@@ -65,8 +65,9 @@ import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
-import {CorporationDeck, PreludeDeck, ProjectDeck} from './cards/Deck';
+import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
+import {addDays, dayStringToDays} from './database/utils.ts';
 
 export interface Score {
   corporation: String;
@@ -79,14 +80,18 @@ export class Game implements Logger {
   public rng: SeededRandom;
   public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
+  public createdTime: Date = new Date(0);
   public gameAge: number = 0; // Each log event increases it
   public gameLog: Array<LogMessage> = [];
   public undoCount: number = 0; // Each undo increases it
+  public inputsThisRound = 0;
+  public resettable: boolean = false;
 
   public generation: number = 1;
   public phase: Phase = Phase.RESEARCH;
   public projectDeck: ProjectDeck;
   public preludeDeck: PreludeDeck;
+  public ceoDeck: CeoDeck;
   public corporationDeck: CorporationDeck;
   public board: Board;
 
@@ -145,7 +150,8 @@ export class Game implements Logger {
     board: Board,
     projectDeck: ProjectDeck,
     corporationDeck: CorporationDeck,
-    preludeDeck: PreludeDeck) {
+    preludeDeck: PreludeDeck,
+    ceoDeck: CeoDeck) {
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -167,6 +173,7 @@ export class Game implements Logger {
     this.projectDeck = projectDeck;
     this.corporationDeck = corporationDeck;
     this.preludeDeck = preludeDeck;
+    this.ceoDeck = ceoDeck;
     this.board = board;
 
     this.players.forEach((player) => {
@@ -198,6 +205,9 @@ export class Game implements Logger {
     const preludeDeck = new PreludeDeck(gameCards.getPreludeCards(), [], rng);
     preludeDeck.shuffle(gameOptions.customPreludes);
 
+    const ceoDeck = new CeoDeck(gameCards.getCeoCards(), [], rng);
+    ceoDeck.shuffle(gameOptions.customCeos);
+
     const activePlayer = firstPlayer.id;
 
     // Single player game player starts with 14TR
@@ -211,8 +221,10 @@ export class Game implements Logger {
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
+    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
     game.spectatorId = spectatorId;
+    // This evaluation of created time doesn't match what's stored in the database, but that's fine.
+    game.createdTime = new Date();
     // Initialize Ares data
     if (gameOptions.aresExtension) {
       game.aresData = AresSetup.initialData(gameOptions.aresHazards, players);
@@ -279,11 +291,13 @@ export class Game implements Logger {
 
       if (!player.beginner ||
         // Bypass beginner choice if any extension is choosen
+        gameOptions.ceoExtension ||
         gameOptions.preludeExtension ||
         gameOptions.venusNextExtension ||
         gameOptions.coloniesExtension ||
         gameOptions.turmoilExtension ||
-        gameOptions.initialDraftVariant) {
+        gameOptions.initialDraftVariant ||
+        gameOptions.ceoExtension) {
         if (gameOptions.corporationsDraft === false) {
           for (let i = 0; i < gameOptions.startingCorporations; i++) {
             player.dealtCorporationCards.push(corporationDeck.draw(game));
@@ -298,6 +312,13 @@ export class Game implements Logger {
           for (let i = 0; i < constants.PRELUDE_CARDS_DEALT_PER_PLAYER; i++) {
             const prelude = preludeDeck.draw(game);
             player.dealtPreludeCards.push(prelude);
+          }
+        }
+        if (gameOptions.ceoExtension) {
+          // TODO: Replace this with i < gameOptions.startingCeos constants
+          for (let i = 0; i < 2; i++) {
+            const ceoCard = ceoDeck.draw(game);
+            player.dealtCeoCards.push(ceoCard);
           }
         }
       } else {
@@ -357,8 +378,10 @@ export class Game implements Logger {
       awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
+      ceoDeck: this.ceoDeck.serialize(),
       colonies: this.colonies.map((colony) => colony.serialize()),
       corporationDeck: this.corporationDeck.serialize(),
+      createdTimeMs: this.createdTime.getTime(),
       currentSeed: this.rng.current,
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
@@ -556,23 +579,10 @@ export class Game implements Logger {
     }
   }
 
-  private pickCorporationCard(player: Player): PlayerInput {
+  private selectInitialCards(player: Player): PlayerInput {
     return new SelectInitialCards(player, (corporation: ICorporationCard) => {
-      // Check for negative M€
-      const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
-      if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
-        player.cardsInHand = [];
-        player.preludeCardsInHand = [];
-        throw new Error('Too many cards selected');
-      }
-      // discard all unpurchased cards
-      player.dealtProjectCards.forEach((card) => {
-        if (player.cardsInHand.includes(card) === false) {
-          this.projectDeck.discard(card);
-        }
-      });
-
-      this.playerHasPickedCorporationCard(player, corporation); return undefined;
+      this.playerHasPickedCorporationCard(player, corporation);
+      return undefined;
     });
   }
 
@@ -604,13 +614,14 @@ export class Game implements Logger {
     this.players.forEach((player) => {
       player.needsToDraft = true;
       if (this.draftRound === 1 && !preludeDraft) {
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name);
       } else if (this.draftRound === 1 && preludeDraft) {
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name, player.dealtPreludeCards);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name, player.dealtPreludeCards);
       } else {
-        const cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-        this.unDraftedCards.delete(this.getDraftCardsFrom(player));
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name, cards);
+        const draftCardsFrom = this.getDraftCardsFrom(player).id;
+        const cards = this.unDraftedCards.get(draftCardsFrom);
+        this.unDraftedCards.delete(draftCardsFrom);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name, cards);
       }
     });
   }
@@ -622,7 +633,7 @@ export class Game implements Logger {
 
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
-        player.setWaitingFor(this.pickCorporationCard(player));
+        player.setWaitingFor(this.selectInitialCards(player));
       }
     }
     if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
@@ -669,7 +680,7 @@ export class Game implements Logger {
 
     if (this.gameIsOver()) {
       this.log('Final greenery placement', (b) => b.forNewGeneration());
-      this.gotoFinalGreeneryPlacement();
+      this.takeNextFinalGreeneryAction();
       return;
     } else {
       this.players.forEach((player) => {
@@ -814,7 +825,7 @@ export class Game implements Logger {
 
     // Push last card for each player
     this.players.forEach((player) => {
-      const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
+      const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player).id);
       if (lastCards !== undefined) {
         player.draftedCards.push(...lastCards);
       }
@@ -874,31 +885,28 @@ export class Game implements Logger {
     this.players.forEach((player) => {
       player.dealtCorporationCards = player.draftedCorporations;
     });
-    // Reset value to guarantee no impact on eventual futur drafts (projects or preludes)
+    // Reset value to guarantee no impact on eventual future drafts (projects or preludes)
     this.initialDraftIteration = 1;
     this.draftRound = 1;
     this.gotoInitialPhase();
   }
 
-  private getDraftCardsFrom(player: Player): PlayerId {
-    let nextPlayer = this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-
-    // Change initial draft direction on second iteration
+  private getDraftCardsFrom(player: Player): Player {
+    // Special-case for the initial draft direction on second iteration
     if (this.generation === 1 && this.initialDraftIteration === 2) {
-      nextPlayer = this.getPlayerBefore(player);
+      return this.getPlayerBefore(player);
     }
 
-    return nextPlayer.id;
+    return this.generation % 2 === 0 ? this.getPlayerBefore(player) : this.getPlayerAfter(player);
   }
 
   private giveDraftCardsTo(player: Player): Player {
-    let nextPlayer = this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-
-    // Change initial draft direction on second iteration
+    // Special-case for the initial draft direction on second iteration
     if (this.initialDraftIteration === 2 && this.generation === 1) {
-      nextPlayer = this.getPlayerAfter(player);
+      return this.getPlayerAfter(player);
     }
-    return nextPlayer;
+
+    return this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
   }
 
   private getPlayerBefore(player: Player): Player {
@@ -929,13 +937,15 @@ export class Game implements Logger {
       return;
     }
 
+    this.inputsThisRound = 0;
+
+    // This next section can be done more simply.
     if (this.allPlayersHavePassed()) {
       this.gotoProductionPhase();
       return;
     }
 
     const nextPlayer = this.getPlayerAfter(this.getPlayerById(this.activePlayer));
-
     if (!this.hasPassedThisActionPhase(nextPlayer)) {
       this.startActionsForPlayer(nextPlayer);
     } else {
@@ -983,14 +993,15 @@ export class Game implements Logger {
   public playerIsDoneWithGame(player: Player): void {
     this.donePlayers.add(player.id);
     // Go back in to find someone else to play final greeneries.
-    this.gotoFinalGreeneryPlacement();
+    this.takeNextFinalGreeneryAction();
   }
 
-  // Well, this isn't just "go to the final greenery placement". It finds the next player
-  // who might be able to place a final greenery.
-  // Rename to takeNextFinalGreeneryAction?
-
-  public /* for testing */ gotoFinalGreeneryPlacement(): void {
+  /**
+   * Find the next player who might be able to place a final greenery and ask them.
+   *
+   * If nobody can add a greenery, end the game.
+   */
+  public /* for testing */ takeNextFinalGreeneryAction(): void {
     for (const player of this.getPlayersInGenerationOrder()) {
       if (this.donePlayers.has(player.id)) {
         continue;
@@ -999,6 +1010,7 @@ export class Game implements Logger {
       // You many not place greeneries in solo mode unless you have already won the game
       // (e.g. completed global parameters, reached TR63.)
       if (this.isSoloMode() && !this.isSoloModeWin()) {
+        this.log('Final greenery phase is skipped since you did not complete the win condition.', (b) => b.forNewGeneration());
         continue;
       }
 
@@ -1519,6 +1531,14 @@ export class Game implements Logger {
     return space;
   }
 
+  public expectedPurgeTimeMs(): number {
+    if (this.createdTime.getTime() === 0) {
+      return 0;
+    }
+    const days = dayStringToDays(process.env.MAX_GAME_DAYS, 10);
+    return addDays(this.createdTime, days).getTime();
+  }
+
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
     gameOptions.bannedCards = gameOptions.bannedCards ?? [];
@@ -1536,8 +1556,14 @@ export class Game implements Logger {
     const corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
     const preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
 
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
+    // TODO(dl): remove ?? {...} by 2023/03/20
+    const ceoDeck = CeoDeck.deserialize(d.ceoDeck ?? {drawPile: [], discardPile: []}, rng);
+
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
+    game.resettable = true;
     game.spectatorId = d.spectatorId;
+    // TODO(kberg): remove ?? 0 by 2023-03-15
+    game.createdTime = new Date(d.createdTimeMs ?? 0);
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone | string) => {

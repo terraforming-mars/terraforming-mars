@@ -32,6 +32,7 @@ export type GameOptions = {
   includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
+  ceoExtension: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -46,6 +47,7 @@ export type GameOptions = {
   bannedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
+  customCeos: Array<CardName>;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
@@ -63,11 +65,13 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   aresHazards: true,
   boardName: BoardName.THARSIS,
   bannedCards: [],
+  ceoExtension: false,
   clonedGamedId: undefined,
   coloniesExtension: false,
   communityCardsOption: false,
   corporateEra: true,
   corporationsDraft: false,
+  customCeos: [],
   customColoniesList: [],
   customCorporationsList: [],
   customPreludes: [],

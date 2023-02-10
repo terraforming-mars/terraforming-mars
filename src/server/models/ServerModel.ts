@@ -33,6 +33,7 @@ import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
 import {CardModels} from './CardModels';
 import {OptionsInput} from '../inputs/OptionsInput';
+import {AwardScorer} from '../awards/AwardScorer';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -48,6 +49,7 @@ export class Server {
       spectatorId: game.spectatorId,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       lastSoloGeneration: game.lastSoloGeneration(),
+      expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
     };
   }
 
@@ -59,7 +61,8 @@ export class Server {
       awards: this.getAwards(game),
       colonies: this.getColonies(game, game.colonies),
       deckSize: game.projectDeck.drawPile.length,
-      discardedColonies: this.getColonies(game, game.discardedColonies, /* showTrackPosition */ false),
+      discardedColonies: game.discardedColonies.map((c) => c.name),
+      expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
       gameAge: game.gameAge,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       generation: game.getGeneration(),
@@ -93,8 +96,10 @@ export class Server {
 
     return {
       cardsInHand: CardModels.getCards(player, player.cardsInHand, {showCalculatedCost: true}),
+      ceoCardsInHand: CardModels.getCards(player, player.ceoCardsInHand),
       dealtCorporationCards: CardModels.getCards(player, player.dealtCorporationCards),
       dealtPreludeCards: CardModels.getCards(player, player.dealtPreludeCards),
+      dealtCeoCards: CardModels.getCards(player, player.dealtCeoCards),
       dealtProjectCards: CardModels.getCards(player, player.dealtProjectCards),
       draftedCorporations: CardModels.getCards(player, player.draftedCorporations),
       draftedCards: CardModels.getCards(player, player.draftedCards, {showCalculatedCost: true}),
@@ -151,8 +156,8 @@ export class Server {
       }
 
       milestoneModels.push({
-        player_name: claimed === undefined ? '' : claimed.player.name,
-        player_color: claimed === undefined ? '' : claimed.player.color,
+        playerName: claimed === undefined ? '' : claimed.player.name,
+        playerColor: claimed === undefined ? '' : claimed.player.color,
         name: milestone.name,
         scores,
       });
@@ -162,25 +167,23 @@ export class Server {
   }
 
   public static getAwards(game: Game): Array<FundedAwardModel> {
-    const allAwards = game.awards;
     const fundedAwards = game.fundedAwards;
     const awardModels: Array<FundedAwardModel> = [];
 
-    for (const award of allAwards) {
-      const funded = fundedAwards.find(
-        (a) => a.award.name === award.name,
-      );
+    for (const award of game.awards) {
+      const funded = fundedAwards.find((a) => a.award.name === award.name);
+      const scorer = new AwardScorer(game, award);
       let scores: Array<AwardScore> = [];
       if (fundedAwards.length < 3 || funded !== undefined) {
         scores = game.getPlayers().map((player) => ({
           playerColor: player.color,
-          playerScore: award.getScore(player),
+          playerScore: scorer.get(player),
         }));
       }
 
       awardModels.push({
-        player_name: funded === undefined ? '' : funded.player.name,
-        player_color: funded === undefined ? '' : funded.player.color,
+        playerName: funded === undefined ? '' : funded.player.name,
+        playerColor: funded === undefined ? '' : funded.player.color,
         name: award.name,
         scores: scores,
       });
@@ -225,6 +228,7 @@ export class Server {
       selectBlueCardAction: false,
       availableParties: undefined,
       turmoil: undefined,
+      showReset: player.game.inputsThisRound > 0 && player.game.resettable === true && player.game.phase === Phase.ACTION,
     };
     if (waitingFor instanceof OptionsInput) {
       playerInputModel.options = [];
@@ -257,7 +261,7 @@ export class Server {
       fleetSize: player.colonies.getFleetSize(),
       heat: player.heat,
       heatProduction: player.production.heat,
-      id: game.phase === Phase.END ? player.id : player.color,
+      id: game.phase === Phase.END ? player.id : undefined,
       influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
       isActive: player.id === game.activePlayer,
       lastCardPlayed: player.lastCardPlayed,
@@ -393,6 +397,7 @@ export class Server {
       aresExtension: options.aresExtension,
       boardName: options.boardName,
       bannedCards: options.bannedCards,
+      ceoExtension: options.ceoExtension,
       coloniesExtension: options.coloniesExtension,
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
@@ -421,9 +426,9 @@ export class Server {
       requiresMoonTrackCompletion: options.requiresMoonTrackCompletion,
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
       turmoilExtension: options.turmoilExtension,
+      twoCorpsVariant: options.twoCorpsVariant,
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
-      twoCorpsVariant: options.twoCorpsVariant,
     };
   }
 

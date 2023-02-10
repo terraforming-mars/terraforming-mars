@@ -62,7 +62,7 @@ describe('TheNewSpaceRace', function() {
     // Some assertions before the last cb.
     expect(game.getPlayersInGenerationOrder()).deep.eq([player1, player2, player3]);
 
-    // Some cleanup before the last cb. These would be normally popped if the callbacs were dome via that string[][] stuff.
+    // Some cleanup before the last cb. These would be normally popped if the callbacks were done via inbound HTTP Request.
     // The cast() just confirms these are the expected SelectInitialCards
     cast(player1.popWaitingFor(), SelectInitialCards);
     cast(player2.popWaitingFor(), SelectInitialCards);

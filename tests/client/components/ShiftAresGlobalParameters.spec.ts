@@ -55,6 +55,7 @@ describe('ShiftAresGlobalParameters', function() {
       milestoneResults: [],
     },
     selectBlueCardAction: false,
+    showReset: false,
   };
 
   it('sets up data', function() {

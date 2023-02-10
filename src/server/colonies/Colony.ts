@@ -92,6 +92,12 @@ export abstract class Colony implements IColony {
       if (poseidon !== undefined) {
         poseidon.production.add(Resources.MEGACREDITS, 1);
       }
+
+      // CEO Naomi hook
+      if (player.cardIsInEffect(CardName.NAOMI)) {
+        player.addResource(Resources.ENERGY, 2, {log: true});
+        player.addResource(Resources.MEGACREDITS, 2, {log: true});
+      }
     }
 
     /*

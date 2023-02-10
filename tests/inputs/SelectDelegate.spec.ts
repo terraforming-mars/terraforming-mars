@@ -33,15 +33,10 @@ describe('SelectDelegate', function() {
     expect(selected).eq(players[0]);
   });
 
-  it('Simple - Player by id', function() {
-    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '', cb);
-    selectDelegate.process({type: 'delegate', player: players[0].id});
-    expect(selected).eq(players[0]);
-  });
 
   it('Cannot select unavailable delegate', function() {
     const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '', cb);
-    expect(() => selectDelegate.process({type: 'delegate', player: players[1].id}))
+    expect(() => selectDelegate.process({type: 'delegate', player: players[1].color}))
       .to.throw(Error, /Player not available/);
   });
 

@@ -22,7 +22,7 @@ describe('Miranda', function() {
     game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(miranda);
-    player.popWaitingFor(); // Removes SelectInitialCards
+    player.popSelectInitialCards();
   });
 
   it('Should activate', function() {

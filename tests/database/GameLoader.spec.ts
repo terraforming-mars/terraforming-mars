@@ -201,4 +201,30 @@ describe('GameLoader', function() {
     instance.sweep();
     expect(await instance.isCached('gameid')).is.false;
   });
+
+  it('restoreGameAt', async () => {
+    game.generation = 12;
+    game.save();
+
+    expect(game.lastSaveId).eq(2);
+
+    game.generation = 13;
+    game.save();
+
+    expect(game.lastSaveId).eq(3);
+    game.save();
+
+    game.generation = 14;
+    expect(game.lastSaveId).eq(4);
+
+    expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
+
+    const newGame = await instance.restoreGameAt(game.id, 2);
+
+    expect(newGame.generation).eq(13);
+    // This may seem strange, but what's happening is that the save id is
+    // incremented at the end of save(). It loads #2, and increments.
+    expect(newGame.lastSaveId).eq(3);
+    expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2]);
+  });
 });

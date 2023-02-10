@@ -103,7 +103,13 @@ export class GameCards {
   public getCorporationCards(): Array<ICorporationCard> {
     const cards = this.getCards<ICorporationCard>('corporationCards')
       .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
-    return this.addCustomCards(cards, this.gameOptions.customCorporationsList);
+	if (this.gameOptions.playerCustomCorpList.length > 0) {
+		return this.addCustomCards(cards, this.gameOptions.playerCustomCorpList.flat().concat(this.gameOptions.customCorporationsList));
+		//add the customCorporationsList to work better with Merger
+	}
+	else {
+		return this.addCustomCards(cards, this.gameOptions.customCorporationsList);
+	}
   }
   public getPreludeCards() {
     let preludes = this.getCards<IPreludeCard>('preludeCards');

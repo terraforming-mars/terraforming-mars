@@ -66,6 +66,7 @@ export interface NewGameConfig {
   includeFanMA: boolean,
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
+  playerCustomCorpList: Array<CardName[]>;
   bannedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;

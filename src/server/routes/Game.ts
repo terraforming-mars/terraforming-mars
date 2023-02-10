@@ -111,6 +111,7 @@ export class GameHandler extends Handler {
             includeFanMA: gameReq.includeFanMA,
             soloTR: gameReq.soloTR,
             customCorporationsList: gameReq.customCorporationsList,
+			playerCustomCorpList: gameReq.playerCustomCorpList,
             bannedCards: gameReq.bannedCards,
             customColoniesList: gameReq.customColoniesList,
             customPreludes: gameReq.customPreludes,

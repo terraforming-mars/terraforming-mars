@@ -44,6 +44,7 @@ export type GameOptions = {
   includeFanMA: boolean;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
+  playerCustomCorpList: Array<CardName[]>;
   bannedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
@@ -74,6 +75,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customCeos: [],
   customColoniesList: [],
   customCorporationsList: [],
+  playerCustomCorpList: [],
   customPreludes: [],
   draftVariant: false,
   escapeVelocityMode: false, // When true, escape velocity is enabled.

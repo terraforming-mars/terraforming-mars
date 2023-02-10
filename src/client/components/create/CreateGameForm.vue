@@ -1114,7 +1114,7 @@ export default (Vue as WithRefs<Refs>).extend({
 		  players = temp_array;
 		  
 		  //Re-order the player custom corporation lists to match player order array
-		  if (component.showPlayerCorporationList) {
+		  if (playerCustomCorpList.length > 0) {
 			let temp_array2: Array<CardName[]> = [];
 				
 			for (let i = 0; i < component.playersCount; i++) {
@@ -1327,6 +1327,7 @@ export default (Vue as WithRefs<Refs>).extend({
         colonies,
         turmoil,
         customCorporationsList: customCorporations,
+		playerCustomCorpList: playerCustomCorpList,
         customColoniesList: customColonies,
         customPreludes,
         bannedCards,

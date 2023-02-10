@@ -102,14 +102,12 @@ export default Vue.extend({
     getCost(): number | undefined {
       const cost = this.cardInstance.cost;
       const type = this.getCardType();
-      const noCostCard = CardType.PRELUDE || type === CardType.CORPORATION || type === CardType.CEO;
-      return cost === undefined || noCostCard ? undefined : cost;
+      return type === CardType.PRELUDE || type === CardType.CORPORATION || type === CardType.CEO ? undefined : cost
     },
     getReducedCost(): number | undefined {
       const cost = this.card.calculatedCost;
       const type = this.getCardType();
-      const noCostCard = CardType.PRELUDE || type === CardType.CORPORATION || type === CardType.CEO;
-      return cost === undefined || noCostCard ? undefined : cost;
+      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION || type === CardType.CEO ? undefined : cost;
     },
     getCardType(): CardType {
       return this.cardInstance.cardType;

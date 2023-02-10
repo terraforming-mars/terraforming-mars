@@ -108,4 +108,40 @@ export class LogHelper {
       }
     }, options);
   }
+  
+    static logCustomCorps(player: Player, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {
+	// Copies the logDrawnCards code
+    // If |this.count| equals 3, for instance, this generates "${0} custom Corporations list: ${1}, ${2} and ${3}"
+    let message = '${0} custom Corporations list: ';
+    if (cards.length === 0) {
+      message += 'no cards';
+    } else {
+      for (let i = 0, length = cards.length; i < length; i++) {
+        if (i > 0) {
+          if (i < length - 1) {
+            message += ', ';
+          } else {
+            message += ' and ';
+          }
+        }
+        message += '${' + (i + 1) + '}';
+      }
+    }
+    const options = privateMessage ? {reservedFor: player} : {};
+
+    player.game.log(message, (b) => {
+      if (privateMessage === false) {
+        b.player(player);
+      } else {
+        b.string('You');
+      }
+      for (const card of cards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
+    }, options);
+  }
 }

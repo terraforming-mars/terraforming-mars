@@ -425,7 +425,7 @@
             </div>
 			
 			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 1">
-			  <h2>Player 1 </h2>
+			  <h2>Player 1: {{ players[0].name }}</h2>
               <CorporationsFilter
                   ref="p1CorporationsFilter"
                   v-on:corporation-list-changed="updateP1Corporations"
@@ -442,7 +442,7 @@
             </div>
 			
 			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 2">
-			  <h2>Player 2 </h2>
+			  <h2>Player 2: {{ players[1].name }}</h2>
               <CorporationsFilter
                   ref="p2CorporationsFilter"
                   v-on:corporation-list-changed="updateP2Corporations"
@@ -459,7 +459,7 @@
             </div>
 						
 			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 3">
-			  <h2>Player 3 </h2>
+			  <h2>Player 3: {{ players[2].name }}</h2>
               <CorporationsFilter
                   ref="p3CorporationsFilter"
                   v-on:corporation-list-changed="updateP3Corporations"
@@ -476,7 +476,7 @@
             </div>
 						
 			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 4">
-			  <h2>Player 4 </h2>
+			  <h2>Player 4: {{ players[3].name }}</h2>
               <CorporationsFilter
                   ref="p4CorporationsFilter"
                   v-on:corporation-list-changed="updateP4Corporations"
@@ -493,7 +493,7 @@
             </div>
 						
 			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 5">
-			  <h2>Player 5 </h2>
+			  <h2>Player 5: {{ players[4].name }}</h2>
               <CorporationsFilter
                   ref="p5CorporationsFilter"
                   v-on:corporation-list-changed="updateP5Corporations"
@@ -510,7 +510,7 @@
             </div>
 						
 			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 6">
-			  <h2>Player 6 </h2>
+			  <h2>Player 6: {{ players[5].name }}</h2>
               <CorporationsFilter
                   ref="p6CorporationsFilter"
                   v-on:corporation-list-changed="updateP6Corporations"
@@ -883,15 +883,15 @@ export default (Vue as WithRefs<Refs>).extend({
 					if (playerCustomCorpList.length >= 1) 
 						{refs.p1CorporationsFilter.selectedCorporations = playerCustomCorpList[0];}
 					if (playerCustomCorpList.length >= 2) 
-						{refs.p1CorporationsFilter.selectedCorporations = playerCustomCorpList[1];}
+						{refs.p2CorporationsFilter.selectedCorporations = playerCustomCorpList[1];}
 					if (playerCustomCorpList.length >= 3) 
-						{refs.p1CorporationsFilter.selectedCorporations = playerCustomCorpList[2];}
+						{refs.p3CorporationsFilter.selectedCorporations = playerCustomCorpList[2];}
 					if (playerCustomCorpList.length >= 4) 
-						{refs.p1CorporationsFilter.selectedCorporations = playerCustomCorpList[3];}
+						{refs.p4CorporationsFilter.selectedCorporations = playerCustomCorpList[3];}
 					if (playerCustomCorpList.length >= 5) 
-						{refs.p1CorporationsFilter.selectedCorporations = playerCustomCorpList[4];}
+						{refs.p5CorporationsFilter.selectedCorporations = playerCustomCorpList[4];}
 					if (playerCustomCorpList.length >= 6) 
-						{refs.p1CorporationsFilter.selectedCorporations = playerCustomCorpList[5];}
+						{refs.p6CorporationsFilter.selectedCorporations = playerCustomCorpList[5];}
 				}
 
 				
@@ -1078,52 +1078,75 @@ export default (Vue as WithRefs<Refs>).extend({
 
       let players = component.players.slice(0, component.playersCount);
 	  
-	  // Rewrote random first player order code
-	  // Previous version may not have truly randomized player order
-	  // Also allows for reshuffling player custom corps array in same order
+	  // Reshuffle players array to match player order
+		  // Rewrote random first player order code
+		  // Previous version may not have truly randomized player order
+		  // Also allows for reshuffling player custom corps array in same order
+      let playerOrderArray: Array<number> = [];
+	  
 	  if (component.randomFirstPlayer) {
         // Shuffle players array to assign each player a random seat around the table
-        let playerOrderArray: Array<number> = [];
 	  
 		  if (component.randomFirstPlayer) {
 			// Set first player index
-			//component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
-			component.firstIndex = 1;
+			component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
 			
-			// Create a shuffled player order index
 			for (let i = 0; i < component.playersCount; i++) {
 				let rand_order = Math.floor(Math.random() * (i+1)); //roll what slot player i is in
 				playerOrderArray.splice(rand_order, 0, i); //insert player i in that slot
-			}
-		  } else { // No random player order; reorder players starting at indicated first player
-			for (let i = 0; i < component.playersCount; i++) {
-				if (i + component.firstIndex <= component.playersCount) {
-					playerOrderArray.push(i + component.firstIndex - 1);
-				} else {
-					playerOrderArray.push(i + component.firstIndex - 1 - component.playersCount);
-				}
-			}
+			} 
 		  }
+	  }
+	  //If not random first player, reshuffle players based on chosen starting player
+	  if (!component.randomFirstPlayer) {
+		//find who the first player is
+		for (let i = 0; i < component.playersCount; i++) {
+			if (players[i].first) {component.firstIndex = i+1}
+		}
+		//Create the player order array
+		for (let i = 0; i < component.playersCount; i++) {
+			//example: 4 players, 3rd player (index 2) is starting player
+				//i=0: 0+3-1 <= 4-1 -> push 0+3-1 = 2
+				//i=1: 1+3-1 <= 4-1 -> push 1+3-1 = 3
+				//i=2: 2+3-1 !<= 4-1 -> push 2+3-1-4 = 0
+				//i=3: 3+3-1 !<= 4-1 -> push 3+3-1-4 = 1
+			if (i + component.firstIndex - 1 <= component.playersCount - 1) {
+				playerOrderArray.push(i + component.firstIndex - 1);
+			}
+			else {
+				playerOrderArray.push(i + component.firstIndex - 1 - component.playersCount);
+			}
+		}
+	  }
+	  
+	  // Reorder players array to match player order array
+	  let temp_array: Array<NewPlayerModel> = [];
+	  for (let i = 0; i < component.playersCount; i++) {
+		let idx = playerOrderArray[i];
+		temp_array.push(players[idx]);
+		
+		//update index and first features to match new player order
+		temp_array[i].index = i + 1; 
+		if (i > 0) {
+			temp_array[i].first = false;
+		} else {
+			temp_array[i].first = true;
+		}
+	  }
+	  players = temp_array;
 		  
-		  // Reorder players array to match player order array
-		  let temp_array: Array<NewPlayerModel> = [];
-		  for (let i = 0; i < component.playersCount; i++) {
-			let idx = playerOrderArray[i];
-			temp_array.push(players[idx]);
-		  }
-		  players = temp_array;
-		  
-		  //Re-order the player custom corporation lists to match player order array
-		  if (playerCustomCorpList.length > 0) {
-			let temp_array2: Array<CardName[]> = [];
+	  component.firstIndex = 1; //need to reset this so the new first player in the array is the first player
+		
+	  //Re-order the player custom corporation lists to match player order array
+	  if (playerCustomCorpList.length > 0) {
+		let temp_array2: Array<CardName[]> = [];
 				
-			for (let i = 0; i < component.playersCount; i++) {
-				let idx = playerOrderArray[i];
-				temp_array2.push(playerCustomCorpList[idx]);
-			}
-			playerCustomCorpList = temp_array2;
-		  }
-      }
+		for (let i = 0; i < component.playersCount; i++) {
+			let idx = playerOrderArray[i];
+			temp_array2.push(playerCustomCorpList[idx]);
+		}
+		playerCustomCorpList = temp_array2;
+	  }
 
       // Auto assign an available color if there are duplicates
       const uniqueColors = players.map((player) => player.color).filter((v, i, a) => a.indexOf(v) === i);

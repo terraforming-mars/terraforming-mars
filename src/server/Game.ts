@@ -266,12 +266,13 @@ export class Game implements Logger {
     }
 	
 	//Log each player's custom corporation lists
-	//Right now this is suboptimal, will say the player drew these corp cards
+	//For simplicity, use drawn cards logger
+		//Will need to write new logger function
 	if (gameOptions.playerCustomCorpList.length > 0) {
 		let player_number = -1;
 		for (const player of game.getPlayers()) {
 			player_number++;
-			LogHelper.logDrawnCards(player, gameOptions.playerCustomCorpList[player_number], false);
+			LogHelper.logCustomCorps(player, gameOptions.playerCustomCorpList[player_number], false);
 		}
 	}
 
@@ -316,8 +317,8 @@ export class Game implements Logger {
 				let drawn_corp = gameOptions.playerCustomCorpList[player_number][corp_index];
 				let drawn_corp_card = cardFinder.getCorporationCardByName(drawn_corp);
 				if (drawn_corp_card !== undefined) {
-					corporationDeck.moveToTop([drawn_corp_card.name]); //I'm probably doing something too complicated here
-					player.dealtCorporationCards.push(corporationDeck.draw(game, 'bottom')); //Does the moveToTop method move to bottom?
+					corporationDeck.moveToTop([drawn_corp_card.name]);
+					player.dealtCorporationCards.push(corporationDeck.draw(game, 'bottom')); //moveToTop method seems to move to bottom
 				} else {
 					player.dealtCorporationCards.push(new BeginnerCorporation()); //fill excess corp deals w/ beginner corps
 					//This is taking on faith that the code below properly removes dealt corps from every player's custom corp list

@@ -780,15 +780,21 @@ export class Player {
   public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
     for (const playedCard of this.tableau) {
-      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this)) {
+      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this) && !isCeoCard(playedCard)) {
         result.push(playedCard);
       }
     }
     return result;
   }
 
-  public getUsableOPGCeoCards(): Array<ICard & IActionCard> {
-    return this.getPlayableActionCards().filter((card) => isCeoCard(card));
+  public getUsableOPGCeoCards(): Array<ICard & ICeoCard> {
+    const result: Array<ICard & ICeoCard> = [];
+    for (const playedCard of this.tableau) {
+      if (isCeoCard(playedCard) && playedCard.canAct(this)  ) {
+        result.push(playedCard);
+      }
+    }
+    return result;
   }
 
   public runProductionPhase(): void {
@@ -1274,7 +1280,7 @@ export class Player {
   }
 
   private playCeoOPGAction(): PlayerInput {
-    return new SelectCard<ICard & IActionCard>(
+    return new SelectCard<ICard & ICeoCard>(
       'Use CEO once per game action',
       'Take action',
       this.getUsableOPGCeoCards(),

@@ -23,7 +23,7 @@ export const range = (n: number): Array<number> => Array.from(Array(n).keys());
  * @param {Array<T>} b: the second array
  * @return {Boolean} true if a includes an element of b.
  */
-export function hasIntersection<T>(a: Array<T>, b: Array<T>): Array<T> {
+export function hasIntersection<T>(a: Array<T>, b: Array<T>): boolean {
   return a.some((e) => b.includes(e));
 }
 

@@ -19,7 +19,7 @@ const MODULE_TO_CSS: Map<GameModule, string> = new Map([
   ['moon', 'moon-icon'],
   ['pathfinders', 'pathfinders-icon'],
   ['ceo', 'ceo-icon'],
-  ],
+],
 );
 export default Vue.extend({
   name: 'CardExpansion',

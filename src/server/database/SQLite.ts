@@ -162,26 +162,6 @@ export class SQLite implements IDatabase {
     }
   }
 
-  restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    // I don't think this is tested. Once it is use this.asyncGet
-    return new Promise((resolve, reject) => {
-      // Retrieve last save from database
-      this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [gameId, saveId], (err: Error | null, row: { game: any; }) => {
-        if (err) {
-          console.error(err.message);
-          reject(err);
-        }
-        try {
-          const json = JSON.parse(row.game);
-          resolve(json);
-        } catch (e) {
-          const error = e instanceof Error ? e : new Error(String(e));
-          reject(error);
-        }
-      });
-    });
-  }
-
   async saveGame(game: Game): Promise<void> {
     const gameJSON = game.toJSON();
     // Insert

@@ -85,14 +85,6 @@ export interface IDatabase {
     saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
 
     /**
-     * The meat behind player undo. Loads the game at the given save point,
-     * and provides it in the callback.
-     */
-    // TODO(kberg): it's not clear to me how this saveId is known to
-    // be the absolute prior game id, so that could use some clarification.
-    restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame>;
-
-    /**
      * Load a game at save point 0, and provide it in the callback.
      */
     loadCloneableGame(gameId: GameId): Promise<SerializedGame>;

@@ -84,8 +84,8 @@
           </div>
 
           <a name="cards" class="player_home_anchor"></a>
-          <div class="player_home_block player_home_block--hand" v-if="playerView.cardsInHand.length + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length > 0" id="shortkey-hand">
-              <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="(thisPlayer.cardsInHandNbr + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length).toString()" />
+          <div class="player_home_block player_home_block--hand" v-if="cardsInHandCount > 0" id="shortkey-hand">
+              <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="cardsInHandCount.toString()" />
               <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.ceoCardsInHand).concat(playerView.cardsInHand)" />
           </div>
 
@@ -364,6 +364,10 @@ export default Vue.extend({
     },
     CardType(): typeof CardType {
       return CardType;
+    },
+    cardsInHandCount(): number {
+      const playerView = this.playerView;
+      return playerView.cardsInHand.length + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length;
     },
   },
 

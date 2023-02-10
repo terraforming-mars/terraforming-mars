@@ -5,19 +5,13 @@ import PlayerResources from '@/client/components/overview/PlayerResources.vue';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
 import PlayerStatus from '@/client/components/overview/PlayerStatus.vue';
 import {playerColorClass} from '@/common/utils/utils';
-import {mainAppSettings} from '@/client/components/App';
+import {vueRoot} from '@/client/components/vueRoot';
 import {range} from '@/common/utils/utils';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Button from '@/client/components/common/Button.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 
-const isPinned = (root: any, playerIndex: number): boolean => {
-  return (root as any).getVisibilityState('pinned_player_' + playerIndex);
-};
-const showPlayerData = (root: any, playerIndex: number) => {
-  (root as any).setVisibilityState('pinned_player_' + playerIndex, true);
-};
 export default Vue.extend({
   name: 'PlayerInfo',
   props: {
@@ -60,27 +54,35 @@ export default Vue.extend({
     },
   },
   methods: {
+    isPinned(playerIndex: number): boolean {
+      return vueRoot(this).getVisibilityState('pinned_player_' + playerIndex);
+    },
+    pin(playerIndex: number) {
+      return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, true);
+    },
+    unpin(playerIndex: number) {
+      return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, true);
+    },
     pinPlayer() {
       let hiddenPlayersIndexes: Array<Number> = [];
-      const playerPinned = isPinned(this.$root, this.playerIndex);
+      const playerPinned = this.isPinned(this.playerIndex);
 
       // if player is already pinned, add to hidden players (toggle)
       hiddenPlayersIndexes = range(this.playerView.players.length - 1);
       if (!playerPinned) {
-        showPlayerData(this.$root, this.playerIndex);
+        this.pin(this.playerIndex);
         hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
           (index) => index !== this.playerIndex,
         );
       }
       for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
         if (hiddenPlayersIndexes.includes(i)) {
-          // TODO find a better way to share methods with this.$root for type safety
-          (this.$root as unknown as typeof mainAppSettings.methods).setVisibilityState('pinned_player_' + i, false);
+          this.unpin(i);
         }
       }
     },
     buttonLabel(): string {
-      return isPinned(this.$root, this.playerIndex) ? 'hide' : 'show';
+      return this.isPinned(this.playerIndex) ? 'hide' : 'show';
     },
     togglePlayerDetails() {
       // for the player viewing this page => scroll to cards UI

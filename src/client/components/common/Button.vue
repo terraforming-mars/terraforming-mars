@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {vueRoot} from '@/client/components/vueRoot';
 
 export default Vue.extend({
   name: 'Button',
@@ -59,7 +60,7 @@ export default Vue.extend({
   },
   computed: {
     isDisabledDueToServerBusy(): boolean {
-      return this.disableOnServerBusy && (this.$root as any).isServerSideRequestInProgress;
+      return this.disableOnServerBusy && vueRoot(this).isServerSideRequestInProgress;
     },
     isDisabled(): boolean {
       return this.disabled || this.isDisabledDueToServerBusy;

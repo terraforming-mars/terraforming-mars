@@ -452,6 +452,9 @@
 </template>
 
 <script lang="ts">
+import * as constants from '@/common/constants';
+import * as json_constants from '@/client/components/create/json';
+
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 import {Color} from '@/common/Color';
@@ -472,10 +475,8 @@ import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {GameModule} from '@/common/cards/GameModule';
-
-import * as constants from '@/common/constants';
-import * as json_constants from '@/client/components/create/json';
 import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
+import {vueRoot} from '@/client/components/vueRoot';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -1157,8 +1158,8 @@ export default (Vue as WithRefs<Refs>).extend({
           return;
         } else {
           window.history.replaceState(json, `${constants.APP_NAME} - Game`, '/game?id=' + json.id);
-          (this as any).$root.$data.game = json;
-          (this as any).$root.$data.screen = 'game-home';
+          vueRoot(this).game = json;
+          vueRoot(this).screen = 'game-home';
         }
       };
 

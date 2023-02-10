@@ -5,7 +5,7 @@ import Vue from 'vue';
 import StackedCards from '@/client/components/StackedCards.vue';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
-import {mainAppSettings} from '@/client/components/App';
+import {vueRoot} from '@/client/components/vueRoot';
 import Card from '@/client/components/card/Card.vue';
 import Button from '@/client/components/common/Button.vue';
 import {CardType} from '@/common/cards/CardType';
@@ -28,11 +28,10 @@ export default Vue.extend({
   methods: {
     ...PlayerMixin.methods,
     hideMe() {
-      // TODO find a better way to share methods with this.$root for type safety
-      (this.$root as unknown as typeof mainAppSettings.methods).setVisibilityState('pinned_player_' + this.playerIndex, false);
+      vueRoot(this).setVisibilityState('pinned_player_' + this.playerIndex, false);
     },
     isVisible() {
-      return (this.$root as unknown as typeof mainAppSettings.methods).getVisibilityState(
+      return vueRoot(this).getVisibilityState(
         'pinned_player_' + this.playerIndex,
       );
     },

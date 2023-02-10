@@ -79,6 +79,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
+import {vueRoot} from '@/client/components/vueRoot';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
@@ -141,10 +142,10 @@ export default Vue.extend({
     },
     toggleMe() {
       const currentState: boolean = this.isVisible();
-      (this.$root as any).setVisibilityState('turmoil_parties', ! currentState);
+      vueRoot(this).setVisibilityState('turmoil_parties', ! currentState);
     },
     isVisible() {
-      return (this.$root as any).getVisibilityState('turmoil_parties');
+      return vueRoot(this).getVisibilityState('turmoil_parties');
     },
   },
   components: {

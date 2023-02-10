@@ -86,8 +86,7 @@
           <a name="cards" class="player_home_anchor"></a>
           <div class="player_home_block player_home_block--hand" v-if="playerView.cardsInHand.length + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length > 0" id="shortkey-hand">
               <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="(thisPlayer.cardsInHandNbr + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length).toString()" />
-              <!-- <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.ceoCardsInHand).concat(playerView.cardsInHand)" /> -->
-              <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.cardsInHand, playerView.ceoCardsInHand)" />
+              <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.ceoCardsInHand).concat(playerView.cardsInHand)" />
           </div>
 
           <div class="player_home_block player_home_block--cards">

@@ -1064,7 +1064,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       // Clone game checks
-      if (component.clonedGameId !== undefined && component.seededGame) {
+      if (this.clonedGameId !== undefined && this.seededGame) {
         const gameData = await fetch('api/cloneablegame?id=' + this.clonedGameId)
           .then((response) => {
             if (response.ok) {

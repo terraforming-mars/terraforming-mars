@@ -2,6 +2,7 @@
   <div :class="getMainClasses()">
     <div v-if="isPrelude()" class="prelude-label">prelude</div>
     <div v-if="isCorporation()" class="corporation-label">corporation</div>
+    <div v-if="isCeo()" class="ceo-label">CEO</div>
     <CardCorporationLogo v-if="isCorporation()" :title="title"/>
     <div v-else :class="getClasses(title)">{{ getCardTitleWithoutSuffix(title) }}</div>
   </div>
@@ -30,6 +31,9 @@ export default Vue.extend({
     CardCorporationLogo,
   },
   methods: {
+    isCeo(): boolean {
+      return this.type === CardType.CEO;
+    },
     isCorporation(): boolean {
       return this.type === CardType.CORPORATION;
     },
@@ -47,6 +51,8 @@ export default Vue.extend({
         classes.push('background-color-events');
       } else if (this.type === CardType.PRELUDE) {
         classes.push('background-color-prelude');
+      } else if (this.type === CardType.CEO) {
+        classes.push('background-color-ceo');
       } else if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
         classes.push('background-color-standard-project');
       }

@@ -6,7 +6,7 @@
  *
  * @param {Array<T>} source The collection to iterate over.
  * @param {Function} predicate The function invoked per iteration.
- * @returns {Array<Array<T>>} Returns the array of grouped elements. Failing group come first.
+ * @returns {Array<Array<T>>} Returns the array of grouped elements. Passing group come first.
  */
 export function partition<T>(source: Array<T>, predicate: (t: T) => boolean): Array<Array<T>> {
   return source

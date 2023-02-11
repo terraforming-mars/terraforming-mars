@@ -1,5 +1,5 @@
 import {CardModel} from '@/common/models/CardModel';
-import {partition} from './utils';
+import {partition} from '@/common/utils/utils';
 
 const STORAGE_PREFIX = 'cardOrder';
 
@@ -19,7 +19,7 @@ export class CardOrderStorage {
 
   public static getOrdered(order: {[x: string]: number}, cards: Array<CardModel>): Array<CardModel> {
     const [misses, hits] = partition(cards, (card: CardModel) => order[card.name] === undefined);
-    hits.sort((a, b) => {
+    hits.sort((a: CardModel, b: CardModel) => {
       return order[a.name] - order[b.name];
     });
     return hits.concat(misses);

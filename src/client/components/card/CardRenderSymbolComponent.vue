@@ -26,14 +26,12 @@ const configs: Record<CardRenderSymbolType, {class: string, sizes?: Array<Size>}
   [CardRenderSymbolType.BRACKET_CLOSE]: {class: ''},
 };
 
-function sizeToString(size: Size): string {
-  switch (size) {
-  case Size.TINY: return 'tiny';
-  case Size.SMALL: return 'small';
-  case Size.MEDIUM: return 'medium';
-  case Size.LARGE: return 'large';
-  }
-}
+const sizes: Record<Size, string> = {
+  [Size.TINY]: 'tiny',
+  [Size.SMALL]: 'small',
+  [Size.MEDIUM]: 'medium',
+  [Size.LARGE]: 'large',
+};
 
 export default Vue.extend({
   name: 'CardRenderSymbolComponent',
@@ -60,7 +58,7 @@ export default Vue.extend({
         const config = configs[type];
         classes.push(config.class);
         if (config.sizes?.includes(size)) {
-          classes.push(`${config.class}--${sizeToString(size)}`);
+          classes.push(`${config.class}--${sizes[size]}`);
         }
       }
 

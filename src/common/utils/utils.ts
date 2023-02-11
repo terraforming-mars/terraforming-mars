@@ -8,6 +8,8 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
   return `${prefix}${color}`;
 };
 
+export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
+
 /**
  * Creates a range from 0 to n.
  *
@@ -37,8 +39,6 @@ export function intersection<T>(a: Array<T>, b: Array<T>): Array<T> {
 export function hasIntersection<T>(a: Array<T>, b: Array<T>): boolean {
   return a.some((e) => b.includes(e));
 }
-
-export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
 
 // https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescript
 // Recursive partials are useful for nested partial objects.

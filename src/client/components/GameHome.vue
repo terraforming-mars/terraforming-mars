@@ -101,13 +101,15 @@ export default Vue.extend({
     },
     getHref(playerId: ParticipantId): string {
       if (playerId === this.game.spectatorId) {
-        return `/spectator?id=${playerId}`;
+        return `spectator?id=${playerId}`;
       }
-      return `/player?id=${playerId}`;
+      return `player?id=${playerId}`;
     },
     copyUrl(playerId: ParticipantId | undefined): void {
       if (playerId === undefined) return;
-      copyToClipboard(window.location.origin + this.getHref(playerId));
+      // Get current location path without game?id=xxxxxxx
+      const path = window.location.href.replace(/game\?id=.*/, '');
+      copyToClipboard(path + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
     },
     isPlayerUrlCopied(playerId: string): boolean {

@@ -39,7 +39,7 @@
       </div>
   </a>
 
-  <language-icon v-if="preferencesManager.values().experimental_ui"></language-icon>
+  <language-icon></language-icon>
 
   <div class="sidebar_item sidebar_item--info" :title="$t('Information panel')">
     <i class="sidebar_icon sidebar_icon--info"

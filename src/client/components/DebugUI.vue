@@ -83,6 +83,7 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
+      <template v-if="getPreferences().experimental_ui">
       <br>
       <section class="debug-ui-cards-list">
           <h2 v-i18n>CEOs</h2>
@@ -90,6 +91,7 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
+      </template>
       <br>
       <section class="debug-ui-cards-list">
         <h2 v-i18n>Standard Projects</h2>
@@ -156,7 +158,7 @@ import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
-import {getPreferences} from '@/client/utils/PreferencesManager';
+import {getPreferences, Preferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import {allGlobalEventNames, getGlobalEvent, getGlobalEventModel, getGlobalEventOrThrow} from '@/client/turmoil/ClientGlobalEventManifest';
@@ -363,7 +365,7 @@ export default Vue.extend({
       return GAME_MODULES;
     },
     allTypes(): Array<TypeOptions> {
-      return [
+      const allTypes: Array<TypeOptions> = [
         CardType.EVENT,
         CardType.ACTIVE,
         CardType.AUTOMATED,
@@ -376,6 +378,7 @@ export default Vue.extend({
         'milestones',
         'awards',
       ];
+      return getPreferences().experimental_ui ? allTypes : allTypes.filter((e) => e !== CardType.CEO);
     },
     allTags(): Array<Tag | 'none'> {
       const results: Array<Tag | 'none'> = [];
@@ -564,6 +567,9 @@ export default Vue.extend({
         playerColor: '',
         scores: [],
       };
+    },
+    getPreferences(): Readonly<Preferences> {
+      return getPreferences();
     },
   },
 });

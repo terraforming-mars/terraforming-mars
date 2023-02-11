@@ -202,15 +202,15 @@ const moduleAbbreviations: Record<GameModule, string> = {
 // TODO(kberg): make this  use suffixModules.
 const ALL_MODULES = 'bcpvCt*ramP';
 
-type TypeOptions = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
-type TagOptions = Tag | 'none';
+type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
+type TagOption = Tag | 'none';
 
 export interface DebugUIModel {
   filterText: string,
   fullFilter: boolean,
   expansions: Record<GameModule, boolean>,
-  types: Record<TypeOptions, boolean>,
-  tags: Record<TagOptions, boolean>,
+  types: Record<TypeOption, boolean>,
+  tags: Record<TagOption, boolean>,
   searchIndex: Map<string, Array<string>>,
 }
 
@@ -362,7 +362,7 @@ export default Vue.extend({
     allModules(): ReadonlyArray<GameModule> {
       return GAME_MODULES;
     },
-    allTypes(): Array<TypeOptions> {
+    allTypes(): Array<TypeOption> {
       return [
         CardType.EVENT,
         CardType.ACTIVE,

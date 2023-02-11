@@ -17,7 +17,7 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
 export const range = (n: number): Array<number> => Array.from(Array(n).keys());
 
 /**
- * Returns a new array consisting of elements only in both and b.
+ * Returns a new array consisting of elements only in both a and b.
  *
  * @param {Array<T>} a: the first array
  * @param {Array<T>} b: the second array
@@ -25,6 +25,17 @@ export const range = (n: number): Array<number> => Array.from(Array(n).keys());
  */
 export function intersection<T>(a: Array<T>, b: Array<T>): Array<T> {
   return a.filter((e) => b.includes(e));
+}
+
+/**
+ * Returns true if a includes an element of b.
+ *
+ * @param {Array<T>} a: the first array
+ * @param {Array<T>} b: the second array
+ * @return {Boolean} true if a includes an element of b.
+ */
+export function hasIntersection<T>(a: Array<T>, b: Array<T>): boolean {
+  return a.some((e) => b.includes(e));
 }
 
 export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();

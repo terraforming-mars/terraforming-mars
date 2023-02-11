@@ -370,6 +370,7 @@ export default Vue.extend({
         CardType.PRELUDE,
         CardType.CORPORATION,
         CardType.STANDARD_PROJECT,
+        CardType.CEO,
         'colonyTiles',
         'globalEvents',
         'milestones',

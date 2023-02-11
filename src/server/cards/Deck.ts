@@ -106,24 +106,6 @@ export class Deck<T extends ICard> {
     Deck.shuffle(this.discardPile, this.random);
   }
 
-  public moveToTop(customList: Array<CardName> | undefined) {
-    const list = (customList || []).slice();
-    while (list.length > 0) {
-      const cardName = list.pop();
-      if (cardName === undefined) {
-        break;
-      }
-      const idx = this.drawPile.findIndex((c) => c.name === cardName);
-      if (idx > 0) { // If idx === 0 it's already at the front, so athis is a good test.
-        const card = this.drawPile.splice(idx, 1)[0];
-        this.drawPile.unshift(card);
-      }
-      if (idx === -1) {
-        console.error(`Unknown custom card for ${this.type}: ${cardName}`);
-      }
-    }
-  }
-
   public serialize(): SerializedDeck {
     return {
       drawPile: this.drawPile.map((c) => c.name),

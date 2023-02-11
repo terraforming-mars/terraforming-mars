@@ -892,17 +892,14 @@ export default (Vue as WithRefs<Refs>).extend({
       return 'https://github.com/terraforming-mars/terraforming-mars/wiki/Maps#' + options[boardName];
     },
     async serializeSettings() {
-      // TODO(kberg): remove 'component'
-      const component: CreateGameModel = this;
+      let players = this.players.slice(0, this.playersCount);
 
-      let players = component.players.slice(0, component.playersCount);
-
-      if (component.randomFirstPlayer) {
+      if (this.randomFirstPlayer) {
         // Shuffle players array to assign each player a random seat around the table
         players = players.map((a) => ({sort: Math.random(), value: a}))
           .sort((a, b) => a.sort - b.sort)
           .map((a) => a.value);
-        component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
+        this.firstIndex = Math.floor(this.seed * this.playersCount) + 1;
       }
 
       // Auto assign an available color if there are duplicates
@@ -919,9 +916,9 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       // Set player name automatically if not entered
-      const isSoloMode = component.playersCount === 1;
+      const isSoloMode = this.playersCount === 1;
 
-      component.players.forEach((player) => {
+      this.players.forEach((player) => {
         if (player.name === '') {
           if (isSoloMode) {
             player.name = this.$t('You');
@@ -933,52 +930,52 @@ export default (Vue as WithRefs<Refs>).extend({
       });
 
       players.map((player: any) => {
-        player.first = (component.firstIndex === player.index);
+        player.first = (this.firstIndex === player.index);
         return player;
       });
 
-      const corporateEra = component.corporateEra;
-      const prelude = component.prelude;
-      const draftVariant = component.draftVariant;
-      const initialDraft = component.initialDraft;
-      const corporationsDraft = component.corporationsDraft;
-      const randomMA = component.randomMA;
-      const showOtherPlayersVP = component.showOtherPlayersVP;
-      const venusNext = component.venusNext;
-      const colonies = component.colonies;
-      const turmoil = component.turmoil;
+      const corporateEra = this.corporateEra;
+      const prelude = this.prelude;
+      const draftVariant = this.draftVariant;
+      const initialDraft = this.initialDraft;
+      const corporationsDraft = this.corporationsDraft;
+      const randomMA = this.randomMA;
+      const showOtherPlayersVP = this.showOtherPlayersVP;
+      const venusNext = this.venusNext;
+      const colonies = this.colonies;
+      const turmoil = this.turmoil;
       const solarPhaseOption = this.solarPhaseOption;
       const shuffleMapOption = this.shuffleMapOption;
-      const customColonies = component.customColonies;
-      const customCorporations = component.customCorporations;
-      const customPreludes = component.customPreludes;
-      const bannedCards = component.bannedCards;
-      const board = component.board;
-      const seed = component.seed;
-      const promoCardsOption = component.promoCardsOption;
-      const communityCardsOption = component.communityCardsOption;
-      const aresExtension = component.aresExtension;
+      const customColonies = this.customColonies;
+      const customCorporations = this.customCorporations;
+      const customPreludes = this.customPreludes;
+      const bannedCards = this.bannedCards;
+      const board = this.board;
+      const seed = this.seed;
+      const promoCardsOption = this.promoCardsOption;
+      const communityCardsOption = this.communityCardsOption;
+      const aresExtension = this.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
-      const moonExpansion = component.moonExpansion;
-      const pathfindersExpansion = component.pathfindersExpansion;
-      const undoOption = component.undoOption;
-      const showTimers = component.showTimers;
-      const fastModeOption = component.fastModeOption;
+      const moonExpansion = this.moonExpansion;
+      const pathfindersExpansion = this.pathfindersExpansion;
+      const undoOption = this.undoOption;
+      const showTimers = this.showTimers;
+      const fastModeOption = this.fastModeOption;
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
-      const includeVenusMA = component.includeVenusMA;
-      const includeFanMA = component.includeFanMA;
-      const startingCorporations = component.startingCorporations;
-      const soloTR = component.soloTR;
-      // const beginnerOption = component.beginnerOption;
-      const randomFirstPlayer = component.randomFirstPlayer;
-      const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
-      const escapeVelocityMode = component.escapeVelocityMode;
-      const escapeVelocityThreshold = component.escapeVelocityMode ? component.escapeVelocityThreshold : undefined;
-      const escapeVelocityPeriod = component.escapeVelocityMode ? component.escapeVelocityPeriod : undefined;
-      const escapeVelocityPenalty = component.escapeVelocityMode ? component.escapeVelocityPenalty : undefined;
-      const twoCorpsVariant = component.twoCorpsVariant;
-      const ceoExtension = component.ceoExtension;
-      const customCeos = component.customCeos;
+      const includeVenusMA = this.includeVenusMA;
+      const includeFanMA = this.includeFanMA;
+      const startingCorporations = this.startingCorporations;
+      const soloTR = this.soloTR;
+      // const beginnerOption = this.beginnerOption;
+      const randomFirstPlayer = this.randomFirstPlayer;
+      const requiresVenusTrackCompletion = this.requiresVenusTrackCompletion;
+      const escapeVelocityMode = this.escapeVelocityMode;
+      const escapeVelocityThreshold = this.escapeVelocityMode ? this.escapeVelocityThreshold : undefined;
+      const escapeVelocityPeriod = this.escapeVelocityMode ? this.escapeVelocityPeriod : undefined;
+      const escapeVelocityPenalty = this.escapeVelocityMode ? this.escapeVelocityPenalty : undefined;
+      const twoCorpsVariant = this.twoCorpsVariant;
+      const ceoExtension = this.ceoExtension;
+      const customCeos = this.customCeos;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1004,7 +1001,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       // Check custom corp count
-      if (component.showCorporationList && customCorporations.length > 0) {
+      if (this.showCorporationList && customCorporations.length > 0) {
         let neededCorpsCount = players.length * startingCorporations;
         if (REVISED_COUNT_ALGORITHM) {
           if (this.twoCorpsVariant) {
@@ -1043,7 +1040,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // TODO(kberg): this is a direct copy of the code right above.
       // Check custom prelude count
-      if (component.showPreludesList && customPreludes.length > 0) {
+      if (this.showPreludesList && customPreludes.length > 0) {
         const requiredPreludeCount = players.length * constants.PRELUDE_CARDS_DEALT_PER_PLAYER;
         if (customPreludes.length < requiredPreludeCount) {
           window.alert(translateTextWithParams('Must select at least ${0} Preludes', [requiredPreludeCount.toString()]));
@@ -1068,8 +1065,8 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       // Clone game checks
-      if (component.clonedGameId !== undefined && component.seededGame) {
-        const gameData = await fetch('/api/cloneablegame?id=' + component.clonedGameId)
+      if (this.clonedGameId !== undefined && this.seededGame) {
+        const gameData = await fetch('api/cloneablegame?id=' + this.clonedGameId)
           .then((response) => {
             if (response.ok) {
               return response.json();
@@ -1080,20 +1077,20 @@ export default (Vue as WithRefs<Refs>).extend({
             return response.text().then((res) => new Error(res));
           });
         if (gameData === undefined) {
-          alert(this.$t('Game id ' + component.clonedGameId + ' not found'));
+          alert(this.$t('Game id ' + this.clonedGameId + ' not found'));
           return;
         }
         if (gameData instanceof Error) {
           alert(this.$t('Error looking for predefined game ' + gameData.message));
           return;
         }
-        clonedGamedId = component.clonedGameId;
+        clonedGamedId = this.clonedGameId;
         if (gameData.playerCount !== players.length) {
           alert(this.$t('Player count mismatch'));
           this.$data.playersCount = gameData.playerCount;
           return;
         }
-      } else if (!component.seededGame) {
+      } else if (!this.seededGame) {
         clonedGamedId = undefined;
       }
 
@@ -1135,9 +1132,9 @@ export default (Vue as WithRefs<Refs>).extend({
         // beginnerOption,
         randomFirstPlayer,
         requiresVenusTrackCompletion,
-        requiresMoonTrackCompletion: component.requiresMoonTrackCompletion,
-        moonStandardProjectVariant: component.moonStandardProjectVariant,
-        altVenusBoard: component.altVenusBoard,
+        requiresMoonTrackCompletion: this.requiresMoonTrackCompletion,
+        moonStandardProjectVariant: this.moonStandardProjectVariant,
+        altVenusBoard: this.altVenusBoard,
         escapeVelocityMode,
         escapeVelocityThreshold,
         escapeVelocityPeriod,
@@ -1154,16 +1151,16 @@ export default (Vue as WithRefs<Refs>).extend({
       if (dataToSend === undefined) return;
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
-          window.location.href = '/player?id=' + json.players[0].id;
+          window.location.href = 'player?id=' + json.players[0].id;
           return;
         } else {
-          window.history.replaceState(json, `${constants.APP_NAME} - Game`, '/game?id=' + json.id);
+          window.history.replaceState(json, `${constants.APP_NAME} - Game`, 'game?id=' + json.id);
           vueRoot(this).game = json;
           vueRoot(this).screen = 'game-home';
         }
       };
 
-      fetch('/game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
+      fetch('game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
         .then((response) => response.text())
         .then((text) => {
           try {

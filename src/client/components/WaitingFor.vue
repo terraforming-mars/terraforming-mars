@@ -85,7 +85,7 @@ export default Vue.extend({
           root.playerView = xhr.response;
           root.playerkey++;
           root.screen = 'player-home';
-          if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
+          if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
             (window).location = (window).location; // eslint-disable-line no-self-assign
           }
         } else if (xhr.status === HTTPResponseCode.BAD_REQUEST && xhr.responseType === 'json') {
@@ -127,7 +127,7 @@ export default Vue.extend({
         root.playerView = xhr.response;
         root.playerkey++;
         root.screen = 'player-home';
-        if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
+        if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
           (window).location = (window).location; // eslint-disable-line no-self-assign
         }
       } else if (xhr.status === 400 && xhr.responseType === 'json') {
@@ -159,7 +159,7 @@ export default Vue.extend({
                 Notification.requestPermission();
               } else if (Notification.permission === 'granted') {
                 const notificationOptions = {
-                  icon: '/favicon.ico',
+                  icon: 'favicon.ico',
                   body: 'It\'s your turn!',
                 };
                 const notificationTitle = constants.APP_NAME;

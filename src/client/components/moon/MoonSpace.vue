@@ -54,7 +54,6 @@ export default Vue.extend({
   },
   computed: {
     verboseTitle(): string {
-      // TODO - Add i18n for this title
       let ret = '';
       if (this.space.tileType === TileType.LUNA_TRADE_STATION) {
         ret = 'Luna Trade Station';

@@ -186,8 +186,8 @@
   "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(Erhöhe deine M€-Produktion um 1 je eigenes Spezialplättchen.)",
 
   "Red City": "Rote Stadt",
-  "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space next to this tile (Ares hazards don't count.))": "(Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort. Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 2. PLatziere dieses Plättchen nicht angrenzend zu Grünflächenplättchen. Es dürfen keine Grünflächenplättchen angrenzend an dieses Plättchen platziert werden. 1 SP je angrenzendes leeres Feld.) ",
-
+  "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.)": "(Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort. Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 2. PLatziere dieses Plättchen nicht angrenzend zu Grünflächenplättchen. Es dürfen keine Grünflächenplättchen angrenzend an dieses Plättchen platziert werden. 1 SP je angrenzendes leeres (oder Risko-) Feld.)",
+  
   "Return to Abandoned Technology": "Aufgegebene Ideen recyclen",
   "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "(Schaue die obersten 4 Karten des Ablagestapels an. Behalte 2 davon und wirf die anderen beiden ab.)",
 

@@ -7,7 +7,7 @@ describe('16 Psyche', function() {
     const card = new Psyche();
     const game = newTestGame(1);
     const player = getTestPlayer(game, 0);
-    
+
     // Sanity
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
     player.playedCards.push(card);

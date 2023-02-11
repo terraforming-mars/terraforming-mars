@@ -15,7 +15,7 @@ export class Psyche extends Card implements IProjectCard {
       victoryPoints: 2,
       behavior: {
         production: {titanium: 2},
-        stock: {titanium: 3}
+        stock: {titanium: 3},
       },
 
       metadata: {

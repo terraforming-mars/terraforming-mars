@@ -64,7 +64,7 @@ export const mainAppSettings = {
     settings: raw_settings,
     isServerSideRequestInProgress: false,
     componentsVisibility: {
-      'milestones_list': true,
+      'milestones': true,
       'awards_list': true,
       'tags_concise': false,
       'pinned_player_0': false,

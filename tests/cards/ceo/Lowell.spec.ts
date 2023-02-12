@@ -26,9 +26,9 @@ describe('Lowell', function() {
     player.playedCards.push(card);
     expect(player.tags.count(Tag.WILD)).eq(1);
     expect(player.tags.count(Tag.SPACE)).eq(1);
-    expect(player.tags.count(Tag.SPACE, "raw")).eq(0);
+    expect(player.tags.count(Tag.SPACE, 'raw')).eq(0);
     expect(player.tags.count(Tag.SCIENCE)).eq(1);
-    expect(player.tags.count(Tag.SCIENCE, "raw")).eq(0);
+    expect(player.tags.count(Tag.SCIENCE, 'raw')).eq(0);
 
 
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));

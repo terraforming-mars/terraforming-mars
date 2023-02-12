@@ -46,7 +46,7 @@ export class Lowell extends CeoCard {
         cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
         game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player));
       }
-    });    
+    });
 
     player.game.defer(new SelectPaymentDeferred(player, 8, {title: 'Select how to pay for action'}));
     this.isDisabled = true;
@@ -57,6 +57,5 @@ export class Lowell extends CeoCard {
 
       return player.playCard(foundCards[0]);
     });
-
   }
 }

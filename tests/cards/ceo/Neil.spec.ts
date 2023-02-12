@@ -4,12 +4,12 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-import {Neil} from "../../../src/server/cards/ceos/Neil";
+import {Neil} from '../../../src/server/cards/ceos/Neil';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
-import {LTFPrivileges} from "../../../src/server/cards/moon/LTFPrivileges";
-import {ThoriumRush} from "../../../src/server/cards/moon/ThoriumRush";
+import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
+import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
 
 
 describe('Neil', function() {

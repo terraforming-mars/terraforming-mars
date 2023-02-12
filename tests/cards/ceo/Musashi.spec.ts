@@ -20,7 +20,7 @@ describe('Musashi', function() {
 
   beforeEach(() => {
     card = new Musashi();
-    game = newTestGame(1,);
+    game = newTestGame(1);
     player = getTestPlayer(game, 0);
   });
 

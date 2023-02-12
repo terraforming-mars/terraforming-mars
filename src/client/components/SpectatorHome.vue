@@ -46,7 +46,7 @@
     <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
 
     <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
-        <Milestone :milestones_list="game.milestones" />
+        <Milestone :milestones="game.milestones" />
         <Awards :awards="game.awards" />
     </div>
 

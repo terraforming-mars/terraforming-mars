@@ -3,7 +3,7 @@
       <div class="ma-player" v-if="milestone.playerName"><i :title="milestone.playerName" :class="'board-cube board-cube--'+milestone.playerColor" /></div>
       <div class="ma-name--milestones" :class="nameCss">
           <span v-i18n>{{milestone.name}}</span>
-          <div v-if="show_scores" class="ma-scores player_home_block--milestones-and-awards-scores">
+          <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
               <p v-for="score in [...milestone.scores].sort(
                   (s1, s2) => s2.playerScore - s1.playerScore
               )" :key="score.playerColor" :class="'ma-score player_bg_color_'+score.playerColor">{{ score.playerScore }}</p>
@@ -24,7 +24,7 @@ export default Vue.extend({
     milestone: {
       type: Object as () => ClaimedMilestoneModel,
     },
-    show_scores: {
+    showScores: {
       type: Boolean,
       default: true,
     },

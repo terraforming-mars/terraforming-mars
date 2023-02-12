@@ -202,6 +202,7 @@ export default Vue.extend({
     'board': Board,
     DynamicTitle,
     Card,
+    Drafting,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
     Milestones,
@@ -216,7 +217,6 @@ export default Vue.extend({
     PlanetaryTracks,
     PurgeWarning,
     PlayedCards,
-    Drafting
   },
   mixins: [PlayerMixin],
   methods: {

@@ -78,7 +78,7 @@
     </template>
 
     <dynamic-title v-if="playerView.pickedCorporationCard.length === 0" title="Select initial cards:" :color="thisPlayer.color"/>
-    <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
+    <WaitingFor v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor" />
 
     <dynamic-title title="Game details" :color="thisPlayer.color"/>
 
@@ -96,7 +96,7 @@
         <div class="player_separator" v-if="idx !== playerView.players.length - 1">⟶</div>
       </div>
     </div>
-    
+
     <details class="accordion board-accordion" open>
       <summary class="accordion-header">
         <div class="is-action">
@@ -105,7 +105,7 @@
         </div>
       </summary>
       <div class="accordion-body">
-        <board
+        <Board
           :spaces="game.spaces"
           :venusNextExtension="game.gameOptions.venusNextExtension"
           :venusScaleLevel="game.venusScaleLevel"
@@ -113,10 +113,9 @@
           :aresExtension="game.gameOptions.aresExtension"
           :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
           :aresData="game.aresData"
-          :altVenusBoard="game.gameOptions.altVenusBoard">
-        </board>
+          :altVenusBoard="game.gameOptions.altVenusBoard" />
 
-        <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
+        <Turmoil v-if="game.turmoil" :turmoil="game.turmoil" />
 
         <a name="moonBoard" class="player_home_anchor"></a>
         <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"></MoonBoard>
@@ -134,7 +133,6 @@ import Card from '@/client/components/card/Card.vue';
 import Milestones from '@/client/components/Milestones.vue';
 import Awards from '@/client/components/Awards.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
-import Colony from '@/client/components/colonies/Colony.vue';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import {playerColorClass} from '@/common/utils/utils';
@@ -172,18 +170,17 @@ export default Vue.extend({
     },
     game(): GameModel {
       return this.playerView.game;
-    }
+    },
   },
 
   components: {
-    'board': Board,
+    Board,
     DynamicTitle,
     Card,
-    'waiting-for': WaitingFor,
+    WaitingFor,
     Milestones,
     Awards,
-    'colony': Colony,
-    'turmoil': Turmoil,
+    Turmoil,
     MoonBoard,
   },
   mixins: [PlayerMixin],

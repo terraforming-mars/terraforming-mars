@@ -22,7 +22,7 @@ import {Lowell} from './Lowell';
 // import {Maria} from './Maria';
 import {Musashi} from './Musashi';
 import {Naomi} from './Naomi';
-// import {Neil} from './Neil';
+import {Neil} from './Neil';
 // import {Oscar} from './Oscar';
 // import {Petra} from './Petra';
 import {Quill} from './Quill';
@@ -63,7 +63,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     // [CardName.MARIA]: {Factory: Maria, compatibility: 'colonies'},
     [CardName.MUSASHI]: {Factory: Musashi},
     [CardName.NAOMI]: {Factory: Naomi, compatibility: 'colonies'},
-    // [CardName.NEIL]: {Factory: Neil, compatibility: 'moon'},
+    [CardName.NEIL]: {Factory: Neil, compatibility: 'moon'},
     // [CardName.OSCAR]: {Factory: Oscar, compatibility: 'turmoil'},
     // [CardName.PETRA]: {Factory: Petra, compatibility: 'turmoil'},
     [CardName.QUILL]: {Factory: Quill, compatibility: 'venus'},

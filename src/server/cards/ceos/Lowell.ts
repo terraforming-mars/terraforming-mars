@@ -35,11 +35,12 @@ export class Lowell extends CeoCard {
 
 
   public action(player: Player): PlayerInput | undefined {
-    const cardsDrawn: Array<ICeoCard> = [];
     const game = player.game;
-    for (let i = 0; i < 3; i++) {
-      cardsDrawn.push(game.ceoDeck.draw(game));
-    }
+    const cardsDrawn: Array<ICeoCard> = [
+      game.ceoDeck.draw(game),
+      game.ceoDeck.draw(game),
+      game.ceoDeck.draw(game),
+    ];
 
     cardsDrawn.forEach((card) => {
       if (card.canPlay?.(player) === false) {

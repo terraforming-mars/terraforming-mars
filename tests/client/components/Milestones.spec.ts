@@ -16,7 +16,7 @@ describe('Milestones', function() {
     const milestone = mount(Milestones, {
       localVue: getLocalVue(),
       propsData: {
-        milestones_list: [
+        milestones: [
           mockMilestone,
         ],
       },

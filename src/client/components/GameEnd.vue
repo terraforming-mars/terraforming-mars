@@ -58,6 +58,7 @@
                           <th v-if="game.moon !== undefined"><div class="table-moon-road-tile"></div></th>
                           <th v-if="game.moon !== undefined"><div class="table-moon-colony-tile"></div></th>
                           <th v-if="game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
+                          <th v-if="game.pathfinders !== undefined"><div class="table-planetary-track"></div></th>
                           <th><div class="vp">VP</div></th>
                           <th v-if="game.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" :data-tooltip="$t('Escape Velocity penalty')">&#x23F3;</th>
                           <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
@@ -80,6 +81,7 @@
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonRoads }}</td>
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonHabitats }}</td>
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
+                          <td v-if="game.pathfinders !== undefined"> {{ p.victoryPointsBreakdown.planetaryTracks}}</td>
                           <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                           <td v-if="game.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                           <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>

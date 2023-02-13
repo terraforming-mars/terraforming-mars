@@ -1,7 +1,6 @@
 <template>
   <div id="player-home" :class="(game.turmoil ? 'with-turmoil': '')">
 
-    <!-- Top bar -->
     <top-bar :playerView="playerView" />
 
     <!-- Game status message -->
@@ -12,7 +11,6 @@
       </div>
     </div>
 
-    <!--  Sidebar -->
     <sidebar v-trim-whitespace
       :acting_player="isPlayerActing(playerView)"
       :player_color="thisPlayer.color"
@@ -30,7 +28,7 @@
         <div class="deck-size">{{ game.deckSize }}</div>
     </sidebar>
 
-    <Drafting :playerView="playerView" :settings="settings" v-if="thisPlayer.tableau.length === 0" />
+    <DraftingCards :playerView="playerView" :settings="settings" v-if="thisPlayer.tableau.length === 0" />
 
     <div v-if="thisPlayer.tableau.length > 0">
       <div class="player_home_block">
@@ -68,10 +66,8 @@
         </div>
       </div>
 
-      <!-- Players overview -->
       <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
-      <!-- Action log -->
       <div class="player_home_block nofloat">
         <log-panel
           :id="playerView.id"
@@ -104,27 +100,12 @@
         <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.ceoCardsInHand).concat(playerView.cardsInHand)" />
       </div>
 
-      <!-- Played cards -->
       <PlayedCards :playerView="playerView" />
     </div>
 
-    <!-- Colonies -->
-    <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
-      <a name="colonies" class="player_home_anchor"></a>
-      <dynamic-title title="Colonies" :color="thisPlayer.color"/>
-      <div class="colonies-fleets-cont">
-        <div class="colonies-player-fleets" v-for="colonyPlayer in playerView.players" :key="colonyPlayer.color">
-          <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)" :key="idx"></div>
-        </div>
-      </div>
-      <div class="player_home_colony_cont">
-        <div class="player_home_colony" v-for="colony in game.colonies" :key="colony.name">
-          <colony :colony="colony"></colony>
-        </div>
-      </div>
-    </div>
+    <ColoniesStatus :playerView="playerView" id="shortkey-colonies" />
 
-    <!-- Spectator -->
+    <!-- Spectator link -->
     <div v-if="game.spectatorId">
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
@@ -135,8 +116,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
+import ColoniesStatus from '@/client/components/playerhome/ColoniesStatus.vue';
 import PlayedCards from '@/client/components/playerhome/PlayedCards.vue';
-import Drafting from '@/client/components/playerhome/Drafting.vue';
+import DraftingCards from '@/client/components/playerhome/DraftingCards.vue';
 import Board from '@/client/components/Board.vue';
 import Card from '@/client/components/card/Card.vue';
 import Milestones from '@/client/components/Milestones.vue';
@@ -144,9 +126,7 @@ import Awards from '@/client/components/Awards.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
-import Colony from '@/client/components/colonies/Colony.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
-import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
@@ -202,14 +182,14 @@ export default Vue.extend({
     'board': Board,
     DynamicTitle,
     Card,
-    Drafting,
+    ColoniesStatus,
+    DraftingCards,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
     Milestones,
     Awards,
     'top-bar': TopBar,
     'sidebar': Sidebar,
-    'colony': Colony,
     'log-panel': LogPanel,
     'turmoil': Turmoil,
     'sortable-cards': SortableCards,
@@ -218,9 +198,7 @@ export default Vue.extend({
     PurgeWarning,
     PlayedCards,
   },
-  mixins: [PlayerMixin],
   methods: {
-    ...PlayerMixin.methods,
     navigatePage(event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {

@@ -133,7 +133,6 @@ import Card from '@/client/components/card/Card.vue';
 import Milestones from '@/client/components/Milestones.vue';
 import Awards from '@/client/components/Awards.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
-import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
@@ -150,7 +149,7 @@ export interface PlayerHomeModel {
 }
 
 export default Vue.extend({
-  name: 'player-home',
+  name: 'drafting-cards',
   data(): PlayerHomeModel {
     return {
       tileView: 'show',
@@ -183,9 +182,7 @@ export default Vue.extend({
     Turmoil,
     MoonBoard,
   },
-  mixins: [PlayerMixin],
   methods: {
-    ...PlayerMixin.methods,
     getPlayerCssForTurnOrder: (
       player: PublicPlayerModel,
       highlightActive: boolean,

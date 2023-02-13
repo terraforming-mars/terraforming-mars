@@ -5,13 +5,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {DrawCards} from '../../deferredActions/DrawCards';
-import {SelectAmount} from '../../inputs/SelectAmount';
 
 import {Tag} from '../../../common/cards/Tag';
-import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {Resources} from '../../../common/Resources';
 import {SelectCard} from '../../inputs/SelectCard';
-import {IProjectCard} from '../IProjectCard';
 
 
 export class Musashi extends CeoCard {
@@ -26,7 +23,7 @@ export class Musashi extends CeoCard {
           b.titanium(6);
           b.br.br;
         }),
-        description: 'Once per game, discard any number of Earth cards to draw/gain that many Space cards and titanium. Gain 6 titanium.',
+        description: 'Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.',
       },
     });
   }
@@ -34,38 +31,27 @@ export class Musashi extends CeoCard {
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
     const eligibleCards = player.cardsInHand.filter((card) => card.tags.includes(Tag.EARTH));
-    const max = eligibleCards.length;
+    this.isDisabled = true;
 
-    return new SelectAmount(
-      'Select number of Earth cards to discard',
-      'Discard cards',
-      (amount: number) => {
-        const discardEarthCards = new SimpleDeferredAction(
-          player,
-          () => {
-            if (amount === 0) return undefined;
-            return new SelectCard(
-              `Select ${amount} Earth card(s) to discard`,
-              'Discard',
-              eligibleCards,
-              (foundCards: Array<IProjectCard>) => {
-                for (const card of foundCards) {
-                  player.cardsInHand.splice(player.cardsInHand.indexOf(card), 1);
-                  game.projectDeck.discard(card);
-                }
-                return undefined;
-              },
-              {min: amount, max: amount});
-          },
-        );
-        player.game.defer(discardEarthCards, Priority.DISCARD_AND_DRAW);
-        player.game.defer(DrawCards.keepAll(player, amount, {tag: Tag.SPACE}));
-        player.addResource(Resources.TITANIUM, 6 + amount);
-        this.isDisabled = true;
+    if (eligibleCards.length === 0) {
+      game.log('${0} has no Earth cards', (b) => b.player(player));
+      player.addResource(Resources.TITANIUM, 6, {log:true});
+      return undefined;
+    }
+
+    return new SelectCard(
+      'Select Earth card(s) to discard',
+      'Discard',
+      eligibleCards,
+      (cards) => {
+        for (const card of cards) {
+          player.cardsInHand.splice(player.cardsInHand.indexOf(card), 1);
+          game.projectDeck.discard(card);
+        }
+        player.game.defer(DrawCards.keepAll(player, cards.length, {tag: Tag.SPACE}));
+        player.addResource(Resources.TITANIUM, cards.length + 6, {log:true});
         return undefined;
       },
-      0,
-      max,
-    );
+      {min: 0, max: eligibleCards.length});
   }
 }

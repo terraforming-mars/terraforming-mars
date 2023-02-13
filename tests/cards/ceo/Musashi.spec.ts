@@ -8,10 +8,9 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {forceGenerationEnd} from '../../TestingUtils';
+import {cast, forceGenerationEnd, fakeCard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-
 
 describe('Musashi', function() {
   let card: Musashi;
@@ -22,39 +21,68 @@ describe('Musashi', function() {
     card = new Musashi();
     game = newTestGame(1);
     player = getTestPlayer(game, 0);
+    player.playedCards.push(card);
   });
 
   it('Takes action with no Earth cards', function() {
     expect(player.titanium).to.eq(0);
     expect(card.canAct(player)).is.true;
-    const selectAmount = card.action(player) as SelectAmount;
-    selectAmount.cb(0);
-    game.deferredActions.runAll(() => {});
+    card.action(player);
+    runAllActions(player.game);
     expect(player.titanium).to.eq(6);
   });
 
-  it('Takes action', function() {
-    player.cardsInHand.push(new EarthOffice(), new LunaGovernor(), new Cartel());
+  it('Can only act once per game', function() {
     expect(player.titanium).to.eq(0);
-    const selectAmount = card.action(player) as SelectAmount;
-    selectAmount.cb(3);
-    const selectCardsToDiscard = game.deferredActions.pop()!.execute() as SelectCard<IProjectCard>;
-    selectCardsToDiscard.cb([...selectCardsToDiscard.cards]);
+    expect(card.canAct(player)).is.true;
+    card.action(player);
+    runAllActions(player.game);
+    expect(card.isDisabled).is.true;
+    expect(card.canAct(player)).is.false;
+  });
 
-    game.deferredActions.runAll(() => {});
+
+  it('Takes action with one Earth card, discards it', function() {
+    const earthCard = fakeCard({tags: [Tag.EARTH]});
+    expect(player.cardsInHand).has.length(0);
+    player.cardsInHand.push(earthCard);
+    const selectCard = cast(card.action(player), SelectCard);
+    selectCard.cb([earthCard]);
+    runAllActions(player.game);
+    expect(player.cardsInHand).has.length(1);
+    expect(player.titanium).to.eq(7);
+  });
+
+  it('Takes action with three Earth cards, discards all', function() {
+    const earthCard1 = fakeCard({tags: [Tag.EARTH]});
+    const earthCard2 = fakeCard({tags: [Tag.EARTH]});
+    const earthCard3 = fakeCard({tags: [Tag.EARTH]});
+    player.cardsInHand.push(earthCard1, earthCard2, earthCard3);
+    expect(player.titanium).to.eq(0);
+    const selectCard = cast(card.action(player), SelectCard);
+    selectCard.cb([earthCard1, earthCard2, earthCard3]);
+    runAllActions(player.game);
     expect(player.cardsInHand).has.length(3);
-
     // Make sure all the drawn cards have Space tag
     expect(player.cardsInHand.some((card) => !card.tags.includes(Tag.SPACE))).is.false;
     expect(player.titanium).to.eq(9);
   });
 
-  it('Can only act once per game', function() {
-    player.cardsInHand.push(new EarthOffice(), new LunaGovernor(), new Cartel());
-    (card.action(player) as SelectAmount).cb(2);
-
-    forceGenerationEnd(game);
-    expect(card.isDisabled).is.true;
-    expect(card.canAct(player)).is.false;
+  it('Takes action with two Earth cards, discards two, keeps one', function() {
+    const earthCard1 = fakeCard({tags: [Tag.EARTH]});
+    const earthCard2 = fakeCard({tags: [Tag.EARTH]});
+    const earthCard3 = fakeCard({tags: [Tag.EARTH]});
+    player.cardsInHand.push(earthCard1, earthCard2, earthCard3);
+    expect(player.titanium).to.eq(0);
+    const selectCard = cast(card.action(player), SelectCard);
+    selectCard.cb([earthCard1, earthCard2]);
+    runAllActions(player.game);
+    expect(player.cardsInHand).has.length(3);
+    expect(player.cardsInHand[0].tags.includes(Tag.EARTH)).is.true;
+    player.cardsInHand.shift(); // Drop the Earth card
+    // Make sure all the remaining/drawn cards have Space tag
+    expect(player.cardsInHand.some((card) => !card.tags.includes(Tag.SPACE))).is.false;
+    expect(player.titanium).to.eq(8);
   });
+
 });

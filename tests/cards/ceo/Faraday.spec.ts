@@ -19,6 +19,7 @@ describe('Faraday', function() {
     game = newTestGame(1);
     player = getTestPlayer(game, 0);
 
+    player.popWaitingFor();
     player.megaCredits = 10;
     player.playedCards.push(card);
   });
@@ -28,7 +29,8 @@ describe('Faraday', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
 
-    expect(game.deferredActions).has.lengthOf(0);
+    runAllActions(player.game);
+    expect(player.getWaitingFor()).is.undefined;
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(10);
   });
@@ -37,12 +39,14 @@ describe('Faraday', function() {
   it('Can draw a card when reaching a multiple of 5 for a tag', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     // 4 tags: Not sufficient
-    expect(game.deferredActions).has.lengthOf(0);
+    
+    runAllActions(player.game);
+    expect(player.getWaitingFor()).is.undefined;
     // 5 tags: Draw a card with a Science tag
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
 
-    expect(game.deferredActions).has.lengthOf(1);
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
     expect(player.megaCredits).to.eq(8);
@@ -54,8 +58,8 @@ describe('Faraday', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
 
-    const orOpations = cast(game.deferredActions.pop()!.execute(), OrOptions);
-    orOpations.options[1].cb();
+    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    orOptions.options[1].cb();
     runAllActions(game);
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(10);
@@ -66,7 +70,8 @@ describe('Faraday', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
 
-    expect(game.deferredActions).has.length(0);
+    runAllActions(player.game);
+    expect(player.getWaitingFor()).is.undefined;
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(1);
   });
@@ -75,8 +80,8 @@ describe('Faraday', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playCard(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));
 
-    expect(game.deferredActions).has.lengthOf(1);
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
     expect(player.megaCredits).to.eq(8);
@@ -90,8 +95,8 @@ describe('Faraday', function() {
 
     player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
 
-    expect(game.deferredActions).has.lengthOf(2);
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
     orOptions.options[0].cb();
@@ -107,8 +112,8 @@ describe('Faraday', function() {
 
     player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
 
-    expect(game.deferredActions).has.lengthOf(2);
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
     orOptions.options[1].cb();
@@ -124,8 +129,8 @@ describe('Faraday', function() {
 
     player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
 
-    expect(game.deferredActions).has.lengthOf(2);
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[1].cb();
     runAllActions(game);
 

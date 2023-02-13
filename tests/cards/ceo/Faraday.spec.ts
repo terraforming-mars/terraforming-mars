@@ -27,8 +27,8 @@ describe('Faraday', function() {
   it('Nothing happens when playing the 7th tag', function() {
     // 7th here is arbitrary, just a number that isnt a multiple of 5
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
 
+    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
     expect(player.cardsInHand).has.length(0);
@@ -38,13 +38,14 @@ describe('Faraday', function() {
 
   it('Can draw a card when reaching a multiple of 5 for a tag', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    // 4 tags: Not sufficient
+    expect(player.cardsInHand).has.length(0);
 
+    // 4 tags: Not sufficient
     runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
+
     // 5 tags: Draw a card with a Science tag
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
-
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
@@ -56,9 +57,10 @@ describe('Faraday', function() {
 
   it('Can choose to do nothing when reaching a multiple of 5 for a tag', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
 
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[1].cb();
     runAllActions(game);
     expect(player.cardsInHand).has.length(0);
@@ -68,8 +70,8 @@ describe('Faraday', function() {
   it('No prompt if player cannot afford to pay for card', function() {
     player.megaCredits = 1;
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
 
+    player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
     expect(player.cardsInHand).has.length(0);
@@ -94,7 +96,6 @@ describe('Faraday', function() {
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
 
     player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
-
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
@@ -111,7 +112,6 @@ describe('Faraday', function() {
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
 
     player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
-
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
@@ -128,12 +128,10 @@ describe('Faraday', function() {
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
 
     player.playCard(fakeCard({tags: [Tag.EARTH, Tag.SCIENCE]}));
-
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[1].cb();
     runAllActions(game);
-
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(10);
   });

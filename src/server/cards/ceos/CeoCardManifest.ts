@@ -29,7 +29,7 @@ import {Rogers} from './Rogers';
 import {Ryu} from './Ryu';
 import {Stefan} from './Stefan';
 // import {Sweeney} from './Sweeney';
-// import {Tate} from './Tate';
+import {Tate} from './Tate';
 import {Ulrich} from './Ulrich';
 // import {VanAllen} from './VanAllen';
 import {Will} from './Will';
@@ -69,7 +69,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.RYU]: {Factory: Ryu},
     [CardName.STEFAN]: {Factory: Stefan},
     // [CardName.SWEENEY]: {Factory: Sweeney},
-    // [CardName.TATE]: {Factory: Tate},
+    [CardName.TATE]: {Factory: Tate},
     [CardName.ULRICH]: {Factory: Ulrich},
     // [CardName.VANALLEN]: {Factory: VanAllen},
     [CardName.WILL]: {Factory: Will, compatibility: 'venus'},

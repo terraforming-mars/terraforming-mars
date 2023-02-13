@@ -144,13 +144,13 @@ import {TileView} from '../board/TileView';
 
 import * as raw_settings from '@/genfiles/settings.json';
 
-export interface PlayerHomeModel {
+export interface InitialDrafting {
   tileView: TileView;
 }
 
 export default Vue.extend({
-  name: 'drafting-cards',
-  data(): PlayerHomeModel {
+  name: 'initial-drafting',
+  data(): InitialDrafting {
     return {
       tileView: 'show',
     };

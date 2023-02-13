@@ -28,7 +28,7 @@
         <div class="deck-size">{{ game.deckSize }}</div>
     </sidebar>
 
-    <DraftingCards :playerView="playerView" :settings="settings" v-if="thisPlayer.tableau.length === 0" />
+    <InitialDrafting :playerView="playerView" :settings="settings" v-if="thisPlayer.tableau.length === 0" />
 
     <div v-if="thisPlayer.tableau.length > 0">
       <div class="player_home_block">
@@ -107,7 +107,7 @@
 
     <!-- Spectator link -->
     <div v-if="game.spectatorId">
-      <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
+      <a :href="'spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
     <purge-warning :expectedPurgeTimeMs="playerView.game.expectedPurgeTimeMs"></purge-warning>
   </div>
@@ -118,7 +118,7 @@ import Vue from 'vue';
 
 import ColoniesStatus from '@/client/components/playerhome/ColoniesStatus.vue';
 import PlayedCards from '@/client/components/playerhome/PlayedCards.vue';
-import DraftingCards from '@/client/components/playerhome/DraftingCards.vue';
+import InitialDrafting from '@/client/components/playerhome/InitialDrafting.vue';
 import Board from '@/client/components/Board.vue';
 import Card from '@/client/components/card/Card.vue';
 import Milestones from '@/client/components/Milestones.vue';
@@ -183,7 +183,7 @@ export default Vue.extend({
     DynamicTitle,
     Card,
     ColoniesStatus,
-    DraftingCards,
+    InitialDrafting,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
     Milestones,

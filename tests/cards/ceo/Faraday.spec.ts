@@ -39,7 +39,7 @@ describe('Faraday', function() {
   it('Can draw a card when reaching a multiple of 5 for a tag', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     // 4 tags: Not sufficient
-    
+
     runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
     // 5 tags: Draw a card with a Science tag

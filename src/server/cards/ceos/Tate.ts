@@ -5,7 +5,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {Tag} from '../../../common/cards/Tag';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Size} from '../../../common/cards/render/Size';

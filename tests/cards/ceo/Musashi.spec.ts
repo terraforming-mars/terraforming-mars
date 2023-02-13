@@ -84,5 +84,4 @@ describe('Musashi', function() {
     expect(player.cardsInHand.some((card) => !card.tags.includes(Tag.SPACE))).is.false;
     expect(player.titanium).to.eq(8);
   });
-
 });

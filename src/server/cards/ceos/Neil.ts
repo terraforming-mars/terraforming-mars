@@ -7,7 +7,7 @@ import {all, played} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 
 import {IProjectCard} from '../IProjectCard';
-import {IMoonData} from '../../moon/IMoonData';
+import {MoonExpansion} from '../../moon/MoonExpansion';
 
 import {Resources} from '../../../common/Resources';
 
@@ -37,12 +37,13 @@ export class Neil extends CeoCard {
 
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
-    const moonData = game.moonData as IMoonData;
-    const lowestRate = Math.min(moonData.colonyRate, moonData.logisticRate, moonData.miningRate);
+    MoonExpansion.ifMoon(game, (moonData) => {
+      const lowestRate = Math.min(moonData.colonyRate, moonData.logisticRate, moonData.miningRate);
 
-    if (lowestRate > 0) {
-      player.production.add(Resources.MEGACREDITS, lowestRate, {log: true});
-    }
+      if (lowestRate > 0) {
+        player.production.add(Resources.MEGACREDITS, lowestRate, {log: true});
+      }
+    });
 
     this.isDisabled = true;
     return undefined;

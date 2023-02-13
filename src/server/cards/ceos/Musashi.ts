@@ -35,7 +35,7 @@ export class Musashi extends CeoCard {
 
     if (eligibleCards.length === 0) {
       game.log('${0} has no Earth cards', (b) => b.player(player));
-      player.addResource(Resources.TITANIUM, 6, {log:true});
+      player.addResource(Resources.TITANIUM, 6, {log: true});
       return undefined;
     }
 
@@ -49,7 +49,7 @@ export class Musashi extends CeoCard {
           game.projectDeck.discard(card);
         }
         player.game.defer(DrawCards.keepAll(player, cards.length, {tag: Tag.SPACE}));
-        player.addResource(Resources.TITANIUM, cards.length + 6, {log:true});
+        player.addResource(Resources.TITANIUM, cards.length + 6, {log: true});
         return undefined;
       },
       {min: 0, max: eligibleCards.length});

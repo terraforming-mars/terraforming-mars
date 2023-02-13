@@ -1,21 +1,16 @@
-
-
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Size} from '../../../common/cards/render/Size';
 
-export class Yvonne extends Card implements CeoCard {
+export class Yvonne extends CeoCard {
   constructor() {
     super({
       name: CardName.YVONNE,
-      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L25',
         renderData: CardRenderer.builder((b) => {
@@ -26,15 +21,12 @@ export class Yvonne extends Card implements CeoCard {
     });
   }
 
-  public isDisabled = false;
 
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(player: Player): boolean {
-    if (player.game.gameOptions.coloniesExtension === false) return false;
-    return !this.isDisabled;
+  public override canAct(player: Player): boolean {
+    if (!super.canAct(player)) {
+      return false;
+    }
+    return player.game.gameOptions.coloniesExtension === true;
   }
 
   public action(player: Player): PlayerInput | undefined {

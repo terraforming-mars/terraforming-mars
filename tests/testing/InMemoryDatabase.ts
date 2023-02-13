@@ -45,7 +45,7 @@ export class InMemoryDatabase implements IDatabase {
   getGameIds(): Promise<GameId[]> {
     return Promise.resolve(Array.from(this.data.keys()));
   }
-  getPlayerCount(_game_id: string): Promise<number> {
+  getPlayerCount(_gameId: GameId): Promise<number> {
     throw new Error('Method not implemented.');
   }
   saveGame(game: Game): Promise<void> {
@@ -59,19 +59,22 @@ export class InMemoryDatabase implements IDatabase {
     game.lastSaveId++;
     return Promise.resolve();
   }
-  saveGameResults(_game_id: string, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Score[]): void {
+  saveGameResults(_gameId: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Score[]): void {
     throw new Error('Method not implemented.');
   }
-  restoreGame(_game_id: string, _save_id: number): Promise<SerializedGame> {
+  loadCloneableGame(_gameId: GameId): Promise<SerializedGame> {
     throw new Error('Method not implemented.');
   }
-  loadCloneableGame(_game_id: string): Promise<SerializedGame> {
-    throw new Error('Method not implemented.');
+  deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {
+    const row = this.data.get(gameId);
+    if (row === undefined) {
+      throw new Error('Game not found ' + gameId);
+    }
+    row.splice(row.length - rollbackCount, rollbackCount);
+
+    return Promise.resolve();
   }
-  deleteGameNbrSaves(_game_id: string, _rollbackCount: number): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-  cleanGame(_game_id: string): Promise<void> {
+  cleanGame(_gameId: GameId): Promise<void> {
     throw new Error('Method not implemented.');
   }
   purgeUnfinishedGames(): Promise<void> {

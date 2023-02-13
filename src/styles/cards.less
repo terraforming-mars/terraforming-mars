@@ -437,6 +437,23 @@ input[type="radio"]:checked + .filterDiv::after {
     content: "🪐";
 }
 
+.ceo-icon:after {
+    position: absolute;
+    color:#000;
+    border: 1px solid #222;
+    background: #edbd18;
+    font-family: Prototype;
+    // font-weight: bold;
+    font-size: 9px;
+    line-height: 17px;
+    width: 16px;
+    height:16px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+    content: "💼";
+}
+
 .button-icon:after {
     margin-top: -9px;
     margin-left: -9px;
@@ -527,6 +544,10 @@ input[type="radio"]:checked + .filterDiv::after {
     background: linear-gradient(-60deg, #089108 10%, #0ac20a, #089108 90%);
 }
 
+.background-color-ceo {
+    background: linear-gradient(-60deg, #F8C61B 10%, #EED240, #CD872A 90%);
+}
+
 .background-color-active {
     background: linear-gradient(-60deg, #208cdf 10%, #4da3e6, #208cdf 90%);
 }
@@ -568,7 +589,7 @@ input[type="radio"]:checked + .filterDiv::after {
 /*********** Style the tags ************/
 
 .tag-wild {
-    background-image: url("../assets/tags/wild.png");
+    background-image: url("./assets/tags/wild.png");
 }
 .tag-building {
     background-image: url("./assets/tags/building.png");
@@ -1332,7 +1353,7 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .plus {
-    background-image: url(/assets/misc/plus.png);
+    background-image: url(./assets/misc/plus.png);
     background-size: 15px;
     min-height: 15px;
     vertical-align: middle;
@@ -1342,7 +1363,7 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .minus {
-    background-image: url(/assets/misc/minus.png);
+    background-image: url(./assets/misc/minus.png);
     background-size: 15px;
     vertical-align: middle;
     display: inline-block;
@@ -2652,6 +2673,11 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .expansion-icon-pathfinders {
     background-image: url(./assets/expansion_icons/expansion_icon_pathfinders.png);
+}
+
+.expansion-icon-ceo {
+    // TODO(dl): Upload this asset
+    background-image: url(./assets/expansion_icons/ceo.png);
 }
 
 /* refactored */

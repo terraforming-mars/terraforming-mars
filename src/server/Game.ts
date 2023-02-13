@@ -65,7 +65,7 @@ import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
-import {CorporationDeck, PreludeDeck, ProjectDeck} from './cards/Deck';
+import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, dayStringToDays} from './database/utils.ts';
 
@@ -84,11 +84,14 @@ export class Game implements Logger {
   public gameAge: number = 0; // Each log event increases it
   public gameLog: Array<LogMessage> = [];
   public undoCount: number = 0; // Each undo increases it
+  public inputsThisRound = 0;
+  public resettable: boolean = false;
 
   public generation: number = 1;
   public phase: Phase = Phase.RESEARCH;
   public projectDeck: ProjectDeck;
   public preludeDeck: PreludeDeck;
+  public ceoDeck: CeoDeck;
   public corporationDeck: CorporationDeck;
   public board: Board;
 
@@ -147,7 +150,8 @@ export class Game implements Logger {
     board: Board,
     projectDeck: ProjectDeck,
     corporationDeck: CorporationDeck,
-    preludeDeck: PreludeDeck) {
+    preludeDeck: PreludeDeck,
+    ceoDeck: CeoDeck) {
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -169,6 +173,7 @@ export class Game implements Logger {
     this.projectDeck = projectDeck;
     this.corporationDeck = corporationDeck;
     this.preludeDeck = preludeDeck;
+    this.ceoDeck = ceoDeck;
     this.board = board;
 
     this.players.forEach((player) => {
@@ -200,6 +205,9 @@ export class Game implements Logger {
     const preludeDeck = new PreludeDeck(gameCards.getPreludeCards(), [], rng);
     preludeDeck.shuffle(gameOptions.customPreludes);
 
+    const ceoDeck = new CeoDeck(gameCards.getCeoCards(), [], rng);
+    ceoDeck.shuffle(gameOptions.customCeos);
+
     const activePlayer = firstPlayer.id;
 
     // Single player game player starts with 14TR
@@ -213,7 +221,7 @@ export class Game implements Logger {
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
+    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
     game.spectatorId = spectatorId;
     // This evaluation of created time doesn't match what's stored in the database, but that's fine.
     game.createdTime = new Date();
@@ -301,7 +309,8 @@ export class Game implements Logger {
         gameOptions.venusNextExtension ||
         gameOptions.coloniesExtension ||
         gameOptions.turmoilExtension ||
-        gameOptions.initialDraftVariant) {
+        gameOptions.initialDraftVariant ||
+        gameOptions.ceoExtension) {
         if (gameOptions.corporationsDraft === false && gameOptions.playerCustomCorpList.length == 0) {
           for (let i = 0; i < gameOptions.startingCorporations; i++) {
             player.dealtCorporationCards.push(corporationDeck.draw(game));
@@ -340,6 +349,13 @@ export class Game implements Logger {
           for (let i = 0; i < constants.PRELUDE_CARDS_DEALT_PER_PLAYER; i++) {
             const prelude = preludeDeck.draw(game);
             player.dealtPreludeCards.push(prelude);
+          }
+        }
+        if (gameOptions.ceoExtension) {
+          // TODO: Replace this with i < gameOptions.startingCeos constants
+          for (let i = 0; i < 2; i++) {
+            const ceoCard = ceoDeck.draw(game);
+            player.dealtCeoCards.push(ceoCard);
           }
         }
       } else {
@@ -399,6 +415,7 @@ export class Game implements Logger {
       awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
+      ceoDeck: this.ceoDeck.serialize(),
       colonies: this.colonies.map((colony) => colony.serialize()),
       corporationDeck: this.corporationDeck.serialize(),
       createdTimeMs: this.createdTime.getTime(),
@@ -905,7 +922,7 @@ export class Game implements Logger {
     this.players.forEach((player) => {
       player.dealtCorporationCards = player.draftedCorporations;
     });
-    // Reset value to guarantee no impact on eventual futur drafts (projects or preludes)
+    // Reset value to guarantee no impact on eventual future drafts (projects or preludes)
     this.initialDraftIteration = 1;
     this.draftRound = 1;
     this.gotoInitialPhase();
@@ -957,13 +974,15 @@ export class Game implements Logger {
       return;
     }
 
+    this.inputsThisRound = 0;
+
+    // This next section can be done more simply.
     if (this.allPlayersHavePassed()) {
       this.gotoProductionPhase();
       return;
     }
 
     const nextPlayer = this.getPlayerAfter(this.getPlayerById(this.activePlayer));
-
     if (!this.hasPassedThisActionPhase(nextPlayer)) {
       this.startActionsForPlayer(nextPlayer);
     } else {
@@ -1574,7 +1593,11 @@ export class Game implements Logger {
     const corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
     const preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
 
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
+    // TODO(dl): remove ?? {...} by 2023/03/20
+    const ceoDeck = CeoDeck.deserialize(d.ceoDeck ?? {drawPile: [], discardPile: []}, rng);
+
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
+    game.resettable = true;
     game.spectatorId = d.spectatorId;
     // TODO(kberg): remove ?? 0 by 2023-03-15
     game.createdTime = new Date(d.createdTimeMs ?? 0);

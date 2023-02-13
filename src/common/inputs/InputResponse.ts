@@ -1,8 +1,8 @@
 import {CardName} from '../cards/CardName';
 import {ColonyName} from '../colonies/ColonyName';
-import {Color, ColorWithNeutral} from '../Color';
+import {ColorWithNeutral} from '../Color';
 import {PartyName} from '../turmoil/PartyName';
-import {PlayerId, SpaceId} from '../Types';
+import {SpaceId} from '../Types';
 import {Units} from '../Units';
 import {AresGlobalParametersResponse} from './AresGlobalParametersResponse';
 import {Payment} from './Payment';
@@ -91,8 +91,7 @@ export function isSelectPartyResponse(response: InputResponse): response is Sele
 
 export interface SelectDelegateResponse {
   type: 'delegate',
-  // TODO(kberg): remove Color?
-  player: PlayerId | Color | 'NEUTRAL';
+  player: ColorWithNeutral;
 }
 
 export function isSelectDelegateResponse(response: InputResponse): response is SelectDelegateResponse {

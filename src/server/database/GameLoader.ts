@@ -118,10 +118,17 @@ export class GameLoader implements IGameLoader {
   }
 
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<Game> {
-    const serializedGame = await Database.getInstance().restoreGame(gameId, saveId);
+    const current = await this.getGame(gameId);
+    if (current === undefined) {
+      throw new Error('Cannot find game');
+    }
+    const currentSaveId = current.lastSaveId;
+    const serializedGame = await Database.getInstance().getGameVersion(gameId, saveId);
     const game = Game.deserialize(serializedGame);
-    // TODO(kberg): make deleteGameNbrSaves return a promise.
-    await Database.getInstance().deleteGameNbrSaves(gameId, 1);
+    const deletes = (currentSaveId - saveId) - 1;
+    if (deletes > 0) {
+      await Database.getInstance().deleteGameNbrSaves(gameId, deletes);
+    }
     await this.add(game);
     game.undoCount++;
     return game;

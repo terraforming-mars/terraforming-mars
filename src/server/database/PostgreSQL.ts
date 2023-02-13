@@ -172,24 +172,6 @@ export class PostgreSQL implements IDatabase {
     console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
   }
 
-  async restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    // Retrieve last save from database
-    logForUndo(gameId, 'restore to', saveId);
-    const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [gameId, saveId]);
-    if (res.rows.length === 0) {
-      throw new Error(`Game ${gameId} not found`);
-    }
-    try {
-      // Transform string to json
-      const json = JSON.parse(res.rows[0].game);
-      logForUndo(json.id, 'restored to', json.lastSaveId, 'from', saveId);
-      return json;
-    } catch (e) {
-      const error = e instanceof Error ? e : new Error(String(e));
-      throw error;
-    }
-  }
-
   async saveGame(game: Game): Promise<void> {
     const gameJSON = game.toJSON();
     this.statistics.saveCount++;

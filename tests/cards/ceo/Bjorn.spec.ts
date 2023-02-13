@@ -17,7 +17,9 @@ describe('Bjorn', function() {
 
   beforeEach(() => {
     card = new Bjorn();
-    game = newTestGame(4, {ceoExtension: true});
+    // TODO: Prelude extension is only activated here as we didnt have enough CEOs in early testing
+    // In the future, when more base-game CEOs are added, we can remove preludeExtension from here
+    game = newTestGame(4, {ceoExtension: true, preludeExtension: true});
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
     player3 = getTestPlayer(game, 2);
@@ -28,7 +30,7 @@ describe('Bjorn', function() {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 
   it('Takes OPG action, Everyone is richer than me, and has more MC than Current Generation.  Steal the maximum amount of MC', function() {

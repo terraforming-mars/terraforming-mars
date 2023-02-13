@@ -145,41 +145,21 @@ export class SQLite implements IDatabase {
 
   async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
-    if (maxGameDays) {
+    if (maxGameDays !== undefined) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
       const selectResult = await this.asyncAll('SELECT distinct game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
       const gameIds = selectResult.map((row) => row.game_id);
-      console.log(`About to purge ${gameIds} games`);
-      const placeholders = gameIds.map(() => '?').join(', ');
       if (gameIds.length > 0) {
-        const deleteResult = await this.asyncRun(`DELETE FROM games WHERE game_id in ( ${placeholders} )`, [gameIds]);
+        console.log(`About to purge ${gameIds.length} games`);
+        const placeholders = gameIds.map(() => '?').join(', ');
+        const deleteResult = await this.asyncRun(`DELETE FROM games WHERE game_id in ( ${placeholders} )`, [...gameIds]);
         console.log(`Purged ${deleteResult.changes} rows from games`);
-        const deleteParticipantsResult = await this.asyncRun(`DELETE FROM participants WHERE game_id in ( ${placeholders} )`, [gameIds]);
+        const deleteParticipantsResult = await this.asyncRun(`DELETE FROM participants WHERE game_id in ( ${placeholders} )`, [...gameIds]);
         console.log(`Purged ${deleteParticipantsResult.changes} rows from participants`);
       }
     } else {
       return Promise.resolve();
     }
-  }
-
-  restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    // I don't think this is tested. Once it is use this.asyncGet
-    return new Promise((resolve, reject) => {
-      // Retrieve last save from database
-      this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [gameId, saveId], (err: Error | null, row: { game: any; }) => {
-        if (err) {
-          console.error(err.message);
-          reject(err);
-        }
-        try {
-          const json = JSON.parse(row.game);
-          resolve(json);
-        } catch (e) {
-          const error = e instanceof Error ? e : new Error(String(e));
-          reject(error);
-        }
-      });
-    });
   }
 
   async saveGame(game: Game): Promise<void> {

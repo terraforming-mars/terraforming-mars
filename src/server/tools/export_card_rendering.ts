@@ -16,7 +16,9 @@ import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
 import {ALL_MILESTONES} from '../milestones/Milestones';
 import {ALL_AWARDS} from '../awards/Awards';
-import {MilestoneAwardMetadata} from '@/common/ma/MilestoneAwardMetadata';
+import {MilestoneAwardMetadata} from '../../common/ma/MilestoneAwardMetadata';
+import {AwardName} from '../../common/ma/AwardName';
+import {MilestoneName} from '../../common/ma/MilestoneName';
 
 class ProjectCardProcessor {
   public static json: Array<ClientCard> = [];
@@ -25,7 +27,7 @@ class ProjectCardProcessor {
   }
 
   private static processManifest(manifest: ModuleManifest) {
-    for (const cardManifest of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.standardActions, manifest.standardProjects]) {
+    for (const cardManifest of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.ceoCards, manifest.standardActions, manifest.standardProjects]) {
       ProjectCardProcessor.processDeck(manifest.module, cardManifest);
     }
   }
@@ -143,7 +145,7 @@ class MAProcessor {
     });
   }
 
-  private static processEntry(metadata: {name: string, description: string}) {
+  private static processEntry(metadata: {name: MilestoneName | AwardName, description: string}) {
     MAProcessor.json.push({
       name: metadata.name,
       description: metadata.description,

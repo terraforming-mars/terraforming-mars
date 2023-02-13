@@ -46,7 +46,7 @@
     </div>
 
     <!-- Actions -->
-    <div class="player_home_block player_home_block--actions nofloat">
+    <div class="player_home_block player_home_block--actions nofloat" id="shortkey-actions">
       <a name="actions" class="player_home_anchor"></a>
       <dynamic-title title="Actions" :color="thisPlayer.color"/>
       <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>

@@ -107,6 +107,9 @@ export default Vue.extend({
         case KeyboardNavigation.COLONIES:
           id = 'shortkey-colonies';
           break;
+        case KeyboardNavigation.ACTIONS:
+          id = 'shortkey-actions';
+          break;
         default:
           return;
         }

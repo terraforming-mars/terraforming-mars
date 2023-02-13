@@ -4,4 +4,5 @@ export enum KeyboardNavigation {
   PLAYERSOVERVIEW = 'KeyS',
   HAND = 'KeyD',
   COLONIES = 'KeyF',
+  ACTIONS = 'KeyC',
 }

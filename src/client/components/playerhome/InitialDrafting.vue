@@ -140,7 +140,7 @@ import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import {Phase} from '@/common/Phase';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {TileView} from '../board/TileView';
+import {TileView} from '@/client/components/board/TileView';
 
 import * as raw_settings from '@/genfiles/settings.json';
 

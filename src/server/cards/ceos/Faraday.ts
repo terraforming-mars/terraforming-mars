@@ -37,14 +37,30 @@ export class Faraday extends CeoCard {
     if (card.tags.length === 0 || card.cardType === CardType.EVENT || !player.canAfford(2)) return;
 
     // Get all 'valid' tags that Player has in play after playing the card.
-    const allTags = this.getAllValidTags(player);
-    const validTags = allTags
-      .filter((item) => card.tags.includes(item));
+    const invalidTags = [
+      Tag.EVENT,
+      Tag.WILD,
+      Tag.CLONE,
+    ];
+    const playersValidTagCount = player.tags.getAllTags().filter((tag) => !invalidTags.includes(tag.tag));
+    // Convert tags into an assocative array indexed by tag.
+    //  This _could_ save CPU cycles instead of running multiple finds?
+    // ie:
+    // from:
+    //    { tag: Tag.BUILDING, count: 5 },
+    //    { tag: Tag.EARTH, count: 10 },
+    //    { tag: Tag.POWER, count: 20 },
+    // to:
+    //    { Tag.BUILDING: 5, Tag.EARTH: 10, Tag.POWER: 20 }
+    const countOfTags = playersValidTagCount.reduce((acc, cur) => {
+      acc[cur.tag] = cur.count;
+      return acc;
+    }, {} as { [key in Tag]: number });
 
-    const uniqueCardTags = new Set(card.tags);
-    uniqueCardTags.forEach((tag) => {
-      if (!validTags.includes(tag)) return;
-      const playerTagCount = player.tags.count(tag, 'raw'); // Raw here means no Wild tags
+    const uniqueTagsOnCard = new Set(card.tags);
+    uniqueTagsOnCard.forEach((tag) => {
+      if (invalidTags.includes(tag)) return;
+      const playerTagCount = countOfTags[tag];
       const cardTagCount = card.tags.filter((cardTag) => cardTag === tag).length;
       const playerTagCountPrePlay = playerTagCount - cardTagCount;
       // Modulo 5 what the tag count was before the card was played.
@@ -67,32 +83,5 @@ export class Faraday extends CeoCard {
         return undefined;
       }),
     );
-  }
-
-  private getAllValidTags(player: Player): Array<Tag> {
-    const tags = [
-      Tag.BUILDING,
-      Tag.SPACE,
-      Tag.SCIENCE,
-      Tag.POWER,
-      Tag.EARTH,
-      Tag.JOVIAN,
-      Tag.PLANT,
-      Tag.MICROBE,
-      Tag.ANIMAL,
-      Tag.CITY,
-      // Tag.WILD,  // No Wild
-      // Tag.EVENT, // No Event
-      // Tag.CLONE,
-    ];
-
-    // On the players 'Tag Bar' VENUS is in between JOVIAN and PLANTS
-    // It's nice to keep these in order for the player's own tag prompts
-    const gOpts = player.game.gameOptions;
-    if (gOpts.venusNextExtension) tags.splice(tags.indexOf(Tag.JOVIAN) + 1, 0, Tag.VENUS);
-    if (gOpts.moonExpansion) tags.push(Tag.MOON);
-    if (gOpts.aresExtension) tags.push(Tag.MARS);
-
-    return tags;
   }
 }

@@ -3,13 +3,14 @@
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {ITagCount} from '../../common/cards/ITagCount';
-import {Tag} from '../../common/cards/Tag';
+import {ALL_TAGS, Tag} from '../../common/cards/Tag';
 import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {CeoExtension} from '../CeoExtension';
 import {Player} from '../Player';
 
+const ALL_TAGS_EXCEPT_CLONE = ALL_TAGS.filter((tag) => tag !== Tag.CLONE);
 export class Tags {
   private player: Player;
   constructor(player: Player) {
@@ -17,23 +18,9 @@ export class Tags {
   }
 
   public getAllTags(): Array<ITagCount> {
-    return [
-      {tag: Tag.BUILDING, count: this.count(Tag.BUILDING, 'raw')},
-      {tag: Tag.CITY, count: this.count(Tag.CITY, 'raw')},
-      {tag: Tag.EARTH, count: this.count(Tag.EARTH, 'raw')},
-      {tag: Tag.POWER, count: this.count(Tag.POWER, 'raw')},
-      {tag: Tag.JOVIAN, count: this.count(Tag.JOVIAN, 'raw')},
-      {tag: Tag.MARS, count: this.count(Tag.MARS, 'raw')},
-      {tag: Tag.MICROBE, count: this.count(Tag.MICROBE, 'raw')},
-      {tag: Tag.MOON, count: this.count(Tag.MOON, 'raw')},
-      {tag: Tag.PLANT, count: this.count(Tag.PLANT, 'raw')},
-      {tag: Tag.SCIENCE, count: this.count(Tag.SCIENCE, 'raw')},
-      {tag: Tag.SPACE, count: this.count(Tag.SPACE, 'raw')},
-      {tag: Tag.VENUS, count: this.count(Tag.VENUS, 'raw')},
-      {tag: Tag.WILD, count: this.count(Tag.WILD, 'raw')},
-      {tag: Tag.ANIMAL, count: this.count(Tag.ANIMAL, 'raw')},
-      {tag: Tag.EVENT, count: this.player.getPlayedEventsCount()},
-    ].filter((tag) => tag.count > 0);
+    return ALL_TAGS_EXCEPT_CLONE.map((tag) => {
+      return {tag, count: this.count(tag, 'raw')};
+    });
   }
 
   /*

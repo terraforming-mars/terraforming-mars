@@ -20,7 +20,7 @@ export class Tags {
   public getAllTags(): Array<ITagCount> {
     return ALL_TAGS_EXCEPT_CLONE.map((tag) => {
       return {tag, count: this.count(tag, 'raw')};
-    });
+    }).filter((tag) => tag.count > 0);
   }
 
   /*

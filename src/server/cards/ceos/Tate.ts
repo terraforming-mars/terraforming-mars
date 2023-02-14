@@ -34,7 +34,7 @@ export class Tate extends CeoCard {
       Tag.CLONE,
       !game.gameOptions.venusNextExtension ? Tag.VENUS : null,
       !game.gameOptions.moonExpansion ? Tag.MOON : null,
-      !game.gameOptions.aresExtension ? Tag.MARS : null,
+      !game.gameOptions.pathfindersExpansion ? Tag.MARS : null,
     ].filter(Boolean);
 
     // Blame OpenAI for this allTags:

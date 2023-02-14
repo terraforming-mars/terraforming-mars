@@ -16,7 +16,7 @@ export class Stefan extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('SELL').cards(1).colon().megacredits(3);
         }),
-        description: 'Once per game, sell any number of cards from hand for 3 M€ each.',
+        description: 'Once per game, sell any number of cards from your hand for 3 M€ each.',
       },
     });
   }

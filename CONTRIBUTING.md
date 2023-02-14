@@ -29,7 +29,7 @@ If you both agree that the code doesn't need any tests, don't be surprised if yo
 
 ## Readability
 
-The code needs to be readable as well as correct. Far too often we have reviewed code from just a few months before, where a regular contributor has since disappeared, and nobody understands what it does. So before sending  PR for review, consider these things: _Is your code structured well? Do comments explain the tricky parts? Do variable names make sense? If you weren’t around to maintain the change, would someone else understand?_
+The code needs to be readable as well as correct. Far too often we have accepted code from a casual or regular contributor, said contributor has disappeared, and nobody today understand what it does. So before sending  PR for review, consider these things: _Is your code structured well? Do comments explain the tricky parts? Do variable names make sense? If you weren’t around to maintain the change, would someone else understand?_
 
 If these things seem difficult, just ask us for help, even if your code is in a partially-completed state.
 

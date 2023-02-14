@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Musashi} from '../../../src/server/cards/ceos/Musashi';
+import {Musk} from '../../../src/server/cards/ceos/Musk';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -7,13 +7,13 @@ import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
-describe('Musashi', function() {
-  let card: Musashi;
+describe('Musk', function() {
+  let card: Musk;
   let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
-    card = new Musashi();
+    card = new Musk();
     game = newTestGame(1);
     player = getTestPlayer(game, 0);
     player.playedCards.push(card);

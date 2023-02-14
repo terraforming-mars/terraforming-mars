@@ -14,12 +14,12 @@ export function dateToSeconds(date: Date) {
   return Math.round(date.getTime() / 1000);
 }
 
-export function dayStringToDays(dayString: string | undefined, defaultValue: number) {
+export function dayStringToDays(dayString: string | undefined, defaultValue: number): number {
   const parsed = parseInt(dayString || '');
   return Number.isInteger(parsed) ? parsed : defaultValue;
 }
 
-export function daysAgoToSeconds(dayString: string | undefined, defaultValue: number) {
+export function daysAgoToSeconds(dayString: string | undefined, defaultValue: number): number {
   const days = dayStringToDays(dayString, defaultValue);
   const date = addDays(new Date(), -days);
   return dateToSeconds(date);

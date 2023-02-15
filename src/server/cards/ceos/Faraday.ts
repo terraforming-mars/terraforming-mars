@@ -75,8 +75,18 @@ export class Faraday extends CeoCard {
   public effectOptions(player: Player, tag: Tag) {
     return new OrOptions(
       new SelectOption(`Pay 2 M€ to draw a ${tag} card`, 'Confirm', () => {
-        player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}));
-        player.drawCard(1, {tag: tag});
+        player.game.defer(
+          new SelectPaymentDeferred(
+            player,
+            2,
+            {
+              title: 'Select how to pay for action',
+              afterPay: () => {
+                player.drawCard(1, {tag: tag});
+              },
+            }
+          )
+        );
         return undefined;
       }),
       new SelectOption('Do nothing', 'Confirm', () => {

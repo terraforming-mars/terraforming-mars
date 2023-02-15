@@ -45,7 +45,7 @@ export class Lowell extends CeoCard {
     cardsDrawn.forEach((card) => {
       if (card.canPlay?.(player) === false) {
         cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
-        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player));
+        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player), {reservedFor: player});
       }
     });
 

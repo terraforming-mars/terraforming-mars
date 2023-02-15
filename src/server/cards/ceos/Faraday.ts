@@ -40,7 +40,6 @@ export class Faraday extends CeoCard {
     const invalidTags = [
       Tag.EVENT,
       Tag.WILD,
-      Tag.CLONE,
     ];
     const playersValidTagCount = player.tags.getAllTags().filter((tag) => !invalidTags.includes(tag.tag));
     // Convert tags into an assocative array indexed by tag.
@@ -84,8 +83,8 @@ export class Faraday extends CeoCard {
               afterPay: () => {
                 player.drawCard(1, {tag: tag});
               },
-            }
-          )
+            },
+          ),
         );
         return undefined;
       }),

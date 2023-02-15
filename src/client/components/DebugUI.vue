@@ -8,7 +8,7 @@
       <!-- start filters -->
 
       <div class="form-group">
-        <input class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
+        <input ref="filter" class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
       </div>
       <input type="checkbox" name="fullFilter" id="fullFilter-checkbox" v-model="fullFilter">
       <label for="fullFilter-checkbox">
@@ -189,6 +189,7 @@ import Award from '@/client/components/Award.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
+import {WithRefs} from 'vue-typed-refs';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -286,7 +287,11 @@ function buildSearchIndex(map: Map<string, Array<string>>) {
   }
 }
 
-export default Vue.extend({
+type Refs = {
+  filter: HTMLInputElement,
+};
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'debug-ui',
   components: {
     Card,
@@ -363,6 +368,7 @@ export default Vue.extend({
       return this.expansions[module] = modules.includes(moduleAbbreviations[module]);
     });
     buildSearchIndex(this.searchIndex);
+    this.$refs.filter.focus();
   },
   computed: {
     allModules(): ReadonlyArray<GameModule> {

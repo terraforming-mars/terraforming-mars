@@ -472,6 +472,7 @@ export enum CardName {
     MERGER = 'Merger',
     CORPORATE_ARCHIVES = 'Corporate Archives',
     DOUBLE_DOWN = 'Double Down',
+    PSYCHE = '16 Psyche',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
@@ -753,7 +754,7 @@ export enum CardName {
     HABITAT_MARTE = 'Habitat Marte',
     ADHAI_HIGH_ORBIT_CONSTRUCTIONS = 'Adhai High Orbit Constructions',
 
-    // CEOs/Leader
+    // CEOs
     ASIMOV = 'Asimov',
     BJORN = 'Bjorn',
     CLARKE = 'Clarke',

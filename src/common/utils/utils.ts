@@ -8,6 +8,8 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
   return `${prefix}${color}`;
 };
 
+export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
+
 /**
  * Creates a range from 0 to n.
  *
@@ -17,7 +19,7 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
 export const range = (n: number): Array<number> => Array.from(Array(n).keys());
 
 /**
- * Returns a new array consisting of elements only in both and b.
+ * Returns a new array consisting of elements only in both a and b.
  *
  * @param {Array<T>} a: the first array
  * @param {Array<T>} b: the second array
@@ -27,7 +29,16 @@ export function intersection<T>(a: Array<T>, b: Array<T>): Array<T> {
   return a.filter((e) => b.includes(e));
 }
 
-export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
+/**
+ * Returns true if a includes an element of b.
+ *
+ * @param {Array<T>} a: the first array
+ * @param {Array<T>} b: the second array
+ * @return {Boolean} true if a includes an element of b.
+ */
+export function hasIntersection<T>(a: Array<T>, b: Array<T>): boolean {
+  return a.some((e) => b.includes(e));
+}
 
 // https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescript
 // Recursive partials are useful for nested partial objects.
@@ -44,4 +55,21 @@ export function inplaceRemove<T>(array: Array<T>, element: T) {
 
 export function sum(array: Array<number>): number {
   return array.reduce((a, b) => a + b, 0);
+}
+
+/**
+ * Creates an array of elements split into two groups,
+ * the first of which contains elements predicate returns truthy for,
+ * the second of which contains elements predicate returns falsey for.
+ * The predicate is invoked with one argument: (value).
+ *
+ * @param {Array<T>} source The collection to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {Array<Array<T>>} Returns the array of grouped elements. Passing group come first.
+ */
+export function partition<T>(source: Array<T>, predicate: (t: T) => boolean): Array<Array<T>> {
+  return source.reduce((result: [Array<T>, Array<T>], element: T) => {
+    result[predicate(element) ? 0 : 1].push(element);
+    return result;
+  }, [[], []]);
 }

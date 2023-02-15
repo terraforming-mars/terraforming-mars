@@ -74,20 +74,6 @@ export function testGameOptions(options: Partial<GameOptions>): GameOptions {
   return {...DEFAULT_GAME_OPTIONS, ...options};
 }
 
-// Use gameOptions, which doesn't hide that certain features are on.
-export function setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
-  const defaultOptions = {
-    ...DEFAULT_GAME_OPTIONS,
-    venusNextExtension: true,
-    turmoilExtension: true,
-    showTimers: false,
-    includeVenusMA: true,
-    aresHazards: false,
-  };
-
-  return Object.assign(defaultOptions, options);
-}
-
 export function setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
   turmoil.rulingParty = party;
   turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: policyId});

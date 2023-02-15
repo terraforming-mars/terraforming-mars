@@ -8,6 +8,10 @@ const colonies: Map<ColonyName, IColonyMetadata> = new Map();
   colonies.set(colony.name, colony);
 });
 
+export function allColonyNames() {
+  return colonies.keys();
+}
+
 export function getColony(name: ColonyName): IColonyMetadata {
   const metadata = colonies.get(name);
   if (metadata === undefined) {

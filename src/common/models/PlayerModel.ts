@@ -5,14 +5,14 @@ import {ITagCount} from '../cards/ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
-import {PlayerId, SpectatorId} from '../Types';
+import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
 import {Resources} from '../Resources';
 
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
-  id?: PlayerId | SpectatorId;
+  id?: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
 }
 
@@ -38,8 +38,7 @@ export type PublicPlayerModel = {
   fleetSize: number;
   heat: number;
   heatProduction: number;
-  // TODO(kberg): this is removeable now.
-  id: string; // Color
+  id: PlayerId | undefined;
   influence: number;
   isActive: boolean;
   lastCardPlayed?: CardName;
@@ -75,9 +74,11 @@ export interface PlayerViewModel extends ViewModel {
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
+  dealtCeoCards: Array<CardModel>;
   draftedCorporations: Array<CardModel>;
   draftedCards: Array<CardModel>;
   id: PlayerId;
+  ceoCardsInHand: Array<CardModel>;
   pickedCorporationCard: Array<CardModel>; // Why Array?
   preludeCardsInHand: Array<CardModel>;
   thisPlayer: PublicPlayerModel;

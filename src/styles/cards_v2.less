@@ -1130,6 +1130,16 @@
             .card-resource-community {
                 background: linear-gradient(orange, orangered);
             }
+            .card-arrow-opg {
+                display: inline-block;
+                background-image: url(./assets/ceos/arrow_opg.png);
+                width: 50px;
+                height: 43px;
+                background-size: 50px 43px;
+                padding-bottom: 22px;
+                background-repeat: no-repeat;
+            }
+
             /*special*/
             .card-special {
                 font-size: @font_size_big;
@@ -1139,7 +1149,7 @@
                 top: 3px;
             }
             .card-minus {
-                background-image: url(/assets/misc/minus.png);
+                background-image: url(./assets/misc/minus.png);
                 background-size: 12px;
                 margin: 0;
                 width: 12px;
@@ -1156,7 +1166,7 @@
                 height: 6px;
             }
             .card-plus {
-                background-image: url(/assets/misc/plus.png);
+                background-image: url(./assets/misc/plus.png);
                 background-size: 12px;
                 min-height: 12px;
                 width: 12px;
@@ -1349,7 +1359,7 @@
             }
             // TODO(kberg) This set of tags looks like a duplicate of cards.less.
             .card-tag-wild {
-                background-image: url("../assets/tags/wild.png");
+                background-image: url("./assets/tags/wild.png");
             }
             .card-tag-building {
                 background-image: url("./assets/tags/building.png");
@@ -1395,7 +1405,7 @@
                 border-radius: 0px;
             }
             .card-tag-wild-resource {
-                background-image: url("../assets/resources/wild.png");
+                background-image: url("./assets/resources/wild.png");
                 border-radius: 0px;
             }
             .card-tag-moon {
@@ -1403,6 +1413,9 @@
             }
             .card-tag-mars {
                 background-image: url("./assets/tags/mars.png");
+            }
+            .card-tag-diverse {
+                background: linear-gradient(to bottom right, green, yellow, red);
             }
             .card-community-services {
                 font-size: 42px;
@@ -1516,6 +1529,23 @@
                     border-radius: 2px;
                 }
             }
+            .card-ceo-container {
+                background-color: #2c2c2c;
+                background: linear-gradient(to right bottom, black, #3c3c3c, #969696, #3c3c3c, #3c3c3c, black);
+                color: black;
+                font-size: 12px;
+                padding: 4px 7px 1px;
+                border-radius: 3px;
+                box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.8);
+                .card-ceo-icon {
+                    text-transform: uppercase;
+                    background: linear-gradient(to right, rgb(235,118,171), #e64d91);
+                    padding-left: 4px;
+                    padding-right: 4px;
+                    border-radius: 2px;
+                }
+            }
+
             .card-corporation-icon {
                 display: inline-block;
                 background-image: url(./assets/misc/corpCard.png);
@@ -2112,6 +2142,25 @@
                 font-size: 12px;
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 background-color: rgb(235, 118, 171);
+                border-radius: 14px 2px 2px 2px;
+                border-top: 2px solid rgb(221, 221, 221);
+                border-left: 2px solid rgb(221, 221, 221);
+                border-bottom: 2px solid rgb(137, 137, 137);
+                border-right: 2px solid rgb(137, 137, 137);
+            }
+            .ceo-label {
+                position: absolute;
+                text-transform: uppercase;
+                top: 15px;
+                left: 4px;
+                margin: 0px;
+                width: 80px;
+                height: 20px;
+                line-height: 22px;
+                text-align: center;
+                font-size: 12px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background-color: #edbd18;
                 border-radius: 14px 2px 2px 2px;
                 border-top: 2px solid rgb(221, 221, 221);
                 border-left: 2px solid rgb(221, 221, 221);

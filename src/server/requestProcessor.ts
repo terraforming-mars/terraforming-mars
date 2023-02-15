@@ -22,10 +22,11 @@ import {PlayerInput} from './routes/PlayerInput';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
 import {serverId, statsId} from './server-ids';
+import {Reset} from './routes/Reset';
 
 const handlers: Map<string, IHandler> = new Map(
   [
-    ['/', ServeApp.INSTANCE],
+    ['', ServeApp.INSTANCE],
     [paths.ADMIN, ServeApp.INSTANCE],
     [paths.API_CLONEABLEGAME, ApiCloneableGame.INSTANCE],
     [paths.API_GAME, ApiGame.INSTANCE],
@@ -38,20 +39,21 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_SPECTATOR, ApiSpectator.INSTANCE],
     [paths.API_WAITING_FOR, ApiWaitingFor.INSTANCE],
     [paths.CARDS, ServeApp.INSTANCE],
-    ['/favicon.ico', ServeAsset.INSTANCE],
+    ['favicon.ico', ServeAsset.INSTANCE],
     [paths.GAME, GameHandler.INSTANCE],
     [paths.GAMES_OVERVIEW, GamesOverview.INSTANCE],
     [paths.HELP, ServeApp.INSTANCE],
     [paths.LOAD, Load.INSTANCE],
     [paths.LOAD_GAME, LoadGame.INSTANCE],
-    ['/main.js', ServeAsset.INSTANCE],
-    ['/main.js.map', ServeAsset.INSTANCE],
+    ['main.js', ServeAsset.INSTANCE],
+    ['main.js.map', ServeAsset.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
     [paths.PLAYER_INPUT, PlayerInput.INSTANCE],
+    [paths.RESET, Reset.INSTANCE],
     [paths.SPECTATOR, ServeApp.INSTANCE],
-    ['/styles.css', ServeAsset.INSTANCE],
-    ['/sw.js', ServeAsset.INSTANCE],
+    ['styles.css', ServeAsset.INSTANCE],
+    ['sw.js', ServeAsset.INSTANCE],
     [paths.THE_END, ServeApp.INSTANCE],
   ],
 );
@@ -70,12 +72,13 @@ export function processRequest(
   }
 
   const url = new URL(req.url, `http://${req.headers.host}`);
+  const pathname = url.pathname.substring(1); // Remove leading '/'
   const ctx = {url, route, gameLoader: GameLoader.getInstance(), ids: {serverId, statsId}};
-  const handler: IHandler | undefined = handlers.get(url.pathname);
+  const handler: IHandler | undefined = handlers.get(pathname);
 
   if (handler !== undefined) {
     handler.processRequest(req, res, ctx);
-  } else if (req.method === 'GET' && url.pathname.startsWith('/assets/')) {
+  } else if (req.method === 'GET' && pathname.startsWith('assets/')) {
     ServeAsset.INSTANCE.get(req, res, ctx);
   } else {
     route.notFound(req, res);

@@ -8,7 +8,7 @@
       <!-- start filters -->
 
       <div class="form-group">
-        <input class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
+        <input ref="filter" class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
       </div>
       <input type="checkbox" name="fullFilter" id="fullFilter-checkbox" v-model="fullFilter">
       <label for="fullFilter-checkbox">
@@ -22,11 +22,13 @@
         </button>
 
         <span v-for="expansion in allModules" :key="expansion">
+          <template v-if="experimentalUI() || expansion !== 'ceo'">
           <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
           <label :for="`${expansion}-checkbox`" class="expansion-button">
             <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
             <span v-i18n>{{expansionName(expansion)}}</span>
           </label>
+          </template>
         </span>
       </div>
 
@@ -37,12 +39,14 @@
         </button>
 
         <span v-for="type in allTypes" :key="type">
+          <template v-if="experimentalUI() || type !== ceoType">
           <input type="checkbox" :name="`${type}-cardType`" :id="`${type}-cardType-checkbox`" v-model="types[type]">
           <label :for="`${type}-cardType-checkbox`" class="expansion-button">
               <span v-if="type === 'colonyTiles'" v-i18n>Colony Tiles</span>
               <span v-else-if="type === 'globalEvents'" v-i18n>Global Events</span>
               <span v-else v-i18n>{{type}}</span>
           </label>
+          </template>
         </span>
       </div>
 
@@ -83,6 +87,15 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
+      <template v-if="experimentalUI()">
+      <br>
+      <section class="debug-ui-cards-list">
+          <h2 v-i18n>CEOs</h2>
+          <div class="cardbox" v-for="card in getAllCeoCards()" :key="card">
+              <Card v-if="showCard(card)" :card="{'name': card}" />
+          </div>
+      </section>
+      </template>
       <br>
       <section class="debug-ui-cards-list">
         <h2 v-i18n>Standard Projects</h2>
@@ -117,7 +130,7 @@
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="milestoneName in allMilestoneNames" :key="milestoneName">
               <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
+                <milestone v-if="showMA(milestoneName)" :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
               </div>
             </div>
           </div>
@@ -130,7 +143,7 @@
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="awardName in allAwardNames" :key="awardName">
               <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <award :award="awardModel(awardName)" :showDescription="true"></award>
+                <award v-if="showMA(awardName)" :award="awardModel(awardName)" :showDescription="true"></award>
               </div>
             </div>
           </div>
@@ -162,7 +175,7 @@ import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {Tag} from '@/common/cards/Tag';
-import {getColony} from '@/client/colonies/ClientColonyManifest';
+import {allColonyNames, getColony} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
 import {CardComponent} from '@/common/cards/render/CardComponent';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
@@ -175,6 +188,8 @@ import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
+import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
+import {WithRefs} from 'vue-typed-refs';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -188,21 +203,21 @@ const moduleAbbreviations: Record<GameModule, string> = {
   ares: 'a',
   moon: 'm',
   pathfinders: 'P',
-  leader: 'l',
+  ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
 };
 
 // TODO(kberg): make this  use suffixModules.
 const ALL_MODULES = 'bcpvCt*ramP';
 
-type TypeOptions = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
-type TagOptions = Tag | 'none';
+type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
+type TagOption = Tag | 'none';
 
 export interface DebugUIModel {
   filterText: string,
   fullFilter: boolean,
   expansions: Record<GameModule, boolean>,
-  types: Record<TypeOptions, boolean>,
-  tags: Record<TagOptions, boolean>,
+  types: Record<TypeOption, boolean>,
+  tags: Record<TagOption, boolean>,
   searchIndex: Map<string, Array<string>>,
 }
 
@@ -249,17 +264,34 @@ function buildSearchIndex(map: Map<string, Array<string>>) {
     map.set('card:' + card.name, [...entries]);
   }
 
-  for (const globalEventName of allGlobalEventNames()) {
-    const globalEvent = getGlobalEventOrThrow(globalEventName);
+  for (const colonyName of allColonyNames()) {
     entries = [];
+    add(colonyName);
+    map.set('colony:' + colonyName, [...entries]);
+  }
+
+  for (const globalEventName of allGlobalEventNames()) {
+    entries = [];
+    const globalEvent = getGlobalEventOrThrow(globalEventName);
     add(globalEvent.name);
     add(globalEvent.description);
     process(globalEvent.renderData);
     map.set('globalEvent:' + globalEvent.name, [...entries]);
   }
+
+  for (const maName of allMaNames()) {
+    entries = [];
+    add(maName);
+    add(getMilestoneAwardDescription(maName));
+    map.set('ma:' + maName, [...entries]);
+  }
 }
 
-export default Vue.extend({
+type Refs = {
+  filter: HTMLInputElement,
+};
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'debug-ui',
   components: {
     Card,
@@ -286,7 +318,7 @@ export default Vue.extend({
         moon: true,
         promo: true,
         pathfinders: true,
-        leader: true,
+        ceo: true,
       },
       types: {
         event: true,
@@ -301,7 +333,7 @@ export default Vue.extend({
         colonyTiles: true,
         milestones: true,
         awards: true,
-        leader: true,
+        ceo: true,
       },
       tags: {
         building: true,
@@ -336,12 +368,13 @@ export default Vue.extend({
       return this.expansions[module] = modules.includes(moduleAbbreviations[module]);
     });
     buildSearchIndex(this.searchIndex);
+    this.$refs.filter.focus();
   },
   computed: {
     allModules(): ReadonlyArray<GameModule> {
       return GAME_MODULES;
     },
-    allTypes(): Array<TypeOptions> {
+    allTypes(): Array<TypeOption> {
       return [
         CardType.EVENT,
         CardType.ACTIVE,
@@ -349,6 +382,7 @@ export default Vue.extend({
         CardType.PRELUDE,
         CardType.CORPORATION,
         CardType.STANDARD_PROJECT,
+        CardType.CEO,
         'colonyTiles',
         'globalEvents',
         'milestones',
@@ -369,6 +403,9 @@ export default Vue.extend({
     },
     allAwardNames(): ReadonlyArray<AwardName> {
       return awardNames;
+    },
+    ceoType(): CardType {
+      return CardType.CEO;
     },
   },
   methods: {
@@ -423,6 +460,10 @@ export default Vue.extend({
       const names = getCards(byType(CardType.PRELUDE)).map(toName);
       return this.sort(names);
     },
+    getAllCeoCards() {
+      const names = getCards(byType(CardType.CEO)).map(toName);
+      return this.sort(names);
+    },
     getAllGlobalEvents() {
       return this.sort(Array.from(allGlobalEventNames()));
     },
@@ -432,7 +473,7 @@ export default Vue.extend({
     getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
       return getGlobalEventModel(globalEventName);
     },
-    filter(name: string, type: 'card' | 'globalEvent' | 'colony') {
+    filter(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
       const filterText = this.$data.filterText.toLocaleUpperCase();
       if (filterText.length === 0) {
         return true;
@@ -471,7 +512,7 @@ export default Vue.extend({
       case 'community': return 'Community';
       case 'moon': return 'The Moon';
       case 'pathfinders': return 'Pathfinders';
-      case 'leader': return 'CEOs';
+      case 'ceo': return 'CEOs';
       }
     },
     filterByTags(card: ClientCard): boolean {
@@ -507,6 +548,9 @@ export default Vue.extend({
       const colony = getColony(name);
       return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
     },
+    showMA(name: MilestoneName | AwardName): boolean {
+      return this.filter(name, 'ma');
+    },
     getLanguageCssClass() {
       const language = getPreferences().lang;
       return 'language-' + language;
@@ -523,18 +567,21 @@ export default Vue.extend({
     milestoneModel(milestoneName: MilestoneName): ClaimedMilestoneModel {
       return {
         name: milestoneName,
-        player_name: '',
-        player_color: '',
+        playerName: '',
+        playerColor: '',
         scores: [],
       };
     },
     awardModel(awardName: AwardName): FundedAwardModel {
       return {
         name: awardName,
-        player_name: '',
-        player_color: '',
+        playerName: '',
+        playerColor: '',
         scores: [],
       };
+    },
+    experimentalUI(): boolean {
+      return getPreferences().experimental_ui;
     },
   },
 });

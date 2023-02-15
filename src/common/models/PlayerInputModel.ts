@@ -40,4 +40,5 @@ export interface PlayerInputModel {
     showOwner?: boolean;
     availableParties: Array<PartyName> | undefined;
     turmoil?: TurmoilModel;
+    showReset: boolean;
 }

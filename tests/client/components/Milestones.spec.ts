@@ -7,8 +7,8 @@ import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 describe('Milestones', function() {
   const mockMilestone: ClaimedMilestoneModel = {
     name: 'Farmer',
-    player_name: 'foo',
-    player_color: 'blue',
+    playerName: 'foo',
+    playerColor: 'blue',
     scores: [],
   };
 
@@ -16,7 +16,7 @@ describe('Milestones', function() {
     const milestone = mount(Milestones, {
       localVue: getLocalVue(),
       propsData: {
-        milestones_list: [
+        milestones: [
           mockMilestone,
         ],
       },

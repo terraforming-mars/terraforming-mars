@@ -3,8 +3,7 @@ import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
-import {MainAppData} from '@/client/components/App';
-
+import {vueRoot} from '@/client/components/vueRoot';
 import * as constants from '@/common/constants';
 import * as paths from '@/common/app/paths';
 import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
@@ -34,12 +33,12 @@ export default Vue.extend({
         if (xhr.status === HTTPResponseCode.OK) {
           const response = xhr.response as SimpleGameModel;
           if (response.players.length === 1) {
-            window.location.href = '/player?id=' + response.players[0].id;
+            window.location.href = 'player?id=' + response.players[0].id;
             return;
           } else {
-            window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
-            (this.$root.$data as unknown as MainAppData).game = response;
-            (this.$root.$data as unknown as MainAppData).screen = 'game-home';
+            window.history.replaceState(response, `${constants.APP_NAME} - Game`, 'game?id=' + response.id);
+            vueRoot(this).game = response;
+            vueRoot(this).screen = 'game-home';
           }
         } else {
           alert('Unexpected server response');

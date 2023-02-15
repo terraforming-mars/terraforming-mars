@@ -1,5 +1,5 @@
 <template>
-  <component :is="getComponentName(playerinput.inputType)"
+  <component :is="componentName"
     :players="players"
     :playerView="playerView"
     :playerinput="playerinput"
@@ -30,6 +30,24 @@ import SelectColony from '@/client/components/SelectColony.vue';
 import SelectProductionToLose from '@/client/components/SelectProductionToLose.vue';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
+
+const typeToComponentName: Record<PlayerInputType, string> = {
+  [PlayerInputType.AND_OPTIONS]: 'and-options',
+  [PlayerInputType.SELECT_CARD]: 'SelectCard',
+  [PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY]: 'SelectProjectCardToPlay',
+  [PlayerInputType.SELECT_INITIAL_CARDS]: 'SelectInitialCards',
+  [PlayerInputType.OR_OPTIONS]: 'or-options',
+  [PlayerInputType.SELECT_OPTION]: 'select-option',
+  [PlayerInputType.SELECT_PAYMENT]: 'SelectPayment',
+  [PlayerInputType.SELECT_SPACE]: 'select-space',
+  [PlayerInputType.SELECT_PLAYER]: 'select-player',
+  [PlayerInputType.SELECT_AMOUNT]: 'select-amount',
+  [PlayerInputType.SELECT_DELEGATE]: 'select-party-player',
+  [PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE]: 'select-party-to-send-delegate',
+  [PlayerInputType.SELECT_COLONY]: 'select-colony',
+  [PlayerInputType.SELECT_PRODUCTION_TO_LOSE]: 'select-production-to-lose',
+  [PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS]: 'shift-ares-global-parameters',
+};
 
 export default Vue.component('player-input-factory', {
   props: {
@@ -77,41 +95,10 @@ export default Vue.component('player-input-factory', {
       const canSave = (this.$children[0] as any).canSave;
       return canSave ? canSave() : true;
     },
-    getComponentName(inputType: PlayerInputType): string {
-      switch (inputType) {
-      case PlayerInputType.AND_OPTIONS:
-        return 'and-options';
-      case PlayerInputType.SELECT_CARD:
-        return 'SelectCard';
-      case PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY:
-        return 'SelectProjectCardToPlay';
-      case PlayerInputType.SELECT_INITIAL_CARDS:
-        return 'SelectInitialCards';
-      case PlayerInputType.OR_OPTIONS:
-        return 'or-options';
-      case PlayerInputType.SELECT_OPTION:
-        return 'select-option';
-      case PlayerInputType.SELECT_PAYMENT:
-        return 'SelectPayment';
-      case PlayerInputType.SELECT_SPACE:
-        return 'select-space';
-      case PlayerInputType.SELECT_PLAYER:
-        return 'select-player';
-      case PlayerInputType.SELECT_AMOUNT:
-        return 'select-amount';
-      case PlayerInputType.SELECT_DELEGATE:
-        return 'select-party-player';
-      case PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE:
-        return 'select-party-to-send-delegate';
-      case PlayerInputType.SELECT_COLONY:
-        return 'select-colony';
-      case PlayerInputType.SELECT_PRODUCTION_TO_LOSE:
-        return 'select-production-to-lose';
-      case PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS:
-        return 'shift-ares-global-parameters';
-      default:
-        throw new Error('Unsupported input type: ' + inputType);
-      }
+  },
+  computed: {
+    componentName(): string {
+      return typeToComponentName[this.playerinput.inputType];
     },
   },
 });

@@ -123,7 +123,7 @@ export class GameLoader implements IGameLoader {
       throw new Error('Cannot find game');
     }
     const currentSaveId = current.lastSaveId;
-    const serializedGame = await Database.getInstance().restoreGame(gameId, saveId);
+    const serializedGame = await Database.getInstance().getGameVersion(gameId, saveId);
     const game = Game.deserialize(serializedGame);
     const deletes = (currentSaveId - saveId) - 1;
     if (deletes > 0) {

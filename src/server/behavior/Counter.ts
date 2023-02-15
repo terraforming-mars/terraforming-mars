@@ -3,7 +3,7 @@ import {TileType} from '../../common/TileType';
 import {ICard} from '../cards/ICard';
 import {Player} from '../Player';
 import {Countable, CountableUnits} from './Countable';
-import {intersection} from '../../common/utils/utils';
+import {hasIntersection} from '../../common/utils/utils';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
 /**
@@ -70,7 +70,7 @@ export class Counter {
       if (Array.isArray(tag)) { // Multiple tags
         // These two error cases could be coded up, but they don't have a case just yet, and if they do come
         // up, better for the code to error than silently ignore it.
-        if (this.cardIsUnplayed && intersection(tag, card.tags).length > 0) {
+        if (this.cardIsUnplayed && hasIntersection(tag, card.tags)) {
           throw new Error(`Not supporting the case counting tags ${tag} when played card tags are ${card.tags}`);
         }
         if (countable.others === true) {

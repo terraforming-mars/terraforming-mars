@@ -46,7 +46,7 @@
     <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
 
     <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
-        <Milestone :milestones_list="game.milestones" />
+        <Milestone :milestones="game.milestones" />
         <Awards :awards="game.awards" />
     </div>
 
@@ -76,7 +76,7 @@
 import Vue from 'vue';
 
 import {GameModel} from '@/common/models/GameModel';
-import {mainAppSettings} from './App';
+import {vueRoot} from '@/client/components/vueRoot';
 
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
@@ -138,8 +138,7 @@ export default Vue.extend({
   methods: {
     forceRerender() {
       // TODO(kberg): this is very inefficient. It pulls down the entire state, ignoring the value of 'waitingFor' which only fetches a short state.
-      const root = this.$root as unknown as typeof mainAppSettings.methods;
-      root.updateSpectator();
+      vueRoot(this).updateSpectator();
     },
     range(n: number): Array<number> {
       return range(n);

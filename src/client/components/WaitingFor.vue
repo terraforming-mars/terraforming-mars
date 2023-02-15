@@ -16,7 +16,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {MainAppData, mainAppSettings} from '@/client/components/App';
+import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -68,8 +68,8 @@ export default Vue.extend({
     // TODO(kberg): use loadPlayerViewResponse.
     onsave(out: InputResponse) {
       const xhr = new XMLHttpRequest();
-      const root = this.$root as unknown as MainAppData;
-      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
+      const root = vueRoot(this);
+      const showAlert = root.showAlert;
 
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
@@ -85,7 +85,7 @@ export default Vue.extend({
           root.playerView = xhr.response;
           root.playerkey++;
           root.screen = 'player-home';
-          if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
+          if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
             (window).location = (window).location; // eslint-disable-line no-self-assign
           }
         } else if (xhr.status === HTTPResponseCode.BAD_REQUEST && xhr.responseType === 'json') {
@@ -102,7 +102,7 @@ export default Vue.extend({
     },
     reset() {
       const xhr = new XMLHttpRequest();
-      const root = this.$root as unknown as MainAppData;
+      const root = vueRoot(this);
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;
@@ -112,21 +112,22 @@ export default Vue.extend({
       xhr.open('GET', paths.RESET + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
-        this.loadPlayerViewResponse(xhr, root);
+        this.loadPlayerViewResponse(xhr);
       };
       xhr.send();
       xhr.onerror = function() {
         root.isServerSideRequestInProgress = false;
       };
     },
-    loadPlayerViewResponse(xhr: XMLHttpRequest, root: MainAppData) {
-      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
+    loadPlayerViewResponse(xhr: XMLHttpRequest) {
+      const root = vueRoot(this);
+      const showAlert = vueRoot(this).showAlert;
       if (xhr.status === 200) {
         root.screen = 'empty';
         root.playerView = xhr.response;
         root.playerkey++;
         root.screen = 'player-home';
-        if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
+        if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
           (window).location = (window).location; // eslint-disable-line no-self-assign
         }
       } else if (xhr.status === 400 && xhr.responseType === 'json') {
@@ -139,7 +140,7 @@ export default Vue.extend({
 
     waitForUpdate() {
       const vueApp = this;
-      const root = this.$root as unknown as typeof mainAppSettings.methods;
+      const root = vueRoot(this);
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
@@ -158,7 +159,7 @@ export default Vue.extend({
                 Notification.requestPermission();
               } else if (Notification.permission === 'granted') {
                 const notificationOptions = {
-                  icon: '/favicon.ico',
+                  icon: 'favicon.ico',
                   body: 'It\'s your turn!',
                 };
                 const notificationTitle = constants.APP_NAME;

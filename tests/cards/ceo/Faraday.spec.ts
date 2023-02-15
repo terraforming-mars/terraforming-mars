@@ -7,6 +7,8 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
+import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
+import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 
 
 describe('Faraday', function() {
@@ -34,7 +36,6 @@ describe('Faraday', function() {
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(10);
   });
-
 
   it('Can draw a card when reaching a multiple of 5 for a tag', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
@@ -149,5 +150,41 @@ describe('Faraday', function() {
     player.playCard(fakeCard({tags: [Tag.SCIENCE], cardType: CardType.EVENT}));
     expect(game.deferredActions).has.length(0);
     expect(player.cardsInHand).has.length(0);
+  });
+
+  it('Nothing happens when playing the Clone tag alone', function() {
+    // Just give the player 4 tags of all the planets
+    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.JOVIAN, Tag.VENUS, Tag.MARS, Tag.SCIENCE]}));
+    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.JOVIAN, Tag.VENUS, Tag.MARS, Tag.SCIENCE]}));
+    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.JOVIAN, Tag.VENUS, Tag.MARS, Tag.SCIENCE]}));
+    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.JOVIAN, Tag.VENUS, Tag.MARS, Tag.SCIENCE]}));
+
+    player.playCard(fakeCard({tags: [Tag.CLONE]}));
+    runAllActions(player.game);
+    expect(player.getWaitingFor()).is.undefined;
+    expect(player.cardsInHand).has.length(0);
+    expect(player.megaCredits).to.eq(10);
+  });
+
+  it('Does trigger when activating Clone Tags (via CrewTraining)', function() {
+    player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
+
+    const crewTraining = new CrewTraining();
+    player.playCard(crewTraining);
+    expect(game.deferredActions.length).eq(1);
+    const action = cast(game.deferredActions.pop(), DeclareCloneTag);
+    const options = cast(action.execute(), OrOptions);
+
+    expect(options.options[0].title).to.match(/earth/);
+    options.options[0].cb();
+    runAllActions(game);
+
+    // Now that it's Earth tags, we should be prompted to draw an Earth card
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    orOptions.options[0].cb();
+    runAllActions(game);
+    expect(player.megaCredits).to.eq(8);
+    expect(player.cardsInHand).has.length(1);
+    expect(player.cardsInHand[0].tags.includes(Tag.EARTH)).is.true;
   });
 });

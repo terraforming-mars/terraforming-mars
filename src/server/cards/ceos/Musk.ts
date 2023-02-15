@@ -34,7 +34,7 @@ export class Musk extends CeoCard {
     this.isDisabled = true;
 
     if (eligibleCards.length === 0) {
-      game.log('${0} has no Earth cards', (b) => b.player(player));
+      game.log('${0} has no Earth cards', (b) => b.player(player), {reservedFor: player});
       player.addResource(Resources.TITANIUM, 6, {log: true});
       return undefined;
     }

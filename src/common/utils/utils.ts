@@ -21,11 +21,13 @@ export const range = (n: number): Array<number> => Array.from(Array(n).keys());
 /**
  * Returns a new array consisting of elements only in both a and b.
  *
- * @param {Array<T>} a: the first array
- * @param {Array<T>} b: the second array
- * @return {Array<T>} the intersection of both array elements
+ * This preserves the order of the first array.
+ *
+ * @param {ReadonlyArray<T>} a: the first array
+ * @param {ReadonlyArray<T>} b: the second array
+ * @return {Array<T>} the intersection of both arrays
  */
-export function intersection<T>(a: Array<T>, b: Array<T>): Array<T> {
+export function intersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): Array<T> {
   return a.filter((e) => b.includes(e));
 }
 
@@ -46,6 +48,9 @@ export type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
 };
 
+/**
+ * Remove the `element` from `array`.
+ */
 export function inplaceRemove<T>(array: Array<T>, element: T) {
   const idx = array.findIndex((e) => e === element);
   if (idx > -1) {

@@ -8,6 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Size} from '../../../common/cards/render/Size';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class Tate extends CeoCard {
   constructor() {
@@ -26,22 +27,12 @@ export class Tate extends CeoCard {
 
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
-    // TODO(dl): Is there a 'validTagsInThisGame()', should we add one? This code seems to repeat a few times
-    //   maybe with an option for validTagsThisGame(options{'planetary'})
-    const excludedTags = [
-      Tag.WILD,
-      Tag.EVENT,
-      Tag.CLONE,
-      !game.gameOptions.venusNextExtension ? Tag.VENUS : null,
-      !game.gameOptions.moonExpansion ? Tag.MOON : null,
-      !game.gameOptions.pathfindersExpansion ? Tag.MARS : null,
-    ].filter(Boolean);
+    const tags = [...game.tagsInGame()];
+    inplaceRemove(tags, Tag.WILD);
+    inplaceRemove(tags, Tag.EVENT);
+    inplaceRemove(tags, Tag.CLONE);
 
-    // Blame OpenAI for this allTags:
-    const allTags: Array<Tag> = Object.values(Tag) as Array<Tag>;
-    const validTags = allTags.filter((tag) => !excludedTags.includes(tag));
-
-    const options = validTags.map((tag) => {
+    const options = tags.map((tag) => {
       return new SelectOption('Search for ' + tag + ' tags', 'Search', () => {
         game.log('${0} searched for ${1} tags', (b) => b.player(player).string(tag));
         return player.drawCardKeepSome(5, {keepMax: 2, tag: tag, paying: true, logDrawnCard: true});

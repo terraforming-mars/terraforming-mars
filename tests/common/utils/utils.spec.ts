@@ -13,6 +13,11 @@ describe('utils', function() {
     expect(utils.intersection([1, 2, 3], [1, 3, 4, 2])).contains.members([2, 3]);
   });
 
+  it('intersection preserves order of first array', () => {
+    expect(utils.intersection([1, 2, 3], [3, 2, 1])).deep.eq([1, 2, 3]);
+    expect(utils.intersection([3, 2, 1], [1, 2, 3])).deep.eq([3, 2, 1]);
+  });
+
   it('hasIntersection', () => {
     expect(utils.hasIntersection([], [])).is.false;
     expect(utils.hasIntersection([1], [2, 3])).is.false;

@@ -68,6 +68,7 @@ import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, dayStringToDays} from './database/utils.ts';
+import {ALL_TAGS, Tag} from '../common/cards/Tag';
 
 export interface Score {
   corporation: String;
@@ -1537,6 +1538,23 @@ export class Game implements Logger {
     }
     const days = dayStringToDays(process.env.MAX_GAME_DAYS, 10);
     return addDays(this.createdTime, days).getTime();
+  }
+
+  /**
+   * Returns a list of the tags to be found in this game.
+   *
+   * This could be cached when the game is created.
+   */
+  public tagsInGame(): ReadonlyArray<Tag> {
+    const gameOptions = this.gameOptions;
+    const tags = ALL_TAGS.filter((tag) => {
+      if (tag === Tag.VENUS) return gameOptions.venusNextExtension;
+      if (tag === Tag.MOON) return gameOptions.moonExpansion;
+      if (tag === Tag.MARS) return gameOptions.pathfindersExpansion;
+      if (tag === Tag.CLONE) return gameOptions.pathfindersExpansion;
+      return true;
+    });
+    return tags;
   }
 
   public static deserialize(d: SerializedGame): Game {

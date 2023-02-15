@@ -23,6 +23,11 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 
+/**
+ * The possible tags with planetary tracks.
+ *
+ * The order of this list matches the order of the list displayed in the UI.
+ */
 export const PLANETARY_TAGS = [Tag.VENUS, Tag.EARTH, Tag.MARS, Tag.JOVIAN, Tag.MOON] as const;
 export type PlanetaryTag = typeof PLANETARY_TAGS[number];
 

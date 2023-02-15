@@ -8,7 +8,7 @@ import {Bjorn} from './Bjorn';
 import {Clarke} from './Clarke';
 import {Duncan} from './Duncan';
 import {Ender} from './Ender';
-// import {Faraday} from './Faraday';
+import {Faraday} from './Faraday';
 import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
 // import {Gordon} from './Gordon';
@@ -48,7 +48,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CLARKE]: {Factory: Clarke},
     [CardName.DUNCAN]: {Factory: Duncan},
     [CardName.ENDER]: {Factory: Ender},
-    // [CardName.FARADAY]: {Factory: Faraday},
+    [CardName.FARADAY]: {Factory: Faraday},
     [CardName.FLOYD]: {Factory: Floyd},
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     // [CardName.GORDON]: {Factory: Gordon},

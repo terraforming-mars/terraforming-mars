@@ -8,5 +8,5 @@
         "utils/setup.ts",
         "**/*.spec.ts",
         "vue-shims.d.ts"
-, "cards/ceo/Musk.ts"    ]
+    ]
 }

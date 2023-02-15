@@ -141,6 +141,8 @@ export class Game implements Logger {
   // Syndicate Pirate Raids
   public syndicatePirateRaider?: PlayerId;
 
+  public readonly tags: ReadonlyArray<Tag>;
+
   private constructor(
     public id: GameId,
     private players: Array<Player>,
@@ -180,6 +182,14 @@ export class Game implements Logger {
     this.players.forEach((player) => {
       player.game = this;
       if (player.isCorporation(CardName.MONS_INSURANCE)) this.monsInsuranceOwner = player.id;
+    });
+
+    this.tags = ALL_TAGS.filter((tag) => {
+      if (tag === Tag.VENUS) return gameOptions.venusNextExtension;
+      if (tag === Tag.MOON) return gameOptions.moonExpansion;
+      if (tag === Tag.MARS) return gameOptions.pathfindersExpansion;
+      if (tag === Tag.CLONE) return gameOptions.pathfindersExpansion;
+      return true;
     });
   }
 
@@ -1538,23 +1548,6 @@ export class Game implements Logger {
     }
     const days = dayStringToDays(process.env.MAX_GAME_DAYS, 10);
     return addDays(this.createdTime, days).getTime();
-  }
-
-  /**
-   * Returns a list of the tags to be found in this game.
-   *
-   * This could be cached when the game is created.
-   */
-  public tagsInGame(): ReadonlyArray<Tag> {
-    const gameOptions = this.gameOptions;
-    const tags = ALL_TAGS.filter((tag) => {
-      if (tag === Tag.VENUS) return gameOptions.venusNextExtension;
-      if (tag === Tag.MOON) return gameOptions.moonExpansion;
-      if (tag === Tag.MARS) return gameOptions.pathfindersExpansion;
-      if (tag === Tag.CLONE) return gameOptions.pathfindersExpansion;
-      return true;
-    });
-    return tags;
   }
 
   public static deserialize(d: SerializedGame): Game {

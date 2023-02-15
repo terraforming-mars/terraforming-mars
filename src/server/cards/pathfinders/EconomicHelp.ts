@@ -48,7 +48,7 @@ export class EconomicHelp extends Card implements IProjectCard {
     if (data === undefined) {
       return undefined;
     }
-    const tags = player.game.tagsInGame().filter(isPlanetaryTag);
+    const tags = player.game.tags.filter(isPlanetaryTag);
     const values = tags.map((tag) => this.trackOffset(tag, data));
 
     // Filter any maximized track.

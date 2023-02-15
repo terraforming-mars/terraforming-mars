@@ -27,7 +27,7 @@ export class Tate extends CeoCard {
 
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
-    const tags = [...game.tagsInGame()];
+    const tags = [...game.tags];
     inplaceRemove(tags, Tag.WILD);
     inplaceRemove(tags, Tag.EVENT);
     inplaceRemove(tags, Tag.CLONE);

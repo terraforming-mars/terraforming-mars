@@ -33,7 +33,7 @@ export class DeclareCloneTag extends DeferredAction {
     // which defines the order of tags in SelectOption.
     const tags = intersection(
       PLANETARY_TAGS,
-      this.player.game.tagsInGame().filter(isPlanetaryTag));
+      this.player.game.tags.filter(isPlanetaryTag));
 
     const options = tags.map((tag) => {
       return new SelectOption(tag, 'Choose', () => {

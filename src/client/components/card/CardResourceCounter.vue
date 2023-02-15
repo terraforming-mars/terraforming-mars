@@ -1,7 +1,7 @@
 <template>
   <div class="card-resources-counter">
       <span class="card-resources-counter-number"> {{ amount }}</span>
-      <span class="card-resource" :class="getClass"></span>
+      <span class="card-resource" :class="cssClass"></span>
   </div>
 </template>
 
@@ -9,6 +9,27 @@
 
 import Vue from 'vue';
 import {CardResource} from '@/common/CardResource';
+
+const cssClass: Record<CardResource, string> = {
+  [CardResource.ANIMAL]: 'card-resource-animal',
+  [CardResource.MICROBE]: 'card-resource-microbe',
+  [CardResource.FIGHTER]: 'card-resource-fighter',
+  [CardResource.SCIENCE]: 'card-resource-science',
+  [CardResource.FLOATER]: 'card-resource-floater',
+  [CardResource.ASTEROID]: 'card-resource-asteroid',
+  [CardResource.PRESERVATION]: 'card-resource-preservation',
+  [CardResource.CAMP]: 'card-resource-camp',
+  [CardResource.DISEASE]: 'card-resource-disease',
+  [CardResource.RESOURCE_CUBE]: 'card-resource-cube',
+  [CardResource.DATA]: 'card-resource-data',
+  [CardResource.SYNDICATE_FLEET]: 'card-resource-syndicate-fleet',
+  [CardResource.VENUSIAN_HABITAT]: 'card-resource-venusian-habitat',
+  [CardResource.SPECIALIZED_ROBOT]: 'card-resource-specialized-robot',
+  [CardResource.SEED]: 'card-resource-seed',
+  [CardResource.AGENDA]: 'card-resource-agenda',
+  [CardResource.ORBITAL]: 'card-resource-orbital',
+};
+
 export default Vue.extend({
   name: 'CardResourceCounter',
   props: {
@@ -22,45 +43,8 @@ export default Vue.extend({
     },
   },
   computed: {
-    getClass(): string {
-      switch (this.type) {
-      case CardResource.ANIMAL:
-        return 'card-resource-animal';
-      case CardResource.MICROBE:
-        return 'card-resource-microbe';
-      case CardResource.FIGHTER:
-        return 'card-resource-fighter';
-      case CardResource.SCIENCE:
-        return 'card-resource-science';
-      case CardResource.FLOATER:
-        return 'card-resource-floater';
-      case CardResource.ASTEROID:
-        return 'card-resource-asteroid';
-      case CardResource.PRESERVATION:
-        return 'card-resource-preservation';
-      case CardResource.CAMP:
-        return 'card-resource-camp';
-      case CardResource.DISEASE:
-        return 'card-resource-disease';
-      case CardResource.RESOURCE_CUBE:
-        return 'card-resource-cube';
-      case CardResource.DATA:
-        return 'card-resource-data';
-      case CardResource.SYNDICATE_FLEET:
-        return 'card-resource-syndicate-fleet';
-      case CardResource.VENUSIAN_HABITAT:
-        return 'card-resource-venusian-habitat';
-      case CardResource.SPECIALIZED_ROBOT:
-        return 'card-resource-specialized-robot';
-      case CardResource.SEED:
-        return 'card-resource-seed';
-      case CardResource.AGENDA:
-        return 'card-resource-agenda';
-      case CardResource.ORBITAL:
-        return 'card-resource-orbital';
-      default:
-        return '';
-      }
+    cssClass(): string {
+      return cssClass[this.type];
     },
   },
 });

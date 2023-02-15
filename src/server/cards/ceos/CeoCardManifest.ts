@@ -8,7 +8,7 @@ import {Bjorn} from './Bjorn';
 import {Clarke} from './Clarke';
 import {Duncan} from './Duncan';
 import {Ender} from './Ender';
-// import {Faraday} from './Faraday';
+import {Faraday} from './Faraday';
 import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
 // import {Gordon} from './Gordon';
@@ -28,8 +28,8 @@ import {Neil} from './Neil';
 import {Quill} from './Quill';
 import {Rogers} from './Rogers';
 import {Ryu} from './Ryu';
-// import {Stefan} from './Stefan';
-// import {Tate} from './Tate';
+import {Stefan} from './Stefan';
+import {Tate} from './Tate';
 import {Ulrich} from './Ulrich';
 // import {VanAllen} from './VanAllen';
 import {Will} from './Will';
@@ -48,7 +48,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CLARKE]: {Factory: Clarke},
     [CardName.DUNCAN]: {Factory: Duncan},
     [CardName.ENDER]: {Factory: Ender},
-    // [CardName.FARADAY]: {Factory: Faraday},
+    [CardName.FARADAY]: {Factory: Faraday},
     [CardName.FLOYD]: {Factory: Floyd},
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     // [CardName.GORDON]: {Factory: Gordon},
@@ -69,8 +69,8 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.QUILL]: {Factory: Quill, compatibility: 'venus'},
     [CardName.ROGERS]: {Factory: Rogers, compatibility: 'venus'},
     [CardName.RYU]: {Factory: Ryu},
-    // [CardName.STEFAN]: {Factory: Stefan},
-    // [CardName.TATE]: {Factory: Tate},
+    [CardName.STEFAN]: {Factory: Stefan},
+    [CardName.TATE]: {Factory: Tate},
     [CardName.ULRICH]: {Factory: Ulrich},
     // [CardName.VANALLEN]: {Factory: VanAllen},
     [CardName.WILL]: {Factory: Will, compatibility: 'venus'},

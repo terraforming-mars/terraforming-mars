@@ -44,7 +44,7 @@ export class Karen extends CeoCard {
         this.isDisabled = true;
         return player.playCard(card);
       } else {
-        throw new Error('You cannot pay for this card');
+        throw new Error('You cannot play this card');
       }
     });
   }

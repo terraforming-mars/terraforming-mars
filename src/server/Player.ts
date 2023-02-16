@@ -431,6 +431,10 @@ export class Player {
     }
   }
 
+  /**
+   * Steal up to `qty` units of `resource` from `from`. Or, at least as
+   * much as possible.
+   */
   public stealResource(resource: Resources, qty: number, from: Player) {
     const qtyToSteal = Math.min(this.getResource(resource), qty);
     if (qtyToSteal > 0) {

@@ -13,7 +13,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
 
 import {ALL_AWARDS} from '../../awards/Awards';
-
+import {AwardScorer} from '../../awards/AwardScorer';
 
 export class Asimov extends CeoCard {
   constructor() {
@@ -63,13 +63,15 @@ export class Asimov extends CeoCard {
   }
 
   private selectAwardToFund(player: Player, award: IAward): SelectOption {
-    // Get the players and store them in a non-read-only array:
-    const players = [...player.game.getPlayers()];
+    const game = player.game;
+    const scorer = new AwardScorer(game, award);
     // Sort the players by score:
+    const players: Array<Player> = game.getPlayers().slice();
+    players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
     let title = 'Fund ' + award.name + ' award' + ' [';
     title += players
-      .sort((a, b) => award.getScore(b) - award.getScore(a))
-      .map((player) => player.name + ': ' + award.getScore(player))
+      .sort((a, b) => scorer.get(b) - scorer.get(a))
+      .map((player) => player.name + ': ' + scorer.get(player))
       .join(' / ');
     title += ']';
 

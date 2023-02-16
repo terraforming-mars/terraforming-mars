@@ -4,12 +4,14 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
+import {MessageBuilder} from '../logs/MessageBuilder';
+import {Message} from '../../common/logs/Message';
 
 export class RemoveAnyPlants extends DeferredAction {
   constructor(
     player: Player,
     public count: number = 1,
-    public title: string = 'Select player to remove up to ' + count + ' plants',
+    public title: string | Message = new MessageBuilder('Select player to remove up to ${0} plants').number(count).getMessage(),
   ) {
     super(player, Priority.ATTACK_OPPONENT);
   }
@@ -36,7 +38,13 @@ export class RemoveAnyPlants extends DeferredAction {
         qtyToRemove = Math.ceil(qtyToRemove / 2);
       }
 
-      return new SelectOption('Remove ' + qtyToRemove + ' plants from ' + candidate.name, 'Remove plants', () => {
+      const message =
+        new MessageBuilder('Remove ${0} plants from ${1}')
+          .number(qtyToRemove)
+          .rawString(candidate.name) // TODO(kberg): change to .player(candidate). But it won't work immediately.
+          .getMessage();
+
+      return new SelectOption(message, 'Remove plants', () => {
         candidate.deductResource(Resources.PLANTS, qtyToRemove, {log: true, from: this.player});
         return undefined;
       });

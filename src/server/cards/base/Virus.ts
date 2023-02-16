@@ -37,12 +37,12 @@ export class Virus extends Card implements IProjectCard {
       return undefined;
     }
 
-    const orOptionsAnimals = (new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, false, false)).execute() as OrOptions;
+    const orOptionsAnimals = new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, false, false).execute() as OrOptions;
     const removeAnimals = orOptionsAnimals !== undefined ?
       orOptionsAnimals.options[0] :
       undefined;
 
-    const orOptionsPlants = (new RemoveAnyPlants(player, 5)).execute() as OrOptions;
+    const orOptionsPlants = new RemoveAnyPlants(player, 5).execute();
     const removePlants = orOptionsPlants !== undefined ?
       orOptionsPlants.options.slice(0, -1) :
       undefined;
@@ -50,6 +50,7 @@ export class Virus extends Card implements IProjectCard {
     // If no other player has resources to remove
     // assume player will remove nothing from themselves
     if (removeAnimals === undefined && removePlants === undefined) {
+      player.game.log('There was nobody to steal plants or animals from.');
       return undefined;
     }
 

@@ -133,6 +133,13 @@
                                     <span v-i18n>Alt. Venus Board</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Alternative-Venus-Board" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
+
+                            <input type="checkbox" name="ceo" id="ceo-checkbox" v-model="ceoExtension">
+                            <label for="ceo-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-ceo"></div>
+                                <span v-i18n>CEOs (BETA)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
                         </div>
 
                         <div class="create-game-page-column">

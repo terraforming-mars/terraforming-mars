@@ -24,7 +24,7 @@ import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 
 export default Vue.extend({
-  name: 'colonies-status',
+  name: 'ColoniesStatus',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,

@@ -35,7 +35,7 @@ export class Karen extends CeoCard {
     });
 
     if (cardsDrawn.length === 0) {
-      game.log('${0} drew no playable prelude cards', (b) => b.player(player), {reservedFor: player});
+      game.log('${0} drew no playable prelude cards', (b) => b.player(player));
       return undefined;
     }
 

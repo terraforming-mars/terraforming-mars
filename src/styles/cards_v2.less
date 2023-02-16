@@ -1130,13 +1130,35 @@
             .card-resource-community {
                 background: linear-gradient(orange, orangered);
             }
+
+            /* CEO Assets */
             .card-arrow-opg {
                 display: inline-block;
-                background-image: url(./assets/ceos/arrow_opg.png);
+                background-image: url(./assets/ceos/arrow-opg.png);
                 width: 50px;
                 height: 43px;
                 background-size: 50px 43px;
                 padding-bottom: 22px;
+                background-repeat: no-repeat;
+            }
+            .card-reds-deactivated {
+                display: inline-block;
+                background-image: url(./assets/parties/reds.png);
+                // Increase size by 1.5 _without_ Scale; Scale blows out formatting.
+                width: 75px;
+                height: 54px;
+                background-size: 75px 54px;
+                background-repeat: no-repeat;
+                filter: grayscale(1);
+                // transform: scale(1.5);
+                // margin-right: 10px;
+            }
+            .card-reds {
+                display: inline-block;
+                background-image: url(./assets/parties/reds.png);
+                width: 50px;
+                height: 36px;
+                background-size: 50px 36px;
                 background-repeat: no-repeat;
             }
 
@@ -1149,7 +1171,7 @@
                 top: 3px;
             }
             .card-minus {
-                background-image: url(/assets/misc/minus.png);
+                background-image: url(./assets/misc/minus.png);
                 background-size: 12px;
                 margin: 0;
                 width: 12px;
@@ -1166,7 +1188,7 @@
                 height: 6px;
             }
             .card-plus {
-                background-image: url(/assets/misc/plus.png);
+                background-image: url(./assets/misc/plus.png);
                 background-size: 12px;
                 min-height: 12px;
                 width: 12px;
@@ -1359,7 +1381,7 @@
             }
             // TODO(kberg) This set of tags looks like a duplicate of cards.less.
             .card-tag-wild {
-                background-image: url("../assets/tags/wild.png");
+                background-image: url("./assets/tags/wild.png");
             }
             .card-tag-building {
                 background-image: url("./assets/tags/building.png");
@@ -1405,7 +1427,7 @@
                 border-radius: 0px;
             }
             .card-tag-wild-resource {
-                background-image: url("../assets/resources/wild.png");
+                background-image: url("./assets/resources/wild.png");
                 border-radius: 0px;
             }
             .card-tag-moon {
@@ -1413,6 +1435,9 @@
             }
             .card-tag-mars {
                 background-image: url("./assets/tags/mars.png");
+            }
+            .card-tag-diverse {
+                background: linear-gradient(to bottom right, green, yellow, red);
             }
             .card-community-services {
                 font-size: 42px;

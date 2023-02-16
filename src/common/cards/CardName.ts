@@ -472,6 +472,7 @@ export enum CardName {
     MERGER = 'Merger',
     CORPORATE_ARCHIVES = 'Corporate Archives',
     DOUBLE_DOWN = 'Double Down',
+    PSYCHE = '16 Psyche',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
@@ -767,6 +768,7 @@ export enum CardName {
     JANSSON = 'Jansson',
     KAREN = 'Karen',
     LOWELL = 'Lowell',
+    MUSK = 'Musk',
     MARIA = 'Maria',
     NAOMI = 'Naomi',
     OSCAR = 'Oscar',
@@ -782,7 +784,6 @@ export enum CardName {
     YVONNE = 'Yvonne',
     ZAN = 'Zan',
     FARADAY = 'Faraday',
-    SWEENEY = 'Sweeney',
     HUAN = 'Huan',
     RYU = 'Ryu',
     CAESAR = 'Caesar',

@@ -7,7 +7,7 @@
                   <div class="game_end_success">
                       <h2 v-i18n>You win!</h2>
                       <div class="game_end_solo_img">
-                          <img src="/assets/solo_win.png" />
+                          <img src="assets/solo_win.png" />
                       </div>
                       <div class="game_end_notice">
                         <span v-i18n>But it isn't the reason to stop making Mars better.</span>
@@ -36,7 +36,7 @@
               </div>
           </div>
           <div class="game_end_go_home">
-              <a href="/">
+              <a href=".">
                   <Button size="big" type="back" />
                   <span  v-i18n>Go to main page</span>
               </a>
@@ -58,6 +58,7 @@
                           <th v-if="game.moon !== undefined"><div class="table-moon-road-tile"></div></th>
                           <th v-if="game.moon !== undefined"><div class="table-moon-colony-tile"></div></th>
                           <th v-if="game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
+                          <th v-if="game.pathfinders !== undefined"><div class="table-planetary-track"></div></th>
                           <th><div class="vp">VP</div></th>
                           <th v-if="game.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" :data-tooltip="$t('Escape Velocity penalty')">&#x23F3;</th>
                           <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
@@ -69,7 +70,7 @@
                   <tbody>
                       <tr v-for="p in getSortedPlayers()" :key="p.color" :class="getEndGamePlayerRowColorClass(p.color)">
                           <td>
-                            <a :href="'/player?id='+p.id+'&noredirect'">{{ p.name }}</a>
+                            <a :href="'player?id='+p.id+'&noredirect'">{{ p.name }}</a>
                             <div class="column-corporation"><span v-i18n>{{ getCorporationName(p) }}</span></div>
                           </td>
                           <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
@@ -80,6 +81,7 @@
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonRoads }}</td>
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonHabitats }}</td>
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
+                          <td v-if="game.pathfinders !== undefined"> {{ p.victoryPointsBreakdown.planetaryTracks}}</td>
                           <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                           <td v-if="game.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                           <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
@@ -99,7 +101,7 @@
               <div class="game-end-flexrow">
                   <div v-for="p in getSortedPlayers()" :key="p.color" class="game-end-column">
                       <div class="game-end-winer-scorebreak-player-title">
-                          <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></div>
+                          <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'player?id='+p.id+'&noredirect'">{{p.name}}</a></div>
                       </div>
                       <div v-for="v in p.victoryPointsBreakdown.detailsCards" :key="v.cardName">
                         <div class="game-end-column-row">

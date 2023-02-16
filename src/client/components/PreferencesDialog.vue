@@ -3,7 +3,6 @@ import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 
 import {getPreferences, PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
-import {LANGUAGES} from '@/common/constants';
 import BugReportDialog from '@/client/components/BugReportDialog.vue';
 
 type Refs = {
@@ -62,9 +61,6 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   computed: {
-    LANGUAGES(): typeof LANGUAGES {
-      return LANGUAGES;
-    },
     getPreferences(): typeof getPreferences {
       return getPreferences;
     },
@@ -159,17 +155,6 @@ export default (Vue as WithRefs<Refs>).extend({
           <span class="tooltip tooltip-left" :data-tooltip="$t('Add information useful for development and debugging.')">&#9432;</span>
         </label>
       </div>
-      <template v-if="!getPreferences().experimental_ui">
-        <div class="preferences_panel_item form-group">
-          <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
-          <div class="preferences_panel_langs">
-            <label class="form-radio" v-for="language in LANGUAGES" :key="language.id">
-              <input name="lang" type="radio" v-on:change="updatePreferences" v-model="prefs.lang" :value="language.id">
-              <i class="form-icon"></i>{{ language.title }}
-            </label>
-          </div>
-        </div>
-      </template>
 
       <div class="preferences_panel_actions">
         <button class="btn btn-lg btn-primary" v-on:click="okClicked" v-i18n>Ok</button>

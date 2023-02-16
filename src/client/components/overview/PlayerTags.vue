@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="player-tags-secondary">
-              <div class="tag-count-container" v-for="tagDetail of tags()" :key="tagDetail.name">
+              <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
                 <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
                   <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
                   <PointsPerTag v-if="getVPs(tagDetail) !== ''" :amount="getVPs(tagDetail)" :data-test="'vps-' + tagDetail.name" />
@@ -36,8 +36,8 @@ import {SpecialTags} from '@/client/cards/SpecialTags';
 import PlayerTagDiscount from '@/client/components/overview/PlayerTagDiscount.vue';
 import PointsPerTag from '@/client/components/overview/PointsPerTag.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
-import {Shared} from '@/client/components/overview/Shared';
 import {getCard} from '@/client/cards/ClientCardManifest';
+import {vueRoot} from '@/client/components/vueRoot';
 
 type InterfaceTagsType = Tag | SpecialTags | 'all' | 'separator';
 type TagDetail = {
@@ -70,6 +70,7 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.COLONY_COUNT,
 ];
 
+// TODO(kberg): Possibly pull this from server model.
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   if (game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) return false;
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
@@ -186,6 +187,21 @@ export default Vue.extend({
     tooltipCss(): string {
       return 'tooltip tooltip-' + (this.isTopBar ? 'bottom' : 'top');
     },
+    tags(): Array<TagDetail> {
+      // In tests this one call to vueRoot uses `?.` because for some reason it this doesn't pass tests.
+      const concise = vueRoot(this).componentsVisibility?.['tags_concise'] ?? this.conciseTagsViewDefaultValue;
+      return this.tagsInOrder.filter((entry) => {
+        if (!isInGame(entry.name, this.playerView.game)) {
+          return false;
+        }
+        if (entry.count === 0) {
+          if (this.hideZeroTags || concise) {
+            return false;
+          }
+        }
+        return true;
+      });
+    },
   },
 
   methods: {
@@ -199,16 +215,6 @@ export default Vue.extend({
         vulgarFraction = '⅓';
       }
       return `${integer || ''}${vulgarFraction}`;
-    },
-    tags(): Array<TagDetail> {
-      return this.tagsInOrder.filter((entry) => {
-        if (!isInGame(entry.name, this.playerView.game)) return false;
-        if (entry.count === 0) {
-          if (this.hideZeroTags) return false;
-          if (Shared.isTagsViewConcise(this.$root) ?? this.conciseTagsViewDefaultValue) return false;
-        }
-        return true;
-      });
     },
   },
 });

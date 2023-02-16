@@ -29,7 +29,7 @@ describe('Kickstarter', function() {
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);
 
-    expect(options.options[2].title).to.match(/mars/);
+    expect(options.options[1].title).to.match(/mars/);
     expect(game.pathfindersData).deep.eq({
       venus: -1,
       earth: 0,
@@ -39,7 +39,7 @@ describe('Kickstarter', function() {
       vps: [],
     });
 
-    options.options[2].cb();
+    options.options[1].cb();
 
     expect(game.pathfindersData).deep.eq({
       venus: -1,

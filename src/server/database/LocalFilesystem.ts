@@ -3,7 +3,7 @@ import {Game, Score} from '../Game';
 import {GameOptions} from '../GameOptions';
 import {GameId, isGameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-import {copyFileSync, Dirent, existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync} from 'fs';
+import {Dirent, existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync} from 'fs';
 
 const path = require('path');
 const defaultDbFolder = path.resolve(process.cwd(), './db/files');
@@ -154,11 +154,6 @@ export class LocalFilesystem implements IDatabase {
   purgeUnfinishedGames(): Promise<void> {
     // Not implemented.
     return Promise.resolve();
-  }
-
-  async restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    await copyFileSync(this.historyFilename(gameId, saveId), this.filename(gameId));
-    return this.getGame(gameId);
   }
 
   deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {

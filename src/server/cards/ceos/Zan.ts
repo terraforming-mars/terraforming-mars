@@ -14,11 +14,9 @@ export class Zan extends CeoCard {
         cardNumber: 'L26',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          // b.redsInactive().asterix();
-          b.text('(NoRedsNeg)').asterix();
+          b.redsInactive().asterix();
           b.br.br;
-          // b.opgArrow().text('ALL').delegates(1).colon().nbsp.nbsp.party(PartyName.REDS);
-          b.opgArrow().text('ALL').delegates(1).colon().text('REDS');
+          b.opgArrow().text('ALL').delegates(1).colon().reds();
         }),
         description: 'You are immune to Reds\' ruling policy. Once per game, place all of your available delegates in Reds.',
       },

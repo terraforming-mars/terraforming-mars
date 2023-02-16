@@ -14,7 +14,6 @@ import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard'
 import {TRSource} from '../common/cards/TRSource';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {LogMessageDataType} from '../common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from '../common/turmoil/PartyName';
@@ -69,6 +68,7 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 // import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
+import {MessageBuilder} from './logs/MessageBuilder';
 
 /**
  * Behavior when playing a card:
@@ -936,23 +936,20 @@ export class Player {
       'Select two cards to keep and pass the rest to ${0}';
 
     this.setWaitingFor(
-      new SelectCard({
-        message: message,
-        data: [{
-          type: LogMessageDataType.RAW_STRING,
-          value: playerName,
-        }],
-      },
-      'Keep',
-      cards,
-      (selected) => {
-        selected.forEach((card) => {
-          this.draftedCards.push(card);
-          cards = cards.filter((c) => c !== card);
-        });
-        this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
-        return undefined;
-      }, {min: cardsToKeep, max: cardsToKeep, played: false}),
+      new SelectCard(
+        new MessageBuilder(message)
+          .rawString(playerName) // TODO(kberg): replace with player?`
+          .getMessage(),
+        'Keep',
+        cards,
+        (selected) => {
+          selected.forEach((card) => {
+            this.draftedCards.push(card);
+            cards = cards.filter((c) => c !== card);
+          });
+          this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
+          return undefined;
+        }, {min: cardsToKeep, max: cardsToKeep, played: false}),
     );
   }
 
@@ -963,27 +960,22 @@ export class Player {
   public runDraftCorporationPhase(playerName: string, passedCards: Array<ICorporationCard>): void {
     let cards: Array<ICorporationCard> = passedCards;
 
-    const message = 'Select a corporation to keep and pass the rest to ${0}';
-
     this.setWaitingFor(
-      new SelectCard({
-        message: message,
-        data: [{
-          type: LogMessageDataType.RAW_STRING,
-          value: playerName,
-        }],
-      },
-      'Keep',
-      cards,
-      (foundCards: Array<ICorporationCard>) => {
-        foundCards.forEach((card) => {
-          this.draftedCorporations.push(card);
-          this.game.log('${0} kept ${1}', (b) => b.player(this).card(card));
-          cards = cards.filter((c) => c !== card);
-        });
-        this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
-        return undefined;
-      }, {min: 1, max: 1, played: false}),
+      new SelectCard(
+        new MessageBuilder('Select a corporation to keep and pass the rest to ${0}')
+          .rawString(playerName) // TODO(kberg): replace with player?`
+          .getMessage(),
+        'Keep',
+        cards,
+        (foundCards: Array<ICorporationCard>) => {
+          foundCards.forEach((card) => {
+            this.draftedCorporations.push(card);
+            this.game.log('${0} kept ${1}', (b) => b.player(this).card(card));
+            cards = cards.filter((c) => c !== card);
+          });
+          this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
+          return undefined;
+        }, {min: 1, max: 1, played: false}),
     );
   }
 
@@ -1787,13 +1779,10 @@ export class Player {
 
       this.pendingInitialActions.forEach((corp) => {
         const option = new SelectOption(
-          {
-            message: 'Take first action of ${0} corporation',
-            data: [{
-              type: LogMessageDataType.RAW_STRING,
-              value: corp.name,
-            }],
-          },
+          new MessageBuilder('Take first action of ${0} corporation')
+            .rawString(corp.name) // TODO(kberg): replace with card or cardName?]
+            .getMessage(),
+
           corp.initialActionText, () => {
             this.runInitialAction(corp);
             this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
@@ -1922,13 +1911,7 @@ export class Player {
     const fundingCost = this.game.getAwardFundingCost();
     if (this.canAfford(fundingCost) && !this.game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
-      remainingAwards.title = {
-        data: [{
-          type: LogMessageDataType.RAW_STRING,
-          value: String(fundingCost),
-        }],
-        message: 'Fund an award (${0} M€)',
-      };
+      remainingAwards.title = new MessageBuilder('Fund an award (${0} M€)').number(fundingCost).getMessage(),
       remainingAwards.buttonLabel = 'Confirm';
       remainingAwards.options = this.game.awards
         .filter((award: IAward) => this.game.hasBeenFunded(award) === false)

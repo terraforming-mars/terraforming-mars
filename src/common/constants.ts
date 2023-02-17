@@ -53,6 +53,9 @@ export const DEFAULT_ESCAPE_VELOCITY_THRESHOLD = 30;
 export const DEFAULT_ESCAPE_VELOCITY_PERIOD = 2;
 export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 
+// Leaders/CEOs
+export const ASIMOV_AWARD_BONUS = 2;
+
 export const LANGUAGES2 = {
   en: 'English',
   de: 'Deutsch',

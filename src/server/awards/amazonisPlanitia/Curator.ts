@@ -16,7 +16,6 @@ export class Curator implements IAward {
         if (count > max) max = count;
       }
     }
-    // if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return max;
   }

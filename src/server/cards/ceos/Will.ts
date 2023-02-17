@@ -14,7 +14,7 @@ export class Will extends CeoCard {
       metadata: {
         cardNumber: 'L23',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('GAIN BELOW RESOURCES').br;
+          b.opgArrow().text('GAIN THESE RESOURCES').br;
           b.animals(1).animals(1).microbes(1).microbes(1).br;
           b.science().floaters(1).asteroids(1).wild(1);
           b.br;

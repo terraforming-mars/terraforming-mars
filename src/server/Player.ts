@@ -431,6 +431,10 @@ export class Player {
     }
   }
 
+  /**
+   * Steal up to `qty` units of `resource` from `from`. Or, at least as
+   * much as possible.
+   */
   public stealResource(resource: Resources, qty: number, from: Player) {
     const qtyToSteal = Math.min(this.getResource(resource), qty);
     if (qtyToSteal > 0) {
@@ -780,15 +784,21 @@ export class Player {
   public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
     for (const playedCard of this.tableau) {
-      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this)) {
+      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && !isCeoCard(playedCard) && playedCard.canAct(this)) {
         result.push(playedCard);
       }
     }
     return result;
   }
 
-  public getUsableOPGCeoCards(): Array<ICard & IActionCard> {
-    return this.getPlayableActionCards().filter((card) => isCeoCard(card));
+  public getUsableOPGCeoCards(): Array<ICeoCard> {
+    const result: Array<ICeoCard> = [];
+    for (const playedCard of this.tableau) {
+      if (isCeoCard(playedCard) && playedCard.canAct(this) ) {
+        result.push(playedCard);
+      }
+    }
+    return result;
   }
 
   public runProductionPhase(): void {
@@ -1266,13 +1276,13 @@ export class Player {
   }
 
   private playCeoOPGAction(): PlayerInput {
-    return new SelectCard<ICard & IActionCard>(
+    return new SelectCard<ICeoCard>(
       'Use CEO once per game action',
       'Take action',
       this.getUsableOPGCeoCards(),
       ([card]) => {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
-        const action = card.action(this);
+        const action = card.action?.(this);
         this.defer(action);
         this.actionsThisGeneration.add(card.name);
         return undefined;
@@ -1867,6 +1877,10 @@ export class Player {
       action.options.push(this.playActionCard());
     }
 
+    if (CeoExtension.ceoActionIsUsable(this)) {
+      action.options.push(this.playCeoOPGAction());
+    }
+
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
       action.options.push(new SelectProjectCardToPlay(this, playableCards));
@@ -1896,10 +1910,6 @@ export class Player {
         }
       }
     });
-
-    if (CeoExtension.ceoActionIsUsable(this)) {
-      action.options.push(this.playCeoOPGAction());
-    }
 
     if (this.game.getPlayers().length > 1 &&
       this.actionsTakenThisRound > 0 &&

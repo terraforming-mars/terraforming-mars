@@ -27,8 +27,7 @@ export class Bjorn extends CeoCard {
     const targetPlayers = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
 
     targetPlayers.forEach((target) => {
-      const qtyToSteal = Math.min(game.generation, target.megaCredits);
-      target.stealResource(Resources.MEGACREDITS, qtyToSteal, player);
+      target.stealResource(Resources.MEGACREDITS, game.generation, player);
     });
 
     this.isDisabled = true;

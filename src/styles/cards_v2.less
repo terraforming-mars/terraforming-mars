@@ -1130,13 +1130,35 @@
             .card-resource-community {
                 background: linear-gradient(orange, orangered);
             }
+
+            /* CEO Assets */
             .card-arrow-opg {
                 display: inline-block;
-                background-image: url(./assets/ceos/arrow_opg.png);
+                background-image: url(./assets/ceos/arrow-opg.png);
                 width: 50px;
                 height: 43px;
                 background-size: 50px 43px;
                 padding-bottom: 22px;
+                background-repeat: no-repeat;
+            }
+            .card-reds-deactivated {
+                display: inline-block;
+                background-image: url(./assets/parties/reds.png);
+                // Increase size by 1.5 _without_ Scale; Scale blows out formatting.
+                width: 75px;
+                height: 54px;
+                background-size: 75px 54px;
+                background-repeat: no-repeat;
+                filter: grayscale(1);
+                // transform: scale(1.5);
+                // margin-right: 10px;
+            }
+            .card-reds {
+                display: inline-block;
+                background-image: url(./assets/parties/reds.png);
+                width: 50px;
+                height: 36px;
+                background-size: 50px 36px;
                 background-repeat: no-repeat;
             }
 

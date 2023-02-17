@@ -7,9 +7,7 @@ import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
-import {Cartel} from '../../../src/server/cards/base/Cartel';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
-import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 
 
 describe('Musk', function() {

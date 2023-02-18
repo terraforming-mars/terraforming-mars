@@ -3,7 +3,6 @@ import {Jansson} from '../../../src/server/cards/ceos/Jansson';
 import {addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Game} from '../../../src/server/Game';
 
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
@@ -11,7 +10,6 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 describe('Jansson', function() {
   let card: Jansson;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(() => {
     card = new Jansson();

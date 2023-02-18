@@ -38,18 +38,18 @@ export class Caesar extends CeoCard {
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
     for (let i = 0; i < game.generation; i++) {
-      game.defer(new PlaceHazardTile(player, TileType.DUST_STORM_MILD));
+      game.defer(new PlaceHazardTile(player, TileType.EROSION_MILD));
     }
 
     const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
 
     game.defer(new SimpleDeferredAction(player, () => {
       const hazardTileCount = game.board.spaces.filter((space) => space.tile && HAZARD_TILES.has(space.tile.tileType)).length;
-      otherPlayers.forEach((player) => {
-        if (hazardTileCount > 5) {
-          game.defer(new SelectProductionToLoseDeferred(player, 2));
+      otherPlayers.forEach((opponent) => {
+        if (hazardTileCount < 6) {
+          game.defer(new SelectProductionToLoseDeferred(opponent, 1));
         } else {
-          game.defer(new SelectProductionToLoseDeferred(player, 1));
+          game.defer(new SelectProductionToLoseDeferred(opponent, 2));
         }
       });
       return undefined;

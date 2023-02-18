@@ -22,7 +22,7 @@ export class Caesar extends CeoCard {
           b.minus().production((pb) => pb.wild(1, {all})).asterix();
           b.br;
         }),
-        description: 'Once per game, place X hazard tiles. Each opponent loses 1 unit of production, or 2 units if there are more than 5 hazard tiles.',
+        description: 'Once per game, place X hazard tiles. Each opponent loses 1 unit of production, or 2 units if there are 6 or more hazard tiles.',
       },
     });
   }

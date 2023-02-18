@@ -139,14 +139,6 @@
                                 <div class="create-game-expansion-icon expansion-icon-ceo"></div>
                                 <span v-i18n>CEOs (BETA)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
                             </label>
-                            <template v-if="ceoExtension">
-                              <label for="startingCEONum-checkbox">
-                              <input type="number" class="create-game-corporations-count" value="3" min="1" :max="6" v-model="startingCeos" id="startingCEONum-checkbox">
-                                  <span v-i18n>Starting CEOs</span>
-                              </label>
-                            </template>
-
-
                         </div>
 
                         <div class="create-game-page-column">
@@ -174,6 +166,14 @@
                             <input type="number" class="create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" id="startingCorpNum-checkbox">
                                 <span v-i18n>Starting Corporations</span>
                             </label>
+
+                            <template v-if="ceoExtension">
+                              <label for="startingCEONum-checkbox">
+                              <div class="create-game-expansion-icon expansion-icon-ceo"></div>
+                              <input type="number" class="create-game-corporations-count" value="3" min="1" :max="6" v-model="startingCeos" id="startingCEONum-checkbox">
+                                  <span v-i18n>Starting CEOs</span>
+                              </label>
+                            </template>
 
                             <input type="checkbox" v-model="solarPhaseOption" id="WGT-checkbox">
                             <label for="WGT-checkbox">

@@ -16,7 +16,7 @@ import {Floyd} from './Floyd';
 import {HAL9000} from './HAL9000';
 // import {Huan} from './Huan';
 // import {Ingrid} from './Ingrid';
-// import {Jansson} from './Jansson';
+import {Jansson} from './Jansson';
 import {Karen} from './Karen';
 import {Lowell} from './Lowell';
 // import {Maria} from './Maria';
@@ -56,7 +56,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.HAL9000]: {Factory: HAL9000},
     // [CardName.HUAN]: {Factory: Huan, compatibility: 'colonies'},
     // [CardName.INGRID]: {Factory: Ingrid},
-    // [CardName.JANSSON]: {Factory: Jansson},
+    [CardName.JANSSON]: {Factory: Jansson},
     [CardName.KAREN]: {Factory: Karen, compatibility: 'prelude'},
     // TODO(dl): Why is Lowell limited to Prelude?
     [CardName.LOWELL]: {Factory: Lowell, compatibility: 'prelude'},

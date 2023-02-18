@@ -22,7 +22,7 @@ export class Caesar extends CeoCard {
           b.minus().production((pb) => pb.wild(1, {all})).asterix();
           b.br;
         }),
-        description: 'Once per game, place X hazard tiles. Each opponent loses 1 unit of production, or 2 units if there are 6 or more hazard tiles.',
+        description: 'Once per game, place X hazard tiles. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.',
       },
     });
   }
@@ -31,8 +31,7 @@ export class Caesar extends CeoCard {
     if (!super.canAct(player)) {
       return false;
     }
-    const game = player.game;
-    return game.board.getAvailableSpacesOnLand(player).length >= game.generation;
+    return player.game.board.getAvailableSpacesOnLand(player).length >= player.game.generation;
   }
 
   public action(player: Player): PlayerInput | undefined {
@@ -46,11 +45,8 @@ export class Caesar extends CeoCard {
     game.defer(new SimpleDeferredAction(player, () => {
       const hazardTileCount = game.board.spaces.filter((space) => space.tile && HAZARD_TILES.has(space.tile.tileType)).length;
       otherPlayers.forEach((opponent) => {
-        if (hazardTileCount < 6) {
-          game.defer(new SelectProductionToLoseDeferred(opponent, 1));
-        } else {
-          game.defer(new SelectProductionToLoseDeferred(opponent, 2));
-        }
+        const units = hazardTileCount < 6 ? 1 : 2;
+        game.defer(new SelectProductionToLoseDeferred(opponent, units));
       });
       return undefined;
     }));

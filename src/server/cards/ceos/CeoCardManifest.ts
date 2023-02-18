@@ -4,7 +4,7 @@ import {ModuleManifest} from '../ModuleManifest';
 import {Apollo} from './Apollo';
 import {Asimov} from './Asimov';
 import {Bjorn} from './Bjorn';
-// import {Caesar} from './Caesar';
+import {Caesar} from './Caesar';
 import {Clarke} from './Clarke';
 import {Duncan} from './Duncan';
 import {Ender} from './Ender';
@@ -44,7 +44,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.APOLLO]: {Factory: Apollo, compatibility: 'moon'},
     [CardName.ASIMOV]: {Factory: Asimov},
     [CardName.BJORN]: {Factory: Bjorn},
-    // [CardName.CAESAR]: {Factory: Caesar, compatibility: 'ares'},
+    [CardName.CAESAR]: {Factory: Caesar, compatibility: 'ares'},
     [CardName.CLARKE]: {Factory: Clarke},
     [CardName.DUNCAN]: {Factory: Duncan},
     [CardName.ENDER]: {Factory: Ender},

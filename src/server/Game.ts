@@ -326,8 +326,7 @@ export class Game implements Logger {
           }
         }
         if (gameOptions.ceoExtension) {
-          // TODO: Replace this with i < gameOptions.startingCeos constants
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < gameOptions.startingCeos; i++) {
             const ceoCard = ceoDeck.draw(game);
             player.dealtCeoCards.push(ceoCard);
           }

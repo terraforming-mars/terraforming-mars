@@ -139,6 +139,13 @@
                                 <div class="create-game-expansion-icon expansion-icon-ceo"></div>
                                 <span v-i18n>CEOs (BETA)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+                            <template v-if="ceoExtension">
+                              <label for="startingCEONum-checkbox">
+                              <input type="number" class="create-game-ceo-count" value="3" min="1" :max="6" v-model="startingCeos" id="startingCEONum-checkbox">
+                                  <span v-i18n>Starting CEOs</span>
+                              </label>
+                            </template>
+
 
                         </div>
 
@@ -544,6 +551,7 @@ export interface CreateGameModel {
     twoCorpsVariant: boolean;
     ceoExtension: boolean;
     customCeos: Array<CardName>;
+    startingCeos: number;
 }
 
 type Refs = {
@@ -634,6 +642,7 @@ export default (Vue as WithRefs<Refs>).extend({
       twoCorpsVariant: false,
       ceoExtension: false,
       customCeos: [],
+      startingCeos: 3,
     };
   },
   components: {
@@ -983,6 +992,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const twoCorpsVariant = this.twoCorpsVariant;
       const ceoExtension = this.ceoExtension;
       const customCeos = this.customCeos;
+      const startingCeos = this.startingCeos;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1149,6 +1159,7 @@ export default (Vue as WithRefs<Refs>).extend({
         twoCorpsVariant,
         ceoExtension,
         customCeos,
+        startingCeos,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

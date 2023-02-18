@@ -8,7 +8,7 @@ import {SelectProductionToLoseDeferred} from '../../deferredActions/SelectProduc
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
 import {HAZARD_TILES, TileType} from '../../../common/TileType';
-// import {Size} from '../../../common/cards/render/Size';
+import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
 export class Caesar extends CeoCard {
@@ -18,7 +18,7 @@ export class Caesar extends CeoCard {
       metadata: {
         cardNumber: 'L33',
         renderData: CardRenderer.builder((b) => {
-          // b.opgArrow().colon().text('X').hazardTile(1, {size: Size.LARGE}).nbsp;
+          b.opgArrow().text('X').hazardTile(1, {size: Size.LARGE}).br;
           b.minus().production((pb) => pb.wild(1, {all})).asterix();
           b.br;
         }),

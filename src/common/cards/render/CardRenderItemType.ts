@@ -78,4 +78,5 @@ export enum CardRenderItemType {
   ARROW_OPG = 'arrow-opg',
   REDS = 'reds',
   REDS_DEACTIVATED = 'reds-deactivated',
+  HAZARD_TILE = 'hazard-tile',
 }

@@ -17,7 +17,7 @@ describe('Caesar', function() {
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: Game;
-  let startingPlants = 7;
+  const startingPlants = 7;
 
   beforeEach(() => {
     card = new Caesar();

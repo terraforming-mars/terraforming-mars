@@ -8,7 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Phase} from '../../../common/Phase';
 import {SpaceType} from '../../../common/boards/SpaceType';
-
+import {BoardType} from '../../boards/BoardType';
 export class Ingrid extends CeoCard {
   constructor() {
     super({
@@ -34,11 +34,11 @@ export class Ingrid extends CeoCard {
     return undefined;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
     if (this.opgActionIsActive === false) return;
+    if (boardType !== BoardType.MARS || space.spaceType !== SpaceType.LAND) return;
     if (cardOwner.id !== activePlayer.id) return;
     if (cardOwner.game.phase === Phase.SOLAR) return;
-    if (space.spaceType !== SpaceType.LAND) return;
 
     cardOwner.game.defer(new SimpleDeferredAction(cardOwner, () => cardOwner.drawCard()));
   }

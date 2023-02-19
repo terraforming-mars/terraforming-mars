@@ -36,10 +36,17 @@
               </div>
           </div>
           <div class="game_end_go_home">
+            <div class="whatever_suited_name">
+              <a href="/new-game">
+                  <Button size="big" type="back" />
+                  <span v-i18n>Start a new game</span>
+              </a>
+
               <a href="/">
                   <Button size="big" type="back" />
-                  <span  v-i18n>Go to main page</span>
+                  <span v-i18n>Go to main page</span>
               </a>
+            </div>
           </div>
           <div v-if="!isSoloGame() || game.isSoloModeWin" class="game-end-winer-announcement">
               <span v-for="p in getWinners()" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>

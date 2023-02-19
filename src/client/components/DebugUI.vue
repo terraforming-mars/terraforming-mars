@@ -22,13 +22,11 @@
         </button>
 
         <span v-for="expansion in allModules" :key="expansion">
-          <template v-if="experimentalUI() || expansion !== 'ceo'">
           <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
           <label :for="`${expansion}-checkbox`" class="expansion-button">
             <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
             <span v-i18n>{{expansionName(expansion)}}</span>
           </label>
-          </template>
         </span>
       </div>
 
@@ -39,14 +37,12 @@
         </button>
 
         <span v-for="type in allTypes" :key="type">
-          <template v-if="experimentalUI() || type !== ceoType">
           <input type="checkbox" :name="`${type}-cardType`" :id="`${type}-cardType-checkbox`" v-model="types[type]">
           <label :for="`${type}-cardType-checkbox`" class="expansion-button">
               <span v-if="type === 'colonyTiles'" v-i18n>Colony Tiles</span>
               <span v-else-if="type === 'globalEvents'" v-i18n>Global Events</span>
               <span v-else v-i18n>{{type}}</span>
           </label>
-          </template>
         </span>
       </div>
 
@@ -207,7 +203,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
 };
 
 // TODO(kberg): make this  use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramP';
+const ALL_MODULES = 'bcpvCt*ramPl';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
@@ -403,9 +399,6 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     allAwardNames(): ReadonlyArray<AwardName> {
       return awardNames;
-    },
-    ceoType(): CardType {
-      return CardType.CEO;
     },
   },
   methods: {

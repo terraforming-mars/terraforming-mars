@@ -39,7 +39,7 @@
             <div class="whatever_suited_name">
               <a href="new-game">
                   <Button size="big" type="back" />
-                  <span v-i18n>Start a new game</span>
+                  <span v-i18n>Create New Game</span>
               </a>
 
               <a href=".">

@@ -133,6 +133,13 @@
                                     <span v-i18n>Alt. Venus Board</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Alternative-Venus-Board" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
+
+                            <input type="checkbox" name="ceo" id="ceo-checkbox" v-model="ceoExtension">
+                            <label for="ceo-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-ceo"></div>
+                                <span v-i18n>CEOs (BETA)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
                         </div>
 
                         <div class="create-game-page-column">
@@ -452,6 +459,9 @@
 </template>
 
 <script lang="ts">
+import * as constants from '@/common/constants';
+import * as json_constants from '@/client/components/create/json';
+
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 import {Color} from '@/common/Color';
@@ -472,10 +482,8 @@ import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {GameModule} from '@/common/cards/GameModule';
-
-import * as constants from '@/common/constants';
-import * as json_constants from '@/client/components/create/json';
 import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
+import {vueRoot} from '@/client/components/vueRoot';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -1065,7 +1073,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Clone game checks
       if (this.clonedGameId !== undefined && this.seededGame) {
-        const gameData = await fetch('/api/cloneablegame?id=' + this.clonedGameId)
+        const gameData = await fetch('api/cloneablegame?id=' + this.clonedGameId)
           .then((response) => {
             if (response.ok) {
               return response.json();
@@ -1150,16 +1158,16 @@ export default (Vue as WithRefs<Refs>).extend({
       if (dataToSend === undefined) return;
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
-          window.location.href = '/player?id=' + json.players[0].id;
+          window.location.href = 'player?id=' + json.players[0].id;
           return;
         } else {
-          window.history.replaceState(json, `${constants.APP_NAME} - Game`, '/game?id=' + json.id);
-          (this as any).$root.$data.game = json;
-          (this as any).$root.$data.screen = 'game-home';
+          window.history.replaceState(json, `${constants.APP_NAME} - Game`, 'game?id=' + json.id);
+          vueRoot(this).game = json;
+          vueRoot(this).screen = 'game-home';
         }
       };
 
-      fetch('/game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
+      fetch('game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
         .then((response) => response.text())
         .then((text) => {
           try {

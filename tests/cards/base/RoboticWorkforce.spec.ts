@@ -13,7 +13,7 @@ import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
+import {ALL_RESOURCES, Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {resetBoard, runNextAction, cast, runAllActions, addCityTile, addOceanTile, testGameOptions} from '../../TestingUtils';
@@ -277,8 +277,7 @@ describe('RoboticWorkforce', () => {
         }
 
         // Now if any of the production changed, that means the card has a production change
-        const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
-        include = productions.filter((prod) => player.production[prod] !== 2).length > 0;
+        include = ALL_RESOURCES.filter((prod) => player.production[prod] !== 2).length > 0;
       }
 
       console.log(`        ${card.name}: ${include}`);

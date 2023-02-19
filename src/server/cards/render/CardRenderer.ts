@@ -387,10 +387,6 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
   }
 
-  public opgArrow(): Builder<T> {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.ARROW_OPG));
-  }
-
   public mars(amount: number, options?: ItemOptions): Builder<T> {
     this._appendToRow(new CardRenderItem(CardRenderItemType.MARS, amount, options));
     return this;
@@ -574,6 +570,24 @@ abstract class Builder<T> {
     this._appendToRow(CardRenderSymbol.arrow());
     this.br;
     return this;
+  }
+
+  /**
+   * CEO Card Assets
+   */
+  public opgArrow(): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.ARROW_OPG));
+  }
+  // Reds icons used by Zan
+  public reds(): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.REDS));
+  }
+  public redsInactive(): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.REDS_DEACTIVATED));
+  }
+  // Hazard tiles for Caesar
+  public hazardTile(amount: number = 1, options?: ItemOptions | undefined): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.HAZARD_TILE, amount, options));
   }
 }
 

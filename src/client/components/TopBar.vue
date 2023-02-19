@@ -2,7 +2,7 @@
     <div :class="formatCssClass()" :key="componentKey">
       <PlayerInfo v-show="isExpanded()" :player="playerView.thisPlayer" :playerView="playerView" actionLabel="" :playerIndex="0" :hideZeroTags="true" :isTopBar="true"/>
       <div class="top-bar-collapser" v-on:click="toggleBar()">
-        <img src="/assets/arrows_left.png">
+        <img src="assets/arrows_left.png">
       </div>
     </div>
 </template>

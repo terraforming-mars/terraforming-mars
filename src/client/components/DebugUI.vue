@@ -8,7 +8,7 @@
       <!-- start filters -->
 
       <div class="form-group">
-        <input class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
+        <input ref="filter" class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
       </div>
       <input type="checkbox" name="fullFilter" id="fullFilter-checkbox" v-model="fullFilter">
       <label for="fullFilter-checkbox">
@@ -83,6 +83,7 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
+      <template v-if="experimentalUI()">
       <br>
       <section class="debug-ui-cards-list">
           <h2 v-i18n>CEOs</h2>
@@ -90,6 +91,7 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
+      </template>
       <br>
       <section class="debug-ui-cards-list">
         <h2 v-i18n>Standard Projects</h2>
@@ -183,6 +185,7 @@ import Award from '@/client/components/Award.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
+import {WithRefs} from 'vue-typed-refs';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -200,17 +203,17 @@ const moduleAbbreviations: Record<GameModule, string> = {
 };
 
 // TODO(kberg): make this  use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramP';
+const ALL_MODULES = 'bcpvCt*ramPl';
 
-type TypeOptions = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
-type TagOptions = Tag | 'none';
+type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
+type TagOption = Tag | 'none';
 
 export interface DebugUIModel {
   filterText: string,
   fullFilter: boolean,
   expansions: Record<GameModule, boolean>,
-  types: Record<TypeOptions, boolean>,
-  tags: Record<TagOptions, boolean>,
+  types: Record<TypeOption, boolean>,
+  tags: Record<TagOption, boolean>,
   searchIndex: Map<string, Array<string>>,
 }
 
@@ -280,7 +283,11 @@ function buildSearchIndex(map: Map<string, Array<string>>) {
   }
 }
 
-export default Vue.extend({
+type Refs = {
+  filter: HTMLInputElement,
+};
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'debug-ui',
   components: {
     Card,
@@ -357,12 +364,13 @@ export default Vue.extend({
       return this.expansions[module] = modules.includes(moduleAbbreviations[module]);
     });
     buildSearchIndex(this.searchIndex);
+    this.$refs.filter.focus();
   },
   computed: {
     allModules(): ReadonlyArray<GameModule> {
       return GAME_MODULES;
     },
-    allTypes(): Array<TypeOptions> {
+    allTypes(): Array<TypeOption> {
       return [
         CardType.EVENT,
         CardType.ACTIVE,
@@ -370,6 +378,7 @@ export default Vue.extend({
         CardType.PRELUDE,
         CardType.CORPORATION,
         CardType.STANDARD_PROJECT,
+        CardType.CEO,
         'colonyTiles',
         'globalEvents',
         'milestones',
@@ -563,6 +572,9 @@ export default Vue.extend({
         playerColor: '',
         scores: [],
       };
+    },
+    experimentalUI(): boolean {
+      return getPreferences().experimental_ui;
     },
   },
 });

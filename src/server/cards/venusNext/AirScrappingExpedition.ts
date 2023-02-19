@@ -37,8 +37,13 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
       return undefined;
     }
 
+    if (floaterCards.length === 1) {
+      player.addResourceTo(floaterCards[0], {qty: 3, log: true});
+      return;
+    }
+
     return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, ([card]) => {
-      player.addResourceTo(card, 3);
+      player.addResourceTo(card, {qty: 3, log: true});
       return undefined;
     });
   }

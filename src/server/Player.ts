@@ -1844,7 +1844,7 @@ export class Player {
     action.buttonLabel = 'Take action';
 
     // VanAllen can claim milestones for free:
-    if ((this.canAfford(MILESTONE_COST) && !this.game.allMilestonesClaimed()) || this.cardIsInEffect(CardName.VANALLEN)) {
+    if ((this.canAfford(MILESTONE_COST) || this.cardIsInEffect(CardName.VANALLEN)) && !this.game.allMilestonesClaimed() ) {
       const remainingMilestones = new OrOptions();
       remainingMilestones.title = 'Claim a milestone';
       remainingMilestones.options = this.game.milestones

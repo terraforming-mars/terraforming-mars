@@ -45,7 +45,7 @@ export class CardFinder {
   // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
   //              another function, perhaps?
   public getProjectCardByName(cardName: CardName): IProjectCard | undefined {
-    return this.getCard(cardName, ['projectCards', 'preludeCards']);
+    return this.getCard(cardName, ['projectCards', 'preludeCards', 'ceoCards']);
   }
 
   public getPreludeByName(cardName: CardName): IPreludeCard | undefined {

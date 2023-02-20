@@ -125,7 +125,7 @@ export abstract class Board {
     return this.getOceanSpaces(include).length;
   }
 
-  public getAvailableSpacesForType(player: Player, type: PlacementType) {
+  public getAvailableSpacesForType(player: Player, type: PlacementType): Array<ISpace> {
     switch (type) {
     case 'land': return this.getAvailableSpacesOnLand(player);
     case 'ocean': return this.getAvailableSpacesForOcean(player);

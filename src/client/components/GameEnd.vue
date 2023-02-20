@@ -35,8 +35,8 @@
                   </div>
               </div>
           </div>
-          <div class="game_end_navigation_wrapper">
-            <div class="game_end_navigation">
+          <div class="game_end_navigation">
+            <div>
               <a href="new-game">
                   <Button size="big" type="back" />
                   <span v-i18n>Create New Game</span>

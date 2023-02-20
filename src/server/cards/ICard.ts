@@ -17,8 +17,16 @@ import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
 
+/*
+ * Represents a card which has an action that itself allows a player
+ * to replay a card. Those cards can evaluate card playability recursively.
+ * which consumes the entire call stack.
+ *
+ * Cards like that keep track of the number of times they're called as a
+ * loop check.
+ */
 export interface IHasCheckLoops {
-    getCheckLoops(): number;
+  getCheckLoops(): number;
 }
 
 export function isIHasCheckLoops(object: any): object is IHasCheckLoops {

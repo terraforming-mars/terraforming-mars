@@ -14,13 +14,23 @@ describe('Van Allen', function() {
 
   beforeEach(() => {
     card = new VanAllen();
-    game = newTestGame(4, {ceoExtension: true});
+    game = newTestGame(2, {ceoExtension: true});
     player = getTestPlayer(game, 0);
-    player.playedCards.push(card);
   });
 
+  it('Cannot claim for free if VanAllen is not in play', function() {
+    player.megaCredits = 0;
+    player.setTerraformRating(35); // Can claim Terraformer milestone
+    const actions = cast(player.getActions(), OrOptions);
+    const claimMilestoneAction = actions.options.find((option) => option.title === 'Claim a milestone');
+    expect(claimMilestoneAction).is.undefined;
+  });
+
+
   it('Can claim milestones for free, and gains 3 M€ upon claim', function() {
-    player.megaCredits = 70;
+    player.playedCards.push(card);
+
+    player.megaCredits = 0;
 
     player.setTerraformRating(35); // Can claim Terraformer milestone
 
@@ -31,7 +41,7 @@ describe('Van Allen', function() {
 
     claimMilestoneAction!.options![0].cb();
     game.deferredActions.runAll(() => {});
-    expect(player.megaCredits).eq(73); // No M€ cost incurred, gains 3 M€ instead
+    expect(player.megaCredits).eq(3); // No M€ cost incurred, gains 3 M€ instead
     const claimedMilestone = player.game.claimedMilestones;
     expect(claimedMilestone.find((cm) => cm.milestone.name === 'Terraformer' && cm.player === player)).is.not.undefined;
   });

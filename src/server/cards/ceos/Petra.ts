@@ -55,12 +55,13 @@ export class Petra extends CeoCard {
     for (const party of turmoil.parties) {
       const neutralDelegates = party.delegates.count('NEUTRAL');
       for (let i = 0; i < neutralDelegates; i++) {
-        // Add the delegate _before_ removing the Neutral, otherwise we can get errors when it
-        // attempts to find the new party leader if there are no remaining members.
-        // turmoil.sendDelegateToParty(player.id, party.name, player.game);
-        // turmoil.removeDelegateFromParty('NEUTRAL', party.name, player.game);
-        // This would be nice to use, but is generating errors for similar reasons to above::
-        turmoil.replaceDelegateFromParty('NEUTRAL', player.id, party.name, player.game);
+        // Add the delegate _before_ removing the Neutral, otherwise we get errors when it
+        // attempts to find the new party leader if there are no remaining members in the party.
+        turmoil.sendDelegateToParty(player.id, party.name, player.game);
+        turmoil.removeDelegateFromParty('NEUTRAL', party.name, player.game);
+        // This would be nice to use:
+        // turmoil.replaceDelegateFromParty('NEUTRAL', player.id, party.name, player.game);
+        // but it generates errors if the party only has the single Neutral member
 
         // Check dominance after every replacement
         turmoil.checkDominantParty();

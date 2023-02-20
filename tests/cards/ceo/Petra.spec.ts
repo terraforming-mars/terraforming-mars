@@ -3,12 +3,10 @@ import {Game} from '../../../src/server/Game';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-// import {testGameOptions} from '../../TestingUtils';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {getTestPlayer} from '../../TestGame';
-
 import {newTestGame} from '../../TestGame';
 
 import {Petra} from '../../../src/server/cards/ceos/Petra';

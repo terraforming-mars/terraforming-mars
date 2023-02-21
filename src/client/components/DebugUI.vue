@@ -83,7 +83,6 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
-      <template v-if="experimentalUI()">
       <br>
       <section class="debug-ui-cards-list">
           <h2 v-i18n>CEOs</h2>
@@ -91,7 +90,6 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
-      </template>
       <br>
       <section class="debug-ui-cards-list">
         <h2 v-i18n>Standard Projects</h2>
@@ -573,6 +571,7 @@ export default (Vue as WithRefs<Refs>).extend({
         scores: [],
       };
     },
+    // experimentalUI might not be used at the moment, but it's fine to just leave it here.
     experimentalUI(): boolean {
       return getPreferences().experimental_ui;
     },

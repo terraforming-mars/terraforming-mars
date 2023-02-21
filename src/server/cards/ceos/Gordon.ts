@@ -36,7 +36,7 @@ export class Gordon extends CeoCard {
     if (cardOwner.game.phase === Phase.SOLAR) return;
 
     if (Board.isCitySpace(space) || Board.isGreenerySpace(space)) {
-      cardOwner.game.defer(new GainResources(cardOwner, Resources.MEGACREDITS, {count: 2}));
+      cardOwner.game.defer(new GainResources(cardOwner, Resources.MEGACREDITS, {count: 2, log: true}));
     }
     return;
   }

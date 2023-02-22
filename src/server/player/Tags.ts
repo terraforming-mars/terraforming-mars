@@ -10,8 +10,6 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {CeoExtension} from '../CeoExtension';
 import {Player} from '../Player';
 
-const ALL_TAGS_EXCEPT_CLONE = ALL_TAGS.filter((tag) => tag !== Tag.CLONE);
-
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
   'default' | // Like raw, but include the wild tags. Typical when performing an action.
@@ -31,6 +29,8 @@ export type MultipleCountMode =
   'award'; // Like default, including Chimera.
 
 export class Tags {
+  private static COUNTED_TAGS = ALL_TAGS.filter((tag) => tag !== Tag.CLONE && tag !== Tag.EVENT);
+
   private player: Player;
   constructor(player: Player) {
     this.player = player;
@@ -38,9 +38,11 @@ export class Tags {
 
   // TODO(kberg): Rename to countAllTags
   public getAllTags(): Array<ITagCount> {
-    return ALL_TAGS_EXCEPT_CLONE.map((tag) => {
+    const counts = Tags.COUNTED_TAGS.map((tag) => {
       return {tag, count: this.count(tag, 'raw')};
     }).filter((tag) => tag.count > 0);
+    counts.push({tag: Tag.EVENT, count: this.player.getPlayedEventsCount()});
+    return counts;
   }
 
   /*

@@ -32,6 +32,7 @@
     "${0} removed ${1} resource(s) from ${2}\u2019s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}\u2019s ${3}",
     
     "Card not found" : "Karte nicht gefunden",
+    "The project discard pile has been shuffled to form a new deck." : "Der Projektkarten-Ablagestapel wurde neu gemischt, um einen neuen Nachziehstapel zu bilden.",
     "Incorrect options provided" : "Ungültige Optionen angegeben",
     "Input contains unauthorized keys": "Eingabe enthält ungültige Zeichen",
     "Amount provided too high (max ": "Eingegebener Betrag zu hoch (max. ",
@@ -198,6 +199,7 @@
     "Bio-Fertilizer Facility tile": "Plättchen Bio-Dünger-Anlage",
     "Mohole Area tile": "Plättchen Mohole-Bohrung",
     "Mild Erosion tile": "Plättchen Leichte Erosion",
+    "Severe Erosion tile": "Plättchen Schwere Erosion",
     "Mild Dust Storm": "Leichte Sandstürme",
     "Severe Dust Storm": "Schwere Sandstürme",
     "Mild Erosion": "Leichte Erosion",

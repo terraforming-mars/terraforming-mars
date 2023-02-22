@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Resources} from '../../../common/Resources';
+import {ALL_RESOURCES} from '../../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -39,7 +39,7 @@ export class RobinsonIndustries extends Card implements IActionCard, ICorporatio
     let minimum = player.production.megacredits;
     let lowest: Array<SelectOption> = [];
 
-    [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
+    ALL_RESOURCES.forEach((resource) => {
       const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
         player.payMegacreditsDeferred(
           4,

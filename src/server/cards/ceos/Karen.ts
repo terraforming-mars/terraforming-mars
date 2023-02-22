@@ -30,7 +30,7 @@ export class Karen extends CeoCard {
     cardsDrawn.forEach((card) => {
       if (card.canPlay?.(player) === false) {
         cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
-        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player));
+        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player), {reservedFor: player});
       }
     });
 
@@ -44,7 +44,7 @@ export class Karen extends CeoCard {
         this.isDisabled = true;
         return player.playCard(card);
       } else {
-        throw new Error('You cannot pay for this card');
+        throw new Error('You cannot play this card');
       }
     });
   }

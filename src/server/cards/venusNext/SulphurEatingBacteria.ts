@@ -8,7 +8,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -69,7 +68,9 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
     const megaCreditsGained = 3 * amount;
     player.megaCredits += megaCreditsGained;
 
-    LogHelper.logRemoveResource(player, this, amount, `gain ${megaCreditsGained} M€`);
+    player.game.log('${0} removed ${1} microbes from ${2} to gain ${3} M€', (b) =>
+      b.player(player).number(amount).card(this).number(megaCreditsGained));
+
     return undefined;
   }
 }

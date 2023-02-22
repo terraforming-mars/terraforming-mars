@@ -23,12 +23,22 @@ export class ProjectInspection extends Card implements IProjectCard {
       },
     });
   }
+
+  // This matches Viron.getActionCards.
   private getActionCards(player: Player): Array<IActionCard & ICard> {
     const result: Array<IActionCard & ICard> = [];
 
     for (const playedCard of player.tableau) {
-      if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) continue;
-      if (isIActionCard(playedCard) && playedCard.canAct(player) && player.getActionsThisGeneration().has(playedCard.name)) {
+      if (playedCard === this) {
+        continue;
+      }
+      if (!isIActionCard(playedCard)) {
+        continue;
+      }
+      if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) {
+        continue;
+      }
+      if (player.getActionsThisGeneration().has(playedCard.name) && playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }

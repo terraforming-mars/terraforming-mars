@@ -7,3 +7,4 @@ export enum Resources {
     HEAT = 'heat'
 }
 
+export const ALL_RESOURCES = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT] as const;

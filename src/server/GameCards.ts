@@ -80,6 +80,8 @@ export class GameCards {
         return gameOptions.moonExpansion;
       case 'pathfinders':
         return gameOptions.pathfindersExpansion;
+      case 'ares':
+        return gameOptions.aresExtension;
       case 'ceo':
         return gameOptions.ceoExtension;
       default:

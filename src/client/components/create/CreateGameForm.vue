@@ -133,6 +133,12 @@
                                     <span v-i18n>Alt. Venus Board</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Alternative-Venus-Board" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
+
+                            <input type="checkbox" name="ceo" id="ceo-checkbox" v-model="ceoExtension">
+                            <label for="ceo-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-ceo"></div>
+                                <span v-i18n>CEOs (BETA)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
                         </div>
 
                         <div class="create-game-page-column">
@@ -160,6 +166,14 @@
                             <input type="number" class="create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" id="startingCorpNum-checkbox">
                                 <span v-i18n>Starting Corporations</span>
                             </label>
+
+                            <template v-if="ceoExtension">
+                              <label for="startingCEONum-checkbox">
+                              <div class="create-game-expansion-icon expansion-icon-ceo"></div>
+                              <input type="number" class="create-game-corporations-count" value="3" min="1" :max="6" v-model="startingCeos" id="startingCEONum-checkbox">
+                                  <span v-i18n>Starting CEOs</span>
+                              </label>
+                            </template>
 
                             <input type="checkbox" v-model="solarPhaseOption" id="WGT-checkbox">
                             <label for="WGT-checkbox">
@@ -537,6 +551,7 @@ export interface CreateGameModel {
     twoCorpsVariant: boolean;
     ceoExtension: boolean;
     customCeos: Array<CardName>;
+    startingCeos: number;
 }
 
 type Refs = {
@@ -627,6 +642,7 @@ export default (Vue as WithRefs<Refs>).extend({
       twoCorpsVariant: false,
       ceoExtension: false,
       customCeos: [],
+      startingCeos: 3,
     };
   },
   components: {
@@ -976,6 +992,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const twoCorpsVariant = this.twoCorpsVariant;
       const ceoExtension = this.ceoExtension;
       const customCeos = this.customCeos;
+      const startingCeos = this.startingCeos;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1142,6 +1159,7 @@ export default (Vue as WithRefs<Refs>).extend({
         twoCorpsVariant,
         ceoExtension,
         customCeos,
+        startingCeos,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

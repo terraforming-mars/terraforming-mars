@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {OrOptions} from '../../inputs/OrOptions';
-import {Resources} from '../../../common/Resources';
+import {ALL_RESOURCES, Resources} from '../../../common/Resources';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
 
@@ -40,23 +40,22 @@ export class Ryu extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-    const resources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
     const choices = new OrOptions();
 
-    resources.filter((r) => this.productionIsDecreasable(player, r)).forEach((resourceToDecrease) => {
-      const selectOption = new SelectOption('Decrease ${resourceToDecrease} production', 'Select', () => {
+    ALL_RESOURCES.filter((r) => this.productionIsDecreasable(player, r)).forEach((resourceToDecrease) => {
+      const selectOption = new SelectOption(`Decrease ${resourceToDecrease} production`, 'Select', () => {
         // M€ production can go down to -5
         let decreasable = player.production.get(resourceToDecrease);
         if (resourceToDecrease === Resources.MEGACREDITS) decreasable += 5;
         const maxDecreasableAmt = Math.min(player.game.generation + 2, decreasable);
 
         return new SelectAmount(
-          'Select amount of ${resourceToDecrease} production to decrease',
+          `Select amount of ${resourceToDecrease} production to decrease`,
           'Decrease',
           (amount: number) => {
             const productionToIncrease =
-              resources.filter((res) => res !== resourceToDecrease)
-                .map((res) => new SelectOption('Increase ${res} production', 'Select', () => {
+              ALL_RESOURCES.filter((res) => res !== resourceToDecrease)
+                .map((res) => new SelectOption(`Increase ${res} production`, 'Select', () => {
                   player.production.add(resourceToDecrease, -amount, {log: true});
                   // player.production.adjust()
                   player.production.add(res, amount, {log: true});

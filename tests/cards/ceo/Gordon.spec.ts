@@ -1,13 +1,13 @@
 import {expect} from 'chai';
+import {intersection} from '../../../src/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {getTestPlayer, newTestGame} from '../../TestGame';
+import {addGreenery, addCityTile, runAllActions} from '../../TestingUtils';
 
 import {Gordon} from '../../../src/server/cards/ceos/Gordon';
-
-import {addGreenery, addCityTile, runAllActions} from '../../TestingUtils';
 
 
 describe('Gordon', function() {
@@ -31,9 +31,13 @@ describe('Gordon', function() {
   });
 
   it('Can place cities next to other cities', function() {
-    const initialAvailableSpaces = game.board.getAvailableSpacesForCity(player).length;
-    addCityTile(player, '35');
-    expect(game.board.getAvailableSpacesForCity(player).length).eq(initialAvailableSpaces - 1);
+    const board = game.board;
+    const space = board.getSpace('35');
+    addCityTile(player, space.id);
+    const availableSpacesForCity = board.getAvailableSpacesForCity(player);
+    const spacesNextToCity = board.getAdjacentSpaces(space);
+    // intersect preserves order of first element.
+    expect(intersection(spacesNextToCity, availableSpacesForCity)).deep.eq(spacesNextToCity);
   });
 
   it('Gains 2 MC when placing city or greenery tile', function() {
@@ -57,6 +61,7 @@ describe('Gordon', function() {
   it('Does not gain MC when opponent places city or greenery tile', function() {
     player.megaCredits = 0;
     addGreenery(player2, '35');
+    runAllActions(game);
     expect(player.megaCredits).eq(0);
   });
 });

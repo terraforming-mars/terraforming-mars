@@ -11,6 +11,7 @@ import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Button from '@/client/components/common/Button.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
+import {PlayerIndex} from '@/client/components/toggleable';
 
 export default Vue.extend({
   name: 'PlayerInfo',
@@ -30,7 +31,7 @@ export default Vue.extend({
       default: '',
     },
     playerIndex: {
-      type: Number,
+      type: Number as () => PlayerIndex,
     },
     hideZeroTags: {
       type: Boolean,
@@ -54,28 +55,28 @@ export default Vue.extend({
     },
   },
   methods: {
-    isPinned(playerIndex: number): boolean {
-      return vueRoot(this).getVisibilityState('pinned_player_' + playerIndex);
+    isPinned(playerIndex: PlayerIndex): boolean {
+      return vueRoot(this).getVisibilityState(`pinned_player_${playerIndex}`);
     },
-    pin(playerIndex: number) {
-      return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, true);
+    pin(playerIndex: PlayerIndex) {
+      return vueRoot(this).setVisibilityState(`pinned_player_${playerIndex}`, true);
     },
-    unpin(playerIndex: number) {
-      return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, false);
+    unpin(playerIndex: PlayerIndex) {
+      return vueRoot(this).setVisibilityState(`pinned_player_${playerIndex}`, false);
     },
     pinPlayer() {
-      let hiddenPlayersIndexes: Array<Number> = [];
+      let hiddenPlayersIndexes: Array<PlayerIndex> = [];
       const playerPinned = this.isPinned(this.playerIndex);
 
       // if player is already pinned, add to hidden players (toggle)
-      hiddenPlayersIndexes = range(this.playerView.players.length - 1);
+      for (let i: PlayerIndex = 0; i < this.playerView.players.length; i++) {
+        hiddenPlayersIndexes.push(i);
+      }
       if (!playerPinned) {
         this.pin(this.playerIndex);
-        hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
-          (index) => index !== this.playerIndex,
-        );
+        hiddenPlayersIndexes = hiddenPlayersIndexes.filter((index) => index !== this.playerIndex);
       }
-      for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
+      for (let i: PlayerIndex = 0; i < hiddenPlayersIndexes.length; i++) {
         if (hiddenPlayersIndexes.includes(i)) {
           this.unpin(i);
         }

@@ -188,8 +188,7 @@ export default Vue.extend({
       return 'tooltip tooltip-' + (this.isTopBar ? 'bottom' : 'top');
     },
     tags(): Array<TagDetail> {
-      // In tests this one call to vueRoot uses `?.` because for some reason it this doesn't pass tests.
-      const concise = vueRoot(this).componentsVisibility?.['tags_concise'] ?? this.conciseTagsViewDefaultValue;
+      const concise = vueRoot(this).getVisibilityState('tags_concise') ?? this.conciseTagsViewDefaultValue;
       return this.tagsInOrder.filter((entry) => {
         if (!isInGame(entry.name, this.playerView.game)) {
           return false;

@@ -20,7 +20,7 @@ export default Vue.extend({
       );
     },
     getTagToggleLabel(): string {
-      return vueRoot(this).componentsVisibility['tags_concise'] ? 'full' : 'concise';
+      return vueRoot(this).getVisibilityState('tags_concise') ? 'full' : 'concise';
     },
   },
 });

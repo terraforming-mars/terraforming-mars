@@ -6,7 +6,7 @@ import {PlayerInput} from '../PlayerInput';
 
 type Party = 'mf' | 's' | 'u' | 'k' | 'r' | 'g';
 type Suffix = 'p01' | 'p02' | 'p03' | 'p04';
-export type PolicyId = `${Party}${Suffix}`
+export type PolicyId = `${Party}${Suffix}`;
 
 export interface Policy {
   id: PolicyId;

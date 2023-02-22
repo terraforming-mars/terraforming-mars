@@ -12,6 +12,7 @@ import DebugUI from '@/client/components/DebugUI.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Help from '@/client/components/help/Help.vue';
 import AdminHome from '@/client/components/admin/AdminHome.vue';
+import {Toggleable} from '@/client/components/toggleable';
 
 import {$t} from '@/client/directives/i18n';
 
@@ -52,7 +53,7 @@ export interface MainAppData {
     playerkey: number;
     settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
-    componentsVisibility: {[x: string]: boolean};
+    componentsVisibility: Record<Toggleable, boolean>;
     game: SimpleGameModel | undefined;
 }
 
@@ -72,8 +73,9 @@ export const mainAppSettings = {
       'pinned_player_2': false,
       'pinned_player_3': false,
       'pinned_player_4': false,
+      'pinned_player_5': false,
       'turmoil_parties': false,
-    } as {[x: string]: boolean},
+    },
     game: undefined as SimpleGameModel | undefined,
     playerView: undefined,
     spectator: undefined,
@@ -112,11 +114,11 @@ export const mainAppSettings = {
         cb();
       }
     },
-    setVisibilityState(targetVar: string, isVisible: boolean) {
+    setVisibilityState(targetVar: Toggleable, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;
       (this as unknown as MainAppData).componentsVisibility[targetVar] = isVisible;
     },
-    getVisibilityState(targetVar: string): boolean {
+    getVisibilityState(targetVar: Toggleable): boolean {
       return (this as unknown as MainAppData).componentsVisibility[targetVar] ? true : false;
     },
     update(path: typeof paths.PLAYER | typeof paths.SPECTATOR): void {

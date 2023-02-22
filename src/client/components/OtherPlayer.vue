@@ -9,6 +9,7 @@ import {vueRoot} from '@/client/components/vueRoot';
 import Card from '@/client/components/card/Card.vue';
 import Button from '@/client/components/common/Button.vue';
 import {CardType} from '@/common/cards/CardType';
+import {PlayerIndex} from '@/client/components/toggleable';
 
 export default Vue.extend({
   name: 'OtherPlayer',
@@ -17,7 +18,7 @@ export default Vue.extend({
       type: Object as () => PublicPlayerModel,
     },
     playerIndex: {
-      type: Number,
+      type: Number as () => PlayerIndex,
     },
   },
   components: {
@@ -28,12 +29,10 @@ export default Vue.extend({
   methods: {
     ...PlayerMixin.methods,
     hideMe() {
-      vueRoot(this).setVisibilityState('pinned_player_' + this.playerIndex, false);
+      vueRoot(this).setVisibilityState(`pinned_player_${this.playerIndex}`, false);
     },
     isVisible() {
-      return vueRoot(this).getVisibilityState(
-        'pinned_player_' + this.playerIndex,
-      );
+      return vueRoot(this).getVisibilityState(`pinned_player_${this.playerIndex}`);
     },
   },
   computed: {

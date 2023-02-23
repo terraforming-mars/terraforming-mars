@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {intersection} from '../../../src/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';

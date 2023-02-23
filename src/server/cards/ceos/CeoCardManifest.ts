@@ -12,7 +12,7 @@ import {Faraday} from './Faraday';
 import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
 // import {Gordon} from './Gordon';
-// import {Greta} from './Greta';
+import {Greta} from './Greta';
 import {HAL9000} from './HAL9000';
 // import {Huan} from './Huan';
 import {Ingrid} from './Ingrid';
@@ -52,7 +52,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.FLOYD]: {Factory: Floyd},
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     // [CardName.GORDON]: {Factory: Gordon},
-    // [CardName.GRETA]: {Factory: Greta},
+    [CardName.GRETA]: {Factory: Greta},
     [CardName.HAL9000]: {Factory: HAL9000},
     // [CardName.HUAN]: {Factory: Huan, compatibility: 'colonies'},
     [CardName.INGRID]: {Factory: Ingrid},

@@ -4,10 +4,8 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {ICeoCard} from './ICeoCard';
-
 import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
-import {IProjectCard} from '../IProjectCard';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class Lowell extends CeoCard {
@@ -21,7 +19,7 @@ export class Lowell extends CeoCard {
           b.opgArrow().megacredits(8).colon().text('CHANGE LEADER').asterix();
           b.br.br;
         }),
-        description: 'Once per game, pay 8 M€ to draw 3 Leader cards and choose one to play. Discard this card.',
+        description: 'Once per game, pay 8 M€ to draw 3 CEO cards and choose one to play. Discard this card.',
       },
     });
   }
@@ -52,11 +50,12 @@ export class Lowell extends CeoCard {
     player.game.defer(new SelectPaymentDeferred(player, 8, {title: 'Select how to pay for action'}));
     this.isDisabled = true;
 
-    return new SelectCard('Choose leader card to play', 'Play', cardsDrawn, (foundCards: Array<IProjectCard>) => {
+    return new SelectCard('Choose CEO card to play', 'Play', cardsDrawn, (([card]) => {
       const cardIndex = player.playedCards.findIndex((c) => c.name === this.name);
       player.playedCards.splice(cardIndex, 1);
+      game.ceoDeck.discard(this);
 
-      return player.playCard(foundCards[0]);
-    });
+      return player.playCard(card);
+    }));
   }
 }

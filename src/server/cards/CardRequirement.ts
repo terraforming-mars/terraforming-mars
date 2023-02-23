@@ -2,7 +2,7 @@ import {RequirementType} from '../../common/cards/RequirementType';
 import {Tag} from '../../common/cards/Tag';
 import {ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITagCardRequirement} from '../../common/cards/ICardRequirement';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {Resources} from '../../common/Resources';
+import {ALL_RESOURCES, Resources} from '../../common/Resources';
 import {Player} from '../Player';
 import {CardResource} from '../../common/CardResource';
 import {TileType} from '../../common/TileType';
@@ -72,8 +72,7 @@ export class CardRequirement implements ICardRequirement {
       return player.game.someoneHasRemovedOtherPlayersPlants;
 
     case RequirementType.RESOURCE_TYPES:
-      const standardResources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT]
-        .filter((res) => player.getResource(res) > 0).length;
+      const standardResources = ALL_RESOURCES.filter((res) => player.getResource(res) > 0).length;
       const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
       return this.satisfiesInequality(standardResources + nonStandardResources);
 

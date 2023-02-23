@@ -61,7 +61,7 @@ export default Vue.extend({
       return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, true);
     },
     unpin(playerIndex: number) {
-      return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, true);
+      return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, false);
     },
     pinPlayer() {
       let hiddenPlayersIndexes: Array<Number> = [];

@@ -9,11 +9,15 @@ import {CardType} from '../../../src/common/cards/CardType';
 import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvancedGHG';
 import {InventionContest} from '../../../src/server/cards/base/InventionContest';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {MediaGroup} from '../../../src/server/cards/base/MediaGroup';
 import {IceCapMelting} from '../../../src/server/cards/base/IceCapMelting';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
 import {DeimosDown} from '../../../src/server/cards/base/DeimosDown';
+import {ProjectInspection} from '../../../src/server/cards/promo/ProjectInspection';
+import {Viron} from '../../../src/server/cards/venusNext/Viron';
+import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 
 describe('Odyssey', () => {
   let card: Odyssey;
@@ -134,5 +138,45 @@ describe('Odyssey', () => {
     player.playCard(deimosDown);
 
     expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
+  });
+
+  // This is a weird one.
+  // Odyssey lets you replay an event card.
+  // Project Inspection is an event that lets you replay a blue action.
+  // Assume Viron and Inventors Guild are used blue actions. (Inventors guild lets you draw a card. Viron lets you replay a blue action.)
+  //
+  // Play Odyssey, which lets player replay Project Inspection.
+  //   Project Inspection looks for blue action cards to play.
+  //   Project Inspection sees Viron.
+  //     Project Inspection evaluates whether Viron has an action to take.
+  //       Viron looks for blue card actions to play.
+  //       Viron sees Odyssey
+  //         Viron evaluates whether Odyssey can be played.
+  //
+  // ... and so on.
+  it('Be compatible with Viron and Project Inspection', () => {
+    const viron = new Viron();
+    player.playAdditionalCorporationCard(viron);
+
+    const projectInspection = new ProjectInspection();
+    player.playedCards.push(projectInspection);
+    player.addActionThisGeneration(viron.name);
+
+    // Need another action that Project Inspection can play. This creates the conditions
+    // which caused a recursive call stack problem.
+    const inventorsGuild = new InventorsGuild();
+    player.playedCards.push(inventorsGuild);
+    player.addActionThisGeneration(inventorsGuild.name);
+
+    const selectProjectCardToPlay = cast(card.action(player), SelectProjectCardToPlay);
+    player.addActionThisGeneration(card.name); // This is played after `action` as it matches code behavior.
+    expect(selectProjectCardToPlay.cards.map((c) => c.name)).deep.eq([projectInspection.name]);
+
+    const playAction = selectProjectCardToPlay.cb(projectInspection, Payment.EMPTY);
+    expect(playAction).is.undefined;
+    runAllActions(game);
+    const selectAction = cast(player.popWaitingFor(), SelectCard);
+    // It might be a bug that odyssey is replayable, but that's what you get when you bend the rules.
+    expect(selectAction.cards.map((c) => c.name)).deep.eq([card.name, inventorsGuild.name]);
   });
 });

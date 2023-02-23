@@ -20,10 +20,16 @@ body {
     margin-bottom: 25px;
 }
 
-.game_end_go_home {
+.game_end_navigation {
     font-size: 30px;
-    text-align: center;
     margin: 40px 0;
+    display: flex;
+    justify-content: center;
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+    }
 
     button {
         margin-right: 10px;

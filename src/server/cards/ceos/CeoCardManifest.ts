@@ -4,7 +4,7 @@ import {ModuleManifest} from '../ModuleManifest';
 import {Apollo} from './Apollo';
 import {Asimov} from './Asimov';
 import {Bjorn} from './Bjorn';
-// import {Caesar} from './Caesar';
+import {Caesar} from './Caesar';
 import {Clarke} from './Clarke';
 import {Duncan} from './Duncan';
 import {Ender} from './Ender';
@@ -15,8 +15,8 @@ import {Floyd} from './Floyd';
 // import {Greta} from './Greta';
 import {HAL9000} from './HAL9000';
 // import {Huan} from './Huan';
-// import {Ingrid} from './Ingrid';
-// import {Jansson} from './Jansson';
+import {Ingrid} from './Ingrid';
+import {Jansson} from './Jansson';
 import {Karen} from './Karen';
 import {Lowell} from './Lowell';
 // import {Maria} from './Maria';
@@ -44,7 +44,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.APOLLO]: {Factory: Apollo, compatibility: 'moon'},
     [CardName.ASIMOV]: {Factory: Asimov},
     [CardName.BJORN]: {Factory: Bjorn},
-    // [CardName.CAESAR]: {Factory: Caesar, compatibility: 'ares'},
+    [CardName.CAESAR]: {Factory: Caesar, compatibility: 'ares'},
     [CardName.CLARKE]: {Factory: Clarke},
     [CardName.DUNCAN]: {Factory: Duncan},
     [CardName.ENDER]: {Factory: Ender},
@@ -55,8 +55,8 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     // [CardName.GRETA]: {Factory: Greta},
     [CardName.HAL9000]: {Factory: HAL9000},
     // [CardName.HUAN]: {Factory: Huan, compatibility: 'colonies'},
-    // [CardName.INGRID]: {Factory: Ingrid},
-    // [CardName.JANSSON]: {Factory: Jansson},
+    [CardName.INGRID]: {Factory: Ingrid},
+    [CardName.JANSSON]: {Factory: Jansson},
     [CardName.KAREN]: {Factory: Karen, compatibility: 'prelude'},
     // TODO(dl): Why is Lowell limited to Prelude?
     [CardName.LOWELL]: {Factory: Lowell, compatibility: 'prelude'},

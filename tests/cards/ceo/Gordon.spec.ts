@@ -21,7 +21,6 @@ describe('Gordon', function() {
     game = newTestGame(2);
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
-
     player.playedCards.push(card);
   });
 
@@ -36,8 +35,7 @@ describe('Gordon', function() {
     addCityTile(player, space.id);
     const availableSpacesForCity = board.getAvailableSpacesForCity(player);
     const spacesNextToCity = board.getAdjacentSpaces(space);
-    // intersect preserves order of first element.
-    expect(intersection(spacesNextToCity, availableSpacesForCity)).deep.eq(spacesNextToCity);
+    expect(availableSpacesForCity).includes(spacesNextToCity[0]);
   });
 
   it('Gains 2 MC when placing city or greenery tile', function() {

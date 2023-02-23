@@ -29,8 +29,11 @@ export class Oscar extends CeoCard {
   }
 
   public override canAct(player: Player): boolean {
+    if (!super.canAct(player)) {
+      return false;
+    }
     const turmoil = Turmoil.getTurmoil(player.game);
-    return turmoil.hasDelegatesInReserve(player.id) && this.isDisabled === false;
+    return turmoil.hasDelegatesInReserve(player.id) && turmoil.chairman !== player.id;
   }
 
   public action(player: Player): PlayerInput | undefined {

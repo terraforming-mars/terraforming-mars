@@ -9,7 +9,7 @@ import {Turmoil} from '../../turmoil/Turmoil';
 export class Oscar extends CeoCard {
   constructor() {
     super({
-      name: CardName.CLARKE,
+      name: CardName.OSCAR,
       metadata: {
         cardNumber: 'L15',
         renderData: CardRenderer.builder((b) => {

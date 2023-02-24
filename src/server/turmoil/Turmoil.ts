@@ -82,7 +82,8 @@ export class Turmoil {
     game.getPlayersInGenerationOrder().forEach((player) => {
       turmoil.delegateReserve.add(player.id, DELEGATES_PER_PLAYER);
     });
-    turmoil.delegateReserve.add('NEUTRAL', DELEGATES_FOR_NEUTRAL_PLAYER);
+    // One Neutral delegate is already Chairman
+    turmoil.delegateReserve.add('NEUTRAL', DELEGATES_FOR_NEUTRAL_PLAYER - 1);
 
     turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties);
     // Note: this call relies on an instance of Game that will not be fully formed.

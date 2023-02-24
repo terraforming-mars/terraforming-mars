@@ -7,6 +7,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 
 import {Oscar} from '../../../src/server/cards/ceos/Oscar';
 import {Politician} from '../../../src/server/awards/terraCimmeria/Politician';
+import {TempestConsultancy} from '../../../src/server/cards/moon/TempestConsultancy';
 
 describe('Oscar', function() {
   let card: Oscar;
@@ -53,6 +54,21 @@ describe('Oscar', function() {
     expect(card.canAct(player)).is.false;
   });
 
+  it('OPG does not gain TR', function() {
+    const tr = player.getTerraformRating();
+    card.action(player);
+    turmoil.chairman = player.id;
+    expect(player.getTerraformRating()).is.eq(tr);
+  });
+
+  it('OPG gains 1 TR with Tempest Consultancy', function() {
+    const tempcons = new TempestConsultancy();
+    player.playCorporationCard(tempcons);
+    const tr = player.getTerraformRating();
+    card.action(player);
+    turmoil.chairman = player.id;
+    expect(player.getTerraformRating()).is.eq(tr+1);
+  });
 
   it('OPG Counts for POLITICAN Award', function() {
     const politician = new Politician();

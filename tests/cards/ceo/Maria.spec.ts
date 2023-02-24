@@ -48,7 +48,8 @@ describe('Maria', function() {
     const selectColony = cast(card.action(player), SelectColony);
     expect(selectColony.colonies[0].name).eq('Titan');
     selectColony.cb(selectColony.colonies[0]); // 0 is Titan
-    expect(game.colonies[game.colonies.length-1].isActive).eq(false);
+    expect(game.colonies[0].name).eq('Titan');
+    expect(game.colonies[0].isActive).eq(false);
   });
 
   it('Takes action, chooses Colony and gets the benefit', function() {
@@ -59,9 +60,9 @@ describe('Maria', function() {
     const selectColony = cast(card.action(player), SelectColony);
     expect(selectColony.colonies[0].name).eq('Titan');
     selectColony.cb(selectColony.colonies[0]); // 0 is Titan
-    expect(game.colonies[game.colonies.length-1].name).eq('Titan');
-    expect(game.colonies[game.colonies.length-1].isActive).eq(false);
+    expect(game.colonies[0].name).eq('Titan');
+    expect(game.colonies[0].isActive).eq(false);
     player.playCard(aerialmappers);
-    expect(game.colonies[game.colonies.length-1].isActive).eq(true);
+    expect(game.colonies[0].isActive).eq(true);
   });
 });

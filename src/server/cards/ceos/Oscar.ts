@@ -38,15 +38,7 @@ export class Oscar extends CeoCard {
 
   public action(player: Player): PlayerInput | undefined {
     const turmoil = Turmoil.getTurmoil(player.game);
-    // This action does not grant TR, so we dont use turmoil.setNewChairman()
-    turmoil.delegateReserve.remove(player.id);
-    turmoil.chairman = player.id;
-    player.game.log('${0} is the new chairman.', (b) => b.player(player));
-
-    // TEMPEST_CONSULTANCY gets 1TR every time they become the chairman
-    if (player.isCorporation(CardName.TEMPEST_CONSULTANCY)) {
-      player.increaseTerraformRatingSteps(1, {log: true});
-    }
+    turmoil.setNewChairman(player.id, player.game, /* setAgenda*/false, /* gainTR*/false);
 
     // Increase totalDelegatesPlaced manually since we're not using SendDeletageToArea()
     // If we dont do this player will not get the bonus for POLITICAN Awards

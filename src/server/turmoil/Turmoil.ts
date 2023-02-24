@@ -272,11 +272,6 @@ export class Turmoil {
     // Cleanup previous party effects
     game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
 
-    // Change the chairman
-    if (this.chairman) {
-      this.delegateReserve.add(this.chairman);
-    }
-
     const newChariman = this.rulingParty.partyLeader || 'NEUTRAL';
 
     // Fill the delegate reserve with everyone except the party leader
@@ -287,7 +282,6 @@ export class Turmoil {
       this.delegateReserve.add(playerId, count);
     });
 
-
     // Clean the party
     this.rulingParty.partyLeader = undefined;
     this.rulingParty.delegates.clear();
@@ -295,23 +289,34 @@ export class Turmoil {
     this.setNewChairman(newChariman, game, /* setAgenda*/ true);
   }
 
-  public setNewChairman(newChairman : PlayerId | NeutralPlayer, game: Game, setAgenda: boolean = true) {
+  public setNewChairman(newChairman : PlayerId | NeutralPlayer, game: Game, setAgenda: boolean = true, gainTR: boolean = true) {
+    // Change the chairman
+    if (this.chairman) {
+      // Return the current Chairman to reserve
+      this.delegateReserve.add(this.chairman);
+    }
     this.chairman = newChairman;
+
+    // Set Agenda
     if (setAgenda) {
       PoliticalAgendas.setNextAgenda(this, game);
     }
 
-
-    // Finally, award Chairman TR
+    // Finally, award Chairman benefits
     if (this.chairman !== 'NEUTRAL') {
       const player = game.getPlayerById(this.chairman);
+      let steps = gainTR ? 1 : 0;
       // Tempest Consultancy Hook (gains an additional TR when they become chairman)
-      const steps = player.isCorporation(CardName.TEMPEST_CONSULTANCY) ? 2 : 1;
+      if (player.isCorporation(CardName.TEMPEST_CONSULTANCY)) steps += 1;
 
-      // Raise TR but after resolving the new policy
+      // Raise TR
       game.defer(new SimpleDeferredAction(player, () => {
-        player.increaseTerraformRatingSteps(steps);
-        game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(player).number(steps));
+        if (steps > 0) {
+          player.increaseTerraformRatingSteps(steps);
+          game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(player).number(steps));
+        } else {
+          game.log('${0} is the new chairman', (b) => b.player(player));
+        }
         return undefined;
       }));
     } else {

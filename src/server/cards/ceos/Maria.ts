@@ -6,7 +6,6 @@ import {CeoCard} from './CeoCard';
 
 import {IColony} from '../../colonies/IColony';
 import {SelectColony} from '../../inputs/SelectColony';
-import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class Maria extends CeoCard {
   constructor() {
@@ -40,8 +39,9 @@ export class Maria extends CeoCard {
         game.colonies.push(colony);
         game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
         game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
-        // this.checkActivation(colony, player);
-        if (colony.isActive) colony.addColony(player);
+        if (colony.isActive) {
+          colony.addColony(player);
+        }
       } else {
         throw new Error(`Colony ${colony.name} is not a discarded colony`);
       }
@@ -50,17 +50,4 @@ export class Maria extends CeoCard {
     });
     return selectColony;
   }
-
-  // private checkActivation(colony: IColony, player: Player): void {
-  //   const game = player.game;
-  //   if (colony.isActive) return;
-  //   for (const player of game.getPlayers()) {
-  //     for (const card of player.tableau) {
-  //       const active = ColoniesHandler.maybeActivateColony(colony, card);
-  //       if (active) {
-  //         return;
-  //       }
-  //     }
-  //   }
-  // }
 }

@@ -11,7 +11,7 @@ import {Ender} from './Ender';
 import {Faraday} from './Faraday';
 import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
-// import {Gordon} from './Gordon';
+import {Gordon} from './Gordon';
 // import {Greta} from './Greta';
 import {HAL9000} from './HAL9000';
 // import {Huan} from './Huan';
@@ -51,7 +51,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.FARADAY]: {Factory: Faraday},
     [CardName.FLOYD]: {Factory: Floyd},
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
-    // [CardName.GORDON]: {Factory: Gordon},
+    [CardName.GORDON]: {Factory: Gordon},
     // [CardName.GRETA]: {Factory: Greta},
     [CardName.HAL9000]: {Factory: HAL9000},
     // [CardName.HUAN]: {Factory: Huan, compatibility: 'colonies'},

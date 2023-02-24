@@ -16,6 +16,9 @@ export enum AltSecondaryTag {
   NO_PLANETARY_TAG = 'no_planetary_tag',
   WILD_RESOURCE = 'wild-resource',
 
+  // CEOs:
+  // used in Buck CEO
+  GREEN = 'green',
   // used in Faraday CEO
   DIVERSE = 'diverse',
 }

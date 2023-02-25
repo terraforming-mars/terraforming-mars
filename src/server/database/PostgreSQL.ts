@@ -4,7 +4,7 @@ import {GameOptions} from '../GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {Pool, ClientConfig} from 'pg';
-import {daysAgoToSeconds} from './utils.ts';
+import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
 
 export class PostgreSQL implements IDatabase {

@@ -1,11 +1,11 @@
 import {shallowMount} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 
-describe('Button', () => {
+describe('AppButton', () => {
   it('emits click event on click', async () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
     });
 
@@ -15,7 +15,7 @@ describe('Button', () => {
 
   it('renders title', () => {
     const title = 'test';
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
       propsData: {title},
     });
@@ -28,7 +28,7 @@ describe('Button', () => {
     const types = ['close', 'back', 'plus', 'minus'];
 
     types.forEach((type) => {
-      const wrapper = shallowMount(Button, {
+      const wrapper = shallowMount(AppButton, {
         localVue: getLocalVue(),
         propsData: {title, type},
       });
@@ -38,7 +38,7 @@ describe('Button', () => {
   });
 
   it('is disabled if disabled is passed', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
       propsData: {disabled: true},
     });
@@ -47,7 +47,7 @@ describe('Button', () => {
   });
 
   it('is not disabled if no disabled is passed', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
     });
 
@@ -58,7 +58,7 @@ describe('Button', () => {
   // (info: $root in vue app and $root in test environment are not the same)
 
   // it('is disabled if disableOnServerBusy is passed and server is busy', async () => {
-  //   const wrapper = shallowMount(Button, {
+  //   const wrapper = shallowMount(AppButton, {
   //     localVue: getLocalVue(),
   //     propsData: {disableOnServerBusy: true},
   //     mocks: {
@@ -70,7 +70,7 @@ describe('Button', () => {
   // });
 
   // it('is not disabled if disableOnServerBusy is passed and server is not busy', async () => {
-  //   const wrapper = shallowMount(Button, {
+  //   const wrapper = shallowMount(AppButton, {
   //     localVue: getLocalVue(),
   //     propsData: {disableOnServerBusy: true},
   //     mocks: {
@@ -87,7 +87,7 @@ describe('Button', () => {
    * Align classes
    */
   it('has float-left class if align left is passed', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
       propsData: {align: 'left'},
     });
@@ -96,7 +96,7 @@ describe('Button', () => {
   });
 
   it('has float-right class if align right is passed', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
       propsData: {align: 'right'},
     });
@@ -108,7 +108,7 @@ describe('Button', () => {
    * Size classes
    */
   it('has btn-tiny class if size tiny is passed', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
       propsData: {size: 'tiny'},
     });
@@ -117,7 +117,7 @@ describe('Button', () => {
   });
 
   it('has btn-sm class if size small is passed', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
       propsData: {size: 'small'},
     });
@@ -126,7 +126,7 @@ describe('Button', () => {
   });
 
   it('has btn-lg class if size big is passed', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(AppButton, {
       localVue: getLocalVue(),
       propsData: {size: 'big'},
     });
@@ -154,7 +154,7 @@ describe('Button', () => {
     ];
 
     types.forEach((type) => {
-      const wrapper = shallowMount(Button, {
+      const wrapper = shallowMount(AppButton, {
         localVue: getLocalVue(),
         propsData: {type},
       });
@@ -172,7 +172,7 @@ describe('Button', () => {
     ];
 
     iconTypes.forEach((iconType) => {
-      const wrapper = shallowMount(Button, {
+      const wrapper = shallowMount(AppButton, {
         localVue: getLocalVue(),
         propsData: {type: iconType},
       });

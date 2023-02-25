@@ -16,8 +16,8 @@
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <div v-if="showsave === true" class="nofloat">
-            <Button :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
-            <Button :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
+            <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
+            <AppButton :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
     </div>
 </template>
@@ -25,7 +25,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {Color} from '@/common/Color';
 import {Message} from '@/common/logs/Message';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
@@ -79,7 +79,7 @@ export default Vue.extend({
   },
   components: {
     Card,
-    Button,
+    AppButton,
   },
   watch: {
     cards() {

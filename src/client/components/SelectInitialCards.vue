@@ -24,7 +24,7 @@
       <label class="label label-error">{{ $t(warning) }}</label>
     </div>
     <!-- :key=warning is a way of validing that the state of the button should change. If the warning changes, or disappears, that's a signal that the button might change. -->
-    <Button :disabled="!valid" v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel"/>
+    <AppButton :disabled="!valid" v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel"/>
   </div>
 </template>
 
@@ -33,7 +33,7 @@
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {getCard, getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/common/constants';
@@ -89,7 +89,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   components: {
-    Button,
+    AppButton,
     SelectCard,
     'confirm-dialog': ConfirmDialog,
     Colony,

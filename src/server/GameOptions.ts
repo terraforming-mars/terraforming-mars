@@ -48,6 +48,7 @@ export type GameOptions = {
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
   customCeos: Array<CardName>;
+  startingCeos: number;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
@@ -99,6 +100,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   shuffleMapOption: false,
   solarPhaseOption: false,
   soloTR: false,
+  startingCeos: 3,
   startingCorporations: 2,
   turmoilExtension: false,
   undoOption: false,

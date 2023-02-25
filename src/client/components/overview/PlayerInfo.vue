@@ -8,7 +8,7 @@ import {playerColorClass} from '@/common/utils/utils';
 import {vueRoot} from '@/client/components/vueRoot';
 import {range} from '@/common/utils/utils';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 
@@ -42,7 +42,7 @@ export default Vue.extend({
     },
   },
   components: {
-    Button,
+    AppButton,
     PlayerResources,
     PlayerTags,
     'player-status': PlayerStatus,
@@ -61,7 +61,7 @@ export default Vue.extend({
       return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, true);
     },
     unpin(playerIndex: number) {
-      return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, true);
+      return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, false);
     },
     pinPlayer() {
       let hiddenPlayersIndexes: Array<Number> = [];
@@ -136,7 +136,7 @@ export default Vue.extend({
                 <div class="played-cards-count">{{numberOfPlayedCards()}}</div>
               </div>
             </div>
-            <Button class="played-cards-button" size="tiny" @click="togglePlayerDetails" :title="buttonLabel()" />
+            <AppButton class="played-cards-button" size="tiny" @click="togglePlayerDetails" :title="buttonLabel()" />
           </div>
           <div class="tag-display player-board-blue-action-counter" :class="tooltipCss" :data-tooltip="$t('The number of available actions on active cards')">
             <div class="tag-count tag-action-card">

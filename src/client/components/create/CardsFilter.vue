@@ -4,7 +4,7 @@
         <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
             <div class="cards-filter-result" v-for="cardName in selectedCardNames" v-bind:key="cardName">
                 <label>{{ cardName }}<i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i></label>
-                <Button size="small" type="close" @click="removeCard(cardName)" />
+                <AppButton size="small" type="close" @click="removeCard(cardName)" />
             </div>
         </div>
         <div class="cards-filter-input">
@@ -26,7 +26,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {CardName} from '@/common/cards/CardName';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
 
@@ -54,7 +54,9 @@ export default Vue.extend({
       searchTerm: '',
     };
   },
-  components: {Button},
+  components: {
+    AppButton,
+  },
   methods: {
     isPrelude(cardName: CardName) {
       return getCard(cardName)?.cardType === CardType.PRELUDE;

@@ -21,7 +21,7 @@
           <div class='debugid'>(debugid {{step}})</div>
         </div>
         <div class="card-panel" v-if="cardNames.length + globalEventNames.length + colonyNames.length > 0">
-          <Button size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
+          <AppButton size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
           <div id="log_panel_card" class="cardbox" v-for="cardName in cardNames.elements" :key="cardName">
             <Card :card="{name: cardName, resources: getResourcesOnCard(cardName)}"/>
           </div>
@@ -57,7 +57,7 @@ import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import {getGlobalEventModel} from '@/client/turmoil/ClientGlobalEventManifest';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {ParticipantId} from '@/common/Types';
@@ -152,7 +152,7 @@ export default Vue.extend({
     };
   },
   components: {
-    Button,
+    AppButton,
     Card,
     GlobalEvent,
     Colony,

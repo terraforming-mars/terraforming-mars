@@ -6,7 +6,7 @@ import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
 import {RunResult} from 'sqlite3';
-import {daysAgoToSeconds} from './utils.ts';
+import {daysAgoToSeconds} from './utils';
 import {MultiMap} from 'mnemonist';
 const path = require('path');
 const fs = require('fs');

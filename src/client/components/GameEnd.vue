@@ -35,11 +35,18 @@
                   </div>
               </div>
           </div>
-          <div class="game_end_go_home">
-              <a href=".">
-                  <Button size="big" type="back" />
-                  <span  v-i18n>Go to main page</span>
+          <div class="game_end_navigation">
+            <div>
+              <a href="new-game">
+                  <AppButton size="big" type="back" />
+                  <span v-i18n>Create New Game</span>
               </a>
+
+              <a href=".">
+                  <AppButton size="big" type="back" />
+                  <span v-i18n>Go to main page</span>
+              </a>
+            </div>
           </div>
           <div v-if="!isSoloGame() || game.isSoloModeWin" class="game-end-winer-announcement">
               <span v-for="p in getWinners()" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>
@@ -175,7 +182,7 @@ import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import VictoryPointChart from '@/client/components/gameend/VictoryPointChart.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {Timer} from '@/common/Timer';
@@ -230,7 +237,7 @@ export default Vue.extend({
   components: {
     'board': Board,
     'log-panel': LogPanel,
-    Button,
+    AppButton,
     MoonBoard,
     PlanetaryTracks,
     VictoryPointChart,

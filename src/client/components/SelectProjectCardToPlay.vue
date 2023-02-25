@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 
 import {Payment} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
@@ -76,7 +76,7 @@ export default Vue.extend({
   },
   components: {
     Card,
-    Button,
+    AppButton,
   },
   mounted() {
     Vue.nextTick(() => {
@@ -361,10 +361,10 @@ export default Vue.extend({
 
     <div class="payments_type input-group" v-if="canUseSteel()">
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
-      <Button type="minus" @click="reduceValue('steel', 1)" />
+      <AppButton type="minus" @click="reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <Button type="plus" @click="addValue('steel', 1, available.steel)" />
-      <Button type="max" @click="setMaxValue('steel', available.steel)" title="MAX" />
+      <AppButton type="plus" @click="addValue('steel', 1, available.steel)" />
+      <AppButton type="max" @click="setMaxValue('steel', available.steel)" title="MAX" />
     </div>
     <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
     (Some steel is unavailable here in reserve for the project card.)
@@ -372,10 +372,10 @@ export default Vue.extend({
 
     <div class="payments_type input-group" v-if="canUseTitanium() || canUseLunaTradeFederationTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
-      <Button type="minus" @click="reduceValue('titanium', 1)" />
+      <AppButton type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <Button type="plus" @click="addValue('titanium', 1, available.titanium)" />
-      <Button type="max" @click="setMaxValue('titanium', available.titanium)" title="MAX" />
+      <AppButton type="plus" @click="addValue('titanium', 1, available.titanium)" />
+      <AppButton type="max" @click="setMaxValue('titanium', available.titanium)" title="MAX" />
     </div>
     <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
     (Some titanium is unavailable here in reserve for the project card.)
@@ -383,10 +383,10 @@ export default Vue.extend({
 
     <div class="payments_type input-group" v-if="canUseHeat()">
       <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
-      <Button type="minus" @click="reduceValue('heat', 1)" />
+      <AppButton type="minus" @click="reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <Button type="plus" @click="addValue('heat', 1, available.heat)" />
-      <Button type="max" @click="setMaxValue('heat', available.heat)" title="MAX" />
+      <AppButton type="plus" @click="addValue('heat', 1, available.heat)" />
+      <AppButton type="max" @click="setMaxValue('heat', available.heat)" title="MAX" />
     </div>
     <div v-if="showReserveHeatWarning()" class="card-warning" v-i18n>
     (Some heat is unavailable here in reserve for the project card.)
@@ -394,41 +394,41 @@ export default Vue.extend({
 
     <div class="payments_type input-group" v-if="canUseMicrobes()">
       <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay by Microbes')"></i>
-      <Button type="minus" @click="reduceValue('microbes', 1)" />
+      <AppButton type="minus" @click="reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
-      <Button type="plus" @click="addValue('microbes', 1)" />
-      <Button type="max" @click="setMaxValue('microbes')" title="MAX" />
+      <AppButton type="plus" @click="addValue('microbes', 1)" />
+      <AppButton type="max" @click="setMaxValue('microbes')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseFloaters()">
       <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay by Floaters')"></i>
-      <Button type="minus" @click="reduceValue('floaters', 1)" />
+      <AppButton type="minus" @click="reduceValue('floaters', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
-      <Button type="plus" @click="addValue('floaters', 1)" />
-      <Button type="max" @click="setMaxValue('floaters')" title="MAX" />
+      <AppButton type="plus" @click="addValue('floaters', 1)" />
+      <AppButton type="max" @click="setMaxValue('floaters')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseScience()">
       <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science Resources')"></i>
-      <Button type="minus" @click="reduceValue('science', 1)" />
+      <AppButton type="minus" @click="reduceValue('science', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="science" />
-      <Button type="plus" @click="addValue('science', 1)" />
-      <Button type="max" @click="setMaxValue('science')" title="MAX" />
+      <AppButton type="plus" @click="addValue('science', 1)" />
+      <AppButton type="max" @click="setMaxValue('science')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseSeeds()">
       <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
-      <Button type="minus" @click="reduceValue('seeds', 1)" />
+      <AppButton type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
-      <Button type="plus" @click="addValue('seeds', 1)" />
-      <Button type="max" @click="setMaxValue('seeds')" title="MAX" />
+      <AppButton type="plus" @click="addValue('seeds', 1)" />
+      <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
-      <Button type="minus" @click="reduceValue('megaCredits', 1)" />
+      <AppButton type="minus" @click="reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
-      <Button type="plus" @click="addValue('megaCredits', 1)" />
+      <AppButton type="plus" @click="addValue('megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -436,7 +436,7 @@ export default Vue.extend({
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <Button size="big" @click="saveData" :title="playerinput.buttonLabel" data-test="save"/>
+      <AppButton size="big" @click="saveData" :title="playerinput.buttonLabel" data-test="save"/>
     </div>
   </section>
 </div>

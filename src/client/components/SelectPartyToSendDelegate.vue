@@ -8,13 +8,13 @@
           </label>
         </div>
         <div v-if="showsave === true" class="nofloat">
-            <Button @click="saveData" :title="playerinput.buttonLabel" />
+            <AppButton @click="saveData" :title="playerinput.buttonLabel" />
         </div>
     </div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import Party from '@/client/components/Party.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
@@ -41,7 +41,10 @@ export default Vue.extend({
       selectedParty: undefined as PartyName | undefined,
     };
   },
-  components: {Button, Party},
+  components: {
+    AppButton,
+    Party,
+  },
   methods: {
     saveData() {
       this.onsave({type: 'party', partyName: this.selectedParty});

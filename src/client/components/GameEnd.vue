@@ -38,12 +38,12 @@
           <div class="game_end_navigation">
             <div>
               <a href="new-game">
-                  <Button size="big" type="back" />
+                  <AppButton size="big" type="back" />
                   <span v-i18n>Create New Game</span>
               </a>
 
               <a href=".">
-                  <Button size="big" type="back" />
+                  <AppButton size="big" type="back" />
                   <span v-i18n>Go to main page</span>
               </a>
             </div>
@@ -182,7 +182,7 @@ import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import VictoryPointChart from '@/client/components/gameend/VictoryPointChart.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {Timer} from '@/common/Timer';
@@ -237,7 +237,7 @@ export default Vue.extend({
   components: {
     'board': Board,
     'log-panel': LogPanel,
-    Button,
+    AppButton,
     MoonBoard,
     PlanetaryTracks,
     VictoryPointChart,

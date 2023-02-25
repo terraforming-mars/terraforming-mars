@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -11,7 +11,7 @@ import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 export default Vue.extend({
   name: 'LoadGameForm',
   components: {
-    Button,
+    AppButton,
   },
   data() {
     return {
@@ -65,7 +65,7 @@ export default Vue.extend({
                   <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
                   <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
                   <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>
-                  <Button title="Load Game" size="big" type="success" @click="loadGame" />
+                  <AppButton title="Load Game" size="big" type="success" @click="loadGame" />
               </div>
           </div>
       </div>

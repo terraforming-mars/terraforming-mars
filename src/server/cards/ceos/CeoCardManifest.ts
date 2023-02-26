@@ -24,7 +24,7 @@ import {Musk} from './Musk';
 import {Naomi} from './Naomi';
 import {Neil} from './Neil';
 import {Oscar} from './Oscar';
-// import {Petra} from './Petra';
+import {Petra} from './Petra';
 import {Quill} from './Quill';
 import {Rogers} from './Rogers';
 import {Ryu} from './Ryu';
@@ -65,7 +65,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.NAOMI]: {Factory: Naomi, compatibility: 'colonies'},
     [CardName.NEIL]: {Factory: Neil, compatibility: 'moon'},
     [CardName.OSCAR]: {Factory: Oscar, compatibility: 'turmoil'},
-    // [CardName.PETRA]: {Factory: Petra, compatibility: 'turmoil'},
+    [CardName.PETRA]: {Factory: Petra, compatibility: 'turmoil'},
     [CardName.QUILL]: {Factory: Quill, compatibility: 'venus'},
     [CardName.ROGERS]: {Factory: Rogers, compatibility: 'venus'},
     [CardName.RYU]: {Factory: Ryu},

@@ -7,7 +7,7 @@ import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {vueRoot} from '@/client/components/vueRoot';
 import Card from '@/client/components/card/Card.vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
 
 export default Vue.extend({
@@ -21,7 +21,7 @@ export default Vue.extend({
     },
   },
   components: {
-    Button,
+    AppButton,
     'stacked-cards': StackedCards,
     Card,
   },
@@ -45,7 +45,7 @@ export default Vue.extend({
 </script>
 <template>
   <div v-show="isVisible()" class="other_player_cont menu">
-      <Button size="big" type="close" @click="hideMe" :disableOnServerBusy="false" align="right" />
+      <AppButton size="big" type="close" @click="hideMe" :disableOnServerBusy="false" align="right" />
       <div v-if="player.tableau.length > 0" class="player_home_block">
           <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
           <div>

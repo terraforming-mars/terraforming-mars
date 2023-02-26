@@ -10,7 +10,7 @@ import Vue from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
 
 export default Vue.extend({
-  name: 'Button',
+  name: 'AppButton',
   props: {
     title: {
       type: String,

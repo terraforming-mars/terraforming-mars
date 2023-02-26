@@ -3,6 +3,7 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
+import {DELEGATES_FOR_NEUTRAL_PLAYER} from '../../../common/constants';
 
 import {Turmoil} from '../../turmoil/Turmoil';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -30,23 +31,21 @@ export class Petra extends CeoCard {
   }
 
   public override canAct(player: Player): boolean {
+    if (!super.canAct(player)) {
+      return false;
+    }
     // We need to make sure that the player has enough delegates available to replace ALL neuts.
     //  including Chairman!
     const turmoil = player.game.turmoil;
     if (turmoil === undefined || this.isDisabled === true) return false;
-
-    let numNeutralDelegates = 0;
-    for (const party of turmoil.parties) {
-      numNeutralDelegates += party.delegates.count('NEUTRAL');
-    }
-    if (turmoil.chairman === 'NEUTRAL') numNeutralDelegates += 1;
-
+    const numNeutralDelegates = DELEGATES_FOR_NEUTRAL_PLAYER - turmoil.getAvailableDelegateCount('NEUTRAL');
     const playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player.id);
-
     return playerTotalDelegateCount >= numNeutralDelegates;
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
+
     const turmoil = player.game.turmoil as Turmoil;
 
     let count = 0; // How many delegates were swapped out
@@ -96,8 +95,6 @@ export class Petra extends CeoCard {
     if (turmoil.dominantParty.name !== previousDominantParty) {
       player.game.log('${0} is the new dominant party', (b) => b.string(turmoil.dominantParty.name));
     }
-
-    this.isDisabled = true;
     return undefined;
   }
 }

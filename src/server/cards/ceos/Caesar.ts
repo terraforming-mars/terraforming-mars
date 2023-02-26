@@ -35,6 +35,7 @@ export class Caesar extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     for (let i = 0; i < game.generation; i++) {
       game.defer(new PlaceHazardTile(player, TileType.EROSION_MILD));
@@ -51,7 +52,6 @@ export class Caesar extends CeoCard {
       return undefined;
     }));
 
-    this.isDisabled = true;
     return undefined;
   }
 }

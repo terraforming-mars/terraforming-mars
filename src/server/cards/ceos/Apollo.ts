@@ -27,9 +27,9 @@ export class Apollo extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const moonSpacesCount = MoonExpansion.spaces(player.game, undefined, {surfaceOnly: true}).length;
     player.addResource(Resources.MEGACREDITS, moonSpacesCount * 3, {log: true});
-    this.isDisabled = true;
     return undefined;
   }
 }

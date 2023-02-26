@@ -25,6 +25,7 @@ export class Will extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 2}));
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
     player.game.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: 1}));
@@ -32,7 +33,6 @@ export class Will extends CeoCard {
     player.game.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: 1}));
     player.game.defer(new AddResourcesToCard(player, undefined, {count: 1}));
 
-    this.isDisabled = true;
     return undefined;
   }
 }

@@ -26,6 +26,7 @@ export class Tate extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const tags = [...game.tags];
     inplaceRemove(tags, Tag.WILD);
@@ -39,7 +40,6 @@ export class Tate extends CeoCard {
       });
     });
 
-    this.isDisabled = true;
     return new OrOptions(...options);
   }
 }

@@ -24,6 +24,7 @@ export class HAL9000 extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     // For every Unit type, if it can be reduced one unit, do so, and give the player
     // 4 of that resource.
     for (const type of Units.keys) {
@@ -35,8 +36,6 @@ export class HAL9000 extends CeoCard {
         player.addUnits(adjustment, {log: true});
       }
     }
-
-    this.isDisabled = true;
     return undefined;
   }
 }

@@ -30,6 +30,7 @@ export class Stefan extends CeoCard {
 
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     return new SelectCard(
       'Sell patents',
       'Sell',
@@ -48,7 +49,6 @@ export class Stefan extends CeoCard {
         });
 
         player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
-        this.isDisabled = true;
         return undefined;
       }, {min: 0, max: player.cardsInHand.length},
     );

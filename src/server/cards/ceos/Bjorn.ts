@@ -23,6 +23,7 @@ export class Bjorn extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const targetPlayers = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
 
@@ -30,7 +31,6 @@ export class Bjorn extends CeoCard {
       target.stealResource(Resources.MEGACREDITS, game.generation, player);
     });
 
-    this.isDisabled = true;
     return undefined;
   }
 }

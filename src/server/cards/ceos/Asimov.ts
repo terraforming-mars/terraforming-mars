@@ -37,10 +37,11 @@ export class Asimov extends CeoCard {
       return false;
     }
     if (player.game.isSoloMode()) return false; // Awards are disabled in solo mode
-    return !player.game.allAwardsFunded() && this.isDisabled === false;
+    return !player.game.allAwardsFunded();
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const awardCount = Math.max(1, 10 - game.generation);
     const validAwards = this.getValidAwards(player);
@@ -54,7 +55,6 @@ export class Asimov extends CeoCard {
     freeAward.options.push(
       new SelectOption('Do nothing', 'Confirm', () => {
         game.log('${0} chose not to fund any award', (b) => b.player(player));
-        this.isDisabled = true;
         return undefined;
       }),
     );
@@ -78,7 +78,6 @@ export class Asimov extends CeoCard {
     return new SelectOption(title, 'Confirm', () => {
       player.game.awards.push(award);
       player.game.fundAward(player, award);
-      this.isDisabled = true;
       return undefined;
     });
   }

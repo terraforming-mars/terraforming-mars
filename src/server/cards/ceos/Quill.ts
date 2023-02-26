@@ -25,12 +25,12 @@ export class Quill extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const resourceCards = player.getResourceCards(CardResource.FLOATER);
     resourceCards.forEach((card) => player.addResourceTo(card, {qty: 2, log: true}));
 
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
 
-    this.isDisabled = true;
     return undefined;
   }
 }

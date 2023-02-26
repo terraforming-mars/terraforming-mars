@@ -24,6 +24,8 @@ export class Floyd extends CeoCard {
     });
   }
 
+  public opgActionIsActive = false;
+
   public override canAct(player: Player): boolean {
     if (!super.canAct(player)) {
       return false;
@@ -32,16 +34,18 @@ export class Floyd extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
+    this.opgActionIsActive = true;
     player.game.defer(new PlayProjectCard(player));
     player.game.defer(new SimpleDeferredAction(player, () => {
-      this.isDisabled = true;
       return undefined;
     }));
     return undefined;
   }
 
   public override getCardDiscount(player: Player) {
-    if (player.getActionsThisGeneration().has(this.name) && this.isDisabled === false) {
+    if (player.getActionsThisGeneration().has(this.name) && this.opgActionIsActive === true) {
+      this.opgActionIsActive = false;
       return 13 + 2 * player.game.generation;
     }
     return 0;

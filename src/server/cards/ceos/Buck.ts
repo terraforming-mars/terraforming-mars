@@ -34,6 +34,7 @@ export class Buck extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     return new SelectCard(
       'Select card to take back into hand',
       'Select',
@@ -41,7 +42,6 @@ export class Buck extends CeoCard {
       (foundCards: Array<IProjectCard>) => {
         const selectedCard = player.playedCards.splice(player.playedCards.indexOf(foundCards[0]), 1)[0];
         player.cardsInHand.push(selectedCard);
-        this.isDisabled = true;
         return undefined;
       },
     );

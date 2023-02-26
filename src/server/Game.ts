@@ -67,7 +67,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
-import {addDays, dayStringToDays} from './database/utils.ts';
+import {addDays, dayStringToDays} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
 
 export interface Score {
@@ -326,8 +326,7 @@ export class Game implements Logger {
           }
         }
         if (gameOptions.ceoExtension) {
-          // TODO: Replace this with i < gameOptions.startingCeos constants
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < gameOptions.startingCeos; i++) {
             const ceoCard = ceoDeck.draw(game);
             player.dealtCeoCards.push(ceoCard);
           }

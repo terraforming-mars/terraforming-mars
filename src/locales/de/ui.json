@@ -248,8 +248,10 @@
     "Select initial cards:": "Wähle Startkarten",
     "Select initial cards to buy": "Wähle zu kaufende Startkarten",
     "You haven't selected any project cards": "Du hast noch keine Projektkarten gewählt",
+    "Haven't spent enough": "Nicht genug bezahlt",
     
     "Select 2 Prelude cards": "Wähle 2 Präludium-Karten",
+    "Select 2 preludes": "Wähle 2 Präludium-Karten",
     "Select prelude card to play": "Wähle zu spielende Präludium-Karte",
     "Draw 3 Prelude cards, and play one of them": "Ziehe 3 Präludium-Karten und spiele eine davon",
 
@@ -355,6 +357,7 @@
     "Draw 3 cards and keep 2.": "Ziehe 3 Karten und behalte 2.",
     "Select 2 card(s) to keep": "Wähle 2 Karten zum Behalten",
     "Take first action of Celestic corporation": "Erste Aktion von Celestic",
+    "Place a community (player marker) on a non-reserved area": "Platziere einen Spielermarker auf einem nicht reservierten Gebiet",
     "Draw 2 cards with a floater icon on it": "Ziehe 2 Karten mit einem Schwebersymbol",
     "Draw 2 cards with a science tag": "Ziehe 2 Karten mit einem Wissenschaftssymbol",
     "Project Cards": "Projektkarten",
@@ -879,6 +882,7 @@
     "Select how to pay for milestone": "Wähle, wie du für den Meilenstein bezahlen möchtest",
     "Select how to pay for award": "Wähle, wie du für die Auszeichnung bezahlen möchtest",
     "Select how to pay for cards": "Wähle, wie du für die Karten bezahlen möchtest",
+    "Select how to pay for asteroid": "Wähle, wie du für den Asteriod bezahlen möchtest",
     "Select how to spend ${0} M€ for ${1} cards": "Wähle, wie du ${0} M€ für ${1} Karten bezahlen möchtest",
     "Select how to spend 3 M€ for 1 cards": "Wähle, wie du 3 M€ für 1 Karten bezahlen möchtest",
     "Select how to spend 6 M€ for 2 cards": "Wähle, wie du 6 M€ für 2 Karten bezahlen möchtest",

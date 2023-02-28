@@ -125,7 +125,7 @@ export abstract class Board {
     return this.getOceanSpaces(include).length;
   }
 
-  public getAvailableSpacesForType(player: Player, type: PlacementType) {
+  public getAvailableSpacesForType(player: Player, type: PlacementType): Array<ISpace> {
     switch (type) {
     case 'land': return this.getAvailableSpacesOnLand(player);
     case 'ocean': return this.getAvailableSpacesForOcean(player);
@@ -169,14 +169,19 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+    const spacesOnLand = this.getAvailableSpacesOnLand(player);
+    // Gordon CEO can ignore placement restrictions for Cities+Greenery
+    if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
     // A city cannot be adjacent to another city
-    return this.getAvailableSpacesOnLand(player).filter(
+    return spacesOnLand.filter(
       (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
     );
   }
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
     let spacesOnLand = this.getAvailableSpacesOnLand(player);
+    // Gordon CEO can ignore placement restrictions for Cities+Greenery
+    if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
     // Spaces next to Red City are always unavialable.
     if (player.game.gameOptions.pathfindersExpansion === true) {
       spacesOnLand = spacesOnLand.filter((space) => {

@@ -6,14 +6,14 @@
       <colony :colony="colony"></colony>
     </label>
     <div v-if="showsave === true" class="nofloat">
-      <Button @click="saveData" :title="playerinput.buttonLabel" :disabled="!canSave()"/>
+      <AppButton @click="saveData" :title="playerinput.buttonLabel" :disabled="!canSave()"/>
     </div>
   </div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
 import Colony from '@/client/components/colonies/Colony.vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {SelectColonyResponse} from '@/common/inputs/InputResponse';
 import {ColonyName} from '@/common/colonies/ColonyName';
@@ -45,7 +45,7 @@ export default Vue.extend({
   },
   components: {
     'colony': Colony,
-    Button,
+    AppButton,
   },
   methods: {
     canSave() {

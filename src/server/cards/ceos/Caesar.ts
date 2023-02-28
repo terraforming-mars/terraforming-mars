@@ -22,7 +22,7 @@ export class Caesar extends CeoCard {
           b.minus().production((pb) => pb.wild(1, {all})).asterix();
           b.br;
         }),
-        description: 'Once per game, place X hazard tiles. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.',
+        description: 'Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.',
       },
     });
   }
@@ -35,6 +35,7 @@ export class Caesar extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     for (let i = 0; i < game.generation; i++) {
       game.defer(new PlaceHazardTile(player, TileType.EROSION_MILD));
@@ -51,7 +52,6 @@ export class Caesar extends CeoCard {
       return undefined;
     }));
 
-    this.isDisabled = true;
     return undefined;
   }
 }

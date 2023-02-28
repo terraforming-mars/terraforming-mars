@@ -22,11 +22,11 @@ export class Ulrich extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const oceansPlaced = game.board.getOceanCount();
     const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
     player.addResource(Resources.MEGACREDITS, bonusCredits, {log: true});
-    this.isDisabled = true;
     return undefined;
   }
 }

@@ -34,6 +34,7 @@ export class Naomi extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const activeColonies = game.colonies.filter((colony) => colony.isActive);
 
@@ -49,7 +50,6 @@ export class Naomi extends CeoCard {
         }),
       )));
     });
-    this.isDisabled = true;
     return undefined;
   }
 }

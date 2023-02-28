@@ -36,6 +36,7 @@ export class Neil extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
       const lowestRate = Math.min(moonData.colonyRate, moonData.logisticRate, moonData.miningRate);
@@ -45,7 +46,6 @@ export class Neil extends CeoCard {
       }
     });
 
-    this.isDisabled = true;
     return undefined;
   }
 }

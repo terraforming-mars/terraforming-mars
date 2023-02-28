@@ -21,9 +21,9 @@ export class Clarke extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     player.addResource(Resources.PLANTS, player.production.plants + 4, {log: true});
     player.addResource(Resources.HEAT, player.production.heat + 4, {log: true});
-    this.isDisabled = true;
     return undefined;
   }
 }

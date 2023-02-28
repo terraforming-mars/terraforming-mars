@@ -36,7 +36,8 @@ export class Ingrid extends CeoCard {
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
     if (this.opgActionIsActive === false) return;
-    if (boardType !== BoardType.MARS || space.spaceType !== SpaceType.LAND) return;
+    // This filters for tiles only on mars (not moon), and includes Land+Oceans+'Coves'(landoceans)
+    if (boardType !== BoardType.MARS || space.spaceType === SpaceType.COLONY) return;
     if (cardOwner.id !== activePlayer.id) return;
     if (cardOwner.game.phase === Phase.SOLAR) return;
 

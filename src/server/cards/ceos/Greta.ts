@@ -17,7 +17,7 @@ export class Greta extends CeoCard {
           b.tr(1).colon().megacredits(4);
           b.br;
         }),
-        description: 'When you take an action or gain a track bonus that raises your terraform rating THIS GENERATION, gain 4 M€.',
+        description: 'When you take an action or play a card that increases your TR THIS GENERATION, gain 4 M€ for each step.',
       },
     });
   }

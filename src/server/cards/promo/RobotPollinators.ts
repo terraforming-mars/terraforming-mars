@@ -5,8 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {CardRequirements} from '../CardRequirements';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 
 export class RobotPollinators extends Card implements IProjectCard {
@@ -18,7 +16,7 @@ export class RobotPollinators extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.oxygen(4)),
       behavior: {
         production: {plants: 1},
-        stock: {titanium: 3},
+        stock: {plants: {tag: Tag.PLANT}},
       },
 
       metadata: {
@@ -29,10 +27,5 @@ export class RobotPollinators extends Card implements IProjectCard {
         description: 'Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResource(Resources.PLANTS, player.tags.count(Tag.PLANT), {log: true});
-    return undefined;
   }
 }

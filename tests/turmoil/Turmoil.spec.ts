@@ -35,6 +35,7 @@ import {DarksideMeteorBombardment} from '../../src/server/cards/moon/DarksideMet
 import {LunaStagingStation} from '../../src/server/cards/moon/LunaStagingStation';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
+import {CardName} from '../../src/common/cards/CardName';
 
 describe('Turmoil', function() {
   let player: TestPlayer;
@@ -197,8 +198,7 @@ describe('Turmoil', function() {
     const standardProjects = player.getStandardProjectOption();
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
-    expect(standardProjects.config.enabled![0]).to.eq(true);
-    expect(standardProjects.config.enabled!.slice(1)).to.not.contain(true);
+    expect(standardProjects.config.enabled).to.have.all.keys(CardName.POWER_PLANT_STANDARD_PROJECT);
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {

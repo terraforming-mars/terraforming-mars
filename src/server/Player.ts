@@ -1699,12 +1699,19 @@ export class Player {
   public getStandardProjectOption(): SelectCard<IStandardProjectCard> {
     const standardProjects: Array<IStandardProjectCard> = this.getStandardProjects();
 
+    const enabled: Set<CardName> = new Set();
+    for (const card of standardProjects) {
+      if (card.canAct(this)) {
+        enabled.add(card.name);
+      }
+    }
+
     return new SelectCard(
       'Standard projects',
       'Confirm',
       standardProjects,
       (card) => card[0].action(this),
-      {enabled: standardProjects.map((card) => card.canAct(this))},
+      {enabled},
     );
   }
 

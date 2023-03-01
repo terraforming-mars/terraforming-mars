@@ -32,10 +32,13 @@ export class Merger extends PreludeCard {
   public override bespokePlay(player: Player) {
     const game = player.game;
     const dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
-    const enabled = dealtCorps.map((corp) => {
-      return player.canAfford(Merger.mergerCost - corp.startingMegaCredits);
+    const enabled = new Set<CardName>();
+    dealtCorps.forEach((corp) => {
+      if (player.canAfford(Merger.mergerCost - corp.startingMegaCredits)) {
+        enabled.add(corp.name);
+      }
     });
-    if (enabled.some((v) => v === true) === false) {
+    if (enabled.size === 0) {
       game.log('None of the four drawn corporation cards are affordable.');
       dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
     }

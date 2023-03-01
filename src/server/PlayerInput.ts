@@ -32,11 +32,11 @@ export abstract class BasePlayerInput implements PlayerInput {
   }
 }
 
-export function getCardFromPlayerInput<T extends ICard>(cards: Array<T>, cardName: string): {card: T, idx: number} {
+export function getCardFromPlayerInput<T extends ICard>(cards: Array<T>, cardName: string): T {
   const idx = cards.findIndex((card) => card.name === cardName);
   if (idx === -1) {
     throw new Error(`Card ${cardName} not found`);
   }
   const card = cards[idx];
-  return {card, idx};
+  return card;
 }

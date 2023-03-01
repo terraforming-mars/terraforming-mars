@@ -6,9 +6,10 @@ import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, Player} from '../Player';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
+import {CardName} from '@/common/cards/CardName';
 
 export class SelectProjectCardToPlay extends BasePlayerInput {
-  public reserveUnits: Array<Units>;
+  public reserveUnits: Map<CardName, Units>;
 
   constructor(
     private player: Player,
@@ -19,8 +20,9 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     }) {
     super(PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY, 'Play project card');
     this.buttonLabel = 'Play card';
-    this.reserveUnits = this.cards.map((card) => {
-      return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;
+    this.reserveUnits = new Map();
+    this.cards.forEach((card) => {
+      this.reserveUnits.set(card.name, card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY);
     });
   }
 
@@ -31,9 +33,13 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     if (!isPayment(input.payment)) {
       throw new Error('payment is not a valid type');
     }
-    const cardData = getCardFromPlayerInput(this.cards, input.card);
-    const card: IProjectCard = cardData.card;
-    const reserveUnits = this.reserveUnits[cardData.idx];
+    const cardName = input.card;
+    const card = getCardFromPlayerInput(this.cards, cardName);
+    const reserveUnits = this.reserveUnits.get(cardName);
+    if (reserveUnits === undefined) {
+      throw new Error(`reserve units not found for ${cardName}`);
+    }
+
     // These are not used for safety but do help give a better error message
     // to the user
     if (reserveUnits.steel + input.payment.steel > this.player.steel) {

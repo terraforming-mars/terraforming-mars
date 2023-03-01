@@ -43,10 +43,6 @@ describe('Merger', function() {
     game.corporationDeck.drawPile = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
   });
 
-  function enabledMap(selectCard: SelectCard<ICorporationCard>): Array<[CardName, boolean]> {
-    return selectCard.cards.map((card, idx) => [card.name, selectCard.config.enabled![idx]]);
-  }
-
   it('Can play as long as have enough M€', function() {
     player.corporations.push(new BeginnerCorporation()); // Vestigial corporation
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
@@ -55,13 +51,13 @@ describe('Merger', function() {
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
 
-    expect(enabledMap(selectCorp)).to.have.deep.members(
+    expect(selectCorp.config.enabled).deep.eq(new Set(
       [
-        ['Arcadian Communities', true],
-        ['Saturn Systems', true],
-        ['Polyphemos', true],
-        ['Terralabs Research', true],
-      ]);
+        'Arcadian Communities',
+        'Saturn Systems',
+        'Polyphemos',
+        'Terralabs Research',
+      ]));
   });
 
   it('Excludes corps that player cannot afford', function() {
@@ -70,13 +66,12 @@ describe('Merger', function() {
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
-    expect(enabledMap(selectCorp)).to.have.deep.members(
+    expect(selectCorp.config.enabled).deep.eq(new Set(
       [
-        ['Arcadian Communities', true],
-        ['Saturn Systems', true],
-        ['Polyphemos', true],
-        ['Terralabs Research', false],
-      ]);
+        'Arcadian Communities',
+        'Saturn Systems',
+        'Polyphemos',
+      ]));
   });
 
   it('Can play as long as have enough M€', function() {

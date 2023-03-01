@@ -56,17 +56,17 @@ describe('SelectCard', function() {
       'Save',
       [aquiferPumping, roboticWorkforce, ioMiningIndustries],
       cb,
-      {enabled: [true, false, true]},
+      {enabled: new Set<CardName>([aquiferPumping.name, ioMiningIndustries.name])},
     );
 
     selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING]});
     expect(selected).deep.eq([aquiferPumping]);
 
-    selectCards.process({type: 'card', cards: [CardName.IO_MINING_INDUSTRIES]});
-    expect(selected).deep.eq([ioMiningIndustries]);
-
     expect(() => selectCards.process({type: 'card', cards: [CardName.ROBOTIC_WORKFORCE]}))
       .to.throw(Error, /Robotic Workforce is not available/);
+
+    selectCards.process({type: 'card', cards: [CardName.IO_MINING_INDUSTRIES]});
+    expect(selected).deep.eq([ioMiningIndustries]);
   });
 });
 

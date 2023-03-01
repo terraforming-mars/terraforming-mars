@@ -281,7 +281,7 @@ export class Server {
       });
       playerInputModel.max = selectCard.config.max;
       playerInputModel.min = selectCard.config.min;
-      playerInputModel.showOnlyInLearnerMode = selectCard.config.enabled?.every((p: boolean) => p === false);
+      playerInputModel.showOnlyInLearnerMode = selectCard.config.enabled && selectCard.config.enabled.size === 0;
       playerInputModel.selectBlueCardAction = selectCard.config.selectBlueCardAction;
       playerInputModel.showOwner = selectCard.config.showOwner === true;
       break;
@@ -361,11 +361,11 @@ export class Server {
     options: {
       showResources?: boolean,
       showCalculatedCost?: boolean,
-      reserveUnits?: Array<Units>,
-      enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
+      reserveUnits?: Map<CardName, Units>,
+      enabled?: Set<CardName>, // If provided, then cards not in this set are not selectable and grayed out
     } = {},
   ): Array<CardModel> {
-    return cards.map((card, index) => {
+    return cards.map((card) => {
       let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
 
       // Too bad this is hard-coded
@@ -376,7 +376,12 @@ export class Server {
         discount = [{tag: Tag.MARS, amount: player.tags.count(Tag.MARS)}];
       }
 
-      const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
+      let isDisabled: boolean;
+      if (isICorporationCard(card)) {
+        isDisabled = card.isDisabled || false;
+      } else {
+        isDisabled = options.enabled !== undefined && !options.enabled.has(card.name);
+      }
 
       const model: CardModel = {
         resources: options.showResources ? card.resourceCount : undefined,
@@ -385,7 +390,7 @@ export class Server {
         cardType: card.cardType,
         isDisabled: isDisabled,
         warning: card.warning,
-        reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
+        reserveUnits: options.reserveUnits?.get(card.name) ?? Units.EMPTY,
         bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
         discount: discount,
         cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,

@@ -473,6 +473,7 @@ export enum CardName {
     CORPORATE_ARCHIVES = 'Corporate Archives',
     DOUBLE_DOWN = 'Double Down',
     PSYCHE = '16 Psyche',
+    ROBOT_POLLINATORS = 'Robot Pollinators',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

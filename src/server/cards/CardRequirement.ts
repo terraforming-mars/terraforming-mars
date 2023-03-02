@@ -54,16 +54,16 @@ export class CardRequirement implements ICardRequirement {
       return this.satisfiesInequality(parties);
 
     case RequirementType.OCEANS:
-      return this.checkGlobalRequirement(player, GlobalParameter.OCEANS, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.OCEANS);
 
     case RequirementType.OXYGEN:
-      return this.checkGlobalRequirement(player, GlobalParameter.OXYGEN, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.OXYGEN);
 
     case RequirementType.TEMPERATURE:
-      return this.checkGlobalRequirement(player, GlobalParameter.TEMPERATURE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.TEMPERATURE);
 
     case RequirementType.VENUS:
-      return this.checkGlobalRequirement(player, GlobalParameter.VENUS, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.VENUS);
 
     case RequirementType.TR:
       return this.satisfiesInequality(player.getTerraformRating());
@@ -77,13 +77,13 @@ export class CardRequirement implements ICardRequirement {
       return this.satisfiesInequality(standardResources + nonStandardResources);
 
     case RequirementType.HABITAT_RATE:
-      return this.checkGlobalRequirement(player, GlobalParameter.MOON_HABITAT_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_HABITAT_RATE);
 
     case RequirementType.MINING_RATE:
-      return this.checkGlobalRequirement(player, GlobalParameter.MOON_MINING_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_MINING_RATE);
 
     case RequirementType.LOGISTIC_RATE:
-      return this.checkGlobalRequirement(player, GlobalParameter.MOON_LOGISTICS_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_LOGISTICS_RATE);
 
     case RequirementType.HABITAT_TILES:
       return this.satisfiesInequality(
@@ -104,7 +104,7 @@ export class CardRequirement implements ICardRequirement {
     }
   }
 
-  private checkGlobalRequirement(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
+  private checkGlobalRequirement(player: Player, parameter: GlobalParameter): boolean {
     let currentLevel: number;
     let playerRequirementsBonus = player.getRequirementsBonus(parameter);
 
@@ -140,10 +140,10 @@ export class CardRequirement implements ICardRequirement {
       return false;
     }
 
-    if (max) {
-      return currentLevel <= level + playerRequirementsBonus;
+    if (this.isMax) {
+      return currentLevel <= this.amount + playerRequirementsBonus;
     } else {
-      return currentLevel >= level - playerRequirementsBonus;
+      return currentLevel >= this.amount - playerRequirementsBonus;
     }
   }
 }

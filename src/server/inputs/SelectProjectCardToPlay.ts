@@ -6,7 +6,7 @@ import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, Player} from '../Player';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
-import {CardName} from '@/common/cards/CardName';
+import {CardName} from '../../common/cards/CardName';
 
 export class SelectProjectCardToPlay extends BasePlayerInput {
   public reserveUnits: Map<CardName, Units>;

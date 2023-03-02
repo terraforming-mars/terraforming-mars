@@ -21,7 +21,7 @@ import {ColonyDeserializer} from '../../src/server/colonies/ColonyDeserializer';
 
 function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   const options = cast(player.getStandardProjectOption(), SelectCard);
-  return options.config.enabled!.has(CardName.BUILD_COLONY_STANDARD_PROJECT);
+  return options.config.enabled.has(CardName.BUILD_COLONY_STANDARD_PROJECT);
 }
 
 function isTradeWithColonyActionAvailable(player: Player) {

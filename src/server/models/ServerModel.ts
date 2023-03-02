@@ -281,7 +281,7 @@ export class Server {
       });
       playerInputModel.max = selectCard.config.max;
       playerInputModel.min = selectCard.config.min;
-      playerInputModel.showOnlyInLearnerMode = selectCard.config.enabled && selectCard.config.enabled.size === 0;
+      playerInputModel.showOnlyInLearnerMode = selectCard.config.enabled.size === 0;
       playerInputModel.selectBlueCardAction = selectCard.config.selectBlueCardAction;
       playerInputModel.showOwner = selectCard.config.showOwner === true;
       break;
@@ -362,7 +362,7 @@ export class Server {
       showResources?: boolean,
       showCalculatedCost?: boolean,
       reserveUnits?: Map<CardName, Units>,
-      enabled?: Set<CardName>, // If provided, then cards not in this set are not selectable and grayed out
+      enabled?: Set<CardName>, // cards not in this set are not selectable and grayed out
     } = {},
   ): Array<CardModel> {
     return cards.map((card) => {

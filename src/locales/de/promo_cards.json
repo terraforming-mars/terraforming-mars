@@ -1,4 +1,7 @@
 {
+  "Robot Pollinators": "Roboter-Bestäuber",
+  "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Erfordet 4% Sauerstoffgehalt. Erhöhe deine Pflanzen-Produktion um 1. Erhalte 1 Pflanze für jedes Pflanzensymbol, das du hast.",
+  
   "16 Psyche": "16 Psyche",
   "Increase titanium production 2 steps. Gain 3 titanium.": "Erhöhe deine Titan-Produktion um 2. Erhalte 3 Titan.",
   
@@ -32,11 +35,11 @@
   "(Action: Remove 1 asteroid here to raise temperature 1 step.)": "(AKTION: Entferne 1 Asteroiden von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
 
   "Field-Capped City": "Schutzschild-Stadt",
-  "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)": "(Erhöhe deine M€-Produktion um 2, erhöhe deine Energie-Produktion um 1, erhalte 3 Pflanzen und platziere ein Stadtplättchen.)",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Erhöhe deine M€-Produktion um 2, erhöhe deine Energie-Produktion um 1, erhalte 3 Pflanzen und platziere ein Stadtplättchen.",
 
   "Magnetic Shield": "Magnetschild",
   "3 Power": "3 Energie",
-  "(Requires 3 power tags. Raise your TR 4 steps.)": "(Benötigt 3 eigene Energiesymbole. Erhöhe deinen TW um 4.)",
+  "Requires 3 power tags. Raise your TR 4 steps.": "Benötigt 3 eigene Energiesymbole. Erhöhe deinen TW um 4.",
 
   "Meltworks": "Schmelzwerk",
   "Action: Spend 5 heat to gain 3 steel.": "AKTION: Bezahle 5 Wärme und erhalte 3 Stahl.",
@@ -54,7 +57,7 @@
   "Gain 3 plants.": "Erhalte 3 Pflanzen.",
 
   "Imported Nutrients": "Importierte Nährstoffe",
-  "(Gain 4 plants and add 4 microbes to ANOTHER CARD.)": "(Erhalte 4 Pflanzen und füge einer ANDEREN KARTE 4 Mikroben hinzu.)",
+  "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Erhalte 4 Pflanzen und füge einer ANDEREN KARTE 4 Mikroben hinzu.",
 
   "Asteroid Deflection System": "Asteroiden-Abwehrsystem",
   "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)": "(AKTION: DECKE die oberste Karte des Stapels auf und WIRF SIE AB. Sollte sie ein Weltraumsymbol haben, füge dieser Karte einen Asteroiden hinzu.)",
@@ -62,7 +65,7 @@
   "(Decrease your energy production 1 step. 1VP per asteroid on this card.)": "(Senke deine Energie-Produktion um 1. 1 SP für jeden Asteroiden auf dieser Karte.)",
 
   "Jovian Embassy": "Jupiter-Botschaft",
-  "(Raise your TR 1 step.)": "(Erhöhe deine TW um 1.)",
+  "Raise your TR 1 step.": "Erhöhe deine TW um 1.",
 
   "Sub-Crust Measurements": "Unterirdische Messungen",
   "Action: Draw a card.": "AKTION: Ziehe eine Karte.",

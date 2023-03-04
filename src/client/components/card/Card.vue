@@ -105,7 +105,7 @@ export default Vue.extend({
       return this.isProjectCard() ? this.card.calculatedCost : undefined;
     },
     getCardType(): CardType {
-      return this.cardInstance.cardType;
+      return this.cardInstance.type;
     },
     getCardClasses(card: CardModel): string {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];

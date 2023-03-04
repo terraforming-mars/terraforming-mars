@@ -6,6 +6,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
 import {RequirementType} from '../../../src/common/cards/RequirementType';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
+import {CardType} from '../../../src/common/cards/CardType';
 
 describe('Celestic', function() {
   it('Should play', function() {
@@ -34,6 +35,7 @@ describe('Celestic', function() {
         // Only looking for cards that mention floaters in the metadata
         // or requirements. Cards with floater resources don't need to be hand-verified.
         if (card.resourceType === CardResource.FLOATER) return;
+        if (card.cardType === CardType.PROXY) return;
 
         const renderData = card.metadata.renderData;
         if (renderData === undefined) return;

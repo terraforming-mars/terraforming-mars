@@ -12,6 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all} from '../Options';
+import {SpecialDesignProxy} from './SpecialDesignProxy';
 
 export class Playwrights extends Card implements ICorporationCard {
   constructor() {
@@ -78,11 +79,13 @@ export class Playwrights extends Card implements ICorporationCard {
             afterPay: () => {
               player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
               player.removedFromPlayCards.push(selectedCard); // Remove card from the game
-              if (selectedCard.name === CardName.LAW_SUIT) {
+              if (selectedCard.name === CardName.SPECIAL_DESIGN) {
+                player.playedCards.push(new SpecialDesignProxy());
+              } else if (selectedCard.name === CardName.LAW_SUIT) {
                 /*
-                   * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
-                   * Needs to be deferred to happen after Law Suit's `play()` method.
-                   */
+                 * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
+                 * Needs to be deferred to happen after Law Suit's `play()` method.
+                 */
                 player.game.defer(new SimpleDeferredAction(player, () => {
                   player.game.getPlayers().some((p) => {
                     const card = p.playedCards[p.playedCards.length - 1];

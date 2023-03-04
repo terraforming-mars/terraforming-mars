@@ -27,7 +27,7 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
       startingMegaCredits: properties.startingMegacredits,
     });
   }
-  public override get cardType(): CardType.PRELUDE {
+  public override get type(): CardType.PRELUDE {
     return CardType.PRELUDE;
   }
 }

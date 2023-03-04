@@ -382,7 +382,7 @@ export class Server {
         resources: options.showResources ? card.resourceCount : undefined,
         name: card.name,
         calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
-        cardType: card.cardType,
+        cardType: card.type,
         isDisabled: isDisabled,
         warning: card.warning,
         reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,

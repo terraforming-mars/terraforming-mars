@@ -85,7 +85,7 @@ describe('MaxwellBase', function() {
       canPlay: () => true,
       play: () => undefined,
       getVictoryPoints: () => 0,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       metadata: {
         cardNumber: '1',
       },

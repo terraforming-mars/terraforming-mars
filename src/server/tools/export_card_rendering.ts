@@ -57,7 +57,7 @@ class ProjectCardProcessor {
       cardDiscount: card.cardDiscount,
       victoryPoints: card.victoryPoints,
       cost: card.cost,
-      cardType: card.cardType,
+      cardType: card.type,
       requirements: card.requirements,
       metadata: card.metadata,
       warning: card.warning,

@@ -7,8 +7,8 @@ export class Collector implements IMilestone {
   public readonly description = 'Have 3 sets of automated, active and event cards';
 
   public getScore(player: Player): number {
-    const numAutomatedCards = player.playedCards.filter((card) => card.cardType === CardType.AUTOMATED).length;
-    const numActiveCards = player.playedCards.filter((card) => card.cardType === CardType.ACTIVE).length;
+    const numAutomatedCards = player.playedCards.filter((card) => card.type === CardType.AUTOMATED).length;
+    const numActiveCards = player.playedCards.filter((card) => card.type === CardType.ACTIVE).length;
     const numEventCards = player.getPlayedEventsCount();
 
     return Math.min(numAutomatedCards, numActiveCards, numEventCards);

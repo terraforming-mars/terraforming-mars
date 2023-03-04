@@ -22,7 +22,7 @@ describe('MartianInsuranceGroup', function() {
   });
 
   it('when you play an event', function() {
-    const event = fakeCard({name: 'A' as CardName, cardType: CardType.EVENT});
+    const event = fakeCard({name: 'A' as CardName, type: CardType.EVENT});
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(0);
     player.playCard(event);
@@ -31,7 +31,7 @@ describe('MartianInsuranceGroup', function() {
   });
 
   it('when opponent plays an event', function() {
-    const event = fakeCard({name: 'A' as CardName, cardType: CardType.EVENT});
+    const event = fakeCard({name: 'A' as CardName, type: CardType.EVENT});
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(0);
     player2.playCard(event);

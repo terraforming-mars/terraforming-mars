@@ -13,7 +13,7 @@ export const PlayerMixin = {
       inCards: Array<CardModel>,
       cardTypes: Array<CardType>,
     ) {
-      const cards: Array<CardModel> = inCards.filter((card) => cardTypes.includes(card.cardType));
+      const cards: Array<CardModel> = inCards.filter((card) => cardTypes.includes(card.type));
       return cards.reverse();
     },
     isCardActivated(card: CardModel, player: PublicPlayerModel): boolean {

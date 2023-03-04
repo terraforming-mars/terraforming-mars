@@ -11,6 +11,7 @@ import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
+import { getCard } from '@/client/cards/ClientCardManifest';
 
 export default Vue.extend({
   name: 'PlayerInfo',
@@ -108,7 +109,7 @@ export default Vue.extend({
     },
     corporationCardName(): CardName | undefined {
       const card = this.player.tableau[0];
-      if (card?.cardType !== CardType.CORPORATION) return undefined;
+      if (getCard(card.name)?.cardType !== CardType.CORPORATION) return undefined;
       return card.name;
     },
   },

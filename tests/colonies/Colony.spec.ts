@@ -250,18 +250,18 @@ describe('Colony', function() {
   it('Should not let players build a colony if colony tile is full', function() {
     game.colonies = [luna]; // Only a single colony in this test to show that building on a full tile isn't possible.
     player.megaCredits = 17;
-    expect(luna.isColonyFull()).to.be.false;
+    expect(luna.isFull()).to.be.false;
 
     luna.addColony(player2);
-    expect(luna.isColonyFull()).to.be.false;
+    expect(luna.isFull()).to.be.false;
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
     luna.addColony(player3);
-    expect(luna.isColonyFull()).to.be.false;
+    expect(luna.isFull()).to.be.false;
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
     luna.addColony(player4);
-    expect(luna.isColonyFull()).to.be.true;
+    expect(luna.isFull()).to.be.true;
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 

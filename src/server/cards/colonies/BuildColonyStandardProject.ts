@@ -28,7 +28,7 @@ export class BuildColonyStandardProject extends StandardProjectCard {
   }
 
   private getOpenColonies(player: Player) {
-    let openColonies = player.game.colonies.filter((colony) => colony.colonies.length < 3 &&
+    let openColonies = player.game.colonies.filter((colony) => !colony.isFull() &&
       colony.colonies.includes(player.id) === false &&
       colony.isActive);
 

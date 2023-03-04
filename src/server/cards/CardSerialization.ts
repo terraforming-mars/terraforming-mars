@@ -1,6 +1,7 @@
 import {CardFinder} from '../CardFinder';
 import {SerializedCard} from '../SerializedCard';
 import {MiningCard} from './base/MiningCard';
+import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
@@ -25,6 +26,9 @@ export function serializeProjectCard(c: IProjectCard): SerializedCard {
   }
   if (isICloneTagCard(c)) {
     result.cloneTag = c.cloneTag;
+  }
+  if (isCeoCard(c)) {
+    result.isDisabled = c.isDisabled;
   }
   return result;
 }
@@ -56,6 +60,9 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
   }
   if (card instanceof MiningCard && element.bonusResource !== undefined) {
     card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+  }
+  if (isCeoCard(card)) {
+    card.isDisabled = element.isDisabled;
   }
   return card;
 }

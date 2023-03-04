@@ -11,7 +11,7 @@ import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
-import { getCard } from '@/client/cards/ClientCardManifest';
+import {getCard} from '@/client/cards/ClientCardManifest';
 
 export default Vue.extend({
   name: 'PlayerInfo',

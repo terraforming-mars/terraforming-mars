@@ -4,14 +4,15 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 
 export class AerospaceMission extends PreludeCard {
   constructor() {
     super({
       name: CardName.AEROSPACE_MISSION,
       tags: [Tag.SPACE],
-      startingMegacredits: -14,
+      behavior: {
+        stock: {megacredits: -14},
+      },
 
       metadata: {
         cardNumber: 'Y01',
@@ -29,7 +30,6 @@ export class AerospaceMission extends PreludeCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.deductResource(Resources.MEGACREDITS, 14);
     player.game.defer(new BuildColony(player, {title: 'Select where to build the first colony'}));
     player.game.defer(new BuildColony(player, {title: 'Select where to build the second colony'}));
     return undefined;

@@ -1,18 +1,15 @@
-import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 
 export class HydrogenBombardment extends PreludeCard {
   constructor() {
     super({
       name: CardName.HYDROGEN_BOMBARDMENT,
-      startingMegacredits: 6,
-
       behavior: {
         production: {titanium: 1},
         global: {venus: 1},
+        stock: {megacredits: 6},
       },
 
       metadata: {
@@ -25,10 +22,6 @@ export class HydrogenBombardment extends PreludeCard {
         description: 'Increase the Venus scale 1 step. Increase your titanium production 1 step. Gain 6 M€.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.addResource(Resources.MEGACREDITS, this.startingMegaCredits);
-    return undefined;
   }
 }
 

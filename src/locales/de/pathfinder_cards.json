@@ -99,7 +99,7 @@
   "(Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.)": "(Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Energie-Produktion um 2.)",
 
   "Huygens Observatory": "Huygens-Observatorium",
-  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that you used this generation already, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Errichte eine Kolonie - auch dort erlaubt, wo du bereits eine Kolonie hast. Handle kostenlos - du darfst dafür eine bereits genutzte Flotte verwenden. Erhöhe deinen TW um 1.)",
+  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Errichte eine Kolonie - auch dort erlaubt, wo du bereits eine Kolonie hast. Handle kostenlos - du darfst dafür eine bereits genutzte Flotte verwenden. Erhöhe deinen TW um 1. *)",
 
   "Hydrogen Processing Plant": "Wasserstoff-Verarbeitung",
   "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(Benötigt Sauerstoffgehalt von 3% oder mehr. Erhöhe deine Energie-Produktion um 1 je 2 Ozeanplättchen im Spiel. Senke den Sauerstoffgehalt um 1%)",
@@ -109,13 +109,13 @@
 
   "Kickstarter": "Kickstarter",
   "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "Wähle ein Planetensymbol. Diese Karte zählt als hätte sie dieses Symbol. Erhöhe die dazugehörige Planetenleiste um 3 Schritte insgesamt statt um 1.",
-  
+
   "Last Resort Ingenuity": "Improviationstalent",
   "The next card you play this generation can be paid for with steel or titanium despite its tags.": "(Du darfst die nächste Karte, die du spielst, auch mit Stahl und Titan bezahlen.)",
 
   "Lobby Halls": "Empfangshallen",
   "(Increase your M€ production 2 steps. Place 1 delegate in any party. Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.)": "(Erhöhe deine M€-Produktion um 2. Setzte 1 Deligierten in eine beliebige Partei. Wähle ein Planetensymbol. Diese Karte zählt als hätte sie dieses Symbol. Erhöhe die dazugehörige Planetenleiste um 1 Schritt.)",
-  
+
   "Lunar Embassy": "Mondbotschaft",
   "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "(Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reservierten Gebiet. Erhöhe deine Planzen-Produktion um 1 je 2 eigene Erdsymbole (einschließlich dieses). Erhöhe deine M€-Produktion um 3.)",
 
@@ -187,7 +187,7 @@
 
   "Red City": "Rote Stadt",
   "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.)": "(Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort. Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 2. PLatziere dieses Plättchen nicht angrenzend zu Grünflächenplättchen. Es dürfen keine Grünflächenplättchen angrenzend an dieses Plättchen platziert werden. 1 SP je angrenzendes leeres (oder Risko-) Feld.)",
-  
+
   "Return to Abandoned Technology": "Aufgegebene Ideen recyclen",
   "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "(Schaue die obersten 4 Karten des Ablagestapels an. Behalte 2 davon und wirf die anderen beiden ab.)",
 

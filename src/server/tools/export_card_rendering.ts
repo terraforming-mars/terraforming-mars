@@ -19,6 +19,7 @@ import {ALL_AWARDS} from '../awards/Awards';
 import {MilestoneAwardMetadata} from '../../common/ma/MilestoneAwardMetadata';
 import {AwardName} from '../../common/ma/AwardName';
 import {MilestoneName} from '../../common/ma/MilestoneName';
+import {CardType} from '../../common/cards/CardType';
 
 class ProjectCardProcessor {
   public static json: Array<ClientCard> = [];
@@ -39,6 +40,7 @@ class ProjectCardProcessor {
   }
 
   private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {
+    if (card.cardType === CardType.PROXY) return;
     let startingMegaCredits = undefined;
     let cardCost = undefined;
     if (isPreludeCard(card)) {

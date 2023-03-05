@@ -57,6 +57,13 @@ export class Executor implements BehaviorExecutor {
         if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city').length === 0) {
           return false;
         }
+      } else {
+        const space = player.game.board.getSpace(behavior.city.space);
+        if (space.player !== undefined) {
+          // The Space tile has already been played.
+          // Somehow (probably Buck) the Green Automation card has returned to a players hand.  We cannot allow this card to be replayed.
+          return false;
+        }
       }
     }
 

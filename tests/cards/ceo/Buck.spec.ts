@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {cast, forceGenerationEnd} from '../../TestingUtils';
 
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 

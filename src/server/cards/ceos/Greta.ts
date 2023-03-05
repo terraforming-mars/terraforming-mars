@@ -4,6 +4,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Resources} from '../../../common/Resources';
+import {Phase} from '../../../common/Phase';
 
 export class Greta extends CeoCard {
   constructor() {
@@ -30,9 +31,12 @@ export class Greta extends CeoCard {
     return undefined;
   }
 
-  public onTRIncrease(player: Player): undefined {
+  public onIncreaseTerraformRating(player: Player, cardOwner: Player, steps: number) {
+    const game = player.game;
     if (this.opgActionIsActive === true) {
-      player.addResource(Resources.MEGACREDITS, 4, {log: true});
+      if (player === cardOwner && game.phase === Phase.ACTION) {
+        player.addResource(Resources.MEGACREDITS, 4*steps, {log: true});
+      }
     }
     return undefined;
   }

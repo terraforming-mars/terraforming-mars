@@ -28,12 +28,12 @@ export class Maria extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     if (game.discardedColonies.length === 0) return undefined;
 
     const count = Math.min(game.discardedColonies.length, player.game.generation);
     const availableColonies = game.discardedColonies.slice(0, count);
-    availableColonies;
     const selectColony = new SelectColony('Select colony tile to add', 'Add colony tile', availableColonies, (colony: IColony) => {
       if (availableColonies.includes(colony)) {
         game.colonies.push(colony);
@@ -45,7 +45,6 @@ export class Maria extends CeoCard {
       } else {
         throw new Error(`Colony ${colony.name} is not a discarded colony`);
       }
-      this.isDisabled = true;
       return undefined;
     });
     return selectColony;

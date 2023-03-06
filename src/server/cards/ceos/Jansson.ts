@@ -19,13 +19,11 @@ export class Jansson extends CeoCard {
   }
 
   public action(player: Player): undefined {
+    this.isDisabled = true;
     const spaces = player.game.board.spaces.filter((space) => space.tile !== undefined && space.player === player);
     spaces.forEach((space) => {
       player.game.grantSpaceBonuses(player, space);
     });
-
-    this.isDisabled = true;
-
     return undefined;
   }
 }

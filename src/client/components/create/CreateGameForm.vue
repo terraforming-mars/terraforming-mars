@@ -401,7 +401,7 @@
                         </div>
 
                         <div class="create-game-action">
-                            <Button title="Create game" size="big" @click="createGame"/>
+                            <AppButton title="Create game" size="big" @click="createGame"/>
 
                             <label>
                                 <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
@@ -481,7 +481,7 @@ import {translateText, translateTextWithParams} from '@/client/directives/i18n';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
@@ -646,7 +646,7 @@ export default (Vue as WithRefs<Refs>).extend({
     };
   },
   components: {
-    Button,
+    AppButton,
     CardsFilter,
     ColoniesFilter,
     CorporationsFilter,

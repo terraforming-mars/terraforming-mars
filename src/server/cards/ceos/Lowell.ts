@@ -33,6 +33,7 @@ export class Lowell extends CeoCard {
 
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const cardsDrawn: Array<ICeoCard> = [
       game.ceoDeck.draw(game),
@@ -48,7 +49,6 @@ export class Lowell extends CeoCard {
     });
 
     player.game.defer(new SelectPaymentDeferred(player, 8, {title: 'Select how to pay for action'}));
-    this.isDisabled = true;
 
     return new SelectCard('Choose CEO card to play', 'Play', cardsDrawn, (([card]) => {
       const cardIndex = player.playedCards.findIndex((c) => c.name === this.name);

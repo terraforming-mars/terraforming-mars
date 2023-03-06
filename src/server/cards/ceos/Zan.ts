@@ -24,12 +24,12 @@ export class Zan extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
     while (turmoil.getAvailableDelegateCount(player.id) > 0) {
       turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     }
-    this.isDisabled = true;
     return undefined;
   }
 }

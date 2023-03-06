@@ -27,8 +27,8 @@ export class Duncan extends CeoCard {
   public generationUsed = -1;
 
   public action(player: Player): PlayerInput | undefined {
-    player.addResource(Resources.MEGACREDITS, 4 * player.game.generation, {log: true});
     this.isDisabled = true;
+    player.addResource(Resources.MEGACREDITS, 4 * player.game.generation, {log: true});
     this.generationUsed = player.game.generation;
     return undefined;
   }

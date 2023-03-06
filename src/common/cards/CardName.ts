@@ -473,6 +473,7 @@ export enum CardName {
     CORPORATE_ARCHIVES = 'Corporate Archives',
     DOUBLE_DOWN = 'Double Down',
     PSYCHE = '16 Psyche',
+    ROBOT_POLLINATORS = 'Robot Pollinators',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
@@ -496,6 +497,9 @@ export enum CardName {
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',
+
+    // For Playwright.
+    SPECIAL_DESIGN_PROXY = 'Special Design:proxy',
 
     // Ares expansion.
     BIOENGINEERING_ENCLOSURE = 'Bioengineering Enclosure',

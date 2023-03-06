@@ -19,7 +19,7 @@
     </div>
     <div v-if="showsave && selectedOption">
       <div style="margin: 5px 30px 10px" class="wf-action">
-        <Button :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
+        <AppButton :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -60,7 +60,7 @@ export default Vue.extend({
     },
   },
   components: {
-    Button,
+    AppButton,
   },
   data() {
     if (this.playerinput.options === undefined) {

@@ -4,16 +4,16 @@
     <div class="flex">
       <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
       &nbsp;
-      <Button size="big" type="max" @click="setMaxValue" title="MAX" />
+      <AppButton size="big" type="max" @click="setMaxValue" title="MAX" />
       &nbsp;
-      <Button v-if="showsave === true" size="big" @click="saveData" :title="playerinput.buttonLabel" />
+      <AppButton v-if="showsave === true" size="big" @click="saveData" :title="playerinput.buttonLabel" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {SelectAmountResponse} from '@/common/inputs/InputResponse';
 
@@ -25,7 +25,7 @@ interface DataModel {
 export default Vue.extend({
   name: 'SelectAmount',
   components: {
-    Button,
+    AppButton,
   },
   props: {
     playerinput: {

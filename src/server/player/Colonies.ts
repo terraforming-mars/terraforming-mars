@@ -3,7 +3,7 @@ import {CardName} from '../../common/cards/CardName';
 import {ColoniesHandler} from '../colonies/ColoniesHandler';
 import {AndOptions} from '../inputs/AndOptions';
 import {Player} from '../Player';
-import {ENERGY_TRADE_COST, MAX_COLONIES_PER_TILE, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../../common/constants';
+import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../../common/constants';
 import {IColony} from '../colonies/IColony';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Resources} from '../../common/Resources';
@@ -103,11 +103,8 @@ export class Colonies {
   }
 
   public getPlayableColonies(allowDuplicate: boolean = false) {
-    if (this.player.game.gameOptions.coloniesExtension === false) return [];
-
     return this.player.game.colonies
-      .filter((colony) => colony.isActive)
-      .filter((colony) => colony.colonies.length < MAX_COLONIES_PER_TILE)
+      .filter((colony) => colony.isActive && !colony.isFull())
       .filter((colony) => allowDuplicate || !colony.colonies.includes(this.player.id));
   }
 

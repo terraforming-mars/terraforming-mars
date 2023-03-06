@@ -5,7 +5,7 @@ import {PaymentWidgetMixin, SelectPaymentModel, Unit} from '@/client/mixins/Paym
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPaymentResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
@@ -33,7 +33,7 @@ export default Vue.extend({
     },
   },
   components: {
-    Button,
+    AppButton,
   },
   data(): SelectPaymentModel {
     return {
@@ -212,50 +212,50 @@ export default Vue.extend({
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
       <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay by Steel')"></i>
-      <Button type="minus" @click="reduceValue('steel', 1)" />
+      <AppButton type="minus" @click="reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <Button type="plus" @click="addValue('steel', 1)" />
-      <Button type="max" @click="setMaxValue('steel')" title="MAX" />
+      <AppButton type="plus" @click="addValue('steel', 1)" />
+      <AppButton type="max" @click="setMaxValue('steel')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseTitanium || canUseLunaTradeFederationTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
-      <Button type="minus" @click="reduceValue('titanium', 1)" />
+      <AppButton type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <Button type="plus" @click="addValue('titanium', 1)" />
-      <Button type="max" @click="setMaxValue('titanium')" title="MAX" />
+      <AppButton type="plus" @click="addValue('titanium', 1)" />
+      <AppButton type="max" @click="setMaxValue('titanium')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseHeat">
       <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
-      <Button type="minus" @click="reduceValue('heat', 1)" />
+      <AppButton type="minus" @click="reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <Button type="plus" @click="addValue('heat', 1)" />
-      <Button type="max" @click="setMaxValue('heat')" title="MAX" />
+      <AppButton type="plus" @click="addValue('heat', 1)" />
+      <AppButton type="max" @click="setMaxValue('heat')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSeeds">
       <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
-      <Button type="minus" @click="reduceValue('seeds', 1)" />
+      <AppButton type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
-      <Button type="plus" @click="addValue('seeds', 1)" />
-      <Button type="max" @click="setMaxValue('seeds')" title="MAX" />
+      <AppButton type="plus" @click="addValue('seeds', 1)" />
+      <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseData">
       <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay by Data')"></i>
-      <Button type="minus" @click="reduceValue('data', 1)" />
+      <AppButton type="minus" @click="reduceValue('data', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="data" />
-      <Button type="plus" @click="addValue('data', 1)" />
-      <Button type="max" @click="setMaxValue('data')" title="MAX" />
+      <AppButton type="plus" @click="addValue('data', 1)" />
+      <AppButton type="max" @click="setMaxValue('data')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
-      <Button type="minus" @click="reduceValue('megaCredits', 1)" />
+      <AppButton type="minus" @click="reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
-      <Button type="plus" @click="addValue('megaCredits', 1)" />
-      <Button type="max" @click="setMaxMCValue()" title="MAX" />
+      <AppButton type="plus" @click="addValue('megaCredits', 1)" />
+      <AppButton type="max" @click="setMaxMCValue()" title="MAX" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -263,7 +263,7 @@ export default Vue.extend({
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <Button size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
     </div>
 
   </section>

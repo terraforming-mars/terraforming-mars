@@ -29,9 +29,9 @@ export class Musk extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const eligibleCards = player.cardsInHand.filter((card) => card.tags.includes(Tag.EARTH));
-    this.isDisabled = true;
 
     if (eligibleCards.length === 0) {
       game.log('${0} has no Earth cards', (b) => b.player(player), {reservedFor: player});

@@ -40,6 +40,7 @@ export class Ryu extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const choices = new OrOptions();
 
     ALL_RESOURCES.filter((r) => this.productionIsDecreasable(player, r)).forEach((resourceToDecrease) => {
@@ -73,7 +74,6 @@ export class Ryu extends CeoCard {
       choices.options.push(selectOption);
     });
 
-    this.isDisabled = true;
     return choices;
   }
 

@@ -21,6 +21,7 @@ export class Karen extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const cardsDrawn: Array<IProjectCard> = [];
     const game = player.game;
     for (let i = 0; i < game.generation; i++) {
@@ -41,7 +42,6 @@ export class Karen extends CeoCard {
 
     return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
       if (card.canPlay === undefined || card.canPlay(player)) {
-        this.isDisabled = true;
         return player.playCard(card);
       } else {
         throw new Error('You cannot play this card');

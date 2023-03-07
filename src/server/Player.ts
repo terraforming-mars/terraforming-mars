@@ -277,7 +277,7 @@ export class Player {
         player.corporations.forEach((corp) => {
           corp.onIncreaseTerraformRating?.(this, player, steps);
         });
-        player.playedCards.filter((card: IProjectCard) => card.cardType === CardType.CEO).forEach((ceo) => {
+        player.playedCards.filter((card: IProjectCard) => card.type === CardType.CEO).forEach((ceo) => {
           ceo.onIncreaseTerraformRating?.(this, player, steps);
         });
       });

@@ -1,8 +1,6 @@
-import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 
 export class ResearchGrant extends PreludeCard {
@@ -13,8 +11,8 @@ export class ResearchGrant extends PreludeCard {
 
       behavior: {
         production: {energy: 1},
+        stock: {megacredits: 14},
       },
-      startingMegacredits: 14,
 
       metadata: {
         cardNumber: 'P08',
@@ -25,10 +23,6 @@ export class ResearchGrant extends PreludeCard {
         description: 'Increase your energy production 1 step. Gain 14 M€.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.addResource(Resources.MEGACREDITS, 14);
-    return undefined;
   }
 }
 

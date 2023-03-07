@@ -1,17 +1,15 @@
 import {IProjectCard} from '../IProjectCard';
 import {VictoryPoints} from '../ICard';
 import {IActionCard} from '../ICard';
-import {Player} from '../../Player';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {SelectCard} from '../../inputs/SelectCard';
 
-export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
+export class FloaterUrbanism extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -22,8 +20,14 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS, 4)),
       victoryPoints: VictoryPoints.resource(1, 1),
 
+      action: {
+        removeResourcesFromAnyCard: {type: CardResource.FLOATER, count: 1},
+        addResources: 1,
+        // 'Choose a card to move a floater to a Venusian habitat.',
+      },
+
       metadata: {
-        cardNumber: 'PfTMP',
+        cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 floater from any card and add 1 Venusian habitat on this card.', (ab) => {
             ab.floaters(1).startAction.venusianHabitat(1);
@@ -33,31 +37,5 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
         description: 'Requires 4 Venus tags.',
       },
     });
-  }
-
-
-  public canAct(player: Player) {
-    return player.getResourceCount(CardResource.FLOATER) > 0;
-  }
-
-  public action(player: Player) {
-    const cards = player.getCardsWithResources(CardResource.FLOATER);
-    const input = new SelectCard(
-      'Choose a card to move a floater to a Venusian habitat.',
-      'Choose',
-      cards,
-      (selected) => {
-        player.removeResourceFrom(selected[0], 1);
-        player.addResourceTo(this, {log: true});
-        return undefined;
-      });
-    if (cards.length === 0) {
-      return undefined;
-    }
-    if (cards.length === 1) {
-      input.cb(cards);
-      return undefined;
-    }
-    return input;
   }
 }

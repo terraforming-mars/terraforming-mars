@@ -31,12 +31,12 @@ describe('MartianZoo', function() {
 
   it('Can not act', function() {
     player.playedCards.push(card);
-    expect(card.canAct()).is.not.true;
+    expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act', function() {
     card.onCardPlayed(player, new LunaGovernor());
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
 
     card.action(player);
     expect(player.megaCredits).to.eq(2);

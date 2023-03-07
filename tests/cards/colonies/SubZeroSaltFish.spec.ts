@@ -3,6 +3,7 @@ import {SubZeroSaltFish} from '../../../src/server/cards/colonies/SubZeroSaltFis
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {runAllActions} from '../../TestingUtils';
 
 describe('SubZeroSaltFish', function() {
   let card: SubZeroSaltFish;
@@ -39,6 +40,7 @@ describe('SubZeroSaltFish', function() {
 
   it('Should act', function() {
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 });

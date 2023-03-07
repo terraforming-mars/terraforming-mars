@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
+import {runAllActions} from '../../TestingUtils';
 
 describe('Pollinators', function() {
   let card: Pollinators;
@@ -32,6 +33,7 @@ describe('Pollinators', function() {
   it('act', () => {
     expect(card.resourceCount).eq(0);
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).eq(1);
   });
 });

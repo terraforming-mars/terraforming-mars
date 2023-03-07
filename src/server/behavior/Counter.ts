@@ -96,6 +96,10 @@ export class Counter {
       }
     }
 
+    if (countable.resourcesHere !== undefined) {
+      sum += card.resourceCount;
+    }
+
     if (countable.moon !== undefined) {
       const moon = countable.moon;
       MoonExpansion.ifMoon(game, (moonData) => {

@@ -2,6 +2,8 @@ import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {runAllActions} from '../../TestingUtils';
 
 describe('RefugeeCamps', function() {
   let card: RefugeeCamps;
@@ -9,7 +11,8 @@ describe('RefugeeCamps', function() {
 
   beforeEach(function() {
     card = new RefugeeCamps();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Should play', function() {
@@ -28,6 +31,7 @@ describe('RefugeeCamps', function() {
   it('Should act', function() {
     expect(card.canAct(player)).is.true;
     card.action(player);
+    runAllActions(player.game);
     expect(card.resourceCount).to.eq(1);
   });
 });

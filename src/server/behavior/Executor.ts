@@ -59,7 +59,7 @@ export class Executor implements BehaviorExecutor {
       if (spend.energy && player.energy < spend.energy) {
         return false;
       }
-      if (spend.card && card.resourceCount < spend.card) {
+      if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
         return false;
       }
       if (spend.heat) {
@@ -107,6 +107,10 @@ export class Executor implements BehaviorExecutor {
           return false;
         }
       }
+    }
+
+    if (behavior.removeResourcesFromAnyCard !== undefined) {
+      throw new Error('not yet');
     }
 
     if (behavior.turmoil) {
@@ -172,8 +176,8 @@ export class Executor implements BehaviorExecutor {
       if (spend.heat) {
         throw new Error('Spending heat not supported yet.');
       }
-      if (spend.card) {
-        player.removeResourceFrom(card, spend.card);
+      if (spend.resourcesHere) {
+        player.removeResourceFrom(card, spend.resourcesHere);
       }
     }
 
@@ -243,6 +247,11 @@ export class Executor implements BehaviorExecutor {
         player.game.defer(new AddResourcesToCard(player, entry.type, {count: ctx.count(entry.count), restrictedTag: entry.tag}));
       }
     }
+
+    if (behavior.removeResourcesFromAnyCard !== undefined) {
+      throw new Error('not yet');
+    }
+
     if (behavior.decreaseAnyProduction !== undefined) {
       player.game.defer(new DecreaseAnyProduction(player, behavior.decreaseAnyProduction.type, {count: behavior.decreaseAnyProduction.count}));
     }

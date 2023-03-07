@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Psychrophiles} from '../../../src/server/cards/prelude/Psychrophiles';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {runAllActions} from '../../TestingUtils';
 
 describe('Psychrophiles', () => {
   let card: Psychrophiles;
@@ -31,7 +32,7 @@ describe('Psychrophiles', () => {
   });
 
   it('Can act', () => {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Should act', () => {
@@ -39,6 +40,7 @@ describe('Psychrophiles', () => {
     player.playedCards.push(card);
 
     card.action(player);
+    runAllActions(game);
     expect(player.getCardsWithResources()).has.lengthOf(1);
     expect(player.getSpendableMicrobes()).to.eq(1);
   });

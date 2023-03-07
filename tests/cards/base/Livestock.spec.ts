@@ -3,6 +3,7 @@ import {Livestock} from '../../../src/server/cards/base/Livestock';
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {runAllActions} from '../../TestingUtils';
 
 describe('Livestock', function() {
   let card: Livestock;
@@ -44,6 +45,7 @@ describe('Livestock', function() {
   it('Should act', function() {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 });

@@ -1,13 +1,12 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SpaceElevator extends Card implements IActionCard, IProjectCard {
+export class SpaceElevator extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -18,6 +17,11 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
       behavior: {
         production: {titanium: 1},
       },
+      action: {
+        spend: {steel: 1},
+        stock: {megacredits: 5},
+      },
+
       victoryPoints: 2,
 
       metadata: {
@@ -31,14 +35,5 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
         description: 'Increase your titanium production 1 step.',
       },
     });
-  }
-
-  public canAct(player: Player): boolean {
-    return player.steel > 0;
-  }
-  public action(player: Player) {
-    player.steel--;
-    player.megaCredits += 5;
-    return undefined;
   }
 }

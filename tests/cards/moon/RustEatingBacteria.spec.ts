@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RustEatingBacteria} from '../../../src/server/cards/moon/RustEatingBacteria';
 import {expect} from 'chai';
@@ -26,6 +26,7 @@ describe('RustEatingBacteria', () => {
     player.steel = 1;
     card.resourceCount = 0;
     card.action(player);
+    runAllActions(player.game);
     expect(card.resourceCount).eq(2);
     expect(player.steel).eq(0);
   });

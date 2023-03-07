@@ -1,4 +1,6 @@
 import {expect} from 'chai';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {runAllActions} from '../../TestingUtils';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -8,7 +10,8 @@ describe('Tardigrades', function() {
 
   beforeEach(function() {
     card = new Tardigrades();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Should play', function() {
@@ -21,6 +24,7 @@ describe('Tardigrades', function() {
   it('Should act', function() {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(player.game);
     expect(card.resourceCount).to.eq(1);
   });
 });

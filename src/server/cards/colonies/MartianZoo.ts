@@ -5,12 +5,11 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {all, played} from '../Options';
 
-export class MartianZoo extends Card implements IProjectCard {
+export class MartianZoo extends ActionCard implements IProjectCard {
   constructor() {
     super({
       cost: 12,
@@ -20,6 +19,11 @@ export class MartianZoo extends Card implements IProjectCard {
       resourceType: CardResource.ANIMAL,
       requirements: CardRequirements.builder((b) => b.cities(2, {all})),
       victoryPoints: 1,
+
+      action: {
+        stock: {megacredits: {resourcesHere: {}}},
+        // Shouldn't be playable when no resources are on the card?
+      },
 
       metadata: {
         cardNumber: 'C24',
@@ -45,14 +49,5 @@ export class MartianZoo extends Card implements IProjectCard {
     if (count > 0) {
       player.addResourceTo(this, count);
     }
-  }
-
-  public canAct(): boolean {
-    return this.resourceCount > 0;
-  }
-
-  public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, this.resourceCount, {log: true});
-    return undefined;
   }
 }

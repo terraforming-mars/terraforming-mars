@@ -1,10 +1,9 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class SmallAnimals extends Card implements IActionCard, IProjectCard {
+export class SmallAnimals extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -26,6 +25,10 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard {
 
       behavior: {
         decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+      },
+
+      action: {
+        addResources: 1,
       },
 
       metadata: {
@@ -43,13 +46,5 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard {
         },
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
   }
 }

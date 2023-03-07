@@ -45,25 +45,25 @@ describe('CommunicationCenter', function() {
     player.playedCards = [card];
     expect(card.resourceCount).eq(0);
 
-    player.onCardPlayed(fakeCard({cardType: CardType.ACTIVE}));
+    player.onCardPlayed(fakeCard({type: CardType.ACTIVE}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(fakeCard({cardType: CardType.AUTOMATED}));
+    player.onCardPlayed(fakeCard({type: CardType.AUTOMATED}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(fakeCard({cardType: CardType.CORPORATION}));
+    player.onCardPlayed(fakeCard({type: CardType.CORPORATION}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(fakeCard({cardType: CardType.PRELUDE}));
+    player.onCardPlayed(fakeCard({type: CardType.PRELUDE}));
     expect(card.resourceCount).eq(0);
 
-    player.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
+    player.onCardPlayed(fakeCard({type: CardType.EVENT}));
     expect(card.resourceCount).eq(1);
 
-    otherPlayer.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
+    otherPlayer.onCardPlayed(fakeCard({type: CardType.EVENT}));
     expect(card.resourceCount).eq(2);
 
     expect(player.cardsInHand).is.length(0);
     expect(otherPlayer.cardsInHand).is.length(0);
 
-    otherPlayer.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
+    otherPlayer.onCardPlayed(fakeCard({type: CardType.EVENT}));
 
     expect(card.resourceCount).eq(0);
     expect(player.cardsInHand).is.length(1);

@@ -18,5 +18,5 @@ export interface ICeoCard extends IProjectCard, Partial<IActionCard> {
 }
 
 export function isCeoCard(card: ICard): card is ICeoCard {
-  return card.cardType === CardType.CEO;
+  return card.type === CardType.CEO;
 }

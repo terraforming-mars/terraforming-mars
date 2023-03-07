@@ -77,9 +77,8 @@ export interface ICard {
      */
     onResourceAdded?: (player: Player, playedCard: ICard, count: number) => void;
 
-    /** Used with IProjectCard only, I think. */
-    cost?: number;
-    cardType: CardType;
+    cost?: number; /** Used with IProjectCard and PreludeCard. */
+    type: CardType;
     requirements?: CardRequirements;
     metadata: ICardMetadata;
     warning?: string | Message;

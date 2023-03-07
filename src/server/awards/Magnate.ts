@@ -8,6 +8,6 @@ export class Magnate implements IAward {
   public readonly description = 'Most automated cards in play (green cards)';
   public getScore(player: Player): number {
     return player.playedCards
-      .filter((card) => card.cardType === CardType.AUTOMATED).length;
+      .filter((card) => card.type === CardType.AUTOMATED).length;
   }
 }

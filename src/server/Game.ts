@@ -1484,7 +1484,7 @@ export class Game implements Logger {
   }
 
   public getCardsInHandByType(player: Player, cardType: CardType) {
-    return player.cardsInHand.filter((card) => card.cardType === cardType);
+    return player.cardsInHand.filter((card) => card.type === cardType);
   }
 
   public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: Player}) {

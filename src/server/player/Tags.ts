@@ -136,7 +136,7 @@ export class Tags {
     let tagCount = 0;
 
     this.player.tableau.forEach((card: IProjectCard | ICorporationCard) => {
-      if (!includeEventsTags && card.cardType === CardType.EVENT) return;
+      if (!includeEventsTags && card.type === CardType.EVENT) return;
       if (isICorporationCard(card) && card.isDisabled) return;
       tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
     });
@@ -195,7 +195,7 @@ export class Tags {
       }
     }
     for (const card of this.player.playedCards) {
-      if (card.cardType !== CardType.EVENT) {
+      if (card.type !== CardType.EVENT) {
         card.tags.forEach(addTag);
       }
     }

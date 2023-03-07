@@ -117,7 +117,7 @@ export class Playwrights extends Card implements ICorporationCard {
     try {
       player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
-          return card.cardType === CardType.EVENT &&
+          return card.type === CardType.EVENT &&
           // Can player.canPlay(card) replace this?
           player.canAfford(player.getCardCost(card), {
             reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),

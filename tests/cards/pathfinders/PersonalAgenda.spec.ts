@@ -25,7 +25,7 @@ describe('PersonalAgenda', function() {
 
     expect(player.cardsInHand).has.lengthOf(3);
     player.cardsInHand.forEach((card) => {
-      expect(card.cardType).eq(CardType.EVENT);
+      expect(card.type).eq(CardType.EVENT);
       expect(card.tags.indexOf(Tag.SPACE)).to.eq(-1);
     });
   });

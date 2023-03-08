@@ -32,7 +32,7 @@ export class Executor implements BehaviorExecutor {
     if (behavior.stock !== undefined) {
       // Only supporting positive values for now.
       if (Units.keys.some((key) => (behavior.stock?.[key] ?? 0) < 0)) {
-        throw new Error('Not supporting negative units for now.');
+        throw new Error('Not supporting negative units for now: ' + card.name);
       }
 
       // if (!player.hasUnits(behavior.stock)) {

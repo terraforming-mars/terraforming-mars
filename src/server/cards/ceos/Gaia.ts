@@ -35,8 +35,6 @@ export class Gaia extends CeoCard {
     const board = player.game.board;
     const allPlayers = player.game.getPlayers();
 
-    // Find all 
-
     allPlayers.forEach((p) => {
       board.spaces
         .filter((space) => space.player === p)
@@ -83,21 +81,21 @@ export class Gaia extends CeoCard {
     adjacentSpace.adjacency.bonus.forEach((bonus) => {
       bonuses.add(bonus);
       switch (bonus) {
-        case SpaceBonus.ANIMAL:
-          addResourceToCard(player, CardResource.ANIMAL, 'animal');
-          break;
-        case SpaceBonus.MEGACREDITS:
-          player.megaCredits++;
-          break;
-        case SpaceBonus.ENERGY:
-          player.energy++;
-          break;
-        case SpaceBonus.MICROBE:
-          addResourceToCard(player, CardResource.MICROBE, 'microbe');
-          break;
-        default:
-          player.game.grantSpaceBonus(player, bonus);
-          break;
+      case SpaceBonus.ANIMAL:
+        addResourceToCard(player, CardResource.ANIMAL, 'animal');
+        break;
+      case SpaceBonus.MEGACREDITS:
+        player.megaCredits++;
+        break;
+      case SpaceBonus.ENERGY:
+        player.energy++;
+        break;
+      case SpaceBonus.MICROBE:
+        addResourceToCard(player, CardResource.MICROBE, 'microbe');
+        break;
+      default:
+        player.game.grantSpaceBonus(player, bonus);
+        break;
       }
     });
 

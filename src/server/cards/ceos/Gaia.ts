@@ -3,17 +3,9 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
+import {SpaceType} from '../../../common/boards/SpaceType';
 
-import {CardResource} from '../../../common/CardResource';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {ISpace} from '../../boards/ISpace';
-import {ICard} from '../ICard';
-import {SelectCard} from '../../inputs/SelectCard';
-import {TileType} from '../../../common/TileType';
-
-import {MultiSet} from 'mnemonist';
-
+import {AresHandler} from '../../ares/AresHandler';
 
 export class Gaia extends CeoCard {
   constructor() {
@@ -32,79 +24,18 @@ export class Gaia extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-    const board = player.game.board;
-    const allPlayers = player.game.getPlayers();
-
-    allPlayers.forEach((p) => {
-      board.spaces
-        .filter((space) => space.player === p)
-        .forEach((space) => {
-          board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-            this.grantAdjacencyBonus(adjacentSpace, player);
-          });
-        });
-    });
-
     this.isDisabled = true;
-    return undefined;
-  }
-
-  public grantAdjacencyBonus(adjacentSpace: ISpace, player: Player) {
-    if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
-      return undefined;
-    }
-
-    const addResourceToCard = function(player: Player, resourceType: CardResource, resourceAsText: string) {
-      const availableCards = player.getResourceCards(resourceType);
-      if (availableCards.length === 0) {
-        return;
-      } else if (availableCards.length === 1) {
-        player.addResourceTo(availableCards[0], {log: true});
-      } else if (availableCards.length > 1) {
-        player.game.defer(new SimpleDeferredAction(
-          player,
-          () => new SelectCard(
-            'Select a card to add an ' + resourceAsText,
-            'Add ' + resourceAsText + 's',
-            availableCards,
-            (selected: ICard[]) => {
-              player.addResourceTo(selected[0], {log: true});
-              return undefined;
-            },
-          ),
-        ));
-      }
-    };
-
-    const bonuses = new MultiSet<SpaceBonus>();
-
-    adjacentSpace.adjacency.bonus.forEach((bonus) => {
-      bonuses.add(bonus);
-      switch (bonus) {
-      case SpaceBonus.ANIMAL:
-        addResourceToCard(player, CardResource.ANIMAL, 'animal');
-        break;
-      case SpaceBonus.MEGACREDITS:
-        player.megaCredits++;
-        break;
-      case SpaceBonus.ENERGY:
-        player.energy++;
-        break;
-      case SpaceBonus.MICROBE:
-        addResourceToCard(player, CardResource.MICROBE, 'microbe');
-        break;
-      default:
-        player.game.grantSpaceBonus(player, bonus);
-        break;
-      }
+    const board = player.game.board;
+    // For every tile placed on the board, grant all the adjacency bonuses for that tile.
+    // Owners and types of the tiles do not matter.  All the space needs a tile, including Ocean Tiles.
+    const tilesOnMars = board.spaces.filter((space) =>
+      space.tile?.tileType !== undefined && space.spaceType !== SpaceType.COLONY,
+    );
+    tilesOnMars.forEach((space) => {
+      AresHandler.ifAres(player.game, (aresData) => {
+        AresHandler.earnAdjacencyBonuses(aresData, player, space);
+      });
     });
-
-    const bonusText = Array.from(bonuses.multiplicities())
-      .map(([bonus, count]) => `${count} ${SpaceBonus.toString(bonus)}`)
-      .join(', ');
-    const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile.tileType) : 'no tile';
-    player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
-
     return undefined;
   }
 }

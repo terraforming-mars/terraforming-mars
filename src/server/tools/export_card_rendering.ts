@@ -40,7 +40,7 @@ class ProjectCardProcessor {
   }
 
   private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {
-    if (card.cardType === CardType.PROXY) return;
+    if (card.type === CardType.PROXY) return;
     let startingMegaCredits = undefined;
     let cardCost = undefined;
     if (isPreludeCard(card)) {
@@ -59,7 +59,7 @@ class ProjectCardProcessor {
       cardDiscount: card.cardDiscount,
       victoryPoints: card.victoryPoints,
       cost: card.cost,
-      cardType: card.cardType,
+      cardType: card.type,
       requirements: card.requirements,
       metadata: card.metadata,
       warning: card.warning,

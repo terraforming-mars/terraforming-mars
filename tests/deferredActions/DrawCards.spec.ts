@@ -45,7 +45,7 @@ describe('DrawCards', function() {
   it('draws 3 special', function() {
     DrawCards.keepAll(player, 3, {cardType: CardType.ACTIVE, tag: Tag.SPACE}).execute();
     expect(player.cardsInHand).has.length(3);
-    expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SPACE) && card.cardType === CardType.ACTIVE))
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SPACE) && card.type === CardType.ACTIVE))
       .has.length(3);
   });
 

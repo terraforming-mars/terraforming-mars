@@ -8,7 +8,7 @@ export class Adapter implements IAward {
 
   public getScore(player: Player): number {
     const validCards = player.playedCards.filter((card) => {
-      const isValidCardType = card.cardType !== CardType.EVENT;
+      const isValidCardType = card.type !== CardType.EVENT;
       const hasRequirements = card.requirements !== undefined;
 
       return isValidCardType && hasRequirements;

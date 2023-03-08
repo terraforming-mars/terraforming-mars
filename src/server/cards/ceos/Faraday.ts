@@ -56,7 +56,7 @@ export class Faraday extends CeoCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.length === 0 || card.cardType === CardType.EVENT || !player.canAfford(2)) return;
+    if (card.tags.length === 0 || card.type === CardType.EVENT || !player.canAfford(2)) return;
 
     const counts = this.countTags(player);
 

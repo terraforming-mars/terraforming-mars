@@ -9,7 +9,7 @@ import {Tag} from '../../src/common/cards/Tag';
 describe('Card', function() {
   it('pulls values for typical corporation', function() {
     const card = new Helion();
-    expect(card.cardType).to.eq(CardType.CORPORATION);
+    expect(card.type).to.eq(CardType.CORPORATION);
     expect(card.initialActionText).is.undefined;
     expect(card.startingMegaCredits).to.eq(42);
     expect(card.metadata).not.is.undefined;

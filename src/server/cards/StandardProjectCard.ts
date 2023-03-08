@@ -21,12 +21,12 @@ interface StaticStandardProjectCardProperties {
 export abstract class StandardProjectCard extends Card implements IActionCard, ICard {
   constructor(properties: StaticStandardProjectCardProperties) {
     super({
-      cardType: CardType.STANDARD_PROJECT,
+      type: CardType.STANDARD_PROJECT,
       ...properties,
     });
   }
 
-  public override get cardType(): CardType.STANDARD_PROJECT {
+  public override get type(): CardType.STANDARD_PROJECT {
     return CardType.STANDARD_PROJECT;
   }
 

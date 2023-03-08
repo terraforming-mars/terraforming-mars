@@ -14,7 +14,9 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     super({
       name: CardName.VALUABLE_GASES,
       tags: [Tag.JOVIAN, Tag.VENUS],
-      startingMegacredits: 6,
+      behavior: {
+        stock: {megacredits: 6},
+      },
 
       metadata: {
         cardNumber: 'Y06',
@@ -29,8 +31,6 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.megaCredits += 6;
-
     const playableCards = player.getPlayableCards().filter((card) => card.tags.includes(Tag.VENUS));
 
     if (playableCards.length > 0) {

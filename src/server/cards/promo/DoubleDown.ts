@@ -22,7 +22,7 @@ export class DoubleDown extends PreludeCard {
   }
 
   private cloneablePreludes(player: Player) {
-    return player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)
+    return player.playedCards.filter((card) => card.type === CardType.PRELUDE)
       .filter((card) => card.name !== this.name)
       .filter((card) => card.canPlay(player));
   }

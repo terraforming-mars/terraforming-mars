@@ -32,7 +32,7 @@ describe('Karen', function() {
     expect(selectCard.cards).has.length(1);
 
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(1);
+    expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(1);
   });
 
   it('Takes action in Generation 4', function() {
@@ -45,7 +45,7 @@ describe('Karen', function() {
     expect(selectCard.cards).has.length(4);
 
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(1);
+    expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(1);
   });
 
   it('Discards unplayable prelude cards', function() {
@@ -54,7 +54,7 @@ describe('Karen', function() {
 
     const action = card.action(player);
     expect(action).is.undefined;
-    expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(0);
+    expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(0);
   });
 
   it('Can only act once per game', function() {

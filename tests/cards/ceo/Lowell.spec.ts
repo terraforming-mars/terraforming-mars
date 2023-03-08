@@ -46,7 +46,7 @@ describe('Lowell', function() {
     game.deferredActions.runNext();
 
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.playedCards.filter((card) => card.cardType === CardType.CEO).length).eq(1);
+    expect(player.playedCards.filter((card) => card.type === CardType.CEO).length).eq(1);
     expect(player.playedCards.includes(card)).is.false;
     expect(player.megaCredits).eq(0);
   });

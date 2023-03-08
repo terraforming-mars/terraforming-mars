@@ -14,7 +14,7 @@ export class SpecialDesignProxy implements IProjectCard {
   public get name() {
     return CardName.SPECIAL_DESIGN_PROXY;
   }
-  public get cardType() {
+  public get type() {
     return CardType.PROXY;
   }
   public canPlay() {

@@ -63,7 +63,7 @@ export class PathfindersExpansion {
     });
 
     // Communication Center hook
-    if (card.cardType === CardType.EVENT) {
+    if (card.type === CardType.EVENT) {
       for (const p of player.game.getPlayers()) {
         for (const c of p.playedCards) {
           if (c.name === CardName.COMMUNICATION_CENTER) {

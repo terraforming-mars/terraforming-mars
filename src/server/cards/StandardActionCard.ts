@@ -14,12 +14,12 @@ interface StaticStandardActionCardProperties {
 export abstract class StandardActionCard extends Card implements IActionCard, ICard {
   constructor(properties: StaticStandardActionCardProperties) {
     super({
-      cardType: CardType.STANDARD_ACTION,
+      type: CardType.STANDARD_ACTION,
       ...properties,
     });
   }
 
-  public override get cardType(): CardType.STANDARD_ACTION {
+  public override get type(): CardType.STANDARD_ACTION {
     return CardType.STANDARD_ACTION;
   }
 

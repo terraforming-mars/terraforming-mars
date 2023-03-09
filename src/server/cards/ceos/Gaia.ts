@@ -14,8 +14,7 @@ export class Gaia extends CeoCard {
       metadata: {
         cardNumber: 'L32',
         renderData: CardRenderer.builder((b) => {
-          // b.opgArrow().colon().adjacencyBonus({all}).asterix();
-          b.opgArrow().colon().text('Adjacency Bonus').asterix();
+          b.opgArrow().colon().adjacencyBonus().asterix();
           b.br;
         }),
         description: 'Once per game, gain the Ares adjacency bonuses of all tiles placed on Mars.',

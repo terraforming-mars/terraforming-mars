@@ -589,6 +589,10 @@ abstract class Builder<T> {
   public hazardTile(amount: number = 1, options?: ItemOptions | undefined): Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.HAZARD_TILE, amount, options));
   }
+  public adjacencyBonus(): Builder<T> {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.ADJACENCY_BONUS));
+    return this;
+  }
 }
 
 class RootBuilder extends Builder<CardRenderRoot> {

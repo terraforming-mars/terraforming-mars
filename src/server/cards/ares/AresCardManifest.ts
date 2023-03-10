@@ -9,6 +9,7 @@ import {DesperateMeasures} from './DesperateMeasures';
 import {EcologicalSurvey} from './EcologicalSurvey';
 import {EcologicalZoneAres} from './EcologicalZoneAres';
 import {GeologicalSurvey} from './GeologicalSurvey';
+import {GreatDamAres} from './GreatDamAres';
 import {IndustrialCenterAres} from './IndustrialCenterAres';
 import {LavaFlowsAres} from './LavaFlowsAres';
 import {MarketingExperts} from './MarketingExperts';
@@ -37,6 +38,7 @@ export const ARES_CARD_MANIFEST = new ModuleManifest({
     [CardName.ECOLOGICAL_ZONE_ARES]: {Factory: EcologicalZoneAres},
     [CardName.GEOLOGICAL_SURVEY]: {Factory: GeologicalSurvey},
     [CardName.INDUSTRIAL_CENTER_ARES]: {Factory: IndustrialCenterAres},
+    [CardName.GREAT_DAM_ARES]: {Factory: GreatDamAres},
     [CardName.LAVA_FLOWS_ARES]: {Factory: LavaFlowsAres},
     [CardName.MARKETING_EXPERTS]: {Factory: MarketingExperts},
     [CardName.METALLIC_ASTEROID]: {Factory: MetallicAsteroid},

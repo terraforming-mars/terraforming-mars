@@ -171,6 +171,16 @@
   "Splice":"基因重组",
   "TACTICAL GENOMICS" :"策略基因学",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.":"你起始拥有44 M€。作为你的第一个行动，亮出牌堆顶的牌直至有微生物标志被亮出。获得那张带微生物标志的牌并弃置其余亮出的牌。",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.":"效果：当任何玩家打出1个微生物标志，包括本卡上的微生物标志，那名玩家获得2 M€，或放置1个微生物资源在那张卡上，而你获得2 M€。"
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.":"效果：当任何玩家打出1个微生物标志，包括本卡上的微生物标志，那名玩家获得2 M€，或放置1个微生物资源在那张卡上，而你获得2 M€。",
 
+
+  "Double Down": "双倍下注",
+  "Copy your other prelude's direct effect.": "复制你另外一张前序卡的打出效果",
+
+  "Corporate Archives": "公司档案馆",
+  "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "观看牌堆顶的7张牌。从中挑选2张，并弃置剩余的5张。",
+  "Gain 13 M€": "获得13M€",
+
+  "Merger": "企业合并",
+  "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "抽4张公司牌，选择1张打出，然后支付42M€。"
 }

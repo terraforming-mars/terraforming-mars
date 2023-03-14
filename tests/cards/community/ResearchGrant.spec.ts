@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ResearchGrant} from '../../../src/server/cards/community/ResearchGrant';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -8,7 +9,8 @@ describe('ResearchGrant', function() {
 
   beforeEach(function() {
     card = new ResearchGrant();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Should play', function() {

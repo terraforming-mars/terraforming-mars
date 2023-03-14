@@ -1,6 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -10,10 +9,10 @@ export class CorporateArchives extends PreludeCard {
     super({
       name: CardName.CORPORATE_ARCHIVES,
       tags: [Tag.SCIENCE],
-      startingMegacredits: 13,
 
       behavior: {
         drawCard: {count: 7, keep: 2},
+        stock: {megacredits: 13},
       },
 
       metadata: {
@@ -26,9 +25,5 @@ export class CorporateArchives extends PreludeCard {
         }),
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.megaCredits += this.startingMegaCredits;
-    return undefined;
   }
 }

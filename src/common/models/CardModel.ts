@@ -18,5 +18,4 @@ export interface CardModel {
     reserveUnits: Readonly<Units>; // Written for The Moon, but useful in other contexts.
     bonusResource?: Array<Resources>; // Used with the Mining cards and Robotic Workforce
     cloneTag?: Tag; // Used with Pathfinders
-    startingMegacredits?: number;
 }

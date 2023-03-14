@@ -21,6 +21,9 @@ export default Vue.extend({
     timer: {
       type: Object as () => TimerModel,
     },
+    live: {
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -33,9 +36,11 @@ export default Vue.extend({
   watch: {
     timerText: {
       handler() {
-        setTimeout(() => {
-          this.updateTimer();
-        }, 1000);
+        if (this.live) {
+          setTimeout(() => {
+            this.updateTimer();
+          }, 1000);
+        }
       },
     },
   },

@@ -293,7 +293,6 @@ import WaitingFor from '@/client/components/WaitingFor.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
-import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
@@ -310,6 +309,8 @@ import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
 import {nextTileView, TileView} from './board/TileView';
+import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
+import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 
 import * as raw_settings from '@/genfiles/settings.json';
 
@@ -368,6 +369,15 @@ export default Vue.extend({
       const playerView = this.playerView;
       return playerView.cardsInHand.length + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length;
     },
+    getCardsByType(): typeof getCardsByType {
+      return getCardsByType;
+    },
+    isCardActivated(): typeof isCardActivated {
+      return isCardActivated;
+    },
+    sortActiveCards(): typeof sortActiveCards {
+      return sortActiveCards;
+    },
   },
 
   components: {
@@ -389,9 +399,7 @@ export default Vue.extend({
     'stacked-cards': StackedCards,
     PurgeWarning,
   },
-  mixins: [PlayerMixin],
   methods: {
-    ...PlayerMixin.methods,
     navigatePage(event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {

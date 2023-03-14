@@ -109,7 +109,7 @@ export default Vue.extend({
     },
     corporationCardName(): CardName | undefined {
       const card = this.player.tableau[0];
-      if (getCard(card.name)?.cardType !== CardType.CORPORATION) return undefined;
+      if (getCard(card.name)?.type !== CardType.CORPORATION) return undefined;
       return card.name;
     },
   },

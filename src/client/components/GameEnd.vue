@@ -278,7 +278,7 @@ export default Vue.extend({
     },
     getCorporationName(p: PublicPlayerModel): string {
       const firstCard = p.tableau[0];
-      return getCard(firstCard.name)?.cardType === CardType.CORPORATION ? firstCard.name : '';
+      return getCard(firstCard.name)?.type === CardType.CORPORATION ? firstCard.name : '';
     },
   },
 });

@@ -608,7 +608,7 @@ describe('SelectProjectCardToPlay', () => {
       cards: [{
         name: cardName,
         resources: undefined,
-        cardType: CardType.ACTIVE,
+        type: CardType.ACTIVE,
         isDisabled: false,
         reserveUnits: reserveUnits,
         calculatedCost: cardCost,

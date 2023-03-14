@@ -12,7 +12,7 @@ export interface CardModel {
     calculatedCost?: number;
     isSelfReplicatingRobotsCard?: boolean,
     discount?: Array<CardDiscount>,
-    cardType: CardType;
+    type: CardType;
     isDisabled: boolean; // Used with Pharmacy Union
     warning?: string | Message;
     reserveUnits: Readonly<Units>; // Written for The Moon, but useful in other contexts.

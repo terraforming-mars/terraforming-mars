@@ -7,7 +7,6 @@ import PlayerStatus from '@/client/components/overview/PlayerStatus.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {vueRoot} from '@/client/components/vueRoot';
 import {range} from '@/common/utils/utils';
-import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
@@ -48,7 +47,6 @@ export default Vue.extend({
     PlayerTags,
     'player-status': PlayerStatus,
   },
-  mixins: [PlayerMixin],
   computed: {
     tooltipCss(): string {
       return 'tooltip tooltip-' + (this.isTopBar ? 'bottom' : 'top');

@@ -1,4 +1,3 @@
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -8,7 +7,9 @@ export class Donation extends PreludeCard {
     super({
       name: CardName.DONATION,
 
-      startingMegacredits: 21,
+      behavior: {
+        stock: {megacredits: 21},
+      },
 
       metadata: {
         cardNumber: 'P08',
@@ -18,10 +19,6 @@ export class Donation extends PreludeCard {
         description: 'Gain 21 M€.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.megaCredits += 21;
-    return undefined;
   }
 }
 

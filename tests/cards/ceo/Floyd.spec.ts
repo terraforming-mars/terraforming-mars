@@ -1,7 +1,9 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
+
+import {forceGenerationEnd, runAllActions, cast} from '../../TestingUtils';
 import {Floyd} from '../../../src/server/cards/ceos/Floyd';
 import {AsteroidMining} from '../../../src/server/cards/base/AsteroidMining';
 import {getTestPlayer, newTestGame} from '../../TestGame';
@@ -13,8 +15,9 @@ describe('Floyd', function() {
 
   beforeEach(() => {
     card = new Floyd();
-    game = newTestGame(2);
+    game = newTestGame(2, {ceoExtension: true});
     player = getTestPlayer(game, 0);
+    player.popSelectInitialCards();
   });
 
   it('Cannot act without cards', function() {
@@ -22,16 +25,25 @@ describe('Floyd', function() {
   });
 
   it('Takes action', function() {
-    player.cardsInHand.push(new AsteroidMining());
+    player.playedCards.push(card);
+    game.generation = 6;
+    player.megaCredits = 6;
+
+    const asteroidMining = new AsteroidMining();
+    expect(card.canAct(player)).is.false;
+    player.cardsInHand.push(asteroidMining);
     expect(card.canAct(player)).is.true;
 
-    card.action(player);
-    expect(game.deferredActions).has.length(2);
-    player.getActionsThisGeneration().add(card.name);
-    expect(card.getCardDiscount(player)).eq(15);
+    expect(player.getCardCost(asteroidMining)).eq(30);
+    expect(player.canPlay(asteroidMining)).is.false;
 
+    card.action(player);
     runAllActions(game);
-    expect(card.getCardDiscount(player)).eq(0);
+    const selectProjectCardToPlay = cast(player.popWaitingFor(), SelectProjectCardToPlay);
+    expect(selectProjectCardToPlay.cards).deep.eq([asteroidMining]);
+
+    expect(player.getCardCost(asteroidMining)).eq(5);
+    expect(player.canPlay(asteroidMining)).is.true;
   });
 
   it('Can only act once per game', function() {

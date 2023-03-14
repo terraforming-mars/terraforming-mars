@@ -65,7 +65,6 @@ import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
-// import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
 import {MessageBuilder} from './logs/MessageBuilder';
@@ -278,12 +277,10 @@ export class Player {
         player.corporations.forEach((corp) => {
           corp.onIncreaseTerraformRating?.(this, player, steps);
         });
+        player.playedCards.filter((card: IProjectCard) => card.type === CardType.CEO).forEach((ceo) => {
+          ceo.onIncreaseTerraformRating?.(this, player, steps);
+        });
       });
-      // Greta CEO hook
-      // if (this.cardIsInEffect(CardName.GRETA)) {
-      //   const greta = this.playedCards.find((card) => card.name === CardName.GRETA) as CeoCard;
-      //   greta.onTRIncrease!(this);
-      // }
     };
 
     if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {

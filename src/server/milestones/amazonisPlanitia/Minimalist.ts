@@ -3,7 +3,7 @@ import {IMilestone} from '../IMilestone';
 
 export class Minimalist implements IMilestone {
   public readonly name = 'Minimalist';
-  public readonly description = 'Have 2 or less cards in hand';
+  public readonly description = 'Have 2 or fewer cards in hand';
 
   public getScore(player: Player): number {
     return player.cardsInHand.length;

@@ -25,7 +25,7 @@ export function getCards(filter: (card: ClientCard) => boolean): Array<ClientCar
 }
 
 export function byType(cardType: CardType): (card: ClientCard) => boolean {
-  return (card) => card.cardType === cardType;
+  return (card) => card.type === cardType;
 }
 
 export function byModule(module: GameModule): (card: ClientCard) => boolean {

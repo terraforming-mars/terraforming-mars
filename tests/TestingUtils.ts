@@ -126,7 +126,7 @@ const FAKE_CARD_TEMPLATE: IProjectCard = {
   canPlay: () => true,
   play: () => undefined,
   getVictoryPoints: () => 0,
-  cardType: CardType.ACTIVE,
+  type: CardType.ACTIVE,
   metadata: {},
   resourceCount: 0,
 };

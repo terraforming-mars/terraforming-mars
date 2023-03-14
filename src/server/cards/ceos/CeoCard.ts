@@ -32,7 +32,7 @@ export abstract class CeoCard extends Card implements ICeoCard {
     return undefined;
   }
 
-  public override get cardType(): CardType.CEO {
+  public override get type(): CardType.CEO {
     return CardType.CEO;
   }
 }

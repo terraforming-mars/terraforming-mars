@@ -28,7 +28,7 @@ export class PersonalAgenda extends PreludeCard {
   public override bespokePlay(player: Player) {
     player.drawCard(3, {
       include: (card) => {
-        return card.cardType === CardType.EVENT &&
+        return card.type === CardType.EVENT &&
           (card.tags.includes(Tag.SPACE) === false);
       }});
     return undefined;

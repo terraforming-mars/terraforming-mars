@@ -24,21 +24,22 @@ import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 type ReserveUnits = Units & {deduct: boolean};
 type FirstActionBehavior = Behavior & {text: string};
 
-/* External representation of card properties. */
-export interface StaticCardProperties {
+type TemporaryCardType = {type: CardType} | {cardType: CardType};
+
+type ProperitesMinusType = {
   /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
   behavior?: Behavior | undefined;
   cardCost?: number;
   cardDiscount?: CardDiscount | Array<CardDiscount>;
-  cardType: CardType;
+  // cardType: CardType;
   cost?: number;
   initialActionText?: string;
   firstAction?: FirstActionBehavior;
   metadata: ICardMetadata;
   requirements?: CardRequirements;
   name: CardName;
-  reserveUnits?: Partial<ReserveUnits>,
+  reserveUnits?: ReserveUnits,
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
@@ -47,12 +48,18 @@ export interface StaticCardProperties {
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
+// TODO(kberg): move this out.
+// Makes fields in T Partial.
+type PartialField<T, K extends keyof T> = Omit<T, K> & {[k in K]: Partial<T[K]>};
+
+/* External representation of card properties. */
+// type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+export type StaticCardProperties = PartialField<ProperitesMinusType, 'reserveUnits'> & TemporaryCardType;
+
 /*
  * Internal representation of card properties.
  */
-type Properties = Omit<StaticCardProperties, 'reserveUnits'> & {
-  reserveUnits?: ReserveUnits,
-};
+type Properties = ProperitesMinusType & {type: CardType};
 
 export const staticCardProperties = new Map<CardName, Properties>();
 
@@ -80,7 +87,8 @@ export abstract class Card {
   constructor(properties: StaticCardProperties) {
     let staticInstance = staticCardProperties.get(properties.name);
     if (staticInstance === undefined) {
-      if (properties.cardType === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
+      const type = ('type' in properties) ? properties.type : properties.cardType;
+      if (type === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
         throw new Error('must define startingMegaCredits for corporation cards');
       }
       if (properties.cost === undefined) {
@@ -90,7 +98,7 @@ export abstract class Card {
           CardType.CEO,
           CardType.STANDARD_ACTION,
         ];
-        if (noCostCardTypes.includes(properties.cardType) === false) {
+        if (noCostCardTypes.includes(type) === false) {
           throw new Error(`${properties.name} must have a cost property`);
         }
       }
@@ -102,6 +110,7 @@ export abstract class Card {
 
       const p: Properties = {
         ...properties,
+        type: type,
         reserveUnits: properties.reserveUnits === undefined ? undefined : {...Units.of(properties.reserveUnits), deduct: properties.reserveUnits.deduct ?? true},
       };
       staticCardProperties.set(properties.name, p);
@@ -119,8 +128,8 @@ export abstract class Card {
   public get cardCost() {
     return this.properties.cardCost;
   }
-  public get cardType() {
-    return this.properties.cardType;
+  public get type() {
+    return this.properties.type;
   }
   public get cost() {
     return this.properties.cost === undefined ? 0 : this.properties.cost;

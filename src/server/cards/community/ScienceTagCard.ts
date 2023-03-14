@@ -17,6 +17,9 @@ export class ScienceTagCard implements IProjectCard {
   public get cardType() {
     return CardType.PROXY;
   }
+  public get type() {
+    return CardType.PROXY;
+  }
   public canPlay() {
     return false;
   }

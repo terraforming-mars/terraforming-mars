@@ -65,7 +65,6 @@ import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
-// import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
 import {MessageBuilder} from './logs/MessageBuilder';
@@ -278,12 +277,10 @@ export class Player {
         player.corporations.forEach((corp) => {
           corp.onIncreaseTerraformRating?.(this, player, steps);
         });
+        player.playedCards.filter((card: IProjectCard) => card.type === CardType.CEO).forEach((ceo) => {
+          ceo.onIncreaseTerraformRating?.(this, player, steps);
+        });
       });
-      // Greta CEO hook
-      // if (this.cardIsInEffect(CardName.GRETA)) {
-      //   const greta = this.playedCards.find((card) => card.name === CardName.GRETA) as CeoCard;
-      //   greta.onTRIncrease!(this);
-      // }
     };
 
     if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
@@ -609,8 +606,8 @@ export class Player {
   public getNoTagsCount() {
     let noTagsCount = 0;
 
-    noTagsCount += this.corporations.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
-    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
+    noTagsCount += this.corporations.filter((card) => card.type !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
+    noTagsCount += this.playedCards.filter((card) => card.type !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
 
     return noTagsCount;
   }
@@ -669,7 +666,7 @@ export class Player {
    * Legend Milestone, Media Archives, and NOT Media Group.
    */
   public getPlayedEventsCount(): number {
-    let count = this.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
+    let count = this.playedCards.filter((card) => card.type === CardType.EVENT).length;
     if (this.getCorporation(CardName.PHARMACY_UNION)?.isDisabled) count++;
 
     return count;
@@ -766,7 +763,7 @@ export class Player {
   }
 
   public getCardsByCardType(cardType: CardType) {
-    return this.playedCards.filter((card) => card.cardType === cardType);
+    return this.playedCards.filter((card) => card.type === cardType);
   }
 
   public deferInputCb(result: PlayerInput | undefined): void {
@@ -1056,7 +1053,7 @@ export class Player {
       microbes: card.tags.includes(Tag.PLANT),
       science: card.tags.includes(Tag.MOON),
       // TODO(kberg): add this.corporation.name === CardName.AURORAI
-      data: card.cardType === CardType.STANDARD_PROJECT,
+      data: card.type === CardType.STANDARD_PROJECT,
     };
   }
 
@@ -1155,7 +1152,7 @@ export class Player {
 
     ColoniesHandler.onCardPlayed(this.game, selectedCard);
 
-    if (selectedCard.cardType !== CardType.PROXY) {
+    if (selectedCard.type !== CardType.PROXY) {
       this.lastCardPlayed = selectedCard.name;
       this.game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
     }
@@ -1225,7 +1222,7 @@ export class Player {
   }
 
   public onCardPlayed(card: IProjectCard) {
-    if (card.cardType === CardType.PROXY) {
+    if (card.type === CardType.PROXY) {
       return;
     }
     for (const playedCard of this.playedCards) {

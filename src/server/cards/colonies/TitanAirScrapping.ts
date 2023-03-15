@@ -15,7 +15,7 @@ export class TitanAirScrapping extends Card implements IProjectCard {
       cost: 21,
       tags: [Tag.JOVIAN],
       name: CardName.TITAN_AIRSCRAPPING,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
       victoryPoints: 2,
 

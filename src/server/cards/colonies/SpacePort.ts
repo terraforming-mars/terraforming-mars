@@ -12,7 +12,7 @@ export class SpacePort extends Card implements IProjectCard {
       cost: 22,
       tags: [Tag.CITY, Tag.BUILDING],
       name: CardName.SPACE_PORT,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         production: {energy: -1, megacredits: 4},

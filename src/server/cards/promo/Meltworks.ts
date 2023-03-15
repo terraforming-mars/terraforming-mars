@@ -11,7 +11,7 @@ import {digit} from '../Options';
 export class Meltworks extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MELTWORKS,
       tags: [Tag.BUILDING],
       cost: 4,

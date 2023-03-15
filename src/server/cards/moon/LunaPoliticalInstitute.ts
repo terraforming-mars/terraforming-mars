@@ -14,7 +14,7 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
   constructor() {
     super({
       name: CardName.LUNA_POLITICAL_INSTITUTE,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON, Tag.EARTH],
       cost: 6,
       requirements: CardRequirements.builder((b) => b.tag(Tag.MOON, 2)),

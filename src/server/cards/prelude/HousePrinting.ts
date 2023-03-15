@@ -8,7 +8,7 @@ import {IProjectCard} from '../IProjectCard';
 export class HousePrinting extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.HOUSE_PRINTING,
       tags: [Tag.BUILDING],
       cost: 10,

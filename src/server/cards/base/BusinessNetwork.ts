@@ -11,7 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.BUSINESS_NETWORK,
       tags: [Tag.EARTH],
       cost: 4,

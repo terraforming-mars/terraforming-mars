@@ -16,7 +16,7 @@ export class AnOfferYouCantRefuse extends Card {
   constructor() {
     super({
       name: CardName.AN_OFFER_YOU_CANT_REFUSE,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       cost: 5,
 
       metadata: {

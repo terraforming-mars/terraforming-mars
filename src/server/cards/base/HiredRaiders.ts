@@ -13,7 +13,7 @@ import {all} from '../Options';
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.HIRED_RAIDERS,
       cost: 1,
 

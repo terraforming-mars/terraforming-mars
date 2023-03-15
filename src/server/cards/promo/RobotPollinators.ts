@@ -10,7 +10,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class RobotPollinators extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ROBOT_POLLINATORS,
       cost: 9,
       requirements: CardRequirements.builder((b) => b.oxygen(4)),

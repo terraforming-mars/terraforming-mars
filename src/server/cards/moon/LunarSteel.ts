@@ -10,7 +10,7 @@ export class LunarSteel extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_STEEL,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON],
       cost: 5,
 

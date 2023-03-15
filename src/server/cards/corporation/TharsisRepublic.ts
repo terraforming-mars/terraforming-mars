@@ -18,7 +18,7 @@ import {all} from '../Options';
 export class TharsisRepublic extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.THARSIS_REPUBLIC,
       tags: [Tag.BUILDING],
       startingMegaCredits: 40,

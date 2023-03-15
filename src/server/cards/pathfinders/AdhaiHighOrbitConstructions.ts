@@ -15,7 +15,7 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 export class AdhaiHighOrbitConstructions extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
       tags: [Tag.SPACE],
       startingMegaCredits: 43,

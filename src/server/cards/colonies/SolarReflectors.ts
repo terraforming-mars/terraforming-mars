@@ -12,7 +12,7 @@ export class SolarReflectors extends Card implements IProjectCard {
       cost: 23,
       tags: [Tag.SPACE],
       name: CardName.SOLAR_REFLECTORS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         production: {heat: 5},

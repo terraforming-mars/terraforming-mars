@@ -25,7 +25,7 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       description: 'Place this tile.',
     }) {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name,
       tags: [Tag.SCIENCE],
       cost: 11,

@@ -14,7 +14,7 @@ import {Player} from '../../Player';
 export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.BIOENGINEERING_ENCLOSURE,
       tags: [Tag.ANIMAL],
       cost: 7,

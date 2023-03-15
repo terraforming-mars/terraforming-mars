@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SpecialDesign extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SPECIAL_DESIGN,
       tags: [Tag.SCIENCE],
       cost: 4,

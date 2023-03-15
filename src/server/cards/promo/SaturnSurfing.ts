@@ -13,7 +13,7 @@ import {played} from '../Options';
 export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SATURN_SURFING,
       cost: 13,
       tags: [Tag.JOVIAN, Tag.EARTH],

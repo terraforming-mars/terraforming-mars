@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class NoctisCity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.NOCTIS_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 18,

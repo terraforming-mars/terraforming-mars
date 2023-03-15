@@ -15,7 +15,7 @@ export class SmallDutyRovers extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SMALL_DUTY_ROVERS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.SPACE],
       cost: 9,
       reserveUnits: {titanium: 1},

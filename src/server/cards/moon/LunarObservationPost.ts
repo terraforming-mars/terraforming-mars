@@ -13,7 +13,7 @@ export class LunarObservationPost extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNAR_OBSERVATION_POST,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.SCIENCE, Tag.SCIENCE],
       cost: 7,
 

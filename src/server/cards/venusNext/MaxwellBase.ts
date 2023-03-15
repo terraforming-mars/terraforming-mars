@@ -13,7 +13,7 @@ export class MaxwellBase extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.MAXWELL_BASE,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.CITY, Tag.VENUS],
       cost: 18,
 

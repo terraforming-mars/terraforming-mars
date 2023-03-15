@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class HiTechLab extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.HI_TECH_LAB,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 17,

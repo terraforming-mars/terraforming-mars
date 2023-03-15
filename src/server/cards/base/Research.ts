@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Research extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.RESEARCH,
       tags: [Tag.SCIENCE, Tag.SCIENCE],
       cost: 11,

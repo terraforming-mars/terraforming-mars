@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class LightningHarvest extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LIGHTNING_HARVEST,
       cost: 8,
       tags: [Tag.POWER],

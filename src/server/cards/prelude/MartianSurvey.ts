@@ -10,7 +10,7 @@ import {max} from '../Options';
 export class MartianSurvey extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.MARTIAN_SURVEY,
       tags: [Tag.SCIENCE],
       cost: 9,

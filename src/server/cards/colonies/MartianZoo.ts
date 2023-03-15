@@ -16,7 +16,7 @@ export class MartianZoo extends Card implements IProjectCard {
       cost: 12,
       tags: [Tag.ANIMAL, Tag.BUILDING],
       name: CardName.MARTIAN_ZOO,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.ANIMAL,
       requirements: CardRequirements.builder((b) => b.cities(2, {all})),
       victoryPoints: 1,

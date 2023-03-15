@@ -11,7 +11,7 @@ export class IoSulphurResearch extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.IO_SULPHUR_RESEARCH,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.SCIENCE, Tag.JOVIAN],
       cost: 17,
 

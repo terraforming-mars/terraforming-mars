@@ -9,7 +9,7 @@ import {digit} from '../Options';
 export class GHGFactories extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GHG_FACTORIES,
       tags: [Tag.BUILDING],
       cost: 11,

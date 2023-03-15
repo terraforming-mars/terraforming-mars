@@ -18,7 +18,7 @@ import {all} from '../Options';
 export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.THE_GRAND_LUNA_CAPITAL_GROUP,
       tags: [Tag.CITY, Tag.MOON],
       startingMegaCredits: 32,

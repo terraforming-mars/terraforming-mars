@@ -12,7 +12,7 @@ import {played} from '../Options';
 export class MartianInsuranceGroup extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.MARTIAN_INSURANCE_GROUP,
       tags: [Tag.MARS],
       startingMegaCredits: 42,

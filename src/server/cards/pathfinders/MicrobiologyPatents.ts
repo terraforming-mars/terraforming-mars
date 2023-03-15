@@ -11,7 +11,7 @@ import {played} from '../Options';
 export class MicrobiologyPatents extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MICROBIOLOGY_PATENTS,
       cost: 6,
       tags: [Tag.MARS, Tag.MICROBE],

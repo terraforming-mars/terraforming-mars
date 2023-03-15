@@ -15,7 +15,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class LunaHyperloopCorporation extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.LUNA_HYPERLOOP_CORPORATION,
       tags: [Tag.MOON, Tag.BUILDING],
       startingMegaCredits: 38,

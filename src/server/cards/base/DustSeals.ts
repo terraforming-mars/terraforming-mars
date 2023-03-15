@@ -8,7 +8,7 @@ import {max} from '../Options';
 export class DustSeals extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.DUST_SEALS,
       cost: 2,
       victoryPoints: 1,

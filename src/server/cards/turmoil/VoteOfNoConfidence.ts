@@ -12,7 +12,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VOTE_OF_NO_CONFIDENCE,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       cost: 5,
       tr: {tr: 1},
 

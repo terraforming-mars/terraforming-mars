@@ -10,7 +10,7 @@ export class MooncrateBlockFactory extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOONCRATE_BLOCK_FACTORY,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.BUILDING],
       cost: 8,
       requirements: CardRequirements.builder((b) => b.miningTiles(1)),

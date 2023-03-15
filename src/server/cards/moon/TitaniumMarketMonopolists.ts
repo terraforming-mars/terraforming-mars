@@ -14,7 +14,7 @@ export class TitaniumMarketMonopolists extends MarketCard {
       {from: 1, to: 4, limit: 4},
       {
         name: CardName.TITANIUM_MARKET_MONOPOLISTS,
-        cardType: CardType.ACTIVE,
+        type: CardType.ACTIVE,
         cost: 21,
 
         requirements: CardRequirements.builder((b) => b.miningRate(3)),

@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Lichen extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LICHEN,
       tags: [Tag.PLANT],
       cost: 7,

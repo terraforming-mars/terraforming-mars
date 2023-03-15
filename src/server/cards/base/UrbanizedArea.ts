@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class UrbanizedArea extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.URBANIZED_AREA,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 10,

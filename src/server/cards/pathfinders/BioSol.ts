@@ -12,7 +12,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 export class BioSol extends Card implements ICorporationCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.BIO_SOL,
       tags: [Tag.MICROBE],
       startingMegaCredits: 42,

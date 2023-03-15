@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class Teractor extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.TERACTOR,
       tags: [Tag.EARTH],
       startingMegaCredits: 60,

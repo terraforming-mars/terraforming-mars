@@ -11,7 +11,7 @@ export const ACTION_COST = 3;
 export class UnitedNationsMarsInitiative extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.UNITED_NATIONS_MARS_INITIATIVE,
       tags: [Tag.EARTH],
       startingMegaCredits: 40,

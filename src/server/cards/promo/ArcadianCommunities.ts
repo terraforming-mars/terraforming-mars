@@ -13,7 +13,7 @@ import {digit} from '../Options';
 export class ArcadianCommunities extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.ARCADIAN_COMMUNITIES,
       startingMegaCredits: 40,
       initialActionText: 'Place a community (player marker) on a non-reserved area',

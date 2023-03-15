@@ -13,7 +13,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 export class EconomicEspionage extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ECONOMIC_ESPIONAGE,
       cost: 8,
       tags: [Tag.EARTH],

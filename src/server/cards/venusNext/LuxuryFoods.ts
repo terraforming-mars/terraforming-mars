@@ -10,7 +10,7 @@ export class LuxuryFoods extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUXURY_FOODS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       cost: 8,
 
       victoryPoints: 2,

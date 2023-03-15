@@ -9,7 +9,7 @@ export class WaterTreatmentComplex extends Card {
   constructor() {
     super({
       name: CardName.WATER_TREATMENT_COMPLEX,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       cost: 12,
       requirements: CardRequirements.builder((b) => b.habitatTiles(1, {all})),
       reserveUnits: {titanium: 1},

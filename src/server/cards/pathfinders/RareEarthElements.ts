@@ -11,7 +11,7 @@ import {isSpecialTile, playerTileFn} from '../../boards/Board';
 export class RareEarthElements extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.RARE_EARTH_ELEMENTS,
       cost: 5,
       tags: [Tag.EARTH, Tag.MARS],

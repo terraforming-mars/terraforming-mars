@@ -12,7 +12,7 @@ import {Priority} from '../../deferredActions/DeferredAction';
 export class Aurorai extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.AURORAI,
       tags: [Tag.MARS],
       startingMegaCredits: 33,

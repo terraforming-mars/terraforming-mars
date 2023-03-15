@@ -13,7 +13,7 @@ import {TileType} from '../../../common/TileType';
 export class MartianNatureWonders extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MARTIAN_NATURE_WONDERS,
       cost: 13,
       tags: [Tag.MARS],

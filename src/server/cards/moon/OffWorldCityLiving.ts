@@ -12,7 +12,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.OFF_WORLD_CITY_LIVING,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.SPACE],
       cost: 35,
       victoryPoints: 'special',

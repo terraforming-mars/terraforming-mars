@@ -19,7 +19,7 @@ import {Phase} from '../../../common/Phase';
 export class CuriosityII extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.CURIOSITY_II,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       startingMegaCredits: 40,

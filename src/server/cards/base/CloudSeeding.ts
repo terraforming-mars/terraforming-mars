@@ -10,7 +10,7 @@ import {all} from '../Options';
 export class CloudSeeding extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CLOUD_SEEDING,
       cost: 11,
 

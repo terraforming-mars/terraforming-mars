@@ -11,7 +11,7 @@ import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 export class Cyanobacteria extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CYANOBACTERIA,
       cost: 12,
       tags: [Tag.MICROBE, Tag.MARS],

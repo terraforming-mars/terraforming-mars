@@ -13,7 +13,7 @@ import {multiplier} from '../Options';
 export class PowerInfrastructure extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.POWER_INFRASTRUCTURE,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 4,

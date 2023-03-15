@@ -14,7 +14,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.PRELIMINARY_DARKSIDE,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.MOON],
       cost: 13,
 

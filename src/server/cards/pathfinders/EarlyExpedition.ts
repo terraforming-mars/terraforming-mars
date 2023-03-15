@@ -11,7 +11,7 @@ import {max} from '../Options';
 export class EarlyExpedition extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.EARLY_EXPEDITION,
       cost: 15,
       tags: [Tag.SCIENCE, Tag.SPACE, Tag.CITY],

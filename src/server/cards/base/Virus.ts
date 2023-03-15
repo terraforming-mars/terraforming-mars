@@ -16,7 +16,7 @@ import {all, digit} from '../Options';
 export class Virus extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.VIRUS,
       tags: [Tag.MICROBE],
       cost: 1,

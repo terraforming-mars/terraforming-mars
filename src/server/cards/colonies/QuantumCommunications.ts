@@ -15,7 +15,7 @@ export class QuantumCommunications extends Card implements IProjectCard {
     super({
       cost: 8,
       name: CardName.QUANTUM_COMMUNICATIONS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
       victoryPoints: 1,
 

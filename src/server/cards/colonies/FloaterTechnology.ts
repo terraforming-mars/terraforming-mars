@@ -14,7 +14,7 @@ export class FloaterTechnology extends Card implements IProjectCard {
       cost: 7,
       tags: [Tag.SCIENCE],
       name: CardName.FLOATER_TECHNOLOGY,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       metadata: {
         cardNumber: 'C12',

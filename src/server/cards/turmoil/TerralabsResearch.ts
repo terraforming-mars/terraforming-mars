@@ -12,7 +12,7 @@ export class TerralabsResearch extends Card implements ICorporationCard {
       name: CardName.TERRALABS_RESEARCH,
       tags: [Tag.SCIENCE, Tag.EARTH],
       startingMegaCredits: 14,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       cardCost: 1,
 
       metadata: {

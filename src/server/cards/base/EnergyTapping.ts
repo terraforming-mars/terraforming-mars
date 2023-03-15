@@ -13,7 +13,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 export class EnergyTapping extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ENERGY_TAPPING,
       tags: [Tag.POWER],
       cost: 3,

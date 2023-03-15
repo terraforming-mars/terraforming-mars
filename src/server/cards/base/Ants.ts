@@ -16,7 +16,7 @@ import {all} from '../Options';
 export class Ants extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ANTS,
       tags: [Tag.MICROBE],
       cost: 9,

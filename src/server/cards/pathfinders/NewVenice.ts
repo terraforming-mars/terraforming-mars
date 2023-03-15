@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class NewVenice extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.NEW_VENICE,
       tags: [Tag.MARS, Tag.POWER, Tag.BUILDING, Tag.CITY],
       cost: 21,

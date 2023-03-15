@@ -28,7 +28,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
     },
   ) {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name,
       tags: [Tag.BUILDING],
       cost: 16,

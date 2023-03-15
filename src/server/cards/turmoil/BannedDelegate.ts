@@ -16,7 +16,7 @@ import {MultiSet} from 'mnemonist';
 export class BannedDelegate extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.BANNED_DELEGATE,
       cost: 0,
 

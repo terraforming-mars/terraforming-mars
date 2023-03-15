@@ -14,7 +14,7 @@ import {played} from '../Options';
 export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ASTEROID_DEFLECTION_SYSTEM,
       tags: [Tag.SPACE, Tag.EARTH, Tag.BUILDING],
       cost: 13,

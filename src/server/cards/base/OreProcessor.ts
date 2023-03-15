@@ -11,7 +11,7 @@ import {digit} from '../Options';
 export class OreProcessor extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ORE_PROCESSOR,
       tags: [Tag.BUILDING],
       cost: 13,

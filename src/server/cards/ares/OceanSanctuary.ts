@@ -13,7 +13,7 @@ import {IProjectCard} from '../IProjectCard';
 export class OceanSanctuary extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.OCEAN_SANCTUARY,
       tags: [Tag.ANIMAL],
       cost: 9,

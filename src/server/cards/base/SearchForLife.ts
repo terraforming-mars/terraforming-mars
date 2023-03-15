@@ -15,7 +15,7 @@ import {max, played} from '../Options';
 export class SearchForLife extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SEARCH_FOR_LIFE,
       tags: [Tag.SCIENCE],
       cost: 3,

@@ -14,7 +14,7 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.FREYJA_BIODOMES,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.PLANT, Tag.VENUS],
       cost: 14,
 

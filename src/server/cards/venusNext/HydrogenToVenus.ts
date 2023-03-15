@@ -11,7 +11,7 @@ export class HydrogenToVenus extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HYDROGEN_TO_VENUS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.SPACE],
       cost: 11,
 

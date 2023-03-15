@@ -14,7 +14,7 @@ export class SteelMarketMonopolists extends MarketCard {
       {from: 1, to: 3, limit: 3},
       {
         name: CardName.STEEL_MARKET_MONOPOLISTS,
-        cardType: CardType.ACTIVE,
+        type: CardType.ACTIVE,
         cost: 15,
         requirements: CardRequirements.builder((b) => b.miningRate(3)),
 

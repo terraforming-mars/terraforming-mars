@@ -12,7 +12,7 @@ import {IProjectCard} from '../IProjectCard';
 export class Ringcom extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.RINGCOM,
       tags: [Tag.JOVIAN],
       startingMegaCredits: 39,

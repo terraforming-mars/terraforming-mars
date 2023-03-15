@@ -12,7 +12,7 @@ import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.KICKSTARTER,
       cost: 12,
 

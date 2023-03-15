@@ -14,7 +14,7 @@ export class LocalShading extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LOCAL_SHADING,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 4,
       resourceType: CardResource.FLOATER,

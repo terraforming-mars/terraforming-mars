@@ -19,7 +19,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard {
       cost: 9,
       tags: [Tag.JOVIAN],
       name: CardName.JUPITER_FLOATING_STATION,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
       victoryPoints: 1,

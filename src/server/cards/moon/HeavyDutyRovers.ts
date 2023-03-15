@@ -13,7 +13,7 @@ import {all} from '../Options';
 export class HeavyDutyRovers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.HEAVY_DUTY_ROVERS,
       cost: 12,
 

@@ -8,7 +8,7 @@ import {CardRequirements} from '../CardRequirements';
 export class BreathingFilters extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.BREATHING_FILTERS,
       tags: [Tag.SCIENCE],
       cost: 11,

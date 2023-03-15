@@ -8,7 +8,7 @@ export class SubterraneanHabitats extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SUBTERRANEAN_HABITATS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       cost: 12,
       reserveUnits: {steel: 2},
 

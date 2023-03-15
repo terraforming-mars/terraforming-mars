@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class WavePower extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.WAVE_POWER,
       tags: [Tag.POWER],
       cost: 8,

@@ -10,7 +10,7 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SYNDICATE_PIRATE_RAIDS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.SPACE],
       cost: 8,
 

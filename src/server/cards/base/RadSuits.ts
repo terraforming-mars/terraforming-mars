@@ -9,7 +9,7 @@ import {all} from '../Options';
 export class RadSuits extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.RAD_SUITS,
       cost: 6,
       victoryPoints: 1,

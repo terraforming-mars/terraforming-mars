@@ -11,7 +11,7 @@ import {multiplier} from '../Options';
 export class Insulation extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.INSULATION,
       cost: 2,
 

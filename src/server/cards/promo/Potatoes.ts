@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Potatoes extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.POTATOES,
       tags: [Tag.PLANT],
       cost: 2,

@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.BEAM_FROM_A_THORIUM_ASTEROID,
       tags: [Tag.JOVIAN, Tag.SPACE, Tag.POWER],
       cost: 32,

@@ -12,7 +12,7 @@ import {played} from '../Options';
 export class PrefabricationofHumanHabitats extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.PREFABRICATION_OF_HUMAN_HABITATS,
       cost: 8,
       tags: [Tag.BUILDING, Tag.CITY],

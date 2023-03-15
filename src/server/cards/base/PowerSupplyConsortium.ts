@@ -14,7 +14,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 export class PowerSupplyConsortium extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.POWER_SUPPLY_CONSORTIUM,
       tags: [Tag.POWER],
       cost: 5,

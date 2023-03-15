@@ -14,7 +14,7 @@ export class SpacePortColony extends Card implements IProjectCard {
       cost: 27,
       tags: [Tag.SPACE],
       name: CardName.SPACE_PORT_COLONY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       requirements: CardRequirements.builder((b) => b.colonies()),
       victoryPoints: 'special',

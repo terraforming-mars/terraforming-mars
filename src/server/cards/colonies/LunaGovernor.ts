@@ -12,7 +12,7 @@ export class LunaGovernor extends Card implements IProjectCard {
       cost: 4,
       tags: [Tag.EARTH, Tag.EARTH],
       name: CardName.LUNA_GOVERNOR,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         production: {megacredits: 2},

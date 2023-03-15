@@ -13,7 +13,7 @@ export class CoordinatedRaid extends Card implements IProjectCard {
     super({
       cost: 5,
       name: CardName.COORDINATED_RAID,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       requirements: CardRequirements.builder((b) => b.colonies(1)),
 
       metadata: {

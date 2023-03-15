@@ -18,7 +18,7 @@ export interface RobotCard {
 export class SelfReplicatingRobots extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SELF_REPLICATING_ROBOTS,
       cost: 7,
 

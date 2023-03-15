@@ -14,7 +14,7 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       name: CardName.SOLARPEDIA,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.SPACE],
       cost: 12,
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.MARS).tag(Tag.JOVIAN)),

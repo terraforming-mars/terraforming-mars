@@ -12,7 +12,7 @@ export class HeavyTaxation extends Card implements IProjectCard {
       cost: 3,
       tags: [Tag.EARTH],
       name: CardName.HEAVY_TAXATION,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       victoryPoints: -1,
 
       behavior: {

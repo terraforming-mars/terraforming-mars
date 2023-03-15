@@ -18,7 +18,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class MindSetMars extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.MIND_SET_MARS,
       startingMegaCredits: 44,
       resourceType: CardResource.AGENDA,

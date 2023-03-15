@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class RobinsonIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.ROBINSON_INDUSTRIES,
       startingMegaCredits: 47,
 

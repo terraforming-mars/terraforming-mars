@@ -16,7 +16,7 @@ import {Board} from '../../boards/Board';
 export class ArcticAlgae extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ARCTIC_ALGAE,
       tags: [Tag.PLANT],
       cost: 12,

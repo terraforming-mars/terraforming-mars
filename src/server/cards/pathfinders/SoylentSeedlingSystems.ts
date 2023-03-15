@@ -14,7 +14,7 @@ import {Board} from '../../boards/Board';
 export class SoylentSeedlingSystems extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.SOYLENT_SEEDLING_SYSTEMS,
       tags: [Tag.SCIENCE, Tag.PLANT],
       startingMegaCredits: 38,

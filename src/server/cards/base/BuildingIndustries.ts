@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class BuildingIndustries extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.BUILDING_INDUSTRIES,
       tags: [Tag.BUILDING],
       cost: 6,

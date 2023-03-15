@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class Insects extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.INSECTS,
       tags: [Tag.MICROBE],
       cost: 9,

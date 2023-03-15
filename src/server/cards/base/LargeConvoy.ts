@@ -17,7 +17,7 @@ import {digit} from '../Options';
 export class LargeConvoy extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.LARGE_CONVOY,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 36,

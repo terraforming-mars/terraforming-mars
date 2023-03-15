@@ -11,7 +11,7 @@ import {all} from '../Options';
 export class SmallComet extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SMALL_COMET,
       cost: 32,
       tags: [Tag.MARS, Tag.SPACE],

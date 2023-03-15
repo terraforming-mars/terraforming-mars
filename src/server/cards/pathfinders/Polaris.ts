@@ -16,7 +16,7 @@ import {Board} from '../../boards/Board';
 export class Polaris extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.POLARIS,
       tags: [Tag.SPACE],
       startingMegaCredits: 32,

@@ -11,7 +11,7 @@ import {played} from '../Options';
 export class HighTempSuperconductors extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.HIGH_TEMP_SUPERCONDUCTORS,
       cost: 10,
       tags: [Tag.POWER, Tag.SCIENCE],

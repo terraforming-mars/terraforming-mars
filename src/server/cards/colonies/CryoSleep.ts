@@ -11,7 +11,7 @@ export class CryoSleep extends Card implements IProjectCard {
       cost: 10,
       tags: [Tag.SCIENCE],
       name: CardName.CRYO_SLEEP,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       victoryPoints: 1,
 
       behavior: {

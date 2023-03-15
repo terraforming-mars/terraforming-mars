@@ -18,7 +18,7 @@ export class Aridor extends Card implements ICorporationCard {
     super({
       name: CardName.ARIDOR,
       startingMegaCredits: 40,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       initialActionText: 'Add a colony tile',
 
       metadata: {

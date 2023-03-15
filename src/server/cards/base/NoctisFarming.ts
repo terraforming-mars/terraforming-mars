@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class NoctisFarming extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.NOCTIS_FARMING,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 10,

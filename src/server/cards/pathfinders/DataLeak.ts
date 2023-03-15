@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 export class DataLeak extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.DATA_LEAK,
       cost: 5,
 

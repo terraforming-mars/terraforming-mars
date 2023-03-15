@@ -10,7 +10,7 @@ import {max} from '../Options';
 export class SpinInducingAsteroid extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SPIN_INDUCING_ASTEROID,
       cost: 16,
       tags: [Tag.SPACE],

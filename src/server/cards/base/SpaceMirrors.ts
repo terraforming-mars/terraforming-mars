@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SPACE_MIRRORS,
       tags: [Tag.POWER, Tag.SPACE],
       cost: 3,

@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class EquatorialMagnetizer extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.EQUATORIAL_MAGNETIZER,
       tags: [Tag.BUILDING],
       cost: 11,

@@ -16,7 +16,7 @@ import {all} from '../Options';
 export class Predators extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.PREDATORS,
       tags: [Tag.ANIMAL],
       cost: 14,

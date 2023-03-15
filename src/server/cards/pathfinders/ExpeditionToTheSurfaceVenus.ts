@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.EXPEDITION_TO_THE_SURFACE_VENUS,
       cost: 16,
       tags: [Tag.VENUS],

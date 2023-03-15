@@ -283,7 +283,7 @@ export default Vue.extend({
       const corporationCards = cards
         .filter((card) => getCard(card.name)?.type === CardType.CORPORATION)
         .map((card) => card.name);
-      return corporationCards;
+      return corporationCards.length === 0 ? [''] : corporationCards;
     },
   },
 });

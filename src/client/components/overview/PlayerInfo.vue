@@ -109,12 +109,12 @@ export default Vue.extend({
     availableBlueActionCount(): number {
       return this.player.availableBlueCardActionCount;
     },
-    getCorporationName(): CardName[] | undefined {
+    getCorporationName(): string[] {
       const cards = this.player.tableau;
       const corporationCards = cards
         .filter((card) => getCard(card.name)?.type === CardType.CORPORATION)
         .map((card) => card.name);
-      return corporationCards;
+      return corporationCards.length === 0 ? [''] : corporationCards;
     },
   },
 });

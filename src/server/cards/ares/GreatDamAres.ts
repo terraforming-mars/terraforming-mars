@@ -14,7 +14,7 @@ export class GreatDamAres extends GreatDamPromo {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, false, true).asterix();
         }),
-        description: 'Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy',
+        description: 'Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.',
       },
     );
   }

@@ -16,7 +16,7 @@ export class ExtractorBalloons extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.EXTRACTOR_BALLOONS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 21,
       resourceType: CardResource.FLOATER,

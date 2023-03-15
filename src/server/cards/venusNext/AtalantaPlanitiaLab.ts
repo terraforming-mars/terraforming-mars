@@ -10,7 +10,7 @@ export class AtalantaPlanitiaLab extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.ATALANTA_PLANITIA_LAB,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.VENUS, Tag.SCIENCE],
       cost: 10,
 

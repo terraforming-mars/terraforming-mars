@@ -15,7 +15,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
       cost: 5,
       tags: [Tag.SPACE],
       name: CardName.MINORITY_REFUGE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       metadata: {
         cardNumber: 'C26',

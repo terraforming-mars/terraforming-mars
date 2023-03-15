@@ -12,7 +12,7 @@ import {ICard} from '../ICard';
 export class TheArchaicFoundationInstitute extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
       tags: [Tag.MOON, Tag.MOON],
       startingMegaCredits: 55,

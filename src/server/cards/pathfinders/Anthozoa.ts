@@ -13,7 +13,7 @@ import {CardResource} from '../../../common/CardResource';
 export class Anthozoa extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ANTHOZOA,
       cost: 9,
       tags: [Tag.PLANT, Tag.ANIMAL, Tag.MARS],

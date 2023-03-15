@@ -9,7 +9,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class AdvancedAlloys extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ADVANCED_ALLOYS,
       tags: [Tag.SCIENCE],
       cost: 9,

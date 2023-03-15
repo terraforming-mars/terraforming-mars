@@ -13,7 +13,7 @@ export class FloaterLeasing extends Card implements IProjectCard {
     super({
       cost: 3,
       name: CardName.FLOATER_LEASING,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       metadata: {
         cardNumber: 'C10',

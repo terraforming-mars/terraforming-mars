@@ -17,7 +17,7 @@ export class Thermophiles extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.THERMOPHILES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS, Tag.MICROBE],
       cost: 9,
       resourceType: CardResource.MICROBE,

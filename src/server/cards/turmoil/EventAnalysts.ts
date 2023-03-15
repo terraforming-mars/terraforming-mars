@@ -10,7 +10,7 @@ import {CardRequirements} from '../CardRequirements';
 export class EventAnalysts extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.EVENT_ANALYSTS,
       tags: [Tag.SCIENCE],
       cost: 5,

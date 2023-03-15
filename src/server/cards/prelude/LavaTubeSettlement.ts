@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class LavaTubeSettlement extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LAVA_TUBE_SETTLEMENT,
       tags: [Tag.BUILDING, Tag.CITY],
       cost: 15,

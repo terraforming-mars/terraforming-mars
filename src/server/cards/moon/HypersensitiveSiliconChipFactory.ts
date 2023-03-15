@@ -10,7 +10,7 @@ export class HypersensitiveSiliconChipFactory extends Card {
   constructor() {
     super({
       name: CardName.HYPERSENSITIVE_SILICON_CHIP_FACTORY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 11,
 

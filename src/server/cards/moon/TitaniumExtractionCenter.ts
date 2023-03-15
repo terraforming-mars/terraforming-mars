@@ -8,7 +8,7 @@ export class TitaniumExtractionCenter extends Card {
   constructor() {
     super({
       name: CardName.TITANIUM_EXTRACTION_CENTER,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 14,
       reserveUnits: {titanium: 2},

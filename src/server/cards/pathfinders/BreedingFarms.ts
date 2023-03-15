@@ -11,7 +11,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class BreedingFarms extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.BREEDING_FARMS,
       cost: 16,
       tags: [Tag.SCIENCE, Tag.ANIMAL, Tag.BUILDING],

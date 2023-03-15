@@ -11,7 +11,7 @@ import {digit, played} from '../Options';
 export class InterplanetaryCinematics extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.INTERPLANETARY_CINEMATICS,
       tags: [Tag.BUILDING],
       startingMegaCredits: 30,

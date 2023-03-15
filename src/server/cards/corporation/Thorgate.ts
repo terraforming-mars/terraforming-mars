@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class Thorgate extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.THORGATE,
       tags: [Tag.POWER],
       startingMegaCredits: 48,

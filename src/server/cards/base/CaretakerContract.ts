@@ -11,7 +11,7 @@ import {Units} from '../../../common/Units';
 export class CaretakerContract extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.CARETAKER_CONTRACT,
       cost: 3,
       requirements: CardRequirements.builder((b) => b.temperature(0)),

@@ -13,7 +13,7 @@ import {ICard} from '../ICard';
 export class CommunicationCenter extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.COMMUNICATION_CENTER,
       cost: 13,
       tags: [Tag.SPACE, Tag.MARS, Tag.BUILDING],

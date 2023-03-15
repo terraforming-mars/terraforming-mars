@@ -10,7 +10,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class LuxuryEstate extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LUXURY_ESTATE,
       cost: 12,
       tags: [Tag.EARTH, Tag.MARS, Tag.BUILDING],

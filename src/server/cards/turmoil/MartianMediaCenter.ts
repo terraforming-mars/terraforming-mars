@@ -14,7 +14,7 @@ import {Turmoil} from '../../turmoil/Turmoil';
 export class MartianMediaCenter extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARTIAN_MEDIA_CENTER,
       tags: [Tag.BUILDING],
       cost: 7,

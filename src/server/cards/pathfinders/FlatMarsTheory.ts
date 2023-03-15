@@ -12,7 +12,7 @@ import {max} from '../Options';
 export class FlatMarsTheory extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.FLAT_MARS_THEORY,
       cost: 8,
       tags: [Tag.EARTH],

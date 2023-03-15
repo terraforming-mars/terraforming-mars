@@ -30,7 +30,7 @@ const VALID_BONUSES: Array<SpaceBonus> = [
 export class GeologicalExpedition extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.GEOLOGICAL_EXPEDITION,
       cost: 18,
       tags: [Tag.MARS, Tag.SCIENCE],

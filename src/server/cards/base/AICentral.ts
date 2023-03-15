@@ -10,7 +10,7 @@ import {ActionCard} from '../ActionCard';
 export class AICentral extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.AI_CENTRAL,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 21,

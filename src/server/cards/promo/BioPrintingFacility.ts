@@ -16,7 +16,7 @@ import {digit} from '../Options';
 export class BioPrintingFacility extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.BIO_PRINTING_FACILITY,
       tags: [Tag.BUILDING],
       cost: 7,

@@ -15,7 +15,7 @@ export class SeptumTribus extends Card implements IActionCard, ICorporationCard 
       name: CardName.SEPTUM_TRIBUS,
       tags: [Tag.WILD],
       startingMegaCredits: 36,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R15',

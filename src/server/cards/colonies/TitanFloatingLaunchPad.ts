@@ -20,7 +20,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
       cost: 18,
       tags: [Tag.JOVIAN],
       name: CardName.TITAN_FLOATING_LAUNCHPAD,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 

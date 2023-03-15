@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class GeneRepair extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GENE_REPAIR,
       tags: [Tag.SCIENCE],
       cost: 12,

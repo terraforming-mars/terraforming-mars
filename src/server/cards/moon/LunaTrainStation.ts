@@ -14,7 +14,7 @@ export class LunaTrainStation extends Card {
   constructor() {
     super({
       name: CardName.LUNA_TRAIN_STATION,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 20,
       reserveUnits: {steel: 2},

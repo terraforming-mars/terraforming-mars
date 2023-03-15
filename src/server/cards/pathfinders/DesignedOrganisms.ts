@@ -10,7 +10,7 @@ import {CardResource} from '../../../common/CardResource';
 export class DesignedOrganisms extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.DESIGNED_ORGANISMS,
       cost: 12,
       tags: [Tag.SCIENCE, Tag.PLANT, Tag.MARS],

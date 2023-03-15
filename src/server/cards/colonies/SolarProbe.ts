@@ -12,7 +12,7 @@ export class SolarProbe extends Card implements IProjectCard {
       cost: 9,
       tags: [Tag.SPACE, Tag.SCIENCE],
       name: CardName.SOLAR_PROBE,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       victoryPoints: 1,
 
       behavior: {

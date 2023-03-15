@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SolarFarm extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SOLAR_FARM,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 12,

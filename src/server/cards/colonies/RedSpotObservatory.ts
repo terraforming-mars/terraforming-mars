@@ -16,7 +16,7 @@ export class RedSpotObservatory extends Card implements IProjectCard {
       cost: 17,
       tags: [Tag.JOVIAN, Tag.SCIENCE],
       name: CardName.RED_SPOT_OBSERVATORY,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
       victoryPoints: 2,
 

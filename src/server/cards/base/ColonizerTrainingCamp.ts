@@ -9,7 +9,7 @@ import {max} from '../Options';
 export class ColonizerTrainingCamp extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.COLONIZER_TRAINING_CAMP,
       tags: [Tag.JOVIAN, Tag.BUILDING],
       cost: 8,

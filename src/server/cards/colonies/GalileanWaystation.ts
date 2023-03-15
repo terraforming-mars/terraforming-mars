@@ -12,7 +12,7 @@ export class GalileanWaystation extends Card implements IProjectCard {
       cost: 15,
       tags: [Tag.SPACE],
       name: CardName.GALILEAN_WAYSTATION,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       victoryPoints: 1,
 
       behavior: {

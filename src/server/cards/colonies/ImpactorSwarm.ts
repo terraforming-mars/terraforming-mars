@@ -13,7 +13,7 @@ export class ImpactorSwarm extends Card implements IProjectCard {
       cost: 11,
       tags: [Tag.SPACE],
       name: CardName.IMPACTOR_SWARM,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       behavior: {
         stock: {heat: 12},

@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AdaptedLichen extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ADAPTED_LICHEN,
       tags: [Tag.PLANT],
       cost: 9,

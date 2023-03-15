@@ -23,7 +23,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
       name: CardName.PROJECT_WORKSHOP,
       tags: [Tag.EARTH],
       startingMegaCredits: 39,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       behavior: {
         stock: {steel: 1, titanium: 1},

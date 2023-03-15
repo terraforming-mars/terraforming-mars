@@ -15,7 +15,7 @@ import {digit} from '../Options';
 export class AsteroidResources extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ASTEROID_RESOURCES,
       cost: 17,
       tags: [Tag.JOVIAN, Tag.SPACE],

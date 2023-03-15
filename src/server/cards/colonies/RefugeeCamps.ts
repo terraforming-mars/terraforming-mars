@@ -15,7 +15,7 @@ export class RefugeeCamps extends Card implements IProjectCard {
       cost: 10,
       tags: [Tag.EARTH],
       name: CardName.REFUGEE_CAMPS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.CAMP,
       victoryPoints: VictoryPoints.resource(1, 1),
 

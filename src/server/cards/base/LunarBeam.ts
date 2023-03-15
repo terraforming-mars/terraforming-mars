@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class LunarBeam extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LUNAR_BEAM,
       tags: [Tag.EARTH, Tag.POWER],
       cost: 13,

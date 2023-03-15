@@ -13,7 +13,7 @@ import {PathfindersData} from '../../pathfinders/PathfindersData';
 export class EconomicHelp extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.ECONOMIC_HELP,
       cost: 9,
 

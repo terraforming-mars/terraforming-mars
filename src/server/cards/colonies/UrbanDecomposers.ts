@@ -14,7 +14,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
       cost: 6,
       tags: [Tag.MICROBE],
       name: CardName.URBAN_DECOMPOSERS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         production: {plants: 1},

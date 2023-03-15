@@ -10,7 +10,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class ButterflyEffect extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.BUTTERFLY_EFFECT,
       cost: 8,
 

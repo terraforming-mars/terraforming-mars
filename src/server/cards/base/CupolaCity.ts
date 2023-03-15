@@ -11,7 +11,7 @@ import {max} from '../Options';
 export class CupolaCity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CUPOLA_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 16,

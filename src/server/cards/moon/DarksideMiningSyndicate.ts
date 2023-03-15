@@ -12,7 +12,7 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_MINING_SYNDICATE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.SPACE],
       cost: 18,
       tr: {moonMining: 1},

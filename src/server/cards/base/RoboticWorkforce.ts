@@ -15,7 +15,7 @@ import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ROBOTIC_WORKFORCE,
       tags: [Tag.SCIENCE],
       cost: 9,

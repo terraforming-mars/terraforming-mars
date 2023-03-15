@@ -10,7 +10,7 @@ import {digit, played} from '../Options';
 export class QuantumExtractor extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.QUANTUM_EXTRACTOR,
       tags: [Tag.SCIENCE, Tag.POWER],
       cost: 13,

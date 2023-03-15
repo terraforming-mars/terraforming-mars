@@ -18,7 +18,7 @@ export class MarketManipulation extends Card implements IProjectCard {
       cost: 1,
       tags: [Tag.EARTH],
       name: CardName.MARKET_MANIPULATION,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       metadata: {
         cardNumber: 'C23',

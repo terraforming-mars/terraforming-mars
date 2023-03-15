@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class ReleaseOfInertGases extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.RELEASE_OF_INERT_GASES,
       cost: 14,
 

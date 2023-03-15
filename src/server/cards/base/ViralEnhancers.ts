@@ -15,7 +15,7 @@ import {played} from '../Options';
 export class ViralEnhancers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.VIRAL_ENHANCERS,
       tags: [Tag.SCIENCE, Tag.MICROBE],
       cost: 9,

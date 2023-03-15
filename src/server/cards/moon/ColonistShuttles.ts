@@ -11,7 +11,7 @@ export class ColonistShuttles extends Card {
   constructor() {
     super({
       name: CardName.COLONIST_SHUTTLES,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.SPACE],
       cost: 12,
       reserveUnits: {titanium: 1},

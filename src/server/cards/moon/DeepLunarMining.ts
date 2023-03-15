@@ -8,7 +8,7 @@ export class DeepLunarMining extends Card {
   constructor() {
     super({
       name: CardName.DEEP_LUNAR_MINING,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 18,
       reserveUnits: {titanium: 1},

@@ -15,7 +15,7 @@ export class CometForVenus extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.COMET_FOR_VENUS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.SPACE],
       cost: 11,
 

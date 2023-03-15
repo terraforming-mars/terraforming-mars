@@ -14,7 +14,7 @@ import {all} from '../Options';
 export class EcologicalSurvey extends SurveyCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ECOLOGICAL_SURVEY,
       tags: [Tag.SCIENCE],
       cost: 9,

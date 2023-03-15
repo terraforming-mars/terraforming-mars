@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class GHGProducingBacteria extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.GHG_PRODUCING_BACTERIA,
       tags: [Tag.SCIENCE, Tag.MICROBE],
       cost: 8,

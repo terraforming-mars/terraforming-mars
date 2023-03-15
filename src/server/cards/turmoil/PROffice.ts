@@ -11,7 +11,7 @@ import {played} from '../Options';
 export class PROffice extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.PR_OFFICE,
       tags: [Tag.EARTH],
       cost: 7,

@@ -9,7 +9,6 @@ import {vueRoot} from '@/client/components/vueRoot';
 import {range} from '@/common/utils/utils';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {Phase} from '@/common/Phase';
 

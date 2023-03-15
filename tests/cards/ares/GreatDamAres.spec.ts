@@ -39,7 +39,7 @@ describe('GreatDamAres', function() {
     const space = action.availableSpaces[0];
     action.cb(space);
 
-    expect(space.tile && space.tile.tileType).to.eq(TileType.GREAT_DAM);
+    expect(space.tile!.tileType).to.eq(TileType.GREAT_DAM);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.ENERGY, SpaceBonus.ENERGY]});
   });
 });

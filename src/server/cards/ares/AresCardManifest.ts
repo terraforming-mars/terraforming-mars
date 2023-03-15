@@ -57,6 +57,8 @@ export const ARES_CARD_MANIFEST = new ModuleManifest({
     CardName.CAPITAL,
     CardName.COMMERCIAL_DISTRICT,
     CardName.ECOLOGICAL_ZONE,
+    CardName.GREAT_DAM,
+    CardName.GREAT_DAM_PROMO,
     CardName.INDUSTRIAL_CENTER,
     CardName.LAVA_FLOWS,
     CardName.MINING_AREA,

@@ -133,7 +133,7 @@ export default Vue.extend({
               </div>
             </span>
           </div>
-          <player-status :timer="player.timer" :showTimers="playerView.game.gameOptions.showTimers" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" />
+          <player-status :timer="player.timer" :showTimer="playerView.game.gameOptions.showTimers" :liveTimer="playerView.game.phase !== Phase.END" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" />
         </div>
           <PlayerResources :player="player" v-trim-whitespace />
           <div class="player-played-cards">

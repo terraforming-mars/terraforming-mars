@@ -18,6 +18,7 @@ export class CultivationOfVenus extends ActionCard implements IProjectCard {
       action: {
         spend: {plants: 3},
         global: {venus: 1},
+        //   player.game.log('${0} spent 3 plants to raise the Venus level 1 step', (b) => b.player(player));
       },
 
       metadata: {
@@ -31,15 +32,5 @@ export class CultivationOfVenus extends ActionCard implements IProjectCard {
       },
     });
   }
-  // public canAct(player: Player) {
-  //   return player.plants >= 3 && player.canAfford(0, {tr: {venus: 1}});
-  // }
-
-  // public action(player: Player) {
-  //   player.deductResource(Resources.PLANTS, 3);
-  //   player.game.increaseVenusScaleLevel(player, 1);
-  //   player.game.log('${0} spent 3 plants to raise the Venus level 1 step', (b) => b.player(player));
-  //   return undefined;
-  // }
 }
 

@@ -161,9 +161,9 @@ describe('Executor', () => {
     expect(player.cardsInHand[0].tags).contains(Tag.SPACE);
     expect(player.cardsInHand[1].tags).contains(Tag.SPACE);
     expect(player.cardsInHand[2].tags).contains(Tag.SPACE);
-    expect(player.cardsInHand[0].cardType).eq(CardType.EVENT);
-    expect(player.cardsInHand[1].cardType).eq(CardType.EVENT);
-    expect(player.cardsInHand[2].cardType).eq(CardType.EVENT);
+    expect(player.cardsInHand[0].type).eq(CardType.EVENT);
+    expect(player.cardsInHand[1].type).eq(CardType.EVENT);
+    expect(player.cardsInHand[2].type).eq(CardType.EVENT);
     expect(player.megaCredits).eq(5);
   });
 
@@ -449,7 +449,11 @@ describe('Executor', () => {
   });
 
   it('spend - resource on card', () => {
+<<<<<<< HEAD
     const behavior = {spend: {resourcesHere: 1}};
+=======
+    const behavior = {spend: {card: 1}};
+>>>>>>> main
     expect(executor.canExecute(behavior, player, fake)).is.false;
     fake.resourceCount = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;

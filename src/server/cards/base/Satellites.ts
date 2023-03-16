@@ -11,7 +11,7 @@ import {played} from '../Options';
 export class Satellites extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SATELLITES,
       tags: [Tag.SPACE],
       cost: 10,

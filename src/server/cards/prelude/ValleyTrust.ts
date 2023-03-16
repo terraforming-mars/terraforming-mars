@@ -12,7 +12,7 @@ import {played} from '../Options';
 export class ValleyTrust extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.VALLEY_TRUST,
       tags: [Tag.EARTH],
       startingMegaCredits: 37,

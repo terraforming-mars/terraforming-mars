@@ -10,7 +10,7 @@ import {digit} from '../Options';
 export class ImportedNitrogen extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.IMPORTED_NITROGEN,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 23,

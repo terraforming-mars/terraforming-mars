@@ -15,7 +15,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
       cost: 20,
       tags: [Tag.SPACE, Tag.SCIENCE],

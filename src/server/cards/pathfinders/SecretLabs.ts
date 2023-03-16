@@ -18,7 +18,7 @@ import {digit} from '../Options';
 export class SecretLabs extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SECRET_LABS,
       cost: 21,
       tags: [Tag.JOVIAN, Tag.BUILDING, Tag.SPACE],

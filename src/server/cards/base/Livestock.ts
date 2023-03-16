@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Livestock extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.LIVESTOCK,
       tags: [Tag.ANIMAL],
       cost: 13,

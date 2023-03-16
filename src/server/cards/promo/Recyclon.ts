@@ -15,7 +15,7 @@ import {digit, played} from '../Options';
 export class Recyclon extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.RECYCLON,
       tags: [Tag.MICROBE, Tag.BUILDING],
       startingMegaCredits: 38,

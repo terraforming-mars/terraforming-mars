@@ -13,7 +13,7 @@ import {all, max} from '../Options';
 export class GeologicalSurvey extends SurveyCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.GEOLOGICAL_SURVEY,
       tags: [Tag.SCIENCE],
       cost: 8,

@@ -19,7 +19,7 @@ import {all} from '../Options';
 export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
       tags: [Tag.MOON],
       startingMegaCredits: 40,

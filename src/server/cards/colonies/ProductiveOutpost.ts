@@ -12,7 +12,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
     super({
       cost: 0,
       name: CardName.PRODUCTIVE_OUTPOST,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       metadata: {
         cardNumber: 'C30',

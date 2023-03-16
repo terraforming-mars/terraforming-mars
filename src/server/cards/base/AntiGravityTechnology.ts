@@ -9,7 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 export class AntiGravityTechnology extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ANTI_GRAVITY_TECHNOLOGY,
       tags: [Tag.SCIENCE],
       cost: 14,

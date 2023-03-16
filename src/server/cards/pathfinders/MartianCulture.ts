@@ -12,7 +12,7 @@ import {all} from '../Options';
 export class MartianCulture extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARTIAN_CULTURE,
       cost: 11,
       tags: [Tag.MARS, Tag.MARS],

@@ -12,7 +12,7 @@ import {played} from '../Options';
 export class MartianInsuranceGroup extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.MARTIAN_INSURANCE_GROUP,
       tags: [Tag.MARS],
       startingMegaCredits: 42,
@@ -38,7 +38,7 @@ export class MartianInsuranceGroup extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    if (player.isCorporation(this.name) && card.cardType === CardType.EVENT) {
+    if (player.isCorporation(this.name) && card.type === CardType.EVENT) {
       player.production.add(Resources.MEGACREDITS, 1, {log: true});
     }
   }

@@ -15,7 +15,7 @@ export class JovianLanterns extends Card implements IProjectCard {
       cost: 20,
       tags: [Tag.JOVIAN],
       name: CardName.JOVIAN_LANTERNS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       resourceType: CardResource.FLOATER,
       victoryPoints: VictoryPoints.resource(1, 2),

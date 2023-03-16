@@ -11,7 +11,7 @@ import {all} from '../Options';
 export class MonsInsurance extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.MONS_INSURANCE,
       startingMegaCredits: 48,
 

@@ -11,7 +11,7 @@ import {all, played} from '../Options';
 export class DiasporaMovement extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.DIASPORA_MOVEMENT,
       tags: [Tag.JOVIAN],
       cost: 7,

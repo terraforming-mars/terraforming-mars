@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class DevelopmentCenter extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.DEVELOPMENT_CENTER,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 11,

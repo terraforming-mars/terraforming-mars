@@ -10,7 +10,7 @@ export class LunarIndustryComplex extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_INDUSTRY_COMPLEX,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 28,
 

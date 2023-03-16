@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class CrashSiteCleanup extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.CRASH_SITE_CLEANUP,
       cost: 4,
       requirements: CardRequirements.builder((b) => b.plantsRemoved()),

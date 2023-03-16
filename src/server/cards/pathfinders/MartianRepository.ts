@@ -13,7 +13,7 @@ import {played} from '../Options';
 export class MartianRepository extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARTIAN_REPOSITORY,
       cost: 12,
       tags: [Tag.MARS, Tag.MARS, Tag.BUILDING],

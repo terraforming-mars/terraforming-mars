@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class DesperateMeasures extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.DESPERATE_MEASURES,
       cost: 1,
       victoryPoints: -2,

@@ -14,7 +14,7 @@ import {Priority} from '../../deferredActions/DeferredAction';
 export class ArtificialPhotosynthesis extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ARTIFICIAL_PHOTOSYNTHESIS,
       tags: [Tag.SCIENCE],
       cost: 12,

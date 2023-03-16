@@ -189,6 +189,7 @@ import {Timer} from '@/common/Timer';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {Color} from '@/common/Color';
 import {CardType} from '@/common/cards/CardType';
+import {getCard} from '../cards/ClientCardManifest';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;
@@ -277,7 +278,7 @@ export default Vue.extend({
     },
     getCorporationName(p: PublicPlayerModel): string {
       const firstCard = p.tableau[0];
-      return firstCard.cardType === CardType.CORPORATION ? firstCard.name : '';
+      return getCard(firstCard.name)?.type === CardType.CORPORATION ? firstCard.name : '';
     },
   },
 });

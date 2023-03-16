@@ -10,7 +10,7 @@ export class SinusIridiumRoadNetwork extends Card {
   constructor() {
     super({
       name: CardName.SINUS_IRIDIUM_ROAD_NETWORK,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 15,
 

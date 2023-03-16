@@ -45,7 +45,7 @@ describe('ProjectWorkshop', function() {
     player.runInitialAction(card);
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
+    expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
 
   it('Can not act', function() {
@@ -60,7 +60,7 @@ describe('ProjectWorkshop', function() {
     card.action(player).cb();
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
+    expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
 
   it('Can flip a played blue card and remove its ongoing effects', function() {
@@ -197,6 +197,6 @@ describe('ProjectWorkshop', function() {
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
+    expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
 });

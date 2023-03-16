@@ -16,7 +16,7 @@ export class SubZeroSaltFish extends ActionCard implements IProjectCard {
       cost: 5,
       tags: [Tag.ANIMAL],
       name: CardName.SUBZERO_SALT_FISH,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 2),

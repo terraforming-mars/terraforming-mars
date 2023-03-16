@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Tardigrades extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.TARDIGRADES,
       tags: [Tag.MICROBE],
       cost: 4,

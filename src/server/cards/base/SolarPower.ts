@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SolarPower extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SOLAR_POWER,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 11,

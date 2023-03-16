@@ -11,7 +11,7 @@ import {IStandardProjectCard} from '../IStandardProjectCard';
 export class CrediCor extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.CREDICOR,
       startingMegaCredits: 57,
 

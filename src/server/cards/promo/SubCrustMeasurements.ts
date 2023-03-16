@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SubCrustMeasurements extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SUB_CRUST_MEASUREMENTS,
       tags: [Tag.SCIENCE, Tag.BUILDING, Tag.EARTH],
       cost: 20,

@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AdaptationTechnology extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ADAPTATION_TECHNOLOGY,
       tags: [Tag.SCIENCE],
       cost: 12,

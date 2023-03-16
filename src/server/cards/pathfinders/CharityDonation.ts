@@ -12,7 +12,7 @@ import {DeferredAction, Priority} from '../..//deferredActions/DeferredAction';
 export class CharityDonation extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.CHARITY_DONATION,
       tags: [Tag.MARS],
       cost: 7,

@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SymbioticFungus extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SYMBIOTIC_FUNGUS,
       tags: [Tag.MICROBE],
       cost: 4,

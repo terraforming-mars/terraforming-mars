@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class MartianMediaCenter extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARTIAN_MEDIA_CENTER,
       tags: [Tag.BUILDING],
       cost: 7,

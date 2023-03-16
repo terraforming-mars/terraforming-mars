@@ -14,7 +14,7 @@ import {played} from '../Options';
 export class MarsUniversity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARS_UNIVERSITY,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 8,

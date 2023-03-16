@@ -18,7 +18,7 @@ import {Board} from '../../boards/Board';
 export class Herbivores extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.HERBIVORES,
       tags: [Tag.ANIMAL],
       cost: 12,

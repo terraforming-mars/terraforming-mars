@@ -16,7 +16,7 @@ import {digit} from '../Options';
 export class MiningGuild extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.MINING_GUILD,
       tags: [Tag.BUILDING, Tag.BUILDING],
       startingMegaCredits: 30,

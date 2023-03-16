@@ -19,20 +19,20 @@
 
   "Breeding Farms": "Aufzuchtbetriebe",
   "(Action: Spend 1 plant to add 1 animal to ANY card.)": "(AKTION: Verbrauche 1 Pflanze, um einer beliebigen Karte 1 Tier hinzuzufügen.)",
-  "(Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.)": "(Benötigt 1 eigenes Tier- und Wissenschaftssymbol. Erhöhe die Temperatur um 2°C",
+  "(Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.)": "(Benötigt 1 eigenes Tier- und Wissenschaftssymbol. Erhöhe die Temperatur um 2°C)",
 
   "Cassini Station": "Cassini Raumstation",
-  "(Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.)": "Erhöhe deine Energie-Produktion um 1 je Kolonie im Spiel. Füge einer Karte 2 Schweber hinzu ODER füge einer Karte 3 Daten hinzu.)",
+  "(Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.)": "(Erhöhe deine Energie-Produktion um 1 je Kolonie im Spiel. Füge einer Karte 2 Schweber hinzu ODER füge einer Karte 3 Daten hinzu.)",
 
   "Ceres Spaceport": "Ceres Raumhafen",
-  "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reserviertem Gebiet. Platziere ein Ozeanplättchen. Erhöhe deine Titan-Produktion um 1 je 2 eigene Jupitersymbole (einschließlich diese). Erhöhe deine M€-Produktion um 2.)",
+  "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "(Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reserviertem Gebiet. Platziere ein Ozeanplättchen. Erhöhe deine Titan-Produktion um 1 je 2 eigene Jupitersymbole (einschließlich diese). Erhöhe deine M€-Produktion um 2.)",
 
   "Charity Donation": "Wohltätige Spende",
   "Reveal cards from the deck equal to the player count plus 1.": "Decke 1 Karte mehr auf als Spieler am Spiel teilnehmen.",
   "In player order starting with you, each player takes one card in hand. Discard the remaining card.":  "Beginnend bei dir wählt der Reihe nach jeder Spieler eine davon und nimmt sie auf die Hand. Werfe die letzte Karte ab.",
 
   "Communication Center": "Kommunikationszentrum",
-  "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "(EFFEKT: Immer wenn eine Ereigniskarte gespielt wird, füge dieser Karte 1 Datenressource hinzu.",
+  "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "(EFFEKT: Immer wenn eine Ereigniskarte gespielt wird, füge dieser Karte 1 Datenressource hinzu.)",
   "(Effect: Remove 3 data to draw a card automatically.)": "(EFFEKT: Befinden sich 3 Daten auf dieser Karte, entferne diese um eine Karte zu ziehen.)",
   "(Decrease your energy production 1 step. Place 2 data on this card.)": "(Senke deine Energie-Produktion um 1. Füge dieser Karte 2 Daten hinzu.)",
 
@@ -47,7 +47,7 @@
   "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(AKTION: Entferne Daten von hier, um 3 M€ je entfernten Daten zu erhalten.)",
 
   "Cultivation of Venus": "Kultivierung der Venus",
-  "(Action: Spend 3 plants to raise Venus 1 step.)": "(AKTION Verbrauche 3 Pflanzen, um Venus um 2% zu erhöhen.)",
+  "(Action: Spend 3 plants to raise Venus 1 step.)": "(AKTION: Verbrauche 3 Pflanzen, um Venus um 2% zu erhöhen.)",
   "(1 VP for every 2 Venus tags you own.)": "(1 SP je 2 eigene Venussysmbole.)",
 
   "Cyanobacteria": "Cyanbakterien",
@@ -221,7 +221,7 @@
   "(Requires 4 space tags. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(Benötigt 4 Weltraumsymbole im Spiel. Füge einer Karte 1 beliebige Ressource hinzu (kein Tier). Füge einer Karte 1 Datenressource hinzu. Erhalte 3 Titan. Ziehe 1 Karte.)",
 
   "Space Relay": "Orbitaler Verstärker",
-  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(EFFEKT: Wenn du ein Jupitersymbol ausspielst (einschließlich dieses), ziehe 1 Karte.",
+  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(EFFEKT: Wenn du ein Jupitersymbol ausspielst (einschließlich dieses), ziehe 1 Karte.)",
   "(Erhöhe deine M€-Produktion um 1 Schritt.)": "(Erhöhe deine M€-Produktion um 1.)",
 
   "Specialized Settlement": "Spezialisierte Siedlung",

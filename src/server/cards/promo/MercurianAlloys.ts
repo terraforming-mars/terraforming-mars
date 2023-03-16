@@ -10,7 +10,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class MercurianAlloys extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MERCURIAN_ALLOYS,
       tags: [Tag.SPACE],
       cost: 3,

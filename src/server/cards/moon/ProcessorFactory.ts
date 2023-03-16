@@ -11,7 +11,7 @@ export class ProcessorFactory extends ActionCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.PROCESSOR_FACTORY,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 8,
 

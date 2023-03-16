@@ -32,7 +32,7 @@ describe('Odyssey', () => {
   });
 
   it('events count for tags', () => {
-    const event = fakeCard({cardType: CardType.EVENT, tags: [Tag.JOVIAN]});
+    const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
     player.playedCards.push(event);
     expect(player.tags.count(Tag.JOVIAN)).eq(1);
     player.setCorporationForTest(undefined);
@@ -40,7 +40,7 @@ describe('Odyssey', () => {
   });
 
   it('cannot act - cannot afford', () => {
-    const expensiveEvent = fakeCard({cardType: CardType.EVENT, cost: 8});
+    const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 8});
     player.playedCards = [expensiveEvent];
     expect(card.canAct(player)).is.false;
     player.megaCredits = 7;
@@ -64,8 +64,8 @@ describe('Odyssey', () => {
   it('can act', () => {
     player.megaCredits = 50;
     expect(card.canAct(player)).is.false;
-    const expensiveEvent = fakeCard({cardType: CardType.EVENT, cost: 17});
-    const nonEvent = fakeCard({cardType: CardType.ACTIVE, cost: 2});
+    const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 17});
+    const nonEvent = fakeCard({type: CardType.ACTIVE, cost: 2});
     player.playedCards = [expensiveEvent, nonEvent];
     expect(card.canAct(player)).is.false;
     expensiveEvent.cost = 16;

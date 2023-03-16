@@ -10,7 +10,7 @@ export class VenusGovernor extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUS_GOVERNOR,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.VENUS, Tag.VENUS],
       cost: 4,
 

@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class BiofertilizerFacility extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.BIOFERTILIZER_FACILITY,
       tags: [Tag.MICROBE, Tag.BUILDING],
       cost: 12,

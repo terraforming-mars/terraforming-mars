@@ -23,7 +23,7 @@ export interface IProjectCard extends ICard {
 }
 
 export function isIProjectCard(card: ICard): card is IProjectCard {
-  return card.cardType === CardType.AUTOMATED ||
-    card.cardType === CardType.ACTIVE ||
-    card.cardType === CardType.EVENT;
+  return card.type === CardType.AUTOMATED ||
+    card.type === CardType.ACTIVE ||
+    card.type === CardType.EVENT;
 }

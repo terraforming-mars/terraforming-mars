@@ -12,7 +12,7 @@ export class RustEatingBacteria extends ActionCard implements IActionCard, IProj
   constructor() {
     super({
       name: CardName.RUST_EATING_BACTERIA,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MICROBE],
       cost: 7,
 

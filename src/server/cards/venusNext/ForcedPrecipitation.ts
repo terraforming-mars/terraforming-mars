@@ -16,7 +16,7 @@ export class ForcedPrecipitation extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.FORCED_PRECIPITATION,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 8,
       resourceType: CardResource.FLOATER,

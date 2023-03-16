@@ -10,7 +10,7 @@ import {ICard} from '../ICard';
 export class StandardTechnology extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.STANDARD_TECHNOLOGY,
       tags: [Tag.SCIENCE],
       cost: 6,

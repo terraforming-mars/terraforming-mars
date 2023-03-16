@@ -8,7 +8,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class ProtectedHabitats extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.PROTECTED_HABITATS,
       cost: 5,
 

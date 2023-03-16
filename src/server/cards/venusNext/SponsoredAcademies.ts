@@ -14,7 +14,7 @@ export class SponsoredAcademies extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SPONSORED_ACADEMIES,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.EARTH, Tag.SCIENCE],
       cost: 9,
 

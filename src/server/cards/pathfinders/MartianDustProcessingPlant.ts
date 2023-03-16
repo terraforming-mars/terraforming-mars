@@ -8,7 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class MartianDustProcessingPlant extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MARTIAN_DUST_PROCESSING_PLANT,
       cost: 15,
       tags: [Tag.MARS, Tag.BUILDING],

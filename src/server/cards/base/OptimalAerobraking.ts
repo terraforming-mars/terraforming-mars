@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class OptimalAerobraking extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.OPTIMAL_AEROBRAKING,
       tags: [Tag.SPACE],
       cost: 7,
@@ -25,7 +25,7 @@ export class OptimalAerobraking extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.cardType === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
+    if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
       player.megaCredits += 3;
       player.heat += 3;
     }

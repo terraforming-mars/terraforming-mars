@@ -32,6 +32,19 @@ describe('Leavitt', function() {
     expect(player.tags.count(Tag.SCIENCE)).to.eq(2);
   });
 
+  it('Science tag bonus should survive deserialization', function() {
+    expect(player.tags.count(Tag.SCIENCE)).to.eq(0);
+    leavitt.addColony(player);
+    expect(player.tags.count(Tag.SCIENCE)).to.eq(1);
+    leavitt.addColony(player);
+    expect(player.tags.count(Tag.SCIENCE)).to.eq(2);
+
+    const serialized = game.serialize();
+    const newGame = Game.deserialize(serialized);
+    const newPlayer = newGame.getPlayerById(player.id);
+    expect(newPlayer.tags.count(Tag.SCIENCE)).to.eq(2);
+  });
+
   it('Should trade + bonus', function() {
     leavitt.addColony(player2);
     leavitt.trackPosition = 4;

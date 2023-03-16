@@ -11,7 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 export class Pollinators extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.POLLINATORS,
       cost: 19,
       tags: [Tag.PLANT, Tag.ANIMAL],

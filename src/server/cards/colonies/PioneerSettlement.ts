@@ -17,7 +17,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
       cost: 13,
       tags: [Tag.SPACE],
       name: CardName.PIONEER_SETTLEMENT,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       requirements: CardRequirements.builder((b) => b.colonies(1, {max})),
       victoryPoints: 2,
 
@@ -43,7 +43,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
     let coloniesCount = 0;
     const hasOneColonyMax = player.game.colonies.every((colony) => {
       if (colony.name === ColonyName.LUNA &&
-          colony.isColonyFull() === false &&
+          colony.isFull() === false &&
           colony.colonies.includes(player.id) === false) {
         lunaIsAvailable = true;
       }

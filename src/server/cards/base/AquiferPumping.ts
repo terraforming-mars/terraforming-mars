@@ -13,7 +13,7 @@ export const OCEAN_COST = 8;
 export class AquiferPumping extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.AQUIFER_PUMPING,
       tags: [Tag.BUILDING],
       cost: 18,

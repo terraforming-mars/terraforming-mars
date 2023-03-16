@@ -14,7 +14,7 @@ import {digit} from '../Options';
 export class DysonScreens extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.DYSON_SCREENS,
       tags: [Tag.SCIENCE, Tag.VENUS, Tag.POWER, Tag.SPACE],
       cost: 28,

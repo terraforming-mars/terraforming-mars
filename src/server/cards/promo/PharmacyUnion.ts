@@ -18,7 +18,7 @@ import {SerializedCard} from '@/server/SerializedCard';
 export class PharmacyUnion extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.PHARMACY_UNION,
       startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
       resourceType: CardResource.DISEASE,

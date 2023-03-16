@@ -13,7 +13,7 @@ import {ICard} from '../ICard';
 export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SPACE_DEBRIS_CLEANING_OPERATION,
       cost: 7,
       tags: [Tag.MARS, Tag.SPACE],

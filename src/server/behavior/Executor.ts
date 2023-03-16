@@ -59,7 +59,11 @@ export class Executor implements BehaviorExecutor {
       if (spend.energy && player.energy < spend.energy) {
         return false;
       }
+<<<<<<< HEAD
       if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
+=======
+      if (spend.card && card.resourceCount < spend.card) {
+>>>>>>> main
         return false;
       }
       if (spend.heat) {
@@ -109,10 +113,13 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+<<<<<<< HEAD
     if (behavior.removeResourcesFromAnyCard !== undefined) {
       throw new Error('not yet');
     }
 
+=======
+>>>>>>> main
     if (behavior.turmoil) {
       if (behavior.turmoil.sendDelegates) {
         if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) < behavior.turmoil.sendDelegates.count) {
@@ -176,8 +183,13 @@ export class Executor implements BehaviorExecutor {
       if (spend.heat) {
         throw new Error('Spending heat not supported yet.');
       }
+<<<<<<< HEAD
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);
+=======
+      if (spend.card) {
+        player.removeResourceFrom(card, spend.card);
+>>>>>>> main
       }
     }
 

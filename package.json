@@ -23,7 +23,7 @@
     "pg": "^8.2.1",
     "prom-client": "^14.0.1",
     "spectre.css": "^0.5.8",
-    "sqlite3": "^5.0.4",
+    "sqlite3": "^5.1.5",
     "vti": "^0.1.7",
     "vue": "2.6.10",
     "vue-template-compiler": "2.6.10",

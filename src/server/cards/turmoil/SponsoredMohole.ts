@@ -13,7 +13,7 @@ export class SponsoredMohole extends Card implements IProjectCard {
       cost: 5,
       tags: [Tag.BUILDING],
       name: CardName.SPONSORED_MOHOLE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         production: {heat: 2},

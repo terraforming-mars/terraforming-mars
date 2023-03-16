@@ -17,7 +17,7 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
   constructor() {
     super({
       name: CardName.DARKSIDE_INCUBATION_PLANT,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MICROBE, Tag.MOON],
       cost: 11,
 

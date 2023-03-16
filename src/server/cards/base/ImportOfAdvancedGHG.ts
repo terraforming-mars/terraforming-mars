@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class ImportOfAdvancedGHG extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.IMPORT_OF_ADVANCED_GHG,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 9,

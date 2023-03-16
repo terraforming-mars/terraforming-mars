@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Advertising extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ADVERTISING,
       tags: [Tag.EARTH],
       cost: 4,

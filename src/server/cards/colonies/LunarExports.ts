@@ -16,7 +16,7 @@ export class LunarExports extends Card implements IProjectCard {
       cost: 19,
       tags: [Tag.EARTH, Tag.SPACE],
       name: CardName.LUNAR_EXPORTS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       metadata: {
         cardNumber: 'C21',

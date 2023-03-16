@@ -12,7 +12,7 @@ export class FloaterTechnology extends ActionCard implements IProjectCard {
       cost: 7,
       tags: [Tag.SCIENCE],
       name: CardName.FLOATER_TECHNOLOGY,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       action: {
         addResourcesToAnyCard: {type: CardResource.FLOATER, count: 1, mustHaveCard: true},

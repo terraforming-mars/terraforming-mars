@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class TowingAComet extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.TOWING_A_COMET,
       tags: [Tag.SPACE],
       cost: 23,

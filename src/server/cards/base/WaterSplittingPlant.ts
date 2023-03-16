@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class WaterSplittingPlant extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.WATER_SPLITTING_PLANT,
       tags: [Tag.BUILDING],
       cost: 12,

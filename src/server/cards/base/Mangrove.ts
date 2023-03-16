@@ -10,7 +10,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class Mangrove extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MANGROVE,
       tags: [Tag.PLANT],
       cost: 12,

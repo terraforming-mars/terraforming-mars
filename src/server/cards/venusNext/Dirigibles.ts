@@ -11,7 +11,7 @@ export class Dirigibles extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.DIRIGIBLES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 11,
       resourceType: CardResource.FLOATER,

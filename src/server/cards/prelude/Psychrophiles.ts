@@ -12,7 +12,7 @@ import {max, played} from '../Options';
 export class Psychrophiles extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.PSYCHROPHILES,
       tags: [Tag.MICROBE],
       cost: 2,

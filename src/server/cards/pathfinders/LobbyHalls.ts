@@ -11,7 +11,7 @@ import {ICloneTagCard} from './ICloneTagCard';
 export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LOBBY_HALLS,
       cost: 11,
 

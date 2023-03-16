@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {Game} from '../../../src/server/Game';
@@ -35,13 +35,17 @@ describe('Thermophiles', function() {
     card.play(player);
     player.playedCards.push(card, new VenusianInsects());
 
-    const action = cast(card.action(player), SelectCard);
+    card.action(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     action.cb([card]);
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card);
 
-    const orOptions = cast(card.action(player), OrOptions);
+    card.action(player);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);
@@ -53,11 +57,14 @@ describe('Thermophiles', function() {
 
     const action = card.action(player);
     expect(action).is.undefined;
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card);
 
-    const orOptions = cast(card.action(player), OrOptions);
+    card.action(player);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

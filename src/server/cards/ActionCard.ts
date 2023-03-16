@@ -2,12 +2,13 @@ import {Behavior} from '../behavior/Behavior';
 import {Player} from '../Player';
 import {Card, StaticCardProperties, validateBehavior} from './Card';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
+import {IActionCard} from './ICard';
 
 export interface StaticActionCardProperties extends StaticCardProperties {
   action: Behavior;
 }
 
-export abstract class ActionCard extends Card {
+export abstract class ActionCard extends Card implements IActionCard {
   // Add actionBehavior to StaticCardProperties, otherwise this will multiple memory consumption.
   private actionBehavior: Behavior;
   constructor(properties: StaticActionCardProperties) {

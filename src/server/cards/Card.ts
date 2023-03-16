@@ -101,6 +101,9 @@ export abstract class Card {
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
       Card.autopopulateMetadataVictoryPoints(properties);
 
+      validateBehavior(properties.behavior);
+      validateBehavior(properties.firstAction);
+
       const p: Properties = {
         ...properties,
         reserveUnits: properties.reserveUnits === undefined ? undefined : {...Units.of(properties.reserveUnits), deduct: properties.reserveUnits.deduct ?? true},
@@ -315,5 +318,25 @@ export abstract class Card {
       }
     }
     return sum;
+  }
+}
+
+export function validateBehavior(behavior: Behavior | undefined) : void {
+  function validate(condition: boolean, error: string) {
+    if (condition === false) {
+      throw new Error(error);
+    }
+  }
+  if (behavior === undefined) {
+    return;
+  }
+  if (behavior.spend) {
+    if (behavior.spend.megacredits ?? behavior.spend.heat) {
+      validate(behavior.tr === undefined, 'spend.megacredits and spend.heat are not yet compatible with tr');
+      validate(behavior.global === undefined, 'spend.megacredits and spend.heat are not yet compatible with global');
+      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.habitatRate');
+      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.logisticsRate');
+      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.miningRate');
+    }
   }
 }

@@ -12,10 +12,23 @@ import {TileType} from '../../common/TileType';
 import {Countable, CountableUnits} from './Countable';
 import {PlacementType} from '../boards/PlacementType';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
+import {Units} from '../../common/Units';
+
+type ValueOf<Obj> = Obj[keyof Obj];
+type OneOnly<Obj, Key extends keyof Obj> = { [key in Exclude<keyof Obj, Key>]: null } & Pick<Obj, Key>;
+type OneOfByKey<Obj> = { [key in keyof Obj]: OneOnly<Obj, key> };
+export type OneOfType<Obj> = ValueOf<OneOfByKey<Obj>>;
+
+
+export interface Spend extends Units {
+  /** units or a number of resources from the card. */
+  card: number
+}
 
 /** A set of steps that an action can perform in any specific order. */
-
 export interface Behavior {
+  spend?: Partial<OneOfType<Spend>>;
+
   /** Gain or lose production */
   production?: Partial<CountableUnits>;
   /** Gain or lose stock */
@@ -25,7 +38,7 @@ export interface Behavior {
   addResources?: Countable;
 
   /** Add resources to any cards */
-  addResourcesToAnyCard?: AddResource | Array<AddResource>;
+  addResourcesToAnyCard?: AddResource | Array<Omit<AddResource, 'mustHaveCard'>>;
 
   /** Decrease any production */
   decreaseAnyProduction?: DecreaseAnyProduction;
@@ -127,7 +140,7 @@ export interface DrawCard {
   count: Countable,
   /** The number of cards to keep, should be between [1..count-1] */
   keep?: number,
-  /** When true, player has to pay to keep the card. (e.g. 3MC) */
+  /** When true, player may keep the card if they choose to pay for it. (e.g. 3MC.) */
   pay?: boolean,
 
   /** Discard cards without this tag */
@@ -141,7 +154,15 @@ export interface DrawCard {
 export interface AddResource {
   count: Countable,
   type?: CardResource,
-  tag?: Tag;
+  tag?: Tag,
+  /**
+   * If true, then there must be a card that matches this requirement to take the action.
+   *
+   * While the game allows players to take an action that places a resource even though
+   * there might not be a card to accept it, that can often make for players wasting
+   * resources without realizing it. In other words, a true value is a break from the standard rules.
+   */
+  mustHaveCard?: boolean,
 }
 
 export interface DecreaseAnyProduction {

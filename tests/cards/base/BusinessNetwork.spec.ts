@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('BusinessNetwork', function() {
   let card: BusinessNetwork;
@@ -30,12 +30,14 @@ describe('BusinessNetwork', function() {
   });
 
   it('Can act', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Cannot buy card if cannot pay', function() {
     player.megaCredits = 2;
-    const action = cast(card.action(player), SelectCard);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     expect(action.config.max).to.eq(0);
 
     action.cb([]);
@@ -46,7 +48,9 @@ describe('BusinessNetwork', function() {
 
   it('Should action as not helion', function() {
     player.megaCredits = 3;
-    const action = cast(card.action(player), SelectCard);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
 
     action.cb([]);
     expect(game.projectDeck.discardPile).has.lengthOf(1);

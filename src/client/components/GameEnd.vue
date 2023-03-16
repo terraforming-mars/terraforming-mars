@@ -78,7 +78,9 @@
                       <tr v-for="p in getSortedPlayers()" :key="p.color" :class="getEndGamePlayerRowColorClass(p.color)">
                           <td>
                             <a :href="'player?id='+p.id+'&noredirect'">{{ p.name }}</a>
-                            <div class="column-corporation"><span v-i18n>{{ getCorporationName(p) }}</span></div>
+                            <div class="column-corporation">
+                              <div v-for="(corporationName, index) in getCorporationName(p)" :key="index" v-i18n>{{ corporationName }}</div>
+                            </div>
                           </td>
                           <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                           <td>{{ p.victoryPointsBreakdown.milestones }}</td>
@@ -276,9 +278,12 @@ export default Vue.extend({
     isSoloGame(): boolean {
       return this.players.length === 1;
     },
-    getCorporationName(p: PublicPlayerModel): string {
-      const firstCard = p.tableau[0];
-      return getCard(firstCard.name)?.type === CardType.CORPORATION ? firstCard.name : '';
+    getCorporationName(p: PublicPlayerModel): string[] {
+      const cards = p.tableau;
+      const corporationCards = cards
+        .filter((card) => getCard(card.name)?.type === CardType.CORPORATION)
+        .map((card) => card.name);
+      return corporationCards.length === 0 ? [''] : corporationCards;
     },
   },
 });

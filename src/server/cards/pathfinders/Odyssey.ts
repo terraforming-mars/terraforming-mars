@@ -13,7 +13,7 @@ import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 export class Odyssey extends Card implements ICorporationCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.ODYSSEY,
       startingMegaCredits: 33,
 
@@ -45,7 +45,7 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
     this.checkLoops++;
     try {
       return player.playedCards.filter((card) => {
-        return card.cardType === CardType.EVENT &&
+        return card.type === CardType.EVENT &&
         card.cost <= 16 &&
         player.canPlay(card);
       });

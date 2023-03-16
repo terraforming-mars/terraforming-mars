@@ -16,7 +16,7 @@ import {IProjectCard} from '../IProjectCard';
 export class RedCity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.RED_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 21,

@@ -12,7 +12,7 @@ import {Turmoil} from '../../turmoil/Turmoil';
 export class TempestConsultancy extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.TEMPEST_CONSULTANCY,
       tags: [Tag.MOON],
       startingMegaCredits: 37,

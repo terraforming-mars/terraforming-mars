@@ -18,7 +18,7 @@ export class Celestic extends Card implements IActionCard, ICorporationCard {
       tags: [Tag.VENUS],
       startingMegaCredits: 42,
       resourceType: CardResource.FLOATER,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       initialActionText: 'Draw 2 cards with a floater icon on it',
       victoryPoints: VictoryPoints.resource(1, 3),
 

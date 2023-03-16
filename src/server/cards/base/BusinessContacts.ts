@@ -9,7 +9,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class BusinessContacts extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.BUSINESS_CONTACTS,
       tags: [Tag.EARTH],
       cost: 7,

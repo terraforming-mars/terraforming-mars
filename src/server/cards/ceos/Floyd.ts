@@ -4,7 +4,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {multiplier} from '../Options';
 
 export class Floyd extends CeoCard {
@@ -36,17 +35,16 @@ export class Floyd extends CeoCard {
   public action(player: Player): PlayerInput | undefined {
     this.isDisabled = true;
     this.opgActionIsActive = true;
-    player.game.defer(new PlayProjectCard(player));
-    player.game.defer(new SimpleDeferredAction(player, () => {
+    player.game.defer(new PlayProjectCard(player, () => {
+      this.opgActionIsActive = false;
       return undefined;
     }));
     return undefined;
   }
 
   public override getCardDiscount(player: Player) {
-    if (player.getActionsThisGeneration().has(this.name) && this.opgActionIsActive === true) {
-      this.opgActionIsActive = false;
-      return 13 + 2 * player.game.generation;
+    if (this.opgActionIsActive === true) {
+      return 13 + (2 * player.game.generation);
     }
     return 0;
   }

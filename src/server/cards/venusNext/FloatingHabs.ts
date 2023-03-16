@@ -12,7 +12,7 @@ export class FloatingHabs extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.FLOATING_HABS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 5,
 

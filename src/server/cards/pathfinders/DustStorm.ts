@@ -11,7 +11,7 @@ import {all} from '../Options';
 export class DustStorm extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.DUST_STORM,
       cost: 17,
       tags: [Tag.MARS],

@@ -12,7 +12,7 @@ import {Player} from '../../Player';
 export class JunkVentures extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.JUNK_VENTURES,
       initialActionText: 'Discard the top 3 cards of the deck',
       startingMegaCredits: 43,

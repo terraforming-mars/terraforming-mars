@@ -15,7 +15,7 @@ import {max} from '../Options';
 export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ELECTRO_CATAPULT,
       tags: [Tag.BUILDING],
       cost: 17,

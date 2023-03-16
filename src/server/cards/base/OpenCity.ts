@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class OpenCity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.OPEN_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 23,

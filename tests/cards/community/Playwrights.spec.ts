@@ -12,6 +12,10 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
+import {ICard} from '../../../src/server/cards/ICard';
+import {GlobalParameter} from '../../../src/common/GlobalParameter';
+import {Worms} from '../../../src/server/cards/base/Worms';
 
 describe('Playwrights', () => {
   let card: Playwrights;
@@ -27,6 +31,7 @@ describe('Playwrights', () => {
 
     card.play(player);
     player.setCorporationForTest(card);
+    player.popSelectInitialCards();
   });
 
   it('Cannot act without any played events', () => {
@@ -123,5 +128,53 @@ describe('Playwrights', () => {
     expect(player.playedCards).has.lengthOf(0);
     expect(player2.playedCards).has.lengthOf(0); // Card is removed from play for sued player
     expect(player.removedFromPlayCards).has.lengthOf(1);
+  });
+
+  it('Works with Special Design', () => {
+    const event = new SpecialDesign();
+    player2.playedCards.push(event);
+
+    player.megaCredits = event.cost;
+    expect(card.canAct(player)).is.true;
+
+    const selectCard = cast(card.action(player), SelectCard<ICard>);
+    selectCard.cb([event]);
+
+    runAllActions(game);
+
+    expect(player.getRequirementsBonus(GlobalParameter.OXYGEN)).to.eq(2);
+
+    const lastRemovedFromPlayCard = player.removedFromPlayCards[player.removedFromPlayCards.length - 1];
+    expect(lastRemovedFromPlayCard.name).to.eq(event.name);
+
+    player.playCard(new Worms());
+    expect(player.getRequirementsBonus(GlobalParameter.OXYGEN)).to.eq(0);
+    expect(player.removedFromPlayCards).deep.eq([event]);
+  });
+
+  it('Works with Special Design after deserialization', () => {
+    const event = new SpecialDesign();
+    player2.playedCards.push(event);
+
+    player.megaCredits = event.cost;
+    expect(card.canAct(player)).is.true;
+
+    const selectCard = cast(card.action(player), SelectCard<ICard>);
+    selectCard.cb([event]);
+
+    runAllActions(game);
+
+    expect(player.getRequirementsBonus(GlobalParameter.OXYGEN)).to.eq(2);
+
+    const serialized = game.serialize();
+    const newGame = Game.deserialize(serialized);
+    const newPlayer = newGame.getPlayerById(player.id);
+
+    const lastRemovedFromPlayCard = newPlayer.removedFromPlayCards[player.removedFromPlayCards.length - 1];
+    expect(lastRemovedFromPlayCard.name).to.eq(event.name);
+
+    newPlayer.playCard(new Worms());
+    expect(newPlayer.getRequirementsBonus(GlobalParameter.OXYGEN)).to.eq(0);
+    expect(newPlayer.removedFromPlayCards).deep.eq([event]);
   });
 });

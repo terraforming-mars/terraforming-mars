@@ -10,7 +10,7 @@ import {all} from '../Options';
 export class Zeppelins extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ZEPPELINS,
       cost: 13,
       victoryPoints: 1,

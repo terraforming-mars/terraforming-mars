@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AsteroidHollowing extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ASTEROID_HOLLOWING,
       tags: [Tag.SPACE],
       cost: 16,

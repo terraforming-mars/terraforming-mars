@@ -13,7 +13,7 @@ import {all, digit} from '../Options';
 export class Sabotage extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SABOTAGE,
       cost: 1,
 

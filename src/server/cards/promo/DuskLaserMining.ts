@@ -10,7 +10,7 @@ import {digit} from '../Options';
 export class DuskLaserMining extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.DUSK_LASER_MINING,
       cost: 8,
       tags: [Tag.SPACE],

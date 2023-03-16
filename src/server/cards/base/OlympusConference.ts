@@ -14,7 +14,7 @@ import {played} from '../Options';
 export class OlympusConference extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.OLYMPUS_CONFERENCE,
       tags: [Tag.SCIENCE, Tag.EARTH, Tag.BUILDING],
       cost: 10,

@@ -31,7 +31,7 @@ describe('NewPartner', function() {
     expect(selectCard.cards).has.length(2);
     selectCard.cb([selectCard.cards[0]]);
     expect(player.production.megacredits).to.eq(1);
-    expect(player.playedCards.every((card) => card.cardType === CardType.PRELUDE)).is.true;
+    expect(player.playedCards.every((card) => card.type === CardType.PRELUDE)).is.true;
   });
 
   it('Should play with only 1 playable prelude', function() {

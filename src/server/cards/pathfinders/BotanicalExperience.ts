@@ -17,7 +17,7 @@ import {Resources} from '../../../common/Resources';
 export class BotanicalExperience extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.BOTANICAL_EXPERIENCE,
       cost: 14,
       tags: [Tag.PLANT, Tag.MARS, Tag.SCIENCE],

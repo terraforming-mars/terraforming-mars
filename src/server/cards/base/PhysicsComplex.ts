@@ -12,7 +12,7 @@ import {digit} from '../Options';
 export class PhysicsComplex extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.PHYSICS_COMPLEX,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 12,

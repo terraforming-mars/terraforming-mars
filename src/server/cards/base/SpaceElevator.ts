@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SpaceElevator extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SPACE_ELEVATOR,
       tags: [Tag.SPACE, Tag.BUILDING],
       cost: 27,

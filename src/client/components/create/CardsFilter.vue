@@ -59,7 +59,7 @@ export default Vue.extend({
   },
   methods: {
     isPrelude(cardName: CardName) {
-      return getCard(cardName)?.cardType === CardType.PRELUDE;
+      return getCard(cardName)?.type === CardType.PRELUDE;
     },
     removeCard(cardNameToRemove: CardName) {
       this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();

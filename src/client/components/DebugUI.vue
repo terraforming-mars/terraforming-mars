@@ -526,7 +526,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       if (!this.filterByTags(card)) return false;
-      if (!this.types[card.cardType]) return false;
+      if (!this.types[card.type]) return false;
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {

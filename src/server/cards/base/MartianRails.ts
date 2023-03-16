@@ -11,7 +11,7 @@ import {all} from '../Options';
 export class MartianRails extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARTIAN_RAILS,
       tags: [Tag.BUILDING],
       cost: 13,

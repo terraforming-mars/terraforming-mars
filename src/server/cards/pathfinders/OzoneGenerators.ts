@@ -10,7 +10,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class OzoneGenerators extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.OZONE_GENERATORS,
       cost: 14,
       tags: [Tag.MARS, Tag.SPACE],

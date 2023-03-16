@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class TechnologyDemonstration extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.TECHNOLOGY_DEMONSTRATION,
       tags: [Tag.SCIENCE, Tag.SPACE],
       cost: 5,

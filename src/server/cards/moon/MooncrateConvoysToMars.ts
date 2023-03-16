@@ -13,7 +13,7 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOONCRATE_CONVOYS_TO_MARS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       cost: 13,
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
 

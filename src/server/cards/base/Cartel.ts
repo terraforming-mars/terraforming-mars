@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class Cartel extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CARTEL,
       tags: [Tag.EARTH],
       cost: 8,

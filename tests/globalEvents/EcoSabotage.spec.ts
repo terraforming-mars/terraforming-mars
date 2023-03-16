@@ -12,14 +12,22 @@ describe('EcoSabotage', function() {
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
+
     turmoil.initGlobalEvent(game);
+
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
     turmoil.dominantParty.delegates.add(player2.id);
-    player.plants = 5;
-    player2.plants = 5;
+
+    player.plants = 10;
+    player2.plants = 10;
+
+    expect(turmoil.getPlayerInfluence(player)).eq(0);
+    expect(turmoil.getPlayerInfluence(player2)).eq(2);
+
     card.resolve(game, turmoil);
+
     expect(player.plants).to.eq(3);
     expect(player2.plants).to.eq(5);
   });

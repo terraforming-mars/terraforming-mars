@@ -147,7 +147,7 @@ describe('Faraday', function() {
 
   it('Does not trigger on event cards', function() {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
-    player.playCard(fakeCard({tags: [Tag.SCIENCE], cardType: CardType.EVENT}));
+    player.playCard(fakeCard({tags: [Tag.SCIENCE], type: CardType.EVENT}));
     expect(game.deferredActions).has.length(0);
     expect(player.cardsInHand).has.length(0);
   });

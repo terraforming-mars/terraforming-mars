@@ -9,7 +9,7 @@ import {Card} from '../Card';
 export class SnowAlgae extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SNOW_ALGAE,
       cost: 12,
       tags: [Tag.PLANT],

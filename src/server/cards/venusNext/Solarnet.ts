@@ -10,7 +10,7 @@ export class Solarnet extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SOLARNET,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       cost: 7,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.JOVIAN)),

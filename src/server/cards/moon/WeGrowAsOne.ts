@@ -13,7 +13,7 @@ export class WeGrowAsOne extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.WE_GROW_AS_ONE,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.SPACE],
       cost: 8,
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),

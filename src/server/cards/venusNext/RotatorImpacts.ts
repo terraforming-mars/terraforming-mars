@@ -17,7 +17,7 @@ export class RotatorImpacts extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.ROTATOR_IMPACTS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.SPACE],
       cost: 6,
       resourceType: CardResource.ASTEROID,

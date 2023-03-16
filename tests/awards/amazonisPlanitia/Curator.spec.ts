@@ -42,7 +42,7 @@ describe('Curator', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SPACE, Tag.BUILDING]}));
     expect(award.getScore(player)).to.eq(1);
 
-    player.playedCards.push(fakeCard({tags: [Tag.SPACE, Tag.BUILDING], cardType: CardType.EVENT}));
+    player.playedCards.push(fakeCard({tags: [Tag.SPACE, Tag.BUILDING], type: CardType.EVENT}));
     expect(award.getScore(player)).to.eq(1);
   });
 });

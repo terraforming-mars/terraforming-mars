@@ -9,7 +9,7 @@ export class HE3Lobbyists extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HE3_LOBBYISTS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 7,
 

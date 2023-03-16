@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class EarthOffice extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.EARTH_OFFICE,
       tags: [Tag.EARTH],
       cost: 1,

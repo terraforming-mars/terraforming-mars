@@ -16,7 +16,7 @@ export class AirRaid extends Card implements IProjectCard {
     super({
       cost: 0,
       name: CardName.AIR_RAID,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       metadata: {
         cardNumber: 'C02',

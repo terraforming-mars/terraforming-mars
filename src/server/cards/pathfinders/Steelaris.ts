@@ -18,7 +18,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 export class Steelaris extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.STEELARIS,
       tags: [Tag.BUILDING, Tag.CITY],
       startingMegaCredits: 42,

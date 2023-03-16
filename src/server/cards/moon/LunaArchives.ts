@@ -11,7 +11,7 @@ export class LunaArchives extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_ARCHIVES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.SCIENCE, Tag.MOON],
       cost: 13,
       resourceType: CardResource.SCIENCE,

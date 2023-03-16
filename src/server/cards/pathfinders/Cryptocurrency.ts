@@ -14,7 +14,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.CRYPTOCURRENCY,
       cost: 6,
       tags: [Tag.POWER],

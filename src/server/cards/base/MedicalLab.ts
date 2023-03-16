@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class MedicalLab extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MEDICAL_LAB,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 13,

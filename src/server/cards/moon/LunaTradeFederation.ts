@@ -17,7 +17,7 @@ import {multiplier} from '../Options';
 export class LunaTradeFederation extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.LUNA_TRADE_FEDERATION,
       tags: [Tag.MOON, Tag.SPACE],
       startingMegaCredits: 15,

@@ -10,7 +10,7 @@ export class VenusMagnetizer extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.VENUS_MAGNETIZER,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 7,
 

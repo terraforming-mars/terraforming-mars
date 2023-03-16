@@ -9,7 +9,7 @@ import {VictoryPoints} from '../ICard';
 export class CultivationOfVenus extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.CULTIVATION_OF_VENUS,
       cost: 18,
       tags: [Tag.PLANT, Tag.VENUS],
@@ -18,6 +18,7 @@ export class CultivationOfVenus extends ActionCard implements IProjectCard {
       action: {
         spend: {plants: 3},
         global: {venus: 1},
+        //   player.game.log('${0} spent 3 plants to raise the Venus level 1 step', (b) => b.player(player));
       },
 
       metadata: {

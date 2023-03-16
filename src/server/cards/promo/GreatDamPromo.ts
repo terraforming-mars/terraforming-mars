@@ -14,7 +14,7 @@ import {Card} from '../Card';
 export class GreatDamPromo extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GREAT_DAM_PROMO,
       cost: 15,
       tags: [Tag.POWER, Tag.BUILDING],

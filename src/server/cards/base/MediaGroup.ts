@@ -12,7 +12,7 @@ import {Resources} from '../../../common/Resources';
 export class MediaGroup extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MEDIA_GROUP,
       tags: [Tag.EARTH],
       cost: 6,
@@ -29,7 +29,7 @@ export class MediaGroup extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.cardType === CardType.EVENT) {
+    if (card.type === CardType.EVENT) {
       player.game.defer(new GainResources(player, Resources.MEGACREDITS, {count: 3}));
     }
   }

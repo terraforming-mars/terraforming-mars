@@ -12,7 +12,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class AgroDrones extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.AGRO_DRONES,
       cost: 14,
       tags: [Tag.PLANT, Tag.MARS],

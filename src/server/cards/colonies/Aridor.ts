@@ -18,7 +18,7 @@ export class Aridor extends Card implements ICorporationCard {
     super({
       name: CardName.ARIDOR,
       startingMegaCredits: 40,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       initialActionText: 'Add a colony tile',
 
       metadata: {
@@ -74,7 +74,7 @@ export class Aridor extends Card implements ICorporationCard {
 
   public onCardPlayed(player: Player, card: ICard) {
     if (
-      card.cardType === CardType.EVENT ||
+      card.type === CardType.EVENT ||
       card.tags.filter((tag) => tag !== Tag.WILD).length === 0 ||
       !player.isCorporation(this.name)) {
       return undefined;

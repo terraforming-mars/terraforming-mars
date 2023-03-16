@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class RegolithEaters extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.REGOLITH_EATERS,
       tags: [Tag.SCIENCE, Tag.MICROBE],
       cost: 13,

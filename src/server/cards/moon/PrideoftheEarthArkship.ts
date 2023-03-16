@@ -13,7 +13,7 @@ export class PrideoftheEarthArkship extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.PRIDE_OF_THE_EARTH_ARKSHIP,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SPACE],
       cost: 22,
 

@@ -27,7 +27,7 @@ describe('Tags', function() {
   });
 
   function playFakeCorporation(...tags: Array<Tag>) {
-    const card = fakeCard({cardType: CardType.CORPORATION, tags: tags});
+    const card = fakeCard({type: CardType.CORPORATION, tags: tags});
     if (isICorporationCard(card)) {
       player.corporations.push(card);
     } else {
@@ -36,12 +36,12 @@ describe('Tags', function() {
   }
 
   function playFakeEvent(...tags: Array<Tag>) {
-    const card = fakeCard({cardType: CardType.EVENT, tags: tags});
+    const card = fakeCard({type: CardType.EVENT, tags: tags});
     player.playedCards.push(card);
   }
 
   function playFakeProject(...tags: Array<Tag>) {
-    const card = fakeCard({cardType: CardType.AUTOMATED, tags: tags});
+    const card = fakeCard({type: CardType.AUTOMATED, tags: tags});
     player.playedCards.push(card);
   }
 

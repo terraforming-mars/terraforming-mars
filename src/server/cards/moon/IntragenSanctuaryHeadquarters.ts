@@ -14,7 +14,7 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 export class IntragenSanctuaryHeadquarters extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS,
       tags: [Tag.ANIMAL, Tag.MOON],
       startingMegaCredits: 38,

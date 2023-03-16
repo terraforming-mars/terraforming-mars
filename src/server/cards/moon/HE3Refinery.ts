@@ -8,7 +8,7 @@ import {ActionCard} from '../ActionCard';
 export class HE3Refinery extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.HE3_REFINERY,
       cost: 8,
       tags: [Tag.MOON],

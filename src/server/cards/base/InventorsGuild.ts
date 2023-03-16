@@ -10,7 +10,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class InventorsGuild extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.INVENTORS_GUILD,
       tags: [Tag.SCIENCE],
       cost: 9,

@@ -11,7 +11,7 @@ import {all} from '../Options';
 export class BiomassCombustors extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.BIOMASS_COMBUSTORS,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 4,

@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SecurityFleet extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SECURITY_FLEET,
       tags: [Tag.SPACE],
       cost: 12,

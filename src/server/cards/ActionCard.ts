@@ -12,8 +12,8 @@ export abstract class ActionCard extends Card {
   private actionBehavior: Behavior;
   constructor(properties: StaticActionCardProperties) {
     super(properties);
-    validateBehavior(properties.action);
     this.actionBehavior = properties.action;
+    validateBehavior(properties.action);
   }
   public canAct(player: Player) {
     if (!getBehaviorExecutor().canExecute(this.actionBehavior, player, this)) {

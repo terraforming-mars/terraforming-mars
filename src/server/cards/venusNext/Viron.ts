@@ -14,7 +14,7 @@ export class Viron extends Card implements ICard, ICorporationCard {
       name: CardName.VIRON,
       tags: [Tag.MICROBE],
       startingMegaCredits: 48,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R12',

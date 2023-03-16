@@ -15,7 +15,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.REVOLTING_COLONISTS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.MOON],
       cost: 3,
       requirements: CardRequirements.builder((b) => b.habitatRate(4)),

@@ -498,6 +498,9 @@ export enum CardName {
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',
 
+    // For Playwright.
+    SPECIAL_DESIGN_PROXY = 'Special Design:proxy',
+
     // Ares expansion.
     BIOENGINEERING_ENCLOSURE = 'Bioengineering Enclosure',
     BIOFERTILIZER_FACILITY = 'Bio-Fertilizer Facility',

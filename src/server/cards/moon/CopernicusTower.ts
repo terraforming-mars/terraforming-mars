@@ -18,7 +18,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.COPERNICUS_TOWER,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.SCIENCE, Tag.MOON],
       cost: 36,
 

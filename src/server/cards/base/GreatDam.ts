@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class GreatDam extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GREAT_DAM,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 12,

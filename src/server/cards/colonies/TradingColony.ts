@@ -12,7 +12,7 @@ export class TradingColony extends Card implements IProjectCard {
       cost: 18,
       tags: [Tag.SPACE],
       name: CardName.TRADING_COLONY,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       behavior: {
         colonies: {

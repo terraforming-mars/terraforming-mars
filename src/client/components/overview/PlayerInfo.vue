@@ -7,10 +7,11 @@ import PlayerStatus from '@/client/components/overview/PlayerStatus.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {vueRoot} from '@/client/components/vueRoot';
 import {range} from '@/common/utils/utils';
-import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
+import {getCard} from '@/client/cards/ClientCardManifest';
+import {Phase} from '@/common/Phase';
 
 export default Vue.extend({
   name: 'PlayerInfo',
@@ -47,10 +48,12 @@ export default Vue.extend({
     PlayerTags,
     'player-status': PlayerStatus,
   },
-  mixins: [PlayerMixin],
   computed: {
     tooltipCss(): string {
       return 'tooltip tooltip-' + (this.isTopBar ? 'bottom' : 'top');
+    },
+    Phase(): typeof Phase {
+      return Phase;
     },
   },
   methods: {
@@ -108,7 +111,7 @@ export default Vue.extend({
     },
     corporationCardName(): CardName | undefined {
       const card = this.player.tableau[0];
-      if (card?.cardType !== CardType.CORPORATION) return undefined;
+      if (getCard(card.name)?.type !== CardType.CORPORATION) return undefined;
       return card.name;
     },
   },
@@ -124,7 +127,7 @@ export default Vue.extend({
             <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1" v-i18n>1st</div>
             <div class="player-info-corp" @click="togglePlayerDetails" v-if="corporationCardName() !== undefined" :title="$t(corporationCardName())"><span v-i18n>{{ corporationCardName() }}</span></div>
           </div>
-          <player-status :timer="player.timer" :showTimers="playerView.game.gameOptions.showTimers" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" />
+          <player-status :timer="player.timer" :showTimer="playerView.game.gameOptions.showTimers" :liveTimer="playerView.game.phase !== Phase.END" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" />
         </div>
           <PlayerResources :player="player" v-trim-whitespace />
           <div class="player-played-cards">

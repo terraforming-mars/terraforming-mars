@@ -10,7 +10,7 @@ export class SolarPanelFoundry extends ActionCard implements IActionCard, IProje
   constructor() {
     super({
       name: CardName.SOLAR_PANEL_FOUNDRY,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.POWER, Tag.MOON, Tag.BUILDING],
       cost: 11,
 

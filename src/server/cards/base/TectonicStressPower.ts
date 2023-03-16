@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class TectonicStressPower extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.TECTONIC_STRESS_POWER,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 18,

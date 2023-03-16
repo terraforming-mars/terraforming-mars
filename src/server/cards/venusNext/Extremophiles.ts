@@ -14,7 +14,7 @@ export class Extremophiles extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.EXTREMOPHILES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS, Tag.MICROBE],
       cost: 3,
       resourceType: CardResource.MICROBE,

@@ -25,7 +25,6 @@ import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
 import {TileType} from '../../common/TileType';
 import {Phase} from '../../common/Phase';
 import {Resources} from '../../common/Resources';
-import {CardType} from '../../common/cards/CardType';
 import {
   ClaimedMilestoneModel,
   MilestoneScore,
@@ -145,7 +144,6 @@ export class Server {
         resources: targetCard.resourceCount,
         name: targetCard.card.name,
         calculatedCost: player.getCardCost(targetCard.card),
-        cardType: CardType.ACTIVE,
         isDisabled: false,
         reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
         isSelfReplicatingRobotsCard: true,
@@ -382,7 +380,6 @@ export class Server {
         resources: options.showResources ? card.resourceCount : undefined,
         name: card.name,
         calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
-        cardType: card.cardType,
         isDisabled: isDisabled,
         warning: card.warning,
         reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,

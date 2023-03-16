@@ -19,7 +19,7 @@ import {PlayerInput} from '../../PlayerInput';
 export class Astrodrill extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.ASTRODRILL,
       tags: [Tag.SPACE],
       startingMegaCredits: 35,

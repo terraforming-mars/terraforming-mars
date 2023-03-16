@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class RadChemFactory extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.RAD_CHEM_FACTORY,
       tags: [Tag.BUILDING],
       cost: 8,

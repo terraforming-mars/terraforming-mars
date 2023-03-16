@@ -10,7 +10,7 @@ export class MiningQuota extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MINING_QUOTA,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 5,
 

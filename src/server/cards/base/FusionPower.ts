@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class FusionPower extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.FUSION_POWER,
       tags: [Tag.SCIENCE, Tag.POWER, Tag.BUILDING],
       cost: 14,

@@ -125,14 +125,16 @@ export default Vue.extend({
         <div class="player-status">
           <div class="player-info-details">
             <div class="player-info-name" @click="togglePlayerDetails">{{ player.name }}</div>
-            <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1" v-i18n>1st</div>
             <span @click="togglePlayerDetails" v-for="(corporationName, index) in getCorporationName()" :key="index" v-i18n>
               <div class="player-info-corp" :title="$t(corporationName)">
                 {{ corporationName }}
               </div>
             </span>
           </div>
-          <player-status :timer="player.timer" :showTimer="playerView.game.gameOptions.showTimers" :liveTimer="playerView.game.phase !== Phase.END" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" />
+          <div>
+            <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1" v-i18n>1st</div>
+            <player-status :timer="player.timer" :showTimer="playerView.game.gameOptions.showTimers" :liveTimer="playerView.game.phase !== Phase.END" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel"/>
+          </div>
         </div>
           <PlayerResources :player="player" v-trim-whitespace />
           <div class="player-played-cards">

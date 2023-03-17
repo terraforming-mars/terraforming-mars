@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
@@ -35,7 +35,7 @@ describe('FloatingHabs', function() {
     player.megaCredits = 10;
 
     card.action(player);
-    game.deferredActions.runNext();
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(8);
   });
@@ -43,7 +43,9 @@ describe('FloatingHabs', function() {
   it('Should act - multiple targets', function() {
     player.playedCards.push(card, new Dirigibles());
     player.megaCredits = 10;
-    const action = cast(card.action(player), SelectCard);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     action.cb([card]);
     game.deferredActions.runNext();
     expect(card.resourceCount).to.eq(1);

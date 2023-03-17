@@ -7,7 +7,7 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('FloaterUrbanism', function() {
@@ -61,10 +61,7 @@ describe('FloaterUrbanism', function() {
     floater2.resourceCount = 1;
     other.resourceCount = 1;
 
-    expect(card.action(player)).is.undefined;
-    runAllActions(game);
-    const options = cast(player.popWaitingFor(), SelectCard);
-
+    const options = cast(card.action(player), SelectCard);
     expect(options.cards.length).eq(2);
     options.cb([options.cards[0]]);
     expect(floater1.resourceCount).eq(0);

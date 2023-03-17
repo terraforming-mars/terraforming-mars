@@ -449,11 +449,7 @@ describe('Executor', () => {
   });
 
   it('spend - resource on card', () => {
-<<<<<<< HEAD
     const behavior = {spend: {resourcesHere: 1}};
-=======
-    const behavior = {spend: {card: 1}};
->>>>>>> main
     expect(executor.canExecute(behavior, player, fake)).is.false;
     fake.resourceCount = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;

@@ -92,6 +92,7 @@ export class GameCards {
 
   private instantiate<T extends ICard>(manifest: CardManifest<T>): Array<T> {
     return CardManifest.values(manifest)
+      .filter((factory) => factory.instantiate !== false)
       .filter((factory) => GameCards.isCompatibleWith(factory, this.gameOptions))
       .map((factory) => new factory.Factory());
   }

@@ -22,11 +22,7 @@ export type OneOfType<Obj> = ValueOf<OneOfByKey<Obj>>;
 
 export interface Spend extends Units {
   /** units or a number of resources from the card. */
-<<<<<<< HEAD
   resourcesHere: number,
-=======
-  card: number
->>>>>>> main
 }
 
 /** A set of steps that an action can perform in any specific order. */
@@ -43,12 +39,9 @@ export interface Behavior {
 
   /** Add resources to any cards */
   addResourcesToAnyCard?: AddResource | Array<Omit<AddResource, 'mustHaveCard'>>;
-<<<<<<< HEAD
 
-  /** Remove resources from any card */
-  removeResourcesFromAnyCard?: Omit<AddResource, 'mustHaveCard'>; // This Omit thing isn't right.
-=======
->>>>>>> main
+  // /** Remove resources from any card */
+  // removeResourcesFromAnyCard?: Omit<AddResource, 'mustHaveCard'>; // This Omit thing isn't right.
 
   /** Decrease any production */
   decreaseAnyProduction?: DecreaseAnyProduction;
@@ -173,12 +166,9 @@ export interface AddResource {
    * resources without realizing it. In other words, a true value is a break from the standard rules.
    */
   mustHaveCard?: boolean,
-<<<<<<< HEAD
 
   /** If true, if only one card matches, apply immediately without asking. */
   autoSelect?: boolean,
-=======
->>>>>>> main
 }
 
 export interface DecreaseAnyProduction {

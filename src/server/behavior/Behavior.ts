@@ -40,8 +40,8 @@ export interface Behavior {
   /** Add resources to any cards */
   addResourcesToAnyCard?: AddResource | Array<Omit<AddResource, 'mustHaveCard'>>;
 
-  /** Remove resources from any card */
-  removeResourcesFromAnyCard?: Omit<AddResource, 'mustHaveCard'>; // This Omit thing isn't right.
+  // /** Remove resources from any card */
+  // removeResourcesFromAnyCard?: Omit<AddResource, 'mustHaveCard'>; // This Omit thing isn't right.
 
   /** Decrease any production */
   decreaseAnyProduction?: DecreaseAnyProduction;

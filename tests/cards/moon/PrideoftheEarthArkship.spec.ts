@@ -44,6 +44,7 @@ describe('PrideoftheEarthArkship', () => {
   });
 
   it('act', () => {
+    player.playedCards.push(card);
     player.tagsForTest = {science: 0, space: 0};
     card.resourceCount = 0;
     card.action(player);

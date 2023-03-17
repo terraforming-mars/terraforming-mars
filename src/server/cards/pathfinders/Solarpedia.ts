@@ -24,7 +24,7 @@ export class Solarpedia extends ActionCard implements IProjectCard, IActionCard 
       },
 
       action: {
-        addResourcesToAnyCard: {type: CardResource.DATA, count: 2}
+        addResourcesToAnyCard: {type: CardResource.DATA, count: 2},
       },
 
       metadata: {

@@ -1,14 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Tardigrades extends Card implements IProjectCard {
+export class Tardigrades extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -18,6 +17,10 @@ export class Tardigrades extends Card implements IProjectCard {
 
       resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 4),
+
+      action: {
+        addResources: 1,
+      },
 
       metadata: {
         cardNumber: '049',
@@ -29,13 +32,5 @@ export class Tardigrades extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public action(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
-  }
-  public canAct(): boolean {
-    return true;
   }
 }

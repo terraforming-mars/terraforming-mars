@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
@@ -25,14 +24,16 @@ describe('InventorsGuild', function() {
 
   it('Should act', function() {
     player.megaCredits = 3;
-    const action = cast(card.action(player), SelectCard);
-    action.cb([]);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    selectCard.cb([]);
 
     expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);
     player.megaCredits = 3;
 
-    action.cb([action.cards[0]]);
+    selectCard.cb([selectCard.cards[0]]);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);
@@ -40,7 +41,9 @@ describe('InventorsGuild', function() {
 
   it('Cannot buy card if cannot pay', function() {
     player.megaCredits = 2;
-    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
     expect(selectCard.config.max).to.eq(0);
     selectCard.cb([]);
     expect(game.deferredActions).has.lengthOf(0);

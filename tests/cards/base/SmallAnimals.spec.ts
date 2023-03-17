@@ -3,6 +3,7 @@ import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {runAllActions} from '../../TestingUtils';
 
 describe('SmallAnimals', function() {
   let card: SmallAnimals;
@@ -31,6 +32,7 @@ describe('SmallAnimals', function() {
   it('Should act', function() {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 

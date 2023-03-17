@@ -1,6 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -8,10 +7,9 @@ import {IActionCard, VictoryPoints} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {all} from '../Options';
 
-export class MartianCulture extends Card implements IProjectCard, IActionCard {
+export class MartianCulture extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -22,6 +20,10 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
       requirements: CardRequirements.builder((b) => b.tag(Tag.MARS, 2, {all})),
       victoryPoints: VictoryPoints.resource(1, 2),
 
+      action: {
+        addResourcesToAnyCard: {type: CardResource.DATA, count: 1},
+      },
+
       metadata: {
         cardNumber: 'Pf35',
         renderData: CardRenderer.builder((b) => {
@@ -30,15 +32,6 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
         description: 'Requires any 2 Mars tags in play.  1 VP for every 2 data here.',
       },
     });
-  }
-
-  public canAct() {
-    return true;
-  }
-
-  public action(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
-    return undefined;
   }
 }
 

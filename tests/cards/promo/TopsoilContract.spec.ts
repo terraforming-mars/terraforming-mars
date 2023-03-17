@@ -34,6 +34,7 @@ describe('TopsoilContract', function() {
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
     tardigrades.action(player);
+    runAllActions(game);
     expect(player.megaCredits).to.eq(1);
 
     const aerobrakedAmmoniaAsteroid = new AerobrakedAmmoniaAsteroid();
@@ -46,6 +47,7 @@ describe('TopsoilContract', function() {
     const ants = new Ants();
     player2.playedCards.push(ants);
     ants.action(player2);
+    runAllActions(game);
     expect(player.megaCredits).to.eq(3);
   });
 });

@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {runAllActions} from '../../TestingUtils';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -42,6 +43,7 @@ describe('VenusianInsects', () => {
   it('Should act', () => {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 });

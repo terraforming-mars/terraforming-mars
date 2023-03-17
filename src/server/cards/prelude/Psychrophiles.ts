@@ -1,16 +1,15 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max, played} from '../Options';
 
-export class Psychrophiles extends Card implements IActionCard, IProjectCard {
+export class Psychrophiles extends ActionCard implements IActionCard, IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -18,6 +17,10 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard {
       tags: [Tag.MICROBE],
       cost: 2,
       resourceType: CardResource.MICROBE,
+
+      action: {
+        addResources: 1,
+      },
 
       requirements: CardRequirements.builder((b) => b.temperature(-20, {max})),
       metadata: {
@@ -33,14 +36,5 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard {
         description: 'Temperature must be -20 C or lower.',
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
   }
 }

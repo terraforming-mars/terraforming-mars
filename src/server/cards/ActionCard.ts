@@ -1,6 +1,6 @@
 import {Behavior} from '../behavior/Behavior';
 import {Player} from '../Player';
-import {Card, StaticCardProperties} from './Card';
+import {Card, StaticCardProperties, validateBehavior} from './Card';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 
 export interface StaticActionCardProperties extends StaticCardProperties {
@@ -8,11 +8,12 @@ export interface StaticActionCardProperties extends StaticCardProperties {
 }
 
 export abstract class ActionCard extends Card {
-  // This will replicate. Find a way to store it. Possibly pass it down.
+  // Add actionBehavior to StaticCardProperties, otherwise this will multiple memory consumption.
   private actionBehavior: Behavior;
   constructor(properties: StaticActionCardProperties) {
     super(properties);
     this.actionBehavior = properties.action;
+    validateBehavior(properties.action);
   }
   public canAct(player: Player) {
     if (!getBehaviorExecutor().canExecute(this.actionBehavior, player, this)) {

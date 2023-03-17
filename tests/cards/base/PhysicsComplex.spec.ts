@@ -1,6 +1,8 @@
 import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/server/cards/base/PhysicsComplex';
 import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {runAllActions} from '../../TestingUtils';
 
 describe('PhysicsComplex', function() {
   let card: PhysicsComplex;
@@ -8,7 +10,8 @@ describe('PhysicsComplex', function() {
 
   beforeEach(function() {
     card = new PhysicsComplex();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not act', function() {
@@ -23,6 +26,7 @@ describe('PhysicsComplex', function() {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
+    runAllActions(player.game);
     expect(player.energy).to.eq(0);
     expect(card.resourceCount).to.eq(1);
   });

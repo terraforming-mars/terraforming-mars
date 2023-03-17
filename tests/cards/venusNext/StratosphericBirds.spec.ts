@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
-import {ICard} from '../../../src/server/cards/ICard';
 import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBalloons';
@@ -11,7 +10,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
@@ -25,6 +24,7 @@ describe('StratosphericBirds', () => {
     const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
     deuteriumExport = new DeuteriumExport();
+    player.popWaitingFor();
   });
 
   it('Cannot play if Venus requirement not met', () => {
@@ -54,13 +54,13 @@ describe('StratosphericBirds', () => {
     player.playedCards.push(card);
 
     card.play(player);
-    expect(game.deferredActions).has.lengthOf(1);
-    expect(game.deferredActions.pop()!.execute()).is.undefined;
+    runAllActions(game);
   });
 
   it('Should act', () => {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card, 7);
@@ -76,7 +76,8 @@ describe('StratosphericBirds', () => {
     player.addResourceTo(extractorBalloons, 1);
 
     card.play(player);
-    const selectCard = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
     expect(selectCard.cards).has.lengthOf(2);
 
     selectCard.cb([deuteriumExport]);
@@ -96,7 +97,8 @@ describe('StratosphericBirds', () => {
 
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
     selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 12});
-    game.deferredActions.pop()!.execute(); // Remove floater
+    runAllActions(game); // Remove floater
+    expect(player.popWaitingFor()).is.undefined;
     expect(aerialMappers.resourceCount).to.eq(0);
   });
 

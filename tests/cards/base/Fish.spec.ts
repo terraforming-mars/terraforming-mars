@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('Fish', function() {
   let card: Fish;
@@ -25,6 +25,7 @@ describe('Fish', function() {
 
   it('Should act', function() {
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 

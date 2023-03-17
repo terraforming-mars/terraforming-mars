@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class JovianEmbassy extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.JOVIAN_EMBASSY,
       tags: [Tag.JOVIAN, Tag.BUILDING],
       cost: 14,

@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class TerraformingGanymede extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.TERRAFORMING_GANYMEDE,
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 33,

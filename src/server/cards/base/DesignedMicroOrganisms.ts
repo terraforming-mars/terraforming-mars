@@ -10,7 +10,7 @@ import {max} from '../Options';
 export class DesignedMicroOrganisms extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.DESIGNED_MICROORGANISMS,
       tags: [Tag.SCIENCE, Tag.MICROBE],
       cost: 16,

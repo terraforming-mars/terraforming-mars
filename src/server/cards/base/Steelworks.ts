@@ -11,7 +11,7 @@ import {digit} from '../Options';
 export class Steelworks extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.STEELWORKS,
       tags: [Tag.BUILDING],
       cost: 15,

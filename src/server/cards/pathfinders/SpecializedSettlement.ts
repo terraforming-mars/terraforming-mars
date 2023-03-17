@@ -14,7 +14,7 @@ import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTy
 export class SpecializedSettlement extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SPECIALIZED_SETTLEMENT,
       tags: [Tag.CITY, Tag.BUILDING, Tag.MARS],
       cost: 20,

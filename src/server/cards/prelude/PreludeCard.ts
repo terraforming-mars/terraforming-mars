@@ -24,7 +24,7 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
     }
     const obj: StaticCardProperties = {
       behavior: properties.behavior,
-      cardType: CardType.PRELUDE,
+      type: CardType.PRELUDE,
       name: properties.name,
       tags: properties.tags,
       metadata: properties.metadata,

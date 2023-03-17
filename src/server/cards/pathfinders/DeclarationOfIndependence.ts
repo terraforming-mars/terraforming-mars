@@ -9,7 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 export class DeclarationOfIndependence extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.DECLARATION_OF_INDEPENDENCE,
       cost: 20,
       tags: [Tag.MARS],

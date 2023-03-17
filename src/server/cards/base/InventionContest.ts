@@ -9,7 +9,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class InventionContest extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.INVENTION_CONTEST,
       tags: [Tag.SCIENCE],
       cost: 2,

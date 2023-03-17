@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
 import {TerralabsResearch} from '../../../src/server/cards/turmoil/TerralabsResearch';
@@ -25,7 +25,9 @@ describe('TerralabsResearch', function() {
     expect(player.getTerraformRating()).to.eq(13);
 
     player.playedCards.push(card3);
-    const action = cast(card3.action(player), SelectCard);
+    expect(card3.action(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     action.cb([action.cards[0]]);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(11);

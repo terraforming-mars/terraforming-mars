@@ -191,7 +191,7 @@ export default Vue.extend({
         const cardName = data.value as CardName;
         const card = getCard(cardName);
         if (card !== undefined) {
-          return this.cardToHtml(card.cardType, cardName);
+          return this.cardToHtml(card.type, cardName);
         } else {
           console.log(`Cannot render ${cardName}`);
         }

@@ -15,7 +15,7 @@ export class Stratopolis extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.STRATOPOLIS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.CITY, Tag.VENUS],
       cost: 22,
 

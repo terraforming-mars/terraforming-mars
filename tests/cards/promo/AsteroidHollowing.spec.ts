@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {runAllActions} from '../../TestingUtils';
 import {AsteroidHollowing} from '../../../src/server/cards/promo/AsteroidHollowing';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,6 +13,7 @@ describe('AsteroidHollowing', function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
+    player.popSelectInitialCards();
   });
 
   it('Should play', function() {
@@ -25,9 +27,12 @@ describe('AsteroidHollowing', function() {
 
   it('Should act', function() {
     player.titanium = 1;
-    expect(card.canAct(player)).is.true;
 
-    card.action(player);
+    expect(card.canAct(player)).is.true;
+    expect(card.action(player)).is.undefined;
+
+    runAllActions(player.game);
+
     expect(player.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(1);
     expect(player.production.megacredits).to.eq(1);
@@ -37,10 +42,17 @@ describe('AsteroidHollowing', function() {
     player.playedCards.push(card);
     player.titanium = 2;
 
-    card.action(player);
+    expect(card.action(player)).is.undefined;
+    runAllActions(player.game);
+    expect(player.popWaitingFor()).is.undefined;
+
     expect(card.getVictoryPoints()).to.eq(0);
 
-    card.action(player);
+    expect(card.action(player)).is.undefined;
+
+    runAllActions(player.game);
+
+    expect(player.popWaitingFor()).is.undefined;
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

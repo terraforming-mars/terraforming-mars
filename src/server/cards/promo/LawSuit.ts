@@ -14,7 +14,7 @@ import {all} from '../Options';
 export class LawSuit extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.LAW_SUIT,
       tags: [Tag.EARTH],
       cost: 2,

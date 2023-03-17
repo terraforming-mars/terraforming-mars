@@ -17,7 +17,7 @@ export type ClientCard = {
   cardDiscount?: CardDiscount | Array<CardDiscount>;
   victoryPoints?: number | 'special' | IVictoryPoints,
   cost?: number;
-  cardType: CardType;
+  type: CardType;
   requirements?: ICardRequirements;
   metadata: ICardMetadata;
   warning?: string | Message;

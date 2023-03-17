@@ -1,21 +1,25 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
 import {VictoryPoints} from '../ICard';
 
-export class CultivationOfVenus extends Card implements IProjectCard {
+export class CultivationOfVenus extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.CULTIVATION_OF_VENUS,
       cost: 18,
       tags: [Tag.PLANT, Tag.VENUS],
       victoryPoints: VictoryPoints.tags(Tag.VENUS, 1, 2),
+
+      action: {
+        spend: {plants: 3},
+        global: {venus: 1},
+        //   player.game.log('${0} spent 3 plants to raise the Venus level 1 step', (b) => b.player(player));
+      },
 
       metadata: {
         cardNumber: 'Pf45',
@@ -27,17 +31,6 @@ export class CultivationOfVenus extends Card implements IProjectCard {
         description: '1 VP for every 2 Venus tags you own.',
       },
     });
-  }
-
-  public canAct(player: Player) {
-    return player.plants >= 3 && player.canAfford(0, {tr: {venus: 1}});
-  }
-
-  public action(player: Player) {
-    player.deductResource(Resources.PLANTS, 3);
-    player.game.increaseVenusScaleLevel(player, 1);
-    player.game.log('${0} spent 3 plants to raise the Venus level 1 step', (b) => b.player(player));
-    return undefined;
   }
 }
 

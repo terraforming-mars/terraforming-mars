@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SoilFactory extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SOIL_FACTORY,
       tags: [Tag.BUILDING],
       cost: 9,

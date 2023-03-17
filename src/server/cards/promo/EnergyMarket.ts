@@ -15,7 +15,7 @@ import {multiplier} from '../Options';
 export class EnergyMarket extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ENERGY_MARKET,
       tags: [Tag.POWER],
       cost: 3,

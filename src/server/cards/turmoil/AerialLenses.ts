@@ -10,7 +10,7 @@ import {all} from '../Options';
 export class AerialLenses extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.AERIAL_LENSES,
       cost: 2,
       victoryPoints: -1,

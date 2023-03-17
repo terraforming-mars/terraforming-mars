@@ -13,7 +13,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 export class MartianMonuments extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MARTIAN_MONUMENTS,
       cost: 10,
       tags: [Tag.MARS, Tag.BUILDING],

@@ -8,7 +8,7 @@ import {CardRequirements} from '../CardRequirements';
 export class InterstellarColonyShip extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.INTERSTELLAR_COLONY_SHIP,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 24,

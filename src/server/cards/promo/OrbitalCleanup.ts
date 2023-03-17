@@ -11,7 +11,7 @@ import {played} from '../Options';
 export class OrbitalCleanup extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ORBITAL_CLEANUP,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 14,

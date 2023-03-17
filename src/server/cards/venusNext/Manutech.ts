@@ -13,7 +13,7 @@ export class Manutech extends Card implements ICorporationCard {
       name: CardName.MANUTECH,
       tags: [Tag.BUILDING],
       startingMegaCredits: 35,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       behavior: {
         production: {steel: 1},

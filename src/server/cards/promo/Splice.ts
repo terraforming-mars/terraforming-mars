@@ -16,7 +16,7 @@ import {all, played} from '../Options';
 export class Splice extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.SPLICE,
       tags: [Tag.MICROBE],
       startingMegaCredits: 48, // 44 + 4 as card resolution when played

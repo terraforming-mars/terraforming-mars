@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('Birds', function() {
   let card: Birds;
@@ -42,6 +42,7 @@ describe('Birds', function() {
 
   it('Should act', function() {
     card.action(player);
+    runAllActions(player.game);
     expect(card.resourceCount).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });

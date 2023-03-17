@@ -14,7 +14,7 @@ export class Pristar extends Card implements ICorporationCard {
       name: CardName.PRISTAR,
       startingMegaCredits: 53,
       resourceType: CardResource.PRESERVATION,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       victoryPoints: VictoryPoints.resource(1, 1),
 

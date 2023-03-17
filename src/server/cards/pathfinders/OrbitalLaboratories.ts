@@ -8,7 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class OrbitalLaboratories extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ORBITAL_LABORATORIES,
       cost: 18,
       tags: [Tag.SCIENCE, Tag.PLANT, Tag.SPACE],

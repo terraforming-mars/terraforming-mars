@@ -16,7 +16,7 @@ export class LunaTradeStation extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_TRADE_STATION,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON, Tag.MOON, Tag.SPACE],
       cost: 10,
       reserveUnits: {titanium: 2},

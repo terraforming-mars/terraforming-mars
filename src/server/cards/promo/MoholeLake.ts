@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class MoholeLake extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MOHOLE_LAKE,
       tags: [Tag.BUILDING],
       cost: 31,

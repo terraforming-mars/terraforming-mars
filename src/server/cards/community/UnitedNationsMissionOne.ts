@@ -12,7 +12,7 @@ import {Resources} from '../../../common/Resources';
 export class UnitedNationsMissionOne extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.UNITED_NATIONS_MISSION_ONE,
       tags: [Tag.EARTH],
       startingMegaCredits: 40, // +1 for the initial change in TR.

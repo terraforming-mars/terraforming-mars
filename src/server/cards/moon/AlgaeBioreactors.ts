@@ -8,7 +8,7 @@ export class AlgaeBioreactors extends Card {
   constructor() {
     super({
       name: CardName.ALGAE_BIOREACTORS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.PLANT],
       cost: 9,
 

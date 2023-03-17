@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class UndergroundDetonations extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.UNDERGROUND_DETONATIONS,
       tags: [Tag.BUILDING],
       cost: 6,

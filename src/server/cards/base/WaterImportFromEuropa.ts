@@ -14,7 +14,7 @@ const ACTION_COST = 12;
 export class WaterImportFromEuropa extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.WATER_IMPORT_FROM_EUROPA,
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 25,

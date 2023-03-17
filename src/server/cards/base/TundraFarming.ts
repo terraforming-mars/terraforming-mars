@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class TundraFarming extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.TUNDRA_FARMING,
       tags: [Tag.PLANT],
       cost: 16,

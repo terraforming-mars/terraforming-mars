@@ -10,7 +10,7 @@ export class Polyphemos extends Card implements ICorporationCard {
     super({
       name: CardName.POLYPHEMOS,
       startingMegaCredits: 50,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       cardCost: 5,
 
       behavior: {

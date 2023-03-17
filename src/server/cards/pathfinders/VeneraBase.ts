@@ -15,7 +15,7 @@ import {SpaceName} from '../../SpaceName';
 export class VeneraBase extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.VENERA_BASE,
       cost: 21,
       tags: [Tag.VENUS, Tag.VENUS, Tag.CITY],

@@ -10,7 +10,7 @@ import {CardRequirements} from '../CardRequirements';
 export class ControlledBloom extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.CONTROLLED_BLOOM,
       cost: 13,
       tags: [Tag.MICROBE, Tag.PLANT],

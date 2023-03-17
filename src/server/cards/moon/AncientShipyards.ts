@@ -13,7 +13,7 @@ export class AncientShipyards extends Card {
   constructor() {
     super({
       name: CardName.ANCIENT_SHIPYARDS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON, Tag.SPACE],
       cost: 6,
 

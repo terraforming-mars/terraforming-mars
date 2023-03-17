@@ -10,7 +10,7 @@ import {all} from '../Options';
 export class HeatTrappers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.HEAT_TRAPPERS,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 6,

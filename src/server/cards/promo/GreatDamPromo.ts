@@ -25,10 +25,10 @@ export class GreatDamPromo extends Card implements IProjectCard {
     },
   ) {
     super({
-      cardType: CardType.AUTOMATED,
-      name,
-      tags: [Tag.POWER, Tag.BUILDING],
+      name: CardName.GREAT_DAM_PROMO,
+      type: CardType.AUTOMATED,
       cost: 15,
+      tags: [Tag.POWER, Tag.BUILDING],
       metadata,
 
       behavior: {

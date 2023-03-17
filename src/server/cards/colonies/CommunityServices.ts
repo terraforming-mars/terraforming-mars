@@ -11,7 +11,7 @@ export class CommunityServices extends Card implements IProjectCard {
     super({
       cost: 13,
       name: CardName.COMMUNITY_SERVICES,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       victoryPoints: 1,
 
       metadata: {

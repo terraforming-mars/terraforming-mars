@@ -21,7 +21,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
       description: 'Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.',
     }) {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 9,

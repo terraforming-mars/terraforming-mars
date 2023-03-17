@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class LagrangeObservatory extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LAGRANGE_OBSERVATORY,
       tags: [Tag.SCIENCE, Tag.SPACE],
       cost: 9,

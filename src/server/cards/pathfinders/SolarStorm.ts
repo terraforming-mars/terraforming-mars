@@ -13,7 +13,7 @@ import {all, digit} from '../Options';
 export class SolarStorm extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SOLAR_STORM,
       cost: 12,
       tags: [Tag.SPACE],

@@ -22,10 +22,12 @@ export class AddResourcesToCard extends DeferredAction {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
   }
 
-  public execute() {
-    const count = this.options.count ?? 1;
-    const title = this.options.title ??
-      'Select card to add ' + count + ' ' + (this.resourceType || 'resources') + '(s)';
+  /**
+   * Returns the cards this deferredAction could apply to. Does not cache results.
+   *
+   * This is made public because of `Executor.canExecute` and should probably be someplace else.
+   */
+  public getCards() {
     let cards = this.player.getResourceCards(this.resourceType);
     const restrictedTag = this.options.restrictedTag;
     if (restrictedTag !== undefined) {
@@ -34,7 +36,15 @@ export class AddResourcesToCard extends DeferredAction {
     if (this.options.filter !== undefined) {
       cards = cards.filter(this.options.filter);
     }
+    return cards;
+  }
 
+  public execute() {
+    const count = this.options.count ?? 1;
+    const title = this.options.title ??
+      'Select card to add ' + count + ' ' + (this.resourceType || 'resources') + '(s)';
+
+    const cards = this.getCards();
     if (cards.length === 0) {
       return undefined;
     }

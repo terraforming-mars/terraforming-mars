@@ -14,7 +14,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.FLOATER_URBANISM,
       cost: 7,
       tags: [Tag.VENUS],

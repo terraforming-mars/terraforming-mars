@@ -14,7 +14,7 @@ import {played} from '../Options';
 export class Decomposers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.DECOMPOSERS,
       tags: [Tag.MICROBE],
       cost: 5,

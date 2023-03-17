@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class Shuttles extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SHUTTLES,
       tags: [Tag.SPACE],
       cost: 10,

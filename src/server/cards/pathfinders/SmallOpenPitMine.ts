@@ -13,7 +13,7 @@ import {Resources} from '../../../common/Resources';
 export class SmallOpenPitMine extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SMALL_OPEN_PIT_MINE,
       cost: 10,
       tags: [Tag.BUILDING],

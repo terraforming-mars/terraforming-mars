@@ -14,7 +14,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class Factorum extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.FACTORUM,
       tags: [Tag.POWER, Tag.BUILDING],
       startingMegaCredits: 37,

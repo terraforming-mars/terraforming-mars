@@ -11,7 +11,7 @@ import {Resources} from '../../../common/Resources';
 export class HE3Refinery extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.HE3_REFINERY,
       cost: 8,
       tags: [Tag.MOON],

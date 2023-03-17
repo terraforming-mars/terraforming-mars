@@ -12,7 +12,7 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.AIR_SCRAPPING_EXPEDITION,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.VENUS],
       cost: 13,
 

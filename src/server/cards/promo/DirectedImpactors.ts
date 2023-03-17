@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class DirectedImpactors extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.DIRECTED_IMPACTORS,
       tags: [Tag.SPACE],
       cost: 8,

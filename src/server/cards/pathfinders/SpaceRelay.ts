@@ -11,7 +11,7 @@ import {played} from '../Options';
 export class SpaceRelay extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SPACE_RELAY,
       cost: 13,
       tags: [Tag.SPACE, Tag.JOVIAN],

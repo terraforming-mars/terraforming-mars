@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class OptimalAerobraking extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.OPTIMAL_AEROBRAKING,
       tags: [Tag.SPACE],
       cost: 7,

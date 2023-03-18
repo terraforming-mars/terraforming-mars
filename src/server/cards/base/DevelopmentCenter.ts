@@ -1,4 +1,3 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
@@ -6,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class DevelopmentCenter extends ActionCard implements IActionCard, IProjectCard {
+export class DevelopmentCenter extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

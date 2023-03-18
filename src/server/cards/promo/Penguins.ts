@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
 import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
@@ -9,7 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Penguins extends ActionCard implements IActionCard, IProjectCard {
+export class Penguins extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

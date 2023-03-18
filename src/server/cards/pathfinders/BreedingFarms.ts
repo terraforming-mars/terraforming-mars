@@ -3,12 +3,11 @@ import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 
-export class BreedingFarms extends ActionCard implements IProjectCard, IActionCard {
+export class BreedingFarms extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

@@ -1,4 +1,3 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
@@ -8,7 +7,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 
-export class ElectroCatapult extends ActionCard implements IActionCard, IProjectCard {
+export class ElectroCatapult extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

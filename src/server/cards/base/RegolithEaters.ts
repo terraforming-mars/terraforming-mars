@@ -1,4 +1,3 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
@@ -7,7 +6,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RegolithEaters extends ActionCard implements IActionCard, IProjectCard {
+export class RegolithEaters extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

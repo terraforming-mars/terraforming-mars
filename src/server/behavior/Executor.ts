@@ -34,6 +34,12 @@ export class Executor implements BehaviorExecutor {
       return false;
     }
 
+    if (behavior.or) {
+      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card))) {
+        return false;
+      }
+    }
+
     if (behavior.stock !== undefined) {
       // Only supporting positive values for now.
       if (Units.keys.some((key) => (behavior.stock?.[key] ?? 0) < 0)) {

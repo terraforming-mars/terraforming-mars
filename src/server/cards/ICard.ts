@@ -92,8 +92,8 @@ export interface ICard {
 }
 
 export interface IActionCard {
-  action: (player: Player) => PlayerInput | undefined;
-  canAct: (player: Player) => boolean;
+  action(player: Player): PlayerInput | undefined;
+  canAct(player: Player): boolean;
 }
 
 export function isIActionCard(object: any): object is IActionCard {

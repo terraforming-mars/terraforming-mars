@@ -1,4 +1,3 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
@@ -12,7 +11,7 @@ import {Board} from '../../boards/Board';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class IndustrialCenter extends ActionCard implements IActionCard, IProjectCard {
+export class IndustrialCenter extends ActionCard implements IProjectCard {
   constructor(
     name = CardName.INDUSTRIAL_CENTER,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,

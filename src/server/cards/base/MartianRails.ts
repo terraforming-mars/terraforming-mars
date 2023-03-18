@@ -1,4 +1,3 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
@@ -8,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class MartianRails extends ActionCard implements IActionCard, IProjectCard {
+export class MartianRails extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

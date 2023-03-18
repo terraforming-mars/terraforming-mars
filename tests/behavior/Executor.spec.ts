@@ -22,6 +22,8 @@ import {NitriteReducingBacteria} from '../../src/server/cards/base/NitriteReduci
 import {AerialMappers} from '../../src/server/cards/venusNext/AerialMappers';
 import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
 import {SaturnSurfing} from '../../src/server/cards/promo/SaturnSurfing';
+import {Behavior} from '../../src/server/behavior/Behavior';
+import {OrOptions} from '../../src/server/inputs/OrOptions';
 
 function asUnits(player: Player): Units {
   return {
@@ -455,5 +457,55 @@ describe('Executor', () => {
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
     expect(fake.resourceCount).eq(0);
+  });
+
+  it('or, canExecute', () => {
+    const behavior: Behavior = {or: {behaviors: [{spend: {steel: 1}, stock: {megacredits: 1}, title: ''}]}};
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+    player.steel = 1;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+  });
+
+  it('or, execute', () => {
+    const behavior: Behavior = {or: {behaviors: [
+      {stock: {megacredits: 3}, title: '3MC'},
+      {stock: {megacredits: 1}, title: '1MC'},
+    ]}};
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    expect(orOptions.options).has.length(2);
+    expect(player.megaCredits).eq(0);
+    orOptions.options[0].cb();
+    expect(player.megaCredits).eq(3);
+    orOptions.options[1].cb();
+    expect(player.megaCredits).eq(4);
+  });
+
+  it('or, execute, not all options are playable', () => {
+    const behavior: Behavior = {or: {behaviors: [
+      {spend: {steel: 1}, stock: {megacredits: 3}, title: '3MC'},
+      {stock: {megacredits: 1}, title: '1MC'},
+    ]}};
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    expect(orOptions.options).has.length(1);
+    expect(player.megaCredits).eq(0);
+    orOptions.options[0].cb();
+    expect(player.megaCredits).eq(1);
+  });
+
+  it('or, execute, autoselect', () => {
+    const behavior: Behavior = {or: {
+      autoSelect: true,
+      behaviors: [
+        {spend: {steel: 1}, stock: {megacredits: 3}, title: '3MC'},
+        {stock: {megacredits: 1}, title: '1MC'},
+      ]}};
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+    expect(player.popWaitingFor()).is.undefined;
+    expect(player.megaCredits).eq(1);
   });
 });

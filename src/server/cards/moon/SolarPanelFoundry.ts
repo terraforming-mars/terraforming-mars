@@ -6,7 +6,7 @@ import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
-export class SolarPanelFoundry extends ActionCard implements IActionCard, IProjectCard {
+export class SolarPanelFoundry extends ActionCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.SOLAR_PANEL_FOUNDRY,

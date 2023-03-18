@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SpaceElevator extends ActionCard implements IActionCard, IProjectCard {
+export class SpaceElevator extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

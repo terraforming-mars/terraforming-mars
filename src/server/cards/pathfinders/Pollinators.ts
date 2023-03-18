@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 
-export class Pollinators extends ActionCard implements IProjectCard, IActionCard {
+export class Pollinators extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

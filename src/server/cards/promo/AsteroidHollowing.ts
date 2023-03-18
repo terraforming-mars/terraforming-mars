@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AsteroidHollowing extends ActionCard implements IActionCard, IProjectCard {
+export class AsteroidHollowing extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

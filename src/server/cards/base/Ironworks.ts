@@ -7,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class Ironworks extends ActionCard implements IActionCard, IProjectCard {
+export class Ironworks extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

@@ -11,7 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Birds extends ActionCard implements IActionCard, IProjectCard {
+export class Birds extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

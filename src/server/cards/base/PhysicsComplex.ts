@@ -9,7 +9,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class PhysicsComplex extends ActionCard implements IActionCard, IProjectCard {
+export class PhysicsComplex extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

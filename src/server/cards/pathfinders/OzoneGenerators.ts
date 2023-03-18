@@ -7,7 +7,7 @@ import {IActionCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 
-export class OzoneGenerators extends ActionCard implements IProjectCard, IActionCard {
+export class OzoneGenerators extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

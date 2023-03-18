@@ -7,7 +7,7 @@ import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
 import {ActionCard} from '../ActionCard';
 
-export class LunaPoliticalInstitute extends ActionCard implements IActionCard, IProjectCard {
+export class LunaPoliticalInstitute extends ActionCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_POLITICAL_INSTITUTE,

@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard, VictoryPoints} from '../ICard';
 
-export class EconomicEspionage extends ActionCard implements IProjectCard, IActionCard {
+export class EconomicEspionage extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

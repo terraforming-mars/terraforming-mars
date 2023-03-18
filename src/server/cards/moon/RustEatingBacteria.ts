@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 
-export class RustEatingBacteria extends ActionCard implements IActionCard, IProjectCard {
+export class RustEatingBacteria extends ActionCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.RUST_EATING_BACTERIA,

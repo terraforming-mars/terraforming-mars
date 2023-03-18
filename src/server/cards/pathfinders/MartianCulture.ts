@@ -9,7 +9,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {all} from '../Options';
 
-export class MartianCulture extends ActionCard implements IProjectCard, IActionCard {
+export class MartianCulture extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

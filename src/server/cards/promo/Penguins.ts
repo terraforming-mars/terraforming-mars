@@ -9,7 +9,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Penguins extends ActionCard implements IActionCard, IProjectCard {
+export class Penguins extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

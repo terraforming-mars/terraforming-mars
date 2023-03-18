@@ -17,6 +17,9 @@ import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
+import {PlayerInput} from '@/server/PlayerInput';
+import {IActionCard} from '@/server/cards/ICard';
+import {TestPlayer} from './TestPlayer';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
@@ -92,6 +95,15 @@ export function runNextAction(game: Game) {
     return undefined;
   }
   return action.execute();
+}
+
+export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput | undefined {
+  const input = card.action(player);
+  if (input !== undefined) {
+    return input;
+  }
+  runAllActions(player.game);
+  return player.popWaitingFor();
 }
 
 export function forceGenerationEnd(game: Game) {

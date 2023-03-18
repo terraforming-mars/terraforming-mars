@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('ElectroCatapult', () => {
   let card: ElectroCatapult;
@@ -16,6 +16,7 @@ describe('ElectroCatapult', () => {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
+    player.popSelectInitialCards();
   });
 
   it('Cannot play without energy production', () => {
@@ -45,7 +46,9 @@ describe('ElectroCatapult', () => {
     player.plants = 1;
     player.steel = 1;
 
-    const action = cast(card.action(player), OrOptions);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), OrOptions);
     expect(action.options).has.lengthOf(2);
 
     action.options[0].cb();

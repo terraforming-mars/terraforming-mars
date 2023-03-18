@@ -27,6 +27,10 @@ export interface Spend extends Units {
 
 /** A set of steps that an action can perform in any specific order. */
 export interface Behavior {
+  /** Select one of these actions */
+  or?: OrBehavior;
+
+  /** Spend these resources before taking the action. */
   spend?: Partial<OneOfType<Spend>>;
 
   /** Gain or lose production */
@@ -174,4 +178,13 @@ export interface AddResource {
 export interface DecreaseAnyProduction {
   count: number;
   type: Resources;
+}
+
+export interface TitledBehavior extends Behavior {
+  title: string;
+}
+
+export interface OrBehavior {
+  behaviors: Array<TitledBehavior>;
+  autoSelect?: boolean;
 }

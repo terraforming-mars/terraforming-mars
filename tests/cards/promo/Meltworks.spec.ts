@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Meltworks} from '../../../src/server/cards/promo/Meltworks';
 import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Meltworks', function() {
   let card: Meltworks;
@@ -8,7 +9,8 @@ describe('Meltworks', function() {
 
   beforeEach(function() {
     card = new Meltworks();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not act', function() {

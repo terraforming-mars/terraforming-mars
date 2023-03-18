@@ -5,7 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard, VictoryPoints} from '../ICard';
+import {VictoryPoints} from '../ICard';
 
 export class EconomicEspionage extends ActionCard implements IProjectCard {
   constructor() {

@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
 import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';

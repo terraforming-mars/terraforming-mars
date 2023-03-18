@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';

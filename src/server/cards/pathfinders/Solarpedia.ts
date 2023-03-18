@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard, VictoryPoints} from '../ICard';
+import {VictoryPoints} from '../ICard';
 import {ActionCard} from '../ActionCard';
 import {CardRequirements} from '../CardRequirements';
 

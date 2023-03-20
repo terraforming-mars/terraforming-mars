@@ -45,7 +45,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   }
 
   public canAct(player: Player) {
-    return player.production.titanium >= 2 || this.canRaiseTR(player);
+    return this.canRaiseTR(player);
   }
 
   public action(player: Player) {

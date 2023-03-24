@@ -8,7 +8,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PlaceOceanTile} from '../../../src/server/deferredActions/PlaceOceanTile';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('AsteroidResources', function() {
   let card: AsteroidResources;
@@ -23,15 +23,17 @@ describe('AsteroidResources', function() {
 
   it('canPlay', function() {
     player.energy = 2;
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
     player.energy = 3;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play, gain production', function() {
     player.energy = 3;
 
-    const options = cast(card.play(player), OrOptions);
+    card.play(player);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), OrOptions);
     options.options[0].cb();
     expect(player.energy).eq(0);
     expect(player.production.titanium).eq(1);
@@ -43,7 +45,9 @@ describe('AsteroidResources', function() {
   it('play, place ocean', function() {
     player.energy = 3;
 
-    const options = cast(card.play(player), OrOptions);
+    card.play(player);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), OrOptions);
     options.options[1].cb();
     expect(player.energy).eq(0);
     expect(player.production.titanium).eq(0);

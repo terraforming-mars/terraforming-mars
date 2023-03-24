@@ -23,6 +23,8 @@ import {BehaviorExecutor} from './BehaviorExecutor';
 import {PlaceTile} from '../deferredActions/PlaceTile';
 import {Resources} from '../../common/Resources';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectOption} from '../inputs/SelectOption';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: Player, card: ICard) {
@@ -31,6 +33,13 @@ export class Executor implements BehaviorExecutor {
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
       return false;
     }
+
+    if (behavior.or) {
+      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card))) {
+        return false;
+      }
+    }
+
     if (behavior.stock !== undefined) {
       // Only supporting positive values for now.
       if (Units.keys.some((key) => (behavior.stock?.[key] ?? 0) < 0)) {
@@ -152,6 +161,24 @@ export class Executor implements BehaviorExecutor {
 
   public execute(behavior: Behavior, player: Player, card: ICard) {
     const ctx = new Counter(player, card);
+
+    if (behavior.or !== undefined) {
+      const options = behavior.or.behaviors
+        .filter((behavior) => this.canExecute(behavior, player, card))
+        .map((behavior) => {
+          return new SelectOption(behavior.title, undefined, () => {
+            this.execute(behavior, player, card);
+            return undefined;
+          });
+        });
+
+      // TODO(kberg): move this behavior to OrOptions?
+      if (options.length === 1 && behavior.or.autoSelect === true) {
+        options[0].cb();
+      } else {
+        player.defer(new OrOptions(...options));
+      }
+    }
 
     if (behavior.spend !== undefined) {
       const spend = behavior.spend;

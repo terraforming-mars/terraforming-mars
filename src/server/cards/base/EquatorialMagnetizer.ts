@@ -1,12 +1,11 @@
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EquatorialMagnetizer extends ActionCard implements IActionCard, IProjectCard {
+export class EquatorialMagnetizer extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,

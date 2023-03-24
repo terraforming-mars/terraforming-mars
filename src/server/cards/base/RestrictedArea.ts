@@ -1,4 +1,3 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
@@ -8,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RestrictedArea extends ActionCard implements IActionCard, IProjectCard {
+export class RestrictedArea extends ActionCard implements IProjectCard {
   constructor(
     name = CardName.RESTRICTED_AREA,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,

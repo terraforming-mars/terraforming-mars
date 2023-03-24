@@ -297,10 +297,6 @@
                                 </label>
                                 </div>
                             </div>
-                            <input type="checkbox" v-model="corporationsDraft" id="corporationsDraft-checkbox">
-                            <label for="corporationsDraft-checkbox">
-                                <span v-i18n>Corporations Draft</span>
-                            </label>
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
                             <label for="randomFirstPlayer-checkbox">
                                 <span v-i18n>Random first player</span>
@@ -504,7 +500,6 @@ export interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
-    corporationsDraft: boolean;
     randomMA: RandomMAOptionType;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
@@ -583,7 +578,6 @@ export default (Vue as WithRefs<Refs>).extend({
       prelude: false,
       draftVariant: true,
       initialDraft: false,
-      corporationsDraft: false,
       randomMA: RandomMAOptionType.NONE,
       randomFirstPlayer: true,
       showOtherPlayersVP: false,
@@ -709,6 +703,9 @@ export default (Vue as WithRefs<Refs>).extend({
           const readerResults = reader.result;
           if (typeof(readerResults) === 'string') {
             const results = JSON.parse(readerResults);
+            if (results.corporationsDraft !== undefined) {
+              warnings.push('Corporations draft is no longer available. Future versions might just raise an error, so edit your JSON file.');
+            }
 
             const customCorporations = results[json_constants.CUSTOM_CORPORATIONS] || results[json_constants.OLD_CUSTOM_CORPORATIONS] || [];
             const customColonies = results[json_constants.CUSTOM_COLONIES] || results[json_constants.OLD_CUSTOM_COLONIES] || [];
@@ -954,7 +951,6 @@ export default (Vue as WithRefs<Refs>).extend({
       const prelude = this.prelude;
       const draftVariant = this.draftVariant;
       const initialDraft = this.initialDraft;
-      const corporationsDraft = this.corporationsDraft;
       const randomMA = this.randomMA;
       const showOtherPlayersVP = this.showOtherPlayersVP;
       const venusNext = this.venusNext;
@@ -1143,7 +1139,6 @@ export default (Vue as WithRefs<Refs>).extend({
         soloTR,
         clonedGamedId,
         initialDraft,
-        corporationsDraft,
         randomMA,
         shuffleMapOption,
         // beginnerOption,

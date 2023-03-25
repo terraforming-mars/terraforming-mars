@@ -5,7 +5,7 @@ import {AsteroidStandardProject} from '../../../src/server/cards/base/standardPr
 import {CityStandardProject} from '../../../src/server/cards/base/standardProjects/CityStandardProject';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {CrediCor} from '../../../src/server/cards/corporation/CrediCor';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CrediCor', function() {
@@ -14,9 +14,7 @@ describe('CrediCor', function() {
 
   beforeEach(function() {
     card = new CrediCor();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

@@ -14,7 +14,7 @@ describe('ElectroCatapult', () => {
 
   beforeEach(() => {
     card = new ElectroCatapult();
-    [game, player] = testGame(2, {skipInitialCardSelection: true});
+    [game, player] = testGame(2);
   });
 
   it('Cannot play without energy production', () => {

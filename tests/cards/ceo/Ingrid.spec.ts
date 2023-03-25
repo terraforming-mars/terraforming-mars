@@ -5,7 +5,7 @@ import {Phase} from '../../../src/common/Phase';
 import {addGreenery, addOcean, addCityTile, forceGenerationEnd, cast} from '../../TestingUtils';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {EcologicalZoneAres} from '../../../src/server/cards/ares/EcologicalZoneAres';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
@@ -17,9 +17,7 @@ describe('Ingrid', function() {
 
   beforeEach(() => {
     card = new Ingrid();
-    game = newTestGame(2, {preludeExtension: true});
-    player = getTestPlayer(game, 0);
-
+    [game, player] = testGame(2, {preludeExtension: true});
     player.playedCards.push(card);
   });
 

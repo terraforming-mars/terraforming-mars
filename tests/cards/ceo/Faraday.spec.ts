@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
@@ -18,8 +18,7 @@ describe('Faraday', function() {
 
   beforeEach(() => {
     card = new Faraday();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
 
     player.popWaitingFor();
     player.megaCredits = 10;

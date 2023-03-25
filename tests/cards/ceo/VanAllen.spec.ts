@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -14,8 +14,7 @@ describe('Van Allen', function() {
 
   beforeEach(() => {
     card = new VanAllen();
-    game = newTestGame(2, {ceoExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {ceoExtension: true});
   });
 
   it('Cannot claim for free if VanAllen is not in play', function() {

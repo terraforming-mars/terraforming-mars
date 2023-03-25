@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/AsteroidDeflectionSystem';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -11,9 +11,7 @@ describe('AsteroidDeflectionSystem', function() {
 
   beforeEach(function() {
     card = new AsteroidDeflectionSystem();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

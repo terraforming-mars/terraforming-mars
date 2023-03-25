@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MindSetMars} from '../../../src/server/cards/pathfinders/MindSetMars';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -20,9 +20,7 @@ describe('MindSetMars', function() {
 
   beforeEach(function() {
     card = new MindSetMars();
-    game = newTestGame(2, {turmoilExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(3, {turmoilExtension: true});
     player.setCorporationForTest(card);
     turmoil = game.turmoil!;
   });

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {Moss} from '../../../src/server/cards/base/Moss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
-import {Game} from '../../../src/server/Game';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -11,9 +11,7 @@ describe('Moss', function() {
 
   beforeEach(function() {
     card = new Moss();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play without enough oceans', function() {

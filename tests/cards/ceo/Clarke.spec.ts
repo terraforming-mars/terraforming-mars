@@ -12,7 +12,7 @@ describe('Clarke', function() {
 
   beforeEach(() => {
     card = new Clarke();
-    [game, player] = testGame(1, {skipInitialCardSelection: true});
+    [game, player] = testGame(1);
   });
 
   it('Can only act once per game', function() {

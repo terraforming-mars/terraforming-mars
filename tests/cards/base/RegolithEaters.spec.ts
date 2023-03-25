@@ -13,7 +13,7 @@ describe('RegolithEaters', function() {
 
   beforeEach(function() {
     card = new RegolithEaters();
-    [game, player] = testGame(2, {skipInitialCardSelection: true});
+    [game, player] = testGame(2);
   });
 
   it('Should act', function() {

@@ -1,14 +1,11 @@
 import {expect} from 'chai';
 import {Greenhouses} from '../../../src/server/cards/base/Greenhouses';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Greenhouses', function() {
   it('Should play', function() {
     const card = new Greenhouses();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    const [game, player, player2] = testGame(2);
     const action = card.play(player);
 
     expect(action).is.undefined;
@@ -16,10 +13,10 @@ describe('Greenhouses', function() {
 
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
-    game.addCityTile(redPlayer, game.board.getAvailableSpacesOnLand(redPlayer)[0]);
+    game.addCityTile(player2, game.board.getAvailableSpacesOnLand(player2)[0]);
     card.play(player);
 
     expect(player.plants).to.eq(3);
-    expect(redPlayer.plants).to.eq(0);
+    expect(player2.plants).to.eq(0);
   });
 });

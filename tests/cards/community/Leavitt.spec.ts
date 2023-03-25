@@ -16,7 +16,7 @@ describe('Leavitt', function() {
 
   beforeEach(function() {
     leavitt = new Leavitt();
-    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(leavitt);
   });

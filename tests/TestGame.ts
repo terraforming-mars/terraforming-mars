@@ -11,12 +11,6 @@ type _TestOptions = {
 export type TestGameOptions = GameOptions & _TestOptions;
 
 export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [Game, ...Array<TestPlayer>] {
-  const game = newTestGame(count, customOptions, idSuffix);
-  const players = game.getPlayers() as Array<TestPlayer>;
-  return [game, ...players];
-}
-
-export function newTestGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): Game {
   const players = [
     TestPlayer.BLUE.newPlayer(false, idSuffix),
     TestPlayer.RED.newPlayer(false, idSuffix),
@@ -32,7 +26,7 @@ export function newTestGame(count: number, customOptions?: Partial<TestGameOptio
     undefined :
     testGameOptions(customOptions);
   const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
-  if (customOptions?.skipInitialCardSelection === true) {
+  if (customOptions?.skipInitialCardSelection !== false) {
     for (const player of players) {
       /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
       if (player.getWaitingFor() instanceof SelectInitialCards) {
@@ -40,7 +34,7 @@ export function newTestGame(count: number, customOptions?: Partial<TestGameOptio
       }
     }
   }
-  return game;
+  return [game, ...players];
 }
 
 export function getTestPlayer(game: Game, idx: number): TestPlayer {

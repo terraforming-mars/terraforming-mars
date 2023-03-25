@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
+import {testGame} from '../../TestGame';
 
 describe('AICentral', function() {
   let card: AICentral;
@@ -10,9 +10,7 @@ describe('AICentral', function() {
 
   beforeEach(function() {
     card = new AICentral();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play if not enough science tags to play', function() {

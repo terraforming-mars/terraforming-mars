@@ -11,7 +11,7 @@ describe('DeuteriumExport', function() {
 
   beforeEach(function() {
     card = new DeuteriumExport();
-    [/* skipped */, player] = testGame(1, {preludeExtension: true, skipInitialCardSelection: true});
+    [/* skipped */, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Should play', function() {

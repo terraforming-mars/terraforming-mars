@@ -16,7 +16,7 @@ describe('FloaterTechnology', function() {
 
   beforeEach(function() {
     card = new FloaterTechnology();
-    [game, player] = testGame(2, {skipInitialCardSelection: true});
+    [game, player] = testGame(2);
   });
 
   it('Can play', function() {

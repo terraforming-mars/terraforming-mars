@@ -4,7 +4,7 @@ import {Game} from '../../src/server/Game';
 import {SpinoffProducts} from '../../src/server/turmoil/globalEvents/SpinoffProducts';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {TestPlayer} from '../TestPlayer';
 import {HabitatMarte} from '../../src/server/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../src/server/cards/pathfinders/DesignedOrganisms';
@@ -19,9 +19,7 @@ describe('SpinoffProducts', function() {
 
   beforeEach(() => {
     card = new SpinoffProducts();
-    game = newTestGame(2, testGameOptions({turmoilExtension: true}));
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
   });
 

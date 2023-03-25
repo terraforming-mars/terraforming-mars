@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
@@ -23,8 +23,7 @@ describe('SelectInitialCards', () => {
   }
 
   beforeEach(() => {
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
     player.dealtCorporationCards = [new Inventrix(), new Helion()];
     player.dealtProjectCards = [new Ants(), new BactoviralResearch(), new CometAiming(), new Dirigibles()];
     selectInitialCards = new SelectInitialCards(player, cb);

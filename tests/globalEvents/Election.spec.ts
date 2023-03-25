@@ -2,20 +2,14 @@ import {expect} from 'chai';
 import {StripMine} from '../../src/server/cards/base/StripMine';
 import {Election} from '../../src/server/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {addCityTile, fakeCard} from '../TestingUtils';
 import {Tag} from '../../src/common/cards/Tag';
 
 describe('Election', function() {
-  let card: Election;
-  beforeEach(() => {
-    card = new Election();
-  });
   it('resolve play', function() {
-    const game = newTestGame(3, {turmoilExtension: true});
-    const player = getTestPlayer(game, 0);
-    const player2 = getTestPlayer(game, 1);
-    const player3 = getTestPlayer(game, 2);
+    const card = new Election();
+    const [game, player, player2, player3] = testGame(3, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
     player.playedCards.push(new StripMine());
@@ -40,8 +34,8 @@ describe('Election', function() {
 
 
   it('solo play', function() {
-    const game = newTestGame(1, {turmoilExtension: true});
-    const player = getTestPlayer(game, 0);
+    const card = new Election();
+    const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
     const fake = fakeCard({tags: [Tag.BUILDING, Tag.BUILDING, Tag.BUILDING, Tag.BUILDING]});

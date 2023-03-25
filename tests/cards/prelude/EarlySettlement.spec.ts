@@ -3,13 +3,12 @@ import {EarlySettlement} from '../../../src/server/cards/prelude/EarlySettlement
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('EarlySettlement', function() {
   it('Should play', function() {
     const card = new EarlySettlement();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(1);
 
     card.play(player);
     const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);

@@ -2,7 +2,7 @@ import {ButterflyEffect} from '../../../src/server/cards/ares/ButterflyEffect';
 import {expect} from 'chai';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {ShiftAresGlobalParameters} from '../../../src/server/inputs/ShiftAresGlobalParameters';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {runAllActions, cast} from '../../TestingUtils';
@@ -14,8 +14,7 @@ describe('ButterflyEffect', function() {
 
   beforeEach(function() {
     card = new ButterflyEffect();
-    game = newTestGame(2, ARES_OPTIONS_WITH_HAZARDS);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, ARES_OPTIONS_WITH_HAZARDS);
   });
 
   it('play', function() {

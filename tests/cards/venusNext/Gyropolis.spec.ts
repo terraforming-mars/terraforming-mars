@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
@@ -20,9 +20,7 @@ describe('Gyropolis', function() {
 
   beforeEach(function() {
     card = new Gyropolis();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

@@ -131,7 +131,7 @@ describe('MonsInsurance - Solo', () => {
   beforeEach(() => {
     card = new MonsInsurance();
 
-    [/* skipped */, player] = testGame(1, {preludeExtension: true, skipInitialCardSelection: true});
+    [/* skipped */, player] = testGame(1, {preludeExtension: true});
     card.play(player);
     player.setCorporationForTest(card);
   });

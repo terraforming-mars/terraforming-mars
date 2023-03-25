@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {RobotPollinators} from '../../../src/server/cards/promo/RobotPollinators';
 import {Game} from '../../../src/server/Game';
 import {fakeCard} from '../../TestingUtils';
@@ -13,8 +13,7 @@ describe('Robot Pollinators', function() {
 
   beforeEach(function() {
     card = new RobotPollinators();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
   });
 
 

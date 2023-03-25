@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 import {Zan} from '../../../src/server/cards/ceos/Zan';
 import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInertGases';
@@ -15,8 +15,7 @@ describe('Zan', function() {
 
   beforeEach(() => {
     card = new Zan();
-    game = newTestGame(2, {ceoExtension: true, turmoilExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
 
     player.playedCards.push(card);
   });

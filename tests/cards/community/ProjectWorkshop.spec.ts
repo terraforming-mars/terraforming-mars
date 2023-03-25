@@ -15,7 +15,7 @@ import {cast, churn, churnAction, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {getTestPlayer, newTestGame, testGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
@@ -30,7 +30,7 @@ describe('ProjectWorkshop', function() {
   beforeEach(function() {
     card = new ProjectWorkshop();
     advancedAlloys = new AdvancedAlloys();
-    [game, player] = testGame(1, {skipInitialCardSelection: true});
+    [game, player] = testGame(1);
 
     card.play(player);
     player.setCorporationForTest(card);
@@ -124,8 +124,7 @@ describe('ProjectWorkshop', function() {
 
 
   it('Project Workshop and Reds taxes', () => {
-    game = newTestGame(1, {turmoilExtension: true});
-    const player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {turmoilExtension: true});
     card.play(player);
     player.setCorporationForTest(card);
     player.game.phase = Phase.ACTION;

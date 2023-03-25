@@ -1,12 +1,11 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 
 describe('AlliedBanks', function() {
   it('Should play', function() {
     const card = new AlliedBanks();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [, player] = testGame(1);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.megaCredits).to.eq(3);

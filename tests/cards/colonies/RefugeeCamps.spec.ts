@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 
 describe('RefugeeCamps', function() {
@@ -11,8 +11,7 @@ describe('RefugeeCamps', function() {
 
   beforeEach(function() {
     card = new RefugeeCamps();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Should play', function() {

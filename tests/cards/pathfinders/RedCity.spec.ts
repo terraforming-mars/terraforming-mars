@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RedCity} from '../../../src/server/cards/pathfinders/RedCity';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Phase} from '../../../src/common/Phase';
@@ -23,9 +23,7 @@ describe('RedCity', function() {
 
   beforeEach(function() {
     card = new RedCity();
-    game = newTestGame(2, {pathfindersExpansion: true, turmoilExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {pathfindersExpansion: true, turmoilExtension: true});
     turmoil = game.turmoil!;
     board = game.board;
   });

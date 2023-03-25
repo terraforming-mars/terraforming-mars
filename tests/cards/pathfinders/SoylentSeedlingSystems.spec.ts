@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {SoylentSeedlingSystems} from '../../../src/server/cards/pathfinders/SoylentSeedlingSystems';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {addGreenery, fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -15,13 +14,10 @@ describe('SoylentSeedlingSystems', function() {
   let celestic: Celestic;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     soylent = new SoylentSeedlingSystems();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [, player, player2] = testGame(2);
     player.setCorporationForTest(soylent);
     // Giving it a corporation card that stores resources to show it doesn't have any.
     celestic = new Celestic();

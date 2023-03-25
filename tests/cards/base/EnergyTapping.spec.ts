@@ -15,7 +15,7 @@ describe('EnergyTapping', function() {
 
   beforeEach(function() {
     card = new EnergyTapping();
-    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2);
   });
 
   it('Should play - auto select if single target', function() {
@@ -44,7 +44,7 @@ describe('EnergyTapping', function() {
   });
 
   it('Playable in solo mode', function() {
-    [game, player] = testGame(1, {skipInitialCardSelection: true});
+    [game, player] = testGame(1);
     card.play(player);
 
     runAllActions(game);

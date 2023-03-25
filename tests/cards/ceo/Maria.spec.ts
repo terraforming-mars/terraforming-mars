@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {cast, forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 
 import {Maria} from '../../../src/server/cards/ceos/Maria';
@@ -14,8 +14,7 @@ describe('Maria', function() {
 
   beforeEach(() => {
     card = new Maria();
-    game = newTestGame(1, {ceoExtension: true, coloniesExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {ceoExtension: true, coloniesExtension: true});
   });
 
   it('Can act', function() {

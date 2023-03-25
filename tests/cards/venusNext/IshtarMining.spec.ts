@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {IshtarMining} from '../../../src/server/cards/venusNext/IshtarMining';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('IshtarMining', function() {
   it('Should play', function() {
     const card = new IshtarMining();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(2);
     game.increaseVenusScaleLevel(player, 3);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     game.increaseVenusScaleLevel(player, 3);

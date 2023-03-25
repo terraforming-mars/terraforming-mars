@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {DustSeals} from '../../../src/server/cards/base/DustSeals';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('DustSeals', function() {
   let card: DustSeals;
@@ -10,9 +10,7 @@ describe('DustSeals', function() {
 
   beforeEach(function() {
     card = new DustSeals();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

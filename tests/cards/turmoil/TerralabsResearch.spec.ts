@@ -5,15 +5,14 @@ import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
 import {TerralabsResearch} from '../../../src/server/cards/turmoil/TerralabsResearch';
 import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('TerralabsResearch', function() {
   it('Should play', function() {
     const card = new TerralabsResearch();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(1, {skipInitialCardSelection: false});
     const pi = cast(player.getWaitingFor(), SelectInitialCards);
     pi.options[0].cb([card]);
     pi.options[1].cb([card2, card2]);

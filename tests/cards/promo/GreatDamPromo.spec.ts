@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {GreatDamPromo} from '../../../src/server/cards/promo/GreatDamPromo';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {cast, maxOutOceans} from '../../TestingUtils';
@@ -12,9 +12,7 @@ describe('GreatDamPromo', function() {
 
   beforeEach(function() {
     card = new GreatDamPromo();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play without meeting requirements', function() {

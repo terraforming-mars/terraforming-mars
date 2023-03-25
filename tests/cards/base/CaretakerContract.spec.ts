@@ -8,7 +8,7 @@ import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('CaretakerContract', function() {
   let card: CaretakerContract;
@@ -17,8 +17,7 @@ describe('CaretakerContract', function() {
 
   beforeEach(function() {
     card = new CaretakerContract();
-    game = newTestGame(2),
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play or act', function() {
@@ -45,8 +44,7 @@ describe('CaretakerContract', function() {
   });
 
   it('Cannot act if cannot afford reds tax', function() {
-    const game = newTestGame(1, {turmoilExtension: true});
-    const player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -66,8 +64,7 @@ describe('CaretakerContract', function() {
   });
 
   it('Do not double-account heat with Helion using Reds tax', function() {
-    const game = newTestGame(1, {turmoilExtension: true});
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(1, {turmoilExtension: true});
     const helion = new Helion();
     player.corporations.push(helion);
     helion.play(player);

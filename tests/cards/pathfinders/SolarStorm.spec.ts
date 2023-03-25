@@ -20,7 +20,7 @@ describe('SolarStorm', function() {
 
   beforeEach(function() {
     card = new SolarStorm();
-    [, player, player2, player3] = testGame(3);
+    [, player, player2, player3] = testGame(3, {skipInitialCardSelection: true});
     cryptocurrency = new Cryptocurrency();
     communicationCenter = new CommunicationCenter();
   });

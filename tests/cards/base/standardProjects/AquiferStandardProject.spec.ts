@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {cast} from '../../../TestingUtils';
+import {cast, churnAction} from '../../../TestingUtils';
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
-import {maxOutOceans, testGameOptions, runAllActions} from '../../../TestingUtils';
+import {maxOutOceans, testGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -34,10 +34,7 @@ describe('AquiferStandardProject', function() {
     player.setTerraformRating(20);
     expect(game.board.getOceanCount()).eq(0);
 
-    card.action(player);
-    runAllActions(game);
-
-    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
+    const selectSpace = cast(churnAction(card, player), SelectSpace);
     const availableSpace = selectSpace.availableSpaces[0];
 
     expect(availableSpace.spaceType).eq(SpaceType.OCEAN);

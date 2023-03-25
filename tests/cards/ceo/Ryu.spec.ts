@@ -5,7 +5,7 @@ import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {Resources} from '../../../src/common/Resources';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
 import {Ryu} from '../../../src/server/cards/ceos/Ryu';
@@ -18,8 +18,7 @@ describe('Ryu', function() {
 
   beforeEach(() => {
     card = new Ryu();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
 
     player.production.add(Resources.STEEL, 1);
     player.production.add(Resources.HEAT, 4);

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/server/cards/base/PhysicsComplex';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 
 describe('PhysicsComplex', function() {
@@ -10,8 +10,7 @@ describe('PhysicsComplex', function() {
 
   beforeEach(function() {
     card = new PhysicsComplex();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not act', function() {

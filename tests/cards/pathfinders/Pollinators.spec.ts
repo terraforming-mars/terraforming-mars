@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Pollinators} from '../../../src/server/cards/pathfinders/Pollinators';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {runAllActions} from '../../TestingUtils';
 
@@ -13,8 +13,7 @@ describe('Pollinators', function() {
 
   beforeEach(function() {
     card = new Pollinators();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
   });
 
   it('canPlay', function() {

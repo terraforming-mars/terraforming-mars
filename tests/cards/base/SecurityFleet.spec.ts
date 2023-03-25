@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 
 describe('SecurityFleet', function() {
@@ -10,8 +10,7 @@ describe('SecurityFleet', function() {
 
   beforeEach(function() {
     card = new SecurityFleet();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not act if no titanium', function() {

@@ -5,7 +5,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {forceGenerationEnd, fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 
 describe('Stefan', function() {
@@ -15,8 +15,7 @@ describe('Stefan', function() {
 
   beforeEach(() => {
     card = new Stefan();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
   });
 
   it('Cannot act without cards', function() {

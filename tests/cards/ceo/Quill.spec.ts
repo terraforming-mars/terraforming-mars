@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {runAllActions, cast} from '../../TestingUtils';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
@@ -19,8 +19,7 @@ describe('Quill', function() {
 
   beforeEach(() => {
     card = new Quill();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
   });
 
   it('Can only act once per game', function() {

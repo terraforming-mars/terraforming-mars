@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {HabitatMarte} from '../../../src/server/cards/pathfinders/HabitatMarte';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
@@ -16,8 +16,7 @@ describe('HabitatMarte', () => {
 
   beforeEach(() => {
     card = new HabitatMarte();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
   });
 
   it('tag count', () => {

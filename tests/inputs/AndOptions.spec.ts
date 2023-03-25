@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
 import {TestPlayer} from '../TestPlayer';
 import {SelectAmount} from '../../src/server/inputs/SelectAmount';
@@ -18,8 +18,7 @@ describe('AndOptions', function() {
   }
 
   beforeEach(() => {
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Simple', function() {

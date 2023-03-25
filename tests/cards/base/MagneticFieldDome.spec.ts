@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {MagneticFieldDome} from '../../../src/server/cards/base/MagneticFieldDome';
-import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('MagneticFieldDome', function() {
   let card: MagneticFieldDome;
@@ -10,9 +10,7 @@ describe('MagneticFieldDome', function() {
 
   beforeEach(function() {
     card = new MagneticFieldDome();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

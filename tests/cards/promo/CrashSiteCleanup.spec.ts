@@ -5,6 +5,7 @@ import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('CrashSiteCleanup', function() {
   let card: CrashSiteCleanup;
@@ -12,9 +13,7 @@ describe('CrashSiteCleanup', function() {
 
   beforeEach(function() {
     card = new CrashSiteCleanup();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {QuantumExtractor} from '../../../src/server/cards/base/QuantumExtractor';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('QuantumExtractor', function() {
@@ -11,9 +11,7 @@ describe('QuantumExtractor', function() {
 
   beforeEach(function() {
     card = new QuantumExtractor();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

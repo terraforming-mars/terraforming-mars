@@ -3,7 +3,7 @@ import {cast} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
@@ -14,9 +14,7 @@ describe('AerialMappers', function() {
 
   beforeEach(function() {
     card = new AerialMappers();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
     player.playedCards.push(card);
   });
 

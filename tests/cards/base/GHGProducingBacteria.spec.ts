@@ -3,7 +3,7 @@ import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingB
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('GHGProducingBacteria', () => {
   let card: GHGProducingBacteria;
@@ -33,18 +33,23 @@ describe('GHGProducingBacteria', () => {
   it('Should act', () => {
     player.playedCards.push(card);
 
-    card.action(player);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 
-    card.action(player);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
     expect(card.resourceCount).to.eq(2);
 
-    const orAction = cast(card.action(player), OrOptions);
+    expect(card.action(player)).is.undefined;
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
 
-    orAction.options[1].cb();
+    orOptions.options[1].cb();
+    runAllActions(game);
     expect(card.resourceCount).to.eq(3);
 
-    orAction.options[0].cb();
+    orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(1);
     expect(game.getTemperature()).to.eq(-28);
   });

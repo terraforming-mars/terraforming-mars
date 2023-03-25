@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {BuildColony} from '../../src/server/deferredActions/BuildColony';
-import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {cast} from '../TestingUtils';
-import {getTestPlayers, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {ColoniesHandler} from '../../src/server/colonies/ColoniesHandler';
@@ -13,10 +12,8 @@ describe('BuildColony', function() {
   let player2: TestPlayer;
   let player3: TestPlayer;
 
-  let game: Game;
-
   beforeEach(function() {
-    game = newTestGame(3, {
+    [/* unused */, player, player2, player3] = testGame(3, {
       coloniesExtension: true,
       customColoniesList: [
         // The important thing is that Europa is absent.
@@ -26,7 +23,6 @@ describe('BuildColony', function() {
         ColonyName.TITAN,
         ColonyName.TRITON],
     });
-    [player, player2, player3] = getTestPlayers(game);
   });
 
   it('simple', function() {

@@ -3,7 +3,7 @@ import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExpo
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('DeuteriumExport', function() {
   let card: DeuteriumExport;
@@ -11,9 +11,7 @@ describe('DeuteriumExport', function() {
 
   beforeEach(function() {
     card = new DeuteriumExport();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
-    player.popSelectInitialCards();
+    [/* skipped */, player] = testGame(1, {preludeExtension: true, skipInitialCardSelection: true});
   });
 
   it('Should play', function() {

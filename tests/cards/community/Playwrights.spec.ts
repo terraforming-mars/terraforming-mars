@@ -16,6 +16,7 @@ import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
 import {ICard} from '../../../src/server/cards/ICard';
 import {GlobalParameter} from '../../../src/common/GlobalParameter';
 import {Worms} from '../../../src/server/cards/base/Worms';
+import {testGame} from '../../TestGame';
 
 describe('Playwrights', () => {
   let card: Playwrights;
@@ -25,13 +26,10 @@ describe('Playwrights', () => {
 
   beforeEach(() => {
     card = new Playwrights();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
 
     card.play(player);
     player.setCorporationForTest(card);
-    player.popSelectInitialCards();
   });
 
   it('Cannot act without any played events', () => {

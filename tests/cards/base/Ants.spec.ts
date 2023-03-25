@@ -9,6 +9,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Ants', function() {
   let card: Ants;
@@ -18,10 +19,7 @@ describe('Ants', function() {
 
   beforeEach(function() {
     card = new Ants();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
-    player.popWaitingFor();
+    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
   });
 
   it('Can not play without oxygen', function() {

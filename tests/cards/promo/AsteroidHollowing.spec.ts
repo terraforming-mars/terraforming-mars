@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {runAllActions} from '../../TestingUtils';
 import {AsteroidHollowing} from '../../../src/server/cards/promo/AsteroidHollowing';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('AsteroidHollowing', function() {
   let card: AsteroidHollowing;
@@ -10,10 +10,7 @@ describe('AsteroidHollowing', function() {
 
   beforeEach(function() {
     card = new AsteroidHollowing();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
-    player.popSelectInitialCards();
+    [/* skipped */, player] = testGame(2, {skipInitialCardSelection: true});
   });
 
   it('Should play', function() {

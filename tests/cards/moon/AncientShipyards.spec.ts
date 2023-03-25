@@ -1,9 +1,9 @@
 import {Game} from '../../../src/server/Game';
-import {runAllActions, testGameOptions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
 import {expect} from 'chai';
-import {getTestPlayer, getTestPlayers, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('AncientShipyards', () => {
   let game: Game;
@@ -13,10 +13,8 @@ describe('AncientShipyards', () => {
   let card: AncientShipyards;
 
   beforeEach(() => {
-    game = newTestGame(3, testGameOptions({moonExpansion: true}));
-    [player, player2, player3] = getTestPlayers(game);
+    [game, player, player2, player3] = testGame(3, {moonExpansion: true, skipInitialCardSelection: true});
     card = new AncientShipyards();
-    player.popSelectInitialCards();
   });
 
   it('can play', () => {
@@ -54,9 +52,7 @@ describe('AncientShipyards', () => {
   });
 
   it('act solo', () => {
-    game = newTestGame(1, testGameOptions({moonExpansion: true}));
-    player = getTestPlayer(game, 0);
-    player.popSelectInitialCards();
+    [game, player] = testGame(1, {moonExpansion: true, skipInitialCardSelection: true});
 
     expect(card.resourceCount).eq(0);
     player.megaCredits = 10;

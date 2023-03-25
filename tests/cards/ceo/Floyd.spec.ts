@@ -6,7 +6,7 @@ import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectC
 import {forceGenerationEnd, runAllActions, cast} from '../../TestingUtils';
 import {Floyd} from '../../../src/server/cards/ceos/Floyd';
 import {AsteroidMining} from '../../../src/server/cards/base/AsteroidMining';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Floyd', function() {
   let card: Floyd;
@@ -15,9 +15,7 @@ describe('Floyd', function() {
 
   beforeEach(() => {
     card = new Floyd();
-    game = newTestGame(2, {ceoExtension: true});
-    player = getTestPlayer(game, 0);
-    player.popSelectInitialCards();
+    [game, player] = testGame(2, {ceoExtension: true, skipInitialCardSelection: true});
   });
 
   it('Cannot act without cards', function() {

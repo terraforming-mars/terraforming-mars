@@ -1,18 +1,12 @@
-import {IActionCard} from '../ICard';
-import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {OrOptions} from '../../inputs/OrOptions';
 import {CardResource} from '../../../common/CardResource';
-import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../../common/cards/CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {ActionCard} from '../ActionCard';
 
-export class GHGProducingBacteria extends Card implements IActionCard, IProjectCard {
+export class GHGProducingBacteria extends ActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -22,6 +16,25 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
       resourceType: CardResource.MICROBE,
 
       requirements: CardRequirements.builder((b) => b.oxygen(4)),
+
+      action: {
+        or: {
+          autoSelect: true,
+          behaviors: [
+            {
+              spend: {resourcesHere: 2},
+              global: {temperature: 1},
+              title: 'Remove 2 microbes to raise temperature 1 step',
+              // LogHelper.logRemoveResource(player, this, 2, 'raise temperature 1 step');
+            },
+            {
+              addResources: 1,
+              title: 'Add 1 microbe to this card',
+            },
+          ],
+        },
+      },
+
       metadata: {
         description: 'Requires 4% oxygen.',
         cardNumber: '034',
@@ -36,34 +49,5 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
         }),
       },
     });
-  }
-
-
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    if (this.resourceCount < 2) {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    }
-
-    const orOptions = new OrOptions();
-
-    if (player.canAfford(0, {tr: {temperature: 1}})) {
-      orOptions.options.push(new SelectOption('Remove 2 microbes to raise temperature 1 step', 'Remove microbes', () => {
-        player.removeResourceFrom(this, 2);
-        LogHelper.logRemoveResource(player, this, 2, 'raise temperature 1 step');
-        return player.game.increaseTemperature(player, 1);
-      }));
-    }
-
-    orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    }));
-
-    if (orOptions.options.length === 1) return orOptions.options[0].cb();
-    return orOptions;
   }
 }

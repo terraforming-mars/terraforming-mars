@@ -7,7 +7,7 @@ import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnima
 import {Game} from '../../../src/server/Game';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 
 describe('Rogers', function() {
@@ -17,8 +17,7 @@ describe('Rogers', function() {
 
   beforeEach(() => {
     card = new Rogers();
-    game = newTestGame(1, {ceoExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {ceoExtension: true});
     player.playedCards.push(card);
     player.megaCredits = 30;
   });

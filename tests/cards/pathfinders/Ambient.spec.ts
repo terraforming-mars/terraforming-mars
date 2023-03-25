@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Ambient} from '../../../src/server/cards/pathfinders/Ambient';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
@@ -17,9 +17,7 @@ describe('Ambient', function() {
 
   beforeEach(function() {
     card = new Ambient();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2);
     player.setCorporationForTest(card);
   });
 

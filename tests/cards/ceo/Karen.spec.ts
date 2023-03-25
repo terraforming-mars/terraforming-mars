@@ -7,7 +7,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Karen', function() {
   let card: Karen;
@@ -16,8 +16,7 @@ describe('Karen', function() {
 
   beforeEach(() => {
     card = new Karen();
-    game = newTestGame(2, {preludeExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {preludeExtension: true});
 
     // This ensures that preludes which cost MC are affordable.
     player.megaCredits = 20;

@@ -8,7 +8,7 @@ import {forceGenerationEnd, fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Lowell} from '../../../src/server/cards/ceos/Lowell';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Lowell', function() {
   let card: Lowell;
@@ -17,8 +17,7 @@ describe('Lowell', function() {
 
   beforeEach(() => {
     card = new Lowell();
-    game = newTestGame(1, {ceoExtension: true, preludeExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {ceoExtension: true, preludeExtension: true});
     player.megaCredits = 8;
   });
 

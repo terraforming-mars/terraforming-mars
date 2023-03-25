@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {ISpace} from '../../src/server/boards/ISpace';
 import {Game} from '../../src/server/Game';
-import {newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 
 describe('SelectSpace', () => {
   let game: Game;
@@ -14,7 +14,7 @@ describe('SelectSpace', () => {
   };
 
   beforeEach(() => {
-    game = newTestGame(1);
+    [game] = testGame(1);
     selected = undefined;
   });
 

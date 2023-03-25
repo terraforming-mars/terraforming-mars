@@ -7,7 +7,7 @@ import {BeamFromAThoriumAsteroid} from '../../../src/server/cards/base/BeamFromA
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {cast, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CharityDonation', function() {
@@ -19,10 +19,7 @@ describe('CharityDonation', function() {
 
   beforeEach(function() {
     card = new CharityDonation();
-    game = newTestGame(3);
-    player1 = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
+    [game, player1, player2, player3] = testGame(3);
   });
 
   it('play', function() {

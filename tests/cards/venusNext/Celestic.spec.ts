@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllCards';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
 import {RequirementType} from '../../../src/common/cards/RequirementType';
@@ -11,8 +11,7 @@ import {CardType} from '../../../src/common/cards/CardType';
 describe('Celestic', function() {
   it('Should play', function() {
     const card = new Celestic();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [, player] = testGame(2);
     const play = card.play(player);
     expect(play).is.undefined;
 

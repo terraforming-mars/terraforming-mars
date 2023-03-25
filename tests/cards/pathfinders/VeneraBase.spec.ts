@@ -3,7 +3,7 @@ import {VeneraBase} from '../../../src/server/cards/pathfinders/VeneraBase';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Unity} from '../../../src/server/turmoil/parties/Unity';
@@ -28,8 +28,7 @@ describe('VeneraBase', function() {
 
   beforeEach(function() {
     card = new VeneraBase();
-    game = newTestGame(1, {turmoilExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
 
     nonVenusFloater = new TitanShuttles();
     venusFloater = new FloatingHabs();

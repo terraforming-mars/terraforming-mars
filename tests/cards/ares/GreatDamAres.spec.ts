@@ -7,7 +7,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, maxOutOceans} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('GreatDamAres', function() {
   let card: GreatDamAres;
@@ -16,8 +16,7 @@ describe('GreatDamAres', function() {
 
   beforeEach(() => {
     card = new GreatDamAres();
-    game = newTestGame(2, ARES_OPTIONS_NO_HAZARDS);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Requirements + Benefits', function() {

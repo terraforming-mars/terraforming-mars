@@ -2,8 +2,7 @@ import {CardFinder} from '../src/server/CardFinder';
 import {CardName} from '../src/common/cards/CardName';
 import {cast, finishGeneration} from './TestingUtils';
 import {expect} from 'chai';
-import {Game} from '../src/server/Game';
-import {getTestPlayer, newTestGame} from './TestGame';
+import {testGame} from './TestGame';
 import {ICard} from '../src/server/cards/ICard';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {Player} from '../src/server/Player';
@@ -15,9 +14,7 @@ import {Deck} from '../src/server/cards/Deck';
 // Tests for drafting
 describe('drafting', () => {
   it('2 player - project draft', () => {
-    const game = newTestGame(2, {draftVariant: true});
-    const player = getTestPlayer(game, 0);
-    const otherPlayer = getTestPlayer(game, 1);
+    const [game, player, otherPlayer] = testGame(2, {draftVariant: true});
     const drawPile = game.projectDeck.drawPile;
 
     unshiftCards(drawPile, [
@@ -118,15 +115,14 @@ describe('drafting', () => {
 
   it('2 player - initial draft', () => {
     const shuffle = Deck.shuffle;
-    let game: Game;
+    let player: TestPlayer;
+    let otherPlayer: TestPlayer;
     try {
       Deck.shuffle = function() {};
-      game = newTestGame(2, {draftVariant: true, initialDraftVariant: true});
+      [, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true});
     } finally {
       Deck.shuffle = shuffle;
     }
-    const player = getTestPlayer(game, 0);
-    const otherPlayer = getTestPlayer(game, 1);
 
     // First round
 

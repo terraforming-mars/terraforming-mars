@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Resources} from '../../../src/common/Resources';
@@ -21,9 +21,7 @@ describe('Caesar', function() {
 
   beforeEach(() => {
     card = new Caesar();
-    game = newTestGame(2, ARES_OPTIONS_NO_HAZARDS);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
     player.production.add(Resources.PLANTS, startingPlants);
     player2.production.add(Resources.PLANTS, startingPlants);

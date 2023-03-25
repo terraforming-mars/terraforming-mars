@@ -2,13 +2,11 @@ import {expect} from 'chai';
 import {SimpleDeferredAction} from '../../src/server/deferredActions/DeferredAction';
 import {DeferredActionsQueue} from '../../src/server/deferredActions/DeferredActionsQueue';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 
 describe('DeferredActionsQueue', () => {
   it('runs actions for player', () => {
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
-    const otherPlayer = getTestPlayer(game, 1);
+    const [, player, otherPlayer] = testGame(2);
 
     const queue = new DeferredActionsQueue();
     const expectedInput = new SelectOption('foo', 'bar', () => undefined);

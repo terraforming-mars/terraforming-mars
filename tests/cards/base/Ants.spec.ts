@@ -19,7 +19,7 @@ describe('Ants', function() {
 
   beforeEach(function() {
     card = new Ants();
-    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2);
   });
 
   it('Can not play without oxygen', function() {

@@ -19,7 +19,7 @@ describe('DoubleDown', () => {
 
   beforeEach(() => {
     card = new DoubleDown();
-    [game, player] = testGame(1, {preludeExtension: true, skipInitialCardSelection: true});
+    [game, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Cannot play as first prelude', () => {

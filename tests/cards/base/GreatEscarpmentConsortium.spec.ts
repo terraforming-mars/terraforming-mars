@@ -15,7 +15,7 @@ describe('GreatEscarpmentConsortium', function() {
 
   beforeEach(function() {
     card = new GreatEscarpmentConsortium();
-    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2);
   });
 
   it('Cannot play without steel production', function() {
@@ -53,7 +53,7 @@ describe('GreatEscarpmentConsortium', function() {
   });
 
   it('Can play in solo - will not reduce own production', function() {
-    [game, player] = testGame(1, {skipInitialCardSelection: true});
+    [game, player] = testGame(1);
     player.production.add(Resources.STEEL, 1);
     expect(player.production.steel).to.eq(1);
 

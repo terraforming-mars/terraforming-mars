@@ -15,7 +15,7 @@ describe('MoholeLake', function() {
 
   beforeEach(function() {
     card = new MoholeLake();
-    [/* skipped */, player] = testGame(2, {skipInitialCardSelection: true});
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can play', function() {

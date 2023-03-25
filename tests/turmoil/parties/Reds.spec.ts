@@ -94,7 +94,7 @@ describe('Reds', function() {
 
   it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step: Moon', function() {
     // Reset the whole game infrastructure to include the Moon
-    [game, player, secondPlayer] = testGame(2, {turmoilExtension: true, moonExpansion: true, skipInitialCardSelection: true});
+    [game, player, secondPlayer] = testGame(2, {turmoilExtension: true, moonExpansion: true});
     turmoil = game.turmoil!;
 
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[2].id);

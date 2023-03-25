@@ -14,7 +14,7 @@ describe('BiomassCombustors', function() {
 
   beforeEach(function() {
     card = new BiomassCombustors();
-    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2);
   });
 
   it('Cannot play if oxygen requirement not met', function() {

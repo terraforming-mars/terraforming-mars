@@ -21,7 +21,7 @@ describe('Counter', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false, skipInitialCardSelection: true});
+    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
     fake = fakeCard({});
   });
 
@@ -232,7 +232,7 @@ describe('Counter for Moon', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player] = testGame(3, {moonExpansion: true, skipInitialCardSelection: true});
+    [game, player] = testGame(3, {moonExpansion: true});
     fake = fakeCard({});
   });
 

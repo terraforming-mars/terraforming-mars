@@ -15,7 +15,7 @@ describe('AsteroidMiningConsortium', function() {
 
   beforeEach(function() {
     card = new AsteroidMiningConsortium();
-    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2);
   });
 
   it('Cannot play if no titanium production', function() {

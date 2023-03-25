@@ -45,7 +45,7 @@ describe('Executor', () => {
   let executor: Executor;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, skipInitialCardSelection: true});
+    [game, player, player2, player3] = testGame(3, {venusNextExtension: true});
 
     fake = fakeCard({});
     executor = new Executor();

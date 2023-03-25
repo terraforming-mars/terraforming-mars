@@ -12,7 +12,7 @@ describe('Dirigibles', function() {
 
   beforeEach(function() {
     card = new Dirigibles();
-    [/* skipped */, player] = testGame(2, {skipInitialCardSelection: true});
+    [/* skipped */, player] = testGame(2);
     player.playedCards.push(card);
   });
 

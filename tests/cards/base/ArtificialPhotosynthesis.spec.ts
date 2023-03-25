@@ -7,7 +7,7 @@ import {testGame} from '../../TestGame';
 describe('ArtificialPhotosynthesis', () => {
   it('Should play', () => {
     const card = new ArtificialPhotosynthesis();
-    const [game, player] = testGame(1, {skipInitialCardSelection: true});
+    const [game, player] = testGame(1);
     const action = card.play(player);
     expect(action).is.undefined;
     runAllActions(game);

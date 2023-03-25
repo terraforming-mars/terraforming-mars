@@ -14,7 +14,7 @@ describe('Floyd', function() {
 
   beforeEach(() => {
     card = new Floyd();
-    [game, player] = testGame(2, {ceoExtension: true, skipInitialCardSelection: true});
+    [game, player] = testGame(2, {ceoExtension: true});
   });
 
   it('Cannot act without cards', function() {

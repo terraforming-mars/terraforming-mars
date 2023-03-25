@@ -15,7 +15,7 @@ describe('DecreaseAnyProduction', function() {
   let decreaseAnyProduction: DecreaseAnyProduction;
 
   beforeEach(function() {
-    [game, player, player2, player3] = testGame(3, {skipInitialCardSelection: true});
+    [game, player, player2, player3] = testGame(3);
     decreaseAnyProduction = new DecreaseAnyProduction(player, Resources.TITANIUM, {count: 2});
   });
 

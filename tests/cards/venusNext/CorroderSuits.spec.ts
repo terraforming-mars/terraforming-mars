@@ -17,7 +17,7 @@ describe('CorroderSuits', function() {
 
   beforeEach(function() {
     card = new CorroderSuits();
-    [game, player] = testGame(2, {skipInitialCardSelection: true});
+    [game, player] = testGame(2);
   });
 
   it('Should play - no targets', function() {

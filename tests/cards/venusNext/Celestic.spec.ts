@@ -7,6 +7,7 @@ import {CardResource} from '../../../src/common/CardResource';
 import {RequirementType} from '../../../src/common/cards/RequirementType';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {CardType} from '../../../src/common/cards/CardType';
+import {churnAction} from '../../TestingUtils';
 
 describe('Celestic', function() {
   it('Should play', function() {
@@ -17,8 +18,7 @@ describe('Celestic', function() {
 
     player.setCorporationForTest(card);
 
-    const action = card.action(player);
-    expect(action).is.undefined;
+    expect(churnAction(card, player)).is.undefined;
     expect(card.resourceCount).to.eq(1);
     player.addResourceTo(card, 4);
     expect(card.getVictoryPoints()).to.eq(1);

@@ -4,6 +4,7 @@ import {HiredRaiders} from '../../../src/server/cards/base/HiredRaiders';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('HiredRaiders', function() {
   let card: HiredRaiders;
@@ -12,9 +13,7 @@ describe('HiredRaiders', function() {
 
   beforeEach(function() {
     card = new HiredRaiders();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player, player2] = testGame(2);
   });
 
   it('Should play', function() {

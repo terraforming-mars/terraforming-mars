@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {SubCrustMeasurements} from '../../../src/server/cards/promo/SubCrustMeasurements';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SubCrustMeasurements', function() {
@@ -10,9 +10,7 @@ describe('SubCrustMeasurements', function() {
 
   beforeEach(function() {
     card = new SubCrustMeasurements();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play if not enough science tags', function() {

@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {CorporateStronghold} from '../../../src/server/cards/base/CorporateStronghold';
-import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('CorporateStronghold', function() {
   let card: CorporateStronghold;
@@ -13,9 +13,7 @@ describe('CorporateStronghold', function() {
 
   beforeEach(function() {
     card = new CorporateStronghold();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
     player.popWaitingFor(); // Removing SelectInitalCards.
   });
 

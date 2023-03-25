@@ -1,15 +1,12 @@
 import {expect} from 'chai';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {NitrogenRichAsteroid} from '../../../src/server/cards/base/NitrogenRichAsteroid';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('NitrogenRichAsteroid', function() {
   it('Should play', function() {
     const card = new NitrogenRichAsteroid();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    const [game, player] = testGame(2);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getTerraformRating()).to.eq(23);

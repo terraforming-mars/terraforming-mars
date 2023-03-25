@@ -5,17 +5,18 @@ import {Resources} from '../../../src/common/Resources';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Birds', function() {
   let card: Birds;
+  let game: Game;
   let player: TestPlayer;
   let player2: TestPlayer;
+  let player3: TestPlayer;
 
   beforeEach(function() {
     card = new Birds();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2, player3] = testGame(3);
   });
 
   it('Cannot play without oxygen', function() {
@@ -23,9 +24,6 @@ describe('Birds', function() {
   });
 
   it('Should play', function() {
-    const player3 = TestPlayer.GREEN.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2, player3], player);
-
     player2.production.add(Resources.PLANTS, 2);
     player3.production.add(Resources.PLANTS, 7);
     (game as any).oxygenLevel = 13;

@@ -9,14 +9,12 @@ import {TestPlayer} from '../../TestPlayer';
 describe('Cartel', function() {
   let card: Cartel;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new Cartel();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
-    player.game = game;
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {

@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {churnAction, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('ElectroCatapult', () => {
@@ -44,16 +44,14 @@ describe('ElectroCatapult', () => {
     player.plants = 1;
     player.steel = 1;
 
-    expect(card.action(player)).is.undefined;
-    runAllActions(game);
-    const action = cast(player.popWaitingFor(), OrOptions);
-    expect(action.options).has.lengthOf(2);
+    const orOptions = cast(churnAction(card, player), OrOptions);
+    expect(orOptions.options).has.lengthOf(2);
 
-    action.options[0].cb();
+    orOptions.options[0].cb();
     expect(player.plants).to.eq(0);
     expect(player.megaCredits).to.eq(7);
 
-    action.options[1].cb();
+    orOptions.options[1].cb();
     expect(player.steel).to.eq(0);
     expect(player.megaCredits).to.eq(14);
   });

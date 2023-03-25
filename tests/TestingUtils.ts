@@ -179,3 +179,26 @@ export function getSendADelegateOption(player: Player) {
     (option) => option.title.toString().startsWith('Send a delegate'));
 }
 
+/**
+ * Simulate the behavior of a card action run through the deferred action queue, returning the
+ * next input the player must supply.
+ *
+ * @see churn.
+ */
+export function churnAction(card: IActionCard, player: TestPlayer) {
+  return churn(() => card.action(player), player);
+}
+
+/**
+ * Simulate the behavior of a block run through the deferred action queue, returning the next input
+ * the player must supply.
+ *
+ * Card actions can return input through deferred actions, and also through the return value.
+ * Rather than have to know which is correct, this function supports both cases, returning a
+ * PlayerInput if necessary.
+ */
+export function churn(f: () => PlayerInput | undefined, player: TestPlayer): PlayerInput | undefined {
+  player.defer(f());
+  runAllActions(player.game);
+  return player.popWaitingFor();
+}

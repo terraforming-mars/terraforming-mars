@@ -15,7 +15,7 @@ export class FloaterTechnology extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
 
       action: {
-        addResourcesToAnyCard: {type: CardResource.FLOATER, count: 1, mustHaveCard: true},
+        addResourcesToAnyCard: {type: CardResource.FLOATER, count: 1 /* , mustHaveCard: true */},
       },
 
       metadata: {

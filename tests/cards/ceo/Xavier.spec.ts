@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 import {Xavier} from '../../../src/server/cards/ceos/Xavier';
 import {Cartel} from '../../../src/server/cards/base/Cartel';
@@ -18,8 +18,7 @@ describe('Xavier', function() {
 
   beforeEach(() => {
     card = new Xavier();
-    game = newTestGame(2, {ceoExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {ceoExtension: true});
     player.playedCards.push(card, new SearchForLife());
   });
 

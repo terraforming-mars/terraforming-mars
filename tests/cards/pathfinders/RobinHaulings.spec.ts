@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RobinHaulings} from '../../../src/server/cards/pathfinders/RobinHaulings';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -15,9 +15,7 @@ describe('RobinHaulings', function() {
 
   beforeEach(function() {
     card = new RobinHaulings();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 0);
+    [game, player, player2] = testGame(2);
     player.setCorporationForTest(card);
   });
 

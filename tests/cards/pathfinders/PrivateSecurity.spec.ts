@@ -3,7 +3,7 @@ import {PrivateSecurity} from '../../../src/server/cards/pathfinders/PrivateSecu
 import {TestPlayer} from '../../TestPlayer';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PrivateSecurity', function() {
@@ -14,10 +14,7 @@ describe('PrivateSecurity', function() {
 
   beforeEach(function() {
     card = new PrivateSecurity();
-    const game = newTestGame(3, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
-    opponent1 = getTestPlayer(game, 1);
-    opponent2 = getTestPlayer(game, 2);
+    [, player, opponent1, opponent2] = testGame(3, {pathfindersExpansion: true});
   });
 
   it('protects against Fish', function() {

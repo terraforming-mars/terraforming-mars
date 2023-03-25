@@ -3,7 +3,7 @@ import {Game} from '../../src/server/Game';
 import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {testGameOptions} from '../TestingUtils';
 import {ISpace} from '../../src/server/boards/ISpace';
 import {TileType} from '../../src/common/TileType';
@@ -36,8 +36,7 @@ describe('MudSlides', function() {
   });
 
   it('resolve play with overplaced tiles', function() {
-    game = newTestGame(2, testGameOptions({aresExtension: true, turmoilExtension: true}));
-    player = getTestPlayer(game, 0);
+    [game, player, player2] = testGame(2, testGameOptions({aresExtension: true, turmoilExtension: true}));
 
     // Find two adjacent ocean spaces
     function adjacentOceans(): {first: ISpace, second: ISpace} {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Jansson} from '../../../src/server/cards/ceos/Jansson';
 import {addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
@@ -13,8 +13,7 @@ describe('Jansson', function() {
 
   beforeEach(() => {
     card = new Jansson();
-    const game = newTestGame(2);
-    player = getTestPlayer(game, 0);
+    [, player] = testGame(2);
   });
 
   it('Can only act once per game', function() {
@@ -32,9 +31,8 @@ describe('Jansson', function() {
   });
 
   it('Do not get bonuses from tiles on the Moon', function() {
-    const moonGame = newTestGame(2, {ceoExtension: true, moonExpansion: true});
+    const [moonGame, player] = testGame(2, {ceoExtension: true, moonExpansion: true});
     const moonData = MoonExpansion.moonData(moonGame);
-    player = getTestPlayer(moonGame, 0);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     expect(player.steel).eq(0);
     expect(player.titanium).eq(0);

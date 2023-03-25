@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SpaceRaceToMars} from '../../src/server/turmoil/globalEvents/SpaceRaceToMars';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {TileType} from '../../src/common/TileType';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
@@ -19,9 +19,7 @@ let spaces: Array<ISpace>;
 describe('SpaceRaceToMars', function() {
   beforeEach(() => {
     card = new SpaceRaceToMars();
-    game = newTestGame(2, {turmoilExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(3, {turmoilExtension: true});
     turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
     spaces = player.game.board.getAvailableSpacesOnLand(player);

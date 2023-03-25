@@ -3,7 +3,7 @@ import {SpacePort} from '../../../src/server/cards/colonies/SpacePort';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {cast, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
@@ -13,14 +13,13 @@ describe('SpacePort', function() {
 
   beforeEach(function() {
     card = new SpacePort();
-    const game = newTestGame(2, {coloniesExtension: true, customColoniesList: [
+    [, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
       ColonyName.CERES,
       ColonyName.CALLISTO,
       ColonyName.ENCELADUS,
       ColonyName.EUROPA,
       ColonyName.GANYMEDE,
     ]});
-    player = getTestPlayer(game, 0);
   });
 
   it('Can not play without colony', function() {

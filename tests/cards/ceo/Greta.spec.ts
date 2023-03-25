@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Phase} from '../../../src/common/Phase';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -14,13 +14,13 @@ import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 describe('Greta', function() {
   let card: Greta;
   let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 
   beforeEach(() => {
     card = new Greta();
-    game = newTestGame(2, {ceoExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player, player2] = testGame(2, {ceoExtension: true});
     player.playCard(card);
   });
 
@@ -61,13 +61,11 @@ describe('Greta', function() {
   });
 
   it('Does not gain 4MC from TR bonus when the winning Chairman', function() {
-    game = newTestGame(2, {turmoilExtension: true, ceoExtension: true});
+    [game, player, player2] = testGame(2, {turmoilExtension: true, ceoExtension: true});
     turmoil = game.turmoil!;
     turmoil.parties.forEach((p) => p.delegates.clear());
-    player = getTestPlayer(game, 0);
     player.playCard(card);
     player.setTerraformRating(20);
-    const player2 = getTestPlayer(game, 1);
     player2.setTerraformRating(20);
     player.megaCredits = 0;
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);

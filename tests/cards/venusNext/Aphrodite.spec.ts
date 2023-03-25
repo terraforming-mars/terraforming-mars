@@ -1,13 +1,11 @@
 import {expect} from 'chai';
 import {Aphrodite} from '../../../src/server/cards/venusNext/Aphrodite';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Aphrodite', function() {
   it('Should play', function() {
     const card = new Aphrodite();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
-    const player2 = getTestPlayer(game, 1);
+    const [game, player, player2] = testGame(2);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.production.plants).to.eq(1);

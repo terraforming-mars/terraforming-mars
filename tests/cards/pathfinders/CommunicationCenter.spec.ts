@@ -3,7 +3,7 @@ import {CommunicationCenter} from '../../../src/server/cards/pathfinders/Communi
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Resources} from '../../../src/common/Resources';
 import {CardType} from '../../../src/common/cards/CardType';
 
@@ -15,9 +15,7 @@ describe('CommunicationCenter', function() {
 
   beforeEach(function() {
     card = new CommunicationCenter();
-    game = newTestGame(2, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
-    otherPlayer = getTestPlayer(game, 1);
+    [game, player, otherPlayer] = testGame(2, {pathfindersExpansion: true});
     player.playedCards = [card];
   });
 

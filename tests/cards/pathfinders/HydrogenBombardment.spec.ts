@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {HydrogenBombardment} from '../../../src/server/cards/pathfinders/HydrogenBombardment';
 import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
@@ -12,8 +12,7 @@ describe('HydrogenBombardment', function() {
 
   beforeEach(function() {
     card = new HydrogenBombardment();
-    game = newTestGame(1, {venusNextExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {venusNextExtension: true});
   });
 
   it('Should play', function() {

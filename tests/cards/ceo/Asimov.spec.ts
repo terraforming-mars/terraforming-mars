@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {ASIMOV_AWARD_BONUS} from '../../../src/common/constants';
 import {cast, forceGenerationEnd} from '../../TestingUtils';
 import {Asimov} from '../../../src/server/cards/ceos/Asimov';
@@ -17,9 +17,7 @@ describe('Asimov', function() {
 
   beforeEach(() => {
     card = new Asimov();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2);
   });
 
   it('Asimov award bonuses', () => {

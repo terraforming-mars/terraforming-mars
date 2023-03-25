@@ -1,6 +1,6 @@
 import {SelectColony} from './../../../src/server/inputs/SelectColony';
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {MarketManipulation} from '../../../src/server/cards/colonies/MarketManipulation';
 import {Enceladus} from '../../../src/server/colonies/Enceladus';
@@ -21,7 +21,7 @@ describe('MarketManipulation', function() {
 
   beforeEach(function() {
     card = new MarketManipulation();
-    game = newTestGame(2, {
+    [game, player] = testGame(2, {
       coloniesExtension: true,
       customColoniesList: [
         ColonyName.GANYMEDE,
@@ -30,7 +30,6 @@ describe('MarketManipulation', function() {
         ColonyName.CALLISTO,
         ColonyName.EUROPA],
     });
-    player = getTestPlayer(game, 0);
   });
 
   it('Should play', function() {

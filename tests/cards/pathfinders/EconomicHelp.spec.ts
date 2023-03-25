@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {EconomicHelp} from '../../../src/server/cards/pathfinders/EconomicHelp';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,8 +12,7 @@ describe('EconomicHelp', function() {
 
   beforeEach(function() {
     card = new EconomicHelp();
-    game = newTestGame(1, {pathfindersExpansion: true, venusNextExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
   });
 
   it('Play - one lowest influence tracks', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {HAL9000} from '../../../src/server/cards/ceos/HAL9000';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('HAL 9000', function() {
   let card: HAL9000;
@@ -10,8 +10,7 @@ describe('HAL 9000', function() {
 
   beforeEach(() => {
     card = new HAL9000();
-    const game = newTestGame(2);
-    player = getTestPlayer(game, 0);
+    [, player] = testGame(2);
     player.production.adjust({plants: 0, megacredits: -1, steel: 1, titanium: 1, energy: 1, heat: 1});
   });
 

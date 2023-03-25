@@ -1,14 +1,12 @@
 import {expect} from 'chai';
 import {SelectDelegate} from '../../src/server/inputs/SelectDelegate';
 import {TestPlayer} from '../TestPlayer';
-import {Game} from '../../src/server/Game';
-import {getTestPlayers, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {Player} from '../../src/server/Player';
 import {NeutralPlayer} from '../../src/server/turmoil/Turmoil';
 
 describe('SelectDelegate', function() {
   let players: Array<TestPlayer>;
-  let game: Game;
   let selected: Player | NeutralPlayer | undefined;
   const cb = (player: Player | NeutralPlayer) => {
     selected = player;
@@ -16,8 +14,7 @@ describe('SelectDelegate', function() {
   };
 
   beforeEach(() => {
-    game = newTestGame(3);
-    players = getTestPlayers(game);
+    [/* unused */, ...players] = testGame(3);
     selected = undefined;
   });
 

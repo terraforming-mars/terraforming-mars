@@ -4,6 +4,7 @@ import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('RegolithEaters', function() {
   let card: RegolithEaters;
@@ -12,10 +13,7 @@ describe('RegolithEaters', function() {
 
   beforeEach(function() {
     card = new RegolithEaters();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
-    player.popSelectInitialCards();
+    [game, player] = testGame(2, {skipInitialCardSelection: true});
   });
 
   it('Should act', function() {

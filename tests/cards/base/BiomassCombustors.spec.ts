@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('BiomassCombustors', function() {
   let card: BiomassCombustors;
@@ -13,10 +14,7 @@ describe('BiomassCombustors', function() {
 
   beforeEach(function() {
     card = new BiomassCombustors();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
-    player.popWaitingFor();
+    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
   });
 
   it('Cannot play if oxygen requirement not met', function() {

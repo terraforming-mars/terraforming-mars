@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {Executor} from '../../src/server/behavior/Executor';
 import {Units} from '../../src/common/Units';
 import {Payment} from '../../src/common/inputs/Payment';
@@ -45,13 +45,7 @@ describe('Executor', () => {
   let executor: Executor;
 
   beforeEach(() => {
-    game = newTestGame(3, {venusNextExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
-    player.popSelectInitialCards();
-    player2.popSelectInitialCards();
-    player3.popSelectInitialCards();
+    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, skipInitialCardSelection: true});
 
     fake = fakeCard({});
     executor = new Executor();

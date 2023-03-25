@@ -23,7 +23,6 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
       victoryPoints: VictoryPoints.resource(1, 1),
 
       metadata: {
-        cardNumber: 'PfTMP',
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 floater from any card and add 1 Venusian habitat on this card.', (ab) => {
             ab.floaters(1).startAction.venusianHabitat(1);

@@ -1,20 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class FloaterTechnology extends Card implements IProjectCard {
+export class FloaterTechnology extends ActionCard implements IProjectCard {
   constructor() {
     super({
       cost: 7,
       tags: [Tag.SCIENCE],
       name: CardName.FLOATER_TECHNOLOGY,
       type: CardType.ACTIVE,
+
+      action: {
+        addResourcesToAnyCard: {type: CardResource.FLOATER, count: 1 /* , mustHaveCard: true */},
+      },
 
       metadata: {
         cardNumber: 'C12',
@@ -25,18 +27,5 @@ export class FloaterTechnology extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    const floaterCards = player.getResourceCards(CardResource.FLOATER);
-    if (floaterCards.length === 0) return undefined;
-
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 1}));
-
-    return undefined;
   }
 }

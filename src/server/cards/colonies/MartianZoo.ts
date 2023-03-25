@@ -39,7 +39,6 @@ export class MartianZoo extends Card implements IProjectCard {
     });
   }
 
-
   public onCardPlayed(player: Player, card: IProjectCard) {
     const count = player.tags.cardTagCount(card, Tag.EARTH);
     if (count > 0) {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -26,8 +26,7 @@ describe('Odyssey', () => {
 
   beforeEach(() => {
     card = new Odyssey();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 

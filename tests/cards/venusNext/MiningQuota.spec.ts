@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {MiningQuota} from '../../../src/server/cards/venusNext/MiningQuota';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('MiningQuota', function() {
   it('Should play', function() {
     const card = new MiningQuota();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [, player] = testGame(1);
     player.playedCards.push(new SisterPlanetSupport);
     expect(card.canPlay(player)).is.not.true;
 

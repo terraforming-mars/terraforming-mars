@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {FusionPower} from '../../../src/server/cards/base/FusionPower';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -9,8 +9,7 @@ describe('FusionPower', function() {
 
   beforeEach(function() {
     card = new FusionPower();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not play', function() {

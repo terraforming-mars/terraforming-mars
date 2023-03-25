@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {BeamFromAThoriumAsteroid} from '../../../src/server/cards/base/BeamFromAThoriumAsteroid';
 
@@ -9,8 +9,7 @@ describe('BeamFromAThoriumAsteroid', function() {
 
   beforeEach(function() {
     card = new BeamFromAThoriumAsteroid();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Cannot play without a Jovian tag', function() {

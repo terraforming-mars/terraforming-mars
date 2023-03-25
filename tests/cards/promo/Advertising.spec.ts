@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {Advertising} from '../../../src/server/cards/promo/Advertising';
 import {Game} from '../../../src/server/Game';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Advertising', function() {
   it('Should play', function() {
     const advertising = new Advertising();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [, player] = testGame(1);
     Game.newInstance('gameid', [player], player);
 
     player.playedCards.push(advertising);

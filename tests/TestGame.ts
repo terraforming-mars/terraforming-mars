@@ -26,7 +26,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
     undefined :
     testGameOptions(customOptions);
   const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
-  if (customOptions?.skipInitialCardSelection === true) {
+  if (customOptions?.skipInitialCardSelection !== false) {
     for (const player of players) {
       /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
       if (player.getWaitingFor() instanceof SelectInitialCards) {

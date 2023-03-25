@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {cast} from '../../../TestingUtils';
+import {cast, churnAction} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
-import {testGameOptions, runAllActions} from '../../../TestingUtils';
+import {testGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -35,10 +35,7 @@ describe('GreeneryStandardProject', function() {
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);
 
-    card.action(player);
-    runAllActions(game);
-
-    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
+    const selectSpace = cast(churnAction(card, player), SelectSpace);
     const availableSpace = selectSpace.availableSpaces[0];
 
     expect(availableSpace.spaceType).eq(SpaceType.LAND);

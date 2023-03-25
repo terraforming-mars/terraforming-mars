@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, churnAction} from '../../TestingUtils';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -23,9 +23,7 @@ describe('Dirigibles', function() {
 
   it('Should act - single target', function() {
     expect(player.getSpendableFloaters()).to.eq(0);
-    expect(card.action(player)).is.undefined;
-    runAllActions(player.game);
-    expect(player.popWaitingFor()).is.undefined;
+    expect(churnAction(card, player)).is.undefined;
     expect(player.getCardsWithResources()).has.lengthOf(1);
     expect(player.getSpendableFloaters()).to.eq(1);
     expect(card.resourceCount).to.eq(1);
@@ -33,11 +31,8 @@ describe('Dirigibles', function() {
 
   it('Should act - multiple targets', function() {
     player.playedCards.push(new FloatingHabs());
-    expect(card.action(player)).is.undefined;
-    runAllActions(player.game);
-
-    const action = cast(player.popWaitingFor(), SelectCard);
-    action.cb([card]);
+    const selectCard = cast(churnAction(card, player), SelectCard);
+    selectCard.cb([card]);
 
     expect(card.resourceCount).to.eq(1);
   });

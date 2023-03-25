@@ -20,8 +20,7 @@ describe('Scientists', function() {
   let scientists: Scientists;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    [game, player] = testGame(1, {turmoilExtension: true});
     turmoil = game.turmoil!;
     scientists = new Scientists();
   });

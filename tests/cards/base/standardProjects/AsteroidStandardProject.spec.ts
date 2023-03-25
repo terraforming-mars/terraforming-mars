@@ -47,8 +47,7 @@ describe('AsteroidStandardProject', function() {
   });
 
   it('Can not act with reds', () => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    [game, player] = testGame(1, {turmoilExtension: true});
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

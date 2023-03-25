@@ -15,7 +15,7 @@ describe('ImportedNutrients', function() {
 
   beforeEach(function() {
     card = new ImportedNutrients();
-    [game, player] = testGame(1, {preludeExtension: true, skipInitialCardSelection: true});
+    [game, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Can play without microbe cards', function() {

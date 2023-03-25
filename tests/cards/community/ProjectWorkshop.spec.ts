@@ -30,7 +30,7 @@ describe('ProjectWorkshop', function() {
   beforeEach(function() {
     card = new ProjectWorkshop();
     advancedAlloys = new AdvancedAlloys();
-    [game, player] = testGame(1, {skipInitialCardSelection: true});
+    [game, player] = testGame(1);
 
     card.play(player);
     player.setCorporationForTest(card);

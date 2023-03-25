@@ -16,7 +16,7 @@ describe('VenusSoils', function() {
 
   beforeEach(function() {
     card = new VenusSoils();
-    [game, player] = testGame(2, {skipInitialCardSelection: true});
+    [game, player] = testGame(2);
   });
 
   it('Should play - single target', function() {

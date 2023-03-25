@@ -23,7 +23,7 @@ describe('Atmoscoop', function() {
 
   beforeEach(function() {
     card = new Atmoscoop();
-    [game, player] = testGame(2, {venusNextExtension: true, skipInitialCardSelection: true});
+    [game, player] = testGame(2, {venusNextExtension: true});
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();
   });

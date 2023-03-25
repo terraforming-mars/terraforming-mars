@@ -20,7 +20,7 @@ describe('Pallas', function() {
 
   beforeEach(function() {
     pallas = new Pallas();
-    [game, player, player2] = testGame(2, {turmoilExtension: true, coloniesExtension: true, skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2, {turmoilExtension: true, coloniesExtension: true});
     game.colonies.push(pallas);
     turmoil = Turmoil.getTurmoil(game);
     greens = turmoil.getPartyByName(PartyName.GREENS);

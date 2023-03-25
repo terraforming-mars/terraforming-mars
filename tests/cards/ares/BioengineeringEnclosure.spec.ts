@@ -18,7 +18,7 @@ describe('BioengineeringEnclosure', function() {
   beforeEach(function() {
     animalHost = new Birds();
     card = new BioengineeringEnclosure();
-    [game, player] = testGame(2, {...ARES_OPTIONS_NO_HAZARDS, skipInitialCardSelection: true});
+    [game, player] = testGame(2, {...ARES_OPTIONS_NO_HAZARDS});
   });
 
   it('Can not play without a science tag', () => {

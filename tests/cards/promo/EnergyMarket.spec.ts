@@ -13,7 +13,7 @@ describe('EnergyMarket', function() {
 
   beforeEach(function() {
     card = new EnergyMarket();
-    [/* skipped */, player] = testGame(1, {preludeExtension: true, skipInitialCardSelection: true});
+    [/* skipped */, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Can not act', function() {

@@ -19,7 +19,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {moonExpansion: true, skipInitialCardSelection: true});
+    [game, player, player2, player3] = testGame(3, {moonExpansion: true});
     card = new TheDarksideofTheMoonSyndicate();
     moonData = MoonExpansion.moonData(game);
   });

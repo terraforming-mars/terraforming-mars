@@ -23,7 +23,7 @@ describe('HydrogenToVenus', function() {
 
   beforeEach(function() {
     card = new HydrogenToVenus();
-    [game, player] = testGame(2, {skipInitialCardSelection: true});
+    [game, player] = testGame(2);
     venusCard1 = new DeuteriumExport();
     venusCard2 = new Dirigibles();
     jovianTagCard1 = new ColonizerTrainingCamp();

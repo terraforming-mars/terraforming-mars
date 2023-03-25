@@ -10,7 +10,7 @@ describe('AsteroidHollowing', function() {
 
   beforeEach(function() {
     card = new AsteroidHollowing();
-    [/* skipped */, player] = testGame(2, {skipInitialCardSelection: true});
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

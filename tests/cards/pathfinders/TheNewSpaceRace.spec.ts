@@ -24,7 +24,14 @@ describe('TheNewSpaceRace', function() {
 
   beforeEach(function() {
     card = new TheNewSpaceRace();
-    [game, player1, player2, player3] = testGame(3, {turmoilExtension: true, preludeExtension: true, draftVariant: false, initialDraftVariant: false});
+    [game, player1, player2, player3] = testGame(
+      3, {
+        turmoilExtension: true,
+        preludeExtension: true,
+        draftVariant: false,
+        initialDraftVariant: false,
+        skipInitialCardSelection: false,
+      });
   });
 
   /*

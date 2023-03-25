@@ -26,7 +26,7 @@ describe('Playwrights', () => {
 
   beforeEach(() => {
     card = new Playwrights();
-    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2);
 
     card.play(player);
     player.setCorporationForTest(card);

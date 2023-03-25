@@ -19,7 +19,7 @@ describe('LunaTradeFederation', () => {
   // let moonData: IMoonData;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(2, {moonExpansion: true, skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2, {moonExpansion: true});
     lunaTradeFederation = new LunaTradeFederation();
   });
 

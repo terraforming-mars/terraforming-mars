@@ -18,7 +18,7 @@ describe('Venus', function() {
 
   beforeEach(function() {
     venus = new Venus();
-    [game, player, player2] = testGame(2, {venusNextExtension: true, coloniesExtension: true, skipInitialCardSelection: true});
+    [game, player, player2] = testGame(2, {venusNextExtension: true, coloniesExtension: true});
     game.colonies.push(venus);
     localShading = new LocalShading();
   });

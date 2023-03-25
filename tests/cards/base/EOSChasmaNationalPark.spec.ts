@@ -15,7 +15,7 @@ describe('EosChasmaNationalPark', () => {
 
   beforeEach(() => {
     card = new EosChasmaNationalPark();
-    [game, player] = testGame(2, {skipInitialCardSelection: true});
+    [game, player] = testGame(2);
   });
 
   it('Can play', () => {

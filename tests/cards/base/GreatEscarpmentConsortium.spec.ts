@@ -5,6 +5,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('GreatEscarpmentConsortium', function() {
   let card: GreatEscarpmentConsortium;
@@ -14,10 +15,7 @@ describe('GreatEscarpmentConsortium', function() {
 
   beforeEach(function() {
     card = new GreatEscarpmentConsortium();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
-    player.popSelectInitialCards();
+    [game, player, player2] = testGame(2, {skipInitialCardSelection: true});
   });
 
   it('Cannot play without steel production', function() {
@@ -55,8 +53,7 @@ describe('GreatEscarpmentConsortium', function() {
   });
 
   it('Can play in solo - will not reduce own production', function() {
-    const game = Game.newInstance('gameid', [player], player);
-    player.popSelectInitialCards();
+    [game, player] = testGame(1, {skipInitialCardSelection: true});
     player.production.add(Resources.STEEL, 1);
     expect(player.production.steel).to.eq(1);
 

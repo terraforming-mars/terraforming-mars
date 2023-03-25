@@ -2,9 +2,9 @@ import {expect} from 'chai';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
-import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Dirigibles', function() {
   let card: Dirigibles;
@@ -12,11 +12,8 @@ describe('Dirigibles', function() {
 
   beforeEach(function() {
     card = new Dirigibles();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2, {skipInitialCardSelection: true});
     player.playedCards.push(card);
-    player.popSelectInitialCards();
   });
 
   it('Should play', function() {

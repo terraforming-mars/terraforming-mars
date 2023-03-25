@@ -6,6 +6,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('EosChasmaNationalPark', () => {
   let card: EosChasmaNationalPark;
@@ -14,10 +15,7 @@ describe('EosChasmaNationalPark', () => {
 
   beforeEach(() => {
     card = new EosChasmaNationalPark();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
-    player.popSelectInitialCards();
+    [game, player] = testGame(2, {skipInitialCardSelection: true});
   });
 
   it('Can play', () => {

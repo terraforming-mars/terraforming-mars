@@ -284,7 +284,8 @@ export class Server {
       playerInputModel.showOwner = selectCard.config.showOwner === true;
       break;
     case PlayerInputType.SELECT_COLONY:
-      playerInputModel.coloniesModel = this.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
+      const selectColony = waitingFor as SelectColony;
+      playerInputModel.coloniesModel = this.getColonyModel(player.game, selectColony.colonies, selectColony.showTileOnly);
       break;
     case PlayerInputType.SELECT_PAYMENT:
       const sp = waitingFor as SelectPayment;
@@ -580,22 +581,23 @@ export class Server {
     };
   }
 
-  private static getColonyModel(game: Game, colonies: Array<IColony>) : Array<ColonyModel> {
+  private static getColonyModel(game: Game, colonies: Array<IColony>, showTileOnly: boolean) : Array<ColonyModel> {
     return colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(
           (playerId): Color => game.getPlayerById(playerId).color,
         ),
-        isActive: colony.isActive,
+        isActive: colony.isActive && showTileOnly === false,
         name: colony.name,
         trackPosition: colony.trackPosition,
         visitor:
-                colony.visitor === undefined ?
-                  undefined :
-                  game.getPlayerById(colony.visitor).color,
+          colony.visitor === undefined ?
+            undefined :
+            game.getPlayerById(colony.visitor).color,
       }),
     );
   }
+
   private static getMoonModel(game: Game): MoonModel | undefined {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return {

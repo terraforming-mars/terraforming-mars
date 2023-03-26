@@ -53,6 +53,7 @@ export class Aridor extends Card implements ICorporationCard {
       }
       return undefined;
     });
+    selectColony.showTileOnly = true;
     return selectColony;
   }
 

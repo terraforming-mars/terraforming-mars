@@ -47,6 +47,7 @@ export class Maria extends CeoCard {
       }
       return undefined;
     });
+    selectColony.showTileOnly = true;
     return selectColony;
   }
 }

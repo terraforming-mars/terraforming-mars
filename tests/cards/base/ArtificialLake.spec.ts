@@ -7,6 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {cast, maxOutOceans, runAllActions, setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('ArtificialLake', function() {
   let card: ArtificialLake;
@@ -15,9 +16,7 @@ describe('ArtificialLake', function() {
 
   beforeEach(function() {
     card = new ArtificialLake();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

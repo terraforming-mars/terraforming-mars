@@ -6,6 +6,7 @@ import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('SymbioticFungus', function() {
   let card: SymbioticFungus;
@@ -14,9 +15,7 @@ describe('SymbioticFungus', function() {
 
   beforeEach(function() {
     card = new SymbioticFungus();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

@@ -3,6 +3,7 @@ import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('VenusianInsects', () => {
   let card: VenusianInsects;
@@ -11,9 +12,7 @@ describe('VenusianInsects', () => {
 
   beforeEach(() => {
     card = new VenusianInsects();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', () => {

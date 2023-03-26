@@ -8,6 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, setVenusScaleLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('FreyjaBiodomes', function() {
   let card: FreyjaBiodomes;
@@ -16,9 +17,7 @@ describe('FreyjaBiodomes', function() {
 
   beforeEach(function() {
     card = new FreyjaBiodomes();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play without energy production', function() {

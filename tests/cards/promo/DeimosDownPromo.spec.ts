@@ -5,6 +5,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('DeimosDownPromo', function() {
   let card: DeimosDownPromo;
@@ -14,9 +15,7 @@ describe('DeimosDownPromo', function() {
 
   beforeEach(function() {
     card = new DeimosDownPromo();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Should play without plants', function() {

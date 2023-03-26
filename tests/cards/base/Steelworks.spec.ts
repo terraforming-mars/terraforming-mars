@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Steelworks} from '../../../src/server/cards/base/Steelworks';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Steelworks', function() {
   let card: Steelworks;
@@ -10,9 +11,7 @@ describe('Steelworks', function() {
 
   beforeEach(function() {
     card = new Steelworks();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not act', function() {

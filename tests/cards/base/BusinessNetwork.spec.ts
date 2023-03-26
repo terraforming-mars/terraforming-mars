@@ -5,6 +5,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {churnAction, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('BusinessNetwork', function() {
   let card: BusinessNetwork;
@@ -13,9 +14,7 @@ describe('BusinessNetwork', function() {
 
   beforeEach(function() {
     card = new BusinessNetwork();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {

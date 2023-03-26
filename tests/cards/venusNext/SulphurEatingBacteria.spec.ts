@@ -4,6 +4,7 @@ import {SulphurEatingBacteria} from '../../../src/server/cards/venusNext/Sulphur
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('SulphurEatingBacteria', function() {
   let card: SulphurEatingBacteria;
@@ -12,9 +13,7 @@ describe('SulphurEatingBacteria', function() {
 
   beforeEach(function() {
     card = new SulphurEatingBacteria();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

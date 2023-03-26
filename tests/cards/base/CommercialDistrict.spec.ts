@@ -6,6 +6,7 @@ import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('CommercialDistrict', function() {
   let card: CommercialDistrict;
@@ -14,9 +15,7 @@ describe('CommercialDistrict', function() {
 
   beforeEach(function() {
     card = new CommercialDistrict();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

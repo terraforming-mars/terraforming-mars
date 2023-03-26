@@ -9,6 +9,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('UrbanDecomposers', function() {
   let card: UrbanDecomposers;
@@ -18,9 +19,7 @@ describe('UrbanDecomposers', function() {
 
   beforeEach(function() {
     card = new UrbanDecomposers();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
     luna = new Luna();
     game.colonies.push(luna);
   });

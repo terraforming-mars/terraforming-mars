@@ -6,6 +6,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Shuttles', function() {
   let card: Shuttles;
@@ -14,9 +15,7 @@ describe('Shuttles', function() {
 
   beforeEach(function() {
     card = new Shuttles();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play without energy production', function() {

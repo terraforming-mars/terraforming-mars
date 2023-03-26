@@ -5,6 +5,7 @@ import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('BlackPolarDust', function() {
   let card: BlackPolarDust;
@@ -13,9 +14,7 @@ describe('BlackPolarDust', function() {
 
   beforeEach(function() {
     card = new BlackPolarDust();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

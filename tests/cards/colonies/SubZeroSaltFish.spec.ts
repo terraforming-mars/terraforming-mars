@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('SubZeroSaltFish', function() {
   let card: SubZeroSaltFish;
@@ -13,9 +14,7 @@ describe('SubZeroSaltFish', function() {
 
   beforeEach(function() {
     card = new SubZeroSaltFish();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Can not play if no one has plant production', function() {

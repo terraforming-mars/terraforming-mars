@@ -7,6 +7,7 @@ import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
+import {testGame} from '../../TestGame';
 
 describe('AquiferPumping', function() {
   let card: AquiferPumping;
@@ -15,9 +16,7 @@ describe('AquiferPumping', function() {
 
   beforeEach(function() {
     card = new AquiferPumping();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {

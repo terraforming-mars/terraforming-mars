@@ -5,6 +5,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Fish', function() {
   let card: Fish;
@@ -14,9 +15,7 @@ describe('Fish', function() {
 
   beforeEach(function() {
     card = new Fish();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Can not play', function() {

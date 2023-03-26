@@ -5,6 +5,7 @@ import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {addCityTile, cast} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('IndustrialCenter', function() {
   let card: IndustrialCenter;
@@ -13,9 +14,7 @@ describe('IndustrialCenter', function() {
 
   beforeEach(function() {
     card = new IndustrialCenter();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play or act', function() {

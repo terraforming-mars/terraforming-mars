@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('GHGProducingBacteria', () => {
   let card: GHGProducingBacteria;
@@ -12,9 +13,7 @@ describe('GHGProducingBacteria', () => {
 
   beforeEach(() => {
     card = new GHGProducingBacteria();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can play', () => {

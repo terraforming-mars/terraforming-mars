@@ -6,6 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('MiningArea', function() {
   let card: MiningArea;
@@ -14,9 +15,7 @@ describe('MiningArea', function() {
 
   beforeEach(function() {
     card = new MiningArea();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', function() {

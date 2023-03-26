@@ -6,6 +6,7 @@ import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {cast, churnAction, runAllActions} from '../../TestingUtils';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {testGame} from '../../TestGame';
 
 describe('UnitedNationsMarsInitiative', function() {
   let card: UnitedNationsMarsInitiative;
@@ -14,9 +15,7 @@ describe('UnitedNationsMarsInitiative', function() {
 
   beforeEach(function() {
     card = new UnitedNationsMarsInitiative();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not act if TR was not raised', function() {

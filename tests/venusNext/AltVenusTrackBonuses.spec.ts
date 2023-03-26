@@ -3,17 +3,17 @@
 
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {cast, setVenusScaleLevel, testGameOptions} from '../TestingUtils';
+import {cast, setVenusScaleLevel} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/server/venusNext/GrantVenusAltTrackBonusDeferred';
+import {testGame} from '../TestGame';
 
 describe('AltVenusTrackBonuses', function() {
   let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({altVenusBoard: true}));
+    [game, player] = testGame(1, {altVenusBoard: true});
   });
 
   function getAction(game: Game) {

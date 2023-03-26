@@ -3,6 +3,7 @@ import {Ganymede} from '../../src/server/colonies/Ganymede';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
+import {testGame} from '../TestGame';
 
 describe('Ganymede', function() {
   let ganymede: Ganymede;
@@ -12,9 +13,7 @@ describe('Ganymede', function() {
 
   beforeEach(function() {
     ganymede = new Ganymede();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(ganymede);
   });

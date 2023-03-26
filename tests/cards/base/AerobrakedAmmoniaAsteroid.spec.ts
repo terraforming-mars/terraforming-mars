@@ -6,6 +6,7 @@ import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('AerobrakedAmmoniaAsteroid', function() {
   let card: AerobrakedAmmoniaAsteroid;
@@ -14,9 +15,7 @@ describe('AerobrakedAmmoniaAsteroid', function() {
 
   beforeEach(function() {
     card = new AerobrakedAmmoniaAsteroid();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play without microbe cards', function() {

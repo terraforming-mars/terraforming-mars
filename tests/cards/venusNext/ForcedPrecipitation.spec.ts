@@ -4,6 +4,7 @@ import {ForcedPrecipitation} from '../../../src/server/cards/venusNext/ForcedPre
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('ForcedPrecipitation', function() {
   let card: ForcedPrecipitation;
@@ -12,9 +13,7 @@ describe('ForcedPrecipitation', function() {
 
   beforeEach(function() {
     card = new ForcedPrecipitation();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {

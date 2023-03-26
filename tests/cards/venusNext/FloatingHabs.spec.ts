@@ -6,6 +6,7 @@ import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('FloatingHabs', function() {
   let card: FloatingHabs;
@@ -14,9 +15,7 @@ describe('FloatingHabs', function() {
 
   beforeEach(function() {
     card = new FloatingHabs();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

@@ -5,6 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('OpenCity', function() {
   let card: OpenCity;
@@ -13,9 +14,7 @@ describe('OpenCity', function() {
 
   beforeEach(function() {
     card = new OpenCity();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play without energy production', function() {

@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Worms', function() {
   let card: Worms;
@@ -12,9 +13,7 @@ describe('Worms', function() {
 
   beforeEach(function() {
     card = new Worms();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

@@ -1,16 +1,13 @@
 
 import {expect} from 'chai';
 import {Insulation} from '../../../src/server/cards/base/Insulation';
-import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Insulation', function() {
   it('Should play', function() {
     const card = new Insulation();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    const [, player] = testGame(2);
 
     expect(card.canPlay(player)).is.false;
     player.production.add(Resources.HEAT, 1);

@@ -4,6 +4,7 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('VenusianAnimals', function() {
   let card: VenusianAnimals;
@@ -12,9 +13,7 @@ describe('VenusianAnimals', function() {
 
   beforeEach(function() {
     card = new VenusianAnimals();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

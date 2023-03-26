@@ -6,6 +6,7 @@ import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('RotatorImpacts', () => {
   let card: RotatorImpacts;
@@ -14,9 +15,7 @@ describe('RotatorImpacts', () => {
 
   beforeEach(() => {
     card = new RotatorImpacts();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', () => {

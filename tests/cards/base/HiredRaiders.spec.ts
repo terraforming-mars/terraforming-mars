@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {HiredRaiders} from '../../../src/server/cards/base/HiredRaiders';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -33,7 +32,7 @@ describe('HiredRaiders', function() {
   });
 
   it('Works in solo', function() {
-    Game.newInstance('gameid', [player], player);
+    [, player] = testGame(1);
 
     const action = cast(card.play(player), OrOptions);
     expect(action.options).has.lengthOf(2);

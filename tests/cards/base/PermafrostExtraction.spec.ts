@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {runAllActions, cast, setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('PermafrostExtraction', function() {
   let card: PermafrostExtraction;
@@ -12,9 +13,7 @@ describe('PermafrostExtraction', function() {
 
   beforeEach(function() {
     card = new PermafrostExtraction();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', function() {

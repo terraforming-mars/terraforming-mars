@@ -7,6 +7,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('NaturalPreserveAres', function() {
   let card: NaturalPreserveAres;
@@ -15,9 +16,7 @@ describe('NaturalPreserveAres', function() {
 
   beforeEach(function() {
     card = new NaturalPreserveAres();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {

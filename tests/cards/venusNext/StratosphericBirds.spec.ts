@@ -11,6 +11,7 @@ import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
@@ -20,9 +21,7 @@ describe('StratosphericBirds', () => {
 
   beforeEach(() => {
     card = new StratosphericBirds();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
     deuteriumExport = new DeuteriumExport();
     player.popWaitingFor();
   });

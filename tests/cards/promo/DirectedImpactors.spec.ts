@@ -9,6 +9,7 @@ import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, setTemperature} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {testGame} from '../../TestGame';
 
 describe('DirectedImpactors', function() {
   let card: DirectedImpactors;
@@ -17,9 +18,7 @@ describe('DirectedImpactors', function() {
 
   beforeEach(function() {
     card = new DirectedImpactors();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {

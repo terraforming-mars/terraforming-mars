@@ -4,6 +4,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('SearchForLife', function() {
   let card: SearchForLife;
@@ -12,9 +13,7 @@ describe('SearchForLife', function() {
 
   beforeEach(function() {
     card = new SearchForLife();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not act if no MC', function() {

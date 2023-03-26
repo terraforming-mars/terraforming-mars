@@ -3,6 +3,7 @@ import {setTemperature} from '../../TestingUtils';
 import {TundraFarming} from '../../../src/server/cards/base/TundraFarming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('TundraFarming', function() {
   let card: TundraFarming;
@@ -11,9 +12,7 @@ describe('TundraFarming', function() {
 
   beforeEach(function() {
     card = new TundraFarming();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

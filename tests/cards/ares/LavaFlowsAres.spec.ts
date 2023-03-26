@@ -7,6 +7,7 @@ import {LavaFlowsAres} from '../../../src/server/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('LavaFlowsAres', function() {
   let card: LavaFlowsAres;
@@ -15,9 +16,7 @@ describe('LavaFlowsAres', function() {
 
   beforeEach(function() {
     card = new LavaFlowsAres();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
     resetBoard(game);
   });
 

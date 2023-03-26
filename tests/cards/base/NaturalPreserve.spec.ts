@@ -5,6 +5,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('NaturalPreserve', () => {
   let card: NaturalPreserve;
@@ -13,9 +14,7 @@ describe('NaturalPreserve', () => {
 
   beforeEach(() => {
     card = new NaturalPreserve();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play if no spaces available', () => {

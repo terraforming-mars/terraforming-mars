@@ -4,6 +4,7 @@ import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('ResearchOutpost', function() {
   let card: ResearchOutpost;
@@ -12,9 +13,7 @@ describe('ResearchOutpost', function() {
 
   beforeEach(function() {
     card = new ResearchOutpost();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {

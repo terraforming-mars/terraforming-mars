@@ -5,6 +5,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {addGreenery, cast, runAllActions, runNextAction, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Herbivores', () => {
   let card: Herbivores;
@@ -14,9 +15,7 @@ describe('Herbivores', () => {
 
   beforeEach(() => {
     card = new Herbivores();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Can not play if nobody has plant production', () => {
@@ -74,7 +73,7 @@ describe('Herbivores', () => {
   });
 
   it('Should be playable in solo mode', () => {
-    const game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
     setOxygenLevel(game, 8);
     player.production.add(Resources.PLANTS, 1);
 

@@ -6,18 +6,16 @@ import {Resources} from '../../../src/common/Resources';
 import {cast, runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('ImmigrantCity', function() {
   let card: ImmigrantCity;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new ImmigrantCity();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play without energy production', function() {

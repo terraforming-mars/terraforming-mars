@@ -6,6 +6,7 @@ import {Game} from '../../../src/server/Game';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/server/cards/base/AerobrakedAmmoniaAsteroid';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('TopsoilContract', function() {
   let card: TopsoilContract;
@@ -15,9 +16,7 @@ describe('TopsoilContract', function() {
 
   beforeEach(function() {
     card = new TopsoilContract();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Can play', function() {

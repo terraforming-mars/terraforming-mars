@@ -3,6 +3,7 @@ import {setTemperature} from '../../TestingUtils';
 import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('NoctisFarming', function() {
   let card: NoctisFarming;
@@ -11,9 +12,7 @@ describe('NoctisFarming', function() {
 
   beforeEach(function() {
     card = new NoctisFarming();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

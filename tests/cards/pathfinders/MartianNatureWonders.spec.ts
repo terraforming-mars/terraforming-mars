@@ -7,18 +7,16 @@ import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservat
 import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('MartianNatureWonders', function() {
   let card: MartianNatureWonders;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new MartianNatureWonders();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player] = testGame(2);
   });
 
   it('play', function() {

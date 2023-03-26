@@ -3,6 +3,7 @@ import {setOxygenLevel} from '../../TestingUtils';
 import {Zeppelins} from '../../../src/server/cards/base/Zeppelins';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Zeppelins', function() {
   let card: Zeppelins;
@@ -11,9 +12,7 @@ describe('Zeppelins', function() {
 
   beforeEach(function() {
     card = new Zeppelins();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

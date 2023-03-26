@@ -4,6 +4,7 @@ import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc
 import {SpinInducingAsteroid} from '../../../src/server/cards/venusNext/SpinInducingAsteroid';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('SpinInducingAsteroid', function() {
   let card: SpinInducingAsteroid;
@@ -12,9 +13,7 @@ describe('SpinInducingAsteroid', function() {
 
   beforeEach(function() {
     card = new SpinInducingAsteroid();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {

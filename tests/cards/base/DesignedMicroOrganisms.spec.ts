@@ -3,6 +3,7 @@ import {setTemperature} from '../../TestingUtils';
 import {DesignedMicroOrganisms} from '../../../src/server/cards/base/DesignedMicroOrganisms';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('DesignedMicroOrganisms', function() {
   let card: DesignedMicroOrganisms;
@@ -11,9 +12,7 @@ describe('DesignedMicroOrganisms', function() {
 
   beforeEach(function() {
     card = new DesignedMicroOrganisms();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {ISpace} from '../../../src/server/boards/ISpace';
-import {cast, testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Resources} from '../../../src/common/Resources';
@@ -10,6 +10,7 @@ import {TileType} from '../../../src/common/TileType';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
+import {testGame} from '../../TestGame';
 
 describe('Kelvinists', function() {
   let player: TestPlayer;

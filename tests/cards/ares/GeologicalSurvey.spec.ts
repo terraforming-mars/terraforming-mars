@@ -11,10 +11,11 @@ import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
-import {addGreenery, resetBoard, testGameOptions, setRulingPartyAndRulingPolicy, runAllActions, cast} from '../../TestingUtils';
+import {addGreenery, resetBoard, setRulingPartyAndRulingPolicy, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast, churnAction} from '../../../TestingUtils';
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
-import {maxOutOceans, testGameOptions} from '../../../TestingUtils';
+import {maxOutOceans} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -10,6 +10,7 @@ import {Phase} from '../../../../src/common/Phase';
 import {SelectSpace} from '../../../../src/server/inputs/SelectSpace';
 import {SpaceType} from '../../../../src/common/boards/SpaceType';
 import {TileType} from '../../../../src/common/TileType';
+import {testGame} from '../../../TestGame';
 
 describe('AquiferStandardProject', function() {
   let card: AquiferStandardProject;

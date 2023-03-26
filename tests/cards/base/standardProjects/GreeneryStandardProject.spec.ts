@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {cast, churnAction} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
-import {testGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -11,6 +10,7 @@ import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 import {SelectSpace} from '../../../../src/server/inputs/SelectSpace';
 import {SpaceType} from '../../../../src/common/boards/SpaceType';
 import {TileType} from '../../../../src/common/TileType';
+import {testGame} from '../../../TestGame';
 
 describe('GreeneryStandardProject', function() {
   let card: GreeneryStandardProject;

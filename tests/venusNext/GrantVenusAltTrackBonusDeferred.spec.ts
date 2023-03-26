@@ -7,7 +7,7 @@ import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Birds} from '../../src/server/cards/base/Birds';
-import {testGame} from 'tests/TestGame';
+import {testGame} from '../TestGame';
 
 describe('GrantVenusAltTrackBonusDeferred', function() {
   let player: TestPlayer;

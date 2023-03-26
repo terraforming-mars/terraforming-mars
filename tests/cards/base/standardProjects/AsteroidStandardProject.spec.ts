@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {testGameOptions, runAllActions} from '../../../TestingUtils';
+import {runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {Phase} from '../../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
+import {testGame} from '../../../TestGame';
 
 describe('AsteroidStandardProject', function() {
   let card: AsteroidStandardProject;

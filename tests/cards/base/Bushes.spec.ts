@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -20,7 +21,7 @@ describe('Bushes', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = -10;
+    setTemperature(game, -10);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

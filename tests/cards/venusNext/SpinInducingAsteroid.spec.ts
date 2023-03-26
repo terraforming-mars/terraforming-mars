@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setVenusScaleLevel} from '../../TestingUtils';
 import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc';
 import {SpinInducingAsteroid} from '../../../src/server/cards/venusNext/SpinInducingAsteroid';
 import {Game} from '../../../src/server/Game';
@@ -17,7 +18,7 @@ describe('SpinInducingAsteroid', function() {
   });
 
   it('Can not play', function() {
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -29,7 +30,7 @@ describe('SpinInducingAsteroid', function() {
 
   it('Should play with Morning Star', function() {
     player.setCorporationForTest(new MorningStarInc());
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

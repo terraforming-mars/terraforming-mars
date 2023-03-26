@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {setOxygenLevel, testGameOptions} from '../../TestingUtils';
 import {CrescentResearchAssociation} from '../../../src/server/cards/moon/CrescentResearchAssociation';
 import {TestPlayer} from '../../TestPlayer';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
@@ -25,7 +25,7 @@ describe('CrescentResearchAssociation', () => {
 
     // Additional card requirements.
     player.titanium = 1;
-    (game as any).oxygenLevel = 14;
+    setOxygenLevel(game, 14);
 
     player.cardsInHand = [mareNectarisMine, predators];
     player.setCorporationForTest(card);

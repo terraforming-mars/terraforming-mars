@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {IceCapMelting} from '../../../src/server/cards/base/IceCapMelting';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -20,7 +21,7 @@ describe('IceCapMelting', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

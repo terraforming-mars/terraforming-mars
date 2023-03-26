@@ -3,7 +3,7 @@ import {Wetlands} from '../../../src/server/cards/pathfinders/Wetlands';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {addCityTile, addGreenery, addOceanTile, cast, fakeCard, runAllActions, testGameOptions} from '../../TestingUtils';
+import {addCityTile, addGreenery, addOceanTile, cast, fakeCard, runAllActions, setOxygenLevel, setTemperature, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -122,8 +122,8 @@ describe('Wetlands', function() {
     for (let idx = 0; idx <= 8; idx++) {
       addOceanTile(player, spaces[idx].id);
     }
-    (game as any).temperature = MAX_TEMPERATURE;
-    (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    setTemperature(game, MAX_TEMPERATURE);
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     expect(game.marsIsTerraformed()).is.true;
     spaces[0].tile!.tileType = TileType.WETLANDS;
     expect(game.marsIsTerraformed()).is.false;

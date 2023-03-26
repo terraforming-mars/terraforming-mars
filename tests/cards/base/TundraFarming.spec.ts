@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {TundraFarming} from '../../../src/server/cards/base/TundraFarming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -20,7 +21,7 @@ describe('TundraFarming', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = -6;
+    setTemperature(game, -6);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

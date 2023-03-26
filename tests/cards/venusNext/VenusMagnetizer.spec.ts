@@ -3,6 +3,7 @@ import {VenusMagnetizer} from '../../../src/server/cards/venusNext/VenusMagnetiz
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {setVenusScaleLevel} from '../../TestingUtils';
 
 describe('VenusMagnetizer', function() {
   let card: VenusMagnetizer;
@@ -17,12 +18,12 @@ describe('VenusMagnetizer', function() {
   });
 
   it('Can not play', function() {
-    (game as any).venusScaleLevel = 8;
+    setVenusScaleLevel(game, 8);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).venusScaleLevel = 10;
+    setVenusScaleLevel(game, 10);
     expect(player.canPlayIgnoringCost(card)).is.true;
     expect(card.play(player)).is.undefined;
   });

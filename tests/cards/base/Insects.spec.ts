@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setOxygenLevel} from '../../TestingUtils';
 import {Insects} from '../../../src/server/cards/base/Insects';
 import {Trees} from '../../../src/server/cards/base/Trees';
 import {Game} from '../../../src/server/Game';
@@ -21,7 +22,7 @@ describe('Insects', function() {
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

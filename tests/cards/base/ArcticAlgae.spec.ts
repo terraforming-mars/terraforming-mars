@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
 import {Game} from '../../../src/server/Game';
-import {addOcean, runNextAction} from '../../TestingUtils';
+import {addOcean, runNextAction, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ArcticAlgae', function() {
@@ -18,7 +18,7 @@ describe('ArcticAlgae', function() {
   });
 
   it('Can not play', function() {
-    (game as any).temperature = -10;
+    setTemperature(game, -10);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

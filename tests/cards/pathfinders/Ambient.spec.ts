@@ -3,7 +3,7 @@ import {Ambient} from '../../../src/server/cards/pathfinders/Ambient';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -52,23 +52,23 @@ describe('Ambient', function() {
 
   it('canAct', function() {
     player.heat = 7;
-    (game as any).temperature = MAX_TEMPERATURE;
+    setTemperature(game, MAX_TEMPERATURE);
 
     expect(card.canAct(player)).is.false;
 
     player.heat = 8;
-    (game as any).temperature = MAX_TEMPERATURE - 2;
+    setTemperature(game, MAX_TEMPERATURE - 2);
     expect(card.canAct(player)).is.false;
 
 
     player.heat = 8;
-    (game as any).temperature = MAX_TEMPERATURE;
+    setTemperature(game, MAX_TEMPERATURE);
     expect(card.canAct(player)).is.true;
   });
 
   it('action', () => {
     player.heat = 9;
-    (game as any).temperature = MAX_TEMPERATURE;
+    setTemperature(game, MAX_TEMPERATURE);
 
     expect(player.getTerraformRating()).eq(20);
 
@@ -81,7 +81,7 @@ describe('Ambient', function() {
 
   it('action is repeatable', () => {
     player.heat = 16;
-    (game as any).temperature = MAX_TEMPERATURE;
+    setTemperature(game, MAX_TEMPERATURE);
 
     const getBlueActions = function() {
       const actions = cast(player.getActions(), OrOptions);

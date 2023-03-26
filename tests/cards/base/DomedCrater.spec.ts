@@ -5,7 +5,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 
 describe('DomedCrater', function() {
   let card: DomedCrater;
@@ -25,7 +25,7 @@ describe('DomedCrater', function() {
 
   it('Can not play if oxygen level too high', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 8;
+    setOxygenLevel(game, 8);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 

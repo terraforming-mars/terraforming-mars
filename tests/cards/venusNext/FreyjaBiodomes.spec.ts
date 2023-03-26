@@ -7,7 +7,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, setVenusScaleLevel} from '../../TestingUtils';
 
 describe('FreyjaBiodomes', function() {
   let card: FreyjaBiodomes;
@@ -22,13 +22,13 @@ describe('FreyjaBiodomes', function() {
   });
 
   it('Can not play without energy production', function() {
-    (game as any).venusScaleLevel = 10;
+    setVenusScaleLevel(game, 10);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can not play if Venus requirement not met', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).venusScaleLevel = 8;
+    setVenusScaleLevel(game, 8);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -37,7 +37,7 @@ describe('FreyjaBiodomes', function() {
     player.playedCards.push(card2);
 
     player.production.add(Resources.ENERGY, 1);
-    (game as any).venusScaleLevel = 10;
+    setVenusScaleLevel(game, 10);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     expect(card.play(player)).is.undefined;

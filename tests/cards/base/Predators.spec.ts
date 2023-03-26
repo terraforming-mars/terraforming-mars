@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, setOxygenLevel} from '../../TestingUtils';
 import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {Pets} from '../../../src/server/cards/base/Pets';
@@ -29,7 +29,7 @@ describe('Predators', function() {
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 11;
+    setOxygenLevel(game, 11);
     expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
     card.play(player);

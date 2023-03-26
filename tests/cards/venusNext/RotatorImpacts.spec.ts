@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc';
 import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
@@ -20,12 +20,12 @@ describe('RotatorImpacts', () => {
   });
 
   it('Cannot play', () => {
-    (game as any).venusScaleLevel = 16;
+    setVenusScaleLevel(game, 16);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play', () => {
-    (game as any).venusScaleLevel = 14;
+    setVenusScaleLevel(game, 14);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
@@ -40,7 +40,7 @@ describe('RotatorImpacts', () => {
     corp.play(player);
     player.setCorporationForTest(corp);
 
-    (game as any).venusScaleLevel = 18;
+    setVenusScaleLevel(game, 18);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
@@ -84,7 +84,7 @@ describe('RotatorImpacts', () => {
     player.playedCards.push(card);
     card.resourceCount = 1;
 
-    (game as any).venusScaleLevel = MAX_VENUS_SCALE;
+    setVenusScaleLevel(game, MAX_VENUS_SCALE);
     expect(card.canAct(player)).is.not.true;
   });
 });

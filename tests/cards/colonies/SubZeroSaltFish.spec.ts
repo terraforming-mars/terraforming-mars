@@ -3,7 +3,7 @@ import {SubZeroSaltFish} from '../../../src/server/cards/colonies/SubZeroSaltFis
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, setTemperature} from '../../TestingUtils';
 
 describe('SubZeroSaltFish', function() {
   let card: SubZeroSaltFish;
@@ -19,7 +19,7 @@ describe('SubZeroSaltFish', function() {
   });
 
   it('Can not play if no one has plant production', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -29,7 +29,7 @@ describe('SubZeroSaltFish', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     player2.production.add(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 

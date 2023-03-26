@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/server/cards/CardRequirements';
-import {testGameOptions, runAllActions, cast, addGreenery} from '../TestingUtils';
+import {testGameOptions, runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel} from '../TestingUtils';
 import {Game} from '../../src/server/Game';
 import {AdaptationTechnology} from '../../src/server/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/common/TileType';
@@ -43,9 +43,9 @@ describe('CardRequirements', function() {
   it('satisfies properly for temperature max', function() {
     const requirements = CardRequirements.builder((b) => b.temperature(-10, {max: true}));
     expect(requirements.satisfies(player)).eq(true);
-    (player.game as any).temperature = -10;
+    setTemperature(player.game, -10);
     expect(requirements.satisfies(player)).eq(true);
-    (player.game as any).temperature = -8;
+    setTemperature(player.game, -8);
     expect(requirements.satisfies(player)).eq(false);
     player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
@@ -54,9 +54,9 @@ describe('CardRequirements', function() {
   it('satisfies properly for oxygen', function() {
     const requirements = CardRequirements.builder((b) => b.oxygen(4));
     expect(requirements.satisfies(player)).eq(false);
-    (player.game as any).oxygenLevel = 4;
+    setOxygenLevel(player.game, 4);
     expect(requirements.satisfies(player)).eq(true);
-    (player.game as any).oxygenLevel = 3;
+    setOxygenLevel(player.game, 3);
     expect(requirements.satisfies(player)).eq(false);
     player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
@@ -65,9 +65,9 @@ describe('CardRequirements', function() {
   it('satisfies properly for venus', function() {
     const requirements = CardRequirements.builder((b) => b.venus(8));
     expect(requirements.satisfies(player)).eq(false);
-    (player.game as any).venusScaleLevel = 8;
+    setVenusScaleLevel(player.game, 8);
     expect(requirements.satisfies(player)).eq(true);
-    (player.game as any).venusScaleLevel = 7;
+    setVenusScaleLevel(player.game, 7);
     expect(requirements.satisfies(player)).eq(false);
     player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
@@ -76,9 +76,9 @@ describe('CardRequirements', function() {
   it('satisfies properly for tr', function() {
     const requirements = CardRequirements.builder((b) => b.tr(25));
     expect(requirements.satisfies(player)).eq(false);
-    (player as any).terraformRating = 25;
+    player.setTerraformRating(25);
     expect(requirements.satisfies(player)).eq(true);
-    (player as any).terraformRating = 24;
+    player.setTerraformRating(24);
     expect(requirements.satisfies(player)).eq(false);
     player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(false);

@@ -3,6 +3,7 @@ import {Worms} from '../../../src/server/cards/base/Worms';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {setOxygenLevel} from '../../TestingUtils';
 
 describe('Worms', function() {
   let card: Worms;
@@ -17,12 +18,12 @@ describe('Worms', function() {
   });
 
   it('Can not play', function() {
-    (game as any).oxygenLevel = 3;
+    setOxygenLevel(game, 3);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 4;
+    setOxygenLevel(game, 4);
     expect(player.canPlayIgnoringCost(card)).is.true;
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);

@@ -3,7 +3,7 @@ import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 
 describe('SmallAnimals', function() {
   let card: SmallAnimals;
@@ -20,12 +20,12 @@ describe('SmallAnimals', function() {
 
   it('Can not play if oxygen level too low', function() {
     player2.production.add(Resources.PLANTS, 1);
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can not play if no one has plant production', function() {
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -37,7 +37,7 @@ describe('SmallAnimals', function() {
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     player2.production.add(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 

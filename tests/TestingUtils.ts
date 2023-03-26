@@ -34,6 +34,18 @@ export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace>
   return oceans;
 }
 
+export function setTemperature(game: Game, temperature: number) {
+  (game as any).temperature = temperature;
+}
+
+export function setOxygenLevel(game: Game, oxygenLevel: number) {
+  (game as any).oxygenLevel = oxygenLevel;
+}
+
+export function setVenusScaleLevel(game: Game, venusScaleLevel: number) {
+  (game as any).venusScaleLevel = venusScaleLevel;
+}
+
 export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :

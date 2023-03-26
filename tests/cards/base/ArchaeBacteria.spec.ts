@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {ArchaeBacteria} from '../../../src/server/cards/base/ArchaeBacteria';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
+import {setTemperature} from '../../TestingUtils';
 
 describe('ArchaeBacteria', function() {
   let card: ArchaeBacteria;
@@ -16,7 +17,7 @@ describe('ArchaeBacteria', function() {
   });
 
   it('Can not play', function() {
-    (game as any).temperature = -12;
+    setTemperature(game, -12);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

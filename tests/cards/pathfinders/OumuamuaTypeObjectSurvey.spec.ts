@@ -3,7 +3,7 @@ import {OumuamuaTypeObjectSurvey} from '../../../src/server/cards/pathfinders/Ou
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
-import {fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -157,7 +157,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     projectDeck.drawPile = [slug, requirementsCard, noTags];
 
     expect(player.canPlay(requirementsCard)).is.true;
-    (game as any).temperature = 0;
+    setTemperature(game, 0);
     expect(player.canPlay(requirementsCard)).is.false;
 
     card.play(player);

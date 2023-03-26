@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {RobotPollinators} from '../../../src/server/cards/promo/RobotPollinators';
 import {Game} from '../../../src/server/Game';
-import {fakeCard} from '../../TestingUtils';
+import {fakeCard, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
 
@@ -18,15 +18,15 @@ describe('Robot Pollinators', function() {
 
 
   it('Can not play if oxygen level too low', function() {
-    (game as any).oxygenLevel = 1;
+    setOxygenLevel(game, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
-    (game as any).oxygenLevel = 10;
+    setOxygenLevel(game, 10);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Play, No tags', function() {
     // Sanity
-    (game as any).oxygenLevel = 10;
+    setOxygenLevel(game, 10);
     expect(player.production.plants).to.eq(0);
     expect(player.plants).to.eq(0);
 
@@ -39,7 +39,7 @@ describe('Robot Pollinators', function() {
 
   it('Play, Yes tags', function() {
     // Sanity
-    (game as any).oxygenLevel = 10;
+    setOxygenLevel(game, 10);
     expect(player.production.plants).to.eq(0);
     expect(player.plants).to.eq(0);
 

@@ -56,8 +56,15 @@ export class MinorityRefuge extends Card implements IProjectCard {
     const openColonies = player.production.megacredits <= -4 ?
       player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
       undefined;
-    player.game.defer(new BuildColony(player, {title: 'Select colony for Minority Refuge', colonies: openColonies}));
-    player.production.add(Resources.MEGACREDITS, -2);
+    player.game.defer(
+      new BuildColony(
+        player, {
+          title: 'Select colony for Minority Refuge',
+          colonies: openColonies,
+          cb: () => {
+            player.production.add(Resources.MEGACREDITS, -2);
+          },
+        }));
     return undefined;
   }
 }

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LuxuryEstate} from '../../../src/server/cards/pathfinders/LuxuryEstate';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {addGreenery, addCity} from '../../TestingUtils';
+import {addGreenery, addCity, setOxygenLevel} from '../../TestingUtils';
 
 describe('LuxuryEstate', function() {
   let card: LuxuryEstate;
@@ -19,10 +19,10 @@ describe('LuxuryEstate', function() {
   });
 
   it('canPlay', function() {
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    (game as any).oxygenLevel = 7;
+    setOxygenLevel(game, 7);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 

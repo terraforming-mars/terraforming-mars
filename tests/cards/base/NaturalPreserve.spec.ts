@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 
 describe('NaturalPreserve', () => {
   let card: NaturalPreserve;
@@ -28,12 +28,12 @@ describe('NaturalPreserve', () => {
   });
 
   it('Cannot play if oxygen level too high', () => {
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
-    (game as any).oxygenLevel = 4;
+    setOxygenLevel(game, 4);
     expect(card.canPlay(player)).is.true;
   });
 

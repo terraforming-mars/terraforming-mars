@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -20,7 +21,7 @@ describe('NoctisFarming', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = -20;
+    setTemperature(game, -20);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

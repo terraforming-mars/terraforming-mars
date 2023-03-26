@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, setTemperature} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {ExtremeColdFungus} from '../../../src/server/cards/base/ExtremeColdFungus';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -21,12 +21,12 @@ describe('ExtremeColdFungus', () => {
   });
 
   it('Cannot play', () => {
-    (game as any).temperature = -8;
+    setTemperature(game, -8);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play', () => {
-    (game as any).temperature = -12;
+    setTemperature(game, -12);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 

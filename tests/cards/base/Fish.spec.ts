@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature} from '../../TestingUtils';
 
 describe('Fish', function() {
   let card: Fish;
@@ -30,7 +30,7 @@ describe('Fish', function() {
   });
 
   it('Should play - auto select if single target', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     player2.production.add(Resources.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
@@ -42,7 +42,7 @@ describe('Fish', function() {
   });
 
   it('Should play - multiple targets', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     player.production.add(Resources.PLANTS, 1);
     player2.production.add(Resources.PLANTS, 1);
 

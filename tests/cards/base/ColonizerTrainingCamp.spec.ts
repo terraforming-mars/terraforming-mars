@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setOxygenLevel} from '../../TestingUtils';
 import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -16,11 +17,11 @@ describe('ColonizerTrainingCamp', function() {
   });
 
   it('Can not play', function() {
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
   it('Should play', function() {
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

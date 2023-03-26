@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setVenusScaleLevel} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
 import {Game} from '../../../src/server/Game';
@@ -17,12 +18,12 @@ describe('VenusianAnimals', function() {
   });
 
   it('Can not play', function() {
-    (game as any).venusScaleLevel = 16;
+    setVenusScaleLevel(game, 16);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).venusScaleLevel = 18;
+    setVenusScaleLevel(game, 18);
     expect(player.canPlayIgnoringCost(card)).is.true;
     player.playedCards.push(card);
     card.play(player);

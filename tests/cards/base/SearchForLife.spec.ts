@@ -3,6 +3,7 @@ import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {setOxygenLevel} from '../../TestingUtils';
 
 describe('SearchForLife', function() {
   let card: SearchForLife;
@@ -21,12 +22,12 @@ describe('SearchForLife', function() {
   });
 
   it('Can not play if oxygen level too high', function() {
-    (game as any).oxygenLevel = 7;
+    setOxygenLevel(game, 7);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.true;
     player.playedCards.push(card);
     card.play(player);

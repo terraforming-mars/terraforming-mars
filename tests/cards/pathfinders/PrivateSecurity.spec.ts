@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature} from '../../TestingUtils';
 
 describe('PrivateSecurity', function() {
   let card: PrivateSecurity;
@@ -43,7 +43,7 @@ describe('PrivateSecurity', function() {
     opponent2.production.override({plants: 0});
 
     const fish = new Fish();
-    (player.game as any).temperature = 2;
+    setTemperature(player.game, 2);
 
     opponent2.playedCards = [];
     expect(fish.canPlay(player)).is.true;
@@ -58,7 +58,7 @@ describe('PrivateSecurity', function() {
     opponent2.production.override({plants: 1});
 
     const fish = new Fish();
-    (player.game as any).temperature = 2;
+    setTemperature(player.game, 2);
 
     player.playedCards = [card];
     expect(fish.canPlay(player)).is.true;

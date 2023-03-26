@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
 import {VenusianPlants} from '../../../src/server/cards/venusNext/VenusianPlants';
@@ -20,12 +20,12 @@ describe('VenusianPlants', function() {
   });
 
   it('Can not play', function() {
-    (game as any).venusScaleLevel = 14;
+    setVenusScaleLevel(game, 14);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play - multiple targets', function() {
-    (game as any).venusScaleLevel = 16;
+    setVenusScaleLevel(game, 16);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const card2 = new Thermophiles();
@@ -42,7 +42,7 @@ describe('VenusianPlants', function() {
   it('Should play - single target', function() {
     const card2 = new Thermophiles();
     player.playedCards.push(card2);
-    (game as any).venusScaleLevel = 16;
+    setVenusScaleLevel(game, 16);
 
     card.play(player);
     expect(card2.resourceCount).to.eq(1);

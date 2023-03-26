@@ -7,7 +7,7 @@ import {Payment} from '../../../src/common/inputs/Payment';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, setTemperature} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('DirectedImpactors', function() {
@@ -82,7 +82,7 @@ describe('DirectedImpactors', function() {
   it('Can still spend resource even if temperature is max', function() {
     player.playedCards.push(card);
     card.resourceCount = 1;
-    (game as any).temperature = MAX_TEMPERATURE;
+    setTemperature(game, MAX_TEMPERATURE);
 
     expect(card.canAct(player)).is.true;
   });

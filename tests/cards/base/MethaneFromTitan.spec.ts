@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setOxygenLevel} from '../../TestingUtils';
 import {MethaneFromTitan} from '../../../src/server/cards/base/MethaneFromTitan';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -20,7 +21,7 @@ describe('MethaneFromTitan', function() {
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 2;
+    setOxygenLevel(game, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ConvertPlants} from '../../../../src/server/cards/base/standardActions/ConvertPlants';
 import {Phase} from '../../../../src/common/Phase';
-import {testGameOptions} from '../../../TestingUtils';
+import {setOxygenLevel, testGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -51,7 +51,7 @@ describe('ConvertPlants', function() {
   it('Can act when maximized', function() {
     player.plants = 8;
     expect(card.canAct(player)).eq(true);
-    (player.game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    setOxygenLevel(player.game, MAX_OXYGEN_LEVEL);
     expect(card.canAct(player)).eq(true);
   });
 });

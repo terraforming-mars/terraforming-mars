@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 
 describe('OpenCity', function() {
   let card: OpenCity;
@@ -24,13 +24,13 @@ describe('OpenCity', function() {
 
   it('Can not play if oxygen level too low', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 11;
+    setOxygenLevel(game, 11);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 12;
+    setOxygenLevel(game, 12);
     expect(card.canPlay(player)).is.true;
 
     expect(card.play(player)).is.undefined;

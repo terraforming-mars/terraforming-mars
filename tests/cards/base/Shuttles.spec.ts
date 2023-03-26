@@ -5,6 +5,7 @@ import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {setOxygenLevel} from '../../TestingUtils';
 
 describe('Shuttles', function() {
   let card: Shuttles;
@@ -19,18 +20,18 @@ describe('Shuttles', function() {
   });
 
   it('Can not play without energy production', function() {
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can not play if oxygen level too low', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 4;
+    setOxygenLevel(game, 4);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     player.production.add(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 

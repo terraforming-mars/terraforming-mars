@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, churnAction} from '../../../TestingUtils';
+import {cast, churnAction, setOxygenLevel} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
@@ -52,7 +52,7 @@ describe('GreeneryStandardProject', function() {
   it('can act when maximized', () => {
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
-    (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     // Players can still place greeneries even if the oxygen level is maximized
     expect(card.canAct(player)).is.true;
   });

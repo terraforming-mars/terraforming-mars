@@ -5,7 +5,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 
 describe('CupolaCity', function() {
   let card: CupolaCity;
@@ -25,7 +25,7 @@ describe('CupolaCity', function() {
 
   it('Can not play if oxygen level too high', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 10;
+    setOxygenLevel(game, 10);
     expect(card.canPlay(player)).is.not.true;
   });
 

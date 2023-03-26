@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {runAllActions} from '../../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -43,7 +43,7 @@ describe('AsteroidStandardProject', function() {
   it('Can not act when maximized', () => {
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
-    (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     expect(card.canAct(player)).is.true;
   });
 

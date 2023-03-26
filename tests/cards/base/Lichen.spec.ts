@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {Lichen} from '../../../src/server/cards/base/Lichen';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -20,7 +21,7 @@ describe('Lichen', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = -24;
+    setTemperature(game, -24);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

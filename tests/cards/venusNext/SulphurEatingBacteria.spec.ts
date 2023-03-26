@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {SulphurEatingBacteria} from '../../../src/server/cards/venusNext/SulphurEatingBacteria';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -18,12 +18,12 @@ describe('SulphurEatingBacteria', function() {
   });
 
   it('Can not play', function() {
-    (game as any).venusScaleLevel = 4;
+    setVenusScaleLevel(game, 4);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).venusScaleLevel = 6;
+    setVenusScaleLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.true;
     expect(card.play(player)).is.undefined;
   });

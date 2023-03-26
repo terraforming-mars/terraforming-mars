@@ -6,7 +6,7 @@ import {expect} from 'chai';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Player} from '../../../src/server/Player';
-import {testGame} from '../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('LunaProjectOffice', () => {
   it('can play', () => {

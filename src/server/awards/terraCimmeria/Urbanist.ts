@@ -11,11 +11,25 @@ export class Urbanist implements IAward {
     let score = 0;
 
     player.game.board.spaces.forEach((space) => {
-      // Victory points for greenery tiles adjacent to cities
-      if (Board.isCitySpace(space) && space.player !== undefined && space.player.id === player.id) {
-        const adjacent = player.game.board.getAdjacentSpaces(space);
-        for (const adj of adjacent) {
-          if (adj.tile && adj.tile.tileType === TileType.GREENERY) score++;
+      if (Board.isCitySpace(space) && space.player?.id === player.id) {
+        // Victory points for greenery tiles adjacent to cities
+        switch (space.tile?.tileType) {
+        case TileType.CITY:
+        case TileType.OCEAN_CITY:
+          const adjacent = player.game.board.getAdjacentSpaces(space);
+          for (const adj of adjacent) {
+            if (adj.tile?.tileType === TileType.GREENERY) score++;
+          }
+          break;
+        case TileType.CAPITAL:
+        case TileType.RED_CITY:
+          const card = player.playedCards.find((c) => c.name === space?.tile?.card);
+          if (card !== undefined) {
+            score += card.getVictoryPoints(player);
+          }
+          break;
+        default:
+          throw new Error('foo');
         }
       }
     });

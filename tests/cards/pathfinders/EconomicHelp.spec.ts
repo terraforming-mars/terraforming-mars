@@ -104,9 +104,4 @@ describe('EconomicHelp', function() {
       vps: [],
     });
   });
-
-  // Economic Help does not correctly raise a planetary influence track when
-  // the relevant (lowest) non-completed track is higher than any other already
-  // completed track. Example: A non-completed Moon track will not be raised
-  // if it is higher than a completed Jovian track.
 });

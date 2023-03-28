@@ -9,6 +9,7 @@ import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurren
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
 
 describe('SolarStorm', function() {
   let card: SolarStorm;
@@ -85,5 +86,18 @@ describe('SolarStorm', function() {
     expect(selectCard.cards).has.members([cryptocurrency, communicationCenter]);
     selectCard.cb([communicationCenter]);
     expect(communicationCenter.resourceCount).eq(3);
+  });
+
+  it('Compatible with Botanical Experience', () => {
+    player.plants = 5;
+    player2.plants = 15;
+    player2.playedCards.push(new BotanicalExperience());
+    player3.plants = 400;
+
+    card.play(player);
+
+    expect(player.plants).eq(3);
+    expect(player2.plants).eq(14);
+    expect(player3.plants).eq(398);
   });
 });

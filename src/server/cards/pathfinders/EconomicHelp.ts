@@ -40,7 +40,8 @@ export class EconomicHelp extends Card implements IProjectCard {
 
   private trackOffset(tag: PlanetaryTag, data: PathfindersData): number {
     const value = data[tag];
-    return TRACKS[tag].spaces.length === value ? -1 : value;
+    const maxValue = TRACKS[tag].spaces.length - 1;
+    return maxValue === value ? -1 : value;
   }
 
   public override bespokePlay(player: Player) {

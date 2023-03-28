@@ -73,6 +73,4 @@ export namespace PathfindersData {
       break;
     }
   }
-
-
 }

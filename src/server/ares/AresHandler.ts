@@ -33,7 +33,7 @@ export class AresHandler {
     }
   }
 
-  public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace) {
+  public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace, ignoreMilestones = false) {
     let incrementMilestone = false;
 
     player.game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
@@ -41,7 +41,7 @@ export class AresHandler {
         incrementMilestone = true;
       }
     });
-    if (incrementMilestone) {
+    if (incrementMilestone && !ignoreMilestones) {
       const milestoneResults = aresData.milestoneResults;
       const entry : MilestoneCount | undefined = milestoneResults.find((e) => e.id === player.id);
       if (entry === undefined) {

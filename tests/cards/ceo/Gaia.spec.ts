@@ -10,6 +10,7 @@ import {Gaia} from '../../../src/server/cards/ceos/Gaia';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
+import {Networker} from '../../../src/server/milestones/Networker';
 
 describe('Gaia', function() {
   let card: Gaia;
@@ -49,6 +50,29 @@ describe('Gaia', function() {
     card.action(player);
     expect(player.megaCredits).to.eq(2);
   });
+
+  it('Takes action, Networker Milestone does not get a benefit', function() {
+    // Place a tile that grants adjacency bonuses
+    const naturalPreserveAres = new NaturalPreserveAres();
+    naturalPreserveAres.play(player2);
+    runAllActions(game);
+    const action = cast(player2.popWaitingFor(), SelectSpace);
+    const space = action.availableSpaces[0];
+    action.cb(space);
+
+    // Place tiles from different players next to tile that grants adjacency bonuses
+    const firstAdjacentSpace = game.board.getAdjacentSpaces(space)[0];
+    const secondAdjacentSpace = game.board.getAdjacentSpaces(space)[1];
+    addGreenery(player2, firstAdjacentSpace.id);
+    addCityTile(player3, secondAdjacentSpace.id);
+
+    const milestone = new Networker();
+    const oldScore = milestone.getScore(player);
+    // Gain adjacency bonuses of all players' tiles
+    card.action(player);
+    expect(milestone.getScore(player)).eq(oldScore);
+  });
+
 
   it('Can only act once per game', function() {
     card.action(player);

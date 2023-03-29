@@ -32,7 +32,7 @@ export class Gaia extends CeoCard {
     );
     tilesOnMars.forEach((space) => {
       AresHandler.ifAres(player.game, (aresData) => {
-        AresHandler.earnAdjacencyBonuses(aresData, player, space);
+        AresHandler.earnAdjacencyBonuses(aresData, player, space, true);
       });
     });
     return undefined;

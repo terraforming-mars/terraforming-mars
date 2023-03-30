@@ -24,10 +24,10 @@ export class MarsMaths extends Card implements ICorporationCard {
         description: 'You start with 43 M€. As your first action, draw 2 cards',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(43).nbsp.cards(2).br;
-          b.effect('At the beginning of the new generation, you draw 5 cards to choose from (instead of 4) but you can buy maximum 4 cards.', (eb) => {
+          b.effect('At the beginning of the Research phase, you draw 5 cards to choose from, but do not buy additional cards.', (eb) => {
             eb.empty().startEffect.plus().cards(1).asterix();
           }).br;
-          b.action('Immediately take two additional actions.', (eb) => {
+          b.action('Take another two actions this turn.', (eb) => {
             eb.empty().startAction.colon().nbsp.arrow().arrow();
           });
         }),

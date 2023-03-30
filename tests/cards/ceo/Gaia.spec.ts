@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {addGreenery, addCityTile, cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
@@ -21,12 +21,9 @@ describe('Gaia', function() {
 
   beforeEach(() => {
     card = new Gaia();
-    game = newTestGame(3, ARES_OPTIONS_NO_HAZARDS);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
-    player.playedCards.push(card);
+    [game, player, player2, player3] = testGame(3, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
+    player.playedCards.push(card);
     runAllActions(game);
   });
 

@@ -46,6 +46,7 @@ import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
+import {MarsMaths} from './cards/pathfinders/MarsMaths';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
@@ -68,7 +69,6 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
 import {MessageBuilder} from './logs/MessageBuilder';
-import {MarsMaths} from './cards/pathfinders/MarsMaths';
 
 /**
  * Behavior when playing a card:
@@ -156,6 +156,10 @@ export class Player {
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
+
+  // This allows for cards to increase / decrease the number of actions a player
+  // can take per round.
+  public actionsThisRound = 2;
 
   // Stats
   public actionsTakenThisGame: number = 0;
@@ -1448,7 +1452,7 @@ export class Player {
 
   private endTurnOption(): PlayerInput {
     return new SelectOption('End Turn', 'End', () => {
-      this.actionsTakenThisRound = 1; // Why is this statement necessary?
+      this.actionsTakenThisRound = 1;
       this.game.log('${0} ended turn', (b) => b.player(this));
       return undefined;
     });
@@ -1764,8 +1768,9 @@ export class Player {
       game.phase = Phase.ACTION;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= 2)) {
+    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.actionsThisRound)) {
       this.actionsTakenThisRound = 0;
+      this.actionsThisRound = 2;
       game.resettable = true;
       game.playerIsFinishedTakingActions();
       return;

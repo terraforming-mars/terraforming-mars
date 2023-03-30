@@ -40,9 +40,7 @@ export class MarsMaths extends Card implements ICorporationCard {
   }
 
   public action(player: Player) {
-    // Just reduce actions taken this round by two
-    player.actionsTakenThisRound--;
-    player.actionsTakenThisRound--;
+    player.actionsThisRound += 2;
     return undefined;
   }
 

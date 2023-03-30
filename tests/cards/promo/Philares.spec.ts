@@ -162,44 +162,6 @@ describe('Philares', () => {
     expect(philaresPlayer.getTerraformRating()).to.eq(21);
   });
 
-  // it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', function() {
-  //   game.addGreenery(philaresPlayer, space);
-
-  //   // Max out all global parameters
-  //   setTemperature(game, MAX_TEMPERATURE);
-  //   setOxygenLevel(game, MAX_OXYGEN_LEVEL);
-  //   // maxOutOceans(player);
-
-  //   // Setup plants for endgame
-  //   philaresPlayer.plants = 7;
-  //   otherPlayer.plants = 8;
-
-  //   // First player final greenery placement, done adjacent to one of Philares' tiles
-  //   game.takeNextFinalGreeneryAction();
-  //   const firstPlayerGreeneryPlacement = cast(otherPlayer.getWaitingFor(), OrOptions);
-
-  //   // Option 1 is 'Don't place a greenery'
-  //   // Don't place a greenery using the callback; add it directly via game.addGreenery() instead
-  //   // Workaround for test since the greenery placement option auto resolves deferred action
-  //   firstPlayerGreeneryPlacement.options[1].cb();
-  //   game.addGreenery(otherPlayer, adjacentSpace);
-  //   expect(game.deferredActions).has.lengthOf(1);
-
-  //   // Philares player gains plant and can subsequently place a greenery
-  //   philaresPlayer.takeActionForFinalGreenery();
-  //   const philaresPlayerResourceSelection = cast(philaresPlayer.getWaitingFor(), AndOptions);
-  //   // Option 3 is plants.
-  //   philaresPlayerResourceSelection.options[3].cb(1);
-  //   philaresPlayerResourceSelection.cb();
-  //   expect(philaresPlayer.plants).to.eq(8);
-  //   philaresPlayer.popWaitingFor();
-  //   game.takeNextFinalGreeneryAction();
-  //   const finalGreeneryPlacement = cast(philaresPlayer.getWaitingFor(), OrOptions);
-  //   expect(game.phase).eq(Phase.RESEARCH);
-  //   finalGreeneryPlacement.options[1].cb();
-  //   expect(game.phase).eq(Phase.END);
-  // });
-
   it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', function() {
     game.addGreenery(philaresPlayer, space);
 

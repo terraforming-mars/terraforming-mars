@@ -21,9 +21,9 @@ export class MarsMaths extends Card implements ICorporationCard {
 
       metadata: {
         cardNumber: 'PfCXX',
-        description: 'You start with 43 M€. As your first action, draw 2 cards',
+        description: 'You start with 40 M€. As your first action, draw 2 cards',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(43).nbsp.cards(2).br;
+          b.megacredits(40).nbsp.cards(2).br;
           b.effect('At the beginning of the Research phase, you draw 5 cards to choose from, but do not buy additional cards.', (eb) => {
             eb.empty().startEffect.plus().cards(1).asterix();
           }).br;
@@ -42,9 +42,5 @@ export class MarsMaths extends Card implements ICorporationCard {
   public action(player: Player) {
     player.actionsThisRound += 2;
     return undefined;
-  }
-
-  public static isActive(player: Player): boolean {
-    return player.cardIsInEffect(CardName.MARS_MATHS);
   }
 }

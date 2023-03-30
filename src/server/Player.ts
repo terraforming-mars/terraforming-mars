@@ -930,7 +930,7 @@ export class Player {
     if (passedCards === undefined) {
       if (!initialDraft) {
         let cardsToDraw = 4;
-        if (LunaProjectOffice.isActive(this) || MarsMaths.isActive(this)) {
+        if (LunaProjectOffice.isActive(this) || this.cardIsInEffect(CardName.MARS_MATHS)) {
           cardsToDraw = 5;
           cardsToKeep = 2;
         }

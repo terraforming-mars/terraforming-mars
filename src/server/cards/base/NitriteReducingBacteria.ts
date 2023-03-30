@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class NitriteReducingBacteria extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.NITRITE_REDUCING_BACTERIA,
       tags: [Tag.MICROBE],
       cost: 11,

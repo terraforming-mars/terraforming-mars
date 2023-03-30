@@ -3,7 +3,7 @@ import {Game} from '../../src/server/Game';
 import {CorrosiveRain} from '../../src/server/turmoil/globalEvents/CorrosiveRain';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {cast, runAllActions, testGameOptions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TitanShuttles} from '../../src/server/cards/colonies/TitanShuttles';
 import {TitanAirScrapping} from '../../src/server/cards/colonies/TitanAirScrapping';
@@ -11,6 +11,7 @@ import {Birds} from '../../src/server/cards/base/Birds';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
+import {testGame} from '../TestGame';
 
 describe('CorrosiveRain', function() {
   let card: CorrosiveRain;
@@ -21,11 +22,8 @@ describe('CorrosiveRain', function() {
 
   beforeEach(() => {
     card = new CorrosiveRain();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
+    [game, player, player2] = testGame(2, {turmoilExtension: true});
     turmoil = game.turmoil!;
-    player.popSelectInitialCards();
   });
 
   it('resolve play', function() {

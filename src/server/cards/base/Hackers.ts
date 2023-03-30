@@ -11,7 +11,7 @@ import {all} from '../Options';
 export class Hackers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.HACKERS,
       cost: 3,
       victoryPoints: -1,

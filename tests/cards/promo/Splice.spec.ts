@@ -4,7 +4,7 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {Recyclon} from '../../../src/server/cards/promo/Recyclon';
 import {Splice} from '../../../src/server/cards/promo/Splice';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
@@ -17,9 +17,7 @@ describe('Splice', function() {
 
   beforeEach(function() {
     card = new Splice();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player, player2] = testGame(2, {skipInitialCardSelection: false});
   });
 
   it('Should play', function() {

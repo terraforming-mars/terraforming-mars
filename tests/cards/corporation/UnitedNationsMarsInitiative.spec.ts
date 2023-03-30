@@ -3,9 +3,10 @@ import {UnitedNationsMarsInitiative} from '../../../src/server/cards/corporation
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, churnAction, runAllActions} from '../../TestingUtils';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {testGame} from '../../TestGame';
 
 describe('UnitedNationsMarsInitiative', function() {
   let card: UnitedNationsMarsInitiative;
@@ -14,9 +15,7 @@ describe('UnitedNationsMarsInitiative', function() {
 
   beforeEach(function() {
     card = new UnitedNationsMarsInitiative();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not act if TR was not raised', function() {
@@ -56,9 +55,7 @@ describe('UnitedNationsMarsInitiative', function() {
     // Setting a larger amount of heat just to make the test results more interesting
     player.heat = 5;
 
-    card.action(player);
-    runAllActions(game);
-    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    const selectPayment = cast(churnAction(card, player), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.getTerraformRating()).to.eq(22);
     expect(player.megaCredits).to.eq(1);

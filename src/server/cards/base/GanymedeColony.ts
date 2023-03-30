@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class GanymedeColony extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GANYMEDE_COLONY,
       tags: [Tag.JOVIAN, Tag.SPACE, Tag.CITY],
       cost: 20,

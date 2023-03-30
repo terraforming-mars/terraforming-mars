@@ -2,7 +2,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
 import {DoubleDown} from '../../../src/server/cards/promo/DoubleDown';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Donation} from '../../../src/server/cards/prelude/Donation';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {PowerGeneration} from '../../../src/server/cards/prelude/PowerGeneration';
@@ -19,9 +19,7 @@ describe('DoubleDown', () => {
 
   beforeEach(() => {
     card = new DoubleDown();
-    game = newTestGame(1, {preludeExtension: true});
-    player = getTestPlayer(game, 0);
-    player.popSelectInitialCards();
+    [game, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Cannot play as first prelude', () => {

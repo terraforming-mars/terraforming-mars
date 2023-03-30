@@ -9,7 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 export class HydrogenProcessingPlant extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.HYDROGEN_PROCESSING_PLANT,
       cost: 9,
       tags: [Tag.BUILDING, Tag.POWER],

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/server/pathfinders/PathfindersExpansion';
 import {Tag} from '../../src/common/cards/Tag';
 import {fakeCard, runAllActions} from '../TestingUtils';
@@ -16,14 +16,12 @@ describe('PathfindersExpansion', function() {
   let pathfindersData: PathfindersData;
 
   beforeEach(() => {
-    game = newTestGame(2, {
+    [game, player1, player2] = testGame(2, {
       venusNextExtension: true,
       pathfindersExpansion: true,
       moonExpansion: true,
     });
     pathfindersData = game.pathfindersData!;
-    player1 = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
   });
 
   it('Earth track', () => {

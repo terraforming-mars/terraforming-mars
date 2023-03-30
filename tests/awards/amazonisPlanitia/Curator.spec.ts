@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {Curator} from '../../../src/server/awards/amazonisPlanitia/Curator';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -12,10 +12,9 @@ describe('Curator', () => {
 
   beforeEach(() => {
     award = new Curator();
-    player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player] = testGame(2);
   });
+
   it('Counts tags', () => {
     expect(award.getScore(player)).to.eq(0);
 

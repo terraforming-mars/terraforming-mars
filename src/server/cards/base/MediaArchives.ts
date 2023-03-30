@@ -11,7 +11,7 @@ import {all, played} from '../Options';
 export class MediaArchives extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MEDIA_ARCHIVES,
       tags: [Tag.EARTH],
       cost: 8,

@@ -16,7 +16,7 @@ export class LunaEcumenopolis extends Card {
   constructor() {
     super({
       name: CardName.LUNA_ECUMENOPOLIS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.CITY, Tag.MOON],
       cost: 35,
       reserveUnits: {titanium: 2},

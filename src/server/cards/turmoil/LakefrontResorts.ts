@@ -16,7 +16,7 @@ import {Board} from '../../boards/Board';
 export class LakefrontResorts extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.LAKEFRONT_RESORTS,
       tags: [Tag.BUILDING],
       startingMegaCredits: 54,

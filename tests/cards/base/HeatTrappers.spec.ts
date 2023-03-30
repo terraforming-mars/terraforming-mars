@@ -5,6 +5,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('HeatTrappers', function() {
   let card: HeatTrappers;
@@ -14,9 +15,7 @@ describe('HeatTrappers', function() {
 
   beforeEach(function() {
     card = new HeatTrappers();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Should be playable in solo mode', function() {

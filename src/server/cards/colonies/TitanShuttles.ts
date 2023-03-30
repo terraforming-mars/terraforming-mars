@@ -17,7 +17,7 @@ export class TitanShuttles extends Card implements IProjectCard {
       cost: 23,
       tags: [Tag.JOVIAN, Tag.SPACE],
       name: CardName.TITAN_SHUTTLES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 

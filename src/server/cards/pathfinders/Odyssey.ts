@@ -13,7 +13,7 @@ import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 export class Odyssey extends Card implements ICorporationCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.ODYSSEY,
       startingMegaCredits: 33,
 

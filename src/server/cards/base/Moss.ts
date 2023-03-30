@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Moss extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MOSS,
       tags: [Tag.PLANT],
       cost: 4,

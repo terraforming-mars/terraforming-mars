@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {Musk} from '../../../src/server/cards/ceos/Musk';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 
@@ -13,12 +12,10 @@ import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 describe('Musk', function() {
   let card: Musk;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(() => {
     card = new Musk();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
     player.playedCards.push(card);
   });
 

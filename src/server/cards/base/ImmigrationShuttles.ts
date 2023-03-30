@@ -10,7 +10,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 export class ImmigrationShuttles extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.IMMIGRATION_SHUTTLES,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 31,

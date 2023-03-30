@@ -3,15 +3,12 @@ import {EnergySaving} from '../../../src/server/cards/base/EnergySaving';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Thorgate', function() {
   it('Should play', function() {
     const card = new Thorgate();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    const [, player] = testGame(2);
     const action = card.play(player);
     expect(action).is.undefined;
     player.setCorporationForTest(card);

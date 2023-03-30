@@ -6,7 +6,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('ArtificialLake', function() {
   let card: ArtificialLake;
@@ -15,9 +16,7 @@ describe('ArtificialLake', function() {
 
   beforeEach(function() {
     card = new ArtificialLake();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -42,7 +41,7 @@ describe('ArtificialLake', function() {
 
   it('Cannot place ocean if all oceans are already placed', function() {
     // Set temperature level to fit requirements
-    (game as any).temperature = -6;
+    setTemperature(game, -6);
 
     // Set oceans count to the max value
     for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
@@ -61,7 +60,7 @@ describe('ArtificialLake', function() {
 
   it('Cannot place ocean if all land spaces are occupied', function() {
     // Set temperature level to fit requirements
-    (game as any).temperature = -6;
+    setTemperature(game, -6);
 
     // Take all but one space.
     const spaces = game.board.getAvailableSpacesOnLand(player);
@@ -83,7 +82,7 @@ describe('ArtificialLake', function() {
   });
 
   it('Can still play if oceans are maxed but no land spaces are available', function() {
-    (game as any).temperature = -6;
+    setTemperature(game, -6);
     maxOutOceans(player);
 
     // Take all land spaces

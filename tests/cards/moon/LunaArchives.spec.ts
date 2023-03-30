@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {LunaArchives} from '../../../src/server/cards/moon/LunaArchives';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
 import {TestPlayer} from '../../TestPlayer';
@@ -24,6 +24,7 @@ describe('LunaArchives', () => {
 
     player.tagsForTest = {moon: 5};
     card.action(player);
+    runAllActions(player.game);
     expect(card.resourceCount).eq(5);
     expect(player.getSpendableScienceResources()).eq(5);
   });

@@ -10,7 +10,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 export class SoilDetoxification extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SOIL_DETOXIFICATION,
       cost: 10,
       tags: [Tag.PLANT, Tag.SCIENCE],

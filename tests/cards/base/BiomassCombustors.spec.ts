@@ -3,7 +3,8 @@ import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustor
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('BiomassCombustors', function() {
   let card: BiomassCombustors;
@@ -13,10 +14,7 @@ describe('BiomassCombustors', function() {
 
   beforeEach(function() {
     card = new BiomassCombustors();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
-    player.popWaitingFor();
+    [game, player, player2] = testGame(2);
   });
 
   it('Cannot play if oxygen requirement not met', function() {
@@ -25,18 +23,18 @@ describe('BiomassCombustors', function() {
   });
 
   it('Cannot play if no one has plant production', function() {
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play in solo mode if oxygen requirement is met', function() {
     const game = Game.newInstance('gameid', [player], player);
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 6;
+    setOxygenLevel(game, 6);
     player2.production.add(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 

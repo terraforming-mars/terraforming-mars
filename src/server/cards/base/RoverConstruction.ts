@@ -16,7 +16,7 @@ import {all} from '../Options';
 export class RoverConstruction extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ROVER_CONSTRUCTION,
       tags: [Tag.BUILDING],
       cost: 8,

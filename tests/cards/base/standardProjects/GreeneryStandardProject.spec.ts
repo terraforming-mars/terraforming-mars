@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {cast} from '../../../TestingUtils';
+import {cast, churnAction, setOxygenLevel} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
-import {testGameOptions, runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -11,6 +10,7 @@ import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 import {SelectSpace} from '../../../../src/server/inputs/SelectSpace';
 import {SpaceType} from '../../../../src/common/boards/SpaceType';
 import {TileType} from '../../../../src/common/TileType';
+import {testGame} from '../../../TestGame';
 
 describe('GreeneryStandardProject', function() {
   let card: GreeneryStandardProject;
@@ -35,10 +35,7 @@ describe('GreeneryStandardProject', function() {
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);
 
-    card.action(player);
-    runAllActions(game);
-
-    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
+    const selectSpace = cast(churnAction(card, player), SelectSpace);
     const availableSpace = selectSpace.availableSpaces[0];
 
     expect(availableSpace.spaceType).eq(SpaceType.LAND);
@@ -55,14 +52,13 @@ describe('GreeneryStandardProject', function() {
   it('can act when maximized', () => {
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
-    (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     // Players can still place greeneries even if the oxygen level is maximized
     expect(card.canAct(player)).is.true;
   });
 
   it('Can not act with reds', () => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    [game, player] = testGame(1, {turmoilExtension: true});
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

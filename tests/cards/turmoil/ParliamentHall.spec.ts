@@ -4,15 +4,14 @@ import {MartianRails} from '../../../src/server/cards/base/MartianRails';
 import {ParliamentHall} from '../../../src/server/cards/turmoil/ParliamentHall';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGameOptions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('ParliamentHall', function() {
   it('Should play', function() {
     const card = new ParliamentHall();
     const card2 = new DeepWellHeating();
     const card3 = new MartianRails();
-    const game = newTestGame(1, testGameOptions({turmoilExtension: true}));
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(1, testGameOptions({turmoilExtension: true}));
 
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 

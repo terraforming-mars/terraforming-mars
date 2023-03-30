@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Ironworks} from '../../../src/server/cards/base/Ironworks';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Ironworks', function() {
   let card: Ironworks;
@@ -10,9 +11,7 @@ describe('Ironworks', function() {
 
   beforeEach(function() {
     card = new Ironworks();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not act without enough energy', function() {

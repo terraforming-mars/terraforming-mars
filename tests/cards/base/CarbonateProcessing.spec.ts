@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CarbonateProcessing} from '../../../src/server/cards/base/CarbonateProcessing';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('CarbonateProcessing', function() {
   let card: CarbonateProcessing;
@@ -10,8 +10,7 @@ describe('CarbonateProcessing', function() {
 
   beforeEach(function() {
     card = new CarbonateProcessing();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not play', function() {

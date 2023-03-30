@@ -3,7 +3,7 @@ import {DecreaseAnyProduction} from '../../src/server/deferredActions/DecreaseAn
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
-import {getTestPlayers, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../src/common/Resources';
 
@@ -15,10 +15,8 @@ describe('DecreaseAnyProduction', function() {
   let decreaseAnyProduction: DecreaseAnyProduction;
 
   beforeEach(function() {
-    game = newTestGame(3);
-    [player, player2, player3] = getTestPlayers(game);
+    [game, player, player2, player3] = testGame(3);
     decreaseAnyProduction = new DecreaseAnyProduction(player, Resources.TITANIUM, {count: 2});
-    player.popSelectInitialCards();
   });
 
   it('Does nothing with zero targets', () => {

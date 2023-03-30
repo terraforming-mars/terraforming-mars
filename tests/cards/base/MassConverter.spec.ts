@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {MassConverter} from '../../../src/server/cards/base/MassConverter';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
+import {testGame} from '../../TestGame';
 
 describe('MassConverter', function() {
   let card: MassConverter;
@@ -12,9 +12,7 @@ describe('MassConverter', function() {
 
   beforeEach(function() {
     card = new MassConverter();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

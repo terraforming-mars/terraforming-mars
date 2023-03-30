@@ -1,14 +1,11 @@
 import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Research', function() {
   it('Should play', function() {
     const card = new Research();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    const [, player] = testGame(2);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(card.getVictoryPoints()).to.eq(1);

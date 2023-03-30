@@ -10,7 +10,7 @@ import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {ProjectDeck} from '../../src/server/cards/Deck';
 import {cast, formatLogMessage} from '../TestingUtils';
-import {getTestPlayers, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 
 describe('DrawCards', function() {
   let game: Game;
@@ -19,8 +19,7 @@ describe('DrawCards', function() {
   const cards = [new AICentral(), new Asteroid(), new CapitalAres()];
 
   beforeEach(function() {
-    game = newTestGame(2);
-    [player] = getTestPlayers(game);
+    [game, player] = testGame(2);
     projectDeck = player.game.projectDeck;
   });
 

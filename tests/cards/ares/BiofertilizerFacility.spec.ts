@@ -7,7 +7,7 @@ import {Game} from '../../../src/server/Game';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -22,8 +22,7 @@ describe('BiofertilizerFacility', function() {
 
   beforeEach(function() {
     card = new BiofertilizerFacility();
-    game = newTestGame(2, ARES_OPTIONS_NO_HAZARDS);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
     scienceTagCard = new AICentral();
     microbeHost = new Ants();
   });

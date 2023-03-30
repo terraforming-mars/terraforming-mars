@@ -17,7 +17,7 @@ import {all} from '../Options';
 export class ImmigrantCity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.IMMIGRANT_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 13,

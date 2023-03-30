@@ -1,14 +1,11 @@
 import {expect} from 'chai';
 import {DeepWellHeating} from '../../../src/server/cards/base/DeepWellHeating';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('DeepWellHeating', function() {
   it('Should play', function() {
     const card = new DeepWellHeating();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    const [game, player] = testGame(2);
     const action = player.playCard(card);
     expect(action).is.undefined;
     expect(player.production.energy).to.eq(1);

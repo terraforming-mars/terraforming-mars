@@ -6,7 +6,7 @@ import {StratosphericBirds} from '../../../src/server/cards/venusNext/Stratosphe
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast, setVenusScaleLevel, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -27,19 +27,19 @@ describe('MaxwellBase', function() {
   });
 
   it('Can not play without energy production', function() {
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can not play if Venus requirement not met', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).venusScaleLevel = 10;
+    setVenusScaleLevel(game, 10);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const action = card.play(player);

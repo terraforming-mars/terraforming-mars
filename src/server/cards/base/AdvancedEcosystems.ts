@@ -8,7 +8,7 @@ import {CardRequirements} from '../CardRequirements';
 export class AdvancedEcosystems extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ADVANCED_ECOSYSTEMS,
       tags: [Tag.PLANT, Tag.MICROBE, Tag.ANIMAL],
       cost: 11,

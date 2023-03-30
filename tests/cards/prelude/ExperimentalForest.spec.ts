@@ -3,13 +3,12 @@ import {ExperimentalForest} from '../../../src/server/cards/prelude/Experimental
 import {Tag} from '../../../src/common/cards/Tag';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('ExperimentalForest', function() {
   it('Should play', function() {
     const card = new ExperimentalForest();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(1);
     card.play(player);
 
     // Select Greenery space

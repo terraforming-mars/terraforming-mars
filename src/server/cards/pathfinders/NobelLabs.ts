@@ -14,7 +14,7 @@ import {digit} from '../Options';
 export class NobelLabs extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.NOBEL_LABS,
       cost: 9,
       tags: [Tag.PLANT, Tag.ANIMAL, Tag.MARS],

@@ -24,7 +24,7 @@ import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {ICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
 import {Viron} from '../../../src/server/cards/venusNext/Viron';
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
 
 describe('Merger', function() {
@@ -35,9 +35,7 @@ describe('Merger', function() {
 
   beforeEach(() => {
     card = new Merger();
-    game = newTestGame(2, {preludeExtension: true, turmoilExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
 
     // Preset corporation deck for testing
     game.corporationDeck.drawPile = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];

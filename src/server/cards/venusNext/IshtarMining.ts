@@ -10,7 +10,7 @@ export class IshtarMining extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.ISHTAR_MINING,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.VENUS],
       cost: 5,
 

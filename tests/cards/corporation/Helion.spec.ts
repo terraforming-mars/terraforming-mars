@@ -1,19 +1,16 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 
 describe('Helion', function() {
   let card: Helion;
-  let game: Game;
   let player: TestPlayer;
 
   beforeEach(function() {
     card = new Helion();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Should play', function() {

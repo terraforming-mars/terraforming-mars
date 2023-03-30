@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.AEROBRAKED_AMMONIA_ASTEROID,
       tags: [Tag.SPACE],
       cost: 26,

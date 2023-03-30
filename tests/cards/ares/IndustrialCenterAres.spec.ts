@@ -7,6 +7,7 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('IndustrialCenterAres', function() {
   let card: IndustrialCenterAres;
@@ -15,9 +16,7 @@ describe('IndustrialCenterAres', function() {
 
   beforeEach(function() {
     card = new IndustrialCenterAres();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {

@@ -33,7 +33,7 @@ export class Capital extends Card implements IProjectCard {
     },
   ) {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 26,

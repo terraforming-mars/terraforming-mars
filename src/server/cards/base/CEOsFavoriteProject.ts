@@ -12,7 +12,7 @@ import {RobotCard} from '../promo/SelfReplicatingRobots';
 export class CEOsFavoriteProject extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.CEOS_FAVORITE_PROJECT,
       cost: 1,
 

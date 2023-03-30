@@ -15,7 +15,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class Ambient extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.AMBIENT,
       tags: [Tag.VENUS],
       startingMegaCredits: 38,

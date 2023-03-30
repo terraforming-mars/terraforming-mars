@@ -14,7 +14,7 @@ export class VenusianAnimals extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUSIAN_ANIMALS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS, Tag.ANIMAL, Tag.SCIENCE],
       cost: 15,
       resourceType: CardResource.ANIMAL,

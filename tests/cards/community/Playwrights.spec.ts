@@ -11,11 +11,12 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
 import {ICard} from '../../../src/server/cards/ICard';
 import {GlobalParameter} from '../../../src/common/GlobalParameter';
 import {Worms} from '../../../src/server/cards/base/Worms';
+import {testGame} from '../../TestGame';
 
 describe('Playwrights', () => {
   let card: Playwrights;
@@ -25,13 +26,10 @@ describe('Playwrights', () => {
 
   beforeEach(() => {
     card = new Playwrights();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
 
     card.play(player);
     player.setCorporationForTest(card);
-    player.popSelectInitialCards();
   });
 
   it('Cannot act without any played events', () => {
@@ -86,7 +84,7 @@ describe('Playwrights', () => {
   it('Cannot act without any playable events', () => {
     player2.playedCards.push(new MartianSurvey(), new LocalHeatTrapping(), new DeimosDown());
 
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     player.heat = 4;
     player.megaCredits = 30;
     expect(card.canAct(player)).is.not.true;

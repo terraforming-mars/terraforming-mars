@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
+import {cast, fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardType} from '../../../src/common/cards/CardType';
 import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvancedGHG';
@@ -26,8 +26,7 @@ describe('Odyssey', () => {
 
   beforeEach(() => {
     card = new Odyssey();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 
@@ -55,9 +54,9 @@ describe('Odyssey', () => {
     player.megaCredits = event.cost;
     player.playedCards = [event];
     expect(card.canAct(player)).is.false;
-    (game as any).temperature = 0;
+    setTemperature(game, 0);
     expect(card.canAct(player)).is.false;
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     expect(card.canAct(player)).is.true;
   });
 

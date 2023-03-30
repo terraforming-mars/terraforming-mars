@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {CoordinatedRaid} from '../../../src/server/cards/pathfinders/CoordinatedRaid';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
@@ -38,7 +38,7 @@ describe('CoordinatedRaid', function() {
 
   beforeEach(function() {
     card = new CoordinatedRaid();
-    game = newTestGame(2, {
+    [game, player, player2] = testGame(2, {
       coloniesExtension: true,
       customColoniesList: [
         ColonyName.PLUTO,
@@ -48,8 +48,6 @@ describe('CoordinatedRaid', function() {
         ColonyName.LUNA,
       ],
     });
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
     // This shortens the array.
     game.colonies = [game.colonies[0], new TestColony()];
   });

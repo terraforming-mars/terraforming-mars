@@ -1,16 +1,13 @@
 import {expect} from 'chai';
 import {ArtificialPhotosynthesis} from '../../../src/server/cards/base/ArtificialPhotosynthesis';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('ArtificialPhotosynthesis', () => {
   it('Should play', () => {
     const card = new ArtificialPhotosynthesis();
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player);
-    player.popSelectInitialCards();
+    const [game, player] = testGame(1);
     const action = card.play(player);
     expect(action).is.undefined;
     runAllActions(game);

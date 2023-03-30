@@ -8,6 +8,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('UrbanizedArea', function() {
   let card: UrbanizedArea;
@@ -17,9 +18,7 @@ describe('UrbanizedArea', function() {
 
   beforeEach(function() {
     card = new UrbanizedArea();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
 
     const tharsisTholus = game.board.getSpace(SpaceName.THARSIS_THOLUS);
     lands = game.board.getAdjacentSpaces(tharsisTholus).filter((space) => space.spaceType === SpaceType.LAND);

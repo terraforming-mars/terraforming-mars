@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {StrategicBasePlanning} from '../../../src/server/cards/pathfinders/StrategicBasePlanning';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
@@ -17,7 +17,7 @@ describe('StrategicBasePlanning', function() {
   beforeEach(function() {
     card = new StrategicBasePlanning();
     // 2 players to remove an early-game solo action in the deferred actions queue.
-    game = newTestGame(2, {
+    [game, player] = testGame(2, {
       coloniesExtension: true,
       customColoniesList: [
         // The important thing is that Europa is absent.
@@ -27,7 +27,6 @@ describe('StrategicBasePlanning', function() {
         ColonyName.TITAN,
         ColonyName.TRITON],
     });
-    player = getTestPlayer(game, 0);
   });
 
   it('Should play', function() {

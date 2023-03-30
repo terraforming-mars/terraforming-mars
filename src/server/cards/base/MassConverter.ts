@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class MassConverter extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MASS_CONVERTER,
       tags: [Tag.SCIENCE, Tag.POWER],
       cost: 8,

@@ -1,22 +1,24 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class MartianRails extends Card implements IActionCard, IProjectCard {
+export class MartianRails extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARTIAN_RAILS,
       tags: [Tag.BUILDING],
       cost: 13,
+
+      action: {
+        spend: {energy: 1},
+        stock: {megacredits: {cities: {where: 'onmars'}}},
+      },
 
       metadata: {
         cardNumber: '007',
@@ -28,13 +30,5 @@ export class MartianRails extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-  public canAct(player: Player): boolean {
-    return player.energy >= 1;
-  }
-  public action(player: Player) {
-    player.deductResource(Resources.ENERGY, 1);
-    player.addResource(Resources.MEGACREDITS, player.game.getCitiesOnMarsCount(), {log: true});
-    return undefined;
   }
 }

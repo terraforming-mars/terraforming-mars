@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {LargeConvoy} from '../../../src/server/cards/base/LargeConvoy';
 import {Pets} from '../../../src/server/cards/base/Pets';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('LargeConvoy', function() {
   let card: LargeConvoy;
@@ -13,9 +13,7 @@ describe('LargeConvoy', function() {
 
   beforeEach(function() {
     card = new LargeConvoy();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play without animal cards', function() {

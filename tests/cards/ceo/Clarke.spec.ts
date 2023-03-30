@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, forceGenerationEnd} from '../../TestingUtils';
+import {runAllActions, forceGenerationEnd, churnAction} from '../../TestingUtils';
 import {Clarke} from '../../../src/server/cards/ceos/Clarke';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Clarke', function() {
   let card: Clarke;
@@ -12,8 +12,7 @@ describe('Clarke', function() {
 
   beforeEach(() => {
     card = new Clarke();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
   });
 
   it('Can only act once per game', function() {
@@ -28,7 +27,7 @@ describe('Clarke', function() {
   });
 
   it('Takes action', function() {
-    expect(card.action(player)).is.undefined;
+    expect(churnAction(card, player)).is.undefined;
     expect(player.plants).eq(4);
     expect(player.heat).eq(4);
   });

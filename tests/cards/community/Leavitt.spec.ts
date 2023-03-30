@@ -6,6 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {testGame} from '../../TestGame';
 
 describe('Leavitt', function() {
   let leavitt: Leavitt;
@@ -15,13 +16,9 @@ describe('Leavitt', function() {
 
   beforeEach(function() {
     leavitt = new Leavitt();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(leavitt);
-    player.popSelectInitialCards();
-    player2.popSelectInitialCards();
   });
 
   it('Should build', function() {

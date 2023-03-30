@@ -10,7 +10,7 @@ export class SisterPlanetSupport extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SISTER_PLANET_SUPPORT,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.VENUS, Tag.EARTH],
       cost: 7,
 

@@ -1,7 +1,7 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGameOptions} from '../../TestingUtils';
+import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeStation} from '../../../src/server/cards/moon/LunaTradeStation';
 import {expect} from 'chai';
@@ -53,16 +53,19 @@ describe('LunaTradeStation', () => {
     player.megaCredits = 0;
     spaces[0].tile = {tileType: TileType.MOON_HABITAT};
     card.action(player);
+    runAllActions(game);
     expect(player.megaCredits).eq(2);
 
     player.megaCredits = 0;
     spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     card.action(player);
+    runAllActions(game);
     expect(player.megaCredits).eq(4);
 
     player.megaCredits = 0;
     spaces[2].tile = {tileType: TileType.MOON_HABITAT};
     card.action(player);
+    runAllActions(game);
     expect(player.megaCredits).eq(6);
   });
 });

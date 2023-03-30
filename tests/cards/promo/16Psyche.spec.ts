@@ -1,12 +1,11 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Psyche} from '../../../src/server/cards/promo/16Psyche';
 
 describe('16 Psyche', function() {
   it('Should play', function() {
     const card = new Psyche();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [, player] = testGame(1);
 
     // Sanity
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);

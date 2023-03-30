@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
 import {Polyphemos} from '../../../src/server/cards/colonies/Polyphemos';
@@ -25,9 +25,11 @@ describe('Polyphemos', function() {
     expect(player.production.megacredits).to.eq(5);
 
     player.playedCards.push(card3);
-    const action = cast(card3.action(player), SelectCard);
+    expect(card3.action(player)).is.undefined;
+    runAllActions(player.game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     action.cb([action.cards[0]]);
-    player.game.deferredActions.runNext();
+    runAllActions(player.game);
     expect(player.megaCredits).to.eq(35);
     expect(player.cardsInHand).has.lengthOf(3);
   });

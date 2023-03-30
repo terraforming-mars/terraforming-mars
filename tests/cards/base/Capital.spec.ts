@@ -8,6 +8,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {Board} from '../../../src/server/boards/Board';
+import {testGame} from '../../TestGame';
 
 describe('Capital', () => {
   let card: Capital;
@@ -16,9 +17,7 @@ describe('Capital', () => {
 
   beforeEach(() => {
     card = new Capital();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play without 2 energy production', () => {

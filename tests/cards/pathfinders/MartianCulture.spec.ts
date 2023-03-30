@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
@@ -11,9 +11,7 @@ describe('MartianCulture', function() {
 
   beforeEach(function() {
     card = new MartianCulture();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player, player2] = testGame(2);
     player.playedCards.push(card);
   });
 

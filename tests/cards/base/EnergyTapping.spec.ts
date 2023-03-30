@@ -5,6 +5,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('EnergyTapping', function() {
   let card: EnergyTapping;
@@ -14,10 +15,7 @@ describe('EnergyTapping', function() {
 
   beforeEach(function() {
     card = new EnergyTapping();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
-    player.popWaitingFor();
+    [game, player, player2] = testGame(2);
   });
 
   it('Should play - auto select if single target', function() {
@@ -46,8 +44,7 @@ describe('EnergyTapping', function() {
   });
 
   it('Playable in solo mode', function() {
-    const game = Game.newInstance('gameid', [player], player);
-    player.popSelectInitialCards();
+    [game, player] = testGame(1);
     card.play(player);
 
     runAllActions(game);

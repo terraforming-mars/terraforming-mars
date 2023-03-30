@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Inventrix extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.INVENTRIX,
       tags: [Tag.SCIENCE],
       startingMegaCredits: 45,

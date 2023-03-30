@@ -13,7 +13,7 @@ import {PathfindersData} from '../../pathfinders/PathfindersData';
 export class EconomicHelp extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.ECONOMIC_HELP,
       cost: 9,
 
@@ -40,7 +40,8 @@ export class EconomicHelp extends Card implements IProjectCard {
 
   private trackOffset(tag: PlanetaryTag, data: PathfindersData): number {
     const value = data[tag];
-    return TRACKS[tag].spaces.length === value ? -1 : value;
+    const maxValue = TRACKS[tag].spaces.length - 1;
+    return maxValue === value ? -1 : value;
   }
 
   public override bespokePlay(player: Player) {

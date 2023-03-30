@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {EconomicEspionage} from '../../../src/server/cards/pathfinders/EconomicEspionage';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
@@ -10,9 +10,7 @@ describe('EconomicEspionage', function() {
 
   beforeEach(function() {
     card = new EconomicEspionage();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
     player.playedCards.push(card);
   });
 

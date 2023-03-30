@@ -3,7 +3,7 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtractor';
 import {AgricolaInc} from '../../../src/server/cards/community/AgricolaInc';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AgricolaInc', function() {
@@ -12,9 +12,7 @@ describe('AgricolaInc', function() {
 
   beforeEach(function() {
     card = new AgricolaInc();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
 
     card.play(player);
     player.setCorporationForTest(card);

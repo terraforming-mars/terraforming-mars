@@ -3,7 +3,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {addGreenery, addCityTile, runAllActions} from '../../TestingUtils';
 
 import {Gordon} from '../../../src/server/cards/ceos/Gordon';
@@ -17,9 +17,7 @@ describe('Gordon', function() {
 
   beforeEach(() => {
     card = new Gordon();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2);
     player.playedCards.push(card);
   });
 

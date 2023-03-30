@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeFederation} from '../../../src/server/cards/moon/LunaTradeFederation';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 // import {IMoonData} from '../../../src/server/moon/IMoonData';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 // import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
@@ -19,12 +19,8 @@ describe('LunaTradeFederation', () => {
   // let moonData: IMoonData;
 
   beforeEach(() => {
-    game = newTestGame(2, {moonExpansion: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {moonExpansion: true});
     lunaTradeFederation = new LunaTradeFederation();
-    // moonData = MoonExpansion.moonData(game);
-    player.popSelectInitialCards();
   });
 
   it('play', () => {

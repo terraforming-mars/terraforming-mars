@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class GiantSpaceMirror extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GIANT_SPACE_MIRROR,
       tags: [Tag.POWER, Tag.SPACE],
       cost: 17,

@@ -7,20 +7,24 @@ import {CardName} from '../../../common/cards/CardName';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 
-export class StratosphericBirds extends Card implements IActionCard {
+export class StratosphericBirds extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.STRATOSPHERIC_BIRDS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS, Tag.ANIMAL],
       cost: 12,
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
-
       requirements: CardRequirements.builder((b) => b.venus(12)),
+
+      action: {
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: '249',
         renderData: CardRenderer.builder((b) => {
@@ -53,13 +57,6 @@ export class StratosphericBirds extends Card implements IActionCard {
   }
   public override bespokePlay(player: Player) {
     player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, true));
-    return undefined;
-  }
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    player.addResourceTo(this);
     return undefined;
   }
 }

@@ -4,6 +4,7 @@ import {JetStreamMicroscrappers} from '../../../src/server/cards/venusNext/JetSt
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('JetStreamMicroscrappers', function() {
   let card: JetStreamMicroscrappers;
@@ -12,9 +13,7 @@ describe('JetStreamMicroscrappers', function() {
 
   beforeEach(function() {
     card = new JetStreamMicroscrappers();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {

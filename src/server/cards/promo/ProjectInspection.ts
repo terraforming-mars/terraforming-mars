@@ -11,7 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class ProjectInspection extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.PROJECT_INSPECTION,
       cost: 0,
 

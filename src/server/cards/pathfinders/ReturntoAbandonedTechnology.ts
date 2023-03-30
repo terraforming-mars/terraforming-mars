@@ -11,7 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.RETURN_TO_ABANDONED_TECHNOLOGY,
       cost: 4,
       tags: [Tag.MARS],

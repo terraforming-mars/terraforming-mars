@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Phase} from '../../../src/common/Phase';
 import {Mine} from '../../../src/server/cards/base/Mine';
 import {UnitedNationsMissionOne} from '../../../src/server/cards/community/UnitedNationsMissionOne';
@@ -16,9 +16,7 @@ describe('UnitedNationsMissionOne', function() {
 
   beforeEach(() => {
     card = new UnitedNationsMissionOne();
-    game = newTestGame(2, {turmoilExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(3, {turmoilExtension: true});
   });
 
   it('Initializes correctly', function() {

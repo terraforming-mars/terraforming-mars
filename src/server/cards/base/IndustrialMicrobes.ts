@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class IndustrialMicrobes extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.INDUSTRIAL_MICROBES,
       tags: [Tag.MICROBE, Tag.BUILDING],
       cost: 12,

@@ -1,21 +1,18 @@
 import {expect} from 'chai';
 import {RestrictedArea} from '../../../src/server/cards/base/RestrictedArea';
 import {Viron} from '../../../src/server/cards/venusNext/Viron';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
 import {cast} from '../../TestingUtils';
 
 describe('Viron', function() {
   let card: Viron;
-  let game: Game;
   let player: TestPlayer;
 
   beforeEach(function() {
     card = new Viron();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Should act', function() {

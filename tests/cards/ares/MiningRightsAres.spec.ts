@@ -7,6 +7,7 @@ import {MiningRightsAres} from '../../../src/server/cards/ares/MiningRightsAres'
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('MiningRightsAres', function() {
   let card: MiningRightsAres;
@@ -15,9 +16,7 @@ describe('MiningRightsAres', function() {
 
   beforeEach(function() {
     card = new MiningRightsAres();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {

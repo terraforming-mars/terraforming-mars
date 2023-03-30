@@ -12,7 +12,7 @@ import {Resources} from '../../../common/Resources';
 export class MediaGroup extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MEDIA_GROUP,
       tags: [Tag.EARTH],
       cost: 6,

@@ -8,6 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
+import {testGame} from '../../TestGame';
 
 describe('CorroderSuits', function() {
   let card: CorroderSuits;
@@ -16,10 +17,7 @@ describe('CorroderSuits', function() {
 
   beforeEach(function() {
     card = new CorroderSuits();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
-    player.popSelectInitialCards();
+    [game, player] = testGame(2);
   });
 
   it('Should play - no targets', function() {

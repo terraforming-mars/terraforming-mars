@@ -1,11 +1,12 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Thermophiles', function() {
   let card: Thermophiles;
@@ -14,18 +15,16 @@ describe('Thermophiles', function() {
 
   beforeEach(function() {
     card = new Thermophiles();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    (game as any).venusScaleLevel = 4;
+    setVenusScaleLevel(game, 4);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).venusScaleLevel = 6;
+    setVenusScaleLevel(game, 6);
     expect(player.canPlayIgnoringCost(card)).is.true;
     const action = card.play(player);
     expect(action).is.undefined;
@@ -35,13 +34,15 @@ describe('Thermophiles', function() {
     card.play(player);
     player.playedCards.push(card, new VenusianInsects());
 
-    const action = cast(card.action(player), SelectCard);
+    card.action(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     action.cb([card]);
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card);
 
-    const orOptions = cast(card.action(player), OrOptions);
+    const orOptions = cast(churnAction(card, player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);
@@ -53,11 +54,12 @@ describe('Thermophiles', function() {
 
     const action = card.action(player);
     expect(action).is.undefined;
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card);
 
-    const orOptions = cast(card.action(player), OrOptions);
+    const orOptions = cast(churnAction(card, player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

@@ -14,7 +14,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 export class CassiniStation extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CASSINI_STATION,
       cost: 23,
       tags: [Tag.POWER, Tag.SCIENCE, Tag.SPACE],

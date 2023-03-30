@@ -12,7 +12,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class LandClaim extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.LAND_CLAIM,
       cost: 1,
 

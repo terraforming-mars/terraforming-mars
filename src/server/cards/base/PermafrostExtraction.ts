@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class PermafrostExtraction extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.PERMAFROST_EXTRACTION,
       cost: 8,
 

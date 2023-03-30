@@ -7,7 +7,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
-import {newTestGame, getTestPlayer} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Enceladus} from '../../../src/server/colonies/Enceladus';
 import {Europa} from '../../../src/server/colonies/Europa';
@@ -24,8 +24,7 @@ describe('CollegiumCopernicus', function() {
 
   beforeEach(function() {
     card = new CollegiumCopernicus();
-    game = newTestGame(2, {coloniesExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {coloniesExtension: true, pathfindersExpansion: true});
     player.setCorporationForTest(card);
     // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
     game.colonies = [

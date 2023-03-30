@@ -17,7 +17,7 @@ import {max} from '../Options';
 export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.EXTREME_COLD_FUNGUS,
       tags: [Tag.MICROBE],
       cost: 13,

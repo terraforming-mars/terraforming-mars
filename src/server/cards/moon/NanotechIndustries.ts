@@ -14,7 +14,7 @@ import {VictoryPoints} from '../ICard';
 export class NanotechIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.NANOTECH_INDUSTRIES,
       tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 42,

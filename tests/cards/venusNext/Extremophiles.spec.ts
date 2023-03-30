@@ -3,7 +3,7 @@ import {cast} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Extremophiles} from '../../../src/server/cards/venusNext/Extremophiles';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -13,9 +13,7 @@ describe('Extremophiles', function() {
 
   beforeEach(function() {
     card = new Extremophiles();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

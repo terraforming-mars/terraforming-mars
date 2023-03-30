@@ -12,7 +12,7 @@ import {Resources} from '../../../common/Resources';
 export class MeatIndustry extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MEAT_INDUSTRY,
       tags: [Tag.BUILDING],
       cost: 5,

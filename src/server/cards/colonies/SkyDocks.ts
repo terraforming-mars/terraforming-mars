@@ -12,7 +12,7 @@ export class SkyDocks extends Card implements IProjectCard {
       cost: 18,
       tags: [Tag.SPACE, Tag.EARTH],
       name: CardName.SKY_DOCKS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       victoryPoints: 2,
 
       behavior: {

@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Vitor extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.VITOR,
       tags: [Tag.EARTH],
       startingMegaCredits: 48, // It's 45 + 3 when this corp is played

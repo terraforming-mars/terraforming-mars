@@ -1,11 +1,12 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {churnAction, cast, runAllActions} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('FloatingHabs', function() {
   let card: FloatingHabs;
@@ -14,9 +15,7 @@ describe('FloatingHabs', function() {
 
   beforeEach(function() {
     card = new FloatingHabs();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -35,7 +34,7 @@ describe('FloatingHabs', function() {
     player.megaCredits = 10;
 
     card.action(player);
-    game.deferredActions.runNext();
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(8);
   });
@@ -43,8 +42,8 @@ describe('FloatingHabs', function() {
   it('Should act - multiple targets', function() {
     player.playedCards.push(card, new Dirigibles());
     player.megaCredits = 10;
-    const action = cast(card.action(player), SelectCard);
-    action.cb([card]);
+    const selectCard = cast(churnAction(card, player), SelectCard);
+    selectCard.cb([card]);
     game.deferredActions.runNext();
     expect(card.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(8);

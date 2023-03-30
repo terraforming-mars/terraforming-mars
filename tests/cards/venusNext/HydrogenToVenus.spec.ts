@@ -10,6 +10,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {testGame} from '../../TestGame';
 
 describe('HydrogenToVenus', function() {
   let card: HydrogenToVenus;
@@ -22,14 +23,11 @@ describe('HydrogenToVenus', function() {
 
   beforeEach(function() {
     card = new HydrogenToVenus();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
     venusCard1 = new DeuteriumExport();
     venusCard2 = new Dirigibles();
     jovianTagCard1 = new ColonizerTrainingCamp();
     jovianTagCard2 = new JovianLanterns();
-    player.popSelectInitialCards();
   });
 
   it('Should play with multiple venus cards', function() {

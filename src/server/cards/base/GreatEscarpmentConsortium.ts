@@ -13,7 +13,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 export class GreatEscarpmentConsortium extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GREAT_ESCARPMENT_CONSORTIUM,
       cost: 6,
 

@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class ProtectedValley extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.PROTECTED_VALLEY,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 23,

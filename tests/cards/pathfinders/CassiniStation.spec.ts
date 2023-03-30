@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CassiniStation} from '../../../src/server/cards/pathfinders/CassiniStation';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {Mercury} from '../../../src/server/cards/community/Mercury';
 import {Units} from '../../../src/common/Units';
@@ -18,6 +18,7 @@ import {cast} from '../../TestingUtils';
 describe('CassiniStation', function() {
   let card: CassiniStation;
   let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   let floater1: IProjectCard;
@@ -28,8 +29,7 @@ describe('CassiniStation', function() {
 
   beforeEach(function() {
     card = new CassiniStation();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
+    [game, player, player2] = testGame(2);
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     data1 = new MartianCulture();
@@ -53,7 +53,7 @@ describe('CassiniStation', function() {
 
     player.production.override(Units.EMPTY);
     colonyTile2.colonies.push(player.id);
-    colonyTile2.colonies.push(getTestPlayer(game, 1).id);
+    colonyTile2.colonies.push(player2.id);
 
     card.play(player);
 

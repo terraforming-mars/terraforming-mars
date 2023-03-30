@@ -10,7 +10,7 @@ export class TheWomb extends Card {
   constructor() {
     super({
       name: CardName.THE_WOMB,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.MOON],
       cost: 16,
 

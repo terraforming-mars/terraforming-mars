@@ -6,10 +6,10 @@ import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
 import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplicatingRobots';
-import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {ICard} from '../../../src/server/cards/ICard';
+import {testGame} from '../../TestGame';
 
 describe('CEOsFavoriteProject', function() {
   let card: CEOsFavoriteProject;
@@ -17,9 +17,7 @@ describe('CEOsFavoriteProject', function() {
 
   beforeEach(function() {
     card = new CEOsFavoriteProject();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

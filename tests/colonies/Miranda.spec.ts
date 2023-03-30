@@ -6,6 +6,7 @@ import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesT
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
+import {testGame} from '../TestGame';
 
 describe('Miranda', function() {
   let miranda: Miranda;
@@ -17,12 +18,9 @@ describe('Miranda', function() {
   beforeEach(function() {
     miranda = new Miranda();
     pets = new Pets();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(miranda);
-    player.popSelectInitialCards();
   });
 
   it('Should activate', function() {

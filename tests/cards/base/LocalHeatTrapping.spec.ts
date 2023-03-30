@@ -4,9 +4,9 @@ import {Fish} from '../../../src/server/cards/base/Fish';
 import {LocalHeatTrapping} from '../../../src/server/cards/base/LocalHeatTrapping';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('LocalHeatTrapping', () => {
   let card: LocalHeatTrapping;
@@ -14,9 +14,7 @@ describe('LocalHeatTrapping', () => {
 
   beforeEach(() => {
     card = new LocalHeatTrapping();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Cannot play without 5 heat', () => {

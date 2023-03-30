@@ -4,7 +4,7 @@ import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast, churnAction, runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
@@ -33,6 +33,7 @@ describe('Stratopolis', function() {
   it('Should act - single target', function() {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(player.game);
     expect(card.resourceCount).to.eq(2);
   });
 
@@ -40,8 +41,8 @@ describe('Stratopolis', function() {
     const card2 = new AerialMappers();
     player.playedCards.push(card, card2);
 
-    const action = cast(card.action(player), SelectCard);
-    action.cb([card2]);
+    const selectCard = cast(churnAction(card, player), SelectCard);
+    selectCard.cb([card2]);
 
     expect(card2.resourceCount).to.eq(2);
   });

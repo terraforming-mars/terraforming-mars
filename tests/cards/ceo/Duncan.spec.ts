@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
@@ -13,8 +13,7 @@ describe('Duncan', function() {
 
   beforeEach(() => {
     card = new Duncan();
-    game = newTestGame(4, {ceoExtension: true, moonExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {ceoExtension: true, moonExpansion: true});
     player.playedCards.push(card);
   });
 

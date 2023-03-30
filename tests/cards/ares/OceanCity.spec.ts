@@ -10,6 +10,7 @@ import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('OceanCity', function() {
   let card: OceanCity;
@@ -18,9 +19,7 @@ describe('OceanCity', function() {
 
   beforeEach(function() {
     card = new OceanCity();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Can play', function() {

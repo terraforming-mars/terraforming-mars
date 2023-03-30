@@ -6,11 +6,11 @@ import {expect} from 'chai';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Player} from '../../../src/server/Player';
+import {testGame} from '../../TestGame';
 
 describe('LunaProjectOffice', () => {
   it('can play', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const [, player] = testGame(1, {moonExpansion: true});
     const card = new LunaProjectOffice();
 
     player.cardsInHand = [card];
@@ -24,15 +24,10 @@ describe('LunaProjectOffice', () => {
   });
 
   it('play - solo', function() {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance(
-      'gameid',
-      [player],
-      player,
-      testGameOptions({
-        moonExpansion: true,
-        turmoilExtension: false,
-      }));
+    const [game, player] = testGame(1, {
+      moonExpansion: true,
+      turmoilExtension: false,
+    });
 
     game.generation = 10;
     const card = new LunaProjectOffice();

@@ -9,7 +9,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class IndenturedWorkers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.INDENTURED_WORKERS,
       cost: 0,
       victoryPoints: -1,

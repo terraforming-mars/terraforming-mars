@@ -15,7 +15,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class Wetlands extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.WETLANDS,
       tags: [Tag.PLANT, Tag.MARS],
       cost: 20,

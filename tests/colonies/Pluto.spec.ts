@@ -6,6 +6,7 @@ import {Game} from '../../src/server/Game';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
+import {testGame} from '../TestGame';
 
 describe('Pluto', function() {
   let pluto: Pluto;
@@ -15,9 +16,7 @@ describe('Pluto', function() {
 
   beforeEach(function() {
     pluto = new Pluto();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(pluto);
   });

@@ -1,22 +1,24 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
+export class BusinessNetwork extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.BUSINESS_NETWORK,
       tags: [Tag.EARTH],
       cost: 4,
       behavior: {
         production: {megacredits: -1},
+      },
+
+      action: {
+        drawCard: {count: 1, pay: true},
       },
 
       metadata: {
@@ -28,13 +30,5 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    return player.drawCardKeepSome(1, {paying: true});
   }
 }

@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class MarketingExperts extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARKETING_EXPERTS,
       tags: [Tag.EARTH],
       cost: 5,

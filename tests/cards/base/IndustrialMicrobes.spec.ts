@@ -1,14 +1,11 @@
 import {expect} from 'chai';
 import {IndustrialMicrobes} from '../../../src/server/cards/base/IndustrialMicrobes';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('IndustrialMicrobes', function() {
   it('Should play', function() {
     const card = new IndustrialMicrobes();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    const [, player] = testGame(2);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.production.energy).to.eq(1);

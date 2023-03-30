@@ -5,7 +5,7 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -17,9 +17,7 @@ describe('NoctisCity', function() {
 
   beforeEach(function() {
     card = new NoctisCity();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play without energy production', function() {
@@ -28,8 +26,7 @@ describe('NoctisCity', function() {
 
   it('All land spaces are available on Hellas', function() {
     // With two players, there's no solo setup, so all spaces will be available.
-    const game = newTestGame(2, {boardName: BoardName.HELLAS});
-    const player = game.getPlayersInGenerationOrder()[0];
+    const [game, player] = testGame(2, {boardName: BoardName.HELLAS});
 
     const action = cast(card.play(player), SelectSpace);
     expect(action.availableSpaces).deep.eq(game.board.getAvailableSpacesForCity(player));

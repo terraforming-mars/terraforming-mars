@@ -15,7 +15,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.COSMIC_RADIATION,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.MOON],
       cost: 3,
 

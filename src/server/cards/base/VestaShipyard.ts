@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class VestaShipyard extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.VESTA_SHIPYARD,
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 15,

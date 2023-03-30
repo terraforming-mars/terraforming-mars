@@ -52,6 +52,7 @@ import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
 import {MarsDirect} from './MarsDirect';
+import {MarsMaths} from './MarsMaths';
 import {MartianCulture} from './MartianCulture';
 import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianInsuranceGroup} from './MartianInsuranceGroup';
@@ -196,6 +197,7 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.STEELARIS]: {Factory: Steelaris},
     // [CardName.MARS_MATHS]: {Factory: MarsMaths},
     [CardName.MARS_DIRECT]: {Factory: MarsDirect, compatibility: 'pathfinders'},
+    [CardName.MARS_MATHS]: {Factory: MarsMaths},
     [CardName.MARTIAN_INSURANCE_GROUP]: {Factory: MartianInsuranceGroup, compatibility: 'pathfinders'},
     // [CardName.SOLBANK]: {Factory: SolBank},
     [CardName.BIO_SOL]: {Factory: BioSol},

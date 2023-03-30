@@ -68,6 +68,7 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
 import {MessageBuilder} from './logs/MessageBuilder';
+import {MarsMaths} from './cards/pathfinders/MarsMaths';
 
 /**
  * Behavior when playing a card:
@@ -925,7 +926,7 @@ export class Player {
     if (passedCards === undefined) {
       if (!initialDraft) {
         let cardsToDraw = 4;
-        if (LunaProjectOffice.isActive(this)) {
+        if (LunaProjectOffice.isActive(this) || MarsMaths.isActive(this)) {
           cardsToDraw = 5;
           cardsToKeep = 2;
         }
@@ -1000,7 +1001,7 @@ export class Player {
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
-      this.dealForDraft(LunaProjectOffice.isActive(this) ? 5 : 4, dealtCards);
+      this.dealForDraft(LunaProjectOffice.isActive(this) || MarsMaths.isActive(this) ? 5 : 4, dealtCards);
     } else {
       dealtCards = this.draftedCards;
       this.draftedCards = [];

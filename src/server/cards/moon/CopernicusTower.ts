@@ -44,8 +44,8 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
     return this.resourceCount > 0 && player.canAfford(0, {tr: {tr: 1}});
   }
 
-  public canAct(player: Player) {
-    return this.canRaiseTR(player);
+  public canAct() {
+    return true;
   }
 
   public action(player: Player) {

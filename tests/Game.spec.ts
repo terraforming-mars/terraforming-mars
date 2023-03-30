@@ -29,7 +29,8 @@ import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
-import {SerializedGame} from '@/server/SerializedGame';
+import {SerializedGame} from '../src/server/SerializedGame';
+import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -289,6 +290,8 @@ describe('Game', () => {
   it('Solo player should place final greeneries if victory condition met', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('game-solo2', [player], player);
+    /* Removes SelectInitialCards. The cast verifies that it's popping the right thing. */
+    cast(player.popWaitingFor(), SelectInitialCards);
 
     // Set up end-game conditions
     game.generation = 14;
@@ -328,6 +331,8 @@ describe('Game', () => {
   it('Solo player should place final greeneries in TR 63 mode if victory condition is met', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('game-solo2', [player], player, testGameOptions({soloTR: true}));
+    /* Removes SelectInitialCards. The cast verifies that it's popping the right thing. */
+    cast(player.popWaitingFor(), SelectInitialCards);
 
     // Set up end-game conditions
     game.generation = 14;

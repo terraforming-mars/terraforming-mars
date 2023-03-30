@@ -1506,7 +1506,7 @@ export class Player {
           return undefined;
         }),
       );
-      this.setWaitingFor(action);
+      this.setWaitingForSafely(action);
       return;
     }
 
@@ -1975,10 +1975,30 @@ export class Player {
     return this.waitingFor;
   }
   public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
+    if (this.waitingFor !== undefined) {
+      // Add a metric.
+      console.error('Overwriting a waitingFor: ' + this.waitingFor);
+    }
     this.timer.start();
     this.waitingFor = input;
     this.waitingForCb = cb;
     this.game.inputsThisRound++;
+  }
+
+  // This was only built for the Philares/Final Greenery case. Might not work elsewhere.
+  public setWaitingForSafely(input: PlayerInput, cb: () => void = () => {}): void {
+    if (this.waitingFor === undefined) {
+      this.setWaitingFor(input, cb);
+    } else {
+      const oldcb = this.waitingForCb;
+      this.waitingForCb =
+        oldcb === undefined ?
+          cb :
+          () => {
+            oldcb();
+            this.setWaitingForSafely(input, cb);
+          };
+    }
   }
 
   public serialize(): SerializedPlayer {

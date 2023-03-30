@@ -73,6 +73,27 @@ describe('Gaia', function() {
     expect(milestone.getScore(player)).eq(oldScore);
   });
 
+  it('Takes action, owner of the tile does not gain MC', function() {
+    // Place a tile that grants adjacency bonuses
+    const naturalPreserveAres = new NaturalPreserveAres();
+    naturalPreserveAres.play(player2);
+    runAllActions(game);
+    const action = cast(player2.popWaitingFor(), SelectSpace);
+    const space = action.availableSpaces[0];
+    action.cb(space);
+
+    // Place tiles from different players next to tile that grants adjacency bonuses
+    const firstAdjacentSpace = game.board.getAdjacentSpaces(space)[0];
+    const secondAdjacentSpace = game.board.getAdjacentSpaces(space)[1];
+    addGreenery(player2, firstAdjacentSpace.id);
+    addCityTile(player3, secondAdjacentSpace.id);
+
+    const oldPlayer2MC = player2.megaCredits;
+    // Gain adjacency bonuses of all players' tiles
+    card.action(player);
+    expect(player2.megaCredits).eq(oldPlayer2MC);
+  });
+
 
   it('Can only act once per game', function() {
     card.action(player);

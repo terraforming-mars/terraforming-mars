@@ -182,10 +182,6 @@ describe('Philares', () => {
     selectSpace.cb(adjacentSpace);
     runAllActions(game);
 
-    // firstPlayerGreeneryPlacement.options[0].cb();
-    // game.addGreenery(otherPlayer, adjacentSpace);
-    // expect(game.deferredActions).has.lengthOf(1);
-
     // Philares player gains plant and can subsequently place a greenery
     // philaresPlayer.takeActionForFinalGreenery();
     const philaresPlayerResourceSelection = cast(philaresPlayer.popWaitingFor(), AndOptions);

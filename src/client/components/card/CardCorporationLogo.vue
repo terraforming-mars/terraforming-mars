@@ -128,6 +128,12 @@
     <template v-else-if="title ===  CardName.CURIOSITY_II">
       <div class="card-curiosity-ii-logo">Curiosity II</div>
     </template>
+    <template v-else-if="title === CardName.MARS_MATHS">
+      <div class="card-mars-maths-logo" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif">
+        <span style="color: rgb(0, 0, 0);">MARS</span>
+        <span style="color: rgb(208, 96, 3);box-shadow: -6px -6px #d58c56;">MATHS</span>
+      </div>
+    </template>
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>
@@ -185,6 +191,7 @@ const imageLogosWithNames: Map<CardName, string> = new Map([
   [CardName.ARIDOR, 'card-aridor-logo'],
   [CardName.TERACTOR, 'card-teractor-logo'],
   [CardName.MIDAS, 'card-midas-logo'],
+  [CardName.MARS_MATHS, 'card-mars-maths-logo'],
 ]);
 
 export default Vue.extend({

@@ -46,7 +46,6 @@ import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
-import {MarsMaths} from './cards/pathfinders/MarsMaths';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
@@ -1005,7 +1004,7 @@ export class Player {
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
-      this.dealForDraft(LunaProjectOffice.isActive(this) || MarsMaths.isActive(this) ? 5 : 4, dealtCards);
+      this.dealForDraft(LunaProjectOffice.isActive(this) || this.cardIsInEffect(CardName.MARS_MATHS) ? 5 : 4, dealtCards);
     } else {
       dealtCards = this.draftedCards;
       this.draftedCards = [];

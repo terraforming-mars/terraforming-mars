@@ -36,8 +36,6 @@ describe('MarsMaths', function() {
     expect(getWaitingFor(player).cards).has.length(5);
   });
 
-  // This test is almost exactly the same as the solo test, but they take
-  // different paths in the code.
   it('play - 2 player - draft', function() {
     const [game, player, player2] = testGame(2, {
       pathfindersExpansion: true,
@@ -57,8 +55,6 @@ describe('MarsMaths', function() {
     expect(getWaitingFor(player2).cards).has.length(4);
   });
 
-  // This test is almost exactly the same as the solo test, but it takes
-  // different paths in the code.
   it('play - 2 player - no draft', function() {
     const [game, player, player2] = testGame(2, {
       pathfindersExpansion: true,

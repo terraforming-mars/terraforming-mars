@@ -923,21 +923,24 @@ export class Player {
    *   step in the draft, and cards have to be dealt.
    */
   public askPlayerToDraft(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void {
+    let cardsToDraw = 4;
     let cardsToKeep = 1;
 
     let cards: Array<IProjectCard> = [];
     if (passedCards === undefined) {
-      if (!initialDraft) {
-        let cardsToDraw = 4;
-        if (LunaProjectOffice.isActive(this) || this.cardIsInEffect(CardName.MARS_MATHS)) {
+      if (initialDraft) {
+        cardsToDraw = 5;
+      } else {
+        if (LunaProjectOffice.isActive(this)) {
           cardsToDraw = 5;
           cardsToKeep = 2;
         }
-
-        this.dealForDraft(cardsToDraw, cards);
-      } else {
-        this.dealForDraft(5, cards);
+        if (this.isCorporation(CardName.MARS_MATHS)) {
+          cardsToDraw = 5;
+          cardsToKeep = 2;
+        }
       }
+      this.dealForDraft(cardsToDraw, cards);
     } else {
       cards = passedCards;
     }

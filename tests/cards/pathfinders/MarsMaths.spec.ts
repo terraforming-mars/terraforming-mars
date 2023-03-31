@@ -1,9 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {MarsMaths} from '../../../src/server/cards/pathfinders/MarsMaths';
-import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
-import {cast, finishGeneration, testGameOptions} from '../../TestingUtils';
+import {cast, finishGeneration} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Player} from '../../../src/server/Player';

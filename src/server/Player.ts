@@ -1006,14 +1006,23 @@ export class Player {
 
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
-    if (!draftVariant) {
-      this.dealForDraft(LunaProjectOffice.isActive(this) || this.cardIsInEffect(CardName.MARS_MATHS) ? 5 : 4, dealtCards);
-    } else {
+    let cardsToKeep = 4;
+    if (draftVariant) {
       dealtCards = this.draftedCards;
       this.draftedCards = [];
+    } else {
+      let cardsToDraw = 4;
+      if (this.isCorporation(CardName.MARS_MATHS)) {
+        cardsToDraw = 5;
+      }
+      if (LunaProjectOffice.isActive(this)) {
+        cardsToKeep = 5;
+        cardsToDraw = 5;
+      }
+      this.dealForDraft(cardsToDraw, dealtCards);
     }
 
-    const action = DrawCards.choose(this, dealtCards, {paying: true});
+    const action = DrawCards.choose(this, dealtCards, {paying: true, keepMax: cardsToKeep});
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
   }
 

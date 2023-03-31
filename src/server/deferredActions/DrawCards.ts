@@ -94,6 +94,8 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
       if (max === 0) {
         msg = 'You cannot afford any cards';
       } else if (max < cards.length) {
+        // We're being offered more cards than we're able to buy
+        // So we should be specific on maximum number of cards
         msg = `Select up to ${max} card(s) to buy`;
       } else {
         msg = 'Select card(s) to buy';

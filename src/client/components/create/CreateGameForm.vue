@@ -876,18 +876,21 @@ export default (Vue as WithRefs<Refs>).extend({
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
     isEnabled(module: GameModule): boolean {
+      const model: CreateGameModel = this;
       switch (module) {
-      case 'corpera': return this.$data.corpera;
-      case 'promo': return this.$data.promoCardsOption;
-      case 'venus': return this.$data.venusNext;
-      case 'colonies': return this.$data.colonies;
-      case 'prelude': return this.$data.prelude;
-      case 'turmoil': return this.$data.turmoil;
-      case 'community': return this.$data.communityCardsOption;
-      case 'ares': return this.$data.aresExtension;
-      case 'moon': return this.$data.moonExpansion;
-      case 'pathfinders': return this.$data.pathfindersExpansion;
-      default: return true;
+      case 'base': return true;
+      case 'corpera': return model.corporateEra;
+      case 'promo': return model.promoCardsOption;
+      case 'venus': return model.venusNext;
+      case 'colonies': return model.colonies;
+      case 'prelude': return model.prelude;
+      case 'turmoil': return model.turmoil;
+      case 'community': return model.communityCardsOption;
+      case 'ares': return model.aresExtension;
+      case 'moon': return model.moonExpansion;
+      case 'pathfinders': return model.pathfindersExpansion;
+      case 'ceo': return model.ceoExtension;
+      default: throw new Error('Unknown module: ' + module);
       }
     },
     boardHref(boardName: BoardName | RandomBoardOption) {

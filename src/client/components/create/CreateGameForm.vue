@@ -467,7 +467,7 @@ import * as json_constants from '@/client/components/create/json';
 
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
-import {Color} from '@/common/Color';
+import {Color, PLAYER_COLORS} from '@/common/Color';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
@@ -861,16 +861,21 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       // Auto assign an available color if there are duplicates
-      const uniqueColors = players.map((player) => player.color).filter((v, i, a) => a.indexOf(v) === i);
-      if (uniqueColors.length !== players.length) {
-        const allColors = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK, Color.PURPLE, Color.ORANGE, Color.PINK];
-        players.forEach((player) => {
-          if (allColors.includes(player.color)) {
-            allColors.splice(allColors.indexOf(player.color), 1);
+      const uniqueColors = new Set(players.map((player) => player.color));
+      if (uniqueColors.size !== players.length) {
+        const usedColors: Set<Color> = new Set();
+        // This filter retains the default player color order.
+        const unusedColors = PLAYER_COLORS.filter((c) => !uniqueColors.has(c));
+        for (const player of players) {
+          const color = player.color;
+          if (usedColors.has(color)) {
+            // Pulling off the front of the list also helps retain the default player color order.
+            player.color = unusedColors.shift() as Color;
+            usedColors.add(color);
           } else {
-            player.color = allColors.shift() as Color;
+            usedColors.add(color);
           }
-        });
+        }
       }
 
       // Set player name automatically if not entered

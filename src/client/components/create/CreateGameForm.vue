@@ -485,69 +485,11 @@ import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {GameModule} from '@/common/cards/GameModule';
-import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
+import {NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 import {vueRoot} from '@/client/components/vueRoot';
+import {CreateGameModel} from './CreateGameModel';
 
 const REVISED_COUNT_ALGORITHM = false;
-
-export interface CreateGameModel {
-    constants: typeof constants;
-    allOfficialExpansions: boolean;
-    firstIndex: number;
-    playersCount: number;
-    players: Array<NewPlayerModel>;
-    corporateEra: boolean;
-    prelude: boolean;
-    draftVariant: boolean;
-    initialDraft: boolean;
-    randomMA: RandomMAOptionType;
-    randomFirstPlayer: boolean;
-    showOtherPlayersVP: boolean;
-    venusNext: boolean;
-    colonies: boolean;
-    turmoil: boolean;
-    bannedCards: Array<CardName>;
-    customColonies: Array<ColonyName>;
-    customCorporations: Array<CardName>;
-    customPreludes: Array<CardName>;
-    showBannedCards: boolean;
-    showCorporationList: boolean;
-    showColoniesList: boolean;
-    showPreludesList: boolean;
-    board: BoardNameType;
-    boards: Array<BoardNameType>;
-    seed: number;
-    solarPhaseOption: boolean;
-    shuffleMapOption: boolean;
-    promoCardsOption: boolean;
-    communityCardsOption: boolean;
-    aresExtension: boolean;
-    politicalAgendasExtension: AgendaStyle;
-    moonExpansion: boolean;
-    pathfindersExpansion: boolean;
-    undoOption: boolean;
-    showTimers: boolean;
-    fastModeOption: boolean;
-    removeNegativeGlobalEventsOption: boolean;
-    includeVenusMA: boolean;
-    includeFanMA: boolean;
-    startingCorporations: number;
-    soloTR: boolean;
-    clonedGameId: GameId | undefined;
-    requiresVenusTrackCompletion: boolean;
-    requiresMoonTrackCompletion: boolean;
-    moonStandardProjectVariant: boolean;
-    altVenusBoard: boolean;
-    seededGame: boolean;
-    escapeVelocityMode: boolean;
-    escapeVelocityThreshold: number;
-    escapeVelocityPeriod: number;
-    escapeVelocityPenalty: number;
-    twoCorpsVariant: boolean;
-    ceoExtension: boolean;
-    customCeos: Array<CardName>;
-    startingCeos: number;
-}
 
 type Refs = {
   coloniesFilter: InstanceType<typeof ColoniesFilter>,
@@ -559,7 +501,7 @@ type Refs = {
 
 export default (Vue as WithRefs<Refs>).extend({
   name: 'CreateGameForm',
-  data(): CreateGameModel {
+  data(): CreateGameModel & {constants: typeof constants} {
     return {
       constants,
       firstIndex: 1,

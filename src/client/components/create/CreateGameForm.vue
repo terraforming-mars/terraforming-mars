@@ -401,11 +401,11 @@
 
                             <label>
                                 <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
-                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" v-on:change="handleSettingsUpload()"/>
+                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" v-on:change="uploadSettings()"/>
                             </label>
 
                             <label>
-                                <div v-on:click="downloadCurrentSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
+                                <div v-on:click="downloadSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
                             </label>
                         </div>
                     </div>
@@ -622,7 +622,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   methods: {
-    async downloadCurrentSettings() {
+    async downloadSettings() {
       const serializedData = await this.serializeSettings();
 
       if (serializedData) {
@@ -633,7 +633,7 @@ export default (Vue as WithRefs<Refs>).extend({
         a.click();
       }
     },
-    handleSettingsUpload() {
+    uploadSettings() {
       const refs: Refs = this.$refs;
       const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();

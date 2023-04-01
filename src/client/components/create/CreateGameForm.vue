@@ -478,7 +478,7 @@ import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {playerColorClass} from '@/common/utils/utils';
+import {playerColorClass, range, zip} from '@/common/utils/utils';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
@@ -645,6 +645,13 @@ export default (Vue as WithRefs<Refs>).extend({
           const readerResults = reader.result;
           if (typeof(readerResults) === 'string') {
             const results = JSON.parse(readerResults);
+
+            const players = results['players'];
+            const validationErrors = validatePlayers(players);
+            if (validationErrors.length > 0) {
+              throw new Error(validationErrors.join('\n'));
+            }
+
             if (results.corporationsDraft !== undefined) {
               warnings.push('Corporations draft is no longer available. Future versions might just raise an error, so edit your JSON file.');
             }
@@ -654,7 +661,6 @@ export default (Vue as WithRefs<Refs>).extend({
             const bannedCards = results[json_constants.BANNED_CARDS] || results[json_constants.OLD_BANNED_CARDS] || [];
             const customPreludes = results[json_constants.CUSTOM_PRELUDES] || [];
 
-            const players = results['players'];
             component.playersCount = players.length;
             component.showCorporationList = customCorporations.length > 0;
             component.showColoniesList = customColonies.length > 0;
@@ -704,12 +710,12 @@ export default (Vue as WithRefs<Refs>).extend({
             });
           }
           if (warnings.length > 0) {
-            window.alert('Settings loaded, with these errors: \n' + warnings.join('\n'));
+            window.alert('Settings loaded, with these warnings: \n' + warnings.join('\n'));
           } else {
             window.alert('Settings loaded.');
           }
         } catch (e) {
-          window.alert('Error reading JSON ' + e);
+          window.alert('Error loading settings ' + e);
         }
       }, false);
       if (file) {
@@ -1139,4 +1145,31 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
 });
+
+function validatePlayers(players: Array<NewPlayerModel>): Array<string> {
+  const errors: Array<string> = [];
+
+  // Ensure indexes are distinct, and start from 1..
+  const indexes = players.map((p) => p.index).sort();
+  const expectedIndexes = range(players.length + 1); // [0, 1, 2, ...], the +1 is necessary.
+  expectedIndexes.shift(); // [1, 2, ...]
+  const zipped = zip(indexes, expectedIndexes);
+  if (zipped.some((e) => e[0] !== e[1])) {
+    errors.push('Each player index must be unique and in the range of 1..player count');
+  }
+
+  // Ensure colors are valid and distinct
+  const colors = new Set(players.map((p) => p.color));
+  for (const color of colors) {
+    // `as any` is OK here since this just validates `color`.
+    if (PLAYER_COLORS.indexOf(color as any) === -1) {
+      errors.push(color + ' is not a color');
+    }
+  }
+  if (colors.size !== players.length) {
+    errors.push('Colors are duplicated');
+  }
+  return errors;
+}
+
 </script>

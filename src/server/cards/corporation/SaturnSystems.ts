@@ -12,7 +12,7 @@ import {all, played} from '../Options';
 export class SaturnSystems extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.SATURN_SYSTEMS,
       tags: [Tag.JOVIAN],
       startingMegaCredits: 42,

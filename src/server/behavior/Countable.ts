@@ -18,6 +18,7 @@ export type _Countable = {
   cities?: {where?: 'onmars' | 'offmars' | 'everywhere'},
   greeneries?: NoAttributes,
   oceans?: NoAttributes,
+  resourcesHere?: NoAttributes,
   moon?: {
     habitatRate?: NoAttributes,
     miningRate?: NoAttributes,
@@ -30,10 +31,11 @@ export type _Countable = {
   all?: boolean; // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
   others?: true; // For tags this has a behavior.
 
+  // THESE ARE BACKWARDS
   /**
    * Multiple the sum by `per`.
    *
-   * For example, `{cities: {}, each: 2}` would count all the cities on the board, and multiply that value by 2.
+   * For example, `{cities: {}, per: 2}` would count all the cities on the board, and multiply that value by 2.
    */
   per?: number;
 

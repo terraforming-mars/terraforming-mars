@@ -9,11 +9,12 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
+import {MessageBuilder} from '../../logs/MessageBuilder';
 
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.HIRED_RAIDERS,
       cost: 1,
 
@@ -49,7 +50,9 @@ export class HiredRaiders extends Card implements IProjectCard {
     availablePlayerTargets.forEach((target) => {
       if (target.steel > 0 && !target.alloysAreProtected()) {
         const amountStolen = Math.min(2, target.steel);
-        const optionTitle = 'Steal ' + amountStolen + ' steel from ' + target.name;
+        const optionTitle = MessageBuilder.of('Steal ${0} steel from ${1}')
+          .number(amountStolen)
+          .player(target).getMessage();
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.steel += amountStolen;
@@ -60,7 +63,9 @@ export class HiredRaiders extends Card implements IProjectCard {
 
       if (target.megaCredits > 0) {
         const amountStolen = Math.min(3, target.megaCredits);
-        const optionTitle = 'Steal ' + amountStolen + ' M€ from ' + target.name;
+        const optionTitle = MessageBuilder.of('Steal ${0} M€ from ${1}')
+          .number(amountStolen)
+          .player(target).getMessage();
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.megaCredits += amountStolen;

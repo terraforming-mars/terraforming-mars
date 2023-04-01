@@ -13,7 +13,7 @@ import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Help from '@/client/components/help/Help.vue';
 import AdminHome from '@/client/components/admin/AdminHome.vue';
 
-import {$t} from '@/client/directives/i18n';
+import {$t, setTranslationContext} from '@/client/directives/i18n';
 
 import * as constants from '@/common/constants';
 import * as paths from '@/common/app/paths';
@@ -135,6 +135,7 @@ export const mainAppSettings = {
             const model = xhr.response as ViewModel;
             if (path === paths.PLAYER) {
               app.playerView = model as PlayerViewModel;
+              setTranslationContext(app.playerView);
             } else if (path === paths.SPECTATOR) {
               app.spectator = model as SpectatorModel;
             }

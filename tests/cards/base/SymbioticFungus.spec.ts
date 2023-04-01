@@ -1,11 +1,12 @@
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {churnAction, cast, runAllActions, setTemperature} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('SymbioticFungus', function() {
   let card: SymbioticFungus;
@@ -14,9 +15,7 @@ describe('SymbioticFungus', function() {
 
   beforeEach(function() {
     card = new SymbioticFungus();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -24,25 +23,26 @@ describe('SymbioticFungus', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = -14;
+    setTemperature(game, -14);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Can act without targets', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Should act - single target', function() {
     player.playedCards.push(new Ants());
     card.action(player);
+    runAllActions(game);
     expect(player.playedCards[0].resourceCount).to.eq(1);
   });
 
   it('Should act - multiple targets', function() {
     player.playedCards.push(new Ants(), new Decomposers());
-    const action = cast(card.action(player), SelectCard);
+    const selectCard = cast(churnAction(card, player), SelectCard);
 
-    action.cb([player.playedCards[0]]);
+    selectCard.cb([player.playedCards[0]]);
     expect(player.playedCards[0].resourceCount).to.eq(1);
   });
 });

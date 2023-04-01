@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AirScrappingStandardProject} from '../../../src/server/cards/venusNext/AirScrappingStandardProject';
-import {runAllActions, testGameOptions} from '../../TestingUtils';
+import {runAllActions, setVenusScaleLevel, testGameOptions} from '../../TestingUtils';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
@@ -42,7 +42,7 @@ describe('AirScrappingStandardProject', function() {
   it('Cannot act when maximized', () => {
     player.megaCredits = 15;
     expect(card.canAct(player)).is.true;
-    (game as any).venusScaleLevel = MAX_VENUS_SCALE;
+    setVenusScaleLevel(game, MAX_VENUS_SCALE);
     expect(card.canAct(player)).is.false;
   });
 

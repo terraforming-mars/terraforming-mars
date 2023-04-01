@@ -10,7 +10,7 @@ import {multiplier} from '../Options';
 export class Helion extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.HELION,
       tags: [Tag.SPACE],
       startingMegaCredits: 42,

@@ -4,7 +4,8 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {churnAction, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('BusinessNetwork', function() {
   let card: BusinessNetwork;
@@ -13,9 +14,7 @@ describe('BusinessNetwork', function() {
 
   beforeEach(function() {
     card = new BusinessNetwork();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -30,15 +29,15 @@ describe('BusinessNetwork', function() {
   });
 
   it('Can act', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Cannot buy card if cannot pay', function() {
     player.megaCredits = 2;
-    const action = cast(card.action(player), SelectCard);
-    expect(action.config.max).to.eq(0);
+    const selectCard = cast(churnAction(card, player), SelectCard);
+    expect(selectCard.config.max).to.eq(0);
 
-    action.cb([]);
+    selectCard.cb([]);
     expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.cardsInHand).has.lengthOf(0);
     expect(player.megaCredits).to.eq(2);
@@ -46,14 +45,13 @@ describe('BusinessNetwork', function() {
 
   it('Should action as not helion', function() {
     player.megaCredits = 3;
-    const action = cast(card.action(player), SelectCard);
-
-    action.cb([]);
+    const selectCard = cast(churnAction(card, player), SelectCard);
+    selectCard.cb([]);
     expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);
 
     player.megaCredits = 3;
-    action.cb([action.cards[0]]);
+    selectCard.cb([selectCard.cards[0]]);
     expect(game.deferredActions).has.lengthOf(1);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);

@@ -6,11 +6,13 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {AresHandler} from '../../../server/ares/AresHandler';
+import {HAZARD_CONSTRAINTS} from '../../../common/ares/AresData';
 
 export class ButterflyEffect extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.BUTTERFLY_EFFECT,
       cost: 8,
 
@@ -29,7 +31,14 @@ export class ButterflyEffect extends Card implements IProjectCard {
     });
   }
   public override bespokePlay(player: Player) {
-    player.game.defer(new ShiftAresGlobalParametersDeferred(player));
+    AresHandler.ifAres(player.game, (aresData) => {
+      const hazardData = aresData.hazardData;
+      if (HAZARD_CONSTRAINTS.some((constraint) => hazardData[constraint].available === true)) {
+        player.game.defer(new ShiftAresGlobalParametersDeferred(player));
+      } else {
+        player.game.log('All global parameters are high enough that there is no point in changing any of them.');
+      }
+    });
     return undefined;
   }
 }

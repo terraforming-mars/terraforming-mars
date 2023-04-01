@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {EconomicHelp} from '../../../src/server/cards/pathfinders/EconomicHelp';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,8 +12,7 @@ describe('EconomicHelp', function() {
 
   beforeEach(function() {
     card = new EconomicHelp();
-    game = newTestGame(1, {pathfindersExpansion: true, venusNextExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
   });
 
   it('Play - one lowest influence tracks', function() {
@@ -86,10 +85,10 @@ describe('EconomicHelp', function() {
 
   it('Play - ignore maximized tracks', function() {
     game.pathfindersData = {
-      venus: 18,
-      earth: 18,
-      mars: 18,
-      jovian: 15,
+      venus: 17, // At the maximum
+      earth: 18, // Max is 22
+      mars: 17, // At the maximmum
+      jovian: 14, // At the maximum
       moon: -1,
       vps: [],
     };
@@ -97,12 +96,17 @@ describe('EconomicHelp', function() {
     card.play(player);
 
     expect(game.pathfindersData).deep.eq({
-      venus: 18,
+      venus: 17,
       earth: 21,
-      mars: 18,
-      jovian: 15,
+      mars: 17,
+      jovian: 14,
       moon: -1,
       vps: [],
     });
   });
+
+  // Economic Help does not correctly raise a planetary influence track when
+  // the relevant (lowest) non-completed track is higher than any other already
+  // completed track. Example: A non-completed Moon track will not be raised
+  // if it is higher than a completed Jovian track.
 });

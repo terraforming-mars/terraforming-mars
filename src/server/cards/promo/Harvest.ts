@@ -9,7 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 export class Harvest extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.HARVEST,
       tags: [Tag.PLANT],
       cost: 4,

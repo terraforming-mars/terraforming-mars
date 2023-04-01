@@ -14,7 +14,7 @@ import {played} from '../Options';
 export class GMOContract extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.GMO_CONTRACT,
       tags: [Tag.MICROBE, Tag.SCIENCE],
       cost: 3,

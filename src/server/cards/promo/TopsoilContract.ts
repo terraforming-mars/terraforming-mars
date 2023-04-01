@@ -12,7 +12,7 @@ import {Resources} from '../../../common/Resources';
 export class TopsoilContract extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.TOPSOIL_CONTRACT,
       tags: [Tag.MICROBE, Tag.EARTH],
       cost: 8,

@@ -1,9 +1,10 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, setTemperature} from '../../TestingUtils';
 import {LakeMarineris} from '../../../src/server/cards/base/LakeMarineris';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('LakeMarineris', function() {
   let card: LakeMarineris;
@@ -12,9 +13,7 @@ describe('LakeMarineris', function() {
 
   beforeEach(function() {
     card = new LakeMarineris();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -22,7 +21,7 @@ describe('LakeMarineris', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = -0;
+    setTemperature(game, -0);
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 

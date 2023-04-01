@@ -6,6 +6,7 @@ import {TileType} from '../../../src/common/TileType';
 import {addCityTile, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('TharsisRepublic', function() {
   let card: TharsisRepublic;
@@ -15,9 +16,7 @@ describe('TharsisRepublic', function() {
 
   beforeEach(function() {
     card = new TharsisRepublic();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
 
     player.setCorporationForTest(card);
   });

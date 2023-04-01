@@ -10,7 +10,7 @@ export class Omnicourt extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.OMNICOURT,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 11,
 

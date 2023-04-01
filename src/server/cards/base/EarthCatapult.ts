@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class EarthCatapult extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.EARTH_CATAPULT,
       tags: [Tag.EARTH],
       cost: 23,

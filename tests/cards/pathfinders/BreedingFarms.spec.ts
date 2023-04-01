@@ -16,6 +16,7 @@ describe('BreedingFarms', function() {
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
     fish = new Fish();
+    player.popWaitingFor();
   });
 
   it('canPlay', function() {

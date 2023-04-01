@@ -16,7 +16,7 @@ export class AtmoCollectors extends Card implements IProjectCard {
     super({
       cost: 15,
       name: CardName.ATMO_COLLECTORS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
 
       behavior: {

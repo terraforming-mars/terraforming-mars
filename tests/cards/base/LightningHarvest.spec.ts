@@ -1,7 +1,7 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
 import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LightningHarvest', function() {
@@ -10,9 +10,7 @@ describe('LightningHarvest', function() {
 
   beforeEach(function() {
     card = new LightningHarvest();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

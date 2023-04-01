@@ -11,7 +11,7 @@ import {Board} from '../../boards/Board';
 export class OutdoorSports extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.OUTDOOR_SPORTS,
       cost: 8,
       victoryPoints: 1,

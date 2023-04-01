@@ -7,7 +7,7 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {IDatabase} from '../../src/server/database/IDatabase';
-import {newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 
 export interface ITestDatabase extends IDatabase {
   lastSaveGamePromise: Promise<void>;
@@ -192,7 +192,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
     it('participantIds', async () => {
       expect(await db.getParticipants()).is.empty;
-      newTestGame(2, {}, '1');
+      testGame(2, {}, '1');
       await db.lastSaveGamePromise;
       expect(await db.getParticipants()).deep.eq([
         {
@@ -203,7 +203,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
           ],
         },
       ]);
-      newTestGame(3, {}, '2');
+      testGame(3, {}, '2');
       await db.lastSaveGamePromise;
       expect(await db.getParticipants()).deep.eq([
         {
@@ -226,9 +226,9 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
     it('getGameId', async () => {
       // TODO(kberg): this does not test spectator ids.
-      newTestGame(2, {}, '1');
+      testGame(2, {}, '1');
       await db.lastSaveGamePromise;
-      newTestGame(3, {}, '2');
+      testGame(3, {}, '2');
       await db.lastSaveGamePromise;
       expect(await db.getGameId('p-blue-id1')).eq('game-id1');
       expect(await db.getGameId('p-yellow-id2')).eq('game-id2');

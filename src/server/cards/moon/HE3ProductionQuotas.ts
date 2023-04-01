@@ -16,7 +16,7 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HE3_PRODUCTION_QUOTAS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.MOON],
       cost: 10,
 

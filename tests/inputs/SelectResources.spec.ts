@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {SelectResources} from '../../src/server/inputs/SelectResources';
 import {TestPlayer} from '../TestPlayer';
 import {Units} from '../../src/common/Units';
@@ -8,8 +8,7 @@ describe('SelectResources', function() {
   let player: TestPlayer;
 
   beforeEach(() => {
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Simple', function() {

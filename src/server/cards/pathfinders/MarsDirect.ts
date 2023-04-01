@@ -14,7 +14,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class MarsDirect extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.MARS_DIRECT,
       tags: [Tag.MARS],
       startingMegaCredits: 52,

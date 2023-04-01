@@ -1,20 +1,22 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EquatorialMagnetizer extends Card implements IActionCard, IProjectCard {
+export class EquatorialMagnetizer extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.EQUATORIAL_MAGNETIZER,
       tags: [Tag.BUILDING],
       cost: 11,
+
+      action: {
+        production: {energy: -1},
+        tr: 1,
+      },
 
       metadata: {
         cardNumber: '015',
@@ -25,14 +27,6 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
         }),
       },
     });
-  }
-  public canAct(player: Player): boolean {
-    return player.production.energy >= 1 && player.canAfford(0, {tr: {tr: 1}});
-  }
-  public action(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
-    player.increaseTerraformRating();
-    return undefined;
   }
 }
 

@@ -16,7 +16,7 @@ export class EcologyResearch extends Card implements IProjectCard {
       cost: 21,
       tags: [Tag.SCIENCE, Tag.PLANT, Tag.ANIMAL, Tag.MICROBE],
       name: CardName.ECOLOGY_RESEARCH,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       victoryPoints: 1,
 
       metadata: {

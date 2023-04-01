@@ -13,7 +13,7 @@ import {all, digit} from '../Options';
 export class SolarStorm extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SOLAR_STORM,
       cost: 12,
       tags: [Tag.SPACE],
@@ -36,11 +36,16 @@ export class SolarStorm extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.getPlayers().forEach((p) => {
+    for (const p of player.game.getPlayers()) {
       if (!p.plantsAreProtected()) {
-        p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
+        // Botanical Experience reduces the impact in half.
+        if (p.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+          p.deductResource(Resources.PLANTS, 1, {log: true, from: player});
+        } else {
+          p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
+        }
       }
-    });
+    }
     player.game.defer(new RemoveResourcesFromCard(
       player, CardResource.DATA, 3, /* ownCards */ false, /* mandatory */ false));
     return undefined;

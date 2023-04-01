@@ -2,8 +2,15 @@ import {Game} from '../src/server/Game';
 import {GameOptions} from '../src/server/GameOptions';
 import {testGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
+import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 
-export function newTestGame(count: number, customOptions?: Partial<GameOptions>, idSuffix = ''): Game {
+type _TestOptions = {
+  /* skip initial card selection */
+  skipInitialCardSelection: boolean;
+}
+export type TestGameOptions = GameOptions & _TestOptions;
+
+export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [Game, ...Array<TestPlayer>] {
   const players = [
     TestPlayer.BLUE.newPlayer(false, idSuffix),
     TestPlayer.RED.newPlayer(false, idSuffix),
@@ -18,7 +25,16 @@ export function newTestGame(count: number, customOptions?: Partial<GameOptions>,
   const options: GameOptions | undefined = customOptions === undefined ?
     undefined :
     testGameOptions(customOptions);
-  return Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
+  const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
+  if (customOptions?.skipInitialCardSelection !== false) {
+    for (const player of players) {
+      /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
+      if (player.getWaitingFor() instanceof SelectInitialCards) {
+        player.popWaitingFor();
+      }
+    }
+  }
+  return [game, ...players];
 }
 
 export function getTestPlayer(game: Game, idx: number): TestPlayer {
@@ -28,8 +44,4 @@ export function getTestPlayer(game: Game, idx: number): TestPlayer {
     throw new Error(`Invalid index ${idx} when game has ${length} players`);
   }
   return game.getPlayers()[idx] as TestPlayer;
-}
-
-export function getTestPlayers(game: Game): Array<TestPlayer> {
-  return game.getPlayers() as Array<TestPlayer>;
 }

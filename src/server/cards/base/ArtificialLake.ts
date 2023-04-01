@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class ArtificialLake extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ARTIFICIAL_LAKE,
       tags: [Tag.BUILDING],
       cost: 15,

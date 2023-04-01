@@ -10,7 +10,7 @@ import {digit} from '../Options';
 export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
       tags: [Tag.BUILDING],
       cost: 22,

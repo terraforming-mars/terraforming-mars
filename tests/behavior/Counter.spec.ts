@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Counter} from '../../src/server/behavior/Counter';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {Tag} from '../../src/common/cards/Tag';
 import {addCity, addGreenery, cast, fakeCard, maxOutOceans, runAllActions} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
@@ -21,13 +21,7 @@ describe('Counter', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    game = newTestGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
-    player.popSelectInitialCards();
-    player2.popSelectInitialCards();
-    player3.popSelectInitialCards();
+    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
     fake = fakeCard({});
   });
 
@@ -235,18 +229,10 @@ describe('Counter', () => {
 describe('Counter for Moon', () => {
   let game: Game;
   let player: TestPlayer;
-  let player2: TestPlayer;
-  let player3: TestPlayer;
   let fake: IProjectCard;
 
   beforeEach(() => {
-    game = newTestGame(3, {moonExpansion: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
-    player.popSelectInitialCards();
-    player2.popSelectInitialCards();
-    player3.popSelectInitialCards();
+    [game, player] = testGame(3, {moonExpansion: true});
     fake = fakeCard({});
   });
 

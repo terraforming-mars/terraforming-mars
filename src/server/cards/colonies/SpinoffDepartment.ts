@@ -12,7 +12,7 @@ export class SpinoffDepartment extends Card implements IProjectCard {
       cost: 10,
       tags: [Tag.BUILDING],
       name: CardName.SPINOFF_DEPARTMENT,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       behavior: {
         production: {megacredits: 2},

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
-import {ICard} from '../../../src/server/cards/ICard';
 import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBalloons';
@@ -11,7 +10,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
@@ -21,46 +21,45 @@ describe('StratosphericBirds', () => {
 
   beforeEach(() => {
     card = new StratosphericBirds();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
     deuteriumExport = new DeuteriumExport();
+    player.popWaitingFor();
   });
 
   it('Cannot play if Venus requirement not met', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
-    (game as any).venusScaleLevel = 10;
+    setVenusScaleLevel(game, 10);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Cannot play if no floater', () => {
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     expect(player.canPlayIgnoringCost(card)).is.true;
     player.playedCards.push(card);
 
     card.play(player);
-    expect(game.deferredActions).has.lengthOf(1);
-    expect(game.deferredActions.pop()!.execute()).is.undefined;
+    runAllActions(game);
   });
 
   it('Should act', () => {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card, 7);
@@ -76,7 +75,8 @@ describe('StratosphericBirds', () => {
     player.addResourceTo(extractorBalloons, 1);
 
     card.play(player);
-    const selectCard = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
     expect(selectCard.cards).has.lengthOf(2);
 
     selectCard.cb([deuteriumExport]);
@@ -89,14 +89,15 @@ describe('StratosphericBirds', () => {
     aerialMappers.resourceCount = 1;
     player.playedCards.push(aerialMappers);
 
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     player.megaCredits = 12;
 
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
     selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 12});
-    game.deferredActions.pop()!.execute(); // Remove floater
+    runAllActions(game); // Remove floater
+    expect(player.popWaitingFor()).is.undefined;
     expect(aerialMappers.resourceCount).to.eq(0);
   });
 
@@ -106,7 +107,7 @@ describe('StratosphericBirds', () => {
     player.playedCards.push(dirigibles);
     player.addResourceTo(dirigibles, 1);
 
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     player.megaCredits = 9;
 
     // 9 M€ + 1 Dirigibles floater: Cannot play
@@ -136,7 +137,7 @@ describe('StratosphericBirds', () => {
     player.addResourceTo(deuteriumExport, 1);
     player.addResourceTo(dirigibles, 3);
 
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
     player.megaCredits = 3;
 
     expect(player.canPlayIgnoringCost(card)).is.true;
@@ -155,7 +156,7 @@ describe('StratosphericBirds', () => {
     player.playedCards.push(dirigibles);
     player.addResourceTo(dirigibles, 1);
     player.megaCredits = 4;
-    (game as any).venusScaleLevel = 12;
+    setVenusScaleLevel(game, 12);
 
     const indentured = new IndenturedWorkers();
     player.playCard(indentured);

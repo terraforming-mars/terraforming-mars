@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {ValuableGases} from '../../../src/server/cards/pathfinders/ValuableGases';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
@@ -13,7 +12,6 @@ import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectC
 describe('ValuableGases', function() {
   let card: ValuableGases;
   let player: TestPlayer;
-  let game: Game;
 
   let floatingHabs: FloatingHabs;
   let jovianLanters: JovianLanterns;
@@ -22,8 +20,7 @@ describe('ValuableGases', function() {
 
   beforeEach(function() {
     card = new ValuableGases();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
 
     // Floating Habs is active, has floaters, and requires 2 science
     floatingHabs = new FloatingHabs();

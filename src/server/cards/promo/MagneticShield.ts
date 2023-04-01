@@ -10,7 +10,7 @@ import {digit} from '../Options';
 export class MagneticShield extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MAGNETIC_SHIELD,
       tags: [Tag.SPACE],
       cost: 24,

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {MartianInsuranceGroup} from '../../../src/server/cards/pathfinders/MartianInsuranceGroup';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -11,13 +10,10 @@ describe('MartianInsuranceGroup', function() {
   let card: MartianInsuranceGroup;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new MartianInsuranceGroup();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [, player, player2] = testGame(2);
     player.setCorporationForTest(card);
   });
 

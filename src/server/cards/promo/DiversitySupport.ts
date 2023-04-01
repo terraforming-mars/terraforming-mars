@@ -8,7 +8,7 @@ import {Card} from '../Card';
 export class DiversitySupport extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.DIVERSITY_SUPPORT,
       tags: [],
       cost: 1,

@@ -10,7 +10,7 @@ import {digit} from '../Options';
 export class CoronaExtractor extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CORONA_EXTRACTOR,
       cost: 10,
       tags: [Tag.SPACE, Tag.POWER],

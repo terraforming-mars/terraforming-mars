@@ -10,7 +10,7 @@ export class LunaResort extends Card {
   constructor() {
     super({
       name: CardName.LUNA_RESORT,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 11,
       reserveUnits: {titanium: 2},

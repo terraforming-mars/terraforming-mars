@@ -1,7 +1,9 @@
 import {expect} from 'chai';
+import {setOxygenLevel} from '../../TestingUtils';
 import {MethaneFromTitan} from '../../../src/server/cards/base/MethaneFromTitan';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('MethaneFromTitan', function() {
   let card: MethaneFromTitan;
@@ -10,9 +12,7 @@ describe('MethaneFromTitan', function() {
 
   beforeEach(function() {
     card = new MethaneFromTitan();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -20,7 +20,7 @@ describe('MethaneFromTitan', function() {
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 2;
+    setOxygenLevel(game, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 

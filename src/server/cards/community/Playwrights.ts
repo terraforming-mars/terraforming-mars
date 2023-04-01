@@ -20,7 +20,7 @@ export class Playwrights extends Card implements ICorporationCard {
       name: CardName.PLAYWRIGHTS,
       tags: [Tag.POWER],
       startingMegaCredits: 38,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       behavior: {
         production: {energy: 1},

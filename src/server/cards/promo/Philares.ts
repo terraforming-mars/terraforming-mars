@@ -17,7 +17,7 @@ import {all} from '../Options';
 export class Philares extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.PHILARES,
       tags: [Tag.BUILDING],
       startingMegaCredits: 47,

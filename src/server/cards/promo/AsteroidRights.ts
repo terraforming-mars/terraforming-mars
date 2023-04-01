@@ -18,7 +18,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AsteroidRights extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ASTEROID_RIGHTS,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 10,

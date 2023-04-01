@@ -11,7 +11,7 @@ import {digit, played} from '../Options';
 export class NitrogenRichAsteroid extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.NITROGEN_RICH_ASTEROID,
       tags: [Tag.SPACE],
       cost: 31,

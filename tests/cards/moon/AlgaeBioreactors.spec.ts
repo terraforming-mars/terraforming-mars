@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions, testRedsCosts} from '../../TestingUtils';
+import {setOxygenLevel, testGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/server/cards/moon/AlgaeBioreactors';
 import {expect} from 'chai';
@@ -58,7 +58,7 @@ describe('AlgaeBioreactors', () => {
     testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
     moonData.colonyRate = 8;
     testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
-    (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
   });
 });

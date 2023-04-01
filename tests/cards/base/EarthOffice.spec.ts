@@ -1,8 +1,8 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EarthOffice', function() {
@@ -11,9 +11,7 @@ describe('EarthOffice', function() {
 
   beforeEach(function() {
     card = new EarthOffice();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
 
     const action = card.play(player);
     expect(action).is.undefined;

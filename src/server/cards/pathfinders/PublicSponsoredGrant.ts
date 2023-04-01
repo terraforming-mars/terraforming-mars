@@ -15,7 +15,7 @@ import {all} from '../Options';
 export class PublicSponsoredGrant extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.PUBLIC_SPONSORED_GRANT,
       cost: 6,
       requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),

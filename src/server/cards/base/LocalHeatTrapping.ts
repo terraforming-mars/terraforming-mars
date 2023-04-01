@@ -15,7 +15,7 @@ import {digit} from '../Options';
 export class LocalHeatTrapping extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.LOCAL_HEAT_TRAPPING,
       cost: 1,
       // The 5 heat will be deducted in bespokePlay

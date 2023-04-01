@@ -11,7 +11,7 @@ export class Midas extends Card implements ICorporationCard {
     super({
       name: CardName.MIDAS,
       startingMegaCredits: 120,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R41',

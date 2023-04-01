@@ -1,25 +1,27 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
-import {Resources} from '../../../common/Resources';
 
-export class RustEatingBacteria extends Card implements IActionCard, IProjectCard {
+export class RustEatingBacteria extends ActionCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.RUST_EATING_BACTERIA,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MICROBE],
       cost: 7,
 
       resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 3),
+
+      action: {
+        spend: {steel: 1},
+        addResources: 2,
+      },
 
       metadata: {
         cardNumber: 'M88',
@@ -31,16 +33,5 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
         }),
       },
     });
-  }
-
-
-  public canAct(player: Player) {
-    return player.steel >= 1;
-  }
-
-  public action(player: Player) {
-    player.deductResource(Resources.STEEL, 1);
-    player.addResourceTo(this, 2);
-    return undefined;
   }
 }

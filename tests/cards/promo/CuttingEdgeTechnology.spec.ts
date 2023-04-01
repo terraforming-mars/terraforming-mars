@@ -3,13 +3,12 @@ import {DustSeals} from '../../../src/server/cards/base/DustSeals';
 import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
 import {CuttingEdgeTechnology} from '../../../src/server/cards/promo/CuttingEdgeTechnology';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('CuttingEdgeTechnology', function() {
   it('Should play', function() {
     const card = new CuttingEdgeTechnology();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [, player] = testGame(2);
     card.play(player);
 
     const discountedCard = new DustSeals();

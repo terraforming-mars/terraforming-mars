@@ -1,23 +1,25 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {IActionCard} from '../ICard';
-import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
-import {Card} from '../Card';
-import {Turmoil} from '../../turmoil/Turmoil';
+import {ActionCard} from '../ActionCard';
 
-export class LunaPoliticalInstitute extends Card implements IActionCard, IProjectCard {
+export class LunaPoliticalInstitute extends ActionCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_POLITICAL_INSTITUTE,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON, Tag.EARTH],
       cost: 6,
       requirements: CardRequirements.builder((b) => b.tag(Tag.MOON, 2)),
+
+      action: {
+        turmoil: {
+          sendDelegates: {count: 1},
+        },
+      },
 
       metadata: {
         description: 'Requires that you have 2 Moon tags.',
@@ -29,14 +31,5 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
         }),
       },
     });
-  }
-
-  public canAct(player: Player) {
-    return Turmoil.getTurmoil(player.game).hasDelegatesInReserve(player.id);
-  }
-
-  public action(player: Player) {
-    player.game.defer(new SendDelegateToArea(player));
-    return undefined;
   }
 }

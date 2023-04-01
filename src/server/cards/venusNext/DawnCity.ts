@@ -11,7 +11,7 @@ export class DawnCity extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DAWN_CITY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.SPACE],
       cost: 15,
 

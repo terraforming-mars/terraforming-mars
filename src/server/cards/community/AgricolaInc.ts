@@ -15,7 +15,7 @@ export class AgricolaInc extends Card implements ICorporationCard {
       name: CardName.AGRICOLA_INC,
       tags: [Tag.PLANT],
       startingMegaCredits: 40,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       victoryPoints: 'special',
       behavior: {

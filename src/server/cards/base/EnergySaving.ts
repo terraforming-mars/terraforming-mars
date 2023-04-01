@@ -10,7 +10,7 @@ import {all} from '../Options';
 export class EnergySaving extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ENERGY_SAVING,
       tags: [Tag.POWER],
       cost: 15,

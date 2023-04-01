@@ -6,9 +6,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
-import {getTestPlayer} from '../../TestGame';
-import {newTestGame} from '../../TestGame';
-
+import {testGame} from '../../TestGame';
 import {Petra} from '../../../src/server/cards/ceos/Petra';
 
 
@@ -24,11 +22,9 @@ describe('Petra', function() {
   let reds: IParty;
   let kelvinists: IParty;
 
-
   beforeEach(function() {
     card = new Petra();
-    game = newTestGame(2, {ceoExtension: true, turmoilExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
 
     turmoil = game.turmoil!;
     scientists = turmoil.getPartyByName(PartyName.SCIENTISTS)!;

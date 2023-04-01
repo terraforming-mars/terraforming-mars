@@ -10,7 +10,7 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 export class InterplanetaryTrade extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.INTERPLANETARY_TRADE,
       tags: [Tag.SPACE],
       cost: 27,

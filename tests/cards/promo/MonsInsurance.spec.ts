@@ -13,6 +13,7 @@ import {Resources} from '../../../src/common/Resources';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('MonsInsurance', () => {
   let card: MonsInsurance;
@@ -130,12 +131,9 @@ describe('MonsInsurance - Solo', () => {
   beforeEach(() => {
     card = new MonsInsurance();
 
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* skipped */, player] = testGame(1, {preludeExtension: true});
     card.play(player);
     player.setCorporationForTest(card);
-
-    player.popSelectInitialCards();
   });
 
   it('Should play', () => {

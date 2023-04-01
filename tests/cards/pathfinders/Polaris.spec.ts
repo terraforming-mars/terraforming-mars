@@ -3,7 +3,7 @@ import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
 import {Game} from '../../../src/server/Game';
 import {addOceanTile, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame, getTestPlayer} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
@@ -15,9 +15,7 @@ describe('Polaris', function() {
 
   beforeEach(function() {
     card = new Polaris();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2);
     player.setCorporationForTest(card);
   });
 

@@ -16,7 +16,7 @@ import {all} from '../Options';
 export class Flooding extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.FLOODING,
       cost: 7,
       tr: {oceans: 1},

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {HuygensObservatory} from '../../../src/server/cards/pathfinders/HuygensObservatory';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
@@ -21,7 +21,7 @@ describe('HuygensObservatory', function() {
     card = new HuygensObservatory();
     // By choosing 2 players I don't have to pay attention to the first action which
     // removes a colony tile.
-    game = newTestGame(2, {
+    [game, player] = testGame(2, {
       coloniesExtension: true,
       customColoniesList: [
         ColonyName.GANYMEDE,
@@ -31,7 +31,6 @@ describe('HuygensObservatory', function() {
         ColonyName.EUROPA,
       ],
     });
-    player = getTestPlayer(game, 0);
     ganymede = game.colonies.find((colony) => colony.name === ColonyName.GANYMEDE)!;
   });
 

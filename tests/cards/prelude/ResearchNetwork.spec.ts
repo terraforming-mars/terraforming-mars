@@ -1,13 +1,12 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Units} from '../../../src/common/Units';
 
 describe('ResearchNetwork', function() {
   it('Should play', function() {
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [, player] = testGame(1);
     const card = new ResearchNetwork();
 
     expect(player.cardsInHand).has.length(0);

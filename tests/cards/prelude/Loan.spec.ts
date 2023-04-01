@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Loan} from '../../../src/server/cards/prelude/Loan';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Loan', function() {
   let card: Loan;
@@ -10,8 +10,7 @@ describe('Loan', function() {
 
   beforeEach(function() {
     card = new Loan();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not play', function() {

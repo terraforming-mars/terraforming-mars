@@ -1,24 +1,27 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SecurityFleet extends Card implements IActionCard, IProjectCard {
+export class SecurityFleet extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SECURITY_FLEET,
       tags: [Tag.SPACE],
       cost: 12,
       resourceType: CardResource.FIGHTER,
 
       victoryPoints: VictoryPoints.resource(1, 1),
+
+      action: {
+        spend: {titanium: 1},
+        addResources: 1,
+      },
 
       metadata: {
         cardNumber: '028',
@@ -30,14 +33,5 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-
-  public canAct(player: Player): boolean {
-    return player.titanium > 0;
-  }
-  public action(player: Player) {
-    player.titanium--;
-    player.addResourceTo(this, 1);
-    return undefined;
   }
 }

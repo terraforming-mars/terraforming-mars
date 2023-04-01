@@ -6,6 +6,7 @@ import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelp
 import {TestPlayer} from '../../TestPlayer';
 import {addOcean, cast} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('DesperateMeasures', function() {
   let card: DesperateMeasures;
@@ -14,9 +15,7 @@ describe('DesperateMeasures', function() {
 
   beforeEach(function() {
     card = new DesperateMeasures();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    [game, player] = testGame(2, ARES_OPTIONS_WITH_HAZARDS);
   });
 
   it('play on top of dust storm', function() {

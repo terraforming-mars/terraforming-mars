@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 import * as constants from '../../../src/common/constants';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
@@ -12,9 +12,7 @@ describe('StormCraftIncorporated', function() {
 
   beforeEach(function() {
     card = new StormCraftIncorporated();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
 
     player.setCorporationForTest(card);
   });

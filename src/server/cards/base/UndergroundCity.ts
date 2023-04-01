@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class UndergroundCity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.UNDERGROUND_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 18,

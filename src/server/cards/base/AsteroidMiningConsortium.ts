@@ -14,7 +14,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 export class AsteroidMiningConsortium extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ASTEROID_MINING_CONSORTIUM,
       tags: [Tag.JOVIAN],
       cost: 13,

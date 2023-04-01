@@ -19,7 +19,7 @@ export class LavaFlows extends Card implements IProjectCard {
       description: 'Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.',
     }) {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name,
       cost: 18,
       adjacencyBonus,

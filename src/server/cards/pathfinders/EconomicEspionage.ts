@@ -1,24 +1,26 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {Player} from '../../Player';
-import {IActionCard, VictoryPoints} from '../ICard';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {VictoryPoints} from '../ICard';
 
-export class EconomicEspionage extends Card implements IProjectCard, IActionCard {
+export class EconomicEspionage extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ECONOMIC_ESPIONAGE,
       cost: 8,
       tags: [Tag.EARTH],
       resourceType: CardResource.DATA,
       victoryPoints: VictoryPoints.resource(1, 3),
+
+      action: {
+        spend: {megacredits: 2},
+        addResourcesToAnyCard: {count: 1, type: CardResource.DATA},
+      },
 
       metadata: {
         cardNumber: 'Pf37',
@@ -30,20 +32,5 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
         description: '1VP for every 3 data here.',
       },
     });
-  }
-
-
-  public canAct(player: Player) {
-    return player.canAfford(2);
-  }
-
-  public action(player: Player) {
-    player.game.defer(new SelectPaymentDeferred(player, 2, {
-      title: 'Select how to pay for action',
-      afterPay: () => {
-        player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
-      },
-    }));
-    return undefined;
   }
 }

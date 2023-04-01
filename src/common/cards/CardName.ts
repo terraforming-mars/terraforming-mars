@@ -512,6 +512,7 @@ export enum CardName {
     ECOLOGICAL_SURVEY = 'Ecological Survey',
     ECOLOGICAL_ZONE_ARES = 'Ecological Zone:ares',
     GEOLOGICAL_SURVEY = 'Geological Survey',
+    GREAT_DAM_ARES = 'Great Dam:ares',
     INDUSTRIAL_CENTER_ARES = 'Industrial Center:ares',
     LAVA_FLOWS_ARES = 'Lava Flows:ares',
     MARKETING_EXPERTS = 'Marketing Experts',

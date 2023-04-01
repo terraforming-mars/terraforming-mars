@@ -6,6 +6,7 @@ import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesT
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
+import {testGame} from '../TestGame';
 
 describe('Enceladus', function() {
   let enceladus: Enceladus;
@@ -17,9 +18,7 @@ describe('Enceladus', function() {
   beforeEach(function() {
     enceladus = new Enceladus();
     tardigrades = new Tardigrades();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(enceladus);
   });

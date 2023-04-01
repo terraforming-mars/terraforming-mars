@@ -23,8 +23,8 @@ export class DeimosDownPromo extends Card implements IProjectCard {
     },
   ) {
     super({
-      cardType: CardType.EVENT,
-      name,
+      type: CardType.EVENT,
+      name: CardName.DEIMOS_DOWN_PROMO,
       tags: [Tag.SPACE],
       cost: 31,
       metadata,

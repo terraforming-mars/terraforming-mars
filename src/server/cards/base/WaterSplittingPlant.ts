@@ -1,19 +1,23 @@
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class WaterSplittingPlant extends Card implements IProjectCard {
+export class WaterSplittingPlant extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.WATER_SPLITTING_PLANT,
       tags: [Tag.BUILDING],
       cost: 12,
+
+      action: {
+        spend: {energy: 3},
+        global: {oxygen: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(2)),
       metadata: {
@@ -26,13 +30,5 @@ export class WaterSplittingPlant extends Card implements IProjectCard {
         description: 'Requires 2 ocean tiles.',
       },
     });
-  }
-  public canAct(player: Player): boolean {
-    return player.energy >= 3 && player.canAfford(0, {tr: {oxygen: 1}});
-  }
-  public action(player: Player) {
-    player.energy -= 3;
-    player.game.increaseOxygenLevel(player, 1);
-    return undefined;
   }
 }

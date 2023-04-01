@@ -1,22 +1,25 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
 
-export class OzoneGenerators extends Card implements IProjectCard, IActionCard {
+export class OzoneGenerators extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.OZONE_GENERATORS,
       cost: 14,
       tags: [Tag.MARS, Tag.SPACE],
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
+
+      action: {
+        spend: {energy: 3},
+        tr: 1,
+        // player.game.log('${0} spent 3 energy to gain 1 TR', (b) => b.player(player));
+      },
 
       metadata: {
         cardNumber: 'Pf36',
@@ -26,17 +29,6 @@ export class OzoneGenerators extends Card implements IProjectCard, IActionCard {
         description: 'Requires 6% Oxygen.',
       },
     });
-  }
-
-  public canAct(player: Player) {
-    return player.energy >= 3 && player.canAfford(0, {tr: {tr: 1}});
-  }
-
-  public action(player: Player) {
-    player.deductResource(Resources.ENERGY, 3);
-    player.increaseTerraformRating();
-    player.game.log('${0} spent 3 energy to gain 1 TR', (b) => b.player(player));
-    return undefined;
   }
 }
 

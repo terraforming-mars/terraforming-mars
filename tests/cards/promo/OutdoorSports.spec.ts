@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {OutdoorSports} from '../../../src/server/cards/promo/OutdoorSports';
 import {TestPlayer} from '../../TestPlayer';
 import {ISpace} from '../../../src/server/boards/ISpace';
@@ -11,11 +11,10 @@ describe('OutdoorSports', function() {
   let oceanSpace: ISpace;
   let spaceNextToOcean: ISpace;
   let spaceNotNextToOcean: ISpace;
+
   beforeEach(function() {
     card = new OutdoorSports();
-    const game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [, player, player2] = testGame(2);
     const board = player.game.board;
     oceanSpace = board.getAvailableSpacesForOcean(player)[0];
 

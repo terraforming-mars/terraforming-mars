@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {EnergyMarket} from '../../../src/server/cards/promo/EnergyMarket';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('EnergyMarket', function() {
   let card: EnergyMarket;
@@ -13,9 +13,7 @@ describe('EnergyMarket', function() {
 
   beforeEach(function() {
     card = new EnergyMarket();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
-    player.popSelectInitialCards();
+    [/* skipped */, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Can not act', function() {

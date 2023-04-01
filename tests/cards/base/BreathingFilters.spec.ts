@@ -1,7 +1,9 @@
 import {expect} from 'chai';
+import {setOxygenLevel} from '../../TestingUtils';
 import {BreathingFilters} from '../../../src/server/cards/base/BreathingFilters';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('BreathingFilters', function() {
   let card: BreathingFilters;
@@ -10,9 +12,7 @@ describe('BreathingFilters', function() {
 
   beforeEach(function() {
     card = new BreathingFilters();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -20,7 +20,7 @@ describe('BreathingFilters', function() {
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 7;
+    setOxygenLevel(game, 7);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

@@ -13,7 +13,7 @@ import {played} from '../Options';
 export class TerraformingRobots extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.TERRAFORMING_ROBOTS,
       cost: 7,
       tags: [Tag.SCIENCE],

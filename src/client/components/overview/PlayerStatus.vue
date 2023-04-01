@@ -3,7 +3,7 @@
         <div class="player-status-bottom">
           <div :class="getLabelAndTimerClasses()">
             <div :class="getActionStatusClasses()"><span v-i18n>{{ actionLabel }}</span></div>
-            <div class="player-status-timer" v-if="showTimers"><player-timer :timer="timer"/></div>
+            <div class="player-status-timer" v-if="showTimer"><player-timer :timer="timer" :live="liveTimer"/></div>
           </div>
         </div>
       </div>
@@ -25,7 +25,10 @@ export default Vue.extend({
     actionLabel: {
       type: String,
     },
-    showTimers: {
+    showTimer: {
+      type: Boolean,
+    },
+    liveTimer: {
       type: Boolean,
     },
   },
@@ -37,7 +40,7 @@ export default Vue.extend({
       const classes: Array<string> = [];
       const baseClass = 'player-action-status-container';
       classes.push(baseClass);
-      if (!this.showTimers) {
+      if (!this.showTimer) {
         classes.push('no-timer');
       }
       if (this.actionLabel === ActionLabel.PASSED) {

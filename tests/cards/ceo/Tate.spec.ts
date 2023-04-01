@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {forceGenerationEnd} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -20,8 +20,7 @@ describe('Tate', function() {
   beforeEach(() => {
     card = new Tate();
     player = TestPlayer.BLUE.newPlayer();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
     player.megaCredits = 6;
   });
 

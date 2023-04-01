@@ -17,7 +17,7 @@ export class AerialMappers extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.AERIAL_MAPPERS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 11,
       resourceType: CardResource.FLOATER,

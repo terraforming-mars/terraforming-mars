@@ -8,7 +8,7 @@ export class ArchimedesHydroponicsStation extends Card {
   constructor() {
     super({
       name: CardName.ARCHIMEDES_HYDROPONICS_STATION,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.PLANT],
       cost: 12,
 

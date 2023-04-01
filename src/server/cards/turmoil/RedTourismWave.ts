@@ -16,7 +16,7 @@ export class RedTourismWave extends Card implements IProjectCard {
       cost: 3,
       tags: [Tag.EARTH],
       name: CardName.RED_TOURISM_WAVE,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
       metadata: {

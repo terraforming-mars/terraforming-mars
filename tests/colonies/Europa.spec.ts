@@ -4,6 +4,7 @@ import {PlaceOceanTile} from '../../src/server/deferredActions/PlaceOceanTile';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
+import {testGame} from '../TestGame';
 
 describe('Europa', function() {
   let europa: Europa;
@@ -13,9 +14,7 @@ describe('Europa', function() {
 
   beforeEach(function() {
     europa = new Europa();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(europa);
   });

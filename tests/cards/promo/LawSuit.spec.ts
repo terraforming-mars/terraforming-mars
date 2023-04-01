@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
@@ -13,9 +13,7 @@ describe('LawSuit', () => {
 
   beforeEach(() => {
     card = new LawSuit();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player, player2] = testGame(2);
   });
 
   it('Cannot play if no resources or production reduced this turn', () => {

@@ -37,7 +37,7 @@ export class EcologicalZone extends Card implements IProjectCard {
     },
   ) {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name,
       tags: [Tag.ANIMAL, Tag.PLANT],
       cost,

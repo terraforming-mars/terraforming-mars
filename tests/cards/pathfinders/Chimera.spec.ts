@@ -4,9 +4,8 @@ import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {AdaptationTechnology} from '../../../src/server/cards/base/AdaptationTechnology';
 import {Cartel} from '../../../src/server/cards/base/Cartel';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
 import {CardRequirements} from '../../../src/server/cards/CardRequirements';
@@ -22,12 +21,10 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 describe('Chimera', function() {
   let card: Chimera;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new Chimera();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 

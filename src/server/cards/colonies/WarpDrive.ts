@@ -13,7 +13,7 @@ export class WarpDrive extends Card implements IProjectCard {
       cost: 14,
       tags: [Tag.SCIENCE],
       name: CardName.WARP_DRIVE,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       victoryPoints: 2,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 5)),

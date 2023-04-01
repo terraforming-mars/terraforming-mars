@@ -11,10 +11,16 @@ import {digit} from '../Options';
 export class Meltworks extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MELTWORKS,
       tags: [Tag.BUILDING],
       cost: 4,
+
+      // When you're ready.
+      // action: {
+      //   spend: {heat: 5},
+      //   stock: {steel: 3},
+      // },
 
       metadata: {
         cardNumber: 'X26',

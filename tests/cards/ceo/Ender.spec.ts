@@ -6,7 +6,7 @@ import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {Ender} from '../../../src/server/cards/ceos/Ender';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Research} from '../../../src/server/cards/base/Research';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Ender', function() {
   let card: Ender;
@@ -15,8 +15,7 @@ describe('Ender', function() {
 
   beforeEach(() => {
     card = new Ender();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2);
   });
 
   it('Cannot act without cards', function() {

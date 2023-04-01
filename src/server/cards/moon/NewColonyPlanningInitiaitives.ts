@@ -9,7 +9,7 @@ export class NewColonyPlanningInitiaitives extends Card implements IProjectCard 
   constructor() {
     super({
       name: CardName.NEW_COLONY_PLANNING_INITIAITIVES,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       cost: 6,
 
       behavior: {

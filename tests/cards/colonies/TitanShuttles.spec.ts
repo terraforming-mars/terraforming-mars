@@ -7,6 +7,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('TitanShuttles', function() {
   let card: TitanShuttles;
@@ -15,9 +16,7 @@ describe('TitanShuttles', function() {
 
   beforeEach(function() {
     card = new TitanShuttles();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
 
     player.playedCards.push(card);
   });

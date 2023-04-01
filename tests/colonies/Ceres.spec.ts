@@ -3,6 +3,7 @@ import {Ceres} from '../../src/server/colonies/Ceres';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
+import {testGame} from '../TestGame';
 
 describe('Ceres', function() {
   let ceres: Ceres;
@@ -12,9 +13,7 @@ describe('Ceres', function() {
 
   beforeEach(function() {
     ceres = new Ceres();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(ceres);
   });

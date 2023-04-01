@@ -12,7 +12,7 @@ import {all} from '../Options';
 export class LunaFirstIncorporated extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.LUNA_FIRST_INCORPORATED,
       tags: [Tag.MOON],
       startingMegaCredits: 40,

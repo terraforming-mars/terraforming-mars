@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GeologicalExpedition} from '../../../src/server/cards/pathfinders/GeologicalExpedition';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {ISpace} from '../../../src/server/boards/ISpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -24,8 +24,7 @@ describe('GeologicalExpedition', function() {
 
   beforeEach(function() {
     card = new GeologicalExpedition();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
     game.board = EmptyBoard.newInstance();
     space = game.board.getAvailableSpacesOnLand(player)[0];
     microbeCard = fakeCard({resourceType: CardResource.MICROBE});

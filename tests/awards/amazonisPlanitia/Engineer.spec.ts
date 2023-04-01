@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {fail} from 'assert';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {Engineer} from '../../../src/server/awards/amazonisPlanitia/Engineer';
 import {TestPlayer} from '../../TestPlayer';
 import {CardFinder} from '../../../src/server/CardFinder';
@@ -15,9 +15,7 @@ describe('Engineer', () => {
 
   beforeEach(() => {
     award = new Engineer();
-    player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('score', () => {

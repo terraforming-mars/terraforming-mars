@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
 import {Game} from '../../../src/server/Game';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -15,8 +15,7 @@ describe('CrewTraining', function() {
 
   beforeEach(function() {
     card = new CrewTraining();
-    game = newTestGame(1, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {pathfindersExpansion: true});
   });
 
   it('Should play', function() {

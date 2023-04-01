@@ -1,20 +1,21 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {Resources} from '../../../common/Resources';
+import {ActionCard} from '../ActionCard';
 
-export class HE3Refinery extends Card implements IProjectCard {
+export class HE3Refinery extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.HE3_REFINERY,
       cost: 8,
       tags: [Tag.MOON],
+
+      action: {
+        stock: {megacredits: {moon: {miningRate: {}}}},
+      },
 
       metadata: {
         cardNumber: 'M49',
@@ -26,14 +27,5 @@ export class HE3Refinery extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public canAct() {
-    return true;
-  }
-
-  public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, MoonExpansion.moonData(player.game).miningRate, {log: true});
-    return undefined;
   }
 }

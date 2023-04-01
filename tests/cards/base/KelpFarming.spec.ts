@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {KelpFarming} from '../../../src/server/cards/base/KelpFarming';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('KelpFarming', function() {
   let card: KelpFarming;
@@ -10,9 +10,7 @@ describe('KelpFarming', function() {
 
   beforeEach(function() {
     card = new KelpFarming();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {

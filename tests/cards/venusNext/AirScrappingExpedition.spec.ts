@@ -4,14 +4,13 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {AirScrappingExpedition} from '../../../src/server/cards/venusNext/AirScrappingExpedition';
 import {JetStreamMicroscrappers} from '../../../src/server/cards/venusNext/JetStreamMicroscrappers';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('AirScrappingExpedition', function() {
   it('No cards', function() {
     const card = new AirScrappingExpedition();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(2);
 
     expect(card.play(player)).is.undefined;
 
@@ -21,8 +20,7 @@ describe('AirScrappingExpedition', function() {
   it('One option', function() {
     const card = new AirScrappingExpedition();
     const corp = new Celestic(); // Stores floaters, has Venus tag.
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(2);
     player.setCorporationForTest(corp);
 
     expect(card.play(player)).is.undefined;
@@ -35,8 +33,7 @@ describe('AirScrappingExpedition', function() {
     const card = new AirScrappingExpedition();
     const celestic = new Celestic(); // Stores floaters. has Venus tag
     const jsr = new JetStreamMicroscrappers(); // Stores floaters, has Venus tag.
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(2);
     player.setCorporationForTest(celestic);
     player.playedCards.push(jsr);
 

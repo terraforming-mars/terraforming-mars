@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SelectPayment} from '../../src/server/inputs/SelectPayment';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {Payment} from '../../src/common/inputs/Payment';
 
 describe('SelectPayment', function() {
@@ -13,8 +13,7 @@ describe('SelectPayment', function() {
   };
 
   beforeEach(() => {
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Simple', function() {

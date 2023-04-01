@@ -105,6 +105,10 @@ export class MessageBuilder {
     return this;
   }
 
+  public static of(message: string) {
+    return new MessageBuilder(message);
+  }
+
   public getMessage(): Message {
     return this.message;
   }

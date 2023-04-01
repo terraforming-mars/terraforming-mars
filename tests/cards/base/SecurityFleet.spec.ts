@@ -1,6 +1,8 @@
 import {expect} from 'chai';
 import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
+import {runAllActions} from '../../TestingUtils';
 
 describe('SecurityFleet', function() {
   let card: SecurityFleet;
@@ -8,7 +10,7 @@ describe('SecurityFleet', function() {
 
   beforeEach(function() {
     card = new SecurityFleet();
-    player = TestPlayer.BLUE.newPlayer();
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not act if no titanium', function() {
@@ -21,6 +23,7 @@ describe('SecurityFleet', function() {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
+    runAllActions(player.game);
     expect(player.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(1);
   });

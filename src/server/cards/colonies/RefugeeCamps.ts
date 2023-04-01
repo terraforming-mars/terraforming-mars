@@ -1,23 +1,26 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 
-export class RefugeeCamps extends Card implements IProjectCard {
+export class RefugeeCamps extends ActionCard implements IProjectCard {
   constructor() {
     super({
       cost: 10,
       tags: [Tag.EARTH],
       name: CardName.REFUGEE_CAMPS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.CAMP,
       victoryPoints: VictoryPoints.resource(1, 1),
+
+      action: {
+        production: {megacredits: -1},
+        addResources: 1,
+      },
 
       metadata: {
         cardNumber: 'C33',
@@ -30,17 +33,6 @@ export class RefugeeCamps extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-
-  public canAct(player: Player): boolean {
-    return player.production.megacredits >= -4;
-  }
-
-  public action(player: Player) {
-    player.production.add(Resources.MEGACREDITS, -1);
-    player.addResourceTo(this, 1);
-    return undefined;
   }
 }
 

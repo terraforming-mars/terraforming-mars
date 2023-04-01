@@ -5,7 +5,7 @@ import {EconomicEspionage} from '../../../src/server/cards/pathfinders/EconomicE
 import {AddResourcesToCard} from '../../../src/server/deferredActions/AddResourcesToCard';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 
 describe('IapetusII', function() {
@@ -18,9 +18,7 @@ describe('IapetusII', function() {
   beforeEach(function() {
     iapetusII = new IapetusII();
     lunarObservationPost = new LunarObservationPost();
-    game = newTestGame(2, {coloniesExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {coloniesExtension: true});
     game.colonies = [iapetusII];
   });
 

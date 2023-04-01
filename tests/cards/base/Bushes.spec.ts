@@ -1,7 +1,9 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Bushes', function() {
   let card: Bushes;
@@ -10,9 +12,7 @@ describe('Bushes', function() {
 
   beforeEach(function() {
     card = new Bushes();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -20,7 +20,7 @@ describe('Bushes', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = -10;
+    setTemperature(game, -10);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

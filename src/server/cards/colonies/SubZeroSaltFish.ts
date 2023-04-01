@@ -1,23 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
-export class SubZeroSaltFish extends Card implements IProjectCard {
+export class SubZeroSaltFish extends ActionCard implements IProjectCard {
   constructor() {
     super({
       cost: 5,
       tags: [Tag.ANIMAL],
       name: CardName.SUBZERO_SALT_FISH,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 2),
@@ -25,6 +24,10 @@ export class SubZeroSaltFish extends Card implements IProjectCard {
 
       behavior: {
         decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+      },
+
+      action: {
+        addResources: 1,
       },
 
       metadata: {
@@ -42,15 +45,5 @@ export class SubZeroSaltFish extends Card implements IProjectCard {
         },
       },
     });
-  }
-
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
   }
 }

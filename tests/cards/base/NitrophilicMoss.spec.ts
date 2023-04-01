@@ -1,8 +1,8 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {NitrophilicMoss} from '../../../src/server/cards/base/NitrophilicMoss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
-import {Game} from '../../../src/server/Game';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -12,9 +12,7 @@ describe('NitrophilicMoss', function() {
 
   beforeEach(function() {
     card = new NitrophilicMoss();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play without enough oceans', function() {

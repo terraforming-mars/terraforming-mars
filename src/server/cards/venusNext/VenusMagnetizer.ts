@@ -1,20 +1,23 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 
-export class VenusMagnetizer extends Card implements IActionCard {
+export class VenusMagnetizer extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.VENUS_MAGNETIZER,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 7,
+
+      action: {
+        production: {energy: -1},
+        global: {venus: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.venus(10)),
       metadata: {
@@ -27,13 +30,5 @@ export class VenusMagnetizer extends Card implements IActionCard {
         description: 'Requires Venus 10%.',
       },
     });
-  }
-  public canAct(player: Player): boolean {
-    return player.production.energy > 0 && player.canAfford(0, {tr: {venus: 1}});
-  }
-  public action(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
-    player.game.increaseVenusScaleLevel(player, 1);
-    return undefined;
   }
 }

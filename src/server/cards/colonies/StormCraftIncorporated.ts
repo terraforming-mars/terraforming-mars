@@ -21,7 +21,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
       tags: [Tag.JOVIAN],
       startingMegaCredits: 48,
       resourceType: CardResource.FLOATER,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       metadata: {
         cardNumber: 'R29',
         description: 'You start with 48 M€.',

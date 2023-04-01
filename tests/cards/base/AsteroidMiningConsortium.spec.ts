@@ -5,6 +5,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('AsteroidMiningConsortium', function() {
   let card: AsteroidMiningConsortium;
@@ -14,10 +15,7 @@ describe('AsteroidMiningConsortium', function() {
 
   beforeEach(function() {
     card = new AsteroidMiningConsortium();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
-    player.popSelectInitialCards();
+    [game, player, player2] = testGame(2);
   });
 
   it('Cannot play if no titanium production', function() {

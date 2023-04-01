@@ -6,7 +6,6 @@ import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 import {Tags} from '../src/server/player/Tags';
-import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 
 class TestPlayerFactory {
   constructor(private color: Color) {}
@@ -85,14 +84,6 @@ export class TestPlayer extends Player {
     this.waitingFor = undefined;
     this.waitingForCb = undefined;
     return waitingFor;
-  }
-
-  /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
-  public popSelectInitialCards(): PlayerInput | undefined {
-    if (this.getWaitingFor() instanceof SelectInitialCards) {
-      return this.popWaitingFor();
-    }
-    return undefined;
   }
 
   public setCorporationForTest(card: ICorporationCard | undefined) {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('LunarBeam', function() {
   let card: LunarBeam;
@@ -10,8 +10,7 @@ describe('LunarBeam', function() {
 
   beforeEach(function() {
     card = new LunarBeam();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can play', function() {

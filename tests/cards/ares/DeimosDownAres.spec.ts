@@ -7,8 +7,8 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {testGame} from '../../TestGame';
 
 describe('DeimosDownAres', function() {
   let card: DeimosDownAres;
@@ -18,14 +18,23 @@ describe('DeimosDownAres', function() {
 
   beforeEach(() => {
     card = new DeimosDownAres();
-    game = newTestGame(2, ARES_OPTIONS_NO_HAZARDS);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
   });
 
+  // Identical to the Deimos Down Promo test
+  it('Should play without plants', function() {
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace);
+    expect(player.game.getTemperature()).to.eq(-24);
+    expect(player.steel).to.eq(4);
+    const input = player.game.deferredActions.peek()!.execute();
+    expect(input).is.undefined;
+  });
+
+  // Identical to the Deimos Down Promo test
   it('Can remove plants', function() {
-    player.plants = 0;
-    player2.plants = 8;
+    player2.plants = 5;
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -35,13 +44,28 @@ describe('DeimosDownAres', function() {
 
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    // Choose Remove 6 plants option
+    // Choose Remove 5 plants option
     const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb([player2]);
 
-    expect(player2.plants).to.eq(2);
+    expect(player2.plants).to.eq(0);
   });
 
+  // Identical to the Deimos Down Promo test
+  it('Works fine in solo mode', function() {
+    game = Game.newInstance('gameid', [player], player);
+
+    player.plants = 15;
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace);
+
+    expect(player.game.getTemperature()).to.eq(-24);
+    expect(player.steel).to.eq(4);
+    expect(player.plants).to.eq(15); // not removed
+  });
+
+  // Identical to the Deimos Down Promo test
   it('Adjacency bonus', function() {
     card.play(player);
     runAllActions(game);

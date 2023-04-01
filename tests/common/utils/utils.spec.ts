@@ -55,4 +55,15 @@ describe('utils', function() {
     expect(utils.sum([1, 4])).eq(5);
     expect(utils.sum([1, 4, -6])).eq(-1);
   });
+
+  it('zip', () => {
+    const a1 = ['a', 'b', 'c'];
+    const b1 = [5, 4, 2];
+    const zipped: Array<[string, number]> = utils.zip(a1, b1);
+    expect(zipped).deep.eq([
+      ['a', 5],
+      ['b', 4],
+      ['c', 2],
+    ]);
+  });
 });

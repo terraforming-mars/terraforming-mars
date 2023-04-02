@@ -1,6 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
@@ -16,7 +15,7 @@ export class Penguins extends ActionCard implements IProjectCard {
       tags: [Tag.ANIMAL],
       cost: 7,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
 
       action: {
         addResources: 1,

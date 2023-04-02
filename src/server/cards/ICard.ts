@@ -33,15 +33,6 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
   return object.getCheckLoops !== undefined;
 }
 
-export namespace VictoryPoints {
-  export function resource(points: number, per: number): IVictoryPoints {
-    return {type: 'resource', points, per};
-  }
-  export function tags(tag: Tag, points: number, per: number): IVictoryPoints {
-    return {type: tag, points, per};
-  }
-}
-
 export type DynamicTRSource = (player: Player) => TRSource;
 
 export interface ICard {

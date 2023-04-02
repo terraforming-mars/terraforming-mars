@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class JovianLanterns extends Card implements IProjectCard {
@@ -18,7 +17,7 @@ export class JovianLanterns extends Card implements IProjectCard {
       type: CardType.ACTIVE,
 
       resourceType: CardResource.FLOATER,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {type: 'resource', points: 1, per: 2},
       requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
 
       behavior: {

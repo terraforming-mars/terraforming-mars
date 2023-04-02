@@ -8,7 +8,6 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 
 export class StratosphericBirds extends ActionCard implements IActionCard {
   constructor() {
@@ -18,7 +17,7 @@ export class StratosphericBirds extends ActionCard implements IActionCard {
       tags: [Tag.VENUS, Tag.ANIMAL],
       cost: 12,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
       requirements: CardRequirements.builder((b) => b.venus(12)),
 
       action: {

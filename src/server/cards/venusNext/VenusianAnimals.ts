@@ -7,7 +7,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {played} from '../Options';
 
 export class VenusianAnimals extends Card implements IProjectCard {
@@ -18,7 +17,7 @@ export class VenusianAnimals extends Card implements IProjectCard {
       tags: [Tag.VENUS, Tag.ANIMAL, Tag.SCIENCE],
       cost: 15,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
 
       requirements: CardRequirements.builder((b) => b.venus(18)),
       metadata: {

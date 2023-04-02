@@ -1,7 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
@@ -16,7 +15,7 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
       tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 50,
 
-      victoryPoints: VictoryPoints.tags(Tag.MOON, 1, 3),
+      victoryPoints: {type: Tag.MOON, points: 1, per: 3},
 
       metadata: {
         description: 'You start with 50 M€. 1 VP for every 3 Moon tags you have.',

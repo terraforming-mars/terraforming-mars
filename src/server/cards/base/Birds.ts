@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
@@ -20,7 +19,7 @@ export class Birds extends ActionCard implements IProjectCard {
 
       resourceType: CardResource.ANIMAL,
       requirements: CardRequirements.builder((b) => b.oxygen(13)),
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
 
       behavior: {
         decreaseAnyProduction: {type: Resources.PLANTS, count: 2},

@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -23,7 +22,7 @@ export class MartianRepository extends Card implements IProjectCard {
         production: {energy: -1},
       },
 
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
 
       metadata: {
         cardNumber: 'Pf29',

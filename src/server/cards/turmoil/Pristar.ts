@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -16,7 +15,7 @@ export class Pristar extends Card implements ICorporationCard {
       resourceType: CardResource.PRESERVATION,
       type: CardType.CORPORATION,
 
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
 
       metadata: {
         cardNumber: 'R07',

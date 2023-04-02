@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
@@ -19,7 +18,7 @@ export class SmallAnimals extends ActionCard implements IProjectCard {
       cost: 6,
 
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {type: 'resource', points: 1, per: 2},
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
 
       behavior: {

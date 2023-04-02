@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -20,7 +19,7 @@ export class Decomposers extends Card implements IProjectCard {
       cost: 5,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
       requirements: CardRequirements.builder((b) => b.oxygen(3)),
 
       metadata: {

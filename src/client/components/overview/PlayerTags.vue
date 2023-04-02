@@ -1,27 +1,27 @@
 <template>
-        <div class="player-tags">
-            <div class="player-tags-main">
-                <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
-                <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
-                  <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
-                </div>
-                <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
-                <div class="tag-and-discount">
-                  <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
-                  <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
-                </div>
+    <div class="player-tags">
+        <div class="player-tags-main">
+            <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
+            <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
+              <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
             </div>
-            <div class="player-tags-secondary">
-              <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
-                <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
-                  <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
-                  <PointsPerTag v-if="getVPs(tagDetail) !== ''" :amount="getVPs(tagDetail)" :data-test="'vps-' + tagDetail.name" />
-                  <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
-                </div>
-                <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
-              </div>
+            <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
+            <div class="tag-and-discount">
+              <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
+              <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
             </div>
         </div>
+        <div class="player-tags-secondary">
+          <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
+            <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
+              <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
+              <PointsPerTag v-if="getVPs(tagDetail) !== ''" :amount="getVPs(tagDetail)" :data-test="'vps-' + tagDetail.name" />
+              <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
+            </div>
+            <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
+          </div>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">

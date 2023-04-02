@@ -11,7 +11,6 @@ import {IActionCard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 
 export class CopernicusTower extends Card implements IActionCard, IProjectCard {
@@ -24,7 +23,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
 
       resourceType: CardResource.SCIENCE,
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
-      victoryPoints: VictoryPoints.tags(Tag.MOON, 1, 1),
+      victoryPoints: {type: Tag.MOON, points: 1, per: 1},
 
       metadata: {
         cardNumber: 'M72',

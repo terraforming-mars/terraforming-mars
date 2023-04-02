@@ -5,6 +5,7 @@ import {BiofertilizerFacility} from './BiofertilizerFacility';
 import {ButterflyEffect} from './ButterflyEffect';
 import {CapitalAres} from './CapitalAres';
 import {CommercialDistrictAres} from './CommercialDistrictAres';
+import {DeimosDownAres} from './DeimosDownAres';
 import {DesperateMeasures} from './DesperateMeasures';
 import {EcologicalSurvey} from './EcologicalSurvey';
 import {EcologicalZoneAres} from './EcologicalZoneAres';
@@ -33,6 +34,7 @@ export const ARES_CARD_MANIFEST = new ModuleManifest({
     [CardName.BUTTERFLY_EFFECT]: {Factory: ButterflyEffect},
     [CardName.CAPITAL_ARES]: {Factory: CapitalAres},
     [CardName.COMMERCIAL_DISTRICT_ARES]: {Factory: CommercialDistrictAres},
+    [CardName.DEIMOS_DOWN_ARES]: {Factory: DeimosDownAres},
     [CardName.DESPERATE_MEASURES]: {Factory: DesperateMeasures},
     [CardName.ECOLOGICAL_SURVEY]: {Factory: EcologicalSurvey},
     [CardName.ECOLOGICAL_ZONE_ARES]: {Factory: EcologicalZoneAres},
@@ -56,6 +58,8 @@ export const ARES_CARD_MANIFEST = new ModuleManifest({
   cardsToRemove: [
     CardName.CAPITAL,
     CardName.COMMERCIAL_DISTRICT,
+    CardName.DEIMOS_DOWN,
+    CardName.DEIMOS_DOWN_PROMO,
     CardName.ECOLOGICAL_ZONE,
     CardName.GREAT_DAM,
     CardName.GREAT_DAM_PROMO,

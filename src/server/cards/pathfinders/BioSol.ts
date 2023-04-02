@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard, VictoryPoints} from '../ICard';
+import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
@@ -17,7 +17,7 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
       tags: [Tag.MICROBE],
       startingMegaCredits: 42,
       resourceType: CardResource.MICROBE,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
 
       firstAction: {
         text: 'Draw 2 cards with a microbe tag',

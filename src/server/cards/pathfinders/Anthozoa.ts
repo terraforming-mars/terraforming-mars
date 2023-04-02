@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard, VictoryPoints} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
@@ -19,7 +19,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
       tags: [Tag.PLANT, Tag.ANIMAL, Tag.MARS],
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {type: 'resource', points: 1, per: 2},
 
       metadata: {
         cardNumber: 'Pf55',

@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Resources} from '../../../common/Resources';
@@ -27,7 +26,7 @@ export class Fish extends ActionCard implements IProjectCard {
       },
 
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
       requirements: CardRequirements.builder((b) => b.temperature(2)),
 
       metadata: {

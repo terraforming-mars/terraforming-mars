@@ -1,6 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
@@ -22,7 +21,7 @@ export class AsteroidHollowing extends ActionCard implements IProjectCard {
         addResources: 1,
       },
 
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {type: 'resource', points: 1, per: 2},
 
       metadata: {
         cardNumber: 'X15',

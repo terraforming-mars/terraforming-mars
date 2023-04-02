@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
-import {VictoryPoints} from '../ICard';
 
 export class PrideoftheEarthArkship extends ActionCard implements IActionCard {
   constructor() {
@@ -18,7 +17,7 @@ export class PrideoftheEarthArkship extends ActionCard implements IActionCard {
       cost: 22,
 
       resourceType: CardResource.SCIENCE,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.SPACE, 2)),
       reserveUnits: {titanium: 2},
 

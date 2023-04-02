@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
 import {CardName} from '../../../common/cards/CardName';
@@ -15,7 +14,7 @@ export class GanymedeColony extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE, Tag.CITY],
       cost: 20,
 
-      victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
+      victoryPoints: {type: Tag.JOVIAN, points: 1, per: 1},
       behavior: {
         city: {space: SpaceName.GANYMEDE_COLONY},
       },

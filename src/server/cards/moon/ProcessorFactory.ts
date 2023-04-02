@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 
 export class ProcessorFactory extends ActionCard implements IProjectCard {
   constructor() {
@@ -21,7 +20,7 @@ export class ProcessorFactory extends ActionCard implements IProjectCard {
       },
 
       resourceType: CardResource.DATA,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
 
       metadata: {
         cardNumber: 'M86',

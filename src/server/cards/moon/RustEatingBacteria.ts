@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 
 export class RustEatingBacteria extends ActionCard implements IProjectCard {
   constructor() {
@@ -16,7 +15,7 @@ export class RustEatingBacteria extends ActionCard implements IProjectCard {
       cost: 7,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
 
       action: {
         spend: {steel: 1},

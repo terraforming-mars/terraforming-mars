@@ -9,7 +9,6 @@ import {Player} from '../../Player';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 
 export class NanotechIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
@@ -25,7 +24,7 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
         drawCard: {count: 3, keep: 2},
       },
 
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {type: 'resource', points: 1, per: 2},
 
       metadata: {
         cardNumber: 'MC1',

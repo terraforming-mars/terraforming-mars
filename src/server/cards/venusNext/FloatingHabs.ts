@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 
 export class FloatingHabs extends ActionCard implements IActionCard {
   constructor() {
@@ -17,7 +16,7 @@ export class FloatingHabs extends ActionCard implements IActionCard {
       cost: 5,
 
       resourceType: CardResource.FLOATER,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {type: 'resource', points: 1, per: 2},
 
       action: {
         spend: {

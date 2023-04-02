@@ -7,7 +7,6 @@ import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all} from '../Options';
-import {VictoryPoints} from '../ICard';
 
 export class AncientShipyards extends Card {
   constructor() {
@@ -18,7 +17,7 @@ export class AncientShipyards extends Card {
       cost: 6,
 
       resourceType: CardResource.RESOURCE_CUBE,
-      victoryPoints: VictoryPoints.resource(-1, 1),
+      victoryPoints: {type: 'resource', points: -1, per: 1},
       reserveUnits: {titanium: 3},
 
       metadata: {

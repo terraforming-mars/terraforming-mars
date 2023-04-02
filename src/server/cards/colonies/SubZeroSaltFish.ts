@@ -7,7 +7,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
 export class SubZeroSaltFish extends ActionCard implements IProjectCard {
@@ -19,7 +18,7 @@ export class SubZeroSaltFish extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
 
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {type: 'resource', points: 1, per: 2},
       requirements: CardRequirements.builder((b) => b.temperature(-6)),
 
       behavior: {

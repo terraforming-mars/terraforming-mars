@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
 export class LunaSenate extends Card implements IProjectCard {
@@ -15,7 +14,7 @@ export class LunaSenate extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.MOON],
       cost: 32,
-      victoryPoints: VictoryPoints.tags(Tag.MOON, 1, 1),
+      victoryPoints: {type: Tag.MOON, points: 1, per: 1},
 
       behavior: {
         production: {megacredits: {tag: Tag.MOON, all: true}},

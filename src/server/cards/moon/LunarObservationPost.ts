@@ -7,7 +7,6 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 
 export class LunarObservationPost extends Card implements IActionCard {
   constructor() {
@@ -18,7 +17,7 @@ export class LunarObservationPost extends Card implements IActionCard {
       cost: 7,
 
       resourceType: CardResource.DATA,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
       reserveUnits: {titanium: 1},
 
       metadata: {

@@ -1,5 +1,4 @@
 import {VictoryPoints} from '../ICard';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';

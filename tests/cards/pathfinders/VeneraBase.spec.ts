@@ -15,7 +15,7 @@ import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '../../TestingUtils';
+import {cast, churnAction} from '../../TestingUtils';
 
 describe('VeneraBase', function() {
   let card: VeneraBase;
@@ -71,9 +71,7 @@ describe('VeneraBase', function() {
   it('action', function() {
     player.playedCards = [venusFloater, venusFloater2, data, nonVenusFloater];
 
-    card.action(player);
-
-    const selectCard = cast(game.deferredActions.pop()?.execute(), SelectCard);
+    const selectCard = cast(churnAction(card, player), SelectCard);
     expect(selectCard.cards).to.have.members([venusFloater, venusFloater2]);
 
     selectCard.cb([venusFloater]);

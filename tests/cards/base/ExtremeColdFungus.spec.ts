@@ -11,12 +11,11 @@ import {testGame} from '../../TestGame';
 describe('ExtremeColdFungus', () => {
   let card: ExtremeColdFungus;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new ExtremeColdFungus();
-    [game, player, player2] = testGame(2);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', () => {

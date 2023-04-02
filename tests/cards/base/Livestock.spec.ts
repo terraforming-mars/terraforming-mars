@@ -38,7 +38,7 @@ describe('Livestock', function() {
     expect(player.production.megacredits).to.eq(2);
 
     player.addResourceTo(card, 4);
-    expect(card.getVictoryPoints()).to.eq(4);
+    expect(card.getVictoryPoints(player)).to.eq(4);
   });
 
   it('Should act', function() {

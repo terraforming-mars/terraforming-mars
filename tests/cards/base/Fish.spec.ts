@@ -56,6 +56,6 @@ describe('Fish', function() {
 
   it('Should give victory points', function() {
     player.addResourceTo(card, 5);
-    expect(card.getVictoryPoints()).to.eq(card.resourceCount);
+    expect(card.getVictoryPoints(player)).to.eq(card.resourceCount);
   });
 });

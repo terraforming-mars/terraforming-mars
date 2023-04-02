@@ -38,10 +38,10 @@ describe('AsteroidHollowing', function() {
     player.titanium = 2;
 
     expect(churnAction(card, player)).is.undefined;
-    expect(card.getVictoryPoints()).to.eq(0);
+    expect(card.getVictoryPoints(player)).to.eq(0);
 
     expect(churnAction(card, player)).eq(undefined);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

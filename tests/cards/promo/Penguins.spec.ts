@@ -39,6 +39,6 @@ describe('Penguins', function() {
     runAllActions(game);
     card.action(player);
     runAllActions(game);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

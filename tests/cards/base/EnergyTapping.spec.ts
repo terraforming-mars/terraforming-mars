@@ -51,6 +51,6 @@ describe('EnergyTapping', function() {
     expect(player.popWaitingFor()).is.undefined;
 
     expect(player.production.energy).to.eq(1);
-    expect(card.getVictoryPoints()).to.eq(-1);
+    expect(card.getVictoryPoints(player)).to.eq(-1);
   });
 });

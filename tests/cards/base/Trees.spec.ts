@@ -27,6 +27,6 @@ describe('Trees', function() {
     expect(player.production.plants).to.eq(3);
     expect(player.plants).to.eq(1);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

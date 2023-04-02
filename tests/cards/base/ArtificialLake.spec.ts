@@ -36,7 +36,7 @@ describe('ArtificialLake', function() {
     const placedTile = action.availableSpaces[0].tile;
     expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Cannot place ocean if all oceans are already placed', function() {

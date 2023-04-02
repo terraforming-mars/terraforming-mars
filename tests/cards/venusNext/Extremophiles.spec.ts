@@ -43,6 +43,6 @@ describe('Extremophiles', function() {
 
   it('Gives victory points', function() {
     player.addResourceTo(card, 7);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

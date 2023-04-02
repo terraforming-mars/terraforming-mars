@@ -13,7 +13,7 @@ describe('VenusWaystation', function() {
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(card.getCardDiscount(player, card2)).to.eq(2);
     expect(card.getCardDiscount(player, card3)).to.eq(4);
   });

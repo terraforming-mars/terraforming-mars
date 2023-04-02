@@ -23,6 +23,6 @@ describe('InterstellarColonyShip', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(4);
+    expect(card.getVictoryPoints(player)).to.eq(4);
   });
 });

@@ -49,9 +49,9 @@ describe('SmallAnimals', function() {
 
   it('Gives victory points', function() {
     player.addResourceTo(card, 3);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
 
     player.addResourceTo(card);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

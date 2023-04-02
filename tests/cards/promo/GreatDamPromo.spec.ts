@@ -24,7 +24,7 @@ describe('GreatDamPromo', function() {
 
     cast(churnPlay(card, player), SelectSpace);
     expect(player.production.energy).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Works with Ares', function() {
@@ -32,6 +32,6 @@ describe('GreatDamPromo', function() {
 
     cast(churnPlay(card, player), SelectSpace);
     expect(player.production.energy).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

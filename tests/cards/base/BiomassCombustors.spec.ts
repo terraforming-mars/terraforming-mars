@@ -44,6 +44,6 @@ describe('BiomassCombustors', function() {
     expect(player.production.energy).to.eq(2);
     expect(player2.production.plants).to.eq(0);
 
-    expect(card.getVictoryPoints()).to.eq(-1);
+    expect(card.getVictoryPoints(player)).to.eq(-1);
   });
 });

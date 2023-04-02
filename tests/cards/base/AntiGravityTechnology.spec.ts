@@ -20,7 +20,7 @@ describe('AntiGravityTechnology', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(3);
+    expect(card.getVictoryPoints(player)).to.eq(3);
     expect(card.getCardDiscount()).to.eq(2);
   });
 });

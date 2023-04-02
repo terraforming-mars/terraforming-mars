@@ -19,7 +19,7 @@ describe('LargeConvoy', function() {
   it('Should play without animal cards', function() {
     card.play(player);
 
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.plants).to.eq(5);
   });
@@ -46,7 +46,7 @@ describe('LargeConvoy', function() {
 
     const action = cast(card.play(player), OrOptions);
 
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.plants).to.eq(0);
 
@@ -63,7 +63,7 @@ describe('LargeConvoy', function() {
 
     const action = cast(card.play(player), OrOptions);
 
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(cardsInHand + 2);
 
     action.options[0].cb();

@@ -32,7 +32,7 @@ describe('EcologicalZoneAres', function() {
 
     card.onCardPlayed(player, card);
     expect(card.resourceCount).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(adjacentSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.ANIMAL]});
   });
 });

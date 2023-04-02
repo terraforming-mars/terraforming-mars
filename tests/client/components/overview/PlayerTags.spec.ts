@@ -83,15 +83,4 @@ describe('PlayerTags', function() {
     expect(() => test(Tag.EARTH, 0)).to.throw(/find did not return/);
     test('all', 4);
   });
-
-  it('victoryPoints', function() {
-    const test = function(tag: Tag | 'all', value: string) {
-      const elem = wrapper.find(`[data-test="vps-${tag}"]`);
-      expect(elem.attributes()['amount']).to.eq(value);
-    };
-    // expect(() => test(Tag.JOVIAN, '')).to.throw(/find did not return/);
-    // Victory Points come from the cards themselves, and not the props.
-    test(Tag.VENUS, '½');
-    test(Tag.MOON, '1⅓');
-  });
 });

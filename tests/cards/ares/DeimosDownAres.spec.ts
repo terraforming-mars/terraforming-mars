@@ -65,7 +65,6 @@ describe('DeimosDownAres', function() {
     expect(player.plants).to.eq(15); // not removed
   });
 
-  // Identical to the Deimos Down Promo test
   it('Adjacency bonus', function() {
     card.play(player);
     runAllActions(game);

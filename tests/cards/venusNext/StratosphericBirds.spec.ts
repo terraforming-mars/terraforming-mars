@@ -63,7 +63,7 @@ describe('StratosphericBirds', () => {
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card, 7);
-    expect(card.getVictoryPoints()).to.eq(8);
+    expect(card.getVictoryPoints(player)).to.eq(8);
   });
 
   it('Allows to choose card to remove floater from', () => {

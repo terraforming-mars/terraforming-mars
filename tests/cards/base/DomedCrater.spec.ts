@@ -42,7 +42,7 @@ describe('DomedCrater', function() {
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });
 

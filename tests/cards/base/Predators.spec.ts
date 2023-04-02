@@ -34,7 +34,7 @@ describe('Predators', function() {
     card.play(player);
 
     player.addResourceTo(card, 5);
-    expect(card.getVictoryPoints()).to.eq(5);
+    expect(card.getVictoryPoints(player)).to.eq(5);
   });
 
   it('Should act', function() {

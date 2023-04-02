@@ -207,8 +207,7 @@ export abstract class Card {
   public bespokeOnDiscard(_player: Player): void {
   }
 
-  // player is optional to support historical tests.
-  public getVictoryPoints(player?: Player): number {
+  public getVictoryPoints(player: Player): number {
     const vp1 = this.properties.victoryPoints;
     if (vp1 === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
@@ -221,7 +220,7 @@ export abstract class Card {
         return vp1.points * Math.floor(this.resourceCount / vp1.per);
       } else {
         const tag = vp1.type;
-        const count = player?.tags.count(tag, 'vps') ?? 0;
+        const count = player.tags.count(tag, 'vps') ?? 0;
         return vp1.points * Math.floor(count / vp1.per);
       }
     }

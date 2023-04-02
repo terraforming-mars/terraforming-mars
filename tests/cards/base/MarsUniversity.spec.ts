@@ -46,7 +46,7 @@ describe('MarsUniversity', function() {
 
   it('Gives victory point', function() {
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Runs twice for multiple science tags', function() {

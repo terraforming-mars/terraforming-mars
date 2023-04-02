@@ -23,6 +23,6 @@ describe('QuantumCommunications', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.production.megacredits).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

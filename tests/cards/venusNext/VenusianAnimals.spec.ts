@@ -33,6 +33,6 @@ describe('VenusianAnimals', function() {
     card.onCardPlayed(player, new Research());
     expect(card.resourceCount).to.eq(3);
 
-    expect(card.getVictoryPoints()).to.eq(3);
+    expect(card.getVictoryPoints(player)).to.eq(3);
   });
 });

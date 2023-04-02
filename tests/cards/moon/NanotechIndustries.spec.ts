@@ -49,17 +49,17 @@ describe('NanotechIndustries', () => {
 
   it('victory points', () => {
     nanotechIndustries.resourceCount = 0;
-    expect(nanotechIndustries.getVictoryPoints()).eq(0);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(0);
     nanotechIndustries.resourceCount = 1;
-    expect(nanotechIndustries.getVictoryPoints()).eq(0);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(0);
     nanotechIndustries.resourceCount = 2;
-    expect(nanotechIndustries.getVictoryPoints()).eq(1);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(1);
     nanotechIndustries.resourceCount = 3;
-    expect(nanotechIndustries.getVictoryPoints()).eq(1);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(1);
     nanotechIndustries.resourceCount = 4;
-    expect(nanotechIndustries.getVictoryPoints()).eq(2);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(2);
     nanotechIndustries.resourceCount = 5;
-    expect(nanotechIndustries.getVictoryPoints()).eq(2);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(2);
   });
 });
 

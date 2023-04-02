@@ -21,7 +21,7 @@ describe('Celestic', function() {
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
     player.addResourceTo(card, 4);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Ensure static list contains all cards that mention floaters', function() {

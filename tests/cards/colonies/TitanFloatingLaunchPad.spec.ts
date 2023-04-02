@@ -27,7 +27,7 @@ describe('TitanFloatingLaunchPad', function() {
   it('Should act', function() {
     player.playedCards.push(card);
     expect(card.canAct()).is.true;
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Should play with single targets', function() {

@@ -33,7 +33,7 @@ describe('Ants', function() {
 
     card.play(player);
     card.resourceCount += 5;
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
   it('Should action with multiple valid targets', function() {

@@ -14,7 +14,7 @@ describe('Pets', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     player.addResourceTo(card, 4);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
     addCityTile(player);
     runAllActions(game);
     expect(card.resourceCount).to.eq(6);

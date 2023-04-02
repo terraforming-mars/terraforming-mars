@@ -21,7 +21,7 @@ describe('DustSeals', function() {
   it('Should play', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });
 

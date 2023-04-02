@@ -30,7 +30,7 @@ describe('TitanAirScrapping', function() {
 
     expect(player.getTerraformRating()).to.eq(21);
     expect(card.resourceCount).to.eq(5);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
   it('Should act automatically when only one action possible', function() {

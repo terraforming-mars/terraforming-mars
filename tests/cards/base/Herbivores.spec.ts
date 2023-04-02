@@ -69,7 +69,7 @@ describe('Herbivores', () => {
     runNextAction(game);
     expect(card.resourceCount).to.eq(2); // i.e. not changed
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Should be playable in solo mode', () => {

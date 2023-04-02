@@ -42,6 +42,6 @@ describe('Birds', function() {
     card.action(player);
     runAllActions(player.game);
     expect(card.resourceCount).to.eq(1);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

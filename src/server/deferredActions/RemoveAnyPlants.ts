@@ -50,11 +50,13 @@ export class RemoveAnyPlants extends DeferredAction {
       });
     });
 
-    return new OrOptions(
+    const orOptions = new OrOptions(
       ...removalOptions,
       new SelectOption('Skip removing plants', 'Confirm', () => {
         return undefined;
       }),
     );
+    orOptions.title = this.title;
+    return orOptions;
   }
 }

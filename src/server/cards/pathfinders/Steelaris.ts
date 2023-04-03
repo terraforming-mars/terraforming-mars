@@ -9,11 +9,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../../common/TileType';
-import {GainResources} from '../../deferredActions/GainResources';
+import {GainStock} from '../../deferredActions/GainStock';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../../common/boards/SpaceType';
+import {Units} from '../../../common/Units';
 
 export class Steelaris extends Card implements ICorporationCard {
   constructor() {
@@ -51,22 +52,11 @@ export class Steelaris extends Card implements ICorporationCard {
     if (tileType === TileType.OCEAN || tileType === TileType.GREENERY) {
       return;
     }
-    // TODO(kberg): Use units to consolidate both of these into one.
     game.defer(
-      new GainResources(cardOwner, Resources.STEEL, {
-        count: 1,
+      new GainStock(cardOwner, Units.of({steel: 1, plants: 1}), {
         cb: () => game.log(
-          '${0} gained 1 ${1} from ${2}',
-          (b) => b.player(cardOwner).string(Resources.STEEL).cardName(this.name)),
-      }),
-      cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
-    );
-    game.defer(
-      new GainResources(cardOwner, Resources.PLANTS, {
-        count: 1,
-        cb: () => game.log(
-          '${0} gained 1 ${1} from ${2}',
-          (b) => b.player(cardOwner).string(Resources.PLANTS).cardName(this.name)),
+          '${0} gained 1 ${1} and 1 ${2} from ${3}',
+          (b) => b.player(cardOwner).string(Resources.STEEL).string(Resources.PLANTS).cardName(this.name)),
       }),
       cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
     );

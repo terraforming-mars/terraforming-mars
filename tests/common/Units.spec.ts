@@ -103,4 +103,11 @@ describe('Units', () => {
     expect(Units.partial({megacredits: 1})).deep.eq({megacredits: 1});
     expect(Units.partial({megacredits: -1})).deep.eq({megacredits: -1});
   });
+
+  it('values', () => {
+    expect(
+      Units.values(
+        Units.of({megacredits: -2, steel: -1, titanium: 0, plants: 1, energy: 2, heat: 3}),
+      )).deep.eq([-2, -1, 0, 1, 2, 3]);
+  });
 });

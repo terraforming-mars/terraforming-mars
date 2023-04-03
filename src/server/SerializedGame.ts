@@ -20,8 +20,7 @@ export type SerializedGame = {
     aresData?: AresData;
     awards: Array<string>;
     board: SerializedBoard;
-    // TODO(dl): Remove conditional on ceoDeck after 2023-03-20
-    ceoDeck?: SerializedDeck;
+    ceoDeck: SerializedDeck;
     currentSeed: number;
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;

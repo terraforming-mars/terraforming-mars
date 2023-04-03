@@ -1,6 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {testGameOptions} from '../../TestingUtils';
+import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CosmicRadiation} from '../../../src/server/cards/moon/CosmicRadiation';
 import {expect} from 'chai';
@@ -56,6 +56,7 @@ describe('CosmicRadiation', () => {
     player3.megaCredits = 20;
 
     card.play(player1);
+    runAllActions(player1.game);
 
     expect(player1.megaCredits).eq(6);
     expect(player2.megaCredits).eq(0);

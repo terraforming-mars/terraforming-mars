@@ -7,7 +7,6 @@ export class Engineer implements IAward {
   public readonly description = 'Most cards that directly alter your own production';
 
   public getScore(player: Player): number {
-    // TODO(kberg): should Engineer include events?
     const score = player.tableau.filter((card) => {
       if (Engineer.productionCards.includes(card.name)) return true;
 

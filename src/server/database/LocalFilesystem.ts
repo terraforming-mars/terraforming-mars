@@ -126,7 +126,6 @@ export class LocalFilesystem implements IDatabase {
   getGameIds(): Promise<Array<GameId>> {
     const gameIds: Array<GameId> = [];
 
-    // TODO(kberg): use readdir since this is expected to be async anyway.
     readdirSync(this.dbFolder, {withFileTypes: true}).forEach((dirent: Dirent) => {
       const gameId = this.asGameId(dirent);
       if (gameId !== undefined) {
@@ -196,7 +195,6 @@ export class LocalFilesystem implements IDatabase {
   public getParticipants(): Promise<Array<GameIdLedger>> {
     const gameIds: Array<GameIdLedger> = [];
 
-    // TODO(kberg): use readdir since this is expected to be async anyway.
     readdirSync(this.dbFolder, {withFileTypes: true}).forEach((dirent: Dirent) => {
       const gameId = this.asGameId(dirent);
       if (gameId !== undefined) {

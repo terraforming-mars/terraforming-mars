@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setOxygenLevel} from '../../TestingUtils';
 import {MartianSurvey} from '../../../src/server/cards/prelude/MartianSurvey';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -15,11 +16,11 @@ describe('MartianSurvey', function() {
   });
 
   it('Cannot play', () => {
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
   it('Can play', () => {
-    (game as any).oxygenLevel = 4;
+    setOxygenLevel(game, 4);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
@@ -27,7 +28,7 @@ describe('MartianSurvey', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(2);
   });
 });

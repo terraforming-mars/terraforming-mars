@@ -44,6 +44,7 @@ const tileTypeToCssClass = new Map<TileType, string>([
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial-district-ares'],
+  [TileType.DEIMOS_DOWN, 'deimos-down-ares'],
   [TileType.ECOLOGICAL_ZONE, 'ecological-zone-ares'],
   [TileType.GREAT_DAM, 'great-dam-ares'],
   [TileType.INDUSTRIAL_CENTER, 'industrial-center-ares'],

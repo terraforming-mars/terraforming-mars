@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {VictoryPoints} from '../ICard';
 
 export class EconomicEspionage extends ActionCard implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class EconomicEspionage extends ActionCard implements IProjectCard {
       cost: 8,
       tags: [Tag.EARTH],
       resourceType: CardResource.DATA,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
 
       action: {
         spend: {megacredits: 2},

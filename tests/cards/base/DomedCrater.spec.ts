@@ -5,7 +5,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('DomedCrater', function() {
   let card: DomedCrater;
@@ -14,9 +15,7 @@ describe('DomedCrater', function() {
 
   beforeEach(function() {
     card = new DomedCrater();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play without energy production', function() {
@@ -25,7 +24,7 @@ describe('DomedCrater', function() {
 
   it('Can not play if oxygen level too high', function() {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 8;
+    setOxygenLevel(game, 8);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
@@ -43,7 +42,7 @@ describe('DomedCrater', function() {
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });
 

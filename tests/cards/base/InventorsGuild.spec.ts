@@ -4,6 +4,7 @@ import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('InventorsGuild', function() {
   let card: InventorsGuild;
@@ -12,9 +13,7 @@ describe('InventorsGuild', function() {
 
   beforeEach(function() {
     card = new InventorsGuild();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {

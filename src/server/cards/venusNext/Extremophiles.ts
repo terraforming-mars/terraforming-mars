@@ -8,7 +8,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 
 export class Extremophiles extends Card implements IActionCard {
   constructor() {
@@ -18,7 +17,7 @@ export class Extremophiles extends Card implements IActionCard {
       tags: [Tag.VENUS, Tag.MICROBE],
       cost: 3,
       resourceType: CardResource.MICROBE,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
       metadata: {

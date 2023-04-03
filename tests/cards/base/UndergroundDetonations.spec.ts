@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {UndergroundDetonations} from '../../../src/server/cards/base/UndergroundDetonations';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('UndergroundDetonations', function() {
   let card: UndergroundDetonations;
@@ -10,9 +11,7 @@ describe('UndergroundDetonations', function() {
 
   beforeEach(function() {
     card = new UndergroundDetonations();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not act', function() {

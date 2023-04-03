@@ -4,7 +4,8 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('NaturalPreserve', () => {
   let card: NaturalPreserve;
@@ -13,9 +14,7 @@ describe('NaturalPreserve', () => {
 
   beforeEach(() => {
     card = new NaturalPreserve();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play if no spaces available', () => {
@@ -28,12 +27,12 @@ describe('NaturalPreserve', () => {
   });
 
   it('Cannot play if oxygen level too high', () => {
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
-    (game as any).oxygenLevel = 4;
+    setOxygenLevel(game, 4);
     expect(card.canPlay(player)).is.true;
   });
 
@@ -48,6 +47,6 @@ describe('NaturalPreserve', () => {
     expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
     expect(space.adjacency?.bonus).eq(undefined);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

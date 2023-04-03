@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {all, played} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -19,7 +18,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
       tags: [Tag.ANIMAL, Tag.MOON],
       startingMegaCredits: 38,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {type: 'resource', points: 1, per: 2},
 
       behavior: {
         // Gains the initial resource from its own tag.

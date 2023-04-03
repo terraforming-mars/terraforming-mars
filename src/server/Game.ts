@@ -1376,6 +1376,9 @@ export class Game implements Logger {
     case SpaceBonus.ENERGY:
       player.addResource(Resources.ENERGY, count, {log: true});
       break;
+    case SpaceBonus.ASTEROID:
+      this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));
+      break;
     default:
       // TODO(kberg): Remove the isProduction condition after 2022-01-01.
       // I tried this once and broke the server, so I'm wrapping it in isProduction for now.

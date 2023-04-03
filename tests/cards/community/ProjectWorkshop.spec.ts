@@ -143,7 +143,7 @@ describe('ProjectWorkshop', function() {
 
     const birds = new Birds();
     birds.resourceCount = 1;
-    expect(birds.getVictoryPoints()).eq(1);
+    expect(birds.getVictoryPoints(player)).eq(1);
 
     player.playedCards.push(smallAnimals, extremophiles, birds);
 

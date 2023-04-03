@@ -51,6 +51,7 @@ export class Warmonger implements IAward {
     CardName.MONS_INSURANCE,
     // Ares
     CardName.METALLIC_ASTEROID,
+    CardName.DEIMOS_DOWN_ARES,
     // Moon
     CardName.ANCIENT_SHIPYARDS,
     CardName.COSMIC_RADIATION,

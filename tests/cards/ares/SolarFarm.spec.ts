@@ -8,6 +8,7 @@ import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('SolarFarm', function() {
   let card: SolarFarm;
@@ -16,9 +17,7 @@ describe('SolarFarm', function() {
 
   beforeEach(function() {
     card = new SolarFarm();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    [game, player] = testGame(2, ARES_OPTIONS_WITH_HAZARDS);
   });
 
   it('Play', function() {

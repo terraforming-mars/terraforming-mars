@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {churnAction, cast} from '../../TestingUtils';
+import {churnAction, cast, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('ElectroCatapult', () => {
@@ -23,13 +23,13 @@ describe('ElectroCatapult', () => {
 
   it('Cannot play if oxygen level too high', () => {
     player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 9;
+    setOxygenLevel(game, 9);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     player.production.override({energy: 1});
-    (game as any).oxygenLevel = 8;
+    setOxygenLevel(game, 8);
     expect(card.canPlay(player)).is.true;
   });
 
@@ -38,7 +38,7 @@ describe('ElectroCatapult', () => {
     player.playCard(card);
 
     expect(player.production.energy).to.eq(0);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
   it('Should act', () => {
     player.plants = 1;

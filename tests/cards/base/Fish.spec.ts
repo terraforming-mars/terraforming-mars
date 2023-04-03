@@ -4,7 +4,8 @@ import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Fish', function() {
   let card: Fish;
@@ -14,9 +15,7 @@ describe('Fish', function() {
 
   beforeEach(function() {
     card = new Fish();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -30,7 +29,7 @@ describe('Fish', function() {
   });
 
   it('Should play - auto select if single target', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     player2.production.add(Resources.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
@@ -42,7 +41,7 @@ describe('Fish', function() {
   });
 
   it('Should play - multiple targets', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     player.production.add(Resources.PLANTS, 1);
     player2.production.add(Resources.PLANTS, 1);
 
@@ -57,6 +56,6 @@ describe('Fish', function() {
 
   it('Should give victory points', function() {
     player.addResourceTo(card, 5);
-    expect(card.getVictoryPoints()).to.eq(card.resourceCount);
+    expect(card.getVictoryPoints(player)).to.eq(card.resourceCount);
   });
 });

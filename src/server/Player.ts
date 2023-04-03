@@ -156,6 +156,10 @@ export class Player {
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
 
+  // This allows for cards to increase / decrease the number of actions a player
+  // can take per round.
+  public actionsThisRound = 2;
+
   // Stats
   public actionsTakenThisGame: number = 0;
   public victoryPointsByGeneration: Array<number> = [];
@@ -919,21 +923,24 @@ export class Player {
    *   step in the draft, and cards have to be dealt.
    */
   public askPlayerToDraft(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void {
+    let cardsToDraw = 4;
     let cardsToKeep = 1;
 
     let cards: Array<IProjectCard> = [];
     if (passedCards === undefined) {
-      if (!initialDraft) {
-        let cardsToDraw = 4;
+      if (initialDraft) {
+        cardsToDraw = 5;
+      } else {
         if (LunaProjectOffice.isActive(this)) {
           cardsToDraw = 5;
           cardsToKeep = 2;
         }
-
-        this.dealForDraft(cardsToDraw, cards);
-      } else {
-        this.dealForDraft(5, cards);
+        if (this.isCorporation(CardName.MARS_MATHS)) {
+          cardsToDraw = 5;
+          cardsToKeep = 2;
+        }
       }
+      this.dealForDraft(cardsToDraw, cards);
     } else {
       cards = passedCards;
     }
@@ -999,14 +1006,23 @@ export class Player {
 
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
-    if (!draftVariant) {
-      this.dealForDraft(LunaProjectOffice.isActive(this) ? 5 : 4, dealtCards);
-    } else {
+    let cardsToKeep = 4;
+    if (draftVariant) {
       dealtCards = this.draftedCards;
       this.draftedCards = [];
+    } else {
+      let cardsToDraw = 4;
+      if (this.isCorporation(CardName.MARS_MATHS)) {
+        cardsToDraw = 5;
+      }
+      if (LunaProjectOffice.isActive(this)) {
+        cardsToKeep = 5;
+        cardsToDraw = 5;
+      }
+      this.dealForDraft(cardsToDraw, dealtCards);
     }
 
-    const action = DrawCards.choose(this, dealtCards, {paying: true});
+    const action = DrawCards.choose(this, dealtCards, {paying: true, keepMax: cardsToKeep});
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
   }
 
@@ -1447,7 +1463,7 @@ export class Player {
 
   private endTurnOption(): PlayerInput {
     return new SelectOption('End Turn', 'End', () => {
-      this.actionsTakenThisRound = 1; // Why is this statement necessary?
+      this.actionsTakenThisRound = 1;
       this.game.log('${0} ended turn', (b) => b.player(this));
       return undefined;
     });
@@ -1506,7 +1522,7 @@ export class Player {
           return undefined;
         }),
       );
-      this.setWaitingFor(action);
+      this.setWaitingForSafely(action);
       return;
     }
 
@@ -1763,8 +1779,9 @@ export class Player {
       game.phase = Phase.ACTION;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= 2)) {
+    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.actionsThisRound)) {
       this.actionsTakenThisRound = 0;
+      this.actionsThisRound = 2;
       game.resettable = true;
       game.playerIsFinishedTakingActions();
       return;
@@ -1975,10 +1992,30 @@ export class Player {
     return this.waitingFor;
   }
   public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
+    if (this.waitingFor !== undefined) {
+      // Add a metric.
+      console.error('Overwriting a waitingFor: ' + this.waitingFor);
+    }
     this.timer.start();
     this.waitingFor = input;
     this.waitingForCb = cb;
     this.game.inputsThisRound++;
+  }
+
+  // This was only built for the Philares/Final Greenery case. Might not work elsewhere.
+  public setWaitingForSafely(input: PlayerInput, cb: () => void = () => {}): void {
+    if (this.waitingFor === undefined) {
+      this.setWaitingFor(input, cb);
+    } else {
+      const oldcb = this.waitingForCb;
+      this.waitingForCb =
+        oldcb === undefined ?
+          cb :
+          () => {
+            oldcb();
+            this.setWaitingForSafely(input, cb);
+          };
+    }
   }
 
   public serialize(): SerializedPlayer {

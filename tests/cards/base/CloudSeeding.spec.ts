@@ -5,6 +5,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('CloudSeeding', () => {
   let card: CloudSeeding;
@@ -14,9 +15,7 @@ describe('CloudSeeding', () => {
 
   beforeEach(() => {
     card = new CloudSeeding();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Cannot play if cannot reduce M€ production', () => {

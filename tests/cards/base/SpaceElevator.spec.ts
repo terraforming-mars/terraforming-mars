@@ -19,7 +19,7 @@ describe('SpaceElevator', function() {
   it('Should play', function() {
     card.play(player);
     expect(player.production.titanium).to.eq(1);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
   it('Should act', function() {

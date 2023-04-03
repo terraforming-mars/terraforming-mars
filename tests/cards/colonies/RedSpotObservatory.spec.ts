@@ -36,6 +36,6 @@ describe('RedSpotObservatory', function() {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(card.resourceCount).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

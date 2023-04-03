@@ -3,8 +3,8 @@ import {Cartel} from '../../../src/server/cards/base/Cartel';
 import {ImportedHydrogen} from '../../../src/server/cards/base/ImportedHydrogen';
 import {InterstellarColonyShip} from '../../../src/server/cards/base/InterstellarColonyShip';
 import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Cartel', function() {
   let card: Cartel;
@@ -12,9 +12,7 @@ describe('Cartel', function() {
 
   beforeEach(function() {
     card = new Cartel();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [, player] = testGame(2);
   });
 
   it('Should play', function() {

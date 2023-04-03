@@ -5,7 +5,6 @@ import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {VictoryPoints} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {ActionCard} from '../ActionCard';
 
@@ -19,7 +18,7 @@ export class CopernicusTower extends ActionCard {
 
       resourceType: CardResource.SCIENCE,
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
-      victoryPoints: VictoryPoints.tags(Tag.MOON, 1, 1),
+      victoryPoints: {type: Tag.MOON, points: 1, per: 1},
 
       action: {
         or: {

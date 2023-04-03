@@ -4,7 +4,7 @@ import {EarlyExpedition} from '../../../src/server/cards/pathfinders/EarlyExpedi
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('EarlyExpedition', function() {
@@ -20,15 +20,15 @@ describe('EarlyExpedition', function() {
   });
 
   it('canPlay', function() {
-    (game as any).temperature = -16;
+    setTemperature(game, -16);
     player.production.override({energy: 1});
     expect(card.canPlay(player)).is.false;
 
-    (game as any).temperature = -18;
+    setTemperature(game, -18);
     player.production.override({energy: 0});
     expect(card.canPlay(player)).is.false;
 
-    (game as any).temperature = -18;
+    setTemperature(game, -18);
     player.production.override({energy: 1});
     expect(card.canPlay(player)).is.true;
   });

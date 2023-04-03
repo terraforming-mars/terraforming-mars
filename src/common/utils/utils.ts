@@ -14,7 +14,7 @@ export const generateClassString = (classes: Array<string>): string => classes.j
  * Creates a range from 0 to n.
  *
  * @param {number} n maximum value in the range.
- * @return {Array<number>} an Array of numbers from 0 to n, inclusive.
+ * @return {Array<number>} an Array of numbers from 0 to n-1, inclusive.
  */
 export const range = (n: number): Array<number> => Array.from(Array(n).keys());
 
@@ -77,4 +77,13 @@ export function partition<T>(source: Array<T>, predicate: (t: T) => boolean): Ar
     result[predicate(element) ? 0 : 1].push(element);
     return result;
   }, [[], []]);
+}
+
+/**
+ * Zip two arrays of equal length.
+ *
+ * Unexpected behavior if the arrays have different length.
+ */
+export function zip<S, T>(first: Array<S>, second: Array<T>): Array<[S, T]> {
+  return first.map((e, i) => [e, second[i]]);
 }

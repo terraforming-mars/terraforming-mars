@@ -3,7 +3,8 @@ import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingB
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('GHGProducingBacteria', () => {
   let card: GHGProducingBacteria;
@@ -12,20 +13,18 @@ describe('GHGProducingBacteria', () => {
 
   beforeEach(() => {
     card = new GHGProducingBacteria();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can play', () => {
-    (game as any).oxygenLevel = 3;
+    setOxygenLevel(game, 3);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
-    (game as any).oxygenLevel = 4;
+    setOxygenLevel(game, 4);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play', () => {
-    (game as any).oxygenLevel = 4;
+    setOxygenLevel(game, 4);
     const action = card.play(player);
     expect(action).is.undefined;
   });

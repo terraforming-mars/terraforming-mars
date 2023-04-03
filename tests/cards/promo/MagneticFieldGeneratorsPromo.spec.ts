@@ -5,6 +5,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('MagneticFieldGeneratorsPromo', function() {
   let card: MagneticFieldGeneratorsPromo;
@@ -13,9 +14,7 @@ describe('MagneticFieldGeneratorsPromo', function() {
 
   beforeEach(function() {
     card = new MagneticFieldGeneratorsPromo();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play without enough energy production', function() {

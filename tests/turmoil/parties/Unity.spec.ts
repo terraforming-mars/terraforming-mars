@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/server/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
@@ -9,6 +9,7 @@ import {VestaShipyard} from '../../../src/server/cards/base/VestaShipyard';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Tag} from '../../../src/common/cards/Tag';
+import {testGame} from '../../TestGame';
 
 describe('Unity', function() {
   let player: TestPlayer;
@@ -17,8 +18,7 @@ describe('Unity', function() {
   let unity: Unity;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    [game, player] = testGame(1, {turmoilExtension: true});
     turmoil = game.turmoil!;
     unity = new Unity();
   });

@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 
 export class RefugeeCamps extends ActionCard implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class RefugeeCamps extends ActionCard implements IProjectCard {
       name: CardName.REFUGEE_CAMPS,
       type: CardType.ACTIVE,
       resourceType: CardResource.CAMP,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
 
       action: {
         production: {megacredits: -1},

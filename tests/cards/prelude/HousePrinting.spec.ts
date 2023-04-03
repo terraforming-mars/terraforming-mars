@@ -8,7 +8,7 @@ describe('HousePrinting', function() {
     const [, player] = testGame(1);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.steel).to.eq(1);
   });
 });

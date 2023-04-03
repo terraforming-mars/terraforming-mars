@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {VictoryPoints} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -19,7 +18,7 @@ export class TerraformingRobots extends Card implements IProjectCard {
       tags: [Tag.SCIENCE],
       resourceType: CardResource.SPECIALIZED_ROBOT,
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {type: 'resource', points: 1, per: 1},
 
       metadata: {
         cardNumber: 'PfTMP',

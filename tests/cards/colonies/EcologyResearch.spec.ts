@@ -32,7 +32,7 @@ describe('EcologyResearch', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.production.plants).to.eq(1);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Should play with single targets', function() {

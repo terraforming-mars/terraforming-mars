@@ -26,6 +26,7 @@ export enum SpaceBonus {
     // Amazonis-specific
     // TODO(kberg): move RESTRICTED to SpaceType?
     RESTRICTED, // 14  // RESTRICTED is just a that a space is empty, not an actual bonus.
+    ASTEROID, // 15 // Used by Deimos Down Ares
 }
 
 const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
@@ -44,6 +45,7 @@ const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
   [SpaceBonus.ENERGY_PRODUCTION, 'Energy Production'],
   [SpaceBonus.TEMPERATURE, 'Temperature'],
   [SpaceBonus.RESTRICTED, 'Restricted'],
+  [SpaceBonus.ASTEROID, 'Asteroid'],
 ]);
 
 export namespace SpaceBonus {

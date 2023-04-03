@@ -9,6 +9,7 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 import {testGame} from '../../TestGame';
+import {setTemperature} from '../../TestingUtils';
 
 describe('CaretakerContract', function() {
   let card: CaretakerContract;
@@ -26,7 +27,7 @@ describe('CaretakerContract', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = 0;
+    setTemperature(game, 0);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 

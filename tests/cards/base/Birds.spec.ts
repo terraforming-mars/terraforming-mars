@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('Birds', function() {
@@ -26,7 +26,7 @@ describe('Birds', function() {
   it('Should play', function() {
     player2.production.add(Resources.PLANTS, 2);
     player3.production.add(Resources.PLANTS, 7);
-    (game as any).oxygenLevel = 13;
+    setOxygenLevel(game, 13);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
@@ -42,6 +42,6 @@ describe('Birds', function() {
     card.action(player);
     runAllActions(player.game);
     expect(card.resourceCount).to.eq(1);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

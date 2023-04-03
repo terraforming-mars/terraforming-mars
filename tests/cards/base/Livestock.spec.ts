@@ -3,7 +3,8 @@ import {Livestock} from '../../../src/server/cards/base/Livestock';
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Livestock', function() {
   let card: Livestock;
@@ -12,25 +13,23 @@ describe('Livestock', function() {
 
   beforeEach(function() {
     card = new Livestock();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play without plant production', function() {
-    (game as any).oxygenLevel = 9;
+    setOxygenLevel(game, 9);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can not play if oxygen level too low', function() {
-    (game as any).oxygenLevel = 8;
+    setOxygenLevel(game, 8);
     player.production.add(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.PLANTS, 1);
-    (game as any).oxygenLevel = 9;
+    setOxygenLevel(game, 9);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
@@ -39,7 +38,7 @@ describe('Livestock', function() {
     expect(player.production.megacredits).to.eq(2);
 
     player.addResourceTo(card, 4);
-    expect(card.getVictoryPoints()).to.eq(4);
+    expect(card.getVictoryPoints(player)).to.eq(4);
   });
 
   it('Should act', function() {

@@ -32,8 +32,13 @@
   "(You start with 40 M€)": "(Du beginnst mit 40 M€.)",
 
   "Mars Dierct": "Mars Dierkt",
-  "(Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, bezahle 1 M€ weniger je eigenes Marssymbol. ",
+  "(Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, bezahle 1 M€ weniger je eigenes Marssymbol.",
   "(You start with 52 M€.)": "(Du beginnst mit 52 M€.)",
+  
+  "Mars Math": "Mars Mathematik",
+  "(Effect: At the beginning of the Research phase, you draw 5 cards to choose from, but do not buy additional cards.)": "(Effekt: Zu Beginn der Forschungsphase ziehst du 5 Karten, aus denen du wählen kannst, aber du kannst keine weiteren Karten kaufen).",
+  "(Action: Take another two actions this turn.)": "(Aktion: Mache in diesem Zug zwei weitere Aktionen.)",
+  "(You start with 40 M€. As your first action, draw 2 cards)": "(Du beginnst mit 40 M€. Als deine erste Aktion im Spiel, ziehe 2 Karten.)",
 
   "Martian Insurance Group": "Mars Versicherungsgruppe",
   "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "EFFEKT: Nachdem du eine Ereigniskarte ausgespielt hast, erhöhe deine M€-Produktion um 1.)",

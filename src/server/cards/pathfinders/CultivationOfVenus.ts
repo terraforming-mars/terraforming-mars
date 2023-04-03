@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {VictoryPoints} from '../ICard';
 
 export class CultivationOfVenus extends ActionCard implements IProjectCard {
   constructor() {
@@ -13,7 +12,7 @@ export class CultivationOfVenus extends ActionCard implements IProjectCard {
       name: CardName.CULTIVATION_OF_VENUS,
       cost: 18,
       tags: [Tag.PLANT, Tag.VENUS],
-      victoryPoints: VictoryPoints.tags(Tag.VENUS, 1, 2),
+      victoryPoints: {type: Tag.VENUS, points: 1, per: 2},
 
       action: {
         spend: {plants: 3},

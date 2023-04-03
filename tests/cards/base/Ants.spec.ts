@@ -8,7 +8,7 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, cast, churnAction} from '../../TestingUtils';
+import {runAllActions, cast, churnAction, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('Ants', function() {
@@ -23,17 +23,17 @@ describe('Ants', function() {
   });
 
   it('Can not play without oxygen', function() {
-    (game as any).oxygenLevel = 3;
+    setOxygenLevel(game, 3);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 4;
+    setOxygenLevel(game, 4);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
     card.resourceCount += 5;
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
   it('Should action with multiple valid targets', function() {

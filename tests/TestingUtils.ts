@@ -17,8 +17,8 @@ import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
-import {PlayerInput} from '@/server/PlayerInput';
-import {IActionCard} from '@/server/cards/ICard';
+import {PlayerInput} from '../src/server/PlayerInput';
+import {IActionCard} from '../src/server/cards/ICard';
 import {TestPlayer} from './TestPlayer';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
@@ -32,6 +32,18 @@ export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace>
     oceans.push(addOcean(player));
   }
   return oceans;
+}
+
+export function setTemperature(game: Game, temperature: number) {
+  (game as any).temperature = temperature;
+}
+
+export function setOxygenLevel(game: Game, oxygenLevel: number) {
+  (game as any).oxygenLevel = oxygenLevel;
+}
+
+export function setVenusScaleLevel(game: Game, venusScaleLevel: number) {
+  (game as any).venusScaleLevel = venusScaleLevel;
 }
 
 export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
@@ -180,10 +192,20 @@ export function getSendADelegateOption(player: Player) {
 }
 
 /**
+ * Simulate the behavior of a playing a project card run through the deferred action queue, returning the
+ * next input the player must supply.
+ *
+ * ../srcsee churn.
+ */
+export function churnPlay(card: IProjectCard, player: TestPlayer) {
+  return churn(() => card.play(player), player);
+}
+
+/**
  * Simulate the behavior of a card action run through the deferred action queue, returning the
  * next input the player must supply.
  *
- * @see churn.
+ * ../srcsee churn.
  */
 export function churnAction(card: IActionCard, player: TestPlayer) {
   return churn(() => card.action(player), player);

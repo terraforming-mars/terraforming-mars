@@ -11,6 +11,7 @@ import {Mine} from '../../../src/server/cards/base/Mine';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {testGame} from '../../TestGame';
 
 describe('MarsUniversity', function() {
   let card: MarsUniversity;
@@ -19,9 +20,7 @@ describe('MarsUniversity', function() {
 
   beforeEach(function() {
     card = new MarsUniversity();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -47,7 +46,7 @@ describe('MarsUniversity', function() {
 
   it('Gives victory point', function() {
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Runs twice for multiple science tags', function() {

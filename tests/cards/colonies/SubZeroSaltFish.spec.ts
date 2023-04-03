@@ -3,7 +3,8 @@ import {SubZeroSaltFish} from '../../../src/server/cards/colonies/SubZeroSaltFis
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('SubZeroSaltFish', function() {
   let card: SubZeroSaltFish;
@@ -13,13 +14,11 @@ describe('SubZeroSaltFish', function() {
 
   beforeEach(function() {
     card = new SubZeroSaltFish();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Can not play if no one has plant production', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -29,13 +28,13 @@ describe('SubZeroSaltFish', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = 2;
+    setTemperature(game, 2);
     player2.production.add(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
     player.addResourceTo(card, 5);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
   it('Should act', function() {

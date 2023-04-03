@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 
 export class Stratopolis extends ActionCard {
   constructor() {
@@ -17,7 +16,7 @@ export class Stratopolis extends ActionCard {
       cost: 22,
 
       resourceType: CardResource.FLOATER,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
 
       behavior: {

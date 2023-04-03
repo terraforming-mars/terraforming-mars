@@ -1,4 +1,3 @@
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,7 +17,7 @@ export class VeneraBase extends ActionCard {
       tags: [Tag.VENUS, Tag.VENUS, Tag.CITY],
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
-      victoryPoints: VictoryPoints.tags(Tag.VENUS, 1, 2),
+      victoryPoints: {type: Tag.VENUS, points: 1, per: 2},
 
       behavior: {
         production: {megacredits: 3},

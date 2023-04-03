@@ -12,7 +12,7 @@ describe('RoverConstruction', function() {
     const game = Game.newInstance('gameid', [player, player2], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     player.playedCards.push(card);
     addCityTile(player);
     runAllActions(game);

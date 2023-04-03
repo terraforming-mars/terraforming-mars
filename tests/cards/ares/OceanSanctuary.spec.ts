@@ -71,7 +71,7 @@ describe('OceanSanctuary', function() {
 
   it('Victory Points', function() {
     card.resourceCount = 7;
-    expect(card.getVictoryPoints()).eq(7);
+    expect(card.getVictoryPoints(player)).eq(7);
   });
 
   it('Placing Ocean Sanctuary does not grant underlying space bonus', () => {

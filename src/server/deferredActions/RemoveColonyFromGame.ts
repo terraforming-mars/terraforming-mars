@@ -16,6 +16,7 @@ export class RemoveColonyFromGame extends DeferredAction {
       game.log('You discarded ${0}', (b) => b.colony(colony));
       return undefined;
     });
+    removeColony.showTileOnly = true;
 
     return removeColony;
   }

@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {ActionCard} from '../ActionCard';
-import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,7 +17,7 @@ export class Celestic extends ActionCard implements ICorporationCard {
       resourceType: CardResource.FLOATER,
       type: CardType.CORPORATION,
       initialActionText: 'Draw 2 cards with a floater icon on it',
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {type: 'resource', points: 1, per: 3},
 
       action: {
         addResourcesToAnyCard: {

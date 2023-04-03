@@ -12,6 +12,7 @@ import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce'
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Units} from '../../../src/common/Units';
 import {Resources} from '../../../src/common/Resources';
+import {testGame} from '../../TestGame';
 
 describe('MiningRights', () => {
   let card: MiningRights;
@@ -20,9 +21,7 @@ describe('MiningRights', () => {
 
   beforeEach(() => {
     card = new MiningRights();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play if no available spaces', () => {

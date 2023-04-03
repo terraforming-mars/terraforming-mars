@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/server/cards/CardRequirements';
-import {testGameOptions, runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel} from '../TestingUtils';
-import {Game} from '../../src/server/Game';
+import {runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel, churnAction} from '../TestingUtils';
 import {AdaptationTechnology} from '../../src/server/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/common/TileType';
 import {Ants} from '../../src/server/cards/base/Ants';
@@ -14,6 +13,7 @@ import {Resources} from '../../src/common/Resources';
 import {SmallAsteroid} from '../../src/server/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestGame';
 
 describe('CardRequirements', function() {
   let player: TestPlayer;
@@ -21,10 +21,7 @@ describe('CardRequirements', function() {
   const adaptationTechnology = new AdaptationTechnology();
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-
-    Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
+    [, player, player2] = testGame(2, {turmoilExtension: true});
   });
 
   it('satisfies properly for oceans', function() {
@@ -142,9 +139,9 @@ describe('CardRequirements', function() {
     const requirements = CardRequirements.builder((b) => b.floaters(2));
     const corp = new Celestic();
     player.setCorporationForTest(corp);
-    corp.action(player);
+    churnAction(corp, player);
     expect(requirements.satisfies(player)).eq(false);
-    corp.action(player);
+    churnAction(corp, player);
     expect(requirements.satisfies(player)).eq(true);
   });
 

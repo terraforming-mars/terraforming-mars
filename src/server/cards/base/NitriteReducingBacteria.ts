@@ -1,17 +1,11 @@
-import {IActionCard} from '../ICard';
-import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {OrOptions} from '../../inputs/OrOptions';
 import {CardResource} from '../../../common/CardResource';
-import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../../common/cards/CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
+import {ActionCard} from '../ActionCard';
 
-export class NitriteReducingBacteria extends Card implements IActionCard, IProjectCard {
+export class NitriteReducingBacteria extends ActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -22,6 +16,24 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
 
       behavior: {
         addResources: 3,
+      },
+
+      action: {
+        or: {
+          autoSelect: true,
+          behaviors: [
+            {
+              spend: {resourcesHere: 3},
+              tr: 1,
+              title: 'Remove 3 microbes to increase your terraform rating 1 step',
+              // LogHelper.logRemoveResource(player, this, 3, 'gain 1 TR');
+            },
+            {
+              addResources: 1,
+              title: 'Add 1 microbe to this card',
+            },
+          ],
+        },
       },
 
       metadata: {
@@ -39,34 +51,5 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
         description: 'Add 3 microbes to this card.',
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    if (this.resourceCount < 3) {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    }
-
-    const orOptions = new OrOptions();
-
-    if (player.canAfford(0, {tr: {tr: 1}})) {
-      orOptions.options.push(new SelectOption('Remove 3 microbes to increase your terraform rating 1 step', 'Remove microbes', () => {
-        player.removeResourceFrom(this, 3, {log: false});
-        LogHelper.logRemoveResource(player, this, 3, 'gain 1 TR');
-        player.increaseTerraformRating();
-        return undefined;
-      }));
-    }
-
-    orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    }));
-
-    if (orOptions.options.length === 1) return orOptions.options[0].cb();
-    return orOptions;
   }
 }

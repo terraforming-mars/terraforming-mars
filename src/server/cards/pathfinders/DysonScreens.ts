@@ -1,17 +1,13 @@
-import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Size} from '../../../common/cards/render/Size';
-import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
-import {IActionCard} from '../ICard';
 import {digit} from '../Options';
+import {ActionCard} from '../ActionCard';
 
-export class DysonScreens extends Card implements IProjectCard, IActionCard {
+export class DysonScreens extends ActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -27,6 +23,11 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
         city: {space: SpaceName.DYSON_SCREENS},
       },
 
+      action: {
+        spend: {titanium: 2},
+        production: {energy: 1, heat: 1},
+      },
+
       metadata: {
         cardNumber: 'Pf15',
         renderData: CardRenderer.builder((b) => {
@@ -39,16 +40,5 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
         description: 'Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.',
       },
     });
-  }
-
-  public canAct(player: Player) {
-    return player.titanium >= 2;
-  }
-
-  public action(player: Player) {
-    player.titanium -= 2;
-    player.production.add(Resources.HEAT, 1);
-    player.production.add(Resources.ENERGY, 1);
-    return undefined;
   }
 }

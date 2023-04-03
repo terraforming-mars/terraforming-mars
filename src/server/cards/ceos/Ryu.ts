@@ -8,6 +8,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {ALL_RESOURCES, Resources} from '../../../common/Resources';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class Ryu extends CeoCard {
   constructor() {
@@ -44,7 +45,7 @@ export class Ryu extends CeoCard {
     const choices = new OrOptions();
 
     ALL_RESOURCES.filter((r) => this.productionIsDecreasable(player, r)).forEach((resourceToDecrease) => {
-      const selectOption = new SelectOption(`Decrease ${resourceToDecrease} production`, 'Select', () => {
+      const selectOption = new SelectOption(newMessage('Decrease ${0} production', (b) => b.string(resourceToDecrease)), 'Select', () => {
         // M€ production can go down to -5
         let decreasable = player.production.get(resourceToDecrease);
         if (resourceToDecrease === Resources.MEGACREDITS) decreasable += 5;
@@ -56,7 +57,7 @@ export class Ryu extends CeoCard {
           (amount: number) => {
             const productionToIncrease =
               ALL_RESOURCES.filter((res) => res !== resourceToDecrease)
-                .map((res) => new SelectOption(`Increase ${res} production`, 'Select', () => {
+                .map((res) => new SelectOption(newMessage('Increase ${0} production', (b) => b.string(res)), 'Select', () => {
                   player.production.add(resourceToDecrease, -amount, {log: true});
                   // player.production.adjust()
                   player.production.add(res, amount, {log: true});

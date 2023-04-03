@@ -4,6 +4,9 @@ import {getPreferences} from '@/client/utils/PreferencesManager';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {Log} from '@/common/logs/Log';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
+// import {getCard} from '../cards/ClientCardManifest';
+// import {CardName} from '@/common/cards/CardName';
+// import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 
 type Context = {
   playerView: PlayerViewModel | undefined;
@@ -34,8 +37,11 @@ export function translateMessage(message: Message): string {
       return datum.value;
     case LogMessageDataType.PLAYER:
       return context.players.get(datum.value) ?? datum.value;
+    case LogMessageDataType.CARD:
+    case LogMessageDataType.GLOBAL_EVENT:
+      return translateText(datum.value);
     default:
-      return '';
+      return translateText(datum.value);
     }
   });
 }

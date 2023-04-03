@@ -7,7 +7,7 @@ import {ISpace} from '../src/server/boards/ISpace';
 import {Phase} from '../src/common/Phase';
 import {IParty} from '../src/server/turmoil/parties/IParty';
 import {Turmoil} from '../src/server/turmoil/Turmoil';
-import {LogMessage} from '../src/common/logs/LogMessage';
+import {Message} from '../src/common/logs/Message';
 import {PolicyId} from '../src/common/turmoil/Types';
 import {Log} from '../src/common/logs/Log';
 import {Greens} from '../src/server/turmoil/parties/Greens';
@@ -109,6 +109,7 @@ export function runNextAction(game: Game) {
   return action.execute();
 }
 
+// Use churnAction instead.
 export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput | undefined {
   const input = card.action(player);
   if (input !== undefined) {
@@ -125,7 +126,15 @@ export function forceGenerationEnd(game: Game) {
 }
 
 // Provides a readable version of a log message for easier testing.
-export function formatLogMessage(message: LogMessage): string {
+export function formatLogMessage(message: Message): string {
+  return Log.applyData(message, (datum) => datum.value);
+}
+
+// Provides a readable version of a message for easier testing.
+export function formatMessage(message: Message | string): string {
+  if (typeof message === 'string') {
+    return message;
+  }
   return Log.applyData(message, (datum) => datum.value);
 }
 

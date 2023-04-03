@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resources} from '../../../common/Resources';
 import {all, digit, played} from '../Options';
-import {SerializedCard} from '@/server/SerializedCard';
+import {SerializedCard} from '../../SerializedCard';
 
 export class PharmacyUnion extends Card implements ICorporationCard {
   constructor() {

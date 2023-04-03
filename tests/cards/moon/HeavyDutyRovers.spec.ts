@@ -7,7 +7,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceId} from '../../../src/common/Types';
 import {Player} from '../../../src/server/Player';
 import {testGame} from '../../TestGame';
-import {Game} from '@/server/Game';
+import {Game} from '../../../src/server/Game';
 
 describe('HeavyDutyRovers', () => {
   let player: TestPlayer;

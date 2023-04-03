@@ -42,7 +42,7 @@ describe('Celestic', function() {
         const string = JSON.stringify(renderData);
         if (string.includes('floater')) {
           found.push(card.name);
-        } else if (card.requirements !== undefined && card.requirements.requirements.some((req) => req.type === RequirementType.FLOATERS)) {
+        } else if (card.requirements?.requirements.some((req) => req.type === RequirementType.FLOATERS)) {
           found.push(card.name);
         }
       });

@@ -78,7 +78,7 @@ export class Splice extends Card implements ICorporationCard {
     player.game.getCardPlayer(this.name).addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
 
     // Card player choose between 2 M€ and a microbe on card, if possible
-    if (card.resourceType !== undefined && card.resourceType === CardResource.MICROBE) {
+    if (card.resourceType === CardResource.MICROBE) {
       return new OrOptions(addResource, getMegacredits);
     } else {
       player.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});

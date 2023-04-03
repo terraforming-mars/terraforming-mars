@@ -1994,7 +1994,7 @@ export class Player {
   public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
     if (this.waitingFor !== undefined) {
       // Add a metric.
-      console.error('Overwriting a waitingFor: ' + this.waitingFor);
+      console.error('Overwriting a waitingFor: ' + this.waitingFor.inputType);
     }
     this.timer.start();
     this.waitingFor = input;

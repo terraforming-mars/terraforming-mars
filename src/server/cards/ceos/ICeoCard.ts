@@ -4,7 +4,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 
 export interface ICeoCard extends IProjectCard, Partial<IActionCard> {
-  // TODO: Rename to something that indicates that it's usable even when this value is true.
   /** When true, the card cannot be activated again. */
   isDisabled?: boolean;
 

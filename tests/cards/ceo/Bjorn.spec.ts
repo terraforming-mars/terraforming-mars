@@ -17,7 +17,7 @@ describe('Bjorn', function() {
 
   beforeEach(() => {
     card = new Bjorn();
-    // TODO: Prelude extension is only activated here as we didnt have enough CEOs in early testing
+    // TODO(dl): Prelude extension is only activated here as we didnt have enough CEOs in early testing
     // In the future, when more base-game CEOs are added, we can remove preludeExtension from here
     [game, player, player2, player3, player4] = testGame(4, {ceoExtension: true, preludeExtension: true});
   });

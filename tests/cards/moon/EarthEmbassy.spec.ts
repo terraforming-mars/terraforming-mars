@@ -39,7 +39,7 @@ describe('EarthEmbassy', () => {
     // Earth Embassy has an earth tag and a moon tag.
     // Business Contacts has an earth tag.
     player.playedCards.push(earthEmbassy, new BusinessNetwork());
-    expect(player.canPlayIgnoringCost(lunaGovernor)).is.true;
+    expect(player.simpleCanPlay(lunaGovernor)).is.true;
   });
 
   it('Works for Martian Zoo', () => {

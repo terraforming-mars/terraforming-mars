@@ -17,17 +17,17 @@ describe('VenusianInsects', () => {
 
   it('Cannot play', () => {
     setVenusScaleLevel(game, 10);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play', () => {
     setVenusScaleLevel(game, 12);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play', () => {
     setVenusScaleLevel(game, 12);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     player.playedCards.push(card);
 
     const action = card.play(player);

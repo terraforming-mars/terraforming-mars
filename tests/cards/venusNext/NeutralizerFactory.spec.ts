@@ -6,7 +6,7 @@ describe('NeutralizerFactory', function() {
   it('Should play', function() {
     const card = new NeutralizerFactory();
     const [game, player] = testGame(2);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;
     expect(game.getVenusScaleLevel()).to.eq(2);

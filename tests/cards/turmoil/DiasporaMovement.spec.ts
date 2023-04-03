@@ -29,13 +29,13 @@ describe('DiasporaMovement', function() {
 
   it('Can not play', function() {
     reds.sendDelegate(player.id, game);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     reds.sendDelegate(player.id, game);
     reds.sendDelegate(player.id, game);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     player.playedCards.push(new ColonizerTrainingCamp());
     player2.playedCards.push(new MethaneFromTitan());

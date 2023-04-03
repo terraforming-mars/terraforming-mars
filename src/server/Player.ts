@@ -1571,11 +1571,6 @@ export class Player {
     return this.canAffordCard(card) && this.simpleCanPlay(card);
   }
 
-  // TODO(kberg): Replace all uses of canPlayIgnoringCost with simpleCanPlay.
-  public canPlayIgnoringCost(card: IProjectCard) {
-    return this.simpleCanPlay(card);
-  }
-
   /**
    * Verify if requirements for the card can be met, ignoring the project cost.
    * Only made public for tests.

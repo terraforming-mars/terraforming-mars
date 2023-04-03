@@ -17,11 +17,11 @@ describe('Zeppelins', function() {
 
   it('Can not play', function() {
     setOxygenLevel(game, 4);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
   it('Should play', function() {
     setOxygenLevel(game, 5);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     const lands = game.board.getAvailableSpacesOnLand(player);
     game.addCityTile(player, lands[0]);

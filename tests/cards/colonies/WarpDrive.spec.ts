@@ -10,7 +10,7 @@ describe('WarpDrive', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;
     expect(card.getCardDiscount(player, new TollStation())).to.eq(4);

@@ -1,17 +1,15 @@
-import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {expect} from 'chai';
+import {churnAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
-import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 
 describe('LunarObservationPost', () => {
-  let game: Game;
   let player: TestPlayer;
   let card: LunarObservationPost;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [, player] = testGame(2, {moonExpansion: true});
     card = new LunarObservationPost();
   });
 
@@ -39,10 +37,7 @@ describe('LunarObservationPost', () => {
 
     expect(card.resourceCount).eq(0);
 
-    card.action(player);
-    // TODO(kberg): figure out what type action should be.
-    const action = game.deferredActions.pop();
-    action!.execute();
+    expect(churnAction(card, player)).is.undefined;
 
     expect(card.resourceCount).eq(1);
 

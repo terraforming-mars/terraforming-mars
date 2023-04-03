@@ -105,4 +105,8 @@ export namespace Units {
     }
     return partial;
   }
+
+  export function values(u: Units): Array<number> {
+    return keys.map((k) => u[k]);
+  }
 }

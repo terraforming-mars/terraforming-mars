@@ -41,8 +41,13 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.stock !== undefined) {
+      const stock = behavior.stock;
       // Only supporting positive values for now.
-      if (Units.keys.some((key) => (behavior.stock?.[key] ?? 0) < 0)) {
+      // (Also supporting Countable because it's a pain.)
+      if (Units.keys.some((key) => {
+        const v = stock[key];
+        return (typeof v === 'number') ? v < 0 : false;
+      })) {
         throw new Error('Not supporting negative units for now: ' + card.name);
       }
 

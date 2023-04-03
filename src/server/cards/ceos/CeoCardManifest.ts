@@ -58,8 +58,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.INGRID]: {Factory: Ingrid},
     [CardName.JANSSON]: {Factory: Jansson},
     [CardName.KAREN]: {Factory: Karen, compatibility: 'prelude'},
-    // TODO(dl): Why is Lowell limited to Prelude?
-    [CardName.LOWELL]: {Factory: Lowell, compatibility: 'prelude'},
+    [CardName.LOWELL]: {Factory: Lowell},
     [CardName.MARIA]: {Factory: Maria, compatibility: 'colonies'},
     [CardName.MUSK]: {Factory: Musk},
     [CardName.NAOMI]: {Factory: Naomi, compatibility: 'colonies'},

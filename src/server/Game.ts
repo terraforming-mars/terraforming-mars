@@ -60,7 +60,6 @@ import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBon
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
-import {isProduction} from './utils/server';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
@@ -1380,11 +1379,7 @@ export class Game implements Logger {
       this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));
       break;
     default:
-      // TODO(kberg): Remove the isProduction condition after 2022-01-01.
-      // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
-      if (!isProduction()) {
-        throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');
-      }
+      throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');
     }
   }
 
@@ -1494,9 +1489,7 @@ export class Game implements Logger {
 
   public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: Player}) {
     const builder = new LogBuilder(message);
-    if (f) {
-      f(builder);
-    }
+    f?.(builder);
     const logMessage = builder.build();
     logMessage.playerId = options?.reservedFor?.id;
     this.gameLog.push(logMessage);
@@ -1571,14 +1564,12 @@ export class Game implements Logger {
     const corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
     const preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
 
-    // TODO(dl): remove ?? {...} by 2023/03/20
-    const ceoDeck = CeoDeck.deserialize(d.ceoDeck ?? {drawPile: [], discardPile: []}, rng);
+    const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
 
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
-    // TODO(kberg): remove ?? 0 by 2023-03-15
-    game.createdTime = new Date(d.createdTimeMs ?? 0);
+    game.createdTime = new Date(d.createdTimeMs);
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone | string) => {

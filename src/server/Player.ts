@@ -69,6 +69,9 @@ import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
 import {MessageBuilder} from './logs/MessageBuilder';
 
+
+const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
+
 /**
  * Behavior when playing a card:
  *   add it to the tableau
@@ -77,6 +80,7 @@ import {MessageBuilder} from './logs/MessageBuilder';
  */
 
 export type CardAction ='add' | 'discard' | 'nothing';
+
 export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
@@ -1991,10 +1995,15 @@ export class Player {
   public getWaitingFor(): PlayerInput | undefined {
     return this.waitingFor;
   }
+
   public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
     if (this.waitingFor !== undefined) {
-      // Add a metric.
-      console.error('Overwriting a waitingFor: ' + this.waitingFor.inputType);
+      const message = 'Overwriting a waitingFor: ' + this.waitingFor.inputType;
+      if (THROW_WAITING_FOR) {
+        throw new Error(message);
+      } else {
+        console.warn(message);
+      }
     }
     this.timer.start();
     this.waitingFor = input;

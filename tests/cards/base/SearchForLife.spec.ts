@@ -22,12 +22,12 @@ describe('SearchForLife', function() {
 
   it('Can not play if oxygen level too high', function() {
     setOxygenLevel(game, 7);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     setOxygenLevel(game, 6);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     player.playedCards.push(card);
     card.play(player);
 

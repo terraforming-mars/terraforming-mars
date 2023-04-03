@@ -8,12 +8,12 @@ describe('EventAnalysts', function() {
   it('Should play', function() {
     const card = new EventAnalysts();
     const [game, player] = testGame(1, testGameOptions({turmoilExtension: true}));
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
 
     game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
     game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
     game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     expect(game.turmoil!.getPlayerInfluence(player)).to.eq(3);

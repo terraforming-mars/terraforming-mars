@@ -121,7 +121,7 @@ export class Playwrights extends Card implements ICorporationCard {
           // Can player.canPlay(card) replace this?
           player.canAfford(player.getCardCost(card), {
             reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
-          }) && player.canPlayIgnoringCost(card);
+          }) && player.simpleCanPlay(card);
         }));
       });
     } finally {

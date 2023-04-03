@@ -14,12 +14,12 @@ describe('LightningHarvest', function() {
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair());
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     expect(player.production.energy).to.eq(1);

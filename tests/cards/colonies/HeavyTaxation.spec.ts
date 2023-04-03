@@ -6,7 +6,7 @@ describe('HeavyTaxation', function() {
   it('Should play', function() {
     const card = new HeavyTaxation();
     const [, player] = testGame(1);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.production.megacredits).to.eq(2);

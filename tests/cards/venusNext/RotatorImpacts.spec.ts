@@ -20,16 +20,16 @@ describe('RotatorImpacts', () => {
 
   it('Cannot play', () => {
     setVenusScaleLevel(game, 16);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play', () => {
     setVenusScaleLevel(game, 14);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play', () => {
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     const action = card.play(player);
     expect(action).is.undefined;
   });
@@ -40,7 +40,7 @@ describe('RotatorImpacts', () => {
     player.setCorporationForTest(corp);
 
     setVenusScaleLevel(game, 18);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should act', () => {

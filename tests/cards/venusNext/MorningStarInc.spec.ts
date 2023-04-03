@@ -10,7 +10,7 @@ describe('MorningStarInc', function() {
     const [game, player] = testGame(2);
     player.setCorporationForTest(corp);
     game.increaseVenusScaleLevel(player, 3);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     expect(game.getVenusScaleLevel()).to.eq(6);
   });
 });

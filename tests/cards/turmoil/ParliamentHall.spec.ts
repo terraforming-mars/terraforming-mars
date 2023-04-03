@@ -13,11 +13,11 @@ describe('ParliamentHall', function() {
     const card3 = new MartianRails();
     const [game, player] = testGame(1, testGameOptions({turmoilExtension: true}));
 
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
 
     const mars = game.turmoil!.getPartyByName(PartyName.MARS);
     mars.delegates.add(player.id, 2);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     player.playedCards.push(card2, card3);
     card.play(player);

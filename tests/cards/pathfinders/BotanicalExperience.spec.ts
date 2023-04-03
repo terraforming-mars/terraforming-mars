@@ -26,10 +26,10 @@ describe('BotanicalExperience', function() {
   });
 
   it('canPlay', () => {
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     game.addGreenery(otherPlayer, space);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('onTilePlaced', () => {

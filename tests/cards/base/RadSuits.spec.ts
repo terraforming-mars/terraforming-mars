@@ -15,7 +15,7 @@ describe('RadSuits', function() {
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
@@ -23,7 +23,7 @@ describe('RadSuits', function() {
     game.addCityTile(player, lands[0]);
     game.addCityTile(player, lands[1]);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     card.play(player);
 
     expect(player.production.megacredits).to.eq(1);

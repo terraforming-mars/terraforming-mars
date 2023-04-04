@@ -51,7 +51,6 @@ describe('Van Allen', function() {
 
     player.megaCredits = 0;
     player2.megaCredits = 8;
-    player.setTerraformRating(35); // Can claim Terraformer milestone
     player2.setTerraformRating(35); // Can claim Terraformer milestone
 
     const actions = cast(player2.getActions(), OrOptions);
@@ -60,7 +59,7 @@ describe('Van Allen', function() {
     expect(claimMilestoneAction).is.not.undefined;
     claimMilestoneAction!.options![0].cb();
     game.deferredActions.runAll(() => {});
-    expect(player.megaCredits).eq(3); // No M€ cost incurred, gains 3 M€ instead
+    expect(player.megaCredits).eq(3); // player2 claimed milestone, grants Van Allen 3 M€
     const claimedMilestone = player.game.claimedMilestones;
     expect(claimedMilestone.find((cm) => cm.milestone.name === 'Terraformer' && cm.player === player2)).is.not.undefined;
   });

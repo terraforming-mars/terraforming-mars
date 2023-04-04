@@ -32,7 +32,7 @@ export class BuildColonyStandardProject extends StandardProjectCard {
       colony.colonies.includes(player.id) === false &&
       colony.isActive);
 
-    // TODO: Europa sometimes costs additional 3.
+    // TODO(kberg): Europa sometimes costs additional 3.
     const canAffordVenus = player.canAfford(this.cost, {tr: {venus: 1}});
     if (!canAffordVenus) {
       openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);

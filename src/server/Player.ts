@@ -636,9 +636,8 @@ export class Player {
     const game = this.game;
     if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== this.id) {
       const monsInsuranceOwner = game.getPlayerById(game.monsInsuranceOwner);
-      // TODO(kberg): replace with "getCorporationOrThrow"?
-      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporation(CardName.MONS_INSURANCE);
-      monsInsurance?.payDebt(monsInsuranceOwner, this);
+      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporationOrThrow(CardName.MONS_INSURANCE);
+      monsInsurance.payDebt(monsInsuranceOwner, this);
     }
   }
 

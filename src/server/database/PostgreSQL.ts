@@ -163,8 +163,8 @@ export class PostgreSQL implements IDatabase {
     console.log(`${gameIds.length} games to be purged.`);
     if (gameIds.length > 1000) {
       gameIds.length = 1000;
+      console.log('Truncated purge to 1000 games.');
     }
-    console.log('Truncated purge to 1000 games.');
     // https://github.com/brianc/node-postgres/wiki/FAQ#11-how-do-i-build-a-where-foo-in--query-to-find-rows-matching-an-array-of-values
     const deleteGamesResult = await this.client.query('DELETE FROM games WHERE game_id = ANY($1)', [gameIds]);
     console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
@@ -269,7 +269,7 @@ export class PostgreSQL implements IDatabase {
 
     map['size-bytes-games'] = result.rows[0].game_size;
     map['size-bytes-game-results'] = result.rows[0].game_result_size;
-    map['size-bytes-participants'] = result.rows[0].participants;
+    map['size-bytes-participants'] = result.rows[0].participants_size;
     map['size-bytes-database'] = result.rows[0].db_size;
     return map;
   }

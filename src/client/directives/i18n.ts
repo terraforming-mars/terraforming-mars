@@ -4,9 +4,6 @@ import {getPreferences} from '@/client/utils/PreferencesManager';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {Log} from '@/common/logs/Log';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
-// import {getCard} from '../cards/ClientCardManifest';
-// import {CardName} from '@/common/cards/CardName';
-// import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 
 type Context = {
   playerView: PlayerViewModel | undefined;

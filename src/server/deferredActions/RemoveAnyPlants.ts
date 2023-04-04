@@ -4,16 +4,17 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
-import {MessageBuilder} from '../logs/MessageBuilder';
+import {MessageBuilder, newMessage} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
 
 export class RemoveAnyPlants extends DeferredAction {
-  constructor(
-    player: Player,
-    public count: number = 1,
-    public title: string | Message = new MessageBuilder('Select player to remove up to ${0} plants').number(count).getMessage(),
-  ) {
+  private title: string | Message;
+  private count: number;
+
+  constructor(player: Player, count: number = 1, title?: string | Message) {
     super(player, Priority.ATTACK_OPPONENT);
+    this.count = count;
+    this.title = title ?? newMessage('Select player to remove up to ${0} plants', (b) => b.number(count));
   }
 
   public execute() {

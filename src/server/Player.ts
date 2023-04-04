@@ -67,7 +67,7 @@ import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
-import {MessageBuilder} from './logs/MessageBuilder';
+import {newMessage} from './logs/MessageBuilder';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -948,15 +948,12 @@ export class Player {
       cards = passedCards;
     }
 
-    const message = cardsToKeep === 1 ?
+    const messageTitle = cardsToKeep === 1 ?
       'Select a card to keep and pass the rest to ${0}' :
       'Select two cards to keep and pass the rest to ${0}';
-
     this.setWaitingFor(
       new SelectCard(
-        new MessageBuilder(message)
-          .rawString(playerName) // TODO(kberg): replace with player?`
-          .getMessage(),
+        newMessage(messageTitle, (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
         'Keep',
         cards,
         (selected) => {
@@ -979,9 +976,7 @@ export class Player {
 
     this.setWaitingFor(
       new SelectCard(
-        new MessageBuilder('Select a corporation to keep and pass the rest to ${0}')
-          .rawString(playerName) // TODO(kberg): replace with player?`
-          .getMessage(),
+        newMessage('Select a corporation to keep and pass the rest to ${0}', (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
         'Keep',
         cards,
         (foundCards: Array<ICorporationCard>) => {
@@ -1801,9 +1796,7 @@ export class Player {
 
       this.pendingInitialActions.forEach((corp) => {
         const option = new SelectOption(
-          new MessageBuilder('Take first action of ${0} corporation')
-            .rawString(corp.name) // TODO(kberg): replace with card or cardName?]
-            .getMessage(),
+          newMessage('Take first action of ${0} corporation', (b) => b.card(corp)),
 
           corp.initialActionText, () => {
             this.runInitialAction(corp);
@@ -1879,7 +1872,7 @@ export class Player {
     // Convert Heat
     const convertHeat = new ConvertHeat();
     if (convertHeat.canAct(this)) {
-      action.options.push(new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
+      action.options.push(new SelectOption('Convert 8 heat into temperature', 'Convert heat', () => {
         return convertHeat.action(this);
       }));
     }
@@ -1934,7 +1927,7 @@ export class Player {
     const fundingCost = this.game.getAwardFundingCost();
     if (this.canAfford(fundingCost) && !this.game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
-      remainingAwards.title = new MessageBuilder('Fund an award (${0} M€)').number(fundingCost).getMessage(),
+      remainingAwards.title = newMessage('Fund an award (${0} M€)', (b) => b.number(fundingCost)),
       remainingAwards.buttonLabel = 'Confirm';
       remainingAwards.options = this.game.awards
         .filter((award: IAward) => this.game.hasBeenFunded(award) === false)

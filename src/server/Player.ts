@@ -2079,7 +2079,7 @@ export class Player {
       // Colonies
       // TODO(kberg): consider a ColoniesSerializer or something.
       fleetSize: this.colonies.getFleetSize(),
-      tradesThisTurn: this.colonies.tradesThisGeneration,
+      tradesThisGeneration: this.colonies.tradesThisGeneration,
       colonyTradeOffset: this.colonies.tradeOffset,
       colonyTradeDiscount: this.colonies.tradeDiscount,
       colonyVictoryPoints: this.colonies.victoryPoints,
@@ -2155,7 +2155,7 @@ export class Player {
     player.titanium = d.titanium;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
-    player.colonies.tradesThisGeneration = d.tradesThisTurn;
+    player.colonies.tradesThisGeneration = d.tradesThisTurn ?? d.tradesThisGeneration ?? 0;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 

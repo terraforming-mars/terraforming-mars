@@ -95,7 +95,7 @@ export class PathfindersExpansion {
       return;
     }
 
-    let space = PathfindersData.getValue(data, tag);
+    let space = data[tag];
 
     // Do not raise tracks unused this game.
     if (space === -1) {
@@ -119,7 +119,7 @@ export class PathfindersExpansion {
     // game.indentation++;
     while (space < lastSpace) {
       space++;
-      PathfindersData.setValue(data, tag, space);
+      data[tag] = space;
       const rewards = track.spaces[space];
 
       // Can be false because of the Constant Struggle global event.

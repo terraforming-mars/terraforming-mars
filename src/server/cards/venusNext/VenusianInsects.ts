@@ -15,7 +15,7 @@ export class VenusianInsects extends ActionCard implements IActionCard {
       tags: [Tag.VENUS, Tag.MICROBE],
       cost: 5,
       resourceType: CardResource.MICROBE,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, each: 1, per: 2},
 
       action: {
         addResources: 1,

@@ -31,18 +31,17 @@ export type _Countable = {
   all?: boolean; // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
   others?: true; // For tags this has a behavior.
 
-  // THESE ARE BACKWARDS
   /**
-   * Multiple the sum by `per`.
+   * Divide the sum by `per`. Round down.
    *
-   * For example, `{cities: {}, per: 2}` would count all the cities on the board, and multiply that value by 2.
+   * For example, `{cities: {}, per: 2}` would count all the cities on the board, and divide that value by 2.
    */
   per?: number;
 
   /**
-   * Divide the sum by `each`. Round down.
+   * Multiple the sum by `each`. Round down.
    *
-   * For example, `{tags: Tag.MOON, each: 3}` would count all moon tags, and then divide by 3.
+   * For example, `{tags: Tag.MOON, each: 3}` would count all moon tags, and then multiply by 3.
    */
   each?: number;
 };

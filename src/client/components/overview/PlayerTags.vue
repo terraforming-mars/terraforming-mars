@@ -145,8 +145,8 @@ export default Vue.extend({
         details[Tag.VENUS].halfPoints ++;
       } else {
         const vps = getCard(card.name)?.victoryPoints;
-        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.type !== 'resource') {
-          details[vps.type].points += (vps.points / vps.per);
+        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.tag !== undefined) {
+          details[vps.tag].points += (vps.each / vps.per);
         }
       }
     }

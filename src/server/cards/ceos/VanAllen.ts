@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {all, digit} from '../Options';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {all} from '../Options';
 
 export class VanAllen extends CeoCard {
   constructor() {

@@ -30,9 +30,12 @@ describe('Oscar', function() {
 
   it('Takes OPG action', function() {
     turmoil.chairman = 'NEUTRAL';
+    const preActionDelegates = turmoil.delegateReserve.get(player.id);
     card.action(player);
     runAllActions(game);
     expect(turmoil.chairman).eq(player.id);
+    // Delegates in reserve decreases
+    expect(turmoil.delegateReserve.get(player.id)).is.eq(preActionDelegates - 1);
   });
 
   it('Can only act once per game', function() {

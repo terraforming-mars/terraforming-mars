@@ -137,13 +137,12 @@ export class SQLite implements IDatabase {
       // DELETE all saves except initial and last one
       await this.asyncRun('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, saveId]);
       await this.asyncRun('UPDATE games SET status = \'finished\' WHERE game_id = ?', [gameId]);
-      await this.purgeUnfinishedGames();
     } catch (err) {
       console.error(`SQLite: cleanGame for ${gameId} ` + err);
     }
   }
 
-  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<Array<GameId>> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays !== undefined) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
@@ -157,8 +156,9 @@ export class SQLite implements IDatabase {
         const deleteParticipantsResult = await this.asyncRun(`DELETE FROM participants WHERE game_id in ( ${placeholders} )`, [...gameIds]);
         console.log(`Purged ${deleteParticipantsResult.changes} rows from participants`);
       }
+      return gameIds;
     } else {
-      return Promise.resolve();
+      return Promise.resolve([]);
     }
   }
 

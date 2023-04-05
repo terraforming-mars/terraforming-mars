@@ -29,4 +29,10 @@ export class FakeGameLoader implements IGameLoader {
   }
   public mark() {
   }
+  public completeGame(_game: Game): Promise<void> {
+    return Promise.resolve(undefined);
+  }
+  public saveGame(_game: Game) {
+    return Promise.resolve(undefined);
+  }
 }

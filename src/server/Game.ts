@@ -376,7 +376,7 @@ export class Game implements Logger {
   }
 
   public save(): void {
-    Database.getInstance().saveGame(this);
+    GameLoader.getInstance().saveGame(this);
   }
 
   public toJSON(): string {
@@ -985,12 +985,7 @@ export class Game implements Logger {
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
     this.phase = Phase.END;
-    Database.getInstance().saveGame(this).then(() => {
-      GameLoader.getInstance().mark(this.id);
-      return Database.getInstance().cleanGame(this.id);
-    }).catch((err) => {
-      console.error(err);
-    });
+    GameLoader.getInstance().completeGame(this);
   }
 
   // Part of final greenery placement.

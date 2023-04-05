@@ -28,4 +28,6 @@ export interface IGameLoader {
    * @param {GameId} gameId the game to be removed from the cache. Only call this for completed games.
    */
   mark(gameId: GameId): void;
+  saveGame(game: Game): Promise<void>
+  completeGame(game: Game): Promise<void>;
 }

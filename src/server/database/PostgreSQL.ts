@@ -150,13 +150,11 @@ export class PostgreSQL implements IDatabase {
     const delete1 = this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId]);
     // Flag game as finished
     const delete2 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
-    // Purge after setting the status as finished so it does not delete the game.
-    const delete3 = this.purgeUnfinishedGames();
-    await Promise.all([delete1, delete2, delete3]);
+    await Promise.all([delete1, delete2]);
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
-  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<Array<GameId>> {
     const dateToSeconds = daysAgoToSeconds(maxGameDays, 10);
     const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < to_timestamp($1)', [dateToSeconds]);
     const gameIds = selectResult.rows.slice(0, 1000).map((row) => row.game_id);
@@ -170,6 +168,7 @@ export class PostgreSQL implements IDatabase {
     console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
     const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
     console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+    return gameIds;
   }
 
   async saveGame(game: Game): Promise<void> {

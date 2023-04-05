@@ -77,7 +77,7 @@ export class InMemoryDatabase implements IDatabase {
   cleanGame(_gameId: GameId): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  purgeUnfinishedGames(): Promise<void> {
+  purgeUnfinishedGames(): Promise<Array<GameId>> {
     throw new Error('Method not implemented.');
   }
   stats(): Promise<{[ key: string ]: string | number;}> {

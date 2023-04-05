@@ -5,7 +5,7 @@ import {Game} from '../Game';
 import {GameOptions} from '../GameOptions';
 import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
-import {PathfindersData} from './PathfindersData';
+import {PathfindersData, PlanetaryTag, isPlanetaryTag} from './PathfindersData';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
@@ -23,19 +23,8 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 
-/**
- * The possible tags with planetary tracks.
- *
- * The order of this list matches the order of the list displayed in the UI.
- */
-export const PLANETARY_TAGS = [Tag.VENUS, Tag.EARTH, Tag.MARS, Tag.JOVIAN, Tag.MOON] as const;
-export type PlanetaryTag = typeof PLANETARY_TAGS[number];
-
 export const TRACKS = PlanetaryTracks.initialize();
 
-export function isPlanetaryTag(tag: Tag): tag is PlanetaryTag {
-  return PLANETARY_TAGS.includes(tag as PlanetaryTag);
-}
 export class PathfindersExpansion {
   private constructor() {
   }
@@ -58,7 +47,7 @@ export class PathfindersExpansion {
     const tags = card.tags;
     tags.forEach((tag) => {
       if (isPlanetaryTag(tag)) {
-        PathfindersExpansion.raiseTrack(tag as PlanetaryTag, player);
+        PathfindersExpansion.raiseTrack(tag, player);
       }
     });
 

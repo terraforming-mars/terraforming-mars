@@ -7,7 +7,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
-import {isPlanetaryTag} from '../../pathfinders/PathfindersExpansion';
+import {isPlanetaryTag} from '../../pathfinders/PathfindersData';
 import {played} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';

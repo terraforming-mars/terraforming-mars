@@ -1,5 +1,5 @@
 import {PlayerId} from '../../common/Types';
-import {PlanetaryTag} from './PathfindersExpansion';
+import {PlanetaryTag} from './PathfindersData';
 
 export type SerializedPathfindersData = {
   venus: number;

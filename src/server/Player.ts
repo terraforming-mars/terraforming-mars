@@ -1398,10 +1398,9 @@ export class Player {
         milestone: milestone,
       });
       // VanAllen CEO Hook for Milestones
-      for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
-        if (somePlayer.getCeo(CardName.VANALLEN)) {
-          somePlayer.addResource(Resources.MEGACREDITS, 3, {log: true});
-        }
+      const vanAllen = this.game.getCardPlayer(CardName.VANALLEN);
+      if (vanAllen !== undefined) {
+        vanAllen.addResource(Resources.MEGACREDITS, 3, {log: true});
       }
       if (!this.cardIsInEffect(CardName.VANALLEN)) {
         this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));

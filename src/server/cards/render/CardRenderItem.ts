@@ -16,6 +16,7 @@ export interface ItemOptions {
   played?: boolean;
   secondaryTag?: Tag | AltSecondaryTag;
   multiplier?: boolean; /** Mark any amount to be a multiplier 'X' */
+  clone?: boolean; /** Replace the amount with the clone tag */
   cancelled?: boolean;
   over?: number; /** Used for global events. */
 }
@@ -33,6 +34,7 @@ export class CardRenderItem implements ICardRenderItem {
   public size?: Size;
   public secondaryTag?: Tag | AltSecondaryTag;
   public multiplier?: boolean = false;
+  public clone?: boolean = false;
   public cancelled?: boolean = false;
   over?: number;
   constructor(public type: CardRenderItemType, public amount: number = -1, options?: ItemOptions) {
@@ -60,6 +62,11 @@ export class CardRenderItem implements ICardRenderItem {
     if (options.multiplier === true) {
       this.amountInside = true;
       this.multiplier = true;
+    }
+
+    if (options.clone === true) {
+      this.amountInside = false;
+      this.clone = true;
     }
 
     this.cancelled = options.cancelled ?? false;

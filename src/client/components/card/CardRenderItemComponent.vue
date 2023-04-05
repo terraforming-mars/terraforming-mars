@@ -281,6 +281,8 @@ export default Vue.extend({
           classes.push('card-tag tag-city');
         } else if (this.item.type === CardRenderItemType.MARS) {
           classes.push('card-tag tag-mars');
+        } else if (this.item.type === CardRenderItemType.CLONE) {
+          classes.push('card-tag tag-clone');
         }
       }
 
@@ -333,6 +335,9 @@ export default Vue.extend({
         }
         if (this.item.multiplier) {
           result += 'X';
+        }
+        if (this.item.clone) {
+          result += '<div style="-webkit-filter: greyscale(100%);filter: grayscale(100%)">🪐</div>';
         }
       }
 

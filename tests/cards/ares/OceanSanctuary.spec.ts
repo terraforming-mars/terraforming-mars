@@ -26,19 +26,19 @@ describe('OceanSanctuary', function() {
 
   it('Can play', function() {
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Play', function() {
@@ -71,7 +71,7 @@ describe('OceanSanctuary', function() {
 
   it('Victory Points', function() {
     card.resourceCount = 7;
-    expect(card.getVictoryPoints()).eq(7);
+    expect(card.getVictoryPoints(player)).eq(7);
   });
 
   it('Placing Ocean Sanctuary does not grant underlying space bonus', () => {

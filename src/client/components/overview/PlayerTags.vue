@@ -14,8 +14,7 @@
         <div class="player-tags-secondary">
           <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
             <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
-              <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
-              <PointsPerTag v-if="getVPs(tagDetail) !== ''" :amount="getVPs(tagDetail)" :data-test="'vps-' + tagDetail.name" />
+              <PointsPerTag :points="tagDetail"/>
               <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
             </div>
             <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
@@ -38,12 +37,14 @@ import PointsPerTag from '@/client/components/overview/PointsPerTag.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {vueRoot} from '@/client/components/vueRoot';
+import {CardName} from '@/common/cards/CardName';
 
 type InterfaceTagsType = Tag | SpecialTags | 'all' | 'separator';
 type TagDetail = {
   name: InterfaceTagsType;
   discount: number;
   points: number;
+  halfPoints: number;
   count: number;
 };
 
@@ -124,11 +125,11 @@ export default Vue.extend({
 
     // Start by giving every entry a default value
     // Ideally, remove 'x' and inline it into Object.fromEntries, but Typescript doesn't like it.
-    const x = ORDER.map((key) => [key, {name: key, discount: 0, points: 0, count: getTagCount(key, this.player)}]);
+    const x = ORDER.map((key) => [key, {name: key, discount: 0, points: 0, count: getTagCount(key, this.player), halfPoints: 0}]);
     const details: TagDetails = Object.fromEntries(x);
 
     // Initialize all's card discount.
-    details['all'] = {name: 'all', discount: this.player?.cardDiscount ?? 0, points: 0, count: 0};
+    details['all'] = {name: 'all', discount: this.player?.cardDiscount ?? 0, points: 0, count: 0, halfPoints: 0};
 
     // For each card
     for (const card of this.player.tableau) {
@@ -138,9 +139,15 @@ export default Vue.extend({
         details[tag].discount += discount.amount;
       }
 
-      const vps = getCard(card.name)?.victoryPoints;
-      if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.type !== 'resource') {
-        details[vps.type].points += (vps.points / vps.per);
+      // Special case Cultivation of Venus & Venera Base.
+      // See https://github.com/terraforming-mars/terraforming-mars/issues/5236
+      if (card.name === CardName.CULTIVATION_OF_VENUS || card.name === CardName.VENERA_BASE) {
+        details[Tag.VENUS].halfPoints ++;
+      } else {
+        const vps = getCard(card.name)?.victoryPoints;
+        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.type !== 'resource') {
+          details[vps.type].points += (vps.points / vps.per);
+        }
       }
     }
 
@@ -201,20 +208,6 @@ export default Vue.extend({
         }
         return true;
       });
-    },
-  },
-
-  methods: {
-    getVPs(detail: TagDetail) {
-      const integer = Math.floor(detail.points);
-      const fraction = detail.points - integer;
-      let vulgarFraction = '';
-      if (fraction === 0.5) {
-        vulgarFraction = '½';
-      } else if (Math.abs(fraction - (1/3)) < Number.EPSILON) {
-        vulgarFraction = '⅓';
-      }
-      return `${integer || ''}${vulgarFraction}`;
     },
   },
 });

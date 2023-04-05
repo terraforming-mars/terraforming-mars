@@ -26,7 +26,7 @@ describe('HeatTrappers', function() {
     card.play(player);
 
     expect(player.production.heat).to.eq(1); // Not changed
-    expect(card.getVictoryPoints()).to.eq(-1);
+    expect(card.getVictoryPoints(player)).to.eq(-1);
     expect(player.production.energy).to.eq(1); // Incremented
   });
 
@@ -59,6 +59,6 @@ describe('HeatTrappers', function() {
   });
 
   it('Gives victory points', function() {
-    expect(card.getVictoryPoints()).to.eq(-1);
+    expect(card.getVictoryPoints(player)).to.eq(-1);
   });
 });

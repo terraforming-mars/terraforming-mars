@@ -15,7 +15,7 @@ describe('NuclearZone', function() {
     const space = action.availableSpaces[0];
     action.cb(space);
     expect(space.tile && space.tile.tileType).to.eq(TileType.NUCLEAR_ZONE);
-    expect(card.getVictoryPoints()).to.eq(-2);
+    expect(card.getVictoryPoints(player)).to.eq(-2);
     expect(space.adjacency?.cost).eq(undefined);
     expect(game.getTemperature()).to.eq(-26);
   });

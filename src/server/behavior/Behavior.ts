@@ -172,6 +172,7 @@ export interface AddResource {
   mustHaveCard?: boolean,
 
   /** If true, if only one card matches, apply immediately without asking. */
+  // WARNING: I don't think this is actually used.
   autoSelect?: boolean,
 }
 

@@ -32,9 +32,9 @@ export namespace Units {
     get heat() {
       return 0;
     },
-  };
+  } as const;
 
-  export const keys = Object.keys(EMPTY) as (keyof Units)[];
+  export const keys: ReadonlyArray<keyof Units> = Object.keys(EMPTY) as (keyof Units)[];
 
   /**
    * Returns true when all six units fields exist in `arg` and each represents a valid number.
@@ -104,5 +104,9 @@ export namespace Units {
       }
     }
     return partial;
+  }
+
+  export function values(u: Units): Array<number> {
+    return keys.map((k) => u[k]);
   }
 }

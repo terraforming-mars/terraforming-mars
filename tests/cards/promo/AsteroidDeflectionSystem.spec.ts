@@ -35,6 +35,6 @@ describe('AsteroidDeflectionSystem', function() {
     }
 
     expect(card.resourceCount).to.eq(1);
-    expect(card.getVictoryPoints()).to.eq(card.resourceCount);
+    expect(card.getVictoryPoints(player)).to.eq(card.resourceCount);
   });
 });

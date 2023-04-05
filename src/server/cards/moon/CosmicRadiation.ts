@@ -10,6 +10,7 @@ import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class CosmicRadiation extends Card implements IProjectCard {
   constructor() {
@@ -31,17 +32,21 @@ export class CosmicRadiation extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);
-    player.game.getPlayersInGenerationOrder().forEach((mineTileOwner) => {
+    const game = player.game;
+    const mines = MoonExpansion.spaces(game, TileType.MOON_MINE);
+    game.getPlayersInGenerationOrder().forEach((mineTileOwner) => {
       const owned = mines.filter((mine) => mine.player?.id === mineTileOwner.id).length;
       if (owned > 0) {
-        const owes = owned * 4;
-        // TODO(kberg): Helion player should select thieir heat expenditure.
-        const spent = Math.min(owes, mineTileOwner.megaCredits);
-        mineTileOwner.megaCredits -= spent;
-        player.game.log(
-          '${0} spends ${1} M€ for the ${2} mines they own.',
-          (b) => b.player(mineTileOwner).number(spent).number(owned));
+        const bill = owned * 4;
+        const owes = Math.min(bill, mineTileOwner.spendableMegacredits());
+
+        game.defer(new SelectPaymentDeferred(mineTileOwner, owes, {
+          title: 'You must pay ' + owes + 'M€ for ' + owned + ' mining tiles',
+          afterPay: () => {
+            game.log(
+              '${0} spends ${1} M€ for the ${2} mining tiles they own.',
+              (b) => b.player(mineTileOwner).number(owes).number(owned));
+          }}));
       }
     });
     return undefined;

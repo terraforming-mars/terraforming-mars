@@ -20,7 +20,7 @@ describe('ArtificialLake', function() {
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
@@ -36,7 +36,7 @@ describe('ArtificialLake', function() {
     const placedTile = action.availableSpaces[0].tile;
     expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Cannot place ocean if all oceans are already placed', function() {
@@ -51,7 +51,7 @@ describe('ArtificialLake', function() {
     }
 
     // Card is still playable to get VPs...
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     // ...but an action to place ocean is not unavailable
     const action = card.play(player);
@@ -71,14 +71,14 @@ describe('ArtificialLake', function() {
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(1);
 
     // Card is still playable.
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     // No spaces left?
     game.simpleAddTile(player, spaces[0], {tileType: TileType.GREENERY});
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(0);
 
     // Cannot play.
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
   });
 
   it('Can still play if oceans are maxed but no land spaces are available', function() {
@@ -91,6 +91,6 @@ describe('ArtificialLake', function() {
       game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
     });
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 });

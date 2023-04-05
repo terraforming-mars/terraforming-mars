@@ -45,7 +45,7 @@ describe('EosChasmaNationalPark', () => {
     expect(player.plants).to.eq(3);
     expect(player.production.megacredits).to.eq(2);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.getVictoryPoints().victoryPoints).to.eq(2);
   });
 
@@ -65,7 +65,7 @@ describe('EosChasmaNationalPark', () => {
     expect(player.plants).to.eq(3);
     expect(player.production.megacredits).to.eq(2);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.getVictoryPoints().victoryPoints).to.eq(2);
   });
 });

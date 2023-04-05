@@ -20,12 +20,12 @@ describe('SmallAnimals', function() {
   it('Can not play if oxygen level too low', function() {
     player2.production.add(Resources.PLANTS, 1);
     setOxygenLevel(game, 5);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can not play if no one has plant production', function() {
     setOxygenLevel(game, 6);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should act', function() {
@@ -38,7 +38,7 @@ describe('SmallAnimals', function() {
   it('Should play', function() {
     setOxygenLevel(game, 6);
     player2.production.add(Resources.PLANTS, 1);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     player.playedCards.push(card);
     card.play(player);
@@ -49,9 +49,9 @@ describe('SmallAnimals', function() {
 
   it('Gives victory points', function() {
     player.addResourceTo(card, 3);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
 
     player.addResourceTo(card);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

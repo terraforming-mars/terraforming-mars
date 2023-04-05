@@ -19,10 +19,10 @@ describe('LuxuryEstate', function() {
 
   it('canPlay', function() {
     setOxygenLevel(game, 6);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     setOxygenLevel(game, 7);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('play', function() {

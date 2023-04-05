@@ -30,7 +30,7 @@ describe('Gyropolis', function() {
     player.playedCards.push(researchNetwork, lunaGoveror);
     player.production.add(Resources.ENERGY, 2);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);

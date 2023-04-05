@@ -32,11 +32,11 @@ export default Vue.extend({
         <label class="form-radio" v-for="lang in LANGUAGES" :key="lang.id">
           <div
             :key="lang.id"
-            :class="`language-icon language-icon--${lang.id}`"
+            :class="`language-icon language-icon-for-switcher language-icon--${lang.id}`"
             :title="lang.title"
             @click="switchLanguageTo(lang.id)"
           />
-          {{ lang.title }}
+          <span class="language-text" @click="switchLanguageTo(lang.id)">{{ lang.title }}</span>
         </label>
       </div>
     </div>

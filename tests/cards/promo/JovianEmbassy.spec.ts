@@ -9,6 +9,6 @@ describe('JovianEmbassy', function() {
 
     card.play(player);
     expect(player.getTerraformRating()).to.eq(21);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

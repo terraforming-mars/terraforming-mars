@@ -41,8 +41,13 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.stock !== undefined) {
+      const stock = behavior.stock;
       // Only supporting positive values for now.
-      if (Units.keys.some((key) => (behavior.stock?.[key] ?? 0) < 0)) {
+      // (Also supporting Countable because it's a pain.)
+      if (Units.keys.some((key) => {
+        const v = stock[key];
+        return (typeof v === 'number') ? v < 0 : false;
+      })) {
         throw new Error('Not supporting negative units for now: ' + card.name);
       }
 
@@ -249,7 +254,7 @@ export class Executor implements BehaviorExecutor {
             paying: drawCard.pay,
           });
           // By moving behavior to this object, Priority for this action is changing from DEFAULT.
-          // TODO: remove this comment block by 2023-10-01, or once bug reports on card drawing order subsides.
+          // TODO(kberg): remove this comment block by 2023-10-01, or once bug reports on card drawing order subsides.
           player.defer(input, Priority.DRAW_CARDS);
         }
       }

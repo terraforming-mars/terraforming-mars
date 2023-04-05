@@ -17,17 +17,17 @@ describe('VenusianInsects', () => {
 
   it('Cannot play', () => {
     setVenusScaleLevel(game, 10);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play', () => {
     setVenusScaleLevel(game, 12);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play', () => {
     setVenusScaleLevel(game, 12);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     player.playedCards.push(card);
 
     const action = card.play(player);
@@ -36,7 +36,7 @@ describe('VenusianInsects', () => {
 
   it('Gives victory points', () => {
     player.addResourceTo(card, 7);
-    expect(card.getVictoryPoints()).to.eq(3);
+    expect(card.getVictoryPoints(player)).to.eq(3);
   });
 
   it('Should act', () => {

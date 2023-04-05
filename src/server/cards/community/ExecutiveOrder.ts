@@ -43,7 +43,7 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
     player.game.defer(new SimpleDeferredAction(player, () => {
       return new OrOptions(
         ...globalEvents.map((event) => {
-          // TODO: Render as SelectGlobalEvent
+          // TODO(kberg): Render as SelectGlobalEvent
           const description = event.name + ': ' + event.description + ' Neutral delegate added: ' + event.currentDelegate;
           return new SelectOption(description, 'Select', () => {
             turmoil.currentGlobalEvent = event;

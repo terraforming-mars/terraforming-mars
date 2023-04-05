@@ -1,4 +1,3 @@
-import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
@@ -7,7 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {ActionCard} from '../ActionCard';
 
-export class DeuteriumExport extends ActionCard implements IActionCard {
+export class DeuteriumExport extends ActionCard {
   constructor() {
     super({
       name: CardName.DEUTERIUM_EXPORT,

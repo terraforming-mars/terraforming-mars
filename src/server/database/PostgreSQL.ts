@@ -22,7 +22,7 @@ export class PostgreSQL implements IDatabase {
     config: ClientConfig = {
       connectionString: process.env.POSTGRES_HOST,
     }) {
-    if (config.connectionString !== undefined && config.connectionString.startsWith('postgres')) {
+    if (config.connectionString?.startsWith('postgres')) {
       config.ssl = {
         // heroku uses self-signed certificates
         rejectUnauthorized: false,
@@ -163,8 +163,8 @@ export class PostgreSQL implements IDatabase {
     console.log(`${gameIds.length} games to be purged.`);
     if (gameIds.length > 1000) {
       gameIds.length = 1000;
+      console.log('Truncated purge to 1000 games.');
     }
-    console.log('Truncated purge to 1000 games.');
     // https://github.com/brianc/node-postgres/wiki/FAQ#11-how-do-i-build-a-where-foo-in--query-to-find-rows-matching-an-array-of-values
     const deleteGamesResult = await this.client.query('DELETE FROM games WHERE game_id = ANY($1)', [gameIds]);
     console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
@@ -258,19 +258,33 @@ export class PostgreSQL implements IDatabase {
       'save-conflict-undo-count': this.statistics.saveConflictUndoCount,
     };
 
-    // TODO(kberg): return row counts
-    const result = await this.client.query(`
+    const dbsizes = await this.client.query(`
     SELECT
       pg_size_pretty(pg_total_relation_size('games')) as game_size,
-      pg_size_pretty(pg_total_relation_size('game_results')) as game_result_size,
+      pg_size_pretty(pg_total_relation_size('game_results')) as game_results_size,
       pg_size_pretty(pg_total_relation_size('participants')) as participants_size,
       pg_size_pretty(pg_database_size($1)) as db_size
     `, [this.databaseName]);
 
-    map['size-bytes-games'] = result.rows[0].game_size;
-    map['size-bytes-game-results'] = result.rows[0].game_result_size;
-    map['size-bytes-participants'] = result.rows[0].participants;
-    map['size-bytes-database'] = result.rows[0].db_size;
+    map['size-bytes-games'] = dbsizes.rows[0].game_size;
+    map['size-bytes-game-results'] = dbsizes.rows[0].game_results_size;
+    map['size-bytes-participants'] = dbsizes.rows[0].participants_size;
+    map['size-bytes-database'] = dbsizes.rows[0].db_size;
+
+    // Using count(*) is inefficient, but the estimates from here
+    // https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
+    // seem wildly inaccurate.
+    //
+    // heroku pg:bloat --app terraforming-mars
+    // shows some bloat
+    // and the postgres command
+    // VACUUM (VERBOSE) shows a fairly reasonable vacumm (no rows locked, for instance),
+    // so it's not clear why those wrong. But these select count(*0) commands seem pretty quick
+    // in testing. :fingers-crossed:
+    for (const table of ['games', 'game_results', 'participants']) {
+      const result = await this.client.query('select count(*) as rowcount from ' + table);
+      map['rows-' + table] = result.rows[0].rowcount;
+    }
     return map;
   }
 }

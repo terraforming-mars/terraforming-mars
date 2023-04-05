@@ -15,7 +15,7 @@ export type Payment = {
   floaters: number;
   // Luna Archives corporation can spend its science resources for cards with Moon tags.
   science: number;
-  // TODO: add test for Soylent Seedling Systems + Psychophiles.
+  // TODO(kberg): add test for Soylent Seedling Systems + Psychophiles.
   // Soylent Seedling Systems corporation can use its seeds to pay for cards with plant tags, or the standard greenery project.
   seeds: number;
   // Aurorai corporation can use its data to pay for standard projects.

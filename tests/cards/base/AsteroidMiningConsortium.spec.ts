@@ -19,12 +19,12 @@ describe('AsteroidMiningConsortium', function() {
   });
 
   it('Cannot play if no titanium production', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play if player has titanium production', function() {
     player.production.add(Resources.TITANIUM, 1);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play - auto select if single target', function() {
@@ -79,6 +79,6 @@ describe('AsteroidMiningConsortium', function() {
   });
 
   it('Gives victory points', function() {
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

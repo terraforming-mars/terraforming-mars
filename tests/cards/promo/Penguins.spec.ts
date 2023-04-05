@@ -17,12 +17,12 @@ describe('Penguins', function() {
 
   it('Cannot play', function() {
     maxOutOceans(player, 7);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, 8);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should act', function() {
@@ -39,6 +39,6 @@ describe('Penguins', function() {
     runAllActions(game);
     card.action(player);
     runAllActions(game);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

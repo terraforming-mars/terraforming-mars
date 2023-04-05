@@ -18,19 +18,19 @@ describe('Livestock', function() {
 
   it('Can not play without plant production', function() {
     setOxygenLevel(game, 9);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can not play if oxygen level too low', function() {
     setOxygenLevel(game, 8);
     player.production.add(Resources.PLANTS, 1);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.PLANTS, 1);
     setOxygenLevel(game, 9);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     player.playedCards.push(card);
@@ -38,7 +38,7 @@ describe('Livestock', function() {
     expect(player.production.megacredits).to.eq(2);
 
     player.addResourceTo(card, 4);
-    expect(card.getVictoryPoints()).to.eq(4);
+    expect(card.getVictoryPoints(player)).to.eq(4);
   });
 
   it('Should act', function() {

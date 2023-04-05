@@ -2,19 +2,17 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
-import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resources} from '../../../common/Resources';
+import {ActionCard} from '../ActionCard';
 
-export class StormCraftIncorporated extends Card implements IActionCard, ICorporationCard {
+export class StormCraftIncorporated extends ActionCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.STORMCRAFT_INCORPORATED,
@@ -22,6 +20,11 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
       startingMegaCredits: 48,
       resourceType: CardResource.FLOATER,
       type: CardType.CORPORATION,
+
+      action: {
+        addResourcesToAnyCard: {type: CardResource.FLOATER, count: 1, autoSelect: true},
+      },
+
       metadata: {
         cardNumber: 'R29',
         description: 'You start with 48 M€.',
@@ -41,28 +44,6 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
         }),
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    const floaterCards = player.getResourceCards(CardResource.FLOATER);
-    if (floaterCards.length === 1) {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    }
-
-    return new SelectCard(
-      'Select card to add 1 floater',
-      'Add floater',
-      floaterCards,
-      ([card]) => {
-        player.addResourceTo(card, {qty: 1, log: true});
-        return undefined;
-      },
-    );
   }
 
   public spendHeat(player: Player, targetAmount: number,

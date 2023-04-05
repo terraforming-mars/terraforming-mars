@@ -24,16 +24,16 @@ describe('Ants', function() {
 
   it('Can not play without oxygen', function() {
     setOxygenLevel(game, 3);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     setOxygenLevel(game, 4);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     card.resourceCount += 5;
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
   it('Should action with multiple valid targets', function() {

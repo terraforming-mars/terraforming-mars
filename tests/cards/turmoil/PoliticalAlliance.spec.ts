@@ -23,7 +23,7 @@ describe('PoliticalAlliance', function() {
   it('Can not play', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player.id;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
@@ -31,7 +31,7 @@ describe('PoliticalAlliance', function() {
     const reds = turmoil.getPartyByName(PartyName.REDS);
     greens.partyLeader = player.id;
     reds.partyLeader = player.id;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     expect(player.getTerraformRating()).to.eq(21);

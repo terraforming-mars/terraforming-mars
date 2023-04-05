@@ -69,6 +69,9 @@ import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
 import {MessageBuilder} from './logs/MessageBuilder';
 
+
+const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
+
 /**
  * Behavior when playing a card:
  *   add it to the tableau
@@ -77,6 +80,7 @@ import {MessageBuilder} from './logs/MessageBuilder';
  */
 
 export type CardAction ='add' | 'discard' | 'nothing';
+
 export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
@@ -632,9 +636,8 @@ export class Player {
     const game = this.game;
     if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== this.id) {
       const monsInsuranceOwner = game.getPlayerById(game.monsInsuranceOwner);
-      // TODO(kberg): replace with "getCorporationOrThrow"?
-      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporation(CardName.MONS_INSURANCE);
-      monsInsurance?.payDebt(monsInsuranceOwner, this);
+      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporationOrThrow(CardName.MONS_INSURANCE);
+      monsInsurance.payDebt(monsInsuranceOwner, this);
     }
   }
 
@@ -1571,11 +1574,6 @@ export class Player {
     return this.canAffordCard(card) && this.simpleCanPlay(card);
   }
 
-  // TODO(kberg): Replace all uses of canPlayIgnoringCost with simpleCanPlay.
-  public canPlayIgnoringCost(card: IProjectCard) {
-    return this.simpleCanPlay(card);
-  }
-
   /**
    * Verify if requirements for the card can be met, ignoring the project cost.
    * Only made public for tests.
@@ -1991,10 +1989,15 @@ export class Player {
   public getWaitingFor(): PlayerInput | undefined {
     return this.waitingFor;
   }
+
   public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
     if (this.waitingFor !== undefined) {
-      // Add a metric.
-      console.error('Overwriting a waitingFor: ' + this.waitingFor);
+      const message = 'Overwriting a waitingFor: ' + this.waitingFor.inputType;
+      if (THROW_WAITING_FOR) {
+        throw new Error(message);
+      } else {
+        console.warn(message);
+      }
     }
     this.timer.start();
     this.waitingFor = input;
@@ -2075,7 +2078,7 @@ export class Player {
       // Colonies
       // TODO(kberg): consider a ColoniesSerializer or something.
       fleetSize: this.colonies.getFleetSize(),
-      tradesThisTurn: this.colonies.tradesThisGeneration,
+      tradesThisGeneration: this.colonies.tradesThisGeneration,
       colonyTradeOffset: this.colonies.tradeOffset,
       colonyTradeDiscount: this.colonies.tradeDiscount,
       colonyVictoryPoints: this.colonies.victoryPoints,
@@ -2151,7 +2154,7 @@ export class Player {
     player.titanium = d.titanium;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
-    player.colonies.tradesThisGeneration = d.tradesThisTurn;
+    player.colonies.tradesThisGeneration = d.tradesThisTurn ?? d.tradesThisGeneration ?? 0;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 

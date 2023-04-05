@@ -77,7 +77,7 @@ export interface ICardRenderItem extends CardComponent {
   readonly is: 'item';
   /** The thing being drawn */
   type: CardRenderItemType;
-  /** The number of times it is drawn */
+  /** The number of times it is drawn (or MC count) */
   amount: number;
   /** activated for any player */
   anyPlayer?: boolean;
@@ -105,7 +105,9 @@ export interface ICardRenderItem extends CardComponent {
   cancelled?: boolean;
   /** over is used for rendering under TR for global events. */
   over?: number
-;}
+  // Used for unknown values (currently just megacredits, fwiw)
+  questionMark?: boolean;
+}
 
 export function isICardRenderItem(item: ItemType): item is ICardRenderItem {
   return typeof(item) !== 'string' && item?.is === 'item';

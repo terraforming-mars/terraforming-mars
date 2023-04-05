@@ -49,6 +49,7 @@ export enum CardRenderItemType {
   IGNORE_GLOBAL_REQUIREMENTS = 'ignore_global_requirements',
   PRELUDE = 'prelude',
   AWARD = 'award',
+  MILESTONE = 'milestone',
   CORPORATION = 'corporation',
   VP = 'vp',
   COMMUNITY = 'community',

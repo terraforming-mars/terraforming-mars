@@ -150,7 +150,7 @@ export class PathfindersExpansion {
     }
   }
 
-  private static grant(reward: Reward, player: Player, tag: Tag) {
+  private static grant(reward: Reward, player: Player, tag: PlanetaryTag) {
     const game = player.game;
 
     switch (reward) {

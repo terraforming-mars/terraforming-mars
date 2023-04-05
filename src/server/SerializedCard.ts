@@ -8,6 +8,7 @@ export type SerializedCard = {
   cloneTag?: Tag; // For Pathfinders' clone tag
   isDisabled?: boolean; // For Pharmacy Union and CEO Cards.
   name: CardName;
+  opgActionIsActive?: boolean; // For CEO Cards.
   resourceCount?: number;
   targetCards?: Array<SerializedRobotCard>;
 }

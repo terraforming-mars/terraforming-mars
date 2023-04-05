@@ -147,7 +147,7 @@ export default Vue.extend({
       } else {
         const vps = getCard(card.name)?.victoryPoints;
         if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.type !== 'resource') {
-          details[vps.type].points += (vps.points / vps.per);
+          details[vps.type].points += (vps.each / vps.per);
         }
       }
     }

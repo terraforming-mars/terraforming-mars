@@ -15,7 +15,7 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
       tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 50,
 
-      victoryPoints: {type: Tag.MOON, points: 1, per: 3},
+      victoryPoints: {type: Tag.MOON, each: 1, per: 3},
 
       metadata: {
         description: 'You start with 50 M€. 1 VP for every 3 Moon tags you have.',

@@ -21,7 +21,7 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
       cost: 11,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {type: 'resource', each: 1, per: 2},
       reserveUnits: {titanium: 1},
 
       metadata: {

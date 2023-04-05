@@ -15,7 +15,7 @@ export class Pristar extends Card implements ICorporationCard {
       resourceType: CardResource.PRESERVATION,
       type: CardType.CORPORATION,
 
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {type: 'resource', each: 1, per: 1},
 
       metadata: {
         cardNumber: 'R07',

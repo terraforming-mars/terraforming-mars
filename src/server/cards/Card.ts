@@ -217,11 +217,11 @@ export abstract class Card {
         return vp1;
       }
       if (vp1.type === 'resource') {
-        return vp1.points * Math.floor(this.resourceCount / vp1.per);
+        return vp1.each * Math.floor(this.resourceCount / vp1.per);
       } else {
         const tag = vp1.type;
         const count = player.tags.count(tag, 'vps') ?? 0;
-        return vp1.points * Math.floor(count / vp1.per);
+        return vp1.each * Math.floor(count / vp1.per);
       }
     }
 
@@ -291,10 +291,10 @@ export abstract class Card {
       if (properties.resourceType === undefined) {
         throw new Error('When defining a card-resource based VP, resourceType must be defined.');
       }
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.points, vps.per);
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.each, vps.per);
       return;
     } else {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.type, vps.points, vps.per);
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.type, vps.each, vps.per);
     }
   }
 

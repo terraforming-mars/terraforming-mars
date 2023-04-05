@@ -5,9 +5,9 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
 
 interface DeprecatedFields {
-    // corporationCard?: SerializedCard | undefined; // TODO(kberg): remove after 2022-09-01
-    // corporationInitialActionDone?: boolean; // TODO(kberg): remove field after 2022-09-01
+    tradesThisTurn?: number; // TODO(kberg): Remove tradesThisTurn after 2023-06-01
 }
+
 export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisGame: number;
     actionsTakenThisRound: number;
@@ -65,8 +65,8 @@ export interface SerializedPlayer extends DeprecatedFields{
     titaniumProduction: number;
     titaniumValue: number;
     totalDelegatesPlaced: number;
-    // TODO(kberg): change tradesThisTurn to tradeThisGeneration later
-    tradesThisTurn: number;
+    // TODO(kberg): Remove ? by 2023-06-01
+    tradesThisGeneration?: number;
     turmoilPolicyActionUsed: boolean;
     victoryPointsByGeneration: Array<number>;
 }

@@ -34,8 +34,11 @@ export function translateMessage(message: Message): string {
       return datum.value;
     case LogMessageDataType.PLAYER:
       return context.players.get(datum.value) ?? datum.value;
+    case LogMessageDataType.CARD:
+    case LogMessageDataType.GLOBAL_EVENT:
+      return translateText(datum.value);
     default:
-      return '';
+      return translateText(datum.value);
     }
   });
 }

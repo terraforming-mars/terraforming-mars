@@ -4,7 +4,7 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
-// TODO: add a test for Posideon's initial action.
+// TODO(kberg): add a test for Posideon's initial action.
 
 describe('Poseidon', function() {
   it('Should play', function() {

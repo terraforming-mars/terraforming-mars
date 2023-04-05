@@ -8,7 +8,7 @@ import {Resources} from '../../../common/Resources';
 import {multiplier} from '../Options';
 
 
-// TODO: Does Duncan trigger Vitor?
+// TODO(dl): Does Duncan trigger Vitor?
 export class Duncan extends CeoCard {
   constructor() {
     super({

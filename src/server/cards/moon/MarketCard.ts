@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export interface Terms {
   from: number,
@@ -40,8 +41,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
       return new OrOptions(
-        new SelectOption(`Buy ${this.tradeResource}`, 'Buy', () => this.getBuyingOption(player)),
-        new SelectOption(`Sell ${this.tradeResource}`, 'Sell', () => this.getSellingOption(player)),
+        new SelectOption(newMessage('Buy ${0}', (b) => b.string(this.tradeResource)), 'Buy', () => this.getBuyingOption(player)),
+        new SelectOption(newMessage('Sell ${0}', (b) => b.string(this.tradeResource)), 'Sell', () => this.getSellingOption(player)),
       );
     } else if (offerBuy) {
       return this.getBuyingOption(player);
@@ -58,7 +59,9 @@ export abstract class MarketCard extends Card implements IActionCard {
     limit = Math.min(limit, terms.limit);
 
     return new SelectAmount(
-      `Select a number of trades (${terms.from} M€ => ${terms.to} ${this.tradeResource}, max ${limit})`,
+      newMessage(
+        'Select a number of trades (${terms.from} M€ => ${terms.to} ${this.tradeResource}, max ${limit})',
+        (b) => b.number(terms.from).number(terms.to).string(this.tradeResource).number(limit)),
       `Buy ${this.tradeResource}`,
       (tradesRequested: number) => {
         const cashDue = tradesRequested * terms.from;

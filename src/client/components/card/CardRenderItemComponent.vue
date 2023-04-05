@@ -382,6 +382,9 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.AWARD) {
         result = '<span class="card-award-icon">award</span>';
       }
+      if (this.item.type === CardRenderItemType.MILESTONE) {
+        result = '<span class="card-award-icon">milestone</span>';
+      }
       if (this.item.type === CardRenderItemType.VP) {
         result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
       }

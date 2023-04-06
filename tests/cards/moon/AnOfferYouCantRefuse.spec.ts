@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast, formatMessage, testGameOptions} from '../../TestingUtils';
 import {AnOfferYouCantRefuse} from '../../../src/server/cards/moon/AnOfferYouCantRefuse';
 import {TestPlayer} from '../../TestPlayer';
 import {NeutralPlayer, Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -59,11 +59,12 @@ describe('AnOfferYouCantRefuse', () => {
 
     expect(card.canPlay(player)).is.true;
     const options = cast(card.play(player), OrOptions);
-    expect(options.options.map((option) => option.title)).deep.eq(
+    const strings = options.options.map((option) => formatMessage(option.title));
+    expect(strings).deep.eq(
       [
-        'Greens / player-red', // Option 0
-        'Greens / player-green', // Option 1
-        'Reds / player-red', // Option 2
+        'Greens / p-red-id', // Option 0
+        'Greens / p-green-id', // Option 1
+        'Reds / p-red-id', // Option 2
       ]);
 
     // Now do a delegate exchange
@@ -108,11 +109,12 @@ describe('AnOfferYouCantRefuse', () => {
     populateParty(parties.reds, 'NEUTRAL', redPlayer.id, 'NEUTRAL', redPlayer.id);
 
     const options = cast(card.play(player), OrOptions);
-    expect(options.options.map((option) => option.title)).deep.eq(
+    const strings = options.options.map((option) => formatMessage(option.title));
+    expect(strings).deep.eq(
       [
-        'Greens / player-red', // Option 0
-        'Greens / player-green', // Option 1
-        'Reds / player-red', // Option 2
+        'Greens / p-red-id', // Option 0
+        'Greens / p-green-id', // Option 1
+        'Reds / p-red-id', // Option 2
       ]);
 
     // Now do a delegate exchange
@@ -134,7 +136,8 @@ describe('AnOfferYouCantRefuse', () => {
     expect(parties.reds.partyLeader).eq('NEUTRAL');
 
     const options = cast(card.play(player), OrOptions);
-    expect(options.options.map((option) => option.title)).deep.eq(['Greens / player-green']);
+    const strings = options.options.map((option) => formatMessage(option.title));
+    expect(strings).deep.eq(['Greens / p-green-id']);
 
     // Now do a delegate exchange
     // Swap with Greens / green

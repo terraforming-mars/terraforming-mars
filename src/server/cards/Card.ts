@@ -20,7 +20,6 @@ import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
-import {Countable} from '../behavior/Countable';
 import {Counter} from '../behavior/Counter';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
@@ -225,8 +224,6 @@ export abstract class Card {
       if (vp1.hasOwnProperty('each')) {
         const vp = vp1 as IVictoryPoints;
         return new Counter(player, this).count(vp);
-      } else {
-        return new Counter(player, this).count(vp1 as Countable);
       }
     }
 

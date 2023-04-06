@@ -11,6 +11,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {newMessage} from '../../logs/MessageBuilder';
 
 const INVALID_TAGS = [
   Tag.EVENT,
@@ -71,7 +72,7 @@ export class Faraday extends CeoCard {
 
   public effectOptions(player: Player, tag: Tag) {
     return new OrOptions(
-      new SelectOption(`Pay 2 M€ to draw a ${tag} card`, 'Confirm', () => {
+      new SelectOption(newMessage('Pay 2 M€ to draw a ${0} card', (b) => b.string(tag)), 'Confirm', () => {
         player.game.defer(
           new SelectPaymentDeferred(
             player,

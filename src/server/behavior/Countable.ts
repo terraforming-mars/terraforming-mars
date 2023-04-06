@@ -32,18 +32,21 @@ export type _Countable = {
   others?: true; // For tags this has a behavior.
 
   /**
-   * Divide the sum by `per`. Round down.
+   * Multiply the sum by this value.
    *
-   * For example, `{cities: {}, per: 2}` would count all the cities on the board, and divide that value by 2.
-   */
-  per?: number;
-
-  /**
-   * Multiple the sum by `each`. Round down.
-   *
-   * For example, `{tags: Tag.MOON, each: 3}` would count all moon tags, and then multiply by 3.
+   * For example, `{cities: {}, each: 2}` would count all the cities on the board, and multiply that value by 2.
    */
   each?: number;
+
+  /**
+   * Divide the sum by this value. Round down.
+   *
+   * For example, `{tags: Tag.MOON, per: 3}` would count all moon tags, and then divide by 3.
+   *
+   * `each` is applied before `per`, so `{tags: Tag.MOON, each: 2, per: 3}` would provide 2/3 the value
+   * of moon tags.
+   */
+  per?: number;
 };
 
 export type Countable = number | _Countable;

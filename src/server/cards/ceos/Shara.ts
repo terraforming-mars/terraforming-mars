@@ -6,7 +6,6 @@ import {CeoCard} from './CeoCard';
 import {Tag} from '../../../common/cards/Tag';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {Resources} from '../../../common/Resources';
-import {PathfindersData} from '../../pathfinders/PathfindersData';
 import {clone} from '../Options';
 
 export class Shara extends CeoCard {

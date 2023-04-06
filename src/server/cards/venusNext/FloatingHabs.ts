@@ -16,7 +16,7 @@ export class FloatingHabs extends ActionCard implements IActionCard {
       cost: 5,
 
       resourceType: CardResource.FLOATER,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {type: 'resource', each: 1, per: 2},
 
       action: {
         spend: {

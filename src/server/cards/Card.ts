@@ -220,7 +220,7 @@ export abstract class Card {
         return vp1.each * Math.floor(this.resourceCount / vp1.per);
       } else {
         const tag = vp1.type;
-        const count = player.tags.count(tag, 'vps') ?? 0;
+        const count = player.tags.count(tag, 'raw') ?? 0;
         return vp1.each * Math.floor(count / vp1.per);
       }
     }
@@ -253,10 +253,10 @@ export abstract class Card {
       break;
 
     case CardRenderItemType.JOVIAN:
-      units = player?.tags.count(Tag.JOVIAN, 'vps');
+      units = player?.tags.count(Tag.JOVIAN, 'raw');
       break;
     case CardRenderItemType.MOON:
-      units = player?.tags.count(Tag.MOON, 'vps');
+      units = player?.tags.count(Tag.MOON, 'raw');
       break;
     }
 

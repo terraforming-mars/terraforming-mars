@@ -79,5 +79,4 @@ export enum CardRenderItemType {
   REDS = 'reds',
   REDS_DEACTIVATED = 'reds-deactivated',
   HAZARD_TILE = 'hazard-tile',
-  CLONE = 'clone',
 }

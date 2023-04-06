@@ -281,8 +281,6 @@ export default Vue.extend({
           classes.push('card-tag tag-city');
         } else if (this.item.type === CardRenderItemType.MARS) {
           classes.push('card-tag tag-mars');
-        } else if (this.item.type === CardRenderItemType.CLONE) {
-          classes.push('card-tag tag-clone');
         }
       }
 

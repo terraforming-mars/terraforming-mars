@@ -18,6 +18,8 @@ const INVALID_TAGS = [
   Tag.WILD,
 ];
 
+const CARD_DRAW_COST = 3;
+
 export class Faraday extends CeoCard {
   constructor() {
     super({
@@ -26,10 +28,10 @@ export class Faraday extends CeoCard {
         cardNumber: 'L27',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.text('5', Size.LARGE).diverseTag(1).colon().megacredits(-2).cards(1, {secondaryTag: AltSecondaryTag.DIVERSE}).asterix();
+          b.text('5', Size.LARGE).diverseTag(1).colon().megacredits(-CARD_DRAW_COST).cards(1, {secondaryTag: AltSecondaryTag.DIVERSE}).asterix();
           b.br.br;
         }),
-        description: 'When you gain a multiple of 5 for any tag type IN PLAY, you may pay 2 M€ to draw a card with that tag. Wild tags do not count for this effect.',
+        description: 'When you gain a multiple of 5 for any tag type IN PLAY, you may pay ${CARD_DRAW_COST} M€ to draw a card with that tag. Wild tags do not count for this effect.',
       },
     });
   }
@@ -71,12 +73,13 @@ export class Faraday extends CeoCard {
   }
 
   public effectOptions(player: Player, tag: Tag) {
+    if (!player.canAfford(CARD_DRAW_COST)) return;
     return new OrOptions(
-      new SelectOption(newMessage('Pay 2 M€ to draw a ${0} card', (b) => b.string(tag)), 'Confirm', () => {
+      new SelectOption(newMessage('Pay ${CARD_DRAW_COST} M€ to draw a ${0} card', (b) => b.string(tag)), 'Confirm', () => {
         player.game.defer(
           new SelectPaymentDeferred(
             player,
-            2,
+            CARD_DRAW_COST,
             {
               title: 'Select how to pay for action',
               afterPay: () => {

@@ -13,12 +13,11 @@ import {Shara} from '../../../src/server/cards/ceos/Shara';
 describe('Shara', function() {
   let card: Shara;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Shara();
-    [game, player, player2] = testGame(2, {ceoExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(2, {ceoExtension: true, pathfindersExpansion: true});
   });
 
   it('Can act', function() {

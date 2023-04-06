@@ -20,7 +20,7 @@ export class ProcessorFactory extends ActionCard implements IProjectCard {
       },
 
       resourceType: CardResource.DATA,
-      victoryPoints: {resourcesHere: {}, each: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       metadata: {
         cardNumber: 'M86',

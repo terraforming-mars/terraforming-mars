@@ -46,7 +46,8 @@ describe('CopernicusTower', () => {
   });
 
   it('victory points', () => {
-    expect(card.getVictoryPoints(player)).eq(0);
+    player.playedCards.push(card);
+    expect(card.getVictoryPoints(player)).eq(1);
     player.tagsForTest = {moon: 7};
     expect(card.getVictoryPoints(player)).eq(7);
   });

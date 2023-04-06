@@ -14,7 +14,7 @@ export class RefugeeCamps extends ActionCard implements IProjectCard {
       name: CardName.REFUGEE_CAMPS,
       type: CardType.ACTIVE,
       resourceType: CardResource.CAMP,
-      victoryPoints: {resourcesHere: {}, each: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
 
       action: {
         production: {megacredits: -1},

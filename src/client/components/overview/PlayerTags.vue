@@ -14,6 +14,7 @@
         <div class="player-tags-secondary">
           <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
             <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
+              <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
               <PointsPerTag :points="tagDetail"/>
               <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
             </div>
@@ -146,7 +147,7 @@ export default Vue.extend({
       } else {
         const vps = getCard(card.name)?.victoryPoints;
         if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.tag !== undefined) {
-          details[vps.tag].points += (vps.each / vps.per);
+          details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
         }
       }
     }

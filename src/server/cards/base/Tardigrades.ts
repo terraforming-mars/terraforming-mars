@@ -15,7 +15,7 @@ export class Tardigrades extends ActionCard implements IProjectCard {
       cost: 4,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: {resourcesHere: {}, each: 1, per: 4},
+      victoryPoints: {resourcesHere: {}, per: 4},
 
       action: {
         addResources: 1,

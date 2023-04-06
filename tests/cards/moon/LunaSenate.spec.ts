@@ -48,6 +48,7 @@ describe('LunaSenate', () => {
   });
 
   it('getVictoryPoints', () => {
+    player.playedCards.push(card);
     player.tagsForTest = {moon: 3};
     expect(card.getVictoryPoints(player)).eq(3);
 

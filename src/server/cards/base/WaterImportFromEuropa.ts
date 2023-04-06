@@ -18,7 +18,7 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 25,
 
-      victoryPoints: {tag: Tag.JOVIAN, each: 1, per: 1},
+      victoryPoints: {tag: Tag.JOVIAN},
 
       metadata: {
         cardNumber: '012',

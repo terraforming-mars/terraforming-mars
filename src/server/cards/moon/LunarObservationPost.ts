@@ -17,7 +17,7 @@ export class LunarObservationPost extends Card implements IActionCard {
       cost: 7,
 
       resourceType: CardResource.DATA,
-      victoryPoints: {resourcesHere: {}, each: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
       reserveUnits: {titanium: 1},
 
       metadata: {

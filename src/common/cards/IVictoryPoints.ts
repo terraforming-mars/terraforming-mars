@@ -13,6 +13,6 @@ export interface IVictoryPoints {
     colonies?: {},
   }
   all?: boolean,
-  each: number,
-  per: number,
+  each?: number,
+  per?: number,
 }

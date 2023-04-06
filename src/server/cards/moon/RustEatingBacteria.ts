@@ -15,7 +15,7 @@ export class RustEatingBacteria extends ActionCard implements IProjectCard {
       cost: 7,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: {resourcesHere: {}, each: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       action: {
         spend: {steel: 1},

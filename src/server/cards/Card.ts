@@ -213,18 +213,15 @@ export abstract class Card {
   }
 
   public getVictoryPoints(player: Player): number {
-    const vp1 = this.properties.victoryPoints;
-    if (vp1 === 'special') {
-      throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
+    const vp = this.properties.victoryPoints;
+    if (typeof(vp) === 'number') {
+      return vp;
     }
-    if (vp1 !== undefined) {
-      if (typeof(vp1) === 'number') {
-        return vp1;
-      }
-      if (vp1.hasOwnProperty('each')) {
-        const vp = vp1 as IVictoryPoints;
-        return new Counter(player, this).count(vp);
-      }
+    if (typeof(vp) === 'object') {
+      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+    }
+    if (vp === 'special') {
+      throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
     }
 
     const vps = this.properties.metadata.victoryPoints;
@@ -289,22 +286,24 @@ export abstract class Card {
       properties.metadata.victoryPoints = vps;
       return;
     }
+    const each = vps.each ?? 1;
+    const per = vps.per ?? 1;
     if (vps.resourcesHere !== undefined) {
       if (properties.resourceType === undefined) {
         throw new Error('When defining a card-resource based VP, resourceType must be defined.');
       }
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.each, vps.per);
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, each, per);
       return;
     } else if (vps.tag !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.tag, vps.each, vps.per);
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.tag, each, per);
     } else if (vps.cities !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.cities(vps.each, vps.per, vps.all);
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.cities(each, per, vps.all);
     } else if (vps.colonies !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.colonies(vps.each, vps.per, vps.all);
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.colonies(each, per, vps.all);
     } else if (vps.moon !== undefined) {
       if (vps.moon.road !== undefined) {
         // vps.per is ignored
-        properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.moonRoadTile(vps.each, vps.all);
+        properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.moonRoadTile(each, vps.all);
       } else {
         throw new Error('moon defined, but no valid sub-object defined');
       }

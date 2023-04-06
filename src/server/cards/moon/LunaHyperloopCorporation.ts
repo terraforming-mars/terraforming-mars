@@ -23,7 +23,7 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, ICorp
         stock: {steel: 4},
       },
 
-      victoryPoints: {moon: {road: {}}, all, each: 1, per: 1},
+      victoryPoints: {moon: {road: {}}, all},
 
       metadata: {
         description: 'You start with 38 M€ and 4 steel.',

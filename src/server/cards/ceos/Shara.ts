@@ -48,8 +48,8 @@ export class Shara extends CeoCard {
         player,
         this,
         (tag) => {
-          // const value = PathfindersData.getValue(data, tag) - player.game.generation;
-          const value = PathfindersData.getValue(data, tag);
+          // const value = data[tag] - player.game.generation;
+          const value = data[tag];
           player.addResource(Resources.MEGACREDITS, value, {log: true});
         },
       ),

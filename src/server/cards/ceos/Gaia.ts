@@ -17,7 +17,7 @@ export class Gaia extends CeoCard {
           b.opgArrow().colon().adjacencyBonus().asterix();
           b.br;
         }),
-        description: 'Once per game, gain the Ares adjacency bonuses of all tiles placed on Mars.',
+        description: 'Once per game, gain the Ares adjacency bonuses of all non-ocean tiles placed on Mars.',
       },
     });
   }
@@ -28,7 +28,7 @@ export class Gaia extends CeoCard {
     // For every tile placed on the board, grant all the adjacency bonuses for that tile.
     // Owners and types of the tiles do not matter.  All the space needs a tile, including Ocean Tiles.
     const tilesOnMars = board.spaces.filter((space) =>
-      space.tile?.tileType !== undefined && space.spaceType !== SpaceType.COLONY,
+      space.tile?.tileType !== undefined && space.spaceType !== SpaceType.OCEAN && space.spaceType !== SpaceType.COLONY,
     );
     tilesOnMars.forEach((space) => {
       AresHandler.ifAres(player.game, (aresData) => {

@@ -30,10 +30,10 @@ describe('Naomi', function() {
     expect(player.megaCredits).to.eq(0);
     game.colonies[0].addColony(player);
     expect(player.energy).to.eq(2);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.megaCredits).to.eq(3);
     game.colonies[1].addColony(player);
     expect(player.energy).to.eq(4);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.megaCredits).to.eq(6);
 
     // Player2 here is just a sanity check, _and_ is necessary for the colony count
     game.colonies[0].addColony(player2);

@@ -252,10 +252,10 @@ export abstract class Card {
       break;
 
     case CardRenderItemType.JOVIAN:
-      units = player?.tags.count(Tag.JOVIAN, 'vps');
+      units = player?.tags.count(Tag.JOVIAN, 'raw');
       break;
     case CardRenderItemType.MOON:
-      units = player?.tags.count(Tag.MOON, 'vps');
+      units = player?.tags.count(Tag.MOON, 'raw');
       break;
     }
 

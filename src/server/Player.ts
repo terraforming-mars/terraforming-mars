@@ -1004,7 +1004,6 @@ export class Player {
 
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
-    let cardsToKeep = 4;
     if (draftVariant) {
       dealtCards = this.draftedCards;
       this.draftedCards = [];
@@ -1014,10 +1013,15 @@ export class Player {
         cardsToDraw = 5;
       }
       if (LunaProjectOffice.isActive(this)) {
-        cardsToKeep = 5;
         cardsToDraw = 5;
       }
       this.dealForDraft(cardsToDraw, dealtCards);
+    }
+
+    let cardsToKeep = 4;
+    if (LunaProjectOffice.isActive(this)) {
+      // If Luna Project is active, they get to keep the 5 cards they drafted
+      cardsToKeep = 5;
     }
 
     const action = DrawCards.choose(this, dealtCards, {paying: true, keepMax: cardsToKeep});

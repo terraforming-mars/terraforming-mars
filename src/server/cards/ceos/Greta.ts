@@ -15,15 +15,16 @@ export class Greta extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br.br;
-          b.tr(1).colon().megacredits(4);
+          b.tr(1).colon().megacredits(4).asterix();
           b.br;
         }),
-        description: 'When you take an action or play a card that increases your TR THIS GENERATION, gain 4 M€ for each step.',
+        description: 'When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.',
       },
     });
   }
 
   public opgActionIsActive = false;
+  public effectTriggerCount = 0;
 
   public action(): PlayerInput | undefined {
     this.opgActionIsActive = true;
@@ -31,11 +32,12 @@ export class Greta extends CeoCard {
     return undefined;
   }
 
-  public onIncreaseTerraformRating(player: Player, cardOwner: Player, steps: number) {
+  public onIncreaseTerraformRating(player: Player, cardOwner: Player) {
     const game = player.game;
-    if (this.opgActionIsActive === true) {
+    if (this.opgActionIsActive === true && this.effectTriggerCount < 10) {
       if (player === cardOwner && game.phase === Phase.ACTION) {
-        player.addResource(Resources.MEGACREDITS, 4*steps, {log: true});
+        player.addResource(Resources.MEGACREDITS, 4, {log: true});
+        this.effectTriggerCount++;
       }
     }
     return undefined;

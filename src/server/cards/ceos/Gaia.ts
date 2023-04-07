@@ -6,6 +6,7 @@ import {CeoCard} from './CeoCard';
 import {SpaceType} from '../../../common/boards/SpaceType';
 
 import {AresHandler} from '../../ares/AresHandler';
+import {isHazardTileType} from '../../../common/TileType';
 
 export class Gaia extends CeoCard {
   constructor() {
@@ -17,7 +18,7 @@ export class Gaia extends CeoCard {
           b.opgArrow().colon().adjacencyBonus().asterix();
           b.br;
         }),
-        description: 'Once per game, gain the Ares adjacency bonuses of all non-ocean tiles placed on Mars.',
+        description: 'Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.',
       },
     });
   }
@@ -26,9 +27,11 @@ export class Gaia extends CeoCard {
     this.isDisabled = true;
     const board = player.game.board;
     // For every tile placed on the board, grant all the adjacency bonuses for that tile.
-    // Owners and types of the tiles do not matter.  All the space needs a tile, including Ocean Tiles.
+    // We do not exclude Ocean tiles because of things like Ocean Cities.
+    // We exclude all tiles that _do not_ have owners
+    // We exlcude all hazard tiles. (Spaces with Hazard tiles can have players in weird edge cases, like with Land Claim)
     const tilesOnMars = board.spaces.filter((space) =>
-      space.tile?.tileType !== undefined && space.spaceType !== SpaceType.OCEAN && space.spaceType !== SpaceType.COLONY,
+      space.tile?.tileType !== undefined && space.player !== undefined && !isHazardTileType(space.tile.tileType) && space.spaceType !== SpaceType.COLONY,
     );
     tilesOnMars.forEach((space) => {
       AresHandler.ifAres(player.game, (aresData) => {

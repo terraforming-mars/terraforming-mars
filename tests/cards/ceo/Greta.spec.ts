@@ -43,12 +43,35 @@ describe('Greta', function() {
     player.game.increaseVenusScaleLevel(player, 1);
     expect(player.megaCredits).to.eq(12);
 
-    player.playCard(new BigAsteroid()); // 2 Temp Steps
-    expect(player.megaCredits).to.eq(20);
+    player.playCard(new BigAsteroid()); // 2 Temp Steps in ONE ACTION
+    expect(player.megaCredits).to.eq(16);
 
-    player.playCard(new Omnicourt()); // 2 Steps
-    expect(player.megaCredits).to.eq(28);
+    player.playCard(new Omnicourt()); // 2 Steps in ONE ACTION
+    expect(player.megaCredits).to.eq(20);
   });
+
+  it('Does not gain MC after 10 increases', function() {
+    // doesnt gain before card action
+    runAllActions(game);
+    game.phase = Phase.ACTION;
+    card.action();
+    expect(player.megaCredits).to.eq(0);
+    player.game.increaseOxygenLevel(player, 2); // One action, two steps, only 4MC
+    player.game.increaseOxygenLevel(player, 1);
+    player.game.increaseOxygenLevel(player, 1);
+    player.game.increaseOxygenLevel(player, 1);
+    player.game.increaseOxygenLevel(player, 1);
+    expect(player.megaCredits).to.eq(20);
+    player.game.increaseTemperature(player, 2); // One action, two steps, only 4MC
+    player.game.increaseTemperature(player, 1);
+    player.game.increaseTemperature(player, 1);
+    player.game.increaseTemperature(player, 1);
+    player.game.increaseTemperature(player, 1);
+    expect(player.megaCredits).to.eq(40);
+    player.game.increaseTemperature(player, 2); // 10 increases already, no more bonuses
+    expect(player.megaCredits).to.eq(40);
+  });
+
 
   it('Can only act once per game, no income when not active', function() {
     card.action();

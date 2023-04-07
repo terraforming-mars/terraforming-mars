@@ -8,7 +8,6 @@ import {Resources} from '../../../common/Resources';
 import {multiplier} from '../Options';
 
 
-// TODO(dl): Does Duncan trigger Vitor?
 export class Duncan extends CeoCard {
   constructor() {
     super({
@@ -19,7 +18,7 @@ export class Duncan extends CeoCard {
           b.opgArrow().vpIcon().asterix().megacredits(4, {multiplier});
           b.br;
         }),
-        description: 'Once per game, gain 6-X VP and 4X M€, where X is the current generation number.',
+        description: 'Once per game, gain 7-X VP and 4X M€, where X is the current generation number.',
       },
     });
   }

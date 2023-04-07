@@ -8,7 +8,6 @@ import {TestPlayer} from '../../TestPlayer';
 
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Birds} from '../../../src/server/cards/base/Birds';
-import {AsteroidRights} from '../../../src/server/cards/promo/AsteroidRights';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 
 import {Will} from '../../../src/server/cards/ceos/Will';
@@ -35,11 +34,10 @@ describe('Will', function() {
   it('Takes OPG action', function() {
     const birds = new Birds();
     const ants = new Ants();
-    const asteroidRights = new AsteroidRights();
-    player.playedCards.push(birds, ants, asteroidRights);
+    player.playedCards.push(birds, ants);
 
     card.action(player);
-    expect(game.deferredActions).has.length(6);
+    expect(game.deferredActions).has.length(4);
 
     // Add animals
     game.deferredActions.runNext();
@@ -49,17 +47,12 @@ describe('Will', function() {
     game.deferredActions.runNext();
     expect(ants.resourceCount).eq(2);
 
-    game.deferredActions.runNext(); // No Science resource cards, skip
     game.deferredActions.runNext(); // No Floater resource cards, skip
-
-    // Add asteroid
-    game.deferredActions.runNext();
-    expect(asteroidRights.resourceCount).eq(1);
 
     // Add resource to any card
     const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     selectCard.cb([selectCard.cards[1]]);
-    expect(ants.resourceCount).eq(3);
+    expect(ants.resourceCount).eq(4);
   });
 
   it('Takes OPG w/ Communication Center', function() {
@@ -73,16 +66,14 @@ describe('Will', function() {
 
     // Action
     card.action(player);
-    expect(game.deferredActions).has.length(6);
+    expect(game.deferredActions).has.length(4);
     game.deferredActions.runNext(); // No animals
     game.deferredActions.runNext(); // No bugs
-    game.deferredActions.runNext(); // No Science
     game.deferredActions.runNext(); // No Floaters
-    game.deferredActions.runNext(); // No Asteroid
-    game.deferredActions.runNext(); // One Wild on comms
+    game.deferredActions.runNext(); // Two Wild on comms
 
-    // We should have drawn a card here
-    expect(comms.resourceCount).eq(0);
+    // We should have drawn a card here AND added another science to Comms
+    expect(comms.resourceCount).eq(1);
     expect(player.cardsInHand.length).to.eq(1);
   });
 });

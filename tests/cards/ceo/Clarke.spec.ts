@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, forceGenerationEnd, churnAction} from '../../TestingUtils';
-import {Clarke} from '../../../src/server/cards/ceos/Clarke';
 import {testGame} from '../../TestGame';
+import {Clarke} from '../../../src/server/cards/ceos/Clarke';
 
 describe('Clarke', function() {
   let card: Clarke;
@@ -28,7 +28,9 @@ describe('Clarke', function() {
 
   it('Takes action', function() {
     expect(churnAction(card, player)).is.undefined;
-    expect(player.plants).eq(4);
-    expect(player.heat).eq(4);
+    expect(player.production.plants).eq(1);
+    expect(player.production.heat).eq(1);
+    expect(player.plants).eq(5);
+    expect(player.heat).eq(5);
   });
 });

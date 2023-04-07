@@ -19,7 +19,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
       cost: 13,
 
       resourceType: CardResource.ASTEROID,
-      victoryPoints: {type: 'resource', each: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
 
       behavior: {
         production: {energy: -1},

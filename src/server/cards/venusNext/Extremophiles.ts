@@ -17,7 +17,7 @@ export class Extremophiles extends Card implements IActionCard {
       tags: [Tag.VENUS, Tag.MICROBE],
       cost: 3,
       resourceType: CardResource.MICROBE,
-      victoryPoints: {type: 'resource', each: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
       metadata: {

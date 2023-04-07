@@ -42,7 +42,7 @@ export class EcologicalZone extends Card implements IProjectCard {
       cost,
       resourceType: CardResource.ANIMAL,
       adjacencyBonus,
-      victoryPoints: {type: 'resource', each: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
       requirements: CardRequirements.builder((b) => b.greeneries()),
       metadata,
     });

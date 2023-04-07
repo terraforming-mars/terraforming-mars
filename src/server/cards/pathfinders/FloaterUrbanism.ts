@@ -19,7 +19,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
       tags: [Tag.VENUS],
       resourceType: CardResource.VENUSIAN_HABITAT,
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS, 4)),
-      victoryPoints: {type: 'resource', each: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
 
       metadata: {
         renderData: CardRenderer.builder((b) => {

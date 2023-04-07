@@ -21,7 +21,7 @@ export class Predators extends Card implements IProjectCard, IActionCard {
       cost: 14,
 
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', each: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
       requirements: CardRequirements.builder((b) => b.oxygen(11)),
 
       metadata: {

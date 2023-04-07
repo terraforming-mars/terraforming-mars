@@ -52,6 +52,7 @@ describe('CrescentResearchAssociation', () => {
   });
 
   it('getVictoryPoints', () => {
+    player.playedCards.push(card);
     player.tagsForTest = {moon: 0};
     expect(card.getVictoryPoints(player)).eq(0);
     player.tagsForTest = {moon: 1};

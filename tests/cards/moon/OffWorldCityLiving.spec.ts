@@ -50,6 +50,7 @@ describe('OffWorldCityLiving', () => {
   });
 
   it('getVictoryPoints', () => {
+    player.playedCards.push(card);
     expect(card.getVictoryPoints(player)).eq(0);
     const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
     colonySpaces[0].tile = {tileType: TileType.CITY};

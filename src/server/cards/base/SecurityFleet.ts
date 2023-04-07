@@ -15,7 +15,7 @@ export class SecurityFleet extends ActionCard implements IProjectCard {
       cost: 12,
       resourceType: CardResource.FIGHTER,
 
-      victoryPoints: {type: 'resource', each: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
 
       action: {
         spend: {titanium: 1},

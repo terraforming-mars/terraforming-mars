@@ -8,7 +8,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IActionCard} from '../ICard';
 import {all} from '../Options';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
@@ -24,7 +23,7 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, ICorp
         stock: {steel: 4},
       },
 
-      victoryPoints: 'special',
+      victoryPoints: {moon: {road: {}}, all},
 
       metadata: {
         description: 'You start with 38 M€ and 4 steel.',
@@ -36,7 +35,6 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, ICorp
           }).br,
           b.vpText('1 VP for each road tile on The Moon.').br;
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(1, true),
       },
     });
   }
@@ -50,9 +48,5 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, ICorp
     player.addResource(Resources.MEGACREDITS, roadTileCount, {log: true});
 
     return undefined;
-  }
-
-  public override getVictoryPoints(player: Player) {
-    return MoonExpansion.spaces(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
   }
 }

@@ -20,6 +20,7 @@ import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
+import {Counter} from '../behavior/Counter';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -98,11 +99,15 @@ export abstract class Card {
           throw new Error(`${properties.name} must have a cost property`);
         }
       }
-      // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
-      Card.autopopulateMetadataVictoryPoints(properties);
+      try {
+        // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
+        Card.autopopulateMetadataVictoryPoints(properties);
 
-      validateBehavior(properties.behavior);
-      validateBehavior(properties.firstAction);
+        validateBehavior(properties.behavior);
+        validateBehavior(properties.firstAction);
+      } catch (e) {
+        throw new Error(`Cannot validate ${properties.name}: ${e}`);
+      }
 
       const p: Properties = {
         ...properties,
@@ -208,21 +213,15 @@ export abstract class Card {
   }
 
   public getVictoryPoints(player: Player): number {
-    const vp1 = this.properties.victoryPoints;
-    if (vp1 === 'special') {
-      throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
+    const vp = this.properties.victoryPoints;
+    if (typeof(vp) === 'number') {
+      return vp;
     }
-    if (vp1 !== undefined) {
-      if (typeof(vp1) === 'number') {
-        return vp1;
-      }
-      if (vp1.type === 'resource') {
-        return vp1.each * Math.floor(this.resourceCount / vp1.per);
-      } else {
-        const tag = vp1.type;
-        const count = player.tags.count(tag, 'raw') ?? 0;
-        return vp1.each * Math.floor(count / vp1.per);
-      }
+    if (typeof(vp) === 'object') {
+      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+    }
+    if (vp === 'special') {
+      throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
     }
 
     const vps = this.properties.metadata.victoryPoints;
@@ -287,14 +286,29 @@ export abstract class Card {
       properties.metadata.victoryPoints = vps;
       return;
     }
-    if (vps.type === 'resource') {
+    const each = vps.each ?? 1;
+    const per = vps.per ?? 1;
+    if (vps.resourcesHere !== undefined) {
       if (properties.resourceType === undefined) {
         throw new Error('When defining a card-resource based VP, resourceType must be defined.');
       }
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.each, vps.per);
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, each, per);
       return;
+    } else if (vps.tag !== undefined) {
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.tag, each, per);
+    } else if (vps.cities !== undefined) {
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.cities(each, per, vps.all);
+    } else if (vps.colonies !== undefined) {
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.colonies(each, per, vps.all);
+    } else if (vps.moon !== undefined) {
+      if (vps.moon.road !== undefined) {
+        // vps.per is ignored
+        properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.moonRoadTile(each, vps.all);
+      } else {
+        throw new Error('moon defined, but no valid sub-object defined');
+      }
     } else {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.type, vps.each, vps.per);
+      throw new Error('Unknown VPs defined');
     }
   }
 

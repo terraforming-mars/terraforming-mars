@@ -204,13 +204,15 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.GLOBAL_EVENT) {
         classes.push('turmoil-global-event');
 
-        // CEO Extension:
+      // CEO Extension:
       } else if (type === CardRenderItemType.ARROW_OPG) {
         classes.push('card-arrow-opg');
       } else if (type === CardRenderItemType.REDS) {
         classes.push('card-reds');
       } else if (type === CardRenderItemType.REDS_DEACTIVATED) {
         classes.push('card-reds-deactivated');
+      } else if (type === CardRenderItemType.ADJACENCY_BONUS) {
+        classes.push('card-adjacency-bonus');
       } else if (type === CardRenderItemType.HAZARD_TILE) {
         if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
           classes.push(`card-hazard-tile--${this.item.size}`);

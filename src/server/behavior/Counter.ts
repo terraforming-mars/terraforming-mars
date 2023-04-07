@@ -80,7 +80,7 @@ export class Counter {
         sum += player.tags.multipleCount(tag);
       } else { // Single tag
         if (countable.others !== true) { // Just count player's own tags.
-          sum += player.tags.count(tag, context);
+          sum += player.tags.count(tag, context === 'vps' ? 'raw' : context);
 
           if (this.cardIsUnplayed) { // And include the card itself if it isn't already on the tableau.
             sum += card.tags.filter((t) => t === tag).length;

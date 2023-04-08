@@ -3,9 +3,11 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
+import {Game} from '../../Game';
 
 import {IColony} from '../../colonies/IColony';
 import {SelectColony} from '../../inputs/SelectColony';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class Maria extends CeoCard {
   constructor() {
@@ -39,6 +41,9 @@ export class Maria extends CeoCard {
         game.colonies.push(colony);
         game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
         game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
+
+        // 'Force' the game to update the new colony activation status
+        this.checkActivation(colony, game);
         if (colony.isActive) {
           colony.addColony(player);
         }
@@ -49,5 +54,17 @@ export class Maria extends CeoCard {
     });
     selectColony.showTileOnly = true;
     return selectColony;
+  }
+
+  private checkActivation(colony: IColony, game: Game): void {
+    if (colony.isActive) return;
+    for (const player of game.getPlayers()) {
+      for (const card of player.tableau) {
+        const active = ColoniesHandler.maybeActivateColony(colony, card);
+        if (active) {
+          return;
+        }
+      }
+    }
   }
 }

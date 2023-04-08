@@ -530,7 +530,7 @@ describe('Game', () => {
     const game = Game.newInstance('gto', [player], player);
     const card = new SaturnSystems();
     player.setCorporationForTest(card);
-    expect(game.getCardPlayer(card.name)).to.eq(player);
+    expect(game.getCardPlayerOrThrow(card.name)).to.eq(player);
   });
 
   it('Does not assign player to ocean after placement', () => {
@@ -630,6 +630,31 @@ describe('Game', () => {
 
     expect(prevMilestones).to.not.eq(milestones);
     expect(prevAwards).to.not.eq(awards);
+  });
+
+  // https://github.com/terraforming-mars/terraforming-mars/issues/5572
+  it('Milestones can be claimed', function() {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({}));
+    player.popWaitingFor();
+
+    player.setTerraformRating(35); // Can claim Terraformer milestone
+
+    player.megaCredits = 7;
+    // Cannot afford milestone.
+    const actions = cast(player.getActions(), OrOptions);
+
+    expect(actions.options.find((option) => option.title === 'Claim a milestone')).is.undefined;
+
+    player.megaCredits = 8;
+    const actions2 = cast(player.getActions(), OrOptions);
+    const claimMilestoneAction = cast(actions2.options.find((option) => option.title === 'Claim a milestone'), OrOptions);
+    claimMilestoneAction.options[0].cb();
+    runAllActions(game);
+    const claimedMilestones = player.game.claimedMilestones;
+
+    expect(claimedMilestones.find((cm) => cm.milestone.name === 'Terraformer' && cm.player === player)).is.not.undefined;
   });
 
   it('specifically-requested corps override expansion corps', () => {

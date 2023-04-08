@@ -1392,7 +1392,7 @@ export class Player {
         milestone: milestone,
       });
       // VanAllen CEO Hook for Milestones
-      const vanAllen = this.game.getCardPlayer(CardName.VANALLEN);
+      const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
       if (vanAllen !== undefined) {
         vanAllen.addResource(Resources.MEGACREDITS, 3, {log: true});
       }

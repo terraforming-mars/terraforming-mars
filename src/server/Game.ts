@@ -1454,16 +1454,29 @@ export class Game implements Logger {
     return ret;
   }
 
-  public getCardPlayer(name: CardName): Player {
+  /**
+   * Returns the Player holding this card, or throws.
+   */
+  public getCardPlayerOrThrow(name: CardName): Player {
+    const player = this.getCardPlayerOrUndefined(name);
+    if (player === undefined) {
+      throw new Error(`No player has played ${name}`);
+    }
+    return player;
+  }
+
+  /**
+   * Returns the Player holding this card, or throws.
+   */
+  public getCardPlayerOrUndefined(name: CardName): Player | undefined {
     for (const player of this.players) {
-      // Check cards player has played
       for (const card of player.tableau) {
         if (card.name === name) {
           return player;
         }
       }
     }
-    throw new Error(`No player has played ${name}`);
+    return undefined;
   }
 
   // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.

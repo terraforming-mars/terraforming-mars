@@ -30,7 +30,7 @@ export class Neil extends CeoCard {
   public onCardPlayed(player: Player, card: IProjectCard) {
     for (const tag of card.tags) {
       if (tag === Tag.MOON) {
-        player.game.getCardPlayer(this.name).addResource(Resources.MEGACREDITS, 1, {log: true});
+        player.game.getCardPlayerOrThrow(this.name).addResource(Resources.MEGACREDITS, 1, {log: true});
       }
     }
   }

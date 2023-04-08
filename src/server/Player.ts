@@ -1392,9 +1392,14 @@ export class Player {
         milestone: milestone,
       });
       // VanAllen CEO Hook for Milestones
-      if (this.cardIsInEffect(CardName.VANALLEN)) {
-        this.addResource(Resources.MEGACREDITS, 3, {log: true});
-      } else {
+      // is Van Allen in play? If so, give that player 3MC
+      const isVanAllenInGame = this.game.getPlayers().some((p) => p.getCeo(CardName.VANALLEN) !== undefined);
+      if (isVanAllenInGame) {
+        const vanAllenPlayer = this.game.getCardPlayer(CardName.VANALLEN);
+        vanAllenPlayer.addResource(Resources.MEGACREDITS, 3, {log: true});
+      }
+      // Now, if THIS player is Van Allen, they do not have to pay for the milestone
+      if (!this.cardIsInEffect(CardName.VANALLEN)) {
         this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
       }
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));

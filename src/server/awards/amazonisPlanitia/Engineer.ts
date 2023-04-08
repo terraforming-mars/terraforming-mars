@@ -49,5 +49,12 @@ export class Engineer implements IAward {
     CardName.DARKSIDE_MINING_SYNDICATE,
     CardName.ROVER_DRIVERS_UNION,
     CardName.LUNA_FIRST_INCORPORATED,
+    // Pathfinders
+    CardName.RARE_EARTH_ELEMENTS,
+    CardName.CASSINI_STATION,
+    CardName.MICROBIOLOGY_PATENTS,
+    CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
+    CardName.RARE_EARTH_ELEMENTS,
+    CardName.SMALL_OPEN_PIT_MINE,
   ];
 }

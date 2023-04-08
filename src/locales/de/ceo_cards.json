@@ -42,11 +42,14 @@
 	"Floyd": "Floyd",
 	"Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.": "Einmal pro Spiel spiele eine Karte aus der Hand für 13 + 2X M€ weniger, wobei X die aktuelle Generation ist.",
 
+	"Gaia": "Gaia",
+	"Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.": "Einmal pro Spiel erhalte den Ares-Nachbarschaftsbonus von allen Spieler eigenen Plättchen auf dem Mars.",
+	
 	"Gordon": "Gordon",
 	"Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.": "Effekt: Ignoriere die Platzierungsbeschränkungen für Grünflächen und Stadtplättchen auf dem Mars. Erhalte 2 M€, wenn du ein Grünflächen- oder Stadtplättchen auf dem Mars platzierst.",
 
 	"Greta": "Greta",
-	"When you take an action or play a card that increases your TR THIS GENERATION, gain 4 M€ for each step.": "Wenn du eine Aktion ausführst oder eine Karte ausspielst, die deinen TW in DIESER GENERATION erhöht, erhalte 4 M€ für jeden Schritt.",
+	"When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "Wenn du eine Aktion ausführst oder eine Karte ausspielst, die deinen TW in DIESER GENERATION erhöht (max. 10 Mal), erhalte 4 M€ für jeden Schritt.",
 
 	"HAL 9000": "HAL 9000",
 	"Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "Einmal pro Spiel reduziere jede deiner Produktionen um 1, erhalte je 4 dieser Ressource.",
@@ -70,7 +73,7 @@
 	"Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "Einmal pro Spiel lege eine beliebige Anzahl von Erdkarten ab, ziehe so viele Weltraumkarten und erhalte so viele Titan-Ressourcen plus 6.",
 
 	"Naomi": "Naomi",
-	"When you build a colony, gain 2 energy and 2 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "Wenn du eine Kolonie baust, erhalte 2 Energie und 2 M€. Einmal pro Spiel setzte jede Koloniewertung auf den höchsten oder niedrigsten Wert.",
+	"When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "Wenn du eine Kolonie baust, erhalte 2 Energie und 3 M€. Einmal pro Spiel setzte jede Koloniewertung auf den höchsten oder niedrigsten Wert.",
 
 	"Neil": "Neil",
 	"Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Erhalte 1 M€, wenn ein beliebiger Spieler ein Mondsymbol ausspielt. Einmal pro Spiel erhöhe deine M€-Produktion um den Wert der NIEDRIGSTEN Mondwertung.",
@@ -82,7 +85,7 @@
 	"Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.": "Einmal pro Spiel ersetzte alle neutralen Delegierten durch deine Delegierten. Erhalte 3 M€ für jeden auf diese Weise ausgetauschten Delegierten. Platziere 3 neutrale Delegierte.",
 
 	"Quill": "Quill",
-	"Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card.": "Einmal pro Spiel, füge 2 Schweber zu jeder deiner Karten hinzu, die Schweber sammeln, dann füge 2 Schweber zu einer beliebigen Karte hinzu.",
+	"Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card. Gain 1 M€ for every 2 floaters added this way.": "Einmal pro Spiel, füge 2 Schweber zu jeder deiner Karten hinzu, die Schweber sammeln, dann füge 2 Schweber zu einer beliebigen Karte hinzu. Du erhältst 1 M€ für je 2 Schweber, die du auf diese Weise hinzufügst.",
 
 	"Rogers": "Rogers",
 	"Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.": "Ignoriere die globalen Anforderungen für deine Venus-Karten in DIESE GENERATION. Wenn du ein Venus-Symbol in DIESER GENERATION spielst, zahle 3 M€ weniger dafür.",
@@ -103,7 +106,7 @@
 	"You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.": "Effekt: Du darfst kostenfrei Meilensteine beanspruchen (du musst weiterhin die Voraussetzungen erfüllen). Wenn ein Meilenstein beansprucht wird, erhalte 3 M€.",
 
 	"Will": "Will",
-	"Once per game, add the following resources to your cards: 2 animals, 2 microbes, 1 science, 1 floater, 1 asteroid, 1 wild.": "Einmal pro Spiel füge die folgenden Ressourcen zu deinen Karten hinzu: 2 Tiere, 2 Mikroben, 1 Wissenschaft, 1 Schweber, 1 Asteroid, 1 Joker-Ressource.",
+	"Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "Einmal pro Spiel füge die folgenden Ressourcen zu deinen Karten hinzu: 2 Tiere, 2 Mikroben, 2 Schweber, 2 Joker-Ressourcen.",
 
 	"Xavier": "Xavier",
 	"Gain 2 wild tags for THIS GENERATION.": "Erhalte 2 Joker-Symbole für DIESE GENERATION.",
@@ -112,5 +115,5 @@
 	"Once per game, gain all your colony bonuses twice.": "Einmal pro Spiel erhalte alle Boni deiner Kolonie doppelt.",
 
 	"Zan": "Zan",
-	"You are immune to Reds' ruling policy. Once per game, place all of your available delegates in Reds.": "Du bist immun gegen die Agendapolitik der Roten. Einmal pro Spiel platziere alle deine verfügbaren Delegierten in die Roten."
+	"You are immune to Reds' ruling policy. Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "Du bist immun gegen die Agendapolitik der Roten. Einmal pro Spiel platziere alle deine verfügbaren Delegierten in die Roten. Du erhältst 1 M€ für jeden auf diese Weise platzierten Delegierten."
 }

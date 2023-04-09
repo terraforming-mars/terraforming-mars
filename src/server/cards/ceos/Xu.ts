@@ -6,6 +6,7 @@ import {CeoCard} from './CeoCard';
 import {played, all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
+import {sum} from '../../../common/utils/utils';
 
 export class Xu extends CeoCard {
   constructor() {
@@ -27,14 +28,14 @@ export class Xu extends CeoCard {
   public action(player: Player): PlayerInput | undefined {
     this.isDisabled = true;
     const players = player.game.getPlayers();
-    const amount = players
-      .map((p) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw')) // If the player being counted is Me, include Wild tags. Dont include opponent wild tags
-      .reduce((a, c) => a + c, 0);
 
-    player.addResource(Resources.MEGACREDITS, amount * 2, {log: true});
+    // If the player being counted is Me, include Wild tags. Dont include opponent wild tags
+    const counts = players.map((p: Player) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw'));
 
-    const maxPlayerVenusTagCount = Math.max(...players.map((p) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw')));
+    const total = sum(counts);
+    player.addResource(Resources.MEGACREDITS, total * 2, {log: true});
 
+    const maxPlayerVenusTagCount = Math.max(...counts);
     if (maxPlayerVenusTagCount === player.tags.count(Tag.VENUS)) {
       player.addResource(Resources.MEGACREDITS, 8, {log: true});
     }

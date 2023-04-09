@@ -318,8 +318,8 @@
     "Select colony tile for trade with": "Wähle Kolonieplättchen zum Handeln",
     "Pay ${0} M€": "Zahle ${0} M€",
     "Pay ${0} energy": "Zahle ${0} Energie",
-    "Pay ${0} Titanium": "Zahle ${0} Titan",
-    "Pay ${0} Data (use ${1})": "Zahle ${0} Daten (nutze die ${1} Aktion)",
+    "Pay ${0} titanium": "Zahle ${0} Titan",
+    "Pay ${0} data (use ${1})": "Zahle ${0} Daten (nutze die ${1} Aktion)",
     "Trade with a colony tile": "Mit einer Koloniekarte handeln",
     "(Enceladus - (Microbes)": "(Enceladus - (Mikroben)",
 

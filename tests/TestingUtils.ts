@@ -228,8 +228,9 @@ export function churnAction(card: IActionCard, player: TestPlayer) {
  * Rather than have to know which is correct, this function supports both cases, returning a
  * PlayerInput if necessary.
  */
-export function churn(f: () => PlayerInput | undefined, player: TestPlayer): PlayerInput | undefined {
-  player.defer(f());
+export function churn(pi: PlayerInput | (() => PlayerInput | undefined) | undefined, player: TestPlayer): PlayerInput | undefined {
+  const result = typeof(pi) === 'function' ? pi() : pi;
+  player.defer(result);
   runAllActions(player.game);
   return player.popWaitingFor();
 }

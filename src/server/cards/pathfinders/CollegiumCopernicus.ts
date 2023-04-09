@@ -102,7 +102,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
   }
 
   public optionText() {
-    return newMessage('Pay ${0} Data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName.COLLEGIUM_COPERNICUS));
+    return newMessage('Pay ${0} data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName.COLLEGIUM_COPERNICUS));
   }
 
   public trade(colony: IColony) {

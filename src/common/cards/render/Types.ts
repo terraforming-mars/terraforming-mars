@@ -101,6 +101,8 @@ export interface ICardRenderItem extends CardComponent {
   secondaryTag?: Tag | AltSecondaryTag;
   /** used for amount labels like 2x, x, etc. */
   multiplier?: boolean;
+  /** places the pathfinder Clone symbol in the object */
+  clone?: boolean;
   /** add a symbol on top of the item to show it's cancelled or negated in some way (usually X) */
   cancelled?: boolean;
   /** over is used for rendering under TR for global events. */

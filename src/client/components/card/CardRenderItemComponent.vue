@@ -339,6 +339,9 @@ export default Vue.extend({
         if (this.item.multiplier) {
           result += 'X';
         }
+        if (this.item.clone) {
+          result += '<div style="-webkit-filter: greyscale(100%);filter: grayscale(100%)">🪐</div>';
+        }
       }
 
       const previouslyRendered: Array<Tag | AltSecondaryTag> = [

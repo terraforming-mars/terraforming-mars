@@ -16,7 +16,7 @@ export class Pollinators extends ActionCard implements IProjectCard {
       tags: [Tag.PLANT, Tag.ANIMAL],
       resourceType: CardResource.ANIMAL,
       requirements: CardRequirements.builder((b) => b.tag(Tag.PLANT, 3)),
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
 
       behavior: {
         production: {plants: 1, megacredits: 2},

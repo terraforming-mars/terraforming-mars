@@ -16,7 +16,7 @@ export class PhysicsComplex extends ActionCard implements IProjectCard {
       cost: 12,
 
       resourceType: CardResource.SCIENCE,
-      victoryPoints: {type: 'resource', points: 2, per: 1},
+      victoryPoints: {resourcesHere: {}, each: 2},
 
       action: {
         spend: {energy: 6},

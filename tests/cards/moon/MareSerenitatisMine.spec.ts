@@ -23,7 +23,7 @@ describe('MareSerenitatisMine', () => {
   });
 
   it('can play', () => {
-    // TODO: Ensuring resources is going to require changes coming later.
+    // TODO(kberg): Ensuring resources is going to require changes coming later.
   });
 
   it('play', () => {

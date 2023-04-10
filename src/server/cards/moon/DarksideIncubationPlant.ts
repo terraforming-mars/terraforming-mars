@@ -21,7 +21,7 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
       cost: 11,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
       reserveUnits: {titanium: 1},
 
       metadata: {
@@ -49,14 +49,14 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
     return true;
   }
 
-  private canRaiseColonyRate(player: Player) {
+  private canRaiseHabitatRate(player: Player) {
     return this.resourceCount >= 2 && player.canAfford(0, {tr: {moonHabitat: 1}});
   }
 
   public action(player: Player) {
     const options: Array<SelectOption> = [];
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (this.canRaiseColonyRate(player) && moonData.colonyRate < 8) {
+      if (this.canRaiseHabitatRate(player) && moonData.colonyRate < 8) {
         options.push(new SelectOption('Spend 2 microbes to raise the habitat rate 1 step.', 'Select', () => {
           player.removeResourceFrom(this, 2);
           LogHelper.logRemoveResource(player, this, 2, 'raise the habitat rate');

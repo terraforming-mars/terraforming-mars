@@ -21,7 +21,7 @@ export class AsteroidHollowing extends ActionCard implements IProjectCard {
         addResources: 1,
       },
 
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       metadata: {
         cardNumber: 'X15',

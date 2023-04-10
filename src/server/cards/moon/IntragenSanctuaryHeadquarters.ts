@@ -18,7 +18,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
       tags: [Tag.ANIMAL, Tag.MOON],
       startingMegaCredits: 38,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       behavior: {
         // Gains the initial resource from its own tag.

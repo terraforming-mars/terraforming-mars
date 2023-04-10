@@ -17,7 +17,7 @@ export class VenusianAnimals extends Card implements IProjectCard {
       tags: [Tag.VENUS, Tag.ANIMAL, Tag.SCIENCE],
       cost: 15,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
 
       requirements: CardRequirements.builder((b) => b.venus(18)),
       metadata: {

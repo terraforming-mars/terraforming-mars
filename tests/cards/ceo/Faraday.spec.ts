@@ -15,13 +15,14 @@ describe('Faraday', function() {
   let card: Faraday;
   let player: TestPlayer;
   let game: Game;
-
+  const CARD_DRAW_COST = 3;
+  const PLAYER_INITIALMC = 10;
   beforeEach(() => {
     card = new Faraday();
     [game, player] = testGame(1);
 
     player.popWaitingFor();
-    player.megaCredits = 10;
+    player.megaCredits = PLAYER_INITIALMC;
     player.playedCards.push(card);
   });
 
@@ -33,7 +34,7 @@ describe('Faraday', function() {
     runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(10);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
   it('Can draw a card when reaching a multiple of 5 for a tag', function() {
@@ -50,7 +51,7 @@ describe('Faraday', function() {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
@@ -64,7 +65,7 @@ describe('Faraday', function() {
     orOptions.options[1].cb();
     runAllActions(game);
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(10);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
   it('No prompt if player cannot afford to pay for card', function() {
@@ -86,7 +87,7 @@ describe('Faraday', function() {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
@@ -104,7 +105,7 @@ describe('Faraday', function() {
     runAllActions(game);
 
     expect(player.cardsInHand).has.length(2);
-    expect(player.megaCredits).to.eq(6);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST - CARD_DRAW_COST);
   });
 
   it('Play a card that puts two tags at 5 count, buy one', function() {
@@ -120,7 +121,7 @@ describe('Faraday', function() {
     runAllActions(game);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
   });
 
   it('Play a card that puts two tags at 5 count, buy none', function() {
@@ -133,7 +134,7 @@ describe('Faraday', function() {
     orOptions.options[1].cb();
     runAllActions(game);
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(10);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
   it('Wild tags dont count', function() {
@@ -162,7 +163,7 @@ describe('Faraday', function() {
     runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(10);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
   it('Does trigger when activating Clone Tags (via CrewTraining)', function() {
@@ -182,7 +183,7 @@ describe('Faraday', function() {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand[0].tags.includes(Tag.EARTH)).is.true;
   });

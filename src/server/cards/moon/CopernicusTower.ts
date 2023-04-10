@@ -18,7 +18,7 @@ export class CopernicusTower extends ActionCard {
 
       resourceType: CardResource.SCIENCE,
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
-      victoryPoints: {type: Tag.MOON, points: 1, per: 1},
+      victoryPoints: {tag: Tag.MOON},
 
       action: {
         or: {

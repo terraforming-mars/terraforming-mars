@@ -17,7 +17,7 @@ export class VeneraBase extends ActionCard {
       tags: [Tag.VENUS, Tag.VENUS, Tag.CITY],
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
-      victoryPoints: {type: Tag.VENUS, points: 1, per: 2},
+      victoryPoints: {tag: Tag.VENUS, per: 2},
 
       behavior: {
         production: {megacredits: 3},

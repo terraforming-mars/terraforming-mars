@@ -1,14 +1,22 @@
-import {Tag} from '../../common/cards/Tag';
 import {PlayerId} from '../../common/Types';
+import {Tag} from '../../common/cards/Tag';
 import {SerializedPathfindersData} from './SerializedPathfindersData';
 
-export type PathfindersData = {
-  venus: number;
-  earth: number;
-  mars: number;
-  jovian: number;
-  moon: number;
-  vps: Array<{id: PlayerId, tag: Tag, points: number}>;
+/**
+ * The possible tags with planetary tracks.
+ *
+ * The order of this list matches the order of the list displayed in the UI.
+ */
+export const PLANETARY_TAGS = [Tag.VENUS, Tag.EARTH, Tag.MARS, Tag.JOVIAN, Tag.MOON] as const;
+export type PlanetaryTag = typeof PLANETARY_TAGS[number];
+
+
+export function isPlanetaryTag(tag: Tag): tag is PlanetaryTag {
+  return PLANETARY_TAGS.includes(tag as PlanetaryTag);
+}
+
+export type PathfindersData = Record<PlanetaryTag, number> & {
+  vps: Array<{id: PlayerId, tag: PlanetaryTag, points: number}>;
 }
 
 export namespace PathfindersData {
@@ -35,42 +43,5 @@ export namespace PathfindersData {
       moon: pathfindersData.moon,
       vps: pathfindersData.vps,
     };
-  }
-
-  export function getValue(pathfindersData: PathfindersData, tag: Tag): number {
-    switch (tag) {
-    case Tag.VENUS:
-      return pathfindersData.venus;
-    case Tag.EARTH:
-      return pathfindersData.earth;
-    case Tag.MARS:
-      return pathfindersData.mars;
-    case Tag.JOVIAN:
-      return pathfindersData.jovian;
-    case Tag.MOON:
-      return pathfindersData.moon;
-    default:
-      return -1;
-    }
-  }
-
-  export function setValue(pathfindersData: PathfindersData, tag: Tag, value: number): void {
-    switch (tag) {
-    case Tag.VENUS:
-      pathfindersData.venus = value;
-      break;
-    case Tag.EARTH:
-      pathfindersData.earth = value;
-      break;
-    case Tag.MARS:
-      pathfindersData.mars = value;
-      break;
-    case Tag.JOVIAN:
-      pathfindersData.jovian = value;
-      break;
-    case Tag.MOON:
-      pathfindersData.moon = value;
-      break;
-    }
   }
 }

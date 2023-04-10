@@ -14,7 +14,7 @@ export class GanymedeColony extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE, Tag.CITY],
       cost: 20,
 
-      victoryPoints: {type: Tag.JOVIAN, points: 1, per: 1},
+      victoryPoints: {tag: Tag.JOVIAN},
       behavior: {
         city: {space: SpaceName.GANYMEDE_COLONY},
       },

@@ -204,13 +204,15 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.GLOBAL_EVENT) {
         classes.push('turmoil-global-event');
 
-        // CEO Extension:
+      // CEO Extension:
       } else if (type === CardRenderItemType.ARROW_OPG) {
         classes.push('card-arrow-opg');
       } else if (type === CardRenderItemType.REDS) {
         classes.push('card-reds');
       } else if (type === CardRenderItemType.REDS_DEACTIVATED) {
         classes.push('card-reds-deactivated');
+      } else if (type === CardRenderItemType.ADJACENCY_BONUS) {
+        classes.push('card-adjacency-bonus');
       } else if (type === CardRenderItemType.HAZARD_TILE) {
         if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
           classes.push(`card-hazard-tile--${this.item.size}`);
@@ -328,9 +330,12 @@ export default Vue.extend({
       let result = '';
       // in case of symbols inside
       if (isICardRenderItem(this.item) && this.item.amountInside) {
-        if (this.item.amount !== 0) {
+        if (this.item.questionMark === true) {
+          result += '?';
+        } else if (this.item.amount !== 0) {
           result += this.item.amount.toString();
         }
+
         if (this.item.multiplier) {
           result += 'X';
         }
@@ -382,12 +387,13 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.AWARD) {
         result = '<span class="card-award-icon">award</span>';
       }
+      if (this.item.type === CardRenderItemType.MILESTONE) {
+        result = '<span class="card-award-icon">milestone</span>';
+      }
       if (this.item.type === CardRenderItemType.VP) {
         result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
       }
-      // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
-      // This is assocaited with the card Playwrights.
-      if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === 1000) {
+      if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === undefined) {
         result = '?';
       }
       if (this.item.type === CardRenderItemType.MOON) {

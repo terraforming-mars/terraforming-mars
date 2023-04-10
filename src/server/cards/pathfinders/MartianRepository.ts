@@ -22,7 +22,7 @@ export class MartianRepository extends Card implements IProjectCard {
         production: {energy: -1},
       },
 
-      victoryPoints: {type: 'resource', points: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       metadata: {
         cardNumber: 'Pf29',

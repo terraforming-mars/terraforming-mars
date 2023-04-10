@@ -19,7 +19,7 @@ export class Decomposers extends Card implements IProjectCard {
       cost: 5,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: {type: 'resource', points: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
       requirements: CardRequirements.builder((b) => b.oxygen(3)),
 
       metadata: {

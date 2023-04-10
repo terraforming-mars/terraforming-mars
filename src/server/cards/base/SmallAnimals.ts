@@ -18,7 +18,7 @@ export class SmallAnimals extends ActionCard implements IProjectCard {
       cost: 6,
 
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
 
       behavior: {

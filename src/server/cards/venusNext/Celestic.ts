@@ -17,7 +17,7 @@ export class Celestic extends ActionCard implements ICorporationCard {
       resourceType: CardResource.FLOATER,
       type: CardType.CORPORATION,
       initialActionText: 'Draw 2 cards with a floater icon on it',
-      victoryPoints: {type: 'resource', points: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       action: {
         addResourcesToAnyCard: {

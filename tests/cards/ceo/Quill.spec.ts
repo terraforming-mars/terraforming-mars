@@ -29,24 +29,31 @@ describe('Quill', function() {
     expect(card.canAct(player)).is.false;
   });
 
+  it('Cannot act if no Floaters are in play', function() {
+    expect(card.canAct(player)).is.false;
+  });
+
   it('Takes action', function() {
     const dirigibles = new Dirigibles();
     const localShading = new LocalShading();
     player.playedCards.push(dirigibles, localShading);
+    player.megaCredits = 0;
 
     // Sanity
     expect(dirigibles.resourceCount).eq(0);
     expect(localShading.resourceCount).eq(0);
-    expect(dirigibles.resourceCount).eq(0);
 
     card.action(player);
     expect(dirigibles.resourceCount).eq(2);
     expect(localShading.resourceCount).eq(2);
-    expect(game.deferredActions).has.length(1);
+    expect(game.deferredActions).has.length(2);
 
     runAllActions(game);
     const addFloaters = cast(player.popWaitingFor(), SelectCard<ICard>);
     addFloaters.cb([dirigibles]);
     expect(dirigibles.resourceCount).eq(4);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(3);
   });
 });

@@ -17,7 +17,7 @@ export class JovianLanterns extends Card implements IProjectCard {
       type: CardType.ACTIVE,
 
       resourceType: CardResource.FLOATER,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
       requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
 
       behavior: {

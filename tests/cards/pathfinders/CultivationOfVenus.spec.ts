@@ -33,6 +33,7 @@ describe('CultivationOfVenus', function() {
   });
 
   it('victoryPoints', function() {
+    player.playedCards.push(card);
     expect(card.getVictoryPoints(player)).eq(0);
     player.tagsForTest = {venus: 1};
     expect(card.getVictoryPoints(player)).eq(0);

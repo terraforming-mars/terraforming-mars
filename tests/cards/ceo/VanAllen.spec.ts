@@ -2,19 +2,20 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-
 import {VanAllen} from '../../../src/server/cards/ceos/VanAllen';
 
 describe('Van Allen', function() {
   let card: VanAllen;
   let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
+
 
   beforeEach(() => {
     card = new VanAllen();
-    [game, player] = testGame(2, {ceoExtension: true});
+    [game, player, player2] = testGame(2, {ceoExtension: true});
   });
 
   it('Cannot claim for free if VanAllen is not in play', function() {
@@ -25,7 +26,6 @@ describe('Van Allen', function() {
     expect(claimMilestoneAction).is.undefined;
   });
 
-
   it('Can claim milestones for free, and gains 3 M€ upon claim', function() {
     player.playedCards.push(card);
 
@@ -35,13 +35,26 @@ describe('Van Allen', function() {
 
     const actions = cast(player.getActions(), OrOptions);
     const claimMilestoneAction = cast(actions.options.find((option) => option.title === 'Claim a milestone'), OrOptions);
-
-    expect(claimMilestoneAction).is.not.undefined;
-
-    claimMilestoneAction!.options![0].cb();
-    game.deferredActions.runAll(() => {});
+    claimMilestoneAction!.options[0].cb();
+    runAllActions(game);
     expect(player.megaCredits).eq(3); // No M€ cost incurred, gains 3 M€ instead
-    const claimedMilestone = player.game.claimedMilestones;
-    expect(claimedMilestone.find((cm) => cm.milestone.name === 'Terraformer' && cm.player === player)).is.not.undefined;
+    const claimedMilestones = player.game.claimedMilestones;
+    expect(claimedMilestones.find((cm) => cm.milestone.name === 'Terraformer' && cm.player === player)).is.not.undefined;
+  });
+
+  it('Gains 3 M€ when an opponent claims', function() {
+    player.playedCards.push(card);
+
+    player.megaCredits = 0;
+    player2.megaCredits = 8;
+    player2.setTerraformRating(35); // Can claim Terraformer milestone
+
+    const actions = cast(player2.getActions(), OrOptions);
+    const claimMilestoneAction = cast(actions.options.find((option) => option.title === 'Claim a milestone'), OrOptions);
+    claimMilestoneAction!.options[0].cb();
+    runAllActions(game);
+    expect(player.megaCredits).eq(3); // player2 claimed milestone, grants Van Allen 3 M€
+    const claimedMilestones = player.game.claimedMilestones;
+    expect(claimedMilestones.find((cm) => cm.milestone.name === 'Terraformer' && cm.player === player2)).is.not.undefined;
   });
 });

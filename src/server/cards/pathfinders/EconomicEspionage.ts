@@ -14,7 +14,7 @@ export class EconomicEspionage extends ActionCard implements IProjectCard {
       cost: 8,
       tags: [Tag.EARTH],
       resourceType: CardResource.DATA,
-      victoryPoints: {type: 'resource', points: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       action: {
         spend: {megacredits: 2},

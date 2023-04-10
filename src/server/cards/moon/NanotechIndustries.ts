@@ -24,7 +24,7 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
         drawCard: {count: 3, keep: 2},
       },
 
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       metadata: {
         cardNumber: 'MC1',

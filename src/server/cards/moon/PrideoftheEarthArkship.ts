@@ -17,7 +17,7 @@ export class PrideoftheEarthArkship extends ActionCard implements IActionCard {
       cost: 22,
 
       resourceType: CardResource.SCIENCE,
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.SPACE, 2)),
       reserveUnits: {titanium: 2},
 

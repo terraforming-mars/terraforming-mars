@@ -26,7 +26,7 @@ export class Fish extends ActionCard implements IProjectCard {
       },
 
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
       requirements: CardRequirements.builder((b) => b.temperature(2)),
 
       metadata: {

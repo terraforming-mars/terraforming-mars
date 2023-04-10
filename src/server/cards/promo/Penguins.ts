@@ -15,7 +15,7 @@ export class Penguins extends ActionCard implements IProjectCard {
       tags: [Tag.ANIMAL],
       cost: 7,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
 
       action: {
         addResources: 1,

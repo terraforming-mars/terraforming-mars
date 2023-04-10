@@ -17,7 +17,7 @@ export class OceanSanctuary extends Card implements IProjectCard {
       tags: [Tag.ANIMAL],
       cost: 9,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
       requirements: CardRequirements.builder((b) => b.oceans(5)),
 
       behavior: {

@@ -4,7 +4,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {IProjectCard} from '../cards/IProjectCard';
-import {isPlanetaryTag, PlanetaryTag, PLANETARY_TAGS} from './PathfindersExpansion';
+import {isPlanetaryTag, PLANETARY_TAGS, PlanetaryTag} from '../pathfinders/PathfindersData';
 import {intersection} from '../../common/utils/utils';
 
 /**

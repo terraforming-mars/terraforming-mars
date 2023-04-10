@@ -18,7 +18,7 @@ export class TerraformingRobots extends Card implements IProjectCard {
       tags: [Tag.SCIENCE],
       resourceType: CardResource.SPECIALIZED_ROBOT,
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
 
       metadata: {
         cardNumber: 'PfTMP',

@@ -67,7 +67,7 @@ import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
-import {MessageBuilder} from './logs/MessageBuilder';
+import {newMessage} from './logs/MessageBuilder';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -636,9 +636,8 @@ export class Player {
     const game = this.game;
     if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== this.id) {
       const monsInsuranceOwner = game.getPlayerById(game.monsInsuranceOwner);
-      // TODO(kberg): replace with "getCorporationOrThrow"?
-      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporation(CardName.MONS_INSURANCE);
-      monsInsurance?.payDebt(monsInsuranceOwner, this);
+      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporationOrThrow(CardName.MONS_INSURANCE);
+      monsInsurance.payDebt(monsInsuranceOwner, this);
     }
   }
 
@@ -949,15 +948,12 @@ export class Player {
       cards = passedCards;
     }
 
-    const message = cardsToKeep === 1 ?
+    const messageTitle = cardsToKeep === 1 ?
       'Select a card to keep and pass the rest to ${0}' :
       'Select two cards to keep and pass the rest to ${0}';
-
     this.setWaitingFor(
       new SelectCard(
-        new MessageBuilder(message)
-          .rawString(playerName) // TODO(kberg): replace with player?`
-          .getMessage(),
+        newMessage(messageTitle, (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
         'Keep',
         cards,
         (selected) => {
@@ -980,9 +976,7 @@ export class Player {
 
     this.setWaitingFor(
       new SelectCard(
-        new MessageBuilder('Select a corporation to keep and pass the rest to ${0}')
-          .rawString(playerName) // TODO(kberg): replace with player?`
-          .getMessage(),
+        newMessage('Select a corporation to keep and pass the rest to ${0}', (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
         'Keep',
         cards,
         (foundCards: Array<ICorporationCard>) => {
@@ -1010,7 +1004,6 @@ export class Player {
 
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
-    let cardsToKeep = 4;
     if (draftVariant) {
       dealtCards = this.draftedCards;
       this.draftedCards = [];
@@ -1020,10 +1013,15 @@ export class Player {
         cardsToDraw = 5;
       }
       if (LunaProjectOffice.isActive(this)) {
-        cardsToKeep = 5;
         cardsToDraw = 5;
       }
       this.dealForDraft(cardsToDraw, dealtCards);
+    }
+
+    let cardsToKeep = 4;
+    if (LunaProjectOffice.isActive(this)) {
+      // If Luna Project is active, they get to keep the 5 cards they drafted
+      cardsToKeep = 5;
     }
 
     const action = DrawCards.choose(this, dealtCards, {paying: true, keepMax: cardsToKeep});
@@ -1398,9 +1396,11 @@ export class Player {
         milestone: milestone,
       });
       // VanAllen CEO Hook for Milestones
-      if (this.cardIsInEffect(CardName.VANALLEN)) {
-        this.addResource(Resources.MEGACREDITS, 3, {log: true});
-      } else {
+      const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
+      if (vanAllen !== undefined) {
+        vanAllen.addResource(Resources.MEGACREDITS, 3, {log: true});
+      }
+      if (!this.cardIsInEffect(CardName.VANALLEN)) {
         this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
       }
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
@@ -1802,9 +1802,7 @@ export class Player {
 
       this.pendingInitialActions.forEach((corp) => {
         const option = new SelectOption(
-          new MessageBuilder('Take first action of ${0} corporation')
-            .rawString(corp.name) // TODO(kberg): replace with card or cardName?]
-            .getMessage(),
+          newMessage('Take first action of ${0} corporation', (b) => b.card(corp)),
 
           corp.initialActionText, () => {
             this.runInitialAction(corp);
@@ -1880,7 +1878,7 @@ export class Player {
     // Convert Heat
     const convertHeat = new ConvertHeat();
     if (convertHeat.canAct(this)) {
-      action.options.push(new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
+      action.options.push(new SelectOption('Convert 8 heat into temperature', 'Convert heat', () => {
         return convertHeat.action(this);
       }));
     }
@@ -1935,7 +1933,7 @@ export class Player {
     const fundingCost = this.game.getAwardFundingCost();
     if (this.canAfford(fundingCost) && !this.game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
-      remainingAwards.title = new MessageBuilder('Fund an award (${0} M€)').number(fundingCost).getMessage(),
+      remainingAwards.title = newMessage('Fund an award (${0} M€)', (b) => b.number(fundingCost)),
       remainingAwards.buttonLabel = 'Confirm';
       remainingAwards.options = this.game.awards
         .filter((award: IAward) => this.game.hasBeenFunded(award) === false)
@@ -2079,7 +2077,7 @@ export class Player {
       // Colonies
       // TODO(kberg): consider a ColoniesSerializer or something.
       fleetSize: this.colonies.getFleetSize(),
-      tradesThisTurn: this.colonies.tradesThisGeneration,
+      tradesThisGeneration: this.colonies.tradesThisGeneration,
       colonyTradeOffset: this.colonies.tradeOffset,
       colonyTradeDiscount: this.colonies.tradeDiscount,
       colonyVictoryPoints: this.colonies.victoryPoints,
@@ -2155,7 +2153,7 @@ export class Player {
     player.titanium = d.titanium;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
-    player.colonies.tradesThisGeneration = d.tradesThisTurn;
+    player.colonies.tradesThisGeneration = d.tradesThisTurn ?? d.tradesThisGeneration ?? 0;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 

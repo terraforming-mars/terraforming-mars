@@ -200,7 +200,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
   ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
 };
 
-// TODO(kberg): make this  use suffixModules.
+// TODO(kberg): make this use suffixModules.
 const ALL_MODULES = 'bcpvCt*ramPl';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';

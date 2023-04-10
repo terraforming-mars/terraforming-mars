@@ -49,6 +49,7 @@ export enum CardRenderItemType {
   IGNORE_GLOBAL_REQUIREMENTS = 'ignore_global_requirements',
   PRELUDE = 'prelude',
   AWARD = 'award',
+  MILESTONE = 'milestone',
   CORPORATION = 'corporation',
   VP = 'vp',
   COMMUNITY = 'community',
@@ -79,4 +80,5 @@ export enum CardRenderItemType {
   REDS = 'reds',
   REDS_DEACTIVATED = 'reds-deactivated',
   HAZARD_TILE = 'hazard-tile',
+  ADJACENCY_BONUS = 'adjacency-bonus',
 }

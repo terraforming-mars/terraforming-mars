@@ -21,7 +21,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
       cost: 9,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
       requirements: CardRequirements.builder((b) => b.oxygen(4)),
 
       metadata: {

@@ -16,7 +16,7 @@ export class Solarpedia extends ActionCard implements IProjectCard {
       cost: 12,
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.MARS).tag(Tag.JOVIAN)),
       resourceType: CardResource.DATA,
-      victoryPoints: {type: 'resource', points: 1, per: 6},
+      victoryPoints: {resourcesHere: {}, per: 6},
 
       behavior: {
         addResourcesToAnyCard: {type: CardResource.DATA, count: 2},

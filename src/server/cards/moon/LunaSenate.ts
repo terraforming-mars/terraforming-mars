@@ -14,7 +14,7 @@ export class LunaSenate extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.MOON],
       cost: 32,
-      victoryPoints: {type: Tag.MOON, points: 1, per: 1},
+      victoryPoints: {tag: Tag.MOON},
 
       behavior: {
         production: {megacredits: {tag: Tag.MOON, all: true}},

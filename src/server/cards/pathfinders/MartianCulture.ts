@@ -17,7 +17,7 @@ export class MartianCulture extends ActionCard implements IProjectCard {
       tags: [Tag.MARS, Tag.MARS],
       resourceType: CardResource.DATA,
       requirements: CardRequirements.builder((b) => b.tag(Tag.MARS, 2, {all})),
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       action: {
         addResourcesToAnyCard: {type: CardResource.DATA, count: 1},

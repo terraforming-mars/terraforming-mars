@@ -17,7 +17,7 @@ export class StratosphericBirds extends ActionCard implements IActionCard {
       tags: [Tag.VENUS, Tag.ANIMAL],
       cost: 12,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', points: 1, per: 1},
+      victoryPoints: {resourcesHere: {}},
       requirements: CardRequirements.builder((b) => b.venus(12)),
 
       action: {

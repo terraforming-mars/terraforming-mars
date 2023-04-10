@@ -14,7 +14,7 @@ export class BioSol extends ActionCard implements ICorporationCard {
       tags: [Tag.MICROBE],
       startingMegaCredits: 42,
       resourceType: CardResource.MICROBE,
-      victoryPoints: {type: 'resource', points: 1, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       firstAction: {
         text: 'Draw 2 cards with a microbe tag',

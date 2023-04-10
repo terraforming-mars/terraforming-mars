@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {all} from '../Options';
 
 export class SpacePortColony extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +17,7 @@ export class SpacePortColony extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
 
       requirements: CardRequirements.builder((b) => b.colonies()),
-      victoryPoints: 'special',
+      victoryPoints: {colonies: {colonies: {}}, all, per: 2},
 
       behavior: {
         colonies: {
@@ -33,7 +33,6 @@ export class SpacePortColony extends Card implements IProjectCard {
           b.vpText('1VP per 2 colonies in play.');
         }),
         description: 'Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.',
-        victoryPoints: CardRenderDynamicVictoryPoints.colonies(1, 2, true),
       },
     });
   }

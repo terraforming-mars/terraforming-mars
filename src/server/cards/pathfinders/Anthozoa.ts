@@ -19,7 +19,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
       tags: [Tag.PLANT, Tag.ANIMAL, Tag.MARS],
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       resourceType: CardResource.ANIMAL,
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       metadata: {
         cardNumber: 'Pf55',

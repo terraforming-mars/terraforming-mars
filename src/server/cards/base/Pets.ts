@@ -22,7 +22,7 @@ export class Pets extends Card implements IProjectCard {
       cost: 10,
       resourceType: CardResource.ANIMAL,
 
-      victoryPoints: {type: 'resource', points: 1, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       behavior: {
         addResources: 1,

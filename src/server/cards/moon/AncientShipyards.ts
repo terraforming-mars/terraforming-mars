@@ -17,7 +17,7 @@ export class AncientShipyards extends Card {
       cost: 6,
 
       resourceType: CardResource.RESOURCE_CUBE,
-      victoryPoints: {type: 'resource', points: -1, per: 1},
+      victoryPoints: {resourcesHere: {}, each: -1},
       reserveUnits: {titanium: 3},
 
       metadata: {

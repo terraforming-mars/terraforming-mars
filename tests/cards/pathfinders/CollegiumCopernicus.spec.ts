@@ -89,7 +89,7 @@ describe('CollegiumCopernicus', function() {
     expect(payAction.options).has.length(1);
 
     const dataOption = payAction.options[0];
-    expect(formatMessage(dataOption.title)).to.match(/Pay 3 Data/);
+    expect(formatMessage(dataOption.title)).to.match(/Pay 3 data/);
 
     expect(player.megaCredits).eq(0);
 

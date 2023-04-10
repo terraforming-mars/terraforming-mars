@@ -100,7 +100,9 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
 
   public trade(colony: IColony) {
     // grr I wish there was a simpler syntax.
-    if (this.titanFloatingLaunchPad !== undefined) this.titanFloatingLaunchPad.resourceCount--;
+    if (this.titanFloatingLaunchPad !== undefined) {
+      this.titanFloatingLaunchPad.resourceCount--;
+    }
     this.player.addActionThisGeneration(CardName.TITAN_FLOATING_LAUNCHPAD);
     this.player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(this.player).colony(colony));
     colony.trade(this.player);

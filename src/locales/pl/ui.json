@@ -306,9 +306,9 @@
     "City": "Obszar miasta",
     "Buffer Gas": "Gaz buforowy",
 
-    "Pay 9 M€": "Wydaj 9 M€",
-    "Pay 3 Energy": "Wydaj 3 jednostki energii",
-    "Pay 3 Titanium": "Wydaj 3 jednostki tytanu",
+    "Pay ${0} M€": "Wydaj ${0} M€",
+    "Pay ${0} energy": "Wydaj ${0} jednostki energii",
+    "Pay ${0} titanium": "Wydaj ${0} jednostki tytanu",
     "Trade with a colony tile": "Handluj z kaflem obiektu",
     "(Enceladus - (Microbes)": "(Enceladus - (Mikroby)",
     "Select action for World Government Terraforming": "Wybierz akcję Działań Rządu Światowego",

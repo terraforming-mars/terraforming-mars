@@ -153,7 +153,7 @@
     "Air scrapping": "Очистка воздуха",
     "Build colony": "Построить колонию",
 
-    "Pay 9 M€": "Заплатить 9 M€",
+    "Pay ${0} M€": "Заплатить ${0} M€",
     "Trade with a colony tile": "Торговать с колонией",
     "63 TR solo mode": "Соло режим на 63 РТ",
     "Random first player": "Случайный первый игрок",
@@ -198,7 +198,7 @@
     "Promos": "Промо",
     "Pay trade fee": "Торговать",
     "Trade": "Торговать",
-    "Pay 3 Titanium": "Заплатить 3 Титана",
+    "Pay ${0} titanium": "Заплатить ${0} Титана",
     "Select 2 Prelude cards": "Выберите 2 карты Прологов",
     "Self-Replicating Robots cards": "Карты Роботов-саморепликантов",
     "Remove colony": "Убрать колонию",

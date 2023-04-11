@@ -1,27 +1,26 @@
 import {Player} from '../../Player';
-import {PlayerId} from '../../../common/Types';
 import {Game} from '../../Game';
-import {NeutralPlayer} from '../Turmoil';
+import {Delegate, NeutralPlayer} from '../Turmoil';
 import {MultiSet} from 'mnemonist';
 
 export abstract class Party {
-  public partyLeader: undefined | PlayerId | NeutralPlayer = undefined;
-  public delegates = new MultiSet<PlayerId | NeutralPlayer>();
+  public partyLeader: undefined | Delegate = undefined;
+  public delegates = new MultiSet<Delegate>();
 
   // Send a delegate in the area
-  public sendDelegate(playerId: PlayerId | NeutralPlayer, game: Game): void {
+  public sendDelegate(playerId: Delegate, game: Game): void {
     this.delegates.add(playerId);
     this.checkPartyLeader(playerId, game);
   }
 
   // Remove a delegate from the area
-  public removeDelegate(playerId: PlayerId | NeutralPlayer, game: Game): void {
+  public removeDelegate(playerId: Delegate, game: Game): void {
     this.delegates.remove(playerId);
     this.checkPartyLeader(playerId, game);
   }
 
   // Check if you are the new party leader
-  public checkPartyLeader(newPlayer: PlayerId | NeutralPlayer, game: Game): void {
+  public checkPartyLeader(newPlayer: Delegate, game: Game): void {
     const players = game.getPlayersInGenerationOrder();
     // If there is a party leader
     if (this.partyLeader) {
@@ -53,7 +52,7 @@ export abstract class Party {
         playersToCheck.push('NEUTRAL');
 
         playersToCheck.some((nextPlayer) => {
-          let nextPlayerId: PlayerId | NeutralPlayer;
+          let nextPlayerId: Delegate;
           if (nextPlayer === 'NEUTRAL') {
             nextPlayerId = 'NEUTRAL';
           } else {

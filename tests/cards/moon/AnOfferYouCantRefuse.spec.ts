@@ -3,9 +3,8 @@ import {Game} from '../../../src/server/Game';
 import {cast, formatMessage, testGameOptions} from '../../TestingUtils';
 import {AnOfferYouCantRefuse} from '../../../src/server/cards/moon/AnOfferYouCantRefuse';
 import {TestPlayer} from '../../TestPlayer';
-import {NeutralPlayer, Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {Delegate, Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {PlayerId} from '../../../src/common/Types';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
@@ -163,7 +162,7 @@ describe('AnOfferYouCantRefuse', () => {
     });
   }
 
-  function populateParty(party: IParty, ...delegates: Array<PlayerId | NeutralPlayer>) {
+  function populateParty(party: IParty, ...delegates: Array<Delegate>) {
     delegates.forEach((delegate) => party.sendDelegate(delegate, game));
   }
 });

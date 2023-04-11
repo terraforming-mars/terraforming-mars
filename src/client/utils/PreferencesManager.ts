@@ -5,6 +5,8 @@ export type Preferences = {
   show_alerts: boolean,
   hide_hand: boolean,
   hide_awards_and_milestones: boolean,
+  collapse_milestones: boolean,
+  collapse_awards: boolean,
   hide_top_bar: boolean,
   small_cards: boolean,
   remove_background: boolean,
@@ -30,6 +32,8 @@ const defaults: Preferences = {
 
   hide_hand: false,
   hide_awards_and_milestones: false,
+  collapse_milestones: false,
+  collapse_awards: false,
   hide_top_bar: false,
   small_cards: false,
   remove_background: false,

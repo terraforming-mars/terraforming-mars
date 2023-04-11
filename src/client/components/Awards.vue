@@ -51,7 +51,7 @@ import Vue from 'vue';
 import Award from '@/client/components/Award.vue';
 import {AWARD_COSTS} from '@/common/constants';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
-import {getPreferences} from '@/client/utils/PreferencesManager';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'Awards',
@@ -67,14 +67,16 @@ export default Vue.extend({
     },
   },
   data() {
+    const preferences = getPreferences();
     return {
-      showAwards: true,
+      showAwards: !preferences.collapse_awards,
       showDescription: false,
     };
   },
   methods: {
     toggleList() {
       this.showAwards = !this.showAwards;
+      PreferencesManager.INSTANCE.set('collapse_awards', !this.showAwards);
     },
     toggleDescription() {
       this.showDescription = !this.showDescription;

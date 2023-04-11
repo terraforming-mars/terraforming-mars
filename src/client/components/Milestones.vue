@@ -34,7 +34,7 @@ import Vue from 'vue';
 import {MILESTONE_COST, MAX_MILESTONES} from '@/common/constants';
 import Milestone from '@/client/components/Milestone.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
-import {getPreferences} from '@/client/utils/PreferencesManager';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'Milestones',
@@ -48,8 +48,9 @@ export default Vue.extend({
     },
   },
   data() {
+    const preferences = getPreferences();
     return {
-      showMilestones: this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : true,
+      showMilestones: this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : !preferences.collapse_milestones,
       showDescription: false,
     };
   },
@@ -62,6 +63,7 @@ export default Vue.extend({
     },
     toggleList() {
       this.showMilestones = !this.showMilestones;
+      PreferencesManager.INSTANCE.set('collapse_milestones', !this.showMilestones);
     },
     getAvailableMilestoneSpots(): Array<number> {
       const count = this.milestones.filter((milestone) => milestone.playerName).length;

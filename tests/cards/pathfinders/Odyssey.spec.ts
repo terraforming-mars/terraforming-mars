@@ -18,16 +18,21 @@ import {DeimosDown} from '../../../src/server/cards/base/DeimosDown';
 import {ProjectInspection} from '../../../src/server/cards/promo/ProjectInspection';
 import {Viron} from '../../../src/server/cards/venusNext/Viron';
 import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
+import {AdvancedEcosystems} from '../../../src/server/cards/base/AdvancedEcosystems';
+import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
+import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
+import {Diversity} from '../../../src/server/turmoil/globalEvents/Diversity';
+import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 
 describe('Odyssey', () => {
-  let card: Odyssey;
+  let odyssey: Odyssey;
   let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
-    card = new Odyssey();
+    odyssey = new Odyssey();
     [game, player] = testGame(1);
-    player.setCorporationForTest(card);
+    player.setCorporationForTest(odyssey);
   });
 
   it('events count for tags', () => {
@@ -41,11 +46,11 @@ describe('Odyssey', () => {
   it('cannot act - cannot afford', () => {
     const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 8});
     player.playedCards = [expensiveEvent];
-    expect(card.canAct(player)).is.false;
+    expect(odyssey.canAct(player)).is.false;
     player.megaCredits = 7;
-    expect(card.canAct(player)).is.false;
+    expect(odyssey.canAct(player)).is.false;
     player.megaCredits = 8;
-    expect(card.canAct(player)).is.true;
+    expect(odyssey.canAct(player)).is.true;
   });
 
   it('cannot act - cannot meet requirements', () => {
@@ -53,22 +58,22 @@ describe('Odyssey', () => {
     const event = new IceCapMelting();
     player.megaCredits = event.cost;
     player.playedCards = [event];
-    expect(card.canAct(player)).is.false;
+    expect(odyssey.canAct(player)).is.false;
     setTemperature(game, 0);
-    expect(card.canAct(player)).is.false;
+    expect(odyssey.canAct(player)).is.false;
     setTemperature(game, 2);
-    expect(card.canAct(player)).is.true;
+    expect(odyssey.canAct(player)).is.true;
   });
 
   it('can act', () => {
     player.megaCredits = 50;
-    expect(card.canAct(player)).is.false;
+    expect(odyssey.canAct(player)).is.false;
     const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 17});
     const nonEvent = fakeCard({type: CardType.ACTIVE, cost: 2});
     player.playedCards = [expensiveEvent, nonEvent];
-    expect(card.canAct(player)).is.false;
+    expect(odyssey.canAct(player)).is.false;
     expensiveEvent.cost = 16;
-    expect(card.canAct(player)).is.true;
+    expect(odyssey.canAct(player)).is.true;
   });
 
   it('action', () => {
@@ -78,16 +83,16 @@ describe('Odyssey', () => {
     const inventionContest = new InventionContest();
     player.playedCards = [importOfAdvancedGHG, inventionContest];
 
-    let selectCard = cast(card.action(player), SelectProjectCardToPlay);
+    let selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
 
     expect(selectCard.cards).is.empty;
 
     player.megaCredits = 4;
-    selectCard = cast(card.action(player), SelectProjectCardToPlay);
+    selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectCard.cards).has.members([inventionContest]);
 
     player.megaCredits = 9;
-    selectCard = cast(card.action(player), SelectProjectCardToPlay);
+    selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectCard.cards).has.members([importOfAdvancedGHG, inventionContest]);
 
     expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
@@ -108,7 +113,7 @@ describe('Odyssey', () => {
     player.megaCredits = 50;
 
     player.playedCards = [importOfAdvancedGHG, mediaGroup];
-    const selectCard = cast(card.action(player), SelectProjectCardToPlay);
+    const selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
 
     expect(player.production.heat).eq(0);
     expect(player.megaCredits).eq(50);
@@ -126,7 +131,7 @@ describe('Odyssey', () => {
     const indenturedWorkers = new IndenturedWorkers();
     player.playedCards.push(indenturedWorkers);
 
-    const selectCard = cast(card.action(player), SelectProjectCardToPlay);
+    const selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectCard.cards).includes(indenturedWorkers);
     selectCard.cb(indenturedWorkers, Payment.of({})); // Indentured workers costs 0.
     runAllActions(game);
@@ -167,8 +172,8 @@ describe('Odyssey', () => {
     player.playedCards.push(inventorsGuild);
     player.addActionThisGeneration(inventorsGuild.name);
 
-    const selectProjectCardToPlay = cast(card.action(player), SelectProjectCardToPlay);
-    player.addActionThisGeneration(card.name); // This is played after `action` as it matches code behavior.
+    const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
+    player.addActionThisGeneration(odyssey.name); // This is played after `action` as it matches code behavior.
     expect(selectProjectCardToPlay.cards.map((c) => c.name)).deep.eq([projectInspection.name]);
 
     const playAction = selectProjectCardToPlay.cb(projectInspection, Payment.EMPTY);
@@ -176,6 +181,34 @@ describe('Odyssey', () => {
     runAllActions(game);
     const selectAction = cast(player.popWaitingFor(), SelectCard);
     // It might be a bug that odyssey is replayable, but that's what you get when you bend the rules.
-    expect(selectAction.cards.map((c) => c.name)).deep.eq([card.name, inventorsGuild.name]);
+    expect(selectAction.cards.map((c) => c.name)).deep.eq([odyssey.name, inventorsGuild.name]);
+  });
+
+  it('Be compatible with Diversity Global Event', () => {
+    const diversity = new Diversity();
+
+    const [game, player] = testGame(2, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
+
+    // player has 8 tags.
+    player.playedCards.push(new AdvancedEcosystems()); // Plant, Microbe, Animal
+    player.playedCards.push(new SolarWindPower()); // Science, Space, Power
+
+    player.playedCards.push(new ThoriumRush()); // Event: Building, Moon
+
+    turmoil.chairman = player.id;
+    turmoil.dominantParty = new Kelvinists();
+    turmoil.dominantParty.partyLeader = player.id;
+    turmoil.dominantParty.delegates.add(player.id);
+
+    // Not enough tags, because the event does not count.
+    diversity.resolve(game, turmoil);
+    expect(player.megaCredits).to.eq(0);
+
+    // Now there will be enough tags, with the event.
+    player.setCorporationForTest(odyssey);
+    diversity.resolve(game, turmoil);
+
+    expect(player.megaCredits).to.eq(10);
   });
 });

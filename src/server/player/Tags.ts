@@ -174,7 +174,7 @@ export class Tags {
    * Counts the number of distinct tags the player has.
    *
    * `extraTag` (optional) represents a tag from a card that is in the middle of being played. If the card had multiple tags,
-   * this API could change, but right now it's only used once.
+   * this API could change, but right the additional argument is only used once.
    */
   public distinctCount(mode: DistinctCountMode, extraTag?: Tag): number {
     const uniqueTags = new Set<Tag>();
@@ -196,6 +196,13 @@ export class Tags {
     for (const card of this.player.playedCards) {
       if (card.type !== CardType.EVENT) {
         card.tags.forEach(addTag);
+      }
+    }
+    if (this.player.isCorporation(CardName.ODYSSEY)) {
+      for (const card of this.player.playedCards) {
+        if (card.type === CardType.EVENT) {
+          card.tags.forEach(addTag);
+        }
       }
     }
 

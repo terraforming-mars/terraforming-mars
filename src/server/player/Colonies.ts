@@ -14,6 +14,7 @@ import {SelectColony} from '../inputs/SelectColony';
 import {IColonyTrader} from '../colonies/IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
+import {newMessage} from '../logs/MessageBuilder';
 
 export class Colonies {
   private player: Player;
@@ -157,7 +158,7 @@ export class TradeWithEnergy implements IColonyTrader {
     return this.player.energy >= this.tradeCost;
   }
   public optionText() {
-    return 'Pay ' + this.tradeCost +' Energy';
+    return newMessage('Pay ${0} energy', (b) => b.number(this.tradeCost));
   }
 
   public trade(colony: IColony) {
@@ -178,7 +179,7 @@ export class TradeWithTitanium implements IColonyTrader {
     return this.player.titanium >= this.tradeCost;
   }
   public optionText() {
-    return 'Pay ' + this.tradeCost +' Titanium';
+    return newMessage('Pay ${0} titanium', (b) => b.number(this.tradeCost));
   }
 
   public trade(colony: IColony) {
@@ -205,7 +206,7 @@ export class TradeWithMegacredits implements IColonyTrader {
     return this.player.canAfford(this.tradeCost);
   }
   public optionText() {
-    return 'Pay ' + this.tradeCost +' M€';
+    return newMessage('Pay ${0} M€', (b) => b.number(this.tradeCost));
   }
 
   public trade(colony: IColony) {
@@ -213,7 +214,7 @@ export class TradeWithMegacredits implements IColonyTrader {
       this.player,
       this.tradeCost,
       {
-        title: 'Select how to pay ' + this.tradeCost + ' for colony trade',
+        title: newMessage('Select how to pay ${0} for colony trade', (b) => b.number(this.tradeCost)),
         afterPay: () => {
           this.player.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
           colony.trade(this.player);

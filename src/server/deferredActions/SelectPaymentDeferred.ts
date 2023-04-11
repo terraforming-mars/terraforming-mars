@@ -4,13 +4,14 @@ import {Payment} from '../../common/inputs/Payment';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
+import {Message} from '../../common/logs/Message';
 
 export type Options = {
   canUseSteel?: boolean;
   canUseTitanium?: boolean;
   canUseSeeds?: boolean,
   canUseData?: boolean,
-  title?: string;
+  title?: string | Message;
   afterPay?: () => void;
 }
 

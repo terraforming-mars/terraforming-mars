@@ -6,7 +6,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, formatMessage, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Enceladus} from '../../../src/server/colonies/Enceladus';
@@ -89,7 +89,7 @@ describe('CollegiumCopernicus', function() {
     expect(payAction.options).has.length(1);
 
     const dataOption = payAction.options[0];
-    expect(dataOption.title).to.match(/Pay 3 Data/);
+    expect(formatMessage(dataOption.title)).to.match(/Pay 3 data/);
 
     expect(player.megaCredits).eq(0);
 

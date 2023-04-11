@@ -22,6 +22,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {MultiSet} from 'mnemonist';
 
 export type NeutralPlayer = 'NEUTRAL';
+export type Delegate = PlayerId | NeutralPlayer;
 
 export interface IPartyFactory {
     partyName: PartyName;

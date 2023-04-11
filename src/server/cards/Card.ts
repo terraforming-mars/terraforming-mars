@@ -187,7 +187,7 @@ export abstract class Card {
     return true;
   }
 
-  public play(player: Player) {
+  public play(player: Player): PlayerInput | undefined {
     if (!isICorporationCard(this) && this.reserveUnits.deduct === true) {
       const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
       player.deductUnits(adjustedReserveUnits);

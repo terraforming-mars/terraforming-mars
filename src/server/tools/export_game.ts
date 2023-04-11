@@ -57,6 +57,7 @@ async function load(gameId: GameId) {
     }
   }
   console.log(`Wrote ${writes} records and had ${errors} failures.`);
+  console.log(`id: ${gameId}`);
 }
 
 main();

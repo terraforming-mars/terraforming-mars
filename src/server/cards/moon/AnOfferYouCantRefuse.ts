@@ -4,7 +4,7 @@ import {PlayerId} from '../../../common/Types';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
+import {Delegate, Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -30,7 +30,7 @@ export class AnOfferYouCantRefuse extends Card {
     });
   }
 
-  private isReplaceableDelegate(delegate: PlayerId | NeutralPlayer, player: Player, party: IParty): delegate is PlayerId {
+  private isReplaceableDelegate(delegate: Delegate, player: Player, party: IParty): delegate is PlayerId {
     return delegate !== player.id && delegate !== 'NEUTRAL' && delegate !== party.partyLeader;
   }
 

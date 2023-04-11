@@ -552,6 +552,9 @@ export class Game implements Logger {
     this.log('${0} funded ${1} award',
       (b) => b.player(player).award(award));
 
+    if (this.hasBeenFunded(award)) {
+      throw new Error(award.name + ' cannot is already funded.');
+    }
     this.fundedAwards.push({
       award: award,
       player: player,

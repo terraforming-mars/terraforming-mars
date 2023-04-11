@@ -652,9 +652,27 @@ describe('Game', () => {
     const claimMilestoneAction = cast(actions2.options.find((option) => option.title === 'Claim a milestone'), OrOptions);
     claimMilestoneAction.options[0].cb();
     runAllActions(game);
-    const claimedMilestones = player.game.claimedMilestones;
+    expect(game.claimedMilestones.some((cm) => cm.milestone.name === 'Terraformer' && cm.player === player)).is.true;
+  });
 
-    expect(claimedMilestones.find((cm) => cm.milestone.name === 'Terraformer' && cm.player === player)).is.not.undefined;
+  // https://github.com/terraforming-mars/terraforming-mars/issues/5572
+  it('Milestones cannot be claimed twice', function() {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({}));
+    player.popWaitingFor();
+
+    player.setTerraformRating(35); // Can claim Terraformer milestone
+    player.megaCredits = 8;
+    const actions = cast(player.getActions(), OrOptions);
+    const claimMilestoneAction = cast(actions.options.find((option) => option.title === 'Claim a milestone'), OrOptions);
+    claimMilestoneAction.options[0].cb();
+    runAllActions(game);
+    expect(game.claimedMilestones.some((cm) => cm.milestone.name === 'Terraformer' && cm.player === player)).is.true;
+
+    expect(() => claimMilestoneAction.options[0].cb()).to.throw(/Terraformer is already claimed/);
+    const actions2 = cast(player.getActions(), OrOptions);
+    expect(actions2.options.some((option) => option.title === 'Claim a milestone')).is.false;
   });
 
   it('specifically-requested corps override expansion corps', () => {
@@ -800,17 +818,115 @@ describe('Game', () => {
   it('deserializing a game with awards', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, testGameOptions({pathfindersExpansion: false}));
+    const scientist = game.awards.find((award) => award.name === 'Scientist')!;
+    game.fundedAwards.push({
+      award: scientist,
+      player: player,
+    });
     const serialized = game.serialize();
+    expect(serialized.fundedAwards).deep.eq([{
+      name: 'Scientist',
+      playerId: 'p-blue-id',
+    }]);
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.awards).deep.eq(game.awards);
+    expect(deserialized.fundedAwards).has.length(1);
+    expect(deserialized.fundedAwards[0].award.name).eq('Scientist');
+    expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
   });
+
+  // https://github.com/terraforming-mars/terraforming-mars/issues/5572
+  it('dealing with awards accidentally funded twice', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({pathfindersExpansion: false}));
+    const scientist = game.awards.find((award) => award.name === 'Scientist')!;
+
+    game.fundedAwards.push({
+      award: scientist,
+      player: player,
+    });
+
+    game.fundedAwards.push({
+      award: scientist,
+      player: player,
+    });
+
+    const serialized = game.serialize();
+    // Serializing both of these isn't great, but it's how it works, and demonstrates how the
+    // duplication goes away during deserialization
+    expect(serialized.fundedAwards).deep.eq([{
+      name: 'Scientist',
+      playerId: 'p-blue-id',
+    },
+    {
+      name: 'Scientist',
+      playerId: 'p-blue-id',
+    }]);
+
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.fundedAwards).has.length(1);
+    expect(deserialized.fundedAwards[0].award.name).eq('Scientist');
+    expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
+  });
+
 
   it('deserializing a game with milestones', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({pathfindersExpansion: false}));
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({pathfindersExpansion: false}));
+    const terraformier = game.milestones.find((milestone) => milestone.name === 'Terraformer')!;
+
+    game.claimedMilestones.push({
+      milestone: terraformier,
+      player: player,
+    });
     const serialized = game.serialize();
+    expect(serialized.claimedMilestones).deep.eq([{
+      name: 'Terraformer',
+      playerId: 'p-blue-id',
+    }]);
+
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.milestones).deep.eq(game.milestones);
+    expect(deserialized.claimedMilestones).has.length(1);
+    expect(deserialized.claimedMilestones[0].milestone.name).eq('Terraformer');
+    expect(deserialized.claimedMilestones[0].player.id).eq('p-blue-id');
+  });
+
+  // https://github.com/terraforming-mars/terraforming-mars/issues/5572
+  it('dealing with milestones accidentally claimed twice', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({pathfindersExpansion: false}));
+    const terraformier = game.milestones.find((milestone) => milestone.name === 'Terraformer')!;
+
+    game.claimedMilestones.push({
+      milestone: terraformier,
+      player: player,
+    });
+
+    game.claimedMilestones.push({
+      milestone: terraformier,
+      player: player,
+    });
+
+    const serialized = game.serialize();
+    // Serializing both of these isn't great, but it's how it works, and demonstrates how the
+    // duplication goes away during deserialization
+    expect(serialized.claimedMilestones).deep.eq([{
+      name: 'Terraformer',
+      playerId: 'p-blue-id',
+    },
+    {
+      name: 'Terraformer',
+      playerId: 'p-blue-id',
+    }]);
+
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.claimedMilestones).has.length(1);
+    expect(deserialized.claimedMilestones[0].milestone.name).eq('Terraformer');
+    expect(deserialized.claimedMilestones[0].player.id).eq('p-blue-id');
   });
 
   it('deserializing a colonies game includes discarded colonies #4522', () => {

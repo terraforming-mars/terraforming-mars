@@ -1391,6 +1391,9 @@ export class Player {
 
   private claimMilestone(milestone: IMilestone): SelectOption {
     return new SelectOption(milestone.name, 'Claim - ' + '('+ milestone.name + ')', () => {
+      if (this.game.milestoneClaimed(milestone)) {
+        throw new Error(milestone.name + ' is already claimed');
+      }
       this.game.claimedMilestones.push({
         player: this,
         milestone: milestone,

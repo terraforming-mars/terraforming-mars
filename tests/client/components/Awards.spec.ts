@@ -9,6 +9,7 @@ import {AWARD_COSTS} from '@/common/constants';
 import {AwardName} from '@/common/ma/AwardName';
 import {getMilestoneAwardDescription} from '@/client/MilestoneAwardManifest';
 import {Color} from '@/common/Color';
+import {Preferences} from '@/client/utils/PreferencesManager';
 
 const names: Array<AwardName> = ['Banker', 'Celebrity'];
 function createAward({id = 1, funded = false}): FundedAwardModel {
@@ -41,7 +42,25 @@ describe('Awards', () => {
     });
   });
 
-  it('hides awards on click', async () => {
+  it('awards start in non-collapsed state', async () => {
+    const awards = [
+      createAward({id: 1, funded: true}),
+      createAward({id: 2, funded: false}),
+    ];
+
+    const wrapper = shallowMount(Awards, {
+      localVue: getLocalVue(),
+      propsData: {
+        awards,
+      },
+    });
+
+    expect(
+      wrapper.findAllComponents(Award).wrappers.every((awardWrapper) => awardWrapper.isVisible()),
+    ).to.be.true;
+  });
+
+  it('collapse awards on click', async () => {
     const awards = [
       createAward({id: 1, funded: true}),
       createAward({id: 2, funded: false}),
@@ -55,8 +74,29 @@ describe('Awards', () => {
     await wrapper.find('[data-test=toggle-awards]').trigger('click');
 
     expect(
-      wrapper.findAllComponents(Award).wrappers.some((awardWrapper) => awardWrapper.isVisible()),
-    ).to.be.false;
+      wrapper.findAllComponents(Award).wrappers.every((awardWrapper) => !awardWrapper.isVisible()),
+    ).to.be.true;
+  });
+
+  it('awards are collapsed if previously set to collapsed', async () => {
+    const awards = [
+      createAward({id: 1, funded: true}),
+      createAward({id: 2, funded: false}),
+    ];
+
+    const wrapper = shallowMount(Awards, {
+      localVue: getLocalVue(),
+      propsData: {
+        awards: awards,
+        preferences: {
+          collapse_awards: true,
+        } as Readonly<Preferences>,
+      },
+    });
+
+    expect(
+      wrapper.findAllComponents(Award).wrappers.every((awardWrapper) => !awardWrapper.isVisible()),
+    ).to.be.true;
   });
 
   it('shows funded awards', () => {

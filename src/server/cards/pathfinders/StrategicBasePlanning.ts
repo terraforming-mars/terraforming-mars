@@ -11,6 +11,8 @@ export class StrategicBasePlanning extends PreludeCard {
       name: CardName.STRATEGIC_BASE_PLANNING,
       tags: [Tag.BUILDING],
 
+      startingMegacredits: -8,
+
       behavior: {
         colonies: {buildColony: {}},
         city: {},

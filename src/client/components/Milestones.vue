@@ -14,7 +14,7 @@
                 </span>
             </div>
             <span @click="toggleDescription" :title="$t('press to show or hide the description')" data-test="toggle-description">
-              <div v-show="showMilestones">
+              <div v-show="!collapseMilestones">
                   <Milestone
                     v-for="milestone in milestones"
                     :key="milestone.name"
@@ -31,10 +31,10 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {MILESTONE_COST, MAX_MILESTONES} from '@/common/constants';
+import {MAX_MILESTONES, MILESTONE_COST} from '@/common/constants';
 import Milestone from '@/client/components/Milestone.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
-import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'Milestones',
@@ -46,11 +46,14 @@ export default Vue.extend({
       type: Boolean,
       default: true,
     },
+    preferences: {
+      type: Object as () => Readonly<Preferences>,
+      default: () => PreferencesManager.INSTANCE.values(),
+    },
   },
   data() {
-    const preferences = getPreferences();
     return {
-      showMilestones: this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : !preferences.collapse_milestones,
+      collapseMilestones: (this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : this.preferences.collapse_milestones),
       showDescription: false,
     };
   },
@@ -62,15 +65,15 @@ export default Vue.extend({
       this.showDescription = !this.showDescription;
     },
     toggleList() {
-      this.showMilestones = !this.showMilestones;
-      PreferencesManager.INSTANCE.set('collapse_milestones', !this.showMilestones);
+      this.collapseMilestones = !this.collapseMilestones;
+      PreferencesManager.INSTANCE.set('collapse_milestones', this.collapseMilestones);
     },
     getAvailableMilestoneSpots(): Array<number> {
       const count = this.milestones.filter((milestone) => milestone.playerName).length;
       return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
     },
     isLearnerModeOn(): boolean {
-      return getPreferences().learner_mode;
+      return this.preferences.learner_mode;
     },
   },
 });

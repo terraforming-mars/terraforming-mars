@@ -32,7 +32,7 @@
       </div>
 
       <span @click="toggleDescription" :title="$t('press to show or hide the description')" data-test="toggle-description">
-        <div v-show="showAwards">
+        <div v-show="!collapseAwards">
           <Award
             v-for="award in awards"
             :key="award.name"
@@ -51,7 +51,7 @@ import Vue from 'vue';
 import Award from '@/client/components/Award.vue';
 import {AWARD_COSTS} from '@/common/constants';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
-import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'Awards',
@@ -65,18 +65,21 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    preferences: {
+      type: Object as () => Readonly<Preferences>,
+      default: () => PreferencesManager.INSTANCE.values(),
+    },
   },
   data() {
-    const preferences = getPreferences();
     return {
-      showAwards: !preferences.collapse_awards,
+      collapseAwards: this.preferences.collapse_awards,
       showDescription: false,
     };
   },
   methods: {
     toggleList() {
-      this.showAwards = !this.showAwards;
-      PreferencesManager.INSTANCE.set('collapse_awards', !this.showAwards);
+      this.collapseAwards = !this.collapseAwards;
+      PreferencesManager.INSTANCE.set('collapse_awards', this.collapseAwards);
     },
     toggleDescription() {
       this.showDescription = !this.showDescription;
@@ -92,7 +95,7 @@ export default Vue.extend({
       return AWARD_COSTS.slice(this.fundedAwards.length);
     },
     isLearnerModeOn(): boolean {
-      return getPreferences().learner_mode;
+      return this.preferences.learner_mode;
     },
   },
 });

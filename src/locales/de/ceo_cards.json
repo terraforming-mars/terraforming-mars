@@ -28,16 +28,16 @@
 	"Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "Einmal pro Spiel, platziere X Gefahrenplättchen, wobei X die aktuelle Generation ist. Jeder Gegner verliert 1 Produktionseinheit seiner Wahl, oder 2 Einheiten, wenn es 6 oder mehr Gefahrenplättchen gibt.",
 
 	"Clarke": "Clarke",
-	"Once per game, gain plants and heat equal to your production +4.": "Einmal pro Spiel erhalte Pflanzen- und Wärme-Ressourcen in Höhe deiner Produktion +4.",
+	"Once per game, increase your plant and heat production 1 step each. Gain plants and heat equal to your production +4.": "Einmal pro Spiel kannst du deine Pflanzen- und Wärme-Produktion um je 1 erhöhen. Du erhältst Pflanzen- und Wärme-Ressourcen in Höhe deiner Produktion +4.",
 
 	"Duncan": "Duncan",
-	"Once per game, gain 6-X VP and 4X M€, where X is the current generation number.": "Einmal pro Spiel erhalte 6-X SP und 4X M€, wobei X die aktuelle Generation ist.",
+	"Once per game, gain 7-X VP and 4X M€, where X is the current generation number.": "Einmal pro Spiel erhalte 7-X SP und 4X M€, wobei X die aktuelle Generation ist.",
 
 	"Ender": "Ender",
 	"Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "Einmal pro Spiel werfe eine beliebige Anzahl von Karten bis zum Doppelten der aktuellen Generation ab, ziehe so viele Karten.",
 
 	"Faraday": "Faraday",
-	"When you gain a multiple of 5 for any tag type IN PLAY, you may pay 2 M€ to draw a card with that tag. Wild tags do not count for this effect.": "Effekt: Wenn du ein Vielfaches von 5 für eine beliebiges Symbol IM SPIEL hast, zahle 2 M€, um eine Karte mit diesem Symbol zu ziehen. Joker-Symbole zählen für diesen Effekt nicht.",
+	"When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "Effekt: Wenn du ein Vielfaches von 5 für eine beliebiges Symbol IM SPIEL hast, zahle 3 M€, um eine Karte mit diesem Symbol zu ziehen. Joker-Symbole zählen für diesen Effekt nicht.",
 
 	"Floyd": "Floyd",
 	"Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.": "Einmal pro Spiel spiele eine Karte aus der Hand für 13 + 2X M€ weniger, wobei X die aktuelle Generation ist.",
@@ -93,6 +93,9 @@
 	"Ryu": "Ryu",
 	"Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "Einmal pro Spiel tausche bis zu X+2 Produktionseinheiten zwischen zwei Ressourcen aus, wobei X die aktuelle Generation ist.",
 
+	"Shara": "Shara",
+	"Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "Einmal pro Spiel wähle ein Planetensymbol. Diese Karte zählt, als hätte man sofort 2 dieser Symbole gespielt. Dann erhalte M€ in Höhe der Planetenleiste dieses Symbols.",
+
 	"Stefan": "Stefan",
 	"Once per game, sell any number of cards from your hand for 3 M€ each.": "Einmal pro Spiel verkaufe eine beliebige Anzahl von Karten aus deiner Hand für je 3 M€.",
 
@@ -111,6 +114,9 @@
 	"Xavier": "Xavier",
 	"Gain 2 wild tags for THIS GENERATION.": "Erhalte 2 Joker-Symbole für DIESE GENERATION.",
 
+	"Xu": "Xu",
+	"Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.": "Einmal pro Spiel erhalte 2 M€ für jede Venus-Symbol im Spiel. Erhalte zusätzlich 8 M€, falls du die meisten Venus-Symbole im Spiel hast.",
+	
 	"Yvonne": "Yvonne",
 	"Once per game, gain all your colony bonuses twice.": "Einmal pro Spiel erhalte alle Boni deiner Kolonie doppelt.",
 

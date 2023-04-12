@@ -967,30 +967,6 @@ export class Player {
     );
   }
 
-  /*
-   * @param playerName  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player.
-   */
-  public runDraftCorporationPhase(playerName: string, passedCards: Array<ICorporationCard>): void {
-    let cards: Array<ICorporationCard> = passedCards;
-
-    this.setWaitingFor(
-      new SelectCard(
-        newMessage('Select a corporation to keep and pass the rest to ${0}', (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
-        'Keep',
-        cards,
-        (foundCards: Array<ICorporationCard>) => {
-          foundCards.forEach((card) => {
-            this.draftedCorporations.push(card);
-            this.game.log('${0} kept ${1}', (b) => b.player(this).card(card));
-            cards = cards.filter((c) => c !== card);
-          });
-          this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
-          return undefined;
-        }, {min: 1, max: 1, played: false}),
-    );
-  }
-
   /**
    * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
    * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).

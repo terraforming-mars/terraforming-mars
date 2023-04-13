@@ -1,21 +1,28 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
-import {IActionCard, ICard} from '../ICard';
-import {SelectCard} from '../../inputs/SelectCard';
+import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 
-export class MaxwellBase extends Card implements IActionCard {
+export class MaxwellBase extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.MAXWELL_BASE,
       type: CardType.ACTIVE,
       tags: [Tag.CITY, Tag.VENUS],
       cost: 18,
+
+      action: {
+        addResourcesToAnyCard: {
+          tag: Tag.VENUS,
+          count: 1,
+          autoSelect: true,
+          mustHaveCard: true,
+        },
+      },
 
       requirements: CardRequirements.builder((b) => b.venus(12)),
       victoryPoints: 3,
@@ -38,32 +45,5 @@ export class MaxwellBase extends Card implements IActionCard {
         },
       },
     });
-  }
-
-  public getResCards(player: Player): ICard[] {
-    return player.getResourceCards().filter((card) => card.tags.includes(Tag.VENUS));
-  }
-
-  public canAct(player: Player): boolean {
-    return this.getResCards(player).length > 0;
-  }
-
-  public action(player: Player) {
-    const cards = this.getResCards(player);
-
-    if (cards.length === 1) {
-      player.addResourceTo(cards[0], {log: true});
-      return undefined;
-    }
-
-    return new SelectCard(
-      'Select card to add 1 resource',
-      'Add resource',
-      cards,
-      ([card]) => {
-        player.addResourceTo(card, {log: true});
-        return undefined;
-      },
-    );
   }
 }

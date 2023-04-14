@@ -43,7 +43,7 @@ export class TestPlayer extends Player {
     this.tags = new TestTags(this);
   }
 
-  public tagsForTest: Partial<TagsForTest> | undefined = undefined;
+  public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
 
   public override runInput(input: InputResponse, pi: PlayerInput): void {
     super.runInput(input, pi);
@@ -82,23 +82,4 @@ export class TestPlayer extends Player {
       this.corporations = [card];
     }
   }
-}
-
-export type TagsForTest = {
-  building: number;
-  space: number;
-  science: number;
-  power: number;
-  earth: number;
-  jovian: number;
-  venus: number;
-  plant: number;
-  microbe: number;
-  animal: number;
-  city: number;
-  wild: number;
-  moon: number;
-  event: number;
-  mars: number;
-  clone: number;
 }

@@ -52,7 +52,7 @@ describe('HuygensObservatory', function() {
     selectColony.cb(ganymede);
 
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
-    expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
+    expect(player.purse()).deep.eq(Units.EMPTY);
     expect(ganymede.visitor).is.undefined;
 
     runAllActions(game);
@@ -66,7 +66,7 @@ describe('HuygensObservatory', function() {
     expect(ganymede.visitor).eq(player.id);
 
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
-    expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 1}));
+    expect(player.purse()).deep.eq(Units.of({plants: 1}));
   });
 
   it('play, place colony where you already have one', function() {
@@ -108,7 +108,7 @@ describe('HuygensObservatory', function() {
     expect(ganymede.visitor).eq(player.id);
 
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 1}));
+    expect(player.purse()).deep.eq(Units.of({plants: 1}));
   });
 
   it('play, only trade fleet is on a colony', function() {

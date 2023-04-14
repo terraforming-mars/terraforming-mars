@@ -43,17 +43,6 @@ export class TestPlayer extends Player {
     this.tags = new TestTags(this);
   }
 
-  public getResourcesForTest(): Units {
-    return {
-      megacredits: this.megaCredits,
-      steel: this.steel,
-      titanium: this.titanium,
-      plants: this.plants,
-      energy: this.energy,
-      heat: this.heat,
-    };
-  }
-
   public tagsForTest: Partial<TagsForTest> | undefined = undefined;
 
   public override runInput(input: InputResponse, pi: PlayerInput): void {

@@ -150,7 +150,7 @@ describe('SpecializedSettlement', function() {
     expect(hazardSpace.player).eq(player);
 
     runAllActions(game);
-    expect(player.getResourcesForTest()).deep.eq(Units.of({}));
+    expect(player.purse()).deep.eq(Units.of({}));
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
@@ -167,7 +167,7 @@ describe('SpecializedSettlement', function() {
 
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(space.player).eq(player);
-    expect(player.getResourcesForTest()).deep.eq(Units.of(stock));
+    expect(player.purse()).deep.eq(Units.of(stock));
 
     runAllActions(game);
 

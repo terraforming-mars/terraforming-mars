@@ -42,7 +42,7 @@ describe('Awards', () => {
     });
   });
 
-  it('awards start in non-collapsed state', async () => {
+  it('awards start showing their details', async () => {
     const awards = [
       createAward({id: 1, funded: true}),
       createAward({id: 2, funded: false}),
@@ -60,7 +60,7 @@ describe('Awards', () => {
     ).to.be.true;
   });
 
-  it('collapse awards on click', async () => {
+  it('hide award details on click', async () => {
     const awards = [
       createAward({id: 1, funded: true}),
       createAward({id: 2, funded: false}),
@@ -78,7 +78,7 @@ describe('Awards', () => {
     ).to.be.true;
   });
 
-  it('awards are collapsed if previously set to collapsed', async () => {
+  it('award details are hidden if they were previously hidden', async () => {
     const awards = [
       createAward({id: 1, funded: true}),
       createAward({id: 2, funded: false}),
@@ -89,7 +89,7 @@ describe('Awards', () => {
       propsData: {
         awards: awards,
         preferences: {
-          collapse_awards: true,
+          show_award_details: false,
         } as Readonly<Preferences>,
       },
     });

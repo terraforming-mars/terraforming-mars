@@ -31,7 +31,7 @@ describe('Milestones', function() {
     expect(test.classes()).to.contain('ma-name--farmer');
   });
 
-  it('milestones are not collapsed if not previously set to collapse', async () => {
+  it('milestones show details if previously set to show details', async () => {
     const milestone = mount(Milestones, {
       localVue: getLocalVue(),
       propsData: {
@@ -39,7 +39,7 @@ describe('Milestones', function() {
           mockMilestone,
         ],
         preferences: {
-          collapse_milestones: false,
+          show_milestone_details: true,
         } as Readonly<Preferences>,
       },
     });
@@ -50,7 +50,7 @@ describe('Milestones', function() {
     ).to.be.true;
   });
 
-  it('milestones are collapsed if previously set to collapsed', async () => {
+  it('milestones hide details if previously set to hide details', async () => {
     const milestone = mount(Milestones, {
       localVue: getLocalVue(),
       propsData: {
@@ -58,7 +58,7 @@ describe('Milestones', function() {
           mockMilestone,
         ],
         preferences: {
-          collapse_milestones: true,
+          show_milestone_details: false,
         } as Readonly<Preferences>,
       },
     });

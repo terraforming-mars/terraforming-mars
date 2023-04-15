@@ -14,7 +14,7 @@
                 </span>
             </div>
             <span @click="toggleDescription" :title="$t('press to show or hide the description')" data-test="toggle-description">
-              <div v-show="!collapseMilestones">
+              <div v-show="showMilestoneDetails">
                   <Milestone
                     v-for="milestone in milestones"
                     :key="milestone.name"
@@ -53,7 +53,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      collapseMilestones: (this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : this.preferences.collapse_milestones),
+      showMilestoneDetails: (this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : this.preferences?.show_milestone_details),
       showDescription: false,
     };
   },
@@ -65,8 +65,8 @@ export default Vue.extend({
       this.showDescription = !this.showDescription;
     },
     toggleList() {
-      this.collapseMilestones = !this.collapseMilestones;
-      PreferencesManager.INSTANCE.set('collapse_milestones', this.collapseMilestones);
+      this.showMilestoneDetails = !this.showMilestoneDetails;
+      PreferencesManager.INSTANCE.set('show_milestone_details', this.showMilestoneDetails);
     },
     getAvailableMilestoneSpots(): Array<number> {
       const count = this.milestones.filter((milestone) => milestone.playerName).length;

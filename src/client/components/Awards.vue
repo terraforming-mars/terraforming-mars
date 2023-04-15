@@ -32,7 +32,7 @@
       </div>
 
       <span @click="toggleDescription" :title="$t('press to show or hide the description')" data-test="toggle-description">
-        <div v-show="!collapseAwards">
+        <div v-show="showAwardDetails">
           <Award
             v-for="award in awards"
             :key="award.name"
@@ -72,14 +72,14 @@ export default Vue.extend({
   },
   data() {
     return {
-      collapseAwards: this.preferences.collapse_awards,
+      showAwardDetails: this.preferences?.show_award_details,
       showDescription: false,
     };
   },
   methods: {
     toggleList() {
-      this.collapseAwards = !this.collapseAwards;
-      PreferencesManager.INSTANCE.set('collapse_awards', this.collapseAwards);
+      this.showAwardDetails = !this.showAwardDetails;
+      PreferencesManager.INSTANCE.set('show_award_details', this.showAwardDetails);
     },
     toggleDescription() {
       this.showDescription = !this.showDescription;

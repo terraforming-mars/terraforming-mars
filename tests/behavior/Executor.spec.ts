@@ -15,6 +15,7 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../src/server/cards/base/Ants';
+import {Birds} from '../../src/server/cards/base/Birds';
 import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
 import {Livestock} from '../../src/server/cards/base/Livestock';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
@@ -347,6 +348,37 @@ describe('Executor', () => {
     runAllActions(game);
 
     expect(livestock.resourceCount).eq(3);
+  });
+
+  it('add resources to any card - countable, zero count', () => {
+    const livestock = new Livestock(); // Holds animals
+    const birds = new Birds(); // Holds animals
+
+    player.playedCards = [birds, livestock];
+
+    expect(livestock.resourceCount).eq(0);
+
+    // There are no microbe tags.
+    executor.execute({addResourcesToAnyCard: {count: {tag: Tag.MICROBE}, type: CardResource.ANIMAL}}, player, fake);
+    runAllActions(game);
+
+    expect(player.popWaitingFor()).is.undefined;
+    expect(livestock.resourceCount).eq(0);
+    expect(birds.resourceCount).eq(0);
+
+    // Second half of the test.
+
+    // But if one card has a microbe tag
+    player.playedCards.push(new Ants());
+    executor.execute({addResourcesToAnyCard: {count: {tag: Tag.MICROBE}, type: CardResource.ANIMAL}}, player, fake);
+    runAllActions(game);
+
+    // There will be one animal to place.
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    selectCard.cb([livestock]);
+
+    expect(birds.resourceCount).eq(0);
+    expect(livestock.resourceCount).eq(1);
   });
 
   it('add resources to any card by tag', () => {

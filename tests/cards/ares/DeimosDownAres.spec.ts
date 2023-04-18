@@ -2,13 +2,14 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {DeimosDownAres} from '../../../src/server/cards/ares/DeimosDownAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
+import {DeimosDownAres} from '../../../src/server/cards/ares/DeimosDownAres';
+import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/AsteroidDeflectionSystem';
 
 describe('DeimosDownAres', function() {
   let card: DeimosDownAres;
@@ -19,6 +20,10 @@ describe('DeimosDownAres', function() {
   beforeEach(() => {
     card = new DeimosDownAres();
     [game, player, player2] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    player.megaCredits = 0;
+    player2.megaCredits = 0;
+    player.steel = 0;
+    player2.steel = 0;
   });
 
   // Identical to the Deimos Down Promo test
@@ -75,5 +80,62 @@ describe('DeimosDownAres', function() {
 
     expect(space.tile && space.tile.tileType).to.eq(TileType.DEIMOS_DOWN);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.ASTEROID, SpaceBonus.STEEL]});
+  });
+
+  it('Adjacency bonus - Tile Placement - Self', function() {
+    const adsPlayer1 = new AsteroidDeflectionSystem();
+    const adsPlayer2 = new AsteroidDeflectionSystem();
+    adsPlayer1.play(player);
+    adsPlayer2.play(player2);
+
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+    const space = action.availableSpaces[0];
+    action.cb(space);
+
+    player.megaCredits = 0;
+    player2.megaCredits = 0;
+    player.steel = 0;
+    player2.steel = 0;
+
+    // Place tiles from different players next to tile that grants adjacency bonuses
+    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+    adjacentSpaces[0].bonus = []; // Just in case it had steel bonuses
+    game.addGreenery(player, adjacentSpaces[0]);
+    runAllActions(game);
+    expect(player.megaCredits).to.eq(1); // 1MC for Owner Adjacent
+    expect(player.steel).to.eq(1); // 1 Steel for adjacency bonus
+    expect(adsPlayer1.resourceCount).to.eq(1); // 1 Asteroid
+    expect(player2.steel).to.eq(0);
+    expect(adsPlayer2.resourceCount).to.eq(0);
+  });
+
+  it('Adjacency bonus - Tile Placement - Opponent', function() {
+    const adsPlayer1 = new AsteroidDeflectionSystem();
+    const adsPlayer2 = new AsteroidDeflectionSystem();
+    adsPlayer1.play(player);
+    adsPlayer2.play(player2);
+
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+    const space = action.availableSpaces[0];
+    action.cb(space);
+
+    player.megaCredits = 0;
+    player2.megaCredits = 0;
+    player.steel = 0;
+    player2.steel = 0;
+
+    // Place tiles from different players next to tile that grants adjacency bonuses
+    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+    adjacentSpaces[0].bonus = []; // Just in case it had steel bonuses
+    game.addGreenery(player2, adjacentSpaces[0]);
+    runAllActions(game);
+    expect(player.megaCredits).to.eq(1); // 1MC for Owner Adjacent
+    expect(adsPlayer1.resourceCount).to.eq(0); // 0 Asteroids for Player1
+    expect(player2.steel).to.eq(1); // 1 Steel for adjacency bonus
+    expect(adsPlayer2.resourceCount).to.eq(1); // 1 Asteroid
   });
 });

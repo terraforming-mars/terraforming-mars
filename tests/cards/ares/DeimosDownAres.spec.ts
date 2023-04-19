@@ -2,13 +2,16 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {DeimosDownAres} from '../../../src/server/cards/ares/DeimosDownAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
+import {DeimosDownAres} from '../../../src/server/cards/ares/DeimosDownAres';
+import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/AsteroidDeflectionSystem';
+import {AsteroidRights} from '../../../src/server/cards/promo/AsteroidRights';
+import {CardResource} from '../../../src/common/CardResource';
 
 describe('DeimosDownAres', function() {
   let card: DeimosDownAres;
@@ -19,6 +22,10 @@ describe('DeimosDownAres', function() {
   beforeEach(() => {
     card = new DeimosDownAres();
     [game, player, player2] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    player.megaCredits = 0;
+    player2.megaCredits = 0;
+    player.steel = 0;
+    player2.steel = 0;
   });
 
   // Identical to the Deimos Down Promo test
@@ -53,7 +60,7 @@ describe('DeimosDownAres', function() {
 
   // Identical to the Deimos Down Promo test
   it('Works fine in solo mode', function() {
-    game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
 
     player.plants = 15;
     expect(card.play(player)).is.undefined;
@@ -73,7 +80,71 @@ describe('DeimosDownAres', function() {
     const space = action.availableSpaces[0];
     action.cb(space);
 
-    expect(space.tile && space.tile.tileType).to.eq(TileType.DEIMOS_DOWN);
+    expect(space.tile?.tileType).to.eq(TileType.DEIMOS_DOWN);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.ASTEROID, SpaceBonus.STEEL]});
+  });
+
+  it('Adjacency bonus - Tile Placement - Self', function() {
+    player.playedCards.push(new AsteroidDeflectionSystem());
+    player2.playedCards.push(new AsteroidRights());
+
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+    const space = action.availableSpaces[0];
+    action.cb(space);
+
+    player.megaCredits = 0;
+    player2.megaCredits = 0;
+    player.steel = 0;
+    player2.steel = 0;
+
+    // Place tiles from different players next to tile that grants adjacency bonuses
+    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+    adjacentSpaces[0].bonus = []; // Just in case it had steel bonuses
+    game.addGreenery(player, adjacentSpaces[0]);
+    runAllActions(game);
+
+    expect(player.megaCredits).to.eq(1); // Owner gets MC bonus
+
+    // Player 1 gets adjacency bonuses
+    expect(player.steel).to.eq(1); // 1 Steel for adjacency bonus
+    expect(player.getResourceCount(CardResource.ASTEROID)).eq(1);
+
+    // Player 2 gets nothing
+    expect(player2.steel).to.eq(0);
+    expect(player2.getResourceCount(CardResource.ASTEROID)).eq(0);
+  });
+
+  it('Adjacency bonus - Tile Placement - Opponent', function() {
+    player.playedCards.push(new AsteroidDeflectionSystem());
+    player2.playedCards.push(new AsteroidRights());
+
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+    const space = action.availableSpaces[0];
+    action.cb(space);
+
+    player.megaCredits = 0;
+    player2.megaCredits = 0;
+    player.steel = 0;
+    player2.steel = 0;
+
+    // Place tiles from different players next to tile that grants adjacency bonuses
+    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+    adjacentSpaces[0].bonus = []; // Just in case it had steel bonuses
+    game.addGreenery(player2, adjacentSpaces[0]);
+    runAllActions(game);
+
+    expect(player.megaCredits).to.eq(1); // Owner gets MC bonus
+
+    // Player 1 gets nothing
+    expect(player.steel).to.eq(0);
+    expect(player.getResourceCount(CardResource.ASTEROID)).eq(0);
+
+    // Player 2 gets adjacency bonuses
+    expect(player2.steel).to.eq(1); // 1 Steel for adjacency bonus
+    expect(player2.getResourceCount(CardResource.ASTEROID)).eq(1);
   });
 });

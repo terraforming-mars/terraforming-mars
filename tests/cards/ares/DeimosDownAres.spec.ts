@@ -10,6 +10,8 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
 import {DeimosDownAres} from '../../../src/server/cards/ares/DeimosDownAres';
 import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/AsteroidDeflectionSystem';
+import {AsteroidRights} from '../../../src/server/cards/promo/AsteroidRights';
+import {CardResource} from '../../../src/common/CardResource';
 
 describe('DeimosDownAres', function() {
   let card: DeimosDownAres;
@@ -58,7 +60,7 @@ describe('DeimosDownAres', function() {
 
   // Identical to the Deimos Down Promo test
   it('Works fine in solo mode', function() {
-    game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
 
     player.plants = 15;
     expect(card.play(player)).is.undefined;
@@ -78,15 +80,13 @@ describe('DeimosDownAres', function() {
     const space = action.availableSpaces[0];
     action.cb(space);
 
-    expect(space.tile && space.tile.tileType).to.eq(TileType.DEIMOS_DOWN);
+    expect(space.tile?.tileType).to.eq(TileType.DEIMOS_DOWN);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.ASTEROID, SpaceBonus.STEEL]});
   });
 
   it('Adjacency bonus - Tile Placement - Self', function() {
-    const adsPlayer1 = new AsteroidDeflectionSystem();
-    const adsPlayer2 = new AsteroidDeflectionSystem();
-    adsPlayer1.play(player);
-    adsPlayer2.play(player2);
+    player.playedCards.push(new AsteroidDeflectionSystem());
+    player2.playedCards.push(new AsteroidRights());
 
     card.play(player);
     runAllActions(game);
@@ -104,18 +104,21 @@ describe('DeimosDownAres', function() {
     adjacentSpaces[0].bonus = []; // Just in case it had steel bonuses
     game.addGreenery(player, adjacentSpaces[0]);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(1); // 1MC for Owner Adjacent
+
+    expect(player.megaCredits).to.eq(1); // Owner gets MC bonus
+
+    // Player 1 gets adjacency bonuses
     expect(player.steel).to.eq(1); // 1 Steel for adjacency bonus
-    expect(adsPlayer1.resourceCount).to.eq(1); // 1 Asteroid
+    expect(player.getResourceCount(CardResource.ASTEROID)).eq(1);
+
+    // Player 2 gets nothing
     expect(player2.steel).to.eq(0);
-    expect(adsPlayer2.resourceCount).to.eq(0);
+    expect(player2.getResourceCount(CardResource.ASTEROID)).eq(0);
   });
 
   it('Adjacency bonus - Tile Placement - Opponent', function() {
-    const adsPlayer1 = new AsteroidDeflectionSystem();
-    const adsPlayer2 = new AsteroidDeflectionSystem();
-    adsPlayer1.play(player);
-    adsPlayer2.play(player2);
+    player.playedCards.push(new AsteroidDeflectionSystem());
+    player2.playedCards.push(new AsteroidRights());
 
     card.play(player);
     runAllActions(game);
@@ -133,9 +136,15 @@ describe('DeimosDownAres', function() {
     adjacentSpaces[0].bonus = []; // Just in case it had steel bonuses
     game.addGreenery(player2, adjacentSpaces[0]);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(1); // 1MC for Owner Adjacent
-    expect(adsPlayer1.resourceCount).to.eq(0); // 0 Asteroids for Player1
+
+    expect(player.megaCredits).to.eq(1); // Owner gets MC bonus
+
+    // Player 1 gets nothing
+    expect(player.steel).to.eq(0);
+    expect(player.getResourceCount(CardResource.ASTEROID)).eq(0);
+
+    // Player 2 gets adjacency bonuses
     expect(player2.steel).to.eq(1); // 1 Steel for adjacency bonus
-    expect(adsPlayer2.resourceCount).to.eq(1); // 1 Asteroid
+    expect(player2.getResourceCount(CardResource.ASTEROID)).eq(1);
   });
 });

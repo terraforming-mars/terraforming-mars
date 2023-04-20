@@ -6,7 +6,6 @@ import {Size} from '../../../common/cards/render/Size';
 import {ICeoCard} from './ICeoCard';
 import {SelectCard} from '../../inputs/SelectCard';
 
-
 export class CoLeadership extends PreludeCard {
   constructor() {
     super({
@@ -36,8 +35,6 @@ export class CoLeadership extends PreludeCard {
     });
 
     return new SelectCard('Choose CEO card to play', 'Play', cardsDrawn, (([card]) => {
-      const cardIndex = player.playedCards.findIndex((c) => c.name === this.name);
-      player.playedCards.splice(cardIndex, 1);
       return player.playCard(card);
     }));
   }

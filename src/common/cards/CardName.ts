@@ -799,5 +799,5 @@ export enum CardName {
     SHARA = 'Shara',
     XU = 'Xu',
     // CEO Preludes
-    CO_LEADERSHIP = 'Co Leadership',
+    CO_LEADERSHIP = 'Co-leadership',
 }

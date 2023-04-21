@@ -1,9 +1,13 @@
-import {IMilestone} from './IMilestone';
+import {BaseMilestone} from './IMilestone';
 import {Player} from '../Player';
 
-export class Generalist implements IMilestone {
-  public readonly name = 'Generalist';
-  public readonly description = 'Requires that you have increased all 6 productions by at least 1 step';
+export class Generalist extends BaseMilestone {
+  constructor() {
+    super(
+      'Generalist',
+      'Requires that you have increased all 6 productions by at least 1 step',
+      6);
+  }
   public getScore(player: Player): number {
     let score = 0;
     const requiredProduction = player.game.gameOptions.corporateEra ? 0 : 1;
@@ -16,8 +20,5 @@ export class Generalist implements IMilestone {
     if (player.production.heat > requiredProduction) score++;
 
     return score;
-  }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) === 6;
   }
 }

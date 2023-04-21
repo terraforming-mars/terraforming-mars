@@ -1,13 +1,14 @@
-import {IMilestone} from './IMilestone';
+import {BaseMilestone} from './IMilestone';
 import {Player} from '../Player';
 
-export class Legend implements IMilestone {
-  public readonly name = 'Legend';
-  public readonly description = 'Requires that you have played 5 events';
+export class Legend extends BaseMilestone {
+  constructor() {
+    super(
+      'Legend',
+      'Requires that you have played 5 events',
+      5);
+  }
   public getScore(player: Player): number {
     return player.getPlayedEventsCount();
-  }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) > 4;
   }
 }

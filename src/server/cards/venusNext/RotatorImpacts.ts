@@ -48,7 +48,7 @@ export class RotatorImpacts extends Card implements IActionCard {
   public action(player: Player) {
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Pay 6 to add 1 asteroid to this card', 'Pay', () => this.addResource(player));
+    const addResource = new SelectOption('Pay 6 M€ to add 1 asteroid to this card', 'Pay', () => this.addResource(player));
     const spendResource = new SelectOption('Remove 1 asteroid to raise Venus 1 step', 'Remove asteroid', () => this.spendResource(player));
 
     if (this.resourceCount > 0 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE) {

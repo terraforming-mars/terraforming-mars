@@ -6,13 +6,14 @@ import {StratosphericBirds} from '../../../src/server/cards/venusNext/Stratosphe
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
-import {cast, setVenusScaleLevel, testGameOptions} from '../../TestingUtils';
+import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CardResource} from '../../../src/common/CardResource';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {testGame} from '../../TestGame';
 
 describe('MaxwellBase', function() {
   let card: MaxwellBase;
@@ -21,9 +22,7 @@ describe('MaxwellBase', function() {
 
   beforeEach(function() {
     card = new MaxwellBase();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({venusNextExtension: true}));
+    [game, player] = testGame(2, {venusNextExtension: true});
   });
 
   it('Can not play without energy production', function() {
@@ -44,6 +43,7 @@ describe('MaxwellBase', function() {
 
     const action = card.play(player);
     expect(action).is.undefined;
+    runAllActions(game);
     expect(player.production.energy).to.eq(0);
   });
 
@@ -57,6 +57,7 @@ describe('MaxwellBase', function() {
     player.playedCards.push(card3);
     expect(card.canAct(player)).is.true;
     card.action(player);
+    runAllActions(game);
     expect(card3.resourceCount).to.eq(1);
   });
 
@@ -66,7 +67,7 @@ describe('MaxwellBase', function() {
     player.playedCards.push(card, card2, card3);
     expect(card.canAct(player)).is.true;
 
-    const action = cast(card.action(player), SelectCard);
+    const action = cast(churnAction(card, player), SelectCard);
     action.cb([card2]);
     expect(card2.resourceCount).to.eq(1);
   });

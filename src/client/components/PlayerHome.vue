@@ -337,13 +337,13 @@ export default Vue.extend({
     };
   },
   watch: {
-    hide_active_cards() {
+    showActiveCards: function toggle_active_cards() {
       PreferencesManager.INSTANCE.set('hide_active_cards', !this.showActiveCards);
     },
-    hide_automated_cards() {
+    showAutomatedCards: function toggle_automated_cards() {
       PreferencesManager.INSTANCE.set('hide_automated_cards', !this.showAutomatedCards);
     },
-    hide_event_cards() {
+    showEventCards: function toggle_event_cards() {
       PreferencesManager.INSTANCE.set('hide_event_cards', !this.showEventCards);
     },
   },

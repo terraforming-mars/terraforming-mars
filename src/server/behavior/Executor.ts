@@ -282,7 +282,10 @@ export class Executor implements BehaviorExecutor {
     if (behavior.addResourcesToAnyCard) {
       const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
       for (const entry of array) {
-        player.game.defer(new AddResourcesToCard(player, entry.type, {count: ctx.count(entry.count), restrictedTag: entry.tag}));
+        const count = ctx.count(entry.count);
+        if (count > 0) {
+          player.game.defer(new AddResourcesToCard(player, entry.type, {count, restrictedTag: entry.tag}));
+        }
       }
     }
 

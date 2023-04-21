@@ -8,7 +8,7 @@ export class Terraformer implements IMilestone {
   private terraformRatingTurmoil: number = 26;
   public readonly description;
   constructor() {
-    this.description = 'Having a terraform rating of at least ' +
+    this.description = 'Have a terraform rating of at least ' +
                             this.terraformRating + ' or ' +
                             this.terraformRatingTurmoil + ' with Turmoil.';
   }

@@ -6,7 +6,7 @@ export class Builder extends BaseMilestone {
   constructor() {
     super(
       'Builder',
-      'Having at least 8 building tags in play',
+      'Have at least 8 building tags in play',
       8);
   }
   public getScore(player: Player): number {

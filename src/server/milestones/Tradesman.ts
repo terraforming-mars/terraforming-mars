@@ -1,4 +1,5 @@
-import {BaseMilestone} from './IMilestone';import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {Player} from '../Player';
 
 export class Tradesman extends BaseMilestone {
   constructor() {

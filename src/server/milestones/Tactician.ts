@@ -1,11 +1,12 @@
-import {BaseMilestone} from './IMilestone';import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {Player} from '../Player';
 import {CardType} from '../../common/cards/CardType';
 
 export class Tactician extends BaseMilestone {
   constructor() {
     super(
       'Tactician',
-      'Requires that you have 5 cards with requirements in play',
+      'Have 5 cards with requirements in play',
       5);
   }
   private excludedCardTypes = [CardType.PRELUDE, CardType.EVENT];

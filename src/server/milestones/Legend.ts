@@ -5,7 +5,7 @@ export class Legend extends BaseMilestone {
   constructor() {
     super(
       'Legend',
-      'Requires that you have played 5 events',
+      'Have played 5 events',
       5);
   }
   public getScore(player: Player): number {

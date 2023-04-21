@@ -5,7 +5,7 @@ export class Energizer extends BaseMilestone {
   constructor() {
     super(
       'Energizer',
-      'Requires that you have 6 energy production',
+      'Have 6 energy production',
       6);
   }
   public getScore(player: Player): number {

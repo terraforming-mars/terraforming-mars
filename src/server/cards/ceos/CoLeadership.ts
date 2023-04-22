@@ -5,6 +5,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {Size} from '../../../common/cards/render/Size';
 import {ICeoCard} from './ICeoCard';
 import {SelectCard} from '../../inputs/SelectCard';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class CoLeadership extends PreludeCard {
   constructor() {
@@ -29,7 +30,7 @@ export class CoLeadership extends PreludeCard {
 
     cardsDrawn.forEach((card) => {
       if (card.canPlay?.(player) === false) {
-        cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
+        inplaceRemove(cardsDrawn, card);
         game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player), {reservedFor: player});
       }
     });

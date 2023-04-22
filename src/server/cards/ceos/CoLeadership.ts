@@ -14,7 +14,7 @@ export class CoLeadership extends PreludeCard {
       metadata: {
         cardNumber: 'xxx',
         renderData: CardRenderer.builder((b) => {
-          b.text('Draw 3 CEO cards and immediately play one of them. Discard the other 2.', Size.SMALL, true);
+          b.text('Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.', Size.SMALL, true);
         }),
       },
     });
@@ -28,15 +28,28 @@ export class CoLeadership extends PreludeCard {
       game.ceoDeck.draw(game),
     ];
 
-    cardsDrawn.forEach((card) => {
-      if (card.canPlay?.(player) === false) {
-        inplaceRemove(cardsDrawn, card);
-        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player), {reservedFor: player});
+    cardsDrawn.forEach((ceo) => {
+      if (ceo.canPlay?.(player) === false) {
+        inplaceRemove(cardsDrawn, ceo);
+        game.ceoDeck.discard(ceo);
+        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(ceo).player(player), {reservedFor: player});
       }
     });
 
-    return new SelectCard('Choose CEO card to play', 'Play', cardsDrawn, (([card]) => {
-      return player.playCard(card);
+    if (cardsDrawn.length === 0) {
+      game.log('${0} drew no playable CEO cards', (b) => b.player(player));
+      return undefined;
+    }
+
+    return new SelectCard('Choose CEO card', 'Take', cardsDrawn, (([chosenCeo]) => {
+      // Discard unchosen CEOs
+      inplaceRemove(cardsDrawn, chosenCeo);
+      cardsDrawn.forEach((ceo) => {
+        game.ceoDeck.discard(ceo);
+      });
+      // Add chosen CEO to hand
+      player.ceoCardsInHand.push(chosenCeo);
+      return undefined;
     }));
   }
 }

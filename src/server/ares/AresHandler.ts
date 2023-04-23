@@ -36,7 +36,7 @@ export class AresHandler {
   public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace, isTileBeingPlaced = true) {
     let incrementMilestone = false;
     player.game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-      incrementMilestone = this.earnAdacencyBonus(adjacentSpace, player, isTileBeingPlaced);
+      incrementMilestone ||= this.earnAdacencyBonus(adjacentSpace, player, isTileBeingPlaced);
     });
     if (incrementMilestone && isTileBeingPlaced) {
       const milestoneResults = aresData.milestoneResults;

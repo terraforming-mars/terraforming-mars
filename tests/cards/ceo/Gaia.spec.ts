@@ -25,7 +25,6 @@ describe('Gaia', function() {
     [game, player, player2, player3] = testGame(3, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
     player.playedCards.push(card);
-    runAllActions(game);
   });
 
   it('Takes action', function() {

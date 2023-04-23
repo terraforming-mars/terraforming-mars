@@ -7,7 +7,6 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -18,7 +17,7 @@ describe('CapitalAres', function() {
 
   beforeEach(function() {
     card = new CapitalAres();
-    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Should play', function() {

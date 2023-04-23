@@ -1,6 +1,5 @@
 import {Game} from '../../../src/server/Game';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
@@ -19,7 +18,7 @@ describe('OceanCity', function() {
 
   beforeEach(function() {
     card = new OceanCity();
-    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Can play', function() {

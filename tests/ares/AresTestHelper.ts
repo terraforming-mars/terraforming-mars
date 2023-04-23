@@ -4,18 +4,7 @@ import {Player} from '../../src/server/Player';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/server/boards/ISpace';
-import {testGameOptions} from '../TestingUtils';
 import {AresHandler} from '../../src/server/ares/AresHandler';
-
-export const ARES_OPTIONS_NO_HAZARDS = testGameOptions({
-  aresExtension: true,
-  aresHazards: false,
-});
-
-export const ARES_OPTIONS_WITH_HAZARDS = testGameOptions({
-  aresExtension: true,
-  aresHazards: true,
-});
 
 export const ALL_ADJACENCY_BONUSES = [
   SpaceBonus.TITANIUM,

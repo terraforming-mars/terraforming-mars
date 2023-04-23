@@ -5,7 +5,6 @@ import {cast, resetBoard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LavaFlowsAres} from '../../../src/server/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 
@@ -16,7 +15,7 @@ describe('LavaFlowsAres', function() {
 
   beforeEach(function() {
     card = new LavaFlowsAres();
-    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
     resetBoard(game);
   });
 

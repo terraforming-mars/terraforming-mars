@@ -4,7 +4,6 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EcologicalZoneAres} from '../../../src/server/cards/ares/EcologicalZoneAres';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -16,7 +15,7 @@ describe('EcologicalZoneAres', function() {
 
   beforeEach(function() {
     card = new EcologicalZoneAres();
-    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Should play', function() {

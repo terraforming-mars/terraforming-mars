@@ -3,7 +3,6 @@ import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {IndustrialCenterAres} from '../../../src/server/cards/ares/IndustrialCenterAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -16,7 +15,7 @@ describe('IndustrialCenterAres', function() {
 
   beforeEach(function() {
     card = new IndustrialCenterAres();
-    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Should play', function() {

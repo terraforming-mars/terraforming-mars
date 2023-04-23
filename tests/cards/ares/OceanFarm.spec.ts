@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {OceanFarm} from '../../../src/server/cards/ares/OceanFarm';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -9,6 +8,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('OceanFarm', () => {
   let card: OceanFarm;
@@ -18,9 +18,7 @@ describe('OceanFarm', () => {
 
   beforeEach(() => {
     card = new OceanFarm();
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
   });
 
   it('Can play', () => {

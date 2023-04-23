@@ -155,7 +155,6 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-draft', [player, player2], player);
-    game.gameOptions.venusNextExtension = false;
     game.generation = 4;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
@@ -168,7 +167,6 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-classic', [player, player2], player);
-    game.gameOptions.venusNextExtension = false;
     game.generation = 2;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
@@ -180,7 +178,6 @@ describe('Game', () => {
   it('Solo play next generation', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('game-solo', [player], player);
-    game.gameOptions.venusNextExtension = false;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
     expect(game.getGeneration()).to.eq(2);
@@ -189,9 +186,7 @@ describe('Game', () => {
   it('Should not finish game before Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player);
-    game.gameOptions.venusNextExtension = true;
-    game.gameOptions.requiresVenusTrackCompletion = true;
+    const game = Game.newInstance('game-venusterraform', [player, player2], player, {venusNextExtension: true, requiresVenusTrackCompletion: true});
     setTemperature(game, constants.MAX_TEMPERATURE);
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     // setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
@@ -211,9 +206,7 @@ describe('Game', () => {
   it('Should finish game if Mars and Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player);
-    game.gameOptions.venusNextExtension = true;
-    game.gameOptions.requiresVenusTrackCompletion = true;
+    const game = Game.newInstance('game-venusterraform', [player, player2], player, {venusNextExtension: true, requiresVenusTrackCompletion: true});
     setTemperature(game, constants.MAX_TEMPERATURE);
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
@@ -238,9 +231,7 @@ describe('Game', () => {
   it('Should not finish game if Mars is not terraformed but Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player);
-    game.gameOptions.venusNextExtension = true;
-    game.gameOptions.requiresVenusTrackCompletion = true;
+    const game = Game.newInstance('game-venusterraform', [player, player2], player, {venusNextExtension: true, requiresVenusTrackCompletion: true});
     setTemperature(game, 2);
     setOxygenLevel(game, 2);
     setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);

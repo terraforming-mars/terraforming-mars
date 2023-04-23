@@ -184,8 +184,7 @@ describe('Player', function() {
 
   it('Include buffer gas for solo games with 63 TR', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
-    game.gameOptions.soloTR = true;
+    Game.newInstance('gameid', [player], player, {soloTR: true});
     const option = player.getStandardProjectOption();
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).not.to.be.undefined;

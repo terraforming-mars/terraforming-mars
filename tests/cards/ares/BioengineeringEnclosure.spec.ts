@@ -3,7 +3,6 @@ import {BioengineeringEnclosure} from '../../../src/server/cards/ares/Bioenginee
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {expect} from 'chai';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
@@ -18,7 +17,7 @@ describe('BioengineeringEnclosure', function() {
   beforeEach(function() {
     animalHost = new Birds();
     card = new BioengineeringEnclosure();
-    [game, player] = testGame(2, {...ARES_OPTIONS_NO_HAZARDS});
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Can not play without a science tag', () => {

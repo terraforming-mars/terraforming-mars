@@ -3,8 +3,7 @@ import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Player} from '../../src/server/Player';
 import {Game} from '../../src/server/Game';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
-
-import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
+import {AresTestHelper} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';
 import {Tile} from '../../src/server/Tile';
@@ -25,6 +24,9 @@ import {addOcean, cast, runAllActions} from '../TestingUtils';
 import {Ants} from '../../src/server/cards/base/Ants';
 import {Birds} from '../../src/server/cards/base/Birds';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {testGame} from '../TestGame';
+
+const ARES_OPTIONS_WITH_HAZARDS = {...DEFAULT_GAME_OPTIONS, aresExtension: true, aresHazards: true};
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
@@ -34,9 +36,7 @@ describe('AresHandler', function() {
   let game: Game;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
 

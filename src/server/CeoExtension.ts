@@ -17,11 +17,7 @@ export class CeoExtension {
   }
 
   public static ceoActionIsUsable(player: Player): boolean {
-    for (const card of player.playedCards) {
-      if (isCeoCard(card)) {
-        return card.canAct(player);
-      }
-    }
-    return false;
+    // If _at least_ one CEO has usable actions, return true
+    return player.playedCards.some((card) => isCeoCard(card) && card.canAct(player));
   }
 }

@@ -3,7 +3,6 @@ import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
 import {Sponsors} from '../../../src/server/cards/base/Sponsors';
 import {PROffice} from '../../../src/server/cards/turmoil/PROffice';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {testGameOptions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('PROffice', function() {
@@ -11,7 +10,7 @@ describe('PROffice', function() {
     const card = new PROffice();
     const card2 = new Sponsors();
     const card3 = new AcquiredCompany();
-    const [game, player] = testGame(1, testGameOptions({turmoilExtension: true}));
+    const [game, player] = testGame(1, {turmoilExtension: true});
 
     expect(player.simpleCanPlay(card)).is.not.true;
 

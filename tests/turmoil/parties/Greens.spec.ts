@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {ISpace} from '../../../src/server/boards/ISpace';
-import {cast, testGameOptions, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
+import {cast, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../../src/server/turmoil/parties/Greens';
 import {Lichen} from '../../../src/server/cards/base/Lichen';
@@ -21,7 +21,7 @@ describe('Greens', function() {
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
     const otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, otherPlayer], player, {turmoilExtension: true});
     turmoil = game.turmoil!;
     greens = new Greens();
   });

@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusSolarArrays} from '../../../src/server/cards/moon/CopernicusSolarArrays';
 import {expect} from 'chai';
@@ -10,7 +9,7 @@ describe('CopernicusSolarArrays', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new CopernicusSolarArrays();
   });
 

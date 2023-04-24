@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Habitat14} from '../../../src/server/cards/moon/Habitat14';
 import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
@@ -11,7 +10,7 @@ describe('Habitat14', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new Habitat14();
   });
 

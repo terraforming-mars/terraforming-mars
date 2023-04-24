@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {DarksideMiningSyndicate} from '../../../src/server/cards/moon/DarksideMiningSyndicate';
 import {expect} from 'chai';
@@ -13,7 +12,7 @@ describe('DarksideMiningSyndicate', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new DarksideMiningSyndicate();
     moonData = MoonExpansion.moonData(game);
   });

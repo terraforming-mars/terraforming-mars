@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {DarksideIncubationPlant} from '../../../src/server/cards/moon/DarksideIncubationPlant';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -13,7 +13,7 @@ describe('DarksideIncubationPlant', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new DarksideIncubationPlant();
   });
 

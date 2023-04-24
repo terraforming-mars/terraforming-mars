@@ -43,10 +43,7 @@ export class CoLeadership extends PreludeCard {
 
     return new SelectCard('Choose CEO card', 'Take', cardsDrawn, (([chosenCeo]) => {
       // Discard unchosen CEOs
-      inplaceRemove(cardsDrawn, chosenCeo);
-      cardsDrawn.forEach((ceo) => {
-        game.ceoDeck.discard(ceo);
-      });
+      cardsDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
       // Add chosen CEO to hand
       player.ceoCardsInHand.push(chosenCeo);
       return undefined;

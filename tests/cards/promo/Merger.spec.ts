@@ -26,15 +26,18 @@ import {Viron} from '../../../src/server/cards/venusNext/Viron';
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
 import {testGame} from '../../TestGame';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
+import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
+import {AgricolaInc} from '../../../src/server/cards/community/AgricolaInc';
+// import {ProjectWorkshop} from '../../../src/server/cards/community/ProjectWorkshop';
 
 describe('Merger', function() {
-  let card: Merger;
+  let merger: Merger;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
-    card = new Merger();
+    merger = new Merger();
     [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
 
     // Preset corporation deck for testing
@@ -48,39 +51,39 @@ describe('Merger', function() {
   it('Can play as long as have enough M€', function() {
     player.corporations.push(new BeginnerCorporation()); // Vestigial corporation
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
 
     expect(enabledMap(selectCorp)).to.have.deep.members(
       [
-        ['Arcadian Communities', true],
-        ['Saturn Systems', true],
-        ['Polyphemos', true],
-        ['Terralabs Research', true],
+        [CardName.ARCADIAN_COMMUNITIES, true],
+        [CardName.SATURN_SYSTEMS, true],
+        [CardName.POLYPHEMOS, true],
+        [CardName.TERRALABS_RESEARCH, true],
       ]);
   });
 
   it('Excludes corps that player cannot afford', function() {
     player.megaCredits = 27;
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
     expect(enabledMap(selectCorp)).to.have.deep.members(
       [
-        ['Arcadian Communities', true],
-        ['Saturn Systems', true],
-        ['Polyphemos', true],
-        ['Terralabs Research', false],
+        [CardName.ARCADIAN_COMMUNITIES, true],
+        [CardName.SATURN_SYSTEMS, true],
+        [CardName.POLYPHEMOS, true],
+        [CardName.TERRALABS_RESEARCH, false],
       ]);
   });
 
   it('Can play as long as have enough M€', function() {
     player.corporations = [new BeginnerCorporation()]; // Vestigial corporation
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -94,7 +97,7 @@ describe('Merger', function() {
 
   it('Player has 2 corps after playing Merger', function() {
     player.corporations.push(new Splice());
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -118,7 +121,7 @@ describe('Merger', function() {
 
   it('Confirming that Cheung Shing Mars works', function() {
     player.corporations.push(new Splice());
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -135,7 +138,7 @@ describe('Merger', function() {
   it('Works with Terralabs played via Merger', function() {
     player.corporations = [new BeginnerCorporation()]; // Vestigial corporation
     player.megaCredits = 50; // Ensure enough to pay for Merger cost
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -146,7 +149,7 @@ describe('Merger', function() {
 
   it('Works with Polyphemos played via Merger', function() {
     player.corporations = [new BeginnerCorporation()];
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -173,7 +176,7 @@ describe('Merger', function() {
   it('Works with Terralabs first', function() {
     player.playCorporationCard(new TerralabsResearch());
     player.megaCredits = 50; // Ensure enough to pay for Merger cost
-    card.play(player);
+    merger.play(player);
     expect(player.cardCost).to.eq(1);
     runAllActions(game);
 
@@ -186,7 +189,7 @@ describe('Merger', function() {
     player.playCorporationCard(new TharsisRepublic());
     expect(player.pendingInitialActions).has.length(1);
 
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -210,7 +213,7 @@ describe('Merger', function() {
     player.playCorporationCard(helion);
     expect(player.megaCredits).eq(helion.startingMegaCredits - 6);
 
-    card.play(player);
+    merger.play(player);
 
     runAllActions(game);
 
@@ -247,5 +250,42 @@ describe('Merger', function() {
     player.playAdditionalCorporationCard(new Viron());
     runAllActions(game);
     expect(player.production.megacredits).eq(1);
+  });
+
+  function testCard(currentCorp: ICorporationCard, candidate: ICorporationCard, megaCredits: number, pass: boolean) {
+    [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+    player.playCorporationCard(currentCorp);
+    game.corporationDeck.drawPile.push(candidate);
+    player.megaCredits = megaCredits;
+    merger.play(player);
+    runAllActions(game);
+
+    const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
+    const idx = selectCorp.cards.findIndex((c) => c.name === candidate.name);
+    const enabled = selectCorp.config.enabled![idx];
+    expect(enabled, `${candidate.name}, ${megaCredits}`).eq(pass);
+  }
+
+  // Grants stock when gaining production
+  it('Manutech and Low MC cards', () => {
+    const beginnerCorp = new BeginnerCorporation();
+    const manutech = new Manutech();
+    const agricolaInc = new AgricolaInc();
+
+    // Agricola, Inc: 40MC and 1 MC production.
+    testCard(manutech, agricolaInc, 0, false);
+    testCard(manutech, agricolaInc, 1, true);
+    testCard(beginnerCorp, agricolaInc, 1, false);
+    testCard(beginnerCorp, agricolaInc, 2, true);
+
+    // Project Workshop: 39MC and 1 titanium.
+    // const projectWorkshop = new ProjectWorkshop();
+    // Phobolog: 23 MC, 10 titanium and +1 titanium value.
+    // Luna First Incorporated: 40MC and 1 titanium.
+    // Luna Trade Federation: 15MC and 10 titanium
+    // The Grand Luna Capital Group: 32MC and 1 titanium
+    // Chimera: 36MC and 1 titanium
+    // Robin Haulings: 39MC, add 1 floater to any card. (Helion + X)
+    // Point Luna: 38MC 1 titanium production.
   });
 });

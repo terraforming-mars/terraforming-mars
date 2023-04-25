@@ -15,6 +15,10 @@ export class MonsInsurance extends Card implements ICorporationCard {
       name: CardName.MONS_INSURANCE,
       startingMegaCredits: 48,
 
+      behavior: {
+        production: {megacredits: 4},
+      },
+
       metadata: {
         cardNumber: 'R46',
         description: 'You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.',
@@ -35,9 +39,10 @@ export class MonsInsurance extends Card implements ICorporationCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 6);
     for (const p of player.game.getPlayers()) {
-      p.production.add(Resources.MEGACREDITS, -2, {log: true});
+      if (p.id !== player.id) {
+        p.production.add(Resources.MEGACREDITS, -2, {log: true});
+      }
     }
     player.game.monsInsuranceOwner = player.id;
     return undefined;

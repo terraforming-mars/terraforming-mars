@@ -7,7 +7,6 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 import {DeimosDown} from '../../../src/server/cards/base/DeimosDown';
 import {Predators} from '../../../src/server/cards/base/Predators';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
@@ -24,10 +23,7 @@ describe('MonsInsurance', () => {
   beforeEach(() => {
     card = new MonsInsurance();
 
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.GREEN.newPlayer();
-    Game.newInstance('gameid', [player, player2, player3], player);
+    [, player, player2, player3] = testGame(3);
     card.play(player);
     player.setCorporationForTest(card);
   });

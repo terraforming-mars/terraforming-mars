@@ -22,28 +22,28 @@ export class CoLeadership extends PreludeCard {
 
   public override bespokePlay(player: Player) {
     const game = player.game;
-    const cardsDrawn: Array<ICeoCard> = [
+    const ceosDrawn: Array<ICeoCard> = [
       game.ceoDeck.draw(game),
       game.ceoDeck.draw(game),
       game.ceoDeck.draw(game),
     ];
 
-    cardsDrawn.forEach((ceo) => {
+    ceosDrawn.forEach((ceo) => {
       if (ceo.canPlay?.(player) === false) {
-        inplaceRemove(cardsDrawn, ceo);
+        inplaceRemove(ceosDrawn, ceo);
         game.ceoDeck.discard(ceo);
         game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(ceo).player(player), {reservedFor: player});
       }
     });
 
-    if (cardsDrawn.length === 0) {
+    if (ceosDrawn.length === 0) {
       game.log('${0} drew no playable CEO cards', (b) => b.player(player));
       return undefined;
     }
 
-    return new SelectCard('Choose CEO card', 'Take', cardsDrawn, (([chosenCeo]) => {
+    return new SelectCard('Choose CEO card', 'Take', ceosDrawn, (([chosenCeo]) => {
       // Discard unchosen CEOs
-      cardsDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
+      ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
       // Add chosen CEO to hand
       player.ceoCardsInHand.push(chosenCeo);
       return undefined;

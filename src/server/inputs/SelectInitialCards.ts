@@ -63,7 +63,10 @@ export class SelectInitialCards extends AndOptions {
             if (ceoCards.length !== 1) {
               throw new Error('Only select 1 CEO');
             }
+            // Push chosen card to hand
             player.ceoCardsInHand.push(ceoCards[0]);
+            // Discard unchosen CEOs
+            player.dealtCeoCards.filter((c) => c !== ceoCards[0]).forEach((c) => player.game.ceoDeck.discard(c));
             return undefined;
           }, {min: 1, max: 1},
         ),

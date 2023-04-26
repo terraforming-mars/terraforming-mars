@@ -35,11 +35,11 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     return new OrOptions(
-      new SelectOption('Gain 3 titanium.', 'Gain titanium', () => {
+      new SelectOption('Gain 3 titanium', 'Gain titanium', () => {
         player.addResource(Resources.TITANIUM, 3, {log: true});
         return undefined;
       }),
-      new SelectOption('Gain 4 steel.', 'Gain steel', () => {
+      new SelectOption('Gain 4 steel', 'Gain steel', () => {
         player.addResource(Resources.STEEL, 4, {log: true});
         return undefined;
       }));

@@ -14,7 +14,7 @@ import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from 
 import {Resources} from '../../common/Resources';
 import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
-import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([

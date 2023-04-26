@@ -5,7 +5,6 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {Size} from '../../../common/cards/render/Size';
 import {ICeoCard} from './ICeoCard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {inplaceRemove} from '../../../common/utils/utils';
 
 export class CoLeadership extends PreludeCard {
   constructor() {

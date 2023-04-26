@@ -40,7 +40,7 @@ export class MarsMaths extends Card implements ICorporationCard {
   }
 
   public action(player: Player) {
-    player.actionsThisRound += 2;
+    player.availableActionsThisRound += 2;
     return undefined;
   }
 }

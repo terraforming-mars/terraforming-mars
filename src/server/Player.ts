@@ -160,9 +160,11 @@ export class Player {
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
 
-  // This allows for cards to increase / decrease the number of actions a player
-  // can take per round.
-  public actionsThisRound = 2;
+  // The number of actions a player can take this round.
+  // It's almost always 2, but certain cards can change this value.
+  //
+  // This value isn't serialized. Probably ought to.
+  public availableActionsThisRound = 2;
 
   // Stats
   public actionsTakenThisGame: number = 0;
@@ -1470,7 +1472,7 @@ export class Player {
 
   private endTurnOption(): PlayerInput {
     return new SelectOption('End Turn', 'End', () => {
-      this.actionsTakenThisRound = this.actionsThisRound; // This allows for variable actions per turn, like Mars Maths
+      this.actionsTakenThisRound = this.availableActionsThisRound; // This allows for variable actions per turn, like Mars Maths
       this.game.log('${0} ended turn', (b) => b.player(this));
       return undefined;
     });
@@ -1781,9 +1783,9 @@ export class Player {
       game.phase = Phase.ACTION;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.actionsThisRound)) {
+    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
       this.actionsTakenThisRound = 0;
-      this.actionsThisRound = 2;
+      this.availableActionsThisRound = 2;
       game.resettable = true;
       game.playerIsFinishedTakingActions();
       return;

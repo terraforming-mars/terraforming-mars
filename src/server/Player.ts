@@ -34,7 +34,7 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tag} from '../common/cards/Tag';
-import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from './game/VictoryPointsBreakdown';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {Timer} from '../common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';

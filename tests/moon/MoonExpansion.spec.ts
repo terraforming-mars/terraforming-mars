@@ -14,7 +14,7 @@ import {TileType} from '../../src/common/TileType';
 import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
-import {VictoryPointsBreakdown} from '../../src/server/VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../../src/server/game/VictoryPointsBreakdown';
 
 describe('MoonExpansion', () => {
   let game: Game;

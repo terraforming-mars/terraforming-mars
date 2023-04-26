@@ -1470,7 +1470,7 @@ export class Player {
 
   private endTurnOption(): PlayerInput {
     return new SelectOption('End Turn', 'End', () => {
-      this.actionsTakenThisRound = 1;
+      this.actionsTakenThisRound = this.actionsThisRound; // This allows for variable actions per turn, like Mars Maths
       this.game.log('${0} ended turn', (b) => b.player(this));
       return undefined;
     });

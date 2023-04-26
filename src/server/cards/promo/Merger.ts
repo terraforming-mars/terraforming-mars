@@ -100,15 +100,15 @@ export class Merger extends PreludeCard {
     // Used to filter down anything of type Countable.
     const asNumber = (x: Countable | undefined) => typeof(x) === 'number' ? x : 0;
 
-    const incomingTitanium = asNumber(stock?.titanium);
+    let incomingTitanium = asNumber(stock?.titanium);
     // const titaniumValue = player.getTitaniumValue() + (behavior?.titanumValue ?? 0);
     const titaniumValue = player.getTitaniumValue();
 
     if (player.isCorporation(CardName.MANUTECH)) {
       sum += asNumber(production?.megacredits);
-      // incomingTitanium += asNumber(production?.titanium);
+      incomingTitanium += asNumber(production?.titanium);
     }
-    if (/* corp.name === CardName.LUNA_TRADE_FEDERATION || */ player.isCorporation(CardName.LUNA_TRADE_FEDERATION)) {
+    if (corp.name === CardName.LUNA_TRADE_FEDERATION || player.isCorporation(CardName.LUNA_TRADE_FEDERATION)) {
       sum += (player.titanium + incomingTitanium) * (titaniumValue - 1);
     }
 

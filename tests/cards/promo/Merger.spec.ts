@@ -34,6 +34,7 @@ import {Units} from '../../../src/common/Units';
 import {LunaFirstIncorporated} from '../../../src/server/cards/moon/LunaFirstIncorporated';
 import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
 import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {PhoboLog} from '../../../src/server/cards/corporation/PhoboLog';
 
 describe('Merger', function() {
   let merger: Merger;
@@ -257,13 +258,20 @@ describe('Merger', function() {
     expect(player.production.megacredits).eq(1);
   });
 
-  describe('low MC cards', () => {
-    function testCard(currentCorp: ICorporationCard, candidate: ICorporationCard, activeStock: Partial<Units>, pass: boolean) {
-      it(`${currentCorp.name} ${candidate.name}, ${activeStock}`, () => {
+  describe('Mergability outliers for weird cases', () => {
+    function testMergability(currentCorp: ICorporationCard | [ICorporationCard, ICorporationCard], candidate: ICorporationCard, megacredits: number, pass: boolean) {
+      const corporations = Array.isArray(currentCorp) ? currentCorp : [currentCorp];
+      const corpNames = corporations.map((c) => c.name).join(', ');
+
+      it(`(${corpNames}, ${candidate.name}, ${megacredits})`, () => {
         [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
-        player.playCorporationCard(currentCorp);
+        player.playCorporationCard(corporations[0]);
+        if (corporations.length > 1) {
+          player.playAdditionalCorporationCard(corporations[1]);
+        }
         game.corporationDeck.drawPile.push(candidate);
-        player.setResourcesForTest(Units.of(activeStock));
+
+        player.setResourcesForTest(Units.of({megacredits})); // Clear all resources but MC.
         merger.play(player);
         runAllActions(game);
 
@@ -282,40 +290,57 @@ describe('Merger', function() {
     const lunaFirstIncorporated = new LunaFirstIncorporated();
     const theGrandLunaCapitalGroup = new TheGrandLunaCapitalGroup();
     const chimera = new Chimera();
+    const phobolog = new PhoboLog();
+    const pointLuna = new PointLuna();
 
     // Agricola, Inc: 40MC and 1 MC production.
-    testCard(beginnerCorp, agricolaInc, {megacredits: 1}, false);
-    testCard(beginnerCorp, agricolaInc, {megacredits: 2}, true);
-    testCard(manutech, agricolaInc, {megacredits: 0}, false);
-    testCard(manutech, agricolaInc, {megacredits: 1}, true);
+    testMergability(beginnerCorp, agricolaInc, 1, false);
+    testMergability(beginnerCorp, agricolaInc, 2, true);
+    testMergability(manutech, agricolaInc, 0, false);
+    testMergability(manutech, agricolaInc, 1, true);
 
     // Project Workshop: 39MC and 1 titanium.
     // Luna Trade Federation: titanium = 2MC each
-    testCard(beginnerCorp, projectWorkshop, {megacredits: 2}, false);
-    testCard(beginnerCorp, projectWorkshop, {megacredits: 3}, true);
-    testCard(lunaTradeFederation, projectWorkshop, {megacredits: 0}, false);
-    testCard(lunaTradeFederation, projectWorkshop, {megacredits: 1}, true);
+    testMergability(beginnerCorp, projectWorkshop, 2, false);
+    testMergability(beginnerCorp, projectWorkshop, 3, true);
+    testMergability(lunaTradeFederation, projectWorkshop, 0, false);
+    testMergability(lunaTradeFederation, projectWorkshop, 1, true);
 
     // Luna First Incorporated: 40MC and 1 titanium.
-    testCard(beginnerCorp, lunaFirstIncorporated, {megacredits: 1}, false);
-    testCard(beginnerCorp, lunaFirstIncorporated, {megacredits: 2}, true);
-    testCard(lunaTradeFederation, lunaFirstIncorporated, {megacredits: 0}, true);
+    testMergability(beginnerCorp, lunaFirstIncorporated, 1, false);
+    testMergability(beginnerCorp, lunaFirstIncorporated, 2, true);
+    testMergability(lunaTradeFederation, lunaFirstIncorporated, 0, true);
 
     // The Grand Luna Capital Group: 32MC and 1 titanium
-    testCard(beginnerCorp, theGrandLunaCapitalGroup, {megacredits: 9}, false);
-    testCard(beginnerCorp, theGrandLunaCapitalGroup, {megacredits: 10}, true);
-    testCard(lunaTradeFederation, theGrandLunaCapitalGroup, {megacredits: 7}, false);
-    testCard(lunaTradeFederation, theGrandLunaCapitalGroup, {megacredits: 8}, true);
+    testMergability(beginnerCorp, theGrandLunaCapitalGroup, 9, false);
+    testMergability(beginnerCorp, theGrandLunaCapitalGroup, 10, true);
+    testMergability(lunaTradeFederation, theGrandLunaCapitalGroup, 7, false);
+    testMergability(lunaTradeFederation, theGrandLunaCapitalGroup, 8, true);
 
     // Chimera: 36MC and 1 titanium
-    testCard(beginnerCorp, chimera, {megacredits: 5}, false);
-    testCard(beginnerCorp, chimera, {megacredits: 6}, true);
-    testCard(lunaTradeFederation, chimera, {megacredits: 3}, false);
-    testCard(lunaTradeFederation, chimera, {megacredits: 4}, true);
+    testMergability(beginnerCorp, chimera, 5, false);
+    testMergability(beginnerCorp, chimera, 6, true);
+    testMergability(lunaTradeFederation, chimera, 3, false);
+    testMergability(lunaTradeFederation, chimera, 4, true);
 
     // Luna Trade Federation: 15MC and 10 titanium
-    // Robin Haulings: 39MC, add 1 floater to any card. (Helion + X)
-    // Point Luna: 38MC 1 titanium production.
+    testMergability(beginnerCorp, lunaTradeFederation, 6, false);
+    testMergability(beginnerCorp, lunaTradeFederation, 7, true);
+
     // Phobolog: 23 MC, 10 titanium and +1 titanium value.
+    testMergability(beginnerCorp, phobolog, 0, false);
+    testMergability(lunaTradeFederation, phobolog, 0, true);
+    testMergability(phobolog, lunaTradeFederation, 0, true);
+
+    // Point Luna: 38MC 1 titanium production.
+    testMergability(beginnerCorp, pointLuna, 3, false);
+    testMergability(beginnerCorp, pointLuna, 4, true);
+    testMergability(lunaTradeFederation, pointLuna, 3, false);
+    testMergability(lunaTradeFederation, pointLuna, 4, true);
+    // Combo. The titanium production provides 2 more MC.
+    testMergability([lunaTradeFederation, manutech], pointLuna, 1, false);
+    testMergability([lunaTradeFederation, manutech], pointLuna, 3, true);
+
+    // Robin Haulings: 39MC, add 1 floater to any card. (Helion + X)
   });
 });

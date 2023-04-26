@@ -139,7 +139,14 @@ export class PathfindersExpansion {
     }
   }
 
-  private static grant(reward: Reward, player: Player, tag: PlanetaryTag) {
+  /**
+   * Grant the specified award.
+   *
+   * @param reward the reward to grant
+   * @param player the player gaining the reward (which may not be the same as the player who triggers the reward)
+   * @param tag the tag associated with the reward (used for logging VP rewards.)
+   */
+  public static grant(reward: Reward, player: Player, tag: PlanetaryTag): void {
     const game = player.game;
 
     switch (reward) {
@@ -168,7 +175,11 @@ export class PathfindersExpansion {
       break;
     case 'delegate':
       Turmoil.ifTurmoilElse(game,
-        () => game.defer(new SendDelegateToArea(player)),
+        (turmoil) => {
+          if (turmoil.hasDelegatesInReserve(player.id)) {
+            game.defer(new SendDelegateToArea(player));
+          }
+        },
         () => player.addResource(Resources.MEGACREDITS, 3, {log: true}));
       break;
     case 'energy':

@@ -28,7 +28,12 @@ import {testGame} from '../../TestGame';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {AgricolaInc} from '../../../src/server/cards/community/AgricolaInc';
-// import {ProjectWorkshop} from '../../../src/server/cards/community/ProjectWorkshop';
+import {LunaTradeFederation} from '../../../src/server/cards/moon/LunaTradeFederation';
+import {ProjectWorkshop} from '../../../src/server/cards/community/ProjectWorkshop';
+import {Units} from '../../../src/common/Units';
+import {LunaFirstIncorporated} from '../../../src/server/cards/moon/LunaFirstIncorporated';
+import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
+import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
 
 describe('Merger', function() {
   let merger: Merger;
@@ -252,40 +257,65 @@ describe('Merger', function() {
     expect(player.production.megacredits).eq(1);
   });
 
-  function testCard(currentCorp: ICorporationCard, candidate: ICorporationCard, megaCredits: number, pass: boolean) {
-    [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
-    player.playCorporationCard(currentCorp);
-    game.corporationDeck.drawPile.push(candidate);
-    player.megaCredits = megaCredits;
-    merger.play(player);
-    runAllActions(game);
+  describe('low MC cards', () => {
+    function testCard(currentCorp: ICorporationCard, candidate: ICorporationCard, activeStock: Partial<Units>, pass: boolean) {
+      it(`${currentCorp.name} ${candidate.name}, ${activeStock}`, () => {
+        [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+        player.playCorporationCard(currentCorp);
+        game.corporationDeck.drawPile.push(candidate);
+        player.setResourcesForTest(Units.of(activeStock));
+        merger.play(player);
+        runAllActions(game);
 
-    const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
-    const idx = selectCorp.cards.findIndex((c) => c.name === candidate.name);
-    const enabled = selectCorp.config.enabled![idx];
-    expect(enabled, `${candidate.name}, ${megaCredits}`).eq(pass);
-  }
+        const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
+        const idx = selectCorp.cards.findIndex((c) => c.name === candidate.name);
+        const enabled = selectCorp.config.enabled![idx];
+        expect(enabled).eq(pass);
+      });
+    }
 
-  // Grants stock when gaining production
-  it('Manutech and Low MC cards', () => {
     const beginnerCorp = new BeginnerCorporation();
     const manutech = new Manutech();
     const agricolaInc = new AgricolaInc();
+    const lunaTradeFederation = new LunaTradeFederation();
+    const projectWorkshop = new ProjectWorkshop();
+    const lunaFirstIncorporated = new LunaFirstIncorporated();
+    const theGrandLunaCapitalGroup = new TheGrandLunaCapitalGroup();
+    const chimera = new Chimera();
 
     // Agricola, Inc: 40MC and 1 MC production.
-    testCard(manutech, agricolaInc, 0, false);
-    testCard(manutech, agricolaInc, 1, true);
-    testCard(beginnerCorp, agricolaInc, 1, false);
-    testCard(beginnerCorp, agricolaInc, 2, true);
+    testCard(beginnerCorp, agricolaInc, {megacredits: 1}, false);
+    testCard(beginnerCorp, agricolaInc, {megacredits: 2}, true);
+    testCard(manutech, agricolaInc, {megacredits: 0}, false);
+    testCard(manutech, agricolaInc, {megacredits: 1}, true);
 
     // Project Workshop: 39MC and 1 titanium.
-    // const projectWorkshop = new ProjectWorkshop();
-    // Phobolog: 23 MC, 10 titanium and +1 titanium value.
+    // Luna Trade Federation: titanium = 2MC each
+    testCard(beginnerCorp, projectWorkshop, {megacredits: 2}, false);
+    testCard(beginnerCorp, projectWorkshop, {megacredits: 3}, true);
+    testCard(lunaTradeFederation, projectWorkshop, {megacredits: 0}, false);
+    testCard(lunaTradeFederation, projectWorkshop, {megacredits: 1}, true);
+
     // Luna First Incorporated: 40MC and 1 titanium.
-    // Luna Trade Federation: 15MC and 10 titanium
+    testCard(beginnerCorp, lunaFirstIncorporated, {megacredits: 1}, false);
+    testCard(beginnerCorp, lunaFirstIncorporated, {megacredits: 2}, true);
+    testCard(lunaTradeFederation, lunaFirstIncorporated, {megacredits: 0}, true);
+
     // The Grand Luna Capital Group: 32MC and 1 titanium
+    testCard(beginnerCorp, theGrandLunaCapitalGroup, {megacredits: 9}, false);
+    testCard(beginnerCorp, theGrandLunaCapitalGroup, {megacredits: 10}, true);
+    testCard(lunaTradeFederation, theGrandLunaCapitalGroup, {megacredits: 7}, false);
+    testCard(lunaTradeFederation, theGrandLunaCapitalGroup, {megacredits: 8}, true);
+
     // Chimera: 36MC and 1 titanium
+    testCard(beginnerCorp, chimera, {megacredits: 5}, false);
+    testCard(beginnerCorp, chimera, {megacredits: 6}, true);
+    testCard(lunaTradeFederation, chimera, {megacredits: 3}, false);
+    testCard(lunaTradeFederation, chimera, {megacredits: 4}, true);
+
+    // Luna Trade Federation: 15MC and 10 titanium
     // Robin Haulings: 39MC, add 1 floater to any card. (Helion + X)
     // Point Luna: 38MC 1 titanium production.
+    // Phobolog: 23 MC, 10 titanium and +1 titanium value.
   });
 });

@@ -54,6 +54,15 @@ export class TestPlayer extends Player {
     };
   }
 
+  public setResourcesForTest(units: Units) {
+    this.megaCredits = units.megacredits;
+    this.steel = units.steel;
+    this.titanium = units.titanium;
+    this.plants = units.plants;
+    this.energy = units.energy;
+    this.heat = units.heat;
+  }
+
   public tagsForTest: Partial<TagsForTest> | undefined = undefined;
 
   public override runInput(input: InputResponse, pi: PlayerInput): void {

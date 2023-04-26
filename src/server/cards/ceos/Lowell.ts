@@ -35,18 +35,20 @@ export class Lowell extends CeoCard {
   public action(player: Player): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const ceosDrawn: Array<ICeoCard> = [
+    let ceosDrawn: Array<ICeoCard> = [
       game.ceoDeck.draw(game),
       game.ceoDeck.draw(game),
       game.ceoDeck.draw(game),
     ];
 
-    ceosDrawn.forEach((ceo) => {
+    // TODO(): This is not being tested, but currently every CEO is always playable
+    ceosDrawn = ceosDrawn.filter((ceo) => {
       if (ceo.canPlay?.(player) === false) {
         game.ceoDeck.discard(ceo);
-        ceosDrawn.splice(ceosDrawn.indexOf(ceo), 1);
         game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(ceo).player(player), {reservedFor: player});
+        return false;
       }
+      return true;
     });
 
     player.game.defer(new SelectPaymentDeferred(player, 8, {title: 'Select how to pay for action'}));
@@ -60,8 +62,7 @@ export class Lowell extends CeoCard {
       // Add Lowell to Discard pile
       game.ceoDeck.discard(this);
       // Play the new CEO
-      player.playCard(chosenCeo);
-      return undefined;
+      return player.playCard(chosenCeo);
     }));
   }
 }

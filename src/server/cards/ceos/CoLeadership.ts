@@ -22,18 +22,20 @@ export class CoLeadership extends PreludeCard {
 
   public override bespokePlay(player: Player) {
     const game = player.game;
-    const ceosDrawn: Array<ICeoCard> = [
+    let ceosDrawn: Array<ICeoCard> = [
       game.ceoDeck.draw(game),
       game.ceoDeck.draw(game),
       game.ceoDeck.draw(game),
     ];
 
-    ceosDrawn.forEach((ceo) => {
+    // TODO(): This is not being tested, but currently every CEO is always playable
+    ceosDrawn = ceosDrawn.filter((ceo) => {
       if (ceo.canPlay?.(player) === false) {
-        inplaceRemove(ceosDrawn, ceo);
         game.ceoDeck.discard(ceo);
         game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(ceo).player(player), {reservedFor: player});
+        return false;
       }
+      return true;
     });
 
     if (ceosDrawn.length === 0) {

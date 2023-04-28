@@ -1,7 +1,6 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
 import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
-import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
@@ -34,8 +33,6 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tag} from '../common/cards/Tag';
-import {VictoryPointsBreakdown} from './game/VictoryPointsBreakdown';
-import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {Timer} from '../common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {GameCards} from './GameCards';
@@ -65,9 +62,9 @@ import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
-import {AwardScorer} from './awards/AwardScorer';
-import {FundedAward} from './awards/FundedAward';
 import {newMessage} from './logs/MessageBuilder';
+import {calculateVictoryPoints} from './game/calculateVictoryPoints';
+import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -492,79 +489,7 @@ export class Player {
   }
 
   public getVictoryPoints(): IVictoryPointsBreakdown {
-    const victoryPointsBreakdown = new VictoryPointsBreakdown();
-
-    // Victory points from cards
-    for (const playedCard of this.tableau) {
-      if (playedCard.victoryPoints !== undefined) {
-        victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
-      }
-    }
-
-    // Victory points from TR
-    victoryPointsBreakdown.setVictoryPoints('terraformRating', this.terraformRating);
-
-    // Victory points from awards
-    this.giveAwards(victoryPointsBreakdown);
-
-    // Victory points from milestones
-    for (const milestone of this.game.claimedMilestones) {
-      if (milestone.player !== undefined && milestone.player.id === this.id) {
-        victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed '+milestone.milestone.name+' milestone');
-      }
-    }
-
-    // Victory points from board
-    this.game.board.spaces.forEach((space) => {
-      // Victory points for greenery tiles
-      if (Board.isGreenerySpace(space) && Board.spaceOwnedBy(space, this)) {
-        victoryPointsBreakdown.setVictoryPoints('greenery', 1);
-      }
-
-      // Victory points for greenery tiles adjacent to cities
-      if (Board.isCitySpace(space) && Board.spaceOwnedBy(space, this)) {
-        const adjacent = this.game.board.getAdjacentSpaces(space);
-        for (const adj of adjacent) {
-          if (Board.isGreenerySpace(adj)) {
-            victoryPointsBreakdown.setVictoryPoints('city', 1);
-          }
-        }
-      }
-    });
-
-    // Turmoil Victory Points
-    const includeTurmoilVP = this.game.gameIsOver() || this.game.phase === Phase.END;
-
-    Turmoil.ifTurmoil(this.game, (turmoil) => {
-      if (includeTurmoilVP) {
-        victoryPointsBreakdown.setVictoryPoints('victoryPoints', turmoil.getPlayerVictoryPoints(this), 'Turmoil Points');
-      }
-    });
-
-    this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
-    MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
-    PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
-    CeoExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
-
-    // Escape velocity VP penalty
-    if (this.game.gameOptions.escapeVelocityMode) {
-      const threshold = this.game.gameOptions.escapeVelocityThreshold;
-      const period = this.game.gameOptions.escapeVelocityPeriod;
-      const penaltyPerMin = this.game.gameOptions.escapeVelocityPenalty ?? 1;
-      const elapsedTimeInMinutes = this.timer.getElapsedTimeInMinutes();
-      if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
-        const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION / 60)), 0);
-        // Don't lose more VP than what is available
-        victoryPointsBreakdown.updateTotal();
-
-        const totalBeforeEscapeVelocity = victoryPointsBreakdown.points.total;
-        const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
-        victoryPointsBreakdown.setVictoryPoints('escapeVelocity', -penaltyTotal, 'Escape Velocity Penalty');
-      }
-    }
-
-    victoryPointsBreakdown.updateTotal();
-    return victoryPointsBreakdown.points;
+    return calculateVictoryPoints(this);
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
@@ -1418,55 +1343,6 @@ export class Player {
       this.game.defer(new SelectPaymentDeferred(this, this.game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
       this.game.fundAward(this, award);
       return undefined;
-    });
-  }
-
-  private giveAwards(vpb: VictoryPointsBreakdown): void {
-    // Awards are disabled for 1 player games
-    if (this.game.isSoloMode()) return;
-
-    const maybeSetVP = (player: Player, fundedAward: FundedAward, vps: number, place: '1st' | '2nd') => {
-      if (player.id === this.id) {
-        vpb.setVictoryPoints(
-          'awards',
-          vps,
-          `${place} place for ${fundedAward.award.name} award (funded by ${fundedAward.player.name})`);
-      }
-    };
-
-    this.game.fundedAwards.forEach((fundedAward) => {
-      const award = fundedAward.award;
-      const scorer = new AwardScorer(this.game, award);
-      const players: Array<Player> = this.game.getPlayers().slice();
-      players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
-
-      // There is one rank 1 player
-      if (scorer.get(players[0]) > scorer.get(players[1])) {
-        maybeSetVP(players[0], fundedAward, 5, '1st');
-        players.shift();
-
-        if (players.length > 1) {
-          // There is one rank 2 player
-          if (scorer.get(players[0]) > scorer.get(players[1])) {
-            maybeSetVP(players[0], fundedAward, 2, '2nd');
-          } else {
-            // There are at least two rank 2 players
-            const score = scorer.get(players[0]);
-            while (players.length > 0 && scorer.get(players[0]) === score) {
-              maybeSetVP(players[0], fundedAward, 2, '2nd');
-              players.shift();
-            }
-          }
-        }
-
-      // There are at least two rank 1 players
-      } else {
-        const score = scorer.get(players[0]);
-        while (players.length > 0 && scorer.get(players[0]) === score) {
-          maybeSetVP(players[0], fundedAward, 5, '1st');
-          players.shift();
-        }
-      }
     });
   }
 

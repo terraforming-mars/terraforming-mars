@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {Player} from '../../src/server/Player';
 import {Game} from '../../src/server/Game';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {AresTestHelper} from './AresTestHelper';
@@ -32,14 +31,13 @@ const ARES_OPTIONS_WITH_HAZARDS = {...DEFAULT_GAME_OPTIONS, aresExtension: true,
 // TODO(kberg): break up tests, but no rush.
 describe('AresHandler', function() {
   let player: TestPlayer;
-  let otherPlayer: Player;
+  let otherPlayer: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     [game, player, otherPlayer] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
-
 
   it('Get adjacency bonus', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
@@ -61,6 +59,26 @@ describe('AresHandler', function() {
     // player who owns Restricted area gets money, but no card.
     expect(otherPlayer.megaCredits).is.eq(1);
     expect(otherPlayer.cardsInHand).is.length(0);
+  });
+
+  it('Get multiple bonuses', function() {
+    const greenerySpace = game.board.getAvailableSpacesForGreenery(player)[0];
+    const adjacentSpaces = game.board.getAdjacentSpaces(greenerySpace);
+    const [firstSpace, secondSpace] = adjacentSpaces;
+    firstSpace.adjacency = {bonus: [SpaceBonus.STEEL]};
+    game.addTile(otherPlayer, firstSpace, {tileType: TileType.MINING_RIGHTS});
+
+
+    secondSpace.adjacency = {bonus: [SpaceBonus.TITANIUM]};
+    game.addTile(otherPlayer, secondSpace, {tileType: TileType.MINING_AREA});
+
+    player.setResourcesForTest(Units.EMPTY);
+    otherPlayer.setResourcesForTest(Units.EMPTY);
+
+    game.addTile(player, greenerySpace, {tileType: TileType.GREENERY});
+
+    expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 1, steel: 1}));
+    expect(otherPlayer.getResourcesForTest()).deep.eq(Units.of({megacredits: 2}));
   });
 
   describe('setupHazards', function() {
@@ -144,7 +162,7 @@ describe('AresHandler', function() {
     expect(otherPlayer.megaCredits).is.eq(0);
   });
 
-  it('Can\'t afford adjacency costs', function() {
+  it('Cannot afford adjacency costs', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [], cost: 2};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
@@ -387,7 +405,7 @@ describe('AresHandler', function() {
     expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(2);
   });
 
-  it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
+  it('Placing on top of an ocean does not regrant bonuses', function() {
     game.board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;

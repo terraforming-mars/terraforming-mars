@@ -1190,14 +1190,6 @@ export class Game implements Logger {
     return passedPlayersColors;
   }
 
-  public getPlayer(name: string): Player {
-    const player = this.players.find((player) => player.name === name);
-    if (player === undefined) {
-      throw new Error('Player not found');
-    }
-    return player;
-  }
-
   public getCitiesOffMarsCount(player?: Player): number {
     return this.getCitiesCount(player, (space) => space.spaceType === SpaceType.COLONY);
   }

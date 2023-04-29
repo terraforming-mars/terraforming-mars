@@ -4,6 +4,8 @@ import {ParticipantId} from '../../common/Types';
 import {Game} from '../Game';
 import {Phase} from '../../common/Phase';
 import {Log} from '../../common/logs/Log';
+import {LogMessageData} from '../../common/logs/LogMessageData';
+import {LogMessageDataType} from '../../common/logs/LogMessageDataType';
 
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {
@@ -41,6 +43,28 @@ export class GameLogs {
       throw new Error('Game is not over');
     }
 
-    return game.gameLog.map((message) => Log.applyData(message, (d) => d.value));
+    return game.gameLog.map((message) => Log.applyData(message, (datum: LogMessageData) => {
+      if (datum.type === undefined || datum.value === undefined) {
+        return '';
+      }
+
+      switch (datum.type) {
+      case LogMessageDataType.PLAYER:
+        for (const player of game.getPlayers()) {
+          if (datum.value === player.color) {
+            return player.name;
+          }
+        }
+        // Fall-back, show the player color.
+        return datum.value;
+
+      case LogMessageDataType.CARD:
+      case LogMessageDataType.GLOBAL_EVENT:
+      case LogMessageDataType.TILE_TYPE:
+      case LogMessageDataType.COLONY:
+      default:
+        return datum.value;
+      }
+    }));
   }
 }

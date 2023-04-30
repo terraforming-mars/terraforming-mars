@@ -565,7 +565,7 @@
     "Add 1 animal to this card. 1 VP per 2 animals here.": "Положите 1 животное на эту карту. 1 ПО за каждые два животных на этой карте.",
 
     "Protected Habitats": "Защищённая среда обитания",
-    "OPPONENTS MAY NOT REMOVE YOUR": "Противники не могут удалять ваши.",
+    "Opponents may not remove your": "Противники не могут удалять ваши жетоны.",
 
     "Protected Valley": "Защищённая долина",
     "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Повысьте свой доход на 2. Проведите озеленение зарезервированного для океана участка, игнорируя правила проведения озеленений, и повысьте уровень кислорода на 1.",
@@ -687,6 +687,7 @@
     "ACTION": "ДЕЙСТВИЕ",
     "Select prelude card to play": "Выберите карту Прологов, чтобы разыграть ее",
     "Select space for ocean tile": "Выберите место для размещения океана",
+    "Select space adjacent to a city tile": "Выберите место, примыкающее к тайлу города",
     "Venus Milestone/Award": "Награда/Достижение проекта Венера",
 
     "${0} placed ${1} tile on (${2}, ${3}": "${0} разместил тайл \"${1}\" на координатах (${2}, ${3}"

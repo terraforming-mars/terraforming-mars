@@ -91,6 +91,7 @@
             <div class="played-cards-count">{{cardsInHandCount.toString()}}</div>
             <div class="played-cards-selection" v-i18n>{{ getToggleLabel('HAND')}}</div>
           </div>
+          <div class="text-overview" v-i18n>[ toggle cards in hand ]</div>
         </div>
         <sortable-cards v-show="isVisible('HAND')" :playerId="playerView.id"
                         :cards="playerView.preludeCardsInHand

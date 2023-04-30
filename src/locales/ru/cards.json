@@ -42,7 +42,7 @@
     "Big Asteroid": "Большой астероид",
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Повысьте температуру на 2 и получите 4 титана. Удалите до 4 растений у любого игрока.",
 
-    "Water Import from Europa": "Импорт воды с Европы",
+    "Water Import From Europa": "Импорт воды с Европы",
     "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "Действие: заплатите 12 M€, чтоб выложить тайл океана. Можно использовать титан для оплаты, как при игре карты с символом космоса.",
     "1 VP for each Jovian tag you have.": "1 ПО за каждый ваш символ Юпитера.",
 
@@ -84,7 +84,7 @@
 
     "Predators": "Хищники",
     "Action: Remove 1 animal from any card and add it to this card.": "Действие: удалите 1 жетон животных с любой карты и положите на эту карту 1 жетон животных.",
-    "Requires 11% oxygen. 1 VP per animal on this card.": "Уровень кислорода должен быть 11%. 1 ПО за каждый жетон животных на этой карте.",
+    "(Requires 11% oxygen.)": "(Уровень кислорода должен быть 11%)",
 
     "Space Station": "Космическая станция",
     "Effect: When you play a space card, you pay 2 M€ less for it.": "Свойство: когда играете карту с символом космоса, вы платите на 2 M€ меньше.",
@@ -120,7 +120,7 @@
 
     "Ants": "Муравьи",
     "Action: Remove 1 microbe from any card to add 1 to this card.": "Действие: удалите 1 жетон бактерий с любой карты и положите на эту карту 1 жетон бактерий.",
-    "Requires 4% oxygen. 1 VP per 2 microbes on this card.": "Уровень кислорода должен быть 4%. 1 ПО за каждые 2 жетона бактерий на этой карте.",
+    "1 VP per 2 microbes on this card.": "1 ПО за каждые 2 жетона бактерий на этой карте.",
 
     "Release of Inert Gases": "Выпуск инертных газов",
     "Raise your terraforming rating 2 steps.": "Повысьте свой рейтинг на 2.",
@@ -247,7 +247,7 @@
     "Viral Enhancers": "Вирусные векторы",
     "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Свойство: когда вы играете карту с символом растения, бактерии или животного, включая эту, получите 1 растение или положите 1 соответствующий жетон на только что сыгранную карту.",
 
-    "Towing a Comet": "Буксировка кометы",
+    "Towing A Comet": "Буксировка кометы",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Получите 2 растения. Повысьте уровень кислорода на 1 и выложите тайл океана.",
 
     "Space Mirrors": "Космические зеркала",
@@ -436,7 +436,7 @@
 
     "Symbiotic Fungus": "Грибы-симбионты",
     "Action: Add a microbe to ANOTHER card.": "Действие: положите жетон бактерий на другую карту.",
-    "Requires -14 C or warmer.": "Температура должна быть -14 градусов или выше.",
+    "(Requires -14 C° or warmer.)": "(Температура должна быть -14 градусов или выше.)",
 
     "Extreme-Cold Fungus": "Грибок для сверхнизких температур",
     "Action: Gain 1 plant.": "Действие: получите 1 растение",
@@ -513,6 +513,7 @@
 
     "Nitrite Reducing Bacteria": "Бактерия, перерабатывающая нитриты",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Действие: положите жетон бактерий на эту карту или сбросьте 3 жетона бактерий, чтобы повысить свой рейтинг на 1.",
+    "(Action: Remove 3 microbes to increase your TR 1 step.)": "(Действие: сбросьте 3 жетона бактерий, чтобы повысить свой рейтинг на 1.)",
     "Add 3 microbes to this card.": "Положите 3 жетона бактерий на эту карту.",
 
     "Industrial Microbes": "Промышленные микробы",

@@ -78,6 +78,8 @@ const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
 export type CardAction ='add' | 'discard' | 'nothing';
 
+export type ResourceSource = Player | GlobalEventName | ICard;
+
 export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
@@ -333,7 +335,7 @@ export class Player {
     resource: Resources,
     amount: number,
     unitType: 'production' | 'amount',
-    from: Player | GlobalEventName | undefined,
+    from: ResourceSource | undefined,
     stealing = false,
   ) {
     if (amount === 0) {
@@ -360,7 +362,9 @@ export class Player {
         .number(absAmount);
       if (from instanceof Player) {
         b.player(from);
-      } else if (from !== undefined) {
+      } else if (typeof(from) === 'object') {
+        b.cardName(from.name);
+      } else if (typeof(from) === 'string') {
         b.globalEventName(from);
       }
     });
@@ -371,7 +375,7 @@ export class Player {
     amount: number,
     options? : {
       log?: boolean,
-      from? : Player | GlobalEventName,
+      from? : ResourceSource,
       stealing?: boolean
     }) {
     this.addResource(resource, -amount, options);
@@ -382,7 +386,7 @@ export class Player {
     amount: number,
     options? : {
       log?: boolean,
-      from? : Player | GlobalEventName,
+      from? : ResourceSource,
       stealing?: boolean
     }) {
     // When amount is negative, sometimes the amount being asked to be removed is more than the player has.
@@ -460,7 +464,7 @@ export class Player {
 
   public addUnits(units: Partial<Units>, options? : {
     log?: boolean,
-    from? : Player | GlobalEventName,
+    from? : ResourceSource,
   }) {
     this.addResource(Resources.MEGACREDITS, units.megacredits || 0, options);
     this.addResource(Resources.STEEL, units.steel || 0, options);
@@ -1328,7 +1332,7 @@ export class Player {
       // VanAllen CEO Hook for Milestones
       const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
       if (vanAllen !== undefined) {
-        vanAllen.addResource(Resources.MEGACREDITS, 3, {log: true});
+        vanAllen.addResource(Resources.MEGACREDITS, 3, {log: true, from: this});
       }
       if (!this.cardIsInEffect(CardName.VANALLEN)) {
         this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));

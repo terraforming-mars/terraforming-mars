@@ -8,7 +8,7 @@ export class OneGiantStep extends BaseMilestone {
       'One Giant Step',
       // The original rules had "Have at least 4 moon tags in play" but that
       // was before the deck got 100% larger.
-      'Have at least 6 moon tags in play',
+      'Have 6 moon tags',
       6);
   }
 

@@ -7,7 +7,7 @@ export class PolarExplorer extends BaseMilestone {
   constructor() {
     super(
       'Polar Explorer',
-      'Have 3 tiles on the two bottom rows',
+      'Own 3 tiles on the two bottom rows',
       3);
   }
   public getScore(player: Player): number {

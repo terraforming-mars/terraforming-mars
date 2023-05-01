@@ -5,7 +5,7 @@ export class Generalist extends BaseMilestone {
   constructor() {
     super(
       'Generalist',
-      'Have increased all 6 productions by at least 1 step',
+      'Have increased all 6 productions by 1 step',
       6);
   }
 

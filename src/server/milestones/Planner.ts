@@ -5,7 +5,7 @@ export class Planner extends BaseMilestone {
   constructor() {
     super(
       'Planner',
-      'Have at least 16 cards in your hand',
+      'Have 16 cards in your hand',
       16);
   }
   public getScore(player: Player): number {

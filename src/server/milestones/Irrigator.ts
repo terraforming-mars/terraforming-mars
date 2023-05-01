@@ -7,7 +7,7 @@ export class Irrigator extends BaseMilestone {
   constructor() {
     super(
       'Irrigator',
-      'Have 4 tiles adjacent to oceans',
+      'Own 4 tiles adjacent to oceans',
       4);
   }
 

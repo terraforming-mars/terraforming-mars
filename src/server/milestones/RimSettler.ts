@@ -6,7 +6,7 @@ export class RimSettler extends BaseMilestone {
   constructor() {
     super(
       'Rim Settler',
-      'Have 3 Jovian tags in play',
+      'Have 3 Jovian tags',
       3);
   }
   public getScore(player: Player): number {

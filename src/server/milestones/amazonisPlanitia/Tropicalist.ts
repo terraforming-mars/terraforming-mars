@@ -6,7 +6,7 @@ export class Tropicalist extends BaseMilestone {
   constructor() {
     super(
       'Tropicalist',
-      'Have 3 tiles in the middle 3 equatorial rows',
+      'Own 3 tiles in the middle 3 equatorial rows',
       3);
   }
 

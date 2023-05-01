@@ -4,7 +4,7 @@
     <CardRenderData v-if="metadata.renderData" :renderData="metadata.renderData" />
     <CardDescription v-if="metadata.description" :item="metadata.description" />
     <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
-		<div class="spacer" v-if="needSpacer" style="padding-bottom: 22px;"></div>
+    <div class="spacer" v-if="needSpacer" style="padding-bottom: 22px;"></div>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default Vue.extend({
       required: true,
     },
     needSpacer: {
-      type: Boolean
+      type: Boolean,
     },
   },
   components: {

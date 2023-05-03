@@ -15,7 +15,7 @@ export class MarsMaths extends Card implements ICorporationCard {
       startingMegaCredits: 40,
 
       firstAction: {
-        text: 'Draw 2 cards ',
+        text: 'Draw 2 cards',
         drawCard: {count: 2},
       },
 

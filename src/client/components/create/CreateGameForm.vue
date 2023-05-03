@@ -791,7 +791,7 @@ export default (Vue as WithRefs<Refs>).extend({
       if (count === 1) {
         return translateText('Solo');
       }
-			return count.toString();
+      return count.toString();
     },
     deselectVenusCompletion() {
       if (this.$data.venusNext === false) {

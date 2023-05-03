@@ -93,7 +93,7 @@ async function start() {
     // Do not fail. Just continue. Stats aren't vital.
     console.error(err);
   }
-  Database.getInstance().purgeUnfinishedGames();
+  Database.getInstance().maintenance();
 
   const port = process.env.PORT || 8080;
   console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);

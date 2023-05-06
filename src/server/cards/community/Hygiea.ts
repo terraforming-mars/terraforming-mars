@@ -2,7 +2,6 @@ import {Colony} from '../../colonies/Colony';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../../common/colonies/ColonyBenefit';
 import {Resources} from '../../../common/Resources';
-import {ShouldIncreaseTrack} from '../../../common/colonies/ShouldIncreaseTrack';
 
 export class Hygiea extends Colony {
   constructor() {
@@ -23,7 +22,7 @@ export class Hygiea extends Colony {
       colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
       colonyBonusQuantity: 3,
       colonyBonusResource: Resources.MEGACREDITS,
-      shouldIncreaseTrack: ShouldIncreaseTrack.ASK,
+      shouldIncreaseTrack: 'ask',
     });
   }
 }

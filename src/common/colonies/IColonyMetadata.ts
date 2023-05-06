@@ -1,6 +1,5 @@
 import {ColonyBenefit} from './ColonyBenefit';
 import {Resources} from '../Resources';
-import {ShouldIncreaseTrack} from './ShouldIncreaseTrack';
 import {ColonyName} from './ColonyName';
 import {CardResource} from '../CardResource';
 import {GameModule} from '../cards/GameModule';
@@ -11,14 +10,14 @@ export interface IColonyMetadata {
   readonly buildType: ColonyBenefit;
   readonly buildQuantity: Array<number>; // Default is [1,1,1]
   readonly buildResource?: Resources;
-  readonly resourceType?: CardResource;
+  readonly cardResource?: CardResource;
   readonly tradeType: ColonyBenefit;
   readonly tradeQuantity: Array<number>; // Default is [1,1,1,1,1,1,1]
   readonly tradeResource?: Resources | Array<Resources>;
   readonly colonyBonusType: ColonyBenefit;
   readonly colonyBonusQuantity: number; // Default is 1
   readonly colonyBonusResource?: Resources;
-  readonly shouldIncreaseTrack: ShouldIncreaseTrack // Default is ShouldIncreaseTrack.YES;
+  readonly shouldIncreaseTrack: 'yes' | 'no' | 'ask' // Default is 'yes';
 }
 
 export type IInputColonyMetadata = Omit<IColonyMetadata, 'buildQuantity' |'tradeQuantity' | 'colonyBonusQuantity' | 'shouldIncreaseTrack'> & Partial<IColonyMetadata>;
@@ -31,7 +30,7 @@ export function colonyMetadata(partial: IInputColonyMetadata): IColonyMetadata {
     buildQuantity: DEFAULT_BUILD_QUANTITY,
     tradeQuantity: DEFAULT_TRADE_QUANTITY,
     colonyBonusQuantity: 1,
-    shouldIncreaseTrack: ShouldIncreaseTrack.YES,
+    shouldIncreaseTrack: 'yes',
     ...partial,
   };
 }

@@ -2,7 +2,6 @@ import {Colony} from './Colony';
 import {Resources} from '../../common/Resources';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
-import {ShouldIncreaseTrack} from '../../common/colonies/ShouldIncreaseTrack';
 
 export class Europa extends Colony {
   constructor() {
@@ -17,7 +16,7 @@ export class Europa extends Colony {
       ],
       colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
       colonyBonusResource: Resources.MEGACREDITS,
-      shouldIncreaseTrack: ShouldIncreaseTrack.ASK,
+      shouldIncreaseTrack: 'ask',
     });
   }
 }

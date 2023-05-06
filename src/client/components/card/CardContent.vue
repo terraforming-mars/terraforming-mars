@@ -33,7 +33,7 @@ export default Vue.extend({
       required: true,
     },
     padBottom: {
-      type: Boolean
+      type: Boolean,
     },
   },
   components: {

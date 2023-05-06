@@ -9,7 +9,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {ActionCard} from '../ActionCard';
 
 export class StormCraftIncorporated extends ActionCard implements ICorporationCard {
@@ -63,7 +63,7 @@ export class StormCraftIncorporated extends ActionCard implements ICorporationCa
           throw new Error('You cannot overspend floaters');
         }
         player.removeResourceFrom(this, floaterAmount);
-        player.deductResource(Resources.HEAT, heatAmount);
+        player.deductResource(Resource.HEAT, heatAmount);
         return cb();
       },
       new SelectAmount('Heat', 'Spend heat', (amount: number) => {

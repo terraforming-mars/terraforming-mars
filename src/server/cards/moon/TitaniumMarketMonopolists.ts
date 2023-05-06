@@ -2,14 +2,14 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {MarketCard} from './MarketCard';
 import {multiplier} from '../Options';
 
 export class TitaniumMarketMonopolists extends MarketCard {
   constructor() {
     super(
-      Resources.TITANIUM,
+      Resource.TITANIUM,
       {from: 2, to: 1, limit: 4},
       {from: 1, to: 4, limit: 4},
       {

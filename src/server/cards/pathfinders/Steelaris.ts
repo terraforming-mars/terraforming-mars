@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -56,7 +56,7 @@ export class Steelaris extends Card implements ICorporationCard {
       new GainStock(cardOwner, Units.of({steel: 1, plants: 1}), {
         cb: () => game.log(
           '${0} gained 1 ${1} and 1 ${2} from ${3}',
-          (b) => b.player(cardOwner).string(Resources.STEEL).string(Resources.PLANTS).cardName(this.name)),
+          (b) => b.player(cardOwner).string(Resource.STEEL).string(Resource.PLANTS).cardName(this.name)),
       }),
       cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
     );

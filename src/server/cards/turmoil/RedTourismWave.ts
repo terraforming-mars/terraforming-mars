@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -31,7 +31,7 @@ export class RedTourismWave extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     const amount = RedTourismWave.getAdjacentEmptySpacesCount(player);
-    player.addResource(Resources.MEGACREDITS, amount);
+    player.addResource(Resource.MEGACREDITS, amount);
     return undefined;
   }
 

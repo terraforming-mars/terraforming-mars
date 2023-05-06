@@ -3,7 +3,7 @@ import {BlackPolarDust} from '../../../src/server/cards/base/BlackPolarDust';
 import {Game} from '../../../src/server/Game';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 
@@ -18,7 +18,7 @@ describe('BlackPolarDust', function() {
   });
 
   it('Can not play', function() {
-    player.production.add(Resources.MEGACREDITS, -4);
+    player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 

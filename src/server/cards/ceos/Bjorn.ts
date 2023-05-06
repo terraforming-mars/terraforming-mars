@@ -4,7 +4,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {multiplier} from '../Options';
 
 export class Bjorn extends CeoCard {
@@ -28,7 +28,7 @@ export class Bjorn extends CeoCard {
     const targetPlayers = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
 
     targetPlayers.forEach((target) => {
-      target.stealResource(Resources.MEGACREDITS, game.generation, player);
+      target.stealResource(Resource.MEGACREDITS, game.generation, player);
     });
 
     return undefined;

@@ -5,7 +5,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -29,7 +29,7 @@ export class TiredEarth extends GlobalEvent implements IGlobalEvent {
       const tags = player.tags.count(Tag.EARTH, 'raw');
       const rawTotal = Math.min(tags, 5) - turmoil.getPlayerInfluence(player);
       const total = Math.max(rawTotal, 0);
-      player.deductResource(Resources.PLANTS, total, {log: true, from: this.name});
+      player.deductResource(Resource.PLANTS, total, {log: true, from: this.name});
     });
   }
 }

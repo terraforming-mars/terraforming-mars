@@ -7,7 +7,7 @@ import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 import {ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class TopsoilContract extends Card implements IProjectCard {
   constructor() {
@@ -36,7 +36,7 @@ export class TopsoilContract extends Card implements IProjectCard {
 
   public onResourceAdded(player: Player, card: ICard, count: number) {
     if (card.resourceType === CardResource.MICROBE) {
-      player.addResource(Resources.MEGACREDITS, count, {log: true});
+      player.addResource(Resource.MEGACREDITS, count, {log: true});
     }
   }
 }

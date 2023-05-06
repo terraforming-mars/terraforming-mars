@@ -2,7 +2,7 @@ import {RequirementType} from '../../common/cards/RequirementType';
 import {Tag} from '../../common/cards/Tag';
 import {ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITagCardRequirement} from '../../common/cards/ICardRequirement';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {ALL_RESOURCES, Resources} from '../../common/Resources';
+import {ALL_RESOURCES, Resource} from '../../common/Resource';
 import {Player} from '../Player';
 import {CardResource} from '../../common/CardResource';
 import {TileType} from '../../common/TileType';
@@ -173,7 +173,7 @@ export class TagCardRequirement extends CardRequirement implements ITagCardRequi
 }
 
 export class ProductionCardRequirement extends CardRequirement implements IProductionCardRequirement {
-  constructor(public resource: Resources, amount: number, options?: Options) {
+  constructor(public resource: Resource, amount: number, options?: Options) {
     super(RequirementType.PRODUCTION, amount, options);
   }
   public override satisfies(player: Player): boolean {

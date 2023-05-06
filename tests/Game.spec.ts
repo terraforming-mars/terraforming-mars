@@ -11,7 +11,7 @@ import {Phase} from '../src/common/Phase';
 import {addCity, addGreenery, addOcean, cast, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel, testGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
-import {Resources} from '../src/common/Resources';
+import {Resource} from '../src/common/Resource';
 import {ISpace} from '../src/server/boards/ISpace';
 import {SpaceId} from '../src/common/Types';
 import {ResearchNetwork} from '../src/server/cards/prelude/ResearchNetwork';
@@ -77,10 +77,10 @@ describe('Game', () => {
     game.fundAward(player, award);
 
     // Set second player to win Banker award
-    player2.production.add(Resources.MEGACREDITS, 10);
+    player2.production.add(Resource.MEGACREDITS, 10);
 
     // Our testing player will be 2nd Banker in the game
-    player.production.add(Resources.MEGACREDITS, 7);
+    player.production.add(Resource.MEGACREDITS, 7);
 
     // Two other players will share Thermalist award
     award = new Thermalist();

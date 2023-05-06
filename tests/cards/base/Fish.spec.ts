@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -30,7 +30,7 @@ describe('Fish', function() {
 
   it('Should play - auto select if single target', function() {
     setTemperature(game, 2);
-    player2.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
@@ -42,8 +42,8 @@ describe('Fish', function() {
 
   it('Should play - multiple targets', function() {
     setTemperature(game, 2);
-    player.production.add(Resources.PLANTS, 1);
-    player2.production.add(Resources.PLANTS, 1);
+    player.production.add(Resource.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);

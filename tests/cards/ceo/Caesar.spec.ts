@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {cast, runAllActions} from '../../TestingUtils';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 
 import {SelectProductionToLose} from '../../../src/server/inputs/SelectProductionToLose';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -23,8 +23,8 @@ describe('Caesar', function() {
     card = new Caesar();
     [game, player, player2] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
-    player.production.add(Resources.PLANTS, startingPlants);
-    player2.production.add(Resources.PLANTS, startingPlants);
+    player.production.add(Resource.PLANTS, startingPlants);
+    player2.production.add(Resource.PLANTS, startingPlants);
     runAllActions(game);
   });
 

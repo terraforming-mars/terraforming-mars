@@ -9,7 +9,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class Neil extends CeoCard {
   constructor() {
@@ -30,7 +30,7 @@ export class Neil extends CeoCard {
   public onCardPlayed(player: Player, card: IProjectCard) {
     for (const tag of card.tags) {
       if (tag === Tag.MOON) {
-        player.game.getCardPlayerOrThrow(this.name).addResource(Resources.MEGACREDITS, 1, {log: true});
+        player.game.getCardPlayerOrThrow(this.name).addResource(Resource.MEGACREDITS, 1, {log: true});
       }
     }
   }
@@ -42,7 +42,7 @@ export class Neil extends CeoCard {
       const lowestRate = Math.min(moonData.colonyRate, moonData.logisticRate, moonData.miningRate);
 
       if (lowestRate > 0) {
-        player.production.add(Resources.MEGACREDITS, lowestRate, {log: true});
+        player.production.add(Resource.MEGACREDITS, lowestRate, {log: true});
       }
     });
 

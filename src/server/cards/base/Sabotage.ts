@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
@@ -40,7 +40,7 @@ export class Sabotage extends Card implements IProjectCard {
         const optionTitle = 'Remove ' + amountRemoved + ' titanium from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.deductResource(Resources.TITANIUM, 3, {log: true, from: player});
+          target.deductResource(Resource.TITANIUM, 3, {log: true, from: player});
           return undefined;
         }));
       }
@@ -50,7 +50,7 @@ export class Sabotage extends Card implements IProjectCard {
         const optionTitle = 'Remove ' + amountRemoved + ' steel from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.deductResource(Resources.STEEL, 4, {log: true, from: player});
+          target.deductResource(Resource.STEEL, 4, {log: true, from: player});
           return undefined;
         }));
       }
@@ -60,7 +60,7 @@ export class Sabotage extends Card implements IProjectCard {
         const optionTitle = 'Remove ' + amountRemoved + ' M€ from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.deductResource(Resources.MEGACREDITS, 7, {log: true, from: player});
+          target.deductResource(Resource.MEGACREDITS, 7, {log: true, from: player});
           return undefined;
         }));
       }

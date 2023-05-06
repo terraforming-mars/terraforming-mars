@@ -2,14 +2,14 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {MarketCard} from './MarketCard';
 import {multiplier} from '../Options';
 
 export class SteelMarketMonopolists extends MarketCard {
   constructor() {
     super(
-      Resources.STEEL,
+      Resource.STEEL,
       {from: 3, to: 2, limit: 3},
       {from: 1, to: 3, limit: 3},
       {

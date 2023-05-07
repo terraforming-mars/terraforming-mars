@@ -28,7 +28,7 @@ import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
-import {Resources} from '../common/Resources';
+import {Resource} from '../common/Resource';
 import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
@@ -651,7 +651,7 @@ export class Game implements Logger {
       }
     }
     if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
-      this.players[0].production.add(Resources.MEGACREDITS, -2);
+      this.players[0].production.add(Resource.MEGACREDITS, -2);
       this.defer(new RemoveColonyFromGame(this.players[0]));
     }
   }
@@ -1150,10 +1150,10 @@ export class Game implements Logger {
     if (this.phase !== Phase.SOLAR) {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
-        player.production.add(Resources.HEAT, 1, {log: true});
+        player.production.add(Resource.HEAT, 1, {log: true});
       }
       if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
-        player.production.add(Resources.HEAT, 1, {log: true});
+        player.production.add(Resource.HEAT, 1, {log: true});
       }
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
@@ -1188,14 +1188,6 @@ export class Game implements Logger {
       passedPlayersColors.push(this.getPlayerById(player).color);
     });
     return passedPlayersColors;
-  }
-
-  public getPlayer(name: string): Player {
-    const player = this.players.find((player) => player.name === name);
-    if (player === undefined) {
-      throw new Error('Player not found');
-    }
-    return player;
   }
 
   public getCitiesOffMarsCount(player?: Player): number {
@@ -1298,7 +1290,7 @@ export class Game implements Logger {
       TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
 
       if (arcadianCommunityBonus) {
-        this.defer(new GainResources(player, Resources.MEGACREDITS, {count: 3}));
+        this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
       }
     } else {
       space.player = undefined;
@@ -1337,16 +1329,16 @@ export class Game implements Logger {
       player.drawCard(count);
       break;
     case SpaceBonus.PLANT:
-      player.addResource(Resources.PLANTS, count, {log: true});
+      player.addResource(Resource.PLANTS, count, {log: true});
       break;
     case SpaceBonus.STEEL:
-      player.addResource(Resources.STEEL, count, {log: true});
+      player.addResource(Resource.STEEL, count, {log: true});
       break;
     case SpaceBonus.TITANIUM:
-      player.addResource(Resources.TITANIUM, count, {log: true});
+      player.addResource(Resource.TITANIUM, count, {log: true});
       break;
     case SpaceBonus.HEAT:
-      player.addResource(Resources.HEAT, count, {log: true});
+      player.addResource(Resource.HEAT, count, {log: true});
       break;
     case SpaceBonus.OCEAN:
       // ignore
@@ -1361,7 +1353,7 @@ export class Game implements Logger {
       this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
       break;
     case SpaceBonus.ENERGY_PRODUCTION:
-      player.production.add(Resources.ENERGY, count, {log: true});
+      player.production.add(Resource.ENERGY, count, {log: true});
       break;
     case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
@@ -1376,7 +1368,7 @@ export class Game implements Logger {
       }
       break;
     case SpaceBonus.ENERGY:
-      player.addResource(Resources.ENERGY, count, {log: true});
+      player.addResource(Resource.ENERGY, count, {log: true});
       break;
     case SpaceBonus.ASTEROID:
       this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));
@@ -1512,7 +1504,7 @@ export class Game implements Logger {
     this.gameAge++;
   }
 
-  public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
+  public someoneCanHaveProductionReduced(resource: Resource, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
     return this.getPlayers().some((p) => {

@@ -6,7 +6,7 @@ import {testGame} from '../TestGame';
 import {Executor} from '../../src/server/behavior/Executor';
 import {Units} from '../../src/common/Units';
 import {Payment} from '../../src/common/inputs/Payment';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {CardResource} from '../../src/common/CardResource';
 import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
@@ -64,7 +64,7 @@ describe('Executor', () => {
 
     expect(executor.canExecute(behavior, player, fake)).is.false;
 
-    player.production.add(Resources.STEEL, 1);
+    player.production.add(Resource.STEEL, 1);
 
     expect(executor.canExecute(behavior, player, fake)).is.true;
 
@@ -402,14 +402,14 @@ describe('Executor', () => {
   });
 
   it('decrease any production - cannot execute with zero targets', () => {
-    expect(executor.canExecute({decreaseAnyProduction: {count: 2, type: Resources.TITANIUM}}, player, fake)).is.false;
+    expect(executor.canExecute({decreaseAnyProduction: {count: 2, type: Resource.TITANIUM}}, player, fake)).is.false;
   });
 
   it('decrease any production - standard', () => {
-    const behavior = {decreaseAnyProduction: {count: 2, type: Resources.TITANIUM}};
-    player.production.add(Resources.TITANIUM, 3);
-    player2.production.add(Resources.TITANIUM, 2);
-    player3.production.add(Resources.TITANIUM, 2);
+    const behavior = {decreaseAnyProduction: {count: 2, type: Resource.TITANIUM}};
+    player.production.add(Resource.TITANIUM, 3);
+    player2.production.add(Resource.TITANIUM, 2);
+    player3.production.add(Resource.TITANIUM, 2);
     expect(executor.canExecute(behavior, player, fake)).is.true;
 
     executor.execute(behavior, player, fake);

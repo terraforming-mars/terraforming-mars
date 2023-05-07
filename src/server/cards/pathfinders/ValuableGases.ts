@@ -7,7 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {digit} from '../Options';
 import {CardType} from '../../../common/cards/CardType';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -25,10 +25,9 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(10).br;
           b.text('play', Size.MEDIUM, true).cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().br;
-          b.projectRequirements().br;
           b.floaters(5, {digit});
         }),
-        description: 'Gain 10 M€. Play an active floater card from hand, ignoring global requirements, and add 5 floaters to it.',
+        description: 'Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.',
       },
     });
   }
@@ -40,12 +39,12 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     return 0;
   }
   public override bespokePlay(player: Player) {
-    player.addResource(Resources.MEGACREDITS, 10);
+    player.addResource(Resource.MEGACREDITS, 10);
 
     const playableCards = player.cardsInHand.filter((card) => {
       return card.resourceType === CardResource.FLOATER &&
         card.type === CardType.ACTIVE &&
-        player.canPlay(card);
+        player.canAffordCard(card);
     });
     if (playableCards.length !== 0) {
       player.game.defer(new SimpleDeferredAction(player, () => {

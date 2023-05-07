@@ -9,7 +9,6 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 import {Gaia} from '../../../src/server/cards/ceos/Gaia';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {Networker} from '../../../src/server/milestones/Networker';
 
@@ -22,10 +21,9 @@ describe('Gaia', function() {
 
   beforeEach(() => {
     card = new Gaia();
-    [game, player, player2, player3] = testGame(3, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, player2, player3] = testGame(3, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
     player.playedCards.push(card);
-    runAllActions(game);
   });
 
   it('Takes action', function() {

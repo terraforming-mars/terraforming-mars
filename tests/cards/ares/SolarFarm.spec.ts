@@ -5,7 +5,6 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -17,7 +16,7 @@ describe('SolarFarm', function() {
 
   beforeEach(function() {
     card = new SolarFarm();
-    [game, player] = testGame(2, ARES_OPTIONS_WITH_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
   });
 
   it('Play', function() {

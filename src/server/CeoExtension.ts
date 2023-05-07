@@ -1,7 +1,7 @@
 import {Player} from './Player';
 import {isCeoCard} from './cards/ceos/ICeoCard';
 import {CardName} from '../common/cards/CardName';
-import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from './game/VictoryPointsBreakdown';
 
 export class CeoExtension {
   public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {
@@ -17,11 +17,7 @@ export class CeoExtension {
   }
 
   public static ceoActionIsUsable(player: Player): boolean {
-    for (const card of player.playedCards) {
-      if (isCeoCard(card)) {
-        return card.canAct(player);
-      }
-    }
-    return false;
+    // If _at least_ one CEO has usable actions, return true
+    return player.playedCards.some((card) => isCeoCard(card) && card.canAct(player));
   }
 }

@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -22,7 +22,7 @@ export class Birds extends ActionCard implements IProjectCard {
       victoryPoints: {resourcesHere: {}},
 
       behavior: {
-        decreaseAnyProduction: {type: Resources.PLANTS, count: 2},
+        decreaseAnyProduction: {type: Resource.PLANTS, count: 2},
       },
 
       action: {

@@ -1,7 +1,6 @@
 import {BaseMilestone} from './IMilestone';
 import {Player} from '../Player';
 
-// TODO(kberg): write a test.
 export class Networker extends BaseMilestone {
   constructor() {
     super(

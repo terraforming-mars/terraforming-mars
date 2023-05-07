@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {NoctisCity} from '../../../src/server/cards/base/NoctisCity';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
@@ -33,7 +33,7 @@ describe('NoctisCity', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

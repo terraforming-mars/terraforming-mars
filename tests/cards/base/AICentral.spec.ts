@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
 describe('AICentral', function() {
@@ -24,7 +24,7 @@ describe('AICentral', function() {
 
   it('Should play', function() {
     player.playedCards.push(card, card, card);
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
 
     card.play(player);
     expect(player.production.energy).to.eq(0);

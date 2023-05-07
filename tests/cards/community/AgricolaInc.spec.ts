@@ -5,6 +5,7 @@ import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtracto
 import {AgricolaInc} from '../../../src/server/cards/community/AgricolaInc';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
+import {Units} from '../../../src/common/Units';
 
 describe('AgricolaInc', function() {
   let card: AgricolaInc;
@@ -19,6 +20,7 @@ describe('AgricolaInc', function() {
   });
 
   it('Starts with correct production', function() {
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1, plants: 1, heat: 1}));
     expect(player.production.megacredits).to.eq(1);
     expect(player.production.plants).to.eq(1);
   });

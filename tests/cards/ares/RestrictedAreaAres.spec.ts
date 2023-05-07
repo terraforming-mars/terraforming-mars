@@ -3,7 +3,6 @@ import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {RestrictedAreaAres} from '../../../src/server/cards/ares/RestrictedAreaAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -16,7 +15,7 @@ describe('RestrictedAreaAres', function() {
 
   beforeEach(function() {
     card = new RestrictedAreaAres();
-    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Should play', function() {

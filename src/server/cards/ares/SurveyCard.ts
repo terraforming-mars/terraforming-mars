@@ -3,7 +3,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {GainResources} from '../../deferredActions/GainResources';
@@ -42,21 +42,21 @@ export abstract class SurveyCard extends Card implements IProjectCard {
 
   protected abstract checkForBonuses(cardOwner: Player, space: ISpace): void;
 
-  private log(cardOwner: Player, resource: Resources | CardResource): void {
+  private log(cardOwner: Player, resource: Resource | CardResource): void {
     cardOwner.game.log(
       '${0} gained a bonus ${1} because of ${2}',
       (b) => b.player(cardOwner).string(resource).cardName(this.name));
   }
 
-  protected testForStandardResource(cardOwner: Player, space: ISpace, resource: Resources, bonus: SpaceBonus) {
+  protected testForStandardResource(cardOwner: Player, space: ISpace, resource: Resource, bonus: SpaceBonus) {
     let grant = this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus);
     if (!grant) {
       switch (resource) {
-      case Resources.STEEL:
+      case Resource.STEEL:
         grant = space.spaceType !== SpaceType.COLONY &&
             PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, 'mfp01');
         break;
-      case Resources.PLANTS:
+      case Resource.PLANTS:
         grant = Board.isUncoveredOceanSpace(space) &&
           cardOwner.cardIsInEffect(CardName.ARCTIC_ALGAE);
       }

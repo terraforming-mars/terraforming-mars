@@ -1,7 +1,7 @@
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 
 export class SellSteel extends DeferredAction {
   constructor(
@@ -26,8 +26,8 @@ export class SellSteel extends DeferredAction {
       (unitsSold: number) => {
         if (unitsSold > 0) {
           const cashEarned = unitsSold * 3;
-          this.player.addResource(Resources.MEGACREDITS, cashEarned);
-          this.player.deductResource(Resources.STEEL, unitsSold);
+          this.player.addResource(Resource.MEGACREDITS, cashEarned);
+          this.player.deductResource(Resource.STEEL, unitsSold);
         }
         this.logSale(unitsSold);
         return undefined;

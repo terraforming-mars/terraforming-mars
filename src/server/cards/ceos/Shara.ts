@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Tag} from '../../../common/cards/Tag';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {clone} from '../Options';
 
 export class Shara extends CeoCard {
@@ -49,7 +49,7 @@ export class Shara extends CeoCard {
         (tag) => {
           // const value = data[tag] - player.game.generation;
           const value = data[tag];
-          player.addResource(Resources.MEGACREDITS, value, {log: true});
+          player.addResource(Resource.MEGACREDITS, value, {log: true});
         },
       ),
     );

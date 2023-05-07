@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {OrOptions} from '../../inputs/OrOptions';
-import {ALL_RESOURCES, Resources} from '../../../common/Resources';
+import {ALL_RESOURCES, Resource} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {newMessage} from '../../logs/MessageBuilder';
@@ -48,7 +48,7 @@ export class Ryu extends CeoCard {
       const selectOption = new SelectOption(newMessage('Decrease ${0} production', (b) => b.string(resourceToDecrease)), 'Select', () => {
         // M€ production can go down to -5
         let decreasable = player.production.get(resourceToDecrease);
-        if (resourceToDecrease === Resources.MEGACREDITS) decreasable += 5;
+        if (resourceToDecrease === Resource.MEGACREDITS) decreasable += 5;
         const maxDecreasableAmt = Math.min(player.game.generation + 2, decreasable);
 
         return new SelectAmount(
@@ -78,9 +78,9 @@ export class Ryu extends CeoCard {
     return choices;
   }
 
-  private productionIsDecreasable(player: Player, resource: Resources): boolean {
+  private productionIsDecreasable(player: Player, resource: Resource): boolean {
     let minProduction = 0;
-    if (resource === Resources.MEGACREDITS) minProduction -= 5;
+    if (resource === Resource.MEGACREDITS) minProduction -= 5;
     return player.production.get(resource) > minProduction;
   }
 }

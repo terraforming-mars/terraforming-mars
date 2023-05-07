@@ -1,213 +1,304 @@
 {
   "Basic Infrastructure": "Basis-Infrastruktur",
   "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1. Erhalte 1 Handelsflotte.",
+  
   "Core Mine": "Kernmine",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "Platziere ein Minenplättchen auf dem Mond und erhöhe die Minenwertung um 1. Erhöhe deine Titan-Produktion um 1.",
+  
   "First Lunar Settlement": "Erste Mondbesiedlung",
   "Place a habitat tile on The Moon and raise the habitat rate 1 step. Increase your M€ production 1 step.": "Platziere ein Habitatplättchen auf dem Mond und erhöhe die Habitatwertung um 1. Erhöhe deine M€-Produktion um 1.",
+  
   "Lunar Planning Office": "Mond-Planungsbüro",
   "Draw 2 cards with a Moon tag. Gain 6 steel.": "Ziehe 2 Karten mit Mondsymbol. Erhalte 6 Stahl.",
+  
   "Mining Complex": "Bergbaukomplex",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "Platziere ein Minenplättchen auf dem Mond und erhöhe die Bergbauwertung um 1. Platziere ein Straßenplättchen angrenzend zum platzierten Bergbauplättchen und erhöhe die Logistikwertung um 1. Bezahle 7 M€.",
+  
   "AI Controlled Mine Network": "KI-kontrollierte Bergbaunetzwerk",
   "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "Benötigt Logistikwertung auf 2 oder höher. Erhöhe die Logistikwertung um 1.",
+  
   "Algae Bioreactors": "Algen-Bioreaktoren",
   "Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.": "Reduziere deine Pflanzen-Produktion um 1. Erhöhe die Habitatwertung um 1 und den Sauerstoffgehalt um 1%.",
+  
   "An Offer You Can't Refuse": "Ein Angebot, das du nicht ablehnen kannst",
-  "Exchange a NON-NEUTRAL NON-LEADER delegate with one of your own from the reserve. You may then move your delegate to another party.": "Tausche einen NICHT-NEUTRALEN NICHT-LEADER-Delegierten mit einem deiner eigenen aus der Reserve. Du kannst dann deinen Delegierten zu einer anderen Partei versetzen.",
+  "Exchange a NON-NEUTRAL opponent delegate with one of your own from the reserve. This exchange may not change the party leader. You may then move your delegate to another party.": "Tausche einen NICHT-NEUTRALEN gegnerischen Delegierten gegen einen eigenen aus der Reserve aus. Dieser Tausch darf den Parteivorsitzenden nicht verändern. Sie können dann Ihren Delegierten in eine andere Partei versetzen.",
+  
   "Ancient Shipyards": "Antike Schiffswerften",
   "Ancient Shipyards (Nerfed)": "Antike Schiffswerften (Nerfed)",
   "Action: Steal 2 M€ from each player and add a resource cube here.": "AKTION: Klaue 2 M€ von jedem Spieler und füge dieser Karte einen Rohstoffwürfel hinzu.",
   "Spend 3 titanium. -1 VP for every resource here.": "Bezahle 3 Titan. -1 SP je Rohstoffwürfel auf dieser Karte. ",
+  
   "Archimedes Hydroponics Station": "Archimedische Hydroponik-Station",
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Reduziere deine Energie-Produktion und deine M€-Produktion um 1. Erhöhe deine Pflanzenproduktion um 2.",
+  
   "Aristarchus Road Network": "Aristarchus-Straßennetz",
   "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Bezahle 2 Stahl. Erhöhe deine M€-Produktion um 2. Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1.",
+  
   "Colonist Shuttles": "Kolonisten-Shuttles",
   "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Bezahle 1 Titan. Erhöhe die Habitatwertung um 1. Erhalte 2M€ für jedes Habitatplättchen auf dem Mond.",
+  
   "Copernicus Solar Arrays": "Kopernikus-Solarzellen",
   "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "Bezahle 1 Titan. Erhalte 2 Wärme. Erhöhe deine Energie-Produktion um 1.",
+  
   "Copernicus Tower": "Kopernikus-Turm",
   "Requires you have 2 titanium production.": "Benötigt 2 Titan-Produktion.",
   "Action: Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.": "AKTION: Füge dieser Karte 1 Wissenschaft hinzu, oder entferne 1 Wissenschaft hier, um deinen TW um 1 zu erhöhen.",
   "1 VP PER MOON TAG YOU HAVE.": "1 SP JE EIGENEM MONDSYMBOL.",
+  
   "Cosmic Radiation": "Kosmische Strahlung",
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Benötigt Minenwertung von 4. Alle Spieler zahlen 4 M€ für jedes Minenplättchen, das sie besitzen.",
+  
   "Darkside Incubation Plant": "Darkside-Inkubationsanlage",
   "Action: Add 1 microbe here.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
   "Action: Spend 2 microbes to raise the habitat rate 1 step.": "AKTION: Entferne 2 Mikroben von dieser Karte, um die Habitatwertung um 1 zu erhöhen.",
   "Spend 1 titanium. 1 VP for every 2 microbes here.": "Bezahle 1 Titan. 1 SP je 2 Mikroben auf dieser Karte. ",
+  
   "Darkside Meteor Bombardment": "Darkside-Meteoritenbombardement",
   "Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.": "Erhalte 2 Stahl und 2 Titan. Erhöhe die Minenwertung um 2.",
+  
   "Darkside Mining Syndicate": "Darkside-Bergbausyndikat",
   "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Erhöhe deine Titan-Produktion um 2 oder um 1, wenn die Minenwertung mindestens 2 oder mehr beträgt; und erhöhe dann die Minenwertung um 1.",
+  
   "Darkside Observatory": "Darkside-Observatorium",
   "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "AKTION: Füge einer beliebigen Karte 1 Wissenschaft hinzu, [außer denen, die 2 oder mehr SP je Wissenschaft geben].",
   "Action: Add 2 data to ANY card.": "AKTION: Füge zu einer beliebigen Karte 2 Daten hinzu.",
+  
   "Deep Lunar Mining": "Tiefgehender Mondbergbau",
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Bezahle 1 Titan. Erhöhe deine Titan-Produktion um 2. Erhöhe die Minenwertung um 1.",
+  
   "Earth Embassy": "Botschaft der Erde",
   "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.": "EFFEKT: Nachdem diese Karte ausgespielt ist, zählen deine Mondsymbole als Erdsymbole, aber nicht umgekehrt, wenn du eine Aktion ausführst.",
+  
   "Geodesic Tents": "Geodätische Zelte",
   "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Reduziere deine Energie-Produktion um 1 und erhöhe deine Pflanzen-Produktion um 1. Bezahle 1 Titan. Platziere ein Habitatplättchen auf dem Mond und erhöhe die Habitatwertung um 1.",
+  
   "Grand Luna Academy": "Große Mond-Akademie",
   "Draw 1 card per 2 Moon tags you have, including this.": "Ziehe 1 Karte pro 2 Mondsymbol, die du besitzt, einschließlich dieser.",
+  
   "HE3 Fusion Plant": "HE3-Fusionskraftwerk",
   "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "Benötigt eine Minenwertung von 2 oder höher. Erhöhe deine Energie-Produktion um 1 für jedes Minenplättchen auf dem Mond.",
+  
   "HE3 Lobbyists": "HE3-Lobbyisten",
   "Increase your M€ production 1 step for each Moon tag you have (including this).": "Erhöhe deine M€-Produktion um 1 für jedes eigene Mondsymbol (einschließlich dieser).",
+  
   "HE3 Production Quotas": "HE3-Produktionsquoten",
   "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort, und 1 Minenplättchen auf dem Mond. Bezahle 1 Stahl pro Minenplättchen auf dem Mond, um 4 Wärme pro Minenplättchen auf dem Mond zu erhalten. Erhöhe die Minenwertung um 1.",
+  
   "HE3 Refinery": "HE3-Raffinerie",
   "Action: Gain 1 M€ for each level of mining rate.": "AKTION: Erhalte 1 M€ für jede Minenwertung.",
+  
   "Habitat 14": "Habitat 14",
   "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Reduziere deine Energie-Produktion und deine M€-Produktion um 1. Bezahle 1 Titan. Platziere ein Habitatplättchen auf dem Mond und erhöhe die Habitatwertung um 1.",
+  
   "Heavy Duty Rovers": "Schwerlast-Rover",
   "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the logistic rate 1 step.": "Erhalte 4 M€ für jedes Minenplättchen, das an ein Straßenplättchen angrenzt. Erhöhe die Logistikwertung um 1.",
+  
   "Heliostat Mirror Array": "Heliostat-Spiegel-Array",
   "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "Bezahle 1 Titan. Erhalte 1 Wärme. Erhöhe deine Energie-Produktion um 2.",
+  
   "Hypersensitive Silicon Chip Factory": "Hypersensible Silizium-Chipfabrik",
   "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "Benötigt 2 Minenplättchen auf dem Mond. Bezahle 2 Titan. Erhöhe deine M€-Produktion um 4.",
+  
   "Improved Moon Concrete": "Verbesserter Mondbeton",
   "Effect: When you build a mine on The Moon, you spend 1 titanium less.": "EFFEKT: Wenn du ein Minenplättchen auf dem Mond platzierst, bezahlst du 1 Titan weniger.",
   "Spend 2 steel. Raise the mining rate 1 step.": "Bezahle 2 Stahl. Erhöhe die Minenwertung um 1.",
+  
   "Iron Extraction Center": "Zentrum für Eisengewinnung",
   "Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.": "Bezahle 1 Titan. Erhöhe deine Stahl-Produktion um 1 je 2 erhöhte Minenwertung.",
+  
   "L.T.F. Headquarters": "L.T.F.-Zentrale",
   "Raise the habitat rate 1 step. Place a colony. Gain 1 Trade Fleet.": "Erhöhe die Habitatwertung um 1. Platziere eine Kolonie. Erhalte 1 Handelsflotte.",
+  
   "L.T.F. Privileges": "L.T.F.-Privilegien",
   "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "EFFEKT: Wenn du ein Mondsymbole spielst, zahlst du keinen zusätzlichen Stahl oder Titan für das Spielen dieser Symbole.",
+  
   "Luna Conference": "Mond-Konferenz",
   "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "Benötigt Regierungspartei: FORSCHUNG oder 2+ eigene Delegierte dort. Erhalte 2 M€ pro Straßenplättchen auf dem Mond. Erhalte 2 M€ pro Habitatplättchen auf dem Mond.",
+  
   "Luna Mining Hub": "Mond-Bergbau-Drehscheibe",
   "Requires a mining rate of 5 or higher.": "Benötigt eine Minenwertung von 5 oder höher.",
   "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "Bezahle 1 Stahl und 1 Titan und erhöhe deine Stahl- und Titan-Produktion um 1.",
   "Place this tile on The Moon and raise the mining rate 1 step.": "Platziere dieses Plättchen auf dem Mond und erhöhe die Minenwertung um 1.",
   "2 VP PER MINING TILE ADJACENT TO THIS TILE.": "2 SP JE MINENPLÄTTCHEN, DAS AN DIESES PLÄTTCHEN ANGRENZT.",
+  
   "Luna Political Institute": "Politisches Institut Mond",
   "Action: Place one of your delegates in any party.": "AKTION: Bewege einen deiner Delegierten aus der Reserve zu einer beliebigen Partei.",
   "Requires that you have 2 Moon tags.": "Benötigt 2 eigene Mondsymbole.",
+  
   "Luna Project Office": "Mond-Projektbüro",
   "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "ZIEHE 5 KARTEN IN DER FORSCHUNGSPHASE FÜR DIE NÄCHSTEN 2 GENERATIONEN.",
+  
   "Luna Resort": "Mond-Erholungsort",
   "Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.": "Benötigt 2 Habitate auf dem Mond. Bezahle 2 Titan. Reduziere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3. Erhöhe die Habitatwertung um 1.",
+  
   "Luna Senate": "Mond-Senat",
   "1 VP per Moon tag you have.": "1 SP JE EIGENEM MONDSYMBOL.",
   "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)": "Benötigt 3 eigene Mondsymbole. Erhöhe deine M€-Produktion um 1 pro Mondsymbole im Spiel (einschließlich dieser).",
+  
   "Luna Staging Station": "Mond-Schattenbahnhof",
   "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "Benötigt eine Logistikwertung von 2 oder höher. Bezahle 1 Titan. Erhöhe die Logistikwertung um 2.",
+  
   "Luna Trade Station": "Mond-Handelsstation",
   "Action: Gain 2 M€ for each habitat tile on The Moon.": "AKTION: Erhalte 2 M€ für jedes Habitatplättchen auf dem Mond.",
   "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "Bezahle 2 Titan aus. Platziere dieses Plättchen AUF DEM RESERVIERTEN BEREICH.",
+  
   "Luna Train Station": "Mond-Bahnhof",
   "Requires a logistic rate of 5 or higher. Spend 2 steel. Increase your M€ production 4 steps. Place this tile on The Moon and raise the logistic rate 1 step. 2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.": "Benötigt eine Logistikwertung von 5 oder höher. Bezahle 2 Stahl. Erhöhe deine M€-Produktion um 4. Platziere dieses Plättchen auf dem Mond und erhöhe die Logistikwertung um 1. 2 SP JE STRASSENPLÄTTCHEN NEBEN DIESEM PLÄTTCHEN.",
+  
   "Lunar Dust Processing Plant": "Mondstaub-Aufbereitungsanlage",
   "Effect: When you place a road tile on The Moon, you spend no steel on it.": "EFFEKT: Wenn du ein Straßenplättchen auf dem Mond platzierst, bezahlst du keinen Stahl extra dafür.",
   "Spend 1 titanium. Raise the logistic rate 1 step.": "Bezahle 1 Titan. Erhöhe die Logistikwertung um 1.",
+  
   "Lunar Industry Complex": "Mondindustrie-Komplex",
   "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "Bezahle 2 Titan. Platziere ein Minenplättchen auf dem Mond und erhöhe die Minenwertung um 1. Erhöhe deine Stahl-, Titan- und Wärme-Produktion um jeweils 1. Erhöhe deine Energie-Produktion um 2.",
+  
   "Lunar Mine Urbanization": "Mondminen-Urbanisierung",
   "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "Benötigt 1 eigenes Minenplättchen. Erhöhe deine M€-Produktion um 1. Ersetze eines deiner Minenplättchen durch dieses spezielle Plättchen. Erhöhe die Habitatwertung um 1. Dieses Plättchen zählt sowohl als Habitat- als auch als Minenplättchen.",
+  
   "Lunar Observation Post": "Mondbeobachtungsposten",
   "Action: Add 1 data resource to ANY card": "AKTION: Füge einer beliebigen Karte 1 Datenressource hinzu.",
   "Spend 1 titanium. 1 VP for every 3 data resources here.": "Bezahle 1 Titan. 1 SP je 3 Daten auf dieser Karte.",
+  
   "Lunar Security Stations": "Mond-Sicherheitsstationen",
   "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "Benötigt 3 Straßenplättchen auf dem Mond. Erhöhe die Logistikwertung um 1.",
+  
   "Lunar Steel": "Mondstahl",
+  "Effect: Your steel resources are worth 1 M€ extra.": "EFFEKT: Deine Stahl-Ressourcen sind 1 M€ mehr wert.",
+  
   "Lunar Trade Fleet": "Mondhandelsflotte",
   "2 titanium production": "Benötigt 2 Titan-Produktion.",
   "Requires that you have 2 titanium production. Increase your M€ production 1 step. Raise the logistic rate 1 step.": "Benötigt eine Titan-Produktion von 2. Erhöhe deine M€-Produktion um 1. Erhöhe die Logistikwertung um 1.",
+  
   "Mare Imbrium Mine": "Bergwerk Mare Imbrium",
   "Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Bezahle 1 Titan. Erhöhe deine Stahl-Produktion und deine Titan-Produktion um 1. Platziere eine Mine AUF DEM RESERVIERTEN BEREICH und erhöhe die Minenwertung um 1.",
+  
   "Mare Nectaris Mine": "Bergwerk Mare Nectaris",
   "Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Bezahle 1 Titan. Erhöhe deine Stahl-Produktion um 1. Platziere eine Mine AUF DEM RESERVIERTEN BEREICH und erhöhe die Minenwertung um 1.",
+  
   "Mare Nubium Mine": "Bergwerk Mare Nubium",
   "Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Bezahle 1 Titan. Erhöhe deine Titan-Produktion um 1. Platziere eine Mine AUF DEM RESERVIERTEN BEREICH und erhöhe die Minenwertung um 1.",
+  
   "Mare Serenitatis Mine": "Bergwerk Mare Serenitatis",
   "Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step. Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the mining rate 1 step and the logistic rate 1 step.": "Bezahle 2 Titan und 1 Stahl. Erhöhe deine Stahl-Produktion und deine Titan-Produktion um 1. Platziere eine Mine AUF DEM RESERVIERTEN BEREICH und angrenzend dazu ein Straßenplättchen. Erhöhe die Minen- und die Logistikwertung um je 1.",
+  
   "Microsingularity Plant": "Mikrosingularitätsanlage",
   "Requires 2 habitats on The Moon. Increase your energy production 2 steps.": "Benötigt 2 Habitate auf dem Mond. Erhöhe deine Energie-Produktion um 2.",
+  
   "Mining Robots Manuf. Center": "Fertigungszentrum für Bergbau-Roboter",
   "Spend 1 titanium. Raise the mining rate 2 steps.": "Bezahle 1 Titan. Erhöhe die Minenwertung um 2.",
+  
   "Momentum Virium Habitat": "Momentum-Virium-Habitat",
   "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "Bezahle 1 Titan. Erhöhe deine Wärme-Produktion um 2 und deine M€-Produktion um 3. Platziere ein Habitatplättchen AUF DEM RESERVIERTEN BEREICH und erhöhe die Habitatwertung um 1.",
+  
   "Moon Tether": "Mondfessel",
-  "Requires 6 space tags.": "Benötigt 6 eigene Weltraumsymbole. ",
+  "Effect: When you play a card, you pay 2 M€ less for it.": "EFFEKT: Wenn du eine Karte ausspielst, bezahlst du 2 M€ weniger.",
+  "Requires 6 space tags.": "Benötigt 6 eigene Weltraumsymbole.",
+  
   "Mooncrate Block Factory": "Mondkrater-Blockfabrik",
   "Lunar standard projects": "Lunar-Standardprojekte",
   "Effect: When you pay for a Lunar standard project, you spend 4M€ less.": "EFFEKT: Wenn du für ein Lunar-Standardprojekt bezahlst, bezahlst du 4 M€ weniger.",
   "Requires 1 mine on The Moon.": "Benötigt 1 eigenes Minenplättchen.",
+  
   "Mooncrate Convoys To Mars": "Mondkratenkonvois zum Mars",
   "Requires that Mars First are ruling or that you have 2 delegates there. Raise the logistic rate 1 step. All players may sell their steel resources for 3M€ each.": "Benötigt Regierungspartei: MARS FIRST oder 2+ eigene Delegierte dort. Erhöhe die Logistikwertung um 1. Alle Spieler können ihre Stahlressourcen für je 3 M€ verkaufen.",
+  
   "New Colony Planning Initiaitives": "Neue Kolonie Planungsinitiativen",
   "Requires the habitat rate to be 2 or higher. Raise the habitat rate 1 step.": "Benötigt eine Habitatwertung von 2 oder höher. Erhöhe die Habitatwertung um 1.",
+  
   "Off-World City Living": "Außerweltliches Stadtleben",
   "Increase your M€ production 1 step per city tile NOT ON MARS. Increase habitat rate 1 step.": "Erhöhe deine M€-Produktion um 1 pro Stadtplättchen NICHT AUF DEM MARS. Erhöhe die Habitatwertung um 1.",
+  
   "Orbital Power Grid": "Orbitales Stromnetz",
   "Increase your energy production 1 step per city tile NOT ON MARS.": "Erhöhe deine Energie-Produktion um 1 pro Stadtplättchen NICHT AUF DEM MARS.",
+  
   "Preliminary Darkside": "Vorläufige Darkside",
   "Gain 3 titanium or 4 steel. Raise the mining rate 1 step.": "Erhalte 3 Titan oder 4 Stahl. Erhöhe die Minenwertung um 1.",
+  
   "Pride of the Earth Arkship": "Der Stolz der Erde Arkship",
   "Science 2 Space": "Wissenschaft 2 Weltraum",
   "Action: Add 1 science resource here per every 5 science tags you have.": "AKTION: Füge dieser Karte 1 Wissenschaft pro 5 eigene Wissenschaftssymbole hinzu.",
   "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "Benötigt 1 eigenes Wissenschafts- und 2 eigenes Weltraumsymbole. Bezahle 2 Titan. 1 SP je Wissenschaft auf dieser Karte.",
+  
   "Processor Factory": "Prozessorfabrik",
   "1 VP for every 3 data resources here.": "1 SP je 3 Daten auf dieser Karte.",
   "Action: Spend 1 steel to add 2 data resources to ANY card.": "AKTION: Bezahle 1 Stahl, um einer beliebigen Karte 2 Daten hinzuzufügen.",
+  
   "Revolting Colonists": "Aufständische Kolonisten",
   "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "Benötigt eine Habitatwertung von 4 oder höher. Alle Spieler zahlen 3 M€ für jedes Habitatplättchen, das sie besitzen.",
+  
   "Rover Drivers Union": "Rover-Fahrergewerkschaft",
   "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "Benötigt eine Logistikwertung von 2. Erhöhe die Logistikwertung um 1. Erhöhe deine M€-Produktion um 1 je erhöhte Logistikwertung.",
+  
   "Rust Eating Bacteria": "Rostfressende Bakterien",
   "1 VP per 3 microbes here.": "1 SP je 3 Mikroben auf dieser Karte.",
   "Action: Spend 1 steel to add 2 microbes here.": "Aktion: Bezahle 1 Stahl, um dieser Karte 2 Mikroben hinzuzufügen.",
+  
   "Sinus Iridium Road Network": "Sinus Iridium Straßennetzwerk",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Reduziere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3. Bezahle 1 Stahl. Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1.",
+  
   "Small Duty Rovers": "Kleine Raupenfahrzeuge",
   "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Bezahle 1 Titan. Erhöhe die Logistikwertung um 1. Erhalte 1 M€ pro Habitatplättchen, Minenplättchen und Straßenplättchen auf dem Mond.",
+  
   "Solar Panel Foundry": "Solarzellen-Gießerei",
   "Action: Spend 2 steel to increase your energy production 1 step.": "AKTION: Bezahle 2 Stahl, um deine Energie-Produktion um 1 zu erhöhen.",
+  
   "Sphere Habitats": "Sphärische Habitate",
   "Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Bezahle 1 Titan. Platziere ein Habitatplättchen auf dem Mond und erhöhe die Habitatswertung um 1.",
+  
   "Staging Station \"Behemoth\"": "Schattenbahnhof \"Behemoth\"",
   "Gain 2 Trade Fleets. Raise the logistic rate 1 step.": "Erhalte 2 Handelsflotten. Erhöhe die Logistikwertung um 1.",
+  
   "Steel Market Monopolists": "Stahlmarkt-Monopolisten",
   "Requires the mining rate to be 3 or higher.": "Benötigt eine Minienwertung von 3 oder höher.",
   "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "AKTION: Bezahle 3X M€, um 2X Stahl zu erhalten (max. 9 M€)",
   "Action: Spend X steel to gain 3X M€ (max 3 steel).": "AKTION: Bezahle X Stahl, um 3X M€ zu erhalten (max. 3 Stahl).",
+  
   "Subterranean Habitats": "Unterirdische Habitate",
   "Effect: When you build a habitat on The Moon, you spend 1 titanium less.": "EFFEKT: Wenn du ein Habitatplättchen auf dem Mond platzierst, bezahlst du 1 Titan weniger.",
   "Spend 2 steel. Raise the habitat rate 1 step.": "Bezahle 2 Stahl. Erhöhe die Habitatwertung um 1.",
+  
   "Syndicate Pirate Raids": "Syndikat-Piratenüberfälle",
   "ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION": "ALLE GEGNER KÖNNEN IHRE HANDELSFLOTTEN IN DIESER GENERATION NICHT MEHR ZURÜCKHOLEN.",
+  
   "The Womb": "Ursprung aller Metropolen",
   "Decrease your energy production 2 steps and increase your M€ production 4 steps. Spend 2 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Reduziere deine Energie-Produktion um 2 und erhöhe deine M€-Produktion um 4. Bezahle 2 Titan. Platziere ein Habitatplättchen auf dem Mond und erhöhe die Habitatswertung um 1.",
+  
   "Thorium Rush": "Thoriumrausch",
   "Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. Raise the habitat rate, mining rate and logistic rate 1 step.": "Platziere 1 Habitatplättchen, 1 Minenplättchen und 1 Straßenplättchen auf dem Mond. Erhöhe die Habitatswertung, die Minenwertung und die Logistikwertung um je 1.",
   "Titanium Extraction Center": "Titan-Gewinnungszentrum",
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "Bezahle 2 Titan. Erhöhe deine Titan-Produktion um 1 je 2 erhöhte Minenwertung.",
+  
   "Titanium Market Monopolists": "Titanmarkt-Monopolisten",
   "Action: Spend 2X M€ to gain X titanium [max 8 M€]": "AKTION: Bezahle 2X M€, um X Titan zu erhalten [max. 8 M€]",
   "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "AKTION: Bezahle X Titan, um 4X M€ zu erhalten [max. 4 Titan].",
+  
   "Tycho Road Network": "Tycho-Straßennetz",
   "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Bezahle 1 Stahl. Erhöhe deine M€-Produktion um 1. Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1.",
+  
   "Underground Detonators": "Unterirdische Sprengsätze",
   "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Erhalte 1 Stahl und 1 Titan. Erhöhe die Minenwertung um 1.",
+  
   "Undermoon Drug Lords Network": "Untergrundnetzwerk der Drogenbarone",
   "Increase your M€ production 1 step per 2 steps of habitat rate.": "Erhöhe deine M€-Produktion um 1 je 2 erhöhte Habitatwertung.",
+  
   "Water Treatment Complex": "Wasseraufbereitungskomplex",
   "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "Benötigt 1 Habitatplättchen auf dem Mond. Bezahle 1 Titan. Erhöhe die Habitatwertung um 2.",
+  
   "We Grow As One": "Wir wachsen als Einheit",
   "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "Benötigt Regierungspartei EINIGKEIT oder 2+ eigene Delegierte dort. Erhöhe ALLE Kolonieleisten um 1. Erhöhe jede Kolonieleiste um 1, wenn du eine Kolonie auf diesem Kolonieplättchen hast.",
+  
   "Martian Embassy": "Botschaft des Mars",
   "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "Erhöhe die Mars-Planetenbahn um 1 je eigene 3 Mondsymbole, einschließlich dieser.",
+  
   "Luna Archives": "Mond-Archive",
   "Action: Add 1 science resource here for each Moon tag you have.": "AKTION: Füge dieser Karte 1 Wissenschaft je eigenes Mondsymbol hinzu.",
   "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "EFFEKT: Wenn du ein Mondsymbol spielst, kann Wissenschaft von dieser Karte zu je 1 M€ zur Bezahlung verwendet werden.",
+  
   "Luna Ecumenopolis": "Mond-Ökumenopolis",
   "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "Bezahle 2 Titan. Platziere 2 Habitatplättchen neben mindestens 2 anderen Habitatplättchen und erhöhe die Habitatwertung um 2. Erhöhe deinen TW um 1 je 2 erhöhte Habitatwertung.",
+  
   "Steal": "Klaue",
-  "habitat rate": "Habitatwertung",
+  "Habitat rate": "Habitatwertung",
   "Mining rate": "Minenwertung",
   "Logistic rate": "Logistikwertung",
   "Colony tiles": "Habitatplättchen",

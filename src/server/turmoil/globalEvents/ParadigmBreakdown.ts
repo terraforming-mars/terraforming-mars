@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -29,7 +29,7 @@ export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
       } else if (player.cardsInHand.length === 1) {
         game.defer(new DiscardCards(player, 1, 'Global Event - Select a card to discard'));
       }
-      player.addResource(Resources.MEGACREDITS, 2 * (turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+      player.addResource(Resource.MEGACREDITS, 2 * (turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }
 }

@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 
 
@@ -29,7 +29,7 @@ export class Apollo extends CeoCard {
   public action(player: Player): PlayerInput | undefined {
     this.isDisabled = true;
     const moonSpacesCount = MoonExpansion.spaces(player.game, undefined, {surfaceOnly: true}).length;
-    player.addResource(Resources.MEGACREDITS, moonSpacesCount * 3, {log: true});
+    player.addResource(Resource.MEGACREDITS, moonSpacesCount * 3, {log: true});
     return undefined;
   }
 }

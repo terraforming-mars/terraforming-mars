@@ -789,7 +789,6 @@ export enum CardName {
     XAVIER = 'Xavier',
     YVONNE = 'Yvonne',
     ZAN = 'Zan',
-
     APOLLO = 'Apollo',
     CAESAR = 'Caesar',
     FARADAY = 'Faraday',
@@ -799,4 +798,6 @@ export enum CardName {
     RYU = 'Ryu',
     SHARA = 'Shara',
     XU = 'Xu',
+    // CEO Preludes
+    CO_LEADERSHIP = 'Co-leadership',
 }

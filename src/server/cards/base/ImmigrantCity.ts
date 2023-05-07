@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {GainProduction} from '../../deferredActions/GainProduction';
@@ -46,7 +46,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
-        new GainProduction(cardOwner, Resources.MEGACREDITS),
+        new GainProduction(cardOwner, Resource.MEGACREDITS),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }
@@ -55,8 +55,8 @@ export class ImmigrantCity extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space);
-      player.game.defer(new LoseProduction(player, Resources.ENERGY, {count: 1}));
-      player.game.defer(new LoseProduction(player, Resources.MEGACREDITS, {count: 2}));
+      player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
+      player.game.defer(new LoseProduction(player, Resource.MEGACREDITS, {count: 2}));
       return undefined;
     });
   }

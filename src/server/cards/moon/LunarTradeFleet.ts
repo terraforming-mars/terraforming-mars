@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -20,7 +20,7 @@ export class LunarTradeFleet extends Card implements IProjectCard {
         moon: {logisticsRate: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
+      requirements: CardRequirements.builder((b) => b.production(Resource.TITANIUM, 2)),
       metadata: {
         description: 'Requires that you have 2 titanium production. ' +
         'Increase your M€ production 1 step. Raise the logistic rate 1 step.',

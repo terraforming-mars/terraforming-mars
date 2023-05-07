@@ -85,8 +85,18 @@
 
       <a name="cards" class="player_home_anchor"></a>
       <div class="player_home_block player_home_block--hand" v-if="cardsInHandCount > 0" id="shortkey-hand">
-        <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="cardsInHandCount.toString()" />
-        <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.ceoCardsInHand).concat(playerView.cardsInHand)" />
+        <div class="hiding-card-button-row">
+          <dynamic-title title="Cards In Hand" :color="thisPlayer.color"/>
+          <div :class="getHideButtonClass('HAND')" v-on:click.prevent="toggle('HAND')">
+            <div class="played-cards-count">{{cardsInHandCount.toString()}}</div>
+            <div class="played-cards-selection" v-i18n>{{ getToggleLabel('HAND')}}</div>
+          </div>
+          <div class="text-overview" v-i18n>[ toggle cards in hand ]</div>
+        </div>
+        <sortable-cards v-show="isVisible('HAND')" :playerId="playerView.id"
+                        :cards="playerView.preludeCardsInHand
+                                .concat(playerView.ceoCardsInHand)
+                                .concat(playerView.cardsInHand)"/>
       </div>
 
       <div class="player_home_block player_home_block--cards">
@@ -315,6 +325,7 @@ import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import * as raw_settings from '@/genfiles/settings.json';
 
 export interface PlayerHomeModel {
+  showHand: boolean;
   showActiveCards: boolean;
   showAutomatedCards: boolean;
   showEventCards: boolean;
@@ -330,6 +341,7 @@ export default Vue.extend({
   data(): PlayerHomeModel {
     const preferences = getPreferences();
     return {
+      showHand: !preferences.hide_hand,
       showActiveCards: !preferences.hide_active_cards,
       showAutomatedCards: !preferences.hide_automated_cards,
       showEventCards: !preferences.hide_event_cards,
@@ -337,6 +349,9 @@ export default Vue.extend({
     };
   },
   watch: {
+    showHand: function hide_hand() {
+      PreferencesManager.INSTANCE.set('hide_hand', !this.showHand);
+    },
     showActiveCards: function toggle_active_cards() {
       PreferencesManager.INSTANCE.set('hide_active_cards', !this.showActiveCards);
     },
@@ -452,6 +467,9 @@ export default Vue.extend({
     },
     toggle(type: string): void {
       switch (type) {
+      case 'HAND':
+        this.showHand = !this.showHand;
+        break;
       case 'ACTIVE':
         this.showActiveCards = !this.showActiveCards;
         break;
@@ -468,6 +486,8 @@ export default Vue.extend({
     },
     isVisible(type: string): boolean {
       switch (type) {
+      case 'HAND':
+        return this.showHand;
       case 'ACTIVE':
         return this.showActiveCards;
       case 'AUTOMATED':
@@ -484,7 +504,9 @@ export default Vue.extend({
       return (this.game.phase === Phase.CORPORATIONDRAFTING) && this.game.gameOptions.corporationsDraft;
     },
     getToggleLabel(hideType: string): string {
-      if (hideType === 'ACTIVE') {
+      if (hideType === 'HAND') {
+        return (this.showHand ? '✔' : '');
+      } else if (hideType === 'ACTIVE') {
         return (this.showActiveCards? '✔' : '');
       } else if (hideType === 'AUTOMATED') {
         return (this.showAutomatedCards ? '✔' : '');
@@ -496,7 +518,9 @@ export default Vue.extend({
     },
     getHideButtonClass(hideType: string): string {
       const prefix = 'hiding-card-button ';
-      if (hideType === 'ACTIVE') {
+      if (hideType === 'HAND') {
+        return prefix + (this.showHand ? 'hand-toggle' : 'hand-toggle-transparent');
+      } else if (hideType === 'ACTIVE') {
         return prefix + (this.showActiveCards ? 'active' : 'active-transparent');
       } else if (hideType === 'AUTOMATED') {
         return prefix + (this.showAutomatedCards ? 'automated' : 'automated-transparent');

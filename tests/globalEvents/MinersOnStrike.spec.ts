@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MethaneFromTitan} from '../../src/server/cards/base/MethaneFromTitan';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {MinersOnStrike} from '../../src/server/turmoil/globalEvents/MinersOnStrike';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -15,8 +15,8 @@ describe('MinersOnStrike', function() {
     const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
-    player.addResource(Resources.TITANIUM, 5);
-    player2.addResource(Resources.TITANIUM, 5);
+    player.addResource(Resource.TITANIUM, 5);
+    player2.addResource(Resource.TITANIUM, 5);
     player.playedCards.push(new MethaneFromTitan());
     player2.playedCards.push(new MethaneFromTitan());
     player2.playedCards.push(new MethaneFromTitan());

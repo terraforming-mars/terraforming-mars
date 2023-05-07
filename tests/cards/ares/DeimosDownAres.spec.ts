@@ -3,7 +3,6 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -21,7 +20,7 @@ describe('DeimosDownAres', function() {
 
   beforeEach(() => {
     card = new DeimosDownAres();
-    [game, player, player2] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, player2] = testGame(2, {aresExtension: true});
     player.megaCredits = 0;
     player2.megaCredits = 0;
     player.steel = 0;

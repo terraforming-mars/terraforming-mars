@@ -4,7 +4,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {multiplier} from '../Options';
 
 
@@ -27,7 +27,7 @@ export class Duncan extends CeoCard {
 
   public action(player: Player): PlayerInput | undefined {
     this.isDisabled = true;
-    player.addResource(Resources.MEGACREDITS, 4 * player.game.generation, {log: true});
+    player.addResource(Resource.MEGACREDITS, 4 * player.game.generation, {log: true});
     this.generationUsed = player.game.generation;
     return undefined;
   }

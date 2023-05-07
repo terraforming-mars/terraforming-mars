@@ -2,7 +2,6 @@ import {Colony} from '../../colonies/Colony';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../../common/colonies/ColonyBenefit';
 import {Resource} from '../../../common/Resource';
-import {ShouldIncreaseTrack} from '../../../common/colonies/ShouldIncreaseTrack';
 
 export class Mercury extends Colony {
   constructor() {
@@ -18,7 +17,7 @@ export class Mercury extends Colony {
       colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
       colonyBonusResource: Resource.MEGACREDITS,
       colonyBonusQuantity: 2,
-      shouldIncreaseTrack: ShouldIncreaseTrack.ASK,
+      shouldIncreaseTrack: 'ask',
     });
   }
 }

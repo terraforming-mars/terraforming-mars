@@ -7,7 +7,7 @@ export class IapetusII extends Colony {
   constructor() {
     super({
       name: ColonyName.IAPETUS_II,
-      resourceType: CardResource.DATA,
+      cardResource: CardResource.DATA,
       buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
       buildQuantity: [3, 3, 3],
 

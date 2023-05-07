@@ -22,7 +22,6 @@ import {Tag} from '../../common/cards/Tag';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
-import {ShouldIncreaseTrack} from '../../common/colonies/ShouldIncreaseTrack';
 import {SerializedColony} from '../SerializedColony';
 import {IColony, TradeOptions} from './IColony';
 import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../common/colonies/IColonyMetadata';
@@ -117,14 +116,14 @@ export abstract class Colony implements IColony {
       const steps = maxTrackPosition - this.trackPosition;
 
       if (steps === 0 ||
-        this.metadata.shouldIncreaseTrack === ShouldIncreaseTrack.NO ||
+        this.metadata.shouldIncreaseTrack === 'no' ||
         tradeOptions.selfishTrade === true) {
         // Don't increase
         this.handleTrade(player, tradeOptions);
         return;
       }
 
-      if (this.metadata.shouldIncreaseTrack === ShouldIncreaseTrack.YES || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxTrackPosition])) {
+      if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxTrackPosition])) {
         // No point in asking the player, just increase it
         this.increaseTrack(steps);
         LogHelper.logColonyTrackIncrease(player, this, steps);
@@ -177,8 +176,8 @@ export abstract class Colony implements IColony {
       let action: undefined | DeferredAction = undefined;
       switch (bonusType) {
       case ColonyBenefit.ADD_RESOURCES_TO_CARD:
-        const resourceType = this.metadata.resourceType;
-        action = new AddResourcesToCard(player, resourceType, {count: quantity});
+        const cardResource = this.metadata.cardResource;
+        action = new AddResourcesToCard(player, cardResource, {count: quantity});
         break;
 
       case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:

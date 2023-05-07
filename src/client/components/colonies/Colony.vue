@@ -171,7 +171,7 @@ export default Vue.extend({
       return getColony(this.colony.name);
     },
     colonyResourceClass(): string {
-      const resource = this.metadata.resourceType;
+      const resource = this.metadata.cardResource;
       return resource?.toString()?.toLowerCase() ?? '';
     },
     backgroundClass(): string {

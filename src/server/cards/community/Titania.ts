@@ -2,7 +2,6 @@ import {Colony} from '../../colonies/Colony';
 import {Resource} from '../../../common/Resource';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../../common/colonies/ColonyBenefit';
-import {ShouldIncreaseTrack} from '../../../common/colonies/ShouldIncreaseTrack';
 
 export class Titania extends Colony {
   constructor() {
@@ -15,7 +14,7 @@ export class Titania extends Colony {
       colonyBonusType: ColonyBenefit.LOSE_RESOURCES,
       colonyBonusQuantity: 3,
       colonyBonusResource: Resource.MEGACREDITS,
-      shouldIncreaseTrack: ShouldIncreaseTrack.NO,
+      shouldIncreaseTrack: 'no',
     });
   }
 }

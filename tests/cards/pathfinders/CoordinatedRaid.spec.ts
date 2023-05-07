@@ -10,7 +10,6 @@ import {ColonyBenefit} from '../../../src/common/colonies/ColonyBenefit';
 import {Resource} from '../../../src/common/Resource';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
-import {ShouldIncreaseTrack} from '../../../src/common/colonies/ShouldIncreaseTrack';
 
 export class TestColony extends Colony {
   constructor() {
@@ -25,7 +24,7 @@ export class TestColony extends Colony {
       colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
       colonyBonusQuantity: 7,
       colonyBonusResource: Resource.STEEL,
-      shouldIncreaseTrack: ShouldIncreaseTrack.YES,
+      shouldIncreaseTrack: 'yes',
     });
   }
 }

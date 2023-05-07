@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -48,7 +48,7 @@ export class EnergyMarket extends Card implements IProjectCard {
           player,
           amount * 2,
           {
-            afterPay: () => player.addResource(Resources.ENERGY, amount, {log: true}),
+            afterPay: () => player.addResource(Resource.ENERGY, amount, {log: true}),
           }));
 
         return undefined;
@@ -59,8 +59,8 @@ export class EnergyMarket extends Card implements IProjectCard {
   }
 
   private getMegacreditsOption(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
-    player.addResource(Resources.MEGACREDITS, 8);
+    player.production.add(Resource.ENERGY, -1);
+    player.addResource(Resource.MEGACREDITS, 8);
     player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
     return undefined;
   }

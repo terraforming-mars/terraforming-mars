@@ -6,7 +6,7 @@ import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Tag} from '../../../common/cards/Tag';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
@@ -26,7 +26,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
       metadata,
     });
   }
-  public bonusResource?: Array<Resources>;
+  public bonusResource?: Array<Resource>;
   public override bespokeCanPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
@@ -74,10 +74,10 @@ export abstract class MiningCard extends Card implements IProjectCard {
     return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: ISpace) => {
       const bonusResources = [];
       if (space.bonus.includes(SpaceBonus.STEEL)) {
-        bonusResources.push(Resources.STEEL);
+        bonusResources.push(Resource.STEEL);
       }
       if (space.bonus.includes(SpaceBonus.TITANIUM)) {
-        bonusResources.push(Resources.TITANIUM);
+        bonusResources.push(Resource.TITANIUM);
       }
 
       player.game.defer(new SelectResourceTypeDeferred(
@@ -86,7 +86,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
         (resource) => {
           player.production.add(resource, 1, {log: true});
           this.bonusResource = [resource];
-          const spaceBonus = resource === Resources.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
+          const spaceBonus = resource === Resource.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
           player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
           space.adjacency = this.getAdjacencyBonus(spaceBonus);
         },

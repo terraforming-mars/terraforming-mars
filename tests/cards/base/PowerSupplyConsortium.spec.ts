@@ -3,7 +3,7 @@ import {PowerSupplyConsortium} from '../../../src/server/cards/base/PowerSupplyC
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -19,7 +19,7 @@ describe('PowerSupplyConsortium', function() {
   });
 
   it('Cannot play without power tags', function() {
-    player.production.add(Resources.ENERGY, 3);
+    player.production.add(Resource.ENERGY, 3);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
@@ -48,8 +48,8 @@ describe('PowerSupplyConsortium', function() {
   });
 
   it('Can play - multiple targets', function() {
-    player.production.add(Resources.ENERGY, 1);
-    player2.production.add(Resources.ENERGY, 3);
+    player.production.add(Resource.ENERGY, 1);
+    player2.production.add(Resource.ENERGY, 3);
 
     card.play(player);
 

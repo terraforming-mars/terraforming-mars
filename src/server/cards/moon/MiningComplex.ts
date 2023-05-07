@@ -7,7 +7,7 @@ import {Player} from '../../Player';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {TileType} from '../../../common/TileType';
 
@@ -50,7 +50,7 @@ export class MiningComplex extends PreludeCard {
             'Select a space next to the mine for a road',
           ));
       }));
-    player.deductResource(Resources.MEGACREDITS, 7);
+    player.deductResource(Resource.MEGACREDITS, 7);
     return undefined;
   }
 }

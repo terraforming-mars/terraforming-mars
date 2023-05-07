@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -54,7 +54,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.steel += amountStolen;
-          target.deductResource(Resources.STEEL, 2, {log: true, from: player, stealing: true});
+          target.deductResource(Resource.STEEL, 2, {log: true, from: player, stealing: true});
           return undefined;
         }));
       }
@@ -65,7 +65,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.megaCredits += amountStolen;
-          target.deductResource(Resources.MEGACREDITS, 3, {log: true, from: player, stealing: true});
+          target.deductResource(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
           return undefined;
         }));
       }

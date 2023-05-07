@@ -1,5 +1,5 @@
 import {ColonyBenefit} from './ColonyBenefit';
-import {Resources} from '../Resources';
+import {Resource} from '../Resource';
 import {ShouldIncreaseTrack} from './ShouldIncreaseTrack';
 import {ColonyName} from './ColonyName';
 import {CardResource} from '../CardResource';
@@ -10,14 +10,14 @@ export interface IColonyMetadata {
   readonly name: ColonyName;
   readonly buildType: ColonyBenefit;
   readonly buildQuantity: Array<number>; // Default is [1,1,1]
-  readonly buildResource?: Resources;
+  readonly buildResource?: Resource;
   readonly resourceType?: CardResource;
   readonly tradeType: ColonyBenefit;
   readonly tradeQuantity: Array<number>; // Default is [1,1,1,1,1,1,1]
-  readonly tradeResource?: Resources | Array<Resources>;
+  readonly tradeResource?: Resource | Array<Resource>;
   readonly colonyBonusType: ColonyBenefit;
   readonly colonyBonusQuantity: number; // Default is 1
-  readonly colonyBonusResource?: Resources;
+  readonly colonyBonusResource?: Resource;
   readonly shouldIncreaseTrack: ShouldIncreaseTrack // Default is ShouldIncreaseTrack.YES;
 }
 

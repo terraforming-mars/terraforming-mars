@@ -7,7 +7,7 @@ import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';
 import {Tile} from '../../src/server/Tile';
 import {SpaceType} from '../../src/common/boards/SpaceType';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {SelectProductionToLose} from '../../src/server/inputs/SelectProductionToLose';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {DesperateMeasures} from '../../src/server/cards/ares/DesperateMeasures';
@@ -181,14 +181,14 @@ describe('AresHandler', function() {
     _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
     // No resources available to play the tile.
-    player.production.add(Resources.MEGACREDITS, -5);
+    player.production.add(Resource.MEGACREDITS, -5);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     expect(() => {
       game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     }).to.throw(/Placing here costs 1 units of production/);
 
-    player.production.add(Resources.PLANTS, 7);
+    player.production.add(Resource.PLANTS, 7);
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
@@ -202,7 +202,7 @@ describe('AresHandler', function() {
     _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE);
 
     // No resources available to play the tile.
-    player.production.add(Resources.MEGACREDITS, -5);
+    player.production.add(Resource.MEGACREDITS, -5);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     try {
@@ -211,7 +211,7 @@ describe('AresHandler', function() {
       expect((err as any).toString()).includes('Placing here costs 2 units of production');
     }
 
-    player.production.add(Resources.PLANTS, 7);
+    player.production.add(Resource.PLANTS, 7);
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     runAllActions(game);

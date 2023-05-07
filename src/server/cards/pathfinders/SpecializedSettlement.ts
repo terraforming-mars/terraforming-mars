@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
@@ -34,7 +34,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
     });
   }
 
-  public bonusResource?: Array<Resources>;
+  public bonusResource?: Array<Resource>;
 
   public override bespokeCanPlay(player: Player): boolean {
     return player.production.energy >= 1 &&
@@ -42,23 +42,23 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   }
 
   private bonusResources(space: ISpace) {
-    const resources: Set<Resources> = new Set();
+    const resources: Set<Resource> = new Set();
     space.bonus.forEach((bonus) => {
       switch (bonus) {
       case SpaceBonus.STEEL:
-        resources.add(Resources.STEEL);
+        resources.add(Resource.STEEL);
         break;
       case SpaceBonus.TITANIUM:
-        resources.add(Resources.TITANIUM);
+        resources.add(Resource.TITANIUM);
         break;
       case SpaceBonus.PLANT:
-        resources.add(Resources.PLANTS);
+        resources.add(Resource.PLANTS);
         break;
       case SpaceBonus.ENERGY:
-        resources.add(Resources.ENERGY);
+        resources.add(Resource.ENERGY);
         break;
       case SpaceBonus.HEAT:
-        resources.add(Resources.HEAT);
+        resources.add(Resource.HEAT);
         break;
       }
     });
@@ -100,11 +100,11 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   }
 
   private defaultProduce(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
-    player.production.add(Resources.MEGACREDITS, 3);
+    player.production.add(Resource.ENERGY, -1);
+    player.production.add(Resource.MEGACREDITS, 3);
   }
 
-  public produceForTile(player: Player, bonusResources: Array<Resources>) {
+  public produceForTile(player: Player, bonusResources: Array<Resource>) {
     if (bonusResources.length === 0) return;
 
     player.game.defer(new SelectResourceTypeDeferred(

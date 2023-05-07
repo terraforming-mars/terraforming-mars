@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CarbonateProcessing} from '../../../src/server/cards/base/CarbonateProcessing';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
 describe('CarbonateProcessing', function() {
@@ -18,7 +18,7 @@ describe('CarbonateProcessing', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

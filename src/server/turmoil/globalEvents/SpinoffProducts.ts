@@ -4,7 +4,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -27,7 +27,7 @@ export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.tags.count(Tag.SCIENCE, 'raw-pf')) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+      player.addResource(Resource.MEGACREDITS, 2 * (Math.min(5, player.tags.count(Tag.SCIENCE, 'raw-pf')) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }
 }

@@ -1,7 +1,7 @@
 
 import {expect} from 'chai';
 import {Insulation} from '../../../src/server/cards/base/Insulation';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
 describe('Insulation', function() {
@@ -10,7 +10,7 @@ describe('Insulation', function() {
     const [, player] = testGame(2);
 
     expect(card.canPlay(player)).is.false;
-    player.production.add(Resources.HEAT, 1);
+    player.production.add(Resource.HEAT, 1);
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);

@@ -3,7 +3,7 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -34,7 +34,7 @@ class UnityBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -50,7 +50,7 @@ class UnityBonus02 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -104,7 +104,7 @@ class UnityPolicy02 implements Policy {
           }
 
           orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
-            player.addResource(Resources.TITANIUM, 2);
+            player.addResource(Resource.TITANIUM, 2);
             game.log('${0} gained 2 titanium', (b) => b.player(player));
             return undefined;
           }));

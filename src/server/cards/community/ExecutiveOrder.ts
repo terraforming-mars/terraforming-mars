@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -29,7 +29,7 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.addResource(Resources.MEGACREDITS, 10, {log: true});
+    player.addResource(Resource.MEGACREDITS, 10, {log: true});
     const turmoil = Turmoil.getTurmoil(player.game);
     const globalEvents: IGlobalEvent[] = [];
 

@@ -21,7 +21,7 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {BehaviorExecutor} from './BehaviorExecutor';
 import {PlaceTile} from '../deferredActions/PlaceTile';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -200,16 +200,16 @@ export class Executor implements BehaviorExecutor {
         return;
       }
       if (spend.steel) {
-        player.deductResource(Resources.STEEL, spend.steel);
+        player.deductResource(Resource.STEEL, spend.steel);
       }
       if (spend.titanium) {
-        player.deductResource(Resources.TITANIUM, spend.titanium);
+        player.deductResource(Resource.TITANIUM, spend.titanium);
       }
       if (spend.plants) {
-        player.deductResource(Resources.PLANTS, spend.plants);
+        player.deductResource(Resource.PLANTS, spend.plants);
       }
       if (spend.energy) {
-        player.deductResource(Resources.ENERGY, spend.energy);
+        player.deductResource(Resource.ENERGY, spend.energy);
       }
       if (spend.heat) {
         throw new Error('Spending heat not supported yet.');

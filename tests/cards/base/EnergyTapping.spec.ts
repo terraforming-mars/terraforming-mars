@@ -3,7 +3,7 @@ import {EnergyTapping} from '../../../src/server/cards/base/EnergyTapping';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -28,8 +28,8 @@ describe('EnergyTapping', function() {
   });
 
   it('Should play - multiple targets', function() {
-    player.production.add(Resources.ENERGY, 2);
-    player2.production.add(Resources.ENERGY, 3);
+    player.production.add(Resource.ENERGY, 2);
+    player2.production.add(Resource.ENERGY, 3);
 
     card.play(player);
 

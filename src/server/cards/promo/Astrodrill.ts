@@ -9,7 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {LogHelper} from '../../LogHelper';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -61,27 +61,27 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
     const gainStandardResource = new SelectOption('Gain a standard resource', 'Gain', () => {
       return new OrOptions(
         new SelectOption('Gain 1 titanium', 'Gain titanium', () => {
-          player.addResource(Resources.TITANIUM, 1, {log: true});
+          player.addResource(Resource.TITANIUM, 1, {log: true});
           return undefined;
         }),
         new SelectOption('Gain 1 steel', 'Gain steel', () => {
-          player.addResource(Resources.STEEL, 1, {log: true});
+          player.addResource(Resource.STEEL, 1, {log: true});
           return undefined;
         }),
         new SelectOption('Gain 1 plant', 'Gain plant', () => {
-          player.addResource(Resources.PLANTS, 1, {log: true});
+          player.addResource(Resource.PLANTS, 1, {log: true});
           return undefined;
         }),
         new SelectOption('Gain 1 energy', 'Gain energy', () => {
-          player.addResource(Resources.ENERGY, 1, {log: true});
+          player.addResource(Resource.ENERGY, 1, {log: true});
           return undefined;
         }),
         new SelectOption('Gain 1 heat', 'Gain heat', () => {
-          player.addResource(Resources.HEAT, 1, {log: true});
+          player.addResource(Resource.HEAT, 1, {log: true});
           return undefined;
         }),
         new SelectOption('Gain 1 M€', 'Gain M€', () => {
-          player.addResource(Resources.MEGACREDITS, 1, {log: true});
+          player.addResource(Resource.MEGACREDITS, 1, {log: true});
           return undefined;
         }),
       );

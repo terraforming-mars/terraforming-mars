@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all} from '../Options';
@@ -41,10 +41,10 @@ export class AncientShipyards extends Card {
     const game = player.game;
     for (const p of game.getPlayers()) {
       if (p === player) continue;
-      p.stealResource(Resources.MEGACREDITS, 2, player);
+      p.stealResource(Resource.MEGACREDITS, 2, player);
     }
     if (game.isSoloMode()) {
-      player.addResource(Resources.MEGACREDITS, 2);
+      player.addResource(Resource.MEGACREDITS, 2);
     }
     player.addResourceTo(this, 1);
     return undefined;

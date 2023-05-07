@@ -1,4 +1,4 @@
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
 import {RequirementType} from '../../common/cards/RequirementType';
@@ -132,7 +132,7 @@ class Builder {
     return this;
   }
 
-  public production(resource: Resources, amount: number = 1, options?: Options): Builder {
+  public production(resource: Resource, amount: number = 1, options?: Options): Builder {
     this.reqs.push(new ProductionCardRequirement(resource, amount, options));
     return this;
   }

@@ -4,7 +4,7 @@ import {IAward} from '../IAward';
 
 export class Tourist implements IAward {
   public readonly name = 'Tourist';
-  public readonly description = 'Most empty spaces adjacent to your tiles';
+  public readonly description = 'Have the most empty spaces adjacent to your tiles';
 
   public getScore(player: Player): number {
     return RedTourismWave.getAdjacentEmptySpacesCount(player);

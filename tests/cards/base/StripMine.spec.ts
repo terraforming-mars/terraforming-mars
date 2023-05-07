@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {StripMine} from '../../../src/server/cards/base/StripMine';
 import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -25,12 +25,12 @@ describe('StripMine', function() {
   });
 
   it('Can not play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
@@ -41,7 +41,7 @@ describe('StripMine', function() {
   });
 
   it('Cannot play if Reds are ruling and cannot afford 6 MC', function() {
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;
 

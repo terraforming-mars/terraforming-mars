@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -26,7 +26,7 @@ export class StrongSociety extends GlobalEvent implements IGlobalEvent {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const amount = Math.min(5, player.game.getCitiesCount(player)) + turmoil.getPlayerInfluence(player);
       if (amount > 0) {
-        player.addResource(Resources.MEGACREDITS, amount * 2, {log: true, from: this.name});
+        player.addResource(Resource.MEGACREDITS, amount * 2, {log: true, from: this.name});
       }
     });
   }

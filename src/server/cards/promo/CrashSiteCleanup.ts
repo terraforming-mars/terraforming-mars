@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -33,7 +33,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       'Gain 1 titanium',
       'Gain titanium',
       () => {
-        player.addResource(Resources.TITANIUM, 1, {log: true});
+        player.addResource(Resource.TITANIUM, 1, {log: true});
         return undefined;
       },
     );
@@ -42,7 +42,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       'Gain 2 steel',
       'Gain steel',
       () => {
-        player.addResource(Resources.STEEL, 2, {log: true});
+        player.addResource(Resource.STEEL, 2, {log: true});
         return undefined;
       },
     );
@@ -50,11 +50,11 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     return new OrOptions(gainTitanium, gain2Steel);
   }
 
-  public static resourceHook(player: Player, resource: Resources, amount: number, from: Player) {
+  public static resourceHook(player: Player, resource: Resource, amount: number, from: Player) {
     if (from === player || amount >= 0) {
       return;
     }
-    if (resource === Resources.PLANTS && amount < 0) {
+    if (resource === Resource.PLANTS && amount < 0) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
     }
   }

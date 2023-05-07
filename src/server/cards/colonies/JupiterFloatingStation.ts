@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -58,7 +58,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard {
         return undefined;
       }),
       new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
-        player.addResource(Resources.MEGACREDITS, Math.min(this.resourceCount, 4), {log: true});
+        player.addResource(Resource.MEGACREDITS, Math.min(this.resourceCount, 4), {log: true});
         return undefined;
       }),
     );

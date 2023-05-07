@@ -5,7 +5,7 @@ import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -31,13 +31,13 @@ describe('MaxwellBase', function() {
   });
 
   it('Can not play if Venus requirement not met', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 10);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 12);
     expect(player.simpleCanPlay(card)).is.true;
 

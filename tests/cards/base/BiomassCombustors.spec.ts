@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustors';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -18,7 +18,7 @@ describe('BiomassCombustors', function() {
   });
 
   it('Cannot play if oxygen requirement not met', function() {
-    player2.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
@@ -35,7 +35,7 @@ describe('BiomassCombustors', function() {
 
   it('Should play', function() {
     setOxygenLevel(game, 6);
-    player2.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

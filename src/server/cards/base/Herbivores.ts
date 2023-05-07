@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -27,7 +27,7 @@ export class Herbivores extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.oxygen(8)),
 
       behavior: {
-        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+        decreaseAnyProduction: {type: Resource.PLANTS, count: 1},
         addResources: 1,
       },
 

@@ -10,7 +10,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {TRSource} from '../../../common/cards/TRSource';
 import {digit} from '../Options';
@@ -60,7 +60,7 @@ export class SecretLabs extends Card implements IProjectCard {
     if (this.canAfford(player, {temperature: 1}, 0)) {
       options.options.push(new SelectOption('Raise temperature 1 step. Gain 3 plants.', 'select', () => {
         player.game.increaseTemperature(player, 1);
-        player.addResource(Resources.PLANTS, 3, {log: true});
+        player.addResource(Resource.PLANTS, 3, {log: true});
         return undefined;
       }));
     }

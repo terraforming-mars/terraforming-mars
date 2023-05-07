@@ -18,7 +18,7 @@ import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from '../common/turmoil/PartyName';
 import {Phase} from '../common/Phase';
 import {PlayerInput} from './PlayerInput';
-import {Resources} from '../common/Resources';
+import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
@@ -319,18 +319,18 @@ export class Player {
     return this.terraformRating = value;
   }
 
-  public getResource(resource: Resources): number {
-    if (resource === Resources.MEGACREDITS) return this.megaCredits;
-    if (resource === Resources.STEEL) return this.steel;
-    if (resource === Resources.TITANIUM) return this.titanium;
-    if (resource === Resources.PLANTS) return this.plants;
-    if (resource === Resources.ENERGY) return this.energy;
-    if (resource === Resources.HEAT) return this.heat;
+  public getResource(resource: Resource): number {
+    if (resource === Resource.MEGACREDITS) return this.megaCredits;
+    if (resource === Resource.STEEL) return this.steel;
+    if (resource === Resource.TITANIUM) return this.titanium;
+    if (resource === Resource.PLANTS) return this.plants;
+    if (resource === Resource.ENERGY) return this.energy;
+    if (resource === Resource.HEAT) return this.heat;
     throw new Error('Resource ' + resource + ' not found');
   }
 
   public logUnitDelta(
-    resource: Resources,
+    resource: Resource,
     amount: number,
     unitType: 'production' | 'amount',
     from: Player | GlobalEventName | undefined,
@@ -367,7 +367,7 @@ export class Player {
   }
 
   public deductResource(
-    resource: Resources,
+    resource: Resource,
     amount: number,
     options? : {
       log?: boolean,
@@ -378,7 +378,7 @@ export class Player {
   }
 
   public addResource(
-    resource: Resources,
+    resource: Resource,
     amount: number,
     options? : {
       log?: boolean,
@@ -410,12 +410,12 @@ export class Player {
         {player: {color: this.color, id: this.id, name: this.name}, resource, amount});
     }
 
-    if (resource === Resources.MEGACREDITS) this.megaCredits += delta;
-    else if (resource === Resources.STEEL) this.steel += delta;
-    else if (resource === Resources.TITANIUM) this.titanium += delta;
-    else if (resource === Resources.PLANTS) this.plants += delta;
-    else if (resource === Resources.ENERGY) this.energy += delta;
-    else if (resource === Resources.HEAT) this.heat += delta;
+    if (resource === Resource.MEGACREDITS) this.megaCredits += delta;
+    else if (resource === Resource.STEEL) this.steel += delta;
+    else if (resource === Resource.TITANIUM) this.titanium += delta;
+    else if (resource === Resource.PLANTS) this.plants += delta;
+    else if (resource === Resource.ENERGY) this.energy += delta;
+    else if (resource === Resource.HEAT) this.heat += delta;
     else {
       throw new Error(`tried to add unsupported resource ${resource}`);
     }
@@ -439,7 +439,7 @@ export class Player {
    * Steal up to `qty` units of `resource` from `from`. Or, at least as
    * much as possible.
    */
-  public stealResource(resource: Resources, qty: number, from: Player) {
+  public stealResource(resource: Resource, qty: number, from: Player) {
     const qtyToSteal = Math.min(this.getResource(resource), qty);
     if (qtyToSteal > 0) {
       this.deductResource(resource, qtyToSteal, {log: true, from: from, stealing: true});
@@ -462,21 +462,21 @@ export class Player {
     log?: boolean,
     from? : Player | GlobalEventName,
   }) {
-    this.addResource(Resources.MEGACREDITS, units.megacredits || 0, options);
-    this.addResource(Resources.STEEL, units.steel || 0, options);
-    this.addResource(Resources.TITANIUM, units.titanium || 0, options);
-    this.addResource(Resources.PLANTS, units.plants || 0, options);
-    this.addResource(Resources.ENERGY, units.energy || 0, options);
-    this.addResource(Resources.HEAT, units.heat || 0, options);
+    this.addResource(Resource.MEGACREDITS, units.megacredits || 0, options);
+    this.addResource(Resource.STEEL, units.steel || 0, options);
+    this.addResource(Resource.TITANIUM, units.titanium || 0, options);
+    this.addResource(Resource.PLANTS, units.plants || 0, options);
+    this.addResource(Resource.ENERGY, units.energy || 0, options);
+    this.addResource(Resource.HEAT, units.heat || 0, options);
   }
 
   public deductUnits(units: Units) {
-    this.deductResource(Resources.MEGACREDITS, units.megacredits);
-    this.deductResource(Resources.STEEL, units.steel);
-    this.deductResource(Resources.TITANIUM, units.titanium);
-    this.deductResource(Resources.PLANTS, units.plants);
-    this.deductResource(Resources.ENERGY, units.energy);
-    this.deductResource(Resources.HEAT, units.heat);
+    this.deductResource(Resource.MEGACREDITS, units.megacredits);
+    this.deductResource(Resource.STEEL, units.steel);
+    this.deductResource(Resource.TITANIUM, units.titanium);
+    this.deductResource(Resource.PLANTS, units.plants);
+    this.deductResource(Resource.ENERGY, units.energy);
+    this.deductResource(Resource.HEAT, units.heat);
   }
 
   public getActionsThisGeneration(): Set<CardName> {
@@ -509,21 +509,21 @@ export class Player {
     return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
   }
 
-  public canReduceAnyProduction(resource: Resources, minQuantity: number = 1): boolean {
+  public canReduceAnyProduction(resource: Resource, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     const game = this.game;
     if (game.isSoloMode()) return true;
     return game.getPlayers().some((p) => p.canHaveProductionReduced(resource, minQuantity, this));
   }
 
-  public canHaveProductionReduced(resource: Resources, minQuantity: number, attacker: Player) {
-    if (resource === Resources.MEGACREDITS) {
+  public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: Player) {
+    if (resource === Resource.MEGACREDITS) {
       if ((this.production[resource] + 5) < minQuantity) return false;
     } else {
       if (this.production[resource] < minQuantity) return false;
     }
 
-    if (resource === Resources.STEEL || resource === Resources.TITANIUM) {
+    if (resource === Resource.STEEL || resource === Resource.TITANIUM) {
       if (this.alloysAreProtected()) return false;
     }
 
@@ -1056,9 +1056,9 @@ export class Player {
   }
 
   public pay(payment: Payment) {
-    this.deductResource(Resources.STEEL, payment.steel);
-    this.deductResource(Resources.TITANIUM, payment.titanium);
-    this.deductResource(Resources.MEGACREDITS, payment.megaCredits);
+    this.deductResource(Resource.STEEL, payment.steel);
+    this.deductResource(Resource.TITANIUM, payment.titanium);
+    this.deductResource(Resource.MEGACREDITS, payment.megaCredits);
 
     if (payment.heat > 0) {
       this.defer(this.spendHeat(payment.heat));
@@ -1262,7 +1262,7 @@ export class Player {
 
     if (additionalCorp === false && corporationCard.name !== CardName.BEGINNER_CORPORATION) {
       const diff = this.cardsInHand.length * this.cardCost;
-      this.deductResource(Resources.MEGACREDITS, diff);
+      this.deductResource(Resource.MEGACREDITS, diff);
     }
     corporationCard.play(this);
     if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
@@ -1312,7 +1312,7 @@ export class Player {
     if (stormcraft?.resourceCount > 0) {
       return stormcraft.spendHeat(this, amount, cb);
     }
-    this.deductResource(Resources.HEAT, amount);
+    this.deductResource(Resource.HEAT, amount);
     return cb();
   }
 
@@ -1328,7 +1328,7 @@ export class Player {
       // VanAllen CEO Hook for Milestones
       const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
       if (vanAllen !== undefined) {
-        vanAllen.addResource(Resources.MEGACREDITS, 3, {log: true});
+        vanAllen.addResource(Resource.MEGACREDITS, 3, {log: true});
       }
       if (!this.cardIsInEffect(CardName.VANALLEN)) {
         this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
@@ -1391,7 +1391,7 @@ export class Player {
           this.game.board.getAvailableSpacesForGreenery(this), (space) => {
             // Do not raise oxygen or award TR for final greenery placements
             this.game.addGreenery(this, space, false);
-            this.deductResource(Resources.PLANTS, this.plantsNeededForGreenery);
+            this.deductResource(Resource.PLANTS, this.plantsNeededForGreenery);
 
             this.takeActionForFinalGreenery();
 

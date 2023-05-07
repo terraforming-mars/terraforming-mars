@@ -1,5 +1,5 @@
 import {Colony} from './Colony';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
 
@@ -10,12 +10,12 @@ export class Europa extends Colony {
       buildType: ColonyBenefit.PLACE_OCEAN_TILE,
       tradeType: ColonyBenefit.GAIN_PRODUCTION,
       tradeResource: [
-        Resources.MEGACREDITS, Resources.MEGACREDITS,
-        Resources.ENERGY, Resources.ENERGY,
-        Resources.PLANTS, Resources.PLANTS, Resources.PLANTS,
+        Resource.MEGACREDITS, Resource.MEGACREDITS,
+        Resource.ENERGY, Resource.ENERGY,
+        Resource.PLANTS, Resource.PLANTS, Resource.PLANTS,
       ],
       colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusResource: Resources.MEGACREDITS,
+      colonyBonusResource: Resource.MEGACREDITS,
       shouldIncreaseTrack: 'ask',
     });
   }

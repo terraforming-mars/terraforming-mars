@@ -1,5 +1,5 @@
 import {ColonyBenefit} from './ColonyBenefit';
-import {Resources} from '../Resources';
+import {Resource} from '../Resource';
 import {ColonyName} from './ColonyName';
 import {CardResource} from '../CardResource';
 import {GameModule} from '../cards/GameModule';
@@ -9,14 +9,14 @@ export interface IColonyMetadata {
   readonly name: ColonyName;
   readonly buildType: ColonyBenefit;
   readonly buildQuantity: Array<number>; // Default is [1,1,1]
-  readonly buildResource?: Resources;
+  readonly buildResource?: Resource;
   readonly cardResource?: CardResource;
   readonly tradeType: ColonyBenefit;
   readonly tradeQuantity: Array<number>; // Default is [1,1,1,1,1,1,1]
-  readonly tradeResource?: Resources | Array<Resources>;
+  readonly tradeResource?: Resource | Array<Resource>;
   readonly colonyBonusType: ColonyBenefit;
   readonly colonyBonusQuantity: number; // Default is 1
-  readonly colonyBonusResource?: Resources;
+  readonly colonyBonusResource?: Resource;
   readonly shouldIncreaseTrack: 'yes' | 'no' | 'ask' // Default is 'yes';
 }
 

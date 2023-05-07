@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {churnAction, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -24,7 +24,7 @@ describe('BusinessNetwork', function() {
   });
 
   it('Can not play', function() {
-    player.production.add(Resources.MEGACREDITS, -5);
+    player.production.add(Resource.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });
 

@@ -13,7 +13,7 @@ import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
 import {PlayerInput} from '../PlayerInput';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
@@ -89,13 +89,13 @@ export abstract class Colony implements IColony {
       // Poseidon hook
       const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
-        poseidon.production.add(Resources.MEGACREDITS, 1);
+        poseidon.production.add(Resource.MEGACREDITS, 1);
       }
 
       // CEO Naomi hook
       if (player.cardIsInEffect(CardName.NAOMI)) {
-        player.addResource(Resources.ENERGY, 2, {log: true});
-        player.addResource(Resources.MEGACREDITS, 3, {log: true});
+        player.addResource(Resource.ENERGY, 2, {log: true});
+        player.addResource(Resource.MEGACREDITS, 3, {log: true});
       }
     }
 
@@ -170,7 +170,7 @@ export abstract class Colony implements IColony {
     }
 
 
-    private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+    private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
       const game = player.game;
 
       let action: undefined | DeferredAction = undefined;
@@ -264,7 +264,7 @@ export abstract class Colony implements IColony {
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         Turmoil.ifTurmoil(game, (turmoil) => {
           const partyDelegateCount = turmoil.parties.map((party) => party.delegates.get(player.id)).reduce((a, b) => a + b, 0);
-          player.addResource(Resources.MEGACREDITS, partyDelegateCount, {log: true});
+          player.addResource(Resource.MEGACREDITS, partyDelegateCount, {log: true});
         });
         break;
 

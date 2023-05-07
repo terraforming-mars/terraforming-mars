@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {HiTechLab} from '../../../src/server/cards/promo/HiTechLab';
 import {Game} from '../../../src/server/Game';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
@@ -21,7 +21,7 @@ describe('HiTechLab', function() {
   });
 
   it('Should act', function() {
-    player.addResource(Resources.ENERGY, 5);
+    player.addResource(Resource.ENERGY, 5);
     expect(card.canAct(player)).is.true;
 
     const amount = cast(card.action(player), SelectAmount);

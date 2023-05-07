@@ -2,7 +2,7 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {Player} from '../../Player';
@@ -28,7 +28,7 @@ class KelvinistsBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -44,7 +44,7 @@ class KelvinistsBonus02 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.HEAT, this.getScore(player));
+      player.addResource(Resource.HEAT, this.getScore(player));
     });
   }
 }
@@ -73,8 +73,8 @@ class KelvinistsPolicy01 implements Policy {
       {
         title: 'Select how to pay for Turmoil Kelvinists action',
         afterPay: () => {
-          player.production.add(Resources.ENERGY, 1);
-          player.production.add(Resources.HEAT, 1);
+          player.production.add(Resource.ENERGY, 1);
+          player.production.add(Resource.HEAT, 1);
           game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
         },
       },
@@ -117,7 +117,7 @@ class KelvinistsPolicy04 implements Policy {
   readonly isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.addResource(Resources.HEAT, 2);
+    player.addResource(Resource.HEAT, 2);
   }
 }
 

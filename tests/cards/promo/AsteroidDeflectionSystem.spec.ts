@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/AsteroidDeflectionSystem';
 import {Tag} from '../../../src/common/cards/Tag';
 import {testGame} from '../../TestGame';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AsteroidDeflectionSystem', function() {
@@ -19,7 +19,7 @@ describe('AsteroidDeflectionSystem', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

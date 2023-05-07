@@ -6,7 +6,7 @@ import {CeoCard} from './CeoCard';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class Zan extends CeoCard {
   constructor() {
@@ -33,7 +33,7 @@ export class Zan extends CeoCard {
     while (turmoil.getAvailableDelegateCount(player.id) > 0) {
       turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     }
-    player.addResource(Resources.MEGACREDITS, totalDelegatesPlaced, {log: true});
+    player.addResource(Resource.MEGACREDITS, totalDelegatesPlaced, {log: true});
     return undefined;
   }
 }

@@ -5,7 +5,7 @@ export class Capitalist extends BaseMilestone {
   constructor() {
     super(
       'Capitalist',
-      'Have at least 64 M€',
+      'Have 64 M€',
       64);
   }
 

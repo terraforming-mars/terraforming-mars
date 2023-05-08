@@ -7,7 +7,7 @@ export class TerraPioneer extends BaseMilestone {
   constructor() {
     super(
       'Terra Pioneer',
-      'Have 5 tiles on Mars',
+      'Own 5 tiles on Mars',
       5);
   }
 

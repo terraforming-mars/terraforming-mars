@@ -6,7 +6,7 @@ export class Hoverlord extends BaseMilestone {
   constructor() {
     super(
       'Hoverlord',
-      'Having at least 7 floater resources on your cards',
+      'Have 7 floater resources on your cards',
       7);
   }
   public getScore(player: Player): number {

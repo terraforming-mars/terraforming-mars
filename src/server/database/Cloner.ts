@@ -12,18 +12,18 @@ export class Cloner {
     players: Array<Player>,
     firstPlayerIndex: number,
     serialized: SerializedGame): Game {
-    const sourceGameId: GameId = serialized.id;
-    const oldPlayerIds: Array<PlayerId> = serialized.players.map((player) => player.id);
-    const newPlayerIds: Array<PlayerId> = players.map((player) => player.id);
-    if (oldPlayerIds.length !== newPlayerIds.length) {
-      throw new Error(`Failing to clone from a ${oldPlayerIds.length} game ${sourceGameId} to a ${newPlayerIds.length} game.`);
+    const serializedGameId: GameId = serialized.id;
+    const serializedPlayerIds: Array<PlayerId> = serialized.players.map((player) => player.id);
+    const playerIds: Array<PlayerId> = players.map((player) => player.id);
+    if (serializedPlayerIds.length !== playerIds.length) {
+      throw new Error(`Failing to clone from a ${serializedPlayerIds.length} game ${serializedGameId} to a ${playerIds.length} game.`);
     }
-    Cloner.replacePlayerIds(serialized, oldPlayerIds, newPlayerIds);
-    if (oldPlayerIds.length === 1) {
+    Cloner.replacePlayerIds(serialized, serializedPlayerIds, playerIds);
+    if (serializedPlayerIds.length === 1) {
       // The neutral player has a different ID in different games, and yet, it isn't serialized. So it gets a special case.
       Cloner.replacePlayerIds(
         serialized,
-        [GameSetup.neutralPlayerFor(sourceGameId).id],
+        [GameSetup.neutralPlayerFor(serializedGameId).id],
         [GameSetup.neutralPlayerFor(newGameId).id]);
     }
     serialized.id = newGameId;
@@ -32,8 +32,8 @@ export class Cloner {
       this.updatePlayer(players[idx], serialized.players[idx]);
     }
     serialized.first = serialized.players[firstPlayerIndex].id;
-    serialized.clonedGamedId = '#' + sourceGameId;
-
+    serialized.clonedGamedId = '#' + serializedGameId;
+    serialized.createdTimeMs = new Date().getTime();
     const game = Game.deserialize(serialized);
     return game;
   }

@@ -71,7 +71,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   coloniesExtension: false,
   communityCardsOption: false,
   corporateEra: true,
-  corporationsDraft: false,
+  corporationsDraft: true,
   customCeos: [],
   customColoniesList: [],
   customCorporationsList: [],

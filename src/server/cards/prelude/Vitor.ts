@@ -9,6 +9,7 @@ import {IAward} from '../../awards/IAward';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Resource} from '../../../common/Resource';
 
 export class Vitor extends Card implements ICorporationCard {
   constructor() {
@@ -72,6 +73,6 @@ export class Vitor extends Card implements ICorporationCard {
       if (victoryPoints.points <= 0) return;
     }
 
-    player.megaCredits += 3;
+    player.addResource(Resource.MEGACREDITS, 3, {log: true, from: this});
   }
 }

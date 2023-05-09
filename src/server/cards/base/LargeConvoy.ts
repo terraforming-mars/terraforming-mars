@@ -9,7 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {PlayerInput} from '../../PlayerInput';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
@@ -43,7 +43,7 @@ export class LargeConvoy extends Card implements IProjectCard {
     const animalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
-      player.addResource(Resources.PLANTS, 5, {log: true});
+      player.addResource(Resource.PLANTS, 5, {log: true});
       return undefined;
     };
 

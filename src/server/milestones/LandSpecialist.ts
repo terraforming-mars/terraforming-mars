@@ -7,7 +7,7 @@ export class LandSpecialist extends BaseMilestone {
   constructor() {
     super(
       'Land Specialist',
-      'Requires that you have 3 special (normally, brown) tiles in play',
+      'Have 3 special (normally, brown) tiles',
       3);
   }
   public getScore(player: Player): number {

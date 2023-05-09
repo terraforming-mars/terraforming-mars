@@ -11,7 +11,7 @@ import {Phase} from '../src/common/Phase';
 import {addCity, addGreenery, addOcean, cast, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel, testGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
-import {Resources} from '../src/common/Resources';
+import {Resource} from '../src/common/Resource';
 import {ISpace} from '../src/server/boards/ISpace';
 import {SpaceId} from '../src/common/Types';
 import {ResearchNetwork} from '../src/server/cards/prelude/ResearchNetwork';
@@ -77,10 +77,10 @@ describe('Game', () => {
     game.fundAward(player, award);
 
     // Set second player to win Banker award
-    player2.production.add(Resources.MEGACREDITS, 10);
+    player2.production.add(Resource.MEGACREDITS, 10);
 
     // Our testing player will be 2nd Banker in the game
-    player.production.add(Resources.MEGACREDITS, 7);
+    player.production.add(Resource.MEGACREDITS, 7);
 
     // Two other players will share Thermalist award
     award = new Thermalist();
@@ -155,7 +155,6 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-draft', [player, player2], player);
-    game.gameOptions.venusNextExtension = false;
     game.generation = 4;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
@@ -168,7 +167,6 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-classic', [player, player2], player);
-    game.gameOptions.venusNextExtension = false;
     game.generation = 2;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
@@ -180,7 +178,6 @@ describe('Game', () => {
   it('Solo play next generation', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('game-solo', [player], player);
-    game.gameOptions.venusNextExtension = false;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
     expect(game.getGeneration()).to.eq(2);
@@ -189,9 +186,7 @@ describe('Game', () => {
   it('Should not finish game before Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player);
-    game.gameOptions.venusNextExtension = true;
-    game.gameOptions.requiresVenusTrackCompletion = true;
+    const game = Game.newInstance('game-venusterraform', [player, player2], player, {venusNextExtension: true, requiresVenusTrackCompletion: true});
     setTemperature(game, constants.MAX_TEMPERATURE);
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     // setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
@@ -211,9 +206,7 @@ describe('Game', () => {
   it('Should finish game if Mars and Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player);
-    game.gameOptions.venusNextExtension = true;
-    game.gameOptions.requiresVenusTrackCompletion = true;
+    const game = Game.newInstance('game-venusterraform', [player, player2], player, {venusNextExtension: true, requiresVenusTrackCompletion: true});
     setTemperature(game, constants.MAX_TEMPERATURE);
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
@@ -238,9 +231,7 @@ describe('Game', () => {
   it('Should not finish game if Mars is not terraformed but Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player);
-    game.gameOptions.venusNextExtension = true;
-    game.gameOptions.requiresVenusTrackCompletion = true;
+    const game = Game.newInstance('game-venusterraform', [player, player2], player, {venusNextExtension: true, requiresVenusTrackCompletion: true});
     setTemperature(game, 2);
     setOxygenLevel(game, 2);
     setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);

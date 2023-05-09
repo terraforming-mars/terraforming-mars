@@ -3,7 +3,7 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {ISpace} from '../../boards/ISpace';
@@ -39,7 +39,7 @@ class GreensBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -57,7 +57,7 @@ class GreensBonus02 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -69,7 +69,7 @@ class GreensPolicy01 implements Policy {
 
   onTilePlaced(player: Player, space: ISpace) {
     if (Board.isGreenerySpace(space) && player.game.phase === Phase.ACTION) {
-      player.addResource(Resources.MEGACREDITS, 4);
+      player.addResource(Resource.MEGACREDITS, 4);
     }
   }
 }
@@ -80,7 +80,7 @@ class GreensPolicy02 implements Policy {
   readonly isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.addResource(Resources.PLANTS, 1);
+    player.addResource(Resource.PLANTS, 1);
   }
 }
 
@@ -93,7 +93,7 @@ class GreensPolicy03 implements Policy {
     const tags = [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE];
     const tagCount = card.tags.filter((tag) => tags.includes(tag)).length;
 
-    player.addResource(Resources.MEGACREDITS, tagCount * 2);
+    player.addResource(Resource.MEGACREDITS, tagCount * 2);
   }
 }
 
@@ -140,7 +140,7 @@ class GreensPolicy04 implements Policy {
           }
 
           orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm', () => {
-            player.addResource(Resources.PLANTS, 3);
+            player.addResource(Resource.PLANTS, 3);
             game.log('${0} gained 3 plants', (b) => b.player(player));
             return undefined;
           }));

@@ -2,7 +2,7 @@ import {Player} from '../../../Player';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
-import {Resources} from '../../../../common/Resources';
+import {Resource} from '../../../../common/Resource';
 
 export class PowerPlantStandardProject extends StandardProjectCard {
   constructor() {
@@ -34,6 +34,6 @@ export class PowerPlantStandardProject extends StandardProjectCard {
   }
 
   actionEssence(player: Player): void {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
   }
 }

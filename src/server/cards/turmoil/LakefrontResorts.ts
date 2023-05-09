@@ -2,7 +2,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -49,7 +49,7 @@ export class LakefrontResorts extends Card implements ICorporationCard {
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
-        new GainProduction(cardOwner, Resources.MEGACREDITS),
+        new GainProduction(cardOwner, Resource.MEGACREDITS),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }

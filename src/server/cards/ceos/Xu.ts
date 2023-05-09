@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {played, all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {sum} from '../../../common/utils/utils';
 
 export class Xu extends CeoCard {
@@ -33,11 +33,11 @@ export class Xu extends CeoCard {
     const counts = players.map((p: Player) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw'));
 
     const total = sum(counts);
-    player.addResource(Resources.MEGACREDITS, total * 2, {log: true});
+    player.addResource(Resource.MEGACREDITS, total * 2, {log: true});
 
     const maxPlayerVenusTagCount = Math.max(...counts);
     if (maxPlayerVenusTagCount === player.tags.count(Tag.VENUS)) {
-      player.addResource(Resources.MEGACREDITS, 8, {log: true});
+      player.addResource(Resource.MEGACREDITS, 8, {log: true});
     }
 
     return undefined;

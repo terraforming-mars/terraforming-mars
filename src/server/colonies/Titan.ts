@@ -8,7 +8,7 @@ export class Titan extends Colony {
   constructor() {
     super({
       name: ColonyName.TITAN,
-      resourceType: CardResource.FLOATER,
+      cardResource: CardResource.FLOATER,
       buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
       buildQuantity: [3, 3, 3],
       tradeType: ColonyBenefit.ADD_RESOURCES_TO_CARD,

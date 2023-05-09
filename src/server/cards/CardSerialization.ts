@@ -32,6 +32,9 @@ export function serializeProjectCard(c: IProjectCard): SerializedCard {
     if (c.opgActionIsActive !== undefined) {
       result.opgActionIsActive = c.opgActionIsActive;
     }
+    if (c.generationUsed !== undefined) {
+      result.generationUsed = c.generationUsed;
+    }
   }
   return result;
 }
@@ -68,6 +71,9 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
     card.isDisabled = element.isDisabled;
     if (element.opgActionIsActive !== undefined) {
       card.opgActionIsActive = element.opgActionIsActive;
+    }
+    if (element.generationUsed !== undefined) {
+      card.generationUsed = element.generationUsed;
     }
   }
   return card;

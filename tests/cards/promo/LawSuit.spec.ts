@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
 import {testGame} from '../../TestGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
@@ -22,30 +22,30 @@ describe('LawSuit', () => {
 
   it('Cannot play if resource loss is zero', () => {
     player.megaCredits = 0;
-    player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
+    player.addResource(Resource.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.false;
   });
 
   it('Can play if resources removed this turn by other player', () => {
     player.megaCredits = 1;
-    player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
+    player.addResource(Resource.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Cannot play if resources removed by self', () => {
     player.megaCredits = 1;
-    player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player});
+    player.addResource(Resource.MEGACREDITS, -1, {log: true, from: player});
     expect(card.canPlay(player)).is.false;
   });
 
   it('Can play if production decreased this turn by other player', () => {
-    player.production.add(Resources.MEGACREDITS, -1, {log: true, from: player2});
+    player.production.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
-    player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
-    player.production.add(Resources.MEGACREDITS, -1, {log: true, from: player2});
+    player.addResource(Resource.MEGACREDITS, -1, {log: true, from: player2});
+    player.production.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
 
     const play = card.play(player);
     expect(play).instanceOf(SelectPlayer);

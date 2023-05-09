@@ -11,7 +11,7 @@ import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredActi
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 
 export class Philares extends Card implements ICorporationCard {
@@ -88,12 +88,12 @@ export class Philares extends Card implements ICorporationCard {
         ) {
           throw new Error('Need to select ' + resourceCount + ' resource(s)');
         }
-        philaresPlayer.addResource(Resources.MEGACREDITS, megacreditsAmount, {log: true});
-        philaresPlayer.addResource(Resources.STEEL, steelAmount, {log: true});
-        philaresPlayer.addResource(Resources.TITANIUM, titaniumAmount, {log: true});
-        philaresPlayer.addResource(Resources.PLANTS, plantsAmount, {log: true});
-        philaresPlayer.addResource(Resources.ENERGY, energyAmount, {log: true});
-        philaresPlayer.addResource(Resources.HEAT, heatAmount, {log: true});
+        philaresPlayer.addResource(Resource.MEGACREDITS, megacreditsAmount, {log: true});
+        philaresPlayer.addResource(Resource.STEEL, steelAmount, {log: true});
+        philaresPlayer.addResource(Resource.TITANIUM, titaniumAmount, {log: true});
+        philaresPlayer.addResource(Resource.PLANTS, plantsAmount, {log: true});
+        philaresPlayer.addResource(Resource.ENERGY, energyAmount, {log: true});
+        philaresPlayer.addResource(Resource.HEAT, heatAmount, {log: true});
         return undefined;
       }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
     selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';

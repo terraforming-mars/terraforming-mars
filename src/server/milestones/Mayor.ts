@@ -5,7 +5,7 @@ export class Mayor extends BaseMilestone {
   constructor() {
     super(
       'Mayor',
-      'Owning at least 3 city tiles',
+      'Own 3 city tiles',
       3);
   }
   public getScore(player: Player): number {

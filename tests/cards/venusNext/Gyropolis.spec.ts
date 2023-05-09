@@ -4,7 +4,7 @@ import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork
 import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
@@ -28,7 +28,7 @@ describe('Gyropolis', function() {
     const lunaGoveror = new LunaGovernor();
 
     player.playedCards.push(researchNetwork, lunaGoveror);
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
 
     expect(player.simpleCanPlay(card)).is.true;
     expect(card.play(player)).is.undefined;

@@ -5,7 +5,7 @@ export class Diversifier extends BaseMilestone {
   constructor() {
     super(
       'Diversifier',
-      'Requires that you have 8 different tags in play',
+      'Have 8 different tags',
       8);
   }
   public getScore(player: Player): number {

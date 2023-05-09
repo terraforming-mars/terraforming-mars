@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MagneticFieldDome} from '../../../src/server/cards/base/MagneticFieldDome';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
@@ -18,7 +18,7 @@ describe('MagneticFieldDome', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

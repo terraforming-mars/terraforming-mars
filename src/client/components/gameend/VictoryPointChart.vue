@@ -10,6 +10,7 @@ import Vue from 'vue';
 import {Chart, registerables} from 'chart.js';
 import {Color} from '@/common/Color';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {translateText} from '@/client/directives/i18n';
 
 Chart.register(...registerables);
 Chart.defaults.font.size = 20;
@@ -93,7 +94,7 @@ export default Vue.extend({
             maintainAspectRatio: false,
             scales: {
               y: {
-                title: {text: 'Victory Points', display: true},
+                title: {text: translateText('Victory Points'), display: true},
                 grid: {
                   color: (ctx) => {
                     return ctx.tick.value % 10 === 0 ? 'lightgray' : 'rgb(90, 90, 90)';
@@ -111,7 +112,7 @@ export default Vue.extend({
                 },
               },
               x: {
-                title: {text: 'Generation', display: true},
+                title: {text: translateText('Generation'), display: true},
                 offset: true,
               },
             },

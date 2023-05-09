@@ -39,5 +39,12 @@
     "Main Board": "Карта Марса",
     "Players Overview Table": "Игроки",
     "Cards in Hand": "Карты в руке",
-    "Colonies": "Колонии"
+    "Colonies": "Колонии",
+		
+    "Game Iconology": "Иконология игры",
+    "Game Phases": "Фазы игры",
+    "Hot Keys" : "Горячие клавиши",
+    "Fan Expansion Tags": "Метки фанатских дополнений",
+    "Standard Projects from Expansions and Solo Mode": "Стандартные ресурсы из дополнений и соло-режима",
+    "Standard Project from Fan-made Expansions": "Стандартные ресурсы из фанатских дополнений"
 }

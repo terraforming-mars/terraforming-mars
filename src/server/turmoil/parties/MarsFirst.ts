@@ -3,7 +3,7 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
@@ -33,7 +33,7 @@ class MarsFirstBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -50,7 +50,7 @@ class MarsFirstBonus02 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -62,7 +62,7 @@ class MarsFirstPolicy01 implements Policy {
 
   onTilePlaced(player: Player, space: ISpace) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
-      player.addResource(Resources.STEEL, 1);
+      player.addResource(Resource.STEEL, 1);
     }
   }
 }
@@ -73,7 +73,7 @@ class MarsFirstPolicy02 implements Policy {
   readonly isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tag.BUILDING)) player.addResource(Resources.MEGACREDITS, 2);
+    if (card.tags.includes(Tag.BUILDING)) player.addResource(Resource.MEGACREDITS, 2);
   }
 }
 

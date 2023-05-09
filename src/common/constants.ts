@@ -67,6 +67,7 @@ export const LANGUAGES2 = {
   br: 'Português Brasileiro',
   it: 'Italiano',
   ko: '한국어',
+  nl: 'Nederlands',
 };
 
 export const LANGUAGES = [
@@ -80,6 +81,7 @@ export const LANGUAGES = [
   {'id': 'br', 'title': 'Português Brasileiro'},
   {'id': 'it', 'title': 'Italiano'},
   {'id': 'ko', 'title': '한국어'},
+  {'id': 'nl', 'title': 'Nederlands'},
 ];
 
 export const APP_NAME = 'Terraforming Mars';

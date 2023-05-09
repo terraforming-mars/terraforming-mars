@@ -9,6 +9,7 @@ export type SerializedCard = {
   isDisabled?: boolean; // For Pharmacy Union and CEO Cards.
   name: CardName;
   opgActionIsActive?: boolean; // For CEO Cards.
+  generationUsed?: number; // For CEO Cards.
   resourceCount?: number;
   targetCards?: Array<SerializedRobotCard>;
 }

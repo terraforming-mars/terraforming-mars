@@ -32,11 +32,11 @@ export class SQLite implements IDatabase {
     await this.asyncRun('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participant varchar, PRIMARY KEY (game_id, participant))');
     await this.asyncRun('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
     await this.asyncRun(
-      `CREATE TABLE IF NOT EXISTS purges(
-        game_id varchar not null,
-        last_save_id number not null,
-        completed_time timestamp not null default (strftime('%s', 'now')),
-        PRIMARY KEY (game_id))`);
+      `CREATE TABLE IF NOT EXISTS completed_game(
+      game_id varchar not null,
+      completed_time timestamp not null default (strftime('%s', 'now')),
+      PRIMARY KEY (game_id))`);
+    await this.asyncRun('DROP TABLE IF EXISTS purges');
   }
 
   public async getPlayerCount(gameId: GameId): Promise<number> {
@@ -129,25 +129,23 @@ export class SQLite implements IDatabase {
     return row.save_id;
   }
 
-  async cleanGame(gameId: GameId): Promise<void> {
-    try {
-      const saveId = await this.getMaxSaveId(gameId);
-      // Purges isn't used yet
-      await this.asyncRun('INSERT into purges (game_id, last_save_id) values (?, ?)', [gameId, saveId]);
-      // DELETE all saves except initial and last one
-      await this.asyncRun('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, saveId]);
-      await this.asyncRun('UPDATE games SET status = \'finished\' WHERE game_id = ?', [gameId]);
-      await this.purgeUnfinishedGames();
-    } catch (err) {
-      console.error(`SQLite: cleanGame for ${gameId} ` + err);
-    }
+  async markFinished(gameId: GameId): Promise<void> {
+    const promise1 = this.asyncRun('INSERT into completed_game (game_id) values (?)', [gameId]);
+    const promise2 = this.asyncRun('UPDATE games SET status = \'finished\' WHERE game_id = ?', [gameId]);
+    const promise3 = this.maintenance();
+    await Promise.all([promise1, promise2, promise3]);
+  }
+
+
+  maintenance(): Promise<unknown> {
+    return Promise.all([this.purgeUnfinishedGames(), this.compressCompletedGames()]);
   }
 
   async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays !== undefined) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
-      const selectResult = await this.asyncAll('SELECT distinct game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
+      const selectResult = await this.asyncAll('SELECT DISTINCT game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
       const gameIds = selectResult.map((row) => row.game_id);
       if (gameIds.length > 0) {
         console.log(`About to purge ${gameIds.length} games`);
@@ -160,6 +158,32 @@ export class SQLite implements IDatabase {
     } else {
       return Promise.resolve();
     }
+  }
+
+  async compressCompletedGames(compressCompletedGamesDays: string | undefined = process.env.COMPRESS_COMPLETED_GAMES_DAYS): Promise<void> {
+    if (compressCompletedGamesDays === undefined) {
+      return;
+    }
+    const dateToSeconds = daysAgoToSeconds(compressCompletedGamesDays, 0);
+    const selectResult = await this.asyncAll('SELECT DISTINCT game_id FROM completed_game WHERE completed_time < ?', [dateToSeconds]);
+    const gameIds = selectResult.map((row) => row.game_id);
+    console.log(`${gameIds.length} completed games to be compressed.`);
+    if (gameIds.length > 1000) {
+      gameIds.length = 1000;
+      console.log('Compressing 1000 games.');
+    }
+    for (const gameId of gameIds) {
+      // This isn't using await because nothing really depends on it.
+      this.compressCompletedGame(gameId);
+    }
+  }
+
+  async compressCompletedGame(gameId: GameId): Promise<RunResult> {
+    const maxSaveId = await this.getMaxSaveId(gameId);
+    return this.asyncRun('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, maxSaveId])
+      .then(() => {
+        return this.asyncRun('DELETE FROM completed_games where game_id = ?', [gameId]);
+      });
   }
 
   async saveGame(game: Game): Promise<void> {
@@ -225,7 +249,7 @@ export class SQLite implements IDatabase {
     return result;
   }
 
-  private asyncRun(sql: string, params?: any): Promise<RunResult> {
+  protected asyncRun(sql: string, params?: any): Promise<RunResult> {
     return new Promise((resolve, reject) => {
       // It is intentional that this is declared `function` and that the first
       // parameter is `this`.
@@ -247,7 +271,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  private asyncGet(sql: string, params?: any): Promise<any> {
+  protected asyncGet(sql: string, params?: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db.get(sql, params, function(err: Error | null, row: any) {
         if (err) {
@@ -259,7 +283,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  private asyncAll(sql: string, params?: any): Promise<Array<any>> {
+  protected asyncAll(sql: string, params?: any): Promise<Array<any>> {
     return new Promise((resolve, reject) => {
       this.db.all(sql, params, function(err, rows: Array<any>) {
         if (err) {
@@ -272,7 +296,7 @@ export class SQLite implements IDatabase {
   }
 
   // Run the given SQL but do not return errors.
-  private async runQuietly(sql: string, params: any): Promise<void> {
+  protected async runQuietly(sql: string, params: any): Promise<void> {
     try {
       await this.asyncRun(sql, params);
     } catch (err) {

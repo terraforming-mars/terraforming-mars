@@ -9,7 +9,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {PlayerInput} from '../../PlayerInput';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
@@ -44,7 +44,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
-      player.addResource(Resources.PLANTS, 3, {log: true});
+      player.addResource(Resource.PLANTS, 3, {log: true});
       return undefined;
     };
 

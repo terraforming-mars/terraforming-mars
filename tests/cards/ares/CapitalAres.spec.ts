@@ -4,10 +4,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -18,7 +17,7 @@ describe('CapitalAres', function() {
 
   beforeEach(function() {
     card = new CapitalAres();
-    [game, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Should play', function() {
@@ -26,7 +25,7 @@ describe('CapitalAres', function() {
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

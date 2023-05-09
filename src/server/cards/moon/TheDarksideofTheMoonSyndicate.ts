@@ -8,7 +8,7 @@ import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MultiSet} from 'mnemonist';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
@@ -68,7 +68,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
         const game = player.game;
         for (const p of game.getPlayers()) {
           if (p === player) continue;
-          p.stealResource(Resources.MEGACREDITS, 2, player);
+          p.stealResource(Resource.MEGACREDITS, 2, player);
         }
         return undefined;
       }));
@@ -103,8 +103,8 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
         // TODO(kberg): Create a Game.steal method that manages this, both here
         // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.addResource(Resources.MEGACREDITS, adjustedQuantity, {log: true});
-        target.deductResource(Resources.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
+        activePlayer.addResource(Resource.MEGACREDITS, adjustedQuantity, {log: true});
+        target.deductResource(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
       });
     }
     return undefined;

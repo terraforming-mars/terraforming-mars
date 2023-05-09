@@ -20,7 +20,7 @@
 
 import Vue from 'vue';
 import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '@/common/constants';
-import {Resources} from '@/common/Resources';
+import {Resource} from '@/common/Resource';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Protection} from '@/common/models/PlayerModel';
 
@@ -28,7 +28,7 @@ export default Vue.extend({
   name: 'PlayerResource',
   props: {
     type: {
-      type: String as () => Resources,
+      type: String as () => Resource,
     },
     count: {
       type: Number,
@@ -59,11 +59,11 @@ export default Vue.extend({
       const learnerModeOn = getPreferences().learner_mode;
 
       switch (this.type) {
-      case Resources.STEEL:
+      case Resource.STEEL:
         return learnerModeOn || this.value > DEFAULT_STEEL_VALUE;
-      case Resources.TITANIUM:
+      case Resource.TITANIUM:
         return learnerModeOn || this.value > DEFAULT_TITANIUM_VALUE;
-      case Resources.HEAT:
+      case Resource.HEAT:
         return this.value > 0;
       default:
         return false;

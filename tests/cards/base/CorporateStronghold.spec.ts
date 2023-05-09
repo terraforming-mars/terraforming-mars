@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CorporateStronghold} from '../../../src/server/cards/base/CorporateStronghold';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -22,7 +22,7 @@ describe('CorporateStronghold', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     expect(card.play(player)).is.undefined;

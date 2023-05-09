@@ -45,10 +45,6 @@ export class TestPlayer extends Player {
 
   public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
 
-  public override runInput(input: InputResponse, pi: PlayerInput): void {
-    super.runInput(input, pi);
-  }
-
   public purse(): Units {
     return Units.of({
       megacredits: this.megaCredits,
@@ -58,6 +54,19 @@ export class TestPlayer extends Player {
       energy: this.energy,
       heat: this.heat,
     });
+  }
+
+  public setResourcesForTest(units: Units) {
+    this.megaCredits = units.megacredits;
+    this.steel = units.steel;
+    this.titanium = units.titanium;
+    this.plants = units.plants;
+    this.energy = units.energy;
+    this.heat = units.heat;
+  }
+
+  public override runInput(input: InputResponse, pi: PlayerInput): void {
+    super.runInput(input, pi);
   }
 
   public popWaitingFor2(): [PlayerInput | undefined, (() => void) | undefined] {

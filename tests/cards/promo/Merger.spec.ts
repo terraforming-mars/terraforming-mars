@@ -26,15 +26,24 @@ import {Viron} from '../../../src/server/cards/venusNext/Viron';
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
 import {testGame} from '../../TestGame';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
+import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
+import {AgricolaInc} from '../../../src/server/cards/community/AgricolaInc';
+import {LunaTradeFederation} from '../../../src/server/cards/moon/LunaTradeFederation';
+import {ProjectWorkshop} from '../../../src/server/cards/community/ProjectWorkshop';
+import {Units} from '../../../src/common/Units';
+import {LunaFirstIncorporated} from '../../../src/server/cards/moon/LunaFirstIncorporated';
+import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
+import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {PhoboLog} from '../../../src/server/cards/corporation/PhoboLog';
 
 describe('Merger', function() {
-  let card: Merger;
+  let merger: Merger;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
-    card = new Merger();
+    merger = new Merger();
     [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
 
     // Preset corporation deck for testing
@@ -48,39 +57,39 @@ describe('Merger', function() {
   it('Can play as long as have enough M€', function() {
     player.corporations.push(new BeginnerCorporation()); // Vestigial corporation
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
 
     expect(enabledMap(selectCorp)).to.have.deep.members(
       [
-        ['Arcadian Communities', true],
-        ['Saturn Systems', true],
-        ['Polyphemos', true],
-        ['Terralabs Research', true],
+        [CardName.ARCADIAN_COMMUNITIES, true],
+        [CardName.SATURN_SYSTEMS, true],
+        [CardName.POLYPHEMOS, true],
+        [CardName.TERRALABS_RESEARCH, true],
       ]);
   });
 
   it('Excludes corps that player cannot afford', function() {
     player.megaCredits = 27;
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
     expect(enabledMap(selectCorp)).to.have.deep.members(
       [
-        ['Arcadian Communities', true],
-        ['Saturn Systems', true],
-        ['Polyphemos', true],
-        ['Terralabs Research', false],
+        [CardName.ARCADIAN_COMMUNITIES, true],
+        [CardName.SATURN_SYSTEMS, true],
+        [CardName.POLYPHEMOS, true],
+        [CardName.TERRALABS_RESEARCH, false],
       ]);
   });
 
   it('Can play as long as have enough M€', function() {
     player.corporations = [new BeginnerCorporation()]; // Vestigial corporation
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -94,7 +103,7 @@ describe('Merger', function() {
 
   it('Player has 2 corps after playing Merger', function() {
     player.corporations.push(new Splice());
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -118,7 +127,7 @@ describe('Merger', function() {
 
   it('Confirming that Cheung Shing Mars works', function() {
     player.corporations.push(new Splice());
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -135,7 +144,7 @@ describe('Merger', function() {
   it('Works with Terralabs played via Merger', function() {
     player.corporations = [new BeginnerCorporation()]; // Vestigial corporation
     player.megaCredits = 50; // Ensure enough to pay for Merger cost
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -146,7 +155,7 @@ describe('Merger', function() {
 
   it('Works with Polyphemos played via Merger', function() {
     player.corporations = [new BeginnerCorporation()];
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -173,7 +182,7 @@ describe('Merger', function() {
   it('Works with Terralabs first', function() {
     player.playCorporationCard(new TerralabsResearch());
     player.megaCredits = 50; // Ensure enough to pay for Merger cost
-    card.play(player);
+    merger.play(player);
     expect(player.cardCost).to.eq(1);
     runAllActions(game);
 
@@ -186,7 +195,7 @@ describe('Merger', function() {
     player.playCorporationCard(new TharsisRepublic());
     expect(player.pendingInitialActions).has.length(1);
 
-    card.play(player);
+    merger.play(player);
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -210,7 +219,7 @@ describe('Merger', function() {
     player.playCorporationCard(helion);
     expect(player.megaCredits).eq(helion.startingMegaCredits - 6);
 
-    card.play(player);
+    merger.play(player);
 
     runAllActions(game);
 
@@ -247,5 +256,91 @@ describe('Merger', function() {
     player.playAdditionalCorporationCard(new Viron());
     runAllActions(game);
     expect(player.production.megacredits).eq(1);
+  });
+
+  describe('Mergability outliers for weird cases', () => {
+    function testMergability(currentCorp: ICorporationCard | [ICorporationCard, ICorporationCard], candidate: ICorporationCard, megacredits: number, pass: boolean) {
+      const corporations = Array.isArray(currentCorp) ? currentCorp : [currentCorp];
+      const corpNames = corporations.map((c) => c.name).join(', ');
+
+      it(`(${corpNames}, ${candidate.name}, ${megacredits})`, () => {
+        [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+        player.playCorporationCard(corporations[0]);
+        if (corporations.length > 1) {
+          player.playAdditionalCorporationCard(corporations[1]);
+        }
+        game.corporationDeck.drawPile.push(candidate);
+
+        player.setResourcesForTest(Units.of({megacredits})); // Clear all resources but MC.
+        merger.play(player);
+        runAllActions(game);
+
+        const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
+        const idx = selectCorp.cards.findIndex((c) => c.name === candidate.name);
+        const enabled = selectCorp.config.enabled![idx];
+        expect(enabled).eq(pass);
+      });
+    }
+
+    const beginnerCorp = new BeginnerCorporation();
+    const manutech = new Manutech();
+    const agricolaInc = new AgricolaInc();
+    const lunaTradeFederation = new LunaTradeFederation();
+    const projectWorkshop = new ProjectWorkshop();
+    const lunaFirstIncorporated = new LunaFirstIncorporated();
+    const theGrandLunaCapitalGroup = new TheGrandLunaCapitalGroup();
+    const chimera = new Chimera();
+    const phobolog = new PhoboLog();
+    const pointLuna = new PointLuna();
+
+    // Agricola, Inc: 40MC and 1 MC production.
+    testMergability(beginnerCorp, agricolaInc, 1, false);
+    testMergability(beginnerCorp, agricolaInc, 2, true);
+    testMergability(manutech, agricolaInc, 0, false);
+    testMergability(manutech, agricolaInc, 1, true);
+
+    // Project Workshop: 39MC and 1 titanium.
+    // Luna Trade Federation: titanium = 2MC each
+    testMergability(beginnerCorp, projectWorkshop, 2, false);
+    testMergability(beginnerCorp, projectWorkshop, 3, true);
+    testMergability(lunaTradeFederation, projectWorkshop, 0, false);
+    testMergability(lunaTradeFederation, projectWorkshop, 1, true);
+
+    // Luna First Incorporated: 40MC and 1 titanium.
+    testMergability(beginnerCorp, lunaFirstIncorporated, 1, false);
+    testMergability(beginnerCorp, lunaFirstIncorporated, 2, true);
+    testMergability(lunaTradeFederation, lunaFirstIncorporated, 0, true);
+
+    // The Grand Luna Capital Group: 32MC and 1 titanium
+    testMergability(beginnerCorp, theGrandLunaCapitalGroup, 9, false);
+    testMergability(beginnerCorp, theGrandLunaCapitalGroup, 10, true);
+    testMergability(lunaTradeFederation, theGrandLunaCapitalGroup, 7, false);
+    testMergability(lunaTradeFederation, theGrandLunaCapitalGroup, 8, true);
+
+    // Chimera: 36MC and 1 titanium
+    testMergability(beginnerCorp, chimera, 5, false);
+    testMergability(beginnerCorp, chimera, 6, true);
+    testMergability(lunaTradeFederation, chimera, 3, false);
+    testMergability(lunaTradeFederation, chimera, 4, true);
+
+    // Luna Trade Federation: 15MC and 10 titanium
+    testMergability(beginnerCorp, lunaTradeFederation, 6, false);
+    testMergability(beginnerCorp, lunaTradeFederation, 7, true);
+
+    // Phobolog: 23 MC, 10 titanium and +1 titanium value.
+    testMergability(beginnerCorp, phobolog, 0, false);
+    testMergability(lunaTradeFederation, phobolog, 0, true);
+    testMergability(phobolog, lunaTradeFederation, 0, true);
+
+    // Point Luna: 38MC 1 titanium production.
+    testMergability(beginnerCorp, pointLuna, 3, false);
+    testMergability(beginnerCorp, pointLuna, 4, true);
+    testMergability(lunaTradeFederation, pointLuna, 3, false);
+    testMergability(lunaTradeFederation, pointLuna, 4, true);
+    // Combo. The titanium production provides 2 more MC.
+    testMergability([lunaTradeFederation, manutech], pointLuna, 1, false);
+    testMergability([lunaTradeFederation, manutech], pointLuna, 3, true);
+
+    // Robin Haulings: 39MC, add 1 floater to any card. (Helion + X)
   });
 });

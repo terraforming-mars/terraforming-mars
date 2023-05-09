@@ -1,4 +1,4 @@
-import {Resources} from '../Resources';
+import {Resource} from '../Resource';
 import {PartyName} from '../turmoil/PartyName';
 import {RequirementType} from './RequirementType';
 import {Tag} from './Tag';
@@ -15,7 +15,7 @@ export interface IPartyCardRequirement extends ICardRequirement {
 }
 
 export interface IProductionCardRequirement extends ICardRequirement {
-  resource: Resources;
+  resource: Resource;
 }
 
 export interface ITagCardRequirement extends ICardRequirement {

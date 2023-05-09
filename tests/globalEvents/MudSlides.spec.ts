@@ -16,9 +16,8 @@ describe('MudSlides', function() {
 
   beforeEach(() => {
     card = new MudSlides();
-    [game, player] = testGame(2);
-    turmoil = Turmoil.newInstance(game);
-    turmoil.initGlobalEvent(game);
+    [game, player] = testGame(2, {turmoilExtension: true, aresExtension: true});
+    turmoil = Turmoil.getTurmoil(game);
   });
 
   it('resolve play', function() {
@@ -58,7 +57,6 @@ describe('MudSlides', function() {
       tileType: TileType.OCEAN_CITY,
       covers: spaces.second.tile,
     };
-    game.gameOptions.aresExtension = true;
     player.game.addTile(player, spaces.second, tile);
 
     player.megaCredits = 10;

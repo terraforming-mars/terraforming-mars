@@ -8,7 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -60,7 +60,7 @@ export class Flooding extends Card implements IProjectCard {
               'Select adjacent player to remove 4 M€ from',
               'Remove credits',
               (selectedPlayer: Player) => {
-                selectedPlayer.deductResource(Resources.MEGACREDITS, 4, {log: true, from: player});
+                selectedPlayer.deductResource(Resource.MEGACREDITS, 4, {log: true, from: player});
                 return undefined;
               },
             ),

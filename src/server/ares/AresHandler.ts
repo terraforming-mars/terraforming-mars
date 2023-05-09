@@ -33,14 +33,14 @@ export class AresHandler {
     }
   }
 
-  public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace, isTileBeingPlaced = true) {
+  public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace) {
     let incrementMilestone = false;
-    player.game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-      incrementMilestone = this.earnAdacencyBonus(adjacentSpace, player, isTileBeingPlaced);
-    });
-    if (incrementMilestone && isTileBeingPlaced) {
-      const milestoneResults = aresData.milestoneResults;
-      const entry : MilestoneCount | undefined = milestoneResults.find((e) => e.id === player.id);
+    for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
+      const grantedBonus = this.earnAdacencyBonus(adjacentSpace, player);
+      incrementMilestone ||= grantedBonus;
+    }
+    if (incrementMilestone) {
+      const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
       if (entry === undefined) {
         throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
       }
@@ -50,7 +50,7 @@ export class AresHandler {
 
   // |player| placed a tile next to |adjacentSpace|.
   // Returns true if the adjacent space contains a bonus for adjacency.
-  private static earnAdacencyBonus(adjacentSpace: ISpace, player: Player, adjacentTileOwnerGainsBonus = true): boolean {
+  private static earnAdacencyBonus(adjacentSpace: ISpace, player: Player, adjacentTileOwnerGainsBonus: boolean = true): boolean {
     if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
       return false;
     }
@@ -145,6 +145,14 @@ export class AresHandler {
 
     default:
       return HazardSeverity.NONE;
+    }
+  }
+
+  // A light version of `earnAdjacencyBonuses` but does not increment the milestone,
+  // and does not grant the 1MC bonus for ares tile owners.
+  public static earnAdjacencyBonusesForGaia(player: Player, space: ISpace) {
+    for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
+      this.earnAdacencyBonus(adjacentSpace, player, false);
     }
   }
 

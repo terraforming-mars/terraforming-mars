@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -36,7 +36,7 @@ export class QuantumCommunications extends Card implements IProjectCard {
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;
     });
-    player.production.add(Resources.MEGACREDITS, coloniesCount, {log: true});
+    player.production.add(Resource.MEGACREDITS, coloniesCount, {log: true});
     return undefined;
   }
 }

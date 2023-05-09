@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardResource} from '../../../common/CardResource';
@@ -40,9 +40,9 @@ export class SolarStorm extends Card implements IProjectCard {
       if (!p.plantsAreProtected()) {
         // Botanical Experience reduces the impact in half.
         if (p.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
-          p.deductResource(Resources.PLANTS, 1, {log: true, from: player});
+          p.deductResource(Resource.PLANTS, 1, {log: true, from: player});
         } else {
-          p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
+          p.deductResource(Resource.PLANTS, 2, {log: true, from: player});
         }
       }
     }

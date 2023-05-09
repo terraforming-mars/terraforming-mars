@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -52,6 +52,6 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
     player.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonHabitatTile(player));
-    player.production.add(Resources.MEGACREDITS, 1, {log: true});
+    player.production.add(Resource.MEGACREDITS, 1, {log: true});
   }
 }

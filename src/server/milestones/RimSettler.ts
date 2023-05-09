@@ -1,14 +1,15 @@
-import {IMilestone} from './IMilestone';
+import {BaseMilestone} from './IMilestone';
 import {Player} from '../Player';
 import {Tag} from '../../common/cards/Tag';
 
-export class RimSettler implements IMilestone {
-  public readonly name = 'Rim Settler';
-  public readonly description = 'Requires that you have 3 Jovian tags';
+export class RimSettler extends BaseMilestone {
+  constructor() {
+    super(
+      'Rim Settler',
+      'Have 3 Jovian tags',
+      3);
+  }
   public getScore(player: Player): number {
     return player.tags.count(Tag.JOVIAN, 'milestone');
-  }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 3;
   }
 }

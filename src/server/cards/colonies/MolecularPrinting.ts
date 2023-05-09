@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 
 export class MolecularPrinting extends Card implements IProjectCard {
@@ -34,7 +34,7 @@ export class MolecularPrinting extends Card implements IProjectCard {
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;
     });
-    player.addResource(Resources.MEGACREDITS, player.game.getCitiesCount() + coloniesCount, {log: true});
+    player.addResource(Resource.MEGACREDITS, player.game.getCitiesCount() + coloniesCount, {log: true});
     return undefined;
   }
 }

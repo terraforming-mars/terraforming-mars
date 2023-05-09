@@ -8,6 +8,7 @@ import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('ValuableGases', function() {
   let card: ValuableGases;
@@ -22,11 +23,11 @@ describe('ValuableGases', function() {
     card = new ValuableGases();
     [/* skipped */, player] = testGame(1);
 
-    // Floating Habs is active, has floaters, and requires 2 science
+    // Floating Habs is active, has floaters, requires 2 science, and costs 20
     floatingHabs = new FloatingHabs();
-    // Jovian Lanters is active, has floaters, and requires a jovian tag
+    // Jovian Lanters is active, has floaters, requires a jovian tag, but costs 20
     jovianLanters = new JovianLanterns();
-    // Local Shading has floaters and no requirements
+    // Local Shading has floaters and no requirements. Costs 4.
     localShading = new LocalShading();
     // Air Raid is not a floater card
     airRaid = new AirRaid();
@@ -36,15 +37,12 @@ describe('ValuableGases', function() {
   it('Should play', function() {
     expect(player.getPlayableCards()).is.empty;
 
-    // Using playCard instead because playCard impacts lastCardPlayed.
-    player.playCard(card);
+    card.play(player);
 
     runAllActions(player.game);
 
-    const input = player.popWaitingFor();
-
-    const selectProjectCardToPlay = cast(input, SelectProjectCardToPlay);
-    expect(selectProjectCardToPlay.cards).has.members([localShading]);
+    const selectProjectCardToPlay = cast(player.popWaitingFor(), SelectProjectCardToPlay);
+    expect(selectProjectCardToPlay.cards.map((card) => card.name)).has.members([CardName.LOCAL_SHADING, CardName.FLOATING_HABS]);
     expect(player.megaCredits).eq(10);
 
     selectProjectCardToPlay.cb(localShading, {

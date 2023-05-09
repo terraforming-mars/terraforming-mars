@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Phase} from '../../../common/Phase';
 
 export class Greta extends CeoCard {
@@ -36,7 +36,7 @@ export class Greta extends CeoCard {
     const game = player.game;
     if (this.opgActionIsActive === true && this.effectTriggerCount < 10) {
       if (player === cardOwner && game.phase === Phase.ACTION) {
-        player.addResource(Resources.MEGACREDITS, 4, {log: true});
+        player.addResource(Resource.MEGACREDITS, 4, {log: true});
         this.effectTriggerCount++;
       }
     }

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CloudSeeding} from '../../../src/server/cards/base/CloudSeeding';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -20,13 +20,13 @@ describe('CloudSeeding', () => {
 
   it('Cannot play if cannot reduce M€ production', () => {
     maxOutOceans(player, 3);
-    player.production.add(Resources.MEGACREDITS, -5);
+    player.production.add(Resource.MEGACREDITS, -5);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Cannot play if ocean requirements not met', () => {
     maxOutOceans(player, 2);
-    player.production.add(Resources.HEAT, 1);
+    player.production.add(Resource.HEAT, 1);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
@@ -37,14 +37,14 @@ describe('CloudSeeding', () => {
 
   it('Can play', () => {
     maxOutOceans(player, 3);
-    player.production.add(Resources.MEGACREDITS, -4);
-    player.production.add(Resources.HEAT, 1);
+    player.production.add(Resource.MEGACREDITS, -4);
+    player.production.add(Resource.HEAT, 1);
     expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play - auto select if single target', () => {
     // Meet requirements
-    player2.production.add(Resources.HEAT, 1);
+    player2.production.add(Resource.HEAT, 1);
     maxOutOceans(player, 3);
     expect(player.simpleCanPlay(card)).is.true;
 
@@ -58,8 +58,8 @@ describe('CloudSeeding', () => {
   });
 
   it('Should play - multiple targets', () => {
-    player.production.add(Resources.HEAT, 1);
-    player2.production.add(Resources.HEAT, 1);
+    player.production.add(Resource.HEAT, 1);
+    player2.production.add(Resource.HEAT, 1);
 
     card.play(player);
     expect(player.production.megacredits).to.eq(-1);

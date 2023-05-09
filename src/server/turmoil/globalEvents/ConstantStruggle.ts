@@ -4,7 +4,7 @@ import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventN
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -29,7 +29,7 @@ export class ConstantStruggle extends GlobalEvent implements IGlobalEvent {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const influence = turmoil.getPlayerInfluence(player);
       const deducted = Math.max(10 - influence, 0);
-      player.deductResource(Resources.MEGACREDITS, deducted, {log: true, from: this.name});
+      player.deductResource(Resource.MEGACREDITS, deducted, {log: true, from: this.name});
     });
     PathfindersExpansion.raiseTrackForGlobalEvent(Tag.VENUS, this.name, game, 2, false);
     PathfindersExpansion.raiseTrackForGlobalEvent(Tag.EARTH, this.name, game, 2, false);

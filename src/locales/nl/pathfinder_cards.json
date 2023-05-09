@@ -1,0 +1,247 @@
+{
+    "Advanced Power Grid": "Geavanceerd elektriciteitsnet",
+    "(Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.)": "(Verhoog je energieproductie met 2. Verhoog je M€-productie met 1 voor elk energiesymbool dat je hebt (inclusief deze).)",
+
+    "Agro-Drones": "Agrarische drones",
+    "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "(ACTIE: Verbruik 1 staal en 1 energie om 3 planten te krijgen.)",
+    "(Requires -18° C or warmer.)": "(Vereist een temperatuur van -18 °C of warmer.)",
+
+    "Anthozoa": "Anthozoa",
+    "(Action: Spend 1 plant to add an animal to this card.)": "(ACTIE: Verbruik 1 plant om 1 dier aan deze kaart toe te voegen.)",
+    "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "(Vereist 3 oceaantegels. 1 OP voor elke 2 dieren op deze kaart.)",
+
+    "Asteroid Resources": "Asteroïde grondstoffen",
+    "(Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.)": "(Verbruik 3 energie. Verhoog je staal- en titaniumproductie met 1 OF plaats een oceaantegel en ontvang 2 staal en 1 titanium.)",
+
+    "Botanical Experience": "Botanische expertise",
+    "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) (EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) (EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(EFFECT: Telkens wanneer een groentegel wordt geplaatst, voeg je 1 data toe aan deze kaart.) (EFFECT: Als er 3 data op deze kaart staan, verwijder je ze om je plantproductie met 1 te verhogen.) (EFFECT: Spelers mogen je planten verwijderen, maar je verliest slechts de helft, afgerond naar boven.)",
+    "(Requires one greenery tile on Mars.)": "(Vereist 1 groentegel op Mars.)",
+
+    "Breeding Farms": "Fokkerijen",
+    "(Action: Spend 1 plant to add 1 animal to ANY card.)": "(ACTIE: Verbruik 1 plant om 1 dier toe te voegen aan een willekeurige kaart.)",
+    "(Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.)": "(Vereist 1 wetenschaps- en 1 diersymbool. Verhoog de temperatuur met 2 °C.)",
+
+    "Cassini Station": "Cassini-ruimtestation",
+    "(Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.)": "(Verhoog je energieproductie met 1 voor elke kolonie in het spel. Voeg 2 floaters OF 3 data toe aan een willekeurige kaart.)",
+
+    "Ceres Spaceport": "Ceres ruimtehaven",
+    "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "(Trek 1 kaart. Plaats een stadstegel op het gereserveerde gebied. Plaats een oceaantegel. Verhoog je titanium-productie met 1 voor elke 2 Jupiter-symbolen die je bezit (inclusief deze). Verhoog je M€-productie met 2.)",
+
+    "Charity Donation": "Kaarten doneren",
+    "Reveal cards from the deck equal to the player count plus 1.": "Trek 1 kaart meer dan er spelers in het spel zijn en leg open op tafel.",
+    "In player order starting with you, each player takes one card in hand. Discard the remaining card.": "In spelersvolgorde beginnend met jou, neemt elke speler één kaart op hand. Leg de resterende kaart af.",
+
+    "Communication Center": "Communicatiecentrum",
+    "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "(EFFECT: Telkens wanneer een gebeurteniskaart wordt gespeeld, voegt u 1 data toe aan die kaart.)",
+    "(Effect: Remove 3 data to draw a card automatically.)": "(Effect: verwijder 3 data om een kaart te trekken.)",
+    "(Decrease your energy production 1 step. Place 2 data on this card.)": "(Verlaag je energieproductie met 1. Voeg 2 data toe aan deze kaart.)",
+
+    "Controlled Bloom": "Gecontroleerde bloei",
+    "(Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.)": "(Vereist 3 oceaantegels. Voeg 3 microben toe aan een kaart. Ontvang 3 planten.)",
+
+    "Coordinated Raid": "Gecoördineerde inval",
+    "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(Vereist 1 kolonie in het spel. Verplaats een van je ongebruikte handelsvloten naar een willekeurige kolonietegel (inclusief een die al bezet is). Ontvang de handels- en koloniebonus voor elke kolonie daar. Andere spelers ontvangen geen bonus.)",
+
+    "Cryptocurrency": "Cryptovaluta",
+    "(Action: Spend 1 energy to add 1 data to this card.)": "(ACTIE: Besteed 1 energie om 1 data aan deze kaart toe te voegen.)",
+    "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(ACTIE: Verwijder alle data van deze kaart en ontvang 3 M€ per verwijderde data.)",
+
+    "Cultivation of Venus": "Cultivering van Venus",
+    "(Action: Spend 3 plants to raise Venus 1 step.)": "(ACTIE: Verbruik 3 planten om Venus met 2% te verhogen.)",
+    "(1 VP for every 2 Venus tags you own.)": "(1 OP voor elke 2 van je eigen Venus-symbolen.)",
+
+    "Cyanobacteria": "Cyanobacteriën",
+    "(Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.)": "(Verhoog het zuurstofgehalte met 1%. Voeg 1 microbe toe aan een willekeurige kaart voor elke oceaantegel in het spel.)",
+
+    "Data Leak": "Datalek",
+    "(Add 5 data to ANY card.)": "(Voeg 5 data toe aan een willekeurige kaart.)",
+
+    "Declaration of Independence": "Onafhankelijkheidsverklaring",
+    "(Requires that you have at least 6 Mars tags in play. Place 2 delegates in any party.)": "(Vereist 6 van je eigen Mars-symbolen. Plaats 2 afgevaardigden in een willekeurige partij.)",
+
+    "Designed Organisms": "Ontworpen organismen",
+    "(Requires 5 science tags. Increase your plant production 2 steps. Gain 3 plants. Add 3 microbes to ANY card. Add 1 animal to ANY card.)": "(Vereist 5 van je eigen Wetenschapssymbolen. Verhoog je plantproductie met 2. Ontvang 3 planten. Voeg 3 microben toe aan een willekeurige kaart. Voeg 1 dier toe aan een willekeurige kaart.)",
+
+    "Dust Storm": "Stofstorm",
+    "(Every player loses all energy. Raise the temperature 2 steps.)": "(Verhoog de temperatuur met 4 °C. Alle spelers verliezen alle energie.)",
+
+    "Dyson Screens": "Dyson zonneparasols",
+    "(Action: Pay 2 titanium to raise your heat and energy production 1 step each.)": "(ACTIE: Verbruik 2 titanium om je energie- en warmteproductie met 1 te verhogen.)",
+    "(Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.)": "(Verhoog je energie- en warmteproductie met 2. Verhoog de temperatuur met 2 °C. Trek 1 kaart. Plaats een stadstegel op het gereserveerde gebied.)",
+
+    "Early Expedition": "Vroege expeditie",
+    "(Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.)": "(De temperatuur moet -18 °C of kouder zijn. Verlaag je energieproductie met 1. Verhoog je M€-productie met 3. Plaats een stadstegel, maar niet naast een andere tegel. Voeg 1 data toe aan een willekeurige kaart.)",
+
+    "Economic Espionage": "Bedrijfsspionage",
+    "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(ACTIE: Betaal 2 M€ om 1 data toe te voegen aan een willekeurige kaart.)",
+    "(1VP for every 3 data here.)": "(1 OP voor elke 3 data op deze kaart.)",
+
+    "Economic Help": "Economische hulp",
+    "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(Verhoog het laagste planetaire invloedsspoor 3 stappen. In het geval van een gelijkspel, verplaats alle laagste fiches met 2 stappen. Verhoog je M€-productie met 1.)",
+
+    "Expedition to the Surface - Venus": "Expeditie naar Venus",
+    "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "(Trek 2 kaarten. Verhoog Venus met 2%. Verdien 1 M€ voor elk Venussymbool dat je bezit (inclusief deze).)",
+
+    "Flat Mars Theory": "Platte Mars-theorie",
+    "GENERATION": "Generation",
+    "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(Vereist 1 of minder van je eigen Wetenschapssymbolen. Verhoog je M€-productie met 1 per gespeelde generatie, inclusief de huidige.)",
+
+    "Floater-Urbanism": "Floater stedenbouw",
+    "(Action: Remove 1 floater from any card and add 1 Venusian habitat on this card.)": "(ACTIE: Gebruik 1 floater om 1 Venus habitat aan deze kaart toe te voegen.)",
+    "1 VP for every Venusian habitat on this card.": "(1 OP per Venus-habitat op deze kaart.)",
+    "(Requires 4 Venus tags.)": "(Vereist 4 van uw eigen Venus-symbolen.)",
+
+    "Geological Expedition": "Geologische Expedition",
+    "(Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.)": "(EFFECT: Elke keer dat je een tegel op Mars plaatst, ontvang je 1 extra grondstofbonus. Ontvang 1 staal op gebieden zonder grondstofbonus.)",
+
+    "High Temp. Superconductors": "Verbeterde supergeleiders",
+    "(Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.)": "(EFFECT: Als je een energiesymbool speelt of het standaardproject voor een energiecentrale gebruikt, betaal je 3 M€ minder.)",
+    "(Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.)": "(Vereist regerende partij: KELVINISTEN of 2+ eigen afgevaardigden daar. Verhoog je energieproductie met 2.)",
+
+    "Huygens Observatory": "Huygens-Observatorium",
+    "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that you used this generation already, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Plaats een kolonie. DEZE MAG OOK WORDEN GEPLAATST OP EEN KOLONIETEGEL WAAR JE AL EEN KOLONIE HEBT. Handel gratis. Je mag een handelsvloot gebruiken die je deze generatie al hebt gebruikt, maar je mag niet ruilen met de tegel waar die vloot vandaan kwam. Ontvang 1 TR.)",
+
+    "Hydrogen Processing Plant": "Waterstof verwerking",
+    "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(Vereist een zuurstofgehalte van 3% of meer. Verhoog je energieproductie met 1 voor elke 2 oceaantegels die in het spel zijn. Verlaag het zuurstofgehalte met 1%.)",
+
+    "Interplanetary Transport": "Interplanetair transport",
+    "(Increase your M€ production 1 step for every offworld city tile.)": "(Verhoog je M€-productie met 1 stap voor elke stadstegel buiten de wereld.)",
+
+    "Kickstarter": "Kickstarter",
+    "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "Kies een planeetsymbool. Deze kaart telt als het hebben van dit symbool. Verhoog het corresponderende planetenspoor met in totaal 3 stappen in plaats van 1.",
+
+    "Last Resort Ingenuity": "Improvisatietalent",
+    "The next card you play this generation can be paid for with steel or titanium despite its tags.": "(Je mag ook betalen met staal en titanium voor de volgende kaart die je speelt.)",
+
+    "Lobby Halls": "Lobbyzalen",
+    "(Increase your M€ production 2 steps. Place 1 delegate in any party. Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.)": "(Verhoog je M€-productie met 2. Plaats 1 afgevaardigde in een willekeurige factie. Kies een planeetsymbool. Deze kaart telt alsof hij dat symbool heeft. Verhoog het bijbehorende planeetspoor met 1 stap.)",
+
+    "Lunar Embassy": "Maanambassade",
+    "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "(Trek 1 kaart. Plaats een stadstegel op het gereserveerde gebied. Verhoog je plantproductie met 1 voor elke 2 aardesymbolen die je bezit (inclusief deze). Verhoog je M€-productie met 3.)",
+
+    "Luxury Estate": "Luxe villa's",
+    "(Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.)": "(Vereist een zuurstofgehalte van 7% of meer. Ontvang 1 titanium voor elke stadstegel en groentegel die je bezit.)",
+
+    "Martian Culture": "Martiaanse cultuur",
+    "(Action: Add 1 data to ANY card.)": "(ACTIE: voeg 1 data toe aan een willekeurige kaart.)",
+    "(Requires any 2 Mars tags in play. 1 VP for every 2 data here.)": "(Vereist 2 Mars-symbolen in het spel. 1 OP voor elke 2 data op deze kaart.)",
+
+    "Martian Dust Processing Plant": "Marsstofverwerkingsinstallatie",
+    "(Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.)": "(Verlaag je energieproductie met 1 en verhoog je staalproductie met 2. Verhoog je TW met 1.)",
+
+    "Martian Monuments": "Marsmonumenten",
+    "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(Vereist 1 eigen stad op Mars. Verhoog je M€-productie met 1 voor elk Marssymbool dat je bezit (inclusief deze).)",
+
+    "Martian Nature Wonders": "Martiaanse natuurwonderen",
+    "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(Reserveer een plaats op Mars en ontvang de plaatsingsbonus. Er mag geen tegel op die plaats worden geplaatst. Voeg 2 data toe aan een willekeurige kaart.)",
+
+    "Martian Repository": "Databank",
+    "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "(EFFECT: als je een wetenschaps- of Marssymbool speelt (inclusief dit symbool), voeg dan 1 data toe aan deze kaart.)",
+    "(Decrease your energy production 1 step. 1 VP for every 3 data here.)": "(Verlaag je energieproductie met 1. 1 OP voor elke 3 gegevens op deze kaart.)",
+
+    "Microbiology Patents": "Octrooien voor microbiologie",
+    "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(EFFECT: Als je een microbesymbool speelt, verhoog je je M€-productie met 1.)",
+
+    "Museum of Early Colonisation": "Vroege Kolonisatie Museum",
+    "(Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.)": "(Vereist 1 oceaan-, stads- en groentegel op Mars. Verlaagt je energieproductie met 1. Verhoogt je staal-, titanium- en plantproductie met 1. Verhoogt je TW met 1.)",
+
+    "New Venice": "Nieuw Venetië",
+    "(Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.)": "(Vereist 3 oceaantegels. Verbruikt 2 planten. Verhoog je energieproductie met 1 en je M€-productie met 2. Plaats deze tegel op een oceaantegel, NEGEER DE NORMALE PLAATSINGSEISEN VOOR STEDEN. Deze tegel telt als een stadstegel en een oceaantegel. )",
+
+    "Nobel Labs": "Nobel-laboratoria",
+    "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(ACTIE: Voeg 2 microben, 2 data of 2 floaters toe aan een willekeurige kaart.)",
+    "(Requires 4 science tags.)": "(Vereist 4 van je eigen wetenschapssymbolen.)",
+
+    "Orbital Laboratories": "Orbitale tuinen",
+    "(Increase your plant production by 2. Gain 1 plant.)": "(Verhoog je plantproductie met 2. Ontvang 1 plant.)",
+
+    "Oumuamua Type Object Survey": "Oumuamua-onderzoek",
+    "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Trek 2 kaarten. Als de eerste een wetenschaps- of microbesymbool heeft, speel deze dan (negeer de voorwaarden). Zo niet, en het heeft een ruimtesymbool, verhoog dan je energieproductie met 3. Als er niets van toepassing is, doe dan hetzelfde voor de 2e kaart.)",
+    "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Vereist 1 eigen ruimte- en wetenschapssymbool. Voeg 2 data toe aan een willekeurige kaart.)",
+
+    "Ozone Generators": "Ozongenerator",
+    "(Action: Spend 3 energy to gain 1 TR.)": "(ACTIE: besteed 3 energie om je TW met 1 te verhogen.)",
+    "(Requires 6% Oxygen.)": "(Vereist een zuurstofgehalte van 6% of meer.)",
+
+    "Pollinators": "Bestuivers",
+    "(Action: Add 1 animal on this card)": "(ACTIE: Voeg 1 dier toe aan deze kaart.)",
+    "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "(Vereist 3 eigen plantsymbolen. Verhoog je plantproductie met 1 en je M€-productie met 2. 1 OP per dier op deze kaart.)",
+
+    "Power Plant": "Energiecentrale",
+    "(Increase your heat production 2 steps and your energy production 1 step.)": "(Verhoog je Energieproductie met 1 en je warmteproductie met 2.)",
+
+    "Prefabrication of Human Habitats": "Prefab menselijke habitats",
+    "(Effect: Cards with a city tag cost 2M€ less.)": "(EFFECT: als je een stadssymbool speelt, betaal je 2 M€ minder.)",
+    "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(EFFECT: Als u het standaard stadsproject gebruikt, betaalt u 2 M€ minder. U kunt het standaard stadsproject met staal betalen.)",
+    "(Requires that you have steel production.)": "(Vereist eigen staalproductie.)",
+
+    "Private Security": "Privébeveiliging",
+    "Opponents may not remove your basic resource production": "(EFFECT: Andere spelers mogen je productie niet verlagen.)",
+    "NO": "NIET",
+
+    "Public Sponsored Grant": "Overheidssubsidie",
+    "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Vereist regerende partij: ONDERZOEK of 2+ eigen afgevaardigden daar. Alle andere spelers verliezen 2 M€. Kies een symbool (behalve Jupiter, Stad, Joker en Planeet) en trek er 2 kaarten met die tag.)",
+
+    "Rare-Earth Elements": "Zeldzame aardelementen",
+    "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(Verhoog je M€-productie met 1 voor elke speciale tegel die je bezit.)",
+
+    "Red City": "Rode stad",
+    "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.)": "(Vereist regerende partij: DE RODEN of 2+ eigen afgevaardigden daar. Verlaag je energieproductie met 1. Verhoog je M€-productie met 2. Plaats deze tegel niet naast een groentegel. Er mogen geen groentegels naast deze worden geplaatst. 1 OP per aangrenzend leeg (of risico-) veld.)",
+
+    "Return to Abandoned Technology": "Recycle verlaten ideeën",
+    "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "(Kijk naar de bovenste 4 kaarten van de aflegstapel. Houd er 2 en gooi de andere 2 weg.)",
+
+    "Rich Deposits": "Rijke deposities",
+    "(Requires 2 science tags. Increase your steel production 3 steps.)": "(Vereist 2 van je eigen wetenschapssymbolen. Verhoog je staalproductie met 3.)",
+
+    "Secret Labs": "Geheim laboratorium",
+    "(Requires 1 science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.)": "(Vereist 1 eigen wetenschaps- en 1 Jupitersymbool. Plaats 1 oceaantegel en krijg 2 microben OF verhoog de temperatuur met 2°C en krijg 3 planten OF verhoog zuurstof met 1% en verkrijg 2 floaters.)",
+
+    "Small Comet": "Kleine komeet",
+    "(Every player loses 2 plants. Raise the temperature 1 step. Raise the oxygen 1 step. Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Gain 1 titanium.)": "(Verhoog de temperatuur met 2°C. Verhoog het zuurstofgehalte met 1%. Plaats een oceaantegel op een gebied dat niet gereserveerd is voor oceanen. Ontvang 1 titanium. Alle spelers verliezen 2 planten.)",
+
+    "Small Open Pit Mine": "Kleine open mijn",
+    "(Increase your steel production 2 steps OR increase your titanium production 1 step.)": "(Verhoog je staalproductie met 2 OF verhoog je titaniumproductie met 1.)",
+
+    "Social Events": "Sociale evenementen",
+    "(Gain 1 TR for every 2 Mars tags you have (including this one.))": "(Verhoog je TW met 1 voor elke 2 eigen Mars-symbolen (inclusief deze).)",
+
+    "Soil Detoxification": "Bodemontgifting",
+    "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(EFFECT: De standaard groentegel kost je 1 plant minder.)",
+    "(Requires that Greens are ruling or you have 2 delegates there. Increase your plant production 1 step)": "(Vereist regerende partij: DE GROENEN of 2+ eigen afgevaardigden daar. Verhoog je plantproductie met 1.)",
+
+    "Solar Storm": "Zonnestorm",
+    "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(Verhoog de temperatuur met 2°C. Verhoog je warmteproductie met 1. Verwijder maximaal 3 data van een andere speler. Alle spelers verliezen 2 planten.)",
+
+    "Solarpedia": "Solarpedia",
+    "(Action: Add 2 data to ANY card.)": "(ACTIE: voeg 2 data toe aan een willekeurige kaart.)",
+    "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(Vereist 1 Venus-, Aarde-, Mars- en Jupitersymbool. Voeg 2 data toe aan een willekeurige kaart. 1 OP voor elke 6 data op die kaart.)",
+
+    "Space Debris Cleaning Operation": "Ruimtepuin opruimen",
+    "(Requires 4 space tags. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(Vereist 4 ruimtesymbolen in het spel. Voeg 1 grondstof van een willekeurig type (geen dier) toe aan een kaart. Voeg 1 data toe aan een kaart. Ontvang 3 titanium. Trek 1 kaart.)",
+
+    "Space Relay": "Orbitale versterker",
+    "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(EFFECT: Als je een Jupiter-symbool speelt (inclusief deze), trek dan 1 kaart.",
+    "(Erhöhe deine M€-Produktion um 1 Schritt.)": "(Verhoog je M€-productie met 1.)",
+
+    "Specialized Settlement": "Gespecialiseerde nederzetting",
+    "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.)": "(Verlaag je energieproductie met 1. Verhoog je M€-productie met 3. Plaats een stadstegel. Verhoog je productie met 1 van een grondstof op de kaart verkregen door plaatsingsbonus.)",
+
+    "Terraforming Control Station": "Terraforming-besturingsstation",
+    "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(EFFECT: Als je een Venus- of Marssymbool speelt, betaal je 2 M€ minder.)",
+    "(Erhöhe deinen TW um 2.)": "(Verhoog je TW met 2).",
+
+    "Terraforming Robots": "Terraforming-robots",
+    "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(EFFECT: Als je een Mars-symbool speelt, voeg je 1 robot toe aan deze kaart.)",
+    "1 VP for every specialized robot on this card.": "1 OP per robot op deze kaart.",
+    "(Requires 4 science tags.) ## defined previously ##": "",
+
+    "Venera Base": "Venera Basis",
+    "(Action: Add 1 floater to ANY Venus card)": "(ACTIE: Voeg 1 floater toe aan een willekeurige Venuskaart.)",
+    "1 VP per 2 Venus tags you have.": "1 OP voor elk 2 eigen Venussymbolen.",
+    "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Vereist regerende partij: EENHEID of 2+ eigen afgevaardigden daar. Verhoog je M€-productie met 3. Plaats een stadstegel op het gereserveerde gebied.",
+
+    "Wetlands": "Wetlands",
+    "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Vereist 2 oceaantegels. Verbruikt 4 planten. Verhoog de zuurstof met 1%. Verhoog je TW met 1. Plaats deze tegel naast 2 oceaantegels.)",
+    "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(EFFECT: Het telt als een groentegel en een oceaantegel. Andere tegels kunnen het niet bedekken en het telt niet mee voor de 9 te plaatsen oceanen.)"
+}

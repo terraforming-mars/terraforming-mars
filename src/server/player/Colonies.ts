@@ -6,14 +6,14 @@ import {Player} from '../Player';
 import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../../common/constants';
 import {IColony} from '../colonies/IColony';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {TradeWithTitanFloatingLaunchPad} from '../cards/colonies/TitanFloatingLaunchPad';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {SelectColony} from '../inputs/SelectColony';
 import {IColonyTrader} from '../colonies/IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
-import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {newMessage} from '../logs/MessageBuilder';
 
 export class Colonies {
@@ -162,7 +162,7 @@ export class TradeWithEnergy implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.deductResource(Resources.ENERGY, this.tradeCost);
+    this.player.deductResource(Resource.ENERGY, this.tradeCost);
     this.player.game.log('${0} spent ${1} energy to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
   }
@@ -183,7 +183,7 @@ export class TradeWithTitanium implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.deductResource(Resources.TITANIUM, this.tradeCost);
+    this.player.deductResource(Resource.TITANIUM, this.tradeCost);
     this.player.game.log('${0} spent ${1} titanium to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
   }

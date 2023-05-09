@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
 
 describe('CommunicationCenter', function() {
@@ -22,14 +22,14 @@ describe('CommunicationCenter', function() {
   it('canPlay', () => {
     expect(card.canPlay(player)).is.false;
 
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
 
     expect(card.canPlay(player)).is.true;
   });
 
   it('play', () => {
     card.resourceCount = 0;
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
 
     expect(card.play(player));
 

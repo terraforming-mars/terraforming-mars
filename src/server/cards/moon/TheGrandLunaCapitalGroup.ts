@@ -8,7 +8,7 @@ import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceId} from '../../../common/Types';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
@@ -62,7 +62,7 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
     }
     const adjacentSpaces = MoonExpansion.moonData(cardOwner.game).moon.getAdjacentSpaces(space);
     const filtered = adjacentSpaces.filter((space) => MoonExpansion.spaceHasType(space, TileType.MOON_HABITAT));
-    cardOwner.addResource(Resources.MEGACREDITS, filtered.length * 2, {log: true});
+    cardOwner.addResource(Resource.MEGACREDITS, filtered.length * 2, {log: true});
   }
 
   public override getVictoryPoints(player: Player) {

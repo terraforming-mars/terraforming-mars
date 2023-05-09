@@ -1,16 +1,16 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {IMilestone} from '../IMilestone';
+import {BaseMilestone} from '../IMilestone';
 
-export class Terran implements IMilestone {
-  public readonly name = 'Terran';
-  public readonly description = 'Have 6 Earth tags';
+export class Terran extends BaseMilestone {
+  constructor() {
+    super(
+      'Terran',
+      'Have 6 Earth tags',
+      6);
+  }
 
   public getScore(player: Player): number {
     return player.tags.count(Tag.EARTH, 'milestone');
-  }
-
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 6;
   }
 }

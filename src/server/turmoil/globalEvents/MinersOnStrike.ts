@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -28,7 +28,7 @@ export class MinersOnStrike extends GlobalEvent implements IGlobalEvent {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const amount = Math.min(5, player.tags.count(Tag.JOVIAN, 'raw')) - turmoil.getPlayerInfluence(player);
       if (amount > 0) {
-        player.deductResource(Resources.TITANIUM, amount, {log: true, from: this.name});
+        player.deductResource(Resource.TITANIUM, amount, {log: true, from: this.name});
       }
     });
   }

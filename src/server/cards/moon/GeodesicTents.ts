@@ -26,7 +26,7 @@ export class GeodesicTents extends Card {
         cardNumber: 'M06',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).nbsp.plants(1);
+            pb.minus().energy(1).nbsp.plus().plants(1);
           }).br;
           b.minus().titanium(1).br;
           b.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});

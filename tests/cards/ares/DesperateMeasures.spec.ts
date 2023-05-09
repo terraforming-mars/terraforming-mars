@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DesperateMeasures} from '../../../src/server/cards/ares/DesperateMeasures';
 import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
-import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
+import {AresTestHelper} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {addOcean, cast} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -15,7 +15,7 @@ describe('DesperateMeasures', function() {
 
   beforeEach(function() {
     card = new DesperateMeasures();
-    [game, player] = testGame(2, ARES_OPTIONS_WITH_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
   });
 
   it('play on top of dust storm', function() {

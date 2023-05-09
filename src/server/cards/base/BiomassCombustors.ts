@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -19,7 +19,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
 
       // This might not work for Robotic Workforce yet.
       behavior: {
-        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+        decreaseAnyProduction: {type: Resource.PLANTS, count: 1},
         production: {energy: 2},
       },
 

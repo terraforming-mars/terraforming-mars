@@ -56,7 +56,7 @@ describe('Chimera', function() {
   });
 
   it('as milestone, single tag count', function() {
-    // Businessperson: Requires that you have 6 Earth tags in play
+    // Businessperson: Have at least 6 Earth tags in play
     const milestone = new Businessperson();
     player.playedCards = [new BusinessNetwork(), new EarthCatapult(), new Cartel()];
     expect(milestone.getScore(player)).eq(4);

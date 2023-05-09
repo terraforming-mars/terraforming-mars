@@ -5,7 +5,7 @@ export class Businessperson extends BaseMilestone {
   constructor() {
     super(
       'Businessperson',
-      'Requires that you have 6 Earth tags in play',
+      'Have 6 Earth tags',
       6);
   }
   public getScore(player: Player): number {

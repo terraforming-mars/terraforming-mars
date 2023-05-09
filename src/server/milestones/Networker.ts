@@ -5,7 +5,7 @@ export class Networker extends BaseMilestone {
   constructor() {
     super(
       'Networker',
-      'Place three tiles adjacent to tiles that grants adjacency bonus',
+      'Have placed 3 tiles adjacent to tiles that grant adjacency bonuses',
       3);
   }
   public getScore(player: Player): number {

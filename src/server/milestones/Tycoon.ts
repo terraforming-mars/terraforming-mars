@@ -6,7 +6,7 @@ export class Tycoon extends BaseMilestone {
   constructor() {
     super(
       'Tycoon',
-      'Requires that you have 15 project cards in play (blue and green cards)',
+      'Have 15 project cards (blue and green cards)',
       15);
   }
   public getScore(player: Player): number {

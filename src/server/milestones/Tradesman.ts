@@ -5,7 +5,7 @@ export class Tradesman extends BaseMilestone {
   constructor() {
     super(
       'Tradesman',
-      'Have at least 3 different types of non-standard resources',
+      'Have 3 different types of non-standard resources',
       3);
   }
 

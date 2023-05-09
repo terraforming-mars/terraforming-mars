@@ -5,7 +5,7 @@ export class Colonizer extends BaseMilestone {
   constructor() {
     super(
       'Colonizer',
-      'Have 4 colonies built',
+      'Have built 4 colonies',
       4);
   }
 

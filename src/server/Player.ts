@@ -1,7 +1,6 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
 import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
-import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
@@ -19,7 +18,7 @@ import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from '../common/turmoil/PartyName';
 import {Phase} from '../common/Phase';
 import {PlayerInput} from './PlayerInput';
-import {Resources} from '../common/Resources';
+import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
@@ -34,8 +33,6 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tag} from '../common/cards/Tag';
-import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
-import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {Timer} from '../common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {GameCards} from './GameCards';
@@ -65,9 +62,9 @@ import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
-import {AwardScorer} from './awards/AwardScorer';
-import {FundedAward} from './awards/FundedAward';
 import {newMessage} from './logs/MessageBuilder';
+import {calculateVictoryPoints} from './game/calculateVictoryPoints';
+import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -160,9 +157,11 @@ export class Player {
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
 
-  // This allows for cards to increase / decrease the number of actions a player
-  // can take per round.
-  public actionsThisRound = 2;
+  // The number of actions a player can take this round.
+  // It's almost always 2, but certain cards can change this value.
+  //
+  // This value isn't serialized. Probably ought to.
+  public availableActionsThisRound = 2;
 
   // Stats
   public actionsTakenThisGame: number = 0;
@@ -320,18 +319,18 @@ export class Player {
     return this.terraformRating = value;
   }
 
-  public getResource(resource: Resources): number {
-    if (resource === Resources.MEGACREDITS) return this.megaCredits;
-    if (resource === Resources.STEEL) return this.steel;
-    if (resource === Resources.TITANIUM) return this.titanium;
-    if (resource === Resources.PLANTS) return this.plants;
-    if (resource === Resources.ENERGY) return this.energy;
-    if (resource === Resources.HEAT) return this.heat;
+  public getResource(resource: Resource): number {
+    if (resource === Resource.MEGACREDITS) return this.megaCredits;
+    if (resource === Resource.STEEL) return this.steel;
+    if (resource === Resource.TITANIUM) return this.titanium;
+    if (resource === Resource.PLANTS) return this.plants;
+    if (resource === Resource.ENERGY) return this.energy;
+    if (resource === Resource.HEAT) return this.heat;
     throw new Error('Resource ' + resource + ' not found');
   }
 
   public logUnitDelta(
-    resource: Resources,
+    resource: Resource,
     amount: number,
     unitType: 'production' | 'amount',
     from: Player | GlobalEventName | undefined,
@@ -368,7 +367,7 @@ export class Player {
   }
 
   public deductResource(
-    resource: Resources,
+    resource: Resource,
     amount: number,
     options? : {
       log?: boolean,
@@ -379,7 +378,7 @@ export class Player {
   }
 
   public addResource(
-    resource: Resources,
+    resource: Resource,
     amount: number,
     options? : {
       log?: boolean,
@@ -411,12 +410,12 @@ export class Player {
         {player: {color: this.color, id: this.id, name: this.name}, resource, amount});
     }
 
-    if (resource === Resources.MEGACREDITS) this.megaCredits += delta;
-    else if (resource === Resources.STEEL) this.steel += delta;
-    else if (resource === Resources.TITANIUM) this.titanium += delta;
-    else if (resource === Resources.PLANTS) this.plants += delta;
-    else if (resource === Resources.ENERGY) this.energy += delta;
-    else if (resource === Resources.HEAT) this.heat += delta;
+    if (resource === Resource.MEGACREDITS) this.megaCredits += delta;
+    else if (resource === Resource.STEEL) this.steel += delta;
+    else if (resource === Resource.TITANIUM) this.titanium += delta;
+    else if (resource === Resource.PLANTS) this.plants += delta;
+    else if (resource === Resource.ENERGY) this.energy += delta;
+    else if (resource === Resource.HEAT) this.heat += delta;
     else {
       throw new Error(`tried to add unsupported resource ${resource}`);
     }
@@ -440,7 +439,7 @@ export class Player {
    * Steal up to `qty` units of `resource` from `from`. Or, at least as
    * much as possible.
    */
-  public stealResource(resource: Resources, qty: number, from: Player) {
+  public stealResource(resource: Resource, qty: number, from: Player) {
     const qtyToSteal = Math.min(this.getResource(resource), qty);
     if (qtyToSteal > 0) {
       this.deductResource(resource, qtyToSteal, {log: true, from: from, stealing: true});
@@ -463,21 +462,21 @@ export class Player {
     log?: boolean,
     from? : Player | GlobalEventName,
   }) {
-    this.addResource(Resources.MEGACREDITS, units.megacredits || 0, options);
-    this.addResource(Resources.STEEL, units.steel || 0, options);
-    this.addResource(Resources.TITANIUM, units.titanium || 0, options);
-    this.addResource(Resources.PLANTS, units.plants || 0, options);
-    this.addResource(Resources.ENERGY, units.energy || 0, options);
-    this.addResource(Resources.HEAT, units.heat || 0, options);
+    this.addResource(Resource.MEGACREDITS, units.megacredits || 0, options);
+    this.addResource(Resource.STEEL, units.steel || 0, options);
+    this.addResource(Resource.TITANIUM, units.titanium || 0, options);
+    this.addResource(Resource.PLANTS, units.plants || 0, options);
+    this.addResource(Resource.ENERGY, units.energy || 0, options);
+    this.addResource(Resource.HEAT, units.heat || 0, options);
   }
 
   public deductUnits(units: Units) {
-    this.deductResource(Resources.MEGACREDITS, units.megacredits);
-    this.deductResource(Resources.STEEL, units.steel);
-    this.deductResource(Resources.TITANIUM, units.titanium);
-    this.deductResource(Resources.PLANTS, units.plants);
-    this.deductResource(Resources.ENERGY, units.energy);
-    this.deductResource(Resources.HEAT, units.heat);
+    this.deductResource(Resource.MEGACREDITS, units.megacredits);
+    this.deductResource(Resource.STEEL, units.steel);
+    this.deductResource(Resource.TITANIUM, units.titanium);
+    this.deductResource(Resource.PLANTS, units.plants);
+    this.deductResource(Resource.ENERGY, units.energy);
+    this.deductResource(Resource.HEAT, units.heat);
   }
 
   public getActionsThisGeneration(): Set<CardName> {
@@ -490,79 +489,7 @@ export class Player {
   }
 
   public getVictoryPoints(): IVictoryPointsBreakdown {
-    const victoryPointsBreakdown = new VictoryPointsBreakdown();
-
-    // Victory points from cards
-    for (const playedCard of this.tableau) {
-      if (playedCard.victoryPoints !== undefined) {
-        victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
-      }
-    }
-
-    // Victory points from TR
-    victoryPointsBreakdown.setVictoryPoints('terraformRating', this.terraformRating);
-
-    // Victory points from awards
-    this.giveAwards(victoryPointsBreakdown);
-
-    // Victory points from milestones
-    for (const milestone of this.game.claimedMilestones) {
-      if (milestone.player !== undefined && milestone.player.id === this.id) {
-        victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed '+milestone.milestone.name+' milestone');
-      }
-    }
-
-    // Victory points from board
-    this.game.board.spaces.forEach((space) => {
-      // Victory points for greenery tiles
-      if (Board.isGreenerySpace(space) && Board.spaceOwnedBy(space, this)) {
-        victoryPointsBreakdown.setVictoryPoints('greenery', 1);
-      }
-
-      // Victory points for greenery tiles adjacent to cities
-      if (Board.isCitySpace(space) && Board.spaceOwnedBy(space, this)) {
-        const adjacent = this.game.board.getAdjacentSpaces(space);
-        for (const adj of adjacent) {
-          if (Board.isGreenerySpace(adj)) {
-            victoryPointsBreakdown.setVictoryPoints('city', 1);
-          }
-        }
-      }
-    });
-
-    // Turmoil Victory Points
-    const includeTurmoilVP = this.game.gameIsOver() || this.game.phase === Phase.END;
-
-    Turmoil.ifTurmoil(this.game, (turmoil) => {
-      if (includeTurmoilVP) {
-        victoryPointsBreakdown.setVictoryPoints('victoryPoints', turmoil.getPlayerVictoryPoints(this), 'Turmoil Points');
-      }
-    });
-
-    this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
-    MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
-    PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
-    CeoExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
-
-    // Escape velocity VP penalty
-    if (this.game.gameOptions.escapeVelocityMode) {
-      const threshold = this.game.gameOptions.escapeVelocityThreshold;
-      const period = this.game.gameOptions.escapeVelocityPeriod;
-      const penaltyPerMin = this.game.gameOptions.escapeVelocityPenalty ?? 1;
-      const elapsedTimeInMinutes = this.timer.getElapsedTimeInMinutes();
-      if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
-        const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION / 60)), 0);
-        // Don't lose more VP than what is available
-        victoryPointsBreakdown.updateTotal();
-
-        const totalBeforeEscapeVelocity = victoryPointsBreakdown.points.total;
-        const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
-        victoryPointsBreakdown.setVictoryPoints('escapeVelocity', -penaltyTotal, 'Escape Velocity Penalty');
-      }
-    }
-
-    victoryPointsBreakdown.updateTotal();
-    return victoryPointsBreakdown.points;
+    return calculateVictoryPoints(this);
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
@@ -582,21 +509,21 @@ export class Player {
     return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
   }
 
-  public canReduceAnyProduction(resource: Resources, minQuantity: number = 1): boolean {
+  public canReduceAnyProduction(resource: Resource, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     const game = this.game;
     if (game.isSoloMode()) return true;
     return game.getPlayers().some((p) => p.canHaveProductionReduced(resource, minQuantity, this));
   }
 
-  public canHaveProductionReduced(resource: Resources, minQuantity: number, attacker: Player) {
-    if (resource === Resources.MEGACREDITS) {
+  public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: Player) {
+    if (resource === Resource.MEGACREDITS) {
       if ((this.production[resource] + 5) < minQuantity) return false;
     } else {
       if (this.production[resource] < minQuantity) return false;
     }
 
-    if (resource === Resources.STEEL || resource === Resources.TITANIUM) {
+    if (resource === Resource.STEEL || resource === Resource.TITANIUM) {
       if (this.alloysAreProtected()) return false;
     }
 
@@ -967,30 +894,6 @@ export class Player {
     );
   }
 
-  /*
-   * @param playerName  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player.
-   */
-  public runDraftCorporationPhase(playerName: string, passedCards: Array<ICorporationCard>): void {
-    let cards: Array<ICorporationCard> = passedCards;
-
-    this.setWaitingFor(
-      new SelectCard(
-        newMessage('Select a corporation to keep and pass the rest to ${0}', (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
-        'Keep',
-        cards,
-        (foundCards: Array<ICorporationCard>) => {
-          foundCards.forEach((card) => {
-            this.draftedCorporations.push(card);
-            this.game.log('${0} kept ${1}', (b) => b.player(this).card(card));
-            cards = cards.filter((c) => c !== card);
-          });
-          this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
-          return undefined;
-        }, {min: 1, max: 1, played: false}),
-    );
-  }
-
   /**
    * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
    * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
@@ -1129,9 +1032,9 @@ export class Player {
   }
 
   public pay(payment: Payment) {
-    this.deductResource(Resources.STEEL, payment.steel);
-    this.deductResource(Resources.TITANIUM, payment.titanium);
-    this.deductResource(Resources.MEGACREDITS, payment.megaCredits);
+    this.deductResource(Resource.STEEL, payment.steel);
+    this.deductResource(Resource.TITANIUM, payment.titanium);
+    this.deductResource(Resource.MEGACREDITS, payment.megaCredits);
 
     if (payment.heat > 0) {
       this.defer(this.spendHeat(payment.heat));
@@ -1335,7 +1238,7 @@ export class Player {
 
     if (additionalCorp === false && corporationCard.name !== CardName.BEGINNER_CORPORATION) {
       const diff = this.cardsInHand.length * this.cardCost;
-      this.deductResource(Resources.MEGACREDITS, diff);
+      this.deductResource(Resource.MEGACREDITS, diff);
     }
     corporationCard.play(this);
     if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
@@ -1385,7 +1288,7 @@ export class Player {
     if (stormcraft?.resourceCount > 0) {
       return stormcraft.spendHeat(this, amount, cb);
     }
-    this.deductResource(Resources.HEAT, amount);
+    this.deductResource(Resource.HEAT, amount);
     return cb();
   }
 
@@ -1401,7 +1304,7 @@ export class Player {
       // VanAllen CEO Hook for Milestones
       const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
       if (vanAllen !== undefined) {
-        vanAllen.addResource(Resources.MEGACREDITS, 3, {log: true});
+        vanAllen.addResource(Resource.MEGACREDITS, 3, {log: true});
       }
       if (!this.cardIsInEffect(CardName.VANALLEN)) {
         this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
@@ -1419,58 +1322,9 @@ export class Player {
     });
   }
 
-  private giveAwards(vpb: VictoryPointsBreakdown): void {
-    // Awards are disabled for 1 player games
-    if (this.game.isSoloMode()) return;
-
-    const maybeSetVP = (player: Player, fundedAward: FundedAward, vps: number, place: '1st' | '2nd') => {
-      if (player.id === this.id) {
-        vpb.setVictoryPoints(
-          'awards',
-          vps,
-          `${place} place for ${fundedAward.award.name} award (funded by ${fundedAward.player.name})`);
-      }
-    };
-
-    this.game.fundedAwards.forEach((fundedAward) => {
-      const award = fundedAward.award;
-      const scorer = new AwardScorer(this.game, award);
-      const players: Array<Player> = this.game.getPlayers().slice();
-      players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
-
-      // There is one rank 1 player
-      if (scorer.get(players[0]) > scorer.get(players[1])) {
-        maybeSetVP(players[0], fundedAward, 5, '1st');
-        players.shift();
-
-        if (players.length > 1) {
-          // There is one rank 2 player
-          if (scorer.get(players[0]) > scorer.get(players[1])) {
-            maybeSetVP(players[0], fundedAward, 2, '2nd');
-          } else {
-            // There are at least two rank 2 players
-            const score = scorer.get(players[0]);
-            while (players.length > 0 && scorer.get(players[0]) === score) {
-              maybeSetVP(players[0], fundedAward, 2, '2nd');
-              players.shift();
-            }
-          }
-        }
-
-      // There are at least two rank 1 players
-      } else {
-        const score = scorer.get(players[0]);
-        while (players.length > 0 && scorer.get(players[0]) === score) {
-          maybeSetVP(players[0], fundedAward, 5, '1st');
-          players.shift();
-        }
-      }
-    });
-  }
-
   private endTurnOption(): PlayerInput {
     return new SelectOption('End Turn', 'End', () => {
-      this.actionsTakenThisRound = 1;
+      this.actionsTakenThisRound = this.availableActionsThisRound; // This allows for variable actions per turn, like Mars Maths
       this.game.log('${0} ended turn', (b) => b.player(this));
       return undefined;
     });
@@ -1513,7 +1367,7 @@ export class Player {
           this.game.board.getAvailableSpacesForGreenery(this), (space) => {
             // Do not raise oxygen or award TR for final greenery placements
             this.game.addGreenery(this, space, false);
-            this.deductResource(Resources.PLANTS, this.plantsNeededForGreenery);
+            this.deductResource(Resource.PLANTS, this.plantsNeededForGreenery);
 
             this.takeActionForFinalGreenery();
 
@@ -1781,9 +1635,9 @@ export class Player {
       game.phase = Phase.ACTION;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.actionsThisRound)) {
+    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
       this.actionsTakenThisRound = 0;
-      this.actionsThisRound = 2;
+      this.availableActionsThisRound = 2;
       game.resettable = true;
       game.playerIsFinishedTakingActions();
       return;

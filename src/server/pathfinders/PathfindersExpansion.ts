@@ -13,14 +13,14 @@ import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {PlanetaryTracks} from '../../common/pathfinders/PlanetaryTracks';
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {CardResource} from '../../common/CardResource';
 import {Reward} from '../../common/pathfinders/Reward';
 import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tag} from '../../common/cards/Tag';
 import {Turmoil} from '../turmoil/Turmoil';
-import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 
 export const TRACKS = PlanetaryTracks.initialize();
@@ -139,7 +139,14 @@ export class PathfindersExpansion {
     }
   }
 
-  private static grant(reward: Reward, player: Player, tag: PlanetaryTag) {
+  /**
+   * Grant the specified award.
+   *
+   * @param reward the reward to grant
+   * @param player the player gaining the reward (which may not be the same as the player who triggers the reward)
+   * @param tag the tag associated with the reward (used for logging VP rewards.)
+   */
+  public static grant(reward: Reward, player: Player, tag: PlanetaryTag): void {
     const game = player.game;
 
     switch (reward) {
@@ -152,10 +159,10 @@ export class PathfindersExpansion {
       game.log('${0} has the most ${1} tags and earns 2VP', (b) => b.player(player).string(tag));
       break;
     case '3mc':
-      player.addResource(Resources.MEGACREDITS, 3, {log: true});
+      player.addResource(Resource.MEGACREDITS, 3, {log: true});
       break;
     case '6mc':
-      player.addResource(Resources.MEGACREDITS, 6, {log: true});
+      player.addResource(Resource.MEGACREDITS, 6, {log: true});
       break;
     case 'any_resource':
       game.defer(new GrantResourceDeferred(player, false));
@@ -168,14 +175,18 @@ export class PathfindersExpansion {
       break;
     case 'delegate':
       Turmoil.ifTurmoilElse(game,
-        () => game.defer(new SendDelegateToArea(player)),
-        () => player.addResource(Resources.MEGACREDITS, 3, {log: true}));
+        (turmoil) => {
+          if (turmoil.hasDelegatesInReserve(player.id)) {
+            game.defer(new SendDelegateToArea(player));
+          }
+        },
+        () => player.addResource(Resource.MEGACREDITS, 3, {log: true}));
       break;
     case 'energy':
-      player.addResource(Resources.ENERGY, 1, {log: true});
+      player.addResource(Resource.ENERGY, 1, {log: true});
       break;
     case 'energy_production':
-      player.production.add(Resources.ENERGY, 1, {log: true});
+      player.production.add(Resource.ENERGY, 1, {log: true});
       break;
     case 'floater':
       game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
@@ -184,10 +195,10 @@ export class PathfindersExpansion {
       game.defer(new PlaceGreeneryTile(player));
       break;
     case 'heat':
-      player.addResource(Resources.HEAT, 1, {log: true});
+      player.addResource(Resource.HEAT, 1, {log: true});
       break;
     case 'heat_production':
-      player.production.add(Resources.HEAT, 1, {log: true});
+      player.production.add(Resource.HEAT, 1, {log: true});
       break;
     case 'moon_mine':
       game.defer(new PlaceMoonMineTile(player));
@@ -199,25 +210,25 @@ export class PathfindersExpansion {
       game.defer(new PlaceOceanTile(player));
       break;
     case 'plant':
-      player.addResource(Resources.PLANTS, 1, {log: true});
+      player.addResource(Resource.PLANTS, 1, {log: true});
       break;
     case 'plant_production':
-      player.production.add(Resources.PLANTS, 1, {log: true});
+      player.production.add(Resource.PLANTS, 1, {log: true});
       break;
     case 'resource':
       game.defer(new SelectResourcesDeferred(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
       break;
     case 'steel':
-      player.addResource(Resources.STEEL, 1, {log: true});
+      player.addResource(Resource.STEEL, 1, {log: true});
       break;
     case 'steel_production':
-      player.production.add(Resources.STEEL, 1, {log: true});
+      player.production.add(Resource.STEEL, 1, {log: true});
       break;
     case 'titanium':
-      player.addResource(Resources.TITANIUM, 1, {log: true});
+      player.addResource(Resource.TITANIUM, 1, {log: true});
       break;
     case 'titanium_production':
-      player.production.add(Resources.TITANIUM, 1, {log: true});
+      player.production.add(Resource.TITANIUM, 1, {log: true});
       break;
     case 'tr':
       player.increaseTerraformRating();

@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -46,7 +46,7 @@ export class RemoveAnyPlants extends DeferredAction {
           .getMessage();
 
       return new SelectOption(message, 'Remove plants', () => {
-        candidate.deductResource(Resources.PLANTS, qtyToRemove, {log: true, from: this.player});
+        candidate.deductResource(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
         return undefined;
       });
     });

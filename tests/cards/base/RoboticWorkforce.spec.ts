@@ -13,7 +13,7 @@ import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {ALL_RESOURCES, Resources} from '../../../src/common/Resources';
+import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {resetBoard, runNextAction, cast, runAllActions, addCityTile, addOceanTile} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
@@ -85,7 +85,7 @@ describe('RoboticWorkforce', () => {
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production for gyropolis, no other building card to copy
 
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([gyropolis]);
     expect(player.production.energy).to.eq(0);
@@ -99,7 +99,7 @@ describe('RoboticWorkforce', () => {
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([capital]);
     expect(player.production.energy).to.eq(0);
@@ -114,7 +114,7 @@ describe('RoboticWorkforce', () => {
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([capitalAres]);
     expect(player.production.energy).to.eq(0);

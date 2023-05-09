@@ -3,7 +3,7 @@ import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName
 import {LawSuit} from '../cards/promo/LawSuit';
 import {Manutech} from '../cards/venusNext/Manutech';
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 
 export class Production {
@@ -33,7 +33,7 @@ export class Production {
     return this.units.heat;
   }
 
-  public get(resource: Resources): number {
+  public get(resource: Resource): number {
     return this.units[resource];
   }
 
@@ -46,11 +46,11 @@ export class Production {
   }
 
   public add(
-    resource: Resources,
+    resource: Resource,
     amount : number,
     options? : { log: boolean, from? : Player | GlobalEventName, stealing?: boolean},
   ) {
-    const adj = resource === Resources.MEGACREDITS ? -5 : 0;
+    const adj = resource === Resource.MEGACREDITS ? -5 : 0;
     const delta = (amount >= 0) ? amount : Math.max(amount, -(this.units[resource] - adj));
     this.units[resource] += delta;
 
@@ -84,27 +84,27 @@ export class Production {
 
   public adjust(units: Units, options?: {log: boolean, from?: Player}) {
     if (units.megacredits !== undefined) {
-      this.add(Resources.MEGACREDITS, units.megacredits, options);
+      this.add(Resource.MEGACREDITS, units.megacredits, options);
     }
 
     if (units.steel !== undefined) {
-      this.add(Resources.STEEL, units.steel, options);
+      this.add(Resource.STEEL, units.steel, options);
     }
 
     if (units.titanium !== undefined) {
-      this.add(Resources.TITANIUM, units.titanium, options);
+      this.add(Resource.TITANIUM, units.titanium, options);
     }
 
     if (units.plants !== undefined) {
-      this.add(Resources.PLANTS, units.plants, options);
+      this.add(Resource.PLANTS, units.plants, options);
     }
 
     if (units.energy !== undefined) {
-      this.add(Resources.ENERGY, units.energy, options);
+      this.add(Resource.ENERGY, units.energy, options);
     }
 
     if (units.heat !== undefined) {
-      this.add(Resources.HEAT, units.heat, options);
+      this.add(Resource.HEAT, units.heat, options);
     }
   }
 }

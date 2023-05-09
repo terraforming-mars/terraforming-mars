@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
@@ -34,7 +34,7 @@ export class EcologicalSurvey extends SurveyCard {
   }
 
   public checkForBonuses(cardOwner: Player, space: ISpace) {
-    super.testForStandardResource(cardOwner, space, Resources.PLANTS, SpaceBonus.PLANT);
+    super.testForStandardResource(cardOwner, space, Resource.PLANTS, SpaceBonus.PLANT);
     super.testForCardResource(cardOwner, space, CardResource.MICROBE, SpaceBonus.MICROBE);
     super.testForCardResource(cardOwner, space, CardResource.ANIMAL, SpaceBonus.ANIMAL);
   }

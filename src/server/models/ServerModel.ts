@@ -24,7 +24,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
 import {TileType} from '../../common/TileType';
 import {Phase} from '../../common/Phase';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {
   ClaimedMilestoneModel,
   MilestoneScore,
@@ -98,7 +98,6 @@ export class Server {
       undoCount: game.undoCount,
       venusScaleLevel: game.getVenusScaleLevel(),
       step: game.lastSaveId,
-      corporationsToDraft: this.getCards(game.getPlayers()[0], game.corporationsToDraft),
     };
   }
 
@@ -442,7 +441,7 @@ export class Server {
   }
 
   private static getResourceProtections(player: Player) {
-    const protection: Record<Resources, Protection> = {
+    const protection: Record<Resource, Protection> = {
       megacredits: 'off',
       steel: 'off',
       titanium: 'off',
@@ -467,7 +466,7 @@ export class Server {
 
   private static getProductionProtections(player: Player) {
     const defaultProteection = player.cardIsInEffect(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
-    const protection: Record<Resources, Protection> = {
+    const protection: Record<Resource, Protection> = {
       megacredits: defaultProteection,
       steel: defaultProteection,
       titanium: defaultProteection,
@@ -551,7 +550,6 @@ export class Server {
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
       draftVariant: options.draftVariant,
-      corporationsDraft: options.corporationsDraft,
       escapeVelocityMode: options.escapeVelocityMode,
       escapeVelocityThreshold: options.escapeVelocityThreshold,
       escapeVelocityPeriod: options.escapeVelocityPeriod,

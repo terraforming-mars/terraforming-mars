@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectAmount} from '../../inputs/SelectAmount';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
@@ -36,8 +36,8 @@ export class Insulation extends Card implements IProjectCard {
       'Select amount of heat production to decrease',
       'Decrease',
       (amount: number) => {
-        player.production.add(Resources.HEAT, -amount, {log: true});
-        player.production.add(Resources.MEGACREDITS, amount, {log: true});
+        player.production.add(Resource.HEAT, -amount, {log: true});
+        player.production.add(Resource.MEGACREDITS, amount, {log: true});
         return undefined;
       },
       1,

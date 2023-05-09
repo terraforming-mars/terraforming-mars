@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {Generalist} from '../../src/server/milestones/Generalist';
-import {ALL_RESOURCES} from '../../src/common/Resources';
+import {ALL_RESOURCES} from '../../src/common/Resource';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Generalist', function() {

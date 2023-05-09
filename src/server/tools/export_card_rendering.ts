@@ -121,7 +121,7 @@ class ColoniesProcessor {
       buildType: metadata.buildType,
       buildQuantity: metadata.buildQuantity,
       buildResource: metadata.buildResource,
-      resourceType: metadata.resourceType,
+      cardResource: metadata.cardResource,
       tradeType: metadata.tradeType,
       tradeQuantity: metadata.tradeQuantity,
       tradeResource: metadata.tradeResource,

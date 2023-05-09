@@ -8,7 +8,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
@@ -37,7 +37,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
     const availableActions = new OrOptions();
 
     const gain4Plants = function() {
-      player.addResource(Resources.PLANTS, 4, {log: true});
+      player.addResource(Resource.PLANTS, 4, {log: true});
       return undefined;
     };
     if (animalCards.length === 0) {

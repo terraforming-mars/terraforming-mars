@@ -3,7 +3,7 @@ import {DomedCrater} from '../../../src/server/cards/base/DomedCrater';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -23,13 +23,13 @@ describe('DomedCrater', function() {
   });
 
   it('Can not play if oxygen level too high', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 8);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     expect(card.play(player)).is.undefined;

@@ -5,7 +5,7 @@ export class Smith extends BaseMilestone {
   constructor() {
     super(
       'Smith',
-      'Have a total of at least 7 steel and titanium production',
+      'Have a total of 7 steel and titanium production',
       7);
   }
 

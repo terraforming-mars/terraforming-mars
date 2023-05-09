@@ -1,7 +1,7 @@
 import {Game} from '../../../src/server/Game';
 import {NewVenice} from '../../../src/server/cards/pathfinders/NewVenice';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
@@ -83,7 +83,7 @@ describe('NewVenice', function() {
 
   it('Can place New Venice next to a city', function() {
     const oceanSpace = addOcean(player);
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
 
     const citySpace = game.board
       .getAdjacentSpaces(oceanSpace)

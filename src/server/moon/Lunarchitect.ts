@@ -8,7 +8,7 @@ export class Lunarchitect extends BaseMilestone {
       'Lunarchitect',
       // The original rules had "Own at least 4 Moon tiles" but that
       // was before the moon got 50% bigger.
-      'Own at least 6 Moon tiles',
+      'Own 6 Moon tiles',
       6);
   }
 

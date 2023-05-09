@@ -16,7 +16,7 @@
 import Vue from 'vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import LanguageSelectionDialog from '@/client/components/LanguageSelectionDialog.vue';
-import {LANGUAGES2} from '@/common/constants';
+import {LANGUAGES} from '@/common/constants';
 
 export default Vue.extend({
   name: 'LanguageIcon',
@@ -32,11 +32,11 @@ export default Vue.extend({
     preferencesManager(): PreferencesManager {
       return PreferencesManager.INSTANCE;
     },
-    lang(): keyof typeof LANGUAGES2 {
-      return PreferencesManager.INSTANCE.values().lang as keyof typeof LANGUAGES2;
+    lang(): keyof typeof LANGUAGES {
+      return PreferencesManager.INSTANCE.values().lang as keyof typeof LANGUAGES;
     },
     title(): string {
-      return LANGUAGES2[this.lang];
+      return LANGUAGES[this.lang];
     },
   },
 });

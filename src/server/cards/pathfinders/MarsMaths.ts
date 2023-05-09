@@ -15,7 +15,7 @@ export class MarsMaths extends Card implements ICorporationCard {
       startingMegaCredits: 40,
 
       firstAction: {
-        text: 'Draw 2 cards ',
+        text: 'Draw 2 cards',
         drawCard: {count: 2},
       },
 
@@ -40,7 +40,7 @@ export class MarsMaths extends Card implements ICorporationCard {
   }
 
   public action(player: Player) {
-    player.actionsThisRound += 2;
+    player.availableActionsThisRound += 2;
     return undefined;
   }
 }

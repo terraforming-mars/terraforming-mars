@@ -7,7 +7,7 @@ import {CeoCard} from './CeoCard';
 import {DrawCards} from '../../deferredActions/DrawCards';
 
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {SelectCard} from '../../inputs/SelectCard';
 
 
@@ -35,7 +35,7 @@ export class Musk extends CeoCard {
 
     if (eligibleCards.length === 0) {
       game.log('${0} has no Earth cards', (b) => b.player(player), {reservedFor: player});
-      player.addResource(Resources.TITANIUM, 6, {log: true});
+      player.addResource(Resource.TITANIUM, 6, {log: true});
       return undefined;
     }
 
@@ -44,7 +44,7 @@ export class Musk extends CeoCard {
       'Discard',
       eligibleCards,
       (cards) => {
-        player.addResource(Resources.TITANIUM, cards.length + 6, {log: true});
+        player.addResource(Resource.TITANIUM, cards.length + 6, {log: true});
         for (const card of cards) {
           player.cardsInHand.splice(player.cardsInHand.indexOf(card), 1);
           game.projectDeck.discard(card);

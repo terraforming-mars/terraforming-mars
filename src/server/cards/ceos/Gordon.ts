@@ -6,7 +6,7 @@ import {CeoCard} from './CeoCard';
 import {Board} from '../../boards/Board';
 import {ISpace} from '../../boards/ISpace';
 import {GainResources} from '../../deferredActions/GainResources';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {BoardType} from '../../boards/BoardType';
 import {Phase} from '../../../common/Phase';
@@ -36,7 +36,7 @@ export class Gordon extends CeoCard {
     if (cardOwner.game.phase === Phase.SOLAR) return;
 
     if (Board.isCitySpace(space) || Board.isGreenerySpace(space)) {
-      cardOwner.game.defer(new GainResources(cardOwner, Resources.MEGACREDITS, {count: 2, log: true}));
+      cardOwner.game.defer(new GainResources(cardOwner, Resource.MEGACREDITS, {count: 2, log: true}));
     }
     return;
   }

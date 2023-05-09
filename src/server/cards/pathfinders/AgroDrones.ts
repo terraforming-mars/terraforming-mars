@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRequirements} from '../CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 
@@ -35,9 +35,9 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
   }
 
   public action(player: Player) {
-    player.deductResource(Resources.STEEL, 1);
-    player.deductResource(Resources.ENERGY, 1);
-    player.addResource(Resources.PLANTS, 3);
+    player.deductResource(Resource.STEEL, 1);
+    player.deductResource(Resource.ENERGY, 1);
+    player.addResource(Resource.PLANTS, 3);
     player.game.log('${0} spent 1 steel and 1 energy to gain 3 plants.', (b) => b.player(player));
     return undefined;
   }

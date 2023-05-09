@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
@@ -36,7 +36,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.getPlayers().forEach((p) => p.deductResource(Resources.MEGACREDITS, Math.min(p.megaCredits, 2), {log: true, from: player}));
+    player.game.getPlayers().forEach((p) => p.deductResource(Resource.MEGACREDITS, Math.min(p.megaCredits, 2), {log: true, from: player}));
 
     // TODO(kberg): Add a test that fails when a new tag is added.
     const tags = [

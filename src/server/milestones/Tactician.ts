@@ -6,7 +6,7 @@ export class Tactician extends BaseMilestone {
   constructor() {
     super(
       'Tactician',
-      'Requires that you have 5 cards with requirements in play',
+      'Have 5 cards with requirements',
       5);
   }
   private excludedCardTypes = [CardType.PRELUDE, CardType.EVENT];

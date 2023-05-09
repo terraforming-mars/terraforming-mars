@@ -16,7 +16,7 @@ import {JovianEmbassy} from '../../src/server/cards/promo/JovianEmbassy';
 import {IceAsteroid} from '../../src/server/cards/base/IceAsteroid';
 import {ProtectedValley} from '../../src/server/cards/base/ProtectedValley';
 import {MagneticFieldGeneratorsPromo} from '../../src/server/cards/promo/MagneticFieldGeneratorsPromo';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {NitrogenFromTitan} from '../../src/server/cards/colonies/NitrogenFromTitan';
 import {SpaceStation} from '../../src/server/cards/base/SpaceStation';
 import {EarthCatapult} from '../../src/server/cards/base/EarthCatapult';
@@ -219,7 +219,7 @@ describe('Turmoil', function() {
     expect(player.canPlay(releaseOfInertGases)).is.not.true; // needs 20 MC
     expect(player.canPlay(jovianEmbassy)).is.not.true; // needs 17 MC
 
-    player.production.add(Resources.ENERGY, 4);
+    player.production.add(Resource.ENERGY, 4);
     player.megaCredits = 30;
     const magneticFieldGeneratorsPromo = new MagneticFieldGeneratorsPromo();
     expect(player.canPlay(magneticFieldGeneratorsPromo)).is.not.true; // needs 31 MC

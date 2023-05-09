@@ -3,7 +3,7 @@ import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
-import {Resources} from '../../../../common/Resources';
+import {Resource} from '../../../../common/Resource';
 
 export class CityStandardProject extends StandardProjectCard {
   constructor() {
@@ -44,6 +44,6 @@ export class CityStandardProject extends StandardProjectCard {
 
   actionEssence(player: Player): void {
     player.game.defer(new PlaceCityTile(player));
-    player.production.add(Resources.MEGACREDITS, 1);
+    player.production.add(Resource.MEGACREDITS, 1);
   }
 }

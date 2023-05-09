@@ -5,7 +5,7 @@ export class Gambler extends BaseMilestone {
   constructor() {
     super(
       'Gambler',
-      'Fund at least 2 awards',
+      'Fund 2 awards',
       2);
   }
 

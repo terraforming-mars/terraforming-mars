@@ -11,7 +11,7 @@ import {runAllActions, cast} from '../../TestingUtils';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Units} from '../../../src/common/Units';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
 describe('MiningRights', () => {
@@ -80,7 +80,7 @@ describe('MiningRights', () => {
 
     orOptions.options[0].cb();
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
-    expect(card.bonusResource).deep.eq([Resources.STEEL]);
+    expect(card.bonusResource).deep.eq([Resource.STEEL]);
   });
 
   it('Should play when space bonus is both steel and titanium, plus Robotic Workforce works correctly', () => {

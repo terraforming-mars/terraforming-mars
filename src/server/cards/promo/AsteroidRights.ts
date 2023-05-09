@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {LogHelper} from '../../LogHelper';
 import {PlayerInput} from '../../PlayerInput';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -65,7 +65,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
 
     const increaseMcProdOption = new SelectOption('Remove 1 asteroid on this card to increase M€ production 1 step', 'Remove asteroid', () => {
       this.resourceCount--;
-      player.production.add(Resources.MEGACREDITS, 1);
+      player.production.add(Resource.MEGACREDITS, 1);
       LogHelper.logRemoveResource(player, this, 1, 'increase M€ production 1 step');
       return undefined;
     });

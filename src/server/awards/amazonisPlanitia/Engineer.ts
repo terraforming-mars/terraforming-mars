@@ -44,7 +44,6 @@ export class Engineer implements IAward {
     CardName.QUANTUM_COMMUNICATIONS,
     // Promo
     CardName.INTERPLANETARY_TRADE,
-    CardName.MONS_INSURANCE,
     // Moon
     CardName.DARKSIDE_MINING_SYNDICATE,
     CardName.ROVER_DRIVERS_UNION,

@@ -16,7 +16,7 @@
     <!-- Colony Bonus -->
     <div class="colony-content" :style="'margin-top: {{colonyContentOffset}}px;'">
       <template v-if="metadata.colonyBonusType === ColonyBenefit.GAIN_RESOURCES">
-        <template v-if="metadata.colonyBonusResource !== Resources.MEGACREDITS">
+        <template v-if="metadata.colonyBonusResource !== Resource.MEGACREDITS">
           <div v-for="n in metadata.colonyBonusQuantity" :key=n class="resource" :class="metadata.colonyBonusResource"></div>
         </template>
         <template v-else>
@@ -117,7 +117,7 @@ import ColonyRow from '@/client/components/colonies/ColonyRow.vue';
 import ColonyTradeRow from '@/client/components/colonies/ColonyTradeRow.vue';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
-import {Resources} from '@/common/Resources';
+import {Resource} from '@/common/Resource';
 
 export default Vue.extend({
   name: 'colony',
@@ -171,7 +171,7 @@ export default Vue.extend({
       return getColony(this.colony.name);
     },
     colonyResourceClass(): string {
-      const resource = this.metadata.resourceType;
+      const resource = this.metadata.cardResource;
       return resource?.toString()?.toLowerCase() ?? '';
     },
     backgroundClass(): string {
@@ -183,8 +183,8 @@ export default Vue.extend({
     ColonyBenefit(): typeof ColonyBenefit {
       return ColonyBenefit;
     },
-    Resources(): typeof Resources {
-      return Resources;
+    Resource(): typeof Resource {
+      return Resource;
     },
   },
 });

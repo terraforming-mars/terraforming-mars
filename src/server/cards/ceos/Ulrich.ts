@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {MAX_OCEAN_TILES} from '../../../common/constants';
 import {multiplier} from '../Options';
 
@@ -26,7 +26,7 @@ export class Ulrich extends CeoCard {
     const game = player.game;
     const oceansPlaced = game.board.getOceanCount();
     const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
-    player.addResource(Resources.MEGACREDITS, bonusCredits, {log: true});
+    player.addResource(Resource.MEGACREDITS, bonusCredits, {log: true});
     return undefined;
   }
 }

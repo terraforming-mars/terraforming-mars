@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
 
@@ -33,7 +33,7 @@ export class DustStorm extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.getPlayers().forEach((p) => p.deductResource(Resources.ENERGY, p.energy, {log: true}));
+    player.game.getPlayers().forEach((p) => p.deductResource(Resource.ENERGY, p.energy, {log: true}));
     return undefined;
   }
 }

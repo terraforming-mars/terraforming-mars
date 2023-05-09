@@ -5,7 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 
 describe('DecreaseAnyProduction', function() {
   let game: Game;
@@ -16,7 +16,7 @@ describe('DecreaseAnyProduction', function() {
 
   beforeEach(function() {
     [game, player, player2, player3] = testGame(3);
-    decreaseAnyProduction = new DecreaseAnyProduction(player, Resources.TITANIUM, {count: 2});
+    decreaseAnyProduction = new DecreaseAnyProduction(player, Resource.TITANIUM, {count: 2});
   });
 
   it('Does nothing with zero targets', () => {
@@ -26,7 +26,7 @@ describe('DecreaseAnyProduction', function() {
   });
 
   it('automatically if single target', () => {
-    player2.production.add(Resources.TITANIUM, 5);
+    player2.production.add(Resource.TITANIUM, 5);
 
     expect(decreaseAnyProduction.execute()).is.undefined;
     runAllActions(game);
@@ -38,7 +38,7 @@ describe('DecreaseAnyProduction', function() {
   });
 
   it('do not auto select single target is self', () => {
-    player.production.add(Resources.TITANIUM, 3);
+    player.production.add(Resource.TITANIUM, 3);
     const selectPlayer = cast(decreaseAnyProduction.execute(), SelectPlayer);
 
     expect(selectPlayer.players).deep.eq([player]);
@@ -50,9 +50,9 @@ describe('DecreaseAnyProduction', function() {
   });
 
   it('omits players with some production, but not enough', () => {
-    player.production.add(Resources.TITANIUM, 3);
-    player2.production.add(Resources.TITANIUM, 1);
-    player3.production.add(Resources.TITANIUM, 2);
+    player.production.add(Resource.TITANIUM, 3);
+    player2.production.add(Resource.TITANIUM, 1);
+    player3.production.add(Resource.TITANIUM, 2);
 
     const selectPlayer = cast(decreaseAnyProduction.execute(), SelectPlayer);
     runAllActions(game);
@@ -61,9 +61,9 @@ describe('DecreaseAnyProduction', function() {
   });
 
   it('multiple targets', () => {
-    player.production.add(Resources.TITANIUM, 3);
-    player2.production.add(Resources.TITANIUM, 2);
-    player3.production.add(Resources.TITANIUM, 2);
+    player.production.add(Resource.TITANIUM, 3);
+    player2.production.add(Resource.TITANIUM, 2);
+    player3.production.add(Resource.TITANIUM, 2);
 
     const selectPlayer = cast(decreaseAnyProduction.execute(), SelectPlayer);
     runAllActions(game);

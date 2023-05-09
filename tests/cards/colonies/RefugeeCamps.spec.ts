@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
@@ -23,7 +23,7 @@ describe('RefugeeCamps', function() {
   });
 
   it('Can not act', function() {
-    player.production.add(Resources.MEGACREDITS, -5);
+    player.production.add(Resource.MEGACREDITS, -5);
     expect(card.canAct(player)).is.not.true;
   });
 

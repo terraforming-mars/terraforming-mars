@@ -1,5 +1,5 @@
 import {shallowMount} from '@vue/test-utils';
-import {LANGUAGES} from '@/common/constants';
+import {ALL_LANGUAGES, LANGUAGES} from '@/common/constants';
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
@@ -9,9 +9,9 @@ describe('LanguageSwitcher', () => {
   it('renders all available languages', () => {
     const wrapper = shallowMount(LanguageSwitcher);
 
-    LANGUAGES.forEach((lang) => {
-      const icon = wrapper.find(`.language-icon--${lang.id}`);
-      expect(icon.attributes('title')).to.be.eq(lang.title);
+    ALL_LANGUAGES.forEach((lang) => {
+      const icon = wrapper.find(`.language-icon--${lang}`);
+      expect(icon.attributes('title')).to.be.eq(LANGUAGES[lang]);
     });
   });
 

@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -28,7 +28,7 @@ export class MicrogravityHealthProblems extends GlobalEvent implements IGlobalEv
       game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
       });
-      player.deductResource(Resources.MEGACREDITS, 3 * Math.max(0, Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+      player.deductResource(Resource.MEGACREDITS, 3 * Math.max(0, Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }
 }

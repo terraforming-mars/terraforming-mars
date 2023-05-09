@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -27,7 +27,7 @@ export class Pandemic extends GlobalEvent implements IGlobalEvent {
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const maxedSteelTags = Math.min(5, player.tags.count(Tag.BUILDING, 'raw'));
-      player.deductResource(Resources.MEGACREDITS, 3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+      player.deductResource(Resource.MEGACREDITS, 3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }
 }

@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {VictoryPointsBreakdown} from '../../../src/server/VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../../../src/server/game/VictoryPointsBreakdown';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('LunarMineUrbanization', () => {

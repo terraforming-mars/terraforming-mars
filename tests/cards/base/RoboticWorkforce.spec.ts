@@ -13,9 +13,8 @@ import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {ALL_RESOURCES, Resources} from '../../../src/common/Resources';
+import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {resetBoard, runNextAction, cast, runAllActions, addCityTile, addOceanTile, testGameOptions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
@@ -32,6 +31,7 @@ import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
+import {DEFAULT_GAME_OPTIONS} from '../../../src/server/GameOptions';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
@@ -85,7 +85,7 @@ describe('RoboticWorkforce', () => {
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production for gyropolis, no other building card to copy
 
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([gyropolis]);
     expect(player.production.energy).to.eq(0);
@@ -99,7 +99,7 @@ describe('RoboticWorkforce', () => {
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([capital]);
     expect(player.production.energy).to.eq(0);
@@ -107,14 +107,14 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Capital (Ares expansion)', () => {
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, redPlayer], player, {...DEFAULT_GAME_OPTIONS, aresExtension: true, aresHazards: false});
     const capitalAres = new CapitalAres();
     player.playedCards.push(capitalAres);
 
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([capitalAres]);
     expect(player.production.energy).to.eq(0);
@@ -122,7 +122,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Solar Farm (Ares expansion)', () => {
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, redPlayer], player, {...DEFAULT_GAME_OPTIONS, aresExtension: true, aresHazards: false});
     const solarFarm = new SolarFarm();
 
     // This space should have 2 plants bonus on default map

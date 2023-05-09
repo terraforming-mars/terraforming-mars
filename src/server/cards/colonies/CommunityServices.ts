@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -27,7 +27,7 @@ export class CommunityServices extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
+    player.production.add(Resource.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
     return undefined;
   }
 }

@@ -5,7 +5,7 @@ import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {Board} from '../../../src/server/boards/Board';
 import {testGame} from '../../TestGame';
@@ -22,19 +22,19 @@ describe('Capital', () => {
 
   it('Cannot play without 2 energy production', () => {
     maxOutOceans(player, 4);
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Cannot play if oceans requirement not met', () => {
     maxOutOceans(player, 3);
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     maxOutOceans(player, 4);
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
   });
 
@@ -43,7 +43,7 @@ describe('Capital', () => {
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

@@ -2,7 +2,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {IColony} from '../../colonies/IColony';
@@ -85,7 +85,7 @@ export class Aridor extends Card implements ICorporationCard {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {
-        player.production.add(Resources.MEGACREDITS, 1, {log: true});
+        player.production.add(Resource.MEGACREDITS, 1, {log: true});
       }
     }
     return undefined;

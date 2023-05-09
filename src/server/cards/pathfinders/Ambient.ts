@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -55,7 +55,7 @@ export class Ambient extends Card implements ICorporationCard {
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
-      player.production.add(Resources.HEAT, 1, {log: true});
+      player.production.add(Resource.HEAT, 1, {log: true});
     }
   }
 

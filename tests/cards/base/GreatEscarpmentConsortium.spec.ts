@@ -3,7 +3,7 @@ import {GreatEscarpmentConsortium} from '../../../src/server/cards/base/GreatEsc
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -23,12 +23,12 @@ describe('GreatEscarpmentConsortium', function() {
   });
 
   it('Can play if player has steel production', function() {
-    player.production.add(Resources.STEEL, 1);
+    player.production.add(Resource.STEEL, 1);
     expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play - auto select if single target', function() {
-    player2.production.add(Resources.STEEL, 1);
+    player2.production.add(Resource.STEEL, 1);
 
     card.play(player);
     runAllActions(game);
@@ -39,8 +39,8 @@ describe('GreatEscarpmentConsortium', function() {
   });
 
   it('Should play - multiple targets', function() {
-    player.production.add(Resources.STEEL, 1);
-    player2.production.add(Resources.STEEL, 1);
+    player.production.add(Resource.STEEL, 1);
+    player2.production.add(Resource.STEEL, 1);
     card.play(player);
 
     runAllActions(game);
@@ -54,7 +54,7 @@ describe('GreatEscarpmentConsortium', function() {
 
   it('Can play in solo - will not reduce own production', function() {
     [game, player] = testGame(1);
-    player.production.add(Resources.STEEL, 1);
+    player.production.add(Resource.STEEL, 1);
     expect(player.production.steel).to.eq(1);
 
     card.play(player);

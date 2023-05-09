@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -39,7 +39,7 @@ export class MartianInsuranceGroup extends Card implements ICorporationCard {
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
     if (player.isCorporation(this.name) && card.type === CardType.EVENT) {
-      player.production.add(Resources.MEGACREDITS, 1, {log: true});
+      player.production.add(Resource.MEGACREDITS, 1, {log: true});
     }
   }
 }

@@ -3,11 +3,13 @@ import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/server/pathfinders/PathfindersExpansion';
 import {Tag} from '../../src/common/cards/Tag';
-import {fakeCard, runAllActions} from '../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
 import {Game} from '../../src/server/Game';
 import {PathfindersData} from '../../src/server/pathfinders/PathfindersData';
 import {CardName} from '../../src/common/cards/CardName';
+import {SelectPartyToSendDelegate} from '../../src/server/inputs/SelectPartyToSendDelegate';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 
 describe('PathfindersExpansion', function() {
   let player1: TestPlayer;
@@ -20,6 +22,7 @@ describe('PathfindersExpansion', function() {
       venusNextExtension: true,
       pathfindersExpansion: true,
       moonExpansion: true,
+      turmoilExtension: true,
     });
     pathfindersData = game.pathfindersData!;
   });
@@ -95,5 +98,20 @@ describe('PathfindersExpansion', function() {
     player1.playCard(fakeCard({name: 'A' as CardName, tags: [Tag.EARTH]}));
     expect(pathfindersData.earth).eq(1);
   });
+
+  it('grant delegate reward', () => {
+    PathfindersExpansion.grant('delegate', player1, Tag.EARTH);
+    runAllActions(game);
+    cast(player1.popWaitingFor(), SelectPartyToSendDelegate);
+  });
+
+  it('grant delegate reward - no grant when player has no available delegates', () => {
+    const turmoil = Turmoil.getTurmoil(game);
+    turmoil.delegateReserve.clear();
+    PathfindersExpansion.grant('delegate', player1, Tag.EARTH);
+    runAllActions(game);
+    expect(player1.popWaitingFor()).is.undefined;
+  });
+
   // TODO(kberg): not all rewards are tested.
 });

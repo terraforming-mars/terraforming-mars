@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
@@ -9,7 +9,7 @@ export type Options = {
 export class LoseProduction extends DeferredAction {
   constructor(
     player: Player,
-    public resource: Resources,
+    public resource: Resource,
     public options: Options = {},
   ) {
     super(player, Priority.LOSE_RESOURCE_OR_PRODUCTION);

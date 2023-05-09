@@ -8,7 +8,7 @@ export class Enceladus extends Colony {
   constructor() {
     super({
       name: ColonyName.ENCELADUS,
-      resourceType: CardResource.MICROBE,
+      cardResource: CardResource.MICROBE,
       buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
       buildQuantity: [3, 3, 3],
       tradeType: ColonyBenefit.ADD_RESOURCES_TO_CARD,

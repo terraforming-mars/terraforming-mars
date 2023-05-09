@@ -8,7 +8,6 @@ import {Player} from '../../../src/server/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
 import {addGreenery, resetBoard, setRulingPartyAndRulingPolicy, runAllActions, cast} from '../../TestingUtils';
@@ -25,9 +24,7 @@ describe('GeologicalSurvey', () => {
 
   beforeEach(() => {
     card = new GeologicalSurvey();
-    player = TestPlayer.BLUE.newPlayer();
-    redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, redPlayer] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
 

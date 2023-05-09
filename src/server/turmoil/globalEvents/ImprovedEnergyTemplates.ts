@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -26,7 +26,7 @@ export class ImprovedEnergyTemplates extends GlobalEvent implements IGlobalEvent
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.production.add(Resources.ENERGY, Math.floor((player.tags.count(Tag.POWER, 'raw') + turmoil.getPlayerInfluence(player)) / 2), {log: true, from: this.name});
+      player.production.add(Resource.ENERGY, Math.floor((player.tags.count(Tag.POWER, 'raw') + turmoil.getPlayerInfluence(player)) / 2), {log: true, from: this.name});
     });
   }
 }

@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Size} from '../../../common/cards/render/Size';
@@ -32,7 +32,7 @@ export class EcologyResearch extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     const coloniesCount = player.getColoniesCount();
-    player.production.add(Resources.PLANTS, coloniesCount, {log: true});
+    player.production.add(Resource.PLANTS, coloniesCount, {log: true});
 
     const animalCards = player.getResourceCards(CardResource.ANIMAL);
     if (animalCards.length) {

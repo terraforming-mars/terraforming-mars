@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Herbivores} from '../../../src/server/cards/base/Herbivores';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {addGreenery, cast, runAllActions, runNextAction, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -25,13 +25,13 @@ describe('Herbivores', () => {
 
   it('Can not play if oxygen level too low', () => {
     setOxygenLevel(game, 7);
-    player2.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play - auto select if single target', () => {
     setOxygenLevel(game, 8);
-    player2.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
@@ -44,8 +44,8 @@ describe('Herbivores', () => {
   });
 
   it('Should play - multiple targets', () => {
-    player.production.add(Resources.PLANTS, 1);
-    player2.production.add(Resources.PLANTS, 1);
+    player.production.add(Resource.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
 
     card.play(player);
     runAllActions(game);
@@ -75,7 +75,7 @@ describe('Herbivores', () => {
   it('Should be playable in solo mode', () => {
     [game, player] = testGame(1);
     setOxygenLevel(game, 8);
-    player.production.add(Resources.PLANTS, 1);
+    player.production.add(Resource.PLANTS, 1);
 
     expect(player.simpleCanPlay(card)).is.true;
     card.play(player);

@@ -1,13 +1,14 @@
-import {IMilestone} from './IMilestone';
+import {BaseMilestone} from './IMilestone';
 import {Player} from '../Player';
 
-export class Mayor implements IMilestone {
-  public readonly name = 'Mayor';
-  public readonly description = 'Owning at least 3 city tiles';
+export class Mayor extends BaseMilestone {
+  constructor() {
+    super(
+      'Mayor',
+      'Own 3 city tiles',
+      3);
+  }
   public getScore(player: Player): number {
     return player.game.getCitiesCount(player);
-  }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 3;
   }
 }

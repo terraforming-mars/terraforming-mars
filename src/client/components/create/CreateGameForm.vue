@@ -15,7 +15,7 @@
                               <div v-bind:key="pCount">
                                 <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                                 <label :for="pCount+'-radio'">
-                                    {{pCount === 1 ? 'Solo' : pCount}}
+                                    {{ getPlayersCountText(pCount) }}
                                 </label>
                               </div>
                             </template>
@@ -786,6 +786,12 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     isBeginnerToggleEnabled(): Boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
+    },
+    getPlayersCountText(count: number): string {
+      if (count === 1) {
+        return translateText('Solo');
+      }
+      return count.toString();
     },
     deselectVenusCompletion() {
       if (this.$data.venusNext === false) {

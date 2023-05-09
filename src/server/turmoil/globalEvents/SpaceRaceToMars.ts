@@ -4,7 +4,7 @@ import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventN
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Player} from '../../Player';
 import {isSpecialTile, playerTileFn} from '../../boards/Board';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -30,8 +30,8 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const specialTileCount = this.specialTileCount(player);
       const bonus = Math.min(specialTileCount, 5);
-      player.production.add(Resources.MEGACREDITS, bonus, {log: true, from: this.name});
-      player.addResource(Resources.ENERGY, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+      player.production.add(Resource.MEGACREDITS, bonus, {log: true, from: this.name});
+      player.addResource(Resource.ENERGY, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }
 

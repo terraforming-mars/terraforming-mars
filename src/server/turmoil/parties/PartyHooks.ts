@@ -3,7 +3,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Phase} from '../../../common/Phase';
 import {PolicyId} from '../Policy';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {ISpace} from '../../boards/ISpace';
 import {GREENS_POLICY_1} from './Greens';
 import {PoliticalAgendas} from '../PoliticalAgendas';
@@ -14,7 +14,7 @@ export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
     if (this.shouldApplyPolicy(player, PartyName.MARS, 'mfp01') &&
         spaceType !== SpaceType.COLONY) {
-      player.addResource(Resources.STEEL, 1);
+      player.addResource(Resource.STEEL, 1);
     }
   }
 

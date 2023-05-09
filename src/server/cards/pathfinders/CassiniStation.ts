@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {all} from '../Options';
 import {ICard} from '../ICard';
@@ -37,7 +37,7 @@ export class CassiniStation extends Card implements IProjectCard {
       coloniesCount += colony.colonies.length;
     });
 
-    player.production.add(Resources.ENERGY, coloniesCount, {log: true});
+    player.production.add(Resource.ENERGY, coloniesCount, {log: true});
 
     const cards = [
       ...player.getResourceCards(CardResource.FLOATER),

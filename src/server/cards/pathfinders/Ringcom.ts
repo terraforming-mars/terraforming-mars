@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -59,7 +59,7 @@ export class Ringcom extends Card implements ICorporationCard {
     if (card.tags.includes(Tag.JOVIAN)) {
       player.game.getPlayers().forEach((p) => {
         if (p.isCorporation(this.name)) {
-          p.addResource(Resources.TITANIUM, 1, {log: true});
+          p.addResource(Resource.TITANIUM, 1, {log: true});
         }
       });
     }

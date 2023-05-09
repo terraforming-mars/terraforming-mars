@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SoilFactory} from '../../../src/server/cards/base/SoilFactory';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
 describe('SoilFactory', function() {
@@ -18,7 +18,7 @@ describe('SoilFactory', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

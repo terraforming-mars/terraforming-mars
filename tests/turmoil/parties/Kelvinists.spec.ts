@@ -5,7 +5,7 @@ import {ISpace} from '../../../src/server/boards/ISpace';
 import {cast, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
@@ -25,7 +25,7 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each heat production you have', function() {
-    player.production.add(Resources.HEAT, 5);
+    player.production.add(Resource.HEAT, 5);
 
     const bonus = KELVINISTS_BONUS_1;
     bonus.grant(game);
@@ -33,7 +33,7 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling bonus 2: Gain 1 heat for each heat production you have', function() {
-    player.production.add(Resources.HEAT, 5);
+    player.production.add(Resource.HEAT, 5);
 
     const bonus = KELVINISTS_BONUS_2;
     bonus.grant(game);
@@ -65,7 +65,7 @@ describe('Kelvinists', function() {
     const kelvinistsPolicy = KELVINISTS_POLICY_3;
     expect(kelvinistsPolicy.canAct(player)).to.be.false;
 
-    player.addResource(Resources.HEAT, 6);
+    player.addResource(Resource.HEAT, 6);
     expect(kelvinistsPolicy.canAct(player)).to.be.true;
 
     const initialTR = player.getTerraformRating();
@@ -81,7 +81,7 @@ describe('Kelvinists', function() {
     const stormcraft = new StormCraftIncorporated();
     player.setCorporationForTest(stormcraft);
     stormcraft.resourceCount = 2;
-    player.addResource(Resources.HEAT, 8);
+    player.addResource(Resource.HEAT, 8);
 
     const kelvinistsPolicy = KELVINISTS_POLICY_3;
     expect(kelvinistsPolicy.canAct(player)).to.be.true;

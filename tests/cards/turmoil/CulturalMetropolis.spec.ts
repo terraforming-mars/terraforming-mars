@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CulturalMetropolis} from '../../../src/server/cards/turmoil/CulturalMetropolis';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {cast, testGameOptions} from '../../TestingUtils';
@@ -33,12 +33,12 @@ describe('Cultural Metropolis', function() {
 
 
   it('Can not play without two delegate in unity or unity ruling', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play without 2 delegates available', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game);
     while (turmoil.getAvailableDelegateCount(player.id) > 2) {
@@ -51,7 +51,7 @@ describe('Cultural Metropolis', function() {
   });
 
   it('Can not play without an available city space', () => {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game);
 
@@ -72,7 +72,7 @@ describe('Cultural Metropolis', function() {
     const unity = turmoil.getPartyByName(PartyName.UNITY);
     const startingUnityDelegateCount = unity.delegates.size;
 
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game);
 

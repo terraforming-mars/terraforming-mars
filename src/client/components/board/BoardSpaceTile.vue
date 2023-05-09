@@ -10,37 +10,47 @@ import {TileType} from '@/common/TileType';
 import {SpaceHighlight} from '@/common/models/SpaceModel';
 import {TileView} from '@/client/components/board/TileView';
 
-const tileTypeToCssClass = new Map<TileType, string>([
-  [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],
-  [TileType.ECOLOGICAL_ZONE, 'ecological_zone'],
-  [TileType.INDUSTRIAL_CENTER, 'industrial_center'],
-  [TileType.LAVA_FLOWS, 'lava_flows'],
-  [TileType.MINING_AREA, 'mining_area'],
-  [TileType.MINING_RIGHTS, 'mining_rights'],
-  [TileType.CAPITAL, 'capital'],
-  [TileType.MOHOLE_AREA, 'mohole_area'],
-  [TileType.NATURAL_PRESERVE, 'natural_preserve'],
-  [TileType.NUCLEAR_ZONE, 'nuclear_zone'],
-  [TileType.RESTRICTED_AREA, 'restricted_area'],
-  [TileType.DEIMOS_DOWN, 'deimos_down'],
-  [TileType.GREAT_DAM, 'great_dam'],
-  [TileType.MAGNETIC_FIELD_GENERATORS, 'magnetic_field_generators'],
-  [TileType.BIOFERTILIZER_FACILITY, 'biofertilizer-facility'],
-  [TileType.METALLIC_ASTEROID, 'metallic-asteroid'],
-  [TileType.SOLAR_FARM, 'solar-farm'],
-  [TileType.OCEAN_CITY, 'ocean-city'],
-  [TileType.OCEAN_FARM, 'ocean-farm'],
-  [TileType.OCEAN_SANCTUARY, 'ocean-sanctuary'],
-  [TileType.DUST_STORM_MILD, 'dust-storm-mild'],
-  [TileType.DUST_STORM_SEVERE, 'dust-storm-severe'],
-  [TileType.EROSION_MILD, 'erosion-mild'],
-  [TileType.EROSION_SEVERE, 'erosion-severe'],
-  [TileType.MINING_STEEL_BONUS, 'mining-steel'],
-  [TileType.MINING_TITANIUM_BONUS, 'mining-titanium'],
-  [TileType.WETLANDS, 'wetlands'],
-  [TileType.RED_CITY, 'red-city'],
-  [TileType.MARTIAN_NATURE_WONDERS, 'martian-nature-wonders'],
-]);
+const tileTypeToCssClass: Record<TileType, string> = {
+  [TileType.OCEAN]: 'ocean',
+  [TileType.CITY]: 'city',
+  [TileType.GREENERY]: 'greenery',
+  [TileType.COMMERCIAL_DISTRICT]: 'commercial_district',
+  [TileType.ECOLOGICAL_ZONE]: 'ecological_zone',
+  [TileType.INDUSTRIAL_CENTER]: 'industrial_center',
+  [TileType.LAVA_FLOWS]: 'lava_flows',
+  [TileType.MINING_AREA]: 'mining_area',
+  [TileType.MINING_RIGHTS]: 'mining_rights',
+  [TileType.CAPITAL]: 'capital',
+  [TileType.MOHOLE_AREA]: 'mohole_area',
+  [TileType.NATURAL_PRESERVE]: 'natural_preserve',
+  [TileType.NUCLEAR_ZONE]: 'nuclear_zone',
+  [TileType.RESTRICTED_AREA]: 'restricted_area',
+  [TileType.DEIMOS_DOWN]: 'deimos_down',
+  [TileType.GREAT_DAM]: 'great_dam',
+  [TileType.MAGNETIC_FIELD_GENERATORS]: 'magnetic_field_generators',
+  [TileType.BIOFERTILIZER_FACILITY]: 'biofertilizer-facility',
+  [TileType.METALLIC_ASTEROID]: 'metallic-asteroid',
+  [TileType.SOLAR_FARM]: 'solar-farm',
+  [TileType.OCEAN_CITY]: 'ocean-city',
+  [TileType.OCEAN_FARM]: 'ocean-farm',
+  [TileType.OCEAN_SANCTUARY]: 'ocean-sanctuary',
+  [TileType.DUST_STORM_MILD]: 'dust-storm-mild',
+  [TileType.DUST_STORM_SEVERE]: 'dust-storm-severe',
+  [TileType.EROSION_MILD]: 'erosion-mild',
+  [TileType.EROSION_SEVERE]: 'erosion-severe',
+  [TileType.MINING_STEEL_BONUS]: 'mining-steel',
+  [TileType.MINING_TITANIUM_BONUS]: 'mining-titanium',
+  [TileType.WETLANDS]: 'wetlands',
+  [TileType.RED_CITY]: 'red-city',
+  [TileType.MARTIAN_NATURE_WONDERS]: 'martian-nature-wonders',
+  [TileType.MOON_ROAD]: 'road',
+  [TileType.MOON_HABITAT]: 'colony',
+  [TileType.MOON_MINE]: 'mine',
+  [TileType.LUNA_TRADE_STATION]: 'luna-trade-station',
+  [TileType.LUNA_MINING_HUB]: 'luna-mining-hub',
+  [TileType.LUNA_TRAIN_STATION]: 'luna-train-station',
+  [TileType.LUNAR_MINE_URBANIZATION]: 'lunar-mine-urbanization',
+};
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial-district-ares'],
@@ -135,23 +145,11 @@ export default Vue.extend({
     klass(): string {
       let css = 'board-space';
       if (this.tileType !== undefined) {
-        switch (this.tileType) {
-        case TileType.OCEAN:
-          css += ' board-space-tile--ocean';
-          break;
-        case TileType.CITY:
-          css += ' board-space-tile--city';
-          break;
-        case TileType.GREENERY:
-          css += ' board-space-tile--greenery';
-          break;
-        default:
-          let cssClass = tileTypeToCssClass.get(this.tileType);
-          if (this.aresExtension && tileTypeToCssClassAresOverride.has(this.tileType)) {
-            cssClass = tileTypeToCssClassAresOverride.get(this.tileType);
-          }
-          css += ' board-space-tile--' + cssClass;
+        let cssClass: string | undefined = tileTypeToCssClass[this.tileType];
+        if (this.aresExtension && tileTypeToCssClassAresOverride.has(this.tileType)) {
+          cssClass = tileTypeToCssClassAresOverride.get(this.tileType);
         }
+        css += ' board-space-tile--' + cssClass;
       } else {
         if (this.spaceType === SpaceType.OCEAN) {
           css += ' board-space-type-ocean';

@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,6 +14,10 @@ export class MonsInsurance extends Card implements ICorporationCard {
       type: CardType.CORPORATION,
       name: CardName.MONS_INSURANCE,
       startingMegaCredits: 48,
+
+      behavior: {
+        production: {megacredits: 4},
+      },
 
       metadata: {
         cardNumber: 'R46',
@@ -35,9 +39,10 @@ export class MonsInsurance extends Card implements ICorporationCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 6);
     for (const p of player.game.getPlayers()) {
-      p.production.add(Resources.MEGACREDITS, -2, {log: true});
+      if (p.id !== player.id) {
+        p.production.add(Resource.MEGACREDITS, -2, {log: true});
+      }
     }
     player.game.monsInsuranceOwner = player.id;
     return undefined;
@@ -48,7 +53,7 @@ export class MonsInsurance extends Card implements ICorporationCard {
     if (player !== claimant) {
       const retribution = Math.min(player.megaCredits, 3);
       if (claimant) claimant.megaCredits += retribution;
-      player.deductResource(Resources.MEGACREDITS, retribution);
+      player.deductResource(Resource.MEGACREDITS, retribution);
       if (retribution > 0) {
         if (claimant !== undefined) {
           player.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>

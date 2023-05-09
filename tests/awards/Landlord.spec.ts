@@ -6,13 +6,13 @@ import {SpaceName} from '../../src/server/SpaceName';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {Player} from '../../src/server/Player';
-import {ARES_OPTIONS_NO_HAZARDS} from '../ares/AresTestHelper';
 import {EmptyBoard} from '../ares/EmptyBoard';
 import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
 import {addCityTile, addGreenery, cast, testGameOptions} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {testGame} from '../TestGame';
 
 describe('Landlord', () => {
   let player: TestPlayer;
@@ -21,9 +21,7 @@ describe('Landlord', () => {
   const award = new Landlord();
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
 

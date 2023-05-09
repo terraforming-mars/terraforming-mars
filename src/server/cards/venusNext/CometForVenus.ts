@@ -2,7 +2,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -47,7 +47,7 @@ export class CometForVenus extends Card implements IProjectCard {
           'Select player to remove up to 4 M€ from',
           'Remove M€',
           (selectedPlayer: Player) => {
-            selectedPlayer.deductResource(Resources.MEGACREDITS, 4, {log: true, from: player});
+            selectedPlayer.deductResource(Resource.MEGACREDITS, 4, {log: true, from: player});
             return undefined;
           },
         ),

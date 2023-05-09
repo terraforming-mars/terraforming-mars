@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 import {all} from '../Options';
 import {Phase} from '../../../common/Phase';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class UnitedNationsMissionOne extends Card implements ICorporationCard {
   constructor() {
@@ -44,7 +44,7 @@ export class UnitedNationsMissionOne extends Card implements ICorporationCard {
     const game = player.game;
 
     if (game.phase === Phase.ACTION || game.phase === Phase.PRELUDES) {
-      cardOwner.addResource(Resources.MEGACREDITS, steps, {log: true});
+      cardOwner.addResource(Resource.MEGACREDITS, steps, {log: true});
     }
   }
 }

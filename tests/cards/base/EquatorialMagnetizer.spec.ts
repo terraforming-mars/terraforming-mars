@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {EquatorialMagnetizer} from '../../../src/server/cards/base/EquatorialMagnetizer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
@@ -18,7 +18,7 @@ describe('EquatorialMagnetizer', function() {
   });
 
   it('Should act', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canAct(player)).is.true;
 
     card.action(player);

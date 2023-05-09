@@ -9,7 +9,7 @@ import {Turmoil} from '../../turmoil/Turmoil';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectPartyToSendDelegate} from '../../inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 
 export class Petra extends CeoCard {
@@ -75,7 +75,7 @@ export class Petra extends CeoCard {
       count += 1;
     }
 
-    player.addResource(Resources.MEGACREDITS, count * 3, {log: true});
+    player.addResource(Resource.MEGACREDITS, count * 3, {log: true});
 
     // Place 3 Neutral delegates
     const availableParties = turmoil.parties.map((party) => party.name);

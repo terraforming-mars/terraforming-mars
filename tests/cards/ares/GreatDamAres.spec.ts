@@ -3,7 +3,6 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {GreatDamAres} from '../../../src/server/cards/ares/GreatDamAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans, churnPlay} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -14,7 +13,7 @@ describe('GreatDamAres', function() {
 
   beforeEach(() => {
     card = new GreatDamAres();
-    [, player] = testGame(2, ARES_OPTIONS_NO_HAZARDS);
+    [, player] = testGame(2, {aresExtension: true});
   });
 
   it('Requirements + Benefits', function() {

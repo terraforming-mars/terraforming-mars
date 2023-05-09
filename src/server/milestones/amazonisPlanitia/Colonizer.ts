@@ -1,15 +1,15 @@
 import {Player} from '../../Player';
-import {IMilestone} from '../IMilestone';
+import {BaseMilestone} from '../IMilestone';
 
-export class Colonizer implements IMilestone {
-  public readonly name = 'Colonizer';
-  public readonly description = 'Have 4 colonies built';
+export class Colonizer extends BaseMilestone {
+  constructor() {
+    super(
+      'Colonizer',
+      'Have built 4 colonies',
+      4);
+  }
 
   public getScore(player: Player): number {
     return player.getColoniesCount();
-  }
-
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 4;
   }
 }

@@ -24,7 +24,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
 import {TileType} from '../../common/TileType';
 import {Phase} from '../../common/Phase';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {
   ClaimedMilestoneModel,
   MilestoneScore,
@@ -441,7 +441,7 @@ export class Server {
   }
 
   private static getResourceProtections(player: Player) {
-    const protection: Record<Resources, Protection> = {
+    const protection: Record<Resource, Protection> = {
       megacredits: 'off',
       steel: 'off',
       titanium: 'off',
@@ -466,7 +466,7 @@ export class Server {
 
   private static getProductionProtections(player: Player) {
     const defaultProteection = player.cardIsInEffect(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
-    const protection: Record<Resources, Protection> = {
+    const protection: Record<Resource, Protection> = {
       megacredits: defaultProteection,
       steel: defaultProteection,
       titanium: defaultProteection,

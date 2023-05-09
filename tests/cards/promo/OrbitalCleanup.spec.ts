@@ -4,7 +4,7 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {OrbitalCleanup} from '../../../src/server/cards/promo/OrbitalCleanup';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('OrbitalCleanup', function() {
@@ -18,7 +18,7 @@ describe('OrbitalCleanup', function() {
   });
 
   it('Can not play if cannot decrease MC production', function() {
-    player.production.add(Resources.MEGACREDITS, -4);
+    player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 

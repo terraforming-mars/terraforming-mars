@@ -6,7 +6,7 @@ import {testGame} from '../TestGame';
 import {Executor} from '../../src/server/behavior/Executor';
 import {Units} from '../../src/common/Units';
 import {Payment} from '../../src/common/inputs/Payment';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {CardResource} from '../../src/common/CardResource';
 import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
@@ -15,6 +15,7 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../src/server/cards/base/Ants';
+import {Birds} from '../../src/server/cards/base/Birds';
 import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
 import {Livestock} from '../../src/server/cards/base/Livestock';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
@@ -63,7 +64,7 @@ describe('Executor', () => {
 
     expect(executor.canExecute(behavior, player, fake)).is.false;
 
-    player.production.add(Resources.STEEL, 1);
+    player.production.add(Resource.STEEL, 1);
 
     expect(executor.canExecute(behavior, player, fake)).is.true;
 
@@ -349,6 +350,37 @@ describe('Executor', () => {
     expect(livestock.resourceCount).eq(3);
   });
 
+  it('add resources to any card - countable, zero count', () => {
+    const livestock = new Livestock(); // Holds animals
+    const birds = new Birds(); // Holds animals
+
+    player.playedCards = [birds, livestock];
+
+    expect(livestock.resourceCount).eq(0);
+
+    // There are no microbe tags.
+    executor.execute({addResourcesToAnyCard: {count: {tag: Tag.MICROBE}, type: CardResource.ANIMAL}}, player, fake);
+    runAllActions(game);
+
+    expect(player.popWaitingFor()).is.undefined;
+    expect(livestock.resourceCount).eq(0);
+    expect(birds.resourceCount).eq(0);
+
+    // Second half of the test.
+
+    // But if one card has a microbe tag
+    player.playedCards.push(new Ants());
+    executor.execute({addResourcesToAnyCard: {count: {tag: Tag.MICROBE}, type: CardResource.ANIMAL}}, player, fake);
+    runAllActions(game);
+
+    // There will be one animal to place.
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    selectCard.cb([livestock]);
+
+    expect(birds.resourceCount).eq(0);
+    expect(livestock.resourceCount).eq(1);
+  });
+
   it('add resources to any card by tag', () => {
     const aerialMappers = new AerialMappers(); // Venus tag with Floaters
     const dirigibles = new Dirigibles(); // Venus tag with Floaters
@@ -370,14 +402,14 @@ describe('Executor', () => {
   });
 
   it('decrease any production - cannot execute with zero targets', () => {
-    expect(executor.canExecute({decreaseAnyProduction: {count: 2, type: Resources.TITANIUM}}, player, fake)).is.false;
+    expect(executor.canExecute({decreaseAnyProduction: {count: 2, type: Resource.TITANIUM}}, player, fake)).is.false;
   });
 
   it('decrease any production - standard', () => {
-    const behavior = {decreaseAnyProduction: {count: 2, type: Resources.TITANIUM}};
-    player.production.add(Resources.TITANIUM, 3);
-    player2.production.add(Resources.TITANIUM, 2);
-    player3.production.add(Resources.TITANIUM, 2);
+    const behavior = {decreaseAnyProduction: {count: 2, type: Resource.TITANIUM}};
+    player.production.add(Resource.TITANIUM, 3);
+    player2.production.add(Resource.TITANIUM, 2);
+    player3.production.add(Resource.TITANIUM, 2);
     expect(executor.canExecute(behavior, player, fake)).is.true;
 
     executor.execute(behavior, player, fake);

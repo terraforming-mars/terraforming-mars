@@ -35,27 +35,34 @@ export class Lowell extends CeoCard {
   public action(player: Player): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const cardsDrawn: Array<ICeoCard> = [
+    let ceosDrawn: Array<ICeoCard> = [
       game.ceoDeck.draw(game),
       game.ceoDeck.draw(game),
       game.ceoDeck.draw(game),
     ];
 
-    cardsDrawn.forEach((card) => {
-      if (card.canPlay?.(player) === false) {
-        cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
-        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player), {reservedFor: player});
+    // TODO(): This is not being tested, but currently every CEO is always playable
+    ceosDrawn = ceosDrawn.filter((ceo) => {
+      if (ceo.canPlay?.(player) === false) {
+        game.ceoDeck.discard(ceo);
+        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(ceo).player(player), {reservedFor: player});
+        return false;
       }
+      return true;
     });
 
     player.game.defer(new SelectPaymentDeferred(player, 8, {title: 'Select how to pay for action'}));
 
-    return new SelectCard('Choose CEO card to play', 'Play', cardsDrawn, (([card]) => {
-      const cardIndex = player.playedCards.findIndex((c) => c.name === this.name);
-      player.playedCards.splice(cardIndex, 1);
+    return new SelectCard('Choose CEO card to play', 'Play', ceosDrawn, (([chosenCeo]) => {
+      // Discard unchosen CEOs
+      ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
+      // Remove Lowell from played cards
+      const lowellIndex = player.playedCards.findIndex((c) => c.name === this.name);
+      player.playedCards.splice(lowellIndex, 1);
+      // Add Lowell to Discard pile
       game.ceoDeck.discard(this);
-
-      return player.playCard(card);
+      // Play the new CEO
+      return player.playCard(chosenCeo);
     }));
   }
 }

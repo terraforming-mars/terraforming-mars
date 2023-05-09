@@ -6,15 +6,21 @@ import {testGame} from '../../TestGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 
 import {Maria} from '../../../src/server/cards/ceos/Maria';
+import {Venus} from '../../../src/server/cards/community/Venus';
+import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {IapetusII} from '../../../src/server/cards/pathfinders/IapetusII';
+import {CollegiumCopernicus} from '../../../src/server/cards/pathfinders/CollegiumCopernicus';
+
 
 describe('Maria', function() {
   let card: Maria;
   let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Maria();
-    [game, player] = testGame(1, {ceoExtension: true, coloniesExtension: true});
+    [game, player, player2] = testGame(2, {ceoExtension: true, coloniesExtension: true});
   });
 
   it('Can act', function() {
@@ -37,6 +43,55 @@ describe('Maria', function() {
     expect(selectColony.colonies).has.length(4);
   });
 
+  it('Takes action - chooses Venus which cannot be activated', () => {
+    const venus = new Venus();
+    game.discardedColonies = [];
+    game.discardedColonies.push(venus);
+    const selectColony = cast(card.action(player), SelectColony);
+    selectColony?.cb(venus);
+
+    expect(game.colonies).includes(venus);
+    expect(venus.isActive).is.false;
+    expect(venus.colonies).is.empty;
+  });
+
+  it('Takes action - chooses Venus, which is activated', () => {
+    player2.setCorporationForTest(new Celestic());
+    const venus = new Venus();
+    game.discardedColonies = [];
+    game.discardedColonies.push(venus);
+    const selectColony = cast(card.action(player), SelectColony);
+    selectColony?.cb(venus);
+
+    expect(game.colonies).includes(venus);
+    expect(venus.isActive).is.true;
+    expect(venus.colonies).is.not.empty;
+  });
+
+  it('Takes action - chooses Ieptus II, which is not activated', () => {
+    const iapetusii = new IapetusII();
+    game.discardedColonies = [];
+    game.discardedColonies.push(iapetusii);
+    const selectColony = cast(card.action(player), SelectColony);
+    selectColony?.cb(iapetusii);
+
+    expect(game.colonies).includes(iapetusii);
+    expect(iapetusii.isActive).is.false;
+    expect(iapetusii.colonies).is.empty;
+  });
+
+  it('Takes action - chooses Ieptus II, which is activated', () => {
+    player2.setCorporationForTest(new CollegiumCopernicus());
+    const iapetusii = new IapetusII();
+    game.discardedColonies = [];
+    game.discardedColonies.push(iapetusii);
+    const selectColony = cast(card.action(player), SelectColony);
+    selectColony?.cb(iapetusii);
+
+    expect(game.colonies).includes(iapetusii);
+    expect(iapetusii.isActive).is.true;
+    expect(iapetusii.colonies).is.not.empty;
+  });
 
   it('Can only act once per game', function() {
     card.action(player);

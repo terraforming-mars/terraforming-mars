@@ -10,8 +10,8 @@ type _TestOptions = {
 }
 export type TestGameOptions = GameOptions & _TestOptions;
 
-export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [Game, ...Array<TestPlayer>] {
-  const players = [
+function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
+  return [
     TestPlayer.BLUE.newPlayer(false, idSuffix),
     TestPlayer.RED.newPlayer(false, idSuffix),
     TestPlayer.YELLOW.newPlayer(false, idSuffix),
@@ -21,10 +21,32 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
     TestPlayer.ORANGE.newPlayer(false, idSuffix),
     TestPlayer.PINK.newPlayer(false, idSuffix),
   ].slice(0, count);
+}
+
+/**
+ * Creates a new game for testing. Has some hidden behavior for testing:
+ *
+ * 1. If aresExtension is true, and the player has not specifically enabled hazards, disable ares hazards.
+ *    Hazard placement is non-deterministic.
+ * 2. If skipInitialCardSelection is true, then the game ignores initial card selection. It's still
+ *    in an intermediate state, but the game is testable.
+ *
+ * Players are returned in player order, so the first player returned is the first player.
+ *
+ * Test game has a return type with a spread array operator.
+ */
+export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [Game, ...Array<TestPlayer>] {
+  const players = createPlayers(count, idSuffix);
+
+  const copy = {...customOptions};
+  if (copy.aresExtension === true && copy.aresHazards === undefined) {
+    copy.aresHazards = true;
+  }
 
   const options: GameOptions | undefined = customOptions === undefined ?
     undefined :
     testGameOptions(customOptions);
+
   const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
   if (customOptions?.skipInitialCardSelection !== false) {
     for (const player of players) {

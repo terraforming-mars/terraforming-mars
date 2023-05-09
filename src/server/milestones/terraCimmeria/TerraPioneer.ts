@@ -1,11 +1,15 @@
 import {Player} from '../../Player';
 import {isHazardTileType, TileType} from '../../../common/TileType';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {IMilestone} from '../IMilestone';
+import {BaseMilestone} from '../IMilestone';
 
-export class TerraPioneer implements IMilestone {
-  public readonly name = 'Terra Pioneer';
-  public readonly description = 'Have 5 tiles on Mars';
+export class TerraPioneer extends BaseMilestone {
+  constructor() {
+    super(
+      'Terra Pioneer',
+      'Own 5 tiles on Mars',
+      5);
+  }
 
   public getScore(player: Player): number {
     // Don't simplify this to "space.tile?.tileType !== TileType.OCEAN"
@@ -21,9 +25,5 @@ export class TerraPioneer implements IMilestone {
     ).length;
 
     return marsSpaces;
-  }
-
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 5;
   }
 }

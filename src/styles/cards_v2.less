@@ -898,6 +898,22 @@
             line-height: 20px;
             font-weight: bold;
             text-align: center;
+
+            // Adding scrolling for cards with huge description
+            overflow-x: hidden;
+            &::-webkit-scrollbar-track {
+                background-color: transparent;
+                border-radius: 0 0 32px 0;
+            }
+            &::-webkit-scrollbar {
+                width: 4px;
+                background-color: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: #898989;
+                border-radius: 0 0 32px 0;
+            }
+
             .card-corporation-box {
                 position: absolute;
                 display: flex;

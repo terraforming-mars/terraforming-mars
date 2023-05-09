@@ -4,7 +4,7 @@ import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventN
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -27,7 +27,7 @@ export class CommunicationBoom extends GlobalEvent implements IGlobalEvent {
 
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.deductResource(Resources.MEGACREDITS, 10, {log: true, from: this.name});
+      player.deductResource(Resource.MEGACREDITS, 10, {log: true, from: this.name});
       player.getResourceCards(CardResource.DATA).forEach((card) => {
         player.addResourceTo(card, {qty: 2, log: true});
       });

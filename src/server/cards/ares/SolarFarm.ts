@@ -3,7 +3,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
@@ -41,7 +41,7 @@ export class SolarFarm extends Card implements IProjectCard {
       throw new Error('Solar Farm space not found');
     }
     const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
-    player.production.add(Resources.ENERGY, plantsOnSpace, {log: true});
+    player.production.add(Resource.ENERGY, plantsOnSpace, {log: true});
   }
 
   public override bespokePlay(player: Player) {

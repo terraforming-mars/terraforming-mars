@@ -3,7 +3,7 @@ import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -20,7 +20,7 @@ describe('HeatTrappers', function() {
 
   it('Should be playable in solo mode', function() {
     game = Game.newInstance('gameid', [player], player);
-    player.production.add(Resources.HEAT, 1);
+    player.production.add(Resource.HEAT, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
@@ -31,7 +31,7 @@ describe('HeatTrappers', function() {
   });
 
   it('Should play - auto select if single target', function() {
-    player2.production.add(Resources.HEAT, 7);
+    player2.production.add(Resource.HEAT, 7);
     expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(player.production.energy).to.eq(1);
@@ -42,8 +42,8 @@ describe('HeatTrappers', function() {
   });
 
   it('Should play - multiple targets', function() {
-    player.production.add(Resources.HEAT, 3);
-    player2.production.add(Resources.HEAT, 7);
+    player.production.add(Resource.HEAT, 3);
+    player2.production.add(Resource.HEAT, 7);
     card.play(player);
 
     expect(player.production.energy).to.eq(1);

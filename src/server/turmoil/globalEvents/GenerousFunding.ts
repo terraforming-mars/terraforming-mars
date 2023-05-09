@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {digit} from '../../cards/Options';
@@ -28,7 +28,7 @@ export class GenerousFunding extends GlobalEvent implements IGlobalEvent {
       const trSets = Math.max(0, Math.floor((player.getTerraformRating() - 15) / 5));
       const maxTRSets = 5;
       const totalSets = Math.min(maxTRSets, trSets) + turmoil.getPlayerInfluence(player);
-      player.addResource(Resources.MEGACREDITS, 2 * totalSets, {log: true, from: this.name});
+      player.addResource(Resource.MEGACREDITS, 2 * totalSets, {log: true, from: this.name});
     });
   }
 }

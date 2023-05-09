@@ -8,7 +8,7 @@ export class Miranda extends Colony {
   constructor() {
     super({
       name: ColonyName.MIRANDA,
-      resourceType: CardResource.ANIMAL,
+      cardResource: CardResource.ANIMAL,
       buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
       tradeType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
       tradeQuantity: [0, 1, 1, 2, 2, 3, 3],

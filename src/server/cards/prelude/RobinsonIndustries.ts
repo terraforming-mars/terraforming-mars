@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ALL_RESOURCES} from '../../../common/Resources';
+import {ALL_RESOURCES} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';

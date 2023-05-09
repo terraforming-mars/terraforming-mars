@@ -11,7 +11,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all, digit, played} from '../Options';
 import {SerializedCard} from '../../SerializedCard';
 
@@ -89,7 +89,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 this.isDisabled = true;
                 player.increaseTerraformRatingSteps(3);
-                player.deductResource(Resources.MEGACREDITS, megaCreditsLost);
+                player.deductResource(Resource.MEGACREDITS, megaCreditsLost);
                 game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                 return undefined;
               }),

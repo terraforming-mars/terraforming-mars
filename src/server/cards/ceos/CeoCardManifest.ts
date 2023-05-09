@@ -40,6 +40,8 @@ import {Yvonne} from './Yvonne';
 import {Zan} from './Zan';
 
 
+import {CoLeadership} from './CoLeadership';
+
 export const CEO_CARD_MANIFEST = new ModuleManifest({
   module: 'ceo',
   ceoCards: {
@@ -80,5 +82,8 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.XU]: {Factory: Xu, compatibility: 'venus'},
     [CardName.YVONNE]: {Factory: Yvonne, compatibility: 'colonies'},
     [CardName.ZAN]: {Factory: Zan, compatibility: 'turmoil'},
+  },
+  preludeCards: {
+    [CardName.CO_LEADERSHIP]: {Factory: CoLeadership},
   },
 });

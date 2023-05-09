@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {Sabotage} from '../../src/server/turmoil/globalEvents/Sabotage';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -15,8 +15,8 @@ describe('Sabotage', function() {
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.initGlobalEvent(game);
-    player.production.add(Resources.ENERGY, 1);
-    player2.production.add(Resources.STEEL, 3);
+    player.production.add(Resource.ENERGY, 1);
+    player2.production.add(Resource.STEEL, 3);
 
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();

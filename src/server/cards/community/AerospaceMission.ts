@@ -4,7 +4,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class AerospaceMission extends PreludeCard {
   constructor() {
@@ -29,7 +29,7 @@ export class AerospaceMission extends PreludeCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.deductResource(Resources.MEGACREDITS, 14);
+    player.deductResource(Resource.MEGACREDITS, 14);
     player.game.defer(new BuildColony(player, {title: 'Select where to build the first colony'}));
     player.game.defer(new BuildColony(player, {title: 'Select where to build the second colony'}));
     return undefined;

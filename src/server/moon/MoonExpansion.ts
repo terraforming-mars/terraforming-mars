@@ -11,10 +11,10 @@ import {Units} from '../../common/Units';
 import {Tag} from '../../common/cards/Tag';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../../common/constants';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
-import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -166,7 +166,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.miningRate, increment, 6, () => {
-            player.production.add(Resources.TITANIUM, 1, {log: true});
+            player.production.add(Resource.TITANIUM, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, increment);
         }
@@ -190,7 +190,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.colonyRate, increment, 6, () => {
-            player.production.add(Resources.ENERGY, 1, {log: true});
+            player.production.add(Resource.ENERGY, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, count);
         }
@@ -214,7 +214,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.logisticRate, increment, 6, () => {
-            player.production.add(Resources.STEEL, 1, {log: true});
+            player.production.add(Resource.STEEL, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, increment);
         }
@@ -226,9 +226,9 @@ export class MoonExpansion {
   private static activateLunaFirst(sourcePlayer: Player | undefined, game: Game, count: number) {
     const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
     if (lunaFirstPlayer !== undefined) {
-      lunaFirstPlayer.addResource(Resources.MEGACREDITS, count, {log: true});
+      lunaFirstPlayer.addResource(Resource.MEGACREDITS, count, {log: true});
       if (lunaFirstPlayer.id === sourcePlayer?.id) {
-        lunaFirstPlayer.production.add(Resources.MEGACREDITS, count, {log: true});
+        lunaFirstPlayer.production.add(Resource.MEGACREDITS, count, {log: true});
       }
     }
   }

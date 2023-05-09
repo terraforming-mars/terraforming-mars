@@ -4,7 +4,7 @@ import {Shuttles} from '../../../src/server/cards/base/Shuttles';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -24,14 +24,14 @@ describe('Shuttles', function() {
   });
 
   it('Can not play if oxygen level too low', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 4);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     setOxygenLevel(game, 5);
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

@@ -1,13 +1,14 @@
-import {IMilestone} from './IMilestone';
+import {BaseMilestone} from './IMilestone';
 import {Player} from '../Player';
 
-export class Economizer implements IMilestone {
-  public readonly name = 'Economizer';
-  public readonly description = 'Requires that you have 5 heat production';
+export class Economizer extends BaseMilestone {
+  constructor() {
+    super(
+      'Economizer',
+      'Have 5 heat production',
+      5);
+  }
   public getScore(player: Player): number {
     return player.production.heat;
-  }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 5;
   }
 }

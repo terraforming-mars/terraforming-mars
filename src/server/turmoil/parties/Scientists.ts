@@ -3,7 +3,7 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {Player} from '../../Player';
@@ -27,7 +27,7 @@ class ScientistsBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -43,7 +43,7 @@ class ScientistsBonus02 implements Bonus {
 
   grant(game: Game) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, this.getScore(player));
+      player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }

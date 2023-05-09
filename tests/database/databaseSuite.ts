@@ -3,24 +3,23 @@ import {use} from 'chai';
 import chaiAsPromised = require('chai-as-promised');
 use(chaiAsPromised);
 
+import {ITestDatabase} from './ITestDatabase';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
-import {IDatabase} from '../../src/server/database/IDatabase';
 import {testGame} from '../TestGame';
+import {GameId} from '../../src/common/Types';
 
-export interface ITestDatabase extends IDatabase {
-  lastSaveGamePromise: Promise<void>;
-  afterEach?: () => Promise<void>;
-}
-
+/**
+ * Describes a database test
+ */
 export type DatabaseTestDescriptor = {
   name: string,
   constructor: () => ITestDatabase,
   stats: any,
   omit?: {
     purgeUnfinishedGames?: boolean,
-    cleanGame?: boolean,
+    markFinished?: boolean,
   },
   otherTests?: (dbFunction: () => ITestDatabase) => void,
 };
@@ -64,7 +63,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       Game.newInstance('game-id-2323', [player], player);
       await db.lastSaveGamePromise;
 
-      await db.cleanGame(game.id);
+      await db.markFinished(game.id);
 
       const allGameIds = await db.getGameIds();
       expect(allGameIds).has.members(['game-id-1212', 'game-id-2323']);
@@ -84,23 +83,68 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(allSaveIds).has.members([0, 1, 2, 3]);
     });
 
-    if (dtor.omit?.cleanGame !== true) {
-      it('cleanGame', async () => {
+    if (dtor.omit?.markFinished !== true) {
+      it('markFinished', async () => {
         const player = TestPlayer.BLACK.newPlayer();
         const game = Game.newInstance('game-id-1212', [player], player);
         await db.lastSaveGamePromise;
-        expect(game.lastSaveId).eq(1);
-
         await db.saveGame(game);
         await db.saveGame(game);
         await db.saveGame(game);
 
         expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+        expect(await db.status(game.id)).eq('running');
 
-        await db.cleanGame(game.id);
+        await db.markFinished(game.id);
 
+        expect(await db.status(game.id)).eq('finished');
         const saveIds = await db.getSaveIds(game.id);
-        expect(saveIds).has.members([0, 3]);
+        expect(saveIds).has.members([0, 1, 2, 3]);
+        expect(await db.completedTime(game.id)).is.not.undefined;
+      });
+
+      it('morecleaning', async () => {
+        async function createGame(id: GameId) {
+          const player = TestPlayer.BLACK.newPlayer();
+          const game = Game.newInstance(id, [player], player);
+          await db.lastSaveGamePromise;
+          await db.saveGame(game);
+          await db.saveGame(game);
+          await db.saveGame(game);
+
+          expect(await db.status(game.id)).eq('running');
+
+          await db.markFinished(game.id);
+
+          expect(await db.status(game.id)).eq('finished');
+        }
+
+        // Create 2 finished games.
+        await createGame('game1-id');
+        await createGame('game2-id');
+
+        expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
+        expect(await db.completedTime('game1-id')).is.not.undefined;
+
+        expect(await db.getSaveIds('game2-id')).has.members([0, 1, 2, 3]);
+        expect(await db.completedTime('game2-id')).is.not.undefined;
+
+        await db.compressCompletedGames('2');
+
+        expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
+        expect(await db.completedTime('game1-id')).is.not.undefined;
+
+        expect(await db.getSaveIds('game2-id')).has.members([0, 1, 2, 3]);
+        expect(await db.completedTime('game2-id')).is.not.undefined;
+
+        await db.setCompletedTime('game2-id', 100);
+        await db.compressCompletedGames('2');
+
+        expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
+        expect(await db.completedTime('game1-id')).is.not.undefined;
+
+        expect(await db.getSaveIds('game2-id')).has.members([0, 3]);
+        expect(await db.completedTime('game2-id')).is.undefined;
       });
     }
 

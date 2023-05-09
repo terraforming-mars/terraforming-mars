@@ -1,6 +1,5 @@
 import * as constants from '../../common/constants';
 import {Phase} from '../../common/Phase';
-import {CeoExtension} from '../CeoExtension';
 import {Player} from '../Player';
 import {Board} from '../boards/Board';
 import {MoonExpansion} from '../moon/MoonExpansion';
@@ -63,7 +62,6 @@ export function calculateVictoryPoints(player: Player) {
   player.colonies.calculateVictoryPoints(victoryPointsBreakdown);
   MoonExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
   PathfindersExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
-  CeoExtension.calculateVictoryPoints(player, victoryPointsBreakdown);
 
   // Escape velocity VP penalty
   if (player.game.gameOptions.escapeVelocityMode) {

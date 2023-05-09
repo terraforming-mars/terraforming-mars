@@ -74,6 +74,10 @@ export interface Score {
   playerScore: number;
 }
 export class Game implements Logger {
+  public readonly id: GameId;
+  public readonly gameOptions: Readonly<GameOptions>;
+  private players: Array<Player>;
+
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
@@ -137,20 +141,24 @@ export class Game implements Logger {
   // Syndicate Pirate Raids
   public syndicatePirateRaider?: PlayerId;
 
+  // The set of tags available in this game.
   public readonly tags: ReadonlyArray<Tag>;
 
   private constructor(
-    public id: GameId,
-    private players: Array<Player>,
+    id: GameId,
+    players: Array<Player>,
     first: Player,
     activePlayer: PlayerId,
-    public gameOptions: GameOptions,
+    gameOptions: GameOptions,
     rng: SeededRandom,
     board: Board,
     projectDeck: ProjectDeck,
     corporationDeck: CorporationDeck,
     preludeDeck: PreludeDeck,
     ceoDeck: CeoDeck) {
+    this.id = id;
+    this.gameOptions = {...gameOptions};
+    this.players = players;
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -192,9 +200,10 @@ export class Game implements Logger {
   public static newInstance(id: GameId,
     players: Array<Player>,
     firstPlayer: Player,
-    gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
+    options: Partial<GameOptions> = {},
     seed = 0,
     spectatorId: SpectatorId | undefined = undefined): Game {
+    const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }

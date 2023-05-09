@@ -14,8 +14,7 @@ describe('Europa', function() {
 
   beforeEach(function() {
     europa = new Europa();
-    [game, player, player2] = testGame(2);
-    game.gameOptions.coloniesExtension = true;
+    [game, player, player2] = testGame(2, {coloniesExtension: true});
     game.colonies.push(europa);
   });
 

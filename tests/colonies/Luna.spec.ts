@@ -13,8 +13,7 @@ describe('Luna', function() {
 
   beforeEach(function() {
     luna = new Luna();
-    [game, player, player2] = testGame(2);
-    game.gameOptions.coloniesExtension = true;
+    [game, player, player2] = testGame(2, {coloniesExtension: true});
     game.colonies.push(luna);
   });
 

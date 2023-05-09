@@ -18,8 +18,7 @@ describe('Enceladus', function() {
   beforeEach(function() {
     enceladus = new Enceladus();
     tardigrades = new Tardigrades();
-    [game, player, player2] = testGame(2);
-    game.gameOptions.coloniesExtension = true;
+    [game, player, player2] = testGame(2, {coloniesExtension: true});
     game.colonies.push(enceladus);
   });
 

@@ -969,7 +969,7 @@ export class Game implements Logger {
     }
   }
 
-  private gotoEndGame(): void {
+  private async gotoEndGame(): Promise<void> {
     // Log id or cloned game id
     if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
       const clonedGamedId = this.clonedGamedId;
@@ -988,12 +988,10 @@ export class Game implements Logger {
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
     this.phase = Phase.END;
-    Database.getInstance().saveGame(this).then(() => {
-      GameLoader.getInstance().mark(this.id);
-      return Database.getInstance().cleanGame(this.id);
-    }).catch((err) => {
-      console.error(err);
-    });
+    await Database.getInstance().saveGame(this);
+    GameLoader.getInstance().mark(this.id);
+    await Database.getInstance().markFinished(this.id);
+    Database.getInstance().maintenance();
   }
 
   // Part of final greenery placement.

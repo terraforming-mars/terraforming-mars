@@ -3,7 +3,7 @@ import {Game, Score} from '../Game';
 import {GameOptions} from '../GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-import {Pool, ClientConfig} from 'pg';
+import {Pool, ClientConfig, QueryResult} from 'pg';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
 
@@ -47,10 +47,12 @@ export class PostgreSQL implements IDatabase {
     await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
+    await this.client.query('CREATE TABLE IF NOT EXISTS completed_game(game_id varchar not null, completed_time timestamp default now(), PRIMARY KEY (game_id))');
 
     await this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
     await this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)');
     await this.client.query('CREATE INDEX IF NOT EXISTS participants_idx_ids on participants USING GIN (participants)');
+    await this.client.query('CREATE INDEX IF NOT EXISTS completed_game_idx_completed_time on completed_game(completed_time)');
   }
 
   public async getPlayerCount(gameId: GameId): Promise<number> {
@@ -144,15 +146,15 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  async cleanGame(gameId: GameId): Promise<void> {
-    const maxSaveId = await this.getMaxSaveId(gameId);
-    // DELETE all saves except initial and last one
-    const delete1 = this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId]);
-    // Flag game as finished
-    const delete2 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
-    // Purge after setting the status as finished so it does not delete the game.
-    const delete3 = this.purgeUnfinishedGames();
-    await Promise.all([delete1, delete2, delete3]);
+  async markFinished(gameId: GameId): Promise<void> {
+    const promise1 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
+    const promise2 = this.client.query('INSERT INTO completed_game(game_id) VALUES ($1)', [gameId]);
+    const promise3 = this.maintenance();
+    await Promise.all([promise1, promise2, promise3]);
+  }
+
+  maintenance(): Promise<unknown> {
+    return Promise.all([this.purgeUnfinishedGames(), this.compressCompletedGames()]);
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
@@ -170,6 +172,33 @@ export class PostgreSQL implements IDatabase {
     console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
     const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
     console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+  }
+
+
+  async compressCompletedGames(compressCompletedGamesDays: string | undefined = process.env.COMPRESS_COMPLETED_GAMES_DAYS): Promise<void> {
+    if (compressCompletedGamesDays === undefined) {
+      return;
+    }
+    const dateToSeconds = daysAgoToSeconds(compressCompletedGamesDays, 0);
+    const selectResult = await this.client.query('SELECT DISTINCT game_id FROM completed_game WHERE completed_time < to_timestamp($1)', [dateToSeconds]);
+    const gameIds = selectResult.rows.slice(0, 1000).map((row) => row.game_id);
+    console.log(`${gameIds.length} completed games to be compressed.`);
+    if (gameIds.length > 1000) {
+      gameIds.length = 1000;
+      console.log('Compressing 1000 games.');
+    }
+    for (const gameId of gameIds) {
+      // This isn't using await because nothing really depends on it.
+      this.compressCompletedGame(gameId);
+    }
+  }
+
+  async compressCompletedGame(gameId: GameId): Promise<QueryResult<any>> {
+    const maxSaveId = await this.getMaxSaveId(gameId);
+    return this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId])
+      .then(() => {
+        return this.client.query('DELETE FROM completed_games where game_id = $1', [gameId]);
+      });
   }
 
   async saveGame(game: Game): Promise<void> {
@@ -279,7 +308,7 @@ export class PostgreSQL implements IDatabase {
     // shows some bloat
     // and the postgres command
     // VACUUM (VERBOSE) shows a fairly reasonable vacumm (no rows locked, for instance),
-    // so it's not clear why those wrong. But these select count(*0) commands seem pretty quick
+    // so it's not clear why those wrong. But these select count(*) commands seem pretty quick
     // in testing. :fingers-crossed:
     for (const table of ['games', 'game_results', 'participants']) {
       const result = await this.client.query('select count(*) as rowcount from ' + table);

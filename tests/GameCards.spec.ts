@@ -11,13 +11,6 @@ describe('GameCards', function() {
     // include corporate era
     const gameOptions: GameOptions = {
       ...DEFAULT_GAME_OPTIONS,
-      // corporateEra: false,
-      // preludeExtension: false,
-      // venusNextExtension: false,
-      // coloniesExtension: false,
-      // turmoilExtension: false,
-      // promoCardsOption: false,
-      // communityCardsOption: false,
       aresExtension: true,
     };
     const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
@@ -30,13 +23,6 @@ describe('GameCards', function() {
     const gameOptions: GameOptions = {
       ...DEFAULT_GAME_OPTIONS,
       corporateEra: true,
-      // preludeExtension: false,
-      // venusNextExtension: false,
-      // coloniesExtension: false,
-      // turmoilExtension: false,
-      // promoCardsOption: false,
-      // communityCardsOption: false,
-      // aresExtension: false,
     };
     expect(new GameCards(gameOptions).getProjectCards().length)
       .to.eq(208);
@@ -51,11 +37,6 @@ describe('GameCards', function() {
     const gameOptions: GameOptions = {
       ...DEFAULT_GAME_OPTIONS,
       corporateEra: true,
-      // preludeExtension: false,
-      // venusNextExtension: false,
-      // coloniesExtension: false,
-      // turmoilExtension: false,
-      // promoCardsOption: false,
       communityCardsOption: true,
       aresExtension: false,
     };
@@ -74,12 +55,6 @@ describe('GameCards', function() {
       ...DEFAULT_GAME_OPTIONS,
       corporateEra: true,
       preludeExtension: true,
-      // venusNextExtension: false,
-      // coloniesExtension: false,
-      // turmoilExtension: false,
-      // promoCardsOption: false,
-      // communityCardsOption: false,
-      // aresExtension: false,
       twoCorpsVariant: true,
     };
 

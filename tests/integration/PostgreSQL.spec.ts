@@ -7,7 +7,7 @@ import {PostgreSQL} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
-import {runAllActions, testGameOptions} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 import {Player} from '../../src/server/Player';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {GameId} from '../../src/common/Types';
@@ -182,7 +182,7 @@ describeDatabaseSuite({
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
       const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({draftVariant: false, undoOption: true}));
+      const game = Game.newInstance('gameid', [player, player2], player, {draftVariant: false, undoOption: true});
       await db.awaitAllSaves();
 
       expect(await db.getStat('save-count')).eq(1);
@@ -257,7 +257,7 @@ describeDatabaseSuite({
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
       const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player, player2], player2, testGameOptions({draftVariant: false, undoOption: true}));
+      const game = Game.newInstance('gameid', [player, player2], player2, {draftVariant: false, undoOption: true});
       await db.awaitAllSaves();
 
       // Move into the action phase by having both players complete their research.
@@ -348,7 +348,7 @@ describeDatabaseSuite({
     it('undo works in solo', async () => {
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player], player, testGameOptions({undoOption: true}));
+      const game = Game.newInstance('gameid', [player], player, {undoOption: true});
       await db.awaitAllSaves();
 
       // Move into the action phase. This triggers a save.

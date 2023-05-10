@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Player} from '../src/server/Player';
 import {Game} from '../src/server/Game';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../src/server/GameOptions';
 import * as constants from '../src/common/constants';
 import {ISpace} from '../src/server/boards/ISpace';
 import {Phase} from '../src/common/Phase';
@@ -83,10 +82,6 @@ export function resetBoard(game: Game): void {
     space.player = undefined;
     space.tile = undefined;
   });
-}
-
-export function testGameOptions(options: Partial<GameOptions>): GameOptions {
-  return {...DEFAULT_GAME_OPTIONS, ...options};
 }
 
 export function setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {

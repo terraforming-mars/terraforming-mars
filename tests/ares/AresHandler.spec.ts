@@ -77,8 +77,8 @@ describe('AresHandler', function() {
 
     game.addTile(player, greenerySpace, {tileType: TileType.GREENERY});
 
-    expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 1, steel: 1}));
-    expect(otherPlayer.getResourcesForTest()).deep.eq(Units.of({megacredits: 2}));
+    expect(player.purse()).deep.eq(Units.of({titanium: 1, steel: 1}));
+    expect(otherPlayer.purse()).deep.eq(Units.of({megacredits: 2}));
   });
 
   describe('setupHazards', function() {

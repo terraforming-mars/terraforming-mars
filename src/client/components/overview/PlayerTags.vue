@@ -72,7 +72,6 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.COLONY_COUNT,
 ];
 
-// TODO(kberg): Possibly pull this from server model.
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   if (game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) return false;
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;

@@ -6,7 +6,6 @@ import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/server/Player';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 let card: GiantSolarShade;
 let player: TestPlayer;
@@ -19,7 +18,7 @@ describe('GiantSolarShade', function() {
     player = TestPlayer.BLUE.newPlayer();
     redPlayer = TestPlayer.RED.newPlayer();
 
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({venusNextExtension: true, turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {venusNextExtension: true, turmoilExtension: true});
   });
 
   it('Should play', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
@@ -15,7 +15,7 @@ describe('DeclarationOfIndependence', function() {
   beforeEach(function() {
     card = new DeclarationOfIndependence();
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    Game.newInstance('gameid', [player], player, {turmoilExtension: true});
     turmoil = player.game.turmoil!;
   });
 

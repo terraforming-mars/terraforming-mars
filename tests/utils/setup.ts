@@ -9,7 +9,7 @@ import {Executor} from '../../src/server/behavior/Executor';
 registerBehaviorExecutor(new Executor());
 
 const FAKE_DATABASE: IDatabase = {
-  cleanGame: () => Promise.resolve(),
+  markFinished: () => Promise.resolve(),
   deleteGameNbrSaves: () => Promise.resolve(),
   getPlayerCount: () => Promise.resolve(0),
   getGame: () => Promise.resolve({} as SerializedGame),
@@ -21,7 +21,9 @@ const FAKE_DATABASE: IDatabase = {
   loadCloneableGame: () => Promise.resolve({} as SerializedGame),
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),
+  maintenance: () => Promise.resolve(),
   purgeUnfinishedGames: () => Promise.resolve(),
+  compressCompletedGames: () => Promise.resolve(),
   stats: () => Promise.resolve({}),
 
   storeParticipants: () => Promise.resolve(),

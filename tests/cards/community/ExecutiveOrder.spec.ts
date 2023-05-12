@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -17,7 +17,7 @@ describe('ExecutiveOrder', function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
 
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
   });
 
   it('Should play', function() {

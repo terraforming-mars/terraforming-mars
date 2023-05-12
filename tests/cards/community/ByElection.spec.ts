@@ -3,7 +3,7 @@ import {ByElection} from '../../../src/server/cards/community/ByElection';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 
@@ -16,7 +16,7 @@ describe('ByElection', function() {
     card = new ByElection();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
   });
 
   it('Should play', function() {

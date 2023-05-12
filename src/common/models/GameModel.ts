@@ -9,7 +9,6 @@ import {AresData} from '../ares/AresData';
 import {SpaceModel} from './SpaceModel';
 import {MoonModel} from './MoonModel';
 import {PathfindersModel} from './PathfindersModel';
-import {CardModel} from './CardModel';
 import {SpectatorId} from '../Types';
 import {ColonyName} from '../colonies/ColonyName';
 
@@ -19,7 +18,6 @@ export type GameModel = {
   awards: Array<FundedAwardModel>;
   colonies: Array<ColonyModel>;
   discardedColonies: Array<ColonyName>;
-  corporationsToDraft: Array<CardModel>;
   deckSize: number;
   expectedPurgeTimeMs: number;
   gameAge: number;

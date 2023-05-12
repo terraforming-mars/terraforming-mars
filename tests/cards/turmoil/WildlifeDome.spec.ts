@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -23,7 +23,7 @@ describe('WildlifeDome', function() {
     card = new WildlifeDome();
     player = TestPlayer.BLUE.newPlayer();
     redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
     turmoil = game.turmoil!;
     reds = turmoil.getPartyByName(PartyName.REDS);
     greens = turmoil.getPartyByName(PartyName.GREENS);

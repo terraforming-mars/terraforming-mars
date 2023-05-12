@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {Resource} from '../../../common/Resource';
 
 export class Pristar extends Card implements ICorporationCard {
   constructor() {
@@ -41,7 +42,7 @@ export class Pristar extends Card implements ICorporationCard {
 
   public onProductionPhase(player: Player) {
     if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-      player.megaCredits += 6;
+      player.addResource(Resource.MEGACREDITS, 6, {log: true, from: this});
       player.addResourceTo(this, 1);
     }
     return undefined;

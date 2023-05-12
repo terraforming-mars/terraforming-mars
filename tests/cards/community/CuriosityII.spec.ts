@@ -5,7 +5,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Phase} from '../../../src/common/Phase';
 import {TileType} from '../../../src/common/TileType';
-import {testGameOptions, runAllActions, cast} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
@@ -19,7 +19,7 @@ describe('CuriosityII', function() {
     card = new CuriosityII();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({aresExtension: true, aresHazards: false}));
+    game = Game.newInstance('gameid', [player, player2], player, {aresExtension: true, aresHazards: false});
     game.phase = Phase.ACTION;
 
     player.setCorporationForTest(card);

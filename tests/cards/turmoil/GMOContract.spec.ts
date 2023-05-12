@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {GMOContract} from '../../../src/server/cards/turmoil/GMOContract';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {testGameOptions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('GMOContract', function() {
   it('Should play', function() {
     const card = new GMOContract();
-    const [game, player] = testGame(1, testGameOptions({turmoilExtension: true}));
+    const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
 
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);

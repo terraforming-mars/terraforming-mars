@@ -14,7 +14,7 @@ describe('SelectResources', function() {
   it('Simple', function() {
     const selectResources = new SelectResources(player, 2, '');
 
-    expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
+    expect(player.purse()).deep.eq(Units.EMPTY);
     selectResources.process({type: 'and', responses: [
       {type: 'amount', amount: 1},
       {type: 'amount', amount: 0},
@@ -23,7 +23,7 @@ describe('SelectResources', function() {
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
     ]}, player);
-    expect(player.getResourcesForTest()).deep.eq(Units.of({megacredits: 1, plants: 1}));
+    expect(player.purse()).deep.eq(Units.of({megacredits: 1, plants: 1}));
   });
 
   it('No options', function() {

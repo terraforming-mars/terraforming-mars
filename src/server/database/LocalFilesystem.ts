@@ -145,12 +145,21 @@ export class LocalFilesystem implements IDatabase {
     writeFileSync(this.completedFilename(gameId), text);
   }
 
-  cleanGame(_gameId: GameId): Promise<void> {
+  markFinished(_gameId: GameId): Promise<void> {
     // Not implemented here.
     return Promise.resolve();
   }
 
+  maintenance(): Promise<void> {
+    return this.purgeUnfinishedGames();
+  }
+
   purgeUnfinishedGames(): Promise<void> {
+    // Not implemented.
+    return Promise.resolve();
+  }
+
+  compressCompletedGames(): Promise<unknown> {
     // Not implemented.
     return Promise.resolve();
   }

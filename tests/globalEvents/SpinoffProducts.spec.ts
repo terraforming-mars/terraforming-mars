@@ -8,7 +8,6 @@ import {testGame} from '../TestGame';
 import {TestPlayer} from '../TestPlayer';
 import {HabitatMarte} from '../../src/server/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../src/server/cards/pathfinders/DesignedOrganisms';
-import {testGameOptions} from '../TestingUtils';
 
 describe('SpinoffProducts', function() {
   let card: SpinoffProducts;
@@ -19,7 +18,7 @@ describe('SpinoffProducts', function() {
 
   beforeEach(() => {
     card = new SpinoffProducts();
-    [game, player, player2] = testGame(2, testGameOptions({turmoilExtension: true}));
+    [game, player, player2] = testGame(2, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 

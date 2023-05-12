@@ -43,15 +43,17 @@ export class TestPlayer extends Player {
     this.tags = new TestTags(this);
   }
 
-  public getResourcesForTest(): Units {
-    return {
+  public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
+
+  public purse(): Units {
+    return Units.of({
       megacredits: this.megaCredits,
       steel: this.steel,
       titanium: this.titanium,
       plants: this.plants,
       energy: this.energy,
       heat: this.heat,
-    };
+    });
   }
 
   public setResourcesForTest(units: Units) {
@@ -63,21 +65,8 @@ export class TestPlayer extends Player {
     this.heat = units.heat;
   }
 
-  public tagsForTest: Partial<TagsForTest> | undefined = undefined;
-
   public override runInput(input: InputResponse, pi: PlayerInput): void {
     super.runInput(input, pi);
-  }
-
-  public purse(): Units {
-    return Units.of({
-      megacredits: this.megaCredits,
-      steel: this.steel,
-      titanium: this.titanium,
-      plants: this.plants,
-      energy: this.energy,
-      heat: this.heat,
-    });
   }
 
   public popWaitingFor2(): [PlayerInput | undefined, (() => void) | undefined] {
@@ -102,23 +91,4 @@ export class TestPlayer extends Player {
       this.corporations = [card];
     }
   }
-}
-
-export type TagsForTest = {
-  building: number;
-  space: number;
-  science: number;
-  power: number;
-  earth: number;
-  jovian: number;
-  venus: number;
-  plant: number;
-  microbe: number;
-  animal: number;
-  city: number;
-  wild: number;
-  moon: number;
-  event: number;
-  mars: number;
-  clone: number;
 }

@@ -78,6 +78,8 @@ const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
 export type CardAction ='add' | 'discard' | 'nothing';
 
+export type ResourceSource = Player | GlobalEventName | ICard;
+
 export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
@@ -333,7 +335,7 @@ export class Player {
     resource: Resource,
     amount: number,
     unitType: 'production' | 'amount',
-    from: Player | GlobalEventName | undefined,
+    from: ResourceSource | undefined,
     stealing = false,
   ) {
     if (amount === 0) {
@@ -360,7 +362,9 @@ export class Player {
         .number(absAmount);
       if (from instanceof Player) {
         b.player(from);
-      } else if (from !== undefined) {
+      } else if (typeof(from) === 'object') {
+        b.cardName(from.name);
+      } else if (typeof(from) === 'string') {
         b.globalEventName(from);
       }
     });
@@ -371,7 +375,7 @@ export class Player {
     amount: number,
     options? : {
       log?: boolean,
-      from? : Player | GlobalEventName,
+      from? : ResourceSource,
       stealing?: boolean
     }) {
     this.addResource(resource, -amount, options);
@@ -382,7 +386,7 @@ export class Player {
     amount: number,
     options? : {
       log?: boolean,
-      from? : Player | GlobalEventName,
+      from? : ResourceSource,
       stealing?: boolean
     }) {
     // When amount is negative, sometimes the amount being asked to be removed is more than the player has.
@@ -460,7 +464,7 @@ export class Player {
 
   public addUnits(units: Partial<Units>, options? : {
     log?: boolean,
-    from? : Player | GlobalEventName,
+    from? : ResourceSource,
   }) {
     this.addResource(Resource.MEGACREDITS, units.megacredits || 0, options);
     this.addResource(Resource.STEEL, units.steel || 0, options);
@@ -696,10 +700,6 @@ export class Player {
     return count;
   }
 
-  public getCardsByCardType(cardType: CardType) {
-    return this.playedCards.filter((card) => card.type === cardType);
-  }
-
   public deferInputCb(result: PlayerInput | undefined): void {
     this.defer(result, Priority.DEFAULT);
   }
@@ -891,30 +891,6 @@ export class Player {
           this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
           return undefined;
         }, {min: cardsToKeep, max: cardsToKeep, played: false}),
-    );
-  }
-
-  /*
-   * @param playerName  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player.
-   */
-  public runDraftCorporationPhase(playerName: string, passedCards: Array<ICorporationCard>): void {
-    let cards: Array<ICorporationCard> = passedCards;
-
-    this.setWaitingFor(
-      new SelectCard(
-        newMessage('Select a corporation to keep and pass the rest to ${0}', (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
-        'Keep',
-        cards,
-        (foundCards: Array<ICorporationCard>) => {
-          foundCards.forEach((card) => {
-            this.draftedCorporations.push(card);
-            this.game.log('${0} kept ${1}', (b) => b.player(this).card(card));
-            cards = cards.filter((c) => c !== card);
-          });
-          this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
-          return undefined;
-        }, {min: 1, max: 1, played: false}),
     );
   }
 
@@ -1328,7 +1304,7 @@ export class Player {
       // VanAllen CEO Hook for Milestones
       const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
       if (vanAllen !== undefined) {
-        vanAllen.addResource(Resource.MEGACREDITS, 3, {log: true});
+        vanAllen.addResource(Resource.MEGACREDITS, 3, {log: true, from: this});
       }
       if (!this.cardIsInEffect(CardName.VANALLEN)) {
         this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));

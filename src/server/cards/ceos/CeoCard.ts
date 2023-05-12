@@ -1,16 +1,9 @@
-import {Card} from '../Card';
+import {Card, StaticCardProperties} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
-import {CardName} from '../../../common/cards/CardName';
-import {Tag} from '../../../common/cards/Tag';
 import {ICeoCard} from './ICeoCard';
 import {Player} from '../../../server/Player';
 
-interface StaticCeoProperties {
-    metadata: ICardMetadata;
-    name: CardName;
-    tags?: Array<Tag>;
-}
+type StaticCeoProperties = Pick<StaticCardProperties, 'name' | 'tags' | 'victoryPoints' | 'metadata'>;
 
 export abstract class CeoCard extends Card implements ICeoCard {
   public isDisabled = false;
@@ -18,9 +11,7 @@ export abstract class CeoCard extends Card implements ICeoCard {
   constructor(properties: StaticCeoProperties) {
     super({
       type: CardType.CEO,
-      name: properties.name,
-      tags: properties.tags,
-      metadata: properties.metadata,
+      ...properties,
     });
   }
 

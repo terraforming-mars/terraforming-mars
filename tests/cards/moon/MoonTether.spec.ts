@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {fakeCard, testGameOptions} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonTether} from '../../../src/server/cards/moon/MoonTether';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -11,7 +11,7 @@ describe('MoonTether', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new MoonTether();
   });
 

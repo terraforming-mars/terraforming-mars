@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaResort} from '../../../src/server/cards/moon/LunaResort';
 import {TileType} from '../../../src/common/TileType';
@@ -15,7 +14,7 @@ describe('LunaResort', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new LunaResort();
   });

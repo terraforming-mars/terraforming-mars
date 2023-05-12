@@ -107,14 +107,11 @@ describe('GameLoader', function() {
   });
 
   it('gets game when added and not in database', async function() {
-    game.id = 'gameid-alpha';
-    try {
-      instance.add(game);
-      const game1 = await instance.getGame('gameid-alpha');
-      expect(game1!.id).to.eq('gameid-alpha');
-    } finally {
-      game.id = 'gameid';
-    }
+    // Violating the readonly nature for this test. It ensures that no game with the specific ID is not in the loader.
+    (game.id as GameId) = 'gameid-alpha';
+    instance.add(game);
+    const game1 = await instance.getGame('gameid-alpha');
+    expect(game1!.id).to.eq('gameid-alpha');
   });
 
   it('gets player when added and not in database', async function() {

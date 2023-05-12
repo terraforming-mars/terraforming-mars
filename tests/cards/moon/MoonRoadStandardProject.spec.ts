@@ -1,7 +1,7 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testGameOptions, testRedsCosts} from '../../TestingUtils';
+import {cast, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonRoadStandardProject} from '../../../src/server/cards/moon/MoonRoadStandardProject';
 import {expect} from 'chai';
@@ -18,7 +18,7 @@ describe('MoonRoadStandardProject', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MoonRoadStandardProject();
   });
@@ -71,7 +71,7 @@ describe('MoonRoadStandardProject', () => {
 
   it('can act when Reds are in power.', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 

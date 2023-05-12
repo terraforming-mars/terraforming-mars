@@ -3,7 +3,7 @@ import {PoliticalUprising} from '../../../src/server/cards/community/PoliticalUp
 import {Game} from '../../../src/server/Game';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PoliticalUprising', function() {
@@ -15,7 +15,7 @@ describe('PoliticalUprising', function() {
     card = new PoliticalUprising();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
   });
 
   it('Should play', function() {

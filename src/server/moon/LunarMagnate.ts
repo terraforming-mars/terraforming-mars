@@ -4,7 +4,7 @@ import {MoonExpansion} from './MoonExpansion';
 
 export class LunarMagnate implements IAward {
   public readonly name = 'Lunar Magnate';
-  public readonly description = 'Owning the most tiles on The Moon.';
+  public readonly description = 'Own the most tiles on The Moon';
   public getScore(player: Player): number {
     return MoonExpansion.ifElseMoon(player.game, (moonData) => {
       return moonData.moon.spaces.filter((space) => space.player?.id === player.id).length;

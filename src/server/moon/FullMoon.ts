@@ -4,7 +4,7 @@ import {Player} from '../Player';
 
 export class FullMoon implements IAward {
   public readonly name = 'Full Moon';
-  public readonly description = 'Having the most moon tags in play.';
+  public readonly description = 'Have the most moon tags';
   public getScore(player: Player): number {
     return player.tags.count(Tag.MOON, 'award');
   }

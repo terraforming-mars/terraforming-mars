@@ -4,7 +4,7 @@ import {isHazardTileType} from '../../common/TileType';
 
 export class Edgedancer implements IAward {
   public readonly name = 'Edgedancer';
-  public readonly description = 'Most tiles on the edges of the board';
+  public readonly description = 'Own the most tiles on the edges of the board';
 
   public getScore(player: Player): number {
     return player.game.board.spaces

@@ -107,7 +107,7 @@ describe('SelectInitialCards', function() {
     expect(savedData).is.undefined;
 
     await component.vm.$nextTick();
-    const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
+    const confirmationDialog = getConfirmDialog(component);
     expect(confirmationDialog.$data.shown).is.true;
   });
 
@@ -126,9 +126,25 @@ describe('SelectInitialCards', function() {
     expect(savedData).is.undefined;
 
     await component.vm.$nextTick();
-    const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
+    const confirmationDialog = getConfirmDialog(component);
     expect(confirmationDialog.$data.shown).is.true;
   });
+});
+
+it('Cannot select two ceos', async function() {
+  const component = createComponent([CardName.ECOLINE], [CardName.ANTS], undefined, [CardName.FLOYD, CardName.HAL9000, CardName.ENDER]);
+  expect(component).not.is.undefined;
+
+  const selectCards = component.findAllComponents({name: 'select-card'});
+  expect(selectCards.length).to.eq(3);
+  selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
+  selectCards.at(1).vm.$emit('cardschanged', [CardName.FLOYD, CardName.HAL9000]);
+  selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
+  await component.vm.$nextTick();
+
+  const button = getButton(component);
+  console.log(button.attributes());
+  expect(button.attributes().disabled).eq('disabled');
 });
 
 function getButton(component: Wrapper<SelectInitialCards>) {
@@ -136,7 +152,11 @@ function getButton(component: Wrapper<SelectInitialCards>) {
   return button.findAllComponents({name: 'AppButton'}).at(0);
 }
 
-function createComponent(corpCards: Array<CardName>, projectCards: Array<CardName>, preludeCards?: Array<CardName>) {
+function getConfirmDialog(component: Wrapper<SelectInitialCards>): InstanceType<typeof ConfirmDialog> {
+  return component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
+}
+
+function createComponent(corpCards: Array<CardName>, projectCards: Array<CardName>, preludeCards?: Array<CardName>, ceoCards?: Array<CardName>) {
   const toObject = (cards: Array<CardName>) => cards.map((name) => {
     return {name} as CardModel;
   });
@@ -154,6 +174,12 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
       cards: toObject(preludeCards),
     });
   }
+  if (ceoCards) {
+    options.push({
+      title: titles.SELECT_CEO_TITLE,
+      cards: toObject(ceoCards),
+    });
+  }
 
   return mount(SelectInitialCards, {
     localVue: getLocalVue(),
@@ -162,12 +188,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
         id: 'foo',
         dealtCorporationCards: [],
         thisPlayer: {actionsThisGeneration: []},
-        game: {
-          gameOptions: {
-            preludeExtension: false,
-            leadersExtension: false,
-          },
-        },
+        game: {},
       },
       playerinput: {
         title: 'foo',

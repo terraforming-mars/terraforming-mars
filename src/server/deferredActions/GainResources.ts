@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
@@ -11,7 +11,7 @@ export type Options = {
 export class GainResources extends DeferredAction {
   constructor(
     player: Player,
-    public resource: Resources,
+    public resource: Resource,
     public options: Options = {},
   ) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
@@ -25,9 +25,7 @@ export class GainResources extends DeferredAction {
       return undefined;
     }
     this.player.addResource(this.resource, this.options.count ?? 1, {log: this.options.log});
-    if (this.options.cb) {
-      this.options.cb();
-    }
+    this.options.cb?.();
     return undefined;
   }
 }

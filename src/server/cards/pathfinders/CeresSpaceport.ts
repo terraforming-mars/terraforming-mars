@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class CeresSpaceport extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CERES_SPACEPORT,
       tags: [Tag.JOVIAN, Tag.JOVIAN, Tag.CITY, Tag.SPACE],
       cost: 36,

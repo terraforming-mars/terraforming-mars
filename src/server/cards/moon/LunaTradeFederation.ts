@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 // import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {Card} from '../Card';
@@ -17,7 +17,7 @@ import {multiplier} from '../Options';
 export class LunaTradeFederation extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.LUNA_TRADE_FEDERATION,
       tags: [Tag.MOON, Tag.SPACE],
       startingMegaCredits: 15,
@@ -64,7 +64,7 @@ export class LunaTradeFederation extends Card implements ICorporationCard {
   // }
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (activePlayer === cardOwner && MoonExpansion.spaceHasType(space, TileType.MOON_MINE)) {
-      cardOwner.production.add(Resources.TITANIUM, 1, {log: true});
+      cardOwner.production.add(Resource.TITANIUM, 1, {log: true});
     }
   }
 }

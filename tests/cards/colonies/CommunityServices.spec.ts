@@ -19,7 +19,7 @@ describe('CommunityServices', function() {
     player.setCorporationForTest(corpo);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });
   it('Wild Tags', function() {
@@ -33,7 +33,7 @@ describe('CommunityServices', function() {
     player.setCorporationForTest(corpo);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });
 });

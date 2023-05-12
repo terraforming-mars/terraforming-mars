@@ -18,7 +18,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class MindSetMars extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.MIND_SET_MARS,
       startingMegaCredits: 44,
       resourceType: CardResource.AGENDA,
@@ -44,7 +44,7 @@ export class MindSetMars extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (player.game.getCardPlayer(this.name) !== player) return;
+    if (player.game.getCardPlayerOrUndefined(this.name) !== player) return;
     if (card.tags.includes(Tag.BUILDING)) {
       player.addResourceTo(this, {qty: 1, log: true});
     }

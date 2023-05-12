@@ -2,7 +2,6 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
 import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -608,7 +607,6 @@ describe('SelectProjectCardToPlay', () => {
       cards: [{
         name: cardName,
         resources: undefined,
-        cardType: CardType.ACTIVE,
         isDisabled: false,
         reserveUnits: reserveUnits,
         calculatedCost: cardCost,

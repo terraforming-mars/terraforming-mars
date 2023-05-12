@@ -299,6 +299,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.AWARD));
   }
 
+  public milestone(options?: ItemOptions | undefined) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MILESTONE, 1, options));
+  }
+
   public corporation() {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.CORPORATION));
   }
@@ -513,6 +517,16 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
+  public text2(text: string, options: {size?: Size, caps?: boolean, bold?: boolean, all?: boolean}) {
+    const item = new CardRenderItem(CardRenderItemType.TEXT);
+    item.text = text;
+    item.size = options.size || Size.MEDIUM;
+    item.isUppercase = options.caps || false;
+    item.isBold = options.bold || true;
+    item.anyPlayer = options.all;
+    return this._appendToRow(item);
+  }
+
   public vpText(text: string): Builder<T> {
     return this.text(text, Size.TINY, true);
   }
@@ -578,13 +592,20 @@ abstract class Builder<T> {
   public opgArrow(): Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.ARROW_OPG));
   }
-
   // Reds icons used by Zan
   public reds(): Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.REDS));
   }
   public redsInactive(): Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.REDS_DEACTIVATED));
+  }
+  // Hazard tiles for Caesar
+  public hazardTile(amount: number = 1, options?: ItemOptions | undefined): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.HAZARD_TILE, amount, options));
+  }
+  public adjacencyBonus(): Builder<T> {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.ADJACENCY_BONUS));
+    return this;
   }
 }
 

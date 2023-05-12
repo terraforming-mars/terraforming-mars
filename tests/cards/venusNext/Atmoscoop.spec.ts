@@ -10,8 +10,9 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature, setVenusScaleLevel} from '../../TestingUtils';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
+import {testGame} from '../../TestGame';
 
 describe('Atmoscoop', function() {
   let card: Atmoscoop;
@@ -22,22 +23,19 @@ describe('Atmoscoop', function() {
 
   beforeEach(function() {
     card = new Atmoscoop();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({venusNextExtension: true}));
+    [game, player] = testGame(2, {venusNextExtension: true});
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();
-    player.popSelectInitialCards();
   });
 
   it('Cannot play', function() {
     player.playedCards.push(new Research());
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play - no targets', function() {
     player.playedCards.push(new Research(), new SearchForLife());
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     const action = cast(card.play(player), OrOptions);
 
@@ -85,7 +83,7 @@ describe('Atmoscoop', function() {
 
   it('Should play - single target, one global parameter maxed', function() {
     player.playedCards.push(dirigibles);
-    (game as any).temperature = constants.MAX_TEMPERATURE;
+    setTemperature(game, constants.MAX_TEMPERATURE);
 
     const action = card.play(player);
     expect(action).is.undefined;
@@ -99,8 +97,8 @@ describe('Atmoscoop', function() {
 
   it('Should play - single target, both global parameters maxed', function() {
     player.playedCards.push(dirigibles);
-    (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
-    (game as any).temperature = constants.MAX_TEMPERATURE;
+    setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
+    setTemperature(game, constants.MAX_TEMPERATURE);
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -111,7 +109,7 @@ describe('Atmoscoop', function() {
 
   it('Should play - multiple targets, one global parameter maxed', function() {
     player.playedCards.push(dirigibles, floatingHabs);
-    (game as any).temperature = constants.MAX_TEMPERATURE;
+    setTemperature(game, constants.MAX_TEMPERATURE);
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -124,8 +122,8 @@ describe('Atmoscoop', function() {
 
   it('Should play - multiple targets, both global parameters maxed', function() {
     player.playedCards.push(dirigibles, floatingHabs);
-    (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
-    (game as any).temperature = constants.MAX_TEMPERATURE;
+    setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
+    setTemperature(game, constants.MAX_TEMPERATURE);
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);

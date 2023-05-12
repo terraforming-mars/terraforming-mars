@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
 import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
@@ -13,9 +13,7 @@ describe('CometAiming', function() {
 
   beforeEach(function() {
     card = new CometAiming();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

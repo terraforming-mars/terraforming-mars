@@ -6,7 +6,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -17,8 +16,8 @@ export class Arklight extends Card implements ICorporationCard {
       tags: [Tag.ANIMAL],
       startingMegaCredits: 45,
       resourceType: CardResource.ANIMAL,
-      cardType: CardType.CORPORATION,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      type: CardType.CORPORATION,
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       behavior: {
         production: {megacredits: 2},

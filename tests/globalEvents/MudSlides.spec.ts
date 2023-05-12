@@ -3,25 +3,20 @@ import {Game} from '../../src/server/Game';
 import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
-import {testGameOptions} from '../TestingUtils';
+import {testGame} from '../TestGame';
 import {ISpace} from '../../src/server/boards/ISpace';
 import {TileType} from '../../src/common/TileType';
 
 describe('MudSlides', function() {
   let card: MudSlides;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 
   beforeEach(() => {
     card = new MudSlides();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
-    turmoil = Turmoil.newInstance(game);
-    turmoil.initGlobalEvent(game);
+    [game, player] = testGame(2, {turmoilExtension: true, aresExtension: true});
+    turmoil = Turmoil.getTurmoil(game);
   });
 
   it('resolve play', function() {
@@ -36,8 +31,7 @@ describe('MudSlides', function() {
   });
 
   it('resolve play with overplaced tiles', function() {
-    game = newTestGame(2, testGameOptions({aresExtension: true, turmoilExtension: true}));
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
 
     // Find two adjacent ocean spaces
     function adjacentOceans(): {first: ISpace, second: ISpace} {
@@ -62,7 +56,6 @@ describe('MudSlides', function() {
       tileType: TileType.OCEAN_CITY,
       covers: spaces.second.tile,
     };
-    game.gameOptions.aresExtension = true;
     player.game.addTile(player, spaces.second, tile);
 
     player.megaCredits = 10;

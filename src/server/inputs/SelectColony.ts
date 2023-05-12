@@ -5,6 +5,11 @@ import {IColony} from '../colonies/IColony';
 import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
 
 export class SelectColony extends BasePlayerInput {
+  // When true, show just the tile, and none of the cubes on top.
+  // Used for tiles that are not yet in the game, or for a clearer
+  // visualziation when necesary.
+  public showTileOnly = false;
+
   constructor(
     title: string | Message,
     buttonLabel: string = 'Save',

@@ -1,6 +1,6 @@
 import {ICard} from './ICard';
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
 
@@ -14,7 +14,7 @@ export interface IProjectCard extends ICard {
     //
     // It's also used when rendering the card to indicate which production bonus it might have received, as
     // a visual cue for someone playing Robotic Workforce.
-    bonusResource?: Array<Resources>;
+    bonusResource?: Array<Resource>;
 
     // Represents resources held in reserve when paying for a card.
     // Cards that require a unit of steel while playing, for instance.
@@ -23,7 +23,7 @@ export interface IProjectCard extends ICard {
 }
 
 export function isIProjectCard(card: ICard): card is IProjectCard {
-  return card.cardType === CardType.AUTOMATED ||
-    card.cardType === CardType.ACTIVE ||
-    card.cardType === CardType.EVENT;
+  return card.type === CardType.AUTOMATED ||
+    card.type === CardType.ACTIVE ||
+    card.type === CardType.EVENT;
 }

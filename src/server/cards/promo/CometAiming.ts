@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class CometAiming extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.COMET_AIMING,
       tags: [Tag.SPACE],
       cost: 17,

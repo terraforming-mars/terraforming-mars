@@ -67,7 +67,18 @@ describe('Units', () => {
     });
   });
 
-  // todo: test for isUnits
+  it('isUnits', () => {
+    expect(Units.isUnits(undefined)).is.false;
+    expect(Units.isUnits(1)).is.false;
+    expect(Units.isUnits([])).is.false;
+    expect(Units.isUnits({})).is.false;
+    expect(Units.isUnits(Units.EMPTY)).is.true;
+    expect(Units.isUnits({steel: 0})).is.false;
+    expect(Units.isUnits({megacredits: 1, steel: 2, titanium: 3, plants: 4, energy: 5, heat: 6})).is.true;
+    expect(Units.isUnits({megaCredits: 1, steel: 2, titanium: 3, plants: 4, energy: 5, heat: 6})).is.false;
+    expect(Units.isUnits({megacredits: undefined, steel: 2, titanium: 3, plants: 4, energy: 5, heat: 6})).is.false;
+    expect(Units.isUnits({megacredits: NaN, steel: 2, titanium: 3, plants: 4, energy: 5, heat: 6})).is.false;
+  });
 
   it('isEmpty', () => {
     expect(Units.isEmpty({})).is.true;
@@ -102,5 +113,12 @@ describe('Units', () => {
     expect(Units.partial({megacredits: undefined})).deep.eq({});
     expect(Units.partial({megacredits: 1})).deep.eq({megacredits: 1});
     expect(Units.partial({megacredits: -1})).deep.eq({megacredits: -1});
+  });
+
+  it('values', () => {
+    expect(
+      Units.values(
+        Units.of({megacredits: -2, steel: -1, titanium: 0, plants: 1, energy: 2, heat: 3}),
+      )).deep.eq([-2, -1, 0, 1, 2, 3]);
   });
 });

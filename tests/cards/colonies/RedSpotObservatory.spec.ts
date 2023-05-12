@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {RedSpotObservatory} from '../../../src/server/cards/colonies/RedSpotObservatory';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -11,18 +11,16 @@ describe('RedSpotObservatory', function() {
 
   beforeEach(function() {
     card = new RedSpotObservatory();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(card, card, card);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     const action = card.play(player);
     expect(action).is.undefined;
@@ -38,6 +36,6 @@ describe('RedSpotObservatory', function() {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(card.resourceCount).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

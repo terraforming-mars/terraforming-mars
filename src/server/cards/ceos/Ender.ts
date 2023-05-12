@@ -30,6 +30,7 @@ export class Ender extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const max = Math.min(player.cardsInHand.length, player.game.generation * 2);
     // TODO(d-little): Replace with SelectCard.
     return new SelectAmount(
@@ -38,7 +39,6 @@ export class Ender extends CeoCard {
       (amount: number) => {
         player.game.defer(new DiscardCards(player, amount), Priority.DISCARD_AND_DRAW);
         player.game.defer(DrawCards.keepAll(player, amount));
-        this.isDisabled = true;
         return undefined;
       },
       1,

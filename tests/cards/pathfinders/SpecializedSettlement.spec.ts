@@ -11,7 +11,7 @@ import {TileType} from '../../../src/common/TileType';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('SpecializedSettlement', function() {
   let card: SpecializedSettlement;
@@ -20,17 +20,16 @@ describe('SpecializedSettlement', function() {
 
   beforeEach(function() {
     card = new SpecializedSettlement();
-    game = newTestGame(1, {aresExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {aresExtension: true, pathfindersExpansion: true});
     game.board = EmptyBoard.newInstance();
     player.popWaitingFor(); // Clears out the default waiting for (selecting initial cards)
   });
 
   it('Can play', () => {
     player.production.override({energy: 0});
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
     player.production.override({energy: 1});
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('play', function() {
@@ -151,7 +150,7 @@ describe('SpecializedSettlement', function() {
     expect(hazardSpace.player).eq(player);
 
     runAllActions(game);
-    expect(player.getResourcesForTest()).deep.eq(Units.of({}));
+    expect(player.purse()).deep.eq(Units.of({}));
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
@@ -168,7 +167,7 @@ describe('SpecializedSettlement', function() {
 
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(space.player).eq(player);
-    expect(player.getResourcesForTest()).deep.eq(Units.of(stock));
+    expect(player.purse()).deep.eq(Units.of(stock));
 
     runAllActions(game);
 

@@ -5,7 +5,7 @@ import {ICorporationCard} from './ICorporationCard';
 import {Phase} from '../../../common/Phase';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {GainProduction} from '../../deferredActions/GainProduction';
@@ -16,7 +16,7 @@ import {digit} from '../Options';
 export class MiningGuild extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.MINING_GUILD,
       tags: [Tag.BUILDING, Tag.BUILDING],
       startingMegaCredits: 30,
@@ -56,7 +56,7 @@ export class MiningGuild extends Card implements ICorporationCard {
       return;
     }
     if (space.bonus.some((bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM)) {
-      cardOwner.game.defer(new GainProduction(cardOwner, Resources.STEEL));
+      cardOwner.game.defer(new GainProduction(cardOwner, Resource.STEEL));
     }
   }
 }

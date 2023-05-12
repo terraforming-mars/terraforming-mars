@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {HydrogenProcessingPlant} from '../../../src/server/cards/pathfinders/HydrogenProcessingPlant';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {addOcean} from '../../TestingUtils';
+import {addOcean, setOxygenLevel} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 
 describe('HydrogenProcessingPlant', function() {
@@ -18,11 +18,11 @@ describe('HydrogenProcessingPlant', function() {
   });
 
   it('canPlay', function() {
-    (game as any).oxygenLevel = 2;
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    setOxygenLevel(game, 2);
+    expect(player.simpleCanPlay(card)).is.false;
 
-    (game as any).oxygenLevel = 3;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setOxygenLevel(game, 3);
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('play', function() {

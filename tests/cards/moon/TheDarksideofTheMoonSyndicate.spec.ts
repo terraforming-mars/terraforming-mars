@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
@@ -8,7 +8,7 @@ import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/common/Phase';
-import {getTestPlayers, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('TheDarksideofTheMoonSyndicate', () => {
   let game: Game;
@@ -19,11 +19,9 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    game = newTestGame(3, testGameOptions({moonExpansion: true}));
-    [player, player2, player3] = getTestPlayers(game);
+    [game, player, player2, player3] = testGame(3, {moonExpansion: true});
     card = new TheDarksideofTheMoonSyndicate();
     moonData = MoonExpansion.moonData(game);
-    player.popSelectInitialCards();
   });
 
   it('can act', () => {

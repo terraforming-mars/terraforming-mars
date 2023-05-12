@@ -1,23 +1,24 @@
-import {IMilestone} from './IMilestone';
+import {BaseMilestone} from './IMilestone';
 import {Player} from '../Player';
 import {CardType} from '../../common/cards/CardType';
 
-export class Tactician implements IMilestone {
-  public readonly name = 'Tactician';
-  public readonly description = 'Requires that you have 5 cards with requirements in play';
+export class Tactician extends BaseMilestone {
+  constructor() {
+    super(
+      'Tactician',
+      'Have 5 cards with requirements',
+      5);
+  }
   private excludedCardTypes = [CardType.PRELUDE, CardType.EVENT];
 
   public getScore(player: Player): number {
     const validCards = player.playedCards.filter((card) => {
-      const isValidCardType = !this.excludedCardTypes.includes(card.cardType);
+      const isValidCardType = !this.excludedCardTypes.includes(card.type);
       const hasRequirements = card.requirements !== undefined;
 
       return isValidCardType && hasRequirements;
     });
 
     return validCards.length;
-  }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 5;
   }
 }

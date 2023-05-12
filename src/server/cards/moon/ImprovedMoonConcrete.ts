@@ -8,7 +8,7 @@ export class ImprovedMoonConcrete extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.IMPROVED_MOON_CONCRETE,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       cost: 12,
       reserveUnits: {steel: 2},
 

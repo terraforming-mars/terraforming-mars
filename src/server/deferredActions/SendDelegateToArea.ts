@@ -1,16 +1,15 @@
 import {Player} from '../Player';
-import {PlayerId} from '../../common/Types';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
-import {NeutralPlayer, Turmoil} from '../turmoil/Turmoil';
+import {Delegate, Turmoil} from '../turmoil/Turmoil';
 import {PartyName} from '../../common/turmoil/PartyName';
 
 export type Options = {
   /** The number of delegates to replace. Default is 1. */
   count?: number,
   /** If defined, this action is used to replace another player's delegates */
-  replace?: PlayerId | NeutralPlayer | undefined,
+  replace?: Delegate | undefined,
   /** Cost for sending this delegate. Default is no cost. */
   cost?: number,
   freeStandardAction?: boolean,

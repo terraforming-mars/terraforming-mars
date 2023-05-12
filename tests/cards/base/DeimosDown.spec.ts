@@ -4,6 +4,7 @@ import {DeimosDown} from '../../../src/server/cards/base/DeimosDown';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('DeimosDown', function() {
   let card: DeimosDown;
@@ -13,9 +14,7 @@ describe('DeimosDown', function() {
 
   beforeEach(function() {
     card = new DeimosDown();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Should play', function() {

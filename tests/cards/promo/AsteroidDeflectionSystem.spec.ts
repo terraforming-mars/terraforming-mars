@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/AsteroidDeflectionSystem';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {testGame} from '../../TestGame';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AsteroidDeflectionSystem', function() {
@@ -11,9 +11,7 @@ describe('AsteroidDeflectionSystem', function() {
 
   beforeEach(function() {
     card = new AsteroidDeflectionSystem();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -21,7 +19,7 @@ describe('AsteroidDeflectionSystem', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
@@ -37,6 +35,6 @@ describe('AsteroidDeflectionSystem', function() {
     }
 
     expect(card.resourceCount).to.eq(1);
-    expect(card.getVictoryPoints()).to.eq(card.resourceCount);
+    expect(card.getVictoryPoints(player)).to.eq(card.resourceCount);
   });
 });

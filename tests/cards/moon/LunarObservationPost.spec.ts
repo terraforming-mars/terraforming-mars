@@ -1,17 +1,15 @@
-import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {expect} from 'chai';
+import {churnAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
-import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 
 describe('LunarObservationPost', () => {
-  let game: Game;
   let player: TestPlayer;
   let card: LunarObservationPost;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [, player] = testGame(2, {moonExpansion: true});
     card = new LunarObservationPost();
   });
 
@@ -39,10 +37,7 @@ describe('LunarObservationPost', () => {
 
     expect(card.resourceCount).eq(0);
 
-    card.action(player);
-    // TODO(kberg): figure out what type action should be.
-    const action = game.deferredActions.pop();
-    action!.execute();
+    expect(churnAction(card, player)).is.undefined;
 
     expect(card.resourceCount).eq(1);
 
@@ -52,24 +47,24 @@ describe('LunarObservationPost', () => {
 
   it('getVictoryPoints', () => {
     card.resourceCount = 0;
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
     card.resourceCount = 1;
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
     card.resourceCount = 2;
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
 
     card.resourceCount = 3;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints(player)).eq(1);
     card.resourceCount = 4;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints(player)).eq(1);
     card.resourceCount = 5;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints(player)).eq(1);
 
     card.resourceCount = 6;
-    expect(card.getVictoryPoints()).eq(2);
+    expect(card.getVictoryPoints(player)).eq(2);
     card.resourceCount = 7;
-    expect(card.getVictoryPoints()).eq(2);
+    expect(card.getVictoryPoints(player)).eq(2);
     card.resourceCount = 8;
-    expect(card.getVictoryPoints()).eq(2);
+    expect(card.getVictoryPoints(player)).eq(2);
   });
 });

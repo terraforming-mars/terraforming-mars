@@ -23,7 +23,7 @@
     "pg": "^8.2.1",
     "prom-client": "^14.0.1",
     "spectre.css": "^0.5.8",
-    "sqlite3": "^5.0.4",
+    "sqlite3": "^5.1.5",
     "vti": "^0.1.7",
     "vue": "2.6.10",
     "vue-template-compiler": "2.6.10",
@@ -72,6 +72,7 @@
   },
   "scripts": {
     "start": "node build/src/server/server.js",
+    "start:prof": "node --prof build/src/server/server.js",
     "build": "npm run make:static && npm run build:server && npm run build:client",
     "build:client": "npm run make:cards && cross-env NODE_ENV=production webpack",
     "build:server": "tsc --build src/tsconfig.json",

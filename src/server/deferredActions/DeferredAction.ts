@@ -13,7 +13,7 @@ export enum Priority {
 
   /** When you must discard before you can draw. Making a determination that Sponsored Academies should come before Mars U. */
   SPONSORED_ACADEMIES,
-  /** When you must discard before you can draw. Mars U */
+  /** When you must discard before you can draw. Mars U, Ender (CEO). */
   DISCARD_AND_DRAW,
   DRAW_CARDS,
   BUILD_COLONY,

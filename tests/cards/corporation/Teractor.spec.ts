@@ -3,7 +3,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {Cartel} from '../../../src/server/cards/base/Cartel';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {Teractor} from '../../../src/server/cards/corporation/Teractor';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Teractor', function() {
@@ -12,9 +12,7 @@ describe('Teractor', function() {
 
   beforeEach(function() {
     card = new Teractor();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
 
     const action = card.play(player);
     expect(action).is.undefined;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {Moss} from '../../../src/server/cards/base/Moss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
-import {Game} from '../../../src/server/Game';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -11,27 +11,25 @@ describe('Moss', function() {
 
   beforeEach(function() {
     card = new Moss();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play without enough oceans', function() {
     maxOutOceans(player, 2);
     player.plants = 1;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can not play if have no plants', function() {
     maxOutOceans(player, 3);
     player.plants = 0;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, 3);
     player.plants = 1;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     expect(player.plants).to.eq(0);
@@ -44,7 +42,7 @@ describe('Moss', function() {
     player.playedCards.push(viralEnhancers);
     player.plants = 0;
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     card.play(player);
 
     expect(player.plants).to.eq(-1);

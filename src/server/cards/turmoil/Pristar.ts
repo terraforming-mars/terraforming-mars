@@ -3,10 +3,10 @@ import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {Resource} from '../../../common/Resource';
 
 export class Pristar extends Card implements ICorporationCard {
   constructor() {
@@ -14,9 +14,9 @@ export class Pristar extends Card implements ICorporationCard {
       name: CardName.PRISTAR,
       startingMegaCredits: 53,
       resourceType: CardResource.PRESERVATION,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {resourcesHere: {}},
 
       metadata: {
         cardNumber: 'R07',
@@ -42,7 +42,7 @@ export class Pristar extends Card implements ICorporationCard {
 
   public onProductionPhase(player: Player) {
     if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-      player.megaCredits += 6;
+      player.addResource(Resource.MEGACREDITS, 6, {log: true, from: this});
       player.addResourceTo(this, 1);
     }
     return undefined;

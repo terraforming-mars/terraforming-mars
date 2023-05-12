@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {OrbitalReflectors} from '../../../src/server/cards/venusNext/OrbitalReflectors';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('OrbitalReflectors', function() {
   it('Should play', function() {
     const card = new OrbitalReflectors();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(2);
 
     const action = card.play(player);
     expect(action).is.undefined;

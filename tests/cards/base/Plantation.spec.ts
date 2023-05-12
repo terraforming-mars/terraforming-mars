@@ -5,6 +5,7 @@ import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 import {Plantation} from '../../../src/server/cards/base/Plantation';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Plantation', function() {
   let card: Plantation;
@@ -13,18 +14,16 @@ describe('Plantation', function() {
 
   beforeEach(function() {
     card = new Plantation();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new InventorsGuild(), new InventorsGuild());
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);

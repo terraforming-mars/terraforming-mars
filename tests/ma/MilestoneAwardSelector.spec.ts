@@ -5,8 +5,8 @@ import {IAward} from '../../src/server/awards/IAward';
 import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
 import {IMilestone} from '../../src/server/milestones/IMilestone';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
-import {testGameOptions} from '../TestingUtils';
 import {intersection} from '../../src/common/utils/utils';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/GameOptions';
 
 function toNames(list: Array<IMilestone | IAward>): Array<string> {
   return list.map((e) => e.name);
@@ -71,36 +71,27 @@ describe('MilestoneAwardSelector', () => {
 
   it('Main entrance point', () => {
     // These tests don't test results, they just make sure these calls don't fail.
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.NONE}));
+    choose({randomMA: RandomMAOptionType.NONE});
   });
   it('Main entrance point - limited', () => {
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.LIMITED}));
+    choose({randomMA: RandomMAOptionType.LIMITED});
   });
   it('Main entrance point - unlimited', () => {
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.UNLIMITED}));
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.NONE, moonExpansion: true}));
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.LIMITED, moonExpansion: true}));
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true}));
+    choose({randomMA: RandomMAOptionType.UNLIMITED});
+    choose({randomMA: RandomMAOptionType.NONE, moonExpansion: true});
+    choose({randomMA: RandomMAOptionType.LIMITED, moonExpansion: true});
+    choose({randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true});
   });
 
   it('Main entrance point, Ares & Moon enabled', () => {
     // These tests don't test results, they just make sure these calls don't fail.
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.NONE, aresExtension: true, moonExpansion: true}));
+    choose({randomMA: RandomMAOptionType.NONE, aresExtension: true, moonExpansion: true});
   });
   it('Main entrance point, Ares & Moon enabled - limited', () => {
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.LIMITED, aresExtension: true, moonExpansion: true}));
+    choose({randomMA: RandomMAOptionType.LIMITED, aresExtension: true, moonExpansion: true});
   });
   it('Main entrance point, Ares & Moon enabled - unlimited', () => {
-    chooseMilestonesAndAwards(
-      testGameOptions({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true}));
+    choose({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true});
   });
 
   it('Do not select fan milestones or awards when that feature is disabled', () => {
@@ -119,11 +110,10 @@ describe('MilestoneAwardSelector', () => {
       ...TERRA_CIMMERIA_MILESTONES,
       ...VASTITAS_BOREALIS_MILESTONES].map((a) => a.name);
     for (let idx = 0; idx < 10000; idx++) {
-      const mas = chooseMilestonesAndAwards(
-        testGameOptions({
-          randomMA: RandomMAOptionType.UNLIMITED,
-          includeFanMA: false,
-        }));
+      const mas = choose({
+        randomMA: RandomMAOptionType.UNLIMITED,
+        includeFanMA: false,
+      });
 
       expect(intersection(mas.awards.map((award) => award.name), avoidedAwards)).is.empty;
       expect(intersection(mas.milestones.map((milestone) => milestone.name), avoidedMilestones)).is.empty;
@@ -136,19 +126,22 @@ describe('MilestoneAwardSelector', () => {
     avoidedMilestones.push('Pioneer', 'Martian', 'Colonizer');
     avoidedAwards.push('Politician');
     for (let idx = 0; idx < 10000; idx++) {
-      const mas = chooseMilestonesAndAwards(
-        testGameOptions({
-          randomMA: RandomMAOptionType.LIMITED,
-          venusNextExtension: false,
-          aresExtension: false,
-          moonExpansion: false,
-          coloniesExtension: false,
-          turmoilExtension: false,
-          includeFanMA: true,
-        }));
+      const mas = choose({
+        randomMA: RandomMAOptionType.LIMITED,
+        venusNextExtension: false,
+        aresExtension: false,
+        moonExpansion: false,
+        coloniesExtension: false,
+        turmoilExtension: false,
+        includeFanMA: true,
+      });
 
       expect(intersection(toNames(mas.awards), avoidedAwards)).is.empty;
       expect(intersection(toNames(mas.milestones), avoidedMilestones)).is.empty;
     }
   });
+
+  function choose(options: Partial<GameOptions>) {
+    return chooseMilestonesAndAwards({...DEFAULT_GAME_OPTIONS, ...options});
+  }
 });

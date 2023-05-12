@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {LTFHeadquarters} from '../../../src/server/cards/moon/LTFHeadquarters';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
@@ -14,7 +13,7 @@ describe('LTFHeadquarters', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new LTFHeadquarters();
     moonData = MoonExpansion.moonData(game);
   });

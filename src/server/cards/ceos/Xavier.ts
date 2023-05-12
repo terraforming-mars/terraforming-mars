@@ -24,8 +24,8 @@ export class Xavier extends CeoCard {
   public opgActionIsActive = false;
 
   public action(): PlayerInput | undefined {
-    this.opgActionIsActive = true;
     this.isDisabled = true;
+    this.opgActionIsActive = true;
     return undefined;
   }
 }

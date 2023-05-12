@@ -1,16 +1,17 @@
 import {expect} from 'chai';
 import {LakefrontResorts} from '../../../src/server/cards/turmoil/LakefrontResorts';
 import {addOceanTile, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('LakefrontResorts', function() {
   it('Should play', function() {
-    const card2 = new LakefrontResorts();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
-    const play = card2.play(player);
+    const card = new LakefrontResorts();
+    const [game, player] = testGame(2);
+    const play = card.play(player);
+
     expect(play).is.undefined;
-    player.setCorporationForTest(card2);
+
+    player.setCorporationForTest(card);
     addOceanTile(player, '06');
     addOceanTile(player, '07');
     runAllActions(game);

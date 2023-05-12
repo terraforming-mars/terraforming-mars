@@ -1,7 +1,7 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MooncrateConvoysToMars} from '../../../src/server/cards/moon/MooncrateConvoysToMars';
 import {expect} from 'chai';
@@ -21,7 +21,7 @@ describe('MooncrateConvoysToMars', () => {
     player1 = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     player3 = TestPlayer.GREEN.newPlayer();
-    game = Game.newInstance('gameid', [player1, player2, player3], player1, testGameOptions({moonExpansion: true, turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player1, player2, player3], player1, {moonExpansion: true, turmoilExtension: true});
     moonData = MoonExpansion.moonData(game);
     card = new MooncrateConvoysToMars();
   });

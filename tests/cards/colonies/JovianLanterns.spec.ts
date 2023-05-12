@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('JovianLanterns', function() {
@@ -9,9 +9,7 @@ describe('JovianLanterns', function() {
 
   beforeEach(function() {
     card = new JovianLanterns();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -32,6 +30,6 @@ describe('JovianLanterns', function() {
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(2);
     expect(player.titanium).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

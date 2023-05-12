@@ -11,7 +11,7 @@ export class LunaMetropolis extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_METROPOLIS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.SPACE, Tag.EARTH],
       cost: 21,
 

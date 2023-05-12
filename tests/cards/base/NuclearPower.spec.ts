@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {NuclearPower} from '../../../src/server/cards/base/NuclearPower';
-import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('NuclearPower', function() {
   let card: NuclearPower;
@@ -10,13 +10,11 @@ describe('NuclearPower', function() {
 
   beforeEach(function() {
     card = new NuclearPower();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    player.production.add(Resources.MEGACREDITS, -4);
+    player.production.add(Resource.MEGACREDITS, -4);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 

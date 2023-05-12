@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {setOxygenLevel} from '../../TestingUtils';
 import {CrescentResearchAssociation} from '../../../src/server/cards/moon/CrescentResearchAssociation';
 import {TestPlayer} from '../../TestPlayer';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
@@ -13,7 +13,7 @@ describe('CrescentResearchAssociation', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new CrescentResearchAssociation();
   });
 
@@ -25,7 +25,7 @@ describe('CrescentResearchAssociation', () => {
 
     // Additional card requirements.
     player.titanium = 1;
-    (game as any).oxygenLevel = 14;
+    setOxygenLevel(game, 14);
 
     player.cardsInHand = [mareNectarisMine, predators];
     player.setCorporationForTest(card);
@@ -52,6 +52,7 @@ describe('CrescentResearchAssociation', () => {
   });
 
   it('getVictoryPoints', () => {
+    player.playedCards.push(card);
     player.tagsForTest = {moon: 0};
     expect(card.getVictoryPoints(player)).eq(0);
     player.tagsForTest = {moon: 1};

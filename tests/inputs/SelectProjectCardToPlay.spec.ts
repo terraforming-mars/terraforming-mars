@@ -6,12 +6,10 @@ import {TestPlayer} from '../TestPlayer';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';
-import {Game} from '../../src/server/Game';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 
 describe('SelectProjectCardToPlay', function() {
   let player: TestPlayer;
-  let game: Game;
   let aquiferPumping: IProjectCard;
   let ioMiningIndustries: IProjectCard;
   let called: boolean;
@@ -21,8 +19,7 @@ describe('SelectProjectCardToPlay', function() {
   };
 
   beforeEach(() => {
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
     aquiferPumping = new AquiferPumping();
     ioMiningIndustries = new IoMiningIndustries();
     called = false;

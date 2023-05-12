@@ -11,7 +11,12 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
+import {ICard} from '../../../src/server/cards/ICard';
+import {GlobalParameter} from '../../../src/common/GlobalParameter';
+import {Worms} from '../../../src/server/cards/base/Worms';
+import {testGame} from '../../TestGame';
 
 describe('Playwrights', () => {
   let card: Playwrights;
@@ -21,9 +26,7 @@ describe('Playwrights', () => {
 
   beforeEach(() => {
     card = new Playwrights();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
 
     card.play(player);
     player.setCorporationForTest(card);
@@ -81,7 +84,7 @@ describe('Playwrights', () => {
   it('Cannot act without any playable events', () => {
     player2.playedCards.push(new MartianSurvey(), new LocalHeatTrapping(), new DeimosDown());
 
-    (game as any).oxygenLevel = 5;
+    setOxygenLevel(game, 5);
     player.heat = 4;
     player.megaCredits = 30;
     expect(card.canAct(player)).is.not.true;
@@ -123,5 +126,53 @@ describe('Playwrights', () => {
     expect(player.playedCards).has.lengthOf(0);
     expect(player2.playedCards).has.lengthOf(0); // Card is removed from play for sued player
     expect(player.removedFromPlayCards).has.lengthOf(1);
+  });
+
+  it('Works with Special Design', () => {
+    const event = new SpecialDesign();
+    player2.playedCards.push(event);
+
+    player.megaCredits = event.cost;
+    expect(card.canAct(player)).is.true;
+
+    const selectCard = cast(card.action(player), SelectCard<ICard>);
+    selectCard.cb([event]);
+
+    runAllActions(game);
+
+    expect(player.getRequirementsBonus(GlobalParameter.OXYGEN)).to.eq(2);
+
+    const lastRemovedFromPlayCard = player.removedFromPlayCards[player.removedFromPlayCards.length - 1];
+    expect(lastRemovedFromPlayCard.name).to.eq(event.name);
+
+    player.playCard(new Worms());
+    expect(player.getRequirementsBonus(GlobalParameter.OXYGEN)).to.eq(0);
+    expect(player.removedFromPlayCards).deep.eq([event]);
+  });
+
+  it('Works with Special Design after deserialization', () => {
+    const event = new SpecialDesign();
+    player2.playedCards.push(event);
+
+    player.megaCredits = event.cost;
+    expect(card.canAct(player)).is.true;
+
+    const selectCard = cast(card.action(player), SelectCard<ICard>);
+    selectCard.cb([event]);
+
+    runAllActions(game);
+
+    expect(player.getRequirementsBonus(GlobalParameter.OXYGEN)).to.eq(2);
+
+    const serialized = game.serialize();
+    const newGame = Game.deserialize(serialized);
+    const newPlayer = newGame.getPlayerById(player.id);
+
+    const lastRemovedFromPlayCard = newPlayer.removedFromPlayCards[player.removedFromPlayCards.length - 1];
+    expect(lastRemovedFromPlayCard.name).to.eq(event.name);
+
+    newPlayer.playCard(new Worms());
+    expect(newPlayer.getRequirementsBonus(GlobalParameter.OXYGEN)).to.eq(0);
+    expect(newPlayer.removedFromPlayCards).deep.eq([event]);
   });
 });

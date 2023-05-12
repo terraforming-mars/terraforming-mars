@@ -1,13 +1,12 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Recyclon} from '../../../src/server/cards/promo/Recyclon';
 import {runAllActions} from '../../TestingUtils';
 
 describe('Recyclon', function() {
   it('Should play', function() {
     const card = new Recyclon();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(1);
     const play = card.play(player);
     runAllActions(game);
     expect(play).is.undefined;

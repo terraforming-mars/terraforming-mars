@@ -1,6 +1,7 @@
 import {CardFinder} from '../CardFinder';
 import {SerializedCard} from '../SerializedCard';
 import {MiningCard} from './base/MiningCard';
+import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
@@ -25,6 +26,15 @@ export function serializeProjectCard(c: IProjectCard): SerializedCard {
   }
   if (isICloneTagCard(c)) {
     result.cloneTag = c.cloneTag;
+  }
+  if (isCeoCard(c)) {
+    result.isDisabled = c.isDisabled;
+    if (c.opgActionIsActive !== undefined) {
+      result.opgActionIsActive = c.opgActionIsActive;
+    }
+    if (c.generationUsed !== undefined) {
+      result.generationUsed = c.generationUsed;
+    }
   }
   return result;
 }
@@ -56,6 +66,15 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
   }
   if (card instanceof MiningCard && element.bonusResource !== undefined) {
     card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+  }
+  if (isCeoCard(card)) {
+    card.isDisabled = element.isDisabled;
+    if (element.opgActionIsActive !== undefined) {
+      card.opgActionIsActive = element.opgActionIsActive;
+    }
+    if (element.generationUsed !== undefined) {
+      card.generationUsed = element.generationUsed;
+    }
   }
   return card;
 }

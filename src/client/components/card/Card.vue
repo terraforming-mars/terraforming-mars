@@ -7,7 +7,7 @@
               <CardTags :tags="getTags()" />
           </div>
           <CardTitle :title="card.name" :type="getCardType()"/>
-          <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
+          <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()" :padBottom="hasResourceType" />
       </div>
       <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
       <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount()" :type="resourceType" />
@@ -38,9 +38,8 @@ import {CardResource} from '@/common/CardResource';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 
-const names = [
+const CARDS_WITH_EXTERNAL_DOCUMENTATION = [
   CardName.BOTANICAL_EXPERIENCE,
-  CardName.MARS_DIRECT,
   CardName.LUNA_ECUMENOPOLIS,
   CardName.ROBOTIC_WORKFORCE,
 ];
@@ -106,7 +105,7 @@ export default Vue.extend({
       return this.isProjectCard() ? this.card.calculatedCost : undefined;
     },
     getCardType(): CardType {
-      return this.cardInstance.cardType;
+      return this.cardInstance.type;
     },
     getCardClasses(card: CardModel): string {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
@@ -154,7 +153,7 @@ export default Vue.extend({
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
     },
     hasHelp(): boolean {
-      return names.includes(this.card.name) && getPreferences().experimental_ui;
+      return CARDS_WITH_EXTERNAL_DOCUMENTATION.includes(this.card.name) && getPreferences().experimental_ui;
     },
   },
 });

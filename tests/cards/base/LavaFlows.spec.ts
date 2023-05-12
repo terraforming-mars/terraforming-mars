@@ -5,7 +5,7 @@ import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast, resetBoard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
@@ -16,9 +16,7 @@ describe('LavaFlows', function() {
 
   beforeEach(function() {
     card = new LavaFlows();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
     resetBoard(game);
   });
 
@@ -36,8 +34,7 @@ describe('LavaFlows', function() {
 
   it('All land spaces are available on Hellas', function() {
     // With two players, there's no solo setup, so all spaces will be available.
-    const game = newTestGame(2, {boardName: BoardName.HELLAS});
-    const player = game.getPlayersInGenerationOrder()[0] as TestPlayer;
+    [game, player] = testGame(2, {boardName: BoardName.HELLAS});
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);

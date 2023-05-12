@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 
 export class StrategicBasePlanning extends PreludeCard {
@@ -10,6 +10,8 @@ export class StrategicBasePlanning extends PreludeCard {
     super({
       name: CardName.STRATEGIC_BASE_PLANNING,
       tags: [Tag.BUILDING],
+
+      startingMegacredits: -8,
 
       behavior: {
         colonies: {buildColony: {}},
@@ -26,7 +28,7 @@ export class StrategicBasePlanning extends PreludeCard {
     });
   }
   public override bespokePlay(player: Player) {
-    player.deductResource(Resources.MEGACREDITS, 8);
+    player.deductResource(Resource.MEGACREDITS, 8);
     return undefined;
   }
 }

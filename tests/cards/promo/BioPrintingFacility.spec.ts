@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
 import {BioPrintingFacility} from '../../../src/server/cards/promo/BioPrintingFacility';
 import {Fish} from '../../../src/server/cards/base/Fish';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
@@ -10,13 +10,10 @@ import {cast} from '../../TestingUtils';
 describe('BioPrintingFacility', function() {
   let card: BioPrintingFacility;
   let player: TestPlayer;
-  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new BioPrintingFacility();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player] = testGame(2);
     player.playedCards.push(card);
   });
 

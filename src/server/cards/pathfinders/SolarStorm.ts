@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardResource} from '../../../common/CardResource';
@@ -13,7 +13,7 @@ import {all, digit} from '../Options';
 export class SolarStorm extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SOLAR_STORM,
       cost: 12,
       tags: [Tag.SPACE],
@@ -36,11 +36,16 @@ export class SolarStorm extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.getPlayers().forEach((p) => {
+    for (const p of player.game.getPlayers()) {
       if (!p.plantsAreProtected()) {
-        p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
+        // Botanical Experience reduces the impact in half.
+        if (p.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+          p.deductResource(Resource.PLANTS, 1, {log: true, from: player});
+        } else {
+          p.deductResource(Resource.PLANTS, 2, {log: true, from: player});
+        }
       }
-    });
+    }
     player.game.defer(new RemoveResourcesFromCard(
       player, CardResource.DATA, 3, /* ownCards */ false, /* mandatory */ false));
     return undefined;

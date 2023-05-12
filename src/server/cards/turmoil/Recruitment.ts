@@ -13,7 +13,7 @@ export class Recruitment extends Card implements IProjectCard {
     super({
       name: CardName.RECRUITMENT,
       cost: 2,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       metadata: {
         cardNumber: 'T11',

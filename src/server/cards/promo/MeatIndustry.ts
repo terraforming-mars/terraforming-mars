@@ -7,12 +7,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 import {ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class MeatIndustry extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MEAT_INDUSTRY,
       tags: [Tag.BUILDING],
       cost: 5,
@@ -30,7 +30,7 @@ export class MeatIndustry extends Card implements IProjectCard {
 
   public onResourceAdded(player: Player, card: ICard, count: number) {
     if (card.resourceType === CardResource.ANIMAL) {
-      player.addResource(Resources.MEGACREDITS, count * 2, {log: true});
+      player.addResource(Resource.MEGACREDITS, count * 2, {log: true});
     }
   }
 }

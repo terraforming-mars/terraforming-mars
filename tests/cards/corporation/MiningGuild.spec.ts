@@ -4,12 +4,13 @@ import {Game} from '../../../src/server/Game';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
-import {maxOutOceans, testGameOptions, runAllActions, cast} from '../../TestingUtils';
+import {maxOutOceans, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {BoardType} from '../../../src/server/boards/BoardType';
 import {TileType} from '../../../src/common/TileType';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('MiningGuild', () => {
   let card: MiningGuild;
@@ -19,12 +20,10 @@ describe('MiningGuild', () => {
 
   beforeEach(() => {
     card = new MiningGuild();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({
+    [game, player, player2] = testGame(2, {
       aresExtension: true,
       aresHazards: false,
-    }));
+    });
 
     player.setCorporationForTest(card);
   });

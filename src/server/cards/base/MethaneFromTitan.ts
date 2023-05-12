@@ -9,7 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 export class MethaneFromTitan extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.METHANE_FROM_TITAN,
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 28,

@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {StealResources} from '../../deferredActions/StealResources';
@@ -16,7 +16,7 @@ export class AirRaid extends Card implements IProjectCard {
     super({
       cost: 0,
       name: CardName.AIR_RAID,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       metadata: {
         cardNumber: 'C02',
@@ -34,7 +34,7 @@ export class AirRaid extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new StealResources(player, Resources.MEGACREDITS, 5));
+    player.game.defer(new StealResources(player, Resource.MEGACREDITS, 5));
     player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, true));
     return undefined;
   }

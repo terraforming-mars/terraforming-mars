@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
@@ -13,8 +13,7 @@ describe('Duncan', function() {
 
   beforeEach(() => {
     card = new Duncan();
-    game = newTestGame(4, {ceoExtension: true, moonExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {ceoExtension: true, moonExpansion: true});
     player.playedCards.push(card);
   });
 
@@ -27,7 +26,7 @@ describe('Duncan', function() {
 
   it('Has 5 VP and 4 MC in gen 1', function() {
     card.action(player);
-    expect(player.getVictoryPoints().total).eq(25);
+    expect(player.getVictoryPoints().total).eq(26);
     expect(player.megaCredits).eq(4);
   });
 
@@ -38,13 +37,13 @@ describe('Duncan', function() {
 
     player.megaCredits = 0;
     card.action(player);
-    expect(player.getVictoryPoints().total).eq(18);
+    expect(player.getVictoryPoints().total).eq(19);
     expect(player.megaCredits).eq(32);
 
     // Run for a few more generations, leader VP should not change
     forceGenerationEnd(player.game);
     forceGenerationEnd(player.game);
-    expect(player.getVictoryPoints().total).eq(18);
+    expect(player.getVictoryPoints().total).eq(19);
   });
 
   it('Does not affect VP if OPG action not used yet', function() {

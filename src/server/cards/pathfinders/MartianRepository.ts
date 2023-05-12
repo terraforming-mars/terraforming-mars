@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,7 +12,7 @@ import {played} from '../Options';
 export class MartianRepository extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.MARTIAN_REPOSITORY,
       cost: 12,
       tags: [Tag.MARS, Tag.MARS, Tag.BUILDING],
@@ -23,7 +22,7 @@ export class MartianRepository extends Card implements IProjectCard {
         production: {energy: -1},
       },
 
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       metadata: {
         cardNumber: 'Pf29',

@@ -30,13 +30,13 @@ export class Yvonne extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     player.game.colonies.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
         player.game.defer(new SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
         player.game.defer(new SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
       });
     });
-    this.isDisabled = true;
     return undefined;
   }
 }

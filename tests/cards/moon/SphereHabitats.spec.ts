@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SphereHabitats} from '../../../src/server/cards/moon/SphereHabitats';
 import {expect} from 'chai';
@@ -11,7 +10,7 @@ describe('SphereHabitats', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new SphereHabitats();
   });
 

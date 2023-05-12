@@ -17,6 +17,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Player} from '../../../src/server/Player';
+import {testGame} from '../../TestGame';
 
 describe('PharmacyUnion', function() {
   let card: PharmacyUnion;
@@ -26,9 +27,7 @@ describe('PharmacyUnion', function() {
 
   beforeEach(function() {
     card = new PharmacyUnion();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
 
     player.setCorporationForTest(card);
   });
@@ -139,7 +138,7 @@ describe('PharmacyUnion', function() {
     const advancedEcosystems = new AdvancedEcosystems();
     player.playedCards.push(new Fish());
     player.playedCards.push(new Lichen());
-    expect(player.canPlayIgnoringCost(advancedEcosystems)).is.true;
+    expect(player.simpleCanPlay(advancedEcosystems)).is.true;
 
     card.resourceCount = 0;
     card.onCardPlayed(player, new SearchForLife());
@@ -148,7 +147,7 @@ describe('PharmacyUnion', function() {
     orOptions.options[0].cb();
     expect(card.isDisabled).is.true;
     expect(player.tags.count(Tag.MICROBE)).to.eq(0);
-    expect(player.canPlayIgnoringCost(advancedEcosystems)).is.not.true;
+    expect(player.simpleCanPlay(advancedEcosystems)).is.not.true;
   });
 
   it('Edge Case - Let player pick the tag resolution order', function() {

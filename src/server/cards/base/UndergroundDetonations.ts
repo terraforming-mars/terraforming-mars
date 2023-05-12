@@ -1,21 +1,22 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class UndergroundDetonations extends Card implements IActionCard, IProjectCard {
+export class UndergroundDetonations extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.UNDERGROUND_DETONATIONS,
       tags: [Tag.BUILDING],
       cost: 6,
+
+      action: {
+        spend: {megacredits: 10},
+        production: {heat: 2},
+      },
 
       metadata: {
         cardNumber: '202',
@@ -26,13 +27,5 @@ export class UndergroundDetonations extends Card implements IActionCard, IProjec
         }),
       },
     });
-  }
-  public canAct(player: Player): boolean {
-    return player.canAfford(10);
-  }
-  public action(player: Player) {
-    player.game.defer(new SelectPaymentDeferred(player, 10, {title: 'Select how to pay for action'}));
-    player.production.add(Resources.HEAT, 2);
-    return undefined;
   }
 }

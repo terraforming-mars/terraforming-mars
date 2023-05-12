@@ -3,8 +3,9 @@ import {PowerSupplyConsortium} from '../../../src/server/cards/base/PowerSupplyC
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('PowerSupplyConsortium', function() {
   let card: PowerSupplyConsortium;
@@ -14,20 +15,17 @@ describe('PowerSupplyConsortium', function() {
 
   beforeEach(function() {
     card = new PowerSupplyConsortium();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
-    player.popSelectInitialCards();
+    [game, player, player2] = testGame(2);
   });
 
   it('Cannot play without power tags', function() {
-    player.production.add(Resources.ENERGY, 3);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    player.production.add(Resource.ENERGY, 3);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play - no targets', function() {
     player.playedCards.push(card, card);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     runAllActions(game);
@@ -39,7 +37,7 @@ describe('PowerSupplyConsortium', function() {
   it('Can play - single target', function() {
     player2.production.override({energy: 1});
     player.playedCards.push(card, card);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     runAllActions(game);
@@ -50,8 +48,8 @@ describe('PowerSupplyConsortium', function() {
   });
 
   it('Can play - multiple targets', function() {
-    player.production.add(Resources.ENERGY, 1);
-    player2.production.add(Resources.ENERGY, 3);
+    player.production.add(Resource.ENERGY, 1);
+    player2.production.add(Resource.ENERGY, 3);
 
     card.play(player);
 
@@ -64,9 +62,7 @@ describe('PowerSupplyConsortium', function() {
   });
 
   it('Can play in solo mode if have enough power tags', function() {
-    const soloPlayer = TestPlayer.BLUE.newPlayer();
-    const soloGame = Game.newInstance('gameid2', [soloPlayer], soloPlayer);
-    soloPlayer.popSelectInitialCards();
+    const [soloGame, soloPlayer] = testGame(1);
     soloPlayer.playedCards.push(card, card);
     expect(card.canPlay(soloPlayer)).is.true;
 

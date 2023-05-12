@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -37,13 +36,13 @@ export class EcologicalZone extends Card implements IProjectCard {
     },
   ) {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name,
       tags: [Tag.ANIMAL, Tag.PLANT],
       cost,
       resourceType: CardResource.ANIMAL,
       adjacencyBonus,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {resourcesHere: {}, per: 2},
       requirements: CardRequirements.builder((b) => b.greeneries()),
       metadata,
     });

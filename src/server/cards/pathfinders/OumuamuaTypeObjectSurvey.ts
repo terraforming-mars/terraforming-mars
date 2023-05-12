@@ -9,13 +9,13 @@ import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {digit, played} from '../Options';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 
 export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
       cost: 20,
       tags: [Tag.SPACE, Tag.SCIENCE],
@@ -48,7 +48,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       player.playCard(card, undefined);
       return true;
     } else if (tags.includes(Tag.SPACE)) {
-      player.production.add(Resources.ENERGY, 3, {log: true});
+      player.production.add(Resource.ENERGY, 3, {log: true});
       this.keep(player, card);
       return true;
     } else {

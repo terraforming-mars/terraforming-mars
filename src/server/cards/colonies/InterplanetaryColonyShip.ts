@@ -11,7 +11,7 @@ export class InterplanetaryColonyShip extends Card implements IProjectCard {
       cost: 12,
       tags: [Tag.SPACE, Tag.EARTH],
       name: CardName.INTERPLANETARY_COLONY_SHIP,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       behavior: {
         colonies: {buildColony: {}},

@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {VictoryPoints} from '../ICard';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
@@ -14,16 +13,15 @@ import {SelectCard} from '../../inputs/SelectCard';
 export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.FLOATER_URBANISM,
       cost: 7,
       tags: [Tag.VENUS],
       resourceType: CardResource.VENUSIAN_HABITAT,
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS, 4)),
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {resourcesHere: {}},
 
       metadata: {
-        cardNumber: 'PfTMP',
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 floater from any card and add 1 Venusian habitat on this card.', (ab) => {
             ab.floaters(1).startAction.venusianHabitat(1);

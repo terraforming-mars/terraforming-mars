@@ -1,22 +1,24 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
-import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {played} from '../Options';
 
-export class Dirigibles extends Card implements IActionCard {
+export class Dirigibles extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.DIRIGIBLES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 11,
       resourceType: CardResource.FLOATER,
+
+      action: {
+        addResourcesToAnyCard: {count: 1, type: CardResource.FLOATER, mustHaveCard: true},
+      },
 
       metadata: {
         cardNumber: '222',
@@ -30,26 +32,5 @@ export class Dirigibles extends Card implements IActionCard {
         }),
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    const floaterCards = player.getResourceCards(CardResource.FLOATER);
-    if (floaterCards.length === 1) {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    }
-
-    return new SelectCard(
-      'Select card to add 1 floater',
-      'Add floater',
-      floaterCards,
-      ([card]) => {
-        player.addResourceTo(card, {log: true});
-        return undefined;
-      },
-    );
   }
 }

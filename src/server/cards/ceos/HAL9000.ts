@@ -24,8 +24,9 @@ export class HAL9000 extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-    // For every Unit type, see if we can adjust production of that resource by -1
-    // If we can, make said adjustment, and give the player 4 of that production resource
+    this.isDisabled = true;
+    // For every Unit type, if it can be reduced one unit, do so, and give the player
+    // 4 of that resource.
     for (const type of Units.keys) {
       const adjustment = Units.of({});
       adjustment[type] = -1;
@@ -35,8 +36,6 @@ export class HAL9000 extends CeoCard {
         player.addUnits(adjustment, {log: true});
       }
     }
-
-    this.isDisabled = true;
     return undefined;
   }
 }

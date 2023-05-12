@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class SocialEvents extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SOCIAL_EVENTS,
       cost: 18,
       tags: [Tag.EARTH, Tag.MARS],

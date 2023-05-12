@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {EquatorialMagnetizer} from '../../../src/server/cards/base/EquatorialMagnetizer';
-import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('EquatorialMagnetizer', function() {
   let card: EquatorialMagnetizer;
@@ -10,9 +10,7 @@ describe('EquatorialMagnetizer', function() {
 
   beforeEach(function() {
     card = new EquatorialMagnetizer();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not act', function() {
@@ -20,7 +18,7 @@ describe('EquatorialMagnetizer', function() {
   });
 
   it('Should act', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canAct(player)).is.true;
 
     card.action(player);

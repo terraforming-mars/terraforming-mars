@@ -30,7 +30,7 @@ export class Counter {
     this.cardIsUnplayed = !player.cardIsInEffect(card.name);
   }
 
-  public count(countable: Countable): number {
+  public count(countable: Countable, context: 'default' | 'vps' = 'default'): number {
     if (typeof(countable) === 'number') {
       return countable;
     }
@@ -80,7 +80,7 @@ export class Counter {
         sum += player.tags.multipleCount(tag);
       } else { // Single tag
         if (countable.others !== true) { // Just count player's own tags.
-          sum += player.tags.count(tag);
+          sum += player.tags.count(tag, context === 'vps' ? 'raw' : context);
 
           if (this.cardIsUnplayed) { // And include the card itself if it isn't already on the tableau.
             sum += card.tags.filter((t) => t === tag).length;
@@ -94,6 +94,10 @@ export class Counter {
             .forEach((p) => sum += p.tags.count(tag, 'raw'));
         }
       }
+    }
+
+    if (countable.resourcesHere !== undefined) {
+      sum += card.resourceCount;
     }
 
     if (countable.moon !== undefined) {

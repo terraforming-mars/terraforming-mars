@@ -6,7 +6,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('ArtificialLake', function() {
   let card: ArtificialLake;
@@ -15,13 +16,11 @@ describe('ArtificialLake', function() {
 
   beforeEach(function() {
     card = new ArtificialLake();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
@@ -37,12 +36,12 @@ describe('ArtificialLake', function() {
     const placedTile = action.availableSpaces[0].tile;
     expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Cannot place ocean if all oceans are already placed', function() {
     // Set temperature level to fit requirements
-    (game as any).temperature = -6;
+    setTemperature(game, -6);
 
     // Set oceans count to the max value
     for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
@@ -52,7 +51,7 @@ describe('ArtificialLake', function() {
     }
 
     // Card is still playable to get VPs...
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     // ...but an action to place ocean is not unavailable
     const action = card.play(player);
@@ -61,7 +60,7 @@ describe('ArtificialLake', function() {
 
   it('Cannot place ocean if all land spaces are occupied', function() {
     // Set temperature level to fit requirements
-    (game as any).temperature = -6;
+    setTemperature(game, -6);
 
     // Take all but one space.
     const spaces = game.board.getAvailableSpacesOnLand(player);
@@ -72,18 +71,18 @@ describe('ArtificialLake', function() {
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(1);
 
     // Card is still playable.
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     // No spaces left?
     game.simpleAddTile(player, spaces[0], {tileType: TileType.GREENERY});
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(0);
 
     // Cannot play.
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
   });
 
   it('Can still play if oceans are maxed but no land spaces are available', function() {
-    (game as any).temperature = -6;
+    setTemperature(game, -6);
     maxOutOceans(player);
 
     // Take all land spaces
@@ -92,6 +91,6 @@ describe('ArtificialLake', function() {
       game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
     });
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 });

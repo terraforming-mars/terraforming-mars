@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {Riots} from '../../src/server/turmoil/globalEvents/Riots';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
@@ -14,7 +14,7 @@ describe('Riots', function() {
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
     addCityTile(player);
-    player.addResource(Resources.MEGACREDITS, 10);
+    player.addResource(Resource.MEGACREDITS, 10);
     card.resolve(game, turmoil);
     expect(player.megaCredits).to.eq(6);
   });

@@ -2,7 +2,6 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,12 +13,12 @@ const ACTION_COST = 12;
 export class WaterImportFromEuropa extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.WATER_IMPORT_FROM_EUROPA,
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 25,
 
-      victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
+      victoryPoints: {tag: Tag.JOVIAN},
 
       metadata: {
         cardNumber: '012',

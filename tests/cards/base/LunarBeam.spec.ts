@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('LunarBeam', function() {
   let card: LunarBeam;
@@ -10,15 +10,14 @@ describe('LunarBeam', function() {
 
   beforeEach(function() {
     card = new LunarBeam();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can play', function() {
-    player.production.add(Resources.MEGACREDITS, -4);
+    player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
 
-    player.production.add(Resources.MEGACREDITS, 1);
+    player.production.add(Resource.MEGACREDITS, 1);
     expect(card.canPlay(player)).is.true;
   });
 

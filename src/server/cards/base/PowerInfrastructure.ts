@@ -6,14 +6,14 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
 
 export class PowerInfrastructure extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.POWER_INFRASTRUCTURE,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 4,
@@ -36,8 +36,8 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
       'Select amount of energy to spend',
       'Spend energy',
       (amount: number) => {
-        player.deductResource(Resources.ENERGY, amount);
-        player.addResource(Resources.MEGACREDITS, amount, {log: true});
+        player.deductResource(Resource.ENERGY, amount);
+        player.addResource(Resource.MEGACREDITS, amount, {log: true});
         return undefined;
       },
       1,

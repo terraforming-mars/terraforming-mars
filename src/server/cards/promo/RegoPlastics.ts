@@ -9,7 +9,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class RegoPlastics extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.REGO_PLASTICS,
       tags: [Tag.BUILDING],
       cost: 10,

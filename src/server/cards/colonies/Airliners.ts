@@ -11,7 +11,7 @@ export class Airliners extends Card implements IProjectCard {
     super({
       cost: 11,
       name: CardName.AIRLINERS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       requirements: CardRequirements.builder((b) => b.floaters(3)),
       victoryPoints: 1,
 

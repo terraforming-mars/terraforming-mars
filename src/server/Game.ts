@@ -28,7 +28,7 @@ import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
-import {Resources} from '../common/Resources';
+import {Resource} from '../common/Resource';
 import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
@@ -60,14 +60,13 @@ import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBon
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
-import {isProduction} from './utils/server';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
-import {addDays, dayStringToDays} from './database/utils.ts';
+import {addDays, dayStringToDays} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
 
 export interface Score {
@@ -75,6 +74,10 @@ export interface Score {
   playerScore: number;
 }
 export class Game implements Logger {
+  public readonly id: GameId;
+  public readonly gameOptions: Readonly<GameOptions>;
+  private players: Array<Player>;
+
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
@@ -115,9 +118,6 @@ export class Game implements Logger {
   // Used when drafting the first 10 project cards.
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
-  // Used for corporation global draft: do we draft to next player or to player before
-  private corporationsDraftDirection: 'before' | 'after' = 'before';
-  public corporationsToDraft: Array<ICorporationCard> = [];
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -141,20 +141,24 @@ export class Game implements Logger {
   // Syndicate Pirate Raids
   public syndicatePirateRaider?: PlayerId;
 
+  // The set of tags available in this game.
   public readonly tags: ReadonlyArray<Tag>;
 
   private constructor(
-    public id: GameId,
-    private players: Array<Player>,
+    id: GameId,
+    players: Array<Player>,
     first: Player,
     activePlayer: PlayerId,
-    public gameOptions: GameOptions,
+    gameOptions: GameOptions,
     rng: SeededRandom,
     board: Board,
     projectDeck: ProjectDeck,
     corporationDeck: CorporationDeck,
     preludeDeck: PreludeDeck,
     ceoDeck: CeoDeck) {
+    this.id = id;
+    this.gameOptions = {...gameOptions};
+    this.players = players;
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -196,13 +200,13 @@ export class Game implements Logger {
   public static newInstance(id: GameId,
     players: Array<Player>,
     firstPlayer: Player,
-    gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
+    options: Partial<GameOptions> = {},
     seed = 0,
     spectatorId: SpectatorId | undefined = undefined): Game {
+    const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }
-
     const rng = new SeededRandom(seed);
     const board = GameSetup.newBoard(gameOptions, rng);
     const gameCards = new GameCards(gameOptions);
@@ -225,7 +229,6 @@ export class Game implements Logger {
     if (players.length === 1) {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
-      gameOptions.corporationsDraft = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
 
       players[0].setTerraformRating(14);
@@ -309,10 +312,8 @@ export class Game implements Logger {
         gameOptions.turmoilExtension ||
         gameOptions.initialDraftVariant ||
         gameOptions.ceoExtension) {
-        if (gameOptions.corporationsDraft === false) {
-          for (let i = 0; i < gameOptions.startingCorporations; i++) {
-            player.dealtCorporationCards.push(corporationDeck.draw(game));
-          }
+        for (let i = 0; i < gameOptions.startingCorporations; i++) {
+          player.dealtCorporationCards.push(corporationDeck.draw(game));
         }
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {
@@ -326,8 +327,7 @@ export class Game implements Logger {
           }
         }
         if (gameOptions.ceoExtension) {
-          // TODO: Replace this with i < gameOptions.startingCeos constants
-          for (let i = 0; i < 2; i++) {
+          for (let i = 0; i < gameOptions.startingCeos; i++) {
             const ceoCard = ceoDeck.draw(game);
             player.dealtCeoCards.push(ceoCard);
           }
@@ -348,18 +348,7 @@ export class Game implements Logger {
 
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
 
-    // Do we draft corporations or do we start the game?
-    if (gameOptions.corporationsDraft) {
-      game.phase = Phase.CORPORATIONDRAFTING;
-      for (let i = 0; i < gameOptions.startingCorporations * players.length; i++) {
-        game.corporationsToDraft.push(game.corporationDeck.draw(game));
-      }
-      // First player should be the last player
-      const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
-      playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
-    } else {
-      game.gotoInitialPhase();
-    }
+    game.gotoInitialPhase();
 
     return game;
   }
@@ -430,8 +419,6 @@ export class Game implements Logger {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
-      corporationsDraftDirection: this.corporationsDraftDirection,
-      corporationsToDraft: this.corporationsToDraft.map((c) => c.name),
     };
     if (this.aresData !== undefined) {
       result.aresData = this.aresData;
@@ -552,6 +539,9 @@ export class Game implements Logger {
     this.log('${0} funded ${1} award',
       (b) => b.player(player).award(award));
 
+    if (this.hasBeenFunded(award)) {
+      throw new Error(award.name + ' cannot is already funded.');
+    }
     this.fundedAwards.push({
       award: award,
       player: player,
@@ -648,7 +638,7 @@ export class Game implements Logger {
       }
     }
     if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
-      this.players[0].production.add(Resources.MEGACREDITS, -2);
+      this.players[0].production.add(Resource.MEGACREDITS, -2);
       this.defer(new RemoveColonyFromGame(this.players[0]));
     }
   }
@@ -871,37 +861,6 @@ export class Game implements Logger {
     }
   }
 
-  // Function use to manage corporation draft way
-  public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<ICorporationCard>): void {
-    const nextPlayer = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-    const passTo = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(nextPlayer) : this.getPlayerBefore(nextPlayer);
-
-    // If more than 1 card are to be passed to the next player, that means we're still drafting
-    if (cards.length > 1) {
-      if ((this.draftRound + 1) % this.players.length === 0) {
-        nextPlayer.runDraftCorporationPhase(nextPlayer.name, cards);
-      } else if (this.draftRound % this.players.length === 0) {
-        player.runDraftCorporationPhase(nextPlayer.name, cards);
-        this.corporationsDraftDirection = this.corporationsDraftDirection === 'after' ? 'before' : 'after';
-      } else {
-        nextPlayer.runDraftCorporationPhase(passTo.name, cards);
-      }
-      this.draftRound++;
-      return;
-    }
-
-    // Push last card to next player
-    nextPlayer.draftedCorporations.push(...cards);
-
-    this.players.forEach((player) => {
-      player.dealtCorporationCards = player.draftedCorporations;
-    });
-    // Reset value to guarantee no impact on eventual future drafts (projects or preludes)
-    this.initialDraftIteration = 1;
-    this.draftRound = 1;
-    this.gotoInitialPhase();
-  }
-
   private getDraftCardsFrom(player: Player): Player {
     // Special-case for the initial draft direction on second iteration
     if (this.generation === 1 && this.initialDraftIteration === 2) {
@@ -966,7 +925,7 @@ export class Game implements Logger {
     }
   }
 
-  private gotoEndGame(): void {
+  private async gotoEndGame(): Promise<void> {
     // Log id or cloned game id
     if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
       const clonedGamedId = this.clonedGamedId;
@@ -985,12 +944,10 @@ export class Game implements Logger {
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
     this.phase = Phase.END;
-    Database.getInstance().saveGame(this).then(() => {
-      GameLoader.getInstance().mark(this.id);
-      return Database.getInstance().cleanGame(this.id);
-    }).catch((err) => {
-      console.error(err);
-    });
+    await Database.getInstance().saveGame(this);
+    GameLoader.getInstance().mark(this.id);
+    await Database.getInstance().markFinished(this.id);
+    Database.getInstance().maintenance();
   }
 
   // Part of final greenery placement.
@@ -1147,10 +1104,10 @@ export class Game implements Logger {
     if (this.phase !== Phase.SOLAR) {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
-        player.production.add(Resources.HEAT, 1, {log: true});
+        player.production.add(Resource.HEAT, 1, {log: true});
       }
       if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
-        player.production.add(Resources.HEAT, 1, {log: true});
+        player.production.add(Resource.HEAT, 1, {log: true});
       }
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
@@ -1185,14 +1142,6 @@ export class Game implements Logger {
       passedPlayersColors.push(this.getPlayerById(player).color);
     });
     return passedPlayersColors;
-  }
-
-  public getPlayer(name: string): Player {
-    const player = this.players.find((player) => player.name === name);
-    if (player === undefined) {
-      throw new Error('Player not found');
-    }
-    return player;
   }
 
   public getCitiesOffMarsCount(player?: Player): number {
@@ -1295,7 +1244,7 @@ export class Game implements Logger {
       TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
 
       if (arcadianCommunityBonus) {
-        this.defer(new GainResources(player, Resources.MEGACREDITS, {count: 3}));
+        this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
       }
     } else {
       space.player = undefined;
@@ -1334,16 +1283,16 @@ export class Game implements Logger {
       player.drawCard(count);
       break;
     case SpaceBonus.PLANT:
-      player.addResource(Resources.PLANTS, count, {log: true});
+      player.addResource(Resource.PLANTS, count, {log: true});
       break;
     case SpaceBonus.STEEL:
-      player.addResource(Resources.STEEL, count, {log: true});
+      player.addResource(Resource.STEEL, count, {log: true});
       break;
     case SpaceBonus.TITANIUM:
-      player.addResource(Resources.TITANIUM, count, {log: true});
+      player.addResource(Resource.TITANIUM, count, {log: true});
       break;
     case SpaceBonus.HEAT:
-      player.addResource(Resources.HEAT, count, {log: true});
+      player.addResource(Resource.HEAT, count, {log: true});
       break;
     case SpaceBonus.OCEAN:
       // ignore
@@ -1358,7 +1307,7 @@ export class Game implements Logger {
       this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
       break;
     case SpaceBonus.ENERGY_PRODUCTION:
-      player.production.add(Resources.ENERGY, count, {log: true});
+      player.production.add(Resource.ENERGY, count, {log: true});
       break;
     case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
@@ -1373,14 +1322,13 @@ export class Game implements Logger {
       }
       break;
     case SpaceBonus.ENERGY:
-      player.addResource(Resources.ENERGY, count, {log: true});
+      player.addResource(Resource.ENERGY, count, {log: true});
+      break;
+    case SpaceBonus.ASTEROID:
+      this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));
       break;
     default:
-      // TODO(kberg): Remove the isProduction condition after 2022-01-01.
-      // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
-      if (!isProduction()) {
-        throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');
-      }
+      throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');
     }
   }
 
@@ -1455,16 +1403,29 @@ export class Game implements Logger {
     return ret;
   }
 
-  public getCardPlayer(name: CardName): Player {
+  /**
+   * Returns the Player holding this card, or throws.
+   */
+  public getCardPlayerOrThrow(name: CardName): Player {
+    const player = this.getCardPlayerOrUndefined(name);
+    if (player === undefined) {
+      throw new Error(`No player has played ${name}`);
+    }
+    return player;
+  }
+
+  /**
+   * Returns the Player holding this card, or throws.
+   */
+  public getCardPlayerOrUndefined(name: CardName): Player | undefined {
     for (const player of this.players) {
-      // Check cards player has played
       for (const card of player.tableau) {
         if (card.name === name) {
           return player;
         }
       }
     }
-    throw new Error(`No player has played ${name}`);
+    return undefined;
   }
 
   // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
@@ -1485,21 +1446,19 @@ export class Game implements Logger {
   }
 
   public getCardsInHandByType(player: Player, cardType: CardType) {
-    return player.cardsInHand.filter((card) => card.cardType === cardType);
+    return player.cardsInHand.filter((card) => card.type === cardType);
   }
 
   public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: Player}) {
     const builder = new LogBuilder(message);
-    if (f) {
-      f(builder);
-    }
+    f?.(builder);
     const logMessage = builder.build();
     logMessage.playerId = options?.reservedFor?.id;
     this.gameLog.push(logMessage);
     this.gameAge++;
   }
 
-  public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
+  public someoneCanHaveProductionReduced(resource: Resource, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
     return this.getPlayers().some((p) => {
@@ -1567,14 +1526,12 @@ export class Game implements Logger {
     const corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
     const preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
 
-    // TODO(dl): remove ?? {...} by 2023/03/20
-    const ceoDeck = CeoDeck.deserialize(d.ceoDeck ?? {drawPile: [], discardPile: []}, rng);
+    const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
 
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
-    // TODO(kberg): remove ?? 0 by 2023-03-15
-    game.createdTime = new Date(d.createdTimeMs ?? 0);
+    game.createdTime = new Date(d.createdTimeMs);
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone | string) => {
@@ -1636,9 +1593,6 @@ export class Game implements Logger {
     d.unDraftedCards.forEach((unDraftedCard) => {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
-
-    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft);
-    game.corporationsDraftDirection = d.corporationsDraftDirection ?? false;
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

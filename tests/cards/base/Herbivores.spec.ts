@@ -2,9 +2,10 @@ import {expect} from 'chai';
 import {Herbivores} from '../../../src/server/cards/base/Herbivores';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Resources} from '../../../src/common/Resources';
-import {addGreenery, cast, runAllActions, runNextAction} from '../../TestingUtils';
+import {Resource} from '../../../src/common/Resource';
+import {addGreenery, cast, runAllActions, runNextAction, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Herbivores', () => {
   let card: Herbivores;
@@ -14,26 +15,24 @@ describe('Herbivores', () => {
 
   beforeEach(() => {
     card = new Herbivores();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Can not play if nobody has plant production', () => {
-    (game as any).oxygenLevel = 8;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setOxygenLevel(game, 8);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can not play if oxygen level too low', () => {
-    (game as any).oxygenLevel = 7;
-    player2.production.add(Resources.PLANTS, 1);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setOxygenLevel(game, 7);
+    player2.production.add(Resource.PLANTS, 1);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play - auto select if single target', () => {
-    (game as any).oxygenLevel = 8;
-    player2.production.add(Resources.PLANTS, 1);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setOxygenLevel(game, 8);
+    player2.production.add(Resource.PLANTS, 1);
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     runAllActions(game);
@@ -45,8 +44,8 @@ describe('Herbivores', () => {
   });
 
   it('Should play - multiple targets', () => {
-    player.production.add(Resources.PLANTS, 1);
-    player2.production.add(Resources.PLANTS, 1);
+    player.production.add(Resource.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
 
     card.play(player);
     runAllActions(game);
@@ -70,15 +69,15 @@ describe('Herbivores', () => {
     runNextAction(game);
     expect(card.resourceCount).to.eq(2); // i.e. not changed
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Should be playable in solo mode', () => {
-    const game = Game.newInstance('gameid', [player], player);
-    (game as any).oxygenLevel = 8;
-    player.production.add(Resources.PLANTS, 1);
+    [game, player] = testGame(1);
+    setOxygenLevel(game, 8);
+    player.production.add(Resource.PLANTS, 1);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     card.play(player);
     expect(player.production.plants).to.eq(1); // should not decrease
   });

@@ -4,9 +4,9 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EcologicalZoneAres} from '../../../src/server/cards/ares/EcologicalZoneAres';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('EcologicalZoneAres', function() {
   let card: EcologicalZoneAres;
@@ -15,9 +15,7 @@ describe('EcologicalZoneAres', function() {
 
   beforeEach(function() {
     card = new EcologicalZoneAres();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Should play', function() {
@@ -33,7 +31,7 @@ describe('EcologicalZoneAres', function() {
 
     card.onCardPlayed(player, card);
     expect(card.resourceCount).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(adjacentSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.ANIMAL]});
   });
 });

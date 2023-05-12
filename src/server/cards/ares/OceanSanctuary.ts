@@ -1,5 +1,4 @@
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
@@ -13,12 +12,12 @@ import {IProjectCard} from '../IProjectCard';
 export class OceanSanctuary extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.OCEAN_SANCTUARY,
       tags: [Tag.ANIMAL],
       cost: 9,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {resourcesHere: {}},
       requirements: CardRequirements.builder((b) => b.oceans(5)),
 
       behavior: {

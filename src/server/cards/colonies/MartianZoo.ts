@@ -7,7 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all, played} from '../Options';
 
 export class MartianZoo extends Card implements IProjectCard {
@@ -16,7 +16,7 @@ export class MartianZoo extends Card implements IProjectCard {
       cost: 12,
       tags: [Tag.ANIMAL, Tag.BUILDING],
       name: CardName.MARTIAN_ZOO,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       resourceType: CardResource.ANIMAL,
       requirements: CardRequirements.builder((b) => b.cities(2, {all})),
       victoryPoints: 1,
@@ -39,7 +39,6 @@ export class MartianZoo extends Card implements IProjectCard {
     });
   }
 
-
   public onCardPlayed(player: Player, card: IProjectCard) {
     const count = player.tags.cardTagCount(card, Tag.EARTH);
     if (count > 0) {
@@ -52,7 +51,7 @@ export class MartianZoo extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, this.resourceCount, {log: true});
+    player.addResource(Resource.MEGACREDITS, this.resourceCount, {log: true});
     return undefined;
   }
 }

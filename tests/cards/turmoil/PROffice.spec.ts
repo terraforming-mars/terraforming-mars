@@ -3,22 +3,20 @@ import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
 import {Sponsors} from '../../../src/server/cards/base/Sponsors';
 import {PROffice} from '../../../src/server/cards/turmoil/PROffice';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {testGameOptions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('PROffice', function() {
   it('Should play', function() {
     const card = new PROffice();
     const card2 = new Sponsors();
     const card3 = new AcquiredCompany();
-    const game = newTestGame(1, testGameOptions({turmoilExtension: true}));
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(1, {turmoilExtension: true});
 
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
 
     const unity = game.turmoil!.getPartyByName(PartyName.UNITY);
     unity.delegates.add(player.id, 2);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     player.playedCards.push(card2, card3);
     card.play(player);

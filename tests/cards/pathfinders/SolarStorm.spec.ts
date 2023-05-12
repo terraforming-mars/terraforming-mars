@@ -4,11 +4,12 @@ import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
 
 describe('SolarStorm', function() {
   let card: SolarStorm;
@@ -20,13 +21,7 @@ describe('SolarStorm', function() {
 
   beforeEach(function() {
     card = new SolarStorm();
-    const game = newTestGame(3);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
-    player.popWaitingFor();
-    player2.popWaitingFor();
-    player3.popWaitingFor();
+    [, player, player2, player3] = testGame(3);
     cryptocurrency = new Cryptocurrency();
     communicationCenter = new CommunicationCenter();
   });
@@ -91,5 +86,18 @@ describe('SolarStorm', function() {
     expect(selectCard.cards).has.members([cryptocurrency, communicationCenter]);
     selectCard.cb([communicationCenter]);
     expect(communicationCenter.resourceCount).eq(3);
+  });
+
+  it('Compatible with Botanical Experience', () => {
+    player.plants = 5;
+    player2.plants = 15;
+    player2.playedCards.push(new BotanicalExperience());
+    player3.plants = 400;
+
+    card.play(player);
+
+    expect(player.plants).eq(3);
+    expect(player2.plants).eq(14);
+    expect(player3.plants).eq(398);
   });
 });

@@ -3,9 +3,10 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export interface Terms {
   from: number,
@@ -16,7 +17,7 @@ export interface Terms {
 // An abstract base class for SteelMarketMonopolists and TitaniumMarketMonopolists
 export abstract class MarketCard extends Card implements IActionCard {
   constructor(
-    public readonly tradeResource: Resources,
+    public readonly tradeResource: Resource,
     public readonly buyingTerms: Terms,
     public readonly sellingTerms: Terms,
     properties: StaticCardProperties) {
@@ -40,8 +41,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
       return new OrOptions(
-        new SelectOption(`Buy ${this.tradeResource}`, 'Buy', () => this.getBuyingOption(player)),
-        new SelectOption(`Sell ${this.tradeResource}`, 'Sell', () => this.getSellingOption(player)),
+        new SelectOption(newMessage('Buy ${0}', (b) => b.string(this.tradeResource)), 'Buy', () => this.getBuyingOption(player)),
+        new SelectOption(newMessage('Sell ${0}', (b) => b.string(this.tradeResource)), 'Sell', () => this.getSellingOption(player)),
       );
     } else if (offerBuy) {
       return this.getBuyingOption(player);
@@ -58,7 +59,9 @@ export abstract class MarketCard extends Card implements IActionCard {
     limit = Math.min(limit, terms.limit);
 
     return new SelectAmount(
-      `Select a number of trades (${terms.from} M€ => ${terms.to} ${this.tradeResource}, max ${limit})`,
+      newMessage(
+        'Select a number of trades (${terms.from} M€ => ${terms.to} ${this.tradeResource}, max ${limit})',
+        (b) => b.number(terms.from).number(terms.to).string(this.tradeResource).number(limit)),
       `Buy ${this.tradeResource}`,
       (tradesRequested: number) => {
         const cashDue = tradesRequested * terms.from;
@@ -91,7 +94,7 @@ export abstract class MarketCard extends Card implements IActionCard {
       `Sell ${this.tradeResource}`,
       (unitsSold: number) => {
         const cashEarned = unitsSold * terms.to;
-        player.addResource(Resources.MEGACREDITS, cashEarned);
+        player.addResource(Resource.MEGACREDITS, cashEarned);
         player.deductResource(this.tradeResource, unitsSold);
 
         player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));

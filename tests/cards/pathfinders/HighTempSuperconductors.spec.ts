@@ -3,7 +3,7 @@ import {HighTempSuperconductors} from '../../../src/server/cards/pathfinders/Hig
 import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -20,8 +20,7 @@ describe('HighTempSuperconductors', function() {
 
   beforeEach(function() {
     card = new HighTempSuperconductors();
-    game = newTestGame(1, {turmoilExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {turmoilExtension: true});
     turmoil = Turmoil.getTurmoil(game);
   });
 

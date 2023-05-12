@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 import {JunkVentures} from '../../../src/server/cards/community/JunkVentures';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
@@ -17,10 +17,7 @@ describe('JunkVentures', function() {
 
   beforeEach(() => {
     card = new JunkVentures();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player.popSelectInitialCards();
-
+    [game, player] = testGame(2);
     player.playCorporationCard(card);
   });
 

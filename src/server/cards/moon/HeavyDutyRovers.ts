@@ -7,13 +7,13 @@ import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 
 export class HeavyDutyRovers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.HEAVY_DUTY_ROVERS,
       cost: 12,
 
@@ -43,7 +43,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
         return firstRoad !== undefined;
       });
       const count = minesNextToRoads.length;
-      player.addResource(Resources.MEGACREDITS, count * 4, {log: true});
+      player.addResource(Resource.MEGACREDITS, count * 4, {log: true});
     });
     return undefined;
   }

@@ -8,7 +8,7 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Player} from '../../Player';
 import {BoardType} from '../../boards/BoardType';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
@@ -30,7 +30,7 @@ const VALID_BONUSES: Array<SpaceBonus> = [
 export class GeologicalExpedition extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.GEOLOGICAL_EXPEDITION,
       cost: 18,
       tags: [Tag.MARS, Tag.SCIENCE],
@@ -55,7 +55,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
 
     const bonuses = space.bonus;
     if (bonuses.length === 0) {
-      activePlayer.addResource(Resources.STEEL, 1, {log: true /* , from: this.name */});
+      activePlayer.addResource(Resource.STEEL, 1, {log: true /* , from: this.name */});
       return;
     }
     const filtered = bonuses.filter((bonus) => VALID_BONUSES.includes(bonus));

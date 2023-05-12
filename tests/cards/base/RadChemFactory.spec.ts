@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {RadChemFactory} from '../../../src/server/cards/base/RadChemFactory';
-import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {testGame} from '../../TestGame';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RadChemFactory', function() {
@@ -10,9 +10,7 @@ describe('RadChemFactory', function() {
 
   beforeEach(function() {
     card = new RadChemFactory();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -20,7 +18,7 @@ describe('RadChemFactory', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

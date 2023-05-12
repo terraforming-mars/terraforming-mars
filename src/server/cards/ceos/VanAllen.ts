@@ -1,4 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
+import {all, digit} from '../Options';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
@@ -10,7 +11,9 @@ export class VanAllen extends CeoCard {
         cardNumber: 'L22',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.text('MILESTONES: ').megacredits(0, {cancelled: true}).megacredits(3).asterix();
+          b.milestone().colon().text('=').megacredits(0, {digit});
+          b.br;
+          b.milestone({all}).colon().megacredits(3);
           b.br.br;
         }),
         description: 'You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.',

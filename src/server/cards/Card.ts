@@ -20,25 +20,35 @@ import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
+import {Counter} from '../behavior/Counter';
+
+const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
+  CardType.CORPORATION,
+  CardType.PRELUDE,
+  CardType.CEO,
+  CardType.STANDARD_ACTION,
+] as const;
 
 type ReserveUnits = Units & {deduct: boolean};
 type FirstActionBehavior = Behavior & {text: string};
 
-/* External representation of card properties. */
-export interface StaticCardProperties {
+/*
+ * Internal representation of card properties.
+ */
+type Properties = {
   /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
   behavior?: Behavior | undefined;
   cardCost?: number;
   cardDiscount?: CardDiscount | Array<CardDiscount>;
-  cardType: CardType;
+  type: CardType;
   cost?: number;
   initialActionText?: string;
   firstAction?: FirstActionBehavior;
   metadata: ICardMetadata;
   requirements?: CardRequirements;
   name: CardName;
-  reserveUnits?: Partial<ReserveUnits>,
+  reserveUnits?: ReserveUnits,
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
@@ -47,12 +57,13 @@ export interface StaticCardProperties {
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-/*
- * Internal representation of card properties.
- */
-type Properties = Omit<StaticCardProperties, 'reserveUnits'> & {
-  reserveUnits?: ReserveUnits,
-};
+// TODO(kberg): move this out.
+// Makes fields in T Partial.
+type PartialField<T, K extends keyof T> = Omit<T, K> & {[k in K]: Partial<T[K]>};
+
+/* External representation of card properties. */
+// type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+export type StaticCardProperties = PartialField<Properties, 'reserveUnits'>;
 
 export const staticCardProperties = new Map<CardName, Properties>();
 
@@ -80,22 +91,23 @@ export abstract class Card {
   constructor(properties: StaticCardProperties) {
     let staticInstance = staticCardProperties.get(properties.name);
     if (staticInstance === undefined) {
-      if (properties.cardType === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
+      if (properties.type === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
         throw new Error('must define startingMegaCredits for corporation cards');
       }
       if (properties.cost === undefined) {
-        const noCostCardTypes = [
-          CardType.CORPORATION,
-          CardType.PRELUDE,
-          CardType.CEO,
-          CardType.STANDARD_ACTION,
-        ];
-        if (noCostCardTypes.includes(properties.cardType) === false) {
+        if (NO_COST_CARD_TYPES.includes(properties.type) === false) {
           throw new Error(`${properties.name} must have a cost property`);
         }
       }
-      // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
-      Card.autopopulateMetadataVictoryPoints(properties);
+      try {
+        // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
+        Card.autopopulateMetadataVictoryPoints(properties);
+
+        validateBehavior(properties.behavior);
+        validateBehavior(properties.firstAction);
+      } catch (e) {
+        throw new Error(`Cannot validate ${properties.name}: ${e}`);
+      }
 
       const p: Properties = {
         ...properties,
@@ -116,8 +128,8 @@ export abstract class Card {
   public get cardCost() {
     return this.properties.cardCost;
   }
-  public get cardType() {
-    return this.properties.cardType;
+  public get type() {
+    return this.properties.type;
   }
   public get cost() {
     return this.properties.cost === undefined ? 0 : this.properties.cost;
@@ -175,7 +187,7 @@ export abstract class Card {
     return true;
   }
 
-  public play(player: Player) {
+  public play(player: Player): PlayerInput | undefined {
     if (!isICorporationCard(this) && this.reserveUnits.deduct === true) {
       const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
       player.deductUnits(adjustedReserveUnits);
@@ -200,23 +212,16 @@ export abstract class Card {
   public bespokeOnDiscard(_player: Player): void {
   }
 
-  // player is optional to support historical tests.
-  public getVictoryPoints(player?: Player): number {
-    const vp1 = this.properties.victoryPoints;
-    if (vp1 === 'special') {
-      throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
+  public getVictoryPoints(player: Player): number {
+    const vp = this.properties.victoryPoints;
+    if (typeof(vp) === 'number') {
+      return vp;
     }
-    if (vp1 !== undefined) {
-      if (typeof(vp1) === 'number') {
-        return vp1;
-      }
-      if (vp1.type === 'resource') {
-        return vp1.points * Math.floor(this.resourceCount / vp1.per);
-      } else {
-        const tag = vp1.type;
-        const count = player?.tags.count(tag, 'vps') ?? 0;
-        return vp1.points * Math.floor(count / vp1.per);
-      }
+    if (typeof(vp) === 'object') {
+      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+    }
+    if (vp === 'special') {
+      throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
     }
 
     const vps = this.properties.metadata.victoryPoints;
@@ -247,10 +252,10 @@ export abstract class Card {
       break;
 
     case CardRenderItemType.JOVIAN:
-      units = player?.tags.count(Tag.JOVIAN, 'vps');
+      units = player?.tags.count(Tag.JOVIAN, 'raw');
       break;
     case CardRenderItemType.MOON:
-      units = player?.tags.count(Tag.MOON, 'vps');
+      units = player?.tags.count(Tag.MOON, 'raw');
       break;
     }
 
@@ -281,14 +286,29 @@ export abstract class Card {
       properties.metadata.victoryPoints = vps;
       return;
     }
-    if (vps.type === 'resource') {
+    const each = vps.each ?? 1;
+    const per = vps.per ?? 1;
+    if (vps.resourcesHere !== undefined) {
       if (properties.resourceType === undefined) {
         throw new Error('When defining a card-resource based VP, resourceType must be defined.');
       }
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.points, vps.per);
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, each, per);
       return;
+    } else if (vps.tag !== undefined) {
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.tag, each, per);
+    } else if (vps.cities !== undefined) {
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.cities(each, per, vps.all);
+    } else if (vps.colonies !== undefined) {
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.colonies(each, per, vps.all);
+    } else if (vps.moon !== undefined) {
+      if (vps.moon.road !== undefined) {
+        // vps.per is ignored
+        properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.moonRoadTile(each, vps.all);
+      } else {
+        throw new Error('moon defined, but no valid sub-object defined');
+      }
     } else {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.type, vps.points, vps.per);
+      throw new Error('Unknown VPs defined');
     }
   }
 
@@ -311,5 +331,25 @@ export abstract class Card {
       }
     }
     return sum;
+  }
+}
+
+export function validateBehavior(behavior: Behavior | undefined) : void {
+  function validate(condition: boolean, error: string) {
+    if (condition === false) {
+      throw new Error(error);
+    }
+  }
+  if (behavior === undefined) {
+    return;
+  }
+  if (behavior.spend) {
+    if (behavior.spend.megacredits ?? behavior.spend.heat) {
+      validate(behavior.tr === undefined, 'spend.megacredits and spend.heat are not yet compatible with tr');
+      validate(behavior.global === undefined, 'spend.megacredits and spend.heat are not yet compatible with global');
+      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.habitatRate');
+      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.logisticsRate');
+      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.miningRate');
+    }
   }
 }

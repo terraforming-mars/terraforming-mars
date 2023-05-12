@@ -10,7 +10,7 @@ export class PublicCelebrations extends Card implements IProjectCard {
       cost: 8,
       tags: [],
       name: CardName.PUBLIC_CELEBRATIONS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       requirements: CardRequirements.builder((b) => b.chairman()),
       victoryPoints: 2,

@@ -4,7 +4,8 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {isPlanetaryTag, PathfindersExpansion, PlanetaryTag, TRACKS} from '../../pathfinders/PathfindersExpansion';
+import {isPlanetaryTag, PlanetaryTag} from '../../pathfinders/PathfindersData';
+import {PathfindersExpansion, TRACKS} from '../../pathfinders/PathfindersExpansion';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
@@ -13,7 +14,7 @@ import {PathfindersData} from '../../pathfinders/PathfindersData';
 export class EconomicHelp extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.ECONOMIC_HELP,
       cost: 9,
 
@@ -40,7 +41,8 @@ export class EconomicHelp extends Card implements IProjectCard {
 
   private trackOffset(tag: PlanetaryTag, data: PathfindersData): number {
     const value = data[tag];
-    return TRACKS[tag].spaces.length === value ? -1 : value;
+    const maxValue = TRACKS[tag].spaces.length - 1;
+    return maxValue === value ? -1 : value;
   }
 
   public override bespokePlay(player: Player) {

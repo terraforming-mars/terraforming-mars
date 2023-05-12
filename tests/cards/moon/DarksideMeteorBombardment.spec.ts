@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {DarksideMeteorBombardment} from '../../../src/server/cards/moon/DarksideMeteorBombardment';
 import {expect} from 'chai';
@@ -13,7 +12,7 @@ describe('DarksideMeteorBombardment', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new DarksideMeteorBombardment();
     moonData = MoonExpansion.moonData(game);
   });

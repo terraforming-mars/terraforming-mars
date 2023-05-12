@@ -12,7 +12,7 @@ export class MareImbriumMine extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARE_IMBRIUM_MINE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 19,
       reserveUnits: {titanium: 1},

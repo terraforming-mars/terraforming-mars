@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BioSol} from '../../../src/server/cards/pathfinders/BioSol';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame, getTestPlayer} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Tag} from '../../../src/common/cards/Tag';
 import {runAllActions} from '../../TestingUtils';
 
@@ -13,8 +13,7 @@ describe('BioSol', function() {
 
   beforeEach(function() {
     card = new BioSol();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 
@@ -33,10 +32,10 @@ describe('BioSol', function() {
   });
 
   it('getVictoryPoints', () => {
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
     card.resourceCount = 2;
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
     card.resourceCount = 3;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints(player)).eq(1);
   });
 });

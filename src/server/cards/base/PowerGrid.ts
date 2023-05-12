@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class PowerGrid extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.POWER_GRID,
       tags: [Tag.POWER],
       cost: 18,

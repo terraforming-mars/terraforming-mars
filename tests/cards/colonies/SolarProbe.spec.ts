@@ -2,14 +2,13 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {SolarProbe} from '../../../src/server/cards/colonies/SolarProbe';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('SolarProbe', function() {
   it('Should play', function() {
     const card = new SolarProbe();
     const research = new Research();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 1);
+    const [, player] = testGame(2);
 
     player.playedCards.push(research);
 

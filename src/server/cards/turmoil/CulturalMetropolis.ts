@@ -13,7 +13,7 @@ import {Turmoil} from '../../turmoil/Turmoil';
 export class CulturalMetropolis extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CULTURAL_METROPOLIS,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 20,

@@ -148,8 +148,8 @@ it('Cannot select two ceos', async function() {
 });
 
 function getButton(component: Wrapper<SelectInitialCards>) {
-  const button = component.findAllComponents({name: 'Button'}).at(0);
-  return button.findAllComponents({name: 'button'}).at(0);
+  const button = component.findAllComponents({name: 'AppButton'}).at(0);
+  return button.findAllComponents({name: 'AppButton'}).at(0);
 }
 
 function getConfirmDialog(component: Wrapper<SelectInitialCards>): InstanceType<typeof ConfirmDialog> {

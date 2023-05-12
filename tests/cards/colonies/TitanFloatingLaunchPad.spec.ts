@@ -10,7 +10,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
-import {newTestGame, getTestPlayer} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
 describe('TitanFloatingLaunchPad', function() {
@@ -20,15 +20,14 @@ describe('TitanFloatingLaunchPad', function() {
 
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();
-    game = newTestGame(2, {coloniesExtension: true, turmoilExtension: false});
-    player = getTestPlayer(game, 0);
     // Second player is ignored.
+    [game, player] = testGame(2, {coloniesExtension: true, turmoilExtension: false});
   });
 
   it('Should act', function() {
     player.playedCards.push(card);
     expect(card.canAct()).is.true;
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Should play with single targets', function() {

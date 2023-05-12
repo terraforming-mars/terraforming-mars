@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
@@ -14,13 +13,13 @@ import {played} from '../Options';
 export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ASTEROID_DEFLECTION_SYSTEM,
       tags: [Tag.SPACE, Tag.EARTH, Tag.BUILDING],
       cost: 13,
 
       resourceType: CardResource.ASTEROID,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {resourcesHere: {}},
 
       behavior: {
         production: {energy: -1},

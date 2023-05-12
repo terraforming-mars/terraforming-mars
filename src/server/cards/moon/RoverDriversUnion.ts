@@ -5,7 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 
@@ -13,7 +13,7 @@ export class RoverDriversUnion extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.ROVER_DRIVERS_UNION,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 16,
       requirements: CardRequirements.builder((b) => b.logisticRate(2)),
@@ -33,7 +33,7 @@ export class RoverDriversUnion extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       MoonExpansion.raiseLogisticRate(player);
-      player.production.add(Resources.MEGACREDITS, moonData.logisticRate, {log: true});
+      player.production.add(Resource.MEGACREDITS, moonData.logisticRate, {log: true});
     });
     return undefined;
   }

@@ -24,8 +24,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
 import {TileType} from '../../common/TileType';
 import {Phase} from '../../common/Phase';
-import {Resources} from '../../common/Resources';
-import {CardType} from '../../common/cards/CardType';
+import {Resource} from '../../common/Resource';
 import {
   ClaimedMilestoneModel,
   MilestoneScore,
@@ -99,7 +98,6 @@ export class Server {
       undoCount: game.undoCount,
       venusScaleLevel: game.getVenusScaleLevel(),
       step: game.lastSaveId,
-      corporationsToDraft: this.getCards(game.getPlayers()[0], game.corporationsToDraft),
     };
   }
 
@@ -145,7 +143,6 @@ export class Server {
         resources: targetCard.resourceCount,
         name: targetCard.card.name,
         calculatedCost: player.getCardCost(targetCard.card),
-        cardType: CardType.ACTIVE,
         isDisabled: false,
         reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
         isSelfReplicatingRobotsCard: true,
@@ -286,7 +283,8 @@ export class Server {
       playerInputModel.showOwner = selectCard.config.showOwner === true;
       break;
     case PlayerInputType.SELECT_COLONY:
-      playerInputModel.coloniesModel = this.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
+      const selectColony = waitingFor as SelectColony;
+      playerInputModel.coloniesModel = this.getColonyModel(player.game, selectColony.colonies, selectColony.showTileOnly);
       break;
     case PlayerInputType.SELECT_PAYMENT:
       const sp = waitingFor as SelectPayment;
@@ -382,7 +380,6 @@ export class Server {
         resources: options.showResources ? card.resourceCount : undefined,
         name: card.name,
         calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
-        cardType: card.cardType,
         isDisabled: isDisabled,
         warning: card.warning,
         reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
@@ -444,7 +441,7 @@ export class Server {
   }
 
   private static getResourceProtections(player: Player) {
-    const protection: Record<Resources, Protection> = {
+    const protection: Record<Resource, Protection> = {
       megacredits: 'off',
       steel: 'off',
       titanium: 'off',
@@ -469,7 +466,7 @@ export class Server {
 
   private static getProductionProtections(player: Player) {
     const defaultProteection = player.cardIsInEffect(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
-    const protection: Record<Resources, Protection> = {
+    const protection: Record<Resource, Protection> = {
       megacredits: defaultProteection,
       steel: defaultProteection,
       titanium: defaultProteection,
@@ -553,7 +550,6 @@ export class Server {
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
       draftVariant: options.draftVariant,
-      corporationsDraft: options.corporationsDraft,
       escapeVelocityMode: options.escapeVelocityMode,
       escapeVelocityThreshold: options.escapeVelocityThreshold,
       escapeVelocityPeriod: options.escapeVelocityPeriod,
@@ -583,22 +579,23 @@ export class Server {
     };
   }
 
-  private static getColonyModel(game: Game, colonies: Array<IColony>) : Array<ColonyModel> {
+  private static getColonyModel(game: Game, colonies: Array<IColony>, showTileOnly: boolean) : Array<ColonyModel> {
     return colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(
           (playerId): Color => game.getPlayerById(playerId).color,
         ),
-        isActive: colony.isActive,
+        isActive: colony.isActive && showTileOnly === false,
         name: colony.name,
         trackPosition: colony.trackPosition,
         visitor:
-                colony.visitor === undefined ?
-                  undefined :
-                  game.getPlayerById(colony.visitor).color,
+          colony.visitor === undefined ?
+            undefined :
+            game.getPlayerById(colony.visitor).color,
       }),
     );
   }
+
   private static getMoonModel(game: Game): MoonModel | undefined {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return {

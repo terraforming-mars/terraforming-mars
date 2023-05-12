@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
 import {AquiferTurbines} from '../../../src/server/cards/prelude/AquiferTurbines';
@@ -24,10 +24,14 @@ describe('TheNewSpaceRace', function() {
 
   beforeEach(function() {
     card = new TheNewSpaceRace();
-    game = newTestGame(3, {turmoilExtension: true, preludeExtension: true, draftVariant: false, initialDraftVariant: false});
-    player1 = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
+    [game, player1, player2, player3] = testGame(
+      3, {
+        turmoilExtension: true,
+        preludeExtension: true,
+        draftVariant: false,
+        initialDraftVariant: false,
+        skipInitialCardSelection: false,
+      });
   });
 
   /*

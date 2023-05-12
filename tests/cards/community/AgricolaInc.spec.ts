@@ -3,8 +3,9 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtractor';
 import {AgricolaInc} from '../../../src/server/cards/community/AgricolaInc';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
+import {Units} from '../../../src/common/Units';
 
 describe('AgricolaInc', function() {
   let card: AgricolaInc;
@@ -12,15 +13,14 @@ describe('AgricolaInc', function() {
 
   beforeEach(function() {
     card = new AgricolaInc();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
 
     card.play(player);
     player.setCorporationForTest(card);
   });
 
   it('Starts with correct production', function() {
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1, plants: 1, heat: 1}));
     expect(player.production.megacredits).to.eq(1);
     expect(player.production.plants).to.eq(1);
   });

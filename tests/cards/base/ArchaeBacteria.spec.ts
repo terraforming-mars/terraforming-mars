@@ -2,6 +2,8 @@ import {expect} from 'chai';
 import {ArchaeBacteria} from '../../../src/server/cards/base/ArchaeBacteria';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
+import {setTemperature} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('ArchaeBacteria', function() {
   let card: ArchaeBacteria;
@@ -10,14 +12,12 @@ describe('ArchaeBacteria', function() {
 
   beforeEach(function() {
     card = new ArchaeBacteria();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    (game as any).temperature = -12;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setTemperature(game, -12);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {

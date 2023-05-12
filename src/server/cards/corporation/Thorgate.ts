@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class Thorgate extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.THORGATE,
       tags: [Tag.POWER],
       startingMegaCredits: 48,
@@ -27,7 +27,6 @@ export class Thorgate extends Card implements ICorporationCard {
           b.production((pb) => pb.energy(1)).nbsp.megacredits(48);
           b.corpBox('effect', (ce) => {
             ce.effect('When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.', (eb) => {
-              // TODO(chosta): energy().played needs to be power() [same for space()]
               eb.energy(1, {played}).asterix().startEffect.megacredits(-3);
             });
           });

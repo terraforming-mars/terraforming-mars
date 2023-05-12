@@ -2,7 +2,7 @@ import {RequirementType} from '../../common/cards/RequirementType';
 import {Tag} from '../../common/cards/Tag';
 import {ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITagCardRequirement} from '../../common/cards/ICardRequirement';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {Resources} from '../../common/Resources';
+import {ALL_RESOURCES, Resource} from '../../common/Resource';
 import {Player} from '../Player';
 import {CardResource} from '../../common/CardResource';
 import {TileType} from '../../common/TileType';
@@ -54,16 +54,16 @@ export class CardRequirement implements ICardRequirement {
       return this.satisfiesInequality(parties);
 
     case RequirementType.OCEANS:
-      return this.checkGlobalRequirement(player, GlobalParameter.OCEANS, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.OCEANS);
 
     case RequirementType.OXYGEN:
-      return this.checkGlobalRequirement(player, GlobalParameter.OXYGEN, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.OXYGEN);
 
     case RequirementType.TEMPERATURE:
-      return this.checkGlobalRequirement(player, GlobalParameter.TEMPERATURE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.TEMPERATURE);
 
     case RequirementType.VENUS:
-      return this.checkGlobalRequirement(player, GlobalParameter.VENUS, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.VENUS);
 
     case RequirementType.TR:
       return this.satisfiesInequality(player.getTerraformRating());
@@ -72,19 +72,18 @@ export class CardRequirement implements ICardRequirement {
       return player.game.someoneHasRemovedOtherPlayersPlants;
 
     case RequirementType.RESOURCE_TYPES:
-      const standardResources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT]
-        .filter((res) => player.getResource(res) > 0).length;
+      const standardResources = ALL_RESOURCES.filter((res) => player.getResource(res) > 0).length;
       const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
       return this.satisfiesInequality(standardResources + nonStandardResources);
 
     case RequirementType.HABITAT_RATE:
-      return this.checkGlobalRequirement(player, GlobalParameter.MOON_HABITAT_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_HABITAT_RATE);
 
     case RequirementType.MINING_RATE:
-      return this.checkGlobalRequirement(player, GlobalParameter.MOON_MINING_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_MINING_RATE);
 
     case RequirementType.LOGISTIC_RATE:
-      return this.checkGlobalRequirement(player, GlobalParameter.MOON_LOGISTICS_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_LOGISTICS_RATE);
 
     case RequirementType.HABITAT_TILES:
       return this.satisfiesInequality(
@@ -105,7 +104,7 @@ export class CardRequirement implements ICardRequirement {
     }
   }
 
-  private checkGlobalRequirement(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
+  private checkGlobalRequirement(player: Player, parameter: GlobalParameter): boolean {
     let currentLevel: number;
     let playerRequirementsBonus = player.getRequirementsBonus(parameter);
 
@@ -141,10 +140,10 @@ export class CardRequirement implements ICardRequirement {
       return false;
     }
 
-    if (max) {
-      return currentLevel <= level + playerRequirementsBonus;
+    if (this.isMax) {
+      return currentLevel <= this.amount + playerRequirementsBonus;
     } else {
-      return currentLevel >= level - playerRequirementsBonus;
+      return currentLevel >= this.amount - playerRequirementsBonus;
     }
   }
 }
@@ -174,7 +173,7 @@ export class TagCardRequirement extends CardRequirement implements ITagCardRequi
 }
 
 export class ProductionCardRequirement extends CardRequirement implements IProductionCardRequirement {
-  constructor(public resource: Resources, amount: number, options?: Options) {
+  constructor(public resource: Resource, amount: number, options?: Options) {
     super(RequirementType.PRODUCTION, amount, options);
   }
   public override satisfies(player: Player): boolean {

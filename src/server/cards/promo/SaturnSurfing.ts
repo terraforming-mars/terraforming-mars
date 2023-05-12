@@ -6,14 +6,14 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
 export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SATURN_SURFING,
       cost: 13,
       tags: [Tag.JOVIAN, Tag.EARTH],
@@ -43,7 +43,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, Math.min(5, this.resourceCount--));
+    player.addResource(Resource.MEGACREDITS, Math.min(5, this.resourceCount--));
     return undefined;
   }
 }

@@ -19,6 +19,7 @@ import {ALL_AWARDS} from '../awards/Awards';
 import {MilestoneAwardMetadata} from '../../common/ma/MilestoneAwardMetadata';
 import {AwardName} from '../../common/ma/AwardName';
 import {MilestoneName} from '../../common/ma/MilestoneName';
+import {CardType} from '../../common/cards/CardType';
 
 class ProjectCardProcessor {
   public static json: Array<ClientCard> = [];
@@ -39,6 +40,7 @@ class ProjectCardProcessor {
   }
 
   private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {
+    if (card.type === CardType.PROXY) return;
     let startingMegaCredits = undefined;
     let cardCost = undefined;
     if (isPreludeCard(card)) {
@@ -57,7 +59,7 @@ class ProjectCardProcessor {
       cardDiscount: card.cardDiscount,
       victoryPoints: card.victoryPoints,
       cost: card.cost,
-      cardType: card.cardType,
+      type: card.type,
       requirements: card.requirements,
       metadata: card.metadata,
       warning: card.warning,
@@ -119,7 +121,7 @@ class ColoniesProcessor {
       buildType: metadata.buildType,
       buildQuantity: metadata.buildQuantity,
       buildResource: metadata.buildResource,
-      resourceType: metadata.resourceType,
+      cardResource: metadata.cardResource,
       tradeType: metadata.tradeType,
       tradeQuantity: metadata.tradeQuantity,
       tradeResource: metadata.tradeResource,

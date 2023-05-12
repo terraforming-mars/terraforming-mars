@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from './ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,7 +12,7 @@ import {all, played} from '../Options';
 export class SaturnSystems extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.SATURN_SYSTEMS,
       tags: [Tag.JOVIAN],
       startingMegaCredits: 42,
@@ -50,7 +50,7 @@ export class SaturnSystems extends Card implements ICorporationCard {
   private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
     for (const tag of card.tags) {
       if (tag === Tag.JOVIAN) {
-        player.game.getCardPlayer(this.name).production.add(Resources.MEGACREDITS, 1, {log: true});
+        player.game.getCardPlayerOrThrow(this.name).production.add(Resource.MEGACREDITS, 1, {log: true});
       }
     }
   }

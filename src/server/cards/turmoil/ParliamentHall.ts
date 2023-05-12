@@ -11,7 +11,7 @@ import {played} from '../Options';
 export class ParliamentHall extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.PARLIAMENT_HALL,
       tags: [Tag.BUILDING],
       cost: 8,

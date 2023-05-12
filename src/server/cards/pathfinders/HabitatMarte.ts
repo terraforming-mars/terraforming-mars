@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class HabitatMarte extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.HABITAT_MARTE,
       tags: [Tag.MARS],
       startingMegaCredits: 40,

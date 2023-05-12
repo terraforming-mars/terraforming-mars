@@ -10,7 +10,7 @@ export class TheWomb extends Card {
   constructor() {
     super({
       name: CardName.THE_WOMB,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.MOON],
       cost: 16,
 
@@ -28,7 +28,7 @@ export class TheWomb extends Card {
         cardNumber: 'M08',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(2).nbsp.megacredits(4);
+            pb.minus().energy(2).nbsp.plus().megacredits(4);
           }).br;
           b.minus().titanium(2).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});
         }),

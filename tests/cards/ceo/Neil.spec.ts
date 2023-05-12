@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -21,9 +21,7 @@ describe('Neil', function() {
 
   beforeEach(() => {
     card = new Neil();
-    game = newTestGame(2, {ceoExtension: true, moonExpansion: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {ceoExtension: true, moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
   });
 

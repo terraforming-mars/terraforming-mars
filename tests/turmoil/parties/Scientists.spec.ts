@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {setRulingPartyAndRulingPolicy, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4} from '../../../src/server/turmoil/parties/Scientists';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
@@ -12,6 +12,7 @@ import {SpaceStation} from '../../../src/server/cards/base/SpaceStation';
 import {Satellites} from '../../../src/server/cards/base/Satellites';
 import {HabitatMarte} from '../../../src/server/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../../src/server/cards/pathfinders/DesignedOrganisms';
+import {testGame} from '../../TestGame';
 
 describe('Scientists', function() {
   let player: TestPlayer;
@@ -20,8 +21,7 @@ describe('Scientists', function() {
   let scientists: Scientists;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    [game, player] = testGame(1, {turmoilExtension: true});
     turmoil = game.turmoil!;
     scientists = new Scientists();
   });
@@ -71,8 +71,8 @@ describe('Scientists', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, scientists, SCIENTISTS_POLICY_2.id);
 
     const card = new SearchForLife();
-    (game as any).oxygenLevel = 8;
-    expect(player.canPlayIgnoringCost(card)).to.be.true;
+    setOxygenLevel(game, 8);
+    expect(player.simpleCanPlay(card)).to.be.true;
   });
 
   it('Ruling policy 3: When you raise a global parameter, draw a card per step raised', function() {
@@ -91,12 +91,12 @@ describe('Scientists', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, scientists, SCIENTISTS_POLICY_4.id);
 
     const card = new GeneRepair();
-    expect(player.canPlayIgnoringCost(card)).to.be.false;
+    expect(player.simpleCanPlay(card)).to.be.false;
 
     const scientistsPolicy = SCIENTISTS_POLICY_4;
     scientistsPolicy.apply(game);
     player.playedCards.push(new Research());
-    expect(player.canPlayIgnoringCost(card)).to.be.true;
+    expect(player.simpleCanPlay(card)).to.be.true;
   });
 
   it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less Science tag', function() {
@@ -106,10 +106,10 @@ describe('Scientists', function() {
     player.playedCards.push(new SpaceStation(), new Satellites());
     player.titanium = 2;
     const card = new PrideoftheEarthArkship();
-    expect(player.canPlayIgnoringCost(card)).to.be.false;
+    expect(player.simpleCanPlay(card)).to.be.false;
 
     const scientistsPolicy = SCIENTISTS_POLICY_4;
     scientistsPolicy.apply(game);
-    expect(player.canPlayIgnoringCost(card)).to.be.true;
+    expect(player.simpleCanPlay(card)).to.be.true;
   });
 });

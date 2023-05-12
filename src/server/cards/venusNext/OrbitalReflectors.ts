@@ -9,7 +9,7 @@ export class OrbitalReflectors extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.ORBITAL_REFLECTORS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.VENUS, Tag.SPACE],
       cost: 26,
 

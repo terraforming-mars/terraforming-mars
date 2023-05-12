@@ -20,5 +20,5 @@ export interface ICorporationCard extends ICard {
 }
 
 export function isICorporationCard(card: ICard): card is ICorporationCard {
-  return card.cardType === CardType.CORPORATION;
+  return card.type === CardType.CORPORATION;
 }

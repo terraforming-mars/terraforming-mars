@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class PoliticalAlliance extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.POLITICAL_ALLIANCE,
       cost: 4,
 

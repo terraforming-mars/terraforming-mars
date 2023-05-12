@@ -1,7 +1,7 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
 import {expect} from 'chai';
@@ -17,13 +17,13 @@ describe('MareSerenitatisMine', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MareSerenitatisMine();
   });
 
   it('can play', () => {
-    // TODO: Ensuring resources is going to require changes coming later.
+    // TODO(kberg): Ensuring resources is going to require changes coming later.
   });
 
   it('play', () => {

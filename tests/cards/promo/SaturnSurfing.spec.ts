@@ -3,7 +3,7 @@ import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {Sponsors} from '../../../src/server/cards/base/Sponsors';
 import {SaturnSurfing} from '../../../src/server/cards/promo/SaturnSurfing';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {Game} from '../../../src/server/Game';
 
@@ -14,8 +14,7 @@ describe('SaturnSurfing', function() {
 
   beforeEach(function() {
     card = new SaturnSurfing();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
   });
 
   it('Should play', function() {
@@ -53,6 +52,6 @@ describe('SaturnSurfing', function() {
 
   it('Should give victory points', function() {
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

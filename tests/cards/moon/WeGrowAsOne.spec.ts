@@ -1,10 +1,10 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {WeGrowAsOne} from '../../../src/server/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
 import {Unity} from '../../../src/server/turmoil/parties/Unity';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
+import {testGame} from '../../TestGame';
 
 describe('WeGrowAsOne', () => {
   let player: TestPlayer;
@@ -12,16 +12,11 @@ describe('WeGrowAsOne', () => {
   let card: WeGrowAsOne;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance(
-      'gameid',
-      [player],
-      player,
-      testGameOptions({
-        moonExpansion: true,
-        coloniesExtension: true,
-        turmoilExtension: true,
-      }));
+    [game, player] = testGame(1, {
+      moonExpansion: true,
+      coloniesExtension: true,
+      turmoilExtension: true,
+    });
     card = new WeGrowAsOne();
   });
 

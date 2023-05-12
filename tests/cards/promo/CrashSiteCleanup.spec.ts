@@ -5,6 +5,7 @@ import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('CrashSiteCleanup', function() {
   let card: CrashSiteCleanup;
@@ -12,13 +13,11 @@ describe('CrashSiteCleanup', function() {
 
   beforeEach(function() {
     card = new CrashSiteCleanup();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play if removed plants from another player this generation', function() {
@@ -32,7 +31,7 @@ describe('CrashSiteCleanup', function() {
     const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb([player2]);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     expect(player.game.someoneHasRemovedOtherPlayersPlants).is.true;
 
     const action = cast(card.play(player), OrOptions);
@@ -51,7 +50,7 @@ describe('CrashSiteCleanup', function() {
     expect(player.game.deferredActions).has.lengthOf(1);
     player.game.deferredActions.peek()!.execute();
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     expect(player.game.someoneHasRemovedOtherPlayersPlants).is.true;
   });
 });

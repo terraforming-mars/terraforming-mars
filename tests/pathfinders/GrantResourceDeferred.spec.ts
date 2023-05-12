@@ -4,7 +4,7 @@ import {GrantResourceDeferred} from '../../src/server/pathfinders/GrantResourceD
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectResources} from '../../src/server/inputs/SelectResources';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {Ants} from '../../src/server/cards/base/Ants';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
@@ -16,8 +16,7 @@ describe('GrantResourceDeferred', function() {
   let tardigrades: Tardigrades;
 
   beforeEach(() => {
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
     ants = new Ants();
     tardigrades = new Tardigrades();
     player.playedCards.push(ants);

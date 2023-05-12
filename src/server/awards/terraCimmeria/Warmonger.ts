@@ -31,6 +31,7 @@ export class Warmonger implements IAward {
     CardName.HEAT_TRAPPERS,
     CardName.HERBIVORES,
     CardName.HIRED_RAIDERS,
+    CardName.MINING_EXPEDITION,
     CardName.POWER_SUPPLY_CONSORTIUM,
     CardName.PREDATORS,
     CardName.SABOTAGE,
@@ -51,6 +52,7 @@ export class Warmonger implements IAward {
     CardName.MONS_INSURANCE,
     // Ares
     CardName.METALLIC_ASTEROID,
+    CardName.DEIMOS_DOWN_ARES,
     // Moon
     CardName.ANCIENT_SHIPYARDS,
     CardName.COSMIC_RADIATION,

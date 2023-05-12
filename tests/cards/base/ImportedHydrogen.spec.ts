@@ -4,11 +4,11 @@ import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {ImportedHydrogen} from '../../../src/server/cards/base/ImportedHydrogen';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('ImportedHydrogen', function() {
   let card: ImportedHydrogen;
@@ -16,9 +16,7 @@ describe('ImportedHydrogen', function() {
 
   beforeEach(function() {
     card = new ImportedHydrogen();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {NanotechIndustries} from '../../../src/server/cards/moon/NanotechIndustries';
 import {expect} from 'chai';
@@ -25,7 +25,7 @@ describe('NanotechIndustries', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     nanotechIndustries = new NanotechIndustries();
   });
 
@@ -49,17 +49,17 @@ describe('NanotechIndustries', () => {
 
   it('victory points', () => {
     nanotechIndustries.resourceCount = 0;
-    expect(nanotechIndustries.getVictoryPoints()).eq(0);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(0);
     nanotechIndustries.resourceCount = 1;
-    expect(nanotechIndustries.getVictoryPoints()).eq(0);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(0);
     nanotechIndustries.resourceCount = 2;
-    expect(nanotechIndustries.getVictoryPoints()).eq(1);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(1);
     nanotechIndustries.resourceCount = 3;
-    expect(nanotechIndustries.getVictoryPoints()).eq(1);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(1);
     nanotechIndustries.resourceCount = 4;
-    expect(nanotechIndustries.getVictoryPoints()).eq(2);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(2);
     nanotechIndustries.resourceCount = 5;
-    expect(nanotechIndustries.getVictoryPoints()).eq(2);
+    expect(nanotechIndustries.getVictoryPoints(player)).eq(2);
   });
 });
 

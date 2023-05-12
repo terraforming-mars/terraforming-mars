@@ -16,11 +16,11 @@ export class Naomi extends CeoCard {
         cardNumber: 'L14',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.colonies(1).colon().energy(2).megacredits(2);
+          b.colonies(1).colon().energy(2).megacredits(3);
           b.br.br.br;
           b.opgArrow().text('SET ALL').colonies(1).asterix();
         }),
-        description: 'When you build a colony, gain 2 energy and 2 M€. Once per game, move each colony tile track marker to its highest or lowest value.',
+        description: 'When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.',
       },
     });
   }
@@ -34,22 +34,22 @@ export class Naomi extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const activeColonies = game.colonies.filter((colony) => colony.isActive);
 
     activeColonies.forEach((colony) => {
       game.defer(new SimpleDeferredAction(player, () => new OrOptions(
-        new SelectOption('Increase ' + colony.name + ' track to its highest value', 'Select', () => {
+        new SelectOption('Move the ' + colony.name + ' tile track marker to its HIGHEST value', 'Select', () => {
           colony.trackPosition = MAX_COLONY_TRACK_POSITION;
           return undefined;
         }),
-        new SelectOption('Decrease ' + colony.name + ' track to its lowest value', 'Select', () => {
+        new SelectOption('Move the ' + colony.name + ' tile track marker to its LOWEST value', 'Select', () => {
           colony.trackPosition = colony.colonies.length;
           return undefined;
         }),
       )));
     });
-    this.isDisabled = true;
     return undefined;
   }
 }

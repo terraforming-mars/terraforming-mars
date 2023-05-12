@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
@@ -14,7 +14,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 export class PowerSupplyConsortium extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.POWER_SUPPLY_CONSORTIUM,
       tags: [Tag.POWER],
       cost: 5,
@@ -35,8 +35,8 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.game.defer(
-      new DecreaseAnyProduction(player, Resources.ENERGY, {count: 1, stealing: true}));
-    player.game.defer(new GainProduction(player, Resources.ENERGY, {count: 1}));
+      new DecreaseAnyProduction(player, Resource.ENERGY, {count: 1, stealing: true}));
+    player.game.defer(new GainProduction(player, Resource.ENERGY, {count: 1}));
     return undefined;
   }
 }

@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -14,13 +13,13 @@ import {played} from '../Options';
 export class Decomposers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.DECOMPOSERS,
       tags: [Tag.MICROBE],
       cost: 5,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {resourcesHere: {}, per: 3},
       requirements: CardRequirements.builder((b) => b.oxygen(3)),
 
       metadata: {

@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -25,7 +25,7 @@ export class ScientificCommunity extends GlobalEvent implements IGlobalEvent {
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const amount = player.cardsInHand.length + turmoil.getPlayerInfluence(player);
-      player.addResource(Resources.MEGACREDITS, amount, {log: true, from: this.name});
+      player.addResource(Resource.MEGACREDITS, amount, {log: true, from: this.name});
     });
   }
 }

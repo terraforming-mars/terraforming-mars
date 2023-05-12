@@ -1,22 +1,18 @@
-import {Game} from '../../../src/server/Game';
-import {runAllActions, testGameOptions} from '../../TestingUtils';
+import {churnAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
 import {expect} from 'chai';
-import {getTestPlayer, getTestPlayers, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('AncientShipyards', () => {
-  let game: Game;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let card: AncientShipyards;
 
   beforeEach(() => {
-    game = newTestGame(3, testGameOptions({moonExpansion: true}));
-    [player, player2, player3] = getTestPlayers(game);
+    [/* skipped */, player, player2, player3] = testGame(3, {moonExpansion: true});
     card = new AncientShipyards();
-    player.popSelectInitialCards();
   });
 
   it('can play', () => {
@@ -43,9 +39,7 @@ describe('AncientShipyards', () => {
     player2.megaCredits = 10;
     player3.megaCredits = 7;
 
-    card.action(player);
-    runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    expect(churnAction(card, player)).is.undefined;
 
     expect(player.megaCredits).eq(4);
     expect(player2.megaCredits).eq(8);
@@ -54,29 +48,25 @@ describe('AncientShipyards', () => {
   });
 
   it('act solo', () => {
-    game = newTestGame(1, testGameOptions({moonExpansion: true}));
-    player = getTestPlayer(game, 0);
-    player.popSelectInitialCards();
+    [/* skipped */, player] = testGame(1, {moonExpansion: true});
 
     expect(card.resourceCount).eq(0);
     player.megaCredits = 10;
 
-    card.action(player);
-    runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    expect(churnAction(card, player)).is.undefined;
 
     expect(player.megaCredits).eq(12);
     expect(card.resourceCount).eq(1);
   });
 
   it('victory points', () => {
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
     card.resourceCount = 1;
-    expect(card.getVictoryPoints()).eq(-1);
+    expect(card.getVictoryPoints(player)).eq(-1);
     card.resourceCount = 2;
-    expect(card.getVictoryPoints()).eq(-2);
+    expect(card.getVictoryPoints(player)).eq(-2);
     card.resourceCount = 3;
-    expect(card.getVictoryPoints()).eq(-3);
+    expect(card.getVictoryPoints(player)).eq(-3);
   });
 });
 

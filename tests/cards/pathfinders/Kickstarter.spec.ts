@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Kickstarter} from '../../../src/server/cards/pathfinders/Kickstarter';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Game} from '../../../src/server/Game';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -15,8 +15,7 @@ describe('Kickstarter', function() {
 
   beforeEach(function() {
     card = new Kickstarter();
-    game = newTestGame(1, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {pathfindersExpansion: true});
   });
 
   it('play', () => {

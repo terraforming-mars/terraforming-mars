@@ -15,6 +15,7 @@ import {SelectColony} from '../../inputs/SelectColony';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {newMessage} from '../../logs/MessageBuilder';
 
 function tradeCost(player: Player) {
   return Math.max(0, 3 - player.colonies.tradeDiscount);
@@ -22,7 +23,7 @@ function tradeCost(player: Player) {
 export class CollegiumCopernicus extends Card implements ICorporationCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.COLLEGIUM_COPERNICUS,
       tags: [Tag.SCIENCE, Tag.EARTH],
       startingMegaCredits: 33,
@@ -101,7 +102,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
   }
 
   public optionText() {
-    return 'Pay 3 Data (use Collegium Copernicus action)';
+    return newMessage('Pay ${0} data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName.COLLEGIUM_COPERNICUS));
   }
 
   public trade(colony: IColony) {

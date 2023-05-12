@@ -7,7 +7,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Karen', function() {
   let card: Karen;
@@ -16,8 +16,7 @@ describe('Karen', function() {
 
   beforeEach(() => {
     card = new Karen();
-    game = newTestGame(2, {preludeExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {preludeExtension: true});
 
     // This ensures that preludes which cost MC are affordable.
     player.megaCredits = 20;
@@ -32,7 +31,7 @@ describe('Karen', function() {
     expect(selectCard.cards).has.length(1);
 
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(1);
+    expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(1);
   });
 
   it('Takes action in Generation 4', function() {
@@ -45,7 +44,7 @@ describe('Karen', function() {
     expect(selectCard.cards).has.length(4);
 
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(1);
+    expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(1);
   });
 
   it('Discards unplayable prelude cards', function() {
@@ -54,7 +53,7 @@ describe('Karen', function() {
 
     const action = card.action(player);
     expect(action).is.undefined;
-    expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(0);
+    expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(0);
   });
 
   it('Can only act once per game', function() {

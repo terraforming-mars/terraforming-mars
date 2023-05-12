@@ -1,10 +1,9 @@
 import {expect} from 'chai';
-import {testGameOptions} from '../../TestingUtils';
 import {DysonScreens} from '../../../src/server/cards/pathfinders/DysonScreens';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {Units} from '../../../src/common/Units';
+import {testGame} from '../../TestGame';
 
 describe('DysonScreens', function() {
   let card: DysonScreens;
@@ -12,8 +11,7 @@ describe('DysonScreens', function() {
 
   beforeEach(function() {
     card = new DysonScreens();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({pathfindersExpansion: true}));
+    [, player] = testGame(1, {pathfindersExpansion: true});
   });
 
   it('play', () => {

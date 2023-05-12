@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class CarbonateProcessing extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CARBONATE_PROCESSING,
       tags: [Tag.BUILDING],
       cost: 6,

@@ -1,17 +1,17 @@
 import {expect} from 'chai';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
+import {cast} from '../../TestingUtils';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('FloaterUrbanism', function() {
   let card: FloaterUrbanism;
   let player: TestPlayer;
-  let game: Game;
 
   let floater1: IProjectCard;
   let floater2: IProjectCard;
@@ -19,8 +19,7 @@ describe('FloaterUrbanism', function() {
 
   beforeEach(function() {
     card = new FloaterUrbanism();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();
@@ -59,8 +58,7 @@ describe('FloaterUrbanism', function() {
     floater2.resourceCount = 1;
     other.resourceCount = 1;
 
-    const options = card.action(player)!;
-
+    const options = cast(card.action(player), SelectCard);
     expect(options.cards.length).eq(2);
     options.cb([options.cards[0]]);
     expect(floater1.resourceCount).eq(0);

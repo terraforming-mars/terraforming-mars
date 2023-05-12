@@ -13,7 +13,7 @@ export class MorningStarInc extends Card implements ICorporationCard {
       name: CardName.MORNING_STAR_INC,
       tags: [Tag.VENUS],
       startingMegaCredits: 50,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       firstAction: {
         text: 'Draw 3 cards with a Venus tag',

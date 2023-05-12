@@ -6,7 +6,6 @@ import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 import {Tags} from '../src/server/player/Tags';
-import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 
 class TestPlayerFactory {
   constructor(private color: Color) {}
@@ -44,22 +43,7 @@ export class TestPlayer extends Player {
     this.tags = new TestTags(this);
   }
 
-  public getResourcesForTest(): Units {
-    return {
-      megacredits: this.megaCredits,
-      steel: this.steel,
-      titanium: this.titanium,
-      plants: this.plants,
-      energy: this.energy,
-      heat: this.heat,
-    };
-  }
-
-  public tagsForTest: Partial<TagsForTest> | undefined = undefined;
-
-  public override runInput(input: InputResponse, pi: PlayerInput): void {
-    super.runInput(input, pi);
-  }
+  public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
 
   public purse(): Units {
     return Units.of({
@@ -70,6 +54,19 @@ export class TestPlayer extends Player {
       energy: this.energy,
       heat: this.heat,
     });
+  }
+
+  public setResourcesForTest(units: Units) {
+    this.megaCredits = units.megacredits;
+    this.steel = units.steel;
+    this.titanium = units.titanium;
+    this.plants = units.plants;
+    this.energy = units.energy;
+    this.heat = units.heat;
+  }
+
+  public override runInput(input: InputResponse, pi: PlayerInput): void {
+    super.runInput(input, pi);
   }
 
   public popWaitingFor2(): [PlayerInput | undefined, (() => void) | undefined] {
@@ -87,14 +84,6 @@ export class TestPlayer extends Player {
     return waitingFor;
   }
 
-  /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
-  public popSelectInitialCards(): PlayerInput | undefined {
-    if (this.getWaitingFor() instanceof SelectInitialCards) {
-      return this.popWaitingFor();
-    }
-    return undefined;
-  }
-
   public setCorporationForTest(card: ICorporationCard | undefined) {
     if (card === undefined) {
       this.corporations = [];
@@ -102,23 +91,4 @@ export class TestPlayer extends Player {
       this.corporations = [card];
     }
   }
-}
-
-export type TagsForTest = {
-  building: number;
-  space: number;
-  science: number;
-  power: number;
-  earth: number;
-  jovian: number;
-  venus: number;
-  plant: number;
-  microbe: number;
-  animal: number;
-  city: number;
-  wild: number;
-  moon: number;
-  event: number;
-  mars: number;
-  clone: number;
 }

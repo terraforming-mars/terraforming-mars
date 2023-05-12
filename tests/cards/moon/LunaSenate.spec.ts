@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaSenate} from '../../../src/server/cards/moon/LunaSenate';
 
@@ -12,7 +11,7 @@ describe('LunaSenate', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.PURPLE.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player, player2], player, {moonExpansion: true});
     card = new LunaSenate();
   });
 
@@ -48,6 +47,7 @@ describe('LunaSenate', () => {
   });
 
   it('getVictoryPoints', () => {
+    player.playedCards.push(card);
     player.tagsForTest = {moon: 3};
     expect(card.getVictoryPoints(player)).eq(3);
 

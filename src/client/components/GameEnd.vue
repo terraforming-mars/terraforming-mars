@@ -35,11 +35,18 @@
                   </div>
               </div>
           </div>
-          <div class="game_end_go_home">
-              <a href=".">
-                  <Button size="big" type="back" />
-                  <span  v-i18n>Go to main page</span>
+          <div class="game_end_navigation">
+            <div>
+              <a href="new-game">
+                  <AppButton size="big" type="back" />
+                  <span v-i18n>Create New Game</span>
               </a>
+
+              <a href=".">
+                  <AppButton size="big" type="back" />
+                  <span v-i18n>Go to main page</span>
+              </a>
+            </div>
           </div>
           <div v-if="!isSoloGame() || game.isSoloModeWin" class="game-end-winer-announcement">
               <span v-for="p in getWinners()" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>
@@ -71,7 +78,9 @@
                       <tr v-for="p in getSortedPlayers()" :key="p.color" :class="getEndGamePlayerRowColorClass(p.color)">
                           <td>
                             <a :href="'player?id='+p.id+'&noredirect'">{{ p.name }}</a>
-                            <div class="column-corporation"><span v-i18n>{{ getCorporationName(p) }}</span></div>
+                            <div class="column-corporation">
+                              <div v-for="(corporationName, index) in getCorporationName(p)" :key="index" v-i18n>{{ corporationName }}</div>
+                            </div>
                           </td>
                           <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                           <td>{{ p.victoryPointsBreakdown.milestones }}</td>
@@ -175,13 +184,14 @@ import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import VictoryPointChart from '@/client/components/gameend/VictoryPointChart.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {Timer} from '@/common/Timer';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {Color} from '@/common/Color';
 import {CardType} from '@/common/cards/CardType';
+import {getCard} from '../cards/ClientCardManifest';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;
@@ -230,7 +240,7 @@ export default Vue.extend({
   components: {
     'board': Board,
     'log-panel': LogPanel,
-    Button,
+    AppButton,
     MoonBoard,
     PlanetaryTracks,
     VictoryPointChart,
@@ -268,9 +278,12 @@ export default Vue.extend({
     isSoloGame(): boolean {
       return this.players.length === 1;
     },
-    getCorporationName(p: PublicPlayerModel): string {
-      const firstCard = p.tableau[0];
-      return firstCard.cardType === CardType.CORPORATION ? firstCard.name : '';
+    getCorporationName(p: PublicPlayerModel): string[] {
+      const cards = p.tableau;
+      const corporationCards = cards
+        .filter((card) => getCard(card.name)?.type === CardType.CORPORATION)
+        .map((card) => card.name);
+      return corporationCards.length === 0 ? [''] : corporationCards;
     },
   },
 });

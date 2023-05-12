@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MartianZoo', function() {
@@ -10,20 +10,18 @@ describe('MartianZoo', function() {
 
   beforeEach(function() {
     card = new MartianZoo();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     const lands = player.game.board.getAvailableSpacesOnLand(player);
     player.game.addCityTile(player, lands[0]);
     player.game.addCityTile(player, lands[1]);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     const action = card.play(player);
     expect(action).is.undefined;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {forceGenerationEnd} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Bjorn} from '../../../src/server/cards/ceos/Bjorn';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
 
@@ -17,13 +17,9 @@ describe('Bjorn', function() {
 
   beforeEach(() => {
     card = new Bjorn();
-    // TODO: Prelude extension is only activated here as we didnt have enough CEOs in early testing
+    // TODO(dl): Prelude extension is only activated here as we didnt have enough CEOs in early testing
     // In the future, when more base-game CEOs are added, we can remove preludeExtension from here
-    game = newTestGame(4, {ceoExtension: true, preludeExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
-    player4 = getTestPlayer(game, 3);
+    [game, player, player2, player3, player4] = testGame(4, {ceoExtension: true, preludeExtension: true});
   });
 
   it('Can only act once per game', function() {

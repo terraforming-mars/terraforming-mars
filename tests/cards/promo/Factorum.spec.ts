@@ -9,6 +9,7 @@ import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
+import {testGame} from '../../TestGame';
 
 describe('Factorum', function() {
   let card: Factorum;
@@ -17,9 +18,7 @@ describe('Factorum', function() {
 
   beforeEach(function() {
     card = new Factorum();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
     player.setCorporationForTest(card);
   });
 

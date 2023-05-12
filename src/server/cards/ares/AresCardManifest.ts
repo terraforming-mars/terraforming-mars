@@ -5,10 +5,12 @@ import {BiofertilizerFacility} from './BiofertilizerFacility';
 import {ButterflyEffect} from './ButterflyEffect';
 import {CapitalAres} from './CapitalAres';
 import {CommercialDistrictAres} from './CommercialDistrictAres';
+import {DeimosDownAres} from './DeimosDownAres';
 import {DesperateMeasures} from './DesperateMeasures';
 import {EcologicalSurvey} from './EcologicalSurvey';
 import {EcologicalZoneAres} from './EcologicalZoneAres';
 import {GeologicalSurvey} from './GeologicalSurvey';
+import {GreatDamAres} from './GreatDamAres';
 import {IndustrialCenterAres} from './IndustrialCenterAres';
 import {LavaFlowsAres} from './LavaFlowsAres';
 import {MarketingExperts} from './MarketingExperts';
@@ -32,11 +34,13 @@ export const ARES_CARD_MANIFEST = new ModuleManifest({
     [CardName.BUTTERFLY_EFFECT]: {Factory: ButterflyEffect},
     [CardName.CAPITAL_ARES]: {Factory: CapitalAres},
     [CardName.COMMERCIAL_DISTRICT_ARES]: {Factory: CommercialDistrictAres},
+    [CardName.DEIMOS_DOWN_ARES]: {Factory: DeimosDownAres},
     [CardName.DESPERATE_MEASURES]: {Factory: DesperateMeasures},
     [CardName.ECOLOGICAL_SURVEY]: {Factory: EcologicalSurvey},
     [CardName.ECOLOGICAL_ZONE_ARES]: {Factory: EcologicalZoneAres},
     [CardName.GEOLOGICAL_SURVEY]: {Factory: GeologicalSurvey},
     [CardName.INDUSTRIAL_CENTER_ARES]: {Factory: IndustrialCenterAres},
+    [CardName.GREAT_DAM_ARES]: {Factory: GreatDamAres},
     [CardName.LAVA_FLOWS_ARES]: {Factory: LavaFlowsAres},
     [CardName.MARKETING_EXPERTS]: {Factory: MarketingExperts},
     [CardName.METALLIC_ASTEROID]: {Factory: MetallicAsteroid},
@@ -54,7 +58,11 @@ export const ARES_CARD_MANIFEST = new ModuleManifest({
   cardsToRemove: [
     CardName.CAPITAL,
     CardName.COMMERCIAL_DISTRICT,
+    CardName.DEIMOS_DOWN,
+    CardName.DEIMOS_DOWN_PROMO,
     CardName.ECOLOGICAL_ZONE,
+    CardName.GREAT_DAM,
+    CardName.GREAT_DAM_PROMO,
     CardName.INDUSTRIAL_CENTER,
     CardName.LAVA_FLOWS,
     CardName.MINING_AREA,

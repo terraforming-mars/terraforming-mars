@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
@@ -17,13 +16,13 @@ import {all} from '../Options';
 export class Pets extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.PETS,
       tags: [Tag.EARTH, Tag.ANIMAL],
       cost: 10,
       resourceType: CardResource.ANIMAL,
 
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       behavior: {
         addResources: 1,

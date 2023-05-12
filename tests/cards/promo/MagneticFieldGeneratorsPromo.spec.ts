@@ -2,9 +2,10 @@ import {expect} from 'chai';
 import {MagneticFieldGeneratorsPromo} from '../../../src/server/cards/promo/MagneticFieldGeneratorsPromo';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('MagneticFieldGeneratorsPromo', function() {
   let card: MagneticFieldGeneratorsPromo;
@@ -13,18 +14,16 @@ describe('MagneticFieldGeneratorsPromo', function() {
 
   beforeEach(function() {
     card = new MagneticFieldGeneratorsPromo();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play without enough energy production', function() {
-    player.production.add(Resources.ENERGY, 3);
+    player.production.add(Resource.ENERGY, 3);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 4);
+    player.production.add(Resource.ENERGY, 4);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

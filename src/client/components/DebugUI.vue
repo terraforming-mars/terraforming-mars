@@ -22,13 +22,11 @@
         </button>
 
         <span v-for="expansion in allModules" :key="expansion">
-          <template v-if="experimentalUI() || expansion !== 'ceo'">
           <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
           <label :for="`${expansion}-checkbox`" class="expansion-button">
             <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
             <span v-i18n>{{expansionName(expansion)}}</span>
           </label>
-          </template>
         </span>
       </div>
 
@@ -39,14 +37,12 @@
         </button>
 
         <span v-for="type in allTypes" :key="type">
-          <template v-if="experimentalUI() || type !== ceoType">
           <input type="checkbox" :name="`${type}-cardType`" :id="`${type}-cardType-checkbox`" v-model="types[type]">
           <label :for="`${type}-cardType-checkbox`" class="expansion-button">
               <span v-if="type === 'colonyTiles'" v-i18n>Colony Tiles</span>
               <span v-else-if="type === 'globalEvents'" v-i18n>Global Events</span>
               <span v-else v-i18n>{{type}}</span>
           </label>
-          </template>
         </span>
       </div>
 
@@ -87,7 +83,6 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
-      <template v-if="experimentalUI()">
       <br>
       <section class="debug-ui-cards-list">
           <h2 v-i18n>CEOs</h2>
@@ -95,7 +90,6 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
-      </template>
       <br>
       <section class="debug-ui-cards-list">
         <h2 v-i18n>Standard Projects</h2>
@@ -206,8 +200,8 @@ const moduleAbbreviations: Record<GameModule, string> = {
   ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
 };
 
-// TODO(kberg): make this  use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramP';
+// TODO(kberg): make this use suffixModules.
+const ALL_MODULES = 'bcpvCt*ramPl';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
@@ -404,9 +398,6 @@ export default (Vue as WithRefs<Refs>).extend({
     allAwardNames(): ReadonlyArray<AwardName> {
       return awardNames;
     },
-    ceoType(): CardType {
-      return CardType.CEO;
-    },
   },
   methods: {
     updateUrl(search?: string) {
@@ -535,7 +526,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       if (!this.filterByTags(card)) return false;
-      if (!this.types[card.cardType]) return false;
+      if (!this.types[card.type]) return false;
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {
@@ -580,6 +571,7 @@ export default (Vue as WithRefs<Refs>).extend({
         scores: [],
       };
     },
+    // experimentalUI might not be used at the moment, but it's fine to just leave it here.
     experimentalUI(): boolean {
       return getPreferences().experimental_ui;
     },

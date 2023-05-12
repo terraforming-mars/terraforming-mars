@@ -21,6 +21,7 @@ export class Karen extends CeoCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
+    this.isDisabled = true;
     const cardsDrawn: Array<IProjectCard> = [];
     const game = player.game;
     for (let i = 0; i < game.generation; i++) {
@@ -30,7 +31,7 @@ export class Karen extends CeoCard {
     cardsDrawn.forEach((card) => {
       if (card.canPlay?.(player) === false) {
         cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
-        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player));
+        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player), {reservedFor: player});
       }
     });
 
@@ -41,10 +42,9 @@ export class Karen extends CeoCard {
 
     return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
       if (card.canPlay === undefined || card.canPlay(player)) {
-        this.isDisabled = true;
         return player.playCard(card);
       } else {
-        throw new Error('You cannot pay for this card');
+        throw new Error('You cannot play this card');
       }
     });
   }

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TerraformingControlStation} from '../../../src/server/cards/pathfinders/TerraformingControlStation';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {runAllActions} from '../../TestingUtils';
@@ -18,13 +18,9 @@ describe('Venus', function() {
 
   beforeEach(function() {
     venus = new Venus();
-    game = newTestGame(2, {venusNextExtension: true, coloniesExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {venusNextExtension: true, coloniesExtension: true});
     game.colonies.push(venus);
     localShading = new LocalShading();
-    player.popSelectInitialCards();
-    player2.popSelectInitialCards();
   });
 
   it('Should activate', function() {

@@ -11,7 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class Conscription extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       cost: 5,
       tags: [Tag.EARTH],
       name: CardName.CONSCRIPTION,

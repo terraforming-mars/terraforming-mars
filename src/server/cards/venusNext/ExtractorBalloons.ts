@@ -16,7 +16,7 @@ export class ExtractorBalloons extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.EXTRACTOR_BALLOONS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 21,
       resourceType: CardResource.FLOATER,
@@ -24,6 +24,23 @@ export class ExtractorBalloons extends Card implements IActionCard {
       behavior: {
         addResources: 3,
       },
+
+      // action: {
+      //   or: {
+      //     autoSelect: true,
+      //     behaviors: [{
+      //       title: 'Remove 2 floaters here to raise Venus 1 step.',
+      //       spend: {resourcesHere: 2},
+      //       global: {venus: 1},
+      //       // Don't offer this if Venus isn't maximized?
+      //       // // // LogHelper.logRemoveResource(player, this, 2, 'raise oxygen 1 step');
+      //     },
+      //     {
+      //       title: 'Add 1 floater to this card.',
+      //       addResources: 1,
+      //     }],
+      //   },
+      // },
 
       metadata: {
         cardNumber: '223',

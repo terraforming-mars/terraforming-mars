@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -15,7 +15,7 @@ import {digit, played} from '../Options';
 export class Recyclon extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.RECYCLON,
       tags: [Tag.MICROBE, Tag.BUILDING],
       startingMegaCredits: 38,
@@ -59,7 +59,7 @@ export class Recyclon extends Card implements ICorporationCard {
 
     const spendResource = new SelectOption('Remove 2 microbes on this card and increase plant production 1 step', 'Remove microbes', () => {
       player.removeResourceFrom(this, 2);
-      player.production.add(Resources.PLANTS, 1);
+      player.production.add(Resource.PLANTS, 1);
       return undefined;
     });
     return new OrOptions(spendResource, addResource);

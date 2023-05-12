@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {PolarIndustries} from '../../../src/server/cards/prelude/PolarIndustries';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('PolarIndustries', function() {
   it('Should play', function() {
     const card = new PolarIndustries();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [, player] = testGame(1);
 
     const action = card.play(player);
 

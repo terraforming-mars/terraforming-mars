@@ -13,7 +13,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_PROJECT_OFFICE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.SCIENCE],
       cost: 4,
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),

@@ -8,6 +8,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {addGreenery, cast, maxOutOceans} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Flooding', function() {
   let card: Flooding;
@@ -17,9 +18,7 @@ describe('Flooding', function() {
 
   beforeEach(function() {
     card = new Flooding();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Should play', function() {
@@ -47,7 +46,7 @@ describe('Flooding', function() {
     subActionSelectPlayer.cb(player2);
     expect(player2.megaCredits).to.eq(0);
 
-    expect(card.getVictoryPoints()).to.eq(-1);
+    expect(card.getVictoryPoints(player)).to.eq(-1);
   });
 
   it('Does not suggest to remove money from yourself', function() {

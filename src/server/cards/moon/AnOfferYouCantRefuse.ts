@@ -4,23 +4,24 @@ import {PlayerId} from '../../../common/Types';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
+import {Delegate, Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Game} from '../../Game';
 import {IParty} from '../../turmoil/parties/IParty';
 import {all} from '../Options';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class AnOfferYouCantRefuse extends Card {
   constructor() {
     super({
       name: CardName.AN_OFFER_YOU_CANT_REFUSE,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       cost: 5,
 
       metadata: {
-        description: 'Exchange a NON-NEUTRAL NON-LEADER delegate with one of your own from the reserve. You may then move your delegate to another party.',
+        description: 'Exchange a NON-NEUTRAL opponent delegate with one of your own from the reserve. This exchange may not change the party leader. You may then move your delegate to another party.',
         cardNumber: 'M62',
         renderData: CardRenderer.builder((b) => {
           b.minus().delegates(1, {all}).asterix().nbsp.plus().delegates(1);
@@ -29,11 +30,49 @@ export class AnOfferYouCantRefuse extends Card {
     });
   }
 
-  private isReplaceableDelegate(delegate: PlayerId | NeutralPlayer, player: Player, party: IParty): delegate is PlayerId {
-    return delegate !== player.id && delegate !== 'NEUTRAL' && delegate !== party.partyLeader;
+  private isReplaceableDelegate(delegate: Delegate, player: Player, party: IParty): delegate is PlayerId {
+    if (delegate === player.id || delegate === 'NEUTRAL') {
+      return false;
+    }
+
+    // This can't happen. It just appeases the compiler.
+    if (party.partyLeader === undefined) {
+      return false;
+    }
+
+    // If you're the party leader and the delegate isn't neutral, the exchange is OK.
+    if (party.partyLeader === player.id) {
+      return true;
+    }
+
+    const partyLeaderDelegateCount = party.delegates.get(party.partyLeader);
+    const yourDelegateCount = party.delegates.get(player.id);
+
+    if (delegate !== party.partyLeader) {
+      // The only reason you might not replace a non-party leader delegate is if you don't start with
+      // the same number of delegates as the party leader.
+      return yourDelegateCount < partyLeaderDelegateCount;
+    } else {
+      // You can't replace a party leader's delegate the party leader doesn't have at least two more delegates. Otherwise
+      // you can take the lead.
+      if (partyLeaderDelegateCount - yourDelegateCount <= 1) {
+        return false;
+      }
+      // You also can't replace a party leader's delegate if another non-party leader has the same number of delegates as the
+      // current party leader. Otherwise that other player's delegate would take the lead.
+      for (const m of party.delegates.multiplicities()) {
+        if (m[0] === party.partyLeader || m[0] === player.id) {
+          continue;
+        }
+        if (m[1] === partyLeaderDelegateCount) {
+          return false;
+        }
+      }
+      return true;
+    }
   }
 
-  // You can play this if you have an available delegate, and if there are non-neutral non-leader delegates available to swap with.
+  // You can play this if you have an available delegate, and if you can swap with a non-neutral delegate without changing the party leader
   public override bespokeCanPlay(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
     if (!turmoil.hasDelegatesInReserve(player.id)) {
@@ -82,8 +121,7 @@ export class AnOfferYouCantRefuse extends Card {
           continue;
         }
 
-        const playerName = game.getPlayerById(delegate).name;
-        const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
+        const option = new SelectOption(newMessage('${0} / ${1}', (b) => b.party(party).playerId(delegate)), 'Select', () => {
           turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
           turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
           return this.moveToAnotherParty(game, party.name, player.id);

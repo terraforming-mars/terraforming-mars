@@ -9,7 +9,7 @@ import {digit} from '../Options';
 export class EcoLine extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.ECOLINE,
       tags: [Tag.PLANT],
       startingMegaCredits: 36,

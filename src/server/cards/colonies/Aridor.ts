@@ -2,7 +2,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {IColony} from '../../colonies/IColony';
@@ -18,7 +18,7 @@ export class Aridor extends Card implements ICorporationCard {
     super({
       name: CardName.ARIDOR,
       startingMegaCredits: 40,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       initialActionText: 'Add a colony tile',
 
       metadata: {
@@ -53,6 +53,7 @@ export class Aridor extends Card implements ICorporationCard {
       }
       return undefined;
     });
+    selectColony.showTileOnly = true;
     return selectColony;
   }
 
@@ -74,7 +75,7 @@ export class Aridor extends Card implements ICorporationCard {
 
   public onCardPlayed(player: Player, card: ICard) {
     if (
-      card.cardType === CardType.EVENT ||
+      card.type === CardType.EVENT ||
       card.tags.filter((tag) => tag !== Tag.WILD).length === 0 ||
       !player.isCorporation(this.name)) {
       return undefined;
@@ -84,7 +85,7 @@ export class Aridor extends Card implements ICorporationCard {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {
-        player.production.add(Resources.MEGACREDITS, 1, {log: true});
+        player.production.add(Resource.MEGACREDITS, 1, {log: true});
       }
     }
     return undefined;

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {ArchimedesHydroponicsStation} from '../../../src/server/cards/moon/ArchimedesHydroponicsStation';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -10,7 +9,7 @@ describe('ArchimedesHydroponicsStation', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new ArchimedesHydroponicsStation();
   });
 

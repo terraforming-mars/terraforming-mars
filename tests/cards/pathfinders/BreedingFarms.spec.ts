@@ -16,20 +16,21 @@ describe('BreedingFarms', function() {
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
     fish = new Fish();
+    player.popWaitingFor();
   });
 
   it('canPlay', function() {
     player.tagsForTest = {};
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     player.tagsForTest = {science: 1};
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     player.tagsForTest = {animal: 1};
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     player.tagsForTest = {science: 1, animal: 1};
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('play', function() {

@@ -4,14 +4,14 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
 
 export class SmallComet extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SMALL_COMET,
       cost: 32,
       tags: [Tag.MARS, Tag.SPACE],
@@ -42,7 +42,7 @@ export class SmallComet extends Card implements IProjectCard {
     const game = player.game;
     game.getPlayers().forEach((p) => {
       if (!p.plantsAreProtected()) {
-        p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
+        p.deductResource(Resource.PLANTS, 2, {log: true, from: player});
       }
     });
     return undefined;

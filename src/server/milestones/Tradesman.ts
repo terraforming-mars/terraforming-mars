@@ -1,16 +1,16 @@
-import {IMilestone} from './IMilestone';
+import {BaseMilestone} from './IMilestone';
 import {Player} from '../Player';
 
-export class Tradesman implements IMilestone {
-  public readonly name = 'Tradesman';
-  public readonly description = 'Have at least 3 different types of non-standard resources';
+export class Tradesman extends BaseMilestone {
+  constructor() {
+    super(
+      'Tradesman',
+      'Have 3 different types of non-standard resources',
+      3);
+  }
 
   public getScore(player: Player): number {
     const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType));
     return nonStandardResources.size;
-  }
-
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 3;
   }
 }

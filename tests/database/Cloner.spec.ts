@@ -2,16 +2,15 @@ import {expect} from 'chai';
 import {Cloner} from '../../src/server/database/Cloner';
 import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
-import {testGameOptions} from '../TestingUtils';
 import {Color} from '../../src/common/Color';
 
 describe('Cloner', function() {
   it('solo game preserved', () => {
     const player = new Player('old-player1', Color.YELLOW, true, 9, 'p-old-player1-id');
     const game = Game.newInstance(
-      'g-old-game-id', [player], player, testGameOptions({
+      'g-old-game-id', [player], player, {
         turmoilExtension: true,
-      }), -5179823149812374);
+      }, -5179823149812374);
 
     const newPlayer = new Player('new-player1', Color.RED, false, 3, 'p-new-player1-id');
     const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());

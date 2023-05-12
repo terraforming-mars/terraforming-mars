@@ -1,23 +1,36 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
-import {ISpace} from '../../boards/ISpace';
-import {Board} from '../../boards/Board';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
+import {Board} from '../../boards/Board';
+import {ISpace} from '../../boards/ISpace';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {Player} from '../../Player';
 
 export class GreatDamPromo extends Card implements IProjectCard {
-  constructor() {
+  constructor(
+    name = CardName.GREAT_DAM_PROMO,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
+    metadata = {
+      cardNumber: 'X32',
+      renderData: CardRenderer.builder((b) => {
+        b.production((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
+      }),
+      description: 'Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.',
+    },
+  ) {
     super({
-      cardType: CardType.AUTOMATED,
-      name: CardName.GREAT_DAM_PROMO,
+      type: CardType.AUTOMATED,
+      name,
       cost: 15,
       tags: [Tag.POWER, Tag.BUILDING],
+      metadata,
+      adjacencyBonus,
 
       behavior: {
         production: {energy: 2},
@@ -25,17 +38,8 @@ export class GreatDamPromo extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       victoryPoints: 1,
-
-      metadata: {
-        cardNumber: 'X32',
-        renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
-        }),
-        description: 'Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.',
-      },
     });
   }
-
   public override bespokeCanPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
@@ -46,6 +50,7 @@ export class GreatDamPromo extends Card implements IProjectCard {
 
     return new SelectSpace('Select space for tile', availableSpaces, (space: ISpace) => {
       player.game.addTile(player, space, {tileType: TileType.GREAT_DAM});
+      space.adjacency = this.adjacencyBonus;
       return undefined;
     });
   }

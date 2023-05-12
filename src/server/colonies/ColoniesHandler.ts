@@ -34,7 +34,7 @@ export class ColoniesHandler {
    */
   public static maybeActivateColony(colony: IColony, card: ICard): boolean {
     if (colony.isActive !== true) {
-      if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === card.resourceType) {
+      if (colony.metadata.cardResource !== undefined && colony.metadata.cardResource === card.resourceType) {
         colony.isActive = true;
       }
 

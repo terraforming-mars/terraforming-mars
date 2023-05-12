@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {EconomicEspionage} from '../../../src/server/cards/pathfinders/EconomicEspionage';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
@@ -10,9 +10,7 @@ describe('EconomicEspionage', function() {
 
   beforeEach(function() {
     card = new EconomicEspionage();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
     player.playedCards.push(card);
   });
 
@@ -37,15 +35,15 @@ describe('EconomicEspionage', function() {
 
   it('victoryPoints', function() {
     card.resourceCount = 2;
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
 
     card.resourceCount = 3;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints(player)).eq(1);
 
     card.resourceCount = 5;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints(player)).eq(1);
 
     card.resourceCount = 6;
-    expect(card.getVictoryPoints()).eq(2);
+    expect(card.getVictoryPoints(player)).eq(2);
   });
 });

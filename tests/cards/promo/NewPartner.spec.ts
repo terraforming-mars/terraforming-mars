@@ -8,7 +8,7 @@ import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
 import {SmeltingPlant} from '../../../src/server/cards/prelude/SmeltingPlant';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NewPartner', function() {
@@ -21,7 +21,7 @@ describe('NewPartner', function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
 
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({preludeExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {preludeExtension: true});
   });
 
   it('Should play with at least 1 playable prelude', function() {
@@ -31,7 +31,7 @@ describe('NewPartner', function() {
     expect(selectCard.cards).has.length(2);
     selectCard.cb([selectCard.cards[0]]);
     expect(player.production.megacredits).to.eq(1);
-    expect(player.playedCards.every((card) => card.cardType === CardType.PRELUDE)).is.true;
+    expect(player.playedCards.every((card) => card.type === CardType.PRELUDE)).is.true;
   });
 
   it('Should play with only 1 playable prelude', function() {

@@ -5,7 +5,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectDelegate} from '../../../src/server/inputs/SelectDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Banned Delegate', function() {
@@ -20,18 +20,18 @@ describe('Banned Delegate', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
 
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 
   it('Cannot play', function() {
     turmoil.chairman = player2.id;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     turmoil.chairman = player.id;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);

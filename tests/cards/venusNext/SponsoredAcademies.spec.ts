@@ -8,7 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {DiscardCards} from '../../../src/server/deferredActions/DiscardCards';
 import {DrawCards} from '../../../src/server/deferredActions/DrawCards';
 import {cast, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, getTestPlayers, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -23,9 +23,7 @@ describe('SponsoredAcademies', function() {
 
   beforeEach(() => {
     card = new SponsoredAcademies();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2);
     player.cardsInHand.push(card);
     tardigrades = new Tardigrades();
     housePrinting = new HousePrinting();
@@ -33,7 +31,7 @@ describe('SponsoredAcademies', function() {
 
   it('Should play', function() {
     player.cardsInHand.push(housePrinting, tardigrades);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     player.playCard(card);
     const discardCard = cast(game.deferredActions.pop()!.execute(), SelectCard<IProjectCard>);
@@ -48,8 +46,7 @@ describe('SponsoredAcademies', function() {
   });
 
   it('triggers in right order', function() {
-    const game = newTestGame(4);
-    const [player, player2, player3, player4] = getTestPlayers(game);
+    const [game, player, player2, player3, player4] = testGame(4);
 
     player.cardsInHand.push(card, new HousePrinting(), new Tardigrades());
     player.playCard(card);

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ConvertPlants} from '../../../../src/server/cards/base/standardActions/ConvertPlants';
 import {Phase} from '../../../../src/common/Phase';
-import {setOxygenLevel, testGameOptions} from '../../../TestingUtils';
+import {setOxygenLevel} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -16,7 +16,7 @@ describe('ConvertPlants', function() {
     card = new ConvertPlants();
     player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
+    Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
   });
 
   it('Can not act without plants', function() {

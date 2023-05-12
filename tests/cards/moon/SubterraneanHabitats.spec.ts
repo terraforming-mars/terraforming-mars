@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGameOptions} from '../../TestingUtils';
 import {SubterraneanHabitats} from '../../../src/server/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -17,7 +16,7 @@ describe('SubterraneanHabitats', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new SubterraneanHabitats();
   });

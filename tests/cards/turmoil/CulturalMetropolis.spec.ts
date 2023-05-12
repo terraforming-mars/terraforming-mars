@@ -5,7 +5,7 @@ import {Game} from '../../../src/server/Game';
 import {Resource} from '../../../src/common/Resource';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 
@@ -21,7 +21,7 @@ describe('Cultural Metropolis', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
 
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 

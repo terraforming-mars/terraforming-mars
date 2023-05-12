@@ -7,7 +7,7 @@ import {Io} from '../../../src/server/colonies/Io';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Game} from '../../../src/server/Game';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AerospaceMission', function() {
@@ -19,8 +19,7 @@ describe('AerospaceMission', function() {
     card = new AerospaceMission();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = testGameOptions({coloniesExtension: true});
-    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, {coloniesExtension: true});
     // Ignore randomly generated colonies, and add some colonies that can be built independently of cards
     game.colonies = [new Callisto(), new Ceres(), new Io(), new Luna()];
   });

@@ -13,7 +13,7 @@ import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
-import {cast, formatLogMessage, getSendADelegateOption, runAllActions, testGameOptions} from './TestingUtils';
+import {cast, formatLogMessage, getSendADelegateOption, runAllActions} from './TestingUtils';
 import {Units} from '../src/common/Units';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/server/cards/base/Pets';
@@ -144,8 +144,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = testGameOptions({venusNextExtension: false});
-    Game.newInstance('gameid', [player], player, gameOptions);
+    Game.newInstance('gameid', [player], player, {venusNextExtension: false});
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -156,8 +155,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start, with Venus', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = testGameOptions({venusNextExtension: true});
-    Game.newInstance('gameid', [player], player, gameOptions);
+    Game.newInstance('gameid', [player], player, {venusNextExtension: true});
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -169,8 +167,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start, with The Moon', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = testGameOptions({venusNextExtension: false, moonExpansion: true});
-    Game.newInstance('gameid', [player], player, gameOptions);
+    Game.newInstance('gameid', [player], player, {venusNextExtension: false, moonExpansion: true});
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -184,8 +181,7 @@ describe('Player', function() {
 
   it('Include buffer gas for solo games with 63 TR', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
-    game.gameOptions.soloTR = true;
+    Game.newInstance('gameid', [player], player, {soloTR: true});
     const option = player.getStandardProjectOption();
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).not.to.be.undefined;
@@ -769,7 +765,7 @@ describe('Player', function() {
   it('Turmoil player action', () => {
     const player = TestPlayer.BLUE.newPlayer();
 
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    const game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
 
     const turmoil = game.turmoil!;
 

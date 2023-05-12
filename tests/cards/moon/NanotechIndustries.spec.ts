@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {NanotechIndustries} from '../../../src/server/cards/moon/NanotechIndustries';
 import {expect} from 'chai';
@@ -25,7 +25,7 @@ describe('NanotechIndustries', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     nanotechIndustries = new NanotechIndustries();
   });
 

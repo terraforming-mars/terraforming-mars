@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {LunarTradeFleet} from '../../../src/server/cards/moon/LunarTradeFleet';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
@@ -13,7 +12,7 @@ describe('LunarTradeFleet', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new LunarTradeFleet();
     moonData = MoonExpansion.moonData(game);
   });

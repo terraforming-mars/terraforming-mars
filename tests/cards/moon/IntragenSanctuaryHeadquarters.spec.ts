@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {runAllActions, testGameOptions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IntragenSanctuaryHeadquarters} from '../../../src/server/cards/moon/IntragenSanctuaryHeadquarters';
 import {expect} from 'chai';
@@ -14,7 +14,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player, player2], player, {moonExpansion: true});
     card = new IntragenSanctuaryHeadquarters();
   });
 

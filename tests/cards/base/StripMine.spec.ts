@@ -6,7 +6,6 @@ import {Resource} from '../../../src/common/Resource';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('StripMine', function() {
@@ -20,7 +19,7 @@ describe('StripMine', function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
 
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 

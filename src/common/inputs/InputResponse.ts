@@ -1,6 +1,7 @@
 import {CardName} from '../cards/CardName';
 import {ColonyName} from '../colonies/ColonyName';
 import {ColorWithNeutral} from '../Color';
+import {TileType} from '../TileType';
 import {PartyName} from '../turmoil/PartyName';
 import {SpaceId} from '../Types';
 import {Units} from '../Units';
@@ -149,6 +150,16 @@ export function isAresGlobalParametersResponse(obj: any): obj is AresGlobalParam
   return matches(obj, ['lowOceanDelta', 'highOceanDelta', 'temperatureDelta', 'oxygenDelta']);
 }
 
+export interface SelectTileResponse {
+  type: 'tile',
+  tileType: TileType;
+}
+
+export function isSelectTileResponse(response: InputResponse): response is SelectTileResponse {
+  return response.type === 'tile' && matches(response, ['type', 'tileType']);
+}
+
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
@@ -163,4 +174,5 @@ export type InputResponse =
   SelectProductionToLoseResponse |
   SelectProjectCardToPlayResponse |
   SelectSpaceResponse |
-  ShiftAresGlobalParametersResponse;
+  ShiftAresGlobalParametersResponse |
+  SelectTileResponse;

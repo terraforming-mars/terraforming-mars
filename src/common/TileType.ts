@@ -47,54 +47,56 @@ export enum TileType {
     WETLANDS, // 36
     RED_CITY, // 37
     MARTIAN_NATURE_WONDERS, // 38
+    CRASHLANDING, // 39
 }
 
-const TO_STRING_MAP: Map<TileType, string> = new Map([
-  [TileType.GREENERY, 'greenery'],
-  [TileType.OCEAN, 'ocean'],
-  [TileType.CITY, 'city'],
+const TO_STRING_MAP: Record<TileType, string> = {
+  [TileType.GREENERY]: 'greenery',
+  [TileType.OCEAN]: 'ocean',
+  [TileType.CITY]: 'city',
 
-  [TileType.CAPITAL, 'Capital'],
-  [TileType.COMMERCIAL_DISTRICT, 'Commercial District'],
-  [TileType.ECOLOGICAL_ZONE, 'Ecological Zone'],
-  [TileType.INDUSTRIAL_CENTER, 'Industrial Center'],
-  [TileType.LAVA_FLOWS, 'Lava Flows'],
-  [TileType.MINING_AREA, 'Mining Area'],
-  [TileType.MINING_RIGHTS, 'Mining Rights'],
-  [TileType.MOHOLE_AREA, 'Mohole Area'],
-  [TileType.NATURAL_PRESERVE, 'Natural Preserve'],
-  [TileType.NUCLEAR_ZONE, 'Nuclear Zone'],
-  [TileType.RESTRICTED_AREA, 'Restricted Area'],
-  [TileType.DEIMOS_DOWN, 'Deimos Down'],
-  [TileType.GREAT_DAM, 'Great Dam'],
-  [TileType.MAGNETIC_FIELD_GENERATORS, 'Magnetic Field Generators'],
-  [TileType.BIOFERTILIZER_FACILITY, 'Bio-Fertilizer Facility'],
-  [TileType.METALLIC_ASTEROID, 'Metallic Asteroid'],
-  [TileType.SOLAR_FARM, 'Solar Farm'],
-  [TileType.OCEAN_CITY, 'Ocean City'],
-  [TileType.OCEAN_FARM, 'Ocean Farm'],
-  [TileType.OCEAN_SANCTUARY, 'Ocean Sanctuary'],
-  [TileType.DUST_STORM_MILD, 'Mild Dust Storm'],
-  [TileType.DUST_STORM_SEVERE, 'Severe Dust Storm'],
-  [TileType.EROSION_MILD, 'Mild Erosion'],
-  [TileType.EROSION_SEVERE, 'Severe Erosion'],
-  [TileType.MINING_STEEL_BONUS, 'Mining (Steel)'],
-  [TileType.MINING_TITANIUM_BONUS, 'Mining (Titanium)'],
-  [TileType.MOON_MINE, 'Mine'],
-  [TileType.MOON_HABITAT, 'Habitat'],
-  [TileType.MOON_ROAD, 'Road'],
-  [TileType.LUNA_TRADE_STATION, 'Luna Trade Station'],
-  [TileType.LUNA_MINING_HUB, 'Luna Mining Hub'],
-  [TileType.LUNA_TRAIN_STATION, 'Luna Train Station'],
-  [TileType.LUNAR_MINE_URBANIZATION, 'Lunar Mine Urbanization'],
-  [TileType.WETLANDS, 'Wetlands'],
-  [TileType.RED_CITY, 'Red City'],
-  [TileType.MARTIAN_NATURE_WONDERS, 'Martian Nature Wonders'],
-]);
+  [TileType.CAPITAL]: 'Capital',
+  [TileType.COMMERCIAL_DISTRICT]: 'Commercial District',
+  [TileType.ECOLOGICAL_ZONE]: 'Ecological Zone',
+  [TileType.INDUSTRIAL_CENTER]: 'Industrial Center',
+  [TileType.LAVA_FLOWS]: 'Lava Flows',
+  [TileType.MINING_AREA]: 'Mining Area',
+  [TileType.MINING_RIGHTS]: 'Mining Rights',
+  [TileType.MOHOLE_AREA]: 'Mohole Area',
+  [TileType.NATURAL_PRESERVE]: 'Natural Preserve',
+  [TileType.NUCLEAR_ZONE]: 'Nuclear Zone',
+  [TileType.RESTRICTED_AREA]: 'Restricted Area',
+  [TileType.DEIMOS_DOWN]: 'Deimos Down',
+  [TileType.GREAT_DAM]: 'Great Dam',
+  [TileType.MAGNETIC_FIELD_GENERATORS]: 'Magnetic Field Generators',
+  [TileType.BIOFERTILIZER_FACILITY]: 'Bio-Fertilizer Facility',
+  [TileType.METALLIC_ASTEROID]: 'Metallic Asteroid',
+  [TileType.SOLAR_FARM]: 'Solar Farm',
+  [TileType.OCEAN_CITY]: 'Ocean City',
+  [TileType.OCEAN_FARM]: 'Ocean Farm',
+  [TileType.OCEAN_SANCTUARY]: 'Ocean Sanctuary',
+  [TileType.DUST_STORM_MILD]: 'Mild Dust Storm',
+  [TileType.DUST_STORM_SEVERE]: 'Severe Dust Storm',
+  [TileType.EROSION_MILD]: 'Mild Erosion',
+  [TileType.EROSION_SEVERE]: 'Severe Erosion',
+  [TileType.MINING_STEEL_BONUS]: 'Mining (Steel)',
+  [TileType.MINING_TITANIUM_BONUS]: 'Mining (Titanium)',
+  [TileType.MOON_MINE]: 'Mine',
+  [TileType.MOON_HABITAT]: 'Habitat',
+  [TileType.MOON_ROAD]: 'Road',
+  [TileType.LUNA_TRADE_STATION]: 'Luna Trade Station',
+  [TileType.LUNA_MINING_HUB]: 'Luna Mining Hub',
+  [TileType.LUNA_TRAIN_STATION]: 'Luna Train Station',
+  [TileType.LUNAR_MINE_URBANIZATION]: 'Lunar Mine Urbanization',
+  [TileType.WETLANDS]: 'Wetlands',
+  [TileType.RED_CITY]: 'Red City',
+  [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
+  [TileType.CRASHLANDING]: 'Crashlanding',
+};
 
 export namespace TileType {
   export function toString(tileType: TileType): string {
-    return TO_STRING_MAP.get(tileType) || `(unnamed tile, id ${tileType})`;
+    return TO_STRING_MAP[tileType];
   }
 }
 

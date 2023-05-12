@@ -526,16 +526,23 @@ export class Server {
       } else if (noctisCitySpaceIds === space.id) {
         highlight = 'noctis';
       }
-      return {
+      const model: SpaceModel = {
         x: space.x,
         y: space.y,
         id: space.id,
-        bonus: space.bonus,
         spaceType: space.spaceType,
-        tileType: space.tile && space.tile.tileType,
+        bonus: space.bonus,
+        // TODO(kberg): Don't show tileType or color if they're undefined.
+        tileType: space.tile?.tileType,
         color: this.getColor(space),
-        highlight: highlight,
       };
+      if (highlight === undefined) {
+        model.highlight = highlight;
+      }
+      if (space.tile?.rotated === true) {
+        model.rotated = true;
+      }
+      return model;
     });
   }
 

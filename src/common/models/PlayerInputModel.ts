@@ -7,6 +7,7 @@ import {AresData} from '../ares/AresData';
 import {Message} from '../logs/Message';
 import {PartyName} from '../turmoil/PartyName';
 import {TurmoilModel} from './TurmoilModel';
+import {TileType} from '../TileType';
 import {SpaceId} from '../Types';
 
 export interface PlayerInputModel {
@@ -40,5 +41,6 @@ export interface PlayerInputModel {
     showOwner?: boolean;
     availableParties: Array<PartyName> | undefined;
     turmoil?: TurmoilModel;
+    tiles?: Array<TileType>;
     showReset: boolean;
 }

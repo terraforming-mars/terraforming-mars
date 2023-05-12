@@ -16,6 +16,7 @@ export type Options = {
 export class AddResourcesToCard extends DeferredAction {
   constructor(
     player: Player,
+    /** The card type to add to. Undefined means any resource. */
     public resourceType: CardResource | undefined,
     public options: Options = {},
   ) {

@@ -20,13 +20,16 @@ export abstract class Board {
   private map: Map<string, ISpace> = new Map();
 
   // stores adjacent spaces in clockwise order starting from the top left
-  private readonly adjacentSpaces = new Map<SpaceId, Array<ISpace>>();
+  private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<ISpace>>();
 
   protected constructor(public spaces: Array<ISpace>) {
     this.maxX = Math.max(...spaces.map((s) => s.x));
     this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
-      this.adjacentSpaces.set(space.id, this.computeAdjacentSpaces(space));
+      const adjacentSpaces = this.computeAdjacentSpaces(space);
+      const filtered = adjacentSpaces.filter((space) => space !== undefined);
+      // "as ReadonlyArray<ISpace> is OK because the line above filters out the undefined values."
+      this.adjacentSpaces.set(space.id, filtered as ReadonlyArray<ISpace>);
       this.map.set(space.id, space);
     });
   }
@@ -48,7 +51,7 @@ export abstract class Board {
     return space;
   }
 
-  protected computeAdjacentSpaces(space: ISpace): Array<ISpace> {
+  protected computeAdjacentSpaces(space: ISpace): Array<ISpace | undefined> {
     // Expects an odd number of rows. If a funny shape appears, it can be addressed.
     const middleRow = this.maxY / 2;
     if (space.spaceType !== SpaceType.COLONY) {
@@ -85,16 +88,11 @@ export abstract class Board {
         bottomLeftSpace,
         leftSpace,
       ];
-      const spaces: Array<ISpace> = [];
-      for (const [x, y] of coords) {
-        const adj = this.spaces.find((adj) =>
+      const spaces = coords.map(([x, y]) =>
+        this.spaces.find((adj) =>
           adj.x === x && adj.y === y &&
           space !== adj && adj.spaceType !== SpaceType.COLONY,
-        );
-        if (adj !== undefined) {
-          spaces.push(adj);
-        }
-      }
+        ));
       return spaces;
     }
     return [];
@@ -107,6 +105,18 @@ export abstract class Board {
       throw new Error(`Unexpected space ID ${space.id}`);
     }
     return spaces;
+  }
+
+  //  Returns spaces in order from the top left.
+  //
+  //   0 1
+  //  5 x 2
+  //   4 3
+  //
+  // If there is no space in that spot, the index is undefined.
+  // If the space is invalid or is a colony, this returns an unreliable value.
+  public getAdjacentSpacesClockwise(space: ISpace): ReadonlyArray<ISpace | undefined> {
+    return this.computeAdjacentSpaces(space);
   }
 
   public getSpaceByTileCard(cardName: CardName): ISpace | undefined {

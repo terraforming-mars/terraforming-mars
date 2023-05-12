@@ -89,7 +89,7 @@ const TILE_CLASSES: Record<TileType, Classes> = {
     tile: 'card-tile-lunar-mine',
   },
   [TileType.MOON_HABITAT]: {
-    tile: 'card-tile-lunar-colony',
+    tile: 'card-tile-lunar-habitat',
   },
   [TileType.MOON_ROAD]: {
     tile: 'card-tile-lunar-road',

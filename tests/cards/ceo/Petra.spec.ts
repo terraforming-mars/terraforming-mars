@@ -3,11 +3,12 @@ import {Game} from '../../../src/server/Game';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {forceGenerationEnd} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {testGame} from '../../TestGame';
 import {Petra} from '../../../src/server/cards/ceos/Petra';
+import {Politician} from '../../../src/server/awards/terraCimmeria/Politician';
 
 
 describe('Petra', function() {
@@ -131,6 +132,18 @@ describe('Petra', function() {
     // We should have been paid 3MC for every swap, 7*3 total
     expect(player.megaCredits).to.eq(21);
   });
+
+
+  it('OPG Counts for POLITICAN Award', function() {
+    const politician = new Politician();
+    game.awards = [];
+    game.awards.push(politician);
+    const preOPGScore = game.awards[0].getScore(player);
+    card.action(player);
+    runAllActions(game);
+    expect(game.awards[0].getScore(player)).eq(preOPGScore+5); // 1 Chairman, 4 Delegates
+  });
+
 
   it('Can only act once per game', function() {
     card.action(player);

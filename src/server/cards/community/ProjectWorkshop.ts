@@ -57,11 +57,15 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
   }
 
   private getEligibleCards(player: Player) {
-    const cards = player.getCardsByCardType(CardType.ACTIVE);
-    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) return cards;
+    const cards = player.playedCards.filter((card) => card.type === CardType.ACTIVE);
+    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
+      return cards;
+    }
     return cards.filter((card) => {
       const vp = card.getVictoryPoints(player);
-      if (vp <= 0) return true;
+      if (vp <= 0) {
+        return true;
+      }
       return player.canAfford(REDS_RULING_POLICY_COST * vp);
     });
   }

@@ -98,7 +98,6 @@ export class Server {
       undoCount: game.undoCount,
       venusScaleLevel: game.getVenusScaleLevel(),
       step: game.lastSaveId,
-      corporationsToDraft: this.getCards(game.getPlayers()[0], game.corporationsToDraft),
     };
   }
 
@@ -551,7 +550,6 @@ export class Server {
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
       draftVariant: options.draftVariant,
-      corporationsDraft: options.corporationsDraft,
       escapeVelocityMode: options.escapeVelocityMode,
       escapeVelocityThreshold: options.escapeVelocityThreshold,
       escapeVelocityPeriod: options.escapeVelocityPeriod,

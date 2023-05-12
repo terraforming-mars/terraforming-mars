@@ -4,7 +4,7 @@ import {EventAnalysts} from '../../../src/server/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/server/Game';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, getSendADelegateOption, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, getSendADelegateOption, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 
@@ -18,7 +18,7 @@ describe('Incite', function() {
     card = new Incite();
     player = TestPlayer.BLUE.newPlayer();
 
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
 
     card.play(player);
     player.setCorporationForTest(card);

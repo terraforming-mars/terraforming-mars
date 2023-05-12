@@ -12,6 +12,7 @@ import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {GameOptions} from '../../../src/server/GameOptions';
 
 describe('InterplanetaryTrade', function() {
   let card: InterplanetaryTrade;
@@ -48,7 +49,7 @@ describe('InterplanetaryTrade', function() {
   });
 
   it('Should only count wild tags up to the max amount of tag types existing (11 with venus)', function() {
-    game.gameOptions.venusNextExtension = true;
+    (game.gameOptions as GameOptions).venusNextExtension = true;
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -62,8 +63,8 @@ describe('InterplanetaryTrade', function() {
   });
 
   it('Should only count wild tags up to the max amount of tag types existing (12 with venus and moon)', function() {
-    game.gameOptions.venusNextExtension = true;
-    game.gameOptions.moonExpansion = true;
+    (game.gameOptions as GameOptions).venusNextExtension = true;
+    (game.gameOptions as GameOptions).moonExpansion = true;
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -77,8 +78,8 @@ describe('InterplanetaryTrade', function() {
   });
 
   it('Should only count wild tags up to the max amount of tag types existing (13 with venus, moon, and Mars)', function() {
-    game.gameOptions.venusNextExtension = true;
-    game.gameOptions.moonExpansion = true;
+    (game.gameOptions as GameOptions).venusNextExtension = true;
+    (game.gameOptions as GameOptions).moonExpansion = true;
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());

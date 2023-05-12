@@ -15,7 +15,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {resetBoard, runNextAction, cast, runAllActions, addCityTile, addOceanTile, testGameOptions} from '../../TestingUtils';
+import {resetBoard, runNextAction, cast, runAllActions, addCityTile, addOceanTile} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -43,7 +43,7 @@ describe('RoboticWorkforce', () => {
     card = new RoboticWorkforce();
     player = TestPlayer.BLUE.newPlayer();
     redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {moonExpansion: true});
   });
 
   it('Cannot play if no building cards to copy', () => {
@@ -218,7 +218,7 @@ describe('RoboticWorkforce', () => {
 
     const testCard = function(card: ICard) {
       const researchCoordination = new ResearchCoordination();
-      const gameOptions = testGameOptions({turmoilExtension: true, aresExtension: true, aresHazards: false, moonExpansion: true});
+      const gameOptions = {turmoilExtension: true, aresExtension: true, aresHazards: false, moonExpansion: true};
 
       let include = false;
       if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {

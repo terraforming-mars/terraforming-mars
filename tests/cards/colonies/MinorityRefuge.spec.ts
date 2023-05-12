@@ -52,7 +52,7 @@ describe('MinorityRefuge', function() {
     // Card cost
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: -2}));
     // Colony bonus
-    expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 3}));
+    expect(player.purse()).deep.eq(Units.of({titanium: 3}));
 
     runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;

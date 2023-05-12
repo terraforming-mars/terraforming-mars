@@ -2,8 +2,9 @@ import {expect} from 'chai';
 import {TradeAdvance} from '../../../src/server/cards/community/TradeAdvance';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('TradeAdvance', function() {
   let card: TradeAdvance;
@@ -12,13 +13,10 @@ describe('TradeAdvance', function() {
 
   beforeEach(function() {
     card = new TradeAdvance();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = testGameOptions({
+    [game, player] = testGame(2, {
       coloniesExtension: true,
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });
-    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {

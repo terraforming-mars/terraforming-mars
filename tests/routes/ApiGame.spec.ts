@@ -62,7 +62,6 @@ describe('ApiGame', () => {
           'communityCardsOption': false,
           'corporateEra': true,
           'draftVariant': false,
-          'corporationsDraft': false,
           'escapeVelocityMode': false,
           'escapeVelocityPenalty': 1,
           'escapeVelocityPeriod': 2,

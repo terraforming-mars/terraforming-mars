@@ -1,14 +1,12 @@
 import {Game} from '../src/server/Game';
 import {GameOptions} from '../src/server/GameOptions';
-import {testGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 
-type _TestOptions = {
+export type TestGameOptions = GameOptions & {
   /* skip initial card selection */
   skipInitialCardSelection: boolean;
-}
-export type TestGameOptions = GameOptions & _TestOptions;
+};
 
 function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
   return [
@@ -43,11 +41,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
     copy.aresHazards = true;
   }
 
-  const options: GameOptions | undefined = customOptions === undefined ?
-    undefined :
-    testGameOptions(customOptions);
-
-  const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
+  const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], customOptions);
   if (customOptions?.skipInitialCardSelection !== false) {
     for (const player of players) {
       /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */

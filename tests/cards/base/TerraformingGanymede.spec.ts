@@ -5,7 +5,6 @@ import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
-import {testGameOptions} from '../../TestingUtils';
 
 describe('TerraformingGanymede', function() {
   let card: TerraformingGanymede;
@@ -17,7 +16,7 @@ describe('TerraformingGanymede', function() {
     card = new TerraformingGanymede();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
   });
 
   it('Should play', function() {

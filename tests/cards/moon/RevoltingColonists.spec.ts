@@ -1,6 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {runAllActions, testGameOptions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RevoltingColonists} from '../../../src/server/cards/moon/RevoltingColonists';
 import {expect} from 'chai';
@@ -19,7 +19,7 @@ describe('RevoltingColonists', () => {
     player1 = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     player3 = TestPlayer.YELLOW.newPlayer();
-    const game = Game.newInstance('gameid', [player1, player2, player3], player1, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player1, player2, player3], player1, {moonExpansion: true});
     card = new RevoltingColonists();
     moonData = MoonExpansion.moonData(game);
   });

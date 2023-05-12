@@ -13,7 +13,6 @@ export type GameOptionsModel = {
   communityCardsOption: boolean,
   corporateEra: boolean,
   draftVariant: boolean,
-  corporationsDraft: boolean,
   escapeVelocityMode: boolean,
   escapeVelocityThreshold?: number,
   escapeVelocityPeriod?: number,

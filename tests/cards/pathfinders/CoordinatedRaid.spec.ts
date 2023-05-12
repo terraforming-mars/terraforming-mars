@@ -58,14 +58,14 @@ describe('CoordinatedRaid', function() {
     const action = card.play(player);
     const selectColony = cast(action, SelectColony);
 
-    expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
-    expect(player2.getResourcesForTest()).deep.eq(Units.of({titanium: 6}));
+    expect(player.purse()).deep.eq(Units.EMPTY);
+    expect(player2.purse()).deep.eq(Units.of({titanium: 6}));
 
     selectColony.cb(colony);
     runAllActions(game);
 
-    expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 0, steel: 14, megacredits: 6}));
-    expect(player2.getResourcesForTest()).deep.eq(Units.of({titanium: 6}));
+    expect(player.purse()).deep.eq(Units.of({titanium: 0, steel: 14, megacredits: 6}));
+    expect(player2.purse()).deep.eq(Units.of({titanium: 6}));
   });
 
   it('Coordinated Raid ignores Trade Envoys', function() {
@@ -74,11 +74,11 @@ describe('CoordinatedRaid', function() {
     colony.addColony(player2);
     const selectColony = cast(card.play(player), SelectColony);
 
-    expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
+    expect(player.purse()).deep.eq(Units.EMPTY);
 
     selectColony.cb(colony);
     runAllActions(game);
 
-    expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 0, steel: 7, megacredits: 5}));
+    expect(player.purse()).deep.eq(Units.of({titanium: 0, steel: 7, megacredits: 5}));
   });
 });

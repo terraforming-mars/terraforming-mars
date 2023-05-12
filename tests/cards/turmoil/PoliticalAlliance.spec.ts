@@ -3,7 +3,6 @@ import {PoliticalAlliance} from '../../../src/server/cards/turmoil/PoliticalAlli
 import {Game} from '../../../src/server/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PoliticalAlliance', function() {
@@ -16,7 +15,7 @@ describe('PoliticalAlliance', function() {
     card = new PoliticalAlliance();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 

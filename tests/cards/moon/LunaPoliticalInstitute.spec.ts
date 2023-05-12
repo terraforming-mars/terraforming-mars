@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {cast, fakeCard, testGameOptions} from '../../TestingUtils';
+import {cast, fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
@@ -16,7 +16,7 @@ describe('LunaPoliticalInstitute', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true, moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {turmoilExtension: true, moonExpansion: true});
     card = new LunaPoliticalInstitute();
     turmoil = game.turmoil!;
   });

@@ -74,7 +74,7 @@ export interface IDatabase {
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal
-     * games. Called at a game's conclusion along with {@link cleanGame}.
+     * games. Called at a game's conclusion along with {@link markFinished}.
      *
      * This is not impliemented in {@link SQLite}.
      *
@@ -97,23 +97,27 @@ export interface IDatabase {
     deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void>;
 
     /**
-     * A maintenance task on a single game to close it out upon its completion.
+     * A maintenance task on a single game to mark it as complete.
+     *
      * It will:
      *
-     * * Purge all saves between `(0, last save]`.
      * * Mark the game as finished.
-     * * It also participates in purging abandoned solo games older
-     *   than a given date range, regardless of the supplied `gameId`.
-     *   Constraints for this purge vary by database.
+     * * Put it on queue to compress it after a given amount of time.
+     *   (Purges all saves between `(0, last save]`.)
      */
-    // TODO(kberg): Make the extra maintenance behavior a first-class method.
-    cleanGame(gameId: GameId): Promise<void>;
+    markFinished(gameId: GameId): Promise<void>;
+
+
+    /**
+     * Perform a regular database maintenance:
+     * 1. purge unfinished games after a set time period
+     * 2. Compress finished games after a set time period.
+     */
+    maintenance(): Promise<unknown>;
 
     /**
      * A maintenance task that purges abandoned solo games older
      * than a given date range.
-     *
-     * This is currently also part of cleanGame().
      *
      * Behavior when the environment variable is absent is system-dependent:
      * * In PostgreSQL, it uses a default of 10 days
@@ -121,6 +125,8 @@ export interface IDatabase {
      * * This whole method is ignored in LocalFilesystem.
      */
     purgeUnfinishedGames(maxGameDays?: string): Promise<void>;
+
+    compressCompletedGames(maxGameDays?: string): Promise<unknown>;
 
     /**
      * Generate database statistics for admin purposes.

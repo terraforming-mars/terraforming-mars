@@ -130,7 +130,7 @@ export default Vue.extend({
       case RequirementType.LOGISTIC_RATE:
         return ['card-logistics-rate', 'card-logistics-rate--req'];
       case RequirementType.HABITAT_TILES:
-        return ['card-tile-lunar-colony--S', 'tile--req'];
+        return ['card-tile-lunar-habitat--S', 'tile--req'];
       case RequirementType.MINING_TILES:
         return ['card-tile-lunar-mine--S', 'tile--req'];
       case RequirementType.ROAD_TILES:

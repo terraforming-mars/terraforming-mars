@@ -7,6 +7,7 @@ import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {ISpace} from './ISpace';
 import {GameOptions} from '../GameOptions';
+import {SpaceId} from '../../common/Types';
 
 export class TerraCimmeriaBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaBoard {
@@ -50,11 +51,11 @@ export class TerraCimmeriaBoard extends Board {
     return new TerraCimmeriaBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public override getNonReservedLandSpaces(): Array<ISpace> {
+  public override getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
     return super.getNonReservedLandSpaces();
   }
 
-  public override getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
     return [
       SpaceName.ALBOR_THOLUS_TERRACIMMERIA,
       SpaceName.APOLLINARIS_MONS,
@@ -63,7 +64,7 @@ export class TerraCimmeriaBoard extends Board {
     ];
   }
 
-  public getNoctisCitySpaceIds(): Array<string> {
-    return [];
+  public override getNoctisCitySpaceId(): SpaceId | undefined {
+    return undefined;
   }
 }

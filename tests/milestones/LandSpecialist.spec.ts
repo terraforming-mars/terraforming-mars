@@ -14,7 +14,7 @@ describe('LandSpecialist', function() {
   let player2: TestPlayer;
   let game: Game;
   let board: Board;
-  let spaces: Array<ISpace>;
+  let spaces: ReadonlyArray<ISpace>;
 
   beforeEach(function() {
     milestone = new LandSpecialist();

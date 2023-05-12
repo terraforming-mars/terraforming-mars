@@ -700,10 +700,6 @@ export class Player {
     return count;
   }
 
-  public getCardsByCardType(cardType: CardType) {
-    return this.playedCards.filter((card) => card.type === cardType);
-  }
-
   public deferInputCb(result: PlayerInput | undefined): void {
     this.defer(result, Priority.DEFAULT);
   }

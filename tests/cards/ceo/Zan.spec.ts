@@ -5,8 +5,9 @@ import {testGame} from '../../TestGame';
 
 import {Zan} from '../../../src/server/cards/ceos/Zan';
 import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInertGases';
-import {forceGenerationEnd, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {forceGenerationEnd, setRulingPartyAndRulingPolicy, runAllActions} from '../../TestingUtils';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {Politician} from '../../../src/server/awards/terraCimmeria/Politician';
 
 describe('Zan', function() {
   let card: Zan;
@@ -52,6 +53,16 @@ describe('Zan', function() {
     expect(turmoil.dominantParty.name).eq(PartyName.REDS);
     expect(turmoil.dominantParty.partyLeader).eq(player.id);
     expect(card.isDisabled).is.true;
+  });
+
+  it('OPG Counts for POLITICAN Award', function() {
+    const politician = new Politician();
+    game.awards = [];
+    game.awards.push(politician);
+    const preOPGScore = game.awards[0].getScore(player);
+    card.action(player);
+    runAllActions(game);
+    expect(game.awards[0].getScore(player)).eq(preOPGScore+7);
   });
 
   it('Can only act once per game', function() {

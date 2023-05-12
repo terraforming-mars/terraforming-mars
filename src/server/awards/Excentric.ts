@@ -3,7 +3,7 @@ import {Player} from '../Player';
 
 export class Excentric implements IAward {
   public readonly name = 'Excentric';
-  public readonly description = 'Most resources on cards';
+  public readonly description = 'Have the most resources on cards';
   public getScore(player: Player): number {
     let score = 0;
 

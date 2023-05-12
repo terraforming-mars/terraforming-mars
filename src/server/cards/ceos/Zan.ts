@@ -29,11 +29,13 @@ export class Zan extends CeoCard {
     this.isDisabled = true;
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
-    const totalDelegatesPlaced = turmoil.getAvailableDelegateCount(player.id);
+    const totalAvailableDelegates = turmoil.getAvailableDelegateCount(player.id);
     while (turmoil.getAvailableDelegateCount(player.id) > 0) {
       turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     }
-    player.addResource(Resource.MEGACREDITS, totalDelegatesPlaced, {log: true});
+    // If we dont do this player will not get the bonus for POLITICAN Awards
+    player.totalDelegatesPlaced += totalAvailableDelegates;
+    player.addResource(Resource.MEGACREDITS, totalAvailableDelegates, {log: true});
     return undefined;
   }
 }

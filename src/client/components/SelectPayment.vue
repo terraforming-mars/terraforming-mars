@@ -52,17 +52,17 @@ export default Vue.extend({
   mounted() {
     Vue.nextTick(() => {
       this.setInitialCost();
-      this.$data.megaCredits = this.getMegaCreditsMax();
+      this.megaCredits = this.getMegaCreditsMax();
       this.setDefaultValues();
     });
   },
   methods: {
     ...PaymentWidgetMixin.methods,
     hasWarning() {
-      return this.$data.warning !== undefined;
+      return this.warning !== undefined;
     },
     setInitialCost() {
-      this.$data.cost = this.playerinput.amount;
+      this.cost = this.playerinput.amount ?? 0;
     },
     canUse(target: Unit) {
       switch (target) {
@@ -81,7 +81,7 @@ export default Vue.extend({
       const amount = this.getAmount(target);
       if (amount === 0) return 0;
 
-      const cost = this.$data.cost;
+      const cost = this.cost;
       const resourceRate = this.getResourceRate(target);
 
       let qty = Math.ceil(Math.max(cost - this.getAmount('megaCredits') - amountCovered, 0) / resourceRate);
@@ -101,7 +101,7 @@ export default Vue.extend({
       return contributingValue;
     },
     setDefaultValues(reserveMegacredits: boolean = false) {
-      const cost = this.$data.cost;
+      const cost = this.cost;
 
       const megaCredits = this.getAmount('megaCredits');
 
@@ -111,7 +111,7 @@ export default Vue.extend({
         amountCovered += this.setDefaultValue(amountCovered, target);
       }
       if (!reserveMegacredits) {
-        this.$data.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
+        this.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
       }
     },
     setMaxMCValue() {
@@ -119,7 +119,7 @@ export default Vue.extend({
       this.setDefaultValues(/* reserveMegacredits */ true);
     },
     canAffordWithMcOnly() {
-      return this.thisPlayer.megaCredits >= this.$data.cost;
+      return this.thisPlayer.megaCredits >= this.cost;
     },
     canUseHeat() {
       return this.playerinput.canUseHeat && this.availableHeat() > 0;
@@ -144,12 +144,12 @@ export default Vue.extend({
       const targets: Array<Unit> = ['seeds', 'data', 'steel', 'titanium', 'heat', 'megaCredits'];
 
       const payment: Payment = {
-        heat: this.$data.heat,
-        megaCredits: this.$data.megaCredits,
-        steel: this.$data.steel,
-        titanium: this.$data.titanium,
-        seeds: this.$data.seeds,
-        data: this.$data.data,
+        heat: this.heat,
+        megaCredits: this.megaCredits,
+        steel: this.steel,
+        titanium: this.titanium,
+        seeds: this.seeds ?? 0,
+        data: this.data ?? 0,
         microbes: 0,
         floaters: 0,
         science: 0,
@@ -158,7 +158,7 @@ export default Vue.extend({
       let totalSpent = 0;
       for (const target of targets) {
         if (payment[target] > this.getAmount(target)) {
-          this.$data.warning = `You do not have enough ${target}`;
+          this.warning = `You do not have enough ${target}`;
           return;
         }
         totalSpent += payment[target] * this.getResourceRate(target);
@@ -167,7 +167,7 @@ export default Vue.extend({
       const requiredAmt = this.playerinput.amount || 0;
 
       if (requiredAmt > 0 && totalSpent < requiredAmt) {
-        this.$data.warning = 'Haven\'t spent enough';
+        this.warning = 'Haven\'t spent enough';
         return;
       }
 
@@ -185,7 +185,7 @@ export default Vue.extend({
         const diff = totalSpent - requiredAmt;
         for (const target of targets) {
           if (payment[target] && diff >= this.getResourceRate(target)) {
-            this.$data.warning = `You cannot overspend ${target}`;
+            this.warning = `You cannot overspend ${target}`;
             return;
           }
         }
@@ -196,7 +196,7 @@ export default Vue.extend({
         const diff = totalSpent - requiredAmt;
 
         if (!confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.$data.warning = 'Please adjust payment amount';
+          this.warning = 'Please adjust payment amount';
           return;
         }
       }

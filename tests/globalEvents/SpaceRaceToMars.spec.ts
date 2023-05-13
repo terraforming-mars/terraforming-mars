@@ -13,7 +13,7 @@ let game: Game;
 let player: TestPlayer;
 let player2: TestPlayer;
 let turmoil: Turmoil;
-let spaces: Array<ISpace>;
+let spaces: ReadonlyArray<ISpace>;
 
 // TODO(kberg): Include the Moon.
 describe('SpaceRaceToMars', function() {

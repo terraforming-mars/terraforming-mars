@@ -13,7 +13,7 @@ export class PlaceMoonHabitatTile extends BasePlaceMoonTile {
     super(player, spaces, title);
   }
 
-  protected getSpaces(moonData: IMoonData) {
+  protected getSpaces(moonData: IMoonData): ReadonlyArray<ISpace> {
     return moonData.moon.getAvailableSpacesOnLand(this.player);
   }
 

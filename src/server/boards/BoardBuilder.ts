@@ -128,7 +128,8 @@ export class BoardBuilder {
     if (id < 10) {
       strId = '0'+strId;
     }
-    return strId;
+    // OK to cast this.
+    return strId as SpaceId;
   }
 }
 
@@ -140,11 +141,11 @@ class Space implements ISpace {
     return new Space(id, SpaceType.COLONY, [], -1, -1);
   }
 
-  static land(id: string, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+  static land(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus> = []) {
     return new Space(id, SpaceType.LAND, bonus, x, y);
   }
 
-  static ocean(id: string, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+  static ocean(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus> = []) {
     return new Space(id, SpaceType.OCEAN, bonus, x, y);
   }
 }

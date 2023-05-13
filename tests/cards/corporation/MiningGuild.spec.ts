@@ -35,19 +35,19 @@ describe('MiningGuild', () => {
   });
 
   it('Gives steel production bonus when placing tiles', () => {
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: []}, BoardType.MARS);
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: []}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(0);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.STEEL, SpaceBonus.TITANIUM]}, BoardType.MARS);
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: [SpaceBonus.STEEL, SpaceBonus.TITANIUM]}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(1);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.STEEL]}, BoardType.MARS);
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: [SpaceBonus.STEEL]}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(2);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.TITANIUM]}, BoardType.MARS);
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: [SpaceBonus.TITANIUM]}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(3);
   });
@@ -64,7 +64,7 @@ describe('MiningGuild', () => {
   });
 
   it('Does not give bonus when other players place tiles', () => {
-    card.onTilePlaced(player, player2, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.TITANIUM]}, BoardType.MARS);
+    card.onTilePlaced(player, player2, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: [SpaceBonus.TITANIUM]}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(0);
   });

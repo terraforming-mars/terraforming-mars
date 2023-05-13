@@ -419,13 +419,13 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     invertExpansions() {
-      GAME_MODULES.forEach((module) => this.$data.expansions[module] = !this.$data.expansions[module]);
+      GAME_MODULES.forEach((module) => this.expansions[module] = !this.expansions[module]);
     },
     invertTags() {
-      this.allTags.forEach((tag) => this.$data.tags[tag] = !this.$data.tags[tag]);
+      this.allTags.forEach((tag) => this.tags[tag] = !this.tags[tag]);
     },
     invertTypes() {
-      this.allTypes.forEach((type) => this.$data.types[type] = !this.$data.types[type]);
+      this.allTypes.forEach((type) => this.types[type] = !this.types[type]);
     },
     sort<T extends string>(names: Array<T>): Array<T> {
       const translated = names.map((name) => ({name: name, text: translateText(name)}));
@@ -465,7 +465,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return getGlobalEventModel(globalEventName);
     },
     filter(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
-      const filterText = this.$data.filterText.toLocaleUpperCase();
+      const filterText = this.filterText.toLocaleUpperCase();
       if (filterText.length === 0) {
         return true;
       }

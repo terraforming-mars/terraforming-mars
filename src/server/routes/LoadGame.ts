@@ -5,7 +5,6 @@ import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {LoadGameFormModel} from '../../common/models/LoadGameFormModel';
-import {GameId} from '../../common/Types';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
@@ -23,16 +22,17 @@ export class LoadGame extends Handler {
         try {
           const gameReq: LoadGameFormModel = JSON.parse(body);
 
-          const game_id = gameReq.game_id as GameId;
+          // TODO(kberg): verify that the game ID is of the right type.
+          const gameId = gameReq.gameId;
           // This should probably be behind some kind of verification that prevents just
           // anyone from rolling back a large number of steps.
           const rollbackCount = gameReq.rollbackCount;
           if (rollbackCount > 0) {
-            Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
+            Database.getInstance().deleteGameNbrSaves(gameId, rollbackCount);
           }
-          const game = await GameLoader.getInstance().getGame(game_id, /* bypassCache */ true);
+          const game = await GameLoader.getInstance().getGame(gameId, /* bypassCache */ true);
           if (game === undefined) {
-            console.warn(`unable to find ${game_id} in database`);
+            console.warn(`unable to find ${gameId} in database`);
             ctx.route.notFound(req, res, 'game_id not found');
           } else {
             ctx.route.writeJson(res, Server.getSimpleGameModel(game));

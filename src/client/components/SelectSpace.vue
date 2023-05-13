@@ -32,6 +32,13 @@ type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
 }
 
+type SelectSpaceDataModel = {
+  availableSpaces: Set<SpaceId>;
+  selectedTile: HTMLElement | undefined,
+  spaceId: SpaceId | undefined;
+  warning: string | undefined;
+};
+
 export default (Vue as WithRefs<Refs>).extend({
   name: 'SelectSpace',
   props: {
@@ -48,10 +55,10 @@ export default (Vue as WithRefs<Refs>).extend({
       type: Boolean,
     },
   },
-  data() {
+  data(): SelectSpaceDataModel {
     return {
       availableSpaces: new Set(this.playerinput.availableSpaces),
-      selectedTile: undefined as HTMLElement | undefined,
+      selectedTile: undefined,
       spaceId: undefined,
       warning: undefined,
     };
@@ -93,7 +100,11 @@ export default (Vue as WithRefs<Refs>).extend({
       if (this.selectedTile === undefined) {
         throw new Error('unexpected, no tile selected!');
       }
-      this.$data.spaceId = this.selectedTile.getAttribute('data_space_id');
+      const spaceId = this.selectedTile.getAttribute('data_space_id');
+      if (spaceId === null) {
+        throw new Error('unexpected, space has no id');
+      }
+      this.spaceId = spaceId;
       this.selectedTile.classList.add('board-space--selected');
       this.saveData();
     },
@@ -143,11 +154,11 @@ export default (Vue as WithRefs<Refs>).extend({
       return getPreferences().experimental_ui;
     },
     saveData() {
-      if (this.$data.spaceId === undefined) {
-        this.$data.warning = 'Must select a space';
+      if (this.spaceId === undefined) {
+        this.warning = 'Must select a space';
         return;
       }
-      this.onsave({type: 'space', spaceId: this.$data.spaceId});
+      this.onsave({type: 'space', spaceId: this.spaceId});
     },
   },
   mounted() {

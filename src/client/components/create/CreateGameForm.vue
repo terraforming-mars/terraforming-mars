@@ -794,12 +794,12 @@ export default (Vue as WithRefs<Refs>).extend({
       return count.toString();
     },
     deselectVenusCompletion() {
-      if (this.$data.venusNext === false) {
+      if (this.venusNext === false) {
         this.requiresVenusTrackCompletion = false;
       }
     },
     deselectMoonCompletion() {
-      if (this.$data.moonExpansion === false) {
+      if (this.moonExpansion === false) {
         this.requiresMoonTrackCompletion = false;
         this.moonStandardProjectVariant = false;
       }
@@ -1062,7 +1062,7 @@ export default (Vue as WithRefs<Refs>).extend({
         clonedGamedId = this.clonedGameId;
         if (gameData.playerCount !== players.length) {
           alert(this.$t('Player count mismatch'));
-          this.$data.playersCount = gameData.playerCount;
+          this.playersCount = gameData.playerCount;
           return;
         }
       } else if (!this.seededGame) {

@@ -5,6 +5,7 @@ export type ParticipantId = PlayerId | SpectatorId;
 type Digit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 type TwoDigits = `${Digit}${Digit}`;
 export type SpaceId = `${TwoDigits}` | `m${TwoDigits}`;
+export type Named<T> = {name: T};
 
 export function isPlayerId(object: any): object is PlayerId {
   return object?.charAt?.(0) === 'p';

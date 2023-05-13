@@ -42,6 +42,12 @@
   "Coordinated Raid": "Koordinierter Überfall",
   "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(Benötigt 1 Kolonie im Spiel. Bewege eine deiner ungenutzten Handelsflotten auf ein beliebiges (auch bereits besetztes) Kolonieplättchen. Erhalte den Handels- und Koloniebonus für jede dortige Kolonie. Andere Spieler erhalten keinen Bonus.)",
 
+  "Crashlanding": "Bruchlandung",
+  "Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "Platziere UND ORIENTIERE dieses Plättchen angrenzend zu maximal einer Stadt.",
+  "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Dieses Plättchen gewährt einen Nachbarschaftsbonus von 1 Datenressource und entweder 1 Stahl oder 1 Titan.",
+  "When placing Crashsite, for each tile you own next it, gain those bonuses.": "Beim Platzieren erhältst du für alle EIGENEN dort angrenzenden Plättchen im Spiel diese Boni.",
+  "Place 1 data on any card. Place 1 resource on any card.": "Füge 1 Datenressource einer beliebigen Karte hinzu. Füge 1 beliebige Ressource einer beliebigen Karte hinzu.",
+  
   "Cryptocurrency": "Kryptowährung",
   "(Action: Spend 1 energy to add 1 data to this card.)": "(AKTION: Verbrauche 1 Energie, um dieser Karte 1 Datenressource hinzuzufügen.)",
   "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(AKTION: Entferne Daten von hier, um 3 M€ je entfernten Daten zu erhalten.)",

@@ -7,23 +7,32 @@ import {vueRoot} from '@/client/components/vueRoot';
 import * as constants from '@/common/constants';
 import * as paths from '@/common/app/paths';
 import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
+import {GameId} from '@/common/Types';
+
+type LoadGameFormDataModel = {
+  gameId: GameId | undefined;
+  rollbackCount: number;
+};
 
 export default Vue.extend({
   name: 'LoadGameForm',
   components: {
     AppButton,
   },
-  data() {
+  data(): LoadGameFormDataModel {
     return {
-      constants,
-      gameId: '',
-      rollbackCount: '0',
+      gameId: undefined,
+      rollbackCount: 0,
     };
   },
   methods: {
     loadGame() {
-      const gameId = this.$data.gameId;
-      const rollbackCount = this.$data.rollbackCount;
+      const gameId = this.gameId;
+      const rollbackCount = this.rollbackCount;
+      if (gameId === undefined) {
+        alert('Specify a game id');
+        return;
+      }
       const xhr = new XMLHttpRequest();
       xhr.open('PUT', paths.LOAD_GAME);
       xhr.onerror = function() {
@@ -45,18 +54,23 @@ export default Vue.extend({
         }
       };
       const loadGameFormModel: LoadGameFormModel = {
-        game_id: gameId,
+        gameId: gameId,
         rollbackCount: rollbackCount,
       };
       xhr.responseType = 'json';
       xhr.send(JSON.stringify(loadGameFormModel));
     },
   },
+  computed: {
+    APP_NAME(): string {
+      return constants.APP_NAME;
+    },
+  },
 });
 </script>
 <template>
   <div id="load-game">
-      <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Load Game</span></h1>
+      <h1><span v-i18n>{{ APP_NAME }}</span> — <span v-i18n>Load Game</span></h1>
 
       <div class="load-game-form load-game--block">
           <div class="container load-game-options">

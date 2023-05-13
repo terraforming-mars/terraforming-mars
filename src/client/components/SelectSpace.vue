@@ -26,6 +26,7 @@ import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesMana
 import {SelectSpaceResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import GoToMap from '@/client/components/waitingFor/GoToMap.vue';
+import {SpaceId} from '@/common/Types';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -69,7 +70,8 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     animateAvailableSpaces(tiles: Array<Element>) {
       tiles.forEach((tile: Element) => {
-        const spaceId = tile.getAttribute('data_space_id');
+        // TODO(kberg): Replace Element / HTMLElement with `typeof BoardSpace`
+        const spaceId = tile.getAttribute('data_space_id') as SpaceId;
         if (spaceId !== null && this.availableSpaces.has(spaceId)) {
           this.animateSpace(tile, true);
         }
@@ -154,7 +156,9 @@ export default (Vue as WithRefs<Refs>).extend({
     this.animateAvailableSpaces(tiles);
     for (let i = 0, length = tiles.length; i < length; i++) {
       const tile: HTMLElement = tiles[i] as HTMLElement;
-      const spaceId = tile.getAttribute('data_space_id');
+      // TODO(kberg): Replace Element / HTMLElement with `typeof BoardSpace`
+      const spaceId = tile.getAttribute('data_space_id') as SpaceId;
+
       if (spaceId === null || this.availableSpaces.has(spaceId) === false) {
         continue;
       }

@@ -5,28 +5,29 @@ import {Player} from '../Player';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
+import {SpaceId} from '../../common/Types';
 
 class Space implements ISpace {
   constructor(
-    public id: string,
+    public id: SpaceId,
     public spaceType: SpaceType,
     public x: number,
     public y: number,
     public bonus: Array<SpaceBonus>) { }
 
-  public static mine(id: string, x: number, y: number, bonus: Array<SpaceBonus>) {
+  public static mine(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>) {
     return new Space(id, SpaceType.LUNAR_MINE, x, y, bonus);
   }
-  public static surface(id: string, x: number, y: number, bonus: Array<SpaceBonus>) {
+  public static surface(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>) {
     return new Space(id, SpaceType.LAND, x, y, bonus);
   }
-  public static colony(id: string) {
+  public static colony(id: SpaceId) {
     return new Space(id, SpaceType.COLONY, -1, -1, []);
   }
 }
 
 export class MoonBoard extends Board {
-  public getAvailableSpacesForMine(player: Player): Array<ISpace> {
+  public getAvailableSpacesForMine(player: Player): ReadonlyArray<ISpace> {
     const spaces = this.spaces.filter((space) => {
       const val = space.tile === undefined &&
         space.spaceType === SpaceType.LUNAR_MINE &&
@@ -78,10 +79,11 @@ class Builder {
   public colony() {
     this.spaces.push(Space.colony(this.nextId()));
   }
-  public nextId(): string {
+  public nextId(): SpaceId {
     this.idx++;
     const strId = this.idx.toString().padStart(2, '0');
-    return 'm' + strId;
+    // This cast is safe.
+    return 'm' + strId as SpaceId;
   }
 }
 

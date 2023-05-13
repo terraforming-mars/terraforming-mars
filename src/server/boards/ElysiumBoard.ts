@@ -6,6 +6,7 @@ import {SerializedBoard} from './SerializedBoard';
 import {Player} from '../Player';
 import {Random} from '../Random';
 import {GameOptions} from '../GameOptions';
+import {SpaceId} from '../../common/Types';
 
 export class ElysiumBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {
@@ -46,7 +47,7 @@ export class ElysiumBoard extends Board {
     return new ElysiumBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public override getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): Array<SpaceId> {
     return [
       SpaceName.ARSIA_MONS_ELYSIUM,
       SpaceName.ELYSIUM_MONS,

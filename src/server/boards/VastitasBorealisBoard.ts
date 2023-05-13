@@ -9,6 +9,7 @@ import {Random} from '../Random';
 import {GameOptions} from '../GameOptions';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
+import {SpaceId} from '../../common/Types';
 
 export class VastitasBorealisBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisBoard {
@@ -72,7 +73,7 @@ export class VastitasBorealisBoard extends Board {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
   }
 
-  public override getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): Array<SpaceId> {
     return [
       SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
       SpaceName.ALBA_FOSSAE,

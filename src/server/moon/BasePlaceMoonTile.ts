@@ -15,7 +15,7 @@ export abstract class BasePlaceMoonTile extends DeferredAction {
     super(player, Priority.DEFAULT);
   }
 
-  protected abstract getSpaces(moonData: IMoonData): Array<ISpace>;
+  protected abstract getSpaces(moonData: IMoonData): ReadonlyArray<ISpace>;
   protected abstract placeTile(space: ISpace): PlayerInput | undefined;
 
   public execute() {

@@ -79,7 +79,6 @@ describe('ShiftAresGlobalParameters', function() {
       highOceanDelta: 0,
       temperatureDelta: 0,
       oxygenDelta: 0,
-      ADJUSTMENT_RANGE: [-1, 0, 1],
     });
   });
 });

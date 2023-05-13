@@ -80,10 +80,10 @@ export default Vue.extend({
   },
   mounted() {
     Vue.nextTick(() => {
-      this.$data.card = this.getCard();
-      this.$data.cost = this.$data.card.calculatedCost;
-      this.$data.tags = this.getCardTags(),
-      this.$data.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+      this.card = this.getCard();
+      this.cost = this.card.calculatedCost ?? 0;
+      this.tags = this.getCardTags(),
+      this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     });
@@ -297,7 +297,7 @@ export default Vue.extend({
       let totalSpent = 0;
       for (const target of unit) {
         if (payment[target] > this.getAmount(target)) {
-          this.$data.warning = `You do not have enough ${target}`;
+          this.warning = `You do not have enough ${target}`;
           return;
         }
         totalSpent += payment[target] * this.getResourceRate(target);
@@ -312,7 +312,7 @@ export default Vue.extend({
         const diff = totalSpent - this.cost;
         for (const target of unit) {
           if (payment[target] && diff >= this.getResourceRate(target)) {
-            this.$data.warning = `You cannot overspend ${target}`;
+            this.warning = `You cannot overspend ${target}`;
             return;
           }
         }

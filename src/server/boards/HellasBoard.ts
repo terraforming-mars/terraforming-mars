@@ -48,27 +48,27 @@ export class HellasBoard extends Board {
     return new HellasBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): HellasBoard {
+  public static deserialize(board: SerializedBoard, players: ReadonlyArray<Player>): HellasBoard {
     return new HellasBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  private filterHellas(player: Player, spaces: Array<ISpace>) {
+  private filterHellas(player: Player, spaces: ReadonlyArray<ISpace>) {
     return player.canAfford(HELLAS_BONUS_OCEAN_COST, {tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
-  public override getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
+  public override getSpaces(spaceType: SpaceType, player: Player): ReadonlyArray<ISpace> {
     return this.filterHellas(player, super.getSpaces(spaceType, player));
   }
 
-  public override getAvailableSpacesForCity(player: Player): Array<ISpace> {
+  public override getAvailableSpacesForCity(player: Player): ReadonlyArray<ISpace> {
     return this.filterHellas(player, super.getAvailableSpacesForCity(player));
   }
 
-  public override getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+  public override getAvailableSpacesOnLand(player: Player): ReadonlyArray<ISpace> {
     return this.filterHellas(player, super.getAvailableSpacesOnLand(player));
   }
 
-  public override getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+  public override getAvailableSpacesForGreenery(player: Player): ReadonlyArray<ISpace> {
     return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
   }
 }

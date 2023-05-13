@@ -55,7 +55,7 @@ describe('Cultural Metropolis', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game);
 
-    const availableCitySpaces = game.board.getAvailableSpacesForCity(player);
+    const availableCitySpaces = [...game.board.getAvailableSpacesForCity(player)];
     const savedSpace = availableCitySpaces.pop()!;
     for (const space of availableCitySpaces) {
       game.simpleAddTile(player, space, {tileType: TileType.GREENERY});

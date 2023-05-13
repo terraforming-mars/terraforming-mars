@@ -7,7 +7,7 @@ import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputRes
 export class SelectSpace extends BasePlayerInput {
   constructor(
     title: string | Message,
-    public availableSpaces: Array<ISpace>,
+    public availableSpaces: ReadonlyArray<ISpace>,
     public cb: (space: ISpace) => PlayerInput | undefined) {
     super(PlayerInputType.SELECT_SPACE, title);
     if (availableSpaces.length === 0) {

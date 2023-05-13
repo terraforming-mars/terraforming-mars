@@ -1345,7 +1345,7 @@ export class Game implements Logger {
     return undefined;
   }
 
-  public addCityTile(
+  public addCity(
     player: Player, space: ISpace,
     cardName: CardName | undefined = undefined): void {
     this.addTile(player, space, {
@@ -1363,7 +1363,7 @@ export class Game implements Logger {
     return count > 0 && count < constants.MAX_OCEAN_TILES;
   }
 
-  public addOceanTile(player: Player, space: ISpace): void {
+  public addOcean(player: Player, space: ISpace): void {
     if (this.canAddOcean() === false) return;
 
     this.addTile(player, space, {

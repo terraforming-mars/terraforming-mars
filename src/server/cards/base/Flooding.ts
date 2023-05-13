@@ -44,7 +44,7 @@ export class Flooding extends Card implements IProjectCard {
       'Select space for ocean tile',
       player.game.board.getAvailableSpacesForOcean(player),
       (space: ISpace) => {
-        player.game.addOceanTile(player, space);
+        player.game.addOcean(player, space);
 
         const adjacentPlayers: Set<Player> = new Set<Player>();
         player.game.board.getAdjacentSpaces(space).forEach((space) => {

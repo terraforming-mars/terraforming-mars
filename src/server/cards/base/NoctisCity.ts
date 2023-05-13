@@ -44,11 +44,11 @@ export class NoctisCity extends Card implements IProjectCard {
     const noctisCitySpaceId = player.game.board.getNoctisCitySpaceId();
     if (noctisCitySpaceId !== undefined) {
       const space = player.game.board.getSpace(noctisCitySpaceId);
-      player.game.addCityTile(player, space);
+      player.game.addCity(player, space);
       return undefined;
     }
     return new SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCityTile(player, space);
+      player.game.addCity(player, space);
       return undefined;
     });
   }

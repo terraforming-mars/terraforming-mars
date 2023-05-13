@@ -78,7 +78,7 @@ describe('OceanSanctuary', function() {
     })[0];
 
     player.plants = 0;
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
     expect(player.plants).eq(1);
 
     card.play(player);

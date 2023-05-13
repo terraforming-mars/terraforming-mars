@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
 import {Game} from '../../../src/server/Game';
-import {addOceanTile, cast, runAllActions} from '../../TestingUtils';
+import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -39,7 +39,7 @@ describe('Polaris', function() {
   });
 
   it('When anyone plays ocean tile', function() {
-    addOceanTile(player2, '06');
+    addOcean(player2, '06');
     runAllActions(game);
 
     expect(player.production.megacredits).to.eq(1);
@@ -49,7 +49,7 @@ describe('Polaris', function() {
   });
 
   it('When you play ocean tile', function() {
-    addOceanTile(player, '06');
+    addOcean(player, '06');
     runAllActions(game);
 
     expect(player.production.megacredits).to.eq(1);

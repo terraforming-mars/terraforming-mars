@@ -10,7 +10,7 @@ import {EmptyBoard} from '../ares/EmptyBoard';
 import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
-import {addCityTile, addGreenery, cast} from '../TestingUtils';
+import {addCity, addGreenery, cast} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {testGame} from '../TestGame';
 
@@ -28,7 +28,7 @@ describe('Landlord', () => {
   it('Simple test', () => {
     expect(award.getScore(player)).to.eq(0);
 
-    addCityTile(player, SpaceName.NOCTIS_CITY);
+    addCity(player, SpaceName.NOCTIS_CITY);
     expect(award.getScore(player)).to.eq(1);
 
     addGreenery(player, '35');
@@ -40,7 +40,7 @@ describe('Landlord', () => {
 
     expect(award.getScore(player)).to.eq(0);
 
-    addCityTile(player, SpaceName.NOCTIS_CITY);
+    addCity(player, SpaceName.NOCTIS_CITY);
     expect(award.getScore(player)).to.eq(1);
 
     addGreenery(player, '35');

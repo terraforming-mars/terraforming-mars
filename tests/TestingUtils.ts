@@ -53,27 +53,19 @@ export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
   return space;
 }
 
-export function addOceanTile(player: Player, spaceId?: SpaceId): ISpace {
-  return addOcean(player, spaceId);
-}
-
 export function addOcean(player: Player, spaceId?: SpaceId): ISpace {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForOcean(player)[0];
-  player.game.addOceanTile(player, space);
+  player.game.addOcean(player, space);
   return space;
-}
-
-export function addCityTile(player: Player, spaceId?: SpaceId): ISpace {
-  return addCity(player, spaceId);
 }
 
 export function addCity(player: Player, spaceId?: SpaceId): ISpace {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForCity(player)[0];
-  player.game.addCityTile(player, space);
+  player.game.addCity(player, space);
   return space;
 }
 

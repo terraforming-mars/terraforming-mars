@@ -32,7 +32,7 @@ describe('ImmigrantCity', function() {
     expect(player.production.megacredits).to.eq(-2);
     player.playedCards.push(card);
 
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
+    game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
     runNextAction(game);
     expect(player.production.megacredits).to.eq(-1);
   });
@@ -51,7 +51,7 @@ describe('ImmigrantCity', function() {
     player.playedCards.push(card);
 
     // add another city tile
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
+    game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
     runNextAction(game);
     expect(player.production.megacredits).to.eq(-4);
   });
@@ -71,7 +71,7 @@ describe('ImmigrantCity', function() {
     player.playedCards.push(card);
 
     // add another city tile - MC prod should increase by 2 (1 from Tharsis, 1 from IC)
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
+    game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
     runAllActions(game);
     expect(player.production.megacredits).to.eq(-3);
   });

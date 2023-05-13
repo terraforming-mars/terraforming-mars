@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Ingrid} from '../../../src/server/cards/ceos/Ingrid';
 import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {addGreenery, addOcean, addCityTile, forceGenerationEnd, cast} from '../../TestingUtils';
+import {addGreenery, addOcean, addCity, forceGenerationEnd, cast} from '../../TestingUtils';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -62,7 +62,7 @@ describe('Ingrid', function() {
 
   it('Does not trigger ability when placing tile off Mars', function() {
     card.action();
-    addCityTile(player, SpaceName.GANYMEDE_COLONY);
+    addCity(player, SpaceName.GANYMEDE_COLONY);
     expect(game.deferredActions).has.length(0);
   });
 

@@ -42,7 +42,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
   }
   public override bespokePlay(player: Player) {
     return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (space: ISpace) => {
-      player.game.addCityTile(player, space);
+      player.game.addCity(player, space);
       return undefined;
     });
   }

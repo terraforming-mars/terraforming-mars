@@ -24,7 +24,7 @@ describe('Zeppelins', function() {
     expect(player.simpleCanPlay(card)).is.true;
 
     const lands = game.board.getAvailableSpacesOnLand(player);
-    game.addCityTile(player, lands[0]);
+    game.addCity(player, lands[0]);
 
     card.play(player);
     expect(player.production.megacredits).to.eq(1);

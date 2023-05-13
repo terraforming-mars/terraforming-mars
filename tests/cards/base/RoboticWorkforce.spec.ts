@@ -15,7 +15,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {resetBoard, runNextAction, cast, runAllActions, addCityTile, addOceanTile} from '../../TestingUtils';
+import {resetBoard, runNextAction, cast, runAllActions, addCity, addOcean} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -241,11 +241,11 @@ describe('RoboticWorkforce', () => {
 
         // place some tiles
         resetBoard(game);
-        addCityTile(player, '17');
-        addCityTile(player, '19');
-        addOceanTile(player, '32');
-        addOceanTile(player, '33');
-        addOceanTile(player, '34');
+        addCity(player, '17');
+        addCity(player, '19');
+        addOcean(player, '32');
+        addOcean(player, '33');
+        addOcean(player, '34');
 
         // Some moon cards need steel and titanium
         player.steel = 2;

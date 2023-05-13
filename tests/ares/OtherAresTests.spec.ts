@@ -14,7 +14,7 @@ describe('OtherAresTests', function() {
     [game, player] = testGame(2, {aresExtension: true});
 
     const oceanSpace = game.board.getAvailableSpacesForOcean(player).filter((s) => s.y >= 5)[0];
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
     for (let n = 0; n < 8; n++) {
       addOcean(player);
     }

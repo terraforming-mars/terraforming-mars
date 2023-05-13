@@ -27,7 +27,7 @@ export class PlaceOceanTile extends DeferredAction {
       title,
       availableSpaces,
       (space: ISpace) => {
-        this.player.game.addOceanTile(this.player, space);
+        this.player.game.addOcean(this.player, space);
         return undefined;
       },
     );

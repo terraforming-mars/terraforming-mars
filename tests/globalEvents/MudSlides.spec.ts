@@ -21,8 +21,8 @@ describe('MudSlides', function() {
 
   it('resolve play', function() {
     const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];
-    game.addCityTile(player, game.board.getAdjacentSpaces(oceanTile)[0]);
-    game.addOceanTile(player, oceanTile);
+    game.addCity(player, game.board.getAdjacentSpaces(oceanTile)[0]);
+    game.addOcean(player, oceanTile);
     player.megaCredits = 10;
 
     card.resolve(game, turmoil);
@@ -48,8 +48,8 @@ describe('MudSlides', function() {
 
     const spaces = adjacentOceans();
 
-    game.addOceanTile(player, spaces.first);
-    game.addOceanTile(player, spaces.second);
+    game.addOcean(player, spaces.first);
+    game.addOcean(player, spaces.second);
 
     // Add an ocean city on top of the second ocean.
     const tile = {

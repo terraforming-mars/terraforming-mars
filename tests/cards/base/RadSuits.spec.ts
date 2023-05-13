@@ -20,8 +20,8 @@ describe('RadSuits', function() {
 
   it('Should play', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
-    game.addCityTile(player, lands[0]);
-    game.addCityTile(player, lands[1]);
+    game.addCity(player, lands[0]);
+    game.addCity(player, lands[1]);
 
     expect(player.simpleCanPlay(card)).is.true;
     card.play(player);

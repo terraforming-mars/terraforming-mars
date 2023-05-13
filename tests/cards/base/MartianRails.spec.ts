@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {addCityTile} from '../../TestingUtils';
+import {addCity} from '../../TestingUtils';
 import {MartianRails} from '../../../src/server/cards/base/MartianRails';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TestPlayer} from '../../TestPlayer';
@@ -22,7 +22,7 @@ describe('MartianRails', () => {
   it('Should act', () => {
     player.energy = 1;
     expect(card.canAct(player)).is.true;
-    addCityTile(player);
+    addCity(player);
 
     card.action(player);
     expect(player.energy).to.eq(0);
@@ -32,7 +32,7 @@ describe('MartianRails', () => {
   it('Ignores cities off Mars', () => {
     player.energy = 1;
     expect(card.canAct(player)).is.true;
-    addCityTile(player, SpaceName.GANYMEDE_COLONY);
+    addCity(player, SpaceName.GANYMEDE_COLONY);
 
     card.action(player);
     expect(player.energy).to.eq(0);

@@ -787,7 +787,7 @@ export class Player {
         new SelectSpace(
           'Add an ocean',
           game.board.getAvailableSpacesForOcean(this), (space) => {
-            game.addOceanTile(this, space);
+            game.addOcean(this, space);
             game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
             return undefined;
           },

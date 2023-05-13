@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../TestGame';
 import {Irrigator} from '../../src/server/milestones/Irrigator';
-import {addCityTile, addGreenery, maxOutOceans} from '../TestingUtils';
+import {addCity, addGreenery, maxOutOceans} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Irrigator', () => {
@@ -16,9 +16,9 @@ describe('Irrigator', () => {
   });
 
   it('Can claim with 4 tiles adjacent to oceans', () => {
-    addCityTile(player, '09');
+    addCity(player, '09');
     addGreenery(player, '20');
-    addCityTile(player, '11');
+    addCity(player, '11');
     expect(milestone.canClaim(player)).is.false;
 
     addGreenery(player, '24');

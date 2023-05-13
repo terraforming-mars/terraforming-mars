@@ -93,7 +93,7 @@ describe('OceanCity', function() {
     const citySpace = game.board
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
-    game.addCityTile(player, citySpace);
+    game.addCity(player, citySpace);
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -159,7 +159,7 @@ describe('OceanCity', function() {
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
 
     // And now adds the tile.
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
     card.play(player);
     runAllActions(game);
     const oceanCityAction = cast(player.popWaitingFor(), SelectSpace);
@@ -176,7 +176,7 @@ describe('OceanCity', function() {
     })[0];
 
     player.plants = 0;
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
     expect(player.plants).eq(1);
 
     expect(card.play(player)).is.undefined;

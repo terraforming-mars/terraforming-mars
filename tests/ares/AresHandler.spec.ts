@@ -413,7 +413,7 @@ describe('AresHandler', function() {
     expect(otherPlayer.plants).eq(0);
     expect(player.plants).eq(0);
 
-    game.addOceanTile(otherPlayer, space);
+    game.addOcean(otherPlayer, space);
     // Placing an Ocean City on top of the ocean will not grant player plants.
     game.addTile(player, space, {tileType: TileType.OCEAN_CITY});
 

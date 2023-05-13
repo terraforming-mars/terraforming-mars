@@ -26,28 +26,28 @@ describe('OutdoorSports', function() {
 
   it('cannotPlay', function() {
     player.megaCredits = card.cost;
-    player.game.addOceanTile(player, oceanSpace);
+    player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
 
-    player.game.addCityTile(player, spaceNotNextToOcean);
+    player.game.addCity(player, spaceNotNextToOcean);
     expect(player.canPlay(card)).is.not.true;
   });
 
   it('canPlay', function() {
     player.megaCredits = card.cost;
-    player.game.addOceanTile(player, oceanSpace);
+    player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
 
-    player.game.addCityTile(player, spaceNextToOcean);
+    player.game.addCity(player, spaceNextToOcean);
     expect(player.canPlay(card)).is.true;
   });
 
   it('canPlay - other player owns the city', function() {
     player.megaCredits = card.cost;
-    player.game.addOceanTile(player, oceanSpace);
+    player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
 
-    player.game.addCityTile(player2, spaceNextToOcean);
+    player.game.addCity(player2, spaceNextToOcean);
     expect(player.canPlay(card)).is.true;
   });
 

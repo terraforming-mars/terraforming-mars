@@ -27,7 +27,7 @@ export class PlaceCityTile extends DeferredAction {
       title,
       spaces,
       (space: ISpace) => {
-        this.player.game.addCityTile(this.player, space);
+        this.player.game.addCity(this.player, space);
         return undefined;
       },
     );

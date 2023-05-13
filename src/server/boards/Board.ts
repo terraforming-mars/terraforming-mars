@@ -107,6 +107,18 @@ export abstract class Board {
     return spaces;
   }
 
+  //  Returns spaces in order from the top left.
+  //
+  //   0 1
+  //  5 x 2
+  //   4 3
+  //
+  // If there is no space in that spot, the index is undefined.
+  // If the space is invalid or is a colony, this returns an unreliable value.
+  public getAdjacentSpacesClockwise(space: ISpace): ReadonlyArray<ISpace | undefined> {
+    return this.computeAdjacentSpaces(space);
+  }
+
   public getSpaceByTileCard(cardName: CardName): ISpace | undefined {
     return this.spaces.find(
       (space) => space.tile !== undefined && space.tile.card === cardName,

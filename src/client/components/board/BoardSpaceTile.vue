@@ -7,7 +7,7 @@
 import Vue from 'vue';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType} from '@/common/TileType';
-import {SpaceHighlight} from '@/common/models/SpaceModel';
+import {SpaceHighlight, SpaceModel} from '@/common/models/SpaceModel';
 import {TileView} from '@/client/components/board/TileView';
 
 const tileTypeToCssClass: Record<TileType, string> = {
@@ -50,6 +50,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.LUNA_MINING_HUB]: 'luna-mining-hub',
   [TileType.LUNA_TRAIN_STATION]: 'luna-train-station',
   [TileType.LUNAR_MINE_URBANIZATION]: 'lunar-mine-urbanization',
+  [TileType.CRASHLANDING]: 'crashlanding',
 };
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -107,12 +108,14 @@ const descriptions: Record<TileType, string> = {
   [TileType.WETLANDS]: 'Wetlands: counts as an ocean and a greenery. Does not count toward 9 oceans.',
   [TileType.RED_CITY]: 'Red City: 1 VP per empty adjacent area. No greeneries may be placed next to it.',
   [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
+  [TileType.CRASHLANDING]: 'Crashlanding',
 };
+
 export default Vue.extend({
   name: 'board-space-tile',
   props: {
-    tileType: {
-      type: Number as () => TileType | undefined,
+    space: {
+      type: Object as () => SpaceModel,
     },
     aresExtension: {
       type: Boolean,
@@ -120,13 +123,6 @@ export default Vue.extend({
     tileView: {
       type: String as () => TileView,
       default: 'show',
-    },
-    spaceType: {
-      type: String as () => SpaceType,
-    },
-    highlight: {
-      type: String as () => SpaceHighlight,
-      required: false,
     },
     restricted: {
       type: Boolean,
@@ -137,6 +133,15 @@ export default Vue.extend({
     return {};
   },
   computed: {
+    tileType(): TileType | undefined {
+      return this.space.tileType;
+    },
+    spaceType(): SpaceType {
+      return this.space.spaceType;
+    },
+    highlight(): SpaceHighlight {
+      return this.space.highlight;
+    },
     description(): string {
       if (this.tileType === undefined) return '';
       if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) return 'City in space.';
@@ -148,6 +153,10 @@ export default Vue.extend({
         let cssClass: string | undefined = tileTypeToCssClass[this.tileType];
         if (this.aresExtension && tileTypeToCssClassAresOverride.has(this.tileType)) {
           cssClass = tileTypeToCssClassAresOverride.get(this.tileType);
+        }
+        // Special case Crashlanding rotation
+        if (this.tileType === TileType.CRASHLANDING && this.space.rotated === true) {
+          cssClass += '-rotated';
         }
         css += ' board-space-tile--' + cssClass;
       } else {

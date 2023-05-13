@@ -134,6 +134,26 @@ describe('Board', function() {
     });
   });
 
+  it('getAdjacentSpacesClockwise', () => {
+    expect(
+      board.getAdjacentSpacesClockwise(
+        board.getSpace('51'))
+        .map((space) => space?.id))
+      .deep.eq(['43', '44', '52', '58', '57', '50']);
+
+    expect(
+      board.getAdjacentSpacesClockwise(
+        board.getSpace('20'))
+        .map((space) => space?.id))
+      .deep.eq(['13', undefined, undefined, '28', '27', '19']);
+
+    expect(
+      board.getAdjacentSpacesClockwise(
+        board.getSpace('03'))
+        .map((space) => space?.id))
+      .deep.eq([undefined, undefined, '04', '09', '08', undefined]);
+  });
+
   it('getNthAvailableLandSpace', function() {
     // board spaces start at 03, and the top of the map looks like this
     //

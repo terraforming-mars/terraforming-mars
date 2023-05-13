@@ -1,10 +1,11 @@
-
 import {CardName} from '../common/cards/CardName';
 import {TileType} from '../common/TileType';
 
 export type Tile = {
-  card?: CardName;
   tileType: TileType;
-  protectedHazard?: boolean;
-  covers?: Tile;
+  card?: CardName;
+
+  protectedHazard?: boolean; // For Desperate Measures
+  rotated?: boolean; // For Crashlanding
+  covers?: Tile; // For Ares tiles
 }

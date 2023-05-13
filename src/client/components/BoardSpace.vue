@@ -1,11 +1,9 @@
 <template>
   <div :class="getMainClass()" :data_space_id="space.id">
     <board-space-tile
-      :tileType="space.tileType"
-      :spaceType="space.spaceType"
+      :space="space"
       :aresExtension="aresExtension"
       :tileView="tileView"
-      :highlight="space.highlight"
       :restricted="restricted"
     ></board-space-tile>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>

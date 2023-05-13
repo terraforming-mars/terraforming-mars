@@ -9,7 +9,7 @@ import {ICardRenderTile} from '@/common/cards/render/Types';
 import {generateClassString} from '@/common/utils/utils';
 import {TileType} from '@/common/TileType';
 
-interface Classes {
+type Classes = {
   // The tile div is used to display a full tile. If distinct version
   // of the tile appears for Ares it uses aresTile, otherwise it ses tile.
   tile?: string;
@@ -19,6 +19,7 @@ interface Classes {
   // going to show a whole tile, just a symbol on top of a tile template.
   symbol?: string;
 }
+
 const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.BIOFERTILIZER_FACILITY]: {
     aresTile: 'card-tile-biofertilizer-facility',
@@ -121,9 +122,9 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.WETLANDS]: {
     tile: 'card-tile-wetlands',
   },
-  // [TileType.CRASHLANDING]: {
-  //   tile: 'card-tile-crashlanding',
-  // },
+  [TileType.CRASHLANDING]: {
+    tile: 'card-tile-crashlanding',
+  },
   [TileType.GREENERY]: {},
   [TileType.OCEAN]: {},
   [TileType.CITY]: {},
@@ -131,9 +132,8 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.DUST_STORM_SEVERE]: {},
   [TileType.EROSION_MILD]: {},
   [TileType.EROSION_SEVERE]: {},
-  [TileType.RED_CITY]: {}, // Why is this omitted?
-  [TileType.MARTIAN_NATURE_WONDERS]: {}, // Why is this omitted?
-  // [TileType.CRASHLANDING_ROTATED]: {},
+  [TileType.RED_CITY]: {}, // This isn't shown on a card
+  [TileType.MARTIAN_NATURE_WONDERS]: {}, // This isn't shown on a card
 };
 
 export default Vue.extend({

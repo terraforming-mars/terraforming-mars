@@ -7,7 +7,7 @@ import {Delegate} from '../../turmoil/Turmoil';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
 import {IParty} from '../../turmoil/parties/IParty';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
 import {all} from '../Options';

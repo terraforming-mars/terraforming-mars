@@ -8,7 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
-import {CardRequirements} from '../../../src/server/cards/CardRequirements';
+import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Businessperson} from '../../../src/server/milestones/Businessperson';
 import {Scientist} from '../../../src/server/awards/Scientist';

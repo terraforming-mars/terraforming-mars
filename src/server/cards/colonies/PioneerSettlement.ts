@@ -7,7 +7,7 @@ import {Resource} from '../../../common/Resource';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {max} from '../Options';
 

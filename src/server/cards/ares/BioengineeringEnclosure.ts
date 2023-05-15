@@ -7,7 +7,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 

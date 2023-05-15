@@ -5,7 +5,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {ActionCard} from '../ActionCard';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 
 export class Solarpedia extends ActionCard implements IProjectCard {
   constructor() {

@@ -4,7 +4,7 @@ import {ActionCard} from '../ActionCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MartianMediaCenter extends ActionCard implements IProjectCard {

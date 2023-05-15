@@ -101,9 +101,9 @@ export default Vue.extend({
     },
     resourceTypeTooltip(): string {
       if (this.type === Resource.MEGACREDITS) {
-		    return this.$t("MegaCredits (M€)");
-			}
-			return this.$t(this.type.charAt(0).toUpperCase() + this.type.slice(1));
+        return this.$t("MegaCredits (M€)");
+      }
+      return this.$t(this.type.charAt(0).toUpperCase() + this.type.slice(1));
     },
     productionCountTooltip(): string {
       return this.$t('Production count');

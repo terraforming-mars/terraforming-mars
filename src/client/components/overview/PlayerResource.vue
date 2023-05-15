@@ -1,11 +1,11 @@
 <template>
   <div class="resource_item" :class="mainCSS">
       <div class="resource_item_stock">
-          <i class="resource_icon" :class="iconCSS"></i>
+          <i class="resource_icon tooltip tooltip-bottom" :class="iconCSS" :data-tooltip="resourceTypeTooltip"></i>
           <div class="resource_item_stock_count" data-test="stock-count">{{ count }}</div>
       </div>
       <div class="resource_item_prod">
-          <span class="resource_item_prod_count" data-test="production">{{ productionSign }}{{ production }}</span>
+          <span class="resource_item_prod_count tooltip tooltip-bottom" data-test="production" :data-tooltip="productionCountTooltip">{{ productionSign }}{{ production }}</span>
           <div class="shield_parent" data-test="protection-shield"> <!-- Why is this a child of resource_item_prod?-->
             <div v-if="protectionIcon !== ''" :class="protectionIcon"></div>
             <div v-if="showProductionProtectedIcon" class="shield_production_protection"></div>
@@ -98,6 +98,15 @@ export default Vue.extend({
     },
     showResourceProtectionIcon(): boolean {
       return this.productionProtection === 'on' && this.resourceProtection !== 'off';
+    },
+    resourceTypeTooltip(): string {
+      if (this.type === Resource.MEGACREDITS) {
+        return this.$t('MegaCredits (M€)');
+      }
+      return this.$t(this.type.charAt(0).toUpperCase() + this.type.slice(1));
+    },
+    productionCountTooltip(): string {
+      return this.$t('Production count');
     },
   },
 });

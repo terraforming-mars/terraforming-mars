@@ -515,6 +515,7 @@ export enum CardName {
     GREAT_DAM_ARES = 'Great Dam:ares',
     INDUSTRIAL_CENTER_ARES = 'Industrial Center:ares',
     LAVA_FLOWS_ARES = 'Lava Flows:ares',
+    MAGNETIC_FIELD_GENERATORS_ARES = 'Magnetic Field Generators:ares',
     MARKETING_EXPERTS = 'Marketing Experts',
     METALLIC_ASTEROID = 'Metallic Asteroid',
     MINING_AREA_ARES = 'Mining Area:ares',

@@ -13,6 +13,7 @@ import {GeologicalSurvey} from './GeologicalSurvey';
 import {GreatDamAres} from './GreatDamAres';
 import {IndustrialCenterAres} from './IndustrialCenterAres';
 import {LavaFlowsAres} from './LavaFlowsAres';
+import {MagneticFieldGeneratorsAres} from './MagneticFieldGeneratorsAres';
 import {MarketingExperts} from './MarketingExperts';
 import {MetallicAsteroid} from './MetallicAsteroid';
 import {MiningAreaAres} from './MiningAreaAres';
@@ -42,6 +43,7 @@ export const ARES_CARD_MANIFEST = new ModuleManifest({
     [CardName.INDUSTRIAL_CENTER_ARES]: {Factory: IndustrialCenterAres},
     [CardName.GREAT_DAM_ARES]: {Factory: GreatDamAres},
     [CardName.LAVA_FLOWS_ARES]: {Factory: LavaFlowsAres},
+    [CardName.MAGNETIC_FIELD_GENERATORS_ARES]: {Factory: MagneticFieldGeneratorsAres},
     [CardName.MARKETING_EXPERTS]: {Factory: MarketingExperts},
     [CardName.METALLIC_ASTEROID]: {Factory: MetallicAsteroid},
     [CardName.MINING_AREA_ARES]: {Factory: MiningAreaAres},

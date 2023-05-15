@@ -101,7 +101,7 @@ export default Vue.extend({
     },
     resourceTypeTooltip(): string {
       if (this.type === Resource.MEGACREDITS) {
-        return this.$t("MegaCredits (M€)");
+        return this.$t('MegaCredits (M€)');
       }
       return this.$t(this.type.charAt(0).toUpperCase() + this.type.slice(1));
     },

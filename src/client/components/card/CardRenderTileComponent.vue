@@ -65,6 +65,7 @@ const TILE_CLASSES: Record<TileType, Classes> = {
     symbol: 'card-tile-symbol-lunar-mine-urbanization',
   },
   [TileType.MAGNETIC_FIELD_GENERATORS]: {
+    aresTile: 'card-tile-magnetic-field-generators-ares',
     symbol: 'card-tile-symbol-magnetic-field-generators',
   },
   [TileType.METALLIC_ASTEROID]: {

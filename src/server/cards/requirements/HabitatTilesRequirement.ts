@@ -1,15 +1,12 @@
 import {Player} from '../../Player';
+import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {GlobalParameterRequirement} from './GlobalParameterRequirement';
-import {GlobalParameter} from '../../../common/GlobalParameter';
+import {InequalityRequirement} from './InequalityRequirement';
 import {RequirementType} from '../../../common/cards/RequirementType';
 
-export class HabitatRateRequirement extends GlobalParameterRequirement {
-  public readonly type = RequirementType.HABITAT_RATE;
-  protected readonly parameter = GlobalParameter.MOON_HABITAT_RATE;
-
-  public getGlobalValue(player: Player) {
-    return MoonExpansion.moonData(player.game).colonyRate;
+export class HabitatTilesRequirement extends InequalityRequirement {
+  public readonly type = RequirementType.HABITAT_TILES;
+  public override getScore(player: Player): number {
+    return MoonExpansion.spaces(player.game, TileType.MOON_HABITAT, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length;
   }
 }
-

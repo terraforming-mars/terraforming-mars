@@ -4,23 +4,14 @@ import {RequirementType} from '../../../common/cards/RequirementType';
 import {ICardRequirements} from '../../../common/cards/ICardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {
-  MAX_OCEAN_TILES,
-  MAX_OXYGEN_LEVEL,
-  MAX_TEMPERATURE, MAX_VENUS_SCALE,
-  MIN_OXYGEN_LEVEL,
-  MIN_TEMPERATURE,
-  MIN_VENUS_SCALE,
-} from '../../../common/constants';
-// import {CardName} from '../../common/cards/CardName';
 import {CardRequirement, Options} from './CardRequirement';
 import {ChairmanRequirement} from './ChairmanRequirement';
 import {CitiesRequirement} from './CitiesRequirement';
 import {ColoniesRequirement} from './ColoniesRequirement';
 import {FloatersRequirement} from './FloatersRequirement';
 import {GreeneriesRequirement} from './GreeneriesRequirement';
-import {HabitatTilesRequirement} from './HabitatRateRequirement';
-import {HabitatRateRequirement} from './HabitatTilesRequirement';
+import {HabitatRateRequirement} from './HabitatRateRequirement';
+import {HabitatTilesRequirement} from './HabitatTilesRequirement';
 import {LogisticsRateRequirement} from './LogisticsRateRequirement';
 import {MiningRateRequirement} from './MiningRateRequirement';
 import {MiningTilesRequirement} from './MiningTilesRequirement';
@@ -58,8 +49,6 @@ export class CardRequirements implements ICardRequirements {
     if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
-    // // Think Tank hack
-    // const thinkTankResources = player.getCard(CardName.THINK_TANK).getResourceCount;
     return this.requirements.every((requirement: CardRequirement) => requirement.satisfies(player));
   }
 }

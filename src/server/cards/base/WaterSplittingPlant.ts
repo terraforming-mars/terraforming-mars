@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class WaterSplittingPlant extends ActionCard implements IProjectCard {

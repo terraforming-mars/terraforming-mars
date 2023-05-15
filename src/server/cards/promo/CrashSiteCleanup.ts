@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Resource} from '../../../common/Resource';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class CrashSiteCleanup extends Card implements IProjectCard {

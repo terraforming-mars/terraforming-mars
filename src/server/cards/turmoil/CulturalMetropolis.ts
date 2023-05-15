@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Turmoil} from '../../turmoil/Turmoil';
 

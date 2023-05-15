@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {

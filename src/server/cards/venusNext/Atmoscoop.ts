@@ -10,7 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import * as constants from '../../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';

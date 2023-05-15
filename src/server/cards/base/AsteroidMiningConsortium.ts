@@ -6,7 +6,7 @@ import {Player} from '../../Player';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';

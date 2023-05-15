@@ -8,7 +8,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {played} from '../Options';
 
 export class GMOContract extends Card implements IProjectCard {

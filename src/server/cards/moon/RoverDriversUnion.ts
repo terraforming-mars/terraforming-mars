@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 
 export class RoverDriversUnion extends Card implements IProjectCard {
   constructor() {

@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';

@@ -1,10 +1,9 @@
-import {Resource} from '../../common/Resource';
-import {PartyName} from '../../common/turmoil/PartyName';
-import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
-import {RequirementType} from '../../common/cards/RequirementType';
-import {ICardRequirements} from '../../common/cards/ICardRequirements';
-import {Tag} from '../../common/cards/Tag';
-import {Player} from '../Player';
+import {Resource} from '../../../common/Resource';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {RequirementType} from '../../../common/cards/RequirementType';
+import {ICardRequirements} from '../../../common/cards/ICardRequirements';
+import {Tag} from '../../../common/cards/Tag';
+import {Player} from '../../Player';
 import {
   MAX_OCEAN_TILES,
   MAX_OXYGEN_LEVEL,
@@ -12,7 +11,31 @@ import {
   MIN_OXYGEN_LEVEL,
   MIN_TEMPERATURE,
   MIN_VENUS_SCALE,
-} from '../../common/constants';
+} from '../../../common/constants';
+// import {CardName} from '../../common/cards/CardName';
+import {CardRequirement, Options} from './CardRequirement';
+import {ChairmanRequirement} from './ChairmanRequirement';
+import {CitiesRequirement} from './CitiesRequirement';
+import {ColoniesRequirement} from './ColoniesRequirement';
+import {FloatersRequirement} from './FloatersRequirement';
+import {GreeneriesRequirement} from './GreeneriesRequirement';
+import {HabitatTilesRequirement} from './HabitatRateRequirement';
+import {HabitatRateRequirement} from './HabitatTilesRequirement';
+import {LogisticsRateRequirement} from './LogisticsRateRequirement';
+import {MiningRateRequirement} from './MiningRateRequirement';
+import {MiningTilesRequirement} from './MiningTilesRequirement';
+import {OceanRequirement} from './OceanRequirement';
+import {OxygenRequirement} from './OxygenRequirement';
+import {PartyLeadersRequirement} from './PartyLeadersRequirement';
+import {PartyRequirement} from './PartyRequirement';
+import {ProductionRequirement} from './ProductionRequirement';
+import {RemovedPlantsRequirement} from './RemovedPlantsRequirement';
+import {ResourceTypeRequirement} from './ResourceTypeRequirement';
+import {RoadTilesRequirement} from './RoadTilesRequirement';
+import {TRRequirement} from './TRRequirement';
+import {TagCardRequirement} from './TagCardRequirement';
+import {TemperatureRequirement} from './TemperatureRequirement';
+import {VenusRequirement} from './VenusRequirement';
 
 export class CardRequirements implements ICardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
@@ -35,11 +58,11 @@ export class CardRequirements implements ICardRequirements {
     if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
+    // // Think Tank hack
+    // const thinkTankResources = player.getCard(CardName.THINK_TANK).getResourceCount;
     return this.requirements.every((requirement: CardRequirement) => requirement.satisfies(player));
   }
 }
-
-export type Options = {max?: boolean, all?: boolean, text?: string};
 
 class Builder {
   private reqs: Array<CardRequirement> = [];
@@ -49,81 +72,62 @@ class Builder {
   }
 
   public oceans(amount: number = 1, options?: Options): Builder {
-    const req = new CardRequirement(RequirementType.OCEANS, amount, options);
-    if (req.amount <= 0 || req.amount > MAX_OCEAN_TILES) {
-      throw new Error('Ocean tiles must be above 0 and below ' + MAX_OCEAN_TILES);
-    }
-    this.reqs.push(req);
+    this.reqs.push(new OceanRequirement(amount, options));
     return this;
   }
 
   public oxygen(amount: number = 1, options?: Options): Builder {
-    const req = new CardRequirement(RequirementType.OXYGEN, amount, options);
-    if (req.amount < MIN_OXYGEN_LEVEL || req.amount > MAX_OXYGEN_LEVEL) {
-      throw new Error('Oxygen must be above ' + MIN_OXYGEN_LEVEL + ' and below ' + MAX_OXYGEN_LEVEL);
-    }
-    this.reqs.push(req);
+    this.reqs.push(new OxygenRequirement(amount, options));
     return this;
   }
 
   public temperature(amount: number = 1, options?: Options): Builder {
-    const req = new CardRequirement(RequirementType.TEMPERATURE, amount, options);
-    if (req.amount < MIN_TEMPERATURE || req.amount > MAX_TEMPERATURE) {
-      throw new Error('Temperature must be above ' + MIN_TEMPERATURE + ' and below ' + MAX_TEMPERATURE);
-    }
-    if (req.amount % 2 !== 0) {
-      throw new Error('Temperature must be even');
-    }
-    this.reqs.push(req);
+    this.reqs.push(new TemperatureRequirement(amount, options));
     return this;
   }
 
   public venus(amount: number = 1, options?: Options): Builder {
-    const req =new CardRequirement(RequirementType.VENUS, amount, options);
-    if (req.amount < MIN_VENUS_SCALE || req.amount > MAX_VENUS_SCALE) {
-      throw new Error('Venus must be above ' + MIN_VENUS_SCALE + ' and below ' + MAX_VENUS_SCALE);
-    }
-    this.reqs.push(req);
+    this.reqs.push(new VenusRequirement(amount, options));
     return this;
   }
 
   public tr(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.TR, amount, options));
+    this.reqs.push(new TRRequirement(amount, options));
     return this;
   }
 
   public chairman(): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.CHAIRMAN));
+    this.reqs.push(new ChairmanRequirement());
     return this;
   }
 
   public resourceTypes(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.RESOURCE_TYPES, amount, options));
+    this.reqs.push(new ResourceTypeRequirement(amount, options));
     return this;
   }
 
   public greeneries(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.GREENERIES, amount, options));
+    this.reqs.push(new GreeneriesRequirement(amount, options));
     return this;
   }
 
   public cities(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.CITIES, amount, options));
+    this.reqs.push(new CitiesRequirement(amount, options));
     return this;
   }
 
   public colonies(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.COLONIES, amount, options));
+    this.reqs.push(new ColoniesRequirement(amount, options));
     return this;
   }
 
   public floaters(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.FLOATERS, amount, options));
+    this.reqs.push(new FloatersRequirement(amount, options));
     return this;
   }
 
   public partyLeaders(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.PARTY_LEADERS, amount, options));
+    this.reqs.push(new PartyLeadersRequirement(amount, options));
     return this;
   }
 
@@ -133,47 +137,47 @@ class Builder {
   }
 
   public production(resource: Resource, amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new ProductionCardRequirement(resource, amount, options));
+    this.reqs.push(new ProductionRequirement(resource, amount, options));
     return this;
   }
 
   public party(party: PartyName): Builder {
-    this.reqs.push(new PartyCardRequirement(party));
+    this.reqs.push(new PartyRequirement(party));
     return this;
   }
 
   public plantsRemoved(): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.REMOVED_PLANTS));
+    this.reqs.push(new RemovedPlantsRequirement());
     return this;
   }
 
   public habitatRate(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.HABITAT_RATE, amount, options));
+    this.reqs.push(new HabitatRateRequirement(amount, options));
     return this;
   }
 
   public miningRate(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.MINING_RATE, amount, options));
+    this.reqs.push(new MiningRateRequirement(amount, options));
     return this;
   }
 
   public logisticRate(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.LOGISTIC_RATE, amount, options));
+    this.reqs.push(new LogisticsRateRequirement(amount, options));
     return this;
   }
 
   public habitatTiles(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.HABITAT_TILES, amount, options));
+    this.reqs.push(new HabitatTilesRequirement(amount, options));
     return this;
   }
 
   public miningTiles(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.MINING_TILES, amount, options));
+    this.reqs.push(new MiningTilesRequirement(amount, options));
     return this;
   }
 
   public roadTiles(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.ROAD_TILES, amount, options));
+    this.reqs.push(new RoadTilesRequirement(amount, options));
     return this;
   }
 }

@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {IProjectCard} from '../IProjectCard';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
 
 export class LunarSecurityStations extends Card implements IProjectCard {

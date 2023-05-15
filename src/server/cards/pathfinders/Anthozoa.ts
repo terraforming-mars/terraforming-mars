@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardResource} from '../../../common/CardResource';
 
 export class Anthozoa extends Card implements IProjectCard, IActionCard {

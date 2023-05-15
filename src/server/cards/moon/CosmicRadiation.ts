@@ -6,7 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';

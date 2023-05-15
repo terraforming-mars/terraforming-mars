@@ -7,7 +7,7 @@ import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 
 export interface RobotCard {

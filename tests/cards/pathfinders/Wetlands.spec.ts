@@ -9,7 +9,7 @@ import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ISpace} from '../../../src/server/boards/ISpace';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
-import {CardRequirements} from '../../../src/server/cards/CardRequirements';
+import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
 import {CardName} from '../../../src/common/cards/CardName';
 
 const toSpaceId = (space: ISpace): string => space.id;

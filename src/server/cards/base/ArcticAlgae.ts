@@ -8,7 +8,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, max} from '../Options';
 import {Board} from '../../boards/Board';

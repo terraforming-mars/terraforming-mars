@@ -3,7 +3,7 @@ import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 
 export class OzoneGenerators extends ActionCard implements IProjectCard {

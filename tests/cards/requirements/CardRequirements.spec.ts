@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {CardRequirements} from '../../src/server/cards/CardRequirements';
-import {runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel, churnAction} from '../TestingUtils';
-import {AdaptationTechnology} from '../../src/server/cards/base/AdaptationTechnology';
-import {TileType} from '../../src/common/TileType';
-import {Ants} from '../../src/server/cards/base/Ants';
-import {Ceres} from '../../src/server/colonies/Ceres';
-import {Celestic} from '../../src/server/cards/venusNext/Celestic';
-import {PartyName} from '../../src/common/turmoil/PartyName';
-import {Tag} from '../../src/common/cards/Tag';
-import {ResearchCoordination} from '../../src/server/cards/prelude/ResearchCoordination';
-import {Resource} from '../../src/common/Resource';
-import {SmallAsteroid} from '../../src/server/cards/promo/SmallAsteroid';
-import {OrOptions} from '../../src/server/inputs/OrOptions';
-import {TestPlayer} from '../TestPlayer';
-import {testGame} from '../TestGame';
+import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
+import {runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel, churnAction} from '../../TestingUtils';
+import {AdaptationTechnology} from '../../../src/server/cards/base/AdaptationTechnology';
+import {TileType} from '../../../src/common/TileType';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Ceres} from '../../../src/server/colonies/Ceres';
+import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {Tag} from '../../../src/common/cards/Tag';
+import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
+import {Resource} from '../../../src/common/Resource';
+import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('CardRequirements', function() {
   let player: TestPlayer;

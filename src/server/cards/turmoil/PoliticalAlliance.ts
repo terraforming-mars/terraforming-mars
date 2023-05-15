@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class PoliticalAlliance extends Card implements IProjectCard {

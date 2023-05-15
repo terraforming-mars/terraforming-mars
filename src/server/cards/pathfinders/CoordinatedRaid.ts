@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
 

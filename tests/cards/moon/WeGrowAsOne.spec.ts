@@ -25,10 +25,10 @@ describe('WeGrowAsOne', () => {
     player.megaCredits = card.cost;
 
     game.turmoil!.rulingParty = new Unity();
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     game.turmoil!.rulingParty = new Greens();
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

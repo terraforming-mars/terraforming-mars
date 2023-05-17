@@ -23,15 +23,15 @@ describe('LunaStagingStation', () => {
 
     player.titanium = 1;
     moonData.logisticRate = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 0;
     moonData.logisticRate = 2;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 1;
     moonData.logisticRate = 1;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

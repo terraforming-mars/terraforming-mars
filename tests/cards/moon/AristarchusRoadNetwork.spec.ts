@@ -25,9 +25,9 @@ describe('AristarchusRoadNetwork', () => {
     player.cardsInHand = [card];
     player.steel = 1;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
     player.steel = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {

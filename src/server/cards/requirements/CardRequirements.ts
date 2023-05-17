@@ -4,7 +4,8 @@ import {RequirementType} from '../../../common/cards/RequirementType';
 import {ICardRequirements} from '../../../common/cards/ICardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {CardRequirement, Options} from './CardRequirement';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRequirement, Options, YesAnd} from './CardRequirement';
 import {ChairmanRequirement} from './ChairmanRequirement';
 import {CitiesRequirement} from './CitiesRequirement';
 import {ColoniesRequirement} from './ColoniesRequirement';
@@ -36,7 +37,7 @@ export class CardRequirements implements ICardRequirements {
     f(builder);
     return builder.build();
   }
-  public satisfies(player: Player): boolean {
+  public satisfies(player: Player): boolean | YesAnd {
     // Process tags separately, though max & any tag criteria will be processed later.
     // This pre-computation takes the wild tag into account.
     const tags: Array<Tag> = [];
@@ -49,7 +50,18 @@ export class CardRequirements implements ICardRequirements {
     if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
-    return this.requirements.every((requirement: CardRequirement) => requirement.satisfies(player));
+    const thinkTankResources = player.playedCards.find((c) => c.name === CardName.THINK_TANK)?.resourceCount;
+    let result: boolean | YesAnd = true;
+    for (const requirement of this.requirements) {
+      const satisfies = requirement.satisfies(player, thinkTankResources);
+      if (satisfies === false) {
+        return false;
+      }
+      if (typeof(satisfies) === 'object') {
+        result = satisfies;
+      }
+    }
+    return result;
   }
 }
 

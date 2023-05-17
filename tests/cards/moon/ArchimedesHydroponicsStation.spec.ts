@@ -18,13 +18,13 @@ describe('ArchimedesHydroponicsStation', () => {
     player.megaCredits = card.cost;
 
     player.production.override({energy: 1, megacredits: -4});
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.production.override({energy: 0, megacredits: -4});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.production.override({energy: 1, megacredits: -5});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

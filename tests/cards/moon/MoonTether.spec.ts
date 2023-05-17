@@ -19,14 +19,14 @@ describe('MoonTether', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.playedCards.push(fakeCard({tags: [Tag.SPACE, Tag.SPACE, Tag.SPACE, Tag.SPACE, Tag.SPACE]}));
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     // Pushing a sixth tag will do it.
     player.playedCards.push(fakeCard({tags: [Tag.SPACE]}));
-    expect(player.getPlayableCards()).includes(card);
+    expect(player.getPlayableCardsForTest()).includes(card);
   });
 
   it('play', () => {

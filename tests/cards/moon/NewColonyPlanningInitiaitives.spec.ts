@@ -22,10 +22,10 @@ describe('NewColonyPlanningInitiaitives', () => {
     player.megaCredits = card.cost;
 
     moonData.colonyRate = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     moonData.colonyRate = 1;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

@@ -9,6 +9,7 @@ import {played} from '../Options';
 import {IActionCard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
+import {PlayableCard} from '../IProjectCard';
 
 export class Odyssey extends Card implements ICorporationCard, IActionCard {
   constructor() {
@@ -41,14 +42,19 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
   }
 
 
-  public availableEventCards(player: Player) {
+  private availableEventCards(player: Player) {
     this.checkLoops++;
     try {
-      return player.playedCards.filter((card) => {
-        return card.type === CardType.EVENT &&
-        card.cost <= 16 &&
-        player.canPlay(card);
-      });
+      const array: Array<PlayableCard> = [];
+      for (const card of player.playedCards) {
+        if (card.type === CardType.EVENT && card.cost <= 16) {
+          const details = player.canPlay(card);
+          if (details !== false) {
+            array.push({card, details});
+          }
+        }
+      }
+      return array;
     } finally {
       this.checkLoops--;
     }

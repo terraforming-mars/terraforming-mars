@@ -23,10 +23,10 @@ describe('ColonistShuttles', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 0;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {

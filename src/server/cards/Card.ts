@@ -174,7 +174,8 @@ export abstract class Card {
     return this.properties.tilesBuilt || [];
   }
   public canPlay(player: Player) {
-    if (this.requirements?.satisfies(player) === false) {
+    const satisfied = this.requirements?.satisfies(player);
+    if (satisfied === false) {
       return false;
     }
     if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {

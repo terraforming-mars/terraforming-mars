@@ -15,10 +15,10 @@ describe('LunaProjectOffice', () => {
     player.megaCredits = card.cost;
 
     player.tagsForTest = {science: 2};
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.tagsForTest = {science: 1};
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play - solo', function() {

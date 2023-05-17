@@ -26,10 +26,10 @@ describe('LunaConference', () => {
     player.megaCredits = card.cost;
 
     game.turmoil!.rulingParty = new Scientists();
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     game.turmoil!.rulingParty = new Greens();
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

@@ -270,7 +270,7 @@ export default Vue.extend({
     hasWarning(): boolean {
       return this.warning !== undefined;
     },
-    hasCardWarning(): boolean {
+    selectedCardHasWarning(): boolean {
       return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveSteelWarning(): boolean {
@@ -355,7 +355,7 @@ export default Vue.extend({
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="hasCardWarning()" class="card-warning">{{ $t(card.warning) }}</div>
+    <div v-if="selectedCardHasWarning()" class="card-warning">{{ $t(card.warning) }}</div>
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 

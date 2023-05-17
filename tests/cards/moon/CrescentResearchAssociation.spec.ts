@@ -32,23 +32,23 @@ describe('CrescentResearchAssociation', () => {
 
     player.tagsForTest = {moon: 0};
     player.megaCredits = 14;
-    expect(player.getPlayableCards()).has.members([mareNectarisMine, predators]);
+    expect(player.getPlayableCardsForTest()).has.members([mareNectarisMine, predators]);
 
     player.tagsForTest = {moon: 0};
     player.megaCredits = 13;
-    expect(player.getPlayableCards()).is.empty;
+    expect(player.getPlayableCardsForTest()).is.empty;
 
     player.tagsForTest = {moon: 1};
     player.megaCredits = 13;
-    expect(player.getPlayableCards()).has.members([mareNectarisMine]);
+    expect(player.getPlayableCardsForTest()).has.members([mareNectarisMine]);
 
     player.tagsForTest = {moon: 1};
     player.megaCredits = 12;
-    expect(player.getPlayableCards()).is.empty;
+    expect(player.getPlayableCardsForTest()).is.empty;
 
     player.tagsForTest = {moon: 2};
     player.megaCredits = 12;
-    expect(player.getPlayableCards()).has.members([mareNectarisMine]);
+    expect(player.getPlayableCardsForTest()).has.members([mareNectarisMine]);
   });
 
   it('getVictoryPoints', () => {

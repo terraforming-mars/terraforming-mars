@@ -18,7 +18,7 @@ import {PlayerViewModel, Protection, PublicPlayerModel} from '../../common/model
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectPayment} from '../inputs/SelectPayment';
-import {SelectProjectCardToPlay} from '../inputs/SelectProjectCardToPlay';
+import {PlayCardMetadata, SelectProjectCardToPlay} from '../inputs/SelectProjectCardToPlay';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
@@ -261,7 +261,7 @@ export class Server {
       break;
     case PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY:
       const spctp: SelectProjectCardToPlay = waitingFor as SelectProjectCardToPlay;
-      playerInputModel.cards = this.getCards(player, spctp.cards, {showCalculatedCost: true, reserveUnits: spctp.reserveUnits});
+      playerInputModel.cards = this.getCards(player, spctp.cards, {showCalculatedCost: true, extras: spctp.extras});
       playerInputModel.microbes = player.getSpendableMicrobes();
       playerInputModel.floaters = player.getSpendableFloaters();
       playerInputModel.canUseHeat = player.canUseHeatAsMegaCredits;
@@ -359,7 +359,7 @@ export class Server {
     options: {
       showResources?: boolean,
       showCalculatedCost?: boolean,
-      reserveUnits?: Array<Units>,
+      extras?: Map<CardName, PlayCardMetadata>,
       enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
     } = {},
   ): Array<CardModel> {
@@ -374,15 +374,24 @@ export class Server {
         discount = [{tag: Tag.MARS, amount: player.tags.count(Tag.MARS)}];
       }
 
+
       const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
+      let warning = card.warning;
+      const playCardMetadata = options?.extras?.get(card.name);
+      if (typeof(playCardMetadata?.details) === 'object') {
+        const thinkTankResources = playCardMetadata?.details.thinkTankResources;
+        if ((thinkTankResources ?? 0) > 0) {
+          warning = `Playing ${card.name} Consumes ${thinkTankResources} data from Think Tank`;
+        }
+      }
 
       const model: CardModel = {
         resources: options.showResources ? card.resourceCount : undefined,
         name: card.name,
         calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
         isDisabled: isDisabled,
-        warning: card.warning,
-        reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
+        warning: warning,
+        reserveUnits: playCardMetadata?.reserveUnits ?? Units.EMPTY,
         bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
         discount: discount,
         cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,

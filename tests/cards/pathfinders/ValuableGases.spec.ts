@@ -35,7 +35,7 @@ describe('ValuableGases', function() {
   });
 
   it('Should play', function() {
-    expect(player.getPlayableCards()).is.empty;
+    expect(player.getPlayableCardsForTest()).is.empty;
 
     card.play(player);
 
@@ -45,7 +45,7 @@ describe('ValuableGases', function() {
     expect(selectProjectCardToPlay.cards.map((card) => card.name)).has.members([CardName.LOCAL_SHADING, CardName.FLOATING_HABS]);
     expect(player.megaCredits).eq(10);
 
-    selectProjectCardToPlay.cb(localShading, {
+    selectProjectCardToPlay.payAndPlay(localShading, {
       heat: 0,
       megaCredits: localShading.cost,
       steel: 0,

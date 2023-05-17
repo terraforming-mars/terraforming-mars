@@ -7,8 +7,10 @@ import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
+import {testGame} from '../../TestGame';
 
 describe('CosmicRadiation', () => {
+  let game: Game;
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
@@ -16,10 +18,7 @@ describe('CosmicRadiation', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player1 = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.YELLOW.newPlayer();
-    const game = Game.newInstance('gameid', [player1, player2, player3], player1, {moonExpansion: true});
+    [game, player1, player2, player3] = testGame(3, {moonExpansion: true, turmoilExtension: true});
     card = new CosmicRadiation();
     moonData = MoonExpansion.moonData(game);
   });
@@ -29,10 +28,10 @@ describe('CosmicRadiation', () => {
     player1.megaCredits = card.cost;
 
     moonData.miningRate = 4;
-    expect(player1.getPlayableCards()).does.include(card);
+    expect(player1.getPlayableCardsForTest()).does.include(card);
 
     moonData.miningRate = 3;
-    expect(player1.getPlayableCards()).does.not.include(card);
+    expect(player1.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

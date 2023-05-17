@@ -24,15 +24,15 @@ describe('LTFPrivileges', () => {
 
     const arn = new AristarchusRoadNetwork();
     player.cardsInHand = [arn];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
+    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
 
     player.titanium = 0;
     player.steel = 0;
-    expect(player.getPlayableCards().map((card) => card.name)).is.empty;
+    expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
 
     // And this one shows that with Improved Moon Concrete, doesn't need steel.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
+    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
   });
 });
 

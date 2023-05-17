@@ -3,9 +3,17 @@ import {Player} from '../Player';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
+import {YesAnd} from './requirements/CardRequirement';
+
+export type CanPlayResponse = boolean | YesAnd;
+
+export type PlayableCard = {
+  card: IProjectCard,
+  details?: CanPlayResponse,
+};
 
 export interface IProjectCard extends ICard {
-    canPlay: (player: Player) => boolean;
+    canPlay(player: Player): CanPlayResponse;
     cost: number;
 
     // This field serves two purposes:

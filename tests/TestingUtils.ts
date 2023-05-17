@@ -12,7 +12,7 @@ import {Log} from '../src/common/logs/Log';
 import {Greens} from '../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../src/server/turmoil/parties/Reds';
-import {IProjectCard} from '../src/server/cards/IProjectCard';
+import {CanPlayResponse, IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
@@ -125,8 +125,8 @@ export function formatMessage(message: Message | string): string {
   return Log.applyData(message, (datum) => datum.value);
 }
 
-export function testRedsCosts(cb: () => boolean, player: Player, initialMegacredits: number, passingDelta: number) {
-  const turmoil = player.game.turmoil!;
+export function testRedsCosts(cb: () => CanPlayResponse, player: Player, initialMegacredits: number, passingDelta: number) {
+  const turmoil = Turmoil.getTurmoil(player.game);
   turmoil.rulingParty = new Greens();
   PoliticalAgendas.setNextAgenda(turmoil, player.game);
   player.megaCredits = initialMegacredits;

@@ -100,6 +100,7 @@ import {SurveyMission} from './SurveyMission';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
 import {TheNewSpaceRace} from './TheNewSpaceRace';
+import {ThinkTank} from './ThinkTank';
 import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
@@ -157,7 +158,7 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.EXPEDITION_TO_THE_SURFACE_VENUS]: {Factory: ExpeditionToTheSurfaceVenus, compatibility: 'venus'},
     [CardName.LAST_RESORT_INGENUITY]: {Factory: LastResortIngenuity},
     [CardName.CRASHLANDING]: {Factory: Crashlanding, compatibility: 'ares'},
-    // // [CardName.THINK_TANK]: {Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
+    [CardName.THINK_TANK]: {Factory: ThinkTank},
     [CardName.BOTANICAL_EXPERIENCE]: {Factory: BotanicalExperience},
     [CardName.CRYPTOCURRENCY]: {Factory: Cryptocurrency},
     [CardName.RICH_DEPOSITS]: {Factory: RichDeposits},

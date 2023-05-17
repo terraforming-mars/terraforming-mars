@@ -4,6 +4,11 @@ import {Player} from '../../Player';
 
 export type Options = {max?: boolean, all?: boolean, text?: string};
 
+export type YesAnd = {
+  ok: true,
+  thinkTankResources?: number
+}
+
 export abstract class CardRequirement implements ICardRequirement {
   public abstract readonly type: RequirementType;
   public readonly amount: number;
@@ -19,5 +24,5 @@ export abstract class CardRequirement implements ICardRequirement {
     this.text = options?.text;
   }
 
-  public abstract satisfies(player: Player) : boolean;
+  public abstract satisfies(player: Player, thinkTankResources?: number) : boolean | YesAnd;
 }

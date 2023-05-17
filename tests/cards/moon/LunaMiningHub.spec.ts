@@ -27,22 +27,22 @@ describe('LunaMiningHub', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 5;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 0;
     player.steel = 1;
     moonData.miningRate = 5;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 1;
     player.steel = 0;
     moonData.miningRate = 5;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 4;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

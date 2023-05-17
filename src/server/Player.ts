@@ -65,6 +65,8 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {newMessage} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
+import {YesAnd} from './cards/requirements/CardRequirement';
+import {PlayableCard} from './cards/IProjectCard';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -1402,7 +1404,7 @@ export class Player {
     return this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true);
   }
 
-  public getPlayableCards(): Array<IProjectCard> {
+  public getPlayableCards(): Array<PlayableCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
     const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
@@ -1412,7 +1414,17 @@ export class Player {
       }
     }
 
-    return candidateCards.filter((card) => this.canPlay(card));
+    const playableCards: Array<PlayableCard> = [];
+    for (const card of candidateCards) {
+      const canPlay = this.canPlay(card);
+      if (canPlay !== false) {
+        playableCards.push({
+          card,
+          details: canPlay,
+        });
+      }
+    }
+    return playableCards;
   }
 
   // TODO(kberg): After migration, see if this can become private again.
@@ -1428,7 +1440,7 @@ export class Player {
       });
   }
 
-  public canPlay(card: IProjectCard): boolean {
+  public canPlay(card: IProjectCard): boolean | YesAnd {
     return this.canAffordCard(card) && this.simpleCanPlay(card);
   }
 
@@ -1436,11 +1448,23 @@ export class Player {
    * Verify if requirements for the card can be met, ignoring the project cost.
    * Only made public for tests.
    */
-  public simpleCanPlay(card: IProjectCard): boolean {
+  // TODO(kberg): use CanPlayResponse
+  public simpleCanPlay(card: IProjectCard): boolean | YesAnd {
+    let satisfies: boolean | YesAnd = true;
+    if (card.requirements !== undefined) {
+      satisfies = card.requirements.satisfies(this);
+      if (satisfies === false) {
+        return false;
+      }
+    }
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
       return false;
     }
-    return card.canPlay(this);
+    const canPlay = card.canPlay(this);
+    if (canPlay === false) {
+      return false;
+    }
+    return typeof(canPlay) === 'object' ? canPlay : satisfies;
   }
 
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {

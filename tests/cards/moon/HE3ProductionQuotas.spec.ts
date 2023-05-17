@@ -32,19 +32,19 @@ describe('HE3ProductionQuotas', () => {
     spaces[2].tile = {tileType: TileType.MOON_MINE};
 
     player.steel = 3;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     game.turmoil!.rulingParty = new Greens();
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
 
     game.turmoil!.rulingParty = new Kelvinists();
     player.steel = 2;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.steel = 3;
     spaces[3].tile = {tileType: TileType.MOON_MINE};
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

@@ -27,15 +27,15 @@ describe('LunaTrainStation', () => {
 
     player.steel = 2;
     moonData.logisticRate = 5;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.steel = 2;
     moonData.logisticRate = 4;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.steel = 1;
     moonData.logisticRate = 5;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

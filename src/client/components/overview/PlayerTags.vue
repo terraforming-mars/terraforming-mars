@@ -201,7 +201,8 @@ export default Vue.extend({
         if (!isInGame(entry.name, this.playerView.game)) {
           return false;
         }
-        if (entry.count === 0) {
+
+        if (entry.count === 0 && entry.discount === 0) {
           if (this.hideZeroTags || concise) {
             return false;
           }

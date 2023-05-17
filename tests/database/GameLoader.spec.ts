@@ -224,4 +224,34 @@ describe('GameLoader', function() {
     expect(newGame.lastSaveId).eq(3);
     expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2]);
   });
+
+  it('saveGame', async () => {
+    game.generation = 12;
+    instance.saveGame(game);
+
+    expect(game.lastSaveId).eq(2);
+
+    game.generation = 13;
+    instance.saveGame(game);
+
+    expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2]);
+  });
+
+
+  it('saveGame, already deleted', async () => {
+    game.generation = 12;
+    instance.saveGame(game);
+
+    expect(game.lastSaveId).eq(2);
+
+    game.generation = 13;
+    instance.saveGame(game);
+
+    database.markFinished(game.id);
+    database.compressCompletedGames();
+  });
+
+  it('completeGame', () => {
+
+  });
 });

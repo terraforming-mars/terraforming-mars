@@ -69,6 +69,8 @@ export interface IDatabase {
     /**
      * Saves the current state of the game. at a supplied save point. Used for
      * interim game updates.
+     *
+     * Do not call directly.
      */
     saveGame(game: Game): Promise<void>;
 
@@ -109,13 +111,6 @@ export interface IDatabase {
 
 
     /**
-     * Perform a regular database maintenance:
-     * 1. purge unfinished games after a set time period
-     * 2. Compress finished games after a set time period.
-     */
-    maintenance(): Promise<unknown>;
-
-    /**
      * A maintenance task that purges abandoned solo games older
      * than a given date range.
      *
@@ -123,9 +118,14 @@ export interface IDatabase {
      * * In PostgreSQL, it uses a default of 10 days
      * * In Sqlite, it doesn't purge
      * * This whole method is ignored in LocalFilesystem.
+     *
+     * Returns a list of purged Game IDs.
      */
-    purgeUnfinishedGames(maxGameDays?: string): Promise<void>;
+    purgeUnfinishedGames(maxGameDays?: string): Promise<Array<GameId>>;
 
+    /**
+     * A maintenance task that compresses completed games.
+     */
     compressCompletedGames(maxGameDays?: string): Promise<unknown>;
 
     /**

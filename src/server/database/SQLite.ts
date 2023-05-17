@@ -132,16 +132,11 @@ export class SQLite implements IDatabase {
   async markFinished(gameId: GameId): Promise<void> {
     const promise1 = this.asyncRun('INSERT into completed_game (game_id) values (?)', [gameId]);
     const promise2 = this.asyncRun('UPDATE games SET status = \'finished\' WHERE game_id = ?', [gameId]);
-    const promise3 = this.maintenance();
-    await Promise.all([promise1, promise2, promise3]);
+    await Promise.all([promise1, promise2]);
   }
 
 
-  maintenance(): Promise<unknown> {
-    return Promise.all([this.purgeUnfinishedGames(), this.compressCompletedGames()]);
-  }
-
-  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<Array<GameId>> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays !== undefined) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
@@ -155,8 +150,9 @@ export class SQLite implements IDatabase {
         const deleteParticipantsResult = await this.asyncRun(`DELETE FROM participants WHERE game_id in ( ${placeholders} )`, [...gameIds]);
         console.log(`Purged ${deleteParticipantsResult.changes} rows from participants`);
       }
+      return gameIds;
     } else {
-      return Promise.resolve();
+      return Promise.resolve([]);
     }
   }
 

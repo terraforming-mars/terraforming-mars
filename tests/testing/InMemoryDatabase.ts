@@ -6,6 +6,7 @@ import {GameId, ParticipantId} from '../../src/common/Types';
 
 export class InMemoryDatabase implements IDatabase {
   public data: Map<GameId, Array<SerializedGame>> = new Map();
+  private completedGames: Map<GameId, Date> = new Map();
 
   initialize(): Promise<unknown> {
     throw new Error('Method not implemented.');
@@ -74,17 +75,19 @@ export class InMemoryDatabase implements IDatabase {
 
     return Promise.resolve();
   }
-  markFinished(_gameId: GameId): Promise<void> {
-    throw new Error('Method not implemented.');
+  markFinished(gameId: GameId): Promise<void> {
+    this.completedGames.set(gameId, new Date());
+    return Promise.resolve();
   }
-  maintenance(): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  purgeUnfinishedGames(): Promise<void> {
-    throw new Error('Method not implemented.');
+  purgeUnfinishedGames(): Promise<Array<GameId>> {
+    const keys = [...this.data.keys()];
+    for (const key of keys) {
+      this.data.delete(key);
+    }
+    return Promise.resolve(keys);
   }
   compressCompletedGames(): Promise<unknown> {
-    throw new Error('Method not implemented.');
+    return Promise.resolve();
   }
   stats(): Promise<{[ key: string ]: string | number;}> {
     throw new Error('Method not implemented.');

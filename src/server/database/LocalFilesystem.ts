@@ -150,13 +150,9 @@ export class LocalFilesystem implements IDatabase {
     return Promise.resolve();
   }
 
-  maintenance(): Promise<void> {
-    return this.purgeUnfinishedGames();
-  }
-
-  purgeUnfinishedGames(): Promise<void> {
+  purgeUnfinishedGames(): Promise<Array<GameId>> {
     // Not implemented.
-    return Promise.resolve();
+    return Promise.resolve([]);
   }
 
   compressCompletedGames(): Promise<unknown> {

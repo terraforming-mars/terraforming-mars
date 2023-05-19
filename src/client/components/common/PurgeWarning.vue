@@ -43,5 +43,7 @@ export default Vue.extend({
       } else {
         return translateTextWithParams('Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.', [this.purgeTime]);
       }
-});
+    },
+  },
+);
 </script>

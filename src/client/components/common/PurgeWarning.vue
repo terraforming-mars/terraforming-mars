@@ -37,7 +37,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getWarningText(isHours: Boolean) {
+    getWarningText(isHours: Boolean): string {
       if (isHours) {
         return translateTextWithParams('Warning: This game will be purged in approximately ${0} hours.', [Math.floor(this.hoursLeft).toString()]);
       } else {
@@ -45,5 +45,5 @@ export default Vue.extend({
       }
     },
   },
-);
+});
 </script>

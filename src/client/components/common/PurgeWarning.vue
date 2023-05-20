@@ -4,7 +4,7 @@
       {{ getWarningText(true) }}
     </div>
     <div v-else>
-      {{ getWarningText() }}
+      {{ getWarningText(false) }}
     </div>
   </span>
       <!-- <label class="label label-error">{{ $t(warning) }}</label> -->
@@ -12,6 +12,7 @@
 
 </template>
 <script lang="ts">
+import {translateTextWithParams} from '@/client/directives/i18n';
 import Vue from 'vue';
 
 export default Vue.extend({

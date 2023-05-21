@@ -34,11 +34,13 @@ export class GameLoader implements IGameLoader {
   private cache: Cache;
   private readonly config: CacheConfig;
   private readonly clock: Clock;
+  private purgedGames: Array<GameId>;
 
   private constructor(config: CacheConfig, clock: Clock) {
     this.config = config;
     this.clock = clock;
     this.cache = new Cache(config, clock);
+    this.purgedGames = [];
     timeAsync(this.cache.load())
       .then((v) => {
         metrics.initialize.set(v.duration);
@@ -140,6 +142,32 @@ export class GameLoader implements IGameLoader {
 
   public sweep() {
     this.cache.sweep();
+  }
+
+  public async completeGame(game: Game) {
+    const database = Database.getInstance();
+    await database.saveGame(game);
+    try {
+      this.mark(game.id);
+      await database.markFinished(game.id);
+      await this.maintenance();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  public saveGame(game: Game): Promise<void> {
+    if (this.purgedGames.includes(game.id)) {
+      throw new Error('This game no longer exists');
+    }
+    return Database.getInstance().saveGame(game);
+  }
+
+  public async maintenance() {
+    const database = Database.getInstance();
+    const purgedGames = await database.purgeUnfinishedGames();
+    this.purgedGames.push(...purgedGames);
+    await database.compressCompletedGames();
   }
 }
 

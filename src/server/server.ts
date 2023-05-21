@@ -17,6 +17,7 @@ import {processRequest} from './requestProcessor';
 import {timeAsync} from './utils/timer';
 import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {Executor} from './behavior/Executor';
+import {GameLoader} from './database/GameLoader';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
@@ -93,7 +94,7 @@ async function start() {
     // Do not fail. Just continue. Stats aren't vital.
     console.error(err);
   }
-  Database.getInstance().maintenance();
+  GameLoader.getInstance().maintenance();
 
   const port = process.env.PORT || 8080;
   console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);

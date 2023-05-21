@@ -28,4 +28,13 @@ export interface IGameLoader {
    * @param {GameId} gameId the game to be removed from the cache. Only call this for completed games.
    */
   mark(gameId: GameId): void;
+
+  /**
+   * Saves a game (but takes into account that the game might have already been purged.)
+   *
+   * Do not call IDatabase.saveGame directly in a running system.
+   */
+  saveGame(game: Game): Promise<void>;
+  completeGame(game: Game): Promise<void>;
+  maintenance(): Promise<void>;
 }

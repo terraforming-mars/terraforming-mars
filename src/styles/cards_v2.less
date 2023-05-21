@@ -900,7 +900,9 @@
             text-align: center;
 
             // Adding scrolling for cards with huge description
-            overflow-x: hidden;
+            &:not(.global-event-card-content) {
+				overflow-x: hidden;
+			}
             &::-webkit-scrollbar-track {
                 background-color: transparent;
                 border-radius: 0 0 32px 0;

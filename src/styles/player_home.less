@@ -3,6 +3,19 @@
     padding-top: 20px;
     background: linear-gradient(transparent, #000), url(./assets/stars.jpg);
     background-attachment: fixed;
+
+    > div:not([class]), > div:not([class]) > div.player_home_block:first-child {
+        > a:after {
+            content: '🔗';
+            border-radius: 32px;
+            margin-left: 5px;
+        }
+        > a:hover, a:focus {
+            background: rgba(180, 180, 180, 0.3);
+            border-radius: 6px;
+            text-decoration: none;
+        }
+    }
 }
 
 // text shadows
@@ -1086,4 +1099,10 @@
         font-family: Prototype;
         color: #000;
     }
+}
+
+#spectator-link + span {
+    div {
+		    width: calc(100% - 450px);
+		}
 }

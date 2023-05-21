@@ -2,12 +2,12 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 
-import {Payment} from '@/common/inputs/Payment';
+import {Payment, PAYMENT_KEYS} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PaymentWidgetMixin, SelectProjectCardToPlayModel, unit} from '@/client/mixins/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectProjectCardToPlayModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -68,7 +68,7 @@ export default Vue.extend({
       microbes: 0,
       science: 0,
       seeds: 0,
-      data: 0,
+      auroraiData: 0,
       floaters: 0,
       warning: undefined,
       available: Units.of({}),
@@ -292,10 +292,10 @@ export default Vue.extend({
         floaters: this.floaters,
         science: this.science,
         seeds: this.seeds,
-        data: 0,
+        auroraiData: 0,
       };
       let totalSpent = 0;
-      for (const target of unit) {
+      for (const target of PAYMENT_KEYS) {
         if (payment[target] > this.getAmount(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
@@ -310,7 +310,7 @@ export default Vue.extend({
 
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
-        for (const target of unit) {
+        for (const target of PAYMENT_KEYS) {
           if (payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;

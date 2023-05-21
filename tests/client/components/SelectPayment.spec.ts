@@ -107,16 +107,16 @@ describe('SelectPayment', () => {
     tester.expectValue('megaCredits', 0);
   });
 
-  it('Uses data', async () => {
+  it('Uses auroraiData', async () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 6},
-      {canUseData: true, data: 4});
+      {canUseData: true, auroraiData: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectValue('data', 4);
+    tester.expectValue('auroraiData', 4);
     tester.expectValue('megaCredits', 2);
   });
 
@@ -136,7 +136,7 @@ describe('SelectPayment', () => {
     tester.expectIsAvailable('megaCredits', true);
     tester.expectIsAvailable('science', false);
     tester.expectIsAvailable('seeds', false);
-    tester.expectIsAvailable('data', false);
+    tester.expectIsAvailable('auroraiData', false);
 
     tester.expectValue('titanium', 2);
     tester.expectValue('heat', 0);
@@ -153,7 +153,7 @@ describe('SelectPayment', () => {
     await tester.nextTick();
 
     tester.expectIsAvailable('seeds', false);
-    tester.expectIsAvailable('data', false);
+    tester.expectIsAvailable('auroraiData', false);
     tester.expectValue('titanium', 0);
     tester.expectValue('steel', 0);
     tester.expectValue('heat', 0);

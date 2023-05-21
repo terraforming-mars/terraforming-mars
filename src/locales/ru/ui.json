@@ -389,8 +389,8 @@
     "TR solo mode": "Соло режим на РТ",
 
     "Oxygen Level": "Уровень кислорода",
-		"Venus Scale": "Уровень Венеры",
-		"Ruling Party": "Управляющая группа",
+    "Venus Scale": "Уровень Венеры",
+    "Ruling Party": "Управляющая группа",
     "Spectator link": "Ссылка для зрителей",
     "Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.": "Внимание: этот сервер автоматически удаляет незаконченные игры. Постарайтесь закончить игру до ${0}.",
     "Warning: This game will be purged in approximately ${0} hours.": "Внимание: эта игровая партия будет удалена примерно через ${0} часов.",
@@ -407,7 +407,7 @@
 
     "Cards List": "Список карт",
     "legacy card UI": "Список карт (старый)",
-		"filter": "название карты на английском",
+    "filter": "название карты на английском",
     "Full filter": "Искать целиком",
     "Project Cards": "Карты проектов",
     "Invert": "Инвертировать",

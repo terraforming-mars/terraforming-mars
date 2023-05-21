@@ -234,7 +234,7 @@ export class Server {
       floaters: undefined,
       science: undefined,
       seeds: undefined,
-      data: undefined,
+      auroraiData: undefined,
       coloniesModel: undefined,
       payProduction: undefined,
       aresData: undefined,
@@ -296,7 +296,7 @@ export class Server {
       playerInputModel.canUseSeeds = sp.canUseSeeds;
       playerInputModel.seeds = player.getSpendableSeedResources();
       playerInputModel.canUseData = sp.canUseData;
-      playerInputModel.data = player.getSpendableData();
+      playerInputModel.auroraiData = player.getSpendableData();
       break;
     case PlayerInputType.SELECT_PLAYER:
       playerInputModel.players = (waitingFor as SelectPlayer).players.map(

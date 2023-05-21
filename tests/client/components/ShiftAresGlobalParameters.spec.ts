@@ -29,7 +29,7 @@ describe('ShiftAresGlobalParameters', function() {
     floaters: undefined,
     science: undefined,
     seeds: undefined,
-    data: undefined,
+    auroraiData: undefined,
     coloniesModel: undefined,
     payProduction: undefined,
     aresData: {

@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
-import {Payment} from '@/common/inputs/Payment';
-import {PaymentWidgetMixin, SelectPaymentModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
+import {Payment, PaymentKey} from '@/common/inputs/Payment';
+import {PaymentWidgetMixin, SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -45,7 +45,7 @@ export default Vue.extend({
       microbes: 0,
       floaters: 0,
       seeds: 0,
-      data: 0,
+      auroraiData: 0,
       warning: undefined,
     };
   },
@@ -64,19 +64,19 @@ export default Vue.extend({
     setInitialCost() {
       this.cost = this.playerinput.amount ?? 0;
     },
-    canUse(target: Unit) {
+    canUse(target: PaymentKey) {
       switch (target) {
       case 'steel': return this.canUseSteel();
       case 'titanium': return this.canUseTitanium();
       case 'heat': return this.canUseHeat();
       case 'seeds': return this.canUseSeeds();
-      case 'data': return this.canUseData();
+      case 'auroraiData': return this.canUseData();
       }
       return false;
     },
     setDefaultValue(
       amountCovered: number, // MC values of prior-computed resources.
-      target: Unit): number {
+      target: PaymentKey): number {
       if (!this.canUse(target)) return 0;
       const amount = this.getAmount(target);
       if (amount === 0) return 0;
@@ -105,7 +105,7 @@ export default Vue.extend({
 
       const megaCredits = this.getAmount('megaCredits');
 
-      const targets: Array<Unit> = ['seeds', 'data', 'steel', 'titanium', 'heat'];
+      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat'];
       let amountCovered = reserveMegacredits ? megaCredits : 0;
       for (const target of targets) {
         amountCovered += this.setDefaultValue(amountCovered, target);
@@ -137,11 +137,11 @@ export default Vue.extend({
       return this.playerinput.canUseSeeds && (this.playerinput.seeds ?? 0 > 0);
     },
     canUseData() {
-      return this.playerinput.canUseData && (this.playerinput.data ?? 0 > 0);
+      return this.playerinput.canUseData && (this.playerinput.auroraiData ?? 0 > 0);
     },
 
     saveData() {
-      const targets: Array<Unit> = ['seeds', 'data', 'steel', 'titanium', 'heat', 'megaCredits'];
+      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits'];
 
       const payment: Payment = {
         heat: this.heat,
@@ -149,7 +149,7 @@ export default Vue.extend({
         steel: this.steel,
         titanium: this.titanium,
         seeds: this.seeds ?? 0,
-        data: this.data ?? 0,
+        auroraiData: this.auroraiData ?? 0,
         microbes: 0,
         floaters: 0,
         science: 0,
@@ -244,10 +244,10 @@ export default Vue.extend({
 
     <div class="payments_type input-group" v-if="playerinput.canUseData">
       <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay by Data')"></i>
-      <AppButton type="minus" @click="reduceValue('data', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="data" />
-      <AppButton type="plus" @click="addValue('data', 1)" />
-      <AppButton type="max" @click="setMaxValue('data')" title="MAX" />
+      <AppButton type="minus" @click="reduceValue('auroraiData', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="auroraiData" />
+      <AppButton type="plus" @click="addValue('auroraiData', 1)" />
+      <AppButton type="max" @click="setMaxValue('auroraiData')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">

@@ -147,7 +147,7 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     floaters: undefined,
     science: undefined,
     seeds: undefined,
-    data: undefined,
+    auroraiData: undefined,
     title: 'test input',
     players: undefined,
     buttonLabel: 'save',

@@ -78,7 +78,7 @@ export class SelectPaymentDeferred extends DeferredAction {
           floaters: false, // Used in project cards only
           microbes: false, // Used in project cards only
           science: false, // Used in project cards only
-          data: this.options.canUseData,
+          auroraiData: this.options.canUseData,
         });
         if (amountPaid < this.amount) {
           throw new Error('Did not spend enough');

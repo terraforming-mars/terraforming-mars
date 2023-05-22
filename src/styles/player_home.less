@@ -176,6 +176,15 @@
     margin-left: 3px;
     box-sizing: content-box;
     z-index: 2;
+    &::after {
+        text-transform: capitalize;
+    }
+    &.tag-tr::after {
+        text-transform: uppercase;
+    }
+    &.tag-vp::after {
+        text-transform: uppercase;
+    }
 }
 
 .tag-type-main {
@@ -211,7 +220,7 @@
     background: linear-gradient(#cc8b00, #805700, #805700) !important;
     background-position: 0px !important;
 }
-.tag-vp::after {
+.tag-vp::before {
     position: absolute;
     content: "VP";
     font-family: Prototype;

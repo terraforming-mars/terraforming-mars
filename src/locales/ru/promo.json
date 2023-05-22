@@ -23,7 +23,7 @@
     "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Увеличьте своё производсво М€ на 2, увеличьте своё производство энергии на 1. Получите 3 растения и постройте город",
 
     "Magnetic Shield": "Магнитное поле",
-    "(Requires 3 power tags. Raise your TR 4 steps.)": "(Требует 2 метки энергии. Повысьте свой РТ на 4.)",
+    "(Requires 3 power tags. Raise your TR 4 steps.)": "(Требует 3 метки энергии. Повысьте свой РТ на 4.)",
     "2 Power": "2 энергии",
 
     "Meltworks": "Плавление",
@@ -175,7 +175,7 @@
     "Bio Printing Facility": "Биопечать",
     "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Действие: Потратьте 2 энергии, чтобы получить 2 растения ИЛИ добавить 1 животное на ДРУГУЮ карту",
 
-    "Saturn Surfing": "",
+    "Saturn Surfing": "Сёрфинг на Сатурне",
     "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "Действие: Потратьте 1 аэростат отсюда, чтобы получить по 1М€ за каждый аэростат здесь, включая только что потраченный. Можно получить не больше 5М€ за раз",
     "Add 1 floater here for every Earth tag you have, including this.": "Добавьте на эту карту по 1 аэростату за каждую метку Земли, включая метку на этой карте",
 
@@ -186,10 +186,12 @@
     "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "(Возьмите 1 карту. Выберите 1 из сыгранных вами карт и выложите на неё 1 жетон бактерий за каждый жетон науки, включая этот.)",
 
     "Harvest": "Урожай",
-    "(Requires that you have 3 greenery tiles in play. Gain 12 M€.)": "(Возьмите 1 карту. Выберите 1 из сыгранных вами карт и выложите на неё 1 жетон бактерий за каждый жетон науки, включая этот.)",
+    "(Requires that you have 3 greenery tiles in play. Gain 12 M€.)": "(Требуется 3 выложенных жетона озеленения. Получите 12 M€.)",
 
     "16 Psyche": "Психея 16",
     "(Increase titanium production 2 steps. Gain 3 titanium.)": "(Увеличьте производство титана на 2. Получите 3 титана.)",
-
-    "": ""
+    "Robot Pollinators": "Роботы-опылители",
+    "(Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.)": "(Требование: 4% кислорода. Увеличьте производство растений на 1. Получите 1 растение за каждую метку растений.)",
+    "Outdoor Sports": "Уличный спорт",
+    "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": "(Требуется город рядом с океаном. Увеличьте производство M€ на 2.)"
 }

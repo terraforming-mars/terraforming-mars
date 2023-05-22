@@ -1,11 +1,11 @@
 {
     "Buffer Gas": "Буферный газ",
     "(Spend 16 M€ to increase your TR 1 step. Solo games only.)": "Потратьте 16 M€, чтобы увеличить РТ на 1. Только для соло-игр",
-    "Build Moon Colony": "Лунная колония",
+    "Lunar Habitat": "Лунная колония",
     "(Spend 22 M€ and 1 titanium to place a habitat on The Moon and raise your M€ production 1 step.)": "Потратьте 22 M€, чтобы разместить колонию на Луне и увеличить производство M€ 1",
-    "Build Moon Mine": "Лунная шахта",
-    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "Потратьте 20 M€, чтобы построить шахту на Луне и увеличить производство стали на 1",
-    "Build Moon Road": "Лунная дорога",
+    "Lunar Mine": "Лунная шахта",
+    "(Spend 20 M€ and 1 titanium to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.)": "Потратьте 20 M€, чтобы построить шахту на Луне и увеличить производство стали и рейтинг добычи на 1",
+    "Road Infrastructure": "Лунная дорога",
     "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": "Потратьте 18 M€, чтобы построить дорогу на Луне и повысить рейтинг логистики на 1",
     "(Spend 25 M€ to place a city tile and increase your M€ production 1 step.)": "Потратьте 25 M€, чтобы построить город и увеличить производство M€ на 1",
     "(Spend 17 M€ to place a colony.)": "Потратьте 17 M€, чтобы построить Колонию",
@@ -15,7 +15,9 @@
     "(Discard any number of cards to gain that amount of M€.)": "Сбросьте X карт, чтобы получить X M€",
     "asteroid": "Астероид",
     "(Spend 14 M€ to raise temperature 1 step.)": "Потратьте 14 M€, чтобы увеличить температуру на 1 шаг",
-    "Air Scrapping": "Очистка  воздуха",
+    "Air Scrapping": "Очистка воздуха",
     "(Spend 15 M€ to raise Venus 1 step.)": "Потратьте 15 M€, чтобы увеличить шкалу Венеры на 1 шаг",
+    "Air Scrapping (Var)": "Очистка воздуха (альт.)",
+    "(Spend 15M€, less 1M€ per Venus tag you have, to raise Venus 1 step.)": "Потратьте 15 M€ (скидка 1 M€ за каждый жетон Венеры), чтобы увеличить шкалу Венеры на 1 шаг",
     "(Spend 18 M€ to place an ocean tile.)": "Потратьте 18 M€, чтобы разместить океан"
 }

@@ -67,6 +67,8 @@ export const ARES_CARD_MANIFEST = new ModuleManifest({
     CardName.GREAT_DAM_PROMO,
     CardName.INDUSTRIAL_CENTER,
     CardName.LAVA_FLOWS,
+    CardName.MAGNETIC_FIELD_GENERATORS,
+    CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
     CardName.MINING_AREA,
     CardName.MINING_RIGHTS,
     CardName.MOHOLE_AREA,

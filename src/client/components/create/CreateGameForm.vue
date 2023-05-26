@@ -139,6 +139,12 @@
                                 <div class="create-game-expansion-icon expansion-icon-ceo"></div>
                                 <span v-i18n>CEOs (BETA)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <input type="checkbox" name="nuclear" id="nuclear-checkbox" v-model="nuclearExtension">
+                            <label for="nuclear-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-nuclear"></div>
+                                <span v-i18n>Nuclear (ALPHA)</span>&nbsp;<a href="" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
                         </div>
 
                         <div class="create-game-page-column">
@@ -579,6 +585,7 @@ export default (Vue as WithRefs<Refs>).extend({
       ceoExtension: false,
       customCeos: [],
       startingCeos: 3,
+      nuclearExtension: false,
     };
   },
   components: {
@@ -844,6 +851,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'moon': return model.moonExpansion;
       case 'pathfinders': return model.pathfindersExpansion;
       case 'ceo': return model.ceoExtension;
+      case 'nuclear': return model.nuclearExtension;
       default: throw new Error('Unknown module: ' + module);
       }
     },
@@ -951,6 +959,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const ceoExtension = this.ceoExtension;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
+      const nuclearExtension = this.nuclearExtension;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1117,6 +1126,7 @@ export default (Vue as WithRefs<Refs>).extend({
         ceoExtension,
         customCeos,
         startingCeos,
+        nuclearExtension,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

@@ -14,6 +14,7 @@ export enum CardRenderItemType {
   FLOATERS = 'floaters',
   ASTEROIDS = 'asteroids',
   MICROBES = 'microbes',
+  ANIMAL = 'animal',
   ANIMALS = 'animals',
   EVENT = 'event',
   SPACE = 'space',

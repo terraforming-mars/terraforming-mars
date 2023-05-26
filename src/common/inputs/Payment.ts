@@ -1,5 +1,5 @@
 // https://steveholgado.com/typescript-types-from-arrays/
-export const PAYMENT_KEYS = ['heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'science', 'seeds', 'auroraiData'] as const;
+export const PAYMENT_KEYS = ['heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'science', 'seeds', 'auroraiData', 'radiations'] as const;
 export type PaymentKey = typeof PAYMENT_KEYS[number];
 export type Payment = {
   // Standard currency for paying for stuff
@@ -21,6 +21,8 @@ export type Payment = {
   seeds: number;
   // Aurorai corporation can use its data to pay for standard projects.
   auroraiData: number;
+  // Few radiation cards can use radiation resources as other resources (like Free Radicals)
+  radiations: number;
 }
 
 export function isPayment(obj: unknown): obj is Payment {
@@ -33,7 +35,7 @@ export function isPayment(obj: unknown): obj is Payment {
 
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {
-    heat: 0, megaCredits: 0, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, seeds: 0, auroraiData: 0,
+    heat: 0, megaCredits: 0, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, seeds: 0, auroraiData: 0, radiations: 0,
   } as const;
 
   export interface Options {
@@ -44,6 +46,7 @@ export namespace Payment {
     science: boolean,
     seeds: boolean,
     auroraiData: boolean,
+    radiations: boolean,
   }
 
   export function of(payment: Partial<Payment>) : Payment {
@@ -57,6 +60,7 @@ export namespace Payment {
       seeds: payment.seeds ?? 0,
       steel: payment.steel ?? 0,
       titanium: payment.titanium ?? 0,
+      radiations: payment.radiations ?? 0,
     };
   }
 }

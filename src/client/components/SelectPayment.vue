@@ -150,6 +150,7 @@ export default Vue.extend({
         titanium: this.titanium,
         seeds: this.seeds ?? 0,
         auroraiData: this.auroraiData ?? 0,
+        radiations: this.radiations ?? 0,
         microbes: 0,
         floaters: 0,
         science: 0,

@@ -13,6 +13,7 @@ import {TURMOIL_CARD_MANIFEST} from './turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './venusNext/VenusCardManifest';
 import {MOON_CARD_MANIFEST} from './moon/MoonCardManifest';
 import {PATHFINDERS_CARD_MANIFEST} from './pathfinders/PathfindersCardManifest';
+import {NUCLEAR_CARD_MANIFEST} from './nuclear/NuclearCardManifest';
 
 export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   BASE_CARD_MANIFEST,
@@ -27,4 +28,5 @@ export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   MOON_CARD_MANIFEST,
   PATHFINDERS_CARD_MANIFEST,
   CEO_CARD_MANIFEST,
+  NUCLEAR_CARD_MANIFEST,
 ];

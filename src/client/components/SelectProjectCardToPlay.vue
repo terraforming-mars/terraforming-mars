@@ -72,6 +72,7 @@ export default Vue.extend({
       floaters: 0,
       warning: undefined,
       available: Units.of({}),
+      radiations: 0,
     };
   },
   components: {
@@ -108,6 +109,7 @@ export default Vue.extend({
       this.steel = 0;
       this.titanium = 0;
       this.heat = 0;
+      this.radiations = 0;
 
       let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
 
@@ -258,6 +260,16 @@ export default Vue.extend({
       }
       return false;
     },
+    canUseRadiations() {
+      // FYI Radiations are limited to few cards
+      if (this.card !== undefined && (this.playerinput.radiations ?? 0) > 0) {
+        if (this.tags.includes(Tag.RADIATION)) {
+          return true;
+        }
+      }
+      return false;
+    },
+
     cardChanged() {
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
@@ -293,6 +305,7 @@ export default Vue.extend({
         science: this.science,
         seeds: this.seeds,
         auroraiData: 0,
+        radiations: 0,
       };
       let totalSpent = 0;
       for (const target of PAYMENT_KEYS) {
@@ -422,6 +435,14 @@ export default Vue.extend({
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
       <AppButton type="plus" @click="addValue('seeds', 1)" />
       <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
+    </div>
+
+    <div class="payments_type input-group" v-if="canUseRadiations()">
+      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Radiations')"></i>
+      <AppButton type="minus" @click="reduceValue('seeds', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="seeds" />
+      <AppButton type="plus" @click="addValue('radiations', 1)" />
+      <AppButton type="max" @click="setMaxValue('radiations')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">

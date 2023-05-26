@@ -801,4 +801,12 @@ export enum CardName {
     XU = 'Xu',
     // CEO Preludes
     CO_LEADERSHIP = 'Co-leadership',
+
+    // NUCLEAR
+    CARACALS = 'Caracals',
+    CENTRAL_DOCKING_STATION = 'Central Docking Station',
+    CHEMTRAILS = 'Chemtrails',
+    GENOMICS_NUCLEATION_CENTER = 'Genomics Nucleation Center',
+    INFRARED_THERAPY = 'Infrared Therapy',
+    NEON_JELLYFISH = 'Neon Jellyfish'
 }

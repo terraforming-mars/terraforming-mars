@@ -13,6 +13,7 @@
               <div v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></div>
               <div v-if="isPoliticalAgendasOn" class="create-game-expansion-icon expansion-icon-agendas"></div>
               <div v-if="gameOptions.ceoExtension" class="create-game-expansion-icon expansion-icon-ceo"></div>
+              <div v-if="gameOptions.nuclearExtension" class="create-game-expansion-icon expansion-icon-nuclear"></div>
             </li>
 
             <li><div class="setup-item" v-i18n>Board:</div>

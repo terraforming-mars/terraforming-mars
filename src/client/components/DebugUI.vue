@@ -198,6 +198,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
   moon: 'm',
   pathfinders: 'P',
   ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
+  nuclear: 'n',
 };
 
 // TODO(kberg): make this use suffixModules.
@@ -313,6 +314,7 @@ export default (Vue as WithRefs<Refs>).extend({
         promo: true,
         pathfinders: true,
         ceo: true,
+        nuclear: true,
       },
       types: {
         event: true,
@@ -347,6 +349,7 @@ export default (Vue as WithRefs<Refs>).extend({
         event: true,
         clone: true,
         none: true,
+        radiation: true,
       },
       searchIndex: new Map(),
     };
@@ -504,6 +507,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'moon': return 'The Moon';
       case 'pathfinders': return 'Pathfinders';
       case 'ceo': return 'CEOs';
+      case 'nuclear': return 'Nuclear';
       }
     },
     filterByTags(card: ClientCard): boolean {

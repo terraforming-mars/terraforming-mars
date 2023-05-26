@@ -16,6 +16,7 @@ export interface PlayerInputModel {
     canUseHeat: boolean | undefined;
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;
+    canUseRadiations: boolean | undefined;
     canUseSeeds: boolean | undefined;
     canUseData: boolean | undefined;
     canUseLunaTradeFederationTitanium: boolean | undefined;
@@ -29,6 +30,7 @@ export interface PlayerInputModel {
     floaters: number | undefined;
     science: number | undefined;
     seeds: number | undefined;
+    radiations: number | undefined;
     auroraiData: number | undefined;
     players: Array<ColorWithNeutral> | undefined;
     title: string | Message;

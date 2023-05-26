@@ -46,6 +46,7 @@ export const MAXIMUM_LOGISTICS_RATE = 8;
 // Pathfinders
 export const SEED_VALUE = 5;
 export const DATA_VALUE = 3;
+export const RADIATION_VALUE = 1;
 
 // Escape Velocity
 export const BONUS_SECONDS_PER_ACTION = 2;

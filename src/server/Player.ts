@@ -975,6 +975,7 @@ export class Player {
       science: card.tags.includes(Tag.MOON),
       // TODO(kberg): add this.corporation.name === CardName.AURORAI
       auroraiData: card.type === CardType.STANDARD_PROJECT,
+      radiations: card.tags.includes(Tag.MOON), //TODO
     };
   }
 
@@ -1028,6 +1029,12 @@ export class Player {
   }
 
   public getSpendableData(): number {
+    return this.getCorporation(CardName.AURORAI)?.resourceCount ?? 0;
+  }
+
+  public getSpendableRadiationResources(): number {
+    //const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
+    //return lunaArchives?.resourceCount ?? 0;
     return this.getCorporation(CardName.AURORAI)?.resourceCount ?? 0;
   }
 
@@ -1454,6 +1461,7 @@ export class Player {
       science: this.getSpendableScienceResources(),
       seeds: this.getSpendableSeedResources(),
       auroraiData: this.getSpendableData(),
+      radiations: this.getSpendableRadiationResources(),
     };
   }
 
@@ -1485,6 +1493,7 @@ export class Player {
       science: 1,
       seeds: constants.SEED_VALUE,
       auroraiData: constants.DATA_VALUE,
+      radiations: 1,
     };
 
     const usable: {[key in PaymentKey]: boolean} = {
@@ -1497,6 +1506,7 @@ export class Player {
       science: options?.science ?? false,
       seeds: options?.seeds ?? false,
       auroraiData: options?.auroraiData ?? false,
+      radiations: options?.radiations ?? false,
     };
 
     // HOOK: Luna Trade Federation

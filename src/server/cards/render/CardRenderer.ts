@@ -88,6 +88,7 @@ class CardRenderCorpBoxAction implements ICardRenderCorpBoxAction {
 
 abstract class Builder<T> {
   protected _data: Array<Array<ItemType>> = [[]];
+    tag: any;
 
   public abstract build(): T;
 
@@ -132,7 +133,7 @@ abstract class Builder<T> {
   }
 
   public animals(amount: number, options?: ItemOptions): Builder<T> {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.ANIMALS, amount, options));
+   return this._appendToRow(new CardRenderItem(CardRenderItemType.ANIMALS, amount, options));
   }
 
   public heat(amount: number, options?: ItemOptions): Builder<T> {

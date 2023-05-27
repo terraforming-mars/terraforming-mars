@@ -4,8 +4,8 @@
     "Tiles": "Тайлы",
     "Global Parameters": "Глобальные параметры",
     "Others": "Другие",
-    " Standard Resources ": "Стандартные ресурсы",
-    " Resources on Cards ": "Ресурсы на картах",
+    "Standard Resources ": "Стандартные ресурсы",
+    "Resources on Cards ": "Ресурсы на картах",
     "Building": "Здание",
     "Space": "Космос",
     "Science": "Наука",
@@ -50,11 +50,11 @@
     "Game Iconology": "Иконология игры",
     "Game Phases": "Фазы игры",
     "Hot Keys" : "Горячие клавиши",
-    " Fan Expansion Tags ": "Метки фанатских дополнений",
+    "Fan Expansion Tags ": "Метки фанатских дополнений",
     "Standard Projects from Expansions and Solo Mode": "Стандартные ресурсы из дополнений и соло-режима",
     "Standard Project from Fan-made Expansions": "Стандартные ресурсы из фанатских дополнений",
 		
-	"Initial Drafting (optional variant)": "Предварительный набор карт (опциональный режим)",
+    "Initial Drafting (optional variant)": "Предварительный набор карт (опциональный режим)",
 	"Draw 3 corporation cards": "Взятие 3 карт корпораций",
 	"Draw 4 prelude cards ": "Взятие 4 карт прологов",
 	"Draw 5 project cards. Draft. Pick one card and pass to the player above in turn order. Repeat until you have 5 cards.": "Взятие 5 карт проектов. Каждый игрок берёт карту и передаёт следующему игроку в порядке очереди. Добор до 5 карт. Повторение, пока у каждого игрока не получится 5 карт проектов на руке.",
@@ -115,5 +115,5 @@
 	"End Game": "Конец игры",
 	"In turn order, convert plants to greeneries.": "В порядке очереди выполняется заключительное озеленение",
 	"Assign awards": "Назначение наград",
-	" Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader": "Итоговый счёт: ПО + тайлы + карты + достижения + награды + (1 ПО за каждого делегата и главу группы"
+	"Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader": "Итоговый счёт: ПО + тайлы + карты + достижения + награды + (1 ПО за каждого делегата и главу группы"
 }

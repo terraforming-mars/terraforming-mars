@@ -808,5 +808,12 @@ export enum CardName {
     CHEMTRAILS = 'Chemtrails',
     GENOMICS_NUCLEATION_CENTER = 'Genomics Nucleation Center',
     INFRARED_THERAPY = 'Infrared Therapy',
-    NEON_JELLYFISH = 'Neon Jellyfish'
+    NEON_JELLYFISH = 'Neon Jellyfish',
+    NEUTRON_CITY = 'Neutron City',
+    NITRATE_COMBUSTION = 'Nitrate Combustion',
+    OXYGEN_GARDEN = "Oxygen Garden",
+    PROCESSED_TITANIUM = 'Processed Titanium',
+    TOKAMAK_FUNDRAISER = 'Tokamak Fundraiser',
+    UNDERCOVER_ACTIVISTS = 'Undercover Activists',
+    FAKE_MEDIA_CONFERENCE = 'Fake Media Conference',
 }

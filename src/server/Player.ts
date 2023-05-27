@@ -938,6 +938,7 @@ export class Player {
     this.tableau.forEach((playedCard) => {
       cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
     });
+  
 
     // Playwrights hook
     this.removedFromPlayCards.forEach((removedFromPlayCard) => {

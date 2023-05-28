@@ -67,6 +67,7 @@ const ORDER: Array<InterfaceTagsType> = [
   Tag.EVENT,
   SpecialTags.NONE,
   Tag.WILD,
+  Tag.RADIATION,
   SpecialTags.INFLUENCE,
   SpecialTags.CITY_COUNT,
   SpecialTags.COLONY_COUNT,
@@ -78,6 +79,7 @@ const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   if (game.gameOptions.venusNextExtension === false && tag === Tag.VENUS) return false;
   if (game.gameOptions.moonExpansion === false && tag === Tag.MOON) return false;
   if (game.gameOptions.pathfindersExpansion === false && tag === Tag.MARS) return false;
+  if (game.gameOptions.nuclearExtension === false && tag === Tag.RADIATION) return false;
   return true;
 };
 

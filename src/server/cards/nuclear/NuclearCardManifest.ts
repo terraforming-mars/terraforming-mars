@@ -13,7 +13,13 @@ import { OxygenGarden } from './OxygenGarden';
 import { ProcessedTitanium } from './ProcessedTitanium';
 import { TokamakFundraiser } from './TokamakFundraiser';
 import { UndercoverActivists } from './UndercoverActivists';
-import { FakeMediaConference } from './FakeMediaConference';
+//import { FakeMediaConference } from './FakeMediaConference';
+import { FundingForIter } from './FundingForIter';
+//import { MolecularH2OResearch } from './MolecularH2OResearch';
+import { OberonOrbitalBase } from './OberonOrbitalBase';
+import { ColdFusion } from './ColdFusion';
+import { JovianMegaReseachBay } from './JovianMegaResearchBay';
+
 
 export const NUCLEAR_CARD_MANIFEST = new ModuleManifest({
   module: 'nuclear',
@@ -30,8 +36,12 @@ export const NUCLEAR_CARD_MANIFEST = new ModuleManifest({
     [CardName.PROCESSED_TITANIUM]: {Factory: ProcessedTitanium},
     [CardName.TOKAMAK_FUNDRAISER]: {Factory: TokamakFundraiser},
     [CardName.UNDERCOVER_ACTIVISTS]: {Factory: UndercoverActivists},
-    [CardName.FAKE_MEDIA_CONFERENCE]: {Factory: FakeMediaConference},
-
+    //[CardName.FAKE_MEDIA_CONFERENCE]: {Factory: FakeMediaConference},
+    [CardName.FUNDING_FOR_ITER]: {Factory: FundingForIter},
+    //[CardName.MOLECULAR_H2O_RESEARCH] : {Factory: MolecularH2OResearch},
+    [CardName.OBERON_ORBITAL_BASE] : {Factory: OberonOrbitalBase},
+    [CardName.COLD_FUSION]: {Factory: ColdFusion},
+    [CardName.JOVIAN_MEGA_RESEARCH_BAY] :{Factory: JovianMegaReseachBay},
   },
  
 });

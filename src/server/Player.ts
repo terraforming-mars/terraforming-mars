@@ -67,6 +67,7 @@ import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 
 
+
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
 /**
@@ -120,6 +121,7 @@ export class Player {
   public actionsTakenThisRound: number = 0;
   private actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: CardName | undefined;
+  public lastCardObjectPlayed: IProjectCard | undefined;
   public pendingInitialActions: Array<ICorporationCard> = [];
 
   // Cards
@@ -937,8 +939,8 @@ export class Player {
 
     this.tableau.forEach((playedCard) => {
       cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
-    });
-  
+    });    
+
 
     // Playwrights hook
     this.removedFromPlayCards.forEach((removedFromPlayCard) => {
@@ -2026,6 +2028,7 @@ export class Player {
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 
     player.lastCardPlayed = d.lastCardPlayed;
+    
 
     // Rebuild removed from play cards (Playwrights)
     player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);

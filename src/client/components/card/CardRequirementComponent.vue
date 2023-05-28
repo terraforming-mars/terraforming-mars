@@ -116,6 +116,8 @@ export default Vue.extend({
         return ['card-resource-colony', 'card-resource-colony--req'];
       case RequirementType.FLOATERS:
         return ['card-resource-tag--S', 'card-tag-floater'];
+        case RequirementType.RADIATION:
+        return ['card-resource-tag--S', 'card-tag-radiation']
       case RequirementType.CHAIRMAN:
         return ['card-chairman--req'];
       case RequirementType.PARTY_LEADERS:
@@ -173,7 +175,7 @@ export default Vue.extend({
       case RequirementType.REMOVED_PLANTS:
         return false;
       }
-      return this.requirement.amount < 4;
+      return this.requirement.amount < 3;
     },
     repeats(): Array<number> {
       if (!this.isRepeated || this.requirement.amount === undefined) {

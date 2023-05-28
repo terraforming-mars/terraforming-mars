@@ -197,6 +197,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.JOVIAN, -1, options));
   }
 
+  public radiation(options?: ItemOptions): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.RADIATION, -1, options));
+  }
+
   public science(amount: number = 1, options?: ItemOptions): Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.SCIENCE, amount, options));
   }

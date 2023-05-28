@@ -15,7 +15,7 @@ export enum Tag {
     WILD = 'wild',
     EVENT = 'event',
     CLONE = 'clone',
-    RADIATION = 'radiation'
+    RADIATION = 'radiation',
 }
 
 export const ALL_TAGS = [

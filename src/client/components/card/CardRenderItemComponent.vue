@@ -22,7 +22,8 @@ const RESOURCE_AND_TAG_TYPES = [
   CardRenderItemType.PLANTS,
   CardRenderItemType.MICROBES,
   CardRenderItemType.SCIENCE,
-  CardRenderItemType.CITY];
+  CardRenderItemType.CITY,
+  CardRenderItemType.RADIATION];
 
 export default Vue.extend({
   name: 'CardRenderItemComponent',
@@ -93,6 +94,9 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.ANIMALS) {
         classes.push('card-resource');
         classes.push('card-resource-animal');
+      } else if (type === CardRenderItemType.RADIATION) {
+        classes.push('card-resource');
+        classes.push('card-resource-radiation');
       } else if (type === CardRenderItemType.WILD) {
         classes.push('card-resource');
         classes.push('card-resource-wild');
@@ -283,6 +287,8 @@ export default Vue.extend({
           classes.push('card-tag tag-city');
         } else if (this.item.type === CardRenderItemType.MARS) {
           classes.push('card-tag tag-mars');
+        } else if (this.item.type === CardRenderItemType.RADIATION) {
+          classes.push('card-tag tag-radiation');
         }
       }
 

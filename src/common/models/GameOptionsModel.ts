@@ -22,6 +22,7 @@ export type GameOptionsModel = {
   includeVenusMA: boolean,
   initialDraftVariant: boolean,
   moonExpansion: boolean,
+  nuclearExtension: boolean,
   pathfindersExpansion: boolean,
   preludeExtension: boolean,
   promoCardsOption: boolean,

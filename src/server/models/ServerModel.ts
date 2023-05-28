@@ -568,6 +568,7 @@ export class Server {
       includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,
       moonExpansion: options.moonExpansion,
+      nuclearExtension: options.nuclearExtension,
       pathfindersExpansion: options.pathfindersExpansion,
       preludeExtension: options.preludeExtension,
       promoCardsOption: options.promoCardsOption,

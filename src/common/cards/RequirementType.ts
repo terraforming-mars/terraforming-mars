@@ -21,4 +21,5 @@ export enum RequirementType {
     HABITAT_TILES = 'Habitat tiles',
     MINING_TILES = 'Mine tiles',
     ROAD_TILES = 'Road tiles',
+    RADIATION = 'Radiation',
 }

@@ -816,4 +816,9 @@ export enum CardName {
     TOKAMAK_FUNDRAISER = 'Tokamak Fundraiser',
     UNDERCOVER_ACTIVISTS = 'Undercover Activists',
     FAKE_MEDIA_CONFERENCE = 'Fake Media Conference',
+    FUNDING_FOR_ITER = 'Funding For Iter',
+    MOLECULAR_H2O_RESEARCH = 'Molecular H2O Research',
+    OBERON_ORBITAL_BASE = 'Oberon Orbital Base',
+    COLD_FUSION = 'Cold Fusion',
+    JOVIAN_MEGA_RESEARCH_BAY = 'Jovian Mega Research Bay',
 }

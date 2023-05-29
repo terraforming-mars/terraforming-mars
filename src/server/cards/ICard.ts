@@ -43,7 +43,7 @@ export interface ICard {
     cardDiscount?: CardDiscount | Array<CardDiscount>;
     // parameter is a Morningstar Inc. special case.
     getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
-    victoryPoints?: number | 'special' | IVictoryPoints,
+    victoryPoints?: number | 'special' | IVictoryPoints;
     getVictoryPoints: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => PlayerInput | undefined | void;
     onStandardProject?: (player: Player, project: ICard) => void;

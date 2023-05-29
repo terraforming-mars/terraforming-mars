@@ -4,6 +4,7 @@ import {Tag} from './Tag';
 // which means this can be passed to Counter.
 export interface IVictoryPoints {
   tag?: Tag,
+  tag2?: Tag,
   resourcesHere?: {},
   cities?: {},
   moon?: {
@@ -15,4 +16,6 @@ export interface IVictoryPoints {
   all?: boolean,
   each?: number,
   per?: number,
+  per2?: number,
 }
+

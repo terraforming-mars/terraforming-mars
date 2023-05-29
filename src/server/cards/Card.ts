@@ -218,7 +218,11 @@ export abstract class Card {
       return vp;
     }
     if (typeof(vp) === 'object') {
+      if (Object.keys(vp).length =1){
+        return 10;
+      } else {
       return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+      }
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');

@@ -135,6 +135,10 @@ abstract class Builder<T> {
   public animals(amount: number, options?: ItemOptions): Builder<T> {
    return this._appendToRow(new CardRenderItem(CardRenderItemType.ANIMALS, amount, options));
   }
+  
+  public radiations(amount: number, options?: ItemOptions): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.RADIATIONS, amount, options));
+   }
 
   public heat(amount: number, options?: ItemOptions): Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.HEAT, amount, options));

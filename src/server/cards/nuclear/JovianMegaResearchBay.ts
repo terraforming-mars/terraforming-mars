@@ -5,9 +5,12 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ICard} from '../ICard';
+//import {ITagCount} from '../../../common/cards/ITagCount';
 import {Tag} from '../../../common/cards/Tag';
 import {played} from '../Options';
 import {ActionCard} from '../ActionCard';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+
 
 export class JovianMegaReseachBay extends ActionCard implements IProjectCard {
   constructor() {
@@ -16,7 +19,8 @@ export class JovianMegaReseachBay extends ActionCard implements IProjectCard {
       name: CardName.JOVIAN_MEGA_RESEARCH_BAY,
       cost: 46,
       tags: [Tag.RADIATION, Tag.JOVIAN, Tag.SPACE],
-      victoryPoints: [{tag: Tag.RADIATION, per: 2}, {tag: Tag.JOVIAN, per: 2}],
+      victoryPoints: 'special',
+
       behavior: {
         tr: 1,
       },
@@ -37,6 +41,7 @@ export class JovianMegaReseachBay extends ActionCard implements IProjectCard {
         })
         }),
         description: 'Raise your TR 1 step. Score 1VP for every 2 radiation and 2 Jovian tags you have.',
+        victoryPoints: CardRenderDynamicVictoryPoints.jovianAndRadiation(2),
       },
     });
   }
@@ -46,5 +51,25 @@ export class JovianMegaReseachBay extends ActionCard implements IProjectCard {
       player.drawCard();
     }
   }
-}
 
+  public override getVictoryPoints(player: Player): number {
+    const tags = player.tags.getAllTags();
+    let radiationCount = 0;
+    let jovianCount = 0;
+  
+    tags.forEach((tagData) => {
+      if (tagData.tag === Tag.RADIATION) {
+        radiationCount += tagData.count;
+      } else if (tagData.tag === Tag.JOVIAN) {
+        jovianCount += tagData.count;
+      }
+    });
+  
+    const radiationPoints = Math.floor(radiationCount / 2);
+    const jovianPoints = Math.floor(jovianCount / 2);
+  
+    const Points = radiationPoints + jovianPoints;
+  
+    return Points;
+}
+}

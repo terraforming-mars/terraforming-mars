@@ -821,4 +821,9 @@ export enum CardName {
     OBERON_ORBITAL_BASE = 'Oberon Orbital Base',
     COLD_FUSION = 'Cold Fusion',
     JOVIAN_MEGA_RESEARCH_BAY = 'Jovian Mega Research Bay',
+    LIMITED_ENERGY_BUDGET = 'Limited Energy Budget',
+    NUCLEAR_REACTOR = 'Nuclear Reactor',
+    SPENT_FUEL = 'Spent Fuel',
+    ENERGIZING_LAVA = 'Energizing Lava',
+    MIRRORED_HEAT_EXCHANGERS = 'Mirrored Heat Exchangers',
 }

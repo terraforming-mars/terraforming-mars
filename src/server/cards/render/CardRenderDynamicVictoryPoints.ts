@@ -1,6 +1,7 @@
 import {CardRenderItemType} from '../../../common/cards/render/CardRenderItemType';
 import {ICardRenderDynamicVictoryPoints} from '../../../common/cards/render/ICardRenderDynamicVictoryPoints';
 import {CardRenderItem} from './CardRenderItem';
+
 import {Size} from '../../../common/cards/render/Size';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
@@ -18,6 +19,7 @@ const RESOURCE_TO_ITEM_TYPE = new Map([
   [CardResource.FLOATER, CardRenderItemType.FLOATERS],
   [CardResource.VENUSIAN_HABITAT, CardRenderItemType.VENUSIAN_HABITAT],
   [CardResource.SPECIALIZED_ROBOT, CardRenderItemType.SPECIALIZED_ROBOT],
+  [CardResource.RADIATION, CardRenderItemType.RADIATIONS],
 ]);
 
 export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictoryPoints {
@@ -38,6 +40,7 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
       [Tag.MOON, CardRenderItemType.MOON],
       [Tag.VENUS, CardRenderItemType.VENUS],
       [Tag.RADIATION, CardRenderItemType.RADIATION],
+      [Tag.POWER, CardRenderItemType.ENERGY],
     ]);
     const itemType = map.get(type);
     if (itemType === undefined) {
@@ -45,6 +48,25 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
     }
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(itemType, 1, {played: true}), points, target);
   }
+
+  public combineWith(points: CardRenderDynamicVictoryPoints): CardRenderDynamicVictoryPoints {
+    if (!this.item || !points.item) {
+      throw new Error('Cannot combine invalid victory points');
+    }
+  
+    const combinedItem = new CardRenderItem(
+      this.item.type,
+      this.item.amount,
+      Object.assign({}, this.item),
+    );
+  
+    const combinedPoints = this.points + points.points;
+    const combinedTarget = this.target + points.target;
+  
+    return new CardRenderDynamicVictoryPoints(combinedItem, combinedPoints, combinedTarget);
+  }
+  
+
   public static oceans(points: number, target: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.OCEANS);
     item.size = Size.SMALL;
@@ -87,6 +109,14 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
   public static questionmark(): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(undefined, 0, 0);
   }
+
+  public static jovianAndRadiation(points: number): CardRenderDynamicVictoryPoints {
+    const jovianItem = new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.JOVIAN, 1, { digit: true }), points, 2);
+    const radiationItem = new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.RADIATION, 1, { digit: true }), points, 2);
+    
+    return jovianItem.combineWith(radiationItem);
+  }
+
   public static any(points: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderDynamicVictoryPoints(undefined, points, points);
     item.anyPlayer = true;

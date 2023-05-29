@@ -1121,6 +1121,10 @@
                 color: #0000 !important;
                 background-image: url(./assets/resources/disease.png);
             }
+            .card-resource-radiation {
+                color: #0000 !important;
+                background-image: url(./assets/resources/radiation.png);
+            }
             .card-resource-preservation {
                 background-image: url(./assets/resources/preservation.png);
             }
@@ -1436,6 +1440,9 @@
             // TODO(kberg) This set of tags looks like a duplicate of cards.less.
             .card-tag-wild {
                 background-image: url("./assets/tags/wild.png");
+            }
+            .card-tag-radiation {
+                background-image: url("./assets/tags/radiation.png");
             }
             .card-tag-building {
                 background-image: url("./assets/tags/building.png");
@@ -2330,7 +2337,7 @@ each(@parties, {
     // the stuff above wasn't contained inside card-content.
     @resource_types: microbe, animal, science, floater, fighter, camp,
       asteroid, disease, preservation, data, syndicate-fleet, cube,
-      venusian-habitat, specialized-robot, seed, orbital, agenda;
+      venusian-habitat, specialized-robot, seed, orbital, agenda, radiation;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

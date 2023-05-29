@@ -85,4 +85,5 @@ export enum CardRenderItemType {
 
   //Nuclear
   RADIATION = 'radiation',
+  RADIATIONS = 'radiations',
 }

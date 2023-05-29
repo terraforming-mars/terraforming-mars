@@ -16,5 +16,5 @@ export enum CardResource {
     SEED = 'Seed',
     AGENDA = 'Agenda',
     ORBITAL = 'Orbital',
-    RADIATION = 'Radiations',
+    RADIATION = 'Radiation',
 }

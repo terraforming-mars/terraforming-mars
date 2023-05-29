@@ -23,7 +23,7 @@ const RESOURCE_AND_TAG_TYPES = [
   CardRenderItemType.MICROBES,
   CardRenderItemType.SCIENCE,
   CardRenderItemType.CITY,
-  CardRenderItemType.RADIATION];
+  CardRenderItemType.RADIATIONS];
 
 export default Vue.extend({
   name: 'CardRenderItemComponent',
@@ -94,7 +94,7 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.ANIMALS) {
         classes.push('card-resource');
         classes.push('card-resource-animal');
-      } else if (type === CardRenderItemType.RADIATION) {
+      } else if (type === CardRenderItemType.RADIATIONS) {
         classes.push('card-resource');
         classes.push('card-resource-radiation');
       } else if (type === CardRenderItemType.WILD) {

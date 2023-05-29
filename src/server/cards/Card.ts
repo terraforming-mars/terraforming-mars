@@ -54,7 +54,7 @@ type Properties = {
   tags?: Array<Tag>;
   tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
   tr?: TRSource | DynamicTRSource,
-  victoryPoints?: number | 'special' | IVictoryPoints | Array<IVictoryPoints>,
+  victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
 // TODO(kberg): move this out.
@@ -248,6 +248,7 @@ export abstract class Card {
     case CardRenderItemType.RESOURCE_CUBE:
     case CardRenderItemType.SCIENCE:
     case CardRenderItemType.CAMPS:
+    case CardRenderItemType.RADIATIONS:  
       units = this.resourceCount ?? 0;
       break;
 
@@ -259,7 +260,7 @@ export abstract class Card {
       break;
     case CardRenderItemType.RADIATION:
       units = player?.tags.count(Tag.RADIATION, 'raw');
-      break;  
+     break;  
     }
 
     if (units === undefined) {

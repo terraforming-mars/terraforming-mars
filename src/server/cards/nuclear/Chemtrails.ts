@@ -20,7 +20,7 @@ export class Chemtrails extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: '144',
+        cardNumber: 'N06',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.titanium(1)).steel(1).titanium(1).oxygen(1);
         }),

@@ -18,7 +18,12 @@ import { FundingForIter } from './FundingForIter';
 //import { MolecularH2OResearch } from './MolecularH2OResearch';
 import { OberonOrbitalBase } from './OberonOrbitalBase';
 import { ColdFusion } from './ColdFusion';
-import { JovianMegaReseachBay } from './JovianMegaResearchBay';
+//import { JovianMegaReseachBay } from './JovianMegaResearchBay';
+import { LimitedEnergyBudget } from './LimitedEnergyBudget';
+import { NuclearReactor } from './NuclearReactor';
+import { SpentFuel } from './SpentFuel';
+import { EnergizingLava } from './EnergizingLava';
+//import { MirroredHeatExchangers } from './MirroredHeatExchangers';
 
 
 export const NUCLEAR_CARD_MANIFEST = new ModuleManifest({
@@ -41,7 +46,12 @@ export const NUCLEAR_CARD_MANIFEST = new ModuleManifest({
     //[CardName.MOLECULAR_H2O_RESEARCH] : {Factory: MolecularH2OResearch},
     [CardName.OBERON_ORBITAL_BASE] : {Factory: OberonOrbitalBase},
     [CardName.COLD_FUSION]: {Factory: ColdFusion},
-    [CardName.JOVIAN_MEGA_RESEARCH_BAY] :{Factory: JovianMegaReseachBay},
+    //[CardName.JOVIAN_MEGA_RESEARCH_BAY] :{Factory: JovianMegaReseachBay},
+    [CardName.LIMITED_ENERGY_BUDGET] : {Factory: LimitedEnergyBudget},
+    [CardName.NUCLEAR_REACTOR] : {Factory: NuclearReactor},
+    [CardName.SPENT_FUEL] : {Factory: SpentFuel},
+    [CardName.ENERGIZING_LAVA]: {Factory: EnergizingLava},
+    //[CardName.MIRRORED_HEAT_EXCHANGERS]: {Factory:MirroredHeatExchangers},
   },
  
 });

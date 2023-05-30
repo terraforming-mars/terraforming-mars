@@ -7,9 +7,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ICard} from '../ICard';
 //import {ITagCount} from '../../../common/cards/ITagCount';
 import {Tag} from '../../../common/cards/Tag';
-import {played} from '../Options';
 import {ActionCard} from '../ActionCard';
 //import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {played} from '../Options';
 
 
 export class JovianMegaReseachBay extends ActionCard implements IProjectCard {

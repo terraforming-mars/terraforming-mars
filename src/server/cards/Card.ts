@@ -20,7 +20,7 @@ import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
-import {Counter} from '../behavior/Counter';
+//import {Counter} from '../behavior/Counter';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -217,13 +217,13 @@ export abstract class Card {
     if (typeof(vp) === 'number') {
       return vp;
     }
-    if (typeof(vp) === 'object') {
+    /*if (typeof(vp) === 'object') {
       if (Object.keys(vp).length =1){
         return 10;
       } else {
       return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
       }
-    }
+    }*/
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
     }

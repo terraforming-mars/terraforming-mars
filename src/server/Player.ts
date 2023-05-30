@@ -1457,13 +1457,14 @@ export class Player {
         return false;
       }
     }
-    if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
-      return false;
-    }
     const canPlay = card.canPlay(this);
     if (canPlay === false) {
       return false;
     }
+    // canPlay is true or a YesAnd. If it's a YesAnd, return
+    // the YesAnd. Otherwise, it's true, so return the YesAnd from `satisfies`.
+    //
+    // This is a hack. Ideally there will be 2 YesAnds, but right now there's just one.
     return typeof(canPlay) === 'object' ? canPlay : satisfies;
   }
 

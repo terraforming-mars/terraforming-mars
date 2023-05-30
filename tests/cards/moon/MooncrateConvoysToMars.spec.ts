@@ -8,6 +8,7 @@ import {expect} from 'chai';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
+import {testGame} from '../../TestGame';
 
 describe('MooncrateConvoysToMars', () => {
   let game: Game;
@@ -18,10 +19,7 @@ describe('MooncrateConvoysToMars', () => {
   let card: MooncrateConvoysToMars;
 
   beforeEach(() => {
-    player1 = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.GREEN.newPlayer();
-    game = Game.newInstance('gameid', [player1, player2, player3], player1, {moonExpansion: true, turmoilExtension: true});
+    [game, player1, player2, player3] = testGame(3, {moonExpansion: true, turmoilExtension: true});
     moonData = MoonExpansion.moonData(game);
     card = new MooncrateConvoysToMars();
   });
@@ -31,10 +29,10 @@ describe('MooncrateConvoysToMars', () => {
     player1.megaCredits = card.cost;
 
     game.turmoil!.rulingParty = new MarsFirst();
-    expect(player1.getPlayableCards()).does.include(card);
+    expect(player1.getPlayableCardsForTest()).does.include(card);
 
     game.turmoil!.rulingParty = new Reds();
-    expect(player1.getPlayableCards()).does.not.include(card);
+    expect(player1.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

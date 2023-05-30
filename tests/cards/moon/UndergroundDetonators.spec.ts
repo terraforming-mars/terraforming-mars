@@ -20,7 +20,7 @@ describe('UndergroundDetonators', () => {
   it('can play', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {

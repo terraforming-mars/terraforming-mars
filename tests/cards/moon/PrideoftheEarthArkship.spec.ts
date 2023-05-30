@@ -20,19 +20,19 @@ describe('PrideoftheEarthArkship', () => {
 
     player.tagsForTest = {science: 1, space: 2};
     player.titanium = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.tagsForTest = {science: 0, space: 2};
     player.titanium = 2;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.tagsForTest = {science: 1, space: 1};
     player.titanium = 2;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.tagsForTest = {science: 1, space: 2};
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

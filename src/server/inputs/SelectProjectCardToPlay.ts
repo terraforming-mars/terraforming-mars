@@ -1,27 +1,46 @@
-import {BasePlayerInput, getCardFromPlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {isPayment, Payment} from '../../common/inputs/Payment';
-import {IProjectCard} from '../cards/IProjectCard';
+import {IProjectCard, PlayableCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, Player} from '../Player';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
+import {CardName} from '../../common/cards/CardName';
+import {CanPlayResponse} from '../cards/IProjectCard';
+import {YesAnd} from '../cards/requirements/CardRequirement';
+
+export type PlayCardMetadata = {
+  reserveUnits: Readonly<Units>;
+  details: CanPlayResponse | undefined;
+};
 
 export class SelectProjectCardToPlay extends BasePlayerInput {
-  public reserveUnits: Array<Units>;
+  public cards: Array<IProjectCard> = [];
+  public extras: Map<CardName, PlayCardMetadata>;
 
   constructor(
     private player: Player,
-    public cards: Array<IProjectCard> = player.getPlayableCards(),
+    cards: Array<PlayableCard> = player.getPlayableCards(),
     public config?: {
       action?: CardAction,
       cb?: (cardToPlay: IProjectCard) => void,
     }) {
     super(PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY, 'Play project card');
     this.buttonLabel = 'Play card';
-    this.reserveUnits = this.cards.map((card) => {
-      return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;
-    });
+    this.cards = cards.map((card) => card.card);
+    this.extras = new Map(
+      cards.map((card) => {
+        return [
+          card.card.name,
+          {
+            reserveUnits: card.card.reserveUnits ?
+              MoonExpansion.adjustedReserveCosts(player, card.card) :
+              Units.EMPTY,
+            details: card.details,
+          },
+        ];
+      }));
   }
 
   public process(input: InputResponse) {
@@ -31,24 +50,43 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     if (!isPayment(input.payment)) {
       throw new Error('payment is not a valid type');
     }
-    const cardData = getCardFromPlayerInput(this.cards, input.card);
-    const card: IProjectCard = cardData.card;
-    const reserveUnits = this.reserveUnits[cardData.idx];
+
+    const card = this.cards.find((card) => card.name === input.card);
+    if (card === undefined) {
+      throw new Error('Unknown card name ' + input.card);
+    }
+    const details = this.extras.get(input.card);
+    if (details === undefined) {
+      throw new Error('Unknown card name ' + input.card);
+    }
     // These are not used for safety but do help give a better error message
     // to the user
+    const reserveUnits = details.reserveUnits;
     if (reserveUnits.steel + input.payment.steel > this.player.steel) {
       throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${input.card}`);
     }
     if (reserveUnits.titanium + input.payment.titanium > this.player.titanium) {
       throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${input.card}`);
     }
-    this.cb(card, input.payment);
+    const yesAnd = typeof(details.details) === 'boolean' ? undefined : details.details;
+    this.payAndPlay(card, input.payment, yesAnd);
     return undefined;
   }
 
-  // To fullfil PlayerInput.
-  public cb(card: IProjectCard, payment: Payment) {
+  public payAndPlay(card: IProjectCard, payment: Payment, yesAnd?: YesAnd) {
     this.player.checkPaymentAndPlayCard(card, payment, this.config?.action);
+    if ((yesAnd?.thinkTankResources ?? 0) > 0) {
+      const thinkTank = this.player.tableau.find((card) => card.name === CardName.THINK_TANK);
+      // TODO(kberg): this processing ought to be done while paying for the card.
+      if (thinkTank !== undefined) {
+        this.player.removeResourceFrom(thinkTank, yesAnd?.thinkTankResources, {log: true});
+      }
+    }
+    this.cb(card);
+  }
+
+  // To fullfil PlayerInput.
+  public cb(card: IProjectCard) {
     this.config?.cb?.(card);
     return undefined;
   }

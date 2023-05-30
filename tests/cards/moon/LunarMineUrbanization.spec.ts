@@ -25,16 +25,16 @@ describe('LunarMineUrbanization', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
 
     space.tile = {tileType: TileType.MOON_MINE};
     space.player = player;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     space.player = undefined;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {
@@ -68,16 +68,16 @@ describe('LunarMineUrbanization', () => {
 
     const [space, nextSpace] = moonData.moon.getAvailableSpacesOnLand(player);
 
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     space.tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
     space.player = player;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     nextSpace.tile = {tileType: TileType.MOON_MINE};
     nextSpace.player = player;
 
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play, compatible with Odyssey', () => {

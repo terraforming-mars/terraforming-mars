@@ -25,9 +25,9 @@ describe('TitaniumMarketMonopolists', () => {
     player.megaCredits = card.cost;
 
     moonData.miningRate = 3;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
     moonData.miningRate = 2;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('can act - buy', () => {

@@ -83,22 +83,22 @@ describe('Odyssey', () => {
     const inventionContest = new InventionContest();
     player.playedCards = [importOfAdvancedGHG, inventionContest];
 
-    let selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
+    let selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
 
-    expect(selectCard.cards).is.empty;
+    expect(selectProjectCardToPlay.cards).is.empty;
 
     player.megaCredits = 4;
-    selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
-    expect(selectCard.cards).has.members([inventionContest]);
+    selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
+    expect(selectProjectCardToPlay.cards).has.members([inventionContest]);
 
     player.megaCredits = 9;
-    selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
-    expect(selectCard.cards).has.members([importOfAdvancedGHG, inventionContest]);
+    selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
+    expect(selectProjectCardToPlay.cards).has.members([importOfAdvancedGHG, inventionContest]);
 
     expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
     expect(player.production.heat).eq(0);
 
-    selectCard.cb(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
+    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
     runAllActions(game);
 
     expect(player.production.heat).eq(2);
@@ -113,12 +113,12 @@ describe('Odyssey', () => {
     player.megaCredits = 50;
 
     player.playedCards = [importOfAdvancedGHG, mediaGroup];
-    const selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
+    const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
 
     expect(player.production.heat).eq(0);
     expect(player.megaCredits).eq(50);
 
-    selectCard.cb(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: 9});
+    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: 9});
     runAllActions(game);
 
     expect(player.production.heat).eq(2);
@@ -131,9 +131,9 @@ describe('Odyssey', () => {
     const indenturedWorkers = new IndenturedWorkers();
     player.playedCards.push(indenturedWorkers);
 
-    const selectCard = cast(odyssey.action(player), SelectProjectCardToPlay);
-    expect(selectCard.cards).includes(indenturedWorkers);
-    selectCard.cb(indenturedWorkers, Payment.of({})); // Indentured workers costs 0.
+    const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
+    expect(selectProjectCardToPlay.cards).includes(indenturedWorkers);
+    selectProjectCardToPlay.payAndPlay(indenturedWorkers, Payment.of({})); // Indentured workers costs 0.
     runAllActions(game);
     const deimosDown = new DeimosDown();
 
@@ -176,7 +176,7 @@ describe('Odyssey', () => {
     player.addActionThisGeneration(odyssey.name); // This is played after `action` as it matches code behavior.
     expect(selectProjectCardToPlay.cards.map((c) => c.name)).deep.eq([projectInspection.name]);
 
-    const playAction = selectProjectCardToPlay.cb(projectInspection, Payment.EMPTY);
+    const playAction = selectProjectCardToPlay.payAndPlay(projectInspection, Payment.EMPTY);
     expect(playAction).is.undefined;
     runAllActions(game);
     const selectAction = cast(player.popWaitingFor(), SelectCard);

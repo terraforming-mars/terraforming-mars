@@ -95,7 +95,7 @@ describe('StratosphericBirds', () => {
     expect(player.simpleCanPlay(card)).is.true;
 
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 12});
+    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 12});
     runAllActions(game); // Remove floater
     expect(player.popWaitingFor()).is.undefined;
     expect(aerialMappers.resourceCount).to.eq(0);
@@ -121,12 +121,12 @@ describe('StratosphericBirds', () => {
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
       const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-      selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
+      selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 12});
+    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 12});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
   });
@@ -144,7 +144,7 @@ describe('StratosphericBirds', () => {
 
     // Spend all 3 floaters from Dirigibles to pay for the card
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
+    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
     expect(deuteriumExport.resourceCount).to.eq(0);

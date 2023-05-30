@@ -19,9 +19,9 @@ describe('AncientShipyards', () => {
     player.cardsInHand = [card];
     player.titanium = 2;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
     player.titanium = 3;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {

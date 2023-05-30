@@ -36,10 +36,10 @@ describe('LunarSecurityStations', () => {
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
     spaces[2].tile = {tileType: TileType.MOON_ROAD};
 
-    expect(player.getPlayableCards()).includes(card);
+    expect(player.getPlayableCardsForTest()).includes(card);
 
     spaces[1].tile = {tileType: TileType.MOON_HABITAT};
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('protects against Hired Raiders', () => {

@@ -85,7 +85,7 @@ export function translateText(englishText: string): string {
       }
     }
     if (!translated.has(englishText)) {
-      console.log(`${lang} - please translate: ${englishText}`);
+      console.log(`${lang} - please translate: "${englishText}"`);
     }
   }
 

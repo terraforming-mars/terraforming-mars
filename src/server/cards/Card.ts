@@ -173,10 +173,16 @@ export abstract class Card {
   public get tilesBuilt(): Array<TileType> {
     return this.properties.tilesBuilt || [];
   }
-  public canPlay(player: Player) {
-    if (this.requirements?.satisfies(player) === false) {
+  public canPlay(player: Player): boolean {
+    //
+    // Is this block necessary?
+    const satisfied = this.requirements?.satisfies(player);
+    if (satisfied === false) {
       return false;
     }
+    // It's repeated at Player.simpleCanPlay.
+    //
+
     if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
       return false;
     }

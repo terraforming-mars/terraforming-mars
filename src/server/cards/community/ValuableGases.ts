@@ -31,7 +31,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    const playableCards = player.getPlayableCards().filter((card) => card.tags.includes(Tag.VENUS));
+    const playableCards = player.getPlayableCards().filter((card) => card.card.tags.includes(Tag.VENUS));
 
     if (playableCards.length > 0) {
       return new SelectProjectCardToPlay(

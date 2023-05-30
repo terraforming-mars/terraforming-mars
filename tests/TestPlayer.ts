@@ -6,6 +6,7 @@ import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 import {Tags} from '../src/server/player/Tags';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 class TestPlayerFactory {
   constructor(private color: Color) {}
@@ -90,5 +91,9 @@ export class TestPlayer extends Player {
     } else {
       this.corporations = [card];
     }
+  }
+
+  public getPlayableCardsForTest(): Array<IProjectCard> {
+    return this.getPlayableCards().map((entry) => entry.card);
   }
 }

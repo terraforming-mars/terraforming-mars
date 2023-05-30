@@ -106,7 +106,7 @@ describe('ProjectInspection', function() {
     expect(action1.cards).has.lengthOf(2); // IW and PI (which was just played) are available
     expect(action1.cards[0]?.name).eq(indenturedWorkers.name);
     expect(action1.cards[1]?.name).eq(card.name);
-    action1.cb(card, Payment.EMPTY);
+    action1.payAndPlay(card, Payment.EMPTY);
     runAllActions(player.game);
 
     const play2 = cast(player.popWaitingFor(), SelectCard);

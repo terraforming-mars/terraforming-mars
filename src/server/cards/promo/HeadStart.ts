@@ -1,0 +1,46 @@
+import {PreludeCard} from '../prelude/PreludeCard';
+import {Player} from '../../Player';
+import {CardName} from '../../../common/cards/CardName';
+import {Resources} from '../../../common/Resources';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {CardType} from '../../../common/cards/CardType';
+
+export class HeadStart extends PreludeCard {
+  constructor() {
+    super({
+      name: CardName.HEAD_START,
+
+      behavior: {
+        stock: {
+          steel: 2,
+        },
+      },
+
+      // This is not exactly the same as the official Head Start, which says "Immediately take 2 actions"
+
+      metadata: {
+        cardNumber: 'X43',
+        renderData: CardRenderer.builder((b) => {
+          b.steel(2).br;
+          b.text('GAIN 2 STEEL.', Size.TINY).br;
+          b.megacredits(0, {questionMark: true}).br;
+          b.text('GAIN 2 MC PER PROJECT CARD YOU HAVE IN HAND.', Size.TINY, true, false).br;
+          b.arrow().arrow().br;
+          b.text('TAKE 2 ACTIONS AFTER PLAYING PRELUDES.', Size.TINY, true, false).br;
+        }),
+      },
+    });
+  }
+
+  private static PROJECT_CARD_TYPES = [CardType.ACTIVE, CardType.AUTOMATED, CardType.EVENT];
+
+  public override bespokePlay(player: Player) {
+    const projectCardsInHand = player.cardsInHand.filter((card) => HeadStart.PROJECT_CARD_TYPES.includes(card.type));
+    const megacredits = projectCardsInHand.length * 2;
+    player.addResource(Resources.MEGACREDITS, megacredits, {log: true});
+    player.actionsThisRound += 2;
+
+    return undefined;
+  }
+}

@@ -182,6 +182,10 @@ export default (Vue as WithRefs<Refs>).extend({
             break;
           }
           break;
+          // Gain 2 MC for each project card in hand.
+        case CardName.HEAD_START:
+          result += this.selectedCards.length * 2;
+          break;
         }
       }
       return result;

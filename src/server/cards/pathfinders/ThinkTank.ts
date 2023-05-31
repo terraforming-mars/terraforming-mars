@@ -24,7 +24,7 @@ export class ThinkTank extends ActionCard {
         cardNumber: 'Pf49',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2 M€ to place 1 data on any card.', (ab) => {
-            ab.megacredits(2).startAction.data();
+            ab.megacredits(2).startAction.data().asterix();
           }).br;
           b.effect(
             'When playing a card, you can remove data from this card to ' +

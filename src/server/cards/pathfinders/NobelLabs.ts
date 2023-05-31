@@ -16,7 +16,7 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
     super({
       type: CardType.ACTIVE,
       name: CardName.NOBEL_LABS,
-      cost: 9,
+      cost: 8,
       tags: [Tag.PLANT, Tag.ANIMAL, Tag.MARS],
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
 

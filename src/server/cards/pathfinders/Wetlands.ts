@@ -22,6 +22,7 @@ export class Wetlands extends Card implements IProjectCard {
       tr: {oxygen: 1, tr: 1},
       requirements: CardRequirements.builder((b) => b.oceans(2)),
       reserveUnits: {plants: 4},
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'Pf03',

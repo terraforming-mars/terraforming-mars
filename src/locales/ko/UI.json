@@ -415,7 +415,7 @@
     "Choose prelude card to play": "추진할 서곡 카드 선택",
     "Remove 1 floater on this card to trade for free": "이 카드의 부양체 자원 1개를 소비하여 무료로 무역사업 수행",
     "Add 1 floater to a Jovian card": "목성 카드에 부양체 자원 1개 추가",
-    "Pay 1 floater (use Titan Floating Launch-pad action)": "부양체 자원 1개 지불 (‘타이탄 공중 발사대’ 행동)",
+    "Pay 1 floater (use ${0} action)": "부양체 자원 1개 지불 (‘타이탄 공중 발사대’ 행동)",
     "Spend one titanium to add 2 floaters to this card": "티타늄 자원 1개를 소비하여 이 카드에 부양체 자원 2개 추가",
     "Spend titanium": "티타늄 자원 소비",
     "Select space for ocean from placement bonus": "점유 보너스",

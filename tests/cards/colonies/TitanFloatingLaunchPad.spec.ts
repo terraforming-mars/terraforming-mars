@@ -12,6 +12,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
+import {Message} from '../../../src/common/logs/Message';
 
 describe('TitanFloatingLaunchPad', function() {
   let card: TitanFloatingLaunchPad;
@@ -21,7 +22,7 @@ describe('TitanFloatingLaunchPad', function() {
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();
     // Second player is ignored.
-    [game, player] = testGame(2, {coloniesExtension: true, turmoilExtension: false});
+    [game, player] = testGame(2, {coloniesExtension: true});
   });
 
   it('Should act', function() {
@@ -112,7 +113,7 @@ describe('TitanFloatingLaunchPad', function() {
     expect(payAction.options).has.length(1);
 
     const floaterOption = cast(payAction, OrOptions).options[0];
-    expect(floaterOption.title).to.match(/Pay 1 floater/);
+    expect((floaterOption.title as Message).message).to.match(/Pay 1 floater/);
 
     floaterOption.cb();
     tradeAction.options[1].cb(luna);

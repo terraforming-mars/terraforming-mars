@@ -405,7 +405,7 @@
     "Choose prelude card to play": "选择要打出的前序牌",
     "Remove 1 floater on this card to trade for free": "移除 1 个云资源免费贸易 1 次",
     "Add 1 floater to a Jovian card": "添加 1 个云资源到任意木星卡",
-    "Pay 1 floater (use Titan Floating Launch-pad action)": "支付 1 个云资源(使用 泰坦漂浮物起飞平台 行动)",
+    "Pay 1 floater (use ${0} action)": "支付 1 个云资源(使用 泰坦漂浮物起飞平台 行动)",
     "Spend one titanium to add 2 floaters to this card": "支付 1 个钛来添加 2 个云资源到本卡",
     "Spend titanium": "支付钛",
     "Select space for ocean from placement bonus": "从放置奖励中选择放置海洋板块",

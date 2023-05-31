@@ -21,6 +21,7 @@ import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {CardFinder} from './CardFinder';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
+import {STAR_WARS_CARD_MANIFEST} from './cards/starwars/StarwarsCardManifest';
 
 /**
  * Returns the cards available to a game based on its `GameOptions`.
@@ -56,6 +57,7 @@ export class GameCards {
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
       [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
       [gameOptions.ceoExtension, CEO_CARD_MANIFEST],
+      [gameOptions.starWarsExpansion, STAR_WARS_CARD_MANIFEST],
     ];
 
     this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);
@@ -84,9 +86,10 @@ export class GameCards {
         return gameOptions.aresExtension;
       case 'ceo':
         return gameOptions.ceoExtension;
-      default:
-        throw new Error(`Unhandled expansion type ${expansion}`);
+      case 'starwars':
+        return gameOptions.starWarsExpansion;
       }
+      throw new Error(`Unhandled expansion type ${expansion}`);
     });
   }
 

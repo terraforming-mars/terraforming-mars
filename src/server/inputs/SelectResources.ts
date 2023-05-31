@@ -37,7 +37,7 @@ export class SelectResources extends AndOptions {
     public count: number,
     public override title: string,
     // this isn't actually used as a paramteter, but  this class
-    // is kind of strangely structered. If you can refactor this,
+    // is kind of strangely structured. If you can refactor this,
     // please do.
     private units = Units.of({})) {
     super(

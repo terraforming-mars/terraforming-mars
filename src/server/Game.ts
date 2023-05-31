@@ -144,6 +144,11 @@ export class Game implements Logger {
   // The set of tags available in this game.
   public readonly tags: ReadonlyArray<Tag>;
 
+  // Trade Embargo
+  public tradeEmbargo: boolean = false;
+  // Trade Embargo
+  public beholdTheEmperor: boolean = false;
+
   private constructor(
     id: GameId,
     players: Array<Player>,
@@ -376,6 +381,7 @@ export class Game implements Logger {
     const result: SerializedGame = {
       activePlayer: this.activePlayer,
       awards: this.awards.map((a) => a.name),
+      beholdTheEmperor: this.beholdTheEmperor,
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       ceoDeck: this.ceoDeck.serialize(),
@@ -411,6 +417,7 @@ export class Game implements Logger {
       spectatorId: this.spectatorId,
       syndicatePirateRaider: this.syndicatePirateRaider,
       temperature: this.temperature,
+      tradeEmbargo: this.tradeEmbargo,
       undoCount: this.undoCount,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [
@@ -705,6 +712,10 @@ export class Game implements Logger {
       });
       // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
       this.syndicatePirateRaider = undefined;
+      // Trade embargo hook.
+      this.tradeEmbargo = false;
+      // Behold The Emperor hook
+      this.beholdTheEmperor = false;
     }
   }
 
@@ -1512,7 +1523,11 @@ export class Game implements Logger {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
+
+    // TODO(kberg): delete this block by 2023-07-01
+    gameOptions.starWarsExpansion = gameOptions.starWarsExpansion ?? false;
     gameOptions.bannedCards = gameOptions.bannedCards ?? [];
+
     const players = d.players.map((element) => Player.deserialize(element));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {
@@ -1610,6 +1625,8 @@ export class Game implements Logger {
     game.initialDraftIteration = d.initialDraftIteration;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
+    game.tradeEmbargo = d.tradeEmbargo ?? false;
+    game.beholdTheEmperor = d.beholdTheEmperor ?? false;
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {

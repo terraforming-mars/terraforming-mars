@@ -16,4 +16,5 @@ export enum CardResource {
     SEED = 'Seed',
     AGENDA = 'Agenda',
     ORBITAL = 'Orbital',
+    CLONE_TROOPER = 'Clone Trooper',
 }

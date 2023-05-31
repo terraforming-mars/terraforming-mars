@@ -27,9 +27,11 @@ import {IColony, TradeOptions} from './IColony';
 import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {ColonyName} from '../../common/colonies/ColonyName';
 
+export enum ShouldIncreaseTrack { YES, NO, ASK }
 export abstract class Colony implements IColony {
     // Players can't build colonies on Miranda until someone has played an Animal card.
     // isActive is the gateway for that action and any other card with that type of constraint
+    // also isActive represents when the colony is part of the game, or "back in the box", as it were.
     public isActive: boolean = true;
     public visitor: undefined | PlayerId = undefined;
     public colonies: Array<PlayerId> = [];

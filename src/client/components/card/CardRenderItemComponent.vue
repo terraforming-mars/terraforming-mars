@@ -219,6 +219,9 @@ export default Vue.extend({
         } else {
           classes.push('card-hazard-tile');
         }
+      } else if (type === CardRenderItemType.CLONE_TROOPER) {
+        classes.push('card-resource');
+        classes.push('card-resource-clone-trooper');
       }
 
       function sized(clazz: string, size: string | undefined) {

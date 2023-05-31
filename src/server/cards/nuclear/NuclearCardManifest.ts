@@ -24,6 +24,12 @@ import { NuclearReactor } from './NuclearReactor';
 import { SpentFuel } from './SpentFuel';
 import { EnergizingLava } from './EnergizingLava';
 //import { MirroredHeatExchangers } from './MirroredHeatExchangers';
+import { MissileDefenseMatrix } from './MissileDefenseMatrix';
+import { ParticleBeamAccelerator } from './ParticleBeamAccelerator';
+import { PlanetXSighting } from './PlanetXSighting';
+import { RadioactiveDecay } from './RadioactiveDecay';
+import { RedSpotGasHarvesting } from './RedSpotGasHervting';
+
 
 
 export const NUCLEAR_CARD_MANIFEST = new ModuleManifest({
@@ -52,6 +58,11 @@ export const NUCLEAR_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPENT_FUEL] : {Factory: SpentFuel},
     [CardName.ENERGIZING_LAVA]: {Factory: EnergizingLava},
     //[CardName.MIRRORED_HEAT_EXCHANGERS]: {Factory:MirroredHeatExchangers},
+    [CardName.MISSILE_DEFENSE_MATRIX]: {Factory: MissileDefenseMatrix},
+    [CardName.PARTICLE_BEAM_ACCELERATOR]: {Factory: ParticleBeamAccelerator},
+    [CardName.PLANET_X_SIGHTING]: {Factory: PlanetXSighting},
+    [CardName.RADIOACTIVE_DECAY]: {Factory: RadioactiveDecay},
+    [CardName.RED_SPOT_GAS_HARVESTING]: {Factory: RedSpotGasHarvesting}
   },
  
 });

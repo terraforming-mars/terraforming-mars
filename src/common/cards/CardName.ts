@@ -826,4 +826,9 @@ export enum CardName {
     SPENT_FUEL = 'Spent Fuel',
     ENERGIZING_LAVA = 'Energizing Lava',
     MIRRORED_HEAT_EXCHANGERS = 'Mirrored Heat Exchangers',
+    MISSILE_DEFENSE_MATRIX = 'Missile Defense Matrix',
+    PARTICLE_BEAM_ACCELERATOR = 'Particle Beam Accelerator',
+    PLANET_X_SIGHTING = 'Planet X Sighting',
+    RADIOACTIVE_DECAY = 'Radioactive Decay',
+    RED_SPOT_GAS_HARVESTING = 'Red Spot Gas Harvesting'
 }

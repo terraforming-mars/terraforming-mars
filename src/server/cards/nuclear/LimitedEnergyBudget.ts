@@ -25,7 +25,7 @@ export class LimitedEnergyBudget extends Card implements IProjectCard {
         cardNumber: 'N46',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a radiation card, you pay 1 M€ less for it.', (eb) => {
-            eb.radiation({played}).startEffect.megacredits(-1);
+            eb.radiation({amount: 1, played}).startEffect.megacredits(-1);
           }).br;
           b.effect('When you play a power card, you pay 1 M€ more for it and gain 1 energy.', (eb) => {
             eb.energy(1, {played}).startEffect.plus().megacredits(1).colon().energy(1);

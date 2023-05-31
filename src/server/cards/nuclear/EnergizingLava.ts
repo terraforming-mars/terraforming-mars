@@ -25,18 +25,18 @@ export class EnergizingLava extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: 'Pf55',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 hear to add 1 radiation to this card.', (eb) => {
+          b.action('Spend 1 heat to add 1 radiation to this card.', (eb) => {
             eb.heat(1).startAction.radiations(1);
           });
         }),
-        description: 'Requires 4 radiation tagx maximum. 1 VP per 3radiation on this card.',
+        description: 'Requires 4 radiation tags maximum. 1 VP per 4 radiations on this card.',
       },
     });
   }
 
 
   public canAct(player: Player) {
-    return player.plants > 0;
+    return player.heat > 0;
   }
 
   public action(player: Player) {

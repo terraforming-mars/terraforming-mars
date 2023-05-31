@@ -7,6 +7,7 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_COLONY_TRACK_POSITION} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class Naomi extends CeoCard {
   constructor() {
@@ -26,11 +27,7 @@ export class Naomi extends CeoCard {
   }
 
   public override canAct(player: Player): boolean {
-    if (!super.canAct(player)) {
-      return false;
-    }
-    const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
-    return openColonies.length > 0;
+    return super.canAct(player) && ColoniesHandler.tradeableColonies(player.game).length > 0;
   }
 
   public action(player: Player): PlayerInput | undefined {

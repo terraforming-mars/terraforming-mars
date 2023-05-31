@@ -11,6 +11,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class HuygensObservatory extends Card implements IProjectCard {
   constructor() {
@@ -42,13 +43,9 @@ export class HuygensObservatory extends Card implements IProjectCard {
     });
   }
 
-  private tradeableColonies(player: Player) {
-    return player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
-  }
-
   private tryToTrade(player: Player) {
     const game = player.game;
-    const tradeableColonies = this.tradeableColonies(player);
+    const tradeableColonies = ColoniesHandler.tradeableColonies(player.game);
     if (tradeableColonies.length === 0) {
       game.log(
         '${0} cannot trade with ${1} because there is no colony they may visit.',
@@ -97,7 +94,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
     }
   }
   public override bespokeCanPlay(player: Player): boolean {
-    return player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0 || this.tradeableColonies(player).length > 0;
+    return player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0 || ColoniesHandler.tradeableColonies(player.game).length > 0;
   }
 
   public override bespokePlay(player: Player) {

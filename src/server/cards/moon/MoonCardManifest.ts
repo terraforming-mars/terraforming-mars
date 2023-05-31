@@ -17,7 +17,7 @@ import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
 import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
 import {DarksideObservatory} from './DarksideObservatory';
-// import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
+import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
 import {DeepLunarMining} from './DeepLunarMining';
 import {EarthEmbassy} from './EarthEmbassy';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
@@ -56,7 +56,6 @@ import {LunarSecurityStations} from './LunarSecurityStations';
 import {LunarSteel} from './LunarSteel';
 import {LunarTradeFleet} from './LunarTradeFleet';
 import {LunaSenate} from './LunaSenate';
-// import {LunaSenate} from './LunaSenate';
 import {LunaStagingStation} from './LunaStagingStation';
 import {LunaTradeStation} from './LunaTradeStation';
 import {LunaTrainStation} from './LunaTrainStation';
@@ -84,7 +83,6 @@ import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
 import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {OrbitalPowerGrid} from './OrbitalPowerGrid';
-// import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
@@ -196,6 +194,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.EARTH_EMBASSY]: {Factory: EarthEmbassy},
     [CardName.ROVER_DRIVERS_UNION]: {Factory: RoverDriversUnion},
     [CardName.LTF_HEADQUARTERS]: {Factory: LTFHeadquarters, compatibility: 'colonies'},
+    [CardName.DARKSIDE_SMUGGLERS_UNION]: {Factory: DarksideSmugglersUnion, compatibility: 'colonies'},
     [CardName.UNDERMOON_DRUG_LORDS_NETWORK]: {Factory: UndermoonDrugLordsNetwork},
     [CardName.LTF_PRIVILEGES]: {Factory: LTFPrivileges},
     [CardName.GRAND_LUNA_ACADEMY]: {Factory: GrandLunaAcademy},

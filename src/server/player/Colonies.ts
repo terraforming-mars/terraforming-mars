@@ -15,6 +15,7 @@ import {IColonyTrader} from '../colonies/IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
 import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {newMessage} from '../logs/MessageBuilder';
+import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
 
 export class Colonies {
   private player: Player;
@@ -35,6 +36,9 @@ export class Colonies {
     this.player = player;
   }
 
+  /**
+   * Returns `true` if this player has an unused trade fleet.
+   */
   public canTrade() {
     return ColoniesHandler.tradeableColonies(this.player.game).length > 0 &&
       this.getFleetSize() > this.tradesThisGeneration;
@@ -42,12 +46,8 @@ export class Colonies {
 
   public coloniesTradeAction(): AndOptions | undefined {
     const game = this.player.game;
-    if (game.gameOptions.coloniesExtension) {
-      const openColonies = ColoniesHandler.tradeableColonies(game);
-      if (openColonies.length > 0 &&
-        this.fleetSize > this.tradesThisGeneration) {
-        return this.tradeWithColony(openColonies);
-      }
+    if (game.gameOptions.coloniesExtension && this.canTrade()) {
+      return this.tradeWithColony(ColoniesHandler.tradeableColonies(game));
     }
     return undefined;
   }
@@ -55,6 +55,7 @@ export class Colonies {
   private tradeWithColony(openColonies: Array<IColony>): AndOptions | undefined {
     const player = this.player;
     const handlers = [
+      new TradeWithDarksideSmugglersUnion(player),
       new TradeWithTitanFloatingLaunchPad(player),
       new TradeWithCollegiumCopernicus(player),
       new TradeWithEnergy(player),

@@ -4,12 +4,14 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
+import {Tag} from '../../../common/cards/Tag';
 
 export class WaterTreatmentComplex extends Card {
   constructor() {
     super({
       name: CardName.WATER_TREATMENT_COMPLEX,
       type: CardType.AUTOMATED,
+      tags: [Tag.MOON],
       cost: 12,
       requirements: CardRequirements.builder((b) => b.habitatTiles(1, {all})),
       reserveUnits: {titanium: 1},

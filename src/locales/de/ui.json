@@ -329,7 +329,6 @@
     "Increase oxygen": "Erhöhe Sauerstoffgehalt",
     "Add an ocean": "Platziere einen Ozean",
     "Increase Venus scale": "Erhöhe Venuswertung",
-    "[ toggle tags view ]": "[ Symbolanzeige ]",
 
     "Login": "Einloggen",
     "Register": "Registrieren",
@@ -627,6 +626,7 @@
     "Add 1 science resource to this card": "Füge dieser Karte 1 Wissenschaftsressource hinzu",
     "Remove resource": "Entferne Ressource",
     "Remove resource(s)": "Entferne Ressource",
+    "Pay 2 M€ to draw a card": "Bezahle 2 M€, um eine Karte zu ziehen",
     "Pay 2 M€ to add 1 floater to this card": "Bezahle 2 M€, um dieser Karte 1 Schweber hinzuzufügen",
     "Select card to add ${0} Data(s)": "Wähle eine Karte um ${0} Daten hinzuzufügen",
     "Select card to add 1 Data(s)": "Wähle eine Karte um 1 Daten hinzuzufügen",
@@ -774,6 +774,7 @@
     "Gain 3 resources for your Venus track bonus.": "Erhalte 3 Ressource für deinen Venusleisten-Bonus.",
     "Gain 1 resource for your Planetary track bonus.": "Erhalte 1 Ressource für deinen Planetenleisten-Bonus.",
     "Select a new tag for this clone tag.": "Wähle 1 neues Symbol für dieses Klon-Symbol.",
+    "Select an additional bonus from this space.": "Wähle 1 zusätzlichen Bonus von diesem Feld.",
     "Philares effect: select ${0} resource(s)": "Philares Effekt: Wähle ${0} Ressource(n)",
     "Global Event - Select 2 cards to discard": "Globales Ereignis - 2 Karten zum Abwerfen auswählen",
     "Dry Deserts Global Event - Gain 1 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 1 Ressource für deinen Einfluss",
@@ -939,6 +940,7 @@
     "Must select a space": "Suche ein Feld aus",
     "[ toggle cards filters ]": "[ Kartenfilter aktivieren/deaktivieren ]",
     "[ toggle tags view ]": "[ Symbolsichtfilter aktivieren/deaktivieren ]",
+    "[ toggle cards in hand ]": "[ Handkarten aktivieren/deaktivieren ]",
 
     "Cards List": "Kartenliste",
     "legacy card UI": "Alte Kartenliste",

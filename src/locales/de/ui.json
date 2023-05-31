@@ -643,7 +643,7 @@
     "Choose CEO card to play": "Wähle eine CEO-Karte um sie zu spielen",
     "Remove 1 floater on this card to trade for free": "Entferne 1 Schweber von dieser Karte, um kostenlos zu handeln",
     "Add 1 floater to a Jovian card": "Füge einer JUPITER-KARTE 1 Schweber hinzu",
-    "Pay 1 floater (use Titan Floating Launch-pad action)": "Bezahle 1 Schweber (die Titan-Schweber-Startplattform Aktion nutzen)",
+    "Pay 1 floater (use ${0} action)": "Bezahle 1 Schweber (die Titan-Schweber-Startplattform Aktion nutzen)",
     "Spend 2X M€ to gain X energy": "Bezahle 2X M€, um X Energie zu erhalten",
     "Spend M€": "Bezahle M€",
     "Decrease energy production 1 step to gain 8 M€": "Reduziere deine Energie-Produktion um 1, um 8 M€ zu erhalten",

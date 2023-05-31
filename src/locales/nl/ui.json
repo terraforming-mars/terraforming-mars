@@ -552,7 +552,7 @@
     "Choose prelude card to play": "Kies een Prelude-kaart om te spelen",
     "Remove 1 floater on this card to trade for free": "Verwijder 1 floater van deze kaart om gratis te ruilen",
     "Add 1 floater to a Jovian card": "Voeg 1 floater toe aan een Jupiter-kaart",
-    "Pay 1 floater (use Titan Floating Launch-pad action)": "Betaal 1 floater (gebruik de Titan drijvend lanceerplatform actie)",
+    "Pay 1 floater (use ${0} action)": "Betaal 1 floater (gebruik de Titan drijvend lanceerplatform actie)",
     "Spend 1 plant to gain 7 M€": "Betaal 1 plant om 7 M€ te krijgen",
     "Spend 1 steel to gain 7 M€": "Betaal 1 staal om 7 M€ te krijgen",
     "Spend plant": "Betaal plant",

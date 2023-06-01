@@ -29,6 +29,9 @@ import { ParticleBeamAccelerator } from './ParticleBeamAccelerator';
 import { PlanetXSighting } from './PlanetXSighting';
 import { RadioactiveDecay } from './RadioactiveDecay';
 import { RedSpotGasHarvesting } from './RedSpotGasHervting';
+import { SoilDecontamination } from './SoilDecontamination';
+import { SolarIrradiance } from './SolarIrradiance';
+import { StellarNova } from './StellarNova';
 
 
 
@@ -62,7 +65,10 @@ export const NUCLEAR_CARD_MANIFEST = new ModuleManifest({
     [CardName.PARTICLE_BEAM_ACCELERATOR]: {Factory: ParticleBeamAccelerator},
     [CardName.PLANET_X_SIGHTING]: {Factory: PlanetXSighting},
     [CardName.RADIOACTIVE_DECAY]: {Factory: RadioactiveDecay},
-    [CardName.RED_SPOT_GAS_HARVESTING]: {Factory: RedSpotGasHarvesting}
+    [CardName.RED_SPOT_GAS_HARVESTING]: {Factory: RedSpotGasHarvesting},
+    [CardName.SOIL_DECONTAMINATION]: {Factory: SoilDecontamination},
+    [CardName.SOLAR_IRRADIANCE]: {Factory: SolarIrradiance},
+    [CardName.STELLAR_NOVA]: {Factory: StellarNova},
   },
  
 });

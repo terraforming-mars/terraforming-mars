@@ -18,6 +18,7 @@ export class RadioactiveDecay extends ActionCard {
 
       action: {
         or: {
+          autoSelect: true,
           behaviors: [
             {
               addResources: 1,

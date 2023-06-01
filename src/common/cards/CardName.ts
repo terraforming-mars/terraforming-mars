@@ -830,5 +830,8 @@ export enum CardName {
     PARTICLE_BEAM_ACCELERATOR = 'Particle Beam Accelerator',
     PLANET_X_SIGHTING = 'Planet X Sighting',
     RADIOACTIVE_DECAY = 'Radioactive Decay',
-    RED_SPOT_GAS_HARVESTING = 'Red Spot Gas Harvesting'
+    RED_SPOT_GAS_HARVESTING = 'Red Spot Gas Harvesting',
+    SOIL_DECONTAMINATION = 'Soil Decontamination',
+    SOLAR_IRRADIANCE = 'Solar Irradiance',
+    STELLAR_NOVA = 'Stellar Nova',
 }

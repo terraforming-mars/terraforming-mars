@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
+//import {Size} from '../../../common/cards/render/Size';
 import {ActionCard} from '../ActionCard';
 import {CardRequirements} from '../requirements/CardRequirements';
 
@@ -45,8 +45,7 @@ export class RedSpotGasHarvesting extends ActionCard {
           b.action('Add 2 radiations to this card.', (be) => {
             be.titanium(1).startAction.radiations(2);
           }).br;
-          b.or(Size.SMALL).br;
-          b.action('Remove 1 radiation here to gain 1 steel and 1 energy.', (be) => {
+          b.or().action('Remove 1 radiation here to gain 1 steel and 1 energy.', (be) => {
             be.radiations(1).startAction.steel(1).energy(1);
           }).br;
           

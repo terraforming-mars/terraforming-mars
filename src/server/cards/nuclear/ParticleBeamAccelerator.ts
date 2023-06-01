@@ -52,11 +52,13 @@ export class ParticleBeamAccelerator extends Card implements IActionCard, IProje
 
       metadata: {
         cardNumber: 'N18',
-        description: 'Requires 2 science tags.',
+        description: {
+          text: 'Requires 2 science tags.',
+          align: 'left'},
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a science tag or power tag, including this, add 1 radiation to this card.', (be) => {
             be.science(1, {played}).slash();
-            be.energy(1, {played}).slash();
+            be.energy(1, {played});
             be.startEffect.radiations(1);
           }).br;
           b.action('Spend 1 radiation here to increase gain 1 titanium or 1 energy or 2 heat.', (eb) => {

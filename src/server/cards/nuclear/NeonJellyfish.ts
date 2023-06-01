@@ -35,7 +35,9 @@ export class NeonJellyfish extends ActionCard implements IProjectCard {
           }).br;
             b.animals(1).slash().oceans(2);
         }),
-          description: 'Requires 5 Ocean tiles. Add an animal to this card for every 2 ocean tiles in play. 1 VP per 2 animals on this card.',
+          description: {
+            text: 'Requires 5 Ocean tiles. Add an animal to this card for every 2 ocean tiles in play. 1 VP per 2 animals on this card.',
+            align: 'left'}
       },
     });
     }

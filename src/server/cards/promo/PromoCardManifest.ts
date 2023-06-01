@@ -54,6 +54,7 @@ import {SnowAlgae} from './SnowAlgae';
 import {Splice} from './Splice';
 import {StanfordTorus} from './StanfordTorus';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
+import {Supercapacitors} from './Supercapacitors';
 import {TopsoilContract} from './TopsoilContract';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
@@ -102,6 +103,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.OUTDOOR_SPORTS]: {Factory: OutdoorSports},
     [CardName.PSYCHE]: {Factory: Psyche},
     [CardName.ROBOT_POLLINATORS]: {Factory: RobotPollinators},
+    [CardName.SUPERCAPACITORS]: {Factory: Supercapacitors},
   },
   preludeCards: {
     [CardName.NEW_PARTNER]: {Factory: NewPartner},

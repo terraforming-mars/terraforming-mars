@@ -67,6 +67,7 @@ import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
+import {Supercapacitors} from './cards/promo/Supercapacitors';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -740,13 +741,23 @@ export class Player {
 
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
+
+    if (this.cardIsInEffect(CardName.SUPERCAPACITORS)) {
+      Supercapacitors.onProduction(this);
+    } else {
+      this.heat += this.energy;
+      this.energy = 0;
+      this.finishProductionPhase();
+    }
+  }
+
+  public finishProductionPhase() {
     this.megaCredits += this.production.megacredits + this.terraformRating;
-    this.heat += this.energy;
-    this.heat += this.production.heat;
-    this.energy = this.production.energy;
-    this.titanium += this.production.titanium;
     this.steel += this.production.steel;
+    this.titanium += this.production.titanium;
     this.plants += this.production.plants;
+    this.energy += this.production.energy;
+    this.heat += this.production.heat;
 
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
     // Turn off CEO OPG actions that were activated this generation

@@ -678,7 +678,14 @@ export class Game implements Logger {
       player.colonies.cardDiscount = 0; // Iapetus reset hook
       player.runProductionPhase();
     });
+    this.postProductionPhase();
+  }
 
+  private postProductionPhase(): void {
+    if (this.deferredActions.length > 0) {
+      this.deferredActions.runAll(() => this.postProductionPhase());
+      return;
+    }
     if (this.gameIsOver()) {
       this.log('Final greenery placement', (b) => b.forNewGeneration());
       this.takeNextFinalGreeneryAction();

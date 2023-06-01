@@ -19,6 +19,7 @@ describe('Supercapacitors', () => {
 
   it('When player has no energy, go straight to selecting cards', () => {
     expect(player.popWaitingFor()).is.undefined;
+    player.production.override({energy: 1, heat: 2});
     player.playedCards.push(card);
     player.energy = 0;
     forceGenerationEnd(game);
@@ -26,6 +27,9 @@ describe('Supercapacitors', () => {
 
     // Select cards for next generation
     cast(player.popWaitingFor(), SelectCard);
+    // Production still occurs.
+    expect(player.energy).eq(1);
+    expect(player.heat).eq(2);
   });
 
 

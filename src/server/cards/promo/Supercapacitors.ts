@@ -33,6 +33,7 @@ export class Supercapacitors extends Card implements IProjectCard {
 
   public static onProduction(player: Player) {
     if (player.energy === 0) {
+      player.finishProductionPhase();
       return;
     }
     player.defer(

@@ -25,16 +25,24 @@ const RESOURCE_TO_ITEM_TYPE = new Map([
 export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
   public anyPlayer: boolean = false; // Law Suit
-  constructor(public item: CardRenderItem | undefined, public points: number, public target: number) {}
-
-  public static resource(type: CardResource, points: number, target: number): CardRenderDynamicVictoryPoints {
-    const itemType = RESOURCE_TO_ITEM_TYPE.get(type);
-    if (itemType === undefined) {
-      throw new Error('Unknown item type ' + type);
+  // to allow multiple sources of VP optional props to ICArdRenderDynamicVictoryPoints were added
+  constructor(public item: CardRenderItem | undefined, public points: number, public target: number, public item2?: CardRenderItem | undefined, public points2?: number, public target2?: number) {}
+  public static resource(type1: CardResource, points1: number, target1: number, type2?: CardResource, points2?: number, target2?: number): CardRenderDynamicVictoryPoints {
+    const item1Type = RESOURCE_TO_ITEM_TYPE.get(type1);
+    if (item1Type === undefined) {
+      throw new Error('Unknown item type ' + type1);
     }
-    return new CardRenderDynamicVictoryPoints(new CardRenderItem(itemType), points, target);
+    if(type2){
+      const item2Type = RESOURCE_TO_ITEM_TYPE.get(type2);
+      if (item2Type === undefined) {
+        throw new Error('Unknown item type ' + type2);
+      }
+      return new CardRenderDynamicVictoryPoints(new CardRenderItem(item1Type), points1, target1, new CardRenderItem(item2Type), points2, target2);
+    } else {
+      return new CardRenderDynamicVictoryPoints(new CardRenderItem(item1Type), points1, target1);
+    }
   }
-  public static tag(type: Tag, points: number, target: number): CardRenderDynamicVictoryPoints {
+  public static tag(type: Tag, points: number, target: number, type2?: Tag, points2?: number, target2?: number): CardRenderDynamicVictoryPoints {
     const map = new Map<Tag, CardRenderItemType>([
       [Tag.JOVIAN, CardRenderItemType.JOVIAN],
       [Tag.MOON, CardRenderItemType.MOON],
@@ -42,30 +50,20 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
       [Tag.RADIATION, CardRenderItemType.RADIATION],
       [Tag.POWER, CardRenderItemType.ENERGY],
     ]);
-    const itemType = map.get(type);
-    if (itemType === undefined) {
+    const item1Type = map.get(type);
+    if (item1Type === undefined) {
       throw new Error('Unknown item type ' + type);
     }
-    return new CardRenderDynamicVictoryPoints(new CardRenderItem(itemType, 1, {played: true}), points, target);
-  }
-
-  public combineWith(points: CardRenderDynamicVictoryPoints): CardRenderDynamicVictoryPoints {
-    if (!this.item || !points.item) {
-      throw new Error('Cannot combine invalid victory points');
+    if(type2) {
+      const item2Type = map.get(type2);
+      if (item2Type === undefined) {
+        throw new Error('Unknown item type ' + type2);
+      }
+      return new CardRenderDynamicVictoryPoints(new CardRenderItem(item1Type, 1, {played: true}), points, target, new CardRenderItem(item2Type, 1, {played: true}), points2, target2);
+    } else {
+      return new CardRenderDynamicVictoryPoints(new CardRenderItem(item1Type, 1, {played: true}), points, target);
     }
-  
-    const combinedItem = new CardRenderItem(
-      this.item.type,
-      this.item.amount,
-      Object.assign({}, this.item),
-    );
-  
-    const combinedPoints = this.points + points.points;
-    const combinedTarget = this.target + points.target;
-  
-    return new CardRenderDynamicVictoryPoints(combinedItem, combinedPoints, combinedTarget);
   }
-  
 
   public static oceans(points: number, target: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.OCEANS);
@@ -108,13 +106,6 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
   }
   public static questionmark(): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(undefined, 0, 0);
-  }
-
-  public static jovianAndRadiation(points: number): CardRenderDynamicVictoryPoints {
-    const jovianItem = new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.JOVIAN, 1, { digit: true }), points, 2);
-    const radiationItem = new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.RADIATION, 1, { digit: true }), points, 2);
-    
-    return jovianItem.combineWith(radiationItem);
   }
 
   public static any(points: number): CardRenderDynamicVictoryPoints {

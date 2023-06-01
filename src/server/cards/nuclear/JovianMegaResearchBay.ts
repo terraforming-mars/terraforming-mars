@@ -8,8 +8,9 @@ import {ICard} from '../ICard';
 //import {ITagCount} from '../../../common/cards/ITagCount';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
-//import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {played} from '../Options';
+
 
 
 export class JovianMegaReseachBay extends ActionCard implements IProjectCard {
@@ -19,7 +20,7 @@ export class JovianMegaReseachBay extends ActionCard implements IProjectCard {
       name: CardName.JOVIAN_MEGA_RESEARCH_BAY,
       cost: 46,
       tags: [Tag.RADIATION, Tag.JOVIAN, Tag.SPACE],
-      victoryPoints: {tag: Tag.JOVIAN, per: 2, tag2: Tag.RADIATION, per2:2},
+      victoryPoints: 'special',
 
       behavior: {
         tr: 1,
@@ -41,7 +42,7 @@ export class JovianMegaReseachBay extends ActionCard implements IProjectCard {
         })
         }),
         description: 'Raise your TR 1 step. Score 1VP for every 2 radiation and 2 Jovian tags you have.',
-        //victoryPoints: CardRenderDynamicVictoryPoints.jovianAndRadiation(1),
+        victoryPoints: CardRenderDynamicVictoryPoints.tag(Tag.JOVIAN,1,2,Tag.RADIATION,1,2),
       },
     });
   }

@@ -1,8 +1,14 @@
 <template>
-  <div v-if="isObject(victoryPoints)" :class="getClasses()">
-    <template v-if="!victoryPoints.targetOneOrMore">
-      <div>{{ points() }}</div>
+  <div v-if="isObject(victoryPoints)" :class="getClasses()"> 
+    <template v-if="isNotMultiple(victoryPoints)">
+      <div >{{ points() }}</div>
       <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
+    </template>
+    <template v-else-if="isMultiple(victoryPoints)">
+      <div >{{ points() }}</div>
+      <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
+      <div >{{ pointsMultiple() }}</div>
+      <CardRenderItemComponent v-if="victoryPoints.item2 !== undefined" :item="victoryPoints.item2" data-test="item2"/>
     </template>
     <template v-else>
       <div class="card-points-item-first">
@@ -11,7 +17,7 @@
       </div>
     </template>
   </div>
-  <div v-else :class="getClasses()">{{ victoryPoints }}</div>
+  <div v-else :class="getClasses()" >{{ victoryPoints }}</div>
 </template>
 
 <script lang="ts">
@@ -50,6 +56,12 @@ export default Vue.extend({
     isObject(item: any): item is ICardRenderDynamicVictoryPoints {
       return item.points !== undefined;
     },
+    isMultiple(item: any): item is ICardRenderDynamicVictoryPoints {
+      return item.item2?.toString() !== undefined && !item.targetOneOrMore;
+    },
+    isNotMultiple(item: any): item is ICardRenderDynamicVictoryPoints {
+      return item.item2?.toString() === undefined && !item.targetOneOrMore;
+    },
     points(): string {
       if (!this.isObject(this.victoryPoints)) return '';
       const vps = this.victoryPoints;
@@ -57,6 +69,14 @@ export default Vue.extend({
       if (vps.item === undefined) return `${vps.points}`;
       if (vps.target === vps.points || vps.target === 1) return `${vps.points}/`;
       return `${vps.points}/${vps.target}`;
+    },
+    pointsMultiple(): string {
+      if (!this.isObject(this.victoryPoints)) return '';
+      const vps = this.victoryPoints;
+      if (vps.item2 === undefined && vps.points2 === 0 && vps.target2 === 0) return '?';
+      if (vps.item2 === undefined) return `${vps.points2}`;
+      if (vps.target2 === vps.points2 || vps.target2 === 1) return `${vps.points2}/`;
+      return `${vps.points2}/${vps.target2}`;
     },
   },
 });

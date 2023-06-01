@@ -16,7 +16,6 @@
     "Take action for action phase, select one ": "Wähle eine Aktion für die Aktionsphase ",
     "available action.": "verfügbare Aktion",
     "Take action": "Führe Aktion aus",
-    "Convert heat": "Konvertiere Wärme",
     "Take first action of ${0} corporation": "Führe die erste Aktion des ${0}-Konzerns aus",
     "Don\u2019t place a greenery": "Platziere KEINE Grünfläche",
 
@@ -122,6 +121,7 @@
     "${0} claimed ${1} milestone": "${0} hat den Meilenstein ${1} beansprucht",
     "${0} passed": "${0} hat gepasst",
     "${0} ended turn": "${0} hat den Zug beendet",
+    "${0} converted ${1} units of energy to heat": "${0} hat ${1} Energieressource(n) in Wärme umgewandelt",
     "${0} converted heat into temperature": "${0} hat Wärme in einen Temperaturanstieg investiert",
     "${0} converted plants into a greenery": "${0} hat Pflanzen in eine Grünfläche umgewandelt",
     "${0} traded with ${1}": "${0} hat mit ${1} gehandelt",

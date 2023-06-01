@@ -4,6 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
 
@@ -12,6 +13,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
     super({
       name: CardName.LUNAR_SECURITY_STATIONS,
       type: CardType.ACTIVE,
+      tags: [Tag.MOON],
       cost: 9,
       requirements: CardRequirements.builder((b) => b.roadTiles(3, {all})),
 

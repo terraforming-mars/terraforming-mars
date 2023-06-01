@@ -8,13 +8,13 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {setRulingPartyAndRulingPolicy} from '../../TestingUtils';
-import {Scientists, SCIENTISTS_POLICY_4} from '../../../src/server/turmoil/parties/Scientists';
 import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {SCIENTISTS_POLICY_4} from '../../../src/server/turmoil/parties/Scientists';
 
 describe('OrbitalCleanup', function() {
   let card: OrbitalCleanup;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new OrbitalCleanup();
@@ -48,9 +48,9 @@ describe('OrbitalCleanup', function() {
   });
 
   it('Turmoil Science Tag Requirements doesnt increase Income', function() {
-    [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
+    const [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
     const turmoil = game.turmoil!;
-    const scientists = new Scientists();
+    const scientists = turmoil.getPartyByName(PartyName.SCIENTISTS);
 
     // Sanity check that Science Ruling Policy is working as intended:
     const bioengineeringEnclosure = new BioengineeringEnclosure(); // Requires 1 science tag

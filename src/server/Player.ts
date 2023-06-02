@@ -443,14 +443,14 @@ export class Player {
   }
 
   /**
-   * Steal up to `qty` units of `resource` from `from`. Or, at least as
+   * `from` steals up to `qty` units of `resource` from this player. Or, at least as
    * much as possible.
    */
-  public stealResource(resource: Resource, qty: number, from: Player) {
+  public stealResource(resource: Resource, qty: number, thief: Player) {
     const qtyToSteal = Math.min(this.getResource(resource), qty);
     if (qtyToSteal > 0) {
-      this.deductResource(resource, qtyToSteal, {log: true, from: from, stealing: true});
-      from.addResource(resource, qtyToSteal);
+      this.deductResource(resource, qtyToSteal, {log: true, from: thief, stealing: true});
+      thief.addResource(resource, qtyToSteal);
     }
   }
 

@@ -33,7 +33,7 @@ export class MiningGuild extends Card implements ICorporationCard {
           b.br.br;
           b.megacredits(30).nbsp.steel(5, {digit}).nbsp.production((pb) => pb.steel(1));
           b.corpBox('effect', (ce) => {
-            ce.effect('Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.', (eb) => {
+            ce.effect('Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step', (eb) => {
               eb.steel(1).asterix().slash().titanium(1).asterix();
               eb.startEffect.production((pb) => pb.steel(1));
             });

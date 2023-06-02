@@ -58,7 +58,7 @@
     "GUILD": "GILDE",
     "Mining Guild": "Bergbau-Gilde",
     "You start with 30 M€, 5 steel and 1 steel production.": "Du beginnst mit 30 M€, 5 Stahl und 1 Stahl-Produktion",
-    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "EFFEKT: Wenn Du als Platzierungsbonus Stahl oder Titan erhälst, erhöhe deine Stahl-Produktion um 1.",
+    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "EFFEKT: Wenn Du als Platzierungsbonus Stahl oder Titan erhälst, erhöhe deine Stahl-Produktion um 1.",
 
     "TERACTOR": "TERACTOR",
     "Teractor": "Teractor",

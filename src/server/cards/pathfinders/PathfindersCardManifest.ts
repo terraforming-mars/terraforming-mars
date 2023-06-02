@@ -90,6 +90,7 @@ import {SocialEvents} from './SocialEvents';
 import {SoilDetoxification} from './SoilDetoxification';
 import {Solarpedia} from './Solarpedia';
 import {SolarStorm} from './SolarStorm';
+import {SolBank} from './SolBank';
 import {SoylentSeedlingSystems} from './SoylentSeedlingSystems';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
@@ -200,7 +201,7 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.MARS_MATHS]: {Factory: MarsMaths},
     [CardName.MARS_DIRECT]: {Factory: MarsDirect, compatibility: 'pathfinders'},
     [CardName.MARTIAN_INSURANCE_GROUP]: {Factory: MartianInsuranceGroup, compatibility: 'pathfinders'},
-    // [CardName.SOLBANK]: {Factory: SolBank},
+    [CardName.SOLBANK]: {Factory: SolBank},
     [CardName.BIO_SOL]: {Factory: BioSol},
     [CardName.AURORAI]: {Factory: Aurorai, compatibility: 'pathfinders'},
     [CardName.COLLEGIUM_COPERNICUS]: {Factory: CollegiumCopernicus, compatibility: 'colonies'},

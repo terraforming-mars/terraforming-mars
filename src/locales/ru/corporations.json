@@ -40,7 +40,7 @@
 
      "Mining Guild": "Mining Guild",
      "You start with 30 M€, 5 steel and 1 steel production.": "Вы начинаете c 30 M€, 5 стали, и 1 дополнительным уровнем производства стали.",
-     "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Эффект: Всякий раз, получая сталь или титан по территориальному бонусу, увеличивайте своё производство стали на 1.",
+     "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "Эффект: Всякий раз, получая сталь или титан по территориальному бонусу, увеличивайте своё производство стали на 1.",
 
      "Terractor": "Terractor",
      "You start with 60 M€.": "Вы начинаете с 60 M€.",

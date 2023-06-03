@@ -204,13 +204,15 @@ export class Executor implements BehaviorExecutor {
       player.pay(Payment.of({
         steel: spend.steel ?? 0,
         titanium: spend.titanium ?? 0,
-        heat: spend.heat ?? 0,
       }));
       if (spend.plants) {
         player.deductResource(Resource.PLANTS, spend.plants);
       }
       if (spend.energy) {
         player.deductResource(Resource.ENERGY, spend.energy);
+      }
+      if (spend.heat) {
+        throw new Error('Spending heat not supported yet.');
       }
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);

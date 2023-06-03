@@ -39,14 +39,14 @@ export class RoadPiracy extends Card implements IProjectCard {
 
   private generateOption(player: Player, resource: Resource, title: Message, limit: number) {
     const selectAmounts: Array<SelectAmount> = [];
-    const ledger: Array<[Player, number]> = [];
+    const ledger: Map<Player, number> = new Map();
     for (const opponent of player.game.getPlayers()) {
       if (opponent === player) {
         continue;
       }
       if (opponent.getResource(resource) > 0) {
         const cb = (amount: number) => {
-          ledger.push([opponent, amount]);
+          ledger.set(opponent, amount);
           return undefined;
         };
         const selectAmount =
@@ -64,9 +64,10 @@ export class RoadPiracy extends Card implements IProjectCard {
     }
 
     const cb = () => {
-      const total = sum(ledger.map((e) => e[1]));
+      const total = sum(Array.from(ledger.values()));
       if (total > limit) {
         // throw new Error(newMessage('You may only steal up to ${0} ${1} from all players', (b) => b.number(limit).string(resource)));
+        ledger.clear();
         throw new Error(`You may only steal up to ${limit} ${resource} from all players`);
       }
       for (const entry of ledger) {

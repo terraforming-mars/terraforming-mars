@@ -25,6 +25,7 @@ import {ALL_AWARDS} from './awards/Awards';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
 import {Player} from './Player';
+import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
@@ -1152,7 +1153,7 @@ export class Game implements Logger {
     return passedPlayersColors;
   }
 
-  public getCitiesOffMarsCount(player?: Player): number {
+  public getCitiesOffMarsCount(player?: IPlayer): number {
     return this.getCitiesCount(player, (space) => space.spaceType === SpaceType.COLONY);
   }
 
@@ -1160,14 +1161,14 @@ export class Game implements Logger {
     return this.getCitiesCount(player, (space) => space.spaceType !== SpaceType.COLONY);
   }
 
-  public getCitiesCount(player?: Player, filter?: (space: ISpace) => boolean): number {
+  public getCitiesCount(player?: IPlayer, filter?: (space: ISpace) => boolean): number {
     let cities = this.board.spaces.filter(Board.isCitySpace);
     if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
     if (filter) cities = cities.filter(filter);
     return cities.length;
   }
 
-  public getGreeneriesCount(player?: Player): number {
+  public getGreeneriesCount(player?: IPlayer): number {
     let greeneries = this.board.spaces.filter((space) => Board.isGreenerySpace(space));
     if (player !== undefined) greeneries = greeneries.filter(Board.ownedBy(player));
     return greeneries.length;
@@ -1457,7 +1458,7 @@ export class Game implements Logger {
     return player.cardsInHand.filter((card) => card.type === cardType);
   }
 
-  public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: Player}) {
+  public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}) {
     const builder = new LogBuilder(message);
     f?.(builder);
     const logMessage = builder.build();

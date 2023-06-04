@@ -1,8 +1,8 @@
 import {AwardName} from '../../common/ma/AwardName';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export interface IAward {
     name: AwardName;
     description: string;
-    getScore: (player: Player) => number;
+    getScore(player: IPlayer): number;
 }

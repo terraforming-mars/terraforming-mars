@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Energizer extends BaseMilestone {
   constructor() {
@@ -8,7 +8,7 @@ export class Energizer extends BaseMilestone {
       'Have 6 energy production',
       6);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.production.energy;
   }
 }

@@ -1,5 +1,5 @@
 import {CardName} from '../common/cards/CardName';
-import {Player} from './Player';
+import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
 import {ISpace} from './boards/ISpace';
 import {TileType} from '../common/TileType';
@@ -7,7 +7,7 @@ import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
 
 export class LogHelper {
-  static logAddResource(player: Player, card: ICard, qty: number = 1): void {
+  static logAddResource(player: IPlayer, card: ICard, qty: number = 1): void {
     let resourceType = 'resource(s)';
 
     if (card.resourceType) {
@@ -18,7 +18,7 @@ export class LogHelper {
       b.player(player).number(qty).string(resourceType).card(card));
   }
 
-  static logRemoveResource(player: Player, card: ICard, qty: number = 1, effect: string): void {
+  static logRemoveResource(player: IPlayer, card: ICard, qty: number = 1, effect: string): void {
     let resourceType = 'resource(s)';
 
     if (card.resourceType) {
@@ -29,11 +29,11 @@ export class LogHelper {
       b.player(player).number(qty).string(resourceType).card(card).string(effect));
   }
 
-  static logTilePlacement(player: Player, space: ISpace, tileType: TileType) {
+  static logTilePlacement(player: IPlayer, space: ISpace, tileType: TileType) {
     this.logBoardTileAction(player, space, TileType.toString(tileType) + ' tile');
   }
 
-  static logBoardTileAction(player: Player, space: ISpace, description: string, action: string = 'placed') {
+  static logBoardTileAction(player: IPlayer, space: ISpace, description: string, action: string = 'placed') {
     // Skip off-grid tiles
     if (space.x === -1 && space.y === -1) return;
     // Skip solo play random tiles
@@ -47,17 +47,17 @@ export class LogHelper {
       b.player(player).string(action).string(description).number(row).number(position));
   }
 
-  static logColonyTrackIncrease(player: Player, colony: IColony, steps: number = 1) {
+  static logColonyTrackIncrease(player: IPlayer, colony: IColony, steps: number = 1) {
     player.game.log('${0} increased ${1} colony track ${2} step(s)', (b) =>
       b.player(player).colony(colony).number(steps));
   }
 
-  static logColonyTrackDecrease(player: Player, colony: IColony) {
+  static logColonyTrackDecrease(player: IPlayer, colony: IColony) {
     player.game.log('${0} decreased ${1} colony track 1 step', (b) =>
       b.player(player).colony(colony));
   }
 
-  static logVenusIncrease(player: Player, steps: number) {
+  static logVenusIncrease(player: IPlayer, steps: number) {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
@@ -74,7 +74,7 @@ export class LogHelper {
     });
   }
 
-  static logDrawnCards(player: Player, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {
+  static logDrawnCards(player: IPlayer, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {
     // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
     let message = '${0} drew ';
     if (cards.length === 0) {

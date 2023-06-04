@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {isSpecialTile, playerTileFn} from '../boards/Board';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
@@ -10,7 +10,7 @@ export class LandSpecialist extends BaseMilestone {
       'Have 3 special (normally, brown) tiles',
       3);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const spaces = player.game.board.spaces
       .filter(playerTileFn(player))
       .filter(isSpecialTile);

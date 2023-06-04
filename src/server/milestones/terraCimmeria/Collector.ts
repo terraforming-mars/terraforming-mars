@@ -1,6 +1,6 @@
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
 
 export class Collector extends BaseMilestone {
   constructor() {
@@ -10,7 +10,7 @@ export class Collector extends BaseMilestone {
       3);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const numAutomatedCards = player.playedCards.filter((card) => card.type === CardType.AUTOMATED).length;
     const numActiveCards = player.playedCards.filter((card) => card.type === CardType.ACTIVE).length;
     const numEventCards = player.getPlayedEventsCount();

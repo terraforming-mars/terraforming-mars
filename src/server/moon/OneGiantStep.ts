@@ -1,6 +1,6 @@
 import {Tag} from '../../common/cards/Tag';
 import {BaseMilestone} from '../milestones/IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class OneGiantStep extends BaseMilestone {
   constructor() {
@@ -12,7 +12,7 @@ export class OneGiantStep extends BaseMilestone {
       6);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.tags.count(Tag.MOON, 'milestone');
   }
 }

@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 
 export class Electrician extends BaseMilestone {
@@ -10,7 +10,7 @@ export class Electrician extends BaseMilestone {
       4);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.tags.count(Tag.POWER, 'milestone');
   }
 }

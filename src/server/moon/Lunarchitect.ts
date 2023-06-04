@@ -1,5 +1,5 @@
 import {BaseMilestone} from '../milestones/IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {MoonExpansion} from './MoonExpansion';
 
 export class Lunarchitect extends BaseMilestone {
@@ -12,7 +12,7 @@ export class Lunarchitect extends BaseMilestone {
       6);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return MoonExpansion.ifElseMoon(player.game, (moonData) => {
       return moonData.moon.spaces.filter((space) => space.player?.id === player.id).length;
     }, () => 0) || 0;

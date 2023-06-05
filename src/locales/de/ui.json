@@ -280,6 +280,7 @@
 
     "Convert 7 heat into temperature": "Wandle 7 Wärme in Temperatur um",
     "Convert 8 heat into temperature": "Wandle 8 Wärme in Temperatur um",
+    "Convert heat": "Wandle Wärme",
     "Convert 8 plants into greenery": "Wandle 8 Pflanzen in eine Grünfläche um",
     "Convert 7 plants into greenery": "Wandle 7 Pflanzen in eine Grünfläche um",
     "Colonies": "Kolonien",
@@ -766,6 +767,7 @@
     "Orient Crashlanding": "Orientiere Bruchlandung",
     "Leave as it is": "Lass es wie es ist",
     "Rotate Crashlanding": "Rotiere Bruchlandung",
+    "Playing ${0} Consumes ${1} data from Think Tank": "Um ${0} zu spielen, werden ${1} Daten von der Denkfabrik verbraucht",
 
     "Choose your resource bonus": "Wähle dein Ressourcen-Bonus",
     "Choose your wild resource bonus, after which you will gain 1 more distinct standard resources.": "Wähle einen beliebige Ressourcebonus, danach darfst du noch eine beliebige Standardressource wählen.",

@@ -1,17 +1,16 @@
-export enum PlayerInputType {
-    AND_OPTIONS, // 0
-    OR_OPTIONS, // 1
-    SELECT_AMOUNT, // 2
-    SELECT_CARD, // 3
-    SELECT_DELEGATE, // 4
-    SELECT_PAYMENT, // 5
-    SELECT_PROJECT_CARD_TO_PLAY, // 6
-    SELECT_INITIAL_CARDS, // 7
-    SELECT_OPTION, // 8
-    SELECT_PARTY_TO_SEND_DELEGATE, // 9
-    SELECT_PLAYER, // 10
-    SELECT_SPACE, // 11
-    SELECT_COLONY, // 12
-    SELECT_PRODUCTION_TO_LOSE, // 13
-    SHIFT_ARES_GLOBAL_PARAMETERS, // 14
-}
+export type PlayerInputType =
+    'and' |
+    'or' |
+    'amount' |
+    'card' |
+    'delegate' |
+    'payment' |
+    'projectCard' |
+    'initialCards' |
+    'option' |
+    'party' |
+    'player' |
+    'space' |
+    'colony' |
+    'productionToLose' |
+    'aresGlobalParameters';

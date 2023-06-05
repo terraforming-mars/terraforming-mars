@@ -15,6 +15,7 @@ export class TestColony extends Colony {
   constructor() {
     super({
       name: 'TestColony' as ColonyName,
+      description: ['', '', ''],
       buildType: ColonyBenefit.GAIN_RESOURCES,
       buildQuantity: [3, 3, 3],
       buildResource: Resource.TITANIUM,

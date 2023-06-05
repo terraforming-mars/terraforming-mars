@@ -7,6 +7,12 @@ export class Callisto extends Colony {
   constructor() {
     super({
       name: ColonyName.CALLISTO,
+      description: [
+        'Gain 1 energy production',
+        'Gain n energy',
+        'Gain 3 energy',
+      ],
+
       buildType: ColonyBenefit.GAIN_PRODUCTION,
       buildResource: Resource.ENERGY,
       tradeType: ColonyBenefit.GAIN_RESOURCES,

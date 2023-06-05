@@ -1,5 +1,5 @@
 <template>
-    <div class="filterDiv colony-card colonies" :class="backgroundClass" v-i18n>
+    <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
@@ -176,6 +176,12 @@ export default Vue.extend({
     },
     backgroundClass(): string {
       return this.colony.name.replace(' ', '-') + '-background';
+    },
+    tooltip(): string {
+      const description = this.metadata.description;
+      return `Build Colony bonus: ${description[0]}
+Trade bonus: ${description[1]}
+Colony bonus: ${description[2]}`;
     },
     ColonyName(): typeof ColonyName {
       return ColonyName;

@@ -6,6 +6,12 @@ export class Pluto extends Colony {
   constructor() {
     super({
       name: ColonyName.PLUTO,
+      description: [
+        'Draw 2 cards',
+        'Draw n cards',
+        'Draw 1 card and then discard 1 card',
+      ],
+
       buildType: ColonyBenefit.DRAW_CARDS,
       buildQuantity: [2, 2, 2],
       tradeType: ColonyBenefit.DRAW_CARDS,

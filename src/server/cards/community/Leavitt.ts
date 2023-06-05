@@ -5,6 +5,12 @@ import {ColonyBenefit} from '../../../common/colonies/ColonyBenefit';
 export class Leavitt extends Colony {
   constructor() {
     super({
+      description: [
+        'Gain 1 science tag',
+        'Draw n cards, keep 1',
+        'Draw 1 card which you may pay to keep',
+      ],
+
       name: ColonyName.LEAVITT,
       buildType: ColonyBenefit.GAIN_SCIENCE_TAG,
       tradeType: ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE,

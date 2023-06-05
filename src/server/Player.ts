@@ -1685,7 +1685,7 @@ export class Player {
 
       if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
         this.actionsTakenThisRound = 0;
-        this.actionsThisRound = 2;
+        this.availableActionsThisRound = 2;
         game.resettable = true;
         game.playerIsFinishedTakingActions();
         return;

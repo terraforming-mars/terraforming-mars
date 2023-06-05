@@ -13,7 +13,6 @@ import {PlayerInput} from '../../../src/server/PlayerInput';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardType} from '../../../src/common/cards/CardType';
-import {Player} from '../../../src/server/Player';
 
 describe('HeadStart', function() {
   let headStart: HeadStart;
@@ -29,7 +28,7 @@ describe('HeadStart', function() {
   it('Gain resources', () => {
     player.cardsInHand.push(fakeCard({}), fakeCard({}), fakeCard({}));
     headStart.play(player);
-    expect(player.getResourcesForTest()).deep.eq(Units.of({megacredits: 6, steel: 2}));
+    expect(player.purse()).deep.eq(Units.of({megacredits: 6, steel: 2}));
   });
 
   function findOption(pi: PlayerInput, title: string) {

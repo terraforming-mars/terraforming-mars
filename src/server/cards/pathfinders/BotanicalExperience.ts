@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
@@ -12,7 +12,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class BotanicalExperience extends Card implements IProjectCard {
   constructor() {
@@ -53,7 +53,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
       const delta = Math.floor(this.resourceCount / 3);
       const deducted = delta * 3;
       this.resourceCount -= deducted;
-      player.production.add(Resources.PLANTS, delta, {log: false});
+      player.production.add(Resource.PLANTS, delta, {log: false});
       player.game.log('${0} removed ${1} data from ${2} to increase plant production ${3} steps.',
         (b) => b.player(player).number(deducted).card(this).number(delta));
     }

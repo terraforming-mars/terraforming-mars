@@ -11,9 +11,9 @@ describe('EnergySaving', function() {
     expect(player.production.energy).to.eq(0);
     expect(action).is.undefined;
 
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
-    game.addCityTile(redPlayer, game.board.getAvailableSpacesOnLand(redPlayer)[0]);
+    game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
+    game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
+    game.addCity(redPlayer, game.board.getAvailableSpacesOnLand(redPlayer)[0]);
     card.play(player);
 
     expect(player.production.energy).to.eq(3);

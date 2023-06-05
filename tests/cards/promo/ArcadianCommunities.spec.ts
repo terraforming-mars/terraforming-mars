@@ -56,7 +56,7 @@ describe('ArcadianCommunities', function() {
     expect(player.megaCredits).to.eq(0);
 
     // This describes the effect.
-    player.game.addCityTile(player, space);
+    player.game.addCity(player, space);
     runAllActions(player.game);
     expect(player.megaCredits).to.eq(3);
   });

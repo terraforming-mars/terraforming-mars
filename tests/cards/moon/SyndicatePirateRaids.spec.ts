@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {forceGenerationEnd, testGameOptions} from '../../TestingUtils';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {SyndicatePirateRaids} from '../../../src/server/cards/moon/SyndicatePirateRaids';
@@ -13,7 +13,7 @@ describe('SyndicatePirateRaids', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({coloniesExtension: true}));
+    game = Game.newInstance('gameid', [player, otherPlayer], player, {coloniesExtension: true});
     card = new SyndicatePirateRaids();
   });
 

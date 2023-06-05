@@ -1,11 +1,13 @@
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
 
 export class AntidesertificationTechniques extends PreludeCard {
   constructor() {
     super({
       name: CardName.ANTI_DESERTIFICATION_TECHNIQUES,
+      tags: [Tag.MICROBE, Tag.PLANT],
 
       behavior: {
         production: {plants: 1, steel: 1},

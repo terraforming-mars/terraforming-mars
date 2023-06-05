@@ -12,6 +12,7 @@
               <div v-if="gameOptions.pathfindersExpansion" class="create-game-expansion-icon expansion-icon-pathfinders"></div>
               <div v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></div>
               <div v-if="isPoliticalAgendasOn" class="create-game-expansion-icon expansion-icon-agendas"></div>
+              <div v-if="gameOptions.ceoExtension" class="create-game-expansion-icon expansion-icon-ceo"></div>
             </li>
 
             <li><div class="setup-item" v-i18n>Board:</div>
@@ -39,10 +40,9 @@
 
             <li v-if="playerNumber > 1">
               <div class="setup-item" v-i18n>Draft:</div>
-              <div v-if="gameOptions.corporationsDraft" class="game-config generic" v-i18n>Corporation</div>
               <div v-if="gameOptions.initialDraftVariant" class="game-config generic" v-i18n>Initial</div>
               <div v-if="gameOptions.draftVariant" class="game-config generic" v-i18n>Research phase</div>
-              <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant && !gameOptions.corporationsDraft" class="game-config generic" v-i18n>Off</div>
+              <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant" class="game-config generic" v-i18n>Off</div>
             </li>
 
             <li v-if="gameOptions.escapeVelocityMode">

@@ -4,12 +4,11 @@ import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {testGame} from '../../TestGame';
-import {addGreenery, addCityTile, cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {addGreenery, addCity, cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 import {Gaia} from '../../../src/server/cards/ceos/Gaia';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {Networker} from '../../../src/server/milestones/Networker';
 
@@ -22,10 +21,9 @@ describe('Gaia', function() {
 
   beforeEach(() => {
     card = new Gaia();
-    [game, player, player2, player3] = testGame(3, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, player2, player3] = testGame(3, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
     player.playedCards.push(card);
-    runAllActions(game);
   });
 
   it('Takes action', function() {
@@ -40,7 +38,7 @@ describe('Gaia', function() {
     // Place tiles from different players next to tile that grants adjacency bonuses
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
     addGreenery(player2, adjacentSpaces[0].id);
-    addCityTile(player3, adjacentSpaces[1].id);
+    addCity(player3, adjacentSpaces[1].id);
 
     // Gain adjacency bonuses of all players' tiles
     player.megaCredits = 0;
@@ -79,7 +77,7 @@ describe('Gaia', function() {
     // Place tiles from different players next to tile that grants adjacency bonuses
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
     addGreenery(player2, adjacentSpaces[0].id);
-    addCityTile(player3, adjacentSpaces[1].id);
+    addCity(player3, adjacentSpaces[1].id);
 
     const milestone = new Networker();
     const oldScore = milestone.getScore(player);
@@ -100,7 +98,7 @@ describe('Gaia', function() {
     // Place tiles from different players next to tile that grants adjacency bonuses
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
     addGreenery(player2, adjacentSpaces[0].id);
-    addCityTile(player3, adjacentSpaces[1].id);
+    addCity(player3, adjacentSpaces[1].id);
 
     const oldPlayer2MC = player2.megaCredits;
     // Gain adjacency bonuses of all players' tiles

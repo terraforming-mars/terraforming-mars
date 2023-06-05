@@ -56,7 +56,9 @@ export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 // Leaders/CEOs
 export const ASIMOV_AWARD_BONUS = 2;
 
-export const LANGUAGES2 = {
+export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl'] as const;
+
+export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   en: 'English',
   de: 'Deutsch',
   fr: 'Français',
@@ -67,20 +69,8 @@ export const LANGUAGES2 = {
   br: 'Português Brasileiro',
   it: 'Italiano',
   ko: '한국어',
+  nl: 'Nederlands',
 };
-
-export const LANGUAGES = [
-  {'id': 'en', 'title': 'English'},
-  {'id': 'de', 'title': 'Deutsch'},
-  {'id': 'fr', 'title': 'Français'},
-  {'id': 'ru', 'title': 'Русский'},
-  {'id': 'cn', 'title': '华语'},
-  {'id': 'pl', 'title': 'Polski'},
-  {'id': 'es', 'title': 'Español'},
-  {'id': 'br', 'title': 'Português Brasileiro'},
-  {'id': 'it', 'title': 'Italiano'},
-  {'id': 'ko', 'title': '한국어'},
-];
 
 export const APP_NAME = 'Terraforming Mars';
 export const DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';

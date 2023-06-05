@@ -106,7 +106,7 @@ describe('Counter', () => {
 
     const oceanCity = new OceanCity();
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
 
     expect(count()).deep.eq({'': 2, 'onmars': 1, 'offmars': 1, 'everywhere': 2});
 
@@ -132,13 +132,13 @@ describe('Counter', () => {
     expect(count(player2)).eq(0);
 
     const landSpace = game.board.getAvailableSpacesForCity(player)[0];
-    game.addCityTile(player, landSpace);
+    game.addCity(player, landSpace);
 
     expect(count(player)).eq(2);
     expect(count(player2)).eq(0);
 
     const landSpace2 = game.board.getAvailableSpacesForCity(player2)[0];
-    game.addCityTile(player2, landSpace2);
+    game.addCity(player2, landSpace2);
 
     expect(count(player)).eq(2);
     expect(count(player2)).eq(1);

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarIndustryComplex} from '../../../src/server/cards/moon/LunarIndustryComplex';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
@@ -16,7 +15,7 @@ describe('LunarIndustryComplex', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new LunarIndustryComplex();
     moonData = MoonExpansion.moonData(game);
   });
@@ -26,10 +25,10 @@ describe('LunarIndustryComplex', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

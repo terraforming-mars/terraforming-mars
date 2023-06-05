@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {HE3FusionPlant} from '../../../src/server/cards/moon/HE3FusionPlant';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
@@ -14,7 +13,7 @@ describe('HE3FusionPlant', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new HE3FusionPlant();
     moonData = MoonExpansion.moonData(game);
   });
@@ -24,10 +23,10 @@ describe('HE3FusionPlant', () => {
     player.megaCredits = card.cost;
 
     moonData.miningRate = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     moonData.miningRate = 1;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

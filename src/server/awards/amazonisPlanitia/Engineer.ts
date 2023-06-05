@@ -4,7 +4,7 @@ import {IAward} from '../IAward';
 
 export class Engineer implements IAward {
   public readonly name = 'Engineer';
-  public readonly description = 'Most cards that directly alter your own production';
+  public readonly description = 'Play the most cards that directly alter your own production';
 
   public getScore(player: Player): number {
     const score = player.tableau.filter((card) => {
@@ -44,7 +44,6 @@ export class Engineer implements IAward {
     CardName.QUANTUM_COMMUNICATIONS,
     // Promo
     CardName.INTERPLANETARY_TRADE,
-    CardName.MONS_INSURANCE,
     // Moon
     CardName.DARKSIDE_MINING_SYNDICATE,
     CardName.ROVER_DRIVERS_UNION,

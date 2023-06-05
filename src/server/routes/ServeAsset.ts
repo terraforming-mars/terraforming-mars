@@ -141,6 +141,8 @@ export class ServeAsset extends Handler {
     switch (urlPath) {
     case 'assets/index.html':
     case 'assets/Prototype.ttf':
+    case 'assets/Prototype-ru.ttf':
+    case 'assets/Prototype-pl.ttf':
     case 'assets/futureforces.ttf':
       return {file: urlPath};
 

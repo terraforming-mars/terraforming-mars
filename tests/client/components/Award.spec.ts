@@ -17,7 +17,7 @@ function createAward(
   };
 }
 
-const DESCRIPTION = 'Having the most city tiles not on Mars';
+const DESCRIPTION = 'Own the most cities not on Mars';
 
 describe('Award', () => {
   it('shows passed award', () => {

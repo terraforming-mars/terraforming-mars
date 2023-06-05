@@ -28,7 +28,10 @@ describe('SelectProjectCardToPlay', function() {
   it('Simple', function() {
     const selectProjectCardToPlay = new SelectProjectCardToPlay(
       player,
-      [aquiferPumping, ioMiningIndustries],
+      [
+        {card: aquiferPumping},
+        {card: ioMiningIndustries},
+      ],
       {cb},
     );
 

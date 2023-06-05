@@ -5,7 +5,7 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Miranda} from '../../../src/server/colonies/Miranda';
 import {Game} from '../../../src/server/Game';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TradingColony', function() {
@@ -18,9 +18,7 @@ describe('TradingColony', function() {
     card = new TradingColony();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-
-    const gameOptions = testGameOptions({coloniesExtension: true});
-    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, {coloniesExtension: true});
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
   });
 

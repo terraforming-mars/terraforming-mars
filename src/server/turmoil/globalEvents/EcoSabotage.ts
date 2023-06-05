@@ -3,7 +3,7 @@ import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -28,7 +28,7 @@ export class EcoSabotage extends GlobalEvent implements IGlobalEvent {
       const plants = player.plants;
       const maxPlants = 3 + turmoil.getPlayerInfluence(player);
       const plantDecrease = Math.max(0, plants - maxPlants);
-      player.deductResource(Resources.PLANTS, plantDecrease, {log: true, from: this.name});
+      player.deductResource(Resource.PLANTS, plantDecrease, {log: true, from: this.name});
     });
   }
 }

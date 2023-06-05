@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
@@ -37,9 +37,9 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     if (player.tags.count(Tag.PLANT) < 3) {
-      player.production.add(Resources.PLANTS, 1, {log: true});
+      player.production.add(Resource.PLANTS, 1, {log: true});
     } else {
-      player.production.add(Resources.PLANTS, 4, {log: true});
+      player.production.add(Resource.PLANTS, 4, {log: true});
     }
     return undefined;
   }

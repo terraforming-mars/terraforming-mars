@@ -107,14 +107,11 @@ describe('GameLoader', function() {
   });
 
   it('gets game when added and not in database', async function() {
-    game.id = 'gameid-alpha';
-    try {
-      instance.add(game);
-      const game1 = await instance.getGame('gameid-alpha');
-      expect(game1!.id).to.eq('gameid-alpha');
-    } finally {
-      game.id = 'gameid';
-    }
+    // Violating the readonly nature for this test. It ensures that no game with the specific ID is not in the loader.
+    (game.id as GameId) = 'gameid-alpha';
+    instance.add(game);
+    const game1 = await instance.getGame('gameid-alpha');
+    expect(game1!.id).to.eq('gameid-alpha');
   });
 
   it('gets player when added and not in database', async function() {
@@ -226,5 +223,35 @@ describe('GameLoader', function() {
     // incremented at the end of save(). It loads #2, and increments.
     expect(newGame.lastSaveId).eq(3);
     expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2]);
+  });
+
+  it('saveGame', async () => {
+    game.generation = 12;
+    instance.saveGame(game);
+
+    expect(game.lastSaveId).eq(2);
+
+    game.generation = 13;
+    instance.saveGame(game);
+
+    expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2]);
+  });
+
+
+  it('saveGame, already deleted', async () => {
+    game.generation = 12;
+    instance.saveGame(game);
+
+    expect(game.lastSaveId).eq(2);
+
+    game.generation = 13;
+    instance.saveGame(game);
+
+    database.markFinished(game.id);
+    database.compressCompletedGames();
+  });
+
+  it('completeGame', () => {
+
   });
 });

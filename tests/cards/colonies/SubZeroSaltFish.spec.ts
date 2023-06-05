@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SubZeroSaltFish} from '../../../src/server/cards/colonies/SubZeroSaltFish';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -23,13 +23,13 @@ describe('SubZeroSaltFish', function() {
   });
 
   it('Can not play if temperature requirement not met', function() {
-    player2.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     setTemperature(game, 2);
-    player2.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

@@ -197,9 +197,9 @@ export default Vue.extend({
         classes.push('card-resource-agenda');
       } else if (this.item.type === CardRenderItemType.MOON_HABITAT) {
         if (this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE) {
-          classes.push(sized('card-tile-lunar-colony-rate', this.item.size));
+          classes.push(sized('card-tile-lunar-habitat-rate', this.item.size));
         } else {
-          classes.push(sized('card-tile-lunar-colony', this.item.size));
+          classes.push(sized('card-tile-lunar-habitat', this.item.size));
         }
       } else if (type === CardRenderItemType.GLOBAL_EVENT) {
         classes.push('turmoil-global-event');

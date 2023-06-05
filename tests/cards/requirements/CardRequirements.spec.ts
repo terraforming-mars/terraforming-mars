@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {CardRequirements} from '../../src/server/cards/CardRequirements';
-import {runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel, churnAction} from '../TestingUtils';
-import {AdaptationTechnology} from '../../src/server/cards/base/AdaptationTechnology';
-import {TileType} from '../../src/common/TileType';
-import {Ants} from '../../src/server/cards/base/Ants';
-import {Ceres} from '../../src/server/colonies/Ceres';
-import {Celestic} from '../../src/server/cards/venusNext/Celestic';
-import {PartyName} from '../../src/common/turmoil/PartyName';
-import {Tag} from '../../src/common/cards/Tag';
-import {ResearchCoordination} from '../../src/server/cards/prelude/ResearchCoordination';
-import {Resources} from '../../src/common/Resources';
-import {SmallAsteroid} from '../../src/server/cards/promo/SmallAsteroid';
-import {OrOptions} from '../../src/server/inputs/OrOptions';
-import {TestPlayer} from '../TestPlayer';
-import {testGame} from '../TestGame';
+import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
+import {runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel, churnAction} from '../../TestingUtils';
+import {AdaptationTechnology} from '../../../src/server/cards/base/AdaptationTechnology';
+import {TileType} from '../../../src/common/TileType';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Ceres} from '../../../src/server/colonies/Ceres';
+import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {Tag} from '../../../src/common/cards/Tag';
+import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
+import {Resource} from '../../../src/common/Resource';
+import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('CardRequirements', function() {
   let player: TestPlayer;
@@ -118,9 +118,9 @@ describe('CardRequirements', function() {
   it('satisfies properly for cities', function() {
     const requirements = CardRequirements.builder((b) => b.cities(2, {all: true}));
     expect(requirements.satisfies(player)).eq(false);
-    player.game.addCityTile(player2, player.game.board.getAvailableSpacesForCity(player)[0]);
+    player.game.addCity(player2, player.game.board.getAvailableSpacesForCity(player)[0]);
     expect(requirements.satisfies(player)).eq(false);
-    player.game.addCityTile(player, player.game.board.getAvailableSpacesForCity(player)[0]);
+    player.game.addCity(player, player.game.board.getAvailableSpacesForCity(player)[0]);
     expect(requirements.satisfies(player)).eq(true);
   });
 
@@ -207,9 +207,9 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for production', function() {
-    const requirements = CardRequirements.builder((b) => b.production(Resources.PLANTS));
+    const requirements = CardRequirements.builder((b) => b.production(Resource.PLANTS));
     expect(requirements.satisfies(player)).eq(false);
-    player.production.add(Resources.PLANTS, 1);
+    player.production.add(Resource.PLANTS, 1);
     expect(requirements.satisfies(player)).eq(true);
   });
 

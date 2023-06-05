@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
-import {addGreenery, addCityTile, runAllActions} from '../../TestingUtils';
+import {addGreenery, addCity, runAllActions} from '../../TestingUtils';
 
 import {Gordon} from '../../../src/server/cards/ceos/Gordon';
 
@@ -29,7 +29,7 @@ describe('Gordon', function() {
   it('Can place cities next to other cities', function() {
     const board = game.board;
     const space = board.getSpace('35');
-    addCityTile(player, space.id);
+    addCity(player, space.id);
     const availableSpacesForCity = board.getAvailableSpacesForCity(player);
     const spacesNextToCity = board.getAdjacentSpaces(space);
     expect(availableSpacesForCity).includes(spacesNextToCity[0]);
@@ -40,7 +40,7 @@ describe('Gordon', function() {
     addGreenery(player, '35');
     game.deferredActions.runNext();
     expect(player.megaCredits).eq(2);
-    addCityTile(player, '37');
+    addCity(player, '37');
     game.deferredActions.runNext();
     expect(player.megaCredits).eq(4);
   });

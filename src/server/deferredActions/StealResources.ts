@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -8,7 +8,7 @@ import {CardName} from '../../common/cards/CardName';
 export class StealResources extends DeferredAction {
   constructor(
     player: Player,
-    public resource: Resources,
+    public resource: Resource,
     public count: number = 1,
     public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
   ) {
@@ -23,10 +23,10 @@ export class StealResources extends DeferredAction {
     }
 
     let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
-    if (this.resource === Resources.PLANTS) {
+    if (this.resource === Resource.PLANTS) {
       candidates = candidates.filter((p) => !p.plantsAreProtected());
     }
-    if (this.resource === Resources.STEEL || this.resource === Resources.TITANIUM) {
+    if (this.resource === Resource.STEEL || this.resource === Resource.TITANIUM) {
       candidates = candidates.filter((p) => !p.alloysAreProtected());
     }
 
@@ -38,7 +38,7 @@ export class StealResources extends DeferredAction {
       let qtyToSteal = Math.min(candidate.getResource(this.resource), this.count);
 
       // Botanical Experience hook.
-      if (this.resource === Resources.PLANTS && candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (this.resource === Resource.PLANTS && candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToSteal = Math.ceil(qtyToSteal / 2);
       }
 

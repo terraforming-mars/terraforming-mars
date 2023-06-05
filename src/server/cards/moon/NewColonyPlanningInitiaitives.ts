@@ -1,15 +1,17 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
 
 export class NewColonyPlanningInitiaitives extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.NEW_COLONY_PLANNING_INITIAITIVES,
       type: CardType.AUTOMATED,
+      tags: [Tag.MOON],
       cost: 6,
 
       behavior: {

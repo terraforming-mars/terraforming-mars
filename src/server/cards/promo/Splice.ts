@@ -10,7 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all, played} from '../Options';
 import {newMessage} from '../../logs/MessageBuilder';
 
@@ -74,18 +74,18 @@ export class Splice extends Card implements ICorporationCard {
       newMessage('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
       'Gain M€',
       () => {
-        player.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
+        player.addResource(Resource.MEGACREDITS, megacreditsGain, {log: true});
         return undefined;
       });
 
     // Splice owner get 2M€ per microbe tag
-    player.game.getCardPlayerOrThrow(this.name).addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
+    player.game.getCardPlayerOrThrow(this.name).addResource(Resource.MEGACREDITS, megacreditsGain, {log: true});
 
     // Card player choose between 2 M€ and a microbe on card, if possible
     if (card.resourceType === CardResource.MICROBE) {
       return new OrOptions(addResource, getMegacredits);
     } else {
-      player.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
+      player.addResource(Resource.MEGACREDITS, megacreditsGain, {log: true});
       return undefined;
     }
   }

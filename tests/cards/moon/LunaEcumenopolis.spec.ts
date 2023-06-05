@@ -1,7 +1,7 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaEcumenopolis} from '../../../src/server/cards/moon/LunaEcumenopolis';
 import {expect} from 'chai';
@@ -17,7 +17,7 @@ describe('LunaEcumenopolis', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new LunaEcumenopolis();
   });
@@ -38,10 +38,10 @@ describe('LunaEcumenopolis', () => {
     moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
 
     player.titanium = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('can play when 1st placement enables 2nd placement', () => {
@@ -55,14 +55,14 @@ describe('LunaEcumenopolis', () => {
     // This test works because space 13 is the only available colony space, but after
     // playing it, space 12 can take a colony.
     player.titanium = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('Cannot play: not enough adjacent colony tiles', () => {
     player.titanium = 2;
     moonData.moon.getSpace('m09').tile = {tileType: TileType.MOON_HABITAT};
     moonData.moon.getSpace('m18').tile = {tileType: TileType.MOON_HABITAT};
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('Place 2 colony tiles', () => {
@@ -97,10 +97,10 @@ describe('LunaEcumenopolis', () => {
     moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
 
     player.titanium = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('Place 2 colony tiles next to Lunar Mine Urbanization', () => {
@@ -129,7 +129,7 @@ describe('LunaEcumenopolis', () => {
 
   // it('canPlay when Reds are in power', () => {
   //   const player = TestPlayer.BLUE.newPlayer();
-  //   const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+  //   const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
   //   const moonData = MoonExpansion.moonData(game);
   //   game.phase = Phase.ACTION;
 

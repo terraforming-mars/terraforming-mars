@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {Recruitment} from '../../../src/server/cards/turmoil/Recruitment';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {testGameOptions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('Recruitment', function() {
   it('Should play', function() {
     const card = new Recruitment();
-    const [game, player] = testGame(1, testGameOptions({turmoilExtension: true}));
+    const [game, player] = testGame(1, {turmoilExtension: true});
 
     game.turmoil!.parties.forEach((party) => {
       party.delegates.clear();

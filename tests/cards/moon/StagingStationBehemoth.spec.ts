@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {StagingStationBehemoth} from '../../../src/server/cards/moon/StagingStationBehemoth';
 import {expect} from 'chai';
@@ -13,7 +12,7 @@ describe('StagingStationBehemoth', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new StagingStationBehemoth();
     moonData = MoonExpansion.moonData(game);
   });
@@ -22,7 +21,7 @@ describe('StagingStationBehemoth', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {

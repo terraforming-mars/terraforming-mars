@@ -21,7 +21,7 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {BehaviorExecutor} from './BehaviorExecutor';
 import {PlaceTile} from '../deferredActions/PlaceTile';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -200,16 +200,16 @@ export class Executor implements BehaviorExecutor {
         return;
       }
       if (spend.steel) {
-        player.deductResource(Resources.STEEL, spend.steel);
+        player.deductResource(Resource.STEEL, spend.steel);
       }
       if (spend.titanium) {
-        player.deductResource(Resources.TITANIUM, spend.titanium);
+        player.deductResource(Resource.TITANIUM, spend.titanium);
       }
       if (spend.plants) {
-        player.deductResource(Resources.PLANTS, spend.plants);
+        player.deductResource(Resource.PLANTS, spend.plants);
       }
       if (spend.energy) {
-        player.deductResource(Resources.ENERGY, spend.energy);
+        player.deductResource(Resource.ENERGY, spend.energy);
       }
       if (spend.heat) {
         throw new Error('Spending heat not supported yet.');
@@ -282,7 +282,10 @@ export class Executor implements BehaviorExecutor {
     if (behavior.addResourcesToAnyCard) {
       const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
       for (const entry of array) {
-        player.game.defer(new AddResourcesToCard(player, entry.type, {count: ctx.count(entry.count), restrictedTag: entry.tag}));
+        const count = ctx.count(entry.count);
+        if (count > 0) {
+          player.game.defer(new AddResourcesToCard(player, entry.type, {count, restrictedTag: entry.tag}));
+        }
       }
     }
 
@@ -325,7 +328,7 @@ export class Executor implements BehaviorExecutor {
     if (behavior.city !== undefined) {
       if (behavior.city.space !== undefined) {
         const space = player.game.board.getSpace(behavior.city.space);
-        player.game.addCityTile(player, space);
+        player.game.addCity(player, space);
       } else {
         player.game.defer(new PlaceCityTile(player, {on: behavior.city.on}));
       }

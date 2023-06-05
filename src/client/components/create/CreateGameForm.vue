@@ -15,7 +15,7 @@
                               <div v-bind:key="pCount">
                                 <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                                 <label :for="pCount+'-radio'">
-                                    {{pCount === 1 ? 'Solo' : pCount}}
+                                    {{ getPlayersCountText(pCount) }}
                                 </label>
                               </div>
                             </template>
@@ -137,7 +137,7 @@
                             <input type="checkbox" name="ceo" id="ceo-checkbox" v-model="ceoExtension">
                             <label for="ceo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-ceo"></div>
-                                <span v-i18n>CEOs (BETA)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>CEOs</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>
 
@@ -787,13 +787,19 @@ export default (Vue as WithRefs<Refs>).extend({
     isBeginnerToggleEnabled(): Boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
     },
+    getPlayersCountText(count: number): string {
+      if (count === 1) {
+        return translateText('Solo');
+      }
+      return count.toString();
+    },
     deselectVenusCompletion() {
-      if (this.$data.venusNext === false) {
+      if (this.venusNext === false) {
         this.requiresVenusTrackCompletion = false;
       }
     },
     deselectMoonCompletion() {
-      if (this.$data.moonExpansion === false) {
+      if (this.moonExpansion === false) {
         this.requiresMoonTrackCompletion = false;
         this.moonStandardProjectVariant = false;
       }
@@ -1056,7 +1062,7 @@ export default (Vue as WithRefs<Refs>).extend({
         clonedGamedId = this.clonedGameId;
         if (gameData.playerCount !== players.length) {
           alert(this.$t('Player count mismatch'));
-          this.$data.playersCount = gameData.playerCount;
+          this.playersCount = gameData.playerCount;
           return;
         }
       } else if (!this.seededGame) {

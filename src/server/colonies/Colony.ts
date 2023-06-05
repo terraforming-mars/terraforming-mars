@@ -13,7 +13,7 @@ import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
 import {PlayerInput} from '../PlayerInput';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
@@ -22,7 +22,6 @@ import {Tag} from '../../common/cards/Tag';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
-import {ShouldIncreaseTrack} from '../../common/colonies/ShouldIncreaseTrack';
 import {SerializedColony} from '../SerializedColony';
 import {IColony, TradeOptions} from './IColony';
 import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../common/colonies/IColonyMetadata';
@@ -90,13 +89,13 @@ export abstract class Colony implements IColony {
       // Poseidon hook
       const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
-        poseidon.production.add(Resources.MEGACREDITS, 1);
+        poseidon.production.add(Resource.MEGACREDITS, 1);
       }
 
       // CEO Naomi hook
       if (player.cardIsInEffect(CardName.NAOMI)) {
-        player.addResource(Resources.ENERGY, 2, {log: true});
-        player.addResource(Resources.MEGACREDITS, 3, {log: true});
+        player.addResource(Resource.ENERGY, 2, {log: true});
+        player.addResource(Resource.MEGACREDITS, 3, {log: true});
       }
     }
 
@@ -117,14 +116,14 @@ export abstract class Colony implements IColony {
       const steps = maxTrackPosition - this.trackPosition;
 
       if (steps === 0 ||
-        this.metadata.shouldIncreaseTrack === ShouldIncreaseTrack.NO ||
+        this.metadata.shouldIncreaseTrack === 'no' ||
         tradeOptions.selfishTrade === true) {
         // Don't increase
         this.handleTrade(player, tradeOptions);
         return;
       }
 
-      if (this.metadata.shouldIncreaseTrack === ShouldIncreaseTrack.YES || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxTrackPosition])) {
+      if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxTrackPosition])) {
         // No point in asking the player, just increase it
         this.increaseTrack(steps);
         LogHelper.logColonyTrackIncrease(player, this, steps);
@@ -171,14 +170,14 @@ export abstract class Colony implements IColony {
     }
 
 
-    private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+    private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
       const game = player.game;
 
       let action: undefined | DeferredAction = undefined;
       switch (bonusType) {
       case ColonyBenefit.ADD_RESOURCES_TO_CARD:
-        const resourceType = this.metadata.resourceType;
-        action = new AddResourcesToCard(player, resourceType, {count: quantity});
+        const cardResource = this.metadata.cardResource;
+        action = new AddResourcesToCard(player, cardResource, {count: quantity});
         break;
 
       case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
@@ -265,7 +264,7 @@ export abstract class Colony implements IColony {
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         Turmoil.ifTurmoil(game, (turmoil) => {
           const partyDelegateCount = turmoil.parties.map((party) => party.delegates.get(player.id)).reduce((a, b) => a + b, 0);
-          player.addResource(Resources.MEGACREDITS, partyDelegateCount, {log: true});
+          player.addResource(Resource.MEGACREDITS, partyDelegateCount, {log: true});
         });
         break;
 

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MartianMonuments} from '../../../src/server/cards/pathfinders/MartianMonuments';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {addCity, addCityTile} from '../../TestingUtils';
+import {addCity} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {SpaceName} from '../../../src/server/SpaceName';
 
@@ -24,7 +24,7 @@ describe('MartianMonuments', function() {
     expect(player2.simpleCanPlay(card)).is.false;
 
     // Add a city in space, it shouldn't count.
-    addCityTile(player2, SpaceName.GANYMEDE_COLONY);
+    addCity(player2, SpaceName.GANYMEDE_COLONY);
     expect(player2.simpleCanPlay(card)).is.false;
   });
 

@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {LandSpecialist} from '../../src/server/milestones/LandSpecialist';
-import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {Board} from '../../src/server/boards/Board';
@@ -15,13 +14,13 @@ describe('LandSpecialist', function() {
   let player2: TestPlayer;
   let game: Game;
   let board: Board;
-  let spaces: Array<ISpace>;
+  let spaces: ReadonlyArray<ISpace>;
 
   beforeEach(function() {
     milestone = new LandSpecialist();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA, moonExpansion: true}));
+    game = Game.newInstance('gameid', [player, player2], player, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
     board = game.board;
     spaces = board.getAvailableSpacesOnLand(player);
   });

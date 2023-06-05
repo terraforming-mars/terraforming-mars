@@ -7,7 +7,7 @@ import {fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
-import {CardRequirements} from '../../../src/server/cards/CardRequirements';
+import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
 import {ProjectDeck} from '../../../src/server/cards/Deck';
 
 describe('OumuamuaTypeObjectSurvey', function() {

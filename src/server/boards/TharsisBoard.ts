@@ -7,6 +7,7 @@ import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {GameOptions} from '../GameOptions';
+import {SpaceId} from '../../common/Types';
 
 export class TharsisBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): TharsisBoard {
@@ -45,15 +46,15 @@ export class TharsisBoard extends Board {
     return new TharsisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): TharsisBoard {
+  public static deserialize(board: SerializedBoard, players: ReadonlyArray<Player>): TharsisBoard {
     return new TharsisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public override getNonReservedLandSpaces(): Array<ISpace> {
+  public override getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
     return super.getNonReservedLandSpaces().filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
 
-  public override getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+  public override getAvailableSpacesOnLand(player: Player): ReadonlyArray<ISpace> {
     return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
 
@@ -61,7 +62,7 @@ export class TharsisBoard extends Board {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
   }
 
-  public override getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
     return [
       SpaceName.ASCRAEUS_MONS,
       SpaceName.ARSIA_MONS,

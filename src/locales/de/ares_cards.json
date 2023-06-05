@@ -31,6 +31,9 @@
     "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "EFFEKT: Wenn die Platzierung eines Plättchens dir Pflanzen, Tiere oder Mikroben gewährt, erhalte eine zusätzliche Ressource desselben Typs.",
     "Requires 3 greeneries on Mars.": "Erfordert 3 Grünflächen auf dem Mars.",
 
+    "Magnetic Field Generators": "Magnetfeld-Generatoren",
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "Reduziere deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen TR um 3. Platziere dieses Plättchen. Es gibt einen Nachbarschaftsbonus von 1 Pflanze und 1 Mikrobe.",
+    
     "Mining Rights": "Schürfrechte",
     "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Platziere eines dieser Plättchen auf einem Gebiet mit Stahl- oder Titan-Platzierungsbonus. Dieses Plättchen gewährt einen Nachbarschaftsbonus derselben Ressource. Erhöhe deine Produktion dieser Ressource dann um 1.",
 
@@ -52,7 +55,7 @@
     "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "Platziere dieses Plättchen mit einem Nachbarschaftsbonus von 2 Energie. Erhöhe Deine Energieproduktion um 1 Schritt für jedes Pflanzensymbol auf dem Feld, auf das du dieses Plättchen legst.",
 
     "Great Dam": "Staudamm",
-    "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "Benötigt 4 oder mehr Ozeanplättchen im Spiel. Erhöhe deine Energie-Produktion um 2. Platziere dieses Plättchen NEBEN einem Ozeanplättchen. Das Plättchen gewährt einen NAchbarschaftsbonus von 2 Energie.",
+    "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "Benötigt 4 oder mehr Ozeanplättchen im Spiel. Erhöhe deine Energie-Produktion um 2. Platziere dieses Plättchen NEBEN einem Ozeanplättchen. Das Plättchen gewährt einen Nachbarschaftsbonus von 2 Energie.",
 
     "Deimos Down": "Absturz des Daimos",
     "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. It provides adjacency bonus of 1 asteroid and 1 steel.": "Erhöhe die Temperatur um 3 Schritte und erhalte 4 Stahl. Platziere dieses Plättchen NICHT ANGRENZEND an ein anderes Stadtplättchen. Das Plättchen gewährt einen Nachbarschaftsbonus von 1 Asteroiden und 1 Stahl.",

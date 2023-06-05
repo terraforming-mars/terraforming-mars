@@ -42,7 +42,7 @@
 
     "Mining Guild": "Mining Guild",
     "You start with 30 M€, 5 steel and 1 steel production.":"Comienza con 30 M€, 5 de acero y 1 en producción de acero.",
-    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.":"Efecto: cada vez que obtengas acero o titanio como bonificación por colocación, aumenta tu producción de acero en 1.",
+    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step":"Efecto: cada vez que obtengas acero o titanio como bonificación por colocación, aumenta tu producción de acero en 1.",
 
     "Terractor": "Terractor",
     "You start with 60 M€.":"Comienza con 60 M€.",

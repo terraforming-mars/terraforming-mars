@@ -7,7 +7,7 @@ import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
-import {Resources} from '../Resources';
+import {Resource} from '../Resource';
 
 export interface ViewModel {
   game: GameModel;
@@ -50,8 +50,8 @@ export type PublicPlayerModel = {
   noTagsCount: number;
   plants: number;
   plantProduction: number;
-  protectedResources: Record<Resources, Protection>;
-  protectedProduction: Record<Resources, Protection>;
+  protectedResources: Record<Resource, Protection>;
+  protectedProduction: Record<Resource, Protection>;
   tableau: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;

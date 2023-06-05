@@ -1,10 +1,10 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 import {ActionCard} from '../ActionCard';
 
@@ -17,7 +17,7 @@ export class CopernicusTower extends ActionCard {
       cost: 36,
 
       resourceType: CardResource.SCIENCE,
-      requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
+      requirements: CardRequirements.builder((b) => b.production(Resource.TITANIUM, 2)),
       victoryPoints: {tag: Tag.MOON},
 
       action: {

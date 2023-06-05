@@ -7,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {SelectCard} from '../../inputs/SelectCard';
 
 export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
@@ -23,8 +23,8 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
 
       metadata: {
         renderData: CardRenderer.builder((b) => {
-          b.action('Remove 1 floater from any card and add 1 Venusian habitat on this card.', (ab) => {
-            ab.floaters(1).startAction.venusianHabitat(1);
+          b.action('Spend 1 floater from any card to add 1 Venusian habitat on this card.', (ab) => {
+            ab.minus().floaters(1).startAction.venusianHabitat(1);
           }).br;
           b.vpText('1 VP for every Venusian habitat on this card.');
         }),

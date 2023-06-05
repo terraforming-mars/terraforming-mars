@@ -1,11 +1,13 @@
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
 
 export class HydrogenBombardment extends PreludeCard {
   constructor() {
     super({
       name: CardName.HYDROGEN_BOMBARDMENT,
+      tags: [Tag.SPACE, Tag.VENUS],
       behavior: {
         production: {titanium: 1},
         global: {venus: 1},

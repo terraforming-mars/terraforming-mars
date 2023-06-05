@@ -9,7 +9,6 @@ import {SerializedGlobalEventDealer} from '../../../src/server/turmoil/globalEve
 import {SponsoredProjects} from '../../../src/server/turmoil/globalEvents/SponsoredProjects';
 import {SuccessfulOrganisms} from '../../../src/server/turmoil/globalEvents/SuccessfulOrganisms';
 import {WarOnEarth} from '../../../src/server/turmoil/globalEvents/WarOnEarth';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GlobalEventDealer', () => {
@@ -44,7 +43,8 @@ describe('GlobalEventDealer', () => {
   });
 
   it('getGlobalEventByName can retrieve all cards', () => {
-    const gameOptions = testGameOptions({
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, {
       preludeExtension: true,
       venusNextExtension: true,
       coloniesExtension: true,
@@ -53,8 +53,6 @@ describe('GlobalEventDealer', () => {
       communityCardsOption: true,
       removeNegativeGlobalEventsOption: false,
     });
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, gameOptions);
     const dealer = GlobalEventDealer.newInstance(game);
     for (const card of dealer.globalEventsDeck) {
       expect(getGlobalEventByName(card.name), card.name + ' cannot be retrieved, card is probably missing from ALL_EVENTS').to.deep.eq(card);

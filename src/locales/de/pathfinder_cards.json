@@ -42,6 +42,12 @@
   "Coordinated Raid": "Koordinierter Überfall",
   "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(Benötigt 1 Kolonie im Spiel. Bewege eine deiner ungenutzten Handelsflotten auf ein beliebiges (auch bereits besetztes) Kolonieplättchen. Erhalte den Handels- und Koloniebonus für jede dortige Kolonie. Andere Spieler erhalten keinen Bonus.)",
 
+  "Crashlanding": "Bruchlandung",
+  "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(Platziere UND ORIENTIERE dieses Plättchen angrenzend zu maximal einer Stadt.",
+  "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Dieses Plättchen gewährt einen Nachbarschaftsbonus von 1 Datenressource und entweder 1 Stahl oder 1 Titan.",
+  "When placing Crashsite, for each tile you own next it, gain those bonuses.": "Beim Platzieren erhältst du für alle EIGENEN dort angrenzenden Plättchen im Spiel diese Boni.",
+  "Add 1 data to any card. Add 1 resource to any card.)": "Füge 1 Datenressource einer beliebigen Karte hinzu. Füge 1 beliebige Ressource einer beliebigen Karte hinzu.)",
+
   "Cryptocurrency": "Kryptowährung",
   "(Action: Spend 1 energy to add 1 data to this card.)": "(AKTION: Verbrauche 1 Energie, um dieser Karte 1 Datenressource hinzuzufügen.)",
   "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(AKTION: Entferne Daten von hier, um 3 M€ je entfernten Daten zu erhalten.)",
@@ -87,7 +93,7 @@
   "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(Benötigt 1 oder weniger eigene Wissenschaftssymbole. Erhöhe deine M€-Produktion um 1 je gespielter Generation, einschließlich der aktuellen.)",
 
   "Floater-Urbanism": "Schweber-Urbanismus",
-  "(Action: Remove 1 floater from any card and add 1 Venusian habitat on this card.)": "(AKTION: Verbrauche 1 Schweber, um dieser Karte 1 Venus-Habitat hinzuzufügen.)",
+  "(Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.)": "(AKTION: Verbrauche 1 Schweber, um dieser Karte 1 Venus-Habitat hinzuzufügen.)",
   "1 VP for every Venusian habitat on this card.": "(1 SP je Venus-Habitat auf dieser Karte.)",
   "(Requires 4 Venus tags.)": "(Benötigt 4 eigene Venussymbole.)",
 
@@ -235,6 +241,11 @@
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, füge dieser Karte 1 Roboter hinzu.)",
   "1 VP for every specialized robot on this card.": "1 SP je Roboter auf dieser Karte.",
   "(Requires 4 science tags.)": "(Benötigt 4 eigene Wissenschaftssymbole.)",
+  
+  "Think Tank": "Denkfabrik",
+  "(Action: Spend 2 M€ to place 1 data on any card.)": "(AKTION: Bezahle 2 M€ um einer Karte 1 Datenressource hinzuzufügen.)",
+  "+/-1 global parameter": "+/-1 globaler Parameter",
+  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(Effekt: Wenn du eine Karte ausspielst, darfst du Daten von dieser Karte entfernen, um je entfernte Datenressource die globalen Bedingungen der Karte um 1 Stufe zu erhöhen bzw. zu verringern.)",
 
   "Venera Base": "Venera Basis",
   "(Action: Add 1 floater to ANY Venus card)": "(AKTION: Füge einer beliebigen Venuskarte 1 Schweber hinzu.)",

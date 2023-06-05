@@ -21,6 +21,7 @@ import {CollegiumCopernicus} from './CollegiumCopernicus';
 import {CommunicationCenter} from './CommunicationCenter';
 import {ControlledBloom} from './ControlledBloom';
 import {CoordinatedRaid} from './CoordinatedRaid';
+import {Crashlanding} from './Crashlanding';
 import {CrewTraining} from './CrewTraining';
 import {Cryptocurrency} from './Cryptocurrency';
 import {CultivationOfVenus} from './CultivationOfVenus';
@@ -99,6 +100,7 @@ import {SurveyMission} from './SurveyMission';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
 import {TheNewSpaceRace} from './TheNewSpaceRace';
+import {ThinkTank} from './ThinkTank';
 import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
@@ -155,8 +157,8 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.CULTIVATION_OF_VENUS]: {Factory: CultivationOfVenus, compatibility: 'venus'},
     [CardName.EXPEDITION_TO_THE_SURFACE_VENUS]: {Factory: ExpeditionToTheSurfaceVenus, compatibility: 'venus'},
     [CardName.LAST_RESORT_INGENUITY]: {Factory: LastResortIngenuity},
-    // // [CardName.CRASHLANDING]: {Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
-    // // [CardName.THINK_TANK]: {Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
+    [CardName.CRASHLANDING]: {Factory: Crashlanding, compatibility: 'ares'},
+    [CardName.THINK_TANK]: {Factory: ThinkTank},
     [CardName.BOTANICAL_EXPERIENCE]: {Factory: BotanicalExperience},
     [CardName.CRYPTOCURRENCY]: {Factory: Cryptocurrency},
     [CardName.RICH_DEPOSITS]: {Factory: RichDeposits},

@@ -1,6 +1,5 @@
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
 
 export class SelectAmount extends BasePlayerInput {
@@ -12,7 +11,7 @@ export class SelectAmount extends BasePlayerInput {
     public max: number,
     public maxByDefault?: boolean,
   ) {
-    super(PlayerInputType.SELECT_AMOUNT, title);
+    super('amount', title);
     this.buttonLabel = buttonLabel;
   }
 

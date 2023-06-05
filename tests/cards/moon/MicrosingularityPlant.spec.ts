@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MicrosingularityPlant} from '../../../src/server/cards/moon/MicrosingularityPlant';
 import {expect} from 'chai';
@@ -14,7 +13,7 @@ describe('MicrosingularityPlant', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new MicrosingularityPlant();
     moonData = MoonExpansion.moonData(game);
   });
@@ -28,10 +27,10 @@ describe('MicrosingularityPlant', () => {
 
     space1.tile = {tileType: TileType.MOON_HABITAT};
     space2.tile = {tileType: TileType.MOON_HABITAT};
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     space2.tile = {tileType: TileType.MOON_ROAD};
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

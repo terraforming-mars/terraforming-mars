@@ -7,6 +7,7 @@ import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {ISpace} from './ISpace';
 import {GameOptions} from '../GameOptions';
+import {SpaceId} from '../../common/Types';
 
 export class AmazonisBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): AmazonisBoard {
@@ -49,15 +50,15 @@ export class AmazonisBoard extends Board {
     return new AmazonisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): AmazonisBoard {
+  public static deserialize(board: SerializedBoard, players: ReadonlyArray<Player>): AmazonisBoard {
     return new AmazonisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public override getNonReservedLandSpaces(): Array<ISpace> {
+  public override getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
     return super.getNonReservedLandSpaces().filter((space) => space.bonus.includes(SpaceBonus.RESTRICTED) === false);
   }
 
-  public override getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
     return [
       SpaceName.ALBOR_THOLUS,
       SpaceName.ANSERIS_MONS,
@@ -66,7 +67,7 @@ export class AmazonisBoard extends Board {
     ];
   }
 
-  public getNoctisCitySpaceIds(): Array<string> {
-    return [];
+  public override getNoctisCitySpaceId(): SpaceId | undefined {
+    return undefined;
   }
 }

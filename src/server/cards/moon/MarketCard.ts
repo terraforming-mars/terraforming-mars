@@ -3,7 +3,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
 import {newMessage} from '../../logs/MessageBuilder';
@@ -17,7 +17,7 @@ export interface Terms {
 // An abstract base class for SteelMarketMonopolists and TitaniumMarketMonopolists
 export abstract class MarketCard extends Card implements IActionCard {
   constructor(
-    public readonly tradeResource: Resources,
+    public readonly tradeResource: Resource,
     public readonly buyingTerms: Terms,
     public readonly sellingTerms: Terms,
     properties: StaticCardProperties) {
@@ -94,7 +94,7 @@ export abstract class MarketCard extends Card implements IActionCard {
       `Sell ${this.tradeResource}`,
       (unitsSold: number) => {
         const cashEarned = unitsSold * terms.to;
-        player.addResource(Resources.MEGACREDITS, cashEarned);
+        player.addResource(Resource.MEGACREDITS, cashEarned);
         player.deductResource(this.tradeResource, unitsSold);
 
         player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));

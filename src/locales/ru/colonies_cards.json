@@ -1,10 +1,10 @@
 {
     "Airliners": "Авиалайнеры",
     "3 floaters": "3 аэростата",
-    "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Требует 3 аэростата. Увеличьте ваше производство МС на 2. Добавьте 2 аэростата на ЛЮБУЮ карту",
+    "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Требует 3 аэростата. Увеличьте ваше производство M€ на 2. Добавьте 2 аэростата на ЛЮБУЮ карту",
 
     "Air Raid": "Авианалёт",
-    "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Сбросьте 1 аэростат. Украдите 5МС у любого игрока",
+    "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Сбросьте 1 аэростат. Украдите 5M€ у любого игрока",
     "steal": "украдите",
 
     "Atmo Collectors": "Сбор атмосферы",
@@ -13,11 +13,11 @@
     "Add 2 floaters to ANY card.": "Добавьте 2 аэростата на ЛЮБУЮ карту",
 
     "Community Services": "Общественная работа",
-    "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Увеличьте своё производство МС за каждую карту без тегов, включая эту",
+    "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Увеличьте своё производство M€ за каждую карту без тегов, включая эту",
 
     "Conscription": "Мобилизация",
     "next card": "След. карта",
-    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Требует 2 метки земли. Заплатите за следующую карту, которую сыграете в этом поколении на 16 МС меньше",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Требует 2 метки земли. Заплатите за следующую карту, которую сыграете в этом поколении на 16 M€ меньше",
 
     "Corona Extractor": "Сбор солнечной плазмы",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Требует 4 метки Науки. Увеличьте своё производство энергии на 4",
@@ -32,7 +32,7 @@
     "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": "Увеличьте своё производство растений на 1 за каждую свою колонию. Добавьте 1 животное на ДРУГУЮ карту и добавьте 2 микроба на ДРУГУЮ карту",
 
     "Floater Leasing": "Аренда аэростатов",
-    "Increase your M€ production 1 step PER 3 floaters you have.": "Увельчьте своё производство МС за каждых 3 своих аэростата",
+    "Increase your M€ production 1 step PER 3 floaters you have.": "Увельчьте своё производство M€ за каждых 3 своих аэростата",
 
     "Floater Prototypes": "Прототипы аэростатов",
     "Add two floaters to ANOTHER card.": "Добавьте 2 аэростат на ДРУГУЮ карту",
@@ -41,10 +41,10 @@
     "Action: Add 1 floater to ANOTHER card.": "Действие: Добавьте 1 аэростат на ДРУГУЮ карту",
 
     "Galilean Waystation": "Станция Галилея",
-    "Increase your M€ production 1 step for every Jovian tag in play.": "Увеличьте своё производство МС на 1 за каждую метку Юпитера",
+    "Increase your M€ production 1 step for every Jovian tag in play.": "Увеличьте своё производство M€ на 1 за каждую метку Юпитера",
 
     "Heavy Taxation": "Большие налоги",
-    "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Требует 2 метки Земли. Увеличьте своё производство МС на 2 и получите 4 МС",
+    "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Требует 2 метки Земли. Увеличьте своё производство M€ на 2 и получите 4 M€",
 
     "Ice Moon Colony": "Колония во льдах",
     "Place 1 colony and 1 ocean tile.": "Постройте 1 колонию и залейте 1 океан",
@@ -68,14 +68,14 @@
 
     "Jupiter Floating Station": "Станция Юпитера",
     "Action: Add 1 floater to a JOVIAN CARD.": "Дествие: Добавьте 1 аэростат на карту с меткой Юпитера",
-    "Action: Gain 1 M€ for every floater here [MAX 4].": "Дествие: Получите 1 МС за каждый аэростат здесь, но не больше 4",
+    "Action: Gain 1 M€ for every floater here [MAX 4].": "Дествие: Получите 1 M€ за каждый аэростат здесь, но не больше 4",
     "Requires 3 science tags.": "Требует 3 метки Науки",
 
     "Luna Governor": "губернатор Луны",
-    "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Требует 3 метки Земли. Увеличьте своё производство МС на 2",
+    "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Требует 3 метки Земли. Увеличьте своё производство M€ на 2",
 
     "Lunar Exports": "Экспорт с Луны",
-    "Increase your plant production 2 steps, or your M€ production 5 steps.": "Увеличьте своё производство растений на 2, или производство МС на 5",
+    "Increase your plant production 2 steps, or your M€ production 5 steps.": "Увеличьте своё производство растений на 2, или производство M€ на 5",
 
     "Lunar Mining": "Шахты на Луне",
     "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Увеличьте своё производство титана на 1 за каждые 2 метки Земли, включая эту",
@@ -85,36 +85,36 @@
 
     "Martian Zoo": "Марсианский зоопарк",
     "Effect: When you play an Earth tag, place an animal here.": "Эффект: Разыгрывая метку Земли, добавляйте сюда 1 животное",
-    "Action: Gain 1M€ per animal here.": "Действие: Получите 1МС за каждое животное здесь",
+    "Action: Gain 1M€ per animal here.": "Действие: Получите 1M€ за каждое животное здесь",
     "Requires 2 city tiles in play.": "Требует 2 города в игре",
 
     "Mining Colony": "Шахтерская колония",
     "Increase your titanium production 1 step. Place a colony.": "Увеличьте своё производство титана на 1. Постройте колонию",
 
     "Minority Refuge": "Поселение беженцов",
-    "Decrease your M€ production 2 steps. Place a colony.": "Уменьшите свое производство МС на 1. Постройте колонию",
+    "Decrease your M€ production 2 steps. Place a colony.": "Уменьшите свое производство M€ на 1. Постройте колонию",
 
     "Molecular Printing": "Молекуляная печать",
-    "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Получите 1МС за каждый город в игре и 1МС за каждую колонию в игре",
+    "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Получите 1M€ за каждый город в игре и 1M€ за каждую колонию в игре",
 
-    "Nitrogen From Titan": "Азот с Титана",
+    "Nitrogen from Titan": "Азот с Титана",
     "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Увеличьте свой РТ на 2. Добавьте 2 аэростата на карту с меткой Юпитера",
 
     "Pioneer Settlement": "Первое поселение",
-    "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Требует, чтобы у вас было не больше 1 колонии. Уменьшите своё произвоство МС на 2. Постройте колонию",
+    "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Требует, чтобы у вас было не больше 1 колонии. Уменьшите своё произвоство M€ на 2. Постройте колонию",
 
     "Productive Outpost": "Эффективный аванпост",
     "Gain all your colony bonuses.": "Получите бонусы всех ваших колоний",
 
     "Quantum Communications": "Квантовая запутанность",
-    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Требует 4 метки Науки. Увеличьте своё производство МС на 1 за каждую колонию",
+    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Требует 4 метки Науки. Увеличьте своё производство M€ на 1 за каждую колонию",
 
     "Red Spot Observatory": "Изуч. красного пятна",
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Действие: Добавьте 1 аэростат сюда или потратьте 1 аэростат отсюда, чтобы добрать карту",
     "Requires 3 science tags. Draw 2 cards.": "Требует 3 метки Науки. Доберите 2 карты",
 
     "Refugee Camps": "Лагеря беженцев",
-    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Действие: Уменьшите своё производство МС, чтобы добавить сюда лагерь",
+    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Действие: Уменьшите своё производство M€, чтобы добавить сюда лагерь",
     "1 VP for each camp resource on this card.": "1 ПО за каждый лагерь здесь",
 
     "Research Colony": "Научная колония",
@@ -123,7 +123,7 @@
     "Rim Freighters": "Дальнобойщики",
 
     "Sky Docks": "Космические доки",
-    "Effect: When you play a card, you pay 1 M€ less for it.": "Эффект: Разыгрывая карту, платите за нее на 1 МС меньше",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "Эффект: Разыгрывая карту, платите за нее на 1 M€ меньше",
     "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Требует 2 метки Земли. Получити 1 торговый флот",
 
     "Solar Probe": "Солнечный зонд",
@@ -133,7 +133,7 @@
     "Increase your heat production 5 steps.": "Увеличьте своё производство тепла на 5 ",
 
     "Space Port": "Космопорт",
-    "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "Требует 1 колонию. Уменьшите своё производство на 1 и увеличьте своё производство МС на 4. Постройте Город. Получите 1 торговый флот",
+    "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "Требует 1 колонию. Уменьшите своё производство на 1 и увеличьте своё производство M€ на 4. Постройте Город. Получите 1 торговый флот",
 
     "Space Port Colony": "Колония-космопорт",
     "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Требует 1 колонию. Постройте колонию даже там где уже имеете колонию. Получите 1 торговый флот",
@@ -141,9 +141,9 @@
 
     "Spin-off Department": "Дочерний отдел",
     "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Эффект: Разыгрывая карту с базовой стоимостью 20 и больше, добирайте 1 карту",
-    "Increase your M€ production 2 steps.": "Увеличьте своё производство МС на 2",
+    "Increase your M€ production 2 steps.": "Увеличьте своё производство M€ на 2",
 
-    "Sub-Zero Salt Fish": "Ледяная рыба",
+    "Sub-zero Salt Fish": "Ледяная рыба",
     "Requires -6 C. Decrease any plant production 1 step.": "Требование: температура -6 C или выше. Уменьшите любое производство растений на 1",
 
     "Titan Air-scrapping": "Очистка воздуха Титана",
@@ -166,7 +166,7 @@
     "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Требует наличия у вас хотя бы 1 города и 1 колонии. Увеличьте своё произвоство растений на 1 и добавьте 2 микроба на другую карту",
 
     "Warp Drive": "Варп-двигатель",
-    "Effect: When you play a space card, you pay 4 M€ less for it.": "Эффект: Тратьте розыгрыш карт с меткой космоса на 4 МС меньше",
+    "Effect: When you play a space card, you pay 4 M€ less for it.": "Эффект: Тратьте розыгрыш карт с меткой космоса на 4 M€ меньше",
     "Requires 5 science tags.": "Требует 5 меток Науки",
 
     "Colony City": "Колония Город",

@@ -1,7 +1,7 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {OrOptions} from '../inputs/OrOptions';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -20,7 +20,7 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
 
     const selectAction = new OrOptions();
     const payMC = new SelectOption('Lose up to 10 M€', 'Lose M€', () => {
-      this.player.deductResource(Resources.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
+      this.player.deductResource(Resource.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
       return undefined;
     });
     const removeFloaters = new SelectCard(

@@ -2,7 +2,6 @@ import {AndOptions} from './AndOptions';
 import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
 import {CardName} from '../../common/cards/CardName';
@@ -11,7 +10,7 @@ import * as titles from '../../common/inputs/SelectInitialCards';
 
 
 export class SelectInitialCards extends AndOptions {
-  public override readonly inputType = PlayerInputType.SELECT_INITIAL_CARDS;
+  public override readonly inputType = 'initialCards';
   constructor(private player: Player, cb: (corporation: ICorporationCard) => undefined) {
     super(() => {
       this.completed(corporation);
@@ -63,7 +62,10 @@ export class SelectInitialCards extends AndOptions {
             if (ceoCards.length !== 1) {
               throw new Error('Only select 1 CEO');
             }
+            // Push chosen card to hand
             player.ceoCardsInHand.push(ceoCards[0]);
+            // Discard unchosen CEOs
+            player.dealtCeoCards.filter((c) => c !== ceoCards[0]).forEach((c) => player.game.ceoDeck.discard(c));
             return undefined;
           }, {min: 1, max: 1},
         ),

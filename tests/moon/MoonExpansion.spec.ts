@@ -11,10 +11,9 @@ import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {SpaceName} from '../../src/server/SpaceName';
 import {TileType} from '../../src/common/TileType';
-import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
-import {VictoryPointsBreakdown} from '../../src/server/VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../../src/server/game/VictoryPointsBreakdown';
 
 describe('MoonExpansion', () => {
   let game: Game;
@@ -25,7 +24,7 @@ describe('MoonExpansion', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.PINK.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player, player2], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
   });
 
@@ -181,13 +180,13 @@ describe('MoonExpansion', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 3;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     // Gives a +2/-2 on the next action
     player.playedCards = [specialDesign];
     player.lastCardPlayed = specialDesign.name;
 
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('raiseMiningRate during WGT', () => {

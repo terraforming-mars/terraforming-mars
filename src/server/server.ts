@@ -17,6 +17,7 @@ import {processRequest} from './requestProcessor';
 import {timeAsync} from './utils/timer';
 import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {Executor} from './behavior/Executor';
+import {GameLoader} from './database/GameLoader';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
@@ -93,7 +94,7 @@ async function start() {
     // Do not fail. Just continue. Stats aren't vital.
     console.error(err);
   }
-  Database.getInstance().purgeUnfinishedGames();
+  GameLoader.getInstance().maintenance();
 
   const port = process.env.PORT || 8080;
   console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);
@@ -103,7 +104,7 @@ async function start() {
 
   if (!process.env.SERVER_ID) {
     console.log(`The secret serverId for this server is \x1b[1m${serverId}\x1b[0m.`);
-    console.log(`Adminsitrative routes can be found at admin?serverId=${serverId}`);
+    console.log(`Administrative routes can be found at admin?serverId=${serverId}`);
   }
   console.log('Server is ready.');
 }

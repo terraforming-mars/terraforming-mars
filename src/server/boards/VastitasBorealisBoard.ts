@@ -9,6 +9,7 @@ import {Random} from '../Random';
 import {GameOptions} from '../GameOptions';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
+import {SpaceId} from '../../common/Types';
 
 export class VastitasBorealisBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisBoard {
@@ -52,27 +53,27 @@ export class VastitasBorealisBoard extends Board {
     return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  private filterVastitasBorealis(player: Player, spaces: Array<ISpace>) {
+  private filterVastitasBorealis(player: Player, spaces: ReadonlyArray<ISpace>) {
     return player.canAfford(VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {tr: {temperature: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
   }
 
-  public override getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
+  public override getSpaces(spaceType: SpaceType, player: Player): ReadonlyArray<ISpace> {
     return this.filterVastitasBorealis(player, super.getSpaces(spaceType, player));
   }
 
-  public override getAvailableSpacesForCity(player: Player): Array<ISpace> {
+  public override getAvailableSpacesForCity(player: Player): ReadonlyArray<ISpace> {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesForCity(player));
   }
 
-  public override getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+  public override getAvailableSpacesOnLand(player: Player): ReadonlyArray<ISpace> {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesOnLand(player));
   }
 
-  public override getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+  public override getAvailableSpacesForGreenery(player: Player): ReadonlyArray<ISpace> {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
   }
 
-  public override getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): Array<SpaceId> {
     return [
       SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
       SpaceName.ALBA_FOSSAE,

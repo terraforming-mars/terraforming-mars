@@ -7,12 +7,14 @@ import {SpaceId} from '../Types';
 export type SpaceHighlight = undefined | 'noctis' | 'volcanic';
 
 export type SpaceModel = {
-    id: SpaceId;
-    x: number;
-    y: number;
-    bonus: Array<SpaceBonus>;
-    color: Color | undefined;
-    tileType: TileType | undefined;
-    spaceType: SpaceType;
-    highlight: SpaceHighlight;
+  id: SpaceId;
+  x: number;
+  y: number;
+  spaceType: SpaceType;
+
+  bonus: Array<SpaceBonus>;
+  color?: Color;
+  tileType?: TileType;
+  highlight?: SpaceHighlight;
+  rotated?: true; // Absent or true
 }

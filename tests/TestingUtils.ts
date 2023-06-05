@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Player} from '../src/server/Player';
 import {Game} from '../src/server/Game';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../src/server/GameOptions';
 import * as constants from '../src/common/constants';
 import {ISpace} from '../src/server/boards/ISpace';
 import {Phase} from '../src/common/Phase';
@@ -13,7 +12,7 @@ import {Log} from '../src/common/logs/Log';
 import {Greens} from '../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../src/server/turmoil/parties/Reds';
-import {IProjectCard} from '../src/server/cards/IProjectCard';
+import {CanPlayResponse, IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
@@ -54,27 +53,19 @@ export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
   return space;
 }
 
-export function addOceanTile(player: Player, spaceId?: SpaceId): ISpace {
-  return addOcean(player, spaceId);
-}
-
 export function addOcean(player: Player, spaceId?: SpaceId): ISpace {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForOcean(player)[0];
-  player.game.addOceanTile(player, space);
+  player.game.addOcean(player, space);
   return space;
-}
-
-export function addCityTile(player: Player, spaceId?: SpaceId): ISpace {
-  return addCity(player, spaceId);
 }
 
 export function addCity(player: Player, spaceId?: SpaceId): ISpace {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForCity(player)[0];
-  player.game.addCityTile(player, space);
+  player.game.addCity(player, space);
   return space;
 }
 
@@ -83,10 +74,6 @@ export function resetBoard(game: Game): void {
     space.player = undefined;
     space.tile = undefined;
   });
-}
-
-export function testGameOptions(options: Partial<GameOptions>): GameOptions {
-  return {...DEFAULT_GAME_OPTIONS, ...options};
 }
 
 export function setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
@@ -138,8 +125,8 @@ export function formatMessage(message: Message | string): string {
   return Log.applyData(message, (datum) => datum.value);
 }
 
-export function testRedsCosts(cb: () => boolean, player: Player, initialMegacredits: number, passingDelta: number) {
-  const turmoil = player.game.turmoil!;
+export function testRedsCosts(cb: () => CanPlayResponse, player: Player, initialMegacredits: number, passingDelta: number) {
+  const turmoil = Turmoil.getTurmoil(player.game);
   turmoil.rulingParty = new Greens();
   PoliticalAgendas.setNextAgenda(turmoil, player.game);
   player.megaCredits = initialMegacredits;

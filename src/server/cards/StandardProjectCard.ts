@@ -48,7 +48,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
       this.cost - this.discount(player), {
         ...canPayWith,
         tr: this.tr,
-        data: true,
+        auroraiData: true,
         reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
       });
   }

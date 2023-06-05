@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {AirScrappingStandardProjectVariant} from '../../../src/server/cards/venusNext/AirScrappingStandardProjectVariant';
-import {runAllActions, testGameOptions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -13,13 +13,13 @@ describe('AirScrappingStandardProjectVariant', function() {
 
   beforeEach(function() {
     card = new AirScrappingStandardProjectVariant();
-    [game, player] = testGame(1, testGameOptions({venusNextExtension: true, altVenusBoard: true}));
+    [game, player] = testGame(1, {venusNextExtension: true, altVenusBoard: true});
   });
 
   it('option not available for regular board', function() {
     // Building another game without the alt venus board.
     const [, player] = testGame(1);
-    Game.newInstance('gameid', [player], player, testGameOptions({venusNextExtension: true, altVenusBoard: false}));
+    Game.newInstance('gameid', [player], player, {venusNextExtension: true, altVenusBoard: false});
     const cards = player.getStandardProjectOption().cards;
     const names = cards.map((card) => card.name);
     expect(names).to.include(CardName.AIR_SCRAPPING_STANDARD_PROJECT);

@@ -4,7 +4,7 @@ import {GlobalParameter} from '../../common/GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
 import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
@@ -185,13 +185,13 @@ export class TurmoilHandler {
     if (parameter === GlobalParameter.TEMPERATURE) {
       // PoliticalAgendas Kelvinists P2 hook
       if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, 'kp02')) {
-        player.addResource(Resources.MEGACREDITS, steps * 3);
+        player.addResource(Resource.MEGACREDITS, steps * 3);
       }
     }
 
     // PoliticalAgendas Reds P4 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp04')) {
-      player.production.add(Resources.MEGACREDITS, -1 * steps, {log: true});
+      player.production.add(Resource.MEGACREDITS, -1 * steps, {log: true});
     }
 
     // PoliticalAgendas Scientists P3 hook

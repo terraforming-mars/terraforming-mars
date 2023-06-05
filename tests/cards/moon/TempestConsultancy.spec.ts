@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
 import {isPlayerId, PlayerId} from '../../../src/common/Types';
 
@@ -21,7 +21,7 @@ describe('TempestConsultancy', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, otherPlayer], player, {turmoilExtension: true});
     card = new TempestConsultancy();
     turmoil = game.turmoil!;
   });

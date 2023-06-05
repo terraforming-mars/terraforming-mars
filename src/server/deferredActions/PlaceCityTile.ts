@@ -10,7 +10,7 @@ export class PlaceCityTile extends DeferredAction {
     private options?: {
       on?: PlacementType,
       title?: string,
-      spaces?: Array<ISpace>,
+      spaces?: ReadonlyArray<ISpace>,
     }) {
     super(player, Priority.DEFAULT);
   }
@@ -27,7 +27,7 @@ export class PlaceCityTile extends DeferredAction {
       title,
       spaces,
       (space: ISpace) => {
-        this.player.game.addCityTile(this.player, space);
+        this.player.game.addCity(this.player, space);
         return undefined;
       },
     );

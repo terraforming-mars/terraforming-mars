@@ -7,8 +7,8 @@ import {isICorporationCard} from '../../src/server/cards/corporation/ICorporatio
 import {fakeCard} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
 
-// Makes rawCount available for testing.
-class TagsForTest extends Tags {
+// Exposes rawCount available for testing.
+class TestableTags extends Tags {
   constructor(player: Player) {
     super(player);
   }
@@ -19,11 +19,11 @@ class TagsForTest extends Tags {
 
 describe('Tags', function() {
   let player: Player;
-  let tags: TagsForTest;
+  let tags: TestableTags;
 
   beforeEach(() => {
     player = new Player('name', Color.BLUE, false, 0, 'p-id');
-    tags = new TagsForTest(player);
+    tags = new TestableTags(player);
   });
 
   function playFakeCorporation(...tags: Array<Tag>) {

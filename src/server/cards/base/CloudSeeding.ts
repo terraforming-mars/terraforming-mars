@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -16,7 +16,7 @@ export class CloudSeeding extends Card implements IProjectCard {
 
       behavior: {
         production: {megacredits: -1, plants: 2},
-        decreaseAnyProduction: {type: Resources.HEAT, count: 1},
+        decreaseAnyProduction: {type: Resource.HEAT, count: 1},
       },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),

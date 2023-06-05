@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {ArchimedesHydroponicsStation} from '../../../src/server/cards/moon/ArchimedesHydroponicsStation';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -10,7 +9,7 @@ describe('ArchimedesHydroponicsStation', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new ArchimedesHydroponicsStation();
   });
 
@@ -19,13 +18,13 @@ describe('ArchimedesHydroponicsStation', () => {
     player.megaCredits = card.cost;
 
     player.production.override({energy: 1, megacredits: -4});
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.production.override({energy: 0, megacredits: -4});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.production.override({energy: 1, megacredits: -5});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

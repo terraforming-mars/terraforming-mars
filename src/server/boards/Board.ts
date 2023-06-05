@@ -20,18 +20,21 @@ export abstract class Board {
   private map: Map<string, ISpace> = new Map();
 
   // stores adjacent spaces in clockwise order starting from the top left
-  private readonly adjacentSpaces = new Map<SpaceId, Array<ISpace>>();
+  private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<ISpace>>();
 
-  protected constructor(public spaces: Array<ISpace>) {
+  protected constructor(public spaces: ReadonlyArray<ISpace>) {
     this.maxX = Math.max(...spaces.map((s) => s.x));
     this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
-      this.adjacentSpaces.set(space.id, this.computeAdjacentSpaces(space));
+      const adjacentSpaces = this.computeAdjacentSpaces(space);
+      const filtered = adjacentSpaces.filter((space) => space !== undefined);
+      // "as ReadonlyArray<ISpace> is OK because the line above filters out the undefined values."
+      this.adjacentSpaces.set(space.id, filtered as ReadonlyArray<ISpace>);
       this.map.set(space.id, space);
     });
   }
 
-  public getVolcanicSpaceIds(): Array<SpaceId> {
+  public getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
     return [];
   }
 
@@ -48,7 +51,7 @@ export abstract class Board {
     return space;
   }
 
-  protected computeAdjacentSpaces(space: ISpace): Array<ISpace> {
+  protected computeAdjacentSpaces(space: ISpace): ReadonlyArray<ISpace | undefined> {
     // Expects an odd number of rows. If a funny shape appears, it can be addressed.
     const middleRow = this.maxY / 2;
     if (space.spaceType !== SpaceType.COLONY) {
@@ -85,16 +88,11 @@ export abstract class Board {
         bottomLeftSpace,
         leftSpace,
       ];
-      const spaces: Array<ISpace> = [];
-      for (const [x, y] of coords) {
-        const adj = this.spaces.find((adj) =>
+      const spaces = coords.map(([x, y]) =>
+        this.spaces.find((adj) =>
           adj.x === x && adj.y === y &&
           space !== adj && adj.spaceType !== SpaceType.COLONY,
-        );
-        if (adj !== undefined) {
-          spaces.push(adj);
-        }
-      }
+        ));
       return spaces;
     }
     return [];
@@ -107,6 +105,18 @@ export abstract class Board {
       throw new Error(`Unexpected space ID ${space.id}`);
     }
     return spaces;
+  }
+
+  //  Returns spaces in order from the top left.
+  //
+  //   0 1
+  //  5 x 2
+  //   4 3
+  //
+  // If there is no space in that spot, the index is undefined.
+  // If the space is invalid or is a colony, this returns an unreliable value.
+  public getAdjacentSpacesClockwise(space: ISpace): ReadonlyArray<ISpace | undefined> {
+    return this.computeAdjacentSpaces(space);
   }
 
   public getSpaceByTileCard(cardName: CardName): ISpace | undefined {
@@ -125,7 +135,7 @@ export abstract class Board {
     return this.getOceanSpaces(include).length;
   }
 
-  public getAvailableSpacesForType(player: Player, type: PlacementType): Array<ISpace> {
+  public getAvailableSpacesForType(player: Player, type: PlacementType): ReadonlyArray<ISpace> {
     switch (type) {
     case 'land': return this.getAvailableSpacesOnLand(player);
     case 'ocean': return this.getAvailableSpacesForOcean(player);
@@ -144,7 +154,7 @@ export abstract class Board {
    * The default condition is to return those oceans used to count toward the global parameter, so
    * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
    */
-  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): Array<ISpace> {
+  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): ReadonlyArray<ISpace> {
     const spaces = this.spaces.filter((space) => {
       if (!Board.isOceanSpace(space)) return false;
       if (space.tile?.tileType === undefined) return false;
@@ -160,15 +170,15 @@ export abstract class Board {
     return spaces;
   }
 
-  public getSpaces(spaceType: SpaceType, _player : Player): Array<ISpace> {
+  public getSpaces(spaceType: SpaceType, _player : Player): ReadonlyArray<ISpace> {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
-  public getEmptySpaces(): Array<ISpace> {
+  public getEmptySpaces(): ReadonlyArray<ISpace> {
     return this.spaces.filter((space) => space.tile === undefined);
   }
 
-  public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+  public getAvailableSpacesForCity(player: Player): ReadonlyArray<ISpace> {
     const spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
     if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
@@ -178,7 +188,7 @@ export abstract class Board {
     );
   }
 
-  public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+  public getAvailableSpacesForGreenery(player: Player): ReadonlyArray<ISpace> {
     let spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
     if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
@@ -200,7 +210,7 @@ export abstract class Board {
     return spacesOnLand;
   }
 
-  public getAvailableSpacesForOcean(player: Player): Array<ISpace> {
+  public getAvailableSpacesForOcean(player: Player): ReadonlyArray<ISpace> {
     return this.getSpaces(SpaceType.OCEAN, player)
       .filter(
         (space) => space.tile === undefined &&
@@ -208,7 +218,7 @@ export abstract class Board {
       );
   }
 
-  public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+  public getAvailableSpacesOnLand(player: Player): ReadonlyArray<ISpace> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
       const hasPlayerMarker = space.player !== undefined;
       // A space is available if it doesn't have a player marker on it or it belongs to |player|
@@ -225,12 +235,12 @@ export abstract class Board {
     return landSpaces;
   }
 
-  public getAvailableIsolatedSpaces(player: Player) {
+  public getAvailableIsolatedSpaces(player: Player): ReadonlyArray<ISpace> {
     return this.getAvailableSpacesOnLand(player)
       .filter(nextToNoOtherTileFn(this));
   }
 
-  public getAvailableVolcanicSpaces(player: Player) {
+  public getAvailableVolcanicSpaces(player: Player): ReadonlyArray<ISpace> {
     const volcanicSpaceIds = this.getVolcanicSpaceIds();
 
     const spaces = this.getAvailableSpacesOnLand(player);
@@ -243,7 +253,7 @@ export abstract class Board {
   /**
    * Almost the same as getAvailableSpacesOnLand, but doesn't apply to any player.
    */
-  public getNonReservedLandSpaces(): Array<ISpace> {
+  public getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
     return this.spaces.filter((space) => {
       return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
@@ -260,7 +270,7 @@ export abstract class Board {
     distance: number,
     direction: -1 | 1,
     player: Player | undefined = undefined,
-    predicate: (value: ISpace) => boolean = (_x) => true) {
+    predicate: (value: ISpace) => boolean = (_x) => true): ISpace {
     const spaces = this.spaces.filter((space) => {
       return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
     }).filter(predicate);
@@ -325,7 +335,7 @@ export abstract class Board {
     };
   }
 
-  public static deserializeSpace(serialized: SerializedSpace, players: Array<Player>): ISpace {
+  public static deserializeSpace(serialized: SerializedSpace, players: ReadonlyArray<Player>): ISpace {
     const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
     const space: ISpace = {
@@ -349,7 +359,7 @@ export abstract class Board {
     return space;
   }
 
-  public static deserializeSpaces(spaces: Array<SerializedSpace>, players: Array<Player>): Array<ISpace> {
+  public static deserializeSpaces(spaces: ReadonlyArray<SerializedSpace>, players: ReadonlyArray<Player>): Array<ISpace> {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }

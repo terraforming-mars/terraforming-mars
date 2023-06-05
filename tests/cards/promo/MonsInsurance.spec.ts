@@ -7,9 +7,8 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 import {DeimosDown} from '../../../src/server/cards/base/DeimosDown';
 import {Predators} from '../../../src/server/cards/base/Predators';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -24,10 +23,7 @@ describe('MonsInsurance', () => {
   beforeEach(() => {
     card = new MonsInsurance();
 
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.GREEN.newPlayer();
-    Game.newInstance('gameid', [player, player2, player3], player);
+    [, player, player2, player3] = testGame(3);
     card.play(player);
     player.setCorporationForTest(card);
   });
@@ -84,7 +80,7 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.addResource(Resources.STEEL, -1, {log: false, from: player3});
+    player2.addResource(Resource.STEEL, -1, {log: false, from: player3});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
@@ -95,7 +91,7 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.addResource(Resources.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.addResource(Resource.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);
@@ -106,7 +102,7 @@ describe('MonsInsurance', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    player2.production.add(Resources.MEGACREDITS, -1, {log: false, from: player3});
+    player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: player3});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
@@ -117,7 +113,7 @@ describe('MonsInsurance', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    player2.production.add(Resources.MEGACREDITS, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);

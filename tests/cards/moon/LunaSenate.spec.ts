@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaSenate} from '../../../src/server/cards/moon/LunaSenate';
 
@@ -12,7 +11,7 @@ describe('LunaSenate', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.PURPLE.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player, player2], player, {moonExpansion: true});
     card = new LunaSenate();
   });
 
@@ -21,10 +20,10 @@ describe('LunaSenate', () => {
     player.megaCredits = card.cost;
 
     player.tagsForTest = {moon: 3};
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.tagsForTest = {moon: 2};
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

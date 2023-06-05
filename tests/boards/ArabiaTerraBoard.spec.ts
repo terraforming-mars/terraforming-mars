@@ -5,7 +5,7 @@ import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {testGameOptions, runAllActions, cast} from '../TestingUtils';
+import {runAllActions, cast} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {ProcessorFactory} from '../../src/server/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/server/cards/base/SearchForLife';
@@ -22,7 +22,7 @@ describe('ArabiaTerraBoard', function() {
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameId', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA}));
+    game = Game.newInstance('gameId', [player, player2], player, {boardName: BoardName.ARABIA_TERRA});
     board = game.board as ArabiaTerraBoard;
   });
 
@@ -102,7 +102,7 @@ describe('ArabiaTerraBoard', function() {
 
     expect(space.player?.id).equals(player.id);
 
-    player.game.addOceanTile(player, space);
+    player.game.addOcean(player, space);
 
     expect(space.tile?.tileType).equals(TileType.OCEAN);
   });

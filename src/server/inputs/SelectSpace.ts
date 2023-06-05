@@ -1,15 +1,14 @@
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {ISpace} from '../boards/ISpace';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
 
 export class SelectSpace extends BasePlayerInput {
   constructor(
     title: string | Message,
-    public availableSpaces: Array<ISpace>,
+    public availableSpaces: ReadonlyArray<ISpace>,
     public cb: (space: ISpace) => PlayerInput | undefined) {
-    super(PlayerInputType.SELECT_SPACE, title);
+    super('space', title);
     if (availableSpaces.length === 0) {
       throw new Error('No available spaces');
     }

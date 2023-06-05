@@ -3,9 +3,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {SurveyCard} from './SurveyCard';
 import {all, max} from '../Options';
@@ -33,8 +33,8 @@ export class GeologicalSurvey extends SurveyCard {
   }
 
   public checkForBonuses(cardOwner: Player, space: ISpace) {
-    super.testForStandardResource(cardOwner, space, Resources.STEEL, SpaceBonus.STEEL);
-    super.testForStandardResource(cardOwner, space, Resources.TITANIUM, SpaceBonus.TITANIUM);
-    super.testForStandardResource(cardOwner, space, Resources.HEAT, SpaceBonus.HEAT);
+    super.testForStandardResource(cardOwner, space, Resource.STEEL, SpaceBonus.STEEL);
+    super.testForStandardResource(cardOwner, space, Resource.TITANIUM, SpaceBonus.TITANIUM);
+    super.testForStandardResource(cardOwner, space, Resource.HEAT, SpaceBonus.HEAT);
   }
 }

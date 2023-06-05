@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all, played} from '../Options';
 
 export class MartianZoo extends Card implements IProjectCard {
@@ -51,7 +51,7 @@ export class MartianZoo extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, this.resourceCount, {log: true});
+    player.addResource(Resource.MEGACREDITS, this.resourceCount, {log: true});
     return undefined;
   }
 }

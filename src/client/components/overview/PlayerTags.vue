@@ -72,7 +72,6 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.COLONY_COUNT,
 ];
 
-// TODO(kberg): Possibly pull this from server model.
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   if (game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) return false;
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
@@ -202,7 +201,8 @@ export default Vue.extend({
         if (!isInGame(entry.name, this.playerView.game)) {
           return false;
         }
-        if (entry.count === 0) {
+
+        if (entry.count === 0 && entry.discount === 0) {
           if (this.hideZeroTags || concise) {
             return false;
           }

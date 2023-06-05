@@ -5,7 +5,7 @@ import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {CardRequirements} from '../CardRequirements';
+import {CardRequirements} from '../requirements/CardRequirements';
 import {played} from '../Options';
 
 export class PrideoftheEarthArkship extends ActionCard implements IActionCard {

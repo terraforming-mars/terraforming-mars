@@ -32,21 +32,21 @@ import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParame
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 const typeToComponentName: Record<PlayerInputType, string> = {
-  [PlayerInputType.AND_OPTIONS]: 'and-options',
-  [PlayerInputType.SELECT_CARD]: 'SelectCard',
-  [PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY]: 'SelectProjectCardToPlay',
-  [PlayerInputType.SELECT_INITIAL_CARDS]: 'SelectInitialCards',
-  [PlayerInputType.OR_OPTIONS]: 'or-options',
-  [PlayerInputType.SELECT_OPTION]: 'select-option',
-  [PlayerInputType.SELECT_PAYMENT]: 'SelectPayment',
-  [PlayerInputType.SELECT_SPACE]: 'select-space',
-  [PlayerInputType.SELECT_PLAYER]: 'select-player',
-  [PlayerInputType.SELECT_AMOUNT]: 'select-amount',
-  [PlayerInputType.SELECT_DELEGATE]: 'select-party-player',
-  [PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE]: 'select-party-to-send-delegate',
-  [PlayerInputType.SELECT_COLONY]: 'select-colony',
-  [PlayerInputType.SELECT_PRODUCTION_TO_LOSE]: 'select-production-to-lose',
-  [PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS]: 'shift-ares-global-parameters',
+  'and': 'and-options',
+  'card': 'SelectCard',
+  'projectCard': 'SelectProjectCardToPlay',
+  'initialCards': 'SelectInitialCards',
+  'or': 'or-options',
+  'option': 'select-option',
+  'payment': 'SelectPayment',
+  'space': 'select-space',
+  'player': 'select-player',
+  'amount': 'select-amount',
+  'delegate': 'select-party-player',
+  'party': 'select-party-to-send-delegate',
+  'colony': 'select-colony',
+  'productionToLose': 'select-production-to-lose',
+  'aresGlobalParameters': 'shift-ares-global-parameters',
 };
 
 export default Vue.component('player-input-factory', {

@@ -71,9 +71,22 @@ describe('RoadPiracy', () => {
       type: 'and',
       responses: [
         {type: 'amount', amount: 3},
-        {type: 'amount', amount: 1},
+        {type: 'amount', amount: 3},
       ],
     }, player)).to.throw(/Amount provided too high/);
+
+    // This verifies that even if the option has an error state, it can be re-run.
+    titanium.process({
+      type: 'and',
+      responses: [
+        {type: 'amount', amount: 2},
+        {type: 'amount', amount: 2},
+      ],
+    }, player);
+
+    expect(player.titanium).eq(4);
+    expect(player2.titanium).eq(0);
+    expect(player3.titanium).eq(3);
   });
 
 
@@ -90,6 +103,19 @@ describe('RoadPiracy', () => {
         {type: 'amount', amount: 3},
       ],
     }, player)).to.throw(/You may only steal up to 4 titanium/);
+
+    // This verifies that even if the option has an error state, it can be re-run.
+    titanium.process({
+      type: 'and',
+      responses: [
+        {type: 'amount', amount: 2},
+        {type: 'amount', amount: 2},
+      ],
+    }, player);
+
+    expect(player.titanium).eq(4);
+    expect(player2.titanium).eq(0);
+    expect(player3.titanium).eq(3);
   });
 
   it('Do not select', () => {

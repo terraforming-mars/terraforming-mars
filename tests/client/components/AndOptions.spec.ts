@@ -4,7 +4,6 @@ import {getLocalVue} from './getLocalVue';
 
 import {expect} from 'chai';
 import AndOptions from '@/client/components/AndOptions.vue';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 
@@ -20,11 +19,11 @@ describe('AndOptions', function() {
         playerinput: {
           title: 'foo',
           options: [{
-            inputType: PlayerInputType.SELECT_OPTION,
+            inputType: 'option',
             title: 'select a',
           }, {
             title: 'select b',
-            inputType: PlayerInputType.SELECT_OPTION,
+            inputType: 'option',
           }],
         },
         onsave: function(data: InputResponse) {

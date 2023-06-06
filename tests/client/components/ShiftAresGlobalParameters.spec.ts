@@ -3,14 +3,13 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {PartyName} from '@/common/turmoil/PartyName';
 
 describe('ShiftAresGlobalParameters', function() {
   const mockPlayerModel: PlayerInputModel = {
     title: 'Testing, baby!',
     buttonLabel: 'Click me!',
-    inputType: PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS,
+    inputType: 'aresGlobalParameters',
     amount: undefined,
     options: undefined,
     cards: undefined,

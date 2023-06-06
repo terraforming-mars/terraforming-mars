@@ -1,6 +1,5 @@
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
@@ -17,7 +16,7 @@ export class SelectPayment extends BasePlayerInput {
     public amount: number,
     public cb: (payment: Payment) => PlayerInput | undefined,
   ) {
-    super(PlayerInputType.SELECT_PAYMENT, title);
+    super('payment', title);
     this.buttonLabel = 'Pay'; // no input button
   }
 

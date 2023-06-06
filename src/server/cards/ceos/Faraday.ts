@@ -41,7 +41,7 @@ export class Faraday extends CeoCard {
   // This _could_ save CPU cycles instead of running multiple finds?
   private countTags(player: Player): Record<Tag, number> {
     const record: Partial<Record<Tag, number>> = {};
-    for (const entry of player.tags.getAllTags()) {
+    for (const entry of player.tags.countAllTags()) {
       record[entry.tag] = entry.count;
     }
     // This is safe because getAllTags returns all tags. I wish it were easy to initialize a Record type.

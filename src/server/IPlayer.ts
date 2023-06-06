@@ -246,5 +246,5 @@ export interface IPlayer {
 }
 
 export function isIPlayer(object: any): object is IPlayer {
-  return isPlayerId(object.id) && object.game instanceof Game;
+  return object !== undefined && object.hasOwnProperty('id') && isPlayerId(object.id) && object.game instanceof Game;
 }

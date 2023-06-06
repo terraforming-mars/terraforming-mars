@@ -13,7 +13,6 @@ import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from '../../common/models/PlayerInputModel';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {PlayerViewModel, Protection, PublicPlayerModel} from '../../common/models/PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
@@ -244,9 +243,9 @@ export class Server {
       showReset: player.game.inputsThisRound > 0 && player.game.resettable === true && player.game.phase === Phase.ACTION,
     };
     switch (waitingFor.inputType) {
-    case PlayerInputType.AND_OPTIONS:
-    case PlayerInputType.OR_OPTIONS:
-    case PlayerInputType.SELECT_INITIAL_CARDS:
+    case 'and':
+    case 'or':
+    case 'initialCards':
       playerInputModel.options = [];
       if (waitingFor.options !== undefined) {
         for (const option of waitingFor.options) {
@@ -259,7 +258,7 @@ export class Server {
         throw new Error('required options not defined');
       }
       break;
-    case PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY:
+    case 'projectCard':
       const spctp: SelectProjectCardToPlay = waitingFor as SelectProjectCardToPlay;
       playerInputModel.cards = this.getCards(player, spctp.cards, {showCalculatedCost: true, extras: spctp.extras});
       playerInputModel.microbes = player.getSpendableMicrobes();
@@ -269,7 +268,7 @@ export class Server {
       playerInputModel.science = player.getSpendableScienceResources();
       playerInputModel.seeds = player.getSpendableSeedResources();
       break;
-    case PlayerInputType.SELECT_CARD:
+    case 'card':
       const selectCard = waitingFor as SelectCard<ICard>;
       playerInputModel.cards = this.getCards(player, selectCard.cards, {
         showCalculatedCost: selectCard.config.played === false || selectCard.config.played === CardName.SELF_REPLICATING_ROBOTS,
@@ -282,11 +281,11 @@ export class Server {
       playerInputModel.selectBlueCardAction = selectCard.config.selectBlueCardAction;
       playerInputModel.showOwner = selectCard.config.showOwner === true;
       break;
-    case PlayerInputType.SELECT_COLONY:
+    case 'colony':
       const selectColony = waitingFor as SelectColony;
       playerInputModel.coloniesModel = this.getColonyModel(player.game, selectColony.colonies, selectColony.showTileOnly);
       break;
-    case PlayerInputType.SELECT_PAYMENT:
+    case 'payment':
       const sp = waitingFor as SelectPayment;
       playerInputModel.amount = sp.amount;
       playerInputModel.canUseSteel = sp.canUseSteel;
@@ -298,22 +297,22 @@ export class Server {
       playerInputModel.canUseData = sp.canUseData;
       playerInputModel.auroraiData = player.getSpendableData();
       break;
-    case PlayerInputType.SELECT_PLAYER:
+    case 'player':
       playerInputModel.players = (waitingFor as SelectPlayer).players.map(
         (player) => player.color,
       );
       break;
-    case PlayerInputType.SELECT_SPACE:
+    case 'space':
       playerInputModel.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
         (space) => space.id,
       );
       break;
-    case PlayerInputType.SELECT_AMOUNT:
+    case 'amount':
       playerInputModel.min = (waitingFor as SelectAmount).min;
       playerInputModel.max = (waitingFor as SelectAmount).max;
       playerInputModel.maxByDefault = (waitingFor as SelectAmount).maxByDefault;
       break;
-    case PlayerInputType.SELECT_DELEGATE:
+    case 'delegate':
       playerInputModel.players = (waitingFor as SelectDelegate).players.map(
         (player) => {
           if (player === 'NEUTRAL') {
@@ -324,13 +323,13 @@ export class Server {
         },
       );
       break;
-    case PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE:
+    case 'party':
       playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
       if (player.game !== undefined) {
         playerInputModel.turmoil = getTurmoilModel(player.game);
       }
       break;
-    case PlayerInputType.SELECT_PRODUCTION_TO_LOSE:
+    case 'productionToLose':
       const _player = (waitingFor as SelectProductionToLose).player;
       playerInputModel.payProduction = {
         cost: (waitingFor as SelectProductionToLose).unitsToLose,
@@ -344,7 +343,7 @@ export class Server {
         },
       };
       break;
-    case PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS:
+    case 'aresGlobalParameters':
       AresHandler.ifAres((waitingFor as ShiftAresGlobalParameters).player.game, (aresData) => {
         playerInputModel.aresData = aresData;
       });
@@ -437,7 +436,7 @@ export class Server {
       steel: player.steel,
       steelProduction: player.production.steel,
       steelValue: player.getSteelValue(),
-      tags: player.tags.getAllTags(),
+      tags: player.tags.countAllTags(),
       terraformRating: player.getTerraformRating(),
       timer: player.timer.serialize(),
       titanium: player.titanium,

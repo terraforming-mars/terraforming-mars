@@ -1632,49 +1632,62 @@ export class Player implements IPlayer {
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
     // if (saveBeforeTakingAction) game.save();
 
-    // Prelude cards have to be played first
-    if (this.preludeCardsInHand.length > 0) {
-      game.phase = Phase.PRELUDES;
+    let headStartIsInEffect = game.phase === Phase.PRELUDES && this.cardIsInEffect(CardName.HEAD_START);
+    if (headStartIsInEffect) {
+      // const preludesPlayed = this.playedCards.filter((c) => c.type === CardType.PRELUDE).length;
+      if (this.actionsTakenThisRound === 2) {
+        headStartIsInEffect = false;
+      }
+    }
 
-      // If no playable prelude card in hand, end player turn
-      if (this.getPlayablePreludeCards().length === 0) {
-        LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
-        this.preludeCardsInHand = [];
+    if (!headStartIsInEffect) {
+      // Prelude cards have to be played first
+      if (this.preludeCardsInHand.length > 0) {
+        game.phase = Phase.PRELUDES;
+
+        // If no playable prelude card in hand, end player turn
+        if (this.getPlayablePreludeCards().length === 0) {
+          LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
+          this.preludeCardsInHand = [];
+          game.playerIsFinishedTakingActions();
+          return;
+        }
+
+        this.setWaitingFor(this.playPreludeCard(), () => {
+          this.takeAction();
+        });
+        return;
+      }
+
+      if (game.phase === Phase.PRELUDES && this.preludeCardsInHand.length === 0) {
         game.playerIsFinishedTakingActions();
         return;
       }
 
-      this.setWaitingFor(this.playPreludeCard(), () => {
-        if (this.preludeCardsInHand.length === 1) {
-          this.takeAction();
-        } else {
-          game.playerIsFinishedTakingActions();
+      if (this.ceoCardsInHand.length > 0) {
+        // The CEO phase occurs between the Prelude phase and before the Action phase.
+        // All CEO cards are played before players take their first normal actions.
+        game.phase = Phase.CEOS;
+        const playableCeoCards = this.getPlayableCeoCards();
+        for (let i = playableCeoCards.length - 1; i >= 0; i--) {
+          // start from the end of the list and work backwards, we're removing items as we go.
+          const card = this.ceoCardsInHand[i];
+          this.playCard(card);
         }
-      });
-      return;
-    } else if (this.ceoCardsInHand.length > 0) {
-      // The CEO phase occurs between the Prelude phase and before the Action phase.
-      // All CEO cards are played before players take their first normal actions.
-      game.phase = Phase.CEOS;
-      const playableCeoCards = this.getPlayableCeoCards();
-      for (let i = playableCeoCards.length - 1; i >= 0; i--) {
-        // start from the end of the list and work backwards, we're removing items as we go.
-        const card = this.ceoCardsInHand[i];
-        this.playCard(card);
+        // Null out ceoCardsInHand, anything left was unplayable.
+        this.ceoCardsInHand = [];
+        this.takeAction(); // back to top
+      } else {
+        game.phase = Phase.ACTION;
       }
-      // Null out ceoCardsInHand, anything left was unplayable.
-      this.ceoCardsInHand = [];
-      this.takeAction(); // back to top
-    } else {
-      game.phase = Phase.ACTION;
-    }
 
-    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
-      this.actionsTakenThisRound = 0;
-      this.availableActionsThisRound = 2;
-      game.resettable = true;
-      game.playerIsFinishedTakingActions();
-      return;
+      if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
+        this.actionsTakenThisRound = 0;
+        this.availableActionsThisRound = 2;
+        game.resettable = true;
+        game.playerIsFinishedTakingActions();
+        return;
+      }
     }
 
     // Terraforming Mars FAQ says:
@@ -1686,7 +1699,6 @@ export class Player implements IPlayer {
     if (vitor !== undefined && this.game.allAwardsFunded()) {
       this.pendingInitialActions = this.pendingInitialActions.filter((card) => card !== vitor);
     }
-
 
     if (this.pendingInitialActions.length > 0) {
       const orOptions = new OrOptions();
@@ -1703,7 +1715,9 @@ export class Player implements IPlayer {
         orOptions.options.push(option);
       });
 
-      orOptions.options.push(this.passOption());
+      if (!headStartIsInEffect) {
+        orOptions.options.push(this.passOption());
+      }
 
       this.setWaitingFor(orOptions, () => {
         this.actionsTakenThisRound++;
@@ -1968,6 +1982,7 @@ export class Player implements IPlayer {
       // Colonies
       // TODO(kberg): consider a ColoniesSerializer or something.
       fleetSize: this.colonies.getFleetSize(),
+      tradesThisGeneration: this.colonies.tradesThisGeneration,
       colonyTradeOffset: this.colonies.tradeOffset,
       colonyTradeDiscount: this.colonies.tradeDiscount,
       colonyVictoryPoints: this.colonies.victoryPoints,

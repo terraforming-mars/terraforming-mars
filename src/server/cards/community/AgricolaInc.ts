@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {ITagCount} from '../../../common/cards/ITagCount';
+import {TagCount} from '../../../common/cards/TagCount';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -42,7 +42,7 @@ export class AgricolaInc extends Card implements ICorporationCard {
     const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.POWER, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
     if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tag.VENUS);
 
-    const playerTags : ITagCount[] = player.tags.getAllTags();
+    const playerTags : TagCount[] = player.tags.countAllTags();
     let points = 0;
 
     scorableTags.forEach((tag) => {

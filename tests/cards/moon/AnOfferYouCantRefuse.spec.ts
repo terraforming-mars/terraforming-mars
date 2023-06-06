@@ -182,7 +182,7 @@ describe('AnOfferYouCantRefuse', () => {
   }
 
   function assertOptions(orOptions: OrOptions, ...expectedOptions: Array<[IParty, Player]>) {
-    const expectedStrings = expectedOptions.map((entry) => `${entry[0].name} / ${entry[1].id}`);
+    const expectedStrings = expectedOptions.map((entry) => `${entry[0].name} / ${entry[1].color}`);
     const actualStrings = orOptions.options.map((option) => formatMessage(option.title));
     expect(actualStrings).deep.eq(expectedStrings);
   }

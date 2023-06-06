@@ -121,7 +121,8 @@ export class AnOfferYouCantRefuse extends Card {
           continue;
         }
 
-        const option = new SelectOption(newMessage('${0} / ${1}', (b) => b.party(party).playerId(delegate)), 'Select', () => {
+        const color = game.getPlayerById(delegate).color;
+        const option = new SelectOption(newMessage('${0} / ${1}', (b) => b.party(party).playerColor(color)), 'Select', () => {
           turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
           turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
           return this.moveToAnotherParty(game, party.name, player.id);

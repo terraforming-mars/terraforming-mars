@@ -1,6 +1,5 @@
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {Player} from '../Player';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
@@ -14,7 +13,7 @@ export class SelectProductionToLose extends BasePlayerInput {
     public cb: (units: Units) => PlayerInput | undefined,
     buttonLabel: string = 'Save',
   ) {
-    super(PlayerInputType.SELECT_PRODUCTION_TO_LOSE, title);
+    super('productionToLose', title);
     this.buttonLabel = buttonLabel;
   }
 

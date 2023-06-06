@@ -474,6 +474,7 @@ export enum CardName {
     DOUBLE_DOWN = 'Double Down',
     PSYCHE = '16 Psyche',
     ROBOT_POLLINATORS = 'Robot Pollinators',
+    HEAD_START = 'Head Start',
     SUPERCAPACITORS = 'Supercapacitors',
 
     // Community corps

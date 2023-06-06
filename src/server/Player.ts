@@ -44,7 +44,6 @@ import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {GlobalParameter} from '../common/GlobalParameter';
-import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
@@ -68,6 +67,7 @@ import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
+import {CanAffordOptions, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -81,9 +81,7 @@ const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
 export type CardAction ='add' | 'discard' | 'nothing';
 
-export type ResourceSource = Player | GlobalEventName | ICard;
-
-export class Player {
+export class Player implements IPlayer {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
@@ -363,7 +361,7 @@ export class Player {
         .string(resource)
         .string(modifier)
         .number(absAmount);
-      if (from instanceof Player) {
+      if (isIPlayer(from)) {
         b.player(from);
       } else if (typeof(from) === 'object') {
         b.cardName(from.name);
@@ -446,7 +444,7 @@ export class Player {
    * `from` steals up to `qty` units of `resource` from this player. Or, at least as
    * much as possible.
    */
-  public stealResource(resource: Resource, qty: number, thief: Player) {
+  public stealResource(resource: Resource, qty: number, thief: IPlayer) {
     const qtyToSteal = Math.min(this.getResource(resource), qty);
     if (qtyToSteal > 0) {
       this.deductResource(resource, qtyToSteal, {log: true, from: thief, stealing: true});
@@ -523,7 +521,7 @@ export class Player {
     return game.getPlayers().some((p) => p.canHaveProductionReduced(resource, minQuantity, this));
   }
 
-  public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: Player) {
+  public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer) {
     if (resource === Resource.MEGACREDITS) {
       if ((this.production[resource] + 5) < minQuantity) return false;
     } else {
@@ -539,7 +537,7 @@ export class Player {
     return true;
   }
 
-  public productionIsProtected(attacker: Player): boolean {
+  public productionIsProtected(attacker: IPlayer): boolean {
     return attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 
@@ -627,7 +625,7 @@ export class Player {
     return requirementsBonus;
   }
 
-  public removeResourceFrom(card: ICard, count: number = 1, options?: {removingPlayer? : Player, log?: boolean}): void {
+  public removeResourceFrom(card: ICard, count: number = 1, options?: {removingPlayer? : IPlayer, log?: boolean}): void {
     const removingPlayer = options?.removingPlayer;
     if (card.resourceCount) {
       const amountRemoved = Math.min(card.resourceCount, count);
@@ -2115,9 +2113,4 @@ export class Player {
     const action = new SimpleDeferredAction(this, () => input, priority);
     this.game.defer(action);
   }
-}
-
-export interface CanAffordOptions extends Partial<Payment.Options> {
-  reserveUnits?: Units,
-  tr?: TRSource | DynamicTRSource,
 }

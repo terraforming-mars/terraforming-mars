@@ -1,5 +1,5 @@
 import {LogMessageDataType} from '../../common/logs/LogMessageDataType';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardName} from '../../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {IAward} from '../awards/IAward';
@@ -39,7 +39,7 @@ export class MessageBuilder {
     return this;
   }
 
-  public player(value: Player): MessageBuilder {
+  public player(value: IPlayer): MessageBuilder {
     return this.playerColor(value.color);
   }
 

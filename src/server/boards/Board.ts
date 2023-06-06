@@ -1,5 +1,6 @@
 import {ISpace} from './ISpace';
 import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
@@ -310,7 +311,7 @@ export abstract class Board {
     return space.tile !== undefined && GREENERY_TILES.has(space.tile.tileType);
   }
 
-  public static ownedBy(player: Player): (space: ISpace) => boolean {
+  public static ownedBy(player: IPlayer): (space: ISpace) => boolean {
     return (space: ISpace) => space.player?.id === player.id;
   }
 
@@ -368,7 +369,7 @@ export function nextToNoOtherTileFn(board: Board): (space: ISpace) => boolean {
   return (space: ISpace) => board.getAdjacentSpaces(space).every((space) => space.tile === undefined);
 }
 
-export function playerTileFn(player: Player) {
+export function playerTileFn(player: IPlayer) {
   return (space: ISpace) => space.player?.id === player.id;
 }
 

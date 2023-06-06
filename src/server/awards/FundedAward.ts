@@ -1,11 +1,11 @@
 import {IAward} from './IAward';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {AwardName} from '../../common/ma/AwardName';
 
 export type FundedAward = {
   award: IAward;
-  player: Player;
+  player: IPlayer;
 }
 
 export type SerializedFundedAward = {
@@ -24,7 +24,7 @@ export function serializeFundedAwards(fundedAwards: Array<FundedAward>) : Array<
 
 export function deserializeFundedAwards(
   fundedAwards: Array<SerializedFundedAward>,
-  players: Array<Player>,
+  players: Array<IPlayer>,
   awards: Array<IAward>): Array<FundedAward> {
   // Remove duplicates
   const aw = new Set<AwardName>();

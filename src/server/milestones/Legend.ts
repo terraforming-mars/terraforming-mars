@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Legend extends BaseMilestone {
   constructor() {
@@ -8,7 +8,7 @@ export class Legend extends BaseMilestone {
       'Have played 5 events',
       5);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     // TODO(kberg): include events removed by Odyssey and Playwrights?
     return player.getPlayedEventsCount();
   }

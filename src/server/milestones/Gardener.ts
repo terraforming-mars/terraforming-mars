@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Gardener extends BaseMilestone {
   constructor() {
@@ -8,7 +8,7 @@ export class Gardener extends BaseMilestone {
       'Own 3 greenery tiles',
       3);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.game.getGreeneriesCount(player);
   }
 }

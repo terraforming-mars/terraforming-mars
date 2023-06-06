@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardType} from '../../common/cards/CardType';
 
 export class Tycoon extends BaseMilestone {
@@ -9,7 +9,7 @@ export class Tycoon extends BaseMilestone {
       'Have 15 project cards (blue and green cards)',
       15);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.playedCards
       .filter((card) => card.type === CardType.ACTIVE || card.type === CardType.AUTOMATED).length;
   }

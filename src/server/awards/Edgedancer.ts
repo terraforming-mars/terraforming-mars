@@ -1,12 +1,12 @@
 import {IAward} from './IAward';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {isHazardTileType} from '../../common/TileType';
 
 export class Edgedancer implements IAward {
   public readonly name = 'Edgedancer';
   public readonly description = 'Own the most tiles on the edges of the board';
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.game.board.spaces
       .filter((space) => space.player !== undefined &&
         space.player === player &&

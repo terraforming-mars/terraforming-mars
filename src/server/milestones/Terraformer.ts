@@ -1,4 +1,5 @@
 import {IMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 import {Player} from '../Player';
 import {Turmoil} from '../turmoil/Turmoil';
 
@@ -10,7 +11,7 @@ export class Terraformer implements IMilestone {
   constructor() {
     this.description = 'Have a terraform rating of 35 (or 26 with Turmoil.)';
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.getTerraformRating();
   }
   public canClaim(player: Player): boolean {

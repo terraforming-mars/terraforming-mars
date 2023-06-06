@@ -5,6 +5,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ISpace} from '../../boards/ISpace';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MultiSet} from 'mnemonist';
@@ -93,7 +94,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     }
     const game = activePlayer.game;
     if (MoonExpansion.MOON_TILES.has(space.tile.tileType)) {
-      const costs = new MultiSet<Player>();
+      const costs = new MultiSet<IPlayer>();
       MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
         if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {
           costs.add(space.player, 2);

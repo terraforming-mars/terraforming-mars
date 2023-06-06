@@ -2,7 +2,7 @@ import {ISpace} from '../boards/ISpace';
 import {Game} from '../Game';
 import {LogHelper} from '../LogHelper';
 import {Phase} from '../../common/Phase';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {TileType} from '../../common/TileType';
 import {AresData, HazardConstraint} from '../../common/ares/AresData';
 
@@ -44,7 +44,7 @@ export class _AresHazardPlacement {
     );
   }
 
-  public static onOceanPlaced(aresData: AresData, player: Player) {
+  public static onOceanPlaced(aresData: AresData, player: IPlayer) {
     this.testToPlaceErosionTiles(aresData, player);
     this.testToRemoveDustStorms(aresData, player);
   }
@@ -55,7 +55,7 @@ export class _AresHazardPlacement {
     });
   }
 
-  private static testToPlaceErosionTiles(aresData: AresData, player: Player) {
+  private static testToPlaceErosionTiles(aresData: AresData, player: IPlayer) {
     if (player.game.gameOptions.aresHazards === false) {
       return;
     }
@@ -78,7 +78,7 @@ export class _AresHazardPlacement {
     );
   }
 
-  private static testToRemoveDustStorms(aresData: AresData, player: Player) {
+  private static testToRemoveDustStorms(aresData: AresData, player: IPlayer) {
     this.testConstraint(
       aresData.hazardData.removeDustStormsOceanCount,
       player.game.board.getOceanCount(),

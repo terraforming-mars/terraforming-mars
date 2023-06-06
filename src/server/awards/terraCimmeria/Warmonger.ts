@@ -1,12 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 
 export class Warmonger implements IAward {
   public readonly name = 'Warmonger';
   public readonly description = 'Play the most cards that reduce other players\' resources or production';
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const cardNames = player.playedCards.map((card) => card.name);
     return cardNames.filter((name) => Warmonger.attackCards.includes(name)).length;
   }

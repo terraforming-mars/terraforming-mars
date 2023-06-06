@@ -1,12 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 
 export class Engineer implements IAward {
   public readonly name = 'Engineer';
   public readonly description = 'Play the most cards that directly alter your own production';
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const score = player.tableau.filter((card) => {
       if (Engineer.productionCards.includes(card.name)) return true;
 

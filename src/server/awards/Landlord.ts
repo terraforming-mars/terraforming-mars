@@ -1,12 +1,12 @@
 import {IAward} from './IAward';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {TileType, isHazardTileType} from '../../common/TileType';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
 export class Landlord implements IAward {
   public readonly name = 'Landlord';
   public readonly description = 'Own the most tiles';
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const marsSpaces = player.game.board.spaces.filter(
       // Don't simplifiy this to "space.tile?.tileType !== TileType.OCEAN" because that will make
       // Land Claim a valid space for Landlord.

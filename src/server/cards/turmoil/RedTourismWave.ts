@@ -3,6 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
 import {CardRequirements} from '../requirements/CardRequirements';
@@ -35,7 +36,7 @@ export class RedTourismWave extends Card implements IProjectCard {
     return undefined;
   }
 
-  public static getAdjacentEmptySpacesCount(player: Player): number {
+  public static getAdjacentEmptySpacesCount(player: IPlayer): number {
     const board = player.game.board;
     return board.getEmptySpaces().filter((space) =>
       board.getAdjacentSpaces(space).some((adj) =>

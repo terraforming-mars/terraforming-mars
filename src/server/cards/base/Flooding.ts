@@ -49,7 +49,8 @@ export class Flooding extends Card implements IProjectCard {
         const adjacentPlayers: Set<Player> = new Set<Player>();
         player.game.board.getAdjacentSpaces(space).forEach((space) => {
           if (space.player && space.player !== player && space.tile) {
-            adjacentPlayers.add(space.player);
+            // TODO(kberg): Remove "as Player"
+            adjacentPlayers.add(space.player as Player);
           }
         });
 

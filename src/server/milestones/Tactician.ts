@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardType} from '../../common/cards/CardType';
 
 export class Tactician extends BaseMilestone {
@@ -11,7 +11,7 @@ export class Tactician extends BaseMilestone {
   }
   private excludedCardTypes = [CardType.PRELUDE, CardType.EVENT];
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const validCards = player.playedCards.filter((card) => {
       const isValidCardType = !this.excludedCardTypes.includes(card.type);
       const hasRequirements = card.requirements !== undefined;

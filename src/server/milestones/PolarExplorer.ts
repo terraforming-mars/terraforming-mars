@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {isHazardTileType} from '../../common/TileType';
 import {Board} from '../boards/Board';
 
@@ -10,7 +10,7 @@ export class PolarExplorer extends BaseMilestone {
       'Own 3 tiles on the two bottom rows',
       3);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.game.board.spaces
       .filter(Board.ownedBy(player))
       .filter((space) => space.tile !== undefined &&

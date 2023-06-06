@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Planner extends BaseMilestone {
   constructor() {
@@ -8,7 +8,7 @@ export class Planner extends BaseMilestone {
       'Have 16 cards in your hand',
       16);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.cardsInHand.length;
   }
 }

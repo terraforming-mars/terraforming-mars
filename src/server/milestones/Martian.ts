@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 
 export class Martian extends BaseMilestone {
@@ -9,7 +9,7 @@ export class Martian extends BaseMilestone {
       'Have 4 Mars tags',
       4);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.tags.count(Tag.MARS, 'milestone');
   }
 }

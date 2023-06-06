@@ -4,6 +4,7 @@ import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
@@ -34,7 +35,7 @@ export class AresHandler {
     }
   }
 
-  public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace) {
+  public static earnAdjacencyBonuses(aresData: AresData, player: IPlayer, space: ISpace) {
     let incrementMilestone = false;
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
       const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player);
@@ -51,7 +52,7 @@ export class AresHandler {
 
   // |player| placed a tile at |space| next to |adjacentSpace|.
   // Returns true if the adjacent space contains a bonus for adjacency.
-  private static earnAdacencyBonus(newTileSpace: ISpace, adjacentSpace: ISpace, player: Player, adjacentTileOwnerGainsBonus: boolean = true): boolean {
+  private static earnAdacencyBonus(newTileSpace: ISpace, adjacentSpace: ISpace, player: IPlayer, adjacentTileOwnerGainsBonus: boolean = true): boolean {
     if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
       return false;
     }
@@ -60,7 +61,7 @@ export class AresHandler {
       throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
     }
 
-    const addResourceToCard = function(player: Player, resourceType: CardResource, resourceAsText: string) {
+    const addResourceToCard = function(player: IPlayer, resourceType: CardResource, resourceAsText: string) {
       const availableCards = player.getResourceCards(resourceType);
       if (availableCards.length === 0) {
         return;
@@ -68,7 +69,7 @@ export class AresHandler {
         player.addResourceTo(availableCards[0], {log: true});
       } else if (availableCards.length > 1) {
         player.game.defer(new SimpleDeferredAction(
-          player,
+          player as Player, // TODO(kberg): Remove
           () => new SelectCard(
             'Select a card to add an ' + resourceAsText,
             'Add ' + resourceAsText + 's',
@@ -120,7 +121,8 @@ export class AresHandler {
           break;
 
         default:
-          player.game.grantSpaceBonus(player, bonus);
+          // TODO(kberg): remove "as Player"
+          player.game.grantSpaceBonus(player as Player, bonus);
           break;
         }
       }
@@ -207,7 +209,7 @@ export class AresHandler {
     return {megacredits: megaCreditCost, production: productionCost};
   }
 
-  public static assertCanPay(player: Player, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  public static assertCanPay(player: IPlayer, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
     if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: 0};
     }

@@ -26,6 +26,7 @@ import {SerializedColony} from '../SerializedColony';
 import {IColony, TradeOptions} from './IColony';
 import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {ColonyName} from '../../common/colonies/ColonyName';
+import {sum} from '../../common/utils/utils';
 
 export abstract class Colony implements IColony {
     // Players can't build colonies on Miranda until someone has played an Animal card.
@@ -263,7 +264,7 @@ export abstract class Colony implements IColony {
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         Turmoil.ifTurmoil(game, (turmoil) => {
-          const partyDelegateCount = turmoil.parties.map((party) => party.delegates.get(player.id)).reduce((a, b) => a + b, 0);
+          const partyDelegateCount = sum(turmoil.parties.map((party) => party.delegates.get(player.id)));
           player.addResource(Resource.MEGACREDITS, partyDelegateCount, {log: true});
         });
         break;

@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-//import {Size} from '../../../common/cards/render/Size';
+import {Size} from '../../../common/cards/render/Size';
 import {ActionCard} from '../ActionCard';
 import {CardRequirements} from '../requirements/CardRequirements';
 
@@ -42,11 +42,11 @@ export class RedSpotGasHarvesting extends ActionCard {
         cardNumber: 'N10',
         //description: 'Requires 2 space tags. Draw 2 cards. Score 1VP per 3 radiation on this card.',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 2 radiations to this card.', (be) => {
-            be.titanium(1).startAction.radiations(2);
+          b.action('Add 2 radiations to ANY card.', (be) => {
+            be.titanium(1).startAction.radiations(2).asterix();
           }).br;
-          b.or().action('Remove 1 radiation here to gain 1 steel and 1 energy.', (be) => {
-            be.radiations(1).startAction.steel(1).energy(1);
+          b.action('Remove 1 radiation here to gain 1 steel and 1 energy.', (be) => {
+            be.or(Size.SMALL).nbsp.nbsp.radiations(1).startAction.steel(1).energy(1);
           }).br;
           
           b.cards(2).description('Requires 2 space tags. Draw 2 cards. Score 1VP per 3 radiation on this card.');

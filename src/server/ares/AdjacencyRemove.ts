@@ -1,9 +1,6 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 
-export type AdjacencyBonus = {
+export type AdjacencyRemove = {
   bonus: Array<SpaceBonus | 'callback'>;
   cost ?: number;
-  count ?: number;
-  bonus2?: Array<SpaceBonus | 'callback'>;
-  count2? :number
 }

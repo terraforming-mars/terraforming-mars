@@ -37,7 +37,7 @@ export class RadioactiveDecay extends ActionCard {
         cardNumber: 'N52',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 radiation to this card.', (be) => {
-            be.empty().startAction.radiations(1);
+            be.empty().startAction.radiations(1).asterix();
           }).br;
           b.or(Size.SMALL).br;
           b.action('Remove 1 radiation here to gain 1 steel and 1 heat.', (be) => {

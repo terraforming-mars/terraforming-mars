@@ -5,6 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../requirements/CardRequirements';
+import {Size} from '../../../common/cards/render/Size';
 
 export class ProcessedTitanium extends ActionCard implements IProjectCard {
   constructor() {
@@ -41,7 +42,7 @@ export class ProcessedTitanium extends ActionCard implements IProjectCard {
         cardNumber: 'N74',
         renderData: CardRenderer.builder((b) => {
           b.action('Decrease your M€ production 2 steeps to increase your steel production 1 step or titanium production 1 step.', (eb) => {
-            eb.startAction.production((pb) => pb.megacredits(2)).arrow().production((pb) => pb.steel(1)).slash().production((pb) => pb.titanium(1))}),
+            eb.startAction.production((pb) => pb.megacredits(2)).arrow().production((pb) => pb.steel(1).or(Size.SMALL).titanium(1))}),
           b.br,  
           b.production((pb) => pb.megacredits(2));
         }),

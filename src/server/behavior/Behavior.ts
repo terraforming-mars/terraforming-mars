@@ -13,6 +13,7 @@ import {Countable, CountableUnits} from './Countable';
 import {PlacementType} from '../boards/PlacementType';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {Units} from '../../common/Units';
+import { AdjacencyCost } from '../ares/AdjacencyCost';
 
 type ValueOf<Obj> = Obj[keyof Obj];
 type OneOnly<Obj, Key extends keyof Obj> = { [key in Exclude<keyof Obj, Key>]: null } & Pick<Obj, Key>;
@@ -80,13 +81,17 @@ export interface Behavior {
     on: PlacementType,
     adjacencyBonus?: AdjacencyBonus,
     title?: string,
+    adjacencyCost?: AdjacencyCost,
   },
 
   /** Remove plants from any player. Typical for asteroid cards. */
   // removePlants: number,
 
-  /** Remove resources from any player.
-  // removeAnyResource: {type: CardResource, count: number},
+  /** Remove resources from any player.*/
+  removeResourcesFromCard?: {
+    type: CardResource, 
+    count: number
+  },
 
   /** Raise the titanium and steel value. On discard, reduce them. */
   titanumValue?: 1;

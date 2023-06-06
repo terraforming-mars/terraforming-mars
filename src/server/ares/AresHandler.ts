@@ -6,7 +6,7 @@ import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
+import {GREENERY_UPGRADE_TILES, OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
 import {Tile} from '../Tile';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
 import {AdjacencyCost} from './AdjacencyCost';
@@ -222,10 +222,10 @@ export class AresHandler {
             player.production.energy +
             player.production.heat;
 
-    if (availableProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
+    if (cost.production != undefined && availableProductionUnits >= cost.production && cost.megacredits != undefined && player.canAfford(cost.megacredits)) {
       return cost;
     }
-    if (cost.production > 0) {
+    if (cost.production !== undefined && cost.production > 0) {
       throw new Error(`Placing here costs ${cost.production} units of production and ${cost.megacredits} M€`);
     } else {
       throw new Error(`Placing here costs ${cost.megacredits} M€`);
@@ -235,13 +235,14 @@ export class AresHandler {
   public static payAdjacencyAndHazardCosts(player: Player, space: ISpace, subjectToHazardAdjacency: boolean) {
     const cost = this.assertCanPay(player, space, subjectToHazardAdjacency);
 
-    if (cost.production > 0) {
+    if (cost.production !== undefined && cost.production > 0) {
       // TODO(kberg): don't send interrupt if total is available.
       player.game.defer(new SelectProductionToLoseDeferred(player, cost.production));
     }
-    if (cost.megacredits > 0) {
-      player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
-      player.game.defer(new SelectPaymentDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
+    if (cost.megacredits !== undefined && cost.megacredits > 0) {
+      const megacredits = cost.megacredits;
+      player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(megacredits));
+      player.game.defer(new SelectPaymentDeferred(player, megacredits, {title: 'Select how to pay additional placement costs.'}));
     }
   }
 
@@ -255,9 +256,10 @@ export class AresHandler {
     if (AresHandler.hasHazardTile(space) && space.tile.protectedHazard !== true) {
       return true;
     }
-    if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.has(newTile.tileType)) {
+    if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES || GREENERY_UPGRADE_TILES.has(newTile.tileType)) {
       return true;
     }
+
     return false;
   }
 

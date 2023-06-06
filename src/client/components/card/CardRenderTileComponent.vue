@@ -126,6 +126,9 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.CRASHLANDING]: {
     tile: 'card-tile-crashlanding',
   },
+  [TileType.EVACUATION_ZONE]: {
+    tile: 'card-tile-evacuation-zone',
+  },
   [TileType.GREENERY]: {},
   [TileType.OCEAN]: {},
   [TileType.CITY]: {},

@@ -135,6 +135,10 @@ export abstract class Board {
     return this.getOceanSpaces(include).length;
   }
 
+  public getGreeneryCount(include?: {evacuationZone?: boolean, wetlands?: boolean}): number {
+    return this.getGreenerySpaces(include).length;
+  }
+
   public getAvailableSpacesForType(player: Player, type: PlacementType): ReadonlyArray<ISpace> {
     switch (type) {
     case 'land': return this.getAvailableSpacesOnLand(player);
@@ -144,6 +148,7 @@ export abstract class Board {
     case 'isolated': return this.getAvailableIsolatedSpaces(player);
     case 'volcanic': return this.getAvailableVolcanicSpaces(player);
     case 'upgradeable-ocean': return this.getOceanSpaces({upgradedOceans: false});
+    case 'upgradeable-greenery': return this.getGreenerySpaces();
     default: throw new Error('unknown type ' + type);
     }
   }
@@ -169,6 +174,24 @@ export abstract class Board {
     });
     return spaces;
   }
+
+  public getGreenerySpaces(include?: {evacuationZone?: boolean, wetlands?: boolean}): ReadonlyArray<ISpace> {
+    const spaces = this.spaces.filter((space) => {
+      if (!Board.isGreenerySpace(space)) return false;
+      if (space.tile?.tileType === undefined) return false;
+      const tileType = space.tile.tileType;
+      if (tileType === TileType.WETLANDS) {
+        return include?.wetlands ?? false;
+      }
+      if (tileType === TileType.EVACUATION_ZONE) {
+        return include?.evacuationZone ?? false;
+      }
+      return true;
+    });
+    return spaces;
+  }
+
+
 
   public getSpaces(spaceType: SpaceType, _player : Player): ReadonlyArray<ISpace> {
     return this.spaces.filter((space) => space.spaceType === spaceType);

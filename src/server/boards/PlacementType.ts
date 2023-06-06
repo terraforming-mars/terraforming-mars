@@ -5,4 +5,5 @@ export type PlacementType =
   'city' |
   'isolated' |
   'volcanic' |
-  'upgradeable-ocean';
+  'upgradeable-ocean' |
+  'upgradeable-greenery';

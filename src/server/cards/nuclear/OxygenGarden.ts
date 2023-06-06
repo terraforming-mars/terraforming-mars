@@ -24,7 +24,7 @@ export class OxygenGarden extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'N59',
         renderData: CardRenderer.builder((b) => {
-          b.greenery().plants(1).microbes(1).asterix;
+          b.greenery().plants(1).microbes(1).asterix();
         }),
         description: 'Place a greenery tile and raise oxygen 1 step. Gain 1 plant. Add microbe to ANOTHER card.',
       },

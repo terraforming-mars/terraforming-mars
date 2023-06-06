@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import { CardRequirements } from '../requirements/CardRequirements';
 import {all} from '../Options';
+import { digit } from '../Options';
 
 
 export class ColdFusion extends Card implements IProjectCard {
@@ -26,7 +27,7 @@ export class ColdFusion extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'N15',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(1)).br;
+          b.production((pb) => pb.energy(5, {digit})).br;
           b.tr(2);
         }),
         description: 'Requires 6 radiation tags in play. Increase your energy production 5 steps. Gain 2 TR.',

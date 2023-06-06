@@ -5,6 +5,8 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {PlacementType} from '../boards/PlacementType';
 import {Tile} from '../Tile';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
+import { SpaceBonus } from '../../common/boards/SpaceBonus';
+
 
 export class PlaceTile extends DeferredAction {
   constructor(
@@ -13,7 +15,7 @@ export class PlaceTile extends DeferredAction {
       tile: Tile,
       on: PlacementType,
       title?: string,
-      adjacencyBonus?: AdjacencyBonus;
+      adjacencyBonus?: AdjacencyBonus,
     }) {
     super(player, Priority.DEFAULT);
   }
@@ -29,11 +31,11 @@ export class PlaceTile extends DeferredAction {
       availableSpaces,
       (space: ISpace) => {
         const tile: Tile = {...this.options.tile};
-        if (this.options.on === 'upgradeable-ocean') {
+        if (this.options.on === 'upgradeable-ocean' || this.options.on === 'upgradeable-greenery' ) {
           tile.covers = space.tile;
         }
         game.addTile(this.player, space, tile);
-        space.adjacency = this.options.adjacencyBonus;
+        space.adjacency = this.getAdjacencyBonus();
         return undefined;
       },
     );
@@ -46,4 +48,14 @@ export class PlaceTile extends DeferredAction {
     default: return 'Select space for special tile';
     }
   }
+  private getAdjacencyBonus(): AdjacencyBonus | undefined {
+    const adjacencyBonus: AdjacencyBonus | undefined = this.options.adjacencyBonus;
+    if (adjacencyBonus) {
+      const bonus: (SpaceBonus | 'callback')[] = adjacencyBonus.bonus;
+      return { bonus };
+    } else {
+      return undefined;
+    }
+  }
 }
+

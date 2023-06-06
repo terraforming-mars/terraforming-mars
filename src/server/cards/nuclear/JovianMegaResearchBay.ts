@@ -37,7 +37,7 @@ export class JovianMegaReseachBay extends ActionCard implements IProjectCard {
           b.effect('Whenever you play a card with a radiation tag, including this, draw a card.', (eb) => {
             eb.radiation({amount: 1, played}).startEffect.cards(1);
           }).br;
-          b.action('Spend 1 energy to draw a card.', (eb) => {
+          b.action('Spend 1 titanium to draw a card.', (eb) => {
             eb.titanium(1).startAction.cards(1);
         })
         }),

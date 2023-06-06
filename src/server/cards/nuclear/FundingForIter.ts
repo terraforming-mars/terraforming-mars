@@ -27,7 +27,7 @@ export class FundingForIter extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(2).energy(2).heat(1)}).br;
-          b.minus().megacredits(4, {all});
+          b.minus().megacredits(1, {all}).asterix();
         }),
         description: 'Requires any 6 Earth tags in play. Increase you M€ production 2 steps. Increase your energy production and your heat production 1 step each. ALL players remove 1 M€.',
       },

@@ -30,9 +30,9 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     return CardType.STANDARD_PROJECT;
   }
 
-  protected discount(_player: Player) {
+  /*protected discount(_player: Player) {
     return 0;
-  }
+  }*/
 
   protected abstract actionEssence(player: Player): void
 
@@ -65,6 +65,21 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   private suffixFreeCardName(cardName: CardName): string {
     return cardName.split(':')[0];
   }
+
+  protected discount(player: Player): number {
+    let discount = 0;
+    console.log(player.lastCardPlayed, CardType );
+
+    if (player.lastCardPlayed === CardName.FAKE_MEDIA_CONFERENCE) {
+      discount += 8;
+      player.lastCardPlayed = undefined; // Clear the lastCardPlayed property
+
+    } else {
+      discount = 0;
+    }
+    return discount;
+  }
+
 
   public action(player: Player): PlayerInput | undefined {
     const canPayWith = this.canPayWith(player);

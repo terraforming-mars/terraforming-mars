@@ -20,7 +20,7 @@ export class PlanetXSighting extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tag.RADIATION, 3)),
 
       behavior: {
-        production: {energy: {tag: Tag.JOVIAN, each:2, per: 3}},
+        production: {energy: {tag: Tag.JOVIAN, per: 3/2}},
         stock: {heat: {tag: Tag.SPACE, per: 2}},
         addResourcesToAnyCard: {count: 2, type: CardResource.RADIATION},
       },

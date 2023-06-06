@@ -1180,14 +1180,20 @@ export class Game implements Logger {
     tile: Tile): void {
     // Part 1, basic validation checks.
 
-    if (space.tile !== undefined && !(this.gameOptions.aresExtension || this.gameOptions.pathfindersExpansion)) {
+    if (space.tile !== undefined && !(this.gameOptions.aresExtension || this.gameOptions.pathfindersExpansion || this.gameOptions.nuclearExtension)) {
       throw new Error('Selected space is occupied');
     }
 
     // Land claim a player can claim land for themselves
-    if (space.player !== undefined && space.player !== player) {
+    /*if (space.player !== undefined && space.player !== player) {
+      throw new Error('This space is land claimed by ' + space.player.name);
+    }*/
+
+
+    if (space.player !== undefined && space.player !== player && !TileType.EVACUATION_ZONE) {
       throw new Error('This space is land claimed by ' + space.player.name);
     }
+
 
     if (!AresHandler.canCover(space, tile)) {
       throw new Error('Selected space is occupied: ' + space.id);
@@ -1383,6 +1389,11 @@ export class Game implements Logger {
     const space = this.board.getSpace(spaceId);
     space.tile = undefined;
     space.player = undefined;
+  }
+
+  public canRemoveGreenery(): boolean {
+    const count = this.board.getGreeneryCount();
+    return count > 0 && count < constants.MAX_OXYGEN_LEVEL;
   }
 
   public getPlayers(): ReadonlyArray<Player> {

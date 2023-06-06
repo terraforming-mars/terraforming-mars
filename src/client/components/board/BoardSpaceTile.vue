@@ -51,6 +51,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.LUNA_TRAIN_STATION]: 'luna-train-station',
   [TileType.LUNAR_MINE_URBANIZATION]: 'lunar-mine-urbanization',
   [TileType.CRASHLANDING]: 'crashlanding',
+  [TileType.EVACUATION_ZONE]: 'evacuation-zone',
 };
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -109,6 +110,7 @@ const descriptions: Record<TileType, string> = {
   [TileType.RED_CITY]: 'Red City: 1 VP per empty adjacent area. No greeneries may be placed next to it.',
   [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
   [TileType.CRASHLANDING]: 'Crashlanding',
+  [TileType.EVACUATION_ZONE]: 'Evacuation Zone',
 };
 
 export default Vue.extend({

@@ -39,7 +39,7 @@ export class SoilDecontamination extends Card implements IProjectCard {
           b.microbes(1).asterix().nbsp.radiations(2).asterix();
         }),
         description: 
-        {text:'Requires 2 Earth tags. Decrease your M€ production 1 step and any plant production 1 step and increase your own 2 steps.',
+        {text:'Requires 2 Earth tags. Decrease your M€ production 1 step and any plant production 1 step and increase your own 2 steps. Gain 2 plants. Add 1 microbe to ANOTHER card. Add 2 radiation to ANOTHER card.',
         align: 'left'}
       },
     });

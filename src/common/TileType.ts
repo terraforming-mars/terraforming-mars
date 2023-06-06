@@ -48,6 +48,9 @@ export enum TileType {
     RED_CITY, // 37
     MARTIAN_NATURE_WONDERS, // 38
     CRASHLANDING, // 39
+
+    //NUCLEAR
+    EVACUATION_ZONE, //40
 }
 
 const TO_STRING_MAP: Record<TileType, string> = {
@@ -92,6 +95,7 @@ const TO_STRING_MAP: Record<TileType, string> = {
   [TileType.RED_CITY]: 'Red City',
   [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
   [TileType.CRASHLANDING]: 'Crashlanding',
+  [TileType.EVACUATION_ZONE]: 'Evacuation Zone',
 };
 
 export namespace TileType {
@@ -108,6 +112,7 @@ export const CITY_TILES = new Set([TileType.CITY, TileType.CAPITAL, TileType.OCE
 export const OCEAN_TILES = new Set([TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY, TileType.WETLANDS]);
 export const BASE_OCEAN_TILES = new Set([TileType.OCEAN, TileType.WETLANDS]);
 export const GREENERY_TILES = new Set([TileType.GREENERY, TileType.WETLANDS]);
+export const GREENERY_UPGRADE_TILES = new Set([TileType.EVACUATION_ZONE]);
 export function isHazardTileType(tile: TileType): boolean {
   return HAZARD_TILES.has(tile);
 }

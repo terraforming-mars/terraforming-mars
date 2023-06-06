@@ -23,7 +23,7 @@ export class UndercoverActivists extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'N39',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => {pb.megacredits(1).plants(1);
+          b.production((pb) => {pb.megacredits(1).plants(1).br;
         });
           b.plants(1).slash().greenery(Size.MEDIUM, false);
       }),

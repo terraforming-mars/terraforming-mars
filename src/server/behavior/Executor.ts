@@ -4,6 +4,7 @@ import {TRSource} from '../../common/cards/TRSource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
+import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
 import {Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
@@ -289,9 +290,9 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
-    // if (behavior.removeResourcesFromAnyCard !== undefined) {
-    //   throw new Error('not yet');
-    // }
+     if (behavior.removeResourcesFromCard !== undefined) {
+      player.game.defer(new RemoveResourcesFromCard(player, behavior.removeResourcesFromCard.type ));
+     }
 
     if (behavior.decreaseAnyProduction !== undefined) {
       player.game.defer(new DecreaseAnyProduction(player, behavior.decreaseAnyProduction.type, {count: behavior.decreaseAnyProduction.count}));
@@ -299,6 +300,7 @@ export class Executor implements BehaviorExecutor {
     if (behavior.removeAnyPlants !== undefined) {
       player.game.defer(new RemoveAnyPlants(player, behavior.removeAnyPlants));
     }
+    
     if (behavior.colonies !== undefined) {
       const colonies = behavior.colonies;
       if (colonies.buildColony !== undefined) {

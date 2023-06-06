@@ -436,7 +436,7 @@ export class Server {
       steel: player.steel,
       steelProduction: player.production.steel,
       steelValue: player.getSteelValue(),
-      tags: player.tags.getAllTags(),
+      tags: player.tags.countAllTags(),
       terraformRating: player.getTerraformRating(),
       timer: player.timer.serialize(),
       titanium: player.titanium,

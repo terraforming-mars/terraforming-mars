@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -26,7 +27,7 @@ export class SocialEvents extends Card implements IProjectCard {
     });
   }
 
-  private getExpectedTr(player: Player) {
+  private getExpectedTr(player: IPlayer) {
     return Math.floor((player.tags.count(Tag.MARS) + 1) / 2); // +1 is the "including this"
   }
 

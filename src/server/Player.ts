@@ -67,19 +67,10 @@ import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
-import {CanAffordOptions, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
+import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
-
-/**
- * Behavior when playing a card:
- *   add it to the tableau
- *   discard it from the tableau
- *   or do nothing.
- */
-
-export type CardAction ='add' | 'discard' | 'nothing';
 
 export class Player implements IPlayer {
   public readonly id: PlayerId;
@@ -2113,4 +2104,8 @@ export class Player implements IPlayer {
     const action = new SimpleDeferredAction(this, () => input, priority);
     this.game.defer(action);
   }
+}
+
+export function asPlayer(player: IPlayer): Player {
+  return player as Player;
 }

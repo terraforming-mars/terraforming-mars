@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectPayment} from '../inputs/SelectPayment';
 import {Payment} from '../../common/inputs/Payment';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -17,7 +17,7 @@ export type Options = {
 
 export class SelectPaymentDeferred extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public amount: number,
     public options: Options = {},
   ) {

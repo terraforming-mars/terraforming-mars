@@ -4,6 +4,7 @@ import {ISpace} from '../boards/ISpace';
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
@@ -33,21 +34,21 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
   return object.getCheckLoops !== undefined;
 }
 
-export type DynamicTRSource = (player: Player) => TRSource;
+export type DynamicTRSource = (player: IPlayer) => TRSource;
 
 export interface ICard {
     name: CardName;
     tags: Array<Tag>;
     play: (player: Player) => PlayerInput | undefined;
-    getCardDiscount?: (player: Player, card: IProjectCard) => number;
+    getCardDiscount?: (player: IPlayer, card: IProjectCard) => number;
     cardDiscount?: CardDiscount | Array<CardDiscount>;
     // parameter is a Morningstar Inc. special case.
-    getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
+    getRequirementBonus?: (player: IPlayer, parameter: GlobalParameter) => number;
     victoryPoints?: number | 'special' | IVictoryPoints,
     getVictoryPoints: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => PlayerInput | undefined | void;
     onStandardProject?: (player: Player, project: ICard) => void;
-    onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;
+    onTilePlaced?: (cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) => void;
     onDiscard?: (player: Player) => void;
     /**
      * Called when anybody gains TR

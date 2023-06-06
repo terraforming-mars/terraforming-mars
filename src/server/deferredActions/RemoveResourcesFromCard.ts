@@ -1,4 +1,5 @@
 import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
@@ -70,7 +71,7 @@ export class RemoveResourcesFromCard extends DeferredAction {
     );
   }
 
-  public static getAvailableTargetCards(player: Player, resourceType: CardResource | undefined, ownCardsOnly: boolean = false): Array<ICard> {
+  public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, ownCardsOnly: boolean = false): Array<ICard> {
     let resourceCards: Array<ICard>;
     if (ownCardsOnly) {
       if (resourceType === CardResource.ANIMAL) {

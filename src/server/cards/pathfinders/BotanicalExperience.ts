@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -41,7 +42,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
   }
 
 
-  public onTilePlaced(cardOwner: Player, _activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, _activePlayer: IPlayer, space: ISpace) {
     if (Board.isGreenerySpace(space)) {
       cardOwner.addResourceTo(this, 1);
     }

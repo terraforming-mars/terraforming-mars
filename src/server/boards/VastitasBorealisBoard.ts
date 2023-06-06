@@ -1,7 +1,7 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
@@ -49,27 +49,27 @@ export class VastitasBorealisBoard extends Board {
     return new VastitasBorealisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): VastitasBorealisBoard {
+  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): VastitasBorealisBoard {
     return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  private filterVastitasBorealis(player: Player, spaces: ReadonlyArray<ISpace>) {
+  private filterVastitasBorealis(player: IPlayer, spaces: ReadonlyArray<ISpace>) {
     return player.canAfford(VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {tr: {temperature: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
   }
 
-  public override getSpaces(spaceType: SpaceType, player: Player): ReadonlyArray<ISpace> {
+  public override getSpaces(spaceType: SpaceType, player: IPlayer): ReadonlyArray<ISpace> {
     return this.filterVastitasBorealis(player, super.getSpaces(spaceType, player));
   }
 
-  public override getAvailableSpacesForCity(player: Player): ReadonlyArray<ISpace> {
+  public override getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<ISpace> {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesForCity(player));
   }
 
-  public override getAvailableSpacesOnLand(player: Player): ReadonlyArray<ISpace> {
+  public override getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<ISpace> {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesOnLand(player));
   }
 
-  public override getAvailableSpacesForGreenery(player: Player): ReadonlyArray<ISpace> {
+  public override getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<ISpace> {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
   }
 

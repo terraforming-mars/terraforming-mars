@@ -234,7 +234,7 @@ export class AresHandler {
     }
   }
 
-  public static payAdjacencyAndHazardCosts(player: Player, space: ISpace, subjectToHazardAdjacency: boolean) {
+  public static payAdjacencyAndHazardCosts(player: IPlayer, space: ISpace, subjectToHazardAdjacency: boolean) {
     const cost = this.assertCanPay(player, space, subjectToHazardAdjacency);
 
     if (cost.production > 0) {
@@ -267,7 +267,7 @@ export class AresHandler {
     _AresHazardPlacement.onTemperatureChange(game, aresData);
   }
 
-  public static onOceanPlaced(aresData: AresData, player: Player) {
+  public static onOceanPlaced(aresData: AresData, player: IPlayer) {
     _AresHazardPlacement.onOceanPlaced(aresData, player);
   }
 

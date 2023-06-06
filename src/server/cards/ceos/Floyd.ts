@@ -1,5 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -42,7 +43,7 @@ export class Floyd extends CeoCard {
     return undefined;
   }
 
-  public override getCardDiscount(player: Player) {
+  public override getCardDiscount(player: IPlayer) {
     if (this.opgActionIsActive === true) {
       return 13 + (2 * player.game.generation);
     }

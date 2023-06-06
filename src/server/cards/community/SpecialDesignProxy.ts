@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 
 export class SpecialDesignProxy implements IProjectCard {
   public get cost() {
@@ -31,7 +31,7 @@ export class SpecialDesignProxy implements IProjectCard {
   public getVictoryPoints() {
     return 0;
   }
-  public getRequirementBonus(player: Player) {
+  public getRequirementBonus(player: IPlayer) {
     // NOTE: normally code looks like 'if player.lastCardPlayed === this.name` but
     // not in this case.
     if (player.lastCardPlayed === CardName.SPECIAL_DESIGN) {

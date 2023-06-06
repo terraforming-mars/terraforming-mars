@@ -17,6 +17,7 @@ import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
 import {DynamicTRSource} from '../cards/ICard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {TRSource} from '../../common/cards/TRSource';
+import {IPlayer} from '../IPlayer';
 
 export class TurmoilHandler {
   private constructor() {}
@@ -181,7 +182,7 @@ export class TurmoilHandler {
     }
   }
 
-  public static onGlobalParameterIncrease(player: Player, parameter: GlobalParameter, steps: number = 1): void {
+  public static onGlobalParameterIncrease(player: IPlayer, parameter: GlobalParameter, steps: number = 1): void {
     if (parameter === GlobalParameter.TEMPERATURE) {
       // PoliticalAgendas Kelvinists P2 hook
       if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, 'kp02')) {

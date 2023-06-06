@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {Player, asPlayer} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -27,7 +27,7 @@ export class PlaceCityTile extends DeferredAction {
       title,
       spaces,
       (space: ISpace) => {
-        this.player.game.addCity(this.player, space);
+        this.player.game.addCity(asPlayer(this.player), space);
         return undefined;
       },
     );

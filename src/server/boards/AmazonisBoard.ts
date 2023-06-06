@@ -2,7 +2,7 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {SpaceName} from '../SpaceName';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {ISpace} from './ISpace';
@@ -50,7 +50,7 @@ export class AmazonisBoard extends Board {
     return new AmazonisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: ReadonlyArray<Player>): AmazonisBoard {
+  public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): AmazonisBoard {
     return new AmazonisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 

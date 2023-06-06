@@ -1,5 +1,5 @@
 import {GameOptions} from '../GameOptions';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Random} from '../Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
@@ -68,7 +68,7 @@ export class ArabiaTerraBoard extends Board {
     }
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): ArabiaTerraBoard {
+  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): ArabiaTerraBoard {
     return new ArabiaTerraBoard(Board.deserializeSpaces(board.spaces, players));
   }
 }

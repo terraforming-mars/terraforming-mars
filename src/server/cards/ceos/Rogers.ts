@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -35,13 +35,13 @@ export class Rogers extends CeoCard {
     return undefined;
   }
 
-  public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {
+  public getRequirementBonus(_player: IPlayer, parameter: GlobalParameter): number {
     if (this.opgActionIsActive === false || parameter !== GlobalParameter.VENUS) return 0;
     // Magic number high enough to always ignore requirements.
     return 50;
   }
 
-  public override getCardDiscount(_player: Player, card: IProjectCard) {
+  public override getCardDiscount(_player: IPlayer, card: IProjectCard) {
     if (this.opgActionIsActive === false) return 0;
     return card.tags.filter((tag) => tag === Tag.VENUS).length * 3;
   }

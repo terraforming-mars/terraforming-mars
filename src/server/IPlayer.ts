@@ -36,6 +36,14 @@ export interface CanAffordOptions extends Partial<Payment.Options> {
   tr?: TRSource | DynamicTRSource,
 }
 
+/**
+ * Behavior when playing a card:
+ *   add it to the tableau
+ *   discard it from the tableau
+ *   or do nothing.
+ */
+export type CardAction ='add' | 'discard' | 'nothing';
+
 export interface IPlayer {
   readonly id: PlayerId;
   name: string;
@@ -208,6 +216,8 @@ export interface IPlayer {
   spendableMegacredits(): number;
   runResearchPhase(draftVariant: boolean): void;
   getCardCost(card: IProjectCard): number;
+  payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void): void;
+  checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   getSpendableMicrobes(): number;
   getSpendableFloaters(): number;
   getSpendableScienceResources(): number;

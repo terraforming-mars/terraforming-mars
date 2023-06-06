@@ -1,6 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
 import {Player} from '../../Player';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
@@ -46,7 +47,7 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
     if (Board.isCitySpace(space)) {
       if (cardOwner.id === activePlayer.id) {
         cardOwner.game.defer(new GainResources(cardOwner, Resource.MEGACREDITS, {count: 3}));

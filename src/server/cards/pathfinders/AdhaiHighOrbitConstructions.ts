@@ -2,6 +2,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -60,7 +61,7 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
   }
 
   // TODO(kberg): it's not possible to make this a cardDiscount type, which just means rendering is tricky.
-  public override getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
     if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
       return Math.floor(this.resourceCount / 2);
     } else {

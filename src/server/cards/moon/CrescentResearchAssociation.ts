@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -30,7 +30,7 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
     });
   }
 
-  public override getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
     if (card.tags.indexOf(Tag.MOON) === -1) {
       return 0;
     }

@@ -6,6 +6,7 @@ import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
 import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './requirements/CardRequirements';
@@ -314,7 +315,7 @@ export abstract class Card {
     }
   }
 
-  public getCardDiscount(_player?: Player, card?: IProjectCard): number {
+  public getCardDiscount(_player?: IPlayer, card?: IProjectCard): number {
     if (this.cardDiscount === undefined) {
       return 0;
     }

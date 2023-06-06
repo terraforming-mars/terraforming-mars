@@ -1,4 +1,5 @@
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Phase} from '../../../common/Phase';
@@ -27,7 +28,7 @@ export class PartyHooks {
 
   // Return true when the supplied policy is active. When `policyId` is inactive, it selects
   // the default policy for `partyName`.
-  static shouldApplyPolicy(player: Player, partyName: PartyName, policyId?: PolicyId): boolean {
+  static shouldApplyPolicy(player: IPlayer, partyName: PartyName, policyId?: PolicyId): boolean {
     const game = player.game;
     return Turmoil.ifTurmoilElse(game, (turmoil) => {
       if (game.phase !== Phase.ACTION) return false;

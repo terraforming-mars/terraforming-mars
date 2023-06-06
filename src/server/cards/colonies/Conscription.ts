@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
@@ -28,7 +28,7 @@ export class Conscription extends Card implements IProjectCard {
     });
   }
 
-  public override getCardDiscount(player: Player) {
+  public override getCardDiscount(player: IPlayer) {
     if (player.lastCardPlayed === this.name) {
       return 16;
     }

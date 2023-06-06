@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {ISpace} from '../../boards/ISpace';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -43,7 +43,7 @@ export class Philares extends Card implements ICorporationCard {
     });
   }
 
-  private selectResources(philaresPlayer: Player, resourceCount: number): AndOptions {
+  private selectResources(philaresPlayer: IPlayer, resourceCount: number): AndOptions {
     let megacreditsAmount = 0;
     let steelAmount = 0;
     let titaniumAmount = 0;
@@ -101,7 +101,7 @@ export class Philares extends Card implements ICorporationCard {
     return selectResources;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
       return;

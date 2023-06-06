@@ -81,7 +81,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     return orOptions;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
     if (activePlayer.game.phase === Phase.SOLAR) {
       return;
     }

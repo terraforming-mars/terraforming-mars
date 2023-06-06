@@ -1,8 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-
 import {Board} from '../../boards/Board';
 import {ISpace} from '../../boards/ISpace';
 import {GainResources} from '../../deferredActions/GainResources';
@@ -30,7 +29,7 @@ export class Gordon extends CeoCard {
     return false;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
     if (cardOwner.id !== activePlayer.id) return;
     if (boardType !== BoardType.MARS || space.spaceType !== SpaceType.LAND) return;
     if (cardOwner.game.phase === Phase.SOLAR) return;

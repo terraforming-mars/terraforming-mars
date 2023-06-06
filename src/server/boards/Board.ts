@@ -1,5 +1,4 @@
 import {ISpace} from './ISpace';
-import {Player} from '../Player';
 import {IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
@@ -136,7 +135,7 @@ export abstract class Board {
     return this.getOceanSpaces(include).length;
   }
 
-  public getAvailableSpacesForType(player: Player, type: PlacementType): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForType(player: IPlayer, type: PlacementType): ReadonlyArray<ISpace> {
     switch (type) {
     case 'land': return this.getAvailableSpacesOnLand(player);
     case 'ocean': return this.getAvailableSpacesForOcean(player);
@@ -171,7 +170,7 @@ export abstract class Board {
     return spaces;
   }
 
-  public getSpaces(spaceType: SpaceType, _player : Player): ReadonlyArray<ISpace> {
+  public getSpaces(spaceType: SpaceType, _player : IPlayer): ReadonlyArray<ISpace> {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
@@ -179,7 +178,7 @@ export abstract class Board {
     return this.spaces.filter((space) => space.tile === undefined);
   }
 
-  public getAvailableSpacesForCity(player: Player): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<ISpace> {
     const spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
     if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
@@ -189,7 +188,7 @@ export abstract class Board {
     );
   }
 
-  public getAvailableSpacesForGreenery(player: Player): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<ISpace> {
     let spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
     if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
@@ -211,7 +210,7 @@ export abstract class Board {
     return spacesOnLand;
   }
 
-  public getAvailableSpacesForOcean(player: Player): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForOcean(player: IPlayer): ReadonlyArray<ISpace> {
     return this.getSpaces(SpaceType.OCEAN, player)
       .filter(
         (space) => space.tile === undefined &&
@@ -219,7 +218,7 @@ export abstract class Board {
       );
   }
 
-  public getAvailableSpacesOnLand(player: Player): ReadonlyArray<ISpace> {
+  public getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<ISpace> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
       const hasPlayerMarker = space.player !== undefined;
       // A space is available if it doesn't have a player marker on it or it belongs to |player|
@@ -236,12 +235,12 @@ export abstract class Board {
     return landSpaces;
   }
 
-  public getAvailableIsolatedSpaces(player: Player): ReadonlyArray<ISpace> {
+  public getAvailableIsolatedSpaces(player: IPlayer): ReadonlyArray<ISpace> {
     return this.getAvailableSpacesOnLand(player)
       .filter(nextToNoOtherTileFn(this));
   }
 
-  public getAvailableVolcanicSpaces(player: Player): ReadonlyArray<ISpace> {
+  public getAvailableVolcanicSpaces(player: IPlayer): ReadonlyArray<ISpace> {
     const volcanicSpaceIds = this.getVolcanicSpaceIds();
 
     const spaces = this.getAvailableSpacesOnLand(player);
@@ -270,7 +269,7 @@ export abstract class Board {
   public getNthAvailableLandSpace(
     distance: number,
     direction: -1 | 1,
-    player: Player | undefined = undefined,
+    player: IPlayer | undefined = undefined,
     predicate: (value: ISpace) => boolean = (_x) => true): ISpace {
     const spaces = this.spaces.filter((space) => {
       return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
@@ -315,7 +314,7 @@ export abstract class Board {
     return (space: ISpace) => space.player?.id === player.id;
   }
 
-  public static spaceOwnedBy(space: ISpace, player: Player): boolean {
+  public static spaceOwnedBy(space: ISpace, player: IPlayer): boolean {
     return Board.ownedBy(player)(space);
   }
 
@@ -336,7 +335,7 @@ export abstract class Board {
     };
   }
 
-  public static deserializeSpace(serialized: SerializedSpace, players: ReadonlyArray<Player>): ISpace {
+  public static deserializeSpace(serialized: SerializedSpace, players: ReadonlyArray<IPlayer>): ISpace {
     const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
     const space: ISpace = {
@@ -360,7 +359,7 @@ export abstract class Board {
     return space;
   }
 
-  public static deserializeSpaces(spaces: ReadonlyArray<SerializedSpace>, players: ReadonlyArray<Player>): Array<ISpace> {
+  public static deserializeSpaces(spaces: ReadonlyArray<SerializedSpace>, players: ReadonlyArray<IPlayer>): Array<ISpace> {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }

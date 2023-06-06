@@ -28,7 +28,6 @@
 
 import Vue from 'vue';
 import TagCount from '@/client/components/TagCount.vue';
-import {ITagCount} from '@/common/cards/ITagCount';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {GameModel} from '@/common/models/GameModel';
 import {Tag} from '@/common/cards/Tag';
@@ -95,7 +94,7 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
     return player.noTagsCount || 0;
   }
 
-  return player.tags.find((tag: ITagCount) => tag.tag === tagName)?.count ?? 0;
+  return player.tags.find((tag) => tag.tag === tagName)?.count ?? 0;
 };
 
 export default Vue.extend({

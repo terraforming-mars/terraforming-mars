@@ -21,6 +21,7 @@ import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
+import {PartialField} from '../../common/utils/types';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -57,12 +58,7 @@ type Properties = {
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-// TODO(kberg): move this out.
-// Makes fields in T Partial.
-type PartialField<T, K extends keyof T> = Omit<T, K> & {[k in K]: Partial<T[K]>};
-
 /* External representation of card properties. */
-// type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 export type StaticCardProperties = PartialField<Properties, 'reserveUnits'>;
 
 export const staticCardProperties = new Map<CardName, Properties>();

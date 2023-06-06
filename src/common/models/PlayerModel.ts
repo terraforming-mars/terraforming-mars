@@ -1,7 +1,7 @@
 import {CardModel} from './CardModel';
 import {Color} from '../Color';
 import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
-import {ITagCount} from '../cards/ITagCount';
+import {TagCount} from '../cards/TagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
@@ -57,7 +57,7 @@ export type PublicPlayerModel = {
   steel: number;
   steelProduction: number;
   steelValue: number;
-  tags: Array<ITagCount>;
+  tags: Array<TagCount>;
   terraformRating: number;
   timer: TimerModel;
   titanium: number;

@@ -1,5 +1,4 @@
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
@@ -9,7 +8,7 @@ export class OrOptions extends BasePlayerInput {
   }
   public options: Array<PlayerInput>;
   constructor(...options: Array<PlayerInput>) {
-    super(PlayerInputType.OR_OPTIONS, 'Select one option');
+    super('or', 'Select one option');
     this.options = options;
   }
 

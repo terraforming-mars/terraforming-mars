@@ -1,6 +1,6 @@
 import {Tag} from './Tag';
 
-export interface ITagCount {
+export type TagCount = {
   tag: Tag;
   count: number;
 }

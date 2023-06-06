@@ -1,5 +1,4 @@
 import {BasePlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard, PlayableCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
@@ -26,7 +25,7 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
       action?: CardAction,
       cb?: (cardToPlay: IProjectCard) => void,
     }) {
-    super(PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY, 'Play project card');
+    super('projectCard', 'Play project card');
     this.buttonLabel = 'Play card';
     this.cards = cards.map((card) => card.card);
     this.extras = new Map(

@@ -12,6 +12,7 @@ import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName
 import {PartyName} from '../../common/turmoil/PartyName';
 import {IColony} from '../colonies/IColony';
 import {Message} from '../../common/logs/Message';
+import {Color} from '../../common/Color';
 
 export class MessageBuilder {
   protected message: Message;
@@ -39,10 +40,10 @@ export class MessageBuilder {
   }
 
   public player(value: IPlayer): MessageBuilder {
-    return this.playerId(value.color);
+    return this.playerColor(value.color);
   }
 
-  public playerId(value: string): MessageBuilder {
+  public playerColor(value: Color): MessageBuilder {
     this.message.data.push({type: LogMessageDataType.PLAYER, value});
     return this;
   }

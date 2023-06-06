@@ -22,6 +22,7 @@ import {Factorum} from './Factorum';
 import {FieldCappedCity} from './FieldCappedCity';
 import {GreatDamPromo} from './GreatDamPromo';
 import {Harvest} from './Harvest';
+import {HeadStart} from './HeadStart';
 import {HiTechLab} from './HiTechLab';
 import {ImportedNutrients} from './ImportedNutrients';
 import {InterplanetaryTrade} from './InterplanetaryTrade';
@@ -110,6 +111,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
+    [CardName.HEAD_START]: {Factory: HeadStart},
   },
 
   cardsToRemove: [

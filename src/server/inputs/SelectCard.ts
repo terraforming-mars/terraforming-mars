@@ -1,7 +1,6 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, getCardFromPlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
 
@@ -23,7 +22,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput {
     public cb: (cards: Array<T>) => PlayerInput | undefined,
     config?: Partial<Options>,
   ) {
-    super(PlayerInputType.SELECT_CARD, title);
+    super('card', title);
     this.config = {
       max: config?.max ?? 1,
       min: config?.min ?? 1,

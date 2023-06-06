@@ -1,6 +1,5 @@
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {IColony} from '../colonies/IColony';
 import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
 
@@ -16,7 +15,7 @@ export class SelectColony extends BasePlayerInput {
     public colonies: Array<IColony>,
     public cb: (colony: IColony) => PlayerInput | undefined,
   ) {
-    super(PlayerInputType.SELECT_COLONY, title);
+    super('colony', title);
     this.buttonLabel = buttonLabel;
   }
 

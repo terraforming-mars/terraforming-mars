@@ -14,6 +14,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
+import {sum} from '../../../common/utils/utils';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -29,7 +30,7 @@ class UnityBonus01 implements Bonus {
 
   getScore(player: Player) {
     const tags = [Tag.VENUS, Tag.EARTH, Tag.JOVIAN];
-    return tags.map((tag) => player.tags.count(tag, 'raw')).reduce((acc, count) => acc + count, 0);
+    return sum(tags.map((tag) => player.tags.count(tag, 'raw')));
   }
 
   grant(game: Game) {

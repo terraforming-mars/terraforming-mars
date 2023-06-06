@@ -2,7 +2,7 @@
 
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {ITagCount} from '../../common/cards/ITagCount';
+import {TagCount} from '../../common/cards/TagCount';
 import {ALL_TAGS, Tag} from '../../common/cards/Tag';
 import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
@@ -35,8 +35,7 @@ export class Tags {
     this.player = player;
   }
 
-  // TODO(kberg): Rename to countAllTags
-  public getAllTags(): Array<ITagCount> {
+  public countAllTags(): Array<TagCount> {
     const counts = Tags.COUNTED_TAGS.map((tag) => {
       return {tag, count: this.count(tag, 'raw')};
     }).filter((tag) => tag.count > 0);

@@ -1,7 +1,6 @@
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';
 
@@ -11,7 +10,7 @@ export class SelectDelegate extends BasePlayerInput {
     public players: Array<Player | NeutralPlayer>,
     title: string | Message,
     public cb: (player: Player | NeutralPlayer) => PlayerInput | undefined) {
-    super(PlayerInputType.SELECT_DELEGATE, title);
+    super('delegate', title);
   }
 
   public process(input: InputResponse) {

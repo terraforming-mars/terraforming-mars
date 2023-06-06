@@ -17,8 +17,6 @@ export class HeadStart extends PreludeCard {
         },
       },
 
-      // This is not exactly the same as the official Head Start, which says "Immediately take 2 actions"
-
       metadata: {
         cardNumber: 'X43',
         renderData: CardRenderer.builder((b) => {
@@ -27,7 +25,7 @@ export class HeadStart extends PreludeCard {
           b.megacredits(0, {questionMark: true}).br;
           b.text('GAIN 2 MC PER PROJECT CARD YOU HAVE IN HAND.', Size.TINY, true, false).br;
           b.arrow().arrow().br;
-          b.text('TAKE 2 ACTIONS AFTER PLAYING PRELUDES.', Size.TINY, true, false).br;
+          b.text('IMMEDIATELY TAKE 2 ACTIONS.', Size.TINY, true, false).br;
         }),
       },
     });

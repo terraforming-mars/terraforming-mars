@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {Game} from '../../Game';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -33,12 +33,12 @@ export class DesperateMeasures extends Card implements IProjectCard {
     return game.board.spaces.filter((space) => AresHandler.hasHazardTile(space));
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     // You can't play desperate measures if there isn't a hazard marker in play.
     return this.getHazardTiles(player.game).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space: ISpace) => {
       if (space.tile === undefined) {
         throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);

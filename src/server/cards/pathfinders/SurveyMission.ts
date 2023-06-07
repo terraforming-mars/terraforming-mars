@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -65,11 +65,11 @@ export class SurveyMission extends PreludeCard {
     return result;
   }
 
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     return this.validTriplets(player.game.board).length > 0;
   }
 
-  private selectSpace(player: Player, iteration: number, triplets: Array<Triplet>): SelectSpace {
+  private selectSpace(player: IPlayer, iteration: number, triplets: Array<Triplet>): SelectSpace {
     const messages = [
       'Select first space',
       'Select second space',
@@ -97,7 +97,7 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const triplets = this.validTriplets(player.game.board);
     return this.selectSpace(player, 0, triplets);
   }

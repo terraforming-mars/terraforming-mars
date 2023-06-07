@@ -1,7 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
@@ -41,12 +40,12 @@ export class LakefrontResorts extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.oceanBonus = 3;
     return undefined;
   }
 
-  public override onDiscard(player: Player) {
+  public override onDiscard(player: IPlayer) {
     player.oceanBonus = 2;
   }
 

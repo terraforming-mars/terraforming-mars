@@ -3,7 +3,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {ICardRequirements} from '../../../common/cards/ICardRequirements';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirement, Options, YesAnd} from './CardRequirement';
 import {ChairmanRequirement} from './ChairmanRequirement';
@@ -37,7 +37,7 @@ export class CardRequirements implements ICardRequirements {
     f(builder);
     return builder.build();
   }
-  public satisfies(player: Player): boolean | YesAnd {
+  public satisfies(player: IPlayer): boolean | YesAnd {
     // Process tags separately, though max & any tag criteria will be processed later.
     // This pre-computation takes the wild tag into account.
     const tags: Array<Tag> = [];

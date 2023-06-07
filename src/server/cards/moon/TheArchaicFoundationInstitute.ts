@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -38,7 +38,7 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
     if (player.isCorporation(this.name)) {
       const moonTags = card.tags.filter((t) => t === Tag.MOON);
       const count = moonTags.length;
@@ -48,7 +48,7 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
     }
   }
 
-  public onResourceAdded(player: Player, playedCard: ICard): void {
+  public onResourceAdded(player: IPlayer, playedCard: ICard): void {
     if (playedCard.name !== this.name) return;
     // TODO(kberg): If for some reason you gain MC but do not play another card, this becomes almost
     // like lost TR.

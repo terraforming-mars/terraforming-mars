@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -28,11 +28,11 @@ export class CoordinatedRaid extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return player.colonies.getFleetSize() > player.colonies.tradesThisGeneration;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const activeColonies = player.game.colonies.filter((colony) => colony.isActive);
     return new SelectColony('Select colony tile for trade', 'trade', activeColonies, (colony: IColony) => {
       colony.trade(player, {selfishTrade: true});

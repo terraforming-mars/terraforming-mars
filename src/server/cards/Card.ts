@@ -186,7 +186,7 @@ export abstract class Card {
     return this.bespokeCanPlay(player);
   }
 
-  public bespokeCanPlay(_player: Player): boolean {
+  public bespokeCanPlay(_player: IPlayer): boolean {
     return true;
   }
 
@@ -205,14 +205,14 @@ export abstract class Card {
     return undefined;
   }
 
-  public onDiscard(player: Player): void {
+  public onDiscard(player: IPlayer): void {
     if (this.behavior !== undefined) {
       getBehaviorExecutor().onDiscard(this.behavior, player, this);
     }
     this.bespokeOnDiscard(player);
   }
 
-  public bespokeOnDiscard(_player: Player): void {
+  public bespokeOnDiscard(_player: IPlayer): void {
   }
 
   public getVictoryPoints(player: IPlayer): number {

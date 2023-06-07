@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {ICard} from '../ICard';
@@ -44,7 +44,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     return filtered;
   }
 
-  private isCardApplicable(card: ICard, player: Player): boolean {
+  private isCardApplicable(card: ICard, player: IPlayer): boolean {
     if (!card.tags.includes(Tag.BUILDING) && !card.tags.includes(Tag.WILD)) {
       return false;
     }
@@ -67,15 +67,15 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     return false;
   }
 
-  private getAvailableCards(player: Player): Array<ICard> {
+  private getAvailableCards(player: IPlayer): Array<ICard> {
     return player.tableau.filter((card) => this.isCardApplicable(card, player));
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return this.getAvailableCards(player).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const availableCards = this.getAvailableCards(player);
 
     if (availableCards.length === 0) {

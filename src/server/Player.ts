@@ -1542,7 +1542,7 @@ export class Player implements IPlayer {
    * Returns `true` if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
    * and additionally pay the reserveUnits (no replaces here)
    */
-  public canAfford(cost: number, options?: CanAffordOptions) {
+  public canAfford(cost: number, options?: CanAffordOptions): boolean {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
     if (!this.hasUnits(reserveUnits)) {
       return false;

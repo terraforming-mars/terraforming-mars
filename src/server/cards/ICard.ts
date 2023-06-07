@@ -47,9 +47,9 @@ export interface ICard {
     victoryPoints?: number | 'special' | IVictoryPoints,
     getVictoryPoints: (player: IPlayer) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => PlayerInput | undefined | void;
-    onStandardProject?: (player: Player, project: ICard) => void;
+    onStandardProject?: (player: IPlayer, project: ICard) => void;
     onTilePlaced?: (cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) => void;
-    onDiscard?: (player: Player) => void;
+    onDiscard?: (player: IPlayer) => void;
     /**
      * Called when anybody gains TR
      *
@@ -57,7 +57,7 @@ export interface ICard {
      * @param cardOwner the owner of this card
      * @param steps the number of steps gained
      */
-    onIncreaseTerraformRating?(player: Player, cardOwner: Player, steps: number): void;
+    onIncreaseTerraformRating?(player: IPlayer, cardOwner: Player, steps: number): void;
 
     /**
      * Optional callback when a resource is added to this card.
@@ -67,7 +67,7 @@ export interface ICard {
      * for cards like Meat Industry, `playedCard` is the destination card.
      * @param count the number of resources added to `card`
      */
-    onResourceAdded?: (player: Player, playedCard: ICard, count: number) => void;
+    onResourceAdded?: (player: IPlayer, playedCard: ICard, count: number) => void;
 
     cost?: number; /** Used with IProjectCard and PreludeCard. */
     type: CardType;
@@ -75,7 +75,7 @@ export interface ICard {
     metadata: ICardMetadata;
     warning?: string | Message;
     behavior?: Behavior,
-    produce?: (player: Player) => void;
+    produce?: (player: IPlayer) => void;
     tr?: TRSource | DynamicTRSource;
     resourceCount: number;
     resourceType?: CardResource;

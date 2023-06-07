@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -34,7 +34,7 @@ export class Helion extends Card implements ICorporationCard {
       },
     });
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.canUseHeatAsMegaCredits = true;
     return undefined;
   }

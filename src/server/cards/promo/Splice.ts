@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -49,15 +49,15 @@ export class Splice extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     return this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     return this._onCardPlayed(player, card);
   }
 
-  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): OrOptions | undefined {
+  private _onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): OrOptions | undefined {
     if (card.tags.includes(Tag.MICROBE) === false) {
       return undefined;
     }

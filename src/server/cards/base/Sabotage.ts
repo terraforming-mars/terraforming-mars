@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
@@ -28,7 +28,7 @@ export class Sabotage extends Card implements IProjectCard {
       },
     });
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) return undefined;
 
     const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);

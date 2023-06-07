@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {Player} from '../../Player';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resource} from '../../../common/Resource';
@@ -62,7 +61,7 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     return;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) {
       // Get bonus for 2 neutral cities
       player.production.add(Resource.MEGACREDITS, 2);

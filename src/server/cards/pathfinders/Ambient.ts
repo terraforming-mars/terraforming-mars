@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -43,27 +43,27 @@ export class Ambient extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     this.onCorpCardPlayed(player, this);
     return undefined;
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
     return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): void {
     if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
       player.production.add(Resource.HEAT, 1, {log: true});
     }
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.heat >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford(0, {tr: {tr: 1}});
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.heat -= 8;
     player.increaseTerraformRating();
     // A hack that allows this action to be replayable.

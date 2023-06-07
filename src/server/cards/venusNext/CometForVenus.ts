@@ -1,6 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resource} from '../../../common/Resource';
@@ -34,7 +33,7 @@ export class CometForVenus extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.tags.count(Tag.VENUS, 'raw') > 0);
 
     if (player.game.isSoloMode()|| venusTagPlayers.length === 0) {

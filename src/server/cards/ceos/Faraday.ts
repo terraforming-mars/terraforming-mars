@@ -1,7 +1,7 @@
 import {MultiSet} from 'mnemonist';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {IProjectCard} from '../IProjectCard';
@@ -39,7 +39,7 @@ export class Faraday extends CeoCard {
   }
 
   // This _could_ save CPU cycles instead of running multiple finds?
-  private countTags(player: Player): Record<Tag, number> {
+  private countTags(player: IPlayer): Record<Tag, number> {
     const record: Partial<Record<Tag, number>> = {};
     for (const entry of player.tags.countAllTags()) {
       record[entry.tag] = entry.count;
@@ -56,7 +56,7 @@ export class Faraday extends CeoCard {
     return priorTagCount % 5 + tagsOnCard >= 5;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (card.tags.length === 0 || card.type === CardType.EVENT || !player.canAfford(2)) return;
 
     const counts = this.countTags(player);
@@ -70,7 +70,7 @@ export class Faraday extends CeoCard {
     });
   }
 
-  public effectOptions(player: Player, tag: Tag) {
+  public effectOptions(player: IPlayer, tag: Tag) {
     if (!player.canAfford(3)) return;
     return new OrOptions(
       new SelectOption(newMessage('Pay 3 MC to draw a ${1} card', (b) => b.string(tag)), 'Confirm', () => {

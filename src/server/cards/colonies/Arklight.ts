@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
@@ -40,7 +40,7 @@ export class Arklight extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
     if (player.isCorporation(CardName.ARKLIGHT)) {
       player.addResourceTo(this, {qty: card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length, log: true});
     }

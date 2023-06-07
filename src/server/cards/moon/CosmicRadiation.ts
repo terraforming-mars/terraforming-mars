@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -31,7 +31,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const mines = MoonExpansion.spaces(game, TileType.MOON_MINE);
     game.getPlayersInGenerationOrder().forEach((mineTileOwner) => {

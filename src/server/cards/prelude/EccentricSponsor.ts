@@ -1,4 +1,3 @@
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {PreludeCard} from './PreludeCard';
@@ -26,7 +25,7 @@ export class EccentricSponsor extends PreludeCard {
     return 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new PlayProjectCard(player));
     return undefined;
   }

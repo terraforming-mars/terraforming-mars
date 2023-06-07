@@ -1,7 +1,8 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
+import {asPlayer} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
@@ -23,10 +24,10 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     player.addResource(Resource.MEGACREDITS, 12);
-    game.overrideFirstPlayer(player);
+    game.overrideFirstPlayer(asPlayer(player));
     Turmoil.ifTurmoil((player.game), (turmoil) => {
       turmoil.chooseRulingParty(player);
     });

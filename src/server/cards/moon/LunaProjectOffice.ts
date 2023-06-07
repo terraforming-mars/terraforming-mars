@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -28,13 +28,13 @@ export class LunaProjectOffice extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     MoonExpansion.moonData(player.game).lunaProjectOfficeLastGeneration = player.game.generation + 2;
     return undefined;
   }
 
   // Returns true when the current player has played Luna Project Office and the card is still valid
-  public static isActive(player: Player): boolean {
+  public static isActive(player: IPlayer): boolean {
     return MoonExpansion.ifElseMoon(player.game, (moonData) => {
       if (!player.cardIsInEffect(CardName.LUNA_PROJECT_OFFICE)) {
         return false;

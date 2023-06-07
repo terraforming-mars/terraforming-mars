@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Game} from '../../Game';
 import {Resource} from '../../../common/Resource';
@@ -37,7 +37,7 @@ export class Aridor extends Card implements ICorporationCard {
     });
   }
   public allTags = new Set<Tag>();
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     const game = player.game;
     if (game.discardedColonies.length === 0) return undefined;
 
@@ -69,11 +69,11 @@ export class Aridor extends Card implements ICorporationCard {
     }
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     return this.onCardPlayed(player, card);
   }
 
-  public onCardPlayed(player: Player, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (
       card.type === CardType.EVENT ||
       card.tags.filter((tag) => tag !== Tag.WILD).length === 0 ||

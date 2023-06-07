@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -43,26 +43,26 @@ export class RobinHaulings extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }
   }
 
-  private canRaiseVenus(player: Player) {
+  private canRaiseVenus(player: IPlayer) {
     return player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford(0, {tr: {venus: 1}});
   }
 
-  private canRaiseOxygen(player: Player) {
+  private canRaiseOxygen(player: IPlayer) {
     return player.game.getOxygenLevel() < MAX_OXYGEN_LEVEL && player.canAfford(0, {tr: {oxygen: 1}});
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     if (this.resourceCount < 3) return false;
     return this.canRaiseVenus(player) || this.canRaiseOxygen(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const options = new OrOptions();
     if (this.canRaiseVenus(player)) {
       options.options.push(

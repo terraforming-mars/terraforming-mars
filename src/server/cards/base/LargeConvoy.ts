@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -39,7 +39,7 @@ export class LargeConvoy extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player): PlayerInput | undefined {
+  public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     const animalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {

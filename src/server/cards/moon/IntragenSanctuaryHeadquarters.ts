@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -44,12 +44,12 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
     });
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
     return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard) {
     const count = player.tags.cardTagCount(card, Tag.ANIMAL);
     player.addResourceTo(this, count);
     return undefined;

@@ -150,7 +150,7 @@ export interface IPlayer {
   decreaseTerraformRating(opts?: {log?: boolean}): void;
   increaseTerraformRating(opts?: {log?: boolean}): void;
   increaseTerraformRatingSteps(steps: number, opts?: {log?: boolean}): void;
-  decreaseTerraformRatingSteps(steps: number, opts: {log?: boolean}): void;
+  decreaseTerraformRatingSteps(steps: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
   getResource(resource: Resource): number;
   logUnitDelta(resource: Resource, amount: number, unitType: 'production' | 'amount', from: ResourceSource | undefined, stealing?: boolean): void;
@@ -199,7 +199,7 @@ export interface IPlayer {
   getPlayedEventsCount(): number;
   getRequirementsBonus(parameter: GlobalParameter): number;
   removeResourceFrom(card: ICard, count?: number, options?: {removingPlayer? : IPlayer, log?: boolean}): void;
-  addResourceTo(card: ICard, options: number | {qty?: number, log: boolean, logZero?: boolean}): void;
+  addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean}): void;
   getCardsWithResources(resource?: CardResource): Array<ICard>;
   getResourceCards(resource?: CardResource): Array<ICard>;
   getResourceCount(resource: CardResource): number;

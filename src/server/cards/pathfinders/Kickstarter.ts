@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -32,7 +32,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
     return [this.cloneTag];
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     // player.production.adjust(this.productionBox); Why was this here? Remove it, I suppose.
     player.game.defer(
       new DeclareCloneTag(

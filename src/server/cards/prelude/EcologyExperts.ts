@@ -1,6 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from './PreludeCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
@@ -33,7 +32,7 @@ export class EcologyExperts extends PreludeCard {
     }
     return 0;
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new PlayProjectCard(player));
     return undefined;
   }

@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -39,7 +38,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     }
     return 0;
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.addResource(Resource.MEGACREDITS, 10);
 
     const playableCards = player.cardsInHand.filter((card) => {

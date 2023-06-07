@@ -22,7 +22,6 @@ import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
-import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectProjectCardToPlay} from './inputs/SelectProjectCardToPlay';
@@ -764,6 +763,11 @@ export class Player implements IPlayer {
         card.opgActionIsActive = false;
       }
     }
+    const solBank = this.getCorporation(CardName.SOLBANK);
+    if (solBank !== undefined && solBank.resourceCount > 0) {
+      this.megaCredits += solBank.resourceCount;
+      solBank.resourceCount = 0;
+    }
   }
 
   private doneWorldGovernmentTerraforming(): void {
@@ -1075,6 +1079,13 @@ export class Player implements IPlayer {
       if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
       this.removeResourceFrom(aurorai, payment.auroraiData);
     }
+
+    if (payment.megaCredits > 0 || payment.steel > 0 || payment. titanium > 0) {
+      const solBank = this.getCorporation(CardName.SOLBANK);
+      if (solBank !== undefined) {
+        this.addResourceTo(solBank, {qty: 1, log: true});
+      }
+    }
   }
 
   public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: 'add' | 'discard' | 'nothing' | 'action-only' = 'add'): undefined {
@@ -1184,7 +1195,8 @@ export class Player implements IPlayer {
     PathfindersExpansion.onCardPlayed(this, card);
   }
 
-  private playActionCard(): PlayerInput {
+  /* Visible for testing */
+  public playActionCard(): PlayerInput {
     return new SelectCard<ICard & IActionCard>(
       'Perform an action from a played card',
       'Take action',
@@ -1810,21 +1822,9 @@ export class Player implements IPlayer {
 
     // If you can pay to add a delegate to a party.
     Turmoil.ifTurmoil(this.game, (turmoil) => {
-      if (turmoil.hasDelegatesInReserve(this.id)) {
-        let sendDelegate;
-        if (!turmoil.usedFreeDelegateAction.has(this.id)) {
-          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
-        } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3)) {
-          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
-        } else if (this.canAfford(5)) {
-          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
-        }
-        if (sendDelegate) {
-          const input = sendDelegate.execute();
-          if (input !== undefined) {
-            action.options.push(input);
-          }
-        }
+      const input = turmoil.getSendDelegateInput(this);
+      if (input !== undefined) {
+        action.options.push(input);
       }
     });
 

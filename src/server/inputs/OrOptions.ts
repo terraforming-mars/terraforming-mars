@@ -1,6 +1,6 @@
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class OrOptions extends BasePlayerInput {
   public cb(): PlayerInput | undefined {
@@ -12,7 +12,7 @@ export class OrOptions extends BasePlayerInput {
     this.options = options;
   }
 
-  public process(input: InputResponse, player: Player) {
+  public process(input: InputResponse, player: IPlayer) {
     if (!isOrOptionsResponse(input)) {
       throw new Error('Not a valid OrOptionsResponse');
     }

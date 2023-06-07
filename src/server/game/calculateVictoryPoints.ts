@@ -8,8 +8,9 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {FundedAward} from '../awards/FundedAward';
 import {AwardScorer} from '../awards/AwardScorer';
+import {IPlayer} from '../IPlayer';
 
-export function calculateVictoryPoints(player: Player) {
+export function calculateVictoryPoints(player: IPlayer) {
   const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
   // Victory points from cards
@@ -84,7 +85,7 @@ export function calculateVictoryPoints(player: Player) {
   return victoryPointsBreakdown.points;
 }
 
-function maybeSetVP(thisPlayer: Player, awardWinner: Player, fundedAward: FundedAward, vps: number, place: '1st' | '2nd', vpb: VictoryPointsBreakdown) {
+function maybeSetVP(thisPlayer: IPlayer, awardWinner: Player, fundedAward: FundedAward, vps: number, place: '1st' | '2nd', vpb: VictoryPointsBreakdown) {
   if (thisPlayer.id === awardWinner.id) {
     vpb.setVictoryPoints(
       'awards',
@@ -93,7 +94,7 @@ function maybeSetVP(thisPlayer: Player, awardWinner: Player, fundedAward: Funded
   }
 }
 
-function giveAwards(player: Player, vpb: VictoryPointsBreakdown) {
+function giveAwards(player: IPlayer, vpb: VictoryPointsBreakdown) {
   // Awards are disabled for 1 player games
   if (player.game.isSoloMode()) return;
 

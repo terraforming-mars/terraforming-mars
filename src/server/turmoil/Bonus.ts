@@ -1,5 +1,5 @@
 import {Game} from '../Game';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {BonusId} from '../../common/turmoil/Types';
 
 export interface Bonus {
@@ -7,5 +7,5 @@ export interface Bonus {
   description: string;
   isDefault: boolean;
   grant: (game: Game) => void;
-  getScore: (player: Player) => number;
+  getScore: (player: IPlayer) => number;
 }

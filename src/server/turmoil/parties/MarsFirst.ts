@@ -7,7 +7,7 @@ import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Policy} from '../Policy';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -27,7 +27,7 @@ class MarsFirstBonus01 implements Bonus {
   readonly description = 'Gain 1 M€ for each building tag you have';
   readonly isDefault = true;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     return player.tags.count(Tag.BUILDING, 'raw');
   }
 
@@ -43,7 +43,7 @@ class MarsFirstBonus02 implements Bonus {
   readonly description = 'Gain 1 M€ for each tile you have ON MARS';
   readonly isDefault = false;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     const boardSpaces = player.game.board.spaces;
     return boardSpaces.filter((space) => space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY).length;
   }
@@ -60,7 +60,7 @@ class MarsFirstPolicy01 implements Policy {
   readonly id = 'mfp01' as const;
   readonly description = 'When you place a tile ON MARS, gain 1 steel';
 
-  onTilePlaced(player: Player, space: ISpace) {
+  onTilePlaced(player: IPlayer, space: ISpace) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
       player.addResource(Resource.STEEL, 1);
     }
@@ -72,7 +72,7 @@ class MarsFirstPolicy02 implements Policy {
   readonly description = 'When you play a building tag, gain 2 M€';
   readonly isDefault = false;
 
-  onCardPlayed(player: Player, card: IProjectCard) {
+  onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (card.tags.includes(Tag.BUILDING)) player.addResource(Resource.MEGACREDITS, 2);
   }
 }
@@ -88,11 +88,11 @@ class MarsFirstPolicy04 implements Policy {
   readonly description = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
   readonly isDefault = false;
 
-  canAct(player: Player) {
+  canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player) {
+  action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;

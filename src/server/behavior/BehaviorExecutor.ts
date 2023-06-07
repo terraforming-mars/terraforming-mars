@@ -1,12 +1,12 @@
 import {ICard} from '../cards/ICard';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Behavior} from './Behavior';
 import {TRSource} from '../../common/cards/TRSource';
 
 export interface BehaviorExecutor {
-  canExecute(behavior: Behavior, player: Player, card: ICard): boolean;
-  execute(behavior: Behavior, player: Player, card: ICard): void;
-  onDiscard(behavior: Behavior, player: Player, _card: ICard): void;
+  canExecute(behavior: Behavior, player: IPlayer, card: ICard): boolean;
+  execute(behavior: Behavior, player: IPlayer, card: ICard): void;
+  onDiscard(behavior: Behavior, player: IPlayer, _card: ICard): void;
   toTRSource(behavior: Behavior): TRSource;
 }
 

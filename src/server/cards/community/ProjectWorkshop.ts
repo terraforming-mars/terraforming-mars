@@ -1,4 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IPlayer} from '../../IPlayer';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
@@ -56,7 +57,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     });
   }
 
-  private getEligibleCards(player: Player) {
+  private getEligibleCards(player: IPlayer) {
     const cards = player.playedCards.filter((card) => card.type === CardType.ACTIVE);
     if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return cards;
@@ -118,7 +119,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     return new OrOptions(drawBlueCard, flipBlueCard);
   }
 
-  private convertCardPointsToTR(player: Player, card: ICard) {
+  private convertCardPointsToTR(player: IPlayer, card: ICard) {
     const steps = card.getVictoryPoints(player);
     // TODO(kberg): this doesn't reduce VPs below 0. What to do?
     if (steps > 0) {

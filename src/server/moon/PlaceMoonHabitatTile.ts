@@ -1,12 +1,12 @@
 import {ISpace} from '../boards/ISpace';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {BasePlaceMoonTile} from './BasePlaceMoonTile';
 import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
 export class PlaceMoonHabitatTile extends BasePlaceMoonTile {
   constructor(
-    player: Player,
+    player: IPlayer,
     spaces?: Array<ISpace>,
     title: string = 'Select a space on The Moon for a habitat tile.',
   ) {

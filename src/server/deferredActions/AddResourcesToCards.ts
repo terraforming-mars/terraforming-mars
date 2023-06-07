@@ -1,5 +1,5 @@
 import {DeferredAction, Priority} from './DeferredAction';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {SelectAmount} from '../inputs/SelectAmount';
@@ -7,7 +7,7 @@ import {AndOptions} from '../inputs/AndOptions';
 
 export class AddResourcesToCards extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public resourceType: CardResource,
     public count: number) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);

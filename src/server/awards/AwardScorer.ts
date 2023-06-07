@@ -1,6 +1,6 @@
 import {PlayerId} from '../../common/Types';
 import {Game} from '../Game';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {IAward} from './IAward';
 import {CardName} from '../../common/cards/CardName';
 import {ASIMOV_AWARD_BONUS} from '../../common/constants';
@@ -16,7 +16,7 @@ export class AwardScorer {
     }
   }
 
-  public get(player: Player): number {
+  public get(player: IPlayer): number {
     // Ideally throw when player does not match, but this is OK.
     return this.scores.get(player.id) ?? 0;
   }

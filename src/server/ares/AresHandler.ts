@@ -3,7 +3,6 @@ import {ICard} from '../cards/ICard';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
-import {Player} from '../Player';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -69,7 +68,7 @@ export class AresHandler {
         player.addResourceTo(availableCards[0], {log: true});
       } else if (availableCards.length > 1) {
         player.game.defer(new SimpleDeferredAction(
-          player as Player, // TODO(kberg): Remove
+          player,
           () => new SelectCard(
             'Select a card to add an ' + resourceAsText,
             'Add ' + resourceAsText + 's',
@@ -121,8 +120,7 @@ export class AresHandler {
           break;
 
         default:
-          // TODO(kberg): remove "as Player"
-          player.game.grantSpaceBonus(player as Player, bonus);
+          player.game.grantSpaceBonus(player, bonus);
           break;
         }
       }
@@ -170,7 +168,7 @@ export class AresHandler {
 
   // A light version of `earnAdjacencyBonuses` but does not increment the milestone,
   // and does not grant the 1MC bonus for ares tile owners.
-  public static earnAdjacencyBonusesForGaia(player: Player, space: ISpace) {
+  public static earnAdjacencyBonusesForGaia(player: IPlayer, space: ISpace) {
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
       this.earnAdacencyBonus(space, adjacentSpace, player, false);
     }
@@ -275,7 +273,7 @@ export class AresHandler {
     _AresHazardPlacement.onOxygenChange(game, aresData);
   }
 
-  public static grantBonusForRemovingHazard(player: Player, initialTileType: TileType | undefined) {
+  public static grantBonusForRemovingHazard(player: IPlayer, initialTileType: TileType | undefined) {
     if (player.game.phase === Phase.SOLAR) {
       return;
     }

@@ -1,7 +1,7 @@
 import {Units} from '../../common/Units';
 import {TileType} from '../../common/TileType';
 import {ICard} from '../cards/ICard';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Countable, CountableUnits} from './Countable';
 import {hasIntersection} from '../../common/utils/utils';
 import {MoonExpansion} from '../moon/MoonExpansion';
@@ -26,7 +26,7 @@ export class Counter {
    */
   private cardIsUnplayed: boolean;
 
-  public constructor(private player: Player, private card: ICard) {
+  public constructor(private player: IPlayer, private card: ICard) {
     this.cardIsUnplayed = !player.cardIsInEffect(card.name);
   }
 

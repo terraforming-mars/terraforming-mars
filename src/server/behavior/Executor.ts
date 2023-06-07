@@ -14,7 +14,7 @@ import {PlaceMoonHabitatTile} from '../moon/PlaceMoonHabitatTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Behavior} from './Behavior';
 import {Counter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -27,7 +27,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 
 export class Executor implements BehaviorExecutor {
-  public canExecute(behavior: Behavior, player: Player, card: ICard) {
+  public canExecute(behavior: Behavior, player: IPlayer, card: ICard) {
     const ctx = new Counter(player, card);
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
@@ -164,7 +164,7 @@ export class Executor implements BehaviorExecutor {
     return true;
   }
 
-  public execute(behavior: Behavior, player: Player, card: ICard) {
+  public execute(behavior: Behavior, player: IPlayer, card: ICard) {
     const ctx = new Counter(player, card);
 
     if (behavior.or !== undefined) {
@@ -408,7 +408,7 @@ export class Executor implements BehaviorExecutor {
     }
   }
 
-  public onDiscard(behavior: Behavior, player: Player, _card: ICard) {
+  public onDiscard(behavior: Behavior, player: IPlayer, _card: ICard) {
     if (behavior.steelValue === 1) {
       player.decreaseSteelValue();
     }

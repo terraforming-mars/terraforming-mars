@@ -1,7 +1,6 @@
 import {Game} from '../Game';
 import {Tile} from '../Tile';
 import {MoonBoard} from './MoonBoard';
-import {Player} from '../Player';
 import {IPlayer} from '../IPlayer';
 import {TileType} from '../../common/TileType';
 import {SpaceType} from '../../common/boards/SpaceType';
@@ -234,7 +233,7 @@ export class MoonExpansion {
     }
   }
 
-  public static lowerMiningRate(player: Player, count: number) {
+  public static lowerMiningRate(player: IPlayer, count: number) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const increment = Math.min(moonData.miningRate, count);
       moonData.miningRate -= increment;
@@ -242,7 +241,7 @@ export class MoonExpansion {
     });
   }
 
-  public static lowerHabitatRate(player: Player, count: number) {
+  public static lowerHabitatRate(player: IPlayer, count: number) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const increment = Math.min(moonData.colonyRate, count);
       moonData.colonyRate -= increment;
@@ -250,7 +249,7 @@ export class MoonExpansion {
     });
   }
 
-  public static lowerLogisticRate(player: Player, count: number) {
+  public static lowerLogisticRate(player: IPlayer, count: number) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const increment = Math.min(moonData.logisticRate, count);
       moonData.logisticRate -= increment;
@@ -284,7 +283,7 @@ export class MoonExpansion {
     tileType?: TileType,
     options?: {
       surfaceOnly?: boolean,
-      ownedBy? : Player,
+      ownedBy? : IPlayer,
       upgradedTiles?: boolean,
     }): Array<ISpace> {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
@@ -346,7 +345,7 @@ export class MoonExpansion {
     return Units.of({steel, titanium, heat});
   }
 
-  public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {
+  public static calculateVictoryPoints(player: IPlayer, vpb: VictoryPointsBreakdown): void {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       // Each road tile on the map awards 1VP to the player owning it.
       // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.

@@ -5,6 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
+import {IPlayer} from '../../IPlayer';
 import {Player} from '../../Player';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
@@ -50,7 +51,7 @@ export class DarksideSmugglersUnion extends Card implements IProjectCard, IActio
 }
 
 export class TradeWithDarksideSmugglersUnion implements IColonyTrader {
-  constructor(private player: Player) {}
+  constructor(private player: IPlayer) {}
 
   public canUse() {
     return this.player.playedCards.find((card) => card.name === CardName.DARKSIDE_SMUGGLERS_UNION) !== undefined &&

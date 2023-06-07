@@ -12,7 +12,7 @@ import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {PlanetaryTracks} from '../../common/pathfinders/PlanetaryTracks';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {CardResource} from '../../common/CardResource';
 import {Reward} from '../../common/pathfinders/Reward';
@@ -40,7 +40,7 @@ export class PathfindersExpansion {
     };
   }
 
-  public static onCardPlayed(player: Player, card: ICard) {
+  public static onCardPlayed(player: IPlayer, card: ICard) {
     if (player.game.gameOptions.pathfindersExpansion === false) {
       return;
     }
@@ -64,7 +64,7 @@ export class PathfindersExpansion {
     }
   }
 
-  public static raiseTrack(tag: PlanetaryTag, player: Player, steps: number = 1): void {
+  public static raiseTrack(tag: PlanetaryTag, player: IPlayer, steps: number = 1): void {
     PathfindersExpansion.raiseTrackEssense(tag, player, player.game, steps, true);
   }
 
@@ -72,7 +72,7 @@ export class PathfindersExpansion {
     PathfindersExpansion.raiseTrackEssense(tag, name, game, steps, gainRewards);
   }
 
-  private static raiseTrackEssense(tag: PlanetaryTag, from: Player | GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
+  private static raiseTrackEssense(tag: PlanetaryTag, from: IPlayer | GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
     const data = game.pathfindersData;
     if (data === undefined) {
       return;
@@ -95,7 +95,7 @@ export class PathfindersExpansion {
     const distance = lastSpace - space;
     if (distance === 0) return;
 
-    if (from instanceof Player) {
+    if (typeof(from) === 'object') {
       game.log('${0} raised the ${1} planetary track ${2} step(s)', (b) => {
         b.player(from).string(tag).number(distance);
       });
@@ -113,7 +113,7 @@ export class PathfindersExpansion {
 
       // Can be false because of the Constant Struggle global event.
       if (gainRewards) {
-        if (from instanceof Player) {
+        if (typeof(from) === 'object') {
           rewards.risingPlayer.forEach((reward) => {
             PathfindersExpansion.grant(reward, from, tag);
           });
@@ -127,7 +127,7 @@ export class PathfindersExpansion {
           const players = PathfindersExpansion.playersWithMostTags(
             tag,
             game.getPlayers().slice(),
-            (from instanceof Player) ? from : undefined);
+            (typeof(from) === 'object') ? from : undefined);
           rewards.mostTags.forEach((reward) => {
             players.forEach((p) => {
               PathfindersExpansion.grant(reward, p, tag);
@@ -146,7 +146,7 @@ export class PathfindersExpansion {
    * @param player the player gaining the reward (which may not be the same as the player who triggers the reward)
    * @param tag the tag associated with the reward (used for logging VP rewards.)
    */
-  public static grant(reward: Reward, player: Player, tag: PlanetaryTag): void {
+  public static grant(reward: Reward, player: IPlayer, tag: PlanetaryTag): void {
     const game = player.game;
 
     switch (reward) {
@@ -245,7 +245,7 @@ export class PathfindersExpansion {
     }
   }
 
-  private static playersWithMostTags(tag: Tag, players: Array<Player>, activePlayer: Player | undefined): Array<Player> {
+  private static playersWithMostTags(tag: Tag, players: Array<IPlayer>, activePlayer: IPlayer | undefined): Array<IPlayer> {
     const counts = players.map((player) => {
       // Wild tags only apply to a player taking an action.
       const includeWildTags = player.id === activePlayer?.id;
@@ -258,7 +258,7 @@ export class PathfindersExpansion {
     return result;
   }
 
-  public static calculateVictoryPoints(player: Player, victoryPointsBreakdown: VictoryPointsBreakdown) {
+  public static calculateVictoryPoints(player: IPlayer, victoryPointsBreakdown: VictoryPointsBreakdown) {
     const data = player.game.pathfindersData;
     if (data === undefined) {
       return;

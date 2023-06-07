@@ -12,6 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
 import {all} from '../Options';
 import {MultiSet} from 'mnemonist';
+import {IPlayer} from '@/server/IPlayer';
 
 export class BannedDelegate extends Card implements IProjectCard {
   constructor() {
@@ -55,7 +56,7 @@ export class BannedDelegate extends Card implements IProjectCard {
         }
 
         if (players.length > 0) {
-          const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: Player | NeutralPlayer) => {
+          const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: IPlayer | NeutralPlayer) => {
             let playerToRemove: Delegate;
             if (selectedPlayer === 'NEUTRAL') {
               playerToRemove = 'NEUTRAL';
@@ -81,7 +82,7 @@ export class BannedDelegate extends Card implements IProjectCard {
     }
   }
 
-  private log(player: Player, party: IParty, selectedPlayer: Player | NeutralPlayer) {
+  private log(player: Player, party: IParty, selectedPlayer: IPlayer | NeutralPlayer) {
     if (selectedPlayer === 'NEUTRAL') {
       player.game.log('${0} removed neutral delegate from ${1}', (b) => b.player(player).party(party));
     } else {

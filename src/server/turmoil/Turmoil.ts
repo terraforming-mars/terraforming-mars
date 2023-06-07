@@ -327,7 +327,7 @@ export class Turmoil {
     }
   }
 
-  public chooseRulingParty(player: Player): void {
+  public chooseRulingParty(player: IPlayer): void {
     const setRulingParty = new OrOptions();
 
     setRulingParty.title = 'Select new ruling party';
@@ -434,7 +434,7 @@ export class Turmoil {
   }
 
   // Get Victory Points
-  public getPlayerVictoryPoints(player: Player): number {
+  public getPlayerVictoryPoints(player: IPlayer): number {
     let victory = 0;
     if (this.chairman !== undefined && this.chairman === player.id) victory++;
     this.parties.forEach(function(party) {

@@ -1,6 +1,5 @@
 import {IMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
-import {Player} from '../../Player';
 
 export class Minimalist implements IMilestone {
   public readonly name = 'Minimalist';
@@ -10,7 +9,7 @@ export class Minimalist implements IMilestone {
     return player.cardsInHand.length;
   }
 
-  public canClaim(player: Player): boolean {
+  public canClaim(player: IPlayer): boolean {
     return this.getScore(player) <= 2;
   }
 }

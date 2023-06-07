@@ -1,6 +1,6 @@
 import {DeferredAction} from './DeferredAction';
 import {GiveColonyBonus} from './GiveColonyBonus';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class DeferredActionsQueue {
   private insertId: number = 0;
@@ -15,7 +15,7 @@ export class DeferredActionsQueue {
     this.queue.push(action);
   }
 
-  public runAllFor(player: Player, cb: () => void): void {
+  public runAllFor(player: IPlayer, cb: () => void): void {
     let b: DeferredAction | undefined;
     let j = -1;
     for (let i = this.queue.length - 1; i >= 0; i--) {

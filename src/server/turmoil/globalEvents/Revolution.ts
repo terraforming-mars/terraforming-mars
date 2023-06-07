@@ -5,7 +5,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {played} from '../../cards/Options';
 import {Size} from '../../../common/cards/render/Size';
@@ -71,7 +71,7 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
       }
     }
   }
-  public getScore(player: Player, turmoil: Turmoil) {
+  public getScore(player: IPlayer, turmoil: Turmoil) {
     return player.tags.count(Tag.EARTH, 'raw') + turmoil.getPlayerInfluence(player);
   }
 }

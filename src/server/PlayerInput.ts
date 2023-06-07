@@ -2,7 +2,7 @@ import {ICard} from './cards/ICard';
 import {Message} from '../common/logs/Message';
 import {PlayerInputType} from '../common/input/PlayerInputType';
 import {InputResponse} from '../common/inputs/InputResponse';
-import {Player} from './Player';
+import {IPlayer} from './IPlayer';
 
 export interface PlayerInput {
     inputType: PlayerInputType;
@@ -15,7 +15,7 @@ export interface PlayerInput {
      *
      * This is another mechainsm for calling cb() with a client-side response.
      */
-    process(response: InputResponse, player: Player): PlayerInput | undefined;
+    process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
     maxByDefault?: boolean;
 }
 
@@ -24,7 +24,7 @@ export abstract class BasePlayerInput implements PlayerInput {
   public buttonLabel: string = 'Save';
   public title: string | Message;
   public abstract cb(...item: any): PlayerInput | undefined;
-  public abstract process(response: InputResponse, player: Player): PlayerInput | undefined;
+  public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
 
   constructor(inputType: PlayerInputType, title: string | Message = '') {
     this.inputType = inputType;

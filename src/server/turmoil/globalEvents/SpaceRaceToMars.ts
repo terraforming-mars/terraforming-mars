@@ -5,7 +5,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {Resource} from '../../../common/Resource';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {isSpecialTile, playerTileFn} from '../../boards/Board';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -35,7 +35,7 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  private specialTileCount(player: Player) {
+  private specialTileCount(player: IPlayer) {
     // This code is repeated in Land Specialist
     const spaces = player.game.board.spaces
       .filter(playerTileFn(player))

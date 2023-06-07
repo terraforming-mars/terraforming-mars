@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -10,7 +10,7 @@ export class GiveColonyBonus extends DeferredAction {
   private playersWithBonuses = new Set<PlayerId>();
 
   constructor(
-    player: Player,
+    player: IPlayer,
     public colony: IColony,
     public selfish: boolean = false, // Used for CoordinatedRaid.
   ) {
@@ -43,7 +43,7 @@ export class GiveColonyBonus extends DeferredAction {
     return undefined;
   }
 
-  private giveColonyBonus(player: Player): void {
+  private giveColonyBonus(player: IPlayer): void {
     if (this.waitingFor.get(player.id) ?? 0 > 0) {
       this.waitingFor.remove(player.id);
       const input = this.colony.giveColonyBonus(player, true);

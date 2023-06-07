@@ -1,4 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
+import {IPlayer} from '../../IPlayer';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -46,11 +47,10 @@ export class Flooding extends Card implements IProjectCard {
       (space: ISpace) => {
         player.game.addOcean(player, space);
 
-        const adjacentPlayers: Set<Player> = new Set<Player>();
+        const adjacentPlayers: Set<IPlayer> = new Set();
         player.game.board.getAdjacentSpaces(space).forEach((space) => {
           if (space.player && space.player !== player && space.tile) {
-            // TODO(kberg): Remove "as Player"
-            adjacentPlayers.add(space.player as Player);
+            adjacentPlayers.add(space.player);
           }
         });
 
@@ -60,7 +60,7 @@ export class Flooding extends Card implements IProjectCard {
               Array.from(adjacentPlayers),
               'Select adjacent player to remove 4 M€ from',
               'Remove credits',
-              (selectedPlayer: Player) => {
+              (selectedPlayer: IPlayer) => {
                 selectedPlayer.deductResource(Resource.MEGACREDITS, 4, {log: true, from: player});
                 return undefined;
               },

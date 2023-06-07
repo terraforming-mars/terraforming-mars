@@ -1,10 +1,10 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {IColony} from '../colonies/IColony';
 import {SelectColony} from '../inputs/SelectColony';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class RemoveColonyFromGame extends DeferredAction {
-  constructor(player: Player) {
+  constructor(player: IPlayer) {
     super(player, Priority.DEFAULT);
   }
 

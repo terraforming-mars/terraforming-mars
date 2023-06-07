@@ -2,12 +2,12 @@ import {expect} from 'chai';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 
 describe('SelectPlayer', function() {
   let players: Array<TestPlayer>;
-  let selected: Player | undefined;
-  const cb = (player: Player) => {
+  let selected: IPlayer | undefined;
+  const cb = (player: IPlayer) => {
     selected = player;
     return undefined;
   };

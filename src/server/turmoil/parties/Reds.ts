@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -27,7 +27,7 @@ class RedsBonus01 implements Bonus {
   readonly description = 'The player(s) with the lowest TR gains 1 TR';
   readonly isDefault = true;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     const game = player.game;
     const players = game.getPlayersInGenerationOrder();
 
@@ -55,7 +55,7 @@ class RedsBonus02 implements Bonus {
   readonly description = 'The player(s) with the highest TR loses 1 TR';
   readonly isDefault = false;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     const game = player.game;
     const players = game.getPlayersInGenerationOrder();
 
@@ -89,7 +89,7 @@ class RedsPolicy02 implements Policy {
   readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
   readonly isDefault = false;
 
-  onTilePlaced(player: Player) {
+  onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
     if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
 
@@ -139,7 +139,7 @@ class RedsPolicy03 implements Policy {
     }
   }
 
-  canAct(player: Player) {
+  canAct(player: IPlayer) {
     const game = player.game;
     if (game.marsIsTerraformed()) return false;
 
@@ -166,7 +166,7 @@ class RedsPolicy03 implements Policy {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player) {
+  action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Reds action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;

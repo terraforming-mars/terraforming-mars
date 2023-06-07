@@ -1,7 +1,6 @@
 import {IProjectCard} from '../cards/IProjectCard';
 import {Game} from '../Game';
 import {ISpace} from '../boards/ISpace';
-import {Player} from '../Player';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 
@@ -13,9 +12,9 @@ export interface Policy {
   id: PolicyId;
   description: string | ((player: IPlayer | undefined) => string);
   isDefault: boolean;
-  onTilePlaced?: (player: Player, space: ISpace) => void;
-  onCardPlayed?: (player: Player, card: IProjectCard) => void;
-  action?: (player: Player) => PlayerInput | undefined;
-  canAct?: (player: Player) => boolean;
+  onTilePlaced?: (player: IPlayer, space: ISpace) => void;
+  onCardPlayed?: (player: IPlayer, card: IProjectCard) => void;
+  action?: (player: IPlayer) => PlayerInput | undefined;
+  canAct?: (player: IPlayer) => boolean;
   apply?: (game: Game) => void;
 }

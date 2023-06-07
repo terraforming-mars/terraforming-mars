@@ -6,7 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Policy} from '../Policy';
 
 export class Scientists extends Party implements IParty {
@@ -21,7 +21,7 @@ class ScientistsBonus01 implements Bonus {
   readonly isDefault = true;
   readonly description = 'Gain 1 M€ for each science tag you have';
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     return player.tags.count(Tag.SCIENCE, 'raw-pf');
   }
 
@@ -37,7 +37,7 @@ class ScientistsBonus02 implements Bonus {
   readonly description = 'Gain 1 M€ for every 3 cards in hand';
   readonly isDefault = false;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     return Math.floor(player.cardsInHand.length / 3);
   }
 
@@ -53,11 +53,11 @@ class ScientistsPolicy01 implements Policy {
   readonly id = 'sp01' as const;
   readonly description = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
 
-  canAct(player: Player) {
+  canAct(player: IPlayer) {
     return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
   }
 
-  action(player: Player) {
+  action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
     game.defer(new SelectPaymentDeferred(

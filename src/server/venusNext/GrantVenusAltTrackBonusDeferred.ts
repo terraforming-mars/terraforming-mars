@@ -2,12 +2,12 @@ import {ICard} from '../cards/ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectResources} from '../inputs/SelectResources';
 
 export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public standardResourceCount: number,
     public wildResource: boolean,
   ) {

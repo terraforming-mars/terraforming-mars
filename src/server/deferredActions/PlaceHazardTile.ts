@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -7,7 +7,7 @@ import {TileType} from '../../common/TileType';
 
 export class PlaceHazardTile extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public hazardType: TileType.DUST_STORM_MILD | TileType.EROSION_MILD,
     private options?: {
       title?: string,

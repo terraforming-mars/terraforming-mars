@@ -1,6 +1,6 @@
 import {MarketingExperts} from '../../../src/server/cards/ares/MarketingExperts';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';

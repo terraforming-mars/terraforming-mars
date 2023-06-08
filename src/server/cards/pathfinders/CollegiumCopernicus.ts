@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -56,7 +55,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
     });
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
     return undefined;
   }
@@ -67,11 +66,11 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
     }
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.colonies.canTrade() && this.resourceCount >= tradeCost(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const game = player.game;
     game.defer(new SimpleDeferredAction(
       player,

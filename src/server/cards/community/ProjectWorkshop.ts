@@ -1,6 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IPlayer} from '../../IPlayer';
-import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -71,12 +70,12 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.canAfford(3)) return true;
     return this.getEligibleCards(player).length > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const activeCards = this.getEligibleCards(player);
 
     const flipBlueCard = new SelectOption(

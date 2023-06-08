@@ -1,5 +1,4 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
@@ -26,14 +25,14 @@ export class Floyd extends CeoCard {
 
   public opgActionIsActive = false;
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;
     }
     return player.cardsInHand.length > 0;
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     this.opgActionIsActive = true;
     player.game.defer(new PlayProjectCard(player, () => {

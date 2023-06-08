@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {GlobalParameterRequirement} from './GlobalParameterRequirement';
 import {MAX_OCEAN_TILES} from '../../../common/constants';
 import {GlobalParameter} from '../../../common/GlobalParameter';
@@ -16,7 +16,7 @@ export class OceanRequirement extends GlobalParameterRequirement {
     super(amount, options);
   }
 
-  public getGlobalValue(player: Player) {
+  public getGlobalValue(player: IPlayer) {
     return player.game.board.getOceanCount({upgradedOceans: true, wetlands: true});
   }
 }

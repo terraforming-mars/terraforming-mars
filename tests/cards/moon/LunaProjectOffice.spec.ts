@@ -3,7 +3,7 @@ import {LunaProjectOffice} from '../../../src/server/cards/moon/LunaProjectOffic
 import {expect} from 'chai';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {testGame} from '../../TestGame';
 
 describe('LunaProjectOffice', () => {

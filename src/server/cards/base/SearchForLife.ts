@@ -3,7 +3,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -44,10 +44,10 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
     }
     return 0;
   }
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.canAfford(1);
   }
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const topCard = player.game.projectDeck.draw(player.game);
 
     player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));

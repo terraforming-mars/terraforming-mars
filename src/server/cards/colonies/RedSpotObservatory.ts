@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -47,7 +47,7 @@ export class RedSpotObservatory extends Card implements IProjectCard {
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     if (this.resourceCount < 1) {
       player.addResourceTo(this, 1);
       return undefined;
@@ -64,12 +64,12 @@ export class RedSpotObservatory extends Card implements IProjectCard {
     return new OrOptions(...opts);
   }
 
-  private addResource(player: Player) {
+  private addResource(player: IPlayer) {
     player.addResourceTo(this, 1);
     return undefined;
   }
 
-  private spendResource(player: Player) {
+  private spendResource(player: IPlayer) {
     this.resourceCount--;
     player.drawCard();
     return undefined;

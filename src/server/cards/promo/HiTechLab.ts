@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardRenderer} from '../render/CardRenderer';
@@ -28,11 +28,11 @@ export class HiTechLab extends Card implements IProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.energy > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     return new SelectAmount(
       'Select amount of energy to spend',
       'OK',

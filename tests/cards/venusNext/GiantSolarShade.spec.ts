@@ -3,7 +3,7 @@ import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {GiantSolarShade} from '../../../src/server/cards/venusNext/GiantSolarShade';
 import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';

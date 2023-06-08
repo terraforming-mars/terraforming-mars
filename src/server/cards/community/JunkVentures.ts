@@ -7,7 +7,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {LogHelper} from '../../LogHelper';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 
 export class JunkVentures extends Card implements ICorporationCard {
   constructor() {
@@ -31,7 +31,7 @@ export class JunkVentures extends Card implements ICorporationCard {
     });
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     const discardedCards = new Set<CardName>();
 
     for (let i = 0; i < 3; i++) {
@@ -44,11 +44,11 @@ export class JunkVentures extends Card implements ICorporationCard {
     return undefined;
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.game.projectDeck.discardPile.length >= 3;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const game = player.game;
     game.projectDeck.shuffleDiscardPile();
 

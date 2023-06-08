@@ -4,7 +4,7 @@ import {GeologicalSurvey} from '../../../src/server/cards/ares/GeologicalSurvey'
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';

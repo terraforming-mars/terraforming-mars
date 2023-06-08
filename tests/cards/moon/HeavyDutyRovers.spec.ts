@@ -5,7 +5,7 @@ import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceId} from '../../../src/common/Types';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {testGame} from '../../TestGame';
 import {Game} from '../../../src/server/Game';
 

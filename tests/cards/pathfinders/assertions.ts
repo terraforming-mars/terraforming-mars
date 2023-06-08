@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';

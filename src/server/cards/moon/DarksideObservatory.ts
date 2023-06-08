@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -37,11 +37,11 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
     return card.resourceType === CardResource.DATA || MoonCards.scienceCardsWithLessThan2VP.has(card.name);
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.playedCards.some(this.include) || player.corporations.some(this.include);
   }
 
-  private addResource(card: ICard, player: Player): void {
+  private addResource(card: ICard, player: IPlayer): void {
     if (card.resourceType === CardResource.DATA) {
       player.addResourceTo(card, {qty: 2, log: true});
     }
@@ -50,7 +50,7 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
     }
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const playableCards = [
       ...player.playedCards.filter((c) => this.include(c)),
       ...player.corporations.filter((c) => this.include(c)),

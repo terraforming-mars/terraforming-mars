@@ -4,7 +4,7 @@ import {MarsMaths} from '../../../src/server/cards/pathfinders/MarsMaths';
 import {cast, finishGeneration} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 
 describe('MarsMaths', function() {
   let card: MarsMaths;

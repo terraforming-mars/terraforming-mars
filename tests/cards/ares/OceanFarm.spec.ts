@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {OceanFarm} from '../../../src/server/cards/ares/OceanFarm';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';

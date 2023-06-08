@@ -3,7 +3,7 @@ import {GiantIceAsteroid} from '../../../src/server/cards/base/GiantIceAsteroid'
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 

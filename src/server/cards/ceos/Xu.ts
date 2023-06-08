@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {PlayerInput} from '../../PlayerInput';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {played, all} from '../Options';
@@ -25,12 +25,12 @@ export class Xu extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const players = player.game.getPlayers();
 
     // If the player being counted is Me, include Wild tags. Dont include opponent wild tags
-    const counts = players.map((p: Player) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw'));
+    const counts = players.map((p) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw'));
 
     const total = sum(counts);
     player.addResource(Resource.MEGACREDITS, total * 2, {log: true});

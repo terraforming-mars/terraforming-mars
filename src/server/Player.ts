@@ -1611,6 +1611,15 @@ export class Player implements IPlayer {
     );
   }
 
+  private headStartIsInEffect() {
+    if (this.game.phase === Phase.PRELUDES && this.cardIsInEffect(CardName.HEAD_START)) {
+      if (this.actionsTakenThisRound < 2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * Set up a player taking their next action.
    *
@@ -1632,13 +1641,7 @@ export class Player implements IPlayer {
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
     // if (saveBeforeTakingAction) game.save();
 
-    let headStartIsInEffect = game.phase === Phase.PRELUDES && this.cardIsInEffect(CardName.HEAD_START);
-    if (headStartIsInEffect) {
-      // const preludesPlayed = this.playedCards.filter((c) => c.type === CardType.PRELUDE).length;
-      if (this.actionsTakenThisRound === 2) {
-        headStartIsInEffect = false;
-      }
-    }
+    const headStartIsInEffect = this.headStartIsInEffect();
 
     if (!headStartIsInEffect) {
       // Prelude cards have to be played first
@@ -1654,13 +1657,13 @@ export class Player implements IPlayer {
         }
 
         this.setWaitingFor(this.playPreludeCard(), () => {
+          if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
+            game.playerIsFinishedTakingActions();
+            return;
+          }
+
           this.takeAction();
         });
-        return;
-      }
-
-      if (game.phase === Phase.PRELUDES && this.preludeCardsInHand.length === 0) {
-        game.playerIsFinishedTakingActions();
         return;
       }
 

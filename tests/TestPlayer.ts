@@ -6,12 +6,19 @@ import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 import {Tags} from '../src/server/player/Tags';
-import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IProjectCard} from '../src/server/cards/IProjectCard';
+import {PlayerId} from '../src/common/Types';
+
+type Options = {name: string, beginner?: boolean, idSuffix?: string};
 
 class TestPlayerFactory {
   constructor(private color: Color) {}
   newPlayer(beginner: boolean = false, idSuffix = ''): TestPlayer {
-    return new TestPlayer(this.color, beginner, idSuffix);
+    return new TestPlayer(this.color, {beginner, idSuffix});
+  }
+
+  newPlayer2(opts?: Partial<Options>): TestPlayer {
+    return new TestPlayer(this.color, opts);
   }
 }
 
@@ -39,8 +46,21 @@ export class TestPlayer extends Player {
   public static ORANGE: TestPlayerFactory = new TestPlayerFactory(Color.ORANGE);
   public static PINK: TestPlayerFactory = new TestPlayerFactory(Color.PINK);
 
-  constructor(color: Color, beginner: boolean = false, idSuffix = '') {
-    super('player-' + color, color, beginner, 0, `p-${color}-id${idSuffix}`);
+  constructor(color: Color, opts?: Partial<Options>) {
+    const name = opts?.name ?? 'player-' + color;
+
+    // If a name is supplied, use it as part of the ID. Otherwise use
+    // color in the ID.
+    const coreId = opts?.name ?? color;
+    const idSuffix = opts?.idSuffix ?? '';
+    const id: PlayerId = `p-${coreId}-id${idSuffix}`;
+
+    super(
+      name,
+      color,
+      opts?.beginner ?? false,
+      0,
+      id);
     this.tags = new TestTags(this);
   }
 

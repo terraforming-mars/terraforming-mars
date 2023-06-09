@@ -180,8 +180,8 @@ describeDatabaseSuite({
     it('test save id count with undo', async () => {
       // Set up a simple game.
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
+      const player2 = TestPlayer.RED.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player, player2], player, {draftVariant: false, undoOption: true});
       await db.awaitAllSaves();
 
@@ -255,8 +255,8 @@ describeDatabaseSuite({
 
     it('undo works in multiplayer, other players have passed', async () => {
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
+      const player2 = TestPlayer.RED.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player, player2], player2, {draftVariant: false, undoOption: true});
       await db.awaitAllSaves();
 
@@ -347,7 +347,7 @@ describeDatabaseSuite({
 
     it('undo works in solo', async () => {
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player], player, {undoOption: true});
       await db.awaitAllSaves();
 

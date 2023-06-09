@@ -62,6 +62,11 @@
   "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(EFFEKT: Wenn du ein Venussymbol ausspielst (einschließlich dieses), füge einer beliebigen Karte 1 Schweber hinzu.)",
   "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(AKTION: Entferne 3 Schweber von dieser Karte, um Venus um 2% ODER den Sauerstoffgehalt um 1% zu erhöhen.)",
   "(You start with 39 M€.)": "(Du beginnst mit 39 M€.)",
+  
+  "Solbank": "Sonnen-Bank",
+  "(Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.)": "(EFFEKT: Immer wenn du M€ (oder Stahl oder Titan) zahlst, füge 1 Datenressource zu dieser Karte hinzu.)",
+  "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(EFFEKT: Während der Produktionsphase wandelst du alle Daten auf dieser Karte in je 1 M€ um.)",
+  "(You start with 40 M€.)": "(Du beginnst mit 40 M€.)",
 
   "Soylent Seedling Systems": "Soylent-Setzlingssysteme",
   "(Effect: When you place a greenery tile, add 1 seed resource to this card.)": "(EFFEKT: Wenn du ein Grünflchenplättchen platzierst, füge dieser Karte 1 Saatgut hinzu.)",

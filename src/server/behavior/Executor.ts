@@ -25,6 +25,7 @@ import {Resource} from '../../common/Resource';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
+import {Payment} from '../../common/inputs/Payment';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: Player, card: ICard) {
@@ -199,12 +200,11 @@ export class Executor implements BehaviorExecutor {
         // Exit early as the rest of handled by the deferred action.
         return;
       }
-      if (spend.steel) {
-        player.deductResource(Resource.STEEL, spend.steel);
-      }
-      if (spend.titanium) {
-        player.deductResource(Resource.TITANIUM, spend.titanium);
-      }
+      // player.pay triggers Sol Bank.
+      player.pay(Payment.of({
+        steel: spend.steel ?? 0,
+        titanium: spend.titanium ?? 0,
+      }));
       if (spend.plants) {
         player.deductResource(Resource.PLANTS, spend.plants);
       }

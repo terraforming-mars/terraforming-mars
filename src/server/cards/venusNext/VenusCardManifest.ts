@@ -56,6 +56,8 @@ import {VenusWaystation} from './VenusWaystation';
 import {Viron} from './Viron';
 import {WaterToVenus} from './WaterToVenus';
 import {AirScrappingStandardProjectVariant} from './AirScrappingStandardProjectVariant';
+import {StudwellingtonPlanitia} from './StudwellingtonPlanitia';
+import {RainestownGreens} from './RainestownGreens';
 
 export const VENUS_CARD_MANIFEST = new ModuleManifest({
   module: 'venus',
@@ -109,6 +111,8 @@ export const VENUS_CARD_MANIFEST = new ModuleManifest({
     [CardName.ORBITAL_REFLECTORS]: {Factory: OrbitalReflectors},
     [CardName.OMNICOURT]: {Factory: Omnicourt},
     [CardName.MINING_QUOTA]: {Factory: MiningQuota},
+    [CardName.STUDWELLINGTON_PLANITIA]: {Factory: StudwellingtonPlanitia},
+    [CardName.RAINESTOWN_GREENS]: {Factory: RainestownGreens},
   },
   standardProjects: {
     [CardName.AIR_SCRAPPING_STANDARD_PROJECT]: {Factory: AirScrappingStandardProject},

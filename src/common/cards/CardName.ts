@@ -340,6 +340,8 @@ export enum CardName {
     WINDMILLS = 'Windmills',
     WORMS = 'Worms',
     ZEPPELINS = 'Zeppelins',
+    STUDWELLINGTON_PLANITIA = 'Studwellington Planitia',
+    RAINESTOWN_GREENS = 'Rainestown Greens',
 
     // Corps:
     BEGINNER_CORPORATION = 'Beginner Corporation',
@@ -719,6 +721,8 @@ export enum CardName {
     SOCIAL_EVENTS = 'Social Events',
     CONTROLLED_BLOOM = 'Controlled Bloom',
     TERRAFORMING_ROBOTS = 'Terraforming Robots',
+    COPPS_COLONY = 'Copps Colony',
+    EMMET_VILLE = 'EmmetVille',
 
     VENUS_FIRST_PATHFINDERS = 'Venus First:Pathfinders',
     VALUABLE_GASES_PATHFINDERS = 'Valuable Gases:Pathfinders',

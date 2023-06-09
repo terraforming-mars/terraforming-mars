@@ -37,6 +37,7 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
       [Tag.JOVIAN, CardRenderItemType.JOVIAN],
       [Tag.MOON, CardRenderItemType.MOON],
       [Tag.VENUS, CardRenderItemType.VENUS],
+      [Tag.MARS, CardRenderItemType.MARS],
     ]);
     const itemType = map.get(type);
     if (itemType === undefined) {

@@ -107,6 +107,8 @@ import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
 import {VitalColony} from './VitalColony';
 import {Wetlands} from './Wetlands';
+import {CoppsColony} from './CoppsColony';
+import {EmmetVille} from './EmmetVille';
 
 export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
   module: 'pathfinders',
@@ -187,6 +189,8 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.SOCIAL_EVENTS]: {Factory: SocialEvents},
     [CardName.CONTROLLED_BLOOM]: {Factory: ControlledBloom},
     [CardName.TERRAFORMING_ROBOTS]: {Factory: TerraformingRobots},
+    [CardName.COPPS_COLONY]: {Factory: CoppsColony},
+    [CardName.EMMET_VILLE]: {Factory: EmmetVille},
   },
   corporationCards: {
     [CardName.POLARIS]: {Factory: Polaris},

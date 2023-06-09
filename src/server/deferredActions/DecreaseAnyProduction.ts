@@ -1,5 +1,5 @@
-import {asPlayer} from '../Player';
 import {IPlayer} from '../IPlayer';
+import {asPlayer} from '../Player';
 import {Resource} from '../../common/Resource';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';

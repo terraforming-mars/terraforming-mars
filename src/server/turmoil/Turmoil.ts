@@ -21,6 +21,8 @@ import {SelectOption} from '../inputs/SelectOption';
 import {OrOptions} from '../inputs/OrOptions';
 import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
+import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = PlayerId | NeutralPlayer;
@@ -443,6 +445,24 @@ export class Turmoil {
       }
     });
     return victory;
+  }
+
+  public getSendDelegateInput(player: Player): SelectPartyToSendDelegate | undefined {
+    if (this.hasDelegatesInReserve(player.id)) {
+      let sendDelegate;
+      if (!this.usedFreeDelegateAction.has(player.id)) {
+        sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
+      } else if (player.isCorporation(CardName.INCITE) && player.canAfford(3)) {
+        sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (3 M€)', {cost: 3});
+      } else if (player.canAfford(5)) {
+        sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (5 M€)', {cost: 5});
+      }
+      if (sendDelegate) {
+        const input = sendDelegate.execute();
+        return input;
+      }
+    }
+    return undefined;
   }
 
   public serialize(): SerializedTurmoil {

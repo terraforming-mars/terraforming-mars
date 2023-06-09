@@ -6,6 +6,12 @@ export class Pallas extends Colony {
   constructor() {
     super({
       name: ColonyName.PALLAS,
+      description: [
+        'Gain +1 influence',
+        'Place n delegates',
+        'Gain 1 M€ for each delegate in any party',
+      ],
+
       buildType: ColonyBenefit.GAIN_INFLUENCE,
       tradeType: ColonyBenefit.PLACE_DELEGATES,
       tradeQuantity: [1, 1, 1, 2, 2, 2, 3],

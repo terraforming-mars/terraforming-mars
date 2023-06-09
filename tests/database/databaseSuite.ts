@@ -242,8 +242,8 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
         {
           'gameId': 'game-id1',
           'participantIds': [
-            'p-blue-id1',
-            'p-red-id1',
+            'p-player1-id1',
+            'p-player2-id1',
           ],
         },
       ]);
@@ -253,16 +253,16 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
         {
           'gameId': 'game-id1',
           'participantIds': [
-            'p-blue-id1',
-            'p-red-id1',
+            'p-player1-id1',
+            'p-player2-id1',
           ],
         },
         {
           'gameId': 'game-id2',
           'participantIds': [
-            'p-blue-id2',
-            'p-red-id2',
-            'p-yellow-id2',
+            'p-player1-id2',
+            'p-player2-id2',
+            'p-player3-id2',
           ],
         },
       ]);
@@ -274,8 +274,8 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       await db.lastSaveGamePromise;
       testGame(3, {}, '2');
       await db.lastSaveGamePromise;
-      expect(await db.getGameId('p-blue-id1')).eq('game-id1');
-      expect(await db.getGameId('p-yellow-id2')).eq('game-id2');
+      expect(await db.getGameId('p-player1-id1')).eq('game-id1');
+      expect(await db.getGameId('p-player3-id2')).eq('game-id2');
       expect(db.getGameId('p-unknown')).to.be.rejected;
     });
 

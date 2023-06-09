@@ -7,6 +7,12 @@ export class LeavittII extends Colony {
   constructor() {
     super({
       name: ColonyName.LEAVITT_II,
+      description: [
+        'Gain 2 science tags and 1 clone tag',
+        'Raise any planetary track n steps',
+        'Gain 2 M€',
+      ],
+
       buildType: ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG,
 
       tradeType: ColonyBenefit.RAISE_PLANETARY_TRACK,

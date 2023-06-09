@@ -7,6 +7,12 @@ export class Triton extends Colony {
   constructor() {
     super({
       name: ColonyName.TRITON,
+      description: [
+        'Gain 3 titanium',
+        'Gain n titanium',
+        'Gain 1 titanium',
+      ],
+
       buildType: ColonyBenefit.GAIN_RESOURCES,
       buildQuantity: [3, 3, 3],
       buildResource: Resource.TITANIUM,

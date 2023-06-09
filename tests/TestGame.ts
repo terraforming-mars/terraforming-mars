@@ -10,14 +10,14 @@ export type TestGameOptions = GameOptions & {
 
 function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
   return [
-    TestPlayer.BLUE.newPlayer(false, idSuffix),
-    TestPlayer.RED.newPlayer(false, idSuffix),
-    TestPlayer.YELLOW.newPlayer(false, idSuffix),
-    TestPlayer.GREEN.newPlayer(false, idSuffix),
-    TestPlayer.BLACK.newPlayer(false, idSuffix),
-    TestPlayer.PURPLE.newPlayer(false, idSuffix),
-    TestPlayer.ORANGE.newPlayer(false, idSuffix),
-    TestPlayer.PINK.newPlayer(false, idSuffix),
+    TestPlayer.BLUE.newPlayer({name: 'player1', idSuffix}),
+    TestPlayer.RED.newPlayer({name: 'player2', idSuffix}),
+    TestPlayer.YELLOW.newPlayer({name: 'player3', idSuffix}),
+    TestPlayer.GREEN.newPlayer({name: 'player4', idSuffix}),
+    TestPlayer.BLACK.newPlayer({name: 'player5', idSuffix}),
+    TestPlayer.PURPLE.newPlayer({name: 'player6', idSuffix}),
+    TestPlayer.ORANGE.newPlayer({name: 'player7', idSuffix}),
+    TestPlayer.PINK.newPlayer({name: 'player8', idSuffix}),
   ].slice(0, count);
 }
 

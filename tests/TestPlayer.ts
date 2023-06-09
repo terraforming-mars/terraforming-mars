@@ -13,11 +13,7 @@ type Options = {name: string, beginner?: boolean, idSuffix?: string};
 
 class TestPlayerFactory {
   constructor(private color: Color) {}
-  newPlayer(beginner: boolean = false, idSuffix = ''): TestPlayer {
-    return new TestPlayer(this.color, {beginner, idSuffix});
-  }
-
-  newPlayer2(opts?: Partial<Options>): TestPlayer {
+  newPlayer(opts?: Partial<Options>): TestPlayer {
     return new TestPlayer(this.color, opts);
   }
 }

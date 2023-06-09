@@ -774,15 +774,15 @@ export class Game implements Logger {
     return true;
   }
 
-  public playerHasPassed(player: Player): void {
+  public playerHasPassed(player: IPlayer): void {
     this.passedPlayers.add(player.id);
   }
 
-  public hasResearched(player: Player): boolean {
+  public hasResearched(player: IPlayer): boolean {
     return this.researchedPlayers.has(player.id);
   }
 
-  private hasDrafted(player: Player): boolean {
+  private hasDrafted(player: IPlayer): boolean {
     return this.draftedPlayers.has(player.id);
   }
 
@@ -1097,7 +1097,7 @@ export class Game implements Logger {
     return this.venusScaleLevel;
   }
 
-  public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
+  public increaseTemperature(player: IPlayer, increments: -2 | -1 | 1 | 2 | 3): undefined {
     if (this.temperature >= constants.MAX_TEMPERATURE) {
       return undefined;
     }
@@ -1286,7 +1286,7 @@ export class Game implements Logger {
     });
   }
 
-  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
+  public grantSpaceBonus(player: IPlayer, spaceBonus: SpaceBonus, count: number = 1) {
     switch (spaceBonus) {
     case SpaceBonus.DRAW_CARD:
       player.drawCard(count);

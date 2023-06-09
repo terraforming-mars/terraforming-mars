@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {ShiftAresGlobalParametersDeferred} from '../../deferredActions/ShiftAresGlobalParametersDeferred';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
@@ -30,7 +30,7 @@ export class ButterflyEffect extends Card implements IProjectCard {
       },
     });
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     AresHandler.ifAres(player.game, (aresData) => {
       const hazardData = aresData.hazardData;
       if (HAZARD_CONSTRAINTS.some((constraint) => hazardData[constraint].available === true)) {

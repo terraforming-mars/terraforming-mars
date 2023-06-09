@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -24,7 +24,7 @@ export class IndenturedWorkers extends Card implements IProjectCard {
     });
   }
 
-  public override getCardDiscount(player: Player) {
+  public override getCardDiscount(player: IPlayer) {
     if (player.lastCardPlayed === this.name) {
       return 8;
     }

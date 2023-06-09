@@ -1,4 +1,5 @@
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {PreludeCard} from './PreludeCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
@@ -18,7 +19,7 @@ export class EccentricSponsor extends PreludeCard {
       },
     });
   }
-  public override getCardDiscount(player: Player) {
+  public override getCardDiscount(player: IPlayer) {
     if (player.lastCardPlayed === this.name) {
       return 25;
     }

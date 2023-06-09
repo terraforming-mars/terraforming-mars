@@ -1,7 +1,7 @@
 import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
 import {SerializedBoard} from '../boards/SerializedBoard';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
@@ -27,7 +27,7 @@ class Space implements ISpace {
 }
 
 export class MoonBoard extends Board {
-  public getAvailableSpacesForMine(player: Player): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForMine(player: IPlayer): ReadonlyArray<ISpace> {
     const spaces = this.spaces.filter((space) => {
       const val = space.tile === undefined &&
         space.spaceType === SpaceType.LUNAR_MINE &&
@@ -59,7 +59,7 @@ export class MoonBoard extends Board {
     return new MoonBoard(b.spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): MoonBoard {
+  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): MoonBoard {
     const spaces = Board.deserializeSpaces(board.spaces, players);
     return new MoonBoard(spaces);
   }

@@ -2,6 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -43,7 +44,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
     return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
         new GainProduction(cardOwner, Resource.MEGACREDITS),

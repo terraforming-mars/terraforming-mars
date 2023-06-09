@@ -2,6 +2,7 @@ import {Game} from '../Game';
 import {Tile} from '../Tile';
 import {MoonBoard} from './MoonBoard';
 import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {TileType} from '../../common/TileType';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {IMoonData} from './IMoonData';
@@ -74,17 +75,17 @@ export class MoonExpansion {
   }
 
   public static addMineTile(
-    player: Player, spaceId: string, cardName: CardName | undefined = undefined): void {
+    player: IPlayer, spaceId: string, cardName: CardName | undefined = undefined): void {
     MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_MINE, card: cardName});
   }
 
   public static addHabitatTile(
-    player: Player, spaceId: string, cardName: CardName | undefined = undefined): void {
+    player: IPlayer, spaceId: string, cardName: CardName | undefined = undefined): void {
     MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_HABITAT, card: cardName});
   }
 
   public static addRoadTile(
-    player: Player, spaceId: string, cardName: CardName | undefined = undefined): void {
+    player: IPlayer, spaceId: string, cardName: CardName | undefined = undefined): void {
     MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_ROAD, card: cardName});
   }
 
@@ -92,7 +93,7 @@ export class MoonExpansion {
   // isn't.
 
   // Update: I think this is going to have to merge with addTile. It won't be bad.
-  public static addTile(player: Player, spaceId: string, tile: Tile): void {
+  public static addTile(player: IPlayer, spaceId: string, tile: Tile): void {
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
       const space = moonData.moon.getSpace(spaceId);
@@ -133,7 +134,7 @@ export class MoonExpansion {
     });
   }
 
-  private static logTilePlacement(player: Player, space: ISpace, tileType: TileType) {
+  private static logTilePlacement(player: IPlayer, space: ISpace, tileType: TileType) {
     // Skip off-grid tiles
     if (space.x !== -1 && space.y !== -1) {
       const offsets = [-1, 0, 1, 1, 1, 0, -1];
@@ -151,7 +152,7 @@ export class MoonExpansion {
     }
   }
 
-  public static raiseMiningRate(player: Player, count: number = 1) {
+  public static raiseMiningRate(player: IPlayer, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const available = MAXIMUM_MINING_RATE - moonData.miningRate;
       const increment = Math.min(count, available);
@@ -175,7 +176,7 @@ export class MoonExpansion {
     });
   }
 
-  public static raiseHabitatRate(player: Player, count: number = 1) {
+  public static raiseHabitatRate(player: IPlayer, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const available = MAXIMUM_HABITAT_RATE - moonData.colonyRate;
       const increment = Math.min(count, available);
@@ -199,7 +200,7 @@ export class MoonExpansion {
     });
   }
 
-  public static raiseLogisticRate(player: Player, count: number = 1) {
+  public static raiseLogisticRate(player: IPlayer, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const available = MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
       const increment = Math.min(count, available);
@@ -223,7 +224,7 @@ export class MoonExpansion {
     });
   }
 
-  private static activateLunaFirst(sourcePlayer: Player | undefined, game: Game, count: number) {
+  private static activateLunaFirst(sourcePlayer: IPlayer | undefined, game: Game, count: number) {
     const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
     if (lunaFirstPlayer !== undefined) {
       lunaFirstPlayer.addResource(Resource.MEGACREDITS, count, {log: true});
@@ -312,7 +313,7 @@ export class MoonExpansion {
   /*
    * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
    */
-  public static adjustedReserveCosts(player: Player, card: IProjectCard) : Units {
+  public static adjustedReserveCosts(player: IPlayer, card: IProjectCard) : Units {
     // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
     // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
 

@@ -2,7 +2,7 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {SpaceName} from '../SpaceName';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {ISpace} from './ISpace';
@@ -47,7 +47,7 @@ export class TerraCimmeriaBoard extends Board {
     return new TerraCimmeriaBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): TerraCimmeriaBoard {
+  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): TerraCimmeriaBoard {
     return new TerraCimmeriaBoard(Board.deserializeSpaces(board.spaces, players));
   }
 

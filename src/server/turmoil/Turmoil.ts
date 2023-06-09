@@ -20,6 +20,7 @@ import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectOption} from '../inputs/SelectOption';
 import {OrOptions} from '../inputs/OrOptions';
 import {MultiSet} from 'mnemonist';
+import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
@@ -374,7 +375,7 @@ export class Turmoil {
     }
   }
 
-  public getPlayerInfluence(player: Player) {
+  public getPlayerInfluence(player: IPlayer) {
     let influence = 0;
     if (this.chairman !== undefined && this.chairman === player.id) influence++;
 
@@ -398,7 +399,7 @@ export class Turmoil {
     return influence;
   }
 
-  public addInfluenceBonus(player: Player, bonus:number = 1) {
+  public addInfluenceBonus(player: IPlayer, bonus:number = 1) {
     if (this.playersInfluenceBonus.has(player.id)) {
       let current = this.playersInfluenceBonus.get(player.id);
       if (current) {
@@ -410,7 +411,7 @@ export class Turmoil {
     }
   }
 
-  public canPlay(player: Player, partyName : PartyName): boolean {
+  public canPlay(player: IPlayer, partyName : PartyName): boolean {
     if (this.rulingParty.name === partyName) {
       return true;
     }

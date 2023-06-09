@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -35,7 +35,7 @@ export class MorningStarInc extends Card implements ICorporationCard {
     });
   }
 
-  public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {
+  public getRequirementBonus(_player: IPlayer, parameter: GlobalParameter): number {
     return parameter === GlobalParameter.VENUS ? 2 : 0;
   }
 }

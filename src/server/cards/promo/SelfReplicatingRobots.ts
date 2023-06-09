@@ -4,6 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
@@ -39,7 +40,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
 
   public targetCards: Array<RobotCard> = [];
 
-  public override getCardDiscount(_player: Player, card: IProjectCard): number {
+  public override getCardDiscount(_player: IPlayer, card: IProjectCard): number {
     for (const targetCard of this.targetCards) {
       if (targetCard.card.name === card.name) {
         return targetCard.resourceCount;

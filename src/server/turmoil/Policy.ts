@@ -2,6 +2,7 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {Game} from '../Game';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 
 type Party = 'mf' | 's' | 'u' | 'k' | 'r' | 'g';
@@ -10,7 +11,7 @@ export type PolicyId = `${Party}${Suffix}`
 
 export interface Policy {
   id: PolicyId;
-  description: string | ((player: Player | undefined) => string);
+  description: string | ((player: IPlayer | undefined) => string);
   isDefault: boolean;
   onTilePlaced?: (player: Player, space: ISpace) => void;
   onCardPlayed?: (player: Player, card: IProjectCard) => void;

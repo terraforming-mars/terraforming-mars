@@ -10,7 +10,7 @@ import {isIProjectCard} from '../cards/IProjectCard';
 import {isICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from '../../common/models/PlayerInputModel';
 import {PlayerViewModel, Protection, PublicPlayerModel} from '../../common/models/PlayerModel';
@@ -100,7 +100,7 @@ export class Server {
     };
   }
 
-  public static getPlayerModel(player: Player): PlayerViewModel {
+  public static getPlayerModel(player: IPlayer): PlayerViewModel {
     const game = player.game;
 
     const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer);
@@ -136,7 +136,7 @@ export class Server {
     };
   }
 
-  public static getSelfReplicatingRobotsTargetCards(player: Player): Array<CardModel> {
+  public static getSelfReplicatingRobotsTargetCards(player: IPlayer): Array<CardModel> {
     return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
       const model: CardModel = {
         resources: targetCard.resourceCount,
@@ -205,7 +205,7 @@ export class Server {
   }
 
   public static getWaitingFor(
-    player: Player,
+    player: IPlayer,
     waitingFor: PlayerInput | undefined,
   ): PlayerInputModel | undefined {
     if (waitingFor === undefined) {
@@ -353,7 +353,7 @@ export class Server {
   }
 
   public static getCards(
-    player: Player,
+    player: IPlayer,
     cards: Array<ICard>,
     options: {
       showResources?: boolean,
@@ -399,7 +399,7 @@ export class Server {
     });
   }
 
-  public static getPlayer(player: Player): PublicPlayerModel {
+  public static getPlayer(player: IPlayer): PublicPlayerModel {
     const game = player.game;
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
@@ -448,7 +448,7 @@ export class Server {
     };
   }
 
-  private static getResourceProtections(player: Player) {
+  private static getResourceProtections(player: IPlayer) {
     const protection: Record<Resource, Protection> = {
       megacredits: 'off',
       steel: 'off',
@@ -472,7 +472,7 @@ export class Server {
     return protection;
   }
 
-  private static getProductionProtections(player: Player) {
+  private static getProductionProtections(player: IPlayer) {
     const defaultProteection = player.cardIsInEffect(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
     const protection: Record<Resource, Protection> = {
       megacredits: defaultProteection,

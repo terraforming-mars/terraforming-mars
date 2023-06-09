@@ -1,5 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -35,7 +36,7 @@ export class ValleyTrust extends Card implements ICorporationCard {
     });
   }
 
-  public override getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
     // TODO(chosta) -> improve once the discounts property is given a go
     return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
   }

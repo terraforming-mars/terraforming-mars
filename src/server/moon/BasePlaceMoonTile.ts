@@ -1,14 +1,14 @@
 import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
 export abstract class BasePlaceMoonTile extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public spaces?: Array<ISpace>,
     public title: string = 'Select a space for a tile',
   ) {

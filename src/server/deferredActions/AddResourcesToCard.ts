@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectCard} from '../inputs/SelectCard';
 import {CardResource} from '../../common/CardResource';
 import {ICard} from '../cards/ICard';
@@ -15,7 +15,7 @@ export type Options = {
 
 export class AddResourcesToCard extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     /** The card type to add to. Undefined means any resource. */
     public resourceType: CardResource | undefined,
     public options: Options = {},

@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -16,7 +16,7 @@ enum LogType {
 
 export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends DeferredAction {
   private constructor(
-    player: Player,
+    player: IPlayer,
     public count: number = 1,
     public options: DrawCards.AllOptions = {},
     public cb: (cards: Array<IProjectCard>) => T,
@@ -46,7 +46,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
     return this.cb(cards);
   }
 
-  public static keepAll(player: Player, count: number = 1, options?: DrawCards.DrawOptions): DrawCards<undefined> {
+  public static keepAll(player: IPlayer, count: number = 1, options?: DrawCards.DrawOptions): DrawCards<undefined> {
     return new DrawCards(player, count, options, (cards) => {
       let verbosity: LogType = LogType.DREW;
       if (options !== undefined) {
@@ -61,11 +61,11 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
     });
   }
 
-  public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions): DrawCards<SelectCard<IProjectCard>> {
+  public static keepSome(player: IPlayer, count: number = 1, options: DrawCards.AllOptions): DrawCards<SelectCard<IProjectCard>> {
     return new DrawCards(player, count, options, (cards) => DrawCards.choose(player, cards, options));
   }
 
-  public static keep(player: Player, cards: Array<IProjectCard>, logType: LogType = LogType.DREW): undefined {
+  public static keep(player: IPlayer, cards: Array<IProjectCard>, logType: LogType = LogType.DREW): undefined {
     player.cardsInHand.push(...cards);
     if (logType === LogType.DREW_VERBOSE) {
       LogHelper.logDrawnCards(player, cards);
@@ -76,7 +76,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
     return undefined;
   }
 
-  public static discard(player: Player, preserve: Array<IProjectCard>, discard: Array<IProjectCard>) {
+  public static discard(player: IPlayer, preserve: Array<IProjectCard>, discard: Array<IProjectCard>) {
     discard.forEach((card) => {
       if (preserve.find((f) => f.name === card.name) === undefined) {
         player.game.projectDeck.discard(card);
@@ -84,7 +84,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
     });
   }
 
-  public static choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
+  public static choose(player: IPlayer, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
     let max = options.keepMax || cards.length;
     let msg = '';
     if (options.paying) {

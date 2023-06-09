@@ -1,11 +1,11 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectColony} from '../inputs/SelectColony';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class BuildColony extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     private options?: {
       allowDuplicate?: boolean, // Allow placing a colony on a tile that already has a colony.
       title?: string,

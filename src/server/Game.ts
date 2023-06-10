@@ -1012,7 +1012,7 @@ export class Game implements Logger {
     player.takeAction();
   }
 
-  public increaseOxygenLevel(player: Player, increments: -2 | -1 | 1 | 2): void {
+  public increaseOxygenLevel(player: IPlayer, increments: -2 | -1 | 1 | 2): void {
     if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
       return undefined;
     }
@@ -1045,7 +1045,7 @@ export class Game implements Logger {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): number {
+  public increaseVenusScaleLevel(player: IPlayer, increments: -1 | 1 | 2 | 3): number {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
       return 0;
     }
@@ -1157,7 +1157,7 @@ export class Game implements Logger {
     return this.getCitiesCount(player, (space) => space.spaceType === SpaceType.COLONY);
   }
 
-  public getCitiesOnMarsCount(player?: Player): number {
+  public getCitiesOnMarsCount(player?: IPlayer): number {
     return this.getCitiesCount(player, (space) => space.spaceType !== SpaceType.COLONY);
   }
 
@@ -1174,7 +1174,7 @@ export class Game implements Logger {
     return greeneries.length;
   }
 
-  public getSpaceCount(tileType: TileType, player: Player): number {
+  public getSpaceCount(tileType: TileType, player: IPlayer): number {
     return this.board.spaces.filter(Board.ownedBy(player))
       .filter((space) => space.tile?.tileType === tileType)
       .length;
@@ -1183,7 +1183,7 @@ export class Game implements Logger {
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
   public addTile(
-    player: Player,
+    player: IPlayer,
     space: ISpace,
     tile: Tile): void {
     // Part 1, basic validation checks.
@@ -1270,7 +1270,7 @@ export class Game implements Logger {
     });
   }
 
-  public simpleAddTile(player: Player, space: ISpace, tile: Tile) {
+  public simpleAddTile(player: IPlayer, space: ISpace, tile: Tile) {
     space.tile = tile;
     space.player = player;
     if (tile.tileType === TileType.OCEAN || tile.tileType === TileType.MARTIAN_NATURE_WONDERS) {
@@ -1279,7 +1279,7 @@ export class Game implements Logger {
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
-  public grantSpaceBonuses(player: Player, space: ISpace) {
+  public grantSpaceBonuses(player: IPlayer, space: ISpace) {
     const bonuses = MultiSet.from(space.bonus);
     bonuses.forEachMultiplicity((count: number, bonus: SpaceBonus) => {
       this.grantSpaceBonus(player, bonus, count);
@@ -1342,7 +1342,7 @@ export class Game implements Logger {
   }
 
   public addGreenery(
-    player: Player, space: ISpace,
+    player: IPlayer, space: ISpace,
     shouldRaiseOxygen: boolean = true): undefined {
     this.addTile(player, space, {
       tileType: TileType.GREENERY,
@@ -1355,7 +1355,7 @@ export class Game implements Logger {
   }
 
   public addCity(
-    player: Player, space: ISpace,
+    player: IPlayer, space: ISpace,
     cardName: CardName | undefined = undefined): void {
     this.addTile(player, space, {
       tileType: TileType.CITY,
@@ -1450,11 +1450,11 @@ export class Game implements Logger {
     return [undefined, undefined];
   }
 
-  public getCardsInHandByResource(player: Player, resourceType: CardResource) {
+  public getCardsInHandByResource(player: IPlayer, resourceType: CardResource) {
     return player.cardsInHand.filter((card) => card.resourceType === resourceType);
   }
 
-  public getCardsInHandByType(player: Player, cardType: CardType) {
+  public getCardsInHandByType(player: IPlayer, cardType: CardType) {
     return player.cardsInHand.filter((card) => card.type === cardType);
   }
 

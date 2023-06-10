@@ -1,6 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
@@ -86,7 +87,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
 export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
   private titanFloatingLaunchPad: TitanFloatingLaunchPad | undefined;
 
-  constructor(private player: Player) {
+  constructor(private player: IPlayer) {
     const card = player.playedCards.find((card) => card.name === CardName.TITAN_FLOATING_LAUNCHPAD);
     this.titanFloatingLaunchPad = card === undefined ? undefined : (card as TitanFloatingLaunchPad);
   }

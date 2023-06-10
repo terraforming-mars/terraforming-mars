@@ -1,4 +1,3 @@
-import {Player} from '../Player';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../inputs/OrOptions';
@@ -14,7 +13,7 @@ const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE]
 export class RemoveResourcesFromCard extends DeferredAction {
   public override priority = Priority.ATTACK_OPPONENT;
   constructor(
-    player: Player,
+    player: IPlayer,
     public resourceType: CardResource,
     public count: number = 1,
     public ownCardsOnly: boolean = false,

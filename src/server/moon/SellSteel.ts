@@ -1,11 +1,11 @@
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectAmount} from '../inputs/SelectAmount';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 
 export class SellSteel extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public title: string = 'Sell your steel for 3M€ each.',
   ) {
     super(player, Priority.DEFAULT);

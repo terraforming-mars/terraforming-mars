@@ -2,7 +2,7 @@ import * as http from 'http';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Phase} from '../../common/Phase';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {WaitingForModel} from '../../common/models/WaitingForModel';
 import {Game} from '../Game';
 import {isPlayerId, isSpectatorId} from '../../common/Types';
@@ -13,12 +13,12 @@ export class ApiWaitingFor extends Handler {
     super();
   }
 
-  private timeToGo(player: Player): boolean {
+  private timeToGo(player: IPlayer): boolean {
     return player.getWaitingFor() !== undefined || player.game.phase === Phase.END;
   }
 
   // When player is undefined, caller is a spectator.
-  private getPlayerWaitingForModel(player: Player, game: Game, gameAge: number, undoCount: number): WaitingForModel {
+  private getPlayerWaitingForModel(player: IPlayer, game: Game, gameAge: number, undoCount: number): WaitingForModel {
     if (this.timeToGo(player)) {
       return {result: 'GO'};
     } else if (game.gameAge > gameAge || game.undoCount > undoCount) {

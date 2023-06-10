@@ -1,4 +1,3 @@
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -12,14 +11,14 @@ import {Turmoil} from '../Turmoil';
 import {CardName} from '../../../common/cards/CardName';
 
 export class PartyHooks {
-  static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
+  static applyMarsFirstRulingPolicy(player: IPlayer, spaceType: SpaceType) {
     if (this.shouldApplyPolicy(player, PartyName.MARS, 'mfp01') &&
         spaceType !== SpaceType.COLONY) {
       player.addResource(Resource.STEEL, 1);
     }
   }
 
-  static applyGreensRulingPolicy(player: Player, space: ISpace) {
+  static applyGreensRulingPolicy(player: IPlayer, space: ISpace) {
     if (this.shouldApplyPolicy(player, PartyName.GREENS, 'gp01')) {
       const greensPolicy = GREENS_POLICY_1;
       greensPolicy.onTilePlaced(player, space);

@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {IColony} from '../colonies/IColony';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -7,7 +7,7 @@ import {LogHelper} from '../LogHelper';
 
 export class IncreaseColonyTrack extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public colony: IColony,
     public steps: number,
     public cb: () => void,

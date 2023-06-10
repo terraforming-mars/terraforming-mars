@@ -1,5 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -58,7 +59,7 @@ export class RedCity extends Card implements IProjectCard {
     });
   }
 
-  public override getVictoryPoints(player: Player): number {
+  public override getVictoryPoints(player: IPlayer): number {
     const space = player.game.board.getSpaceByTileCard(this.name);
     if (space === undefined) {
       return 0;

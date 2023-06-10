@@ -1,6 +1,6 @@
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {DeferredAction, Priority} from './DeferredAction';
 import {IParty} from '../turmoil/parties/IParty';
@@ -8,7 +8,7 @@ import {BonusId, PolicyId} from '../../common/turmoil/Types';
 
 export class ChoosePoliticalAgenda extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public party: IParty,
     public bonusCb: (bonusId: BonusId) => void,
     public policyCb: (policyId: PolicyId) => void,

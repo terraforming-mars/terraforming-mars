@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
@@ -18,7 +18,7 @@ export class SendDelegateToArea extends DeferredAction {
   private turmoil: Turmoil;
 
   constructor(
-    player: Player,
+    player: IPlayer,
     public title: string = 'Select where to send a delegate',
     public options: Options = {},
   ) {

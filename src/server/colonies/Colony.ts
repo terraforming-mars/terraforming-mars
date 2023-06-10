@@ -9,7 +9,7 @@ import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../LogHelper';
 import {MAX_COLONIES_PER_TILE, MAX_COLONY_TRACK_POSITION} from '../../common/constants';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {PlayerInput} from '../PlayerInput';
 import {Resource} from '../../common/Resource';
@@ -73,7 +73,7 @@ export abstract class Colony implements IColony {
     return this.colonies.length >= MAX_COLONIES_PER_TILE;
   }
 
-  public addColony(player: Player, options?: {giveBonusTwice: boolean}): void {
+  public addColony(player: IPlayer, options?: {giveBonusTwice: boolean}): void {
     player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
 
     this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
@@ -109,7 +109,7 @@ export abstract class Colony implements IColony {
     * @param usesTradeFleet when false, the player can trade without an available trade fleet.
     * @param decreaseTrackAfterTrade when false, the track does not decrease after trading.
     */
-  public trade(player: Player, tradeOptions: TradeOptions = {}, bonusTradeOffset = 0): void {
+  public trade(player: IPlayer, tradeOptions: TradeOptions = {}, bonusTradeOffset = 0): void {
     const tradeOffset = player.colonies.tradeOffset + bonusTradeOffset;
     const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
     const steps = maxTrackPosition - this.trackPosition;
@@ -139,7 +139,7 @@ export abstract class Colony implements IColony {
     ));
   }
 
-  private handleTrade(player: Player, options: TradeOptions) {
+  private handleTrade(player: IPlayer, options: TradeOptions) {
     const resource = Array.isArray(this.metadata.tradeResource) ? this.metadata.tradeResource[this.trackPosition] : this.metadata.tradeResource;
 
     this.giveBonus(player, this.metadata.tradeType, this.metadata.tradeQuantity[this.trackPosition], resource);
@@ -164,11 +164,11 @@ export abstract class Colony implements IColony {
     }
   }
 
-  public giveColonyBonus(player: Player, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+  public giveColonyBonus(player: IPlayer, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
     return this.giveBonus(player, this.metadata.colonyBonusType, this.metadata.colonyBonusQuantity, this.metadata.colonyBonusResource, isGiveColonyBonus);
   }
 
-  private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+  private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
     const game = player.game;
 
     let action: undefined | DeferredAction = undefined;
@@ -300,7 +300,7 @@ export abstract class Colony implements IColony {
             playersWithCards,
             'Select player to discard a card',
             'Select',
-            (selectedPlayer: Player) => {
+            (selectedPlayer: IPlayer) => {
               game.defer(new DiscardCards(selectedPlayer, 1, this.name + ' colony effect. Select a card to discard'));
               return undefined;
             },

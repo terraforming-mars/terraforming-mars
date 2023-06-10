@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -37,7 +37,7 @@ export class AgricolaInc extends Card implements ICorporationCard {
     });
   }
 
-  public override getVictoryPoints(player: Player): number {
+  public override getVictoryPoints(player: IPlayer): number {
     // TODO(kberg): Include  the remaining tags.
     const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.POWER, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
     if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tag.VENUS);

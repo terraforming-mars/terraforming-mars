@@ -45,7 +45,7 @@ export interface ICard {
     // parameter is a Morningstar Inc. special case.
     getRequirementBonus?: (player: IPlayer, parameter: GlobalParameter) => number;
     victoryPoints?: number | 'special' | IVictoryPoints,
-    getVictoryPoints: (player: Player) => number;
+    getVictoryPoints: (player: IPlayer) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => PlayerInput | undefined | void;
     onStandardProject?: (player: Player, project: ICard) => void;
     onTilePlaced?: (cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) => void;

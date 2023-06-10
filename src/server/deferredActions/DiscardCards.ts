@@ -1,10 +1,10 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectCard} from '../inputs/SelectCard';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class DiscardCards extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public count: number = 1,
     public title: string = 'Select ' + count + ' card' + (count > 1 ? 's' : '') + ' to discard',
   ) {

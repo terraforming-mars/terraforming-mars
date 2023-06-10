@@ -1,12 +1,12 @@
 
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {IMilestone} from './IMilestone';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 
 export type ClaimedMilestone = {
   milestone: IMilestone;
-  player: Player;
+  player: IPlayer;
 }
 
 export type SerializedClaimedMilestone = {
@@ -25,7 +25,7 @@ export function serializeClaimedMilestones(claimedMilestones: Array<ClaimedMiles
 
 export function deserializeClaimedMilestones(
   claimedMilestones: Array<SerializedClaimedMilestone>,
-  players: Array<Player>,
+  players: Array<IPlayer>,
   milestones: Array<IMilestone>): Array<ClaimedMilestone> {
   // Remove duplicates
   const ms = new Set<MilestoneName>();

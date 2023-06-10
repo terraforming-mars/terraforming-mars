@@ -215,7 +215,7 @@ export abstract class Card {
   public bespokeOnDiscard(_player: Player): void {
   }
 
-  public getVictoryPoints(player: Player): number {
+  public getVictoryPoints(player: IPlayer): number {
     const vp = this.properties.victoryPoints;
     if (typeof(vp) === 'number') {
       return vp;

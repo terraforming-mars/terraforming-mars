@@ -1,6 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -66,7 +65,7 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
     cardOwner.addResource(Resource.MEGACREDITS, filtered.length * 2, {log: true});
   }
 
-  public override getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: IPlayer) {
     const moon = MoonExpansion.moonData(player.game).moon;
     const neighboringColonyTiles: Set<SpaceId> = new Set();
     const colonyTiles = MoonExpansion.spaces(player.game, TileType.MOON_HABITAT, {ownedBy: player});

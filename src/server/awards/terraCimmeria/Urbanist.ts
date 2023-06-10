@@ -1,6 +1,5 @@
 import {Board} from '../../boards/Board';
 import {IPlayer} from '../../IPlayer';
-import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {IAward} from '../IAward';
 
@@ -26,8 +25,7 @@ export class Urbanist implements IAward {
         case TileType.RED_CITY:
           const card = player.playedCards.find((c) => c.name === space?.tile?.card);
           if (card !== undefined) {
-            // TODO(kberg): remove "as Player"
-            score += card.getVictoryPoints(player as Player);
+            score += card.getVictoryPoints(player);
           }
           break;
         default:

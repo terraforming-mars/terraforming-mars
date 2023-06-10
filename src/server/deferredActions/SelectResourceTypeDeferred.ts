@@ -1,12 +1,12 @@
 import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class SelectResourceTypeDeferred extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public resources: Array<Resource>,
     public title: string,
     public cb: (resource: Resource) => void,

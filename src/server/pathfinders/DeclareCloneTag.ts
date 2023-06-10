@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -17,7 +17,7 @@ import {intersection} from '../../common/utils/utils';
  */
 export class DeclareCloneTag extends DeferredAction {
   public constructor(
-    player: Player,
+    player: IPlayer,
     public card: IProjectCard & ICloneTagCard,
     public cb: (tag: PlanetaryTag) => void = () => {},
     public title: string = '') {

@@ -248,6 +248,7 @@ export interface IPlayer {
   takeAction(saveBeforeTakingAction?: boolean): void;
   runInitialAction(corp: ICorporationCard): void;
   getActions(): void;
+  process(input: InputResponse): void;
   getWaitingFor(): PlayerInput | undefined;
   setWaitingFor(input: PlayerInput, cb?: () => void): void;
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;

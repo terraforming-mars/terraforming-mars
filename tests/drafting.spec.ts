@@ -5,7 +5,7 @@ import {expect} from 'chai';
 import {testGame} from './TestGame';
 import {ICard} from '../src/server/cards/ICard';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
-import {Player} from '../src/server/Player';
+import {IPlayer} from '../src/server/IPlayer';
 import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
@@ -397,7 +397,7 @@ describe('drafting', () => {
   });
 });
 
-function getWaitingFor(player: Player): SelectCard<IProjectCard> {
+function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {
   return cast(player.getWaitingFor(), SelectCard<IProjectCard>);
 }
 
@@ -410,7 +410,7 @@ function cardNames(cards: Array<ICard>): Array<CardName> {
   return cards.map((card) => card.name);
 }
 
-function initialCardSelection(player: Player) {
+function initialCardSelection(player: IPlayer) {
   const selectInitialCards = cast(player.getWaitingFor(), SelectInitialCards);
   const corporationCards = cast(selectInitialCards.options[0], SelectCard);
   const preludeCards = selectInitialCards.options.length === 3 ? cast(selectInitialCards.options[1], SelectCard) : undefined;
@@ -422,7 +422,7 @@ function initialCardSelection(player: Player) {
   };
 }
 
-function draftSelection(player: Player) {
+function draftSelection(player: IPlayer) {
   return getWaitingFor(player).cards.map((card) => card.name);
 }
 

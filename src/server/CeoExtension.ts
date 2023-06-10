@@ -1,9 +1,10 @@
+import {IPlayer} from './IPlayer';
 import {Player} from './Player';
 import {isCeoCard} from './cards/ceos/ICeoCard';
 import {CardName} from '../common/cards/CardName';
 
 export class CeoExtension {
-  public static getBonusWildTags(player: Player) {
+  public static getBonusWildTags(player: IPlayer) {
     const xavier = player.getCeo(CardName.XAVIER);
     return xavier?.opgActionIsActive === true ? 2 : 0;
   }

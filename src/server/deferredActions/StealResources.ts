@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -7,7 +7,7 @@ import {CardName} from '../../common/cards/CardName';
 
 export class StealResources extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public resource: Resource,
     public count: number = 1,
     public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
@@ -22,7 +22,7 @@ export class StealResources extends DeferredAction {
       return undefined;
     }
 
-    let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
+    let candidates: Array<IPlayer> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
     if (this.resource === Resource.PLANTS) {
       candidates = candidates.filter((p) => !p.plantsAreProtected());
     }

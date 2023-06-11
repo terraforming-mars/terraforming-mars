@@ -48,6 +48,7 @@ import {Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {AresHandler} from '../ares/AresHandler';
 import {AwardScorer} from '../awards/AwardScorer';
+import {SpaceId} from '@/common/Types';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -89,7 +90,7 @@ export class Server {
       passedPlayers: game.getPassedPlayers(),
       pathfinders: createPathfindersModel(game),
       phase: game.phase,
-      spaces: this.getSpaces(game.board),
+      spaces: this.getSpaces(game.board, game.gagarinBase),
       spectatorId: game.spectatorId,
       temperature: game.getTemperature(),
       isTerraformed: game.marsIsTerraformed(),
@@ -523,7 +524,7 @@ export class Server {
     return undefined;
   }
 
-  private static getSpaces(board: Board): Array<SpaceModel> {
+  private static getSpaces(board: Board, gagarin: Array<SpaceId>): Array<SpaceModel> {
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
     const noctisCitySpaceIds = board.getNoctisCitySpaceId();
 
@@ -534,6 +535,7 @@ export class Server {
       } else if (noctisCitySpaceIds === space.id) {
         highlight = 'noctis';
       }
+
       const model: SpaceModel = {
         x: space.x,
         y: space.y,
@@ -550,6 +552,11 @@ export class Server {
       if (space.tile?.rotated === true) {
         model.rotated = true;
       }
+      const gagarinIndex = gagarin.indexOf(space.id);
+      if (gagarinIndex > -1) {
+        model.gagarin = gagarinIndex;
+      }
+
       return model;
     });
   }
@@ -617,7 +624,7 @@ export class Server {
         logisticsRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
         colonyRate: moonData.colonyRate,
-        spaces: this.getSpaces(moonData.moon),
+        spaces: this.getSpaces(moonData.moon, []),
       };
     }, () => undefined);
   }

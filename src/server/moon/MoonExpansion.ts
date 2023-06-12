@@ -15,6 +15,7 @@ import {Resource} from '../../common/Resource';
 import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
 import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
+import {SpaceId} from '../../common/Types';
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -74,17 +75,17 @@ export class MoonExpansion {
   }
 
   public static addMineTile(
-    player: IPlayer, spaceId: string, cardName: CardName | undefined = undefined): void {
+    player: IPlayer, spaceId: SpaceId, cardName: CardName | undefined = undefined): void {
     MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_MINE, card: cardName});
   }
 
   public static addHabitatTile(
-    player: IPlayer, spaceId: string, cardName: CardName | undefined = undefined): void {
+    player: IPlayer, spaceId: SpaceId, cardName: CardName | undefined = undefined): void {
     MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_HABITAT, card: cardName});
   }
 
   public static addRoadTile(
-    player: IPlayer, spaceId: string, cardName: CardName | undefined = undefined): void {
+    player: IPlayer, spaceId: SpaceId, cardName: CardName | undefined = undefined): void {
     MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_ROAD, card: cardName});
   }
 
@@ -92,7 +93,7 @@ export class MoonExpansion {
   // isn't.
 
   // Update: I think this is going to have to merge with addTile. It won't be bad.
-  public static addTile(player: IPlayer, spaceId: string, tile: Tile): void {
+  public static addTile(player: IPlayer, spaceId: SpaceId, tile: Tile): void {
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
       const space = moonData.moon.getSpace(spaceId);

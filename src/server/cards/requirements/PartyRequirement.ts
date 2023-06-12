@@ -1,6 +1,6 @@
 import {IPartyCardRequirement} from '../../../common/cards/ICardRequirement';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRequirement} from './CardRequirement';
 import {RequirementType} from '../../../common/cards/RequirementType';
@@ -11,7 +11,7 @@ export class PartyRequirement extends CardRequirement implements IPartyCardRequi
     super();
     this.party = party;
   }
-  public satisfies(player: Player): boolean {
+  public satisfies(player: IPlayer): boolean {
     return Turmoil.getTurmoil(player.game).canPlay(player, this.party);
   }
 }

@@ -1,6 +1,6 @@
 import {IProductionCardRequirement} from '../../../common/cards/ICardRequirement';
 import {Resource} from '../../../common/Resource';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {InequalityRequirement} from './InequalityRequirement';
 import {Options} from './CardRequirement';
 import {RequirementType} from '../../../common/cards/RequirementType';
@@ -12,7 +12,7 @@ export class ProductionRequirement extends InequalityRequirement implements IPro
     super(amount, options);
     this.resource = resource;
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.production[this.resource];
   }
 }

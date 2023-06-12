@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resource} from '../../../common/Resource';
@@ -32,7 +32,7 @@ export class GeologicalSurvey extends SurveyCard {
     });
   }
 
-  public checkForBonuses(cardOwner: Player, space: ISpace) {
+  public checkForBonuses(cardOwner: IPlayer, space: ISpace) {
     super.testForStandardResource(cardOwner, space, Resource.STEEL, SpaceBonus.STEEL);
     super.testForStandardResource(cardOwner, space, Resource.TITANIUM, SpaceBonus.TITANIUM);
     super.testForStandardResource(cardOwner, space, Resource.HEAT, SpaceBonus.HEAT);

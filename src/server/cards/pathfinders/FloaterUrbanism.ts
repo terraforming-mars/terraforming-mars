@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -34,11 +34,11 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
   }
 
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.getResourceCount(CardResource.FLOATER) > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const cards = player.getCardsWithResources(CardResource.FLOATER);
     const input = new SelectCard(
       'Choose a card to move a floater to a Venusian habitat.',

@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resource} from '../../../common/Resource';
@@ -33,7 +33,7 @@ export class EcologicalSurvey extends SurveyCard {
     });
   }
 
-  public checkForBonuses(cardOwner: Player, space: ISpace) {
+  public checkForBonuses(cardOwner: IPlayer, space: ISpace) {
     super.testForStandardResource(cardOwner, space, Resource.PLANTS, SpaceBonus.PLANT);
     super.testForCardResource(cardOwner, space, CardResource.MICROBE, SpaceBonus.MICROBE);
     super.testForCardResource(cardOwner, space, CardResource.ANIMAL, SpaceBonus.ANIMAL);

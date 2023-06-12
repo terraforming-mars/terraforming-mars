@@ -9,7 +9,7 @@ import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
 import {runAllActions} from '../TestingUtils';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {GameId} from '../../src/common/Types';
 import {QueryResult} from 'pg';
@@ -202,7 +202,7 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with our own simple option, and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
         const simpleOption = new SelectOption('', '', () => undefined);
         p.setWaitingFor(simpleOption, () => {
@@ -279,7 +279,7 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
         const simpleOption = new SelectOption('', '', () => {
           player.megaCredits++;
@@ -360,7 +360,7 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
         const simpleOption = new SelectOption('', '', () => {
           player.megaCredits++;

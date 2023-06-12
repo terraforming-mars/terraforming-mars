@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -27,7 +27,7 @@ export class Ryu extends CeoCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;
     }
@@ -40,7 +40,7 @@ export class Ryu extends CeoCard {
               player.production.heat > -5;
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const choices = new OrOptions();
 
@@ -78,7 +78,7 @@ export class Ryu extends CeoCard {
     return choices;
   }
 
-  private productionIsDecreasable(player: Player, resource: Resource): boolean {
+  private productionIsDecreasable(player: IPlayer, resource: Resource): boolean {
     let minProduction = 0;
     if (resource === Resource.MEGACREDITS) minProduction -= 5;
     return player.production.get(resource) > minProduction;

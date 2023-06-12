@@ -2,7 +2,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
@@ -24,19 +24,19 @@ export abstract class MarketCard extends Card implements IActionCard {
     super(properties);
   }
 
-  private canBuy(player: Player) {
+  private canBuy(player: IPlayer) {
     return player.spendableMegacredits() >= this.buyingTerms.from;
   }
 
-  private canSell(player: Player) {
+  private canSell(player: IPlayer) {
     return player.getResource(this.tradeResource) >= this.sellingTerms.from;
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return this.canBuy(player) || this.canSell(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const offerBuy = this.canBuy(player);
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
@@ -52,7 +52,7 @@ export abstract class MarketCard extends Card implements IActionCard {
     return undefined;
   }
 
-  private getBuyingOption(player: Player): SelectAmount {
+  private getBuyingOption(player: IPlayer): SelectAmount {
     const availableMC = player.spendableMegacredits();
     const terms = this.buyingTerms;
     let limit = Math.floor(availableMC / terms.from);
@@ -81,7 +81,7 @@ export abstract class MarketCard extends Card implements IActionCard {
     );
   }
 
-  private getSellingOption(player: Player) {
+  private getSellingOption(player: IPlayer) {
     const terms = this.sellingTerms;
     if (terms.from !== 1) {
       throw new Error('selling from !== 1 not yet supported.');

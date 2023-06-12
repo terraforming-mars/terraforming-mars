@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Options} from './CardRequirement';
 import {GlobalParameterRequirement} from './GlobalParameterRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
@@ -17,7 +17,7 @@ export class OxygenRequirement extends GlobalParameterRequirement {
     super(amount, options);
   }
 
-  public getGlobalValue(player: Player) {
+  public getGlobalValue(player: IPlayer) {
     return player.game.getOxygenLevel();
   }
 }

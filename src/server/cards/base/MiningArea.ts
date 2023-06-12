@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardName} from '../../../common/cards/CardName';
 import {MiningCard} from './MiningCard';
@@ -23,7 +23,7 @@ export class MiningArea extends MiningCard {
       metadata,
     );
   }
-  protected override getAvailableSpaces(player: Player) {
+  protected override getAvailableSpaces(player: IPlayer) {
     return super.getAvailableSpaces(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player));
   }

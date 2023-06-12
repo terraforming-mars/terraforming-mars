@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -38,18 +38,18 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  private canPlaceOcean(player: Player) {
+  private canPlaceOcean(player: IPlayer) {
     return player.game.canAddOcean() && player.canAfford(0, {tr: {oceans: 1}});
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.titanium > 0) {
       return true;
     }
     return this.resourceCount > 0 && this.canPlaceOcean(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
 
     const addAsteroidToSelf = function() {

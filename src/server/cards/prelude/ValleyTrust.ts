@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
@@ -41,7 +40,7 @@ export class ValleyTrust extends Card implements ICorporationCard {
     return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     const game = player.game;
     const cardsDrawn: Array<IProjectCard> = [
       game.preludeDeck.draw(game),

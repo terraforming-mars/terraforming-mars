@@ -5,7 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -38,7 +38,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     const cardHasResources = this.resourceCount > 0;
     const canPayForAsteroid = player.canAfford(6, {titanium: true});
 
@@ -48,7 +48,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     return player.canAfford(0, {tr: {temperature: 1}}) && cardHasResources;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
     const opts: Array<SelectOption> = [];
 
@@ -73,7 +73,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     return new OrOptions(...opts);
   }
 
-  private addResource(player: Player, asteroidCards: ICard[]) {
+  private addResource(player: IPlayer, asteroidCards: ICard[]) {
     player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
 
     if (asteroidCards.length === 1) {
@@ -92,7 +92,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     );
   }
 
-  private spendResource(player: Player) {
+  private spendResource(player: IPlayer) {
     this.resourceCount--;
     LogHelper.logRemoveResource(player, this, 1, 'raise temperature 1 step');
     player.game.increaseTemperature(player, 1);

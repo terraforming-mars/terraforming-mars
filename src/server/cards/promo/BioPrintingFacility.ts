@@ -5,7 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -33,11 +33,11 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.energy >= 2;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
     player.deductResource(Resource.ENERGY, 2);
 

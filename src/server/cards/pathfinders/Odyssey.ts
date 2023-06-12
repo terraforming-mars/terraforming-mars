@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -42,7 +42,7 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
   }
 
 
-  private availableEventCards(player: Player) {
+  private availableEventCards(player: IPlayer) {
     this.checkLoops++;
     try {
       const array: Array<PlayableCard> = [];
@@ -60,11 +60,11 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
     }
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return this.availableEventCards(player).length > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const eventCards = this.availableEventCards(player);
     return new SelectProjectCardToPlay(
       player,

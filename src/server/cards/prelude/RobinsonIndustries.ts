@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -31,11 +31,11 @@ export class RobinsonIndustries extends Card implements IActionCard, ICorporatio
       },
     });
   }
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.canAfford(4);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     let minimum = player.production.megacredits;
     let lowest: Array<SelectOption> = [];
 

@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IGame} from '../../IGame';
 import {Delegate, NeutralPlayer} from '../Turmoil';
 import {MultiSet} from 'mnemonist';
@@ -34,7 +34,7 @@ export abstract class Party {
           currentIndex = players.indexOf(game.getPlayerById(this.partyLeader));
         }
 
-        let playersToCheck: Array<Player | NeutralPlayer> = [];
+        let playersToCheck: Array<IPlayer | NeutralPlayer> = [];
 
         // Manage if it's the first player or the last
         if (players.length === 1 || currentIndex === 0) {

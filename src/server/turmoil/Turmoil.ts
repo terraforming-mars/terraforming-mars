@@ -6,7 +6,6 @@ import {Unity} from './parties/Unity';
 import {Kelvinists} from './parties/Kelvinists';
 import {Reds} from './parties/Reds';
 import {Greens} from './parties/Greens';
-import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
 import {IGame} from '../IGame';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
@@ -447,7 +446,7 @@ export class Turmoil {
     return victory;
   }
 
-  public getSendDelegateInput(player: Player): SelectPartyToSendDelegate | undefined {
+  public getSendDelegateInput(player: IPlayer): SelectPartyToSendDelegate | undefined {
     if (this.hasDelegatesInReserve(player.id)) {
       let sendDelegate;
       if (!this.usedFreeDelegateAction.has(player.id)) {
@@ -491,7 +490,7 @@ export class Turmoil {
     return result;
   }
 
-  public static deserialize(d: SerializedTurmoil, playerIds: Array<Player>): Turmoil {
+  public static deserialize(d: SerializedTurmoil, playerIds: Array<IPlayer>): Turmoil {
     const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
     const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer);
 

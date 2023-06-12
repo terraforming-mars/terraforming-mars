@@ -2,7 +2,7 @@ import {IActionCard} from '../ICard';
 import {PlayerInput} from '../../PlayerInput';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -41,7 +41,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
   public canAct(): boolean {
     return true;
   }
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const opts: Array<PlayerInput> = [];
 
     const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
@@ -62,7 +62,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
     return new OrOptions(...opts);
   }
 
-  private spendResource(player: Player, amount: number) {
+  private spendResource(player: IPlayer, amount: number) {
     player.removeResourceFrom(this, amount, {log: false});
 
     const megaCreditsGained = 3 * amount;

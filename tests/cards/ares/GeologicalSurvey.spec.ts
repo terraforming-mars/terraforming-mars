@@ -4,7 +4,6 @@ import {GeologicalSurvey} from '../../../src/server/cards/ares/GeologicalSurvey'
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/server/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -19,7 +18,7 @@ import {testGame} from '../../TestGame';
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
   let player: TestPlayer;
-  let redPlayer : Player;
+  let redPlayer : TestPlayer;
   let game: Game;
 
   beforeEach(() => {

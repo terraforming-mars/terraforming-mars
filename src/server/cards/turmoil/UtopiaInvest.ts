@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -38,7 +38,7 @@ export class UtopiaInvest extends Card implements IActionCard, ICorporationCard 
       },
     });
   }
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.production.megacredits +
                 player.production.steel +
                 player.production.titanium +
@@ -46,10 +46,10 @@ export class UtopiaInvest extends Card implements IActionCard, ICorporationCard 
                 player.production.energy +
                 player.production.heat > -5;
   }
-  private log(player: Player, type: string) {
+  private log(player: IPlayer, type: string) {
     player.game.log('${0} decreased ${1} production 1 step to gain 4 ${2}', (b) => b.player(player).string(type).string(type));
   }
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const result = new OrOptions();
     result.title = 'Select production to decrease one step and gain 4 resources';
 

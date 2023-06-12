@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {Card} from '../Card';
 
@@ -31,7 +31,7 @@ export class Supercapacitors extends Card implements IProjectCard {
     });
   }
 
-  public static onProduction(player: Player) {
+  public static onProduction(player: IPlayer) {
     if (player.energy === 0) {
       player.finishProductionPhase();
       return;

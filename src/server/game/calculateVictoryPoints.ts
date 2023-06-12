@@ -1,6 +1,6 @@
 import * as constants from '../../common/constants';
 import {Phase} from '../../common/Phase';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PathfindersExpansion} from '../pathfinders/PathfindersExpansion';
@@ -8,7 +8,6 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {FundedAward} from '../awards/FundedAward';
 import {AwardScorer} from '../awards/AwardScorer';
-import {IPlayer} from '../IPlayer';
 
 export function calculateVictoryPoints(player: IPlayer) {
   const victoryPointsBreakdown = new VictoryPointsBreakdown();
@@ -85,7 +84,7 @@ export function calculateVictoryPoints(player: IPlayer) {
   return victoryPointsBreakdown.points;
 }
 
-function maybeSetVP(thisPlayer: IPlayer, awardWinner: Player, fundedAward: FundedAward, vps: number, place: '1st' | '2nd', vpb: VictoryPointsBreakdown) {
+function maybeSetVP(thisPlayer: IPlayer, awardWinner: IPlayer, fundedAward: FundedAward, vps: number, place: '1st' | '2nd', vpb: VictoryPointsBreakdown) {
   if (thisPlayer.id === awardWinner.id) {
     vpb.setVictoryPoints(
       'awards',
@@ -101,7 +100,7 @@ function giveAwards(player: IPlayer, vpb: VictoryPointsBreakdown) {
   player.game.fundedAwards.forEach((fundedAward) => {
     const award = fundedAward.award;
     const scorer = new AwardScorer(player.game, award);
-    const players: Array<Player> = player.game.getPlayers().slice();
+    const players: Array<IPlayer> = player.game.getPlayers().slice();
     players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
 
     // There is one rank 1 player

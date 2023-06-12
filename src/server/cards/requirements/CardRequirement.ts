@@ -1,6 +1,6 @@
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {ICardRequirement} from '../../../common/cards/ICardRequirement';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 
 export type Options = {max?: boolean, all?: boolean, text?: string};
 
@@ -24,5 +24,5 @@ export abstract class CardRequirement implements ICardRequirement {
     this.text = options?.text;
   }
 
-  public abstract satisfies(player: Player, thinkTankResources?: number) : boolean | YesAnd;
+  public abstract satisfies(player: IPlayer, thinkTankResources?: number) : boolean | YesAnd;
 }

@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -36,14 +36,14 @@ export class HuygensObservatory extends Card implements IProjectCard {
     });
   }
 
-  private trade(player: Player, colonies: Array<IColony>) {
+  private trade(player: IPlayer, colonies: Array<IColony>) {
     return new SelectColony('Select colony tile to trade with for free', 'Select', colonies, (colony: IColony) => {
       colony.trade(player);
       return undefined;
     });
   }
 
-  private tryToTrade(player: Player) {
+  private tryToTrade(player: IPlayer) {
     const game = player.game;
     const tradeableColonies = ColoniesHandler.tradeableColonies(player.game);
     if (tradeableColonies.length === 0) {
@@ -93,11 +93,11 @@ export class HuygensObservatory extends Card implements IProjectCard {
       game.defer(new SimpleDeferredAction(player, () => orOptions));
     }
   }
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0 || ColoniesHandler.tradeableColonies(player.game).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
 
     if (player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0) {

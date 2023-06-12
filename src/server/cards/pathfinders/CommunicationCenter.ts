@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -41,7 +41,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
   // Card behavior is in PathfindersExpansion.onCardPlayed. Card.onCardPlayed
   // does not apply to _any card played_
 
-  public onResourceAdded(player: Player, playedCard: ICard) {
+  public onResourceAdded(player: IPlayer, playedCard: ICard) {
     if (playedCard.name !== this.name) return;
     while (this.resourceCount >= 3) {
       this.resourceCount -= 3;

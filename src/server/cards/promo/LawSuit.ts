@@ -36,7 +36,7 @@ export class LawSuit extends Card implements IProjectCard {
     return player.game.getPlayersById(player.removingPlayers);
   }
 
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     return this.targets(player).length > 0;
   }
 

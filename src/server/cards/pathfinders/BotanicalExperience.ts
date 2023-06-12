@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -48,7 +47,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
     }
   }
 
-  public onResourceAdded(player: Player, playedCard: ICard) {
+  public onResourceAdded(player: IPlayer, playedCard: ICard) {
     if (playedCard.name !== this.name) return;
     if (this.resourceCount >= 3) {
       const delta = Math.floor(this.resourceCount / 3);

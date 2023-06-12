@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Tag} from '../../../common/cards/Tag';
@@ -27,7 +27,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     });
   }
   public bonusResource?: Array<Resource>;
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
   private isAres(): boolean {
@@ -40,7 +40,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     }
     return undefined;
   }
-  protected getAvailableSpaces(player: Player): Array<ISpace> {
+  protected getAvailableSpaces(player: IPlayer): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
       // Ares-only: exclude spaces already covered (which is only returned if the tile is a hazard tile.)
       .filter((space) => space.tile === undefined)
@@ -64,13 +64,13 @@ export abstract class MiningCard extends Card implements IProjectCard {
     return TileType.MINING_AREA;
   }
 
-  public produce(player: Player) {
+  public produce(player: IPlayer) {
     if (this.bonusResource && this.bonusResource.length === 1) {
       player.production.add(this.bonusResource[0], 1, {log: true});
     }
   }
 
-  public override bespokePlay(player: Player): SelectSpace {
+  public override bespokePlay(player: IPlayer): SelectSpace {
     return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: ISpace) => {
       const bonusResources = [];
       if (space.bonus.includes(SpaceBonus.STEEL)) {

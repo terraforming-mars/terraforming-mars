@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
@@ -33,14 +33,14 @@ export class NoctisCity extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.game.board.getNoctisCitySpaceId !== undefined) {
       return true;
     } else {
       return player.game.board.getAvailableSpacesForCity(player).length > 0;
     }
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const noctisCitySpaceId = player.game.board.getNoctisCitySpaceId();
     if (noctisCitySpaceId !== undefined) {
       const space = player.game.board.getSpace(noctisCitySpaceId);

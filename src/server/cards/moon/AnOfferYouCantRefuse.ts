@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerId} from '../../../common/Types';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -30,7 +30,7 @@ export class AnOfferYouCantRefuse extends Card {
     });
   }
 
-  private isReplaceableDelegate(delegate: Delegate, player: Player, party: IParty): delegate is PlayerId {
+  private isReplaceableDelegate(delegate: Delegate, player: IPlayer, party: IParty): delegate is PlayerId {
     if (delegate === player.id || delegate === 'NEUTRAL') {
       return false;
     }
@@ -73,7 +73,7 @@ export class AnOfferYouCantRefuse extends Card {
   }
 
   // You can play this if you have an available delegate, and if you can swap with a non-neutral delegate without changing the party leader
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
     if (!turmoil.hasDelegatesInReserve(player.id)) {
       return false;
@@ -110,7 +110,7 @@ export class AnOfferYouCantRefuse extends Card {
     return orOptions;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
     const orOptions = new OrOptions();

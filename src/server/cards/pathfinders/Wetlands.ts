@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -40,7 +40,7 @@ export class Wetlands extends Card implements IProjectCard {
     });
   }
 
-  public availableSpaces(player: Player) {
+  public availableSpaces(player: IPlayer) {
     const board = player.game.board;
     const adjacentOceans: (space: ISpace) => number = (space) => {
       const adjacentSpaces = board.getAdjacentSpaces(space);
@@ -56,14 +56,14 @@ export class Wetlands extends Card implements IProjectCard {
       .filter((space) => !spacesNextToRedCity.includes(space));
   }
 
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     if (!player.hasUnits(this.reserveUnits)) {
       return false;
     }
     return this.availableSpaces(player).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.deductUnits(this.reserveUnits);
 
     return new SelectSpace(

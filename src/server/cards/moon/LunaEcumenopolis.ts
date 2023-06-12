@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
@@ -36,7 +36,7 @@ export class LunaEcumenopolis extends Card {
     });
   }
 
-  private canAffordTRBump(player: Player) {
+  private canAffordTRBump(player: IPlayer) {
     // Note for someone paying close attention:
     //
     // In the real world, this card can be resolved in one of two orders:
@@ -58,7 +58,7 @@ export class LunaEcumenopolis extends Card {
     return player.canAfford(0, {tr: {moonHabitat: 2, tr: expectedTRBump}});
   }
 
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     if (!this.canAffordTRBump(player)) {
       return false;
     }
@@ -98,7 +98,7 @@ export class LunaEcumenopolis extends Card {
     return false;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));

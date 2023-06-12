@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {BoardName} from '../../../common/boards/BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
@@ -35,7 +35,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     });
   }
 
-  private getSpacesForCity(player: Player): ReadonlyArray<ISpace> {
+  private getSpacesForCity(player: IPlayer): ReadonlyArray<ISpace> {
     if (player.game.gameOptions.boardName === BoardName.HELLAS) {
       // https://boardgamegeek.com/thread/1953628/article/29627211#29627211
       return player.game.board.getAvailableSpacesForType(player, 'city');
@@ -44,11 +44,11 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     return player.game.board.getAvailableSpacesForType(player, 'volcanic');
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return this.getSpacesForCity(player).length > 0 && player.production.energy >= 1;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(
       new PlaceCityTile(
         player,

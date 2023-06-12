@@ -30,7 +30,11 @@ export interface Behavior {
   /** Select one of these actions */
   or?: OrBehavior;
 
-  /** Spend these resources before taking the action. */
+  /**
+   * Spend one of resources before taking the action.
+   *
+   * This is specifically designed to spend only one resource type.
+   */
   spend?: Partial<OneOfType<Spend>>;
 
   /** Gain or lose production */

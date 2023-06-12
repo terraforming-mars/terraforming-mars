@@ -40,6 +40,7 @@ import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 import {ExperiencedMartians} from './ExperiencedMartians';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
+import {GagarinMobileBase} from './GagarinMobileBase';
 import {GeologicalExpedition} from './GeologicalExpedition';
 import {HabitatMarte} from './HabitatMarte';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
@@ -207,7 +208,7 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.COLLEGIUM_COPERNICUS]: {Factory: CollegiumCopernicus, compatibility: 'colonies'},
     [CardName.ROBIN_HAULINGS]: {Factory: RobinHaulings, compatibility: ['venus', 'pathfinders']},
     [CardName.ODYSSEY]: {Factory: Odyssey},
-    // [CardName.GAGARIN_MOBILE_BASE]: {Factory: GagarinMobileBase},
+    [CardName.GAGARIN_MOBILE_BASE]: {Factory: GagarinMobileBase},
     // [CardName.MARS_FRONTIER_ALLIANCE]: {Factory: MarsFrontierAlliance},
     [CardName.MIND_SET_MARS]: {Factory: MindSetMars, compatibility: 'turmoil'},
     [CardName.HABITAT_MARTE]: {Factory: HabitatMarte, compatibility: 'pathfinders'},

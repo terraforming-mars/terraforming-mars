@@ -12,6 +12,10 @@
     <template v-if="tileView === 'coords'">
       <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>
     </template>
+    <template v-if="space.gagarin !== undefined">
+      <div v-if="space.gagarin === 0" class='gagarin'></div>
+      <div v-else class='gagarin visited'></div>
+    </template>
   </div>
 </template>
 

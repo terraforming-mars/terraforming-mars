@@ -49,6 +49,12 @@
   "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(AKTION: Entferne 2 Agenden von dieser Karte, um 1 Delegierten in eine Partei zu platzieren.)",
   "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(AKTION: Entferne 5 Agenden von dieser Karte, um ein Stadtplättchen zu platzieren.)",
   "(You start with 44 M€ and 1 agenda resource to this card.)": "(Du beginnst mit 44 M€. Füge dieser Karte 1 Agenda hinzu.)",
+  
+  "GAGARIN MOBILE BASE": "Gagarin",
+  "move": "bewege",
+  "(Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.)": "(AKTION: Bewege den Gagarin-Marker auf das nächste freie benachbarte (auch reservierte) Feld. Erhalte den Platzierungsbonus des Feldes.)",
+  "(Effect: When another player places a tile where the Base is, move the Base.)": "(EFFEKT: Wenn ein anderer Spieler ein Plättchen auf das Gagarin-Feld platziert, bewege den Marker wieder auf das nächste freie benachbarte Feld und erhalte den Platzierungsbonus.)",
+  "(You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.)": "(Du beginnst mit 42 M€. Als deine erste Aktion platzierst du den Gagarin-Mobilstation-Marker auf ein (auch reserviertes) Feld auf. Erhalte den Platzierungsbonus des Feldes.)",
 
   "Polaris": "Polaris",
   "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(EFFEKT: Wenn ein Ozeanplättchen platziert wird, erhöhe deine M€-Produktion um 1. Wenn du ein Ozeanplättchen platzierst, erhalte 4 M€.)",

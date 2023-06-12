@@ -12,7 +12,6 @@ import {ISpace} from './boards/ISpace';
 import {LogBuilder} from './logs/LogBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
-import {Player} from './Player';
 import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
 import {CardResource} from '../common/CardResource';
@@ -88,9 +87,9 @@ export interface IGame extends Logger {
   serialize(): SerializedGame;
   isSoloMode() :boolean;
   // Function to retrieve a player by it's id
-  getPlayerById(id: PlayerId): Player;
+  getPlayerById(id: PlayerId): IPlayer;
   // Function to return an array of players from an array of player ids
-  getPlayersById(ids: Array<PlayerId>): Array<Player>;
+  getPlayersById(ids: Array<PlayerId>): Array<IPlayer>;
   defer(action: DeferredAction, priority?: Priority): void;
   milestoneClaimed(milestone: IMilestone): boolean;
   marsIsTerraformed(): boolean;
@@ -101,23 +100,23 @@ export interface IGame extends Logger {
   hasBeenFunded(award: IAward): boolean;
   allAwardsFunded(): boolean;
   allMilestonesClaimed(): boolean;
-  hasPassedThisActionPhase(player: Player): boolean;
+  hasPassedThisActionPhase(player: IPlayer): boolean;
   // Public for testing.
   incrementFirstPlayer(): void;
   // Only used in the prelude The New Space Race.
-  overrideFirstPlayer(newFirstPlayer: Player): void;
+  overrideFirstPlayer(newFirstPlayer: IPlayer): void;
   gameIsOver(): boolean;
   isDoneWithFinalProduction(): boolean;
   doneWorldGovernmentTerraforming(): void;
   playerHasPassed(player: IPlayer): void;
   hasResearched(player: IPlayer): boolean;
-  playerIsFinishedWithResearchPhase(player: Player): void;
-  playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void;
+  playerIsFinishedWithResearchPhase(player: IPlayer): void;
+  playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: IPlayer, cards : Array<IProjectCard>): void;
   playerIsFinishedTakingActions(): void;
   // Part of final greenery placement.
-  canPlaceGreenery(player: Player): boolean;
+  canPlaceGreenery(player: IPlayer): boolean;
   // Called when a player cannot or chose not to place any more greeneries.
-  playerIsDoneWithGame(player: Player): void;
+  playerIsDoneWithGame(player: IPlayer): void;
   /**
    * Find the next player who might be able to place a final greenery and ask them.
    *
@@ -149,19 +148,19 @@ export interface IGame extends Logger {
   canRemoveOcean(): boolean;
   addOcean(player: IPlayer, space: ISpace): void;
   removeTile(spaceId: string): void;
-  getPlayers(): ReadonlyArray<Player>;
+  getPlayers(): ReadonlyArray<IPlayer>;
   // Players returned in play order starting with first player this generation.
-  getPlayersInGenerationOrder(): Array<Player>;
+  getPlayersInGenerationOrder(): ReadonlyArray<IPlayer>;
   /**
    * Returns the Player holding this card, or throws.
    */
-  getCardPlayerOrThrow(name: CardName): Player;
+  getCardPlayerOrThrow(name: CardName): IPlayer;
   /**
    * Returns the Player holding this card, or throws.
    */
-  getCardPlayerOrUndefined(name: CardName): Player | undefined;
+  getCardPlayerOrUndefined(name: CardName): IPlayer | undefined;
   // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
-  getCardHolder(name: CardName): [Player | undefined, IProjectCard | undefined];
+  getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined];
   getCardsInHandByResource(player: IPlayer, resourceType: CardResource): void;
   getCardsInHandByType(player: IPlayer, cardType: CardType): void;
   log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}): void;

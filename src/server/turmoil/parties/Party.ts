@@ -1,5 +1,5 @@
-import {IPlayer} from '../../IPlayer';
 import {IGame} from '../../IGame';
+import {IPlayer} from '../../IPlayer';
 import {Delegate, NeutralPlayer} from '../Turmoil';
 import {MultiSet} from 'mnemonist';
 

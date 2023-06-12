@@ -14,6 +14,7 @@ import {ServeAsset} from './ServeAsset';
 import {NewGameConfig} from '../../common/game/NewGameConfig';
 import {GameId, PlayerId, SpectatorId} from '../../common/Types';
 import {generateRandomId} from '../server-ids';
+import {IGame} from '../IGame';
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
 
@@ -127,7 +128,7 @@ export class GameHandler extends Handler {
             startingCeos: gameReq.startingCeos,
           };
 
-          let game: Game;
+          let game: IGame;
           if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
             const serialized = await Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId);
             game = Cloner.clone(gameId, players, firstPlayerIdx, serialized);

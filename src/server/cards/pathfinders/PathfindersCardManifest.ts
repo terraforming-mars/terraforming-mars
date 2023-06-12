@@ -40,6 +40,7 @@ import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 import {ExperiencedMartians} from './ExperiencedMartians';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
+import {GagarinMobileBase} from './GagarinMobileBase';
 import {GeologicalExpedition} from './GeologicalExpedition';
 import {HabitatMarte} from './HabitatMarte';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
@@ -90,6 +91,7 @@ import {SocialEvents} from './SocialEvents';
 import {SoilDetoxification} from './SoilDetoxification';
 import {Solarpedia} from './Solarpedia';
 import {SolarStorm} from './SolarStorm';
+import {SolBank} from './SolBank';
 import {SoylentSeedlingSystems} from './SoylentSeedlingSystems';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
@@ -200,13 +202,13 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.MARS_MATHS]: {Factory: MarsMaths},
     [CardName.MARS_DIRECT]: {Factory: MarsDirect, compatibility: 'pathfinders'},
     [CardName.MARTIAN_INSURANCE_GROUP]: {Factory: MartianInsuranceGroup, compatibility: 'pathfinders'},
-    // [CardName.SOLBANK]: {Factory: SolBank},
+    [CardName.SOLBANK]: {Factory: SolBank},
     [CardName.BIO_SOL]: {Factory: BioSol},
     [CardName.AURORAI]: {Factory: Aurorai, compatibility: 'pathfinders'},
     [CardName.COLLEGIUM_COPERNICUS]: {Factory: CollegiumCopernicus, compatibility: 'colonies'},
     [CardName.ROBIN_HAULINGS]: {Factory: RobinHaulings, compatibility: ['venus', 'pathfinders']},
     [CardName.ODYSSEY]: {Factory: Odyssey},
-    // [CardName.GAGARIN_MOBILE_BASE]: {Factory: GagarinMobileBase},
+    [CardName.GAGARIN_MOBILE_BASE]: {Factory: GagarinMobileBase},
     // [CardName.MARS_FRONTIER_ALLIANCE]: {Factory: MarsFrontierAlliance},
     [CardName.MIND_SET_MARS]: {Factory: MindSetMars, compatibility: 'turmoil'},
     [CardName.HABITAT_MARTE]: {Factory: HabitatMarte, compatibility: 'pathfinders'},

@@ -16,6 +16,7 @@ import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopern
 import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {newMessage} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
+import {Payment} from '../../common/inputs/Payment';
 
 export class Colonies {
   private player: IPlayer;
@@ -184,7 +185,7 @@ export class TradeWithTitanium implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.deductResource(Resource.TITANIUM, this.tradeCost);
+    this.player.pay(Payment.of({titanium: this.tradeCost}));
     this.player.game.log('${0} spent ${1} titanium to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
   }

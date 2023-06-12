@@ -17,4 +17,5 @@ export type SpaceModel = {
   tileType?: TileType;
   highlight?: SpaceHighlight;
   rotated?: true; // Absent or true
+  gagarin?: number; // 0 means current
 }

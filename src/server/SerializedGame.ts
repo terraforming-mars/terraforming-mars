@@ -6,7 +6,7 @@ import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
-import {PlayerId, GameId, SpectatorId} from '../common/Types';
+import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {GameOptions} from './GameOptions';
 import {AresData} from '../common/ares/AresData';
 import {LogMessage} from '../common/logs/LogMessage';
@@ -33,6 +33,7 @@ export type SerializedGame = {
     draftRound: number;
     first: SerializedPlayer | PlayerId;
     fundedAwards: Array<SerializedFundedAward>;
+    gagarinBase: Array<SpaceId>;
     gameAge: number;
     gameLog: Array<LogMessage>;
     gameOptions: GameOptions;

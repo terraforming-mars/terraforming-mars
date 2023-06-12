@@ -26,7 +26,7 @@ import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
 import {Player} from './Player';
 import {IPlayer} from './IPlayer';
-import {PlayerId, GameId, SpectatorId} from '../common/Types';
+import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
@@ -141,6 +141,8 @@ export class Game implements Logger {
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
   // Syndicate Pirate Raids
   public syndicatePirateRaider?: PlayerId;
+  // Gagarin Mobile Base
+  public gagarinBase: Array<SpaceId> = [];
 
   // The set of tags available in this game.
   public readonly tags: ReadonlyArray<Tag>;
@@ -390,6 +392,7 @@ export class Game implements Logger {
       draftRound: this.draftRound,
       first: this.first.id,
       fundedAwards: serializeFundedAwards(this.fundedAwards),
+      gagarinBase: this.gagarinBase,
       gameAge: this.gameAge,
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
@@ -1618,6 +1621,8 @@ export class Game implements Logger {
     game.initialDraftIteration = d.initialDraftIteration;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
+    // TODO(kberg): remove ?? [] by 2023-07-15
+    game.gagarinBase = d.gagarinBase ?? [];
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {

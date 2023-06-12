@@ -7,6 +7,7 @@ import {GameModule} from '../cards/GameModule';
 export interface IColonyMetadata {
   module?: GameModule; // TODO(kberg): attach gameModule to the server colonies themselves.
   readonly name: ColonyName;
+  readonly description: [string, string, string];
   readonly buildType: ColonyBenefit;
   readonly buildQuantity: Array<number>; // Default is [1,1,1]
   readonly buildResource?: Resource;

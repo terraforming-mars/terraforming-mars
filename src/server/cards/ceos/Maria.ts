@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 
 import {IColony} from '../../colonies/IColony';
 import {SelectColony} from '../../inputs/SelectColony';
@@ -56,7 +56,7 @@ export class Maria extends CeoCard {
     return selectColony;
   }
 
-  private checkActivation(colony: IColony, game: Game): void {
+  private checkActivation(colony: IColony, game: IGame): void {
     if (colony.isActive) return;
     for (const player of game.getPlayers()) {
       for (const card of player.tableau) {

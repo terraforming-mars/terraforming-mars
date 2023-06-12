@@ -1,6 +1,7 @@
 import * as prometheus from 'prom-client';
 import {Database} from './Database';
 import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {PlayerId, GameId, SpectatorId, isGameId, ParticipantId} from '../../common/Types';
 import {IGameLoader} from './IGameLoader';
 import {GameIdLedger} from './IDatabase';
@@ -64,7 +65,7 @@ export class GameLoader implements IGameLoader {
     this.cache.load();
   }
 
-  public async add(game: Game): Promise<void> {
+  public async add(game: IGame): Promise<void> {
     const d = await this.cache.getGames();
     d.games.set(game.id, game);
     if (game.spectatorId !== undefined) {
@@ -88,7 +89,7 @@ export class GameLoader implements IGameLoader {
     return d.games.get(gameId) !== undefined;
   }
 
-  public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<Game | undefined> {
+  public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<IGame | undefined> {
     const d = await this.cache.getGames();
     const gameId = isGameId(id) ? id : d.participantIds.get(id);
     if (gameId === undefined) return undefined;
@@ -119,7 +120,7 @@ export class GameLoader implements IGameLoader {
     return undefined;
   }
 
-  public async restoreGameAt(gameId: GameId, saveId: number): Promise<Game> {
+  public async restoreGameAt(gameId: GameId, saveId: number): Promise<IGame> {
     const current = await this.getGame(gameId);
     if (current === undefined) {
       throw new Error('Cannot find game');
@@ -144,7 +145,7 @@ export class GameLoader implements IGameLoader {
     this.cache.sweep();
   }
 
-  public async completeGame(game: Game) {
+  public async completeGame(game: IGame) {
     const database = Database.getInstance();
     await database.saveGame(game);
     try {
@@ -156,7 +157,7 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  public saveGame(game: Game): Promise<void> {
+  public saveGame(game: IGame): Promise<void> {
     if (this.purgedGames.includes(game.id)) {
       throw new Error('This game no longer exists');
     }

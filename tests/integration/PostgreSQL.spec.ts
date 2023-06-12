@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import {expect} from 'chai';
 import {describeDatabaseSuite} from '../database/databaseSuite';
 import {ITestDatabase, Status} from '../database/ITestDatabase';
+import {IGame} from '../../src/server/IGame';
 import {Game} from '../../src/server/Game';
 import {PostgreSQL} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
@@ -33,7 +34,7 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   }
 
   // Tests can wait for saveGamePromise since save() is called inside other methods.
-  public override async saveGame(game: Game): Promise<void> {
+  public override async saveGame(game: IGame): Promise<void> {
     this.lastSaveGamePromise = super.saveGame(game);
     this.promises.push(this.lastSaveGamePromise);
     return this.lastSaveGamePromise;

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {DesertSettler} from '../../src/server/awards/DesertSettler';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
 import {addOcean} from '../TestingUtils';
@@ -8,7 +8,7 @@ import {testGame} from '../TestGame';
 
 describe('OtherAresTests', function() {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   it('Desert settler counts upgraded oceans', function() {
     [game, player] = testGame(2, {aresExtension: true});

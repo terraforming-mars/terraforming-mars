@@ -2,7 +2,7 @@ import * as http from 'http';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {isSpectatorId} from '../../common/Types';
 
 export class ApiSpectator extends Handler {
@@ -18,7 +18,7 @@ export class ApiSpectator extends Handler {
       ctx.route.badRequest(req, res, 'invalid id');
       return;
     }
-    let game: Game | undefined;
+    let game: IGame | undefined;
     if (isSpectatorId(id)) {
       game = await ctx.gameLoader.getGame(id);
     }

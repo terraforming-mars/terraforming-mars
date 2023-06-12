@@ -1,4 +1,4 @@
-import {Game, Score} from '../Game';
+import {IGame, Score} from '../IGame';
 import {GameOptions} from '../GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
@@ -72,7 +72,7 @@ export interface IDatabase {
      *
      * Do not call directly.
      */
-    saveGame(game: Game): Promise<void>;
+    saveGame(game: IGame): Promise<void>;
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal

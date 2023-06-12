@@ -3,7 +3,7 @@ import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Server} from '../models/ServerModel';
 import {isGameId} from '../../common/Types';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 
 export class ApiGame extends Handler {
   public static readonly INSTANCE = new ApiGame();
@@ -18,7 +18,7 @@ export class ApiGame extends Handler {
       return;
     }
 
-    let game: Game | undefined;
+    let game: IGame | undefined;
     if (isGameId(gameId)) {
       game = await ctx.gameLoader.getGame(gameId);
     }

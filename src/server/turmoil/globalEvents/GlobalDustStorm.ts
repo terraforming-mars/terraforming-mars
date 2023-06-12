@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
@@ -25,7 +25,7 @@ export class GlobalDustStorm extends GlobalEvent implements IGlobalEvent {
       renderData: RENDER_DATA,
     });
   }
-  public resolve(game: Game, turmoil: Turmoil): void {
+  public resolve(game: IGame, turmoil: Turmoil): void {
     game.getPlayersInGenerationOrder().forEach((player) => {
       if (player.heat > 0) {
         player.deductResource(Resource.HEAT, player.heat, {log: true, from: this.name});

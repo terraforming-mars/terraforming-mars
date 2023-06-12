@@ -1,7 +1,7 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {GameOptions} from '../GameOptions';
 import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
@@ -68,11 +68,11 @@ export class PathfindersExpansion {
     PathfindersExpansion.raiseTrackEssense(tag, player, player.game, steps, true);
   }
 
-  public static raiseTrackForGlobalEvent(tag: PlanetaryTag, name: GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
+  public static raiseTrackForGlobalEvent(tag: PlanetaryTag, name: GlobalEventName, game: IGame, steps: number = 1, gainRewards: boolean = true): void {
     PathfindersExpansion.raiseTrackEssense(tag, name, game, steps, gainRewards);
   }
 
-  private static raiseTrackEssense(tag: PlanetaryTag, from: IPlayer | GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
+  private static raiseTrackEssense(tag: PlanetaryTag, from: IPlayer | GlobalEventName, game: IGame, steps: number = 1, gainRewards: boolean = true): void {
     const data = game.pathfindersData;
     if (data === undefined) {
       return;

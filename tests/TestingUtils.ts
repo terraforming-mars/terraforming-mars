@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Player} from '../src/server/Player';
-import {Game} from '../src/server/Game';
+import {IGame} from '../src/server/IGame';
 import * as constants from '../src/common/constants';
 import {ISpace} from '../src/server/boards/ISpace';
 import {Phase} from '../src/common/Phase';
@@ -33,15 +33,15 @@ export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace>
   return oceans;
 }
 
-export function setTemperature(game: Game, temperature: number) {
+export function setTemperature(game: IGame, temperature: number) {
   (game as any).temperature = temperature;
 }
 
-export function setOxygenLevel(game: Game, oxygenLevel: number) {
+export function setOxygenLevel(game: IGame, oxygenLevel: number) {
   (game as any).oxygenLevel = oxygenLevel;
 }
 
-export function setVenusScaleLevel(game: Game, venusScaleLevel: number) {
+export function setVenusScaleLevel(game: IGame, venusScaleLevel: number) {
   (game as any).venusScaleLevel = venusScaleLevel;
 }
 
@@ -69,14 +69,14 @@ export function addCity(player: Player, spaceId?: SpaceId): ISpace {
   return space;
 }
 
-export function resetBoard(game: Game): void {
+export function resetBoard(game: IGame): void {
   game.board.spaces.forEach((space) => {
     space.player = undefined;
     space.tile = undefined;
   });
 }
 
-export function setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
+export function setRulingPartyAndRulingPolicy(game: IGame, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
   turmoil.rulingParty = party;
   turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: policyId});
   game.phase = Phase.ACTION;
@@ -84,11 +84,11 @@ export function setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, part
 
 // Just shortcuts to some often called methods
 // related to the deferred actions queue
-export function runAllActions(game: Game) {
+export function runAllActions(game: IGame) {
   game.deferredActions.runAll(() => {});
 }
 
-export function runNextAction(game: Game) {
+export function runNextAction(game: IGame) {
   const action = game.deferredActions.pop();
   if (action === undefined) {
     return undefined;
@@ -106,7 +106,7 @@ export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput |
   return player.popWaitingFor();
 }
 
-export function forceGenerationEnd(game: Game) {
+export function forceGenerationEnd(game: IGame) {
   while (game.deferredActions.pop() !== undefined) {} // eslint-disable-line no-empty
   game.getPlayersInGenerationOrder().forEach((player) => player.pass());
   game.playerIsFinishedTakingActions();
@@ -170,7 +170,7 @@ export async function sleep(ms: number): Promise<void> {
   });
 }
 
-export function finishGeneration(game: Game): void {
+export function finishGeneration(game: IGame): void {
   const priorGeneration = game.generation;
   game.getPlayersInGenerationOrder().forEach((player) => {
     game.playerHasPassed(player);

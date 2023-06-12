@@ -1,4 +1,4 @@
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {Tile} from '../Tile';
 import {MoonBoard} from './MoonBoard';
 import {IPlayer} from '../IPlayer';
@@ -32,7 +32,7 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, execute this callback, otherwise do nothing.
-  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T): T | undefined {
+  public static ifMoon<T>(game: IGame, cb: (moonData: IMoonData) => T): T | undefined {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
@@ -44,7 +44,7 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, execute this callback, otherwise execute the else callback.
-  public static ifElseMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb: () => T): T {
+  public static ifElseMoon<T>(game: IGame, cb: (moonData: IMoonData) => T, elseCb: () => T): T {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
@@ -56,7 +56,7 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
-  public static moonData(game: Game): IMoonData {
+  public static moonData(game: IGame): IMoonData {
     if (game.gameOptions.moonExpansion === true && game.moonData !== undefined) {
       return game.moonData;
     }
@@ -224,7 +224,7 @@ export class MoonExpansion {
     });
   }
 
-  private static activateLunaFirst(sourcePlayer: IPlayer | undefined, game: Game, count: number) {
+  private static activateLunaFirst(sourcePlayer: IPlayer | undefined, game: IGame, count: number) {
     const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
     if (lunaFirstPlayer !== undefined) {
       lunaFirstPlayer.addResource(Resource.MEGACREDITS, count, {log: true});
@@ -280,7 +280,7 @@ export class MoonExpansion {
    * Special tiles such as Lunar Mine Urbanization, are especially included.
    */
   public static spaces(
-    game: Game,
+    game: IGame,
     tileType?: TileType,
     options?: {
       surfaceOnly?: boolean,

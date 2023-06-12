@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {MarsFirst} from '../../src/server/turmoil/parties/MarsFirst';
 import {Phase} from '../../src/common/Phase';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
@@ -777,7 +778,7 @@ describe('Turmoil', function() {
     expect(Array.from(t.usedFreeDelegateAction.values())).has.members(['p-blue-id']);
   });
 
-  function setRulingParty(turmoil: Turmoil, game: Game, party: IParty) {
+  function setRulingParty(turmoil: Turmoil, game: IGame, party: IParty) {
     turmoil.rulingParty = party;
     PoliticalAgendas.setNextAgenda(turmoil, game);
   }

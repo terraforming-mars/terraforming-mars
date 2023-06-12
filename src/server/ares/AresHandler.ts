@@ -1,6 +1,6 @@
 import {CardName} from '../../common/cards/CardName';
 import {ICard} from '../cards/ICard';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
 import {IPlayer} from '../IPlayer';
@@ -27,7 +27,7 @@ export enum HazardSeverity {
 export class AresHandler {
   private constructor() {}
 
-  public static ifAres(game: Game, cb: (aresData: AresData) => void) {
+  public static ifAres(game: IGame, cb: (aresData: AresData) => void) {
     if (game.gameOptions.aresExtension) {
       if (game.aresData === undefined) throw new Error('Assertion failure: game.aresData is undefined');
       cb(game.aresData);
@@ -174,7 +174,7 @@ export class AresHandler {
     }
   }
 
-  private static computeAdjacencyCosts(game: Game, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  private static computeAdjacencyCosts(game: IGame, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
     // Summing up production cost isn't really the way to do it, because each tile could
     // reduce different production costs. Oh well.
     let megaCreditCost = 0;
@@ -261,7 +261,7 @@ export class AresHandler {
     return false;
   }
 
-  public static onTemperatureChange(game: Game, aresData: AresData) {
+  public static onTemperatureChange(game: IGame, aresData: AresData) {
     _AresHazardPlacement.onTemperatureChange(game, aresData);
   }
 
@@ -269,7 +269,7 @@ export class AresHandler {
     _AresHazardPlacement.onOceanPlaced(aresData, player);
   }
 
-  public static onOxygenChange(game: Game, aresData: AresData) {
+  public static onOxygenChange(game: IGame, aresData: AresData) {
     _AresHazardPlacement.onOxygenChange(game, aresData);
   }
 

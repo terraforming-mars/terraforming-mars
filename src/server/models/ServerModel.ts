@@ -1,7 +1,7 @@
 import {CardModel} from '../../common/models/CardModel';
 import {ColonyModel} from '../../common/models/ColonyModel';
 import {Color} from '../../common/Color';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {GameOptions} from '../GameOptions';
 import {SimpleGameModel} from '../../common/models/SimpleGameModel';
 import {GameOptionsModel} from '../../common/models/GameOptionsModel';
@@ -48,10 +48,10 @@ import {Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {AresHandler} from '../ares/AresHandler';
 import {AwardScorer} from '../awards/AwardScorer';
-import {SpaceId} from '@/common/Types';
+import {SpaceId} from '../../common/Types';
 
 export class Server {
-  public static getSimpleGameModel(game: Game): SimpleGameModel {
+  public static getSimpleGameModel(game: IGame): SimpleGameModel {
     return {
       activePlayer: game.getPlayerById(game.activePlayer).color,
       id: game.id,
@@ -68,7 +68,7 @@ export class Server {
     };
   }
 
-  public static getGameModel(game: Game): GameModel {
+  public static getGameModel(game: IGame): GameModel {
     const turmoil = getTurmoilModel(game);
 
     return {
@@ -127,7 +127,7 @@ export class Server {
     };
   }
 
-  public static getSpectatorModel(game: Game): SpectatorModel {
+  public static getSpectatorModel(game: IGame): SpectatorModel {
     return {
       color: Color.NEUTRAL,
       id: game.spectatorId,
@@ -151,7 +151,7 @@ export class Server {
     });
   }
 
-  public static getMilestones(game: Game): Array<ClaimedMilestoneModel> {
+  public static getMilestones(game: IGame): Array<ClaimedMilestoneModel> {
     const allMilestones = game.milestones;
     const claimedMilestones = game.claimedMilestones;
     const milestoneModels: Array<ClaimedMilestoneModel> = [];
@@ -179,7 +179,7 @@ export class Server {
     return milestoneModels;
   }
 
-  public static getAwards(game: Game): Array<FundedAwardModel> {
+  public static getAwards(game: IGame): Array<FundedAwardModel> {
     const fundedAwards = game.fundedAwards;
     const awardModels: Array<FundedAwardModel> = [];
 
@@ -492,7 +492,7 @@ export class Server {
     return protection;
   }
 
-  public static getColonies(game: Game, colonies: Array<IColony>, isActive: boolean = true): Array<ColonyModel> {
+  public static getColonies(game: IGame, colonies: Array<IColony>, isActive: boolean = true): Array<ColonyModel> {
     return colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(
@@ -601,7 +601,7 @@ export class Server {
     };
   }
 
-  private static getColonyModel(game: Game, colonies: Array<IColony>, showTileOnly: boolean) : Array<ColonyModel> {
+  private static getColonyModel(game: IGame, colonies: Array<IColony>, showTileOnly: boolean) : Array<ColonyModel> {
     return colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(
@@ -618,7 +618,7 @@ export class Server {
     );
   }
 
-  private static getMoonModel(game: Game): MoonModel | undefined {
+  private static getMoonModel(game: IGame): MoonModel | undefined {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return {
         logisticsRate: moonData.logisticRate,

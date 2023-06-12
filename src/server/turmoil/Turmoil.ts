@@ -7,7 +7,7 @@ import {Kelvinists} from './parties/Kelvinists';
 import {Reds} from './parties/Reds';
 import {Greens} from './parties/Greens';
 import {PlayerId} from '../../common/Types';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {SerializedTurmoil} from './SerializedTurmoil';
@@ -70,7 +70,7 @@ export class Turmoil {
     this.globalEventDealer = globalEventDealer;
   }
 
-  public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
+  public static newInstance(game: IGame, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
     const dealer = GlobalEventDealer.newInstance(game);
 
     // The game begins with Greens in power and a Neutral chairman
@@ -96,14 +96,14 @@ export class Turmoil {
     return turmoil;
   }
 
-  public static getTurmoil(game: Game): Turmoil {
+  public static getTurmoil(game: IGame): Turmoil {
     if (game.turmoil === undefined) {
       throw new Error(`Assertion error: Turmoil not defined for ${game.id}`);
     }
     return game.turmoil;
   }
 
-  public static ifTurmoil(game: Game, cb: (turmoil: Turmoil) => void) {
+  public static ifTurmoil(game: IGame, cb: (turmoil: Turmoil) => void) {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
         console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
@@ -113,7 +113,7 @@ export class Turmoil {
     }
   }
 
-  public static ifTurmoilElse<T>(game: Game, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
+  public static ifTurmoilElse<T>(game: IGame, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
     if (game.gameOptions.turmoilExtension !== false) {
       if (game.turmoil === undefined) {
         console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
@@ -124,7 +124,7 @@ export class Turmoil {
     return elseCb();
   }
 
-  public initGlobalEvent(game: Game) {
+  public initGlobalEvent(game: IGame) {
     // Draw the first global event to setup the game
     this.comingGlobalEvent = this.globalEventDealer.draw();
     this.addNeutralDelegate(this.comingGlobalEvent?.revealedDelegate, game);
@@ -144,7 +144,7 @@ export class Turmoil {
   public sendDelegateToParty(
     playerId: Delegate,
     partyName: PartyName,
-    game: Game): void {
+    game: IGame): void {
     const party = this.getPartyByName(partyName);
     if (this.delegateReserve.has(playerId)) {
       this.delegateReserve.remove(playerId);
@@ -158,7 +158,7 @@ export class Turmoil {
   }
 
   // Use to remove a delegate from a specific party
-  public removeDelegateFromParty(playerId: Delegate, partyName: PartyName, game: Game): void {
+  public removeDelegateFromParty(playerId: Delegate, partyName: PartyName, game: IGame): void {
     const party = this.getPartyByName(partyName);
     this.delegateReserve.add(playerId);
     party.removeDelegate(playerId, game);
@@ -170,7 +170,7 @@ export class Turmoil {
     outgoingPlayerId: Delegate,
     incomingPlayerId: Delegate,
     partyName: PartyName,
-    game: Game): void {
+    game: IGame): void {
     const party = this.getPartyByName(partyName);
     this.delegateReserve.add(outgoingPlayerId);
     party.removeDelegate(outgoingPlayerId, game);
@@ -224,7 +224,7 @@ export class Turmoil {
   }
 
   // Launch the turmoil phase
-  public endGeneration(game: Game): void {
+  public endGeneration(game: IGame): void {
     // 1 - All player lose 1 TR
     game.getPlayers().forEach((player) => {
       player.decreaseTerraformRating();
@@ -264,7 +264,7 @@ export class Turmoil {
     game.log('Turmoil phase has been resolved');
   }
 
-  private addNeutralDelegate(partyName: PartyName | undefined, game: Game) {
+  private addNeutralDelegate(partyName: PartyName | undefined, game: IGame) {
     if (partyName) {
       this.sendDelegateToParty('NEUTRAL', partyName, game);
       game.log('A neutral delegate was added to the ${0} party', (b) => b.partyName(partyName));
@@ -272,7 +272,7 @@ export class Turmoil {
   }
 
   // Ruling Party changes
-  public setRulingParty(game: Game): void {
+  public setRulingParty(game: IGame): void {
     // Cleanup previous party effects
     game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
 
@@ -293,7 +293,7 @@ export class Turmoil {
     this.setNewChairman(newChariman, game, /* setAgenda*/ true);
   }
 
-  public setNewChairman(newChairman : Delegate, game: Game, setAgenda: boolean = true, gainTR: boolean = true) {
+  public setNewChairman(newChairman : Delegate, game: IGame, setAgenda: boolean = true, gainTR: boolean = true) {
     // Change the chairman
     if (this.chairman) {
       // Return the current Chairman to reserve
@@ -349,7 +349,7 @@ export class Turmoil {
 
   // Called either directly during generation change, or after asking chairperson player
   // to choose an agenda.
-  public onAgendaSelected(game: Game): void {
+  public onAgendaSelected(game: IGame): void {
     const rulingParty = this.rulingParty;
 
     // Resolve Ruling Bonus

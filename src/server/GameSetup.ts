@@ -1,7 +1,7 @@
 import {Board} from './boards/Board';
 import {BoardName} from '../common/boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
-import {Game} from './Game';
+import {IGame} from './IGame';
 import {GameOptions} from './GameOptions';
 import {GameId, PlayerId} from '../common/Types';
 import {HellasBoard} from './boards/HellasBoard';
@@ -48,12 +48,12 @@ export class GameSetup {
     return new Player('neutral', Color.NEUTRAL, true, 0, playerId);
   }
 
-  public static setupNeutralPlayer(game: Game) {
+  public static setupNeutralPlayer(game: IGame) {
     // Single player add neutral player
     // put 2 neutrals cities on board with adjacent forest
     const neutral = this.neutralPlayerFor(game.id);
 
-    function placeCityAndForest(game: Game, direction: -1 | 1) {
+    function placeCityAndForest(game: IGame, direction: -1 | 1) {
       const board = game.board;
       const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});

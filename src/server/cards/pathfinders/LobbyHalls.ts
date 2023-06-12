@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -37,7 +37,7 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
     return [this.cloneTag, Tag.BUILDING];
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new DeclareCloneTag(player, this));
     return undefined;
   }

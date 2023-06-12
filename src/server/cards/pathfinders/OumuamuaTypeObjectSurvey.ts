@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -37,12 +37,12 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
     });
   }
 
-  private keep(player: Player, card: IProjectCard) {
+  private keep(player: IPlayer, card: IProjectCard) {
     player.cardsInHand.push(card);
     player.game.log('${0} kept ${1}', (b) => b.player(player).card(card));
   }
 
-  private processCard(player: Player, card: IProjectCard): boolean {
+  private processCard(player: IPlayer, card: IProjectCard): boolean {
     const tags = card.tags;
     if (player.tags.cardHasTag(card, Tag.SCIENCE) || player.tags.cardHasTag(card, Tag.MICROBE)) {
       player.playCard(card, undefined);
@@ -57,7 +57,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
     }
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     // TODO(kberg): Make sure this action occurs after the card play, in case the played card has data.
     game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));

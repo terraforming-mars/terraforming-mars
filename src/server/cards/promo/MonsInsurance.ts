@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -38,7 +38,7 @@ export class MonsInsurance extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     for (const p of player.game.getPlayers()) {
       if (p.id !== player.id) {
         p.production.add(Resource.MEGACREDITS, -2, {log: true});
@@ -49,7 +49,7 @@ export class MonsInsurance extends Card implements ICorporationCard {
   }
 
   // When `insured` is undefined, it's the neutral player.
-  public payDebt(player: Player, claimant : Player | undefined) {
+  public payDebt(player: IPlayer, claimant : IPlayer | undefined) {
     if (player !== claimant) {
       const retribution = Math.min(player.megaCredits, 3);
       if (claimant) claimant.megaCredits += retribution;

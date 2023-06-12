@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -30,7 +30,7 @@ export class Merger extends PreludeCard {
 
   public static readonly mergerCost = 42;
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
     const enabled = dealtCorps.map((corp) => {
@@ -56,7 +56,7 @@ export class Merger extends PreludeCard {
     return undefined;
   }
 
-  private static dealCorporations(player: Player, corporationDeck: CorporationDeck) {
+  private static dealCorporations(player: IPlayer, corporationDeck: CorporationDeck) {
     const cards: Array<ICorporationCard> = [];
     try {
       while (cards.length < 4) {
@@ -69,7 +69,7 @@ export class Merger extends PreludeCard {
     LogHelper.logDrawnCards(player, cards, /* privateMessage= */true);
     return cards;
   }
-  public static setCardCost(player: Player) {
+  public static setCardCost(player: IPlayer) {
     return player.corporations
       .map((card) => (card.cardCost ?? CARD_COST) - CARD_COST) // Convert every card cost to delta from zero. (e.g. -2, 0, +2)
       .reduce((prev, curr) => prev + curr, CARD_COST); // Add them up, and add CARD_COST back.
@@ -86,7 +86,7 @@ export class Merger extends PreludeCard {
   // TO DO: Player has LTF and incoming card raises titanium value (e.g. Phobolog)
   // TO DO: Player has LTF and incoming card adds titanium
   // No use cases coded yet, but player has UNMO and incoming card raises TR.
-  private spendableMegacredits(player: Player, corp: ICorporationCard) {
+  private spendableMegacredits(player: IPlayer, corp: ICorporationCard) {
     // short-circuit. No need for all the work below if the card
     // comes with enough MC.
     if (corp.startingMegaCredits >= Merger.mergerCost) {

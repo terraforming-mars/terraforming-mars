@@ -536,7 +536,7 @@ export class Game implements Logger {
     return 8 + (6 * this.fundedAwards.length);
   }
 
-  public fundAward(player: Player, award: IAward): void {
+  public fundAward(player: IPlayer, award: IAward): void {
     if (this.allAwardsFunded()) {
       throw new Error('All awards already funded');
     }
@@ -1375,7 +1375,7 @@ export class Game implements Logger {
     return count > 0 && count < constants.MAX_OCEAN_TILES;
   }
 
-  public addOcean(player: Player, space: ISpace): void {
+  public addOcean(player: IPlayer, space: ISpace): void {
     if (this.canAddOcean() === false) return;
 
     this.addTile(player, space, {

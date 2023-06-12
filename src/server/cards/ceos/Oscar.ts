@@ -1,4 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
@@ -22,13 +23,13 @@ export class Oscar extends CeoCard {
     });
   }
 
-  public override play(player: Player) {
+  public override play(player: IPlayer) {
     const turmoil = player.game.turmoil;
     if (turmoil) turmoil.addInfluenceBonus(player);
     return undefined;
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;
     }

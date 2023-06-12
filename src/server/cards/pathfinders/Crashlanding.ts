@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -42,16 +42,16 @@ export class Crashlanding extends Card implements IProjectCard {
     });
   }
 
-  private playableSpaces(player: Player): Array<ISpace> {
+  private playableSpaces(player: IPlayer): Array<ISpace> {
     const board = player.game.board;
     const spaces = board.getAvailableSpacesOnLand(player);
     return spaces.filter((space) => board.getAdjacentSpaces(space).filter(Board.isCitySpace).length <= 1);
   }
 
-  public override canPlay(player: Player): boolean {
+  public override canPlay(player: IPlayer): boolean {
     return this.playableSpaces(player).length > 0;
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
       'Select space for Crashlanding tile',
       this.playableSpaces(player),
@@ -79,7 +79,7 @@ export class Crashlanding extends Card implements IProjectCard {
       });
   }
 
-  private grantPlacementBonuses(player: Player, space: ISpace) {
+  private grantPlacementBonuses(player: IPlayer, space: ISpace) {
     const game = player.game;
     for (const adjacentSpace of game.board.getAdjacentSpaces(space)) {
       if (adjacentSpace.player === player && adjacentSpace.tile !== undefined) {

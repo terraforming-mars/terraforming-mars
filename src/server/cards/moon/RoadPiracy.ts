@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -37,9 +37,9 @@ export class RoadPiracy extends Card implements IProjectCard {
     });
   }
 
-  private generateOption(player: Player, resource: Resource, title: Message, limit: number) {
+  private generateOption(player: IPlayer, resource: Resource, title: Message, limit: number) {
     const selectAmounts: Array<SelectAmount> = [];
-    const ledger: Map<Player, number> = new Map();
+    const ledger: Map<IPlayer, number> = new Map();
     for (const opponent of player.game.getPlayers()) {
       if (opponent === player) {
         continue;
@@ -80,7 +80,7 @@ export class RoadPiracy extends Card implements IProjectCard {
     return option;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const stealSteel = newMessage('Steal ${0} steel', (b) => b.number(6));
     const stealTitanium = newMessage('Steal ${0} titanium', (b) => b.number(4));

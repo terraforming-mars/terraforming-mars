@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../requirements/CardRequirements';
@@ -39,7 +39,7 @@ export class MartianZoo extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     const count = player.tags.cardTagCount(card, Tag.EARTH);
     if (count > 0) {
       player.addResourceTo(this, count);
@@ -50,7 +50,7 @@ export class MartianZoo extends Card implements IProjectCard {
     return this.resourceCount > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.addResource(Resource.MEGACREDITS, this.resourceCount, {log: true});
     return undefined;
   }

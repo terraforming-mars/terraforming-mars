@@ -1,5 +1,5 @@
 import {PreludeCard} from '../prelude/PreludeCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
@@ -33,7 +33,7 @@ export class HeadStart extends PreludeCard {
 
   private static PROJECT_CARD_TYPES = [CardType.ACTIVE, CardType.AUTOMATED, CardType.EVENT];
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const projectCardsInHand = player.cardsInHand.filter((card) => HeadStart.PROJECT_CARD_TYPES.includes(card.type));
     const megacredits = projectCardsInHand.length * 2;
     player.addResource(Resource.MEGACREDITS, megacredits, {log: true});

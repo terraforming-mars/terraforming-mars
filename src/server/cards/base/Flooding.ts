@@ -1,6 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
 import {IPlayer} from '../../IPlayer';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
@@ -33,7 +32,7 @@ export class Flooding extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) {
       player.game.defer(new PlaceOceanTile(player));
       return undefined;

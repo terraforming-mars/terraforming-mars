@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -41,7 +41,7 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
     return [this.cloneTag, this.cloneTag];
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new DeclareCloneTag(player, this));
     return undefined;
   }

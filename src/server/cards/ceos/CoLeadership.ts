@@ -1,5 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
+import {asPlayer} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Size} from '../../../common/cards/render/Size';
@@ -19,7 +20,7 @@ export class CoLeadership extends PreludeCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     let ceosDrawn: Array<ICeoCard> = [
       game.ceoDeck.draw(game),
@@ -29,7 +30,7 @@ export class CoLeadership extends PreludeCard {
 
     // TODO(): This is not being tested, but currently every CEO is always playable
     ceosDrawn = ceosDrawn.filter((ceo) => {
-      if (ceo.canPlay?.(player) === false) {
+      if (ceo.canPlay?.(asPlayer(player)) === false) {
         game.ceoDeck.discard(ceo);
         game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(ceo).player(player), {reservedFor: player});
         return false;

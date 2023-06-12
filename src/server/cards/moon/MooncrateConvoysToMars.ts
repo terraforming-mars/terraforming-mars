@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SellSteel} from '../../moon/SellSteel';
 import {all} from '../Options';
 import {IProjectCard} from '../IProjectCard';
@@ -33,7 +33,7 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     game.getPlayers().forEach((player) => {
       game.defer(new SellSteel(player));

@@ -5,7 +5,6 @@ import {CardDiscount} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
-import {Player} from '../Player';
 import {IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
@@ -170,7 +169,7 @@ export abstract class Card {
   public get tilesBuilt(): Array<TileType> {
     return this.properties.tilesBuilt || [];
   }
-  public canPlay(player: Player): boolean {
+  public canPlay(player: IPlayer): boolean {
     //
     // Is this block necessary?
     const satisfied = this.requirements?.satisfies(player);
@@ -190,7 +189,7 @@ export abstract class Card {
     return true;
   }
 
-  public play(player: Player): PlayerInput | undefined {
+  public play(player: IPlayer): PlayerInput | undefined {
     if (!isICorporationCard(this) && this.reserveUnits.deduct === true) {
       const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
       player.deductUnits(adjustedReserveUnits);
@@ -201,7 +200,7 @@ export abstract class Card {
     return this.bespokePlay(player);
   }
 
-  public bespokePlay(_player: Player): PlayerInput | undefined {
+  public bespokePlay(_player: IPlayer): PlayerInput | undefined {
     return undefined;
   }
 

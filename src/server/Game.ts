@@ -142,7 +142,6 @@ export class Game implements Logger {
   // Syndicate Pirate Raids
   public syndicatePirateRaider?: PlayerId;
   // Gagarin Mobile Base
-  // TODO(kberg): Serialize.
   public gagarinBase: Array<SpaceId> = [];
 
   // The set of tags available in this game.

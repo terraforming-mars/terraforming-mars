@@ -16,7 +16,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
 import {cast, runAllActions} from '../../TestingUtils';
-import {IPlayer} from '../../../src/server/IPlayer';
+import {Player} from '../../../src/server/Player';
 import {testGame} from '../../TestGame';
 
 describe('PharmacyUnion', function() {

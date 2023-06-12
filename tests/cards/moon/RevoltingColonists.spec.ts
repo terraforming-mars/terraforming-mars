@@ -37,7 +37,7 @@ describe('RevoltingColonists', () => {
   it('play', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player1);
 
-    const assignTile = function(idx: number, player: Player) {
+    const assignTile = function(idx: number, player: IPlayer) {
       spaces[idx].tile = {tileType: TileType.MOON_HABITAT};
       spaces[idx].player = player;
     };

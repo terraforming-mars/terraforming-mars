@@ -8,7 +8,7 @@ import {Game} from '../../../src/server/Game';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {Tag} from '../../../src/common/cards/Tag';
-import {IPlayer} from '../../../src/server/IPlayer';
+import {Player} from '../../../src/server/Player';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {InputResponse} from '../../../src/common/inputs/InputResponse';

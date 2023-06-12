@@ -155,6 +155,6 @@ describe('LunaProjectOffice', () => {
   });
 });
 
-function getWaitingFor(player: Player): SelectCard<IProjectCard> {
+function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {
   return cast(player.getWaitingFor(), SelectCard<IProjectCard>);
 }

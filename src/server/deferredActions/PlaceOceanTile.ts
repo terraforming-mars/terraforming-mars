@@ -1,5 +1,4 @@
 import {IPlayer} from '../IPlayer';
-import {asPlayer} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -28,7 +27,7 @@ export class PlaceOceanTile extends DeferredAction {
       title,
       availableSpaces,
       (space: ISpace) => {
-        this.player.game.addOcean(asPlayer(this.player), space);
+        this.player.game.addOcean(this.player, space);
         return undefined;
       },
     );

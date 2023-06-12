@@ -47,7 +47,7 @@ describe('HeavyDutyRovers', () => {
     const [game, player, player2, player3] = testGame(3, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
 
-    function addTile(spaceId: SpaceId, tileType: TileType, p: Player = player) {
+    function addTile(spaceId: SpaceId, tileType: TileType, p: IPlayer = player) {
       moonData.moon.getSpace(spaceId)!.tile = {tileType};
       moonData.moon.getSpace(spaceId).player = p;
     }

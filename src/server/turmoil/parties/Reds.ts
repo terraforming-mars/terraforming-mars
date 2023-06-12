@@ -29,7 +29,7 @@ class RedsBonus01 implements Bonus {
 
   getScore(player: IPlayer) {
     const game = player.game;
-    const players = game.getPlayersInGenerationOrder();
+    const players = [...game.getPlayersInGenerationOrder()];
 
     if (game.isSoloMode() && players[0].getTerraformRating() <= 20) return 1;
 
@@ -57,7 +57,7 @@ class RedsBonus02 implements Bonus {
 
   getScore(player: IPlayer) {
     const game = player.game;
-    const players = game.getPlayersInGenerationOrder();
+    const players = [...game.getPlayersInGenerationOrder()];
 
     if (game.isSoloMode() && players[0].getTerraformRating() > 20) return -1;
 

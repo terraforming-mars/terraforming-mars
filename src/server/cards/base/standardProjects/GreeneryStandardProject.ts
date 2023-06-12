@@ -1,4 +1,4 @@
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
@@ -21,7 +21,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
     });
   }
 
-  public override canPayWith(player: Player) {
+  public override canPayWith(player: IPlayer) {
     if (player.isCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
       return {seeds: true};
     } else {
@@ -29,12 +29,12 @@ export class GreeneryStandardProject extends StandardProjectCard {
     }
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) return false;
     return super.canAct(player);
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     player.game.defer(new PlaceGreeneryTile(player));
   }
 }

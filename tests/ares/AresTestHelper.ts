@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/server/boards/ISpace';
@@ -20,7 +20,7 @@ export const ALL_ADJACENCY_BONUSES = [
 
 export class AresTestHelper {
   // provides shared testing between Ecological Survey and Geological Survey
-  public static testSurveyBonus(player: Player, bonus: SpaceBonus, expectedMc: number) {
+  public static testSurveyBonus(player: IPlayer, bonus: SpaceBonus, expectedMc: number) {
     // tile types in this test are irrelevant.
     const firstSpace = player.game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [bonus]};
@@ -32,7 +32,7 @@ export class AresTestHelper {
     expect(player.megaCredits).is.eq(expectedMc);
   }
 
-  public static getHazards(player: Player): Array<ISpace> {
+  public static getHazards(player: IPlayer): Array<ISpace> {
     return player.game.board.getSpaces(SpaceType.LAND, player).filter((space) => AresHandler.hasHazardTile(space));
   }
 

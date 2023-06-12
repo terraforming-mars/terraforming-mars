@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -30,11 +30,11 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.steel > 0 && player.energy > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.deductResource(Resource.STEEL, 1);
     player.deductResource(Resource.ENERGY, 1);
     player.addResource(Resource.PLANTS, 3);

@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
@@ -24,7 +24,7 @@ export class AirScrappingStandardProjectVariant extends AirScrappingStandardProj
     });
   }
 
-  protected override discount(player: Player): number {
+  protected override discount(player: IPlayer): number {
     const tagCount = player.tags.count(Tag.VENUS);
     const discount = Math.min(tagCount, 5);
     return discount + super.discount(player);

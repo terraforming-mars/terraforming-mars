@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -47,12 +47,12 @@ export class Playwrights extends Card implements ICorporationCard {
   // For Project Inspection
   private checkLoops = 0;
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     const replayableEvents = this.getReplayableEvents(player);
     return replayableEvents.length > 0;
   }
 
-  public action(player: Player): SelectCard<IProjectCard> | undefined {
+  public action(player: IPlayer): SelectCard<IProjectCard> | undefined {
     const players = player.game.getPlayers();
     const replayableEvents = this.getReplayableEvents(player);
 
@@ -108,7 +108,7 @@ export class Playwrights extends Card implements ICorporationCard {
     return this.checkLoops;
   }
 
-  private getReplayableEvents(player: Player): Array<IProjectCard> {
+  private getReplayableEvents(player: IPlayer): Array<IProjectCard> {
     const playedEvents : IProjectCard[] = [];
 
     this.checkLoops++;

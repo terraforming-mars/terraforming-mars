@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
@@ -9,7 +9,7 @@ import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
-export function assertSendDelegateToArea(player: Player, action: DeferredAction) {
+export function assertSendDelegateToArea(player: IPlayer, action: DeferredAction) {
   const sendDelegate = cast(action, SendDelegateToArea);
 
   const game = player.game;
@@ -26,7 +26,7 @@ export function assertSendDelegateToArea(player: Player, action: DeferredAction)
   expect(marsFirst.delegates.get(player.id)).eq(delegatesInParty + 1);
 }
 
-export function assertPlaceCityTile(player: Player, action: DeferredAction) {
+export function assertPlaceCityTile(player: IPlayer, action: DeferredAction) {
   const placeCityTile = cast(action, PlaceCityTile);
   const selectSpace = cast(placeCityTile.execute(), SelectSpace);
   const space = selectSpace.availableSpaces[0];

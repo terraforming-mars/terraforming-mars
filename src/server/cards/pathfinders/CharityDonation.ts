@@ -41,7 +41,7 @@ export class CharityDonation extends Card implements IProjectCard {
 }
 
 export class SelectCharityDonationCard extends DeferredAction {
-  constructor(private players: Array<IPlayer>, private playerIdx: number, private boundaryIndex: number, private cards: Array<IProjectCard>) {
+  constructor(private players: ReadonlyArray<IPlayer>, private playerIdx: number, private boundaryIndex: number, private cards: Array<IProjectCard>) {
     super(players[playerIdx], Priority.DRAW_CARDS);
   }
 

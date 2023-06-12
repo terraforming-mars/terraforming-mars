@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -39,7 +39,7 @@ export class MarsMaths extends Card implements ICorporationCard {
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.availableActionsThisRound += 2;
     return undefined;
   }

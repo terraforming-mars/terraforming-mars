@@ -2,7 +2,7 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -26,13 +26,13 @@ export class CaretakerContract extends Card implements IActionCard, IProjectCard
       },
     });
   }
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.availableHeat() >= 8 && player.canAfford(0, {
       reserveUnits: Units.of({heat: 8}),
       tr: {tr: 1},
     });
   }
-  public action(player: Player) {
+  public action(player: IPlayer) {
     return player.spendHeat(8, () => {
       player.increaseTerraformRating();
       return undefined;

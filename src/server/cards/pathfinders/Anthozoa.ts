@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -34,11 +34,11 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
   }
 
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.plants > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.deductResource(Resource.PLANTS, 1);
     player.addResourceTo(this);
     player.game.log('${0} spent 1 plant to place an animal on ${1}.', (b) => b.player(player).card(this));

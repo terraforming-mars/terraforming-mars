@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -32,7 +32,7 @@ export class Asimov extends CeoCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;
     }
@@ -40,7 +40,7 @@ export class Asimov extends CeoCard {
     return !player.game.allAwardsFunded();
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
     const awardCount = Math.max(1, 10 - game.generation);
@@ -62,11 +62,11 @@ export class Asimov extends CeoCard {
     return freeAward;
   }
 
-  private selectAwardToFund(player: Player, award: IAward): SelectOption {
+  private selectAwardToFund(player: IPlayer, award: IAward): SelectOption {
     const game = player.game;
     const scorer = new AwardScorer(game, award);
     // Sort the players by score:
-    const players: Array<Player> = game.getPlayers().slice();
+    const players: Array<IPlayer> = game.getPlayers().slice();
     players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
     let title = 'Fund ' + award.name + ' award' + ' [';
     title += players
@@ -82,7 +82,7 @@ export class Asimov extends CeoCard {
     });
   }
 
-  private getValidAwards(player: Player): Array<IAward> {
+  private getValidAwards(player: IPlayer): Array<IAward> {
     // NB: This makes no effort to maintain Award synergy.
     const gameOptions = player.game.gameOptions;
     const validAwards = ALL_AWARDS.filter((award) => {

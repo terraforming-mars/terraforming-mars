@@ -1,6 +1,5 @@
 import {CardType} from '../../common/cards/CardType';
 import {IPlayer} from '../IPlayer';
-import {Player} from '../Player';
 import {IActionCard, ICard} from './ICard';
 import {TRSource} from '../../common/cards/TRSource';
 import {PlayerInput} from '../PlayerInput';
@@ -67,7 +66,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     return cardName.split(':')[0];
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     const canPayWith = this.canPayWith(player);
     player.game.defer(new SelectPaymentDeferred(
       player,

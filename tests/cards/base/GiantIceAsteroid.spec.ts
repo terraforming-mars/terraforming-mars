@@ -3,7 +3,6 @@ import {GiantIceAsteroid} from '../../../src/server/cards/base/GiantIceAsteroid'
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
@@ -11,7 +10,7 @@ describe('GiantIceAsteroid', function() {
   let card: GiantIceAsteroid;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let player3:Player;
+  let player3: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

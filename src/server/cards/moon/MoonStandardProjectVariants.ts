@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Units} from '../../../common/Units';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
@@ -28,7 +28,7 @@ export class MoonHabitatStandardProjectVariant2 extends MoonHabitatStandardProje
     });
   }
 
-  public override canAct(player: Player) {
+  public override canAct(player: IPlayer) {
     return player.game.gameOptions.moonStandardProjectVariant && super.canAct(player);
   }
 }
@@ -53,7 +53,7 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
     });
   }
 
-  public override canAct(player: Player) {
+  public override canAct(player: IPlayer) {
     return player.game.gameOptions.moonStandardProjectVariant && super.canAct(player);
   }
 }
@@ -78,7 +78,7 @@ export class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject {
     });
   }
 
-  public override canAct(player: Player) {
+  public override canAct(player: IPlayer) {
     return player.game.gameOptions.moonStandardProjectVariant && super.canAct(player);
   }
 }

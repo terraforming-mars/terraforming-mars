@@ -1,6 +1,5 @@
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IPlayer} from '../../IPlayer';
-import {asPlayer} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -25,7 +24,7 @@ export class DoubleDown extends PreludeCard {
   private cloneablePreludes(player: IPlayer) {
     return player.playedCards.filter((card) => card.type === CardType.PRELUDE)
       .filter((card) => card.name !== this.name)
-      .filter((card) => card.canPlay(asPlayer(player)));
+      .filter((card) => card.canPlay(player));
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {

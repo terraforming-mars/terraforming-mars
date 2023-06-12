@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Tag} from '../../src/common/cards/Tag';
-import {Color} from '../../src/common/Color';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {Tags} from '../../src/server/player/Tags';
 import {isICorporationCard} from '../../src/server/cards/corporation/ICorporationCard';
 import {fakeCard} from '../TestingUtils';
@@ -9,7 +9,7 @@ import {CardType} from '../../src/common/cards/CardType';
 
 // Exposes rawCount available for testing.
 class TestableTags extends Tags {
-  constructor(player: Player) {
+  constructor(player: IPlayer) {
     super(player);
   }
   public override rawCount(tag: Tag, includeEventsTags: boolean) {
@@ -18,11 +18,11 @@ class TestableTags extends Tags {
 }
 
 describe('Tags', function() {
-  let player: Player;
+  let player: IPlayer;
   let tags: TestableTags;
 
   beforeEach(() => {
-    player = new Player('name', Color.BLUE, false, 0, 'p-id');
+    player = TestPlayer.BLACK.newPlayer();
     tags = new TestableTags(player);
   });
 

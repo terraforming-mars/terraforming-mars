@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -49,11 +49,11 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
     return true;
   }
 
-  private canRaiseHabitatRate(player: Player) {
+  private canRaiseHabitatRate(player: IPlayer) {
     return this.resourceCount >= 2 && player.canAfford(0, {tr: {moonHabitat: 1}});
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const options: Array<SelectOption> = [];
     MoonExpansion.ifMoon(player.game, (moonData) => {
       if (this.canRaiseHabitatRate(player) && moonData.colonyRate < 8) {

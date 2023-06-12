@@ -2109,7 +2109,3 @@ export class Player implements IPlayer {
     this.game.defer(action);
   }
 }
-
-export function asPlayer(player: IPlayer): Player {
-  return player as Player;
-}

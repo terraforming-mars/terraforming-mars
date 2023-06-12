@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IColony} from '../../src/server/colonies/IColony';
 import {Pluto} from '../../src/server/colonies/Pluto';
 import {DustSeals} from '../../src/server/cards/base/DustSeals';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {Game} from '../../src/server/Game';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
@@ -26,7 +26,7 @@ function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   return options.config.enabled![colonyOptionIdx];
 }
 
-function isTradeWithColonyActionAvailable(player: Player) {
+function isTradeWithColonyActionAvailable(player: IPlayer) {
   let tradeWithColonyIsAvailable = false;
   player.takeAction();
   const actions = cast(player.getWaitingFor(), OrOptions);

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/server/Game';
 import {cast, runAllActions} from '../TestingUtils';
@@ -52,7 +52,7 @@ describe('PoliticalAgendas', function() {
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
       let game = Game.newInstance('gameid', [player1, player2], player1, {turmoilExtension: true, politicalAgendasExtension: AgendaStyle.CHAIRMAN});
-      let newPlayer2: Player = player2;
+      let newPlayer2: IPlayer = player2;
       if (deserialize) {
         game = Game.deserialize(game.serialize());
         // Get a new copy of player2 who will have a different set of waitingFor.

@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -36,14 +36,14 @@ export class ForcedPrecipitation extends Card implements IActionCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 1 && !venusMaxed;
 
     return player.canAfford(2) || (canSpendResource && player.canAfford(0, {tr: {venus: 1}}));
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const opts: Array<SelectOption> = [];
 
     const addResource = new SelectOption('Pay 2 M€ to add 1 floater to this card', 'Pay', () => this.addResource(player));
@@ -63,14 +63,14 @@ export class ForcedPrecipitation extends Card implements IActionCard {
     return new OrOptions(...opts);
   }
 
-  private addResource(player: Player) {
+  private addResource(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action', afterPay: () => {
       player.addResourceTo(this, {log: true});
     }}));
     return undefined;
   }
 
-  private spendResource(player: Player) {
+  private spendResource(player: IPlayer) {
     player.removeResourceFrom(this, 2);
     const actual = player.game.increaseVenusScaleLevel(player, 1);
     LogHelper.logVenusIncrease(player, actual);

@@ -1,4 +1,4 @@
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
@@ -22,7 +22,7 @@ export class PowerPlantStandardProject extends StandardProjectCard {
     });
   }
 
-  protected override discount(player: Player): number {
+  protected override discount(player: IPlayer): number {
     let discount = 0;
     if (player.isCorporation(CardName.THORGATE)) {
       discount += 3;
@@ -33,7 +33,7 @@ export class PowerPlantStandardProject extends StandardProjectCard {
     return discount;
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     player.production.add(Resource.ENERGY, 1);
   }
 }

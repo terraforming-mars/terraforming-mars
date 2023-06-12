@@ -1,6 +1,5 @@
 import {Card, StaticCardProperties} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
@@ -72,7 +71,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
     }
   }
 
-  protected testForCardResource(cardOwner: Player, space: ISpace, resource: CardResource, bonus: SpaceBonus) {
+  protected testForCardResource(cardOwner: IPlayer, space: ISpace, resource: CardResource, bonus: SpaceBonus) {
     if (cardOwner.playedCards.some((card) => card.resourceType === resource) &&
         (this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
       cardOwner.game.defer(new AddResourcesToCard(

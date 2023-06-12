@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 // import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -18,7 +18,7 @@ export class Jansson extends CeoCard {
     });
   }
 
-  public action(player: Player): undefined {
+  public action(player: IPlayer): undefined {
     this.isDisabled = true;
     const spaces = player.game.board.spaces.filter((space) => space.tile !== undefined && space.player === player);
     spaces.forEach((space) => {

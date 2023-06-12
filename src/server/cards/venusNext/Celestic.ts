@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {ActionCard} from '../ActionCard';
@@ -69,7 +69,7 @@ export class Celestic extends ActionCard implements ICorporationCard {
     CardName.VENERA_BASE,
   ]);
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     player.drawCard(2, {
       include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === CardResource.FLOATER,
     });

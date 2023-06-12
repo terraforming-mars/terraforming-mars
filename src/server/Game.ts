@@ -24,8 +24,8 @@ import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
-import {Player} from './Player';
 import {IPlayer} from './IPlayer';
+import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
@@ -77,7 +77,7 @@ export interface Score {
 export class Game implements Logger {
   public readonly id: GameId;
   public readonly gameOptions: Readonly<GameOptions>;
-  private players: Array<Player>;
+  private players: Array<IPlayer>;
 
   // Game-level data
   public lastSaveId: number = 0;
@@ -112,7 +112,7 @@ export class Game implements Logger {
   private researchedPlayers = new Set<PlayerId>();
   private draftedPlayers = new Set<PlayerId>();
   // The first player of this generation.
-  private first: Player;
+  private first: IPlayer;
 
   // Drafting
   private draftRound: number = 1;
@@ -149,8 +149,8 @@ export class Game implements Logger {
 
   private constructor(
     id: GameId,
-    players: Array<Player>,
-    first: Player,
+    players: Array<IPlayer>,
+    first: IPlayer,
     activePlayer: PlayerId,
     gameOptions: GameOptions,
     rng: SeededRandom,
@@ -201,8 +201,8 @@ export class Game implements Logger {
   }
 
   public static newInstance(id: GameId,
-    players: Array<Player>,
-    firstPlayer: Player,
+    players: Array<IPlayer>,
+    firstPlayer: IPlayer,
     options: Partial<GameOptions> = {},
     seed = 0,
     spectatorId: SpectatorId | undefined = undefined): Game {
@@ -441,7 +441,7 @@ export class Game implements Logger {
   }
 
   // Function to retrieve a player by it's id
-  public getPlayerById(id: PlayerId): Player {
+  public getPlayerById(id: PlayerId): IPlayer {
     const player = this.players.find((p) => p.id === id);
     if (player === undefined) {
       throw new Error(`player ${id} does not exist on game ${this.id}`);
@@ -450,7 +450,7 @@ export class Game implements Logger {
   }
 
   // Function to return an array of players from an array of player ids
-  public getPlayersById(ids: Array<PlayerId>): Array<Player> {
+  public getPlayersById(ids: Array<PlayerId>): Array<IPlayer> {
     return ids.map((id) => this.getPlayerById(id));
   }
 
@@ -572,7 +572,7 @@ export class Game implements Logger {
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
-  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard): void {
+  private playerHasPickedCorporationCard(player: IPlayer, corporationCard: ICorporationCard): void {
     player.pickedCorporationCard = corporationCard;
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
       for (const somePlayer of this.getPlayersInGenerationOrder()) {
@@ -584,14 +584,14 @@ export class Game implements Logger {
     }
   }
 
-  private selectInitialCards(player: Player): PlayerInput {
+  private selectInitialCards(player: IPlayer): PlayerInput {
     return new SelectInitialCards(player, (corporation: ICorporationCard) => {
       this.playerHasPickedCorporationCard(player, corporation);
       return undefined;
     });
   }
 
-  public hasPassedThisActionPhase(player: Player): boolean {
+  public hasPassedThisActionPhase(player: IPlayer): boolean {
     return this.passedPlayers.has(player.id);
   }
 
@@ -606,7 +606,7 @@ export class Game implements Logger {
   }
 
   // Only used in the prelude The New Space Race.
-  public overrideFirstPlayer(newFirstPlayer: Player): void {
+  public overrideFirstPlayer(newFirstPlayer: IPlayer): void {
     if (newFirstPlayer.game.id !== this.id) {
       throw new Error(`player ${newFirstPlayer.id} is not part of this game`);
     }
@@ -807,7 +807,7 @@ export class Game implements Logger {
     return true;
   }
 
-  public playerIsFinishedWithResearchPhase(player: Player): void {
+  public playerIsFinishedWithResearchPhase(player: IPlayer): void {
     this.deferredActions.runAllFor(player, () => {
       this.researchedPlayers.add(player.id);
       if (this.allPlayersHaveFinishedResearch()) {
@@ -819,7 +819,7 @@ export class Game implements Logger {
     });
   }
 
-  public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
+  public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: IPlayer, cards : Array<IProjectCard>): void {
     this.draftedPlayers.add(player.id);
     this.unDraftedCards.set(player.id, cards);
 
@@ -872,7 +872,7 @@ export class Game implements Logger {
     }
   }
 
-  private getDraftCardsFrom(player: Player): Player {
+  private getDraftCardsFrom(player: IPlayer): IPlayer {
     // Special-case for the initial draft direction on second iteration
     if (this.generation === 1 && this.initialDraftIteration === 2) {
       return this.getPlayerBefore(player);
@@ -881,7 +881,7 @@ export class Game implements Logger {
     return this.generation % 2 === 0 ? this.getPlayerBefore(player) : this.getPlayerAfter(player);
   }
 
-  private giveDraftCardsTo(player: Player): Player {
+  private giveDraftCardsTo(player: IPlayer): IPlayer {
     // Special-case for the initial draft direction on second iteration
     if (this.initialDraftIteration === 2 && this.generation === 1) {
       return this.getPlayerAfter(player);
@@ -890,7 +890,7 @@ export class Game implements Logger {
     return this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
   }
 
-  private getPlayerBefore(player: Player): Player {
+  private getPlayerBefore(player: IPlayer): IPlayer {
     const playerIndex = this.players.indexOf(player);
     if (playerIndex === -1) {
       throw new Error(`Player ${player.id} not in game ${this.id}`);
@@ -900,7 +900,7 @@ export class Game implements Logger {
     return this.players[(playerIndex === 0) ? this.players.length - 1 : playerIndex - 1];
   }
 
-  private getPlayerAfter(player: Player): Player {
+  private getPlayerAfter(player: IPlayer): IPlayer {
     const playerIndex = this.players.indexOf(player);
 
     if (playerIndex === -1) {
@@ -963,14 +963,14 @@ export class Game implements Logger {
   }
 
   // Part of final greenery placement.
-  public canPlaceGreenery(player: Player): boolean {
+  public canPlaceGreenery(player: IPlayer): boolean {
     return !this.donePlayers.has(player.id) &&
             player.plants >= player.plantsNeededForGreenery &&
             this.board.getAvailableSpacesForGreenery(player).length > 0;
   }
 
   // Called when a player cannot or chose not to place any more greeneries.
-  public playerIsDoneWithGame(player: Player): void {
+  public playerIsDoneWithGame(player: IPlayer): void {
     this.donePlayers.add(player.id);
     // Go back in to find someone else to play final greeneries.
     this.takeNextFinalGreeneryAction();
@@ -1008,7 +1008,7 @@ export class Game implements Logger {
     this.gotoEndGame();
   }
 
-  private startActionsForPlayer(player: Player) {
+  private startActionsForPlayer(player: IPlayer) {
     this.activePlayer = player.id;
     player.actionsTakenThisRound = 0;
 
@@ -1396,13 +1396,13 @@ export class Game implements Logger {
     space.player = undefined;
   }
 
-  public getPlayers(): ReadonlyArray<Player> {
+  public getPlayers(): ReadonlyArray<IPlayer> {
     return this.players;
   }
 
   // Players returned in play order starting with first player this generation.
-  public getPlayersInGenerationOrder(): Array<Player> {
-    const ret: Array<Player> = [];
+  public getPlayersInGenerationOrder(): ReadonlyArray<IPlayer> {
+    const ret: Array<IPlayer> = [];
     let insertIdx = 0;
     for (const p of this.players) {
       if (p.id === this.first.id || insertIdx > 0) {
@@ -1418,7 +1418,7 @@ export class Game implements Logger {
   /**
    * Returns the Player holding this card, or throws.
    */
-  public getCardPlayerOrThrow(name: CardName): Player {
+  public getCardPlayerOrThrow(name: CardName): IPlayer {
     const player = this.getCardPlayerOrUndefined(name);
     if (player === undefined) {
       throw new Error(`No player has played ${name}`);
@@ -1429,7 +1429,7 @@ export class Game implements Logger {
   /**
    * Returns the Player holding this card, or throws.
    */
-  public getCardPlayerOrUndefined(name: CardName): Player | undefined {
+  public getCardPlayerOrUndefined(name: CardName): IPlayer | undefined {
     for (const player of this.players) {
       for (const card of player.tableau) {
         if (card.name === name) {
@@ -1441,7 +1441,7 @@ export class Game implements Logger {
   }
 
   // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
-  public getCardHolder(name: CardName): [Player | undefined, IProjectCard | undefined] {
+  public getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined] {
     for (const player of this.players) {
       // Check cards player has in hand
       for (const card of [...player.preludeCardsInHand, ...player.cardsInHand]) {

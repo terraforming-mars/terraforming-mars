@@ -1,6 +1,5 @@
 import {EcologicalSurvey} from '../../../src/server/cards/ares/EcologicalSurvey';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {Ants} from '../../../src/server/cards/base/Ants';
@@ -19,7 +18,7 @@ import {testGame} from '../../TestGame';
 describe('EcologicalSurvey', () => {
   let card: EcologicalSurvey;
   let player: TestPlayer;
-  let redPlayer : Player;
+  let redPlayer : TestPlayer;
   let game: Game;
 
   beforeEach(() => {

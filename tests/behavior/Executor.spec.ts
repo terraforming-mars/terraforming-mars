@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {Executor} from '../../src/server/behavior/Executor';
@@ -26,7 +26,7 @@ import {SaturnSurfing} from '../../src/server/cards/promo/SaturnSurfing';
 import {Behavior} from '../../src/server/behavior/Behavior';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 
-function asUnits(player: Player): Units {
+function asUnits(player: IPlayer): Units {
   return {
     megacredits: player.megaCredits,
     steel: player.steel,

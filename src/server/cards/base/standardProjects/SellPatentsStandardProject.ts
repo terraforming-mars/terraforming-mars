@@ -1,4 +1,4 @@
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
@@ -22,7 +22,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     return player.cardsInHand.length > 0;
   }
 
@@ -30,7 +30,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
     // no-op
   }
 
-  public override action(player: Player): SelectCard<IProjectCard> {
+  public override action(player: IPlayer): SelectCard<IProjectCard> {
     return new SelectCard(
       'Sell patents',
       'Sell',

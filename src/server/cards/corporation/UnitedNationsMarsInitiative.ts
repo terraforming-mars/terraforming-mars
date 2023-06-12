@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -32,10 +32,10 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, IC
       },
     });
   }
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford(ACTION_COST, {tr: {tr: 1}});
   }
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.payMegacreditsDeferred(
       3,
       'Select how to pay for UNMI action.',

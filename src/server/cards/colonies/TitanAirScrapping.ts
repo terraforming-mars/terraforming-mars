@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -35,7 +35,7 @@ export class TitanAirScrapping extends Card implements IProjectCard {
   }
 
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.titanium > 0) {
       return true;
     }
@@ -45,7 +45,7 @@ export class TitanAirScrapping extends Card implements IProjectCard {
     return false;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const opts: Array<SelectOption> = [];
 
     const addResource = new SelectOption('Spend 1 titanium to add 2 floaters on this card', 'Spend titanium', () => this.addResource(player));
@@ -67,13 +67,13 @@ export class TitanAirScrapping extends Card implements IProjectCard {
     return new OrOptions(...opts);
   }
 
-  private addResource(player: Player) {
+  private addResource(player: IPlayer) {
     player.addResourceTo(this, 2);
     player.titanium--;
     return undefined;
   }
 
-  private spendResource(player: Player) {
+  private spendResource(player: IPlayer) {
     player.removeResourceFrom(this, 2);
     player.increaseTerraformRating();
     return undefined;

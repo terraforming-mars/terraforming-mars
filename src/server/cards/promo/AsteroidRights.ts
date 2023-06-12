@@ -5,7 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {LogHelper} from '../../LogHelper';
 import {PlayerInput} from '../../PlayerInput';
@@ -47,11 +47,11 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.canAfford(1) || this.resourceCount > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const canAddAsteroid = player.canAfford(1);
     const hasAsteroids = this.resourceCount > 0;
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);

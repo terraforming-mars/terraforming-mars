@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {GlobalParameterRequirement} from './GlobalParameterRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 import {RequirementType} from '../../../common/cards/RequirementType';
@@ -17,7 +17,7 @@ export class VenusRequirement extends GlobalParameterRequirement {
     super(amount, options);
   }
 
-  public getGlobalValue(player: Player) {
+  public getGlobalValue(player: IPlayer) {
     return player.game.getVenusScaleLevel();
   }
 }

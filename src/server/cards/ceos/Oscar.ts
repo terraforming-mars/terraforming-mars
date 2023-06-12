@@ -1,6 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -37,7 +36,7 @@ export class Oscar extends CeoCard {
     return turmoil.hasDelegatesInReserve(player.id) && turmoil.chairman !== player.id;
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.setNewChairman(player.id, player.game, /* setAgenda*/false, /* gainTR*/false);
     turmoil.delegateReserve.remove(player.id);

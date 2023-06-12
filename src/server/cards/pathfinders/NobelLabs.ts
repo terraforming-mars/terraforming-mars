@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -35,11 +35,11 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
   private static RESOURCE_TYPES: Array<CardResource> = [CardResource.MICROBE, CardResource.DATA, CardResource.FLOATER];
   private static PREDICATE = (card: ICard) => card.resourceType !== undefined && NobelLabs.RESOURCE_TYPES.includes(card.resourceType);
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.getResourceCards().some(NobelLabs.PREDICATE);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.game.defer(new AddResourcesToCard(player, undefined, {filter: NobelLabs.PREDICATE, count: 2}));
     return undefined;
   }

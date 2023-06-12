@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -35,11 +35,11 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
   }
 
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.energy > 0 || this.resourceCount > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const firstOption = new SelectOption(
       'Spend 1 energy to add 1 data to this card.',
       'Spend energy',

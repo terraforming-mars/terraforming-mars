@@ -1,4 +1,4 @@
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
@@ -23,14 +23,14 @@ export class CityStandardProject extends StandardProjectCard {
     });
   }
 
-  protected override discount(player: Player): number {
+  protected override discount(player: IPlayer): number {
     if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return 2 + super.discount(player);
     }
     return super.discount(player);
   }
 
-  public override canPayWith(player: Player) {
+  public override canPayWith(player: IPlayer) {
     if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return {steel: true};
     } else {
@@ -38,11 +38,11 @@ export class CityStandardProject extends StandardProjectCard {
     }
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     return super.canAct(player) && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     player.game.defer(new PlaceCityTile(player));
     player.production.add(Resource.MEGACREDITS, 1);
   }

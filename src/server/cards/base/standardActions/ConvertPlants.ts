@@ -1,7 +1,7 @@
 import {StandardActionCard} from '../../StandardActionCard';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {MAX_OXYGEN_LEVEL} from '../../../../common/constants';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {ISpace} from '../../../boards/ISpace';
@@ -23,7 +23,7 @@ export class ConvertPlants extends StandardActionCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.plants < player.plantsNeededForGreenery) {
       return false;
     }
@@ -41,7 +41,7 @@ export class ConvertPlants extends StandardActionCard {
     });
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     return new SelectSpace(
       `Convert ${player.plantsNeededForGreenery} plants into greenery`,
       player.game.board.getAvailableSpacesForGreenery(player),

@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CosmicRadiation} from '../../../src/server/cards/moon/CosmicRadiation';
@@ -37,7 +37,7 @@ describe('CosmicRadiation', () => {
   it('play', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player1);
 
-    const assignTile = function(idx: number, player: Player) {
+    const assignTile = function(idx: number, player: IPlayer) {
       spaces[idx].tile = {tileType: TileType.MOON_MINE};
       spaces[idx].player = player;
     };

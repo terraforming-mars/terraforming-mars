@@ -5,7 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {SpaceName} from '../../src/server/SpaceName';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {EmptyBoard} from '../ares/EmptyBoard';
 import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
@@ -16,7 +16,7 @@ import {testGame} from '../TestGame';
 
 describe('Landlord', () => {
   let player: TestPlayer;
-  let otherPlayer: Player;
+  let otherPlayer: IPlayer;
   let game: Game;
   const award = new Landlord();
 

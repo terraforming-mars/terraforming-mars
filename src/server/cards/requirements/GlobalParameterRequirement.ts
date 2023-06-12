@@ -1,5 +1,5 @@
 import {ICardRequirement} from '../../../common/cards/ICardRequirement';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {InequalityRequirement} from './InequalityRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 import {YesAnd} from './CardRequirement';
@@ -8,9 +8,9 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement i
   protected scale: number = 1;
   protected abstract parameter: GlobalParameter;
 
-  public abstract getGlobalValue(player: Player): number;
+  public abstract getGlobalValue(player: IPlayer): number;
 
-  public override satisfies(player: Player, thinkTankResources: number): boolean | YesAnd {
+  public override satisfies(player: IPlayer, thinkTankResources: number): boolean | YesAnd {
     if (super.satisfies(player, thinkTankResources)) {
       return true;
     }
@@ -23,7 +23,7 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement i
     return false;
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const playerRequirementsBonus = player.getRequirementsBonus(this.parameter) * this.scale;
 
     const level = this.getGlobalValue(player);
@@ -35,7 +35,7 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement i
     }
   }
 
-  public distance(player: Player): number {
+  public distance(player: IPlayer): number {
     return Math.floor(Math.abs(this.getScore(player) - this.amount) / this.scale);
   }
 }

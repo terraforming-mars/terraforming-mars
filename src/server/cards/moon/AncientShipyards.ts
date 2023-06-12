@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
@@ -37,7 +37,7 @@ export class AncientShipyards extends Card {
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const game = player.game;
     for (const p of game.getPlayers()) {
       if (p === player) continue;

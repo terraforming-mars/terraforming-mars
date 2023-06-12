@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {asPlayer} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -39,7 +38,7 @@ export class ProjectInspection extends Card implements IProjectCard {
       if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) {
         continue;
       }
-      if (player.getActionsThisGeneration().has(playedCard.name) && playedCard.canAct(asPlayer(player))) {
+      if (player.getActionsThisGeneration().has(playedCard.name) && playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }
@@ -62,7 +61,7 @@ export class ProjectInspection extends Card implements IProjectCard {
       ([card]) => {
         const foundCard = card;
         player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
-        return foundCard.action(asPlayer(player));
+        return foundCard.action(player);
       },
     );
   }

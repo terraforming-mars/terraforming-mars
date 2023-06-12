@@ -1,4 +1,5 @@
 import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {GameId, isPlayerId} from '../../common/Types';
 import {GameSetup} from '../GameSetup';
 import {IPlayer} from '../IPlayer';
@@ -11,7 +12,7 @@ export class Cloner {
     newGameId: GameId,
     players: Array<IPlayer>,
     firstPlayerIndex: number,
-    serialized: SerializedGame): Game {
+    serialized: SerializedGame): IGame {
     const serializedGameId: GameId = serialized.id;
     const serializedPlayerIds: Array<PlayerId> = serialized.players.map((player) => player.id);
     const playerIds: Array<PlayerId> = players.map((player) => player.id);

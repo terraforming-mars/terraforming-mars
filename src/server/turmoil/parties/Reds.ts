@@ -1,7 +1,7 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -40,7 +40,7 @@ class RedsBonus01 implements Bonus {
     return 0;
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     const players = game.getPlayersInGenerationOrder();
     const scores = players.map((player) => this.getScore(player));
 
@@ -68,7 +68,7 @@ class RedsBonus02 implements Bonus {
     return 0;
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     const players = game.getPlayersInGenerationOrder();
     const scores = players.map((player) => this.getScore(player));
 
@@ -105,7 +105,7 @@ class RedsPolicy03 implements Policy {
   readonly description = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
   readonly isDefault = false;
 
-  private canDecrease(game: Game, parameter: GlobalParameter) {
+  private canDecrease(game: IGame, parameter: GlobalParameter) {
     switch (parameter) {
     case GlobalParameter.TEMPERATURE:
       const temp = game.getTemperature();

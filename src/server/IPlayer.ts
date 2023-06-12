@@ -1,7 +1,7 @@
 import {PlayerId, isPlayerId} from '../common/Types';
 import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
-import {Game} from './Game';
+import {IGame, isIGame} from './IGame';
 import {Payment} from '../common/inputs/Payment';
 import {ICard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
@@ -51,7 +51,7 @@ export interface IPlayer {
   beginner: boolean;
   handicap: number;
 
-  game: Game;
+  game: IGame;
   tags: Tags;
   colonies: Colonies;
   readonly production: Production;
@@ -257,5 +257,5 @@ export interface IPlayer {
 }
 
 export function isIPlayer(object: any): object is IPlayer {
-  return object !== undefined && object.hasOwnProperty('id') && isPlayerId(object.id) && object.game instanceof Game;
+  return object !== undefined && object.hasOwnProperty('id') && isPlayerId(object.id) && isIGame(object.game);
 }

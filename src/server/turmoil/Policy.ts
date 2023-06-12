@@ -1,5 +1,5 @@
 import {IProjectCard} from '../cards/IProjectCard';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {ISpace} from '../boards/ISpace';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
@@ -16,5 +16,5 @@ export interface Policy {
   onCardPlayed?: (player: IPlayer, card: IProjectCard) => void;
   action?: (player: IPlayer) => PlayerInput | undefined;
   canAct?: (player: IPlayer) => boolean;
-  apply?: (game: Game) => void;
+  apply?: (game: IGame) => void;
 }

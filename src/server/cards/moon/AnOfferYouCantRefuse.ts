@@ -8,7 +8,7 @@ import {Delegate, Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {IParty} from '../../turmoil/parties/IParty';
 import {all} from '../Options';
 import {newMessage} from '../../logs/MessageBuilder';
@@ -89,7 +89,7 @@ export class AnOfferYouCantRefuse extends Card {
     return false;
   }
 
-  private moveToAnotherParty(game: Game, from: PartyName, delegate: PlayerId): OrOptions {
+  private moveToAnotherParty(game: IGame, from: PartyName, delegate: PlayerId): OrOptions {
     const orOptions = new OrOptions();
     const turmoil = Turmoil.getTurmoil(game);
 

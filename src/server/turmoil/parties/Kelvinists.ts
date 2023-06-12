@@ -1,7 +1,7 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
@@ -26,7 +26,7 @@ class KelvinistsBonus01 implements Bonus {
     return player.production.heat;
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resource.MEGACREDITS, this.getScore(player));
     });
@@ -42,7 +42,7 @@ class KelvinistsBonus02 implements Bonus {
     return player.production.heat;
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resource.HEAT, this.getScore(player));
     });

@@ -1,5 +1,5 @@
 import {PlayerId} from '../../common/Types';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {IAward} from './IAward';
 import {CardName} from '../../common/cards/CardName';
@@ -7,7 +7,7 @@ import {ASIMOV_AWARD_BONUS} from '../../common/constants';
 
 export class AwardScorer {
   private scores: Map<PlayerId, number> = new Map();
-  constructor(game: Game, award: IAward) {
+  constructor(game: IGame, award: IAward) {
     for (const player of game.getPlayers()) {
       let score = award.getScore(player);
       // CEO Asimov Award Score Hook

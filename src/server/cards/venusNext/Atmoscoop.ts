@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
@@ -81,11 +81,11 @@ export class Atmoscoop extends Card implements IProjectCard {
     return undefined;
   }
 
-  private temperatureIsMaxed(game: Game) {
+  private temperatureIsMaxed(game: IGame) {
     return game.getTemperature() === constants.MAX_TEMPERATURE;
   }
 
-  private venusIsMaxed(game: Game) {
+  private venusIsMaxed(game: IGame) {
     return game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
   }
 }

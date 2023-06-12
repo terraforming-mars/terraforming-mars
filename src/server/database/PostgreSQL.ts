@@ -1,5 +1,5 @@
 import {IDatabase} from './IDatabase';
-import {Game, Score} from '../Game';
+import {IGame, Score} from '../IGame';
 import {GameOptions} from '../GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
@@ -197,7 +197,7 @@ export class PostgreSQL implements IDatabase {
       });
   }
 
-  async saveGame(game: Game): Promise<void> {
+  async saveGame(game: IGame): Promise<void> {
     const gameJSON = game.toJSON();
     this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);

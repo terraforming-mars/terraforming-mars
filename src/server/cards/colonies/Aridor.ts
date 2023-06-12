@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -57,7 +57,7 @@ export class Aridor extends Card implements ICorporationCard {
     return selectColony;
   }
 
-  private checkActivation(colony: IColony, game: Game): void {
+  private checkActivation(colony: IColony, game: IGame): void {
     if (colony.isActive) return;
     for (const player of game.getPlayers()) {
       for (const card of player.tableau) {

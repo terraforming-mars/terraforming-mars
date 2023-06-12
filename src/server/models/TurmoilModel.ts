@@ -1,12 +1,12 @@
 import {Color} from '../../common/Color';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {PoliticalAgendas} from '../turmoil/PoliticalAgendas';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {Turmoil} from '../turmoil/Turmoil';
 import {DelegatesModel, GlobalEventModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
 
-export function getTurmoilModel(game: Game): TurmoilModel | undefined {
+export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
   return Turmoil.ifTurmoilElse(game, (turmoil) => {
     const parties = getParties(game);
     let chairman: Color | undefined;
@@ -86,7 +86,7 @@ function globalEventToModel(globalEvent: IGlobalEvent | undefined): GlobalEventM
   };
 }
 
-function getParties(game: Game): Array<PartyModel> {
+function getParties(game: IGame): Array<PartyModel> {
   return Turmoil.ifTurmoilElse(game,
     (turmoil) => {
       return turmoil.parties.map(function(party) {

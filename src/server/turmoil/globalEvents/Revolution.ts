@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
@@ -27,7 +27,7 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
       renderData: RENDER_DATA,
     });
   }
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     if (game.isSoloMode()) {
       if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil) >= 4 ) {
         game.getPlayersInGenerationOrder()[0].decreaseTerraformRatingSteps(2, {log: true});

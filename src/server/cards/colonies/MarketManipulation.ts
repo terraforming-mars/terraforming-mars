@@ -4,7 +4,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
@@ -50,13 +50,13 @@ export class MarketManipulation extends Card implements IProjectCard {
     return true;
   }
 
-  private getIncreasableColonies(game: Game) {
+  private getIncreasableColonies(game: IGame) {
     return game.colonies.filter(
       (colony) => colony.trackPosition < 6 && colony.isActive,
     );
   }
 
-  private getDecreasableColonies(game: Game) {
+  private getDecreasableColonies(game: IGame) {
     return game.colonies.filter(
       (colony) =>
         colony.trackPosition > colony.colonies.length && colony.isActive,

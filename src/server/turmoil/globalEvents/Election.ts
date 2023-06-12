@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {IPlayer} from '../../IPlayer';
@@ -27,7 +27,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     // Solo
     if (game.isSoloMode()) {
       const player = game.getPlayers()[0];
@@ -73,7 +73,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
     }
   }
 
-  public getScore(player: IPlayer, turmoil: Turmoil, game: Game) {
+  public getScore(player: IPlayer, turmoil: Turmoil, game: IGame) {
     const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
 
     const cities = game.board.spaces.filter(

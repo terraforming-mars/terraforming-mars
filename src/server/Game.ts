@@ -69,12 +69,9 @@ import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, dayStringToDays} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
+import {IGame, Score} from './IGame';
 
-export interface Score {
-  corporation: String;
-  playerScore: number;
-}
-export class Game implements Logger {
+export class Game implements IGame, Logger {
   public readonly id: GameId;
   public readonly gameOptions: Readonly<GameOptions>;
   private players: Array<Player>;

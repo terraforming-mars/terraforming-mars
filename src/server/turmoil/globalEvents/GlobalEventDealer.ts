@@ -26,7 +26,7 @@ import {Election} from './Election';
 import {AquiferReleasedByPublicCouncil} from './AquiferReleasedByPublicCouncil';
 import {ParadigmBreakdown} from './ParadigmBreakdown';
 import {CorrosiveRain} from './CorrosiveRain';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {JovianTaxRights} from './JovianTaxRights';
 import {DryDeserts} from './DryDeserts';
 import {ScientificCommunity} from './ScientificCommunity';
@@ -161,7 +161,7 @@ export class GlobalEventDealer {
     public readonly globalEventsDeck: Array<IGlobalEvent>,
     public readonly discardedGlobalEvents: Array<IGlobalEvent>) {}
 
-  public static newInstance(game: Game): GlobalEventDealer {
+  public static newInstance(game: IGame): GlobalEventDealer {
     const events = Array.from(POSITIVE_GLOBAL_EVENTS);
 
     if (!game.gameOptions.removeNegativeGlobalEventsOption) {

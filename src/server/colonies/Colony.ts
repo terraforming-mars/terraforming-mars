@@ -19,7 +19,7 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {StealResources} from '../deferredActions/StealResources';
 import {Tag} from '../../common/cards/Tag';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SerializedColony} from '../SerializedColony';
 import {IColony, TradeOptions} from './IColony';
@@ -45,7 +45,7 @@ export abstract class Colony implements IColony {
     return this.metadata.name;
   }
 
-  public endGeneration(game: Game): void {
+  public endGeneration(game: IGame): void {
     if (this.isActive) {
       this.increaseTrack();
     }

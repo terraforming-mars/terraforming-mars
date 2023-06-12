@@ -1,4 +1,5 @@
 import {Game} from '../src/server/Game';
+import {IGame} from '../src/server/IGame';
 import {GameOptions} from '../src/server/GameOptions';
 import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
@@ -53,7 +54,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
   return [game, ...players];
 }
 
-export function getTestPlayer(game: Game, idx: number): TestPlayer {
+export function getTestPlayer(game: IGame, idx: number): TestPlayer {
   const players = game.getPlayers();
   const length = players.length;
   if (idx >= length) {

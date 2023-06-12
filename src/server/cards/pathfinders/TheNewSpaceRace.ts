@@ -6,7 +6,7 @@ import {asPlayer} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
@@ -35,7 +35,7 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
     return undefined;
   }
 
-  public static potentiallyChangeFirstPlayer(game: Game) {
+  public static potentiallyChangeFirstPlayer(game: IGame) {
     const [cardHolder, card] = game.getCardHolder(CardName.THE_NEW_SPACE_RACE);
     if (cardHolder !== undefined && card !== undefined) {
       game.log('${0} has ${1}, which is played before any other Prelude and makes them first player.', (b) => b.player(cardHolder).card(card));

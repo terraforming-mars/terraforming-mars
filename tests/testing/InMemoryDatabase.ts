@@ -1,4 +1,4 @@
-import {Game, Score} from '../../src/server/Game';
+import {IGame, Score} from '../../src/server/IGame';
 import {GameOptions} from '../../src/server/GameOptions';
 import {SerializedGame} from '../../src/server/SerializedGame';
 import {GameIdLedger, IDatabase} from '../../src/server/database/IDatabase';
@@ -49,7 +49,7 @@ export class InMemoryDatabase implements IDatabase {
   getPlayerCount(_gameId: GameId): Promise<number> {
     throw new Error('Method not implemented.');
   }
-  saveGame(game: Game): Promise<void> {
+  saveGame(game: IGame): Promise<void> {
     const gameId = game.id;
     const row = this.data.get(gameId) || [];
     this.data.set(gameId, row);

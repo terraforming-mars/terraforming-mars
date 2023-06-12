@@ -6,6 +6,7 @@ import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
+import {IGame} from './IGame';
 import {Game} from './Game';
 import {Payment, PaymentKey, PAYMENT_KEYS} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
@@ -75,7 +76,7 @@ export class Player implements IPlayer {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
-  public game: Game;
+  public game: IGame;
   public tags: Tags;
   public colonies: Colonies;
   public readonly production: Production;

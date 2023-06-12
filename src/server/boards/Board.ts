@@ -43,7 +43,7 @@ export abstract class Board {
   }
 
   /* Returns the space given a Space ID. */
-  public getSpace(id: string): ISpace {
+  public getSpace(id: SpaceId): ISpace {
     const space = this.map.get(id);
     if (space === undefined) {
       throw new Error(`Can't find space with id ${id}`);

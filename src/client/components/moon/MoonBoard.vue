@@ -80,6 +80,7 @@ import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import MoonSpace from '@/client/components/moon/MoonSpace.vue';
 import {TileView} from '../board/TileView';
+import {SpaceId} from '@/common/Types';
 
 class MoonParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -112,7 +113,7 @@ export default Vue.extend({
         return s.spaceType !== SpaceType.COLONY;
       });
     },
-    getSpaceById(spaceId: string) {
+    getSpaceById(spaceId: SpaceId) {
       for (const space of this.model.spaces) {
         if (space.id === spaceId) {
           return space;

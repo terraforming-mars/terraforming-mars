@@ -1390,7 +1390,7 @@ export class Game implements Logger {
     });
   }
 
-  public removeTile(spaceId: string): void {
+  public removeTile(spaceId: SpaceId): void {
     const space = this.board.getSpace(spaceId);
     space.tile = undefined;
     space.player = undefined;

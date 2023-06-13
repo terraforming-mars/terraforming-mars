@@ -1047,17 +1047,21 @@ export class Player implements IPlayer {
       this.defer(this.spendHeat(payment.heat));
     }
 
-    for (const playedCard of this.playedCards) {
-      if (playedCard.name === CardName.PSYCHROPHILES) {
-        this.removeResourceFrom(playedCard, payment.microbes);
-      }
+    // TODO(kberg): make it faster to fetch individual cards so this
+    // weird if / for loop can be removed.
+    if (payment.microbes > 0 || payment.floaters > 0 || payment.science > 0) {
+      for (const playedCard of this.playedCards) {
+        if (playedCard.name === CardName.PSYCHROPHILES) {
+          this.removeResourceFrom(playedCard, payment.microbes);
+        }
 
-      if (playedCard.name === CardName.DIRIGIBLES) {
-        this.removeResourceFrom(playedCard, payment.floaters);
-      }
+        if (playedCard.name === CardName.DIRIGIBLES) {
+          this.removeResourceFrom(playedCard, payment.floaters);
+        }
 
-      if (playedCard.name === CardName.LUNA_ARCHIVES) {
-        this.removeResourceFrom(playedCard, payment.science);
+        if (playedCard.name === CardName.LUNA_ARCHIVES) {
+          this.removeResourceFrom(playedCard, payment.science);
+        }
       }
     }
 

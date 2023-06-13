@@ -10,6 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class JetStreamMicroscrappers extends Card implements IActionCard {
   constructor() {
@@ -65,7 +66,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
 
   private addResource(player: IPlayer) {
     player.addResourceTo(this, {qty: 2, log: true});
-    player.titanium--;
+    player.pay(Payment.of({titanium: 1}));
     return undefined;
   }
 

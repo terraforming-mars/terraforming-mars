@@ -7,6 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class JovianLanterns extends Card implements IProjectCard {
   constructor() {
@@ -48,8 +49,8 @@ export class JovianLanterns extends Card implements IProjectCard {
   }
 
   public action(player: IPlayer) {
-    player.titanium--;
-    player.addResourceTo(this, 2);
+    player.pay(Payment.of({titanium: 1}));
+    player.addResourceTo(this, {qty: 2, log: true});
     return undefined;
   }
 }

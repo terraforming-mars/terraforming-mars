@@ -15,6 +15,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Phase} from '../../../common/Phase';
 import {Card} from '../Card';
 import {all} from '../Options';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationCard {
   constructor() {
@@ -57,8 +58,8 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     const orOptions = new OrOptions();
     if (player.titanium > 0) {
       orOptions.options.push(new SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet', () => {
-        player.titanium--;
-        player.addResourceTo(this);
+        player.pay(Payment.of({titanium: 1}));
+        player.addResourceTo(this, {qty: 1, log: true});
         return undefined;
       }));
     }

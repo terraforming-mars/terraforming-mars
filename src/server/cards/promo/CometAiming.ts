@@ -13,6 +13,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {LogHelper} from '../../LogHelper';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class CometAiming extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -53,7 +54,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
 
     const addAsteroidToSelf = function() {
-      player.titanium--;
+      player.pay(Payment.of({titanium: 1}));
       player.addResourceTo(asteroidCards[0], {log: true});
       return undefined;
     };
@@ -63,7 +64,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
       'Add asteroid',
       asteroidCards,
       ([card]) => {
-        player.titanium--;
+        player.pay(Payment.of({titanium: 1}));
         player.addResourceTo(card, {log: true});
         return undefined;
       },

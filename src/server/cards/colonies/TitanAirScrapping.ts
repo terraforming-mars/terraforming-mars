@@ -8,6 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class TitanAirScrapping extends Card implements IProjectCard {
   constructor() {
@@ -68,8 +69,8 @@ export class TitanAirScrapping extends Card implements IProjectCard {
   }
 
   private addResource(player: IPlayer) {
-    player.addResourceTo(this, 2);
-    player.titanium--;
+    player.pay(Payment.of({titanium: 1}));
+    player.addResourceTo(this, {qty: 2, log: true});
     return undefined;
   }
 

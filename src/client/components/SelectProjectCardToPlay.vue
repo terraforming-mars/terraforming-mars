@@ -58,6 +58,7 @@ export default Vue.extend({
     return {
       cardName: card.name,
       card: card,
+      reserveUnits: card.reserveUnits ?? Units.EMPTY,
       cards: cards,
       cost: 0,
       tags: [],
@@ -83,6 +84,7 @@ export default Vue.extend({
       this.card = this.getCard();
       this.cost = this.card.calculatedCost ?? 0;
       this.tags = this.getCardTags(),
+      this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
@@ -164,12 +166,12 @@ export default Vue.extend({
         this.science = deductUnits(this.playerinput.science, 1);
       }
 
-      this.available.steel = Math.max(this.thisPlayer.steel - this.card.reserveUnits.steel, 0);
+      this.available.steel = Math.max(this.thisPlayer.steel - this.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUseSteel()) {
         this.steel = deductUnits(this.available.steel, this.thisPlayer.steelValue, true);
       }
 
-      this.available.titanium = Math.max(this.thisPlayer.titanium - this.card.reserveUnits.titanium, 0);
+      this.available.titanium = Math.max(this.thisPlayer.titanium - this.reserveUnits.titanium, 0);
       if (megacreditBalance > 0 && this.canUseTitanium()) {
         this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue, true);
       }
@@ -177,7 +179,7 @@ export default Vue.extend({
         this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue - 1, true);
       }
 
-      this.available.heat = Math.max(this.availableHeat() - this.card.reserveUnits.heat, 0);
+      this.available.heat = Math.max(this.availableHeat() - this.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUseHeat()) {
         this.heat = deductUnits(this.available.heat, 1);
       }
@@ -274,13 +276,13 @@ export default Vue.extend({
       return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveSteelWarning(): boolean {
-      return this.card?.reserveUnits?.steel > 0 && this.canUseSteel();
+      return this.reserveUnits.steel > 0 && this.canUseSteel();
     },
     showReserveTitaniumWarning(): boolean {
-      return this.card?.reserveUnits?.titanium > 0 && (this.canUseTitanium() || this.canUseLunaTradeFederationTitanium());
+      return this.reserveUnits.titanium > 0 && (this.canUseTitanium() || this.canUseLunaTradeFederationTitanium());
     },
     showReserveHeatWarning(): boolean {
-      return this.card?.reserveUnits?.heat > 0 && this.canUseHeat();
+      return this.reserveUnits?.heat > 0 && this.canUseHeat();
     },
     saveData() {
       const payment: Payment = {

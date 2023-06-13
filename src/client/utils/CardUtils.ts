@@ -9,5 +9,5 @@ export function getCardsByType(inCards: Array<CardModel>, cardTypes: Array<CardT
 }
 
 export function isCardActivated(card: CardModel, player: PublicPlayerModel): boolean {
-  return player.actionsThisGeneration.includes(card.name) || card.isDisabled;
+  return player.actionsThisGeneration.includes(card.name) || (card.isDisabled === true);
 }

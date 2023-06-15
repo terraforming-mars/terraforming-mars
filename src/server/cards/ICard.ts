@@ -72,7 +72,11 @@ export interface ICard {
     type: CardType;
     requirements?: CardRequirements;
     metadata: ICardMetadata;
+
+    // When set, this warning is displayed on the UI. This is typically set in canPlay. It is
+    // *never* serialized.
     warning?: string | Message;
+
     behavior?: Behavior,
     produce?: (player: IPlayer) => void;
     tr?: TRSource | DynamicTRSource;

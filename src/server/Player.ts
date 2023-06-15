@@ -68,7 +68,7 @@ import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
-import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import {IPreludeCard, isPreludeCard} from './cards/prelude/IPreludeCard';
 
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -963,10 +963,12 @@ export class Player implements IPlayer {
   }
 
   private playPreludeCard(): PlayerInput {
+    // Sets warning for fizzle.
+    this.preludeCardsInHand.forEach((card) => card.canPlay(this));
     return new SelectCard(
       'Select prelude card to play',
       'Play',
-      this.getPlayablePreludeCards(),
+      this.preludeCardsInHand,
       ([card]) => {
         return this.playCard(card);
       },
@@ -1293,7 +1295,11 @@ export class Player implements IPlayer {
       return;
     }
     this.playedCards.splice(cardIndex, 1);
-    this.game.projectDeck.discard(card);
+    if (isPreludeCard(card)) {
+      this.game.preludeDeck.discard(card);
+    } else {
+      this.game.projectDeck.discard(card);
+    }
     card.onDiscard?.(this);
     this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
   }
@@ -1412,10 +1418,6 @@ export class Player implements IPlayer {
     } else {
       this.game.playerIsDoneWithGame(this);
     }
-  }
-
-  private getPlayablePreludeCards(): Array<IProjectCard> {
-    return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
   }
 
   private getPlayableCeoCards(): Array<IProjectCard> {
@@ -1656,14 +1658,6 @@ export class Player implements IPlayer {
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
         game.phase = Phase.PRELUDES;
-
-        // If no playable prelude card in hand, end player turn
-        if (this.getPlayablePreludeCards().length === 0) {
-          LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
-          this.preludeCardsInHand = [];
-          game.playerIsFinishedTakingActions();
-          return;
-        }
 
         this.setWaitingFor(this.playPreludeCard(), () => {
           if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
@@ -2117,5 +2111,6 @@ export class Player implements IPlayer {
   public fizzle(card: IPreludeCard): void {
     this.game.log('${0} fizzled. ${1} gains 15 M€.', (b) => b.card(card).player(this));
     this.addResource(Resource.MEGACREDITS, 15);
+    this.game.preludeDeck.discard(card);
   }
 }

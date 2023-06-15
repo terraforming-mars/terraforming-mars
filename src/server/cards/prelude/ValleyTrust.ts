@@ -8,6 +8,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
+import {IPreludeCard} from './IPreludeCard';
 
 export class ValleyTrust extends Card implements ICorporationCard {
   constructor() {
@@ -42,18 +43,14 @@ export class ValleyTrust extends Card implements ICorporationCard {
 
   public initialAction(player: IPlayer) {
     const game = player.game;
-    const cardsDrawn: Array<IProjectCard> = [
+    const cardsDrawn: Array<IPreludeCard> = [
       game.preludeDeck.draw(game),
       game.preludeDeck.draw(game),
       game.preludeDeck.draw(game),
     ];
 
-    return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
-      if (card.canPlay === undefined || card.canPlay(player)) {
-        return player.playCard(card);
-      } else {
-        throw new Error('You cannot pay for this card');
-      }
+    return new SelectCard<IPreludeCard>('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
+      return player.playCard(card);
     });
   }
 }

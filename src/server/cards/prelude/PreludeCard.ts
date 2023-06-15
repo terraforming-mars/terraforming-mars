@@ -6,6 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {TileType} from '../../../common/TileType';
 import {Behavior} from '../../behavior/Behavior';
 import {IPreludeCard} from './IPreludeCard';
+import {IPlayer} from '@/server/IPlayer';
 
 interface StaticPreludeProperties {
     metadata: ICardMetadata;
@@ -20,7 +21,7 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
   constructor(properties: StaticPreludeProperties) {
     const startingMegaCredits = properties.startingMegacredits ?? properties.behavior?.stock?.megacredits;
     if (typeof(startingMegaCredits) === 'object') {
-      throw new Error('Cannot have a Countable for a Prelude stock MC: ' + properties.name);
+      throw new Error('Cannot have a Countable for a Prelude stock M€: ' + properties.name);
     }
     const obj: StaticCardProperties = {
       behavior: properties.behavior,
@@ -33,6 +34,26 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
       obj.startingMegaCredits = startingMegaCredits;
     }
     super(obj);
+  }
+
+  public warning?: string = undefined;
+
+  public override canPlay(player: IPlayer): boolean {
+    const canPlay = super.canPlay(player);
+    if (canPlay === false) {
+      this.warning = 'This Prelude will fizzle. Playing it will give you 15M€.';
+    }
+    return canPlay;
+  }
+
+  // Prelude cards behave differently from other cards. Even if they aren't playable, they can be discarded for 15M€.
+  public override play(player: IPlayer) {
+    if (this.canPlay(player)) {
+      return super.play(player);
+    } else {
+      player.fizzle(this);
+      return undefined;
+    }
   }
   public override get type(): CardType.PRELUDE {
     return CardType.PRELUDE;

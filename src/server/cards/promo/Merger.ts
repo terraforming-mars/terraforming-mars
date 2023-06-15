@@ -38,6 +38,7 @@ export class Merger extends PreludeCard {
       return player.canAfford(Merger.mergerCost - this.spendableMegacredits(player, corp));
     });
     if (enabled.some((v) => v === true) === false) {
+      player.discardPlayedCard(this);
       player.fizzle(this);
       dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
       return undefined;

@@ -32,6 +32,7 @@
 
     "Card not found" : "Karte nicht gefunden",
     "The project discard pile has been shuffled to form a new deck." : "Der Projektkarten-Ablagestapel wurde neu gemischt, um einen neuen Nachziehstapel zu bilden.",
+    "${0} fizzled. ${1} gains 15 M€.": "${0} hat gepatzt. ${1} erhält 15 M€.",
     "Incorrect options provided" : "Ungültige Optionen angegeben",
     "Input contains unauthorized keys": "Eingabe enthält ungültige Zeichen",
     "Amount provided too high (max ": "Eingegebener Betrag zu hoch (max. ",

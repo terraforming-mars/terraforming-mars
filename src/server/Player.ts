@@ -1514,11 +1514,11 @@ export class Player implements IPlayer {
    * worth 2M€, this will return 7.
    *
    * @param {Payment} payment the resources being paid.
-   * @param {Payment.Options} options any configuration defining the accepted forma of payment.
+   * @param {Payment.Options} options any configuration defining the accepted form of payment.
    * @return {number} a number representing the value of payment in M€.
    */
   public payingAmount(payment: Payment, options?: Partial<Payment.Options>): number {
-    const multiplier: {[key in PaymentKey]: number} = {
+    const multiplier: Record<PaymentKey, number> = {
       megaCredits: 1,
       steel: this.getSteelValue(),
       titanium: this.getTitaniumValue(),

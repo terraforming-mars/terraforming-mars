@@ -8,6 +8,7 @@ import {IActionCard} from '../ICard';
 import {Resource} from '../../../common/Resource';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class AgroDrones extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -35,7 +36,7 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
   }
 
   public action(player: IPlayer) {
-    player.deductResource(Resource.STEEL, 1);
+    player.pay(Payment.of({steel: 1})); // Triggers Sol Bank. Ew.
     player.deductResource(Resource.ENERGY, 1);
     player.addResource(Resource.PLANTS, 3);
     player.game.log('${0} spent 1 steel and 1 energy to gain 3 plants.', (b) => b.player(player));

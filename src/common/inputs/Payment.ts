@@ -1,6 +1,15 @@
 // https://steveholgado.com/typescript-types-from-arrays/
 export const PAYMENT_KEYS = ['heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'science', 'seeds', 'auroraiData'] as const;
 export type PaymentKey = typeof PAYMENT_KEYS[number];
+
+/**
+ * A Payment specifically represents the units of resources to deduct from the player's play area.
+ *
+ * At this point, megaCredits means actual money, because (for instance if the player was Helion) they
+ * probably chose to spend money instead of heat.
+ *
+ * Exception: Player.pay({heat}) still triggers asking the caller if they want to spend Stormcraft resources.
+ */
 export type Payment = {
   // Standard currency for paying for stuff
   megaCredits: number;

@@ -29,3 +29,9 @@ export class SolBank extends Card implements ICorporationCard {
 
   // Behavior is in Player.
 }
+
+// Steel Market Monopolists
+// Titanium Market Monopolists
+// Prelude: Strategic Base Planning
+// Global Event: Communication Boom (except if we change the event from pay to lose (as all global event like that to make them consistent)
+// Global Event: Constant Struggle (except if we change the event from pay to lose (as all global event like that to make them consistent)

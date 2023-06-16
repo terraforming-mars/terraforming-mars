@@ -29,6 +29,7 @@ import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import {OrOptions} from './inputs/OrOptions';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -193,7 +194,6 @@ export interface IPlayer {
   canReduceAnyProduction(resource: Resource, minQuantity?: number): boolean;
   canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): void;
   productionIsProtected(attacker: IPlayer): boolean;
-  getNoTagsCount(): number;
   resolveInsurance(): void;
   resolveInsuranceInSoloGame(): void;
   getColoniesCount(): number;
@@ -201,8 +201,24 @@ export interface IPlayer {
   getRequirementsBonus(parameter: GlobalParameter): number;
   removeResourceFrom(card: ICard, count?: number, options?: {removingPlayer? : IPlayer, log?: boolean}): void;
   addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean}): void;
+
+  /**
+   * Returns the set of played cards that have actual resources on them.
+   *
+   * If `resource` is absent, include cards that collect any resource.
+   */
   getCardsWithResources(resource?: CardResource): Array<ICard>;
+
+  /**
+   * Return the cards that collect `resource`.
+   *
+   * If `resource` is absent, return the cards that collect any resource.
+   */
   getResourceCards(resource?: CardResource): Array<ICard>;
+
+  /**
+   * Count all the resources of a given type in the tableau.
+   */
   getResourceCount(resource: CardResource): number;
   deferInputCb(result: PlayerInput | undefined): void;
   runInput(input: InputResponse, pi: PlayerInput): void;
@@ -248,7 +264,7 @@ export interface IPlayer {
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
   runInitialAction(corp: ICorporationCard): void;
-  getActions(): void;
+  getActions(): OrOptions;
   process(input: InputResponse): void;
   getWaitingFor(): PlayerInput | undefined;
   setWaitingFor(input: PlayerInput, cb?: () => void): void;

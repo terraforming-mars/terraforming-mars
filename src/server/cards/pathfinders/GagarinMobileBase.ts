@@ -17,7 +17,7 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     super({
       type: CardType.CORPORATION,
       name: CardName.GAGARIN_MOBILE_BASE,
-      tags: [Tag.SPACE],
+      tags: [Tag.SCIENCE],
       startingMegaCredits: 42,
       initialActionText: 'Place Gagarin Moble Base on ANY space ON MARS',
 

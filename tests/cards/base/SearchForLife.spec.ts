@@ -3,7 +3,7 @@ import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {setOxygenLevel} from '../../TestingUtils';
+import {fakeCard, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('SearchForLife', function() {
@@ -17,7 +17,10 @@ describe('SearchForLife', function() {
   });
 
   it('Can not act if no MC', function() {
+    player.megaCredits = 0;
     expect(card.canAct(player)).is.not.true;
+    player.megaCredits = 1;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Can not play if oxygen level too high', function() {
@@ -37,17 +40,55 @@ describe('SearchForLife', function() {
   });
 
 
-  it('Should act', function() {
+  it('action fails, no tags', function() {
     player.playedCards.push(card);
 
-    while (game.projectDeck.discardPile.find((c) => c.tags.length === 1 && c.tags[0] === Tag.MICROBE) === undefined ||
-               game.projectDeck.discardPile.find((c) => c.tags.length === 1 && c.tags[0] !== Tag.MICROBE) === undefined) {
-      player.megaCredits = 1;
-      card.action(player);
-      game.deferredActions.runNext();
-      expect(player.megaCredits).to.eq(0);
-    }
+    player.megaCredits = 1;
 
-    expect(card.resourceCount >= 1).is.true;
+    game.projectDeck.drawPile.push(fakeCard({}));
+
+    card.action(player);
+    runAllActions(game); // pays for card.
+    expect(player.megaCredits).to.eq(0);
+    expect(card.resourceCount).eq(0);
+  });
+
+  it('action fails, wrong tag', function() {
+    player.playedCards.push(card);
+
+    player.megaCredits = 1;
+
+    game.projectDeck.drawPile.push(fakeCard({tags: [Tag.SCIENCE]}));
+
+    card.action(player);
+    runAllActions(game); // pays for card.
+    expect(player.megaCredits).to.eq(0);
+    expect(card.resourceCount).eq(0);
+  });
+
+  it('action fails, wild tag', function() {
+    player.playedCards.push(card);
+
+    player.megaCredits = 1;
+
+    game.projectDeck.drawPile.push(fakeCard({tags: [Tag.WILD]}));
+
+    card.action(player);
+    runAllActions(game); // pays for card.
+    expect(player.megaCredits).to.eq(0);
+    expect(card.resourceCount).eq(0);
+  });
+
+  it('action succeeds', function() {
+    player.playedCards.push(card);
+
+    player.megaCredits = 1;
+
+    game.projectDeck.drawPile.push(fakeCard({tags: [Tag.WILD, Tag.MICROBE]}));
+
+    card.action(player);
+    runAllActions(game); // pays for card.
+    expect(player.megaCredits).to.eq(0);
+    expect(card.resourceCount).eq(1);
   });
 });

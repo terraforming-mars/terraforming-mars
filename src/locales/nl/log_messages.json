@@ -281,7 +281,7 @@
     "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} kan ${1} niet omdraaien om 3 TW te krijgen vanwege de hoge kosten van het DE RODEN-beleid",
     "${0} turned ${1} face down to gain 3 TR": "${0} heeft ${1} omgedraaid om 3 TW te krijgen",
     "You drew ${0}": "Je trok ${0}",
-    "DELETE 2023-09-01 You drew ${0} and ${1}": "Je trok ${0} en ${1}",
+    "You drew ${0} and ${1}": "Je trok ${0} en ${1}",
     "You drew ${0}, ${1} and ${2}": "Je trok ${0}, ${1} en ${2}",
     "You drew ${0}, ${1}, ${2} and ${3}": "Je trok ${0}, ${1}, ${2} en ${3}",
     "${0} spent ${1} energy": "${0} betaalde ${1} energie",

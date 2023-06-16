@@ -193,7 +193,6 @@ export interface IPlayer {
   canReduceAnyProduction(resource: Resource, minQuantity?: number): boolean;
   canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): void;
   productionIsProtected(attacker: IPlayer): boolean;
-  getNoTagsCount(): number;
   resolveInsurance(): void;
   resolveInsuranceInSoloGame(): void;
   getColoniesCount(): number;

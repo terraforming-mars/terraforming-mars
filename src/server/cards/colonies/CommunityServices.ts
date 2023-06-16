@@ -27,7 +27,7 @@ export class CommunityServices extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.production.add(Resource.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
+    player.production.add(Resource.MEGACREDITS, player.tags.numberOfCardsWithNoTags() + 1, {log: true});
     return undefined;
   }
 }

@@ -50,7 +50,7 @@ describe('PlayerInputFactory2', function() {
   it('SelectProjectCardToPlay', async () => {
     runTest({
       inputType: 'projectCard',
-      cards: [{name: CardName.ANTS, reserveUnits: {}} as CardModel],
+      cards: [{name: CardName.ANTS} as CardModel],
     });
   });
 

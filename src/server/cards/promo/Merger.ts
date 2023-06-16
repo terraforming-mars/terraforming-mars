@@ -11,6 +11,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CARD_COST} from '../../../common/constants';
 import {CorporationDeck} from '../Deck';
 import {Countable} from '../../behavior/Countable';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
 export class Merger extends PreludeCard {
   constructor() {
@@ -38,7 +39,7 @@ export class Merger extends PreludeCard {
       return player.canAfford(Merger.mergerCost - this.spendableMegacredits(player, corp));
     });
     if (enabled.some((v) => v === true) === false) {
-      player.fizzle(this);
+      PreludesExpansion.fizzle(player, this);
       dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
       return undefined;
     }

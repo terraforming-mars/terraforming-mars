@@ -68,8 +68,6 @@ import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
-import {IPreludeCard} from './cards/prelude/IPreludeCard';
-
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -2112,10 +2110,5 @@ export class Player implements IPlayer {
     if (input === undefined) return;
     const action = new SimpleDeferredAction(this, () => input, priority);
     this.game.defer(action);
-  }
-
-  public fizzle(card: IPreludeCard): void {
-    this.game.log('${0} fizzled. ${1} gains 15 M€.', (b) => b.card(card).player(this));
-    this.addResource(Resource.MEGACREDITS, 15);
   }
 }

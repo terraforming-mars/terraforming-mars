@@ -28,7 +28,6 @@ import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
-import {IPreludeCard} from './cards/prelude/IPreludeCard';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -255,7 +254,6 @@ export interface IPlayer {
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
   defer(input: PlayerInput | undefined, priority?: Priority): void;
-  fizzle(card: IPreludeCard): void;
 }
 
 export function isIPlayer(object: any): object is IPlayer {

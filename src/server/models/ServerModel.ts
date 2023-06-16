@@ -35,7 +35,6 @@ import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {SpectatorModel} from '../../common/models/SpectatorModel';
-import {Units} from '../../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from '../../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -143,8 +142,6 @@ export class Server {
         resources: targetCard.resourceCount,
         name: targetCard.card.name,
         calculatedCost: player.getCardCost(targetCard.card),
-        isDisabled: false,
-        reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
         isSelfReplicatingRobotsCard: true,
       };
       return model;
@@ -375,7 +372,6 @@ export class Server {
       }
 
 
-      const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
       let warning = card.warning;
       const playCardMetadata = options?.extras?.get(card.name);
       if (typeof(playCardMetadata?.details) === 'object') {
@@ -389,13 +385,19 @@ export class Server {
         resources: options.showResources ? card.resourceCount : undefined,
         name: card.name,
         calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
-        isDisabled: isDisabled,
         warning: warning,
-        reserveUnits: playCardMetadata?.reserveUnits ?? Units.EMPTY,
         bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
         discount: discount,
         cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
       };
+      const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
+      if (isDisabled === true) {
+        model.isDisabled = true;
+      }
+      const reserveUnits = playCardMetadata?.reserveUnits;
+      if (reserveUnits !== undefined) {
+        model.reserveUnits = reserveUnits;
+      }
       return model;
     });
   }
@@ -427,7 +429,7 @@ export class Server {
       name: player.name,
       needsToDraft: player.needsToDraft,
       needsToResearch: !game.hasResearched(player),
-      noTagsCount: player.getNoTagsCount(),
+      noTagsCount: player.tags.numberOfCardsWithNoTags(),
       plants: player.plants,
       plantProduction: player.production.plants,
       protectedResources: Server.getResourceProtections(player),

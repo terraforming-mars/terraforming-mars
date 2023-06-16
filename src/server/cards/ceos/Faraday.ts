@@ -44,7 +44,8 @@ export class Faraday extends CeoCard {
     for (const entry of player.tags.countAllTags()) {
       record[entry.tag] = entry.count;
     }
-    // This is safe because getAllTags returns all tags. I wish it were easy to initialize a Record type.
+    // This is safe because countAllTags returns all tags. I wish it were easy to initialize a Record type.
+    // Actually it doesn't return Clone tags.
     return record as Record<Tag, number>;
   }
 

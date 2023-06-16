@@ -28,6 +28,7 @@ export interface SelectPaymentModel {
 export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
   cardName: CardName;
   card: CardModel;
+  reserveUnits: Units;
   cards: Array<CardModel>;
   tags: Array<Tag>
   science: number;

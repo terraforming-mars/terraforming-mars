@@ -68,6 +68,8 @@ import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import {sum} from '../common/utils/utils';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -531,17 +533,6 @@ export class Player implements IPlayer {
     return attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 
-  // Return the number of cards in the player's hand without tags.
-  // Wild tags are ignored in this computation. (why?)
-  public getNoTagsCount() {
-    let noTagsCount = 0;
-
-    noTagsCount += this.corporations.filter((card) => card.type !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
-    noTagsCount += this.playedCards.filter((card) => card.type !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
-
-    return noTagsCount;
-  }
-
   /**
    * In the multiplayer game, after an attack, the attacked player makes a claim
    * for insurance. If Mons Insurance is in the game, the claimant will receive
@@ -659,8 +650,6 @@ export class Player implements IPlayer {
     }
   }
 
-  // Returns the set of played cards that have actual resources on them.
-  // If `resource` is supplied, only cards that hold that type of resource are retured.
   public getCardsWithResources(resource?: CardResource): Array<ICard> {
     let result = this.tableau.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
 
@@ -671,8 +660,6 @@ export class Player implements IPlayer {
     return result;
   }
 
-  // Returns the set of played cards that can store resources on them.
-  // If `resource` is supplied, only cards that hold that type of resource are retured.
   public getResourceCards(resource?: CardResource): Array<ICard> {
     let result = this.tableau.filter((card) => card.resourceType !== undefined);
 
@@ -684,11 +671,7 @@ export class Player implements IPlayer {
   }
 
   public getResourceCount(resource: CardResource): number {
-    let count = 0;
-    this.getCardsWithResources(resource).forEach((card) => {
-      count += card.resourceCount;
-    });
-    return count;
+    return sum(this.getCardsWithResources(resource).map((card) => card.resourceCount));
   }
 
   public deferInputCb(result: PlayerInput | undefined): void {
@@ -2110,5 +2093,10 @@ export class Player implements IPlayer {
     if (input === undefined) return;
     const action = new SimpleDeferredAction(this, () => input, priority);
     this.game.defer(action);
+  }
+
+  public fizzle(card: IPreludeCard): void {
+    this.game.log('${0} fizzled. ${1} gains 15 M€.', (b) => b.card(card).player(this));
+    this.addResource(Resource.MEGACREDITS, 15);
   }
 }

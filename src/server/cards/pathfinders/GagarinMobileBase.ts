@@ -79,7 +79,7 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
   }
 
   public action(player: IPlayer) {
-    return new SelectSpace('title', this.availableSpaces(player), (space) => {
+    return new SelectSpace('Select new space for Gagarin Mobile Base', this.availableSpaces(player), (space) => {
       player.game.gagarinBase.unshift(space.id);
       player.game.grantSpaceBonuses(player, space);
 

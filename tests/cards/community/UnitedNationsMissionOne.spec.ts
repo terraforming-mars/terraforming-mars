@@ -39,7 +39,7 @@ describe('UnitedNationsMissionOne', function() {
     player2.increaseTerraformRating();
     expect(player.megaCredits).eq(2);
 
-    player2.increaseTerraformRatingSteps(3);
+    player2.increaseTerraformRating(3);
     expect(player.megaCredits).eq(5);
   });
 

@@ -26,7 +26,7 @@ export class Midas extends Card implements ICorporationCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.decreaseTerraformRatingSteps(7);
+    player.decreaseTerraformRating(7);
     return undefined;
   }
 }

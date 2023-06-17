@@ -31,7 +31,7 @@ export class SocialEvents extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.increaseTerraformRatingSteps(this.getExpectedTr(player), {log: true});
+    player.increaseTerraformRating(this.getExpectedTr(player), {log: true});
     return undefined;
   }
 }

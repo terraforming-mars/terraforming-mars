@@ -28,7 +28,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
   }
   public override bespokePlay(player: IPlayer) {
     const steps = 1 + player.tags.count(Tag.JOVIAN);
-    player.increaseTerraformRatingSteps(steps, {log: true});
+    player.increaseTerraformRating(steps, {log: true});
 
     return undefined;
   }

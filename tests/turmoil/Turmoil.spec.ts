@@ -624,21 +624,21 @@ describe('Turmoil', function() {
     expect(player.getTerraformRating()).eq(15);
 
     player.megaCredits = 3;
-    player.increaseTerraformRatingSteps(2);
+    player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(3); // No change
     expect(player.getTerraformRating()).eq(15);
 
     player.megaCredits = 5;
-    player.increaseTerraformRatingSteps(2);
+    player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(5); // No change
     expect(player.getTerraformRating()).eq(15);
 
     player.megaCredits = 6;
-    player.increaseTerraformRatingSteps(2);
+    player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
@@ -648,7 +648,7 @@ describe('Turmoil', function() {
     game.phase = Phase.SOLAR;
 
     player.megaCredits = 6;
-    player.increaseTerraformRatingSteps(2);
+    player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(6);

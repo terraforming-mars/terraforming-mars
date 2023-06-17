@@ -88,7 +88,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
               new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€', 'Confirm', () => {
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 this.isDisabled = true;
-                player.increaseTerraformRatingSteps(3);
+                player.increaseTerraformRating(3);
                 player.deductResource(Resource.MEGACREDITS, megaCreditsLost);
                 game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                 return undefined;
@@ -139,7 +139,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
             return new OrOptions(
               new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR', () => {
                 this.isDisabled = true;
-                player.increaseTerraformRatingSteps(3);
+                player.increaseTerraformRating(3);
                 game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
                 return undefined;
               }),

@@ -1028,7 +1028,7 @@ export class Game implements IGame, Logger {
 
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OXYGEN, steps);
-      player.increaseTerraformRatingSteps(steps);
+      player.increaseTerraformRating(steps);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
       this.increaseTemperature(player, 1);
@@ -1079,7 +1079,7 @@ export class Game implements IGame, Logger {
         }
       }
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
-      player.increaseTerraformRatingSteps(steps);
+      player.increaseTerraformRating(steps);
     }
 
     // Check for Aphrodite corporation
@@ -1120,7 +1120,7 @@ export class Game implements IGame, Logger {
       }
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
-      player.increaseTerraformRatingSteps(steps);
+      player.increaseTerraformRating(steps);
     }
 
     // BONUS FOR OCEAN TILE AT 0

@@ -148,10 +148,8 @@ export interface IPlayer {
   increaseSteelValue(): void;
   decreaseSteelValue(): void;
   getTerraformRating(): number;
-  decreaseTerraformRating(opts?: {log?: boolean}): void;
-  increaseTerraformRating(opts?: {log?: boolean}): void;
-  increaseTerraformRatingSteps(steps: number, opts?: {log?: boolean}): void;
-  decreaseTerraformRatingSteps(steps: number, opts?: {log?: boolean}): void;
+  increaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
+  decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
   getResource(resource: Resource): number;
   logUnitDelta(resource: Resource, amount: number, unitType: 'production' | 'amount', from: ResourceSource | undefined, stealing?: boolean): void;

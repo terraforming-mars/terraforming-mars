@@ -268,7 +268,7 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.tr !== undefined) {
-      player.increaseTerraformRatingSteps(behavior.tr);
+      player.increaseTerraformRating(behavior.tr);
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {

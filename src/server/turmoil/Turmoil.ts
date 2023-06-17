@@ -316,7 +316,7 @@ export class Turmoil {
       // Raise TR
       game.defer(new SimpleDeferredAction(player, () => {
         if (steps > 0) {
-          player.increaseTerraformRatingSteps(steps);
+          player.increaseTerraformRating(steps);
           game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(player).number(steps));
         } else {
           game.log('${0} is the new chairman', (b) => b.player(player));

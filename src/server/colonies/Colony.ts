@@ -268,7 +268,7 @@ export abstract class Colony implements IColony {
 
     case ColonyBenefit.GAIN_TR:
       if (quantity > 0) {
-        player.increaseTerraformRatingSteps(quantity, {log: true});
+        player.increaseTerraformRating(quantity, {log: true});
       }
       break;
 

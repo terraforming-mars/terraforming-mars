@@ -36,7 +36,7 @@ export class Pristar extends Card implements ICorporationCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.decreaseTerraformRatingSteps(2);
+    player.decreaseTerraformRating(2);
     return undefined;
   }
 

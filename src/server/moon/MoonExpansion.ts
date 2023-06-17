@@ -162,7 +162,7 @@ export class MoonExpansion {
           this.activateLunaFirst(undefined, player.game, increment);
         } else {
           player.game.log('${0} raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
-          player.increaseTerraformRatingSteps(increment);
+          player.increaseTerraformRating(increment);
           this.bonus(moonData.miningRate, increment, 3, () => {
             player.drawCard();
           });
@@ -186,7 +186,7 @@ export class MoonExpansion {
           this.activateLunaFirst(undefined, player.game, count);
         } else {
           player.game.log('${0} raised the habitat rate ${1} step(s)', (b) => b.player(player).number(increment));
-          player.increaseTerraformRatingSteps(count);
+          player.increaseTerraformRating(increment);
           this.bonus(moonData.colonyRate, increment, 3, () => {
             player.drawCard();
           });
@@ -210,7 +210,7 @@ export class MoonExpansion {
           this.activateLunaFirst(undefined, player.game, increment);
         } else {
           player.game.log('${0} raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
-          player.increaseTerraformRatingSteps(count);
+          player.increaseTerraformRating(increment);
           this.bonus(moonData.logisticRate, increment, 3, () => {
             player.drawCard();
           });

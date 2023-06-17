@@ -26,7 +26,7 @@ describe('Aurorai', function() {
     runAllActions(game);
     expect(card.resourceCount).eq(1);
 
-    player.increaseTerraformRatingSteps(3);
+    player.increaseTerraformRating(3);
     runAllActions(game);
     expect(card.resourceCount).eq(4);
   });

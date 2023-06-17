@@ -259,15 +259,7 @@ export class Player implements IPlayer {
     return this.terraformRating;
   }
 
-  public decreaseTerraformRating(opts: {log?: boolean} = {}) {
-    this.decreaseTerraformRatingSteps(1, opts);
-  }
-
-  public increaseTerraformRating(opts: {log?: boolean} = {}) {
-    this.increaseTerraformRatingSteps(1, opts);
-  }
-
-  public increaseTerraformRatingSteps(steps: number, opts: {log?: boolean} = {}) {
+  public increaseTerraformRating(steps: number = 1, opts: {log?: boolean} = {}) {
     const raiseRating = () => {
       this.terraformRating += steps;
 
@@ -303,7 +295,7 @@ export class Player implements IPlayer {
     }
   }
 
-  public decreaseTerraformRatingSteps(steps: number, opts: {log?: boolean} = {}) {
+  public decreaseTerraformRating(steps: number = 1, opts: {log?: boolean} = {}) {
     this.terraformRating -= steps;
     if (opts.log === true) {
       this.game.log('${0} lost ${1} TR', (b) => b.player(this).number(steps));

@@ -296,7 +296,6 @@
     "You drew ${0} and ${1}": "Du zogst ${0} und ${1}",
     "You drew ${0}, ${1} and ${2}": "Du zogst ${0}, ${1} und ${2}",
     "You drew ${0}, ${1}, ${2} and ${3}": "Du zogst ${0}, ${1}, ${2} und ${3}",
-    "${0} and ${1} were discarded as ${2} could not pay for both cards.": "${0} und ${1} wurden abgeworfen, da ${2} nicht für beide Karten bezahlen konnte/",
     "${0} spent ${1} energy": "${0} bezahlte ${1} Energie",
     "${0} placed a Greenery tile": "${0} platzierte ein Grünflächenplättchen",
     "${0} must select ${1} bonus resource(s) from ${2}' ability": "${0} muss ${1} Bonus-Ressource(n) von ${2} auswählen",

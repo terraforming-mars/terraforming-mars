@@ -71,7 +71,6 @@ import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from '
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {sum} from '../common/utils/utils';
 
-
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
 export class Player implements IPlayer {

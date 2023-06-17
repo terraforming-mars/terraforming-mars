@@ -45,7 +45,7 @@ export class Lowell extends CeoCard {
     ceosDrawn = ceosDrawn.filter((ceo) => {
       if (ceo.canPlay?.(player) === false) {
         game.ceoDeck.discard(ceo);
-        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(ceo).player(player), {reservedFor: player});
+        game.log('${0} was discarded as ${1} could not play it.', (b) => b.card(ceo).player(player), {reservedFor: player});
         return false;
       }
       return true;

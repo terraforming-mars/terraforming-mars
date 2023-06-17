@@ -70,7 +70,7 @@ export default Vue.extend({
     let selectedOption = displayedOptions[0];
     if (displayedOptions.length > 1 &&
       selectedOption.inputType === 'card' &&
-      !selectedOption.cards?.some((card) => card.isDisabled === false)) {
+      !selectedOption.cards?.some((card) => card.isDisabled !== true)) {
       selectedOption = displayedOptions[1];
     }
     return {

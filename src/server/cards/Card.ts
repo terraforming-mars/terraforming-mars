@@ -16,7 +16,6 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
-import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
@@ -30,7 +29,6 @@ const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.STANDARD_ACTION,
 ] as const;
 
-type ReserveUnits = Units & {deduct: boolean};
 type FirstActionBehavior = Behavior & {text: string};
 
 /*
@@ -49,7 +47,7 @@ type Properties = {
   metadata: ICardMetadata;
   requirements?: CardRequirements;
   name: CardName;
-  reserveUnits?: ReserveUnits,
+  reserveUnits?: Units,
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
@@ -107,7 +105,7 @@ export abstract class Card {
 
       const p: Properties = {
         ...properties,
-        reserveUnits: properties.reserveUnits === undefined ? undefined : {...Units.of(properties.reserveUnits), deduct: properties.reserveUnits.deduct ?? true},
+        reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
       };
       staticCardProperties.set(properties.name, p);
       staticInstance = p;
@@ -157,8 +155,8 @@ export abstract class Card {
   public get cardDiscount() {
     return this.properties.cardDiscount;
   }
-  public get reserveUnits(): ReserveUnits {
-    return this.properties.reserveUnits || {...Units.EMPTY, deduct: true};
+  public get reserveUnits(): Units {
+    return this.properties.reserveUnits || Units.EMPTY;
   }
   public get tr(): TRSource | DynamicTRSource | undefined {
     return this.properties.tr;
@@ -190,10 +188,7 @@ export abstract class Card {
   }
 
   public play(player: IPlayer): PlayerInput | undefined {
-    if (!isICorporationCard(this) && this.reserveUnits.deduct === true) {
-      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-      player.deductUnits(adjustedReserveUnits);
-    }
+    player.deductUnits(MoonExpansion.adjustedReserveCosts(player, this));
     if (this.behavior !== undefined) {
       getBehaviorExecutor().execute(this.behavior, player, this);
     }

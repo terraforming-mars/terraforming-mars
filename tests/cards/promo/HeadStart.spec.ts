@@ -11,7 +11,7 @@ import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralRese
 import {Loan} from '../../../src/server/cards/prelude/Loan';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {CardType} from '../../../src/common/cards/CardType';
+import {Donation} from '../../../src/server/cards/prelude/Donation';
 
 describe('HeadStart', function() {
   let headStart: HeadStart;
@@ -41,7 +41,7 @@ describe('HeadStart', function() {
     const loan = new Loan();
     player.preludeCardsInHand = [headStart, loan];
     player.cardsInHand = [ants, bactoviralResearch];
-    player2.preludeCardsInHand = [fakeCard({type: CardType.PRELUDE})];
+    player2.preludeCardsInHand = [new Donation()];
 
     expect(player.actionsTakenThisRound).eq(0);
     expect(game.activePlayer).eq(player.id);
@@ -95,7 +95,7 @@ describe('HeadStart', function() {
     const loan = new Loan();
     player.preludeCardsInHand = [headStart, loan];
     player.cardsInHand = [ants, bactoviralResearch];
-    player2.preludeCardsInHand = [fakeCard({type: CardType.PRELUDE})];
+    player2.preludeCardsInHand = [new Donation()];
 
     expect(player.actionsTakenThisRound).eq(0);
     expect(game.activePlayer).eq(player.id);

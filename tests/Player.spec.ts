@@ -13,7 +13,7 @@ import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
-import {cast, formatLogMessage, getSendADelegateOption, runAllActions} from './TestingUtils';
+import {cast, doWait, formatLogMessage, getSendADelegateOption, runAllActions} from './TestingUtils';
 import {Units} from '../src/common/Units';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/server/cards/base/Pets';
@@ -24,6 +24,15 @@ import {PartyName} from '../src/common/turmoil/PartyName';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {SelectPlayer} from '../src/server/inputs/SelectPlayer';
 import {SelectAmount} from '../src/server/inputs/SelectAmount';
+import {Phase} from '../src/common/Phase';
+import {testGame} from './TestGame';
+import {SelectCard} from '../src/server/inputs/SelectCard';
+import {AlliedBanks} from '../src/server/cards/prelude/AlliedBanks';
+import {Biofuels} from '../src/server/cards/prelude/Biofuels';
+import {CO2Reducers} from '../src/server/cards/pathfinders/CO2Reducers';
+import {Donation} from '../src/server/cards/prelude/Donation';
+import {Loan} from '../src/server/cards/prelude/Loan';
+import {IPreludeCard} from '../src/server/cards/prelude/IPreludeCard';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -795,6 +804,86 @@ describe('Player', function() {
 
     expect(player.megaCredits).eq(0);
     expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(2);
+  });
+
+  it('Prelude action cycle', () => {
+    const [game, player1, player2] = testGame(2, {preludeExtension: true});
+
+    // None of these preludes require additional user input, so they're good for this test.
+    const alliedBanks = new AlliedBanks();
+    const biofuels = new Biofuels();
+    const co2Reducers = new CO2Reducers();
+    const donation = new Donation();
+
+    game.phase = Phase.PRELUDES;
+    player1.preludeCardsInHand = [alliedBanks, biofuels];
+    player2.preludeCardsInHand = [co2Reducers, donation];
+
+    expect(player1.actionsTakenThisRound).eq(0);
+    expect(game.activePlayer).eq(player1.id);
+
+    player1.takeAction();
+
+    doWait(player1, SelectCard, (firstPrelude) => {
+      expect(firstPrelude!.title).eq('Select prelude card to play');
+      firstPrelude.cb([alliedBanks]);
+    });
+    runAllActions(game);
+
+    expect(game.activePlayer).eq(player1.id);
+    expect(player2.getWaitingFor()).is.undefined;
+
+    doWait(player1, SelectCard, (selectCard) => {
+      expect(selectCard.title).eq('Select prelude card to play');
+      selectCard.cb([biofuels]);
+    });
+    runAllActions(game);
+
+    expect(game.activePlayer).eq(player2.id);
+    expect(player1.getWaitingFor()).is.undefined;
+
+    doWait(player2, SelectCard, (firstPrelude) => {
+      expect(firstPrelude!.title).eq('Select prelude card to play');
+      firstPrelude.cb([co2Reducers]);
+    });
+    runAllActions(game);
+
+    expect(game.activePlayer).eq(player2.id);
+    expect(player1.getWaitingFor()).is.undefined;
+
+    doWait(player2, SelectCard, (selectCard) => {
+      expect(selectCard.title).eq('Select prelude card to play');
+      selectCard.cb([donation]);
+    });
+
+    runAllActions(game);
+
+    expect(game.phase).eq(Phase.ACTION);
+    expect(game.activePlayer).eq(player1.id);
+    expect(player2.getWaitingFor()).is.undefined;
+  });
+
+  it('Prelude fizzle', () => {
+    const [game, player] = testGame(1, {preludeExtension: true});
+
+    const alliedBanks = new AlliedBanks();
+    const loan = new Loan();
+
+    game.phase = Phase.PRELUDES;
+    player.preludeCardsInHand = [alliedBanks, loan];
+
+    player.production.override({megacredits: -5});
+
+    player.takeAction();
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+    expect(selectCard.cards).deep.eq([alliedBanks, loan]);
+    expect(loan.canPlay(player)).is.false;
+    selectCard.cb([loan]);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(15);
   });
 });
 

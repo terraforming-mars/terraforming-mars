@@ -9,15 +9,15 @@ export class PreludesExpansion {
     player.addResource(Resource.MEGACREDITS, 15);
   }
 
-  public static chooseAndPlayPrelude(player: IPlayer, cards: Array<IPreludeCard>) {
+  public static playPrelude(player: IPlayer, cards: Array<IPreludeCard>): SelectCard<IPreludeCard> {
     // This preps the warning attribute in preludes.
     // All preludes can be presented. Unplayable ones just fizzle.
     for (const card of cards) {
       card.canPlay(player);
     }
 
-    const selectCard = new SelectCard(
-      'Choose prelude card to play', 'Play', cards, ([card]) => {
+    return new SelectCard(
+      'Select prelude card to play', 'Play', cards, ([card]) => {
         if (card.canPlay?.(player) === false) {
           PreludesExpansion.fizzle(player, card);
           return undefined;
@@ -25,6 +25,5 @@ export class PreludesExpansion {
           return player.playCard(card);
         }
       });
-    player.defer(selectCard);
   }
 }

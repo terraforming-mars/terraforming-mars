@@ -27,9 +27,7 @@ describe('Karen', function() {
   });
 
   it('Takes action', function() {
-    cast(card.action(player), undefined);
-    runAllActions(game);
-    const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+    const selectCard = cast(card.action(player), SelectCard<IPreludeCard>);
     expect(selectCard.cards).has.length(1);
 
     selectCard.cb([selectCard.cards[0]]);
@@ -42,9 +40,7 @@ describe('Karen', function() {
       forceGenerationEnd(game);
     }
 
-    cast(card.action(player), undefined);
-    runAllActions(game);
-    const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+    const selectCard = cast(card.action(player), SelectCard<IPreludeCard>);
     expect(selectCard.cards).has.length(4);
 
     selectCard.cb([selectCard.cards[0]]);
@@ -55,16 +51,12 @@ describe('Karen', function() {
     player.megaCredits = 0;
     game.preludeDeck.drawPile.push(new GalileanMining());
 
-    cast(card.action(player), undefined);
-    runAllActions(game);
-    cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+    cast(card.action(player), SelectCard<IPreludeCard>);
     expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(0);
   });
 
   it('Can only act once per game', function() {
-    cast(card.action(player), undefined);
-    runAllActions(game);
-    const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+    const selectCard = cast(card.action(player), SelectCard<IPreludeCard>);
     selectCard.cb([selectCard.cards[0]]);
     forceGenerationEnd(game);
 

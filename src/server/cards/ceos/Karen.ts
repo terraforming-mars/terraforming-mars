@@ -27,7 +27,6 @@ export class Karen extends CeoCard {
     for (let i = 0; i < game.generation; i++) {
       cards.push(game.preludeDeck.draw(game));
     }
-    PreludesExpansion.chooseAndPlayPrelude(player, cards);
-    return undefined;
+    return PreludesExpansion.playPrelude(player, cards);
   }
 }

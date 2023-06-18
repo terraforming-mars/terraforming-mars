@@ -32,9 +32,7 @@ describe('NewPartner', function() {
   it('Should play with at least 1 playable prelude', function() {
     game.preludeDeck.drawPile.push(smeltingPlant, donation);
 
-    cast(card.play(player), undefined);
-    runAllActions(game);
-    const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+    const selectCard = cast(card.play(player), SelectCard<IPreludeCard>);
 
     expect(selectCard.cards).deep.eq([donation, smeltingPlant]);
     selectCard.cb([selectCard.cards[0]]);
@@ -49,9 +47,7 @@ describe('NewPartner', function() {
     // if the player plays this they will have to fizzle one of the cards.
     game.preludeDeck.drawPile.push(hugeAsteroid, galileanMining);
 
-    cast(card.play(player), undefined);
-    runAllActions(game);
-    const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+    const selectCard = cast(card.play(player), SelectCard<IPreludeCard>);
     expect(selectCard.cards).deep.eq([galileanMining, hugeAsteroid]);
     selectCard.cb([selectCard.cards[0]]);
     runAllActions(game);

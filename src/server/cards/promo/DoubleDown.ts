@@ -33,11 +33,8 @@ export class DoubleDown extends PreludeCard {
 
   public override bespokePlay(player: IPlayer) {
     const preludes = this.cloneablePreludes(player);
-    if (preludes.length === 0) {
-      return undefined;
-    }
     return new SelectCard(
-      'Choose prelude card to play',
+      'Select prelude card to play',
       undefined,
       preludes,
       ([card]) => {

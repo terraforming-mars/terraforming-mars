@@ -1048,7 +1048,7 @@ export class Player implements IPlayer {
     }
   }
 
-  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: 'add' | 'discard' | 'nothing' | 'action-only' = 'add'): undefined {
+  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: CardAction = 'add'): undefined {
     if (payment !== undefined) {
       this.pay(payment);
     }

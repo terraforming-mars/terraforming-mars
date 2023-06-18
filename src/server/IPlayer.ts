@@ -42,9 +42,10 @@ export interface CanAffordOptions extends Partial<Payment.Options> {
  * Behavior when playing a card:
  *   add it to the tableau
  *   discard it from the tableau
+ *   only play the card (used for replaying a card)
  *   or do nothing.
  */
-export type CardAction ='add' | 'discard' | 'nothing';
+export type CardAction ='add' | 'discard' | 'nothing' | 'action-only';
 
 export interface IPlayer {
   readonly id: PlayerId;
@@ -239,7 +240,7 @@ export interface IPlayer {
   getSpendableSeedResources(): number;
   getSpendableData(): number;
   pay(payment: Payment): void;
-  playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: 'add' | 'discard' | 'nothing' | 'action-only'): undefined;
+  playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): undefined;
   onCardPlayed(card: IProjectCard): void;
   playAdditionalCorporationCard(corporationCard: ICorporationCard): void;
   playCorporationCard(corporationCard: ICorporationCard): void;

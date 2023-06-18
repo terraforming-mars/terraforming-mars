@@ -50,7 +50,7 @@ describe('SolarStorm', function() {
     card.play(player);
 
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('remove data, only you have data', function() {

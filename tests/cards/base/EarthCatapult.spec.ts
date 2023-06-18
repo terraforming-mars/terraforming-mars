@@ -8,7 +8,7 @@ describe('EarthCatapult', function() {
     const card = new EarthCatapult();
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(card.getVictoryPoints(player)).to.eq(2);
     expect(card.getCardDiscount()).to.eq(2);
   });

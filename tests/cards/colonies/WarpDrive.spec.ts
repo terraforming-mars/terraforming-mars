@@ -3,6 +3,7 @@ import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {WarpDrive} from '../../../src/server/cards/colonies/WarpDrive';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('WarpDrive', function() {
   it('Should play', function() {

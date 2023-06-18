@@ -26,7 +26,7 @@ describe('AtmoCollectors', function() {
 
     card.action(player);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).to.eq(1);
     expect(player.purse()).deep.eq(Units.EMPTY);
 

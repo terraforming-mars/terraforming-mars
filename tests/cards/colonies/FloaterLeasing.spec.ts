@@ -10,7 +10,7 @@ describe('FloaterLeasing', function() {
     const [, player] = testGame(1);
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     expect(player.production.megacredits).eq(0);
 

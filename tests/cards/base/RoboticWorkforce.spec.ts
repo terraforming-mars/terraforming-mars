@@ -83,7 +83,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(gyropolis, venusgov);
 
     const action = card.play(player);
-    expect(action).is.undefined; // Not enough energy production for gyropolis, no other building card to copy
+    cast(action, undefined); // Not enough energy production for gyropolis, no other building card to copy
 
     player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
@@ -97,7 +97,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(capital);
 
     const action = card.play(player);
-    expect(action).is.undefined; // Not enough energy production
+    cast(action, undefined); // Not enough energy production
 
     player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
@@ -112,7 +112,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(capitalAres);
 
     const action = card.play(player);
-    expect(action).is.undefined; // Not enough energy production
+    cast(action, undefined); // Not enough energy production
 
     player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);

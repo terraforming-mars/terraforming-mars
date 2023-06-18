@@ -40,7 +40,7 @@ describe('BiomassCombustors', function() {
 
     card.play(player);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(player.production.energy).to.eq(2);
     expect(player2.production.plants).to.eq(0);
 

@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Donation} from '../../../src/server/cards/prelude/Donation';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('Donation', function() {
   it('Should play', function() {

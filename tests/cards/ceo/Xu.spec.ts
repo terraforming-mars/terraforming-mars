@@ -41,7 +41,7 @@ describe('Xu', function() {
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     // Gains correct M€ amount:
     //  Venus Tags:
@@ -59,7 +59,7 @@ describe('Xu', function() {
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     // Gains correct M€ amount:
     //  Venus Tags:
@@ -77,7 +77,7 @@ describe('Xu', function() {
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     // Gains correct M€ amount:
     //  Venus Tags:
@@ -94,7 +94,7 @@ describe('Xu', function() {
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     // Gains correct M€ amount:
     //  Venus Tags:

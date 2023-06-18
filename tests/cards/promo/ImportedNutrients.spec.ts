@@ -21,7 +21,7 @@ describe('ImportedNutrients', function() {
   it('Can play without microbe cards', function() {
     const action = card.play(player);
     expect(player.plants).to.eq(4);
-    expect(action).is.undefined;
+    cast(action, undefined);
   });
 
   it('Adds microbes automatically if only 1 target', function() {

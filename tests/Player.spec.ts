@@ -92,7 +92,7 @@ describe('Player', function() {
     player.process({type: 'amount', amount: 1});
     expect(player.production.heat).to.eq(1);
     expect(player.production.megacredits).to.eq(1);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
   it('Runs SaturnSystems when other player plays card', function() {
     const player1 = new Player('blue', Color.BLUE, false, 0, 'p-blue');

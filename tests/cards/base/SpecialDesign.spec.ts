@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('SpecialDesign', function() {
   it('Should play', function() {

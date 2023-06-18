@@ -22,7 +22,7 @@ describe('RoadPiracy', () => {
   it('No players have resources', () => {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('Players only have steel', () => {

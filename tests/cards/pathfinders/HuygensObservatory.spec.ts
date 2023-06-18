@@ -38,7 +38,7 @@ describe('HuygensObservatory', function() {
     expect(player.getTerraformRating()).eq(20);
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     expect(player.getTerraformRating()).eq(21);
 
@@ -74,7 +74,7 @@ describe('HuygensObservatory', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     runAllActions(game);
 
@@ -117,7 +117,7 @@ describe('HuygensObservatory', function() {
 
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     runAllActions(game);
@@ -152,7 +152,7 @@ describe('HuygensObservatory', function() {
 
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     runAllActions(game);

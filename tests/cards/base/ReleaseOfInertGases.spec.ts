@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInertGases';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('ReleaseOfInertGases', function() {
   it('Should play', function() {

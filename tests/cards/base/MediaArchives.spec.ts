@@ -3,6 +3,7 @@ import {MediaArchives} from '../../../src/server/cards/base/MediaArchives';
 import {Virus} from '../../../src/server/cards/base/Virus';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('MediaArchives', function() {
   it('Should play', function() {

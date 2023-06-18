@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {HeavyTaxation} from '../../../src/server/cards/colonies/HeavyTaxation';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('HeavyTaxation', function() {
   it('Should play', function() {

@@ -24,7 +24,7 @@ describe('MarsUniversity', function() {
   });
 
   it('Should play', function() {
-  cast(card.play(player), undefined);
+    cast(card.play(player), undefined);
     expect(card.onCardPlayed(player, new Pets())).is.undefined;
     expect(game.deferredActions).has.lengthOf(0);
 

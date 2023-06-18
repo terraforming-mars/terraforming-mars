@@ -3,6 +3,7 @@ import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('MartianZoo', function() {
   let card: MartianZoo;

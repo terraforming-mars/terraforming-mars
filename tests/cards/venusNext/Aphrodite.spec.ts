@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Aphrodite} from '../../../src/server/cards/venusNext/Aphrodite';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('Aphrodite', function() {
   it('Should play', function() {

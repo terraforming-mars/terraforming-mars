@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {MetalsCompany} from '../../../src/server/cards/prelude/MetalsCompany';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('MetalsCompany', function() {
   it('Should play', function() {

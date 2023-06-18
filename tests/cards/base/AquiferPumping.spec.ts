@@ -26,7 +26,7 @@ describe('AquiferPumping', function() {
   it('Should act', function() {
     player.megaCredits = OCEAN_COST;
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
   });

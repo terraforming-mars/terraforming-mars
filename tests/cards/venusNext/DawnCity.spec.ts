@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {DawnCity} from '../../../src/server/cards/venusNext/DawnCity';
 import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
+import {cast} from '../../TestingUtils';
 
 describe('DawnCity', function() {
   it('Should play', function() {

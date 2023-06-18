@@ -8,7 +8,7 @@ describe('TransNeptuneProbe', function() {
     const card = new TransNeptuneProbe();
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

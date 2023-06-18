@@ -3,6 +3,7 @@ import {EcoLine} from '../../../src/server/cards/corporation/EcoLine';
 import {TestPlayer} from '../../TestPlayer';
 import {ConvertPlants} from '../../../src/server/cards/base/standardActions/ConvertPlants';
 import {Game} from '../../../src/server/Game';
+import {cast} from '../../TestingUtils';
 
 describe('EcoLine', function() {
   it('Should play', function() {

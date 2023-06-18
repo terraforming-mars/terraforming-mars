@@ -27,7 +27,7 @@ describe('JetStreamMicroscrappers', function() {
     // only one action possible
     expect(card.resourceCount).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(card.resourceCount).to.eq(2);
     expect(player.titanium).to.eq(1);
 

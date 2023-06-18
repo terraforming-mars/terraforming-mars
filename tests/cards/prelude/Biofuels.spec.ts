@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {Biofuels} from '../../../src/server/cards/prelude/Biofuels';
+import {cast} from '../../TestingUtils';
 
 describe('Biofuels', function() {
   it('Should play', function() {

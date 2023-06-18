@@ -296,7 +296,7 @@ describe('Executor', () => {
     executor.execute({addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER}}, player, fake);
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(resourceCount()).deep.eq({
       tardigrades: 0,
       ants: 0,
@@ -307,7 +307,7 @@ describe('Executor', () => {
     // One animal card. Auto-populated.
     executor.execute({addResourcesToAnyCard: {count: 2, type: CardResource.ANIMAL}}, player, fake);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(resourceCount()).deep.eq({
       tardigrades: 0,
@@ -362,7 +362,7 @@ describe('Executor', () => {
     executor.execute({addResourcesToAnyCard: {count: {tag: Tag.MICROBE}, type: CardResource.ANIMAL}}, player, fake);
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(livestock.resourceCount).eq(0);
     expect(birds.resourceCount).eq(0);
 
@@ -531,7 +531,7 @@ describe('Executor', () => {
       ]}};
     executor.execute(behavior, player, fake);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(player.megaCredits).eq(1);
   });
 });

@@ -17,7 +17,7 @@ describe('SolarProbe', function() {
     // Since Solar Probe is an event, the card still allows its tag to count.
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.cardsInHand).has.lengthOf(1);
 
     // This part shows that it draws one card per 3 tags.

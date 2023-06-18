@@ -18,7 +18,7 @@ describe('Viron', function() {
   it('Should act', function() {
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     player.setCorporationForTest(card);
     const restrictedArea = new RestrictedArea();

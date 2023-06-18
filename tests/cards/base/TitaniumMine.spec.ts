@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {TitaniumMine} from '../../../src/server/cards/base/TitaniumMine';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('TitaniumMine', function() {
   it('Should play', function() {

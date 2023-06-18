@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('SisterPlanetSupport', function() {
   it('Should play', function() {

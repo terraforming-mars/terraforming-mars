@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {TechnologyDemonstration} from '../../../src/server/cards/base/TechnologyDemonstration';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('TechnologyDemonstration', function() {
   it('Should play', function() {

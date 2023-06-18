@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {GiantSpaceMirror} from '../../../src/server/cards/base/GiantSpaceMirror';
+import {cast} from '../../TestingUtils';
 
 describe('GiantSpaceMirror', function() {
   it('Should play', function() {

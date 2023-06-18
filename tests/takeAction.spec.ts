@@ -34,7 +34,7 @@ describe('takeAction', () => {
     runAllActions(game);
 
     expect(game.activePlayer).eq(player1.id);
-    expect(player2.getWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
 
     doWait(player1, SelectCard, (selectCard) => {
       expect(selectCard.title).eq('Select prelude card to play');
@@ -43,7 +43,7 @@ describe('takeAction', () => {
     runAllActions(game);
 
     expect(game.activePlayer).eq(player2.id);
-    expect(player1.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
 
     doWait(player2, SelectCard, (firstPrelude) => {
       expect(firstPrelude!.title).eq('Select prelude card to play');
@@ -52,7 +52,7 @@ describe('takeAction', () => {
     runAllActions(game);
 
     expect(game.activePlayer).eq(player2.id);
-    expect(player1.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
 
     doWait(player2, SelectCard, (selectCard) => {
       expect(selectCard.title).eq('Select prelude card to play');
@@ -65,6 +65,6 @@ describe('takeAction', () => {
 
     expect(game.phase).eq(Phase.ACTION);
     expect(game.activePlayer).eq(player1.id);
-    expect(player2.getWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
   });
 });

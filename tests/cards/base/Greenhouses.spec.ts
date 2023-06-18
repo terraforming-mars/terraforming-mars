@@ -8,7 +8,7 @@ describe('Greenhouses', function() {
     const [game, player, player2] = testGame(2);
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.plants).to.eq(0);
 
     game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);

@@ -3,6 +3,7 @@ import {CryoSleep} from '../../../src/server/cards/colonies/CryoSleep';
 import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('CryoSleep', function() {
   it('Should play', function() {

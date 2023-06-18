@@ -46,7 +46,7 @@ describe('drafting', () => {
       CardName.HACKERS]);
 
     selectCard(player, CardName.BIOFERTILIZER_FACILITY);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.GENE_REPAIR);
 
     expect(cardNames(player.draftedCards)).deep.eq([CardName.BIOFERTILIZER_FACILITY]);
@@ -66,7 +66,7 @@ describe('drafting', () => {
 
 
     selectCard(player, CardName.FISH);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ACQUIRED_COMPANY);
 
     expect(cardNames(player.draftedCards)).deep.eq([
@@ -89,7 +89,7 @@ describe('drafting', () => {
       CardName.HACKERS]);
 
     selectCard(player, CardName.DECOMPOSERS);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.EARTH_OFFICE);
 
     // No longer drafted cards, they're just cards to buy.
@@ -141,7 +141,7 @@ describe('drafting', () => {
       CardName.ARTIFICIAL_LAKE]);
 
     selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ALGAE);
 
     expect(cardNames(player.draftedCards)).deep.eq([CardName.ADAPTATION_TECHNOLOGY]);
@@ -162,7 +162,7 @@ describe('drafting', () => {
       CardName.ANTS]);
 
     selectCard(player, CardName.ARCTIC_ALGAE);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ANTS);
 
     expect(cardNames(player.draftedCards)).deep.eq([
@@ -186,7 +186,7 @@ describe('drafting', () => {
       CardName.ARTIFICIAL_LAKE]);
 
     selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
 
     expect(cardNames(player.draftedCards)).deep.eq([

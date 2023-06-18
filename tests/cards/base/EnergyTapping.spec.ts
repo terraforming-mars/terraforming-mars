@@ -22,7 +22,7 @@ describe('EnergyTapping', function() {
     card.play(player);
     player2.production.override({energy: 1});
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player2.production.energy).to.eq(0);
   });
@@ -48,7 +48,7 @@ describe('EnergyTapping', function() {
     card.play(player);
 
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(player.production.energy).to.eq(1);
     expect(card.getVictoryPoints(player)).to.eq(-1);

@@ -5,6 +5,7 @@ import {Triton} from '../../../src/server/colonies/Triton';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {addCity} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 
 describe('MolecularPrinting', function() {
   it('Should play', function() {

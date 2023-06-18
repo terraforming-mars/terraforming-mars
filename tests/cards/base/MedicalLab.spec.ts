@@ -3,6 +3,7 @@ import {Capital} from '../../../src/server/cards/base/Capital';
 import {MedicalLab} from '../../../src/server/cards/base/MedicalLab';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('MedicalLab', function() {
   it('Should play', function() {

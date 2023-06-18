@@ -55,7 +55,7 @@ describe('Airliners', function() {
 
     runAllActions(game);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.megacredits).eq(2);
     expect(jovianLanterns.resourceCount).eq(2);
   });

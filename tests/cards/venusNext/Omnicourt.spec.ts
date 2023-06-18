@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Omnicourt} from '../../../src/server/cards/venusNext/Omnicourt';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('Omnicourt', function() {
   it('Should play', function() {

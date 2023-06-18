@@ -24,7 +24,7 @@ describe('VenusSoils', function() {
     player.playedCards.push(card2);
     expect(card.play(player)).is.undefined;
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(card2.resourceCount).to.eq(2);
     expect(player.production.plants).to.eq(1);

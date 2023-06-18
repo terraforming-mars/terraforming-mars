@@ -3,6 +3,7 @@ import {RoverConstruction} from '../../../src/server/cards/base/RoverConstructio
 import {Game} from '../../../src/server/Game';
 import {addCity, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('RoverConstruction', function() {
   it('Should play', function() {

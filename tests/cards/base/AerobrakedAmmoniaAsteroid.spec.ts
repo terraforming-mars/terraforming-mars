@@ -25,7 +25,7 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     expect(player.production.plants).to.eq(1);
 
     // It's okay to not have a card to collect Microbes on
-    expect(action).is.undefined;
+    cast(action, undefined);
   });
 
   it('Adds microbes automatically if only 1 target', function() {

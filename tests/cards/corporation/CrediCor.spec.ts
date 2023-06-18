@@ -7,6 +7,7 @@ import {GreeneryStandardProject} from '../../../src/server/cards/base/standardPr
 import {CrediCor} from '../../../src/server/cards/corporation/CrediCor';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('CrediCor', function() {
   let card: CrediCor;

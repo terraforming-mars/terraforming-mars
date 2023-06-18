@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {EarthElevator} from '../../../src/server/cards/colonies/EarthElevator';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('EarthElevator', function() {
   it('Should play', function() {

@@ -3,6 +3,7 @@ import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Conscription} from '../../../src/server/cards/colonies/Conscription';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('Conscription', function() {
   let card: Conscription;

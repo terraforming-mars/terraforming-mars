@@ -97,7 +97,7 @@ describe('StratosphericBirds', () => {
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
     selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 12});
     runAllActions(game); // Remove floater
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(aerialMappers.resourceCount).to.eq(0);
   });
 

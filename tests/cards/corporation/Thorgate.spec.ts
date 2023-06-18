@@ -4,6 +4,7 @@ import {Pets} from '../../../src/server/cards/base/Pets';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('Thorgate', function() {
   it('Should play', function() {

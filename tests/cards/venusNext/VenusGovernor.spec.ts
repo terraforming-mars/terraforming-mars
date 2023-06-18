@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('VenusGovernor', function() {
   it('Should play', function() {

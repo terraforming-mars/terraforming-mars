@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {NitrogenRichAsteroid} from '../../../src/server/cards/base/NitrogenRichAsteroid';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('NitrogenRichAsteroid', function() {
   it('Should play', function() {

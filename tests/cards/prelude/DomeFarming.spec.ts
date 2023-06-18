@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {DomeFarming} from '../../../src/server/cards/prelude/DomeFarming';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('DomeFarming', function() {
   it('Should play', function() {

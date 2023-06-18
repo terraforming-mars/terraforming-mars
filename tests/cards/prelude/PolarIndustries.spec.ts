@@ -9,7 +9,7 @@ describe('PolarIndustries', function() {
 
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.heat).to.eq(2);
   });
 });

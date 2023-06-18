@@ -52,7 +52,7 @@ describe('Thermophiles', function() {
     player.playedCards.push(card);
 
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 

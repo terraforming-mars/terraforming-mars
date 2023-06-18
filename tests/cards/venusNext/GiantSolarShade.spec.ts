@@ -6,12 +6,14 @@ import {Phase} from '../../../src/common/Phase';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
-let card: GiantSolarShade;
-let player: TestPlayer;
-let redPlayer: TestPlayer;
-let game: Game;
+import {cast} from '../../TestingUtils';
 
 describe('GiantSolarShade', function() {
+  let card: GiantSolarShade;
+  let player: TestPlayer;
+  let redPlayer: TestPlayer;
+  let game: Game;
+
   beforeEach(() => {
     card = new GiantSolarShade();
     player = TestPlayer.BLUE.newPlayer();

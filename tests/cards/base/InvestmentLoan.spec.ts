@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {InvestmentLoan} from '../../../src/server/cards/base/InvestmentLoan';
 import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('InvestmentLoan', function() {
   it('Should play', function() {

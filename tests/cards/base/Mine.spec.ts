@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {Mine} from '../../../src/server/cards/base/Mine';
+import {cast} from '../../TestingUtils';
 
 describe('Mine', function() {
   it('Should play', function() {

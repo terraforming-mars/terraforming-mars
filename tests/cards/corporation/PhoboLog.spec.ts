@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {PhoboLog} from '../../../src/server/cards/corporation/PhoboLog';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('PhoboLog', function() {
   it('Should play', function() {

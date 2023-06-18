@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtractor';
+import {cast} from '../../TestingUtils';
 
 describe('CoronaExtractor', function() {
   it('Should play', function() {

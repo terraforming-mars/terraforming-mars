@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {PhobosSpaceHaven} from '../../../src/server/cards/base/PhobosSpaceHaven';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('PhobosSpaceHaven', function() {
   it('Should play', function() {

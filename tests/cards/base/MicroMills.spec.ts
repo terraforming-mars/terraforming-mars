@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('MicroMills', function() {
   it('Should play', function() {

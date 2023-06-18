@@ -52,7 +52,7 @@ describe('Venus', function() {
 
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(localShading.resourceCount).to.eq(2);
   });
 

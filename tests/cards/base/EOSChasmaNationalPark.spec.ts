@@ -59,7 +59,7 @@ describe('EosChasmaNationalPark', () => {
     expect(card.canPlay(player)).is.true;
     player.playCard(card);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(birds.resourceCount).to.eq(1);
     expect(player.plants).to.eq(3);

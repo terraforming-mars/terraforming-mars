@@ -34,7 +34,7 @@ describe('Vitor', function() {
   it('No initial action for solo games', function() {
     Game.newInstance('gameid', [player], player);
     const action = player.runInitialAction(card);
-    expect(action).is.undefined;
+    cast(action, undefined);
   });
 
   it('Give megacredits when card played', function() {

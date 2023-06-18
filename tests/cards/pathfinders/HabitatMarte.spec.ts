@@ -76,13 +76,13 @@ describe('HabitatMarte', () => {
 
     olympusConference.onCardPlayed(player, marsCard);
     runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     expect(olympusConference.resourceCount).eq(0);
 
     player.setCorporationForTest(card);
     olympusConference.onCardPlayed(player, marsCard);
     runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     expect(olympusConference.resourceCount).eq(1);
   });
 });

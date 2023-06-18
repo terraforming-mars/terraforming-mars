@@ -21,8 +21,7 @@ describe('AerialMappers', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act - multiple targets', function() {

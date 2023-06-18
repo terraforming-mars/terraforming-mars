@@ -16,8 +16,7 @@ describe('PowerPlant', function() {
   });
 
   it('play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.asUnits()).deep.eq(Units.of({heat: 2, energy: 1}));
   });
 });

@@ -14,8 +14,7 @@ describe('Helion', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(3);
 
     player.megaCredits = 3;

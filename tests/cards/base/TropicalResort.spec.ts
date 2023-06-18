@@ -9,8 +9,7 @@ describe('TropicalResort', function() {
     const card = new TropicalResort();
     const [, player] = testGame(1);
     player.production.add(Resource.HEAT, 2);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
     expect(card.getVictoryPoints(player)).to.eq(2);

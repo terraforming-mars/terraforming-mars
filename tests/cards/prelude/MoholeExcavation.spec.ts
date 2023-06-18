@@ -6,8 +6,7 @@ describe('MoholeExcavation', function() {
   it('Should play', function() {
     const card = new MoholeExcavation();
     const [, player] = testGame(1);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(2);
     expect(player.heat).to.eq(2);
     expect(player.production.steel).to.eq(1);

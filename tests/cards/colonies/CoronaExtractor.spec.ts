@@ -7,8 +7,7 @@ describe('CoronaExtractor', function() {
     const card = new CoronaExtractor();
     const [, player] = testGame(1);
     expect(player.simpleCanPlay(card)).is.not.true;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(4);
   });
 });

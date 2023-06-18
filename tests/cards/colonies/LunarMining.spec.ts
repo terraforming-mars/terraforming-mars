@@ -13,8 +13,7 @@ describe('LunarMining', function() {
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(card2, card3);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(2);
   });
 });

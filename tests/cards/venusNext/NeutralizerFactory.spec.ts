@@ -7,8 +7,7 @@ describe('NeutralizerFactory', function() {
     const card = new NeutralizerFactory();
     const [game, player] = testGame(2);
     expect(player.simpleCanPlay(card)).is.not.true;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

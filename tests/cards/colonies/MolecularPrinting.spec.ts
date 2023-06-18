@@ -22,8 +22,7 @@ describe('MolecularPrinting', function() {
     player.game.colonies.push(colonyTile2);
     addCity(player, '03');
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.megaCredits).to.eq(3);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

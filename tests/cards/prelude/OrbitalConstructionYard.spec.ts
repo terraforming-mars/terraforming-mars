@@ -7,8 +7,7 @@ describe('OrbitalConstructionYard', function() {
   it('Should play', function() {
     const card = new OrbitalConstructionYard();
     const [, player] = testGame(1);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(1);
     expect(player.titanium).to.eq(4);
   });

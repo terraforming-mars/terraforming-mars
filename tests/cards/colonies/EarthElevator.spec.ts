@@ -6,8 +6,7 @@ describe('EarthElevator', function() {
   it('Should play', function() {
     const card = new EarthElevator();
     const [, player] = testGame(1);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(3);
     expect(card.getVictoryPoints(player)).to.eq(4);
   });

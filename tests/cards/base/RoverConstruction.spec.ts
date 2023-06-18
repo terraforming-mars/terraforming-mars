@@ -10,8 +10,7 @@ describe('RoverConstruction', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     player.playedCards.push(card);
     addCity(player);

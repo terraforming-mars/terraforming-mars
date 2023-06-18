@@ -9,8 +9,7 @@ describe('TollStation', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const anotherPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, anotherPlayer], player);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     anotherPlayer.playedCards.push(card);
     expect(player.production.megacredits).to.eq(0);
     card.play(player);

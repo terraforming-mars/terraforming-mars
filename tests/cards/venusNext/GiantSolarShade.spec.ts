@@ -21,8 +21,7 @@ describe('GiantSolarShade', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(game.getVenusScaleLevel()).to.eq(6);
     expect(player.getTerraformRating()).to.eq(23);
   });

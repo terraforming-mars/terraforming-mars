@@ -6,8 +6,7 @@ describe('IndustrialMicrobes', function() {
   it('Should play', function() {
     const card = new IndustrialMicrobes();
     const [, player] = testGame(2);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player.production.steel).to.eq(1);
   });

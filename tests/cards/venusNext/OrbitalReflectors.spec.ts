@@ -7,8 +7,7 @@ describe('OrbitalReflectors', function() {
     const card = new OrbitalReflectors();
     const [game, player] = testGame(2);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(player.production.heat).to.eq(2);
   });

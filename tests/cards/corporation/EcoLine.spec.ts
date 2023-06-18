@@ -9,8 +9,7 @@ describe('EcoLine', function() {
     const card = new EcoLine();
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.plants).to.eq(2);
     expect(player.plants).to.eq(3);
     expect(player.plantsNeededForGreenery).to.eq(7);

@@ -9,8 +9,7 @@ describe('MedicalLab', function() {
     const card = new MedicalLab();
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(0);
     player.playedCards.push(new Capital());
     card.play(player);

@@ -159,16 +159,14 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(new SolarWindPower());
 
     expect(card.canPlay(player)).is.false;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should not work with Mars University (building tag, no production)', () => {
     player.playedCards.push(new MarsUniversity());
 
     expect(card.canPlay(player)).is.false;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should work with Research Network', () => {

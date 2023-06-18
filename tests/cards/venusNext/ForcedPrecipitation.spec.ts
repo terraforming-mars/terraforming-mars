@@ -17,8 +17,7 @@ describe('ForcedPrecipitation', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act - both actions available', function() {

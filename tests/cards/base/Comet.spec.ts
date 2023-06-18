@@ -54,8 +54,7 @@ describe('Comet', function() {
     Game.newInstance('gameid', [player], player);
     player.plants = 8;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.plants).to.eq(8);
   });
 });

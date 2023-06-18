@@ -12,8 +12,7 @@ describe('VenusGovernor', function() {
     player.tagsForTest = {venus: 2};
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(2);
   });
 });

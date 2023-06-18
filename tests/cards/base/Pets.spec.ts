@@ -11,8 +11,7 @@ describe('Pets', function() {
     const player2 = TestPlayer.RED.newPlayer();
     player.playedCards.push(card);
     const game = Game.newInstance('gameid', [player, player2], player);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     player.addResourceTo(card, 4);
     expect(card.getVictoryPoints(player)).to.eq(2);
     addCity(player);

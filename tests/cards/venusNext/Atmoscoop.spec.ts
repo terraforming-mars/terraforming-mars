@@ -85,9 +85,7 @@ describe('Atmoscoop', function() {
     player.playedCards.push(dirigibles);
     setTemperature(game, constants.MAX_TEMPERATURE);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
-
+  cast(card.play(player), undefined);
     runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
 

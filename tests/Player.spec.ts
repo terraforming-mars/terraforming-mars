@@ -67,8 +67,7 @@ describe('Player', function() {
     player.production.add(Resource.ENERGY, 1);
     player2.production.add(Resource.ENERGY, 1);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
     cast(player.getWaitingFor(), SelectPlayer);
 

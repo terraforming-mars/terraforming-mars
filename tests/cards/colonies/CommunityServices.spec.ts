@@ -17,8 +17,7 @@ describe('CommunityServices', function() {
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(prelude, researchCoordination);
     player.setCorporationForTest(corpo);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });
@@ -31,8 +30,7 @@ describe('CommunityServices', function() {
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(prelude, researchCoordination);
     player.setCorporationForTest(corpo);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });

@@ -6,8 +6,7 @@ describe('Satellites', function() {
   it('Should play', function() {
     const card = new Satellites();
     const [/* skipped */, player] = testGame(2);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(1);
     player.playedCards.push(card);
     card.play(player);

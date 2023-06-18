@@ -7,8 +7,7 @@ describe('NitrogenRichAsteroid', function() {
   it('Should play', function() {
     const card = new NitrogenRichAsteroid();
     const [game, player] = testGame(2);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.getTerraformRating()).to.eq(23);
     expect(game.getTemperature()).to.eq(-28);
     expect(player.production.plants).to.eq(1);

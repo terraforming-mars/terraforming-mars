@@ -6,8 +6,7 @@ describe('ReleaseOfInertGases', function() {
   it('Should play', function() {
     const card = new ReleaseOfInertGases();
     const [, player] = testGame(2);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.getTerraformRating()).to.eq(22);
   });
 });

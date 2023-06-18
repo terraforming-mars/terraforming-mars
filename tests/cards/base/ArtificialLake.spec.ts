@@ -54,8 +54,7 @@ describe('ArtificialLake', function() {
     expect(player.simpleCanPlay(card)).is.true;
 
     // ...but an action to place ocean is not unavailable
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Cannot place ocean if all land spaces are occupied', function() {

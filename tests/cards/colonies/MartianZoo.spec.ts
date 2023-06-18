@@ -23,8 +23,7 @@ describe('MartianZoo', function() {
     player.game.addCity(player, lands[1]);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Can not act', function() {

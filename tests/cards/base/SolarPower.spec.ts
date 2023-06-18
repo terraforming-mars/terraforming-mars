@@ -6,8 +6,7 @@ describe('SolarPower', function() {
   it('Should play', function() {
     const card = new SolarPower();
     const [, player] = testGame(1);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

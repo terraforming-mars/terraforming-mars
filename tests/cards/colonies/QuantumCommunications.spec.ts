@@ -20,8 +20,7 @@ describe('QuantumCommunications', function() {
     player.game.colonies.push(colony1);
     player.game.colonies.push(colony2);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(2);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

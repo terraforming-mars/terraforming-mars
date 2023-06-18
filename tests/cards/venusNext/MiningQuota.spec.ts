@@ -31,8 +31,7 @@ describe('MiningQuota', function() {
     player.tagsForTest = {venus: 1, jovian: 1, earth: 1};
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.steel).to.eq(2);
   });
 });

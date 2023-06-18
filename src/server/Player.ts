@@ -444,8 +444,7 @@ export class Player implements IPlayer {
       this.titanium - units.titanium >= 0 &&
       this.plants - units.plants >= 0 &&
       this.energy - units.energy >= 0 &&
-      // Stormcraft Incorporated can supply heat, so use `availableHeat`
-      this.availableHeat() - units.heat >= 0;
+      this.heat - units.heat >= 0;
   }
 
   public addUnits(units: Partial<Units>, options? : {
@@ -1521,8 +1520,19 @@ export class Player implements IPlayer {
    */
   public canAfford(cost: number, options?: CanAffordOptions): boolean {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
-    if (!this.hasUnits(reserveUnits)) {
-      return false;
+    if (reserveUnits.heat > 0) {
+      // Special-case heat
+      const unitsWithoutHeat = {...reserveUnits, heat: 0};
+      if (!this.hasUnits(unitsWithoutHeat)) {
+        return false;
+      }
+      if (this.availableHeat() < reserveUnits.heat) {
+        return false;
+      }
+    } else {
+      if (!this.hasUnits(reserveUnits)) {
+        return false;
+      }
     }
 
     const maxPayable = this.maxSpendable(reserveUnits);
@@ -2017,7 +2027,7 @@ export class Player implements IPlayer {
 
     player.lastCardPlayed = d.lastCardPlayed;
 
-    // Rebuild removed from play cards (Playwrights)
+    // Rebuild removed from play cards (Playwrights, Odyssey)
     player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
 
     player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);

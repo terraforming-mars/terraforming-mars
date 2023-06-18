@@ -3,8 +3,8 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {CardType} from '../../../common/cards/CardType';
-import {SelectCard} from '../../inputs/SelectCard';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {isPreludeCard} from '../prelude/IPreludeCard';
 
 export class DoubleDown extends PreludeCard {
   constructor() {
@@ -22,7 +22,7 @@ export class DoubleDown extends PreludeCard {
   }
 
   private cloneablePreludes(player: IPlayer) {
-    return player.playedCards.filter((card) => card.type === CardType.PRELUDE)
+    return player.playedCards.filter(isPreludeCard)
       .filter((card) => card.name !== this.name)
       .filter((card) => card.canPlay(player));
   }
@@ -33,17 +33,6 @@ export class DoubleDown extends PreludeCard {
 
   public override bespokePlay(player: IPlayer) {
     const preludes = this.cloneablePreludes(player);
-    if (preludes.length === 0) {
-      return undefined;
-    }
-    return new SelectCard(
-      'Choose prelude card to play',
-      undefined,
-      preludes,
-      ([card]) => {
-        player.playCard(card, undefined, 'action-only');
-        return undefined;
-      },
-    );
+    return PreludesExpansion.playPrelude(player, preludes, 'action-only');
   }
 }

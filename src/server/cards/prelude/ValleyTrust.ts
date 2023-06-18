@@ -47,7 +47,6 @@ export class ValleyTrust extends Card implements ICorporationCard {
       game.preludeDeck.draw(game),
       game.preludeDeck.draw(game),
     ];
-    PreludesExpansion.chooseAndPlayPrelude(player, cards);
-    return undefined;
+    return PreludesExpansion.playPrelude(player, cards);
   }
 }

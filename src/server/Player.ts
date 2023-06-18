@@ -70,6 +70,7 @@ import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {sum} from '../common/utils/utils';
+import {PreludesExpansion} from './preludes/PreludesExpansion';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -121,7 +122,7 @@ export class Player implements IPlayer {
   public dealtCeoCards: Array<ICeoCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
-  public preludeCardsInHand: Array<IProjectCard> = [];
+  public preludeCardsInHand: Array<IPreludeCard> = [];
   public ceoCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
@@ -935,17 +936,6 @@ export class Player implements IPlayer {
     return Math.max(cost, 0);
   }
 
-  private playPreludeCard(): PlayerInput {
-    return new SelectCard(
-      'Select prelude card to play',
-      'Play',
-      this.getPlayablePreludeCards(),
-      ([card]) => {
-        return this.playCard(card);
-      },
-    );
-  }
-
   private paymentOptionsForCard(card: IProjectCard): Payment.Options {
     return {
       steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
@@ -1058,7 +1048,7 @@ export class Player implements IPlayer {
     }
   }
 
-  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: 'add' | 'discard' | 'nothing' | 'action-only' = 'add'): undefined {
+  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: CardAction = 'add'): undefined {
     if (payment !== undefined) {
       this.pay(payment);
     }
@@ -1387,10 +1377,6 @@ export class Player implements IPlayer {
     }
   }
 
-  private getPlayablePreludeCards(): Array<IProjectCard> {
-    return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
-  }
-
   private getPlayableCeoCards(): Array<IProjectCard> {
     return this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true);
   }
@@ -1630,15 +1616,9 @@ export class Player implements IPlayer {
       if (this.preludeCardsInHand.length > 0) {
         game.phase = Phase.PRELUDES;
 
-        // If no playable prelude card in hand, end player turn
-        if (this.getPlayablePreludeCards().length === 0) {
-          LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
-          this.preludeCardsInHand = [];
-          game.playerIsFinishedTakingActions();
-          return;
-        }
+        const selectPrelude = PreludesExpansion.playPrelude(this, this.preludeCardsInHand);
 
-        this.setWaitingFor(this.playPreludeCard(), () => {
+        this.setWaitingFor(selectPrelude, () => {
           if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
             game.playerIsFinishedTakingActions();
             return;
@@ -2070,7 +2050,8 @@ export class Player implements IPlayer {
     player.dealtCeoCards = cardFinder.ceosFromJSON(d.dealtCeoCards);
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
-    player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
+    // I don't like "as IPreludeCard" but this is pretty safe.
+    player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand) as Array<IPreludeCard>;
     player.ceoCardsInHand = cardFinder.ceosFromJSON(d.ceoCardsInHand);
     player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);

@@ -63,7 +63,7 @@ export class StormCraftIncorporated extends ActionCard implements ICorporationCa
           throw new Error('You cannot overspend floaters');
         }
         player.removeResourceFrom(this, floaterAmount);
-        player.deductResource(Resource.HEAT, heatAmount);
+        player.stock.deduct(Resource.HEAT, heatAmount);
         return cb();
       },
       new SelectAmount('Heat', 'Spend heat', (amount: number) => {

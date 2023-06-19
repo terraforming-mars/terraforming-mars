@@ -47,7 +47,7 @@ export class MoonRoadStandardProject extends StandardProjectCard {
 
   actionEssence(player: IPlayer): void {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-    player.deductUnits(adjustedReserveUnits);
+    player.stock.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonRoadTile(player));
   }
 }

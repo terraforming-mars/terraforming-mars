@@ -73,13 +73,13 @@ describe('AresHandler', function() {
     secondSpace.adjacency = {bonus: [SpaceBonus.TITANIUM]};
     game.addTile(otherPlayer, secondSpace, {tileType: TileType.MINING_AREA});
 
-    player.setResourcesForTest(Units.EMPTY);
-    otherPlayer.setResourcesForTest(Units.EMPTY);
+    player.stock.override(Units.EMPTY);
+    otherPlayer.stock.override(Units.EMPTY);
 
     game.addTile(player, greenerySpace, {tileType: TileType.GREENERY});
 
-    expect(player.purse()).deep.eq(Units.of({titanium: 1, steel: 1}));
-    expect(otherPlayer.purse()).deep.eq(Units.of({megacredits: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 1, steel: 1}));
+    expect(otherPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 
   describe('setupHazards', function() {

@@ -28,7 +28,7 @@ export class StrategicBasePlanning extends PreludeCard {
     });
   }
   public override bespokePlay(player: IPlayer) {
-    player.deductResource(Resource.MEGACREDITS, 8);
+    player.stock.deduct(Resource.MEGACREDITS, 8);
     return undefined;
   }
 }

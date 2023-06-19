@@ -36,7 +36,7 @@ export class TopsoilContract extends Card implements IProjectCard {
 
   public onResourceAdded(player: IPlayer, card: ICard, count: number) {
     if (card.resourceType === CardResource.MICROBE) {
-      player.addResource(Resource.MEGACREDITS, count, {log: true});
+      player.stock.add(Resource.MEGACREDITS, count, {log: true});
     }
   }
 }

@@ -26,7 +26,7 @@ export class Ulrich extends CeoCard {
     const game = player.game;
     const oceansPlaced = game.board.getOceanCount();
     const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
-    player.addResource(Resource.MEGACREDITS, bonusCredits, {log: true});
+    player.stock.add(Resource.MEGACREDITS, bonusCredits, {log: true});
     return undefined;
   }
 }

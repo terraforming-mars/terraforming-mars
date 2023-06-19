@@ -89,10 +89,10 @@ describe('Philares', () => {
     runAllActions(game);
     const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.cb();
-    expect(philaresPlayer.purse()).deep.eq(Units.of({megacredits: 1}));
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));
   });
 
   it('one tile one bonus - player is greedy', () => {
@@ -101,7 +101,7 @@ describe('Philares', () => {
     runAllActions(game);
     const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
     expect(() => andOptions.cb()).to.throw('Need to select 1 resource(s)');
@@ -116,11 +116,11 @@ describe('Philares', () => {
     runAllActions(game);
     const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
     andOptions.cb();
-    expect(philaresPlayer.purse()).deep.eq(Units.of({megacredits: 1, steel: 1}));
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
   it('Multiple bonuses when opponent places next to multiple of your tiles', () => {
@@ -132,11 +132,11 @@ describe('Philares', () => {
     runAllActions(game);
     const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
     andOptions.cb();
-    expect(philaresPlayer.purse()).deep.eq(Units.of({megacredits: 1, steel: 1}));
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
   it('two tiles two bonuses - player is greedy', () => {
@@ -146,7 +146,7 @@ describe('Philares', () => {
     const action = game.deferredActions.pop();
     const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     options.options[0].cb(1);
     options.options[1].cb(1);
     options.options[2].cb(1);

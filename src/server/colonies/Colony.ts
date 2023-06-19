@@ -94,8 +94,8 @@ export abstract class Colony implements IColony {
 
     // CEO Naomi hook
     if (player.cardIsInEffect(CardName.NAOMI)) {
-      player.addResource(Resource.ENERGY, 2, {log: true});
-      player.addResource(Resource.MEGACREDITS, 3, {log: true});
+      player.stock.add(Resource.ENERGY, 2, {log: true});
+      player.stock.add(Resource.MEGACREDITS, 3, {log: true});
     }
   }
 
@@ -227,7 +227,7 @@ export abstract class Colony implements IColony {
 
     case ColonyBenefit.GAIN_RESOURCES:
       if (resource === undefined) throw new Error('Resource cannot be undefined');
-      player.addResource(resource, quantity, {log: true});
+      player.stock.add(resource, quantity, {log: true});
       break;
 
     case ColonyBenefit.GAIN_SCIENCE_TAG:
@@ -262,7 +262,7 @@ export abstract class Colony implements IColony {
     case ColonyBenefit.GIVE_MC_PER_DELEGATE:
       Turmoil.ifTurmoil(game, (turmoil) => {
         const partyDelegateCount = sum(turmoil.parties.map((party) => party.delegates.get(player.id)));
-        player.addResource(Resource.MEGACREDITS, partyDelegateCount, {log: true});
+        player.stock.add(Resource.MEGACREDITS, partyDelegateCount, {log: true});
       });
       break;
 
@@ -286,7 +286,7 @@ export abstract class Colony implements IColony {
 
     case ColonyBenefit.LOSE_RESOURCES:
       if (resource === undefined) throw new Error('Resource cannot be undefined');
-      player.deductResource(resource, quantity);
+      player.stock.deduct(resource, quantity);
       break;
 
     case ColonyBenefit.OPPONENT_DISCARD:

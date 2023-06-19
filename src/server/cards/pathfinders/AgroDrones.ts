@@ -35,9 +35,9 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
   }
 
   public action(player: IPlayer) {
-    player.deductResource(Resource.STEEL, 1);
-    player.deductResource(Resource.ENERGY, 1);
-    player.addResource(Resource.PLANTS, 3);
+    player.stock.deduct(Resource.STEEL, 1);
+    player.stock.deduct(Resource.ENERGY, 1);
+    player.stock.add(Resource.PLANTS, 3);
     player.game.log('${0} spent 1 steel and 1 energy to gain 3 plants.', (b) => b.player(player));
     return undefined;
   }

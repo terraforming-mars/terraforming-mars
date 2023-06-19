@@ -55,7 +55,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
 
     const bonuses = space.bonus;
     if (bonuses.length === 0) {
-      activePlayer.addResource(Resource.STEEL, 1, {log: true /* , from: this.name */});
+      activePlayer.stock.add(Resource.STEEL, 1, {log: true /* , from: this.name */});
       return;
     }
     const filtered = bonuses.filter((bonus) => VALID_BONUSES.includes(bonus));

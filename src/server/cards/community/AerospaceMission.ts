@@ -29,7 +29,7 @@ export class AerospaceMission extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.deductResource(Resource.MEGACREDITS, 14);
+    player.stock.deduct(Resource.MEGACREDITS, 14);
     player.game.defer(new BuildColony(player, {title: 'Select where to build the first colony'}));
     player.game.defer(new BuildColony(player, {title: 'Select where to build the second colony'}));
     return undefined;

@@ -33,7 +33,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       'Gain 1 titanium',
       'Gain titanium',
       () => {
-        player.addResource(Resource.TITANIUM, 1, {log: true});
+        player.stock.add(Resource.TITANIUM, 1, {log: true});
         return undefined;
       },
     );
@@ -42,7 +42,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       'Gain 2 steel',
       'Gain steel',
       () => {
-        player.addResource(Resource.STEEL, 2, {log: true});
+        player.stock.add(Resource.STEEL, 2, {log: true});
         return undefined;
       },
     );

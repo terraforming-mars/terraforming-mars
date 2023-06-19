@@ -159,10 +159,10 @@ export class PathfindersExpansion {
       game.log('${0} has the most ${1} tags and earns 2VP', (b) => b.player(player).string(tag));
       break;
     case '3mc':
-      player.addResource(Resource.MEGACREDITS, 3, {log: true});
+      player.stock.add(Resource.MEGACREDITS, 3, {log: true});
       break;
     case '6mc':
-      player.addResource(Resource.MEGACREDITS, 6, {log: true});
+      player.stock.add(Resource.MEGACREDITS, 6, {log: true});
       break;
     case 'any_resource':
       game.defer(new GrantResourceDeferred(player, false));
@@ -180,10 +180,10 @@ export class PathfindersExpansion {
             game.defer(new SendDelegateToArea(player));
           }
         },
-        () => player.addResource(Resource.MEGACREDITS, 3, {log: true}));
+        () => player.stock.add(Resource.MEGACREDITS, 3, {log: true}));
       break;
     case 'energy':
-      player.addResource(Resource.ENERGY, 1, {log: true});
+      player.stock.add(Resource.ENERGY, 1, {log: true});
       break;
     case 'energy_production':
       player.production.add(Resource.ENERGY, 1, {log: true});
@@ -195,7 +195,7 @@ export class PathfindersExpansion {
       game.defer(new PlaceGreeneryTile(player));
       break;
     case 'heat':
-      player.addResource(Resource.HEAT, 1, {log: true});
+      player.stock.add(Resource.HEAT, 1, {log: true});
       break;
     case 'heat_production':
       player.production.add(Resource.HEAT, 1, {log: true});
@@ -210,7 +210,7 @@ export class PathfindersExpansion {
       game.defer(new PlaceOceanTile(player));
       break;
     case 'plant':
-      player.addResource(Resource.PLANTS, 1, {log: true});
+      player.stock.add(Resource.PLANTS, 1, {log: true});
       break;
     case 'plant_production':
       player.production.add(Resource.PLANTS, 1, {log: true});
@@ -219,13 +219,13 @@ export class PathfindersExpansion {
       game.defer(new SelectResourcesDeferred(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
       break;
     case 'steel':
-      player.addResource(Resource.STEEL, 1, {log: true});
+      player.stock.add(Resource.STEEL, 1, {log: true});
       break;
     case 'steel_production':
       player.production.add(Resource.STEEL, 1, {log: true});
       break;
     case 'titanium':
-      player.addResource(Resource.TITANIUM, 1, {log: true});
+      player.stock.add(Resource.TITANIUM, 1, {log: true});
       break;
     case 'titanium_production':
       player.production.add(Resource.TITANIUM, 1, {log: true});

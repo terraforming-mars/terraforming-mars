@@ -44,7 +44,7 @@ export class UnitedNationsMissionOne extends Card implements ICorporationCard {
     const game = player.game;
 
     if (game.phase === Phase.ACTION || game.phase === Phase.PRELUDES) {
-      cardOwner.addResource(Resource.MEGACREDITS, steps, {log: true});
+      cardOwner.stock.add(Resource.MEGACREDITS, steps, {log: true});
     }
   }
 }

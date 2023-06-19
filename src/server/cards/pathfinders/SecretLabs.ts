@@ -60,7 +60,7 @@ export class SecretLabs extends Card implements IProjectCard {
     if (this.canAfford(player, {temperature: 1}, 0)) {
       options.options.push(new SelectOption('Raise temperature 1 step. Gain 3 plants.', 'select', () => {
         player.game.increaseTemperature(player, 1);
-        player.addResource(Resource.PLANTS, 3, {log: true});
+        player.stock.add(Resource.PLANTS, 3, {log: true});
         return undefined;
       }));
     }

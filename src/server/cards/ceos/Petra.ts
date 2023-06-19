@@ -76,7 +76,7 @@ export class Petra extends CeoCard {
     }
     // If we dont do this player will not get the bonus for POLITICAN Awards
     player.totalDelegatesPlaced += count;
-    player.addResource(Resource.MEGACREDITS, count * 3, {log: true});
+    player.stock.add(Resource.MEGACREDITS, count * 3, {log: true});
 
     // Place 3 Neutral delegates
     const availableParties = turmoil.parties.map((party) => party.name);

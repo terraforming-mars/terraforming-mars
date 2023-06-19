@@ -1292,16 +1292,16 @@ export class Game implements IGame, Logger {
       player.drawCard(count);
       break;
     case SpaceBonus.PLANT:
-      player.addResource(Resource.PLANTS, count, {log: true});
+      player.stock.add(Resource.PLANTS, count, {log: true});
       break;
     case SpaceBonus.STEEL:
-      player.addResource(Resource.STEEL, count, {log: true});
+      player.stock.add(Resource.STEEL, count, {log: true});
       break;
     case SpaceBonus.TITANIUM:
-      player.addResource(Resource.TITANIUM, count, {log: true});
+      player.stock.add(Resource.TITANIUM, count, {log: true});
       break;
     case SpaceBonus.HEAT:
-      player.addResource(Resource.HEAT, count, {log: true});
+      player.stock.add(Resource.HEAT, count, {log: true});
       break;
     case SpaceBonus.OCEAN:
       // ignore
@@ -1331,7 +1331,7 @@ export class Game implements IGame, Logger {
       }
       break;
     case SpaceBonus.ENERGY:
-      player.addResource(Resource.ENERGY, count, {log: true});
+      player.stock.add(Resource.ENERGY, count, {log: true});
       break;
     case SpaceBonus.ASTEROID:
       this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));

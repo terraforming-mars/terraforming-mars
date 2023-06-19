@@ -31,7 +31,7 @@ export class RedTourismWave extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const amount = RedTourismWave.getAdjacentEmptySpacesCount(player);
-    player.addResource(Resource.MEGACREDITS, amount);
+    player.stock.add(Resource.MEGACREDITS, amount);
     return undefined;
   }
 

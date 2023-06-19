@@ -32,7 +32,7 @@ export class Sabotage extends GlobalEvent implements IGlobalEvent {
       if (player.production.steel >= 1) {
         player.production.add(Resource.STEEL, -1, {log: true, from: this.name});
       }
-      player.addResource(Resource.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+      player.stock.add(Resource.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }
 }

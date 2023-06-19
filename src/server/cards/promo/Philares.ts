@@ -88,12 +88,12 @@ export class Philares extends Card implements ICorporationCard {
         ) {
           throw new Error('Need to select ' + resourceCount + ' resource(s)');
         }
-        philaresPlayer.addResource(Resource.MEGACREDITS, megacreditsAmount, {log: true});
-        philaresPlayer.addResource(Resource.STEEL, steelAmount, {log: true});
-        philaresPlayer.addResource(Resource.TITANIUM, titaniumAmount, {log: true});
-        philaresPlayer.addResource(Resource.PLANTS, plantsAmount, {log: true});
-        philaresPlayer.addResource(Resource.ENERGY, energyAmount, {log: true});
-        philaresPlayer.addResource(Resource.HEAT, heatAmount, {log: true});
+        philaresPlayer.stock.add(Resource.MEGACREDITS, megacreditsAmount, {log: true});
+        philaresPlayer.stock.add(Resource.STEEL, steelAmount, {log: true});
+        philaresPlayer.stock.add(Resource.TITANIUM, titaniumAmount, {log: true});
+        philaresPlayer.stock.add(Resource.PLANTS, plantsAmount, {log: true});
+        philaresPlayer.stock.add(Resource.ENERGY, energyAmount, {log: true});
+        philaresPlayer.stock.add(Resource.HEAT, heatAmount, {log: true});
         return undefined;
       }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
     selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';

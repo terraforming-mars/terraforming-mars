@@ -29,7 +29,7 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.addResource(Resource.MEGACREDITS, 10, {log: true});
+    player.stock.add(Resource.MEGACREDITS, 10, {log: true});
     const turmoil = Turmoil.getTurmoil(player.game);
     const globalEvents: IGlobalEvent[] = [];
 

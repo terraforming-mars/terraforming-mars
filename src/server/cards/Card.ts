@@ -188,7 +188,7 @@ export abstract class Card {
   }
 
   public play(player: IPlayer): PlayerInput | undefined {
-    player.deductUnits(MoonExpansion.adjustedReserveCosts(player, this));
+    player.stock.deductUnits(MoonExpansion.adjustedReserveCosts(player, this));
     if (this.behavior !== undefined) {
       getBehaviorExecutor().execute(this.behavior, player, this);
     }

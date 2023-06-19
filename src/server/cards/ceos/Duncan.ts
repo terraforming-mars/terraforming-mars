@@ -32,7 +32,7 @@ export class Duncan extends CeoCard {
 
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
-    player.addResource(Resource.MEGACREDITS, 4 * player.game.generation, {log: true});
+    player.stock.add(Resource.MEGACREDITS, 4 * player.game.generation, {log: true});
     this.generationUsed = player.game.generation;
     return undefined;
   }

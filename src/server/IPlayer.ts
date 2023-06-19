@@ -28,8 +28,8 @@ import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
-import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {OrOptions} from './inputs/OrOptions';
+import {Stock} from './player/Stock';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -58,6 +58,7 @@ export interface IPlayer {
   tags: Tags;
   colonies: Colonies;
   readonly production: Production;
+  readonly stock: Stock;
 
   // Corporate identity
   corporations: Array<ICorporationCard>;
@@ -153,36 +154,8 @@ export interface IPlayer {
   increaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
-  getResource(resource: Resource): number;
   logUnitDelta(resource: Resource, amount: number, unitType: 'production' | 'amount', from: ResourceSource | undefined, stealing?: boolean): void;
-  deductResource(
-    resource: Resource,
-    amount: number,
-    options? :{
-      log?: boolean,
-      from? : ResourceSource,
-      stealing?: boolean
-    }): void;
-  addResource(
-    resource: Resource,
-    amount: number,
-    options? :{
-      log?: boolean,
-      from? : ResourceSource,
-      stealing?: boolean
-    }): void;
-  /**
-   * `from` steals up to `qty` units of `resource` from this player. Or, at least as
-   * much as possible.
-   */
-  stealResource(resource: Resource, qty: number, thief: IPlayer): void;
-  // Returns true when the player has the supplied units in its inventory.
-  hasUnits(units: Units): boolean;
-  addUnits(units: Partial<Units>, options? : {
-    log?: boolean,
-    from? : ResourceSource,
-  }): void;
-  deductUnits(units: Units): void;
+
   getActionsThisGeneration(): Set<CardName>;
   addActionThisGeneration(cardName: CardName): void;
   getVictoryPoints(): IVictoryPointsBreakdown;
@@ -270,7 +243,6 @@ export interface IPlayer {
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
   defer(input: PlayerInput | undefined, priority?: Priority): void;
-  fizzle(card: IPreludeCard): void;
 }
 
 export function isIPlayer(object: any): object is IPlayer {

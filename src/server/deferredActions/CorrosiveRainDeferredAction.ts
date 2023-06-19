@@ -20,7 +20,7 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
 
     const selectAction = new OrOptions();
     const payMC = new SelectOption('Lose up to 10 M€', 'Lose M€', () => {
-      this.player.deductResource(Resource.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
+      this.player.stock.deduct(Resource.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
       return undefined;
     });
     const removeFloaters = new SelectCard(

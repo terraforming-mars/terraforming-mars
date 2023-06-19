@@ -27,8 +27,8 @@ export class OptimalAerobraking extends Card implements IProjectCard {
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
-      player.addResource(Resource.MEGACREDITS, 3, {log: true, from: this});
-      player.addResource(Resource.HEAT, 3, {log: true, from: this});
+      player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
+      player.stock.add(Resource.HEAT, 3, {log: true, from: this});
     }
   }
 }

@@ -67,7 +67,7 @@ describe('SecretLabs', function() {
     runAllActions(player.game);
 
     expect(player.game.getTemperature()).eq(-28);
-    expect(player.purse()).deep.eq(Units.of({plants: 3}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 3}));
   });
 
   it('play - raise oxygen', function() {

@@ -44,7 +44,7 @@ export class RoadPiracy extends Card implements IProjectCard {
       if (opponent === player) {
         continue;
       }
-      if (opponent.getResource(resource) > 0) {
+      if (opponent.stock.get(resource) > 0) {
         const cb = (amount: number) => {
           ledger.set(opponent, amount);
           return undefined;
@@ -55,7 +55,7 @@ export class RoadPiracy extends Card implements IProjectCard {
             undefined,
             cb,
             0,
-            opponent.getResource(resource));
+            opponent.stock.get(resource));
         selectAmounts.push(selectAmount);
       }
     }
@@ -71,7 +71,7 @@ export class RoadPiracy extends Card implements IProjectCard {
         throw new Error(`You may only steal up to ${limit} ${resource} from all players`);
       }
       for (const entry of ledger) {
-        entry[0].stealResource(resource, entry[1], player);
+        entry[0].stock.steal(resource, entry[1], player);
       }
       return undefined;
     };

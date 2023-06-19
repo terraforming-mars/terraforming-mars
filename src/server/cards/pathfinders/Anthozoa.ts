@@ -39,7 +39,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
   }
 
   public action(player: IPlayer) {
-    player.deductResource(Resource.PLANTS, 1);
+    player.stock.deduct(Resource.PLANTS, 1);
     player.addResourceTo(this);
     player.game.log('${0} spent 1 plant to place an animal on ${1}.', (b) => b.player(player).card(this));
     return undefined;

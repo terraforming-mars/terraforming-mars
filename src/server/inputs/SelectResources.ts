@@ -50,7 +50,7 @@ export class SelectResources extends AndOptions {
           throw new Error(`Select ${this.count} resources.`);
         }
 
-        this.player.addUnits(this.units, {log: true});
+        this.player.stock.addUnits(this.units, {log: true});
         return undefined;
       },
       ...SelectResources.makeOptions(count, units),

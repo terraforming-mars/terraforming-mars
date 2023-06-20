@@ -65,7 +65,7 @@ describe('Kelvinists', function() {
     const kelvinistsPolicy = KELVINISTS_POLICY_3;
     expect(kelvinistsPolicy.canAct(player)).to.be.false;
 
-    player.addResource(Resource.HEAT, 6);
+    player.stock.add(Resource.HEAT, 6);
     expect(kelvinistsPolicy.canAct(player)).to.be.true;
 
     const initialTR = player.getTerraformRating();
@@ -81,7 +81,7 @@ describe('Kelvinists', function() {
     const stormcraft = new StormCraftIncorporated();
     player.setCorporationForTest(stormcraft);
     stormcraft.resourceCount = 2;
-    player.addResource(Resource.HEAT, 8);
+    player.stock.add(Resource.HEAT, 8);
 
     const kelvinistsPolicy = KELVINISTS_POLICY_3;
     expect(kelvinistsPolicy.canAct(player)).to.be.true;

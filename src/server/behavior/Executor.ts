@@ -206,10 +206,10 @@ export class Executor implements BehaviorExecutor {
         titanium: spend.titanium ?? 0,
       }));
       if (spend.plants) {
-        player.deductResource(Resource.PLANTS, spend.plants);
+        player.stock.deduct(Resource.PLANTS, spend.plants);
       }
       if (spend.energy) {
-        player.deductResource(Resource.ENERGY, spend.energy);
+        player.stock.deduct(Resource.ENERGY, spend.energy);
       }
       if (spend.heat) {
         throw new Error('Spending heat not supported yet.');
@@ -225,7 +225,7 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.stock) {
       const units = ctx.countUnits(behavior.stock);
-      player.addUnits(units, {log: true});
+      player.stock.addUnits(units, {log: true});
     }
     if (behavior.steelValue === 1) {
       player.increaseSteelValue();

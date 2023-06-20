@@ -36,7 +36,7 @@ export class HeadStart extends PreludeCard {
   public override bespokePlay(player: IPlayer) {
     const projectCardsInHand = player.cardsInHand.filter((card) => HeadStart.PROJECT_CARD_TYPES.includes(card.type));
     const megacredits = projectCardsInHand.length * 2;
-    player.addResource(Resource.MEGACREDITS, megacredits, {log: true});
+    player.stock.add(Resource.MEGACREDITS, megacredits, {log: true});
 
     return undefined;
   }

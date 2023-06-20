@@ -70,7 +70,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
 
     const animalCards: Array<ICard> = player.getResourceCards(CardResource.ANIMAL);
     const gainPlantsOption = new SelectOption('Gain 4 plants', 'Gain plants', () => {
-      player.addResource(Resource.PLANTS, 4, {log: true});
+      player.stock.add(Resource.PLANTS, 4, {log: true});
       return undefined;
     });
 

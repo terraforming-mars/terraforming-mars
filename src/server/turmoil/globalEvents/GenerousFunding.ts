@@ -28,7 +28,7 @@ export class GenerousFunding extends GlobalEvent implements IGlobalEvent {
       const trSets = Math.max(0, Math.floor((player.getTerraformRating() - 15) / 5));
       const maxTRSets = 5;
       const totalSets = Math.min(maxTRSets, trSets) + turmoil.getPlayerInfluence(player);
-      player.addResource(Resource.MEGACREDITS, 2 * totalSets, {log: true, from: this.name});
+      player.stock.add(Resource.MEGACREDITS, 2 * totalSets, {log: true, from: this.name});
     });
   }
 }

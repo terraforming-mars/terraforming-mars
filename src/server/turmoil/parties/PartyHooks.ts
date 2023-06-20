@@ -14,7 +14,7 @@ export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: IPlayer, spaceType: SpaceType) {
     if (this.shouldApplyPolicy(player, PartyName.MARS, 'mfp01') &&
         spaceType !== SpaceType.COLONY) {
-      player.addResource(Resource.STEEL, 1);
+      player.stock.add(Resource.STEEL, 1);
     }
   }
 

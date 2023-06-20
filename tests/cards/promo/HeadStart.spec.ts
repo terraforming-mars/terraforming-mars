@@ -27,7 +27,7 @@ describe('HeadStart', function() {
   it('Gain resources', () => {
     player.cardsInHand.push(fakeCard({}), fakeCard({}), fakeCard({}));
     headStart.play(player);
-    expect(player.purse()).deep.eq(Units.of({megacredits: 6, steel: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 6, steel: 2}));
   });
 
   function findOption(pi: OrOptions, title: string) {

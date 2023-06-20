@@ -69,7 +69,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
         const game = player.game;
         for (const p of game.getPlayers()) {
           if (p === player) continue;
-          p.stealResource(Resource.MEGACREDITS, 2, player);
+          p.stock.steal(Resource.MEGACREDITS, 2, player);
         }
         return undefined;
       }));
@@ -104,8 +104,8 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
         // TODO(kberg): Create a Game.steal method that manages this, both here
         // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.addResource(Resource.MEGACREDITS, adjustedQuantity, {log: true});
-        target.deductResource(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
+        activePlayer.stock.add(Resource.MEGACREDITS, adjustedQuantity, {log: true});
+        target.stock.deduct(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
       });
     }
     return undefined;

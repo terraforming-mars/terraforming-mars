@@ -51,7 +51,7 @@ export class MartianZoo extends Card implements IProjectCard {
   }
 
   public action(player: IPlayer) {
-    player.addResource(Resource.MEGACREDITS, this.resourceCount, {log: true});
+    player.stock.add(Resource.MEGACREDITS, this.resourceCount, {log: true});
     return undefined;
   }
 }

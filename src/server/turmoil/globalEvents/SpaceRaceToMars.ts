@@ -31,7 +31,7 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
       const specialTileCount = this.specialTileCount(player);
       const bonus = Math.min(specialTileCount, 5);
       player.production.add(Resource.MEGACREDITS, bonus, {log: true, from: this.name});
-      player.addResource(Resource.ENERGY, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+      player.stock.add(Resource.ENERGY, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }
 

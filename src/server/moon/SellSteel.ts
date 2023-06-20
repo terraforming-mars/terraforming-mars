@@ -26,8 +26,8 @@ export class SellSteel extends DeferredAction {
       (unitsSold: number) => {
         if (unitsSold > 0) {
           const cashEarned = unitsSold * 3;
-          this.player.addResource(Resource.MEGACREDITS, cashEarned);
-          this.player.deductResource(Resource.STEEL, unitsSold);
+          this.player.stock.add(Resource.MEGACREDITS, cashEarned);
+          this.player.stock.deduct(Resource.STEEL, unitsSold);
         }
         this.logSale(unitsSold);
         return undefined;

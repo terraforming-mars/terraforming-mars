@@ -91,12 +91,12 @@ describe('Crashlanding', () => {
     player.megaCredits = 0;
     expect(dataCard.resourceCount).eq(2);
     addGreenery(player, '35');
-    expect(player.purse()).deep.eq(Units.of({megacredits: 1, titanium: 1, steel: 0}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, titanium: 1, steel: 0}));
     runAllActions(game);
     expect(dataCard.resourceCount).eq(3);
 
     addGreenery(player, '37');
-    expect(player.purse()).deep.eq(Units.of({megacredits: 2, titanium: 1, steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 2, titanium: 1, steel: 1}));
     runAllActions(game);
     expect(dataCard.resourceCount).eq(4);
   });
@@ -113,12 +113,12 @@ describe('Crashlanding', () => {
     player.megaCredits = 0;
     expect(dataCard.resourceCount).eq(2);
     addGreenery(player, '35');
-    expect(player.purse()).deep.eq(Units.of({megacredits: 1, titanium: 0, steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, titanium: 0, steel: 1}));
     runAllActions(game);
     expect(dataCard.resourceCount).eq(3);
 
     addGreenery(player, '37');
-    expect(player.purse()).deep.eq(Units.of({megacredits: 2, titanium: 1, steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 2, titanium: 1, steel: 1}));
     runAllActions(game);
     expect(dataCard.resourceCount).eq(4);
   });
@@ -137,7 +137,7 @@ describe('Crashlanding', () => {
     runAllActions(game);
 
     expect(dataCard.resourceCount).eq(3);
-    expect(player.purse()).deep.eq(Units.of({megacredits: 0, titanium: 0, steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 0, titanium: 0, steel: 1}));
   });
 
   it('play - resources', () => {

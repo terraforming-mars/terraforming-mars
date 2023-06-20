@@ -47,7 +47,7 @@ export class CometForVenus extends Card implements IProjectCard {
           'Select player to remove up to 4 M€ from',
           'Remove M€',
           (selectedPlayer: IPlayer) => {
-            selectedPlayer.deductResource(Resource.MEGACREDITS, 4, {log: true, from: player});
+            selectedPlayer.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
             return undefined;
           },
         ),

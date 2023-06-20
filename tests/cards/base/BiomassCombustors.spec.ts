@@ -3,7 +3,7 @@ import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustor
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('BiomassCombustors', function() {

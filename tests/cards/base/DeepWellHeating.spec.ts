@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {DeepWellHeating} from '../../../src/server/cards/base/DeepWellHeating';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('DeepWellHeating', function() {
   it('Should play', function() {

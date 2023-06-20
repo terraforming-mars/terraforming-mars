@@ -3,6 +3,7 @@ import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {SolarProbe} from '../../../src/server/cards/colonies/SolarProbe';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('SolarProbe', function() {
   it('Should play', function() {

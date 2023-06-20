@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {PolarIndustries} from '../../../src/server/cards/prelude/PolarIndustries';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('PolarIndustries', function() {
   it('Should play', function() {

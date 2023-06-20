@@ -2,10 +2,9 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions, forceGenerationEnd} from '../../TestingUtils';
+import {runAllActions, forceGenerationEnd, cast} from '../../TestingUtils';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-
 import {Xu} from '../../../src/server/cards/ceos/Xu';
 
 

@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Greenhouses} from '../../../src/server/cards/base/Greenhouses';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('Greenhouses', function() {
   it('Should play', function() {

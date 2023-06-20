@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {TerraformingControlStation} from '../../../src/server/cards/pathfinders/TerraformingControlStation';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 
 describe('Venus', function() {

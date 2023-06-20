@@ -3,7 +3,7 @@ import {HabitatMarte} from '../../../src/server/cards/pathfinders/HabitatMarte';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {fakeCard, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';

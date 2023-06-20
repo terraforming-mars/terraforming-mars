@@ -22,8 +22,7 @@ describe('RedSpotObservatory', function() {
     player.playedCards.push(card, card, card);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {

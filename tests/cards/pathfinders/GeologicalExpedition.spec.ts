@@ -39,7 +39,7 @@ describe('GeologicalExpedition', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({steel: 1}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('City tile on a space colony, no bonus', () => {
@@ -50,7 +50,7 @@ describe('GeologicalExpedition', function() {
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('one resource, gain it', () => {
@@ -60,7 +60,7 @@ describe('GeologicalExpedition', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('one resource, one non-resource', () => {
@@ -72,7 +72,7 @@ describe('GeologicalExpedition', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({heat: 2}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('one non-resource, no bonus', () => {
@@ -82,7 +82,7 @@ describe('GeologicalExpedition', function() {
 
     expect(player.cardsInHand).has.length(1);
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('three identical resources', () => {
@@ -90,7 +90,7 @@ describe('GeologicalExpedition', function() {
     game.addCity(player, space);
 
     expect(player.stock.asUnits()).deep.eq(Units.of({heat: 4}));
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('card resource', () => {

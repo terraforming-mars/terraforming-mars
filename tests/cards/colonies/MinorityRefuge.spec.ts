@@ -55,7 +55,7 @@ describe('MinorityRefuge', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 3}));
 
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('can play with low MC production when Luna is in play', () => {
@@ -73,6 +73,6 @@ describe('MinorityRefuge', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: -4}));
 
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 });

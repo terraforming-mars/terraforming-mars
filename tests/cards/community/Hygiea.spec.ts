@@ -26,7 +26,7 @@ describe('Hygiea', () => {
   it('Build, no opponent has cards in hand', () => {
     hygiea.addColony(player);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('Build, opponents have cards in hand', () => {
@@ -37,12 +37,12 @@ describe('Hygiea', () => {
     runAllActions(game);
 
     const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
-    expect(player2.popWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
 
     selectPlayer.cb(player2);
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     const selectCard = cast(player2.popWaitingFor(), SelectCard);
     expect(selectCard.cards).to.have.members([microMills, earthCatapult]);
     selectCard.cb([microMills]);

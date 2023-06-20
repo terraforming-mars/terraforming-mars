@@ -53,7 +53,7 @@ describe('EnergyMarket', function() {
     const next = selectAmount.cb(3);
     expect(next).is.undefined;
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     expect(player.megaCredits).eq(2);
     expect(player.energy).eq(3);
   });

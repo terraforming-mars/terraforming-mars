@@ -6,19 +6,19 @@ import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCo
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('CommunityServices', function() {
   it('Should play', function() {
     const card = new CommunityServices();
-    const corpo = new Aridor();
+    const corp = new Aridor();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(prelude, researchCoordination);
-    player.setCorporationForTest(corpo);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    player.setCorporationForTest(corp);
+    cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });
@@ -31,8 +31,7 @@ describe('CommunityServices', function() {
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(prelude, researchCoordination);
     player.setCorporationForTest(corpo);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });

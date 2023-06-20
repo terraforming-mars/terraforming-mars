@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {MiningQuota} from '../../../src/server/cards/venusNext/MiningQuota';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('MiningQuota', function() {
   it('Should play', function() {
@@ -31,8 +32,7 @@ describe('MiningQuota', function() {
     player.tagsForTest = {venus: 1, jovian: 1, earth: 1};
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.steel).to.eq(2);
   });
 });

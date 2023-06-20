@@ -68,7 +68,7 @@ describe('Pallas', function() {
 
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('Should give trade bonus', function() {

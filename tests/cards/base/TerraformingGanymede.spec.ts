@@ -5,6 +5,7 @@ import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
+import {cast} from '../../TestingUtils';
 
 describe('TerraformingGanymede', function() {
   let card: TerraformingGanymede;
@@ -20,8 +21,7 @@ describe('TerraformingGanymede', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(2);
     player.playedCards.push(card);
     expect(player.getTerraformRating()).to.eq(21);

@@ -143,7 +143,7 @@ describe('MonsInsurance - Solo', () => {
     const airRaid = new AirRaid();
     airRaid.play(player);
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     // 10 + 5 - 3 = 12
     expect(player.megaCredits).eq(12);
@@ -156,7 +156,7 @@ describe('MonsInsurance - Solo', () => {
     const birds = new Birds();
     birds.play(player);
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(player.megaCredits).eq(7);
   });
@@ -169,7 +169,7 @@ describe('MonsInsurance - Solo', () => {
 
     comet.play(player);
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(player.megaCredits).eq(7);
   });
@@ -184,7 +184,7 @@ describe('MonsInsurance - Solo', () => {
 
     predators.action(player);
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(predators.resourceCount).eq(1);
     expect(player.megaCredits).eq(7);

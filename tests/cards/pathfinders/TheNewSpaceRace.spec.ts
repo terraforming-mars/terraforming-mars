@@ -77,16 +77,16 @@ describe('TheNewSpaceRace', function() {
 
     expect(game.getPlayersInGenerationOrder()).deep.eq([player2, player3, player1]);
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
     doWait(player2, OrOptions, (selectParty) => {
       expect(game.turmoil!.rulingParty.name).eq(PartyName.GREENS);
       selectParty.options[2].cb(); // 2 is Unity.
       expect(game.turmoil!.rulingParty.name).eq(PartyName.UNITY);
     });
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
 
     // Player2 is up, and will play its other prelude first.
     const next = cast(player2.getWaitingFor(), SelectCard);

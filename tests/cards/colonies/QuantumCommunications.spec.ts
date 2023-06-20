@@ -4,6 +4,7 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('QuantumCommunications', function() {
   it('Should play', function() {
@@ -20,8 +21,7 @@ describe('QuantumCommunications', function() {
     player.game.colonies.push(colony1);
     player.game.colonies.push(colony2);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(2);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

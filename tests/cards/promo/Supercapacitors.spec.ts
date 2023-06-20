@@ -18,7 +18,7 @@ describe('Supercapacitors', () => {
   });
 
   it('When player has no energy, go straight to selecting cards', () => {
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     player.production.override({energy: 1, heat: 2});
     player.playedCards.push(card);
     player.energy = 0;
@@ -34,7 +34,7 @@ describe('Supercapacitors', () => {
 
 
   it('Behavior when player has energy', () => {
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     player.playedCards.push(card);
     player.production.override({energy: 2, heat: 3});
     player.energy = 5;

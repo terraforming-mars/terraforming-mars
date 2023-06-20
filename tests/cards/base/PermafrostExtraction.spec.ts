@@ -24,8 +24,7 @@ describe('PermafrostExtraction', function() {
     setTemperature(game, -8);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     selectSpace.cb(selectSpace.availableSpaces[0]);

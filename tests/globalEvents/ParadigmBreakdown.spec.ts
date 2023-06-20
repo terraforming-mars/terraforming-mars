@@ -38,7 +38,7 @@ describe('ParadigmBreakdown', function() {
     const selectCard = cast(player.popWaitingFor(), SelectCard);
     selectCard.cb([powerPlant, asteroid]);
     runAllActions(game);
-    expect(player2.popWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0]).to.eq(dustSeals);

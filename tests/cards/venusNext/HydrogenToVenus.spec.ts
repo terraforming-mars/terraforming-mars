@@ -56,16 +56,15 @@ describe('HydrogenToVenus', function() {
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(venusCard1.resourceCount).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
   it('Should play with no venus cards', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

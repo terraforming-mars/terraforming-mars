@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Solarnet} from '../../../src/server/cards/venusNext/Solarnet';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('Solarnet', function() {
   it('Should play', function() {
@@ -29,8 +30,7 @@ describe('Solarnet', function() {
     player.tagsForTest = {venus: 1, jovian: 1, earth: 1};
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.cardsInHand).has.lengthOf(2);
   });
 });

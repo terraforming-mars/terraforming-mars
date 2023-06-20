@@ -413,40 +413,40 @@ describe('Game', () => {
 
     game.takeNextFinalGreeneryAction();
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player2.getWaitingFor(), undefined);
     expect(player3.getWaitingFor()).is.not.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player4.getWaitingFor(), undefined);
 
     // Skipping plants placement. Option 1 is "Don't place plants".
     // This weird input is what would come from the server, and indicates "Don't place plants".
     player3.process({type: 'or', index: 1, response: {type: 'option'}});
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
     expect(player4.getWaitingFor()).is.not.undefined;
 
     player4.process({type: 'or', index: 1, response: {type: 'option'}});
 
     expect(player1.getWaitingFor()).is.not.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
+    cast(player4.getWaitingFor(), undefined);
 
     player1.process({type: 'or', index: 1, response: {type: 'option'}});
 
-    expect(player1.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
     expect(player2.getWaitingFor()).is.not.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player3.getWaitingFor(), undefined);
+    cast(player4.getWaitingFor(), undefined);
 
     player2.process({type: 'or', index: 1, response: {type: 'option'}});
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
+    cast(player4.getWaitingFor(), undefined);
 
     expect(game.phase).eq(Phase.END);
   });
@@ -470,9 +470,9 @@ describe('Game', () => {
 
     // Even though player 3 is first player, they have no plants. So player 4 goes.
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
     expect(player4.getWaitingFor()).is.not.undefined;
 
     // Skipping plants placement. Option 1 is "Don't place plants".
@@ -481,9 +481,9 @@ describe('Game', () => {
 
     // After that, player 1 has plants.
     expect(player1.getWaitingFor()).is.not.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
+    cast(player4.getWaitingFor(), undefined);
 
     player1.process({type: 'or', index: 1, response: {type: 'option'}});
 

@@ -58,7 +58,7 @@ describe('GagarinMobileBase', () => {
     game.gagarinBase = ['13'];
     game.addCity(player, space13);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('onTilePlaced, opponent', () => {
@@ -66,7 +66,7 @@ describe('GagarinMobileBase', () => {
     game.gagarinBase = ['13'];
     game.addCity(player2, space13);
     runAllActions(game);
-    expect(player2.popWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     expect(selectSpace.availableSpaces.map((s) => s.id)).to.have.members(['12', '19', '20']);
   });

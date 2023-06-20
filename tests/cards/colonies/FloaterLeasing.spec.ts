@@ -3,6 +3,7 @@ import {testGame} from '../../TestGame';
 import {FloaterLeasing} from '../../../src/server/cards/colonies/FloaterLeasing';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {cast} from '../../TestingUtils';
 
 describe('FloaterLeasing', function() {
   it('Should play', function() {
@@ -10,7 +11,7 @@ describe('FloaterLeasing', function() {
     const [, player] = testGame(1);
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     expect(player.production.megacredits).eq(0);
 

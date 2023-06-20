@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarPlanningOffice} from '../../../src/server/cards/moon/LunarPlanningOffice';
 import {expect} from 'chai';
@@ -38,7 +38,7 @@ describe('LunarPlanningOffice', () => {
 
     expect(player.steel).eq(6);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.MARE_NECTARIS_MINE, CardName.MARE_IMBRIUM_MINE]);
     expect(game.projectDeck.discardPile.map((c) => c.name)).has.members([CardName.MICRO_MILLS]);
 

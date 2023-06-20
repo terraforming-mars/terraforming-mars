@@ -95,7 +95,7 @@ describe('Merger', function() {
     merger.play(player);
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(player.megaCredits).eq(15);
   });
 

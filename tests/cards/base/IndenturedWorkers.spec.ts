@@ -3,6 +3,7 @@ import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorker
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('IndenturedWorkers', function() {
   let card: IndenturedWorkers;
@@ -15,8 +16,7 @@ describe('IndenturedWorkers', function() {
   });
 
   it('play', () => {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(-1);
     expect(card.getCardDiscount(player)).to.eq(0);
   });

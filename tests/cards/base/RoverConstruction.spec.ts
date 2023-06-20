@@ -3,6 +3,7 @@ import {RoverConstruction} from '../../../src/server/cards/base/RoverConstructio
 import {Game} from '../../../src/server/Game';
 import {addCity, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('RoverConstruction', function() {
   it('Should play', function() {
@@ -10,8 +11,7 @@ describe('RoverConstruction', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     player.playedCards.push(card);
     addCity(player);

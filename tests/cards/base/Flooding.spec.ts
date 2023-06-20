@@ -82,7 +82,6 @@ describe('Flooding', function() {
     maxOutOceans(player);
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 });

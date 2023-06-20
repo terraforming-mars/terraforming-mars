@@ -49,7 +49,7 @@ describe('Splice', function() {
     expect(play2).is.undefined;
 
     const action = card.onCardPlayed(player2, card2);
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.megaCredits).to.eq(4);
     expect(player2.megaCredits).to.eq(4);
   });

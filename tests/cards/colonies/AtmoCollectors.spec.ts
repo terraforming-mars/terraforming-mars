@@ -18,8 +18,7 @@ describe('AtmoCollectors', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {
@@ -27,7 +26,7 @@ describe('AtmoCollectors', function() {
 
     card.action(player);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).to.eq(1);
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
 

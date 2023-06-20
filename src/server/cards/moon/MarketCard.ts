@@ -29,7 +29,7 @@ export abstract class MarketCard extends Card implements IActionCard {
   }
 
   private canSell(player: IPlayer) {
-    return player.getResource(this.tradeResource) >= this.sellingTerms.from;
+    return player.stock.get(this.tradeResource) >= this.sellingTerms.from;
   }
 
   public canAct(player: IPlayer): boolean {
@@ -71,7 +71,7 @@ export abstract class MarketCard extends Card implements IActionCard {
             player,
             cashDue,
             {afterPay: () => {
-              player.addResource(this.tradeResource, unitsEarned, {log: true});
+              player.stock.add(this.tradeResource, unitsEarned, {log: true});
             }}));
 
         return undefined;
@@ -86,7 +86,7 @@ export abstract class MarketCard extends Card implements IActionCard {
     if (terms.from !== 1) {
       throw new Error('selling from !== 1 not yet supported.');
     }
-    let limit = player.getResource(this.tradeResource);
+    let limit = player.stock.get(this.tradeResource);
     limit = Math.min(limit, terms.limit);
 
     return new SelectAmount(
@@ -94,8 +94,8 @@ export abstract class MarketCard extends Card implements IActionCard {
       `Sell ${this.tradeResource}`,
       (unitsSold: number) => {
         const cashEarned = unitsSold * terms.to;
-        player.addResource(Resource.MEGACREDITS, cashEarned);
-        player.deductResource(this.tradeResource, unitsSold);
+        player.stock.add(Resource.MEGACREDITS, cashEarned);
+        player.stock.deduct(this.tradeResource, unitsSold);
 
         player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));
         return undefined;

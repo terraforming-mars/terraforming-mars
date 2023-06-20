@@ -42,7 +42,7 @@ export class SmallComet extends Card implements IProjectCard {
     const game = player.game;
     game.getPlayers().forEach((p) => {
       if (!p.plantsAreProtected()) {
-        p.deductResource(Resource.PLANTS, 2, {log: true, from: player});
+        p.stock.deduct(Resource.PLANTS, 2, {log: true, from: player});
       }
     });
     return undefined;

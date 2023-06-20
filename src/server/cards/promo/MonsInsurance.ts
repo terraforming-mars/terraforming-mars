@@ -53,7 +53,7 @@ export class MonsInsurance extends Card implements ICorporationCard {
     if (player !== claimant) {
       const retribution = Math.min(player.megaCredits, 3);
       if (claimant) claimant.megaCredits += retribution;
-      player.deductResource(Resource.MEGACREDITS, retribution);
+      player.stock.deduct(Resource.MEGACREDITS, retribution);
       if (retribution > 0) {
         if (claimant !== undefined) {
           player.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>

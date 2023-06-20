@@ -37,7 +37,7 @@ export class Manutech extends Card implements ICorporationCard {
 
   public static onProductionGain(player: IPlayer, resource: Resource, amount: number) {
     if (amount > 0) {
-      player.addResource(resource, amount);
+      player.stock.add(resource, amount);
     }
   }
 }

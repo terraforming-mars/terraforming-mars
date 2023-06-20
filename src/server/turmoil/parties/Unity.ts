@@ -35,7 +35,7 @@ class UnityBonus01 implements Bonus {
 
   grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -51,7 +51,7 @@ class UnityBonus02 implements Bonus {
 
   grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -105,7 +105,7 @@ class UnityPolicy02 implements Policy {
           }
 
           orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
-            player.addResource(Resource.TITANIUM, 2);
+            player.stock.add(Resource.TITANIUM, 2);
             game.log('${0} gained 2 titanium', (b) => b.player(player));
             return undefined;
           }));

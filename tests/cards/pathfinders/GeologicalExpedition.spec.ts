@@ -36,7 +36,7 @@ describe('GeologicalExpedition', function() {
   it('no bonuses, gain 1 steel', () => {
     game.addCity(player, space);
 
-    expect(player.purse()).deep.eq(Units.of({steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({steel: 1}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
     cast(player.getWaitingFor(), undefined);
@@ -47,7 +47,7 @@ describe('GeologicalExpedition', function() {
 
     expect(game.board.getSpace(SpaceName.GANYMEDE_COLONY).tile?.tileType).eq(TileType.CITY);
 
-    expect(player.purse()).deep.eq(Units.EMPTY);
+    expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
     cast(player.getWaitingFor(), undefined);
@@ -57,7 +57,7 @@ describe('GeologicalExpedition', function() {
     space.bonus = [SpaceBonus.TITANIUM];
     game.addCity(player, space);
 
-    expect(player.purse()).deep.eq(Units.of({titanium: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
     cast(player.getWaitingFor(), undefined);
@@ -69,7 +69,7 @@ describe('GeologicalExpedition', function() {
     game.addCity(player, space);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.purse()).deep.eq(Units.of({heat: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({heat: 2}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
     cast(player.getWaitingFor(), undefined);
@@ -81,7 +81,7 @@ describe('GeologicalExpedition', function() {
     game.addCity(player, space);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.purse()).deep.eq(Units.EMPTY);
+    expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     cast(player.getWaitingFor(), undefined);
   });
 
@@ -89,7 +89,7 @@ describe('GeologicalExpedition', function() {
     space.bonus = [SpaceBonus.HEAT, SpaceBonus.HEAT, SpaceBonus.HEAT];
     game.addCity(player, space);
 
-    expect(player.purse()).deep.eq(Units.of({heat: 4}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({heat: 4}));
     cast(player.getWaitingFor(), undefined);
   });
 
@@ -98,7 +98,7 @@ describe('GeologicalExpedition', function() {
     game.addCity(player, space);
     runAllActions(game);
 
-    expect(player.purse()).deep.eq(Units.EMPTY);
+    expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(2);
   });
@@ -107,7 +107,7 @@ describe('GeologicalExpedition', function() {
     space.bonus = [SpaceBonus.MICROBE, SpaceBonus.PLANT, SpaceBonus.HEAT];
     game.addCity(player, space);
 
-    expect(player.purse()).deep.eq(Units.of({plants: 1, heat: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1, heat: 1}));
 
     runAllActions(game);
     const orOptions = cast(player.getWaitingFor(), OrOptions);
@@ -115,21 +115,21 @@ describe('GeologicalExpedition', function() {
     orOptions.options[0].cb();
     runAllActions(game);
 
-    expect(player.purse()).deep.eq(Units.of({plants: 1, heat: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1, heat: 1}));
     expect(microbeCard.resourceCount).eq(2);
     expect(scienceCard.resourceCount).eq(0);
 
     orOptions.options[1].cb();
     runAllActions(game);
 
-    expect(player.purse()).deep.eq(Units.of({plants: 2, heat: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 2, heat: 1}));
     expect(microbeCard.resourceCount).eq(2);
     expect(scienceCard.resourceCount).eq(0);
 
     orOptions.options[2].cb();
     runAllActions(game);
 
-    expect(player.purse()).deep.eq(Units.of({plants: 2, heat: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 2, heat: 2}));
     expect(microbeCard.resourceCount).eq(2);
     expect(scienceCard.resourceCount).eq(0);
   });

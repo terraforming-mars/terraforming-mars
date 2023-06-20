@@ -284,7 +284,7 @@ describe('Merger', function() {
         }
         game.corporationDeck.drawPile.push(candidate);
 
-        player.setResourcesForTest(Units.of({megacredits})); // Clear all resources but MC.
+        player.stock.override(Units.of({megacredits})); // Clear all resources but MC.
         merger.play(player);
         runAllActions(game);
 

@@ -45,12 +45,12 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
     const otherMicrobeCards = player.getResourceCards(CardResource.MICROBE);
 
     if (otherMicrobeCards.length === 0) {
-      player.addResource(Resource.PLANTS, 1, {log: true});
+      player.stock.add(Resource.PLANTS, 1, {log: true});
       return undefined;
     }
 
     const gainPlantOption = new SelectOption('Gain 1 plant', 'Gain plant', () => {
-      player.addResource(Resource.PLANTS, 1, {log: true});
+      player.stock.add(Resource.PLANTS, 1, {log: true});
       return undefined;
     });
 

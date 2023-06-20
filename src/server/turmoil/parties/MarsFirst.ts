@@ -33,7 +33,7 @@ class MarsFirstBonus01 implements Bonus {
 
   grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -50,7 +50,7 @@ class MarsFirstBonus02 implements Bonus {
 
   grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -62,7 +62,7 @@ class MarsFirstPolicy01 implements Policy {
 
   onTilePlaced(player: IPlayer, space: ISpace) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
-      player.addResource(Resource.STEEL, 1);
+      player.stock.add(Resource.STEEL, 1);
     }
   }
 }
@@ -73,7 +73,7 @@ class MarsFirstPolicy02 implements Policy {
   readonly isDefault = false;
 
   onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (card.tags.includes(Tag.BUILDING)) player.addResource(Resource.MEGACREDITS, 2);
+    if (card.tags.includes(Tag.BUILDING)) player.stock.add(Resource.MEGACREDITS, 2);
   }
 }
 

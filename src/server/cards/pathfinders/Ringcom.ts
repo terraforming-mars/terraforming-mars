@@ -59,7 +59,7 @@ export class Ringcom extends Card implements ICorporationCard {
     if (card.tags.includes(Tag.JOVIAN)) {
       player.game.getPlayers().forEach((p) => {
         if (p.isCorporation(this.name)) {
-          p.addResource(Resource.TITANIUM, 1, {log: true});
+          p.stock.add(Resource.TITANIUM, 1, {log: true});
         }
       });
     }

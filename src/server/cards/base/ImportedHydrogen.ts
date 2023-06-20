@@ -44,7 +44,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
-      player.addResource(Resource.PLANTS, 3, {log: true});
+      player.stock.add(Resource.PLANTS, 3, {log: true});
       return undefined;
     };
 

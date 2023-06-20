@@ -44,7 +44,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
       'Spend 1 energy to add 1 data to this card.',
       'Spend energy',
       () => {
-        player.deductResource(Resource.ENERGY, 1);
+        player.stock.deduct(Resource.ENERGY, 1);
         player.addResourceTo(this, {qty: 1, log: true});
         return undefined;
       });
@@ -53,7 +53,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
       'Remove all data from this card to gain 3M€ per data removed.',
       'Spend data',
       () => {
-        player.addResource(Resource.MEGACREDITS, 3 * this.resourceCount, {log: true});
+        player.stock.add(Resource.MEGACREDITS, 3 * this.resourceCount, {log: true});
         this.resourceCount = 0; // Should this use addResourceTo?
         return undefined;
       });

@@ -49,7 +49,7 @@ export class Shara extends CeoCard {
         (tag) => {
           // const value = data[tag] - player.game.generation;
           const value = data[tag];
-          player.addResource(Resource.MEGACREDITS, value, {log: true});
+          player.stock.add(Resource.MEGACREDITS, value, {log: true});
         },
       ),
     );

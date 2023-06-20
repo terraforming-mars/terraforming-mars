@@ -36,7 +36,7 @@ export class Greta extends CeoCard {
     const game = player.game;
     if (this.opgActionIsActive === true && this.effectTriggerCount < 10) {
       if (player === cardOwner && game.phase === Phase.ACTION) {
-        player.addResource(Resource.MEGACREDITS, 4, {log: true});
+        player.stock.add(Resource.MEGACREDITS, 4, {log: true});
         this.effectTriggerCount++;
       }
     }

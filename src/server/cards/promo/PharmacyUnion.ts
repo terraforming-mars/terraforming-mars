@@ -89,7 +89,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 this.isDisabled = true;
                 player.increaseTerraformRating(3);
-                player.deductResource(Resource.MEGACREDITS, megaCreditsLost);
+                player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
                 game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                 return undefined;
               }),

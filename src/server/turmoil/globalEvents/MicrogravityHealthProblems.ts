@@ -28,7 +28,7 @@ export class MicrogravityHealthProblems extends GlobalEvent implements IGlobalEv
       game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
       });
-      player.deductResource(Resource.MEGACREDITS, 3 * Math.max(0, Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+      player.stock.deduct(Resource.MEGACREDITS, 3 * Math.max(0, Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }
 }

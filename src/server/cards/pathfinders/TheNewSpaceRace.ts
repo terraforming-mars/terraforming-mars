@@ -25,7 +25,7 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
   }
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    player.addResource(Resource.MEGACREDITS, 12);
+    player.stock.add(Resource.MEGACREDITS, 12);
     game.overrideFirstPlayer(player);
     Turmoil.ifTurmoil((player.game), (turmoil) => {
       turmoil.chooseRulingParty(player);

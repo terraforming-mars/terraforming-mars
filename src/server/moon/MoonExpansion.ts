@@ -227,7 +227,7 @@ export class MoonExpansion {
   private static activateLunaFirst(sourcePlayer: IPlayer | undefined, game: IGame, count: number) {
     const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
     if (lunaFirstPlayer !== undefined) {
-      lunaFirstPlayer.addResource(Resource.MEGACREDITS, count, {log: true});
+      lunaFirstPlayer.stock.add(Resource.MEGACREDITS, count, {log: true});
       if (lunaFirstPlayer.id === sourcePlayer?.id) {
         lunaFirstPlayer.production.add(Resource.MEGACREDITS, count, {log: true});
       }

@@ -38,7 +38,7 @@ export class InterplanetaryCinematics extends Card implements ICorporationCard {
   }
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.isCorporation(this.name) && card.type === CardType.EVENT) {
-      player.addResource(Resource.MEGACREDITS, 2, {log: true, from: this});
+      player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: this});
     }
   }
 }

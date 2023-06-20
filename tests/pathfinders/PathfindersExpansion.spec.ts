@@ -110,7 +110,7 @@ describe('PathfindersExpansion', function() {
     turmoil.delegateReserve.clear();
     PathfindersExpansion.grant('delegate', player1, Tag.EARTH);
     runAllActions(game);
-    cast(player1.getWaitingFor(), undefined)
+    cast(player1.getWaitingFor(), undefined);
   });
 
   // TODO(kberg): not all rewards are tested.

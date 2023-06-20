@@ -37,7 +37,7 @@ describe('Hygiea', () => {
     runAllActions(game);
 
     const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
-    cast(player2.getWaitingFor(), undefined)
+    cast(player2.getWaitingFor(), undefined);
 
     selectPlayer.cb(player2);
     runAllActions(game);

@@ -62,7 +62,7 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
     }
     const adjacentSpaces = MoonExpansion.moonData(cardOwner.game).moon.getAdjacentSpaces(space);
     const filtered = adjacentSpaces.filter((space) => MoonExpansion.spaceHasType(space, TileType.MOON_HABITAT));
-    cardOwner.addResource(Resource.MEGACREDITS, filtered.length * 2, {log: true});
+    cardOwner.stock.add(Resource.MEGACREDITS, filtered.length * 2, {log: true});
   }
 
   public override getVictoryPoints(player: IPlayer) {

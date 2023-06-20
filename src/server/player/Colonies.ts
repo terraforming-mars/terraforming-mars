@@ -164,7 +164,7 @@ export class TradeWithEnergy implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.deductResource(Resource.ENERGY, this.tradeCost);
+    this.player.stock.deduct(Resource.ENERGY, this.tradeCost);
     this.player.game.log('${0} spent ${1} energy to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
   }

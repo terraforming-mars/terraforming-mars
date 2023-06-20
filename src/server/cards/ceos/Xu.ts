@@ -33,11 +33,11 @@ export class Xu extends CeoCard {
     const counts = players.map((p) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw'));
 
     const total = sum(counts);
-    player.addResource(Resource.MEGACREDITS, total * 2, {log: true});
+    player.stock.add(Resource.MEGACREDITS, total * 2, {log: true});
 
     const maxPlayerVenusTagCount = Math.max(...counts);
     if (maxPlayerVenusTagCount === player.tags.count(Tag.VENUS)) {
-      player.addResource(Resource.MEGACREDITS, 8, {log: true});
+      player.stock.add(Resource.MEGACREDITS, 8, {log: true});
     }
 
     return undefined;

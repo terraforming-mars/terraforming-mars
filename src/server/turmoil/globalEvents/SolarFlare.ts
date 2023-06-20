@@ -28,7 +28,7 @@ export class SolarFlare extends GlobalEvent implements IGlobalEvent {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const amount = Math.min(5, player.tags.count(Tag.SPACE, 'raw')) - turmoil.getPlayerInfluence(player);
       if (amount > 0) {
-        player.deductResource(Resource.MEGACREDITS, amount * 3, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, amount * 3, {log: true, from: this.name});
       }
     });
   }

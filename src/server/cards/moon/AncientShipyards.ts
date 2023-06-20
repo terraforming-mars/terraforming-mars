@@ -41,10 +41,10 @@ export class AncientShipyards extends Card {
     const game = player.game;
     for (const p of game.getPlayers()) {
       if (p === player) continue;
-      p.stealResource(Resource.MEGACREDITS, 2, player);
+      p.stock.steal(Resource.MEGACREDITS, 2, player);
     }
     if (game.isSoloMode()) {
-      player.addResource(Resource.MEGACREDITS, 2);
+      player.stock.add(Resource.MEGACREDITS, 2);
     }
     player.addResourceTo(this, 1);
     return undefined;

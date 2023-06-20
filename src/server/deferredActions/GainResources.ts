@@ -24,7 +24,7 @@ export class GainResources extends DeferredAction {
     if (this.options.count === 0) {
       return undefined;
     }
-    this.player.addResource(this.resource, this.options.count ?? 1, {log: this.options.log});
+    this.player.stock.add(this.resource, this.options.count ?? 1, {log: this.options.log});
     this.options.cb?.();
     return undefined;
   }

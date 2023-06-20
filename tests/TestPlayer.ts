@@ -1,7 +1,6 @@
 import {Player} from '../src/server/Player';
 import {PlayerInput} from '../src/server/PlayerInput';
 import {Color} from '../src/common/Color';
-import {Units} from '../src/common/Units';
 import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
@@ -61,26 +60,6 @@ export class TestPlayer extends Player {
   }
 
   public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
-
-  public purse(): Units {
-    return Units.of({
-      megacredits: this.megaCredits,
-      steel: this.steel,
-      titanium: this.titanium,
-      plants: this.plants,
-      energy: this.energy,
-      heat: this.heat,
-    });
-  }
-
-  public setResourcesForTest(units: Units) {
-    this.megaCredits = units.megacredits;
-    this.steel = units.steel;
-    this.titanium = units.titanium;
-    this.plants = units.plants;
-    this.energy = units.energy;
-    this.heat = units.heat;
-  }
 
   public override runInput(input: InputResponse, pi: PlayerInput): void {
     super.runInput(input, pi);

@@ -27,7 +27,7 @@ class ScientistsBonus01 implements Bonus {
 
   grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -43,7 +43,7 @@ class ScientistsBonus02 implements Bonus {
 
   grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }

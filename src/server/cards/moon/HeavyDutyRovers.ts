@@ -43,7 +43,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
         return firstRoad !== undefined;
       });
       const count = minesNextToRoads.length;
-      player.addResource(Resource.MEGACREDITS, count * 4, {log: true});
+      player.stock.add(Resource.MEGACREDITS, count * 4, {log: true});
     });
     return undefined;
   }

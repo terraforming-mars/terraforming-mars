@@ -29,7 +29,7 @@ export class TiredEarth extends GlobalEvent implements IGlobalEvent {
       const tags = player.tags.count(Tag.EARTH, 'raw');
       const rawTotal = Math.min(tags, 5) - turmoil.getPlayerInfluence(player);
       const total = Math.max(rawTotal, 0);
-      player.deductResource(Resource.PLANTS, total, {log: true, from: this.name});
+      player.stock.deduct(Resource.PLANTS, total, {log: true, from: this.name});
     });
   }
 }

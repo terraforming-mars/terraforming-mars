@@ -14,7 +14,7 @@ describe('Riots', function() {
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
     addCity(player);
-    player.addResource(Resource.MEGACREDITS, 10);
+    player.stock.add(Resource.MEGACREDITS, 10);
     card.resolve(game, turmoil);
     expect(player.megaCredits).to.eq(6);
   });

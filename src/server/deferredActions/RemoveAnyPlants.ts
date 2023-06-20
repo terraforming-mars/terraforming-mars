@@ -46,7 +46,7 @@ export class RemoveAnyPlants extends DeferredAction {
           .getMessage();
 
       return new SelectOption(message, 'Remove plants', () => {
-        candidate.deductResource(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
+        candidate.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
         return undefined;
       });
     });

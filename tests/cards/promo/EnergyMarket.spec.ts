@@ -17,19 +17,19 @@ describe('EnergyMarket', function() {
   });
 
   it('Can not act', function() {
-    player.addResource(Resource.MEGACREDITS, 1);
+    player.stock.add(Resource.MEGACREDITS, 1);
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Can act when sufficient MC resources available', function() {
-    player.addResource(Resource.MEGACREDITS, 2);
+    player.stock.add(Resource.MEGACREDITS, 2);
     expect(card.canAct(player)).is.true;
   });
 
   it('Can act when sufficient MC (using heat) resources available', function() {
     player.canUseHeatAsMegaCredits = true;
-    player.addResource(Resource.MEGACREDITS, 1);
-    player.addResource(Resource.HEAT, 3);
+    player.stock.add(Resource.MEGACREDITS, 1);
+    player.stock.add(Resource.HEAT, 3);
     expect(card.canAct(player)).is.true;
   });
 
@@ -39,7 +39,7 @@ describe('EnergyMarket', function() {
   });
 
   it('Should act and provide options when enough MC resources and energy production available', function() {
-    player.addResource(Resource.MEGACREDITS, 2);
+    player.stock.add(Resource.MEGACREDITS, 2);
     player.production.add(Resource.ENERGY, 1);
     expect(card.canAct(player)).is.true;
 
@@ -47,7 +47,7 @@ describe('EnergyMarket', function() {
   });
 
   it('Should act when sufficient MC resources available', function() {
-    player.addResource(Resource.MEGACREDITS, 8);
+    player.stock.add(Resource.MEGACREDITS, 8);
     const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.max).eq(4);
     const next = selectAmount.cb(3);

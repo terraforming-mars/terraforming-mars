@@ -29,7 +29,7 @@ export class Apollo extends CeoCard {
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const moonSpacesCount = MoonExpansion.spaces(player.game, undefined, {surfaceOnly: true}).length;
-    player.addResource(Resource.MEGACREDITS, moonSpacesCount * 3, {log: true});
+    player.stock.add(Resource.MEGACREDITS, moonSpacesCount * 3, {log: true});
     return undefined;
   }
 }

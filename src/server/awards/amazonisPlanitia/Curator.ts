@@ -4,7 +4,7 @@ import {IAward} from '../IAward';
 
 export class Curator implements IAward {
   public readonly name = 'Curator';
-  public readonly description = 'Have the most tags of any one type';
+  public readonly description = 'Have the most tags of any one type in play';
 
   public getScore(player: IPlayer): number {
     let max = 0;

@@ -6,7 +6,7 @@ export class Ecologist extends BaseMilestone {
   constructor() {
     super(
       'Ecologist',
-      'Have 4 bio tags (plant, microbe and animal tags count as bio tags)',
+      'Have 4 bio tags in play (plant, microbe and animal tags count as bio tags)',
       4);
   }
   public getScore(player: IPlayer): number {

@@ -4,7 +4,7 @@ import {BaseMilestone} from '../IMilestone'; export class Spacefarer extends Bas
   constructor() {
     super(
       'Spacefarer',
-      'Have 6 space tags',
+      'Have 6 space tags in play',
       6);
   }
 

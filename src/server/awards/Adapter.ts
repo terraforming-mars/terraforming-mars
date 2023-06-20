@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 
 export class Adapter implements IAward {
   public readonly name = 'Adapter';
-  public readonly description = 'Play the most cards with requirements';
+  public readonly description = 'Have the most cards with requirements in play';
 
   public getScore(player: IPlayer): number {
     const validCards = player.playedCards.filter((card) => {

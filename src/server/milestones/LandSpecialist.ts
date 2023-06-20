@@ -7,7 +7,7 @@ export class LandSpecialist extends BaseMilestone {
   constructor() {
     super(
       'Land Specialist',
-      'Have 3 special (normally, brown) tiles',
+      'Own 3 special (normally, brown) tiles',
       3);
   }
   public getScore(player: IPlayer): number {

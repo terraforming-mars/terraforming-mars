@@ -6,7 +6,7 @@ export class Martian extends BaseMilestone {
   constructor() {
     super(
       'Martian',
-      'Have 4 Mars tags',
+      'Have 4 Mars tags in play',
       4);
   }
   public getScore(player: IPlayer): number {

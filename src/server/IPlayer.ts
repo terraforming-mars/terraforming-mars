@@ -137,7 +137,7 @@ export interface IPlayer {
   totalDelegatesPlaced: number;
 
   tearDown(): void;
-  tableau: Array<ICorporationCard | IProjectCard>;
+  gettableau: Array<ICorporationCard | IProjectCard>;
 
   isCorporation(corporationName: CardName): boolean;
   getCorporation(corporationName: CardName): ICorporationCard | undefined;
@@ -202,17 +202,21 @@ export interface IPlayer {
   worldGovernmentTerraforming(): void;
   dealForDraft(quantity: number, cards: Array<IProjectCard>): void;
   askPlayerToDraft(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void;
-  spendableMegacredits(): number;
   runResearchPhase(draftVariant: boolean): void;
   getCardCost(card: IProjectCard): number;
-  payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void): void;
-  checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
+
+  spendableMegacredits(): number;
   getSpendableMicrobes(): number;
   getSpendableFloaters(): number;
   getSpendableScienceResources(): number;
   getSpendableSeedResources(): number;
   getSpendableData(): number;
+  payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void): void;
+  checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;
+  availableHeat(): number;
+  spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
+
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): undefined;
   onCardPlayed(card: IProjectCard): void;
   playAdditionalCorporationCard(corporationCard: ICorporationCard): void;
@@ -220,8 +224,7 @@ export interface IPlayer {
   drawCard(count?: number, options?: DrawCards.DrawOptions): undefined;
   drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard>;
   discardPlayedCard(card: IProjectCard): void;
-  availableHeat(): number;
-  spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
+
   pass(): void;
   takeActionForFinalGreenery(): void;
   getPlayableCards(): Array<PlayableCard>;

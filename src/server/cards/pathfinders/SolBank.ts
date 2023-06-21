@@ -27,5 +27,5 @@ export class SolBank extends Card implements ICorporationCard {
     });
   }
 
-  // Behavior is in Player.
+  // Behavior is in Player and Pathfinders.addToSolBank.
 }

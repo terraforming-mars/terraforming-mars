@@ -920,9 +920,13 @@ export class Player implements IPlayer {
   }
 
   public pay(payment: Payment) {
-    this.stock.deduct(Resource.STEEL, payment.steel);
-    this.stock.deduct(Resource.TITANIUM, payment.titanium);
-    this.stock.deduct(Resource.MEGACREDITS, payment.megaCredits);
+    const standardUnits = Units.of({
+      megacredits: payment.megaCredits,
+      steel: payment.steel,
+      titanium: payment.titanium,
+    });
+
+    this.stock.deductUnits(standardUnits);
 
     if (payment.heat > 0) {
       this.defer(this.spendHeat(payment.heat));
@@ -958,10 +962,7 @@ export class Player implements IPlayer {
     }
 
     if (payment.megaCredits > 0 || payment.steel > 0 || payment. titanium > 0) {
-      const solBank = this.getCorporation(CardName.SOLBANK);
-      if (solBank !== undefined) {
-        this.addResourceTo(solBank, {qty: 1, log: true});
-      }
+      PathfindersExpansion.addToSolBank(this);
     }
   }
 
@@ -1390,11 +1391,11 @@ export class Player implements IPlayer {
    * worth 2M€, this will return 7.
    *
    * @param {Payment} payment the resources being paid.
-   * @param {Payment.Options} options any configuration defining the accepted forma of payment.
+   * @param {Payment.Options} options any configuration defining the accepted form of payment.
    * @return {number} a number representing the value of payment in M€.
    */
   public payingAmount(payment: Payment, options?: Partial<Payment.Options>): number {
-    const multiplier: {[key in PaymentKey]: number} = {
+    const multiplier: Record<PaymentKey, number> = {
       megaCredits: 1,
       steel: this.getSteelValue(),
       titanium: this.getTitaniumValue(),

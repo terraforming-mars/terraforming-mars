@@ -8,6 +8,7 @@ import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 import {CardRenderer} from '../../cards/render/CardRenderer';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.megacredits(-10).nbsp.data({amount: 2}).asterix().nbsp;
@@ -27,7 +28,11 @@ export class CommunicationBoom extends GlobalEvent implements IGlobalEvent {
 
   public resolve(game: IGame, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.deduct(Resource.MEGACREDITS, 10, {log: true, from: this.name});
+      const deducted = Math.min(10, player.megaCredits);
+      if (deducted > 0) {
+        player.stock.deduct(Resource.MEGACREDITS, 10, {log: true, from: this.name});
+        PathfindersExpansion.addToSolBank(player);
+      }
       player.getResourceCards(CardResource.DATA).forEach((card) => {
         player.addResourceTo(card, {qty: 2, log: true});
       });

@@ -7,6 +7,7 @@ import {Resource} from '../../../common/Resource';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
 import {newMessage} from '../../logs/MessageBuilder';
+import {PathfindersExpansion} from '../../../server/pathfinders/PathfindersExpansion';
 
 export interface Terms {
   from: number,
@@ -96,6 +97,7 @@ export abstract class MarketCard extends Card implements IActionCard {
         const cashEarned = unitsSold * terms.to;
         player.stock.add(Resource.MEGACREDITS, cashEarned);
         player.stock.deduct(this.tradeResource, unitsSold);
+        PathfindersExpansion.addToSolBank(player);
 
         player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));
         return undefined;

@@ -5,6 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Tag} from '../../../common/cards/Tag';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -63,6 +64,7 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     const visited = player.game.gagarinBase;
     const availableSpaces = board.spaces
       .filter((space) => space.spaceType !== SpaceType.COLONY)
+      .filter((space) => !space.bonus.includes(SpaceBonus.RESTRICTED))
       .filter((space) => space.tile === undefined)
       .filter((space) => !visited.includes(space.id));
 

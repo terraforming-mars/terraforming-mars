@@ -7,6 +7,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {ISpace} from '../../../src/server/boards/ISpace';
 import {TileType} from '../../../src/common/TileType';
+import {AmazonisBoard} from '../../../src/server/boards/AmazonisBoard';
+import {UnseededRandom} from '../../../src/server/Random';
 
 describe('GagarinMobileBase', () => {
   let game: Game;
@@ -46,6 +48,20 @@ describe('GagarinMobileBase', () => {
     const selectSpace2 = cast(card.action(player), SelectSpace);
     expect(selectSpace2.availableSpaces.map((s) => s.id)).to.have.members(['06', '12']);
     expect(game.gagarinBase).deep.eq(['07', '13']);
+  });
+
+  it('action - cannot select restricted space', () => {
+    // Restricted space is 33.
+    game.gagarinBase = ['32', '24', '23', '31', '40', '41'];
+    const selectSpace = cast(card.action(player), SelectSpace);
+
+    expect(selectSpace.availableSpaces.map((s) => s.id)).to.have.members(['33']);
+
+    game.board = AmazonisBoard.newInstance(game.gameOptions, UnseededRandom.INSTANCE);
+
+    const selectSpace2 = cast(card.action(player), SelectSpace);
+    expect(selectSpace2.availableSpaces.map((s) => s.id)).to.have.members(
+      ['15', '16', '22', '17', '25', '34', '42', '49', '48', '47', '39', '30']);
   });
 
   it('action - blocked in', () => {

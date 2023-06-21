@@ -17,10 +17,11 @@ export type DatabaseTestDescriptor = {
   name: string,
   constructor: () => ITestDatabase,
   stats: any,
-  omit?: {
-    purgeUnfinishedGames?: boolean,
-    markFinished?: boolean,
-  },
+  omit?: Partial<{
+    purgeUnfinishedGames: boolean,
+    markFinished: boolean,
+    moreCleaning: boolean,
+  }>,
   otherTests?: (dbFunction: () => ITestDatabase) => void,
 };
 
@@ -46,7 +47,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(allGames).deep.eq(['game-id-1212']);
     });
 
-    it('getGames - removes duplicates', async () => {
+    it('getGameIds - removes duplicates', async () => {
       const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
@@ -56,7 +57,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(allGames).deep.eq(['game-id-1212']);
     });
 
-    it('getGames - includes finished games', async () => {
+    it('getGameIds - includes finished games', async () => {
       const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
@@ -103,49 +104,51 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
         expect(await db.completedTime(game.id)).is.not.undefined;
       });
 
-      it('morecleaning', async () => {
-        async function createGame(id: GameId) {
-          const player = TestPlayer.BLACK.newPlayer();
-          const game = Game.newInstance(id, [player], player);
-          await db.lastSaveGamePromise;
-          await db.saveGame(game);
-          await db.saveGame(game);
-          await db.saveGame(game);
+      if (dtor.omit?.moreCleaning !== true) {
+        it('moreCleaning', async () => {
+          async function createGame(id: GameId) {
+            const player = TestPlayer.BLACK.newPlayer();
+            const game = Game.newInstance(id, [player], player);
+            await db.lastSaveGamePromise;
+            await db.saveGame(game);
+            await db.saveGame(game);
+            await db.saveGame(game);
 
-          expect(await db.status(game.id)).eq('running');
+            expect(await db.status(game.id)).eq('running');
 
-          await db.markFinished(game.id);
+            await db.markFinished(game.id);
 
-          expect(await db.status(game.id)).eq('finished');
-        }
+            expect(await db.status(game.id)).eq('finished');
+          }
 
-        // Create 2 finished games.
-        await createGame('game1-id');
-        await createGame('game2-id');
+          // Create 2 finished games.
+          await createGame('game1-id');
+          await createGame('game2-id');
 
-        expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
-        expect(await db.completedTime('game1-id')).is.not.undefined;
+          expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
+          expect(await db.completedTime('game1-id')).is.not.undefined;
 
-        expect(await db.getSaveIds('game2-id')).has.members([0, 1, 2, 3]);
-        expect(await db.completedTime('game2-id')).is.not.undefined;
+          expect(await db.getSaveIds('game2-id')).has.members([0, 1, 2, 3]);
+          expect(await db.completedTime('game2-id')).is.not.undefined;
 
-        await db.compressCompletedGames('2');
+          await db.compressCompletedGames('2');
 
-        expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
-        expect(await db.completedTime('game1-id')).is.not.undefined;
+          expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
+          expect(await db.completedTime('game1-id')).is.not.undefined;
 
-        expect(await db.getSaveIds('game2-id')).has.members([0, 1, 2, 3]);
-        expect(await db.completedTime('game2-id')).is.not.undefined;
+          expect(await db.getSaveIds('game2-id')).has.members([0, 1, 2, 3]);
+          expect(await db.completedTime('game2-id')).is.not.undefined;
 
-        await db.setCompletedTime('game2-id', 100);
-        await db.compressCompletedGames('2');
+          await db.setCompletedTime('game2-id', 100);
+          await db.compressCompletedGames('2');
 
-        expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
-        expect(await db.completedTime('game1-id')).is.not.undefined;
+          expect(await db.getSaveIds('game1-id')).has.members([0, 1, 2, 3]);
+          expect(await db.completedTime('game1-id')).is.not.undefined;
 
-        expect(await db.getSaveIds('game2-id')).has.members([0, 3]);
-        expect(await db.completedTime('game2-id')).is.undefined;
-      });
+          expect(await db.getSaveIds('game2-id')).has.members([0, 3]);
+          expect(await db.completedTime('game2-id')).is.undefined;
+        });
+      }
     }
 
     it('gets player count', async () => {

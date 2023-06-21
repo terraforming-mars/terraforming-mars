@@ -1,7 +1,7 @@
 import {describeDatabaseSuite} from './databaseSuite';
 import {IGame} from '../../src/server/IGame';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/server/database/SQLite';
-import {GameId} from '@/common/Types';
+import {GameId} from '../../src/common/Types';
 import {RunResult} from 'sqlite3';
 import {ITestDatabase, Status} from './ITestDatabase';
 

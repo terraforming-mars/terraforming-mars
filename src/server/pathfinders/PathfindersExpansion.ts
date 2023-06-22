@@ -267,4 +267,11 @@ export class PathfindersExpansion {
       .filter((vp) => vp.id === player.id)
       .forEach((vp) => victoryPointsBreakdown.setVictoryPoints('planetary tracks', vp.points, vp.tag));
   }
+
+  public static addToSolBank(player: IPlayer) {
+    const solBank = player.getCorporation(CardName.SOLBANK);
+    if (solBank !== undefined) {
+      player.addResourceTo(solBank, {qty: 1, log: true});
+    }
+  }
 }

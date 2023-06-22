@@ -137,7 +137,7 @@ export interface IPlayer {
   totalDelegatesPlaced: number;
 
   tearDown(): void;
-  gettableau: Array<ICorporationCard | IProjectCard>;
+  tableau: Array<ICorporationCard | IProjectCard>;
 
   isCorporation(corporationName: CardName): boolean;
   getCorporation(corporationName: CardName): ICorporationCard | undefined;

@@ -6,7 +6,7 @@ export class Terran extends BaseMilestone {
   constructor() {
     super(
       'Terran',
-      'Have 6 Earth tags',
+      'Have 6 Earth tags in play',
       6);
   }
 

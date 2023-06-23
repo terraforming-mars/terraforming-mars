@@ -4,7 +4,7 @@ import {IAward} from '../IAward';
 
 export class Engineer implements IAward {
   public readonly name = 'Engineer';
-  public readonly description = 'Play the most cards that directly alter your own production';
+  public readonly description = 'Have the most cards in play that directly alter your own production';
 
   public getScore(player: IPlayer): number {
     const score = player.tableau.filter((card) => {

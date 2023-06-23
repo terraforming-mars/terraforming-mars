@@ -70,7 +70,7 @@ describe('Xu', function() {
   });
 
 
-  it('Takes OPG action, does not have the most venus tags', function() {
+  it('Takes OPG action, does not Have the most Venus tags in play', function() {
     player2.playedCards.push(fakeCard({tags: [Tag.VENUS, Tag.VENUS]}));
 
     expect(player.megaCredits).to.eq(0);

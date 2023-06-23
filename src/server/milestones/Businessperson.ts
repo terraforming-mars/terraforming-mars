@@ -6,7 +6,7 @@ export class Businessperson extends BaseMilestone {
   constructor() {
     super(
       'Businessperson',
-      'Have 6 Earth tags',
+      'Have 6 Earth tags in play',
       6);
   }
   public getScore(player: IPlayer): number {

@@ -5,7 +5,7 @@ export class Legend extends BaseMilestone {
   constructor() {
     super(
       'Legend',
-      'Have played 5 events',
+      'Have 5 cards in your event pile',
       5);
   }
   public getScore(player: IPlayer): number {

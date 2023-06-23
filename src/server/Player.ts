@@ -68,7 +68,7 @@ import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import {sum} from '../common/utils/utils';
+import {inplaceRemove, sum} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
@@ -984,22 +984,15 @@ export class Player implements IPlayer {
 
     // This could probably include 'nothing' but for now this will work.
     if (cardAction !== 'discard') {
-      // Remove card from hand
-      const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
-      const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
-      if (projectCardIndex !== -1) {
-        this.cardsInHand.splice(projectCardIndex, 1);
-      } else if (preludeCardIndex !== -1) {
-        this.preludeCardsInHand.splice(preludeCardIndex, 1);
-      }
+      inplaceRemove(this.cardsInHand, selectedCard);
+      inplaceRemove(this.preludeCardsInHand, selectedCard);
 
       // Remove card from Self Replicating Robots
       const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
       if (card instanceof SelfReplicatingRobots) {
         for (const targetCard of card.targetCards) {
           if (targetCard.card.name === selectedCard.name) {
-            const index = card.targetCards.indexOf(targetCard);
-            card.targetCards.splice(index, 1);
+            inplaceRemove(card.targetCards, targetCard);
           }
         }
       }
@@ -1168,12 +1161,11 @@ export class Player implements IPlayer {
   }
 
   public discardPlayedCard(card: IProjectCard) {
-    const cardIndex = this.playedCards.findIndex((c) => c.name === card.name);
-    if (cardIndex === -1) {
+    const removed = inplaceRemove(this.playedCards, card);
+    if (removed === false) {
       console.error(`Error: card ${card.name} not in ${this.id}'s hand`);
       return;
     }
-    this.playedCards.splice(cardIndex, 1);
     this.game.projectDeck.discard(card);
     card.onDiscard?.(this);
     this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
@@ -1603,7 +1595,7 @@ export class Player implements IPlayer {
 
           corp.initialActionText, () => {
             this.runInitialAction(corp);
-            this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
+            inplaceRemove(this.pendingInitialActions, corp);
             return undefined;
           });
         orOptions.options.push(option);

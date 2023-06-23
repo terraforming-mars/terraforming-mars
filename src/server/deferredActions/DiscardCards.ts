@@ -1,3 +1,4 @@
+import {inplaceRemove} from '../../common/utils/utils';
 import {IPlayer} from '../IPlayer';
 import {SelectCard} from '../inputs/SelectCard';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -23,7 +24,7 @@ export class DiscardCards extends DeferredAction {
       this.player.cardsInHand,
       (cards) => {
         for (const card of cards) {
-          this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
+          inplaceRemove(this.player.cardsInHand, card);
           this.player.game.projectDeck.discard(card);
         }
         return undefined;

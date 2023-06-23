@@ -9,6 +9,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export interface RobotCard {
     card: IProjectCard;
@@ -83,14 +84,11 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
         'Select card to link with Self-Replicating Robots',
         'Link card', selectableCards,
         ([card]) => {
-          const projectCardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
-          player.cardsInHand.splice(projectCardIndex, 1);
-          this.targetCards.push(
-            {
-              card: card,
-              resourceCount: 2,
-            },
-          );
+          inplaceRemove(player.cardsInHand, card);
+          this.targetCards.push({
+            card: card,
+            resourceCount: 2,
+          });
           player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(card).card(this));
           return undefined;
         },

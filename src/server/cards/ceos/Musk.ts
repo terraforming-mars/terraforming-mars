@@ -9,6 +9,7 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {SelectCard} from '../../inputs/SelectCard';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 
 export class Musk extends CeoCard {
@@ -46,7 +47,7 @@ export class Musk extends CeoCard {
       (cards) => {
         player.stock.add(Resource.TITANIUM, cards.length + 6, {log: true});
         for (const card of cards) {
-          player.cardsInHand.splice(player.cardsInHand.indexOf(card), 1);
+          inplaceRemove(player.cardsInHand, card);
           game.projectDeck.discard(card);
         }
         player.game.defer(DrawCards.keepAll(player, cards.length, {tag: Tag.SPACE}));

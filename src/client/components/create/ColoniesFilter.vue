@@ -26,6 +26,7 @@ import Vue from 'vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
 import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
+import {inplaceRemove} from '@/common/utils/utils';
 
 type Data = {
   allColonies: Array<ColonyName>,
@@ -102,25 +103,17 @@ export default Vue.extend({
         }
       }
     },
-    removeFromSelection(colonyName: ColonyName) {
-      const itemIdx = this.selectedColonies.indexOf(colonyName);
-      if (itemIdx !== -1) {
-        this.selectedColonies.splice(itemIdx, 1);
-      }
-    },
     selectNone(group: Group) {
       const items = this.getItemsByGroup(group);
       for (const item of items) {
-        this.removeFromSelection(item);
+        inplaceRemove(this.selectedColonies, item);
       }
     },
     invertSelection(group: Group) {
       const items = this.getItemsByGroup(group);
 
       for (const idx in items) {
-        if (this.selectedColonies.includes(items[idx])) {
-          this.removeFromSelection(items[idx]);
-        } else {
+        if (!inplaceRemove(this.selectedColonies, items[idx])) {
           this.selectedColonies.push(items[idx]);
         }
       }

@@ -5,6 +5,7 @@ import {StandardProjectCard} from '../../StandardProjectCard';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {IProjectCard} from '../../IProjectCard';
 import {multiplier} from '../../Options';
+import {inplaceRemove} from '../../../../common/utils/utils';
 
 export class SellPatentsStandardProject extends StandardProjectCard {
   constructor() {
@@ -38,12 +39,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
       (cards) => {
         player.megaCredits += cards.length;
         cards.forEach((card) => {
-          for (let i = 0; i < player.cardsInHand.length; i++) {
-            if (player.cardsInHand[i].name === card.name) {
-              player.cardsInHand.splice(i, 1);
-              break;
-            }
-          }
+          inplaceRemove(player.cardsInHand, card);
           player.game.projectDeck.discard(card);
         });
         this.projectPlayed(player);

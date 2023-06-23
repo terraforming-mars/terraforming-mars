@@ -8,6 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
 import {DeferredAction, Priority} from '../..//deferredActions/DeferredAction';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class CharityDonation extends Card implements IProjectCard {
   constructor() {
@@ -53,12 +54,9 @@ export class SelectCharityDonationCard extends DeferredAction {
       ([card]) => {
         const game = this.player.game;
 
-        const cardIdx = this.cards.indexOf(card);
-        if (cardIdx > -1) {
-          this.cards.splice(cardIdx, 1);
-        }
-
+        inplaceRemove(this.cards, card);
         this.player.cardsInHand.push(card);
+
         game.log('${0} drew ${1}', (b) => b.player(this.player).card(card));
 
         const nextIndex = (this.playerIdx + 1) % this.players.length;

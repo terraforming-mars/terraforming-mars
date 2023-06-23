@@ -38,6 +38,7 @@ import {CardName} from '@/common/cards/CardName';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {byModule, byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
+import {inplaceRemove} from '@/common/utils/utils';
 
 function preludeCardNames(module: GameModule): Array<CardName> {
   return getCards(byModule(module))
@@ -117,25 +118,17 @@ export default Vue.extend({
         }
       }
     },
-    removeFromSelection(cardName: CardName) {
-      const itemIdx = this.selectedPreludes.indexOf(cardName);
-      if (itemIdx !== -1) {
-        this.selectedPreludes.splice(itemIdx, 1);
-      }
-    },
     selectNone(group: Group) {
       const items = this.getItemsByGroup(group);
       for (const item of items) {
-        this.removeFromSelection(item);
+        inplaceRemove(this.selectedPreludes, item);
       }
     },
     invertSelection(group: Group) {
       const items = this.getItemsByGroup(group);
 
       for (const idx in items) {
-        if (this.selectedPreludes.includes(items[idx])) {
-          this.removeFromSelection(items[idx]);
-        } else {
+        if (!inplaceRemove(this.selectedPreludes, items[idx])) {
           this.selectedPreludes.push(items[idx]);
         }
       }

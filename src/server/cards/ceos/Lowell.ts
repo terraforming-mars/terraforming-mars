@@ -7,6 +7,7 @@ import {ICeoCard} from './ICeoCard';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class Lowell extends CeoCard {
   constructor() {
@@ -57,8 +58,7 @@ export class Lowell extends CeoCard {
       // Discard unchosen CEOs
       ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
       // Remove Lowell from played cards
-      const lowellIndex = player.playedCards.findIndex((c) => c.name === this.name);
-      player.playedCards.splice(lowellIndex, 1);
+      inplaceRemove(player.playedCards, this);
       // Add Lowell to Discard pile
       game.ceoDeck.discard(this);
       // Play the new CEO

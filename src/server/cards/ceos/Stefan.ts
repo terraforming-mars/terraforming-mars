@@ -6,6 +6,7 @@ import {CeoCard} from './CeoCard';
 
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class Stefan extends CeoCard {
   constructor() {
@@ -39,12 +40,7 @@ export class Stefan extends CeoCard {
         player.megaCredits += foundCards.length * 3;
 
         foundCards.forEach((card) => {
-          for (let i = 0; i < player.cardsInHand.length; i++) {
-            if (player.cardsInHand[i].name === card.name) {
-              player.cardsInHand.splice(i, 1);
-              break;
-            }
-          }
+          inplaceRemove(player.cardsInHand, card);
           player.game.projectDeck.discard(card);
         });
 

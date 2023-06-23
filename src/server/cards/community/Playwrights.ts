@@ -13,6 +13,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all} from '../Options';
 import {SpecialDesignProxy} from './SpecialDesignProxy';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class Playwrights extends Card implements ICorporationCard {
   constructor() {
@@ -62,10 +63,7 @@ export class Playwrights extends Card implements ICorporationCard {
         const selectedCard: IProjectCard = card;
 
         players.forEach((p) => {
-          const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
-          if (cardIndex !== -1) {
-            p.playedCards.splice(cardIndex, 1);
-          }
+          inplaceRemove(p.playedCards, selectedCard);
         });
 
         const cost = player.getCardCost(selectedCard);

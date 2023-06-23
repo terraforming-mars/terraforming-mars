@@ -6,6 +6,7 @@ import {TURMOIL_CARD_MANIFEST} from '../turmoil/TurmoilCardManifest';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {CardManifest} from '../ModuleManifest';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class PoliticalUprising extends PreludeCard implements IProjectCard {
   constructor() {
@@ -46,8 +47,7 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     if (drawnCard === undefined) {
       player.game.log('${0} played ${1} to find a Turmoil card but none were in the draw deck.', (b) => b.player(player).card(this));
     } else {
-      const cardIndex = player.game.projectDeck.drawPile.findIndex((c) => c.name === drawnCard.name);
-      player.game.projectDeck.drawPile.splice(cardIndex, 1);
+      inplaceRemove(player.game.projectDeck.drawPile, drawnCard);
 
       player.cardsInHand.push(drawnCard);
       player.game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));

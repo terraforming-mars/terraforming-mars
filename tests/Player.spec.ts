@@ -478,6 +478,7 @@ describe('Player', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(15);
+    expect(player.preludeCardsInHand).deep.eq([alliedBanks]);
   });
 });
 

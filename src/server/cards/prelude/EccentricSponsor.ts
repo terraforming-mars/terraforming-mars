@@ -4,6 +4,7 @@ import {PreludeCard} from './PreludeCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
 export class EccentricSponsor extends PreludeCard {
   constructor() {
@@ -18,6 +19,10 @@ export class EccentricSponsor extends PreludeCard {
       },
     });
   }
+
+  // TODO(kberg): Make it possible to identify that the prelude will fizzle during canPlay, which
+  // will present a warning to the player.
+
   public override getCardDiscount(player: IPlayer) {
     if (player.lastCardPlayed === this.name) {
       return 25;
@@ -26,7 +31,13 @@ export class EccentricSponsor extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new PlayProjectCard(player));
+    player.game.defer(new PlayProjectCard(player, (card) => {
+      if (card === undefined) {
+        PreludesExpansion.fizzle(player, this);
+        // If this card fizzles, don't apply the discount to the next card.
+        player.lastCardPlayed = undefined;
+      }
+    }));
     return undefined;
   }
 }

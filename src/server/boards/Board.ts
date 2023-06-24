@@ -17,7 +17,7 @@ import {PlacementType} from './PlacementType';
 export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
-  private map: Map<string, ISpace> = new Map();
+  private map: Map<SpaceId, ISpace> = new Map();
 
   // stores adjacent spaces in clockwise order starting from the top left
   private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<ISpace>>();

@@ -72,8 +72,8 @@ describe('Capital', () => {
 
     // cover main functions
     expect(Board.isCitySpace(space)).is.true;
-    expect(game.board.getCitiesOnMarsCount()).to.eq(1);
-    expect(game.board.getCitiesCount()).to.eq(1);
+    expect(game.board.getCitiesOnMars()).has.length(1);
+    expect(game.board.getCities()).has.length(1);
 
     // check VP
     const greenerySpace = game.board.getAdjacentSpaces(space).find((space) => space.spaceType === SpaceType.LAND);

@@ -7,7 +7,7 @@ import {Options} from './CardRequirement';
 
 export class TemperatureRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.TEMPERATURE;
-  protected readonly parameter = GlobalParameter.OCEANS;
+  protected readonly parameter = GlobalParameter.TEMPERATURE;
   protected override readonly scale = 2;
 
   constructor(amount: number, options?: Options) {

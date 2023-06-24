@@ -7,8 +7,9 @@ import {IPlayer} from '../IPlayer';
 import {Random} from '../Random';
 import {GameOptions} from '../GameOptions';
 import {SpaceId} from '../../common/Types';
+import {MarsBoard} from './MarsBoard';
 
-export class ElysiumBoard extends Board {
+export class ElysiumBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 

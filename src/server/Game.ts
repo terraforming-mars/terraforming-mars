@@ -40,7 +40,6 @@ import {GainResources} from './deferredActions/GainResources';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceName} from './SpaceName';
-import {SpaceType} from '../common/boards/SpaceType';
 import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
@@ -70,6 +69,7 @@ import {Logger} from './logs/Logger';
 import {addDays, dayStringToDays} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
 import {IGame, Score} from './IGame';
+import {MarsBoard} from './boards/MarsBoard';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -95,7 +95,7 @@ export class Game implements IGame, Logger {
   public preludeDeck: PreludeDeck;
   public ceoDeck: CeoDeck;
   public corporationDeck: CorporationDeck;
-  public board: Board;
+  public board: MarsBoard;
 
   // Global parameters
   private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -151,7 +151,7 @@ export class Game implements IGame, Logger {
     activePlayer: PlayerId,
     gameOptions: GameOptions,
     rng: SeededRandom,
-    board: Board,
+    board: MarsBoard,
     projectDeck: ProjectDeck,
     corporationDeck: CorporationDeck,
     preludeDeck: PreludeDeck,
@@ -1151,33 +1151,6 @@ export class Game implements IGame, Logger {
       passedPlayersColors.push(this.getPlayerById(player).color);
     });
     return passedPlayersColors;
-  }
-
-  public getCitiesOffMarsCount(player?: IPlayer): number {
-    return this.getCitiesCount(player, (space) => space.spaceType === SpaceType.COLONY);
-  }
-
-  public getCitiesOnMarsCount(player?: IPlayer): number {
-    return this.getCitiesCount(player, (space) => space.spaceType !== SpaceType.COLONY);
-  }
-
-  public getCitiesCount(player?: IPlayer, filter?: (space: ISpace) => boolean): number {
-    let cities = this.board.spaces.filter(Board.isCitySpace);
-    if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
-    if (filter) cities = cities.filter(filter);
-    return cities.length;
-  }
-
-  public getGreeneriesCount(player?: IPlayer): number {
-    let greeneries = this.board.spaces.filter((space) => Board.isGreenerySpace(space));
-    if (player !== undefined) greeneries = greeneries.filter(Board.ownedBy(player));
-    return greeneries.length;
-  }
-
-  public getSpaceCount(tileType: TileType, player: IPlayer): number {
-    return this.board.spaces.filter(Board.ownedBy(player))
-      .filter((space) => space.tile?.tileType === tileType)
-      .length;
   }
 
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing

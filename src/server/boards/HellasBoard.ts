@@ -9,8 +9,9 @@ import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {GameOptions} from '../GameOptions';
+import {MarsBoard} from './MarsBoard';
 
-export class HellasBoard extends Board {
+export class HellasBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): HellasBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 

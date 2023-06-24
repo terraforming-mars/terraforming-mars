@@ -45,14 +45,14 @@ export class Counter {
       const p = (countable.all === false) ? player : undefined;
       switch (countable.cities.where) {
       case 'offmars':
-        sum = game.getCitiesOffMarsCount(p);
+        sum = game.board.getCitiesOffMarsCount(p);
         break;
       case 'onmars':
-        sum += game.getCitiesOnMarsCount(p);
+        sum += game.board.getCitiesOnMarsCount(p);
         break;
       case 'everywhere':
       default:
-        sum += game.getCitiesCount(p);
+        sum += game.board.getCitiesCount(p);
       }
     }
 
@@ -62,7 +62,7 @@ export class Counter {
 
     if (countable.greeneries !== undefined) {
       const p = (countable.all === false) ? player : undefined;
-      sum += game.getGreeneriesCount(p);
+      sum += game.board.getGreeneriesCount(p);
     }
     if (countable.tag !== undefined) {
       const tag = countable.tag;

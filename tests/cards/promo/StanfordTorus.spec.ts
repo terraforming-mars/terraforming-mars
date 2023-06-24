@@ -14,7 +14,7 @@ describe('StanfordTorus', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.game.getCitiesCount()).to.eq(1);
+    expect(player.game.board.getCitiesCount()).to.eq(1);
   });
 
   it('Should give victory points', function() {

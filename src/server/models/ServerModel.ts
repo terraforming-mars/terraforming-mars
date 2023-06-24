@@ -412,7 +412,7 @@ export class Server {
       cardCost: player.cardCost,
       cardDiscount: player.colonies.cardDiscount,
       cardsInHandNbr: player.cardsInHand.length,
-      citiesCount: player.game.getCitiesCount(player),
+      citiesCount: player.game.board.getCitiesCount(player),
       coloniesCount: player.getColoniesCount(),
       color: player.color,
       energy: player.energy,

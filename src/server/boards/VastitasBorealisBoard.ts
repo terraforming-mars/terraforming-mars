@@ -10,8 +10,9 @@ import {GameOptions} from '../GameOptions';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
 import {SpaceId} from '../../common/Types';
+import {MarsBoard} from './MarsBoard';
 
-export class VastitasBorealisBoard extends Board {
+export class VastitasBorealisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 

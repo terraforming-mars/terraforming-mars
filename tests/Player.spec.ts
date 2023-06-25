@@ -274,7 +274,7 @@ describe('Player', function() {
   });
   it('pulls self replicating robots target cards', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    expect(player.getSelfReplicatingRobotsTargetCards().length).eq(0);
+    expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
     const srr = new SelfReplicatingRobots();
     player.playedCards.push(srr);
     srr.targetCards.push({card: new LunarBeam(), resourceCount: 0});
@@ -291,19 +291,19 @@ describe('Player', function() {
 
     const card = new Pets();
     expect(card.resourceCount).eq(0);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.addResourceTo(card);
     expect(card.resourceCount).eq(1);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.addResourceTo(card, 1);
     expect(card.resourceCount).eq(2);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.addResourceTo(card, 3);
     expect(card.resourceCount).eq(5);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.addResourceTo(card, {qty: 3, log: true});
     expect(log.length).eq(1);
@@ -335,7 +335,7 @@ describe('Player', function() {
 
     const card = new Pets();
     expect(card.resourceCount).eq(0);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     log.length = 0;
     card.resourceCount = 6;

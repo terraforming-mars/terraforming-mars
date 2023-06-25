@@ -45,24 +45,24 @@ export class Counter {
       const p = (countable.all === false) ? player : undefined;
       switch (countable.cities.where) {
       case 'offmars':
-        sum = game.getCitiesOffMarsCount(p);
+        sum = game.board.getCitiesOffMars(p).length;
         break;
       case 'onmars':
-        sum += game.getCitiesOnMarsCount(p);
+        sum += game.board.getCitiesOnMars(p).length;
         break;
       case 'everywhere':
       default:
-        sum += game.getCitiesCount(p);
+        sum += game.board.getCities(p).length;
       }
     }
 
     if (countable.oceans !== undefined) {
-      sum += game.board.getOceanCount({wetlands: true});
+      sum += game.board.getOceanSpaces({wetlands: true}).length;
     }
 
     if (countable.greeneries !== undefined) {
       const p = (countable.all === false) ? player : undefined;
-      sum += game.getGreeneriesCount(p);
+      sum += game.board.getGreeneries(p).length;
     }
     if (countable.tag !== undefined) {
       const tag = countable.tag;

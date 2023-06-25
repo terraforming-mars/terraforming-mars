@@ -32,7 +32,7 @@ describe('IndustrialCenter', function() {
 
   it('Should play', function() {
     addCity(player);
-    expect(game.getCitiesOnMarsCount()).to.eq(1);
+    expect(game.board.getCitiesOnMars()).has.length(1);
 
     const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];

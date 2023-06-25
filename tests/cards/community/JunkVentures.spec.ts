@@ -22,7 +22,7 @@ describe('JunkVentures', function() {
   });
 
   it('Cannot act', function() {
-    expect(game.projectDeck.discardPile.length).eq(0);
+    expect(game.projectDeck.discardPile).is.empty;
     expect(card.canAct(player)).is.false;
 
     game.projectDeck.discard(game.projectDeck.draw(game));

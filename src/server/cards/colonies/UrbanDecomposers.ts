@@ -37,6 +37,6 @@ export class UrbanDecomposers extends Card implements IProjectCard {
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
     });
-    return coloniesCount > 0 && player.game.getCitiesCount(player) > 0;
+    return coloniesCount > 0 && player.game.board.getCities(player).length > 0;
   }
 }

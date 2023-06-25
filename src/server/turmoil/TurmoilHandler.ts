@@ -230,7 +230,7 @@ export class TurmoilHandler {
     }
 
     if (tr.oceans !== undefined) {
-      const availableSteps = constants.MAX_OCEAN_TILES - player.game.board.getOceanCount();
+      const availableSteps = constants.MAX_OCEAN_TILES - player.game.board.getOceanSpaces().length;
       const steps = Math.min(availableSteps, tr.oceans);
       total = total + steps;
     }

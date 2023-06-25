@@ -17,6 +17,6 @@ export class OceanRequirement extends GlobalParameterRequirement {
   }
 
   public getGlobalValue(player: IPlayer) {
-    return player.game.board.getOceanCount({upgradedOceans: true, wetlands: true});
+    return player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
   }
 }

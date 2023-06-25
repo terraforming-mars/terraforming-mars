@@ -8,7 +8,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Phase} from '../../../src/common/Phase';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {Board} from '../../../src/server/boards/Board';
+import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {Units} from '../../../src/common/Units';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../TestingUtils';
@@ -19,7 +19,7 @@ describe('RedCity', function() {
   let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
-  let board: Board;
+  let board: MarsBoard;
 
   beforeEach(function() {
     card = new RedCity();

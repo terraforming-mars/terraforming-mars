@@ -4,13 +4,13 @@ import {testGame} from '../../TestGame';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
-import {Board} from '../../../src/server/boards/Board';
+import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('ArcadianCommunities', function() {
   let card: ArcadianCommunities;
   let player: TestPlayer;
-  let board: Board;
+  let board: MarsBoard;
 
   beforeEach(() => {
     card = new ArcadianCommunities();

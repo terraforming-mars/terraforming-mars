@@ -961,7 +961,7 @@ export class Player implements IPlayer {
       this.removeResourceFrom(aurorai, payment.auroraiData);
     }
 
-    if (payment.megaCredits > 0 || payment.steel > 0 || payment. titanium > 0) {
+    if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
     }
   }

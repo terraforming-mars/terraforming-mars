@@ -147,12 +147,12 @@ describe('ThinkTank', () => {
     // Requires six oceans
     const [ocean, ...oceans] = range(6).map(() => addOcean(player));
 
-    expect(game.board.getOceanCount()).eq(6);
+    expect(game.board.getOceanSpaces()).has.length(6);
     expect(oceanCity.canPlay(player)).is.true;
 
     oceans.forEach((space) => game.removeTile(space.id));
 
-    expect(game.board.getOceanCount()).eq(1);
+    expect(game.board.getOceanSpaces()).has.length(1);
     expect(oceanCity.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 5;
@@ -160,7 +160,7 @@ describe('ThinkTank', () => {
     expect(oceanCity.canPlay(player)).is.true;
 
     game.removeTile(ocean.id);
-    expect(game.board.getOceanCount()).eq(0);
+    expect(game.board.getOceanSpaces()).is.empty;
 
     expect(oceanCity.canPlay(player)).is.false;
 

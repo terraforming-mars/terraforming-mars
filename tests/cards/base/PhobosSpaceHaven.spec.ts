@@ -10,6 +10,6 @@ describe('PhobosSpaceHaven', function() {
     cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(1);
     expect(card.getVictoryPoints(player)).to.eq(3);
-    expect(game.getCitiesCount()).to.eq(1);
+    expect(game.board.getCities()).has.length(1);
   });
 });

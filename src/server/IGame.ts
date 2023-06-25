@@ -1,4 +1,4 @@
-import {Board} from './boards/Board';
+import {MarsBoard} from './boards/MarsBoard';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {ClaimedMilestone} from './milestones/ClaimedMilestone';
@@ -56,7 +56,7 @@ export interface IGame extends Logger {
   preludeDeck: PreludeDeck;
   ceoDeck: CeoDeck;
   corporationDeck: CorporationDeck;
-  board: Board;
+  board: MarsBoard;
   activePlayer: PlayerId;
   claimedMilestones: Array<ClaimedMilestone>;
   milestones: Array<IMilestone>;
@@ -131,11 +131,6 @@ export interface IGame extends Logger {
   getTemperature(): number;
   getGeneration(): number;
   getPassedPlayers():Array<Color>;
-  getCitiesOffMarsCount(player?: IPlayer): number;
-  getCitiesOnMarsCount(player?: IPlayer): number;
-  getCitiesCount(player?: IPlayer, filter?: (space: ISpace) => boolean): number;
-  getGreeneriesCount(player?: IPlayer): number;
-  getSpaceCount(tileType: TileType, player: IPlayer): number;
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
   addTile(player: IPlayer, space: ISpace, tile: Tile): void;

@@ -24,7 +24,7 @@ export class Ulrich extends CeoCard {
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const oceansPlaced = game.board.getOceanCount();
+    const oceansPlaced = game.board.getOceanSpaces().length;
     const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
     player.stock.add(Resource.MEGACREDITS, bonusCredits, {log: true});
     return undefined;

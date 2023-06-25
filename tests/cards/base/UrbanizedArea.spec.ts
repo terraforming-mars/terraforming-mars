@@ -45,7 +45,7 @@ describe('UrbanizedArea', function() {
     expect(action.availableSpaces).has.lengthOf(1);
 
     action.cb(action.availableSpaces[0]);
-    expect(game.getCitiesCount()).to.eq(3);
+    expect(game.board.getCities()).has.length(3);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(2);
   });

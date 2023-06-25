@@ -8,8 +8,9 @@ import {Random} from '../Random';
 import {ISpace} from './ISpace';
 import {GameOptions} from '../GameOptions';
 import {SpaceId} from '../../common/Types';
+import {MarsBoard} from './MarsBoard';
 
-export class AmazonisBoard extends Board {
+export class AmazonisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): AmazonisBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 

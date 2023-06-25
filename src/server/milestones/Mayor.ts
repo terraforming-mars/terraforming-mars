@@ -9,6 +9,6 @@ export class Mayor extends BaseMilestone {
       3);
   }
   public getScore(player: IPlayer): number {
-    return player.game.getCitiesCount(player);
+    return player.game.board.getCities(player).length;
   }
 }

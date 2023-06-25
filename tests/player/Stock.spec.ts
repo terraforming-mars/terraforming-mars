@@ -236,7 +236,7 @@ describe('Stock', function() {
     log.length = 0; // Empty it out.
 
     player.stock.add(Resource.MEGACREDITS, 12, {log: false});
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.stock.add(Resource.MEGACREDITS, 12, {log: true});
     const logEntry = log[0];

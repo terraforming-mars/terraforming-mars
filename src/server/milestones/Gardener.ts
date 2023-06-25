@@ -9,6 +9,6 @@ export class Gardener extends BaseMilestone {
       3);
   }
   public getScore(player: IPlayer): number {
-    return player.game.getGreeneriesCount(player);
+    return player.game.board.getGreeneries(player).length;
   }
 }

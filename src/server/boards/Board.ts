@@ -2,12 +2,11 @@ import {ISpace} from './ISpace';
 import {IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
-import {AresHandler} from '../ares/AresHandler';
+import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {PlacementType} from './PlacementType';
+import {AresHandler} from '../ares/AresHandler';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -125,97 +124,12 @@ export abstract class Board {
     );
   }
 
-  /*
-   * Returns the number of oceans on the board.
-   *
-   * The default condition is to return those oceans used to count toward the global parameter, so
-   * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
-   */
-  public getOceanCount(include?: {upgradedOceans?: boolean, wetlands?: boolean}): number {
-    return this.getOceanSpaces(include).length;
-  }
-
-  public getAvailableSpacesForType(player: IPlayer, type: PlacementType): ReadonlyArray<ISpace> {
-    switch (type) {
-    case 'land': return this.getAvailableSpacesOnLand(player);
-    case 'ocean': return this.getAvailableSpacesForOcean(player);
-    case 'greenery': return this.getAvailableSpacesForGreenery(player);
-    case 'city': return this.getAvailableSpacesForCity(player);
-    case 'isolated': return this.getAvailableIsolatedSpaces(player);
-    case 'volcanic': return this.getAvailableVolcanicSpaces(player);
-    case 'upgradeable-ocean': return this.getOceanSpaces({upgradedOceans: false});
-    default: throw new Error('unknown type ' + type);
-    }
-  }
-
-  /*
-   * Returns spaces on the board with ocean tiless.
-   *
-   * The default condition is to return those oceans used to count toward the global parameter, so
-   * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
-   */
-  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): ReadonlyArray<ISpace> {
-    const spaces = this.spaces.filter((space) => {
-      if (!Board.isOceanSpace(space)) return false;
-      if (space.tile?.tileType === undefined) return false;
-      const tileType = space.tile.tileType;
-      if (OCEAN_UPGRADE_TILES.has(tileType)) {
-        return include?.upgradedOceans ?? true;
-      }
-      if (tileType === TileType.WETLANDS) {
-        return include?.wetlands ?? false;
-      }
-      return true;
-    });
-    return spaces;
-  }
-
-  public getSpaces(spaceType: SpaceType, _player : IPlayer): ReadonlyArray<ISpace> {
+  public getSpaces(spaceType: SpaceType, _player: IPlayer): ReadonlyArray<ISpace> {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
   public getEmptySpaces(): ReadonlyArray<ISpace> {
     return this.spaces.filter((space) => space.tile === undefined);
-  }
-
-  public getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<ISpace> {
-    const spacesOnLand = this.getAvailableSpacesOnLand(player);
-    // Gordon CEO can ignore placement restrictions for Cities+Greenery
-    if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
-    // A city cannot be adjacent to another city
-    return spacesOnLand.filter(
-      (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
-    );
-  }
-
-  public getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<ISpace> {
-    let spacesOnLand = this.getAvailableSpacesOnLand(player);
-    // Gordon CEO can ignore placement restrictions for Cities+Greenery
-    if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
-    // Spaces next to Red City are always unavialable.
-    if (player.game.gameOptions.pathfindersExpansion === true) {
-      spacesOnLand = spacesOnLand.filter((space) => {
-        return !this.getAdjacentSpaces(space).some((neighbor) => neighbor.tile?.tileType === TileType.RED_CITY);
-      });
-    }
-
-    const spacesForGreenery = spacesOnLand
-      .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);
-
-    // Spaces next to tiles you own
-    if (spacesForGreenery.length > 0) {
-      return spacesForGreenery;
-    }
-    // Place anywhere if no space owned
-    return spacesOnLand;
-  }
-
-  public getAvailableSpacesForOcean(player: IPlayer): ReadonlyArray<ISpace> {
-    return this.getSpaces(SpaceType.OCEAN, player)
-      .filter(
-        (space) => space.tile === undefined &&
-                      (space.player === undefined || space.player === player),
-      );
   }
 
   public getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<ISpace> {
@@ -235,31 +149,6 @@ export abstract class Board {
     return landSpaces;
   }
 
-  public getAvailableIsolatedSpaces(player: IPlayer): ReadonlyArray<ISpace> {
-    return this.getAvailableSpacesOnLand(player)
-      .filter(nextToNoOtherTileFn(this));
-  }
-
-  public getAvailableVolcanicSpaces(player: IPlayer): ReadonlyArray<ISpace> {
-    const volcanicSpaceIds = this.getVolcanicSpaceIds();
-
-    const spaces = this.getAvailableSpacesOnLand(player);
-    if (volcanicSpaceIds.length > 0) {
-      return spaces.filter((space) => volcanicSpaceIds.includes(space.id));
-    }
-    return spaces;
-  }
-
-  /**
-   * Almost the same as getAvailableSpacesOnLand, but doesn't apply to any player.
-   */
-  public getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
-    return this.spaces.filter((space) => {
-      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
-        (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
-        space.player === undefined;
-    });
-  }
 
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
   // to count. So distance 0 means the first available space.
@@ -362,10 +251,6 @@ export abstract class Board {
   public static deserializeSpaces(spaces: ReadonlyArray<SerializedSpace>, players: ReadonlyArray<IPlayer>): Array<ISpace> {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }
-}
-
-export function nextToNoOtherTileFn(board: Board): (space: ISpace) => boolean {
-  return (space: ISpace) => board.getAdjacentSpaces(space).every((space) => space.tile === undefined);
 }
 
 export function playerTileFn(player: IPlayer) {

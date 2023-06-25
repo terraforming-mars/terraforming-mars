@@ -1337,11 +1337,11 @@ export class Game implements IGame, Logger {
   }
 
   public canAddOcean(): boolean {
-    return this.board.getOceanCount() < constants.MAX_OCEAN_TILES;
+    return this.board.getOceanSpaces().length < constants.MAX_OCEAN_TILES;
   }
 
   public canRemoveOcean(): boolean {
-    const count = this.board.getOceanCount();
+    const count = this.board.getOceanSpaces().length;
     return count > 0 && count < constants.MAX_OCEAN_TILES;
   }
 

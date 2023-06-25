@@ -84,7 +84,7 @@ export class Server {
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: this.getMilestones(game),
       moon: this.getMoonModel(game),
-      oceans: game.board.getOceanCount(),
+      oceans: game.board.getOceanSpaces().length,
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
       pathfinders: createPathfindersModel(game),

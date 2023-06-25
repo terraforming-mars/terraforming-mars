@@ -59,7 +59,7 @@ describe('MindSetMars', function() {
 
     turmoil.delegateReserve.clear();
     card.action(player);
-    expect(game.deferredActions.length).eq(0);
+    expect(game.deferredActions).is;
 
     turmoil.delegateReserve.clear();
     turmoil.delegateReserve.add(player.id, 3);

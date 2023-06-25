@@ -2,7 +2,7 @@ import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Board} from '../../boards/Board';
+import {MarsBoard} from '../../boards/MarsBoard';
 import {BoardType} from '../../boards/BoardType';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -32,7 +32,7 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  private validTriplets(board: Board): Array<Triplet> {
+  private validTriplets(board: MarsBoard): Array<Triplet> {
     const spaces = board.getNonReservedLandSpaces().filter((space) => {
       return space.player === undefined && (space.tile === undefined || space.tile.protectedHazard === true);
     });

@@ -27,7 +27,7 @@ export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace>
     toValue = constants.MAX_OCEAN_TILES;
   }
 
-  while (player.game.board.getOceanCount() < toValue) {
+  while (player.game.board.getOceanSpaces().length < toValue) {
     oceans.push(addOcean(player));
   }
   return oceans;

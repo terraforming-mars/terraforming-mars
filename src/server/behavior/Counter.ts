@@ -57,7 +57,7 @@ export class Counter {
     }
 
     if (countable.oceans !== undefined) {
-      sum += game.board.getOceanCount({wetlands: true});
+      sum += game.board.getOceanSpaces({wetlands: true}).length;
     }
 
     if (countable.greeneries !== undefined) {

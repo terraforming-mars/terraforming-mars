@@ -41,6 +41,7 @@ describe('SolBank', () => {
       card: CardName.MICRO_MILLS,
       payment: Payment.of({megaCredits: 3}),
     });
+    runAllActions(game);
 
     expect(solBank.resourceCount).eq(1);
   });
@@ -55,6 +56,7 @@ describe('SolBank', () => {
       card: CardName.MICRO_MILLS,
       payment: Payment.EMPTY,
     });
+    runAllActions(game);
 
     expect(solBank.resourceCount).eq(0);
   });
@@ -70,6 +72,7 @@ describe('SolBank', () => {
       card: CardName.BIOMASS_COMBUSTORS,
       payment: Payment.of({steel: 2}),
     });
+    runAllActions(game);
 
     expect(solBank.resourceCount).eq(1);
   });
@@ -83,6 +86,7 @@ describe('SolBank', () => {
       card: CardName.AEROBRAKED_AMMONIA_ASTEROID,
       payment: Payment.of({titanium: 9}),
     });
+    runAllActions(game);
 
     expect(solBank.resourceCount).eq(1);
   });
@@ -124,7 +128,6 @@ describe('SolBank', () => {
         {'type': 'colony', 'colonyName': ColonyName.LUNA},
       ],
     }, player);
-
     runAllActions(game);
 
     expect(solBank.resourceCount).eq(1);
@@ -148,7 +151,6 @@ describe('SolBank', () => {
         {'type': 'colony', 'colonyName': ColonyName.LUNA},
       ],
     }, player);
-
     runAllActions(game);
 
     expect(player.titanium).eq(97);
@@ -159,14 +161,14 @@ describe('SolBank', () => {
     const turmoil = game.turmoil!;
     player.megaCredits = 6;
     const input = turmoil.getSendDelegateInput(player);
-    input?.process({type: 'party', partyName: PartyName.REDS});
+    input!.process({type: 'party', partyName: PartyName.REDS});
     runAllActions(game);
 
     expect(player.megaCredits).eq(6);
     expect(solBank.resourceCount).eq(0);
 
     const input2 = turmoil.getSendDelegateInput(player);
-    input2?.process({type: 'party', partyName: PartyName.REDS});
+    input2!.process({type: 'party', partyName: PartyName.REDS});
     runAllActions(game);
 
     expect(player.megaCredits).eq(1);
@@ -183,6 +185,7 @@ describe('SolBank', () => {
       type: 'card',
       cards: [CardName.SPACE_ELEVATOR],
     }, player);
+    runAllActions(game);
 
     expect(player.steel).eq(0);
     expect(player.megaCredits).eq(5);

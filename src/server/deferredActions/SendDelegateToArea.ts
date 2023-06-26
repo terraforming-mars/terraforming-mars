@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../inputs/SelectParty';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {Delegate, Turmoil} from '../turmoil/Turmoil';
@@ -53,7 +53,7 @@ export class SendDelegateToArea extends DeferredAction {
     // How many delegates to send
     const numDelegateToSend = this.options.count ?? 1;
 
-    const sendDelegate = new SelectPartyToSendDelegate(this.title, 'Send delegate', availableParties, (partyName: PartyName) => {
+    const sendDelegate = new SelectParty(this.title, 'Send delegate', availableParties, (partyName: PartyName) => {
       if (this.options.cost) {
         this.player.game.defer(new SelectPaymentDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
       }

@@ -76,7 +76,7 @@ describe('PlayerInputFactory2', function() {
     });
   });
 
-  it('SelectPartyToSendDelegate', async () => {
+  it('SelectParty', async () => {
     runTest({
       inputType: 'party',
       turmoil: {

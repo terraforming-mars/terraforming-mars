@@ -25,7 +25,7 @@ import SelectOption from '@/client/components/SelectOption.vue';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
 import SelectSpace from '@/client/components/SelectSpace.vue';
 import SelectPartyPlayer from '@/client/components/SelectPartyPlayer.vue';
-import SelectPartyToSendDelegate from '@/client/components/SelectPartyToSendDelegate.vue';
+import SelectParty from '@/client/components/SelectParty.vue';
 import SelectColony from '@/client/components/SelectColony.vue';
 import SelectProductionToLose from '@/client/components/SelectProductionToLose.vue';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
@@ -82,7 +82,7 @@ export default Vue.component('player-input-factory', {
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
     'select-party-player': SelectPartyPlayer,
-    'select-party-to-send-delegate': SelectPartyToSendDelegate,
+    'select-party-to-send-delegate': SelectParty,
     'select-colony': SelectColony,
     SelectProductionToLose,
     ShiftAresGlobalParameters,

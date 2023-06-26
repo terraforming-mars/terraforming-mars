@@ -5,7 +5,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {cast, runAllActions} from '../../TestingUtils';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
@@ -64,7 +64,7 @@ describe('TempestConsultancy', () => {
     expect(marsFirst.delegates.get(player.id)).eq(0);
     card.action(player);
     const action = cast(player.game.deferredActions.pop(), SendDelegateToArea);
-    const options = cast(action.execute(), SelectPartyToSendDelegate);
+    const options = cast(action.execute(), SelectParty);
     options.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id)).eq(4);
@@ -83,7 +83,7 @@ describe('TempestConsultancy', () => {
     card.action(player);
 
     const action = cast(player.game.deferredActions.pop(), SendDelegateToArea);
-    const options = cast(action.execute(), SelectPartyToSendDelegate);
+    const options = cast(action.execute(), SelectParty);
     options.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id)).eq(0);

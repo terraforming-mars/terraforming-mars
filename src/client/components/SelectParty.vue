@@ -21,7 +21,7 @@ import {PartyName} from '@/common/turmoil/PartyName';
 import {SelectPartyResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
-  name: 'SelectPartyToSendDelegate',
+  name: 'SelectParty',
   props: {
     playerinput: {
       type: Object as () => PlayerInputModel,

@@ -17,7 +17,7 @@ import {cast, doWait, getSendADelegateOption, runAllActions} from './TestingUtil
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/server/cards/base/Pets';
 import {TestPlayer} from './TestPlayer';
-import {SelectPartyToSendDelegate} from '../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../src/server/inputs/SelectParty';
 import {PartyName} from '../src/common/turmoil/PartyName';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {SelectPlayer} from '../src/server/inputs/SelectPlayer';
@@ -373,7 +373,7 @@ describe('Player', function() {
 
     expect(turmoil.usedFreeDelegateAction.has(player.id)).is.false;
 
-    const freeLobbyAction = cast(getSendADelegateOption(player), SelectPartyToSendDelegate);
+    const freeLobbyAction = cast(getSendADelegateOption(player), SelectParty);
 
     expect(freeLobbyAction.title).eq('Send a delegate in an area (from lobby)');
     expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(0);
@@ -389,7 +389,7 @@ describe('Player', function() {
     expect(getSendADelegateOption(player)).is.undefined;
 
     player.megaCredits = 5;
-    const selectParty = cast(getSendADelegateOption(player), SelectPartyToSendDelegate);
+    const selectParty = cast(getSendADelegateOption(player), SelectParty);
 
     expect(selectParty.title).eq('Send a delegate in an area (5 M€)');
 

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
@@ -100,7 +100,7 @@ describe('Petra', function() {
     expect(game.deferredActions.length).is.greaterThanOrEqual(3);
 
     while (game.deferredActions.length) {
-      const selectParty = game.deferredActions.pop()!.execute() as SelectPartyToSendDelegate;
+      const selectParty = game.deferredActions.pop()!.execute() as SelectParty;
       if (selectParty !== undefined) {
         selectParty.cb(PartyName.GREENS);
       }

@@ -21,7 +21,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../inputs/SelectParty';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = PlayerId | NeutralPlayer;
@@ -446,7 +446,7 @@ export class Turmoil {
     return victory;
   }
 
-  public getSendDelegateInput(player: IPlayer): SelectPartyToSendDelegate | undefined {
+  public getSendDelegateInput(player: IPlayer): SelectParty | undefined {
     if (this.hasDelegatesInReserve(player.id)) {
       let sendDelegate;
       if (!this.usedFreeDelegateAction.has(player.id)) {
@@ -457,8 +457,7 @@ export class Turmoil {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (5 M€)', {cost: 5});
       }
       if (sendDelegate) {
-        const input = sendDelegate.execute();
-        return input;
+        return sendDelegate.execute();
       }
     }
     return undefined;

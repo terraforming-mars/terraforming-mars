@@ -35,7 +35,7 @@ import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {SpectatorModel} from '../../common/models/SpectatorModel';
-import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../inputs/SelectParty';
 import {GameModel} from '../../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
 import {createPathfindersModel} from './PathfindersModel';
@@ -322,7 +322,7 @@ export class Server {
       );
       break;
     case 'party':
-      playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
+      playerInputModel.availableParties = (waitingFor as SelectParty).availableParties;
       if (player.game !== undefined) {
         playerInputModel.turmoil = getTurmoilModel(player.game);
       }

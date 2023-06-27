@@ -3,12 +3,11 @@ import {BasePlayerInput} from '../PlayerInput';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputResponse';
 
-// TODO(kberg): Rename to SelectParty
-export class SelectPartyToSendDelegate extends BasePlayerInput {
+export class SelectParty extends BasePlayerInput {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Send delegate',
-    public availableParties: PartyName[],
+    public availableParties: Array<PartyName>,
     public cb: (party: PartyName) => undefined,
   ) {
     super('party', title);

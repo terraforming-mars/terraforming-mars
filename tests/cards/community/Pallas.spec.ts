@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 
@@ -53,14 +53,14 @@ describe('Pallas', function() {
 
     runAllActions(game);
 
-    const selectParty = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const selectParty = cast(player.popWaitingFor(), SelectParty);
     selectParty.cb(PartyName.GREENS);
     expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
     expect(scientists.delegates.size).eq(0);
 
     runAllActions(game);
 
-    const selectParty2 = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const selectParty2 = cast(player.popWaitingFor(), SelectParty);
     selectParty2.cb(PartyName.SCIENTISTS);
 
     expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
@@ -79,7 +79,7 @@ describe('Pallas', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
     pallas.trade(player2); // player2 is trading. But player(1) is getting the MC
     runAllActions(game);
-    const sendDelegates = cast(player2.popWaitingFor(), SelectPartyToSendDelegate);
+    const sendDelegates = cast(player2.popWaitingFor(), SelectParty);
     sendDelegates.cb(PartyName.REDS);
     runAllActions(game);
 
@@ -95,7 +95,7 @@ describe('Pallas', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
     pallas.trade(player); // player(1) is trading and gaining the mc.
     runAllActions(game);
-    const sendDelegates = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const sendDelegates = cast(player.popWaitingFor(), SelectParty);
     sendDelegates.cb(PartyName.REDS);
     runAllActions(game);
 

@@ -8,7 +8,7 @@ import {CardResource} from '../../src/common/CardResource';
 import {Game} from '../../src/server/Game';
 import {PathfindersData} from '../../src/server/pathfinders/PathfindersData';
 import {CardName} from '../../src/common/cards/CardName';
-import {SelectPartyToSendDelegate} from '../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../src/server/inputs/SelectParty';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 
 describe('PathfindersExpansion', function() {
@@ -102,7 +102,7 @@ describe('PathfindersExpansion', function() {
   it('grant delegate reward', () => {
     PathfindersExpansion.grant('delegate', player1, Tag.EARTH);
     runAllActions(game);
-    cast(player1.popWaitingFor(), SelectPartyToSendDelegate);
+    cast(player1.popWaitingFor(), SelectParty);
   });
 
   it('grant delegate reward - no grant when player has no available delegates', () => {

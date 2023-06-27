@@ -3,7 +3,7 @@ import {IPlayer} from '../../../src/server/IPlayer';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src/server//inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server//inputs/SelectParty';
 import {cast} from '../../TestingUtils';
 import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -19,7 +19,7 @@ export function assertSendDelegateToArea(player: IPlayer, action: DeferredAction
   const delegatesInReserve = turmoil.getAvailableDelegateCount(player.id);
   const delegatesInParty = marsFirst.delegates.get(player.id);
 
-  const options = cast(sendDelegate.execute(), SelectPartyToSendDelegate);
+  const options = cast(sendDelegate.execute(), SelectParty);
   options.cb(marsFirst.name);
 
   expect(turmoil.getAvailableDelegateCount(player.id)).eq(delegatesInReserve - 1);

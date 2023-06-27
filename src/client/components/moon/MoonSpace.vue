@@ -34,9 +34,11 @@ export default Vue.extend({
     },
     text: {
       type: String,
+      required: false,
     },
     is_selectable: {
       type: Boolean,
+      default: false,
     },
     tileView: {
       type: String as () => TileView,

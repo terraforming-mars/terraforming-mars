@@ -44,7 +44,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.RED_CITY]: 'red-city',
   [TileType.MARTIAN_NATURE_WONDERS]: 'martian-nature-wonders',
   [TileType.MOON_ROAD]: 'road',
-  [TileType.MOON_HABITAT]: 'colony',
+  [TileType.MOON_HABITAT]: 'habitat',
   [TileType.MOON_MINE]: 'mine',
   [TileType.LUNA_TRADE_STATION]: 'luna-trade-station',
   [TileType.LUNA_MINING_HUB]: 'luna-mining-hub',

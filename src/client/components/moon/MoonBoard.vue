@@ -46,8 +46,8 @@
     </div>
 
     <div class="global-numbers">
-      <div class="global-numbers-colony">
-        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('colony')" :key="i">{{ lvl.strValue }}</div>
+      <div class="global-numbers-habitat">
+        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('habitat')" :key="i">{{ lvl.strValue }}</div>
       </div>
 
       <div class="global-numbers-logistics">
@@ -82,10 +82,11 @@ import MoonSpace from '@/client/components/moon/MoonSpace.vue';
 import {TileView} from '../board/TileView';
 import {SpaceId} from '@/common/Types';
 
-class MoonParamLevel {
-  constructor(public value: number, public isActive: boolean, public strValue: string) {
-  }
-}
+type MoonParamLevel = {
+  value: number,
+  isActive: boolean,
+  strValue: string,
+};
 
 export default Vue.extend({
   name: 'MoonBoard',
@@ -121,7 +122,7 @@ export default Vue.extend({
       }
       throw new Error('Board space not found by id \'' + spaceId + '\'');
     },
-    getValuesForParameter(targetParameter: string): Array<MoonParamLevel> {
+    getValuesForParameter(targetParameter: 'logistics' | 'mining' | 'habitat'): Array<MoonParamLevel> {
       let curValue: number;
 
       switch (targetParameter) {
@@ -131,7 +132,7 @@ export default Vue.extend({
       case 'mining':
         curValue = this.model.miningRate;
         break;
-      case 'colony':
+      case 'habitat':
         curValue = this.model.colonyRate;
         break;
       default:
@@ -140,15 +141,19 @@ export default Vue.extend({
 
       const values: Array<MoonParamLevel> = [];
       for (let value = 8; value >= 0; value -= 1) {
-        const strValue = value.toString();
-        values.push(
-          new MoonParamLevel(value, value === curValue, strValue),
-        );
+        values.push({
+          value: value,
+          isActive: value === curValue,
+          strValue: value.toString(),
+        });
       }
       return values;
     },
     getScaleCSS(paramLevel: MoonParamLevel): string {
       let css = 'global-numbers-value val-' + paramLevel.value + ' ';
+      if (paramLevel.value === 0) {
+        css += 'zero-gap ';
+      }
       if (paramLevel.isActive) {
         css += 'val-is-active';
       }

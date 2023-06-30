@@ -57,9 +57,11 @@ export class Warmonger implements IAward {
     CardName.ANCIENT_SHIPYARDS,
     CardName.COSMIC_RADIATION,
     CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
+    CardName.REVOLTING_COLONISTS,
     // Pathfinders
     CardName.DUST_STORM,
     CardName.SOLAR_STORM,
+    CardName.PUBLIC_SPONSORED_GRANT,
     // CEOs
     CardName.BJORN,
   ];

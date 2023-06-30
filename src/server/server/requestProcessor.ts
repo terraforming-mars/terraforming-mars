@@ -1,28 +1,36 @@
 import * as http from 'http';
-import * as paths from '../common/app/paths';
+import {paths} from '../../common/app/paths';
 
-import {ApiCloneableGame} from './routes/ApiCloneableGame';
-import {ApiGameLogs} from './routes/ApiGameLogs';
-import {ApiGames} from './routes/ApiGames';
-import {ApiGame} from './routes/ApiGame';
-import {ApiGameHistory} from './routes/ApiGameHistory';
-import {ApiPlayer} from './routes/ApiPlayer';
-import {ApiStats} from './routes/ApiStats';
-import {ApiMetrics} from './routes/ApiMetrics';
-import {ApiSpectator} from './routes/ApiSpectator';
-import {ApiWaitingFor} from './routes/ApiWaitingFor';
-import {GameHandler} from './routes/Game';
-import {GameLoader} from './database/GameLoader';
-import {GamesOverview} from './routes/GamesOverview';
-import {IHandler} from './routes/IHandler';
-import {Load} from './routes/Load';
-import {LoadGame} from './routes/LoadGame';
-import {Route} from './routes/Route';
-import {PlayerInput} from './routes/PlayerInput';
-import {ServeApp} from './routes/ServeApp';
-import {ServeAsset} from './routes/ServeAsset';
-import {serverId, statsId} from './server-ids';
-import {Reset} from './routes/Reset';
+import {ApiCloneableGame} from '../routes/ApiCloneableGame';
+import {ApiGameLogs} from '../routes/ApiGameLogs';
+import {ApiGames} from '../routes/ApiGames';
+import {ApiGame} from '../routes/ApiGame';
+import {ApiGameHistory} from '../routes/ApiGameHistory';
+import {ApiPlayer} from '../routes/ApiPlayer';
+import {ApiStats} from '../routes/ApiStats';
+import {ApiMetrics} from '../routes/ApiMetrics';
+import {ApiSpectator} from '../routes/ApiSpectator';
+import {ApiWaitingFor} from '../routes/ApiWaitingFor';
+import {GameHandler} from '../routes/Game';
+import {GameLoader} from '../database/GameLoader';
+import {GamesOverview} from '../routes/GamesOverview';
+import {Context, IHandler} from '../routes/IHandler';
+import {Load} from '../routes/Load';
+import {LoadGame} from '../routes/LoadGame';
+import {Route} from '../routes/Route';
+import {PlayerInput} from '../routes/PlayerInput';
+import {ServeApp} from '../routes/ServeApp';
+import {ServeAsset} from '../routes/ServeAsset';
+import {serverId, statsId} from '../server-ids';
+import {Reset} from '../routes/Reset';
+import {newIpBlocklist} from './IPBlocklist';
+import {MultiMap} from 'mnemonist';
+import {AddressInfo} from 'net';
+import {ApiIPs} from '../routes/ApiIPs';
+
+const ips = (process.env.IP_BLOCKLIST ?? '').trim().split(' ');
+const ipBlocklist = newIpBlocklist(ips);
+const ipCounter = new MultiMap<string, AddressInfo | string>();
 
 const handlers: Map<string, IHandler> = new Map(
   [
@@ -33,6 +41,7 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_GAME_HISTORY, ApiGameHistory.INSTANCE],
     [paths.API_GAME_LOGS, ApiGameLogs.INSTANCE],
     [paths.API_GAMES, ApiGames.INSTANCE],
+    [paths.API_IPS, ApiIPs.INSTANCE],
     [paths.API_METRICS, ApiMetrics.INSTANCE],
     [paths.API_PLAYER, ApiPlayer.INSTANCE],
     [paths.API_STATS, ApiStats.INSTANCE],
@@ -62,6 +71,11 @@ export function processRequest(
   req: http.IncomingMessage,
   res: http.ServerResponse,
   route: Route): void {
+  const ipAddress = req.socket.address();
+  if (ipBlocklist.isBlocked(ipAddress)) {
+    route.notFound(req, res);
+  }
+
   if (req.method === 'HEAD') {
     res.end();
     return;
@@ -73,7 +87,17 @@ export function processRequest(
 
   const url = new URL(req.url, `http://${req.headers.host}`);
   const pathname = url.pathname.substring(1); // Remove leading '/'
-  const ctx = {url, route, gameLoader: GameLoader.getInstance(), ids: {serverId, statsId}};
+  const ctx: Context = {
+    url: url,
+    route: route,
+    gameLoader: GameLoader.getInstance(),
+    ip: req.socket.address(),
+    ipCounter: ipCounter,
+    ids: {
+      serverId,
+      statsId,
+    }};
+
   const handler: IHandler | undefined = handlers.get(pathname);
 
   if (handler !== undefined) {

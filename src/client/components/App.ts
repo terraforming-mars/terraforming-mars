@@ -16,9 +16,9 @@ import AdminHome from '@/client/components/admin/AdminHome.vue';
 import {$t, setTranslationContext} from '@/client/directives/i18n';
 
 import * as constants from '@/common/constants';
-import * as paths from '@/common/app/paths';
 import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import * as raw_settings from '@/genfiles/settings.json';
+import {paths} from '@/common/app/paths';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';

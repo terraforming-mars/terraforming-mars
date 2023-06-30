@@ -17,6 +17,11 @@ export class RouteTestScaffolding {
     this.ctx = {
       route: new Route(),
       url: new URL('http://boo.com'),
+      ip: {
+        address: '123.45.678.90',
+        family: 'IP4',
+        port: 1234,
+      },
       gameLoader: new FakeGameLoader(),
       ids: {
         serverId: '1',

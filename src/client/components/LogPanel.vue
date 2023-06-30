@@ -38,7 +38,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import * as paths from '@/common/app/paths';
+import {paths} from '@/common/app/paths';
 import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';

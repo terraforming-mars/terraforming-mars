@@ -1,5 +1,5 @@
 import * as http from 'http';
-import * as paths from '../common/app/paths';
+import {paths} from '../common/app/paths';
 
 import {ApiCloneableGame} from './routes/ApiCloneableGame';
 import {ApiGameLogs} from './routes/ApiGameLogs';

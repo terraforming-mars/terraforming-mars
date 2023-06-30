@@ -22,6 +22,7 @@ export default Vue.extend({
         paths.API_GAMES,
         paths.API_METRICS,
         paths.LOAD,
+        paths.API_IPS,
       ],
     };
   },

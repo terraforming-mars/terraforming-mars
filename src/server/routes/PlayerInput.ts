@@ -26,6 +26,8 @@ export class PlayerInput extends Handler {
       return;
     }
 
+    ctx.ipTracker.addParticipant(playerId, ctx.ip);
+
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
     const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {

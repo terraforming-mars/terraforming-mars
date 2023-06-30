@@ -5,6 +5,7 @@ export const paths = {
   API_GAME_HISTORY: 'api/game/history',
   API_GAME_LOGS: 'api/game/logs',
   API_GAMES: 'api/games',
+  API_IPS: 'api/ips',
   API_METRICS: 'api/metrics',
   API_PLAYER: 'api/player',
   API_SPECTATOR: 'api/spectator',

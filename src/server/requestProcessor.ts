@@ -14,7 +14,7 @@ import {ApiWaitingFor} from './routes/ApiWaitingFor';
 import {GameHandler} from './routes/Game';
 import {GameLoader} from './database/GameLoader';
 import {GamesOverview} from './routes/GamesOverview';
-import {IHandler} from './routes/IHandler';
+import {Context, IHandler} from './routes/IHandler';
 import {Load} from './routes/Load';
 import {LoadGame} from './routes/LoadGame';
 import {Route} from './routes/Route';
@@ -23,6 +23,10 @@ import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
 import {serverId, statsId} from './server-ids';
 import {Reset} from './routes/Reset';
+import {newIpBlocklist} from './IPBlocklist';
+
+const ips = (process.env.IP_BLOCKLIST ?? '').trim().split(' ');
+const ipBlocklist = newIpBlocklist(ips);
 
 const handlers: Map<string, IHandler> = new Map(
   [
@@ -62,6 +66,11 @@ export function processRequest(
   req: http.IncomingMessage,
   res: http.ServerResponse,
   route: Route): void {
+  const ipAddress = req.socket.address();
+  if (ipBlocklist.isBlocked(ipAddress)) {
+    route.notFound(req, res);
+  }
+
   if (req.method === 'HEAD') {
     res.end();
     return;
@@ -73,7 +82,16 @@ export function processRequest(
 
   const url = new URL(req.url, `http://${req.headers.host}`);
   const pathname = url.pathname.substring(1); // Remove leading '/'
-  const ctx = {url, route, gameLoader: GameLoader.getInstance(), ids: {serverId, statsId}};
+  const ctx: Context = {
+    url: url,
+    route: route,
+    gameLoader: GameLoader.getInstance(),
+    ip: req.socket.address(),
+    ids: {
+      serverId,
+      statsId,
+    }};
+
   const handler: IHandler | undefined = handlers.get(pathname);
 
   if (handler !== undefined) {

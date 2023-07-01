@@ -8,7 +8,7 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
 
 export class HellasBoard extends MarsBoard {

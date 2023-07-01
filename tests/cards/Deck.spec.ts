@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PreludeDeck, CeoDeck} from '../../src/server/cards/Deck';
 import {GameCards} from '../../src/server/GameCards';
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {CardName} from '../../src/common/cards/CardName';
 import {ConstRandom, UnseededRandom} from '../../src/common/utils/Random';
 import {ICard} from '../../src/server/cards/ICard';

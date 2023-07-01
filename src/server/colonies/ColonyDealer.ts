@@ -2,7 +2,7 @@ import {IColony} from './IColony';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {Random} from '../../common/utils/Random';
 import {BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES, PATHFINDERS_COLONIES_TILES} from './ColonyManifest';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
 // forced to rely on the RNG.

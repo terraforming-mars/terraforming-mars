@@ -26,7 +26,7 @@ import {AresData} from '../common/ares/AresData';
 import {IMoonData} from './moon/IMoonData';
 import {SeededRandom} from '../common/utils/Random';
 import {PathfindersData} from './pathfinders/PathfindersData';
-import {GameOptions} from './GameOptions';
+import {GameOptions} from './game/GameOptions';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Tag} from '../common/cards/Tag';
 import {Tile} from './Tile';

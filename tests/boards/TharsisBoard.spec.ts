@@ -1,4 +1,4 @@
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {expect} from 'chai';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {SeededRandom} from '../../src/common/utils/Random';

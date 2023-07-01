@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {VastitasBorealisBoard} from '../../src/server/boards/VastitasBorealisBoard';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';

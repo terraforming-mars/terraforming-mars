@@ -1,4 +1,4 @@
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {IPlayer} from '../IPlayer';
 import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';

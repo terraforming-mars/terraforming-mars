@@ -6,7 +6,7 @@ import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
 import {SpaceId} from '../../common/Types';

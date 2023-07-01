@@ -1,10 +1,10 @@
-import * as constants from '../common/constants';
-import {BoardName} from '../common/boards/BoardName';
-import {CardName} from '../common/cards/CardName';
-import {ColonyName} from '../common/colonies/ColonyName';
-import {GameId} from '../common/Types';
-import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
-import {AgendaStyle} from '../common/turmoil/Types';
+import * as constants from '../../common/constants';
+import {BoardName} from '../../common/boards/BoardName';
+import {CardName} from '../../common/cards/CardName';
+import {ColonyName} from '../../common/colonies/ColonyName';
+import {GameId} from '../../common/Types';
+import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
+import {AgendaStyle} from '../../common/turmoil/Types';
 
 export type GameOptions = {
   boardName: BoardName;

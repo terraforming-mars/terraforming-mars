@@ -31,7 +31,7 @@ import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
-import {DEFAULT_GAME_OPTIONS} from '../../../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../../src/server/game/GameOptions';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Game} from '../../src/server/Game';
 import {IGame} from '../../src/server/IGame';
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {AresTestHelper} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';

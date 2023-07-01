@@ -24,7 +24,7 @@ import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {AresData} from '../common/ares/AresData';
 import {IMoonData} from './moon/IMoonData';
-import {SeededRandom} from './Random';
+import {SeededRandom} from '../common/utils/Random';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {GameOptions} from './GameOptions';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';

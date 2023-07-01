@@ -3,7 +3,7 @@ import {PreludeDeck, CeoDeck} from '../../src/server/cards/Deck';
 import {GameCards} from '../../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {CardName} from '../../src/common/cards/CardName';
-import {ConstRandom, UnseededRandom} from '../../src/server/Random';
+import {ConstRandom, UnseededRandom} from '../../src/common/utils/Random';
 import {ICard} from '../../src/server/cards/ICard';
 
 function name(card: ICard): CardName {

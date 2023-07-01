@@ -10,7 +10,7 @@ import {LunarMagnate} from '../moon/LunarMagnate';
 import {OneGiantStep} from '../moon/OneGiantStep';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {inplaceShuffle} from '../utils/shuffle';
-import {UnseededRandom} from '../Random';
+import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {AwardName} from '../../common/ma/AwardName';
 import {inplaceRemove} from '../../common/utils/utils';

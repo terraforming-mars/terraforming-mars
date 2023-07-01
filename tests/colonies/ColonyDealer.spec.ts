@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ColonyDealer} from '../../src/server/colonies/ColonyDealer';
-import {SeededRandom} from '../../src/server/Random';
+import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 
 describe('ColonyDealer', function() {

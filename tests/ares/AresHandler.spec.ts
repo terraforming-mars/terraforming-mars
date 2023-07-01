@@ -18,7 +18,7 @@ import {Phase} from '../../src/common/Phase';
 import {TestPlayer} from '../TestPlayer';
 import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
 import {AresSetup} from '../../src/server/ares/AresSetup';
-import {SeededRandom} from '../../src/server/Random';
+import {SeededRandom} from '../../src/common/utils/Random';
 import {Units} from '../../src/common/Units';
 import {addOcean, cast, runAllActions} from '../TestingUtils';
 import {Ants} from '../../src/server/cards/base/Ants';

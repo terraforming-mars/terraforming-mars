@@ -4,7 +4,7 @@ import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {IPlayer} from '../IPlayer';
-import {Random} from '../Random';
+import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../GameOptions';
 import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';

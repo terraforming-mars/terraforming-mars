@@ -4,7 +4,7 @@ import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {VastitasBorealisBoard} from '../../src/server/boards/VastitasBorealisBoard';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
-import {SeededRandom} from '../../src/server/Random';
+import {SeededRandom} from '../../src/common/utils/Random';
 import {runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/server/SpaceName';

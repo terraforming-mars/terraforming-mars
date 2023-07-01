@@ -10,7 +10,7 @@ import {IPlayer} from './IPlayer';
 import {Player} from './Player';
 import {Color} from '../common/Color';
 import {TileType} from '../common/TileType';
-import {Random} from './Random';
+import {Random} from '../common/utils/Random';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {SerializedBoard} from './boards/SerializedBoard';

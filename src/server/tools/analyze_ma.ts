@@ -3,7 +3,7 @@ require('dotenv').config();
 import * as http from 'http';
 import * as fs from 'fs';
 import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../GameOptions';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../game/GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {MultiSet} from 'mnemonist';

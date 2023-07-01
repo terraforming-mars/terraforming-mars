@@ -7,8 +7,8 @@ import {HELLAS_BONUS_OCEAN_COST} from '../../common/constants';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
-import {Random} from '../Random';
-import {GameOptions} from '../GameOptions';
+import {Random} from '../../common/utils/Random';
+import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
 
 export class HellasBoard extends MarsBoard {

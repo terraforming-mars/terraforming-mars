@@ -4,7 +4,7 @@ import {CardFinder} from '../src/server/CardFinder';
 import {GameCards} from '../src/server/GameCards';
 import {CardName} from '../src/common/cards/CardName';
 import {CardManifest} from '../src/server/cards/ModuleManifest';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../src/server/game/GameOptions';
 
 describe('GameCards', function() {
   it('correctly removes projectCardsToRemove', function() {

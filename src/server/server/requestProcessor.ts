@@ -21,7 +21,7 @@ import {Route} from '../routes/Route';
 import {PlayerInput} from '../routes/PlayerInput';
 import {ServeApp} from '../routes/ServeApp';
 import {ServeAsset} from '../routes/ServeAsset';
-import {serverId, statsId} from '../server-ids';
+import {serverId, statsId} from '../utils/server-ids';
 import {Reset} from '../routes/Reset';
 import {newIpBlocklist} from './IPBlocklist';
 import {ApiIPs} from '../routes/ApiIPs';

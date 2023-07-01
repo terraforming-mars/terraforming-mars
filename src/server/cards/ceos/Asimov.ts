@@ -4,7 +4,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {inplaceShuffle} from '../../utils/shuffle';
-import {UnseededRandom} from '../../../server/Random';
+import {UnseededRandom} from '../../../common/utils/Random';
 import {ASIMOV_AWARD_BONUS} from '../../../common/constants';
 
 import {IAward} from '../../awards/IAward';

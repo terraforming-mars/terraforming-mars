@@ -12,7 +12,7 @@ import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {GameOptions} from '../../../src/server/GameOptions';
+import {GameOptions} from '../../../src/server/game/GameOptions';
 
 describe('InterplanetaryTrade', function() {
   let card: InterplanetaryTrade;

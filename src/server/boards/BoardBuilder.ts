@@ -3,7 +3,7 @@ import {SpaceId} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {Random} from '../Random';
+import {Random} from '../../common/utils/Random';
 
 export class BoardBuilder {
   // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].

@@ -64,6 +64,7 @@ export class Route {
 
   public writeJson(res: http.ServerResponse, json: any, space?: string | number | undefined) {
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(json, undefined, space));
+    const s = JSON.stringify(json, undefined, space);
+    res.end(s);
   }
 }

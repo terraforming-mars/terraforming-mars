@@ -5,7 +5,7 @@ import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {SpaceId} from '../../common/Types';
 import {IPlayer} from '../IPlayer';
 
-export interface ISpace {
+export type ISpace = {
     id: SpaceId;
     spaceType: SpaceType;
     tile?: Tile;

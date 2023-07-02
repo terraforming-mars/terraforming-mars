@@ -4,7 +4,6 @@ import {IGame} from '../src/server/IGame';
 import * as constants from '../src/common/constants';
 import {ISpace} from '../src/server/boards/ISpace';
 import {Phase} from '../src/common/Phase';
-import {IParty} from '../src/server/turmoil/parties/IParty';
 import {Turmoil} from '../src/server/turmoil/Turmoil';
 import {Message} from '../src/common/logs/Message';
 import {PolicyId} from '../src/common/turmoil/Types';
@@ -19,6 +18,7 @@ import {SpaceId} from '../src/common/Types';
 import {PlayerInput} from '../src/server/PlayerInput';
 import {IActionCard} from '../src/server/cards/ICard';
 import {TestPlayer} from './TestPlayer';
+import {PartyName} from '../src/common/turmoil/PartyName';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
@@ -76,9 +76,13 @@ export function resetBoard(game: IGame): void {
   });
 }
 
-export function setRulingPartyAndRulingPolicy(game: IGame, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
+export function setRulingParty(game: IGame, partyName: PartyName, policyId?: PolicyId) {
+  const turmoil = Turmoil.getTurmoil(game);
+  const party = turmoil.getPartyByName(partyName);
+  const resolvedPolicyId = policyId ?? party.policies[0].id;
+
   turmoil.rulingParty = party;
-  turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: policyId});
+  turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: resolvedPolicyId});
   game.phase = Phase.ACTION;
 }
 

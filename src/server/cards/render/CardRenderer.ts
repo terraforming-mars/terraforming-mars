@@ -358,8 +358,8 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON, amount, options));
   }
 
-  public resourceCube(amount = 1): Builder<T> {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.RESOURCE_CUBE, amount));
+  public resourceCube(amount = 1, options?: ItemOptions): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.RESOURCE_CUBE, amount, options));
   }
 
   public moonHabitat(options?: ItemOptions | undefined): Builder<T> {

@@ -5,7 +5,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MultiSet} from 'mnemonist';
 import {Resource} from '../../../common/Resource';
@@ -81,7 +81,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     return orOptions;
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (activePlayer.game.phase === Phase.SOLAR) {
       return;
     }

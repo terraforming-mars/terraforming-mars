@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {GagarinMobileBase} from '../../../src/server/cards/pathfinders/GagarinMobileBase';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
 import {AmazonisBoard} from '../../../src/server/boards/AmazonisBoard';
 import {UnseededRandom} from '../../../src/server/Random';
@@ -15,7 +15,7 @@ describe('GagarinMobileBase', () => {
   let player: TestPlayer;
   let player2: TestPlayer;
   let card: GagarinMobileBase;
-  let space13: ISpace;
+  let space13: Space;
 
   beforeEach(() => {
     [game, player, player2] = testGame(2);

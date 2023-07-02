@@ -8,7 +8,7 @@ import {FundedAward} from './awards/FundedAward';
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
+import {Space} from './boards/Space';
 import {LogBuilder} from './logs/LogBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
@@ -133,15 +133,15 @@ export interface IGame extends Logger {
   getPassedPlayers():Array<Color>;
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
-  addTile(player: IPlayer, space: ISpace, tile: Tile): void;
-  simpleAddTile(player: IPlayer, space: ISpace, tile: Tile): void;
-  grantSpaceBonuses(player: IPlayer, space: ISpace): void;
+  addTile(player: IPlayer, space: Space, tile: Tile): void;
+  simpleAddTile(player: IPlayer, space: Space, tile: Tile): void;
+  grantSpaceBonuses(player: IPlayer, space: Space): void;
   grantSpaceBonus(player: IPlayer, spaceBonus: SpaceBonus, count?: number): void;
-  addGreenery(player: IPlayer, space: ISpace, shouldRaiseOxygen?: boolean): void;
-  addCity(player: IPlayer, space: ISpace, cardName?: CardName | undefined): void;
+  addGreenery(player: IPlayer, space: Space, shouldRaiseOxygen?: boolean): void;
+  addCity(player: IPlayer, space: Space, cardName?: CardName | undefined): void;
   canAddOcean(): boolean;
   canRemoveOcean(): boolean;
-  addOcean(player: IPlayer, space: ISpace): void;
+  addOcean(player: IPlayer, space: Space): void;
   removeTile(spaceId: string): void;
   getPlayers(): ReadonlyArray<IPlayer>;
   // Players returned in play order starting with first player this generation.
@@ -161,7 +161,7 @@ export interface IGame extends Logger {
   log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}): void;
   someoneCanHaveProductionReduced(resource: Resource, minQuantity?: number): boolean;
   discardForCost(cardCount: 1 | 2, toPlace: TileType): number;
-  getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): ISpace;
+  getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): Space;
   expectedPurgeTimeMs(): number;
   logIllegalState(description: string, metadata: {}): void;
 }

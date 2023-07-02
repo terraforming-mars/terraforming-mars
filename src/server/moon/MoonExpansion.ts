@@ -9,7 +9,7 @@ import {CardName} from '../../common/cards/CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {Tag} from '../../common/cards/Tag';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../../common/constants';
 import {Resource} from '../../common/Resource';
 import {Phase} from '../../common/Phase';
@@ -134,7 +134,7 @@ export class MoonExpansion {
     });
   }
 
-  private static logTilePlacement(player: IPlayer, space: ISpace, tileType: TileType) {
+  private static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
     // Skip off-grid tiles
     if (space.x !== -1 && space.y !== -1) {
       const offsets = [-1, 0, 1, 1, 1, 0, -1];
@@ -260,7 +260,7 @@ export class MoonExpansion {
 
   // Use this to test whether a space has a given moon tile type rather than
   // testing tiletype directly. It takes into account Lunar Mine Urbanization.
-  public static spaceHasType(space: ISpace, type: TileType, upgradedTiles: boolean = true): boolean {
+  public static spaceHasType(space: Space, type: TileType, upgradedTiles: boolean = true): boolean {
     if (space.tile === undefined) {
       return false;
     }
@@ -286,7 +286,7 @@ export class MoonExpansion {
       surfaceOnly?: boolean,
       ownedBy? : IPlayer,
       upgradedTiles?: boolean,
-    }): Array<ISpace> {
+    }): Array<Space> {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return moonData.moon.spaces.filter(
         (space) => {

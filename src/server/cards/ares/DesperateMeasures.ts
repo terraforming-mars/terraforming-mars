@@ -5,7 +5,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {TileType} from '../../../common/TileType';
 import {AresHandler} from '../../ares/AresHandler';
 import {CardRenderer} from '../render/CardRenderer';
@@ -39,7 +39,7 @@ export class DesperateMeasures extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space: ISpace) => {
+    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space: Space) => {
       if (space.tile === undefined) {
         throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);
       }

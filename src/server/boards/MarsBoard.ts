@@ -2,33 +2,33 @@ import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {IPlayer} from '../IPlayer';
 import {Board} from './Board';
-import {ISpace} from './ISpace';
+import {Space} from './Space';
 import {PlacementType} from './PlacementType';
 import {AresHandler} from '../ares/AresHandler';
 import {CardName} from '../../common/cards/CardName';
 
 export class MarsBoard extends Board {
-  public getCitiesOffMars(player?: IPlayer): Array<ISpace> {
+  public getCitiesOffMars(player?: IPlayer): Array<Space> {
     return this.getCities(player).filter((space) => space.spaceType === SpaceType.COLONY);
   }
 
-  public getCitiesOnMars(player?: IPlayer): Array<ISpace> {
+  public getCitiesOnMars(player?: IPlayer): Array<Space> {
     return this.getCities(player).filter((space) => space.spaceType !== SpaceType.COLONY);
   }
 
-  public getCities(player?: IPlayer): Array<ISpace> {
+  public getCities(player?: IPlayer): Array<Space> {
     let cities = this.spaces.filter(Board.isCitySpace);
     if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
     return cities;
   }
 
-  public getGreeneries(player?: IPlayer): Array<ISpace> {
+  public getGreeneries(player?: IPlayer): Array<Space> {
     let greeneries = this.spaces.filter((space) => Board.isGreenerySpace(space));
     if (player !== undefined) greeneries = greeneries.filter(Board.ownedBy(player));
     return greeneries;
   }
 
-  public getAvailableSpacesForType(player: IPlayer, type: PlacementType): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForType(player: IPlayer, type: PlacementType): ReadonlyArray<Space> {
     switch (type) {
     case 'land': return this.getAvailableSpacesOnLand(player);
     case 'ocean': return this.getAvailableSpacesForOcean(player);
@@ -47,7 +47,7 @@ export class MarsBoard extends Board {
    * The default condition is to return those oceans used to count toward the global parameter, so
    * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
    */
-  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): ReadonlyArray<ISpace> {
+  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {
       if (!Board.isOceanSpace(space)) return false;
       if (space.tile?.tileType === undefined) return false;
@@ -63,7 +63,7 @@ export class MarsBoard extends Board {
     return spaces;
   }
 
-  public getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<Space> {
     const spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
     if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
@@ -73,7 +73,7 @@ export class MarsBoard extends Board {
     );
   }
 
-  public getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<Space> {
     let spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
     if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
@@ -95,7 +95,7 @@ export class MarsBoard extends Board {
     return spacesOnLand;
   }
 
-  public getAvailableSpacesForOcean(player: IPlayer): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForOcean(player: IPlayer): ReadonlyArray<Space> {
     return this.getSpaces(SpaceType.OCEAN, player)
       .filter(
         (space) => space.tile === undefined &&
@@ -103,12 +103,12 @@ export class MarsBoard extends Board {
       );
   }
 
-  public getAvailableIsolatedSpaces(player: IPlayer): ReadonlyArray<ISpace> {
+  public getAvailableIsolatedSpaces(player: IPlayer): ReadonlyArray<Space> {
     return this.getAvailableSpacesOnLand(player)
-      .filter((space: ISpace) => this.getAdjacentSpaces(space).every((space) => space.tile === undefined));
+      .filter((space: Space) => this.getAdjacentSpaces(space).every((space) => space.tile === undefined));
   }
 
-  public getAvailableVolcanicSpaces(player: IPlayer): ReadonlyArray<ISpace> {
+  public getAvailableVolcanicSpaces(player: IPlayer): ReadonlyArray<Space> {
     const volcanicSpaceIds = this.getVolcanicSpaceIds();
 
     const spaces = this.getAvailableSpacesOnLand(player);
@@ -121,7 +121,7 @@ export class MarsBoard extends Board {
   /**
    * Almost the same as getAvailableSpacesOnLand, but doesn't apply to any player.
    */
-  public getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
+  public getNonReservedLandSpaces(): ReadonlyArray<Space> {
     return this.spaces.filter((space) => {
       return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&

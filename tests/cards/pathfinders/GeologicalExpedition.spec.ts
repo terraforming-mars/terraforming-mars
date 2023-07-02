@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {addCity, cast, fakeCard, runAllActions} from '../../TestingUtils';
@@ -18,7 +18,7 @@ describe('GeologicalExpedition', function() {
   let card: GeologicalExpedition;
   let player: TestPlayer;
   let game: Game;
-  let space: ISpace;
+  let space: Space;
   let microbeCard: IProjectCard;
   let scienceCard: IProjectCard;
 

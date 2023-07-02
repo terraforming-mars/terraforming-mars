@@ -7,13 +7,13 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Units} from '../../../src/common/Units';
 
-function toSpaceIdDigit(space: ISpace) {
+function toSpaceIdDigit(space: Space) {
   return parseInt(space.id);
 }
 

@@ -8,7 +8,7 @@ import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
@@ -41,7 +41,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
   }
 
 
-  public onTilePlaced(cardOwner: IPlayer, _activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, _activePlayer: IPlayer, space: Space) {
     if (Board.isGreenerySpace(space)) {
       cardOwner.addResourceTo(this, 1);
     }

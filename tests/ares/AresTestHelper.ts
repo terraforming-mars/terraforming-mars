@@ -3,7 +3,7 @@ import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {IPlayer} from '../../src/server/IPlayer';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
-import {ISpace} from '../../src/server/boards/ISpace';
+import {Space} from '../../src/server/boards/Space';
 import {AresHandler} from '../../src/server/ares/AresHandler';
 
 export const ALL_ADJACENCY_BONUSES = [
@@ -32,13 +32,13 @@ export class AresTestHelper {
     expect(player.megaCredits).is.eq(expectedMc);
   }
 
-  public static getHazards(player: IPlayer): Array<ISpace> {
+  public static getHazards(player: IPlayer): Array<Space> {
     return player.game.board.getSpaces(SpaceType.LAND, player).filter((space) => AresHandler.hasHazardTile(space));
   }
 
-  public static byTileType(spaces: Array<ISpace>): Map<number, Array<ISpace>> {
+  public static byTileType(spaces: Array<Space>): Map<number, Array<Space>> {
     // Got a better way to initialize this? LMK.
-    const map: Map<number, Array<ISpace>> = new Map([
+    const map: Map<number, Array<Space>> = new Map([
       [TileType.GREENERY, []],
       [TileType.OCEAN, []],
       [TileType.CITY, []],

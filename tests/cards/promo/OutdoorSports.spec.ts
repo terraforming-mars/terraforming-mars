@@ -2,15 +2,15 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {OutdoorSports} from '../../../src/server/cards/promo/OutdoorSports';
 import {TestPlayer} from '../../TestPlayer';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 
 describe('OutdoorSports', function() {
   let card: OutdoorSports;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let oceanSpace: ISpace;
-  let spaceNextToOcean: ISpace;
-  let spaceNotNextToOcean: ISpace;
+  let oceanSpace: Space;
+  let spaceNextToOcean: Space;
+  let spaceNotNextToOcean: Space;
 
   beforeEach(function() {
     card = new OutdoorSports();

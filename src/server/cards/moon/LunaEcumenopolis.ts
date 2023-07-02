@@ -9,7 +9,7 @@ import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IMoonData} from '../../moon/IMoonData';
 
 export class LunaEcumenopolis extends Card {
@@ -70,7 +70,7 @@ export class LunaEcumenopolis extends Card {
     let firstSpaceId = '';
 
     // This function returns true when this space is next to two colonies. Don't try to understand firstSpaceId yet.
-    const nextToTwoColonies = function(space: ISpace): boolean {
+    const nextToTwoColonies = function(space: Space): boolean {
       const adjacentSpaces = moonData.moon.getAdjacentSpaces(space).filter((adjacentSpace) => {
         return MoonExpansion.spaceHasType(adjacentSpace, TileType.MOON_HABITAT) || adjacentSpace.id === firstSpaceId;
       });

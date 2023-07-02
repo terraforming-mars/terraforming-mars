@@ -1,6 +1,6 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogHelper} from '../LogHelper';
 
@@ -21,7 +21,7 @@ export class RemoveOceanTile extends DeferredAction {
     return new SelectSpace(
       this.title,
       removableOceanTiles,
-      (space: ISpace) => {
+      (space: Space) => {
         this.player.game.removeTile(space.id);
         LogHelper.logBoardTileAction(this.player, space, 'ocean tile', 'removed');
         return undefined;

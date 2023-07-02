@@ -6,7 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -67,7 +67,7 @@ class GreensPolicy01 implements Policy {
   readonly id = 'gp01' as const;
   readonly description = 'When you place a greenery tile, gain 4 M€';
 
-  onTilePlaced(player: IPlayer, space: ISpace) {
+  onTilePlaced(player: IPlayer, space: Space) {
     if (Board.isGreenerySpace(space) && player.game.phase === Phase.ACTION) {
       player.stock.add(Resource.MEGACREDITS, 4);
     }

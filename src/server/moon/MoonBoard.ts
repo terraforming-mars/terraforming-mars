@@ -1,5 +1,5 @@
 import {Board} from '../boards/Board';
-import {ISpace, newSpace} from '../boards/ISpace';
+import {Space, newSpace} from '../boards/Space';
 import {SerializedBoard} from '../boards/SerializedBoard';
 import {IPlayer} from '../IPlayer';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -7,18 +7,18 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {SpaceId} from '../../common/Types';
 
-function mineSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): ISpace {
+function mineSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
   return newSpace(id, SpaceType.LUNAR_MINE, x, y, bonus);
 }
-function surfaceSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): ISpace {
+function surfaceSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
   return newSpace(id, SpaceType.LAND, x, y, bonus);
 }
-function colonySpace(id: SpaceId): ISpace {
+function colonySpace(id: SpaceId): Space {
   return newSpace(id, SpaceType.COLONY, -1, -1, []);
 }
 
 export class MoonBoard extends Board {
-  public getAvailableSpacesForMine(player: IPlayer): ReadonlyArray<ISpace> {
+  public getAvailableSpacesForMine(player: IPlayer): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {
       const val = space.tile === undefined &&
         space.spaceType === SpaceType.LUNAR_MINE &&
@@ -59,7 +59,7 @@ export class MoonBoard extends Board {
 class Builder {
   y: number = -1;
   x: number = 0;
-  spaces: Array<ISpace> = [];
+  spaces: Array<Space> = [];
   private idx: number = 0;
 
   public row(startX: number): Row {

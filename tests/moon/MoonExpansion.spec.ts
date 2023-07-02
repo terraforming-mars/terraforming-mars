@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ISpace} from '../../src/server/boards/ISpace';
+import {Space} from '../../src/server/boards/Space';
 import {SpecialDesign} from '../../src/server/cards/base/SpecialDesign';
 import {EcologicalSurvey} from '../../src/server/cards/ares/EcologicalSurvey';
 import {GeologicalSurvey} from '../../src/server/cards/ares/GeologicalSurvey';
@@ -30,7 +30,7 @@ describe('MoonExpansion', () => {
 
   it('addTile', () => {
     MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION});
-    const space: ISpace = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
+    const space: Space = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
     expect(space.player).eq(player);
     expect(space.tile).deep.eq({tileType: TileType.LUNA_TRADE_STATION});
   });
@@ -45,7 +45,7 @@ describe('MoonExpansion', () => {
   });
 
   it('addTile fails occupied space', () => {
-    const space: ISpace = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
+    const space: Space = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
     space.tile = {tileType: TileType.MOON_MINE};
     expect(() => MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION})).to.throw(/occupied/);
   });

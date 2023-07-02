@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -47,7 +47,7 @@ export class NoctisCity extends Card implements IProjectCard {
       player.game.addCity(player, space);
       return undefined;
     }
-    return new SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+    return new SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space: Space) => {
       player.game.addCity(player, space);
       return undefined;
     });

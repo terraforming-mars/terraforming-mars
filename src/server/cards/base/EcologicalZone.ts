@@ -6,7 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
@@ -49,7 +49,7 @@ export class EcologicalZone extends Card implements IProjectCard {
   }
 
 
-  private getAvailableSpaces(player: IPlayer): Array<ISpace> {
+  private getAvailableSpaces(player: IPlayer): Array<Space> {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter(Board.isGreenerySpace).length > 0);
   }
@@ -69,7 +69,7 @@ export class EcologicalZone extends Card implements IProjectCard {
     return new SelectSpace(
       'Select space next to greenery for special tile',
       this.getAvailableSpaces(player),
-      (requestedSpace: ISpace) => {
+      (requestedSpace: Space) => {
         player.game.addTile(player, requestedSpace, {
           tileType: TileType.ECOLOGICAL_ZONE,
         });

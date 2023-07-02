@@ -2,7 +2,7 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {IPlayer} from '../IPlayer';
-import {ISpace} from './ISpace';
+import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
@@ -51,15 +51,15 @@ export class TharsisBoard extends MarsBoard {
     return new TharsisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public override getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
+  public override getNonReservedLandSpaces(): ReadonlyArray<Space> {
     return super.getNonReservedLandSpaces().filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
 
-  public override getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<ISpace> {
+  public override getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<Space> {
     return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
 
-  public override canPlaceTile(space: ISpace): boolean {
+  public override canPlaceTile(space: Space): boolean {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
   }
 

@@ -15,7 +15,7 @@ import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awa
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
+import {Space} from './boards/Space';
 import {Tile} from './Tile';
 import {LogBuilder} from './logs/LogBuilder';
 import {LogHelper} from './LogHelper';
@@ -1157,7 +1157,7 @@ export class Game implements IGame, Logger {
   // a tile on The Moon.
   public addTile(
     player: IPlayer,
-    space: ISpace,
+    space: Space,
     tile: Tile): void {
     // Part 1, basic validation checks.
 
@@ -1243,7 +1243,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  public simpleAddTile(player: IPlayer, space: ISpace, tile: Tile) {
+  public simpleAddTile(player: IPlayer, space: Space, tile: Tile) {
     space.tile = tile;
     space.player = player;
     if (tile.tileType === TileType.OCEAN || tile.tileType === TileType.MARTIAN_NATURE_WONDERS) {
@@ -1252,7 +1252,7 @@ export class Game implements IGame, Logger {
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
-  public grantSpaceBonuses(player: IPlayer, space: ISpace) {
+  public grantSpaceBonuses(player: IPlayer, space: Space) {
     const bonuses = MultiSet.from(space.bonus);
     bonuses.forEachMultiplicity((count: number, bonus: SpaceBonus) => {
       this.grantSpaceBonus(player, bonus, count);
@@ -1315,7 +1315,7 @@ export class Game implements IGame, Logger {
   }
 
   public addGreenery(
-    player: IPlayer, space: ISpace,
+    player: IPlayer, space: Space,
     shouldRaiseOxygen: boolean = true): undefined {
     this.addTile(player, space, {
       tileType: TileType.GREENERY,
@@ -1328,7 +1328,7 @@ export class Game implements IGame, Logger {
   }
 
   public addCity(
-    player: IPlayer, space: ISpace,
+    player: IPlayer, space: Space,
     cardName: CardName | undefined = undefined): void {
     this.addTile(player, space, {
       tileType: TileType.CITY,
@@ -1345,7 +1345,7 @@ export class Game implements IGame, Logger {
     return count > 0 && count < constants.MAX_OCEAN_TILES;
   }
 
-  public addOcean(player: IPlayer, space: ISpace): void {
+  public addOcean(player: IPlayer, space: Space): void {
     if (this.canAddOcean() === false) return;
 
     this.addTile(player, space, {

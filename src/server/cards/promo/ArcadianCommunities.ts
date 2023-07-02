@@ -2,7 +2,7 @@ import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -42,7 +42,7 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     return new SelectSpace(
       'Select space for claim',
       player.game.board.getAvailableSpacesOnLand(player),
-      (space: ISpace) => {
+      (space: Space) => {
         space.player = player;
 
         player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
@@ -52,7 +52,7 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     );
   }
 
-  public getAvailableSpacesForMarker(player: IPlayer): Array<ISpace> {
+  public getAvailableSpacesForMarker(player: IPlayer): Array<Space> {
     const board = player.game.board;
     const candidateSpaces = board.getAvailableSpacesOnLand(player);
     const spaces = candidateSpaces.filter((space) => {
@@ -73,7 +73,7 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     return new SelectSpace(
       'Select space for claim',
       this.getAvailableSpacesForMarker(player),
-      (space: ISpace) => {
+      (space: Space) => {
         space.player = player;
         return undefined;
       },

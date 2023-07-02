@@ -5,7 +5,7 @@ import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {SpaceId} from '../../common/Types';
 import {IPlayer} from '../IPlayer';
 
-export type ISpace = {
+export type Space = {
     id: SpaceId;
     spaceType: SpaceType;
     tile?: Tile;
@@ -21,6 +21,6 @@ export function newSpace(
   spaceType: SpaceType,
   x: number,
   y: number,
-  bonus: Array<SpaceBonus>): ISpace {
+  bonus: Array<SpaceBonus>): Space {
   return {id, spaceType, x, y, bonus};
 }

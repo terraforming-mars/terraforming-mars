@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {cast, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../../src/server/turmoil/parties/Greens';
@@ -55,7 +55,7 @@ describe('Greens', function() {
   it('Ruling policy 2: When you place a tile, gain 1 plant', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[1].id);
 
-    const emptySpace: ISpace = game.board.spaces.find((space) => space.spaceType === SpaceType.LAND && space.bonus.length === 0) as ISpace;
+    const emptySpace: Space = game.board.spaces.find((space) => space.spaceType === SpaceType.LAND && space.bonus.length === 0)!;
     game.addTile(player, emptySpace, {tileType: TileType.NATURAL_PRESERVE});
     expect(player.plants).to.eq(1);
   });

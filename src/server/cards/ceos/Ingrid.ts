@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Phase} from '../../../common/Phase';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -34,7 +34,7 @@ export class Ingrid extends CeoCard {
     return undefined;
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     if (this.opgActionIsActive === false) return;
     // This filters for tiles only on mars (not moon), and includes Land+Oceans+'Coves'(landoceans)
     if (boardType !== BoardType.MARS || space.spaceType === SpaceType.COLONY) return;

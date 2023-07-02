@@ -1,11 +1,11 @@
 import {IGame} from '../IGame';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Board} from '../boards/Board';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 
 // Reward portion of Crashlanding. It's split out to prevent recursive source loading.
 export class CrashlandingBonus {
-  public static onTilePlacedAdjacentToCrashlanding(game: IGame, crashlandingSpace: ISpace, newTileSpace: ISpace): Array<SpaceBonus> {
+  public static onTilePlacedAdjacentToCrashlanding(game: IGame, crashlandingSpace: Space, newTileSpace: Space): Array<SpaceBonus> {
     const position = this.getAdjacentPosition(game.board, crashlandingSpace, newTileSpace);
     if (position === -1) return [];
     const mod = crashlandingSpace.tile?.rotated ? 1 : 0;
@@ -21,7 +21,7 @@ export class CrashlandingBonus {
    *
    * If b is not next to a, return -1.
    */
-  static getAdjacentPosition(board: Board, a: ISpace, b: ISpace): number {
+  static getAdjacentPosition(board: Board, a: Space, b: Space): number {
     const spaces = board.getAdjacentSpacesClockwise(a);
     return spaces.findIndex((space) => space?.id === b.id);
   }

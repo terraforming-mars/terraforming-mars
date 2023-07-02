@@ -5,7 +5,7 @@ import {SpaceName} from '../SpaceName';
 import {IPlayer} from '../IPlayer';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
-import {ISpace} from './ISpace';
+import {Space} from './Space';
 import {GameOptions} from '../GameOptions';
 import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
@@ -55,7 +55,7 @@ export class AmazonisBoard extends MarsBoard {
     return new AmazonisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public override getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
+  public override getNonReservedLandSpaces(): ReadonlyArray<Space> {
     return super.getNonReservedLandSpaces().filter((space) => space.bonus.includes(SpaceBonus.RESTRICTED) === false);
   }
 

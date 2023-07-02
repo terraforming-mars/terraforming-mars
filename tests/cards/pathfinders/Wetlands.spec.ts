@@ -7,12 +7,12 @@ import {addCity, addGreenery, addOcean, cast, fakeCard, runAllActions, setOxygen
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
 import {CardName} from '../../../src/common/cards/CardName';
 
-const toSpaceId = (space: ISpace): string => space.id;
+const toSpaceId = (space: Space): string => space.id;
 
 describe('Wetlands', function() {
   let card: Wetlands;

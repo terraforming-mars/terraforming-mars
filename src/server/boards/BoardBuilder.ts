@@ -1,11 +1,11 @@
-import {ISpace, newSpace} from './ISpace';
+import {Space, newSpace} from './Space';
 import {SpaceId} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../Random';
 
-function colonySpace(id: SpaceId): ISpace {
+function colonySpace(id: SpaceId): Space {
   return newSpace(id, SpaceType.COLONY, -1, -1, []);
 }
 
@@ -19,7 +19,7 @@ export class BoardBuilder {
 
   private spaceTypes: Array<SpaceType> = [];
   private bonuses: Array<Array<SpaceBonus>> = [];
-  private spaces: Array<ISpace> = [];
+  private spaces: Array<Space> = [];
   private unshufflableSpaces: Array<number> = [];
 
   constructor(private includeVenus: boolean, private includePathfinders: boolean) {
@@ -51,7 +51,7 @@ export class BoardBuilder {
   }
 
 
-  build(): Array<ISpace> {
+  build(): Array<Space> {
     const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
     const idOffset = this.spaces.length + 1;
     let idx = 0;

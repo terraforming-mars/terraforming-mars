@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TileType} from '../../../src/common/TileType';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {expect} from 'chai';
 import {Phase} from '../../../src/common/Phase';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
@@ -20,9 +20,9 @@ describe('Philares', () => {
   let philaresPlayer : TestPlayer;
   let otherPlayer: TestPlayer;
   let game: Game;
-  let space: ISpace;
-  let adjacentSpace: ISpace;
-  let adjacentSpace2: ISpace;
+  let space: Space;
+  let adjacentSpace: Space;
+  let adjacentSpace2: Space;
 
   beforeEach(() => {
     card = new Philares();

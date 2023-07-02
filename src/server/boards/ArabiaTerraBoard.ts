@@ -6,7 +6,7 @@ import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
-import {ISpace} from './ISpace';
+import {Space} from './Space';
 import {SerializedBoard} from './SerializedBoard';
 import {MarsBoard} from './MarsBoard';
 
@@ -59,7 +59,7 @@ export class ArabiaTerraBoard extends MarsBoard {
     ];
   }
 
-  public override getSpaces(spaceType: SpaceType): Array<ISpace> {
+  public override getSpaces(spaceType: SpaceType): Array<Space> {
     switch (spaceType) {
     case SpaceType.LAND:
     case SpaceType.OCEAN:

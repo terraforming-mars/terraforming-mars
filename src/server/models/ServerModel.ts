@@ -9,7 +9,7 @@ import {ICard} from '../cards/ICard';
 import {isIProjectCard} from '../cards/IProjectCard';
 import {isICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {Board} from '../boards/Board';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from '../../common/models/PlayerInputModel';
@@ -513,7 +513,7 @@ export class Server {
 
   // Oceans can't be owned so they shouldn't have a color associated with them
   // Land claim can have a color on a space without a tile
-  private static getColor(space: ISpace): Color | undefined {
+  private static getColor(space: Space): Color | undefined {
     if (
       (space.tile === undefined || space.tile.tileType !== TileType.OCEAN) &&
     space.player !== undefined

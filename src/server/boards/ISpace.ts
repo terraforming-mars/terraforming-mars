@@ -15,3 +15,12 @@ export type ISpace = {
     x: number;
     y: number;
 }
+
+export function newSpace(
+  id: SpaceId,
+  spaceType: SpaceType,
+  x: number,
+  y: number,
+  bonus: Array<SpaceBonus>): ISpace {
+  return {id, spaceType, x, y, bonus};
+}

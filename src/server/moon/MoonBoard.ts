@@ -1,5 +1,5 @@
 import {Board} from '../boards/Board';
-import {ISpace} from '../boards/ISpace';
+import {ISpace, newSpace} from '../boards/ISpace';
 import {SerializedBoard} from '../boards/SerializedBoard';
 import {IPlayer} from '../IPlayer';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -7,23 +7,14 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {SpaceId} from '../../common/Types';
 
-class Space implements ISpace {
-  constructor(
-    public id: SpaceId,
-    public spaceType: SpaceType,
-    public x: number,
-    public y: number,
-    public bonus: Array<SpaceBonus>) { }
-
-  public static mine(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>) {
-    return new Space(id, SpaceType.LUNAR_MINE, x, y, bonus);
-  }
-  public static surface(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>) {
-    return new Space(id, SpaceType.LAND, x, y, bonus);
-  }
-  public static colony(id: SpaceId) {
-    return new Space(id, SpaceType.COLONY, -1, -1, []);
-  }
+function mineSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): ISpace {
+  return newSpace(id, SpaceType.LUNAR_MINE, x, y, bonus);
+}
+function surfaceSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): ISpace {
+  return newSpace(id, SpaceType.LAND, x, y, bonus);
+}
+function colonySpace(id: SpaceId): ISpace {
+  return newSpace(id, SpaceType.COLONY, -1, -1, []);
 }
 
 export class MoonBoard extends Board {
@@ -77,7 +68,7 @@ class Builder {
     return new Row(this);
   }
   public colony() {
-    this.spaces.push(Space.colony(this.nextId()));
+    this.spaces.push(colonySpace(this.nextId()));
   }
   public nextId(): SpaceId {
     this.idx++;
@@ -92,13 +83,13 @@ class Row {
   }
 
   land(...bonuses: SpaceBonus[]): Row {
-    const space = Space.surface(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+    const space = surfaceSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
     this.builder.spaces.push(space);
     return this;
   }
 
   mine(...bonuses: SpaceBonus[]): Row {
-    const space = Space.mine(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+    const space = mineSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
     this.builder.spaces.push(space);
     return this;
   }

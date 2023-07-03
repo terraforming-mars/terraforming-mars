@@ -1,7 +1,6 @@
 import * as http from 'http';
 import {IGameLoader} from '../database/IGameLoader';
 import {Route} from './Route';
-import {AddressInfo} from 'net';
 import {IPTracker} from '../server/IPTracker';
 
 export interface IHandler {
@@ -10,7 +9,7 @@ export interface IHandler {
 
 export type Context = {
   url: URL,
-  ip: AddressInfo | string,
+  ip: string,
   route: Route,
   gameLoader: IGameLoader,
   ipTracker: IPTracker,

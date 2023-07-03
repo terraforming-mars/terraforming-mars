@@ -1,11 +1,8 @@
 import {ParticipantId} from '../../common/Types';
-import {AddressInfo} from 'net';
-
-type Key = AddressInfo | string;
 
 export interface IPTracker {
-  addParticipant(participantId: ParticipantId, ip: Key): void;
-  add(ip: Key): void;
+  addParticipant(participantId: ParticipantId, ip: string): void;
+  add(ip: string): void;
   toJSON(): any;
 }
 
@@ -25,22 +22,13 @@ class IPTrackerImpl implements IPTracker {
     return {count: 0, participantIds: new Set()};
   }
 
-  private normalize(k: Key): string {
-    if (typeof k === 'string') {
-      return k;
-    }
-    return `address: ${k.address}, family: ${k.family}, port: ${k.port}`;
-  }
-
-  public add(ip: Key): void {
-    ip = this.normalize(ip);
+  public add(ip: string): void {
     const value = this.get(ip);
     value.count++;
     this.map.set(ip, value);
   }
 
-  public addParticipant(participantId: ParticipantId, ip: Key): void {
-    ip = this.normalize(ip);
+  public addParticipant(participantId: ParticipantId, ip: string): void {
     const value = this.get(ip);
     value.participantIds.add(participantId);
     this.map.set(ip, value);

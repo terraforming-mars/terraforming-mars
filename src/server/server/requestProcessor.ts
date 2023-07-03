@@ -26,6 +26,7 @@ import {Reset} from '../routes/Reset';
 import {newIpBlocklist} from './IPBlocklist';
 import {ApiIPs} from '../routes/ApiIPs';
 import {newIpTracker} from './IPTracker';
+import {getHerokuIpAddress} from './heroku';
 
 const ips = (process.env.IP_BLOCKLIST ?? '').trim().split(' ');
 const ipBlocklist = newIpBlocklist(ips);
@@ -66,11 +67,23 @@ const handlers: Map<string, IHandler> = new Map(
   ],
 );
 
+function getIPAddress(req: http.IncomingMessage): string {
+  const herokuIpAddress = getHerokuIpAddress(req);
+  if (herokuIpAddress !== undefined) {
+    return herokuIpAddress;
+  }
+  const socketIpAddress = req.socket.address();
+  if (typeof socketIpAddress === 'object') {
+    return `${socketIpAddress.family}/${socketIpAddress.address}/${socketIpAddress.port}`;
+  }
+  return socketIpAddress;
+}
+
 export function processRequest(
   req: http.IncomingMessage,
   res: http.ServerResponse,
   route: Route): void {
-  const ipAddress = req.socket.address();
+  const ipAddress = getIPAddress(req);
   ipTracker.add(ipAddress);
   if (ipBlocklist.isBlocked(ipAddress)) {
     route.notFound(req, res);
@@ -91,7 +104,7 @@ export function processRequest(
     url: url,
     route: route,
     gameLoader: GameLoader.getInstance(),
-    ip: req.socket.address(),
+    ip: getIPAddress(req),
     ipTracker: ipTracker,
     ids: {
       serverId,

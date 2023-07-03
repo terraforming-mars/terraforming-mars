@@ -37,7 +37,7 @@ describe('ApiIPs', function() {
     ipTracker.addParticipant(playerId, '12.15.0.4');
     ipTracker.addParticipant(spectatorId, '12.15.0.5');
     ipTracker.addParticipant(playerId, '12.15.0.5');
-    ipTracker.add({address: '12.23.34.45', family: 'IPV4', port: 80});
+    ipTracker.add('12.23.34.45:80');
     await ApiIPs.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
     const expected = {
       '12.15.0.4': {
@@ -53,7 +53,7 @@ describe('ApiIPs', function() {
           'p12345',
         ],
       },
-      'address: 12.23.34.45, family: IPV4, port: 80': {
+      '12.23.34.45:80': {
         'count': 1,
         'ids': [],
       },

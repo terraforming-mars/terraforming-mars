@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../src/server/Player';
 import {IGame} from '../src/server/IGame';
 import * as constants from '../src/common/constants';
-import {ISpace} from '../src/server/boards/ISpace';
+import {Space} from '../src/server/boards/Space';
 import {Phase} from '../src/common/Phase';
 import {Turmoil} from '../src/server/turmoil/Turmoil';
 import {Message} from '../src/common/logs/Message';
@@ -21,7 +21,7 @@ import {TestPlayer} from './TestPlayer';
 import {PartyName} from '../src/common/turmoil/PartyName';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
-export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
+export function maxOutOceans(player: Player, toValue: number = 0): Array<Space> {
   const oceans = [];
   if (toValue < 1) {
     toValue = constants.MAX_OCEAN_TILES;
@@ -45,7 +45,7 @@ export function setVenusScaleLevel(game: IGame, venusScaleLevel: number) {
   (game as any).venusScaleLevel = venusScaleLevel;
 }
 
-export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
+export function addGreenery(player: Player, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForGreenery(player)[0];
@@ -53,7 +53,7 @@ export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
   return space;
 }
 
-export function addOcean(player: Player, spaceId?: SpaceId): ISpace {
+export function addOcean(player: Player, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForOcean(player)[0];
@@ -61,7 +61,7 @@ export function addOcean(player: Player, spaceId?: SpaceId): ISpace {
   return space;
 }
 
-export function addCity(player: Player, spaceId?: SpaceId): ISpace {
+export function addCity(player: Player, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForCity(player)[0];

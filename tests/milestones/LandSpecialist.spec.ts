@@ -4,7 +4,7 @@ import {LandSpecialist} from '../../src/server/milestones/LandSpecialist';
 import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {Board} from '../../src/server/boards/Board';
-import {ISpace} from '../../src/server/boards/ISpace';
+import {Space} from '../../src/server/boards/Space';
 import {TileType} from '../../src/common/TileType';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 
@@ -14,7 +14,7 @@ describe('LandSpecialist', function() {
   let player2: TestPlayer;
   let game: Game;
   let board: Board;
-  let spaces: ReadonlyArray<ISpace>;
+  let spaces: ReadonlyArray<Space>;
 
   beforeEach(function() {
     milestone = new LandSpecialist();

@@ -2,7 +2,7 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {IPlayer} from '../IPlayer';
-import {ISpace} from './ISpace';
+import {Space} from './Space';
 import {HELLAS_BONUS_OCEAN_COST} from '../../common/constants';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
@@ -53,23 +53,23 @@ export class HellasBoard extends MarsBoard {
     return new HellasBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  private filterHellas(player: IPlayer, spaces: ReadonlyArray<ISpace>) {
+  private filterHellas(player: IPlayer, spaces: ReadonlyArray<Space>) {
     return player.canAfford(HELLAS_BONUS_OCEAN_COST, {tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
-  public override getSpaces(spaceType: SpaceType, player: IPlayer): ReadonlyArray<ISpace> {
+  public override getSpaces(spaceType: SpaceType, player: IPlayer): ReadonlyArray<Space> {
     return this.filterHellas(player, super.getSpaces(spaceType, player));
   }
 
-  public override getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<ISpace> {
+  public override getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<Space> {
     return this.filterHellas(player, super.getAvailableSpacesForCity(player));
   }
 
-  public override getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<ISpace> {
+  public override getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<Space> {
     return this.filterHellas(player, super.getAvailableSpacesOnLand(player));
   }
 
-  public override getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<ISpace> {
+  public override getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<Space> {
     return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
   }
 }

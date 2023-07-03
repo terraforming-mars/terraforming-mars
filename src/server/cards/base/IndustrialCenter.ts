@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
@@ -42,7 +42,7 @@ export class IndustrialCenter extends ActionCard implements IProjectCard {
     });
   }
 
-  private getAvailableSpaces(player: IPlayer): Array<ISpace> {
+  private getAvailableSpaces(player: IPlayer): Array<Space> {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)));
   }
@@ -50,7 +50,7 @@ export class IndustrialCenter extends ActionCard implements IProjectCard {
     return this.getAvailableSpaces(player).length > 0;
   }
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player), (space: ISpace) => {
+    return new SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player), (space: Space) => {
       player.game.addTile(player, space, {tileType: TileType.INDUSTRIAL_CENTER});
       space.adjacency = this.adjacencyBonus;
       return undefined;

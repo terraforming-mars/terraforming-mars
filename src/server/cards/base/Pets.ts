@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -44,7 +44,7 @@ export class Pets extends Card implements IProjectCard {
   }
 
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
         new AddResourcesToCard(cardOwner, CardResource.ANIMAL, {filter: (c) => c.name === this.name}),

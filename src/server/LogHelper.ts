@@ -1,7 +1,7 @@
 import {CardName} from '../common/cards/CardName';
 import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
-import {ISpace} from './boards/ISpace';
+import {Space} from './boards/Space';
 import {TileType} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
@@ -29,11 +29,11 @@ export class LogHelper {
       b.player(player).number(qty).string(resourceType).card(card).string(effect));
   }
 
-  static logTilePlacement(player: IPlayer, space: ISpace, tileType: TileType) {
+  static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
     this.logBoardTileAction(player, space, TileType.toString(tileType) + ' tile');
   }
 
-  static logBoardTileAction(player: IPlayer, space: ISpace, description: string, action: string = 'placed') {
+  static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {
     // Skip off-grid tiles
     if (space.x === -1 && space.y === -1) return;
     // Skip solo play random tiles

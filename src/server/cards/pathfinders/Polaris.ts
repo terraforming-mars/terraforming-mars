@@ -7,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {Size} from '../../../common/cards/render/Size';
@@ -44,7 +44,7 @@ export class Polaris extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isUncoveredOceanSpace(space)) {
       // TODO(kberg): Find a way to add Card to addProduction log options.
       cardOwner.production.add(Resource.MEGACREDITS, 1);

@@ -6,14 +6,14 @@ import {TileType} from '../../src/common/TileType';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {ISpace} from '../../src/server/boards/ISpace';
+import {Space} from '../../src/server/boards/Space';
 
 let card: SpaceRaceToMars;
 let game: Game;
 let player: TestPlayer;
 let player2: TestPlayer;
 let turmoil: Turmoil;
-let spaces: ReadonlyArray<ISpace>;
+let spaces: ReadonlyArray<Space>;
 
 // TODO(kberg): Include the Moon.
 describe('SpaceRaceToMars', function() {

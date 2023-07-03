@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
@@ -48,7 +48,7 @@ export class SolarFarm extends Card implements IProjectCard {
     return new SelectSpace(
       'Select space for Solar Farm tile',
       player.game.board.getAvailableSpacesOnLand(player),
-      (space: ISpace) => {
+      (space: Space) => {
         player.game.addTile(player, space, {
           tileType: TileType.SOLAR_FARM,
           card: this.name,

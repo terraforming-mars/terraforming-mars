@@ -1,6 +1,6 @@
 import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from './IProjectCard';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
@@ -47,7 +47,7 @@ export interface ICard {
     getVictoryPoints: (player: IPlayer) => number;
     onCardPlayed?: (player: IPlayer, card: IProjectCard) => PlayerInput | undefined | void;
     onStandardProject?: (player: IPlayer, project: ICard) => void;
-    onTilePlaced?: (cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) => void;
+    onTilePlaced?: (cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) => void;
     onDiscard?: (player: IPlayer) => void;
     /**
      * Called when anybody gains TR

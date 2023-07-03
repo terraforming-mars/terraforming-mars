@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
-import {ISpace} from '../../src/server/boards/ISpace';
+import {Space} from '../../src/server/boards/Space';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
 import {Board} from '../../src/server/boards/Board';
@@ -187,7 +187,7 @@ describe('Board', function() {
     }).to.throw('no spaces available');
   });
 
-  function expectSpace(space: ISpace, id: string, x: number, y: number) {
+  function expectSpace(space: Space, id: string, x: number, y: number) {
     if (id !== space.id || x !== space.x || y !== space.y) {
       expect.fail(`space ${space.id} at (${space.x}, ${space.y}) does not match [${id}, ${x}, ${y}]`);
     }
@@ -278,7 +278,7 @@ describe('Board', function() {
   });
 
   class TestBoard extends Board {
-    public constructor(spaces: Array<ISpace>) {
+    public constructor(spaces: Array<Space>) {
       super(spaces);
     }
   }

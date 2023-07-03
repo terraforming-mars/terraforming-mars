@@ -1,4 +1,4 @@
-import {ISpace} from './ISpace';
+import {Space} from './Space';
 import {IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
@@ -16,19 +16,19 @@ import {AresHandler} from '../ares/AresHandler';
 export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
-  private map: Map<SpaceId, ISpace> = new Map();
+  private map: Map<SpaceId, Space> = new Map();
 
   // stores adjacent spaces in clockwise order starting from the top left
-  private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<ISpace>>();
+  private readonly adjacentSpaces = new Map<SpaceId, ReadonlyArray<Space>>();
 
-  protected constructor(public spaces: ReadonlyArray<ISpace>) {
+  protected constructor(public spaces: ReadonlyArray<Space>) {
     this.maxX = Math.max(...spaces.map((s) => s.x));
     this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
       const adjacentSpaces = this.computeAdjacentSpaces(space);
       const filtered = adjacentSpaces.filter((space) => space !== undefined);
-      // "as ReadonlyArray<ISpace> is OK because the line above filters out the undefined values."
-      this.adjacentSpaces.set(space.id, filtered as ReadonlyArray<ISpace>);
+      // "as ReadonlyArray<Space> is OK because the line above filters out the undefined values."
+      this.adjacentSpaces.set(space.id, filtered as ReadonlyArray<Space>);
       this.map.set(space.id, space);
     });
   }
@@ -42,7 +42,7 @@ export abstract class Board {
   }
 
   /* Returns the space given a Space ID. */
-  public getSpace(id: SpaceId): ISpace {
+  public getSpace(id: SpaceId): Space {
     const space = this.map.get(id);
     if (space === undefined) {
       throw new Error(`Can't find space with id ${id}`);
@@ -50,7 +50,7 @@ export abstract class Board {
     return space;
   }
 
-  protected computeAdjacentSpaces(space: ISpace): ReadonlyArray<ISpace | undefined> {
+  protected computeAdjacentSpaces(space: Space): ReadonlyArray<Space | undefined> {
     // Expects an odd number of rows. If a funny shape appears, it can be addressed.
     const middleRow = this.maxY / 2;
     if (space.spaceType !== SpaceType.COLONY) {
@@ -98,7 +98,7 @@ export abstract class Board {
   }
 
   // Returns adjacent spaces in clockwise order starting from the top left.
-  public getAdjacentSpaces(space: ISpace): ReadonlyArray<ISpace> {
+  public getAdjacentSpaces(space: Space): ReadonlyArray<Space> {
     const spaces = this.adjacentSpaces.get(space.id);
     if (spaces === undefined) {
       throw new Error(`Unexpected space ID ${space.id}`);
@@ -114,25 +114,25 @@ export abstract class Board {
   //
   // If there is no space in that spot, the index is undefined.
   // If the space is invalid or is a colony, this returns an unreliable value.
-  public getAdjacentSpacesClockwise(space: ISpace): ReadonlyArray<ISpace | undefined> {
+  public getAdjacentSpacesClockwise(space: Space): ReadonlyArray<Space | undefined> {
     return this.computeAdjacentSpaces(space);
   }
 
-  public getSpaceByTileCard(cardName: CardName): ISpace | undefined {
+  public getSpaceByTileCard(cardName: CardName): Space | undefined {
     return this.spaces.find(
       (space) => space.tile !== undefined && space.tile.card === cardName,
     );
   }
 
-  public getSpaces(spaceType: SpaceType, _player: IPlayer): ReadonlyArray<ISpace> {
+  public getSpaces(spaceType: SpaceType, _player: IPlayer): ReadonlyArray<Space> {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
-  public getEmptySpaces(): ReadonlyArray<ISpace> {
+  public getEmptySpaces(): ReadonlyArray<Space> {
     return this.spaces.filter((space) => space.tile === undefined);
   }
 
-  public getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<ISpace> {
+  public getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<Space> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
       const hasPlayerMarker = space.player !== undefined;
       // A space is available if it doesn't have a player marker on it or it belongs to |player|
@@ -159,7 +159,7 @@ export abstract class Board {
     distance: number,
     direction: -1 | 1,
     player: IPlayer | undefined = undefined,
-    predicate: (value: ISpace) => boolean = (_x) => true): ISpace {
+    predicate: (value: Space) => boolean = (_x) => true): Space {
     const spaces = this.spaces.filter((space) => {
       return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
     }).filter(predicate);
@@ -176,34 +176,34 @@ export abstract class Board {
     return spaces[idx];
   }
 
-  public canPlaceTile(space: ISpace): boolean {
+  public canPlaceTile(space: Space): boolean {
     return space.tile === undefined && space.spaceType === SpaceType.LAND && space.bonus.includes(SpaceBonus.RESTRICTED) === false;
   }
 
-  public static isCitySpace(space: ISpace): boolean {
+  public static isCitySpace(space: Space): boolean {
     return space.tile !== undefined && CITY_TILES.has(space.tile.tileType);
   }
 
   // Returns true when the space has an ocean tile or any derivative tiles (ocean city, wetlands)
-  public static isOceanSpace(space: ISpace): boolean {
+  public static isOceanSpace(space: Space): boolean {
     return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
   }
 
   // Returns true when the space is an ocean tile that is not used to cover another ocean.
   // Used for benefits associated with "when a player places an ocean tile"
-  public static isUncoveredOceanSpace(space: ISpace): boolean {
+  public static isUncoveredOceanSpace(space: Space): boolean {
     return space.tile !== undefined && UNCOVERED_OCEAN_TILES.has(space.tile.tileType);
   }
 
-  public static isGreenerySpace(space: ISpace): boolean {
+  public static isGreenerySpace(space: Space): boolean {
     return space.tile !== undefined && GREENERY_TILES.has(space.tile.tileType);
   }
 
-  public static ownedBy(player: IPlayer): (space: ISpace) => boolean {
-    return (space: ISpace) => space.player?.id === player.id;
+  public static ownedBy(player: IPlayer): (space: Space) => boolean {
+    return (space: Space) => space.player?.id === player.id;
   }
 
-  public static spaceOwnedBy(space: ISpace, player: IPlayer): boolean {
+  public static spaceOwnedBy(space: Space, player: IPlayer): boolean {
     return Board.ownedBy(player)(space);
   }
 
@@ -224,10 +224,10 @@ export abstract class Board {
     };
   }
 
-  public static deserializeSpace(serialized: SerializedSpace, players: ReadonlyArray<IPlayer>): ISpace {
+  public static deserializeSpace(serialized: SerializedSpace, players: ReadonlyArray<IPlayer>): Space {
     const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
-    const space: ISpace = {
+    const space: Space = {
       id: serialized.id,
       spaceType: serialized.spaceType,
       bonus: serialized.bonus,
@@ -248,16 +248,16 @@ export abstract class Board {
     return space;
   }
 
-  public static deserializeSpaces(spaces: ReadonlyArray<SerializedSpace>, players: ReadonlyArray<IPlayer>): Array<ISpace> {
+  public static deserializeSpaces(spaces: ReadonlyArray<SerializedSpace>, players: ReadonlyArray<IPlayer>): Array<Space> {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }
 
 export function playerTileFn(player: IPlayer) {
-  return (space: ISpace) => space.player?.id === player.id;
+  return (space: Space) => space.player?.id === player.id;
 }
 
-export function isSpecialTile(space: ISpace): boolean {
+export function isSpecialTile(space: Space): boolean {
   switch (space.tile?.tileType) {
   case TileType.GREENERY:
   case TileType.OCEAN:

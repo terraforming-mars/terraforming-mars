@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -49,7 +49,7 @@ export class LakefrontResorts extends Card implements ICorporationCard {
     player.oceanBonus = 2;
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
         new GainProduction(cardOwner, Resource.MEGACREDITS),

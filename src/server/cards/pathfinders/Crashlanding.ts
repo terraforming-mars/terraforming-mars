@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
@@ -42,7 +42,7 @@ export class Crashlanding extends Card implements IProjectCard {
     });
   }
 
-  private playableSpaces(player: IPlayer): Array<ISpace> {
+  private playableSpaces(player: IPlayer): Array<Space> {
     const board = player.game.board;
     const spaces = board.getAvailableSpacesOnLand(player);
     return spaces.filter((space) => board.getAdjacentSpaces(space).filter(Board.isCitySpace).length <= 1);
@@ -55,7 +55,7 @@ export class Crashlanding extends Card implements IProjectCard {
     return new SelectSpace(
       'Select space for Crashlanding tile',
       this.playableSpaces(player),
-      (space: ISpace) => {
+      (space: Space) => {
         space.adjacency = {bonus: ['callback']};
         const tile: Tile = {
           tileType: TileType.CRASHLANDING,
@@ -79,7 +79,7 @@ export class Crashlanding extends Card implements IProjectCard {
       });
   }
 
-  private grantPlacementBonuses(player: IPlayer, space: ISpace) {
+  private grantPlacementBonuses(player: IPlayer, space: Space) {
     const game = player.game;
     for (const adjacentSpace of game.board.getAdjacentSpaces(space)) {
       if (adjacentSpace.player === player && adjacentSpace.tile !== undefined) {

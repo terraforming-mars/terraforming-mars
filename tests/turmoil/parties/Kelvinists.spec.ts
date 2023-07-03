@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {cast, setRulingParty} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
@@ -98,7 +98,7 @@ describe('Kelvinists', function() {
   it('Ruling policy 4: When you place a tile, gain 2 heat', function() {
     setRulingParty(game, PartyName.KELVINISTS, KELVINISTS_POLICY_4.id);
 
-    const emptySpace: ISpace = game.board.spaces.find((space) => space.bonus.length === 0) as ISpace;
+    const emptySpace: Space = game.board.spaces.find((space) => space.bonus.length === 0)!;
     game.addTile(player, emptySpace, {tileType: TileType.CITY});
     expect(player.heat).to.eq(2);
   });

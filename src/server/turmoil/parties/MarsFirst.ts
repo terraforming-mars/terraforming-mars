@@ -6,7 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
 import {Policy} from '../Policy';
 import {Phase} from '../../../common/Phase';
@@ -60,7 +60,7 @@ class MarsFirstPolicy01 implements Policy {
   readonly id = 'mfp01' as const;
   readonly description = 'When you place a tile ON MARS, gain 1 steel';
 
-  onTilePlaced(player: IPlayer, space: ISpace) {
+  onTilePlaced(player: IPlayer, space: Space) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
       player.stock.add(Resource.STEEL, 1);
     }

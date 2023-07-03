@@ -8,7 +8,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardResource} from '../../../common/CardResource';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
 
 export class SoylentSeedlingSystems extends Card implements ICorporationCard {
@@ -40,7 +40,7 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (cardOwner.id !== activePlayer.id) {
       return;
     }

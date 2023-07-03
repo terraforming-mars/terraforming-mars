@@ -7,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {BoardName} from '../../../common/boards/BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 
 export class LavaTubeSettlement extends Card implements IProjectCard {
   constructor() {
@@ -35,7 +35,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     });
   }
 
-  private getSpacesForCity(player: IPlayer): ReadonlyArray<ISpace> {
+  private getSpacesForCity(player: IPlayer): ReadonlyArray<Space> {
     if (player.game.gameOptions.boardName === BoardName.HELLAS) {
       // https://boardgamegeek.com/thread/1953628/article/29627211#29627211
       return player.game.board.getAvailableSpacesForType(player, 'city');

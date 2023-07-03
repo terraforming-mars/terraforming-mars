@@ -2,7 +2,7 @@ import {CardName} from '../../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {IGame} from '../IGame';
 import {SelectCard} from '../inputs/SelectCard';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -34,7 +34,7 @@ export class AresHandler {
     }
   }
 
-  public static earnAdjacencyBonuses(aresData: AresData, player: IPlayer, space: ISpace) {
+  public static earnAdjacencyBonuses(aresData: AresData, player: IPlayer, space: Space) {
     let incrementMilestone = false;
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
       const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player);
@@ -51,7 +51,7 @@ export class AresHandler {
 
   // |player| placed a tile at |space| next to |adjacentSpace|.
   // Returns true if the adjacent space contains a bonus for adjacency.
-  private static earnAdacencyBonus(newTileSpace: ISpace, adjacentSpace: ISpace, player: IPlayer, adjacentTileOwnerGainsBonus: boolean = true): boolean {
+  private static earnAdacencyBonus(newTileSpace: Space, adjacentSpace: Space, player: IPlayer, adjacentTileOwnerGainsBonus: boolean = true): boolean {
     if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
       return false;
     }
@@ -145,11 +145,11 @@ export class AresHandler {
     return true;
   }
 
-  public static hasHazardTile(space: ISpace): boolean {
+  public static hasHazardTile(space: Space): boolean {
     return AresHandler.hazardSeverity(space) !== HazardSeverity.NONE;
   }
 
-  public static hazardSeverity(space: ISpace): HazardSeverity {
+  public static hazardSeverity(space: Space): HazardSeverity {
     const type = space.tile?.tileType;
 
     switch (type) {
@@ -168,13 +168,13 @@ export class AresHandler {
 
   // A light version of `earnAdjacencyBonuses` but does not increment the milestone,
   // and does not grant the 1MC bonus for ares tile owners.
-  public static earnAdjacencyBonusesForGaia(player: IPlayer, space: ISpace) {
+  public static earnAdjacencyBonusesForGaia(player: IPlayer, space: Space) {
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
       this.earnAdacencyBonus(space, adjacentSpace, player, false);
     }
   }
 
-  private static computeAdjacencyCosts(game: IGame, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  private static computeAdjacencyCosts(game: IGame, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
     // Summing up production cost isn't really the way to do it, because each tile could
     // reduce different production costs. Oh well.
     let megaCreditCost = 0;
@@ -207,7 +207,7 @@ export class AresHandler {
     return {megacredits: megaCreditCost, production: productionCost};
   }
 
-  public static assertCanPay(player: IPlayer, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  public static assertCanPay(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
     if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: 0};
     }
@@ -232,7 +232,7 @@ export class AresHandler {
     }
   }
 
-  public static payAdjacencyAndHazardCosts(player: IPlayer, space: ISpace, subjectToHazardAdjacency: boolean) {
+  public static payAdjacencyAndHazardCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean) {
     const cost = this.assertCanPay(player, space, subjectToHazardAdjacency);
 
     if (cost.production > 0) {
@@ -246,7 +246,7 @@ export class AresHandler {
   }
 
   // Returns true if |newTile| can cover |boardTile|.
-  public static canCover(space: ISpace, newTile: Tile): boolean {
+  public static canCover(space: Space, newTile: Tile): boolean {
     if (space.tile === undefined) {
       return true;
     }

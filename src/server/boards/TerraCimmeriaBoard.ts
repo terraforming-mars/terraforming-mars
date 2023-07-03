@@ -5,7 +5,7 @@ import {SpaceName} from '../SpaceName';
 import {IPlayer} from '../IPlayer';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
-import {ISpace} from './ISpace';
+import {Space} from './Space';
 import {GameOptions} from '../game/GameOptions';
 import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
@@ -52,7 +52,7 @@ export class TerraCimmeriaBoard extends MarsBoard {
     return new TerraCimmeriaBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public override getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
+  public override getNonReservedLandSpaces(): ReadonlyArray<Space> {
     return super.getNonReservedLandSpaces();
   }
 

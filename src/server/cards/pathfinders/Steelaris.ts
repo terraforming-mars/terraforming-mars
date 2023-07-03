@@ -7,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {TileType} from '../../../common/TileType';
 import {GainStock} from '../../deferredActions/GainStock';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -39,7 +39,7 @@ export class Steelaris extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     const game = cardOwner.game;
     // Does not apply to The Moon.
     if (boardType !== BoardType.MARS) {

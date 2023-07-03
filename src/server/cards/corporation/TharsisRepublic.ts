@@ -3,7 +3,7 @@ import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -46,7 +46,7 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isCitySpace(space)) {
       if (cardOwner.id === activePlayer.id) {
         cardOwner.game.defer(new GainResources(cardOwner, Resource.MEGACREDITS, {count: 3}));

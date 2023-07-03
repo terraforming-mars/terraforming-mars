@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -40,7 +40,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     }
     return undefined;
   }
-  protected getAvailableSpaces(player: IPlayer): Array<ISpace> {
+  protected getAvailableSpaces(player: IPlayer): Array<Space> {
     return player.game.board.getAvailableSpacesOnLand(player)
       // Ares-only: exclude spaces already covered (which is only returned if the tile is a hazard tile.)
       .filter((space) => space.tile === undefined)
@@ -71,7 +71,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer): SelectSpace {
-    return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: ISpace) => {
+    return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: Space) => {
       const bonusResources = [];
       if (space.bonus.includes(SpaceBonus.STEEL)) {
         bonusResources.push(Resource.STEEL);

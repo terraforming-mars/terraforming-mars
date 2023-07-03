@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
@@ -42,7 +42,7 @@ export class Wetlands extends Card implements IProjectCard {
 
   public availableSpaces(player: IPlayer) {
     const board = player.game.board;
-    const adjacentOceans: (space: ISpace) => number = (space) => {
+    const adjacentOceans: (space: Space) => number = (space) => {
       const adjacentSpaces = board.getAdjacentSpaces(space);
       return adjacentSpaces.filter(Board.isOceanSpace).length;
     };
@@ -69,7 +69,7 @@ export class Wetlands extends Card implements IProjectCard {
     return new SelectSpace(
       'Select space for Wetlands',
       this.availableSpaces(player),
-      (space: ISpace) => {
+      (space: Space) => {
         const tile = {
           tileType: TileType.WETLANDS,
           card: this.name,

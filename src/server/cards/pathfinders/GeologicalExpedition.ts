@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {IPlayer} from '../../IPlayer';
 import {BoardType} from '../../boards/BoardType';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -47,7 +47,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     if (boardType !== BoardType.MARS || space.spaceType === SpaceType.COLONY) return;
     if (cardOwner !== activePlayer) return;
     // Don't grant bonuses when overplacing.

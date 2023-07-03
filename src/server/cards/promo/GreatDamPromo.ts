@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {IPlayer} from '../../IPlayer';
 
@@ -48,14 +48,14 @@ export class GreatDamPromo extends Card implements IProjectCard {
     const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 
-    return new SelectSpace('Select space for tile', availableSpaces, (space: ISpace) => {
+    return new SelectSpace('Select space for tile', availableSpaces, (space: Space) => {
       player.game.addTile(player, space, {tileType: TileType.GREAT_DAM});
       space.adjacency = this.adjacencyBonus;
       return undefined;
     });
   }
 
-  private getAvailableSpaces(player: IPlayer): Array<ISpace> {
+  private getAvailableSpaces(player: IPlayer): Array<Space> {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter(
         (space) => player.game.board.getAdjacentSpaces(space).filter(

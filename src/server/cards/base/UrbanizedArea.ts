@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
@@ -33,7 +33,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
       },
     });
   }
-  private getAvailableSpaces(player: IPlayer): Array<ISpace> {
+  private getAvailableSpaces(player: IPlayer): Array<Space> {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
@@ -41,7 +41,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
     return this.getAvailableSpaces(player).length > 0;
   }
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (space: ISpace) => {
+    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (space: Space) => {
       player.game.addCity(player, space);
       return undefined;
     });

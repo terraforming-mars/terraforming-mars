@@ -7,7 +7,7 @@ import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Tag} from '../../../common/cards/Tag';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
 import {BoardType} from '../../boards/BoardType';
@@ -38,10 +38,10 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     });
   }
 
-  private closestSpaces(board: Board, availableSpaces: Array<ISpace>, space: ISpace): Array<ISpace> {
-    const visitedSpaces = new Set<ISpace>();
+  private closestSpaces(board: Board, availableSpaces: Array<Space>, space: Space): Array<Space> {
+    const visitedSpaces = new Set<Space>();
 
-    function searchSet(spaces: Set<ISpace>): Array<ISpace> {
+    function searchSet(spaces: Set<Space>): Array<Space> {
       if (spaces.size === 0) {
         return [];
       }
@@ -93,7 +93,7 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     return this.action(player);
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     if (boardType === BoardType.MOON) {
       return;
     }

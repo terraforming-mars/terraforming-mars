@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {IPlayer} from '../../IPlayer';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
@@ -31,7 +31,7 @@ export class LandClaim extends Card implements IProjectCard {
     return new SelectSpace(
       'Select space for claim',
       player.game.board.getNonReservedLandSpaces(),
-      (space: ISpace) => {
+      (space: Space) => {
         space.player = player;
         LogHelper.logBoardTileAction(player, space, 'land claim');
         return undefined;

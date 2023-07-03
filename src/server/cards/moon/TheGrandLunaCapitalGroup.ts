@@ -6,7 +6,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SpaceId} from '../../../common/Types';
 import {Resource} from '../../../common/Resource';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -53,7 +53,7 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (cardOwner.id !== activePlayer.id) {
       return;
     }

@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from './ICorporationCard';
 import {Phase} from '../../../common/Phase';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
@@ -43,7 +43,7 @@ export class MiningGuild extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
       return;

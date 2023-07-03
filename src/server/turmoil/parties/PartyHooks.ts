@@ -4,7 +4,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {Phase} from '../../../common/Phase';
 import {PolicyId} from '../Policy';
 import {Resource} from '../../../common/Resource';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {GREENS_POLICY_1} from './Greens';
 import {PoliticalAgendas} from '../PoliticalAgendas';
 import {Turmoil} from '../Turmoil';
@@ -18,7 +18,7 @@ export class PartyHooks {
     }
   }
 
-  static applyGreensRulingPolicy(player: IPlayer, space: ISpace) {
+  static applyGreensRulingPolicy(player: IPlayer, space: Space) {
     if (this.shouldApplyPolicy(player, PartyName.GREENS, 'gp01')) {
       const greensPolicy = GREENS_POLICY_1;
       greensPolicy.onTilePlaced(player, space);

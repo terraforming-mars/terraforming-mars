@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
 import {Card} from '../Card';
@@ -101,7 +101,7 @@ export class Philares extends Card implements ICorporationCard {
     return selectResources;
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
       return;

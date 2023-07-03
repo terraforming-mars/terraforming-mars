@@ -12,7 +12,7 @@ import {addCity, addGreenery, addOcean, cast, forceGenerationEnd, maxOutOceans, 
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resource} from '../src/common/Resource';
-import {ISpace} from '../src/server/boards/ISpace';
+import {Space} from '../src/server/boards/Space';
 import {SpaceId} from '../src/common/Types';
 import {ResearchNetwork} from '../src/server/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/server/cards/base/ArcticAlgae';
@@ -528,7 +528,7 @@ describe('Game', () => {
     const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
     addOcean(player, spaceId);
 
-    const space: ISpace = game.board.getSpace(spaceId);
+    const space: Space = game.board.getSpace(spaceId);
     expect(space.player).is.undefined;
   });
 

@@ -2,24 +2,24 @@ import {expect} from 'chai';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {GeologicalSurvey} from '../../../src/server/cards/ares/GeologicalSurvey';
 import {Pets} from '../../../src/server/cards/base/Pets';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
-import {addGreenery, resetBoard, setRulingPartyAndRulingPolicy, runAllActions, cast} from '../../TestingUtils';
+import {addGreenery, resetBoard, setRulingParty, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
   let player: TestPlayer;
   let redPlayer : TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new GeologicalSurvey();
@@ -132,8 +132,6 @@ describe('GeologicalSurvey', () => {
 
   it('Works with Mars First policy', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
-    const turmoil = game.turmoil!;
-    const marsFirst = new MarsFirst();
 
     player.playedCards.push(card);
     game.phase = Phase.ACTION; // Policies are only active in the ACTION phase
@@ -146,7 +144,7 @@ describe('GeologicalSurvey', () => {
 
     resetBoard(game);
 
-    setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
+    setRulingParty(game, PartyName.MARS);
     addGreenery(player, '11');
     runAllActions(game);
     expect(player.steel).eq(2);

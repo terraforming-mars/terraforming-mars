@@ -7,10 +7,11 @@ import {testGame} from '../../TestGame';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {fakeCard, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {fakeCard, setRulingParty} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {Tag} from '../../../src/common/cards/Tag';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('HighTempSuperconductors', function() {
   let card: HighTempSuperconductors;
@@ -77,7 +78,7 @@ describe('HighTempSuperconductors', function() {
   });
 
   it('discount Kelvinists ruling bonus', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, new Kelvinists(), 'kp01');
+    setRulingParty(game, PartyName.KELVINISTS);
 
     player.megaCredits = 9;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.false;

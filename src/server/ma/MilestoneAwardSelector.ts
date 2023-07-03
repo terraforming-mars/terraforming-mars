@@ -1,7 +1,7 @@
 import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, THARSIS_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../awards/Awards';
 import {IAward} from '../awards/IAward';
 import {BoardName} from '../../common/boards/BoardName';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {IMilestone} from '../milestones/IMilestone';
 import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, THARSIS_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../milestones/Milestones';
 import {FullMoon} from '../moon/FullMoon';
@@ -10,7 +10,7 @@ import {LunarMagnate} from '../moon/LunarMagnate';
 import {OneGiantStep} from '../moon/OneGiantStep';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {inplaceShuffle} from '../utils/shuffle';
-import {UnseededRandom} from '../Random';
+import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {AwardName} from '../../common/ma/AwardName';
 import {inplaceRemove} from '../../common/utils/utils';

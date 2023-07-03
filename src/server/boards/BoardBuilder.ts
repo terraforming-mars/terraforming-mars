@@ -3,7 +3,7 @@ import {SpaceId} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {Random} from '../Random';
+import {Random} from '../../common/utils/Random';
 
 function colonySpace(id: SpaceId): Space {
   return newSpace(id, SpaceType.COLONY, -1, -1, []);

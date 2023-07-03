@@ -2,7 +2,7 @@ import {SerializedDeck} from './SerializedDeck';
 import {CardFinder} from '../CardFinder';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../LogHelper';
-import {Random} from '../Random';
+import {Random} from '../../common/utils/Random';
 import {ICard} from './ICard';
 import {ICorporationCard} from './corporation/ICorporationCard';
 import {IProjectCard} from './IProjectCard';

@@ -7,7 +7,7 @@ import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
-import {GameOptions} from './GameOptions';
+import {GameOptions} from './game/GameOptions';
 import {AresData} from '../common/ares/AresData';
 import {LogMessage} from '../common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';

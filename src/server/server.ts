@@ -11,7 +11,7 @@ import * as raw_settings from '../genfiles/settings.json';
 import * as prometheus from 'prom-client';
 
 import {Database} from './database/Database';
-import {serverId} from './server-ids';
+import {serverId} from './utils/server-ids';
 import {Route} from './routes/Route';
 import {processRequest} from './server/requestProcessor';
 import {timeAsync} from './utils/timer';

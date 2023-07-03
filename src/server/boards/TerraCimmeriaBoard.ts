@@ -4,9 +4,9 @@ import {BoardBuilder} from './BoardBuilder';
 import {SpaceName} from '../SpaceName';
 import {IPlayer} from '../IPlayer';
 import {SerializedBoard} from './SerializedBoard';
-import {Random} from '../Random';
+import {Random} from '../../common/utils/Random';
 import {Space} from './Space';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 

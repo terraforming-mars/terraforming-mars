@@ -1,5 +1,5 @@
 import {IGame, Score} from '../../src/server/IGame';
-import {GameOptions} from '../../src/server/GameOptions';
+import {GameOptions} from '../../src/server/game/GameOptions';
 import {SerializedGame} from '../../src/server/SerializedGame';
 import {GameIdLedger, IDatabase} from '../../src/server/database/IDatabase';
 import {GameId, ParticipantId} from '../../src/common/Types';

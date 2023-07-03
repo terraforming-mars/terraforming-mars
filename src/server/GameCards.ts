@@ -14,7 +14,7 @@ import {CardName} from '../common/cards/CardName';
 import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 import {GameModule} from '../common/cards/GameModule';
-import {GameOptions} from './GameOptions';
+import {GameOptions} from './game/GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';

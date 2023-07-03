@@ -8,6 +8,9 @@ import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {ICard} from '../ICard';
+import {Size} from '../../../common/cards/render/Size';
+import {digit} from '../Options';
+import {LogHelper} from '../../LogHelper';
 
 export class TheArchaicFoundationInstitute extends Card implements ICorporationCard {
   constructor() {
@@ -26,12 +29,15 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
         description: 'You start with 55 M€.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(55).br;
-          b.effect('When you play a Moon tag, including these, add a resource cube on this card.', (eb) => {
+          b.megacredits(55).nbsp;
+          b.effect('When you play a Moon tag, including these, add a cube to this card.', (eb) => {
             eb.moon().startEffect.resourceCube();
           }).br;
-          b.effect('Automatically remove every 3 resource cubes collected here and increase your TR 1 step.', (eb) => {
-            eb.resourceCube(3).startEffect.tr(1);
+          b.effect('Automatically remove 3 cubes here and gain 1 TR.', (eb) => {
+            eb.resourceCube(3, {digit}).startEffect.tr(1, {size: Size.TINY});
+          }).br;
+          b.action('Remove 3 cubes here; gain 1 TR.', (ab) => {
+            ab.resourceCube(3, {digit}).startAction.tr(1, {size: Size.TINY});
           });
         }),
       },
@@ -43,18 +49,34 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
       const moonTags = card.tags.filter((t) => t === Tag.MOON);
       const count = moonTags.length;
       if (count > 0) {
-        player.addResourceTo(this, count);
+        player.addResourceTo(this, {qty: count, log: true});
       }
     }
   }
 
+  public canAct(player: IPlayer) {
+    return (this.resourceCount >= 3 && player.canAfford(0, {tr: {tr: 1}}));
+  }
+
+  // The only reason Archaic Foundation Institute has an action is if Reds is
+  // in effect when the player gains the Moon tag. Ideally, this is always
+  // automatically resolved, even at strange times, even produciton.
+  //
+  public action(player: IPlayer) {
+    // How should this interact in a Merger with UNMO?
+    let tr = Math.floor(this.resourceCount / 3);
+    while (!player.canAfford(0, {tr: {tr: tr}})) {
+      tr--;
+    }
+    player.removeResourceFrom(this, tr * 3);
+    player.increaseTerraformRating(tr);
+    LogHelper.logRemoveResource(player, this, tr * 3, `Gain {tr} TR`);
+  }
+
   public onResourceAdded(player: IPlayer, playedCard: ICard): void {
     if (playedCard.name !== this.name) return;
-    // TODO(kberg): If for some reason you gain MC but do not play another card, this becomes almost
-    // like lost TR.
-    if (this.resourceCount >= 3 && player.canAfford(0, {tr: {tr: 1}})) {
-      player.removeResourceFrom(this, 3);
-      player.increaseTerraformRating();
+    if (this.canAct(player)) {
+      this.action(player);
     }
   }
 }

@@ -3,11 +3,10 @@ import {AdvancedAlloys} from '../../../src/server/cards/base/AdvancedAlloys';
 import {Research} from '../../../src/server/cards/base/Research';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {OrbitalCleanup} from '../../../src/server/cards/promo/OrbitalCleanup';
-import {Game} from '../../../src/server/Game';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {setRulingParty} from '../../TestingUtils';
 import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SCIENTISTS_POLICY_4} from '../../../src/server/turmoil/parties/Scientists';
@@ -18,8 +17,7 @@ describe('OrbitalCleanup', function() {
 
   beforeEach(function() {
     card = new OrbitalCleanup();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [, player] = testGame(1);
   });
 
   it('Can not play if cannot decrease MC production', function() {
@@ -49,13 +47,11 @@ describe('OrbitalCleanup', function() {
 
   it('Turmoil Science Tag Requirements doesnt increase Income', function() {
     const [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
-    const turmoil = game.turmoil!;
-    const scientists = turmoil.getPartyByName(PartyName.SCIENTISTS);
 
     // Sanity check that Science Ruling Policy is working as intended:
     const bioengineeringEnclosure = new BioengineeringEnclosure(); // Requires 1 science tag
     expect(player.simpleCanPlay(bioengineeringEnclosure)).is.false;
-    setRulingPartyAndRulingPolicy(game, turmoil, scientists, SCIENTISTS_POLICY_4.id); // Reduce science tag requirements by 1
+    setRulingParty(game, PartyName.SCIENTISTS, SCIENTISTS_POLICY_4.id); // Reduce science tag requirements by 1
     SCIENTISTS_POLICY_4.apply(game);
     expect(player.simpleCanPlay(bioengineeringEnclosure)).is.true;
 

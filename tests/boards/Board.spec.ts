@@ -9,8 +9,8 @@ import {Board} from '../../src/server/boards/Board';
 import {Color} from '../../src/common/Color';
 import {SerializedBoard} from '../../src/server/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
-import {SeededRandom} from '../../src/server/Random';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/GameOptions';
+import {SeededRandom} from '../../src/common/utils/Random';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {MultiSet} from 'mnemonist';
 
 describe('Board', function() {

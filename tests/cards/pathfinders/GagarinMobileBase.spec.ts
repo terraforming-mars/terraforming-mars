@@ -8,7 +8,7 @@ import {testGame} from '../../TestGame';
 import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
 import {AmazonisBoard} from '../../../src/server/boards/AmazonisBoard';
-import {UnseededRandom} from '../../../src/server/Random';
+import {UnseededRandom} from '../../../src/common/utils/Random';
 
 describe('GagarinMobileBase', () => {
   let game: Game;

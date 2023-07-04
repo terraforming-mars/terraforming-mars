@@ -1,13 +1,23 @@
 import {IncomingMessage} from 'http';
 
+function deArray<T>(input: T | Array<T>): T | undefined {
+  if (!Array.isArray(input)) {
+    return input;
+  }
+  if (input.length > 0) {
+    return input[0];
+  }
+  return undefined;
+}
+
 export function getHerokuIpAddress(req: IncomingMessage): string | undefined {
-  // https://stackoverflow.com/questions/53646354/how-can-i-get-the-ip-address-of-users-opening-my-heroku-app
-  const address = req.headers['HTTP_X_FORWARDED_FOR'];
-  if (Math.random() < .05) {
-    console.log('Testing :', address);
+  const address = deArray(req.headers['x-forwarded-for']);
+  const port = deArray(req.headers['x-forwarded-port']);
+  if (address === undefined) {
+    return undefined;
   }
-  if (Array.isArray(address)) {
-    return address[0];
+  if (port === undefined) {
+    return address;
   }
-  return address;
+  return address + ':' + port;
 }

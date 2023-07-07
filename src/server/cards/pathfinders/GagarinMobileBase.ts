@@ -20,7 +20,7 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
       name: CardName.GAGARIN_MOBILE_BASE,
       tags: [Tag.SCIENCE],
       startingMegaCredits: 42,
-      initialActionText: 'Place Gagarin Moble Base on ANY space ON MARS',
+      initialActionText: 'Place Gagarin Mobile Base on ANY space ON MARS',
 
       metadata: {
         cardNumber: 'PfC13',

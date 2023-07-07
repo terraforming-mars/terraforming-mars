@@ -264,7 +264,7 @@ export default Vue.extend({
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
-
+      this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();

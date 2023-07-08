@@ -47,7 +47,7 @@ export abstract class Handler implements IHandler {
     case 'GET':
       return this.get(req, res, ctx);
     case 'PUT':
-      return this.put(req, res, ctx);
+      return this.post(req, res, ctx);
     case 'POST':
       return this.post(req, res, ctx);
     default:
@@ -60,7 +60,7 @@ export abstract class Handler implements IHandler {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }
-  public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public post(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }

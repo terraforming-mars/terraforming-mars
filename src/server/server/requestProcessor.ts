@@ -2,6 +2,7 @@ import * as http from 'http';
 import {paths} from '../../common/app/paths';
 
 import {ApiCloneableGame} from '../routes/ApiCloneableGame';
+import {ApiCreateGame} from '../routes/ApiCreateGame';
 import {ApiGameLogs} from '../routes/ApiGameLogs';
 import {ApiGames} from '../routes/ApiGames';
 import {ApiGame} from '../routes/ApiGame';
@@ -37,6 +38,7 @@ const handlers: Map<string, IHandler> = new Map(
     ['', ServeApp.INSTANCE],
     [paths.ADMIN, ServeApp.INSTANCE],
     [paths.API_CLONEABLEGAME, ApiCloneableGame.INSTANCE],
+    [paths.API_CREATE_GAME, ApiCreateGame.INSTANCE],
     [paths.API_GAME, ApiGame.INSTANCE],
     [paths.API_GAME_HISTORY, ApiGameHistory.INSTANCE],
     [paths.API_GAME_LOGS, ApiGameLogs.INSTANCE],

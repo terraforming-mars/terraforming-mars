@@ -1,6 +1,7 @@
 export const paths = {
   ADMIN: 'admin',
   API_CLONEABLEGAME: 'api/cloneablegame',
+  API_CREATE_GAME: 'api/create-game',
   API_GAME: 'api/game',
   API_GAME_HISTORY: 'api/game/history',
   API_GAME_LOGS: 'api/game/logs',
@@ -16,7 +17,7 @@ export const paths = {
   GAMES_OVERVIEW: 'games-overview',
   HELP: 'help',
   LOAD: 'load',
-  LOAD_GAME: 'load_game',
+  LOAD_GAME: 'load-game',
   NEW_GAME: 'new-game',
   PLAYER: 'player',
   PLAYER_INPUT: 'player/input',

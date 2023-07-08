@@ -39,12 +39,8 @@ export class LogHelper {
     // Skip solo play random tiles
     if (player.name === 'neutral') return;
 
-    const offset = Math.abs(space.y - 4);
-    const row = space.y + 1;
-    const position = space.x - offset + 1;
-
     player.game.log('${0} ${1} ${2} on row ${3} position ${4}', (b) =>
-      b.player(player).string(action).string(description).number(row).number(position));
+      b.player(player).string(action).string(description).number(space.y).number(space.x));
   }
 
   static logColonyTrackIncrease(player: IPlayer, colony: IColony, steps: number = 1) {

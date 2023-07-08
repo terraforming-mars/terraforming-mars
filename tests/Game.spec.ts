@@ -522,6 +522,26 @@ describe('Game', () => {
     expect(game.getCardPlayerOrThrow(card.name)).to.eq(player);
   });
 
+  it('Logs position correctly for placement', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-logz', [player], player);
+    const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
+    addOcean(player, spaceId);
+    
+    const space = game.board.getSpace(spaceId)
+    const oceanPlacementLog = game.gameLog
+      .find((l) => l.message === '${0} ${1} ${2} on row ${3} position ${4}')
+    expect(oceanPlacementLog).to.not.be.undefined;
+    const spaceInLog = {
+      y: parseInt(oceanPlacementLog!.data[3].value),
+      x: parseInt(oceanPlacementLog!.data[4].value)
+    }
+    expect(spaceInLog.x).to.not.be.NaN;
+    expect(spaceInLog.y).to.not.be.NaN;
+    expect(spaceInLog.x).to.eq(space.x)
+    expect(spaceInLog.y).to.eq(space.y)
+  });
+
   it('Does not assign player to ocean after placement', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('game-oceanz', [player], player);

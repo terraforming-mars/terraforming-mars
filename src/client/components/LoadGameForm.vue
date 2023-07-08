@@ -34,7 +34,7 @@ export default Vue.extend({
         return;
       }
       const xhr = new XMLHttpRequest();
-      xhr.open('PUT', paths.LOAD_GAME);
+      xhr.open('POST', paths.LOAD_GAME);
       xhr.onerror = function() {
         alert('Error loading game');
       };

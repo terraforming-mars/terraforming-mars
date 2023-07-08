@@ -274,7 +274,7 @@ export class Executor implements BehaviorExecutor {
     if (addResources !== undefined) {
       const count = ctx.count(addResources);
       player.game.defer(new SimpleDeferredAction(player, () => {
-        player.addResourceTo(card, count);
+        player.addResourceTo(card, {qty: count, log: true});
         return undefined;
       }));
     }

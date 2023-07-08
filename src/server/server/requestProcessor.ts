@@ -74,7 +74,7 @@ function getIPAddress(req: http.IncomingMessage): string {
   }
   const socketIpAddress = req.socket.address();
   if (typeof socketIpAddress === 'object') {
-    return `${socketIpAddress.family}/${socketIpAddress.address}/${socketIpAddress.port}`;
+    return '!' + socketIpAddress.address + '!';
   }
   return socketIpAddress;
 }

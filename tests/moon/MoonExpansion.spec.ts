@@ -72,11 +72,11 @@ describe('MoonExpansion', () => {
     expect(player.getTerraformRating()).eq(21);
   });
 
-  it('raiseColonyRate', () => {
-    expect(moonData.colonyRate).to.eq(0);
+  it('raiseHabitatRate', () => {
+    expect(moonData.habitatRate).to.eq(0);
     expect(player.getTerraformRating()).eq(20);
     MoonExpansion.raiseHabitatRate(player);
-    expect(moonData.colonyRate).to.eq(1);
+    expect(moonData.habitatRate).to.eq(1);
     expect(player.getTerraformRating()).eq(21);
   });
 
@@ -157,14 +157,14 @@ describe('MoonExpansion', () => {
   });
 
   it('Raise habitat rate bonus 2-3', () => {
-    moonData.colonyRate = 2;
+    moonData.habitatRate = 2;
     player.cardsInHand = [];
     MoonExpansion.raiseHabitatRate(player, 1);
     expect(player.cardsInHand).has.length(1);
   });
 
   it('Raise habitat rate bonus 5-6', () => {
-    moonData.colonyRate = 5;
+    moonData.habitatRate = 5;
     player.production.override({energy: 0});
     MoonExpansion.raiseHabitatRate(player, 1);
     expect(player.production.energy).eq(1);
@@ -198,12 +198,12 @@ describe('MoonExpansion', () => {
     expect(player.getTerraformRating()).eq(20);
   });
 
-  it('raiseColonyRate during WGT', () => {
+  it('raiseHabitatRate during WGT', () => {
     game.phase = Phase.SOLAR;
-    expect(moonData.colonyRate).to.eq(0);
+    expect(moonData.habitatRate).to.eq(0);
     expect(player.getTerraformRating()).eq(20);
     MoonExpansion.raiseHabitatRate(player);
-    expect(moonData.colonyRate).to.eq(1);
+    expect(moonData.habitatRate).to.eq(1);
     expect(player.getTerraformRating()).eq(20);
   });
 

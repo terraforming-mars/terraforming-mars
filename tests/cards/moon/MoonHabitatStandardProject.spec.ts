@@ -62,12 +62,12 @@ describe('MoonHabitatStandardProject', () => {
     expect(player.titanium).eq(2);
     expect(player.production.megacredits).eq(1);
 
-    expect(moonData.colonyRate).eq(0);
+    expect(moonData.habitatRate).eq(0);
 
     const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonHabitatTile);
     placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });
 
@@ -82,7 +82,7 @@ describe('MoonHabitatStandardProject', () => {
     player.titanium = 1;
 
     testRedsCosts(() => card.canAct(player), player, card.cost, 3);
-    moonData.colonyRate = 8;
+    moonData.habitatRate = 8;
     testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });

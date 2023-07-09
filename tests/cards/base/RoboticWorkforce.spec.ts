@@ -234,7 +234,7 @@ describe('RoboticWorkforce', () => {
 
         // Set Moon rates.
         game.moonData!.miningRate = 3;
-        game.moonData!.colonyRate = 3;
+        game.moonData!.habitatRate = 3;
         game.moonData!.logisticRate = 3;
 
         // place some tiles

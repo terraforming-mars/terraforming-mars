@@ -108,7 +108,7 @@ describe('Reds', function() {
 
     // This is hard-coding that the first moon option is the Colony one. meh.
     options.options[0].cb();
-    expect(MoonExpansion.moonData(game).colonyRate).eq(0);
+    expect(MoonExpansion.moonData(game).habitatRate).eq(0);
     expect(MoonExpansion.moonData(game).miningRate).eq(1);
     expect(MoonExpansion.moonData(game).logisticRate).eq(1);
   });

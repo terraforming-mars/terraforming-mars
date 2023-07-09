@@ -38,14 +38,14 @@ describe('WaterTreatmentComplex', () => {
   });
 
   it('play', () => {
-    expect(moonData.colonyRate).eq(0);
+    expect(moonData.habitatRate).eq(0);
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
 
     card.play(player);
 
     expect(player.titanium).eq(0);
-    expect(moonData.colonyRate).eq(2);
+    expect(moonData.habitatRate).eq(2);
     expect(player.getTerraformRating()).eq(16);
   });
 });

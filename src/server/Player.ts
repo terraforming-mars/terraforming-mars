@@ -704,7 +704,7 @@ export class Player implements IPlayer {
     }
 
     MoonExpansion.ifMoon(game, (moonData) => {
-      if (moonData.colonyRate < constants.MAXIMUM_HABITAT_RATE) {
+      if (moonData.habitatRate < constants.MAXIMUM_HABITAT_RATE) {
         action.options.push(
           new SelectOption('Increase the Moon habitat rate', 'Increase', () => {
             MoonExpansion.raiseHabitatRate(this, 1);

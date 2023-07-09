@@ -9,7 +9,7 @@ export class HabitatRateRequirement extends GlobalParameterRequirement {
   protected readonly parameter = GlobalParameter.MOON_HABITAT_RATE;
 
   public getGlobalValue(player: IPlayer) {
-    return MoonExpansion.moonData(player.game).colonyRate;
+    return MoonExpansion.moonData(player.game).habitatRate;
   }
 }
 

@@ -36,7 +36,7 @@ describe('MomentumViriumHabitat', () => {
     expect(player.production.megacredits).eq(0);
     expect(player.production.heat).eq(0);
     expect(player.getTerraformRating()).eq(14);
-    expect(moonData.colonyRate).eq(0);
+    expect(moonData.habitatRate).eq(0);
 
     card.play(player);
 
@@ -49,7 +49,7 @@ describe('MomentumViriumHabitat', () => {
     expect(momentumVirium.tile!.tileType).eq(TileType.MOON_HABITAT);
 
     expect(player.getTerraformRating()).eq(15);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
   });
 });
 

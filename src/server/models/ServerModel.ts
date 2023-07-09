@@ -625,7 +625,7 @@ export class Server {
       return {
         logisticsRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
-        colonyRate: moonData.colonyRate,
+        habitatRate: moonData.habitatRate,
         spaces: this.getSpaces(moonData.moon, []),
       };
     }, () => undefined);

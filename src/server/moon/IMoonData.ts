@@ -4,7 +4,7 @@ import {SerializedMoonData} from './SerializedMoonData';
 
 export interface IMoonData {
   moon: MoonBoard;
-  colonyRate: number;
+  habitatRate: number;
   miningRate: number;
   logisticRate: number;
   lunaFirstPlayer: IPlayer | undefined;
@@ -18,7 +18,7 @@ export namespace IMoonData {
     }
     return {
       moon: moonData.moon.serialize(),
-      colonyRate: moonData.colonyRate,
+      habitatRate: moonData.habitatRate,
       miningRate: moonData.miningRate,
       logisticRate: moonData.logisticRate,
       lunaFirstPlayerId: moonData.lunaFirstPlayer ? moonData.lunaFirstPlayer.id : undefined,
@@ -32,7 +32,7 @@ export namespace IMoonData {
       throw new Error(`player ${moonData.lunaFirstPlayerId} not found`);
     }
     return {
-      colonyRate: moonData.colonyRate,
+      habitatRate: moonData.habitatRate ?? moonData.colonyRate ?? 0,
       logisticRate: moonData.logisticRate,
       miningRate: moonData.miningRate,
       moon: MoonBoard.deserialize(moonData.moon, players),

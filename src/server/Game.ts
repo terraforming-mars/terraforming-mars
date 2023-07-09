@@ -474,7 +474,7 @@ export class Game implements IGame, Logger {
     MoonExpansion.ifMoon(this, (moonData) => {
       if (this.gameOptions.requiresMoonTrackCompletion) {
         const moonMaxed =
-          moonData.colonyRate === constants.MAXIMUM_HABITAT_RATE &&
+          moonData.habitatRate === constants.MAXIMUM_HABITAT_RATE &&
           moonData.miningRate === constants.MAXIMUM_MINING_RATE &&
           moonData.logisticRate === constants.MAXIMUM_LOGISTICS_RATE;
         globalParametersMaxed = globalParametersMaxed && moonMaxed;

@@ -509,13 +509,13 @@ describe('Turmoil', function() {
     player.megaCredits = card.cost + 6;
     expect(player.canPlay(card)).is.true;
 
-    moonData.colonyRate = 7;
+    moonData.habitatRate = 7;
     player.megaCredits = card.cost + 2;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 3;
     expect(player.canPlay(card)).is.true;
 
-    moonData.colonyRate = 8;
+    moonData.habitatRate = 8;
 
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.true;

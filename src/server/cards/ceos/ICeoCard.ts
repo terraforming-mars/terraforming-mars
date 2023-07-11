@@ -4,9 +4,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 
 export interface ICeoCard extends IProjectCard, Partial<IActionCard> {
-  /** When true, the card cannot be activated again. */
-  isDisabled?: boolean;
-
   /** If this card is active this generation. */
   opgActionIsActive?: boolean;
 

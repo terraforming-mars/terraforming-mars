@@ -13,7 +13,6 @@ export interface ICorporationCard extends ICard {
   cardCost?: number;
   onCorpCardPlayed?: (player: IPlayer, card: ICorporationCard) => PlayerInput | undefined;
   onProductionPhase?: (player: IPlayer) => undefined; // For Pristar
-  isDisabled?: boolean;
 
   serialize?(serialized: SerializedCard): void;
   deserialize?(serialized: SerializedCard): void;

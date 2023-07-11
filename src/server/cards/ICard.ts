@@ -80,6 +80,7 @@ export interface ICard {
     resourceType?: CardResource;
     /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
     tilesBuilt?: Array<TileType>;
+    isDisabled?: boolean; // For Pharmacy Union and CEO cards.
 }
 
 export interface IActionCard {

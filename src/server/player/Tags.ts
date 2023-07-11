@@ -281,6 +281,13 @@ export class Tags {
    * Does not include Odyssey behavior.
    */
   public numberOfCardsWithNoTags(): number {
-    return this.player.tableau.filter((card) => card.type !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
+    const filtered = this.player.tableau.filter((card) => {
+      // Special-case pharmacy union which is out of play once it's disabled.
+      if (card.name === CardName.PHARMACY_UNION && card.isDisabled === true) {
+        return false;
+      }
+      return card.type !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD);
+    });
+    return filtered.length;
   }
 }

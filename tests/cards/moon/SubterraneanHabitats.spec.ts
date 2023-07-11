@@ -34,13 +34,13 @@ describe('SubterraneanHabitats', () => {
   it('play', () => {
     player.steel = 12;
     expect(player.getTerraformRating()).eq(14);
-    expect(moonData.colonyRate).eq(0);
+    expect(moonData.habitatRate).eq(0);
 
     card.play(player);
 
     expect(player.steel).eq(10);
     expect(player.getTerraformRating()).eq(15);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
   });
 
   it('effect', () => {

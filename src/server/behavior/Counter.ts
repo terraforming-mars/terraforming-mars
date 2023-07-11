@@ -104,7 +104,7 @@ export class Counter {
       const moon = countable.moon;
       MoonExpansion.ifMoon(game, (moonData) => {
         if (moon.habitatRate) {
-          sum += moonData.colonyRate;
+          sum += moonData.habitatRate;
         }
         if (moon.miningRate) {
           sum += moonData.miningRate;

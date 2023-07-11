@@ -30,7 +30,7 @@ describe('ThoriumRush', () => {
   });
 
   it('play', () => {
-    moonData.colonyRate = 0;
+    moonData.habitatRate = 0;
     moonData.logisticRate = 0;
     moonData.miningRate = 0;
     expect(player.getTerraformRating()).eq(14);
@@ -41,9 +41,9 @@ describe('ThoriumRush', () => {
     game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m03')),
     game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m04')),
 
-    expect(moonData.colonyRate).eq(1);
-    expect(moonData.colonyRate).eq(1);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
     expect(player.getTerraformRating()).eq(17);
   });
 
@@ -77,7 +77,7 @@ describe('ThoriumRush', () => {
     player.megaCredits = card.cost + 6;
     expect(player.canPlay(card)).is.true;
 
-    moonData.colonyRate = 8;
+    moonData.habitatRate = 8;
 
     player.megaCredits = card.cost + 2;
     expect(player.canPlay(card)).is.false;

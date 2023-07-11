@@ -40,21 +40,21 @@ export class LunaEcumenopolis extends Card {
     // Note for someone paying close attention:
     //
     // In the real world, this card can be resolved in one of two orders:
-    // 1. Raise the TR rate before raising the colony rate
-    // 2. Raise the colony rate before the TR rate.
+    // 1. Raise the TR rate before raising the habitat rate
+    // 2. Raise the habitat rate before the TR rate.
     // In the first case, the player will get fewer TR, but also is more likely to afford the costs.
     // In the second case, the player will get the most TR, but will have to pay up to 3 more MC, the cost
     // of that additional TR bump.
     //
     // This algorithm assumes the second case.
     //
-    // If someone wants to optimize for this, they can change this algorithm to use the current colony rate instead
-    // of the expected colony rate, but then they must also change the order in which the player gains those bonuses
+    // If someone wants to optimize for this, they can change this algorithm to use the current habitat rate instead
+    // of the expected habitat rate, but then they must also change the order in which the player gains those bonuses
     // in play().
     //
     const moonData = MoonExpansion.moonData(player.game);
-    const expectedColonyRate = Math.min(moonData.colonyRate + 2, 8);
-    const expectedTRBump = Math.floor(expectedColonyRate / 2);
+    const expectedHabitatRate = Math.min(moonData.habitatRate + 2, 8);
+    const expectedTRBump = Math.floor(expectedHabitatRate / 2);
     return player.canAfford(0, {tr: {moonHabitat: 2, tr: expectedTRBump}});
   }
 
@@ -103,8 +103,8 @@ export class LunaEcumenopolis extends Card {
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new SimpleDeferredAction(player, () => {
-      const colonyRate = MoonExpansion.moonData(player.game).colonyRate;
-      player.increaseTerraformRating(Math.floor(colonyRate / 2));
+      const habitatRate = MoonExpansion.moonData(player.game).habitatRate;
+      player.increaseTerraformRating(Math.floor(habitatRate / 2));
       return undefined;
     }));
     return undefined;

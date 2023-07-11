@@ -45,11 +45,11 @@ describe('DarksideIncubationPlant', () => {
     action3.options[1].cb();
     expect(card.resourceCount).eq(3);
 
-    // First option removes 2 resources and raises the colony rate.
-    expect(MoonExpansion.moonData(game).colonyRate).eq(0);
+    // First option removes 2 resources and raises the habitat rate.
+    expect(MoonExpansion.moonData(game).habitatRate).eq(0);
     action3.options[0].cb();
     expect(card.resourceCount).eq(1);
-    expect(MoonExpansion.moonData(game).colonyRate).eq(1);
+    expect(MoonExpansion.moonData(game).habitatRate).eq(1);
   });
 
   it('victoryPoints', () => {

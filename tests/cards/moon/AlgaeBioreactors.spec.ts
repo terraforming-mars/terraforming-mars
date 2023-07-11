@@ -36,12 +36,12 @@ describe('AlgaeBioreactors', () => {
     player.production.override({plants: 1});
     expect(player.getTerraformRating()).eq(14);
     expect(game.getOxygenLevel()).eq(0);
-    moonData.colonyRate = 0;
+    moonData.habitatRate = 0;
 
     card.play(player);
 
     expect(player.production.plants).eq(0);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
     expect(game.getOxygenLevel()).eq(1);
     expect(player.getTerraformRating()).eq(16);
   });
@@ -56,7 +56,7 @@ describe('AlgaeBioreactors', () => {
     player.production.override({plants: 1});
 
     testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
-    moonData.colonyRate = 8;
+    moonData.habitatRate = 8;
     testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
     setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     testRedsCosts(() => player.canPlay(card), player, card.cost, 0);

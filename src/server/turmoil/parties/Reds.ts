@@ -120,7 +120,7 @@ class RedsPolicy03 implements Policy {
       return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
     case GlobalParameter.MOON_HABITAT_RATE:
       return MoonExpansion.ifElseMoon(game, (moonData) => {
-        const rate = moonData.colonyRate;
+        const rate = moonData.habitatRate;
         return rate > 0 && rate !== MAXIMUM_HABITAT_RATE;
       },
       () => false);
@@ -156,7 +156,7 @@ class RedsPolicy03 implements Policy {
 
     const moonParametersAtMinimum= MoonExpansion.ifElseMoon(
       game,
-      (moonData) => moonData.colonyRate === 0 && moonData.logisticRate === 0 && moonData.miningRate === 0,
+      (moonData) => moonData.habitatRate === 0 && moonData.logisticRate === 0 && moonData.miningRate === 0,
       () => false);
 
     if (basicParametersAtMinimum && moonParametersAtMinimum) {

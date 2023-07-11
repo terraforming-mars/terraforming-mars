@@ -239,7 +239,7 @@ describe('Counter for Moon', () => {
   it('colony rate', () => {
     const counter = new Counter(player, fake);
     const moonData = MoonExpansion.moonData(game);
-    moonData.colonyRate = 3;
+    moonData.habitatRate = 3;
 
     expect(counter.count({moon: {habitatRate: {}}})).eq(3);
     expect(counter.count({moon: {habitatRate: {}}, per: 2})).eq(1);

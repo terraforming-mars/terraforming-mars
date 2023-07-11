@@ -43,7 +43,7 @@ describe('LunarMineUrbanization', () => {
     space.player = player;
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 0;
+    moonData.habitatRate = 0;
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
 
@@ -58,7 +58,7 @@ describe('LunarMineUrbanization', () => {
     expect(space.tile!.tileType).eq(TileType.LUNAR_MINE_URBANIZATION);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([space]);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });
 
@@ -90,7 +90,7 @@ describe('LunarMineUrbanization', () => {
     space.player = player;
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 0;
+    moonData.habitatRate = 0;
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
 
@@ -105,7 +105,7 @@ describe('LunarMineUrbanization', () => {
     expect(space.tile!.tileType).eq(TileType.LUNAR_MINE_URBANIZATION);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([priorLMUSpace, space]);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([priorLMUSpace, space]);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });
 

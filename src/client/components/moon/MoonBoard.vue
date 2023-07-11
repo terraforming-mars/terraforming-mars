@@ -133,7 +133,7 @@ export default Vue.extend({
         curValue = this.model.miningRate;
         break;
       case 'habitat':
-        curValue = this.model.colonyRate;
+        curValue = this.model.habitatRate;
         break;
       default:
         throw new Error('Wrong parameter to get values from: ' + targetParameter);

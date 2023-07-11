@@ -66,7 +66,7 @@ export class MoonExpansion {
   public static initialize(): IMoonData {
     return {
       moon: MoonBoard.newInstance(),
-      colonyRate: 0,
+      habitatRate: 0,
       miningRate: 0,
       logisticRate: 0,
       lunaFirstPlayer: undefined,
@@ -178,7 +178,7 @@ export class MoonExpansion {
 
   public static raiseHabitatRate(player: IPlayer, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      const available = MAXIMUM_HABITAT_RATE - moonData.colonyRate;
+      const available = MAXIMUM_HABITAT_RATE - moonData.habitatRate;
       const increment = Math.min(count, available);
       if (increment > 0) {
         if (player.game.phase === Phase.SOLAR) {
@@ -187,15 +187,15 @@ export class MoonExpansion {
         } else {
           player.game.log('${0} raised the habitat rate ${1} step(s)', (b) => b.player(player).number(increment));
           player.increaseTerraformRating(increment);
-          this.bonus(moonData.colonyRate, increment, 3, () => {
+          this.bonus(moonData.habitatRate, increment, 3, () => {
             player.drawCard();
           });
-          this.bonus(moonData.colonyRate, increment, 6, () => {
+          this.bonus(moonData.habitatRate, increment, 6, () => {
             player.production.add(Resource.ENERGY, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, count);
         }
-        moonData.colonyRate += increment;
+        moonData.habitatRate += increment;
       }
     });
   }
@@ -244,8 +244,8 @@ export class MoonExpansion {
 
   public static lowerHabitatRate(player: IPlayer, count: number) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      const increment = Math.min(moonData.colonyRate, count);
-      moonData.colonyRate -= increment;
+      const increment = Math.min(moonData.habitatRate, count);
+      moonData.habitatRate -= increment;
       player.game.log('${0} lowered the habitat rate ${1} step(s)', (b) => b.player(player).number(increment));
     });
   }

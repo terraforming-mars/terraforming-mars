@@ -31,7 +31,7 @@ describe('SphereHabitats', () => {
     card.play(player);
 
     expect(player.titanium).eq(2);
-    // PlaceMoonHabitatTile is what's responsible for raising the colony rate.
+    // PlaceMoonHabitatTile is what's responsible for raising the habitat rate.
     // Currently that path is already tested with existing code.
     // So I won't keep repeating it.
     // That said, PlaceMoonRoadTile could have its own test. :D

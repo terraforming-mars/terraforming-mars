@@ -1,0 +1,20 @@
+{
+    "Capital": "Főváros",
+    "Mining Area": "Bányászati terület",
+    "Industrial Center": "Ipari központ",
+    "Mining Rights": "Bányászati jogok",
+    "Natural Preserve": "Természetvédelmi terület",
+    "Nuclear Zone": "Nukleáris zóna",
+    "Restricted Area": "Korlátozott terület",
+    "Ecological Zone": "Ökológiai zóna",
+    "Commercial District": "Kereskedelmi negyed",
+    "Lava Flows": "Lávafolyamok",
+    "Mohole Area": "Mohole terület",
+    "1 additional VP for each ocean tile adjacent to this city tile.":
+        "1 további GyP minden olyan óceán lapka után, ami a Főváros mellett van.",
+    "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": 
+        "Hatás: Ha játszol egy állatot vagy növényt tartalmazó ikon, IDE ÉRTVE EZT, tegyél egy állatot erre a kártyára.",
+    "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.":
+        "Követelmény, hogy NÁLAD legyen egy növényzet lapka. Helyezze ezt a lapkát BÁRMELY növényzet lapka mellé.",
+    "1 VP per adjacent city tile.": "1 GyP minden szomszédos város lapka után."
+}

@@ -120,6 +120,7 @@ export class GameHandler extends Handler {
             altVenusBoard: gameReq.altVenusBoard,
             escapeVelocityMode: gameReq.escapeVelocityMode,
             escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
+            escapeVelocityBonusSeconds: gameReq.escapeVelocityBonusSeconds,
             escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
             escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
             twoCorpsVariant: gameReq.twoCorpsVariant,

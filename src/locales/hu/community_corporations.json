@@ -7,9 +7,9 @@
 
     "Incite": "Incite",
     "You start with 32 M€. As your first action, place two delegates in one party.": 
-        "32 M€-val kezdesz. Első akcióként helyezz el két delegált egy pártban.",
+        "32 M€-val kezdesz. Első akcióként helyezz el két küldöttet egy pártban.",
     "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": 
-        "Hatás: +1 befolyásod van. Amikor delegáltat küldesz a lobbizás akcióval, 2 M€-val kevesebbet fizetsz érte.",
+        "Hatás: +1 befolyásod van. Amikor küldöttet küldesz a lobbizás akcióval, 2 M€-val kevesebbet fizetsz érte.",
 
     "Playwrights": "Playwrights",
     "You start with 38 M€ and 1 energy production.": "38 M€-val és 1 energiatermeléssel kezdesz.",
@@ -23,5 +23,5 @@
     "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": 
         "1 növénytermeléssel, 1 M€-termeléssel, 1 hőtermeléssel és 40 M€-val kezdesz.",
     "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.":
-        "Hatás: Játék végén -2 / 0 / 1 / 2 GyP PER IKON TÍPUS a 0 / 1-2 / 3-4 / 5+ ikonok."
+        "Hatás: Játék végén -2 / 0 / 1 / 2 GyP PER IKON TÍPUS minden 0 / 1-2 / 3-4 / 5+ ikonod után."
 }

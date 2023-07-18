@@ -1,0 +1,48 @@
+{
+  "Discard 2 cards from hand. Gain 2 M€ per influence.": "Dobj el 2 kártyát a kezedből. Kapj 2 M€-t befolyásonként.",
+  "Gain 2 M€ per Venus tag (max 5) and influence.": "Kapj 2 M€-t Vénusz ikononként (max 5) és befolyásonként.",
+  "Gain 1 plant per plant production (max 5) and influence.": "Kapj 1 palántát palántatermelésenként (max 5) és befolyásonként.",
+  "Gain 1 M€ for each card in hand (no limit) and influence.": "Kapj 1 M€-t kézben lévő kártyánként (nincs limit) és befolyásonként.",
+  "First player places an ocean tile. Gain 1 plant and 1 steel per influence.": "Az első játékos lerak egy óceán lapkát. Kapj 1 palántát és 1 acélt befolyásonként.",
+  "Gain 1 titanium for each Jovian tag (max 5) and influence.": "Kapj 1 titánt Jupiter ikononként (max 5) és befolyásonként.",
+  "Gain 2 M€ for each event played (max 5) and influence.": "Kapj 2 M€-t eseményenként (max 5) és befolyásonként.",
+  "Add a floater to each card that can collect floaters. Add 1 floater for each influence to a card.": 
+    "Adj egy lebegőt minden kártyához, amelyik gyűjthet lebegőket. Adj 1 lebegőt befolyásonként egy kártyához.",
+  "Lose 2 floaters from a card or 10 M€. Draw 1 card for each influence.": "Veszíts el 2 lebegőt egy kártyáról vagy 10 M€-t. Húzz 1 lapot befolyásonként.",
+  "Gain 10 M€ if you have 9 or more different tags. Influence counts as unique tags.": 
+    "Kapj 10 M€-t, ha 9 vagy több különböző ikonod van. A befolyás egyedi ikonnak számít.",
+  "First player removes 1 ocean tile from the gameboard. Gain 1 standard resource per influence.": 
+    "Az első játékos eltávolít egy óceán lapkát a játéktábláról. Kapj 1 alapvető erőforrást befolyásonként.",
+  "Lose all plants except 3 + influence.": "Veszíts el minden palántát, kivéve 3-at + befolyás.",
+  "Count your influence plus building tags and city tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).": 
+    "Számold össze a befolyásodat, épület ikonjaidat és a város lapkáidat (nincs limit). A legtöbb befolyással rendelkező játékos (vagy 10 az egyjátékos módban) kap 2 TR-t, a második (vagy 5 az egyjátékos módban) kap 1 TR-t (döntetlen esetén mindkettő kap).",
+  "Gain 2 M€ for each influence and set of 5 TR over 15 (max 5 sets).": "Kapj 2 M€-t befolyásonként és minden 5 TR felett 15-önként (maximum 5-ször).",
+  "Lose all heat. Lose 2 M€ for each building tag (max 5, then reduced by influence).": 
+    "Veszíts el minden hőt. Veszíts el 2 M€-t épület ikononként (max 5, befolyással csökkentve).",
+  "Gain 2 M€ for each Earth tag (max 5) and influence.": "Kapj 2 M€-t Föld ikononként (max 5) és befolyásonként.",
+  "Increase energy production 1 step per 2 power tags (no limit). Influence counts as power tags.": 
+    "Növeld az energiatermelésed 1 lépéssel 2 energia ikononként (nincs limit). A befolyás energia ikonnak számít.",
+  "Gain 2 M€ for each space tag (max 5) and influence.": "Kapj 2 M€-t űr ikononként (max 5) és befolyásonként.",
+  "Increase M€ production 1 step for each colony. Gain 1 titanium for each influence.": 
+    "Növeld a M€ termelésed 1 lépéssel minden kolóniád után. Kapj 1 titánt befolyásonként.",
+  "Lose 1 titanium for each Jovian tag (max 5, then reduced by influence).": "Veszíts el 1 titánt Jupiter ikononként (max 5, befolyással csökkentve).",
+  "Lose 4 M€ for each tile adjacent to ocean (max 5, then reduced by influence).": "Veszíts el 4 M€-t minden óceán melletti lapkán (max 5, befolyással csökkentve).",
+  "Lose 3 M€ for each building tag (max 5, then reduced by influence).": "Veszíts el 3 M€-t épület ikononként (max 5, befolyással csökkentve).",
+  "Gain 1 steel for each steel production (max 5) and influence.": "Kapj 1 acélt acéltermelésenként (max 5) és befolyásonként.",
+  "Lose 3 M€ for each set of 5 TR over 10 (max 5 sets). Increase M€ production 1 step per influence.": 
+    "Veszíts el 3 M€-t minden 5 TR-onként 10 felett (max 5-ször). Növeld a M€ termelésed 1 lépéssel befolyásonként.",
+  "Count Earth tags and ADD(!) influence. The player(s) with most (at least 1) loses 2 TR, and 2nd most (at least 1) loses 1 TR. SOLO: Lose 2 TR if the sum is 4 or more.": 
+    "Számold össze a Föld ikonokat és ADD(!) hozzá a befolyásodat. A legtöbb Föld ikonnal rendelkező játékos (legalább 1) veszít 2 TR-t, a második legtöbbel rendelkező (legalább 1) veszít 1 TR-t. EGYJÁTÉKOS: Vesztíts el 2 TR-t, ha az összeg legalább 4.",
+  "Lose 4 M€ for each city tile (max 5, then reduced by influence).": "Veszíts el 4 M€-t minden város lapkán (max 5, befolyással csökkentve).",
+  "Decrease steel and energy production 1 step each. Gain 1 steel per influence.": "Csökkentsd az acél- és az energia termelésed 1 lépéssel. Kapj 1 acélt befolyásonként.",
+  "Decrease temperature 2 steps. Draw 1 card per influence.": "Csökkentsd a hőmérsékletet 2 lépéssel. Húzz 1 lapot befolyásonként.",
+  "Lose 3 M€ for each space tag (max 5, then reduced by influence).": "Veszíts el 3 M€-t űr ikononként (max 5, befolyással csökkentve).",
+  "Lose 3 M€ for each blue card (max 5, then reduced by influence).": "Veszíts el 3 M€-t kék kártyánként (max 5, befolyással csökkentve).",
+  "Gain 2 M€ for each science tag (max 5) and influence.": "Kapj 2 M€-t tudomány ikononként (max 5) és befolyásonként.",
+  "All cards with resources on them gain 1 resource. Draw 1 card for each influence.": 
+    "Minden kártya, amelyen erőforrás található, kap 1 erőforrást. Húzz 1 lapot befolyásonként.",
+  "Gain 2 M€ for each city tile (max 5) and influence.": "Kapj 2 M€-t város lapkánként (max 5) és befolyásonként.",
+  "Increase temperature 2 steps. Increase heat production 1 step per influence.": "Növeld a hőmérsékletet 2 lépéssel. Növeld a hőtermelésed 1 lépéssel befolyásonként.",
+  "Reduce TR 4 steps. Each influence prevents 1 step.": "Csökkentsd a TR-t 4 lépéssel. Minden befolyás megakadályoz 1 lépést.",
+  "Diaspora": "Diaszpóra"
+}

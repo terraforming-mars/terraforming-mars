@@ -1,0 +1,191 @@
+
+{
+   "Airliners": "Repülőgépek",
+   "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.":
+      "Kijátszási feltétel: 3 lebegő. Növeld a M€ termelésed 2 lépéssel. Adj 2 lebegőt BÁRMELYIK kártyához.",
+
+   "Air Raid": "Légicsapás",
+   "Requires that you lose 1 floater. Steal 5 M€ from any player.":
+      "Kijátszási feltétel: veszíts el 1 lebegőt. Lopj el 5 M€-t bármelyik játékostól.",
+
+   "Atmo Collectors": "Atmo Gyűjtők",
+   "Action: Add one floater here.": "Akció: Tegyél egy lebegőt ide.",
+   "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": 
+      "Akció: Vegyél le 1 lebegőt innen, hogy 2 titánt, vagy 3 energiát, vagy 4 hőt kapj.",
+   "Add 2 floaters to ANY card.": "Tegyél 2 lebegőt BÁRMELYIK kártyára.",
+
+   "Community Services": "Közösségi Szolgáltatások",
+   "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Növeld a M€ termelésed 1 lépéssel MINDEN IKON NÉLKÜLI kártyán, beleértve ezt is.",
+
+   "Conscription": "Besorozás",
+   "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.":
+      "Kijátszási feltétel: 2 Föld ikon. A következő kártya, amit ebben a körben kijátszol, 16 M€-val kevesebbe kerül.",
+
+   "Corona Extractor": "Korona Kitermelő",
+   "Requires 4 science tags. Increase your energy production 4 steps.": "Kijátszási feltétel: 4 tudomány ikon. Növeld az energiatermelésed 4 lépéssel.",
+
+   "Cryo-Sleep": "Kriogén Alvás",
+   "Effect: When you trade, you pay 1 less resource for it.": "Hatás: Amikor kereskedsz, 1 erőforrást kevesebbet kell fizetned érte.",
+
+   "Earth Elevator": "Földi Lift",
+   "Increase your titanium production 3 steps.": "Növeld a titán termelésed 3 lépéssel.",
+
+   "Ecology Research": "Ökológiai Kutatás",
+   "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": 
+      "Növeld a palánta termelésed 1 lépéssel minden kolóniádért. Tegyél 1 állatot EGY MÁSIK kártyára és 2 mikróbát EGY MÁSIK kártyára.",
+
+   "Floater Leasing": "Lebegő Bérbeadás",
+   "Increase your M€ production 1 step PER 3 floaters you have.": "Növeld a M€ termelésed 1 lépéssel MINDEN 3 lebegődért.",
+
+   "Floater Prototypes": "Lebegő Prototípusok",
+   "Add two floaters to ANOTHER card.": "Tegyél 2 lebegőt EGY MÁSIK kártyára.",
+
+   "Floater Technology": "Lebegő Technológia",
+   "Action: Add 1 floater to ANOTHER card.": "Akció: Tegyél 1 lebegőt EGY MÁSIK kártyára.",
+
+   "Galilean Waystation": "Galilei Állomás",
+   "Increase your M€ production 1 step for every Jovian tag in play.": "Növeld a M€ termelésed 1 lépéssel MINDEN Jupiter ikonért, ami játékban van.",
+
+   "Heavy Taxation": "Magas Adóztatás",
+   "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Kijátszási feltétel: 2 Föld ikon. Növeld a M€ termelésed 2 lépéssel, és kapj 4 M€-t.",
+
+   "Ice Moon Colony": "Jeges Hold Kolónia",
+   "Place 1 colony and 1 ocean tile.": "Tegyél le 1 kolóniát és 1 óceán lapkát.",
+
+   "Impactor Swarm": "Ütköző Raj",
+   "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.":
+      "Kijátszási feltétel: 2 Jupiter ikon. Kapj 12 hőt. Távolíts el 2 palántát bármelyik játékostól.",
+
+   "Interplanetary Colony Ship": "Bolygóközi Kolónia Hajó",
+   "Place a colony.": "Tegyél le egy kolóniát.",
+
+   "Jovian Lanterns": "Jupiteri Lámpások",
+   "Action: Spend 1 titanium to add 2 floaters here.": "Akció: Fizess be 1 titánt, hogy 2 lebegőt tegyél ide.",
+
+   "1 VP per 2 floaters here.": "1 GyP minden 2 lebegőért, ami itt van.",
+   "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.":
+      "Kijátszási feltétel: 1 Jupiter ikon. Növeld az TR-ed 1 lépéssel. Tegyél 2 lebegőt BÁRMELYIK kártyára.",
+
+   "Jupiter Floating Station": "Jupiteri Lebegő Állomás",
+   "Action: Add 1 floater to a JOVIAN CARD.": "Akció: Tegyél 1 lebegőt egy Jupiter kártyára.",
+   "Action: Gain 1 M€ for every floater here [MAX 4].": "Akció: Kapj 1 M€-t minden lebegőért, ami itt van [MAX 4].",
+   "Requires 3 science tags.": "Kijátszási feltétel: 3 tudomány ikon.",
+   "Gain 1 M€ per floater here (max 4)": "Kapj 1 M€-t minden lebegőért, ami itt van (max 4)",
+
+   "Luna Governor": "Holdi Kormányzó",
+   "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Kijátszási feltétel: 3 Föld ikon. Növeld a M€ termelésed 2 lépéssel.",
+
+   "Lunar Exports": "Holdi Export",
+   "Increase your plant production 2 steps, or your M€ production 5 steps.": 
+      "Növeld a palánta termelésed 2 lépéssel, vagy a M€ termelésed 5 lépéssel.",
+
+   "Lunar Mining": "Holdi Bányászat",
+   "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": 
+      "Növeld a titán termelésed 1 lépéssel MINDEN 2 Föld ikonért, beleértve ezt is.",
+
+   "Market Manipulation": "Piaci Manipuláció",
+   "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": 
+      "Növeld egy kolónia lapka értékét 1 lépéssel. Csökkents egy másik kolónia lapka értékét 1 lépéssel.",
+
+   "Martian Zoo": "Mars-i Állatkert",
+   "Effect: When you play an Earth tag, place an animal here.": "Hatás: Amikor egy Föld ikont játszol, tegyél egy állatot ide.",
+   "Action: Gain 1 M€ per animal here.": "Akció: Kapj 1 M€-t minden állatért, ami itt van.",
+   "Requires 2 city tiles in play.": "Kijátszási feltétel: 2 város lapka.",
+
+   "Mining Colony": "Bányászati Kolónia",
+   "Increase your titanium production 1 step. Place a colony.": "Növeld a titán termelésed 1 lépéssel. Tegyél le egy kolóniát.",
+
+   "Minority Refuge": "Kisebbségi Menedék",
+   "Decrease your M€ production 2 steps. Place a colony.": "Csökkentsd a M€ termelésed 2 lépéssel. Tegyél le egy kolóniát.",
+
+   "Molecular Printing": "Molekuláris Nyomtatás",
+   "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": 
+      "Kapsz 1 M€-t minden város lapkáért és minden kolóniáért, ami játékban van.",
+
+   "Nitrogen from Titan": "Nitrogén a Titánról",
+   "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Növeld az TR-ed 2 lépéssel. Tegyél 2 lebegőt egy Jupiter kártyára.",
+
+   "Pioneer Settlement": "Pionír telep",
+   "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": 
+      "Kijátszási feltétel: ne legyen több, mint 1 kolóniád. Csökkentsd a M€ termelésed 2 lépéssel. Tegyél le egy kolóniát.",
+   "Productive Outpost": "Termelékeny előretolt állomás",
+   "Gain all your colony bonuses.": "Kapd meg az összes kolóniád bónuszát.",
+
+   "Quantum Communications": "Kvantum Kommunikáció",
+   "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.":
+      "Kijátszási feltétel: 4 tudomány ikon. Növeld a M€ termelésed 1 lépéssel minden kolóniádért.",
+
+   "Red Spot Observatory": "Vörös Folt Megfigyelő Állomás",
+   "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": 
+      "Akció: Tegyél 1 lebegőt erre a kártyára, vagy vegyél le 1 lebegőt innen, hogy húzz egy lapot.",
+   "Requires 3 science tags. Draw 2 cards.": "Kijátszási feltétel: 3 tudomány ikon. Húzz 2 lapot.",
+
+   "Refugee Camps": "Menekült Táborok",
+   "Action: Decrease your M€ production 1 step to add a camp resource to this card.": 
+      "Akció: Csökkentsd a M€ termelésed 1 lépéssel, hogy adj egy tábori erőforrást ehhez a kártyához.",
+   "1 VP for each camp resource on this card.": "1 GyP minden tábori erőforrásért, ami ezen a kártyán van.",
+
+   "Research Colony": "Kutató Kolónia",
+   "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.":
+      "Tegyél le egy kolóniát. TEHETED ODA IS, AHOL MÁR VAN EGY KOLÓNIÁD. Húzz 2 lapot.",
+
+   "Rim Freighters": "Peremvidéki teherhajók",
+
+   "Sky Docks": "Égi Dokkok",
+   "Effect: When you play a card, you pay 1 M€ less for it.": "Hatás: Amikor egy kártyát játszol, 1 M€-val kevesebbe kerül.",
+   "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Kijátszási feltétel: 2 Föld ikon. Kapj 1 kereskedelmi flottát.",
+
+   "Solar Probe": "Nap Sonda",
+   "Draw 1 card for every 3 science tags you have, including this.": "Húzz 1 lapot minden 3 tudomány ikonért, beleértve ezt is.",
+
+   "Solar Reflectors": "Nap Tükrök",
+   "Increase your heat production 5 steps.": "Növeld a hő termelésed 5 lépéssel.",
+
+   "Space Port": "Űr Kikötő",
+   "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": 
+      "Kijátszási feltétel: van kolóniád. Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 4 lépéssel. Tegyél le egy város lapkát. Kapsz 1 kereskedelmi flottát.",
+
+   "Space Port Colony": "Űr Kikötő Kolónia",
+   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": 
+      "Kijátszási feltétel: van kolóniád. Tegyél le egy kolóniát. TEHETED ODA IS, AHOL MÁR VAN KOLÓNIÁD. Kapsz 1 kereskedelmi flottát.",
+   "1VP per 2 colonies in play.": "1 GyP minden 2 kolóniáért, ami játékban van.",
+
+   "Spin-off Department": "Spin-off Osztály",
+   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20 M€ OR MORE, draw a card.": 
+      "Hatás: AMIKOR EGY 20 M€-NÁL DRÁGÁBB KÁRTYÁT JÁTSZOL, húzz egy lapot.",
+   "Increase your M€ production 2 steps.": "Növeld a M€ termelésed 2 lépéssel.",
+
+   "Sub-zero Salt Fish": "Jég Alatti Sós Hal",
+   "Action: Add 1 animal to this card.": "Akció: Tegyél 1 állatot erre a kártyára.",
+   "1 VP per 2 animals on this card.": "1 GyP minden 2 állatért, ami ezen a kártyán van.",
+   "Requires -6 C. Decrease any plant production 1 step.": "Kijátszási feltétel: minimum -6 °C. Csökkentsd a palánta termelésed 1 lépéssel.",
+
+   "Titan Air-scrapping": "Titán Lég-szűrés",
+   "Action: Spend 2 floaters here to increase your TR 1 step.": "Akció: Vegyél le 2 lebegőt innen, hogy növeld az TR-ed 1 lépéssel.",
+
+   "Titan Floating Launch-pad": "Titán Lebegő Indítóállomás",
+   "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.":
+      "Akció: Tegyél 1 lebegőt BÁRMELYIK Jupiter kártyára, vagy vegyél le 1 lebegőt innen, hogy ingyen kereskedj.",
+   "Add two floaters to ANY JOVIAN CARD.": "Tegyél 2 lebegőt BÁRMELYIK Jupiter kártyára.",
+
+   "Titan Shuttles": "Titán Űrjárművek",
+   "Action: Add 2 floaters to ANY JOVIAN CARD.": "Akció: Tegyél 2 lebegőt BÁRMELYIK Jupiter kártyára.",
+   "Action: Spend any number of floaters here to gain the same number of titanium.": 
+      "Akció: Vegyél le bármennyi lebegőt innen, hogy ugyanannyi titánt kapj.",
+
+   "Trade Envoys": "Kereskedelmi Képviselők",
+   "Effect: When you trade, you may first increase that Colony Tile track 1 step.": 
+      "Hatás: Amikor kereskedsz, növelheted a Kolónia Lapka értékét 1 lépéssel.",
+
+   "Trading Colony": "Kereskedelmi Kolónia",
+   "Place a colony": "Tegyél le egy kolóniát",
+
+   "Urban Decomposers": "Városi Lebontók",
+   "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.":
+      "Kijátszási feltétel: van 1 város lapkád és 1 kolóniád. Növeld a palánta termelésed 1 lépéssel, és tegyél 2 mikróbát EGY MÁSIK kártyára.",
+
+   "Warp Drive": "Térhajlító Hajtómű",
+   "Effect: When you play a space card, you pay 4 M€ less for it.": 
+      "Hatás: Amikor egy űr kártyát játszol, 4 M€-val kevesebbe kerül.",
+   "Requires 5 science tags.": "Kijátszási feltétel: 5 tudomány ikon."
+}

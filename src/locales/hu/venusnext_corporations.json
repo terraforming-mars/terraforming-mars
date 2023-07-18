@@ -1,0 +1,25 @@
+{
+    "Aphrodite": "Aphrodite",
+    "You start with 1 plant production and 47 M€.": "47 M€-el és 1 palánta termeléssel kezdesz.",
+    "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": 
+        "Hatás: Minden alkalommal, amikor Vénusz egy lépéssel terraformálódik, 2 M€-t kapsz.",
+
+    "Celestic": "Celestic",
+    "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.":
+        "42 M€-el kezdesz. Első akcióként húzz 2 lebegő ikonos lapot.",
+    "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "Akció: Tegyél egy lebegő ikont BÁRMELYIK lapra. 1 GyP minden 3 lebegő ikonért ezen a lapon.",
+
+    "Manutech": "Manutech",
+    "You start with 1 steel production, and 35 M€.": "35 M€-el és 1 acél termeléssel kezdesz.",
+    "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": 
+        "Hatás: Minden egyes lépés, amivel növeled egy nyersanyag termelését, beleértve ezt is, azon nyersanyag mennyiségét is megkapod.",
+
+    "Morning Star Inc": "Morning Star Inc",
+    "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": 
+        "50 M€-el kezdesz. Első akcióként húzz 3 Vénusz ikonos lapot.",
+    "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "Hatás: Vénusz követelményeid +/- 2 lépés, a te választásod szerint.",
+
+    "Viron": "Viron",
+    "You start with 48 M€.": "48 M€-el kezdesz.",
+    "Action: Use a blue card action that has already been used this generation.": "Akció: Használj egy kék lap akciót, amit már használtak ebben a körben."
+}

@@ -1,0 +1,33 @@
+{
+  "Game Id:${0}": "Játék azonosítója: ${0}",
+  "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": 
+    "Utasítások: A játék elindításához külön-külön másolja és ossza meg a linkeket az összes játékossal, majd kattintson a nevére.",
+  "Save this page in case you or one of your opponents loses a link.": 
+    "Mentse el ezt az oldalt, ha Ön vagy egyik ellenfele elveszíti a linket.",
+  "copy": "másolás",
+  "1st": "1.",
+  "2nd": "2.",
+  "3rd": "3.",
+  "4th": "4.",
+  "5th": "5.",
+  "6th": "6.",
+  "Game setting": "Játék beállítások",
+  "Expansion:": "Kiegészítők:",
+  "Fanmade expansion:": "Rajongói kiegészítők:",
+  "Board:": "Tábla:",
+  "(randomized tiles)": "(véletlenszerű csempék)",
+  "WGT:": "Világkormányzati Terraformálás:",
+  "On": "Bekapcsolva",
+  "Off": "Kikapcsolva",
+  "Milestones and Awards:": "Mérföldkövek és Díjak:",
+  "Full randomized": "Teljesen véletlenszerű",
+  "Randomized with limited synergy": "Véletlenszerű korlátozott összhanggal",
+  "Draft:": "Draft:",
+  "Research phase": "Kutatási fázis",
+  "Initial": "Kezdeti",
+  "Game configs:": "Játék konfigurációk:",
+  "timer": "időzítő",
+  "real-time vp": "valós idejű GyP",
+  "fast mode": "gyors mód",
+  "Banned cards:": "Tiltott kártyák:"
+}

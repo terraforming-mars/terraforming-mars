@@ -45,8 +45,9 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   public canAct(player: IPlayer): boolean {
     const canPayWith = this.canPayWith(player);
     return player.canAfford(
-      this.cost - this.discount(player), {
+      {
         ...canPayWith,
+        cost: this.cost - this.discount(player),
         tr: this.tr,
         auroraiData: true,
         reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),

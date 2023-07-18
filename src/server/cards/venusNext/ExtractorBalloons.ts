@@ -62,7 +62,7 @@ export class ExtractorBalloons extends Card implements IActionCard {
   }
   public action(player: IPlayer) {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const canAffordReds = player.canAfford(0, {tr: {venus: 1}});
+    const canAffordReds = player.canAfford({cost: 0, tr: {venus: 1}});
     if (this.resourceCount < 2 || venusMaxed || !canAffordReds) {
       player.addResourceTo(this, {log: true});
       return undefined;

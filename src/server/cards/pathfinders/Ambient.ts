@@ -60,7 +60,7 @@ export class Ambient extends Card implements ICorporationCard {
   }
 
   public canAct(player: IPlayer) {
-    return player.heat >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford(0, {tr: {tr: 1}});
+    return player.heat >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford({cost: 0, tr: {tr: 1}});
   }
 
   public action(player: IPlayer) {

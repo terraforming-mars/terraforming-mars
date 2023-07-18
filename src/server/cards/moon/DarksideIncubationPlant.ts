@@ -50,7 +50,7 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
   }
 
   private canRaiseHabitatRate(player: IPlayer) {
-    return this.resourceCount >= 2 && player.canAfford(0, {tr: {moonHabitat: 1}});
+    return this.resourceCount >= 2 && player.canAfford({cost: 0, tr: {moonHabitat: 1}});
   }
 
   public action(player: IPlayer) {

@@ -55,7 +55,7 @@ export class VastitasBorealisBoard extends MarsBoard {
   }
 
   private filterVastitasBorealis(player: IPlayer, spaces: ReadonlyArray<Space>) {
-    return player.canAfford(VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {tr: {temperature: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
+    return player.canAfford({cost: VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, tr: {temperature: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
   }
 
   public override getSpaces(spaceType: SpaceType, player: IPlayer): ReadonlyArray<Space> {

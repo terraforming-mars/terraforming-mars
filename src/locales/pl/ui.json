@@ -428,12 +428,13 @@
     "t. cimmeria": "Terra Cimmeria",
 
     "Escape Velocity": "Prędkość ucieczki",
-    "After ${0} min": "co ${0} minut",
     "After": "Co",
     "min": "min.",
+    "Plus": "Plus",
+    "seconds per action": "sekund za akcję",
     "Reduce": "Zmniejsz",
     "VP every": "Wszystkie PZ",
-    "Reduce ${0} VP every ${1} min": "Zmniejsz ${0} PZ co ${1} minut",
+    "After ${0} min, reduce ${1} VP every ${2} min.": "Po ${0} min zmniejszaj ${1} PZ co ${2} min",
 
     "Exclude some cards": "Wyklucz karty",
     "Custom Colonies list": "Niestandardowa lista kolonii",

@@ -74,6 +74,7 @@ export interface NewGameConfig {
   altVenusBoard: boolean;
   escapeVelocityMode: boolean;
   escapeVelocityThreshold: number | undefined;
+  escapeVelocityBonusSeconds: number | undefined;
   escapeVelocityPeriod: number | undefined;
   escapeVelocityPenalty: number | undefined;
   twoCorpsVariant: boolean;

@@ -91,41 +91,46 @@
             <svg id="board_legend" height="550" width="630" class="board-legend">
               <template v-if="boardName === BoardName.THARSIS">
                   <g id="ascraeus_mons" transform="translate(95, 192)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Ascraeus Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Ascraeus</tspan>
+                          <tspan x="12" dy="12">Mons</tspan>
+                      </text>
                       <line x1="38" y1="20" x2="88" y2="26" class="board-line"></line>
                       <text x="86" y="29" class="board-caption board_caption--black">●</text>
                   </g>
 
                   <g id="pavonis_mons" transform="translate(90, 230)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Pavonis Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Pavonis</tspan>
+                          <tspan x="4" dy="12">Mons</tspan>
+                      </text>
                       <line x1="35" y1="25" x2="72" y2="30" class="board-line" />
                       <text x="66" y="33" class="board-caption board_caption--black">●</text>
                   </g>
 
                   <g id="arsia_mons" transform="translate(77, 275)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Arsia Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Arsia</tspan>
+                          <tspan x="-2" dy="12">Mons</tspan>
+                      </text>
                       <line x1="25" y1="20" x2="49" y2="26" class="board-line" />
                       <text x="47" y="29" class="board-caption board_caption--black">●</text>
                   </g>
 
                   <g id="tharsis_tholus" transform="translate(85, 175)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Tharsis Tholus</div>
-                      </foreignObject>
+                      <text class="board-caption" dx="47">
+                          <tspan dy="-7">Tharsis</tspan>
+                          <tspan dy="12" x="48">Tholus</tspan>
+                      </text>
                       <line y1="-3" x2="160" y2="2" class="board-line" x1="90"></line>
                       <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
 
                   <g id="noctis_city" transform="translate(85, 320)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Noctis City</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Noctis</tspan>
+                          <tspan x="7" dy="12">City</tspan>
+                      </text>
                       <line x1="30" y1="20" x2="140" y2="-20" class="board-line"></line>
                       <text x="136" y="-18" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
@@ -133,56 +138,60 @@
 
               <template v-if="boardName === BoardName.ELYSIUM">
                   <g id="elysium_mons" transform="translate(110, 190)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Elysium Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Elysium</tspan>
+                          <tspan x="8" dy="12">Mons</tspan>
+                      </text>
                   </g>
 
                   <g id="hecatus_tholus"  transform="translate(130, 150)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Hecatus Tholus</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Hecatus</tspan>
+                          <tspan x="3" dy="12">Tholus</tspan>
+                      </text>
                   </g>
 
                   <g id="arsia_mons" transform="translate(545, 272)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Arsia Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Arsia</tspan>
+                          <tspan x="0" dy="12">Mons</tspan>
+                      </text>
                   </g>
 
                   <g id="olympus_mons" transform="translate(505, 190)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Olympus Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan x="-5" dy="15">Olympus</tspan>
+                          <tspan x="4" dy="12">Mons</tspan>
+                      </text>
                   </g>
                 </template>
 
                 <template v-if="boardName === BoardName.ARABIA_TERRA">
                   <g id="tikhonarov" transform="translate(487, 185)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Tikhonarov</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan>Tikhonarov</tspan>
+                      </text>
                       <line x1="15" y1="5" x2="3" y2="20" class="board-line"></line>
                       <text x="1" y="22" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="ladon" transform="translate(286, 496)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Ladon</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan>Ladon</tspan>
+                      </text>
                       <line x1="20" y1="-12" x2="17" y2="-70" class="board-line"></line>
                       <text x="14" y="-68" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="flaugergues" transform="translate(480, 405)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Flaugergues</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan>Flaugergues</tspan>
+                      </text>
                       <line x1="0" y1="2" x2="-15" y2="10" class="board-line"></line>
                       <text x="-17" y="12" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="charybdis" transform="translate(455, 450)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Charybdis</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan>Charybdis</tspan>
+                      </text>
                       <line x1="0" y1="2" x2="-15" y2="10" class="board-line"></line>
                       <text x="-17" y="12" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
@@ -190,30 +199,34 @@
 
                 <template v-if="boardName === BoardName.AMAZONIS">
                   <g id="albor_tholus" transform="translate(85, 175)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Albor Tholus</div>
-                      </foreignObject>
+                      <text class="board-caption" dx="47">
+                          <tspan dy="-7">Albor</tspan>
+                          <tspan dy="12" x="48">Tholus</tspan>
+                      </text>
                       <line y1="-3" x2="160" y2="2" class="board-line" x1="90"></line>
                       <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="anseris_mons" transform="translate(525, 330)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Anseris Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan>Anseris</tspan>
+                          <tspan x="5" dy="12">Mons</tspan>
+                      </text>
                       <line x1="6" y1="-4" x2="-90" y2="-27" class="board-line"></line>
                       <text x="-95" y="-25" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="pindus_mons" transform="translate(500, 370)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Pindus Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan>Pindus</tspan>
+                          <tspan x="5" dy="12">Mons</tspan>
+                      </text>
                       <line x1="6" y1="-4" x2="-90" y2="-27" class="board-line"></line>
                       <text x="-95" y="-25" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="ulysses_tholus" transform="translate(325, 496)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Ulysses Tholus</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan>Ulysses</tspan>
+                          <tspan x="10" dy="12">Tholus</tspan>
+                      </text>
                       <line x1="20" y1="-1" x2="4" y2="-109" class="board-line"></line>
                       <text x="1" y="-107" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
@@ -221,28 +234,32 @@
 
                 <template v-if="boardName === BoardName.VASTITAS_BOREALIS">
                   <g id="elysium_mons_vastitas_borealis"  transform="translate(410, 70)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Elysium Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Elysium</tspan>
+                          <tspan x="5" dy="12">Mons</tspan>
+                      </text>
                   </g>
                   <g id="alba_fossae"  transform="translate(350, 70)">
                       <line x1="20" y1="30" x2="41" y2="82" class="board-line"></line>
                       <text x="39" y="85" class="board-caption board_caption--black">&#x25cf;</text>
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                          <div xmlns="http://www.w3.org/1999/xhtml">Alba Fossae</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Alba</tspan>
+                          <tspan x="5" dy="12">Fossae</tspan>
+                      </text>
                   </g>
                   <g id="ceranius_fossae" transform="translate(80, 230)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                          <div xmlns="http://www.w3.org/1999/xhtml">Ceranius Fossae</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Ceranius</tspan>
+                          <tspan x="9" dy="12">Fossae</tspan>
+                      </text>
                       <line x1="35" y1="25" x2="72" y2="30" class="board-line" />
                       <text x="66" y="33" class="board-caption board_caption--black">●</text>
                   </g>
                   <g id="alba_mons" transform="translate(105, 200)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                          <div xmlns="http://www.w3.org/1999/xhtml">Alba Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Alba</tspan>
+                          <tspan x="9" dy="12">Mons</tspan>
+                      </text>
                       <line x1="35" y1="25" x2="94" y2="31" class="board-line" />
                       <text x="92" y="34" class="board-caption board_caption--black">●</text>
                   </g>
@@ -250,26 +267,30 @@
 
                 <template v-if="boardName === BoardName.TERRA_CIMMERIA">
                   <g id="albor_tholus"  transform="translate(260, 70)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Albor Tholus</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Albor</tspan>
+                          <tspan x="5" dy="12">Tholus</tspan>
+                      </text>
                   </g>
                   <g id="apollinaris_mons" transform="translate(500, 210)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Apollinaris Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan>Apollinaris</tspan>
+                          <tspan x="10" dy="12">Mons</tspan>
+                      </text>
                       <line x1="15" y1="5" x2="-35" y2="30" class="board-line"></line>
                       <text x="-40" y="33" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="hadriacus_mons" transform="translate(78, 320)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Hadriacus Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Hadriacus</tspan>
+                          <tspan x="24" dy="12">Mons</tspan>
+                      </text>
                   </g>
                   <g id="tyrrhenus_mons" transform="translate(80, 230)">
-                      <foreignObject class="board-caption" x="0" y="5" width="50" height="45" v-i18n>
-                        <div xmlns="http://www.w3.org/1999/xhtml">Tyrrhenus Mons</div>
-                      </foreignObject>
+                      <text class="board-caption">
+                          <tspan dy="15">Tyrrhenus</tspan>
+                          <tspan x="9" dy="12">Mons</tspan>
+                      </text>
                       <line x1="35" y1="25" x2="72" y2="30" class="board-line" />
                       <text x="66" y="33" class="board-caption board_caption--black">●</text>
                   </g>

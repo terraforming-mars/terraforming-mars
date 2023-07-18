@@ -6,6 +6,8 @@
     "${0} added ${1} ${2} to ${3}": "${0} hozzáadott ${1} ${2} ${3}-hoz",
     "Convert Heat": "Hő beváltása",
     "Convert Plants": "Növények beváltása",
+    "CONVERT HEAT": "HŐ BEVÁLTÁSA",
+    "CONVERT PLANTS": "NÖVÉNYEK BEVÁLTÁSA",
     "Convert": "Beváltás",
     "heat into temperature": "hőt hőmérsékletre",
     "Select amount of energy to spend": "Válassz ki valamekkora mennyiségű energiát, amit el akarsz költeni",

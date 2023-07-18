@@ -19,9 +19,9 @@
       "Hatás: Ha játszol egy állat vagy növény ikonnal, beleértve ezt is, tegyél egy állatot erre a lapra.",
 
    "Aridor": "Aridor",
-   "COLONY": "KOLÓNIA",
-   "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": 
-      "40 M€-el kezdesz. Első akcióként helyezz el még egy kolónia lapkát a választásod szerint",
+   "COLONY": "COLONY",
+   "You start with 40 M€. As your first action add a colony tile.": 
+      "40 M€-el kezdesz. Első akcióként helyezz el egy kolóniát.",
    "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": 
       "Hatás: Ha új típusú ikont helyezel le [esemény lapok nem számítanak], növeld a M€ termelésed 1 lépéssel.",
 

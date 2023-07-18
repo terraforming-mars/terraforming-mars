@@ -16,34 +16,13 @@
 
   "Search For Life": "Élet Kutatás",
   "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": 
-    "Akció: Fizess 1 M€-t, hogy felfedj egy lapot a húzó pakliból. Ha a lapon van mikroba ikon, tegyél egy tudományos erőforrást ide.",
-  "3 VPs if you have one or more science resources here.": "3 GyP ha van egy vagy több tudományos erőforrásod itt.",
+    "Akció: Fizess 1 M€-t, hogy felfedj egy lapot a húzó pakliból. Ha a lapon van mikroba ikon, tegyél egy tudomány erőforrást ide.",
+  "3 VPs if you have one or more science resources here.": "3 GyP ha van egy vagy több tudomány erőforrásod itt.",
   "Oxygen must be 6% or less.": "Kijátszási feltétel: Az oxigén szint maximum 6%.",
-
-  "Aerospace Mission": "Űrmisszió",
-  "Place 2 colonies. Pay 14 M€.": "Helyezz le 2 kolóniát. Fizess 14 M€-t.",
 
   "By-Election": "Kiegészítő Választás",
   "set ruling party": "válaszd ki a kormányzó pártot",
   "Set the ruling party to one of your choice. Gain 1 influence.": "Válaszd ki a kormányzó pártot. Kapsz 1 befolyást.",
-
-  "Political Uprising": "Politikai Lázadás",
-  "Place 4 delegates in any parties. Draw a Turmoil card.": "Helyezz el 4 Küldöttet bármelyik pártba. Húzz egy Hatalmi Játszma lapot.",
-
-  "Research Grant": "Kutatási Ösztöndíj",
-  "Gain 8 M€.": "Kapsz 8 M€-t.",
-
-  "Trade Advance": "Kereskedelmi Fejlesztés",
-  "[ solo": "[ Egyjátékos",
-  "Trade all colonies with": "Kereskedj az összes kolóniáddal",
-  "Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": 
-    "Kapsz 2 M€-t [EGYJÁTÉKOS: Kapsz 10 M€-t]. Azonnal kereskedj az összes aktív kolóniáddal. Növelhetsz minden Kolónia lapokon egy lépéssel a kereskedések előtt.",
-
-  "Valuable Gases": "Értékes Gázok",
-  "Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.": "Kapsz 6 M€-t. Játsz egy Vénusz lapot a kezedből és tegyél rá 4 lebegőt.",
-
-  "Venus First": "Először a Vénusz",
-  "Raise Venus 2 steps. Draw 2 Venus cards from the deck.": "Növeld a Vénusz terraformáltság szintjét 2 lépéssel. Húzz 2 Vénusz lapot a pakliból.",
 
   "Inventors' Guild": "Feltalálók Társasága",
   "Action: Look at the top card and either buy it or discard it": "Akció: Nézd meg a legfelső lapot és vedd meg vagy dobd el.",
@@ -134,7 +113,7 @@
     "Kijátszási feltétel: -12 °C vagy annál melegebb. Tegyél 1 állatot BÁRMELYIK ÁLLATOS LAPRA. Kapsz 3 palántát. Növeld a M€ termelésed 2 lépéssel.",
 
   "Interstellar Colony Ship": "Csillagközi Kolónia Hajó",
-  "Requires that you have 5 science tags.": "Kijátszási feltétel: Van 5 tudományos ikonod.",
+  "Requires that you have 5 science tags.": "Kijátszási feltétel: Van 5 tudomány ikonod.",
 
 
   "Security Fleet": "Biztonsági Flotta",
@@ -208,7 +187,7 @@
 
   "Lightning Harvest": "Villámgyűjtés",
   "Requires 3 science tags. Increase your energy production and your M€ production one step each.": 
-    "Kijátszási feltétel: 3 tudományos ikon. Növeld az energiatermelésed és a M€ termelésed 1 lépéssel.",
+    "Kijátszási feltétel: 3 tudomány ikon. Növeld az energiatermelésed és a M€ termelésed 1 lépéssel.",
 
   "Algae": "Alga",
   "Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.": 
@@ -302,7 +281,7 @@
 
   "Advanced Alloys": "Fejlett Ötvözetek",
   "Effect: Each titanium you have is worth 1 M€ extra.": "Hatás: Minden titánod 1 M€-t ér többet.",
-  "Effect: Each steel you have is worth 1 M€ extra.": "Hatás: Minden acéled 1 M€-t ér többet.",
+  "Effect: Each steel you have is worth 1 M€ extra.": "Hatás: Minden acélod 1 M€-t ér többet.",
 
   "Birds": "Madarak",
   "Action: Add an animal to this card.": "Akció: Tegyél egy állatot erre a lapra.",
@@ -311,7 +290,7 @@
 
   "Mars University": "Marsi Egyetem",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.":
-    "Hatás: Ha kijátszol egy tudományos ikont, beleértve ezt is, eldobhatsz egy lapot a kezedből, hogy húzz egy lapot.",
+    "Hatás: Ha kijátszol egy tudomány ikont, beleértve ezt is, eldobhatsz egy lapot a kezedből, hogy húzz egy lapot.",
 
   "Viral Enhancers": "Vírus Fokozók",
   "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": 
@@ -330,7 +309,7 @@
   "Place 2 ocean tiles.": "Helyezz el 2 óceán lapkát.",
 
   "Quantum Extractor": "Kvantum Kivonó",
-  "Requires 4 science tags. Increase your energy production 4 steps.": "Kijátszási feltétel: 4 tudományos ikon. Növeld az energiatermelésed 4 lépéssel.",
+  "Requires 4 science tags. Increase your energy production 4 steps.": "Kijátszási feltétel: 4 tudomány ikon. Növeld az energiatermelésed 4 lépéssel.",
 
   "Giant Ice Asteroid": "Óriás Jég Aszteroida",
   "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.":
@@ -369,10 +348,10 @@
     "Csökkentsd a M€ termelésed 1 lépéssel és növeld az energiatermelésed 2 lépéssel.",
 
   "Research": "Kutatás",
-  "Counts as playing 2 science cards. Draw 2 cards.": "Úgy számít, mintha 2 tudományos lapot játszanál. Húzz 2 lapot.",
+  "Counts as playing 2 science cards. Draw 2 cards.": "Úgy számít, mintha 2 tudomány lapot játszanál. Húzz 2 lapot.",
 
   "Gene Repair": "Gén Javítás",
-  "Requires 3 science tags. Increase your M€ production 2 steps.": "Kijátszási feltétel: 3 tudományos ikon. Növeld a M€ termelésed 2 lépéssel.",
+  "Requires 3 science tags. Increase your M€ production 2 steps.": "Kijátszási feltétel: 3 tudomány ikon. Növeld a M€ termelésed 2 lépéssel.",
 
   "Io Mining Industries": "Io Bányászati Ipar",
   "Increase your titanium production 2 steps and your M€ production 2 steps.": "Növeld a titán termelésed 2 lépéssel és a M€ termelésed 2 lépéssel.",
@@ -382,11 +361,11 @@
     "Kijátszási feltétel: minimum -10 °C. Növeld a palánta termelésed 2 lépéssel. Kapsz 2 palántát.",
 
   "Mass Converter": "Tömeg Konverter",
-  "Requires 5 science tags. Increase your energy production 6 steps.": "Kijátszási feltétel: 5 tudományos ikon. Növeld az energiatermelésed 6 lépéssel.",
+  "Requires 5 science tags. Increase your energy production 6 steps.": "Kijátszási feltétel: 5 tudomány ikon. Növeld az energiatermelésed 6 lépéssel.",
 
   "Physics Complex": "Fizika Komplexum",
-  "Action: Spend 6 energy to add a science resource to this card.": "Akció: Költs el 6 energiát, hogy tegyél egy tudományos erőforrást erre a lapra.",
-  "2 VP for each science resource on this card.": "2 GyP minden tudományos erőforrás után ezen a lapkán.",
+  "Action: Spend 6 energy to add a science resource to this card.": "Akció: Költs el 6 energiát, hogy tegyél egy tudomány erőforrást erre a lapra.",
+  "2 VP for each science resource on this card.": "2 GyP minden tudomány erőforrás után ezen a lapkán.",
 
   "Greenhouses": "Üvegházak",
   "Gain 1 plant for each city tile in play.": "Kapsz 1 palántát minden város lap után a játékban.",
@@ -566,7 +545,7 @@
   "Titanium Mine": "Titán Bánya",
 
   "Tectonic Stress Power": "Tektónikus Stressz Energia",
-  "Requires 2 science tags. Increase your energy production 3 steps.": "Kijátszási feltétel: 2 tudományos ikon. Növeld az energiatermelésed 3 lépéssel.",
+  "Requires 2 science tags. Increase your energy production 3 steps.": "Kijátszási feltétel: 2 tudomány ikon. Növeld az energiatermelésed 3 lépéssel.",
 
   "Nitrophilic Moss": "Nitrofil Moha",
   "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": 
@@ -585,7 +564,7 @@
   "Add 1 resource to a card with at least 1 resource on it": "Tegyél 1 erőforrást egy lapra, amelyen legalább 1 erőforrás van",
 
   "Anti-Gravity Technology": "Antigravitációs Technológia",
-  "Requires 7 science tags.": "Kijátszási feltétel: 7 tudományos ikon.",
+  "Requires 7 science tags.": "Kijátszási feltétel: 7 tudomány ikon.",
 
   "Investment Loan": "Befektetési Hitel",
   "Decrease your M€ production 1 step. Gain 10 M€.": "Csökkentsd a M€ termelésed 1 lépéssel. Kapsz 10 M€-t.",
@@ -718,7 +697,7 @@
 
   "Olympus Conference": "Olympus Konferencia",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.":
-    "Ha kijátszol egy tudományos ikont, beleértve ezt is, vagy tegyél egy tudományos erőforrást erre a lapra, vagy távolíts el egy tudományos erőforrást erről a lapról, hogy húzz egy lapot.",
+    "Ha kijátszol egy tudomány ikont, beleértve ezt is, vagy tegyél egy tudomány erőforrást erre a lapra, vagy távolíts el egy tudomány erőforrást erről a lapról, hogy húzz egy lapot.",
 
   "Rad-Suits": "Sugárzás Védőruhák",
   "Requires two cities in play. Increase your M€ production 1 step.": "Kijátszási feltétel: két város van játékban. Növeld a M€ termelésed 1 lépéssel.",
@@ -746,13 +725,13 @@
 
   "Plantation": "Ültetvény",
   "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": 
-    "Kijátszási feltétel: 2 tudományos ikon. Helyezz el egy növényzet lapkát és növeld az oxigén szintet 1 lépéssel.",
+    "Kijátszási feltétel: 2 tudomány ikon. Helyezz el egy növényzet lapkát és növeld az oxigén szintet 1 lépéssel.",
 
   "Power Infrastructure": "Energia Infrastruktúra",
-  "Action: Spend any amount of Energy and gain that amount of M€.": "Akció: Fizess el bármennyi energiát és kapsz annyi M€-t.",
+  "Action: Spend any amount of energy and gain that amount of M€.": "Akció: Fizess el bármennyi energiát és kapsz annyi M€-t.",
 
   "Indentured Workers": "Önkéntes Munkások",
-  "The next card you play this generation costs 8 M€ less.": "A következő kártya, amit ebben a körben kijátszol, 8 M€-val kevesebbe kerül.",
+  "The next card you play this generation costs 8 M€ less.": "A következő kártya, amit ebben a körben kijátszol, 8 M€-el kevesebbe kerül.",
 
   "Lagrange Observatory": "Lagrange Obszervatórium",
   "Draw 1 card.": "Húzz 1 lapot.",
@@ -780,7 +759,7 @@
     "Csökkents bármelyik játékos energiatermelését 1 lépéssel és növeld a sajátodat 1 lépéssel.",
 
   "Underground Detonations": "Földalatti Robbanások",
-  "Action: Spend 10 M€ to increase your heat production 2 steps.": "Akció: Fizess el 10 M€-t, hogy növeld a hőtermelésed 2 lépéssel.",
+  "Action: Spend 10M€ to increase your heat production 2 steps.": "Akció: Fizess el 10 M€-t, hogy növeld a hőtermelésed 2 lépéssel.",
 
   "Soletta": "Soletta",
   "Increase your heat production 7 steps.": "Növeld a hőtermelésed 7 lépéssel.",
@@ -807,7 +786,7 @@
   "5 Science": "5 Tudomány",
   "(Effect: Draw 2 cards.)": "(Hatás: Húzz 2 lapot.)",
 
-  "Requires 3 science tags to play. Decrease your energy production 1 step.": "Kijátszási feltétel: 3 tudományos ikon. Csökkentsd az energiatermelésed 1 lépéssel.",
+  "Requires 3 science tags to play. Decrease your energy production 1 step.": "Kijátszási feltétel: 3 tudomány ikon. Csökkentsd az energiatermelésed 1 lépéssel.",
 
   "HYDROGEN TO VENUS": "HIDROGÉN A VÉNUSZRA",
 

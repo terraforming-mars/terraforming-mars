@@ -19,7 +19,7 @@
 
    "Conscription": "Besorozás",
    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.":
-      "Kijátszási feltétel: 2 Föld ikon. A következő kártya, amit ebben a körben kijátszol, 16 M€-val kevesebbe kerül.",
+      "Kijátszási feltétel: 2 Föld ikon. A következő kártya, amit ebben a körben kijátszol, 16 M€-el kevesebbe kerül.",
 
    "Corona Extractor": "Korona Kitermelő",
    "Requires 4 science tags. Increase your energy production 4 steps.": "Kijátszási feltétel: 4 tudomány ikon. Növeld az energiatermelésed 4 lépéssel.",
@@ -89,7 +89,7 @@
 
    "Martian Zoo": "Mars-i Állatkert",
    "Effect: When you play an Earth tag, place an animal here.": "Hatás: Amikor egy Föld ikont játszol, tegyél egy állatot ide.",
-   "Action: Gain 1 M€ per animal here.": "Akció: Kapj 1 M€-t minden állatért, ami itt van.",
+   "Action: Gain 1M€ per animal here.": "Akció: Kapj 1 M€-t minden állatért, ami itt van.",
    "Requires 2 city tiles in play.": "Kijátszási feltétel: 2 város lapka.",
 
    "Mining Colony": "Bányászati Kolónia",
@@ -132,7 +132,7 @@
    "Rim Freighters": "Peremvidéki teherhajók",
 
    "Sky Docks": "Égi Dokkok",
-   "Effect: When you play a card, you pay 1 M€ less for it.": "Hatás: Amikor egy kártyát játszol, 1 M€-val kevesebbe kerül.",
+   "Effect: When you play a card, you pay 1 M€ less for it.": "Hatás: Amikor egy kártyát játszol, 1 M€-el kevesebbe kerül.",
    "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Kijátszási feltétel: 2 Föld ikon. Kapj 1 kereskedelmi flottát.",
 
    "Solar Probe": "Nap Sonda",
@@ -151,7 +151,9 @@
    "1VP per 2 colonies in play.": "1 GyP minden 2 kolóniáért, ami játékban van.",
 
    "Spin-off Department": "Spin-off Osztály",
-   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20 M€ OR MORE, draw a card.": 
+   "(Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.)": 
+      "(Hatás: AMIKOR EGY 20 M€-NÁL DRÁGÁBB KÁRTYÁT JÁTSZOL, húzz egy lapot.)",
+   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": 
       "Hatás: AMIKOR EGY 20 M€-NÁL DRÁGÁBB KÁRTYÁT JÁTSZOL, húzz egy lapot.",
    "Increase your M€ production 2 steps.": "Növeld a M€ termelésed 2 lépéssel.",
 
@@ -186,6 +188,6 @@
 
    "Warp Drive": "Térhajlító Hajtómű",
    "Effect: When you play a space card, you pay 4 M€ less for it.": 
-      "Hatás: Amikor egy űr kártyát játszol, 4 M€-val kevesebbe kerül.",
+      "Hatás: Amikor egy űr kártyát játszol, 4 M€-el kevesebbe kerül.",
    "Requires 5 science tags.": "Kijátszási feltétel: 5 tudomány ikon."
 }

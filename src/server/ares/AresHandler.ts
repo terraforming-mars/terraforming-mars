@@ -6,6 +6,7 @@ import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
 import {Tile} from '../Tile';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
@@ -17,12 +18,6 @@ import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
 import {_AresHazardPlacement} from './AresHazards';
 import {CrashlandingBonus} from '../pathfinders/CrashlandingBonus';
-
-export enum HazardSeverity {
-    NONE,
-    MILD,
-    SEVERE
-}
 
 export class AresHandler {
   private constructor() {}
@@ -146,24 +141,7 @@ export class AresHandler {
   }
 
   public static hasHazardTile(space: Space): boolean {
-    return AresHandler.hazardSeverity(space) !== HazardSeverity.NONE;
-  }
-
-  public static hazardSeverity(space: Space): HazardSeverity {
-    const type = space.tile?.tileType;
-
-    switch (type) {
-    case TileType.DUST_STORM_MILD:
-    case TileType.EROSION_MILD:
-      return HazardSeverity.MILD;
-
-    case TileType.DUST_STORM_SEVERE:
-    case TileType.EROSION_SEVERE:
-      return HazardSeverity.SEVERE;
-
-    default:
-      return HazardSeverity.NONE;
-    }
+    return hazardSeverity(space.tile?.tileType) !== HazardSeverity.NONE;
   }
 
   // A light version of `earnAdjacencyBonuses` but does not increment the milestone,
@@ -182,7 +160,7 @@ export class AresHandler {
     game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
       megaCreditCost += adjacentSpace.adjacency?.cost || 0;
       if (subjectToHazardAdjacency === true) {
-        const severity = this.hazardSeverity(adjacentSpace);
+        const severity = hazardSeverity(adjacentSpace.tile?.tileType);
         switch (severity) {
         case HazardSeverity.MILD:
           productionCost += 1;
@@ -194,7 +172,7 @@ export class AresHandler {
       }
     });
 
-    const severity = this.hazardSeverity(space);
+    const severity = hazardSeverity(space.tile?.tileType);
     switch (severity) {
     case HazardSeverity.MILD:
       megaCreditCost += 8;

@@ -1,6 +1,6 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
-import {isHazardTileType} from '../../common/TileType';
+import {isHazardTileType} from '../../common/AresTileType';
 import {Board} from '../boards/Board';
 
 export class PolarExplorer extends BaseMilestone {

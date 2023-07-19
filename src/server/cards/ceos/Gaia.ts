@@ -6,7 +6,7 @@ import {CeoCard} from './CeoCard';
 import {SpaceType} from '../../../common/boards/SpaceType';
 
 import {AresHandler} from '../../ares/AresHandler';
-import {isHazardTileType} from '../../../common/TileType';
+import {isHazardTileType} from '../../../common/AresTileType';
 
 export class Gaia extends CeoCard {
   constructor() {

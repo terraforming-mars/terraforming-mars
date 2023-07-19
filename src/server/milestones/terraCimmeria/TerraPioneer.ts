@@ -1,5 +1,6 @@
 import {IPlayer} from '../../IPlayer';
-import {isHazardTileType, TileType} from '../../../common/TileType';
+import {TileType} from '../../../common/TileType';
+import {isHazardTileType} from '../../../common/AresTileType';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {BaseMilestone} from '../IMilestone';
 

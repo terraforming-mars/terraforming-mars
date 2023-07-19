@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {IPlayer} from '../IPlayer';
-import {isHazardTileType} from '../../common/TileType';
+import {isHazardTileType} from '../../common/AresTileType';
 
 export class Edgedancer implements IAward {
   public readonly name = 'Edgedancer';

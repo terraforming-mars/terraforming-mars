@@ -1,7 +1,7 @@
 import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
-import {isHazardTileType} from '../../common/TileType';
+import {isHazardTileType} from '../../common/AresTileType';
 
 export class Irrigator extends BaseMilestone {
   constructor() {

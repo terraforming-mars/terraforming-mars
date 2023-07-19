@@ -214,6 +214,12 @@
                               <span v-i18n>min</span>
                             </label>
 
+                            <label for="escapeBonusSeconds-checkbox" v-show="escapeVelocityMode">
+                              <span v-i18n>Plus</span><span>&nbsp;</span>
+                              <input type="number" class="create-game-corporations-count" value="2" step="1" min="1" :max="10" v-model="escapeVelocityBonusSeconds" id="escapeBonusSeconds-checkbox">
+                              <span v-i18n>seconds per action</span>
+                            </label>
+
                             <label for="escapePeriod-checkbox" v-show="escapeVelocityMode">
                               <span v-i18n>Reduce</span><span>&nbsp;</span>
                               <input type="number" class="create-game-corporations-count" value="1" min="1" :max="10" v-model="escapeVelocityPenalty" id="escapePeriod-checkbox">
@@ -573,6 +579,7 @@ export default (Vue as WithRefs<Refs>).extend({
       altVenusBoard: false,
       escapeVelocityMode: false,
       escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
+      escapeVelocityBonusSeconds: constants.DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS,
       escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
       escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
       twoCorpsVariant: false,
@@ -945,6 +952,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const requiresVenusTrackCompletion = this.requiresVenusTrackCompletion;
       const escapeVelocityMode = this.escapeVelocityMode;
       const escapeVelocityThreshold = this.escapeVelocityMode ? this.escapeVelocityThreshold : undefined;
+      const escapeVelocityBonusSeconds = this.escapeVelocityBonusSeconds ? this.escapeVelocityBonusSeconds : undefined;
       const escapeVelocityPeriod = this.escapeVelocityMode ? this.escapeVelocityPeriod : undefined;
       const escapeVelocityPenalty = this.escapeVelocityMode ? this.escapeVelocityPenalty : undefined;
       const twoCorpsVariant = this.twoCorpsVariant;
@@ -1111,6 +1119,7 @@ export default (Vue as WithRefs<Refs>).extend({
         altVenusBoard: this.altVenusBoard,
         escapeVelocityMode,
         escapeVelocityThreshold,
+        escapeVelocityBonusSeconds,
         escapeVelocityPeriod,
         escapeVelocityPenalty,
         twoCorpsVariant,

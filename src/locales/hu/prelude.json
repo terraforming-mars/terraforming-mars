@@ -1,0 +1,113 @@
+{
+    "Allied Bank": "Barátságos Bank",
+    "Increase your M€ production 4 steps. Gain 3 M€.": "Kapsz 3 M€-t és növeld a M€ termelésed 4 lépéssel. ",
+
+    "Aquifer Turbines": "Vízturbinák",
+    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 МC.": 
+        "Helyezz le egy óceán lapkát. Növeld az energiatermelésed 2 lépéssel. Fizess 3 МC-t.",
+
+    "Biofuels": "Biotüzelőanyagok",
+    "Increase your energy and plant production 1 step. Gain 2 plants.": "Növeld az energiatermelésed és a palántatermelésed 1 lépéssel. Kapsz 2 palántát.",
+
+    "Biolab": "Biolabor",
+    "Increase your plant production 1 step. Draw 3 cards.": "Növeld a palántatermelésed 1 lépéssel. Húzz 3 lapot.",
+
+    "Biosphere Support": "Bioszféra támogatás",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Növeld a palántatermelésed 2 lépéssel. Csökkentsd a M€ termelésed 1 lépéssel.",
+
+    "Business Empire": "Üzleti Birodalom",
+    "Increase your M€ production 6 steps. Pay 6 МC.": "Növeld a M€ termelésed 6 lépéssel. Fizess 6 МC-t.",
+
+    "Dome Farming": "Üvegházfarm",
+    "Increase your M€ production 2 steps and plant production 1 step.": "Növeld a M€ termelésed 2 lépéssel és a palántatermelésed 1 lépéssel.",
+
+    "Donation": "Adomány",
+    "Gain 21 МC.": "Kapsz 21 МC-t.",
+
+    "Early Settlement": "Korai település",
+    "Increase your plant production 1 step. Place a city tile.": "Növeld a palántatermelésed 1 lépéssel. Helyezz le egy város lapkát.",
+
+    "Ecology Experts": "Ökológiai szakértők",
+    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": 
+        "Növeld a palántatermelésed 1 lépéssel. Játsz egy lapot a kezedből, figyelmen kívül hagyva a globális követelményeket.",
+
+    "Eccentric Sponsor": "Különc szponzor",
+    "PLAY A CARD FROM HAND, REDUCING ITS COST BY 25 M€": "JÁTSZ EGY LAPOT A KEZEDBŐL, 25 M€-VAL CSÖKKENTVE AZ ÁRÁT",
+
+    "Experimental Forest": "Kísérleti erdő",
+    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": 
+        "Helyezz le 1 növényzet lapkát és növeld az oxigént 1 lépéssel. Húzz 2 palánta ikonnal ellátott lapot",
+
+    "Galilean Mining": "Galilei bányászat",
+    "Increase your titanium production 2 steps. Pay 5 M€.": "Növeld a titán termelésed 2 lépéssel. Fizess 5 M€-t.",
+
+    "Great Aquifer": "Nagy víztározó",
+    "Place 2 ocean tiles.": "Helyezz le 2 óceán lapkát.",
+
+    "Huge Asteroid": "Hatalmas aszteroida",
+    "Increase temperature 3 steps. Pay 5 МC.": "Növeld a hőmérsékletet 3 lépéssel. Fizess 5 М€-t.",
+
+    "Io Research Outpost": "Io kutatóállomás",
+    "Increase your titanium production 1 step. Draw a card.": "Növeld a titán termelésed 1 lépéssel. Húzz egy lapot.",
+
+    "Loan": "Hitel",
+    "Gain 30 МC. Decrease your M€ production 2 steps.": "Kapsz 30 МC-t. Csökkentsd a M€ termelésed 2 lépéssel.",
+
+    "Martian Industries": "Marsi ipar",
+    "Increase your energy and steel production 1 step. Gain 6 МC.": "Növeld az energiatermelésed és az acéltermelésed 1 lépéssel. Kapsz 6 МC-t.",
+
+    "Metal-Rich Asteroid": "Fémgazdag aszteroida",
+    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Növeld a hőmérsékletet 1 lépéssel. Kapsz 4 titánt és 4 acélt.",
+
+    "Metals Company": "Fémek vállalata",
+    "Increase your МC, steel and titanium production 1 step.": "Növeld a МC, acél és titán termelésed 1 lépéssel.",
+
+    "Mining Operations": "Bányászati műveletek",
+    "Increase your steel production 2 steps. Gain 4 steel.": "Növeld az acéltermelésed 2 lépéssel. Kapsz 4 acélt.",
+
+    "Mohole": "Mohole",
+    "Increase your heat production 3 steps. Gain 3 heat.": "Növeld a hőtermelésed 3 lépéssel. Kapsz 3 hőt.",
+
+    "Mohole Excavation": "Mohole ásatás",
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": 
+        "Növeld az acéltermelésed 1 lépéssel és a hőtermelésed 2 lépéssel. Kapsz 2 hőt.",
+
+    "Nitrogen Shipment": "Nitrogén szállítmány",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 МC.": "Növeld a palántatermelésed 1 lépéssel. Növeld a TR-t 1 lépéssel. Kapsz 5 М€-t.",
+
+    "Orbital Construction Yard": "Orbitális építőtábor",
+    "Increase your titanium production 1 step. Gain 4 titanium.": "Növeld a titán termelésed 1 lépéssel. Kapsz 4 titánt.",
+
+    "Polar Industries": "Sarki ipar",
+    "Increase your heat production 2 steps. Place an ocean tile.": "Növeld a hőtermelésed 2 lépéssel. Helyezz le egy óceán lapkát.",
+
+    "Power Generation": "Energiatermelés",
+    "Increase your energy production 3 steps.": "Növeld az energiatermelésed 3 lépéssel.",
+
+    "Research Network": "Kutatási hálózat",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": 
+        "Növeld a M€ termelésed 1 lépéssel. Húzz 3 lapot. Amikor végrehajtasz egy akciót, a kérdőjel ikon bármelyik ikonnak számít a választásod szerint.",
+
+    "Self-Sufficient Settlement": "Önellátó település",
+    "Increase your M€ production 2 steps. Place a city tile.": "Növeld a M€ termelésed 2 lépéssel. Helyezz le egy város lapkát.",
+
+    "Smelting Plant": "Kohó",
+    "Raise oxygen 2 steps. Gain 5 steel.": "Növeld az oxigén szintet 2 lépéssel. Kapsz 5 acélt.",
+
+    "Society Support": "Társadalmi támogatás",
+    "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": 
+        "Növeld a palántatermelésed, az energiatermelésed és a hőtermelésed 1 lépéssel. Csökkentsd a M€ termelésed 1 lépéssel.",
+
+    "Supplier": "Beszállító",
+    "Increase your energy production 2 steps. Gain 4 steel.": "Növeld az energiatermelésed 2 lépéssel. Kapsz 4 acélt.",
+
+    "Supply Drop": "Légi segítség",
+    "Gain 3 titanium, 8 steel and 3 plants.": "Kapsz 3 titánt, 8 acélt és 3 palántát.",
+
+    "UNMI Contractor": "Egyesült Nemzetek szerződéses partnere",
+    "Increase your TR 3 steps. Draw a card.": "Növeld a TR-t 3 lépéssel. Húzz egy lapot.",
+
+    "Acquired Space Agency": "Megvásárolt űrügynökség",
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": 
+        "Kapsz 6 titánt. Húzz két űr ikonnal ellátott lapot"
+}

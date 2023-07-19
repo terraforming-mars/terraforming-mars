@@ -1,0 +1,67 @@
+{
+  "Aerial Lenses": "Légi lencsék",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": 
+    "Kijátsási feltétel: A Kelvinisták kormányoznak, vagy legalább 2 jelölted van ott. Távolíts el 2 palántát bármelyik játékostól. Növeld a hőtermelésed 2 lépéssel.",
+
+  "Banned Delegate": "Kitiltott jelölt",
+  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "Kijátsási feltétel: Te vagy a miniszterelnök. Távolíts el egy nem vezető jelöltet.",
+
+  "Cultural Metropolis": "Kulturális metropolisz",
+  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": 
+    "Kijátsási feltétel: Az Egység kormányozik, vagy legalább 2 jelölted van ott. Csökkentsd az energiatermelésed 1 lépéssel, és növeld a M€ termelésed 3 lépéssel. Helyezz le egy várost. Helyezz el 2 jelöltet 1 pártban.",
+
+  "Diaspora Movement": "Diaszpóra mozgalom",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ for each Jovian tag in play, including this.": 
+    "Kijátsási feltétel: A Vörösök kormányoznak, vagy legalább 2 jelölted van ott. Kapj 1 M€-t minden Jupiter ikonodért, beleértve ezt is.",
+
+  "Event Analysts": "Esemény elemzők",
+  "Effect: You have +1 influence.": "Hatás: +1 befolyásod van.",
+  "Requires that Scientists are ruling or that you have 2 delegates there.": "Kijátsási feltétel: A Tudósok kormányoznak, vagy legalább 2 jelölted van ott.",
+
+  "GMO Contract": "GMO szerződés",
+  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": 
+    "Hatás: Amikor palánta, állat vagy mikroba ikonnal rendelkező kártyát játszol ki, beleértve ezt is, kapj 2 M€-t.",
+  "Requires that Greens are ruling or that you have 2 delegates there.": "Kijátsási feltétel: A Zöldek kormányoznak, vagy legalább 2 jelölted van ott.",
+
+  "Martian Media Center": "Marsi média központ",
+  "Action: Pay 3 M€ to add a delegate to any party.": "Akció: Fizess 3 M€-t, hogy egy jelöltet helyezz bármelyik pártba.",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": 
+    "Kijátsási feltétel: A Csak A Mars kormányozik, vagy legalább 2 jelölted van ott. Növeld a M€ termelésed 2 lépéssel.",
+
+  "Parliament Hall": "Parlament terem",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 building tags you have, including this.": 
+    "Kijátsási feltétel: A Csak A Mars kormányozik, vagy legalább 2 jelölted van ott. Növeld a M€ termelésed 1 lépéssel minden 3 épület ikonodért, beleértve ezt is.",
+
+  "PR Office": "PR iroda",
+  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": 
+    "Kijátsási feltétel: Az Egység kormányozik, vagy legalább 2 jelölted van ott. Kapj 1 TR-t. Kapj 1 M€-t minden Föld ikonodért, beleértve ezt is.",
+
+  "Public Celebrations": "Nyilvános ünneplések",
+  "Requires that you are Chairman.": "Kijátsási feltétel: Te vagy a miniszterelnök.",
+
+  "Recruitment": "Toborzás",
+  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "Cserélj ki egy SEMLEGES NEM PÁRTVEZETŐ jelöltet egy sajátoddal a tartalékodból.",
+
+  "Red Tourism Wave": "Vörös turizmus hullám",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": 
+    "Kijátsási feltétel: A Vörösök kormányoznak, vagy legalább 2 jelölted van ott. Kapj 1 M€-t minden ÜRES TERÜLETRŐL, AMELY SZOMSZÉDOS A TE LAPKÁDDAL",
+
+  "Sponsored Mohole": "Támogatott Mohole",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": 
+    "Kijátsási feltétel: A Kelvinisták kormányoznak, vagy legalább 2 jelölted van ott. Növeld a hőtermelésed 2 lépéssel.",
+
+  "Supported Research": "Támogatott kutatás",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": 
+    "Kijátsási feltétel: A Tudósok kormányoznak, vagy legalább 2 jelölted van ott. Húzz 2 lapot.",
+
+  "Wildlife Dome": "Vadállat kupola",
+  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": 
+    "Kijátsási feltétel: A Zöldek kormányoznak, vagy legalább 2 jelölted van ott. Helyezz le egy növényzet lapkát, és növeld az oxigént 1 lépéssel.",
+
+  "Vote Of No Confidence": "Bizalmatlansági szavazás",
+  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": 
+    "Kijátsási feltétel: Van egy pártvezetőd bármelyik pártban, és a jelenlegi miniszterelnök semleges. Távolítsd el a SEMLEGES miniszterelnököt, és helyezd oda a saját jelöltedet (a tartalékodból) helyette. Kapj 1 TR-t.",
+
+  "Political Alliance": "Politikai szövetség",
+  "Requires that you have 2 party leaders. Gain 1 TR.": "Kijátsási feltétel: Van 2 pártvezetőd. Kapj 1 TR-t."
+}

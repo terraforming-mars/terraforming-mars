@@ -1,0 +1,27 @@
+{    
+    "Project Workshop": "Project Workshop",
+    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": 
+        "Akció: Dobj el egy kék kártyát, hogy a rajta lévő GyP-okat TR-re változtasd és húzz 2 lapot, vagy költs 3 M€-t, hogy húzz egy kék kártyát.",
+    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": 
+        "39 M€-val, 1 acéllal és 1 titánnal kezdesz. Első akcióként húzz egy kék kártyát.",
+
+    "Incite": "Incite",
+    "You start with 32 M€. As your first action, place two delegates in one party.": 
+        "32 M€-val kezdesz. Első akcióként helyezz el két küldöttet egy pártban.",
+    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": 
+        "Hatás: +1 befolyásod van. Amikor küldöttet küldesz a lobbizás akcióval, 2 M€-val kevesebbet fizetsz érte.",
+
+    "Playwrights": "Playwrights",
+    "You start with 38 M€ and 1 energy production.": "38 M€-val és 1 energiatermeléssel kezdesz.",
+    "Action: Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": 
+        "Akció: Játszd újra egy játékos bármelyik lejátszott eseményét, fizess CSAK az M€-tel (kedvezmények és visszatérítések érvényesek), majd TÁVOLÍTSD EL A JÁTÉKBÓL.",
+
+    "Midas": "Midas",
+    "You start with 120 M€. Lower your TR 7 steps.": "120 M€-val kezdesz. Csökkentsd a TR-ed 7 lépéssel.",
+
+    "Agricola Inc": "Agricola Inc",
+    "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": 
+        "1 növénytermeléssel, 1 M€-termeléssel, 1 hőtermeléssel és 40 M€-val kezdesz.",
+    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.":
+        "Hatás: Játék végén -2 / 0 / 1 / 2 GyP PER IKON TÍPUS minden 0 / 1-2 / 3-4 / 5+ ikonod után."
+}

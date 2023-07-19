@@ -1,4 +1,3 @@
-import * as constants from '../../common/constants';
 import {Phase} from '../../common/Phase';
 import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
@@ -66,11 +65,12 @@ export function calculateVictoryPoints(player: IPlayer) {
   // Escape velocity VP penalty
   if (player.game.gameOptions.escapeVelocityMode) {
     const threshold = player.game.gameOptions.escapeVelocityThreshold;
+    const bonusSecondsPerAction = player.game.gameOptions.escapeVelocityBonusSeconds;
     const period = player.game.gameOptions.escapeVelocityPeriod;
     const penaltyPerMin = player.game.gameOptions.escapeVelocityPenalty ?? 1;
     const elapsedTimeInMinutes = player.timer.getElapsedTimeInMinutes();
-    if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
-      const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (player.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION / 60)), 0);
+    if (threshold !== undefined && bonusSecondsPerAction !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
+      const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (player.actionsTakenThisGame * (bonusSecondsPerAction / 60)), 0);
       // Don't lose more VP than what is available
       victoryPointsBreakdown.updateTotal();
 

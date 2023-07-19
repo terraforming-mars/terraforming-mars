@@ -115,12 +115,13 @@ export class Playwrights extends Card implements ICorporationCard {
     try {
       player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
-          return card.type === CardType.EVENT &&
-          // Can player.canPlay(card) replace this?
-          player.canAfford({
+          const canAffordOptions = {
             cost: player.getCardCost(card),
             reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
-          }) && player.simpleCanPlay(card);
+          };
+          return card.type === CardType.EVENT &&
+          // Can player.canPlay(card) replace this?
+          player.canAfford(canAffordOptions) && player.simpleCanPlay(card, canAffordOptions);
         }));
       });
     } finally {

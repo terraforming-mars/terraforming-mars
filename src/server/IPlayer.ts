@@ -230,7 +230,7 @@ export interface IPlayer {
   takeActionForFinalGreenery(): void;
   getPlayableCards(): Array<PlayableCard>;
   canPlay(card: IProjectCard): boolean | YesAnd;
-  simpleCanPlay(card: IProjectCard): boolean | YesAnd;
+  simpleCanPlay(card: IProjectCard, canAffordOptions: CanAffordOptions): boolean | YesAnd;
   canSpend(payment: Payment, reserveUnits?: Units): boolean;
   payingAmount(payment: Payment, options?: Partial<Payment.Options>): number;
   affordOptionsForCard(card: IProjectCard): CanAffordOptions;

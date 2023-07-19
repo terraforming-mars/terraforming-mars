@@ -1334,7 +1334,7 @@ export class Player implements IPlayer {
 
   public canPlay(card: IProjectCard): boolean | YesAnd {
     const options = this.affordOptionsForCard(card);
-    return this.canAfford(options) && this.simpleCanPlay(card);
+    return this.canAfford(options) && this.simpleCanPlay(card, options);
   }
 
   /**
@@ -1342,7 +1342,7 @@ export class Player implements IPlayer {
    * Only made public for tests.
    */
   // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard): boolean | YesAnd {
+  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
     let satisfies: boolean | YesAnd = true;
     if (card.requirements !== undefined) {
       satisfies = card.requirements.satisfies(this);
@@ -1350,7 +1350,7 @@ export class Player implements IPlayer {
         return false;
       }
     }
-    const canPlay = card.canPlay(this);
+    const canPlay = card.canPlay(this, canAffordOptions);
     if (canPlay === false) {
       return false;
     }

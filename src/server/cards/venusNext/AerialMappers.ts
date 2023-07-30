@@ -30,7 +30,7 @@ export class AerialMappers extends ActionCard {
                 type: CardResource.FLOATER,
                 count: 1,
               },
-              title: 'Add 1 floater to this card',
+              title: 'Add 1 floater to ANY card',
             },
           ],
         },

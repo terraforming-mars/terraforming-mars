@@ -88,8 +88,7 @@ describe('SecretLabs', function() {
     player.tagsForTest = {jovian: 1, science: 1};
     maxOutOceans(player);
     const options = cast(card.play(player), OrOptions);
-    expect(options.options.length).eq(3)
-    expect(options.options[0].title).eq('Add 2 microbes to ANY card.')
+    expect(options.options.length).eq(3);
+    expect(options.options[0].title).eq('Add 2 microbes to ANY card.');
   });
-
 });

@@ -3,7 +3,7 @@ import {SecretLabs} from '../../../src/server/cards/pathfinders/SecretLabs';
 import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
@@ -81,5 +81,14 @@ describe('SecretLabs', function() {
 
     expect(player.game.getOxygenLevel()).eq(1);
     expect(floaterCard.resourceCount).eq(2);
+  });
+
+  it('play - available if oceans are maxed out', function() {
+    player.megaCredits = card.cost;
+    player.tagsForTest = {jovian: 1, science: 1};
+    maxOutOceans(player);
+    const options = cast(card.play(player), OrOptions);
+    expect(options.options.length).eq(3);
+    expect(options.options[0].title).eq('Add 2 microbes to ANY card.');
   });
 });

@@ -124,6 +124,8 @@ export class GameCards {
       preludes = preludes.filter((c) => c.name !== CardName.MERGER);
     }
 
+    // TODO(kberg): 2023-10-01 remove this line, also comment out HEAD_START from the preludes manifest.
+    preludes = preludes.filter((c) => c.name !== CardName.HEAD_START);
     return preludes;
   }
 

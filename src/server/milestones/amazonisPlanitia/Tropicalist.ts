@@ -1,5 +1,5 @@
 import {IPlayer} from '../../IPlayer';
-import {isHazardTileType} from '../../../common/TileType';
+import {isHazardTileType} from '../../../common/AresTileType';
 import {BaseMilestone} from '../IMilestone';
 
 export class Tropicalist extends BaseMilestone {

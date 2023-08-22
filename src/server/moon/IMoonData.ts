@@ -32,7 +32,7 @@ export namespace IMoonData {
       throw new Error(`player ${moonData.lunaFirstPlayerId} not found`);
     }
     return {
-      habitatRate: moonData.habitatRate ?? moonData.colonyRate ?? 0,
+      habitatRate: moonData.habitatRate,
       logisticRate: moonData.logisticRate,
       miningRate: moonData.miningRate,
       moon: MoonBoard.deserialize(moonData.moon, players),

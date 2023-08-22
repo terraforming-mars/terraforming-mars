@@ -408,6 +408,8 @@
 
     "Convert heat": "Hő átalakítása",
 	"Take action": "Végezz el egy akciót",
-	"Self-Replicating Robots cards": "Önreplikáló Robotok kártyák"
-
+	"Self-Replicating Robots cards": "Önreplikáló Robotok kártyák",
+    "Plus": "Plusz",
+    "seconds per action": "másodperc akciónként",
+    "After ${0} min, reduce ${1} VP every ${2} min.": "${0} perc után, ${2} percenként, ${1} GyP-ot veszítesz."
 }

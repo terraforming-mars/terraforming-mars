@@ -104,7 +104,7 @@
     "Miner": "Bányász",
     "Having the most steel and titanium resource cubes": "A legtöbb acél és titán erőforrás kockád van",
 
-    "Cultivator": "Földművelő",
+    "Cultivator": "Földműves",
     "Own the most greenery tiles": "A legtöbb növényzet lapod van",
     "Magnate": "Mágnás",
     "Have the most automated (green) project cards in play": "A legtöbb automatizált (zöld) projekt kártyád van a játékban",
@@ -120,11 +120,11 @@
         "A legtöbb projekt kártyád van a játékban, aminek az alap költsége legalább 20 M€ (nem esemény kártyák)",
     "Industrialist": "Iparos",
     "Having most steel and energy resources": "A legtöbb acél és energia erőforrásod van",
-    "Desert Settler": "Sivatagi gyarmatosító",
+    "Desert Settler": "Sivatagi telepes",
     "Own the most tiles south of the equator (the four bottom rows)": "A legtöbb lapkád van az Egyenlítő alatt (a tábla alsó 4 sorában)",
     "Estate Dealer": "Ingatlanos",
     "Own the most tiles adjacent to ocean tiles": "A legtöbb lapkád van az óceán mellett",
-    "Benefactor": "Jótékony",
+    "Benefactor": "Jótevő",
     "Have the highest terraform rating": "A legmagasabb terraformálási rátád van",
     
     "Venuphile": "Vénusz szerető",
@@ -164,8 +164,8 @@
 
     "Convert 7 heat into temperature": "Hőmérséklet növelése 7 hőből",
     "Convert 8 heat into temperature": "Hőmérséklet növelése 8 hőből",
-    "Convert 8 plants into greenery": "Növényzet lapka lehejezése 8 palántából",
-    "Convert 7 plants into greenery": "Növényzet lapka lehejezése 7 palántából",
+    "Convert 8 plants into greenery": "Növényzet lapka lehelyezése 8 palántából",
+    "Convert 7 plants into greenery": "Növényzet lapka lehelyezése 7 palántából",
     "Colonies": "Kolóniák",
     "funded by": "Megalapította",
     "claimed by": "Elérte",
@@ -203,7 +203,7 @@
     "Select action for World Government Terraforming": "Válassz akciót a Világkormányzati Terraformáláshoz",
     "Increase temperature": "Hőmérséklet növelése",
     "Increase oxygen": "Oxigén növelése",
-    "Add an ocean": "Óceán lehejezése",
+    "Add an ocean": "Óceán lehelyezése",
     "Increase Venus scale": "Vénusz skála növelése",
 
     "Login": "Bejelentkezés",
@@ -390,8 +390,8 @@
     "${0} decreased energy production 1 step to gain 8 M€": "${0} csökkentette az energia termelést 1 lépéssel, hogy 8 M€-t szerezzen",
     "${0} flipped and discarded ${1}": "${0} megfordította és eldobta a(z) ${1} kártyát",
     "Remove resource": "Erőforrás eltávolítása",
-    "Remove a science resource from this card to draw a card": "Távolíts el egy tudományos erőforrást erről a kártyáról, hogy húzz egy kártyát",
-    "Add a science resource to this card": "Adj hozzá egy tudományos erőforrást ehhez a kártyához",
+    "Remove a science resource from this card to draw a card": "Távolíts el egy tudomány erőforrást erről a kártyáról, hogy húzz egy kártyát",
+    "Add a science resource to this card": "Adj hozzá egy tudomány erőforrást ehhez a kártyához",
     "Select a card to discard": "Válassz egy kártyát, hogy eldobd",
     "Do nothing": "Ne csinálj semmit",
     "Discard": "Dobd el",
@@ -408,6 +408,8 @@
 
     "Convert heat": "Hő átalakítása",
 	"Take action": "Végezz el egy akciót",
-	"Self-Replicating Robots cards": "Önreplikáló Robotok kártyák"
-
+	"Self-Replicating Robots cards": "Önreplikáló Robotok kártyák",
+    "Plus": "Plusz",
+    "seconds per action": "másodperc akciónként",
+    "After ${0} min, reduce ${1} VP every ${2} min.": "${0} perc után, ${2} percenként, ${1} GyP-ot veszítesz."
 }

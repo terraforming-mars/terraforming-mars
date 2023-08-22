@@ -1,5 +1,6 @@
 {
     "Beginner Corporation": "Kezdő Cégbirodalom",
+    "BEGINNER CORPORATION": "KEZDŐ CÉGBIRODALOM",
     "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.":
         "42 M€-el kezdesz. A játék elején nem választhatsz 10 kártyát, hanem 10 kártyát kapsz ingyen.",
 
@@ -16,7 +17,7 @@
     "ecoline": "ecoline",
     "EcoLine": "EcoLine",
     "You start with 2 plant production, 3 plants, and 36 M€.":  
-        "2 növény termeléssel, 3 növénnyel és 36 M€-val kezdesz.",
+        "2 növény termeléssel, 3 növénnyel és 36 M€-el kezdesz.",
     "Effect: You may always pay 7 plants, instead of 8, to place greenery.":
         "Hatás: Mindig ahelyett, hogy 8 palántát fizetnél a növényzetlapka elhelyezéséért, fizess 7 palántát.",
 

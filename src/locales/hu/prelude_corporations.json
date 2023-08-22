@@ -2,10 +2,13 @@
     "Cheung Shing Mars": "Cheung Shing Mars",
     "You start with 3 M€ production and 44 M€.": "44 M€-el és 3 M€ termeléssel kezded a játékot.",
     "Effect: When you play a building tag, you pay 2 M€ less for it.": 
-        "Hatás: Ha épület ikonú kártyát játszol, akkor 2 M€-val kevesebbe kerül.",
+        "Hatás: Ha épület ikonú kártyát játszol, akkor 2 M€-el kevesebbe kerül.",
 
     "Point Luna": "Point Luna",
-    "You start with 1 titanium production, and 38 M€.": "38 M€-el és 1 titán termeléssel kezded a játékot.",
+    "POINT LUNA": "POINT LUNA",
+    "POINT": "POINT",
+    "LUNA": "LUNA",
+    "You start with 1 titanium production and 38 M€.": "38 M€-el és 1 titán termeléssel kezded a játékot.",
     "Effect: When you play an Earth tag, including this, draw a card.": 
         "Hatás: Ha Föld ikonú kártyát játszol, akkor húzz egy lapot.",
 
@@ -15,10 +18,13 @@
         "Akció: 4 M€-t költs, hogy növeld (egyik) LEGKEVESEBB termelésed 1 lépéssel.",
 
     "Valley Trust": "Valley Trust",
+    "VALLEY TRUST": "VALLEY TRUST",
+    "VALLEY": "VALLEY",
+    "TRUST": "TRUST",
     "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": 
         "37 M€-el kezded a játékot. Első akcióként húzz 3 Prelúdium lapot, és játsz egyet közülük. A másik kettőt dobd el.",
-    "Effect: When you play a science tag, you pay 2 M€ less for it.": 
-        "Hatás: Ha tudomány ikonú kártyát játszol, akkor 2 M€-val kevesebbe kerül.",
+    "Effect: When you play a science tag, you pay 2M€ less for it.":
+        "Hatás: Ha tudomány ikonú kártyát játszol, akkor 2 M€-el kevesebbe kerül.",
 
     "Vitor": "Vitor",
     "You start with 45 M€. As your first action, fund an award for free.": "45 M€-el kezded a játékot. Első akcióként alapíts egy díjat ingyen.",

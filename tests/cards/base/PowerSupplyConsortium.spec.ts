@@ -21,10 +21,14 @@ describe('PowerSupplyConsortium', function() {
   it('Cannot play without power tags', function() {
     player.production.add(Resource.ENERGY, 3);
     expect(player.simpleCanPlay(card)).is.not.true;
+    player.tagsForTest = {power: 1};
+    expect(player.simpleCanPlay(card)).is.false;
+    player.tagsForTest = {power: 2};
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Can play - no targets', function() {
-    player.playedCards.push(card, card);
+    player.tagsForTest = {power: 2};
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
@@ -42,7 +46,7 @@ describe('PowerSupplyConsortium', function() {
 
   it('Can play - single target', function() {
     player2.production.override({energy: 1});
-    player.playedCards.push(card, card);
+    player.tagsForTest = {power: 2};
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
@@ -69,7 +73,7 @@ describe('PowerSupplyConsortium', function() {
 
   it('Can play in solo mode if have enough power tags', function() {
     const [soloGame, soloPlayer] = testGame(1);
-    soloPlayer.playedCards.push(card, card);
+    soloPlayer.tagsForTest = {power: 2};
     expect(card.canPlay(soloPlayer)).is.true;
 
     card.play(soloPlayer);

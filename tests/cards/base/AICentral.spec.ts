@@ -14,17 +14,20 @@ describe('AICentral', function() {
   });
 
   it('Can not play if not enough science tags to play', function() {
+    player.production.add(Resource.ENERGY, 1);
+    player.tagsForTest = {science: 2};
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if no energy production', function() {
-    player.playedCards.push(card, card, card);
+    player.tagsForTest = {science: 3};
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.playedCards.push(card, card, card);
+    player.tagsForTest = {science: 3};
     player.production.add(Resource.ENERGY, 1);
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.energy).to.eq(0);

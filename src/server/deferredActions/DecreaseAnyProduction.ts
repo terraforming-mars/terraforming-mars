@@ -7,7 +7,10 @@ export type Options = {
   count: number,
   stealing?: boolean
 }
+
 export class DecreaseAnyProduction extends DeferredAction {
+  private cb: () => void = () => {};
+
   constructor(
     player: IPlayer,
     public resource: Resource,
@@ -20,20 +23,28 @@ export class DecreaseAnyProduction extends DeferredAction {
     super(player, Priority.ATTACK_OPPONENT);
   }
 
+  public andThen(cb: () => void) {
+    this.cb = cb;
+    return this;
+  }
+
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.resolveInsuranceInSoloGame();
+      this.cb();
       return undefined;
     }
 
     const candidates: Array<IPlayer> = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
 
     if (candidates.length === 0) {
+      this.cb();
       return undefined;
     }
 
     if (candidates.length === 1 && candidates[0] !== this.player) {
       candidates[0].production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+      this.cb();
       return undefined;
     }
 
@@ -43,6 +54,7 @@ export class DecreaseAnyProduction extends DeferredAction {
       'Decrease',
       (found: IPlayer) => {
         found.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+        this.cb();
         return undefined;
       },
     );

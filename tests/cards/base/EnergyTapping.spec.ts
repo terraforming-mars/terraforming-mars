@@ -18,16 +18,35 @@ describe('EnergyTapping', function() {
     [game, player, player2] = testGame(2);
   });
 
-  it('Should play - auto select if single target', function() {
+  it('play - no targets', function() {
+    player.playedCards.push(card, card);
+    expect(player.simpleCanPlay(card)).is.true;
+
     card.play(player);
+    runAllActions(game);
+
+    expect(player.production.energy).to.eq(1);
+
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
+    expect(selectPlayer.players).deep.eq([player]);
+    selectPlayer.cb(player);
+    runAllActions(game);
+    expect(player.production.energy).to.eq(0);
+    expect(player2.production.energy).to.eq(0);
+  });
+
+  it('play - auto select if single target', function() {
     player2.production.override({energy: 1});
+
+    card.play(player);
+
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player2.production.energy).to.eq(0);
   });
 
-  it('Should play - multiple targets', function() {
+  it('play - multiple targets', function() {
     player.production.add(Resource.ENERGY, 2);
     player2.production.add(Resource.ENERGY, 3);
 

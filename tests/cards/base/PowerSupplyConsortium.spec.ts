@@ -30,8 +30,14 @@ describe('PowerSupplyConsortium', function() {
     card.play(player);
     runAllActions(game);
 
-    cast(player.popWaitingFor(), undefined);
     expect(player.production.energy).to.eq(1);
+
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
+    expect(selectPlayer.players).deep.eq([player]);
+    selectPlayer.cb(player);
+    runAllActions(game);
+    expect(player.production.energy).to.eq(0);
+    expect(player2.production.energy).to.eq(0);
   });
 
   it('Can play - single target', function() {

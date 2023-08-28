@@ -1,25 +1,18 @@
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
-import {DeferredAction, Priority} from './DeferredAction';
+import {Priority, TailedDeferredAction} from './DeferredAction';
 
 export type Options = {
   count?: number;
 }
 
-export class GainProduction extends DeferredAction {
-  private cb: () => void = () => {};
-
+export class GainProduction extends TailedDeferredAction<undefined> {
   constructor(
     player: IPlayer,
     public resource: Resource,
     public options: Options = {},
   ) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
-  }
-
-  public andThen(cb: () => void) {
-    this.cb = cb;
-    return this;
   }
 
   public execute() {
@@ -32,7 +25,7 @@ export class GainProduction extends DeferredAction {
     if (this.options.count > 0) {
       this.player.production.add(this.resource, this.options.count);
     }
-    this.cb();
+    this.cb(undefined);
     return undefined;
   }
 }

@@ -11,5 +11,6 @@ export const GAME_MODULES = [
   'moon',
   'pathfinders',
   'ceo',
+  'prelude2',
 ] as const;
 export type GameModule = typeof GAME_MODULES[number];

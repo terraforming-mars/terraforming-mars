@@ -173,6 +173,7 @@ export default Vue.extend({
       case 'venus': return 'Venus Next';
       case 'colonies': return 'Colonies';
       case 'prelude': return 'Prelude';
+      case 'prelude2': return 'Prelude2';
       case 'turmoil': return 'Turmoil';
       case 'community': return 'Community';
       case 'ares': return 'Ares';

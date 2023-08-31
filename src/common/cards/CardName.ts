@@ -430,6 +430,8 @@ export enum CardName {
     WILDLIFE_DOME = 'Wildlife Dome',
     VOTE_OF_NO_CONFIDENCE = 'Vote Of No Confidence',
 
+    // Prelude 2
+
     // Promo cards
     DUSK_LASER_MINING = 'Dusk Laser Mining',
     PROJECT_INSPECTION = 'Project Inspection',
@@ -476,6 +478,7 @@ export enum CardName {
     ROBOT_POLLINATORS = 'Robot Pollinators',
     HEAD_START = 'Head Start',
     SUPERCAPACITORS = 'Supercapacitors',
+    DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

@@ -196,11 +196,20 @@ export abstract class Board {
 
       const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
       if (additionalCosts.stock.megacredits > 0) {
+        let afford = true;
         if (canAffordOptions !== undefined) {
-          return player.canAfford({...canAffordOptions, cost: canAffordOptions.cost + additionalCosts.stock.megacredits});
+          afford = player.canAfford({...canAffordOptions, cost: canAffordOptions.cost + additionalCosts.stock.megacredits});
         } else {
-          return player.canAfford(additionalCosts.stock.megacredits);
+          afford = player.canAfford(additionalCosts.stock.megacredits);
         }
+        if (afford === false) {
+          return false;
+        }
+      }
+      if (additionalCosts.production > 0) {
+        const p = player.production;
+        const sum = p.megacredits + 5 + p.steel + p.titanium + p.plants + p.energy + p.heat;
+        return sum > additionalCosts.production;
       }
       return true;
     });

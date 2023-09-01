@@ -54,3 +54,12 @@ export class SimpleDeferredAction extends DeferredAction {
     super(player, priority);
   }
 }
+
+export abstract class TailedDeferredAction<T> extends DeferredAction {
+  protected cb: (param: T) => void = () => {};
+
+  public andThen(cb: (param: T) => void) {
+    this.cb = cb;
+    return this;
+  }
+}

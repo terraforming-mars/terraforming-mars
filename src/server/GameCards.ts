@@ -48,7 +48,7 @@ export class GameCards {
       [true, BASE_CARD_MANIFEST],
       [gameOptions.corporateEra, CORP_ERA_CARD_MANIFEST],
       [gameOptions.preludeExtension, PRELUDE_CARD_MANIFEST],
-      [gameOptions.preludeExtension, PRELUDE2_CARD_MANIFEST],
+      [gameOptions.prelude2Expansion, PRELUDE2_CARD_MANIFEST],
       [gameOptions.venusNextExtension, VENUS_CARD_MANIFEST],
       [gameOptions.coloniesExtension, COLONIES_CARD_MANIFEST],
       [gameOptions.turmoilExtension, TURMOIL_CARD_MANIFEST],
@@ -79,7 +79,7 @@ export class GameCards {
       case 'prelude':
         return gameOptions.preludeExtension;
       case 'prelude2':
-        return gameOptions.preludeExtension;
+        return gameOptions.prelude2Expansion;
       case 'moon':
         return gameOptions.moonExpansion;
       case 'pathfinders':

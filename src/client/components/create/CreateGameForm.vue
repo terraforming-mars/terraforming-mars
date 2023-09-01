@@ -44,7 +44,7 @@
                             <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="prelude">
                             <label for="prelude2-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-prelude"></div>
-                                <span v-i18n>Prelude2</span>
+                                <span v-i18n>Prelude 2</span>
                             </label>
 
                             <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">

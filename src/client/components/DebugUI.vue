@@ -497,7 +497,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'base': return 'Base';
       case 'corpera': return 'Corporate Era';
       case 'prelude': return 'Prelude';
-      case 'prelude2': return 'Prelude2';
+      case 'prelude2': return 'Prelude 2';
       case 'venus': return 'Venus Next';
       case 'colonies': return 'Colonies';
       case 'turmoil': return 'Turmoil';

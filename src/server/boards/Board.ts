@@ -202,7 +202,7 @@ export abstract class Board {
           return player.canAfford(additionalCosts.stock.megacredits);
         }
       }
-      return false;
+      return true;
     });
 
     return landSpaces;

@@ -41,6 +41,12 @@
                                 <span v-i18n>Prelude</span>
                             </label>
 
+                            <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="prelude">
+                            <label for="prelude2-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                                <span v-i18n>Prelude2</span>
+                            </label>
+
                             <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
                             <label for="venusNext-checkbox" class="expansion-button">
                             <div class="create-game-expansion-icon expansion-icon-venus"></div>
@@ -425,6 +431,7 @@
                   v-on:corporation-list-changed="updatecustomCorporations"
                   v-bind:corporateEra="corporateEra"
                   v-bind:prelude="prelude"
+                  v-bind:prelude2="prelude2Expansion"
                   v-bind:venusNext="venusNext"
                   v-bind:colonies="colonies"
                   v-bind:turmoil="turmoil"
@@ -524,6 +531,7 @@ export default (Vue as WithRefs<Refs>).extend({
       ],
       corporateEra: true,
       prelude: false,
+      prelude2Expansion: false,
       draftVariant: true,
       initialDraft: false,
       randomMA: RandomMAOptionType.NONE,
@@ -845,6 +853,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'venus': return model.venusNext;
       case 'colonies': return model.colonies;
       case 'prelude': return model.prelude;
+      case 'prelude2': return model.prelude2Expansion;
       case 'turmoil': return model.turmoil;
       case 'community': return model.communityCardsOption;
       case 'ares': return model.aresExtension;
@@ -918,6 +927,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       const corporateEra = this.corporateEra;
       const prelude = this.prelude;
+      const prelude2Expansion = this.prelude2Expansion;
       const draftVariant = this.draftVariant;
       const initialDraft = this.initialDraft;
       const randomMA = this.randomMA;
@@ -1081,6 +1091,7 @@ export default (Vue as WithRefs<Refs>).extend({
         players,
         corporateEra,
         prelude,
+        prelude2Expansion,
         draftVariant,
         showOtherPlayersVP,
         venusNext,

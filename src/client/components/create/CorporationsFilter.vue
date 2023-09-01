@@ -57,6 +57,9 @@ export default Vue.extend({
     prelude: {
       type: Boolean,
     },
+    prelude2: {
+      type: Boolean,
+    },
     venusNext: {
       type: Boolean,
     },
@@ -100,6 +103,7 @@ export default Vue.extend({
         ...corpCardNames('base'),
         ...this.corporateEra ? corpCardNames('corpera') : [],
         ...this.prelude ? corpCardNames('prelude') : [],
+        ...this.prelude2 ? corpCardNames('prelude2') : [],
         ...this.venusNext ? corpCardNames('venus') : [],
         ...this.colonies ? corpCardNames('colonies') : [],
         ...this.turmoil ? corpCardNames('turmoil') : [],

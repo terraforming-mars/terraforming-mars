@@ -193,7 +193,7 @@ export class PostgreSQL implements IDatabase {
     const maxSaveId = await this.getMaxSaveId(gameId);
     return this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId])
       .then(() => {
-        return this.client.query('DELETE FROM completed_games where game_id = $1', [gameId]);
+        return this.client.query('DELETE FROM completed_game where game_id = $1', [gameId]);
       });
   }
 

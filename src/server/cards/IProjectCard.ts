@@ -1,5 +1,5 @@
 import {ICard} from './ICard';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
@@ -13,7 +13,7 @@ export type PlayableCard = {
 };
 
 export interface IProjectCard extends ICard {
-  canPlay(player: IPlayer): CanPlayResponse;
+  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): CanPlayResponse;
   cost: number;
 
   // This field serves two purposes:

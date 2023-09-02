@@ -48,7 +48,7 @@ export class Crashlanding extends Card implements IProjectCard {
     return spaces.filter((space) => board.getAdjacentSpaces(space).filter(Board.isCitySpace).length <= 1);
   }
 
-  public override canPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
     return this.playableSpaces(player, canAffordOptions).length > 0;
   }
   public override bespokePlay(player: IPlayer) {

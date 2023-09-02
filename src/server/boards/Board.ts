@@ -178,7 +178,6 @@ export abstract class Board {
 
   public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
-      // tiles are not placeable on restricted spaces at all
       if (space.bonus.includes(SpaceBonus.RESTRICTED)) {
         return false;
       }
@@ -211,9 +210,9 @@ export abstract class Board {
         const sum = p.megacredits + 5 + p.steel + p.titanium + p.plants + p.energy + p.heat;
         return sum > additionalCosts.production;
       }
+
       return true;
     });
-
     return landSpaces;
   }
 

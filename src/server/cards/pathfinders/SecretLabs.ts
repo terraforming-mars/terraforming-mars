@@ -40,8 +40,8 @@ export class SecretLabs extends Card implements IProjectCard {
     });
   }
 
-  private canAfford(player: IPlayer, tr: TRSource, megacrdits: number = this.cost): boolean {
-    return player.canAfford(megacrdits, {steel: true, titanium: true, tr});
+  private canAfford(player: IPlayer, tr: TRSource, megacredits: number = this.cost): boolean {
+    return player.canAfford({cost: megacredits, steel: true, titanium: true, tr});
   }
 
   public override bespokeCanPlay(player: IPlayer) {

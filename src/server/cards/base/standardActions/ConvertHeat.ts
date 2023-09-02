@@ -31,7 +31,8 @@ export class ConvertHeat extends StandardActionCard {
       return false;
     }
 
-    return player.canAfford(0, {
+    return player.canAfford({
+      cost: 0,
       tr: {temperature: 1},
       reserveUnits: Units.of({heat: 8}),
     });

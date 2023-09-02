@@ -34,6 +34,7 @@ import {Stock} from './player/Stock';
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
 export interface CanAffordOptions extends Partial<Payment.Options> {
+  cost: number,
   reserveUnits?: Units,
   tr?: TRSource | DynamicTRSource,
 }
@@ -228,14 +229,16 @@ export interface IPlayer {
   pass(): void;
   takeActionForFinalGreenery(): void;
   getPlayableCards(): Array<PlayableCard>;
-  // TODO(kberg): After migration, see if this can become private again.
-  // Or perhaps moved into card?
-  canAffordCard(card: IProjectCard): boolean;
   canPlay(card: IProjectCard): boolean | YesAnd;
   simpleCanPlay(card: IProjectCard): boolean | YesAnd;
   canSpend(payment: Payment, reserveUnits?: Units): boolean;
   payingAmount(payment: Payment, options?: Partial<Payment.Options>): number;
-  canAfford(cost: number, options?: CanAffordOptions): boolean;
+  /**
+   * Returns a summary of how much a player would have to spend to play a card,
+   * any associated costs, and ways the player can pay.
+   */
+  affordOptionsForCard(card: IProjectCard): CanAffordOptions;
+  canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
   runInitialAction(corp: ICorporationCard): void;

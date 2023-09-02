@@ -55,7 +55,7 @@ export class LunaEcumenopolis extends Card {
     const moonData = MoonExpansion.moonData(player.game);
     const expectedHabitatRate = Math.min(moonData.habitatRate + 2, 8);
     const expectedTRBump = Math.floor(expectedHabitatRate / 2);
-    return player.canAfford(0, {tr: {moonHabitat: 2, tr: expectedTRBump}});
+    return player.canAfford({cost: 0, tr: {moonHabitat: 2, tr: expectedTRBump}});
   }
 
   public override bespokeCanPlay(player: IPlayer) {

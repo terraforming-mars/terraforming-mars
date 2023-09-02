@@ -40,7 +40,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
   }
 
   private canPlaceOcean(player: IPlayer) {
-    return player.game.canAddOcean() && player.canAfford(0, {tr: {oceans: 1}});
+    return player.game.canAddOcean() && player.canAfford({cost: 0, tr: {oceans: 1}});
   }
 
   public canAct(player: IPlayer): boolean {

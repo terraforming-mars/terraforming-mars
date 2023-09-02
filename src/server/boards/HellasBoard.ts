@@ -54,7 +54,7 @@ export class HellasBoard extends MarsBoard {
   }
 
   private filterHellas(player: IPlayer, spaces: ReadonlyArray<Space>) {
-    return player.canAfford(HELLAS_BONUS_OCEAN_COST, {tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    return player.canAfford({cost: HELLAS_BONUS_OCEAN_COST, tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
   public override getSpaces(spaceType: SpaceType, player: IPlayer): ReadonlyArray<Space> {

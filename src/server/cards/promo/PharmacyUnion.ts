@@ -80,7 +80,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
     if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
       // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
-      if (player.canAfford(0, {tr: {tr: 3}})) {
+      if (player.canAfford({cost: 0, tr: {tr: 3}})) {
         game.defer(new SimpleDeferredAction(
           player,
           () => {
@@ -119,7 +119,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
             if (this.isDisabled) return undefined;
 
             if (this.resourceCount > 0) {
-              if (player.canAfford(0, {tr: {tr: 1}}) === false) {
+              if (player.canAfford({cost: 0, tr: {tr: 1}}) === false) {
                 // TODO (Lynesth): Remove this when #1670 is fixed
                 game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
               } else {
@@ -130,7 +130,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
               return undefined;
             }
 
-            if (player.canAfford(0, {tr: {tr: 3}}) === false) {
+            if (player.canAfford({cost: 0, tr: {tr: 3}}) === false) {
               // TODO (Lynesth): Remove this when #1670 is fixed
               game.log('${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
               return undefined;

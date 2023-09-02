@@ -1322,21 +1322,19 @@ export class Player implements IPlayer {
     return playableCards;
   }
 
-  // TODO(kberg): After migration, see if this can become private again.
-  // Or perhaps moved into card?
-  public canAffordCard(card: IProjectCard): boolean {
+  public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
     const trSource: TRSource | DynamicTRSource | undefined = card.tr || (card.behavior !== undefined ? getBehaviorExecutor().toTRSource(card.behavior) : undefined);
-    return this.canAfford(
-      this.getCardCost(card),
-      {
-        ...this.paymentOptionsForCard(card),
-        reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
-        tr: trSource,
-      });
+    return {
+      cost: this.getCardCost(card),
+      ...this.paymentOptionsForCard(card),
+      reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
+      tr: trSource,
+    };
   }
 
   public canPlay(card: IProjectCard): boolean | YesAnd {
-    return this.canAffordCard(card) && this.simpleCanPlay(card);
+    const options = this.affordOptionsForCard(card);
+    return this.canAfford(options) && this.simpleCanPlay(card);
   }
 
   /**
@@ -1434,10 +1432,11 @@ export class Player implements IPlayer {
   }
 
   /**
-   * Returns `true` if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
+   * Returns `true` if the player can afford to pay `options.cost` mc (possibly replaceable with steel, titanium etc.)
    * and additionally pay the reserveUnits (no replaces here)
    */
-  public canAfford(cost: number, options?: CanAffordOptions): boolean {
+  public canAfford(o: number | CanAffordOptions): boolean {
+    const options = typeof(o) === 'number' ? {cost: o} : o;
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
     if (reserveUnits.heat > 0) {
       // Special-case heat
@@ -1455,7 +1454,7 @@ export class Player implements IPlayer {
     }
 
     const maxPayable = this.maxSpendable(reserveUnits);
-    const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options?.tr) * REDS_RULING_POLICY_COST;
+    const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options.tr) * REDS_RULING_POLICY_COST;
     if (redsCost > 0) {
       const usableForRedsCost = this.payingAmount(maxPayable, {});
       if (usableForRedsCost < redsCost) {
@@ -1465,7 +1464,7 @@ export class Player implements IPlayer {
 
     const usable = this.payingAmount(maxPayable, options);
 
-    return cost + redsCost <= usable;
+    return options.cost + redsCost <= usable;
   }
 
   private getStandardProjects(): Array<IStandardProjectCard> {

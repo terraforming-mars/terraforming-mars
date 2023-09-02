@@ -35,7 +35,8 @@ export class ConvertPlants extends StandardActionCard {
       // player can afford the reds tax when increasing the oxygen level.
       return true;
     }
-    return player.canAfford(0, {
+    return player.canAfford({
+      cost: 0,
       tr: {oxygen: 1},
       reserveUnits: Units.of({plants: player.plantsNeededForGreenery}),
     });

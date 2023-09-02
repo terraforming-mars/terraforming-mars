@@ -25,6 +25,8 @@ import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
 import {SaturnSurfing} from '../../src/server/cards/promo/SaturnSurfing';
 import {Behavior} from '../../src/server/behavior/Behavior';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
+import {StormCraftIncorporated} from '../../src/server/cards/colonies/StormCraftIncorporated';
+import {AndOptions} from '../../src/server/inputs/AndOptions';
 
 function asUnits(player: IPlayer): Units {
   return {
@@ -473,7 +475,30 @@ describe('Executor', () => {
 
   it('spend - heat', () => {
     const behavior = {spend: {heat: 1}};
-    expect(() => executor.canExecute(behavior, player, fake)).to.throw(/heat/);
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+    player.heat = 1;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+    executor.execute(behavior, player, fake);
+    expect(player.heat).eq(0);
+  });
+
+  it('spend - heat - Stormcraft', () => {
+    const stormcraft = new StormCraftIncorporated();
+    player.setCorporationForTest(stormcraft);
+    const behavior = {spend: {heat: 3}};
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+    stormcraft.resourceCount = 1;
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+    stormcraft.resourceCount = 2;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+    const andOptions = cast(player.popWaitingFor(), AndOptions);
+    andOptions.options[0].cb(0); // heat
+    andOptions.options[1].cb(2); // floaters
+    andOptions.cb();
+
+    expect(stormcraft.resourceCount).eq(0);
   });
 
   it('spend - resource on card', () => {

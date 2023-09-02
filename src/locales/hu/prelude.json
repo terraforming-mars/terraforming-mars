@@ -3,8 +3,8 @@
     "Increase your M€ production 4 steps. Gain 3 M€.": "Kapsz 3 M€-t és növeld a M€ termelésed 4 lépéssel. ",
 
     "Aquifer Turbines": "Vízturbinák",
-    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 МC.": 
-        "Helyezz le egy óceán lapkát. Növeld az energiatermelésed 2 lépéssel. Fizess 3 МC-t.",
+    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.":
+        "Helyezz le egy óceán lapkát. Növeld az energiatermelésed 2 lépéssel. Fizess 3 M€-t.",
 
     "Biofuels": "Biotüzelőanyagok",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "Növeld az energiatermelésed és a palántatermelésed 1 lépéssel. Kapsz 2 palántát.",
@@ -16,13 +16,13 @@
     "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Növeld a palántatermelésed 2 lépéssel. Csökkentsd a M€ termelésed 1 lépéssel.",
 
     "Business Empire": "Üzleti Birodalom",
-    "Increase your M€ production 6 steps. Pay 6 МC.": "Növeld a M€ termelésed 6 lépéssel. Fizess 6 МC-t.",
+    "Increase your M€ production 6 steps. Pay 6 M€.": "Növeld a M€ termelésed 6 lépéssel. Fizess 6 M€-t.",
 
     "Dome Farming": "Üvegházfarm",
     "Increase your M€ production 2 steps and plant production 1 step.": "Növeld a M€ termelésed 2 lépéssel és a palántatermelésed 1 lépéssel.",
 
     "Donation": "Adomány",
-    "Gain 21 МC.": "Kapsz 21 МC-t.",
+    "Gain 21 МC.": "Kapsz 21 M€-t.",
 
     "Early Settlement": "Korai település",
     "Increase your plant production 1 step. Place a city tile.": "Növeld a palántatermelésed 1 lépéssel. Helyezz le egy város lapkát.",
@@ -32,7 +32,7 @@
         "Növeld a palántatermelésed 1 lépéssel. Játsz egy lapot a kezedből, figyelmen kívül hagyva a globális követelményeket.",
 
     "Eccentric Sponsor": "Különc szponzor",
-    "PLAY A CARD FROM HAND, REDUCING ITS COST BY 25 M€": "JÁTSZ EGY LAPOT A KEZEDBŐL, 25 M€-VAL CSÖKKENTVE AZ ÁRÁT",
+    "Play a card from hand, reducing its cost by 25 M€": "JÁTSZ EGY LAPOT A KEZEDBŐL, 25 M€-el CSÖKKENTVE AZ ÁRÁT",
 
     "Experimental Forest": "Kísérleti erdő",
     "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": 
@@ -45,22 +45,22 @@
     "Place 2 ocean tiles.": "Helyezz le 2 óceán lapkát.",
 
     "Huge Asteroid": "Hatalmas aszteroida",
-    "Increase temperature 3 steps. Pay 5 МC.": "Növeld a hőmérsékletet 3 lépéssel. Fizess 5 М€-t.",
+    "Increase temperature 3 steps. Pay 5 M€.": "Növeld a hőmérsékletet 3 lépéssel. Fizess 5 М€-t.",
 
     "Io Research Outpost": "Io kutatóállomás",
     "Increase your titanium production 1 step. Draw a card.": "Növeld a titán termelésed 1 lépéssel. Húzz egy lapot.",
 
     "Loan": "Hitel",
-    "Gain 30 МC. Decrease your M€ production 2 steps.": "Kapsz 30 МC-t. Csökkentsd a M€ termelésed 2 lépéssel.",
+    "Gain 30 M€. Decrease your M€ production 2 steps.": "Kapsz 30 M€-t. Csökkentsd a M€ termelésed 2 lépéssel.",
 
     "Martian Industries": "Marsi ipar",
-    "Increase your energy and steel production 1 step. Gain 6 МC.": "Növeld az energiatermelésed és az acéltermelésed 1 lépéssel. Kapsz 6 МC-t.",
+    "Increase your energy and steel production 1 step. Gain 6 M€.": "Növeld az energiatermelésed és az acéltermelésed 1 lépéssel. Kapsz 6 M€-t.",
 
     "Metal-Rich Asteroid": "Fémgazdag aszteroida",
     "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Növeld a hőmérsékletet 1 lépéssel. Kapsz 4 titánt és 4 acélt.",
 
     "Metals Company": "Fémek vállalata",
-    "Increase your МC, steel and titanium production 1 step.": "Növeld a МC, acél és titán termelésed 1 lépéssel.",
+    "Increase your M€, steel and titanium production 1 step.": "Növeld a M€, acél és titán termelésed 1 lépéssel.",
 
     "Mining Operations": "Bányászati műveletek",
     "Increase your steel production 2 steps. Gain 4 steel.": "Növeld az acéltermelésed 2 lépéssel. Kapsz 4 acélt.",
@@ -73,7 +73,7 @@
         "Növeld az acéltermelésed 1 lépéssel és a hőtermelésed 2 lépéssel. Kapsz 2 hőt.",
 
     "Nitrogen Shipment": "Nitrogén szállítmány",
-    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 МC.": "Növeld a palántatermelésed 1 lépéssel. Növeld a TR-t 1 lépéssel. Kapsz 5 М€-t.",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Növeld a palántatermelésed 1 lépéssel. Növeld a TR-t 1 lépéssel. Kapsz 5 М€-t.",
 
     "Orbital Construction Yard": "Orbitális építőtábor",
     "Increase your titanium production 1 step. Gain 4 titanium.": "Növeld a titán termelésed 1 lépéssel. Kapsz 4 titánt.",

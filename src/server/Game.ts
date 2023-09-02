@@ -1591,8 +1591,7 @@ export class Game implements IGame, Logger {
     game.initialDraftIteration = d.initialDraftIteration;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
-    // TODO(kberg): remove ?? [] by 2023-07-15
-    game.gagarinBase = d.gagarinBase ?? [];
+    game.gagarinBase = d.gagarinBase;
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {

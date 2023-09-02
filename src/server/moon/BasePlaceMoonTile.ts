@@ -1,12 +1,12 @@
 import {Space} from '../boards/Space';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
+import {Priority, TailedDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
-export abstract class BasePlaceMoonTile extends DeferredAction {
+export abstract class BasePlaceMoonTile extends TailedDeferredAction<Space> {
   constructor(
     player: IPlayer,
     public spaces?: Array<Space>,
@@ -24,6 +24,10 @@ export abstract class BasePlaceMoonTile extends DeferredAction {
     if (spaces.length === 0) {
       return undefined;
     }
-    return new SelectSpace(this.title, spaces, (space) => this.placeTile(space));
+    return new SelectSpace(this.title, spaces, (space) => {
+      this.placeTile(space);
+      this.cb(space);
+      return undefined;
+    });
   }
 }

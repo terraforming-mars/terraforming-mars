@@ -46,7 +46,12 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
         return [];
       }
       const adjacentSpaces = new Set(Array.from(spaces).map((s) => board.getAdjacentSpaces(s)).flat());
+      const sizeBefore = visitedSpaces.size;
       adjacentSpaces.forEach((s) => visitedSpaces.add(s));
+      const sizeAfter = visitedSpaces.size;
+      if (sizeBefore === sizeAfter) {
+        return [];
+      }
 
       const candidateSpaces = [...adjacentSpaces].filter((s) => availableSpaces.includes(s));
       if (candidateSpaces.length > 0) {
@@ -75,18 +80,21 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     return this.closestSpaces(board, availableSpaces, currentSpace);
   }
 
-  public canAct(_player: IPlayer): boolean {
-    return true;
-    // return this.visited.length < player.game.spaces.length;
+  public canAct(player: IPlayer): boolean {
+    return this.availableSpaces(player).length > 0;
   }
 
   public action(player: IPlayer) {
-    return new SelectSpace('Select new space for Gagarin Mobile Base', this.availableSpaces(player), (space) => {
-      player.game.gagarinBase.unshift(space.id);
-      player.game.grantSpaceBonuses(player, space);
+    const spaces = this.availableSpaces(player);
+    if (spaces.length > 0) {
+      return new SelectSpace('Select new space for Gagarin Mobile Base', this.availableSpaces(player), (space) => {
+        player.game.gagarinBase.unshift(space.id);
+        player.game.grantSpaceBonuses(player, space);
 
-      return undefined;
-    });
+        return undefined;
+      });
+    }
+    return undefined;
   }
 
   public initialAction(player: IPlayer) {

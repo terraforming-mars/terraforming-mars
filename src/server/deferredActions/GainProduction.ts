@@ -1,12 +1,12 @@
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
-import {DeferredAction, Priority} from './DeferredAction';
+import {Priority, TailedDeferredAction} from './DeferredAction';
 
 export type Options = {
   count?: number;
 }
 
-export class GainProduction extends DeferredAction {
+export class GainProduction extends TailedDeferredAction<undefined> {
   constructor(
     player: IPlayer,
     public resource: Resource,
@@ -20,10 +20,12 @@ export class GainProduction extends DeferredAction {
       this.options.count = 1;
     } else if (this.options.count < 0) {
       throw new Error('GainProduction count option must be >= 0');
-    } else if (this.options.count === 0) {
-      return undefined;
     }
-    this.player.production.add(this.resource, this.options.count);
+
+    if (this.options.count > 0) {
+      this.player.production.add(this.resource, this.options.count);
+    }
+    this.cb(undefined);
     return undefined;
   }
 }

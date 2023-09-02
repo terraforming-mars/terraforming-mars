@@ -74,11 +74,11 @@ export class Executor implements BehaviorExecutor {
       if (spend.energy && player.energy < spend.energy) {
         return false;
       }
-      if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
+      if (spend.heat && player.availableHeat() < spend.heat) {
         return false;
       }
-      if (spend.heat) {
-        throw new Error('spending heat not yet supported.');
+      if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
+        return false;
       }
     }
 
@@ -212,7 +212,7 @@ export class Executor implements BehaviorExecutor {
         player.stock.deduct(Resource.ENERGY, spend.energy);
       }
       if (spend.heat) {
-        throw new Error('Spending heat not supported yet.');
+        player.defer(player.spendHeat(spend.heat));
       }
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);

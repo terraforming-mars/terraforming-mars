@@ -233,6 +233,10 @@ export interface IPlayer {
   simpleCanPlay(card: IProjectCard, canAffordOptions: CanAffordOptions): boolean | YesAnd;
   canSpend(payment: Payment, reserveUnits?: Units): boolean;
   payingAmount(payment: Payment, options?: Partial<Payment.Options>): number;
+  /**
+   * Returns a summary of how much a player would have to spend to play a card,
+   * any associated costs, and ways the player can pay.
+   */
   affordOptionsForCard(card: IProjectCard): CanAffordOptions;
   canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;

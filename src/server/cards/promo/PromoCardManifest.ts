@@ -57,6 +57,7 @@ import {StanfordTorus} from './StanfordTorus';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
 import {TopsoilContract} from './TopsoilContract';
+import {DirectedHeatUsage} from './DirectedHeatUsage';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -105,6 +106,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.PSYCHE]: {Factory: Psyche},
     [CardName.ROBOT_POLLINATORS]: {Factory: RobotPollinators},
     [CardName.SUPERCAPACITORS]: {Factory: Supercapacitors},
+    [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
   },
   preludeCards: {
     [CardName.NEW_PARTNER]: {Factory: NewPartner},

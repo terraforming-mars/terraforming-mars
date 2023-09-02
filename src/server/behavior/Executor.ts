@@ -14,7 +14,7 @@ import {PlaceMoonHabitatTile} from '../moon/PlaceMoonHabitatTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Behavior} from './Behavior';
 import {Counter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -28,7 +28,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {Payment} from '../../common/inputs/Payment';
 
 export class Executor implements BehaviorExecutor {
-  public canExecute(behavior: Behavior, player: IPlayer, card: ICard) {
+  public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
     const ctx = new Counter(player, card);
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
@@ -36,7 +36,7 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.or) {
-      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card))) {
+      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card, canAffordOptions))) {
         return false;
       }
     }
@@ -57,6 +57,7 @@ export class Executor implements BehaviorExecutor {
       // }
     }
 
+    // TODO(kberg): Spend is not combined with PredictedCost.
     if (behavior.spend !== undefined) {
       const spend = behavior.spend;
       if (spend.megacredits && !player.canAfford(spend.megacredits)) {
@@ -96,20 +97,20 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.city !== undefined) {
       if (behavior.city.space === undefined) {
-        if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city').length === 0) {
+        if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city', canAffordOptions).length === 0) {
           return false;
         }
       }
     }
 
     if (behavior.greenery !== undefined) {
-      if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery').length === 0) {
+      if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
         return false;
       }
     }
 
     if (behavior.tile !== undefined) {
-      if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on).length === 0) {
+      if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on, canAffordOptions).length === 0) {
         return false;
       }
     }

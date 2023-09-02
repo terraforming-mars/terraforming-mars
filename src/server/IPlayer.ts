@@ -33,7 +33,7 @@ import {Stock} from './player/Stock';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
-export interface CanAffordOptions extends Partial<Payment.Options> {
+export type CanAffordOptions = Partial<Payment.Options> & {
   cost: number,
   reserveUnits?: Units,
   tr?: TRSource | DynamicTRSource,

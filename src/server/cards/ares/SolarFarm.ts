@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Space} from '../../boards/Space';
-import {IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
@@ -31,8 +31,8 @@ export class SolarFarm extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions).length > 0;
   }
 
   public produce(player: IPlayer) {

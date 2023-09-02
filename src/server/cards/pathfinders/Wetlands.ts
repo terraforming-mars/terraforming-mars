@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Space} from '../../boards/Space';
-import {IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -40,7 +40,7 @@ export class Wetlands extends Card implements IProjectCard {
     });
   }
 
-  public availableSpaces(player: IPlayer) {
+  public availableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions) {
     const board = player.game.board;
     const adjacentOceans: (space: Space) => number = (space) => {
       const adjacentSpaces = board.getAdjacentSpaces(space);
@@ -51,16 +51,16 @@ export class Wetlands extends Card implements IProjectCard {
     const spacesNextToRedCity = redCity ?
       board.getAdjacentSpaces(redCity) :
       [];
-    return board.getAvailableSpacesOnLand(player)
+    return board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => adjacentOceans(space) >= 2)
       .filter((space) => !spacesNextToRedCity.includes(space));
   }
 
-  public override bespokeCanPlay(player: IPlayer) {
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions) {
     if (!player.stock.has(this.reserveUnits)) {
       return false;
     }
-    return this.availableSpaces(player).length > 0;
+    return this.availableSpaces(player, canAffordOptions).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {

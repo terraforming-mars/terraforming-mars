@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CardName} from '../../../common/cards/CardName';
@@ -33,12 +33,12 @@ export class UrbanizedArea extends Card implements IProjectCard {
       },
     });
   }
-  private getAvailableSpaces(player: IPlayer): Array<Space> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (space: Space) => {

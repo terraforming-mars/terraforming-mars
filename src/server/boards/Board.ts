@@ -1,5 +1,5 @@
 import {Space} from './Space';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
@@ -132,20 +132,25 @@ export abstract class Board {
     return this.spaces.filter((space) => space.tile === undefined);
   }
 
-  public getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<Space> {
+  public getAvailableSpacesOnLand(player: IPlayer, _canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
-      const hasPlayerMarker = space.player !== undefined;
-      // A space is available if it doesn't have a player marker on it or it belongs to |player|
-      const safeForPlayer = !hasPlayerMarker || space.player === player;
-      // And also, if it doesn't have a tile. Unless it's a hazard tile.
-      const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space);
-      // If it does have a hazard tile, make sure it's not a protected one.
-      const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
-      // tiles are not placeable on restricted spaces at all
-      const isRestricted = space.bonus.includes(SpaceBonus.RESTRICTED);
-      return !isRestricted && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
-    });
+      if (space.bonus.includes(SpaceBonus.RESTRICTED)) {
+        return false;
+      }
 
+      // A space is available if it doesn't have a player marker on it, or it belongs to |player|
+      if (space.player !== undefined && space.player !== player) {
+        return false;
+      }
+
+      const playableSpace = space.tile === undefined || (AresHandler.hasHazardTile(space) && space.tile?.protectedHazard !== true);
+
+      if (!playableSpace) {
+        return false;
+      }
+
+      return true;
+    });
     return landSpaces;
   }
 

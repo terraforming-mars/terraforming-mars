@@ -5,7 +5,7 @@ import {CardDiscount} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './requirements/CardRequirements';
@@ -167,7 +167,7 @@ export abstract class Card {
   public get tilesBuilt(): Array<TileType> {
     return this.properties.tilesBuilt || [];
   }
-  public canPlay(player: IPlayer): boolean {
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
     //
     // Is this block necessary?
     const satisfied = this.requirements?.satisfies(player);
@@ -180,10 +180,10 @@ export abstract class Card {
     if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
       return false;
     }
-    return this.bespokeCanPlay(player);
+    return this.bespokeCanPlay(player, canAffordOptions);
   }
 
-  public bespokeCanPlay(_player: IPlayer): boolean {
+  public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {
     return true;
   }
 

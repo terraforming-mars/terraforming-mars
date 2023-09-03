@@ -555,7 +555,7 @@ describe('Game', () => {
     const game = Game.newInstance('gameid', [player, secondPlayer], player, {boardName: BoardName.HELLAS});
 
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
-    expect(game.board.getEmptySpaces().map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(game.board.getSpace(SpaceName.HELLAS_OCEAN_TILE).tile).is.undefined;
 
     // Cannot afford
     player.megaCredits = 5;
@@ -583,7 +583,7 @@ describe('Game', () => {
     player.canUseHeatAsMegaCredits = true;
 
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
-    expect(game.board.getEmptySpaces().map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(game.board.getSpace(SpaceName.HELLAS_OCEAN_TILE).tile).is.undefined;
 
     // Cannot afford
     player.heat = 2;

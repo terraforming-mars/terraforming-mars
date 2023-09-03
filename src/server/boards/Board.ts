@@ -130,10 +130,6 @@ export abstract class Board {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
-  public getEmptySpaces(): ReadonlyArray<Space> {
-    return this.spaces.filter((space) => space.tile === undefined);
-  }
-
   private computeAdditionalCosts(space: Space, aresExtension: boolean): {stock: Units, production: number} {
     const costs = {stock: {...Units.EMPTY}, production: 0};
 

@@ -39,7 +39,11 @@ export class CityStandardProject extends StandardProjectCard {
   }
 
   public override canAct(player: IPlayer): boolean {
-    return super.canAct(player) && player.game.board.getAvailableSpacesForCity(player).length > 0;
+    // This is pricey because it forces calling canPlayOptions twice.
+    if (player.game.board.getAvailableSpacesForCity(player, this.canPlayOptions(player)).length === 0) {
+      return false;
+    }
+    return super.canAct(player);
   }
 
   actionEssence(player: IPlayer): void {

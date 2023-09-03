@@ -63,6 +63,7 @@ export class TradeWithDarksideSmugglersUnion implements IColonyTrader {
 
   public trade(colony: IColony) {
     this.player.addActionThisGeneration(CardName.DARKSIDE_SMUGGLERS_UNION);
+    this.player.game.log('${0} used ${1} action to trade with ${2}', (b) => b.player(this.player).cardName(CardName.DARKSIDE_SMUGGLERS_UNION).colony(colony));
     colony.trade(this.player);
   }
 }

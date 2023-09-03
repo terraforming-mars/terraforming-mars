@@ -1,4 +1,4 @@
-import {CanAffordOptions as CanAffordOptions, IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardName} from '../../../common/cards/CardName';
 import {MiningCard} from './MiningCard';

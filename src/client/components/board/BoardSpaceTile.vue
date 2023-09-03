@@ -65,6 +65,7 @@ const tileTypeToCssClassAresOverride = new Map<TileType, string>([
   [TileType.NATURAL_PRESERVE, 'natural-preserve-ares'],
   [TileType.NUCLEAR_ZONE, 'nuclear-zone-ares'],
   [TileType.RESTRICTED_AREA, 'restricted-area-ares'],
+  [TileType.MAGNETIC_FIELD_GENERATORS, 'magnetic-field-generators-ares'],
 ]);
 
 const descriptions: Record<TileType, string> = {

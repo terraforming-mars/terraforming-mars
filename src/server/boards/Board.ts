@@ -9,6 +9,13 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
 import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
+import {TRSource} from '../../common/cards/TRSource';
+
+export type SpaceCosts = {
+  stock: Units,
+  production: number,
+  tr: TRSource,
+};
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -134,8 +141,17 @@ export abstract class Board {
     return this.spaces.filter((space) => space.tile === undefined);
   }
 
-  private computeAdditionalCosts(space: Space, aresExtension: boolean): {stock: Units, production: number} {
-    const costs = {stock: {...Units.EMPTY}, production: 0};
+  /**
+   * Update `costs` with any costs for this `space`.
+   *
+   * @returns `true` when costs has changed, `false` when it has not.
+   */
+  protected spaceCosts(_space: Space): SpaceCosts {
+    return {stock: {...Units.EMPTY}, production: 0, tr: {}};
+  }
+
+  private computeAdditionalCosts(space: Space, aresExtension: boolean): SpaceCosts {
+    const costs: SpaceCosts = this.spaceCosts(space);
 
     if (aresExtension === false) {
       return costs;
@@ -176,6 +192,26 @@ export abstract class Board {
     return costs;
   }
 
+  public canAfford(player: IPlayer, space: Space, canAffordOptions?: CanAffordOptions) {
+    const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
+    if (additionalCosts.stock.megacredits > 0) {
+      const plan: CanAffordOptions = canAffordOptions !== undefined ? {...canAffordOptions} : {cost: 0, tr: {}};
+      plan.cost += additionalCosts.stock.megacredits;
+      plan.tr = additionalCosts.tr;
+
+      const afford = player.canAfford(plan);
+      if (afford === false) {
+        return false;
+      }
+    }
+    if (additionalCosts.production > 0) {
+      const p = player.production;
+      const sum = p.megacredits + 5 + p.steel + p.titanium + p.plants + p.energy + p.heat;
+      return sum > additionalCosts.production;
+    }
+    return true;
+  }
+
   public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
       if (space.bonus.includes(SpaceBonus.RESTRICTED)) {
@@ -193,25 +229,7 @@ export abstract class Board {
         return false;
       }
 
-      const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
-      if (additionalCosts.stock.megacredits > 0) {
-        let afford = true;
-        if (canAffordOptions !== undefined) {
-          afford = player.canAfford({...canAffordOptions, cost: canAffordOptions.cost + additionalCosts.stock.megacredits});
-        } else {
-          afford = player.canAfford(additionalCosts.stock.megacredits);
-        }
-        if (afford === false) {
-          return false;
-        }
-      }
-      if (additionalCosts.production > 0) {
-        const p = player.production;
-        const sum = p.megacredits + 5 + p.steel + p.titanium + p.plants + p.energy + p.heat;
-        return sum > additionalCosts.production;
-      }
-
-      return true;
+      return this.canAfford(player, space, canAffordOptions);
     });
     return landSpaces;
   }

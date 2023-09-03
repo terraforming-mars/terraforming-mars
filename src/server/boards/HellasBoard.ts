@@ -1,7 +1,7 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Space} from './Space';
 import {HELLAS_BONUS_OCEAN_COST} from '../../common/constants';
 import {SpaceType} from '../../common/boards/SpaceType';
@@ -65,8 +65,8 @@ export class HellasBoard extends MarsBoard {
     return this.filterHellas(player, super.getAvailableSpacesForCity(player));
   }
 
-  public override getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<Space> {
-    return this.filterHellas(player, super.getAvailableSpacesOnLand(player));
+  public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions: CanAffordOptions): ReadonlyArray<Space> {
+    return this.filterHellas(player, super.getAvailableSpacesOnLand(player, canAffordOptions));
   }
 
   public override getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<Space> {

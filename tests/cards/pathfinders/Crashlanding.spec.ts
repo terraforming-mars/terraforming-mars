@@ -48,15 +48,15 @@ describe('Crashlanding', () => {
         addGreenery(player, space.id);
       }
     }
-    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player, {cost: 0})).is.true;
     addCity(player, '35');
-    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player, {cost: 0})).is.true;
     addCity(player, '37');
-    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player, {cost: 0})).is.true;
     addGreenery(player, '26');
-    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player, {cost: 0})).is.true;
     addGreenery(player, '27');
-    expect(card.canPlay(player)).is.false;
+    expect(card.canPlay(player, {cost: 0})).is.false;
   });
 
   it('play - cannot play next to 2 cities', () => {

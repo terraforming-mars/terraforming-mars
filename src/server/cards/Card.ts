@@ -177,8 +177,10 @@ export abstract class Card {
     // It's repeated at Player.simpleCanPlay.
     //
 
-    if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
-      return false;
+    if (this.behavior !== undefined) {
+      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
+        return false;
+      }
     }
     return this.bespokeCanPlay(player, canAffordOptions);
   }

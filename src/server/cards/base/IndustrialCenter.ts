@@ -33,9 +33,7 @@ export class IndustrialCenter extends ActionCard implements IProjectCard {
       adjacencyBonus,
 
       action: {
-        spend: {
-          megacredits: 7,
-        },
+        spend: {megacredits: 7},
         production: {steel: 1},
       },
       metadata,

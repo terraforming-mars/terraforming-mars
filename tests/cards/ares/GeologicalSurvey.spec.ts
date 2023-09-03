@@ -47,7 +47,6 @@ describe('GeologicalSurvey', () => {
     expect(player.simpleCanPlay(card)).is.false;
   });
 
-
   it('Works with Adjacency Bonuses', () => {
     // tile types in this test are irrelevant.
     // What's key is that this space has a weird behavior - it grants all the bonuses.

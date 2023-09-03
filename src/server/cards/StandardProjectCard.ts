@@ -42,16 +42,19 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     }
   }
 
-  public canAct(player: IPlayer): boolean {
+  protected canPlayOptions(player: IPlayer) {
     const canPayWith = this.canPayWith(player);
-    return player.canAfford(
-      {
-        ...canPayWith,
-        cost: this.cost - this.discount(player),
-        tr: this.tr,
-        auroraiData: true,
-        reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
-      });
+    return {
+      ...canPayWith,
+      cost: this.cost - this.discount(player),
+      tr: this.tr,
+      auroraiData: true,
+      reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
+    };
+  }
+
+  public canAct(player: IPlayer): boolean {
+    return player.canAfford(this.canPlayOptions(player));
   }
 
   public canPayWith(_player: IPlayer): {steel?: boolean, titanium?: boolean, seeds?: boolean, tr?: TRSource} {

@@ -7,6 +7,8 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {AresHandler} from '../ares/AresHandler';
+import {Units} from '../../common/Units';
+import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -132,7 +134,49 @@ export abstract class Board {
     return this.spaces.filter((space) => space.tile === undefined);
   }
 
-  public getAvailableSpacesOnLand(player: IPlayer, _canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+  private computeAdditionalCosts(space: Space, aresExtension: boolean): {stock: Units, production: number} {
+    const costs = {stock: {...Units.EMPTY}, production: 0};
+
+    if (aresExtension === false) {
+      return costs;
+    }
+
+    switch (hazardSeverity(space.tile?.tileType)) {
+    case HazardSeverity.MILD:
+      costs.stock.megacredits += 8;
+      break;
+    case HazardSeverity.SEVERE:
+      costs.stock.megacredits += 16;
+      break;
+    }
+
+    for (const adjacentSpace of this.getAdjacentSpaces(space)) {
+      switch (hazardSeverity(adjacentSpace.tile?.tileType)) {
+      case HazardSeverity.MILD:
+        costs.production += 1;
+        break;
+      case HazardSeverity.SEVERE:
+        costs.production += 2;
+        break;
+      }
+      if (adjacentSpace.adjacency !== undefined) {
+        const adjacency = adjacentSpace.adjacency;
+        costs.stock.megacredits += adjacency.cost ?? 0;
+        // TODO(kberg): offset costs with heat and MC bonuses.
+        // for (const bonus of adjacency.bonus) {
+        //   case (bonus) {
+        //     switch SpaceBonus.MEGACREDITS:
+        //       costs.stock.megacredits--;
+        //     switch SpaceBonus.MEGACREDITS:
+        //       costs.stock.megacredits--;
+        //   }
+        // }
+      }
+    }
+    return costs;
+  }
+
+  public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
       if (space.bonus.includes(SpaceBonus.RESTRICTED)) {
         return false;
@@ -147,6 +191,24 @@ export abstract class Board {
 
       if (!playableSpace) {
         return false;
+      }
+
+      const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
+      if (additionalCosts.stock.megacredits > 0) {
+        let afford = true;
+        if (canAffordOptions !== undefined) {
+          afford = player.canAfford({...canAffordOptions, cost: canAffordOptions.cost + additionalCosts.stock.megacredits});
+        } else {
+          afford = player.canAfford(additionalCosts.stock.megacredits);
+        }
+        if (afford === false) {
+          return false;
+        }
+      }
+      if (additionalCosts.production > 0) {
+        const p = player.production;
+        const sum = p.megacredits + 5 + p.steel + p.titanium + p.plants + p.energy + p.heat;
+        return sum > additionalCosts.production;
       }
 
       return true;

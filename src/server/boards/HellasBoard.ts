@@ -54,22 +54,27 @@ export class HellasBoard extends MarsBoard {
   }
 
   private filterHellas(player: IPlayer, spaces: ReadonlyArray<Space>) {
-    return player.canAfford({cost: HELLAS_BONUS_OCEAN_COST, tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    return player.canAfford({
+      cost: HELLAS_BONUS_OCEAN_COST,
+      tr: {oceans: 1},
+    }) ?
+      spaces :
+      spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
   public override getSpaces(spaceType: SpaceType, player: IPlayer): ReadonlyArray<Space> {
     return this.filterHellas(player, super.getSpaces(spaceType, player));
   }
 
-  public override getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<Space> {
-    return this.filterHellas(player, super.getAvailableSpacesForCity(player));
+  public override getAvailableSpacesForCity(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+    return this.filterHellas(player, super.getAvailableSpacesForCity(player, canAffordOptions));
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions: CanAffordOptions): ReadonlyArray<Space> {
     return this.filterHellas(player, super.getAvailableSpacesOnLand(player, canAffordOptions));
   }
 
-  public override getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<Space> {
-    return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
+  public override getAvailableSpacesForGreenery(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+    return this.filterHellas(player, super.getAvailableSpacesForGreenery(player, canAffordOptions));
   }
 }

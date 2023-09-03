@@ -62,16 +62,16 @@ export class VastitasBorealisBoard extends MarsBoard {
     return this.filterVastitasBorealis(player, super.getSpaces(spaceType, player));
   }
 
-  public override getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<Space> {
-    return this.filterVastitasBorealis(player, super.getAvailableSpacesForCity(player));
+  public override getAvailableSpacesForCity(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+    return this.filterVastitasBorealis(player, super.getAvailableSpacesForCity(player, canAffordOptions));
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesOnLand(player, canAffordOptions));
   }
 
-  public override getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<Space> {
-    return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
+  public override getAvailableSpacesForGreenery(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+    return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player, canAffordOptions));
   }
 
   public override getVolcanicSpaceIds(): Array<SpaceId> {

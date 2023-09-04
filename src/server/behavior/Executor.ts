@@ -30,6 +30,7 @@ import {Payment} from '../../common/inputs/Payment';
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
     const ctx = new Counter(player, card);
+    const asTrSource = this.toTRSource(behavior);
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
       return false;
@@ -75,8 +76,17 @@ export class Executor implements BehaviorExecutor {
       if (spend.energy && player.energy < spend.energy) {
         return false;
       }
-      if (spend.heat && player.availableHeat() < spend.heat) {
-        return false;
+      if (spend.heat) {
+        if (player.availableHeat() < spend.heat) {
+          return false;
+        }
+        if (!player.canAfford({
+          cost: 0,
+          reserveUnits: Units.of({heat: spend.heat}),
+          tr: asTrSource,
+        })) {
+          return false;
+        }
       }
       if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
         return false;
@@ -214,6 +224,13 @@ export class Executor implements BehaviorExecutor {
       }
       if (spend.heat) {
         player.defer(player.spendHeat(spend.heat));
+        // AndThen
+        // afterPay: () => {
+        //   const copy = {...behavior};
+        //   delete copy['spend'];
+        //   this.execute(copy, player, card);
+        // },
+        //
       }
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);

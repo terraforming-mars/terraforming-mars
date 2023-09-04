@@ -97,8 +97,8 @@ export class Deck<T extends ICard> {
     return result;
   }
 
-  public discard(card: T): void {
-    this.discardPile.push(card);
+  public discard(...cards: Array<T>): void {
+    this.discardPile.push(...cards);
   }
 
   // For Junk Ventures

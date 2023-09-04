@@ -57,31 +57,12 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
           verbosity = LogType.DREW_VERBOSE;
         }
       }
-      return DrawCards.keep(player, cards, verbosity);
+      return DrawCards.keep(player, cards, [], verbosity);
     });
   }
 
   public static keepSome(player: IPlayer, count: number = 1, options: DrawCards.AllOptions): DrawCards<SelectCard<IProjectCard>> {
     return new DrawCards(player, count, options, (cards) => DrawCards.choose(player, cards, options));
-  }
-
-  public static keep(player: IPlayer, cards: Array<IProjectCard>, logType: LogType = LogType.DREW): undefined {
-    player.cardsInHand.push(...cards);
-    if (logType === LogType.DREW_VERBOSE) {
-      LogHelper.logDrawnCards(player, cards);
-    } else {
-      player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
-      LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
-    }
-    return undefined;
-  }
-
-  public static discard(player: IPlayer, preserve: Array<IProjectCard>, discard: Array<IProjectCard>) {
-    discard.forEach((card) => {
-      if (preserve.find((f) => f.name === card.name) === undefined) {
-        player.game.projectDeck.discard(card);
-      }
-    });
   }
 
   public static choose(player: IPlayer, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
@@ -110,22 +91,20 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
       if (selected.length > max) {
         throw new Error('Selected too many cards');
       }
+      const unselected = cards.filter((card) => !selected.includes(card));
       if (options.paying && selected.length > 0) {
         const cost = selected.length * player.cardCost;
         player.game.defer(
           new SelectPaymentDeferred(player, cost, {
             title: `Select how to spend ${cost} M€ for ${selected.length} cards`,
             afterPay: () => {
-              this.keep(player, selected, LogType.BOUGHT);
-              this.discard(player, selected, cards);
+              this.keep(player, selected, unselected, LogType.BOUGHT);
             },
           }));
       } else if (options.logDrawnCard === true) {
-        this.keep(player, selected, LogType.DREW_VERBOSE);
-        this.discard(player, selected, cards);
+        this.keep(player, selected, unselected, LogType.DREW_VERBOSE);
       } else {
-        this.keep(player, selected, options.paying ? LogType.BOUGHT : LogType.DREW);
-        this.discard(player, selected, cards);
+        this.keep(player, selected, unselected, options.paying ? LogType.BOUGHT : LogType.DREW);
       }
       return undefined;
     };
@@ -136,6 +115,19 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
       cb,
       {max, min},
     );
+  }
+
+  private static keep(player: IPlayer, cards: Array<IProjectCard>, discards: Array<IProjectCard>, logType: LogType = LogType.DREW): undefined {
+    player.cardsInHand.push(...cards);
+    player.game.projectDeck.discard(...discards);
+
+    if (logType === LogType.DREW_VERBOSE) {
+      LogHelper.logDrawnCards(player, cards);
+    } else {
+      player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
+      LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
+    }
+    return undefined;
   }
 }
 

@@ -2,9 +2,6 @@ import {expect} from 'chai';
 import {DrawCards} from '../../src/server/deferredActions/DrawCards';
 import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/server/Game';
-import {AICentral} from '../../src/server/cards/base/AICentral';
-import {Asteroid} from '../../src/server/cards/base/Asteroid';
-import {CapitalAres} from '../../src/server/cards/ares/CapitalAres';
 import {CardType} from '../../src/common/cards/CardType';
 import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
@@ -16,23 +13,10 @@ describe('DrawCards', function() {
   let game: Game;
   let player: TestPlayer;
   let projectDeck: ProjectDeck;
-  const cards = [new AICentral(), new Asteroid(), new CapitalAres()];
 
   beforeEach(function() {
     [game, player] = testGame(2);
     projectDeck = player.game.projectDeck;
-  });
-
-  it('keeps cards', function() {
-    DrawCards.keep(player, [cards[0], cards[1]]);
-    expect(player.cardsInHand).has.length(2);
-    expect(projectDeck.discardPile).has.length(0);
-  });
-
-  it('discards cards', function() {
-    DrawCards.discard(player, [cards[1]], cards);
-    expect(player.cardsInHand).has.length(0);
-    expect(projectDeck.discardPile).has.length(2);
   });
 
   it('draws 3', function() {

@@ -137,10 +137,6 @@ export abstract class Board {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
-  public getEmptySpaces(): ReadonlyArray<Space> {
-    return this.spaces.filter((space) => space.tile === undefined);
-  }
-
   /**
    * Update `costs` with any costs for this `space`.
    *

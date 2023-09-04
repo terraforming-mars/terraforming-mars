@@ -229,6 +229,7 @@
     "${0} spent ${1} energy to trade with ${2}": "${0} bezahlte ${1} Energie, um mit ${2} zu handeln",
     "${0} spent ${1} titanium to trade with ${2}": "${0} bezahlte ${1} Titan, um mit ${2} zu handeln",
     "${0} spent ${1} M€ to trade with ${2}": "${0} bezahlte ${1} M€, um mit ${2} zu handeln",
+    "${0} used ${1} action to trade with ${2}": "${0} verwendet ${1} Aktion, um mit ${2} zu handeln",
     "${0} gained ${1} trade bonus": "${0} erhielt ${1} Handelsbonus",
     "Cards played by ${0} cost 1 M€ less this generation": "Karten, die in dieser Generation von ${0} gespielt werden, kosten 1 M€ weniger",
     "${0} gained 1 Science tag": "${0} erhielt 1 Forschungs-Symbol",

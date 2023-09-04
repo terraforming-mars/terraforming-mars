@@ -23,7 +23,7 @@ describe('DeclareCloneTag', function() {
   });
 
   it('sanity', function() {
-    const action = new DeclareCloneTag(player, card, (t) => tag = t);
+    const action = new DeclareCloneTag(player, card).andThen((t) => tag = t);
 
     const options = cast(action.execute(), OrOptions);
     const orOptions = cast(options.options, Array<SelectOption>);
@@ -47,7 +47,7 @@ describe('DeclareCloneTag', function() {
   it('clone tag with expansions', function() {
     const [, player] = testGame(1, {venusNextExtension: true, moonExpansion: true, pathfindersExpansion: true});
 
-    const action = new DeclareCloneTag(player, card, (t) => tag = t);
+    const action = new DeclareCloneTag(player, card).andThen((t) => tag = t);
 
     const options = action.execute();
     const orOptions = cast(options.options, Array<SelectOption>);

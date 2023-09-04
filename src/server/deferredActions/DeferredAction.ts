@@ -31,7 +31,7 @@ export enum Priority {
   DISCARD_CARDS,
 }
 
-export abstract class DeferredAction {
+export abstract class DeferredAction<T = undefined> {
   // The position in the queue. Do not set directly.
   public queueId: number = -1;
   constructor(
@@ -44,6 +44,12 @@ export abstract class DeferredAction {
   }
 
   public abstract execute(): PlayerInput | undefined;
+  protected cb: (param: T) => void = () => {};
+
+  public andThen(cb: (param: T) => void): this {
+    this.cb = cb;
+    return this;
+  }
 }
 
 export class SimpleDeferredAction extends DeferredAction {
@@ -53,14 +59,5 @@ export class SimpleDeferredAction extends DeferredAction {
     priority?: Priority,
   ) {
     super(player, priority);
-  }
-}
-
-export abstract class TailedDeferredAction<T> extends DeferredAction {
-  protected cb: (param: T) => void = () => {};
-
-  public andThen(cb: (param: T) => void) {
-    this.cb = cb;
-    return this;
   }
 }

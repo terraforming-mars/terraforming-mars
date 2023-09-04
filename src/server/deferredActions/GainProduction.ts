@@ -1,12 +1,12 @@
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
-import {Priority, TailedDeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
   count?: number;
 }
 
-export class GainProduction extends TailedDeferredAction<undefined> {
+export class GainProduction extends DeferredAction {
   constructor(
     player: IPlayer,
     public resource: Resource,

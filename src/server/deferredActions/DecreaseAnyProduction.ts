@@ -1,14 +1,14 @@
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {SelectPlayer} from '../inputs/SelectPlayer';
-import {Priority, TailedDeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
   count: number,
   stealing?: boolean
 }
 
-export class DecreaseAnyProduction extends TailedDeferredAction<undefined> {
+export class DecreaseAnyProduction extends DeferredAction {
   constructor(
     player: IPlayer,
     public resource: Resource,

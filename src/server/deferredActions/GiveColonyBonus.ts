@@ -5,7 +5,6 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {MultiSet} from 'mnemonist';
 
 export class GiveColonyBonus extends DeferredAction {
-  public cb: () => void = () => {};
   private waitingFor = new MultiSet<PlayerId>();
   private playersWithBonuses = new Set<PlayerId>();
 
@@ -19,7 +18,7 @@ export class GiveColonyBonus extends DeferredAction {
 
   public execute() {
     if (this.colony.colonies.length === 0) {
-      this.cb();
+      this.cb(undefined);
       return undefined;
     }
 
@@ -60,7 +59,7 @@ export class GiveColonyBonus extends DeferredAction {
 
   private doneGettingBonus(): void {
     if (this.playersWithBonuses.size === 0) {
-      this.cb();
+      this.cb(undefined);
     }
   }
 }

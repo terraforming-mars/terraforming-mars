@@ -22,7 +22,6 @@ export class ChooseCards extends DeferredAction {
     player: IPlayer,
     public cards: Array<IProjectCard>,
     public options: ChooseOptions = {},
-    public cb: (cards: Array<IProjectCard>) => void = () => {},
   ) {
     super(player, Priority.DRAW_CARDS);
   }

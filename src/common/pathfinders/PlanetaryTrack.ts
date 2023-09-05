@@ -26,22 +26,22 @@ export class TrackBuilder {
     this.currentSpace = 0;
   }
 
-  public at(space: number): TrackBuilder {
+  public at(space: number): this {
     this.currentSpace = space;
     return this;
   }
 
-  public everyone(...rewards: Array<Reward>): TrackBuilder {
+  public everyone(...rewards: Array<Reward>): this {
     this.spaces[this.currentSpace].everyone = rewards;
     return this;
   }
 
-  public risingPlayer(...rewards: Array<Reward>): TrackBuilder {
+  public risingPlayer(...rewards: Array<Reward>): this {
     this.spaces[this.currentSpace].risingPlayer = rewards;
     return this;
   }
 
-  public mostTags(...rewards: Array<Reward>): TrackBuilder {
+  public mostTags(...rewards: Array<Reward>): this {
     this.spaces[this.currentSpace].mostTags = rewards;
     return this;
   }

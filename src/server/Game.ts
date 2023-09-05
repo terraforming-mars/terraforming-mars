@@ -653,7 +653,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  private gotoDraftingPhase(): void {
+  private gotoDraftPhase(): void {
     this.phase = Phase.DRAFTING;
     this.draftRound = 1;
     this.runDraftRound();
@@ -750,7 +750,7 @@ export class Game implements IGame, Logger {
     });
 
     if (this.gameOptions.draftVariant) {
-      this.gotoDraftingPhase();
+      this.gotoDraftPhase();
     } else {
       this.gotoResearchPhase();
     }

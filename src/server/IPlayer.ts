@@ -14,7 +14,7 @@ import {Priority} from './deferredActions/DeferredAction';
 import {RobotCard} from './cards/promo/SelfReplicatingRobots';
 import {SerializedPlayer} from './SerializedPlayer';
 import {Timer} from '../common/Timer';
-import {DrawCards} from './deferredActions/DrawCards';
+import {AllOptions, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {GlobalParameter} from '../common/GlobalParameter';
@@ -222,8 +222,8 @@ export interface IPlayer {
   onCardPlayed(card: IProjectCard): void;
   playAdditionalCorporationCard(corporationCard: ICorporationCard): void;
   playCorporationCard(corporationCard: ICorporationCard): void;
-  drawCard(count?: number, options?: DrawCards.DrawOptions): undefined;
-  drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard>;
+  drawCard(count?: number, options?: DrawOptions): void;
+  drawCardKeepSome(count: number, options: AllOptions): void;
   discardPlayedCard(card: IProjectCard): void;
 
   pass(): void;

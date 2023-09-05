@@ -223,14 +223,14 @@ export class Executor implements BehaviorExecutor {
         player.stock.deduct(Resource.ENERGY, spend.energy);
       }
       if (spend.heat) {
-        player.defer(player.spendHeat(spend.heat));
-        // AndThen
-        // afterPay: () => {
-        //   const copy = {...behavior};
-        //   delete copy['spend'];
-        //   this.execute(copy, player, card);
-        // },
-        //
+        player.defer(player.spendHeat(spend.heat, () => {
+          const copy = {...behavior};
+          delete copy['spend'];
+          this.execute(copy, player, card);
+          return undefined;
+        }));
+        // Exit early as the rest of handled by the deferred action.
+        return;
       }
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);

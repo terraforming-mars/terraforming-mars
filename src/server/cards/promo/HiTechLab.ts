@@ -43,7 +43,8 @@ export class HiTechLab extends Card implements IProjectCard {
           player.drawCard();
           return undefined;
         }
-        return player.drawCardKeepSome(amount, {keepMax: 1});
+        player.drawCardKeepSome(amount, {keepMax: 1});
+        return undefined;
       },
       1,
       player.energy,

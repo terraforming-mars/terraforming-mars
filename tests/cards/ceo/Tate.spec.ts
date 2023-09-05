@@ -31,13 +31,14 @@ describe('Tate', function() {
 
     const orOptions = cast(card.action(player), OrOptions);
     // Select tag [0] (Tag.BUILDING)
-    orOptions.options[0].cb();
     const selectOption = cast(orOptions.options[0], SelectOption);
-    const selectCard = cast(selectOption.cb(), SelectCard<ICard>);
+    cast(selectOption.cb(), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard<ICard>);
 
     // Buy two cards:
     selectCard.cb([selectCard.cards[0], selectCard.cards[1]]);
-    runAllActions(player.game);
+    runAllActions(game);
 
     expect(player.megaCredits).eq(0);
     expect(player.cardsInHand).has.length(2);
@@ -50,15 +51,16 @@ describe('Tate', function() {
     expect(player.megaCredits).eq(6);
     expect(player.cardsInHand).is.empty;
 
-    // Select tag [0] (Tag.BUILDING)
     const orOptions = cast(card.action(player), OrOptions);
-    orOptions.options[0].cb();
+    // Select tag [0] (Tag.BUILDING)
     const selectOption = cast(orOptions.options[0], SelectOption);
-    const selectCard = cast(selectOption.cb(), SelectCard<ICard>);
+    cast(selectOption.cb(), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard<ICard>);
 
     // Buy two cards:
     selectCard.cb([selectCard.cards[0]]);
-    runAllActions(player.game);
+    runAllActions(game);
 
     expect(player.megaCredits).eq(3);
     expect(player.cardsInHand).has.length(1);

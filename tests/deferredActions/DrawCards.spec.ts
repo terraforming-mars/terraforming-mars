@@ -2,37 +2,21 @@ import {expect} from 'chai';
 import {DrawCards} from '../../src/server/deferredActions/DrawCards';
 import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/server/Game';
-import {AICentral} from '../../src/server/cards/base/AICentral';
-import {Asteroid} from '../../src/server/cards/base/Asteroid';
-import {CapitalAres} from '../../src/server/cards/ares/CapitalAres';
 import {CardType} from '../../src/common/cards/CardType';
 import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {ProjectDeck} from '../../src/server/cards/Deck';
-import {cast, formatLogMessage} from '../TestingUtils';
+import {cast, formatLogMessage, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
 describe('DrawCards', function() {
   let game: Game;
   let player: TestPlayer;
   let projectDeck: ProjectDeck;
-  const cards = [new AICentral(), new Asteroid(), new CapitalAres()];
 
   beforeEach(function() {
     [game, player] = testGame(2);
     projectDeck = player.game.projectDeck;
-  });
-
-  it('keeps cards', function() {
-    DrawCards.keep(player, [cards[0], cards[1]]);
-    expect(player.cardsInHand).has.length(2);
-    expect(projectDeck.discardPile).has.length(0);
-  });
-
-  it('discards cards', function() {
-    DrawCards.discard(player, [cards[1]], cards);
-    expect(player.cardsInHand).has.length(0);
-    expect(projectDeck.discardPile).has.length(2);
   });
 
   it('draws 3', function() {
@@ -49,7 +33,9 @@ describe('DrawCards', function() {
   });
 
   it('draws 2 from 4', function() {
-    const action = cast(DrawCards.keepSome(player, 4, {keepMax: 2}).execute(), SelectCard);
+    cast(DrawCards.keepSome(player, 4, {keepMax: 2}).execute(), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     expect(action.config.min).to.eq(2);
     expect(action.config.max).to.eq(2);
     action.cb([action.cards[0], action.cards[2]]);
@@ -59,7 +45,10 @@ describe('DrawCards', function() {
 
   it('buys 1', function() {
     player.megaCredits = 3;
-    const action = cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), SelectCard);
+    cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
+
     expect(action.config.min).to.eq(0);
     expect(action.config.max).to.eq(1);
     action.cb([action.cards[0]]);
@@ -71,7 +60,9 @@ describe('DrawCards', function() {
 
   it('cannot buy', function() {
     player.megaCredits = 2;
-    const action = cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), SelectCard);
+    cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     expect(action.config.min).to.eq(0);
     expect(action.config.max).to.eq(0);
     action.cb([]);

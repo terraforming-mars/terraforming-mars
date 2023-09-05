@@ -4,7 +4,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Space} from '../../boards/Space';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Phase} from '../../../common/Phase';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {BoardType} from '../../boards/BoardType';
@@ -41,6 +40,6 @@ export class Ingrid extends CeoCard {
     if (cardOwner.id !== activePlayer.id) return;
     if (cardOwner.game.phase === Phase.SOLAR) return;
 
-    cardOwner.game.defer(new SimpleDeferredAction(cardOwner, () => cardOwner.drawCard()));
+    cardOwner.drawCard();
   }
 }

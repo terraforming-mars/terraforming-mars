@@ -52,11 +52,11 @@ describe('SponsoredAcademies', function() {
     player.playCard(card);
 
     // If something here doesn't work, it might be linked to the DeferredActionsQueue,
-    expect((game.deferredActions.pop() as DiscardCards).title).eq('Select 1 card to discard');
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(player.color);
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(player2.color);
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(player3.color);
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(player4.color);
+    expect(cast(game.deferredActions.pop(), DiscardCards).title).eq('Select 1 card to discard');
+    expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player.color);
+    expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player2.color);
+    expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player3.color);
+    expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player4.color);
   });
 
   it('Takes priority over Mars U', () => {

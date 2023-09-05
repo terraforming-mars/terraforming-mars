@@ -19,8 +19,8 @@ export class DrawCards extends DeferredAction<Array<IProjectCard>> {
   // Visible for tests.
   public constructor(
     player: IPlayer,
-      public count: number = 1,
-      public options: AllOptions = {},
+    public count: number = 1,
+    public options: AllOptions = {},
   ) {
     super(player, Priority.DRAW_CARDS);
   }

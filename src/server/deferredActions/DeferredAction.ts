@@ -47,6 +47,9 @@ export abstract class DeferredAction<T = undefined> {
   protected cb: (param: T) => void = () => {};
 
   public andThen(cb: (param: T) => void): this {
+    if (this.cb !== undefined) {
+      throw new Error('Cannot call andThen twice for the same object.');
+    }
     this.cb = cb;
     return this;
   }

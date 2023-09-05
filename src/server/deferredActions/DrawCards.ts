@@ -15,13 +15,12 @@ export type DrawOptions = {
 
 export type AllOptions = DrawOptions & ChooseOptions;
 
-export class DrawCards extends DeferredAction {
+export class DrawCards extends DeferredAction<Array<IProjectCard>> {
   // Visible for tests.
   public constructor(
     player: IPlayer,
     public count: number = 1,
     public options: AllOptions = {},
-    public cb: (cards: Array<IProjectCard>) => void,
   ) {
     super(player, Priority.DRAW_CARDS);
   }
@@ -50,7 +49,7 @@ export class DrawCards extends DeferredAction {
   }
 
   public static keepAll(player: IPlayer, count: number = 1, options?: DrawOptions): DrawCards {
-    return new DrawCards(player, count, options, (cards) => {
+    return new DrawCards(player, count, options).andThen((cards) => {
       let verbosity = LogType.DREW;
       if (options !== undefined) {
         if (options.tag !== undefined ||
@@ -65,6 +64,6 @@ export class DrawCards extends DeferredAction {
   }
 
   public static keepSome(player: IPlayer, count: number = 1, options: AllOptions): DrawCards {
-    return new DrawCards(player, count, options, (cards) => player.game.defer(new ChooseCards(player, cards, options)));
+    return new DrawCards(player, count, options).andThen((cards) => player.game.defer(new ChooseCards(player, cards, options)));
   }
 }

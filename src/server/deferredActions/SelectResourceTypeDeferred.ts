@@ -4,12 +4,11 @@ import {SelectOption} from '../inputs/SelectOption';
 import {IPlayer} from '../IPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export class SelectResourceTypeDeferred extends DeferredAction {
+export class SelectResourceTypeDeferred extends DeferredAction<Resource> {
   constructor(
     player: IPlayer,
     public resources: Array<Resource>,
     public title: string,
-    public cb: (resource: Resource) => void,
   ) {
     super(player, Priority.DEFAULT);
   }

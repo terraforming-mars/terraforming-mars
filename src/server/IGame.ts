@@ -90,7 +90,7 @@ export interface IGame extends Logger {
   getPlayerById(id: PlayerId): IPlayer;
   // Return an array of players from an array of player ids
   getPlayersById(ids: Array<PlayerId>): Array<IPlayer>;
-  defer(action: DeferredAction, priority?: Priority): void;
+  defer(action: DeferredAction<any>, priority?: Priority): void;
   milestoneClaimed(milestone: IMilestone): boolean;
   marsIsTerraformed(): boolean;
   lastSoloGeneration(): number;

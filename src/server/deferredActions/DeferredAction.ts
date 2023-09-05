@@ -32,6 +32,7 @@ export enum Priority {
 }
 
 export abstract class DeferredAction {
+  // The position in the queue. Do not set directly.
   public queueId: number = -1;
   constructor(
     public player: IPlayer,

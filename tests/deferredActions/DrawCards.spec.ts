@@ -6,7 +6,7 @@ import {CardType} from '../../src/common/cards/CardType';
 import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {ProjectDeck} from '../../src/server/cards/Deck';
-import {cast, formatLogMessage} from '../TestingUtils';
+import {cast, formatLogMessage, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
 describe('DrawCards', function() {
@@ -33,7 +33,9 @@ describe('DrawCards', function() {
   });
 
   it('draws 2 from 4', function() {
-    const action = cast(DrawCards.keepSome(player, 4, {keepMax: 2}).execute(), SelectCard);
+    cast(DrawCards.keepSome(player, 4, {keepMax: 2}).execute(), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     expect(action.config.min).to.eq(2);
     expect(action.config.max).to.eq(2);
     action.cb([action.cards[0], action.cards[2]]);
@@ -43,7 +45,10 @@ describe('DrawCards', function() {
 
   it('buys 1', function() {
     player.megaCredits = 3;
-    const action = cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), SelectCard);
+    cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
+
     expect(action.config.min).to.eq(0);
     expect(action.config.max).to.eq(1);
     action.cb([action.cards[0]]);
@@ -55,7 +60,9 @@ describe('DrawCards', function() {
 
   it('cannot buy', function() {
     player.megaCredits = 2;
-    const action = cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), SelectCard);
+    cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
     expect(action.config.min).to.eq(0);
     expect(action.config.max).to.eq(0);
     action.cb([]);

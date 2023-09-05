@@ -36,7 +36,7 @@ import {Tag} from '../common/cards/Tag';
 import {Timer} from '../common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {GameCards} from './GameCards';
-import {DrawCards} from './deferredActions/DrawCards';
+import {AllOptions, DrawCards, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
@@ -70,6 +70,7 @@ import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from '
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {sum} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
+import {ChooseCards} from './deferredActions/ChooseCards';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -826,7 +827,8 @@ export class Player implements IPlayer {
       cardsToKeep = 5;
     }
 
-    const action = DrawCards.choose(this, dealtCards, {paying: true, keepMax: cardsToKeep});
+    // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
+    const action = new ChooseCards(this, dealtCards, {paying: true, keepMax: cardsToKeep}).execute();
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
   }
 
@@ -1159,12 +1161,12 @@ export class Player implements IPlayer {
     }
   }
 
-  public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {
+  public drawCard(count?: number, options?: DrawOptions): undefined {
     return DrawCards.keepAll(this, count, options).execute();
   }
 
-  public drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard> {
-    return DrawCards.keepSome(this, count, options).execute();
+  public drawCardKeepSome(count: number, options: AllOptions): void {
+    this.game.defer(DrawCards.keepSome(this, count, options));
   }
 
   public discardPlayedCard(card: IProjectCard) {

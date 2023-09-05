@@ -4,7 +4,7 @@ import {TRSource} from '../../common/cards/TRSource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
-import {Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
@@ -264,16 +264,13 @@ export class Executor implements BehaviorExecutor {
         if (drawCard.keep === undefined && drawCard.pay === undefined) {
           player.drawCard(ctx.count(drawCard.count), {tag: drawCard.tag, resource: drawCard.resource, cardType: drawCard.type});
         } else {
-          const input = player.drawCardKeepSome(ctx.count(drawCard.count), {
+          player.drawCardKeepSome(ctx.count(drawCard.count), {
             tag: drawCard.tag,
             resource: drawCard.resource,
             cardType: drawCard.type,
             keepMax: drawCard.keep,
             paying: drawCard.pay,
           });
-          // By moving behavior to this object, Priority for this action is changing from DEFAULT.
-          // TODO(kberg): remove this comment block by 2023-10-01, or once bug reports on card drawing order subsides.
-          player.defer(input, Priority.DRAW_CARDS);
         }
       }
     }

@@ -8,7 +8,8 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('ReturntoAbandonedTechnology', function() {
   let card: ReturntoAbandonedTechnology;
@@ -17,15 +18,17 @@ describe('ReturntoAbandonedTechnology', function() {
 
   beforeEach(function() {
     card = new ReturntoAbandonedTechnology();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
     player.playedCards.push(card);
   });
 
   it('play when discard pile is empty', function() {
     game.projectDeck.discardPile = [];
 
-    const action = cast(card.play(player), SelectCard);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
+
     expect(action.cards).is.empty;
   });
 
@@ -34,7 +37,9 @@ describe('ReturntoAbandonedTechnology', function() {
     game.projectDeck.discardPile = [];
     game.projectDeck.discard(ants);
 
-    const action = cast(card.play(player), SelectCard);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
 
     expect(action.cards).deep.eq([ants]);
     expect(game.projectDeck.discardPile).is.empty;
@@ -54,7 +59,9 @@ describe('ReturntoAbandonedTechnology', function() {
     game.projectDeck.discard(decomposers);
     game.projectDeck.discard(earthOffice);
 
-    const action = cast(card.play(player), SelectCard);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard);
 
     expect(action.cards).to.have.members([birds, capital, decomposers, earthOffice]);
     expect(game.projectDeck.discardPile).deep.eq([ants]);

@@ -131,12 +131,8 @@ export abstract class Colony implements IColony {
     }
 
     // Ask the player if they want to increase the track
-    player.game.defer(new IncreaseColonyTrack(
-      player,
-      this,
-      steps,
-      () => this.handleTrade(player, tradeOptions),
-    ));
+    player.game.defer(new IncreaseColonyTrack(player, this, steps).andThen(
+      () => this.handleTrade(player, tradeOptions)));
   }
 
   private handleTrade(player: IPlayer, options: TradeOptions) {
@@ -171,7 +167,7 @@ export abstract class Colony implements IColony {
   private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
     const game = player.game;
 
-    let action: undefined | DeferredAction = undefined;
+    let action: undefined | DeferredAction<any> = undefined;
     switch (bonusType) {
     case ColonyBenefit.ADD_RESOURCES_TO_CARD:
       const cardResource = this.metadata.cardResource;

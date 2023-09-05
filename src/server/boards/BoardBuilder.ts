@@ -27,25 +27,25 @@ export class BoardBuilder {
     this.spaces.push(colonySpace(SpaceName.PHOBOS_SPACE_HAVEN));
   }
 
-  ocean(...bonus: Array<SpaceBonus>) {
+  ocean(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.OCEAN);
     this.bonuses.push(bonus);
     return this;
   }
 
-  cove(...bonus: Array<SpaceBonus>) {
+  cove(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.COVE);
     this.bonuses.push(bonus);
     return this;
   }
 
-  land(...bonus: Array<SpaceBonus>) {
+  land(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.LAND);
     this.bonuses.push(bonus);
     return this;
   }
 
-  doNotShuffleLastSpace() {
+  doNotShuffleLastSpace(): this {
     this.unshufflableSpaces.push(this.spaceTypes.length - 1);
     return this;
   }

@@ -6,6 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {Units} from '../../../src/common/Units';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
+import {cast} from '../../TestingUtils';
 
 describe('LunarIndustryComplex', () => {
   let player: TestPlayer;
@@ -39,7 +40,7 @@ describe('LunarIndustryComplex', () => {
 
     card.play(player);
 
-    const placeMineTile = game.deferredActions.pop() as PlaceMoonMineTile;
+    const placeMineTile = cast(game.deferredActions.pop(), PlaceMoonMineTile);
     placeMineTile.execute()!.cb(moonData.moon.getSpace('m02'));
 
     expect(moonData.miningRate).eq(1);

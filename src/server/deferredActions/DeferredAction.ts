@@ -45,12 +45,14 @@ export abstract class DeferredAction<T = undefined> {
 
   public abstract execute(): PlayerInput | undefined;
   protected cb: (param: T) => void = () => {};
+  private callbackSet = false;
 
   public andThen(cb: (param: T) => void): this {
-    if (this.cb !== undefined) {
+    if (this.callbackSet) {
       throw new Error('Cannot call andThen twice for the same object.');
     }
     this.cb = cb;
+    this.callbackSet = true;
     return this;
   }
 }

@@ -59,6 +59,7 @@ import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
 import {TopsoilContract} from './TopsoilContract';
 import {DirectedHeatUsage} from './DirectedHeatUsage';
+import {TychoMagnetics} from './TychoMagnetics';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -132,5 +133,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.MONS_INSURANCE]: {Factory: MonsInsurance},
     [CardName.RECYCLON]: {Factory: Recyclon},
     [CardName.SPLICE]: {Factory: Splice},
+    [CardName.TYCHO_MAGNETICS]: {Factory: TychoMagnetics},
   },
 });

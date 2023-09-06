@@ -480,6 +480,7 @@ export enum CardName {
     SUPERCAPACITORS = 'Supercapacitors',
     DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
     ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
+    TYCHO_MAGNETICS = 'Tycho Magnetics',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

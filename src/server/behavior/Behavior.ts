@@ -42,6 +42,9 @@ export interface Behavior {
   /** Gain or lose stock */
   stock?: Partial<CountableUnits>;
 
+  /** */
+  standardResource?: number;
+
   /** Add resources to this card itself */
   addResources?: Countable;
 
@@ -174,6 +177,9 @@ export interface AddResource {
    * resources without realizing it. In other words, a true value is a break from the standard rules.
    */
   mustHaveCard?: boolean,
+
+  /** When > 0, only cards with at least `min` resources count. */
+  min?: number,
 
   /** If true, if only one card matches, apply immediately without asking. */
   // WARNING: I don't think this is actually used.

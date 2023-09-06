@@ -26,6 +26,7 @@ import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {Payment} from '../../common/inputs/Payment';
+import {SelectResources} from '../inputs/SelectResources';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -128,7 +129,11 @@ export class Executor implements BehaviorExecutor {
     if (behavior.addResourcesToAnyCard !== undefined) {
       const arctac = behavior.addResourcesToAnyCard;
       if (!Array.isArray(arctac) && arctac.mustHaveCard === true) {
-        const action = new AddResourcesToCard(player, arctac.type, {count: ctx.count(arctac.count), restrictedTag: arctac.tag});
+        const action = new AddResourcesToCard(player, arctac.type, {
+          count: ctx.count(arctac.count),
+          restrictedTag: arctac.tag,
+          min: arctac.min,
+        });
         if (action.getCards().length === 0) {
           return false;
         }
@@ -245,6 +250,13 @@ export class Executor implements BehaviorExecutor {
       const units = ctx.countUnits(behavior.stock);
       player.stock.addUnits(units, {log: true});
     }
+    if (behavior.standardResource) {
+      player.defer(new SelectResources(
+        player,
+        behavior.standardResource,
+        `Gain ${behavior.standardResource} resources.`,
+      ));
+    }
     if (behavior.steelValue === 1) {
       player.increaseSteelValue();
     }
@@ -299,7 +311,7 @@ export class Executor implements BehaviorExecutor {
       for (const entry of array) {
         const count = ctx.count(entry.count);
         if (count > 0) {
-          player.game.defer(new AddResourcesToCard(player, entry.type, {count, restrictedTag: entry.tag}));
+          player.game.defer(new AddResourcesToCard(player, entry.type, {count, restrictedTag: entry.tag, min: entry.min}));
         }
       }
     }

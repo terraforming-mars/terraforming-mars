@@ -6,15 +6,19 @@ import {Tag} from '../../../common/cards/Tag';
 import {TileType} from '../../../common/TileType';
 import {Behavior} from '../../behavior/Behavior';
 import {IPreludeCard} from './IPreludeCard';
+import {CardResource} from '../../../common/CardResource';
 
-interface StaticPreludeProperties {
+export interface StaticPreludeProperties {
     metadata: ICardMetadata;
     name: CardName;
     tags?: Array<Tag>;
     tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
     behavior?: Partial<Behavior>,
     startingMegacredits?: number,
-}
+
+    // For Prelude 2
+    resourceType?: CardResource;
+  }
 
 export abstract class PreludeCard extends Card implements IPreludeCard {
   constructor(properties: StaticPreludeProperties) {
@@ -28,6 +32,7 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
       name: properties.name,
       tags: properties.tags,
       metadata: properties.metadata,
+      resourceType: properties.resourceType,
     };
     if (startingMegaCredits !== undefined) {
       obj.startingMegaCredits = startingMegaCredits;

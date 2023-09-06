@@ -6,7 +6,6 @@ import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';
 import {Ambient} from './Ambient';
 import {Anthozoa} from './Anthozoa';
-import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
 import {Aurorai} from './Aurorai';
 import {BotanicalExperience} from './BotanicalExperience';
@@ -228,7 +227,6 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.VITAL_COLONY]: {Factory: VitalColony, compatibility: 'colonies'},
     [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
     [CardName.DEEP_SPACE_OPERATIONS]: {Factory: DeepSpaceOperations},
-    [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
     [CardName.EXPERIENCED_MARTIANS]: {Factory: ExperiencedMartians, compatibility: ['turmoil', 'pathfinders']},
     [CardName.THE_NEW_SPACE_RACE]: {Factory: TheNewSpaceRace, compatibility: 'turmoil'},
   },

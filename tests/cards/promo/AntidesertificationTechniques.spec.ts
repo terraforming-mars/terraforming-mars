@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {AntidesertificationTechniques} from '../../../src/server/cards/pathfinders/AntidesertificationTechniques';
+import {AntidesertificationTechniques} from '../../../src/server/cards/promo/AntidesertificationTechniques';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -15,7 +15,7 @@ describe('AntidesertificationTechniques', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.megaCredits).eq(5);
+    expect(player.megaCredits).eq(3);
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1, steel: 1}));
   });
 });

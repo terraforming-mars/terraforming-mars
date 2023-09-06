@@ -1,6 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {Advertising} from './Advertising';
+import {AntidesertificationTechniques} from '../promo/AntidesertificationTechniques';
 import {ArcadianCommunities} from './ArcadianCommunities';
 import {AsteroidDeflectionSystem} from './AsteroidDeflectionSystem';
 import {AsteroidHollowing} from './AsteroidHollowing';
@@ -114,6 +115,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
     [CardName.HEAD_START]: {Factory: HeadStart},
+    [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
   },
 
   cardsToRemove: [

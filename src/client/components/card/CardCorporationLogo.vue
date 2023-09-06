@@ -70,8 +70,8 @@
     </template>
     <template v-else-if="title === CardName.SPLICE">
       <div class="card-splice-logo"><div>SPLI<span style="color:red">C</span>E</div>
-      <div STYLE="height:3px;background:red;margin-top:-3px;"></div>
-      <div STYLE="font-size:10px;line-height:18px;">TACTICAL GENOMICS</div>
+      <div style="height:3px;background:red;margin-top:-3px;"></div>
+      <div style="font-size:10px;line-height:18px;">TACTICAL GENOMICS</div>
       </div>
     </template>
     <template v-else-if="title === CardName.STORMCRAFT_INCORPORATED">
@@ -132,6 +132,12 @@
       <div class="card-mars-maths-logo" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif">
         <span style="color: rgb(0, 0, 0);">MARS</span>
         <span style="color: rgb(208, 96, 3);box-shadow: -6px -6px #d58c56;">MATHS</span>
+      </div>
+    </template>
+    <template v-else-if="title === CardName.TYCHO_MAGNETICS">
+      <div class="card-tycho-magnetics-logo">
+        <div>TYCHO</div>
+        <div>MAGNETICS</div>
       </div>
     </template>
     <template v-else>

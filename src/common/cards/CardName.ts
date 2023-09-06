@@ -479,6 +479,8 @@ export enum CardName {
     HEAD_START = 'Head Start',
     SUPERCAPACITORS = 'Supercapacitors',
     DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
+    ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
+    TYCHO_MAGNETICS = 'Tycho Magnetics',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
@@ -738,7 +740,6 @@ export enum CardName {
     VITAL_COLONY = 'Vital Colony',
     STRATEGIC_BASE_PLANNING = 'Strategic Base Planning',
     DEEP_SPACE_OPERATIONS = 'Deep Space Operations',
-    ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
     EXPERIENCED_MARTIANS = 'Experienced Martians',
     THE_NEW_SPACE_RACE = 'The New Space Race',
 

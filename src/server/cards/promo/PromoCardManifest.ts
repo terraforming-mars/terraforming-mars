@@ -15,6 +15,8 @@ import {CrashSiteCleanup} from './CrashSiteCleanup';
 import {CuttingEdgeTechnology} from './CuttingEdgeTechnology';
 import {DeimosDownPromo} from './DeimosDownPromo';
 import {DirectedImpactors} from './DirectedImpactors';
+import {DirectedHeatUsage} from './DirectedHeatUsage';
+import {AqueductSystems} from './AqueductSystems';
 import {DiversitySupport} from './DiversitySupport';
 import {DoubleDown} from './DoubleDown';
 import {DuskLaserMining} from './DuskLaserMining';
@@ -58,7 +60,6 @@ import {StanfordTorus} from './StanfordTorus';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
 import {TopsoilContract} from './TopsoilContract';
-import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {TychoMagnetics} from './TychoMagnetics';
 import {AppliedScience} from '../prelude2/AppliedScience';
 
@@ -110,6 +111,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.ROBOT_POLLINATORS]: {Factory: RobotPollinators},
     [CardName.SUPERCAPACITORS]: {Factory: Supercapacitors},
     [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
+    [CardName.AQUEDUCT_SYSTEMS]: {Factory: AqueductSystems},
   },
 
   preludeCards: {

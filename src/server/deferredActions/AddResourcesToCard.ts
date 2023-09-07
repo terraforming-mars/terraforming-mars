@@ -8,6 +8,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 export type Options = {
   count?: number;
   restrictedTag?: Tag;
+  min?: number;
   title?: string;
   filter?: (card: ICard) => boolean;
   log?: () => void;
@@ -36,6 +37,10 @@ export class AddResourcesToCard extends DeferredAction {
     }
     if (this.options.filter !== undefined) {
       cards = cards.filter(this.options.filter);
+    }
+    if (this.options.min) {
+      const min = this.options.min;
+      cards = cards.filter((c) => c.resourceCount >= min);
     }
     return cards;
   }

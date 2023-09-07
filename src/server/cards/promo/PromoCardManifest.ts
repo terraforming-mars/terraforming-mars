@@ -60,6 +60,7 @@ import {Supercapacitors} from './Supercapacitors';
 import {TopsoilContract} from './TopsoilContract';
 import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {TychoMagnetics} from './TychoMagnetics';
+import {AppliedScience} from '../prelude2/AppliedScience';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -110,6 +111,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.SUPERCAPACITORS]: {Factory: Supercapacitors},
     [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
   },
+
   preludeCards: {
     [CardName.NEW_PARTNER]: {Factory: NewPartner},
     [CardName.MERGER]: {Factory: Merger},
@@ -117,6 +119,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
     [CardName.HEAD_START]: {Factory: HeadStart},
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
+    [CardName.APPLIED_SCIENCE]: {Factory: AppliedScience},
   },
 
   cardsToRemove: [

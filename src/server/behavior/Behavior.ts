@@ -42,7 +42,7 @@ export interface Behavior {
   /** Gain or lose stock */
   stock?: Partial<CountableUnits>;
 
-  /** */
+  /** Gain n standard resources */
   standardResource?: number;
 
   /** Add resources to this card itself */
@@ -180,6 +180,9 @@ export interface AddResource {
 
   /** When > 0, only cards with at least `min` resources count. */
   min?: number,
+
+  /** When true, include self-replicating robots cards. */
+  robotCards?: true,
 
   /** If true, if only one card matches, apply immediately without asking. */
   // WARNING: I don't think this is actually used.

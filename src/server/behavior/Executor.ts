@@ -133,8 +133,9 @@ export class Executor implements BehaviorExecutor {
           count: ctx.count(arctac.count),
           restrictedTag: arctac.tag,
           min: arctac.min,
+          robotCards: arctac.robotCards !== undefined,
         });
-        if (action.getCards().length === 0) {
+        if (action.getCardCount() === 0) {
           return false;
         }
       }
@@ -308,10 +309,19 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.addResourcesToAnyCard) {
       const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
-      for (const entry of array) {
-        const count = ctx.count(entry.count);
+      for (const arctac of array) {
+        const count = ctx.count(arctac.count);
         if (count > 0) {
-          player.game.defer(new AddResourcesToCard(player, entry.type, {count, restrictedTag: entry.tag, min: entry.min}));
+          player.game.defer(
+            new AddResourcesToCard(
+              player,
+              arctac.type,
+              {
+                count,
+                restrictedTag: arctac.tag,
+                min: arctac.min,
+                robotCards: arctac.robotCards !== undefined,
+              }));
         }
       }
     }

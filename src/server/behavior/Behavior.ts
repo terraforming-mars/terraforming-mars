@@ -13,6 +13,7 @@ import {Countable, CountableUnits} from './Countable';
 import {PlacementType} from '../boards/PlacementType';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {Units} from '../../common/Units';
+import {NoAttributes} from './NoAttributes';
 
 type ValueOf<Obj> = Obj[keyof Obj];
 type OneOnly<Obj, Key extends keyof Obj> = { [key in Exclude<keyof Obj, Key>]: null } & Pick<Obj, Key>;
@@ -180,6 +181,9 @@ export interface AddResource {
 
   /** When > 0, only cards with at least `min` resources count. */
   min?: number,
+
+  /** When true, include self-replicating robots cards. */
+  robotCards?: true,
 
   /** If true, if only one card matches, apply immediately without asking. */
   // WARNING: I don't think this is actually used.

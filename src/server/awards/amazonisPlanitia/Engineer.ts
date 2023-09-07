@@ -37,7 +37,6 @@ export class Engineer implements IAward {
     // Colonies
     CardName.COMMUNITY_SERVICES,
     CardName.ECOLOGY_RESEARCH,
-    CardName.FLOATER_LEASING,
     CardName.LUNAR_EXPORTS,
     CardName.MINORITY_REFUGE,
     CardName.PIONEER_SETTLEMENT,

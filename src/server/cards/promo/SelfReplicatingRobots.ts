@@ -11,8 +11,8 @@ import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 
 export interface RobotCard {
-    card: IProjectCard;
-    resourceCount: number;
+  card: IProjectCard;
+  resourceCount: number;
 }
 
 export class SelfReplicatingRobots extends Card implements IProjectCard {

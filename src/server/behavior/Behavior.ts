@@ -43,7 +43,7 @@ export interface Behavior {
   /** Gain or lose stock */
   stock?: Partial<CountableUnits>;
 
-  /** */
+  /** Gain n standard resources */
   standardResource?: number;
 
   /** Add resources to this card itself */

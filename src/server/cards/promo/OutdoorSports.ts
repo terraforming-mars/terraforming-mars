@@ -35,7 +35,7 @@ export class OutdoorSports extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     const board = player.game.board;
-    const oceans = board.getOceanSpaces({upgradedOceans: true, wetlands: true} );
+    const oceans = board.getOceanSpaces({upgradedOceans: true, wetlands: true});
     return oceans.some((ocean) => board.getAdjacentSpaces(ocean).some((space) => Board.isCitySpace(space)));
   }
 }

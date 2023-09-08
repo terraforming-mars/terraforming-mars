@@ -61,7 +61,7 @@ export class LogHelper {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
-  static logDiscardedCards(logger: Logger, cards: Array<ICard> | Array<CardName>) {
+  static logDiscardedCards(logger: Logger, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>) {
     logger.log('${0} card(s) were discarded', (b) => {
       b.rawString(cards.length.toString());
       for (const card of cards) {
@@ -74,7 +74,7 @@ export class LogHelper {
     });
   }
 
-  static logDrawnCards(player: IPlayer, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {
+  static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>, privateMessage: boolean = false) {
     // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
     let message = '${0} drew ';
     if (cards.length === 0) {

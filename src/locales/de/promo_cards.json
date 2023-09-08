@@ -1,4 +1,7 @@
 {
+  "Aqueduct Systems": "Aquädukt Systeme",
+  "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "Benötigt eine eigene Stadt angrenzend an einen Ozean. Ziehe 3 Karten mit einem Gebäudesymbol.",
+  
   "Directed Heat Usage": "Direkte Wärmenutzung",
   "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Aktion: Bezahle 3 Wärme, um entweder 4 M€ oder 2 Pflanzen zu erhalten.",
   
@@ -11,6 +14,10 @@
   
   "16 Psyche": "16 Psyche",
   "Increase titanium production 2 steps. Gain 3 titanium.": "Erhöhe deine Titan-Produktion um 2. Erhalte 3 Titan.",
+
+  "Applied Science": "Angewandte Wissenschaft",
+  "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "AKTION: Entferne 1 Ressource hier, um 1 Standardressource deiner Wahl zu erhalten oder füge 1 Ressource auf einer beliebigen Karte mit einer Ressource hinzu.",
+  "Add 6 resources here.": "Füge hier 6 Ressourcen hinzu.",
   
   "Head Start": "Start Voraus",
   "GAIN 2 STEEL.": "Erhalte 2 Stahl.",

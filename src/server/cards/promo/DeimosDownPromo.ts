@@ -27,6 +27,7 @@ export class DeimosDownPromo extends Card implements IProjectCard {
       name,
       tags: [Tag.SPACE],
       cost: 31,
+      tilesBuilt: [TileType.DEIMOS_DOWN],
       metadata,
       behavior: {
         stock: {steel: 4},

@@ -12,7 +12,7 @@ export interface StaticPreludeProperties {
     metadata: ICardMetadata;
     name: CardName;
     tags?: Array<Tag>;
-    tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
+    tilesBuilt?: Array<TileType>,
     behavior?: Partial<Behavior>,
     startingMegacredits?: number,
 

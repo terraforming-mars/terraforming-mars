@@ -51,7 +51,7 @@ type Properties = {
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
+  tilesBuilt?: Array<TileType>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }

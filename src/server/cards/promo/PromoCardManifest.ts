@@ -6,6 +6,7 @@ import {ArcadianCommunities} from './ArcadianCommunities';
 import {AsteroidDeflectionSystem} from './AsteroidDeflectionSystem';
 import {AsteroidHollowing} from './AsteroidHollowing';
 import {AsteroidRights} from './AsteroidRights';
+import {AstraMechanica} from './AstraMechanica';
 import {Astrodrill} from './Astrodrill';
 import {BactoviralResearch} from './BactoviralResearch';
 import {BioPrintingFacility} from './BioPrintingFacility';
@@ -112,6 +113,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.SUPERCAPACITORS]: {Factory: Supercapacitors},
     [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
     [CardName.AQUEDUCT_SYSTEMS]: {Factory: AqueductSystems},
+    [CardName.ASTRA_MECHANICA]: {Factory: AstraMechanica},
   },
 
   preludeCards: {

@@ -352,7 +352,7 @@ export class Server {
 
   public static getCards(
     player: IPlayer,
-    cards: Array<ICard>,
+    cards: ReadonlyArray<ICard>,
     options: {
       showResources?: boolean,
       showCalculatedCost?: boolean,

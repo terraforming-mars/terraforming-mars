@@ -2,6 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {Advertising} from './Advertising';
 import {AntidesertificationTechniques} from '../promo/AntidesertificationTechniques';
+import {AppliedScience} from '../prelude2/AppliedScience';
 import {ArcadianCommunities} from './ArcadianCommunities';
 import {AsteroidDeflectionSystem} from './AsteroidDeflectionSystem';
 import {AsteroidHollowing} from './AsteroidHollowing';
@@ -58,11 +59,11 @@ import {SmallAsteroid} from './SmallAsteroid';
 import {SnowAlgae} from './SnowAlgae';
 import {Splice} from './Splice';
 import {StanfordTorus} from './StanfordTorus';
+import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
 import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
-import {AppliedScience} from '../prelude2/AppliedScience';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -114,6 +115,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
     [CardName.AQUEDUCT_SYSTEMS]: {Factory: AqueductSystems},
     [CardName.ASTRA_MECHANICA]: {Factory: AstraMechanica},
+    [CardName.ST_JOSEPH_OF_CUPERTINO_MISSION]: {Factory: StJosephOfCupertinoMission},
   },
 
   preludeCards: {

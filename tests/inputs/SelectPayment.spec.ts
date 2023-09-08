@@ -19,15 +19,7 @@ describe('SelectPayment', function() {
   it('Simple', function() {
     player.megaCredits = 10;
     const selectPayment = new SelectPayment(
-      '',
-      false, // steel
-      false, // titanium
-      false, // heat
-      false, // seeds
-      false, // data
-      false, // luna trade federation titanium
-      10,
-      cb);
+      '', 10, {}, cb);
 
     selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 10})}, player);
     expect(selected).deep.eq(Payment.of({megaCredits: 10}));
@@ -41,15 +33,7 @@ describe('SelectPayment', function() {
     player.megaCredits = 6;
     player.steel = 2;
     const selectPayment = new SelectPayment(
-      '',
-      true, // steel
-      false, // titanium
-      false, // heat
-      false, // seeds
-      false, // data
-      false, // luna trade federation titanium
-      10,
-      cb);
+      '', 10, {steel: true}, cb);
 
     selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 6, steel: 2})}, player);
     expect(selected).deep.eq(Payment.of({megaCredits: 6, steel: 2}));

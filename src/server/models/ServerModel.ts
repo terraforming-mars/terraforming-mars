@@ -286,13 +286,14 @@ export class Server {
     case 'payment':
       const sp = waitingFor as SelectPayment;
       playerInputModel.amount = sp.amount;
-      playerInputModel.canUseSteel = sp.canUseSteel;
-      playerInputModel.canUseTitanium = sp.canUseTitanium;
-      playerInputModel.canUseHeat = sp.canUseHeat;
-      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUseLunaTradeFederationTitanium;
-      playerInputModel.canUseSeeds = sp.canUseSeeds;
+      // These ?? false might be unnecessary.
+      playerInputModel.canUseSteel = sp.canUse?.steel ?? false;
+      playerInputModel.canUseTitanium = sp.canUse?.titanium ?? false;
+      playerInputModel.canUseHeat = sp.canUse?.heat ?? false;
+      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUse?.lunaTradeFederationTitanium ?? false;
+      playerInputModel.canUseSeeds = sp.canUse?.seeds ?? false;
       playerInputModel.seeds = player.getSpendableSeedResources();
-      playerInputModel.canUseData = sp.canUseData;
+      playerInputModel.canUseData = sp.canUse?.data ?? false;
       playerInputModel.auroraiData = player.getSpendableData();
       break;
     case 'player':

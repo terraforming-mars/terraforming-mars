@@ -7,13 +7,15 @@ import {IPlayer} from '../IPlayer';
 export class SelectPayment extends BasePlayerInput {
   constructor(
     title: string | Message,
-    public canUseSteel: boolean,
-    public canUseTitanium: boolean,
-    public canUseHeat: boolean,
-    public canUseSeeds: boolean,
-    public canUseData: boolean,
-    public canUseLunaTradeFederationTitanium: boolean,
     public amount: number,
+    public canUse: {
+      steel?: boolean,
+      titanium?: boolean,
+      heat?: boolean,
+      seeds?: boolean,
+      data?: boolean,
+      lunaTradeFederationTitanium?: boolean,
+    },
     public cb: (payment: Payment) => PlayerInput | undefined,
   ) {
     super('payment', title);

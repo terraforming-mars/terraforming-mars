@@ -61,7 +61,7 @@ describe('Aurorai', function() {
     runAllActions(game);
 
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
-    expect(selectPayment.canUseData).is.true;
+    expect(selectPayment.canUse.data).is.true;
 
     expect(game.getTemperature()).eq(-30);
     expect(() =>

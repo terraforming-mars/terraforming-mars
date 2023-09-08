@@ -176,6 +176,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.ASTEROIDS, amount, options));
   }
 
+  public graphene(amount: number, options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.GRAPHENE, amount, options));
+  }
+
   public event(options?: ItemOptions): this {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.EVENT, -1, options));
   }

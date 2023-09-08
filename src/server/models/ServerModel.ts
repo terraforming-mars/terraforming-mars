@@ -224,6 +224,7 @@ export class Server {
       canUseHeat: undefined,
       canUseSeeds: undefined,
       canUseData: undefined,
+      canUseGraphene: undefined,
       players: undefined,
       availableSpaces: undefined,
       maxByDefault: undefined,
@@ -232,6 +233,7 @@ export class Server {
       science: undefined,
       seeds: undefined,
       auroraiData: undefined,
+      graphene: undefined,
       coloniesModel: undefined,
       payProduction: undefined,
       aresData: undefined,
@@ -265,6 +267,7 @@ export class Server {
       playerInputModel.canUseLunaTradeFederationTitanium = player.canUseTitaniumAsMegacredits;
       playerInputModel.science = player.getSpendableScienceResources();
       playerInputModel.seeds = player.getSpendableSeedResources();
+      playerInputModel.graphene = player.getSpendableGraphene();
       break;
     case 'card':
       const selectCard = waitingFor as SelectCard<ICard>;
@@ -287,14 +290,14 @@ export class Server {
       const sp = waitingFor as SelectPayment;
       playerInputModel.amount = sp.amount;
       // These ?? false might be unnecessary.
-      playerInputModel.canUseSteel = sp.canUse?.steel ?? false;
-      playerInputModel.canUseTitanium = sp.canUse?.titanium ?? false;
-      playerInputModel.canUseHeat = sp.canUse?.heat ?? false;
-      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUse?.lunaTradeFederationTitanium ?? false;
-      playerInputModel.canUseSeeds = sp.canUse?.seeds ?? false;
+      playerInputModel.canUseSteel = sp.canUse.steel ?? false;
+      playerInputModel.canUseTitanium = sp.canUse.titanium ?? false;
+      playerInputModel.canUseHeat = sp.canUse.heat ?? false;
+      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUse.lunaTradeFederationTitanium ?? false;
+      playerInputModel.canUseSeeds = sp.canUse.seeds ?? false;
       playerInputModel.seeds = player.getSpendableSeedResources();
-      playerInputModel.canUseData = sp.canUse?.data ?? false;
-      playerInputModel.auroraiData = player.getSpendableData();
+      playerInputModel.canUseData = sp.canUse.data ?? false;
+      playerInputModel.canUseGraphene = sp.canUse.graphene && player.getSpendableData() > 0;
       break;
     case 'player':
       playerInputModel.players = (waitingFor as SelectPlayer).players.map(

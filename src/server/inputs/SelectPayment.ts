@@ -15,6 +15,7 @@ export class SelectPayment extends BasePlayerInput {
       seeds?: boolean,
       data?: boolean,
       lunaTradeFederationTitanium?: boolean,
+      graphene?: boolean,
     },
     public cb: (payment: Payment) => PlayerInput | undefined,
   ) {

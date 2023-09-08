@@ -78,6 +78,8 @@ export interface IGame extends Logger {
   syndicatePirateRaider?: PlayerId;
   // Gagarin Mobile Base
   gagarinBase: Array<SpaceId>;
+  // St. Joseph of Cupertino Mission
+  stJosephCathedrals: Array<SpaceId>;
   // The set of tags available in this game.
   readonly tags: ReadonlyArray<Tag>;
   // Function use to properly start the game: with project draft or with research phase

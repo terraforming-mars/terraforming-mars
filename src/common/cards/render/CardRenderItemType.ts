@@ -74,6 +74,7 @@ export enum CardRenderItemType {
   GLOBAL_EVENT = 'global-event',
   FIRST_PLAYER = '1p',
   RULING_PARTY = 'ruling-party',
+  CATHEDRAL = 'cathedral',
 
   // CEO Extension:
   ARROW_OPG = 'arrow-opg',

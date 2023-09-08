@@ -59,13 +59,15 @@ export class SelectPaymentDeferred extends DeferredAction {
 
     return new SelectPayment(
       this.options.title || 'Select how to spend ' + this.amount + ' M€',
-      this.options.canUseSteel || false,
-      this.options.canUseTitanium || false,
-      this.player.canUseHeatAsMegaCredits,
-      this.options.canUseSeeds || false,
-      this.options.canUseData || false,
-      this.player.canUseTitaniumAsMegacredits,
       this.amount,
+      {
+        steel: this.options.canUseSteel || false,
+        titanium: this.options.canUseTitanium || false,
+        heat: this.player.canUseHeatAsMegaCredits,
+        seeds: this.options.canUseSeeds || false,
+        data: this.options.canUseData || false,
+        lunaTradeFederationTitanium: this.player.canUseTitaniumAsMegacredits,
+      },
       (payment: Payment) => {
         if (!this.player.canSpend(payment)) {
           throw new Error('You do not have that many resources to spend');

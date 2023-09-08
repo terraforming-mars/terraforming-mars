@@ -89,7 +89,7 @@ export class Server {
       passedPlayers: game.getPassedPlayers(),
       pathfinders: createPathfindersModel(game),
       phase: game.phase,
-      spaces: this.getSpaces(game.board, game.gagarinBase),
+      spaces: this.getSpaces(game.board, game.gagarinBase, game.stJosephCathedrals),
       spectatorId: game.spectatorId,
       temperature: game.getTemperature(),
       isTerraformed: game.marsIsTerraformed(),
@@ -286,13 +286,14 @@ export class Server {
     case 'payment':
       const sp = waitingFor as SelectPayment;
       playerInputModel.amount = sp.amount;
-      playerInputModel.canUseSteel = sp.canUseSteel;
-      playerInputModel.canUseTitanium = sp.canUseTitanium;
-      playerInputModel.canUseHeat = sp.canUseHeat;
-      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUseLunaTradeFederationTitanium;
-      playerInputModel.canUseSeeds = sp.canUseSeeds;
+      // These ?? false might be unnecessary.
+      playerInputModel.canUseSteel = sp.canUse?.steel ?? false;
+      playerInputModel.canUseTitanium = sp.canUse?.titanium ?? false;
+      playerInputModel.canUseHeat = sp.canUse?.heat ?? false;
+      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUse?.lunaTradeFederationTitanium ?? false;
+      playerInputModel.canUseSeeds = sp.canUse?.seeds ?? false;
       playerInputModel.seeds = player.getSpendableSeedResources();
-      playerInputModel.canUseData = sp.canUseData;
+      playerInputModel.canUseData = sp.canUse?.data ?? false;
       playerInputModel.auroraiData = player.getSpendableData();
       break;
     case 'player':
@@ -526,7 +527,7 @@ export class Server {
     return undefined;
   }
 
-  private static getSpaces(board: Board, gagarin: Array<SpaceId>): Array<SpaceModel> {
+  private static getSpaces(board: Board, gagarin: ReadonlyArray<SpaceId> = [], cathedrals: ReadonlyArray<SpaceId> = []): Array<SpaceModel> {
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
     const noctisCitySpaceIds = board.getNoctisCitySpaceId();
 
@@ -557,6 +558,9 @@ export class Server {
       const gagarinIndex = gagarin.indexOf(space.id);
       if (gagarinIndex > -1) {
         model.gagarin = gagarinIndex;
+      }
+      if (cathedrals.includes(space.id)) {
+        model.cathedral = true;
       }
 
       return model;
@@ -627,7 +631,7 @@ export class Server {
         logisticsRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
         habitatRate: moonData.habitatRate,
-        spaces: this.getSpaces(moonData.moon, []),
+        spaces: this.getSpaces(moonData.moon),
       };
     }, () => undefined);
   }

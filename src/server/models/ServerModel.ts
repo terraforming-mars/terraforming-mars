@@ -527,7 +527,7 @@ export class Server {
     return undefined;
   }
 
-  private static getSpaces(board: Board, gagarin: Array<SpaceId>): Array<SpaceModel> {
+  private static getSpaces(board: Board, gagarin: Array<SpaceId> = [], cathedrals: Array<SpaceId> = []): Array<SpaceModel> {
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
     const noctisCitySpaceIds = board.getNoctisCitySpaceId();
 
@@ -558,6 +558,9 @@ export class Server {
       const gagarinIndex = gagarin.indexOf(space.id);
       if (gagarinIndex > -1) {
         model.gagarin = gagarinIndex;
+      }
+      if (cathedrals.includes(space.id)) {
+        model.cathedral = true;
       }
 
       return model;
@@ -628,7 +631,7 @@ export class Server {
         logisticsRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
         habitatRate: moonData.habitatRate,
-        spaces: this.getSpaces(moonData.moon, []),
+        spaces: this.getSpaces(moonData.moon),
       };
     }, () => undefined);
   }

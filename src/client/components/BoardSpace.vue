@@ -16,7 +16,10 @@
       <div v-if="space.gagarin === 0" class='gagarin'></div>
       <div v-else class='gagarin visited'></div>
     </template>
-  </div>
+    <template v-if="space.cathedral === true">
+      <div class='cathedral'></div>
+    </template>
+    </div>
 </template>
 
 <script lang="ts">

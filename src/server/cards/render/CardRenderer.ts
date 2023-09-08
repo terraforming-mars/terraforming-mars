@@ -411,6 +411,11 @@ abstract class Builder<T> {
     return this;
   }
 
+  public cathedral(): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.CATHEDRAL, 1));
+  }
+
+
   public specialTile(options?: ItemOptions) {
     this._appendToRow(new CardRenderItem(CardRenderItemType.EMPTY_TILE_SPECIAL, 1, options));
     return this;

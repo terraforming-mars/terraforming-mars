@@ -25,7 +25,7 @@ export class AqueductSystems extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.cities(1, {text: ' next to'}).oceans()),
 
       metadata: {
-        cardNumber: 'X28',
+        cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.cards(3, {secondaryTag: Tag.BUILDING});
         }),

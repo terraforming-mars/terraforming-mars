@@ -483,6 +483,7 @@ export enum CardName {
     ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
     TYCHO_MAGNETICS = 'Tycho Magnetics',
     AQUEDUCT_SYSTEMS = 'Aqueduct Systems',
+    ASTRA_MECHANICA = 'Astra Mechanica',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

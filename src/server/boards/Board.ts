@@ -338,8 +338,8 @@ export function playerTileFn(player: IPlayer) {
   return (space: Space) => space.player?.id === player.id;
 }
 
-export function isSpecialTile(space: Space): boolean {
-  switch (space.tile?.tileType) {
+export function isSpecialTile(tileType: TileType | undefined): boolean {
+  switch (tileType) {
   case TileType.GREENERY:
   case TileType.OCEAN:
   case TileType.CITY:
@@ -355,4 +355,8 @@ export function isSpecialTile(space: Space): boolean {
   default:
     return true;
   }
+}
+
+export function isSpecialTileSpace(space: Space): boolean {
+  return isSpecialTile(space.tile?.tileType);
 }

@@ -6,7 +6,7 @@ import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
-import {isSpecialTile, playerTileFn} from '../../boards/Board';
+import {isSpecialTileSpace, playerTileFn} from '../../boards/Board';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
@@ -39,13 +39,13 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
     // This code is repeated in Land Specialist
     const spaces = player.game.board.spaces
       .filter(playerTileFn(player))
-      .filter(isSpecialTile);
+      .filter(isSpecialTileSpace);
 
     const marsCount = spaces.length;
     const moonCount = MoonExpansion.ifElseMoon(player.game, (moonData) => {
       return moonData.moon.spaces
         .filter(playerTileFn(player))
-        .filter(isSpecialTile)
+        .filter(isSpecialTileSpace)
         .length;
     },
     () => 0);

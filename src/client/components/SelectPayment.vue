@@ -139,20 +139,21 @@ export default Vue.extend({
     canUseData() {
       return this.playerinput.canUseData && (this.playerinput.auroraiData ?? 0 > 0);
     },
+    canUseGraphene() {
+      return this.playerinput.canUseGraphene && (this.playerinput.graphene ?? 0 > 0);
+    },
 
     saveData() {
       const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits'];
 
       const payment: Payment = {
+        ...Payment.EMPTY,
         heat: this.heat,
         megaCredits: this.megaCredits,
         steel: this.steel,
         titanium: this.titanium,
         seeds: this.seeds ?? 0,
         auroraiData: this.auroraiData ?? 0,
-        microbes: 0,
-        floaters: 0,
-        science: 0,
       };
 
       let totalSpent = 0;

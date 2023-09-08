@@ -865,6 +865,7 @@ export class Player implements IPlayer {
       science: card.tags.includes(Tag.MOON),
       // TODO(kberg): add this.corporation.name === CardName.AURORAI
       auroraiData: card.type === CardType.STANDARD_PROJECT,
+      graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
     };
   }
 
@@ -898,19 +899,21 @@ export class Player implements IPlayer {
     return this.playCard(selectedCard, payment, cardAction);
   }
 
+  public resourcesOnCard(name: CardName): number {
+    const card = this.tableau.find((card) => card.name === name);
+    return card?.resourceCount ?? 0;
+  }
+
   public getSpendableMicrobes(): number {
-    const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
-    return psychrophiles?.resourceCount ?? 0;
+    return this.resourcesOnCard(CardName.PSYCHROPHILES);
   }
 
   public getSpendableFloaters(): number {
-    const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
-    return dirigibles?.resourceCount ?? 0;
+    return this.resourcesOnCard(CardName.DIRIGIBLES);
   }
 
   public getSpendableScienceResources(): number {
-    const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
-    return lunaArchives?.resourceCount ?? 0;
+    return this.resourcesOnCard(CardName.LUNA_ARCHIVES);
   }
 
   public getSpendableSeedResources(): number {
@@ -919,6 +922,10 @@ export class Player implements IPlayer {
 
   public getSpendableData(): number {
     return this.getCorporation(CardName.AURORAI)?.resourceCount ?? 0;
+  }
+
+  public getSpendableGraphene(): number {
+    return this.resourcesOnCard(CardName.CARBON_NANOSYSTEMS);
   }
 
   public pay(payment: Payment) {
@@ -934,34 +941,23 @@ export class Player implements IPlayer {
       this.defer(this.spendHeat(payment.heat));
     }
 
-    // TODO(kberg): make it faster to fetch individual cards so this
-    // weird if / for loop can be removed.
-    if (payment.microbes > 0 || payment.floaters > 0 || payment.science > 0) {
-      for (const playedCard of this.playedCards) {
-        if (playedCard.name === CardName.PSYCHROPHILES) {
-          this.removeResourceFrom(playedCard, payment.microbes);
-        }
-
-        if (playedCard.name === CardName.DIRIGIBLES) {
-          this.removeResourceFrom(playedCard, payment.floaters);
-        }
-
-        if (playedCard.name === CardName.LUNA_ARCHIVES) {
-          this.removeResourceFrom(playedCard, payment.science);
-        }
+    const removeResourcesOnCard = (name: CardName, count: number) => {
+      if (count === 0) {
+        return;
       }
-    }
+      const card = this.tableau.find((card) => card.name === name);
+      if (card === undefined) {
+        throw new Error('Card ' + name + ' not found');
+      }
+      this.removeResourceFrom(card, count, {log: true});
+    };
 
-    if (payment.seeds > 0) {
-      const soylent = this.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS);
-      if (soylent === undefined) throw new Error('Cannot pay with seeds without ' + CardName.SOYLENT_SEEDLING_SYSTEMS);
-      this.removeResourceFrom(soylent, payment.seeds);
-    }
-    if (payment.auroraiData > 0) {
-      const aurorai = this.getCorporation(CardName.AURORAI);
-      if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
-      this.removeResourceFrom(aurorai, payment.auroraiData);
-    }
+    removeResourcesOnCard(CardName.PSYCHROPHILES, payment.microbes);
+    removeResourcesOnCard(CardName.DIRIGIBLES, payment.floaters);
+    removeResourcesOnCard(CardName.LUNA_ARCHIVES, payment.science);
+    removeResourcesOnCard(CardName.CARBON_NANOSYSTEMS, payment.graphene);
+    removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
+    removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
 
     if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
@@ -1374,6 +1370,7 @@ export class Player implements IPlayer {
       science: this.getSpendableScienceResources(),
       seeds: this.getSpendableSeedResources(),
       auroraiData: this.getSpendableData(),
+      graphene: this.getSpendableGraphene(),
     };
   }
 
@@ -1405,6 +1402,7 @@ export class Player implements IPlayer {
       science: 1,
       seeds: constants.SEED_VALUE,
       auroraiData: constants.DATA_VALUE,
+      graphene: constants.GRAPHENE_VALUE,
     };
 
     const usable: {[key in PaymentKey]: boolean} = {
@@ -1417,6 +1415,7 @@ export class Player implements IPlayer {
       science: options?.science ?? false,
       seeds: options?.seeds ?? false,
       auroraiData: options?.auroraiData ?? false,
+      graphene: options?.graphene ?? false,
     };
 
     // HOOK: Luna Trade Federation

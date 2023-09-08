@@ -21,6 +21,7 @@ export class PaymentTester {
       'science': 'Science',
       'seeds': 'Seeds',
       'auroraiData': 'Data',
+      'graphene': 'graphene',
     };
     const title = titles[type];
     return '[title~=' + title + ']';

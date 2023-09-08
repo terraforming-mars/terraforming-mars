@@ -1177,7 +1177,9 @@
             .card-resource-cathedral {
                 background-image: url(./assets/promo/cathedral.png);
             }
-
+            .card-resource-graphene {
+                background-image: url(./assets/resources/graphene.png);
+            }
             /* CEO Assets */
             .card-arrow-opg {
                 display: inline-block;
@@ -2347,7 +2349,7 @@ each(@parties, {
     // the stuff above wasn't contained inside card-content.
     @resource_types: microbe, animal, science, floater, fighter, camp,
       asteroid, disease, preservation, data, syndicate-fleet, cube,
-      venusian-habitat, specialized-robot, seed, orbital, agenda;
+      venusian-habitat, specialized-robot, seed, orbital, agenda, graphene;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

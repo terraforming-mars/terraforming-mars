@@ -11,6 +11,7 @@ import {AstraMechanica} from './AstraMechanica';
 import {Astrodrill} from './Astrodrill';
 import {BactoviralResearch} from './BactoviralResearch';
 import {BioPrintingFacility} from './BioPrintingFacility';
+import {CarbonNanosystems} from './CarbonNanosystems';
 import {CometAiming} from './CometAiming';
 import {CorporateArchives} from './CorporateArchives';
 import {CrashSiteCleanup} from './CrashSiteCleanup';
@@ -116,6 +117,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.AQUEDUCT_SYSTEMS]: {Factory: AqueductSystems},
     [CardName.ASTRA_MECHANICA]: {Factory: AstraMechanica},
     [CardName.ST_JOSEPH_OF_CUPERTINO_MISSION]: {Factory: StJosephOfCupertinoMission},
+    [CardName.CARBON_NANOSYSTEMS]: {Factory: CarbonNanosystems},
   },
 
   preludeCards: {

@@ -19,6 +19,7 @@ export interface PlayerInputModel {
     canUseSeeds: boolean | undefined;
     canUseData: boolean | undefined;
     canUseLunaTradeFederationTitanium: boolean | undefined;
+    canUseGraphene: boolean | undefined;
     cards: Array<CardModel> | undefined;
     inputType: PlayerInputType;
     options: Array<PlayerInputModel> | undefined;
@@ -30,6 +31,7 @@ export interface PlayerInputModel {
     science: number | undefined;
     seeds: number | undefined;
     auroraiData: number | undefined;
+    graphene: number | undefined;
     players: Array<ColorWithNeutral> | undefined;
     title: string | Message;
     buttonLabel: string;

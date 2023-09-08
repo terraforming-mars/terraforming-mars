@@ -156,7 +156,9 @@ export default Vue.extend({
         classes.push('card-resource-tag', 'card-community-services');
         break;
       case CardRenderItemType.CITY:
-        classes.push('card-tile', `city-tile--${this.item.size}`);
+        if (this.item.isPlayed !== true) {
+          classes.push('card-tile', `city-tile--${this.item.size}`);
+        }
         break;
       case CardRenderItemType.GREENERY:
         classes.push('card-tile');
@@ -272,10 +274,12 @@ export default Vue.extend({
       case CardRenderItemType.PLANETARY_TRACK:
         classes.push('card-planetary-track');
         break;
-      case CardRenderItemType.CATHEDRAL: {
+      case CardRenderItemType.CATHEDRAL:
         classes.push('card-resource', 'card-resource-cathedral');
         break;
-      }
+      case CardRenderItemType.GRAPHENE:
+        classes.push('card-resource', 'card-resource-graphene');
+        break;
       }
 
       if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {

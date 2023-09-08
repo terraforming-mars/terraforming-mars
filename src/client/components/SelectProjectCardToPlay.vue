@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 
+import {GRAPHENE_VALUE, SEED_VALUE} from '@/common/constants';
 import {Payment, PAYMENT_KEYS} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
@@ -69,8 +70,9 @@ export default Vue.extend({
       microbes: 0,
       science: 0,
       seeds: 0,
-      auroraiData: 0,
       floaters: 0,
+      auroraiData: 0,
+      graphene: 0,
       warning: undefined,
       available: Units.of({}),
     };
@@ -151,8 +153,10 @@ export default Vue.extend({
       };
 
       if (megacreditBalance > 0 && this.canUseSeeds()) {
-        this.seeds = deductUnits(this.playerinput.seeds, 5);
+        this.seeds = deductUnits(this.playerinput.seeds, SEED_VALUE);
       }
+
+      // TODO(kberg): create constants for these resource types
 
       if (megacreditBalance > 0 && this.canUseMicrobes()) {
         this.microbes = deductUnits(this.playerinput.microbes, 2);
@@ -164,6 +168,10 @@ export default Vue.extend({
 
       if (megacreditBalance > 0 && this.canUseScience()) {
         this.science = deductUnits(this.playerinput.science, 1);
+      }
+
+      if (megacreditBalance > 0 && this.canUseGraphene()) {
+        this.graphene = deductUnits(this.playerinput.graphene, GRAPHENE_VALUE);
       }
 
       this.available.steel = Math.max(this.thisPlayer.steel - this.reserveUnits.steel, 0);
@@ -194,7 +202,8 @@ export default Vue.extend({
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
         this.science -= saveOverSpendingUnits(this.science, 1);
-        this.seeds -= saveOverSpendingUnits(this.seeds, 5);
+        this.seeds -= saveOverSpendingUnits(this.seeds, SEED_VALUE);
+        this.graphene -= saveOverSpendingUnits(this.graphene, GRAPHENE_VALUE);
         this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
@@ -221,7 +230,7 @@ export default Vue.extend({
       return this.card !== undefined && this.available.titanium > 0 && this.playerinput.canUseLunaTradeFederationTitanium === true;
     },
     canUseMicrobes() {
-      // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
+      // FYI microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
       if (this.card !== undefined && (this.playerinput.microbes ?? 0) > 0) {
         if (this.tags.includes(Tag.PLANT)) {
           return true;
@@ -230,7 +239,7 @@ export default Vue.extend({
       return false;
     },
     canUseFloaters() {
-      // FYI Floaters are limited to the DIRIGIBLES card.
+      // FYI floaters are limited to the Dirigibles card.
       if (this.card !== undefined && (this.playerinput.floaters ?? 0) > 0) {
         if (this.tags.includes(Tag.VENUS)) {
           return true;
@@ -239,7 +248,8 @@ export default Vue.extend({
       return false;
     },
     canUseScience() {
-      // FYI Science Resources are limited to the Luna Archive card, which allows spending its science resources for Moon cards.
+      // FYI science resources are limited to the Luna Archive card, which allows spending its
+      // science resources for Moon cards.
       if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
         if (this.tags.includes(Tag.MOON)) {
           return true;
@@ -248,13 +258,23 @@ export default Vue.extend({
       return false;
     },
     canUseSeeds() {
-      // FYI Seed Resources are limited to the Soylent Seedling Systems corp card, which allows spending its
+      // FYI seeds are limited to the Soylent Seedling Systems corp card, which allows spending its
       // resources for plant cards and the standard greenery project.
       if (this.card !== undefined && (this.playerinput.seeds ?? 0) > 0) {
         if (this.tags.includes(Tag.PLANT)) {
           return true;
         }
         if (this.card.name === CardName.GREENERY_STANDARD_PROJECT) {
+          return true;
+        }
+      }
+      return false;
+    },
+    canUseGraphene() {
+      // FYI graphene is limited to the Carbon Nanosystems card, which allows spending its resources
+      // for city and space cards.
+      if (this.card !== undefined && (this.playerinput.graphene ?? 0) > 0) {
+        if (this.tags.includes(Tag.SPACE) || this.tags.includes(Tag.CITY)) {
           return true;
         }
       }
@@ -294,6 +314,7 @@ export default Vue.extend({
         floaters: this.floaters,
         science: this.science,
         seeds: this.seeds,
+        graphene: this.graphene,
         auroraiData: 0,
       };
       let totalSpent = 0;
@@ -425,6 +446,15 @@ export default Vue.extend({
       <AppButton type="plus" @click="addValue('seeds', 1)" />
       <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
+
+    <div class="payments_type input-group" v-if="canUseGraphene()">
+      <i class="resource_icon resource_icon--graphene payments_type_icon" :title="$t('Pay with graphene')"></i>
+      <AppButton type="minus" @click="reduceValue('graphene', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="graphene" />
+      <AppButton type="plus" @click="addValue('graphene', 1)" />
+      <AppButton type="max" @click="setMaxValue('graphene')" title="MAX" />
+    </div>
+
 
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>

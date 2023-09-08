@@ -49,12 +49,12 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
     }
 
     player.game.defer(new SelectPaymentDeferred(player, 5, {canUseSteel: true, title: 'Select how to pay for St. Joseph of Cupertino Mission action', afterPay: () => {
-      return new SelectSpace('Select new cathedral space', cities, (space) => {
+      player.defer(new SelectSpace('Select new cathedral space', cities, (space) => {
         player.game.stJosephCathedrals.push(space.id);
-        if (space.player === undefined) {
+        const spaceOwner = space.player;
+        if (spaceOwner === undefined || spaceOwner.color === 'neutral') {
           return undefined;
         }
-        const spaceOwner = space.player;
         if (spaceOwner.canAfford(2)) {
           spaceOwner.defer(
             new OrOptions(
@@ -68,7 +68,7 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
             ));
         }
         return undefined;
-      });
+      }));
     }}));
     return undefined;
   }

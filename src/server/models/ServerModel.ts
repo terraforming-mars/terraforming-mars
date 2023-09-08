@@ -89,7 +89,7 @@ export class Server {
       passedPlayers: game.getPassedPlayers(),
       pathfinders: createPathfindersModel(game),
       phase: game.phase,
-      spaces: this.getSpaces(game.board, game.gagarinBase),
+      spaces: this.getSpaces(game.board, game.gagarinBase, game.stJosephCathedrals),
       spectatorId: game.spectatorId,
       temperature: game.getTemperature(),
       isTerraformed: game.marsIsTerraformed(),
@@ -530,7 +530,7 @@ export class Server {
     return undefined;
   }
 
-  private static getSpaces(board: Board, gagarin: Array<SpaceId> = [], cathedrals: Array<SpaceId> = []): Array<SpaceModel> {
+  private static getSpaces(board: Board, gagarin: ReadonlyArray<SpaceId> = [], cathedrals: ReadonlyArray<SpaceId> = []): Array<SpaceModel> {
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
     const noctisCitySpaceIds = board.getNoctisCitySpaceId();
 

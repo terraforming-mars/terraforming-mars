@@ -8,7 +8,7 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
   return `${prefix}${color}`;
 };
 
-export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
+export const generateClassString = (classes: ReadonlyArray<string>): string => classes.join(' ').trimStart();
 
 /**
  * Creates a range from 0 to n.
@@ -38,8 +38,19 @@ export function intersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): Array
  * @param {Array<T>} b: the second array
  * @return {Boolean} true if a includes an element of b.
  */
-export function hasIntersection<T>(a: Array<T>, b: Array<T>): boolean {
+export function hasIntersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): boolean {
   return a.some((e) => b.includes(e));
+}
+
+/**
+ * Returns elements in a that are not in b.
+ *
+ * @param {Array<T>} a: the first array
+ * @param {Array<T>} b: the second array
+ */
+export function difference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): ReadonlyArray<T> {
+  // Not optimized for large arrays.
+  return a.filter((e) => !b.includes(e));
 }
 
 // https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescript
@@ -60,7 +71,7 @@ export function inplaceRemove<T>(array: Array<T>, element: T): boolean {
   return true;
 }
 
-export function sum(array: Array<number>): number {
+export function sum(array: ReadonlyArray<number>): number {
   return array.reduce((a, b) => a + b, 0);
 }
 
@@ -74,7 +85,7 @@ export function sum(array: Array<number>): number {
  * @param {Function} predicate The function invoked per iteration.
  * @returns {Array<Array<T>>} Returns the array of grouped elements. Passing group come first.
  */
-export function partition<T>(source: Array<T>, predicate: (t: T) => boolean): Array<Array<T>> {
+export function partition<T>(source: ReadonlyArray<T>, predicate: (t: T) => boolean): Array<Array<T>> {
   return source.reduce((result: [Array<T>, Array<T>], element: T) => {
     result[predicate(element) ? 0 : 1].push(element);
     return result;
@@ -86,6 +97,6 @@ export function partition<T>(source: Array<T>, predicate: (t: T) => boolean): Ar
  *
  * Unexpected behavior if the arrays have different length.
  */
-export function zip<S, T>(first: Array<S>, second: Array<T>): Array<[S, T]> {
+export function zip<S, T>(first: ReadonlyArray<S>, second: ReadonlyArray<T>): Array<[S, T]> {
   return first.map((e, i) => [e, second[i]]);
 }

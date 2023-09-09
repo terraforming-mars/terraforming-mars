@@ -5,6 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
+import {IPlayer} from '../../IPlayer';
 
 export class RoboticWorkforce extends RoboticWorkforceBase {
   constructor() {
@@ -24,11 +25,7 @@ export class RoboticWorkforce extends RoboticWorkforceBase {
     });
   }
 
-  public override selectCardText(): string {
-    return 'Select builder card to copy';
-  }
-
-  public override count(): number {
-    return 1;
+  public override bespokePlay(player: IPlayer) {
+    return this.selectBuildingCard(player, this.getPlayableBuildingCards(player), 'Select builder card to copy');
   }
 }

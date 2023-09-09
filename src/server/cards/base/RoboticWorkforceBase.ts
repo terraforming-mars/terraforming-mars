@@ -6,6 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ICard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
+import {PlayerInput} from '../..//PlayerInput';
 
 export abstract class RoboticWorkforceBase extends Card {
   constructor(properties: StaticCardProperties) {
@@ -49,25 +50,19 @@ export abstract class RoboticWorkforceBase extends Card {
     return false;
   }
 
-  protected getAvailableCards(player: IPlayer): Array<ICard> {
+  protected getPlayableBuildingCards(player: IPlayer): ReadonlyArray<ICard> {
     return player.tableau.filter((card) => this.isCardApplicable(card, player));
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    return this.getAvailableCards(player).length > 0;
+    return this.getPlayableBuildingCards(player).length > 0;
   }
 
-  public abstract selectCardText(): string;
-  public abstract count(): number;
-
-  public override bespokePlay(player: IPlayer) {
-    const availableCards = this.getAvailableCards(player);
-
-    if (availableCards.length === 0) {
+  protected selectBuildingCard(player: IPlayer, cards: ReadonlyArray<ICard>, title: string, cb: (card: ICard) => PlayerInput | undefined = () => undefined) {
+    if (cards.length === 0) {
       return undefined;
     }
-
-    return new SelectCard(this.selectCardText(), 'Copy', availableCards, ([card]) => {
+    return new SelectCard(title, 'Copy', cards, ([card]) => {
       player.game.log('${0} copied ${1} production with ${2}', (b) =>
         b.player(player).card(card).card(this));
 
@@ -76,7 +71,7 @@ export abstract class RoboticWorkforceBase extends Card {
       } else if (card.behavior !== undefined) {
         getBehaviorExecutor().execute(this.productionBehavior(card.behavior), player, card);
       }
-      return undefined;
-    }, {max: this.count()});
+      return cb(card);
+    });
   }
 }

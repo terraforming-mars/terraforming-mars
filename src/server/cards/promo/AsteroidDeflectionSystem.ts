@@ -47,7 +47,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
 
   public action(player: IPlayer) {
     const topCard = player.game.projectDeck.draw(player.game);
-    if (topCard.tags.includes(Tag.SPACE)) player.addResourceTo(this);
+    if (topCard.tags.includes(Tag.SPACE)) player.addResourceTo(this, {qty: 1, log: true});
     player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
     player.game.projectDeck.discard(topCard);
     return undefined;

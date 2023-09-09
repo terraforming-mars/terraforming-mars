@@ -16,6 +16,7 @@ import {CometAiming} from './CometAiming';
 import {CorporateArchives} from './CorporateArchives';
 import {CrashSiteCleanup} from './CrashSiteCleanup';
 import {CuttingEdgeTechnology} from './CuttingEdgeTechnology';
+import {CyberiaSystems} from './CyberiaSystems';
 import {DeimosDownPromo} from './DeimosDownPromo';
 import {DirectedImpactors} from './DirectedImpactors';
 import {DirectedHeatUsage} from './DirectedHeatUsage';
@@ -118,6 +119,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.ASTRA_MECHANICA]: {Factory: AstraMechanica},
     [CardName.ST_JOSEPH_OF_CUPERTINO_MISSION]: {Factory: StJosephOfCupertinoMission},
     [CardName.CARBON_NANOSYSTEMS]: {Factory: CarbonNanosystems},
+    [CardName.CYBERIA_SYSTEMS]: {Factory: CyberiaSystems},
   },
 
   preludeCards: {

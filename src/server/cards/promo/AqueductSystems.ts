@@ -7,6 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {Board} from '../../boards/Board';
+import {nextTo} from '../Options';
 
 export class AqueductSystems extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class AqueductSystems extends Card implements IProjectCard {
         drawCard: {count: 3, tag: Tag.BUILDING},
       },
 
-      requirements: CardRequirements.builder((b) => b.cities(1, {text: ' next to'}).oceans()),
+      requirements: CardRequirements.builder((b) => b.cities(1, {nextTo}).oceans()),
 
       metadata: {
         cardNumber: '',

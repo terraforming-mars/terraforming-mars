@@ -1,7 +1,7 @@
 <template>
   <div class="card-requirement">
-      <div class="card-item-container">
-        <template v-if="requirement.isMax">max&nbsp;</template>
+      <div class="card-item-container" :class="nextTo">
+        <template v-if="requirement.max">max&nbsp;</template>
         <span v-if="!isRepeated">{{amount}}</span>{{suffix}}
         <template v-if="requirement.type === RequirementType.REMOVED_PLANTS">
           <div class="card-special card-minus"></div>
@@ -48,6 +48,11 @@ export default Vue.extend({
       type: Object as () => ICardRequirement,
       required: true,
     },
+    leftMargin: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
   components: {
     CardParty,
@@ -64,7 +69,7 @@ export default Vue.extend({
       case RequirementType.LOGISTIC_RATE:
         return this.requirement.amount;
       }
-      if (this.requirement.isMax) {
+      if (this.requirement.max) {
         return this.requirement.amount;
       }
       if (this.requirement.amount === 0) {
@@ -86,11 +91,11 @@ export default Vue.extend({
       return '';
     },
     isAny(): string {
-      return this.requirement.isAny ? 'red-outline' : '';
+      return this.requirement.all ? 'red-outline' : '';
     },
     componentClasses(): string {
       const classes = this.componentClassArray;
-      if (this.requirement.isAny) {
+      if (this.requirement.all) {
         classes.push('red-outline');
       }
       return generateClassString(classes);
@@ -181,6 +186,15 @@ export default Vue.extend({
         return [1];
       }
       return range(this.requirement.amount);
+    },
+    nextTo(): string {
+      if (this.requirement.nextTo) {
+        return 'nextto-leftside';
+      }
+      if (this.leftMargin) {
+        return 'nextto-rightside';
+      }
+      return '';
     },
   },
 });

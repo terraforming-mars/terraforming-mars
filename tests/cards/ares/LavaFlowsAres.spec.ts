@@ -23,7 +23,7 @@ describe('LavaFlowsAres', function() {
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
 
     expect(space.tile && space.tile.tileType).to.eq(TileType.LAVA_FLOWS);

@@ -305,7 +305,7 @@ export class Server {
       );
       break;
     case 'space':
-      playerInputModel.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
+      playerInputModel.availableSpaces = (waitingFor as SelectSpace).spaces.map(
         (space) => space.id,
       );
       break;

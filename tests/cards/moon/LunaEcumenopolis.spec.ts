@@ -75,13 +75,13 @@ describe('LunaEcumenopolis', () => {
     card.play(player);
 
     const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input1.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
+    expect(input1.spaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpace('m18'));
     expect(moonData.habitatRate).eq(3);
     expect(player.getTerraformRating()).eq(15);
 
     const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
+    expect(input2.spaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
     expect(moonData.habitatRate).eq(4);
     runAllActions(game);
@@ -113,13 +113,13 @@ describe('LunaEcumenopolis', () => {
     card.play(player);
 
     const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input1.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
+    expect(input1.spaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpace('m18'));
     expect(moonData.habitatRate).eq(3);
     expect(player.getTerraformRating()).eq(15);
 
     const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
+    expect(input2.spaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
     expect(moonData.habitatRate).eq(4);
     runAllActions(game);

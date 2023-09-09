@@ -42,7 +42,7 @@ describe('StandardTechnology', function() {
     const greeneryStandardProject = new GreeneryStandardProject();
 
     const selectSpace = cast(churnAction(greeneryStandardProject, player), SelectSpace);
-    const availableSpace = selectSpace.availableSpaces[0];
+    const availableSpace = selectSpace.spaces[0];
 
     selectSpace?.cb(availableSpace);
 

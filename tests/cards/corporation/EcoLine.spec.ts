@@ -22,7 +22,7 @@ describe('EcoLine', function() {
 
     const action2 = convert.action(player);
     expect(action2).not.eq(undefined);
-    action2.cb(action2.availableSpaces[0]);
+    action2.cb(action2.spaces[0]);
     expect(player.plants).to.eq(0);
   });
 });

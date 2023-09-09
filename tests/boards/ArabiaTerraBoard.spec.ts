@@ -96,7 +96,7 @@ describe('ArabiaTerraBoard', function() {
     const landClaim = new LandClaim();
     const selectSpace = cast(landClaim.play(player), SelectSpace);
     const space = board.getSpaces(SpaceType.COVE)[0];
-    expect(selectSpace.availableSpaces.map((space) => space.id)).contains(space.id);
+    expect(selectSpace.spaces.map((space) => space.id)).contains(space.id);
 
     selectSpace.cb(space);
 

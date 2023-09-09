@@ -29,15 +29,15 @@ describe('CommercialDistrict', function() {
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
 
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(4);
 
-    const adjacent = game.board.getAdjacentSpaces(action.availableSpaces[0]);
+    const adjacent = game.board.getAdjacentSpaces(action.spaces[0]);
     adjacent[0].tile = {tileType: TileType.CITY, card: card.name};
     adjacent[0].player = player;
     expect(card.getVictoryPoints(player)).to.eq(1);
-    expect(action.availableSpaces[0].adjacency?.bonus).eq(undefined);
+    expect(action.spaces[0].adjacency?.bonus).eq(undefined);
   });
 });

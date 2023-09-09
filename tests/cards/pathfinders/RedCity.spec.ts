@@ -88,7 +88,7 @@ describe('RedCity', function() {
     player.production.override({energy: 1});
     const action = cast(card.play(player), SelectSpace);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 2}));
-    expect(action.availableSpaces).includes(redCitySpace);
+    expect(action.spaces).includes(redCitySpace);
 
     action.cb(redCitySpace);
 

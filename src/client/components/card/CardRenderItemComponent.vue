@@ -9,7 +9,6 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {generateClassString} from '@/common/utils/utils';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {Size} from '@/common/cards/render/Size';
@@ -35,7 +34,7 @@ export default Vue.extend({
     sized(clazz: string, size: string | undefined) {
       return size !== undefined ? `${clazz}--${size}` : clazz;
     },
-    getComponentClasses(): string {
+    getComponentClasses(): ReadonlyArray<string> {
       let classes: Array<string> = [];
 
       switch (this.item.type) {
@@ -343,8 +342,7 @@ export default Vue.extend({
           classes.push('card-text-normal');
         }
       }
-
-      return generateClassString(classes);
+      return classes;
     },
     getAmountAbs(): number {
       if (this.item.amountInside) return 1;

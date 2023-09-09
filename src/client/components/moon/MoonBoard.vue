@@ -65,7 +65,6 @@
         v-for="curSpace in getAllNonColonySpaces()"
         :key="curSpace.id"
         :space="curSpace"
-        :is_selectable="true"
         :tileView="tileView"
         data-test="moon-board-space"
       />

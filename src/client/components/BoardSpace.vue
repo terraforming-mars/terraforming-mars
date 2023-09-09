@@ -40,9 +40,6 @@ export default Vue.extend({
     text: {
       type: String,
     },
-    is_selectable: {
-      type: Boolean,
-    },
     aresExtension: {
       type: Boolean,
     },
@@ -60,9 +57,7 @@ export default Vue.extend({
   methods: {
     getMainClass(): string {
       let css = 'board-space board-space-' + this.space.id.toString();
-      if (this.is_selectable) {
-        css += ' board-space-selectable';
-      }
+      css += ' board-space-selectable';
       return css;
     },
   },

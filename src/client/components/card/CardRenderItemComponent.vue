@@ -1,7 +1,7 @@
 <template>
   <div class="card-item-container">
-    <div class="card-res-amount" v-if="item.showDigit">{{ getAmountAbs() }}</div>
-    <div :class="getComponentClasses()" v-for="index in itemsToShow()" v-html="itemHtmlContent()" :key="index"/>
+    <div class="card-res-amount" v-if="item.showDigit">{{ amountAbs }}</div>
+    <div :class="componentClasses" v-for="index in itemsToShow" v-html="itemHtmlContent" :key="index"/>
     <div class="card-over" v-if="this.item.over !== undefined">over {{this.item.over}}</div>
   </div>
 </template>
@@ -34,7 +34,9 @@ export default Vue.extend({
     sized(clazz: string, size: string | undefined) {
       return size !== undefined ? `${clazz}--${size}` : clazz;
     },
-    getComponentClasses(): ReadonlyArray<string> {
+  },
+  computed: {
+    componentClasses(): ReadonlyArray<string> {
       let classes: Array<string> = [];
 
       switch (this.item.type) {
@@ -344,13 +346,13 @@ export default Vue.extend({
       }
       return classes;
     },
-    getAmountAbs(): number {
+    amountAbs(): number {
       if (this.item.amountInside) return 1;
       return Math.abs(this.item.amount);
     },
     itemsToShow(): number {
       if (this.item.showDigit) return 1;
-      return this.getAmountAbs();
+      return this.amountAbs;
     },
     // Oooh this is begging to be a template or something.
     itemHtmlContent(): string {

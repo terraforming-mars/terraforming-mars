@@ -14,10 +14,10 @@ export class TagCardRequirement extends InequalityRequirement implements ITagCar
   }
 
   public getScore(player: IPlayer): number {
-    const mode = this.isMax !== true ? 'default' : 'raw';
+    const mode = this.max !== true ? 'default' : 'raw';
     let tagCount = player.tags.count(this.tag, mode);
 
-    if (this.isAny) {
+    if (this.all) {
       player.game.getPlayers().forEach((p) => {
         if (p.id !== player.id) {
           // Don't include opponents' wild tags because they are not performing the action.

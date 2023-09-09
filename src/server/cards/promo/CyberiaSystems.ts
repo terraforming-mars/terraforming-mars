@@ -21,8 +21,11 @@ export class CyberiaSystems extends RoboticWorkforceBase {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.steel(1)).nbsp;
-          b.text('Copy', Size.SMALL, true).production((pb) => pb.building(2, {played})).br;
+          b.production((pb) => pb.steel(1));
+          b.text('Copy', Size.SMALL, true)
+            .production((pb) => pb.building(1, {played}))
+            .production((pb) => pb.building(1, {played}))
+            .br;
         }),
         description: 'Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.',
       },

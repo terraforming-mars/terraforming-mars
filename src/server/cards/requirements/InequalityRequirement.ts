@@ -7,7 +7,7 @@ export abstract class InequalityRequirement extends CardRequirement implements I
 
   public satisfies(player: IPlayer, _thinkTankResources: number): boolean | YesAnd {
     const score = this.getScore(player);
-    if (this.isMax) {
+    if (this.max) {
       return score <= this.amount;
     }
     return score >= this.amount;

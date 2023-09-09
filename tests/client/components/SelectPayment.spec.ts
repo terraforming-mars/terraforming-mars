@@ -154,9 +154,9 @@ describe('SelectPayment', () => {
 
     tester.expectIsAvailable('seeds', false);
     tester.expectIsAvailable('auroraiData', false);
-    tester.expectValue('titanium', 0);
-    tester.expectValue('steel', 0);
-    tester.expectValue('heat', 0);
+    tester.expectIsAvailable('titanium', false);
+    tester.expectIsAvailable('steel', false);
+    tester.expectIsAvailable('heat', false);
     tester.expectValue('megaCredits', 10);
   });
 

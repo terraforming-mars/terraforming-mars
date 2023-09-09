@@ -30,7 +30,7 @@ describe('Comet', function() {
     expect(game.deferredActions).has.lengthOf(2);
 
     const selectSpace = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(player.getTerraformRating()).to.eq(22);
 
     const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);

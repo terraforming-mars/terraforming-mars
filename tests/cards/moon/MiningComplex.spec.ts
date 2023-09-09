@@ -48,7 +48,7 @@ describe('MiningComplex', () => {
 
     const placeRoadTile = cast(game.deferredActions.pop(), PlaceMoonRoadTile);
     const selectSpace = cast(placeRoadTile.execute(), SelectSpace);
-    const spaces = selectSpace.availableSpaces;
+    const spaces = selectSpace.spaces;
     expect(spaces.map((s) => s.id)).to.have.members(['m02', 'm12']);
     selectSpace.cb(spaces[0]);
 

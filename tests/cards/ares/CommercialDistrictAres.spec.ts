@@ -26,8 +26,8 @@ describe('CommercialDistrictAres', function() {
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
 
-    expect(action.availableSpaces[0].adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
+    expect(action.spaces[0].adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
   });
 });

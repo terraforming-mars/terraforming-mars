@@ -62,14 +62,14 @@ describe('Crashlanding', () => {
   it('play - cannot play next to 2 cities', () => {
     const spaceBetweenTwoCities = game.board.getSpace('36');
     addCity(player, '37'),
-    expect(cast(card.play(player), SelectSpace).availableSpaces).to.include(spaceBetweenTwoCities);
+    expect(cast(card.play(player), SelectSpace).spaces).to.include(spaceBetweenTwoCities);
     addCity(player, '35');
-    expect(cast(card.play(player), SelectSpace).availableSpaces).to.not.include(spaceBetweenTwoCities);
+    expect(cast(card.play(player), SelectSpace).spaces).to.not.include(spaceBetweenTwoCities);
   });
 
   it('play, place tile', () => {
     const selectSpace = cast(card.play(player), SelectSpace);
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     const orOptions = cast(selectSpace.cb(space), OrOptions);
     expect(space.tile?.tileType).eq(TileType.CRASHLANDING);
     expect(space.tile?.rotated).is.undefined;

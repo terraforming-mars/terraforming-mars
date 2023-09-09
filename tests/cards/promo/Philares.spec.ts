@@ -158,7 +158,7 @@ describe('Philares', () => {
     runAllActions(game);
 
     const action = cast(philaresPlayer.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(philaresPlayer.getTerraformRating()).to.eq(21);
   });
 

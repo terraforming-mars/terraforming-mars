@@ -270,7 +270,7 @@ describe('RoboticWorkforce', () => {
           runNextAction(game);
           const waitingFor = player.popWaitingFor();
           if (waitingFor instanceof SelectSpace) {
-            waitingFor.cb(waitingFor.availableSpaces[0]);
+            waitingFor.cb(waitingFor.spaces[0]);
           }
         }
 

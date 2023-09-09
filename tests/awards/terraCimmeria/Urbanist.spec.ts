@@ -60,7 +60,7 @@ describe('Urbanist', () => {
     const redCity = new RedCity();
     const selectSpace = cast(churnPlay(redCity, player), SelectSpace);
     player.playedCards.push(redCity);
-    const citySpace = selectSpace.availableSpaces[0];
+    const citySpace = selectSpace.spaces[0];
 
     expect(award.getScore(player)).eq(0);
 

@@ -68,17 +68,17 @@ describe('SurveyMission', () => {
     expect(board.getSpace('05').player?.id).is.undefined;
     expect(board.getSpace('10').player?.id).is.undefined;
 
-    expect(selectSpace.availableSpaces.map(toSpaceIdDigit)).has.members([4, 5, 10, 11, 16, 17]);
+    expect(selectSpace.spaces.map(toSpaceIdDigit)).has.members([4, 5, 10, 11, 16, 17]);
 
     // So if I pick space 4, only 5 and 10 will be avialable.
     const nextSpace = cast(selectSpace.cb(board.getSpace('04')), SelectSpace);
     expect(board.getSpace('04').player?.id).eq(player.id);
-    expect(nextSpace.availableSpaces.map(toSpaceIdDigit)).has.members([5, 10]);
+    expect(nextSpace.spaces.map(toSpaceIdDigit)).has.members([5, 10]);
 
     const lastSpace = cast(nextSpace.cb(board.getSpace('10')), SelectSpace);
     expect(board.getSpace('10').player?.id).eq(player.id);
 
-    expect(lastSpace.availableSpaces.map(toSpaceIdDigit)).has.members([5]);
+    expect(lastSpace.spaces.map(toSpaceIdDigit)).has.members([5]);
 
     expect(lastSpace.cb(board.getSpace('05'))).is.undefined;
     expect(board.getSpace('05').player?.id).eq(player.id);

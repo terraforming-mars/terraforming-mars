@@ -45,14 +45,14 @@ describe('EarlyExpedition', function() {
     expect(player.production.asUnits()).eql(Units.of({megacredits: 3}));
 
     let tiles = 0;
-    selectSpace.availableSpaces.forEach((space) => {
+    selectSpace.spaces.forEach((space) => {
       game.board.getAdjacentSpaces(space).forEach((s) => {
         if (s.tile !== undefined) tiles++;
       });
     });
     expect(tiles).eq(0);
 
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
 
     runAllActions(game);
 

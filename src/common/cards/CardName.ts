@@ -486,6 +486,7 @@ export enum CardName {
     ASTRA_MECHANICA = 'Astra Mechanica',
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
     CARBON_NANOSYSTEMS = 'Carbon Nanosystems',
+    NIGRAL_ENTERPRISES = 'Nigral Enterprises',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

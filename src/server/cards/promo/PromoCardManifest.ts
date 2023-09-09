@@ -43,6 +43,7 @@ import {Merger} from './Merger';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
 import {NewPartner} from './NewPartner';
+import {NigralEnterprises} from './NigralEnterprises';
 import {OrbitalCleanup} from './OrbitalCleanup';
 import {OutdoorSports} from './OutdoorSports';
 import {Penguins} from './Penguins';
@@ -145,5 +146,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.RECYCLON]: {Factory: Recyclon},
     [CardName.SPLICE]: {Factory: Splice},
     [CardName.TYCHO_MAGNETICS]: {Factory: TychoMagnetics},
+    [CardName.NIGRAL_ENTERPRISES]: {Factory: NigralEnterprises},
   },
 });

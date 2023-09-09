@@ -211,7 +211,7 @@ export default Vue.extend({
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
-    <div class="payments_type input-group" v-if="playerinput.canUseSteel">
+    <div class="payments_type input-group" v-if="canUseSteel()">
       <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay by Steel')"></i>
       <AppButton type="minus" @click="reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
@@ -219,7 +219,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('steel')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="playerinput.canUseTitanium || canUseLunaTradeFederationTitanium()">
+    <div class="payments_type input-group" v-if="canUseTitanium() || canUseLunaTradeFederationTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <AppButton type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
@@ -227,7 +227,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('titanium')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="playerinput.canUseHeat">
+    <div class="payments_type input-group" v-if="canUseHeat()">
       <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
       <AppButton type="minus" @click="reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
@@ -235,7 +235,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('heat')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="playerinput.canUseSeeds">
+    <div class="payments_type input-group" v-if="canUseSeeds()">
       <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
       <AppButton type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
@@ -243,7 +243,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="playerinput.canUseData">
+    <div class="payments_type input-group" v-if="canUseData()">
       <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay by Data')"></i>
       <AppButton type="minus" @click="reduceValue('auroraiData', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="auroraiData" />

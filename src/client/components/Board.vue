@@ -5,7 +5,7 @@
             {{ tileView }} tiles
           </div>
         </div>
-        <div class="board-outer-spaces">
+        <div class="board-outer-spaces" id="colony_spaces">
             <board-space :space="getSpaceById('01')" text="Ganymede Colony" :tileView="tileView"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven" :tileView="tileView"></board-space>
             <board-space :space="getSpaceById('69')" text="Stanford Torus" :tileView="tileView"></board-space>
@@ -82,7 +82,6 @@
               v-for="curSpace in getAllSpacesOnMars()"
               :key="curSpace.id"
               :space="curSpace"
-              :is_selectable="true"
               :aresExtension="aresExtension"
               :tileView="tileView"
               data-test="board-space"

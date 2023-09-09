@@ -118,19 +118,14 @@ export default (Vue as WithRefs<Refs>).extend({
     getSelectableSpaces(): Array<HTMLElement> {
       const spaces: Array<HTMLElement> = [];
 
-      let board = document.getElementById('main_board');
-      if (board !== null) {
-        const array = board.getElementsByClassName('board-space-selectable');
-        for (let i = 0, length = array.length; i < length; i++) {
-          spaces.push(array[i] as HTMLElement);
-        }
-      }
-
-      board = document.getElementById('moon_board');
-      if (board !== null) {
-        const array = board.getElementsByClassName('board-space-selectable');
-        for (let i = 0, length = array.length; i < length; i++) {
-          spaces.push(array[i] as HTMLElement);
+      const regions = ['main_board', 'moon_board', 'colony_spaces'];
+      for (const region of regions) {
+        const board = document.getElementById(region);
+        if (board !== null) {
+          const array = board.getElementsByClassName('board-space-selectable');
+          for (let i = 0, length = array.length; i < length; i++) {
+            spaces.push(array[i] as HTMLElement);
+          }
         }
       }
 

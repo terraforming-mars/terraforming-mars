@@ -6,6 +6,7 @@ import {RoboticWorkforceBase} from '../base/RoboticWorkforceBase';
 import {played} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {IPlayer} from '../../IPlayer';
+import {ICard} from '../ICard';
 
 export class CyberiaSystems extends RoboticWorkforceBase {
   constructor() {
@@ -26,6 +27,10 @@ export class CyberiaSystems extends RoboticWorkforceBase {
         description: 'Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.',
       },
     });
+  }
+
+  protected override getPlayableBuildingCards(player: IPlayer): ReadonlyArray<ICard> {
+    return super.getPlayableBuildingCards(player).filter((c) => c.name === CardName.CYBERIA_SYSTEMS);
   }
 
   public override bespokePlay(player: IPlayer) {

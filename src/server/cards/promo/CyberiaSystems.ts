@@ -33,7 +33,7 @@ export class CyberiaSystems extends RoboticWorkforceBase {
   }
 
   protected override getPlayableBuildingCards(player: IPlayer): ReadonlyArray<ICard> {
-    return super.getPlayableBuildingCards(player).filter((c) => c.name === CardName.CYBERIA_SYSTEMS);
+    return super.getPlayableBuildingCards(player).filter((c) => c.name !== CardName.CYBERIA_SYSTEMS);
   }
 
   public override bespokePlay(player: IPlayer) {

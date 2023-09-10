@@ -923,7 +923,6 @@ export class Player implements IPlayer {
     PathfindersExpansion.onCardPlayed(this, card);
   }
 
-  /* Visible for testing */
   public playActionCard(): PlayerInput {
     return new SelectCard<ICard & IActionCard>(
       'Perform an action from a played card',

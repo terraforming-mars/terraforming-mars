@@ -487,6 +487,7 @@ export enum CardName {
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
     CARBON_NANOSYSTEMS = 'Carbon Nanosystems',
     CYBERIA_SYSTEMS = 'Cyberia Systems',
+    GIANT_SOLAR_COLLECTOR = 'Giant Solar Collector',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

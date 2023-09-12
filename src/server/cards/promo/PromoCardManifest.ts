@@ -3,6 +3,7 @@ import {ModuleManifest} from '../ModuleManifest';
 import {Advertising} from './Advertising';
 import {AntidesertificationTechniques} from '../promo/AntidesertificationTechniques';
 import {AppliedScience} from '../prelude2/AppliedScience';
+import {AqueductSystems} from './AqueductSystems';
 import {ArcadianCommunities} from './ArcadianCommunities';
 import {AsteroidDeflectionSystem} from './AsteroidDeflectionSystem';
 import {AsteroidHollowing} from './AsteroidHollowing';
@@ -20,13 +21,13 @@ import {CyberiaSystems} from './CyberiaSystems';
 import {DeimosDownPromo} from './DeimosDownPromo';
 import {DirectedImpactors} from './DirectedImpactors';
 import {DirectedHeatUsage} from './DirectedHeatUsage';
-import {AqueductSystems} from './AqueductSystems';
 import {DiversitySupport} from './DiversitySupport';
 import {DoubleDown} from './DoubleDown';
 import {DuskLaserMining} from './DuskLaserMining';
 import {EnergyMarket} from './EnergyMarket';
 import {Factorum} from './Factorum';
 import {FieldCappedCity} from './FieldCappedCity';
+import {GiantSolarCollector} from './GiantSolarCollector';
 import {GreatDamPromo} from './GreatDamPromo';
 import {Harvest} from './Harvest';
 import {HeadStart} from './HeadStart';
@@ -130,6 +131,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.HEAD_START]: {Factory: HeadStart},
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
     [CardName.APPLIED_SCIENCE]: {Factory: AppliedScience},
+    [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector},
   },
 
   cardsToRemove: [

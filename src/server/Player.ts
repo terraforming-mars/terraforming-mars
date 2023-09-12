@@ -1495,7 +1495,6 @@ export class Player implements IPlayer {
       .sort((a, b) => a.cost - b.cost);
   }
 
-  // Public for testing.
   public getStandardProjectOption(): SelectCard<IStandardProjectCard> {
     const standardProjects: Array<IStandardProjectCard> = this.getStandardProjects();
 

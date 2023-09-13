@@ -297,6 +297,7 @@ export class Server {
       playerInputModel.canUseSeeds = sp.canUse.seeds ?? false;
       playerInputModel.seeds = player.getSpendableSeedResources();
       playerInputModel.canUseData = sp.canUse.data ?? false;
+      playerInputModel.auroraiData = player.getSpendableData();
       playerInputModel.canUseGraphene = sp.canUse.graphene && player.getSpendableData() > 0;
       break;
     case 'player':

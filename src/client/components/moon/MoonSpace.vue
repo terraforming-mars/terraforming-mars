@@ -36,10 +36,6 @@ export default Vue.extend({
       type: String,
       required: false,
     },
-    is_selectable: {
-      type: Boolean,
-      default: false,
-    },
     tileView: {
       type: String as () => TileView,
       default: 'show',
@@ -52,10 +48,7 @@ export default Vue.extend({
   computed: {
     mainClass(): string {
       let css = 'board-space moon-space-' + this.space.id.toString();
-
-      if (this.is_selectable) {
-        css += ' board-space-selectable';
-      }
+      css += ' board-space-selectable';
 
       if (this.space.spaceType === 'lunar_mine') {
         css += ' moon-space-type-mine';

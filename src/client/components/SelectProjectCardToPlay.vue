@@ -105,13 +105,12 @@ export default Vue.extend({
       return getCardOrThrow(this.cardName).tags;
     },
     setDefaultValues() {
-      this.microbes = 0;
-      this.floaters = 0;
-      this.science = 0;
-      this.seeds = 0;
-      this.steel = 0;
-      this.titanium = 0;
-      this.heat = 0;
+      for (const target of PAYMENT_KEYS) {
+        if (target === 'megaCredits') {
+          continue;
+        }
+        this[target] = 0;
+      }
 
       let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
 

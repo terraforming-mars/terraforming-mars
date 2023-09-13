@@ -43,7 +43,7 @@ export class CardRequirements implements ICardRequirements {
     const tags: Array<Tag> = [];
     this.requirements.forEach((requirement) => {
       if ((requirement.type === RequirementType.TAG) &&
-      requirement.isAny !== true && requirement.isMax !== true) {
+      requirement.all !== true && requirement.max !== true) {
         tags.push((requirement as TagCardRequirement).tag);
       }
     });

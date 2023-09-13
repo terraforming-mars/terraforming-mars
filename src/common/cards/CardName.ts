@@ -430,8 +430,13 @@ export enum CardName {
     WILDLIFE_DOME = 'Wildlife Dome',
     VOTE_OF_NO_CONFIDENCE = 'Vote Of No Confidence',
 
-    // Prelude 2
+    // Prelude 2 Project Cards
+
+    // Prelude 2 Preludes
     APPLIED_SCIENCE = 'Applied Science',
+
+    // Prelude 2 Corps
+    NIGRAL_ENTERPRISES = 'Nigral Enterprises',
 
     // Promo cards
     DUSK_LASER_MINING = 'Dusk Laser Mining',
@@ -486,7 +491,9 @@ export enum CardName {
     ASTRA_MECHANICA = 'Astra Mechanica',
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
     CARBON_NANOSYSTEMS = 'Carbon Nanosystems',
-    NIGRAL_ENTERPRISES = 'Nigral Enterprises',
+    CYBERIA_SYSTEMS = 'Cyberia Systems',
+    GIANT_SOLAR_COLLECTOR = 'Giant Solar Collector',
+    HERMETIC_ORDER_OF_MARS = 'Hermetic Order of Mars',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

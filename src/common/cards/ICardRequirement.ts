@@ -6,8 +6,9 @@ import {Tag} from './Tag';
 export interface ICardRequirement {
   type: RequirementType;
   amount: number;
-  isMax: boolean;
-  isAny: boolean;
+  max: boolean;
+  all: boolean;
+  nextTo: boolean;
 }
 
 export interface IPartyCardRequirement extends ICardRequirement {

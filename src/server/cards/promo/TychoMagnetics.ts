@@ -7,7 +7,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
 import {SelectAmount} from '../../../server/inputs/SelectAmount';
-import {Size} from '../../../common/cards/render/Size';
 
 export class TychoMagnetics extends Card implements ICorporationCard {
   constructor() {
@@ -24,7 +23,8 @@ export class TychoMagnetics extends Card implements ICorporationCard {
         cardNumber: '',
         description: 'You start with 42 M€. Increase your energy production 1 step.',
         renderData: CardRenderer.builder((b) => {
-          b.vSpace(Size.LARGE);
+          b.br.br;
+          b.production((pb) => pb.energy(1)).nbsp.megacredits(42);
           b.corpBox('action', (cb) => {
             cb.action('Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.', (ab) => {
               ab.text('X').energy(1).startAction.text('X').cards(1).text('KEEP 1');

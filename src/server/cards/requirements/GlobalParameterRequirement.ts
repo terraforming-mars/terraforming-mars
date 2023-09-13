@@ -28,7 +28,7 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement i
 
     const level = this.getGlobalValue(player);
 
-    if (this.isMax) {
+    if (this.max) {
       return level - playerRequirementsBonus;
     } else {
       return level + playerRequirementsBonus;

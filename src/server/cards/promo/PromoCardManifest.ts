@@ -47,7 +47,7 @@ import {Merger} from './Merger';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
 import {NewPartner} from './NewPartner';
-import {NigralEnterprises} from './NigralEnterprises';
+import {NigralEnterprises} from '../prelude2/NigralEnterprises';
 import {OrbitalCleanup} from './OrbitalCleanup';
 import {OutdoorSports} from './OutdoorSports';
 import {Penguins} from './Penguins';

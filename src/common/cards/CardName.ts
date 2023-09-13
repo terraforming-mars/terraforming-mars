@@ -431,6 +431,7 @@ export enum CardName {
     VOTE_OF_NO_CONFIDENCE = 'Vote Of No Confidence',
 
     // Prelude 2 Project Cards
+    ISHTAR_EXPEDITION = 'Ishtar Expedition',
 
     // Prelude 2 Preludes
     APPLIED_SCIENCE = 'Applied Science',

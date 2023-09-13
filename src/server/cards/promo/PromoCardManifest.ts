@@ -35,6 +35,7 @@ import {HermeticOrderofMars} from './HermeticOrderofMars';
 import {HiTechLab} from './HiTechLab';
 import {ImportedNutrients} from './ImportedNutrients';
 import {InterplanetaryTrade} from './InterplanetaryTrade';
+import {IshtarExpedition} from '../prelude2/IshtarExpedition';
 import {JovianEmbassy} from './JovianEmbassy';
 import {LawSuit} from './LawSuit';
 import {MagneticFieldGeneratorsPromo} from './MagneticFieldGeneratorsPromo';
@@ -124,6 +125,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CARBON_NANOSYSTEMS]: {Factory: CarbonNanosystems},
     [CardName.CYBERIA_SYSTEMS]: {Factory: CyberiaSystems},
     [CardName.HERMETIC_ORDER_OF_MARS]: {Factory: HermeticOrderofMars},
+    [CardName.ISHTAR_EXPEDITION]: {Factory: IshtarExpedition},
   },
 
   preludeCards: {

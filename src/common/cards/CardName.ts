@@ -430,8 +430,13 @@ export enum CardName {
     WILDLIFE_DOME = 'Wildlife Dome',
     VOTE_OF_NO_CONFIDENCE = 'Vote Of No Confidence',
 
-    // Prelude 2
+    // Prelude 2 Project Cards
+
+    // Prelude 2 Preludes
     APPLIED_SCIENCE = 'Applied Science',
+
+    // Prelude 2 Corps
+    NIGRAL_ENTERPRISES = 'Nigral Enterprises',
 
     // Promo cards
     DUSK_LASER_MINING = 'Dusk Laser Mining',

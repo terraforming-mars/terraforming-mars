@@ -31,6 +31,7 @@ import {GiantSolarCollector} from './GiantSolarCollector';
 import {GreatDamPromo} from './GreatDamPromo';
 import {Harvest} from './Harvest';
 import {HeadStart} from './HeadStart';
+import {HermeticOrderofMars} from './HermeticOrderofMars';
 import {HiTechLab} from './HiTechLab';
 import {ImportedNutrients} from './ImportedNutrients';
 import {InterplanetaryTrade} from './InterplanetaryTrade';
@@ -121,6 +122,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.ST_JOSEPH_OF_CUPERTINO_MISSION]: {Factory: StJosephOfCupertinoMission},
     [CardName.CARBON_NANOSYSTEMS]: {Factory: CarbonNanosystems},
     [CardName.CYBERIA_SYSTEMS]: {Factory: CyberiaSystems},
+    [CardName.HERMETIC_ORDER_OF_MARS]: {Factory: HermeticOrderofMars},
   },
 
   preludeCards: {

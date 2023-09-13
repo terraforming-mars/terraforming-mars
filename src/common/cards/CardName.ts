@@ -488,6 +488,7 @@ export enum CardName {
     CARBON_NANOSYSTEMS = 'Carbon Nanosystems',
     CYBERIA_SYSTEMS = 'Cyberia Systems',
     GIANT_SOLAR_COLLECTOR = 'Giant Solar Collector',
+    HERMETIC_ORDER_OF_MARS = 'Hermetic Order of Mars',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

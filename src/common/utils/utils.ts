@@ -8,8 +8,6 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
   return `${prefix}${color}`;
 };
 
-export const generateClassString = (classes: ReadonlyArray<string>): string => classes.join(' ').trimStart();
-
 /**
  * Creates a range from 0 to n.
  *

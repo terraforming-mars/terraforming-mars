@@ -1,12 +1,11 @@
 <template>
-  <div :class="tiles"><div v-if="symbols !== ''" :class="symbols"></div></div>
+  <div :class="tiles"><div v-if="symbols.length > 0" :class="symbols"></div></div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
 import {ICardRenderTile} from '@/common/cards/render/Types';
-import {generateClassString} from '@/common/utils/utils';
 import {TileType} from '@/common/TileType';
 
 type Classes = {
@@ -146,7 +145,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    tiles(): string {
+    tiles(): ReadonlyArray<string> {
       const classes: string[] = ['card-tile'];
       if (this.item.hasSymbol) {
         classes.push('card-tile-canvas');
@@ -157,19 +156,17 @@ export default Vue.extend({
       } else if (symbolClass.tile !== undefined) {
         classes.push(symbolClass.tile);
       }
-      return generateClassString(classes);
+      return classes;
     },
     // Symbols for tiles go on top of the tile canvas
-    symbols(): string {
-      const classes: string[] = [];
+    symbols(): ReadonlyArray<string> {
       if (this.item.hasSymbol) {
         const symbolClass = TILE_CLASSES[this.item.tile];
         if (symbolClass.symbol !== undefined) {
-          classes.push('card-tile-symbol');
-          classes.push(symbolClass.symbol);
+          return ['card-tile-symbol', symbolClass.symbol];
         }
       }
-      return generateClassString(classes);
+      return [];
     },
   },
 });

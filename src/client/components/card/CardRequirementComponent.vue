@@ -37,7 +37,7 @@ import {
   ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITagCardRequirement,
 } from '@/common/cards/ICardRequirement';
 import {RequirementType} from '@/common/cards/RequirementType';
-import {generateClassString, range} from '@/common/utils/utils';
+import {range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 
@@ -93,12 +93,12 @@ export default Vue.extend({
     isAny(): string {
       return this.requirement.all ? 'red-outline' : '';
     },
-    componentClasses(): string {
+    componentClasses(): Array<string> {
       const classes = this.componentClassArray;
       if (this.requirement.all) {
         classes.push('red-outline');
       }
-      return generateClassString(classes);
+      return classes;
     },
     componentClassArray(): Array<string> {
       // TODO(kberg): This duplicates CardRenderItemComponent. That shouldn't be

@@ -18,7 +18,7 @@ export class HermeticOrderofMars extends Card implements IProjectCard {
       name: CardName.HERMETIC_ORDER_OF_MARS,
       cost: 10,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
+      requirements: {oxygen: 4, max},
 
       behavior: {
         production: {megacredits: 2},

@@ -15,7 +15,7 @@ export class ColonizerTrainingCamp extends Card implements IProjectCard {
       cost: 8,
       victoryPoints: 2,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(5, {max})),
+      requirements: {oxygen: 5, max},
       metadata: {
         description: 'Oxygen must be 5% or less.',
         cardNumber: '001',

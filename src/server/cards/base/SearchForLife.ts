@@ -23,7 +23,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
       resourceType: CardResource.SCIENCE,
       victoryPoints: 'special',
 
-      requirements: CardRequirements.builder((b) => b.oxygen(6, {max})),
+      requirements: {oxygen: 6, max},
       metadata: {
         cardNumber: '005',
         description: 'Oxygen must be 6% or less.',

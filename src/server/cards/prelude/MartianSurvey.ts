@@ -20,7 +20,7 @@ export class MartianSurvey extends Card implements IProjectCard {
         drawCard: 2,
       },
 
-      requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
+      requirements: {oxygen: 4, max},
       metadata: {
         cardNumber: 'P38',
         renderData: CardRenderer.builder((b) => {

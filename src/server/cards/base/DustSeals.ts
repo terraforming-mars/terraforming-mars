@@ -13,7 +13,7 @@ export class DustSeals extends Card implements IProjectCard {
       cost: 2,
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.oceans(3, {max})),
+      requirements: {oceans: 3, max},
       metadata: {
         description: 'Requires 3 or less ocean tiles.',
         cardNumber: '119',

@@ -25,7 +25,7 @@ export class ArcticAlgae extends Card implements IProjectCard {
         stock: {plants: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-12, {max})),
+      requirements: {temperature: -12, max},
       metadata: {
         description: 'It must be -12 C or colder to play. Gain 1 plant.',
         cardNumber: '023',

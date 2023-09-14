@@ -21,7 +21,7 @@ export class Psychrophiles extends ActionCard implements IProjectCard {
         addResources: 1,
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-20, {max})),
+      requirements: {temperature: -20, max},
       metadata: {
         cardNumber: 'P39',
         renderData: CardRenderer.builder((b) => {

@@ -36,7 +36,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
       },
 
       adjacencyBonus,
-      requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
+      requirements: {oxygen: 4, max},
       victoryPoints: 1,
       metadata,
     });

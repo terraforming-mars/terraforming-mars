@@ -19,7 +19,7 @@ export class SpinInducingAsteroid extends Card implements IProjectCard {
         global: {venus: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.venus(10, {max})),
+      requirements: {venus: 10, max},
       metadata: {
         cardNumber: '246',
         renderData: CardRenderer.builder((b) => {

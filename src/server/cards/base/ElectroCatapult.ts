@@ -37,7 +37,7 @@ export class ElectroCatapult extends ActionCard implements IProjectCard {
 
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(8, {max})),
+      requirements: {oxygen: 8, max},
       metadata: {
         cardNumber: '069',
         description: {

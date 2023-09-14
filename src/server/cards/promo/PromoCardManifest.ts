@@ -36,6 +36,7 @@ import {HiTechLab} from './HiTechLab';
 import {HomeostasisBureau} from './HomeostasisBureau';
 import {ImportedNutrients} from './ImportedNutrients';
 import {InterplanetaryTrade} from './InterplanetaryTrade';
+import {IshtarExpedition} from '../prelude2/IshtarExpedition';
 import {JovianEmbassy} from './JovianEmbassy';
 import {LawSuit} from './LawSuit';
 import {MagneticFieldGeneratorsPromo} from './MagneticFieldGeneratorsPromo';
@@ -47,7 +48,7 @@ import {Merger} from './Merger';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
 import {NewPartner} from './NewPartner';
-import {NigralEnterprises} from './NigralEnterprises';
+import {NigralEnterprises} from '../prelude2/NigralEnterprises';
 import {OrbitalCleanup} from './OrbitalCleanup';
 import {OutdoorSports} from './OutdoorSports';
 import {Penguins} from './Penguins';
@@ -126,6 +127,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CYBERIA_SYSTEMS]: {Factory: CyberiaSystems},
     [CardName.HERMETIC_ORDER_OF_MARS]: {Factory: HermeticOrderofMars},
     [CardName.HOMEOSTASIS_BUREAU]: {Factory: HomeostasisBureau},
+    [CardName.ISHTAR_EXPEDITION]: {Factory: IshtarExpedition},
   },
 
   preludeCards: {

@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {all, digit} from '../Options';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -23,7 +22,7 @@ export class RoadPiracy extends Card implements IProjectCard {
       type: CardType.EVENT,
       tags: [Tag.MOON],
       cost: 10,
-      requirements: CardRequirements.builder((b) => b.logisticRate(3)),
+      requirements: {logisticRate: 3},
 
       metadata: {
         description: 'Requires 3 logistic rate. ' +

@@ -5,7 +5,6 @@ import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -18,7 +17,7 @@ export class StratosphericBirds extends ActionCard implements IActionCard {
       cost: 12,
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}},
-      requirements: CardRequirements.builder((b) => b.venus(12)),
+      requirements: {venus: 12},
 
       action: {
         addResources: 1,

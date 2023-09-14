@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardResource} from '../../../common/CardResource';
 
 export class Anthozoa extends Card implements IProjectCard, IActionCard {
@@ -17,7 +16,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
       name: CardName.ANTHOZOA,
       cost: 9,
       tags: [Tag.PLANT, Tag.ANIMAL, Tag.MARS],
-      requirements: CardRequirements.builder((b) => b.oceans(3)),
+      requirements: {oceans: 3},
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}, per: 2},
 

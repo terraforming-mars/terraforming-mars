@@ -8,7 +8,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
@@ -48,7 +47,7 @@ export class Capital extends Card implements IProjectCard {
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(4)),
+      requirements: {oceans: 4},
       victoryPoints: 'special',
       metadata,
     });

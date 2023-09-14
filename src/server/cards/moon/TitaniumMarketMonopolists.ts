@@ -1,6 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {MarketCard} from './MarketCard';
@@ -17,7 +16,7 @@ export class TitaniumMarketMonopolists extends MarketCard {
         type: CardType.ACTIVE,
         cost: 21,
 
-        requirements: CardRequirements.builder((b) => b.miningRate(3)),
+        requirements: {miningRate: 3},
         metadata: {
           description: 'Requires the mining rate to be 3 or higher.',
           cardNumber: 'M29',

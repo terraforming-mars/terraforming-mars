@@ -8,7 +8,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -22,7 +21,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
 
       resourceType: CardResource.MICROBE,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      requirements: {oxygen: 4},
 
       metadata: {
         cardNumber: '035',

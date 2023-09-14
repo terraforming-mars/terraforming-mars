@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 
 export class LuxuryEstate extends Card implements IProjectCard {
@@ -14,7 +13,7 @@ export class LuxuryEstate extends Card implements IProjectCard {
       name: CardName.LUXURY_ESTATE,
       cost: 12,
       tags: [Tag.EARTH, Tag.MARS, Tag.BUILDING],
-      requirements: CardRequirements.builder((b) => b.oxygen(7)),
+      requirements: {oxygen: 7},
 
       behavior: {
         stock: {titanium: {cities: {}, greeneries: {}, all: false}},

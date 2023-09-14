@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class ControlledBloom extends Card implements IProjectCard {
   constructor() {
@@ -16,7 +15,7 @@ export class ControlledBloom extends Card implements IProjectCard {
       tags: [Tag.MICROBE, Tag.PLANT],
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.oceans(3)),
+      requirements: {oceans: 3},
 
       behavior: {
         stock: {plants: 3},

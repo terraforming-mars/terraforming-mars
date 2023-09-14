@@ -16,6 +16,7 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
+import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -70,7 +71,7 @@ export interface ICard {
 
     cost?: number; /** Used with IProjectCard and PreludeCard. */
     type: CardType;
-    requirements?: CardRequirements;
+    requirements?: CardRequirements | CardRequirementsDescriptor;
     metadata: ICardMetadata;
     warning?: string | Message;
     behavior?: Behavior,

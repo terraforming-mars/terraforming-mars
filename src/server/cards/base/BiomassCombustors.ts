@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
 
 export class BiomassCombustors extends Card implements IProjectCard {
@@ -23,7 +22,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
         production: {energy: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.oxygen(6)),
+      requirements: {oxygen: 6},
       metadata: {
         description: 'Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.',
         cardNumber: '183',

@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class GreatDam extends Card implements IProjectCard {
@@ -19,7 +18,7 @@ export class GreatDam extends Card implements IProjectCard {
       },
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.oceans(4)),
+      requirements: {oceans: 4},
       metadata: {
         cardNumber: '136',
         renderData: CardRenderer.builder((b) => {

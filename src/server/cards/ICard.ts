@@ -57,6 +57,7 @@ export interface ICard {
      * @param steps the number of steps gained
      */
     onIncreaseTerraformRating?(player: IPlayer, cardOwner: IPlayer, steps: number): void;
+    onGlobalParameterIncrease?(player: IPlayer, parameter: GlobalParameter, steps: number): void;
 
     /**
      * Optional callback when a resource is added to this card.

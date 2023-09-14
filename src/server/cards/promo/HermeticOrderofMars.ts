@@ -29,7 +29,7 @@ export class HermeticOrderofMars extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).nbsp.megacredits(1).slash().emptyTile().asterix();
         }),
-        description: 'Oxygen must be 4% or lower. Increase your MC production 2 steps. Gain 1 MC per empty area adjacent to your tiles.',
+        description: 'Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.',
       },
     });
   }

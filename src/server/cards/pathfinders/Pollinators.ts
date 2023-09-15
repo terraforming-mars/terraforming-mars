@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class Pollinators extends ActionCard implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class Pollinators extends ActionCard implements IProjectCard {
       cost: 19,
       tags: [Tag.PLANT, Tag.ANIMAL],
       resourceType: CardResource.ANIMAL,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.PLANT, 3)),
+      requirements: {tag: Tag.PLANT, count: 3},
       victoryPoints: {resourcesHere: {}},
 
       behavior: {

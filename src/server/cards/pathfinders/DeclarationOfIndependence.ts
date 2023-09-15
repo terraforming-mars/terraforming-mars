@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class DeclarationOfIndependence extends Card implements IProjectCard {
   constructor() {
@@ -13,7 +12,7 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
       name: CardName.DECLARATION_OF_INDEPENDENCE,
       cost: 20,
       tags: [Tag.MARS],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.MARS, 6)),
+      requirements: {tag: Tag.MARS, count: 6},
       victoryPoints: 4,
 
       behavior: {

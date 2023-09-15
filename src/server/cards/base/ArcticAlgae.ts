@@ -8,7 +8,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, max} from '../Options';
 import {Board} from '../../boards/Board';
@@ -25,7 +24,7 @@ export class ArcticAlgae extends Card implements IProjectCard {
         stock: {plants: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-12, {max})),
+      requirements: {temperature: -12, max},
       metadata: {
         description: 'It must be -12 C or colder to play. Gain 1 plant.',
         cardNumber: '023',

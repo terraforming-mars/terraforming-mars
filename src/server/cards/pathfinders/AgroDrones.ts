@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Resource} from '../../../common/Resource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {Units} from '../../../common/Units';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
@@ -19,7 +18,7 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
       cost: 14,
       tags: [Tag.PLANT, Tag.MARS],
 
-      requirements: CardRequirements.builder((b) => b.temperature(-18)),
+      requirements: {temperature: -18},
       metadata: {
         cardNumber: 'Pf04',
         renderData: CardRenderer.builder((b) => {

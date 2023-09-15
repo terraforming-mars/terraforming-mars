@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -19,7 +18,7 @@ export class SmallAnimals extends ActionCard implements IProjectCard {
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.oxygen(6)),
+      requirements: {oxygen: 6},
 
       behavior: {
         decreaseAnyProduction: {type: Resource.PLANTS, count: 1},

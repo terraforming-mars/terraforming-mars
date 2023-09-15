@@ -7,7 +7,6 @@ import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {digit} from '../Options';
 
 export class LunaTrainStation extends Card {
@@ -28,7 +27,7 @@ export class LunaTrainStation extends Card {
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.logisticRate(5)),
+      requirements: {logisticRate: 5},
 
       metadata: {
         description: 'Requires a logistic rate of 5 or higher. Spend 2 steel. ' +

@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 
 export class PublicCelebrations extends Card implements IProjectCard {
@@ -12,7 +11,7 @@ export class PublicCelebrations extends Card implements IProjectCard {
       name: CardName.PUBLIC_CELEBRATIONS,
       type: CardType.EVENT,
 
-      requirements: CardRequirements.builder((b) => b.chairman()),
+      requirements: {chairman: true},
       victoryPoints: 2,
 
       metadata: {

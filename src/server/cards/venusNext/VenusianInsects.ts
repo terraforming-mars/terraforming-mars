@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -21,7 +20,7 @@ export class VenusianInsects extends ActionCard implements IActionCard {
         addResources: 1,
       },
 
-      requirements: CardRequirements.builder((b) => b.venus(12)),
+      requirements: {venus: 12},
       metadata: {
         cardNumber: '260',
         renderData: CardRenderer.builder((b) => {

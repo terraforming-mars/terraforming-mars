@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -21,7 +20,7 @@ export class PROffice extends Card implements IProjectCard {
         stock: {megacredits: {tag: Tag.EARTH}},
       },
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
+      requirements: {party: PartyName.UNITY},
       metadata: {
         cardNumber: 'T09',
         renderData: CardRenderer.builder((b) => {

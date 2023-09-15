@@ -3,7 +3,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SpaceName} from '../../SpaceName';
 import {ActionCard} from '../ActionCard';
@@ -16,7 +15,7 @@ export class VeneraBase extends ActionCard {
       cost: 21,
       tags: [Tag.VENUS, Tag.VENUS, Tag.CITY],
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
+      requirements: {party: PartyName.UNITY},
       victoryPoints: {tag: Tag.VENUS, per: 2},
 
       behavior: {

@@ -8,7 +8,6 @@ import {Tag} from '../../common/cards/Tag';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
-import {CardRequirements} from './requirements/CardRequirements';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
 import {CardDiscount} from '../../common/cards/Types';
@@ -16,6 +15,7 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
+import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -70,7 +70,7 @@ export interface ICard {
 
     cost?: number; /** Used with IProjectCard and PreludeCard. */
     type: CardType;
-    requirements?: CardRequirements;
+    requirements?: CardRequirementsDescriptor | Array<CardRequirementsDescriptor>;
     metadata: ICardMetadata;
     warning?: string | Message;
     behavior?: Behavior,

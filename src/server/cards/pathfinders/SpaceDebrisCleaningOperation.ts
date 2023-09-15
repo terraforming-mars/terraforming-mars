@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
@@ -17,7 +16,7 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
       name: CardName.SPACE_DEBRIS_CLEANING_OPERATION,
       cost: 7,
       tags: [Tag.MARS, Tag.SPACE],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 4)),
+      requirements: {tag: Tag.SPACE, count: 4},
 
       behavior: {
         stock: {titanium: 3},

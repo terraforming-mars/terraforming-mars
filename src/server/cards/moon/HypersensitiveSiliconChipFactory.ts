@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
 
 export class HypersensitiveSiliconChipFactory extends Card {
@@ -17,7 +16,7 @@ export class HypersensitiveSiliconChipFactory extends Card {
       behavior: {
         production: {megacredits: 4},
       },
-      requirements: CardRequirements.builder((b) => b.miningTiles(2, {all})),
+      requirements: {miningTiles: 2, all},
       reserveUnits: {titanium: 2},
 
       metadata: {

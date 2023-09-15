@@ -7,7 +7,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {SelectCard} from '../../inputs/SelectCard';
 
 export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
@@ -18,7 +17,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
       cost: 7,
       tags: [Tag.VENUS],
       resourceType: CardResource.VENUSIAN_HABITAT,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS, 4)),
+      requirements: {tag: Tag.VENUS, count: 4},
       victoryPoints: {resourcesHere: {}},
 
       metadata: {

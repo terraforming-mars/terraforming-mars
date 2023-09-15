@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
@@ -24,7 +23,7 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
         moon: {miningRate: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1, {all})),
+      requirements: [{party: PartyName.KELVINISTS}, {miningTiles: 1, all}],
       metadata: {
         description: 'Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. ' +
         'Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.',

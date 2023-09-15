@@ -6,7 +6,6 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
@@ -19,7 +18,7 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
       tags: [Tag.POWER],
       cost: 5,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.POWER, 2)),
+      requirements: {tag: Tag.POWER, count: 2},
       metadata: {
         cardNumber: '160',
         renderData: CardRenderer.builder((b) => {

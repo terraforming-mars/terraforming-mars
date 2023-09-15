@@ -6,7 +6,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 
 export class LunaProjectOffice extends Card implements IProjectCard {
@@ -16,7 +15,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       tags: [Tag.SCIENCE],
       cost: 4,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      requirements: {tag: Tag.SCIENCE, count: 2},
 
       metadata: {
         description: 'Requires 2 science tags.',

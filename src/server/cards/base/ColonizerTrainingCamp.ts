@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {max} from '../Options';
 
 export class ColonizerTrainingCamp extends Card implements IProjectCard {
@@ -15,7 +14,7 @@ export class ColonizerTrainingCamp extends Card implements IProjectCard {
       cost: 8,
       victoryPoints: 2,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(5, {max})),
+      requirements: {oxygen: 5, max},
       metadata: {
         description: 'Oxygen must be 5% or less.',
         cardNumber: '001',

@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {max} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -18,7 +17,7 @@ export class HermeticOrderofMars extends Card implements IProjectCard {
       name: CardName.HERMETIC_ORDER_OF_MARS,
       cost: 10,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
+      requirements: {oxygen: 4, max},
 
       behavior: {
         production: {megacredits: 2},

@@ -8,7 +8,6 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +21,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
         production: {megacredits: 1},
       },
       // NOTE(kberg): Rules were that it says it Requires 1 mine tile. Changing to "Requires you have 1 mine tile."
-      requirements: CardRequirements.builder((b) => b.miningTiles(1)),
+      requirements: {miningTiles: 1},
       tr: {moonHabitat: 1},
 
       metadata: {

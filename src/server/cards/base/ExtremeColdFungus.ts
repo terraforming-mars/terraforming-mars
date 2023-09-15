@@ -10,7 +10,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 
@@ -22,7 +21,7 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
       tags: [Tag.MICROBE],
       cost: 13,
 
-      requirements: CardRequirements.builder((b) => b.temperature(-10, {max})),
+      requirements: {temperature: -10, max},
       metadata: {
         cardNumber: '134',
         description: 'It must be -10 C or colder.',

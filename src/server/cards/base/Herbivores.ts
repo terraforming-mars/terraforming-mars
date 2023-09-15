@@ -9,7 +9,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
@@ -24,7 +23,7 @@ export class Herbivores extends Card implements IProjectCard {
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.oxygen(8)),
+      requirements: {oxygen: 8},
 
       behavior: {
         decreaseAnyProduction: {type: Resource.PLANTS, count: 1},

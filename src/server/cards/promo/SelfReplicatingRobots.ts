@@ -7,7 +7,6 @@ import {IPlayer} from '../../IPlayer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 
 export interface RobotCard {
@@ -22,7 +21,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
       name: CardName.SELF_REPLICATING_ROBOTS,
       cost: 7,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      requirements: {tag: Tag.SCIENCE, count: 2},
       metadata: {
         cardNumber: '210',
         renderData: CardRenderer.builder((b) => {

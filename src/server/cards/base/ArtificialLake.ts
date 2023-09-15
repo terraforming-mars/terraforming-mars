@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class ArtificialLake extends Card implements IProjectCard {
@@ -21,7 +20,7 @@ export class ArtificialLake extends Card implements IProjectCard {
         ocean: {on: 'land'},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-6)),
+      requirements: {temperature: -6},
       metadata: {
         description: 'Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.',
         cardNumber: '116',

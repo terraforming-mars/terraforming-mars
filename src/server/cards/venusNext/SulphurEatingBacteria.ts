@@ -8,7 +8,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {multiplier} from '../Options';
@@ -22,7 +21,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
       cost: 6,
       resourceType: CardResource.MICROBE,
 
-      requirements: CardRequirements.builder((b) => b.venus(6)),
+      requirements: {venus: 6},
       metadata: {
         cardNumber: '251',
         renderData: CardRenderer.builder((b) => {

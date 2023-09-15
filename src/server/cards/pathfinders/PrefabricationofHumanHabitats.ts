@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
@@ -17,7 +16,7 @@ export class PrefabricationofHumanHabitats extends Card implements IProjectCard 
       cost: 8,
       tags: [Tag.BUILDING, Tag.CITY],
 
-      requirements: CardRequirements.builder((b) => b.production(Resource.STEEL)),
+      requirements: {production: Resource.STEEL, count: 1},
       cardDiscount: {tag: Tag.CITY, amount: 2},
 
       metadata: {

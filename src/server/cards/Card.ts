@@ -8,7 +8,6 @@ import {Tag} from '../../common/cards/Tag';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {CardRequirements} from './requirements/CardRequirements';
 import {DynamicTRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
@@ -21,6 +20,7 @@ import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
 import {PartialField} from '../../common/utils/types';
+import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -45,7 +45,7 @@ type Properties = {
   initialActionText?: string;
   firstAction?: FirstActionBehavior;
   metadata: ICardMetadata;
-  requirements?: CardRequirements;
+  requirements?: CardRequirementsDescriptor | Array<CardRequirementsDescriptor>;
   name: CardName;
   reserveUnits?: Units,
   resourceType?: CardResource;

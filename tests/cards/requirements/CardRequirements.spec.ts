@@ -25,7 +25,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for oceans', function() {
-    const requirements = CardRequirements.builder((b) => b.oceans(5));
+    const requirements = {oceans: 5};
     const oceanSpaces = player.game.board.getAvailableSpacesForOcean(player);
     for (let i = 0; i < 5; i++) {
       expect(requirements.satisfies(player)).eq(false);
@@ -49,7 +49,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for oxygen', function() {
-    const requirements = CardRequirements.builder((b) => b.oxygen(4));
+    const requirements = {oxygen: 4};
     expect(requirements.satisfies(player)).eq(false);
     setOxygenLevel(player.game, 4);
     expect(requirements.satisfies(player)).eq(true);
@@ -60,7 +60,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for venus', function() {
-    const requirements = CardRequirements.builder((b) => b.venus(8));
+    const requirements = {venus: 8};
     expect(requirements.satisfies(player)).eq(false);
     setVenusScaleLevel(player.game, 8);
     expect(requirements.satisfies(player)).eq(true);
@@ -214,7 +214,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for party', function() {
-    const requirements = CardRequirements.builder((b) => b.party(PartyName.MARS));
+    const requirements = {party: PartyName.MARS};
     expect(requirements.satisfies(player)).eq(false);
     player.game.turmoil!.sendDelegateToParty(player.id, PartyName.MARS, player.game);
     player.game.turmoil!.sendDelegateToParty(player.id, PartyName.MARS, player.game);
@@ -237,14 +237,14 @@ describe('CardRequirements', function() {
   });
 
   it('throws errors when out of range', function() {
-    expect(() => CardRequirements.builder((b) => b.temperature(-32))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.temperature(10))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.temperature(-5))).to.throw();
+    expect(() => {temperature: -32}).to.throw();
+    expect(() => {temperature: 10}).to.throw();
+    expect(() => {temperature: -5}).to.throw();
     expect(() => CardRequirements.builder((b) => b.oxygen(-1))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.oxygen(15))).to.throw();
+    expect(() => {oxygen: 15}).to.throw();
     expect(() => CardRequirements.builder((b) => b.oceans(-1))).to.throw();
     expect(() => CardRequirements.builder((b) => b.oceans(10))).to.throw();
     expect(() => CardRequirements.builder((b) => b.venus(-1))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.venus(31))).to.throw();
+    expect(() => {venus: 31}).to.throw();
   });
 });

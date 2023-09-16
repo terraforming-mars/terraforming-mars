@@ -36,6 +36,6 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement i
   }
 
   public distance(player: IPlayer): number {
-    return Math.floor(Math.abs(this.getScore(player) - this.amount) / this.scale);
+    return Math.floor(Math.abs(this.getScore(player) - this.count) / this.scale);
   }
 }

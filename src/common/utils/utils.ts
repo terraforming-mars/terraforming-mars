@@ -98,3 +98,7 @@ export function partition<T>(source: ReadonlyArray<T>, predicate: (t: T) => bool
 export function zip<S, T>(first: ReadonlyArray<S>, second: ReadonlyArray<T>): Array<[S, T]> {
   return first.map((e, i) => [e, second[i]]);
 }
+
+export function asArray<T>(elem: T | Array<T>): Array<T> {
+  return Array.isArray(elem) ? elem : [elem];
+}

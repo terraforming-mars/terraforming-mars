@@ -20,7 +20,8 @@ import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
 import {PartialField} from '../../common/utils/types';
-import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
+import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
+import {CardRequirements} from './requirements/CardRequirements';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -45,7 +46,7 @@ type Properties = {
   initialActionText?: string;
   firstAction?: FirstActionBehavior;
   metadata: ICardMetadata;
-  requirements?: CardRequirementsDescriptor | Array<CardRequirementsDescriptor>;
+  requirements?: CardRequirementDescriptor | Array<CardRequirementDescriptor>;
   name: CardName;
   reserveUnits?: Units,
   resourceType?: CardResource;
@@ -82,6 +83,8 @@ export const staticCardProperties = new Map<CardName, Properties>();
  */
 export abstract class Card {
   private readonly properties: Properties;
+  private readonly compiledRequirements: CardRequirements | undefined;
+
   constructor(properties: StaticCardProperties) {
     let staticInstance = staticCardProperties.get(properties.name);
     if (staticInstance === undefined) {
@@ -107,6 +110,7 @@ export abstract class Card {
         ...properties,
         reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
       };
+      this.compiledRequirements = CardRequirements.compile(properties.requirements);
       staticCardProperties.set(properties.name, p);
       staticInstance = p;
     }
@@ -168,14 +172,10 @@ export abstract class Card {
     return this.properties.tilesBuilt || [];
   }
   public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
-    //
-    // Is this block necessary?
-    const satisfied = this.requirements?.satisfies(player);
+    const satisfied = this.compiledRequirements?.satisfies(player);
     if (satisfied === false) {
       return false;
     }
-    // It's repeated at Player.simpleCanPlay.
-    //
 
     if (this.behavior !== undefined) {
       if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {

@@ -1352,22 +1352,7 @@ export class Player implements IPlayer {
    */
   // TODO(kberg): use CanPlayResponse
   public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    let satisfies: boolean | YesAnd = true;
-    if (card.requirements !== undefined) {
-      satisfies = card.requirements.satisfies(this);
-      if (satisfies === false) {
-        return false;
-      }
-    }
-    const canPlay = card.canPlay(this, canAffordOptions);
-    if (canPlay === false) {
-      return false;
-    }
-    // canPlay is true or a YesAnd. If it's a YesAnd, return
-    // the YesAnd. Otherwise, it's true, so return the YesAnd from `satisfies`.
-    //
-    // This is a hack. Ideally there will be 2 YesAnds, but right now there's just one.
-    return typeof(canPlay) === 'object' ? canPlay : satisfies;
+    return card.canPlay(this, canAffordOptions);
   }
 
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {

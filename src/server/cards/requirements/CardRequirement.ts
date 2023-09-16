@@ -6,7 +6,8 @@ export type LocalOptions = {
   max: boolean,
   all: boolean,
   text: string | undefined,
-  nextTo: boolean
+  nextTo: boolean,
+  count: number,
 };
 
 export type Options = Partial<LocalOptions>;
@@ -18,7 +19,7 @@ export type YesAnd = {
 
 export abstract class CardRequirement implements ICardRequirement, LocalOptions {
   public abstract readonly type: RequirementType;
-  public readonly amount: number;
+  public readonly count: number;
   public readonly max: boolean = false;
   public readonly all: boolean = false;
   /** Used during card rendering. */
@@ -26,8 +27,8 @@ export abstract class CardRequirement implements ICardRequirement, LocalOptions 
   /** Used during card rendering. */
   public readonly nextTo: boolean = false;
 
-  constructor(amount: number = 1, options?: Options) {
-    this.amount = amount;
+  constructor(options?: Options) {
+    this.count = options?.count ?? 1;
     this.max = options?.max ?? false;
     this.all = options?.all ?? false;
     this.nextTo = options?.nextTo ?? false;

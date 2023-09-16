@@ -138,7 +138,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.HEAD_START]: {Factory: HeadStart},
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
     [CardName.APPLIED_SCIENCE]: {Factory: AppliedScience},
-    [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector},
+    [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},
   },
 
   cardsToRemove: [

@@ -1,10 +1,5 @@
-const path = require('path');
-const fs = require('fs');
-import {tmpdir} from 'os';
-
 import {describeDatabaseSuite} from '../database/databaseSuite';
 import {ITestDatabase, Status} from '../database/ITestDatabase';
-import {IGame} from '../../src/server/IGame';
 import {LocalStorage} from '../../src/server/database/LocalStorage';
 import {GameId} from '../../src/common/Types';
 
@@ -13,8 +8,10 @@ import {GameId} from '../../src/common/Types';
  * correctly.
  */
 class TestLocalStorage extends LocalStorage implements ITestDatabase {
-  public afterEach(): void {
+  public lastSaveGamePromise: Promise<void> = Promise.resolve();
+  public afterEach(): Promise<void> {
     super.clear();
+    return Promise.resolve();
   }
   public status(_gameId: GameId): Promise<Status> {
     throw new Error('Not yet implemented');

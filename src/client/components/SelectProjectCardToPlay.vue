@@ -75,6 +75,7 @@ export default Vue.extend({
       graphene: 0,
       warning: undefined,
       available: Units.of({}),
+      kuiperAsteroids: 0,
     };
   },
   components: {
@@ -315,6 +316,7 @@ export default Vue.extend({
         seeds: this.seeds,
         graphene: this.graphene,
         auroraiData: 0,
+        kuiperAsteroids: 0,
       };
       let totalSpent = 0;
       for (const target of PAYMENT_KEYS) {

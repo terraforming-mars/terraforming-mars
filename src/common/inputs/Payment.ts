@@ -9,7 +9,8 @@ export const PAYMENT_KEYS = [
   'science',
   'seeds',
   'auroraiData',
-  'graphene'] as const;
+  'graphene',
+  'kuiperAsteroids'] as const;
 export type PaymentKey = typeof PAYMENT_KEYS[number];
 
 /**
@@ -43,6 +44,8 @@ export type Payment = {
   auroraiData: number;
   // Graphene is a Carbon Nanosystems resource that pays for city and space projects.
   graphene: number;
+  // Asteroids is a Kuiper Cooperative resource that pays for aquifer and asteroid standard projects.
+  kuiperAsteroids: number;
 }
 
 export function isPayment(obj: unknown): obj is Payment {
@@ -65,6 +68,7 @@ export namespace Payment {
     seeds: 0,
     auroraiData: 0,
     graphene: 0,
+    kuiperAsteroids: 0,
   } as const;
 
   export interface Options {
@@ -76,6 +80,7 @@ export namespace Payment {
     seeds: boolean,
     auroraiData: boolean,
     graphene: boolean,
+    kuiperAsteroids: boolean,
   }
 
   export function of(payment: Partial<Payment>) : Payment {
@@ -90,6 +95,7 @@ export namespace Payment {
       steel: payment.steel ?? 0,
       titanium: payment.titanium ?? 0,
       graphene: payment.graphene ?? 0,
+      kuiperAsteroids: payment.kuiperAsteroids ?? 0,
     };
   }
 }

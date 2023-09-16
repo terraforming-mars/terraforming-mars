@@ -215,6 +215,7 @@ export interface IPlayer {
   getSpendableSeedResources(): number;
   getSpendableData(): number;
   getSpendableGraphene(): number;
+  getSpendableKuiperAsteroids(): number;
   payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void): void;
   checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;

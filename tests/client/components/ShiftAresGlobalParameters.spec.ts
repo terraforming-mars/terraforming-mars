@@ -22,6 +22,7 @@ describe('ShiftAresGlobalParameters', function() {
     canUseSeeds: undefined,
     canUseData: undefined,
     canUseGraphene: undefined,
+    canUseAsteroids: undefined,
     players: undefined,
     availableSpaces: undefined,
     availableParties: [PartyName.MARS, PartyName.SCIENTISTS, PartyName.UNITY, PartyName.GREENS, PartyName.REDS, PartyName.KELVINISTS],
@@ -31,6 +32,7 @@ describe('ShiftAresGlobalParameters', function() {
     seeds: undefined,
     auroraiData: undefined,
     graphene: undefined,
+    kuiperAsteroids: undefined,
     coloniesModel: undefined,
     payProduction: undefined,
     aresData: {

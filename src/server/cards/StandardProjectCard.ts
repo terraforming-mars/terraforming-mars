@@ -88,7 +88,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
         canUseTitanium: canPayWith.titanium,
         canUseSeeds: canPayWith.seeds,
         canUseData: player.isCorporation(CardName.AURORAI),
-        canUseAsteroids: player.isCorporation(CardName.KUIPER_COOPERATIVE),
+        canUseAsteroids: canPayWith.kuiperAsteroids && player.isCorporation(CardName.KUIPER_COOPERATIVE),
         title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
         afterPay: () => {
           this.projectPlayed(player);

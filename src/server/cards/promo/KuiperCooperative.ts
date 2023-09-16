@@ -18,6 +18,10 @@ export class KuiperCooperative extends Card implements ICorporationCard, IAction
       startingMegaCredits: 33,
       resourceType: CardResource.ASTEROID,
 
+      behavior: {
+        production: {titanium: 1},
+      },
+
       metadata: {
         cardNumber: '',
         description: 'You start with 33 M€. Increase titanium production 1 step.',

@@ -217,7 +217,7 @@ export abstract class Card {
       return vp;
     }
     if (typeof(vp) === 'object') {
-      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+      return new Counter(player, this).count(vp, 'vps');
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');

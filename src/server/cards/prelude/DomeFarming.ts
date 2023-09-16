@@ -4,7 +4,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class DomeFarming extends PreludeCard {
-  public migrated = true;
   constructor() {
     super({
       name: CardName.DOME_FARMING,

@@ -536,6 +536,10 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
+  public plainText(text: string) {
+    return this.text(text, Size.SMALL, false, false);
+  }
+
   public vpText(text: string): this {
     return this.text(text, Size.TINY, true);
   }

@@ -1,8 +1,8 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
+import {PRELUDE2_CARD_MANIFEST} from '../prelude2/Prelude2CardManifest';
 import {Advertising} from './Advertising';
-import {AntidesertificationTechniques} from '../promo/AntidesertificationTechniques';
-import {AppliedScience} from '../prelude2/AppliedScience';
+import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AqueductSystems} from './AqueductSystems';
 import {ArcadianCommunities} from './ArcadianCommunities';
 import {AsteroidDeflectionSystem} from './AsteroidDeflectionSystem';
@@ -36,7 +36,6 @@ import {HiTechLab} from './HiTechLab';
 import {HomeostasisBureau} from './HomeostasisBureau';
 import {ImportedNutrients} from './ImportedNutrients';
 import {InterplanetaryTrade} from './InterplanetaryTrade';
-import {IshtarExpedition} from '../prelude2/IshtarExpedition';
 import {JovianEmbassy} from './JovianEmbassy';
 import {KuiperCooperative} from './KuiperCooperative';
 import {LawSuit} from './LawSuit';
@@ -49,10 +48,8 @@ import {Merger} from './Merger';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
 import {NewPartner} from './NewPartner';
-import {NirgalEnterprises} from '../prelude2/NirgalEnterprises';
 import {OrbitalCleanup} from './OrbitalCleanup';
 import {OutdoorSports} from './OutdoorSports';
-import {PalladinShipping} from '../prelude2/PalladinShipping';
 import {Penguins} from './Penguins';
 import {PharmacyUnion} from './PharmacyUnion';
 import {Philares} from './Philares';
@@ -77,6 +74,7 @@ import {TychoMagnetics} from './TychoMagnetics';
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
   projectCards: {
+    ...PRELUDE2_CARD_MANIFEST.projectCards,
     [CardName.PENGUINS]: {Factory: Penguins},
     [CardName.SELF_REPLICATING_ROBOTS]: {Factory: SelfReplicatingRobots},
     [CardName.SMALL_ASTEROID]: {Factory: SmallAsteroid},
@@ -129,17 +127,16 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CYBERIA_SYSTEMS]: {Factory: CyberiaSystems},
     [CardName.HERMETIC_ORDER_OF_MARS]: {Factory: HermeticOrderofMars},
     [CardName.HOMEOSTASIS_BUREAU]: {Factory: HomeostasisBureau},
-    [CardName.ISHTAR_EXPEDITION]: {Factory: IshtarExpedition, compatibility: 'venus'},
   },
 
   preludeCards: {
+    ...PRELUDE2_CARD_MANIFEST.preludeCards,
     [CardName.NEW_PARTNER]: {Factory: NewPartner},
     [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
     [CardName.HEAD_START]: {Factory: HeadStart},
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
-    [CardName.APPLIED_SCIENCE]: {Factory: AppliedScience},
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},
   },
 
@@ -149,6 +146,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     CardName.MAGNETIC_FIELD_GENERATORS],
 
   corporationCards: {
+    ...PRELUDE2_CARD_MANIFEST.corporationCards,
     [CardName.ARCADIAN_COMMUNITIES]: {Factory: ArcadianCommunities},
     [CardName.ASTRODRILL]: {Factory: Astrodrill},
     [CardName.FACTORUM]: {Factory: Factorum},
@@ -158,8 +156,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.RECYCLON]: {Factory: Recyclon},
     [CardName.SPLICE]: {Factory: Splice},
     [CardName.TYCHO_MAGNETICS]: {Factory: TychoMagnetics},
-    [CardName.NIRGAL_ENTERPRISES]: {Factory: NirgalEnterprises},
     [CardName.KUIPER_COOPERATIVE]: {Factory: KuiperCooperative},
-    [CardName.PALLADIN_SHIPPING]: {Factory: PalladinShipping},
   },
 });

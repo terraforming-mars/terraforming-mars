@@ -230,6 +230,7 @@ export interface IPlayer {
   drawCardKeepSome(count: number, options: AllOptions): void;
   discardPlayedCard(card: IProjectCard): void;
 
+  /** Player is done taking actions this generation. */
   pass(): void;
   takeActionForFinalGreenery(): void;
   getPlayableCards(): Array<PlayableCard>;

@@ -448,7 +448,7 @@ export enum CardName {
     NIRGAL_ENTERPRISES = 'Nirgal Enterprises',
     PALLADIN_SHIPPING = 'Palladin Shipping',
     ECOTEC = 'EcoTec',
-    SAGGITA ='Sagitta',
+    SAGITTA ='Sagitta',
     SPIRE = 'Spire',
 
     // Promo cards

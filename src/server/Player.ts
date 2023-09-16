@@ -1246,16 +1246,15 @@ export class Player implements IPlayer {
     });
   }
 
-  // Exposed for tests
   public pass(): void {
     this.game.playerHasPassed(this);
     this.lastCardPlayed = undefined;
+    this.game.log('${0} passed', (b) => b.player(this));
   }
 
   private passOption(): PlayerInput {
     return new SelectOption('Pass for this generation', 'Pass', () => {
       this.pass();
-      this.game.log('${0} passed', (b) => b.player(this));
       return undefined;
     });
   }

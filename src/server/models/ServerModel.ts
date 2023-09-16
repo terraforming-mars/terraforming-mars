@@ -225,6 +225,7 @@ export class Server {
       canUseSeeds: undefined,
       canUseData: undefined,
       canUseGraphene: undefined,
+      canUseAsteroids: undefined,
       players: undefined,
       availableSpaces: undefined,
       maxByDefault: undefined,
@@ -234,6 +235,7 @@ export class Server {
       seeds: undefined,
       auroraiData: undefined,
       graphene: undefined,
+      kuiperAsteroids: undefined,
       coloniesModel: undefined,
       payProduction: undefined,
       aresData: undefined,
@@ -268,6 +270,7 @@ export class Server {
       playerInputModel.science = player.getSpendableScienceResources();
       playerInputModel.seeds = player.getSpendableSeedResources();
       playerInputModel.graphene = player.getSpendableGraphene();
+      playerInputModel.kuiperAsteroids = player.getSpendableKuiperAsteroids();
       break;
     case 'card':
       const selectCard = waitingFor as SelectCard<ICard>;
@@ -299,6 +302,8 @@ export class Server {
       playerInputModel.canUseData = sp.canUse.data ?? false;
       playerInputModel.auroraiData = player.getSpendableData();
       playerInputModel.canUseGraphene = sp.canUse.graphene && player.getSpendableData() > 0;
+      playerInputModel.canUseAsteroids = sp.canUse.kuiperAsteroids && player.getSpendableKuiperAsteroids() > 0;
+      playerInputModel.kuiperAsteroids = player.getSpendableKuiperAsteroids();
       break;
     case 'player':
       playerInputModel.players = (waitingFor as SelectPlayer).players.map(

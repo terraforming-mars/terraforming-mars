@@ -496,6 +496,8 @@ export enum CardName {
     GIANT_SOLAR_COLLECTOR = 'Giant Solar Collector',
     HERMETIC_ORDER_OF_MARS = 'Hermetic Order of Mars',
     HOMEOSTASIS_BUREAU = 'Homeostasis Bureau',
+    KUIPER_COOPERATIVE = 'Kuiper Cooperative',
+    // End of promo cards
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

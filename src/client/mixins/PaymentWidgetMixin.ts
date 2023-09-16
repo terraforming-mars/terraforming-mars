@@ -24,6 +24,7 @@ export interface SelectPaymentModel {
     seeds?: number;
     auroraiData?: number;
     graphene?: number; // Graphene isn't used in this component, but it simplifies testing.
+    kuiperAsteroids: number;
 }
 
 export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
@@ -179,6 +180,7 @@ export const PaymentWidgetMixin = {
       case 'seeds':
       case 'auroraiData':
       case 'graphene':
+      case 'kuiperAsteroids':
         amount = model.playerinput[target];
         break;
       }

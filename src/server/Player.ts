@@ -866,6 +866,7 @@ export class Player implements IPlayer {
       // TODO(kberg): add this.corporation.name === CardName.AURORAI
       auroraiData: card.type === CardType.STANDARD_PROJECT,
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
+      kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
     };
   }
 
@@ -928,6 +929,10 @@ export class Player implements IPlayer {
     return this.resourcesOnCard(CardName.CARBON_NANOSYSTEMS);
   }
 
+  public getSpendableKuiperAsteroids(): number {
+    return this.resourcesOnCard(CardName.KUIPER_COOPERATIVE);
+  }
+
   public pay(payment: Payment) {
     const standardUnits = Units.of({
       megacredits: payment.megaCredits,
@@ -958,6 +963,7 @@ export class Player implements IPlayer {
     removeResourcesOnCard(CardName.CARBON_NANOSYSTEMS, payment.graphene);
     removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
     removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
+    removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
 
     if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
@@ -1382,6 +1388,7 @@ export class Player implements IPlayer {
       seeds: this.getSpendableSeedResources(),
       auroraiData: this.getSpendableData(),
       graphene: this.getSpendableGraphene(),
+      kuiperAsteroids: this.getSpendableKuiperAsteroids(),
     };
   }
 
@@ -1414,6 +1421,7 @@ export class Player implements IPlayer {
       seeds: constants.SEED_VALUE,
       auroraiData: constants.DATA_VALUE,
       graphene: constants.GRAPHENE_VALUE,
+      kuiperAsteroids: 1,
     };
 
     const usable: {[key in PaymentKey]: boolean} = {
@@ -1427,6 +1435,7 @@ export class Player implements IPlayer {
       seeds: options?.seeds ?? false,
       auroraiData: options?.auroraiData ?? false,
       graphene: options?.graphene ?? false,
+      kuiperAsteroids: options?.kuiperAsteroids ?? false,
     };
 
     // HOOK: Luna Trade Federation

@@ -22,6 +22,7 @@ export class PaymentTester {
       'seeds': 'Seeds',
       'auroraiData': 'Data',
       'graphene': 'graphene',
+      'kuiperAsteroids': 'kupiperAsteroids',
     };
     const title = titles[type];
     return '[title~=' + title + ']';

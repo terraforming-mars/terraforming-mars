@@ -38,6 +38,7 @@ import {ImportedNutrients} from './ImportedNutrients';
 import {InterplanetaryTrade} from './InterplanetaryTrade';
 import {IshtarExpedition} from '../prelude2/IshtarExpedition';
 import {JovianEmbassy} from './JovianEmbassy';
+import {KuiperCooperative} from './KuiperCooperative';
 import {LawSuit} from './LawSuit';
 import {MagneticFieldGeneratorsPromo} from './MagneticFieldGeneratorsPromo';
 import {MagneticShield} from './MagneticShield';
@@ -127,7 +128,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CYBERIA_SYSTEMS]: {Factory: CyberiaSystems},
     [CardName.HERMETIC_ORDER_OF_MARS]: {Factory: HermeticOrderofMars},
     [CardName.HOMEOSTASIS_BUREAU]: {Factory: HomeostasisBureau},
-    [CardName.ISHTAR_EXPEDITION]: {Factory: IshtarExpedition},
+    [CardName.ISHTAR_EXPEDITION]: {Factory: IshtarExpedition, compatibility: 'venus'},
   },
 
   preludeCards: {
@@ -157,5 +158,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPLICE]: {Factory: Splice},
     [CardName.TYCHO_MAGNETICS]: {Factory: TychoMagnetics},
     [CardName.NIRGAL_ENTERPRISES]: {Factory: NirgalEnterprises},
+    [CardName.KUIPER_COOPERATIVE]: {Factory: KuiperCooperative},
   },
 });

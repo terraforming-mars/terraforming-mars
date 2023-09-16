@@ -46,6 +46,7 @@ export default Vue.extend({
       floaters: 0,
       seeds: 0,
       auroraiData: 0,
+      kuiperAsteroids: 0,
       warning: undefined,
     };
   },
@@ -71,6 +72,7 @@ export default Vue.extend({
       case 'heat': return this.canUseHeat();
       case 'seeds': return this.canUseSeeds();
       case 'auroraiData': return this.canUseData();
+      case 'kuiperAsteroids': return this.canUseAsteroids();
       }
       return false;
     },
@@ -142,9 +144,12 @@ export default Vue.extend({
     canUseGraphene() {
       return this.playerinput.canUseGraphene && (this.playerinput.graphene ?? 0 > 0);
     },
+    canUseAsteroids() {
+      return this.playerinput.canUseAsteroids && (this.playerinput.kuiperAsteroids ?? 0 > 0);
+    },
 
     saveData() {
-      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits'];
+      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits', 'kuiperAsteroids'];
 
       const payment: Payment = {
         ...Payment.EMPTY,
@@ -154,6 +159,7 @@ export default Vue.extend({
         titanium: this.titanium,
         seeds: this.seeds ?? 0,
         auroraiData: this.auroraiData ?? 0,
+        kuiperAsteroids: this.kuiperAsteroids,
       };
 
       let totalSpent = 0;
@@ -249,6 +255,14 @@ export default Vue.extend({
       <input class="form-input form-inline payments_input" v-model.number="auroraiData" />
       <AppButton type="plus" @click="addValue('auroraiData', 1)" />
       <AppButton type="max" @click="setMaxValue('auroraiData')" title="MAX" />
+    </div>
+
+    <div class="payments_type input-group" v-if="canUseAsteroids()">
+      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay by Asteroid')"></i>
+      <AppButton type="minus" @click="reduceValue('kuiperAsteroids', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="kuiperAsteroids" />
+      <AppButton type="plus" @click="addValue('kuiperAsteroids', 1)" />
+      <AppButton type="max" @click="setMaxValue('kuiperAsteroids')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">

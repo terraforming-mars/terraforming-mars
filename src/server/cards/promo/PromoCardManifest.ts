@@ -52,6 +52,7 @@ import {NewPartner} from './NewPartner';
 import {NirgalEnterprises} from '../prelude2/NirgalEnterprises';
 import {OrbitalCleanup} from './OrbitalCleanup';
 import {OutdoorSports} from './OutdoorSports';
+import {PalladinShipping} from '../prelude2/PalladinShipping';
 import {Penguins} from './Penguins';
 import {PharmacyUnion} from './PharmacyUnion';
 import {Philares} from './Philares';
@@ -159,5 +160,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.TYCHO_MAGNETICS]: {Factory: TychoMagnetics},
     [CardName.NIRGAL_ENTERPRISES]: {Factory: NirgalEnterprises},
     [CardName.KUIPER_COOPERATIVE]: {Factory: KuiperCooperative},
+    [CardName.PALLADIN_SHIPPING]: {Factory: PalladinShipping},
   },
 });

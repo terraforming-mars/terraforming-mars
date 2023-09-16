@@ -438,6 +438,7 @@ export enum CardName {
 
     // Prelude 2 Corps
     NIRGAL_ENTERPRISES = 'Nirgal Enterprises',
+    PALLADIN_SHIPPING = 'Palladin Shipping',
 
     // Promo cards
     DUSK_LASER_MINING = 'Dusk Laser Mining',

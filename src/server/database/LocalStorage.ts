@@ -4,13 +4,46 @@ import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
-export class LocalStorage implements IDatabase {
-  constructor() {
-  }
+let storage: Storage;
 
+if (typeof localStorage !== 'undefined') {
+  storage = localStorage;
+} else {
+  let map: {[x: string]: string} = {};
+
+  storage = {
+    length: 0,
+    clear: function() {
+      map = {};
+    },
+    key: function(i) {
+      return Object.keys(map)[i] ?? null;
+    },
+    getItem: function(key) {
+      return map[key] ?? null;
+    },
+    removeItem: function(key) {
+      delete map[key];
+    },
+    setItem: function(key, value) {
+      map[key] = value;
+    },
+  };
+  Object.defineProperty(storage, 'length', {
+    get: function() {
+      return Object.keys(map).length;
+    },
+  });
+}
+
+export class LocalStorage implements IDatabase {
   public initialize(): Promise<void> {
     console.log(`Starting local storage database`);
     return Promise.resolve();
+  }
+
+  protected clear(): void {
+    storage.clear();
   }
 
   saveGame(game: IGame): Promise<void> {
@@ -22,14 +55,14 @@ export class LocalStorage implements IDatabase {
 
   saveSerializedGame(serializedGame: SerializedGame): void {
     const text = JSON.stringify(serializedGame, null, 2);
-    localStorage.setItem('game:' + serializedGame.id, text);
-    localStorage.setItem('game:' + serializedGame.id + ':' + serializedGame.lastSaveId, text);
+    storage.setItem('game:' + serializedGame.id, text);
+    storage.setItem('game:' + serializedGame.id + ':' + serializedGame.lastSaveId, text);
   }
 
   getGame(gameId: GameId): Promise<SerializedGame> {
     try {
       console.log(`Loading ${gameId}`);
-      const text = localStorage.getItem('game:' + gameId);
+      const text = storage.getItem('game:' + gameId);
       if (text === null) {
         throw new Error('game not found ' + gameId);
       }
@@ -37,7 +70,7 @@ export class LocalStorage implements IDatabase {
       return Promise.resolve(serializedGame);
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));
-      throw error;
+      return Promise.reject(error);
     }
   }
 
@@ -53,8 +86,8 @@ export class LocalStorage implements IDatabase {
 
   getSaveIds(gameId: GameId): Promise<Array<number>> {
     const results: Array<number> = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
+    for (let i = 0; i < storage.length; i++) {
+      const key = storage.key(i);
       if (key === null || key === 'game:' + gameId) {
         continue;
       }
@@ -69,7 +102,7 @@ export class LocalStorage implements IDatabase {
   getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
     try {
       console.log(`Loading ${gameId} at ${saveId}`);
-      const text = localStorage.getItem('game:' + gameId + ':' + saveId);
+      const text = storage.getItem('game:' + gameId + ':' + saveId);
       if (text === null) {
         throw new Error('game not found');
       }
@@ -82,9 +115,9 @@ export class LocalStorage implements IDatabase {
   }
 
   getPlayerCount(gameId: GameId): Promise<number> {
-    const text = localStorage.getItem('game:' + gameId);
+    const text = storage.getItem('game:' + gameId);
     if (text === null) {
-      throw new Error('game not foudn ' + gameId);
+      return Promise.reject(new Error('game not found ' + gameId));
     }
     const serializedGame = JSON.parse(text.toString()) as SerializedGame;
     return Promise.resolve(serializedGame.players.length);
@@ -97,8 +130,8 @@ export class LocalStorage implements IDatabase {
   getGameIds(): Promise<Array<GameId>> {
     const gameIds: Array<GameId> = [];
 
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
+    for (let i = 0; i < storage.length; i++) {
+      const key = storage.key(i);
       if (key !== null && key.startsWith('game:') && key.split(':').length === 2) {
         gameIds.push(key.substring('game:'.length) as `g${string}`);
       }
@@ -109,7 +142,7 @@ export class LocalStorage implements IDatabase {
   saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
     const obj = {gameId, players, generations, gameOptions, scores};
     const text = JSON.stringify(obj, null, 2);
-    localStorage.setItem('completed:' + gameId, text);
+    storage.setItem('completed:' + gameId, text);
   }
 
   markFinished(_gameId: GameId): Promise<void> {
@@ -137,7 +170,7 @@ export class LocalStorage implements IDatabase {
     return this.getSaveIds(gameId).then((saveIds) => {
       const versionsToDelete = saveIds.slice(-rollbackCount);
       for (const version of versionsToDelete) {
-        localStorage.removeItem('game:' + gameId + ':' + version);
+        storage.removeItem('game:' + gameId + ':' + version);
       }
     });
   }
@@ -155,10 +188,10 @@ export class LocalStorage implements IDatabase {
 
   public getParticipants(): Promise<Array<GameIdLedger>> {
     const gameIds: Array<GameIdLedger> = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
+    for (let i = 0; i < storage.length; i++) {
+      const key = storage.key(i);
       if (key !== null && key.startsWith('game:') && key.split(':').length === 2) {
-        const text = localStorage.getItem(key);
+        const text = storage.getItem(key);
         if (text === null) {
           continue;
         }

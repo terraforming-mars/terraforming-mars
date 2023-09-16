@@ -1,16 +1,18 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {AppliedScience} from './AppliedScience';
-import {ColonyTradeHub} from './ColonyTradeHub';
-import {IshtarExpedition} from './IshtarExpedition';
-import {NobelPrize} from './NobelPrize';
-import {NirgalEnterprises} from '../prelude2/NirgalEnterprises';
-import {PalladinShipping} from './PalladinShipping';
-import {SummitLogistics} from './SummitLogistics';
 import {CeresTechMarket} from './CeresTechMarket';
+import {ColonyTradeHub} from './ColonyTradeHub';
+import {Ecotec} from './Ecotec';
+import {IshtarExpedition} from './IshtarExpedition';
 import {L1TradeTerminal} from './L1TradeTerminal';
+import {NirgalEnterprises} from '../prelude2/NirgalEnterprises';
+import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
+import {PalladinShipping} from './PalladinShipping';
 import {RedAppeasement} from './RedAppeasement';
+import {Sagitta} from './Sagitta';
+import {SummitLogistics} from './SummitLogistics';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   // TODO(kberg): make 'prelude2' by 2024-04-01
@@ -34,8 +36,8 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   corporationCards: {
     [CardName.NIRGAL_ENTERPRISES]: {Factory: NirgalEnterprises},
     [CardName.PALLADIN_SHIPPING]: {Factory: PalladinShipping},
-    // [CardName.SAGITTA]: {Factory: Sagitta},
-    // [CardName.ECOTEC]: {Factory: Ecotec},
+    [CardName.SAGITTA]: {Factory: Sagitta},
+    [CardName.ECOTEC]: {Factory: Ecotec},
     // [CardName.SPIRE]: {Factory: Spire},
   },
 });

@@ -156,6 +156,9 @@ export default Vue.extend({
       case CardRenderItemType.NO_TAGS:
         classes.push('card-resource-tag', 'card-community-services');
         break;
+      case CardRenderItemType.EMPTY_TAG:
+        classes.push('card-resource-tag', 'card-tag-empty');
+        break;
       case CardRenderItemType.CITY:
         if (this.item.isPlayed !== true) {
           classes.push('card-tile', `city-tile--${this.item.size}`);

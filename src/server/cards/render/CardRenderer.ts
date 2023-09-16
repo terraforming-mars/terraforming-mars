@@ -269,6 +269,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
   }
 
+  public emptyTag() {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.EMPTY_TAG, -1));
+  }
+
   public wild(amount: number, options?: ItemOptions) {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.WILD, amount, options));
   }

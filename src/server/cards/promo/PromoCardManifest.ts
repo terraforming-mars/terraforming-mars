@@ -71,6 +71,7 @@ import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
 import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
+import {PalladinShipping} from '../prelude2/PalladinShipping';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -157,5 +158,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPLICE]: {Factory: Splice},
     [CardName.TYCHO_MAGNETICS]: {Factory: TychoMagnetics},
     [CardName.NIRGAL_ENTERPRISES]: {Factory: NirgalEnterprises},
+    [CardName.PALLADIN_SHIPPING]: {Factory: PalladinShipping},
   },
 });

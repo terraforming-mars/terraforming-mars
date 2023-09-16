@@ -1217,11 +1217,11 @@ export class Player implements IPlayer {
   }
 
   private milestoneCost() {
-    return this.isCorporation(CardName.NIGRAL_ENTERPRISES) ? 0 : MILESTONE_COST;
+    return this.isCorporation(CardName.NIRGAL_ENTERPRISES) ? 0 : MILESTONE_COST;
   }
 
   private awardFundingCost() {
-    return this.isCorporation(CardName.NIGRAL_ENTERPRISES) ? 0 : this.game.getAwardFundingCost();
+    return this.isCorporation(CardName.NIRGAL_ENTERPRISES) ? 0 : this.game.getAwardFundingCost();
   }
 
   private fundAward(award: IAward): PlayerInput {

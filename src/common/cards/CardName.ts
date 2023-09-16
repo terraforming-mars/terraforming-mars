@@ -432,13 +432,24 @@ export enum CardName {
 
     // Prelude 2 Project Cards
     ISHTAR_EXPEDITION = 'Ishtar Expedition',
+    L1_TRADE_TERMINAL = 'L1 Trade Terminal',
+    RED_APPEASEMENT = 'Red Appeasement',
+    SUMMIT_LOGISTICS = 'Summit Logistics',
+    CERES_TECH_MARKET = 'Ceres Tech Market',
 
     // Prelude 2 Preludes
     APPLIED_SCIENCE = 'Applied Science',
+    FOCUSED_ORGANIZATION = 'Focused Organization',
+    OLD_MINING_COLONY = 'Old Mining Colony',
+    NOBEL_PRIZE = 'Nobel Prize',
+    COLONY_TRADE_HUB = 'Colony Trade Hub',
 
     // Prelude 2 Corps
     NIRGAL_ENTERPRISES = 'Nirgal Enterprises',
     PALLADIN_SHIPPING = 'Palladin Shipping',
+    ECOTEC = 'EcoTec',
+    SAGGITA ='Sagitta',
+    SPIRE = 'Spire',
 
     // Promo cards
     DUSK_LASER_MINING = 'Dusk Laser Mining',
@@ -767,7 +778,7 @@ export enum CardName {
     RINGCOM = 'Ringcom',
     CHIMERA = 'Chimera',
     SISTEMAS_SEEBECK = 'Sistemas Seebeck',
-    SPIRE = 'Spire',
+    // SPIRE = 'Spire',
     SOYLENT_SEEDLING_SYSTEMS = 'Soylent Seedling Systems',
     STEELARIS = 'Steelaris',
     MARS_MATHS = 'Mars Maths',

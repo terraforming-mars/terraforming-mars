@@ -7,7 +7,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRequirements} from '../requirements/CardRequirements';
 
 export class IshtarExpedition extends Card implements IProjectCard {
-  public migrated = true;
   constructor() {
     super({
       name: CardName.ISHTAR_EXPEDITION,

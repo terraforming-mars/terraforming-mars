@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {all} from '../Options';
 import {ICard} from '../ICard';
@@ -18,6 +17,10 @@ export class CassiniStation extends Card implements IProjectCard {
       name: CardName.CASSINI_STATION,
       cost: 23,
       tags: [Tag.POWER, Tag.SCIENCE, Tag.SPACE],
+
+      behavior: {
+        production: {energy: {colonies: {colonies: {}}, all}},
+      },
 
       metadata: {
         cardNumber: 'Pf62',
@@ -32,14 +35,8 @@ export class CassiniStation extends Card implements IProjectCard {
     });
   }
 
+  // TODO(kberg): Repalce this with counter / behavior.
   public override bespokePlay(player: IPlayer) {
-    let coloniesCount = 0;
-    player.game.colonies.forEach((colony) => {
-      coloniesCount += colony.colonies.length;
-    });
-
-    player.production.add(Resource.ENERGY, coloniesCount, {log: true});
-
     const cards = [
       ...player.getResourceCards(CardResource.FLOATER),
       ...player.getResourceCards(CardResource.DATA),

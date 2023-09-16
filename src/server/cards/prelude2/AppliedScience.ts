@@ -7,7 +7,6 @@ import {digit} from '../Options';
 import {ActivePreludeCard} from './ActivePreludeCard';
 
 export class AppliedScience extends ActivePreludeCard implements IActionCard {
-  public migrated = true;
   constructor() {
     super({
       name: CardName.APPLIED_SCIENCE,

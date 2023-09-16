@@ -105,6 +105,16 @@ export class Counter {
       sum += card.resourceCount;
     }
 
+    if (countable.colonies !== undefined) {
+      player.game.colonies.forEach((colony) => {
+        if (countable.all) {
+          sum += colony.colonies.length;
+        } else {
+          sum += colony.colonies.filter((colony) => colony === player.id).length;
+        }
+      });
+    }
+
     if (countable.moon !== undefined) {
       const moon = countable.moon;
       MoonExpansion.ifMoon(game, (moonData) => {

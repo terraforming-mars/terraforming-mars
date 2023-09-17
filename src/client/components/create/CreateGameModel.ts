@@ -12,6 +12,7 @@ export interface CreateGameModel {
   players: Array<NewPlayerModel>;
   corporateEra: boolean;
   prelude: boolean;
+  prelude2Expansion: boolean;
   draftVariant: boolean;
   initialDraft: boolean;
   randomMA: RandomMAOptionType;

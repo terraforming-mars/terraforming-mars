@@ -28,7 +28,6 @@ export class DirectedHeatUsage extends ActionCard {
         },
       },
 
-
       metadata: {
         // cardNumber: '',
         renderData: CardRenderer.builder((b) => {

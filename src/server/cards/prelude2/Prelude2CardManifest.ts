@@ -6,18 +6,19 @@ import {ColonyTradeHub} from './ColonyTradeHub';
 import {Ecotec} from './Ecotec';
 import {IshtarExpedition} from './IshtarExpedition';
 import {L1TradeTerminal} from './L1TradeTerminal';
-import {NirgalEnterprises} from '../prelude2/NirgalEnterprises';
+import {NirgalEnterprises} from './NirgalEnterprises';
 import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
 import {PalladinShipping} from './PalladinShipping';
 import {RedAppeasement} from './RedAppeasement';
 import {Sagitta} from './Sagitta';
 import {SummitLogistics} from './SummitLogistics';
+import {DirectedHeatUsage} from './DirectedHeatUsage';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
-  // TODO(kberg): make 'prelude2' by 2024-04-01
-  module: 'promo',
+  module: 'prelude2',
   projectCards: {
+    [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
     [CardName.ISHTAR_EXPEDITION]: {Factory: IshtarExpedition, compatibility: 'venus'},
     [CardName.SUMMIT_LOGISTICS]: {Factory: SummitLogistics, compatibility: 'turmoil'},
     [CardName.CERES_TECH_MARKET]: {Factory: CeresTechMarket, compatibility: 'colonies'},

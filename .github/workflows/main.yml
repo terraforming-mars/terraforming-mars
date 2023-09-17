@@ -19,8 +19,7 @@ jobs:
     - run: npm test
   build-windows:
 
-    # TODO(kberg): Move to windows-latest.
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2

@@ -103,7 +103,7 @@ export abstract class Colony implements IColony {
     // Colony Trade Hub hook
     const colonyTradeHub = player.game.getPlayers().find((player) => player.cardIsInEffect(CardName.COLONY_TRADE_HUB));
     if (colonyTradeHub !== undefined) {
-      colonyTradeHub.production.add(Resource.MEGACREDITS, 2, {log: true});
+      colonyTradeHub.stock.add(Resource.MEGACREDITS, 2, {log: true});
     }
   }
 

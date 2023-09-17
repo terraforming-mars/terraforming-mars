@@ -11,6 +11,7 @@ export class IshtarExpedition extends Card implements IProjectCard {
     super({
       name: CardName.ISHTAR_EXPEDITION,
       cost: 6,
+      tags: [Tag.VENUS],
       type: CardType.EVENT,
 
       requirements: CardRequirements.builder((b) => b.venus(10)),

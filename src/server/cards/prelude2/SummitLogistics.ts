@@ -33,6 +33,7 @@ export class SummitLogistics extends Card {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(1).slash().jovian({played}).earth(1, {played}).venus(1, {played}).colonies(1);
           b.br;
+          b.cards(2).br;
           b.plainText('(Requires that Scientists are ruling or that you have 2 delegates there. ' +
             'Gain 1 M€ per planet tag and colony you have. Draw 2 cards.)');
           b.br;

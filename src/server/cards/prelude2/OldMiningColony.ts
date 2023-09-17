@@ -31,7 +31,7 @@ export class OldMiningColony extends PreludeCard {
     return player.cardsInHand.length > 0;
   }
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new DiscardCards(player, 1), Priority.DISCARD_AND_DRAW);
+    player.game.defer(new DiscardCards(player, 1), Priority.DISCARD_CARDS);
     return undefined;
   }
 }

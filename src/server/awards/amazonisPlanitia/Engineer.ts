@@ -34,7 +34,6 @@ export class Engineer implements IAward {
     CardName.INSULATION,
     CardName.NITROGEN_RICH_ASTEROID,
     CardName.POWER_SUPPLY_CONSORTIUM,
-    CardName.SATELLITES,
     // Colonies
     CardName.COMMUNITY_SERVICES,
     CardName.ECOLOGY_RESEARCH,

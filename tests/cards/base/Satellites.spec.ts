@@ -9,7 +9,7 @@ describe('Satellites', function() {
     const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(1);
-    player.playedCards.push(card);
+    player.tagsForTest = {space: 1};
     card.play(player);
     expect(player.production.megacredits).to.eq(3);
   });

@@ -5,12 +5,12 @@ export const GAME_MODULES = [
   'venus',
   'colonies',
   'prelude',
+  'prelude2',
   'turmoil',
   'community',
   'ares',
   'moon',
   'pathfinders',
   'ceo',
-  'prelude2',
 ] as const;
 export type GameModule = typeof GAME_MODULES[number];

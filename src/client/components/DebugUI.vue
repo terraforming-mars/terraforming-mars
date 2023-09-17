@@ -202,7 +202,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
 };
 
 // TODO(kberg): make this use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramPl';
+const ALL_MODULES = 'bcpvCt*ramPl2';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';

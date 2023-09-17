@@ -41,9 +41,9 @@
                                 <span v-i18n>Prelude</span>
                             </label>
 
-                            <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="prelude">
+                            <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="prelude2Expansion">
                             <label for="prelude2-checkbox" class="expansion-button">
-                                <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                                <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
                                 <span v-i18n>Prelude 2</span>
                             </label>
 

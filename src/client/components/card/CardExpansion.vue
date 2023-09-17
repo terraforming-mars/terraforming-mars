@@ -7,20 +7,20 @@
 import Vue from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
 
-const MODULE_TO_CSS: Map<GameModule, string> = new Map([
-  ['corpera', 'corporate-icon'],
-  ['promo', 'promo-icon'],
-  ['venus', 'venus-icon'],
-  ['colonies', 'colonies-icon'],
-  ['prelude', 'prelude-icon'],
-  ['turmoil', 'turmoil-icon'],
-  ['community', 'community-icon'],
-  ['ares', 'ares-icon'],
-  ['moon', 'moon-icon'],
-  ['pathfinders', 'pathfinders-icon'],
-  ['ceo', 'ceo-icon'],
-],
-);
+const MODULE_TO_CSS: Omit<Record<GameModule, string>, 'base'> = {
+  'corpera': 'corporate-icon',
+  'promo': 'promo-icon',
+  'venus': 'venus-icon',
+  'colonies': 'colonies-icon',
+  'prelude': 'prelude-icon',
+  'prelude2': 'prelude2-icon',
+  'turmoil': 'turmoil-icon',
+  'community': 'community-icon',
+  'ares': 'ares-icon',
+  'moon': 'moon-icon',
+  'pathfinders': 'pathfinders-icon',
+  'ceo': 'ceo-icon',
+};
 export default Vue.extend({
   name: 'CardExpansion',
   props: {
@@ -36,9 +36,8 @@ export default Vue.extend({
   methods: {
     getClasses(): string {
       const classes = ['card-expansion', 'project-icon'];
-      const expansionClass = MODULE_TO_CSS.get(this.expansion);
-      if (expansionClass !== undefined) {
-        classes.push(expansionClass);
+      if (this.expansion !== 'base') {
+        classes.push(MODULE_TO_CSS[this.expansion]);
       }
       if (this.isCorporation) {
         classes.push('card-corporation-expansion');

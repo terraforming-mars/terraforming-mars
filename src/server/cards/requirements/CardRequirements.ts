@@ -26,12 +26,14 @@ import {TagCardRequirement} from './TagCardRequirement';
 import {TemperatureRequirement} from './TemperatureRequirement';
 import {VenusRequirement} from './VenusRequirement';
 import {CardRequirementDescriptor} from '../../../common/cards/CardRequirementDescriptor';
-import {asArray} from '../../../common/utils/utils';
 
 export class CardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
 
   public satisfies(player: IPlayer): boolean | YesAnd {
+    if (this.requirements.length === 0) {
+      return true;
+    }
     // Process tags separately, though max & any tag criteria will be processed later.
     // This pre-computation takes the wild tag into account.
     const tags: Array<Tag> = [];
@@ -58,11 +60,8 @@ export class CardRequirements {
     return result;
   }
 
-  public static compile(descriptors: CardRequirementDescriptor | Array<CardRequirementDescriptor> | undefined): CardRequirements | undefined {
-    if (descriptors === undefined) {
-      return undefined;
-    }
-    return new CardRequirements(asArray(descriptors).map((descriptor) => CardRequirements.compileOne(descriptor)));
+  public static compile(descriptors: Array<CardRequirementDescriptor>): CardRequirements {
+    return new CardRequirements(descriptors.map((descriptor) => CardRequirements.compileOne(descriptor)));
   }
 
   private static compileOne(descriptor: CardRequirementDescriptor): CardRequirement {

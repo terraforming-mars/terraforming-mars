@@ -9,16 +9,17 @@ import {CardRequirementDescriptor} from './CardRequirementDescriptor';
 import {IVictoryPoints} from './IVictoryPoints';
 import {Tag} from './Tag';
 import {CardDiscount} from './Types';
+import {OneOrMany} from '../utils/types';
 
 export type ClientCard = {
   name: CardName;
   module: GameModule;
   tags: Array<Tag>;
-  cardDiscount?: CardDiscount | Array<CardDiscount>;
+  cardDiscount?: OneOrMany<CardDiscount>;
   victoryPoints?: number | 'special' | IVictoryPoints,
   cost?: number;
   type: CardType;
-  requirements?: CardRequirementDescriptor | Array<CardRequirementDescriptor>;
+  requirements: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
   warning?: string | Message;
   productionBox?: Units; // Replace with behavior?

@@ -127,7 +127,7 @@ export default Vue.extend({
     getCardMetadata(): ICardMetadata {
       return this.cardInstance.metadata;
     },
-    getCardRequirements(): CardRequirementDescriptor | Array<CardRequirementDescriptor> | undefined {
+    getCardRequirements(): Array<CardRequirementDescriptor> {
       return this.cardInstance.requirements;
     },
     getResourceAmount(): number {

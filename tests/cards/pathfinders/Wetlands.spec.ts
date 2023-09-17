@@ -129,7 +129,7 @@ describe('Wetlands', function() {
   });
 
   it('Wetlands counts toward ocean requirements', () => {
-    const fake = fakeCard({requirements: {oceans: 3}});
+    const fake = fakeCard({requirements: [{oceans: 3}]});
     addOcean(player, '15');
     addOcean(player, '16');
     expect(player.canPlay(fake)).is.false;

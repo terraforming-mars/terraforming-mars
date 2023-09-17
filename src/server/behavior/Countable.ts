@@ -1,6 +1,7 @@
 import {Units} from '../../common/Units';
 import {Tag} from '../../common/cards/Tag';
 import {NoAttributes} from './NoAttributes';
+import {OneOrMany} from '../../common/utils/types';
 
 /**
  * Describes something that can be counted.
@@ -14,7 +15,7 @@ export type _Countable = {
    * This is counting tags as if the player was taking an action (for example,
    * a player's wild tags count, events are ignored.)
    */
-  tag?: Tag | Array<Tag>,
+  tag?: OneOrMany<Tag>,
   cities?: {where?: 'onmars' | 'offmars' | 'everywhere'},
   greeneries?: NoAttributes,
   oceans?: NoAttributes,

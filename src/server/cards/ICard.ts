@@ -16,6 +16,7 @@ import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
+import {OneOrMany} from '../../common/utils/types';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -40,7 +41,7 @@ export interface ICard {
   tags: Array<Tag>;
   play: (player: IPlayer) => PlayerInput | undefined;
   getCardDiscount?: (player: IPlayer, card: IProjectCard) => number;
-  cardDiscount?: CardDiscount | Array<CardDiscount>;
+  cardDiscount?: OneOrMany<CardDiscount>;
   // parameter is a Morningstar Inc. special case.
   getRequirementBonus?: (player: IPlayer, parameter: GlobalParameter) => number;
   victoryPoints?: number | 'special' | IVictoryPoints,
@@ -70,7 +71,7 @@ export interface ICard {
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */
   type: CardType;
-  requirements?: CardRequirementDescriptor | Array<CardRequirementDescriptor>;
+  requirements?: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
   warning?: string | Message;
   behavior?: Behavior,

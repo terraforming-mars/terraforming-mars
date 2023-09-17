@@ -20,12 +20,12 @@ export type YesAnd = {
 export abstract class CardRequirement implements ICardRequirement, LocalOptions {
   public abstract readonly type: RequirementType;
   public readonly count: number;
-  public readonly max: boolean = false;
-  public readonly all: boolean = false;
+  public readonly max: boolean;
+  public readonly all: boolean;
   /** Used during card rendering. */
-  public readonly text: string | undefined = undefined;
+  public readonly text: string | undefined;
   /** Used during card rendering. */
-  public readonly nextTo: boolean = false;
+  public readonly nextTo: boolean;
 
   constructor(options?: Options) {
     this.count = options?.count ?? 1;

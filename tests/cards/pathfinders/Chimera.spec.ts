@@ -28,7 +28,7 @@ describe('Chimera', function() {
   });
 
   it('as action', function() {
-    const a = fakeCard({name: 'A' as CardName, requirements: {tag: Tag.EARTH, count: 4}});
+    const a = fakeCard({name: 'A' as CardName, requirements: [{tag: Tag.EARTH, count: 4}]});
     player.megaCredits = card.cost;
     player.playedCards = [new BusinessNetwork()];
     expect(player.canPlay(a)).is.false;

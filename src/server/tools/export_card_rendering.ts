@@ -20,6 +20,7 @@ import {MilestoneAwardMetadata} from '../../common/ma/MilestoneAwardMetadata';
 import {AwardName} from '../../common/ma/AwardName';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {CardType} from '../../common/cards/CardType';
+import {OneOrMany} from '../../common/utils/types';
 
 class CardProcessor {
   public static json: Array<ClientCard> = [];
@@ -39,7 +40,7 @@ class CardProcessor {
     }
   }
 
-  private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {
+  private static processCard(module: GameModule, card: ICard, compatibility: undefined | OneOrMany<GameModule>) {
     if (card.type === CardType.PROXY) return;
     let startingMegaCredits = undefined;
     let cardCost = undefined;
@@ -60,7 +61,7 @@ class CardProcessor {
       victoryPoints: card.victoryPoints,
       cost: card.cost,
       type: card.type,
-      requirements: card.requirements,
+      requirements: card.requirements ?? [],
       metadata: card.metadata,
       warning: card.warning,
       productionBox: Units.isUnits(production) ? Units.of(production) : Units.EMPTY, // Dynamic units aren't used on on the client side.

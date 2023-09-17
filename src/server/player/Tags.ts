@@ -9,6 +9,7 @@ import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {CeoExtension} from '../CeoExtension';
 import {IPlayer} from '../IPlayer';
+import {OneOrMany} from '../../common/utils/types';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
@@ -132,7 +133,7 @@ export class Tags {
     return false;
   }
 
-  public cardTagCount(card: ICard, target: Tag | Array<Tag>): number {
+  public cardTagCount(card: ICard, target: OneOrMany<Tag>): number {
     let count = 0;
     for (const tag of card.tags) {
       if (tag === target) {

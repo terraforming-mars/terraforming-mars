@@ -91,6 +91,7 @@ export class GameHandler extends Handler {
             venusNextExtension: gameReq.venusNext,
             coloniesExtension: gameReq.colonies,
             preludeExtension: gameReq.prelude,
+            prelude2Expansion: gameReq.prelude2Expansion,
             turmoilExtension: gameReq.turmoil,
             aresExtension: gameReq.aresExtension,
             aresHazards: true, // Not a runtime option.

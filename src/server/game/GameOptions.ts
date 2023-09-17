@@ -21,6 +21,7 @@ export type GameOptions = {
   venusNextExtension: boolean;
   coloniesExtension: boolean;
   preludeExtension: boolean;
+  prelude2Expansion: boolean;
   turmoilExtension: boolean;
   promoCardsOption: boolean;
   communityCardsOption: boolean;
@@ -91,6 +92,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   pathfindersExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
+  prelude2Expansion: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
   requiresMoonTrackCompletion: false,

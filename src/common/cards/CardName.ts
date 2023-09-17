@@ -430,7 +430,9 @@ export enum CardName {
     WILDLIFE_DOME = 'Wildlife Dome',
     VOTE_OF_NO_CONFIDENCE = 'Vote Of No Confidence',
 
+    // Prelude 2
     // Prelude 2 Project Cards
+    DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
     ISHTAR_EXPEDITION = 'Ishtar Expedition',
     L1_TRADE_TERMINAL = 'L1 Trade Terminal',
     RED_APPEASEMENT = 'Red Appeasement',
@@ -497,7 +499,6 @@ export enum CardName {
     ROBOT_POLLINATORS = 'Robot Pollinators',
     HEAD_START = 'Head Start',
     SUPERCAPACITORS = 'Supercapacitors',
-    DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
     ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
     TYCHO_MAGNETICS = 'Tycho Magnetics',
     AQUEDUCT_SYSTEMS = 'Aqueduct Systems',

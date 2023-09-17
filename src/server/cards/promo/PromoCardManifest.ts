@@ -1,6 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
-import {PRELUDE2_CARD_MANIFEST} from '../prelude2/Prelude2CardManifest';
 import {Advertising} from './Advertising';
 import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AqueductSystems} from './AqueductSystems';
@@ -20,7 +19,6 @@ import {CuttingEdgeTechnology} from './CuttingEdgeTechnology';
 import {CyberiaSystems} from './CyberiaSystems';
 import {DeimosDownPromo} from './DeimosDownPromo';
 import {DirectedImpactors} from './DirectedImpactors';
-import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {DiversitySupport} from './DiversitySupport';
 import {DoubleDown} from './DoubleDown';
 import {DuskLaserMining} from './DuskLaserMining';
@@ -74,7 +72,6 @@ import {TychoMagnetics} from './TychoMagnetics';
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
   projectCards: {
-    ...PRELUDE2_CARD_MANIFEST.projectCards,
     [CardName.PENGUINS]: {Factory: Penguins},
     [CardName.SELF_REPLICATING_ROBOTS]: {Factory: SelfReplicatingRobots},
     [CardName.SMALL_ASTEROID]: {Factory: SmallAsteroid},
@@ -119,7 +116,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.PSYCHE]: {Factory: Psyche},
     [CardName.ROBOT_POLLINATORS]: {Factory: RobotPollinators},
     [CardName.SUPERCAPACITORS]: {Factory: Supercapacitors},
-    [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
     [CardName.AQUEDUCT_SYSTEMS]: {Factory: AqueductSystems},
     [CardName.ASTRA_MECHANICA]: {Factory: AstraMechanica},
     [CardName.ST_JOSEPH_OF_CUPERTINO_MISSION]: {Factory: StJosephOfCupertinoMission},
@@ -130,7 +126,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
   },
 
   preludeCards: {
-    ...PRELUDE2_CARD_MANIFEST.preludeCards,
     [CardName.NEW_PARTNER]: {Factory: NewPartner},
     [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
@@ -146,7 +141,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     CardName.MAGNETIC_FIELD_GENERATORS],
 
   corporationCards: {
-    ...PRELUDE2_CARD_MANIFEST.corporationCards,
     [CardName.ARCADIAN_COMMUNITIES]: {Factory: ArcadianCommunities},
     [CardName.ASTRODRILL]: {Factory: Astrodrill},
     [CardName.FACTORUM]: {Factory: Factorum},

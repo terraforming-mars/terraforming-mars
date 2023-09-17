@@ -37,6 +37,10 @@ export class Sagitta extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
+    if (!player.isCorporation(this.name)) {
+      return undefined;
+    }
+
     if (card.tags.length === 0) {
       player.stock.megacredits += 4;
       player.game.log('${0} gained 4 M€ for playing a card with no tags.', (b) => b.player(player));

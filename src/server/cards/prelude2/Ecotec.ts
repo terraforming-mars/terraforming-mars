@@ -45,6 +45,9 @@ export class Ecotec extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
+    if (!player.isCorporation(this.name)) {
+      return undefined;
+    }
     const resourceCount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (resourceCount === 0) {
       return undefined;

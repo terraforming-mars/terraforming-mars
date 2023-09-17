@@ -28,9 +28,9 @@ describe('GiantIceAsteroid', function() {
     expect(game.deferredActions).has.lengthOf(3);
 
     const firstOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    firstOcean.cb(firstOcean.availableSpaces[0]);
+    firstOcean.cb(firstOcean.spaces[0]);
     const secondOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    secondOcean.cb(secondOcean.availableSpaces[1]);
+    secondOcean.cb(secondOcean.spaces[1]);
 
     const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
     expect(orOptions.options).has.lengthOf(3);

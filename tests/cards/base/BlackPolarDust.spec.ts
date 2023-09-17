@@ -29,7 +29,7 @@ describe('BlackPolarDust', function() {
 
     expect(game.deferredActions).has.lengthOf(1);
     const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });
 

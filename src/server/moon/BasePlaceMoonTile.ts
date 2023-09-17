@@ -6,7 +6,7 @@ import {PlayerInput} from '../PlayerInput';
 import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
-export abstract class BasePlaceMoonTile extends DeferredAction {
+export abstract class BasePlaceMoonTile extends DeferredAction<Space> {
   constructor(
     player: IPlayer,
     public spaces?: Array<Space>,
@@ -24,6 +24,10 @@ export abstract class BasePlaceMoonTile extends DeferredAction {
     if (spaces.length === 0) {
       return undefined;
     }
-    return new SelectSpace(this.title, spaces, (space) => this.placeTile(space));
+    return new SelectSpace(this.title, spaces, (space) => {
+      this.placeTile(space);
+      this.cb(space);
+      return undefined;
+    });
   }
 }

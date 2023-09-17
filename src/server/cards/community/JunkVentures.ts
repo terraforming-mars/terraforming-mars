@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {DrawCards} from '../../deferredActions/DrawCards';
+import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {LogHelper} from '../../LogHelper';
 import {IPlayer} from '../../IPlayer';
 
@@ -55,10 +55,13 @@ export class JunkVentures extends Card implements ICorporationCard {
     const cards: Array<IProjectCard> = [];
     for (let idx = 0; idx < 3; idx++) {
       const card = player.game.projectDeck.discardPile.pop();
-      if (card === undefined) break;
+      if (card === undefined) {
+        break;
+      }
       cards.push(card);
     }
 
-    return DrawCards.choose(player, cards, {keepMax: 1});
+    player.game.defer(new ChooseCards(player, cards, {keepMax: 1}));
+    return undefined;
   }
 }

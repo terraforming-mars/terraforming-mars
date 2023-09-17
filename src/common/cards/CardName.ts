@@ -431,7 +431,27 @@ export enum CardName {
     VOTE_OF_NO_CONFIDENCE = 'Vote Of No Confidence',
 
     // Prelude 2
+    // Prelude 2 Project Cards
     DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
+    ISHTAR_EXPEDITION = 'Ishtar Expedition',
+    L1_TRADE_TERMINAL = 'L1 Trade Terminal',
+    RED_APPEASEMENT = 'Red Appeasement',
+    SUMMIT_LOGISTICS = 'Summit Logistics',
+    CERES_TECH_MARKET = 'Ceres Tech Market',
+
+    // Prelude 2 Preludes
+    APPLIED_SCIENCE = 'Applied Science',
+    FOCUSED_ORGANIZATION = 'Focused Organization',
+    OLD_MINING_COLONY = 'Old Mining Colony',
+    NOBEL_PRIZE = 'Nobel Prize',
+    COLONY_TRADE_HUB = 'Colony Trade Hub',
+
+    // Prelude 2 Corps
+    NIRGAL_ENTERPRISES = 'Nirgal Enterprises',
+    PALLADIN_SHIPPING = 'Palladin Shipping',
+    ECOTEC = 'EcoTec',
+    SAGITTA ='Sagitta',
+    SPIRE = 'Spire',
 
     // Promo cards
     DUSK_LASER_MINING = 'Dusk Laser Mining',
@@ -479,6 +499,18 @@ export enum CardName {
     ROBOT_POLLINATORS = 'Robot Pollinators',
     HEAD_START = 'Head Start',
     SUPERCAPACITORS = 'Supercapacitors',
+    ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
+    TYCHO_MAGNETICS = 'Tycho Magnetics',
+    AQUEDUCT_SYSTEMS = 'Aqueduct Systems',
+    ASTRA_MECHANICA = 'Astra Mechanica',
+    ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
+    CARBON_NANOSYSTEMS = 'Carbon Nanosystems',
+    CYBERIA_SYSTEMS = 'Cyberia Systems',
+    GIANT_SOLAR_COLLECTOR = 'Giant Solar Collector',
+    HERMETIC_ORDER_OF_MARS = 'Hermetic Order of Mars',
+    HOMEOSTASIS_BUREAU = 'Homeostasis Bureau',
+    KUIPER_COOPERATIVE = 'Kuiper Cooperative',
+    // End of promo cards
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
@@ -738,7 +770,6 @@ export enum CardName {
     VITAL_COLONY = 'Vital Colony',
     STRATEGIC_BASE_PLANNING = 'Strategic Base Planning',
     DEEP_SPACE_OPERATIONS = 'Deep Space Operations',
-    ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
     EXPERIENCED_MARTIANS = 'Experienced Martians',
     THE_NEW_SPACE_RACE = 'The New Space Race',
 
@@ -748,7 +779,7 @@ export enum CardName {
     RINGCOM = 'Ringcom',
     CHIMERA = 'Chimera',
     SISTEMAS_SEEBECK = 'Sistemas Seebeck',
-    SPIRE = 'Spire',
+    // SPIRE = 'Spire',
     SOYLENT_SEEDLING_SYSTEMS = 'Soylent Seedling Systems',
     STEELARIS = 'Steelaris',
     MARS_MATHS = 'Mars Maths',

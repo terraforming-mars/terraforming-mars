@@ -11,7 +11,7 @@ export class AntidesertificationTechniques extends PreludeCard {
 
       behavior: {
         production: {plants: 1, steel: 1},
-        stock: {megacredits: 5},
+        stock: {megacredits: 3},
       },
 
       metadata: {

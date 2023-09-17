@@ -18,7 +18,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Save',
-    public cards: Array<T>,
+    public cards: ReadonlyArray<T>,
     public cb: (cards: Array<T>) => PlayerInput | undefined,
     config?: Partial<Options>,
   ) {

@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Space} from '../../boards/Space';
@@ -33,21 +33,19 @@ export class IndustrialCenter extends ActionCard implements IProjectCard {
       adjacencyBonus,
 
       action: {
-        spend: {
-          megacredits: 7,
-        },
+        spend: {megacredits: 7},
         production: {steel: 1},
       },
       metadata,
     });
   }
 
-  private getAvailableSpaces(player: IPlayer): Array<Space> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)));
   }
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
+    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player), (space: Space) => {

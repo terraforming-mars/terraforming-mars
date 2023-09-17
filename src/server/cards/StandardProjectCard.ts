@@ -10,12 +10,20 @@ import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Units} from '../../common/Units';
 
-interface StaticStandardProjectCardProperties {
+type StaticStandardProjectCardProperties = {
   name: CardName,
   cost: number,
   metadata: ICardMetadata,
   reserveUnits?: Partial<Units>,
   tr?: TRSource,
+}
+
+export type StandardProjectCanPayWith = {
+  steel?: boolean,
+  titanium?: boolean,
+  seeds?: boolean,
+  kuiperAsteroids?: boolean,
+  // tr?: TRSource,
 }
 
 export abstract class StandardProjectCard extends Card implements IActionCard, ICard {
@@ -42,18 +50,22 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     }
   }
 
-  public canAct(player: IPlayer): boolean {
+  protected canPlayOptions(player: IPlayer) {
     const canPayWith = this.canPayWith(player);
-    return player.canAfford(
-      this.cost - this.discount(player), {
-        ...canPayWith,
-        tr: this.tr,
-        auroraiData: true,
-        reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
-      });
+    return {
+      ...canPayWith,
+      cost: this.cost - this.discount(player),
+      tr: this.tr,
+      auroraiData: true,
+      reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
+    };
   }
 
-  public canPayWith(_player: IPlayer): {steel?: boolean, titanium?: boolean, seeds?: boolean, tr?: TRSource} {
+  public canAct(player: IPlayer): boolean {
+    return player.canAfford(this.canPlayOptions(player));
+  }
+
+  public canPayWith(_player: IPlayer): StandardProjectCanPayWith {
     return {};
   }
 
@@ -76,6 +88,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
         canUseTitanium: canPayWith.titanium,
         canUseSeeds: canPayWith.seeds,
         canUseData: player.isCorporation(CardName.AURORAI),
+        canUseAsteroids: canPayWith.kuiperAsteroids && player.isCorporation(CardName.KUIPER_COOPERATIVE),
         title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
         afterPay: () => {
           this.projectPlayed(player);

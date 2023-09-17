@@ -7,19 +7,12 @@ export type Options = {
 }
 
 export class GainProduction extends DeferredAction {
-  private cb: () => void = () => {};
-
   constructor(
     player: IPlayer,
     public resource: Resource,
     public options: Options = {},
   ) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
-  }
-
-  public andThen(cb: () => void) {
-    this.cb = cb;
-    return this;
   }
 
   public execute() {
@@ -32,7 +25,7 @@ export class GainProduction extends DeferredAction {
     if (this.options.count > 0) {
       this.player.production.add(this.resource, this.options.count);
     }
-    this.cb();
+    this.cb(undefined);
     return undefined;
   }
 }

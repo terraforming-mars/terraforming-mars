@@ -48,7 +48,10 @@ export class Atmoscoop extends Card implements IProjectCard {
 
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       // TODO(kberg): this is not correct, because the titanium can't be used for the reds cost.
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
+      return player.canAfford({
+        cost: this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised,
+        titanium: true,
+      });
     }
 
     return true;

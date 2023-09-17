@@ -82,13 +82,13 @@ class Row {
   constructor(private builder: Builder) {
   }
 
-  land(...bonuses: SpaceBonus[]): Row {
+  land(...bonuses: SpaceBonus[]): this {
     const space = surfaceSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
     this.builder.spaces.push(space);
     return this;
   }
 
-  mine(...bonuses: SpaceBonus[]): Row {
+  mine(...bonuses: SpaceBonus[]): this {
     const space = mineSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
     this.builder.spaces.push(space);
     return this;

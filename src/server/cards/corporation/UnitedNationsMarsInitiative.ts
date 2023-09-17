@@ -33,7 +33,7 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, IC
     });
   }
   public canAct(player: IPlayer): boolean {
-    return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford(ACTION_COST, {tr: {tr: 1}});
+    return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford({cost: ACTION_COST, tr: {tr: 1}});
   }
   public action(player: IPlayer) {
     player.payMegacreditsDeferred(

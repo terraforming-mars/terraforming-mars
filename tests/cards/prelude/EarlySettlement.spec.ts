@@ -14,9 +14,9 @@ describe('EarlySettlement', function() {
     const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
 
     expect(player.production.plants).to.eq(1);
-    expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
-    expect(selectSpace.availableSpaces[0].player).to.eq(player);
-    expect(selectSpace.availableSpaces[0].tile).is.not.undefined;
-    expect(selectSpace.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
+    expect(selectSpace.cb(selectSpace.spaces[0])).is.undefined;
+    expect(selectSpace.spaces[0].player).to.eq(player);
+    expect(selectSpace.spaces[0].tile).is.not.undefined;
+    expect(selectSpace.spaces[0].tile!.tileType).to.eq(TileType.CITY);
   });
 });

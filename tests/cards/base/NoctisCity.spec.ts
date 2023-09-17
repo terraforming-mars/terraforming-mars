@@ -29,7 +29,7 @@ describe('NoctisCity', function() {
     const [game, player] = testGame(2, {boardName: BoardName.HELLAS});
 
     const action = cast(card.play(player), SelectSpace);
-    expect(action.availableSpaces).deep.eq(game.board.getAvailableSpacesForCity(player));
+    expect(action.spaces).deep.eq(game.board.getAvailableSpacesForCity(player));
   });
 
   it('Should play', function() {

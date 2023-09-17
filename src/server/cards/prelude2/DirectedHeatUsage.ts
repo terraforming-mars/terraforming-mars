@@ -1,11 +1,10 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard} from '../ICard';
 import {ActionCard} from '../ActionCard';
 import {digit} from '../Options';
 
-export class DirectedHeatUsage extends ActionCard implements IActionCard {
+export class DirectedHeatUsage extends ActionCard {
   constructor() {
     super({
       name: CardName.DIRECTED_HEAT_USAGE,
@@ -28,7 +27,6 @@ export class DirectedHeatUsage extends ActionCard implements IActionCard {
           ],
         },
       },
-
 
       metadata: {
         // cardNumber: '',

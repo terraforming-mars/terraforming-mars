@@ -6,6 +6,7 @@ import {SerializedGame} from '../SerializedGame';
 import {Pool, ClientConfig, QueryResult} from 'pg';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
+import {difference} from '../../common/utils/utils';
 
 export class PostgreSQL implements IDatabase {
   protected client: Pool;
@@ -193,7 +194,7 @@ export class PostgreSQL implements IDatabase {
     const maxSaveId = await this.getMaxSaveId(gameId);
     return this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId])
       .then(() => {
-        return this.client.query('DELETE FROM completed_games where game_id = $1', [gameId]);
+        return this.client.query('DELETE FROM completed_game where game_id = $1', [gameId]);
       });
   }
 
@@ -255,9 +256,8 @@ export class PostgreSQL implements IDatabase {
     const res = await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
     logForUndo(gameId, 'deleted', res?.rowCount, 'rows');
     const second = await this.getSaveIds(gameId);
-    const difference = first.filter((x) => !second.includes(x));
     logForUndo(gameId, 'second', second);
-    logForUndo(gameId, 'Rollback difference', difference);
+    logForUndo(gameId, 'Rollback difference', difference(first, second));
   }
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {

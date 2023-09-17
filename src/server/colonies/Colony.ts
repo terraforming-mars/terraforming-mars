@@ -86,16 +86,24 @@ export abstract class Colony implements IColony {
       this.trackPosition = this.colonies.length;
     }
 
+    // TODO(kberg): Time for an onNewColony hook.
+
     // Poseidon hook
     const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
     if (poseidon !== undefined) {
-      poseidon.production.add(Resource.MEGACREDITS, 1);
+      poseidon.production.add(Resource.MEGACREDITS, 1, {log: true});
     }
 
     // CEO Naomi hook
     if (player.cardIsInEffect(CardName.NAOMI)) {
       player.stock.add(Resource.ENERGY, 2, {log: true});
       player.stock.add(Resource.MEGACREDITS, 3, {log: true});
+    }
+
+    // Colony Trade Hub hook
+    const colonyTradeHub = player.game.getPlayers().find((player) => player.cardIsInEffect(CardName.COLONY_TRADE_HUB));
+    if (colonyTradeHub !== undefined) {
+      colonyTradeHub.production.add(Resource.MEGACREDITS, 2, {log: true});
     }
   }
 
@@ -131,12 +139,8 @@ export abstract class Colony implements IColony {
     }
 
     // Ask the player if they want to increase the track
-    player.game.defer(new IncreaseColonyTrack(
-      player,
-      this,
-      steps,
-      () => this.handleTrade(player, tradeOptions),
-    ));
+    player.game.defer(new IncreaseColonyTrack(player, this, steps).andThen(
+      () => this.handleTrade(player, tradeOptions)));
   }
 
   private handleTrade(player: IPlayer, options: TradeOptions) {
@@ -171,7 +175,7 @@ export abstract class Colony implements IColony {
   private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
     const game = player.game;
 
-    let action: undefined | DeferredAction = undefined;
+    let action: undefined | DeferredAction<any> = undefined;
     switch (bonusType) {
     case ColonyBenefit.ADD_RESOURCES_TO_CARD:
       const cardResource = this.metadata.cardResource;

@@ -143,7 +143,7 @@ describe('SpecializedSettlement', function() {
     hazardSpace.tile = {tileType: TileType.DUST_STORM_MILD, protectedHazard: false};
 
     const selectSpace = cast(card.play(player), SelectSpace);
-    expect(selectSpace.availableSpaces).contains(hazardSpace);
+    expect(selectSpace.spaces).contains(hazardSpace);
     selectSpace.cb(hazardSpace);
 
     expect(hazardSpace.tile?.tileType).eq(TileType.CITY);
@@ -161,7 +161,7 @@ describe('SpecializedSettlement', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 3}));
 
     const selectSpace = cast(action, SelectSpace);
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     space.bonus = spaceBonus instanceof Array ? spaceBonus : [spaceBonus];
     selectSpace.cb(space);
 

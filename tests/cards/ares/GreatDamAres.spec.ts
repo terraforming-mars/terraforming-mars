@@ -30,7 +30,7 @@ describe('GreatDamAres', function() {
   it('Requirements', function() {
     maxOutOceans(player, 4);
     const action = cast(churnPlay(card, player), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
 
     expect(space.tile!.tileType).to.eq(TileType.GREAT_DAM);

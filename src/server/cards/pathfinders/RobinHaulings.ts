@@ -50,11 +50,11 @@ export class RobinHaulings extends Card implements ICorporationCard {
   }
 
   private canRaiseVenus(player: IPlayer) {
-    return player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford(0, {tr: {venus: 1}});
+    return player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford({cost: 0, tr: {venus: 1}});
   }
 
   private canRaiseOxygen(player: IPlayer) {
-    return player.game.getOxygenLevel() < MAX_OXYGEN_LEVEL && player.canAfford(0, {tr: {oxygen: 1}});
+    return player.game.getOxygenLevel() < MAX_OXYGEN_LEVEL && player.canAfford({cost: 0, tr: {oxygen: 1}});
   }
 
   public canAct(player: IPlayer) {

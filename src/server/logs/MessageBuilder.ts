@@ -24,84 +24,84 @@ export class MessageBuilder {
     };
   }
 
-  public string(value: string): MessageBuilder {
+  public string(value: string): this {
     this.message.data.push({type: LogMessageDataType.STRING, value});
     return this;
   }
 
-  public rawString(value: string): MessageBuilder {
+  public rawString(value: string): this {
     this.message.data.push({type: LogMessageDataType.RAW_STRING, value});
     return this;
   }
 
-  public number(value: number): MessageBuilder {
+  public number(value: number): this {
     this.message.data.push({type: LogMessageDataType.RAW_STRING, value: value.toString()});
     return this;
   }
 
-  public player(value: IPlayer): MessageBuilder {
+  public player(value: IPlayer): this {
     return this.playerColor(value.color);
   }
 
-  public playerColor(value: Color): MessageBuilder {
+  public playerColor(value: Color): this {
     this.message.data.push({type: LogMessageDataType.PLAYER, value});
     return this;
   }
 
-  public card(value: ICard): MessageBuilder {
+  public card(value: ICard): this {
     return this.cardName(value.name);
   }
 
-  public cardName(value: CardName): MessageBuilder {
+  public cardName(value: CardName): this {
     this.message.data.push({type: LogMessageDataType.CARD, value});
     return this;
   }
 
-  public award(value: IAward): MessageBuilder {
+  public award(value: IAward): this {
     this.message.data.push({type: LogMessageDataType.AWARD, value: value.name});
     return this;
   }
 
-  public milestone(value: IMilestone): MessageBuilder {
+  public milestone(value: IMilestone): this {
     this.message.data.push({type: LogMessageDataType.MILESTONE, value: value.name});
     return this;
   }
 
-  public colony(value: IColony): MessageBuilder {
+  public colony(value: IColony): this {
     this.message.data.push({type: LogMessageDataType.COLONY, value: value.name});
     return this;
   }
 
-  public standardProject(value: string): MessageBuilder {
+  public standardProject(value: string): this {
     this.message.data.push({type: LogMessageDataType.STANDARD_PROJECT, value});
     return this;
   }
 
-  public party(value: IParty): MessageBuilder {
+  public party(value: IParty): this {
     this.message.data.push({type: LogMessageDataType.PARTY, value: value.name});
     return this;
   }
 
-  public partyName(value: PartyName): MessageBuilder {
+  public partyName(value: PartyName): this {
     this.message.data.push({type: LogMessageDataType.PARTY, value});
     return this;
   }
 
-  public tileType(value: TileType): MessageBuilder {
+  public tileType(value: TileType): this {
     this.message.data.push({type: LogMessageDataType.TILE_TYPE, value: value.toString()});
     return this;
   }
 
-  public spaceBonus(value: SpaceBonus): MessageBuilder {
+  public spaceBonus(value: SpaceBonus): this {
     this.message.data.push({type: LogMessageDataType.SPACE_BONUS, value: value.toString()});
     return this;
   }
 
-  public globalEvent(value: IGlobalEvent): MessageBuilder {
+  public globalEvent(value: IGlobalEvent): this {
     return this.globalEventName(value.name);
   }
 
-  public globalEventName(value: GlobalEventName): MessageBuilder {
+  public globalEventName(value: GlobalEventName): this {
     this.message.data.push({type: LogMessageDataType.GLOBAL_EVENT, value: value.toString()});
     return this;
   }

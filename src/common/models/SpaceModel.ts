@@ -18,4 +18,5 @@ export type SpaceModel = {
   highlight?: SpaceHighlight;
   rotated?: true; // Absent or true
   gagarin?: number; // 0 means current
+  cathedral?: true; // Absent or true
 }

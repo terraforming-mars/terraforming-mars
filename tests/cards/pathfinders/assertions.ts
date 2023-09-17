@@ -29,7 +29,7 @@ export function assertSendDelegateToArea(player: IPlayer, action: DeferredAction
 export function assertPlaceCityTile(player: IPlayer, action: DeferredAction) {
   const placeCityTile = cast(action, PlaceCityTile);
   const selectSpace = cast(placeCityTile.execute(), SelectSpace);
-  const space = selectSpace.availableSpaces[0];
+  const space = selectSpace.spaces[0];
   expect(space.tile).is.undefined;
 
   selectSpace.cb(space);

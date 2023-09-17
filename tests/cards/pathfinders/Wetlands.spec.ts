@@ -104,11 +104,11 @@ describe('Wetlands', function() {
     expect(player.plants).eq(3);
 
     const selectSpace = cast(action, SelectSpace);
-    expect(selectSpace.availableSpaces.map(toSpaceId)).deep.eq(['09', '23']);
+    expect(selectSpace.spaces.map(toSpaceId)).deep.eq(['09', '23']);
 
     expect(game.getOxygenLevel()).eq(0);
 
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.WETLANDS);
     runAllActions(game);
@@ -172,11 +172,11 @@ describe('Wetlands', function() {
     expect(player.plants).eq(3);
 
     const selectSpace = cast(action, SelectSpace);
-    expect(selectSpace.availableSpaces.map(toSpaceId)).deep.eq(['09', '23']);
+    expect(selectSpace.spaces.map(toSpaceId)).deep.eq(['09', '23']);
 
     expect(game.getOxygenLevel()).eq(0);
 
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     expect(space.id).eq(claimedSpace.id);
     selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.WETLANDS);

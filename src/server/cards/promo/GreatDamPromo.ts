@@ -10,7 +10,7 @@ import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
 import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 
 export class GreatDamPromo extends Card implements IProjectCard {
   constructor(
@@ -40,8 +40,8 @@ export class GreatDamPromo extends Card implements IProjectCard {
       victoryPoints: 1,
     });
   }
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
@@ -55,8 +55,8 @@ export class GreatDamPromo extends Card implements IProjectCard {
     });
   }
 
-  private getAvailableSpaces(player: IPlayer): Array<Space> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter(
         (space) => player.game.board.getAdjacentSpaces(space).filter(
           (adjacentSpace) => Board.isOceanSpace(adjacentSpace),

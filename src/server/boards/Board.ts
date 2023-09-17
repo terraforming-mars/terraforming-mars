@@ -1,5 +1,5 @@
 import {Space} from './Space';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
@@ -7,6 +7,15 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {AresHandler} from '../ares/AresHandler';
+import {Units} from '../../common/Units';
+import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
+import {TRSource} from '../../common/cards/TRSource';
+
+export type SpaceCosts = {
+  stock: Units,
+  production: number,
+  tr: TRSource,
+};
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -128,24 +137,96 @@ export abstract class Board {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
-  public getEmptySpaces(): ReadonlyArray<Space> {
-    return this.spaces.filter((space) => space.tile === undefined);
+  /**
+   * Update `costs` with any costs for this `space`.
+   *
+   * @returns `true` when costs has changed, `false` when it has not.
+   */
+  protected spaceCosts(_space: Space): SpaceCosts {
+    return {stock: {...Units.EMPTY}, production: 0, tr: {}};
   }
 
-  public getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<Space> {
-    const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
-      const hasPlayerMarker = space.player !== undefined;
-      // A space is available if it doesn't have a player marker on it or it belongs to |player|
-      const safeForPlayer = !hasPlayerMarker || space.player === player;
-      // And also, if it doesn't have a tile. Unless it's a hazard tile.
-      const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space);
-      // If it does have a hazard tile, make sure it's not a protected one.
-      const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
-      // tiles are not placeable on restricted spaces at all
-      const isRestricted = space.bonus.includes(SpaceBonus.RESTRICTED);
-      return !isRestricted && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
-    });
+  private computeAdditionalCosts(space: Space, aresExtension: boolean): SpaceCosts {
+    const costs: SpaceCosts = this.spaceCosts(space);
 
+    if (aresExtension === false) {
+      return costs;
+    }
+
+    switch (hazardSeverity(space.tile?.tileType)) {
+    case HazardSeverity.MILD:
+      costs.stock.megacredits += 8;
+      break;
+    case HazardSeverity.SEVERE:
+      costs.stock.megacredits += 16;
+      break;
+    }
+
+    for (const adjacentSpace of this.getAdjacentSpaces(space)) {
+      switch (hazardSeverity(adjacentSpace.tile?.tileType)) {
+      case HazardSeverity.MILD:
+        costs.production += 1;
+        break;
+      case HazardSeverity.SEVERE:
+        costs.production += 2;
+        break;
+      }
+      if (adjacentSpace.adjacency !== undefined) {
+        const adjacency = adjacentSpace.adjacency;
+        costs.stock.megacredits += adjacency.cost ?? 0;
+        // TODO(kberg): offset costs with heat and MC bonuses.
+        // for (const bonus of adjacency.bonus) {
+        //   case (bonus) {
+        //     switch SpaceBonus.MEGACREDITS:
+        //       costs.stock.megacredits--;
+        //     switch SpaceBonus.MEGACREDITS:
+        //       costs.stock.megacredits--;
+        //   }
+        // }
+      }
+    }
+    return costs;
+  }
+
+  public canAfford(player: IPlayer, space: Space, canAffordOptions?: CanAffordOptions) {
+    const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
+    if (additionalCosts.stock.megacredits > 0) {
+      const plan: CanAffordOptions = canAffordOptions !== undefined ? {...canAffordOptions} : {cost: 0, tr: {}};
+      plan.cost += additionalCosts.stock.megacredits;
+      plan.tr = additionalCosts.tr;
+
+      const afford = player.canAfford(plan);
+      if (afford === false) {
+        return false;
+      }
+    }
+    if (additionalCosts.production > 0) {
+      const p = player.production;
+      const sum = p.megacredits + 5 + p.steel + p.titanium + p.plants + p.energy + p.heat;
+      return sum > additionalCosts.production;
+    }
+    return true;
+  }
+
+  public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+    const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
+      if (space.bonus.includes(SpaceBonus.RESTRICTED)) {
+        return false;
+      }
+
+      // A space is available if it doesn't have a player marker on it, or it belongs to |player|
+      if (space.player !== undefined && space.player !== player) {
+        return false;
+      }
+
+      const playableSpace = space.tile === undefined || (AresHandler.hasHazardTile(space) && space.tile?.protectedHazard !== true);
+
+      if (!playableSpace) {
+        return false;
+      }
+
+      return this.canAfford(player, space, canAffordOptions);
+    });
     return landSpaces;
   }
 
@@ -257,8 +338,8 @@ export function playerTileFn(player: IPlayer) {
   return (space: Space) => space.player?.id === player.id;
 }
 
-export function isSpecialTile(space: Space): boolean {
-  switch (space.tile?.tileType) {
+export function isSpecialTile(tileType: TileType | undefined): boolean {
+  switch (tileType) {
   case TileType.GREENERY:
   case TileType.OCEAN:
   case TileType.CITY:
@@ -274,4 +355,8 @@ export function isSpecialTile(space: Space): boolean {
   default:
     return true;
   }
+}
+
+export function isSpecialTileSpace(space: Space): boolean {
+  return isSpecialTile(space.tile?.tileType);
 }

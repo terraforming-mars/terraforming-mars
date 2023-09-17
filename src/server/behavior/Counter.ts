@@ -5,6 +5,7 @@ import {IPlayer} from '../IPlayer';
 import {Countable, CountableUnits} from './Countable';
 import {hasIntersection} from '../../common/utils/utils';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {CardResource} from '../../common/CardResource';
 
 /**
  * Counts things in game state.
@@ -57,7 +58,11 @@ export class Counter {
     }
 
     if (countable.oceans !== undefined) {
-      sum += game.board.getOceanSpaces({wetlands: true}).length;
+      sum += game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
+    }
+
+    if (countable.floaters !== undefined) {
+      sum += player.getResourceCount(CardResource.FLOATER);
     }
 
     if (countable.greeneries !== undefined) {
@@ -98,6 +103,16 @@ export class Counter {
 
     if (countable.resourcesHere !== undefined) {
       sum += card.resourceCount;
+    }
+
+    if (countable.colonies !== undefined) {
+      player.game.colonies.forEach((colony) => {
+        if (countable.all) {
+          sum += colony.colonies.length;
+        } else {
+          sum += colony.colonies.filter((colony) => colony === player.id).length;
+        }
+      });
     }
 
     if (countable.moon !== undefined) {

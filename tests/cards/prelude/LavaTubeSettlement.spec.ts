@@ -42,10 +42,10 @@ describe('LavaTubeSettlement', function() {
 
     card.play(player);
     const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
 
-    expect(selectSpace.availableSpaces[0].tile && selectSpace.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
-    expect(selectSpace.availableSpaces[0].player).to.eq(player);
+    expect(selectSpace.spaces[0].tile && selectSpace.spaces[0].tile.tileType).to.eq(TileType.CITY);
+    expect(selectSpace.spaces[0].player).to.eq(player);
     expect(player.production.energy).to.eq(0);
   });
 });

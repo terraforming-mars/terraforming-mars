@@ -27,7 +27,7 @@ describe('PermafrostExtraction', function() {
     cast(card.play(player), undefined);
     runAllActions(game);
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(game.board.getOceanSpaces()).has.length(1);
   });
 });

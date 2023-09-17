@@ -13,3 +13,4 @@ export const digit = true;
 export const played = true;
 export const multiplier = true;
 export const max = true;
+export const nextTo = true;

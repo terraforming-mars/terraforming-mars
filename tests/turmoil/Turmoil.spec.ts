@@ -186,7 +186,7 @@ describe('Turmoil', function() {
     player.worldGovernmentTerraforming();
     const action = cast(player.getWaitingFor(), OrOptions);
     const placeOcean = cast(action.options.find((option) => option.title === 'Add an ocean'), SelectSpace);
-    const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
+    const steelSpace = placeOcean.spaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
 
     placeOcean.cb(steelSpace!);
     expect(player.steel).to.eq(0); // should not give ruling policy bonus

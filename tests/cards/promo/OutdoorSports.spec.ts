@@ -3,6 +3,7 @@ import {testGame} from '../../TestGame';
 import {OutdoorSports} from '../../../src/server/cards/promo/OutdoorSports';
 import {TestPlayer} from '../../TestPlayer';
 import {Space} from '../../../src/server/boards/Space';
+import {partition} from '../../../src/common/utils/utils';
 
 describe('OutdoorSports', function() {
   let card: OutdoorSports;
@@ -20,8 +21,10 @@ describe('OutdoorSports', function() {
 
     const spacesNextToOceanSpace = board.getAdjacentSpaces(oceanSpace);
     const citySpaces = board.getAvailableSpacesForCity(player);
-    spaceNextToOcean = citySpaces.filter((space) => spacesNextToOceanSpace.includes(space))[0];
-    spaceNotNextToOcean = citySpaces.filter((space) => !spacesNextToOceanSpace.includes(space))[0];
+    [[spaceNextToOcean], [spaceNotNextToOcean]] = partition(
+      citySpaces,
+      (space) => spacesNextToOceanSpace.includes(space),
+    );
   });
 
   it('cannotPlay', function() {

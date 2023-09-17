@@ -47,13 +47,13 @@ describe('SecretLabs', function() {
     runAllActions(player.game);
 
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
-    expect(selectSpace.availableSpaces[0].tile).is.undefined;
+    expect(selectSpace.spaces[0].tile).is.undefined;
 
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
 
     runAllActions(player.game);
 
-    expect(selectSpace.availableSpaces[0].tile!.tileType).eq(TileType.OCEAN);
+    expect(selectSpace.spaces[0].tile!.tileType).eq(TileType.OCEAN);
     expect(microbeCard.resourceCount).eq(2);
   });
 

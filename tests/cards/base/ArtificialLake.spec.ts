@@ -28,12 +28,12 @@ describe('ArtificialLake', function() {
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.availableSpaces.forEach((space) => {
+    action.spaces.forEach((space) => {
       expect(space.spaceType).to.eq(SpaceType.LAND);
     });
 
-    action.cb(action!.availableSpaces[0]);
-    const placedTile = action.availableSpaces[0].tile;
+    action.cb(action!.spaces[0]);
+    const placedTile = action.spaces[0].tile;
     expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
     expect(card.getVictoryPoints(player)).to.eq(1);

@@ -65,11 +65,11 @@ export class DeferredActionsQueue {
   }
 
   // The following methods are used in tests
-  public peek(): DeferredAction | undefined {
+  public peek(): DeferredAction<any> | undefined {
     return this.queue[this.nextItemIndex()];
   }
 
-  public pop(): DeferredAction | undefined {
+  public pop(): DeferredAction<any> | undefined {
     return this.queue.splice(this.nextItemIndex(), 1)[0];
   }
 
@@ -77,7 +77,7 @@ export class DeferredActionsQueue {
     // Special hook for trade bonus deferred actions
     // So that they happen for all players at the same time
     if (action instanceof GiveColonyBonus) {
-      action.cb = cb;
+      action.andThen(cb);
       action.execute();
       return;
     }

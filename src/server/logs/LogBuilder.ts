@@ -14,7 +14,7 @@ export class LogBuilder extends MessageBuilder {
     this.type = LogMessageType.DEFAULT;
   }
 
-  public forNewGeneration(): LogBuilder {
+  public forNewGeneration(): this {
     this.type = LogMessageType.NEW_GENERATION;
     return this;
   }

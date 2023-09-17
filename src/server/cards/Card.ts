@@ -5,7 +5,7 @@ import {CardDiscount} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './requirements/CardRequirements';
@@ -51,7 +51,7 @@ type Properties = {
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
+  tilesBuilt?: Array<TileType>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
@@ -167,7 +167,7 @@ export abstract class Card {
   public get tilesBuilt(): Array<TileType> {
     return this.properties.tilesBuilt || [];
   }
-  public canPlay(player: IPlayer): boolean {
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
     //
     // Is this block necessary?
     const satisfied = this.requirements?.satisfies(player);
@@ -177,13 +177,15 @@ export abstract class Card {
     // It's repeated at Player.simpleCanPlay.
     //
 
-    if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
-      return false;
+    if (this.behavior !== undefined) {
+      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
+        return false;
+      }
     }
-    return this.bespokeCanPlay(player);
+    return this.bespokeCanPlay(player, canAffordOptions);
   }
 
-  public bespokeCanPlay(_player: IPlayer): boolean {
+  public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {
     return true;
   }
 
@@ -215,7 +217,7 @@ export abstract class Card {
       return vp;
     }
     if (typeof(vp) === 'object') {
-      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+      return new Counter(player, this).count(vp, 'vps');
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
@@ -341,12 +343,17 @@ export function validateBehavior(behavior: Behavior | undefined) : void {
     return;
   }
   if (behavior.spend) {
-    if (behavior.spend.megacredits ?? behavior.spend.heat) {
-      validate(behavior.tr === undefined, 'spend.megacredits and spend.heat are not yet compatible with tr');
-      validate(behavior.global === undefined, 'spend.megacredits and spend.heat are not yet compatible with global');
-      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.habitatRate');
-      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.logisticsRate');
-      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.miningRate');
+    const spend = behavior.spend;
+    if (spend.megacredits) {
+      validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
+      validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
+      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
+      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
+      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
+    }
+    // Don't spend heat with other types yet. It's probably not compatible. Check carefully.
+    if (spend.heat) {
+      validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
   }
 }

@@ -89,7 +89,7 @@ export class Server {
       passedPlayers: game.getPassedPlayers(),
       pathfinders: createPathfindersModel(game),
       phase: game.phase,
-      spaces: this.getSpaces(game.board, game.gagarinBase),
+      spaces: this.getSpaces(game.board, game.gagarinBase, game.stJosephCathedrals),
       spectatorId: game.spectatorId,
       temperature: game.getTemperature(),
       isTerraformed: game.marsIsTerraformed(),
@@ -224,6 +224,8 @@ export class Server {
       canUseHeat: undefined,
       canUseSeeds: undefined,
       canUseData: undefined,
+      canUseGraphene: undefined,
+      canUseAsteroids: undefined,
       players: undefined,
       availableSpaces: undefined,
       maxByDefault: undefined,
@@ -232,6 +234,8 @@ export class Server {
       science: undefined,
       seeds: undefined,
       auroraiData: undefined,
+      graphene: undefined,
+      kuiperAsteroids: undefined,
       coloniesModel: undefined,
       payProduction: undefined,
       aresData: undefined,
@@ -265,6 +269,8 @@ export class Server {
       playerInputModel.canUseLunaTradeFederationTitanium = player.canUseTitaniumAsMegacredits;
       playerInputModel.science = player.getSpendableScienceResources();
       playerInputModel.seeds = player.getSpendableSeedResources();
+      playerInputModel.graphene = player.getSpendableGraphene();
+      playerInputModel.kuiperAsteroids = player.getSpendableKuiperAsteroids();
       break;
     case 'card':
       const selectCard = waitingFor as SelectCard<ICard>;
@@ -286,14 +292,18 @@ export class Server {
     case 'payment':
       const sp = waitingFor as SelectPayment;
       playerInputModel.amount = sp.amount;
-      playerInputModel.canUseSteel = sp.canUseSteel;
-      playerInputModel.canUseTitanium = sp.canUseTitanium;
-      playerInputModel.canUseHeat = sp.canUseHeat;
-      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUseLunaTradeFederationTitanium;
-      playerInputModel.canUseSeeds = sp.canUseSeeds;
+      // These ?? false might be unnecessary.
+      playerInputModel.canUseSteel = sp.canUse.steel ?? false;
+      playerInputModel.canUseTitanium = sp.canUse.titanium ?? false;
+      playerInputModel.canUseHeat = sp.canUse.heat ?? false;
+      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUse.lunaTradeFederationTitanium ?? false;
+      playerInputModel.canUseSeeds = sp.canUse.seeds ?? false;
       playerInputModel.seeds = player.getSpendableSeedResources();
-      playerInputModel.canUseData = sp.canUseData;
+      playerInputModel.canUseData = sp.canUse.data ?? false;
       playerInputModel.auroraiData = player.getSpendableData();
+      playerInputModel.canUseGraphene = sp.canUse.graphene && player.getSpendableData() > 0;
+      playerInputModel.canUseAsteroids = sp.canUse.kuiperAsteroids && player.getSpendableKuiperAsteroids() > 0;
+      playerInputModel.kuiperAsteroids = player.getSpendableKuiperAsteroids();
       break;
     case 'player':
       playerInputModel.players = (waitingFor as SelectPlayer).players.map(
@@ -301,7 +311,7 @@ export class Server {
       );
       break;
     case 'space':
-      playerInputModel.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
+      playerInputModel.availableSpaces = (waitingFor as SelectSpace).spaces.map(
         (space) => space.id,
       );
       break;
@@ -352,7 +362,7 @@ export class Server {
 
   public static getCards(
     player: IPlayer,
-    cards: Array<ICard>,
+    cards: ReadonlyArray<ICard>,
     options: {
       showResources?: boolean,
       showCalculatedCost?: boolean,
@@ -526,7 +536,7 @@ export class Server {
     return undefined;
   }
 
-  private static getSpaces(board: Board, gagarin: Array<SpaceId>): Array<SpaceModel> {
+  private static getSpaces(board: Board, gagarin: ReadonlyArray<SpaceId> = [], cathedrals: ReadonlyArray<SpaceId> = []): Array<SpaceModel> {
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
     const noctisCitySpaceIds = board.getNoctisCitySpaceId();
 
@@ -557,6 +567,9 @@ export class Server {
       const gagarinIndex = gagarin.indexOf(space.id);
       if (gagarinIndex > -1) {
         model.gagarin = gagarinIndex;
+      }
+      if (cathedrals.includes(space.id)) {
+        model.cathedral = true;
       }
 
       return model;
@@ -627,7 +640,7 @@ export class Server {
         logisticsRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
         habitatRate: moonData.habitatRate,
-        spaces: this.getSpaces(moonData.moon, []),
+        spaces: this.getSpaces(moonData.moon),
       };
     }, () => undefined);
   }

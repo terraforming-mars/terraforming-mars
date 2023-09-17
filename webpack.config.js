@@ -51,10 +51,7 @@ module.exports = {
     extensions: ['.ts', '.vue', '.js'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-    },
-    fallback: {
-      util: false,
-    },
+    }
   },
   module: {
     rules: [

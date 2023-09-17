@@ -25,7 +25,7 @@ describe('ImmigrantCity', function() {
   it('Should play', function() {
     player.production.add(Resource.ENERGY, 1);
     const action = cast(card.play(player), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     runAllActions(game);
 
     expect(player.production.energy).to.eq(0);
@@ -43,7 +43,7 @@ describe('ImmigrantCity', function() {
     expect(card.canPlay(player)).is.true;
 
     const action = cast(card.play(player), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     runAllActions(game);
 
     expect(player.production.energy).to.eq(0);
@@ -63,7 +63,7 @@ describe('ImmigrantCity', function() {
     expect(card.canPlay(player)).is.true;
 
     const action = cast(card.play(player), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     runAllActions(game);
 
     expect(player.production.energy).to.eq(0);

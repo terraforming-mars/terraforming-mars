@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {Space} from '../../boards/Space';
-import {IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Tag} from '../../../common/cards/Tag';
@@ -27,8 +27,8 @@ export abstract class MiningCard extends Card implements IProjectCard {
     });
   }
   public bonusResource?: Array<Resource>;
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
   private isAres(): boolean {
     return this.name === CardName.MINING_AREA_ARES ||
@@ -40,8 +40,8 @@ export abstract class MiningCard extends Card implements IProjectCard {
     }
     return undefined;
   }
-  protected getAvailableSpaces(player: IPlayer): Array<Space> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+  protected getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       // Ares-only: exclude spaces already covered (which is only returned if the tile is a hazard tile.)
       .filter((space) => space.tile === undefined)
       .filter((space) => space.bonus.includes(SpaceBonus.STEEL) || space.bonus.includes(SpaceBonus.TITANIUM));
@@ -80,17 +80,20 @@ export abstract class MiningCard extends Card implements IProjectCard {
         bonusResources.push(Resource.TITANIUM);
       }
 
-      player.game.defer(new SelectResourceTypeDeferred(
-        player, bonusResources,
-        'Select a resource to gain 1 unit of production',
-        (resource) => {
-          player.production.add(resource, 1, {log: true});
-          this.bonusResource = [resource];
-          const spaceBonus = resource === Resource.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
-          player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
-          space.adjacency = this.getAdjacencyBonus(spaceBonus);
-        },
-      ));
+      player.game.defer(
+        new SelectResourceTypeDeferred(
+          player,
+          bonusResources,
+          'Select a resource to gain 1 unit of production')
+          .andThen(
+            (resource) => {
+              player.production.add(resource, 1, {log: true});
+              this.bonusResource = [resource];
+              const spaceBonus = resource === Resource.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
+              player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
+              space.adjacency = this.getAdjacencyBonus(spaceBonus);
+            },
+          ));
       return undefined;
     });
   }

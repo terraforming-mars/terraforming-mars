@@ -36,7 +36,7 @@ describe('OpenCity', function() {
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(game.board.getCitiesOnMars()).has.length(1);
 
     expect(player.production.energy).to.eq(0);

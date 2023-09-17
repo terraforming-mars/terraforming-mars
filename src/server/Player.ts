@@ -36,7 +36,7 @@ import {Tag} from '../common/cards/Tag';
 import {Timer} from '../common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {GameCards} from './GameCards';
-import {DrawCards} from './deferredActions/DrawCards';
+import {AllOptions, DrawCards, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
@@ -70,6 +70,7 @@ import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from '
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {sum} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
+import {ChooseCards} from './deferredActions/ChooseCards';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -826,7 +827,8 @@ export class Player implements IPlayer {
       cardsToKeep = 5;
     }
 
-    const action = DrawCards.choose(this, dealtCards, {paying: true, keepMax: cardsToKeep});
+    // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
+    const action = new ChooseCards(this, dealtCards, {paying: true, keepMax: cardsToKeep}).execute();
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
   }
 
@@ -863,6 +865,8 @@ export class Player implements IPlayer {
       science: card.tags.includes(Tag.MOON),
       // TODO(kberg): add this.corporation.name === CardName.AURORAI
       auroraiData: card.type === CardType.STANDARD_PROJECT,
+      graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
+      kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
     };
   }
 
@@ -896,19 +900,21 @@ export class Player implements IPlayer {
     return this.playCard(selectedCard, payment, cardAction);
   }
 
+  public resourcesOnCard(name: CardName): number {
+    const card = this.tableau.find((card) => card.name === name);
+    return card?.resourceCount ?? 0;
+  }
+
   public getSpendableMicrobes(): number {
-    const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
-    return psychrophiles?.resourceCount ?? 0;
+    return this.resourcesOnCard(CardName.PSYCHROPHILES);
   }
 
   public getSpendableFloaters(): number {
-    const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
-    return dirigibles?.resourceCount ?? 0;
+    return this.resourcesOnCard(CardName.DIRIGIBLES);
   }
 
   public getSpendableScienceResources(): number {
-    const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
-    return lunaArchives?.resourceCount ?? 0;
+    return this.resourcesOnCard(CardName.LUNA_ARCHIVES);
   }
 
   public getSpendableSeedResources(): number {
@@ -917,6 +923,14 @@ export class Player implements IPlayer {
 
   public getSpendableData(): number {
     return this.getCorporation(CardName.AURORAI)?.resourceCount ?? 0;
+  }
+
+  public getSpendableGraphene(): number {
+    return this.resourcesOnCard(CardName.CARBON_NANOSYSTEMS);
+  }
+
+  public getSpendableKuiperAsteroids(): number {
+    return this.resourcesOnCard(CardName.KUIPER_COOPERATIVE);
   }
 
   public pay(payment: Payment) {
@@ -932,34 +946,24 @@ export class Player implements IPlayer {
       this.defer(this.spendHeat(payment.heat));
     }
 
-    // TODO(kberg): make it faster to fetch individual cards so this
-    // weird if / for loop can be removed.
-    if (payment.microbes > 0 || payment.floaters > 0 || payment.science > 0) {
-      for (const playedCard of this.playedCards) {
-        if (playedCard.name === CardName.PSYCHROPHILES) {
-          this.removeResourceFrom(playedCard, payment.microbes);
-        }
-
-        if (playedCard.name === CardName.DIRIGIBLES) {
-          this.removeResourceFrom(playedCard, payment.floaters);
-        }
-
-        if (playedCard.name === CardName.LUNA_ARCHIVES) {
-          this.removeResourceFrom(playedCard, payment.science);
-        }
+    const removeResourcesOnCard = (name: CardName, count: number) => {
+      if (count === 0) {
+        return;
       }
-    }
+      const card = this.tableau.find((card) => card.name === name);
+      if (card === undefined) {
+        throw new Error('Card ' + name + ' not found');
+      }
+      this.removeResourceFrom(card, count, {log: true});
+    };
 
-    if (payment.seeds > 0) {
-      const soylent = this.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS);
-      if (soylent === undefined) throw new Error('Cannot pay with seeds without ' + CardName.SOYLENT_SEEDLING_SYSTEMS);
-      this.removeResourceFrom(soylent, payment.seeds);
-    }
-    if (payment.auroraiData > 0) {
-      const aurorai = this.getCorporation(CardName.AURORAI);
-      if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
-      this.removeResourceFrom(aurorai, payment.auroraiData);
-    }
+    removeResourcesOnCard(CardName.PSYCHROPHILES, payment.microbes);
+    removeResourcesOnCard(CardName.DIRIGIBLES, payment.floaters);
+    removeResourcesOnCard(CardName.LUNA_ARCHIVES, payment.science);
+    removeResourcesOnCard(CardName.CARBON_NANOSYSTEMS, payment.graphene);
+    removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
+    removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
+    removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
 
     if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
@@ -1141,13 +1145,15 @@ export class Player implements IPlayer {
       const diff = this.cardsInHand.length * this.cardCost;
       this.stock.deduct(Resource.MEGACREDITS, diff);
     }
+    // Calculating this before playing the corporation card, which might change the player's hand size.
+    const numberOfCardInHand = this.cardsInHand.length;
     corporationCard.play(this);
     if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
       this.pendingInitialActions.push(corporationCard);
     }
     this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     if (additionalCorp === false) {
-      this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(this.cardsInHand.length));
+      this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(numberOfCardInHand));
     }
 
     this.triggerOtherCorpEffects(corporationCard);
@@ -1159,12 +1165,12 @@ export class Player implements IPlayer {
     }
   }
 
-  public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {
+  public drawCard(count?: number, options?: DrawOptions): undefined {
     return DrawCards.keepAll(this, count, options).execute();
   }
 
-  public drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard> {
-    return DrawCards.keepSome(this, count, options).execute();
+  public drawCardKeepSome(count: number, options: AllOptions): void {
+    this.game.defer(DrawCards.keepSome(this, count, options));
   }
 
   public discardPlayedCard(card: IProjectCard) {
@@ -1208,16 +1214,25 @@ export class Player implements IPlayer {
         vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
       }
       if (!this.cardIsInEffect(CardName.VANALLEN)) {
-        this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
+        const cost = this.milestoneCost();
+        this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
       }
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
   }
 
+  private milestoneCost() {
+    return this.isCorporation(CardName.NIRGAL_ENTERPRISES) ? 0 : MILESTONE_COST;
+  }
+
+  private awardFundingCost() {
+    return this.isCorporation(CardName.NIRGAL_ENTERPRISES) ? 0 : this.game.getAwardFundingCost();
+  }
+
   private fundAward(award: IAward): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')', () => {
-      this.game.defer(new SelectPaymentDeferred(this, this.game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
+      this.game.defer(new SelectPaymentDeferred(this, this.awardFundingCost(), {title: 'Select how to pay for award'}));
       this.game.fundAward(this, award);
       return undefined;
     });
@@ -1231,16 +1246,15 @@ export class Player implements IPlayer {
     });
   }
 
-  // Exposed for tests
   public pass(): void {
     this.game.playerHasPassed(this);
     this.lastCardPlayed = undefined;
+    this.game.log('${0} passed', (b) => b.player(this));
   }
 
   private passOption(): PlayerInput {
     return new SelectOption('Pass for this generation', 'Pass', () => {
       this.pass();
-      this.game.log('${0} passed', (b) => b.player(this));
       return undefined;
     });
   }
@@ -1322,21 +1336,19 @@ export class Player implements IPlayer {
     return playableCards;
   }
 
-  // TODO(kberg): After migration, see if this can become private again.
-  // Or perhaps moved into card?
-  public canAffordCard(card: IProjectCard): boolean {
+  public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
     const trSource: TRSource | DynamicTRSource | undefined = card.tr || (card.behavior !== undefined ? getBehaviorExecutor().toTRSource(card.behavior) : undefined);
-    return this.canAfford(
-      this.getCardCost(card),
-      {
-        ...this.paymentOptionsForCard(card),
-        reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
-        tr: trSource,
-      });
+    return {
+      cost: this.getCardCost(card),
+      ...this.paymentOptionsForCard(card),
+      reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
+      tr: trSource,
+    };
   }
 
   public canPlay(card: IProjectCard): boolean | YesAnd {
-    return this.canAffordCard(card) && this.simpleCanPlay(card);
+    const options = this.affordOptionsForCard(card);
+    return this.canAfford(options) && this.simpleCanPlay(card, options);
   }
 
   /**
@@ -1344,7 +1356,7 @@ export class Player implements IPlayer {
    * Only made public for tests.
    */
   // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard): boolean | YesAnd {
+  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
     let satisfies: boolean | YesAnd = true;
     if (card.requirements !== undefined) {
       satisfies = card.requirements.satisfies(this);
@@ -1352,7 +1364,7 @@ export class Player implements IPlayer {
         return false;
       }
     }
-    const canPlay = card.canPlay(this);
+    const canPlay = card.canPlay(this, canAffordOptions);
     if (canPlay === false) {
       return false;
     }
@@ -1374,6 +1386,8 @@ export class Player implements IPlayer {
       science: this.getSpendableScienceResources(),
       seeds: this.getSpendableSeedResources(),
       auroraiData: this.getSpendableData(),
+      graphene: this.getSpendableGraphene(),
+      kuiperAsteroids: this.getSpendableKuiperAsteroids(),
     };
   }
 
@@ -1405,6 +1419,8 @@ export class Player implements IPlayer {
       science: 1,
       seeds: constants.SEED_VALUE,
       auroraiData: constants.DATA_VALUE,
+      graphene: constants.GRAPHENE_VALUE,
+      kuiperAsteroids: 1,
     };
 
     const usable: {[key in PaymentKey]: boolean} = {
@@ -1417,6 +1433,8 @@ export class Player implements IPlayer {
       science: options?.science ?? false,
       seeds: options?.seeds ?? false,
       auroraiData: options?.auroraiData ?? false,
+      graphene: options?.graphene ?? false,
+      kuiperAsteroids: options?.kuiperAsteroids ?? false,
     };
 
     // HOOK: Luna Trade Federation
@@ -1434,11 +1452,12 @@ export class Player implements IPlayer {
   }
 
   /**
-   * Returns `true` if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
+   * Returns `true` if the player can afford to pay `options.cost` mc (possibly replaceable with steel, titanium etc.)
    * and additionally pay the reserveUnits (no replaces here)
    */
-  public canAfford(cost: number, options?: CanAffordOptions): boolean {
-    const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
+  public canAfford(o: number | CanAffordOptions): boolean {
+    const options = typeof(o) === 'number' ? {cost: o} : o;
+    const reserveUnits = options.reserveUnits ?? Units.EMPTY;
     if (reserveUnits.heat > 0) {
       // Special-case heat
       const unitsWithoutHeat = {...reserveUnits, heat: 0};
@@ -1455,7 +1474,7 @@ export class Player implements IPlayer {
     }
 
     const maxPayable = this.maxSpendable(reserveUnits);
-    const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options?.tr) * REDS_RULING_POLICY_COST;
+    const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options.tr) * REDS_RULING_POLICY_COST;
     if (redsCost > 0) {
       const usableForRedsCost = this.payingAmount(maxPayable, {});
       if (usableForRedsCost < redsCost) {
@@ -1465,7 +1484,7 @@ export class Player implements IPlayer {
 
     const usable = this.payingAmount(maxPayable, options);
 
-    return cost + redsCost <= usable;
+    return options.cost + redsCost <= usable;
   }
 
   private getStandardProjects(): Array<IStandardProjectCard> {
@@ -1495,7 +1514,6 @@ export class Player implements IPlayer {
       .sort((a, b) => a.cost - b.cost);
   }
 
-  // Public for testing.
   public getStandardProjectOption(): SelectCard<IStandardProjectCard> {
     const standardProjects: Array<IStandardProjectCard> = this.getStandardProjects();
 
@@ -1654,7 +1672,7 @@ export class Player implements IPlayer {
     action.buttonLabel = 'Take action';
 
     // VanAllen can claim milestones for free:
-    if ((this.canAfford(MILESTONE_COST) || this.cardIsInEffect(CardName.VANALLEN)) && !this.game.allMilestonesClaimed() ) {
+    if ((this.canAfford(this.milestoneCost()) || this.cardIsInEffect(CardName.VANALLEN)) && !this.game.allMilestonesClaimed() ) {
       const remainingMilestones = new OrOptions();
       remainingMilestones.title = 'Claim a milestone';
       remainingMilestones.options = this.game.milestones
@@ -1717,7 +1735,7 @@ export class Player implements IPlayer {
       action.options.push(this.endTurnOption());
     }
 
-    const fundingCost = this.game.getAwardFundingCost();
+    const fundingCost = this.awardFundingCost();
     if (this.canAfford(fundingCost) && !this.game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
       remainingAwards.title = newMessage('Fund an award (${0} M€)', (b) => b.number(fundingCost)),

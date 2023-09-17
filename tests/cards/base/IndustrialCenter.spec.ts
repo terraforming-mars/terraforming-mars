@@ -35,7 +35,7 @@ describe('IndustrialCenter', function() {
     expect(game.board.getCitiesOnMars()).has.length(1);
 
     const action = cast(card.play(player), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
     expect(space.tile?.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
     expect(space.adjacency?.bonus).eq(undefined);

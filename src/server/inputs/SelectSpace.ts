@@ -6,10 +6,10 @@ import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputRes
 export class SelectSpace extends BasePlayerInput {
   constructor(
     title: string | Message,
-    public availableSpaces: ReadonlyArray<Space>,
+    public spaces: ReadonlyArray<Space>,
     public cb: (space: Space) => PlayerInput | undefined) {
     super('space', title);
-    if (availableSpaces.length === 0) {
+    if (spaces.length === 0) {
       throw new Error('No available spaces');
     }
   }
@@ -18,7 +18,7 @@ export class SelectSpace extends BasePlayerInput {
     if (!isSelectSpaceResponse(input)) {
       throw new Error('Not a valid SelectSpaceResponse');
     }
-    const space = this.availableSpaces.find(
+    const space = this.spaces.find(
       (space) => space.id === input.spaceId,
     );
     if (space === undefined) {

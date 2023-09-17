@@ -21,7 +21,7 @@ describe('MiningRightsAres', function() {
   it('Should play', function() {
     const action = cast(card.play(player), SelectSpace);
 
-    const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
+    const titaniumSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;
 
     action.cb(titaniumSpace!);
@@ -32,7 +32,7 @@ describe('MiningRightsAres', function() {
     expect(player.production.titanium).to.eq(1);
     expect(titaniumSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.TITANIUM]});
 
-    const steelSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
+    const steelSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
     expect(steelSpace).is.not.undefined;
 
     action.cb(steelSpace!);
@@ -49,12 +49,12 @@ describe('MiningRightsAres', function() {
       .find((land) => land.bonus.includes(SpaceBonus.STEEL))!;
 
     let action = cast(card.play(player), SelectSpace);
-    const size = action.availableSpaces.length;
-    expect(action.availableSpaces).contains(land);
+    const size = action.spaces.length;
+    expect(action.spaces).contains(land);
 
     land.tile = {tileType: TileType.MINING_RIGHTS};
     action = cast(card.play(player), SelectSpace);
-    expect(action.availableSpaces).has.length(size - 1);
-    expect(action.availableSpaces).does.not.contain(land);
+    expect(action.spaces).has.length(size - 1);
+    expect(action.spaces).does.not.contain(land);
   });
 });

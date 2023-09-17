@@ -48,7 +48,7 @@ describe('Caesar', function() {
     // Place 3 hazard tiles
     for (let i = 0; i < game.generation; i++) {
       const placeHazard = game.deferredActions.pop()!.execute() as SelectSpace;
-      placeHazard.cb(placeHazard.availableSpaces[i]);
+      placeHazard.cb(placeHazard.spaces[i]);
     }
 
     // Make sure all 3 hazards were placed
@@ -75,7 +75,7 @@ describe('Caesar', function() {
     // Place game.generation hazard tiles
     for (let i = 0; i < game.generation; i++) {
       const placeHazard = game.deferredActions.pop()!.execute() as SelectSpace;
-      placeHazard.cb(placeHazard.availableSpaces[i]);
+      placeHazard.cb(placeHazard.spaces[i]);
     }
 
     // Make sure there are now 6 hazards

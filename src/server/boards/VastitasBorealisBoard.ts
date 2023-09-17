@@ -1,13 +1,12 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board} from './Board';
+import {Board, SpaceCosts} from './Board';
 import {IPlayer} from '../IPlayer';
 import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
-import {SpaceType} from '../../common/boards/SpaceType';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
 import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
@@ -54,24 +53,13 @@ export class VastitasBorealisBoard extends MarsBoard {
     return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  private filterVastitasBorealis(player: IPlayer, spaces: ReadonlyArray<Space>) {
-    return player.canAfford(VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {tr: {temperature: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
-  }
-
-  public override getSpaces(spaceType: SpaceType, player: IPlayer): ReadonlyArray<Space> {
-    return this.filterVastitasBorealis(player, super.getSpaces(spaceType, player));
-  }
-
-  public override getAvailableSpacesForCity(player: IPlayer): ReadonlyArray<Space> {
-    return this.filterVastitasBorealis(player, super.getAvailableSpacesForCity(player));
-  }
-
-  public override getAvailableSpacesOnLand(player: IPlayer): ReadonlyArray<Space> {
-    return this.filterVastitasBorealis(player, super.getAvailableSpacesOnLand(player));
-  }
-
-  public override getAvailableSpacesForGreenery(player: IPlayer): ReadonlyArray<Space> {
-    return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
+  public override spaceCosts(space: Space): SpaceCosts {
+    const costs = super.spaceCosts(space);
+    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {
+      costs.stock.megacredits = VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
+      costs.tr.oceans = 1;
+    }
+    return costs;
   }
 
   public override getVolcanicSpaceIds(): Array<SpaceId> {

@@ -6,15 +6,19 @@ import {Tag} from '../../../common/cards/Tag';
 import {TileType} from '../../../common/TileType';
 import {Behavior} from '../../behavior/Behavior';
 import {IPreludeCard} from './IPreludeCard';
+import {CardResource} from '../../../common/CardResource';
+import {IVictoryPoints} from '../../../common/cards/IVictoryPoints';
 
-interface StaticPreludeProperties {
+export interface StaticPreludeProperties {
+    behavior?: Partial<Behavior>,
     metadata: ICardMetadata;
     name: CardName;
     tags?: Array<Tag>;
-    tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
-    behavior?: Partial<Behavior>,
+    tilesBuilt?: Array<TileType>,
+    resourceType?: CardResource;
     startingMegacredits?: number,
-}
+    victoryPoints?: number | 'special' | IVictoryPoints,
+  }
 
 export abstract class PreludeCard extends Card implements IPreludeCard {
   constructor(properties: StaticPreludeProperties) {
@@ -28,6 +32,8 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
       name: properties.name,
       tags: properties.tags,
       metadata: properties.metadata,
+      resourceType: properties.resourceType,
+      victoryPoints: properties.victoryPoints,
     };
     if (startingMegaCredits !== undefined) {
       obj.startingMegaCredits = startingMegaCredits;

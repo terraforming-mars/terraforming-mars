@@ -23,6 +23,7 @@ export class Engineer implements IAward {
     return score;
   }
 
+  // This is the list of cards that have bespoke code to change production.
   // public for testing.
   public static productionCards = [
     // Base + Corp Era
@@ -37,7 +38,6 @@ export class Engineer implements IAward {
     // Colonies
     CardName.COMMUNITY_SERVICES,
     CardName.ECOLOGY_RESEARCH,
-    CardName.FLOATER_LEASING,
     CardName.LUNAR_EXPORTS,
     CardName.MINORITY_REFUGE,
     CardName.PIONEER_SETTLEMENT,
@@ -50,7 +50,6 @@ export class Engineer implements IAward {
     CardName.LUNA_FIRST_INCORPORATED,
     // Pathfinders
     CardName.RARE_EARTH_ELEMENTS,
-    CardName.CASSINI_STATION,
     CardName.MICROBIOLOGY_PATENTS,
     CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
     CardName.RARE_EARTH_ELEMENTS,

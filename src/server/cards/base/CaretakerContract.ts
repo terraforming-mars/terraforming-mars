@@ -1,20 +1,22 @@
-import {IActionCard} from '../ICard';
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
+import {ActionCard} from '../ActionCard';
 
-export class CaretakerContract extends Card implements IActionCard, IProjectCard {
+export class CaretakerContract extends ActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
       name: CardName.CARETAKER_CONTRACT,
       cost: 3,
       requirements: CardRequirements.builder((b) => b.temperature(0)),
+
+      action: {
+        spend: {heat: 8},
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: '154',
         description: 'Requires 0° C or warmer.',
@@ -24,18 +26,6 @@ export class CaretakerContract extends Card implements IActionCard, IProjectCard
           });
         }),
       },
-    });
-  }
-  public canAct(player: IPlayer): boolean {
-    return player.availableHeat() >= 8 && player.canAfford(0, {
-      reserveUnits: Units.of({heat: 8}),
-      tr: {tr: 1},
-    });
-  }
-  public action(player: IPlayer) {
-    return player.spendHeat(8, () => {
-      player.increaseTerraformRating();
-      return undefined;
     });
   }
 }

@@ -1,9 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
-import {CardResource} from '../../../common/CardResource';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
@@ -15,6 +12,10 @@ export class FloaterLeasing extends Card implements IProjectCard {
       name: CardName.FLOATER_LEASING,
       type: CardType.AUTOMATED,
 
+      behavior: {
+        production: {megacredits: {floaters: {}, per: 3}},
+      },
+
       metadata: {
         cardNumber: 'C10',
         renderData: CardRenderer.builder((b) => {
@@ -23,10 +24,5 @@ export class FloaterLeasing extends Card implements IProjectCard {
         description: 'Increase your M€ production 1 step PER 3 floaters you have.',
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.production.add(Resource.MEGACREDITS, Math.floor(player.getResourceCount(CardResource.FLOATER) / 3), {log: true});
-    return undefined;
   }
 }

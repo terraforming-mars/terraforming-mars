@@ -31,7 +31,8 @@ export enum Priority {
   DISCARD_CARDS,
 }
 
-export abstract class DeferredAction {
+export abstract class DeferredAction<T = undefined> {
+  // The position in the queue. Do not set directly.
   public queueId: number = -1;
   constructor(
     public player: IPlayer,
@@ -43,6 +44,17 @@ export abstract class DeferredAction {
   }
 
   public abstract execute(): PlayerInput | undefined;
+  protected cb: (param: T) => void = () => {};
+  private callbackSet = false;
+
+  public andThen(cb: (param: T) => void): this {
+    if (this.callbackSet) {
+      throw new Error('Cannot call andThen twice for the same object.');
+    }
+    this.cb = cb;
+    this.callbackSet = true;
+    return this;
+  }
 }
 
 export class SimpleDeferredAction extends DeferredAction {

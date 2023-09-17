@@ -42,9 +42,9 @@ describe('UrbanizedArea', function() {
     expect(player.simpleCanPlay(card)).is.true;
 
     const action = cast(card.play(player), SelectSpace);
-    expect(action.availableSpaces).has.lengthOf(1);
+    expect(action.spaces).has.lengthOf(1);
 
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(game.board.getCities()).has.length(3);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(2);

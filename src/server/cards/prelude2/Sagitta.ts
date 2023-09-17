@@ -37,14 +37,16 @@ export class Sagitta extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
-    if (count === 0) {
-      player.stock.megacredits += 4;
-      player.game.log('${0} gained 4 M€ for playing a card with no tags.', (b) => b.player(player));
-    }
-    if (count === 1) {
-      player.stock.megacredits += 1;
-      player.game.log('${0} gained 1 M€ for playing a card with exactly 1 tag.', (b) => b.player(player));
+    if (player.isCorporation(this.name)) {
+      const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
+      if (count === 0) {
+        player.stock.megacredits += 4;
+        player.game.log('${0} gained 4 M€ for playing a card with no tags.', (b) => b.player(player));
+      }
+      if (count === 1) {
+        player.stock.megacredits += 1;
+        player.game.log('${0} gained 1 M€ for playing a card with exactly 1 tag.', (b) => b.player(player));
+      }
     }
   }
 }

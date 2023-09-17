@@ -42,8 +42,10 @@ export class PalladinShipping extends Card implements ICorporationCard, IActionC
   }
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
-      player.stock.add(Resource.TITANIUM, 1, {log: true});
+    if (player.isCorporation(this.name)) {
+      if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
+        player.stock.add(Resource.TITANIUM, 1, {log: true});
+      }
     }
   }
 

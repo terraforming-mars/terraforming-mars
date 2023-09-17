@@ -45,6 +45,7 @@ export interface ICard {
     getRequirementBonus?: (player: IPlayer, parameter: GlobalParameter) => number;
     victoryPoints?: number | 'special' | IVictoryPoints,
     getVictoryPoints: (player: IPlayer) => number;
+    /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
     onCardPlayed?: (player: IPlayer, card: IProjectCard) => PlayerInput | undefined | void;
     onStandardProject?: (player: IPlayer, project: ICard) => void;
     onTilePlaced?: (cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) => void;

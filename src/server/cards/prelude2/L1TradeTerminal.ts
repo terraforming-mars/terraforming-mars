@@ -29,7 +29,7 @@ export class L1TradeTerminal extends Card {
           b.effect('When you trade, first increase that colony tile track 2 steps.', (eb) =>
             eb.trade().startEffect.text('+2')).br;
           b.text('3').diverseTag().asterix().br;
-          b.plainText('(Add a resource to 3 different cards.').br;
+          b.plainText('(Add a resource to 3 different cards.)').br;
         }),
       },
     });

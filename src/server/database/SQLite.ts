@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
 
 import {GameIdLedger, IDatabase} from './IDatabase';
 import {IGame, Score} from '../IGame';
@@ -27,7 +27,7 @@ export class SQLite implements IDatabase {
   }
 
   public async initialize(): Promise<void> {
-    const Database = (await require('sqlite3')).Database;
+    const {Database} = await import('sqlite3');
     const dbFolder = path.resolve(process.cwd(), './db');
     const dbPath = path.resolve(dbFolder, 'game.db');
     if (this.filename === undefined) {
@@ -38,7 +38,7 @@ export class SQLite implements IDatabase {
         fs.mkdirSync(dbFolder);
       }
     }
-    this._db = new Database(this.filename);
+    this._db = new Database(String(this.filename));
     await this.asyncRun('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
     await this.asyncRun('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participant varchar, PRIMARY KEY (game_id, participant))');
     await this.asyncRun('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
@@ -227,7 +227,7 @@ export class SQLite implements IDatabase {
   }
 
   public stats(): Promise<{[key: string]: string | number}> {
-    const size = this.filename === IN_MEMORY_SQLITE_PATH ? -1 : fs.statSync(this.filename).size;
+    const size = this.filename === IN_MEMORY_SQLITE_PATH ? -1 : fs.statSync(String(this.filename)).size;
 
     return Promise.resolve({
       type: 'SQLite',

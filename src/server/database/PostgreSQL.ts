@@ -50,7 +50,7 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async initialize(): Promise<void> {
-    const Pool = (await require('pg')).Pool;
+    const {Pool} = await import('pg');
     this._client = new Pool(this.config);
     await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');

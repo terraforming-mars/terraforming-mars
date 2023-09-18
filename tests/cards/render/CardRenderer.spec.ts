@@ -236,7 +236,7 @@ describe('CardRenderer', function() {
       expect(item.amount).to.equal(-1);
     });
     it('size - s', () => {
-      const renderer = CardRenderer.builder((b) => b.greenery(Size.SMALL));
+      const renderer = CardRenderer.builder((b) => b.greenery({size: Size.SMALL}));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.GREENERY);
       expect(item.size).to.equal(Size.SMALL);

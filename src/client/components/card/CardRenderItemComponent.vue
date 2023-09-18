@@ -284,6 +284,12 @@ export default Vue.extend({
       case CardRenderItemType.GRAPHENE:
         classes.push('card-resource', 'card-resource-graphene');
         break;
+      case CardRenderItemType.NOMADS:
+        classes.push('card-resource', 'card-resource-nomads');
+        break;
+      case CardRenderItemType.HYDROELECTRIC_RESOURCE:
+        classes.push('card-resource', 'card-resource-hydroelectric-resource');
+        break;
       }
 
       if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {

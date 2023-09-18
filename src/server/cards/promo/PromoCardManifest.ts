@@ -35,16 +35,19 @@ import {HomeostasisBureau} from './HomeostasisBureau';
 import {ImportedNutrients} from './ImportedNutrients';
 import {InterplanetaryTrade} from './InterplanetaryTrade';
 import {JovianEmbassy} from './JovianEmbassy';
+import {KaguyaTech} from './KaguyaTech';
 import {KuiperCooperative} from './KuiperCooperative';
 import {LawSuit} from './LawSuit';
 import {MagneticFieldGeneratorsPromo} from './MagneticFieldGeneratorsPromo';
 import {MagneticShield} from './MagneticShield';
+import {MarsNomads} from './MarsNomads';
 import {MeatIndustry} from './MeatIndustry';
 import {Meltworks} from './Meltworks';
 import {MercurianAlloys} from './MercurianAlloys';
 import {Merger} from './Merger';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
+import {NeptunianPowerConsultants} from './NeptunianPowerConsultants';
 import {NewPartner} from './NewPartner';
 import {OrbitalCleanup} from './OrbitalCleanup';
 import {OutdoorSports} from './OutdoorSports';
@@ -123,6 +126,9 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CYBERIA_SYSTEMS]: {Factory: CyberiaSystems},
     [CardName.HERMETIC_ORDER_OF_MARS]: {Factory: HermeticOrderofMars},
     [CardName.HOMEOSTASIS_BUREAU]: {Factory: HomeostasisBureau},
+    [CardName.KAGUYA_TECH]: {Factory: KaguyaTech},
+    [CardName.MARS_NOMADS]: {Factory: MarsNomads},
+    [CardName.NEPTUNIAN_POWER_CONSULTANTS]: {Factory: NeptunianPowerConsultants},
   },
 
   preludeCards: {
@@ -132,6 +138,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
     [CardName.HEAD_START]: {Factory: HeadStart},
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
+    // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods},
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},
   },
 

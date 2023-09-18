@@ -17,7 +17,10 @@
       <div v-else class='gagarin visited'></div>
     </template>
     <template v-if="space.cathedral === true">
-      <div class='cathedral'></div>
+      <div class='board-cube--cathedral'></div>
+    </template>
+    <template v-if="space.nomads === true">
+      <div class='board-cube--nomad'></div>
     </template>
     </div>
 </template>

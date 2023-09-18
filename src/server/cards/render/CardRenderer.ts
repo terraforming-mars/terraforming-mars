@@ -180,6 +180,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.GRAPHENE, amount, options));
   }
 
+  public hydroelectricResource(amount: number, options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.HYDROELECTRIC_RESOURCE, amount, options));
+  }
+
   public event(options?: ItemOptions): this {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.EVENT, -1, options));
   }
@@ -237,13 +241,20 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public greenery(size: Size = Size.MEDIUM, withO2: boolean = true, any: boolean = false) {
+  /**
+   * Add a greenery.
+   *
+   * size: the tile size. Default is medium.
+   * withO2: Show the superscript oxygen icon. Defualt is true.
+   * any: for all players, Default is false.
+   */
+  public greenery(options?: {size?: Size, withO2?: boolean, any?: boolean}) {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
-    item.size = size;
-    if (withO2) {
+    item.size = options?.size ?? Size.MEDIUM;
+    if (options?.withO2 !== false) {
       item.secondaryTag = AltSecondaryTag.OXYGEN;
     }
-    if (any === true) {
+    if (options?.any === true) {
       item.anyPlayer = true;
     }
     return this._appendToRow(item);
@@ -423,6 +434,9 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.CATHEDRAL, 1));
   }
 
+  public nomads(): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.NOMADS, 1));
+  }
 
   public specialTile(options?: ItemOptions) {
     this._appendToRow(new CardRenderItem(CardRenderItemType.EMPTY_TILE_SPECIAL, 1, options));

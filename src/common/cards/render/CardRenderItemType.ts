@@ -77,6 +77,8 @@ export enum CardRenderItemType {
   RULING_PARTY = 'ruling-party',
   CATHEDRAL = 'cathedral',
   GRAPHENE = 'graphene',
+  NOMADS = 'nomads',
+  HYDROELECTRIC_RESOURCE = 'hydroelectric-resource',
 
   // CEO Extension:
   ARROW_OPG = 'arrow-opg',

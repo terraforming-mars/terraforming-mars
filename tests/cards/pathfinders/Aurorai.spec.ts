@@ -65,10 +65,10 @@ describe('Aurorai', function() {
 
     expect(game.getTemperature()).eq(-30);
     expect(() =>
-      selectPayment.cb({...Payment.EMPTY, megaCredits: 4, auroraiData: 2}),
+      selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 4, auroraiData: 2}}, player),
     ).to.throw(/Did not spend enough/);
 
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 8, auroraiData: 2});
+    selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 8, auroraiData: 2}}, player),
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);
     expect(player.getSpendableData()).eq(1);

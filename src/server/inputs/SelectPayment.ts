@@ -28,13 +28,30 @@ export class SelectPayment extends BasePlayerInput {
     if (!isSelectPaymentResponse(input)) {
       throw new Error('Not a valid SelectPaymentResponse');
     }
-    if (!isPayment(input.payment)) {
+    const payment = input.payment;
+    if (!isPayment(payment)) {
       throw new Error('payment is not a valid type');
     }
     // TODO(kberg): This is called here and in SelectPaymentDeferred.
     // There's no reason for both.
-    if (!player.canSpend(input.payment)) {
+    if (!player.canSpend(payment)) {
       throw new Error('You do not have that many resources');
+    }
+    if (!player.canSpend(payment)) {
+      throw new Error('You do not have that many resources to spend');
+    }
+    const amountPaid = player.payingAmount(payment, {
+      steel: this.canUse.steel,
+      titanium: this.canUse.titanium,
+      seeds: this.canUse.seeds,
+      floaters: false, // Used in project cards only
+      microbes: false, // Used in project cards only
+      science: false, // Used in project cards only
+      auroraiData: this.canUse.data,
+      kuiperAsteroids: this.canUse.kuiperAsteroids,
+    });
+    if (amountPaid < this.amount) {
+      throw new Error('Did not spend enough');
     }
     return this.cb(input.payment);
   }

@@ -2,7 +2,7 @@ import {Space} from './Space';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
+import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -225,6 +225,10 @@ export abstract class Board {
         return false;
       }
 
+      if (space.id === player.game.nomadSpace) {
+        return false;
+      }
+
       return this.canAfford(player, space, canAffordOptions);
     });
     return landSpaces;
@@ -270,10 +274,13 @@ export abstract class Board {
     return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
   }
 
-  // Returns true when the space is an ocean tile that is not used to cover another ocean.
-  // Used for benefits associated with "when a player places an ocean tile"
+  /**
+   *  Returns true when the space is an ocean tile that is not used to cover another ocean.
+   *
+   * Used for benefits associated with "when a player places an ocean tile"
+   */
   public static isUncoveredOceanSpace(space: Space): boolean {
-    return space.tile !== undefined && UNCOVERED_OCEAN_TILES.has(space.tile.tileType);
+    return space.tile !== undefined && BASE_OCEAN_TILES.has(space.tile.tileType);
   }
 
   public static isGreenerySpace(space: Space): boolean {

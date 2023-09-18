@@ -78,22 +78,6 @@ export class SelectPaymentDeferred extends DeferredAction {
         kuiperAsteroids: this.options.canUseAsteroids || false,
       },
       (payment: Payment) => {
-        if (!this.player.canSpend(payment)) {
-          throw new Error('You do not have that many resources to spend');
-        }
-        const amountPaid = this.player.payingAmount(payment, {
-          steel: this.options.canUseSteel,
-          titanium: this.options.canUseTitanium,
-          seeds: this.options.canUseSeeds,
-          floaters: false, // Used in project cards only
-          microbes: false, // Used in project cards only
-          science: false, // Used in project cards only
-          auroraiData: this.options.canUseData,
-          kuiperAsteroids: this.options.canUseAsteroids,
-        });
-        if (amountPaid < this.amount) {
-          throw new Error('Did not spend enough');
-        }
         this.player.pay(payment);
         this.options.afterPay?.();
         return undefined;

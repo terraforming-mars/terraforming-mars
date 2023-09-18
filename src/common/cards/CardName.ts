@@ -506,10 +506,15 @@ export enum CardName {
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
     CARBON_NANOSYSTEMS = 'Carbon Nanosystems',
     CYBERIA_SYSTEMS = 'Cyberia Systems',
+    ESTABLISHED_METHODS = 'Established Methods',
     GIANT_SOLAR_COLLECTOR = 'Giant Solar Collector',
     HERMETIC_ORDER_OF_MARS = 'Hermetic Order of Mars',
     HOMEOSTASIS_BUREAU = 'Homeostasis Bureau',
+    KAGUYA_TECH = 'Kaguya Tech',
     KUIPER_COOPERATIVE = 'Kuiper Cooperative',
+    MARS_NOMADS = 'Mars Nomads',
+    NEPTUNIAN_POWER_CONSULTANTS = 'Neptunian Power Consultants',
+
     // End of promo cards
 
     // Community corps

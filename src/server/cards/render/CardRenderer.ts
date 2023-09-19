@@ -443,6 +443,12 @@ abstract class Builder<T> {
     return this;
   }
 
+  public cityorSpecialTile(options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.CITY_OR_SPECIAL_TILE, -1, options);
+    item.size = options?.size ?? Size.MEDIUM;
+    return this._appendToRow(item);
+  }
+
   public emptyTile(type: 'normal' | 'golden' = 'normal', options?: ItemOptions) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1, options);

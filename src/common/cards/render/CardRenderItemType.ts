@@ -79,6 +79,7 @@ export enum CardRenderItemType {
   GRAPHENE = 'graphene',
   NOMADS = 'nomads',
   HYDROELECTRIC_RESOURCE = 'hydroelectric-resource',
+  CITY_OR_SPECIAL_TILE = 'city-or-special-tile',
 
   // CEO Extension:
   ARROW_OPG = 'arrow-opg',

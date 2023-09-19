@@ -515,6 +515,7 @@ export enum CardName {
     MARS_NOMADS = 'Mars Nomads',
     NEPTUNIAN_POWER_CONSULTANTS = 'Neptunian Power Consultants',
     MARTIAN_LUMBER_CORP = 'Martian Lumber Corp',
+    RED_SHIPS = 'Red Ships',
 
     // End of promo cards
 

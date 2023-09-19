@@ -189,6 +189,9 @@ export default Vue.extend({
           classes.push('special-tile');
         }
         break;
+      case CardRenderItemType.CITY_OR_SPECIAL_TILE:
+        classes.push('card-tile', 'city-or-special-tile');
+        break;
       case CardRenderItemType.COMMUNITY:
         classes.push('card-resource', 'card-resource-community');
         break;

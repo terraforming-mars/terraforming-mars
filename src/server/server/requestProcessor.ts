@@ -1,5 +1,5 @@
-import * as http from 'http';
 import * as prometheus from 'prom-client';
+
 import {paths} from '../../common/app/paths';
 
 import {ApiCloneableGame} from '../routes/ApiCloneableGame';
@@ -28,6 +28,8 @@ import {newIpBlocklist} from './IPBlocklist';
 import {ApiIPs} from '../routes/ApiIPs';
 import {newIpTracker} from './IPTracker';
 import {getHerokuIpAddress} from './heroku';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 const metrics = {
   count: new prometheus.Counter({
@@ -84,7 +86,7 @@ const handlers: Map<string, IHandler> = new Map(
   ],
 );
 
-function getIPAddress(req: http.IncomingMessage): string {
+function getIPAddress(req: Request): string {
   const herokuIpAddress = getHerokuIpAddress(req);
   if (herokuIpAddress !== undefined) {
     return herokuIpAddress;
@@ -108,8 +110,8 @@ function getHandler(pathname: string): IHandler | undefined {
 }
 
 export function processRequest(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
+  req: Request,
+  res: Response,
   route: Route): void {
   const start = process.hrtime.bigint();
   let pathnameForLatency: string | undefined = undefined;

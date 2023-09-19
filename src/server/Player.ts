@@ -862,7 +862,7 @@ export class Player implements IPlayer {
       seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
       floaters: card.tags.includes(Tag.VENUS),
       microbes: card.tags.includes(Tag.PLANT),
-      science: card.tags.includes(Tag.MOON),
+      lunaArchivesScience: card.tags.includes(Tag.MOON),
       // TODO(kberg): add this.corporation.name === CardName.AURORAI
       auroraiData: card.type === CardType.STANDARD_PROJECT,
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
@@ -913,7 +913,7 @@ export class Player implements IPlayer {
     return this.resourcesOnCard(CardName.DIRIGIBLES);
   }
 
-  public getSpendableScienceResources(): number {
+  public getSpendableLunaArchiveScienceResources(): number {
     return this.resourcesOnCard(CardName.LUNA_ARCHIVES);
   }
 
@@ -959,7 +959,7 @@ export class Player implements IPlayer {
 
     removeResourcesOnCard(CardName.PSYCHROPHILES, payment.microbes);
     removeResourcesOnCard(CardName.DIRIGIBLES, payment.floaters);
-    removeResourcesOnCard(CardName.LUNA_ARCHIVES, payment.science);
+    removeResourcesOnCard(CardName.LUNA_ARCHIVES, payment.lunaArchivesScience);
     removeResourcesOnCard(CardName.CARBON_NANOSYSTEMS, payment.graphene);
     removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
     removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
@@ -1383,7 +1383,7 @@ export class Player implements IPlayer {
       heat: this.availableHeat() - reserveUnits.heat,
       floaters: this.getSpendableFloaters(),
       microbes: this.getSpendableMicrobes(),
-      science: this.getSpendableScienceResources(),
+      lunaArchivesScience: this.getSpendableLunaArchiveScienceResources(),
       seeds: this.getSpendableSeedResources(),
       auroraiData: this.getSpendableData(),
       graphene: this.getSpendableGraphene(),
@@ -1416,7 +1416,7 @@ export class Player implements IPlayer {
       heat: 1,
       microbes: DEFAULT_MICROBES_VALUE,
       floaters: DEFAULT_FLOATERS_VALUE,
-      science: 1,
+      lunaArchivesScience: 1,
       seeds: constants.SEED_VALUE,
       auroraiData: constants.DATA_VALUE,
       graphene: constants.GRAPHENE_VALUE,
@@ -1430,7 +1430,7 @@ export class Player implements IPlayer {
       heat: this.canUseHeatAsMegaCredits,
       microbes: options?.microbes ?? false,
       floaters: options?.floaters ?? false,
-      science: options?.science ?? false,
+      lunaArchivesScience: options?.lunaArchivesScience ?? false,
       seeds: options?.seeds ?? false,
       auroraiData: options?.auroraiData ?? false,
       graphene: options?.graphene ?? false,

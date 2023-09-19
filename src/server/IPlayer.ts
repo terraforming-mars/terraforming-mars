@@ -211,7 +211,7 @@ export interface IPlayer {
   spendableMegacredits(): number;
   getSpendableMicrobes(): number;
   getSpendableFloaters(): number;
-  getSpendableScienceResources(): number;
+  getSpendableLunaArchiveScienceResources(): number;
   getSpendableSeedResources(): number;
   getSpendableData(): number;
   getSpendableGraphene(): number;

@@ -18,7 +18,7 @@ export class PaymentTester {
       'heat': 'Heat',
       'microbes': 'Microbes',
       'floaters': 'Floaters',
-      'science': 'Science',
+      'lunaArchivesScience': 'Science',
       'seeds': 'Seeds',
       'auroraiData': 'Data',
       'graphene': 'graphene',

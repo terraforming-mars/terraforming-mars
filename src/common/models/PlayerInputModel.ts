@@ -29,7 +29,7 @@ export interface PlayerInputModel {
     maxByDefault?: boolean;
     microbes: number | undefined;
     floaters: number | undefined;
-    science: number | undefined;
+    lunaArchivesScience: number | undefined;
     seeds: number | undefined;
     auroraiData: number | undefined;
     graphene: number | undefined;

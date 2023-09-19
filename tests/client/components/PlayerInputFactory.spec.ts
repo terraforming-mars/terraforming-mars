@@ -144,7 +144,7 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     max: undefined,
     microbes: undefined,
     floaters: undefined,
-    science: undefined,
+    lunaArchivesScience: undefined,
     seeds: undefined,
     auroraiData: undefined,
     title: 'test input',

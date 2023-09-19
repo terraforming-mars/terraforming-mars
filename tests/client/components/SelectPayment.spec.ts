@@ -134,7 +134,7 @@ describe('SelectPayment', () => {
     tester.expectIsAvailable('titanium', true);
     tester.expectIsAvailable('heat', true);
     tester.expectIsAvailable('megaCredits', true);
-    tester.expectIsAvailable('science', false);
+    tester.expectIsAvailable('lunaArchivesScience', false);
     tester.expectIsAvailable('seeds', false);
     tester.expectIsAvailable('auroraiData', false);
 
@@ -334,7 +334,7 @@ describe('SelectPayment', () => {
       title: 'foo',
       microbes: 0,
       floaters: 0,
-      science: 0,
+      lunaArchivesScience: 0,
       ...playerInputFields,
     };
 

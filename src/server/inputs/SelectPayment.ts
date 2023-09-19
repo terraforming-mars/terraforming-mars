@@ -46,7 +46,7 @@ export class SelectPayment extends BasePlayerInput {
       seeds: this.canUse.seeds,
       floaters: false, // Used in project cards only
       microbes: false, // Used in project cards only
-      science: false, // Used in project cards only
+      lunaArchivesScience: false, // Used in project cards only
       auroraiData: this.canUse.data,
       kuiperAsteroids: this.canUse.kuiperAsteroids,
     });

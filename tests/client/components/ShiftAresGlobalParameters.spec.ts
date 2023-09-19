@@ -28,7 +28,7 @@ describe('ShiftAresGlobalParameters', function() {
     availableParties: [PartyName.MARS, PartyName.SCIENTISTS, PartyName.UNITY, PartyName.GREENS, PartyName.REDS, PartyName.KELVINISTS],
     microbes: undefined,
     floaters: undefined,
-    science: undefined,
+    lunaArchivesScience: undefined,
     seeds: undefined,
     auroraiData: undefined,
     graphene: undefined,

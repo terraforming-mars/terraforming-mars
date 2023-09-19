@@ -231,7 +231,7 @@ export class Server {
       maxByDefault: undefined,
       microbes: undefined,
       floaters: undefined,
-      science: undefined,
+      lunaArchivesScience: undefined,
       seeds: undefined,
       auroraiData: undefined,
       graphene: undefined,
@@ -267,7 +267,7 @@ export class Server {
       playerInputModel.floaters = player.getSpendableFloaters();
       playerInputModel.canUseHeat = player.canUseHeatAsMegaCredits;
       playerInputModel.canUseLunaTradeFederationTitanium = player.canUseTitaniumAsMegacredits;
-      playerInputModel.science = player.getSpendableScienceResources();
+      playerInputModel.lunaArchivesScience = player.getSpendableLunaArchiveScienceResources();
       playerInputModel.seeds = player.getSpendableSeedResources();
       playerInputModel.graphene = player.getSpendableGraphene();
       playerInputModel.kuiperAsteroids = player.getSpendableKuiperAsteroids();

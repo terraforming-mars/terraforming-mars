@@ -3,7 +3,9 @@ import {ModuleManifest} from '../ModuleManifest';
 import {AppliedScience} from './AppliedScience';
 import {CeresTechMarket} from './CeresTechMarket';
 import {ColonyTradeHub} from './ColonyTradeHub';
+import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {Ecotec} from './Ecotec';
+import {FocusedOrganization} from './FocusedOrganization';
 import {IshtarExpedition} from './IshtarExpedition';
 import {L1TradeTerminal} from './L1TradeTerminal';
 import {NirgalEnterprises} from './NirgalEnterprises';
@@ -13,7 +15,6 @@ import {PalladinShipping} from './PalladinShipping';
 import {RedAppeasement} from './RedAppeasement';
 import {Sagitta} from './Sagitta';
 import {SummitLogistics} from './SummitLogistics';
-import {DirectedHeatUsage} from './DirectedHeatUsage';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',
@@ -31,7 +32,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.NOBEL_PRIZE]: {Factory: NobelPrize},
     [CardName.COLONY_TRADE_HUB]: {Factory: ColonyTradeHub, compatibility: 'colonies'},
     [CardName.OLD_MINING_COLONY]: {Factory: OldMiningColony, compatibility: 'colonies'},
-    // [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
+    [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
   },
 
   corporationCards: {

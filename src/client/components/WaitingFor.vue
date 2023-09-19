@@ -97,6 +97,7 @@ export default Vue.extend({
       };
       xhr.send(JSON.stringify(out));
       xhr.onerror = function() {
+        // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
       };
     },
@@ -116,6 +117,7 @@ export default Vue.extend({
       };
       xhr.send();
       xhr.onerror = function() {
+        // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
       };
     },

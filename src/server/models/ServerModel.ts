@@ -223,15 +223,17 @@ export class Server {
       canUseLunaTradeFederationTitanium: undefined,
       canUseHeat: undefined,
       canUseSeeds: undefined,
-      canUseData: undefined,
+      canUseAuroraiData: undefined,
       canUseGraphene: undefined,
       canUseAsteroids: undefined,
+      canUseSpireScience: undefined,
       players: undefined,
       availableSpaces: undefined,
       maxByDefault: undefined,
       microbes: undefined,
       floaters: undefined,
-      science: undefined,
+      lunaArchivesScience: undefined,
+      spireScience: undefined,
       seeds: undefined,
       auroraiData: undefined,
       graphene: undefined,
@@ -267,7 +269,7 @@ export class Server {
       playerInputModel.floaters = player.getSpendableFloaters();
       playerInputModel.canUseHeat = player.canUseHeatAsMegaCredits;
       playerInputModel.canUseLunaTradeFederationTitanium = player.canUseTitaniumAsMegacredits;
-      playerInputModel.science = player.getSpendableScienceResources();
+      playerInputModel.lunaArchivesScience = player.getSpendableLunaArchiveScienceResources();
       playerInputModel.seeds = player.getSpendableSeedResources();
       playerInputModel.graphene = player.getSpendableGraphene();
       playerInputModel.kuiperAsteroids = player.getSpendableKuiperAsteroids();
@@ -299,11 +301,13 @@ export class Server {
       playerInputModel.canUseLunaTradeFederationTitanium = sp.canUse.lunaTradeFederationTitanium ?? false;
       playerInputModel.canUseSeeds = sp.canUse.seeds ?? false;
       playerInputModel.seeds = player.getSpendableSeedResources();
-      playerInputModel.canUseData = sp.canUse.data ?? false;
+      playerInputModel.canUseAuroraiData = sp.canUse.auroraiData ?? false;
       playerInputModel.auroraiData = player.getSpendableData();
       playerInputModel.canUseGraphene = sp.canUse.graphene && player.getSpendableData() > 0;
       playerInputModel.canUseAsteroids = sp.canUse.kuiperAsteroids && player.getSpendableKuiperAsteroids() > 0;
       playerInputModel.kuiperAsteroids = player.getSpendableKuiperAsteroids();
+      playerInputModel.canUseSpireScience = sp.canUse.spireScience ?? false;
+      playerInputModel.spireScience = player.getSpendableSpireScienceResources();
       break;
     case 'player':
       playerInputModel.players = (waitingFor as SelectPlayer).players.map(

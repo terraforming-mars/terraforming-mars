@@ -20,7 +20,8 @@ export interface SelectPaymentModel {
     microbes: number; // Microbes are not actually used in this component. It's just to satisfy the mixin.
     floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
-    science?: number; // Science isn't used in this component, but it simplifies testing.
+    lunaArchivesScience?: number; // Luna Archives Science isn't used in this component, but it simplifies testing.
+    spireScience?: number;
     seeds?: number;
     auroraiData?: number;
     graphene?: number; // Graphene isn't used in this component, but it simplifies testing.
@@ -33,7 +34,7 @@ export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
   reserveUnits: Units;
   cards: Array<CardModel>;
   tags: Array<Tag>
-  science: number;
+  lunaArchivesScience: number;
   seeds: number;
   graphene: number;
   available: Units;
@@ -90,6 +91,8 @@ export const PaymentWidgetMixin = {
         return DATA_VALUE;
       case 'graphene':
         return GRAPHENE_VALUE;
+      case 'spireScience':
+        return 2;
       default:
         return 1;
       }
@@ -176,7 +179,8 @@ export const PaymentWidgetMixin = {
 
       case 'floaters':
       case 'microbes':
-      case 'science':
+      case 'lunaArchivesScience':
+      case 'spireScience':
       case 'seeds':
       case 'auroraiData':
       case 'graphene':

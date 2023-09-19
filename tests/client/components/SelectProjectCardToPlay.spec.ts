@@ -415,7 +415,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   // TODO(kberg): Be greedy with science units.
-  it('using science', async () => {
+  it('using luna archive science', async () => {
     // ARISTARCHUS_ROAD_NETWORK costs 15. Player has 7M€ and will use 8 science units.
     const wrapper = setupCardForPurchase(
       CardName.ARISTARCHUS_ROAD_NETWORK, 15,
@@ -423,17 +423,17 @@ describe('SelectProjectCardToPlay', () => {
         megaCredits: 7,
         steel: 0,
       },
-      {science: 10});
+      {lunaArchivesScience: 10});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsAvailable('science', true);
-    tester.expectValue('science', 8);
+    tester.expectIsAvailable('lunaArchivesScience', true);
+    tester.expectValue('lunaArchivesScience', 8);
     tester.expectValue('megaCredits', 7);
 
     tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({science: 8, megaCredits: 7}));
+    expect(saveResponse.payment).deep.eq(Payment.of({lunaArchivesScience: 8, megaCredits: 7}));
   });
 
   // TODO(kberg): be greedy with seeds.

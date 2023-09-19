@@ -17,10 +17,11 @@ export interface PlayerInputModel {
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;
     canUseSeeds: boolean | undefined;
-    canUseData: boolean | undefined;
+    canUseAuroraiData: boolean | undefined;
     canUseLunaTradeFederationTitanium: boolean | undefined;
     canUseGraphene: boolean | undefined;
     canUseAsteroids: boolean | undefined;
+    canUseSpireScience: boolean | undefined;
     cards: Array<CardModel> | undefined;
     inputType: PlayerInputType;
     options: Array<PlayerInputModel> | undefined;
@@ -29,7 +30,8 @@ export interface PlayerInputModel {
     maxByDefault?: boolean;
     microbes: number | undefined;
     floaters: number | undefined;
-    science: number | undefined;
+    lunaArchivesScience: number | undefined;
+    spireScience: number | undefined;
     seeds: number | undefined;
     auroraiData: number | undefined;
     graphene: number | undefined;

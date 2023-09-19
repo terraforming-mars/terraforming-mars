@@ -211,11 +211,12 @@ export interface IPlayer {
   spendableMegacredits(): number;
   getSpendableMicrobes(): number;
   getSpendableFloaters(): number;
-  getSpendableScienceResources(): number;
+  getSpendableLunaArchiveScienceResources(): number;
   getSpendableSeedResources(): number;
   getSpendableData(): number;
   getSpendableGraphene(): number;
   getSpendableKuiperAsteroids(): number;
+  getSpendableSpireScienceResources(): number;
   payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void): void;
   checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;

@@ -68,7 +68,7 @@ export default Vue.extend({
       steel: 0,
       titanium: 0,
       microbes: 0,
-      science: 0,
+      lunaArchivesScience: 0,
       seeds: 0,
       floaters: 0,
       auroraiData: 0,
@@ -166,8 +166,8 @@ export default Vue.extend({
         this.floaters = deductUnits(this.playerinput.floaters, 3);
       }
 
-      if (megacreditBalance > 0 && this.canUseScience()) {
-        this.science = deductUnits(this.playerinput.science, 1);
+      if (megacreditBalance > 0 && this.canUseLunaArchivesScience()) {
+        this.lunaArchivesScience = deductUnits(this.playerinput.lunaArchivesScience, 1);
       }
 
       if (megacreditBalance > 0 && this.canUseGraphene()) {
@@ -201,7 +201,7 @@ export default Vue.extend({
         this.steel -= saveOverSpendingUnits(this.steel, this.thisPlayer.steelValue);
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
-        this.science -= saveOverSpendingUnits(this.science, 1);
+        this.lunaArchivesScience -= saveOverSpendingUnits(this.lunaArchivesScience, 1);
         this.seeds -= saveOverSpendingUnits(this.seeds, SEED_VALUE);
         this.graphene -= saveOverSpendingUnits(this.graphene, GRAPHENE_VALUE);
         this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
@@ -247,10 +247,10 @@ export default Vue.extend({
       }
       return false;
     },
-    canUseScience() {
+    canUseLunaArchivesScience() {
       // FYI science resources are limited to the Luna Archive card, which allows spending its
       // science resources for Moon cards.
-      if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
+      if (this.card !== undefined && (this.playerinput.lunaArchivesScience ?? 0) > 0) {
         if (this.tags.includes(Tag.MOON)) {
           return true;
         }
@@ -312,11 +312,12 @@ export default Vue.extend({
         titanium: this.titanium,
         microbes: this.microbes,
         floaters: this.floaters,
-        science: this.science,
+        lunaArchivesScience: this.lunaArchivesScience,
         seeds: this.seeds,
         graphene: this.graphene,
         auroraiData: 0,
         kuiperAsteroids: 0,
+        spireScience: 0,
       };
       let totalSpent = 0;
       for (const target of PAYMENT_KEYS) {
@@ -432,12 +433,12 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('floaters')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="canUseScience()">
-      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science Resources')"></i>
-      <AppButton type="minus" @click="reduceValue('science', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="science" />
-      <AppButton type="plus" @click="addValue('science', 1)" />
-      <AppButton type="max" @click="setMaxValue('science')" title="MAX" />
+    <div class="payments_type input-group" v-if="canUseLunaArchivesScience()">
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by (Luna Archive) Science Resources')"></i>
+      <AppButton type="minus" @click="reduceValue('lunaArchivesScience', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="lunaArchivesScience" />
+      <AppButton type="plus" @click="addValue('lunaArchivesScience', 1)" />
+      <AppButton type="max" @click="setMaxValue('lunaArchivesScience')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseSeeds()">

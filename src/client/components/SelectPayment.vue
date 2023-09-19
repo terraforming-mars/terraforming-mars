@@ -47,6 +47,7 @@ export default Vue.extend({
       seeds: 0,
       auroraiData: 0,
       kuiperAsteroids: 0,
+      spireScience: 0,
       warning: undefined,
     };
   },
@@ -71,8 +72,9 @@ export default Vue.extend({
       case 'titanium': return this.canUseTitanium();
       case 'heat': return this.canUseHeat();
       case 'seeds': return this.canUseSeeds();
-      case 'auroraiData': return this.canUseData();
+      case 'auroraiData': return this.canUseAuroraiData();
       case 'kuiperAsteroids': return this.canUseAsteroids();
+      case 'spireScience': return this.canUseSpireScience();
       }
       return false;
     },
@@ -107,7 +109,7 @@ export default Vue.extend({
 
       const megaCredits = this.getAmount('megaCredits');
 
-      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat'];
+      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'];
       let amountCovered = reserveMegacredits ? megaCredits : 0;
       for (const target of targets) {
         amountCovered += this.setDefaultValue(amountCovered, target);
@@ -138,8 +140,8 @@ export default Vue.extend({
     canUseSeeds() {
       return this.playerinput.canUseSeeds && (this.playerinput.seeds ?? 0 > 0);
     },
-    canUseData() {
-      return this.playerinput.canUseData && (this.playerinput.auroraiData ?? 0 > 0);
+    canUseAuroraiData() {
+      return this.playerinput.canUseAuroraiData && (this.playerinput.auroraiData ?? 0 > 0);
     },
     canUseGraphene() {
       return this.playerinput.canUseGraphene && (this.playerinput.graphene ?? 0 > 0);
@@ -147,9 +149,12 @@ export default Vue.extend({
     canUseAsteroids() {
       return this.playerinput.canUseAsteroids && (this.playerinput.kuiperAsteroids ?? 0 > 0);
     },
+    canUseSpireScience() {
+      return this.playerinput.canUseSpireScience && (this.playerinput.spireScience ?? 0 > 0);
+    },
 
     saveData() {
-      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits', 'kuiperAsteroids'];
+      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits', 'kuiperAsteroids', 'spireScience'];
 
       const payment: Payment = {
         ...Payment.EMPTY,
@@ -160,6 +165,7 @@ export default Vue.extend({
         seeds: this.seeds ?? 0,
         auroraiData: this.auroraiData ?? 0,
         kuiperAsteroids: this.kuiperAsteroids,
+        spireScience: this.spireScience ?? 0,
       };
 
       let totalSpent = 0;
@@ -249,7 +255,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="canUseData()">
+    <div class="payments_type input-group" v-if="canUseAuroraiData()">
       <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay by Data')"></i>
       <AppButton type="minus" @click="reduceValue('auroraiData', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="auroraiData" />
@@ -263,6 +269,14 @@ export default Vue.extend({
       <input class="form-input form-inline payments_input" v-model.number="kuiperAsteroids" />
       <AppButton type="plus" @click="addValue('kuiperAsteroids', 1)" />
       <AppButton type="max" @click="setMaxValue('kuiperAsteroids')" title="MAX" />
+    </div>
+
+    <div class="payments_type input-group" v-if="canUseSpireScience()">
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science')"></i>
+      <AppButton type="minus" @click="reduceValue('spireScience', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="spireScience" />
+      <AppButton type="plus" @click="addValue('spireScience', 1)" />
+      <AppButton type="max" @click="setMaxValue('spireScience')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">

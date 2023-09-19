@@ -13,10 +13,11 @@ export class SelectPayment extends BasePlayerInput {
       titanium?: boolean,
       heat?: boolean,
       seeds?: boolean,
-      data?: boolean,
+      auroraiData?: boolean,
       lunaTradeFederationTitanium?: boolean,
       graphene?: boolean,
       kuiperAsteroids?: boolean,
+      spireScience?: boolean,
     },
     public cb: (payment: Payment) => PlayerInput | undefined,
   ) {
@@ -46,8 +47,9 @@ export class SelectPayment extends BasePlayerInput {
       seeds: this.canUse.seeds,
       floaters: false, // Used in project cards only
       microbes: false, // Used in project cards only
-      science: false, // Used in project cards only
-      auroraiData: this.canUse.data,
+      lunaArchivesScience: false, // Used in project cards only
+      spireScience: this.canUse.spireScience,
+      auroraiData: this.canUse.auroraiData,
       kuiperAsteroids: this.canUse.kuiperAsteroids,
     });
     if (amountPaid < this.amount) {

@@ -111,7 +111,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 6},
-      {canUseData: true, auroraiData: 4});
+      {canUseAuroraiData: true, auroraiData: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -134,7 +134,7 @@ describe('SelectPayment', () => {
     tester.expectIsAvailable('titanium', true);
     tester.expectIsAvailable('heat', true);
     tester.expectIsAvailable('megaCredits', true);
-    tester.expectIsAvailable('science', false);
+    tester.expectIsAvailable('lunaArchivesScience', false);
     tester.expectIsAvailable('seeds', false);
     tester.expectIsAvailable('auroraiData', false);
 
@@ -334,7 +334,7 @@ describe('SelectPayment', () => {
       title: 'foo',
       microbes: 0,
       floaters: 0,
-      science: 0,
+      lunaArchivesScience: 0,
       ...playerInputFields,
     };
 

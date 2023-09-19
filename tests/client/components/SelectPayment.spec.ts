@@ -111,7 +111,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 6},
-      {canUseData: true, auroraiData: 4});
+      {canUseAuroraiData: true, auroraiData: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();

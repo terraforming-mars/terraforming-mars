@@ -57,6 +57,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
       cost: this.cost - this.discount(player),
       tr: this.tr,
       auroraiData: true,
+      spireScience: true,
       reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
     };
   }
@@ -87,7 +88,8 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
         canUseSteel: canPayWith.steel,
         canUseTitanium: canPayWith.titanium,
         canUseSeeds: canPayWith.seeds,
-        canUseData: player.isCorporation(CardName.AURORAI),
+        canUseAuroraiData: player.isCorporation(CardName.AURORAI),
+        canUseSpireScience: player.isCorporation(CardName.SPIRE),
         canUseAsteroids: canPayWith.kuiperAsteroids && player.isCorporation(CardName.KUIPER_COOPERATIVE),
         title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
         afterPay: () => {

@@ -31,7 +31,7 @@ export class KuiperCooperative extends Card implements ICorporationCard, IAction
             ab.empty().startAction.asteroids(1).slash().space({played});
           }).br;
           b.effect('When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.', (eb) => {
-            eb.text('standard project').asterix().startEffect.asteroids(1).equals().megacredits(1);
+            eb.plate('Standard Project').asterix().startEffect.asteroids(1).equals().megacredits(1);
           });
         }),
       },

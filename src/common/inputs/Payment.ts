@@ -7,6 +7,7 @@ export const PAYMENT_KEYS = [
   'microbes',
   'floaters',
   'lunaArchivesScience',
+  'spireScience',
   'seeds',
   'auroraiData',
   'graphene',
@@ -37,6 +38,8 @@ export type Payment = {
   floaters: number;
   // Luna Archives corporation can spend its science resources for cards with Moon tags.
   lunaArchivesScience: number;
+  // Spire corporation can spend its science resources on standrad projects.
+  spireScience: number;
   // TODO(kberg): add test for Soylent Seedling Systems + Psychophiles.
   // Soylent Seedling Systems corporation can use its seeds to pay for cards with plant tags, or the standard greenery project.
   seeds: number;
@@ -65,6 +68,7 @@ export namespace Payment {
     microbes: 0,
     floaters: 0,
     lunaArchivesScience: 0,
+    spireScience: 0,
     seeds: 0,
     auroraiData: 0,
     graphene: 0,
@@ -77,6 +81,7 @@ export namespace Payment {
     floaters: boolean,
     microbes: boolean,
     lunaArchivesScience: boolean,
+    spireScience: boolean,
     seeds: boolean,
     auroraiData: boolean,
     graphene: boolean,
@@ -89,6 +94,7 @@ export namespace Payment {
       floaters: payment.floaters ?? 0,
       heat: payment.heat ?? 0,
       lunaArchivesScience: payment.lunaArchivesScience ?? 0,
+      spireScience: payment.spireScience ?? 0,
       megaCredits: payment.megaCredits ?? 0,
       microbes: payment.microbes ?? 0,
       seeds: payment.seeds ?? 0,

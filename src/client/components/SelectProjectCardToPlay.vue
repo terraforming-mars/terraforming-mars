@@ -317,6 +317,7 @@ export default Vue.extend({
         graphene: this.graphene,
         auroraiData: 0,
         kuiperAsteroids: 0,
+        spireScience: 0,
       };
       let totalSpent = 0;
       for (const target of PAYMENT_KEYS) {

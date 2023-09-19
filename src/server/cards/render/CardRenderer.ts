@@ -280,8 +280,8 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
   }
 
-  public emptyTag() {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.EMPTY_TAG, -1));
+  public emptyTag(count: number = 1) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.EMPTY_TAG, count));
   }
 
   public wild(amount: number, options?: ItemOptions) {

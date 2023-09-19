@@ -7,36 +7,52 @@ import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {digit} from '../Options';
+import {SelectCard} from '../../inputs/SelectCard';
+import {LogHelper} from '../../LogHelper';
+import {CardResource} from '../../../common/CardResource';
 
-export class Sagitta extends Card implements ICorporationCard {
+export class Spire extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.SPIRE,
       tags: [Tag.CITY, Tag.EARTH],
       startingMegaCredits: 44,
       type: CardType.CORPORATION,
-
-      firstAction: {
-        text: 'Draw 4 cards, then discard 3 cards.',
-        drawCard: 4,
-        // discardCards: 3,
-      },
+      initialActionText: 'Draw 4 cards, then discard 3 cards.',
+      resourceType: CardResource.SCIENCE,
 
       metadata: {
         cardNumber: '',
-        renderData: CardRenderer.builder((b) =>
+        renderData: CardRenderer.builder((b) => {
           b.megacredits(44).plus().cards(4, {digit}).minus().cards(3, {digit}).br,
-        ),
-        // // You start with 44 M€. As your first action,
-        // draw 4 cards, then discard 3 cards from your hand.
-        // b.effect(
-        //   'When you play a card with at least 2 tags. including this. add a science resource here', (eb) => eb.noTags().startEffect.megacredits(4)).br;
-        // When you use a standard project, science resources here may be spent as 2 M€ each.
-        // }),
-        // description: 'You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.',
-        // );
+          b.plainText('You start with 44 M€. As your first action, draw 4 cards, ' +
+              'then discard 3 cards from your hand.').br;
+
+          b.effect('When you play a card with at least 2 tags. including this, add a science resource here.',
+            (eb) => eb.emptyTag(2).asterix().startEffect.science()).br;
+          b.effect('When you use a standard project, science resources here may be spent as 2 M€ each.',
+            (eb) => eb.plate('Standard Project').startEffect.science().equals().megacredits(2)).br;
+        }),
       },
     });
+  }
+
+  public initialAction(player: IPlayer) {
+    player.drawCard(4);
+    return new SelectCard('Select 3 cards to discard', 'Discard', player.cardsInHand, (cards) => {
+      for (const card of cards) {
+        const cardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
+        if (cardIndex === -1) {
+          console.error(`Error: card ${card.name} not in ${player.id}'s hand`);
+          return;
+        }
+        player.cardsInHand.splice(cardIndex, 1);
+        player.game.projectDeck.discard(card);
+        LogHelper.logDiscardedCards(player.game, cards);
+      }
+
+      return undefined;
+    }, {min: 3, max: 3});
   }
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {

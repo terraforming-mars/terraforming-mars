@@ -9,9 +9,10 @@ export type Options = {
   canUseSteel?: boolean;
   canUseTitanium?: boolean;
   canUseSeeds?: boolean,
-  canUseData?: boolean,
+  canUseAuroraiData?: boolean,
   canUseGraphene?: boolean;
   canUseAsteroids?: boolean;
+  canUseSpireScience?: boolean,
   title?: string | Message;
   afterPay?: () => void;
 }
@@ -48,7 +49,10 @@ export class SelectPaymentDeferred extends DeferredAction {
     if (this.options.canUseSeeds && (this.player.resourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS) > 0)) {
       return false;
     }
-    if (this.options.canUseData && (this.player.resourcesOnCard(CardName.AURORAI) > 0)) {
+    if (this.options.canUseAuroraiData && (this.player.resourcesOnCard(CardName.AURORAI) > 0)) {
+      return false;
+    }
+    if (this.options.canUseSpireScience && (this.player.resourcesOnCard(CardName.SPIRE) > 0)) {
       return false;
     }
 
@@ -73,7 +77,8 @@ export class SelectPaymentDeferred extends DeferredAction {
         titanium: this.options.canUseTitanium || false,
         heat: this.player.canUseHeatAsMegaCredits,
         seeds: this.options.canUseSeeds || false,
-        data: this.options.canUseData || false,
+        auroraiData: this.options.canUseAuroraiData || false,
+        spireScience: this.options.canUseSpireScience || false,
         lunaTradeFederationTitanium: this.player.canUseTitaniumAsMegacredits,
         kuiperAsteroids: this.options.canUseAsteroids || false,
       },

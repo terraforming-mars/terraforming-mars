@@ -21,6 +21,7 @@ export interface SelectPaymentModel {
     floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
     lunaArchivesScience?: number; // Luna Archives Science isn't used in this component, but it simplifies testing.
+    spireScience?: number;
     seeds?: number;
     auroraiData?: number;
     graphene?: number; // Graphene isn't used in this component, but it simplifies testing.
@@ -90,6 +91,8 @@ export const PaymentWidgetMixin = {
         return DATA_VALUE;
       case 'graphene':
         return GRAPHENE_VALUE;
+      case 'spireScience':
+        return 2;
       default:
         return 1;
       }
@@ -177,6 +180,7 @@ export const PaymentWidgetMixin = {
       case 'floaters':
       case 'microbes':
       case 'lunaArchivesScience':
+      case 'spireScience':
       case 'seeds':
       case 'auroraiData':
       case 'graphene':

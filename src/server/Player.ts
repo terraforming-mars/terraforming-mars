@@ -863,7 +863,9 @@ export class Player implements IPlayer {
       floaters: card.tags.includes(Tag.VENUS),
       microbes: card.tags.includes(Tag.PLANT),
       lunaArchivesScience: card.tags.includes(Tag.MOON),
-      // TODO(kberg): add this.corporation.name === CardName.AURORAI
+      // TODO(kberg): add this.isCorporation(CardName.SPIRE)
+      spireScience: card.type === CardType.STANDARD_PROJECT,
+      // TODO(kberg): add this.isCorporation(CardName.AURORAI)
       auroraiData: card.type === CardType.STANDARD_PROJECT,
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
       kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
@@ -933,6 +935,10 @@ export class Player implements IPlayer {
     return this.resourcesOnCard(CardName.KUIPER_COOPERATIVE);
   }
 
+  public getSpendableSpireScienceResources(): number {
+    return this.getCorporation(CardName.SPIRE)?.resourceCount ?? 0;
+  }
+
   public pay(payment: Payment) {
     const standardUnits = Units.of({
       megacredits: payment.megaCredits,
@@ -960,6 +966,7 @@ export class Player implements IPlayer {
     removeResourcesOnCard(CardName.PSYCHROPHILES, payment.microbes);
     removeResourcesOnCard(CardName.DIRIGIBLES, payment.floaters);
     removeResourcesOnCard(CardName.LUNA_ARCHIVES, payment.lunaArchivesScience);
+    removeResourcesOnCard(CardName.SPIRE, payment.spireScience);
     removeResourcesOnCard(CardName.CARBON_NANOSYSTEMS, payment.graphene);
     removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
     removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
@@ -1384,6 +1391,7 @@ export class Player implements IPlayer {
       floaters: this.getSpendableFloaters(),
       microbes: this.getSpendableMicrobes(),
       lunaArchivesScience: this.getSpendableLunaArchiveScienceResources(),
+      spireScience: this.getSpendableSpireScienceResources(),
       seeds: this.getSpendableSeedResources(),
       auroraiData: this.getSpendableData(),
       graphene: this.getSpendableGraphene(),
@@ -1417,6 +1425,7 @@ export class Player implements IPlayer {
       microbes: DEFAULT_MICROBES_VALUE,
       floaters: DEFAULT_FLOATERS_VALUE,
       lunaArchivesScience: 1,
+      spireScience: 2,
       seeds: constants.SEED_VALUE,
       auroraiData: constants.DATA_VALUE,
       graphene: constants.GRAPHENE_VALUE,
@@ -1431,6 +1440,7 @@ export class Player implements IPlayer {
       microbes: options?.microbes ?? false,
       floaters: options?.floaters ?? false,
       lunaArchivesScience: options?.lunaArchivesScience ?? false,
+      spireScience: options?.spireScience ?? false,
       seeds: options?.seeds ?? false,
       auroraiData: options?.auroraiData ?? false,
       graphene: options?.graphene ?? false,

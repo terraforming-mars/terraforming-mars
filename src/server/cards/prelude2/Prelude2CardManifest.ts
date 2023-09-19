@@ -13,7 +13,8 @@ import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
 import {PalladinShipping} from './PalladinShipping';
 import {RedAppeasement} from './RedAppeasement';
-import {Sagitta} from './Sagitta';
+import {SagittaFrontierServices} from './SagittaFrontierServices';
+import {Spire} from './Spire';
 import {SummitLogistics} from './SummitLogistics';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
@@ -38,8 +39,8 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   corporationCards: {
     [CardName.NIRGAL_ENTERPRISES]: {Factory: NirgalEnterprises},
     [CardName.PALLADIN_SHIPPING]: {Factory: PalladinShipping},
-    [CardName.SAGITTA]: {Factory: Sagitta},
+    [CardName.SAGITTA_FRONTIER_SERVICES]: {Factory: SagittaFrontierServices},
     [CardName.ECOTEC]: {Factory: Ecotec},
-    // [CardName.SPIRE]: {Factory: Spire},
+    [CardName.SPIRE]: {Factory: Spire},
   },
 });

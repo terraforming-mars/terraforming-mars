@@ -23,7 +23,7 @@ export class NobelPrize extends PreludeCard {
     });
   }
 
-  public override play(player: IPlayer) {
+  public override bespokePlay(player: IPlayer) {
     player.drawCard(2, {include: ((card) =>card.requirements !== undefined)});
     return undefined;
   }

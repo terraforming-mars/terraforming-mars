@@ -12,7 +12,7 @@ import {intersection} from '../../../common/utils/utils';
 export class MarsNomads extends Card implements IActionCard {
   constructor() {
     super({
-      type: CardType.AUTOMATED,
+      type: CardType.ACTIVE,
       name: CardName.MARS_NOMADS,
       cost: 13,
 

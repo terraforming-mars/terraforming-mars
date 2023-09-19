@@ -27,7 +27,7 @@ export class AddResourcesToCard extends DeferredAction {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
   }
 
-  private getCards(): Array<ICard> {
+  private getCardsInPlay(): Array<ICard> {
     let cards = this.player.getResourceCards(this.resourceType);
     const restrictedTag = this.options.restrictedTag;
     if (restrictedTag !== undefined) {
@@ -36,8 +36,8 @@ export class AddResourcesToCard extends DeferredAction {
     if (this.options.filter !== undefined) {
       cards = cards.filter(this.options.filter);
     }
-    if (this.options.min) {
-      const min = this.options.min;
+    const min = this.options.min;
+    if (min) {
       cards = cards.filter((c) => c.resourceCount >= min);
     }
     return cards;
@@ -67,7 +67,11 @@ export class AddResourcesToCard extends DeferredAction {
    * This is made public because of `Executor.canExecute` and should probably be someplace else.
    */
   public getCardCount(): number {
-    return this.getCards().length + this.getSelfReplicatingRobotCards().length;
+    return this.getCardsInPlay().length + this.getSelfReplicatingRobotCards().length;
+  }
+
+  public getCards(): [Array<ICard>, Array<RobotCard>] {
+    return [this.getCardsInPlay(), this.getSelfReplicatingRobotCards()];
   }
 
   public execute() {
@@ -83,7 +87,7 @@ export class AddResourcesToCard extends DeferredAction {
     const title = this.options.title ??
       'Select card to add ' + count + ' ' + (this.resourceType || 'resources') + '(s)';
 
-    const cards = this.getCards();
+    const cards = this.getCardsInPlay();
     if (cards.length === 0) {
       return undefined;
     }
@@ -107,7 +111,7 @@ export class AddResourcesToCard extends DeferredAction {
 
   private execute2() {
     const count = this.options.count ?? 1;
-    const cards = this.getCards();
+    const cards = this.getCardsInPlay();
     const robotCards = this.getSelfReplicatingRobotCards();
     return new SelectCard(
       'Select card to add resource',

@@ -135,8 +135,19 @@ export class Executor implements BehaviorExecutor {
           min: arctac.min,
           robotCards: arctac.robotCards !== undefined,
         });
-        if (action.getCardCount() === 0) {
+        const cards = action.getCards();
+        const count = cards[0].length + cards[1].length;
+        if (count === 0) {
           return false;
+        }
+        // Not playable if the behavior is based on spending a resource
+        // from itself to add to itself, like Applied Science.
+        if (count === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
+          // TODO(kberg): also check wither arctac.min + spend is enough.
+          // but that's just to make this future-proof.
+          if (cards[0][0]?.name === card.name) {
+            return false;
+          }
         }
       }
     }

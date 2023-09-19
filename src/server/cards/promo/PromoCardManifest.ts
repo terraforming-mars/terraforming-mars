@@ -129,6 +129,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.KAGUYA_TECH]: {Factory: KaguyaTech},
     [CardName.MARS_NOMADS]: {Factory: MarsNomads},
     [CardName.NEPTUNIAN_POWER_CONSULTANTS]: {Factory: NeptunianPowerConsultants},
+    // [CardName.MARTIAN_LUMBER_CORP]: {Factory: MartianLumberCorp},
   },
 
   preludeCards: {

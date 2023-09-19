@@ -10,6 +10,7 @@ import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
 import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {TRSource} from '../../common/cards/TRSource';
+import {sum} from '../../common/utils/utils';
 
 export type SpaceCosts = {
   stock: Units,
@@ -201,9 +202,9 @@ export abstract class Board {
       }
     }
     if (additionalCosts.production > 0) {
-      const p = player.production;
-      const sum = p.megacredits + 5 + p.steel + p.titanium + p.plants + p.energy + p.heat;
-      return sum > additionalCosts.production;
+      // +5 because megacredits goes to -5
+      const availableProduction = sum(Units.values(player.production)) + 5;
+      return availableProduction > additionalCosts.production;
     }
     return true;
   }

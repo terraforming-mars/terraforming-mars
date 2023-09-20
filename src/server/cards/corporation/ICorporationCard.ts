@@ -11,7 +11,7 @@ export interface ICorporationCard extends ICard {
   firstAction?: Behavior,
   startingMegaCredits: number;
   cardCost?: number;
-  onCorpCardPlayed?: (player: IPlayer, card: ICorporationCard) => PlayerInput | undefined;
+  onCorpCardPlayed?: (player: IPlayer, card: ICorporationCard, cardOwner: IPlayer) => PlayerInput | undefined;
   onProductionPhase?: (player: IPlayer) => undefined; // For Pristar
 
   serialize?(serialized: SerializedCard): void;

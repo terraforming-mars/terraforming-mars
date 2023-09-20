@@ -40,16 +40,23 @@ export class SagittaFrontierServices extends Card implements ICorporationCard {
     return undefined;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard, cardOwner: IPlayer) {
+    if (player === cardOwner) {
+      this.onCardPlayed(cardOwner, card);
+    }
+    return undefined;
+  }
+
+  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard) {
     if (player.isCorporation(this.name)) {
       const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
       if (count === 0) {
         player.stock.megacredits += 4;
-        player.game.log('${0} gained 4 M€ for playing a card with no tags.', (b) => b.player(player));
+        player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
       }
       if (count === 1) {
         player.stock.megacredits += 1;
-        player.game.log('${0} gained 1 M€ for playing a card with exactly 1 tag.', (b) => b.player(player));
+        player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
       }
     }
   }

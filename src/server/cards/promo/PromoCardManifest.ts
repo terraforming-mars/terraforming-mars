@@ -58,6 +58,7 @@ import {Potatoes} from './Potatoes';
 import {ProjectInspection} from './ProjectInspection';
 import {Psyche} from './16Psyche';
 import {Recyclon} from './Recyclon';
+import {RedShips} from './RedShips';
 import {RegoPlastics} from './RegoPlastics';
 import {RobotPollinators} from './RobotPollinators';
 import {SaturnSurfing} from './SaturnSurfing';
@@ -130,6 +131,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.MARS_NOMADS]: {Factory: MarsNomads},
     [CardName.NEPTUNIAN_POWER_CONSULTANTS]: {Factory: NeptunianPowerConsultants},
     // [CardName.MARTIAN_LUMBER_CORP]: {Factory: MartianLumberCorp},
+    [CardName.RED_SHIPS]: {Factory: RedShips},
   },
 
   preludeCards: {

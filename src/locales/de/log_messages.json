@@ -118,6 +118,7 @@
     "agenda(s)": "Agenda(en)",
     "seed(s)": "Saatgut",
     "specialized robot(s)": "spezialisierten Roboter",
+    "hydroelectric resource(s)": "hydroelektrische Ressource(n)",
 
     "${0} played ${1}": "${0} hat ${1} gespielt",
     "${0} used ${1} action": "${0} hat eine Aktion von ${1} genutzt",

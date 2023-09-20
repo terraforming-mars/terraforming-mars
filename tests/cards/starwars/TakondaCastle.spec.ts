@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {TakondaCastle} from '../../../src/server/cards/starwars/TakondaCastle';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -8,11 +7,10 @@ import {Tag} from '../../../src/common/cards/Tag';
 describe('TakondaCastle', () => {
   let card: TakondaCastle;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(() => {
     card = new TakondaCastle();
-    [game, player] = testGame(1, {starWarsExpansion: true});
+    [, player] = testGame(1, {starWarsExpansion: true});
   });
 
   it('play', () => {

@@ -10,6 +10,8 @@ import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralRese
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {PlayerInput} from '../../../src/server/PlayerInput';
+import {Payment} from '../../../src/common/inputs/Payment';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('ToolWithTheFirstOrder', () => {
   let card: ToolWithTheFirstOrder;
@@ -40,7 +42,7 @@ describe('ToolWithTheFirstOrder', () => {
     player.takeAction();
     const [waitingFor, cb] = player.popWaitingFor2();
     const playProjectCard = findOption(waitingFor!, 'Play project card');
-    cast(playProjectCard, SelectProjectCardToPlay).cb(card);
+    cast(playProjectCard, SelectProjectCardToPlay).payAndPlay(card, Payment.of({megaCredits: 5}));
     cb!();
     runAllActions(game);
 
@@ -51,16 +53,16 @@ describe('ToolWithTheFirstOrder', () => {
 
     player.takeAction();
     const [waitingFor1, cb1] = player.popWaitingFor2();
-    const patents1 = findOption(waitingFor1!, 'Sell patents');
-    patents1.cb(player.cardsInHand[0]);
+    const patents1 = cast(findOption(waitingFor1!, 'Sell patents'), SelectCard);
+    patents1.cb([player.cardsInHand[0]]);
     cb1!();
 
     expect(player.actionsTakenThisRound).eq(2);
     expect(game.activePlayer).eq(player.id);
 
     const [waitingFor2, cb2] = player.popWaitingFor2();
-    const patents2 = findOption(waitingFor2!, 'Sell patents');
-    patents2.cb(player.cardsInHand[0]);
+    const patents2 = cast(findOption(waitingFor2!, 'Sell patents'), SelectCard);
+    patents2.cb([player.cardsInHand[0]]);
     cb2!();
 
     expect(game.activePlayer).eq(player2.id);

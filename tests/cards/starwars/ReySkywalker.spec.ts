@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+// import {expect} from 'chai';
 import {ReySkywalker} from '../../../src/server/cards/starwars/ReySkywalker';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -15,6 +15,7 @@ describe('ReySkywalker', () => {
     [game, player, player2] = testGame(2, {starWarsExpansion: true});
   });
 
-  it('Can play', () => {
+  it('Can play, invalid test', () => {
+    console.log('ignoring this test for now', card, player, player2, game);
   });
 });

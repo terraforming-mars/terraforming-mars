@@ -17,7 +17,7 @@ export class SelectProductionToLose extends BasePlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
-  // TODO(kberg): Coul dmerge this with SelectResources, though it
+  // TODO(kberg): Could merge this with SelectResources, though it
   // would take some work.
   public process(input: InputResponse, player: IPlayer) {
     if (!isSelectProductionToLoseResponse(input)) {

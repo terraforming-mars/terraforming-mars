@@ -82,6 +82,11 @@ export interface IGame extends Logger {
   stJosephCathedrals: Array<SpaceId>;
   // Mars Nomads
   nomadSpace: SpaceId | undefined;
+  // Trade Embargo
+  tradeEmbargo: boolean;
+  // Behold The Emperor
+  beholdTheEmperor: boolean;
+
   // The set of tags available in this game.
   readonly tags: ReadonlyArray<Tag>;
   // Function use to properly start the game: with project draft or with research phase

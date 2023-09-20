@@ -150,7 +150,7 @@ export class Game implements IGame, Logger {
 
   // Trade Embargo
   public tradeEmbargo: boolean = false;
-  // Trade Embargo
+  // Behold The Emperor
   public beholdTheEmperor: boolean = false;
 
   private constructor(

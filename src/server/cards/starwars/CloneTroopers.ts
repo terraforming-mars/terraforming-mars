@@ -13,8 +13,9 @@ import {CardRequirements} from '../requirements/CardRequirements';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
-import {newMessage} from '../../../server/logs/MessageBuilder';
-import {Behavior} from '@/server/behavior/Behavior';
+import {newMessage} from '../../logs/MessageBuilder';
+import {SelectResource} from '../../inputs/SelectResource';
+import {Units} from '../../../common/Units';
 
 export class CloneTroopers extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -51,25 +52,23 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
         return undefined;
       }));
       if (player.game.isSoloMode()) {
-        ALL_RESOURCES.forEach((resource) => {
-          options.options.push(new SelectOption(
-            newMessage('Steal 1 ${0}', (b) => b.string(resource)),
-            'steal', () => {
-              player.addResource(resource, 1);
-              player.removeResourceFrom(this, 1);
-              return undefined;
-            }));
-        });
+        options.options.push(new SelectResource('Steal a resource', Units.keys,
+          (resource) => {
+            player.stock.add(Units.ResourceMap[resource], 1);
+            player.removeResourceFrom(this, 1);
+            return undefined;
+          },
+        ));
       } else {
-        const allPlayers = player.game.getPlayers().filter((p) => p.id === player.id);
+        const allPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);
         ALL_RESOURCES.forEach((resource) => {
           allPlayers.forEach((p) => {
-            if (p.getResource(resource) > 0) {
+            if (p.stock.get(resource) > 0) {
               // TODO(kberg): Included protected resources
               options.options.push(new SelectOption(
                 newMessage('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(p)),
                 'steal', () => {
-                  p.stealResource(resource, 1, player);
+                  p.stock.steal(resource, 1, player);
                   player.removeResourceFrom(this, 1);
                   return undefined;
                 }));

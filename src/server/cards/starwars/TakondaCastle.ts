@@ -20,7 +20,7 @@ export class TakondaCastle extends Card {
       metadata: {
         cardNumber: 'SW07',
         renderData: CardRenderer.builder((b) => {
-          b.startAction.megacredits(1).slash().microbes(1, {played}).animals(1, {played});
+          b.megacredits(1).slash().microbes(1, {played}).animals(1, {played});
         }),
         description: 'Gain 1 M€ for each of your microbe tags and animal tags.',
       },

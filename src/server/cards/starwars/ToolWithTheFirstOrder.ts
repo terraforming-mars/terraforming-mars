@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class ToolWithTheFirstOrder extends Card implements IProjectCard {
   constructor() {
     super({
-      type: CardType.ACTIVE,
+      type: CardType.AUTOMATED,
       name: CardName.TOOL_WITH_THE_FIRST_ORDER,
       tags: [Tag.POWER, Tag.PLANT],
       cost: 5,
@@ -21,7 +21,7 @@ export class ToolWithTheFirstOrder extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'SW08',
         renderData: CardRenderer.builder((b) => {
-          b.arrow().nbsp.tr(1);
+          b.arrow().br.tr(1);
         }),
         description: 'Take another action this turn. Gain 1 TR.',
       },

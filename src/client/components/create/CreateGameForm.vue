@@ -148,9 +148,9 @@
                             </label>
 
                             <input type="checkbox" name="starwars" id="starwars-checkbox" v-model="starWarsExpansion">
-                            <label for="ceo-checkbox" class="expansion-button">
+                            <label for="starwars-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-starwars"></div>
-                                <span v-i18n>Star Wars (BETA)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Star Wars 🆕(β)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>
 

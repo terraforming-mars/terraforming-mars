@@ -174,7 +174,6 @@ export default Vue.extend({
       case RequirementType.OXYGEN:
       case RequirementType.TEMPERATURE:
       case RequirementType.VENUS:
-      case RequirementType.CHAIRMAN:
       case RequirementType.PARTY:
       case RequirementType.REMOVED_PLANTS:
         return false;

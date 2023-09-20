@@ -1,5 +1,5 @@
-import {Player} from '../../Player';
-import {isHazardTileType} from '../../../common/TileType';
+import {IPlayer} from '../../IPlayer';
+import {isHazardTileType} from '../../../common/AresTileType';
 import {BaseMilestone} from '../IMilestone';
 
 export class Tropicalist extends BaseMilestone {
@@ -10,7 +10,7 @@ export class Tropicalist extends BaseMilestone {
       3);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.game.board.spaces
       .filter((space) => space.player !== undefined &&
           space.player === player &&

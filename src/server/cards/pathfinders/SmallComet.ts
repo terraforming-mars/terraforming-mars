@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -38,11 +38,11 @@ export class SmallComet extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     game.getPlayers().forEach((p) => {
       if (!p.plantsAreProtected()) {
-        p.deductResource(Resource.PLANTS, 2, {log: true, from: player});
+        p.stock.deduct(Resource.PLANTS, 2, {log: true, from: player});
       }
     });
     return undefined;

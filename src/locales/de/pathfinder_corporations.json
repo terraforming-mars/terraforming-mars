@@ -49,6 +49,12 @@
   "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(AKTION: Entferne 2 Agenden von dieser Karte, um 1 Delegierten in eine Partei zu platzieren.)",
   "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(AKTION: Entferne 5 Agenden von dieser Karte, um ein Stadtplättchen zu platzieren.)",
   "(You start with 44 M€ and 1 agenda resource to this card.)": "(Du beginnst mit 44 M€. Füge dieser Karte 1 Agenda hinzu.)",
+  
+  "GAGARIN MOBILE BASE": "Gagarin",
+  "move": "bewege",
+  "(Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.)": "(AKTION: Bewege den Gagarin-Marker auf das nächste freie benachbarte (auch reservierte) Feld. Erhalte den Platzierungsbonus des Feldes.)",
+  "(Effect: When another player places a tile where the Base is, move the Base.)": "(EFFEKT: Wenn ein anderer Spieler ein Plättchen auf das Gagarin-Feld platziert, bewege den Marker wieder auf das nächste freie benachbarte Feld und erhalte den Platzierungsbonus.)",
+  "(You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.)": "(Du beginnst mit 42 M€. Als deine erste Aktion platzierst du den Gagarin-Mobilstation-Marker auf ein (auch reserviertes) Feld auf. Erhalte den Platzierungsbonus des Feldes.)",
 
   "Polaris": "Polaris",
   "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(EFFEKT: Wenn ein Ozeanplättchen platziert wird, erhöhe deine M€-Produktion um 1. Wenn du ein Ozeanplättchen platzierst, erhalte 4 M€.)",
@@ -62,6 +68,11 @@
   "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(EFFEKT: Wenn du ein Venussymbol ausspielst (einschließlich dieses), füge einer beliebigen Karte 1 Schweber hinzu.)",
   "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(AKTION: Entferne 3 Schweber von dieser Karte, um Venus um 2% ODER den Sauerstoffgehalt um 1% zu erhöhen.)",
   "(You start with 39 M€.)": "(Du beginnst mit 39 M€.)",
+  
+  "Solbank": "Sonnen-Bank",
+  "(Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.)": "(EFFEKT: Immer wenn du M€ (oder Stahl oder Titan) zahlst, füge 1 Datenressource zu dieser Karte hinzu.)",
+  "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(EFFEKT: Während der Produktionsphase wandelst du alle Daten auf dieser Karte in je 1 M€ um.)",
+  "(You start with 40 M€.)": "(Du beginnst mit 40 M€.)",
 
   "Soylent Seedling Systems": "Soylent-Setzlingssysteme",
   "(Effect: When you place a greenery tile, add 1 seed resource to this card.)": "(EFFEKT: Wenn du ein Grünflchenplättchen platzierst, füge dieser Karte 1 Saatgut hinzu.)",

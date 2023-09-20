@@ -86,7 +86,7 @@ import {OrbitalPowerGrid} from './OrbitalPowerGrid';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
-// import {RoadPiracy} from './RoadPiracy';
+import {RoadPiracy} from './RoadPiracy';
 import {RoverDriversUnion} from './RoverDriversUnion';
 import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
@@ -168,7 +168,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.REVOLTING_COLONISTS]: {Factory: RevoltingColonists},
     [CardName.COSMIC_RADIATION]: {Factory: CosmicRadiation},
     [CardName.OFF_WORLD_CITY_LIVING]: {Factory: OffWorldCityLiving},
-    //   [CardName.ROAD_PIRACY]: {Factory: RoadPiracy},
+    [CardName.ROAD_PIRACY]: {Factory: RoadPiracy},
     [CardName.LUNAR_MINE_URBANIZATION]: {Factory: LunarMineUrbanization},
     [CardName.THORIUM_RUSH]: {Factory: ThoriumRush},
     [CardName.HE3_PRODUCTION_QUOTAS]: {Factory: HE3ProductionQuotas, compatibility: 'turmoil'},

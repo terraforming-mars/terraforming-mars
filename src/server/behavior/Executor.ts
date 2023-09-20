@@ -4,7 +4,7 @@ import {TRSource} from '../../common/cards/TRSource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
-import {Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
@@ -14,7 +14,7 @@ import {PlaceMoonHabitatTile} from '../moon/PlaceMoonHabitatTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
-import {Player} from '../Player';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Behavior} from './Behavior';
 import {Counter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -25,17 +25,20 @@ import {Resource} from '../../common/Resource';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
+import {Payment} from '../../common/inputs/Payment';
+import {SelectResources} from '../inputs/SelectResources';
 
 export class Executor implements BehaviorExecutor {
-  public canExecute(behavior: Behavior, player: Player, card: ICard) {
+  public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
     const ctx = new Counter(player, card);
+    const asTrSource = this.toTRSource(behavior);
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
       return false;
     }
 
     if (behavior.or) {
-      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card))) {
+      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card, canAffordOptions))) {
         return false;
       }
     }
@@ -56,6 +59,7 @@ export class Executor implements BehaviorExecutor {
       // }
     }
 
+    // TODO(kberg): Spend is not combined with PredictedCost.
     if (behavior.spend !== undefined) {
       const spend = behavior.spend;
       if (spend.megacredits && !player.canAfford(spend.megacredits)) {
@@ -73,11 +77,20 @@ export class Executor implements BehaviorExecutor {
       if (spend.energy && player.energy < spend.energy) {
         return false;
       }
+      if (spend.heat) {
+        if (player.availableHeat() < spend.heat) {
+          return false;
+        }
+        if (!player.canAfford({
+          cost: 0,
+          reserveUnits: Units.of({heat: spend.heat}),
+          tr: asTrSource,
+        })) {
+          return false;
+        }
+      }
       if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
         return false;
-      }
-      if (spend.heat) {
-        throw new Error('spending heat not yet supported.');
       }
     }
 
@@ -95,20 +108,20 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.city !== undefined) {
       if (behavior.city.space === undefined) {
-        if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city').length === 0) {
+        if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city', canAffordOptions).length === 0) {
           return false;
         }
       }
     }
 
     if (behavior.greenery !== undefined) {
-      if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery').length === 0) {
+      if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
         return false;
       }
     }
 
     if (behavior.tile !== undefined) {
-      if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on).length === 0) {
+      if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on, canAffordOptions).length === 0) {
         return false;
       }
     }
@@ -116,9 +129,25 @@ export class Executor implements BehaviorExecutor {
     if (behavior.addResourcesToAnyCard !== undefined) {
       const arctac = behavior.addResourcesToAnyCard;
       if (!Array.isArray(arctac) && arctac.mustHaveCard === true) {
-        const action = new AddResourcesToCard(player, arctac.type, {count: ctx.count(arctac.count), restrictedTag: arctac.tag});
-        if (action.getCards().length === 0) {
+        const action = new AddResourcesToCard(player, arctac.type, {
+          count: ctx.count(arctac.count),
+          restrictedTag: arctac.tag,
+          min: arctac.min,
+          robotCards: arctac.robotCards !== undefined,
+        });
+        const cards = action.getCards();
+        const count = cards[0].length + cards[1].length;
+        if (count === 0) {
           return false;
+        }
+        // Not playable if the behavior is based on spending a resource
+        // from itself to add to itself, like Applied Science.
+        if (count === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
+          // TODO(kberg): also check wither arctac.min + spend is enough.
+          // but that's just to make this future-proof.
+          if (cards[0][0]?.name === card.name) {
+            return false;
+          }
         }
       }
     }
@@ -164,7 +193,7 @@ export class Executor implements BehaviorExecutor {
     return true;
   }
 
-  public execute(behavior: Behavior, player: Player, card: ICard) {
+  public execute(behavior: Behavior, player: IPlayer, card: ICard) {
     const ctx = new Counter(player, card);
 
     if (behavior.or !== undefined) {
@@ -199,20 +228,26 @@ export class Executor implements BehaviorExecutor {
         // Exit early as the rest of handled by the deferred action.
         return;
       }
-      if (spend.steel) {
-        player.deductResource(Resource.STEEL, spend.steel);
-      }
-      if (spend.titanium) {
-        player.deductResource(Resource.TITANIUM, spend.titanium);
-      }
+      // player.pay triggers Sol Bank.
+      player.pay(Payment.of({
+        steel: spend.steel ?? 0,
+        titanium: spend.titanium ?? 0,
+      }));
       if (spend.plants) {
-        player.deductResource(Resource.PLANTS, spend.plants);
+        player.stock.deduct(Resource.PLANTS, spend.plants);
       }
       if (spend.energy) {
-        player.deductResource(Resource.ENERGY, spend.energy);
+        player.stock.deduct(Resource.ENERGY, spend.energy);
       }
       if (spend.heat) {
-        throw new Error('Spending heat not supported yet.');
+        player.defer(player.spendHeat(spend.heat, () => {
+          const copy = {...behavior};
+          delete copy['spend'];
+          this.execute(copy, player, card);
+          return undefined;
+        }));
+        // Exit early as the rest of handled by the deferred action.
+        return;
       }
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);
@@ -225,7 +260,14 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.stock) {
       const units = ctx.countUnits(behavior.stock);
-      player.addUnits(units, {log: true});
+      player.stock.addUnits(units, {log: true});
+    }
+    if (behavior.standardResource) {
+      player.defer(new SelectResources(
+        player,
+        behavior.standardResource,
+        `Gain ${behavior.standardResource} resources.`,
+      ));
     }
     if (behavior.steelValue === 1) {
       player.increaseSteelValue();
@@ -246,16 +288,13 @@ export class Executor implements BehaviorExecutor {
         if (drawCard.keep === undefined && drawCard.pay === undefined) {
           player.drawCard(ctx.count(drawCard.count), {tag: drawCard.tag, resource: drawCard.resource, cardType: drawCard.type});
         } else {
-          const input = player.drawCardKeepSome(ctx.count(drawCard.count), {
+          player.drawCardKeepSome(ctx.count(drawCard.count), {
             tag: drawCard.tag,
             resource: drawCard.resource,
             cardType: drawCard.type,
             keepMax: drawCard.keep,
             paying: drawCard.pay,
           });
-          // By moving behavior to this object, Priority for this action is changing from DEFAULT.
-          // TODO(kberg): remove this comment block by 2023-10-01, or once bug reports on card drawing order subsides.
-          player.defer(input, Priority.DRAW_CARDS);
         }
       }
     }
@@ -268,23 +307,32 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.tr !== undefined) {
-      player.increaseTerraformRatingSteps(behavior.tr);
+      player.increaseTerraformRating(behavior.tr);
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {
       const count = ctx.count(addResources);
       player.game.defer(new SimpleDeferredAction(player, () => {
-        player.addResourceTo(card, count);
+        player.addResourceTo(card, {qty: count, log: true});
         return undefined;
       }));
     }
 
     if (behavior.addResourcesToAnyCard) {
       const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
-      for (const entry of array) {
-        const count = ctx.count(entry.count);
+      for (const arctac of array) {
+        const count = ctx.count(arctac.count);
         if (count > 0) {
-          player.game.defer(new AddResourcesToCard(player, entry.type, {count, restrictedTag: entry.tag}));
+          player.game.defer(
+            new AddResourcesToCard(
+              player,
+              arctac.type,
+              {
+                count,
+                restrictedTag: arctac.tag,
+                min: arctac.min,
+                robotCards: arctac.robotCards !== undefined,
+              }));
         }
       }
     }
@@ -408,7 +456,7 @@ export class Executor implements BehaviorExecutor {
     }
   }
 
-  public onDiscard(behavior: Behavior, player: Player, _card: ICard) {
+  public onDiscard(behavior: Behavior, player: IPlayer, _card: ICard) {
     if (behavior.steelValue === 1) {
       player.decreaseSteelValue();
     }

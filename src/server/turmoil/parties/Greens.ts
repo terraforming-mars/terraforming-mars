@@ -1,13 +1,13 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
-import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
+import {Space} from '../../boards/Space';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -31,15 +31,15 @@ class GreensBonus01 implements Bonus {
   readonly id = 'gb01' as const;
   readonly description = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     return player.tags.count(Tag.PLANT, 'raw') +
       player.tags.count(Tag.MICROBE, 'raw') +
       player.tags.count(Tag.ANIMAL, 'raw');
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -49,15 +49,15 @@ class GreensBonus02 implements Bonus {
   readonly description = 'Gain 2 M€ for each greenery tile you have';
   readonly isDefault = false;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     const boardSpaces = player.game.board.spaces;
     const count = boardSpaces.filter((space) => Board.isGreenerySpace(space) && Board.spaceOwnedBy(space, player)).length;
     return count * 2;
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -67,9 +67,9 @@ class GreensPolicy01 implements Policy {
   readonly id = 'gp01' as const;
   readonly description = 'When you place a greenery tile, gain 4 M€';
 
-  onTilePlaced(player: Player, space: ISpace) {
+  onTilePlaced(player: IPlayer, space: Space) {
     if (Board.isGreenerySpace(space) && player.game.phase === Phase.ACTION) {
-      player.addResource(Resource.MEGACREDITS, 4);
+      player.stock.add(Resource.MEGACREDITS, 4);
     }
   }
 }
@@ -79,8 +79,8 @@ class GreensPolicy02 implements Policy {
   readonly description = 'When you place a tile, gain 1 plant';
   readonly isDefault = false;
 
-  onTilePlaced(player: Player) {
-    player.addResource(Resource.PLANTS, 1);
+  onTilePlaced(player: IPlayer) {
+    player.stock.add(Resource.PLANTS, 1);
   }
 }
 
@@ -89,11 +89,11 @@ class GreensPolicy03 implements Policy {
   readonly description = 'When you play an animal, plant or microbe tag, gain 2 M€';
   readonly isDefault = false;
 
-  onCardPlayed(player: Player, card: IProjectCard) {
+  onCardPlayed(player: IPlayer, card: IProjectCard) {
     const tags = [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE];
     const tagCount = card.tags.filter((tag) => tags.includes(tag)).length;
 
-    player.addResource(Resource.MEGACREDITS, tagCount * 2);
+    player.stock.add(Resource.MEGACREDITS, tagCount * 2);
   }
 }
 
@@ -102,11 +102,11 @@ class GreensPolicy04 implements Policy {
   readonly description = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
   readonly isDefault = false;
 
-  canAct(player: Player) {
+  canAct(player: IPlayer) {
     return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player) {
+  action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Greens action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
@@ -140,7 +140,7 @@ class GreensPolicy04 implements Policy {
           }
 
           orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm', () => {
-            player.addResource(Resource.PLANTS, 3);
+            player.stock.add(Resource.PLANTS, 3);
             game.log('${0} gained 3 plants', (b) => b.player(player));
             return undefined;
           }));

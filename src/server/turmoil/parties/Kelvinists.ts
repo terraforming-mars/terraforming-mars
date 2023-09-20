@@ -1,11 +1,11 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {CardName} from '../../../common/cards/CardName';
@@ -22,13 +22,13 @@ class KelvinistsBonus01 implements Bonus {
   readonly isDefault = true;
   readonly description = 'Gain 1 M€ for each heat production you have';
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     return player.production.heat;
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -38,13 +38,13 @@ class KelvinistsBonus02 implements Bonus {
   readonly description = 'Gain 1 heat for each heat production you have';
   readonly isDefault = false;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     return player.production.heat;
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.HEAT, this.getScore(player));
+      player.stock.add(Resource.HEAT, this.getScore(player));
     });
   }
 }
@@ -52,19 +52,19 @@ class KelvinistsBonus02 implements Bonus {
 class KelvinistsPolicy01 implements Policy {
   readonly isDefault = true;
   readonly id = 'kp01' as const;
-  description(player: Player | undefined): string {
+  description(player: IPlayer | undefined): string {
     const cost = player === undefined ? 10 : this.cost(player);
     return `Pay ${cost} M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)`;
   }
 
-  cost(player: Player): number {
+  cost(player: IPlayer): number {
     return player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
   }
-  canAct(player: Player) {
+  canAct(player: IPlayer) {
     return player.canAfford(this.cost(player));
   }
 
-  action(player: Player) {
+  action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.defer(new SelectPaymentDeferred(
@@ -95,11 +95,11 @@ class KelvinistsPolicy03 implements Policy {
   readonly description = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
   readonly isDefault = false;
 
-  canAct(player: Player) {
+  canAct(player: IPlayer) {
     return player.availableHeat() >= 6 && player.game.getTemperature() < MAX_TEMPERATURE;
   }
 
-  action(player: Player) {
+  action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
@@ -116,8 +116,8 @@ class KelvinistsPolicy04 implements Policy {
   readonly description = 'When you place a tile, gain 2 heat';
   readonly isDefault = false;
 
-  onTilePlaced(player: Player) {
-    player.addResource(Resource.HEAT, 2);
+  onTilePlaced(player: IPlayer) {
+    player.stock.add(Resource.HEAT, 2);
   }
 }
 

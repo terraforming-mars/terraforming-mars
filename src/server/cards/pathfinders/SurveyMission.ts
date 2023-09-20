@@ -1,15 +1,15 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Board} from '../../boards/Board';
+import {MarsBoard} from '../../boards/MarsBoard';
 import {BoardType} from '../../boards/BoardType';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {LogHelper} from '../../LogHelper';
 import {digit} from '../Options';
 
-type Triplet = [ISpace, ISpace, ISpace];
+type Triplet = [Space, Space, Space];
 export class SurveyMission extends PreludeCard {
   constructor() {
     super({
@@ -32,14 +32,14 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  private validTriplets(board: Board): Array<Triplet> {
+  private validTriplets(board: MarsBoard): Array<Triplet> {
     const spaces = board.getNonReservedLandSpaces().filter((space) => {
       return space.player === undefined && (space.tile === undefined || space.tile.protectedHazard === true);
     });
 
     const result: Array<Triplet> = [];
 
-    function validAdjacentSpace(s1: ISpace, s2: ISpace) {
+    function validAdjacentSpace(s1: Space, s2: Space) {
       // Ignore spaces before or above, those were covered earlier.
       // This is not just an optimization but also prevents storing
       // multiple triplets with the same spaces, but in a different order.
@@ -65,17 +65,17 @@ export class SurveyMission extends PreludeCard {
     return result;
   }
 
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     return this.validTriplets(player.game.board).length > 0;
   }
 
-  private selectSpace(player: Player, iteration: number, triplets: Array<Triplet>): SelectSpace {
+  private selectSpace(player: IPlayer, iteration: number, triplets: Array<Triplet>): SelectSpace {
     const messages = [
       'Select first space',
       'Select second space',
       'Select third space',
     ];
-    const spaceSet: Set<ISpace> = new Set(triplets.flat());
+    const spaceSet: Set<Space> = new Set(triplets.flat());
     const spaces = Array.from(spaceSet).filter((space) => space.player === undefined);
     spaces.sort((s1, s2) => parseInt(s2.id) - parseInt(s1.id));
     return new SelectSpace(messages[iteration], spaces, (space) => {
@@ -97,7 +97,7 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const triplets = this.validTriplets(player.game.board);
     return this.selectSpace(player, 0, triplets);
   }

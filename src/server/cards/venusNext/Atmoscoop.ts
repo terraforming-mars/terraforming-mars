@@ -1,8 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Game} from '../../Game';
+import {IPlayer} from '../../IPlayer';
+import {IGame} from '../../IGame';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
@@ -41,20 +41,23 @@ export class Atmoscoop extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       // TODO(kberg): this is not correct, because the titanium can't be used for the reds cost.
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
+      return player.canAfford({
+        cost: this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised,
+        titanium: true,
+      });
     }
 
     return true;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
       return undefined;
@@ -81,11 +84,11 @@ export class Atmoscoop extends Card implements IProjectCard {
     return undefined;
   }
 
-  private temperatureIsMaxed(game: Game) {
+  private temperatureIsMaxed(game: IGame) {
     return game.getTemperature() === constants.MAX_TEMPERATURE;
   }
 
-  private venusIsMaxed(game: Game) {
+  private venusIsMaxed(game: IGame) {
     return game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
   }
 }

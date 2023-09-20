@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -25,7 +25,7 @@ export class Zan extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
@@ -35,7 +35,7 @@ export class Zan extends CeoCard {
     }
     // If we dont do this player will not get the bonus for POLITICAN Awards
     player.totalDelegatesPlaced += totalAvailableDelegates;
-    player.addResource(Resource.MEGACREDITS, totalAvailableDelegates, {log: true});
+    player.stock.add(Resource.MEGACREDITS, totalAvailableDelegates, {log: true});
     return undefined;
   }
 }

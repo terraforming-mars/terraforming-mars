@@ -1,12 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -32,7 +32,7 @@ export class Flooding extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) {
       player.game.defer(new PlaceOceanTile(player));
       return undefined;
@@ -43,10 +43,10 @@ export class Flooding extends Card implements IProjectCard {
     return new SelectSpace(
       'Select space for ocean tile',
       player.game.board.getAvailableSpacesForOcean(player),
-      (space: ISpace) => {
+      (space: Space) => {
         player.game.addOcean(player, space);
 
-        const adjacentPlayers: Set<Player> = new Set<Player>();
+        const adjacentPlayers: Set<IPlayer> = new Set();
         player.game.board.getAdjacentSpaces(space).forEach((space) => {
           if (space.player && space.player !== player && space.tile) {
             adjacentPlayers.add(space.player);
@@ -59,8 +59,8 @@ export class Flooding extends Card implements IProjectCard {
               Array.from(adjacentPlayers),
               'Select adjacent player to remove 4 M€ from',
               'Remove credits',
-              (selectedPlayer: Player) => {
-                selectedPlayer.deductResource(Resource.MEGACREDITS, 4, {log: true, from: player});
+              (selectedPlayer: IPlayer) => {
+                selectedPlayer.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
                 return undefined;
               },
             ),

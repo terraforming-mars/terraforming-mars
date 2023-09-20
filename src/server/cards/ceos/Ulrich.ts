@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -21,12 +21,12 @@ export class Ulrich extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const oceansPlaced = game.board.getOceanCount();
+    const oceansPlaced = game.board.getOceanSpaces().length;
     const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
-    player.addResource(Resource.MEGACREDITS, bonusCredits, {log: true});
+    player.stock.add(Resource.MEGACREDITS, bonusCredits, {log: true});
     return undefined;
   }
 }

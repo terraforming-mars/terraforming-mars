@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -30,7 +30,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const playableCards = player.getPlayableCards().filter((card) => card.card.tags.includes(Tag.VENUS));
 
     if (playableCards.length > 0) {

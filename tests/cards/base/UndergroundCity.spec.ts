@@ -30,8 +30,8 @@ describe('UndergroundCity', function() {
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.availableSpaces[0]);
-    expect(game.getCitiesCount()).to.eq(1);
+    action.cb(action.spaces[0]);
+    expect(game.board.getCities()).has.length(1);
     expect(player.production.energy).to.eq(0);
     expect(player.production.steel).to.eq(2);
   });

@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
 import {Resource} from '../../../src/common/Resource';
 import {StealResources} from '../../../src/server/deferredActions/StealResources';
@@ -16,7 +16,7 @@ describe('BotanicalExperience', function() {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let game: Game;
-  let space: ISpace;
+  let space: Space;
 
   beforeEach(function() {
     card = new BotanicalExperience();

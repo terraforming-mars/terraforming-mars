@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -35,11 +35,11 @@ export class EnergyMarket extends Card implements IProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.canAfford(2) || player.production.energy >= 1;
   }
 
-  private getEnergyOption(player: Player, availableMC: number): SelectAmount {
+  private getEnergyOption(player: IPlayer, availableMC: number): SelectAmount {
     return new SelectAmount(
       'Select amount of energy to gain',
       'Gain energy',
@@ -48,7 +48,7 @@ export class EnergyMarket extends Card implements IProjectCard {
           player,
           amount * 2,
           {
-            afterPay: () => player.addResource(Resource.ENERGY, amount, {log: true}),
+            afterPay: () => player.stock.add(Resource.ENERGY, amount, {log: true}),
           }));
 
         return undefined;
@@ -58,14 +58,14 @@ export class EnergyMarket extends Card implements IProjectCard {
     );
   }
 
-  private getMegacreditsOption(player: Player) {
+  private getMegacreditsOption(player: IPlayer) {
     player.production.add(Resource.ENERGY, -1);
-    player.addResource(Resource.MEGACREDITS, 8);
+    player.stock.add(Resource.MEGACREDITS, 8);
     player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
     return undefined;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const availableMC = player.spendableMegacredits();
     if (availableMC >= 2 && player.production.energy >= 1) {
       return new OrOptions(

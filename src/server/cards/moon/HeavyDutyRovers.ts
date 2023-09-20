@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -34,7 +34,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);
       const minesNextToRoads = mines.filter((mine) => {
@@ -43,7 +43,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
         return firstRoad !== undefined;
       });
       const count = minesNextToRoads.length;
-      player.addResource(Resource.MEGACREDITS, count * 4, {log: true});
+      player.stock.add(Resource.MEGACREDITS, count * 4, {log: true});
     });
     return undefined;
   }

@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {Resource} from '../../../common/Resource';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
@@ -25,11 +25,14 @@ export class ConstantStruggle extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const influence = turmoil.getPlayerInfluence(player);
       const deducted = Math.max(10 - influence, 0);
-      player.deductResource(Resource.MEGACREDITS, deducted, {log: true, from: this.name});
+      player.stock.deduct(Resource.MEGACREDITS, deducted, {log: true, from: this.name});
+      if (deducted > 0) {
+        PathfindersExpansion.addToSolBank(player);
+      }
     });
     PathfindersExpansion.raiseTrackForGlobalEvent(Tag.VENUS, this.name, game, 2, false);
     PathfindersExpansion.raiseTrackForGlobalEvent(Tag.EARTH, this.name, game, 2, false);

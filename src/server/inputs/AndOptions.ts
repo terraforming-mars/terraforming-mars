@@ -1,16 +1,15 @@
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isAndOptionsResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class AndOptions extends BasePlayerInput {
   public options: Array<PlayerInput>;
   constructor(public cb: () => PlayerInput | undefined, ...options: Array<PlayerInput>) {
-    super(PlayerInputType.AND_OPTIONS);
+    super('and');
     this.options = options;
   }
 
-  public process(input: InputResponse, player: Player) {
+  public process(input: InputResponse, player: IPlayer) {
     if (!isAndOptionsResponse(input)) {
       throw new Error('Not a valid AndOptionsResponse');
     }

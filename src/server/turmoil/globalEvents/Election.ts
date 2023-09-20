@@ -2,10 +2,10 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {played} from '../../cards/Options';
@@ -27,15 +27,15 @@ export class Election extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     // Solo
     if (game.isSoloMode()) {
       const player = game.getPlayers()[0];
       const score = this.getScore(player, turmoil, game);
       if (score >= 10) {
-        player.increaseTerraformRatingSteps(2, {log: true});
+        player.increaseTerraformRating(2, {log: true});
       } else if (score >= 5) {
-        player.increaseTerraformRatingSteps(1, {log: true});
+        player.increaseTerraformRating(1, {log: true});
       }
     } else {
       const players = game.getPlayers().slice().sort(
@@ -44,20 +44,20 @@ export class Election extends GlobalEvent implements IGlobalEvent {
 
       // We have one rank 1 player
       if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
-        players[0].increaseTerraformRatingSteps(2, {log: true});
+        players[0].increaseTerraformRating(2, {log: true});
         players.shift();
 
         if (players.length === 1) {
-          players[0].increaseTerraformRatingSteps(1, {log: true});
+          players[0].increaseTerraformRating(1, {log: true});
         } else if (players.length > 1) {
           // We have one rank 2 player
           if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
-            players[0].increaseTerraformRatingSteps(1, {log: true});
+            players[0].increaseTerraformRating(1, {log: true});
             // We have at least two rank 2 players
           } else {
             const score = this.getScore(players[0], turmoil, game);
             while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
-              players[0].increaseTerraformRatingSteps(1, {log: true});
+              players[0].increaseTerraformRating(1, {log: true});
               players.shift();
             }
           }
@@ -66,14 +66,14 @@ export class Election extends GlobalEvent implements IGlobalEvent {
       } else {
         const score = this.getScore(players[0], turmoil, game);
         while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
-          players[0].increaseTerraformRatingSteps(2, {log: true});
+          players[0].increaseTerraformRating(2, {log: true});
           players.shift();
         }
       }
     }
   }
 
-  public getScore(player: Player, turmoil: Turmoil, game: Game) {
+  public getScore(player: IPlayer, turmoil: Turmoil, game: IGame) {
     const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
 
     const cities = game.board.spaces.filter(

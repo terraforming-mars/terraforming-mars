@@ -1,7 +1,7 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerId} from '../../common/Types';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {SerializedColony} from '../SerializedColony';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {ColonyName} from '../../common/colonies/ColonyName';
@@ -22,12 +22,12 @@ export interface IColony {
   trackPosition: number;
   visitor: PlayerId | undefined;
 
-  endGeneration(game: Game): void;
+  endGeneration(game: IGame): void;
   increaseTrack(steps?: number): void;
   decreaseTrack(steps?: number): void;
   isFull(): boolean;
-  addColony(player: Player, options?: {giveBonusTwice: boolean}): void;
-  trade(player: Player, tradeOptions?: TradeOptions, bonusTradeOffset?: number): void;
-  giveColonyBonus(player: Player, isGiveColonyBonus?: boolean): undefined | PlayerInput;
+  addColony(player: IPlayer, options?: {giveBonusTwice: boolean}): void;
+  trade(player: IPlayer, tradeOptions?: TradeOptions, bonusTradeOffset?: number): void;
+  giveColonyBonus(player: IPlayer, isGiveColonyBonus?: boolean): undefined | PlayerInput;
   serialize(): SerializedColony;
 }

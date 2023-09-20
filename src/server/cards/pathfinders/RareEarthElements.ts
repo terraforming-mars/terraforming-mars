@@ -1,12 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
-import {isSpecialTile, playerTileFn} from '../../boards/Board';
+import {isSpecialTileSpace, playerTileFn} from '../../boards/Board';
 
 export class RareEarthElements extends Card implements IProjectCard {
   constructor() {
@@ -26,10 +26,10 @@ export class RareEarthElements extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const spaces = player.game.board.spaces
       .filter(playerTileFn(player))
-      .filter(isSpecialTile);
+      .filter(isSpecialTileSpace);
 
     player.production.add(Resource.MEGACREDITS, spaces.length, {log: true});
     return undefined;

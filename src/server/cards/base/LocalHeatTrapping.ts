@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -18,8 +18,14 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       type: CardType.EVENT,
       name: CardName.LOCAL_HEAT_TRAPPING,
       cost: 1,
-      // The 5 heat will be deducted in bespokePlay
-      reserveUnits: {heat: 5, deduct: false},
+
+      // Normally reserveUnits is managed by the rest of the game engine. But in this case
+      // the only purpose of reserveUnits is to prevent the player from spending that heat
+      // as Helion. Managing reserveUnits in this case will be handled by overriding canPlay
+      // and play, which is not a rare behavior.
+      //
+      // This is made that much more complicated thanks to Merger and Stormcraft Incorporated.
+      reserveUnits: {heat: 5},
 
       metadata: {
         cardNumber: '190',
@@ -32,27 +38,55 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       },
     });
   }
-  public override bespokePlay(player: Player) {
-    const animalCards: Array<ICard> = player.getResourceCards(CardResource.ANIMAL);
+
+  public override canPlay(player: IPlayer) {
+    // This card can cost 0 or 1.
+    const cardCost = player.getCardCost(this); // Would be nice to use precalculated value.
+
+    let heat = player.heat;
+    let floaters = player.getCorporation(CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
+
+    // If the card costs anything, determine where that 1MC can come from. Assume it can come from MC first.
+    if (cardCost === 1 && player.megaCredits === 0) {
+      if (heat > 0) {
+        heat--;
+      } else if (floaters > 0) {
+        floaters--;
+      } else {
+        return false;
+      }
+    }
+
+    // At this point, the card cost has been assumed handled, and it's just a question of whether there's 5 heat
+    // left.
+
+    const availableHeat = heat + (floaters * 2);
+    return availableHeat >= 5;
+  }
+
+  // By overriding play, the heat is not deducted automatically.
+  public override play(player: IPlayer) {
     const availableActions = new OrOptions();
 
-    const gain4Plants = function() {
-      player.addResource(Resource.PLANTS, 4, {log: true});
+    const animalCards: Array<ICard> = player.getResourceCards(CardResource.ANIMAL);
+    const gainPlantsOption = new SelectOption('Gain 4 plants', 'Gain plants', () => {
+      player.stock.add(Resource.PLANTS, 4, {log: true});
       return undefined;
-    };
+    });
+
     if (animalCards.length === 0) {
-      availableActions.options.push(new SelectOption('Gain 4 plants', 'Gain plants', gain4Plants));
+      availableActions.options.push(gainPlantsOption);
     } else if (animalCards.length === 1) {
       const targetCard = animalCards[0];
       availableActions.options.push(
-        new SelectOption('Gain 4 plants', 'Gain plants', gain4Plants),
+        gainPlantsOption,
         new SelectOption('Add 2 animals to ' + targetCard.name, 'Add animals', () => {
           player.addResourceTo(targetCard, {qty: 2, log: true});
           return undefined;
         }));
     } else {
       availableActions.options.push(
-        new SelectOption('Gain 4 plants', 'Gain plants', gain4Plants),
+        gainPlantsOption,
         new SelectCard('Select card to add 2 animals', 'Add animals', animalCards, ([card]) => {
           player.addResourceTo(card, {qty: 2, log: true});
           return undefined;

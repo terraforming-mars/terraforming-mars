@@ -4,6 +4,7 @@ import {Handler} from '../../src/server/routes/Handler';
 import {Route} from '../../src/server/routes/Route';
 import {FakeGameLoader} from './FakeGameLoader';
 import {MockResponse} from './HttpMocks';
+import {newIpTracker} from '../../src/server/server/IPTracker';
 
 export type Header = 'accept-encoding';
 
@@ -17,6 +18,8 @@ export class RouteTestScaffolding {
     this.ctx = {
       route: new Route(),
       url: new URL('http://boo.com'),
+      ip: '123.45.678.90',
+      ipTracker: newIpTracker(),
       gameLoader: new FakeGameLoader(),
       ids: {
         serverId: '1',

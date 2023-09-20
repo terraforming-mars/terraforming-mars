@@ -2,7 +2,6 @@ import * as http from 'http';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 
-
 export class ApiGames extends Handler {
   public static readonly INSTANCE = new ApiGames();
   private constructor() {

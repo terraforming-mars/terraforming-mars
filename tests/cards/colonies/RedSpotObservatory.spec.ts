@@ -15,15 +15,17 @@ describe('RedSpotObservatory', function() {
   });
 
   it('Can not play', function() {
+    player.tagsForTest = {science: 2};
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
-  it('Should play', function() {
-    player.playedCards.push(card, card, card);
+  it('Can play', function() {
+    player.tagsForTest = {science: 3};
     expect(player.simpleCanPlay(card)).is.true;
+  });
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+  it('Should play', function() {
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {

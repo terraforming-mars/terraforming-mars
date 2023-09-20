@@ -2,7 +2,6 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {CardModel} from '@/common/models/CardModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {Units} from '@/common/Units';
@@ -12,52 +11,52 @@ import {SELECT_CORPORATION_TITLE, SELECT_PROJECTS_TITLE} from '@/common/inputs/S
 describe('PlayerInputFactory2', function() {
   it('AndOptions', async () => {
     runTest({
-      inputType: PlayerInputType.AND_OPTIONS,
+      inputType: 'and',
       options: [],
     });
   });
 
   it('OrOptions', async () => {
     runTest({
-      inputType: PlayerInputType.OR_OPTIONS,
+      inputType: 'or',
       options: [],
     });
   });
 
   it('SelectAmount', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_AMOUNT,
+      inputType: 'amount',
     });
   });
 
   it('SelectAmount', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_CARD,
+      inputType: 'card',
     });
   });
 
   it('SelectOption', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_OPTION,
+      inputType: 'option',
     });
   });
 
   it('SelectPayment', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_PAYMENT,
+      inputType: 'payment',
     });
   });
 
   it('SelectProjectCardToPlay', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY,
-      cards: [{name: CardName.ANTS, reserveUnits: {}} as CardModel],
+      inputType: 'projectCard',
+      cards: [{name: CardName.ANTS} as CardModel],
     });
   });
 
   it('SelectInitialCards', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_INITIAL_CARDS,
+      inputType: 'initialCards',
       options: [
         {title: SELECT_CORPORATION_TITLE} as PlayerInputModel,
         {title: SELECT_PROJECTS_TITLE} as PlayerInputModel,
@@ -67,19 +66,19 @@ describe('PlayerInputFactory2', function() {
 
   it('SelectSpace', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_SPACE,
+      inputType: 'space',
     });
   });
 
   it('SelectPlayer', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_PLAYER,
+      inputType: 'player',
     });
   });
 
-  it('SelectPartyToSendDelegate', async () => {
+  it('SelectParty', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE,
+      inputType: 'party',
       turmoil: {
         dominant: undefined,
         ruling: undefined,
@@ -98,13 +97,13 @@ describe('PlayerInputFactory2', function() {
 
   it('SelectColony', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_COLONY,
+      inputType: 'colony',
     });
   });
 
   it('SelectProductionToLose', async () => {
     runTest({
-      inputType: PlayerInputType.SELECT_PRODUCTION_TO_LOSE,
+      inputType: 'productionToLose',
       payProduction: {
         cost: 0,
         units: Units.EMPTY,
@@ -114,7 +113,7 @@ describe('PlayerInputFactory2', function() {
 
   it('ShiftAresGlobalParameters', async () => {
     runTest({
-      inputType: PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS,
+      inputType: 'aresGlobalParameters',
       aresData: {
         includeHazards: false,
         hazardData: {
@@ -138,14 +137,15 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     canUseTitanium: undefined,
     canUseLunaTradeFederationTitanium: undefined,
     canUseSeeds: undefined,
-    canUseData: undefined,
+    canUseAuroraiData: undefined,
     cards: undefined,
     options: undefined,
     min: undefined,
     max: undefined,
     microbes: undefined,
     floaters: undefined,
-    science: undefined,
+    lunaArchivesScience: undefined,
+    spireScience: undefined,
     seeds: undefined,
     auroraiData: undefined,
     title: 'test input',

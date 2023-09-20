@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardType} from '../../../src/common/cards/CardType';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
 import {Karen} from '../../../src/server/cards/ceos/Karen';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {Game} from '../../../src/server/Game';
@@ -27,7 +27,7 @@ describe('Karen', function() {
   });
 
   it('Takes action', function() {
-    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    const selectCard = cast(card.action(player), SelectCard<IPreludeCard>);
     expect(selectCard.cards).has.length(1);
 
     selectCard.cb([selectCard.cards[0]]);
@@ -40,7 +40,7 @@ describe('Karen', function() {
       forceGenerationEnd(game);
     }
 
-    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    const selectCard = cast(card.action(player), SelectCard<IPreludeCard>);
     expect(selectCard.cards).has.length(4);
 
     selectCard.cb([selectCard.cards[0]]);
@@ -51,13 +51,12 @@ describe('Karen', function() {
     player.megaCredits = 0;
     game.preludeDeck.drawPile.push(new GalileanMining());
 
-    const action = card.action(player);
-    expect(action).is.undefined;
+    cast(card.action(player), SelectCard<IPreludeCard>);
     expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(0);
   });
 
   it('Can only act once per game', function() {
-    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    const selectCard = cast(card.action(player), SelectCard<IPreludeCard>);
     selectCard.cb([selectCard.cards[0]]);
     forceGenerationEnd(game);
 

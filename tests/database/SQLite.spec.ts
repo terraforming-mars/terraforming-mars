@@ -1,7 +1,7 @@
 import {describeDatabaseSuite} from './databaseSuite';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/server/database/SQLite';
-import {GameId} from '@/common/Types';
+import {GameId} from '../../src/common/Types';
 import {RunResult} from 'sqlite3';
 import {ITestDatabase, Status} from './ITestDatabase';
 
@@ -16,7 +16,7 @@ class TestSQLite extends SQLite implements ITestDatabase {
     return this.db;
   }
 
-  public override saveGame(game: Game): Promise<void> {
+  public override saveGame(game: IGame): Promise<void> {
     this.lastSaveGamePromise = super.saveGame(game);
     return this.lastSaveGamePromise;
   }

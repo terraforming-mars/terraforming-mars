@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -27,19 +27,19 @@ export class Neil extends CeoCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     for (const tag of card.tags) {
       if (tag === Tag.MOON) {
-        player.game.getCardPlayerOrThrow(this.name).addResource(Resource.MEGACREDITS, 1, {log: true});
+        player.game.getCardPlayerOrThrow(this.name).stock.add(Resource.MEGACREDITS, 1, {log: true});
       }
     }
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
-      const lowestRate = Math.min(moonData.colonyRate, moonData.logisticRate, moonData.miningRate);
+      const lowestRate = Math.min(moonData.habitatRate, moonData.logisticRate, moonData.miningRate);
 
       if (lowestRate > 0) {
         player.production.add(Resource.MEGACREDITS, lowestRate, {log: true});

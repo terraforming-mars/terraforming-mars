@@ -3,7 +3,7 @@ import {cast, fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -52,7 +52,7 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(marsFirst.delegates.get(player.id)).eq(0);
 
-    const selectParty = cast(game.deferredActions.peek()!.execute(), SelectPartyToSendDelegate);
+    const selectParty = cast(game.deferredActions.peek()!.execute(), SelectParty);
     selectParty.cb(PartyName.MARS);
 
     expect(marsFirst.delegates.get(player.id)).eq(1);

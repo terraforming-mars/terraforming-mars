@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -30,7 +30,7 @@ export class HiredRaiders extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) {
       return new OrOptions(
         new SelectOption('Steal 2 steel', 'Steal steel', () => {
@@ -54,7 +54,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.steel += amountStolen;
-          target.deductResource(Resource.STEEL, 2, {log: true, from: player, stealing: true});
+          target.stock.deduct(Resource.STEEL, 2, {log: true, from: player, stealing: true});
           return undefined;
         }));
       }
@@ -65,7 +65,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.megaCredits += amountStolen;
-          target.deductResource(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
+          target.stock.deduct(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
           return undefined;
         }));
       }

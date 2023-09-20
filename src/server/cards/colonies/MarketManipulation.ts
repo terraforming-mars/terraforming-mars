@@ -2,9 +2,9 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
@@ -33,7 +33,7 @@ export class MarketManipulation extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     const increasableColonies = this.getIncreasableColonies(player.game);
     const decreasableColonies = this.getDecreasableColonies(player.game);
 
@@ -50,20 +50,20 @@ export class MarketManipulation extends Card implements IProjectCard {
     return true;
   }
 
-  private getIncreasableColonies(game: Game) {
+  private getIncreasableColonies(game: IGame) {
     return game.colonies.filter(
       (colony) => colony.trackPosition < 6 && colony.isActive,
     );
   }
 
-  private getDecreasableColonies(game: Game) {
+  private getDecreasableColonies(game: IGame) {
     return game.colonies.filter(
       (colony) =>
         colony.trackPosition > colony.colonies.length && colony.isActive,
     );
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     let increasableColonies = this.getIncreasableColonies(player.game);
     const decreasableColonies = this.getDecreasableColonies(player.game);
     // if there is only one decreaseable colony and it is an increaseable colony, don't allow increase of that colony.

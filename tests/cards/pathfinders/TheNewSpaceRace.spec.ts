@@ -3,7 +3,7 @@ import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpace
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast} from '../../TestingUtils';
+import {cast, doWait} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
@@ -77,19 +77,16 @@ describe('TheNewSpaceRace', function() {
 
     expect(game.getPlayersInGenerationOrder()).deep.eq([player2, player3, player1]);
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    const [input, cb] = player2.popWaitingFor2();
-    const selectParty = cast(input, OrOptions);
+    cast(player1.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
+    doWait(player2, OrOptions, (selectParty) => {
+      expect(game.turmoil!.rulingParty.name).eq(PartyName.GREENS);
+      selectParty.options[2].cb(); // 2 is Unity.
+      expect(game.turmoil!.rulingParty.name).eq(PartyName.UNITY);
+    });
 
-    expect(game.turmoil!.rulingParty.name).eq(PartyName.GREENS);
-    selectParty.options[2].cb(); // 2 is Unity.
-    expect(game.turmoil!.rulingParty.name).eq(PartyName.UNITY);
-    // cb would be called during normal processing.
-    cb?.();
-
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
 
     // Player2 is up, and will play its other prelude first.
     const next = cast(player2.getWaitingFor(), SelectCard);

@@ -13,6 +13,7 @@ describe('EscapeVelocity', function() {
     [, player] = testGame(1, {
       escapeVelocityMode: true,
       escapeVelocityThreshold: 3, // 3m
+      escapeVelocityBonusSeconds: 5, // 5s
       escapeVelocityPenalty: 2, // 2vp
       escapeVelocityPeriod: 4, // 4m
     });
@@ -87,5 +88,42 @@ describe('EscapeVelocity', function() {
 
     expect(player.getVictoryPoints().total).eq(1);
     expect(player.getVictoryPoints().escapeVelocity).eq(-16);
+  });
+
+  it('bonus seconds', function() {
+    timer.start();
+
+    expect(player.getVictoryPoints().total).eq(14);
+
+    clock.millis = 3 * 60 * 1000;
+
+    expect(player.getVictoryPoints().total).eq(14);
+
+    // Lose 2 points after 4 minutes...
+    clock.millis += 4 * 60 * 1000;
+    expect(player.getVictoryPoints().total).eq(12);
+
+    // But 1 player action makes the threshold 3 minutes and 5 seconds, so we only lose 2 points after 7m5s have elapsed
+    player.actionsTakenThisGame += 1;
+    expect(player.getVictoryPoints().total).eq(14);
+    expect(player.getVictoryPoints().escapeVelocity).eq(0);
+
+    clock.millis += 4990;
+    expect(player.getVictoryPoints().total).eq(14);
+
+    // Check 10ms before and after 7m5s because of inexact floating point math.
+    clock.millis += 20;
+    expect(player.getVictoryPoints().total).eq(12);
+    expect(player.getVictoryPoints().escapeVelocity).eq(-2);
+
+    // With 4 player actions, adjusted threshold is 7m20s
+    player.actionsTakenThisGame += 3;
+    expect(player.getVictoryPoints().total).eq(14);
+
+    clock.millis += 3 * 5 * 1000 - 20;
+    expect(player.getVictoryPoints().total).eq(14);
+
+    clock.millis += 20;
+    expect(player.getVictoryPoints().total).eq(12);
   });
 });

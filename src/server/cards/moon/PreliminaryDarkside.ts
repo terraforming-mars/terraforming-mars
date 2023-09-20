@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -33,14 +33,14 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     return new OrOptions(
       new SelectOption('Gain 3 titanium', 'Gain titanium', () => {
-        player.addResource(Resource.TITANIUM, 3, {log: true});
+        player.stock.add(Resource.TITANIUM, 3, {log: true});
         return undefined;
       }),
       new SelectOption('Gain 4 steel', 'Gain steel', () => {
-        player.addResource(Resource.STEEL, 4, {log: true});
+        player.stock.add(Resource.STEEL, 4, {log: true});
         return undefined;
       }));
   }

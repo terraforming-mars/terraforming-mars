@@ -5,7 +5,7 @@ import {expect} from 'chai';
 import {testGame} from './TestGame';
 import {ICard} from '../src/server/cards/ICard';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
-import {Player} from '../src/server/Player';
+import {IPlayer} from '../src/server/IPlayer';
 import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
@@ -46,7 +46,7 @@ describe('drafting', () => {
       CardName.HACKERS]);
 
     selectCard(player, CardName.BIOFERTILIZER_FACILITY);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.GENE_REPAIR);
 
     expect(cardNames(player.draftedCards)).deep.eq([CardName.BIOFERTILIZER_FACILITY]);
@@ -66,7 +66,7 @@ describe('drafting', () => {
 
 
     selectCard(player, CardName.FISH);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ACQUIRED_COMPANY);
 
     expect(cardNames(player.draftedCards)).deep.eq([
@@ -89,7 +89,7 @@ describe('drafting', () => {
       CardName.HACKERS]);
 
     selectCard(player, CardName.DECOMPOSERS);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.EARTH_OFFICE);
 
     // No longer drafted cards, they're just cards to buy.
@@ -141,7 +141,7 @@ describe('drafting', () => {
       CardName.ARTIFICIAL_LAKE]);
 
     selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ALGAE);
 
     expect(cardNames(player.draftedCards)).deep.eq([CardName.ADAPTATION_TECHNOLOGY]);
@@ -162,7 +162,7 @@ describe('drafting', () => {
       CardName.ANTS]);
 
     selectCard(player, CardName.ARCTIC_ALGAE);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ANTS);
 
     expect(cardNames(player.draftedCards)).deep.eq([
@@ -186,7 +186,7 @@ describe('drafting', () => {
       CardName.ARTIFICIAL_LAKE]);
 
     selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
 
     expect(cardNames(player.draftedCards)).deep.eq([
@@ -397,7 +397,7 @@ describe('drafting', () => {
   });
 });
 
-function getWaitingFor(player: Player): SelectCard<IProjectCard> {
+function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {
   return cast(player.getWaitingFor(), SelectCard<IProjectCard>);
 }
 
@@ -406,11 +406,11 @@ function unshiftCards(deck: Array<IProjectCard>, cards: Array<CardName>) {
   deck.unshift(...cardFinder.cardsFromJSON(cards));
 }
 
-function cardNames(cards: Array<ICard>): Array<CardName> {
+function cardNames(cards: ReadonlyArray<ICard>): Array<CardName> {
   return cards.map((card) => card.name);
 }
 
-function initialCardSelection(player: Player) {
+function initialCardSelection(player: IPlayer) {
   const selectInitialCards = cast(player.getWaitingFor(), SelectInitialCards);
   const corporationCards = cast(selectInitialCards.options[0], SelectCard);
   const preludeCards = selectInitialCards.options.length === 3 ? cast(selectInitialCards.options[1], SelectCard) : undefined;
@@ -422,7 +422,7 @@ function initialCardSelection(player: Player) {
   };
 }
 
-function draftSelection(player: Player) {
+function draftSelection(player: IPlayer) {
   return getWaitingFor(player).cards.map((card) => card.name);
 }
 

@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -33,7 +33,7 @@ export class Viron extends Card implements ICard, ICorporationCard {
   }
 
   // This matches Viron.getActionCards.
-  private getActionCards(player: Player): Array<IActionCard & ICard> {
+  private getActionCards(player: IPlayer): Array<IActionCard & ICard> {
     const result: Array<IActionCard & ICard> = [];
     for (const playedCard of player.tableau) {
       if (playedCard === this) {
@@ -52,11 +52,11 @@ export class Viron extends Card implements ICard, ICorporationCard {
     return result;
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return this.getActionCards(player).length > 0 && !player.getActionsThisGeneration().has(this.name);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     if (this.getActionCards(player).length === 0 ) {
       return undefined;
     }

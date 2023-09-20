@@ -58,7 +58,7 @@ describe('AsteroidMiningConsortium', function() {
 
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(player.production.titanium).to.eq(1);
   });

@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
-import {ISpace} from '../../src/server/boards/ISpace';
+import {Space} from '../../src/server/boards/Space';
 import {Game} from '../../src/server/Game';
 import {testGame} from '../TestGame';
 
 describe('SelectSpace', () => {
   let game: Game;
-  let selected: ISpace | undefined;
+  let selected: Space | undefined;
 
-  const cb = (cards: ISpace) => {
+  const cb = (cards: Space) => {
     selected = cards;
     return undefined;
   };

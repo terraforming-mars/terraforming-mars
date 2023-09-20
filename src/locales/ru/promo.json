@@ -193,5 +193,8 @@
     "Robot Pollinators": "Роботы-опылители",
     "(Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.)": "(Требование: 4% кислорода. Увеличьте производство растений на 1. Получите 1 растение за каждую метку растений.)",
     "Outdoor Sports": "Уличный спорт",
-    "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": "(Требуется город рядом с океаном. Увеличьте производство M€ на 2.)"
+    "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": "(Требуется город рядом с океаном. Увеличьте производство M€ на 2.)",
+    "Supercapacitors": "Суперконденсаторы",
+    "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "Эффект: Конвертация энергии в тепло не обязатаельна для каждой из единиц ресурса",
+    "Increase M€ production 1 step.": "Увеличьте своё производство М€ на 1"
 }

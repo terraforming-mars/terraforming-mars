@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -15,11 +15,10 @@ import {intersection} from '../../common/utils/utils';
  * when the card has a clone tag, and instead defers that call.
  * That's why it calls onCardPlayed here.
  */
-export class DeclareCloneTag extends DeferredAction {
+export class DeclareCloneTag extends DeferredAction<PlanetaryTag> {
   public constructor(
-    player: Player,
+    player: IPlayer,
     public card: IProjectCard & ICloneTagCard,
-    public cb: (tag: PlanetaryTag) => void = () => {},
     public title: string = '') {
     super(player, Priority.DECLARE_CLONE_TAG);
     if (this.title === '') {

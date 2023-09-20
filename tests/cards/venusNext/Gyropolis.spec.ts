@@ -35,10 +35,10 @@ describe('Gyropolis', function() {
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(action.cb(action.availableSpaces[0])).is.undefined;
-    expect(action.availableSpaces[0].player).to.eq(player);
-    expect(action.availableSpaces[0].tile).is.not.undefined;
-    expect(action.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
+    expect(action.cb(action.spaces[0])).is.undefined;
+    expect(action.spaces[0].player).to.eq(player);
+    expect(action.spaces[0].tile).is.not.undefined;
+    expect(action.spaces[0].tile!.tileType).to.eq(TileType.CITY);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
   });

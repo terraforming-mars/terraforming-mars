@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -28,8 +28,8 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.addResource(Resource.MEGACREDITS, 10, {log: true});
+  public override bespokePlay(player: IPlayer) {
+    player.stock.add(Resource.MEGACREDITS, 10, {log: true});
     const turmoil = Turmoil.getTurmoil(player.game);
     const globalEvents: IGlobalEvent[] = [];
 

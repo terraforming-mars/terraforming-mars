@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,7 +17,7 @@ import {IColony} from '../../colonies/IColony';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {newMessage} from '../../logs/MessageBuilder';
 
-function tradeCost(player: Player) {
+function tradeCost(player: IPlayer) {
   return Math.max(0, 3 - player.colonies.tradeDiscount);
 }
 export class CollegiumCopernicus extends Card implements ICorporationCard, IActionCard {
@@ -55,22 +55,22 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
     });
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
     return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): void {
     if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     }
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.colonies.canTrade() && this.resourceCount >= tradeCost(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const game = player.game;
     game.defer(new SimpleDeferredAction(
       player,
@@ -83,7 +83,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 }
 
-export function tradeWithColony(card: ICorporationCard, player: Player, colony: IColony) {
+export function tradeWithColony(card: ICorporationCard, player: IPlayer, colony: IColony) {
   const cost = tradeCost(player);
   card.resourceCount -= cost;
   player.game.log('${0} spent ${1} data from ${2} to trade with ${3}', (b) => b.player(player).number(cost).card(card).colony(colony));
@@ -92,7 +92,7 @@ export function tradeWithColony(card: ICorporationCard, player: Player, colony: 
 export class TradeWithCollegiumCopernicus implements IColonyTrader {
   private collegiumCopernicus: ICorporationCard | undefined;
 
-  constructor(private player: Player) {
+  constructor(private player: IPlayer) {
     this.collegiumCopernicus = player.getCorporation(CardName.COLLEGIUM_COPERNICUS);
   }
 

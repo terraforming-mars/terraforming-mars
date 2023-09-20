@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
@@ -36,11 +36,11 @@ export class PointLuna extends Card implements ICorporationCard {
       },
     });
   }
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     return this.onCardPlayed(player, card);
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard) {
     if (player.isCorporation(this.name)) {
       const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
       if (tagCount > 0) {

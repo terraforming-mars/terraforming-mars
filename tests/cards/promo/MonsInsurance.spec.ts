@@ -80,7 +80,7 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.addResource(Resource.STEEL, -1, {log: false, from: player3});
+    player2.stock.add(Resource.STEEL, -1, {log: false, from: player3});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
@@ -91,7 +91,7 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.addResource(Resource.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.stock.add(Resource.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);
@@ -143,7 +143,7 @@ describe('MonsInsurance - Solo', () => {
     const airRaid = new AirRaid();
     airRaid.play(player);
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     // 10 + 5 - 3 = 12
     expect(player.megaCredits).eq(12);
@@ -156,7 +156,7 @@ describe('MonsInsurance - Solo', () => {
     const birds = new Birds();
     birds.play(player);
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(player.megaCredits).eq(7);
   });
@@ -169,7 +169,7 @@ describe('MonsInsurance - Solo', () => {
 
     comet.play(player);
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(player.megaCredits).eq(7);
   });
@@ -184,7 +184,7 @@ describe('MonsInsurance - Solo', () => {
 
     predators.action(player);
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(predators.resourceCount).eq(1);
     expect(player.megaCredits).eq(7);

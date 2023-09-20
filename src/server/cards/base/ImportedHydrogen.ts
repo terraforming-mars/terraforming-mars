@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -39,12 +39,12 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player): undefined | PlayerInput {
+  public override bespokePlay(player: IPlayer): undefined | PlayerInput {
     const availableMicrobeCards = player.getResourceCards(CardResource.MICROBE);
     const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
-      player.addResource(Resource.PLANTS, 3, {log: true});
+      player.stock.add(Resource.PLANTS, 3, {log: true});
       return undefined;
     };
 

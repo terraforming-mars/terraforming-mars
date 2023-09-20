@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../../common/cards/CardName';
@@ -31,7 +31,7 @@ export class Virus extends Card implements IProjectCard {
       },
     });
   }
-  public override bespokePlay(player: Player): PlayerInput | undefined {
+  public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     if (player.game.isSoloMode()) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;

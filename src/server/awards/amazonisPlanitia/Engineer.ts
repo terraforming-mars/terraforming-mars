@@ -1,12 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 
 export class Engineer implements IAward {
   public readonly name = 'Engineer';
-  public readonly description = 'Play the most cards that directly alter your own production';
+  public readonly description = 'Have the most cards in play that directly alter your own production';
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const score = player.tableau.filter((card) => {
       if (Engineer.productionCards.includes(card.name)) return true;
 
@@ -23,6 +23,7 @@ export class Engineer implements IAward {
     return score;
   }
 
+  // This is the list of cards that have bespoke code to change production.
   // public for testing.
   public static productionCards = [
     // Base + Corp Era
@@ -33,11 +34,9 @@ export class Engineer implements IAward {
     CardName.INSULATION,
     CardName.NITROGEN_RICH_ASTEROID,
     CardName.POWER_SUPPLY_CONSORTIUM,
-    CardName.SATELLITES,
     // Colonies
     CardName.COMMUNITY_SERVICES,
     CardName.ECOLOGY_RESEARCH,
-    CardName.FLOATER_LEASING,
     CardName.LUNAR_EXPORTS,
     CardName.MINORITY_REFUGE,
     CardName.PIONEER_SETTLEMENT,
@@ -50,7 +49,6 @@ export class Engineer implements IAward {
     CardName.LUNA_FIRST_INCORPORATED,
     // Pathfinders
     CardName.RARE_EARTH_ELEMENTS,
-    CardName.CASSINI_STATION,
     CardName.MICROBIOLOGY_PATENTS,
     CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
     CardName.RARE_EARTH_ELEMENTS,

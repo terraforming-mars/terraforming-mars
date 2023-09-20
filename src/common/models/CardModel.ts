@@ -11,9 +11,9 @@ export interface CardModel {
     calculatedCost?: number;
     isSelfReplicatingRobotsCard?: boolean,
     discount?: Array<CardDiscount>,
-    isDisabled: boolean; // Used with Pharmacy Union
+    isDisabled?: boolean; // Used with Pharmacy Union
     warning?: string | Message;
-    reserveUnits: Readonly<Units>; // Written for The Moon, but useful in other contexts.
+    reserveUnits?: Readonly<Units>; // Written for The Moon, but useful in other contexts.
     bonusResource?: Array<Resource>; // Used with the Mining cards and Robotic Workforce
     cloneTag?: Tag; // Used with Pathfinders
 }

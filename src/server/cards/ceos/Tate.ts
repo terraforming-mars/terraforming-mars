@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -25,7 +25,7 @@ export class Tate extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
     const tags = [...game.tags];
@@ -36,7 +36,8 @@ export class Tate extends CeoCard {
     const options = tags.map((tag) => {
       return new SelectOption('Search for ' + tag + ' tags', 'Search', () => {
         game.log('${0} searched for ${1} tags', (b) => b.player(player).string(tag));
-        return player.drawCardKeepSome(5, {keepMax: 2, tag: tag, paying: true, logDrawnCard: true});
+        player.drawCardKeepSome(5, {keepMax: 2, tag: tag, paying: true, logDrawnCard: true});
+        return undefined;
       });
     });
 

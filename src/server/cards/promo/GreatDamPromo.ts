@@ -8,9 +8,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Player} from '../../Player';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 
 export class GreatDamPromo extends Card implements IProjectCard {
   constructor(
@@ -40,23 +40,23 @@ export class GreatDamPromo extends Card implements IProjectCard {
       victoryPoints: 1,
     });
   }
-  public override bespokeCanPlay(player: Player): boolean {
-    return this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 
-    return new SelectSpace('Select space for tile', availableSpaces, (space: ISpace) => {
+    return new SelectSpace('Select space for tile', availableSpaces, (space: Space) => {
       player.game.addTile(player, space, {tileType: TileType.GREAT_DAM});
       space.adjacency = this.adjacencyBonus;
       return undefined;
     });
   }
 
-  private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter(
         (space) => player.game.board.getAdjacentSpaces(space).filter(
           (adjacentSpace) => Board.isOceanSpace(adjacentSpace),

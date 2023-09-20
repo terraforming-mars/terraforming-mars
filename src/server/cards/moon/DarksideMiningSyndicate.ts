@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -30,7 +30,7 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const productionBonus = (MoonExpansion.moonData(player.game).miningRate >= 2) ? 1 : 2;
     player.production.add(Resource.TITANIUM, productionBonus, {log: true});
     MoonExpansion.raiseMiningRate(player);

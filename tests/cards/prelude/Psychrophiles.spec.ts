@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Psychrophiles} from '../../../src/server/cards/prelude/Psychrophiles';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, setTemperature} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature} from '../../TestingUtils';
 
 describe('Psychrophiles', () => {
   let card: Psychrophiles;
@@ -27,8 +27,7 @@ describe('Psychrophiles', () => {
 
   it('Should play', () => {
     expect(player.simpleCanPlay(card)).is.true;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Can act', () => {

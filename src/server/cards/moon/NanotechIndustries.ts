@@ -5,7 +5,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
 import {Card} from '../Card';
@@ -44,7 +44,7 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.game.defer(new AddResourcesToCard(
       player,
       CardResource.SCIENCE,

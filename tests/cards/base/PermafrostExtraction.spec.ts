@@ -24,11 +24,10 @@ describe('PermafrostExtraction', function() {
     setTemperature(game, -8);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
-    expect(game.board.getOceanCount()).to.eq(1);
+    selectSpace.cb(selectSpace.spaces[0]);
+    expect(game.board.getOceanSpaces()).has.length(1);
   });
 });

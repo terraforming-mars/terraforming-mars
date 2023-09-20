@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
@@ -29,14 +29,14 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
     super(properties);
   }
 
-  protected override discount(player: Player): number {
+  protected override discount(player: IPlayer): number {
     if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
       return 4;
     }
     return super.discount(player);
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     const moonData = MoonExpansion.moonData(player.game);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 
@@ -48,9 +48,9 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
   }
 
   // TODO(kberg): subclass MoonCard? This is starting to show the problems with just using subclassing.
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-    player.deductUnits(adjustedReserveUnits);
+    player.stock.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonHabitatTile(player));
     player.production.add(Resource.MEGACREDITS, 1, {log: true});
   }

@@ -3,7 +3,7 @@ import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustor
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('BiomassCombustors', function() {
@@ -40,7 +40,7 @@ describe('BiomassCombustors', function() {
 
     card.play(player);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(player.production.energy).to.eq(2);
     expect(player2.production.plants).to.eq(0);
 

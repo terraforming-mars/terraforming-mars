@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('SisterPlanetSupport', function() {
   it('Should play', function() {
@@ -17,8 +18,7 @@ describe('SisterPlanetSupport', function() {
     player.tagsForTest = {venus: 1, earth: 1};
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(3);
   });
 });

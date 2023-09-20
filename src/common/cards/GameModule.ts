@@ -5,6 +5,7 @@ export const GAME_MODULES = [
   'venus',
   'colonies',
   'prelude',
+  'prelude2',
   'turmoil',
   'community',
   'ares',

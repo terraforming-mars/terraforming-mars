@@ -30,7 +30,8 @@ export enum CardRenderItemType {
   PARTY_LEADERS = 'party_leaders',
   DELEGATES = 'delegates',
   INFLUENCE = 'influence',
-  NO_TAGS ='no_tags',
+  NO_TAGS = 'no_tags',
+  EMPTY_TAG = 'empty_tag',
   PRESERVATION = 'preservation',
   WILD = 'wild',
   FIGHTER = 'fighter',
@@ -74,6 +75,11 @@ export enum CardRenderItemType {
   GLOBAL_EVENT = 'global-event',
   FIRST_PLAYER = '1p',
   RULING_PARTY = 'ruling-party',
+  CATHEDRAL = 'cathedral',
+  GRAPHENE = 'graphene',
+  NOMADS = 'nomads',
+  HYDROELECTRIC_RESOURCE = 'hydroelectric-resource',
+  CITY_OR_SPECIAL_TILE = 'city-or-special-tile',
 
   // CEO Extension:
   ARROW_OPG = 'arrow-opg',

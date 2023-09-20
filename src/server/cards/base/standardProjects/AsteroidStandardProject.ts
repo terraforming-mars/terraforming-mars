@@ -1,4 +1,4 @@
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
@@ -21,14 +21,22 @@ export class AsteroidStandardProject extends StandardProjectCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canPayWith(player: IPlayer) {
+    if (player.isCorporation(CardName.KUIPER_COOPERATIVE)) {
+      return {kuiperAsteroids: true};
+    } else {
+      return {};
+    }
+  }
+
+  public override canAct(player: IPlayer): boolean {
     if (player.game.getTemperature() === constants.MAX_TEMPERATURE) {
       return false;
     }
     return super.canAct(player);
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     player.game.increaseTemperature(player, 1);
   }
 }

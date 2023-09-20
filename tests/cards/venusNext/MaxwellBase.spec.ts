@@ -41,8 +41,7 @@ describe('MaxwellBase', function() {
     setVenusScaleLevel(game, 12);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     expect(player.production.energy).to.eq(0);
   });

@@ -43,7 +43,7 @@ describe('ConvertPlants', function() {
     expect(card.canAct(player)).eq(true);
     const action = card.action(player);
     expect(action).not.eq(undefined);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
 
     expect(player.game.getOxygenLevel()).eq(1);
   });

@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectCard} from '../inputs/SelectCard';
 import {OrOptions} from '../inputs/OrOptions';
 import {Resource} from '../../common/Resource';
@@ -9,7 +9,7 @@ import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName
 
 export class CorrosiveRainDeferredAction extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public title: string = 'Remove 2 floaters from a card or lose up to 10 M€',
   ) {
     super(player, Priority.DEFAULT);
@@ -20,7 +20,7 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
 
     const selectAction = new OrOptions();
     const payMC = new SelectOption('Lose up to 10 M€', 'Lose M€', () => {
-      this.player.deductResource(Resource.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
+      this.player.stock.deduct(Resource.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
       return undefined;
     });
     const removeFloaters = new SelectCard(

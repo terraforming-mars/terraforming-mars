@@ -1,13 +1,13 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
 export class ValleyTrust extends Card implements ICorporationCard {
   constructor() {
@@ -35,25 +35,18 @@ export class ValleyTrust extends Card implements ICorporationCard {
     });
   }
 
-  public override getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
     // TODO(chosta) -> improve once the discounts property is given a go
     return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     const game = player.game;
-    const cardsDrawn: Array<IProjectCard> = [
+    const cards = [
       game.preludeDeck.draw(game),
       game.preludeDeck.draw(game),
       game.preludeDeck.draw(game),
     ];
-
-    return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
-      if (card.canPlay === undefined || card.canPlay(player)) {
-        return player.playCard(card);
-      } else {
-        throw new Error('You cannot pay for this card');
-      }
-    });
+    return PreludesExpansion.playPrelude(player, cards);
   }
 }

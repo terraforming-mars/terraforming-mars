@@ -1,4 +1,4 @@
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {GameId, ParticipantId} from '../../common/Types';
 import {once} from 'events';
 import {EventEmitter} from 'events';
@@ -22,7 +22,7 @@ const metrics = {
 
 export class Cache extends EventEmitter {
   private loaded = false;
-  private readonly games = new Map<GameId, Game | undefined>();
+  private readonly games = new Map<GameId, IGame | undefined>();
   private readonly participantIds = new Map<ParticipantId, GameId>();
   private readonly db = Database.getInstance();
 
@@ -99,7 +99,7 @@ export class Cache extends EventEmitter {
     }
   }
 
-  public async getGames(): Promise<{games:Map<GameId, Game | undefined>, participantIds:Map<ParticipantId, GameId>}> {
+  public async getGames(): Promise<{games:Map<GameId, IGame | undefined>, participantIds:Map<ParticipantId, GameId>}> {
     if (!this.loaded) {
       await once(this, 'loaded');
     }

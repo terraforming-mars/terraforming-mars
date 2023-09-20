@@ -2,11 +2,11 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
@@ -49,18 +49,18 @@ export class EcologicalZone extends Card implements IProjectCard {
   }
 
 
-  private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter(Board.isGreenerySpace).length > 0);
   }
-  public override bespokeCanPlay(player: Player): boolean {
-    return this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
     const qty = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT]);
     player.addResourceTo(this, {qty, log: true});
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     // Get one extra animal from EcoExperts if played during prelude while having just played EcoExperts
     if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
       player.addResourceTo(this, {qty: 1, log: true});
@@ -69,7 +69,7 @@ export class EcologicalZone extends Card implements IProjectCard {
     return new SelectSpace(
       'Select space next to greenery for special tile',
       this.getAvailableSpaces(player),
-      (requestedSpace: ISpace) => {
+      (requestedSpace: Space) => {
         player.game.addTile(player, requestedSpace, {
           tileType: TileType.ECOLOGICAL_ZONE,
         });

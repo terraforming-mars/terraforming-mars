@@ -202,7 +202,6 @@
     "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} nie może odwrócić karty ${1} ze względu na niemożliwość pokrycia dodatkowego kosztu polityki czerwonych.",
     "${0} turned ${1} face down to gain 3 TR": "${0} zakrywa ${1} i podnosi swój WT o 3 poziomy.",
     "You drew ${0} and ${1}": "Dobierasz ${0} i ${1}.",
-    "${0} and ${1} were discarded as ${2} could not pay for both cards.": "${0} i ${1} zostały odrzucone ponieważ gracz ${2} nie był w stanie pokryć kosztu obu kart.",
     "${0} spent ${1} energy": "${0} wydaje ${1} jednostek energii.",
     "${0} placed a Greenery tile": "${0} umieszcza obszar zieleni na planszy.",
     "${0} must select ${1} bonus resource(s) from ${2}' ability": "${0} musi wybrać ${1} dodatkowych zasobów dzięki umiejętności ${2}.",

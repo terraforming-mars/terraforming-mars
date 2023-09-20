@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
@@ -26,9 +26,9 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       },
     });
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const steps = 1 + player.tags.count(Tag.JOVIAN);
-    player.increaseTerraformRatingSteps(steps, {log: true});
+    player.increaseTerraformRating(steps, {log: true});
 
     return undefined;
   }

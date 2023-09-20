@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
@@ -33,7 +33,7 @@ export class CometForVenus extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.tags.count(Tag.VENUS, 'raw') > 0);
 
     if (player.game.isSoloMode()|| venusTagPlayers.length === 0) {
@@ -46,8 +46,8 @@ export class CometForVenus extends Card implements IProjectCard {
           Array.from(venusTagPlayers),
           'Select player to remove up to 4 M€ from',
           'Remove M€',
-          (selectedPlayer: Player) => {
-            selectedPlayer.deductResource(Resource.MEGACREDITS, 4, {log: true, from: player});
+          (selectedPlayer: IPlayer) => {
+            selectedPlayer.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
             return undefined;
           },
         ),

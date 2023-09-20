@@ -4,6 +4,7 @@ import {LunarMining} from '../../../src/server/cards/colonies/LunarMining';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('LunarMining', function() {
   it('Should play', function() {
@@ -13,8 +14,7 @@ describe('LunarMining', function() {
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(card2, card3);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(2);
   });
 });

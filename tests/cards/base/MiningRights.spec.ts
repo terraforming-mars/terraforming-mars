@@ -6,7 +6,6 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {ISpace} from '../../../src/server/boards/ISpace';
 import {runAllActions, cast} from '../../TestingUtils';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -36,7 +35,7 @@ describe('MiningRights', () => {
   it('Should play - titanium', () => {
     const action = cast(card.play(player), SelectSpace);
 
-    const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
+    const titaniumSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;
     expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
 
@@ -52,7 +51,7 @@ describe('MiningRights', () => {
   it('Should play - steel', () => {
     const action = cast(card.play(player), SelectSpace);
 
-    const steelSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
+    const steelSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
     expect(steelSpace).is.not.undefined;
     expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
 
@@ -67,7 +66,10 @@ describe('MiningRights', () => {
 
   it('Should play when space bonus is both steel and titanium', () => {
     const action = cast(card.play(player), SelectSpace);
-    const space = action.availableSpaces.find((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false) as ISpace;
+    const space = action.spaces.find(
+      (space) => space.tile === undefined &&
+        space.bonus.includes(SpaceBonus.TITANIUM) &&
+        space.bonus.includes(SpaceBonus.STEEL) === false)!;
     space.bonus = [SpaceBonus.STEEL, SpaceBonus.TITANIUM];
 
     action.cb(space);
@@ -85,7 +87,10 @@ describe('MiningRights', () => {
 
   it('Should play when space bonus is both steel and titanium, plus Robotic Workforce works correctly', () => {
     const action = cast(card.play(player), SelectSpace);
-    const space = action.availableSpaces.find((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false) as ISpace;
+    const space = action.spaces.find(
+      (space) => space.tile === undefined &&
+        space.bonus.includes(SpaceBonus.TITANIUM) &&
+        space.bonus.includes(SpaceBonus.STEEL) === false)!;
     space.bonus = [SpaceBonus.STEEL, SpaceBonus.TITANIUM];
 
     action.cb(space);

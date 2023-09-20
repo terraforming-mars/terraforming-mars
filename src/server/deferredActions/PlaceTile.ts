@@ -1,6 +1,6 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from './DeferredAction';
 import {PlacementType} from '../boards/PlacementType';
 import {Tile} from '../Tile';
@@ -8,7 +8,7 @@ import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 
 export class PlaceTile extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     private options: {
       tile: Tile,
       on: PlacementType,
@@ -27,7 +27,7 @@ export class PlaceTile extends DeferredAction {
     return new SelectSpace(
       title,
       availableSpaces,
-      (space: ISpace) => {
+      (space: Space) => {
         const tile: Tile = {...this.options.tile};
         if (this.options.on === 'upgradeable-ocean') {
           tile.covers = space.tile;

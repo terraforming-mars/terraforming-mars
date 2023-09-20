@@ -29,8 +29,7 @@ describe('ExtremeColdFungus', () => {
   });
 
   it('Should play', () => {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act - single target', () => {

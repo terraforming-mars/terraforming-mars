@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -35,14 +35,14 @@ export class SolarStorm extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     for (const p of player.game.getPlayers()) {
       if (!p.plantsAreProtected()) {
         // Botanical Experience reduces the impact in half.
         if (p.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
-          p.deductResource(Resource.PLANTS, 1, {log: true, from: player});
+          p.stock.deduct(Resource.PLANTS, 1, {log: true, from: player});
         } else {
-          p.deductResource(Resource.PLANTS, 2, {log: true, from: player});
+          p.stock.deduct(Resource.PLANTS, 2, {log: true, from: player});
         }
       }
     }

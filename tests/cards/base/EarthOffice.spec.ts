@@ -4,6 +4,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('EarthOffice', function() {
   let card: EarthOffice;
@@ -13,8 +14,7 @@ describe('EarthOffice', function() {
     card = new EarthOffice();
     [/* skipped */, player] = testGame(2);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should play', function() {

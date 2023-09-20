@@ -34,6 +34,10 @@ export const DELEGATES_FOR_NEUTRAL_PLAYER = 14;
 export const REDS_RULING_POLICY_COST = 3;
 export const POLITICAL_AGENDAS_MAX_ACTION_USES = 3;
 
+// Promo
+
+export const GRAPHENE_VALUE = 4;
+
 // Map specific
 export const HELLAS_BONUS_OCEAN_COST = 6;
 export const VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST = 3;
@@ -48,15 +52,15 @@ export const SEED_VALUE = 5;
 export const DATA_VALUE = 3;
 
 // Escape Velocity
-export const BONUS_SECONDS_PER_ACTION = 2;
 export const DEFAULT_ESCAPE_VELOCITY_THRESHOLD = 30;
+export const DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS = 2;
 export const DEFAULT_ESCAPE_VELOCITY_PERIOD = 2;
 export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 
 // Leaders/CEOs
 export const ASIMOV_AWARD_BONUS = 2;
 
-export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl'] as const;
+export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu'] as const;
 
 export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   en: 'English',
@@ -70,6 +74,7 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   it: 'Italiano',
   ko: '한국어',
   nl: 'Nederlands',
+  hu: 'Magyar',
 };
 
 export const APP_NAME = 'Terraforming Mars';

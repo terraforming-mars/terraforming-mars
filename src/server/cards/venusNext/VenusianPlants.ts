@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
@@ -40,7 +40,7 @@ export class VenusianPlants extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const cards = this.getResCards(player);
     if (cards.length === 0) return undefined;
 
@@ -60,7 +60,7 @@ export class VenusianPlants extends Card implements IProjectCard {
     );
   }
 
-  public getResCards(player: Player): ICard[] {
+  public getResCards(player: IPlayer): ICard[] {
     let resourceCards = player.getResourceCards(CardResource.MICROBE);
     resourceCards = resourceCards.concat(player.getResourceCards(CardResource.ANIMAL));
     return resourceCards.filter((card) => card.tags.includes(Tag.VENUS));

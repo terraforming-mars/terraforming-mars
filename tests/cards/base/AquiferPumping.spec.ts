@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AquiferPumping, OCEAN_COST} from '../../../src/server/cards/base/AquiferPumping';
 import {Game} from '../../../src/server/Game';
-import {maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
@@ -26,7 +26,7 @@ describe('AquiferPumping', function() {
   it('Should act', function() {
     player.megaCredits = OCEAN_COST;
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
   });

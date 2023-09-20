@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -31,7 +31,7 @@ export class TerralabsResearch extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.decreaseTerraformRating();
     return undefined;
   }

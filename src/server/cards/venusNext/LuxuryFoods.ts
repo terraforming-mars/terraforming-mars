@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
@@ -23,7 +23,7 @@ export class LuxuryFoods extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return player.tags.playerHas([Tag.VENUS, Tag.EARTH, Tag.JOVIAN]);
   }
 }

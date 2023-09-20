@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {Player} from '../src/server/Player';
-import {Game} from '../src/server/Game';
+import {IGame} from '../src/server/IGame';
 import * as constants from '../src/common/constants';
-import {ISpace} from '../src/server/boards/ISpace';
+import {Space} from '../src/server/boards/Space';
 import {Phase} from '../src/common/Phase';
-import {IParty} from '../src/server/turmoil/parties/IParty';
 import {Turmoil} from '../src/server/turmoil/Turmoil';
 import {Message} from '../src/common/logs/Message';
 import {PolicyId} from '../src/common/turmoil/Types';
@@ -19,33 +18,34 @@ import {SpaceId} from '../src/common/Types';
 import {PlayerInput} from '../src/server/PlayerInput';
 import {IActionCard} from '../src/server/cards/ICard';
 import {TestPlayer} from './TestPlayer';
+import {PartyName} from '../src/common/turmoil/PartyName';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
-export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
+export function maxOutOceans(player: Player, toValue: number = 0): Array<Space> {
   const oceans = [];
   if (toValue < 1) {
     toValue = constants.MAX_OCEAN_TILES;
   }
 
-  while (player.game.board.getOceanCount() < toValue) {
+  while (player.game.board.getOceanSpaces().length < toValue) {
     oceans.push(addOcean(player));
   }
   return oceans;
 }
 
-export function setTemperature(game: Game, temperature: number) {
+export function setTemperature(game: IGame, temperature: number) {
   (game as any).temperature = temperature;
 }
 
-export function setOxygenLevel(game: Game, oxygenLevel: number) {
+export function setOxygenLevel(game: IGame, oxygenLevel: number) {
   (game as any).oxygenLevel = oxygenLevel;
 }
 
-export function setVenusScaleLevel(game: Game, venusScaleLevel: number) {
+export function setVenusScaleLevel(game: IGame, venusScaleLevel: number) {
   (game as any).venusScaleLevel = venusScaleLevel;
 }
 
-export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
+export function addGreenery(player: Player, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForGreenery(player)[0];
@@ -53,7 +53,7 @@ export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
   return space;
 }
 
-export function addOcean(player: Player, spaceId?: SpaceId): ISpace {
+export function addOcean(player: Player, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForOcean(player)[0];
@@ -61,7 +61,7 @@ export function addOcean(player: Player, spaceId?: SpaceId): ISpace {
   return space;
 }
 
-export function addCity(player: Player, spaceId?: SpaceId): ISpace {
+export function addCity(player: Player, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForCity(player)[0];
@@ -69,26 +69,30 @@ export function addCity(player: Player, spaceId?: SpaceId): ISpace {
   return space;
 }
 
-export function resetBoard(game: Game): void {
+export function resetBoard(game: IGame): void {
   game.board.spaces.forEach((space) => {
     space.player = undefined;
     space.tile = undefined;
   });
 }
 
-export function setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
+export function setRulingParty(game: IGame, partyName: PartyName, policyId?: PolicyId) {
+  const turmoil = Turmoil.getTurmoil(game);
+  const party = turmoil.getPartyByName(partyName);
+  const resolvedPolicyId = policyId ?? party.policies[0].id;
+
   turmoil.rulingParty = party;
-  turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: policyId});
+  turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: resolvedPolicyId});
   game.phase = Phase.ACTION;
 }
 
 // Just shortcuts to some often called methods
 // related to the deferred actions queue
-export function runAllActions(game: Game) {
+export function runAllActions(game: IGame) {
   game.deferredActions.runAll(() => {});
 }
 
-export function runNextAction(game: Game) {
+export function runNextAction(game: IGame) {
   const action = game.deferredActions.pop();
   if (action === undefined) {
     return undefined;
@@ -106,7 +110,7 @@ export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput |
   return player.popWaitingFor();
 }
 
-export function forceGenerationEnd(game: Game) {
+export function forceGenerationEnd(game: IGame) {
   while (game.deferredActions.pop() !== undefined) {} // eslint-disable-line no-empty
   game.getPlayersInGenerationOrder().forEach((player) => player.pass());
   game.playerIsFinishedTakingActions();
@@ -154,10 +158,22 @@ export function fakeCard(card: Partial<IProjectCard>): IProjectCard {
   return {...FAKE_CARD_TEMPLATE, ...card};
 }
 
-/*
+type ConstructorOf<T> = new (...args: any[]) => T;
+
+/**
  * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
+ *
+ * Accepts `undefined` as class and fails when obj is not undefined.
  */
-export function cast<T>(obj: any, klass: new (...args: any[]) => T): T {
+export function cast<T>(obj: any, klass: ConstructorOf<T>): T;
+export function cast<T>(obj: any, klass: undefined): undefined;
+export function cast<T>(obj: any, klass: ConstructorOf<T> | undefined): T | undefined {
+  if (klass === undefined) {
+    if (obj !== undefined) {
+      throw new Error(`Expected undefined, got type ${obj.constructor.name}`);
+    }
+    return undefined;
+  }
   if (!(obj instanceof klass)) {
     throw new Error(`Not an instance of ${klass.name}: ${obj.constructor.name}`);
   }
@@ -170,7 +186,7 @@ export async function sleep(ms: number): Promise<void> {
   });
 }
 
-export function finishGeneration(game: Game): void {
+export function finishGeneration(game: IGame): void {
   const priorGeneration = game.generation;
   game.getPlayersInGenerationOrder().forEach((player) => {
     game.playerHasPassed(player);
@@ -220,4 +236,14 @@ export function churn(pi: PlayerInput | (() => PlayerInput | undefined) | undefi
   player.defer(result);
   runAllActions(player.game);
   return player.popWaitingFor();
+}
+
+/**
+ * Get the PlayerInput a player is waiting for. Expect it to be of type `klass` and call `f` with it.
+ * Afterwards, call any additional callback.
+ */
+export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, f: (waitingFor: T) => void) {
+  const [waitingFor, cb] = player.popWaitingFor2();
+  f(cast(waitingFor, klass));
+  cb?.();
 }

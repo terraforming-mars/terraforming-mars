@@ -8,7 +8,7 @@ import {Delegate, Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 
 describe('AnOfferYouCantRefuse', () => {
   let player: TestPlayer;
@@ -170,19 +170,19 @@ describe('AnOfferYouCantRefuse', () => {
     delegates.forEach((delegate) => party.sendDelegate(delegate, game));
   }
 
-  function assertExchanges(delegates: Array<Delegate>, leader: Delegate, expectedOptions: Array<Player>) {
+  function assertExchanges(delegates: Array<Delegate>, leader: Delegate, expectedOptions: Array<IPlayer>) {
     populateParty(parties.unity, ...delegates);
 
     expect(parties.unity.partyLeader).eq(leader);
     expect(card.canPlay(player)).is.true;
 
     const options = cast(card.play(player), OrOptions);
-    const mapped: Array<[IParty, Player]> = expectedOptions.map((player) => [parties.unity, player]);
+    const mapped: Array<[IParty, IPlayer]> = expectedOptions.map((player) => [parties.unity, player]);
     assertOptions(options, ...mapped);
   }
 
-  function assertOptions(orOptions: OrOptions, ...expectedOptions: Array<[IParty, Player]>) {
-    const expectedStrings = expectedOptions.map((entry) => `${entry[0].name} / ${entry[1].id}`);
+  function assertOptions(orOptions: OrOptions, ...expectedOptions: Array<[IParty, IPlayer]>) {
+    const expectedStrings = expectedOptions.map((entry) => `${entry[0].name} / ${entry[1].color}`);
     const actualStrings = orOptions.options.map((option) => formatMessage(option.title));
     expect(actualStrings).deep.eq(expectedStrings);
   }

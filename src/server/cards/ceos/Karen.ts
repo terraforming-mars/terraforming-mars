@@ -1,10 +1,10 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {SelectCard} from '../../inputs/SelectCard';
-import {IProjectCard} from '../IProjectCard';
+import {IPreludeCard} from '../prelude/IPreludeCard';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
 export class Karen extends CeoCard {
   constructor() {
@@ -20,32 +20,13 @@ export class Karen extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
-    const cardsDrawn: Array<IProjectCard> = [];
     const game = player.game;
+    const cards: Array<IPreludeCard> = [];
     for (let i = 0; i < game.generation; i++) {
-      cardsDrawn.push(game.preludeDeck.draw(game));
+      cards.push(game.preludeDeck.draw(game));
     }
-
-    cardsDrawn.forEach((card) => {
-      if (card.canPlay?.(player) === false) {
-        cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
-        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player), {reservedFor: player});
-      }
-    });
-
-    if (cardsDrawn.length === 0) {
-      game.log('${0} drew no playable prelude cards', (b) => b.player(player));
-      return undefined;
-    }
-
-    return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
-      if (card.canPlay === undefined || card.canPlay(player)) {
-        return player.playCard(card);
-      } else {
-        throw new Error('You cannot play this card');
-      }
-    });
+    return PreludesExpansion.playPrelude(player, cards);
   }
 }

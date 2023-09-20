@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {MarsFirst} from '../../src/server/turmoil/parties/MarsFirst';
 import {Phase} from '../../src/common/Phase';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
@@ -185,7 +186,7 @@ describe('Turmoil', function() {
     player.worldGovernmentTerraforming();
     const action = cast(player.getWaitingFor(), OrOptions);
     const placeOcean = cast(action.options.find((option) => option.title === 'Add an ocean'), SelectSpace);
-    const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
+    const steelSpace = placeOcean.spaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
 
     placeOcean.cb(steelSpace!);
     expect(player.steel).to.eq(0); // should not give ruling policy bonus
@@ -508,13 +509,13 @@ describe('Turmoil', function() {
     player.megaCredits = card.cost + 6;
     expect(player.canPlay(card)).is.true;
 
-    moonData.colonyRate = 7;
+    moonData.habitatRate = 7;
     player.megaCredits = card.cost + 2;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 3;
     expect(player.canPlay(card)).is.true;
 
-    moonData.colonyRate = 8;
+    moonData.habitatRate = 8;
 
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.true;
@@ -623,21 +624,21 @@ describe('Turmoil', function() {
     expect(player.getTerraformRating()).eq(15);
 
     player.megaCredits = 3;
-    player.increaseTerraformRatingSteps(2);
+    player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(3); // No change
     expect(player.getTerraformRating()).eq(15);
 
     player.megaCredits = 5;
-    player.increaseTerraformRatingSteps(2);
+    player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(5); // No change
     expect(player.getTerraformRating()).eq(15);
 
     player.megaCredits = 6;
-    player.increaseTerraformRatingSteps(2);
+    player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
@@ -647,7 +648,7 @@ describe('Turmoil', function() {
     game.phase = Phase.SOLAR;
 
     player.megaCredits = 6;
-    player.increaseTerraformRatingSteps(2);
+    player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(6);
@@ -777,7 +778,7 @@ describe('Turmoil', function() {
     expect(Array.from(t.usedFreeDelegateAction.values())).has.members(['p-blue-id']);
   });
 
-  function setRulingParty(turmoil: Turmoil, game: Game, party: IParty) {
+  function setRulingParty(turmoil: Turmoil, game: IGame, party: IParty) {
     turmoil.rulingParty = party;
     PoliticalAgendas.setNextAgenda(turmoil, game);
   }

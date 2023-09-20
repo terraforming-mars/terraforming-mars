@@ -13,14 +13,16 @@ describe('SpaceHotels', function() {
   });
 
   it('Can not play', function() {
-    player.playedCards.push(card);
+    player.tagsForTest = {earth: 1};
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
-  it('Should play', function() {
-    player.playedCards.push(card, card);
+  it('Can play', function() {
+    player.tagsForTest = {earth: 2};
     expect(player.simpleCanPlay(card)).is.true;
+  });
 
+  it('Should play', function() {
     card.play(player);
     expect(player.production.megacredits).to.eq(4);
   });

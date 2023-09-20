@@ -1,13 +1,13 @@
 <script lang="ts">
+import * as constants from '@/common/constants';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {vueRoot} from '@/client/components/vueRoot';
-import * as constants from '@/common/constants';
-import * as paths from '@/common/app/paths';
-import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {GameId} from '@/common/Types';
+import {paths} from '@/common/app/paths';
 
 type LoadGameFormDataModel = {
   gameId: GameId | undefined;

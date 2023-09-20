@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -45,7 +45,7 @@ export class LunaTrainStation extends Card {
     });
   }
 
-  public override getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: IPlayer) {
     const moonData = MoonExpansion.moonData(player.game);
     const usedSpace = moonData.moon.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {

@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -22,14 +22,14 @@ export class Ender extends CeoCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;
     }
     return player.cardsInHand.length > 0;
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const max = Math.min(player.cardsInHand.length, player.game.generation * 2);
     // TODO(d-little): Replace with SelectCard.

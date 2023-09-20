@@ -1,11 +1,11 @@
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {IColony} from './IColony';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {ICard} from '../cards/ICard';
 import {Tag} from '../../common/cards/Tag';
 
 export class ColoniesHandler {
-  public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {
+  public static getColony(game: IGame, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {
     let colony: IColony | undefined = game.colonies.find((c) => c.name === colonyName);
     if (colony !== undefined) return colony;
     if (includeDiscardedColonies === true) {
@@ -15,11 +15,11 @@ export class ColoniesHandler {
     throw new Error(`Unknown colony '${colonyName}'`);
   }
 
-  public static tradeableColonies(game: Game) {
+  public static tradeableColonies(game: IGame) {
     return game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
   }
 
-  public static onCardPlayed(game: Game, card: ICard) {
+  public static onCardPlayed(game: IGame, card: ICard) {
     if (!game.gameOptions.coloniesExtension) return;
     game.colonies.forEach((colony) => {
       ColoniesHandler.maybeActivateColony(colony, card);

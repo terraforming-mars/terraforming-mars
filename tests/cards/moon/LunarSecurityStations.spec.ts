@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
 import {cast} from '../../TestingUtils';
 import {LunarSecurityStations} from '../../../src/server/cards/moon/LunarSecurityStations';
 import {expect} from 'chai';
@@ -13,8 +12,8 @@ import {TestPlayer} from '../../TestPlayer';
 describe('LunarSecurityStations', () => {
   let game: Game;
   let player: TestPlayer;
-  let opponent1: Player;
-  let opponent2: Player;
+  let opponent1: TestPlayer;
+  let opponent2: TestPlayer;
   let moonData: IMoonData;
   let card: LunarSecurityStations;
 

@@ -18,12 +18,14 @@ const RESOURCE_TO_ITEM_TYPE: Record<CardResource, CardRenderItemType | undefined
   [CardResource.FLOATER]: CardRenderItemType.FLOATERS,
   [CardResource.VENUSIAN_HABITAT]: CardRenderItemType.VENUSIAN_HABITAT,
   [CardResource.SPECIALIZED_ROBOT]: CardRenderItemType.SPECIALIZED_ROBOT,
+  [CardResource.HYDROELECTRIC_RESOURCE]: CardRenderItemType.HYDROELECTRIC_RESOURCE,
   [CardResource.CLONE_TROOPER]: CardRenderItemType.CLONE_TROOPER,
   [CardResource.DISEASE]: undefined,
   [CardResource.SYNDICATE_FLEET]: undefined,
   [CardResource.SEED]: undefined,
   [CardResource.AGENDA]: undefined,
   [CardResource.ORBITAL]: undefined,
+  [CardResource.GRAPHENE]: undefined,
 };
 
 const TAG_TO_ITEM_TYPE = new Map<Tag, CardRenderItemType>([
@@ -89,6 +91,10 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
     item.size = Size.SMALL;
     item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, 1);
+  }
+  public static cathedral(): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderItem(CardRenderItemType.CATHEDRAL);
+    return new CardRenderDynamicVictoryPoints(item, 1, 1);
   }
   public static questionmark(): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(undefined, 0, 0);

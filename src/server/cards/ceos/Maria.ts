@@ -1,9 +1,9 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 
 import {IColony} from '../../colonies/IColony';
 import {SelectColony} from '../../inputs/SelectColony';
@@ -23,13 +23,13 @@ export class Maria extends CeoCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     const game = player.game;
     if (game.discardedColonies === undefined || !game.gameOptions.coloniesExtension) return false;
     return game.discardedColonies.length > 0 && this.isDisabled === false;
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
     if (game.discardedColonies.length === 0) return undefined;
@@ -56,7 +56,7 @@ export class Maria extends CeoCard {
     return selectColony;
   }
 
-  private checkActivation(colony: IColony, game: Game): void {
+  private checkActivation(colony: IColony, game: IGame): void {
     if (colony.isActive) return;
     for (const player of game.getPlayers()) {
       for (const card of player.tableau) {

@@ -12,15 +12,13 @@ import {addCity, addGreenery, addOcean, cast, forceGenerationEnd, maxOutOceans, 
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resource} from '../src/common/Resource';
-import {ISpace} from '../src/server/boards/ISpace';
+import {Space} from '../src/server/boards/Space';
 import {SpaceId} from '../src/common/Types';
 import {ResearchNetwork} from '../src/server/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/server/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/server/milestones/Ecologist';
 import {OrOptions} from '../src/server/inputs/OrOptions';
 import {BoardName} from '../src/common/boards/BoardName';
-import {SpaceType} from '../src/common/boards/SpaceType';
-import {Helion} from '../src/server/cards/corporation/Helion';
 import {CardName} from '../src/common/cards/CardName';
 import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
@@ -413,40 +411,40 @@ describe('Game', () => {
 
     game.takeNextFinalGreeneryAction();
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player2.getWaitingFor(), undefined);
     expect(player3.getWaitingFor()).is.not.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player4.getWaitingFor(), undefined);
 
     // Skipping plants placement. Option 1 is "Don't place plants".
     // This weird input is what would come from the server, and indicates "Don't place plants".
     player3.process({type: 'or', index: 1, response: {type: 'option'}});
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
     expect(player4.getWaitingFor()).is.not.undefined;
 
     player4.process({type: 'or', index: 1, response: {type: 'option'}});
 
     expect(player1.getWaitingFor()).is.not.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
+    cast(player4.getWaitingFor(), undefined);
 
     player1.process({type: 'or', index: 1, response: {type: 'option'}});
 
-    expect(player1.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
     expect(player2.getWaitingFor()).is.not.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player3.getWaitingFor(), undefined);
+    cast(player4.getWaitingFor(), undefined);
 
     player2.process({type: 'or', index: 1, response: {type: 'option'}});
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
+    cast(player4.getWaitingFor(), undefined);
 
     expect(game.phase).eq(Phase.END);
   });
@@ -470,9 +468,9 @@ describe('Game', () => {
 
     // Even though player 3 is first player, they have no plants. So player 4 goes.
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
     expect(player4.getWaitingFor()).is.not.undefined;
 
     // Skipping plants placement. Option 1 is "Don't place plants".
@@ -481,9 +479,9 @@ describe('Game', () => {
 
     // After that, player 1 has plants.
     expect(player1.getWaitingFor()).is.not.undefined;
-    expect(player2.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    expect(player4.getWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
+    cast(player4.getWaitingFor(), undefined);
 
     player1.process({type: 'or', index: 1, response: {type: 'option'}});
 
@@ -528,7 +526,7 @@ describe('Game', () => {
     const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
     addOcean(player, spaceId);
 
-    const space: ISpace = game.board.getSpace(spaceId);
+    const space: Space = game.board.getSpace(spaceId);
     expect(space.player).is.undefined;
   });
 
@@ -543,62 +541,6 @@ describe('Game', () => {
     expect(ecologist.canClaim(player)).is.not.true;
     player.playedCards.push(card1, card2);
     expect(ecologist.canClaim(player)).is.true;
-  });
-
-  it('Removes Hellas bonus ocean space if player cannot pay', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-
-    // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
-    // the neutral player can't claim the bonus ocean space before our player has a
-    // chance.
-    const secondPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, secondPlayer], player, {boardName: BoardName.HELLAS});
-
-    // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
-    expect(game.board.getEmptySpaces().map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
-
-    // Cannot afford
-    player.megaCredits = 5;
-    let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
-    let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
-
-    // Can afford
-    player.megaCredits = 6;
-    landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
-    availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
-  });
-
-  it('Removes Hellas bonus ocean space if Helion player cannot pay', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
-    // the neutral player can't claim the bonus ocean space before our player has a
-    // chance.
-    const secondPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, secondPlayer], player, {boardName: BoardName.HELLAS});
-    player.setCorporationForTest(new Helion());
-    player.canUseHeatAsMegaCredits = true;
-
-    // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
-    expect(game.board.getEmptySpaces().map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
-
-    // Cannot afford
-    player.heat = 2;
-    player.megaCredits = 3;
-    let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
-    let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
-
-    // Can afford
-    player.megaCredits += 1;
-    landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
-    availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 
   it('Generates random milestones and awards', () => {

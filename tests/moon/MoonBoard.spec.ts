@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {MoonBoard} from '../../src/server/moon/MoonBoard';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
+import {SpaceId} from '../../src/common/Types';
 
 describe('MoonBoard', function() {
   let board: MoonBoard;
@@ -17,7 +18,7 @@ describe('MoonBoard', function() {
   });
 
 
-  const testCases: Array<[string, Array<string>]> = [
+  const testCases: Array<[SpaceId, Array<SpaceId>]> = [
     ['m01', []],
     ['m02', ['m03', 'm07', 'm06']],
     ['m03', ['m04', 'm08', 'm07', 'm02']],

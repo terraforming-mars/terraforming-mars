@@ -32,7 +32,7 @@ describe('Gaia', function() {
     naturalPreserveAres.play(player2);
     runAllActions(game);
     const action = cast(player2.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
 
     // Place tiles from different players next to tile that grants adjacency bonuses
@@ -52,7 +52,7 @@ describe('Gaia', function() {
     naturalPreserveAres.play(player2);
     runAllActions(game);
     const action = cast(player2.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
 
     // Place an Ocean adjacent
@@ -71,7 +71,7 @@ describe('Gaia', function() {
     naturalPreserveAres.play(player2);
     runAllActions(game);
     const action = cast(player2.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
 
     // Place tiles from different players next to tile that grants adjacency bonuses
@@ -92,7 +92,7 @@ describe('Gaia', function() {
     naturalPreserveAres.play(player2);
     runAllActions(game);
     const action = cast(player2.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
 
     // Place tiles from different players next to tile that grants adjacency bonuses

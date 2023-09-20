@@ -30,8 +30,7 @@ describe('RotatorImpacts', () => {
 
   it('Should play', () => {
     expect(player.simpleCanPlay(card)).is.true;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Works with MSI corporation', () => {
@@ -74,7 +73,7 @@ describe('RotatorImpacts', () => {
     expect(card.canAct(player)).is.true;
 
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });

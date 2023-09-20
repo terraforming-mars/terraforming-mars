@@ -28,8 +28,7 @@ describe('EcologyResearch', function() {
   });
 
   it('Should play without targets', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.plants).to.eq(1);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

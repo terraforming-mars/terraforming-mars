@@ -415,7 +415,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   // TODO(kberg): Be greedy with science units.
-  it('using science', async () => {
+  it('using luna archive science', async () => {
     // ARISTARCHUS_ROAD_NETWORK costs 15. Player has 7M€ and will use 8 science units.
     const wrapper = setupCardForPurchase(
       CardName.ARISTARCHUS_ROAD_NETWORK, 15,
@@ -423,17 +423,17 @@ describe('SelectProjectCardToPlay', () => {
         megaCredits: 7,
         steel: 0,
       },
-      {science: 10});
+      {lunaArchivesScience: 10});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsAvailable('science', true);
-    tester.expectValue('science', 8);
+    tester.expectIsAvailable('lunaArchivesScience', true);
+    tester.expectValue('lunaArchivesScience', 8);
     tester.expectValue('megaCredits', 7);
 
     tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({science: 8, megaCredits: 7}));
+    expect(saveResponse.payment).deep.eq(Payment.of({lunaArchivesScience: 8, megaCredits: 7}));
   });
 
   // TODO(kberg): be greedy with seeds.
@@ -455,6 +455,28 @@ describe('SelectProjectCardToPlay', () => {
 
     tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({seeds: 1, megaCredits: 7}));
+  });
+
+  // TODO(kberg): Be greedy with graphene units.
+  it('using graphene', async () => {
+    // ASTEROID_MINING costs 30. Player has 11M€ and will use 5 graphene units.
+    const wrapper = setupCardForPurchase(
+      CardName.ASTEROID_MINING, 30,
+      {
+        megaCredits: 11,
+        titanium: 0,
+      },
+      {graphene: 7, canUseGraphene: true});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectIsAvailable('graphene', true);
+    tester.expectValue('graphene', 5);
+    tester.expectValue('megaCredits', 10);
+
+    tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({graphene: 5, megaCredits: 10}));
   });
 
   it('initial setup allows for steel and titanium when using Last Restort Ingenuity', async () => {
@@ -588,7 +610,7 @@ describe('SelectProjectCardToPlay', () => {
     cardCost: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<PlayerInputModel>,
-    reserveUnits: Units = Units.EMPTY) {
+    reserveUnits: Units | undefined = undefined) {
     const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
       steel: 0,
@@ -607,11 +629,12 @@ describe('SelectProjectCardToPlay', () => {
       cards: [{
         name: cardName,
         resources: undefined,
-        isDisabled: false,
-        reserveUnits: reserveUnits,
         calculatedCost: cardCost,
       }],
     };
+    if (reserveUnits !== undefined) {
+      playerInput.cards![0].reserveUnits = reserveUnits;
+    }
     Object.assign(playerInput, playerInputFields);
 
     return mount(SelectProjectCardToPlay, {

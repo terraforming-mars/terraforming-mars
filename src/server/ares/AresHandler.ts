@@ -1,11 +1,12 @@
 import {CardName} from '../../common/cards/CardName';
 import {ICard} from '../cards/ICard';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {SelectCard} from '../inputs/SelectCard';
-import {ISpace} from '../boards/ISpace';
-import {Player} from '../Player';
+import {Space} from '../boards/Space';
+import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
 import {Tile} from '../Tile';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
@@ -18,23 +19,17 @@ import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductio
 import {_AresHazardPlacement} from './AresHazards';
 import {CrashlandingBonus} from '../pathfinders/CrashlandingBonus';
 
-export enum HazardSeverity {
-    NONE,
-    MILD,
-    SEVERE
-}
-
 export class AresHandler {
   private constructor() {}
 
-  public static ifAres(game: Game, cb: (aresData: AresData) => void) {
+  public static ifAres(game: IGame, cb: (aresData: AresData) => void) {
     if (game.gameOptions.aresExtension) {
       if (game.aresData === undefined) throw new Error('Assertion failure: game.aresData is undefined');
       cb(game.aresData);
     }
   }
 
-  public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace) {
+  public static earnAdjacencyBonuses(aresData: AresData, player: IPlayer, space: Space) {
     let incrementMilestone = false;
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
       const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player);
@@ -51,7 +46,7 @@ export class AresHandler {
 
   // |player| placed a tile at |space| next to |adjacentSpace|.
   // Returns true if the adjacent space contains a bonus for adjacency.
-  private static earnAdacencyBonus(newTileSpace: ISpace, adjacentSpace: ISpace, player: Player, adjacentTileOwnerGainsBonus: boolean = true): boolean {
+  private static earnAdacencyBonus(newTileSpace: Space, adjacentSpace: Space, player: IPlayer, adjacentTileOwnerGainsBonus: boolean = true): boolean {
     if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
       return false;
     }
@@ -60,7 +55,7 @@ export class AresHandler {
       throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
     }
 
-    const addResourceToCard = function(player: Player, resourceType: CardResource, resourceAsText: string) {
+    const addResourceToCard = function(player: IPlayer, resourceType: CardResource, resourceAsText: string) {
       const availableCards = player.getResourceCards(resourceType);
       if (availableCards.length === 0) {
         return;
@@ -145,36 +140,19 @@ export class AresHandler {
     return true;
   }
 
-  public static hasHazardTile(space: ISpace): boolean {
-    return AresHandler.hazardSeverity(space) !== HazardSeverity.NONE;
-  }
-
-  public static hazardSeverity(space: ISpace): HazardSeverity {
-    const type = space.tile?.tileType;
-
-    switch (type) {
-    case TileType.DUST_STORM_MILD:
-    case TileType.EROSION_MILD:
-      return HazardSeverity.MILD;
-
-    case TileType.DUST_STORM_SEVERE:
-    case TileType.EROSION_SEVERE:
-      return HazardSeverity.SEVERE;
-
-    default:
-      return HazardSeverity.NONE;
-    }
+  public static hasHazardTile(space: Space): boolean {
+    return hazardSeverity(space.tile?.tileType) !== HazardSeverity.NONE;
   }
 
   // A light version of `earnAdjacencyBonuses` but does not increment the milestone,
   // and does not grant the 1MC bonus for ares tile owners.
-  public static earnAdjacencyBonusesForGaia(player: Player, space: ISpace) {
+  public static earnAdjacencyBonusesForGaia(player: IPlayer, space: Space) {
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
       this.earnAdacencyBonus(space, adjacentSpace, player, false);
     }
   }
 
-  private static computeAdjacencyCosts(game: Game, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  private static computeAdjacencyCosts(game: IGame, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
     // Summing up production cost isn't really the way to do it, because each tile could
     // reduce different production costs. Oh well.
     let megaCreditCost = 0;
@@ -182,7 +160,7 @@ export class AresHandler {
     game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
       megaCreditCost += adjacentSpace.adjacency?.cost || 0;
       if (subjectToHazardAdjacency === true) {
-        const severity = this.hazardSeverity(adjacentSpace);
+        const severity = hazardSeverity(adjacentSpace.tile?.tileType);
         switch (severity) {
         case HazardSeverity.MILD:
           productionCost += 1;
@@ -194,7 +172,7 @@ export class AresHandler {
       }
     });
 
-    const severity = this.hazardSeverity(space);
+    const severity = hazardSeverity(space.tile?.tileType);
     switch (severity) {
     case HazardSeverity.MILD:
       megaCreditCost += 8;
@@ -207,7 +185,7 @@ export class AresHandler {
     return {megacredits: megaCreditCost, production: productionCost};
   }
 
-  public static assertCanPay(player: Player, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  public static assertCanPay(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
     if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: 0};
     }
@@ -232,7 +210,7 @@ export class AresHandler {
     }
   }
 
-  public static payAdjacencyAndHazardCosts(player: Player, space: ISpace, subjectToHazardAdjacency: boolean) {
+  public static payAdjacencyAndHazardCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean) {
     const cost = this.assertCanPay(player, space, subjectToHazardAdjacency);
 
     if (cost.production > 0) {
@@ -246,7 +224,7 @@ export class AresHandler {
   }
 
   // Returns true if |newTile| can cover |boardTile|.
-  public static canCover(space: ISpace, newTile: Tile): boolean {
+  public static canCover(space: Space, newTile: Tile): boolean {
     if (space.tile === undefined) {
       return true;
     }
@@ -261,19 +239,19 @@ export class AresHandler {
     return false;
   }
 
-  public static onTemperatureChange(game: Game, aresData: AresData) {
+  public static onTemperatureChange(game: IGame, aresData: AresData) {
     _AresHazardPlacement.onTemperatureChange(game, aresData);
   }
 
-  public static onOceanPlaced(aresData: AresData, player: Player) {
+  public static onOceanPlaced(aresData: AresData, player: IPlayer) {
     _AresHazardPlacement.onOceanPlaced(aresData, player);
   }
 
-  public static onOxygenChange(game: Game, aresData: AresData) {
+  public static onOxygenChange(game: IGame, aresData: AresData) {
     _AresHazardPlacement.onOxygenChange(game, aresData);
   }
 
-  public static grantBonusForRemovingHazard(player: Player, initialTileType: TileType | undefined) {
+  public static grantBonusForRemovingHazard(player: IPlayer, initialTileType: TileType | undefined) {
     if (player.game.phase === Phase.SOLAR) {
       return;
     }
@@ -292,8 +270,7 @@ export class AresHandler {
     default:
       return;
     }
-    player.increaseTerraformRatingSteps(steps);
+    player.increaseTerraformRating(steps);
     player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType.toString(initialTileType)));
   }
 }
-

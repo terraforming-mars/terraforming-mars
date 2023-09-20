@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
@@ -26,8 +26,8 @@ export class CommunityServices extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.production.add(Resource.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
+  public override bespokePlay(player: IPlayer) {
+    player.production.add(Resource.MEGACREDITS, player.tags.numberOfCardsWithNoTags() + 1, {log: true});
     return undefined;
   }
 }

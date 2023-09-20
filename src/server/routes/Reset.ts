@@ -2,7 +2,7 @@ import * as http from 'http';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {isPlayerId} from '../../common/Types';
 
 /**
@@ -45,7 +45,7 @@ export class Reset extends Handler {
       throw new Error('Reset is only available for solo games at the moment.');
     }
 
-    let player: Player | undefined;
+    let player: IPlayer | undefined;
     try {
       player = game.getPlayerById(playerId);
     } catch (err) {

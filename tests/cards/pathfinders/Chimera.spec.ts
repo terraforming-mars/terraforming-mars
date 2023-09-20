@@ -48,7 +48,7 @@ describe('Chimera', function() {
   });
 
   it('as award', function() {
-    // Scientist: Have the most science tags
+    // Scientist: Have the most science tags in play
     const award = new Scientist();
     expect(award.getScore(player)).eq(1);
     player.playedCards = [new AdaptationTechnology()];

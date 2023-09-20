@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {PowerGrid} from '../../../src/server/cards/base/PowerGrid';
 import {EnergySaving} from '../../../src/server/cards/base/EnergySaving';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('PowerGrid', function() {
   it('Should play', function() {
@@ -9,7 +10,7 @@ describe('PowerGrid', function() {
     const [/* skipped */, player] = testGame(2);
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.energy).to.eq(1);
 
     player.playedCards.push(new EnergySaving()); // Also contains a power tag.

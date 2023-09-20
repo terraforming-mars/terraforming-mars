@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {JunkVentures} from '../../../src/server/cards/community/JunkVentures';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Game} from '../../../src/server/Game';
@@ -22,7 +22,7 @@ describe('JunkVentures', function() {
   });
 
   it('Cannot act', function() {
-    expect(game.projectDeck.discardPile.length).eq(0);
+    expect(game.projectDeck.discardPile).is.empty;
     expect(card.canAct(player)).is.false;
 
     game.projectDeck.discard(game.projectDeck.draw(game));
@@ -42,7 +42,9 @@ describe('JunkVentures', function() {
 
     game.projectDeck.discardPile = [ants, birds, capital];
 
-    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    cast(card.action(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard<IProjectCard>);
 
     expect(selectCard.cards).to.have.members([ants, birds, capital]);
     selectCard.cb([birds]);

@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -36,9 +36,9 @@ export class InterplanetaryCinematics extends Card implements ICorporationCard {
       },
     });
   }
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.isCorporation(this.name) && card.type === CardType.EVENT) {
-      player.addResource(Resource.MEGACREDITS, 2, {log: true, from: this});
+      player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: this});
     }
   }
 }

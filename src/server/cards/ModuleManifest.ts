@@ -39,15 +39,15 @@ export class ModuleManifest {
   standardProjects : CardManifest<IStandardProjectCard>;
   standardActions : CardManifest<IStandardActionCard>;
   constructor(arg: {
-          module: GameModule,
-          projectCards?: CardManifest<IProjectCard>,
-          cardsToRemove?: Array<CardName>,
-          corporationCards?: CardManifest<ICorporationCard>,
-          ceoCards?: CardManifest<ICeoCard>,
-          preludeCards?: CardManifest<IPreludeCard>,
-          standardProjects?: CardManifest<IStandardProjectCard>,
-          standardActions?: CardManifest<IStandardActionCard>,
-          }) {
+    module: GameModule,
+    projectCards?: CardManifest<IProjectCard>,
+    cardsToRemove?: Array<CardName>,
+    corporationCards?: CardManifest<ICorporationCard>,
+    ceoCards?: CardManifest<ICeoCard>,
+    preludeCards?: CardManifest<IPreludeCard>,
+    standardProjects?: CardManifest<IStandardProjectCard>,
+    standardActions?: CardManifest<IStandardActionCard>,
+    }) {
     this.module = arg.module;
     this.projectCards = arg.projectCards || {};
     this.cardsToRemove = new Set(arg.cardsToRemove || []);

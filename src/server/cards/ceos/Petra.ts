@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -7,7 +7,7 @@ import {DELEGATES_FOR_NEUTRAL_PLAYER} from '../../../common/constants';
 
 import {Turmoil} from '../../turmoil/Turmoil';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {SelectPartyToSendDelegate} from '../../inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../inputs/SelectParty';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
@@ -30,7 +30,7 @@ export class Petra extends CeoCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;
     }
@@ -43,7 +43,7 @@ export class Petra extends CeoCard {
     return playerTotalDelegateCount >= numNeutralDelegates;
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
 
     const turmoil = player.game.turmoil as Turmoil;
@@ -76,7 +76,7 @@ export class Petra extends CeoCard {
     }
     // If we dont do this player will not get the bonus for POLITICAN Awards
     player.totalDelegatesPlaced += count;
-    player.addResource(Resource.MEGACREDITS, count * 3, {log: true});
+    player.stock.add(Resource.MEGACREDITS, count * 3, {log: true});
 
     // Place 3 Neutral delegates
     const availableParties = turmoil.parties.map((party) => party.name);
@@ -85,7 +85,7 @@ export class Petra extends CeoCard {
 
     for (let i = 0; i < 3; i++) {
       player.game.defer(new SimpleDeferredAction(player, () => {
-        return new SelectPartyToSendDelegate(title, 'Send delegate', availableParties, (partyName: PartyName) => {
+        return new SelectParty(title, 'Send delegate', availableParties, (partyName: PartyName) => {
           turmoil.sendDelegateToParty('NEUTRAL', partyName, player.game);
           player.game.log('${0} sent ${1} Neutral delegate in ${2} area', (b) => b.player(player).number(1).party(turmoil.getPartyByName(partyName)));
           return undefined;

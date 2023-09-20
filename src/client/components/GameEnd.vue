@@ -177,7 +177,7 @@
 
 import Vue from 'vue';
 import * as constants from '@/common/constants';
-import * as paths from '@/common/app/paths';
+import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import Board from '@/client/components/Board.vue';

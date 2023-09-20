@@ -28,9 +28,9 @@ describe('CorporateStronghold', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
 
-    expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
+    expect(action.spaces[0].tile && action.spaces[0].tile.tileType).to.eq(TileType.CITY);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
 

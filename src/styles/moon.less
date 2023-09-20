@@ -1,24 +1,4 @@
-.moon-board {
-	width: 570px;
-	height: 335px;
-	margin: 85px 0 0 0;
-	background: url(./assets/moon/board.png) no-repeat;
-}
-
-.global-numbers-colony {
-	position: absolute;
-	margin: 60px 0px 0px 31px;
-}
-.global-numbers-logistics {
-  position: absolute;
-	margin: 60px 0px 0px 440px;
-}
-.global-numbers-mining {
-  position: absolute;
-  margin: 60px 0px 0px 513px;
-}
-
-.board-space-tile--colony {
+.board-space-tile--habitat {
 	background: url(./assets/moon/colonytile.png) no-repeat;
 }
 
@@ -46,59 +26,86 @@
 	background-image: url(./assets/moon/lunar-mine-urbanization.png);
 }
 
-.moon-space-m01 { margin: 15px 0 0 64px; }
-// Row 1
-.moon-space-m02 { margin: -57px 0 0 53px; }
-.moon-space-m03 { margin: -57px 0 0 102px; }
-.moon-space-m04 { margin: -57px 0 0 151px; }
-.moon-space-m05 { margin: -57px 0 0 200px; }
-// Row 2
-.moon-space-m06 { margin: -18px 0 0 29px; }
-.moon-space-m07 { margin: -18px 0 0 78px; }
-.moon-space-m08 { margin: -18px 0 0 127px; }
-.moon-space-m09 { margin: -18px 0 0 176px; }
-.moon-space-m10 { margin: -18px 0 0 225px; }
-// Row 3
-.moon-space-m11 { margin: 21px 0 0 4px; }
-.moon-space-m12 { margin: 21px 0 0 53px; }
-.moon-space-m13 { margin: 21px 0 0 102px; }
-.moon-space-m14 { margin: 21px 0 0 151px; }
-.moon-space-m15 { margin: 21px 0 0 200px; }
-.moon-space-m16 { margin: 21px 0 0 250px; }
-// Row 4
-.moon-space-m17 { margin: 60px 0 0 29px; }
-.moon-space-m18 { margin: 60px 0 0 78px; }
-.moon-space-m19 { margin: 60px 0 0 127px; }
-.moon-space-m20 { margin: 60px 0 0 176px; }
-.moon-space-m21 { margin: 60px 0 0 225px; }
-// Row 5
-.moon-space-m22 { margin: 99px 0 0 4px; }
-.moon-space-m23 { margin: 99px 0 0 53px; }
-.moon-space-m24 { margin: 99px 0 0 102px; }
-.moon-space-m25 { margin: 99px 0 0 151px; }
-.moon-space-m26 { margin: 99px 0 0 200px; }
-.moon-space-m27 { margin: 99px 0 0 250px; }
-// Row 6
-.moon-space-m28 { margin: 138px 0 0 29px; }
-.moon-space-m29 { margin: 138px 0 0 78px; }
-.moon-space-m30 { margin: 138px 0 0 127px; }
-.moon-space-m31 { margin: 138px 0 0 176px; }
-.moon-space-m32 { margin: 138px 0 0 225px; }
-// Row 7
-.moon-space-m33 { margin: 177px 0 0 53px; }
-.moon-space-m34 { margin: 177px 0 0 102px; }
-.moon-space-m35 { margin: 177px 0 0 151px; }
-.moon-space-m36 { margin: 177px 0 0 200px; }
+.moon-board {
+	width: 570px;
+	height: 335px;
+	margin: 85px 0 0 0;
+	background: url(./assets/moon/board.png) no-repeat;
 
-.moon-space-m37 { margin: 13px 0 0 370px; }
+	.global-numbers-habitat {
+		position: absolute;
+		margin: 60px 0px 0px 31px;
+	}
+	.global-numbers-logistics {
+		position: absolute;
+		margin: 60px 0px 0px 442px;
+	}
+	.global-numbers-mining {
+		position: absolute;
+		margin: 60px 0px 0px 513px;
+	}
+	.moon-space-m01 { margin: 15px 0 0 64px; }
+	// Row 1
+	.moon-space-m02 { margin: -57px 0 0 53px; }
+	.moon-space-m03 { margin: -57px 0 0 102px; }
+	.moon-space-m04 { margin: -57px 0 0 151px; }
+	.moon-space-m05 { margin: -57px 0 0 200px; }
+	// Row 2
+	.moon-space-m06 { margin: -18px 0 0 29px; }
+	.moon-space-m07 { margin: -18px 0 0 78px; }
+	.moon-space-m08 { margin: -18px 0 0 127px; }
+	.moon-space-m09 { margin: -18px 0 0 176px; }
+	.moon-space-m10 { margin: -18px 0 0 225px; }
+	// Row 3
+	.moon-space-m11 { margin: 21px 0 0 4px; }
+	.moon-space-m12 { margin: 21px 0 0 53px; }
+	.moon-space-m13 { margin: 21px 0 0 102px; }
+	.moon-space-m14 { margin: 21px 0 0 151px; }
+	.moon-space-m15 { margin: 21px 0 0 200px; }
+	.moon-space-m16 { margin: 21px 0 0 250px; }
+	// Row 4
+	.moon-space-m17 { margin: 60px 0 0 29px; }
+	.moon-space-m18 { margin: 60px 0 0 78px; }
+	.moon-space-m19 { margin: 60px 0 0 127px; }
+	.moon-space-m20 { margin: 60px 0 0 176px; }
+	.moon-space-m21 { margin: 60px 0 0 225px; }
+	// Row 5
+	.moon-space-m22 { margin: 99px 0 0 4px; }
+	.moon-space-m23 { margin: 99px 0 0 53px; }
+	.moon-space-m24 { margin: 99px 0 0 102px; }
+	.moon-space-m25 { margin: 99px 0 0 151px; }
+	.moon-space-m26 { margin: 99px 0 0 200px; }
+	.moon-space-m27 { margin: 99px 0 0 250px; }
+	// Row 6
+	.moon-space-m28 { margin: 138px 0 0 29px; }
+	.moon-space-m29 { margin: 138px 0 0 78px; }
+	.moon-space-m30 { margin: 138px 0 0 127px; }
+	.moon-space-m31 { margin: 138px 0 0 176px; }
+	.moon-space-m32 { margin: 138px 0 0 225px; }
+	// Row 7
+	.moon-space-m33 { margin: 177px 0 0 53px; }
+	.moon-space-m34 { margin: 177px 0 0 102px; }
+	.moon-space-m35 { margin: 177px 0 0 151px; }
+	.moon-space-m36 { margin: 177px 0 0 200px; }
 
-.moon-space-type-mine {
-	background: url(./assets/moon/hex_brown.png);
-	background-color: #8303;
-}
+	.moon-space-m37 { margin: 13px 0 0 370px; }
 
-.moon-space-type-other {
-	background: url(./assets/moon/hex_yellow.png);
+	.moon-space-type-mine {
+		background: url(./assets/moon/hex_brown.png);
+		background-color: #8303;
+	}
+
+	.val-0 {
+		margin-top: 6px;
+	}
+
+	.moon-space-type-other {
+		background: url(./assets/moon/hex_yellow.png);
+	}
+
+	.global-numbers-value {
+		color: #292323;
+	}
 }
 
 .card-tile-lunar-mine {
@@ -185,7 +192,7 @@
 }
 
 .card-tile-moon {
-  background-size: 40px 47px !important;
+	background-size: 40px 47px !important;
 	width: 43px;
 	height: 47px;
 }

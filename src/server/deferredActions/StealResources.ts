@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -7,7 +7,7 @@ import {CardName} from '../../common/cards/CardName';
 
 export class StealResources extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public resource: Resource,
     public count: number = 1,
     public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
@@ -17,12 +17,12 @@ export class StealResources extends DeferredAction {
 
   public execute() {
     if (this.player.game.isSoloMode()) {
-      this.player.addResource(this.resource, this.count);
+      this.player.stock.add(this.resource, this.count);
       this.player.resolveInsuranceInSoloGame();
       return undefined;
     }
 
-    let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
+    let candidates: Array<IPlayer> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.stock.get(this.resource) > 0);
     if (this.resource === Resource.PLANTS) {
       candidates = candidates.filter((p) => !p.plantsAreProtected());
     }
@@ -35,7 +35,7 @@ export class StealResources extends DeferredAction {
     }
 
     const stealOptions = candidates.map((candidate) => {
-      let qtyToSteal = Math.min(candidate.getResource(this.resource), this.count);
+      let qtyToSteal = Math.min(candidate.stock.get(this.resource), this.count);
 
       // Botanical Experience hook.
       if (this.resource === Resource.PLANTS && candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
@@ -46,8 +46,8 @@ export class StealResources extends DeferredAction {
         'Steal ' + qtyToSteal + ' ' + this.resource + ' from ' + candidate.name,
         'Steal',
         () => {
-          candidate.deductResource(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
-          this.player.addResource(this.resource, qtyToSteal);
+          candidate.stock.deduct(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
+          this.player.stock.add(this.resource, qtyToSteal);
           return undefined;
         },
       );

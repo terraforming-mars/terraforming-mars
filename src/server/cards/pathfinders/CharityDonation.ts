@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -28,7 +28,7 @@ export class CharityDonation extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const players = game.getPlayersInGenerationOrder();
     const thisIdx = players.findIndex((p) => p === player);
@@ -41,7 +41,7 @@ export class CharityDonation extends Card implements IProjectCard {
 }
 
 export class SelectCharityDonationCard extends DeferredAction {
-  constructor(private players: Array<Player>, private playerIdx: number, private boundaryIndex: number, private cards: Array<IProjectCard>) {
+  constructor(private players: ReadonlyArray<IPlayer>, private playerIdx: number, private boundaryIndex: number, private cards: Array<IProjectCard>) {
     super(players[playerIdx], Priority.DRAW_CARDS);
   }
 

@@ -7,14 +7,17 @@ import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 
 describe('LocalHeatTrapping', () => {
   let card: LocalHeatTrapping;
   let player: TestPlayer;
+  let helion: Helion;
 
   beforeEach(() => {
     card = new LocalHeatTrapping();
     [/* skipped */, player] = testGame(2);
+    helion = new Helion();
   });
 
   it('Cannot play without 5 heat', () => {
@@ -69,9 +72,8 @@ describe('LocalHeatTrapping', () => {
   });
 
   it('Cannot play as Helion if not enough heat left after paying for card', () => {
-    const corp = new Helion();
-    corp.play(player);
-    player.setCorporationForTest(corp);
+    helion.play(player);
+    player.setCorporationForTest(helion);
 
     player.megaCredits = 0;
     player.heat = 5; // have to pay for card with 1 heat
@@ -79,5 +81,35 @@ describe('LocalHeatTrapping', () => {
     expect(player.canPlay(card)).is.false;
     player.megaCredits = 1;
     expect(player.canPlay(card)).is.true;
+  });
+
+  it('Helion / Stormcraft merger canPlay', () => {
+    const stormcraft = new StormCraftIncorporated();
+    helion.play(player);
+    player.setCorporationForTest(helion);
+    player.corporations.push(stormcraft);
+    player.cardsInHand = [card];
+
+    function canPlay(config: {mc: number, heat: number, floaters: number, discount: number}) {
+      player.megaCredits = config.mc;
+      player.heat = config.heat;
+      stormcraft.resourceCount = config.floaters;
+      player.colonies.cardDiscount = config.discount;
+      return player.canPlay(card);
+    }
+
+    // Thanks to Merger, canPlay has to solve these edge cases.
+    // Case 1: Player has 5 heat and 1MC.
+    // Case 2: 0 heat, 1 MC, and 3 Stormcraft resources
+    // Case 3: 0 heat, 0 MC, and 3 Stormcraft resources
+    // Case 4: 1 heat, 0 MC, and 3 Stormcraft resources
+    // Case 5: 0 heat, 0 MC, 3 Stormcraft resources, and a 1MC card discount.
+
+    expect(canPlay({mc: 1, heat: 5, floaters: 0, discount: 0})).is.true;
+    expect(canPlay({mc: 1, heat: 0, floaters: 3, discount: 0})).is.true;
+    expect(canPlay({mc: 0, heat: 0, floaters: 3, discount: 0})).is.false;
+    expect(canPlay({mc: 0, heat: 0, floaters: 3, discount: 1})).is.true;
+    expect(canPlay({mc: 0, heat: 6, floaters: 0, discount: 0})).is.true;
+    expect(canPlay({mc: 0, heat: 4, floaters: 1, discount: 0})).is.true;
   });
 });

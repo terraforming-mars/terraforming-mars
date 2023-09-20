@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -32,14 +32,14 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     const turmoil = Turmoil.getTurmoil(player.game);
     if (!turmoil.hasDelegatesInReserve(player.id)) return false;
 
     return turmoil.chairman === 'NEUTRAL';
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.delegateReserve.remove(player.id);
     turmoil.setNewChairman(player.id, player.game, /* setAgenda */ false);

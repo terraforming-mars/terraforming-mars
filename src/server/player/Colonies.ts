@@ -2,7 +2,7 @@ import {MAX_FLEET_SIZE} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
 import {ColoniesHandler} from '../colonies/ColoniesHandler';
 import {AndOptions} from '../inputs/AndOptions';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../../common/constants';
 import {IColony} from '../colonies/IColony';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
@@ -16,9 +16,10 @@ import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopern
 import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {newMessage} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
+import {Payment} from '../../common/inputs/Payment';
 
 export class Colonies {
-  private player: Player;
+  private player: IPlayer;
 
   // Each ship in the player's fleet allows a single trade.
   private fleetSize: number = 1;
@@ -32,7 +33,7 @@ export class Colonies {
   public victoryPoints: number = 0; // Titania Colony VP
   public cardDiscount: number = 0; // Iapetus Colony
 
-  constructor(player: Player) {
+  constructor(player: IPlayer) {
     this.player = player;
   }
 
@@ -152,7 +153,7 @@ export class Colonies {
 export class TradeWithEnergy implements IColonyTrader {
   private tradeCost;
 
-  constructor(private player: Player) {
+  constructor(private player: IPlayer) {
     this.tradeCost = ENERGY_TRADE_COST - player.colonies.tradeDiscount;
   }
 
@@ -164,7 +165,7 @@ export class TradeWithEnergy implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.deductResource(Resource.ENERGY, this.tradeCost);
+    this.player.stock.deduct(Resource.ENERGY, this.tradeCost);
     this.player.game.log('${0} spent ${1} energy to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
   }
@@ -173,7 +174,7 @@ export class TradeWithEnergy implements IColonyTrader {
 export class TradeWithTitanium implements IColonyTrader {
   private tradeCost;
 
-  constructor(private player: Player) {
+  constructor(private player: IPlayer) {
     this.tradeCost = TITANIUM_TRADE_COST - player.colonies.tradeDiscount;
   }
 
@@ -185,7 +186,7 @@ export class TradeWithTitanium implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.deductResource(Resource.TITANIUM, this.tradeCost);
+    this.player.pay(Payment.of({titanium: this.tradeCost}));
     this.player.game.log('${0} spent ${1} titanium to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
   }
@@ -195,7 +196,7 @@ export class TradeWithTitanium implements IColonyTrader {
 export class TradeWithMegacredits implements IColonyTrader {
   private tradeCost;
 
-  constructor(private player: Player) {
+  constructor(private player: IPlayer) {
     this.tradeCost = MC_TRADE_COST- player.colonies.tradeDiscount;
     const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
     if (adhai !== undefined) {

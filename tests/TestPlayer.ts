@@ -1,17 +1,19 @@
 import {Player} from '../src/server/Player';
 import {PlayerInput} from '../src/server/PlayerInput';
 import {Color} from '../src/common/Color';
-import {Units} from '../src/common/Units';
 import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 import {Tags} from '../src/server/player/Tags';
-import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IProjectCard} from '../src/server/cards/IProjectCard';
+import {PlayerId} from '../src/common/Types';
+
+type Options = {name: string, beginner?: boolean, idSuffix?: string};
 
 class TestPlayerFactory {
   constructor(private color: Color) {}
-  newPlayer(beginner: boolean = false, idSuffix = ''): TestPlayer {
-    return new TestPlayer(this.color, beginner, idSuffix);
+  newPlayer(opts?: Partial<Options>): TestPlayer {
+    return new TestPlayer(this.color, opts);
   }
 }
 
@@ -39,32 +41,25 @@ export class TestPlayer extends Player {
   public static ORANGE: TestPlayerFactory = new TestPlayerFactory(Color.ORANGE);
   public static PINK: TestPlayerFactory = new TestPlayerFactory(Color.PINK);
 
-  constructor(color: Color, beginner: boolean = false, idSuffix = '') {
-    super('player-' + color, color, beginner, 0, `p-${color}-id${idSuffix}`);
+  constructor(color: Color, opts?: Partial<Options>) {
+    const name = opts?.name ?? 'player-' + color;
+
+    // If a name is supplied, use it as part of the ID. Otherwise use
+    // color in the ID.
+    const coreId = opts?.name ?? color;
+    const idSuffix = opts?.idSuffix ?? '';
+    const id: PlayerId = `p-${coreId}-id${idSuffix}`;
+
+    super(
+      name,
+      color,
+      opts?.beginner ?? false,
+      0,
+      id);
     this.tags = new TestTags(this);
   }
 
   public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
-
-  public purse(): Units {
-    return Units.of({
-      megacredits: this.megaCredits,
-      steel: this.steel,
-      titanium: this.titanium,
-      plants: this.plants,
-      energy: this.energy,
-      heat: this.heat,
-    });
-  }
-
-  public setResourcesForTest(units: Units) {
-    this.megaCredits = units.megacredits;
-    this.steel = units.steel;
-    this.titanium = units.titanium;
-    this.plants = units.plants;
-    this.energy = units.energy;
-    this.heat = units.heat;
-  }
 
   public override runInput(input: InputResponse, pi: PlayerInput): void {
     super.runInput(input, pi);

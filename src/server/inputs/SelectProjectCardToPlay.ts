@@ -1,10 +1,9 @@
 import {BasePlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard, PlayableCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {CardAction, Player} from '../Player';
+import {CardAction, IPlayer} from '../IPlayer';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 import {CardName} from '../../common/cards/CardName';
 import {CanPlayResponse} from '../cards/IProjectCard';
@@ -20,13 +19,13 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
   public extras: Map<CardName, PlayCardMetadata>;
 
   constructor(
-    private player: Player,
+    private player: IPlayer,
     cards: Array<PlayableCard> = player.getPlayableCards(),
     public config?: {
       action?: CardAction,
       cb?: (cardToPlay: IProjectCard) => void,
     }) {
-    super(PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY, 'Play project card');
+    super('projectCard', 'Play project card');
     this.buttonLabel = 'Play card';
     this.cards = cards.map((card) => card.card);
     this.extras = new Map(

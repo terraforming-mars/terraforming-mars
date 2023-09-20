@@ -1,5 +1,5 @@
 import {Board} from '../../boards/Board';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {IAward} from '../IAward';
 
@@ -7,7 +7,7 @@ export class Urbanist implements IAward {
   public readonly name = 'Urbanist';
   public readonly description = 'Have the most VP from city tile adjacencies on Mars';
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     let score = 0;
 
     player.game.board.spaces.forEach((space) => {

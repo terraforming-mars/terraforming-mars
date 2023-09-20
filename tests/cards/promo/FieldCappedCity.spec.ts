@@ -12,8 +12,8 @@ describe('FieldCappedCity', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
-    expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
+    action.cb(action.spaces[0]);
+    expect(action.spaces[0].tile && action.spaces[0].tile.tileType).to.eq(TileType.CITY);
     expect(player.plants).to.eq(3);
     expect(player.production.energy).to.eq(1);
     expect(player.production.megacredits).to.eq(2);

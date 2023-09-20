@@ -2,8 +2,8 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
+import {IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
@@ -35,7 +35,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     const hasEnergyProduction = player.production.energy >= 1;
     const canPlaceCityOnMars = player.game.board.getAvailableSpacesForCity(player).length > 0;
     const canDecreaseMcProduction = player.production.megacredits >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);
@@ -43,7 +43,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
     return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
         new GainProduction(cardOwner, Resource.MEGACREDITS),
@@ -52,8 +52,8 @@ export class ImmigrantCity extends Card implements IProjectCard {
     }
   }
 
-  public override bespokePlay(player: Player) {
-    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+  public override bespokePlay(player: IPlayer) {
+    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: Space) => {
       player.game.addCity(player, space);
       player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
       player.game.defer(new LoseProduction(player, Resource.MEGACREDITS, {count: 2}));

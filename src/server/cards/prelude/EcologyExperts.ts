@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from './PreludeCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
@@ -25,14 +25,14 @@ export class EcologyExperts extends PreludeCard {
       },
     });
   }
-  public getRequirementBonus(player: Player): number {
+  public getRequirementBonus(player: IPlayer): number {
     if (player.lastCardPlayed === this.name) {
       // Magic number high enough to always ignore requirements.
       return 50;
     }
     return 0;
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new PlayProjectCard(player));
     return undefined;
   }

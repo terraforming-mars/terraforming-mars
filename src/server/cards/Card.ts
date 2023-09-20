@@ -5,7 +5,7 @@ import {CardDiscount} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
-import {Player} from '../Player';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './requirements/CardRequirements';
@@ -16,11 +16,11 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
-import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
+import {PartialField} from '../../common/utils/types';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -29,7 +29,6 @@ const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.STANDARD_ACTION,
 ] as const;
 
-type ReserveUnits = Units & {deduct: boolean};
 type FirstActionBehavior = Behavior & {text: string};
 
 /*
@@ -48,21 +47,16 @@ type Properties = {
   metadata: ICardMetadata;
   requirements?: CardRequirements;
   name: CardName;
-  reserveUnits?: ReserveUnits,
+  reserveUnits?: Units,
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
+  tilesBuilt?: Array<TileType>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-// TODO(kberg): move this out.
-// Makes fields in T Partial.
-type PartialField<T, K extends keyof T> = Omit<T, K> & {[k in K]: Partial<T[K]>};
-
 /* External representation of card properties. */
-// type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 export type StaticCardProperties = PartialField<Properties, 'reserveUnits'>;
 
 export const staticCardProperties = new Map<CardName, Properties>();
@@ -111,7 +105,7 @@ export abstract class Card {
 
       const p: Properties = {
         ...properties,
-        reserveUnits: properties.reserveUnits === undefined ? undefined : {...Units.of(properties.reserveUnits), deduct: properties.reserveUnits.deduct ?? true},
+        reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
       };
       staticCardProperties.set(properties.name, p);
       staticInstance = p;
@@ -161,8 +155,8 @@ export abstract class Card {
   public get cardDiscount() {
     return this.properties.cardDiscount;
   }
-  public get reserveUnits(): ReserveUnits {
-    return this.properties.reserveUnits || {...Units.EMPTY, deduct: true};
+  public get reserveUnits(): Units {
+    return this.properties.reserveUnits || Units.EMPTY;
   }
   public get tr(): TRSource | DynamicTRSource | undefined {
     return this.properties.tr;
@@ -173,7 +167,7 @@ export abstract class Card {
   public get tilesBuilt(): Array<TileType> {
     return this.properties.tilesBuilt || [];
   }
-  public canPlay(player: Player): boolean {
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
     //
     // Is this block necessary?
     const satisfied = this.requirements?.satisfies(player);
@@ -183,48 +177,47 @@ export abstract class Card {
     // It's repeated at Player.simpleCanPlay.
     //
 
-    if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
-      return false;
+    if (this.behavior !== undefined) {
+      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
+        return false;
+      }
     }
-    return this.bespokeCanPlay(player);
+    return this.bespokeCanPlay(player, canAffordOptions);
   }
 
-  public bespokeCanPlay(_player: Player): boolean {
+  public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {
     return true;
   }
 
-  public play(player: Player): PlayerInput | undefined {
-    if (!isICorporationCard(this) && this.reserveUnits.deduct === true) {
-      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-      player.deductUnits(adjustedReserveUnits);
-    }
+  public play(player: IPlayer): PlayerInput | undefined {
+    player.stock.deductUnits(MoonExpansion.adjustedReserveCosts(player, this));
     if (this.behavior !== undefined) {
       getBehaviorExecutor().execute(this.behavior, player, this);
     }
     return this.bespokePlay(player);
   }
 
-  public bespokePlay(_player: Player): PlayerInput | undefined {
+  public bespokePlay(_player: IPlayer): PlayerInput | undefined {
     return undefined;
   }
 
-  public onDiscard(player: Player): void {
+  public onDiscard(player: IPlayer): void {
     if (this.behavior !== undefined) {
       getBehaviorExecutor().onDiscard(this.behavior, player, this);
     }
     this.bespokeOnDiscard(player);
   }
 
-  public bespokeOnDiscard(_player: Player): void {
+  public bespokeOnDiscard(_player: IPlayer): void {
   }
 
-  public getVictoryPoints(player: Player): number {
+  public getVictoryPoints(player: IPlayer): number {
     const vp = this.properties.victoryPoints;
     if (typeof(vp) === 'number') {
       return vp;
     }
     if (typeof(vp) === 'object') {
-      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+      return new Counter(player, this).count(vp, 'vps');
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
@@ -318,7 +311,7 @@ export abstract class Card {
     }
   }
 
-  public getCardDiscount(_player?: Player, card?: IProjectCard): number {
+  public getCardDiscount(_player?: IPlayer, card?: IProjectCard): number {
     if (this.cardDiscount === undefined) {
       return 0;
     }
@@ -350,12 +343,17 @@ export function validateBehavior(behavior: Behavior | undefined) : void {
     return;
   }
   if (behavior.spend) {
-    if (behavior.spend.megacredits ?? behavior.spend.heat) {
-      validate(behavior.tr === undefined, 'spend.megacredits and spend.heat are not yet compatible with tr');
-      validate(behavior.global === undefined, 'spend.megacredits and spend.heat are not yet compatible with global');
-      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.habitatRate');
-      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.logisticsRate');
-      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.miningRate');
+    const spend = behavior.spend;
+    if (spend.megacredits) {
+      validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
+      validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
+      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
+      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
+      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
+    }
+    // Don't spend heat with other types yet. It's probably not compatible. Check carefully.
+    if (spend.heat) {
+      validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
   }
 }

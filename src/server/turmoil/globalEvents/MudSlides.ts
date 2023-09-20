@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -23,7 +23,7 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
       renderData: RENDER_DATA,
     });
   }
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const tiles = game.board.spaces.filter(Board.ownedBy(player))
         .filter((space) => space.tile !== undefined &&
@@ -32,7 +32,7 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
         ).length;
       const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
       if (amount > 0) {
-        player.deductResource(Resource.MEGACREDITS, 4 * amount, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: this.name});
       }
     });
   }

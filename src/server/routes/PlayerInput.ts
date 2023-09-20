@@ -1,5 +1,5 @@
 import * as http from 'http';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
@@ -26,13 +26,15 @@ export class PlayerInput extends Handler {
       return;
     }
 
+    ctx.ipTracker.addParticipant(playerId, ctx.ip);
+
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
     const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
       ctx.route.notFound(req, res);
       return;
     }
-    let player: Player | undefined;
+    let player: IPlayer | undefined;
     try {
       player = game.getPlayerById(playerId);
     } catch (err) {
@@ -45,7 +47,7 @@ export class PlayerInput extends Handler {
     return this.processInput(req, res, ctx, player);
   }
 
-  private isWaitingForUndo(player: Player, entity: InputResponse): boolean {
+  private isWaitingForUndo(player: IPlayer, entity: InputResponse): boolean {
     const waitingFor = player.getWaitingFor();
     if (entity.type === 'or' && waitingFor instanceof OrOptions) {
       const idx = entity.index;
@@ -54,7 +56,7 @@ export class PlayerInput extends Handler {
     return false;
   }
 
-  private async performUndo(_req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: Player): Promise<void> {
+  private async performUndo(_req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: IPlayer): Promise<void> {
     /**
      * The `lastSaveId` property is incremented during every `takeAction`.
      * The first save being decremented is the increment during `takeAction` call
@@ -75,7 +77,7 @@ export class PlayerInput extends Handler {
     ctx.route.writeJson(res, Server.getPlayerModel(player));
   }
 
-  private processInput(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: Player): Promise<void> {
+  private processInput(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: IPlayer): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', (data) => {

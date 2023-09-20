@@ -1,5 +1,6 @@
 import {Game} from '../src/server/Game';
-import {GameOptions} from '../src/server/GameOptions';
+import {IGame} from '../src/server/IGame';
+import {GameOptions} from '../src/server/game/GameOptions';
 import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 
@@ -10,14 +11,14 @@ export type TestGameOptions = GameOptions & {
 
 function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
   return [
-    TestPlayer.BLUE.newPlayer(false, idSuffix),
-    TestPlayer.RED.newPlayer(false, idSuffix),
-    TestPlayer.YELLOW.newPlayer(false, idSuffix),
-    TestPlayer.GREEN.newPlayer(false, idSuffix),
-    TestPlayer.BLACK.newPlayer(false, idSuffix),
-    TestPlayer.PURPLE.newPlayer(false, idSuffix),
-    TestPlayer.ORANGE.newPlayer(false, idSuffix),
-    TestPlayer.PINK.newPlayer(false, idSuffix),
+    TestPlayer.BLUE.newPlayer({name: 'player1', idSuffix}),
+    TestPlayer.RED.newPlayer({name: 'player2', idSuffix}),
+    TestPlayer.YELLOW.newPlayer({name: 'player3', idSuffix}),
+    TestPlayer.GREEN.newPlayer({name: 'player4', idSuffix}),
+    TestPlayer.BLACK.newPlayer({name: 'player5', idSuffix}),
+    TestPlayer.PURPLE.newPlayer({name: 'player6', idSuffix}),
+    TestPlayer.ORANGE.newPlayer({name: 'player7', idSuffix}),
+    TestPlayer.PINK.newPlayer({name: 'player8', idSuffix}),
   ].slice(0, count);
 }
 
@@ -53,7 +54,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
   return [game, ...players];
 }
 
-export function getTestPlayer(game: Game, idx: number): TestPlayer {
+export function getTestPlayer(game: IGame, idx: number): TestPlayer {
   const players = game.getPlayers();
   const length = players.length;
   if (idx >= length) {

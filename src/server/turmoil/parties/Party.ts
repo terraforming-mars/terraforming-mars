@@ -1,5 +1,5 @@
-import {Player} from '../../Player';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
+import {IPlayer} from '../../IPlayer';
 import {Delegate, NeutralPlayer} from '../Turmoil';
 import {MultiSet} from 'mnemonist';
 
@@ -8,19 +8,19 @@ export abstract class Party {
   public delegates = new MultiSet<Delegate>();
 
   // Send a delegate in the area
-  public sendDelegate(playerId: Delegate, game: Game): void {
+  public sendDelegate(playerId: Delegate, game: IGame): void {
     this.delegates.add(playerId);
     this.checkPartyLeader(playerId, game);
   }
 
   // Remove a delegate from the area
-  public removeDelegate(playerId: Delegate, game: Game): void {
+  public removeDelegate(playerId: Delegate, game: IGame): void {
     this.delegates.remove(playerId);
     this.checkPartyLeader(playerId, game);
   }
 
   // Check if you are the new party leader
-  public checkPartyLeader(newPlayer: Delegate, game: Game): void {
+  public checkPartyLeader(newPlayer: Delegate, game: IGame): void {
     const players = game.getPlayersInGenerationOrder();
     // If there is a party leader
     if (this.partyLeader) {
@@ -34,7 +34,7 @@ export abstract class Party {
           currentIndex = players.indexOf(game.getPlayerById(this.partyLeader));
         }
 
-        let playersToCheck: Array<Player | NeutralPlayer> = [];
+        let playersToCheck: Array<IPlayer | NeutralPlayer> = [];
 
         // Manage if it's the first player or the last
         if (players.length === 1 || currentIndex === 0) {

@@ -30,11 +30,11 @@ describe('PlayerInput', function() {
   });
 
   it('performs undo action', async () => {
-    const player = TestPlayer.BLUE.newPlayer(/* beginner= */ true);
+    const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
     const game = Game.newInstance('gameid-foo', [player], player);
 
-    const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer(/* beginner= */ true);
+    const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
     const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer);
 
     await scaffolding.ctx.gameLoader.add(game);
@@ -58,11 +58,11 @@ describe('PlayerInput', function() {
   });
 
   it('reverts to current game instance if undo fails', async () => {
-    const player = TestPlayer.BLUE.newPlayer(/* beginner= */ true);
+    const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
     const game = Game.newInstance('gameid-foo', [player], player);
 
-    const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer(/* beginner= */ true);
+    const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
     const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer);
 
     await scaffolding.ctx.gameLoader.add(game);

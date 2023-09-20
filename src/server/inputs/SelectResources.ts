@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {AndOptions} from './AndOptions';
 import {SelectAmount} from './SelectAmount';
 import {Units} from '../../common/Units';
@@ -33,7 +33,7 @@ export class SelectResources extends AndOptions {
     return [selectMegacredits, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat];
   }
   constructor(
-    public player: Player,
+    public player: IPlayer,
     public count: number,
     public override title: string,
     // this isn't actually used as a paramteter, but  this class
@@ -50,7 +50,7 @@ export class SelectResources extends AndOptions {
           throw new Error(`Select ${this.count} resources.`);
         }
 
-        this.player.addUnits(this.units, {log: true});
+        this.player.stock.addUnits(this.units, {log: true});
         return undefined;
       },
       ...SelectResources.makeOptions(count, units),

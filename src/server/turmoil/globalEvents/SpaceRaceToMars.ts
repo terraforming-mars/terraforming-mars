@@ -2,11 +2,11 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {Resource} from '../../../common/Resource';
-import {Player} from '../../Player';
-import {isSpecialTile, playerTileFn} from '../../boards/Board';
+import {IPlayer} from '../../IPlayer';
+import {isSpecialTileSpace, playerTileFn} from '../../boards/Board';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
@@ -26,26 +26,26 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const specialTileCount = this.specialTileCount(player);
       const bonus = Math.min(specialTileCount, 5);
       player.production.add(Resource.MEGACREDITS, bonus, {log: true, from: this.name});
-      player.addResource(Resource.ENERGY, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+      player.stock.add(Resource.ENERGY, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }
 
-  private specialTileCount(player: Player) {
+  private specialTileCount(player: IPlayer) {
     // This code is repeated in Land Specialist
     const spaces = player.game.board.spaces
       .filter(playerTileFn(player))
-      .filter(isSpecialTile);
+      .filter(isSpecialTileSpace);
 
     const marsCount = spaces.length;
     const moonCount = MoonExpansion.ifElseMoon(player.game, (moonData) => {
       return moonData.moon.spaces
         .filter(playerTileFn(player))
-        .filter(isSpecialTile)
+        .filter(isSpecialTileSpace)
         .length;
     },
     () => 0);

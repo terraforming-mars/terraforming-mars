@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -23,7 +23,7 @@ export class Sabotage extends GlobalEvent implements IGlobalEvent {
       renderData: RENDER_DATA,
     });
   }
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       // This conditional isn't to prevent negative production, but to prevent misleading logging when the production diff is zero.
       if (player.production.energy >= 1) {
@@ -32,7 +32,7 @@ export class Sabotage extends GlobalEvent implements IGlobalEvent {
       if (player.production.steel >= 1) {
         player.production.add(Resource.STEEL, -1, {log: true, from: this.name});
       }
-      player.addResource(Resource.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+      player.stock.add(Resource.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }
 }

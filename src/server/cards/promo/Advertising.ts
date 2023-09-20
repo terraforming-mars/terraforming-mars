@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -24,7 +24,7 @@ export class Advertising extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (card.cost >= 20) {
       player.production.add(Resource.MEGACREDITS, 1);
     }

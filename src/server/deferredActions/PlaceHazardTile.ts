@@ -1,13 +1,13 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from './DeferredAction';
 import {_AresHazardPlacement} from '../ares/AresHazards';
 import {TileType} from '../../common/TileType';
 
 export class PlaceHazardTile extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public hazardType: TileType.DUST_STORM_MILD | TileType.EROSION_MILD,
     private options?: {
       title?: string,
@@ -27,7 +27,7 @@ export class PlaceHazardTile extends DeferredAction {
     return new SelectSpace(
       title,
       availableSpaces,
-      (space: ISpace) => {
+      (space: Space) => {
         _AresHazardPlacement.putHazardAt(space, hazardType);
         return undefined;
       },

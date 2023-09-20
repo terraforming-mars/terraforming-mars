@@ -43,7 +43,7 @@ describe('AristarchusRoadNetwork', () => {
 
     const deferredAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
     const selectSpace = deferredAction.execute()!;
-    const roadSpace = selectSpace.availableSpaces[0];
+    const roadSpace = selectSpace.spaces[0];
     expect(roadSpace.tile).is.undefined;
     expect(roadSpace.player).is.undefined;
     expect(moonData.logisticRate).eq(0);

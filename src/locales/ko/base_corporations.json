@@ -58,7 +58,7 @@
     "GUILD": "협동조합",
     "Mining Guild": "광업협동조합",
     "You start with 30 M€, 5 steel and 1 steel production.": "30 M€, 강철 자원 4개 및 강철 생산력 1을 가지고 게임 시작.",
-    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "지속 효과: 타일 1장을 놓을 때마다 점유 보너스로서 강철 또는 티타늄 자원을 하나라도 획득했다면 강철 생산력 1 증가.",
+    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "지속 효과: 타일 1장을 놓을 때마다 점유 보너스로서 강철 또는 티타늄 자원을 하나라도 획득했다면 강철 생산력 1 증가.",
 
     "TERACTOR": "테렉터",
     "Teractor": "테렉터",

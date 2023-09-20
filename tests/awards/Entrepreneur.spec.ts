@@ -3,13 +3,13 @@ import {Game} from '../../src/server/Game';
 import {Entrepreneur} from '../../src/server/awards/Entrepreneur';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {SpaceId} from '../../src/common/Types';
 import {AdjacencyBonus} from '../../src/server/ares/AdjacencyBonus';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {addGreenery} from '../TestingUtils';
 
-function addAdjacencyBonus(player: Player, spaceId: SpaceId, adjacency: AdjacencyBonus = {bonus: [SpaceBonus.HEAT]}): void {
+function addAdjacencyBonus(player: IPlayer, spaceId: SpaceId, adjacency: AdjacencyBonus = {bonus: [SpaceBonus.HEAT]}): void {
   const space = player.game.board.getSpace(spaceId);
   space.tile = {tileType: TileType.GREENERY};
   space.player = player;

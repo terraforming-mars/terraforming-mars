@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Delegate} from '../../turmoil/Turmoil';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
@@ -31,7 +31,7 @@ export class BannedDelegate extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
     const orOptions: Array<SelectDelegate> = [];
     // Take each party having more than just the party leader in the area
@@ -45,7 +45,7 @@ export class BannedDelegate extends Card implements IProjectCard {
           // This wouldn't happen normally.
           throw new Error(`partyLeader not defined for ${player.game.id}`);
         }
-        const players: Array<Player | NeutralPlayer> = [];
+        const players: Array<IPlayer | NeutralPlayer> = [];
         for (const playerId of copy) {
           if (playerId === 'NEUTRAL') {
             players.push('NEUTRAL');
@@ -55,7 +55,7 @@ export class BannedDelegate extends Card implements IProjectCard {
         }
 
         if (players.length > 0) {
-          const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: Player | NeutralPlayer) => {
+          const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: IPlayer | NeutralPlayer) => {
             let playerToRemove: Delegate;
             if (selectedPlayer === 'NEUTRAL') {
               playerToRemove = 'NEUTRAL';
@@ -81,7 +81,7 @@ export class BannedDelegate extends Card implements IProjectCard {
     }
   }
 
-  private log(player: Player, party: IParty, selectedPlayer: Player | NeutralPlayer) {
+  private log(player: IPlayer, party: IParty, selectedPlayer: IPlayer | NeutralPlayer) {
     if (selectedPlayer === 'NEUTRAL') {
       player.game.log('${0} removed neutral delegate from ${1}', (b) => b.player(player).party(party));
     } else {

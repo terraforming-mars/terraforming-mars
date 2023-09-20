@@ -24,7 +24,7 @@ describe('LandClaim', function() {
     const [, player] = testGame(2, {boardName: BoardName.HELLAS});
     const action = cast(card.play(player), SelectSpace);
     expect(player.canAfford(constants.HELLAS_BONUS_OCEAN_COST)).to.be.false;
-    expect(action.availableSpaces.some((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.be.true;
+    expect(action.spaces.some((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.be.true;
   });
 
   it('can claim hazard spaces', function() {
@@ -34,7 +34,7 @@ describe('LandClaim', function() {
     player.playCard(landClaim);
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    expect(selectSpace.availableSpaces).includes(hazardSpace);
+    expect(selectSpace.spaces).includes(hazardSpace);
     selectSpace.cb(hazardSpace);
     expect(hazardSpace.player).eq(player);
   });

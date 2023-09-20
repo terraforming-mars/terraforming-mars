@@ -284,7 +284,6 @@
     "You drew ${0} and ${1}": "Je trok ${0} en ${1}",
     "You drew ${0}, ${1} and ${2}": "Je trok ${0}, ${1} en ${2}",
     "You drew ${0}, ${1}, ${2} and ${3}": "Je trok ${0}, ${1}, ${2} en ${3}",
-    "${0} and ${1} were discarded as ${2} could not pay for both cards.": "${0} en ${1} werden afgelegd, omdat ${2} niet voor beide kaarten kon betalen.",
     "${0} spent ${1} energy": "${0} betaalde ${1} energie",
     "${0} placed a Greenery tile": "${0} plaatste een groentegel",
     "${0} must select ${1} bonus resource(s) from ${2}' ability": "${0} moet ${1} bonusgrondstof(fen) selecteren uit ${2}",

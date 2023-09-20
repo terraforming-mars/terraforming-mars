@@ -2,14 +2,15 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {SpaceName} from '../SpaceName';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SerializedBoard} from './SerializedBoard';
-import {Random} from '../Random';
-import {ISpace} from './ISpace';
-import {GameOptions} from '../GameOptions';
+import {Random} from '../../common/utils/Random';
+import {Space} from './Space';
+import {GameOptions} from '../game/GameOptions';
 import {SpaceId} from '../../common/Types';
+import {MarsBoard} from './MarsBoard';
 
-export class AmazonisBoard extends Board {
+export class AmazonisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): AmazonisBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
@@ -50,11 +51,11 @@ export class AmazonisBoard extends Board {
     return new AmazonisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: ReadonlyArray<Player>): AmazonisBoard {
+  public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): AmazonisBoard {
     return new AmazonisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public override getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
+  public override getNonReservedLandSpaces(): ReadonlyArray<Space> {
     return super.getNonReservedLandSpaces().filter((space) => space.bonus.includes(SpaceBonus.RESTRICTED) === false);
   }
 

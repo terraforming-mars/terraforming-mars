@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {PolarIndustries} from '../../../src/server/cards/prelude/PolarIndustries';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('PolarIndustries', function() {
   it('Should play', function() {
@@ -9,7 +10,7 @@ describe('PolarIndustries', function() {
 
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.heat).to.eq(2);
   });
 });

@@ -1,19 +1,20 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
+import {sum} from '../../../common/utils/utils';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -27,14 +28,14 @@ class UnityBonus01 implements Bonus {
   description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
   isDefault = true;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     const tags = [Tag.VENUS, Tag.EARTH, Tag.JOVIAN];
-    return tags.map((tag) => player.tags.count(tag, 'raw')).reduce((acc, count) => acc + count, 0);
+    return sum(tags.map((tag) => player.tags.count(tag, 'raw')));
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -44,13 +45,13 @@ class UnityBonus02 implements Bonus {
   description = 'Gain 1 M€ for each Space tag you have';
   isDefault = false;
 
-  getScore(player: Player) {
+  getScore(player: IPlayer) {
     return player.tags.count(Tag.SPACE, 'raw');
   }
 
-  grant(game: Game) {
+  grant(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.MEGACREDITS, this.getScore(player));
+      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -66,11 +67,11 @@ class UnityPolicy02 implements Policy {
   description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
   isDefault = false;
 
-  canAct(player: Player) {
+  canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player) {
+  action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
@@ -104,7 +105,7 @@ class UnityPolicy02 implements Policy {
           }
 
           orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
-            player.addResource(Resource.TITANIUM, 2);
+            player.stock.add(Resource.TITANIUM, 2);
             game.log('${0} gained 2 titanium', (b) => b.player(player));
             return undefined;
           }));
@@ -126,11 +127,11 @@ class UnityPolicy03 implements Policy {
   description = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
   isDefault = false;
 
-  canAct(player: Player) {
+  canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player) {
+  action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;

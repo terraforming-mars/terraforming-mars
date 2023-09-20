@@ -5,9 +5,9 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {DrawCards} from '../../deferredActions/DrawCards';
+import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {LogHelper} from '../../LogHelper';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 
 export class JunkVentures extends Card implements ICorporationCard {
   constructor() {
@@ -31,7 +31,7 @@ export class JunkVentures extends Card implements ICorporationCard {
     });
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     const discardedCards = new Set<CardName>();
 
     for (let i = 0; i < 3; i++) {
@@ -44,21 +44,24 @@ export class JunkVentures extends Card implements ICorporationCard {
     return undefined;
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.game.projectDeck.discardPile.length >= 3;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const game = player.game;
     game.projectDeck.shuffleDiscardPile();
 
     const cards: Array<IProjectCard> = [];
     for (let idx = 0; idx < 3; idx++) {
       const card = player.game.projectDeck.discardPile.pop();
-      if (card === undefined) break;
+      if (card === undefined) {
+        break;
+      }
       cards.push(card);
     }
 
-    return DrawCards.choose(player, cards, {keepMax: 1});
+    player.game.defer(new ChooseCards(player, cards, {keepMax: 1}));
+    return undefined;
   }
 }

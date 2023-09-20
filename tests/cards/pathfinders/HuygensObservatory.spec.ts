@@ -38,7 +38,7 @@ describe('HuygensObservatory', function() {
     expect(player.getTerraformRating()).eq(20);
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     expect(player.getTerraformRating()).eq(21);
 
@@ -52,7 +52,7 @@ describe('HuygensObservatory', function() {
     selectColony.cb(ganymede);
 
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
-    expect(player.purse()).deep.eq(Units.EMPTY);
+    expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(ganymede.visitor).is.undefined;
 
     runAllActions(game);
@@ -66,7 +66,7 @@ describe('HuygensObservatory', function() {
     expect(ganymede.visitor).eq(player.id);
 
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
-    expect(player.purse()).deep.eq(Units.of({plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
   });
 
   it('play, place colony where you already have one', function() {
@@ -74,7 +74,7 @@ describe('HuygensObservatory', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     runAllActions(game);
 
@@ -108,7 +108,7 @@ describe('HuygensObservatory', function() {
     expect(ganymede.visitor).eq(player.id);
 
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    expect(player.purse()).deep.eq(Units.of({plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
   });
 
   it('play, only trade fleet is on a colony', function() {
@@ -117,7 +117,7 @@ describe('HuygensObservatory', function() {
 
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     runAllActions(game);
@@ -152,7 +152,7 @@ describe('HuygensObservatory', function() {
 
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     runAllActions(game);

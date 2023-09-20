@@ -36,7 +36,7 @@ describe('GreeneryStandardProject', function() {
     expect(game.getOxygenLevel()).eq(0);
 
     const selectSpace = cast(churnAction(card, player), SelectSpace);
-    const availableSpace = selectSpace.availableSpaces[0];
+    const availableSpace = selectSpace.spaces[0];
 
     expect(availableSpace.spaceType).eq(SpaceType.LAND);
 

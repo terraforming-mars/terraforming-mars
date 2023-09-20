@@ -1,8 +1,7 @@
 import {AndOptions} from './AndOptions';
 import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {IProjectCard} from '../cards/IProjectCard';
-import {Player} from '../Player';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
+import {IPlayer} from '../IPlayer';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
 import {CardName} from '../../common/cards/CardName';
@@ -11,8 +10,8 @@ import * as titles from '../../common/inputs/SelectInitialCards';
 
 
 export class SelectInitialCards extends AndOptions {
-  public override readonly inputType = PlayerInputType.SELECT_INITIAL_CARDS;
-  constructor(private player: Player, cb: (corporation: ICorporationCard) => undefined) {
+  public override readonly inputType = 'initialCards';
+  constructor(private player: IPlayer, cb: (corporation: ICorporationCard) => undefined) {
     super(() => {
       this.completed(corporation);
       cb(corporation);

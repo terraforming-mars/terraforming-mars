@@ -12,6 +12,7 @@ export interface CreateGameModel {
   players: Array<NewPlayerModel>;
   corporateEra: boolean;
   prelude: boolean;
+  prelude2Expansion: boolean;
   draftVariant: boolean;
   initialDraft: boolean;
   randomMA: RandomMAOptionType;
@@ -55,6 +56,7 @@ export interface CreateGameModel {
   seededGame: boolean;
   escapeVelocityMode: boolean;
   escapeVelocityThreshold: number;
+  escapeVelocityBonusSeconds: number;
   escapeVelocityPeriod: number;
   escapeVelocityPenalty: number;
   twoCorpsVariant: boolean;

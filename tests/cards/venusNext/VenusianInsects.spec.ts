@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -30,8 +30,7 @@ describe('VenusianInsects', () => {
     expect(player.simpleCanPlay(card)).is.true;
     player.playedCards.push(card);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Gives victory points', () => {

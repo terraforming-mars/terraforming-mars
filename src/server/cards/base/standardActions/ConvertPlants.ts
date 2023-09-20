@@ -1,10 +1,10 @@
 import {StandardActionCard} from '../../StandardActionCard';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {MAX_OXYGEN_LEVEL} from '../../../../common/constants';
 import {SelectSpace} from '../../../inputs/SelectSpace';
-import {ISpace} from '../../../boards/ISpace';
+import {Space} from '../../../boards/Space';
 import {Units} from '../../../../common/Units';
 
 
@@ -23,7 +23,7 @@ export class ConvertPlants extends StandardActionCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.plants < player.plantsNeededForGreenery) {
       return false;
     }
@@ -35,17 +35,18 @@ export class ConvertPlants extends StandardActionCard {
       // player can afford the reds tax when increasing the oxygen level.
       return true;
     }
-    return player.canAfford(0, {
+    return player.canAfford({
+      cost: 0,
       tr: {oxygen: 1},
       reserveUnits: Units.of({plants: player.plantsNeededForGreenery}),
     });
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     return new SelectSpace(
       `Convert ${player.plantsNeededForGreenery} plants into greenery`,
       player.game.board.getAvailableSpacesForGreenery(player),
-      (space: ISpace) => {
+      (space: Space) => {
         this.actionUsed(player);
         player.game.addGreenery(player, space);
         player.plants -= player.plantsNeededForGreenery;

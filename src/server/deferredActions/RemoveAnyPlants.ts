@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -11,7 +11,7 @@ export class RemoveAnyPlants extends DeferredAction {
   private title: string | Message;
   private count: number;
 
-  constructor(player: Player, count: number = 1, title?: string | Message) {
+  constructor(player: IPlayer, count: number = 1, title?: string | Message) {
     super(player, Priority.ATTACK_OPPONENT);
     this.count = count;
     this.title = title ?? newMessage('Select player to remove up to ${0} plants', (b) => b.number(count));
@@ -46,7 +46,7 @@ export class RemoveAnyPlants extends DeferredAction {
           .getMessage();
 
       return new SelectOption(message, 'Remove plants', () => {
-        candidate.deductResource(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
+        candidate.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
         return undefined;
       });
     });

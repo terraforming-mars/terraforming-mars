@@ -1,8 +1,8 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
+import {Space} from '../../boards/Space';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
@@ -31,11 +31,11 @@ export class SolarFarm extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions).length > 0;
   }
 
-  public produce(player: Player) {
+  public produce(player: IPlayer) {
     const space = player.game.board.getSpaceByTileCard(this.name);
     if (space === undefined) {
       throw new Error('Solar Farm space not found');
@@ -44,11 +44,11 @@ export class SolarFarm extends Card implements IProjectCard {
     player.production.add(Resource.ENERGY, plantsOnSpace, {log: true});
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
       'Select space for Solar Farm tile',
       player.game.board.getAvailableSpacesOnLand(player),
-      (space: ISpace) => {
+      (space: Space) => {
         player.game.addTile(player, space, {
           tileType: TileType.SOLAR_FARM,
           card: this.name,

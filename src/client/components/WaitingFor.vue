@@ -25,7 +25,7 @@ import {WaitingForModel} from '@/common/models/WaitingForModel';
 
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
-import * as paths from '@/common/app/paths';
+import {paths} from '@/common/app/paths';
 import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
@@ -97,6 +97,7 @@ export default Vue.extend({
       };
       xhr.send(JSON.stringify(out));
       xhr.onerror = function() {
+        // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
       };
     },
@@ -116,6 +117,7 @@ export default Vue.extend({
       };
       xhr.send();
       xhr.onerror = function() {
+        // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
       };
     },

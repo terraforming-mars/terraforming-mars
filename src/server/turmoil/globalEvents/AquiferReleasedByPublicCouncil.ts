@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../Turmoil';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -22,11 +22,11 @@ export class AquiferReleasedByPublicCouncil extends GlobalEvent implements IGlob
       renderData: RENDER_DATA,
     });
   }
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     game.defer(new PlaceOceanTile(game.getPlayersInGenerationOrder()[0], {title: 'Select space for ocean tile for Global Event'}));
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resource.PLANTS, turmoil.getPlayerInfluence(player), {log: true, from: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL});
-      player.addResource(Resource.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL});
+      player.stock.add(Resource.PLANTS, turmoil.getPlayerInfluence(player), {log: true, from: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL});
+      player.stock.add(Resource.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL});
     });
   }
 }

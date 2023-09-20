@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -28,12 +28,12 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const gainTitanium = new SelectOption(
       'Gain 1 titanium',
       'Gain titanium',
       () => {
-        player.addResource(Resource.TITANIUM, 1, {log: true});
+        player.stock.add(Resource.TITANIUM, 1, {log: true});
         return undefined;
       },
     );
@@ -42,7 +42,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       'Gain 2 steel',
       'Gain steel',
       () => {
-        player.addResource(Resource.STEEL, 2, {log: true});
+        player.stock.add(Resource.STEEL, 2, {log: true});
         return undefined;
       },
     );
@@ -50,7 +50,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     return new OrOptions(gainTitanium, gain2Steel);
   }
 
-  public static resourceHook(player: Player, resource: Resource, amount: number, from: Player) {
+  public static resourceHook(player: IPlayer, resource: Resource, amount: number, from: IPlayer) {
     if (from === player || amount >= 0) {
       return;
     }

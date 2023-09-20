@@ -47,7 +47,7 @@ describe('StrategicBasePlanning', function() {
 
     // Place city comes next
     const selectSpace = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     expect(space.tile).is.undefined;
 
     selectSpace.cb(space);

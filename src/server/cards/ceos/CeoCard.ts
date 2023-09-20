@@ -1,7 +1,7 @@
 import {Card, StaticCardProperties} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {ICeoCard} from './ICeoCard';
-import {Player} from '../../../server/Player';
+import {IPlayer} from '../../IPlayer';
 
 type StaticCeoProperties = Pick<StaticCardProperties, 'name' | 'tags' | 'victoryPoints' | 'metadata'>;
 
@@ -15,11 +15,11 @@ export abstract class CeoCard extends Card implements ICeoCard {
     });
   }
 
-  public canAct(_player: Player): boolean {
+  public canAct(_player: IPlayer): boolean {
     return this.isDisabled === false;
   }
 
-  public override play(_player: Player) {
+  public override play(_player: IPlayer) {
     return undefined;
   }
 

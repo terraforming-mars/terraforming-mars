@@ -2,7 +2,7 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
@@ -24,11 +24,11 @@ export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {
     });
   }
 
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const tags = player.tags.count(Tag.MARS, 'raw');
       const total = Math.min(tags, 5) + turmoil.getPlayerInfluence(player);
-      player.addResource(Resource.MEGACREDITS, 2 * total, {log: true, from: this.name});
+      player.stock.add(Resource.MEGACREDITS, 2 * total, {log: true, from: this.name});
     });
   }
 }

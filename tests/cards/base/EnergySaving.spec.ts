@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {EnergySaving} from '../../../src/server/cards/base/EnergySaving';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('EnergySaving', function() {
   it('Should play', function() {
@@ -9,7 +10,7 @@ describe('EnergySaving', function() {
     const action = card.play(player);
 
     expect(player.production.energy).to.eq(0);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
     game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);

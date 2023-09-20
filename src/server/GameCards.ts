@@ -14,13 +14,14 @@ import {CardName} from '../common/cards/CardName';
 import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 import {GameModule} from '../common/cards/GameModule';
-import {GameOptions} from './GameOptions';
+import {GameOptions} from './game/GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {CardFinder} from './CardFinder';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
+import {PRELUDE2_CARD_MANIFEST} from './cards/prelude2/Prelude2CardManifest';
 import {STAR_WARS_CARD_MANIFEST} from './cards/starwars/StarwarsCardManifest';
 
 /**
@@ -48,6 +49,7 @@ export class GameCards {
       [true, BASE_CARD_MANIFEST],
       [gameOptions.corporateEra, CORP_ERA_CARD_MANIFEST],
       [gameOptions.preludeExtension, PRELUDE_CARD_MANIFEST],
+      [gameOptions.prelude2Expansion, PRELUDE2_CARD_MANIFEST],
       [gameOptions.venusNextExtension, VENUS_CARD_MANIFEST],
       [gameOptions.coloniesExtension, COLONIES_CARD_MANIFEST],
       [gameOptions.turmoilExtension, TURMOIL_CARD_MANIFEST],
@@ -78,6 +80,8 @@ export class GameCards {
         return gameOptions.turmoilExtension;
       case 'prelude':
         return gameOptions.preludeExtension;
+      case 'prelude2':
+        return gameOptions.prelude2Expansion;
       case 'moon':
         return gameOptions.moonExpansion;
       case 'pathfinders':
@@ -127,6 +131,8 @@ export class GameCards {
       preludes = preludes.filter((c) => c.name !== CardName.MERGER);
     }
 
+    // TODO(kberg): 2023-10-01 remove this line, also comment out HEAD_START from the preludes manifest.
+    preludes = preludes.filter((c) => c.name !== CardName.HEAD_START);
     return preludes;
   }
 

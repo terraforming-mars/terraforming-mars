@@ -1,5 +1,5 @@
-import {Player} from '../../Player';
 import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
 
 export class Firestarter extends BaseMilestone {
   constructor() {
@@ -9,7 +9,7 @@ export class Firestarter extends BaseMilestone {
       20);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.heat;
   }
 }

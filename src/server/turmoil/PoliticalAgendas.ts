@@ -1,5 +1,5 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {Bonus} from './Bonus';
 import {IParty} from './parties/IParty';
 import {PartyName} from '../../common/turmoil/PartyName';
@@ -61,7 +61,7 @@ export class PoliticalAgendas {
   // The ruling party is already in power, and now it is time for the party to select an agenda.
   // Do not expect the method to return an activated agenda if the current agenda style is chairman
   // And a person is the chairman -- the end of this method will just defer selection until later.
-  public static setNextAgenda(turmoil: Turmoil, game: Game): void {
+  public static setNextAgenda(turmoil: Turmoil, game: IGame): void {
     const rulingParty = turmoil.rulingParty;
     const politicalAgendasData = turmoil.politicalAgendasData;
     const chairman = turmoil.chairman;

@@ -2,7 +2,6 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import OrOptions from '@/client/components/OrOptions.vue';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
@@ -20,15 +19,15 @@ describe('OrOptions', function() {
         playerinput: {
           title: 'foo',
           options: [{
-            inputType: PlayerInputType.SELECT_OPTION,
+            inputType: 'option',
             title: 'hide this',
             showOnlyInLearnerMode: true,
           }, {
-            inputType: PlayerInputType.SELECT_OPTION,
+            inputType: 'option',
             title: 'select a',
           }, {
             title: 'select b',
-            inputType: PlayerInputType.SELECT_OPTION,
+            inputType: 'option',
           }],
         },
         onsave: function(data: InputResponse) {
@@ -58,11 +57,11 @@ describe('OrOptions', function() {
         playerinput: {
           title: 'foo',
           options: [{
-            inputType: PlayerInputType.SELECT_OPTION,
+            inputType: 'option',
             title: 'select a',
           }, {
             title: 'select b',
-            inputType: PlayerInputType.SELECT_OPTION,
+            inputType: 'option',
           }],
         },
         onsave: function(data: InputResponse) {

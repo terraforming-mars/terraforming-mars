@@ -1,7 +1,7 @@
 <template>
-  <div :class="getClasses()">
+  <div :class="getClasses">
     <div v-for="(req, idx) in requirements.requirements" :key="idx">
-      <card-requirement :requirement="req" />
+      <card-requirement :requirement="req" :leftMargin="indentRight[idx]"/>
     </div>
   </div>
 </template>
@@ -23,10 +23,13 @@ export default Vue.extend({
   components: {
     'card-requirement': CardRequirementComponent,
   },
-  methods: {
+  computed: {
     getClasses(): string {
-      const hasMax = this.requirements.requirements.some((req) => req.isMax);
+      const hasMax = this.requirements.requirements.some((req) => req.max);
       return hasMax ? 'card-requirements card-requirements-max' : 'card-requirements';
+    },
+    indentRight(): ReadonlyArray<boolean> {
+      return [false, ...this.requirements.requirements.map((req) => req.nextTo)];
     },
   },
 });

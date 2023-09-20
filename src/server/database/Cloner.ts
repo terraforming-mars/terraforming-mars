@@ -1,7 +1,8 @@
 import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {GameId, isPlayerId} from '../../common/Types';
 import {GameSetup} from '../GameSetup';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {SerializedPlayer} from '../SerializedPlayer';
@@ -9,9 +10,9 @@ import {SerializedPlayer} from '../SerializedPlayer';
 export class Cloner {
   public static clone(
     newGameId: GameId,
-    players: Array<Player>,
+    players: Array<IPlayer>,
     firstPlayerIndex: number,
-    serialized: SerializedGame): Game {
+    serialized: SerializedGame): IGame {
     const serializedGameId: GameId = serialized.id;
     const serializedPlayerIds: Array<PlayerId> = serialized.players.map((player) => player.id);
     const playerIds: Array<PlayerId> = players.map((player) => player.id);
@@ -57,7 +58,7 @@ export class Cloner {
     });
   }
 
-  private static updatePlayer(from: Player, to: SerializedPlayer) {
+  private static updatePlayer(from: IPlayer, to: SerializedPlayer) {
     // id is already copied over.
     to.color = from.color;
     to.name = from.name;

@@ -18,27 +18,27 @@ describe('UndermoonDrugLordsNetwork', () => {
     const moonData = MoonExpansion.moonData(player.game);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 0;
+    moonData.habitatRate = 0;
     card.play(player);
     expect(player.production.megacredits).eq(0);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 1;
+    moonData.habitatRate = 1;
     card.play(player);
     expect(player.production.megacredits).eq(0);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 2;
+    moonData.habitatRate = 2;
     card.play(player);
     expect(player.production.megacredits).eq(1);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 3;
+    moonData.habitatRate = 3;
     card.play(player);
     expect(player.production.megacredits).eq(1);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 4;
+    moonData.habitatRate = 4;
     card.play(player);
     expect(player.production.megacredits).eq(2);
   });

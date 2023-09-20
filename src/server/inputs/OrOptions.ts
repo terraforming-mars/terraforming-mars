@@ -1,7 +1,6 @@
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class OrOptions extends BasePlayerInput {
   public cb(): PlayerInput | undefined {
@@ -9,11 +8,11 @@ export class OrOptions extends BasePlayerInput {
   }
   public options: Array<PlayerInput>;
   constructor(...options: Array<PlayerInput>) {
-    super(PlayerInputType.OR_OPTIONS, 'Select one option');
+    super('or', 'Select one option');
     this.options = options;
   }
 
-  public process(input: InputResponse, player: Player) {
+  public process(input: InputResponse, player: IPlayer) {
     if (!isOrOptionsResponse(input)) {
       throw new Error('Not a valid OrOptionsResponse');
     }

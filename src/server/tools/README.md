@@ -6,32 +6,31 @@ Before use them build the project `npm run build`
 
 ... then run any of compilled scripts from build directory `node <path-to-the-toolname>.js`
 
-For example check_locales.ts tool can be run like this: `node build/src/tools/check_locales.js`
+For example check_locales.ts tool can be run like this: `node build/src/server/tools/check_locales.js`
 
 It is possible to run these tools "directly" by using ts-node package
 
 1. Install ts-node on your machine `npm install -g ts-node`
-2. Run the script `ts-node src/tools/check_locales.ts`
+2. Run the script `ts-node src/server/tools/check_locales.ts`
 
 ## Check locales tool
 
-Check locales tool compares localizations and shows missing translations.
+#### Check locales tool compares localizations and shows missing translations.
 
-How to run: `node build/src/tools/check_locales.js`
+How to run: `node build/src/server/tools/check_locales.js`
 
 Result will be something like this:
 ```
-Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.
-    missing ru
-You start with 3 MC production and 44 MC.
-    missing ru
-    missing cn
+"Select a Mars First bonus.": "es,nl,ru"
+"Gain 1 M€ for each building tag you have": "es,nl,ru"
 ...
 ```
+The languages in quotes are missing that translation. (In this case, Spanish, Dutch, and Russian are missing the translation.)
 
-If you want to see warnings for given locale only use --locales switch
 
-`node build/src/tools/check_locales.js --locales cn,ru`
+#### If you want to see warnings for given locale only use --locales switch
+
+`node build/src/server/tools/check_locales.js --locales cn,ru`
 
 as result you will see the warnings for Chinese and Russian languages only.
 

@@ -1,12 +1,12 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from './DeferredAction';
 import {PlacementType} from '../boards/PlacementType';
 
 export class PlaceGreeneryTile extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     private on: PlacementType = 'greenery',
   ) {
     super(player, Priority.DEFAULT);
@@ -21,7 +21,7 @@ export class PlaceGreeneryTile extends DeferredAction {
     return new SelectSpace(
       this.getTitle(),
       availableSpaces,
-      (space: ISpace) => {
+      (space: Space) => {
         this.player.game.addGreenery(this.player, space);
         return undefined;
       },

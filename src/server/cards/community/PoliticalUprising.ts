@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -27,14 +27,14 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     this.drawTurmoilCard(player);
     return undefined;
   }
 
   // TODO(kberg): it is possible, though unlikely, that the draw deck won't have another Turmoil card, but this
   // app ought to check the discard pile, or something.
-  private drawTurmoilCard(player: Player) {
+  private drawTurmoilCard(player: IPlayer) {
     // Rather than draw and discard potentially dozens of cards, find one card in the deck that's a Turmoil card.
 
     // First get all the card names for Turmoil Project cards by indexing the manifest.

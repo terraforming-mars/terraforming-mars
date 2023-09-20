@@ -298,6 +298,9 @@ input[type="radio"]:checked + .filterDiv::after {
     transform: rotate(-90deg);
 }
 
+.prelude2-icon:after {
+  &:extend(.prelude-icon:after);
+}
 .venus-icon:after {
     position: absolute;
     border: 1px solid black;
@@ -942,9 +945,9 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .special-tile {
     background-image: url(./assets/tiles/special.png);
-    width: 47px;
-    height: 51px;
-    background-size: 47px 51px;
+    width: 40px;
+    height: 47px;
+    background-size: 40px;
 }
 
 .special-tile--S {
@@ -966,6 +969,13 @@ input[type="radio"]:checked + .filterDiv::after {
     height: 40px;
     background-size: 60px 40px;
     color: #0000;
+}
+
+.city-or-special-tile {
+    background-image: url(./assets/promo/city-or-special-tile.png);
+    width: 40px;
+    height: 47px;
+    background-size: 40px;
 }
 
 .rating {
@@ -2654,6 +2664,11 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .expansion-icon-prelude {
+    background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
+}
+
+// Create an icon with a 2, perhaps?
+.expansion-icon-prelude2 {
     background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
 }
 

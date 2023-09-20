@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -38,7 +38,7 @@ export class MartianRepository extends Card implements IProjectCard {
   }
 
 
-  public onCardPlayed(player: Player, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const qty = player.tags.cardTagCount(card, Tag.SCIENCE) + player.tags.cardTagCount(card, Tag. MARS);
     if (qty > 0) player.addResourceTo(this, {qty, log: true});
   }

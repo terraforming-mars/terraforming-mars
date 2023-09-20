@@ -36,7 +36,7 @@ describe('Jansson', function() {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     expect(player.steel).eq(0);
     expect(player.titanium).eq(0);
-    expect(player.cardsInHand.length).eq(0);
+    expect(player.cardsInHand).is.empty;
     MoonExpansion.addHabitatTile(player, spaces[0].id);
     MoonExpansion.addMineTile(player, spaces[1].id);
     MoonExpansion.addRoadTile(player, spaces[2].id);

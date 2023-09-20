@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {TerraformingContract} from '../../../src/server/cards/venusNext/TerraformingContract';
 import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('TerraformingContract', function() {
   it('Should play', function() {
@@ -12,8 +13,7 @@ describe('TerraformingContract', function() {
     player.setTerraformRating(25);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(4);
   });
 });

@@ -4,8 +4,8 @@ import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
+import {IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MultiSet} from 'mnemonist';
 import {Resource} from '../../../common/Resource';
@@ -15,6 +15,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Phase} from '../../../common/Phase';
 import {Card} from '../Card';
 import {all} from '../Options';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationCard {
   constructor() {
@@ -49,16 +50,16 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.titanium > 0 || this.resourceCount > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const orOptions = new OrOptions();
     if (player.titanium > 0) {
       orOptions.options.push(new SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet', () => {
-        player.titanium--;
-        player.addResourceTo(this);
+        player.pay(Payment.of({titanium: 1}));
+        player.addResourceTo(this, {qty: 1, log: true});
         return undefined;
       }));
     }
@@ -68,7 +69,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
         const game = player.game;
         for (const p of game.getPlayers()) {
           if (p === player) continue;
-          p.stealResource(Resource.MEGACREDITS, 2, player);
+          p.stock.steal(Resource.MEGACREDITS, 2, player);
         }
         return undefined;
       }));
@@ -80,7 +81,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     return orOptions;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (activePlayer.game.phase === Phase.SOLAR) {
       return;
     }
@@ -93,7 +94,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     }
     const game = activePlayer.game;
     if (MoonExpansion.MOON_TILES.has(space.tile.tileType)) {
-      const costs = new MultiSet<Player>();
+      const costs = new MultiSet<IPlayer>();
       MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
         if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {
           costs.add(space.player, 2);
@@ -103,8 +104,8 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
         // TODO(kberg): Create a Game.steal method that manages this, both here
         // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.addResource(Resource.MEGACREDITS, adjustedQuantity, {log: true});
-        target.deductResource(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
+        activePlayer.stock.add(Resource.MEGACREDITS, adjustedQuantity, {log: true});
+        target.stock.deduct(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
       });
     }
     return undefined;

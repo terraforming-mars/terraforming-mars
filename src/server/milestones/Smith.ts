@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Smith extends BaseMilestone {
   constructor() {
@@ -9,7 +9,7 @@ export class Smith extends BaseMilestone {
       7);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.production.steel + player.production.titanium;
   }
 }

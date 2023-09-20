@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -38,11 +38,11 @@ export class SmallDutyRovers extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const moonData = MoonExpansion.moonData(player.game);
     const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;
 
-    player.addResource(Resource.MEGACREDITS, gain, {log: true});
+    player.stock.add(Resource.MEGACREDITS, gain, {log: true});
 
     return undefined;
   }

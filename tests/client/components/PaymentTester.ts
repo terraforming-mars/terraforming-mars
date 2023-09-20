@@ -18,9 +18,12 @@ export class PaymentTester {
       'heat': 'Heat',
       'microbes': 'Microbes',
       'floaters': 'Floaters',
-      'science': 'Science',
+      'lunaArchivesScience': 'Science',
+      'spireScience': 'Science',
       'seeds': 'Seeds',
       'auroraiData': 'Data',
+      'graphene': 'graphene',
+      'kuiperAsteroids': 'kupiperAsteroids',
     };
     const title = titles[type];
     return '[title~=' + title + ']';

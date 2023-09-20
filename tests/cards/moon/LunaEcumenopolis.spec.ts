@@ -1,12 +1,13 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaEcumenopolis} from '../../../src/server/cards/moon/LunaEcumenopolis';
-import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 // import {Phase} from '../../../src/server/Phase';
 
 describe('LunaEcumenopolis', () => {
@@ -16,8 +17,7 @@ describe('LunaEcumenopolis', () => {
   let card: LunaEcumenopolis;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new LunaEcumenopolis();
   });
@@ -66,7 +66,7 @@ describe('LunaEcumenopolis', () => {
   });
 
   it('Place 2 colony tiles', () => {
-    moonData.colonyRate = 2;
+    moonData.habitatRate = 2;
     const moon = moonData.moon;
     expect(player.getTerraformRating()).eq(14);
 
@@ -75,15 +75,15 @@ describe('LunaEcumenopolis', () => {
     card.play(player);
 
     const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input1.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
+    expect(input1.spaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpace('m18'));
-    expect(moonData.colonyRate).eq(3);
+    expect(moonData.habitatRate).eq(3);
     expect(player.getTerraformRating()).eq(15);
 
     const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
+    expect(input2.spaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
-    expect(moonData.colonyRate).eq(4);
+    expect(moonData.habitatRate).eq(4);
     runAllActions(game);
     expect(player.getTerraformRating()).eq(18);
   });
@@ -104,7 +104,7 @@ describe('LunaEcumenopolis', () => {
   });
 
   it('Place 2 colony tiles next to Lunar Mine Urbanization', () => {
-    moonData.colonyRate = 2;
+    moonData.habitatRate = 2;
     const moon = moonData.moon;
     expect(player.getTerraformRating()).eq(14);
 
@@ -113,15 +113,15 @@ describe('LunaEcumenopolis', () => {
     card.play(player);
 
     const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input1.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
+    expect(input1.spaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpace('m18'));
-    expect(moonData.colonyRate).eq(3);
+    expect(moonData.habitatRate).eq(3);
     expect(player.getTerraformRating()).eq(15);
 
     const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
+    expect(input2.spaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
-    expect(moonData.colonyRate).eq(4);
+    expect(moonData.habitatRate).eq(4);
     runAllActions(game);
     expect(player.getTerraformRating()).eq(18);
   });
@@ -137,7 +137,7 @@ describe('LunaEcumenopolis', () => {
   //   player.production.override({plants: 1});
 
   //   testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
-  //   moonData.colonyRate = 8;
+  //   moonData.habitatRate = 8;
   //   testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
   //   setOxygenLevel(game, MAX_OXYGEN_LEVEL);
   //   testRedsCosts(() => player.canPlay(card), player, card.cost, 0);

@@ -1,0 +1,29 @@
+import {Message} from '../../common/logs/Message';
+import {BasePlayerInput} from '../PlayerInput';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputResponse';
+
+export class SelectParty extends BasePlayerInput {
+  constructor(
+    title: string | Message,
+    buttonLabel: string = 'Send delegate',
+    public availableParties: Array<PartyName>,
+    public cb: (party: PartyName) => undefined,
+  ) {
+    super('party', title);
+    this.buttonLabel = buttonLabel;
+  }
+
+  public process(input: InputResponse) {
+    if (!isSelectPartyResponse(input)) {
+      throw new Error('Not a valid SelectPartyResponse');
+    }
+    if (input.partyName === undefined) {
+      throw new Error('No party selected');
+    }
+    if (!this.availableParties.includes(input.partyName)) {
+      throw new Error('Invalid party selected');
+    }
+    return this.cb(input.partyName);
+  }
+}

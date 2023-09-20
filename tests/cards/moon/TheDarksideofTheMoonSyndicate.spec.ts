@@ -62,7 +62,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     expect(options).is.undefined;
 
     runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(card.resourceCount).eq(2);
     expect(player.megaCredits).eq(9);
@@ -82,13 +82,13 @@ describe('TheDarksideofTheMoonSyndicate', () => {
 
     options.options[0].cb();
     runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     expect(player.titanium).eq(0);
     expect(card.resourceCount).eq(2);
 
     options.options[1].cb();
     runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(card.resourceCount).eq(1);
     expect(player.megaCredits).eq(9);

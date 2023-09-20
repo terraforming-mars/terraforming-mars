@@ -66,6 +66,7 @@ describe('ApiGame', () => {
           'escapeVelocityPenalty': 1,
           'escapeVelocityPeriod': 2,
           'escapeVelocityThreshold': 30,
+          'escapeVelocityBonusSeconds': 2,
           'fastModeOption': false,
           'includeFanMA': false,
           'includeVenusMA': true,

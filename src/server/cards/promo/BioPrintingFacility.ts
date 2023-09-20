@@ -5,7 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -33,22 +33,22 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.energy >= 2;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
-    player.deductResource(Resource.ENERGY, 2);
+    player.stock.deduct(Resource.ENERGY, 2);
 
 
     if (availableAnimalCards.length === 0) {
-      player.addResource(Resource.PLANTS, 2, {log: true});
+      player.stock.add(Resource.PLANTS, 2, {log: true});
       return undefined;
     }
 
     const gainPlantOption = new SelectOption('Gain 2 plants', 'Gain plants', () => {
-      player.addResource(Resource.PLANTS, 2, {log: true});
+      player.stock.add(Resource.PLANTS, 2, {log: true});
       return undefined;
     });
 

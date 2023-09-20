@@ -3,7 +3,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -44,21 +44,30 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
     }
     return 0;
   }
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.canAfford(1);
   }
-  public action(player: Player) {
-    const topCard = player.game.projectDeck.draw(player.game);
+  public action(player: IPlayer) {
+    player.game.defer(
+      new SelectPaymentDeferred(
+        player,
+        1,
+        {
+          title: 'Select how to pay for action',
+          afterPay: () => {
+            const topCard = player.game.projectDeck.draw(player.game);
 
-    player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
+            player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
 
-    if (topCard.tags.includes(Tag.MICROBE)) {
-      player.addResourceTo(this, 1);
-      player.game.log('${0} found life!', (b) => b.player(player));
-    }
+            if (topCard.tags.includes(Tag.MICROBE)) {
+              player.addResourceTo(this, 1);
+              player.game.log('${0} found life!', (b) => b.player(player));
+            }
 
-    player.game.projectDeck.discard(topCard);
-    player.game.defer(new SelectPaymentDeferred(player, 1, {title: 'Select how to pay for action'}));
+            player.game.projectDeck.discard(topCard);
+          },
+        }));
+
     return undefined;
   }
 }

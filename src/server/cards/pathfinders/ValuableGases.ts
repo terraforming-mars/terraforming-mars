@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -31,20 +31,20 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public getRequirementBonus(player: Player): number {
+  public getRequirementBonus(player: IPlayer): number {
     if (player.lastCardPlayed === this.name) {
       // Magic number high enough to always ignore requirements.
       return 50;
     }
     return 0;
   }
-  public override bespokePlay(player: Player) {
-    player.addResource(Resource.MEGACREDITS, 10);
+  public override bespokePlay(player: IPlayer) {
+    player.stock.add(Resource.MEGACREDITS, 10);
 
     const playableCards = player.cardsInHand.filter((card) => {
       return card.resourceType === CardResource.FLOATER &&
         card.type === CardType.ACTIVE &&
-        player.canAffordCard(card);
+        player.canAfford(player.affordOptionsForCard(card));
     }).map((card) => {
       return {
         card: card,

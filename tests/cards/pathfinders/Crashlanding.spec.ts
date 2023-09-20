@@ -48,28 +48,28 @@ describe('Crashlanding', () => {
         addGreenery(player, space.id);
       }
     }
-    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player, {cost: 0})).is.true;
     addCity(player, '35');
-    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player, {cost: 0})).is.true;
     addCity(player, '37');
-    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player, {cost: 0})).is.true;
     addGreenery(player, '26');
-    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player, {cost: 0})).is.true;
     addGreenery(player, '27');
-    expect(card.canPlay(player)).is.false;
+    expect(card.canPlay(player, {cost: 0})).is.false;
   });
 
   it('play - cannot play next to 2 cities', () => {
     const spaceBetweenTwoCities = game.board.getSpace('36');
     addCity(player, '37'),
-    expect(cast(card.play(player), SelectSpace).availableSpaces).to.include(spaceBetweenTwoCities);
+    expect(cast(card.play(player), SelectSpace).spaces).to.include(spaceBetweenTwoCities);
     addCity(player, '35');
-    expect(cast(card.play(player), SelectSpace).availableSpaces).to.not.include(spaceBetweenTwoCities);
+    expect(cast(card.play(player), SelectSpace).spaces).to.not.include(spaceBetweenTwoCities);
   });
 
   it('play, place tile', () => {
     const selectSpace = cast(card.play(player), SelectSpace);
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     const orOptions = cast(selectSpace.cb(space), OrOptions);
     expect(space.tile?.tileType).eq(TileType.CRASHLANDING);
     expect(space.tile?.rotated).is.undefined;
@@ -91,12 +91,12 @@ describe('Crashlanding', () => {
     player.megaCredits = 0;
     expect(dataCard.resourceCount).eq(2);
     addGreenery(player, '35');
-    expect(player.purse()).deep.eq(Units.of({megacredits: 1, titanium: 1, steel: 0}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, titanium: 1, steel: 0}));
     runAllActions(game);
     expect(dataCard.resourceCount).eq(3);
 
     addGreenery(player, '37');
-    expect(player.purse()).deep.eq(Units.of({megacredits: 2, titanium: 1, steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 2, titanium: 1, steel: 1}));
     runAllActions(game);
     expect(dataCard.resourceCount).eq(4);
   });
@@ -113,12 +113,12 @@ describe('Crashlanding', () => {
     player.megaCredits = 0;
     expect(dataCard.resourceCount).eq(2);
     addGreenery(player, '35');
-    expect(player.purse()).deep.eq(Units.of({megacredits: 1, titanium: 0, steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, titanium: 0, steel: 1}));
     runAllActions(game);
     expect(dataCard.resourceCount).eq(3);
 
     addGreenery(player, '37');
-    expect(player.purse()).deep.eq(Units.of({megacredits: 2, titanium: 1, steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 2, titanium: 1, steel: 1}));
     runAllActions(game);
     expect(dataCard.resourceCount).eq(4);
   });
@@ -137,7 +137,7 @@ describe('Crashlanding', () => {
     runAllActions(game);
 
     expect(dataCard.resourceCount).eq(3);
-    expect(player.purse()).deep.eq(Units.of({megacredits: 0, titanium: 0, steel: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 0, titanium: 0, steel: 1}));
   });
 
   it('play - resources', () => {

@@ -8,8 +8,7 @@ describe('ArtificialPhotosynthesis', () => {
   it('Should play', () => {
     const card = new ArtificialPhotosynthesis();
     const [game, player] = testGame(1);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const options = cast(player.popWaitingFor(), OrOptions);
     expect(options.options).has.lengthOf(2);

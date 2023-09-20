@@ -1,17 +1,17 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board} from './Board';
-import {Player} from '../Player';
-import {ISpace} from './ISpace';
+import {Board, SpaceCosts} from './Board';
+import {IPlayer} from '../IPlayer';
+import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
-import {Random} from '../Random';
-import {GameOptions} from '../GameOptions';
-import {SpaceType} from '../../common/boards/SpaceType';
+import {Random} from '../../common/utils/Random';
+import {GameOptions} from '../game/GameOptions';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
 import {SpaceId} from '../../common/Types';
+import {MarsBoard} from './MarsBoard';
 
-export class VastitasBorealisBoard extends Board {
+export class VastitasBorealisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
@@ -49,28 +49,17 @@ export class VastitasBorealisBoard extends Board {
     return new VastitasBorealisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): VastitasBorealisBoard {
+  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): VastitasBorealisBoard {
     return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  private filterVastitasBorealis(player: Player, spaces: ReadonlyArray<ISpace>) {
-    return player.canAfford(VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {tr: {temperature: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
-  }
-
-  public override getSpaces(spaceType: SpaceType, player: Player): ReadonlyArray<ISpace> {
-    return this.filterVastitasBorealis(player, super.getSpaces(spaceType, player));
-  }
-
-  public override getAvailableSpacesForCity(player: Player): ReadonlyArray<ISpace> {
-    return this.filterVastitasBorealis(player, super.getAvailableSpacesForCity(player));
-  }
-
-  public override getAvailableSpacesOnLand(player: Player): ReadonlyArray<ISpace> {
-    return this.filterVastitasBorealis(player, super.getAvailableSpacesOnLand(player));
-  }
-
-  public override getAvailableSpacesForGreenery(player: Player): ReadonlyArray<ISpace> {
-    return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
+  public override spaceCosts(space: Space): SpaceCosts {
+    const costs = super.spaceCosts(space);
+    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {
+      costs.stock.megacredits = VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
+      costs.tr.oceans = 1;
+    }
+    return costs;
   }
 
   public override getVolcanicSpaceIds(): Array<SpaceId> {

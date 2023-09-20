@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -56,7 +56,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     });
   }
 
-  private getEligibleCards(player: Player) {
+  private getEligibleCards(player: IPlayer) {
     const cards = player.playedCards.filter((card) => card.type === CardType.ACTIVE);
     if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return cards;
@@ -70,12 +70,12 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.canAfford(3)) return true;
     return this.getEligibleCards(player).length > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const activeCards = this.getEligibleCards(player);
 
     const flipBlueCard = new SelectOption(
@@ -118,13 +118,13 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     return new OrOptions(drawBlueCard, flipBlueCard);
   }
 
-  private convertCardPointsToTR(player: Player, card: ICard) {
+  private convertCardPointsToTR(player: IPlayer, card: ICard) {
     const steps = card.getVictoryPoints(player);
     // TODO(kberg): this doesn't reduce VPs below 0. What to do?
     if (steps > 0) {
-      player.increaseTerraformRatingSteps(steps, {log: true});
+      player.increaseTerraformRating(steps, {log: true});
     } else if (steps < 0) {
-      player.decreaseTerraformRatingSteps(-steps, {log: true});
+      player.decreaseTerraformRating(-steps, {log: true});
     }
   }
 }

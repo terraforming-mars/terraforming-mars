@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
 import {Card} from '../Card';
@@ -43,7 +43,7 @@ export class Philares extends Card implements ICorporationCard {
     });
   }
 
-  private selectResources(philaresPlayer: Player, resourceCount: number): AndOptions {
+  private selectResources(philaresPlayer: IPlayer, resourceCount: number): AndOptions {
     let megacreditsAmount = 0;
     let steelAmount = 0;
     let titaniumAmount = 0;
@@ -88,12 +88,12 @@ export class Philares extends Card implements ICorporationCard {
         ) {
           throw new Error('Need to select ' + resourceCount + ' resource(s)');
         }
-        philaresPlayer.addResource(Resource.MEGACREDITS, megacreditsAmount, {log: true});
-        philaresPlayer.addResource(Resource.STEEL, steelAmount, {log: true});
-        philaresPlayer.addResource(Resource.TITANIUM, titaniumAmount, {log: true});
-        philaresPlayer.addResource(Resource.PLANTS, plantsAmount, {log: true});
-        philaresPlayer.addResource(Resource.ENERGY, energyAmount, {log: true});
-        philaresPlayer.addResource(Resource.HEAT, heatAmount, {log: true});
+        philaresPlayer.stock.add(Resource.MEGACREDITS, megacreditsAmount, {log: true});
+        philaresPlayer.stock.add(Resource.STEEL, steelAmount, {log: true});
+        philaresPlayer.stock.add(Resource.TITANIUM, titaniumAmount, {log: true});
+        philaresPlayer.stock.add(Resource.PLANTS, plantsAmount, {log: true});
+        philaresPlayer.stock.add(Resource.ENERGY, energyAmount, {log: true});
+        philaresPlayer.stock.add(Resource.HEAT, heatAmount, {log: true});
         return undefined;
       }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
     selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
@@ -101,7 +101,7 @@ export class Philares extends Card implements ICorporationCard {
     return selectResources;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
       return;

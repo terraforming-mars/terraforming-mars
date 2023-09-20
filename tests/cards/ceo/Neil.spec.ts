@@ -41,7 +41,7 @@ describe('Neil', function() {
 
 
   it('Takes action: Gains M€ production equal to lowest Moon rate', function() {
-    moonData.colonyRate = 5;
+    moonData.habitatRate = 5;
     moonData.logisticRate = 4;
     moonData.miningRate = 2;
 
@@ -50,7 +50,7 @@ describe('Neil', function() {
   });
 
   it('Takes action: Gains M€ production equal to lowest Moon rate, two rates the same', function() {
-    moonData.colonyRate = 5;
+    moonData.habitatRate = 5;
     moonData.logisticRate = 3;
     moonData.miningRate = 3;
 

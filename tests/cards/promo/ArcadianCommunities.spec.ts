@@ -4,13 +4,13 @@ import {testGame} from '../../TestGame';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
-import {Board} from '../../../src/server/boards/Board';
+import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('ArcadianCommunities', function() {
   let card: ArcadianCommunities;
   let player: TestPlayer;
-  let board: Board;
+  let board: MarsBoard;
 
   beforeEach(() => {
     card = new ArcadianCommunities();
@@ -21,7 +21,7 @@ describe('ArcadianCommunities', function() {
 
   it('initial action', () => {
     const action = cast(card.initialAction(player), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     expect(space.tile).is.undefined;
     expect(space.player).is.undefined;
 
@@ -44,7 +44,7 @@ describe('ArcadianCommunities', function() {
     initLands[0].player = player;
 
     const action = cast(card.action(player), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
 
     expect(space.tile).is.undefined;
     expect(space.player).is.undefined;
@@ -78,12 +78,12 @@ describe('ArcadianCommunities', function() {
 
     neighbor.player = player;
 
-    expect(cast(card.action(player), SelectSpace).availableSpaces).contains(first);
-    expect(cast(card.action(player), SelectSpace).availableSpaces).contains(second);
+    expect(cast(card.action(player), SelectSpace).spaces).contains(first);
+    expect(cast(card.action(player), SelectSpace).spaces).contains(second);
 
     first.player = player;
 
-    expect(cast(card.action(player), SelectSpace).availableSpaces).does.not.contain(first);
-    expect(cast(card.action(player), SelectSpace).availableSpaces).does.contain(second);
+    expect(cast(card.action(player), SelectSpace).spaces).does.not.contain(first);
+    expect(cast(card.action(player), SelectSpace).spaces).does.contain(second);
   });
 });

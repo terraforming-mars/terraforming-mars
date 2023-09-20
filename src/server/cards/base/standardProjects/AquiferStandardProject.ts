@@ -1,4 +1,4 @@
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
@@ -20,12 +20,20 @@ export class AquiferStandardProject extends StandardProjectCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canPayWith(player: IPlayer) {
+    if (player.isCorporation(CardName.KUIPER_COOPERATIVE)) {
+      return {kuiperAsteroids: true};
+    } else {
+      return {};
+    }
+  }
+
+  public override canAct(player: IPlayer): boolean {
     if (!player.game.canAddOcean()) return false;
     return super.canAct(player);
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     player.game.defer(new PlaceOceanTile(player));
   }
 }

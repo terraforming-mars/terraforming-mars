@@ -30,13 +30,20 @@ export interface Behavior {
   /** Select one of these actions */
   or?: OrBehavior;
 
-  /** Spend these resources before taking the action. */
+  /**
+   * Spend one of resources before taking the action.
+   *
+   * This is specifically designed to spend only one resource type.
+   */
   spend?: Partial<OneOfType<Spend>>;
 
   /** Gain or lose production */
   production?: Partial<CountableUnits>;
   /** Gain or lose stock */
   stock?: Partial<CountableUnits>;
+
+  /** Gain n standard resources */
+  standardResource?: number;
 
   /** Add resources to this card itself */
   addResources?: Countable;
@@ -170,6 +177,12 @@ export interface AddResource {
    * resources without realizing it. In other words, a true value is a break from the standard rules.
    */
   mustHaveCard?: boolean,
+
+  /** When > 0, only cards with at least `min` resources count. */
+  min?: number,
+
+  /** When true, include self-replicating robots cards. */
+  robotCards?: true,
 
   /** If true, if only one card matches, apply immediately without asking. */
   // WARNING: I don't think this is actually used.

@@ -1,5 +1,5 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Tradesman extends BaseMilestone {
   constructor() {
@@ -9,7 +9,7 @@ export class Tradesman extends BaseMilestone {
       3);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType));
     return nonStandardResources.size;
   }

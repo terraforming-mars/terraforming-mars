@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
@@ -28,16 +28,16 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
       },
     });
   }
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.energy > 0;
   }
-  public action(player: Player) {
+  public action(player: IPlayer) {
     return new SelectAmount(
       'Select amount of energy to spend',
       'Spend energy',
       (amount: number) => {
-        player.deductResource(Resource.ENERGY, amount);
-        player.addResource(Resource.MEGACREDITS, amount, {log: true});
+        player.stock.deduct(Resource.ENERGY, amount);
+        player.stock.add(Resource.MEGACREDITS, amount, {log: true});
         return undefined;
       },
       1,

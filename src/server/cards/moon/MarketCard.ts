@@ -2,11 +2,12 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
 import {newMessage} from '../../logs/MessageBuilder';
+import {PathfindersExpansion} from '../../../server/pathfinders/PathfindersExpansion';
 
 export interface Terms {
   from: number,
@@ -24,19 +25,19 @@ export abstract class MarketCard extends Card implements IActionCard {
     super(properties);
   }
 
-  private canBuy(player: Player) {
+  private canBuy(player: IPlayer) {
     return player.spendableMegacredits() >= this.buyingTerms.from;
   }
 
-  private canSell(player: Player) {
-    return player.getResource(this.tradeResource) >= this.sellingTerms.from;
+  private canSell(player: IPlayer) {
+    return player.stock.get(this.tradeResource) >= this.sellingTerms.from;
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return this.canBuy(player) || this.canSell(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const offerBuy = this.canBuy(player);
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
@@ -52,7 +53,7 @@ export abstract class MarketCard extends Card implements IActionCard {
     return undefined;
   }
 
-  private getBuyingOption(player: Player): SelectAmount {
+  private getBuyingOption(player: IPlayer): SelectAmount {
     const availableMC = player.spendableMegacredits();
     const terms = this.buyingTerms;
     let limit = Math.floor(availableMC / terms.from);
@@ -71,7 +72,7 @@ export abstract class MarketCard extends Card implements IActionCard {
             player,
             cashDue,
             {afterPay: () => {
-              player.addResource(this.tradeResource, unitsEarned, {log: true});
+              player.stock.add(this.tradeResource, unitsEarned, {log: true});
             }}));
 
         return undefined;
@@ -81,12 +82,12 @@ export abstract class MarketCard extends Card implements IActionCard {
     );
   }
 
-  private getSellingOption(player: Player) {
+  private getSellingOption(player: IPlayer) {
     const terms = this.sellingTerms;
     if (terms.from !== 1) {
       throw new Error('selling from !== 1 not yet supported.');
     }
-    let limit = player.getResource(this.tradeResource);
+    let limit = player.stock.get(this.tradeResource);
     limit = Math.min(limit, terms.limit);
 
     return new SelectAmount(
@@ -94,8 +95,9 @@ export abstract class MarketCard extends Card implements IActionCard {
       `Sell ${this.tradeResource}`,
       (unitsSold: number) => {
         const cashEarned = unitsSold * terms.to;
-        player.addResource(Resource.MEGACREDITS, cashEarned);
-        player.deductResource(this.tradeResource, unitsSold);
+        player.stock.add(Resource.MEGACREDITS, cashEarned);
+        player.stock.deduct(this.tradeResource, unitsSold);
+        PathfindersExpansion.addToSolBank(player);
 
         player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));
         return undefined;

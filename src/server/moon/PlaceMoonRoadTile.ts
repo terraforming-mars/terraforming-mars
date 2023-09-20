@@ -1,13 +1,13 @@
-import {ISpace} from '../boards/ISpace';
-import {Player} from '../Player';
+import {Space} from '../boards/Space';
+import {IPlayer} from '../IPlayer';
 import {BasePlaceMoonTile} from './BasePlaceMoonTile';
 import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
 export class PlaceMoonRoadTile extends BasePlaceMoonTile {
   constructor(
-    player: Player,
-    spaces?: Array<ISpace>,
+    player: IPlayer,
+    spaces?: Array<Space>,
     title = 'Select a space on The Moon for a road tile.',
   ) {
     super(player, spaces, title);
@@ -17,7 +17,7 @@ export class PlaceMoonRoadTile extends BasePlaceMoonTile {
     return moonData.moon.getAvailableSpacesOnLand(this.player);
   }
 
-  protected placeTile(space: ISpace) {
+  protected placeTile(space: Space) {
     MoonExpansion.addRoadTile(this.player, space.id);
     MoonExpansion.raiseLogisticRate(this.player);
     return undefined;

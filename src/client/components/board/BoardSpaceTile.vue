@@ -44,7 +44,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.RED_CITY]: 'red-city',
   [TileType.MARTIAN_NATURE_WONDERS]: 'martian-nature-wonders',
   [TileType.MOON_ROAD]: 'road',
-  [TileType.MOON_HABITAT]: 'colony',
+  [TileType.MOON_HABITAT]: 'habitat',
   [TileType.MOON_MINE]: 'mine',
   [TileType.LUNA_TRADE_STATION]: 'luna-trade-station',
   [TileType.LUNA_MINING_HUB]: 'luna-mining-hub',
@@ -65,6 +65,7 @@ const tileTypeToCssClassAresOverride = new Map<TileType, string>([
   [TileType.NATURAL_PRESERVE, 'natural-preserve-ares'],
   [TileType.NUCLEAR_ZONE, 'nuclear-zone-ares'],
   [TileType.RESTRICTED_AREA, 'restricted-area-ares'],
+  [TileType.MAGNETIC_FIELD_GENERATORS, 'magnetic-field-generators-ares'],
 ]);
 
 const descriptions: Record<TileType, string> = {

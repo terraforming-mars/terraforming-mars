@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
+import {IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -40,13 +40,16 @@ export class LakefrontResorts extends Card implements ICorporationCard {
     });
   }
 
-  // TODO(kberg): This requires an onDiscard.
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.oceanBonus = 3;
     return undefined;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public override onDiscard(player: IPlayer) {
+    player.oceanBonus = 2;
+  }
+
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
         new GainProduction(cardOwner, Resource.MEGACREDITS),

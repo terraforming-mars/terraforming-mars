@@ -31,7 +31,7 @@ import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
-import {DEFAULT_GAME_OPTIONS} from '../../../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../../src/server/game/GameOptions';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
@@ -83,7 +83,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(gyropolis, venusgov);
 
     const action = card.play(player);
-    expect(action).is.undefined; // Not enough energy production for gyropolis, no other building card to copy
+    cast(action, undefined); // Not enough energy production for gyropolis, no other building card to copy
 
     player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
@@ -97,7 +97,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(capital);
 
     const action = card.play(player);
-    expect(action).is.undefined; // Not enough energy production
+    cast(action, undefined); // Not enough energy production
 
     player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
@@ -112,7 +112,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(capitalAres);
 
     const action = card.play(player);
-    expect(action).is.undefined; // Not enough energy production
+    cast(action, undefined); // Not enough energy production
 
     player.production.add(Resource.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
@@ -159,16 +159,14 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(new SolarWindPower());
 
     expect(card.canPlay(player)).is.false;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should not work with Mars University (building tag, no production)', () => {
     player.playedCards.push(new MarsUniversity());
 
     expect(card.canPlay(player)).is.false;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should work with Research Network', () => {
@@ -236,7 +234,7 @@ describe('RoboticWorkforce', () => {
 
         // Set Moon rates.
         game.moonData!.miningRate = 3;
-        game.moonData!.colonyRate = 3;
+        game.moonData!.habitatRate = 3;
         game.moonData!.logisticRate = 3;
 
         // place some tiles
@@ -272,7 +270,7 @@ describe('RoboticWorkforce', () => {
           runNextAction(game);
           const waitingFor = player.popWaitingFor();
           if (waitingFor instanceof SelectSpace) {
-            waitingFor.cb(waitingFor.availableSpaces[0]);
+            waitingFor.cb(waitingFor.spaces[0]);
           }
         }
 

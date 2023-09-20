@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
@@ -36,14 +36,14 @@ export class Vitor extends Card implements ICorporationCard {
     });
   }
 
-  private selectAwardToFund(player: Player, award: IAward): SelectOption {
+  private selectAwardToFund(player: IPlayer, award: IAward): SelectOption {
     return new SelectOption('Fund ' + award.name + ' award', 'Confirm', () => {
       player.game.fundAward(player, award);
       return undefined;
     });
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     const game = player.game;
 
     // Awards are disabled for 1 player games
@@ -60,7 +60,7 @@ export class Vitor extends Card implements ICorporationCard {
     return freeAward;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (!player.isCorporation(this.name)) {
       return;
     }
@@ -73,6 +73,6 @@ export class Vitor extends Card implements ICorporationCard {
       if (victoryPoints.points <= 0) return;
     }
 
-    player.addResource(Resource.MEGACREDITS, 3, {log: true, from: this});
+    player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
   }
 }

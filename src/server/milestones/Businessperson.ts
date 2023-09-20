@@ -1,14 +1,15 @@
-import {BaseMilestone} from './IMilestone'; import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 
 export class Businessperson extends BaseMilestone {
   constructor() {
     super(
       'Businessperson',
-      'Have 6 Earth tags',
+      'Have 6 Earth tags in play',
       6);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.tags.count(Tag.EARTH, 'milestone');
   }
 }

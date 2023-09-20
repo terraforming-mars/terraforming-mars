@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -31,19 +31,19 @@ export class LawSuit extends Card implements IProjectCard {
     });
   }
 
-  private targets(player: Player) {
+  private targets(player: IPlayer) {
     return player.game.getPlayersById(player.removingPlayers);
   }
 
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     return this.targets(player).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
-    return new SelectPlayer(this.targets(player), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer: Player) => {
+  public override bespokePlay(player: IPlayer) {
+    return new SelectPlayer(this.targets(player), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer: IPlayer) => {
       const amount = Math.min(3, suedPlayer.megaCredits);
-      player.addResource(Resource.MEGACREDITS, amount);
-      suedPlayer.deductResource(Resource.MEGACREDITS, amount, {log: true, from: player, stealing: true});
+      player.stock.add(Resource.MEGACREDITS, amount);
+      suedPlayer.stock.deduct(Resource.MEGACREDITS, amount, {log: true, from: player, stealing: true});
       suedPlayer.playedCards.push(this);
       return undefined;
     });
@@ -52,7 +52,7 @@ export class LawSuit extends Card implements IProjectCard {
     return -1;
   }
 
-  public static resourceHook(player: Player, _resource: Resource, amount: number, from: Player) {
+  public static resourceHook(player: IPlayer, _resource: Resource, amount: number, from: IPlayer) {
     if (from === player || amount >= 0) {
       return;
     }

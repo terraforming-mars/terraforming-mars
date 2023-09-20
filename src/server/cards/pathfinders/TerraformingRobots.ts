@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -34,7 +34,7 @@ export class TerraformingRobots extends Card implements IProjectCard {
   }
 
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     const qty = player.tags.cardTagCount(card, Tag.MARS);
     player.addResourceTo(this, {log: true, qty});
   }

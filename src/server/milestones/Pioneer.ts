@@ -1,14 +1,14 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Pioneer extends BaseMilestone {
   constructor() {
     super(
       'Pioneer',
-      'Have built 3 colonies',
+      'Have 3 colonies',
       3);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.getColoniesCount();
   }
 }

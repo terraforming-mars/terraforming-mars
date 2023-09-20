@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -26,10 +26,10 @@ export class Apollo extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const moonSpacesCount = MoonExpansion.spaces(player.game, undefined, {surfaceOnly: true}).length;
-    player.addResource(Resource.MEGACREDITS, moonSpacesCount * 3, {log: true});
+    player.stock.add(Resource.MEGACREDITS, moonSpacesCount * 3, {log: true});
     return undefined;
   }
 }

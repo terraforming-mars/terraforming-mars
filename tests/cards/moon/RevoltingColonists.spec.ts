@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RevoltingColonists} from '../../../src/server/cards/moon/RevoltingColonists';
@@ -27,17 +27,17 @@ describe('RevoltingColonists', () => {
     player1.cardsInHand = [card];
     player1.megaCredits = card.cost;
 
-    moonData.colonyRate = 4;
+    moonData.habitatRate = 4;
     expect(player1.getPlayableCardsForTest()).does.include(card);
 
-    moonData.colonyRate = 3;
+    moonData.habitatRate = 3;
     expect(player1.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player1);
 
-    const assignTile = function(idx: number, player: Player) {
+    const assignTile = function(idx: number, player: IPlayer) {
       spaces[idx].tile = {tileType: TileType.MOON_HABITAT};
       spaces[idx].player = player;
     };

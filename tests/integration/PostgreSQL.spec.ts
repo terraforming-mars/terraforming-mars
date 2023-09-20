@@ -2,13 +2,14 @@ import * as dotenv from 'dotenv';
 import {expect} from 'chai';
 import {describeDatabaseSuite} from '../database/databaseSuite';
 import {ITestDatabase, Status} from '../database/ITestDatabase';
+import {IGame} from '../../src/server/IGame';
 import {Game} from '../../src/server/Game';
 import {PostgreSQL} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
 import {runAllActions} from '../TestingUtils';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {GameId} from '../../src/common/Types';
 import {QueryResult} from 'pg';
@@ -33,7 +34,7 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   }
 
   // Tests can wait for saveGamePromise since save() is called inside other methods.
-  public override async saveGame(game: Game): Promise<void> {
+  public override async saveGame(game: IGame): Promise<void> {
     this.lastSaveGamePromise = super.saveGame(game);
     this.promises.push(this.lastSaveGamePromise);
     return this.lastSaveGamePromise;
@@ -180,8 +181,8 @@ describeDatabaseSuite({
     it('test save id count with undo', async () => {
       // Set up a simple game.
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
+      const player2 = TestPlayer.RED.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player, player2], player, {draftVariant: false, undoOption: true});
       await db.awaitAllSaves();
 
@@ -201,7 +202,7 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with our own simple option, and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
         const simpleOption = new SelectOption('', '', () => undefined);
         p.setWaitingFor(simpleOption, () => {
@@ -255,8 +256,8 @@ describeDatabaseSuite({
 
     it('undo works in multiplayer, other players have passed', async () => {
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
+      const player2 = TestPlayer.RED.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player, player2], player2, {draftVariant: false, undoOption: true});
       await db.awaitAllSaves();
 
@@ -278,7 +279,7 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
         const simpleOption = new SelectOption('', '', () => {
           player.megaCredits++;
@@ -347,7 +348,7 @@ describeDatabaseSuite({
 
     it('undo works in solo', async () => {
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player], player, {undoOption: true});
       await db.awaitAllSaves();
 
@@ -359,7 +360,7 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
         const simpleOption = new SelectOption('', '', () => {
           player.megaCredits++;

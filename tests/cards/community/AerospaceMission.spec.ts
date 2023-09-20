@@ -61,7 +61,7 @@ describe('AerospaceMission', function() {
     expect(builtColonies[1].colonies.find((c) => c === player.id)).is.not.undefined;
 
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(player.megaCredits).eq(0);
   });

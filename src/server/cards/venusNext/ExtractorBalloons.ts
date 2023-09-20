@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -60,9 +60,9 @@ export class ExtractorBalloons extends Card implements IActionCard {
   public canAct(): boolean {
     return true;
   }
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const canAffordReds = player.canAfford(0, {tr: {venus: 1}});
+    const canAffordReds = player.canAfford({cost: 0, tr: {venus: 1}});
     if (this.resourceCount < 2 || venusMaxed || !canAffordReds) {
       player.addResourceTo(this, {log: true});
       return undefined;

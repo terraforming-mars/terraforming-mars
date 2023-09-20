@@ -65,7 +65,7 @@ describe('RareEarthElements', function() {
     player.playCard(landClaim);
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    expect(selectSpace.availableSpaces).includes(hazardSpace);
+    expect(selectSpace.spaces).includes(hazardSpace);
     selectSpace.cb(hazardSpace);
 
     player.playCard(card);

@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
 import {DeferredAction, Priority} from './DeferredAction';
 
@@ -9,7 +9,7 @@ export type Options = {
 
 export class GainStock extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public units: Units,
     public options: Options = {},
   ) {
@@ -20,7 +20,7 @@ export class GainStock extends DeferredAction {
   }
 
   public execute() {
-    this.player.addUnits(this.units, {log: this.options.log});
+    this.player.stock.addUnits(this.units, {log: this.options.log});
     this.options.cb?.();
     return undefined;
   }

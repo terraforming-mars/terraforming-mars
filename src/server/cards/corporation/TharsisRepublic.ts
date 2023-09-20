@@ -1,9 +1,9 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -46,7 +46,7 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isCitySpace(space)) {
       if (cardOwner.id === activePlayer.id) {
         cardOwner.game.defer(new GainResources(cardOwner, Resource.MEGACREDITS, {count: 3}));
@@ -61,7 +61,7 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     return;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) {
       // Get bonus for 2 neutral cities
       player.production.add(Resource.MEGACREDITS, 2);

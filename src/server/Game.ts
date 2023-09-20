@@ -15,7 +15,7 @@ import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awa
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
+import {Space} from './boards/Space';
 import {Tile} from './Tile';
 import {LogBuilder} from './logs/LogBuilder';
 import {LogHelper} from './LogHelper';
@@ -24,8 +24,9 @@ import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
+import {IPlayer} from './IPlayer';
 import {Player} from './Player';
-import {PlayerId, GameId, SpectatorId} from '../common/Types';
+import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
@@ -39,7 +40,6 @@ import {GainResources} from './deferredActions/GainResources';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceName} from './SpaceName';
-import {SpaceType} from '../common/boards/SpaceType';
 import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
@@ -52,7 +52,7 @@ import {AresSetup} from './ares/AresSetup';
 import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {SeededRandom} from './Random';
+import {SeededRandom} from '../common/utils/Random';
 import {chooseMilestonesAndAwards} from './ma/MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {MultiSet} from 'mnemonist';
@@ -62,21 +62,19 @@ import {PathfindersData} from './pathfinders/PathfindersData';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from './game/GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, dayStringToDays} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
+import {IGame, Score} from './IGame';
+import {MarsBoard} from './boards/MarsBoard';
 
-export interface Score {
-  corporation: String;
-  playerScore: number;
-}
-export class Game implements Logger {
+export class Game implements IGame, Logger {
   public readonly id: GameId;
   public readonly gameOptions: Readonly<GameOptions>;
-  private players: Array<Player>;
+  private players: Array<IPlayer>;
 
   // Game-level data
   public lastSaveId: number = 0;
@@ -97,7 +95,7 @@ export class Game implements Logger {
   public preludeDeck: PreludeDeck;
   public ceoDeck: CeoDeck;
   public corporationDeck: CorporationDeck;
-  public board: Board;
+  public board: MarsBoard;
 
   // Global parameters
   private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -111,7 +109,7 @@ export class Game implements Logger {
   private researchedPlayers = new Set<PlayerId>();
   private draftedPlayers = new Set<PlayerId>();
   // The first player of this generation.
-  private first: Player;
+  private first: IPlayer;
 
   // Drafting
   private draftRound: number = 1;
@@ -140,6 +138,12 @@ export class Game implements Logger {
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
   // Syndicate Pirate Raids
   public syndicatePirateRaider?: PlayerId;
+  // Gagarin Mobile Base
+  public gagarinBase: Array<SpaceId> = [];
+  // St. Joseph of Cupertino Mission
+  stJosephCathedrals: Array<SpaceId> = [];
+  // Mars Nomads
+  nomadSpace: SpaceId | undefined = undefined;
 
   // The set of tags available in this game.
   public readonly tags: ReadonlyArray<Tag>;
@@ -151,12 +155,12 @@ export class Game implements Logger {
 
   private constructor(
     id: GameId,
-    players: Array<Player>,
-    first: Player,
+    players: Array<IPlayer>,
+    first: IPlayer,
     activePlayer: PlayerId,
     gameOptions: GameOptions,
     rng: SeededRandom,
-    board: Board,
+    board: MarsBoard,
     projectDeck: ProjectDeck,
     corporationDeck: CorporationDeck,
     preludeDeck: PreludeDeck,
@@ -203,8 +207,8 @@ export class Game implements Logger {
   }
 
   public static newInstance(id: GameId,
-    players: Array<Player>,
-    firstPlayer: Player,
+    players: Array<IPlayer>,
+    firstPlayer: IPlayer,
     options: Partial<GameOptions> = {},
     seed = 0,
     spectatorId: SpectatorId | undefined = undefined): Game {
@@ -395,6 +399,9 @@ export class Game implements Logger {
       draftRound: this.draftRound,
       first: this.first.id,
       fundedAwards: serializeFundedAwards(this.fundedAwards),
+      gagarinBase: this.gagarinBase,
+      stJosephCathedrals: this.stJosephCathedrals,
+      nomadSpace: this.nomadSpace,
       gameAge: this.gameAge,
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
@@ -444,7 +451,7 @@ export class Game implements Logger {
   }
 
   // Function to retrieve a player by it's id
-  public getPlayerById(id: PlayerId): Player {
+  public getPlayerById(id: PlayerId): IPlayer {
     const player = this.players.find((p) => p.id === id);
     if (player === undefined) {
       throw new Error(`player ${id} does not exist on game ${this.id}`);
@@ -453,7 +460,7 @@ export class Game implements Logger {
   }
 
   // Function to return an array of players from an array of player ids
-  public getPlayersById(ids: Array<PlayerId>): Array<Player> {
+  public getPlayersById(ids: Array<PlayerId>): Array<IPlayer> {
     return ids.map((id) => this.getPlayerById(id));
   }
 
@@ -480,7 +487,7 @@ export class Game implements Logger {
     MoonExpansion.ifMoon(this, (moonData) => {
       if (this.gameOptions.requiresMoonTrackCompletion) {
         const moonMaxed =
-          moonData.colonyRate === constants.MAXIMUM_HABITAT_RATE &&
+          moonData.habitatRate === constants.MAXIMUM_HABITAT_RATE &&
           moonData.miningRate === constants.MAXIMUM_MINING_RATE &&
           moonData.logisticRate === constants.MAXIMUM_LOGISTICS_RATE;
         globalParametersMaxed = globalParametersMaxed && moonMaxed;
@@ -539,7 +546,7 @@ export class Game implements Logger {
     return 8 + (6 * this.fundedAwards.length);
   }
 
-  public fundAward(player: Player, award: IAward): void {
+  public fundAward(player: IPlayer, award: IAward): void {
     if (this.allAwardsFunded()) {
       throw new Error('All awards already funded');
     }
@@ -575,7 +582,7 @@ export class Game implements Logger {
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
-  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard): void {
+  private playerHasPickedCorporationCard(player: IPlayer, corporationCard: ICorporationCard): void {
     player.pickedCorporationCard = corporationCard;
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
       for (const somePlayer of this.getPlayersInGenerationOrder()) {
@@ -587,14 +594,14 @@ export class Game implements Logger {
     }
   }
 
-  private selectInitialCards(player: Player): PlayerInput {
+  private selectInitialCards(player: IPlayer): PlayerInput {
     return new SelectInitialCards(player, (corporation: ICorporationCard) => {
       this.playerHasPickedCorporationCard(player, corporation);
       return undefined;
     });
   }
 
-  public hasPassedThisActionPhase(player: Player): boolean {
+  public hasPassedThisActionPhase(player: IPlayer): boolean {
     return this.passedPlayers.has(player.id);
   }
 
@@ -609,7 +616,7 @@ export class Game implements Logger {
   }
 
   // Only used in the prelude The New Space Race.
-  public overrideFirstPlayer(newFirstPlayer: Player): void {
+  public overrideFirstPlayer(newFirstPlayer: IPlayer): void {
     if (newFirstPlayer.game.id !== this.id) {
       throw new Error(`player ${newFirstPlayer.id} is not part of this game`);
     }
@@ -659,7 +666,7 @@ export class Game implements Logger {
     });
   }
 
-  private gotoDraftingPhase(): void {
+  private gotoDraftPhase(): void {
     this.phase = Phase.DRAFTING;
     this.draftRound = 1;
     this.runDraftRound();
@@ -685,7 +692,14 @@ export class Game implements Logger {
       player.colonies.cardDiscount = 0; // Iapetus reset hook
       player.runProductionPhase();
     });
+    this.postProductionPhase();
+  }
 
+  private postProductionPhase(): void {
+    if (this.deferredActions.length > 0) {
+      this.deferredActions.runAll(() => this.postProductionPhase());
+      return;
+    }
     if (this.gameIsOver()) {
       this.log('Final greenery placement', (b) => b.forNewGeneration());
       this.takeNextFinalGreeneryAction();
@@ -753,7 +767,7 @@ export class Game implements Logger {
     });
 
     if (this.gameOptions.draftVariant) {
-      this.gotoDraftingPhase();
+      this.gotoDraftPhase();
     } else {
       this.gotoResearchPhase();
     }
@@ -777,15 +791,15 @@ export class Game implements Logger {
     return true;
   }
 
-  public playerHasPassed(player: Player): void {
+  public playerHasPassed(player: IPlayer): void {
     this.passedPlayers.add(player.id);
   }
 
-  public hasResearched(player: Player): boolean {
+  public hasResearched(player: IPlayer): boolean {
     return this.researchedPlayers.has(player.id);
   }
 
-  private hasDrafted(player: Player): boolean {
+  private hasDrafted(player: IPlayer): boolean {
     return this.draftedPlayers.has(player.id);
   }
 
@@ -807,7 +821,7 @@ export class Game implements Logger {
     return true;
   }
 
-  public playerIsFinishedWithResearchPhase(player: Player): void {
+  public playerIsFinishedWithResearchPhase(player: IPlayer): void {
     this.deferredActions.runAllFor(player, () => {
       this.researchedPlayers.add(player.id);
       if (this.allPlayersHaveFinishedResearch()) {
@@ -819,7 +833,7 @@ export class Game implements Logger {
     });
   }
 
-  public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
+  public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: IPlayer, cards : Array<IProjectCard>): void {
     this.draftedPlayers.add(player.id);
     this.unDraftedCards.set(player.id, cards);
 
@@ -872,7 +886,7 @@ export class Game implements Logger {
     }
   }
 
-  private getDraftCardsFrom(player: Player): Player {
+  private getDraftCardsFrom(player: IPlayer): IPlayer {
     // Special-case for the initial draft direction on second iteration
     if (this.generation === 1 && this.initialDraftIteration === 2) {
       return this.getPlayerBefore(player);
@@ -881,7 +895,7 @@ export class Game implements Logger {
     return this.generation % 2 === 0 ? this.getPlayerBefore(player) : this.getPlayerAfter(player);
   }
 
-  private giveDraftCardsTo(player: Player): Player {
+  private giveDraftCardsTo(player: IPlayer): IPlayer {
     // Special-case for the initial draft direction on second iteration
     if (this.initialDraftIteration === 2 && this.generation === 1) {
       return this.getPlayerAfter(player);
@@ -890,7 +904,7 @@ export class Game implements Logger {
     return this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
   }
 
-  private getPlayerBefore(player: Player): Player {
+  private getPlayerBefore(player: IPlayer): IPlayer {
     const playerIndex = this.players.indexOf(player);
     if (playerIndex === -1) {
       throw new Error(`Player ${player.id} not in game ${this.id}`);
@@ -900,7 +914,7 @@ export class Game implements Logger {
     return this.players[(playerIndex === 0) ? this.players.length - 1 : playerIndex - 1];
   }
 
-  private getPlayerAfter(player: Player): Player {
+  private getPlayerAfter(player: IPlayer): IPlayer {
     const playerIndex = this.players.indexOf(player);
 
     if (playerIndex === -1) {
@@ -963,14 +977,14 @@ export class Game implements Logger {
   }
 
   // Part of final greenery placement.
-  public canPlaceGreenery(player: Player): boolean {
+  public canPlaceGreenery(player: IPlayer): boolean {
     return !this.donePlayers.has(player.id) &&
             player.plants >= player.plantsNeededForGreenery &&
             this.board.getAvailableSpacesForGreenery(player).length > 0;
   }
 
   // Called when a player cannot or chose not to place any more greeneries.
-  public playerIsDoneWithGame(player: Player): void {
+  public playerIsDoneWithGame(player: IPlayer): void {
     this.donePlayers.add(player.id);
     // Go back in to find someone else to play final greeneries.
     this.takeNextFinalGreeneryAction();
@@ -1008,14 +1022,14 @@ export class Game implements Logger {
     this.gotoEndGame();
   }
 
-  private startActionsForPlayer(player: Player) {
+  private startActionsForPlayer(player: IPlayer) {
     this.activePlayer = player.id;
     player.actionsTakenThisRound = 0;
 
     player.takeAction();
   }
 
-  public increaseOxygenLevel(player: Player, increments: -2 | -1 | 1 | 2): void {
+  public increaseOxygenLevel(player: IPlayer, increments: -2 | -1 | 1 | 2): void {
     if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
       return undefined;
     }
@@ -1031,7 +1045,7 @@ export class Game implements Logger {
 
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OXYGEN, steps);
-      player.increaseTerraformRatingSteps(steps);
+      player.increaseTerraformRating(steps);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
       this.increaseTemperature(player, 1);
@@ -1048,7 +1062,7 @@ export class Game implements Logger {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): number {
+  public increaseVenusScaleLevel(player: IPlayer, increments: -1 | 1 | 2 | 3): number {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
       return 0;
     }
@@ -1082,7 +1096,7 @@ export class Game implements Logger {
         }
       }
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
-      player.increaseTerraformRatingSteps(steps);
+      player.increaseTerraformRating(steps);
     }
 
     // Check for Aphrodite corporation
@@ -1100,7 +1114,7 @@ export class Game implements Logger {
     return this.venusScaleLevel;
   }
 
-  public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
+  public increaseTemperature(player: IPlayer, increments: -2 | -1 | 1 | 2 | 3): undefined {
     if (this.temperature >= constants.MAX_TEMPERATURE) {
       return undefined;
     }
@@ -1122,8 +1136,9 @@ export class Game implements Logger {
         player.production.add(Resource.HEAT, 1, {log: true});
       }
 
+      player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter.TEMPERATURE, steps));
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
-      player.increaseTerraformRatingSteps(steps);
+      player.increaseTerraformRating(steps);
     }
 
     // BONUS FOR OCEAN TILE AT 0
@@ -1156,38 +1171,11 @@ export class Game implements Logger {
     return passedPlayersColors;
   }
 
-  public getCitiesOffMarsCount(player?: Player): number {
-    return this.getCitiesCount(player, (space) => space.spaceType === SpaceType.COLONY);
-  }
-
-  public getCitiesOnMarsCount(player?: Player): number {
-    return this.getCitiesCount(player, (space) => space.spaceType !== SpaceType.COLONY);
-  }
-
-  public getCitiesCount(player?: Player, filter?: (space: ISpace) => boolean): number {
-    let cities = this.board.spaces.filter(Board.isCitySpace);
-    if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
-    if (filter) cities = cities.filter(filter);
-    return cities.length;
-  }
-
-  public getGreeneriesCount(player?: Player): number {
-    let greeneries = this.board.spaces.filter((space) => Board.isGreenerySpace(space));
-    if (player !== undefined) greeneries = greeneries.filter(Board.ownedBy(player));
-    return greeneries.length;
-  }
-
-  public getSpaceCount(tileType: TileType, player: Player): number {
-    return this.board.spaces.filter(Board.ownedBy(player))
-      .filter((space) => space.tile?.tileType === tileType)
-      .length;
-  }
-
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
   public addTile(
-    player: Player,
-    space: ISpace,
+    player: IPlayer,
+    space: Space,
     tile: Tile): void {
     // Part 1, basic validation checks.
 
@@ -1273,7 +1261,7 @@ export class Game implements Logger {
     });
   }
 
-  public simpleAddTile(player: Player, space: ISpace, tile: Tile) {
+  public simpleAddTile(player: IPlayer, space: Space, tile: Tile) {
     space.tile = tile;
     space.player = player;
     if (tile.tileType === TileType.OCEAN || tile.tileType === TileType.MARTIAN_NATURE_WONDERS) {
@@ -1282,29 +1270,29 @@ export class Game implements Logger {
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
-  public grantSpaceBonuses(player: Player, space: ISpace) {
+  public grantSpaceBonuses(player: IPlayer, space: Space) {
     const bonuses = MultiSet.from(space.bonus);
     bonuses.forEachMultiplicity((count: number, bonus: SpaceBonus) => {
       this.grantSpaceBonus(player, bonus, count);
     });
   }
 
-  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
+  public grantSpaceBonus(player: IPlayer, spaceBonus: SpaceBonus, count: number = 1) {
     switch (spaceBonus) {
     case SpaceBonus.DRAW_CARD:
       player.drawCard(count);
       break;
     case SpaceBonus.PLANT:
-      player.addResource(Resource.PLANTS, count, {log: true});
+      player.stock.add(Resource.PLANTS, count, {log: true});
       break;
     case SpaceBonus.STEEL:
-      player.addResource(Resource.STEEL, count, {log: true});
+      player.stock.add(Resource.STEEL, count, {log: true});
       break;
     case SpaceBonus.TITANIUM:
-      player.addResource(Resource.TITANIUM, count, {log: true});
+      player.stock.add(Resource.TITANIUM, count, {log: true});
       break;
     case SpaceBonus.HEAT:
-      player.addResource(Resource.HEAT, count, {log: true});
+      player.stock.add(Resource.HEAT, count, {log: true});
       break;
     case SpaceBonus.OCEAN:
       // ignore
@@ -1334,7 +1322,7 @@ export class Game implements Logger {
       }
       break;
     case SpaceBonus.ENERGY:
-      player.addResource(Resource.ENERGY, count, {log: true});
+      player.stock.add(Resource.ENERGY, count, {log: true});
       break;
     case SpaceBonus.ASTEROID:
       this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));
@@ -1345,7 +1333,7 @@ export class Game implements Logger {
   }
 
   public addGreenery(
-    player: Player, space: ISpace,
+    player: IPlayer, space: Space,
     shouldRaiseOxygen: boolean = true): undefined {
     this.addTile(player, space, {
       tileType: TileType.GREENERY,
@@ -1358,7 +1346,7 @@ export class Game implements Logger {
   }
 
   public addCity(
-    player: Player, space: ISpace,
+    player: IPlayer, space: Space,
     cardName: CardName | undefined = undefined): void {
     this.addTile(player, space, {
       tileType: TileType.CITY,
@@ -1367,15 +1355,15 @@ export class Game implements Logger {
   }
 
   public canAddOcean(): boolean {
-    return this.board.getOceanCount() < constants.MAX_OCEAN_TILES;
+    return this.board.getOceanSpaces().length < constants.MAX_OCEAN_TILES;
   }
 
   public canRemoveOcean(): boolean {
-    const count = this.board.getOceanCount();
+    const count = this.board.getOceanSpaces().length;
     return count > 0 && count < constants.MAX_OCEAN_TILES;
   }
 
-  public addOcean(player: Player, space: ISpace): void {
+  public addOcean(player: IPlayer, space: Space): void {
     if (this.canAddOcean() === false) return;
 
     this.addTile(player, space, {
@@ -1390,19 +1378,19 @@ export class Game implements Logger {
     });
   }
 
-  public removeTile(spaceId: string): void {
+  public removeTile(spaceId: SpaceId): void {
     const space = this.board.getSpace(spaceId);
     space.tile = undefined;
     space.player = undefined;
   }
 
-  public getPlayers(): ReadonlyArray<Player> {
+  public getPlayers(): ReadonlyArray<IPlayer> {
     return this.players;
   }
 
   // Players returned in play order starting with first player this generation.
-  public getPlayersInGenerationOrder(): Array<Player> {
-    const ret: Array<Player> = [];
+  public getPlayersInGenerationOrder(): ReadonlyArray<IPlayer> {
+    const ret: Array<IPlayer> = [];
     let insertIdx = 0;
     for (const p of this.players) {
       if (p.id === this.first.id || insertIdx > 0) {
@@ -1418,7 +1406,7 @@ export class Game implements Logger {
   /**
    * Returns the Player holding this card, or throws.
    */
-  public getCardPlayerOrThrow(name: CardName): Player {
+  public getCardPlayerOrThrow(name: CardName): IPlayer {
     const player = this.getCardPlayerOrUndefined(name);
     if (player === undefined) {
       throw new Error(`No player has played ${name}`);
@@ -1429,7 +1417,7 @@ export class Game implements Logger {
   /**
    * Returns the Player holding this card, or throws.
    */
-  public getCardPlayerOrUndefined(name: CardName): Player | undefined {
+  public getCardPlayerOrUndefined(name: CardName): IPlayer | undefined {
     for (const player of this.players) {
       for (const card of player.tableau) {
         if (card.name === name) {
@@ -1441,7 +1429,7 @@ export class Game implements Logger {
   }
 
   // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
-  public getCardHolder(name: CardName): [Player | undefined, IProjectCard | undefined] {
+  public getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined] {
     for (const player of this.players) {
       // Check cards player has in hand
       for (const card of [...player.preludeCardsInHand, ...player.cardsInHand]) {
@@ -1453,15 +1441,15 @@ export class Game implements Logger {
     return [undefined, undefined];
   }
 
-  public getCardsInHandByResource(player: Player, resourceType: CardResource) {
+  public getCardsInHandByResource(player: IPlayer, resourceType: CardResource) {
     return player.cardsInHand.filter((card) => card.resourceType === resourceType);
   }
 
-  public getCardsInHandByType(player: Player, cardType: CardType) {
+  public getCardsInHandByType(player: IPlayer, cardType: CardType) {
     return player.cardsInHand.filter((card) => card.type === cardType);
   }
 
-  public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: Player}) {
+  public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}) {
     const builder = new LogBuilder(message);
     f?.(builder);
     const logMessage = builder.build();
@@ -1625,6 +1613,10 @@ export class Game implements Logger {
     game.initialDraftIteration = d.initialDraftIteration;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
+    game.gagarinBase = d.gagarinBase;
+    // TODO(kberg): remove ?? [] by 2023-11-01
+    game.stJosephCathedrals = d.stJosephCathedrals ?? [];
+    game.nomadSpace = d.nomadSpace;
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
 

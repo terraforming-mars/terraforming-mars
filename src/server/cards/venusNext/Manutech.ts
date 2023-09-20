@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
@@ -35,9 +35,9 @@ export class Manutech extends Card implements ICorporationCard {
     });
   }
 
-  public static onProductionGain(player: Player, resource: Resource, amount: number) {
+  public static onProductionGain(player: IPlayer, resource: Resource, amount: number) {
     if (amount > 0) {
-      player.addResource(resource, amount);
+      player.stock.add(resource, amount);
     }
   }
 }

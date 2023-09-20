@@ -3,12 +3,13 @@ import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
-import {Player} from '../Player';
-import {Random} from '../Random';
-import {GameOptions} from '../GameOptions';
+import {IPlayer} from '../IPlayer';
+import {Random} from '../../common/utils/Random';
+import {GameOptions} from '../game/GameOptions';
 import {SpaceId} from '../../common/Types';
+import {MarsBoard} from './MarsBoard';
 
-export class ElysiumBoard extends Board {
+export class ElysiumBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
@@ -43,7 +44,7 @@ export class ElysiumBoard extends Board {
     return new ElysiumBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): ElysiumBoard {
+  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): ElysiumBoard {
     return new ElysiumBoard(Board.deserializeSpaces(board.spaces, players));
   }
 

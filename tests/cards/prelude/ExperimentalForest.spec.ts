@@ -14,7 +14,7 @@ describe('ExperimentalForest', function() {
     // Select Greenery space
     const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
 
-    expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
+    expect(selectSpace.cb(selectSpace.spaces[0])).is.undefined;
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.PLANT))).has.lengthOf(2);
   });

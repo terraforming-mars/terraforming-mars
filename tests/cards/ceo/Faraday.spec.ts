@@ -32,7 +32,7 @@ describe('Faraday', function() {
 
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
@@ -43,7 +43,7 @@ describe('Faraday', function() {
 
     // 4 tags: Not sufficient
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     // 5 tags: Draw a card with a Science tag
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
@@ -74,7 +74,7 @@ describe('Faraday', function() {
 
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(1);
   });
@@ -161,7 +161,7 @@ describe('Faraday', function() {
 
     player.playCard(fakeCard({tags: [Tag.CLONE]}));
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     expect(player.cardsInHand).has.length(0);
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });

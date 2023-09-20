@@ -2,7 +2,7 @@ import * as constants from '../../common/constants';
 import {IProjectCard} from '../cards/IProjectCard';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {Resource} from '../../common/Resource';
 import {SpaceType} from '../../common/boards/SpaceType';
@@ -21,7 +21,7 @@ import {TRSource} from '../../common/cards/TRSource';
 export class TurmoilHandler {
   private constructor() {}
 
-  public static addPlayerAction(player: Player, options: PlayerInput[]): void {
+  public static addPlayerAction(player: IPlayer, options: PlayerInput[]): void {
     // Turmoil Scientists action
     if (PartyHooks.shouldApplyPolicy(player, PartyName.SCIENTISTS)) {
       const scientistsPolicy = SCIENTISTS_POLICY_1;
@@ -143,7 +143,7 @@ export class TurmoilHandler {
     }
   }
 
-  public static applyOnCardPlayedEffect(player: Player, selectedCard: IProjectCard): void {
+  public static applyOnCardPlayedEffect(player: IPlayer, selectedCard: IProjectCard): void {
     // PoliticalAgendas Greens P3 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp03')) {
       const policy = GREENS_POLICY_3;
@@ -157,7 +157,7 @@ export class TurmoilHandler {
     }
   }
 
-  public static resolveTilePlacementCosts(player: Player): void {
+  public static resolveTilePlacementCosts(player: IPlayer): void {
     // PoliticalAgendas Reds P2 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp02')) {
       const redsPolicy = REDS_POLICY_2;
@@ -165,7 +165,7 @@ export class TurmoilHandler {
     }
   }
 
-  public static resolveTilePlacementBonuses(player: Player, spaceType: SpaceType): void {
+  public static resolveTilePlacementBonuses(player: IPlayer, spaceType: SpaceType): void {
     PartyHooks.applyMarsFirstRulingPolicy(player, spaceType);
 
     // PoliticalAgendas Greens P2 hook
@@ -181,11 +181,11 @@ export class TurmoilHandler {
     }
   }
 
-  public static onGlobalParameterIncrease(player: Player, parameter: GlobalParameter, steps: number = 1): void {
+  public static onGlobalParameterIncrease(player: IPlayer, parameter: GlobalParameter, steps: number = 1): void {
     if (parameter === GlobalParameter.TEMPERATURE) {
       // PoliticalAgendas Kelvinists P2 hook
       if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, 'kp02')) {
-        player.addResource(Resource.MEGACREDITS, steps * 3);
+        player.stock.add(Resource.MEGACREDITS, steps * 3);
       }
     }
 
@@ -202,7 +202,7 @@ export class TurmoilHandler {
 
   // TODO(kberg): Add a test where if you raise oxygen to max temperature but temperature is maxed you do not have to pay for it.
   // It works, but4 a test would be helpful.
-  public static computeTerraformRatingBump(player: Player, inputTr: TRSource | DynamicTRSource = {}): number {
+  public static computeTerraformRatingBump(player: IPlayer, inputTr: TRSource | DynamicTRSource = {}): number {
     if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) return 0;
 
     let tr = inputTr instanceof Function ? inputTr(player) : inputTr;
@@ -230,7 +230,7 @@ export class TurmoilHandler {
     }
 
     if (tr.oceans !== undefined) {
-      const availableSteps = constants.MAX_OCEAN_TILES - player.game.board.getOceanCount();
+      const availableSteps = constants.MAX_OCEAN_TILES - player.game.board.getOceanSpaces().length;
       const steps = Math.min(availableSteps, tr.oceans);
       total = total + steps;
     }
@@ -246,7 +246,7 @@ export class TurmoilHandler {
 
     MoonExpansion.ifMoon(player.game, (moonData) => {
       if (tr.moonHabitat !== undefined) {
-        const availableSteps = constants.MAXIMUM_HABITAT_RATE - moonData.colonyRate;
+        const availableSteps = constants.MAXIMUM_HABITAT_RATE - moonData.habitatRate;
         total = total + Math.min(availableSteps, tr.moonHabitat);
       }
 

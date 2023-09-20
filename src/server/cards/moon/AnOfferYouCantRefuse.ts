@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerId} from '../../../common/Types';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -8,7 +8,7 @@ import {Delegate, Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {IParty} from '../../turmoil/parties/IParty';
 import {all} from '../Options';
 import {newMessage} from '../../logs/MessageBuilder';
@@ -30,7 +30,7 @@ export class AnOfferYouCantRefuse extends Card {
     });
   }
 
-  private isReplaceableDelegate(delegate: Delegate, player: Player, party: IParty): delegate is PlayerId {
+  private isReplaceableDelegate(delegate: Delegate, player: IPlayer, party: IParty): delegate is PlayerId {
     if (delegate === player.id || delegate === 'NEUTRAL') {
       return false;
     }
@@ -73,7 +73,7 @@ export class AnOfferYouCantRefuse extends Card {
   }
 
   // You can play this if you have an available delegate, and if you can swap with a non-neutral delegate without changing the party leader
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
     if (!turmoil.hasDelegatesInReserve(player.id)) {
       return false;
@@ -89,7 +89,7 @@ export class AnOfferYouCantRefuse extends Card {
     return false;
   }
 
-  private moveToAnotherParty(game: Game, from: PartyName, delegate: PlayerId): OrOptions {
+  private moveToAnotherParty(game: IGame, from: PartyName, delegate: PlayerId): OrOptions {
     const orOptions = new OrOptions();
     const turmoil = Turmoil.getTurmoil(game);
 
@@ -110,7 +110,7 @@ export class AnOfferYouCantRefuse extends Card {
     return orOptions;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
     const orOptions = new OrOptions();
@@ -121,7 +121,8 @@ export class AnOfferYouCantRefuse extends Card {
           continue;
         }
 
-        const option = new SelectOption(newMessage('${0} / ${1}', (b) => b.party(party).playerId(delegate)), 'Select', () => {
+        const color = game.getPlayerById(delegate).color;
+        const option = new SelectOption(newMessage('${0} / ${1}', (b) => b.party(party).playerColor(color)), 'Select', () => {
           turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
           turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
           return this.moveToAnotherParty(game, party.name, player.id);

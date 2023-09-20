@@ -5,7 +5,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
-import {DATA_VALUE, SEED_VALUE} from '@/common/constants';
+import {DATA_VALUE, GRAPHENE_VALUE, SEED_VALUE} from '@/common/constants';
 import {CardResource} from '@/common/CardResource';
 import {getCard} from '../cards/ClientCardManifest';
 import {PAYMENT_KEYS, PaymentKey} from '@/common/inputs/Payment';
@@ -20,18 +20,23 @@ export interface SelectPaymentModel {
     microbes: number; // Microbes are not actually used in this component. It's just to satisfy the mixin.
     floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
-    science?: number; // Science isn't used in this component, but it simplifies testing.
+    lunaArchivesScience?: number; // Luna Archives Science isn't used in this component, but it simplifies testing.
+    spireScience?: number;
     seeds?: number;
     auroraiData?: number;
+    graphene?: number; // Graphene isn't used in this component, but it simplifies testing.
+    kuiperAsteroids: number;
 }
 
 export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
   cardName: CardName;
   card: CardModel;
+  reserveUnits: Units;
   cards: Array<CardModel>;
   tags: Array<Tag>
-  science: number;
+  lunaArchivesScience: number;
   seeds: number;
+  graphene: number;
   available: Units;
 }
 
@@ -84,6 +89,10 @@ export const PaymentWidgetMixin = {
         return SEED_VALUE;
       case 'auroraiData':
         return DATA_VALUE;
+      case 'graphene':
+        return GRAPHENE_VALUE;
+      case 'spireScience':
+        return 2;
       default:
         return 1;
       }
@@ -170,9 +179,12 @@ export const PaymentWidgetMixin = {
 
       case 'floaters':
       case 'microbes':
-      case 'science':
+      case 'lunaArchivesScience':
+      case 'spireScience':
       case 'seeds':
       case 'auroraiData':
+      case 'graphene':
+      case 'kuiperAsteroids':
         amount = model.playerinput[target];
         break;
       }

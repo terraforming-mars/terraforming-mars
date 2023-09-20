@@ -3,7 +3,7 @@ import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
@@ -42,8 +42,8 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
     return this.resourceCount > 0;
   }
 
-  public action(player: Player) {
-    player.addResource(Resource.MEGACREDITS, Math.min(5, this.resourceCount--));
+  public action(player: IPlayer) {
+    player.stock.add(Resource.MEGACREDITS, Math.min(5, this.resourceCount--));
     return undefined;
   }
 }

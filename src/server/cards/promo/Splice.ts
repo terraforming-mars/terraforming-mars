@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -49,15 +49,15 @@ export class Splice extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     return this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     return this._onCardPlayed(player, card);
   }
 
-  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): OrOptions | undefined {
+  private _onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): OrOptions | undefined {
     if (card.tags.includes(Tag.MICROBE) === false) {
       return undefined;
     }
@@ -74,18 +74,18 @@ export class Splice extends Card implements ICorporationCard {
       newMessage('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
       'Gain M€',
       () => {
-        player.addResource(Resource.MEGACREDITS, megacreditsGain, {log: true});
+        player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
         return undefined;
       });
 
     // Splice owner get 2M€ per microbe tag
-    player.game.getCardPlayerOrThrow(this.name).addResource(Resource.MEGACREDITS, megacreditsGain, {log: true});
+    player.game.getCardPlayerOrThrow(this.name).stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
 
     // Card player choose between 2 M€ and a microbe on card, if possible
     if (card.resourceType === CardResource.MICROBE) {
       return new OrOptions(addResource, getMegacredits);
     } else {
-      player.addResource(Resource.MEGACREDITS, megacreditsGain, {log: true});
+      player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
       return undefined;
     }
   }

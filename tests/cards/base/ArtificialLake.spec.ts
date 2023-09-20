@@ -28,12 +28,12 @@ describe('ArtificialLake', function() {
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.availableSpaces.forEach((space) => {
+    action.spaces.forEach((space) => {
       expect(space.spaceType).to.eq(SpaceType.LAND);
     });
 
-    action.cb(action!.availableSpaces[0]);
-    const placedTile = action.availableSpaces[0].tile;
+    action.cb(action!.spaces[0]);
+    const placedTile = action.spaces[0].tile;
     expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
@@ -45,7 +45,7 @@ describe('ArtificialLake', function() {
 
     // Set oceans count to the max value
     for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
-      if (game.board.getOceanCount() < constants.MAX_OCEAN_TILES) {
+      if (game.board.getOceanSpaces().length < constants.MAX_OCEAN_TILES) {
         game.addOcean(player, space);
       }
     }
@@ -54,8 +54,7 @@ describe('ArtificialLake', function() {
     expect(player.simpleCanPlay(card)).is.true;
 
     // ...but an action to place ocean is not unavailable
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Cannot place ocean if all land spaces are occupied', function() {

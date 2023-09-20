@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../requirements/CardRequirements';
-import {Size} from '../../../common/cards/render/Size';
 
 export class LuxuryEstate extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +22,7 @@ export class LuxuryEstate extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf21',
         renderData: CardRenderer.builder((b) => {
-          b.titanium(1).slash().city().plus().greenery(Size.MEDIUM, false);
+          b.titanium(1).slash().city().plus().greenery({withO2: false});
         }),
         description: 'Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.',
       },

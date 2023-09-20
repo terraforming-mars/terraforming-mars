@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {GlobalParameterRequirement} from './GlobalParameterRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 import {RequirementType} from '../../../common/cards/RequirementType';
@@ -7,7 +7,7 @@ import {Options} from './CardRequirement';
 
 export class TemperatureRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.TEMPERATURE;
-  protected readonly parameter = GlobalParameter.OCEANS;
+  protected readonly parameter = GlobalParameter.TEMPERATURE;
   protected override readonly scale = 2;
 
   constructor(amount: number, options?: Options) {
@@ -20,7 +20,7 @@ export class TemperatureRequirement extends GlobalParameterRequirement {
     super(amount, options);
   }
 
-  public getGlobalValue(player: Player) {
+  public getGlobalValue(player: IPlayer) {
     return player.game.getTemperature();
   }
 }

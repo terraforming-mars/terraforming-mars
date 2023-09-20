@@ -19,6 +19,10 @@ export type _Countable = {
   greeneries?: NoAttributes,
   oceans?: NoAttributes,
   resourcesHere?: NoAttributes,
+  floaters?: NoAttributes,
+  colonies?: {
+    colonies?: {},
+  }
   moon?: {
     habitatRate?: NoAttributes,
     miningRate?: NoAttributes,

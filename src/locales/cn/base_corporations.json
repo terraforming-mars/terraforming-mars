@@ -65,7 +65,7 @@
   "GUILD": "协会",
   "Mining Guild": "矿业协会",
   "You start with 30 M€, 5 steel and 1 steel production.": "起始获得30 M€,5个钢铁资源，提升钢铁产量1级。",
-  "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "效果：每当你因放置一个板块而获得钢铁资源或钛资源时，提升你的钢铁产量1级。",
+  "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "效果：每当你因放置一个板块而获得钢铁资源或钛资源时，提升你的钢铁产量1级。",
   "You start with 40 M€. As your first action add a colony tile.": "起始获得40 M€。作为你的第一个行动，将一个殖民地板块加入游戏。",
   "Effect: When you get a new type of tag in play (event cards do not count), increase your M€ production 1 step.": "当你获得一个新的标志时(不计算事件卡)，提升你的M€产量1级。",
 

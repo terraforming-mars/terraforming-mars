@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -53,7 +53,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const tradeableColonies = ColoniesHandler.tradeableColonies(player.game);
 
     if (this.resourceCount === 0 || tradeableColonies.length === 0 || player.colonies.getFleetSize() <= player.colonies.tradesThisGeneration) {
@@ -86,7 +86,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
 export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
   private titanFloatingLaunchPad: TitanFloatingLaunchPad | undefined;
 
-  constructor(private player: Player) {
+  constructor(private player: IPlayer) {
     const card = player.playedCards.find((card) => card.name === CardName.TITAN_FLOATING_LAUNCHPAD);
     this.titanFloatingLaunchPad = card === undefined ? undefined : (card as TitanFloatingLaunchPad);
   }

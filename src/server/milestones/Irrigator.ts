@@ -1,7 +1,7 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
-import {isHazardTileType} from '../../common/TileType';
+import {isHazardTileType} from '../../common/AresTileType';
 
 export class Irrigator extends BaseMilestone {
   constructor() {
@@ -11,7 +11,7 @@ export class Irrigator extends BaseMilestone {
       4);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.game.board.spaces.filter((space) =>
       space.player === player &&
         space.tile !== undefined &&

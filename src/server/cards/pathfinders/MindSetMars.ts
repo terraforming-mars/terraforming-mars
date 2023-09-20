@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {CardResource} from '../../../common/CardResource';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -28,7 +28,7 @@ export class MindSetMars extends Card implements ICorporationCard {
       },
 
       metadata: {
-        cardNumber: 'PfC23',
+        cardNumber: 'PfC21',
         description: 'You start with 44 M€ and 1 agenda resource to this card.',
         renderData: CardRenderer.builder((b) => {
           b.br;
@@ -43,26 +43,26 @@ export class MindSetMars extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.game.getCardPlayerOrUndefined(this.name) !== player) return;
     if (card.tags.includes(Tag.BUILDING)) {
       player.addResourceTo(this, {qty: 1, log: true});
     }
   }
 
-  private canAddDelegate(player: Player) {
+  private canAddDelegate(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
     return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player.id) > 0;
   }
 
-  private canAddCity(player: Player) {
+  private canAddCity(player: IPlayer) {
     return this.resourceCount >= 5 && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return this.canAddDelegate(player) || this.canAddCity(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const options = new OrOptions();
 
     if (this.canAddDelegate(player)) {

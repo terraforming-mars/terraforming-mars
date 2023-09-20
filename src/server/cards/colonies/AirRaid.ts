@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
@@ -29,11 +29,11 @@ export class AirRaid extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return player.getResourceCount(CardResource.FLOATER) > 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new StealResources(player, Resource.MEGACREDITS, 5));
     player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, true));
     return undefined;

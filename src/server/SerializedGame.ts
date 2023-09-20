@@ -6,8 +6,8 @@ import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
-import {PlayerId, GameId, SpectatorId} from '../common/Types';
-import {GameOptions} from './GameOptions';
+import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
+import {GameOptions} from './game/GameOptions';
 import {AresData} from '../common/ares/AresData';
 import {LogMessage} from '../common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
@@ -35,6 +35,7 @@ export type SerializedGame = {
     draftRound: number;
     first: SerializedPlayer | PlayerId;
     fundedAwards: Array<SerializedFundedAward>;
+    gagarinBase: Array<SpaceId>;
     gameAge: number;
     gameLog: Array<LogMessage>;
     gameOptions: GameOptions;
@@ -44,6 +45,7 @@ export type SerializedGame = {
     lastSaveId: number;
     milestones: Array<string>;
     moonData: SerializedMoonData | undefined;
+    nomadSpace: SpaceId | undefined;
     pathfindersData: SerializedPathfindersData | undefined;
     oxygenLevel: number;
     passedPlayers: Array<PlayerId>;
@@ -55,6 +57,7 @@ export type SerializedGame = {
     seed: number;
     someoneHasRemovedOtherPlayersPlants: boolean;
     spectatorId: SpectatorId | undefined;
+    stJosephCathedrals: Array<SpaceId>;
     syndicatePirateRaider: PlayerId | undefined;
     temperature: number;
     tradeEmbargo?: boolean;

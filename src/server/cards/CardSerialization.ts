@@ -1,6 +1,5 @@
 import {CardFinder} from '../CardFinder';
 import {SerializedCard} from '../SerializedCard';
-import {MiningCard} from './base/MiningCard';
 import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
@@ -64,8 +63,10 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
       }
     });
   }
-  if (card instanceof MiningCard && element.bonusResource !== undefined) {
-    card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+  if (!(card instanceof SelfReplicatingRobots)) {
+    if (element.bonusResource !== undefined) {
+      card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+    }
   }
   if (isCeoCard(card)) {
     card.isDisabled = element.isDisabled;

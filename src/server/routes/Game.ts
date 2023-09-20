@@ -7,13 +7,14 @@ import {RandomBoardOption} from '../../common/boards/RandomBoardOption';
 import {Cloner} from '../database/Cloner';
 import {GameLoader} from '../database/GameLoader';
 import {Game} from '../Game';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {ServeAsset} from './ServeAsset';
 import {NewGameConfig} from '../../common/game/NewGameConfig';
 import {GameId, PlayerId, SpectatorId} from '../../common/Types';
-import {generateRandomId} from '../server-ids';
+import {generateRandomId} from '../utils/server-ids';
+import {IGame} from '../IGame';
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
 
@@ -90,6 +91,7 @@ export class GameHandler extends Handler {
             venusNextExtension: gameReq.venusNext,
             coloniesExtension: gameReq.colonies,
             preludeExtension: gameReq.prelude,
+            prelude2Expansion: gameReq.prelude2Expansion,
             turmoilExtension: gameReq.turmoil,
             aresExtension: gameReq.aresExtension,
             aresHazards: true, // Not a runtime option.
@@ -119,6 +121,7 @@ export class GameHandler extends Handler {
             altVenusBoard: gameReq.altVenusBoard,
             escapeVelocityMode: gameReq.escapeVelocityMode,
             escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
+            escapeVelocityBonusSeconds: gameReq.escapeVelocityBonusSeconds,
             escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
             escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
             twoCorpsVariant: gameReq.twoCorpsVariant,
@@ -128,7 +131,7 @@ export class GameHandler extends Handler {
             starWarsExpansion: gameReq.starWarsExpansion,
           };
 
-          let game: Game;
+          let game: IGame;
           if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
             const serialized = await Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId);
             game = Cloner.clone(gameId, players, firstPlayerIdx, serialized);

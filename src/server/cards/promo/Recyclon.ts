@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
@@ -43,7 +43,7 @@ export class Recyclon extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (card.tags.includes(Tag.BUILDING) === false || !player.isCorporation(this.name)) {
       return undefined;
     }

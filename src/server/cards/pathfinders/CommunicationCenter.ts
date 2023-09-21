@@ -37,10 +37,6 @@ export class CommunicationCenter extends Card implements IProjectCard {
     });
   }
 
-
-  // Card behavior is in PathfindersExpansion.onCardPlayed. Card.onCardPlayed
-  // does not apply to _any card played_
-
   public onResourceAdded(player: IPlayer, playedCard: ICard) {
     if (playedCard.name !== this.name) return;
     while (this.resourceCount >= 3) {
@@ -50,5 +46,12 @@ export class CommunicationCenter extends Card implements IProjectCard {
         b.player(player).card(this);
       });
     }
+  }
+
+  public onCardPlayedFromAnyPlayer(thisCardOwner: IPlayer, _playedCardOwner: IPlayer, card: IProjectCard) {
+    if (card.type === CardType.EVENT) {
+      thisCardOwner.addResourceTo(this, {qty: 1, log: true});
+    }
+    return undefined;
   }
 }

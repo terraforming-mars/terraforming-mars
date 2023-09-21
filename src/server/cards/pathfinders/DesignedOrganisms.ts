@@ -12,7 +12,7 @@ export class DesignedOrganisms extends Card implements IProjectCard {
     super({
       type: CardType.AUTOMATED,
       name: CardName.DESIGNED_ORGANISMS,
-      cost: 12,
+      cost: 13,
       tags: [Tag.SCIENCE, Tag.PLANT, Tag.MARS],
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 5)),
 

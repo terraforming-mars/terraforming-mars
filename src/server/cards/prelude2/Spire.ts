@@ -55,10 +55,16 @@ export class Spire extends Card implements ICorporationCard {
     }, {min: 3, max: 3});
   }
 
+  public override bespokePlay(player: IPlayer) {
+    // Including this.
+    this.onCardPlayed(player, this);
+    return undefined;
+  }
+
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.isCorporation(this.name)) {
       const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
-      if (count === 2) {
+      if (count >= 2) {
         player.addResourceTo(this, {qty: 1, log: true});
       }
     }

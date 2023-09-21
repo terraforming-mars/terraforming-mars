@@ -61,12 +61,17 @@ export type RecursivePartial<T> = {
  * Remove the `element` from `array`.
  */
 export function inplaceRemove<T>(array: Array<T>, element: T): boolean {
-  const idx = array.findIndex((e) => e === element);
+  return inplaceRemoveIf(array, (e) => e === element) !== undefined;
+}
+
+export function inplaceRemoveIf<T>(array: Array<T>, predicate: (e: T) => boolean): T | undefined {
+  const idx = array.findIndex(predicate);
   if (idx === -1) {
-    return false;
+    return undefined;
   }
+  const element = array[idx];
   array.splice(idx, 1);
-  return true;
+  return element;
 }
 
 export function sum(array: ReadonlyArray<number>): number {

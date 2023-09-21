@@ -68,7 +68,7 @@ import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import {sum} from '../common/utils/utils';
+import {inplaceRemove, sum} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
 import {ChooseCards} from './deferredActions/ChooseCards';
 
@@ -1188,15 +1188,26 @@ export class Player implements IPlayer {
   }
 
   public discardPlayedCard(card: IProjectCard) {
-    const cardIndex = this.playedCards.findIndex((c) => c.name === card.name);
-    if (cardIndex === -1) {
+    const found = inplaceRemove(this.playedCards, card);
+    if (found === false) {
       console.error(`Error: card ${card.name} not in ${this.id}'s hand`);
       return;
     }
-    this.playedCards.splice(cardIndex, 1);
     this.game.projectDeck.discard(card);
     card.onDiscard?.(this);
     this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
+  }
+
+  public discardCardFromHand(card: IProjectCard, options?: {log?: boolean}) {
+    const found = inplaceRemove(this.cardsInHand, card);
+    if (found === false) {
+      console.error(`Error: card ${card.name} not in ${this.id}'s hand`);
+      return;
+    }
+    this.game.projectDeck.discard(card);
+    if (options?.log === true) {
+      this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card), {reservedFor: this});
+    }
   }
 
   public availableHeat(): number {

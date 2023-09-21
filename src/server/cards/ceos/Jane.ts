@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {Tag} from '../../../common/cards/Tag';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 
@@ -14,7 +14,7 @@ export class Jane extends CeoCard {
       metadata: {
         cardNumber: 'L40',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('RESET X-1').cards(1, {secondaryTag: Tag.WILD}).asterix();
+          b.opgArrow().text('RESET X-1').cards(1, {secondaryTag: AltSecondaryTag.BLUE}).asterix();
         }),
         description: 'Once per game, mark up to X-1 blue card actions as unused this generation, where X is the current generation number.',
       },

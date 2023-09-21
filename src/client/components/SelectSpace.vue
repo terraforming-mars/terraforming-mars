@@ -9,11 +9,11 @@
         v-on:hide="hideDialog" />
     <div v-if="showtitle" class="wf-select-space">
       {{ $t(playerinput.title) }}
-      <go-to-map v-if="experimental()" :playerinput="playerinput"></go-to-map>
+      <go-to-map :playerinput="playerinput"></go-to-map>
     </div>
     <div v-if="warning" class="nes-container is-rounded">
       <span class="nes-text is-warning" v-i18n>{{ warning }}</span>
-      <go-to-map v-if="experimental()" :playerinput="playerinput"></go-to-map>
+      <go-to-map :playerinput="playerinput"></go-to-map>
     </div>
   </div>
 </template>
@@ -145,9 +145,6 @@ export default (Vue as WithRefs<Refs>).extend({
       } else {
         this.$refs.confirmation.show();
       }
-    },
-    experimental(): boolean {
-      return getPreferences().experimental_ui;
     },
     saveData() {
       if (this.spaceId === undefined) {

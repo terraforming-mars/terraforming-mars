@@ -1,4 +1,13 @@
 {
+  "Solar Logistics": "Solar-Logistik",
+  "Effect: When you play an Earth tag, you pay 2 M€ less.": "Effekt: Wenn du ein Erdsymbol spielst, zahle 2 M€ weniger.",
+  "Effect: When any player plays a space event, draw a card.": "EFFEKT: Wenn ein beliebiger Spieler ein Weltraumereignis spielt, ziehe eine Karte.",
+  "Gain 2 titanium.": "Erhalte 2 Titan.",
+  
+  "Teslaract": "Teslarakt",
+  "Action: Spend 1 energy production to gain 1 plant production.": "AKTION: Gebe 1 Energie-Produktion aus, um 1 Pflanzen-Produktion zu erhalten.",
+  "Raise your TR 1 step.": "Erhöhe deine TW um 1.",
+  
   "Red Ships": "Rote Schiffe",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "AKTION: Erhalte 1 M€ für jedes STADT- UND SPEZIALPLÄTTCHEN, die an einen Ozean grenzen.",
   "Requires 4% oxygen.": "Benötigt einen Sauerstoffgehalt von 4% oder mehr.",

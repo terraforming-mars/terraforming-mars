@@ -1065,26 +1065,22 @@ export class Player implements IPlayer {
       return;
     }
     for (const playedCard of this.playedCards) {
+      /* A player responding to their own cards played. */
       const actionFromPlayedCard = playedCard.onCardPlayed?.(this, card);
-      if (actionFromPlayedCard !== undefined) {
-        this.game.defer(new SimpleDeferredAction(
-          this,
-          () => actionFromPlayedCard,
-        ));
-      }
+      this.defer(actionFromPlayedCard);
     }
 
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
 
+    /* A player responding to any other player's card played, for corp effects. */
     for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
       for (const corporationCard of somePlayer.corporations) {
         const actionFromPlayedCard = corporationCard.onCardPlayed?.(this, card);
-        if (actionFromPlayedCard !== undefined) {
-          this.game.defer(new SimpleDeferredAction(
-            this,
-            () => actionFromPlayedCard,
-          ));
-        }
+        this.defer(actionFromPlayedCard);
+      }
+      for (const someCard of somePlayer.playedCards) {
+        const actionFromPlayedCard = someCard.onCardPlayedFromAnyPlayer?.(somePlayer, this, card);
+        this.defer(actionFromPlayedCard);
       }
     }
 
@@ -2026,8 +2022,10 @@ export class Player implements IPlayer {
   }
 
   /* Shorthand for deferring things */
-  public defer(input: PlayerInput | undefined, priority: Priority = Priority.DEFAULT): void {
-    if (input === undefined) return;
+  public defer(input: PlayerInput | undefined | void, priority: Priority = Priority.DEFAULT): void {
+    if (input === undefined) {
+      return;
+    }
     const action = new SimpleDeferredAction(this, () => input, priority);
     this.game.defer(action);
   }

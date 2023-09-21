@@ -230,6 +230,7 @@ export interface IPlayer {
   drawCard(count?: number, options?: DrawOptions): void;
   drawCardKeepSome(count: number, options: AllOptions): void;
   discardPlayedCard(card: IProjectCard): void;
+  discardCardFromHand(card: IProjectCard, options?: {log?: boolean}): void;
 
   /** Player is done taking actions this generation. */
   pass(): void;

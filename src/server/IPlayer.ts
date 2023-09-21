@@ -159,6 +159,7 @@ export interface IPlayer {
 
   getActionsThisGeneration(): Set<CardName>;
   addActionThisGeneration(cardName: CardName): void;
+  deleteActionThisGeneration(cardName: CardName): void;
   getVictoryPoints(): IVictoryPointsBreakdown;
   cardIsInEffect(cardName: CardName): boolean;
   hasProtectedHabitats(): boolean;

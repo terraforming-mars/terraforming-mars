@@ -396,6 +396,14 @@ export class Player implements IPlayer {
     return;
   }
 
+  public deleteActionThisGeneration(cardName: CardName): void {
+    // Behaves idempotently; will not raise an error if the action is not in the set.
+    if (this.actionsThisGeneration.has(cardName)) {
+      this.actionsThisGeneration.delete(cardName);
+    }
+    return;
+  }
+
   public getVictoryPoints(): IVictoryPointsBreakdown {
     return calculateVictoryPoints(this);
   }

@@ -227,8 +227,8 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public placeColony(options?: ItemOptions): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.PLACE_COLONY, -1, options));
+  public colonyTile(options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.COLONY_TILE, -1, options));
   }
 
   public influence(options?: ItemOptions): this {

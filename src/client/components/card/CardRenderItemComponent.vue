@@ -410,8 +410,8 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
         result = '<div class="card-resource card-card"><div class="cards-count">2</div><div class="card-icon card-icon-space">✴</div><div class="card-icon card-icon-building">☗</div></div>';
       }
-      if (this.item.type === CardRenderItemType.PLACE_COLONY) {
-        result = '<span class="card-place-colony">colony</span>';
+      if (this.item.type === CardRenderItemType.COLONY_TILE) {
+        result = '<span class="card-colony-tile">colony</span>';
       }
       if (this.item.type === CardRenderItemType.PRELUDE) {
         result = '<div class="card-prelude-container"><span class="card-prelude-icon">prel</span></div>';

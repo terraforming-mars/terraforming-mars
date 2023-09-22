@@ -11,7 +11,7 @@ export class Maria extends CeoCard {
       metadata: {
         cardNumber: 'L13',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('X ').placeColony().colonies(1);
+          b.opgArrow().text('X ').colonyTile().colonies(1);
         }),
         description: 'Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.',
       },

@@ -1,7 +1,6 @@
-import * as EventEmitter from 'events';
 import {expect} from 'chai';
 import {PlayerInput} from '../../src/server/routes/PlayerInput';
-import {MockResponse} from './HttpMocks';
+import {MockRequest, MockResponse} from './HttpMocks';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
@@ -10,15 +9,14 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {cast} from '../TestingUtils';
 import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
 import {CardName} from '../../src/common/cards/CardName';
-import {Request} from '../../src/server/Request';
 
 describe('PlayerInput', function() {
   let scaffolding: RouteTestScaffolding;
-  let req: Request;
+  let req: MockRequest;
   let res: MockResponse;
 
   beforeEach(() => {
-    req = new EventEmitter() as unknown as Request;
+    req = new MockRequest();
     res = new MockResponse();
     scaffolding = new RouteTestScaffolding(req);
   });
@@ -47,8 +45,8 @@ describe('PlayerInput', function() {
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
-      (req as unknown as EventEmitter).emit('data', JSON.stringify(orOptionsResponse));
-      (req as unknown as EventEmitter).emit('end');
+      req.emitter.emit('data', JSON.stringify(orOptionsResponse));
+      req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
 
@@ -75,8 +73,8 @@ describe('PlayerInput', function() {
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
-      (scaffolding.req as unknown as EventEmitter).emit('data', JSON.stringify(orOptionsResponse));
-      (scaffolding.req as unknown as EventEmitter).emit('end');
+      scaffolding.req.emitter.emit('data', JSON.stringify(orOptionsResponse));
+      scaffolding.req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
 
@@ -93,8 +91,8 @@ describe('PlayerInput', function() {
 
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
-      (scaffolding.req as unknown as EventEmitter).emit('data', '}{');
-      (scaffolding.req as unknown as EventEmitter).emit('end');
+      scaffolding.req.emitter.emit('data', '}{');
+      scaffolding.req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
 

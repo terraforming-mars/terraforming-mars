@@ -2,19 +2,16 @@ import {Context} from '../../src/server/routes/IHandler';
 import {Handler} from '../../src/server/routes/Handler';
 import {Route} from '../../src/server/routes/Route';
 import {FakeGameLoader} from './FakeGameLoader';
-import {MockResponse} from './HttpMocks';
+import {MockRequest, MockResponse} from './HttpMocks';
 import {newIpTracker} from '../../src/server/server/IPTracker';
-import {Request} from '../../src/server/Request';
 
 export type Header = 'accept-encoding';
 
 // Reusable components for testing routes.
 export class RouteTestScaffolding {
-  public req: Request;
   public ctx: Context;
 
-  constructor(req: Partial<Request> = {}) {
-    this.req = req as Request;
+  constructor(public req: MockRequest = new MockRequest()) {
     this.ctx = {
       route: new Route(),
       url: new URL('http://boo.com'),

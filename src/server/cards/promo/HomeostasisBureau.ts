@@ -32,9 +32,9 @@ export class HomeostasisBureau extends Card implements IProjectCard {
     });
   }
 
-  onGlobalParameterIncrease?(player: IPlayer, parameter: GlobalParameter, _steps: number) {
+  onGlobalParameterIncrease?(player: IPlayer, parameter: GlobalParameter, steps: number) {
     if (parameter === GlobalParameter.TEMPERATURE) {
-      player.stock.add(Resource.MEGACREDITS, 3, {log: true});
+      player.stock.add(Resource.MEGACREDITS, 3 * steps, {log: true});
     }
   }
 }

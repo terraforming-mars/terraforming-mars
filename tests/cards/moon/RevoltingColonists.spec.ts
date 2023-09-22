@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {RevoltingColonists} from '../../../src/server/cards/moon/RevoltingColonists';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
 
@@ -15,7 +15,7 @@ describe('RevoltingColonists', () => {
   let player2: TestPlayer;
   let player3: TestPlayer;
   let card: RevoltingColonists;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     [game, player1, player2, player3] = testGame(3, {moonExpansion: true});

@@ -3,13 +3,13 @@ import {TestPlayer} from '../../TestPlayer';
 import {MicrosingularityPlant} from '../../../src/server/cards/moon/MicrosingularityPlant';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MicrosingularityPlant', () => {
   let player: TestPlayer;
   let card: MicrosingularityPlant;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

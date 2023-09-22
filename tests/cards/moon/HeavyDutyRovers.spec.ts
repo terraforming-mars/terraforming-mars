@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {HeavyDutyRovers} from '../../../src/server/cards/moon/HeavyDutyRovers';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceId} from '../../../src/common/Types';
@@ -13,7 +13,7 @@ describe('HeavyDutyRovers', () => {
   let player: TestPlayer;
   let game: Game;
   let card: HeavyDutyRovers;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     [game, player] = testGame(1, {moonExpansion: true});

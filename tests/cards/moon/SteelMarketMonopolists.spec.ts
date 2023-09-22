@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -10,7 +10,7 @@ import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 describe('SteelMarketMonopolists', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: SteelMarketMonopolists;
 
   beforeEach(() => {

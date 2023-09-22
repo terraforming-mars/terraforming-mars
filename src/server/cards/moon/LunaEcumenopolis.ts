@@ -10,7 +10,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Space} from '../../boards/Space';
-import {IMoonData} from '../../moon/IMoonData';
+import {MoonData} from '../../moon/MoonData';
 
 export class LunaEcumenopolis extends Card {
   constructor() {
@@ -112,7 +112,7 @@ export class LunaEcumenopolis extends Card {
 }
 
 class CustomPlaceMoonTile extends PlaceMoonHabitatTile {
-  protected override getSpaces(moonData: IMoonData) {
+  protected override getSpaces(moonData: MoonData) {
     const spaces = moonData.moon.getAvailableSpacesOnLand(this.player);
     const filtered = spaces.filter((space) => {
       const adjacentSpaces = moonData.moon.getAdjacentSpaces(space).filter((adjacentSpace) => {

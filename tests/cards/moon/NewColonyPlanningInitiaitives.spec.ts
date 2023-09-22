@@ -2,13 +2,13 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {NewColonyPlanningInitiaitives} from '../../../src/server/cards/moon/NewColonyPlanningInitiaitives';
 import {expect} from 'chai';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
 describe('NewColonyPlanningInitiaitives', () => {
   let player: TestPlayer;
   let card: NewColonyPlanningInitiaitives;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

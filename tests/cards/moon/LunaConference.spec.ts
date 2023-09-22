@@ -3,7 +3,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {LunaConference} from '../../../src/server/cards/moon/LunaConference';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {Scientists} from '../../../src/server/turmoil/parties/Scientists';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
@@ -12,7 +12,7 @@ describe('LunaConference', () => {
   let player: TestPlayer;
   let game: Game;
   let card: LunaConference;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/common/Phase';
@@ -16,7 +16,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   let player2: TestPlayer;
   let player3: TestPlayer;
   let card: TheDarksideofTheMoonSyndicate;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     [game, player, player2, player3] = testGame(3, {moonExpansion: true});

@@ -3,12 +3,12 @@ import {TestPlayer} from '../../TestPlayer';
 import {DarksideMiningSyndicate} from '../../../src/server/cards/moon/DarksideMiningSyndicate';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 
 describe('DarksideMiningSyndicate', () => {
   let player: TestPlayer;
   let card: DarksideMiningSyndicate;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

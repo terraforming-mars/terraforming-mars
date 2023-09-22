@@ -1,10 +1,11 @@
-import * as http from 'http';
 import {Database} from '../database/Database';
 import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {LoadGameFormModel} from '../../common/models/LoadGameFormModel';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
@@ -12,7 +13,7 @@ export class LoadGame extends Handler {
     super();
   }
 
-  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {

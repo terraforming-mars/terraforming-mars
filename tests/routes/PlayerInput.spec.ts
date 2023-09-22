@@ -1,8 +1,6 @@
-import * as http from 'http';
-import * as EventEmitter from 'events';
 import {expect} from 'chai';
 import {PlayerInput} from '../../src/server/routes/PlayerInput';
-import {MockResponse} from './HttpMocks';
+import {MockRequest, MockResponse} from './HttpMocks';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
@@ -14,13 +12,13 @@ import {CardName} from '../../src/common/cards/CardName';
 
 describe('PlayerInput', function() {
   let scaffolding: RouteTestScaffolding;
-  let req: EventEmitter;
+  let req: MockRequest;
   let res: MockResponse;
 
   beforeEach(() => {
-    req = new EventEmitter();
+    req = new MockRequest();
     res = new MockResponse();
-    scaffolding = new RouteTestScaffolding(req as http.IncomingMessage);
+    scaffolding = new RouteTestScaffolding(req);
   });
 
   it('fails when id not provided', async () => {
@@ -47,8 +45,8 @@ describe('PlayerInput', function() {
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
-      req.emit('data', JSON.stringify(orOptionsResponse));
-      req.emit('end');
+      req.emitter.emit('data', JSON.stringify(orOptionsResponse));
+      req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
 
@@ -75,8 +73,8 @@ describe('PlayerInput', function() {
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
-      scaffolding.req.emit('data', JSON.stringify(orOptionsResponse));
-      scaffolding.req.emit('end');
+      scaffolding.req.emitter.emit('data', JSON.stringify(orOptionsResponse));
+      scaffolding.req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
 
@@ -93,8 +91,8 @@ describe('PlayerInput', function() {
 
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
-      scaffolding.req.emit('data', '}{');
-      scaffolding.req.emit('end');
+      scaffolding.req.emitter.emit('data', '}{');
+      scaffolding.req.emitter.emit('end');
     });
     await Promise.all(([emit, post]));
 

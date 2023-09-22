@@ -1,20 +1,17 @@
-import * as http from 'http';
 import {Context} from '../../src/server/routes/IHandler';
 import {Handler} from '../../src/server/routes/Handler';
 import {Route} from '../../src/server/routes/Route';
 import {FakeGameLoader} from './FakeGameLoader';
-import {MockResponse} from './HttpMocks';
+import {MockRequest, MockResponse} from './HttpMocks';
 import {newIpTracker} from '../../src/server/server/IPTracker';
 
 export type Header = 'accept-encoding';
 
 // Reusable components for testing routes.
 export class RouteTestScaffolding {
-  public req: http.IncomingMessage;
   public ctx: Context;
 
-  constructor(req: Partial<http.IncomingMessage> = {}) {
-    this.req = req as http.IncomingMessage;
+  constructor(public req: MockRequest = new MockRequest()) {
     this.ctx = {
       route: new Route(),
       url: new URL('http://boo.com'),
@@ -36,10 +33,10 @@ export class RouteTestScaffolding {
   }
 
   public get(handler: Handler, res: MockResponse): Promise<void> {
-    return handler.get(this.req, res.hide(), this.ctx);
+    return handler.get(this.req, res, this.ctx);
   }
 
   public post(handler: Handler, res: MockResponse) {
-    return handler.post(this.req, res.hide(), this.ctx);
+    return handler.post(this.req, res, this.ctx);
   }
 }

@@ -45,7 +45,6 @@ export type SerializedGame = {
     lastSaveId: number;
     milestones: Array<string>;
     moonData: SerializedMoonData | undefined;
-    nomadSpace: SpaceId | undefined;
     pathfindersData: SerializedPathfindersData | undefined;
     oxygenLevel: number;
     passedPlayers: Array<PlayerId>;

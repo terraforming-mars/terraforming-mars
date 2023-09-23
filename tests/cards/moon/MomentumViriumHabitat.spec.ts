@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 import {MomentumViriumHabitat} from '../../../src/server/cards/moon/MomentumViriumHabitat';
@@ -10,7 +10,7 @@ import {TileType} from '../../../src/common/TileType';
 describe('MomentumViriumHabitat', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MomentumViriumHabitat;
 
   beforeEach(() => {

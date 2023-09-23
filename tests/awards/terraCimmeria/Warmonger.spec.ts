@@ -1,19 +1,19 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {Engineer} from '../../../src/server/awards/amazonisPlanitia/Engineer';
+import {Warmonger} from '../../../src/server/awards/terraCimmeria/Warmonger';
 import {TestPlayer} from '../../TestPlayer';
 import {CardFinder} from '../../../src/server/CardFinder';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
-import {MicroMills} from '../../../src/server/cards/base/MicroMills';
-import {Cartel} from '../../../src/server/cards/base/Cartel';
-import {DarksideMiningSyndicate} from '../../../src/server/cards/moon/DarksideMiningSyndicate';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
+import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 
-describe('Engineer', () => {
-  let award: Engineer;
+describe('Warmonger', () => {
+  let award: Warmonger;
   let player: TestPlayer;
 
   beforeEach(() => {
-    award = new Engineer();
+    award = new Warmonger();
     [/* skipped */, player] = testGame(2);
   });
 
@@ -22,21 +22,21 @@ describe('Engineer', () => {
     expect(award.getScore(player)).eq(0);
     player.playedCards.push(new Tardigrades());
     expect(award.getScore(player)).eq(0);
-    player.playedCards.push(new MicroMills());
+    player.playedCards.push(new Ants());
     expect(award.getScore(player)).eq(1);
-    player.playedCards.push(new Cartel());
+    player.playedCards.push(new BigAsteroid());
     expect(award.getScore(player)).eq(2);
-    player.playedCards.push(new DarksideMiningSyndicate());
+    player.corporations.push(new TheDarksideofTheMoonSyndicate());
     expect(award.getScore(player)).eq(3);
   });
 
   // A good way to prevent future failures is to duplicate the Robotic Workforce style of test.
-  it('verify if production cards list is accurate', () => {
+  it('verify if attack cards list is accurate', () => {
     const failures: Array<string> = [];
     const cardFinder = new CardFinder();
-    for (const cardName of Engineer.productionCards) {
+    for (const cardName of Warmonger.attackCards) {
       const card = cardFinder.getCardByName(cardName)!;
-      if (Engineer.autoInclude(card)) {
+      if (Warmonger.autoInclude(card)) {
         failures.push(cardName);
       }
     }

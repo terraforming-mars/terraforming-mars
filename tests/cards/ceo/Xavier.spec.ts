@@ -63,4 +63,24 @@ describe('Xavier', function() {
     cartel.play(player);
     expect(player.production.megacredits).eq(4);
   });
+
+  it('Gives discount for cards withh requirements', function() {
+    const lightningHarvest = new LightningHarvest();
+    const geneRepair = new GeneRepair();
+
+    expect(card.getCardDiscount(player, lightningHarvest)).eq(0);
+    expect(card.getCardDiscount(player, geneRepair)).eq(0);
+    card.action();
+    player.getActionsThisGeneration().add(card.name);
+    expect(card.isDisabled).is.true;
+    expect(card.getCardDiscount(player, lightningHarvest)).eq(1);
+    expect(card.getCardDiscount(player, geneRepair)).eq(1);
+
+    // Persists over generations
+    game.deferredActions.runAll(() => {});
+    expect(card.isDisabled).is.true;
+    player.runProductionPhase();
+    expect(card.getCardDiscount(player, lightningHarvest)).eq(1);
+    expect(card.getCardDiscount(player, geneRepair)).eq(1);
+  });
 });

@@ -65,11 +65,13 @@ import {SaturnSurfing} from './SaturnSurfing';
 import {SelfReplicatingRobots} from './SelfReplicatingRobots';
 import {SmallAsteroid} from './SmallAsteroid';
 import {SnowAlgae} from './SnowAlgae';
+import {SolarLogistics} from './SolarLogistics';
 import {Splice} from './Splice';
 import {StanfordTorus} from './StanfordTorus';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
+import {Teslaract} from './Teslaract';
 import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
 
@@ -132,6 +134,9 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.NEPTUNIAN_POWER_CONSULTANTS]: {Factory: NeptunianPowerConsultants},
     // [CardName.MARTIAN_LUMBER_CORP]: {Factory: MartianLumberCorp},
     [CardName.RED_SHIPS]: {Factory: RedShips},
+    [CardName.SOLAR_LOGISTICS]: {Factory: SolarLogistics},
+    [CardName.TESLARACT]: {Factory: Teslaract},
+
   },
 
   preludeCards: {

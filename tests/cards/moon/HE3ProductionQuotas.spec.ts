@@ -3,7 +3,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {HE3ProductionQuotas} from '../../../src/server/cards/moon/HE3ProductionQuotas';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
@@ -12,7 +12,7 @@ describe('HE3ProductionQuotas', () => {
   let player: TestPlayer;
   let game: Game;
   let card: HE3ProductionQuotas;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

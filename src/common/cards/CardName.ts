@@ -516,7 +516,8 @@ export enum CardName {
     NEPTUNIAN_POWER_CONSULTANTS = 'Neptunian Power Consultants',
     MARTIAN_LUMBER_CORP = 'Martian Lumber Corp',
     RED_SHIPS = 'Red Ships',
-
+    SOLAR_LOGISTICS = 'Solar Logistics',
+    TESLARACT = 'Teslaract',
     // End of promo cards
 
     // Community corps

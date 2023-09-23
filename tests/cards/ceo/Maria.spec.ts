@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {cast, forceGenerationEnd} from '../../TestingUtils';
+import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
@@ -29,7 +29,9 @@ describe('Maria', function() {
 
   it('Takes action generation 1', function() {
     const coloniesInPlay = game.colonies.length;
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     const builtColonyName = selectColony.colonies[0].name;
     selectColony.cb(selectColony.colonies[0]);
     expect(game.colonies.find((colony) => colony.name === builtColonyName)).is.not.undefined;
@@ -39,7 +41,9 @@ describe('Maria', function() {
   it('Takes action in Generation 4', function() {
     game.generation = 4;
 
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     expect(selectColony.colonies).has.length(4);
   });
 
@@ -47,7 +51,9 @@ describe('Maria', function() {
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     selectColony?.cb(venus);
 
     expect(game.colonies).includes(venus);
@@ -60,7 +66,9 @@ describe('Maria', function() {
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     selectColony?.cb(venus);
 
     expect(game.colonies).includes(venus);
@@ -72,7 +80,9 @@ describe('Maria', function() {
     const iapetusii = new IapetusII();
     game.discardedColonies = [];
     game.discardedColonies.push(iapetusii);
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     selectColony?.cb(iapetusii);
 
     expect(game.colonies).includes(iapetusii);
@@ -85,7 +95,9 @@ describe('Maria', function() {
     const iapetusii = new IapetusII();
     game.discardedColonies = [];
     game.discardedColonies.push(iapetusii);
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     selectColony?.cb(iapetusii);
 
     expect(game.colonies).includes(iapetusii);

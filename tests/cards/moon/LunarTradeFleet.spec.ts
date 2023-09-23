@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {LunarTradeFleet} from '../../../src/server/cards/moon/LunarTradeFleet';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LunarTradeFleet', () => {
   let player: TestPlayer;
   let card: LunarTradeFleet;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

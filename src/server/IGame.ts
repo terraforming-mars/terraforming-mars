@@ -23,7 +23,7 @@ import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {AresData} from '../common/ares/AresData';
-import {IMoonData} from './moon/IMoonData';
+import {MoonData} from './moon/MoonData';
 import {SeededRandom} from '../common/utils/Random';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {GameOptions} from './game/GameOptions';
@@ -67,7 +67,7 @@ export interface IGame extends Logger {
   discardedColonies: Array<IColony>; // Not serialized
   turmoil: Turmoil | undefined;
   aresData: AresData | undefined;
-  moonData: IMoonData | undefined;
+  moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
   // Card-specific data
   // Mons Insurance promo corp

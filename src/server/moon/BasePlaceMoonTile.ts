@@ -3,7 +3,7 @@ import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
-import {IMoonData} from './IMoonData';
+import {MoonData} from './MoonData';
 import {MoonExpansion} from './MoonExpansion';
 
 export abstract class BasePlaceMoonTile extends DeferredAction<Space> {
@@ -15,7 +15,7 @@ export abstract class BasePlaceMoonTile extends DeferredAction<Space> {
     super(player, Priority.DEFAULT);
   }
 
-  protected abstract getSpaces(moonData: IMoonData): ReadonlyArray<Space>;
+  protected abstract getSpaces(moonData: MoonData): ReadonlyArray<Space>;
   protected abstract placeTile(space: Space): PlayerInput | undefined;
 
   public execute() {

@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast} from '../../TestingUtils';
 import {LunarSecurityStations} from '../../../src/server/cards/moon/LunarSecurityStations';
@@ -14,7 +14,7 @@ describe('LunarSecurityStations', () => {
   let player: TestPlayer;
   let opponent1: TestPlayer;
   let opponent2: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: LunarSecurityStations;
 
   beforeEach(() => {

@@ -3,12 +3,12 @@ import {TestPlayer} from '../../TestPlayer';
 import {UndergroundDetonators} from '../../../src/server/cards/moon/UndergroundDetonators';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 
 describe('UndergroundDetonators', () => {
   let player: TestPlayer;
   let card: UndergroundDetonators;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

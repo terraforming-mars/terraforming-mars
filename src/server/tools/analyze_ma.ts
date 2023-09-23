@@ -7,8 +7,10 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from '../game/GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {MultiSet} from 'mnemonist';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
-function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
+function processRequest(req: Request, res: Response): void {
   if (req.url === undefined) {
     return;
   }

@@ -1,3 +1,5 @@
+import {DATA_VALUE, FLOATERS_VALUE, MICROBES_VALUE, GRAPHENE_VALUE, SEED_VALUE} from '../constants';
+
 /** Types of resources spent to pay for anything. */
 export const PAYMENT_KEYS = [
   'heat',
@@ -74,6 +76,22 @@ export type PaymentOptions = {
   graphene: boolean,
   kuiperAsteroids: boolean,
 }
+
+export const DEFAULT_PAYMENT_VALUES: Record<PaymentKey, number> = {
+  megaCredits: 1,
+  steel: 2,
+  titanium: 3,
+  heat: 1,
+  microbes: MICROBES_VALUE,
+  floaters: FLOATERS_VALUE,
+  lunaArchivesScience: 1,
+  spireScience: 2,
+  seeds: SEED_VALUE,
+  auroraiData: DATA_VALUE,
+  graphene: GRAPHENE_VALUE,
+  kuiperAsteroids: 1,
+} as const;
+
 
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {

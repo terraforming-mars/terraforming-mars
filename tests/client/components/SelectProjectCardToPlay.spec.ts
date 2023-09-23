@@ -44,6 +44,10 @@ describe('SelectProjectCardToPlay', () => {
           }],
           id: 'foo',
           selfReplicatingRobotCards: [],
+          thisPlayer: {
+            steel: 0,
+            tableau: [],
+          },
         },
         playerinput: {
           title: 'foo',
@@ -527,7 +531,7 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 7, megaCredits: 3}));
   });
 
-  it('Max includes Stormcraft floaters', async () => {
+  it('Max heat includes Stormcraft floaters', async () => {
     // Birds will cost 10. Player has 10 MC, 3 heat, and 1 floaters. It also is reserving one unit of heat.
     //
     // Initial setup will be that it selects 10MC.

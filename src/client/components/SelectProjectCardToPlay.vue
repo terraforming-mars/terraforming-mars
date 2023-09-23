@@ -3,7 +3,7 @@ import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 
 import {GRAPHENE_VALUE, SEED_VALUE} from '@/common/constants';
-import {Payment, PAYMENT_KEYS} from '@/common/inputs/Payment';
+import {Payment, PaymentKey, PAYMENT_KEYS} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
@@ -138,7 +138,7 @@ export default Vue.extend({
       };
 
       // This function help save some money at the end
-      const saveOverSpendingUnits = function(
+      const saveOverspendingUnits = function(
         spendingUnits: number | undefined,
         unitValue: number): number {
         if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
@@ -152,43 +152,43 @@ export default Vue.extend({
         return toSaveUnits;
       };
 
-      if (megacreditBalance > 0 && this.canUseSeeds()) {
+      if (megacreditBalance > 0 && this.canUse('seeds')) {
         this.seeds = deductUnits(this.playerinput.seeds, SEED_VALUE);
       }
 
       // TODO(kberg): create constants for these resource types
 
-      if (megacreditBalance > 0 && this.canUseMicrobes()) {
+      if (megacreditBalance > 0 && this.canUse('microbes')) {
         this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
 
-      if (megacreditBalance > 0 && this.canUseFloaters()) {
+      if (megacreditBalance > 0 && this.canUse('floaters')) {
         this.floaters = deductUnits(this.playerinput.floaters, 3);
       }
 
-      if (megacreditBalance > 0 && this.canUseLunaArchivesScience()) {
+      if (megacreditBalance > 0 && this.canUse('lunaArchivesScience')) {
         this.lunaArchivesScience = deductUnits(this.playerinput.lunaArchivesScience, 1);
       }
 
-      if (megacreditBalance > 0 && this.canUseGraphene()) {
+      if (megacreditBalance > 0 && this.canUse('graphene')) {
         this.graphene = deductUnits(this.playerinput.graphene, GRAPHENE_VALUE);
       }
 
       this.available.steel = Math.max(this.thisPlayer.steel - this.reserveUnits.steel, 0);
-      if (megacreditBalance > 0 && this.canUseSteel()) {
+      if (megacreditBalance > 0 && this.canUse('steel')) {
         this.steel = deductUnits(this.available.steel, this.thisPlayer.steelValue, true);
       }
 
       this.available.titanium = Math.max(this.thisPlayer.titanium - this.reserveUnits.titanium, 0);
-      if (megacreditBalance > 0 && this.canUseTitanium()) {
+      if (megacreditBalance > 0 && this.canUse('titanium')) {
         this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue, true);
       }
-      if (megacreditBalance > 0 && this.canUseTitanium() === false && this.canUseLunaTradeFederationTitanium()) {
+      if (megacreditBalance > 0 && this.canUse('titanium') === false && this.canUseLunaTradeFederationTitanium()) {
         this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue - 1, true);
       }
 
       this.available.heat = Math.max(this.availableHeat() - this.reserveUnits.heat, 0);
-      if (megacreditBalance > 0 && this.canUseHeat()) {
+      if (megacreditBalance > 0 && this.canUse('heat')) {
         this.heat = deductUnits(this.available.heat, 1);
       }
 
@@ -198,87 +198,65 @@ export default Vue.extend({
         // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
         // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
         // We cannot reduce the amount of Ti and still pay enough.
-        this.steel -= saveOverSpendingUnits(this.steel, this.thisPlayer.steelValue);
-        this.floaters -= saveOverSpendingUnits(this.floaters, 3);
-        this.microbes -= saveOverSpendingUnits(this.microbes, 2);
-        this.lunaArchivesScience -= saveOverSpendingUnits(this.lunaArchivesScience, 1);
-        this.seeds -= saveOverSpendingUnits(this.seeds, SEED_VALUE);
-        this.graphene -= saveOverSpendingUnits(this.graphene, GRAPHENE_VALUE);
-        this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
-      }
-    },
-    canUseHeat(): boolean {
-      return this.playerinput.paymentOptions?.heat === true && this.availableHeat() > 0;
-    },
-    canUseSteel() {
-      if (this.card !== undefined && this.available.steel > 0) {
-        if (this.tags.includes(Tag.BUILDING) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
-          return true;
+        for (const key of [
+          'steel',
+          'floaters',
+          'microbes',
+          'seeds',
+          'graphene',
+          'lunaArchivesScience',
+          'megaCredits'] as const) {
+          this[key] -= saveOverspendingUnits(this[key], this.getResourceRate(key));
         }
       }
-      return false;
     },
-    canUseTitanium() {
-      if (this.card !== undefined && this.available.titanium > 0) {
-        if (this.tags.includes(Tag.SPACE) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
-          return true;
-        }
+    cardCanUse(unit: PaymentKey): boolean {
+      switch (unit) {
+      case 'megaCredits':
+      case 'heat':
+        return true;
+      case 'steel':
+        return this.tags.includes(Tag.BUILDING) ||
+          this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
+      case 'titanium':
+        return this.tags.includes(Tag.SPACE) ||
+          this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
+      // case 'LunaTradeFederationTitanium':
+      //   return this.card !== undefined && this.available.titanium > 0 && this.playerinput.paymentOptions?.lunaTradeFederationTitanium === true;
+      case 'microbes':
+        return this.tags.includes(Tag.PLANT);
+      case 'floaters':
+        return this.tags.includes(Tag.VENUS);
+      case 'lunaArchivesScience':
+        return this.tags.includes(Tag.MOON);
+      case 'seeds':
+        return this.tags.includes(Tag.PLANT) ||
+            this.card.name === CardName.GREENERY_STANDARD_PROJECT;
+      case 'graphene':
+        return this.tags.includes(Tag.SPACE) ||
+            this.tags.includes(Tag.CITY);
+      default:
+        throw new Error('Unknown unit ' + unit);
       }
-      return false;
     },
-    canUseLunaTradeFederationTitanium() {
-      return this.card !== undefined && this.available.titanium > 0 && this.playerinput.paymentOptions?.lunaTradeFederationTitanium === true;
-    },
-    canUseMicrobes() {
-      // FYI microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
-      if (this.card !== undefined && (this.playerinput.microbes ?? 0) > 0) {
-        if (this.tags.includes(Tag.PLANT)) {
-          return true;
-        }
+    canUse(unit: PaymentKey) {
+      if (!this.hasUnits(unit)) {
+        return false;
       }
-      return false;
-    },
-    canUseFloaters() {
-      // FYI floaters are limited to the Dirigibles card.
-      if (this.card !== undefined && (this.playerinput.floaters ?? 0) > 0) {
-        if (this.tags.includes(Tag.VENUS)) {
-          return true;
-        }
+      if (this.card === undefined) {
+        return false;
       }
-      return false;
+      return this.cardCanUse(unit);
+      // if (unit === 'titanium') {
+      //   if (this.thisPlayer.titanium === 0) {
+      //     return false;
+      //   }
+      //   return this.playerinput.paymentOptions?.titanium || this.playerinput.paymentOptions?.lunaTradeFederationTitanium;
+      // }
+      // return this.playerinput.paymentOptions?.[unit] && this.hasUnits(unit);
     },
-    canUseLunaArchivesScience() {
-      // FYI science resources are limited to the Luna Archive card, which allows spending its
-      // science resources for Moon cards.
-      if (this.card !== undefined && (this.playerinput.lunaArchivesScience ?? 0) > 0) {
-        if (this.tags.includes(Tag.MOON)) {
-          return true;
-        }
-      }
-      return false;
-    },
-    canUseSeeds() {
-      // FYI seeds are limited to the Soylent Seedling Systems corp card, which allows spending its
-      // resources for plant cards and the standard greenery project.
-      if (this.card !== undefined && (this.playerinput.seeds ?? 0) > 0) {
-        if (this.tags.includes(Tag.PLANT)) {
-          return true;
-        }
-        if (this.card.name === CardName.GREENERY_STANDARD_PROJECT) {
-          return true;
-        }
-      }
-      return false;
-    },
-    canUseGraphene() {
-      // FYI graphene is limited to the Carbon Nanosystems card, which allows spending its resources
-      // for city and space cards.
-      if (this.card !== undefined && (this.playerinput.graphene ?? 0) > 0) {
-        if (this.tags.includes(Tag.SPACE) || this.tags.includes(Tag.CITY)) {
-          return true;
-        }
-      }
-      return false;
+    canUseLunaTradeFederationTitanium(): boolean {
+      return this.playerinput.paymentOptions?.lunaTradeFederationTitanium === true;
     },
     cardChanged() {
       this.card = this.getCard();
@@ -296,13 +274,13 @@ export default Vue.extend({
       return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveSteelWarning(): boolean {
-      return this.reserveUnits.steel > 0 && this.canUseSteel();
+      return this.reserveUnits.steel > 0 && this.canUse('steel');
     },
     showReserveTitaniumWarning(): boolean {
-      return this.reserveUnits.titanium > 0 && (this.canUseTitanium() || this.canUseLunaTradeFederationTitanium());
+      return this.reserveUnits.titanium > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium());
     },
     showReserveHeatWarning(): boolean {
-      return this.reserveUnits?.heat > 0 && this.canUseHeat();
+      return this.reserveUnits?.heat > 0 && this.canUse('heat');
     },
     saveData() {
       const payment: Payment = {
@@ -321,7 +299,7 @@ export default Vue.extend({
       };
       let totalSpent = 0;
       for (const target of PAYMENT_KEYS) {
-        if (payment[target] > this.getAmount(target)) {
+        if (payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
         }
@@ -384,7 +362,7 @@ export default Vue.extend({
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 
-    <div class="payments_type input-group" v-if="canUseSteel()">
+    <div class="payments_type input-group" v-if="canUse('steel')">
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
       <AppButton type="minus" @click="reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
@@ -395,7 +373,7 @@ export default Vue.extend({
     (Some steel is unavailable here in reserve for the project card.)
     </div>
 
-    <div class="payments_type input-group" v-if="canUseTitanium() || canUseLunaTradeFederationTitanium()">
+    <div class="payments_type input-group" v-if="canUse('titanium') || canUseLunaTradeFederationTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <AppButton type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
@@ -406,7 +384,7 @@ export default Vue.extend({
     (Some titanium is unavailable here in reserve for the project card.)
     </div>
 
-    <div class="payments_type input-group" v-if="canUseHeat()">
+    <div class="payments_type input-group" v-if="canUse('heat')">
       <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
       <AppButton type="minus" @click="reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
@@ -417,7 +395,7 @@ export default Vue.extend({
     (Some heat is unavailable here in reserve for the project card.)
     </div>
 
-    <div class="payments_type input-group" v-if="canUseMicrobes()">
+    <div class="payments_type input-group" v-if="canUse('microbes')">
       <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay by Microbes')"></i>
       <AppButton type="minus" @click="reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
@@ -425,7 +403,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('microbes')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="canUseFloaters()">
+    <div class="payments_type input-group" v-if="canUse('floaters')">
       <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay by Floaters')"></i>
       <AppButton type="minus" @click="reduceValue('floaters', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
@@ -433,7 +411,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('floaters')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="canUseLunaArchivesScience()">
+    <div class="payments_type input-group" v-if="canUse('lunaArchivesScience')">
       <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by (Luna Archive) Science Resources')"></i>
       <AppButton type="minus" @click="reduceValue('lunaArchivesScience', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="lunaArchivesScience" />
@@ -441,7 +419,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('lunaArchivesScience')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="canUseSeeds()">
+    <div class="payments_type input-group" v-if="canUse('seeds')">
       <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
       <AppButton type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
@@ -449,7 +427,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="canUseGraphene()">
+    <div class="payments_type input-group" v-if="canUse('graphene')">
       <i class="resource_icon resource_icon--graphene payments_type_icon" :title="$t('Pay with graphene')"></i>
       <AppButton type="minus" @click="reduceValue('graphene', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="graphene" />

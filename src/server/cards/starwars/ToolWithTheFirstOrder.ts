@@ -11,7 +11,7 @@ export class ToolWithTheFirstOrder extends Card implements IProjectCard {
     super({
       type: CardType.AUTOMATED,
       name: CardName.TOOL_WITH_THE_FIRST_ORDER,
-      tags: [Tag.POWER, Tag.PLANT],
+      tags: [Tag.SPACE],
       cost: 5,
 
       behavior: {

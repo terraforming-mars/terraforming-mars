@@ -12,7 +12,7 @@ export class BeholdTheEmperor extends Card implements IProjectCard {
     super({
       type: CardType.EVENT,
       name: CardName.BEHOLD_THE_EMPEROR,
-      tags: [Tag.POWER, Tag.PLANT],
+      tags: [Tag.EARTH],
       cost: 10,
       requirements: CardRequirements.builder((b) => b.chairman()),
 

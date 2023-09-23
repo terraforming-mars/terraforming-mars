@@ -226,10 +226,6 @@ export abstract class Board {
         return false;
       }
 
-      if (space.id === player.game.nomadSpace) {
-        return false;
-      }
-
       return this.canAfford(player, space, canAffordOptions);
     });
     return landSpaces;

@@ -142,8 +142,6 @@ export class Game implements IGame, Logger {
   public gagarinBase: Array<SpaceId> = [];
   // St. Joseph of Cupertino Mission
   stJosephCathedrals: Array<SpaceId> = [];
-  // Mars Nomads
-  nomadSpace: SpaceId | undefined = undefined;
 
   // The set of tags available in this game.
   public readonly tags: ReadonlyArray<Tag>;
@@ -401,7 +399,6 @@ export class Game implements IGame, Logger {
       fundedAwards: serializeFundedAwards(this.fundedAwards),
       gagarinBase: this.gagarinBase,
       stJosephCathedrals: this.stJosephCathedrals,
-      nomadSpace: this.nomadSpace,
       gameAge: this.gameAge,
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
@@ -1378,8 +1375,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  public removeTile(spaceId: SpaceId): void {
-    const space = this.board.getSpace(spaceId);
+  public removeTile(space: Space): void {
     space.tile = undefined;
     space.player = undefined;
   }
@@ -1616,7 +1612,6 @@ export class Game implements IGame, Logger {
     game.gagarinBase = d.gagarinBase;
     // TODO(kberg): remove ?? [] by 2023-11-01
     game.stJosephCathedrals = d.stJosephCathedrals ?? [];
-    game.nomadSpace = d.nomadSpace;
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
 

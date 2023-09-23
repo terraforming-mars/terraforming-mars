@@ -8,6 +8,7 @@ import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {Space} from '../../boards/Space';
 import {intersection} from '../../../common/utils/utils';
+import {TileType} from '../../../common/TileType';
 
 export class MarsNomads extends Card implements IActionCard {
   constructor() {
@@ -42,7 +43,7 @@ export class MarsNomads extends Card implements IActionCard {
       'Select space for Nomads',
       player.game.board.getAvailableSpacesOnLand(player),
       (space: Space) => {
-        player.game.nomadSpace = space.id;
+        player.game.addTile(player, space, {tileType: TileType.MARS_NOMADS, card: this.name});
         return undefined;
       },
     );
@@ -51,12 +52,15 @@ export class MarsNomads extends Card implements IActionCard {
   private eliglbleDestinationSpaces(player: IPlayer) {
     const game = player.game;
     const board = game.board;
-    if (game.nomadSpace === undefined) {
-      return [];
-    }
 
     const availableSpaces = board.getAvailableSpacesOnLand(player);
-    const currentNomadSpace = board.getSpace(game.nomadSpace);
+    const currentNomadSpace = board.getSpaceByTileCard(this.name);
+    // This might not be an ideal option, but it's the least disruptive.
+    // There should be a space, and if there isn't, well, let's not penalize
+    // the player.
+    if (currentNomadSpace === undefined) {
+      return [];
+    }
     const adjacentSpaces = board.getAdjacentSpaces(currentNomadSpace);
     return intersection(availableSpaces, adjacentSpaces);
   }
@@ -72,8 +76,12 @@ export class MarsNomads extends Card implements IActionCard {
       'Select new destination for Mars Nomads',
       spaces,
       (space: Space) => {
-        player.game.nomadSpace = space.id;
-        player.game.grantSpaceBonuses(player, space);
+        const currentNomadSpace = player.game.board.getSpaceByTileCard(this.name);
+
+        if (currentNomadSpace !== undefined) {
+          player.game.removeTile(currentNomadSpace);
+        }
+        player.game.addTile(player, space, {tileType: TileType.MARS_NOMADS, card: this.name});
 
         return undefined;
       },

@@ -6,6 +6,7 @@ import {played} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
 
 export class Xavier extends CeoCard {
   constructor() {
@@ -25,8 +26,11 @@ export class Xavier extends CeoCard {
     });
   }
 
-
   public opgActionIsActive = false;
+
+  public override get tags(): Array<Tag> {
+    return this.opgActionIsActive ? [Tag.WILD, Tag.WILD] : [];
+  }
 
   public action(): PlayerInput | undefined {
     this.isDisabled = true;

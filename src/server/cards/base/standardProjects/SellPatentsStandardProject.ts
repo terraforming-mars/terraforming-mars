@@ -35,7 +35,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
       'Sell patents',
       'Sell',
       player.cardsInHand,
-      (cards) => {
+      (cards: Array<IProjectCard>) => {
         player.megaCredits += cards.length;
         cards.forEach((card) => player.discardCardFromHand(card));
         this.projectPlayed(player);

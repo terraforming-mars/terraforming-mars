@@ -194,9 +194,9 @@ export class Player implements IPlayer {
   public removedFromPlayCards: Array<IProjectCard> = [];
 
   // The number of actions a player can take this round.
-  // It's almost always 2, but certain cards can change this value.
+  // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
   //
-  // This value isn't serialized. Probably ought to.
+  // This value isn't serialized. Probably ought to be.
   public availableActionsThisRound = 2;
 
   // Stats

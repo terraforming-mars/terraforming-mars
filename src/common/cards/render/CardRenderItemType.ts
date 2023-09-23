@@ -87,4 +87,7 @@ export enum CardRenderItemType {
   REDS_DEACTIVATED = 'reds-deactivated',
   HAZARD_TILE = 'hazard-tile',
   ADJACENCY_BONUS = 'adjacency-bonus',
+
+  // Star Wars
+  CLONE_TROOPER = 'clone-trooper',
 }

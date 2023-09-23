@@ -58,8 +58,7 @@ export class Warmonger implements IAward {
     CardName.PUBLIC_SPONSORED_GRANT,
     // CEOs
     CardName.BJORN,
-    // // Star Wars
-    // CardName.FOREST_MOON,
-    // CardName.CLONE_TROOPERS,
+    // Star Wars
+    CardName.CLONE_TROOPERS,
   ] as const;
 }

@@ -457,6 +457,23 @@ input[type="radio"]:checked + .filterDiv::after {
     content: "💼";
 }
 
+.starwars-icon:after {
+    position: absolute;
+    color:#DDD;
+    border: 1px solid #222;
+    background: #999;
+    font-family: Prototype;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    width: 16px;
+    height:16px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+    content: "W";
+}
+
 .button-icon:after {
     margin-top: -9px;
     margin-left: -9px;
@@ -2692,6 +2709,10 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .expansion-icon-ceo {
     background-image: url(./assets/expansion_icons/expansion_icon_ceo.png);
+}
+
+.expansion-icon-starwars {
+    background-image: url(./assets/expansion_icons/expansion_icon_starwars.png);
 }
 
 /* refactored */

@@ -302,6 +302,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.FIGHTER, amount));
   }
 
+  public cloneTrooper(amount: number = 1) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.CLONE_TROOPER, amount));
+  }
+
   public camps(amount: number = 1) {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.CAMPS, amount));
   }

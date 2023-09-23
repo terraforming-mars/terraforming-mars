@@ -250,6 +250,9 @@ export default Vue.extend({
           classes.push('card-hazard-tile');
         }
         break;
+      case CardRenderItemType.CLONE_TROOPER:
+        classes.push('card-resource', 'card-resource-clone-trooper');
+        break;
       case CardRenderItemType.MOON_HABITAT_RATE:
         classes.push('card-colony-rate');
         if (this.item.size !== undefined) {

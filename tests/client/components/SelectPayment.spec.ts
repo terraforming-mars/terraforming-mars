@@ -12,7 +12,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {heat: 5, megaCredits: 7},
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -45,7 +45,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {steel: 4, megaCredits: 7, steelValue: 2},
-      {canUseSteel: true});
+      {paymentOptions: {steel: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -58,7 +58,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {steel: 1, titanium: 2, megaCredits: 7, steelValue: 2, titaniumValue: 3},
-      {canUseSteel: true, canUseTitanium: true});
+      {paymentOptions: {steel: true, titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -72,7 +72,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {megaCredits: 2, titanium: 4, titaniumValue: 7},
-      {canUseTitanium: true});
+      {paymentOptions: {titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -85,7 +85,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 6},
-      {canUseSeeds: true, seeds: 4});
+      {paymentOptions: {seeds: true}, seeds: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -98,7 +98,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 2},
-      {canUseSeeds: true, seeds: 4});
+      {paymentOptions: {seeds: true}, seeds: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -111,7 +111,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 6},
-      {canUseAuroraiData: true, auroraiData: 4});
+      {paymentOptions: {auroraiData: true}, auroraiData: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -124,7 +124,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {megaCredits: 2, titanium: 4, titaniumValue: 4, heat: 3},
-      {canUseTitanium: true, canUseHeat: true});
+      {paymentOptions: {titanium: true, heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -147,7 +147,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {megaCredits: 12, titanium: 0, titaniumValue: 3, steelValue: 2, heat: 0},
-      {canUseTitanium: true, canUseHeat: true, canUseSteel: true});
+      {paymentOptions: {titanium: true, heat: true, steel: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -164,7 +164,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       9,
       {megaCredits: 16, heat: 3},
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -189,7 +189,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {megaCredits: 5, titanium: 4, titaniumValue: 4, heat: 3},
-      {canUseTitanium: true, canUseHeat: true});
+      {paymentOptions: {titanium: true, heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -224,7 +224,7 @@ describe('SelectPayment', () => {
             resources: 3,
           } as CardModel,
         ]},
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -252,7 +252,7 @@ describe('SelectPayment', () => {
           } as CardModel,
         ],
       },
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -272,7 +272,7 @@ describe('SelectPayment', () => {
       {
         megaCredits: 10, titanium: 2, titaniumValue: 4,
       },
-      {canUseLunaTradeFederationTitanium: true});
+      {paymentOptions: {lunaTradeFederationTitanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -286,13 +286,13 @@ describe('SelectPayment', () => {
     tester.expectValue('titanium', 2);
   });
 
-  it('Luna Trade Federation: Can use titanium at normal rate when canUseTitanium is true', async () => {
+  it('Luna Trade Federation: Can use titanium at normal rate when titanium is true', async () => {
     const wrapper = setupBill(
       10,
       {
         megaCredits: 10, titanium: 2, titaniumValue: 4,
       },
-      {canUseLunaTradeFederationTitanium: true, canUseTitanium: true});
+      {paymentOptions: {lunaTradeFederationTitanium: true, titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();

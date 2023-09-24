@@ -208,7 +208,7 @@ export default Vue.extend({
       }
     },
     canUseHeat(): boolean {
-      return this.playerinput.canUseHeat === true && this.availableHeat() > 0;
+      return this.playerinput.paymentOptions?.heat === true && this.availableHeat() > 0;
     },
     canUseSteel() {
       if (this.card !== undefined && this.available.steel > 0) {
@@ -227,7 +227,7 @@ export default Vue.extend({
       return false;
     },
     canUseLunaTradeFederationTitanium() {
-      return this.card !== undefined && this.available.titanium > 0 && this.playerinput.canUseLunaTradeFederationTitanium === true;
+      return this.card !== undefined && this.available.titanium > 0 && this.playerinput.paymentOptions?.lunaTradeFederationTitanium === true;
     },
     canUseMicrobes() {
       // FYI microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.

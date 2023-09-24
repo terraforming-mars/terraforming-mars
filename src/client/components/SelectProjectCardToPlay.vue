@@ -327,7 +327,7 @@ export default Vue.extend({
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 
     <div class="payments_type input-group" v-if="canUse('steel')">
-      <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
+      <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay with Steel"></i>
       <AppButton type="minus" @click="reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
       <AppButton type="plus" @click="addValue('steel', 1, available.steel)" />
@@ -338,7 +338,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUse('titanium') || canUseLunaTradeFederationTitanium()">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
+      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay with Titanium')"></i>
       <AppButton type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <AppButton type="plus" @click="addValue('titanium', 1, available.titanium)" />
@@ -349,7 +349,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUse('heat')">
-      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
+      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay with Heat')"></i>
       <AppButton type="minus" @click="reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <AppButton type="plus" @click="addValue('heat', 1, available.heat)" />
@@ -360,7 +360,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUse('microbes')">
-      <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay by Microbes')"></i>
+      <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay with Microbes')"></i>
       <AppButton type="minus" @click="reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
       <AppButton type="plus" @click="addValue('microbes', 1)" />
@@ -368,7 +368,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUse('floaters')">
-      <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay by Floaters')"></i>
+      <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay with Floaters')"></i>
       <AppButton type="minus" @click="reduceValue('floaters', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
       <AppButton type="plus" @click="addValue('floaters', 1)" />
@@ -376,7 +376,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUse('lunaArchivesScience')">
-      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by (Luna Archive) Science Resources')"></i>
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay with (Luna Archive) Science Resources')"></i>
       <AppButton type="minus" @click="reduceValue('lunaArchivesScience', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="lunaArchivesScience" />
       <AppButton type="plus" @click="addValue('lunaArchivesScience', 1)" />
@@ -384,7 +384,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUse('seeds')">
-      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
+      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay with Seeds')"></i>
       <AppButton type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
       <AppButton type="plus" @click="addValue('seeds', 1)" />
@@ -401,7 +401,7 @@ export default Vue.extend({
 
 
     <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
+      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay with Megacredits')"></i>
       <AppButton type="minus" @click="reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <AppButton type="plus" @click="addValue('megaCredits', 1)" />

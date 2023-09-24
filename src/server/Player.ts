@@ -8,7 +8,7 @@ import {Color} from '../common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
-import {Payment, PaymentKey, PAYMENT_KEYS, PaymentOptions, DEFAULT_PAYMENT_VALUES} from '../common/inputs/Payment';
+import {Payment, PaymentUnit, PAYMENT_KEYS, PaymentOptions, DEFAULT_PAYMENT_VALUES} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
@@ -1439,7 +1439,7 @@ export class Player implements IPlayer {
       titanium: this.getTitaniumValue(),
     };
 
-    const usable: {[key in PaymentKey]: boolean} = {
+    const usable: {[key in PaymentUnit]: boolean} = {
       megaCredits: true,
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,

@@ -76,7 +76,7 @@ describe('MarsUniversity', function() {
     player.playCard(roboticWorkforce);
     expect(game.deferredActions).has.lengthOf(3);
 
-    const olympusConferenceAction = game.deferredActions.pop()?.execute();
+    const olympusConferenceAction = cast(game.deferredActions.pop()?.execute(), OrOptions);
     expect(olympusConferenceAction?.title).to.match(/Olympus Conference/);
     // Second option adds another resource.
     olympusConferenceAction?.options?.[1].cb();

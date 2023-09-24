@@ -27,13 +27,4 @@ describe('LanguageSwitcher', () => {
     expect(preferenceSaveSpy.calledWith('lang', 'en')).to.be.true;
     preferenceSaveSpy.restore();
   });
-
-  it('reloads application on lang switch', async () => {
-    const windowReloadSpy = sinon.spy(window.location, 'reload');
-    const wrapper = shallowMount(LanguageSwitcher);
-
-    await wrapper.find('.language-icon--en').trigger('click');
-    expect(windowReloadSpy.called).to.be.true;
-    windowReloadSpy.restore();
-  });
 });

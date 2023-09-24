@@ -1,9 +1,6 @@
 <template>
   <div class="debug-ui-container" :class="getLanguageCssClass()">
       <h1 v-i18n>Cards List</h1>
-      <div class="legacy-anchor">
-        <a href="https://ssimeonoff.github.io/cards-list" target="_blank"><span v-i18n>legacy card UI</span></a>
-      </div>
 
       <!-- start filters -->
 
@@ -25,7 +22,7 @@
           <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
           <label :for="`${expansion}-checkbox`" class="expansion-button">
             <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
-            <span v-i18n>{{expansionName(expansion)}}</span>
+            <span v-i18n>{{MODULE_NAMES[expansion]}}</span>
           </label>
         </span>
       </div>
@@ -167,7 +164,7 @@ import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES, PATHFINDERS_COLONY_NAMES}
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
-import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
+import {GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {Tag} from '@/common/cards/Tag';
 import {allColonyNames, getColony} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
@@ -189,6 +186,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
   corpera: 'c',
   prelude: 'p',
+  prelude2: '2',
   venus: 'v',
   colonies: 'C',
   turmoil: 't',
@@ -198,10 +196,11 @@ const moduleAbbreviations: Record<GameModule, string> = {
   moon: 'm',
   pathfinders: 'P',
   ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
+  starwars: 'w',
 };
 
 // TODO(kberg): make this use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramPl';
+const ALL_MODULES = 'bcpvCt*ramPl2w';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
@@ -304,6 +303,7 @@ export default (Vue as WithRefs<Refs>).extend({
         base: true,
         corpera: true,
         prelude: true,
+        prelude2: true,
         venus: true,
         colonies: true,
         turmoil: true,
@@ -313,6 +313,7 @@ export default (Vue as WithRefs<Refs>).extend({
         promo: true,
         pathfinders: true,
         ceo: true,
+        starwars: true,
       },
       types: {
         event: true,
@@ -367,6 +368,9 @@ export default (Vue as WithRefs<Refs>).extend({
   computed: {
     allModules(): ReadonlyArray<GameModule> {
       return GAME_MODULES;
+    },
+    MODULE_NAMES(): typeof MODULE_NAMES {
+      return MODULE_NAMES;
     },
     allTypes(): Array<TypeOption> {
       return [
@@ -495,6 +499,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'base': return 'Base';
       case 'corpera': return 'Corporate Era';
       case 'prelude': return 'Prelude';
+      case 'prelude2': return 'Prelude 2';
       case 'venus': return 'Venus Next';
       case 'colonies': return 'Colonies';
       case 'turmoil': return 'Turmoil';
@@ -504,6 +509,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'moon': return 'The Moon';
       case 'pathfinders': return 'Pathfinders';
       case 'ceo': return 'CEOs';
+      case 'starwars': return 'Star Wars';
       }
     },
     filterByTags(card: ClientCard): boolean {

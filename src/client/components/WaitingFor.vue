@@ -1,9 +1,9 @@
 <template>
   <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
   <div v-else class="wf-root">
-    <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
+    <!-- <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
       <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
-    </template>
+    </template> -->
     <player-input-factory :players="players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
@@ -97,6 +97,7 @@ export default Vue.extend({
       };
       xhr.send(JSON.stringify(out));
       xhr.onerror = function() {
+        // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
       };
     },
@@ -116,6 +117,7 @@ export default Vue.extend({
       };
       xhr.send();
       xhr.onerror = function() {
+        // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
       };
     },

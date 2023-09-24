@@ -23,8 +23,8 @@ export class WeGrowAsOne extends Card implements IProjectCard {
         'Increase each colony tile track 1 step if you have a colony on that colony tile.',
         cardNumber: 'M59',
         renderData: CardRenderer.builder((b) => {
-          b.placeColony({all}).text('+1').br;
-          b.colonies(1).asterix().slash().placeColony().text('+1');
+          b.colonyTile({all}).text('+1').br;
+          b.colonies(1).asterix().slash().colonyTile().text('+1');
         }),
       },
     });

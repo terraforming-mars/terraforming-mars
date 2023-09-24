@@ -12,6 +12,7 @@ export interface CreateGameModel {
   players: Array<NewPlayerModel>;
   corporateEra: boolean;
   prelude: boolean;
+  prelude2Expansion: boolean;
   draftVariant: boolean;
   initialDraft: boolean;
   randomMA: RandomMAOptionType;
@@ -62,4 +63,5 @@ export interface CreateGameModel {
   ceoExtension: boolean;
   customCeos: Array<CardName>;
   startingCeos: number;
+  starWarsExpansion: boolean,
 }

@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import SelectPayment from '@/client/components/SelectPayment.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 import {CardName} from '@/common/cards/CardName';
@@ -12,7 +12,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {heat: 5, megaCredits: 7},
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -45,7 +45,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {steel: 4, megaCredits: 7, steelValue: 2},
-      {canUseSteel: true});
+      {paymentOptions: {steel: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -58,7 +58,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {steel: 1, titanium: 2, megaCredits: 7, steelValue: 2, titaniumValue: 3},
-      {canUseSteel: true, canUseTitanium: true});
+      {paymentOptions: {steel: true, titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -72,7 +72,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {megaCredits: 2, titanium: 4, titaniumValue: 7},
-      {canUseTitanium: true});
+      {paymentOptions: {titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -85,7 +85,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 6},
-      {canUseSeeds: true, seeds: 4});
+      {paymentOptions: {seeds: true}, seeds: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -98,7 +98,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 2},
-      {canUseSeeds: true, seeds: 4});
+      {paymentOptions: {seeds: true}, seeds: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -111,7 +111,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       14,
       {megaCredits: 6},
-      {canUseData: true, auroraiData: 4});
+      {paymentOptions: {auroraiData: true}, auroraiData: 4});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -124,7 +124,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {megaCredits: 2, titanium: 4, titaniumValue: 4, heat: 3},
-      {canUseTitanium: true, canUseHeat: true});
+      {paymentOptions: {titanium: true, heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -134,7 +134,7 @@ describe('SelectPayment', () => {
     tester.expectIsAvailable('titanium', true);
     tester.expectIsAvailable('heat', true);
     tester.expectIsAvailable('megaCredits', true);
-    tester.expectIsAvailable('science', false);
+    tester.expectIsAvailable('lunaArchivesScience', false);
     tester.expectIsAvailable('seeds', false);
     tester.expectIsAvailable('auroraiData', false);
 
@@ -147,7 +147,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {megaCredits: 12, titanium: 0, titaniumValue: 3, steelValue: 2, heat: 0},
-      {canUseTitanium: true, canUseHeat: true, canUseSteel: true});
+      {paymentOptions: {titanium: true, heat: true, steel: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -164,7 +164,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       9,
       {megaCredits: 16, heat: 3},
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -189,7 +189,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {megaCredits: 5, titanium: 4, titaniumValue: 4, heat: 3},
-      {canUseTitanium: true, canUseHeat: true});
+      {paymentOptions: {titanium: true, heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -224,7 +224,7 @@ describe('SelectPayment', () => {
             resources: 3,
           } as CardModel,
         ]},
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -252,7 +252,7 @@ describe('SelectPayment', () => {
           } as CardModel,
         ],
       },
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -269,30 +269,44 @@ describe('SelectPayment', () => {
   it('Luna Trade Federation: Can use titanium by default', async () => {
     const wrapper = setupBill(
       10,
-      {
-        megaCredits: 10, titanium: 2, titaniumValue: 4,
-      },
-      {canUseLunaTradeFederationTitanium: true});
+      // Note here that titanium is valued at 4, so LTF titanium will be valued at 3.
+      {megaCredits: 10, titanium: 2, titaniumValue: 4},
+      {paymentOptions: {titanium: false, lunaTradeFederationTitanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectValue('megaCredits', 10);
-    tester.expectValue('titanium', 0);
-
-    await tester.clickMax('titanium');
-
     tester.expectValue('megaCredits', 4);
     tester.expectValue('titanium', 2);
+
+    await tester.clickMinus('titanium');
+
+    tester.expectValue('megaCredits', 7);
+    tester.expectValue('titanium', 1);
   });
 
-  it('Luna Trade Federation: Can use titanium at normal rate when canUseTitanium is true', async () => {
+  it('Pay with titanium', async () => {
     const wrapper = setupBill(
       10,
       {
         megaCredits: 10, titanium: 2, titaniumValue: 4,
       },
-      {canUseLunaTradeFederationTitanium: true, canUseTitanium: true});
+      {paymentOptions: {titanium: true, lunaTradeFederationTitanium: false}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('megaCredits', 2);
+    tester.expectValue('titanium', 2);
+  });
+
+  it('Luna Trade Federation: Can use titanium at normal rate when paymentOptions{titanium} is true', async () => {
+    const wrapper = setupBill(
+      10,
+      {
+        megaCredits: 10, titanium: 2, titaniumValue: 4,
+      },
+      {paymentOptions: {lunaTradeFederationTitanium: true, titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -314,7 +328,7 @@ describe('SelectPayment', () => {
   const setupBill = function(
     amount: number,
     playerFields: Partial<PublicPlayerModel>,
-    playerInputFields: Partial<PlayerInputModel>) {
+    playerInputFields: Partial<SelectPaymentModel>) {
     const thisPlayer: Partial<PublicPlayerModel> = {
       steel: 0,
       titanium: 0,
@@ -329,12 +343,16 @@ describe('SelectPayment', () => {
       id: 'playerid-foo',
     };
 
-    const playerInput: Partial<PlayerInputModel> = {
-      amount: amount,
+    const playerInput: SelectPaymentModel = {
+      type: 'payment',
+      buttonLabel: '',
       title: 'foo',
-      microbes: 0,
-      floaters: 0,
-      science: 0,
+      amount: amount,
+      paymentOptions: {},
+      auroraiData: 0,
+      kuiperAsteroids: 0,
+      seeds: 0,
+      spireScience: 0,
       ...playerInputFields,
     };
 

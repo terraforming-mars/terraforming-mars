@@ -32,6 +32,7 @@ export class VenusianAnimals extends Card implements IProjectCard {
     });
   }
   public onCardPlayed(player: IPlayer, card: IProjectCard): void {
-    player.addResourceTo(this, player.tags.cardTagCount(card, Tag.SCIENCE));
+    const qty = player.tags.cardTagCount(card, Tag.SCIENCE);
+    player.addResourceTo(this, {qty, log: true});
   }
 }

@@ -26,7 +26,6 @@ describe('Milestones', function() {
     const toggler = milestone.find('a[class="ma-clickable"]');
     await toggler.trigger('click');
     const test = milestone.find('div[class*="ma-name--milestones');
-    console.log(test.classes());
     expect(test.classes()).to.contain('ma-name');
     expect(test.classes()).to.contain('ma-name--farmer');
   });

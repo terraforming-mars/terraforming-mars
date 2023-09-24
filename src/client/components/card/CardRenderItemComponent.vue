@@ -156,6 +156,9 @@ export default Vue.extend({
       case CardRenderItemType.NO_TAGS:
         classes.push('card-resource-tag', 'card-community-services');
         break;
+      case CardRenderItemType.EMPTY_TAG:
+        classes.push('card-resource-tag', 'card-tag-empty');
+        break;
       case CardRenderItemType.CITY:
         if (this.item.isPlayed !== true) {
           classes.push('card-tile', `city-tile--${this.item.size}`);
@@ -185,6 +188,9 @@ export default Vue.extend({
         } else {
           classes.push('special-tile');
         }
+        break;
+      case CardRenderItemType.CITY_OR_SPECIAL_TILE:
+        classes.push('card-tile', 'city-or-special-tile');
         break;
       case CardRenderItemType.COMMUNITY:
         classes.push('card-resource', 'card-resource-community');
@@ -244,6 +250,9 @@ export default Vue.extend({
           classes.push('card-hazard-tile');
         }
         break;
+      case CardRenderItemType.CLONE_TROOPER:
+        classes.push('card-resource', 'card-resource-clone-trooper');
+        break;
       case CardRenderItemType.MOON_HABITAT_RATE:
         classes.push('card-colony-rate');
         if (this.item.size !== undefined) {
@@ -280,6 +289,12 @@ export default Vue.extend({
         break;
       case CardRenderItemType.GRAPHENE:
         classes.push('card-resource', 'card-resource-graphene');
+        break;
+      case CardRenderItemType.NOMADS:
+        classes.push('card-resource', 'card-resource-nomads');
+        break;
+      case CardRenderItemType.HYDROELECTRIC_RESOURCE:
+        classes.push('card-resource', 'card-resource-hydroelectric-resource');
         break;
       }
 
@@ -398,8 +413,8 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
         result = '<div class="card-resource card-card"><div class="cards-count">2</div><div class="card-icon card-icon-space">✴</div><div class="card-icon card-icon-building">☗</div></div>';
       }
-      if (this.item.type === CardRenderItemType.PLACE_COLONY) {
-        result = '<span class="card-place-colony">colony</span>';
+      if (this.item.type === CardRenderItemType.COLONY_TILE) {
+        result = '<span class="card-colony-tile">colony</span>';
       }
       if (this.item.type === CardRenderItemType.PRELUDE) {
         result = '<div class="card-prelude-container"><span class="card-prelude-icon">prel</span></div>';

@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
@@ -44,6 +44,10 @@ describe('SelectProjectCardToPlay', () => {
           }],
           id: 'foo',
           selfReplicatingRobotCards: [],
+          thisPlayer: {
+            steel: 0,
+            tableau: [],
+          },
         },
         playerinput: {
           title: 'foo',
@@ -54,6 +58,7 @@ describe('SelectProjectCardToPlay', () => {
             name: CardName.BIRDS,
             reserveUnits: {},
           }],
+          paymentOptions: {},
         },
         onsave: () => {},
         showsave: true,
@@ -73,7 +78,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.BIRDS, 10,
       {heat: 4, megaCredits: 7},
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -93,7 +98,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.BIRDS, 10,
       {heat: 4, megaCredits: 10, titaniumValue: 1, steelValue: 1},
-      {canUseHeat: true},
+      {paymentOptions: {heat: true}},
       Units.of({heat: 2}));
 
     const tester = new PaymentTester(wrapper);
@@ -226,7 +231,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.REGO_PLASTICS, 10,
       {steel: 4, megaCredits: 7, steelValue: 2},
-      {canUseSteel: true});
+      {paymentOptions: {steel: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -249,7 +254,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.SOLAR_WIND_POWER, 11,
       {megaCredits: 2, titanium: 4, titaniumValue: 7},
-      {canUseTitanium: true});
+      {paymentOptions: {titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -273,7 +278,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.SPACE_ELEVATOR, 27,
       {megaCredits: 1, steel: 4, steelValue: 3, titanium: 6, titaniumValue: 6},
-      {canUseSteel: true, canUseTitanium: true});
+      {paymentOptions: {steel: true, titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -297,7 +302,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.PROTECTED_VALLEY, 23,
       {megaCredits: 0, steel: 10, steelValue: 4},
-      {canUseSteel: true, microbes: 5});
+      {paymentOptions: {steel: true}, microbes: 5});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -343,7 +348,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.GIANT_SOLAR_SHADE, 27,
       {megaCredits: 1, titanium: 6, titaniumValue: 7},
-      {canUseTitanium: true, floaters: 8});
+      {paymentOptions: {titanium: true}, floaters: 8});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -370,7 +375,7 @@ describe('SelectProjectCardToPlay', () => {
         steelValue: 2,
         titaniumValue: 0, // Needed for when setReminingMCValue is called.
       },
-      {canUseSteel: true},
+      {paymentOptions: {steel: true}},
       Units.of({steel: 2}));
 
     const tester = new PaymentTester(wrapper);
@@ -400,7 +405,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.IO_MINING_INDUSTRIES, 41,
       {megaCredits: 10, titanium: 13, titaniumValue: 5, steel: 2, steelValue: 4},
-      {canUseTitanium: true});
+      {paymentOptions: {titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -415,7 +420,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   // TODO(kberg): Be greedy with science units.
-  it('using science', async () => {
+  it('using luna archive science', async () => {
     // ARISTARCHUS_ROAD_NETWORK costs 15. Player has 7M€ and will use 8 science units.
     const wrapper = setupCardForPurchase(
       CardName.ARISTARCHUS_ROAD_NETWORK, 15,
@@ -423,17 +428,17 @@ describe('SelectProjectCardToPlay', () => {
         megaCredits: 7,
         steel: 0,
       },
-      {science: 10});
+      {lunaArchivesScience: 10});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsAvailable('science', true);
-    tester.expectValue('science', 8);
+    tester.expectIsAvailable('lunaArchivesScience', true);
+    tester.expectValue('lunaArchivesScience', 8);
     tester.expectValue('megaCredits', 7);
 
     tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({science: 8, megaCredits: 7}));
+    expect(saveResponse.payment).deep.eq(Payment.of({lunaArchivesScience: 8, megaCredits: 7}));
   });
 
   // TODO(kberg): be greedy with seeds.
@@ -466,7 +471,7 @@ describe('SelectProjectCardToPlay', () => {
         megaCredits: 11,
         titanium: 0,
       },
-      {graphene: 7, canUseGraphene: true});
+      {graphene: 7, paymentOptions: {graphene: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -488,7 +493,7 @@ describe('SelectProjectCardToPlay', () => {
         titanium: 4,
         lastCardPlayed: CardName.LAST_RESORT_INGENUITY,
       },
-      {canUseSteel: false, canUseTitanium: false});
+      {paymentOptions: {steel: false, titanium: false}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -515,7 +520,7 @@ describe('SelectProjectCardToPlay', () => {
             resources: 3,
           } as CardModel,
         ]},
-      {canUseHeat: true});
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -527,7 +532,7 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 7, megaCredits: 3}));
   });
 
-  it('Max includes Stormcraft floaters', async () => {
+  it('Max heat includes Stormcraft floaters', async () => {
     // Birds will cost 10. Player has 10 MC, 3 heat, and 1 floaters. It also is reserving one unit of heat.
     //
     // Initial setup will be that it selects 10MC.
@@ -545,7 +550,7 @@ describe('SelectProjectCardToPlay', () => {
           } as CardModel,
         ],
       },
-      {canUseHeat: true},
+      {paymentOptions: {heat: true}},
       Units.of({heat: 1}));
 
     const tester = new PaymentTester(wrapper);
@@ -567,7 +572,7 @@ describe('SelectProjectCardToPlay', () => {
     const wrapper = setupCardForPurchase(
       CardName.BIRDS, 10,
       {megaCredits: 10, titanium: 2, titaniumValue: 4},
-      {canUseLunaTradeFederationTitanium: true, canUseTitanium: false});
+      {paymentOptions: {lunaTradeFederationTitanium: true, titanium: false}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -584,11 +589,11 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 2, megaCredits: 4}));
   });
 
-  it('Luna Trade Federation: Can use titanium at normal rate when canUseTitanium is true', async () => {
+  it('Luna Trade Federation: Can use titanium at normal rate when titanium is true', async () => {
     const wrapper = setupCardForPurchase(
       CardName.SPACE_ELEVATOR, 27,
       {megaCredits: 15, titanium: 5, titaniumValue: 4},
-      {canUseLunaTradeFederationTitanium: true, canUseTitanium: true});
+      {paymentOptions: {lunaTradeFederationTitanium: true, titanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -609,7 +614,7 @@ describe('SelectProjectCardToPlay', () => {
     cardName: CardName,
     cardCost: number,
     playerFields: Partial<PublicPlayerModel>,
-    playerInputFields: Partial<PlayerInputModel>,
+    playerInputFields: Partial<SelectProjectCardToPlayModel>,
     reserveUnits: Units | undefined = undefined) {
     const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
@@ -624,18 +629,27 @@ describe('SelectProjectCardToPlay', () => {
       id: 'playerid-foo',
       thisPlayer: thisPlayer as PublicPlayerModel,
     };
-    const playerInput: Partial<PlayerInputModel> = {
+    const playerInput: SelectProjectCardToPlayModel = {
+      type: 'projectCard',
       title: 'foo',
+      buttonLabel: 'bar',
       cards: [{
         name: cardName,
         resources: undefined,
         calculatedCost: cardCost,
       }],
+      paymentOptions: {},
+      floaters: 0,
+      graphene: 0,
+      kuiperAsteroids: 0,
+      lunaArchivesScience: 0,
+      microbes: 0,
+      seeds: 0,
+      ...playerInputFields,
     };
     if (reserveUnits !== undefined) {
       playerInput.cards![0].reserveUnits = reserveUnits;
     }
-    Object.assign(playerInput, playerInputFields);
 
     return mount(SelectProjectCardToPlay, {
       localVue: getLocalVue(),

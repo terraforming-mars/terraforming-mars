@@ -3,7 +3,7 @@ import {setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/server/cards/moon/AlgaeBioreactors';
 import {expect} from 'chai';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Phase} from '../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
@@ -12,7 +12,7 @@ describe('AlgaeBioreactors', () => {
   let player: TestPlayer;
   let card: AlgaeBioreactors;
   let game: Game;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

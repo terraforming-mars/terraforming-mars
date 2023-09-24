@@ -298,6 +298,9 @@ input[type="radio"]:checked + .filterDiv::after {
     transform: rotate(-90deg);
 }
 
+.prelude2-icon:after {
+  &:extend(.prelude-icon:after);
+}
 .venus-icon:after {
     position: absolute;
     border: 1px solid black;
@@ -452,6 +455,23 @@ input[type="radio"]:checked + .filterDiv::after {
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "💼";
+}
+
+.starwars-icon:after {
+    position: absolute;
+    color:#DDD;
+    border: 1px solid #222;
+    background: #999;
+    font-family: Prototype;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    width: 16px;
+    height:16px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+    content: "W";
 }
 
 .button-icon:after {
@@ -925,9 +945,9 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .special-tile {
     background-image: url(./assets/tiles/special.png);
-    width: 47px;
-    height: 51px;
-    background-size: 47px 51px;
+    width: 40px;
+    height: 47px;
+    background-size: 40px;
 }
 
 .special-tile--S {
@@ -949,6 +969,13 @@ input[type="radio"]:checked + .filterDiv::after {
     height: 40px;
     background-size: 60px 40px;
     color: #0000;
+}
+
+.city-or-special-tile {
+    background-image: url(./assets/promo/city-or-special-tile.png);
+    width: 40px;
+    height: 47px;
+    background-size: 40px;
 }
 
 .rating {
@@ -2640,6 +2667,11 @@ input[type="radio"]:checked + .filterDiv::after {
     background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
 }
 
+// Create an icon with a 2, perhaps?
+.expansion-icon-prelude2 {
+    background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
+}
+
 .expansion-icon-colony {
     background-image: url(./assets/expansion_icons/expansion_icon_colonies.png);
 }
@@ -2677,6 +2709,10 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .expansion-icon-ceo {
     background-image: url(./assets/expansion_icons/expansion_icon_ceo.png);
+}
+
+.expansion-icon-starwars {
+    background-image: url(./assets/expansion_icons/expansion_icon_starwars.png);
 }
 
 /* refactored */

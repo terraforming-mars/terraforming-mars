@@ -67,6 +67,9 @@ export class Celestic extends ActionCard implements ICorporationCard {
     CardName.NOBEL_LABS,
     CardName.SECRET_LABS,
     CardName.VENERA_BASE,
+
+    // Star Wars
+    CardName.CLOUD_CITY,
   ]);
 
   public initialAction(player: IPlayer) {

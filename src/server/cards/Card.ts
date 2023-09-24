@@ -15,15 +15,11 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
+import {OneOrArray, PartialField} from '../../common/utils/types';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
-import {OneOrArray} from '../../common/utils/types';
-import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
-import {CardRequirements} from './requirements/CardRequirements';
-import {asArray} from '../../common/utils/utils';
-import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -234,7 +230,7 @@ export abstract class Card {
       return vp;
     }
     if (typeof(vp) === 'object') {
-      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+      return new Counter(player, this).count(vp, 'vps');
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');

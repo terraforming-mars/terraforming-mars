@@ -8,7 +8,7 @@ import {IGame} from '../../IGame';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
-import {SelectColony} from '../..//inputs/SelectColony';
+import {SelectColony} from '../../inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
 import {LogHelper} from '../../LogHelper';
 

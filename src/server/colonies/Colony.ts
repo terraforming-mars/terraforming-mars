@@ -27,9 +27,11 @@ import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../commo
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {sum} from '../../common/utils/utils';
 
+export enum ShouldIncreaseTrack { YES, NO, ASK }
 export abstract class Colony implements IColony {
   // Players can't build colonies on Miranda until someone has played an Animal card.
   // isActive is the gateway for that action and any other card with that type of constraint
+  // also isActive represents when the colony is part of the game, or "back in the box", as it were.
   public isActive: boolean = true;
   public visitor: undefined | PlayerId = undefined;
   public colonies: Array<PlayerId> = [];
@@ -86,16 +88,24 @@ export abstract class Colony implements IColony {
       this.trackPosition = this.colonies.length;
     }
 
+    // TODO(kberg): Time for an onNewColony hook.
+
     // Poseidon hook
     const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
     if (poseidon !== undefined) {
-      poseidon.production.add(Resource.MEGACREDITS, 1);
+      poseidon.production.add(Resource.MEGACREDITS, 1, {log: true});
     }
 
     // CEO Naomi hook
     if (player.cardIsInEffect(CardName.NAOMI)) {
       player.stock.add(Resource.ENERGY, 2, {log: true});
       player.stock.add(Resource.MEGACREDITS, 3, {log: true});
+    }
+
+    // Colony Trade Hub hook
+    const colonyTradeHub = player.game.getPlayers().find((player) => player.cardIsInEffect(CardName.COLONY_TRADE_HUB));
+    if (colonyTradeHub !== undefined) {
+      colonyTradeHub.stock.add(Resource.MEGACREDITS, 2, {log: true});
     }
   }
 

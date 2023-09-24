@@ -430,13 +430,28 @@ export enum CardName {
     WILDLIFE_DOME = 'Wildlife Dome',
     VOTE_OF_NO_CONFIDENCE = 'Vote Of No Confidence',
 
+    // Prelude 2
     // Prelude 2 Project Cards
+    DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
+    ISHTAR_EXPEDITION = 'Ishtar Expedition',
+    L1_TRADE_TERMINAL = 'L1 Trade Terminal',
+    RED_APPEASEMENT = 'Red Appeasement',
+    SUMMIT_LOGISTICS = 'Summit Logistics',
+    CERES_TECH_MARKET = 'Ceres Tech Market',
 
     // Prelude 2 Preludes
     APPLIED_SCIENCE = 'Applied Science',
+    FOCUSED_ORGANIZATION = 'Focused Organization',
+    OLD_MINING_COLONY = 'Old Mining Colony',
+    NOBEL_PRIZE = 'Nobel Prize',
+    COLONY_TRADE_HUB = 'Colony Trade Hub',
 
     // Prelude 2 Corps
-    NIGRAL_ENTERPRISES = 'Nigral Enterprises',
+    NIRGAL_ENTERPRISES = 'Nirgal Enterprises',
+    PALLADIN_SHIPPING = 'Palladin Shipping',
+    ECOTEC = 'EcoTec',
+    SAGITTA_FRONTIER_SERVICES ='Sagitta Frontier Services',
+    SPIRE = 'Spire',
 
     // Promo cards
     DUSK_LASER_MINING = 'Dusk Laser Mining',
@@ -484,7 +499,6 @@ export enum CardName {
     ROBOT_POLLINATORS = 'Robot Pollinators',
     HEAD_START = 'Head Start',
     SUPERCAPACITORS = 'Supercapacitors',
-    DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
     ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
     TYCHO_MAGNETICS = 'Tycho Magnetics',
     AQUEDUCT_SYSTEMS = 'Aqueduct Systems',
@@ -492,8 +506,19 @@ export enum CardName {
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
     CARBON_NANOSYSTEMS = 'Carbon Nanosystems',
     CYBERIA_SYSTEMS = 'Cyberia Systems',
+    ESTABLISHED_METHODS = 'Established Methods',
     GIANT_SOLAR_COLLECTOR = 'Giant Solar Collector',
     HERMETIC_ORDER_OF_MARS = 'Hermetic Order of Mars',
+    HOMEOSTASIS_BUREAU = 'Homeostasis Bureau',
+    KAGUYA_TECH = 'Kaguya Tech',
+    KUIPER_COOPERATIVE = 'Kuiper Cooperative',
+    MARS_NOMADS = 'Mars Nomads',
+    NEPTUNIAN_POWER_CONSULTANTS = 'Neptunian Power Consultants',
+    MARTIAN_LUMBER_CORP = 'Martian Lumber Corp',
+    RED_SHIPS = 'Red Ships',
+    SOLAR_LOGISTICS = 'Solar Logistics',
+    TESLARACT = 'Teslaract',
+    // End of promo cards
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
@@ -762,7 +787,7 @@ export enum CardName {
     RINGCOM = 'Ringcom',
     CHIMERA = 'Chimera',
     SISTEMAS_SEEBECK = 'Sistemas Seebeck',
-    SPIRE = 'Spire',
+    // SPIRE = 'Spire',
     SOYLENT_SEEDLING_SYSTEMS = 'Soylent Seedling Systems',
     STEELARIS = 'Steelaris',
     MARS_MATHS = 'Mars Maths',
@@ -820,4 +845,15 @@ export enum CardName {
     XU = 'Xu',
     // CEO Preludes
     CO_LEADERSHIP = 'Co-leadership',
+
+    // Star Wars cards
+    TRADE_EMBARGO = 'Trade Embargo (I)',
+    CLONE_TROOPERS = 'Clone Troopers (II)',
+    BEHOLD_THE_EMPEROR = 'Behold The Emperor! (III)',
+    TOSCHE_STATION = 'Tosche Station (IV)',
+    CLOUD_CITY = 'Cloud City (V)',
+    FOREST_MOON = 'Forest Moon (VI)',
+    TAKONDA_CASTLE = 'Takonda Castle (VII)',
+    TOOL_WITH_THE_FIRST_ORDER = 'Tool with the First Order (VIII)',
+    REY_SKYWALKER = 'Rey ... Skywalker?! (IX)',
 }

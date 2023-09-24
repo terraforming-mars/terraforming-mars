@@ -180,6 +180,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.GRAPHENE, amount, options));
   }
 
+  public hydroelectricResource(amount: number, options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.HYDROELECTRIC_RESOURCE, amount, options));
+  }
+
   public event(options?: ItemOptions): this {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.EVENT, -1, options));
   }
@@ -223,8 +227,8 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public placeColony(options?: ItemOptions): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.PLACE_COLONY, -1, options));
+  public colonyTile(options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.COLONY_TILE, -1, options));
   }
 
   public influence(options?: ItemOptions): this {
@@ -237,13 +241,20 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public greenery(size: Size = Size.MEDIUM, withO2: boolean = true, any: boolean = false) {
+  /**
+   * Add a greenery.
+   *
+   * size: the tile size. Default is medium.
+   * withO2: Show the superscript oxygen icon. Defualt is true.
+   * any: for all players, Default is false.
+   */
+  public greenery(options?: {size?: Size, withO2?: boolean, any?: boolean}) {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
-    item.size = size;
-    if (withO2) {
+    item.size = options?.size ?? Size.MEDIUM;
+    if (options?.withO2 !== false) {
       item.secondaryTag = AltSecondaryTag.OXYGEN;
     }
-    if (any === true) {
+    if (options?.any === true) {
       item.anyPlayer = true;
     }
     return this._appendToRow(item);
@@ -269,6 +280,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
   }
 
+  public emptyTag(count: number = 1) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.EMPTY_TAG, count));
+  }
+
   public wild(amount: number, options?: ItemOptions) {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.WILD, amount, options));
   }
@@ -285,6 +300,10 @@ abstract class Builder<T> {
 
   public fighter(amount: number = 1) {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.FIGHTER, amount));
+  }
+
+  public cloneTrooper(amount: number = 1) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.CLONE_TROOPER, amount));
   }
 
   public camps(amount: number = 1) {
@@ -419,10 +438,19 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.CATHEDRAL, 1));
   }
 
+  public nomads(): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.NOMADS, 1));
+  }
 
   public specialTile(options?: ItemOptions) {
     this._appendToRow(new CardRenderItem(CardRenderItemType.EMPTY_TILE_SPECIAL, 1, options));
     return this;
+  }
+
+  public cityorSpecialTile(options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.CITY_OR_SPECIAL_TILE, -1, options);
+    item.size = options?.size ?? Size.MEDIUM;
+    return this._appendToRow(item);
   }
 
   public emptyTile(type: 'normal' | 'golden' = 'normal', options?: ItemOptions) {
@@ -534,6 +562,10 @@ abstract class Builder<T> {
     item.isBold = options.bold || true;
     item.anyPlayer = options.all;
     return this._appendToRow(item);
+  }
+
+  public plainText(text: string) {
+    return this.text(text, Size.SMALL, false, false);
   }
 
   public vpText(text: string): this {

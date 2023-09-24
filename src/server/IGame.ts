@@ -23,7 +23,7 @@ import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {AresData} from '../common/ares/AresData';
-import {IMoonData} from './moon/IMoonData';
+import {MoonData} from './moon/MoonData';
 import {SeededRandom} from '../common/utils/Random';
 import {PathfindersData} from './pathfinders/PathfindersData';
 import {GameOptions} from './game/GameOptions';
@@ -67,7 +67,7 @@ export interface IGame extends Logger {
   discardedColonies: Array<IColony>; // Not serialized
   turmoil: Turmoil | undefined;
   aresData: AresData | undefined;
-  moonData: IMoonData | undefined;
+  moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
   // Card-specific data
   // Mons Insurance promo corp
@@ -80,6 +80,11 @@ export interface IGame extends Logger {
   gagarinBase: Array<SpaceId>;
   // St. Joseph of Cupertino Mission
   stJosephCathedrals: Array<SpaceId>;
+  // Trade Embargo
+  tradeEmbargo: boolean;
+  // Behold The Emperor
+  beholdTheEmperor: boolean;
+
   // The set of tags available in this game.
   readonly tags: ReadonlyArray<Tag>;
   // Function use to properly start the game: with project draft or with research phase
@@ -144,7 +149,7 @@ export interface IGame extends Logger {
   canAddOcean(): boolean;
   canRemoveOcean(): boolean;
   addOcean(player: IPlayer, space: Space): void;
-  removeTile(spaceId: string): void;
+  removeTile(space: Space): void;
   getPlayers(): ReadonlyArray<IPlayer>;
   // Players returned in play order starting with first player this generation.
   getPlayersInGenerationOrder(): ReadonlyArray<IPlayer>;

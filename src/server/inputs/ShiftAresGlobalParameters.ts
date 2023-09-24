@@ -2,14 +2,25 @@ import {BasePlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {AresGlobalParametersResponse} from '../../common/inputs/AresGlobalParametersResponse';
 import {InputResponse, isAresGlobalParametersResponse, isShiftAresGlobalParametersResponse} from '../../common/inputs/InputResponse';
+import {ShiftAresGlobalParametersModel} from '../../common/models/PlayerInputModel';
 
 export class ShiftAresGlobalParameters extends BasePlayerInput {
   constructor(
-    public player: IPlayer,
     public cb: (units: AresGlobalParametersResponse) => undefined) {
     super('aresGlobalParameters', 'Adjust Ares global parameters up to 1 step.');
   }
 
+  public toModel(player: IPlayer): ShiftAresGlobalParametersModel {
+    if (player.game.aresData === undefined) {
+      throw new Error('Ares is not defined');
+    }
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'aresGlobalParameters',
+      aresData: player.game.aresData,
+    };
+  }
   public process(input: InputResponse, _player: IPlayer) {
     if (!isShiftAresGlobalParametersResponse(input)) {
       throw new Error('Not a valid ShiftAresGlobalParametersResponse');

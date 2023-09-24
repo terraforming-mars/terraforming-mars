@@ -1,4 +1,5 @@
 import {Units} from '../../common/Units';
+import {OneOrArray} from '../../common/utils/types';
 import {Tag} from '../../common/cards/Tag';
 import {NoAttributes} from './NoAttributes';
 import {OneOrArray} from '../../common/utils/types';
@@ -21,6 +22,9 @@ export type _Countable = {
   oceans?: NoAttributes,
   resourcesHere?: NoAttributes,
   floaters?: NoAttributes,
+  colonies?: {
+    colonies?: {},
+  }
   moon?: {
     habitatRate?: NoAttributes,
     miningRate?: NoAttributes,

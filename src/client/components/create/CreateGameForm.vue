@@ -1,7 +1,8 @@
 <template>
-        <div id="create-game">
+        <div id="create-game" class="create-game">
             <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
-            <div class="create-game-discord-invite" v-if="playersCount===1">
+            <div class="changelog"><a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Changelog" class="tooltip" target="_blank"><u v-i18n>Read our changelog to get the latest updates.</u></a></div>
+            <div class="discord-invite" v-if="playersCount===1">
               (<span v-i18n>Looking for people to play with</span>? <a :href="constants.DISCORD_INVITE" class="tooltip" target="_blank"><u v-i18n>Join us on Discord</u></a>.)
             </div>
 
@@ -41,6 +42,12 @@
                                 <span v-i18n>Prelude</span>
                             </label>
 
+                            <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="prelude2Expansion">
+                            <label for="prelude2-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
+                                <span v-i18n>Prelude 2 🆕(β)</span>
+                            </label>
+
                             <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
                             <label for="venusNext-checkbox" class="expansion-button">
                             <div class="create-game-expansion-icon expansion-icon-venus"></div>
@@ -62,7 +69,7 @@
                             <input type="checkbox" name="promo" id="promo-checkbox" v-model="promoCardsOption">
                             <label for="promo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-promo"></div>
-                                <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Promos 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <div class="create-game-subsection-label" v-i18n>Fan-made</div>
@@ -138,6 +145,12 @@
                             <label for="ceo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-ceo"></div>
                                 <span v-i18n>CEOs</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" name="starwars" id="starwars-checkbox" v-model="starWarsExpansion">
+                            <label for="starwars-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-starwars"></div>
+                                <span v-i18n>Star Wars 🆕(β)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>
 
@@ -425,6 +438,7 @@
                   v-on:corporation-list-changed="updatecustomCorporations"
                   v-bind:corporateEra="corporateEra"
                   v-bind:prelude="prelude"
+                  v-bind:prelude2="prelude2Expansion"
                   v-bind:venusNext="venusNext"
                   v-bind:colonies="colonies"
                   v-bind:turmoil="turmoil"
@@ -524,6 +538,7 @@ export default (Vue as WithRefs<Refs>).extend({
       ],
       corporateEra: true,
       prelude: false,
+      prelude2Expansion: false,
       draftVariant: true,
       initialDraft: false,
       randomMA: RandomMAOptionType.NONE,
@@ -586,6 +601,7 @@ export default (Vue as WithRefs<Refs>).extend({
       ceoExtension: false,
       customCeos: [],
       startingCeos: 3,
+      starWarsExpansion: false,
     };
   },
   components: {
@@ -845,6 +861,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'venus': return model.venusNext;
       case 'colonies': return model.colonies;
       case 'prelude': return model.prelude;
+      case 'prelude2': return model.prelude2Expansion;
       case 'turmoil': return model.turmoil;
       case 'community': return model.communityCardsOption;
       case 'ares': return model.aresExtension;
@@ -918,6 +935,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       const corporateEra = this.corporateEra;
       const prelude = this.prelude;
+      const prelude2Expansion = this.prelude2Expansion;
       const draftVariant = this.draftVariant;
       const initialDraft = this.initialDraft;
       const randomMA = this.randomMA;
@@ -959,6 +977,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const ceoExtension = this.ceoExtension;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
+      const starWarsExpansion = this.starWarsExpansion;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1081,6 +1100,7 @@ export default (Vue as WithRefs<Refs>).extend({
         players,
         corporateEra,
         prelude,
+        prelude2Expansion,
         draftVariant,
         showOtherPlayersVP,
         venusNext,
@@ -1126,6 +1146,7 @@ export default (Vue as WithRefs<Refs>).extend({
         ceoExtension,
         customCeos,
         startingCeos,
+        starWarsExpansion,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

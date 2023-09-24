@@ -2,6 +2,7 @@ import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
 import {MarsBoard} from '../../boards/MarsBoard';
 import {BoardType} from '../../boards/BoardType';
 import {Space} from '../../boards/Space';
@@ -14,6 +15,7 @@ export class SurveyMission extends PreludeCard {
   constructor() {
     super({
       name: CardName.SURVEY_MISSION,
+      tags: [Tag.MARS],
 
       behavior: {
         stock: {steel: 5},

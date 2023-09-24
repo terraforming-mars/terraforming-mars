@@ -6,19 +6,19 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
 import {isMarsSpace} from '@/common/boards/spaces';
 
 export default Vue.extend({
   name: 'GoToMap',
   props: {
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectSpaceModel,
     },
   },
   methods: {
     onclick(event: MouseEvent) {
-      const id = isMarsSpace(this.playerinput.availableSpaces?.[0] ?? '00') ? 'shortkey-board' : 'shortkey-moonBoard';
+      const id = isMarsSpace(this.playerinput.spaces?.[0] ?? '00') ? 'shortkey-board' : 'shortkey-moonBoard';
       const el = document.getElementById(id);
       if (el) {
         event.preventDefault();

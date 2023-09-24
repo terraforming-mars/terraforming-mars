@@ -10,12 +10,12 @@ import {CardType} from '../../../src/common/cards/CardType';
 describe('CommunicationCenter', function() {
   let card: CommunicationCenter;
   let player: TestPlayer;
-  let otherPlayer: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new CommunicationCenter();
-    [game, player, otherPlayer] = testGame(2, {pathfindersExpansion: true});
+    [game, player, player2] = testGame(2, {pathfindersExpansion: true});
     player.playedCards = [card];
   });
 
@@ -55,17 +55,17 @@ describe('CommunicationCenter', function() {
     player.onCardPlayed(fakeCard({type: CardType.EVENT}));
     expect(card.resourceCount).eq(1);
 
-    otherPlayer.onCardPlayed(fakeCard({type: CardType.EVENT}));
+    player2.onCardPlayed(fakeCard({type: CardType.EVENT}));
     expect(card.resourceCount).eq(2);
 
     expect(player.cardsInHand).is.length(0);
-    expect(otherPlayer.cardsInHand).is.length(0);
+    expect(player2.cardsInHand).is.length(0);
 
-    otherPlayer.onCardPlayed(fakeCard({type: CardType.EVENT}));
+    player2.onCardPlayed(fakeCard({type: CardType.EVENT}));
 
     expect(card.resourceCount).eq(0);
     expect(player.cardsInHand).is.length(1);
-    expect(otherPlayer.cardsInHand).is.length(0);
+    expect(player2.cardsInHand).is.length(0);
   });
 
   it('card.addResourceTo', () => {

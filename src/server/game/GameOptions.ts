@@ -21,6 +21,7 @@ export type GameOptions = {
   venusNextExtension: boolean;
   coloniesExtension: boolean;
   preludeExtension: boolean;
+  prelude2Expansion: boolean;
   turmoilExtension: boolean;
   promoCardsOption: boolean;
   communityCardsOption: boolean;
@@ -33,6 +34,7 @@ export type GameOptions = {
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
   ceoExtension: boolean;
+  starWarsExpansion: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -91,6 +93,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   pathfindersExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
+  prelude2Expansion: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
   requiresMoonTrackCompletion: false,
@@ -103,6 +106,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   soloTR: false,
   startingCeos: 3,
   startingCorporations: 2,
+  starWarsExpansion: false,
   turmoilExtension: false,
   undoOption: false,
   venusNextExtension: false,

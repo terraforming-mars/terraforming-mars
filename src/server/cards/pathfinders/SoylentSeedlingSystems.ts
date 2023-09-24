@@ -4,7 +4,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardResource} from '../../../common/CardResource';
@@ -32,7 +31,7 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
             eb.greenery().startEffect.seed();
           }).br;
           b.effect('When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.', (eb) => {
-            eb.plants(1, {played}).slash().greenery(Size.MEDIUM).startEffect.seed().equals().megacredits(5);
+            eb.plants(1, {played}).slash().greenery().startEffect.seed().equals().megacredits(5);
           }).br;
         }),
         description: 'You start with 38M€ and 2 seeds on this card.',

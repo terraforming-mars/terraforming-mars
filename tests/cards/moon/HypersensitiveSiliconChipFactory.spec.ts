@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {HypersensitiveSiliconChipFactory} from '../../../src/server/cards/moon/HypersensitiveSiliconChipFactory';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
@@ -9,7 +9,7 @@ import {TestPlayer} from '../../TestPlayer';
 describe('HypersensitiveSiliconChipFactory', () => {
   let player: TestPlayer;
   let card: HypersensitiveSiliconChipFactory;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

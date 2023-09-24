@@ -1,5 +1,6 @@
 import {OneOrArray} from '../../common/utils/types';
 import {GameModule} from '../../common/cards/GameModule';
+import {OneOrArray} from '../../common/utils/types';
 
 export interface ICardFactory<T> {
   // Creates a new instance of this ard.

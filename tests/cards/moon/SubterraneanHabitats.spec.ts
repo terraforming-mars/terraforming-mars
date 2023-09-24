@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {SubterraneanHabitats} from '../../../src/server/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
@@ -11,7 +11,7 @@ import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHab
 describe('SubterraneanHabitats', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: SubterraneanHabitats;
 
   beforeEach(() => {

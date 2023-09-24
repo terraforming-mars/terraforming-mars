@@ -140,9 +140,9 @@
         <div>MAGNETICS</div>
       </div>
     </template>
-    <template v-else-if="title === CardName.NIGRAL_ENTERPRISES">
-      <div class="nigral-enterprises-logo">
-        <div>NIGRAL</div>
+    <template v-else-if="title === CardName.NIRGAL_ENTERPRISES">
+      <div class="nirgal-enterprises-logo">
+        <div>NIRGRAL</div>
         <div>ENTERPRISES</div>
       </div>
     </template>

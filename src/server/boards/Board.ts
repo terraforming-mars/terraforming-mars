@@ -2,7 +2,7 @@ import {Space} from './Space';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
+import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -10,6 +10,7 @@ import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
 import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {TRSource} from '../../common/cards/TRSource';
+import {sum} from '../../common/utils/utils';
 
 export type SpaceCosts = {
   stock: Units,
@@ -201,9 +202,9 @@ export abstract class Board {
       }
     }
     if (additionalCosts.production > 0) {
-      const p = player.production;
-      const sum = p.megacredits + 5 + p.steel + p.titanium + p.plants + p.energy + p.heat;
-      return sum > additionalCosts.production;
+      // +5 because megacredits goes to -5
+      const availableProduction = sum(Units.values(player.production)) + 5;
+      return availableProduction > additionalCosts.production;
     }
     return true;
   }
@@ -270,10 +271,13 @@ export abstract class Board {
     return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
   }
 
-  // Returns true when the space is an ocean tile that is not used to cover another ocean.
-  // Used for benefits associated with "when a player places an ocean tile"
+  /**
+   *  Returns true when the space is an ocean tile that is not used to cover another ocean.
+   *
+   * Used for benefits associated with "when a player places an ocean tile"
+   */
   public static isUncoveredOceanSpace(space: Space): boolean {
-    return space.tile !== undefined && UNCOVERED_OCEAN_TILES.has(space.tile.tileType);
+    return space.tile !== undefined && BASE_OCEAN_TILES.has(space.tile.tileType);
   }
 
   public static isGreenerySpace(space: Space): boolean {

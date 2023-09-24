@@ -1,9 +1,10 @@
-import * as http from 'http';
 import {escape} from 'html-escaper';
 import {Context} from './IHandler';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class Route {
-  public badRequest(req: http.IncomingMessage, res: http.ServerResponse, err?: string): void {
+  public badRequest(req: Request, res: Response, err?: string): void {
     console.warn('bad request', req.url);
     res.writeHead(400);
     res.write('Bad request');
@@ -13,7 +14,7 @@ export class Route {
     }
     res.end();
   }
-  public notFound(req: http.IncomingMessage, res: http.ServerResponse, err?: string): void {
+  public notFound(req: Request, res: Response, err?: string): void {
     if (!process.argv.includes('hide-not-found-warnings')) {
       console.warn('Not found', req.method, req.url);
     }
@@ -25,13 +26,13 @@ export class Route {
     }
     res.end();
   }
-  public notModified(res: http.ServerResponse): void {
+  public notModified(res: Response): void {
     res.writeHead(304);
     res.end();
   }
   public internalServerError(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+    req: Request,
+    res: Response,
     err: unknown): void {
     console.warn('internal server error: ', req.url, err);
     res.writeHead(500);
@@ -48,21 +49,21 @@ export class Route {
 
     res.end();
   }
-  public notAuthorized(req: http.IncomingMessage, res: http.ServerResponse): void {
+  public notAuthorized(req: Request, res: Response): void {
     console.warn('Not authorized', req.method, req.url);
     res.writeHead(403);
     res.write('Not authorized');
     res.end();
   }
 
-  public downgradeRedirect(_req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): void {
+  public downgradeRedirect(_req: Request, res: Response, ctx: Context): void {
     const url = new URL(ctx.url); // defensive copty
     url.searchParams.set('serverId', ctx.ids.statsId);
     res.writeHead(301, {Location: url.pathname + url.search});
     res.end();
   }
 
-  public writeJson(res: http.ServerResponse, json: any, space?: string | number | undefined) {
+  public writeJson(res: Response, json: any, space?: string | number | undefined) {
     res.setHeader('Content-Type', 'application/json');
     const s = JSON.stringify(json, undefined, space);
     res.end(s);

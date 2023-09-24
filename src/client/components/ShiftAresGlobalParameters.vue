@@ -44,11 +44,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
 import {ShiftAresGlobalParametersResponse} from '@/common/inputs/InputResponse';
 import {HazardData} from '@/common/ares/AresData';
 
-type ShiftAresGlobalParametersModel = AresGlobalParametersResponse & {
+type DataModel = AresGlobalParametersResponse & {
   hazardData: HazardData,
 };
 
@@ -56,7 +56,7 @@ export default Vue.extend({
   name: 'ShiftAresGlobalParameters',
   props: {
     playerinput: {
-      type: Object as () => Required<Pick<PlayerInputModel, 'aresData' | 'buttonLabel'>>,
+      type: Object as () => ShiftAresGlobalParametersModel,
     },
     onsave: {
       type: Function as unknown as () => (out: ShiftAresGlobalParametersResponse) => void,
@@ -68,7 +68,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data(): ShiftAresGlobalParametersModel {
+  data(): DataModel {
     const hazardData = this.playerinput.aresData.hazardData;
     return {
       hazardData: hazardData,

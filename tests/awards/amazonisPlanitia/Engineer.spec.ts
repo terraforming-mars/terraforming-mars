@@ -36,8 +36,7 @@ describe('Engineer', () => {
     const cardFinder = new CardFinder();
     for (const cardName of Engineer.productionCards) {
       const card = cardFinder.getCardByName(cardName)!;
-      const behavior = card.behavior;
-      if (behavior?.production !== undefined) {
+      if (Engineer.autoInclude(card)) {
         failures.push(cardName);
       }
     }

@@ -1,4 +1,3 @@
-import * as http from 'http';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Database} from '../database/Database';
@@ -15,6 +14,8 @@ import {NewGameConfig} from '../../common/game/NewGameConfig';
 import {GameId, PlayerId, SpectatorId} from '../../common/Types';
 import {generateRandomId} from '../utils/server-ids';
 import {IGame} from '../IGame';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
 
@@ -40,14 +41,14 @@ export class GameHandler extends Handler {
     return [board];
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override get(req: Request, res: Response, ctx: Context): Promise<void> {
     req.url = '/assets/index.html';
     return ServeAsset.INSTANCE.get(req, res, ctx);
   }
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {
@@ -91,6 +92,7 @@ export class GameHandler extends Handler {
             venusNextExtension: gameReq.venusNext,
             coloniesExtension: gameReq.colonies,
             preludeExtension: gameReq.prelude,
+            prelude2Expansion: gameReq.prelude2Expansion,
             turmoilExtension: gameReq.turmoil,
             aresExtension: gameReq.aresExtension,
             aresHazards: true, // Not a runtime option.
@@ -127,6 +129,7 @@ export class GameHandler extends Handler {
             ceoExtension: gameReq.ceoExtension,
             customCeos: gameReq.customCeos,
             startingCeos: gameReq.startingCeos,
+            starWarsExpansion: gameReq.starWarsExpansion,
           };
 
           let game: IGame;

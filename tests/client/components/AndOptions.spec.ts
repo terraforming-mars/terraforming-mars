@@ -19,11 +19,11 @@ describe('AndOptions', function() {
         playerinput: {
           title: 'foo',
           options: [{
-            inputType: 'option',
+            type: 'option',
             title: 'select a',
           }, {
             title: 'select b',
-            inputType: 'option',
+            type: 'option',
           }],
         },
         onsave: function(data: InputResponse) {

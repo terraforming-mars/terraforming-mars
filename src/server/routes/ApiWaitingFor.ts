@@ -1,4 +1,3 @@
-import * as http from 'http';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Phase} from '../../common/Phase';
@@ -6,6 +5,8 @@ import {IPlayer} from '../IPlayer';
 import {WaitingForModel} from '../../common/models/WaitingForModel';
 import {IGame} from '../IGame';
 import {isPlayerId, isSpectatorId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class ApiWaitingFor extends Handler {
   public static readonly INSTANCE = new ApiWaitingFor();
@@ -34,7 +35,7 @@ export class ApiWaitingFor extends Handler {
     return {result: 'WAIT'};
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     const id = String(ctx.url.searchParams.get('id'));
     const gameAge = Number(ctx.url.searchParams.get('gameAge'));
     const undoCount = Number(ctx.url.searchParams.get('undoCount'));

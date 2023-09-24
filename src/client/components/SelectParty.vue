@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectPartyModel} from '@/common/models/PlayerInputModel';
 import Party from '@/client/components/Party.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {SelectPartyResponse} from '@/common/inputs/InputResponse';
@@ -24,7 +24,7 @@ export default Vue.extend({
   name: 'SelectParty',
   props: {
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectPartyModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectPartyResponse) => void,
@@ -50,13 +50,13 @@ export default Vue.extend({
       this.onsave({type: 'party', partyName: this.selectedParty});
     },
     isDominant(partyName: PartyName): boolean {
-      return partyName === this.playerinput.turmoil?.dominant;
+      return partyName === this.playerinput.turmoil.dominant;
     },
     partyAvailableToSelect(partyName: PartyName): boolean {
-      if (this.playerinput.availableParties === undefined) {
+      if (this.playerinput.parties === undefined) {
         return false;
       } else {
-        return this.playerinput.availableParties.includes(partyName);
+        return this.playerinput.parties.includes(partyName);
       }
     },
   },

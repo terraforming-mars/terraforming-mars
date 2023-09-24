@@ -2,6 +2,9 @@ import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {IColony} from '../colonies/IColony';
 import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
+import {SelectColonyModel} from '../../common/models/PlayerInputModel';
+import {coloniesToModel} from '../models/ModelUtils';
+import {IPlayer} from '../IPlayer';
 
 export class SelectColony extends BasePlayerInput {
   // When true, show just the tile, and none of the cubes on top.
@@ -17,6 +20,15 @@ export class SelectColony extends BasePlayerInput {
   ) {
     super('colony', title);
     this.buttonLabel = buttonLabel;
+  }
+
+  public toModel(player: IPlayer): SelectColonyModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'colony',
+      coloniesModel: coloniesToModel(player.game, this.colonies, this.showTileOnly),
+    };
   }
 
   public process(input: InputResponse) {

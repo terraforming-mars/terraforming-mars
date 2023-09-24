@@ -143,9 +143,7 @@ export default Vue.extend({
           return;
         }
       }
-
       const requiredAmt = this.playerinput.amount || 0;
-
       if (requiredAmt > 0 && totalSpent < requiredAmt) {
         this.warning = 'Haven\'t spent enough';
         return;

@@ -70,10 +70,10 @@ export const PaymentWidgetMixin = {
       const model = this.asModel();
       return Math.min(model.playerView.thisPlayer.megaCredits, model.cost);
     },
-    canUse(_key: PaymentKey): boolean {
+    canUse(_key: PaymentUnit): boolean {
       throw new Error('Should be overridden');
     },
-    getResourceRate(unit: PaymentKey): number {
+    getResourceRate(unit: PaymentUnit): number {
       switch (unit) {
       case 'steel':
         return this.asModel().playerView.thisPlayer.steelValue;

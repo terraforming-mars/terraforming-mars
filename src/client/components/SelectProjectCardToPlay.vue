@@ -259,17 +259,19 @@ export default Vue.extend({
     },
     saveData() {
       const payment: Payment = {...Payment.EMPTY};
-
       let totalSpent = 0;
+
       for (const target of PAYMENT_KEYS) {
         payment[target] = this[target] ?? 0;
+        totalSpent += payment[target] * this.getResourceRate(target);
+      }
+
+      for (const target of PAYMENT_KEYS) {
         if (payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
         }
-        totalSpent += payment[target] * this.getResourceRate(target);
       }
-
       if (totalSpent < this.cost) {
         this.warning = 'Haven\'t spent enough';
         return;

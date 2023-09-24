@@ -49,7 +49,7 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
         const orOptions = new OrOptions();
         orOptions.options.push(new SelectPayment(
           'Spend 5 M€ for one energy production and hydroelectric resource',
-          5, {steel: true},
+          5, {steel: true, heat: cardOwner.canUseHeatAsMegaCredits},
           (payment) => {
             cardOwner.pay(payment);
             cardOwner.production.add(Resource.ENERGY, 1, {log: true});

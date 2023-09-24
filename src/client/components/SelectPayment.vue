@@ -264,7 +264,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUseKuiperAsteroids()">
-      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay with Asteroid')"></i>
+      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay with Asteroids')"></i>
       <AppButton type="minus" @click="reduceValue('kuiperAsteroids', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="kuiperAsteroids" />
       <AppButton type="plus" @click="addValue('kuiperAsteroids', 1)" />

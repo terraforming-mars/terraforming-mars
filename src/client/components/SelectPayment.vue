@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {Payment, PaymentUnit, PAYMENT_KEYS} from '@/common/inputs/Payment';
+import {Payment, PaymentUnit, PAYMENT_UNITS} from '@/common/inputs/Payment';
 import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -132,12 +132,12 @@ export default Vue.extend({
     saveData() {
       const payment: Payment = {...Payment.EMPTY};
       let totalSpent = 0;
-      for (const target of PAYMENT_KEYS) {
+      for (const target of PAYMENT_UNITS) {
         payment[target] = this[target] ?? 0;
         totalSpent += payment[target] * this.getResourceRate(target);
       }
 
-      for (const target of PAYMENT_KEYS) {
+      for (const target of PAYMENT_UNITS) {
         if (payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
@@ -161,7 +161,7 @@ export default Vue.extend({
 
       if (requiredAmt > 0 && totalSpent > requiredAmt) {
         const diff = totalSpent - requiredAmt;
-        for (const target of PAYMENT_KEYS) {
+        for (const target of PAYMENT_UNITS) {
           if (payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;

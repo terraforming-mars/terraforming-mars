@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 
-import {Payment, PaymentUnit, PAYMENT_KEYS} from '@/common/inputs/Payment';
+import {Payment, PaymentUnit, PAYMENT_UNITS} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
@@ -105,7 +105,7 @@ export default Vue.extend({
       return getCardOrThrow(this.cardName).tags;
     },
     setDefaultValues() {
-      for (const target of PAYMENT_KEYS) {
+      for (const target of PAYMENT_UNITS) {
         if (target === 'megaCredits') {
           continue;
         }
@@ -261,12 +261,12 @@ export default Vue.extend({
       const payment: Payment = {...Payment.EMPTY};
       let totalSpent = 0;
 
-      for (const target of PAYMENT_KEYS) {
+      for (const target of PAYMENT_UNITS) {
         payment[target] = this[target] ?? 0;
         totalSpent += payment[target] * this.getResourceRate(target);
       }
 
-      for (const target of PAYMENT_KEYS) {
+      for (const target of PAYMENT_UNITS) {
         if (payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
@@ -279,7 +279,7 @@ export default Vue.extend({
 
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
-        for (const target of PAYMENT_KEYS) {
+        for (const target of PAYMENT_UNITS) {
           if (payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;

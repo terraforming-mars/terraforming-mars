@@ -323,10 +323,15 @@ export class Server {
         id: space.id,
         spaceType: space.spaceType,
         bonus: space.bonus,
-        // TODO(kberg): Don't show tileType or color if they're undefined.
-        tileType: space.tile?.tileType,
-        color: this.getColor(space),
       };
+      const tileType = space.tile?.tileType;
+      if (tileType !== undefined) {
+        model.tileType = tileType;
+      }
+      const color = this.getColor(space);
+      if (color !== undefined) {
+        model.color = color;
+      }
       if (highlight === undefined) {
         model.highlight = highlight;
       }

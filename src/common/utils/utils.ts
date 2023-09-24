@@ -1,3 +1,5 @@
+import {OneOrArray} from './types';
+
 export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_transparent'): string => {
   const prefix = {
     shadow: 'player_shadow_color_',
@@ -112,4 +114,11 @@ export function partition<T>(source: ReadonlyArray<T>, predicate: (t: T) => bool
  */
 export function zip<S, T>(first: ReadonlyArray<S>, second: ReadonlyArray<T>): Array<[S, T]> {
   return first.map((e, i) => [e, second[i]]);
+}
+
+/**
+ * Returns `elem` if it is an array. If it is not an array, returns `[elem]`
+ */
+export function asArray<T>(elem: OneOrArray<T>): Array<T> {
+  return Array.isArray(elem) ? elem : [elem];
 }

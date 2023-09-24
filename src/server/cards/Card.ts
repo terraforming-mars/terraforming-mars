@@ -20,7 +20,7 @@ import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
-import {PartialField} from '../../common/utils/types';
+import {OneOrArray, PartialField} from '../../common/utils/types';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -39,7 +39,7 @@ type Properties = {
   adjacencyBonus?: AdjacencyBonus;
   behavior?: Behavior | undefined;
   cardCost?: number;
-  cardDiscount?: CardDiscount | Array<CardDiscount>;
+  cardDiscount?: OneOrArray<CardDiscount>;
   type: CardType;
   cost?: number;
   initialActionText?: string;

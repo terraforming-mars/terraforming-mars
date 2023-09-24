@@ -60,7 +60,10 @@ export class CardRequirements {
     return result;
   }
 
-  public static compile(descriptors: Array<CardRequirementDescriptor>): CardRequirements {
+  public static compile(descriptors: Array<CardRequirementDescriptor> | undefined): CardRequirements {
+    if (descriptors === undefined) {
+      return new CardRequirements([]);
+    }
     return new CardRequirements(descriptors.map((descriptor) => CardRequirements.compileOne(descriptor)));
   }
 

@@ -14,15 +14,15 @@ import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {OneOrMany} from '../../../src/common/utils/types';
+import {OneOrArray} from '../../../src/common/utils/types';
 import {CardRequirementDescriptor} from '../../../src/common/cards/CardRequirementDescriptor';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {asArray} from '../../../src/common/utils/utils';
 
-function compile(req: OneOrMany<CardRequirementDescriptor>) {
+function compile(req: OneOrArray<CardRequirementDescriptor>) {
   return CardRequirements.compile(asArray(req));
 }
-function satisfies(req: OneOrMany<CardRequirementDescriptor>, player: IPlayer) {
+function satisfies(req: OneOrArray<CardRequirementDescriptor>, player: IPlayer) {
   return compile(asArray(req)).satisfies(player);
 }
 

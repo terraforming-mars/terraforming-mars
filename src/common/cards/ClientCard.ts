@@ -9,13 +9,13 @@ import {CardRequirementDescriptor} from './CardRequirementDescriptor';
 import {IVictoryPoints} from './IVictoryPoints';
 import {Tag} from './Tag';
 import {CardDiscount} from './Types';
-import {OneOrMany} from '../utils/types';
+import {OneOrArray} from '../utils/types';
 
 export type ClientCard = {
   name: CardName;
   module: GameModule;
   tags: Array<Tag>;
-  cardDiscount?: OneOrMany<CardDiscount>;
+  cardDiscount?: OneOrArray<CardDiscount>;
   victoryPoints?: number | 'special' | IVictoryPoints,
   cost?: number;
   type: CardType;

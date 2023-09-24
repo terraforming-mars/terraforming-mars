@@ -4,6 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {IPlayer} from '../../IPlayer';
 
+// TODO(kberg): Extends ProxyCard?
 export class SpecialDesignProxy implements IProjectCard {
   public get cost() {
     return 0;
@@ -16,6 +17,9 @@ export class SpecialDesignProxy implements IProjectCard {
   }
   public get type() {
     return CardType.PROXY;
+  }
+  public get requirements() {
+    return [];
   }
   public canPlay() {
     return false;

@@ -145,11 +145,11 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: Player, initial
   expect(cb(), 'Reds in power, enough money').is.true;
 }
 
-class FakeCard {
+class FakeCard implements IProjectCard {
   public name = 'Fake Card' as CardName;
   public cost = 0;
   public tags = [];
-  public requirements: undefined;
+  public requirements = [];
   public canPlay(player: IPlayer) {
     if (this.requirements === undefined) {
       return true;

@@ -30,4 +30,4 @@ export type PartialField<T, K extends keyof T> = Omit<T, K> & {[k in K]: Partial
 /**
  * Shorthand for accepting a type of T or Array<T>. Typically converted to array with `asArray`.
  */
-export type OneOrMany<T> = T | Array<T>;
+export type OneOrArray<T> = T | Array<T>;

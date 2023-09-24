@@ -1,4 +1,4 @@
-import {OneOrMany} from './types';
+import {OneOrArray} from './types';
 
 export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_transparent'): string => {
   const prefix = {
@@ -101,6 +101,6 @@ export function zip<S, T>(first: ReadonlyArray<S>, second: ReadonlyArray<T>): Ar
   return first.map((e, i) => [e, second[i]]);
 }
 
-export function asArray<T>(elem: OneOrMany<T>): Array<T> {
+export function asArray<T>(elem: OneOrArray<T>): Array<T> {
   return Array.isArray(elem) ? elem : [elem];
 }

@@ -19,7 +19,7 @@ import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
-import {OneOrMany} from '../../common/utils/types';
+import {OneOrArray} from '../../common/utils/types';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {asArray} from '../../common/utils/utils';
@@ -39,7 +39,7 @@ type SharedProperties = {
   adjacencyBonus?: AdjacencyBonus;
   behavior?: Behavior | undefined;
   cardCost?: number;
-  cardDiscount?: OneOrMany<CardDiscount>;
+  cardDiscount?: OneOrArray<CardDiscount>;
   type: CardType;
   cost?: number;
   initialActionText?: string;
@@ -65,7 +65,7 @@ type InternalProperties = SharedProperties & {
 /* External representation of card properties. */
 export type StaticCardProperties = SharedProperties & {
   reserveUnits?: Partial<Units>,
-  requirements?: OneOrMany<CardRequirementDescriptor>
+  requirements?: OneOrArray<CardRequirementDescriptor>,
 }
 
 const cardProperties = new Map<CardName, InternalProperties>();
@@ -92,7 +92,7 @@ const cardProperties = new Map<CardName, InternalProperties>();
 export abstract class Card {
   private readonly properties: InternalProperties;
 
-  private internalize(external: StaticCardProperties) {
+  private internalize(external: StaticCardProperties): InternalProperties {
     const name = external.name;
     if (external.type === CardType.CORPORATION && external.startingMegaCredits === undefined) {
       throw new Error(`${name}: corp cards must define startingMegaCredits`);
@@ -158,7 +158,7 @@ export abstract class Card {
   public get metadata() {
     return this.properties.metadata;
   }
-  public get requirementss() {
+  public get requirements() {
     return this.properties.requirements;
   }
   public get name() {

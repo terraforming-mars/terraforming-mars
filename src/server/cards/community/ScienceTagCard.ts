@@ -4,6 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 
+// TODO(kberg): Extends ProxyCard?
 export class ScienceTagCard implements IProjectCard {
   public get cost() {
     return 0;
@@ -22,6 +23,9 @@ export class ScienceTagCard implements IProjectCard {
   }
   public canPlay() {
     return false;
+  }
+  public get requirements() {
+    return [];
   }
   public get metadata(): ICardMetadata {
     throw new Error('ScienceTagCard is a proxy card, not a real card. Should not render');

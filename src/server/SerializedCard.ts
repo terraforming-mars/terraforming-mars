@@ -1,11 +1,11 @@
 import {CardName} from '../common/cards/CardName';
 import {Resource} from '../common/Resource';
 import {Tag} from '../common/cards/Tag';
-import {OneOrMany} from '../common/utils/types';
+import {OneOrArray} from '../common/utils/types';
 
 export type SerializedCard = {
   allTags?: Array<Tag>; // For Aridor
-  bonusResource?: OneOrMany<Resource>; // For Robotic Workforce / Mining Area / Mining Rights / Specialized Settlement
+  bonusResource?: OneOrArray<Resource>; // For Robotic Workforce / Mining Area / Mining Rights / Specialized Settlement
   cloneTag?: Tag; // For Pathfinders' clone tag
   isDisabled?: boolean; // For Pharmacy Union and CEO Cards.
   name: CardName;

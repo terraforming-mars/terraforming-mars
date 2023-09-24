@@ -344,7 +344,7 @@ describe('SelectPayment', () => {
     };
 
     const playerInput: SelectPaymentModel = {
-      inputType: 'payment',
+      typeyment',
       buttonLabel: '',
       title: 'foo',
       amount: amount,

@@ -1813,7 +1813,7 @@ export class Player implements IPlayer {
 
   public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
     if (this.waitingFor !== undefined) {
-      const message = 'Overwriting a waitingFor: ' + this.waitingFor.inputType;
+      const message = 'Overwriting a waitingFor: ' + this.waitingFor.type;
       if (THROW_WAITING_FOR) {
         throw new Error(message);
       } else {

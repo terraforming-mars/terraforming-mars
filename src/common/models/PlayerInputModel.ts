@@ -14,26 +14,26 @@ export type BaseInputModel = {
   buttonLabel: string;
 }
 export type AndOptionsModel = BaseInputModel & {
-  inputType: 'and';
+  type: 'and';
   options: Array<PlayerInputModel>;
 }
 
 export type OrOptionsModel = BaseInputModel & {
-  inputType: 'or';
+  type: 'or';
   options: Array<PlayerInputModel>;
 }
 
 export type SelectInitialCardsModel = BaseInputModel & {
-  inputType: 'initialCards';
+  type: 'initialCards';
   options: Array<PlayerInputModel>;
 }
 
 export type SelectOptionModel = BaseInputModel & {
-  inputType: 'option';
+  type: 'option';
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {
-  inputType: 'projectCard';
+  type: 'projectCard';
   cards: Array<CardModel>;
   paymentOptions: Partial<PaymentOptions>,
   microbes: number;
@@ -45,7 +45,7 @@ export type SelectProjectCardToPlayModel = BaseInputModel & {
 }
 
 export type SelectCardModel = BaseInputModel & {
-  inputType: 'card';
+  type: 'card';
   cards: Array<CardModel>;
   max: number;
   min: number;
@@ -56,12 +56,12 @@ export type SelectCardModel = BaseInputModel & {
 }
 
 export type SelectColonyModel = BaseInputModel & {
-  inputType: 'colony';
+  type: 'colony';
   coloniesModel: Array<ColonyModel>;
 }
 
 export type SelectPaymentModel = BaseInputModel & {
-  inputType: 'payment';
+  type: 'payment';
   amount: number;
   paymentOptions: Partial<PaymentOptions>;
   seeds: number;
@@ -71,18 +71,17 @@ export type SelectPaymentModel = BaseInputModel & {
 }
 
 export type SelectPlayerModel = BaseInputModel & {
-  inputType: 'player';
+  type: 'player';
   players: Array<Color>;
 }
 
 export type SelectSpaceModel = BaseInputModel & {
-  inputType: 'space';
-  // TODO(kberg): Rename to 'spaces'
-  availableSpaces: Array<SpaceId>;
+  type: 'space';
+  spaces: Array<SpaceId>;
 }
 
 export type SelectAmountModel = BaseInputModel & {
-  inputType: 'amount';
+  type: 'amount';
   min: number;
   max: number;
   // TODO(kberg): Dig into client to remove 'undefined'
@@ -90,25 +89,25 @@ export type SelectAmountModel = BaseInputModel & {
 }
 
 export type SelectDelegateModel = BaseInputModel & {
-  inputType: 'delegate';
+  type: 'delegate';
   players: Array<ColorWithNeutral>;
 }
 
 export type SelectPartyModel = BaseInputModel & {
-  inputType: 'party';
+  type: 'party';
   // TODO(kberg): Rename to 'parties'
-  availableParties: Array<PartyName>;
+  parties: Array<PartyName>;
   // Is this necessary?
   turmoil: TurmoilModel;
 }
 
 export type SelectProductionToLoseModel = BaseInputModel & {
-  inputType: 'productionToLose';
+  type: 'productionToLose';
   payProduction: PayProductionModel;
 }
 
 export type ShiftAresGlobalParametersModel = BaseInputModel & {
-  inputType: 'aresGlobalParameters';
+  type: 'aresGlobalParameters';
   aresData: AresData;
 }
 

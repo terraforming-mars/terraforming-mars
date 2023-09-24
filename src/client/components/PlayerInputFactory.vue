@@ -98,7 +98,7 @@ export default Vue.component('player-input-factory', {
   },
   computed: {
     componentName(): string {
-      return typeToComponentName[this.playerinput.inputType];
+      return typeToComponentName[this.playerinput.type];
     },
   },
 });

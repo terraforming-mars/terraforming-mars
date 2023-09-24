@@ -8,7 +8,7 @@ describe('ShiftAresGlobalParameters', function() {
   const mockPlayerModel: ShiftAresGlobalParametersModel = {
     title: 'Testing, baby!',
     buttonLabel: 'Click me!',
-    inputType: 'aresGlobalParameters',
+    type: 'aresGlobalParameters',
     aresData: {
       includeHazards: true,
       hazardData: {

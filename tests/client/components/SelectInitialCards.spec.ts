@@ -161,7 +161,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
     return {name} as CardModel;
   });
   const options: Array<SelectCardModel> = [{
-    inputType: 'card',
+    type: 'card',
     title: titles.SELECT_CORPORATION_TITLE,
     buttonLabel: 'x',
     cards: toObject(corpCards),
@@ -171,7 +171,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
     selectBlueCardAction: false,
     showOwner: false,
   }, {
-    inputType: 'card',
+    type: 'card',
     title: titles.SELECT_PROJECTS_TITLE,
     buttonLabel: 'x',
     cards: toObject(projectCards),
@@ -184,7 +184,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
 
   if (preludeCards) {
     options.splice(1, 0, {
-      inputType: 'card',
+      type: 'card',
       title: titles.SELECT_PRELUDE_TITLE,
       buttonLabel: 'x',
       cards: toObject(preludeCards),
@@ -197,7 +197,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
   }
   if (ceoCards) {
     options.push({
-      inputType: 'card',
+      type: 'card',
       title: titles.SELECT_CEO_TITLE,
       buttonLabel: 'x',
       cards: toObject(ceoCards),

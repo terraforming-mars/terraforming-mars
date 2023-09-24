@@ -16,7 +16,7 @@ export class SelectOption extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'option',
+      type: 'option',
     };
   }
   public process(response: InputResponse): PlayerInput | undefined {

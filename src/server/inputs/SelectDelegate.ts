@@ -18,7 +18,7 @@ export class SelectDelegate extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'delegate',
+      type: 'delegate',
       players: this.players.map((player) => player === 'NEUTRAL' ? 'NEUTRAL' : player.color),
     };
   }

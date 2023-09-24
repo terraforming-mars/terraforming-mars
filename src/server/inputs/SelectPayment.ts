@@ -20,7 +20,7 @@ export class SelectPayment extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'payment',
+      type: 'payment',
       amount: this.amount,
       // // These ?? false might be unnecessary.
       // paymentOptions: {

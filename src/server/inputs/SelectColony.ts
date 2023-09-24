@@ -26,7 +26,7 @@ export class SelectColony extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'colony',
+      type: 'colony',
       coloniesModel: coloniesToModel(player.game, this.colonies, this.showTileOnly),
     };
   }

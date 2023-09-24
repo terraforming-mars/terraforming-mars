@@ -362,7 +362,7 @@ function getOption(options: Array<PlayerInputModel>, title: string): SelectCardM
   if (option === undefined) {
     throw new Error('invalid input, missing option');
   }
-  if (option.inputType !== 'card') {
+  if (option.type !== 'card') {
     throw new Error('invalid input, Not a SelectCard option');
   }
   return option;

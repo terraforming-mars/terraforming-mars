@@ -17,7 +17,7 @@ export class ShiftAresGlobalParameters extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'aresGlobalParameters',
+      type: 'aresGlobalParameters',
       aresData: player.game.aresData,
     };
   }

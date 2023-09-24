@@ -12,46 +12,46 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 describe('PlayerInputFactory', function() {
   it('AndOptions', async () => {
     runTest({
-      inputType: 'and',
+      type: 'and',
       options: [],
     });
   });
 
   it('OrOptions', async () => {
     runTest({
-      inputType: 'or',
+      type: 'or',
       options: [],
     });
   });
 
   it('SelectAmount', async () => {
     runTest({
-      inputType: 'amount',
+      type: 'amount',
     });
   });
 
   it('SelectAmount', async () => {
     runTest({
-      inputType: 'card',
+      type: 'card',
     });
   });
 
   it('SelectOption', async () => {
     runTest({
-      inputType: 'option',
+      type: 'option',
     });
   });
 
   it('SelectPayment', async () => {
     runTest({
-      inputType: 'payment',
+      type: 'payment',
       paymentOptions: {},
     });
   });
 
   it('SelectProjectCardToPlay', async () => {
     runTest({
-      inputType: 'projectCard',
+      type: 'projectCard',
       cards: [{name: CardName.ANTS} as CardModel],
       paymentOptions: {},
       floaters: 0,
@@ -65,29 +65,29 @@ describe('PlayerInputFactory', function() {
 
   it('SelectInitialCards', async () => {
     runTest({
-      inputType: 'initialCards',
+      type: 'initialCards',
       options: [
-        {inputType: 'card', title: SELECT_CORPORATION_TITLE} as SelectCardModel,
-        {inputType: 'card', title: SELECT_PROJECTS_TITLE} as SelectCardModel,
+        {type: 'card', title: SELECT_CORPORATION_TITLE} as SelectCardModel,
+        {type: 'card', title: SELECT_PROJECTS_TITLE} as SelectCardModel,
       ],
     });
   });
 
   it('SelectSpace', async () => {
     runTest({
-      inputType: 'space',
+      type: 'space',
     });
   });
 
   it('SelectPlayer', async () => {
     runTest({
-      inputType: 'player',
+      type: 'player',
     });
   });
 
   it('SelectParty', async () => {
     runTest({
-      inputType: 'party',
+      type: 'party',
       turmoil: {
         dominant: undefined,
         ruling: undefined,
@@ -106,13 +106,13 @@ describe('PlayerInputFactory', function() {
 
   it('SelectColony', async () => {
     runTest({
-      inputType: 'colony',
+      type: 'colony',
     });
   });
 
   it('SelectProductionToLose', async () => {
     runTest({
-      inputType: 'productionToLose',
+      type: 'productionToLose',
       payProduction: {
         cost: 0,
         units: Units.EMPTY,
@@ -122,7 +122,7 @@ describe('PlayerInputFactory', function() {
 
   it('ShiftAresGlobalParameters', async () => {
     runTest({
-      inputType: 'aresGlobalParameters',
+      typeesGlobalParameters',
       aresData: {
         includeHazards: false,
         hazardData: {

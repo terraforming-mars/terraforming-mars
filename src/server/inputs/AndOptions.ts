@@ -14,7 +14,7 @@ export class AndOptions extends OptionsInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'and',
+      type: 'and',
       options: this.options.map((option) => option.toModel(player)),
     };
   }

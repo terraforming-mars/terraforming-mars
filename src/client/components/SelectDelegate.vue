@@ -26,7 +26,7 @@ interface DataModel {
 
 // TODO(kberg): rename to SelectDelegate
 export default Vue.extend({
-  name: 'SelectPartyPlayer',
+  name: 'SelectDelegate',
   props: {
     players: {
       type: Array as () => Array<PublicPlayerModel>,

@@ -8,7 +8,7 @@ import {Color} from '../common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
-import {Payment, PaymentKey, PAYMENT_KEYS, PaymentOptions} from '../common/inputs/Payment';
+import {Payment, PaymentUnit, PAYMENT_KEYS, PaymentOptions} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
@@ -1433,7 +1433,7 @@ export class Player implements IPlayer {
    * @return {number} a number representing the value of payment in M€.
    */
   public payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number {
-    const multiplier: Record<PaymentKey, number> = {
+    const multiplier: Record<PaymentUnit, number> = {
       megaCredits: 1,
       steel: this.getSteelValue(),
       titanium: this.getTitaniumValue(),
@@ -1448,7 +1448,7 @@ export class Player implements IPlayer {
       kuiperAsteroids: 1,
     };
 
-    const usable: {[key in PaymentKey]: boolean} = {
+    const usable: {[key in PaymentUnit]: boolean} = {
       megaCredits: true,
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,

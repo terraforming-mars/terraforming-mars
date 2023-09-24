@@ -13,7 +13,7 @@ export const PAYMENT_KEYS = [
   'graphene',
   'kuiperAsteroids'] as const;
 /** Types of resources spent to pay for anything. */
-export type PaymentKey = typeof PAYMENT_KEYS[number];
+export type PaymentUnit = typeof PAYMENT_KEYS[number];
 
 /**
  * The units of resources to deduct from the player's play area. These resources are all worth

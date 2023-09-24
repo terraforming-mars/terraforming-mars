@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {Payment, PaymentKey} from '@/common/inputs/Payment';
+import {Payment, PaymentUnit} from '@/common/inputs/Payment';
 import {PaymentWidgetMixin, SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -66,7 +66,7 @@ export default Vue.extend({
     setInitialCost() {
       this.cost = this.playerinput.amount ?? 0;
     },
-    canUse(target: PaymentKey) {
+    canUse(target: PaymentUnit) {
       switch (target) {
       case 'steel': return this.canUseSteel();
       case 'titanium': return this.canUseTitanium();
@@ -80,7 +80,7 @@ export default Vue.extend({
     },
     setDefaultValue(
       amountCovered: number, // MC values of prior-computed resources.
-      target: PaymentKey): number {
+      target: PaymentUnit): number {
       if (!this.canUse(target)) return 0;
       const amount = this.getAmount(target);
       if (amount === 0) return 0;
@@ -109,7 +109,7 @@ export default Vue.extend({
 
       const megaCredits = this.getAmount('megaCredits');
 
-      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'];
+      const targets: Array<PaymentUnit> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'];
       let amountCovered = reserveMegacredits ? megaCredits : 0;
       for (const target of targets) {
         amountCovered += this.setDefaultValue(amountCovered, target);
@@ -154,7 +154,7 @@ export default Vue.extend({
     },
 
     saveData() {
-      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits', 'kuiperAsteroids', 'spireScience'];
+      const targets: Array<PaymentUnit> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits', 'kuiperAsteroids', 'spireScience'];
 
       const payment: Payment = {
         ...Payment.EMPTY,

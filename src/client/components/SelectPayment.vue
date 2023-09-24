@@ -79,8 +79,6 @@ export default Vue.extend({
 
       const cost = this.cost;
       const targetResourceRate = this.getResourceRate(unit);
-      console.log('set default value', mcAlreadyCovered, unit);
-      console.log('amount for', unit, availableUnits, 'at value', targetResourceRate);
 
       // Compute the required minimum quantity needed to contribute.
       let contributingUnits = Math.ceil(Math.max(cost - this.getAvailableUnits('megaCredits') - mcAlreadyCovered, 0) / targetResourceRate);
@@ -91,13 +89,11 @@ export default Vue.extend({
       const greedy = unit !== 'heat';
       if (greedy === true) {
         while (contributingUnits < availableUnits && contributingMCValue <= cost - targetResourceRate) {
-          console.log('increment', availableUnits, contributingMCValue, cost, targetResourceRate);
           contributingUnits++;
           contributingMCValue += targetResourceRate;
         }
       }
 
-      console.log('contributing', contributingUnits, 'for', contributingMCValue);
       this.$data[unit] = contributingUnits;
       return contributingMCValue;
     },
@@ -126,12 +122,12 @@ export default Vue.extend({
       if (unit === 'megaCredits') {
         return true;
       }
-      // if (unit === 'titanium') {
-      //   if (this.thisPlayer.titanium === 0) {
-      //     return false;
-      //   }
-      //   return this.playerinput.paymentOptions?.titanium || this.playerinput.paymentOptions?.lunaTradeFederationTitanium;
-      // }
+      if (unit === 'titanium') {
+        if (this.thisPlayer.titanium === 0) {
+          return false;
+        }
+        return this.playerinput.paymentOptions?.titanium || this.playerinput.paymentOptions?.lunaTradeFederationTitanium;
+      }
       return this.playerinput.paymentOptions?.[unit] && this.hasUnits(unit);
     },
     saveData() {

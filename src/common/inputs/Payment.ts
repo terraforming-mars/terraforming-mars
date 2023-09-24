@@ -92,7 +92,6 @@ export const DEFAULT_PAYMENT_VALUES: Record<PaymentKey, number> = {
   kuiperAsteroids: 1,
 } as const;
 
-
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {
     heat: 0,

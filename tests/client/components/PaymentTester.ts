@@ -2,7 +2,8 @@ import Vue from 'vue';
 import {Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
 import {SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
-import {PAYMENT_KEYS, PaymentKey} from '@/common/inputs/Payment';
+import {PaymentKey} from '@/common/inputs/Payment';
+import {fail} from 'assert';
 
 export class PaymentTester {
   private model: SelectPaymentModel;
@@ -72,9 +73,9 @@ export class PaymentTester {
   public expectIsAvailable(type: PaymentKey, expected: boolean) {
     const w = this.wrapper.find(PaymentTester.selector(type) + ' ~ input');
     if (expected) {
-      expect(w.element, `Expect input for ${type} to be visible`).is.not.undefined;
+      expect(w?.element, `Expect input for ${type} to be visible`).is.not.undefined;
     } else {
-      expect(w.element, `Expect input for ${type} to be invisible`).is.undefined;
+      expect(w?.element, `Expect input for ${type} to be invisible`).is.undefined;
     }
   }
 

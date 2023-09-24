@@ -247,13 +247,6 @@ export default Vue.extend({
         return false;
       }
       return this.cardCanUse(unit);
-      // if (unit === 'titanium') {
-      //   if (this.thisPlayer.titanium === 0) {
-      //     return false;
-      //   }
-      //   return this.playerinput.paymentOptions?.titanium || this.playerinput.paymentOptions?.lunaTradeFederationTitanium;
-      // }
-      // return this.playerinput.paymentOptions?.[unit] && this.hasUnits(unit);
     },
     canUseLunaTradeFederationTitanium(): boolean {
       return this.playerinput.paymentOptions?.lunaTradeFederationTitanium === true;

@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 
-import {Payment, PaymentKey, PAYMENT_KEYS} from '@/common/inputs/Payment';
+import {Payment, PaymentUnit, PAYMENT_KEYS} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
@@ -192,7 +192,7 @@ export default Vue.extend({
         }
       }
     },
-    cardCanUse(unit: PaymentKey): boolean {
+    cardCanUse(unit: PaymentUnit): boolean {
       switch (unit) {
       case 'megaCredits':
       case 'heat':

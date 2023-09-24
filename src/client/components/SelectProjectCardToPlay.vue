@@ -221,7 +221,7 @@ export default Vue.extend({
         throw new Error('Unknown unit ' + unit);
       }
     },
-    canUse(unit: PaymentKey) {
+    canUse(unit: PaymentUnit) {
       if (!this.hasUnits(unit)) {
         return false;
       }

@@ -7,8 +7,9 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 import {SELECT_CORPORATION_TITLE, SELECT_PROJECTS_TITLE} from '@/common/inputs/SelectInitialCards';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 
-describe('PlayerInputFactory2', function() {
+describe('PlayerInputFactory', function() {
   it('AndOptions', async () => {
     runTest({
       inputType: 'and',
@@ -44,6 +45,7 @@ describe('PlayerInputFactory2', function() {
   it('SelectPayment', async () => {
     runTest({
       inputType: 'payment',
+      paymentOptions: {},
     });
   });
 
@@ -154,14 +156,23 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
 
   const fullPlayerInput: Partial<PlayerInputModel> = {...baseInput, ...playerInput};
 
+  const thisPlayer: Partial<PublicPlayerModel> = {
+    steel: 0,
+    titanium: 0,
+    tableau: [],
+  };
+
+  const playerView: Partial<PlayerViewModel> = {
+    id: 'p-player-id',
+    dealtCorporationCards: [],
+    thisPlayer: thisPlayer as PublicPlayerModel,
+  };
+
   const component = mount(PlayerInputFactory, {
     localVue: getLocalVue(),
     propsData: {
       players: [],
-      playerView: {
-        id: 'foo',
-        dealtCorporationCards: [],
-      },
+      playerView: playerView,
       playerinput: fullPlayerInput,
       onsave: function() {
       },

@@ -5,10 +5,9 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
-import {DATA_VALUE, GRAPHENE_VALUE, SEED_VALUE} from '@/common/constants';
 import {CardResource} from '@/common/CardResource';
-import {getCard} from '../cards/ClientCardManifest';
-import {PAYMENT_KEYS, PaymentUnit} from '@/common/inputs/Payment';
+import {getCard} from '@/client/cards/ClientCardManifest';
+import {DEFAULT_PAYMENT_VALUES, PAYMENT_KEYS, PaymentUnit} from '@/common/inputs/Payment';
 
 export interface SelectPaymentModel {
     card?: CardModel;
@@ -61,40 +60,34 @@ export const PaymentWidgetMixin = {
     asModel(): PaymentWidgetModel {
       return this as unknown as PaymentWidgetModel;
     },
+    /**
+     * Get the most MC needed for this purchase.
+     *
+     * If the player has enough MC to cover the cost, this returns the cost.
+     * Otherwise, it returns player's MC. Other resources will be necessary to make up the cost.
+     */
     getMegaCreditsMax(): number {
       const model = this.asModel();
       return Math.min(model.playerView.thisPlayer.megaCredits, model.cost);
     },
-    canUseTitanium(): boolean {
+    canUse(_key: PaymentUnit): boolean {
       throw new Error('Should be overridden');
     },
-    canUseLunaTradeFederationTitanium(): boolean {
-      throw new Error('Should be overridden');
-    },
-    canUseLunaTradeFederationTitaniumOnly(): boolean {
-      return this.canUseTitanium() !== true && this.canUseLunaTradeFederationTitanium();
-    },
-    getResourceRate(resourceName: PaymentUnit): number {
-      switch (resourceName) {
-      case 'titanium':
-        const v = this.asModel().playerView.thisPlayer.titaniumValue;
-        return this.canUseLunaTradeFederationTitaniumOnly() === true ? v - 1 : v;
+    getResourceRate(unit: PaymentUnit): number {
+      switch (unit) {
       case 'steel':
         return this.asModel().playerView.thisPlayer.steelValue;
-      case 'microbes':
-        return 2;
-      case 'floaters':
-        return 3;
-      case 'seeds':
-        return SEED_VALUE;
-      case 'auroraiData':
-        return DATA_VALUE;
-      case 'graphene':
-        return GRAPHENE_VALUE;
-      case 'spireScience':
-        return 2;
+      case 'titanium': {
+        const paymentOptions = this.asModel().playerinput.paymentOptions;
+        const titaniumValue = this.asModel().playerView.thisPlayer.titaniumValue;
+        if (paymentOptions?.titanium !== true &&
+          paymentOptions?.lunaTradeFederationTitanium === true) {
+          return titaniumValue - 1;
+        }
+        return titaniumValue;
+      }
       default:
-        return 1;
+        return DEFAULT_PAYMENT_VALUES[unit];
       }
     },
     reduceValue(target: PaymentUnit, delta: number): void {
@@ -115,7 +108,7 @@ export const PaymentWidgetMixin = {
         throw new Error(`can not addValue for ${target} on this`);
       }
 
-      let maxValue: number | undefined = max !== undefined ? max : this.getAmount(target);
+      let maxValue: number | undefined = max !== undefined ? max : this.getAvailableUnits(target);
       // TODO(kberg): Remove this special code for MC?
       if (target === 'megaCredits') {
         maxValue = this.getMegaCreditsMax();
@@ -127,11 +120,12 @@ export const PaymentWidgetMixin = {
         throw new Error(`unable to determine maxValue for ${target}`);
       }
 
-      // const adjustedDelta = (currentValue + delta <= maxValue) ? delta : maxValue - currentValue;
       const adjustedDelta = Math.min(delta, maxValue - currentValue);
       if (adjustedDelta === 0) return;
       this.asModel()[target] += adjustedDelta;
-      if (target !== 'megaCredits') this.setRemainingMCValue();
+      if (target !== 'megaCredits') {
+        this.setRemainingMCValue();
+      }
     },
     setRemainingMCValue(): void {
       const ta = this.asModel();
@@ -139,8 +133,9 @@ export const PaymentWidgetMixin = {
       let remainingMC = ta.$data.cost;
 
       for (const resource of PAYMENT_KEYS) {
-        if (resource === 'megaCredits') continue;
-
+        if (resource === 'megaCredits') {
+          continue;
+        }
         const value = (ta[resource] ?? 0) * this.getResourceRate(resource);
         remainingMC -= value;
       }
@@ -155,14 +150,18 @@ export const PaymentWidgetMixin = {
       const cost: number = this.asModel().$data.cost;
       const resourceRate = this.getResourceRate(target);
       const amountNeed = Math.floor(cost / resourceRate);
-      const amountHave: number = this.getAmount(target);
+      const amountHave: number = this.getAvailableUnits(target);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
         this.addValue(target, 1, max);
         currentValue++;
       }
     },
-    getAmount(target: PaymentUnit): number {
+    // Perhaps this is unnecessary. It's just a >0 check.
+    hasUnits(unit: PaymentUnit): boolean {
+      return this.getAvailableUnits(unit) > 0;
+    },
+    getAvailableUnits(target: PaymentUnit): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
       const thisPlayer = model.playerView.thisPlayer;

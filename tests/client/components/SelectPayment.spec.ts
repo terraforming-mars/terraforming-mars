@@ -269,24 +269,38 @@ describe('SelectPayment', () => {
   it('Luna Trade Federation: Can use titanium by default', async () => {
     const wrapper = setupBill(
       10,
-      {
-        megaCredits: 10, titanium: 2, titaniumValue: 4,
-      },
-      {paymentOptions: {lunaTradeFederationTitanium: true}});
+      // Note here that titanium is valued at 4, so LTF titanium will be valued at 3.
+      {megaCredits: 10, titanium: 2, titaniumValue: 4},
+      {paymentOptions: {titanium: false, lunaTradeFederationTitanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectValue('megaCredits', 10);
-    tester.expectValue('titanium', 0);
-
-    await tester.clickMax('titanium');
-
     tester.expectValue('megaCredits', 4);
+    tester.expectValue('titanium', 2);
+
+    await tester.clickMinus('titanium');
+
+    tester.expectValue('megaCredits', 7);
+    tester.expectValue('titanium', 1);
+  });
+
+  it('Pay with titanium', async () => {
+    const wrapper = setupBill(
+      10,
+      {
+        megaCredits: 10, titanium: 2, titaniumValue: 4,
+      },
+      {paymentOptions: {titanium: true, lunaTradeFederationTitanium: false}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('megaCredits', 2);
     tester.expectValue('titanium', 2);
   });
 
-  it('Luna Trade Federation: Can use titanium at normal rate when titanium is true', async () => {
+  it('Luna Trade Federation: Can use titanium at normal rate when paymentOptions{titanium} is true', async () => {
     const wrapper = setupBill(
       10,
       {

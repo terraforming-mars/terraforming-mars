@@ -7,7 +7,7 @@ import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardResource} from '@/common/CardResource';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {DEFAULT_PAYMENT_VALUES, PAYMENT_KEYS, PaymentUnit} from '@/common/inputs/Payment';
+import {DEFAULT_PAYMENT_VALUES, PAYMENT_UNITS, PaymentUnit} from '@/common/inputs/Payment';
 
 export interface SelectPaymentModel {
     card?: CardModel;
@@ -129,7 +129,7 @@ export const PaymentWidgetMixin = {
 
       let remainingMC = ta.$data.cost;
 
-      for (const resource of PAYMENT_KEYS) {
+      for (const resource of PAYMENT_UNITS) {
         if (resource === 'megaCredits') {
           continue;
         }

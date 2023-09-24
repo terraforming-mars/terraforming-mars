@@ -4,11 +4,15 @@ import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
+import {CardType} from '../../common/cards/CardType';
 
 export function serializeProjectCard(card: IProjectCard): SerializedCard {
   const serialized: SerializedCard = {
     name: card.name,
   };
+  if (card.type === CardType.PROXY) {
+    return serialized;
+  }
   if (card.bonusResource !== undefined) {
     serialized.bonusResource = card.bonusResource;
   }

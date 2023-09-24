@@ -4,6 +4,7 @@ import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
+import {SelectProductionToLoseModel} from '../../common/models/PlayerInputModel';
 
 export class SelectProductionToLose extends BasePlayerInput {
   constructor(
@@ -17,6 +18,17 @@ export class SelectProductionToLose extends BasePlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
+  public override toModel(): SelectProductionToLoseModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      inputType: 'productionToLose',
+      payProduction: {
+        cost: this.unitsToLose,
+        units: this.player.production.asUnits(),
+      },
+    };
+  }
   // TODO(kberg): Could merge this with SelectResources, though it
   // would take some work.
   public process(input: InputResponse, player: IPlayer) {

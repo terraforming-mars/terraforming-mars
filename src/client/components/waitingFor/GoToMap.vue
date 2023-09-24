@@ -6,14 +6,14 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
 import {isMarsSpace} from '@/common/boards/spaces';
 
 export default Vue.extend({
   name: 'GoToMap',
   props: {
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectSpaceModel,
     },
   },
   methods: {

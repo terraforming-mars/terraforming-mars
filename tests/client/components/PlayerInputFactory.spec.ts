@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import {CardModel} from '@/common/models/CardModel';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PlayerInputModel, SelectCardModel} from '@/common/models/PlayerInputModel';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 import {SELECT_CORPORATION_TITLE, SELECT_PROJECTS_TITLE} from '@/common/inputs/SelectInitialCards';
@@ -53,6 +53,13 @@ describe('PlayerInputFactory', function() {
     runTest({
       inputType: 'projectCard',
       cards: [{name: CardName.ANTS} as CardModel],
+      paymentOptions: {},
+      floaters: 0,
+      graphene: 0,
+      kuiperAsteroids: 0,
+      lunaArchivesScience: 0,
+      microbes: 0,
+      seeds: 0,
     });
   });
 
@@ -60,8 +67,8 @@ describe('PlayerInputFactory', function() {
     runTest({
       inputType: 'initialCards',
       options: [
-        {title: SELECT_CORPORATION_TITLE} as PlayerInputModel,
-        {title: SELECT_PROJECTS_TITLE} as PlayerInputModel,
+        {inputType: 'card', title: SELECT_CORPORATION_TITLE} as SelectCardModel,
+        {inputType: 'card', title: SELECT_PROJECTS_TITLE} as SelectCardModel,
       ],
     });
   });
@@ -130,31 +137,14 @@ describe('PlayerInputFactory', function() {
   });
 });
 
+// function runTest(playerInput: Omit<PlayerInputModel, 'title' | 'buttonLabel'>) {
 function runTest(playerInput: Partial<PlayerInputModel>) {
-  const baseInput: Partial<PlayerInputModel> = {
-    amount: undefined,
-    availableSpaces: undefined,
-    cards: undefined,
-    options: undefined,
-    min: undefined,
-    max: undefined,
-    microbes: undefined,
-    floaters: undefined,
-    lunaArchivesScience: undefined,
-    paymentOptions: undefined,
-    spireScience: undefined,
-    seeds: undefined,
-    auroraiData: undefined,
+  // TODO(kberg): this no longer needs to be partial, but needs all the invocations above to change.
+  const fullInput: Partial<PlayerInputModel> = {
     title: 'test input',
-    players: undefined,
     buttonLabel: 'save',
-    coloniesModel: undefined,
-    selectBlueCardAction: false,
-    availableParties: undefined,
-    showReset: false,
+    ...playerInput,
   };
-
-  const fullPlayerInput: Partial<PlayerInputModel> = {...baseInput, ...playerInput};
 
   const thisPlayer: Partial<PublicPlayerModel> = {
     steel: 0,
@@ -173,7 +163,7 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     propsData: {
       players: [],
       playerView: playerView,
-      playerinput: fullPlayerInput,
+      playerinput: fullInput,
       onsave: function() {
       },
       showsave: true,

@@ -14,7 +14,7 @@
 import Vue from 'vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectColonyModel} from '@/common/models/PlayerInputModel';
 import {SelectColonyResponse} from '@/common/inputs/InputResponse';
 import {ColonyName} from '@/common/colonies/ColonyName';
 
@@ -26,7 +26,7 @@ export default Vue.extend({
   name: 'SelectColony',
   props: {
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectColonyModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectColonyResponse) => void,

@@ -3,6 +3,7 @@ import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {isPayment, Payment, PaymentOptions} from '../../common/inputs/Payment';
 import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
+import {SelectPaymentModel} from '../../common/models/PlayerInputModel';
 
 export class SelectPayment extends BasePlayerInput {
   constructor(
@@ -13,6 +14,25 @@ export class SelectPayment extends BasePlayerInput {
   ) {
     super('payment', title);
     this.buttonLabel = 'Pay'; // no input button
+  }
+
+  public toModel(player: IPlayer): SelectPaymentModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      inputType: 'payment',
+      amount: this.amount,
+      // // These ?? false might be unnecessary.
+      // paymentOptions: {
+      //   heat: player.canUseHeatAsMegaCredits,
+      //   lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+      // },
+      paymentOptions: this.paymentOptions,
+      seeds: player.getSpendableSeedResources(),
+      auroraiData: player.getSpendableData(),
+      kuiperAsteroids: player.getSpendableKuiperAsteroids(),
+      spireScience: player.getSpendableSpireScienceResources(),
+    };
   }
 
   public process(input: InputResponse, player: IPlayer) {

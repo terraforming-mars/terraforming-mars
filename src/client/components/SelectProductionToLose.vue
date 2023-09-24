@@ -54,12 +54,12 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
 
-interface SelectProductionToLoseModel {
+type DataModel = {
     megacredits: number;
     steel: number;
     titanium: number;
@@ -73,7 +73,7 @@ export default Vue.extend({
   name: 'SelectProductionToLose',
   props: {
     playerinput: {
-      type: Object as () => Required<Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>>,
+      type: Object as () => SelectProductionToLoseModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectProductionToLoseResponse) => void,
@@ -85,7 +85,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data(): SelectProductionToLoseModel {
+  data(): DataModel {
     return {
       megacredits: 0,
       steel: 0,

@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import SelectPayment from '@/client/components/SelectPayment.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 import {CardName} from '@/common/cards/CardName';
@@ -328,7 +328,7 @@ describe('SelectPayment', () => {
   const setupBill = function(
     amount: number,
     playerFields: Partial<PublicPlayerModel>,
-    playerInputFields: Partial<PlayerInputModel>) {
+    playerInputFields: Partial<SelectPaymentModel>) {
     const thisPlayer: Partial<PublicPlayerModel> = {
       steel: 0,
       titanium: 0,
@@ -343,12 +343,16 @@ describe('SelectPayment', () => {
       id: 'playerid-foo',
     };
 
-    const playerInput: Partial<PlayerInputModel> = {
-      amount: amount,
+    const playerInput: SelectPaymentModel = {
+      inputType: 'payment',
+      buttonLabel: '',
       title: 'foo',
-      microbes: 0,
-      floaters: 0,
-      lunaArchivesScience: 0,
+      amount: amount,
+      paymentOptions: {},
+      auroraiData: 0,
+      kuiperAsteroids: 0,
+      seeds: 0,
+      spireScience: 0,
       ...playerInputFields,
     };
 

@@ -46,10 +46,20 @@ export function hasIntersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): bo
  * @param {Array<T>} a: the first array
  * @param {Array<T>} b: the second array
  */
-export function difference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): ReadonlyArray<T> {
+export function oneWayDifference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): ReadonlyArray<T> {
   // Not optimized for large arrays.
   return a.filter((e) => !b.includes(e));
 }
+
+/**
+ * Returns elements in neither A nor B.
+ */
+export function twoWayDifference<T>(a: Array<T>, b: Array<T>): Array<T> {
+  return a
+    .filter((x) => !b.includes(x))
+    .concat(b.filter((x) => !a.includes(x)));
+}
+
 
 // https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescript
 // Recursive partials are useful for nested partial objects.

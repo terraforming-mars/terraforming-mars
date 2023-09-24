@@ -1,8 +1,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Payment, PaymentUnit, PAYMENT_UNITS} from '@/common/inputs/Payment';
-import {PaymentWidgetMixin, SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
+import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import AppButton from '@/client/components/common/AppButton.vue';
@@ -15,7 +15,7 @@ export default Vue.extend({
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectPaymentModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectPaymentResponse) => void,
@@ -35,7 +35,7 @@ export default Vue.extend({
   components: {
     AppButton,
   },
-  data(): SelectPaymentModel {
+  data(): SelectPaymentDataModel {
     return {
       cost: 0,
       heat: 0,
@@ -125,9 +125,9 @@ export default Vue.extend({
         if (this.thisPlayer.titanium === 0) {
           return false;
         }
-        return this.playerinput.paymentOptions?.titanium || this.playerinput.paymentOptions?.lunaTradeFederationTitanium;
+        return this.playerinput.paymentOptions.titanium || this.playerinput.paymentOptions.lunaTradeFederationTitanium;
       }
-      return this.playerinput.paymentOptions?.[unit] && this.hasUnits(unit);
+      return this.playerinput.paymentOptions[unit] && this.hasUnits(unit);
     },
     saveData() {
       const payment: Payment = {...Payment.EMPTY};

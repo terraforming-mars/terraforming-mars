@@ -21,7 +21,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectSpaceResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
@@ -32,7 +32,7 @@ type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
 }
 
-type SelectSpaceDataModel = {
+type DataModel = {
   availableSpaces: Set<SpaceId>;
   selectedTile: HTMLElement | undefined,
   spaceId: SpaceId | undefined;
@@ -43,7 +43,7 @@ export default (Vue as WithRefs<Refs>).extend({
   name: 'SelectSpace',
   props: {
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectSpaceModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectSpaceResponse) => void,
@@ -55,7 +55,7 @@ export default (Vue as WithRefs<Refs>).extend({
       type: Boolean,
     },
   },
-  data(): SelectSpaceDataModel {
+  data(): DataModel {
     return {
       availableSpaces: new Set(this.playerinput.availableSpaces),
       selectedTile: undefined,

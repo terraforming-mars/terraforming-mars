@@ -1,7 +1,7 @@
 // Common code for SelectPayment and SelectProjectCardToPlay
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectPaymentModel as SPM, SelectProjectCardToPlayModel as SPCM} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
@@ -9,7 +9,7 @@ import {CardResource} from '@/common/CardResource';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {DEFAULT_PAYMENT_VALUES, PAYMENT_UNITS, PaymentUnit} from '@/common/inputs/Payment';
 
-export interface SelectPaymentModel {
+export type SelectPaymentDataModel = {
     card?: CardModel;
     cost: number;
     heat: number;
@@ -27,7 +27,7 @@ export interface SelectPaymentModel {
     kuiperAsteroids: number;
 }
 
-export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
+export type SelectProjectCardToPlayDataModel = SelectPaymentDataModel & {
   cardName: CardName;
   card: CardModel;
   reserveUnits: Units;
@@ -39,15 +39,15 @@ export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
   available: Units;
 }
 
-export interface PaymentWidgetModel extends SelectPaymentModel {
+export interface PaymentWidgetModel extends SelectPaymentDataModel {
   cardName?: CardName;
   card?: CardModel;
   cards?: Array<CardModel>;
   tags?: Array<Tag>;
   available?: Units;
-  $data: SelectPaymentModel | SelectProjectCardToPlayModel;
+  $data: SelectPaymentDataModel | SelectProjectCardToPlayDataModel;
   playerView: PlayerViewModel;
-  playerinput: PlayerInputModel;
+  playerinput: SPM | SPCM;
 }
 
 export const PaymentWidgetMixin = {
@@ -181,7 +181,8 @@ export const PaymentWidgetMixin = {
       case 'auroraiData':
       case 'graphene':
       case 'kuiperAsteroids':
-        amount = model.playerinput[unit];
+        // TODO(kberg): remove 'as any'. You can do it.
+        amount = (model.playerinput as any)[unit];
         break;
       }
 

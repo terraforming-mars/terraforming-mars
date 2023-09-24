@@ -7,8 +7,8 @@ import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PaymentWidgetMixin, SelectProjectCardToPlayModel} from '@/client/mixins/PaymentWidgetMixin';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PaymentWidgetMixin, SelectProjectCardToPlayDataModel} from '@/client/mixins/PaymentWidgetMixin';
+import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tag} from '@/common/cards/Tag';
@@ -23,7 +23,7 @@ export default Vue.extend({
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectProjectCardToPlayModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectProjectCardToPlayResponse) => void,
@@ -40,7 +40,7 @@ export default Vue.extend({
       return this.playerView.thisPlayer;
     },
   },
-  data(): SelectProjectCardToPlayModel {
+  data(): SelectProjectCardToPlayDataModel {
     let card: CardModel | undefined;
     let cards: Array<CardModel> = [];
     if (this.playerinput !== undefined &&
@@ -204,7 +204,7 @@ export default Vue.extend({
         return this.tags.includes(Tag.SPACE) ||
           this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
       // case 'LunaTradeFederationTitanium':
-      //   return this.card !== undefined && this.available.titanium > 0 && this.playerinput.paymentOptions?.lunaTradeFederationTitanium === true;
+      //   return this.card !== undefined && this.available.titanium > 0 && this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
       case 'microbes':
         return this.tags.includes(Tag.PLANT);
       case 'floaters':
@@ -231,7 +231,7 @@ export default Vue.extend({
       return this.cardCanUse(unit);
     },
     canUseLunaTradeFederationTitanium(): boolean {
-      return this.playerinput.paymentOptions?.lunaTradeFederationTitanium === true;
+      return this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
     },
     cardChanged() {
       this.card = this.getCard();
@@ -255,7 +255,7 @@ export default Vue.extend({
       return this.reserveUnits.titanium > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium());
     },
     showReserveHeatWarning(): boolean {
-      return this.reserveUnits?.heat > 0 && this.canUse('heat');
+      return this.reserveUnits.heat > 0 && this.canUse('heat');
     },
     saveData() {
       const payment: Payment = {...Payment.EMPTY};

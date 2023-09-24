@@ -4,7 +4,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {LogHelper} from '../LogHelper';
-import {difference} from '../../common/utils/utils';
+import {oneWayDifference} from '../../common/utils/utils';
 
 export enum LogType {
   DREW = 'drew',
@@ -57,7 +57,7 @@ export class ChooseCards extends DeferredAction {
       if (selected.length > max) {
         throw new Error('Selected too many cards');
       }
-      const unselected = difference(cards, selected);
+      const unselected = oneWayDifference(cards, selected);
       if (options.paying && selected.length > 0) {
         const cost = selected.length * player.cardCost;
         player.game.defer(

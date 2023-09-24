@@ -15,7 +15,7 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {ColorWithNeutral} from '@/common/Color';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectDelegateModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectDelegateResponse} from '@/common/inputs/InputResponse';
@@ -24,6 +24,7 @@ interface DataModel {
   selectedPlayer: ColorWithNeutral | undefined;
 }
 
+// TODO(kberg): rename to SelectDelegate
 export default Vue.extend({
   name: 'SelectPartyPlayer',
   props: {
@@ -31,7 +32,7 @@ export default Vue.extend({
       type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectDelegateModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectDelegateResponse) => void,

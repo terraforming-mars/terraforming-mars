@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import {Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
-import {SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
+import {SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PaymentUnit} from '@/common/inputs/Payment';
 
 export class PaymentTester {
-  private model: SelectPaymentModel;
+  private model: SelectPaymentDataModel;
   constructor(private wrapper: Wrapper<Vue>) {
-    this.model = this.wrapper.vm as unknown as SelectPaymentModel;
+    this.model = this.wrapper.vm as unknown as SelectPaymentDataModel;
   }
 
   private static selector(type: PaymentUnit) {

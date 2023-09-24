@@ -14,13 +14,13 @@
 
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectPlayerResponse} from '@/common/inputs/InputResponse';
 import {ColorWithNeutral} from '@/common/Color';
 
-interface SelectPlayerModel {
+type DataModel = {
   selectedPlayer: ColorWithNeutral | undefined;
 }
 
@@ -31,7 +31,7 @@ export default Vue.extend({
       type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectPlayerModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectPlayerResponse) => void,
@@ -43,7 +43,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data(): SelectPlayerModel {
+  data(): DataModel {
     return {
       selectedPlayer: undefined,
     };

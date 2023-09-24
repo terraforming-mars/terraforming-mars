@@ -7,6 +7,7 @@ import {Merger} from '../cards/promo/Merger';
 import {CardName} from '../../common/cards/CardName';
 import {ICeoCard} from '../cards/ceos/ICeoCard';
 import * as titles from '../../common/inputs/SelectInitialCards';
+import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 
 
 export class SelectInitialCards extends AndOptions {
@@ -104,5 +105,14 @@ export class SelectInitialCards extends AndOptions {
         player.game.corporationDeck.discard(card);
       }
     });
+  }
+
+  public override toModel(player: IPlayer): SelectInitialCardsModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      inputType: 'initialCards',
+      options: this.options.map((option) => option.toModel(player)),
+    };
   }
 }

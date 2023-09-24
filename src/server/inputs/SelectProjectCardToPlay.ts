@@ -8,6 +8,8 @@ import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inp
 import {CardName} from '../../common/cards/CardName';
 import {CanPlayResponse} from '../cards/IProjectCard';
 import {YesAnd} from '../cards/requirements/CardRequirement';
+import {cardsToModel} from '../models/ModelUtils';
+import {SelectProjectCardToPlayModel} from '../../common/models/PlayerInputModel';
 
 export type PlayCardMetadata = {
   reserveUnits: Readonly<Units>;
@@ -40,6 +42,25 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
           },
         ];
       }));
+  }
+
+  public toModel(player: IPlayer): SelectProjectCardToPlayModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      inputType: 'projectCard',
+      cards: cardsToModel(player, this.cards, {showCalculatedCost: true, extras: this.extras}),
+      microbes: player.getSpendableMicrobes(),
+      floaters: player.getSpendableFloaters(),
+      paymentOptions: {
+        heat: player.canUseHeatAsMegaCredits,
+        lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+      },
+      lunaArchivesScience: player.getSpendableLunaArchiveScienceResources(),
+      seeds: player.getSpendableSeedResources(),
+      graphene: player.getSpendableGraphene(),
+      kuiperAsteroids: player.getSpendableKuiperAsteroids(),
+    };
   }
 
   public process(input: InputResponse) {

@@ -10,7 +10,7 @@ export class SelectParty extends BasePlayerInput {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Send delegate',
-    public availableParties: Array<PartyName>,
+    public parties: Array<PartyName>,
     public cb: (party: PartyName) => undefined,
   ) {
     super('party', title);

@@ -122,7 +122,7 @@ describe('PlayerInputFactory', function() {
 
   it('ShiftAresGlobalParameters', async () => {
     runTest({
-      typeesGlobalParameters',
+      type: 'aresGlobalParameters',
       aresData: {
         includeHazards: false,
         hazardData: {

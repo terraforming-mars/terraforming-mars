@@ -1,7 +1,7 @@
 import {DATA_VALUE, FLOATERS_VALUE, MICROBES_VALUE, GRAPHENE_VALUE, SEED_VALUE} from '../constants';
 
 /** Types of resources spent to pay for anything. */
-export const PAYMENT_KEYS = [
+export const PAYMENT_UNITS = [
   'heat',
   'megaCredits',
   'steel',
@@ -15,7 +15,7 @@ export const PAYMENT_KEYS = [
   'graphene',
   'kuiperAsteroids'] as const;
 /** Types of resources spent to pay for anything. */
-export type PaymentUnit = typeof PAYMENT_KEYS[number];
+export type PaymentUnit = typeof PAYMENT_UNITS[number];
 
 /**
  * The units of resources to deduct from the player's play area. These resources are all worth
@@ -58,7 +58,7 @@ export function isPayment(obj: unknown): obj is Payment {
   if (typeof obj !== 'object') return false;
   if (!obj) return false;
   const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
-  return PAYMENT_KEYS.every((key) =>
+  return PAYMENT_UNITS.every((key) =>
     h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
 }
 

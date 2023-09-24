@@ -16,9 +16,9 @@ export class SelectDelegate extends BasePlayerInput {
 
   public override toModel(): SelectDelegateModel {
     return {
+      type: 'delegate',
       title: this.title,
       buttonLabel: this.buttonLabel,
-      type: 'delegate',
       players: this.players.map((player) => player === 'NEUTRAL' ? 'NEUTRAL' : player.color),
     };
   }

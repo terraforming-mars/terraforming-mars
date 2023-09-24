@@ -3,6 +3,7 @@ import {Resource} from '../Resource';
 import {ColonyName} from './ColonyName';
 import {CardResource} from '../CardResource';
 import {GameModule} from '../cards/GameModule';
+import {OneOrArray} from '../utils/types';
 
 export interface IColonyMetadata {
   module?: GameModule; // TODO(kberg): attach gameModule to the server colonies themselves.
@@ -14,7 +15,7 @@ export interface IColonyMetadata {
   readonly cardResource?: CardResource;
   readonly tradeType: ColonyBenefit;
   readonly tradeQuantity: Array<number>; // Default is [1,1,1,1,1,1,1]
-  readonly tradeResource?: Resource | Array<Resource>;
+  readonly tradeResource?: OneOrArray<Resource>;
   readonly colonyBonusType: ColonyBenefit;
   readonly colonyBonusQuantity: number; // Default is 1
   readonly colonyBonusResource?: Resource;

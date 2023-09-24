@@ -16,6 +16,7 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
+import {OneOrArray} from '../../common/utils/types';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -40,7 +41,7 @@ export interface ICard {
     tags: Array<Tag>;
     play: (player: IPlayer) => PlayerInput | undefined;
     getCardDiscount?: (player: IPlayer, card: IProjectCard) => number;
-    cardDiscount?: CardDiscount | Array<CardDiscount>;
+    cardDiscount?: OneOrArray<CardDiscount>;
     // parameter is a Morningstar Inc. special case.
     getRequirementBonus?: (player: IPlayer, parameter: GlobalParameter) => number;
     victoryPoints?: number | 'special' | IVictoryPoints,

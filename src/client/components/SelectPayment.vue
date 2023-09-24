@@ -73,7 +73,7 @@ export default Vue.extend({
       case 'heat': return this.canUseHeat();
       case 'seeds': return this.canUseSeeds();
       case 'auroraiData': return this.canUseAuroraiData();
-      case 'kuiperAsteroids': return this.canUseAsteroids();
+      case 'kuiperAsteroids': return this.canUseKuiperAsteroids();
       case 'spireScience': return this.canUseSpireScience();
       }
       return false;
@@ -126,31 +126,31 @@ export default Vue.extend({
       return this.thisPlayer.megaCredits >= this.cost;
     },
     canUseHeat() {
-      return this.playerinput.canUseHeat && this.availableHeat() > 0;
+      return this.playerinput.paymentOptions?.heat && this.availableHeat() > 0;
     },
     canUseSteel() {
-      return this.playerinput.canUseSteel && this.thisPlayer.steel > 0;
+      return this.playerinput.paymentOptions?.steel && this.thisPlayer.steel > 0;
     },
     canUseTitanium() {
-      return this.playerinput.canUseTitanium && this.thisPlayer.titanium > 0;
+      return this.playerinput.paymentOptions?.titanium && this.thisPlayer.titanium > 0;
     },
     canUseLunaTradeFederationTitanium() {
-      return this.playerinput.canUseLunaTradeFederationTitanium && this.thisPlayer.titanium > 0;
+      return this.playerinput.paymentOptions?.lunaTradeFederationTitanium && this.thisPlayer.titanium > 0;
     },
     canUseSeeds() {
-      return this.playerinput.canUseSeeds && (this.playerinput.seeds ?? 0 > 0);
+      return this.playerinput.paymentOptions?.seeds && (this.playerinput.seeds ?? 0 > 0);
     },
     canUseAuroraiData() {
-      return this.playerinput.canUseAuroraiData && (this.playerinput.auroraiData ?? 0 > 0);
+      return this.playerinput.paymentOptions?.auroraiData && (this.playerinput.auroraiData ?? 0 > 0);
     },
     canUseGraphene() {
-      return this.playerinput.canUseGraphene && (this.playerinput.graphene ?? 0 > 0);
+      return this.playerinput.paymentOptions?.graphene && (this.playerinput.graphene ?? 0 > 0);
     },
-    canUseAsteroids() {
-      return this.playerinput.canUseAsteroids && (this.playerinput.kuiperAsteroids ?? 0 > 0);
+    canUseKuiperAsteroids() {
+      return this.playerinput.paymentOptions?.kuiperAsteroids && (this.playerinput.kuiperAsteroids ?? 0 > 0);
     },
     canUseSpireScience() {
-      return this.playerinput.canUseSpireScience && (this.playerinput.spireScience ?? 0 > 0);
+      return this.playerinput.paymentOptions?.spireScience && (this.playerinput.spireScience ?? 0 > 0);
     },
 
     saveData() {
@@ -263,7 +263,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('auroraiData')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="canUseAsteroids()">
+    <div class="payments_type input-group" v-if="canUseKuiperAsteroids()">
       <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay by Asteroid')"></i>
       <AppButton type="minus" @click="reduceValue('kuiperAsteroids', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="kuiperAsteroids" />

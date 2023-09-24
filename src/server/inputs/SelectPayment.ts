@@ -1,6 +1,6 @@
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {isPayment, Payment} from '../../common/inputs/Payment';
+import {isPayment, Payment, PaymentOptions} from '../../common/inputs/Payment';
 import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
 
@@ -8,17 +8,7 @@ export class SelectPayment extends BasePlayerInput {
   constructor(
     title: string | Message,
     public amount: number,
-    public canUse: {
-      steel?: boolean,
-      titanium?: boolean,
-      heat?: boolean,
-      seeds?: boolean,
-      auroraiData?: boolean,
-      lunaTradeFederationTitanium?: boolean,
-      graphene?: boolean,
-      kuiperAsteroids?: boolean,
-      spireScience?: boolean,
-    },
+    public paymentOptions: Partial<PaymentOptions>,
     public cb: (payment: Payment) => PlayerInput | undefined,
   ) {
     super('payment', title);
@@ -41,17 +31,7 @@ export class SelectPayment extends BasePlayerInput {
     if (!player.canSpend(payment)) {
       throw new Error('You do not have that many resources to spend');
     }
-    const amountPaid = player.payingAmount(payment, {
-      steel: this.canUse.steel,
-      titanium: this.canUse.titanium,
-      seeds: this.canUse.seeds,
-      floaters: false, // Used in project cards only
-      microbes: false, // Used in project cards only
-      lunaArchivesScience: false, // Used in project cards only
-      spireScience: this.canUse.spireScience,
-      auroraiData: this.canUse.auroraiData,
-      kuiperAsteroids: this.canUse.kuiperAsteroids,
-    });
+    const amountPaid = player.payingAmount(payment, this.paymentOptions);
     if (amountPaid < this.amount) {
       throw new Error('Did not spend enough');
     }

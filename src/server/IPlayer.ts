@@ -2,7 +2,7 @@ import {PlayerId, isPlayerId} from '../common/Types';
 import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame, isIGame} from './IGame';
-import {Payment} from '../common/inputs/Payment';
+import {Payment, PaymentOptions} from '../common/inputs/Payment';
 import {ICard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
@@ -33,7 +33,7 @@ import {Stock} from './player/Stock';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
-export type CanAffordOptions = Partial<Payment.Options> & {
+export type CanAffordOptions = Partial<PaymentOptions> & {
   cost: number,
   reserveUnits?: Units,
   tr?: TRSource | DynamicTRSource,
@@ -239,7 +239,7 @@ export interface IPlayer {
   canPlay(card: IProjectCard): boolean | YesAnd;
   simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd;
   canSpend(payment: Payment, reserveUnits?: Units): boolean;
-  payingAmount(payment: Payment, options?: Partial<Payment.Options>): number;
+  payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number;
   /**
    * Returns a summary of how much a player would have to spend to play a card,
    * any associated costs, and ways the player can pay.

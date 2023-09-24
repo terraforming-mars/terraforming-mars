@@ -8,7 +8,7 @@ import {Color} from '../common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
-import {Payment, PaymentUnit, PAYMENT_KEYS} from '../common/inputs/Payment';
+import {Payment, PaymentUnit, PAYMENT_KEYS, PaymentOptions} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
@@ -855,10 +855,12 @@ export class Player implements IPlayer {
     return Math.max(cost, 0);
   }
 
-  private paymentOptionsForCard(card: IProjectCard): Payment.Options {
+  private paymentOptionsForCard(card: IProjectCard): PaymentOptions {
     return {
+      heat: this.canUseHeatAsMegaCredits,
       steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
       titanium: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE),
+      lunaTradeFederationTitanium: this.canUseTitaniumAsMegacredits,
       seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
       floaters: card.tags.includes(Tag.VENUS),
       microbes: card.tags.includes(Tag.PLANT),
@@ -1427,10 +1429,10 @@ export class Player implements IPlayer {
    * worth 2M€, this will return 7.
    *
    * @param {Payment} payment the resources being paid.
-   * @param {Payment.Options} options any configuration defining the accepted form of payment.
+   * @param {PaymentOptions} options any configuration defining the accepted form of payment.
    * @return {number} a number representing the value of payment in M€.
    */
-  public payingAmount(payment: Payment, options?: Partial<Payment.Options>): number {
+  public payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number {
     const multiplier: Record<PaymentUnit, number> = {
       megaCredits: 1,
       steel: this.getSteelValue(),

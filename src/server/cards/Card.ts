@@ -23,6 +23,7 @@ import {OneOrMany} from '../../common/utils/types';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {asArray} from '../../common/utils/utils';
+import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -44,6 +45,7 @@ type SharedProperties = {
   initialActionText?: string;
   firstAction?: FirstActionBehavior;
   metadata: ICardMetadata;
+  requirements?: CardRequirementsDescriptor;
   name: CardName;
   resourceType?: CardResource;
   startingMegaCredits?: number;

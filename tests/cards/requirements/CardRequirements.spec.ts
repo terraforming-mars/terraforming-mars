@@ -19,8 +19,11 @@ import {CardRequirementDescriptor} from '../../../src/common/cards/CardRequireme
 import {IPlayer} from '../../../src/server/IPlayer';
 import {asArray} from '../../../src/common/utils/utils';
 
+function compile(req: OneOrMany<CardRequirementDescriptor>) {
+  return CardRequirements.compile(asArray(req));
+}
 function satisfies(req: OneOrMany<CardRequirementDescriptor>, player: IPlayer) {
-  return CardRequirements.compile(asArray(req)).satisfies(player);
+  return compile(asArray(req)).satisfies(player);
 }
 
 describe('CardRequirements', function() {
@@ -79,7 +82,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for tr', function() {
-    const requirements = {tr(25));
+    const requirements = {tr: 25};
     expect(satisfies(requirements, player)).eq(false);
     player.setTerraformRating(25);
     expect(satisfies(requirements, player)).eq(true);
@@ -124,7 +127,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for cities', function() {
-    const requirements = {cities(2, {all: true}));
+    const requirements = {cities: 2, all: true};
     expect(satisfies(requirements, player)).eq(false);
     player.game.addCity(player2, player.game.board.getAvailableSpacesForCity(player)[0]);
     expect(satisfies(requirements, player)).eq(false);
@@ -133,7 +136,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for colonies', function() {
-    const requirements = {colonies(1));
+    const requirements = {colonies: 1};
     const colony = new Ceres();
     player.game.colonies.push(colony);
     expect(satisfies(requirements, player)).eq(false);
@@ -144,7 +147,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for floaters', function() {
-    const requirements = {floaters(2));
+    const requirements = {floaters: 2};
     const corp = new Celestic();
     player.setCorporationForTest(corp);
     churnAction(corp, player);
@@ -154,7 +157,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for partyLeaders', function() {
-    const requirements = {partyLeaders(1));
+    const requirements = {partyLeader: 1};
     expect(satisfies(requirements, player)).eq(false);
     const greens = player.game.turmoil!.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player.id;
@@ -162,7 +165,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for same tags', function() {
-    const requirements = {tag(Tag.MICROBE, 2));
+    const requirements = {tag: Tag.MICROBE, count: 2};
 
     const ants = new Ants();
     player.playedCards.push(ants);
@@ -174,7 +177,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for different tags', function() {
-    const requirements = {tag(Tag.MICROBE).tag(Tag.ANIMAL));
+    const requirements = [{tag: Tag.MICROBE}, {tag: Tag.ANIMAL}];
 
     player.tagsForTest = {wild: 1};
     expect(satisfies(requirements, player)).eq(false);
@@ -197,7 +200,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for any tag requirement', function() {
-    const requirements = {tag(Tag.MICROBE, 2, {all: true}));
+    const requirements = {tag: Tag.MICROBE, count: 2, all: true};
 
     player.tagsForTest = {microbe: 2};
     expect(satisfies(requirements, player)).is.true;
@@ -215,7 +218,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for production', function() {
-    const requirements = {production(Resource.PLANTS));
+    const requirements = {production: Resource.PLANTS};
     expect(satisfies(requirements, player)).eq(false);
     player.production.add(Resource.PLANTS, 1);
     expect(satisfies(requirements, player)).eq(true);
@@ -230,7 +233,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for plantsRemoved', function() {
-    const requirements = {plantsRemoved());
+    const requirements = {plantsRemoved: true};
     expect(satisfies(requirements, player)).eq(false);
 
     player2.plants = 1;
@@ -245,14 +248,14 @@ describe('CardRequirements', function() {
   });
 
   it('throws errors when out of range', function() {
-    expect(() => {temperature: -32}).to.throw();
-    expect(() => {temperature: 10}).to.throw();
-    expect(() => {temperature: -5}).to.throw();
-    expect(() => {oxygen(-1))).to.throw();
-    expect(() => {oxygen: 15}).to.throw();
-    expect(() => {oceans(-1))).to.throw();
-    expect(() => {oceans(10))).to.throw();
-    expect(() => {venus(-1))).to.throw();
-    expect(() => {venus: 31}).to.throw();
+    expect(() => compile({temperature: -32})).to.throw();
+    expect(() => compile({temperature: 10})).to.throw();
+    expect(() => compile({temperature: -5})).to.throw();
+    expect(() => compile({oxygen: -1})).to.throw();
+    expect(() => compile({oxygen: 15})).to.throw();
+    expect(() => compile({oceans: -1})).to.throw();
+    expect(() => compile({oceans: 10})).to.throw();
+    expect(() => compile({venus: -1})).to.throw();
+    expect(() => compile({venus: 31})).to.throw();
   });
 });

@@ -9,7 +9,6 @@ import {ALL_RESOURCES} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
@@ -25,7 +24,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
       tags: [Tag.SCIENCE],
       cost: 12,
       resourceType: CardResource.CLONE_TROOPER,
-      requirements: CardRequirements.builder((b) => b.oceans(6)),
+      requirements: {oceans: 6},
       victoryPoints: {resourcesHere: {}},
 
       metadata: {

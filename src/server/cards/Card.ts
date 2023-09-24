@@ -15,11 +15,15 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
-import {OneOrArray, PartialField} from '../../common/utils/types';
+import {OneOrArray} from '../../common/utils/types';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
+import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
+import {CardRequirements} from './requirements/CardRequirements';
+import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
+import {asArray} from '../../common/utils/utils';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -31,7 +35,7 @@ const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
 type FirstActionBehavior = Behavior & {text: string};
 
 type SharedProperties = {
-  /** @deprecated use behavior */
+  /** ../..deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
   behavior?: Behavior | undefined;
   cardCost?: number;
@@ -54,7 +58,7 @@ type SharedProperties = {
 /* Internal representation of card properties. */
 type InternalProperties = SharedProperties & {
   reserveUnits?: Units,
-  requirements: Array<CardRequirementDescriptor>
+  requirements: Array<CardRequirementsDescriptor>
   compiledRequirements: CardRequirements;
 }
 

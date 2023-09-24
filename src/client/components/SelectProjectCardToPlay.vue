@@ -2,7 +2,6 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 
-import {GRAPHENE_VALUE, SEED_VALUE} from '@/common/constants';
 import {Payment, PaymentKey, PAYMENT_KEYS} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
@@ -152,44 +151,27 @@ export default Vue.extend({
         return toSaveUnits;
       };
 
-      if (megacreditBalance > 0 && this.canUse('seeds')) {
-        this.seeds = deductUnits(this.playerinput.seeds, SEED_VALUE);
+      for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene'] as const) {
+        if (megacreditBalance > 0 && this.canUse(unit)) {
+          this.$data[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
+        }
       }
 
-      // TODO(kberg): create constants for these resource types
-
-      if (megacreditBalance > 0 && this.canUse('microbes')) {
-        this.microbes = deductUnits(this.playerinput.microbes, 2);
-      }
-
-      if (megacreditBalance > 0 && this.canUse('floaters')) {
-        this.floaters = deductUnits(this.playerinput.floaters, 3);
-      }
-
-      if (megacreditBalance > 0 && this.canUse('lunaArchivesScience')) {
-        this.lunaArchivesScience = deductUnits(this.playerinput.lunaArchivesScience, 1);
-      }
-
-      if (megacreditBalance > 0 && this.canUse('graphene')) {
-        this.graphene = deductUnits(this.playerinput.graphene, GRAPHENE_VALUE);
-      }
-
+      // These aren't in the loop above because of the reserve units bit.
+      // It's doable of course.
       this.available.steel = Math.max(this.thisPlayer.steel - this.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUse('steel')) {
-        this.steel = deductUnits(this.available.steel, this.thisPlayer.steelValue, true);
+        this.steel = deductUnits(this.available.steel, this.getResourceRate('steel'), true);
       }
 
       this.available.titanium = Math.max(this.thisPlayer.titanium - this.reserveUnits.titanium, 0);
-      if (megacreditBalance > 0 && this.canUse('titanium')) {
-        this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue, true);
-      }
-      if (megacreditBalance > 0 && this.canUse('titanium') === false && this.canUseLunaTradeFederationTitanium()) {
-        this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue - 1, true);
+      if (megacreditBalance > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium())) {
+        this.titanium = deductUnits(this.available.titanium, this.getResourceRate('titanium'), true);
       }
 
       this.available.heat = Math.max(this.availableHeat() - this.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUse('heat')) {
-        this.heat = deductUnits(this.available.heat, 1);
+        this.heat = deductUnits(this.available.heat, this.getResourceRate('heat'));
       }
 
       // If we are overspending
@@ -276,22 +258,11 @@ export default Vue.extend({
       return this.reserveUnits?.heat > 0 && this.canUse('heat');
     },
     saveData() {
-      const payment: Payment = {
-        heat: this.heat,
-        megaCredits: this.megaCredits,
-        steel: this.steel,
-        titanium: this.titanium,
-        microbes: this.microbes,
-        floaters: this.floaters,
-        lunaArchivesScience: this.lunaArchivesScience,
-        seeds: this.seeds,
-        graphene: this.graphene,
-        auroraiData: 0,
-        kuiperAsteroids: 0,
-        spireScience: 0,
-      };
+      const payment: Payment = {...Payment.EMPTY};
+
       let totalSpent = 0;
       for (const target of PAYMENT_KEYS) {
+        payment[target] = this[target] ?? 0;
         if (payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;

@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {Payment, PaymentKey} from '@/common/inputs/Payment';
+import {Payment, PaymentKey, PAYMENT_KEYS} from '@/common/inputs/Payment';
 import {PaymentWidgetMixin, SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -102,9 +102,8 @@ export default Vue.extend({
 
       const megaCredits = this.getAvailableUnits('megaCredits');
 
-      const units: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'];
       let amountCovered = reserveMegacredits ? megaCredits : 0;
-      for (const unit of units) {
+      for (const unit of ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'] as const) {
         amountCovered += this.setDefaultValue(amountCovered, unit);
       }
       if (!reserveMegacredits) {
@@ -131,22 +130,11 @@ export default Vue.extend({
       return this.playerinput.paymentOptions?.[unit] && this.hasUnits(unit);
     },
     saveData() {
-      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits', 'kuiperAsteroids', 'spireScience'];
-
-      const payment: Payment = {
-        ...Payment.EMPTY,
-        heat: this.heat,
-        megaCredits: this.megaCredits,
-        steel: this.steel,
-        titanium: this.titanium,
-        seeds: this.seeds ?? 0,
-        auroraiData: this.auroraiData ?? 0,
-        kuiperAsteroids: this.kuiperAsteroids,
-        spireScience: this.spireScience ?? 0,
-      };
+      const payment: Payment = {...Payment.EMPTY};
 
       let totalSpent = 0;
-      for (const target of targets) {
+      for (const target of PAYMENT_KEYS) {
+        payment[target] = this[target] ?? 0;
         if (payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
@@ -173,7 +161,7 @@ export default Vue.extend({
 
       if (requiredAmt > 0 && totalSpent > requiredAmt) {
         const diff = totalSpent - requiredAmt;
-        for (const target of targets) {
+        for (const target of PAYMENT_KEYS) {
           if (payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;

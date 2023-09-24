@@ -3,7 +3,6 @@ import {Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
 import {SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PaymentKey} from '@/common/inputs/Payment';
-import {fail} from 'assert';
 
 export class PaymentTester {
   private model: SelectPaymentModel;

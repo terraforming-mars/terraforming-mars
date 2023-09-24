@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {Payment, PaymentKey} from '@/common/inputs/Payment';
+import {Payment, PaymentUnit} from '@/common/inputs/Payment';
 import {PaymentWidgetMixin, SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -66,21 +66,21 @@ export default Vue.extend({
     setInitialCost() {
       this.cost = this.playerinput.amount ?? 0;
     },
-    canUse(target: PaymentKey) {
+    canUse(target: PaymentUnit) {
       switch (target) {
       case 'steel': return this.canUseSteel();
       case 'titanium': return this.canUseTitanium();
       case 'heat': return this.canUseHeat();
       case 'seeds': return this.canUseSeeds();
       case 'auroraiData': return this.canUseAuroraiData();
-      case 'kuiperAsteroids': return this.canUseAsteroids();
+      case 'kuiperAsteroids': return this.canUseKuiperAsteroids();
       case 'spireScience': return this.canUseSpireScience();
       }
       return false;
     },
     setDefaultValue(
       amountCovered: number, // MC values of prior-computed resources.
-      target: PaymentKey): number {
+      target: PaymentUnit): number {
       if (!this.canUse(target)) return 0;
       const amount = this.getAmount(target);
       if (amount === 0) return 0;
@@ -109,7 +109,7 @@ export default Vue.extend({
 
       const megaCredits = this.getAmount('megaCredits');
 
-      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'];
+      const targets: Array<PaymentUnit> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'];
       let amountCovered = reserveMegacredits ? megaCredits : 0;
       for (const target of targets) {
         amountCovered += this.setDefaultValue(amountCovered, target);
@@ -126,35 +126,35 @@ export default Vue.extend({
       return this.thisPlayer.megaCredits >= this.cost;
     },
     canUseHeat() {
-      return this.playerinput.canUseHeat && this.availableHeat() > 0;
+      return this.playerinput.paymentOptions?.heat && this.availableHeat() > 0;
     },
     canUseSteel() {
-      return this.playerinput.canUseSteel && this.thisPlayer.steel > 0;
+      return this.playerinput.paymentOptions?.steel && this.thisPlayer.steel > 0;
     },
     canUseTitanium() {
-      return this.playerinput.canUseTitanium && this.thisPlayer.titanium > 0;
+      return this.playerinput.paymentOptions?.titanium && this.thisPlayer.titanium > 0;
     },
     canUseLunaTradeFederationTitanium() {
-      return this.playerinput.canUseLunaTradeFederationTitanium && this.thisPlayer.titanium > 0;
+      return this.playerinput.paymentOptions?.lunaTradeFederationTitanium && this.thisPlayer.titanium > 0;
     },
     canUseSeeds() {
-      return this.playerinput.canUseSeeds && (this.playerinput.seeds ?? 0 > 0);
+      return this.playerinput.paymentOptions?.seeds && (this.playerinput.seeds ?? 0 > 0);
     },
     canUseAuroraiData() {
-      return this.playerinput.canUseAuroraiData && (this.playerinput.auroraiData ?? 0 > 0);
+      return this.playerinput.paymentOptions?.auroraiData && (this.playerinput.auroraiData ?? 0 > 0);
     },
     canUseGraphene() {
-      return this.playerinput.canUseGraphene && (this.playerinput.graphene ?? 0 > 0);
+      return this.playerinput.paymentOptions?.graphene && (this.playerinput.graphene ?? 0 > 0);
     },
-    canUseAsteroids() {
-      return this.playerinput.canUseAsteroids && (this.playerinput.kuiperAsteroids ?? 0 > 0);
+    canUseKuiperAsteroids() {
+      return this.playerinput.paymentOptions?.kuiperAsteroids && (this.playerinput.kuiperAsteroids ?? 0 > 0);
     },
     canUseSpireScience() {
-      return this.playerinput.canUseSpireScience && (this.playerinput.spireScience ?? 0 > 0);
+      return this.playerinput.paymentOptions?.spireScience && (this.playerinput.spireScience ?? 0 > 0);
     },
 
     saveData() {
-      const targets: Array<PaymentKey> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits', 'kuiperAsteroids', 'spireScience'];
+      const targets: Array<PaymentUnit> = ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'megaCredits', 'kuiperAsteroids', 'spireScience'];
 
       const payment: Payment = {
         ...Payment.EMPTY,
@@ -224,7 +224,7 @@ export default Vue.extend({
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
     <div class="payments_type input-group" v-if="canUseSteel()">
-      <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay by Steel')"></i>
+      <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay with Steel')"></i>
       <AppButton type="minus" @click="reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
       <AppButton type="plus" @click="addValue('steel', 1)" />
@@ -232,7 +232,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium() || canUseLunaTradeFederationTitanium()">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
+      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay with Titanium')"></i>
       <AppButton type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <AppButton type="plus" @click="addValue('titanium', 1)" />
@@ -240,7 +240,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">
-      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
+      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay with Heat')"></i>
       <AppButton type="minus" @click="reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <AppButton type="plus" @click="addValue('heat', 1)" />
@@ -248,7 +248,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUseSeeds()">
-      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
+      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay with Seeds')"></i>
       <AppButton type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
       <AppButton type="plus" @click="addValue('seeds', 1)" />
@@ -256,15 +256,15 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUseAuroraiData()">
-      <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay by Data')"></i>
+      <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay with Data')"></i>
       <AppButton type="minus" @click="reduceValue('auroraiData', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="auroraiData" />
       <AppButton type="plus" @click="addValue('auroraiData', 1)" />
       <AppButton type="max" @click="setMaxValue('auroraiData')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="canUseAsteroids()">
-      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay by Asteroid')"></i>
+    <div class="payments_type input-group" v-if="canUseKuiperAsteroids()">
+      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay with Asteroids')"></i>
       <AppButton type="minus" @click="reduceValue('kuiperAsteroids', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="kuiperAsteroids" />
       <AppButton type="plus" @click="addValue('kuiperAsteroids', 1)" />
@@ -272,7 +272,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUseSpireScience()">
-      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science')"></i>
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay with Science')"></i>
       <AppButton type="minus" @click="reduceValue('spireScience', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="spireScience" />
       <AppButton type="plus" @click="addValue('spireScience', 1)" />
@@ -280,7 +280,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
+      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay with Megacredits')"></i>
       <AppButton type="minus" @click="reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <AppButton type="plus" @click="addValue('megaCredits', 1)" />

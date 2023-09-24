@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 import {ImprovedMoonConcrete} from '../../../src/server/cards/moon/ImprovedMoonConcrete';
@@ -11,7 +11,7 @@ import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineSt
 describe('ImprovedMoonConcrete', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: ImprovedMoonConcrete;
 
   beforeEach(() => {

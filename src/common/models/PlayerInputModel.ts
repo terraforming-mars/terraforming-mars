@@ -9,19 +9,12 @@ import {PartyName} from '../turmoil/PartyName';
 import {TurmoilModel} from './TurmoilModel';
 import {TileType} from '../TileType';
 import {SpaceId} from '../Types';
+import {PaymentOptions} from '../inputs/Payment';
 
 export interface PlayerInputModel {
     amount: number | undefined;
     availableSpaces: Array<SpaceId> | undefined;
-    canUseHeat: boolean | undefined;
-    canUseSteel: boolean | undefined;
-    canUseTitanium: boolean | undefined;
-    canUseSeeds: boolean | undefined;
-    canUseAuroraiData: boolean | undefined;
-    canUseLunaTradeFederationTitanium: boolean | undefined;
-    canUseGraphene: boolean | undefined;
-    canUseAsteroids: boolean | undefined;
-    canUseSpireScience: boolean | undefined;
+    paymentOptions?: Partial<PaymentOptions>;
     cards: Array<CardModel> | undefined;
     inputType: PlayerInputType;
     options: Array<PlayerInputModel> | undefined;

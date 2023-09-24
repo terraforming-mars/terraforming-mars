@@ -89,7 +89,7 @@ export class Server {
       passedPlayers: game.getPassedPlayers(),
       pathfinders: createPathfindersModel(game),
       phase: game.phase,
-      spaces: this.getSpaces(game.board, game.gagarinBase, game.stJosephCathedrals, game.nomadSpace),
+      spaces: this.getSpaces(game.board, game.gagarinBase, game.stJosephCathedrals),
       spectatorId: game.spectatorId,
       temperature: game.getTemperature(),
       isTerraformed: game.marsIsTerraformed(),
@@ -218,15 +218,7 @@ export class Server {
       cards: undefined,
       max: undefined,
       min: undefined,
-      canUseSteel: undefined,
-      canUseTitanium: undefined,
-      canUseLunaTradeFederationTitanium: undefined,
-      canUseHeat: undefined,
-      canUseSeeds: undefined,
-      canUseAuroraiData: undefined,
-      canUseGraphene: undefined,
-      canUseAsteroids: undefined,
-      canUseSpireScience: undefined,
+      paymentOptions: {},
       players: undefined,
       availableSpaces: undefined,
       maxByDefault: undefined,
@@ -267,8 +259,10 @@ export class Server {
       playerInputModel.cards = this.getCards(player, spctp.cards, {showCalculatedCost: true, extras: spctp.extras});
       playerInputModel.microbes = player.getSpendableMicrobes();
       playerInputModel.floaters = player.getSpendableFloaters();
-      playerInputModel.canUseHeat = player.canUseHeatAsMegaCredits;
-      playerInputModel.canUseLunaTradeFederationTitanium = player.canUseTitaniumAsMegacredits;
+      playerInputModel.paymentOptions = {
+        heat: player.canUseHeatAsMegaCredits,
+        lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+      },
       playerInputModel.lunaArchivesScience = player.getSpendableLunaArchiveScienceResources();
       playerInputModel.seeds = player.getSpendableSeedResources();
       playerInputModel.graphene = player.getSpendableGraphene();
@@ -295,18 +289,15 @@ export class Server {
       const sp = waitingFor as SelectPayment;
       playerInputModel.amount = sp.amount;
       // These ?? false might be unnecessary.
-      playerInputModel.canUseSteel = sp.canUse.steel ?? false;
-      playerInputModel.canUseTitanium = sp.canUse.titanium ?? false;
-      playerInputModel.canUseHeat = sp.canUse.heat ?? false;
-      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUse.lunaTradeFederationTitanium ?? false;
-      playerInputModel.canUseSeeds = sp.canUse.seeds ?? false;
+      playerInputModel.paymentOptions = {
+        heat: player.canUseHeatAsMegaCredits,
+        lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+      },
+
+      playerInputModel.paymentOptions = sp.paymentOptions;
       playerInputModel.seeds = player.getSpendableSeedResources();
-      playerInputModel.canUseAuroraiData = sp.canUse.auroraiData ?? false;
       playerInputModel.auroraiData = player.getSpendableData();
-      playerInputModel.canUseGraphene = sp.canUse.graphene && player.getSpendableData() > 0;
-      playerInputModel.canUseAsteroids = sp.canUse.kuiperAsteroids && player.getSpendableKuiperAsteroids() > 0;
       playerInputModel.kuiperAsteroids = player.getSpendableKuiperAsteroids();
-      playerInputModel.canUseSpireScience = sp.canUse.spireScience ?? false;
       playerInputModel.spireScience = player.getSpendableSpireScienceResources();
       break;
     case 'player':
@@ -543,8 +534,7 @@ export class Server {
   private static getSpaces(
     board: Board,
     gagarin: ReadonlyArray<SpaceId> = [],
-    cathedrals: ReadonlyArray<SpaceId> = [],
-    nomads: SpaceId | undefined = undefined): Array<SpaceModel> {
+    cathedrals: ReadonlyArray<SpaceId> = []): Array<SpaceModel> {
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
     const noctisCitySpaceIds = board.getNoctisCitySpaceId();
 
@@ -578,9 +568,6 @@ export class Server {
       }
       if (cathedrals.includes(space.id)) {
         model.cathedral = true;
-      }
-      if (space.id === nomads) {
-        model.nomads = true;
       }
 
       return model;

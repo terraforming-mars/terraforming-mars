@@ -3,12 +3,12 @@ import {TestPlayer} from '../../TestPlayer';
 import {LunaHyperloopCorporation} from '../../../src/server/cards/moon/LunaHyperloopCorporation';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 
 describe('LunaHyperloopCorporation', () => {
   let player: TestPlayer;
   let card: LunaHyperloopCorporation;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

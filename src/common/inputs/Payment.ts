@@ -1,4 +1,4 @@
-// https://steveholgado.com/typescript-types-from-arrays/
+/** Types of resources spent to pay for anything. */
 export const PAYMENT_KEYS = [
   'heat',
   'megaCredits',
@@ -12,7 +12,8 @@ export const PAYMENT_KEYS = [
   'auroraiData',
   'graphene',
   'kuiperAsteroids'] as const;
-export type PaymentKey = typeof PAYMENT_KEYS[number];
+/** Types of resources spent to pay for anything. */
+export type PaymentUnit = typeof PAYMENT_KEYS[number];
 
 /**
  * The units of resources to deduct from the player's play area. These resources are all worth
@@ -59,6 +60,21 @@ export function isPayment(obj: unknown): obj is Payment {
     h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
 }
 
+export type PaymentOptions = {
+  heat: boolean,
+  steel: boolean,
+  titanium: boolean,
+  floaters: boolean,
+  microbes: boolean,
+  lunaTradeFederationTitanium: boolean,
+  lunaArchivesScience: boolean,
+  spireScience: boolean,
+  seeds: boolean,
+  auroraiData: boolean,
+  graphene: boolean,
+  kuiperAsteroids: boolean,
+}
+
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {
     heat: 0,
@@ -74,19 +90,6 @@ export namespace Payment {
     graphene: 0,
     kuiperAsteroids: 0,
   } as const;
-
-  export interface Options {
-    steel: boolean,
-    titanium: boolean,
-    floaters: boolean,
-    microbes: boolean,
-    lunaArchivesScience: boolean,
-    spireScience: boolean,
-    seeds: boolean,
-    auroraiData: boolean,
-    graphene: boolean,
-    kuiperAsteroids: boolean,
-  }
 
   export function of(payment: Partial<Payment>) : Payment {
     return {

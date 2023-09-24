@@ -14,10 +14,10 @@ export class Bjorn extends CeoCard {
       metadata: {
         cardNumber: 'L02',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('STEAL').megacredits(0, {multiplier}).asterix();
+          b.opgArrow().text('STEAL').megacredits(0, {multiplier}).megacredits(2).asterix();
           b.br;
         }),
-        description: 'Once per game, steal X M€ from each player that has more M€ than you, where X is the current generation number.',
+        description: 'Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.',
       },
     });
   }
@@ -28,7 +28,7 @@ export class Bjorn extends CeoCard {
     const targetPlayers = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
 
     targetPlayers.forEach((target) => {
-      target.stock.steal(Resource.MEGACREDITS, game.generation, player);
+      target.stock.steal(Resource.MEGACREDITS, game.generation + 2, player);
     });
 
     return undefined;

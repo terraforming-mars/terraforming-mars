@@ -238,7 +238,10 @@ export class Turmoil {
     }
 
     // 3 - New Government
-    this.rulingParty = this.dominantParty;
+    // Behond the Emperor Hook prevents changing the ruling party.
+    if (game.beholdTheEmperor !== true) {
+      this.rulingParty = this.dominantParty;
+    }
 
     // 3.a - Ruling Policy change
     this.setRulingParty(game);
@@ -276,21 +279,25 @@ export class Turmoil {
     // Cleanup previous party effects
     game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
 
-    const newChariman = this.rulingParty.partyLeader || 'NEUTRAL';
-
-    // Fill the delegate reserve with everyone except the party leader
-    if (this.rulingParty.partyLeader !== undefined) {
-      this.rulingParty.delegates.remove(this.rulingParty.partyLeader);
+    let newChairman = this.rulingParty.partyLeader || 'NEUTRAL';
+    if (game.beholdTheEmperor === true && this.chairman !== undefined) {
+      newChairman = this.chairman;
     }
-    this.rulingParty.delegates.forEachMultiplicity((count, playerId) => {
-      this.delegateReserve.add(playerId, count);
-    });
 
-    // Clean the party
-    this.rulingParty.partyLeader = undefined;
-    this.rulingParty.delegates.clear();
+    if (game.beholdTheEmperor !== true) {
+      // Fill the delegate reserve with everyone except the party leader
+      if (this.rulingParty.partyLeader !== undefined) {
+        this.rulingParty.delegates.remove(this.rulingParty.partyLeader);
+      }
+      this.rulingParty.delegates.forEachMultiplicity((count, playerId) => {
+        this.delegateReserve.add(playerId, count);
+      });
 
-    this.setNewChairman(newChariman, game, /* setAgenda*/ true);
+      // Clean the party
+      this.rulingParty.partyLeader = undefined;
+      this.rulingParty.delegates.clear();
+    }
+    this.setNewChairman(newChairman, game, /* setAgenda*/ true);
   }
 
   public setNewChairman(newChairman : Delegate, game: IGame, setAgenda: boolean = true, gainTR: boolean = true) {

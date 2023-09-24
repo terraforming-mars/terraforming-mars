@@ -227,8 +227,8 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public placeColony(options?: ItemOptions): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.PLACE_COLONY, -1, options));
+  public colonyTile(options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.COLONY_TILE, -1, options));
   }
 
   public influence(options?: ItemOptions): this {
@@ -300,6 +300,10 @@ abstract class Builder<T> {
 
   public fighter(amount: number = 1) {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.FIGHTER, amount));
+  }
+
+  public cloneTrooper(amount: number = 1) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.CLONE_TROOPER, amount));
   }
 
   public camps(amount: number = 1) {

@@ -1,12 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {IGame} from '../../IGame';
-
-import {IColony} from '../../colonies/IColony';
-import {SelectColony} from '../../inputs/SelectColony';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class Maria extends CeoCard {
@@ -16,7 +11,7 @@ export class Maria extends CeoCard {
       metadata: {
         cardNumber: 'L13',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('X ').placeColony().colonies(1);
+          b.opgArrow().text('X ').colonyTile().colonies(1);
         }),
         description: 'Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.',
       },
@@ -29,42 +24,18 @@ export class Maria extends CeoCard {
     return game.discardedColonies.length > 0 && this.isDisabled === false;
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
-    this.isDisabled = true;
+  public action(player: IPlayer): undefined {
     const game = player.game;
-    if (game.discardedColonies.length === 0) return undefined;
-
     const count = Math.min(game.discardedColonies.length, player.game.generation);
     const availableColonies = game.discardedColonies.slice(0, count);
-    const selectColony = new SelectColony('Select colony tile to add', 'Add colony tile', availableColonies, (colony: IColony) => {
-      if (availableColonies.includes(colony)) {
-        game.colonies.push(colony);
-        game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-        game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
 
-        // 'Force' the game to update the new colony activation status
-        this.checkActivation(colony, game);
+    this.isDisabled = true;
+    ColoniesHandler.addColonyTile(player, {
+      colonies: availableColonies, cb: (colony) => {
         if (colony.isActive) {
           colony.addColony(player);
         }
-      } else {
-        throw new Error(`Colony ${colony.name} is not a discarded colony`);
-      }
-      return undefined;
-    });
-    selectColony.showTileOnly = true;
-    return selectColony;
-  }
-
-  private checkActivation(colony: IColony, game: IGame): void {
-    if (colony.isActive) return;
-    for (const player of game.getPlayers()) {
-      for (const card of player.tableau) {
-        const active = ColoniesHandler.maybeActivateColony(colony, card);
-        if (active) {
-          return;
-        }
-      }
-    }
+      }});
+    return undefined;
   }
 }

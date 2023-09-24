@@ -146,6 +146,12 @@
                                 <div class="create-game-expansion-icon expansion-icon-ceo"></div>
                                 <span v-i18n>CEOs</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <input type="checkbox" name="starwars" id="starwars-checkbox" v-model="starWarsExpansion">
+                            <label for="starwars-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-starwars"></div>
+                                <span v-i18n>Star Wars 🆕(β)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
                         </div>
 
                         <div class="create-game-page-column">
@@ -595,6 +601,7 @@ export default (Vue as WithRefs<Refs>).extend({
       ceoExtension: false,
       customCeos: [],
       startingCeos: 3,
+      starWarsExpansion: false,
     };
   },
   components: {
@@ -970,6 +977,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const ceoExtension = this.ceoExtension;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
+      const starWarsExpansion = this.starWarsExpansion;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1138,6 +1146,7 @@ export default (Vue as WithRefs<Refs>).extend({
         ceoExtension,
         customCeos,
         startingCeos,
+        starWarsExpansion,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

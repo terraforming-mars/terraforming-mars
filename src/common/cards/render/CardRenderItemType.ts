@@ -25,7 +25,7 @@ export enum CardRenderItemType {
   TRADE = 'trade',
   TRADE_DISCOUNT = 'trade_discount',
   TRADE_FLEET = 'trade_fleet',
-  PLACE_COLONY = 'place_colony',
+  COLONY_TILE = 'colony_tile',
   CHAIRMAN = 'chairman',
   PARTY_LEADERS = 'party_leaders',
   DELEGATES = 'delegates',
@@ -87,4 +87,7 @@ export enum CardRenderItemType {
   REDS_DEACTIVATED = 'reds-deactivated',
   HAZARD_TILE = 'hazard-tile',
   ADJACENCY_BONUS = 'adjacency-bonus',
+
+  // Star Wars
+  CLONE_TROOPER = 'clone-trooper',
 }

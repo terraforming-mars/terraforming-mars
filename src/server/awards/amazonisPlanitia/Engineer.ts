@@ -1,6 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
+import {ICard} from '../../cards/ICard';
 
 export class Engineer implements IAward {
   public readonly name = 'Engineer';
@@ -9,23 +10,26 @@ export class Engineer implements IAward {
   public getScore(player: IPlayer): number {
     const score = player.tableau.filter((card) => {
       if (Engineer.productionCards.includes(card.name)) return true;
-
-      if (card.produce !== undefined) return true;
-      const production = card.behavior?.production;
-      if (production !== undefined) {
-        // TODO(kberg): this is mildly unsafe because it doesn't take into account when
-        // production[key] = undefined (e.g. {megacredits: undefined}).
-        return Object.keys(production).length > 0;
-      }
-      return false;
+      return Engineer.autoInclude(card);
     }).length;
 
     return score;
   }
 
+  public static autoInclude(card: ICard) {
+    if (card.produce !== undefined) return true;
+    const production = card.behavior?.production;
+    if (production !== undefined) {
+      // TODO(kberg): this is mildly unsafe because it doesn't take into account when
+      // production[key] = undefined (e.g. {megacredits: undefined}).
+      return Object.keys(production).length > 0;
+    }
+    return false;
+  }
+
   // This is the list of cards that have bespoke code to change production.
   // public for testing.
-  public static productionCards = [
+  public static productionCards: ReadonlyArray<CardName> = [
     // Base + Corp Era
     CardName.ARTIFICIAL_PHOTOSYNTHESIS,
     CardName.ASTEROID_MINING_CONSORTIUM,
@@ -52,6 +56,5 @@ export class Engineer implements IAward {
     CardName.MICROBIOLOGY_PATENTS,
     CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
     CardName.RARE_EARTH_ELEMENTS,
-    CardName.SMALL_OPEN_PIT_MINE,
-  ];
+  ] as const;
 }

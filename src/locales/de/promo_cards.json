@@ -1,10 +1,34 @@
 {
+  "Solar Logistics": "Solar-Logistik",
+  "Effect: When you play an Earth tag, you pay 2 M€ less.": "Effekt: Wenn du ein Erdsymbol spielst, zahle 2 M€ weniger.",
+  "Effect: When any player plays a space event, draw a card.": "EFFEKT: Wenn ein beliebiger Spieler ein Weltraumereignis spielt, ziehe eine Karte.",
+  "Gain 2 titanium.": "Erhalte 2 Titan.",
+  
+  "Teslaract": "Teslarakt",
+  "Action: Spend 1 energy production to gain 1 plant production.": "AKTION: Gebe 1 Energie-Produktion aus, um 1 Pflanzen-Produktion zu erhalten.",
+  "Raise your TR 1 step.": "Erhöhe deine TW um 1.",
+  
+  "Red Ships": "Rote Schiffe",
+  "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "AKTION: Erhalte 1 M€ für jedes STADT- UND SPEZIALPLÄTTCHEN, die an einen Ozean grenzen.",
+  "Requires 4% oxygen.": "Benötigt einen Sauerstoffgehalt von 4% oder mehr.",
+  
+  "Neptunian Power Consultants": "Neptunische Energieberater",
+  "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "EFFEKT: Wenn ein Ozean platziert wird, DARFST du 5 M€ zahlen (Stahl kann verwendet werden), um deine Energieproduktion um 1 zu erhöhen und dieser Karte 1 Wasserkraftressource hinzuzufügen.",
+  "Increase your heat production 2 steps.": "Erhöhe deine Wärme-Produktion um 2.",
+  
+  "Mars Nomads": "Mars-Nomaden",
+  "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "AKTION: Bewege die Nomaden auf ein benachbartes, nicht reserviertes, leeres Gebiet und kassiere den PLATZIERUNGSBONUS, als ob du dort ein Sonderplättchen platzieren würdest. Auf dem Nomadenfeld dürfen keine Plättchen platziert werden.",
+  "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "PLATZIERE DIE NOMADEN auf ein nicht reserviertes, leeres Feld auf dem Spielplan.",
+  
+  "Kaguya Tech": "Kaguya-Technik",
+  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Erhöhe die M€-Produktion um 2. Ziehe 1 Karte. Entferne 1 deiner Grünflächenplättchen (betrifft nicht den Sauerstoff). Platziere dort ein Stadtplättchen, unabhängig von den Platzierungsregeln. Erhalte wie üblich Platzierungsboni.",
+  
   "Homeostasis Bureau": "Büro für Homöostase",
   "Effect: When you raise the temperature, gain 3 M€.": "EFFEKT: Wenn du die Temperatur erhöhst, erhalte 3 M€.",
   "Increase your heat production 2 steps.": "Erhöhe deine Wärme-Produktion um 2.",
   
   "Hermetic Order of Mars": "Hermetischer Mars-Orden",
-  "Oxygen must be 4% or lower. Increase your MC production 2 steps. Gain 1 MC per empty area adjacent to your tiles.": "Der Sauerstoffgehalt muss 4% oder weniger betragen. Erhöhe deine MC-Produktion um 2. Erhalte 1 MC pro leeres Feld neben deinen Plättchen.",
+  "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Der Sauerstoffgehalt muss 4% oder weniger betragen. Erhöhe deine M€-Produktion um 2. Erhalte 1 MC pro leeres Feld neben deinen Plättchen.",
   
   "St. Joseph of Cupertino Mission": "St. Joseph von Cupertino Mission",
   "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "AKTION: Zahle 5 M€ (STAHL KANN VERWENDET WERDEN), um 1 Kathedrale in einer Stadt zu bauen. Maximal 1 pro Stadt. Der Besitzer der Stadt kann 2 M€ zahlen, um 1 Karte zu ziehen.",
@@ -22,10 +46,7 @@
   
   "Aqueduct Systems": "Aquadukt Systeme",
   "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "Benötigt eine eigene Stadt angrenzend an einen Ozean. Ziehe 3 Karten mit einem Gebäudesymbol.",
-  
-  "Directed Heat Usage": "Direkte Wärmenutzung",
-  "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Aktion: Bezahle 3 Wärme, um entweder 4 M€ oder 2 Pflanzen zu erhalten.",
-  
+    
   "Supercapacitors": "Superkondensatoren",
   "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "EFFEKT: DIE UMWANDLUNG VON ENERGIE IN WÄRME WÄHREND DER PRODUKTION IST FÜR JEDE ENERGIERESSOURCE OPTIONAL.",
   "Increase M€ production 1 step.": "Erhöhe deine M€-Produktion um 1.",
@@ -35,34 +56,7 @@
   
   "16 Psyche": "16 Psyche",
   "Increase titanium production 2 steps. Gain 3 titanium.": "Erhöhe deine Titan-Produktion um 2. Erhalte 3 Titan.",
-
-  "Giant Solar Collector": "Riesiger Sonnenkollektor",
-  "Increase your energy production 2 steps. Raise Venus 1 step.": "Erhöhe die Energieproduktion um 2 Stufen. Erhöhe die Venuswertung um 2%.",
   
-  "Applied Science": "Angewandte Wissenschaft",
-  "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "AKTION: Entferne 1 Ressource hier, um 1 Standardressource deiner Wahl zu erhalten oder füge 1 Ressource auf einer beliebigen Karte mit einer Ressource hinzu.",
-  "Add 6 resources here.": "Füge hier 6 Ressourcen hinzu.",
-  
-  "Head Start": "Start Voraus",
-  "GAIN 2 STEEL.": "Erhalte 2 Stahl.",
-  "GAIN 2 MC PER PROJECT CARD YOU HAVE IN HAND.": "Erhalte 2 M€ pro Projektkarte, die du auf der Hand hast.",
-  "IMMEDIATELY TAKE 2 ACTIONS.": "Führe sofort 2 Aktionen aus.",
-  
-  "Double Down": "Doppelter Einsatz",
-  "Copy your other prelude's direct effect.": "Kopiere den direkten Effekt einer deiner anderen Präludiums.",
-  
-  "Corporate Archives": "Unternehmensarchiv",
-  "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Sieh dir die obersten 7 Karten des Stapels an. Nimm 2 von ihnen auf die Hand und lege die anderen 5 ab.",
-  "Look at the top 7 cards from the deck.": "Sieh dir die obersten 7 Karten des Stapels an.",
-  "Take 2 of them into hand and discard the other 5.": "Nimm 2 von ihnen auf die Hand und lege die anderen 5 ab.",
-  "Gain 13 M€": "Erhalte 13 M€",
-  
-  "Merger": "Zusammenschluss",
-  "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Ziehe 4 Konzern-Karten, spiele eine dieser Karten und wirf die anderen ab. Dann bezahle 42 M€",
-  
-  "New Partner": "Neuer Partner",
-  "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Erhöhe deine M€-Produktion um 1. Ziehe sofort 2 Präludium-Karten, spiele eine dieser Karten und wirf die andere ab.",
-
   "Comet Aiming": "Kometenzielen",
   "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "AKTION: Bezahle 1 Titan, um 1 Asteroid-Ressource einer BELIEBIGEN Karte hinzuzufügen.",
   "Action: Remove 1 asteroid here to place an ocean.": "AKTION: Entferne 1 Asteroid-Ressource von dieser Karte, um einen Ozean zu platzieren.",

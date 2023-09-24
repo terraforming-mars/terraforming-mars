@@ -8,8 +8,7 @@ import {Units} from '../../../common/Units';
 import {sum} from '../../../common/utils/utils';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectCard} from '../../inputs/SelectCard';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {SelectResource} from '../../inputs/SelectResource';
 
 export class FocusedOrganization extends PreludeCard implements IActionCard {
   constructor() {
@@ -35,19 +34,6 @@ export class FocusedOrganization extends PreludeCard implements IActionCard {
     });
   }
 
-  private selectResource(title: string, include: ReadonlyArray<keyof Units>, cb: (key: keyof Units) => undefined): OrOptions {
-    const orOptions = new OrOptions();
-    for (const key of include) {
-      orOptions.options.push(new SelectOption(key, 'Select', () => {
-        cb(key);
-        return undefined;
-      }));
-    }
-
-    orOptions.title = title;
-    return orOptions;
-  }
-
   public canAct(player: IPlayer): boolean {
     return player.cardsInHand.length > 0 && sum(Units.values(player.stock)) > 0;
   }
@@ -57,7 +43,7 @@ export class FocusedOrganization extends PreludeCard implements IActionCard {
     return new AndOptions(
       () => {
         player.drawCard();
-        return this.selectResource('Select resource to gain', Units.keys, (type) => {
+        return new SelectResource('Select resource to gain', Units.keys, (type) => {
           player.stock.add(Units.ResourceMap[type], 1, {log: true});
           return undefined;
         });
@@ -66,7 +52,7 @@ export class FocusedOrganization extends PreludeCard implements IActionCard {
         player.discardCardFromHand(card);
         return undefined;
       }),
-      this.selectResource('Select resource to discard', discardableStandardResources, (type) => {
+      new SelectResource('Select resource to discard', discardableStandardResources, (type) => {
         player.stock.deduct(Units.ResourceMap[type], 1, {log: true});
         return undefined;
       }));

@@ -118,6 +118,7 @@
     "agenda(s)": "Agenda(en)",
     "seed(s)": "Saatgut",
     "specialized robot(s)": "spezialisierten Roboter",
+    "hydroelectric resource(s)": "hydroelektrische Ressource(n)",
 
     "${0} played ${1}": "${0} hat ${1} gespielt",
     "${0} used ${1} action": "${0} hat eine Aktion von ${1} genutzt",
@@ -317,6 +318,8 @@
     "${0} lowered the habitat rate ${1} step(s)": "${0} senkte die Habitatwertung um ${1} Schritt(e).",
     "${0} lowered the logistic rate ${1} step(s)": "${0} senkte die Logistikwertung um ${1} Schritt(e).",
     "${0} sold ${1} steel": "${0} verkaufte ${1} Stahl",
+    "${0} had no events": "${0} hatte keine Ereignisse",
+    "${0} returned ${1} to their hand": "${0} nahm ${1} auf seine/ihre Hand zurück",
 
     "${0} gained ${1} TR": "${0} erhielt ${1} TW",
     "${0} lost ${1} TR": "${0} verlor ${1} TW",

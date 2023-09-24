@@ -8,7 +8,7 @@ import {Color} from '../common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
-import {Payment, PaymentKey, PAYMENT_KEYS} from '../common/inputs/Payment';
+import {Payment, PaymentUnit, PAYMENT_KEYS, PaymentOptions} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
@@ -194,9 +194,9 @@ export class Player implements IPlayer {
   public removedFromPlayCards: Array<IProjectCard> = [];
 
   // The number of actions a player can take this round.
-  // It's almost always 2, but certain cards can change this value.
+  // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
   //
-  // This value isn't serialized. Probably ought to.
+  // This value isn't serialized. Probably ought to be.
   public availableActionsThisRound = 2;
 
   // Stats
@@ -855,10 +855,12 @@ export class Player implements IPlayer {
     return Math.max(cost, 0);
   }
 
-  private paymentOptionsForCard(card: IProjectCard): Payment.Options {
+  private paymentOptionsForCard(card: IProjectCard): PaymentOptions {
     return {
+      heat: this.canUseHeatAsMegaCredits,
       steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
       titanium: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE),
+      lunaTradeFederationTitanium: this.canUseTitaniumAsMegacredits,
       seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
       floaters: card.tags.includes(Tag.VENUS),
       microbes: card.tags.includes(Tag.PLANT),
@@ -1427,11 +1429,11 @@ export class Player implements IPlayer {
    * worth 2M€, this will return 7.
    *
    * @param {Payment} payment the resources being paid.
-   * @param {Payment.Options} options any configuration defining the accepted form of payment.
+   * @param {PaymentOptions} options any configuration defining the accepted form of payment.
    * @return {number} a number representing the value of payment in M€.
    */
-  public payingAmount(payment: Payment, options?: Partial<Payment.Options>): number {
-    const multiplier: Record<PaymentKey, number> = {
+  public payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number {
+    const multiplier: Record<PaymentUnit, number> = {
       megaCredits: 1,
       steel: this.getSteelValue(),
       titanium: this.getTitaniumValue(),
@@ -1446,7 +1448,7 @@ export class Player implements IPlayer {
       kuiperAsteroids: 1,
     };
 
-    const usable: {[key in PaymentKey]: boolean} = {
+    const usable: {[key in PaymentUnit]: boolean} = {
       megaCredits: true,
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,

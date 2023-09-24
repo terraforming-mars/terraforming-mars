@@ -18,7 +18,7 @@ export class Rogers extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br;
-          b.venus(1).colon().projectRequirements();
+          b.venus(1, {played}).colon().projectRequirements();
           b.br;
           b.venus(1, {played}).colon().megacredits(-3);
         }),

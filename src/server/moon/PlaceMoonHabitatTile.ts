@@ -1,7 +1,7 @@
 import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {BasePlaceMoonTile} from './BasePlaceMoonTile';
-import {IMoonData} from './IMoonData';
+import {MoonData} from './MoonData';
 import {MoonExpansion} from './MoonExpansion';
 
 export class PlaceMoonHabitatTile extends BasePlaceMoonTile {
@@ -13,7 +13,7 @@ export class PlaceMoonHabitatTile extends BasePlaceMoonTile {
     super(player, spaces, title);
   }
 
-  protected getSpaces(moonData: IMoonData): ReadonlyArray<Space> {
+  protected getSpaces(moonData: MoonData): ReadonlyArray<Space> {
     return moonData.moon.getAvailableSpacesOnLand(this.player);
   }
 

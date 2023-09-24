@@ -14,11 +14,13 @@ import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
 import {SerializedDeck} from './cards/SerializedDeck';
+import {AwardName} from '../common/ma/AwardName';
 
 export type SerializedGame = {
     activePlayer: PlayerId;
     aresData?: AresData;
-    awards: Array<string>;
+    awards: Array<AwardName>;
+    beholdTheEmperor?: boolean;
     board: SerializedBoard;
     ceoDeck: SerializedDeck;
     currentSeed: number;
@@ -43,7 +45,6 @@ export type SerializedGame = {
     lastSaveId: number;
     milestones: Array<string>;
     moonData: SerializedMoonData | undefined;
-    nomadSpace: SpaceId | undefined;
     pathfindersData: SerializedPathfindersData | undefined;
     oxygenLevel: number;
     passedPlayers: Array<PlayerId>;
@@ -58,6 +59,7 @@ export type SerializedGame = {
     stJosephCathedrals: Array<SpaceId>;
     syndicatePirateRaider: PlayerId | undefined;
     temperature: number;
+    tradeEmbargo?: boolean;
     turmoil?: SerializedTurmoil;
     undoCount: number;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;

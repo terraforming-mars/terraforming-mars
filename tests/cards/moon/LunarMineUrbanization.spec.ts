@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {cast} from '../../TestingUtils';
 import {LunarMineUrbanization} from '../../../src/server/cards/moon/LunarMineUrbanization';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {VictoryPointsBreakdown} from '../../../src/server/game/VictoryPointsBreakdown';
@@ -12,7 +12,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 describe('LunarMineUrbanization', () => {
   let player: TestPlayer;
   let card: LunarMineUrbanization;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

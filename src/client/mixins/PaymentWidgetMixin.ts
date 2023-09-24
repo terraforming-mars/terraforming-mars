@@ -7,7 +7,7 @@ import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardResource} from '@/common/CardResource';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {DEFAULT_PAYMENT_VALUES, PAYMENT_KEYS, PaymentKey} from '@/common/inputs/Payment';
+import {DEFAULT_PAYMENT_VALUES, PAYMENT_KEYS, PaymentUnit} from '@/common/inputs/Payment';
 
 export interface SelectPaymentModel {
     card?: CardModel;
@@ -90,7 +90,7 @@ export const PaymentWidgetMixin = {
         return DEFAULT_PAYMENT_VALUES[unit];
       }
     },
-    reduceValue(target: PaymentKey, delta: number): void {
+    reduceValue(target: PaymentUnit, delta: number): void {
       const currentValue: number | undefined = this.asModel()[target];
       if (currentValue === undefined) {
         throw new Error(`can not reduceValue for ${target} on this`);
@@ -102,7 +102,7 @@ export const PaymentWidgetMixin = {
       if (target !== 'megaCredits') this.setRemainingMCValue();
     },
     // max is the largest value this item can be. It's not the largest delta.
-    addValue(target: PaymentKey, delta: number, max?: number): void {
+    addValue(target: PaymentUnit, delta: number, max?: number): void {
       const currentValue: number | undefined = this.asModel()[target];
       if (currentValue === undefined) {
         throw new Error(`can not addValue for ${target} on this`);
@@ -142,7 +142,7 @@ export const PaymentWidgetMixin = {
 
       ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue(target: PaymentKey, max?: number): void {
+    setMaxValue(target: PaymentUnit, max?: number): void {
       let currentValue: number | undefined = this.asModel()[target];
       if (currentValue === undefined) {
         throw new Error(`can not setMaxValue for ${target} on this`);
@@ -157,11 +157,11 @@ export const PaymentWidgetMixin = {
         currentValue++;
       }
     },
-    // Perhaps this is unnecessary.
-    hasUnits(unit: PaymentKey): boolean {
+    // Perhaps this is unnecessary. It's just a >0 check.
+    hasUnits(unit: PaymentUnit): boolean {
       return this.getAvailableUnits(unit) > 0;
     },
-    getAvailableUnits(target: PaymentKey): number {
+    getAvailableUnits(target: PaymentUnit): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
       const thisPlayer = model.playerView.thisPlayer;

@@ -2,8 +2,7 @@ import Vue from 'vue';
 import {Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
 import {SelectPaymentModel} from '@/client/mixins/PaymentWidgetMixin';
-import {PaymentKey} from '@/common/inputs/Payment';
-import {fail} from 'assert';
+import {PaymentUnit} from '@/common/inputs/Payment';
 
 export class PaymentTester {
   private model: SelectPaymentModel;
@@ -11,8 +10,8 @@ export class PaymentTester {
     this.model = this.wrapper.vm as unknown as SelectPaymentModel;
   }
 
-  private static selector(type: PaymentKey) {
-    const titles: Record<PaymentKey, String> = {
+  private static selector(type: PaymentUnit) {
+    const titles: Record<PaymentUnit, String> = {
       'megaCredits': 'Megacredits',
       'steel': 'Steel',
       'titanium': 'Titanium',
@@ -30,19 +29,19 @@ export class PaymentTester {
     return '[title~=' + title + ']';
   }
 
-  public async clickMax(type: PaymentKey) {
+  public async clickMax(type: PaymentUnit) {
     const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-max');
     await button.trigger('click');
     await this.nextTick();
   }
 
-  public async clickMinus(type: PaymentKey) {
+  public async clickMinus(type: PaymentUnit) {
     const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-minus');
     await button.trigger('click');
     await this.nextTick();
   }
 
-  public async clickPlus(type: PaymentKey) {
+  public async clickPlus(type: PaymentUnit) {
     const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-plus');
     await button.trigger('click');
     await this.nextTick();
@@ -54,7 +53,7 @@ export class PaymentTester {
     await this.nextTick();
   }
 
-  public getValue(type: PaymentKey) {
+  public getValue(type: PaymentUnit) {
     const textBox = this.wrapper.find(PaymentTester.selector(type) + ' ~ input').element as HTMLInputElement;
     return textBox?.value;
   }
@@ -62,7 +61,7 @@ export class PaymentTester {
   // This that the given unit has the given value. It does this two ways:
   // It verifies that the model has this value, and also that the text box
   // has the same value.
-  public expectValue(type: PaymentKey, amount: number) {
+  public expectValue(type: PaymentUnit, amount: number) {
     const vmVal = this.model[type];
     expect(this.getValue(type), `text box value for ${type}`).eq(String(amount));
     expect(vmVal, 'VM box value for ' + type).eq(amount);
@@ -70,7 +69,7 @@ export class PaymentTester {
 
   // When `expected` is true, this passes when the unit type is available and visible to the user,
   // and vice-versa.
-  public expectIsAvailable(type: PaymentKey, expected: boolean) {
+  public expectIsAvailable(type: PaymentUnit, expected: boolean) {
     const w = this.wrapper.find(PaymentTester.selector(type) + ' ~ input');
     if (expected) {
       expect(w?.element, `Expect input for ${type} to be visible`).is.not.undefined;

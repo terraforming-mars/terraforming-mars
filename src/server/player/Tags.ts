@@ -7,7 +7,6 @@ import {ALL_TAGS, Tag} from '../../common/cards/Tag';
 import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
-import {CeoExtension} from '../CeoExtension';
 import {IPlayer} from '../IPlayer';
 
 export type CountingMode =
@@ -72,11 +71,6 @@ export class Tags {
     // Leavitt Station hook
     if (tag === Tag.SCIENCE && this.player.scienceTagCount > 0) {
       tagCount += this.player.scienceTagCount;
-    }
-
-    if (tag === Tag.WILD || includeTagSubstitutions) {
-      // CEO Xavier hook
-      tagCount += CeoExtension.getBonusWildTags(this.player);
     }
 
     if (includeTagSubstitutions) {
@@ -229,8 +223,6 @@ export class Tags {
     if (extraTag !== undefined) {
       uniqueTags.add(extraTag);
     }
-
-    wildTagCount += CeoExtension.getBonusWildTags(this.player);
 
     // Leavitt Station hook
     if (this.player.scienceTagCount > 0) uniqueTags.add(Tag.SCIENCE);

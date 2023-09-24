@@ -77,7 +77,7 @@ export type PaymentOptions = {
   kuiperAsteroids: boolean,
 }
 
-export const DEFAULT_PAYMENT_VALUES: Record<PaymentKey, number> = {
+export const DEFAULT_PAYMENT_VALUES: Record<PaymentUnit, number> = {
   megaCredits: 1,
   steel: 2,
   titanium: 3,

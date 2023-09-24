@@ -7,7 +7,7 @@ import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardResource} from '@/common/CardResource';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {DEFAULT_PAYMENT_VALUES, PAYMENT_KEYS, PaymentUnit} from '@/common/inputs/Payment';
+import {DEFAULT_PAYMENT_VALUES, PAYMENT_UNITS, PaymentUnit} from '@/common/inputs/Payment';
 
 export interface SelectPaymentModel {
     card?: CardModel;
@@ -68,10 +68,7 @@ export const PaymentWidgetMixin = {
      */
     getMegaCreditsMax(): number {
       const model = this.asModel();
-      return Math.min(model.playerView.thisPlayer.megaCredits, model.cost);
-    },
-    canUse(_key: PaymentUnit): boolean {
-      throw new Error('Should be overridden');
+      return Math.min(this.getAvailableUnits('megaCredits'), model.cost);
     },
     getResourceRate(unit: PaymentUnit): number {
       switch (unit) {
@@ -90,40 +87,40 @@ export const PaymentWidgetMixin = {
         return DEFAULT_PAYMENT_VALUES[unit];
       }
     },
-    reduceValue(target: PaymentUnit, delta: number): void {
-      const currentValue: number | undefined = this.asModel()[target];
+    reduceValue(unit: PaymentUnit, delta: number): void {
+      const currentValue: number | undefined = this.asModel()[unit];
       if (currentValue === undefined) {
-        throw new Error(`can not reduceValue for ${target} on this`);
+        throw new Error(`can not reduceValue for ${unit} on this`);
       }
 
       const adjustedDelta = Math.min(delta, currentValue);
       if (adjustedDelta === 0) return;
-      this.asModel()[target] -= adjustedDelta;
-      if (target !== 'megaCredits') this.setRemainingMCValue();
+      this.asModel()[unit] -= adjustedDelta;
+      if (unit !== 'megaCredits') this.setRemainingMCValue();
     },
     // max is the largest value this item can be. It's not the largest delta.
-    addValue(target: PaymentUnit, delta: number, max?: number): void {
-      const currentValue: number | undefined = this.asModel()[target];
+    addValue(unit: PaymentUnit, delta: number, max?: number): void {
+      const currentValue: number | undefined = this.asModel()[unit];
       if (currentValue === undefined) {
-        throw new Error(`can not addValue for ${target} on this`);
+        throw new Error(`can not addValue for ${unit} on this`);
       }
 
-      let maxValue: number | undefined = max !== undefined ? max : this.getAvailableUnits(target);
+      let maxValue: number = max ?? this.getAvailableUnits(unit);
       // TODO(kberg): Remove this special code for MC?
-      if (target === 'megaCredits') {
+      if (unit === 'megaCredits') {
         maxValue = this.getMegaCreditsMax();
       }
 
-      if (currentValue === maxValue) return;
-
-      if (maxValue === undefined) {
-        throw new Error(`unable to determine maxValue for ${target}`);
+      if (currentValue === maxValue) {
+        return;
       }
 
       const adjustedDelta = Math.min(delta, maxValue - currentValue);
-      if (adjustedDelta === 0) return;
-      this.asModel()[target] += adjustedDelta;
-      if (target !== 'megaCredits') {
+      if (adjustedDelta === 0) {
+        return;
+      }
+      this.asModel()[unit] += adjustedDelta;
+      if (unit !== 'megaCredits') {
         this.setRemainingMCValue();
       }
     },
@@ -132,7 +129,7 @@ export const PaymentWidgetMixin = {
 
       let remainingMC = ta.$data.cost;
 
-      for (const resource of PAYMENT_KEYS) {
+      for (const resource of PAYMENT_UNITS) {
         if (resource === 'megaCredits') {
           continue;
         }
@@ -142,18 +139,18 @@ export const PaymentWidgetMixin = {
 
       ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue(target: PaymentUnit, max?: number): void {
-      let currentValue: number | undefined = this.asModel()[target];
+    setMaxValue(unit: PaymentUnit, max?: number): void {
+      let currentValue: number | undefined = this.asModel()[unit];
       if (currentValue === undefined) {
-        throw new Error(`can not setMaxValue for ${target} on this`);
+        throw new Error(`can not setMaxValue for ${unit} on this`);
       }
       const cost: number = this.asModel().$data.cost;
-      const resourceRate = this.getResourceRate(target);
+      const resourceRate = this.getResourceRate(unit);
       const amountNeed = Math.floor(cost / resourceRate);
-      const amountHave: number = this.getAvailableUnits(target);
+      const amountHave: number = this.getAvailableUnits(unit);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
-        this.addValue(target, 1, max);
+        this.addValue(unit, 1, max);
         currentValue++;
       }
     },
@@ -161,11 +158,11 @@ export const PaymentWidgetMixin = {
     hasUnits(unit: PaymentUnit): boolean {
       return this.getAvailableUnits(unit) > 0;
     },
-    getAvailableUnits(target: PaymentUnit): number {
+    getAvailableUnits(unit: PaymentUnit): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
       const thisPlayer = model.playerView.thisPlayer;
-      switch (target) {
+      switch (unit) {
       case 'heat':
         amount = this.availableHeat();
         break;
@@ -173,7 +170,7 @@ export const PaymentWidgetMixin = {
       case 'steel':
       case 'titanium':
       case 'megaCredits':
-        amount = thisPlayer[target];
+        amount = thisPlayer[unit];
         break;
 
       case 'floaters':
@@ -184,7 +181,7 @@ export const PaymentWidgetMixin = {
       case 'auroraiData':
       case 'graphene':
       case 'kuiperAsteroids':
-        amount = model.playerinput[target];
+        amount = model.playerinput[unit];
         break;
       }
 
@@ -201,7 +198,7 @@ export const PaymentWidgetMixin = {
       // then amount, below would be -1, so the Math.max makes sure it's zero.
 
       // BTW, this could be managed by some derivative of reserveUnits that took extended resources into account.
-      if (target === 'floaters' && this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
+      if (unit === 'floaters' && this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
         // Find a card other than Dirigibles with floaters.
         // If there is none, then Dirigibles can't use every one.
         if (!thisPlayer.tableau.some((card) => {

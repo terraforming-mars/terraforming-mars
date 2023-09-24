@@ -20,7 +20,7 @@ describe('SelectPlayer', () => {
 
   beforeEach(() => {
     const playerInput: SelectPlayerModel = {
-      inputType: 'player',
+      type: 'player',
       title: '',
       buttonLabel: '',
       // This is a different order from the order in `players`

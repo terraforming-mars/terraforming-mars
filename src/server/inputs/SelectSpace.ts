@@ -19,8 +19,8 @@ export class SelectSpace extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'space',
-      availableSpaces: this.spaces.map((space) => space.id),
+      type: 'space',
+      spaces: this.spaces.map((space) => space.id),
     };
   }
 

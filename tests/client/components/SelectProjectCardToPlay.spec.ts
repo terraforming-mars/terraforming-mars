@@ -630,7 +630,7 @@ describe('SelectProjectCardToPlay', () => {
       thisPlayer: thisPlayer as PublicPlayerModel,
     };
     const playerInput: SelectProjectCardToPlayModel = {
-      inputType: 'projectCard',
+      type: 'projectCard',
       title: 'foo',
       buttonLabel: 'bar',
       cards: [{

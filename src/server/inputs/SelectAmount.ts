@@ -20,7 +20,7 @@ export class SelectAmount extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'amount',
+      type: 'amount',
       max: this.max,
       min: this.min,
       maxByDefault: this.maxByDefault,

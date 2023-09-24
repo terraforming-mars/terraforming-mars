@@ -66,7 +66,7 @@ export default Vue.extend({
       throw new Error('no options provided for OrOptions');
     }
     const displayedOptions = this.playerinput.options.filter((o) => {
-      if (o.inputType !== 'card') {
+      if (o.type !== 'card') {
         return true;
       }
       if (o.showOnlyInLearnerMode === false) {
@@ -77,7 +77,7 @@ export default Vue.extend({
     // Special case: If the first displayed option is SelectCard, and none of them are enabled, skip it.
     let selectedOption = displayedOptions[0];
     if (displayedOptions.length > 1 &&
-      selectedOption.inputType === 'card' &&
+      selectedOption.type === 'card' &&
       !selectedOption.cards.some((card) => card.isDisabled !== true)) {
       selectedOption = displayedOptions[1];
     }

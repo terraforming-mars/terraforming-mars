@@ -53,10 +53,10 @@ export default Vue.extend({
       return partyName === this.playerinput.turmoil.dominant;
     },
     partyAvailableToSelect(partyName: PartyName): boolean {
-      if (this.playerinput.availableParties === undefined) {
+      if (this.playerinput.parties === undefined) {
         return false;
       } else {
-        return this.playerinput.availableParties.includes(partyName);
+        return this.playerinput.parties.includes(partyName);
       }
     },
   },

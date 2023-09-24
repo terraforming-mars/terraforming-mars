@@ -17,18 +17,18 @@ describe('OrOptions', function() {
           id: 'foo',
         },
         playerinput: {
-          inputType: 'or',
+          type: 'or',
           title: 'foo',
           options: [{
-            inputType: 'card',
+            type: 'card',
             title: 'hide this',
             showOnlyInLearnerMode: true,
           }, {
-            inputType: 'option',
+            type: 'option',
             title: 'select a',
           }, {
             title: 'select b',
-            inputType: 'option',
+            type: 'option',
           }],
         },
         onsave: function(data: InputResponse) {
@@ -59,10 +59,10 @@ describe('OrOptions', function() {
           type: 'or',
           title: 'foo',
           options: [{
-            inputType: 'option',
+            type: 'option',
             title: 'select a',
           }, {
-            inputType: 'option',
+            type: 'option',
             title: 'select b',
           }],
         },

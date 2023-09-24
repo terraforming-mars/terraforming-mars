@@ -14,7 +14,7 @@ export class SelectPlayer extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'player',
+      type: 'player',
       players: this.players.map((player) => player.color),
     };
   }

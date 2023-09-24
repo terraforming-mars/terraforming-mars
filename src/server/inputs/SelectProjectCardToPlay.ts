@@ -48,7 +48,7 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'projectCard',
+      type: 'projectCard',
       cards: cardsToModel(player, this.cards, {showCalculatedCost: true, extras: this.extras}),
       microbes: player.getSpendableMicrobes(),
       floaters: player.getSpendableFloaters(),

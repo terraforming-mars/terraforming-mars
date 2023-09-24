@@ -10,7 +10,7 @@ export class SelectParty extends BasePlayerInput {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Send delegate',
-    public availableParties: Array<PartyName>,
+    public parties: Array<PartyName>,
     public cb: (party: PartyName) => undefined,
   ) {
     super('party', title);
@@ -25,8 +25,8 @@ export class SelectParty extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'party',
-      availableParties: this.availableParties,
+      type: 'party',
+      parties: this.parties,
       turmoil: turmoil,
     };
   }
@@ -38,7 +38,7 @@ export class SelectParty extends BasePlayerInput {
     if (input.partyName === undefined) {
       throw new Error('No party selected');
     }
-    if (!this.availableParties.includes(input.partyName)) {
+    if (!this.parties.includes(input.partyName)) {
       throw new Error('Invalid party selected');
     }
     return this.cb(input.partyName);

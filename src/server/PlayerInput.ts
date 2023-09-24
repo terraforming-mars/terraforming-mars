@@ -6,7 +6,7 @@ import {IPlayer} from './IPlayer';
 import {PlayerInputModel} from '../common/models/PlayerInputModel';
 
 export interface PlayerInput {
-    inputType: PlayerInputType;
+    type: PlayerInputType;
     buttonLabel: string;
     title: string | Message;
     cb(...item: any): PlayerInput | undefined;
@@ -23,15 +23,15 @@ export interface PlayerInput {
 }
 
 export abstract class BasePlayerInput implements PlayerInput {
-  public readonly inputType: PlayerInputType;
+  public readonly type: PlayerInputType;
   public buttonLabel: string = 'Save';
   public title: string | Message;
   public abstract cb(...item: any): PlayerInput | undefined;
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
 
-  constructor(inputType: PlayerInputType, title: string | Message = '') {
-    this.inputType = inputType;
+  constructor(type: PlayerInputType, title: string | Message = '') {
+    this.type = type;
     this.title = title;
   }
 }

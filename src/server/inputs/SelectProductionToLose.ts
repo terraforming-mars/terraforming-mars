@@ -22,7 +22,7 @@ export class SelectProductionToLose extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'productionToLose',
+      type: 'productionToLose',
       payProduction: {
         cost: this.unitsToLose,
         units: this.player.production.asUnits(),

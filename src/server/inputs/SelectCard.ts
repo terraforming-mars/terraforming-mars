@@ -41,7 +41,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'card',
+      type: 'card',
       cards: cardsToModel(player, this.cards, {
         showCalculatedCost: this.config.played === false || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
         showResources: this.config.played === true || this.config.played === CardName.SELF_REPLICATING_ROBOTS,

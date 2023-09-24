@@ -11,7 +11,7 @@ import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 
 
 export class SelectInitialCards extends AndOptions {
-  public override readonly inputType = 'initialCards';
+  public override readonly type = 'initialCards';
   constructor(private player: IPlayer, cb: (corporation: ICorporationCard) => undefined) {
     super(() => {
       this.completed(corporation);
@@ -111,7 +111,7 @@ export class SelectInitialCards extends AndOptions {
     return {
       title: this.title,
       buttonLabel: this.buttonLabel,
-      inputType: 'initialCards',
+      type: 'initialCards',
       options: this.options.map((option) => option.toModel(player)),
     };
   }

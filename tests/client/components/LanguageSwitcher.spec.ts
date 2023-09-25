@@ -22,9 +22,10 @@ describe('LanguageSwitcher', () => {
         return {PreferencesManager};
       },
     });
-
+    const reloadWindowSpy = sinon.stub(wrapper.vm, 'reloadWindow');
     await wrapper.find('.language-icon--en').trigger('click');
     expect(preferenceSaveSpy.calledWith('lang', 'en')).to.be.true;
+    expect(reloadWindowSpy.calledWith()).to.be.true;
     preferenceSaveSpy.restore();
   });
 });

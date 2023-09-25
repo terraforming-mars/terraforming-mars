@@ -20,9 +20,12 @@ import {PreferencesManager} from '@/client/utils/PreferencesManager';
 export default Vue.extend({
   name: 'language-switcher',
   methods: {
+    reloadWindow() {
+      window.location.reload();
+    },
     switchLanguageTo(langId: string) {
       PreferencesManager.INSTANCE.set('lang', langId);
-      window.location.reload();
+      this.reloadWindow();
     },
   },
   computed: {

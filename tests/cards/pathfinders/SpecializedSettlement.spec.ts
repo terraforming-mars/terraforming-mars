@@ -12,7 +12,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
-import {OneOrArray} from '@/common/utils/types';
+import {OneOrArray} from '../../../src/common/utils/types';
 
 describe('SpecializedSettlement', function() {
   let card: SpecializedSettlement;

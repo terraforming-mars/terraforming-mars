@@ -62,7 +62,6 @@ describe('Milestones', function() {
       },
     });
 
-    console.error(milestone.findAllComponents(Milestone).wrappers[0].isVisible());
     expect(
       milestone.findAllComponents(Milestone).wrappers.every((milestoneWrapper) => !milestoneWrapper.isVisible()),
     ).to.be.true;

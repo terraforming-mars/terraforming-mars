@@ -129,22 +129,21 @@ describe('SelectInitialCards', function() {
     const confirmationDialog = getConfirmDialog(component);
     expect(confirmationDialog.$data.shown).is.true;
   });
-});
 
-it('Cannot select two ceos', async function() {
-  const component = createComponent([CardName.ECOLINE], [CardName.ANTS], undefined, [CardName.FLOYD, CardName.HAL9000, CardName.ENDER]);
-  expect(component).not.is.undefined;
+  it('Cannot select two ceos', async function() {
+    const component = createComponent([CardName.ECOLINE], [CardName.ANTS], undefined, [CardName.FLOYD, CardName.HAL9000, CardName.ENDER]);
+    expect(component).not.is.undefined;
 
-  const selectCards = component.findAllComponents({name: 'select-card'});
-  expect(selectCards.length).to.eq(3);
-  selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
-  selectCards.at(1).vm.$emit('cardschanged', [CardName.FLOYD, CardName.HAL9000]);
-  selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
-  await component.vm.$nextTick();
+    const selectCards = component.findAllComponents({name: 'select-card'});
+    expect(selectCards.length).to.eq(3);
+    selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.FLOYD, CardName.HAL9000]);
+    selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
+    await component.vm.$nextTick();
 
-  const button = getButton(component);
-  console.log(button.attributes());
-  expect(button.attributes().disabled).eq('disabled');
+    const button = getButton(component);
+    expect(button.attributes().disabled).eq('disabled');
+  });
 });
 
 function getButton(component: Wrapper<SelectInitialCards>) {

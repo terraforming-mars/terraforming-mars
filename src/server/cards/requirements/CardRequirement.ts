@@ -1,5 +1,4 @@
 import {RequirementType} from '../../../common/cards/RequirementType';
-import {ICardRequirement} from '../../../common/cards/ICardRequirement';
 import {IPlayer} from '../../IPlayer';
 
 export type LocalOptions = {
@@ -17,7 +16,7 @@ export type YesAnd = {
   thinkTankResources?: number
 }
 
-export abstract class CardRequirement implements ICardRequirement, LocalOptions {
+export abstract class CardRequirement implements LocalOptions {
   public abstract readonly type: RequirementType;
   public readonly count: number;
   public readonly max: boolean;

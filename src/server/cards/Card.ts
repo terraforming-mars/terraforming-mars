@@ -24,6 +24,7 @@ import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
+import {YesAnd} from './requirements/CardRequirement';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -188,10 +189,14 @@ export abstract class Card {
   public get tilesBuilt(): Array<TileType> {
     return this.properties.tilesBuilt || [];
   }
-  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
+    let yesAnd: YesAnd | undefined = undefined;
     const satisfied = this.properties.compiledRequirements.satisfies(player);
     if (satisfied === false) {
       return false;
+    }
+    if (satisfied !== true) {
+      yesAnd = satisfied;
     }
 
     if (this.behavior !== undefined) {
@@ -199,7 +204,15 @@ export abstract class Card {
         return false;
       }
     }
-    return this.bespokeCanPlay(player, canAffordOptions);
+    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions);
+    if (bespokeCanPlay === false) {
+      return false;
+    }
+
+    if (yesAnd !== undefined) {
+      return yesAnd;
+    }
+    return true;
   }
 
   public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {
@@ -363,6 +376,7 @@ function populateCount(requirement: CardRequirementDescriptor): CardRequirementD
     requirement.cities ??
     requirement.colonies ??
     requirement.floaters ??
+    requirement.partyLeader ??
     requirement.habitatRate ??
     requirement.miningRate ??
     requirement.logisticRate ??

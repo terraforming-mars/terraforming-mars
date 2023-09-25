@@ -59,7 +59,7 @@ export default Vue.extend({
     type(): RequirementType {
       return requirementType(this.requirement);
     },
-    c(): number {
+    count(): number {
       return this.requirement.count ?? 0;
     },
     amount(): string | number {
@@ -71,16 +71,16 @@ export default Vue.extend({
       case RequirementType.HABITAT_RATE:
       case RequirementType.MINING_RATE:
       case RequirementType.LOGISTIC_RATE:
-        return this.c;
+        return this.count;
       }
       if (this.requirement.max) {
-        return this.c;
+        return this.count;
       }
-      if (this.c === 0) {
+      if (this.count === 0) {
         return '';
       }
-      if (this.c !== 1) {
-        return this.c;
+      if (this.count !== 1) {
+        return this.count;
       }
       return '';
     },
@@ -181,7 +181,7 @@ export default Vue.extend({
       case RequirementType.REMOVED_PLANTS:
         return false;
       }
-      return this.c < 4;
+      return this.count < 4;
     },
     repeats(): Array<number> {
       if (!this.isRepeated || this.requirement.count === undefined) {

@@ -7,7 +7,7 @@ import {RequirementType} from '../../../common/cards/RequirementType';
 export class ProductionRequirement extends InequalityRequirement {
   public readonly type = RequirementType.PRODUCTION;
   public readonly resource: Resource;
-  constructor(resource: Resource, options?: Options) {
+  constructor(resource: Resource, options?: Partial<Options>) {
     super(options);
     this.resource = resource;
   }

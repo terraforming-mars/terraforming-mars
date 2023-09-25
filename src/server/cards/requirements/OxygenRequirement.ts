@@ -10,7 +10,7 @@ export class OxygenRequirement extends GlobalParameterRequirement {
   protected readonly parameter = GlobalParameter.OXYGEN;
   protected override readonly scale = 1;
 
-  constructor(options?: Options) {
+  constructor(options?: Partial<Options>) {
     const count = options?.count ?? 1;
     if (count < MIN_OXYGEN_LEVEL || count > MAX_OXYGEN_LEVEL) {
       throw new Error('Oxygen must be above ' + MIN_OXYGEN_LEVEL + ' and below ' + MAX_OXYGEN_LEVEL);

@@ -10,7 +10,7 @@ export class TemperatureRequirement extends GlobalParameterRequirement {
   protected readonly parameter = GlobalParameter.TEMPERATURE;
   protected override readonly scale = 2;
 
-  constructor(options?: Options) {
+  constructor(options?: Partial<Options>) {
     const count = options?.count ?? 1;
     if (count < MIN_TEMPERATURE || count > MAX_TEMPERATURE) {
       throw new Error('Temperature must be above ' + MIN_TEMPERATURE + ' and below ' + MAX_TEMPERATURE);

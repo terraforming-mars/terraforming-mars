@@ -36,7 +36,7 @@ const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
 type FirstActionBehavior = Behavior & {text: string};
 
 type SharedProperties = {
-  /** ../..deprecated use behavior */
+  /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
   behavior?: Behavior | undefined;
   cardCost?: number;

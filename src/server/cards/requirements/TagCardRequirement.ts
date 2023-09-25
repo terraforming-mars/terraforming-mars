@@ -7,7 +7,7 @@ import {RequirementType} from '../../../common/cards/RequirementType';
 export class TagCardRequirement extends InequalityRequirement {
   public readonly type = RequirementType.TAG;
   public readonly tag: Tag;
-  constructor(tag: Tag, options?: Options) {
+  constructor(tag: Tag, options?: Partial<Options>) {
     super(options);
     this.tag = tag;
   }

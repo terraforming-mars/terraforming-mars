@@ -1,7 +1,7 @@
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {IPlayer} from '../../IPlayer';
 
-export type LocalOptions = {
+export type Options = {
   max: boolean,
   all: boolean,
   text: string | undefined,
@@ -9,14 +9,12 @@ export type LocalOptions = {
   count: number,
 };
 
-export type Options = Partial<LocalOptions>;
-
 export type YesAnd = {
   ok: true,
   thinkTankResources?: number
 }
 
-export abstract class CardRequirement implements LocalOptions {
+export abstract class CardRequirement {
   public abstract readonly type: RequirementType;
   public readonly count: number;
   public readonly max: boolean;
@@ -26,7 +24,7 @@ export abstract class CardRequirement implements LocalOptions {
   /** Used during card rendering. */
   public readonly nextTo: boolean;
 
-  constructor(options?: Options) {
+  constructor(options?: Partial<Options>) {
     this.count = options?.count ?? 1;
     this.max = options?.max ?? false;
     this.all = options?.all ?? false;

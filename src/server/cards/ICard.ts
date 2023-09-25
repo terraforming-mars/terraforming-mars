@@ -52,6 +52,14 @@ export interface ICard {
   onStandardProject?: (player: IPlayer, project: ICard) => void;
   onTilePlaced?: (cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) => void;
   onDiscard?: (player: IPlayer) => void;
+  /**
+   * Called when anybody gains TR
+   *
+   * @param player the player gaining TR
+   * @param cardOwner the owner of this card
+   * @param steps the number of steps gained
+   */
+  onIncreaseTerraformRating?(player: IPlayer, cardOwner: IPlayer, steps: number): void;
   onGlobalParameterIncrease?(player: IPlayer, parameter: GlobalParameter, steps: number): void;
 
   /**

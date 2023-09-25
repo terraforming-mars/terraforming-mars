@@ -10,7 +10,7 @@ export class VenusRequirement extends GlobalParameterRequirement {
   protected readonly parameter = GlobalParameter.VENUS;
   protected override readonly scale = 2;
 
-  constructor(options?: Options) {
+  constructor(options?: Partial<Options>) {
     const count = options?.count ?? 1;
     if (count < MIN_VENUS_SCALE || count > MAX_VENUS_SCALE) {
       throw new Error('Venus must be above ' + MIN_VENUS_SCALE + ' and below ' + MAX_VENUS_SCALE);

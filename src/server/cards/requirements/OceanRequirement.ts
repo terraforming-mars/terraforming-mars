@@ -9,7 +9,7 @@ export class OceanRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.OCEANS;
   protected readonly parameter = GlobalParameter.OCEANS;
 
-  constructor(options?: Options) {
+  constructor(options?: Partial<Options>) {
     const count = options?.count ?? 1;
     if (count <= 0 || count > MAX_OCEAN_TILES) {
       throw new Error('Ocean tiles must be above 0 and below ' + MAX_OCEAN_TILES);

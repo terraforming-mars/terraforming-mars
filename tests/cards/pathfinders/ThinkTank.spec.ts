@@ -150,7 +150,7 @@ describe('ThinkTank', () => {
     expect(game.board.getOceanSpaces()).has.length(6);
     expect(oceanCity.canPlay(player)).is.true;
 
-    oceans.forEach((space) => game.removeTile(space));
+    oceans.forEach((space) => game.removeTile(space.id));
 
     expect(game.board.getOceanSpaces()).has.length(1);
     expect(oceanCity.canPlay(player)).is.false;
@@ -159,7 +159,7 @@ describe('ThinkTank', () => {
 
     expect(oceanCity.canPlay(player)).is.true;
 
-    game.removeTile(ocean);
+    game.removeTile(ocean.id);
     expect(game.board.getOceanSpaces()).is.empty;
 
     expect(oceanCity.canPlay(player)).is.false;

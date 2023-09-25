@@ -80,6 +80,8 @@ export interface IGame extends Logger {
   gagarinBase: Array<SpaceId>;
   // St. Joseph of Cupertino Mission
   stJosephCathedrals: Array<SpaceId>;
+  // Mars Nomads
+  nomadSpace: SpaceId | undefined;
   // Trade Embargo
   tradeEmbargo: boolean;
   // Behold The Emperor
@@ -149,7 +151,7 @@ export interface IGame extends Logger {
   canAddOcean(): boolean;
   canRemoveOcean(): boolean;
   addOcean(player: IPlayer, space: Space): void;
-  removeTile(space: Space): void;
+  removeTile(spaceId: string): void;
   getPlayers(): ReadonlyArray<IPlayer>;
   // Players returned in play order starting with first player this generation.
   getPlayersInGenerationOrder(): ReadonlyArray<IPlayer>;

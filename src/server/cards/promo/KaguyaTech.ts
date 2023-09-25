@@ -43,7 +43,7 @@ export class KaguyaTech extends Card implements IProjectCard {
     const greeneries = player.game.board.getGreeneries(player);
     return new SelectSpace('Select a greenery to convert to a city.',
       greeneries, (space) => {
-        player.game.removeTile(space);
+        player.game.removeTile(space.id);
         player.game.addCity(player, space, this.name);
         return undefined;
       });

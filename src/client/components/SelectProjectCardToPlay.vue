@@ -66,6 +66,7 @@ export default Vue.extend({
       megaCredits: 0,
       steel: 0,
       titanium: 0,
+      plants: 0,
       microbes: 0,
       lunaArchivesScience: 0,
       seeds: 0,
@@ -174,6 +175,11 @@ export default Vue.extend({
         this.heat = deductUnits(this.available.heat, this.getResourceRate('heat'));
       }
 
+      this.available.plants = Math.max(this.thisPlayer.plants - this.reserveUnits.plants, 0);
+      if (megacreditBalance > 0 && this.canUse('plants')) {
+        this.plants = deductUnits(this.available.plants, this.getResourceRate('plants'));
+      }
+
       // If we are overspending
       if (megacreditBalance < 0) {
         // Try to spend less resource if possible, in the reverse order of the payment (also from high to low)
@@ -182,6 +188,7 @@ export default Vue.extend({
         // We cannot reduce the amount of Ti and still pay enough.
         for (const key of [
           'steel',
+          'plants',
           'floaters',
           'microbes',
           'seeds',
@@ -203,6 +210,8 @@ export default Vue.extend({
       case 'titanium':
         return this.tags.includes(Tag.SPACE) ||
           this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
+      case 'plants':
+        return this.tags.includes(Tag.BUILDING);
       // case 'LunaTradeFederationTitanium':
       //   return this.card !== undefined && this.available.titanium > 0 && this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
       case 'microbes':
@@ -222,9 +231,11 @@ export default Vue.extend({
       }
     },
     canUse(unit: PaymentUnit) {
+      console.log('xx', unit);
       if (!this.hasUnits(unit)) {
         return false;
       }
+      console.log('xxy', unit);
       if (this.card === undefined) {
         return false;
       }
@@ -256,6 +267,9 @@ export default Vue.extend({
     },
     showReserveHeatWarning(): boolean {
       return this.reserveUnits.heat > 0 && this.canUse('heat');
+    },
+    showReservePlantsWarning(): boolean {
+      return this.reserveUnits.plants > 0 && this.canUse('plants');
     },
     saveData() {
       const payment: Payment = {...Payment.EMPTY};
@@ -359,6 +373,17 @@ export default Vue.extend({
     </div>
     <div v-if="showReserveHeatWarning()" class="card-warning" v-i18n>
     (Some heat is unavailable here in reserve for the project card.)
+    </div>
+
+    <div class="payments_type input-group" v-if="canUse('plants')">
+      <i class="resource_icon resource_icon--plants payments_type_icon" :title="$t('Pay with plants')"></i>
+      <AppButton type="minus" @click="reduceValue('plants', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="plants" />
+      <AppButton type="plus" @click="addValue('plants', 1, available.plants)" />
+      <AppButton type="max" @click="setMaxValue('plants', available.plants)" title="MAX" />
+    </div>
+    <div v-if="showReservePlantsWarning()" class="card-warning" v-i18n>
+    (Some plants are unavailable here in reserve for the project card.)
     </div>
 
     <div class="payments_type input-group" v-if="canUse('microbes')">

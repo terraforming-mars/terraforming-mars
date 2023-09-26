@@ -859,6 +859,7 @@ export class Player implements IPlayer {
     return {
       heat: this.canUseHeatAsMegaCredits,
       steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
+      plants: card.tags.includes(Tag.BUILDING) && this.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP),
       titanium: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE),
       lunaTradeFederationTitanium: this.canUseTitaniumAsMegacredits,
       seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
@@ -896,6 +897,7 @@ export class Player implements IPlayer {
       }
     }
 
+    // TODO(kberg): Move this.paymentOptionsForCard to a parameter.
     const totalToPay = this.payingAmount(payment, this.paymentOptionsForCard(selectedCard));
 
     if (totalToPay < cardCost) {
@@ -946,6 +948,7 @@ export class Player implements IPlayer {
       megacredits: payment.megaCredits,
       steel: payment.steel,
       titanium: payment.titanium,
+      plants: payment.plants,
     });
 
     this.stock.deductUnits(standardUnits);
@@ -1391,6 +1394,7 @@ export class Player implements IPlayer {
       megaCredits: this.megaCredits - reserveUnits.megacredits,
       steel: this.steel - reserveUnits.steel,
       titanium: this.titanium - reserveUnits.titanium,
+      plants: this.plants - reserveUnits.plants,
       heat: this.availableHeat() - reserveUnits.heat,
       floaters: this.getSpendableFloaters(),
       microbes: this.getSpendableMicrobes(),
@@ -1413,7 +1417,7 @@ export class Player implements IPlayer {
   /**
    * Returns the value of the suppled payment given the payment options.
    *
-   * For example, if the payment is 3MC and 2 steel, given that steel by default is
+   * For example, if the payment is 3M€ and 2 steel, given that steel by default is
    * worth 2M€, this will return 7.
    *
    * @param {Payment} payment the resources being paid.
@@ -1432,6 +1436,7 @@ export class Player implements IPlayer {
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,
       heat: this.canUseHeatAsMegaCredits,
+      plants: options?.plants ?? false,
       microbes: options?.microbes ?? false,
       floaters: options?.floaters ?? false,
       lunaArchivesScience: options?.lunaArchivesScience ?? false,

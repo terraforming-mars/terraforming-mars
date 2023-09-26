@@ -41,6 +41,7 @@ import {LawSuit} from './LawSuit';
 import {MagneticFieldGeneratorsPromo} from './MagneticFieldGeneratorsPromo';
 import {MagneticShield} from './MagneticShield';
 import {MarsNomads} from './MarsNomads';
+import {MartianLumberCorp} from './MartianLumberCorp';
 import {MeatIndustry} from './MeatIndustry';
 import {Meltworks} from './Meltworks';
 import {MercurianAlloys} from './MercurianAlloys';
@@ -132,7 +133,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.KAGUYA_TECH]: {Factory: KaguyaTech},
     [CardName.MARS_NOMADS]: {Factory: MarsNomads},
     [CardName.NEPTUNIAN_POWER_CONSULTANTS]: {Factory: NeptunianPowerConsultants},
-    // [CardName.MARTIAN_LUMBER_CORP]: {Factory: MartianLumberCorp},
+    [CardName.MARTIAN_LUMBER_CORP]: {Factory: MartianLumberCorp},
     [CardName.RED_SHIPS]: {Factory: RedShips},
     [CardName.SOLAR_LOGISTICS]: {Factory: SolarLogistics},
     [CardName.TESLARACT]: {Factory: Teslaract},

@@ -42,6 +42,7 @@ export default Vue.extend({
       megaCredits: 0,
       steel: 0,
       titanium: 0,
+      plants: 0,
       microbes: 0,
       floaters: 0,
       seeds: 0,

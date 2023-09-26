@@ -26,7 +26,7 @@ export class MartianLumberCorp extends Card {
       /*
 https://discord.com/channels/737945098695999559/742826825922904225/1153319755458031658
       Requires that you have 2 greenery tiles. Increase plant production 1 step.
-      Effect: Plants may be spent for buliding tags, 3 MC.
+      Effect: Plants may be spent for buliding tags, 3 M€.
       b.building({played}).startEffect.plants(1).equals().megaCredits(3)
       */
       metadata: {

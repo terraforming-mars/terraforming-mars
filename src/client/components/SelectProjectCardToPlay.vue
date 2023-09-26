@@ -231,11 +231,9 @@ export default Vue.extend({
       }
     },
     canUse(unit: PaymentUnit) {
-      console.log('xx', unit);
       if (!this.hasUnits(unit)) {
         return false;
       }
-      console.log('xxy', unit);
       if (this.card === undefined) {
         return false;
       }

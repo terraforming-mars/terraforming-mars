@@ -26,7 +26,7 @@ export default Vue.extend({
       required: true,
     },
     requirements: {
-      type: Object as () => Array<CardRequirementDescriptor>,
+      type: Array<CardRequirementDescriptor>,
     },
     isCorporation: {
       type: Boolean,

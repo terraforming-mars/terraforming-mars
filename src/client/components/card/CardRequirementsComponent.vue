@@ -16,7 +16,7 @@ export default Vue.extend({
   name: 'CardRequirementsComponent',
   props: {
     requirements: {
-      type: Object as () => Array<CardRequirementDescriptor>,
+      type: Array<CardRequirementDescriptor>,
       required: true,
     },
   },

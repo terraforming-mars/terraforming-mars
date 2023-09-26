@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SubCrustMeasurements extends ActionCard implements IProjectCard {
@@ -13,7 +12,7 @@ export class SubCrustMeasurements extends ActionCard implements IProjectCard {
       name: CardName.SUB_CRUST_MEASUREMENTS,
       tags: [Tag.SCIENCE, Tag.BUILDING, Tag.EARTH],
       cost: 20,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      requirements: {tag: Tag.SCIENCE, count: 2},
       victoryPoints: 2,
 
       action: {

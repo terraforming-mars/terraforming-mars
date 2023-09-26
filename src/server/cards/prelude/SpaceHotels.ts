@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SpaceHotels extends Card implements IProjectCard {
@@ -18,7 +17,7 @@ export class SpaceHotels extends Card implements IProjectCard {
         production: {megacredits: 4},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
+      requirements: {tag: Tag.EARTH, count: 2},
       metadata: {
         cardNumber: 'P42',
         renderData: CardRenderer.builder((b) => {

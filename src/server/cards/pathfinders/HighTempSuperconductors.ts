@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {played} from '../Options';
 
@@ -16,7 +15,7 @@ export class HighTempSuperconductors extends Card implements IProjectCard {
       cost: 10,
       tags: [Tag.POWER, Tag.SCIENCE],
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
+      requirements: {party: PartyName.KELVINISTS},
       cardDiscount: {tag: Tag.POWER, amount: 3},
 
       behavior: {

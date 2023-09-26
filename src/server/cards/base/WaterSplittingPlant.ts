@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class WaterSplittingPlant extends ActionCard implements IProjectCard {
@@ -19,7 +18,7 @@ export class WaterSplittingPlant extends ActionCard implements IProjectCard {
         global: {oxygen: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(2)),
+      requirements: {oceans: 2},
       metadata: {
         cardNumber: '177',
         renderData: CardRenderer.builder((b) => {

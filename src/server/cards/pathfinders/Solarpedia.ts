@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {ActionCard} from '../ActionCard';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class Solarpedia extends ActionCard implements IProjectCard {
   constructor() {
@@ -14,7 +13,7 @@ export class Solarpedia extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
       tags: [Tag.SPACE],
       cost: 12,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.MARS).tag(Tag.JOVIAN)),
+      requirements: [{tag: Tag.VENUS}, {tag: Tag.EARTH}, {tag: Tag.MARS}, {tag: Tag.JOVIAN}],
       resourceType: CardResource.DATA,
       victoryPoints: {resourcesHere: {}, per: 6},
 

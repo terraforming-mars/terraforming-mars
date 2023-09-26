@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class BeholdTheEmperor extends Card implements IProjectCard {
   constructor() {
@@ -14,7 +13,7 @@ export class BeholdTheEmperor extends Card implements IProjectCard {
       name: CardName.BEHOLD_THE_EMPEROR,
       tags: [Tag.EARTH],
       cost: 10,
-      requirements: CardRequirements.builder((b) => b.chairman()),
+      requirements: {chairman: 1},
 
       metadata: {
         cardNumber: 'SW03',

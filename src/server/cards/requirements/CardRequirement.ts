@@ -1,33 +1,31 @@
 import {RequirementType} from '../../../common/cards/RequirementType';
-import {ICardRequirement} from '../../../common/cards/ICardRequirement';
 import {IPlayer} from '../../IPlayer';
 
-export type LocalOptions = {
+export type Options = {
   max: boolean,
   all: boolean,
   text: string | undefined,
-  nextTo: boolean
+  nextTo: boolean,
+  count: number,
 };
-
-export type Options = Partial<LocalOptions>;
 
 export type YesAnd = {
   ok: true,
   thinkTankResources?: number
 }
 
-export abstract class CardRequirement implements ICardRequirement, LocalOptions {
+export abstract class CardRequirement {
   public abstract readonly type: RequirementType;
-  public readonly amount: number;
-  public readonly max: boolean = false;
-  public readonly all: boolean = false;
+  public readonly count: number;
+  public readonly max: boolean;
+  public readonly all: boolean;
   /** Used during card rendering. */
-  public readonly text: string | undefined = undefined;
+  public readonly text: string | undefined;
   /** Used during card rendering. */
-  public readonly nextTo: boolean = false;
+  public readonly nextTo: boolean;
 
-  constructor(amount: number = 1, options?: Options) {
-    this.amount = amount;
+  constructor(options?: Partial<Options>) {
+    this.count = options?.count ?? 1;
     this.max = options?.max ?? false;
     this.all = options?.all ?? false;
     this.nextTo = options?.nextTo ?? false;

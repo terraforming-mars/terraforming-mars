@@ -33,4 +33,7 @@ export class ProxyCard implements IProjectCard {
   public getVictoryPoints() {
     return 0;
   }
+  public get requirements() {
+    return [];
+  }
 }

@@ -4,7 +4,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 
@@ -21,7 +20,7 @@ export class CupolaCity extends Card implements IProjectCard {
         city: {},
       },
 
-      requirements: CardRequirements.builder((b) => b.oxygen(9, {max})),
+      requirements: {oxygen: 9, max},
       metadata: {
         cardNumber: '029',
         description: 'Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.',

@@ -3,7 +3,6 @@ import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {all} from '../Options';
@@ -16,7 +15,7 @@ export class MartianCulture extends ActionCard implements IProjectCard {
       cost: 11,
       tags: [Tag.MARS, Tag.MARS],
       resourceType: CardResource.DATA,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.MARS, 2, {all})),
+      requirements: {tag: Tag.MARS, count: 2, all},
       victoryPoints: {resourcesHere: {}, per: 2},
 
       action: {

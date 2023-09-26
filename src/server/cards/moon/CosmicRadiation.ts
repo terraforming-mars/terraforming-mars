@@ -6,7 +6,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
@@ -20,7 +19,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
       tags: [Tag.MOON],
       cost: 3,
 
-      requirements: CardRequirements.builder((b) => b.miningRate(4)),
+      requirements: {miningRate: 4},
       metadata: {
         description: 'Requires 4 mining rate. All players pay 4M€ for each mining tile they own.',
         cardNumber: 'M52',

@@ -9,11 +9,12 @@ export class OceanRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.OCEANS;
   protected readonly parameter = GlobalParameter.OCEANS;
 
-  constructor(amount: number, options?: Options) {
-    if (amount <= 0 || amount > MAX_OCEAN_TILES) {
+  constructor(options?: Partial<Options>) {
+    const count = options?.count ?? 1;
+    if (count <= 0 || count > MAX_OCEAN_TILES) {
       throw new Error('Ocean tiles must be above 0 and below ' + MAX_OCEAN_TILES);
     }
-    super(amount, options);
+    super(options);
   }
 
   public getGlobalValue(player: IPlayer) {

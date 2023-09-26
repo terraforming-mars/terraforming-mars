@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Resource} from '../../../common/Resource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class CrashSiteCleanup extends Card implements IProjectCard {
@@ -15,7 +14,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       type: CardType.EVENT,
       name: CardName.CRASH_SITE_CLEANUP,
       cost: 4,
-      requirements: CardRequirements.builder((b) => b.plantsRemoved()),
+      requirements: {plantsRemoved: true},
       victoryPoints: 1,
 
       metadata: {

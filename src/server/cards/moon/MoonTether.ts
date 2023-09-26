@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 
 export class MoonTether extends Card implements IProjectCard {
@@ -15,7 +14,7 @@ export class MoonTether extends Card implements IProjectCard {
       cost: 18,
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 6)),
+      requirements: {tag: Tag.SPACE, count: 6},
       cardDiscount: {amount: 2},
       metadata: {
         cardNumber: 'M90',

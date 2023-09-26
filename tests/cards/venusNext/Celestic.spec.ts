@@ -4,7 +4,6 @@ import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
-import {RequirementType} from '../../../src/common/cards/RequirementType';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {CardType} from '../../../src/common/cards/CardType';
 import {churnAction} from '../../TestingUtils';
@@ -42,7 +41,7 @@ describe('Celestic', function() {
         const string = JSON.stringify(renderData);
         if (string.includes('floater')) {
           found.push(card.name);
-        } else if (card.requirements?.requirements.some((req) => req.type === RequirementType.FLOATERS)) {
+        } else if (card.requirements?.some((req) => req.floaters !== undefined)) {
           found.push(card.name);
         }
       });

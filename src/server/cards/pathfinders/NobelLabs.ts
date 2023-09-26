@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard, ICard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {digit} from '../Options';
@@ -18,7 +17,7 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
       name: CardName.NOBEL_LABS,
       cost: 8,
       tags: [Tag.SCIENCE],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
+      requirements: {tag: Tag.SCIENCE, count: 4},
 
       metadata: {
         cardNumber: 'Pf55',

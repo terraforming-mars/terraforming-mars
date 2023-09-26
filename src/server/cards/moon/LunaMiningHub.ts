@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -29,7 +28,7 @@ export class LunaMiningHub extends Card {
       },
 
       victoryPoints: 'special',
-      requirements: CardRequirements.builder((b) => b.miningRate(5)),
+      requirements: {miningRate: 5},
 
       metadata: {
         cardNumber: 'M14',

@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 
@@ -37,7 +36,7 @@ export class ElectroCatapult extends ActionCard implements IProjectCard {
 
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(8, {max})),
+      requirements: {oxygen: 8, max},
       metadata: {
         cardNumber: '069',
         description: {

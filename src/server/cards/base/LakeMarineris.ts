@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class LakeMarineris extends Card implements IProjectCard {
@@ -12,7 +11,7 @@ export class LakeMarineris extends Card implements IProjectCard {
       name: CardName.LAKE_MARINERIS,
       cost: 18,
       tr: {oceans: 2},
-      requirements: CardRequirements.builder((b) => b.temperature(0)),
+      requirements: {temperature: 0},
       victoryPoints: 2,
 
       behavior: {

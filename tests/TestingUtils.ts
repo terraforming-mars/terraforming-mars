@@ -19,6 +19,8 @@ import {PlayerInput} from '../src/server/PlayerInput';
 import {IActionCard} from '../src/server/cards/ICard';
 import {TestPlayer} from './TestPlayer';
 import {PartyName} from '../src/common/turmoil/PartyName';
+import {IPlayer} from '../src/server/IPlayer';
+import {CardRequirements} from '../src/server/cards/requirements/CardRequirements';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: Player, toValue: number = 0): Array<Space> {
@@ -143,19 +145,32 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: Player, initial
   expect(cb(), 'Reds in power, enough money').is.true;
 }
 
-const FAKE_CARD_TEMPLATE: IProjectCard = {
-  name: 'HELLO' as CardName,
-  cost: 0,
-  tags: [],
-  canPlay: () => true,
-  play: () => undefined,
-  getVictoryPoints: () => 0,
-  type: CardType.ACTIVE,
-  metadata: {},
-  resourceCount: 0,
-};
-export function fakeCard(card: Partial<IProjectCard>): IProjectCard {
-  return {...FAKE_CARD_TEMPLATE, ...card};
+class FakeCard implements IProjectCard {
+  public name = 'Fake Card' as CardName;
+  public cost = 0;
+  public tags = [];
+  public requirements = [];
+  public canPlay(player: IPlayer) {
+    if (this.requirements === undefined) {
+      return true;
+    }
+    return CardRequirements.compile(this.requirements).satisfies(player);
+  }
+  public play() {
+    return undefined;
+  }
+  public getVictoryPoints() {
+    return 0;
+  }
+  public type = CardType.ACTIVE;
+  public metadata = {};
+  public resourceCount = 0;
+}
+
+export function fakeCard(attrs: Partial<IProjectCard>): IProjectCard {
+  const card = new FakeCard();
+  Object.assign(card, attrs);
+  return card;
 }
 
 type ConstructorOf<T> = new (...args: any[]) => T;

@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -23,7 +22,7 @@ export class SecretLabs extends Card implements IProjectCard {
       name: CardName.SECRET_LABS,
       cost: 21,
       tags: [Tag.JOVIAN, Tag.BUILDING, Tag.SPACE],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.JOVIAN)),
+      requirements: [{tag: Tag.SCIENCE}, {tag: Tag.JOVIAN}],
       victoryPoints: 1,
 
       metadata: {

@@ -4,7 +4,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Penguins extends ActionCard implements IProjectCard {
@@ -21,7 +20,7 @@ export class Penguins extends ActionCard implements IProjectCard {
         addResources: 1,
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(8)),
+      requirements: {oceans: 8},
       metadata: {
         cardNumber: '212',
         renderData: CardRenderer.builder((b) => {

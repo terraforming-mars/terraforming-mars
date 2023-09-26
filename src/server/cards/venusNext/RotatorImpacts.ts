@@ -8,7 +8,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE} from '../../../common/constants';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {max} from '../Options';
@@ -22,7 +21,7 @@ export class RotatorImpacts extends Card implements IActionCard {
       cost: 6,
       resourceType: CardResource.ASTEROID,
 
-      requirements: CardRequirements.builder((b) => b.venus(14, {max})),
+      requirements: {venus: 14, max},
       metadata: {
         cardNumber: '243',
         renderData: CardRenderer.builder((b) => {

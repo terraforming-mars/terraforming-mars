@@ -8,7 +8,6 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {played} from '../Options';
 
 export class GMOContract extends Card implements IProjectCard {
@@ -19,7 +18,7 @@ export class GMOContract extends Card implements IProjectCard {
       tags: [Tag.MICROBE, Tag.SCIENCE],
       cost: 3,
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
+      requirements: {party: PartyName.GREENS},
       metadata: {
         description: 'Requires that Greens are ruling or that you have 2 delegates there.',
         cardNumber: 'T06',

@@ -9,7 +9,6 @@ import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Space} from '../../../src/server/boards/Space';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
-import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
 import {CardName} from '../../../src/common/cards/CardName';
 
 const toSpaceId = (space: Space): string => space.id;
@@ -130,7 +129,7 @@ describe('Wetlands', function() {
   });
 
   it('Wetlands counts toward ocean requirements', () => {
-    const fake = fakeCard({requirements: CardRequirements.builder((b) => b.oceans(3))});
+    const fake = fakeCard({requirements: [{oceans: 3}]});
     addOcean(player, '15');
     addOcean(player, '16');
     expect(player.canPlay(fake)).is.false;

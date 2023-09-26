@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -18,7 +17,7 @@ export class RadSuits extends Card implements IProjectCard {
         production: {megacredits: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.cities(2, {all})),
+      requirements: {cities: 2, all},
       metadata: {
         cardNumber: '186',
         renderData: CardRenderer.builder((b) => {

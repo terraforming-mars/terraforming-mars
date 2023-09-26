@@ -6,7 +6,6 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {SurveyCard} from './SurveyCard';
 import {all} from '../Options';
@@ -19,7 +18,7 @@ export class EcologicalSurvey extends SurveyCard {
       tags: [Tag.SCIENCE],
       cost: 9,
 
-      requirements: CardRequirements.builder((b) => b.greeneries(3, {all})),
+      requirements: {greeneries: 3, all},
       metadata: {
         description: 'Requires 3 greeneries on Mars.',
         cardNumber: 'A07',

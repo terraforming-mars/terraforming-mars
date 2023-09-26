@@ -4,7 +4,6 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
 
@@ -14,7 +13,7 @@ export class CoordinatedRaid extends Card implements IProjectCard {
       cost: 5,
       name: CardName.COORDINATED_RAID,
       type: CardType.EVENT,
-      requirements: CardRequirements.builder((b) => b.colonies(1)),
+      requirements: {colonies: 1},
 
       metadata: {
         cardNumber: 'Pf64',

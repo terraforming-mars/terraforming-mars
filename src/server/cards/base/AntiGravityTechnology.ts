@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class AntiGravityTechnology extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
       cost: 14,
       victoryPoints: 3,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 7)),
+      requirements: {tag: Tag.SCIENCE, count: 7},
       cardDiscount: {amount: 2},
       metadata: {
         description: 'Requires 7 science tags.',

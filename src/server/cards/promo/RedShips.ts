@@ -6,7 +6,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {Resource} from '../../../common/Resource';
 import {Board, isSpecialTileSpace} from '../../boards/Board';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {IActionCard} from '../ICard';
 
 export class RedShips extends Card implements IActionCard {
@@ -16,7 +15,7 @@ export class RedShips extends Card implements IActionCard {
       name: CardName.RED_SHIPS,
       cost: 2,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      requirements: {oxygen: 4},
 
       metadata: {
         cardNumber: '',

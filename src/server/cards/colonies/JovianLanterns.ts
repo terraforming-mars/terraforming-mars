@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Payment} from '../../../common/inputs/Payment';
@@ -19,7 +18,7 @@ export class JovianLanterns extends Card implements IProjectCard {
 
       resourceType: CardResource.FLOATER,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
+      requirements: {tag: Tag.JOVIAN},
 
       behavior: {
         tr: 1,

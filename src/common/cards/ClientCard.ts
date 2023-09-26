@@ -5,7 +5,7 @@ import {CardName} from './CardName';
 import {CardType} from './CardType';
 import {GameModule} from './GameModule';
 import {ICardMetadata} from './ICardMetadata';
-import {ICardRequirements} from './ICardRequirements';
+import {CardRequirementDescriptor} from './CardRequirementDescriptor';
 import {IVictoryPoints} from './IVictoryPoints';
 import {Tag} from './Tag';
 import {CardDiscount} from './Types';
@@ -19,7 +19,7 @@ export type ClientCard = {
   victoryPoints?: number | 'special' | IVictoryPoints,
   cost?: number;
   type: CardType;
-  requirements?: ICardRequirements;
+  requirements: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
   warning?: string | Message;
   productionBox?: Units; // Replace with behavior?

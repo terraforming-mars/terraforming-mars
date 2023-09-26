@@ -7,7 +7,6 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class MartianLumberCorp extends Card {
   constructor() {
@@ -21,7 +20,7 @@ export class MartianLumberCorp extends Card {
         production: {plants: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.greeneries(2)),
+      requirements: {greeneries: 2},
 
       /*
 https://discord.com/channels/737945098695999559/742826825922904225/1153319755458031658

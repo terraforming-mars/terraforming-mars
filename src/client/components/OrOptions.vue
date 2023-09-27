@@ -69,9 +69,10 @@ export default Vue.extend({
       if (o.type !== 'card') {
         return true;
       }
-      if (o.showOnlyInLearnerMode === false) {
+      if (Boolean(o.showOnlyInLearnerMode) === false) {
         return true;
       }
+
       return getPreferences().learner_mode;
     });
     // Special case: If the first displayed option is SelectCard, and none of them are enabled, skip it.

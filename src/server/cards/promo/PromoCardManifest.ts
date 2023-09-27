@@ -18,6 +18,7 @@ import {CrashSiteCleanup} from './CrashSiteCleanup';
 import {CuttingEdgeTechnology} from './CuttingEdgeTechnology';
 import {CyberiaSystems} from './CyberiaSystems';
 import {DeimosDownPromo} from './DeimosDownPromo';
+import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {DirectedImpactors} from './DirectedImpactors';
 import {DiversitySupport} from './DiversitySupport';
 import {DoubleDown} from './DoubleDown';
@@ -136,7 +137,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.RED_SHIPS]: {Factory: RedShips},
     [CardName.SOLAR_LOGISTICS]: {Factory: SolarLogistics},
     [CardName.TESLARACT]: {Factory: Teslaract},
-
+    [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
   },
 
   preludeCards: {

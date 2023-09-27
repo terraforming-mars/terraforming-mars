@@ -134,6 +134,7 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.EROSION_SEVERE]: {},
   [TileType.RED_CITY]: {}, // This isn't shown on a card
   [TileType.MARTIAN_NATURE_WONDERS]: {}, // This isn't shown on a card
+  [TileType.MARS_NOMADS]: {}, // This isn't shown on a card
 };
 
 export default Vue.extend({

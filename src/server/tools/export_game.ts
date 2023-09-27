@@ -3,6 +3,7 @@
 
 import {GameId, isGameId, isPlayerId, isSpectatorId} from '../../common/Types';
 import {Database} from '../database/Database';
+import {IDatabase} from '../database/IDatabase';
 import {LocalFilesystem} from '../database/LocalFilesystem';
 
 const args = process.argv.slice(2);
@@ -15,22 +16,28 @@ if (process.env.LOCAL_FS_DB !== undefined) {
   throw new Error('Do not run exportGame on local filesystem. Just access the files themselves');
 }
 
-const db = Database.getInstance();
+const db: IDatabase = Database.getInstance();
 const localDb = new LocalFilesystem();
 
-async function main() {
+async function getGameId(id: string): Promise<GameId | undefined> {
+  if (isGameId(id)) {
+    return id;
+  }
   if (isPlayerId(id) || isSpectatorId(id)) {
     console.log(`Finding game for player/spectator ${id}`);
-    const gameId = await db.getGameId(id);
-    if (gameId === undefined) {
-      console.log('Game is undefined');
-      process.exit(1);
-    }
-    await load(gameId);
+    return await db.getGameId(id);
   }
+  return undefined;
 }
-if (isGameId(id)) {
-  load(id);
+
+async function main() {
+  await db.initialize();
+  const gameId = await getGameId(id);
+  if (gameId === undefined) {
+    console.log('Game is undefined');
+    process.exit(1);
+  }
+  await load(gameId);
 }
 
 async function load(gameId: GameId) {

@@ -537,8 +537,8 @@ abstract class Builder<T> {
     return this._appendToRow(CardRenderSymbol.empty());
   }
 
-  public plate(text: string): this {
-    const item = new CardRenderItem(CardRenderItemType.PLATE);
+  public plate(text: string, options?: ItemOptions | undefined): this {
+    const item = new CardRenderItem(CardRenderItemType.PLATE, 1, options);
     item.text = text;
     item.isPlate = true;
     item.isBold = true;

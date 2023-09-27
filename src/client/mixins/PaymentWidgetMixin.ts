@@ -75,18 +75,20 @@ export const PaymentWidgetMixin = {
       switch (unit) {
       case 'steel':
         return this.asModel().playerView.thisPlayer.steelValue;
-      case 'titanium': {
-        const paymentOptions = this.asModel().playerinput.paymentOptions;
-        const titaniumValue = this.asModel().playerView.thisPlayer.titaniumValue;
-        if (paymentOptions?.titanium !== true &&
-          paymentOptions?.lunaTradeFederationTitanium === true) {
-          return titaniumValue - 1;
-        }
-        return titaniumValue;
-      }
+      case 'titanium':
+        return this.getTitaniumResourceRate();
       default:
         return DEFAULT_PAYMENT_VALUES[unit];
       }
+    },
+    getTitaniumResourceRate(): number {
+      const paymentOptions = this.asModel().playerinput.paymentOptions;
+      const titaniumValue = this.asModel().playerView.thisPlayer.titaniumValue;
+      if (paymentOptions?.titanium !== true &&
+        paymentOptions?.lunaTradeFederationTitanium === true) {
+        return titaniumValue - 1;
+      }
+      return titaniumValue;
     },
     reduceValue(unit: PaymentUnit, delta: number): void {
       const currentValue: number | undefined = this.asModel()[unit];

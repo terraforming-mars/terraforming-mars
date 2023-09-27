@@ -192,19 +192,21 @@ export default Vue.extend({
         }
       }
     },
+    canUseTitaniumRegularly(): boolean {
+      return this.tags.includes(Tag.SPACE) ||
+          this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
+    },
     cardCanUse(unit: PaymentUnit): boolean {
       switch (unit) {
       case 'megaCredits':
       case 'heat':
-        return true;
+        return this.playerinput.paymentOptions.heat === true;
       case 'steel':
         return this.tags.includes(Tag.BUILDING) ||
           this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
       case 'titanium':
-        return this.tags.includes(Tag.SPACE) ||
-          this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
-      // case 'LunaTradeFederationTitanium':
-      //   return this.card !== undefined && this.available.titanium > 0 && this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
+        return this.canUseTitaniumRegularly() ||
+          this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
       case 'microbes':
         return this.tags.includes(Tag.PLANT);
       case 'floaters':
@@ -241,6 +243,13 @@ export default Vue.extend({
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
+    },
+    getTitaniumResourceRate(): number {
+      const titaniumValue = this.asModel().playerView.thisPlayer.titaniumValue;
+      if (this.canUseTitaniumRegularly()) {
+        return titaniumValue;
+      }
+      return titaniumValue - 1;
     },
     hasWarning(): boolean {
       return this.warning !== undefined;

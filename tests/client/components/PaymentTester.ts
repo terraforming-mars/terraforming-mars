@@ -16,6 +16,7 @@ export class PaymentTester {
       'steel': 'Steel',
       'titanium': 'Titanium',
       'heat': 'Heat',
+      'plants': 'Plants',
       'microbes': 'Microbes',
       'floaters': 'Floaters',
       'lunaArchivesScience': 'Science',

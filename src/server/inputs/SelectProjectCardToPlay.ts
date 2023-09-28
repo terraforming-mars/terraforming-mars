@@ -88,6 +88,9 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     if (reserveUnits.titanium + input.payment.titanium > this.player.titanium) {
       throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${input.card}`);
     }
+    if (reserveUnits.plants + input.payment.plants > this.player.plants) {
+      throw new Error(`${reserveUnits.titanium} units of plants must be reserved for ${input.card}`);
+    }
     const yesAnd = typeof(details.details) === 'boolean' ? undefined : details.details;
     this.payAndPlay(card, input.payment, yesAnd);
     return undefined;

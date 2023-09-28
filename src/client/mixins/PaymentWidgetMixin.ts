@@ -16,6 +16,7 @@ export type SelectPaymentDataModel = {
     megaCredits: number;
     steel: number;
     titanium: number;
+    plants: number; // Plants are not actually used in this compnent. It's just to satisfy the mixin.
     microbes: number; // Microbes are not actually used in this component. It's just to satisfy the mixin.
     floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
@@ -172,6 +173,7 @@ export const PaymentWidgetMixin = {
       case 'steel':
       case 'titanium':
       case 'megaCredits':
+      case 'plants':
         amount = thisPlayer[unit];
         break;
 
@@ -189,6 +191,7 @@ export const PaymentWidgetMixin = {
       }
 
       if (amount === undefined) {
+        console.error('Missing resource type: ' + unit);
         return 0;
       }
 

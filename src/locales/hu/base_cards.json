@@ -3,19 +3,19 @@
   "Oxygen must be 5% or less.": "Az oxigén szintnek 5% vagy annál kevesebbnek kell lennie.",
 
   "Asteroid Mining Consortium": "Aszteroida Bányászati Konzorcium",
-  "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": 
+  "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.":
     "Kijátszási feltétel: van titán termelésed. Csökkentsd bármelyik titán termelést 1 lépéssel és növeld a sajátodat 1 lépéssel.",
 
   "Deep Well Heating": "Termál Fűtés",
-  "Increase your energy production 1 step. Increase temperature 1 step.": 
+  "Increase your energy production 1 step. Increase temperature 1 step.":
     "Növeld az energiatermelésed 1 lépéssel. Növeld a hőmérsékletet 1 lépéssel.",
 
   "Cloud Seeding": "Felhőmagvetés",
-  "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": 
+  "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.":
     "Kijátszási feltétel: minimum 3 óceán lapka. Csökkentsd a M€ termelésed 1 lépéssel és bármelyik hő termelést 1 lépéssel. Növeld a palántátermelésed 2 lépéssel.",
 
   "Search For Life": "Élet Kutatás",
-  "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": 
+  "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.":
     "Akció: Fizess 1 M€-t, hogy felfedj egy lapot a húzó pakliból. Ha a lapon van mikroba ikon, tegyél egy tudomány erőforrást ide.",
   "3 VPs if you have one or more science resources here.": "3 GyP ha van egy vagy több tudomány erőforrásod itt.",
   "Oxygen must be 6% or less.": "Kijátszási feltétel: Az oxigén szint maximum 6%.",
@@ -36,12 +36,12 @@
   "4 Oceans": "4 Óceán",
   "5 Oceans": "5 Óceán",
   "6 Oceans": "6 Óceán",
-  "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": 
+  "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.":
     "Kijátszási feltétel: minimum 4 óceán lapka. Helyezd el ezt a lapkát. Csökkentsd az energiatermelésed 2 lépéssel és növeld a M€ termelésed 5 lépéssel.",
   "1 additional VP for each ocean tile adjacent to this city tile.": "1 plusz GyP minden olyan óceán lapkáért, ami szomszédos a Fővárossal lapkával.",
 
   "Asteroid": "Aszteroida",
-  "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": 
+  "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.":
     "Növeld a hőmérsékletet 1 lépéssel és kapsz 2 titánt. Távolíts el 3 palántát bármelyik játékostól.",
 
   "Comet": "Üstökös",
@@ -49,11 +49,11 @@
     "Növeld a hőmérsékletet 1 lépéssel és helyezz el egy óceán lapkát. Távolíts el 3 palántát bármelyik játékostól.",
 
   "Big Asteroid": "Nagy Aszteroida",
-  "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": 
+  "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.":
     "Növeld a hőmérsékletet 2 lépéssel és kapsz 4 titánt. Távolíts el 4 palántát bármelyik játékostól.",
 
   "Water Import From Europa": "Víz Import Európából",
-  "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": 
+  "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.":
     "Fizess 12 M€-t, hogy lehelyezz egy óceán lapkát. A TITÁNT HASZNÁLHATOD, mintha űr kártyát játszanál.",
   "1 VP for each Jovian tag you have.": "1 GyP minden Jupiter ikonod után.",
 
@@ -65,23 +65,23 @@
   "Action: Spend 1 energy to draw a card.": "Akció: Fizess 1 energiát, hogy húzz egy lapot.",
 
   "Equatorial Magnetizer": "Egyenlítői Mágneses Mező",
-  "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": 
+  "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.":
     "Akció: Csökkentsd az energiatermelésed 1 lépéssel, hogy növeld a TR-odat 1 lépéssel.",
 
   "Domed Crater": "Kupolás Kráter",
-  "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": 
+  "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.":
     "Kijátszási feltétel: Az oxigén szint maximum 7%. Kapsz 3 palántát. Helyezz el egy város lapkát. Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 3 lépéssel.",
 
   "Noctis City": "Noctis Város",
-  "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.": 
+  "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.":
     "Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 3 lépéssel. Helyezz el egy város lapkát A FENNTARTOTT TERÜLETRE, figyelmen kívül hagyva a normál elhelyezési korlátozásokat.",
 
   "Methane From Titan": "Metán a Titánról",
-  "(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": 
+  "(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)":
     "(Kijátszási feltétel: Az oxigén szint minimum 2%. Növeld a hőtermelésed 2 lépéssel és a palánta termelésed 2 lépéssel.)",
 
   "Imported Hydrogen": "Importált Hidrogén",
-  "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": 
+  "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.":
     "Kapsz 3 palántát, vagy tegyél 3 mikróbát vagy 2 állatot EGY MÁSIK lapra. Helyezz el egy óceán lapkát.",
 
   "Research Outpost": "Kutató Állomás",
@@ -89,11 +89,11 @@
   "Place a city tile NEXT TO NO OTHER TILE.": "Helyezz el egy város lapkát ÚGY, HOGY NE ÉRJEN MÁS LAPKÁHOZ.",
 
   "Phobos Space Haven": "Phobos Űrállomás",
-  "Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.": 
+  "Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.":
     "Növeld a titán termelésed 1 lépéssel és helyezz el egy város lapkát A FENNTARTOTT TERÜLETRE.",
 
   "Black Polar Dust": "Fekete Sarki Por",
-  "Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.": 
+  "Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.":
     "Helyezz el egy óceán lapkát. Csökkentsd a M€ termelésed 2 lépéssel és növeld a hőtermelésed 3 lépéssel.",
 
   "Arctic Algae": "Sarki Alga",
@@ -109,7 +109,7 @@
   "Effect: When you play a space card, you pay 2 M€ less for it.": "Hatás: Ha játszol egy űr lapot, 2 M€-t kevesebbet kell fizetned érte.",
 
   "Eos Chasma National Park": "Eos Chasma Nemzeti Park",
-  "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.": 
+  "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.":
     "Kijátszási feltétel: -12 °C vagy annál melegebb. Tegyél 1 állatot BÁRMELYIK ÁLLATOS LAPRA. Kapsz 3 palántát. Növeld a M€ termelésed 2 lépéssel.",
 
   "Interstellar Colony Ship": "Csillagközi Kolónia Hajó",
@@ -121,18 +121,18 @@
   "1 VP for each fighter resource on this card.": "1 GyP minden vadász erőforrás után ezen a lapkán.",
 
   "Cupola City": "Kupola Város",
-  "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": 
+  "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.":
     "Kijátszási feltétel: Az oxigén szint maximum 9%. Helyezz el egy város lapkát. Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 3 lépéssel.",
 
   "Lunar Beam": "Hold Fénysugár",
-  "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": 
+  "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.":
     "Csökkentsd a M€ termelésed 2 lépéssel és növeld a hő- és energiatermelésed 2 - 2 lépéssel.",
 
   "Optimal Aerobraking": "Optimális Légfékezés",
   "Effect: When you play a space event, you gain 3 M€ and 3 heat.": "Hatás: Ha játszol egy űr eseményt, kapsz 3 M€-t és 3 hőt.",
 
   "Underground City": "Földalatti Város",
-  "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": 
+  "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.":
     "Helyezz el egy város lapkát. Csökkentsd az energiatermelésed 2 lépéssel és növeld az acél termelésed 2 lépéssel.",
 
   "Regolith Eaters": "Regolit Evők",
@@ -142,7 +142,7 @@
 
 
   "GHG Producing Bacteria": "ÜHG Termelő Baktériumok",
-  "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": 
+  "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.":
     "Akció: Tegyél 1 mikróbát erre a lapra, vagy távolíts el 2 mikróbát, hogy növeld a hőmérsékletet 1 lépéssel.",
   "(Action: Remove 2 microbes to raise temperature 1 step.)": "(Akció: Távolíts el 2 mikróbát, hogy növeld a hőmérsékletet 1 lépéssel.)",
   "Requires 4% oxygen.": "Kijátszási feltétel: Az oxigén szint minimum 4%.",
@@ -155,14 +155,14 @@
   "(Raise your terraforming rating 2 steps.)": "(Növeld a TR-odat 2 lépéssel.)",
 
   "Nitrogen-Rich Asteroid": "Nitrogén Dús Aszteroida",
-  "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": 
+  "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.":
     "Növeld a TR-odat 2 lépéssel és a hőmérsékletet 1 lépéssel. Növeld a palánta termelésed 1 lépéssel, vagy 4 lépéssel, ha van 3 palánta ikonod.",
 
   "Rover Construction": "Rover Építés",
   "Effect: When any city tile is placed, gain 2 M€.": "Hatás: Ha város lapka kerül lehelyezésre, kapsz 2 M€-t.",
 
   "Deimos Down": "Deimos Becsapása",
-  "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": 
+  "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.":
     "Növeld a hőmérsékletet 3 lépéssel és kapsz 4 acélt. Távolíts el maximum 8 palántát bármelyik játékostól.",
 
   "Asteroid Mining": "Aszteroida Bányászat",
@@ -175,22 +175,22 @@
   "It must be -18 C or colder. Increase your plant production 1 step.": "Kijátszási feltétel: -18 °C vagy annál hidegebb. Növeld a palánta termelésed 1 lépéssel.",
 
   "Carbonate Processing": "Karbonát Feldolgozás",
-  "Decrease your energy production 1 step and increase your heat production 3 steps.": 
+  "Decrease your energy production 1 step and increase your heat production 3 steps.":
     "Csökkentsd az energiatermelésed 1 lépéssel és növeld a hőtermelésed 3 lépéssel.",
 
   "Natural Preserve": "Természetvédelmi Terület",
-  "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.": 
+  "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.":
     "Kijátszási feltétel: Az oxigén szint maximum 4%. Helyezd el ezt a lapkát ÚGY, HOGY NE ÉRJEN MÁS LAPKÁHOZ. Növeld a M€ termelésed 1 lépéssel.",
 
   "Nuclear Power": "Nukleáris Erőmű",
   "Decrease your M€ production 2 steps and increase your energy production 3 steps.": "Csökkentsd a M€ termelésed 2 lépéssel és növeld az energiatermelésed 3 lépéssel.",
 
   "Lightning Harvest": "Villámgyűjtés",
-  "Requires 3 science tags. Increase your energy production and your M€ production one step each.": 
+  "Requires 3 science tags. Increase your energy production and your M€ production one step each.":
     "Kijátszási feltétel: 3 tudomány ikon. Növeld az energiatermelésed és a M€ termelésed 1 lépéssel.",
 
   "Algae": "Alga",
-  "Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.": 
+  "Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.":
     "Kijátszási feltétel: minimum 5 óceán lapka. Kapsz 1 palántát és növeld a palánta termelésed 2 lépéssel.",
 
   "Adapted Lichen": "Alkalmazkodott Zuzmó",
@@ -220,7 +220,7 @@
 
 
   "Kelp Farming": "Hínár Farm",
-  "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 plants.": 
+  "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 plants.":
     "Kijátszási feltétel: minimum 6 óceán lapka. Növeld a M€ termelésed 2 lépéssel és a palánta termelésed 3 lépéssel. Kapsz 2 palántát.",
 
   "Mine": "Bánya",
@@ -229,43 +229,43 @@
   "Vesta Shipyard": "Vesta Hajógyár",
 
   "Beam From A Thorium Asteroid": "Sugár a Thorium Aszteroidáról",
-  "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each.)": 
+  "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each.)":
     "(Kijátszási feltétel: van Jupiter ikonod. Növeld a hő- és energiatermelésed 3 - 3 lépéssel.)",
 
   "Mangrove": "Mangrove",
-  "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": 
+  "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.":
     "Kijátszási feltétel: minimum +4 °C. Helyezz el egy növényzet lapkát EGY ÓCEÁNNAK FENNTARTOTT TERÜLETRE és növeld az oxigén szintet 1 lépéssel. Hagyd figyelmen kívül a normál elhelyezési korlátozásokat.",
 
   "Trees": "Fák",
-  "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 plant.": 
+  "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 plant.":
     "Kijátszási feltétel: minimum -4 °C. Növeld a palánta termelésed 3 lépéssel. Kapsz 1 palántát.",
 
   "Great Escarpment Consortium": "Nagy Szakadék Konzorcium",
-  "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.": 
+  "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.":
     "Kijátszási feltétel: van acél termelésed. Csökkentsd bármelyik acél termelést 1 lépéssel és növeld a sajátodat 1 lépéssel.",
 
   "Mineral Deposit": "Ásványi Kincs",
   "Gain 5 steel.": "Kapsz 5 acélt.",
 
   "Mining Expedition": "Bányászati Expedíció",
-  "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.": 
+  "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.":
     "Növeld az oxigén szintet 1 lépéssel. Távolíts el 2 palántát bármelyik játékostól. Kapsz 2 acélt.",
 
   "Mining Area": "Bányászati Terület",
-  "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": 
+  "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.":
     "Helyezd el ezt a lapkát egy olyan területre, ahol van acél vagy titán bónusz és szomszédos egy másik lapkáddal. Növeld azt a termelésedet 1 lépéssel.",
 
   "Building Industries": "Építőipar",
-  "Decrease your energy production 1 step and increase your steel production 2 steps.": 
+  "Decrease your energy production 1 step and increase your steel production 2 steps.":
     "Csökkentsd az energiatermelésed 1 lépéssel és növeld az acél termelésed 2 lépéssel.",
 
   "Land Claim": "Föld Igénylés",
   "land claim": "föld igénylés",
-  "Place your marker on a non-reserved area. Only you may place a tile there.": 
+  "Place your marker on a non-reserved area. Only you may place a tile there.":
     "Helyezd el a jelződet egy nem fenntartott területre. Csak te helyezhetsz oda lapkát.",
 
   "Mining Rights": "Bányászati Jogok",
-  "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": 
+  "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.":
     "Helyezd el ezt a lapkát egy olyan területre, ahol van acél vagy titán bónusz. Növeld azt a termelésedet 1 lépéssel.",
 
   "Sponsors": "Szponzorok",
@@ -293,7 +293,7 @@
     "Hatás: Ha kijátszol egy tudomány ikont, beleértve ezt is, eldobhatsz egy lapot a kezedből, hogy húzz egy lapot.",
 
   "Viral Enhancers": "Vírus Fokozók",
-  "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": 
+  "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.":
     "Hatás: Ha kijátszol egy palánta, mikróbát vagy állat ikont, beleértve ezt is, kapsz 1 palántát vagy tegyél 1 erőforrást ARRA A LAPRA.",
 
   "Towing A Comet": "Üstökös Hajtás",
@@ -328,7 +328,7 @@
   "Trans-Neptune Probe": "Trans-Neptun Szonda",
 
   "Commercial District": "Kereskedelmi Negyed",
-  "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": 
+  "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.":
     "Helyezz el ezt a lapkát. Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 4 lépéssel.",
   "1 VP per adjacent city tile.": "1 GyP minden szomszédos város lap után.",
 
@@ -340,11 +340,11 @@
     "(Kijátszási feltétel: minimum -16 °C. Növeld a palánta termelésed 1 lépéssel. Kapsz 3 palántát.)",
 
   "Heather": "Hanga",
-  "(Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.)": 
+  "(Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.)":
     "(Kijátszási feltétel: minimum -14 °C. Növeld a palánta termelésed 1 lépéssel. Kapsz 1 palántát.)",
 
   "Peroxide Power": "Peroksid Erő",
-  "Decrease your M€ production 1 step and increase your energy production 2 steps.": 
+  "Decrease your M€ production 1 step and increase your energy production 2 steps.":
     "Csökkentsd a M€ termelésed 1 lépéssel és növeld az energiatermelésed 2 lépéssel.",
 
   "Research": "Kutatás",
@@ -447,14 +447,14 @@
   "Requires 3 or less ocean tiles.": "Kijátszási feltétel: maximum 3 óceán lapka.",
 
   "Urbanized Area": "Urbanizált Terület",
-  "(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": 
+  "(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)":
     "(Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 2 lépéssel. Helyezz el egy város lapkát ÚGY, HOGY SZOMSZÉDOS LEGYEN 2 MÁSIK VÁROSLAPKÁVAL.)",
 
   "Sabotage": "Szabotázs",
   "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Távolíts el maximum 3 titánt bármelyik játékostól, vagy 4 acélt, vagy 7 M€-t.",
 
   "Moss": "Moha",
-  "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": 
+  "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.":
     "Kijátszási feltétel: minimum 3 óceán lapka. Elveszítesz 1 palántát és növeld a palánta termelésed 1 lépéssel.",
 
   "Industrial Center": "Ipari Központ",
@@ -465,7 +465,7 @@
   "Steal up to 2 steel, or 3 M€ from any player.": "Lopj el maximum 2 acélt vagy 3 M€-t bármelyik játékostól.",
 
   "Hackers": "Hacker-ek",
-  "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.": 
+  "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.":
     "Csökkentsd az energiatermelésed 1 lépéssel és bármelyik játékos M€ termelését 2 lépéssel. Növeld a saját M€ termelésed 2 lépéssel.",
 
   "GHG Factories": "ÜHG Gyárak",
@@ -476,7 +476,7 @@
   "Place 1 ocean tile.": "Helyezz le 1 óceán lapkát.",
 
   "Ecological Zone": "Ökológiai Zóna",
-  "(Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.)": 
+  "(Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.)":
     "(Hatás: Ha kijátszol egy állat vagy palánta ikont, BELEÉRTVE EZT IS, tegyél egy állatot erre a lapra.)",
   "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)":
     "(Kijátszási feltétel: VAN egy növényzet lapkád. Helyezz el ezt a lapkát BÁRMELYIK növényzet mellé.)",
@@ -489,7 +489,7 @@
     "Kijátszási feltétel: Az oxigén szint minimum 5%. Növeld a M€ termelésed 1 lépéssel minden város lap után A MARSON.",
 
   "Worms": "Férgek",
-  "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": 
+  "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.":
     "Kijátszási feltétel: Az oxigén szint minimum 4%. Növeld a palánta termelésed 1 lépéssel minden 2 mikróba ikonod után, beleértve ezt is.",
 
   "Decomposers": "Lebontók",
@@ -529,13 +529,13 @@
   "Requires 3 ocean tiles. Increase your energy production 1 step.": "Kijátszási feltétel: minimum 3 óceán lapka. Növeld az energiatermelésed 1 lépéssel.",
 
   "Lava Flows": "Láva Folyások",
-  "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": 
+  "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.":
     "Növeld a hőmérsékletet 2 lépéssel és helyezz el ezt a lapkát EGY VULKANIKUS TERÜLETRE.",
 
   "Power Plant": "Erőmű",
 
   "Mohole Area": "Mohole Terület",
-  "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": 
+  "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.":
     "Növeld a hőtermelésed 4 lépéssel. Helyezz el ezt a lapkát EGY ÓCEÁNNAK FENNTARTOTT TERÜLETRE.",
 
   "Large Convoy": "Nagy Konvoj",
@@ -548,7 +548,7 @@
   "Requires 2 science tags. Increase your energy production 3 steps.": "Kijátszási feltétel: 2 tudomány ikon. Növeld az energiatermelésed 3 lépéssel.",
 
   "Nitrophilic Moss": "Nitrofil Moha",
-  "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": 
+  "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.":
     "Kijátszási feltétel: minimum 3 óceán lapka. Elveszítesz 2 palántát és növeld a palánta termelésed 2 lépéssel.",
 
   "Herbivores": "Növényevők",
@@ -575,7 +575,7 @@
 
   "Adaptation Technology": "Adaptációs Technológia",
   "Global requirements": "Globális követelmények",
-  "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": 
+  "Effect: Your global requirements are +2 or -2 steps, your choice in each case.":
     "Hatás: Amikor projektkártyát játszol ki, a globális követelményeid +2 vagy -2 lépéssel változnak, a te választásod szerint.",
 
   "Caretaker Contract": "Gondnoki Szerződés",
@@ -589,7 +589,7 @@
   "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Hatás: Miután fizettél egy standard projektért, kivéve a szabadalmak eladását, kapsz 3 M€-t.",
 
   "Nitrite Reducing Bacteria": "Nitrit Redukáló Baktériumok",
-  "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": 
+  "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.":
     "Akció: Tegyél 1 mikróbát erre a lapra, vagy távolíts el 3 mikróbát, hogy növeld a TR-ed 1 lépéssel.",
   "(Action: Remove 3 microbes to increase your TR 1 step.)": "(Akció: Távolíts el 3 mikróbát, hogy növeld a TR-ed 1 lépéssel.)",
   "Add 3 microbes to this card.": "Tegyél 3 mikróbát erre a lapra.",
@@ -653,7 +653,7 @@
   "Opponents may not remove your": "Az ellenfelek nem távolíthatják el a",
 
   "Protected Valley": "Védett Völgy",
-  "(Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": 
+  "(Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)":
     "(Növeld a M€ termelésed 2 lépéssel. Helyezz el egy növényzet lapkát EGY ÓCEÁNNAK FENNTARTOTT TERÜLETRE, figyelmen kívül hagyva a normál elhelyezési korlátozásokat, és növeld az oxigén szintet 1 lépéssel.)",
 
   "Satellites": "Műholdak",
@@ -720,11 +720,11 @@
   "Requires -8 C or warmer. Place 1 ocean tile.": "Kijátszási feltétel: minimum -8 °C. Helyezz el 1 óceán lapkát.",
 
   "Invention Contest": "Feltaláló Verseny",
-  "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two": 
+  "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two":
     "Nézd meg a pakli felső 3 lapját. Válassz ki 1-et és vedd fel a kezedbe, a másik kettőt dobd el.",
 
   "Plantation": "Ültetvény",
-  "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": 
+  "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.":
     "Kijátszási feltétel: 2 tudomány ikon. Helyezz el egy növényzet lapkát és növeld az oxigén szintet 1 lépéssel.",
 
   "Power Infrastructure": "Energia Infrastruktúra",
@@ -749,9 +749,9 @@
   "Place this tile.": "Helyezzd el ezt a lapkát.",
 
   "Immigrant City": "Imigrációs Város",
-  "Effect: When a city tile is placed, including this, increase your M€ production 1 step.": 
+  "Effect: When a city tile is placed, including this, increase your M€ production 1 step.":
     "Hatás: Ha város lapkát helyeznek le, beleértve ezt is, növeld a M€ termelésed 1 lépéssel.",
-  "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a city tile.": 
+  "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a city tile.":
     "Csökkentsd az energiatermelésed 1 lépéssel és a M€ termelésed 2 lépéssel. Helyezz el egy város lapkát.",
 
   "Energy Tapping": "Energia Lopás",
@@ -804,7 +804,7 @@
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.": "Kijátszási feltétel: 2 Föld ikon. Növeld a M€ termelésed 4 lépéssel.",
   "Oxygen must be 4% or lower. Draw two cards.": "Kijátszási feltétel: Az oxigén szint maximum 4%. Húzz 2 lapot.",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": 
+  "After being played, when you perform an action, the wild tag counts as any tag of your choice.":
     "Miután kijátszottad, amikor akciót hajtasz végre, a (?) ikon bármelyik ikonként számít, amit választasz.",
   "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.":
     "Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 2 lépéssel. Helyezz el egy város lapkát EGY VULKANIKUS TERÜLETRE, figyelmen kívül hagyva a szomszédos városokat.",

@@ -43,7 +43,7 @@ export class SummitLogistics extends Card {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.drawCard(2, {include: ((card) =>card.requirements !== undefined)});
+    player.drawCard(2);
     return undefined;
   }
 }

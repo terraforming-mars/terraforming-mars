@@ -55,6 +55,7 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
       paymentOptions: {
         heat: player.canUseHeatAsMegaCredits,
         lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+        plants: player.canUsePlantsAsMegacredits,
       },
       lunaArchivesScience: player.getSpendableLunaArchiveScienceResources(),
       seeds: player.getSpendableSeedResources(),

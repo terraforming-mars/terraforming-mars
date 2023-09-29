@@ -215,7 +215,7 @@ export default Vue.extend({
         return this.canUseTitaniumRegularly() ||
           this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
       case 'plants':
-        return this.tags.includes(Tag.BUILDING);
+        return this.tags.includes(Tag.BUILDING) && this.playerinput.paymentOptions.plants === true;
       case 'microbes':
         return this.tags.includes(Tag.PLANT);
       case 'floaters':

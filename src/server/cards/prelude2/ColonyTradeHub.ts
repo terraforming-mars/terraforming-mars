@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 
 export class ColonyTradeHub extends PreludeCard {
@@ -25,10 +24,5 @@ export class ColonyTradeHub extends PreludeCard {
         description: 'Increase your energy production 1 step. Gain 3 titanium',
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.drawCard(2, {include: ((card) =>card.requirements !== undefined)});
-    return undefined;
   }
 }

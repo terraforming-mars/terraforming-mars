@@ -4,6 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {played} from '../Options';
+import {IPlayer} from '../../IPlayer';
 
 export class MartianLumberCorp extends Card {
   constructor() {
@@ -29,5 +30,15 @@ export class MartianLumberCorp extends Card {
         }),
       },
     });
+  }
+
+  public override bespokePlay(player: IPlayer) {
+    player.canUsePlantsAsMegacredits = true;
+    return undefined;
+  }
+
+  public override onDiscard(player: IPlayer) {
+    player.canUsePlantsAsMegacredits = false;
+    return undefined;
   }
 }

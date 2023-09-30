@@ -728,8 +728,6 @@ export class Game implements IGame, Logger {
       this.syndicatePirateRaider = undefined;
       // Trade embargo hook.
       this.tradeEmbargo = false;
-      // Behold The Emperor hook
-      this.beholdTheEmperor = false;
     }
   }
 
@@ -738,6 +736,8 @@ export class Game implements IGame, Logger {
 
     Turmoil.ifTurmoil(this, (turmoil) => {
       turmoil.endGeneration(this);
+      // Behold The Emperor hook
+      this.beholdTheEmperor = false;
     });
 
     // turmoil.endGeneration might have added actions.

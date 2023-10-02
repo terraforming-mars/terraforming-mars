@@ -12,6 +12,7 @@ import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {Size} from '../../../common/cards/render/Size';
 import {Board} from '../../boards/Board';
+import {Phase} from '../../../common/Phase';
 
 export class Polaris extends Card implements ICorporationCard {
   constructor() {
@@ -51,7 +52,7 @@ export class Polaris extends Card implements ICorporationCard {
       activePlayer.game.log(
         '${0} gained 1 ${1} production from ${2}',
         (b) => b.player(cardOwner).string(Resource.MEGACREDITS).cardName(this.name));
-      if (activePlayer.id === cardOwner.id) {
+      if (activePlayer.id === cardOwner.id && cardOwner.game.phase !== Phase.SOLAR) {
         cardOwner.game.defer(
           new GainResources(cardOwner, Resource.MEGACREDITS, {
             count: 4,

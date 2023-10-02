@@ -87,9 +87,15 @@ class ScientistsPolicy04 implements Policy {
   readonly id = 'sp04' as const;
   readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
 
-  apply(game: IGame) {
+  onPolicyStart(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       player.hasTurmoilScienceTagBonus = true;
+    });
+  }
+
+  onPolicyEnd(game: IGame) {
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      player.hasTurmoilScienceTagBonus = false;
     });
   }
 }

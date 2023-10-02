@@ -48,8 +48,11 @@ describe('MarsFirst', function() {
   });
 
   it('Ruling policy 3: Your steel resources are worth 1 M€ extra', function() {
+    expect(player.getSteelValue()).to.eq(2);
     setRulingParty(game, PartyName.MARS, 'mfp03');
     expect(player.getSteelValue()).to.eq(3);
+    setRulingParty(game, PartyName.SCIENTISTS, 'sp01');
+    expect(player.getSteelValue()).to.eq(2);
   });
 
   it('Ruling policy 4: Spend 4 M€ to draw a Building card', function() {

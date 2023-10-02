@@ -36,8 +36,11 @@ describe('Unity', function() {
   });
 
   it('Ruling policy 1: Your titanium resources are worth 1 M€ extra', function() {
+    expect(player.getTitaniumValue()).to.eq(3);
     setRulingParty(game, PartyName.UNITY, 'up01');
     expect(player.getTitaniumValue()).to.eq(4);
+    setRulingParty(game, PartyName.SCIENTISTS, 'sp01');
+    expect(player.getTitaniumValue()).to.eq(3);
   });
 
   it('Ruling policy 2: Spend 4 M€ to gain 2 titanium or add 2 floaters to any card', function() {

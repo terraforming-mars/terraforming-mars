@@ -287,8 +287,7 @@ export class Turmoil {
 
   // Ruling Party changes
   public setRulingParty(game: IGame): void {
-    // Cleanup previous party effects
-    game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
+    this.rulingPolicy().onPolicyEnd?.(game);
 
     let newChairman = this.rulingParty.partyLeader || 'NEUTRAL';
     if (game.beholdTheEmperor === true && this.chairman !== undefined) {
@@ -385,8 +384,7 @@ export class Turmoil {
     }
     const description = policyDescription(policy, undefined);
     game.log('The ruling policy is: ${0}', (b) => b.string(description));
-    // Resolve Ruling Policy for Scientists P4
-    policy.apply?.(game);
+    policy.onPolicyStart?.(game);
   }
 
   public getPlayerInfluence(player: IPlayer) {

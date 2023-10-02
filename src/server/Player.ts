@@ -266,7 +266,6 @@ export class Player implements IPlayer {
   }
 
   public getTitaniumValue(): number {
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.UNITY)) return this.titaniumValue + 1;
     return this.titaniumValue;
   }
 
@@ -285,7 +284,6 @@ export class Player implements IPlayer {
   }
 
   public getSteelValue(): number {
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.MARS, 'mfp03')) return this.steelValue + 1;
     return this.steelValue;
   }
 
@@ -849,7 +847,7 @@ export class Player implements IPlayer {
       }
     });
 
-    // PoliticalAgendas Unity P4 hook
+    // TODO(kberg): put this in a callback.
     if (card.tags.includes(Tag.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, 'up04')) {
       cost -= 2;
     }

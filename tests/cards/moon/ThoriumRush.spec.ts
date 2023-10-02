@@ -3,7 +3,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
@@ -13,7 +13,7 @@ describe('ThoriumRush', () => {
   let player: TestPlayer;
   let game: Game;
   let card: ThoriumRush;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

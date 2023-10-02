@@ -17,7 +17,7 @@ describe('Route', () => {
   it('internalServerError expects predictable errors', () => {
     scaffolding.url = 'goo.goo.gaa.gaa';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.internalServerError(scaffolding.req, res.hide(), {'<img src=x onerror=alert(1)>': 'foo'});
+    instance.internalServerError(scaffolding.req, res, {'<img src=x onerror=alert(1)>': 'foo'});
     expect(res.statusCode).eq(500);
     expect(res.content).eq('Internal server error: unknown error');
   });
@@ -25,7 +25,7 @@ describe('Route', () => {
   it('internalServerError prevents xss', () => {
     scaffolding.url = 'goo.goo.gaa.gaa';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.internalServerError(scaffolding.req, res.hide(), '<img src=x onerror=alert(1)>');
+    instance.internalServerError(scaffolding.req, res, '<img src=x onerror=alert(1)>');
     expect(res.statusCode).eq(500);
     expect(res.content).eq('Internal server error: &lt;img src=x onerror=alert(1)&gt;');
   });

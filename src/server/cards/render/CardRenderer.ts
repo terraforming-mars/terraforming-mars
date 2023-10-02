@@ -227,8 +227,8 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public placeColony(options?: ItemOptions): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.PLACE_COLONY, -1, options));
+  public colonyTile(options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.COLONY_TILE, -1, options));
   }
 
   public influence(options?: ItemOptions): this {
@@ -300,6 +300,10 @@ abstract class Builder<T> {
 
   public fighter(amount: number = 1) {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.FIGHTER, amount));
+  }
+
+  public cloneTrooper(amount: number = 1) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.CLONE_TROOPER, amount));
   }
 
   public camps(amount: number = 1) {
@@ -443,6 +447,12 @@ abstract class Builder<T> {
     return this;
   }
 
+  public cityorSpecialTile(options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.CITY_OR_SPECIAL_TILE, -1, options);
+    item.size = options?.size ?? Size.MEDIUM;
+    return this._appendToRow(item);
+  }
+
   public emptyTile(type: 'normal' | 'golden' = 'normal', options?: ItemOptions) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1, options);
@@ -527,8 +537,8 @@ abstract class Builder<T> {
     return this._appendToRow(CardRenderSymbol.empty());
   }
 
-  public plate(text: string): this {
-    const item = new CardRenderItem(CardRenderItemType.PLATE);
+  public plate(text: string, options?: ItemOptions | undefined): this {
+    const item = new CardRenderItem(CardRenderItemType.PLATE, 1, options);
     item.text = text;
     item.isPlate = true;
     item.isBold = true;

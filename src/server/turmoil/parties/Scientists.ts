@@ -18,7 +18,6 @@ export class Scientists extends Party implements IParty {
 
 class ScientistsBonus01 implements Bonus {
   readonly id = 'sb01' as const;
-  readonly isDefault = true;
   readonly description = 'Gain 1 M€ for each science tag you have';
 
   getScore(player: IPlayer) {
@@ -35,7 +34,6 @@ class ScientistsBonus01 implements Bonus {
 class ScientistsBonus02 implements Bonus {
   readonly id = 'sb02' as const;
   readonly description = 'Gain 1 M€ for every 3 cards in hand';
-  readonly isDefault = false;
 
   getScore(player: IPlayer) {
     return Math.floor(player.cardsInHand.length / 3);
@@ -49,7 +47,6 @@ class ScientistsBonus02 implements Bonus {
 }
 
 class ScientistsPolicy01 implements Policy {
-  readonly isDefault = true;
   readonly id = 'sp01' as const;
   readonly description = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
 
@@ -79,19 +76,16 @@ class ScientistsPolicy01 implements Policy {
 class ScientistsPolicy02 implements Policy {
   readonly id = 'sp02' as const;
   readonly description = 'Your global requirements are +/- 2 steps';
-  readonly isDefault = false;
 }
 
 class ScientistsPolicy03 implements Policy {
   readonly id = 'sp03' as const;
   readonly description = 'When you raise a global parameter, draw a card per step raised';
-  readonly isDefault = false;
 }
 
 class ScientistsPolicy04 implements Policy {
   readonly id = 'sp04' as const;
   readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
-  readonly isDefault = false;
 
   apply(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {

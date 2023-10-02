@@ -1,15 +1,14 @@
+import type * as pg from 'pg';
 import {IDatabase} from './IDatabase';
 import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-import {Pool, ClientConfig, QueryResult} from 'pg';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
-import {difference} from '../../common/utils/utils';
+import {oneWayDifference} from '../../common/utils/utils';
 
 export class PostgreSQL implements IDatabase {
-  protected client: Pool;
   private databaseName: string | undefined = undefined; // Use this only for stats.
 
   protected statistics = {
@@ -18,9 +17,17 @@ export class PostgreSQL implements IDatabase {
     saveConflictUndoCount: 0,
     saveConflictNormalCount: 0,
   };
+  private _client: pg.Pool | undefined;
+
+  protected get client(): pg.Pool {
+    if (this._client === undefined) {
+      throw new Error('attempt to get client before intialized');
+    }
+    return this._client;
+  }
 
   constructor(
-    config: ClientConfig = {
+    private config: pg.ClientConfig = {
       connectionString: process.env.POSTGRES_HOST,
     }) {
     if (config.connectionString?.startsWith('postgres')) {
@@ -40,11 +47,11 @@ export class PostgreSQL implements IDatabase {
         console.log(e);
       }
     }
-    // Configuration stats saved for
-    this.client = new Pool(config);
   }
 
   public async initialize(): Promise<void> {
+    const {Pool} = await import('pg');
+    this._client = new Pool(this.config);
     await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
@@ -190,7 +197,7 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  async compressCompletedGame(gameId: GameId): Promise<QueryResult<any>> {
+  async compressCompletedGame(gameId: GameId): Promise<pg.QueryResult<any>> {
     const maxSaveId = await this.getMaxSaveId(gameId);
     return this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId])
       .then(() => {
@@ -257,7 +264,7 @@ export class PostgreSQL implements IDatabase {
     logForUndo(gameId, 'deleted', res?.rowCount, 'rows');
     const second = await this.getSaveIds(gameId);
     logForUndo(gameId, 'second', second);
-    logForUndo(gameId, 'Rollback difference', difference(first, second));
+    logForUndo(gameId, 'Rollback difference', oneWayDifference(first, second));
   }
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {

@@ -1,18 +1,37 @@
-// https://steveholgado.com/typescript-types-from-arrays/
-export const PAYMENT_KEYS = [
-  'heat',
+import {DATA_VALUE, FLOATERS_VALUE, MICROBES_VALUE, GRAPHENE_VALUE, SEED_VALUE} from '../constants';
+
+/** Types of resources spent to pay for anything. */
+export const PAYMENT_UNITS = [
+  // Standard currency for paying for stuff
   'megaCredits',
+  // Helion corporation can spend heat as M€.
+  'heat',
+  // Used for cards with building tags
   'steel',
+  // Used for cards with space tags
   'titanium',
+  // Psychrophiles corporation can spend its floaters for cards with plant tags.
   'microbes',
+  // Dirigibles corporation can spend its floaters for cards with Venus tags.
   'floaters',
+  // Luna Archives corporation can spend its science resources for cards with Moon tags.
   'lunaArchivesScience',
+  // Spire corporation can spend its science resources on standrad projects.
   'spireScience',
+  // TODO(kberg): add test for Soylent Seedling Systems + Psychophiles.
+  // Soylent Seedling Systems corporation can use its seeds to pay for cards with plant tags, or the standard greenery project.
   'seeds',
+  // Aurorai corporation can use its data to pay for standard projects.
   'auroraiData',
+  // Graphene is a Carbon Nanosystems resource that pays for city and space projects.
   'graphene',
-  'kuiperAsteroids'] as const;
-export type PaymentKey = typeof PAYMENT_KEYS[number];
+  // Asteroids is a Kuiper Cooperative resource that pays for aquifer and asteroid standard projects.
+  'kuiperAsteroids',
+  // Martian Lumber Corp lets players pay for building tags with plants.
+  'plants',
+] as const;
+/** Types of resources spent to pay for anything. */
+export type PaymentUnit = typeof PAYMENT_UNITS[number];
 
 /**
  * The units of resources to deduct from the player's play area. These resources are all worth
@@ -23,41 +42,31 @@ export type PaymentKey = typeof PAYMENT_KEYS[number];
  *
  * Exception: Player.pay({heat}) still triggers asking the caller if they want to spend Stormcraft resources.
  */
-export type Payment = {
-  // Standard currency for paying for stuff
-  megaCredits: number;
-  // Helion corporation can spend heat as M€.
-  heat: number;
-  // Used for cards with building tags
-  steel: number;
-  // Used for cards with space tags
-  titanium: number;
-  // Psychrophiles corporation can spend its floaters for cards with plant tags.
-  microbes: number;
-  // Dirigibles corporation can spend its floaters for cards with Venus tags.
-  floaters: number;
-  // Luna Archives corporation can spend its science resources for cards with Moon tags.
-  lunaArchivesScience: number;
-  // Spire corporation can spend its science resources on standrad projects.
-  spireScience: number;
-  // TODO(kberg): add test for Soylent Seedling Systems + Psychophiles.
-  // Soylent Seedling Systems corporation can use its seeds to pay for cards with plant tags, or the standard greenery project.
-  seeds: number;
-  // Aurorai corporation can use its data to pay for standard projects.
-  auroraiData: number;
-  // Graphene is a Carbon Nanosystems resource that pays for city and space projects.
-  graphene: number;
-  // Asteroids is a Kuiper Cooperative resource that pays for aquifer and asteroid standard projects.
-  kuiperAsteroids: number;
-}
+export type Payment = {[k in PaymentUnit]: number};
 
 export function isPayment(obj: unknown): obj is Payment {
   if (typeof obj !== 'object') return false;
   if (!obj) return false;
   const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
-  return PAYMENT_KEYS.every((key) =>
+  return PAYMENT_UNITS.every((key) =>
     h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
 }
+
+export const DEFAULT_PAYMENT_VALUES: Record<PaymentUnit, number> = {
+  megaCredits: 1,
+  steel: 2,
+  titanium: 3,
+  heat: 1,
+  plants: 3,
+  microbes: MICROBES_VALUE,
+  floaters: FLOATERS_VALUE,
+  lunaArchivesScience: 1,
+  spireScience: 2,
+  seeds: SEED_VALUE,
+  auroraiData: DATA_VALUE,
+  graphene: GRAPHENE_VALUE,
+  kuiperAsteroids: 1,
+} as const;
 
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {
@@ -65,6 +74,7 @@ export namespace Payment {
     megaCredits: 0,
     steel: 0,
     titanium: 0,
+    plants: 0,
     microbes: 0,
     floaters: 0,
     lunaArchivesScience: 0,
@@ -74,19 +84,6 @@ export namespace Payment {
     graphene: 0,
     kuiperAsteroids: 0,
   } as const;
-
-  export interface Options {
-    steel: boolean,
-    titanium: boolean,
-    floaters: boolean,
-    microbes: boolean,
-    lunaArchivesScience: boolean,
-    spireScience: boolean,
-    seeds: boolean,
-    auroraiData: boolean,
-    graphene: boolean,
-    kuiperAsteroids: boolean,
-  }
 
   export function of(payment: Partial<Payment>) : Payment {
     return {
@@ -102,6 +99,34 @@ export namespace Payment {
       titanium: payment.titanium ?? 0,
       graphene: payment.graphene ?? 0,
       kuiperAsteroids: payment.kuiperAsteroids ?? 0,
+      plants: payment.plants ?? 0,
     };
   }
+}
+
+/**
+ * PaymentOptions describes the ways you can pay for something. (MC is assumed.)
+ *
+ * This is different from Payment, which describes what is being used to pay for something.
+ *
+ * PaymentOptions says "you can spend heat, microbes, and seeds", and Payment says "Here's 3 heat and 1 seed."
+ *
+ * That's why PaymentOptions includes two references to titanium. One describes paying for space cards (
+ * good ol' titanium) and one describes a special behavior for the Luna Archives corporation that lets you
+ * spend titanium in a new way.
+ */
+export type PaymentOptions = {
+  heat: boolean,
+  steel: boolean,
+  titanium: boolean,
+  plants: boolean;
+  microbes: boolean,
+  floaters: boolean,
+  lunaTradeFederationTitanium: boolean,
+  lunaArchivesScience: boolean,
+  spireScience: boolean,
+  seeds: boolean,
+  auroraiData: boolean,
+  graphene: boolean,
+  kuiperAsteroids: boolean,
 }

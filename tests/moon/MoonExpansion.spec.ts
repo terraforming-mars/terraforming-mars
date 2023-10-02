@@ -6,7 +6,7 @@ import {GeologicalSurvey} from '../../src/server/cards/ares/GeologicalSurvey';
 import {LunaMiningHub} from '../../src/server/cards/moon/LunaMiningHub';
 import {Philares} from '../../src/server/cards/promo/Philares';
 import {Game} from '../../src/server/Game';
-import {IMoonData} from '../../src/server/moon/IMoonData';
+import {MoonData} from '../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {SpaceName} from '../../src/server/SpaceName';
@@ -19,7 +19,7 @@ describe('MoonExpansion', () => {
   let game: Game;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

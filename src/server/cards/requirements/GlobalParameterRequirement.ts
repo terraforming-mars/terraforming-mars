@@ -1,10 +1,9 @@
-import {ICardRequirement} from '../../../common/cards/ICardRequirement';
 import {IPlayer} from '../../IPlayer';
 import {InequalityRequirement} from './InequalityRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 import {YesAnd} from './CardRequirement';
 
-export abstract class GlobalParameterRequirement extends InequalityRequirement implements ICardRequirement {
+export abstract class GlobalParameterRequirement extends InequalityRequirement {
   protected scale: number = 1;
   protected abstract parameter: GlobalParameter;
 
@@ -36,6 +35,6 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement i
   }
 
   public distance(player: IPlayer): number {
-    return Math.floor(Math.abs(this.getScore(player) - this.amount) / this.scale);
+    return Math.floor(Math.abs(this.getScore(player) - this.count) / this.scale);
   }
 }

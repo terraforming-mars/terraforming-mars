@@ -3,7 +3,6 @@ import {ModuleManifest} from '../ModuleManifest';
 import {AppliedScience} from './AppliedScience';
 import {CeresTechMarket} from './CeresTechMarket';
 import {ColonyTradeHub} from './ColonyTradeHub';
-import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {Ecotec} from './Ecotec';
 import {FocusedOrganization} from './FocusedOrganization';
 import {IshtarExpedition} from './IshtarExpedition';
@@ -20,7 +19,6 @@ import {SummitLogistics} from './SummitLogistics';
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',
   projectCards: {
-    [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
     [CardName.ISHTAR_EXPEDITION]: {Factory: IshtarExpedition, compatibility: 'venus'},
     [CardName.SUMMIT_LOGISTICS]: {Factory: SummitLogistics, compatibility: 'turmoil'},
     [CardName.CERES_TECH_MARKET]: {Factory: CeresTechMarket, compatibility: 'colonies'},

@@ -7,7 +7,6 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 
 export class RedSpotObservatory extends Card implements IProjectCard {
@@ -24,7 +23,7 @@ export class RedSpotObservatory extends Card implements IProjectCard {
         drawCard: 2,
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
+      requirements: {tag: Tag.SCIENCE, count: 3},
       metadata: {
         cardNumber: 'C32',
         renderData: CardRenderer.builder((b) => {

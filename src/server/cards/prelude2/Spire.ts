@@ -41,24 +41,24 @@ export class Spire extends Card implements ICorporationCard {
     player.drawCard(4);
     return new SelectCard('Select 3 cards to discard', 'Discard', player.cardsInHand, (cards) => {
       for (const card of cards) {
-        const cardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
-        if (cardIndex === -1) {
-          console.error(`Error: card ${card.name} not in ${player.id}'s hand`);
-          return;
-        }
-        player.cardsInHand.splice(cardIndex, 1);
-        player.game.projectDeck.discard(card);
-        LogHelper.logDiscardedCards(player.game, cards);
+        player.discardCardFromHand(card);
       }
+      LogHelper.logDiscardedCards(player.game, cards);
 
       return undefined;
     }, {min: 3, max: 3});
   }
 
+  public override bespokePlay(player: IPlayer) {
+    // Including this.
+    this.onCardPlayed(player, this);
+    return undefined;
+  }
+
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.isCorporation(this.name)) {
       const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
-      if (count === 2) {
+      if (count >= 2) {
         player.addResourceTo(this, {qty: 1, log: true});
       }
     }

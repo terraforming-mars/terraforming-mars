@@ -18,6 +18,7 @@ import {CrashSiteCleanup} from './CrashSiteCleanup';
 import {CuttingEdgeTechnology} from './CuttingEdgeTechnology';
 import {CyberiaSystems} from './CyberiaSystems';
 import {DeimosDownPromo} from './DeimosDownPromo';
+import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {DirectedImpactors} from './DirectedImpactors';
 import {DiversitySupport} from './DiversitySupport';
 import {DoubleDown} from './DoubleDown';
@@ -28,7 +29,7 @@ import {FieldCappedCity} from './FieldCappedCity';
 import {GiantSolarCollector} from './GiantSolarCollector';
 import {GreatDamPromo} from './GreatDamPromo';
 import {Harvest} from './Harvest';
-import {HeadStart} from './HeadStart';
+// import {HeadStart} from './HeadStart';
 import {HermeticOrderofMars} from './HermeticOrderofMars';
 import {HiTechLab} from './HiTechLab';
 import {HomeostasisBureau} from './HomeostasisBureau';
@@ -41,6 +42,7 @@ import {LawSuit} from './LawSuit';
 import {MagneticFieldGeneratorsPromo} from './MagneticFieldGeneratorsPromo';
 import {MagneticShield} from './MagneticShield';
 import {MarsNomads} from './MarsNomads';
+import {MartianLumberCorp} from './MartianLumberCorp';
 import {MeatIndustry} from './MeatIndustry';
 import {Meltworks} from './Meltworks';
 import {MercurianAlloys} from './MercurianAlloys';
@@ -58,17 +60,20 @@ import {Potatoes} from './Potatoes';
 import {ProjectInspection} from './ProjectInspection';
 import {Psyche} from './16Psyche';
 import {Recyclon} from './Recyclon';
+import {RedShips} from './RedShips';
 import {RegoPlastics} from './RegoPlastics';
 import {RobotPollinators} from './RobotPollinators';
 import {SaturnSurfing} from './SaturnSurfing';
 import {SelfReplicatingRobots} from './SelfReplicatingRobots';
 import {SmallAsteroid} from './SmallAsteroid';
 import {SnowAlgae} from './SnowAlgae';
+import {SolarLogistics} from './SolarLogistics';
 import {Splice} from './Splice';
 import {StanfordTorus} from './StanfordTorus';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
+import {Teslaract} from './Teslaract';
 import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
 
@@ -129,7 +134,11 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.KAGUYA_TECH]: {Factory: KaguyaTech},
     [CardName.MARS_NOMADS]: {Factory: MarsNomads},
     [CardName.NEPTUNIAN_POWER_CONSULTANTS]: {Factory: NeptunianPowerConsultants},
-    // [CardName.MARTIAN_LUMBER_CORP]: {Factory: MartianLumberCorp},
+    [CardName.MARTIAN_LUMBER_CORP]: {Factory: MartianLumberCorp},
+    [CardName.RED_SHIPS]: {Factory: RedShips},
+    [CardName.SOLAR_LOGISTICS]: {Factory: SolarLogistics},
+    [CardName.TESLARACT]: {Factory: Teslaract},
+    [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
   },
 
   preludeCards: {
@@ -137,7 +146,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
-    [CardName.HEAD_START]: {Factory: HeadStart},
+    // [CardName.HEAD_START]: {Factory: HeadStart}, // Head Start is disabled because it's not working well.
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
     // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods},
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},

@@ -27,7 +27,6 @@ export class Greens extends Party implements IParty {
 }
 
 class GreensBonus01 implements Bonus {
-  readonly isDefault = true;
   readonly id = 'gb01' as const;
   readonly description = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
@@ -47,7 +46,6 @@ class GreensBonus01 implements Bonus {
 class GreensBonus02 implements Bonus {
   readonly id = 'gb02' as const;
   readonly description = 'Gain 2 M€ for each greenery tile you have';
-  readonly isDefault = false;
 
   getScore(player: IPlayer) {
     const boardSpaces = player.game.board.spaces;
@@ -63,7 +61,6 @@ class GreensBonus02 implements Bonus {
 }
 
 class GreensPolicy01 implements Policy {
-  readonly isDefault = true;
   readonly id = 'gp01' as const;
   readonly description = 'When you place a greenery tile, gain 4 M€';
 
@@ -77,7 +74,6 @@ class GreensPolicy01 implements Policy {
 class GreensPolicy02 implements Policy {
   readonly id = 'gp02' as const;
   readonly description = 'When you place a tile, gain 1 plant';
-  readonly isDefault = false;
 
   onTilePlaced(player: IPlayer) {
     player.stock.add(Resource.PLANTS, 1);
@@ -87,7 +83,6 @@ class GreensPolicy02 implements Policy {
 class GreensPolicy03 implements Policy {
   readonly id = 'gp03' as const;
   readonly description = 'When you play an animal, plant or microbe tag, gain 2 M€';
-  readonly isDefault = false;
 
   onCardPlayed(player: IPlayer, card: IProjectCard) {
     const tags = [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE];
@@ -100,7 +95,6 @@ class GreensPolicy03 implements Policy {
 class GreensPolicy04 implements Policy {
   readonly id = 'gp04' as const;
   readonly description = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
-  readonly isDefault = false;
 
   canAct(player: IPlayer) {
     return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

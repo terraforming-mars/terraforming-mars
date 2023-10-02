@@ -15,7 +15,7 @@ export interface ITestDatabase extends IDatabase {
   /**
    * Shut down operations after each test.
    */
-  afterEach?: () => Promise<void>;
+  afterEach?(): Promise<void>;
   /**
    * Return the status of a given game id.
    */

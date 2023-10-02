@@ -189,6 +189,9 @@ export default Vue.extend({
           classes.push('special-tile');
         }
         break;
+      case CardRenderItemType.CITY_OR_SPECIAL_TILE:
+        classes.push('card-tile', 'city-or-special-tile');
+        break;
       case CardRenderItemType.COMMUNITY:
         classes.push('card-resource', 'card-resource-community');
         break;
@@ -246,6 +249,9 @@ export default Vue.extend({
         } else {
           classes.push('card-hazard-tile');
         }
+        break;
+      case CardRenderItemType.CLONE_TROOPER:
+        classes.push('card-resource', 'card-resource-clone-trooper');
         break;
       case CardRenderItemType.MOON_HABITAT_RATE:
         classes.push('card-colony-rate');
@@ -339,6 +345,9 @@ export default Vue.extend({
       // golden background
       if (this.item.isPlate) {
         classes.push('card-plate');
+        if (this.item.size === Size.SMALL) {
+          classes.push('card-plate--narrow');
+        }
       }
 
       // size and text
@@ -407,8 +416,8 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
         result = '<div class="card-resource card-card"><div class="cards-count">2</div><div class="card-icon card-icon-space">✴</div><div class="card-icon card-icon-building">☗</div></div>';
       }
-      if (this.item.type === CardRenderItemType.PLACE_COLONY) {
-        result = '<span class="card-place-colony">colony</span>';
+      if (this.item.type === CardRenderItemType.COLONY_TILE) {
+        result = '<span class="card-colony-tile">colony</span>';
       }
       if (this.item.type === CardRenderItemType.PRELUDE) {
         result = '<div class="card-prelude-container"><span class="card-prelude-icon">prel</span></div>';

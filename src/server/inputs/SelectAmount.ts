@@ -1,6 +1,7 @@
 import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
+import {SelectAmountModel} from '../../common/models/PlayerInputModel';
 
 export class SelectAmount extends BasePlayerInput {
   constructor(
@@ -13,6 +14,17 @@ export class SelectAmount extends BasePlayerInput {
   ) {
     super('amount', title);
     this.buttonLabel = buttonLabel;
+  }
+
+  public toModel(): SelectAmountModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'amount',
+      max: this.max,
+      min: this.min,
+      maxByDefault: this.maxByDefault,
+    };
   }
 
   public process(input: InputResponse) {

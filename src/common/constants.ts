@@ -6,8 +6,8 @@ export const AWARD_COSTS = [8, 14, 20];
 export const MAX_AWARDS = 3;
 export const DEFAULT_STEEL_VALUE = 2;
 export const DEFAULT_TITANIUM_VALUE = 3;
-export const DEFAULT_FLOATERS_VALUE = 3;
-export const DEFAULT_MICROBES_VALUE = 2;
+export const FLOATERS_VALUE = 3;
+export const MICROBES_VALUE = 2;
 export const OCEAN_BONUS = 2;
 
 // Global parameters

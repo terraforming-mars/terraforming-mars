@@ -8,10 +8,8 @@ export class Adapter implements IAward {
 
   public getScore(player: IPlayer): number {
     const validCards = player.playedCards.filter((card) => {
-      const isValidCardType = card.type !== CardType.EVENT;
-      const hasRequirements = card.requirements !== undefined;
-
-      return isValidCardType && hasRequirements;
+      // TODO(kberg): Adapter is not compatible with corps that turn events up (eg Odyssey)
+      return card.type !== CardType.EVENT && card.requirements.length > 0;
     });
 
     return validCards.length;

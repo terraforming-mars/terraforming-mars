@@ -12,6 +12,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
+import {OneOrArray} from '../../../src/common/utils/types';
 
 describe('SpecializedSettlement', function() {
   let card: SpecializedSettlement;
@@ -154,7 +155,7 @@ describe('SpecializedSettlement', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
-  function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
+  function singleResourceTest(spaceBonus: OneOrArray<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
     player.production.override({energy: 1});
     const action = card.play(player);
 

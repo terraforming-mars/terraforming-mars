@@ -2,6 +2,7 @@ import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {Space} from '../boards/Space';
 import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
+import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
 
 export class SelectSpace extends BasePlayerInput {
   constructor(
@@ -12,6 +13,15 @@ export class SelectSpace extends BasePlayerInput {
     if (spaces.length === 0) {
       throw new Error('No available spaces');
     }
+  }
+
+  public override toModel(): SelectSpaceModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'space',
+      spaces: this.spaces.map((space) => space.id),
+    };
   }
 
   public process(input: InputResponse) {

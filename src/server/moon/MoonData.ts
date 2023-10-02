@@ -2,7 +2,7 @@ import {IPlayer} from '../IPlayer';
 import {MoonBoard} from './MoonBoard';
 import {SerializedMoonData} from './SerializedMoonData';
 
-export interface IMoonData {
+export type MoonData = {
   moon: MoonBoard;
   habitatRate: number;
   miningRate: number;
@@ -11,8 +11,8 @@ export interface IMoonData {
   lunaProjectOfficeLastGeneration: number | undefined;
 }
 
-export namespace IMoonData {
-  export function serialize(moonData: IMoonData | undefined): SerializedMoonData | undefined {
+export namespace MoonData {
+  export function serialize(moonData: MoonData | undefined): SerializedMoonData | undefined {
     if (moonData === undefined) {
       return undefined;
     }
@@ -26,7 +26,7 @@ export namespace IMoonData {
     };
   }
 
-  export function deserialize(moonData: SerializedMoonData, players: Array<IPlayer>): IMoonData {
+  export function deserialize(moonData: SerializedMoonData, players: Array<IPlayer>): MoonData {
     const lunaFirstPlayer = players.find((p) => p.id === moonData.lunaFirstPlayerId);
     if (moonData.lunaFirstPlayerId !== undefined && lunaFirstPlayer === undefined) {
       throw new Error(`player ${moonData.lunaFirstPlayerId} not found`);

@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
@@ -15,7 +14,7 @@ export class LuxuryFoods extends Card implements IProjectCard {
 
       victoryPoints: 2,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.JOVIAN)),
+      requirements: [{tag: Tag.VENUS}, {tag: Tag.EARTH}, {tag: Tag.JOVIAN}],
       metadata: {
         description: 'Requires that you have a Venus tag, an Earth tag and a Jovian tag.',
         cardNumber: 'T10',

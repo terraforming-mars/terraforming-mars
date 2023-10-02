@@ -26,7 +26,6 @@ export class Unity extends Party implements IParty {
 class UnityBonus01 implements Bonus {
   id = 'ub01' as const;
   description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
-  isDefault = true;
 
   getScore(player: IPlayer) {
     const tags = [Tag.VENUS, Tag.EARTH, Tag.JOVIAN];
@@ -43,7 +42,6 @@ class UnityBonus01 implements Bonus {
 class UnityBonus02 implements Bonus {
   id = 'ub02' as const;
   description = 'Gain 1 M€ for each Space tag you have';
-  isDefault = false;
 
   getScore(player: IPlayer) {
     return player.tags.count(Tag.SPACE, 'raw');
@@ -57,7 +55,6 @@ class UnityBonus02 implements Bonus {
 }
 
 class UnityPolicy01 implements Policy {
-  isDefault = true;
   id = 'up01' as const;
   description = 'Your titanium resources are worth 1 M€ extra';
 }
@@ -65,7 +62,6 @@ class UnityPolicy01 implements Policy {
 class UnityPolicy02 implements Policy {
   id = 'up02' as const;
   description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
-  isDefault = false;
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -125,7 +121,6 @@ class UnityPolicy02 implements Policy {
 class UnityPolicy03 implements Policy {
   id = 'up03' as const;
   description = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
-  isDefault = false;
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -154,7 +149,6 @@ class UnityPolicy03 implements Policy {
 class UnityPolicy04 implements Policy {
   id = 'up04' as const;
   description = 'Cards with Space tags cost 2 M€ less to play';
-  isDefault = false;
 }
 
 export const UNITY_BONUS_1 = new UnityBonus01();

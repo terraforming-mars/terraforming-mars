@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {all} from '../Options';
 
@@ -16,7 +15,7 @@ export class SpacePortColony extends Card implements IProjectCard {
       name: CardName.SPACE_PORT_COLONY,
       type: CardType.AUTOMATED,
 
-      requirements: CardRequirements.builder((b) => b.colonies()),
+      requirements: {colonies: 1},
       victoryPoints: {colonies: {colonies: {}}, all, per: 2},
 
       behavior: {

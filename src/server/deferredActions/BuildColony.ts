@@ -11,7 +11,7 @@ export class BuildColony extends DeferredAction {
       title?: string,
       colonies?: Array<IColony>, // If not specified, will accept all playable colonies.
       giveBonusTwice?: boolean, // Custom for Vital Colony. Rewards the bonus when placing a colony a second time.
-      cb?: (colony: IColony) => void,
+      cb?(colony: IColony): void,
     },
   ) {
     super(player, Priority.BUILD_COLONY);

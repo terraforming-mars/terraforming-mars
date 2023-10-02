@@ -7,7 +7,6 @@ import {Delegate} from '../../turmoil/Turmoil';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
 import {IParty} from '../../turmoil/parties/IParty';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
 import {all} from '../Options';
@@ -20,7 +19,7 @@ export class BannedDelegate extends Card implements IProjectCard {
       name: CardName.BANNED_DELEGATE,
       cost: 0,
 
-      requirements: CardRequirements.builder((b) => b.chairman()),
+      requirements: {chairman: true},
       metadata: {
         cardNumber: 'T02',
         description: 'Requires that you are Chairman. Remove any NON-LEADER delegate.',

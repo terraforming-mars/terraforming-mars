@@ -3,13 +3,13 @@ import {TestPlayer} from '../../TestPlayer';
 import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 
 describe('TheGrandLunaCapitalGroup', () => {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let card: TheGrandLunaCapitalGroup;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

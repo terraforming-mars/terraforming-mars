@@ -24,7 +24,7 @@ import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import SelectOption from '@/client/components/SelectOption.vue';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
 import SelectSpace from '@/client/components/SelectSpace.vue';
-import SelectPartyPlayer from '@/client/components/SelectPartyPlayer.vue';
+import SelectDelegate from '@/client/components/SelectDelegate.vue';
 import SelectParty from '@/client/components/SelectParty.vue';
 import SelectColony from '@/client/components/SelectColony.vue';
 import SelectProductionToLose from '@/client/components/SelectProductionToLose.vue';
@@ -42,8 +42,8 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'space': 'select-space',
   'player': 'select-player',
   'amount': 'select-amount',
-  'delegate': 'select-party-player',
-  'party': 'select-party-to-send-delegate',
+  'delegate': 'select-delegate',
+  'party': 'select-party',
   'colony': 'select-colony',
   'productionToLose': 'select-production-to-lose',
   'aresGlobalParameters': 'shift-ares-global-parameters',
@@ -81,8 +81,8 @@ export default Vue.component('player-input-factory', {
     SelectInitialCards,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
-    'select-party-player': SelectPartyPlayer,
-    'select-party-to-send-delegate': SelectParty,
+    'select-delegate': SelectDelegate,
+    'select-party': SelectParty,
     'select-colony': SelectColony,
     SelectProductionToLose,
     ShiftAresGlobalParameters,
@@ -98,7 +98,7 @@ export default Vue.component('player-input-factory', {
   },
   computed: {
     componentName(): string {
-      return typeToComponentName[this.playerinput.inputType];
+      return typeToComponentName[this.playerinput.type];
     },
   },
 });

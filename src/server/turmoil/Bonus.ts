@@ -5,7 +5,6 @@ import {BonusId} from '../../common/turmoil/Types';
 export interface Bonus {
   id: BonusId;
   description: string;
-  isDefault: boolean;
-  grant: (game: IGame) => void;
-  getScore: (player: IPlayer) => number;
+  grant(game: IGame): void;
+  getScore(player: IPlayer): number;
 }

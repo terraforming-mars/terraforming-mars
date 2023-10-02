@@ -2,7 +2,6 @@ import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -19,7 +18,7 @@ export class VenusMagnetizer extends ActionCard implements IActionCard {
         global: {venus: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.venus(10)),
+      requirements: {venus: 10},
       metadata: {
         cardNumber: '256',
         renderData: CardRenderer.builder((b) => {

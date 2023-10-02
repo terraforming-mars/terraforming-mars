@@ -35,20 +35,14 @@ export class Stefan extends CeoCard {
       'Sell patents',
       'Sell',
       player.cardsInHand,
-      (foundCards: Array<IProjectCard>) => {
-        player.megaCredits += foundCards.length * 3;
+      (cards: Array<IProjectCard>) => {
+        player.megaCredits += cards.length * 3;
 
-        foundCards.forEach((card) => {
-          for (let i = 0; i < player.cardsInHand.length; i++) {
-            if (player.cardsInHand[i].name === card.name) {
-              player.cardsInHand.splice(i, 1);
-              break;
-            }
-          }
-          player.game.projectDeck.discard(card);
+        cards.forEach((card) => {
+          player.discardCardFromHand(card);
         });
 
-        player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
+        player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(cards.length));
         return undefined;
       }, {min: 0, max: player.cardsInHand.length},
     );

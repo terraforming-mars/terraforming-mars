@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {Color} from '@/common/Color';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
@@ -19,7 +19,8 @@ describe('SelectPlayer', () => {
   ];
 
   beforeEach(() => {
-    const playerInput: Partial<PlayerInputModel> = {
+    const playerInput: SelectPlayerModel = {
+      type: 'player',
       title: '',
       buttonLabel: '',
       // This is a different order from the order in `players`

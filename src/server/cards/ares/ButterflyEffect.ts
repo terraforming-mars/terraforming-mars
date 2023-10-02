@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {AresHandler} from '../../../server/ares/AresHandler';
+import {AresHandler} from '../../ares/AresHandler';
 import {HAZARD_CONSTRAINTS} from '../../../common/ares/AresData';
 
 export class ButterflyEffect extends Card implements IProjectCard {

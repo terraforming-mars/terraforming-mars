@@ -5,7 +5,6 @@ import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class OceanFarm extends Card implements IProjectCard {
@@ -26,7 +25,7 @@ export class OceanFarm extends Card implements IProjectCard {
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(4)),
+      requirements: {oceans: 4},
       metadata: {
         cardNumber: 'A21',
         renderData: CardRenderer.builder((b) => {

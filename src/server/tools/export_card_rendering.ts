@@ -20,8 +20,9 @@ import {MilestoneAwardMetadata} from '../../common/ma/MilestoneAwardMetadata';
 import {AwardName} from '../../common/ma/AwardName';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {CardType} from '../../common/cards/CardType';
+import {OneOrArray} from '../../common/utils/types';
 
-class ProjectCardProcessor {
+class CardProcessor {
   public static json: Array<ClientCard> = [];
   public static makeJson() {
     ALL_MODULE_MANIFESTS.forEach(this.processManifest);
@@ -29,17 +30,17 @@ class ProjectCardProcessor {
 
   private static processManifest(manifest: ModuleManifest) {
     for (const cardManifest of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.ceoCards, manifest.standardActions, manifest.standardProjects]) {
-      ProjectCardProcessor.processDeck(manifest.module, cardManifest);
+      CardProcessor.processDeck(manifest.module, cardManifest);
     }
   }
 
   private static processDeck(module: GameModule, cardManifest: CardManifest<ICard>) {
     for (const factory of CardManifest.values(cardManifest)) {
-      ProjectCardProcessor.processCard(module, new factory.Factory(), factory.compatibility);
+      CardProcessor.processCard(module, new factory.Factory(), factory.compatibility);
     }
   }
 
-  private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {
+  private static processCard(module: GameModule, card: ICard, compatibility: undefined | OneOrArray<GameModule>) {
     if (card.type === CardType.PROXY) return;
     let startingMegaCredits = undefined;
     let cardCost = undefined;
@@ -60,7 +61,7 @@ class ProjectCardProcessor {
       victoryPoints: card.victoryPoints,
       cost: card.cost,
       type: card.type,
-      requirements: card.requirements,
+      requirements: card.requirements ?? [],
       metadata: card.metadata,
       warning: card.warning,
       productionBox: Units.isUnits(production) ? Units.of(production) : Units.EMPTY, // Dynamic units aren't used on on the client side.
@@ -75,7 +76,7 @@ class ProjectCardProcessor {
     } else if (compatibility !== undefined) {
       clientCard.compatibility.push(compatibility);
     }
-    ProjectCardProcessor.json.push(clientCard);
+    CardProcessor.json.push(clientCard);
   }
 }
 
@@ -160,12 +161,12 @@ if (!fs.existsSync('src/genfiles')) {
   fs.mkdirSync('src/genfiles');
 }
 
-ProjectCardProcessor.makeJson();
+CardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();
 MAProcessor.makeJson();
 
-fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(ProjectCardProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(CardProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/ma.json', JSON.stringify(MAProcessor.json, null, 2));

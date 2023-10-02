@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {played} from '../Options';
@@ -19,7 +18,7 @@ export class VenusianAnimals extends Card implements IProjectCard {
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}},
 
-      requirements: CardRequirements.builder((b) => b.venus(18)),
+      requirements: {venus: 18},
       metadata: {
         cardNumber: '259',
         renderData: CardRenderer.builder((b) => {
@@ -33,6 +32,7 @@ export class VenusianAnimals extends Card implements IProjectCard {
     });
   }
   public onCardPlayed(player: IPlayer, card: IProjectCard): void {
-    player.addResourceTo(this, player.tags.cardTagCount(card, Tag.SCIENCE));
+    const qty = player.tags.cardTagCount(card, Tag.SCIENCE);
+    player.addResourceTo(this, {qty, log: true});
   }
 }

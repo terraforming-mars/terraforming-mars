@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 import {MiningRobotsManufCenter} from '../../../src/server/cards/moon/MiningRobotsManufCenter';
@@ -8,7 +8,7 @@ import {expect} from 'chai';
 describe('MiningRobotsManufCenter', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MiningRobotsManufCenter;
 
   beforeEach(() => {

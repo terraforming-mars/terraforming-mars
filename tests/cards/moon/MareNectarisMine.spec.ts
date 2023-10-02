@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -11,7 +11,7 @@ import {TileType} from '../../../src/common/TileType';
 describe('MareNectarisMine', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MareNectarisMine;
 
   beforeEach(() => {

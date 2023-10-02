@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class GeneRepair extends Card implements IProjectCard {
@@ -19,7 +18,7 @@ export class GeneRepair extends Card implements IProjectCard {
         production: {megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
+      requirements: {tag: Tag.SCIENCE, count: 3},
       metadata: {
         cardNumber: '091',
         renderData: CardRenderer.builder((b) => b.production((pb) => pb.megacredits(2))),

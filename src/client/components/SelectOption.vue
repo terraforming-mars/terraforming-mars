@@ -9,14 +9,14 @@
 
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectOptionModel} from '@/common/models/PlayerInputModel';
 import {SelectOptionResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'select-option',
   props: {
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectOptionModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectOptionResponse) => void,

@@ -515,7 +515,9 @@ export enum CardName {
     MARS_NOMADS = 'Mars Nomads',
     NEPTUNIAN_POWER_CONSULTANTS = 'Neptunian Power Consultants',
     MARTIAN_LUMBER_CORP = 'Martian Lumber Corp',
-
+    RED_SHIPS = 'Red Ships',
+    SOLAR_LOGISTICS = 'Solar Logistics',
+    TESLARACT = 'Teslaract',
     // End of promo cards
 
     // Community corps
@@ -843,4 +845,15 @@ export enum CardName {
     XU = 'Xu',
     // CEO Preludes
     CO_LEADERSHIP = 'Co-leadership',
+
+    // Star Wars cards
+    TRADE_EMBARGO = 'Trade Embargo (I)',
+    CLONE_TROOPERS = 'Clone Troopers (II)',
+    BEHOLD_THE_EMPEROR = 'Behold The Emperor! (III)',
+    TOSCHE_STATION = 'Tosche Station (IV)',
+    CLOUD_CITY = 'Cloud City (V)',
+    FOREST_MOON = 'Forest Moon (VI)',
+    TAKONDA_CASTLE = 'Takonda Castle (VII)',
+    TOOL_WITH_THE_FIRST_ORDER = 'Tool with the First Order (VIII)',
+    REY_SKYWALKER = 'Rey ... Skywalker?! (IX)',
 }

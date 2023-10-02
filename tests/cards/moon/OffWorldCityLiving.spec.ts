@@ -3,14 +3,14 @@ import {TestPlayer} from '../../TestPlayer';
 import {OffWorldCityLiving} from '../../../src/server/cards/moon/OffWorldCityLiving';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('OffWorldCityLiving', () => {
   let player: TestPlayer;
   let card: OffWorldCityLiving;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();

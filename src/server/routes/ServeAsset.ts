@@ -1,4 +1,3 @@
-import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -7,6 +6,8 @@ import {BufferCache} from './BufferCache';
 import {ContentType} from './ContentType';
 import {Handler} from './Handler';
 import {isProduction} from '../utils/server';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 type Encoding = 'gzip' | 'br';
 
@@ -52,7 +53,7 @@ export class ServeAsset extends Handler {
     this.cache.set('build/styles.css.br', brotli);
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     if (req.url === undefined) {
       ctx.route.internalServerError(req, res, new Error('no url on request'));
       return;
@@ -180,7 +181,7 @@ export class ServeAsset extends Handler {
     return {};
   }
 
-  private supportedEncodings(req: http.IncomingMessage): Set<Encoding> {
+  private supportedEncodings(req: Request): Set<Encoding> {
     const result = new Set<Encoding>();
     for (const header of String(req.headers['accept-encoding']).split(', ')) {
       if (header === 'br' || header === 'gzip') {

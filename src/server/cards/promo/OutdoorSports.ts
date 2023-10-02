@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all, nextTo} from '../Options';
@@ -20,7 +19,7 @@ export class OutdoorSports extends Card implements IProjectCard {
         production: {megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.cities(1, {all, nextTo}).oceans(1)),
+      requirements: [{cities: 1, all, nextTo}, {oceans: 1}],
       metadata: {
         cardNumber: 'X38',
         renderData: CardRenderer.builder((b) => {

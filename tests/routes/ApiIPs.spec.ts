@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ApiIPs} from '../../src/server/routes/ApiIPs';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
-import {PlayerId, SpectatorId} from '@/common/Types';
+import {PlayerId, SpectatorId} from '../../src/common/Types';
 
 describe('ApiIPs', function() {
   let res: MockResponse;
@@ -16,14 +16,14 @@ describe('ApiIPs', function() {
 
   it('validates server id', () => {
     scaffolding.url = '/api/ips';
-    ApiIPs.INSTANCE.processRequest(scaffolding.req, res.hide(), scaffolding.ctx);
+    ApiIPs.INSTANCE.processRequest(scaffolding.req, res, scaffolding.ctx);
     expect(res.content).eq('Not authorized');
   });
 
   it('simple', async () => {
     scaffolding.url = '/api/ips?serverId=1';
     scaffolding.req.method = 'GET';
-    await ApiIPs.INSTANCE.processRequest(scaffolding.req, res.hide(), scaffolding.ctx);
+    await ApiIPs.INSTANCE.processRequest(scaffolding.req, res, scaffolding.ctx);
     expect(res.content).eq('{}');
   });
 
@@ -38,7 +38,7 @@ describe('ApiIPs', function() {
     ipTracker.addParticipant(spectatorId, '12.15.0.5');
     ipTracker.addParticipant(playerId, '12.15.0.5');
     ipTracker.add('12.23.34.45:80');
-    await ApiIPs.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    await ApiIPs.INSTANCE.get(scaffolding.req, res, scaffolding.ctx);
     const expected = {
       '12.15.0.4': {
         'count': 3,

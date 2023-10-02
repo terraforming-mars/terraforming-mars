@@ -4,7 +4,7 @@ import {MoonBoard} from './MoonBoard';
 import {IPlayer} from '../IPlayer';
 import {TileType} from '../../common/TileType';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {IMoonData} from './IMoonData';
+import {MoonData} from './MoonData';
 import {CardName} from '../../common/cards/CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
@@ -32,7 +32,7 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, execute this callback, otherwise do nothing.
-  public static ifMoon<T>(game: IGame, cb: (moonData: IMoonData) => T): T | undefined {
+  public static ifMoon<T>(game: IGame, cb: (moonData: MoonData) => T): T | undefined {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
@@ -44,7 +44,7 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, execute this callback, otherwise execute the else callback.
-  public static ifElseMoon<T>(game: IGame, cb: (moonData: IMoonData) => T, elseCb: () => T): T {
+  public static ifElseMoon<T>(game: IGame, cb: (moonData: MoonData) => T, elseCb: () => T): T {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
@@ -56,14 +56,14 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
-  public static moonData(game: IGame): IMoonData {
+  public static moonData(game: IGame): MoonData {
     if (game.gameOptions.moonExpansion === true && game.moonData !== undefined) {
       return game.moonData;
     }
     throw new Error('Assertion error: Using a Moon feature when the Moon expansion is undefined.');
   }
 
-  public static initialize(): IMoonData {
+  public static initialize(): MoonData {
     return {
       moon: MoonBoard.newInstance(),
       habitatRate: 0,

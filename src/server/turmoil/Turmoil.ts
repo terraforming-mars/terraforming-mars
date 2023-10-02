@@ -22,23 +22,25 @@ import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectParty} from '../inputs/SelectParty';
+import {Policy, PolicyId, policyDescription} from './Policy';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = PlayerId | NeutralPlayer;
 
-export interface IPartyFactory {
-    partyName: PartyName;
-    Factory: new () => IParty
-}
+export type PartyFactory = new() => IParty;
 
-export const ALL_PARTIES: Array<IPartyFactory> = [
-  {partyName: PartyName.MARS, Factory: MarsFirst},
-  {partyName: PartyName.SCIENTISTS, Factory: Scientists},
-  {partyName: PartyName.UNITY, Factory: Unity},
-  {partyName: PartyName.GREENS, Factory: Greens},
-  {partyName: PartyName.REDS, Factory: Reds},
-  {partyName: PartyName.KELVINISTS, Factory: Kelvinists},
-];
+export const ALL_PARTIES: Record<PartyName, PartyFactory> = {
+  [PartyName.MARS]: MarsFirst,
+  [PartyName.SCIENTISTS]: Scientists,
+  [PartyName.UNITY]: Unity,
+  [PartyName.GREENS]: Greens,
+  [PartyName.REDS]: Reds,
+  [PartyName.KELVINISTS]: Kelvinists,
+};
+
+function createParties(): ReadonlyArray<IParty> {
+  return [new MarsFirst(), new Scientists(), new Unity(), new Greens(), new Reds(), new Kelvinists()];
+}
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
   agendas: new Map(),
@@ -51,7 +53,7 @@ export class Turmoil {
   public dominantParty: IParty;
   public usedFreeDelegateAction = new Set<PlayerId>();
   public delegateReserve = new MultiSet<Delegate>();
-  public parties = ALL_PARTIES.map((cf) => new cf.Factory());
+  public parties = createParties();
   public playersInfluenceBonus = new Map<string, number>();
   public readonly globalEventDealer: GlobalEventDealer;
   public distantGlobalEvent: IGlobalEvent | undefined;
@@ -80,7 +82,7 @@ export class Turmoil {
     game.log('Greens are in power in the first generation.');
 
     // Init parties
-    turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
+    turmoil.parties = createParties();
 
     game.getPlayersInGenerationOrder().forEach((player) => {
       turmoil.delegateReserve.add(player.id, DELEGATES_PER_PLAYER);
@@ -140,7 +142,16 @@ export class Turmoil {
     return party;
   }
 
-  // Use to send a delegate to a specific party
+  rulingPolicy(): Policy {
+    const rulingParty = this.rulingParty;
+    const rulingPolicyId: PolicyId = PoliticalAgendas.currentAgenda(this).policyId;
+    const policy = rulingParty.policies.find((policy) => policy.id === rulingPolicyId);
+    if (policy === undefined) {
+      throw new Error(`Policy ${rulingPolicyId} not found in ${rulingParty.name}`);
+    }
+    return policy;
+  }
+
   public sendDelegateToParty(
     playerId: Delegate,
     partyName: PartyName,
@@ -238,7 +249,10 @@ export class Turmoil {
     }
 
     // 3 - New Government
-    this.rulingParty = this.dominantParty;
+    // Behond the Emperor Hook prevents changing the ruling party.
+    if (game.beholdTheEmperor !== true) {
+      this.rulingParty = this.dominantParty;
+    }
 
     // 3.a - Ruling Policy change
     this.setRulingParty(game);
@@ -276,21 +290,25 @@ export class Turmoil {
     // Cleanup previous party effects
     game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
 
-    const newChariman = this.rulingParty.partyLeader || 'NEUTRAL';
-
-    // Fill the delegate reserve with everyone except the party leader
-    if (this.rulingParty.partyLeader !== undefined) {
-      this.rulingParty.delegates.remove(this.rulingParty.partyLeader);
+    let newChairman = this.rulingParty.partyLeader || 'NEUTRAL';
+    if (game.beholdTheEmperor === true && this.chairman !== undefined) {
+      newChairman = this.chairman;
     }
-    this.rulingParty.delegates.forEachMultiplicity((count, playerId) => {
-      this.delegateReserve.add(playerId, count);
-    });
 
-    // Clean the party
-    this.rulingParty.partyLeader = undefined;
-    this.rulingParty.delegates.clear();
+    if (game.beholdTheEmperor !== true) {
+      // Fill the delegate reserve with everyone except the party leader
+      if (this.rulingParty.partyLeader !== undefined) {
+        this.rulingParty.delegates.remove(this.rulingParty.partyLeader);
+      }
+      this.rulingParty.delegates.forEachMultiplicity((count, playerId) => {
+        this.delegateReserve.add(playerId, count);
+      });
 
-    this.setNewChairman(newChariman, game, /* setAgenda*/ true);
+      // Clean the party
+      this.rulingParty.partyLeader = undefined;
+      this.rulingParty.delegates.clear();
+    }
+    this.setNewChairman(newChairman, game, /* setAgenda*/ true);
   }
 
   public setNewChairman(newChairman : Delegate, game: IGame, setAgenda: boolean = true, gainTR: boolean = true) {
@@ -332,14 +350,13 @@ export class Turmoil {
     const setRulingParty = new OrOptions();
 
     setRulingParty.title = 'Select new ruling party';
-    setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
-      p.partyName, 'Select', () => {
-        this.rulingParty = this.getPartyByName(p.partyName);
+    setRulingParty.options = this.parties.map((p: IParty) => new SelectOption(
+      p.name, 'Select', () => {
+        this.rulingParty = p;
         PoliticalAgendas.setNextAgenda(this, player.game);
-
         return undefined;
       }),
-    )];
+    );
 
     player.game.defer(new SimpleDeferredAction(
       player,
@@ -366,12 +383,10 @@ export class Turmoil {
     if (policy === undefined) {
       throw new Error(`Policy id ${policyId} not found in party ${rulingParty.name}`);
     }
-    const description = typeof(policy.description) === 'string' ? policy.description : policy.description(undefined);
+    const description = policyDescription(policy, undefined);
     game.log('The ruling policy is: ${0}', (b) => b.string(description));
     // Resolve Ruling Policy for Scientists P4
-    if (policy.apply !== undefined) {
-      policy.apply(game);
-    }
+    policy.apply?.(game);
   }
 
   public getPlayerInfluence(player: IPlayer) {

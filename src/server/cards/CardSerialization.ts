@@ -4,38 +4,42 @@ import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
+import {CardType} from '../../common/cards/CardType';
 
-export function serializeProjectCard(c: IProjectCard): SerializedCard {
-  const result: SerializedCard = {
-    name: c.name,
+export function serializeProjectCard(card: IProjectCard): SerializedCard {
+  const serialized: SerializedCard = {
+    name: card.name,
   };
-  if (c.bonusResource !== undefined) {
-    result.bonusResource = c.bonusResource;
+  if (card.type === CardType.PROXY) {
+    return serialized;
   }
-  if (c.resourceCount !== undefined) {
-    result.resourceCount = c.resourceCount;
+  if (card.bonusResource !== undefined) {
+    serialized.bonusResource = card.bonusResource;
   }
-  if (c instanceof SelfReplicatingRobots) {
-    result.targetCards = c.targetCards.map((t) => {
+  if (card.resourceCount !== undefined) {
+    serialized.resourceCount = card.resourceCount;
+  }
+  if (card instanceof SelfReplicatingRobots) {
+    serialized.targetCards = card.targetCards.map((t) => {
       return {
         card: {name: t.card.name},
         resourceCount: t.resourceCount,
       };
     });
   }
-  if (isICloneTagCard(c)) {
-    result.cloneTag = c.cloneTag;
+  if (isICloneTagCard(card)) {
+    serialized.cloneTag = card.cloneTag;
   }
-  if (isCeoCard(c)) {
-    result.isDisabled = c.isDisabled;
-    if (c.opgActionIsActive !== undefined) {
-      result.opgActionIsActive = c.opgActionIsActive;
+  if (isCeoCard(card)) {
+    serialized.isDisabled = card.isDisabled;
+    if (card.opgActionIsActive !== undefined) {
+      serialized.opgActionIsActive = card.opgActionIsActive;
     }
-    if (c.generationUsed !== undefined) {
-      result.generationUsed = c.generationUsed;
+    if (card.generationUsed !== undefined) {
+      serialized.generationUsed = card.generationUsed;
     }
   }
-  return result;
+  return serialized;
 }
 
 export function deserializeProjectCard(element: SerializedCard, cardFinder: CardFinder): IProjectCard {

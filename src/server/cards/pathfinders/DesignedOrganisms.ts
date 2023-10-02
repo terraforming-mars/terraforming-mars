@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardResource} from '../../../common/CardResource';
 
 export class DesignedOrganisms extends Card implements IProjectCard {
@@ -12,9 +11,9 @@ export class DesignedOrganisms extends Card implements IProjectCard {
     super({
       type: CardType.AUTOMATED,
       name: CardName.DESIGNED_ORGANISMS,
-      cost: 12,
+      cost: 13,
       tags: [Tag.SCIENCE, Tag.PLANT, Tag.MARS],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 5)),
+      requirements: {tag: Tag.SCIENCE, count: 5},
 
       behavior: {
         production: {plants: 2},

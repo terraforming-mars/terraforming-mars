@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class PoliticalAlliance extends Card implements IProjectCard {
@@ -16,7 +15,7 @@ export class PoliticalAlliance extends Card implements IProjectCard {
         tr: 1,
       },
 
-      requirements: CardRequirements.builder((b) => b.partyLeaders(2)),
+      requirements: {partyLeader: 2},
       metadata: {
         cardNumber: 'X09',
         renderData: CardRenderer.builder((b) => {

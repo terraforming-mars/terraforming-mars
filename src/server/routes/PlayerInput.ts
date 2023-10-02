@@ -1,4 +1,3 @@
-import * as http from 'http';
 import {IPlayer} from '../IPlayer';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
@@ -7,6 +6,8 @@ import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {isPlayerId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -14,7 +15,7 @@ export class PlayerInput extends Handler {
     super();
   }
 
-  public override async post(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override async post(req: Request, res: Response, ctx: Context): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
     if (playerId === null) {
       ctx.route.badRequest(req, res, 'missing id parameter');
@@ -56,7 +57,7 @@ export class PlayerInput extends Handler {
     return false;
   }
 
-  private async performUndo(_req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: IPlayer): Promise<void> {
+  private async performUndo(_req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
     /**
      * The `lastSaveId` property is incremented during every `takeAction`.
      * The first save being decremented is the increment during `takeAction` call
@@ -77,7 +78,7 @@ export class PlayerInput extends Handler {
     ctx.route.writeJson(res, Server.getPlayerModel(player));
   }
 
-  private processInput(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: IPlayer): Promise<void> {
+  private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', (data) => {

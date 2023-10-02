@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -19,7 +18,7 @@ export class Insects extends Card implements IProjectCard {
         production: {plants: {tag: Tag.PLANT}},
       },
 
-      requirements: CardRequirements.builder((b) => b.oxygen(6)),
+      requirements: {oxygen: 6},
       metadata: {
         cardNumber: '148',
         renderData: CardRenderer.builder((b) => {

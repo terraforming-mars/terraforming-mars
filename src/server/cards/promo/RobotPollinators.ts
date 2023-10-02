@@ -4,7 +4,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 
 export class RobotPollinators extends Card implements IProjectCard {
@@ -13,7 +12,7 @@ export class RobotPollinators extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.ROBOT_POLLINATORS,
       cost: 9,
-      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      requirements: {oxygen: 4},
       behavior: {
         production: {plants: 1},
         stock: {plants: {tag: Tag.PLANT}},

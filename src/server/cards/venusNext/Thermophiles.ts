@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -38,7 +37,7 @@ export class Thermophiles extends ActionCard implements IActionCard {
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.venus(6)),
+      requirements: {venus: 6},
       metadata: {
         cardNumber: '253',
         renderData: CardRenderer.builder((b) => {

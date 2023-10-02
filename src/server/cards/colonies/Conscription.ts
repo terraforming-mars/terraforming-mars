@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -17,7 +16,7 @@ export class Conscription extends Card implements IProjectCard {
       name: CardName.CONSCRIPTION,
       victoryPoints: -1,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
+      requirements: {tag: Tag.EARTH, count: 2},
       metadata: {
         cardNumber: 'C05',
         renderData: CardRenderer.builder((b) => {

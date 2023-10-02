@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Mangrove extends Card implements IProjectCard {
@@ -20,7 +19,7 @@ export class Mangrove extends Card implements IProjectCard {
         greenery: {on: 'ocean'},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(4)),
+      requirements: {temperature: 4},
       metadata: {
         cardNumber: '059',
         renderData: CardRenderer.builder((b) => b.greenery().asterix()),

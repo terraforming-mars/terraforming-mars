@@ -4,17 +4,12 @@ import {ColorWithNeutral} from '../Color';
 import {PartyName} from '../turmoil/PartyName';
 import {SpaceId} from '../Types';
 import {Units} from '../Units';
+import {twoWayDifference} from '../utils/utils';
 import {AresGlobalParametersResponse} from './AresGlobalParametersResponse';
 import {Payment} from './Payment';
 
-function difference<T>(arr1: Array<T>, arr2: Array<T>): Array<T> {
-  return arr1
-    .filter((x) => !arr2.includes(x))
-    .concat(arr2.filter((x) => !arr1.includes(x)));
-}
-
 function matches(response: any, fields: Array<string>) {
-  return difference(Object.keys(response), fields).length === 0;
+  return twoWayDifference(Object.keys(response), fields).length === 0;
 }
 export interface SelectOptionResponse {
   type: 'option',

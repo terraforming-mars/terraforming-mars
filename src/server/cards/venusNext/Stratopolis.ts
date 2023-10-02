@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -17,7 +16,7 @@ export class Stratopolis extends ActionCard {
 
       resourceType: CardResource.FLOATER,
       victoryPoints: {resourcesHere: {}, per: 3},
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      requirements: {tag: Tag.SCIENCE, count: 2},
 
       behavior: {
         production: {megacredits: 2},

@@ -5,7 +5,7 @@ import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 import {Neil} from '../../../src/server/cards/ceos/Neil';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
 import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
@@ -17,7 +17,7 @@ describe('Neil', function() {
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: Game;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     card = new Neil();

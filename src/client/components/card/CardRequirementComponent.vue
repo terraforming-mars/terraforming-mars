@@ -3,11 +3,11 @@
       <div class="card-item-container" :class="nextTo">
         <template v-if="requirement.max">max&nbsp;</template>
         <span v-if="!isRepeated">{{amount}}</span>{{suffix}}
-        <template v-if="requirement.type === RequirementType.REMOVED_PLANTS">
+        <template v-if="type === RequirementType.REMOVED_PLANTS">
           <div class="card-special card-minus"></div>
           <div class="card-resource card-resource-plant red-outline"></div>
         </template>
-        <template v-if="requirement.type === RequirementType.PRODUCTION">
+        <template v-if="type === RequirementType.PRODUCTION">
           <div class="card-production-box card-production-box--req">
             <div class="card-production-box-row">
               <div class="card-production-box-row-item">
@@ -20,7 +20,7 @@
             </div>
           </div>
         </template>
-        <CardParty v-else-if="requirement.type === RequirementType.PARTY" :party="party" size="req" />
+        <CardParty v-else-if="type === RequirementType.PARTY" :party="party" size="req" />
         <template v-else>
           <template v-for="num in repeats">
             <div :class="componentClasses" :key="num"></div>
@@ -33,9 +33,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {
-  ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITagCardRequirement,
-} from '@/common/cards/ICardRequirement';
+import {CardRequirementDescriptor, requirementType} from '@/common/cards/CardRequirementDescriptor';
 import {RequirementType} from '@/common/cards/RequirementType';
 import {range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
@@ -45,7 +43,7 @@ export default Vue.extend({
   name: 'CardRequirementComponent',
   props: {
     requirement: {
-      type: Object as () => ICardRequirement,
+      type: Object as () => CardRequirementDescriptor,
       required: true,
     },
     leftMargin: {
@@ -58,30 +56,36 @@ export default Vue.extend({
     CardParty,
   },
   computed: {
+    type(): RequirementType {
+      return requirementType(this.requirement);
+    },
+    count(): number {
+      return this.requirement.count ?? 0;
+    },
     amount(): string | number {
       // <span v-if="requirement.isMax || requirement.amount != 0">{{requirement.amount}}</span>
-      switch (this.requirement.type) {
+      switch (this.type) {
       case RequirementType.TEMPERATURE:
       case RequirementType.OXYGEN:
       case RequirementType.VENUS:
       case RequirementType.HABITAT_RATE:
       case RequirementType.MINING_RATE:
       case RequirementType.LOGISTIC_RATE:
-        return this.requirement.amount;
+        return this.count;
       }
       if (this.requirement.max) {
-        return this.requirement.amount;
+        return this.count;
       }
-      if (this.requirement.amount === 0) {
+      if (this.count === 0) {
         return '';
       }
-      if (this.requirement.amount !== 1) {
-        return this.requirement.amount;
+      if (this.count !== 1) {
+        return this.count;
       }
       return '';
     },
     suffix(): string {
-      switch (this.requirement.type) {
+      switch (this.type) {
       case RequirementType.OXYGEN:
       case RequirementType.VENUS:
         return '%';
@@ -103,7 +107,7 @@ export default Vue.extend({
     componentClassArray(): Array<string> {
       // TODO(kberg): This duplicates CardRenderItemComponent. That shouldn't be
       // necessary.
-      switch (this.requirement.type) {
+      switch (this.type) {
       case RequirementType.OXYGEN:
         return ['card-global-requirement', 'card-oxygen--req'];
       case RequirementType.TEMPERATURE:
@@ -129,8 +133,7 @@ export default Vue.extend({
       case RequirementType.PARTY_LEADERS:
         return ['card-party-leader--req'];
       case RequirementType.TAG:
-        const tagRequirement = this.requirement as ITagCardRequirement;
-        return ['card-resource-tag--S', 'card-tag-' + tagRequirement.tag];
+        return ['card-resource-tag--S', 'card-tag-' + this.requirement.tag];
       case RequirementType.HABITAT_RATE:
         return ['card-colony-rate', 'card-colony-rate--req'];
       case RequirementType.MINING_RATE:
@@ -150,16 +153,16 @@ export default Vue.extend({
       return [];
     },
     party(): PartyName {
-      if (this.requirement.type === RequirementType.PARTY) {
-        return (this.requirement as IPartyCardRequirement).party;
+      if (this.type === RequirementType.PARTY && this.requirement.party) {
+        return this.requirement.party;
       } else {
         // Doesn't matter what this value is, as it is ignored.
         return PartyName.GREENS;
       }
     },
     productionClass(): string {
-      if (this.requirement.type === RequirementType.PRODUCTION) {
-        const resource = (this.requirement as IProductionCardRequirement).resource;
+      if (this.type === RequirementType.PRODUCTION) {
+        const resource = this.requirement.production;
         return `card-resource card-resource-${resource}`;
       } else {
         // Doesn't matter what this value is, as it is ignored.
@@ -170,22 +173,21 @@ export default Vue.extend({
       return RequirementType;
     },
     isRepeated(): boolean {
-      switch (this.requirement.type) {
+      switch (this.type) {
       case RequirementType.OXYGEN:
       case RequirementType.TEMPERATURE:
       case RequirementType.VENUS:
-      case RequirementType.CHAIRMAN:
       case RequirementType.PARTY:
       case RequirementType.REMOVED_PLANTS:
         return false;
       }
-      return this.requirement.amount < 4;
+      return this.count < 4;
     },
     repeats(): Array<number> {
-      if (!this.isRepeated || this.requirement.amount === undefined) {
+      if (!this.isRepeated || this.requirement.count === undefined) {
         return [1];
       }
-      return range(this.requirement.amount);
+      return range(this.requirement.count);
     },
     nextTo(): string {
       if (this.requirement.nextTo) {

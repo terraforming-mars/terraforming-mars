@@ -1,12 +1,22 @@
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {PlayerInput} from '../PlayerInput';
 import {InputResponse, isAndOptionsResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
+import {AndOptionsModel, SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
+import {OptionsInput} from './OptionsPlayerInput';
 
-export class AndOptions extends BasePlayerInput {
-  public options: Array<PlayerInput>;
+export class AndOptions extends OptionsInput {
   constructor(public cb: () => PlayerInput | undefined, ...options: Array<PlayerInput>) {
-    super('and');
-    this.options = options;
+    super('and', '', options);
+  }
+
+  // TODO(kberg): Detach AndOptions and SelectInitialCards.
+  public toModel(player: IPlayer): AndOptionsModel | SelectInitialCardsModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'and',
+      options: this.options.map((option) => option.toModel(player)),
+    };
   }
 
   public process(input: InputResponse, player: IPlayer) {

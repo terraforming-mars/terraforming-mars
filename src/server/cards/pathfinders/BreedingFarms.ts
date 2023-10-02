@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 
 export class BreedingFarms extends ActionCard implements IProjectCard {
@@ -24,7 +23,7 @@ export class BreedingFarms extends ActionCard implements IProjectCard {
         addResourcesToAnyCard: {count: 1, type: CardResource.ANIMAL, mustHaveCard: true},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.ANIMAL)),
+      requirements: [{tag: Tag.SCIENCE}, {tag: Tag.ANIMAL}],
       metadata: {
         cardNumber: 'Pf01',
         renderData: CardRenderer.builder((b) => {

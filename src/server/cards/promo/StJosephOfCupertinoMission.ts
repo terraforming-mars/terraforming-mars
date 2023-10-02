@@ -59,7 +59,7 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
           spaceOwner.defer(
             new OrOptions(
               new SelectOption('Do not buy a card', undefined, () => undefined),
-              new SelectPayment('Pay 2 M€ to draw a card', 2, {heat: player.canUseHeatAsMegaCredits}, (payment) => {
+              new SelectPayment('Pay 2 M€ to draw a card', 2, {}, (payment) => {
                 // TODO(kberg): pay should have an afterPay for the heat / floaters costs.
                 spaceOwner.pay(payment);
                 spaceOwner.drawCard();

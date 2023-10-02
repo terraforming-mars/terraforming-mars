@@ -4,7 +4,6 @@ import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max, played} from '../Options';
 
@@ -21,7 +20,7 @@ export class Psychrophiles extends ActionCard implements IProjectCard {
         addResources: 1,
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-20, {max})),
+      requirements: {temperature: -20, max},
       metadata: {
         cardNumber: 'P39',
         renderData: CardRenderer.builder((b) => {

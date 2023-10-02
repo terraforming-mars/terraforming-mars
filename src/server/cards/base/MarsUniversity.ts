@@ -43,10 +43,8 @@ export class MarsUniversity extends Card implements IProjectCard {
           }
           return new OrOptions(
             new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, ([card]) => {
-              player.cardsInHand.splice(player.cardsInHand.indexOf(card), 1);
-              player.game.projectDeck.discard(card);
               player.game.log('${0} is using their ${1} effect to draw a card by discarding a card.', (b) => b.player(player).card(this));
-              player.game.log('You discarded ${0}', (b) => b.card(card), {reservedFor: player});
+              player.discardCardFromHand(card, {log: true});
               player.drawCard();
               return undefined;
             }),

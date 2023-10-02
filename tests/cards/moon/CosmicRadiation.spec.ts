@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {CosmicRadiation} from '../../../src/server/cards/moon/CosmicRadiation';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
 
@@ -15,7 +15,7 @@ describe('CosmicRadiation', () => {
   let player2: TestPlayer;
   let player3: TestPlayer;
   let card: CosmicRadiation;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     [game, player1, player2, player3] = testGame(3, {moonExpansion: true, turmoilExtension: true});

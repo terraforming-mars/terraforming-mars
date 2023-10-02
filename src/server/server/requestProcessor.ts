@@ -1,4 +1,5 @@
-import * as http from 'http';
+import * as prometheus from 'prom-client';
+
 import {paths} from '../../common/app/paths';
 
 import {ApiCloneableGame} from '../routes/ApiCloneableGame';
@@ -27,6 +28,24 @@ import {newIpBlocklist} from './IPBlocklist';
 import {ApiIPs} from '../routes/ApiIPs';
 import {newIpTracker} from './IPTracker';
 import {getHerokuIpAddress} from './heroku';
+import {Request} from '../Request';
+import {Response} from '../Response';
+
+const metrics = {
+  count: new prometheus.Counter({
+    name: 'http_request_count',
+    help: 'Request count',
+    registers: [prometheus.register],
+    labelNames: ['path', 'method'],
+  }),
+  latency: new prometheus.Histogram({
+    name: 'http_request_latency',
+    help: 'Request latency',
+    registers: [prometheus.register],
+    labelNames: ['path'],
+    buckets: [0.1, 0.25, 0.5, 1, 2.5, 5, 10, 25, 50, 100, 250, 500, 1000],
+  }),
+};
 
 const ips = (process.env.IP_BLOCKLIST ?? '').trim().split(' ');
 const ipBlocklist = newIpBlocklist(ips);
@@ -67,7 +86,7 @@ const handlers: Map<string, IHandler> = new Map(
   ],
 );
 
-function getIPAddress(req: http.IncomingMessage): string {
+function getIPAddress(req: Request): string {
   const herokuIpAddress = getHerokuIpAddress(req);
   if (herokuIpAddress !== undefined) {
     return herokuIpAddress;
@@ -79,45 +98,63 @@ function getIPAddress(req: http.IncomingMessage): string {
   return socketIpAddress;
 }
 
-export function processRequest(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-  route: Route): void {
-  const ipAddress = getIPAddress(req);
-  ipTracker.add(ipAddress);
-  if (ipBlocklist.isBlocked(ipAddress)) {
-    route.notFound(req, res);
-  }
-
-  if (req.method === 'HEAD') {
-    res.end();
-    return;
-  }
-  if (req.url === undefined) {
-    route.notFound(req, res);
-    return;
-  }
-
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  const pathname = url.pathname.substring(1); // Remove leading '/'
-  const ctx: Context = {
-    url: url,
-    route: route,
-    gameLoader: GameLoader.getInstance(),
-    ip: getIPAddress(req),
-    ipTracker: ipTracker,
-    ids: {
-      serverId,
-      statsId,
-    }};
-
+function getHandler(pathname: string): IHandler | undefined {
   const handler: IHandler | undefined = handlers.get(pathname);
-
   if (handler !== undefined) {
-    handler.processRequest(req, res, ctx);
-  } else if (req.method === 'GET' && pathname.startsWith('assets/')) {
-    ServeAsset.INSTANCE.get(req, res, ctx);
-  } else {
-    route.notFound(req, res);
+    return handler;
+  }
+  if (pathname.startsWith('assets/')) {
+    return ServeAsset.INSTANCE;
+  }
+  return undefined;
+}
+
+export function processRequest(
+  req: Request,
+  res: Response,
+  route: Route): void {
+  const start = process.hrtime.bigint();
+  let pathnameForLatency: string | undefined = undefined;
+  try {
+    const ipAddress = getIPAddress(req);
+    ipTracker.add(ipAddress);
+    if (ipBlocklist.isBlocked(ipAddress)) {
+      route.notFound(req, res);
+    }
+
+    if (req.method === 'HEAD') {
+      res.end();
+      return;
+    }
+    if (req.url === undefined) {
+      route.notFound(req, res);
+      return;
+    }
+
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const ctx: Context = {
+      url: url,
+      route: route,
+      gameLoader: GameLoader.getInstance(),
+      ip: getIPAddress(req),
+      ipTracker: ipTracker,
+      ids: {
+        serverId,
+        statsId,
+      }};
+
+    const pathname = url.pathname.substring(1); // Remove leading '/'
+    pathnameForLatency = pathname;
+    const handler = getHandler(pathname);
+    if (handler !== undefined) {
+      metrics.count.inc({path: pathname, method: req.method});
+      handler.processRequest(req, res, ctx);
+    } else {
+      pathnameForLatency = undefined;
+      route.notFound(req, res);
+    }
+  } finally {
+    const duration = Number(process.hrtime.bigint() - start) / 1_000_000;
+    metrics.latency.observe({path: pathnameForLatency}, Number(duration));
   }
 }

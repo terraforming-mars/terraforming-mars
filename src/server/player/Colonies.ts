@@ -38,11 +38,12 @@ export class Colonies {
   }
 
   /**
-   * Returns `true` if this player has an unused trade fleet.
+   * Returns `true` if this player can execute a trade.
    */
   public canTrade() {
     return ColoniesHandler.tradeableColonies(this.player.game).length > 0 &&
-      this.getFleetSize() > this.tradesThisGeneration;
+      this.getFleetSize() > this.tradesThisGeneration &&
+      this.player.game.tradeEmbargo !== true;
   }
 
   public coloniesTradeAction(): AndOptions | undefined {

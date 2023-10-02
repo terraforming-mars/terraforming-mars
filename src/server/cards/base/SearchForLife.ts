@@ -7,7 +7,6 @@ import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {max, played} from '../Options';
@@ -23,7 +22,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
       resourceType: CardResource.SCIENCE,
       victoryPoints: 'special',
 
-      requirements: CardRequirements.builder((b) => b.oxygen(6, {max})),
+      requirements: {oxygen: 6, max},
       metadata: {
         cardNumber: '005',
         description: 'Oxygen must be 6% or less.',

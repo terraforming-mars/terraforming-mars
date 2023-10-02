@@ -3,6 +3,9 @@ import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, getCardFromPlayerInput, PlayerInput} from '../PlayerInput';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
+import {SelectCardModel} from '../../common/models/PlayerInputModel';
+import {IPlayer} from '../IPlayer';
+import {cardsToModel} from '../models/ModelUtils';
 
 export type Options = {
   max: number,
@@ -32,6 +35,24 @@ export class SelectCard<T extends ICard> extends BasePlayerInput {
       showOwner: config?.showOwner ?? false,
     };
     this.buttonLabel = buttonLabel;
+  }
+
+  public toModel(player: IPlayer): SelectCardModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'card',
+      cards: cardsToModel(player, this.cards, {
+        showCalculatedCost: this.config.played === false || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
+        showResources: this.config.played === true || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
+        enabled: this.config.enabled,
+      }),
+      max: this.config.max,
+      min: this.config.min,
+      showOnlyInLearnerMode: this.config.enabled?.every((p: boolean) => p === false),
+      selectBlueCardAction: this.config.selectBlueCardAction,
+      showOwner: this.config.showOwner === true,
+    };
   }
 
   public process(input: InputResponse) {

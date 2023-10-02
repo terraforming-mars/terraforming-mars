@@ -24,7 +24,6 @@ interface DataModel {
   selectedPlayer: ColorWithNeutral | undefined;
 }
 
-// TODO(kberg): rename to SelectDelegate
 export default Vue.extend({
   name: 'SelectDelegate',
   props: {

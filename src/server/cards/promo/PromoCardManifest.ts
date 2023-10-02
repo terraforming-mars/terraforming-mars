@@ -29,7 +29,7 @@ import {FieldCappedCity} from './FieldCappedCity';
 import {GiantSolarCollector} from './GiantSolarCollector';
 import {GreatDamPromo} from './GreatDamPromo';
 import {Harvest} from './Harvest';
-import {HeadStart} from './HeadStart';
+// import {HeadStart} from './HeadStart';
 import {HermeticOrderofMars} from './HermeticOrderofMars';
 import {HiTechLab} from './HiTechLab';
 import {HomeostasisBureau} from './HomeostasisBureau';
@@ -146,7 +146,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
-    [CardName.HEAD_START]: {Factory: HeadStart},
+    // [CardName.HEAD_START]: {Factory: HeadStart}, // Head Start is disabled because it's not working well.
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
     // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods},
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},

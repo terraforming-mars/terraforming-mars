@@ -1,4 +1,8 @@
 {
+  "Martian Lumber Corp": "Mars-Holz Konzern",
+  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "EFFEKT: Wenn du ein Gebäudesymbol spielst, darfst du Pflanzen für je 3 M€ verwenden.",
+  "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Benötigt 2 eigene Grünflächenplättchen. Erhöhe die Pflanzenproduktion um 1.",
+  
   "Solar Logistics": "Solar-Logistik",
   "Effect: When you play an Earth tag, you pay 2 M€ less.": "Effekt: Wenn du ein Erdsymbol spielst, zahle 2 M€ weniger.",
   "Effect: When any player plays a space event, draw a card.": "EFFEKT: Wenn ein beliebiger Spieler ein Weltraumereignis spielt, ziehe eine Karte.",
@@ -14,7 +18,7 @@
   
   "Neptunian Power Consultants": "Neptunische Energieberater",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "EFFEKT: Wenn ein Ozean platziert wird, DARFST du 5 M€ zahlen (Stahl kann verwendet werden), um deine Energieproduktion um 1 zu erhöhen und dieser Karte 1 Wasserkraftressource hinzuzufügen.",
-  "Increase your heat production 2 steps.": "Erhöhe deine Wärme-Produktion um 2.",
+  "1 VP per hydroelectric resource on this card": "1 SP pro Wasserkraftressource auf dieser Karte.",
   
   "Mars Nomads": "Mars-Nomaden",
   "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "AKTION: Bewege die Nomaden auf ein benachbartes, nicht reserviertes, leeres Gebiet und kassiere den PLATZIERUNGSBONUS, als ob du dort ein Sonderplättchen platzieren würdest. Auf dem Nomadenfeld dürfen keine Plättchen platziert werden.",
@@ -47,6 +51,9 @@
   "Aqueduct Systems": "Aquadukt Systeme",
   "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "Benötigt eine eigene Stadt angrenzend an einen Ozean. Ziehe 3 Karten mit einem Gebäudesymbol.",
     
+  "Directed Heat Usage": "Direkte Wärmenutzung",
+  "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Aktion: Bezahle 3 Wärme, um entweder 4 M€ oder 2 Pflanzen zu erhalten.",
+  
   "Supercapacitors": "Superkondensatoren",
   "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "EFFEKT: DIE UMWANDLUNG VON ENERGIE IN WÄRME WÄHREND DER PRODUKTION IST FÜR JEDE ENERGIERESSOURCE OPTIONAL.",
   "Increase M€ production 1 step.": "Erhöhe deine M€-Produktion um 1.",
@@ -197,5 +204,32 @@
   "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Benötigt 3 eigene Grünflächenplättchen im Spiel und erhalte 12 M€.",
 
   "Outdoor Sports": "Sport im Freien",
-  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Benötigt 1 Stadt, die an einen Ozean angrenzt. Erhöhe deine M€-Produktion um 2."
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Benötigt 1 Stadt, die an einen Ozean angrenzt. Erhöhe deine M€-Produktion um 2.",
+
+  "Trade Embargo (I)": "Handelsembargo (I)",
+  "Nobody may trade for the rest of this generation.": "Für den Rest dieser Generation darf niemand mehr handeln.",
+
+  "Clone Troopers (II)": "Klonkrieger (II)",
+  "Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.": "AKTION: Füge einen Klonkrieger zu dieser Karte hinzu ODER entferne einen Klonkrieger von dieser Karte, um eine Standardressource von einem beliebigen Spieler zu klauen.",
+
+  "Behold The Emperor! (III)": "Seht den Imperator! (III)",
+  "Requires that you are Chairman. The current ruling party will automatically be the ruling party during the next Solar phase, and you will remain the Chairman. (As if the current ruling party were dominant and you were its party leader.)": "Benötigt, dass Sie Vorsitzender sind. Die derzeitige Regierungspartei wird in der nächsten Sonnenphase automatisch die Regierungspartei sein, und du bleibst der Vorsitzende. (Als ob die derzeitige Regierungspartei dominant wäre und du ihr Parteivorsitzender wärst).",   
+
+  "Tosche Station (IV)": "Tosche Station (IV)",
+  "Action: Spend X Energy and gain X-1 plants (max 4.)": "AKTION: Gib X Energie aus und erhalte X-1 Pflanzen (max. 4).",
+
+  "Cloud City (V)": "Wolkenstadt (V)",
+  "Requires Venus 6%. Raise Venus 1 step. Add 2 floaters to any card.": "Erfordert Venuswertung von 6%. Erhöhe Venuswertung um 1. Füge 2 Schweber zu einer beliebigen Karte hinzu.",
+  
+  "Forest Moon (VI)": "Wald-Mond (VI)",
+  "Requires any 4 greeneries on Mars. Decrease any energy production 2 steps. Add an animal to any card.": "Benötigt 4 beliebige Grünflächenplättchen auf dem Mars. Reduziere die Energieproduktion um 2. Füge ein Tier zu einer beliebigen Karte hinzu.",
+
+  "Takonda Castle (VII)": "Schloss Takonda (VII)",
+  "Gain 1 M€ for each of your microbe tags and animal tags.": "Erhalte 1 M€ für jedes Ihrer Mikroben- und Tiersymbole.",
+
+  "Tool with the First Order (VIII)": "Werkzeug der Ersten Ordnung (VIII)",
+  "Take another action this turn. Gain 1 TR.": "Erhalte 1 TR. Führe in diesem Zug eine weitere Aktion durch.",
+
+  "Rey ... Skywalker?! (IX)": "Rey ... Skywalker?! (IX)",
+  "Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game. (NOTE: currently using the Restricted Area tile instead of a bronze cube.)": "Erhöhe deine M€-Produktion um 4. Platziere einen Bronzewürfel auf einem freien, nicht reservierten Feld auf dem Mars. Auf diesem Feld darf für den Rest des Spiels kein Plättchen mehr platziert werden. (HINWEIS: Derzeit wird das Sperrgebiet-Plättchen anstelle des Bronzewürfels verwendet)."
 }

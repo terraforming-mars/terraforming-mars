@@ -25,7 +25,6 @@ export class Reds extends Party implements IParty {
 class RedsBonus01 implements Bonus {
   readonly id = 'rb01' as const;
   readonly description = 'The player(s) with the lowest TR gains 1 TR';
-  readonly isDefault = true;
 
   getScore(player: IPlayer) {
     const game = player.game;
@@ -53,7 +52,6 @@ class RedsBonus01 implements Bonus {
 class RedsBonus02 implements Bonus {
   readonly id = 'rb02' as const;
   readonly description = 'The player(s) with the highest TR loses 1 TR';
-  readonly isDefault = false;
 
   getScore(player: IPlayer) {
     const game = player.game;
@@ -80,14 +78,12 @@ class RedsBonus02 implements Bonus {
 
 class RedsPolicy01 implements Policy {
   readonly id = 'rp01' as const;
-  readonly isDefault = true;
   readonly description = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
 class RedsPolicy02 implements Policy {
   readonly id = 'rp02' as const;
   readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
-  readonly isDefault = false;
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
@@ -103,7 +99,6 @@ class RedsPolicy02 implements Policy {
 class RedsPolicy03 implements Policy {
   readonly id = 'rp03' as const;
   readonly description = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
-  readonly isDefault = false;
 
   private canDecrease(game: IGame, parameter: GlobalParameter) {
     switch (parameter) {
@@ -250,7 +245,6 @@ class RedsPolicy03 implements Policy {
 class RedsPolicy04 implements Policy {
   readonly id = 'rp04' as const;
   readonly description = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
-  readonly isDefault = false;
 }
 
 export const REDS_BONUS_1 = new RedsBonus01();

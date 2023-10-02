@@ -10,7 +10,7 @@ export type DrawOptions = {
   tag?: Tag,
   resource?: CardResource,
   cardType?: CardType,
-  include?: (card: IProjectCard) => boolean,
+  include?(card: IProjectCard): boolean,
 }
 
 export type AllOptions = DrawOptions & ChooseOptions;

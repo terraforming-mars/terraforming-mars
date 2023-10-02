@@ -3,7 +3,7 @@ import {Units} from '../../common/Units';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
-  cb?: () => void;
+  cb?(): void;
   log?: boolean;
 }
 

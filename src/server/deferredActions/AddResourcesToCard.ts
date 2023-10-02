@@ -13,8 +13,8 @@ export type Options = {
   min?: number;
   title?: string;
   robotCards?: boolean;
-  filter?: (card: ICard) => boolean;
-  log?: () => void;
+  filter?(card: ICard): boolean;
+  log?(): void;
 }
 
 export class AddResourcesToCard extends DeferredAction {

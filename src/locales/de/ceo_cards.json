@@ -26,8 +26,8 @@
 	"You have +2 score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "Du hast +2 auf alle Auszeichnungen. Einmal pro Spiel ziehst du 10-X Auszeichnungen (mindestens 1), wobei X die aktuelle Generation ist. Du darfst eine davon ins Spiel bringen und kostenfrei finanzieren.",
 
 	"Bjorn": "Björn",
-	"Once per game, steal X M€ from each player that has more M€ than you, where X is the current generation number.": "Einmal pro Spiel klaust du X M€ von jedem Spieler, der mehr M€ hat als du, wobei X die aktuelle Generation ist.",
-
+	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "Einmal pro Spiel klaust du X+2 M€ von jedem Spieler, der mehr M€ hat als du, wobei X die aktuelle Generation ist.",
+	
 	"Caesar": "Cäsar",
 	"Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "Einmal pro Spiel, platziere X Gefahrenplättchen, wobei X die aktuelle Generation ist. Jeder Gegner verliert 1 Produktionseinheit seiner Wahl, oder 2 Einheiten, wenn es 6 oder mehr Gefahrenplättchen gibt.",
 
@@ -116,7 +116,8 @@
 	"Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "Einmal pro Spiel füge die folgenden Ressourcen zu deinen Karten hinzu: 2 Tiere, 2 Mikroben, 2 Schweber, 2 Joker-Ressourcen.",
 
 	"Xavier": "Xavier",
-	"Gain 2 wild tags for THIS GENERATION.": "Erhalte 2 Joker-Symbole für DIESE GENERATION.",
+	"Once per game, gain 2 wild tags for THIS GENERATION.": "Einmal pro Spiel erhalte 2 Jokersymbole für DIESE GENERATION.",
+	"Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it": "Effekt: Wenn du eine Karte spielst, die einen Vorrausetzung hat, zahle 1 M€ weniger, NACH dem Einsatz dieser Aktion.",
 
 	"Xu": "Xu",
 	"Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you Have the most Venus tags in play.": "Einmal pro Spiel erhalte 2 M€ für jede Venus-Symbol im Spiel. Erhalte zusätzlich 8 M€, falls du die meisten Venus-Symbole im Spiel hast.",

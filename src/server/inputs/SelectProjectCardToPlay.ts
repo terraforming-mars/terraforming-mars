@@ -25,7 +25,7 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     cards: Array<PlayableCard> = player.getPlayableCards(),
     public config?: {
       action?: CardAction,
-      cb?: (cardToPlay: IProjectCard) => void,
+      cb?(cardToPlay: IProjectCard): void,
     }) {
     super('projectCard', 'Play project card');
     this.buttonLabel = 'Play card';

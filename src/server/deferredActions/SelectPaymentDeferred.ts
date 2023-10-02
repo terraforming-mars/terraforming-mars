@@ -14,7 +14,7 @@ export type Options = {
   canUseAsteroids?: boolean;
   canUseSpireScience?: boolean,
   title?: string | Message;
-  afterPay?: () => void;
+  afterPay?(): void;
 }
 
 export class SelectPaymentDeferred extends DeferredAction {

@@ -1717,7 +1717,10 @@ export class Player implements IPlayer {
       }));
     }
 
-    TurmoilHandler.addPlayerAction(this, action.options);
+    const turmoilInput = TurmoilHandler.partyAction(this);
+    if (turmoilInput !== undefined) {
+      action.options.push(turmoilInput);
+    }
 
     if (this.getPlayableActionCards().length > 0) {
       action.options.push(this.playActionCard());

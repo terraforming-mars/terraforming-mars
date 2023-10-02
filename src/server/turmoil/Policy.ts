@@ -11,9 +11,9 @@ export type PolicyId = `${Party}${Suffix}`
 export interface Policy {
   id: PolicyId;
   description: string | ((player: IPlayer | undefined) => string);
-  onTilePlaced?: (player: IPlayer, space: Space) => void;
-  onCardPlayed?: (player: IPlayer, card: IProjectCard) => void;
-  action?: (player: IPlayer) => PlayerInput | undefined;
-  canAct?: (player: IPlayer) => boolean;
-  apply?: (game: IGame) => void;
+  onTilePlaced?(player: IPlayer, space: Space): void;
+  onCardPlayed?(player: IPlayer, card: IProjectCard): void;
+  action?(player: IPlayer): PlayerInput | undefined;
+  canAct?(player: IPlayer): boolean;
+  apply?(game: IGame): void;
 }

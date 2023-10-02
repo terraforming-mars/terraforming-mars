@@ -17,3 +17,7 @@ export interface Policy {
   canAct?(player: IPlayer): boolean;
   apply?(game: IGame): void;
 }
+
+export function policyDescription(policy: Policy, player: IPlayer | undefined): string {
+  return typeof(policy.description) === 'string' ? policy.description : policy.description(player);
+}

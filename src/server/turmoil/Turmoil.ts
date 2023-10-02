@@ -22,6 +22,7 @@ import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectParty} from '../inputs/SelectParty';
+import {Policy, PolicyId, policyDescription} from './Policy';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = PlayerId | NeutralPlayer;
@@ -139,6 +140,16 @@ export class Turmoil {
       throw new Error(`Cannot find party with name {${name}}`);
     }
     return party;
+  }
+
+  rulingPolicy(): Policy {
+    const rulingParty = this.rulingParty;
+    const rulingPolicyId: PolicyId = PoliticalAgendas.currentAgenda(this).policyId;
+    const policy = rulingParty.policies.find((policy) => policy.id === rulingPolicyId);
+    if (policy === undefined) {
+      throw new Error(`Policy ${rulingPolicyId} not found in ${rulingParty.name}`);
+    }
+    return policy;
   }
 
   public sendDelegateToParty(
@@ -372,12 +383,10 @@ export class Turmoil {
     if (policy === undefined) {
       throw new Error(`Policy id ${policyId} not found in party ${rulingParty.name}`);
     }
-    const description = typeof(policy.description) === 'string' ? policy.description : policy.description(undefined);
+    const description = policyDescription(policy, undefined);
     game.log('The ruling policy is: ${0}', (b) => b.string(description));
     // Resolve Ruling Policy for Scientists P4
-    if (policy.apply !== undefined) {
-      policy.apply(game);
-    }
+    policy.apply?.(game);
   }
 
   public getPlayerInfluence(player: IPlayer) {

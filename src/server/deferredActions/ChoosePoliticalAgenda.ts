@@ -5,6 +5,7 @@ import {PlayerInput} from '../PlayerInput';
 import {DeferredAction, Priority} from './DeferredAction';
 import {IParty} from '../turmoil/parties/IParty';
 import {BonusId, PolicyId} from '../../common/turmoil/Types';
+import {policyDescription} from '../turmoil/Policy';
 
 export class ChoosePoliticalAgenda extends DeferredAction {
   constructor(
@@ -31,11 +32,12 @@ export class ChoosePoliticalAgenda extends DeferredAction {
     orBonuses.title = 'Select a ' + this.party.name + ' bonus.';
 
     const policies = this.party.policies.map((policy) => {
-      const description = typeof(policy.description) === 'string' ? policy.description : policy.description(this.player);
-      return new SelectOption(description, 'Select', () => {
-        this.policyCb(policy.id);
-        return undefined;
-      });
+      return new SelectOption(policyDescription(policy, this.player),
+        'Select',
+        () => {
+          this.policyCb(policy.id);
+          return undefined;
+        });
     });
     const orPolicies = new OrOptions(...policies);
     orPolicies.title = 'Select a ' + this.party.name + ' policy.';

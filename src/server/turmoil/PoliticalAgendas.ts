@@ -22,7 +22,7 @@ export class PoliticalAgendas {
 
   public static newInstance(
     agendaStyle: AgendaStyle,
-    parties: Array<IParty>): PoliticalAgendasData {
+    parties: ReadonlyArray<IParty>): PoliticalAgendasData {
     const agendas: Map<PartyName, Agenda> = new Map();
 
     parties.forEach((p) => {

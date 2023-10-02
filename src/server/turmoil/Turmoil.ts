@@ -26,19 +26,20 @@ import {SelectParty} from '../inputs/SelectParty';
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = PlayerId | NeutralPlayer;
 
-export interface IPartyFactory {
-    partyName: PartyName;
-    Factory: new () => IParty
-}
+export type PartyFactory = new() => IParty;
 
-export const ALL_PARTIES: Array<IPartyFactory> = [
-  {partyName: PartyName.MARS, Factory: MarsFirst},
-  {partyName: PartyName.SCIENTISTS, Factory: Scientists},
-  {partyName: PartyName.UNITY, Factory: Unity},
-  {partyName: PartyName.GREENS, Factory: Greens},
-  {partyName: PartyName.REDS, Factory: Reds},
-  {partyName: PartyName.KELVINISTS, Factory: Kelvinists},
-];
+export const ALL_PARTIES: Record<PartyName, PartyFactory> = {
+  [PartyName.MARS]: MarsFirst,
+  [PartyName.SCIENTISTS]: Scientists,
+  [PartyName.UNITY]: Unity,
+  [PartyName.GREENS]: Greens,
+  [PartyName.REDS]: Reds,
+  [PartyName.KELVINISTS]: Kelvinists,
+};
+
+function createParties(): ReadonlyArray<IParty> {
+  return [new MarsFirst(), new Scientists(), new Unity(), new Greens(), new Reds(), new Kelvinists()];
+}
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
   agendas: new Map(),
@@ -51,7 +52,7 @@ export class Turmoil {
   public dominantParty: IParty;
   public usedFreeDelegateAction = new Set<PlayerId>();
   public delegateReserve = new MultiSet<Delegate>();
-  public parties = ALL_PARTIES.map((cf) => new cf.Factory());
+  public parties = createParties();
   public playersInfluenceBonus = new Map<string, number>();
   public readonly globalEventDealer: GlobalEventDealer;
   public distantGlobalEvent: IGlobalEvent | undefined;
@@ -80,7 +81,7 @@ export class Turmoil {
     game.log('Greens are in power in the first generation.');
 
     // Init parties
-    turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
+    turmoil.parties = createParties();
 
     game.getPlayersInGenerationOrder().forEach((player) => {
       turmoil.delegateReserve.add(player.id, DELEGATES_PER_PLAYER);
@@ -140,7 +141,6 @@ export class Turmoil {
     return party;
   }
 
-  // Use to send a delegate to a specific party
   public sendDelegateToParty(
     playerId: Delegate,
     partyName: PartyName,
@@ -339,14 +339,13 @@ export class Turmoil {
     const setRulingParty = new OrOptions();
 
     setRulingParty.title = 'Select new ruling party';
-    setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
-      p.partyName, 'Select', () => {
-        this.rulingParty = this.getPartyByName(p.partyName);
+    setRulingParty.options = this.parties.map((p: IParty) => new SelectOption(
+      p.name, 'Select', () => {
+        this.rulingParty = p;
         PoliticalAgendas.setNextAgenda(this, player.game);
-
         return undefined;
       }),
-    )];
+    );
 
     player.game.defer(new SimpleDeferredAction(
       player,

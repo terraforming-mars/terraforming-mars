@@ -245,14 +245,11 @@ export class Turmoil {
     if (this.currentGlobalEvent !== undefined) {
       const currentGlobalEvent: IGlobalEvent = this.currentGlobalEvent;
       game.log('Resolving global event ${0}', (b) => b.globalEvent(currentGlobalEvent));
+      // TODO(kberg): if current global event adds an action, all of the rest of this should wait.
       currentGlobalEvent.resolve(game, this);
     }
 
     // 3 - New Government
-    // Behond the Emperor Hook prevents changing the ruling party.
-    if (game.beholdTheEmperor !== true) {
-      this.rulingParty = this.dominantParty;
-    }
 
     // 3.a - Ruling Policy change
     this.setRulingParty(game);
@@ -288,6 +285,11 @@ export class Turmoil {
   // Ruling Party changes
   public setRulingParty(game: IGame): void {
     this.rulingPolicy().onPolicyEnd?.(game);
+
+    // Behond the Emperor Hook prevents changing the ruling party.
+    if (game.beholdTheEmperor !== true) {
+      this.rulingParty = this.dominantParty;
+    }
 
     let newChairman = this.rulingParty.partyLeader || 'NEUTRAL';
     if (game.beholdTheEmperor === true && this.chairman !== undefined) {
@@ -357,10 +359,7 @@ export class Turmoil {
       }),
     );
 
-    player.game.defer(new SimpleDeferredAction(
-      player,
-      () => setRulingParty,
-    ));
+    player.defer(setRulingParty);
   }
 
   // Called either directly during generation change, or after asking chairperson player

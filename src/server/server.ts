@@ -18,6 +18,8 @@ import {timeAsync} from './utils/timer';
 import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {Executor} from './behavior/Executor';
 import {GameLoader} from './database/GameLoader';
+import {ALL_MODULE_MANIFESTS} from './cards/AllCards';
+import {initializeGlobalEventDealer} from './turmoil/globalEvents/GlobalEventDealer';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
@@ -78,6 +80,7 @@ async function start() {
     app: 'terraforming-mars-app',
   });
   prometheus.collectDefaultMetrics();
+  initializeGlobalEventDealer(ALL_MODULE_MANIFESTS);
   registerBehaviorExecutor(new Executor());
 
   const server = createServer();

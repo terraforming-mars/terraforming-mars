@@ -1,5 +1,6 @@
 import {ModuleManifest} from '../ModuleManifest';
 import {CardName} from '../../../common/cards/CardName';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 
 import {AdhaiHighOrbitConstructions} from './AdhaiHighOrbitConstructions';
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
@@ -107,6 +108,12 @@ import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
 import {VitalColony} from './VitalColony';
 import {Wetlands} from './Wetlands';
+import {BalancedDevelopment} from '../../turmoil/globalEvents/BalancedDevelopment';
+import {SpaceRaceToMars} from '../../turmoil/globalEvents/SpaceRaceToMars';
+import {TiredEarth} from '../../turmoil/globalEvents/TiredEarth';
+import {MagneticFieldStimulationDelays} from '../../turmoil/globalEvents/MagneticFieldStimulationDelays';
+import {CommunicationBoom} from '../../turmoil/globalEvents/CommunicationBoom';
+import {ConstantStruggle} from '../../turmoil/globalEvents/ConstantStruggle';
 
 export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
   module: 'pathfinders',
@@ -229,6 +236,15 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.DEEP_SPACE_OPERATIONS]: {Factory: DeepSpaceOperations},
     [CardName.EXPERIENCED_MARTIANS]: {Factory: ExperiencedMartians, compatibility: ['turmoil', 'pathfinders']},
     [CardName.THE_NEW_SPACE_RACE]: {Factory: TheNewSpaceRace, compatibility: 'turmoil'},
+  },
+
+  globalEvents: {
+    [GlobalEventName.BALANCED_DEVELOPMENT]: {Factory: BalancedDevelopment},
+    [GlobalEventName.SPACE_RACE_TO_MARS]: {Factory: SpaceRaceToMars},
+    [GlobalEventName.CONSTANT_STRUGGLE]: {Factory: ConstantStruggle, negative: true},
+    [GlobalEventName.TIRED_EARTH]: {Factory: TiredEarth, negative: true},
+    [GlobalEventName.MAGNETIC_FIELD_STIMULATION_DELAYS]: {Factory: MagneticFieldStimulationDelays, negative: true},
+    [GlobalEventName.COMMUNICATION_BOOM]: {Factory: CommunicationBoom, negative: true},
   },
 
   // Perhaps these community cards should just move to this manifest, but only if it becomes

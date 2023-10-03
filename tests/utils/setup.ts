@@ -5,6 +5,8 @@ import {IGameLoader} from '../../src/server/database/IGameLoader';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {registerBehaviorExecutor} from '../../src/server/behavior/BehaviorExecutor';
 import {Executor} from '../../src/server/behavior/Executor';
+import {initializeGlobalEventDealer} from '../../src/server/turmoil/globalEvents/GlobalEventDealer';
+import {ALL_MODULE_MANIFESTS} from '../../src/server/cards/AllCards';
 
 registerBehaviorExecutor(new Executor());
 
@@ -47,3 +49,4 @@ export function setTestGameLoader(gameLoader: IGameLoader) {
   gameLoaderUnderTest = gameLoader;
 }
 GameLoader.getInstance = () => gameLoaderUnderTest;
+initializeGlobalEventDealer(ALL_MODULE_MANIFESTS);

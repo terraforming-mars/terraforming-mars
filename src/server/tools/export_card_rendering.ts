@@ -2,11 +2,10 @@ require('dotenv').config();
 import * as fs from 'fs';
 
 import {ALL_MODULE_MANIFESTS} from '../cards/AllCards';
-import {CardManifest, ModuleManifest} from '../cards/ModuleManifest';
+import {CardManifest, GlobalEventManifest, ModuleManifest} from '../cards/ModuleManifest';
 import {ICard} from '../cards/ICard';
 import {GameModule} from '../../common/cards/GameModule';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
-import {ALL_EVENTS, getGlobalEventModule} from '../turmoil/globalEvents/GlobalEventDealer';
 import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
 import {ClientCard} from '../../common/cards/ClientCard';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
@@ -21,6 +20,7 @@ import {AwardName} from '../../common/ma/AwardName';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {CardType} from '../../common/cards/CardType';
 import {OneOrArray} from '../../common/utils/types';
+import {initializeGlobalEventDealer} from '../turmoil/globalEvents/GlobalEventDealer';
 
 class CardProcessor {
   public static json: Array<ClientCard> = [];
@@ -29,9 +29,12 @@ class CardProcessor {
   }
 
   private static processManifest(manifest: ModuleManifest) {
-    for (const cardManifest of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.ceoCards, manifest.standardActions, manifest.standardProjects]) {
-      CardProcessor.processDeck(manifest.module, cardManifest);
-    }
+    CardProcessor.processDeck(manifest.module, manifest.projectCards);
+    CardProcessor.processDeck(manifest.module, manifest.corporationCards);
+    CardProcessor.processDeck(manifest.module, manifest.preludeCards);
+    CardProcessor.processDeck(manifest.module, manifest.ceoCards);
+    CardProcessor.processDeck(manifest.module, manifest.standardActions);
+    CardProcessor.processDeck(manifest.module, manifest.standardProjects);
   }
 
   private static processDeck(module: GameModule, cardManifest: CardManifest<ICard>) {
@@ -83,15 +86,18 @@ class CardProcessor {
 class GlobalEventProcessor {
   public static json: Array<IClientGlobalEvent> = [];
   public static makeJson() {
-    ALL_EVENTS.forEach((Factory) => {
-      const globalEvent = new Factory();
-      GlobalEventProcessor.processGlobalEvent(globalEvent);
-    });
+    ALL_MODULE_MANIFESTS.forEach(this.processManifest);
   }
 
-  private static processGlobalEvent(globalEvent: IGlobalEvent) {
+  private static processManifest(manifest: ModuleManifest) {
+    for (const cf of GlobalEventManifest.values(manifest.globalEvents)) {
+      GlobalEventProcessor.processGlobalEvent(manifest.module, new cf.Factory());
+    }
+  }
+
+  private static processGlobalEvent(module: GameModule, globalEvent: IGlobalEvent) {
     const event: IClientGlobalEvent = {
-      module: getGlobalEventModule(globalEvent.name),
+      module: module,
       name: globalEvent.name,
       description: globalEvent.description,
       revealedDelegate: globalEvent.revealedDelegate,
@@ -161,6 +167,7 @@ if (!fs.existsSync('src/genfiles')) {
   fs.mkdirSync('src/genfiles');
 }
 
+initializeGlobalEventDealer(ALL_MODULE_MANIFESTS);
 CardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();

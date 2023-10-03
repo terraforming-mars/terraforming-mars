@@ -51,7 +51,7 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
 
             globalEvents.forEach((ge) => {
               if (ge.name !== event.name) {
-                turmoil.globalEventDealer.discardedGlobalEvents.push(ge);
+                turmoil.globalEventDealer.discard(ge);
               }
             });
 

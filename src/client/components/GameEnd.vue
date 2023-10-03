@@ -2,7 +2,7 @@
   <div id="game-end" class="game_end_cont">
       <h1  v-i18n>{{ constants.APP_NAME }} - Game finished!</h1>
       <div class="game_end">
-          <div v-if="isSoloGame()">
+          <div v-if="isSoloGame">
               <div v-if="game.isSoloModeWin">
                   <div class="game_end_success">
                       <h2 v-i18n>You win!</h2>
@@ -48,8 +48,8 @@
               </a>
             </div>
           </div>
-          <div v-if="!isSoloGame() || game.isSoloModeWin" class="game-end-winer-announcement">
-              <span v-for="p in getWinners()" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>
+          <div v-if="!isSoloGame || game.isSoloModeWin" class="game-end-winer-announcement">
+              <span v-for="p in winners" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>
           </div>
           <div class="game_end_victory_points">
               <h2><span v-i18n>Victory points breakdown after</span> {{game.generation}} <span v-i18n>generations</span></h2>
@@ -75,7 +75,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr v-for="p in getSortedPlayers()" :key="p.color" :class="getEndGamePlayerRowColorClass(p.color)">
+                      <tr v-for="p in playersInPlace" :key="p.color" :class="getEndGamePlayerRowColorClass(p.color)">
                           <td>
                             <a :href="'player?id='+p.id+'&noredirect'">{{ p.name }}</a>
                             <div class="column-corporation">
@@ -106,9 +106,14 @@
               </table>
               <br/>
               <h2 v-i18n>Victory points details</h2>
-              <victory-point-chart :players="players" :generation="game.generation" :animation="true"></victory-point-chart>
+              <victory-point-chart
+                :datasets="vpDataset"
+                :generation="game.generation"
+                :animation="true"
+                :id="'victory-point-chart'"
+                ></victory-point-chart>
               <div class="game-end-flexrow">
-                  <div v-for="p in getSortedPlayers()" :key="p.color" class="game-end-column">
+                  <div v-for="p in playersInPlace" :key="p.color" class="game-end-column">
                       <div class="game-end-winer-scorebreak-player-title">
                           <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'player?id='+p.id+'&noredirect'">{{p.name}}</a></div>
                       </div>
@@ -147,6 +152,13 @@
           </div>
           <div class="game-end-flexrow">
           <div class="game_end_block--board game-end-column">
+              <victory-point-chart
+                :datasets="globalsDataset"
+                :generation="game.generation"
+                :animation="true"
+                :id="'global-parameter-chart'"
+                :yAxisLabel="'% completed'"
+              ></victory-point-chart>
               <h2 v-i18n>Final situation on the board</h2>
               <board
                   :spaces="game.spaces"
@@ -185,13 +197,14 @@ import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import VictoryPointChart from '@/client/components/gameend/VictoryPointChart.vue';
+import VictoryPointChart, {DataSet} from '@/client/components/gameend/VictoryPointChart.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {Timer} from '@/common/Timer';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {Color} from '@/common/Color';
 import {CardType} from '@/common/cards/CardType';
-import {getCard} from '../cards/ClientCardManifest';
+import {getCard} from '@/client/cards/ClientCardManifest';
+import {GlobalParameter} from '@/common/GlobalParameter';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;
@@ -231,6 +244,65 @@ export default Vue.extend({
       }
       return `${paths.API_GAME_LOGS}?id=${id}&full=true`;
     },
+    playersInPlace(): Array<PublicPlayerModel> {
+      const copy = [...this.viewModel.players];
+      copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
+        if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
+        if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
+        if (a.megaCredits < b.megaCredits) return -1;
+        if (a.megaCredits > b.megaCredits) return 1;
+        return 0;
+      });
+      return copy.reverse();
+    },
+    winners() {
+      const sortedPlayers = this.playersInPlace;
+      const firstWinner = sortedPlayers[0];
+      const winners: PublicPlayerModel[] = [firstWinner];
+      for (let i = 1; i < sortedPlayers.length; i++) {
+        if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
+                    sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
+          winners.push(sortedPlayers[i]);
+        }
+      }
+      return winners;
+    },
+    isSoloGame(): boolean {
+      return this.players.length === 1;
+    },
+    vpDataset(): Array<DataSet> {
+      return this.players.map((player) => {
+        return {
+          label: player.name,
+          data: player.victoryPointsByGeneration,
+          color: player.color,
+        };
+      });
+    },
+    globalsDataset(): Array<DataSet> {
+      const dataset: Array<DataSet> = [];
+
+      const gpg = this.game.globalsPerGeneration;
+      function getValues(param: GlobalParameter, min: number, max: number): Array<number> {
+        return gpg.map((entry) => {
+          const val = entry[param] ?? min;
+          return 100 * (val - min) / (max - min);
+        });
+      }
+
+      dataset.push({label: 'Temperature', color: Color.RED, data: getValues(GlobalParameter.TEMPERATURE, -30, 8)});
+      dataset.push({label: 'Oxygen', color: Color.GREEN, data: getValues(GlobalParameter.OXYGEN, 0, 14)});
+      dataset.push({label: 'Oceans', color: Color.BLUE, data: getValues(GlobalParameter.OCEANS, 0, 9)});
+      if (this.game.gameOptions.venusNextExtension === true) {
+        dataset.push({label: 'Venus', color: Color.YELLOW, data: getValues(GlobalParameter.VENUS, 0, 30)});
+      }
+      if (this.game.gameOptions.moonExpansion === true) {
+        dataset.push({label: 'L. Habitat', color: Color.ORANGE, data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});
+        dataset.push({label: 'L. Mining', color: Color.PINK, data: getValues(GlobalParameter.MOON_MINING_RATE, 0, 8)});
+        dataset.push({label: 'L. Logistics', color: Color.PURPLE, data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
+      }
+      return dataset;
+    },
   },
   data() {
     return {
@@ -251,32 +323,6 @@ export default Vue.extend({
     },
     getTimer(p: PublicPlayerModel): string {
       return Timer.toString(p.timer);
-    },
-    getSortedPlayers(): Array<PublicPlayerModel> {
-      const copy = [...this.viewModel.players];
-      copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
-        if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
-        if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
-        if (a.megaCredits < b.megaCredits) return -1;
-        if (a.megaCredits > b.megaCredits) return 1;
-        return 0;
-      });
-      return copy.reverse();
-    },
-    getWinners() {
-      const sortedPlayers = this.getSortedPlayers();
-      const firstWinner = sortedPlayers[0];
-      const winners: PublicPlayerModel[] = [firstWinner];
-      for (let i = 1; i < sortedPlayers.length; i++) {
-        if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
-                    sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
-          winners.push(sortedPlayers[i]);
-        }
-      }
-      return winners;
-    },
-    isSoloGame(): boolean {
-      return this.players.length === 1;
     },
     getCorporationName(p: PublicPlayerModel): string[] {
       const cards = p.tableau;

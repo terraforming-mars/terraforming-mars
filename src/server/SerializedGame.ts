@@ -15,6 +15,7 @@ import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
 import {SerializedDeck} from './cards/SerializedDeck';
 import {AwardName} from '../common/ma/AwardName';
+import {GlobalParameter} from '../common/GlobalParameter';
 
 export type SerializedGame = {
     activePlayer: PlayerId;
@@ -40,6 +41,7 @@ export type SerializedGame = {
     gameLog: Array<LogMessage>;
     gameOptions: GameOptions;
     generation: number;
+    globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>>;
     id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;

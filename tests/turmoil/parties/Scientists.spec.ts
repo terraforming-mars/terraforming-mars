@@ -90,22 +90,23 @@ describe('Scientists', function() {
     expect(player.simpleCanPlay(card)).to.be.false;
 
     const scientistsPolicy = SCIENTISTS_POLICY_4;
-    scientistsPolicy.apply(game);
+    scientistsPolicy.onPolicyStart(game);
     player.playedCards.push(new Research());
     expect(player.simpleCanPlay(card)).to.be.true;
   });
 
   it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less Science tag', function() {
-    setRulingParty(game, PartyName.SCIENTISTS, SCIENTISTS_POLICY_4.id);
-
     // Meet all card requirements except the Science tag
     player.playedCards.push(new SpaceStation(), new Satellites());
     player.titanium = 2;
     const card = new PrideoftheEarthArkship();
     expect(player.simpleCanPlay(card)).to.be.false;
 
+    setRulingParty(game, PartyName.SCIENTISTS, SCIENTISTS_POLICY_4.id);
     const scientistsPolicy = SCIENTISTS_POLICY_4;
-    scientistsPolicy.apply(game);
+    scientistsPolicy.onPolicyStart(game);
     expect(player.simpleCanPlay(card)).to.be.true;
+    scientistsPolicy.onPolicyEnd(game);
+    expect(player.simpleCanPlay(card)).to.be.false;
   });
 });

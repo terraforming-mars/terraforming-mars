@@ -36,6 +36,7 @@ export class SelectParty extends BasePlayerInput {
       throw new Error('Not a valid SelectPartyResponse');
     }
     if (input.partyName === undefined) {
+      // TODO(kberg): prevent click unless party is selected.
       throw new Error('No party selected');
     }
     if (!this.parties.includes(input.partyName)) {

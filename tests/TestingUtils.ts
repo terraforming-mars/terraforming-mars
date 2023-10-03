@@ -83,8 +83,12 @@ export function setRulingParty(game: IGame, partyName: PartyName, policyId?: Pol
   const party = turmoil.getPartyByName(partyName);
   const resolvedPolicyId = policyId ?? party.policies[0].id;
 
+  turmoil.rulingPolicy().onPolicyEnd?.(game);
+
   turmoil.rulingParty = party;
   turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: resolvedPolicyId});
+  turmoil.rulingPolicy().onPolicyStart?.(game);
+
   game.phase = Phase.ACTION;
 }
 

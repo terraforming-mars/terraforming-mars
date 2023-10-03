@@ -57,6 +57,17 @@ class UnityBonus02 implements Bonus {
 class UnityPolicy01 implements Policy {
   id = 'up01' as const;
   description = 'Your titanium resources are worth 1 M€ extra';
+
+  onPolicyStart(game: IGame): void {
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      player.increaseTitaniumValue();
+    });
+  }
+  onPolicyEnd(game: IGame): void {
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      player.decreaseTitaniumValue();
+    });
+  }
 }
 
 class UnityPolicy02 implements Policy {

@@ -15,7 +15,8 @@ export interface Policy {
   onCardPlayed?(player: IPlayer, card: IProjectCard): void;
   action?(player: IPlayer): PlayerInput | undefined;
   canAct?(player: IPlayer): boolean;
-  apply?(game: IGame): void;
+  onPolicyStart?(game: IGame): void;
+  onPolicyEnd?(game: IGame): void;
 }
 
 export function policyDescription(policy: Policy, player: IPlayer | undefined): string {

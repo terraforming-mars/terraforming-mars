@@ -757,6 +757,9 @@ export class Game implements IGame, Logger {
   }
 
   private updateGlobalsForTheGeneration(): void {
+    if (!Array.isArray(this.globalsPerGeneration)) {
+      this.globalsPerGeneration = [];
+    }
     this.globalsPerGeneration.push({});
     const entry = this.globalsPerGeneration[this.globalsPerGeneration.length - 1];
     entry[GlobalParameter.TEMPERATURE] = this.temperature;
@@ -1639,7 +1642,7 @@ export class Game implements IGame, Logger {
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
     // TODO(kberg): remove ?? {} after 2023-11-30
-    game.globalsPerGeneration = d.globalsPerGeneration ?? {};
+    game.globalsPerGeneration = d.globalsPerGeneration ?? [];
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {

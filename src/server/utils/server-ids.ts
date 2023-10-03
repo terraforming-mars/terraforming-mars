@@ -5,3 +5,4 @@ export function generateRandomId(prefix: string): string {
 
 export const serverId = process.env.SERVER_ID || generateRandomId('');
 export const statsId = process.env.STATS_ID || generateRandomId('');
+export const runId = generateRandomId('r');

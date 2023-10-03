@@ -14,6 +14,7 @@ export interface ViewModel {
   players: Array<PublicPlayerModel>;
   id?: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
+  runId: string;
 }
 
 // 'off': Resources (or production) are unprotected.

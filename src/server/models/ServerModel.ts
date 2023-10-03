@@ -30,6 +30,7 @@ import {CardName} from '../../common/cards/CardName';
 import {AwardScorer} from '../awards/AwardScorer';
 import {SpaceId} from '../../common/Types';
 import {cardsToModel, coloniesToModel} from './ModelUtils';
+import {runId} from '../utils/server-ids';
 
 export class Server {
   public static getSimpleGameModel(game: IGame): SimpleGameModel {
@@ -101,6 +102,7 @@ export class Server {
       draftedCards: cardsToModel(player, player.draftedCards, {showCalculatedCost: true}),
       game: this.getGameModel(player.game),
       id: player.id,
+      runId: runId,
       pickedCorporationCard: player.pickedCorporationCard ? cardsToModel(player, [player.pickedCorporationCard]) : [],
       preludeCardsInHand: cardsToModel(player, player.preludeCardsInHand),
       thisPlayer: thisPlayer,
@@ -116,6 +118,7 @@ export class Server {
       game: this.getGameModel(game),
       players: game.getPlayersInGenerationOrder().map(this.getPlayer),
       thisPlayer: undefined,
+      runId: runId,
     };
   }
 

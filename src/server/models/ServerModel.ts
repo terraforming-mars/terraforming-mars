@@ -62,6 +62,7 @@ export class Server {
       gameAge: game.gameAge,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       generation: game.getGeneration(),
+      globalsPerGeneration: game.gameIsOver() ? game.globalsPerGeneration : [],
       isSoloModeWin: game.isSoloModeWin(),
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: this.getMilestones(game),

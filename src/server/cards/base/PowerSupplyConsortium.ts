@@ -37,9 +37,9 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
     const decreaseAnyProduction = new DecreaseAnyProduction(player, Resource.ENERGY, {count: 1, stealing: true});
     // If no player has energy production, then This Player must gain their energy production in order to lose it.
     if (player.game.getPlayers().filter((player) => player.production.energy > 0).length === 0) {
-      player.game.defer(gainProduction.andThen(() => player.game.defer(decreaseAnyProduction)));
+      player.game.defer(gainProduction).andThen(() => player.game.defer(decreaseAnyProduction));
     } else {
-      player.game.defer(decreaseAnyProduction.andThen(() => player.game.defer(gainProduction)));
+      player.game.defer(decreaseAnyProduction).andThen(() => player.game.defer(gainProduction));
     }
     return undefined;
   }

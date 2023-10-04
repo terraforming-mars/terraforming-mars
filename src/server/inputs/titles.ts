@@ -1,5 +1,5 @@
-import {CardName} from '@/common/cards/CardName';
-import {PartyName} from '@/common/turmoil/PartyName';
+import {CardName} from '../../common/cards/CardName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {newMessage} from '../logs/MessageBuilder';
 
 export const TITLES = {

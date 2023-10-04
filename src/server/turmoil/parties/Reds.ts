@@ -14,6 +14,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {GlobalParameter} from '../../../common/GlobalParameter';
+import {TITLES} from '../../inputs/titles';
 
 export class Reds extends Party implements IParty {
   readonly name = PartyName.REDS;
@@ -166,7 +167,7 @@ class RedsPolicy03 implements Policy {
     game.log('${0} used Turmoil Reds action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(player, 4, {title: 'Select how to pay for Turmoil Reds action'}))
+    game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.REDS)}))
       .andThen(() => {
         const orOptions = new OrOptions();
 

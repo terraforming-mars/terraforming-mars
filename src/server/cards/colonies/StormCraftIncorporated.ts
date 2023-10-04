@@ -11,7 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resource} from '../../../common/Resource';
 import {ActionCard} from '../ActionCard';
-import {newMessage} from '@/server/logs/MessageBuilder';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class StormCraftIncorporated extends ActionCard implements ICorporationCard {
   constructor() {

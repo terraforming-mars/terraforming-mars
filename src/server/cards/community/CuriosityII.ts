@@ -15,6 +15,7 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
+import {TITLES} from '../../inputs/titles';
 
 export class CuriosityII extends Card implements ICorporationCard {
   constructor() {
@@ -65,8 +66,8 @@ export class CuriosityII extends Card implements ICorporationCard {
 
     return new OrOptions(
       new SelectOption('Pay 2 M€ to draw a card', 'Confirm', () => {
-        player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}));
-        player.game.defer(DrawCards.keepAll(player));
+        player.game.defer(new SelectPaymentDeferred(player, 2, {title: TITLES.payForCardAction(this.name)}))
+          .andThen(() => player.game.defer(DrawCards.keepAll(player)));
         return undefined;
       }),
       new SelectOption('Do nothing', 'Confirm', () => {

@@ -28,7 +28,11 @@ export class DiscardCards extends DeferredAction<Array<IProjectCard>> {
     let title: string | Message | undefined = this.title;
     if (title === undefined) {
       if (this.min === this.max) {
-        title = 'Select ' + this.min + ' card' + (this.min > 1 ? 's' : '') + ' to discard';
+        if (this.min === 1) {
+          title = 'Select 1 card to discard';
+        } else {
+          title = newMessage('Select ${0} cards to discard', (b) => b.number(this.min));
+        }
       } else {
         title = newMessage('Select between ${0} and ${1} cards to discard', (b) => b.number(this.min).number(this.max));
       }

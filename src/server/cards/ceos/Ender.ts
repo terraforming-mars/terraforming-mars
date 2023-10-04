@@ -3,8 +3,8 @@ import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {DrawCards} from '../../deferredActions/DrawCards';
-import {SelectCard} from '../../inputs/SelectCard';
 import {Priority} from '../../deferredActions/DeferredAction';
+import {DiscardCards} from '../../deferredActions/DiscardCards';
 
 export class Ender extends CeoCard {
   constructor() {
@@ -30,14 +30,13 @@ export class Ender extends CeoCard {
   public action(player: IPlayer): undefined {
     this.isDisabled = true;
     const max = Math.min(player.cardsInHand.length, player.game.generation * 2);
-    player.defer(
-      new SelectCard('Select cards to discard', 'Discard cards', player.playedCards, (cards) => {
+    player.game.defer(
+      new DiscardCards(player, 0, max).andThen((cards) => {
         for (const card of cards) {
           player.discardCardFromHand(card);
         }
         player.game.defer(DrawCards.keepAll(player, cards.length));
-        return undefined;
-      }, {min: 0, max: max}),
+      }),
       Priority.DISCARD_AND_DRAW,
     );
     return undefined;

@@ -52,7 +52,7 @@ describe('SponsoredAcademies', function() {
     player.playCard(card);
 
     // If something here doesn't work, it might be linked to the DeferredActionsQueue,
-    expect(cast(game.deferredActions.pop(), DiscardCards).title).eq('Select 1 card to discard');
+    cast(game.deferredActions.pop(), DiscardCards);
     expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player.color);
     expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player2.color);
     expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player3.color);

@@ -53,14 +53,16 @@ export class SagittaFrontierServices extends Card implements ICorporationCard {
     if (player.isCorporation(this.name)) {
       const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
       if (count === 0) {
-        player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 4}).andThen(() => {
-          player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
-        }));
+        player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 4}))
+          .andThen(() => {
+            player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
+          });
       }
       if (count === 1) {
-        player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 1}).andThen(() => {
-          player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
-        }));
+        player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 1}))
+          .andThen(() => {
+            player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
+          });
       }
     }
   }

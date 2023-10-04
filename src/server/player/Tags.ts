@@ -261,8 +261,8 @@ export class Tags {
     return false;
   }
 
-  public gainScienceTag() {
-    this.player.scienceTagCount++;
+  public gainScienceTag(count: number) {
+    this.player.scienceTagCount += count;
   }
 
   /**

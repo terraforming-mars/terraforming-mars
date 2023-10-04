@@ -39,13 +39,12 @@ export class CosmicRadiation extends Card implements IProjectCard {
         const bill = owned * 4;
         const owes = Math.min(bill, mineTileOwner.spendableMegacredits());
 
-        game.defer(new SelectPaymentDeferred(mineTileOwner, owes, {
-          title: 'You must pay ' + owes + 'M€ for ' + owned + ' mining tiles',
-          afterPay: () => {
+        // TODO(kberg): Use Message.
+        game.defer(new SelectPaymentDeferred(mineTileOwner, owes, {title: 'You must pay ' + owes + 'M€ for ' + owned + ' mining tiles'}))
+          .andThen(() =>
             game.log(
               '${0} spends ${1} M€ for the ${2} mining tiles they own.',
-              (b) => b.player(mineTileOwner).number(owes).number(owned));
-          }}));
+              (b) => b.player(mineTileOwner).number(owes).number(owned)));
       }
     });
     return undefined;

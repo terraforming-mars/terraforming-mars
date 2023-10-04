@@ -64,9 +64,8 @@ export class ForcedPrecipitation extends Card implements IActionCard {
   }
 
   private addResource(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action', afterPay: () => {
-      player.addResourceTo(this, {log: true});
-    }}));
+    player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}))
+      .andThen(() => player.addResourceTo(this, {log: true}));
     return undefined;
   }
 

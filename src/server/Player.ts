@@ -324,14 +324,10 @@ export class Player implements IPlayer {
         // Cannot pay Reds, will not increase TR
         return;
       }
-      const deferred = new SelectPaymentDeferred(
-        this,
-        REDS_RULING_POLICY_COST * steps,
-        {
-          title: 'Select how to pay for TR increase',
-          afterPay: raiseRating,
-        });
-      this.game.defer(deferred, Priority.COST);
+      this.game.defer(
+        new SelectPaymentDeferred(this, REDS_RULING_POLICY_COST * steps, {title: 'Select how to pay for TR increase'}),
+        Priority.COST)
+        .andThen(raiseRating);
     } else {
       raiseRating();
     }
@@ -873,10 +869,6 @@ export class Player implements IPlayer {
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
       kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
     };
-  }
-
-  public payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void) {
-    this.game.defer(new SelectPaymentDeferred(this, cost, {title, afterPay}));
   }
 
   public checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction: CardAction = 'add') {

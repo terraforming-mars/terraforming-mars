@@ -83,47 +83,41 @@ class UnityPolicy02 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(
-      player,
-      4,
-      {
-        title: 'Select how to pay for Turmoil Unity action',
-        afterPay: () => {
-          const availableFloaterCards = player.getResourceCards(CardResource.FLOATER);
-          const orOptions = new OrOptions();
+    game.defer(new SelectPaymentDeferred(player, 4, {title: 'Select how to pay for Turmoil Unity action'}))
+      .andThen(() => {
+        const availableFloaterCards = player.getResourceCards(CardResource.FLOATER);
+        const orOptions = new OrOptions();
 
-          if (availableFloaterCards.length === 1) {
-            orOptions.options.push(
-              new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
-                player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
+        if (availableFloaterCards.length === 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
+              player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
 
+              return undefined;
+            }),
+          );
+        } else if (availableFloaterCards.length > 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
+              return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, ([card]) => {
+                player.addResourceTo(card, {qty: 2, log: true});
                 return undefined;
-              }),
-            );
-          } else if (availableFloaterCards.length > 1) {
-            orOptions.options.push(
-              new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
-                return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, ([card]) => {
-                  player.addResourceTo(card, {qty: 2, log: true});
-                  return undefined;
-                });
-              }),
-            );
-          }
+              });
+            }),
+          );
+        }
 
-          orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
-            player.stock.add(Resource.TITANIUM, 2);
-            game.log('${0} gained 2 titanium', (b) => b.player(player));
-            return undefined;
-          }));
-
-          if (orOptions.options.length === 1) return orOptions.options[0].cb();
-
-          game.defer(new SimpleDeferredAction(player, () => orOptions));
+        orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
+          player.stock.add(Resource.TITANIUM, 2);
+          game.log('${0} gained 2 titanium', (b) => b.player(player));
           return undefined;
-        },
-      },
-    ));
+        }));
+
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+
+        game.defer(new SimpleDeferredAction(player, () => orOptions));
+        return undefined;
+      });
 
     return undefined;
   }
@@ -142,16 +136,8 @@ class UnityPolicy03 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(
-      player,
-      4,
-      {
-        title: 'Select how to pay for Turmoil Unity action',
-        afterPay: () => {
-          player.drawCard(1, {tag: Tag.SPACE});
-        },
-      },
-    ));
+    game.defer(new SelectPaymentDeferred(player, 4, {title: 'Select how to pay for Turmoil Unity action'}))
+      .andThen(() => player.drawCard(1, {tag: Tag.SPACE}));
 
     return undefined;
   }

@@ -219,12 +219,12 @@ export class Executor implements BehaviorExecutor {
       if (spend.megacredits) {
         player.game.defer(new SelectPaymentDeferred(player, spend.megacredits, {
           title: 'Select how to pay for action',
-          afterPay: () => {
+        }))
+          .andThen(() => {
             const copy = {...behavior};
             delete copy['spend'];
             this.execute(copy, player, card);
-          },
-        }));
+          });
         // Exit early as the rest of handled by the deferred action.
         return;
       }

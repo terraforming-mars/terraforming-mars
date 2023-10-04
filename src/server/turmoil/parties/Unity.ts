@@ -15,6 +15,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
 import {sum} from '../../../common/utils/utils';
+import {TITLES} from '../../inputs/titles';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -83,7 +84,7 @@ class UnityPolicy02 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(player, 4, {title: 'Select how to pay for Turmoil Unity action'}))
+    game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.UNITY)}))
       .andThen(() => {
         const availableFloaterCards = player.getResourceCards(CardResource.FLOATER);
         const orOptions = new OrOptions();
@@ -136,7 +137,7 @@ class UnityPolicy03 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(player, 4, {title: 'Select how to pay for Turmoil Unity action'}))
+    game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.UNITY)}))
       .andThen(() => player.drawCard(1, {tag: Tag.SPACE}));
 
     return undefined;

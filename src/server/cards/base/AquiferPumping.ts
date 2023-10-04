@@ -8,6 +8,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
+import {TITLES} from '../../inputs/titles';
 
 export const OCEAN_COST = 8;
 export class AquiferPumping extends Card implements IActionCard, IProjectCard {
@@ -31,7 +32,7 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
     return player.canAfford({cost: OCEAN_COST, steel: true, tr: {oceans: 1}});
   }
   public action(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 8, {canUseSteel: true, title: 'Select how to pay for action'}))
+    player.game.defer(new SelectPaymentDeferred(player, 8, {canUseSteel: true, title: TITLES.payForCardAction(this.name)}))
       .andThen(() => player.game.defer(new PlaceOceanTile(player)));
     return undefined;
   }

@@ -18,6 +18,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {Board} from '../../boards/Board';
+import {TITLES} from '../../inputs/titles';
 
 export class Greens extends Party implements IParty {
   readonly name = PartyName.GREENS;
@@ -105,7 +106,7 @@ class GreensPolicy04 implements Policy {
     game.log('${0} used Turmoil Greens action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(player, 5, {title: 'Select how to pay for Turmoil Greens action'}))
+    game.defer(new SelectPaymentDeferred(player, 5, {title: TITLES.payForPartyAction(PartyName.GREENS)}))
       .andThen(() => {
         const availableMicrobeCards = player.getResourceCards(CardResource.MICROBE);
         const orOptions = new OrOptions();

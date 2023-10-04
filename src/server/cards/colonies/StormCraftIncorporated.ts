@@ -11,6 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resource} from '../../../common/Resource';
 import {ActionCard} from '../ActionCard';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class StormCraftIncorporated extends ActionCard implements ICorporationCard {
   constructor() {
@@ -75,7 +76,7 @@ export class StormCraftIncorporated extends ActionCard implements ICorporationCa
         return undefined;
       }, 0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2))),
     );
-    options.title = `Select how to spend ${targetAmount} heat`;
+    options.title = newMessage('Select how to spend ${0} heat', (b) => b.number(targetAmount));
     return options;
   }
 }

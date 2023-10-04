@@ -27,6 +27,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {Payment} from '../../common/inputs/Payment';
 import {SelectResources} from '../inputs/SelectResources';
+import {TITLES} from '../inputs/titles';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -218,7 +219,7 @@ export class Executor implements BehaviorExecutor {
       const spend = behavior.spend;
       if (spend.megacredits) {
         player.game.defer(new SelectPaymentDeferred(player, spend.megacredits, {
-          title: 'Select how to pay for action',
+          title: TITLES.payForCardAction(card.name),
         }))
           .andThen(() => {
             const copy = {...behavior};

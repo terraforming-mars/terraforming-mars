@@ -11,6 +11,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {TITLES} from '../../inputs/titles';
 
 export class ForcedPrecipitation extends Card implements IActionCard {
   constructor() {
@@ -64,7 +65,7 @@ export class ForcedPrecipitation extends Card implements IActionCard {
   }
 
   private addResource(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}))
+    player.game.defer(new SelectPaymentDeferred(player, 2, {title: TITLES.payForCardAction(this.name)}))
       .andThen(() => player.addResourceTo(this, {log: true}));
     return undefined;
   }

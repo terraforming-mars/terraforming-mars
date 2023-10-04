@@ -7,6 +7,7 @@ import {ICeoCard} from './ICeoCard';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {TITLES} from '../../inputs/titles';
 
 export class Lowell extends CeoCard {
   constructor() {
@@ -51,7 +52,7 @@ export class Lowell extends CeoCard {
       return true;
     });
 
-    player.game.defer(new SelectPaymentDeferred(player, 8, {title: 'Select how to pay for action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 8, {title: TITLES.payForCardAction(this.name)}));
 
     return new SelectCard('Choose CEO card to play', 'Play', ceosDrawn, (([chosenCeo]) => {
       // Discard unchosen CEOs

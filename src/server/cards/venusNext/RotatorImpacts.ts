@@ -11,6 +11,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {max} from '../Options';
+import {TITLES} from '../../inputs/titles';
 
 export class RotatorImpacts extends Card implements IActionCard {
   constructor() {
@@ -66,7 +67,7 @@ export class RotatorImpacts extends Card implements IActionCard {
   }
 
   private addResource(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: TITLES.payForCardAction(this.name)}));
     player.addResourceTo(this, {log: true});
     return undefined;
   }

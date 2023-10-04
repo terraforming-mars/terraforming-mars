@@ -5,6 +5,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {LogHelper} from '../LogHelper';
 import {oneWayDifference} from '../../common/utils/utils';
+import {newMessage} from '../logs/MessageBuilder';
 
 export enum LogType {
   DREW = 'drew',
@@ -61,8 +62,10 @@ export class ChooseCards extends DeferredAction {
       if (options.paying && selected.length > 0) {
         const cost = selected.length * player.cardCost;
         player.game.defer(
-          // TODO(kberg): Use Message.
-          new SelectPaymentDeferred(player, cost, {title: `Select how to spend ${cost} M€ for ${selected.length} cards`})
+          new SelectPaymentDeferred(
+            player,
+            cost,
+            {title: newMessage('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
             .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
       } else if (options.logDrawnCard === true) {
         keep(player, selected, unselected, LogType.DREW_VERBOSE);

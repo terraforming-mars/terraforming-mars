@@ -13,6 +13,7 @@ import {MAX_TEMPERATURE} from '../../../common/constants';
 import {LogHelper} from '../../LogHelper';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
+import {TITLES} from '../../inputs/titles';
 
 export class DirectedImpactors extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -74,7 +75,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
   }
 
   private addResource(player: IPlayer, asteroidCards: ICard[]) {
-    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: TITLES.payForCardAction(this.name)}));
 
     if (asteroidCards.length === 1) {
       player.addResourceTo(this, {log: true});

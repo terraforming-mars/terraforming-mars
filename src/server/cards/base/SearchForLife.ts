@@ -10,6 +10,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {max, played} from '../Options';
+import {TITLES} from '../../inputs/titles';
 
 export class SearchForLife extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -47,7 +48,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
     return player.canAfford(1);
   }
   public action(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 1, {title: 'Select how to pay for action'}))
+    player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))
       .andThen(() => {
         const topCard = player.game.projectDeck.draw(player.game);
 

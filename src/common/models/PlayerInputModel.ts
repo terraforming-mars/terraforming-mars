@@ -5,7 +5,6 @@ import {PayProductionModel} from './PayProductionUnitsModel';
 import {AresData} from '../ares/AresData';
 import {Message} from '../logs/Message';
 import {PartyName} from '../turmoil/PartyName';
-import {TurmoilModel} from './TurmoilModel';
 import {SpaceId} from '../Types';
 import {PaymentOptions} from '../inputs/Payment';
 
@@ -95,10 +94,7 @@ export type SelectDelegateModel = BaseInputModel & {
 
 export type SelectPartyModel = BaseInputModel & {
   type: 'party';
-  // TODO(kberg): Rename to 'parties'
   parties: Array<PartyName>;
-  // Is this necessary?
-  turmoil: TurmoilModel;
 }
 
 export type SelectProductionToLoseModel = BaseInputModel & {

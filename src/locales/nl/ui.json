@@ -617,7 +617,7 @@
     "Raise temperature 1 step. Gain 3 plants.": "Verhoog de temperatuur met 1. Ontvang 3 planten.",
     "Raise oxygen level 1 step. Add 2 floaters to ANY card.": "Verhoog het zuurstofgehalte met 1. Voeg 2 floaters toe aan een willekeurige kaart.",
     "Select a card to keep": "Kies een kaart en bewaar deze",
-    "Select a new tag for this clone tag": "Selecteer een nieuw symbool voor dit kloonsymbool",
+    "Assign the clone tag for ${0}": "Selecteer een nieuw symbool voor dit kloonsymbool ($0)",
     "Choose global parameter to raise": "Kies welke globale parameter moet worden verhoogd",
     "Raise temperature 2 steps": "Verhoog de temperatuur met 4°C",
     "Raise Venus 2 steps": "Verhoog de Venus-score met 4%",
@@ -627,7 +627,7 @@
     "Add": "Toevoegen",
 
     "Choose your resource bonus": "Kies uw grondstofbonus",
-    "Choose your wild resource bonus, after which you will gain 1 more distinct standard resources.": "Kies je wilde grondstofbonus, waarna je nog 1 afzonderlijke standaard grondstof krijgt.",
+    "Choose your wild resource bonus, after which you will gain ${0} more distinct standard resources.": "Kies je wilde grondstofbonus, waarna je nog ${0} afzonderlijke standaard grondstof krijgt.",
     "Gain 1 standard resource.": "Ontvang 1 standaard grondstof.",
     "Gain 1 resources for your Venus track bonus.": "Ontvang 1 grondstof voor je Venus-spoorbonus.",
     "Gain 1 resource for your Planetary track bonus.": "Ontvang 1 grondstof voor je Planetaire spoorbonus.",

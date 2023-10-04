@@ -141,8 +141,8 @@ export abstract class Colony implements IColony {
     }
 
     // Ask the player if they want to increase the track
-    player.game.defer(new IncreaseColonyTrack(player, this, steps).andThen(
-      () => this.handleTrade(player, tradeOptions)));
+    player.game.defer(new IncreaseColonyTrack(player, this, steps))
+      .andThen(() => this.handleTrade(player, tradeOptions));
   }
 
   private handleTrade(player: IPlayer, options: TradeOptions) {

@@ -39,13 +39,13 @@ export class RevoltingColonists extends Card implements IProjectCard {
         const bill = owned * 3;
         const owes = Math.min(bill, habitatTileOwner.spendableMegacredits());
 
+        // TODO(kberg): Use Message.
         game.defer(new SelectPaymentDeferred(habitatTileOwner, owes, {
-          title: 'You must pay ' + owes + 'M€ for ' + owned + ' habitat tiles',
-          afterPay: () => {
+          title: 'You must pay ' + owes + 'M€ for ' + owned + ' habitat tiles'}))
+          .andThen(() =>
             game.log(
               '${0} spends ${1} M€ for the ${2} habitat tiles they own.',
-              (b) => b.player(habitatTileOwner).number(owes).number(owned));
-          }}));
+              (b) => b.player(habitatTileOwner).number(owes).number(owned)));
       }
     });
     return undefined;

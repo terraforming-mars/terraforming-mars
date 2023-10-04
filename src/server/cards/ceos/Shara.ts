@@ -42,12 +42,12 @@ export class Shara extends CeoCard {
     if (data === undefined) {
       return undefined;
     }
-    player.game.defer(
-      new DeclareCloneTag(player, this).andThen((tag) => {
+    player.game.defer(new DeclareCloneTag(player, this))
+      .andThen((tag) => {
         // const value = data[tag] - player.game.generation;
         const value = data[tag];
         player.stock.add(Resource.MEGACREDITS, value, {log: true});
-      }));
+      });
     return undefined;
   }
 }

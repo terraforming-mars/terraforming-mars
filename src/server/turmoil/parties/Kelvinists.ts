@@ -64,18 +64,12 @@ class KelvinistsPolicy01 implements Policy {
   action(player: IPlayer) {
     const game = player.game;
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
-    game.defer(new SelectPaymentDeferred(
-      player,
-      this.cost(player),
-      {
-        title: 'Select how to pay for Turmoil Kelvinists action',
-        afterPay: () => {
-          player.production.add(Resource.ENERGY, 1);
-          player.production.add(Resource.HEAT, 1);
-          game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
-        },
-      },
-    ));
+    game.defer(new SelectPaymentDeferred(player, this.cost(player), {title: 'Select how to pay for Turmoil Kelvinists action'}))
+      .andThen(() => {
+        player.production.add(Resource.ENERGY, 1);
+        player.production.add(Resource.HEAT, 1);
+        game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
+      });
 
     return undefined;
   }

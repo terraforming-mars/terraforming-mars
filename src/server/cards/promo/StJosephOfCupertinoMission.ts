@@ -48,28 +48,29 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
       return undefined;
     }
 
-    player.game.defer(new SelectPaymentDeferred(player, 5, {canUseSteel: true, title: 'Select how to pay for St. Joseph of Cupertino Mission action', afterPay: () => {
-      player.defer(new SelectSpace('Select new cathedral space', cities, (space) => {
-        player.game.stJosephCathedrals.push(space.id);
-        const spaceOwner = space.player;
-        if (spaceOwner === undefined || spaceOwner.color === 'neutral') {
-          return undefined;
-        }
-        if (spaceOwner.canAfford(2)) {
-          spaceOwner.defer(
-            new OrOptions(
-              new SelectOption('Do not buy a card', undefined, () => undefined),
-              new SelectPayment('Pay 2 M€ to draw a card', 2, {}, (payment) => {
+    player.game.defer(new SelectPaymentDeferred(player, 5, {canUseSteel: true, title: 'Select how to pay for St. Joseph of Cupertino Mission action'}))
+      .andThen(() => {
+        player.defer(new SelectSpace('Select new cathedral space', cities, (space) => {
+          player.game.stJosephCathedrals.push(space.id);
+          const spaceOwner = space.player;
+          if (spaceOwner === undefined || spaceOwner.color === 'neutral') {
+            return undefined;
+          }
+          if (spaceOwner.canAfford(2)) {
+            spaceOwner.defer(
+              new OrOptions(
+                new SelectOption('Do not buy a card', undefined, () => undefined),
+                new SelectPayment('Pay 2 M€ to draw a card', 2, {}, (payment) => {
                 // TODO(kberg): pay should have an afterPay for the heat / floaters costs.
-                spaceOwner.pay(payment);
-                spaceOwner.drawCard();
-                return undefined;
-              }),
-            ));
-        }
-        return undefined;
-      }));
-    }}));
+                  spaceOwner.pay(payment);
+                  spaceOwner.drawCard();
+                  return undefined;
+                }),
+              ));
+          }
+          return undefined;
+        }));
+      });
     return undefined;
   }
 

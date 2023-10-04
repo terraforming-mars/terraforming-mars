@@ -27,7 +27,6 @@ export class SelectParty extends BasePlayerInput {
       buttonLabel: this.buttonLabel,
       type: 'party',
       parties: this.parties,
-      turmoil: turmoil,
     };
   }
 

@@ -100,7 +100,6 @@ export default (Vue as WithRefs<Refs>).extend({
       if (this.selectedTile === undefined) {
         throw new Error('unexpected, no tile selected!');
       }
-      // TODO(kberg): Do something about this typing.
       const spaceId = this.selectedTile.getAttribute('data_space_id') as SpaceId;
       if (spaceId === null) {
         throw new Error('unexpected, space has no id');

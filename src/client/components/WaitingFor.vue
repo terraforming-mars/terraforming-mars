@@ -29,6 +29,7 @@ import {paths} from '@/common/app/paths';
 import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
+import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -89,13 +90,19 @@ export default Vue.extend({
             (window).location = (window).location; // eslint-disable-line no-self-assign
           }
         } else if (xhr.status === HTTPResponseCode.BAD_REQUEST && xhr.responseType === 'json') {
-          showAlert(xhr.response.message);
+          if (xhr.response.id === INVALID_RUN_ID) {
+            showAlert(xhr.response.message, () => {
+              setTimeout(() => window.location.reload(), 100);
+            });
+          } else {
+            showAlert(xhr.response.message);
+          }
         } else {
           showAlert('Unexpected response from server. Please try again.');
         }
         root.isServerSideRequestInProgress = false;
       };
-      xhr.send(JSON.stringify(out));
+      xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
       xhr.onerror = function() {
         // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
@@ -132,7 +139,7 @@ export default Vue.extend({
         if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
           (window).location = (window).location; // eslint-disable-line no-self-assign
         }
-      } else if (xhr.status === 400 && xhr.responseType === 'json') {
+      } else if (xhr.status === HTTPResponseCode.BAD_REQUEST && xhr.responseType === 'json') {
         showAlert(xhr.response.message);
       } else {
         showAlert('Unexpected response from server. Please try again.');

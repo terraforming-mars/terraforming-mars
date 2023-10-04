@@ -9,6 +9,7 @@ import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectP
 import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('MoonHabitatStandardProject', () => {
   let game: Game;
@@ -57,7 +58,7 @@ describe('MoonHabitatStandardProject', () => {
 
     card.action(player);
     const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
-    payAction.options.afterPay!();
+    payAction.cb(Payment.EMPTY);
 
     expect(player.titanium).eq(2);
     expect(player.production.megacredits).eq(1);

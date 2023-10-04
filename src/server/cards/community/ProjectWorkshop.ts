@@ -16,6 +16,7 @@ import {digit} from '../Options';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../../common/constants';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class ProjectWorkshop extends Card implements ICorporationCard {
   constructor() {
@@ -104,10 +105,9 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     );
 
     const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card', () => {
-      player.payMegacreditsDeferred(
-        3,
-        'Select how to pay for Project Workshop action.',
-        () => player.drawCard(1, {cardType: CardType.ACTIVE}));
+      player.game.defer(new SelectPaymentDeferred(player, 3,
+        {title: 'Select how to pay for Project Workshop action.'}))
+        .andThen(() => player.drawCard(1, {cardType: CardType.ACTIVE}));
       return undefined;
     });
 

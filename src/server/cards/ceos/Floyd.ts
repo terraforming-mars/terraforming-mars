@@ -35,10 +35,8 @@ export class Floyd extends CeoCard {
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     this.opgActionIsActive = true;
-    player.game.defer(new PlayProjectCard(player).andThen(() => {
-      this.opgActionIsActive = false;
-      return undefined;
-    }));
+    player.game.defer(new PlayProjectCard(player))
+      .andThen(() => this.opgActionIsActive = false);
     return undefined;
   }
 

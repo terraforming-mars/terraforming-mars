@@ -8,6 +8,8 @@ import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 import {SELECT_CORPORATION_TITLE, SELECT_PROJECTS_TITLE} from '@/common/inputs/SelectInitialCards';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {RecursivePartial} from '@/common/utils/utils';
 
 describe('PlayerInputFactory', function() {
   it('AndOptions', async () => {
@@ -88,19 +90,7 @@ describe('PlayerInputFactory', function() {
   it('SelectParty', async () => {
     runTest({
       type: 'party',
-      turmoil: {
-        dominant: undefined,
-        ruling: undefined,
-        chairman: undefined,
-        parties: [],
-        lobby: [],
-        reserve: [],
-        distant: undefined,
-        coming: undefined,
-        current: undefined,
-        politicalAgendas: undefined,
-        policyActionUsers: [],
-      },
+      parties: [PartyName.GREENS, PartyName.REDS],
     });
   });
 
@@ -152,10 +142,13 @@ function runTest(playerInput: Partial<PlayerInputModel>) {
     tableau: [],
   };
 
-  const playerView: Partial<PlayerViewModel> = {
+  const playerView: RecursivePartial<PlayerViewModel> = {
     id: 'p-player-id',
     dealtCorporationCards: [],
     thisPlayer: thisPlayer as PublicPlayerModel,
+    game: {
+      turmoil: {},
+    },
   };
 
   const component = mount(PlayerInputFactory, {

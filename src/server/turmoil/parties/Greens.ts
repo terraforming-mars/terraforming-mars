@@ -105,47 +105,41 @@ class GreensPolicy04 implements Policy {
     game.log('${0} used Turmoil Greens action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(
-      player,
-      5,
-      {
-        title: 'Select how to pay for Turmoil Greens action',
-        afterPay: () => {
-          const availableMicrobeCards = player.getResourceCards(CardResource.MICROBE);
-          const orOptions = new OrOptions();
+    game.defer(new SelectPaymentDeferred(player, 5, {title: 'Select how to pay for Turmoil Greens action'}))
+      .andThen(() => {
+        const availableMicrobeCards = player.getResourceCards(CardResource.MICROBE);
+        const orOptions = new OrOptions();
 
-          if (availableMicrobeCards.length === 1) {
-            orOptions.options.push(
-              new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm', () => {
-                player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
+        if (availableMicrobeCards.length === 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm', () => {
+              player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
 
+              return undefined;
+            }),
+          );
+        } else if (availableMicrobeCards.length > 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
+              return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, ([card]) => {
+                player.addResourceTo(card, {qty: 2, log: true});
                 return undefined;
-              }),
-            );
-          } else if (availableMicrobeCards.length > 1) {
-            orOptions.options.push(
-              new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
-                return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, ([card]) => {
-                  player.addResourceTo(card, {qty: 2, log: true});
-                  return undefined;
-                });
-              }),
-            );
-          }
+              });
+            }),
+          );
+        }
 
-          orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm', () => {
-            player.stock.add(Resource.PLANTS, 3);
-            game.log('${0} gained 3 plants', (b) => b.player(player));
-            return undefined;
-          }));
-
-          if (orOptions.options.length === 1) return orOptions.options[0].cb();
-
-          game.defer(new SimpleDeferredAction(player, () => orOptions));
+        orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm', () => {
+          player.stock.add(Resource.PLANTS, 3);
+          game.log('${0} gained 3 plants', (b) => b.player(player));
           return undefined;
-        },
-      },
-    ));
+        }));
+
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+
+        game.defer(new SimpleDeferredAction(player, () => orOptions));
+        return undefined;
+      });
 
     return undefined;
   }

@@ -61,12 +61,9 @@ export class ChooseCards extends DeferredAction {
       if (options.paying && selected.length > 0) {
         const cost = selected.length * player.cardCost;
         player.game.defer(
-          new SelectPaymentDeferred(player, cost, {
-            title: `Select how to spend ${cost} M€ for ${selected.length} cards`,
-            afterPay: () => {
-              keep(player, selected, unselected, LogType.BOUGHT);
-            },
-          }));
+          // TODO(kberg): Use Message.
+          new SelectPaymentDeferred(player, cost, {title: `Select how to spend ${cost} M€ for ${selected.length} cards`})
+            .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
       } else if (options.logDrawnCard === true) {
         keep(player, selected, unselected, LogType.DREW_VERBOSE);
       } else {

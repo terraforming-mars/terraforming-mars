@@ -47,25 +47,19 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
     return player.canAfford(1);
   }
   public action(player: IPlayer) {
-    player.game.defer(
-      new SelectPaymentDeferred(
-        player,
-        1,
-        {
-          title: 'Select how to pay for action',
-          afterPay: () => {
-            const topCard = player.game.projectDeck.draw(player.game);
+    player.game.defer(new SelectPaymentDeferred(player, 1, {title: 'Select how to pay for action'}))
+      .andThen(() => {
+        const topCard = player.game.projectDeck.draw(player.game);
 
-            player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
+        player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
 
-            if (topCard.tags.includes(Tag.MICROBE)) {
-              player.addResourceTo(this, 1);
-              player.game.log('${0} found life!', (b) => b.player(player));
-            }
+        if (topCard.tags.includes(Tag.MICROBE)) {
+          player.addResourceTo(this, 1);
+          player.game.log('${0} found life!', (b) => b.player(player));
+        }
 
-            player.game.projectDeck.discard(topCard);
-          },
-        }));
+        player.game.projectDeck.discard(topCard);
+      });
 
     return undefined;
   }

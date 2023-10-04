@@ -59,6 +59,7 @@ export abstract class MarketCard extends Card implements IActionCard {
     let limit = Math.floor(availableMC / terms.from);
     limit = Math.min(limit, terms.limit);
 
+    // TODO(kberg): Move callbacks like this to an andThen.
     return new SelectAmount(
       newMessage(
         'Select a number of trades (${terms.from} M€ => ${terms.to} ${this.tradeResource}, max ${limit})',
@@ -67,14 +68,8 @@ export abstract class MarketCard extends Card implements IActionCard {
       (tradesRequested: number) => {
         const cashDue = tradesRequested * terms.from;
         const unitsEarned = tradesRequested * terms.to;
-        player.game.defer(
-          new SelectPaymentDeferred(
-            player,
-            cashDue,
-            {afterPay: () => {
-              player.stock.add(this.tradeResource, unitsEarned, {log: true});
-            }}));
-
+        player.game.defer(new SelectPaymentDeferred(player, cashDue))
+          .andThen(() => player.stock.add(this.tradeResource, unitsEarned, {log: true}));
         return undefined;
       },
       1,

@@ -102,17 +102,8 @@ class MarsFirstPolicy04 implements Policy {
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(
-      player,
-      4,
-      {
-        title: 'Select how to pay for Turmoil Mars First action',
-        afterPay: () => {
-          player.drawCard(1, {tag: Tag.BUILDING});
-        },
-      },
-    ));
-
+    game.defer(new SelectPaymentDeferred(player, 4, {title: 'Select how to pay for Turmoil Mars First action'}))
+      .andThen(() => player.drawCard(1, {tag: Tag.BUILDING}));
     return undefined;
   }
 }

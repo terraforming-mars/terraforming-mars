@@ -48,7 +48,8 @@ export abstract class DeferredAction<T = undefined> implements AndThen<T> {
   }
 
   public abstract execute(): PlayerInput | undefined;
-  protected cb: (param: T) => void = () => {};
+  // TODO(kberg): Make protected again.
+  public cb: (param: T) => void = () => {};
   private callbackSet = false;
 
   public andThen(cb: (param: T) => void): this {

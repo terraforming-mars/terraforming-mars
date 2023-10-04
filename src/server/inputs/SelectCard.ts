@@ -49,7 +49,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput {
       }),
       max: this.config.max,
       min: this.config.min,
-      showOnlyInLearnerMode: this.config.enabled?.every((p: boolean) => p === false),
+      showOnlyInLearnerMode: this.config.enabled?.every((p: boolean) => p === false) ?? false,
       selectBlueCardAction: this.config.selectBlueCardAction,
       showOwner: this.config.showOwner === true,
     };

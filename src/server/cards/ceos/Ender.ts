@@ -30,15 +30,13 @@ export class Ender extends CeoCard {
   public action(player: IPlayer): undefined {
     this.isDisabled = true;
     const max = Math.min(player.cardsInHand.length, player.game.generation * 2);
-    player.game.defer(
-      new DiscardCards(player, 0, max).andThen((cards) => {
+    player.game.defer(new DiscardCards(player, 0, max), Priority.DISCARD_AND_DRAW)
+      .andThen((cards) => {
         for (const card of cards) {
           player.discardCardFromHand(card);
         }
         player.game.defer(DrawCards.keepAll(player, cards.length));
-      }),
-      Priority.DISCARD_AND_DRAW,
-    );
+      });
     return undefined;
   }
 }

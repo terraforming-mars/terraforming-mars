@@ -465,11 +465,12 @@ export class Game implements IGame, Logger {
     return ids.map((id) => this.getPlayerById(id));
   }
 
-  public defer(action: DeferredAction, priority?: Priority): void {
+  public defer<T>(action: DeferredAction<T>, priority?: Priority): DeferredAction<T> {
     if (priority !== undefined) {
       action.priority = priority;
     }
     this.deferredActions.push(action);
+    return action;
   }
 
   public milestoneClaimed(milestone: IMilestone): boolean {

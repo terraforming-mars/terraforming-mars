@@ -97,7 +97,7 @@
     "All awards already funded": "Toutes les récompenses ont déjà été financées",
     "Didn’t even find player": "Impossible de trouver le joueur",
     "No player has played requested card": "Aucun joueur n'a joué la carte demandée",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Tiré et défaussé ${0} (coûtant ${1}) pour placer un ${2}",
+    "Drew and discarded ${0} to place a ${1}": "Tiré et défaussé ${0} pour placer un ${1}",
     "Good luck ${0}!": "Bonne chance ${0} !",
     "Final greenery placement": "Placement final de Forêt",
     "steel": "acier",

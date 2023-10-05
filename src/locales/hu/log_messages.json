@@ -54,7 +54,7 @@
     "All awards already funded": "Minden díj már finanszírozva van",
     "Didn't even find player": "Nem talált játékost",
     "No player has played requested card": "Nincs olyan játékos, aki a kért kártyát játszotta volna",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Húzott és eldobott ${0} (ára ${1}) egy ${2} elhelyezéséhez",
+    "Drew and discarded ${0} to place a ${1}": "Húzott és eldobott ${0} egy ${1} elhelyezéséhez",
     "Good luck ${0}!": "Sok szerencsét ${0}!",
 
     "${0} played ${1}": "${0} kijátszota ${1}",

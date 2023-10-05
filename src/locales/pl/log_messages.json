@@ -51,7 +51,7 @@
     "All awards already funded": "Ufundowano maksymalną liczbę nagród",
     "Didn\u2019t even find player": "Nie znaleziono takiego gracza",
     "No player has played requested card": "Żaden gracz nie zagrał żądanej karty",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Dobrano i odrzucono kartę ${0} (koszt ${1}) aby umieścić obszar: ${2}",
+    "Drew and discarded ${0} to place a ${1}": "Dobrano i odrzucono kartę ${0} aby umieścić obszar: ${1}",
     "The id of this game is ${0}": "ID tej gry to: ${0}",
     "Good luck ${0}!": "Powodzenia, ${0}!",
     "Final greenery placement": "Końcowe umieszczanie obszarów zieleni",

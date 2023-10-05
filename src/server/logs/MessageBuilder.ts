@@ -13,6 +13,7 @@ import {PartyName} from '../../common/turmoil/PartyName';
 import {IColony} from '../colonies/IColony';
 import {Message} from '../../common/logs/Message';
 import {Color} from '../../common/Color';
+import {LogMessageData} from '../../common/logs/LogMessageData';
 
 export class MessageBuilder {
   protected message: Message;
@@ -48,12 +49,16 @@ export class MessageBuilder {
     return this;
   }
 
-  public card(value: ICard): this {
-    return this.cardName(value.name);
+  public card(value: ICard, tags: boolean = false): this {
+    return this.cardName(value.name, tags);
   }
 
-  public cardName(value: CardName): this {
-    this.message.data.push({type: LogMessageDataType.CARD, value});
+  public cardName(value: CardName, tags: boolean = false): this {
+    const data: LogMessageData = {type: LogMessageDataType.CARD, value};
+    if (tags === true) {
+      data.attrs = {tag: true};
+    }
+    this.message.data.push(data);
     return this;
   }
 

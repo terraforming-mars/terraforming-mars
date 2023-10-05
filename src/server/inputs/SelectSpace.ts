@@ -5,10 +5,11 @@ import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputRes
 import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
 
 export class SelectSpace extends BasePlayerInput {
+  public cb: (space: Space) => PlayerInput | undefined = () => undefined;
+
   constructor(
     title: string | Message,
-    public spaces: ReadonlyArray<Space>,
-    public cb: (space: Space) => PlayerInput | undefined) {
+    public spaces: ReadonlyArray<Space>) {
     super('space', title);
     if (spaces.length === 0) {
       throw new Error('No available spaces');
@@ -35,5 +36,10 @@ export class SelectSpace extends BasePlayerInput {
       throw new Error('Space not available');
     }
     return this.cb(space);
+  }
+
+  public andThen(cb: (space: Space) => PlayerInput | undefined): this {
+    this.cb = cb;
+    return this;
   }
 }

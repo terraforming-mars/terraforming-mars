@@ -41,9 +41,10 @@ export class UrbanizedArea extends Card implements IProjectCard {
     return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (space: Space) => {
-      player.game.addCity(player, space);
-      return undefined;
-    });
+    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player))
+      .andThen((space) => {
+        player.game.addCity(player, space);
+        return undefined;
+      });
   }
 }

@@ -6,7 +6,6 @@ import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -40,10 +39,8 @@ export class Flooding extends Card implements IProjectCard {
 
     if (!player.game.canAddOcean()) return undefined;
 
-    return new SelectSpace(
-      'Select space for ocean tile',
-      player.game.board.getAvailableSpacesForOcean(player),
-      (space: Space) => {
+    return new SelectSpace('Select space for ocean tile', player.game.board.getAvailableSpacesForOcean(player))
+      .andThen((space) => {
         player.game.addOcean(player, space);
 
         const adjacentPlayers: Set<IPlayer> = new Set();
@@ -74,7 +71,6 @@ export class Flooding extends Card implements IProjectCard {
           );
         }
         return undefined;
-      },
-    );
+      });
   }
 }

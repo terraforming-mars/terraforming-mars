@@ -41,15 +41,12 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
   public initialAction(player: IPlayer) {
     return new SelectSpace(
       'Select space for claim',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: Space) => {
+      player.game.board.getAvailableSpacesOnLand(player))
+      .andThen((space: Space) => {
         space.player = player;
-
         player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
-
         return undefined;
-      },
-    );
+      });
   }
 
   public getAvailableSpacesForMarker(player: IPlayer): Array<Space> {
@@ -70,13 +67,10 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
   }
 
   public action(player: IPlayer) {
-    return new SelectSpace(
-      'Select space for claim',
-      this.getAvailableSpacesForMarker(player),
-      (space: Space) => {
+    return new SelectSpace('Select space for claim', this.getAvailableSpacesForMarker(player))
+      .andThen((space) => {
         space.player = player;
         return undefined;
-      },
-    );
+      });
   }
 }

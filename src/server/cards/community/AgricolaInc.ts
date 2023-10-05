@@ -8,6 +8,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class AgricolaInc extends Card implements ICorporationCard {
   constructor() {
@@ -38,9 +39,10 @@ export class AgricolaInc extends Card implements ICorporationCard {
   }
 
   public override getVictoryPoints(player: IPlayer): number {
-    // TODO(kberg): Include  the remaining tags.
-    const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.POWER, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
-    if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tag.VENUS);
+    const scorableTags = [...player.game.tags];
+    inplaceRemove(scorableTags, Tag.WILD);
+    inplaceRemove(scorableTags, Tag.EVENT);
+    inplaceRemove(scorableTags, Tag.CLONE);
 
     const playerTags : TagCount[] = player.tags.countAllTags();
     let points = 0;

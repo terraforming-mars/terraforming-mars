@@ -1,12 +1,10 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {Space} from '../boards/Space';
 import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
 import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
+import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
 
-export class SelectSpace extends BasePlayerInput {
-  public cb: (space: Space) => PlayerInput | undefined = () => undefined;
-
+export class SelectSpace extends BasePlayerInputAndThen<Space> {
   constructor(
     title: string | Message,
     public spaces: ReadonlyArray<Space>) {
@@ -29,17 +27,10 @@ export class SelectSpace extends BasePlayerInput {
     if (!isSelectSpaceResponse(input)) {
       throw new Error('Not a valid SelectSpaceResponse');
     }
-    const space = this.spaces.find(
-      (space) => space.id === input.spaceId,
-    );
+    const space = this.spaces.find((space) => space.id === input.spaceId);
     if (space === undefined) {
       throw new Error('Space not available');
     }
     return this.cb(space);
-  }
-
-  public andThen(cb: (space: Space) => PlayerInput | undefined): this {
-    this.cb = cb;
-    return this;
   }
 }

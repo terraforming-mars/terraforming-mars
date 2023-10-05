@@ -67,15 +67,17 @@ export class StormCraftIncorporated extends ActionCard implements ICorporationCa
         player.stock.deduct(Resource.HEAT, heatAmount);
         return cb();
       },
-      new SelectAmount('Heat', 'Spend heat', (amount: number) => {
-        heatAmount = amount;
-        return undefined;
-      }, 0, Math.min(player.heat, targetAmount)),
-      new SelectAmount('Stormcraft Incorporated Floaters (2 heat each)', 'Spend floaters', (amount: number) => {
-        floaterAmount = amount;
-        return undefined;
-      }, 0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2))),
-    );
+      new SelectAmount('Heat', 'Spend heat', 0, Math.min(player.heat, targetAmount))
+        .andThen((amount: number) => {
+          heatAmount = amount;
+          return undefined;
+        }),
+      new SelectAmount('Stormcraft Incorporated Floaters (2 heat each)', 'Spend floaters',
+        0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2)))
+        .andThen((amount) => {
+          floaterAmount = amount;
+          return undefined;
+        }));
     options.title = newMessage('Select how to spend ${0} heat', (b) => b.number(targetAmount));
     return options;
   }

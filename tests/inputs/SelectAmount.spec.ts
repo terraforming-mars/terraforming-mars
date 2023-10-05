@@ -14,7 +14,7 @@ describe('', () => {
   });
 
   it('Simple', () => {
-    const selectAmount = new SelectAmount('', '', cb, 3, 100, true);
+    const selectAmount = new SelectAmount('', '', 3, 100, true).andThen(cb);
     selectAmount.process({type: 'amount', amount: 3});
     expect(selected).eq(3);
     selectAmount.process({type: 'amount', amount: 20});
@@ -24,7 +24,7 @@ describe('', () => {
   });
 
   it('Cannot select invalid amount', () => {
-    const selectAmount = new SelectAmount('', '', cb, 3, 100, true);
+    const selectAmount = new SelectAmount('', '', 3, 100, true).andThen(cb);
     expect(() => selectAmount.process({type: 'amount', amount: 2}))
       .to.throw(Error, /too low/);
     expect(() => selectAmount.process({type: 'amount', amount: 101}))

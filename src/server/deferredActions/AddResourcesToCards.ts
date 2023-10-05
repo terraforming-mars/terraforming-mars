@@ -28,14 +28,11 @@ export class AddResourcesToCards extends DeferredAction {
     }
     const map = new Map<CardName, number>();
     const options = cards.map((card) => {
-      // Call back for the selectAmount. Store them in the map first, so
-      // they can be counted and affirmed as enough.
-      const cb = (amount: number) => {
-        map.set(card.name, amount);
-        return undefined;
-      };
-
-      return new SelectAmount(card.name, '', cb, 0, this.count);
+      return new SelectAmount(card.name, '', 0, this.count)
+        .andThen((amount) => {
+          map.set(card.name, amount);
+          return undefined;
+        });
     });
 
     return new AndOptions(() => {

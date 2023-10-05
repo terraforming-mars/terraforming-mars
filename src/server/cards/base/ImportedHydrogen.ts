@@ -66,7 +66,8 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     } else if (availableMicrobeCards.length > 1) {
       availableActions.push(new SelectCard('Add 3 microbes to a card',
         'Add microbes',
-        availableMicrobeCards, ([card]) => {
+        availableMicrobeCards)
+        .andThen(([card]) => {
           player.addResourceTo(card, {qty: 3, log: true});
           return undefined;
         }));
@@ -79,10 +80,11 @@ export class ImportedHydrogen extends Card implements IProjectCard {
         return undefined;
       }));
     } else if (availableAnimalCards.length > 1) {
-      availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, ([card]) => {
-        player.addResourceTo(card, {qty: 2, log: true});
-        return undefined;
-      }));
+      availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards)
+        .andThen(([card]) => {
+          player.addResourceTo(card, {qty: 2, log: true});
+          return undefined;
+        }));
     }
 
     return new OrOptions(...availableActions);

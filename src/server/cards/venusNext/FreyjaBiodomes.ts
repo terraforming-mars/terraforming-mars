@@ -50,12 +50,11 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
       return new SelectCard(
         'Select card to add 2 resources',
         'Add resources',
-        cards,
-        ([card]) => {
+        cards)
+        .andThen(([card]) => {
           player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
-        },
-      );
+        });
     }
 
     if (cards.length === 1) {

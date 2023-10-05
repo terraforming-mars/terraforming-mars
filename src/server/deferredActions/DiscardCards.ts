@@ -41,14 +41,13 @@ export class DiscardCards extends DeferredAction<Array<IProjectCard>> {
       title,
       'Discard',
       this.player.cardsInHand,
-      (discards) => {
+      {min: this.min, max: this.max})
+      .andThen((discards) => {
         for (const card of discards) {
           this.player.discardCardFromHand(card);
         }
         this.cb(discards);
         return undefined;
-      },
-      {min: this.min, max: this.max},
-    );
+      });
   }
 }

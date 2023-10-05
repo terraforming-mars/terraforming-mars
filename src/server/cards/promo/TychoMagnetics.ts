@@ -42,7 +42,7 @@ export class TychoMagnetics extends Card implements ICorporationCard {
 
   public action(player: IPlayer) {
     return new SelectAmount('Select amount of energy to spend', 'OK', 1, player.energy)
-      .andThen((amount: number) => {
+      .andThen((amount) => {
         player.stock.deduct(Resource.ENERGY, amount);
         player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
         if (amount === 1) {

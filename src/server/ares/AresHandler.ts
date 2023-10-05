@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {ICard} from '../cards/ICard';
 import {IGame} from '../IGame';
 import {SelectCard} from '../inputs/SelectCard';
 import {Space} from '../boards/Space';
@@ -13,7 +12,6 @@ import {AresData, MilestoneCount} from '../../common/ares/AresData';
 import {AdjacencyCost} from './AdjacencyCost';
 import {MultiSet} from 'mnemonist';
 import {Phase} from '../../common/Phase';
-import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
 import {_AresHazardPlacement} from './AresHazards';
@@ -62,18 +60,14 @@ export class AresHandler {
       } else if (availableCards.length === 1) {
         player.addResourceTo(availableCards[0], {log: true});
       } else if (availableCards.length > 1) {
-        player.game.defer(new SimpleDeferredAction(
-          player,
-          () => new SelectCard(
-            'Select a card to add an ' + resourceAsText,
-            'Add ' + resourceAsText + 's',
-            availableCards,
-            (selected: ICard[]) => {
-              player.addResourceTo(selected[0], {log: true});
-              return undefined;
-            },
-          ),
-        ));
+        player.defer(new SelectCard(
+          'Select a card to add an ' + resourceAsText,
+          'Add ' + resourceAsText + 's',
+          availableCards)
+          .andThen((selected) => {
+            player.addResourceTo(selected[0], {log: true});
+            return undefined;
+          }));
       }
     };
 

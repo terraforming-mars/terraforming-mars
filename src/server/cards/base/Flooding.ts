@@ -56,17 +56,14 @@ export class Flooding extends Card implements IProjectCard {
               Array.from(adjacentPlayers),
               'Select adjacent player to remove 4 M€ from',
               'Remove credits',
-              (selectedPlayer: IPlayer) => {
-                selectedPlayer.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
-                return undefined;
-              },
-            ),
+            ).andThen((selectedPlayer) => {
+              selectedPlayer.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
+              return undefined;
+            }),
             new SelectOption(
               'Don\'t remove M€ from adjacent player',
               'Confirm',
-              () => {
-                return undefined;
-              },
+              () => undefined,
             ),
           );
         }

@@ -57,7 +57,7 @@ export class Ryu extends CeoCard {
           1,
           maxDecreasableAmt,
           true,
-        ).andThen((amount: number) => {
+        ).andThen((amount) => {
           const productionToIncrease =
             ALL_RESOURCES.filter((res) => res !== resourceToDecrease)
               .map((res) => new SelectOption(newMessage('Increase ${0} production', (b) => b.string(res)), 'Select', () => {

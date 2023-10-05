@@ -39,14 +39,14 @@ export class Spire extends Card implements ICorporationCard {
 
   public initialAction(player: IPlayer) {
     player.drawCard(4);
-    return new SelectCard('Select 3 cards to discard', 'Discard', player.cardsInHand, (cards) => {
-      for (const card of cards) {
-        player.discardCardFromHand(card);
-      }
-      LogHelper.logDiscardedCards(player.game, cards);
-
-      return undefined;
-    }, {min: 3, max: 3});
+    return new SelectCard('Select 3 cards to discard', 'Discard', player.cardsInHand, {min: 3, max: 3})
+      .andThen((cards) => {
+        for (const card of cards) {
+          player.discardCardFromHand(card);
+        }
+        LogHelper.logDiscardedCards(player.game, cards);
+        return undefined;
+      });
   }
 
   public override bespokePlay(player: IPlayer) {

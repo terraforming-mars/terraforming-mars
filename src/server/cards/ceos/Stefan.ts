@@ -3,8 +3,6 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-
-import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 
 export class Stefan extends CeoCard {
@@ -35,7 +33,8 @@ export class Stefan extends CeoCard {
       'Sell patents',
       'Sell',
       player.cardsInHand,
-      (cards: Array<IProjectCard>) => {
+      {min: 0, max: player.cardsInHand.length})
+      .andThen((cards) => {
         player.megaCredits += cards.length * 3;
 
         cards.forEach((card) => {
@@ -44,7 +43,6 @@ export class Stefan extends CeoCard {
 
         player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(cards.length));
         return undefined;
-      }, {min: 0, max: player.cardsInHand.length},
-    );
+      });
   }
 }

@@ -65,12 +65,11 @@ export class LargeConvoy extends Card implements IProjectCard {
         new SelectCard(
           'Select card to add 4 animals',
           'Add animals',
-          animalCards,
-          ([card]) => {
+          animalCards)
+          .andThen(([card]) => {
             player.addResourceTo(card, {qty: 4, log: true});
             return undefined;
-          },
-        ),
+          }),
       );
     }
 

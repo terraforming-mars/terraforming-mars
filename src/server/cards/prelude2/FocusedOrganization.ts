@@ -48,10 +48,11 @@ export class FocusedOrganization extends PreludeCard implements IActionCard {
           return undefined;
         });
       },
-      new SelectCard('Select card to discard', 'select', player.cardsInHand, ([card]) => {
-        player.discardCardFromHand(card);
-        return undefined;
-      }),
+      new SelectCard('Select card to discard', 'select', player.cardsInHand)
+        .andThen(([card]) => {
+          player.discardCardFromHand(card);
+          return undefined;
+        }),
       new SelectResource('Select resource to discard', discardableStandardResources, (type) => {
         player.stock.deduct(Units.ResourceMap[type], 1, {log: true});
         return undefined;

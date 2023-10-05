@@ -96,13 +96,11 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
     const addResource = new SelectCard(
       'Select card to add 1 asteroid',
       'Add asteroid',
-      asteroidCards,
-      ([card]) => {
+      asteroidCards)
+      .andThen(([card]) => {
         player.addResourceTo(card, {log: true});
-
         return undefined;
-      },
-    );
+      });
 
     const spendResource = new SelectOption('Remove 1 asteroid on this card to gain 3 titanium', 'Remove asteroid', () => {
       this.resourceCount--;

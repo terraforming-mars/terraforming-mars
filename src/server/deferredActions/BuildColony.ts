@@ -3,8 +3,7 @@ import {SelectColony} from '../inputs/SelectColony';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
 
-// TODO(kberg): use <IColony>
-export class BuildColony extends DeferredAction /* <IColony> */{
+export class BuildColony extends DeferredAction<IColony> {
   constructor(
     player: IPlayer,
     private options?: {
@@ -12,7 +11,6 @@ export class BuildColony extends DeferredAction /* <IColony> */{
       title?: string,
       colonies?: Array<IColony>, // If not specified, will accept all playable colonies.
       giveBonusTwice?: boolean, // Custom for Vital Colony. Rewards the bonus when placing a colony a second time.
-      cb?(colony: IColony): void,
     },
   ) {
     super(player, Priority.BUILD_COLONY);
@@ -29,7 +27,7 @@ export class BuildColony extends DeferredAction /* <IColony> */{
     return new SelectColony(title, 'Build', colonies)
       .andThen((colony: IColony) => {
         colony.addColony(this.player, {giveBonusTwice: this.options?.giveBonusTwice ?? false});
-        this.options?.cb?.(colony);
+        this.cb(colony);
         return undefined;
       });
   }

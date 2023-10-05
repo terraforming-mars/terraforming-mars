@@ -54,16 +54,17 @@ export class Lowell extends CeoCard {
 
     player.game.defer(new SelectPaymentDeferred(player, 8, {title: TITLES.payForCardAction(this.name)}));
 
-    return new SelectCard('Choose CEO card to play', 'Play', ceosDrawn, (([chosenCeo]) => {
+    return new SelectCard('Choose CEO card to play', 'Play', ceosDrawn)
+      .andThen(([chosenCeo]) => {
       // Discard unchosen CEOs
-      ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
-      // Remove Lowell from played cards
-      const lowellIndex = player.playedCards.findIndex((c) => c.name === this.name);
-      player.playedCards.splice(lowellIndex, 1);
-      // Add Lowell to Discard pile
-      game.ceoDeck.discard(this);
-      // Play the new CEO
-      return player.playCard(chosenCeo);
-    }));
+        ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
+        // Remove Lowell from played cards
+        const lowellIndex = player.playedCards.findIndex((c) => c.name === this.name);
+        player.playedCards.splice(lowellIndex, 1);
+        // Add Lowell to Discard pile
+        game.ceoDeck.discard(this);
+        // Play the new CEO
+        return player.playCard(chosenCeo);
+      });
   }
 }

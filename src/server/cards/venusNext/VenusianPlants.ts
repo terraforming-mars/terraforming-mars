@@ -51,12 +51,11 @@ export class VenusianPlants extends Card implements IProjectCard {
     return new SelectCard(
       'Select card to add 1 resource',
       'Add resource',
-      cards,
-      ([card]) => {
+      cards)
+      .andThen(([card]) => {
         player.addResourceTo(card, {log: true});
         return undefined;
-      },
-    );
+      });
   }
 
   public getResCards(player: IPlayer): ICard[] {

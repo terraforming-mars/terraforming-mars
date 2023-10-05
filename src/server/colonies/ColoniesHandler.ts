@@ -78,7 +78,7 @@ export class ColoniesHandler {
     }
 
     const selectColonyTile = new SelectColony(title, 'Add colony tile', colonyTiles)
-      .andThen((colonyTile: IColony) => {
+      .andThen((colonyTile) => {
         game.colonies.push(colonyTile);
         game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
         game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colonyTile));

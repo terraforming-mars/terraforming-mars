@@ -57,45 +57,46 @@ export class Playwrights extends Card implements ICorporationCard {
     const replayableEvents = this.getReplayableEvents(player);
 
     return new SelectCard<IProjectCard>(
-      'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents,
-      ([card]) => {
-        const selectedCard: IProjectCard = card;
+      'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents)
+      .andThen(
+        ([card]) => {
+          const selectedCard: IProjectCard = card;
 
-        players.forEach((p) => {
-          const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
-          if (cardIndex !== -1) {
-            p.playedCards.splice(cardIndex, 1);
-          }
-        });
+          players.forEach((p) => {
+            const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
+            if (cardIndex !== -1) {
+              p.playedCards.splice(cardIndex, 1);
+            }
+          });
 
-        const cost = player.getCardCost(selectedCard);
-        player.game.defer(new SelectPaymentDeferred(player, cost, {title: 'Select how to pay to replay the event'}))
-          .andThen(() => {
-            player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
-            player.removedFromPlayCards.push(selectedCard); // Remove card from the game
-            if (selectedCard.name === CardName.SPECIAL_DESIGN) {
-              player.playedCards.push(new SpecialDesignProxy());
-            } else if (selectedCard.name === CardName.LAW_SUIT) {
+          const cost = player.getCardCost(selectedCard);
+          player.game.defer(new SelectPaymentDeferred(player, cost, {title: 'Select how to pay to replay the event'}))
+            .andThen(() => {
+              player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
+              player.removedFromPlayCards.push(selectedCard); // Remove card from the game
+              if (selectedCard.name === CardName.SPECIAL_DESIGN) {
+                player.playedCards.push(new SpecialDesignProxy());
+              } else if (selectedCard.name === CardName.LAW_SUIT) {
               /*
                * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
                * Needs to be deferred to happen after Law Suit's `play()` method.
                */
-              player.game.defer(new SimpleDeferredAction(player, () => {
-                player.game.getPlayers().some((p) => {
-                  const card = p.playedCards[p.playedCards.length - 1];
-                  if (card?.name === selectedCard.name) {
-                    p.playedCards.pop();
-                    return true;
-                  }
-                  return false;
-                });
-                return undefined;
-              }));
-            }
-          });
-        return undefined;
-      },
-    );
+                player.game.defer(new SimpleDeferredAction(player, () => {
+                  player.game.getPlayers().some((p) => {
+                    const card = p.playedCards[p.playedCards.length - 1];
+                    if (card?.name === selectedCard.name) {
+                      p.playedCards.pop();
+                      return true;
+                    }
+                    return false;
+                  });
+                  return undefined;
+                }));
+              }
+            });
+          return undefined;
+        },
+      );
   }
 
   public getCheckLoops(): number {

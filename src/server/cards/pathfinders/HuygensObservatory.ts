@@ -105,8 +105,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
       game.defer(new BuildColony(player, {
         allowDuplicate: true,
         title: 'Select colony for Huygens Observatory',
-        cb: () => this.tryToTrade(player),
-      }));
+      })).andThen(() => this.tryToTrade(player));
     } else {
       game.defer(new SimpleDeferredAction(player, () => {
         this.tryToTrade(player);

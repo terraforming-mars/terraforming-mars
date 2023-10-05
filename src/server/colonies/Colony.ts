@@ -193,7 +193,7 @@ export abstract class Colony implements IColony {
       action = new SimpleDeferredAction(
         player,
         () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies)
-          .andThen((colony: IColony) => {
+          .andThen((colony) => {
             game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
             (colony as Colony).handleTrade(player, {
               usesTradeFleet: false,
@@ -303,17 +303,12 @@ export abstract class Colony implements IColony {
         () => {
           const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
           if (playersWithCards.length === 0) return undefined;
-          return new SelectPlayer(
-            playersWithCards,
-            'Select player to discard a card',
-            'Select',
-            (selectedPlayer: IPlayer) => {
+          return new SelectPlayer(playersWithCards, 'Select player to discard a card', 'Select')
+            .andThen((selectedPlayer) => {
               game.defer(new DiscardCards(selectedPlayer, 1, 1, this.name + ' colony effect. Select a card to discard'));
               return undefined;
-            },
-          );
-        },
-      );
+            });
+        });
       break;
 
     case ColonyBenefit.PLACE_OCEAN_TILE:

@@ -42,10 +42,11 @@ export class DarksideSmugglersUnion extends Card implements IProjectCard, IActio
 
   public action(player: IPlayer) {
     const tradeableColonies = ColoniesHandler.tradeableColonies(player.game);
-    return new SelectColony('Select colony tile to trade with for free', 'Select', tradeableColonies, (colony: IColony) => {
-      colony.trade(player);
-      return undefined;
-    });
+    return new SelectColony('Select colony tile to trade with for free', 'Select', tradeableColonies)
+      .andThen((colony: IColony) => {
+        colony.trade(player);
+        return undefined;
+      });
   }
 }
 

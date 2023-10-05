@@ -192,15 +192,16 @@ export abstract class Colony implements IColony {
       const openColonies = game.colonies.filter((colony) => colony.isActive);
       action = new SimpleDeferredAction(
         player,
-        () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: IColony) => {
-          game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-          (colony as Colony).handleTrade(player, {
-            usesTradeFleet: false,
-            decreaseTrackAfterTrade: false,
-            giveColonyBonuses: false,
-          });
-          return undefined;
-        }),
+        () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies)
+          .andThen((colony: IColony) => {
+            game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
+            (colony as Colony).handleTrade(player, {
+              usesTradeFleet: false,
+              decreaseTrackAfterTrade: false,
+              giveColonyBonuses: false,
+            });
+            return undefined;
+          }),
       );
       break;
 

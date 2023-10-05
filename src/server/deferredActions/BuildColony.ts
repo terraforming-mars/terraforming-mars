@@ -3,7 +3,8 @@ import {SelectColony} from '../inputs/SelectColony';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export class BuildColony extends DeferredAction {
+// TODO(kberg): use <IColony>
+export class BuildColony extends DeferredAction /* <IColony> */{
   constructor(
     player: IPlayer,
     private options?: {
@@ -25,10 +26,11 @@ export class BuildColony extends DeferredAction {
     }
 
     const title = this.options?.title ?? 'Select where to build a colony';
-    return new SelectColony(title, 'Build', colonies, (colony: IColony) => {
-      colony.addColony(this.player, {giveBonusTwice: this.options?.giveBonusTwice ?? false});
-      this.options?.cb?.(colony);
-      return undefined;
-    });
+    return new SelectColony(title, 'Build', colonies)
+      .andThen((colony: IColony) => {
+        colony.addColony(this.player, {giveBonusTwice: this.options?.giveBonusTwice ?? false});
+        this.options?.cb?.(colony);
+        return undefined;
+      });
   }
 }

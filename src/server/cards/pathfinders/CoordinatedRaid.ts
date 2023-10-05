@@ -33,9 +33,10 @@ export class CoordinatedRaid extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const activeColonies = player.game.colonies.filter((colony) => colony.isActive);
-    return new SelectColony('Select colony tile for trade', 'trade', activeColonies, (colony: IColony) => {
-      colony.trade(player, {selfishTrade: true});
-      return undefined;
-    });
+    return new SelectColony('Select colony tile for trade', 'trade', activeColonies)
+      .andThen((colony: IColony) => {
+        colony.trade(player, {selfishTrade: true});
+        return undefined;
+      });
   }
 }

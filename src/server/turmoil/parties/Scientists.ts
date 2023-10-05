@@ -8,6 +8,7 @@ import {Bonus} from '../Bonus';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {Policy} from '../Policy';
+import {TITLES} from '../../inputs/titles';
 
 export class Scientists extends Party implements IParty {
   readonly name = PartyName.SCIENTISTS as const;
@@ -56,18 +57,13 @@ class ScientistsPolicy01 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
+    // TODO(kberg): use Message for "Turmoil {partyname}" action.
     game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
-    game.defer(new SelectPaymentDeferred(
-      player,
-      10,
-      {
-        title: 'Select how to pay for Turmoil Scientists action',
-        afterPay: () => {
-          player.drawCard(3);
-          player.turmoilPolicyActionUsed = true;
-        },
-      },
-    ));
+    game.defer(new SelectPaymentDeferred(player, 10, {title: TITLES.payForPartyAction(PartyName.SCIENTISTS)}))
+      .andThen(() => {
+        player.drawCard(3);
+        player.turmoilPolicyActionUsed = true;
+      });
 
     return undefined;
   }
@@ -87,9 +83,15 @@ class ScientistsPolicy04 implements Policy {
   readonly id = 'sp04' as const;
   readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
 
-  apply(game: IGame) {
+  onPolicyStart(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       player.hasTurmoilScienceTagBonus = true;
+    });
+  }
+
+  onPolicyEnd(game: IGame) {
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      player.hasTurmoilScienceTagBonus = false;
     });
   }
 }

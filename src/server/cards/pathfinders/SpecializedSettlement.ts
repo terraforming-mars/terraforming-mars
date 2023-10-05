@@ -81,12 +81,13 @@ export class SpecializedSettlement extends Card implements IProjectCard {
 
         player.game.defer(new SelectResourceTypeDeferred(
           player, bonusResources,
-          'Select a resource to gain 1 unit of production').andThen(
-          (resource) => {
-            player.production.add(resource, 1, {log: true});
-            this.bonusResource = [resource];
-          },
-        ));
+          'Select a resource to gain 1 unit of production'))
+          .andThen(
+            (resource) => {
+              player.production.add(resource, 1, {log: true});
+              this.bonusResource = [resource];
+            },
+          );
         return undefined;
       },
     );
@@ -109,11 +110,12 @@ export class SpecializedSettlement extends Card implements IProjectCard {
 
     player.game.defer(new SelectResourceTypeDeferred(
       player, bonusResources,
-      'Select a resource to gain 1 unit of production').andThen(
-      (resource) => {
-        player.production.add(resource, 1, {log: true});
-        this.bonusResource = [resource];
-      },
-    ));
+      'Select a resource to gain 1 unit of production'))
+      .andThen(
+        (resource) => {
+          player.production.add(resource, 1, {log: true});
+          this.bonusResource = [resource];
+        },
+      );
   }
 }

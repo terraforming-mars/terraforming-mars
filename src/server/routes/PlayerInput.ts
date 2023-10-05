@@ -8,6 +8,8 @@ import {InputResponse} from '../../common/inputs/InputResponse';
 import {isPlayerId} from '../../common/Types';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {runId} from '../utils/server-ids';
+import {AppError} from '../server/AppError';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -87,6 +89,7 @@ export class PlayerInput extends Handler {
       req.once('end', async () => {
         try {
           const entity = JSON.parse(body);
+          validateRunId(entity);
           if (this.isWaitingForUndo(player, entity)) {
             await this.performUndo(req, res, ctx, player);
           } else {
@@ -95,14 +98,17 @@ export class PlayerInput extends Handler {
           }
           resolve();
         } catch (e) {
+          if (!(e instanceof AppError)) {
+            console.warn('Error processing input from player', e);
+          }
           // TODO(kberg): use standard Route API, though that changes the output.
           res.writeHead(400, {
             'Content-Type': 'application/json',
           });
 
-          console.warn('Error processing input from player', e);
+          const id = e instanceof AppError ? e.id : undefined;
           const message = e instanceof Error ? e.message : String(e);
-          res.write(JSON.stringify({message}));
+          res.write(JSON.stringify({id: id, message: message}));
           res.end();
           resolve();
         }
@@ -110,3 +116,13 @@ export class PlayerInput extends Handler {
     });
   }
 }
+function validateRunId(entity: any) {
+  if (entity.runId !== undefined && runId !== undefined) {
+    if (entity.runId !== runId) {
+      throw new AppError('#invalid-run-id', 'The server has restarted. Click OK to refresh this page.');
+    }
+  }
+  // Clearing this out to be compatible with the input response processors.
+  delete entity.runId;
+}
+

@@ -36,7 +36,7 @@ export class MiningComplex extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new PlaceMoonMineTile(player)
+    player.game.defer(new PlaceMoonMineTile(player))
       .andThen((space) => {
         const moon = MoonExpansion.moonData(player.game).moon;
         const spaces = moon.getAdjacentSpaces(space);
@@ -49,7 +49,7 @@ export class MiningComplex extends PreludeCard {
             availableRoadSpaces,
             'Select a space next to the mine for a road',
           ));
-      }));
+      });
     player.stock.deduct(Resource.MEGACREDITS, 7);
     return undefined;
   }

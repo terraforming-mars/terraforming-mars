@@ -84,16 +84,16 @@ export abstract class MiningCard extends Card implements IProjectCard {
         new SelectResourceTypeDeferred(
           player,
           bonusResources,
-          'Select a resource to gain 1 unit of production')
-          .andThen(
-            (resource) => {
-              player.production.add(resource, 1, {log: true});
-              this.bonusResource = [resource];
-              const spaceBonus = resource === Resource.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
-              player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
-              space.adjacency = this.getAdjacencyBonus(spaceBonus);
-            },
-          ));
+          'Select a resource to gain 1 unit of production'))
+        .andThen(
+          (resource) => {
+            player.production.add(resource, 1, {log: true});
+            this.bonusResource = [resource];
+            const spaceBonus = resource === Resource.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
+            player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
+            space.adjacency = this.getAdjacencyBonus(spaceBonus);
+          },
+        );
       return undefined;
     });
   }

@@ -14,10 +14,9 @@ export type Options = {
   canUseAsteroids?: boolean;
   canUseSpireScience?: boolean,
   title?: string | Message;
-  afterPay?(): void;
 }
 
-export class SelectPaymentDeferred extends DeferredAction {
+export class SelectPaymentDeferred extends DeferredAction<Payment> {
   constructor(
     player: IPlayer,
     public amount: number,
@@ -64,8 +63,9 @@ export class SelectPaymentDeferred extends DeferredAction {
       if (this.player.megaCredits < this.amount) {
         throw new Error(`Player does not have ${this.amount} M€`);
       }
-      this.player.pay(Payment.of({megaCredits: this.amount}));
-      this.options.afterPay?.();
+      const payment = Payment.of({megaCredits: this.amount});
+      this.player.pay(payment);
+      this.cb(payment);
       return undefined;
     }
 
@@ -84,7 +84,7 @@ export class SelectPaymentDeferred extends DeferredAction {
       },
       (payment: Payment) => {
         this.player.pay(payment);
-        this.options.afterPay?.();
+        this.cb(payment);
         return undefined;
       },
     );

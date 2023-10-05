@@ -43,7 +43,7 @@ import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
-import {LogMessageData} from '@/common/logs/LogMessageData';
+import {LogMessageData, LogMessageDataAttrs} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
@@ -165,7 +165,7 @@ export default Vue.extend({
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
-    cardToHtml(card: ClientCard, tag: boolean | undefined) {
+    cardToHtml(card: ClientCard, attrs: LogMessageDataAttrs | undefined) {
       const suffixFreeCardName = card.name.split(':')[0];
       const className = cardTypeToCss[card.type];
 
@@ -173,7 +173,7 @@ export default Vue.extend({
         return suffixFreeCardName;
       }
       let tagHTML = '';
-      if (tag === true) {
+      if (attrs?.tags === true) {
         tagHTML = '&nbsp;' + (card.tags.map((tag) => `<div class="log-tag tag-${tag}"></div>`).join(' '));
       }
       return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + tagHTML + '</span>';
@@ -196,7 +196,7 @@ export default Vue.extend({
         const cardName = data.value as CardName;
         const card = getCard(cardName);
         if (card !== undefined) {
-          return this.cardToHtml(card, data.attrs?.tag);
+          return this.cardToHtml(card, data.attrs);
         } else {
           console.log(`Cannot render ${cardName}`);
         }

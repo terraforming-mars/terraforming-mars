@@ -31,13 +31,14 @@ export class EccentricSponsor extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new PlayProjectCard(player).andThen((card) => {
-      if (card === undefined) {
-        PreludesExpansion.fizzle(player, this);
-        // If this card fizzles, don't apply the discount to the next card.
-        player.lastCardPlayed = undefined;
-      }
-    }));
+    player.game.defer(new PlayProjectCard(player))
+      .andThen((card) => {
+        if (card === undefined) {
+          PreludesExpansion.fizzle(player, this);
+          // If this card fizzles, don't apply the discount to the next card.
+          player.lastCardPlayed = undefined;
+        }
+      });
     return undefined;
   }
 }

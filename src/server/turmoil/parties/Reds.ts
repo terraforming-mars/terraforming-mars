@@ -14,6 +14,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {GlobalParameter} from '../../../common/GlobalParameter';
+import {TITLES} from '../../inputs/titles';
 
 export class Reds extends Party implements IParty {
   readonly name = PartyName.REDS;
@@ -166,77 +167,71 @@ class RedsPolicy03 implements Policy {
     game.log('${0} used Turmoil Reds action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(
-      player,
-      4,
-      {
-        title: 'Select how to pay for Turmoil Reds action',
-        afterPay: () => {
-          const orOptions = new OrOptions();
+    game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.REDS)}))
+      .andThen(() => {
+        const orOptions = new OrOptions();
 
-          // Decrease temperature option
-          if (this.canDecrease(game, GlobalParameter.TEMPERATURE)) {
-            orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm', () => {
-              game.increaseTemperature(player, -1);
-              game.log('${0} decreased temperature 1 step', (b) => b.player(player));
-              return undefined;
-            }));
-          }
+        // Decrease temperature option
+        if (this.canDecrease(game, GlobalParameter.TEMPERATURE)) {
+          orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm', () => {
+            game.increaseTemperature(player, -1);
+            game.log('${0} decreased temperature 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
 
-          // Remove ocean option
-          if (this.canDecrease(game, GlobalParameter.OCEANS)) {
-            orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
-              game.defer(new RemoveOceanTile(player, 'Turmoil Reds action - Remove an Ocean tile from the board'));
-              return undefined;
-            }));
-          }
+        // Remove ocean option
+        if (this.canDecrease(game, GlobalParameter.OCEANS)) {
+          orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
+            game.defer(new RemoveOceanTile(player, 'Turmoil Reds action - Remove an Ocean tile from the board'));
+            return undefined;
+          }));
+        }
 
-          // Decrease oxygen level option
-          if (this.canDecrease(game, GlobalParameter.OXYGEN)) {
-            orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm', () => {
-              game.increaseOxygenLevel(player, -1);
-              game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
-              return undefined;
-            }));
-          }
+        // Decrease oxygen level option
+        if (this.canDecrease(game, GlobalParameter.OXYGEN)) {
+          orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm', () => {
+            game.increaseOxygenLevel(player, -1);
+            game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
 
-          // Decrease Venus scale option
-          if (this.canDecrease(game, GlobalParameter.VENUS)) {
-            orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm', () => {
-              game.increaseVenusScaleLevel(player, -1);
-              game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
-              return undefined;
-            }));
-          }
+        // Decrease Venus scale option
+        if (this.canDecrease(game, GlobalParameter.VENUS)) {
+          orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm', () => {
+            game.increaseVenusScaleLevel(player, -1);
+            game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
 
-          if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon habitat rate', 'Confirm', () => {
-              MoonExpansion.lowerHabitatRate(player, 1);
-              return undefined;
-            }));
-          }
+        if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon habitat rate', 'Confirm', () => {
+            MoonExpansion.lowerHabitatRate(player, 1);
+            return undefined;
+          }));
+        }
 
-          if (this.canDecrease(game, GlobalParameter.MOON_MINING_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon mining rate', 'Confirm', () => {
-              MoonExpansion.lowerMiningRate(player, 1);
-              return undefined;
-            }));
-          }
+        if (this.canDecrease(game, GlobalParameter.MOON_MINING_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon mining rate', 'Confirm', () => {
+            MoonExpansion.lowerMiningRate(player, 1);
+            return undefined;
+          }));
+        }
 
-          if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate', 'Confirm', () => {
-              MoonExpansion.lowerLogisticRate(player, 1);
-              return undefined;
-            }));
-          }
+        if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate', 'Confirm', () => {
+            MoonExpansion.lowerLogisticRate(player, 1);
+            return undefined;
+          }));
+        }
 
-          if (orOptions.options.length === 1) return orOptions.options[0].cb();
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-          game.defer(new SimpleDeferredAction(player, () => orOptions));
-          return undefined;
-        },
-      },
-    ));
+        game.defer(new SimpleDeferredAction(player, () => orOptions));
+        return undefined;
+      });
 
     return undefined;
   }

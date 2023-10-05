@@ -6,6 +6,8 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {GainResources} from '../../deferredActions/GainResources';
+import {Resource} from '../../../common/Resource';
 
 export class SagittaFrontierServices extends Card implements ICorporationCard {
   constructor() {
@@ -51,12 +53,16 @@ export class SagittaFrontierServices extends Card implements ICorporationCard {
     if (player.isCorporation(this.name)) {
       const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
       if (count === 0) {
-        player.stock.megacredits += 4;
-        player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
+        player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 4}))
+          .andThen(() => {
+            player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
+          });
       }
       if (count === 1) {
-        player.stock.megacredits += 1;
-        player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
+        player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 1}))
+          .andThen(() => {
+            player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
+          });
       }
     }
   }

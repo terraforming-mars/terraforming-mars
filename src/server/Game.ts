@@ -30,7 +30,7 @@ import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
-import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
+import {AndThen, DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -465,11 +465,12 @@ export class Game implements IGame, Logger {
     return ids.map((id) => this.getPlayerById(id));
   }
 
-  public defer(action: DeferredAction, priority?: Priority): void {
+  public defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T> {
     if (priority !== undefined) {
       action.priority = priority;
     }
     this.deferredActions.push(action);
+    return action;
   }
 
   public milestoneClaimed(milestone: IMilestone): boolean {
@@ -757,6 +758,9 @@ export class Game implements IGame, Logger {
   }
 
   private updateGlobalsForTheGeneration(): void {
+    if (!Array.isArray(this.globalsPerGeneration)) {
+      this.globalsPerGeneration = [];
+    }
     this.globalsPerGeneration.push({});
     const entry = this.globalsPerGeneration[this.globalsPerGeneration.length - 1];
     entry[GlobalParameter.TEMPERATURE] = this.temperature;
@@ -1639,7 +1643,7 @@ export class Game implements IGame, Logger {
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
     // TODO(kberg): remove ?? {} after 2023-11-30
-    game.globalsPerGeneration = d.globalsPerGeneration ?? {};
+    game.globalsPerGeneration = d.globalsPerGeneration ?? [];
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {

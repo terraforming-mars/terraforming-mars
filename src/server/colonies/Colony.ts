@@ -141,8 +141,8 @@ export abstract class Colony implements IColony {
     }
 
     // Ask the player if they want to increase the track
-    player.game.defer(new IncreaseColonyTrack(player, this, steps).andThen(
-      () => this.handleTrade(player, tradeOptions)));
+    player.game.defer(new IncreaseColonyTrack(player, this, steps))
+      .andThen(() => this.handleTrade(player, tradeOptions));
   }
 
   private handleTrade(player: IPlayer, options: TradeOptions) {
@@ -214,7 +214,7 @@ export abstract class Colony implements IColony {
 
     case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
       player.drawCard();
-      action = new DiscardCards(player, 1, this.name + ' colony bonus. Select a card to discard');
+      action = new DiscardCards(player, 1, 1, this.name + ' colony bonus. Select a card to discard');
       break;
 
     case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
@@ -307,7 +307,7 @@ export abstract class Colony implements IColony {
             'Select player to discard a card',
             'Select',
             (selectedPlayer: IPlayer) => {
-              game.defer(new DiscardCards(selectedPlayer, 1, this.name + ' colony effect. Select a card to discard'));
+              game.defer(new DiscardCards(selectedPlayer, 1, 1, this.name + ' colony effect. Select a card to discard'));
               return undefined;
             },
           );

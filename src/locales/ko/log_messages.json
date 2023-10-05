@@ -107,16 +107,7 @@
     "All awards already funded": "모든 기업상이 이미 제정되었음",
     "Didn\u2019t even find player": "플레이어를 찾을 수 없음",
     "No player has played requested card": "요청한 카드를 플레이한 플레이어가 없음",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "${2} 배치를 위해 비용이 ${1} M€인 ${0} 카드를 뽑고 버림",
-
-
-
-
-
-
-
-
-
+    "Drew and discarded ${0} to place a ${1}": "${1} 배치를 위해 ${0} 카드를 뽑고 버림",
 
     "${0} played ${1}": "${0} 플레이어는 ${1} 카드를 추진",
     "${0} used ${1} action": "${0} 플레이어는 ${1} 행동 수행",

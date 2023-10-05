@@ -176,7 +176,12 @@ export default Vue.extend({
       if (attrs?.tags === true) {
         tagHTML = '&nbsp;' + (card.tags.map((tag) => `<div class="log-tag tag-${tag}"></div>`).join(' '));
       }
-      return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + tagHTML + '</span>';
+
+      let costHTML = '';
+      if (attrs?.cost === true) {
+        costHTML = `<span>&nbsp;<div class="log-resource-megacredits">${card.cost}</div></span>`;
+      }
+      return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + tagHTML + costHTML +'</span>';
     },
     messageDataToHTML(data: LogMessageData): string {
       if (data.type === undefined || data.value === undefined) {

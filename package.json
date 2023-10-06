@@ -56,7 +56,7 @@
     "tsconfig-paths": "^3.11.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "typescript": "^4.7.4",
-    "vue-loader": "^15.10.1",
+    "vue-loader": "^17.2.2",
     "vue-style-loader": "^4.1.3",
     "vue-typed-refs": "^1.0.0",
     "zlib": "^1.0.5"

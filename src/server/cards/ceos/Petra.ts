@@ -8,7 +8,6 @@ import {DELEGATES_FOR_NEUTRAL_PLAYER} from '../../../common/constants';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectParty} from '../../inputs/SelectParty';
-import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -85,11 +84,12 @@ export class Petra extends CeoCard {
 
     for (let i = 0; i < 3; i++) {
       player.game.defer(new SimpleDeferredAction(player, () => {
-        return new SelectParty(title, 'Send delegate', availableParties, (partyName: PartyName) => {
-          turmoil.sendDelegateToParty('NEUTRAL', partyName, player.game);
-          player.game.log('${0} sent ${1} Neutral delegate in ${2} area', (b) => b.player(player).number(1).party(turmoil.getPartyByName(partyName)));
-          return undefined;
-        });
+        return new SelectParty(title, 'Send delegate', availableParties)
+          .andThen((partyName) => {
+            turmoil.sendDelegateToParty('NEUTRAL', partyName, player.game);
+            player.game.log('${0} sent ${1} Neutral delegate in ${2} area', (b) => b.player(player).number(1).party(turmoil.getPartyByName(partyName)));
+            return undefined;
+          });
       }));
     }
 

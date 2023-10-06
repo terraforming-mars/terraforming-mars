@@ -5,7 +5,6 @@ import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Space} from '../../boards/Space';
 import {TileType} from '../../../common/TileType';
 import {AresHandler} from '../../ares/AresHandler';
 import {CardRenderer} from '../render/CardRenderer';
@@ -39,19 +38,20 @@ export class DesperateMeasures extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space: Space) => {
-      if (space.tile === undefined) {
-        throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);
-      }
-      space.tile.protectedHazard = true;
-      const tileType = space.tile.tileType;
-      if (TileType.DUST_STORM_MILD === tileType || TileType.DUST_STORM_SEVERE === tileType) {
-        player.game.increaseOxygenLevel(player, 1);
-      } else {
+    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game))
+      .andThen((space) => {
+        if (space.tile === undefined) {
+          throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);
+        }
+        space.tile.protectedHazard = true;
+        const tileType = space.tile.tileType;
+        if (TileType.DUST_STORM_MILD === tileType || TileType.DUST_STORM_SEVERE === tileType) {
+          player.game.increaseOxygenLevel(player, 1);
+        } else {
         // is an erosion tile when the expression above is false.
-        player.game.increaseTemperature(player, 1);
-      }
-      return undefined;
-    });
+          player.game.increaseTemperature(player, 1);
+        }
+        return undefined;
+      });
   }
 }

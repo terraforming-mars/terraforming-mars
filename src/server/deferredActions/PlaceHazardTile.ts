@@ -1,6 +1,5 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from './DeferredAction';
 import {_AresHazardPlacement} from '../ares/AresHazards';
 import {TileType} from '../../common/TileType';
@@ -24,14 +23,11 @@ export class PlaceHazardTile extends DeferredAction {
     const hazardType = this.hazardType;
     const title = this.options?.title || 'Select space for ' + TileType.toString(hazardType);
 
-    return new SelectSpace(
-      title,
-      availableSpaces,
-      (space: Space) => {
+    return new SelectSpace(title, availableSpaces)
+      .andThen((space) => {
         _AresHazardPlacement.putHazardAt(space, hazardType);
         return undefined;
-      },
-    );
+      });
   }
 }
 

@@ -1,4 +1,3 @@
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
@@ -9,7 +8,6 @@ import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectColony} from '../../inputs/SelectColony';
-import {IColony} from '../../colonies/IColony';
 import {LogHelper} from '../../LogHelper';
 
 export class MarketManipulation extends Card implements IProjectCard {
@@ -73,30 +71,26 @@ export class MarketManipulation extends Card implements IProjectCard {
     const increaseColonyTrack = new SelectColony(
       'Select which colony tile track to increase',
       'Increase',
-      increasableColonies,
-      (increasedColony: IColony) => {
-        increasedColony.increaseTrack();
-        LogHelper.logColonyTrackIncrease(player, increasedColony, 1);
-        const decreaseColonyTrack = new SelectColony(
-          'Select which colony tile track to decrease',
-          'Decrease',
-          decreasableColonies.filter((decreaseableColony) => decreaseableColony.name !== increasedColony.name),
-          (decreasedColony: IColony) => {
-            decreasedColony.decreaseTrack();
-            LogHelper.logColonyTrackDecrease(player, decreasedColony);
-            return undefined;
-          },
-        );
-        player.game.defer(
-          new SimpleDeferredAction(player, () => decreaseColonyTrack),
-        );
-        return undefined;
-      },
-    );
+      increasableColonies)
+      .andThen(
+        (increasedColony) => {
+          increasedColony.increaseTrack();
+          LogHelper.logColonyTrackIncrease(player, increasedColony, 1);
+          const decreaseColonyTrack = new SelectColony(
+            'Select which colony tile track to decrease',
+            'Decrease',
+            decreasableColonies.filter((decreaseableColony) => decreaseableColony.name !== increasedColony.name))
+            .andThen((decreasedColony) => {
+              decreasedColony.decreaseTrack();
+              LogHelper.logColonyTrackDecrease(player, decreasedColony);
+              return undefined;
+            });
+          player.defer(decreaseColonyTrack);
+          return undefined;
+        },
+      );
 
-    player.game.defer(
-      new SimpleDeferredAction(player, () => increaseColonyTrack),
-    );
+    player.defer(increaseColonyTrack);
     return undefined;
   }
 }

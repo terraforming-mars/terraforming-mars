@@ -42,9 +42,9 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
     const input = new SelectCard(
       'Choose a card to move a floater to a Venusian habitat.',
       'Choose',
-      cards,
-      (selected) => {
-        player.removeResourceFrom(selected[0], 1);
+      cards)
+      .andThen(([card]) => {
+        player.removeResourceFrom(card, 1);
         player.addResourceTo(this, {log: true});
         return undefined;
       });

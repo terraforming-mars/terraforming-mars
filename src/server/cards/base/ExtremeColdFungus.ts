@@ -69,12 +69,11 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
       new SelectCard(
         'Select card to add 2 microbes',
         'Add microbes',
-        otherMicrobeCards,
-        ([card]) => {
+        otherMicrobeCards)
+        .andThen(([card]) => {
           player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
-        },
-      ),
+        }),
       gainPlantOption,
     );
   }

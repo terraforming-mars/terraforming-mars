@@ -1,13 +1,12 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
 import {SelectAmountModel} from '../../common/models/PlayerInputModel';
 
-export class SelectAmount extends BasePlayerInput {
+export class SelectAmount extends BasePlayerInputAndThen<number> {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Save',
-    public cb: (amount: number) => undefined | PlayerInput,
     public min: number,
     public max: number,
     public maxByDefault?: boolean,

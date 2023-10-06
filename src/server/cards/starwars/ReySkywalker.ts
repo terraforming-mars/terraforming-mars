@@ -37,8 +37,8 @@ export class ReySkywalker extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select an empty space to make unavailable for the rest of the game',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space) => {
+      player.game.board.getAvailableSpacesOnLand(player))
+      .andThen((space) => {
         // TODO(kberg): Don't use Restricted Area.
         space.tile = {tileType: TileType.RESTRICTED_AREA, protectedHazard: true};
         return undefined;

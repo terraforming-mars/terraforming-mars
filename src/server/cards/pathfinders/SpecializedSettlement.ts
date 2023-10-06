@@ -69,8 +69,8 @@ export class SpecializedSettlement extends Card implements IProjectCard {
     this.defaultProduce(player);
     return new SelectSpace(
       'Select space for city tile',
-      player.game.board.getAvailableSpacesForCity(player),
-      (space: Space) => {
+      player.game.board.getAvailableSpacesForCity(player))
+      .andThen((space) => {
         const coveringExistingTile = space.tile !== undefined;
 
         player.game.addCity(player, space);
@@ -90,7 +90,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
           );
         return undefined;
       },
-    );
+      );
   }
 
   public produce(player: IPlayer) {

@@ -71,30 +71,29 @@ export abstract class MiningCard extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer): SelectSpace {
-    return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: Space) => {
-      const bonusResources = [];
-      if (space.bonus.includes(SpaceBonus.STEEL)) {
-        bonusResources.push(Resource.STEEL);
-      }
-      if (space.bonus.includes(SpaceBonus.TITANIUM)) {
-        bonusResources.push(Resource.TITANIUM);
-      }
+    return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player))
+      .andThen((space) => {
+        const bonusResources = [];
+        if (space.bonus.includes(SpaceBonus.STEEL)) {
+          bonusResources.push(Resource.STEEL);
+        }
+        if (space.bonus.includes(SpaceBonus.TITANIUM)) {
+          bonusResources.push(Resource.TITANIUM);
+        }
 
-      player.game.defer(
-        new SelectResourceTypeDeferred(
-          player,
-          bonusResources,
-          'Select a resource to gain 1 unit of production'))
-        .andThen(
-          (resource) => {
+        player.game.defer(
+          new SelectResourceTypeDeferred(
+            player,
+            bonusResources,
+            'Select a resource to gain 1 unit of production'))
+          .andThen((resource) => {
             player.production.add(resource, 1, {log: true});
             this.bonusResource = [resource];
             const spaceBonus = resource === Resource.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
             player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
             space.adjacency = this.getAdjacencyBonus(spaceBonus);
-          },
-        );
-      return undefined;
-    });
+          });
+        return undefined;
+      });
   }
 }

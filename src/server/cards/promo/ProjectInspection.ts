@@ -57,12 +57,11 @@ export class ProjectInspection extends Card implements IProjectCard {
     return new SelectCard<IActionCard & ICard>(
       'Perform an action from a played card again',
       'Take action',
-      actionCards,
-      ([card]) => {
+      actionCards)
+      .andThen(([card]) => {
         const foundCard = card;
         player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
         return foundCard.action(player);
-      },
-    );
+      });
   }
 }

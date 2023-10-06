@@ -19,13 +19,13 @@ describe('SelectSpace', () => {
   });
 
   it('Simple', () => {
-    const selectSpace = new SelectSpace('', game.board.spaces, cb);
+    const selectSpace = new SelectSpace('', game.board.spaces).andThen(cb);
     selectSpace.process({type: 'space', spaceId: '05'});
     expect(selected!.id).eq('05');
   });
 
   it('Cannot select space not part of the set', () => {
-    const selectSpace = new SelectSpace('', game.board.spaces, cb);
+    const selectSpace = new SelectSpace('', game.board.spaces).andThen(cb);
     expect(() => selectSpace.process({type: 'space', spaceId: '00'}))
       .to.throw(Error, /Space not available/);
   });

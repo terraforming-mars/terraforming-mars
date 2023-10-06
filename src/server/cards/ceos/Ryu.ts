@@ -54,22 +54,21 @@ export class Ryu extends CeoCard {
         return new SelectAmount(
           `Select amount of ${resourceToDecrease} production to decrease`,
           'Decrease',
-          (amount: number) => {
-            const productionToIncrease =
-              ALL_RESOURCES.filter((res) => res !== resourceToDecrease)
-                .map((res) => new SelectOption(newMessage('Increase ${0} production', (b) => b.string(res)), 'Select', () => {
-                  player.production.add(resourceToDecrease, -amount, {log: true});
-                  // player.production.adjust()
-                  player.production.add(res, amount, {log: true});
-                  return undefined;
-                }));
-
-            return new OrOptions(...productionToIncrease);
-          },
           1,
           maxDecreasableAmt,
           true,
-        );
+        ).andThen((amount) => {
+          const productionToIncrease =
+            ALL_RESOURCES.filter((res) => res !== resourceToDecrease)
+              .map((res) => new SelectOption(newMessage('Increase ${0} production', (b) => b.string(res)), 'Select', () => {
+                player.production.add(resourceToDecrease, -amount, {log: true});
+                // player.production.adjust()
+                player.production.add(res, amount, {log: true});
+                return undefined;
+              }));
+
+          return new OrOptions(...productionToIncrease);
+        });
       });
 
       choices.options.push(selectOption);

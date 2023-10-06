@@ -44,13 +44,14 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const spaces = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player, upgradedTiles: false});
-    return new SelectSpace('Select one of your mines to upgrade', spaces, (space) => {
-      if (space.tile === undefined) {
-        throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
-      }
-      space.tile.tileType = TileType.LUNAR_MINE_URBANIZATION;
-      MoonExpansion.raiseHabitatRate(player);
-      return undefined;
-    });
+    return new SelectSpace('Select one of your mines to upgrade', spaces)
+      .andThen((space) => {
+        if (space.tile === undefined) {
+          throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
+        }
+        space.tile.tileType = TileType.LUNAR_MINE_URBANIZATION;
+        MoonExpansion.raiseHabitatRate(player);
+        return undefined;
+      });
   }
 }

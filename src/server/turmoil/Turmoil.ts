@@ -249,16 +249,16 @@ export class Turmoil {
       currentGlobalEvent.resolve(game, this);
     }
 
-    this.startNewGovernment(game);
-  }
-
-  private startNewGovernment(game: IGame) {
-    if (game.deferredActions.length > 0) {
-      game.deferredActions.runAll(() => {
-        this.startNewGovernment(game);
-      });
-      return;
-    }
+    // WOW THIS BREAKS THINGS
+    //   this.startNewGovernment(game);
+    // }
+    // private startNewGovernment(game: IGame) {
+    //   if (game.deferredActions.length > 0) {
+    //     game.deferredActions.runAll(() => {
+    //       this.startNewGovernment(game);
+    //     });
+    //     return;
+    //   }
 
     // 3 - New Government
 

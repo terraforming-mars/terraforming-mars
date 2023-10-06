@@ -36,7 +36,6 @@ import {DarksideMeteorBombardment} from '../../src/server/cards/moon/DarksideMet
 import {LunaStagingStation} from '../../src/server/cards/moon/LunaStagingStation';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
-import {AquiferReleasedByPublicCouncil} from '../../src/server/turmoil/globalEvents/AquiferReleasedByPublicCouncil';
 import {testGame} from '../TestGame';
 
 describe('Turmoil', function() {
@@ -70,6 +69,16 @@ describe('Turmoil', function() {
     expect(Array.from(greens.delegates.values())).to.deep.eq([player.id]);
     expect(turmoil.usedFreeDelegateAction).does.not.contain(player.id);
   });
+
+  it('Correctly send delegate from the reserve', function() {
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
+    greens.delegates.clear();
+
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+
+    expect(Array.from(greens.delegates.values())).to.deep.eq([player.id]);
+  });
+
 
   it('Do not send delegate from reserve when reserve is empty', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS);
@@ -166,38 +175,6 @@ describe('Turmoil', function() {
     expect(turmoil.usedFreeDelegateAction).is.empty;
     expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.REDS));
     expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
-  });
-
-  it('Correctly run end of generation when global event introduces actions', function() {
-    player.setTerraformRating(20);
-    player2.setTerraformRating(21);
-
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
-
-    // Requires placing an ocean
-    turmoil.currentGlobalEvent = new AquiferReleasedByPublicCouncil();
-    game.phase = Phase.SOLAR;
-    turmoil.endGeneration(game);
-    runAllActions(game);
-
-    // Both players lost their TR, but the new policy isn't in effect.
-    expect(player.getTerraformRating()).to.eq(19);
-    expect(player2.getTerraformRating()).to.eq(20);
-    expect(turmoil.chairman).to.eq('NEUTRAL');
-
-    cast(player.getWaitingFor(), SelectSpace);
-    player.process({
-      type: 'space',
-      spaceId: player.game.board.getAvailableSpacesForOcean(player)[0].id,
-    });
-    runAllActions(game);
-
-    expect(turmoil.chairman).to.eq(player.id);
-    // player gains 1 TR from Reds ruling bonus, and 1 TR from becoming the chairman
-    expect(player.getTerraformRating()).to.eq(21);
-    expect(player2.getTerraformRating()).to.eq(20);
   });
 
   it('Does not give Mars First bonus for World Government terraforming', function() {

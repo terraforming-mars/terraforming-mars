@@ -61,7 +61,9 @@ export class DeferredActionsQueue {
       return;
     }
     this.queue.splice(next, 1);
-    this.run(action, () => this.runAll(cb));
+    this.run(action, () => {
+      this.runAll(cb);
+    });
   }
 
   // The following methods are used in tests

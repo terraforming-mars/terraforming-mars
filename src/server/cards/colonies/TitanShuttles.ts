@@ -48,7 +48,7 @@ export class TitanShuttles extends Card implements IProjectCard {
     }
 
     return new OrOptions(
-      new SelectOption('Add 2 floaters to a Jovian card', 'Add floaters', () => {
+      new SelectOption('Add 2 floaters to a Jovian card', 'Add floaters').andThen(() => {
         player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tag.JOVIAN}));
         return undefined;
       }),

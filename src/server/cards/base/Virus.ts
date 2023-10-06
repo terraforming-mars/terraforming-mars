@@ -61,9 +61,7 @@ export class Virus extends Card implements IProjectCard {
     if (removePlants !== undefined) {
       orOptions.options.push(...removePlants);
     }
-    orOptions.options.push(new SelectOption('Skip removal', 'Confirm', () => {
-      return undefined;
-    }));
+    orOptions.options.push(new SelectOption('Skip removal', 'Confirm'));
 
     return orOptions;
   }

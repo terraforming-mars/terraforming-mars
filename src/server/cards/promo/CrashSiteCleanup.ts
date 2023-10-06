@@ -30,21 +30,19 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     const gainTitanium = new SelectOption(
       'Gain 1 titanium',
-      'Gain titanium',
-      () => {
+      'Gain titanium')
+      .andThen(() => {
         player.stock.add(Resource.TITANIUM, 1, {log: true});
         return undefined;
-      },
-    );
+      });
 
     const gain2Steel = new SelectOption(
       'Gain 2 steel',
-      'Gain steel',
-      () => {
+      'Gain steel')
+      .andThen(() => {
         player.stock.add(Resource.STEEL, 2, {log: true});
         return undefined;
-      },
-    );
+      });
 
     return new OrOptions(gainTitanium, gain2Steel);
   }

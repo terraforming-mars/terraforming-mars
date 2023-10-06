@@ -12,7 +12,7 @@ export class SelectResource extends OrOptions {
   ) {
     super();
     for (const key of include) {
-      this.options.push(new SelectOption(key, 'Select', () => {
+      this.options.push(new SelectOption(key).andThen(() => {
         cb(key);
         return undefined;
       }));

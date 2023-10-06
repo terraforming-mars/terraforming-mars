@@ -25,7 +25,7 @@ describe('ByElection', function() {
 
     const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     const subOptions = cast(orOptions.options[0], SelectOption);
-    subOptions.cb();
+    subOptions.cb(undefined);
 
     const turmoil = game.turmoil!;
     expect(turmoil.playersInfluenceBonus.get(player.id)).to.eq(1);

@@ -73,14 +73,14 @@ describe('CloneTroopers', () => {
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
 
     orOptions = cast(card.action(player), OrOptions);
-    cast(orOptions.options[1], SelectOption).cb();
+    cast(orOptions.options[1], SelectOption).cb(undefined);
 
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));
     expect(player2.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));
     expect(player3.stock.asUnits()).deep.eq(Units.of({titanium: 5}));
     expect(card.resourceCount).eq(2);
 
-    cast(orOptions.options[2], SelectOption).cb();
+    cast(orOptions.options[2], SelectOption).cb(undefined);
 
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, titanium: 1}));
     expect(player2.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));

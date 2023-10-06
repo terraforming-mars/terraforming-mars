@@ -43,7 +43,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
   public action(player: IPlayer) {
     const opts: Array<PlayerInput> = [];
 
-    const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
+    const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe').andThen(() => {
       player.addResourceTo(this, {log: true});
       return undefined;
     });

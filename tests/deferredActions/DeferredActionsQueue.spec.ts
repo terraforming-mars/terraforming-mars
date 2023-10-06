@@ -9,7 +9,7 @@ describe('DeferredActionsQueue', () => {
     const [, player, otherPlayer] = testGame(2);
 
     const queue = new DeferredActionsQueue();
-    const expectedInput = new SelectOption('foo', 'bar', () => undefined);
+    const expectedInput = new SelectOption('foo', 'bar');
     queue.push(new SimpleDeferredAction(player, () => expectedInput));
     queue.push(new SimpleDeferredAction(otherPlayer, () => undefined));
     let finished = false;

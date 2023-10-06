@@ -91,7 +91,7 @@ class UnityPolicy02 implements Policy {
 
         if (availableFloaterCards.length === 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
+            new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm').andThen(() => {
               player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
 
               return undefined;
@@ -99,7 +99,7 @@ class UnityPolicy02 implements Policy {
           );
         } else if (availableFloaterCards.length > 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
+            new SelectOption('Add 2 floaters to a card', 'Confirm').andThen(() => {
               return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards)
                 .andThen(([card]) => {
                   player.addResourceTo(card, {qty: 2, log: true});
@@ -109,7 +109,7 @@ class UnityPolicy02 implements Policy {
           );
         }
 
-        orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
+        orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm').andThen(() => {
           player.stock.add(Resource.TITANIUM, 2);
           game.log('${0} gained 2 titanium', (b) => b.player(player));
           return undefined;

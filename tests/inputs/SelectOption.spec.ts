@@ -10,7 +10,7 @@ describe('SelectOption', function() {
 
 
   it('Simple', function() {
-    const selectOption = new SelectOption('', '', cb);
+    const selectOption = new SelectOption('').andThen(cb);
 
     expect(selected).eq(false);
     selectOption.process({type: 'option'});

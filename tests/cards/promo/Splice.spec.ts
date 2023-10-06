@@ -33,7 +33,7 @@ describe('Splice', function() {
     expect(action.options).has.lengthOf(2);
     const orOptions = cast(action.options[0], SelectOption);
 
-    orOptions.cb();
+    orOptions.cb(undefined);
     expect(card2.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(2);
   });

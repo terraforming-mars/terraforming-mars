@@ -67,12 +67,11 @@ export class GeologicalExpedition extends Card implements IProjectCard {
     unique.forEach((bonus) => {
       options.options.push(new SelectOption(
         SpaceBonus.toString(bonus),
-        'Select',
-        () => {
+        'Select')
+        .andThen(() => {
           activePlayer.game.grantSpaceBonus(activePlayer, bonus, 1);
           return undefined;
-        },
-      ));
+        }));
     });
     if (options.options.length === 1) {
       options.options[0].cb();

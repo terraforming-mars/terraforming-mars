@@ -73,10 +73,10 @@ export class Colonies {
     handlers.forEach((handler) => {
       if (handler.canUse()) {
         howToPayForTrade.options.push(new SelectOption(
-          handler.optionText(), '', () => {
-            selected = handler;
-            return undefined;
-          }));
+          handler.optionText()).andThen(() => {
+          selected = handler;
+          return undefined;
+        }));
       }
     });
 

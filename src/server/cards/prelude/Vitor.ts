@@ -37,7 +37,7 @@ export class Vitor extends Card implements ICorporationCard {
   }
 
   private selectAwardToFund(player: IPlayer, award: IAward): SelectOption {
-    return new SelectOption('Fund ' + award.name + ' award', 'Confirm', () => {
+    return new SelectOption('Fund ' + award.name + ' award', 'Confirm').andThen(() => {
       player.game.fundAward(player, award);
       return undefined;
     });

@@ -57,14 +57,14 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
   public action(player: IPlayer) {
     const orOptions = new OrOptions();
     if (player.titanium > 0) {
-      orOptions.options.push(new SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet', () => {
+      orOptions.options.push(new SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet').andThen(() => {
         player.pay(Payment.of({titanium: 1}));
         player.addResourceTo(this, {qty: 1, log: true});
         return undefined;
       }));
     }
     if (this.resourceCount > 0) {
-      orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 2M€ from every opponent.', 'Remove syndicate fleet', () => {
+      orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 2M€ from every opponent.', 'Remove syndicate fleet').andThen(() => {
         player.removeResourceFrom(this);
         const game = player.game;
         for (const p of game.getPlayers()) {

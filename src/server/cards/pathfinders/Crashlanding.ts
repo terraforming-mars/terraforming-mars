@@ -64,12 +64,12 @@ export class Crashlanding extends Card implements IProjectCard {
         };
         player.game.addTile(player, space, tile);
         const orOptions = new OrOptions(
-          new SelectOption('Leave as it is', '', () => {
+          new SelectOption('Leave as it is').andThen(() => {
             tile.rotated = undefined;
             this.grantPlacementBonuses(player, space);
             return undefined;
           }),
-          new SelectOption('Rotate Crashlanding', '', () => {
+          new SelectOption('Rotate Crashlanding').andThen(() => {
             tile.rotated = true;
             this.grantPlacementBonuses(player, space);
             return undefined;

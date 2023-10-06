@@ -6,6 +6,8 @@ import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {isPlanetaryTag, PLANETARY_TAGS, PlanetaryTag} from '../pathfinders/PathfindersData';
 import {intersection} from '../../common/utils/utils';
+import {newMessage} from '../logs/MessageBuilder';
+import {Message} from '../../common/logs/Message';
 
 /**
  * Declare what tag a new card has. Must occur before anything else, including
@@ -19,11 +21,8 @@ export class DeclareCloneTag extends DeferredAction<PlanetaryTag> {
   public constructor(
     player: IPlayer,
     public card: IProjectCard & ICloneTagCard,
-    public title: string = '') {
+    public title: string | Message | undefined = undefined) {
     super(player, Priority.DECLARE_CLONE_TAG);
-    if (this.title === '') {
-      this.title = `Assign the clone tag for ${card.name}`;
-    }
   }
 
   public execute() {
@@ -45,7 +44,10 @@ export class DeclareCloneTag extends DeferredAction<PlanetaryTag> {
       });
     });
     const orOptions = new OrOptions(...options);
-    orOptions.title = 'Select a new tag for this clone tag.';
+    if (this.title === undefined) {
+      this.title = newMessage('Assign the clone tag for ${0}', (b) => b.cardName(this.card.name));
+    }
+    orOptions.title = this.title;
     return orOptions;
   }
 }

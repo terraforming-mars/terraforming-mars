@@ -69,7 +69,7 @@ export default Vue.extend({
       if (o.type !== 'card') {
         return true;
       }
-      if (Boolean(o.showOnlyInLearnerMode) === false) {
+      if (o.showOnlyInLearnerMode === false) {
         return true;
       }
 

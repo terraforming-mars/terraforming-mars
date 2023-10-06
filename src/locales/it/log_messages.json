@@ -62,7 +62,7 @@
 "${0} removed ${1} ${2} from ${3} to ${4}":"${0} ha rimosso ${1} ${2} da ${3} a ${4}",
 "${0} revealed and discarded ${1}":"${0} ha rivelato e scartato ${1}",
 "${0} is using their ${1} effect to draw a card by discarding a card.":"${0} sta usando l'effetto di ${1} per pescare una carta",
-"Drew and discarded ${0} (cost ${1}) to place a ${2}":"Pescato e scartato ${0} (costo ${1}) per posizionare 1 ${2}",
+"Drew and discarded ${0} to place a ${1}":"Pescato e scartato ${0} per posizionare 1 ${1}",
 
 
 

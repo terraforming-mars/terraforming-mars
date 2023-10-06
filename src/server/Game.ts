@@ -1496,14 +1496,14 @@ export class Game implements IGame, Logger {
     if (cardCount === 1) {
       const card = this.projectDeck.draw(this);
       this.projectDeck.discard(card);
-      this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
+      this.log('Drew and discarded ${0} to place a ${1}', (b) => b.card(card, {cost: true}).tileType(toPlace));
       return card.cost;
     } else {
       const card1 = this.projectDeck.draw(this);
       this.projectDeck.discard(card1);
       const card2 = this.projectDeck.draw(this);
       this.projectDeck.discard(card2);
-      this.log('Drew and discarded ${0} (cost ${1}) and ${2} (cost ${3}) to place a ${4}', (b) => b.card(card1).number(card1.cost).card(card2).number(card2.cost).tileType(toPlace));
+      this.log('Drew and discarded ${0} and ${1} to place a ${2}', (b) => b.card(card1, {cost: true}).card(card2, {cost: true}).tileType(toPlace));
       return card1.cost + card2.cost;
     }
   }

@@ -54,8 +54,7 @@
     "${0}'s ${1} production ${2} by ${3}": "У ${0} производство ${1} ${2} на ${3}",
 
     "Card not found" : "Карта не найдена",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Взял и сбросил ${0} (стоимость ${1}), чтобы выложить ${2}",
-    "Drew and discarded ${0} (cost ${1}) and ${2} (cost ${3}) to place a Mild Dust Storm": "Взял и сбросил ${0} (стоимость ${1}) и ${2} (стоимость ${3}), чтобы выложить слабую пыльную бурю",
+    "Drew and discarded ${0} to place a ${1}": "Взял и сбросил ${0} чтобы выложить ${1}",
     "The id of this game is ${0}": "ID игры ${0}",
     "Good luck ${0}!": "Удачи, ${0}!",
     "Final greenery placement": "Завершающее размещение жетонов озеленения",

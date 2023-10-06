@@ -52,7 +52,7 @@
     "All awards already funded": "Todos os prêmios já foram financiados",
     "Didn't even find player": "Jogador não encontrado",
     "No player has played requested card": "Nenhum jogador jogou a carta solicitada",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Comprou e descartou ${0} (custo ${1}) para colocar ${2}",
+    "Drew and discarded ${0} to place a ${1}": "Comprou e descartou ${0} para colocar ${1}",
     "Good luck ${0}!": "Boa sorte, ${0}!",
 
     "${0} played ${1}": "${0} jogou ${1}",

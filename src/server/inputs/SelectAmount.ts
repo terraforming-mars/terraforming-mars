@@ -22,7 +22,7 @@ export class SelectAmount extends BasePlayerInputAndThen<number> {
       type: 'amount',
       max: this.max,
       min: this.min,
-      maxByDefault: this.maxByDefault,
+      maxByDefault: this.maxByDefault ?? false,
     };
   }
 

@@ -54,7 +54,7 @@ export class StormCraftIncorporated extends ActionCard implements ICorporationCa
 
     const options = new AndOptions(
       new SelectAmount('Heat', 'Spend heat', 0, Math.min(player.heat, targetAmount))
-        .andThen((amount: number) => {
+        .andThen((amount) => {
           heatAmount = amount;
           return undefined;
         }),

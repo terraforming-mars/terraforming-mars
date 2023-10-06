@@ -66,12 +66,10 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
 
   public action(player: IPlayer) {
     const eventCards = this.availableEventCards(player);
-    return new SelectProjectCardToPlay(
-      player,
-      eventCards,
-      {
-        action: 'discard',
-        cb: (card) => player.removedFromPlayCards.push(card),
+    return new SelectProjectCardToPlay(player, eventCards, {action: 'discard'})
+      .andThen((card) => {
+        player.removedFromPlayCards.push(card);
+        return undefined;
       });
   }
 }

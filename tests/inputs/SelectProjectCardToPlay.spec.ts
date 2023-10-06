@@ -32,8 +32,7 @@ describe('SelectProjectCardToPlay', function() {
         {card: aquiferPumping},
         {card: ioMiningIndustries},
       ],
-      {cb},
-    );
+    ).andThen(cb);
 
     expect(() => selectProjectCardToPlay.process({
       type: 'projectCard',

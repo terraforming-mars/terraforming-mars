@@ -68,12 +68,11 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
       new SelectCard(
         'Select card to add 1 animal',
         'Add animal',
-        availableAnimalCards,
-        ([card]) => {
+        availableAnimalCards)
+        .andThen(([card]) => {
           player.addResourceTo(card, {log: true});
           return undefined;
-        },
-      ),
+        }),
       gainPlantOption,
     );
   }

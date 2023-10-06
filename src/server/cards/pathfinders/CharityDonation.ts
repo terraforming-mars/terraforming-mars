@@ -49,27 +49,28 @@ export class SelectCharityDonationCard extends DeferredAction {
     return new SelectCard(
       'Select a card to keep',
       'Choose',
-      this.cards,
-      ([card]) => {
-        const game = this.player.game;
+      this.cards)
+      .andThen(
+        ([card]) => {
+          const game = this.player.game;
 
-        const cardIdx = this.cards.indexOf(card);
-        if (cardIdx > -1) {
-          this.cards.splice(cardIdx, 1);
-        }
+          const cardIdx = this.cards.indexOf(card);
+          if (cardIdx > -1) {
+            this.cards.splice(cardIdx, 1);
+          }
 
-        this.player.cardsInHand.push(card);
-        game.log('${0} drew ${1}', (b) => b.player(this.player).card(card));
+          this.player.cardsInHand.push(card);
+          game.log('${0} drew ${1}', (b) => b.player(this.player).card(card));
 
-        const nextIndex = (this.playerIdx + 1) % this.players.length;
-        if (nextIndex !== this.boundaryIndex) {
-          game.defer(new SelectCharityDonationCard(this.players, nextIndex, this.boundaryIndex, this.cards));
-        } else {
-          game.projectDeck.discard(this.cards[0]);
-          game.log('${0} was discarded.', (b) => b.card(this.cards[0]));
-        }
-        return undefined;
-      },
-    );
+          const nextIndex = (this.playerIdx + 1) % this.players.length;
+          if (nextIndex !== this.boundaryIndex) {
+            game.defer(new SelectCharityDonationCard(this.players, nextIndex, this.boundaryIndex, this.cards));
+          } else {
+            game.projectDeck.discard(this.cards[0]);
+            game.log('${0} was discarded.', (b) => b.card(this.cards[0]));
+          }
+          return undefined;
+        },
+      );
   }
 }

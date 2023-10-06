@@ -67,8 +67,8 @@ export class Wetlands extends Card implements IProjectCard {
 
     return new SelectSpace(
       'Select space for Wetlands',
-      this.availableSpaces(player),
-      (space: Space) => {
+      this.availableSpaces(player))
+      .andThen((space) => {
         const tile = {
           tileType: TileType.WETLANDS,
           card: this.name,
@@ -77,7 +77,6 @@ export class Wetlands extends Card implements IProjectCard {
         player.game.addTile(player, space, tile);
         player.game.increaseOxygenLevel(player, 1);
         return undefined;
-      },
-    );
+      });
   }
 }

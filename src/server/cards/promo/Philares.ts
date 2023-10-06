@@ -51,30 +51,36 @@ export class Philares extends Card implements ICorporationCard {
     let energyAmount = 0;
     let heatAmount = 0;
 
-    const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
-      megacreditsAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectSteel = new SelectAmount('Steel', 'Select', (amount: number) => {
-      steelAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectTitanium = new SelectAmount('Titanium', 'Select', (amount: number) => {
-      titaniumAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectPlants = new SelectAmount('Plants', 'Select', (amount: number) => {
-      plantsAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectEnergy = new SelectAmount('Energy', 'Select', (amount: number) => {
-      energyAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectHeat = new SelectAmount('Heat', 'Select', (amount: number) => {
-      heatAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
+    const selectMegacredit = new SelectAmount('Megacredits', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        megacreditsAmount = amount;
+        return undefined;
+      });
+    const selectSteel = new SelectAmount('Steel', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        steelAmount = amount;
+        return undefined;
+      });
+    const selectTitanium = new SelectAmount('Titanium', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        titaniumAmount = amount;
+        return undefined;
+      });
+    const selectPlants = new SelectAmount('Plants', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        plantsAmount = amount;
+        return undefined;
+      });
+    const selectEnergy = new SelectAmount('Energy', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        energyAmount = amount;
+        return undefined;
+      });
+    const selectHeat = new SelectAmount('Heat', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        heatAmount = amount;
+        return undefined;
+      });
 
     const selectResources = new AndOptions(
       () => {

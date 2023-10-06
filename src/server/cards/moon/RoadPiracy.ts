@@ -44,17 +44,13 @@ export class RoadPiracy extends Card implements IProjectCard {
         continue;
       }
       if (opponent.stock.get(resource) > 0) {
-        const cb = (amount: number) => {
-          ledger.set(opponent, amount);
-          return undefined;
-        };
         const selectAmount =
           new SelectAmount(
-            newMessage('${0}', (b) => b.player(opponent)),
-            undefined,
-            cb,
-            0,
-            opponent.stock.get(resource));
+            newMessage('${0}', (b) => b.player(opponent)), undefined, 0, opponent.stock.get(resource))
+            .andThen((amount: number) => {
+              ledger.set(opponent, amount);
+              return undefined;
+            });
         selectAmounts.push(selectAmount);
       }
     }

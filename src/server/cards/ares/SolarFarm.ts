@@ -1,7 +1,6 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Space} from '../../boards/Space';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
@@ -45,10 +44,8 @@ export class SolarFarm extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace(
-      'Select space for Solar Farm tile',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: Space) => {
+    return new SelectSpace('Select space for Solar Farm tile', player.game.board.getAvailableSpacesOnLand(player))
+      .andThen((space) => {
         player.game.addTile(player, space, {
           tileType: TileType.SOLAR_FARM,
           card: this.name,
@@ -56,7 +53,6 @@ export class SolarFarm extends Card implements IProjectCard {
         this.produce(player);
         space.adjacency = {bonus: [SpaceBonus.ENERGY, SpaceBonus.ENERGY]};
         return undefined;
-      },
-    );
+      });
   }
 }

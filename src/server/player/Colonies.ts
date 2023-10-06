@@ -84,13 +84,14 @@ export class Colonies {
       return undefined;
     }
 
-    const selectColony = new SelectColony('Select colony tile for trade', 'trade', openColonies, (colony: IColony) => {
-      if (selected === undefined) {
-        throw new Error(`Unexpected condition: no trade funding source selected when trading with ${colony.name}.`);
-      }
-      selected.trade(colony);
-      return undefined;
-    });
+    const selectColony = new SelectColony('Select colony tile for trade', 'trade', openColonies)
+      .andThen((colony) => {
+        if (selected === undefined) {
+          throw new Error(`Unexpected condition: no trade funding source selected when trading with ${colony.name}.`);
+        }
+        selected.trade(colony);
+        return undefined;
+      });
 
     const trade = new AndOptions(
       () => {

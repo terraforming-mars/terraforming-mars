@@ -74,7 +74,7 @@ export class ChooseCards extends DeferredAction {
       }
       return undefined;
     };
-    return new SelectCard(msg, button, cards, cb, {max, min});
+    return new SelectCard(msg, button, cards, {max, min}).andThen(cb);
   }
 }
 

@@ -100,12 +100,11 @@ export class AddResourcesToCard extends DeferredAction {
     return new SelectCard(
       title,
       count === 1 ? 'Add resource' : 'Add resources',
-      cards,
-      ([card]) => {
+      cards)
+      .andThen(([card]) => {
         this.addResource(card, count);
         return undefined;
-      },
-    );
+      });
   }
 
 
@@ -116,8 +115,8 @@ export class AddResourcesToCard extends DeferredAction {
     return new SelectCard(
       'Select card to add resource',
       'Add resource',
-      cards.concat(robotCards.map((c) => c.card)),
-      ([card]) => {
+      cards.concat(robotCards.map((c) => c.card)))
+      .andThen(([card]) => {
         // if the user selected a robot card, handle it here:
         const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === card.name);
         if (robotCard) {
@@ -130,8 +129,7 @@ export class AddResourcesToCard extends DeferredAction {
           this.addResource(card, count);
         }
         return undefined;
-      },
-    );
+      });
   }
 
   private addResource(card: ICard, qty: number) {

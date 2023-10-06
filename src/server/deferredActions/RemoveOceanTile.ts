@@ -1,6 +1,5 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogHelper} from '../LogHelper';
 
@@ -18,14 +17,11 @@ export class RemoveOceanTile extends DeferredAction {
     if (removableOceanTiles.length === 0) {
       return undefined;
     }
-    return new SelectSpace(
-      this.title,
-      removableOceanTiles,
-      (space: Space) => {
+    return new SelectSpace(this.title, removableOceanTiles)
+      .andThen((space) => {
         this.player.game.removeTile(space.id);
         LogHelper.logBoardTileAction(this.player, space, 'ocean tile', 'removed');
         return undefined;
-      },
-    );
+      });
   }
 }

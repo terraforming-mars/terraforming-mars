@@ -680,14 +680,12 @@ export class Player implements IPlayer {
     }
     if (game.canAddOcean()) {
       action.options.push(
-        new SelectSpace(
-          'Add an ocean',
-          game.board.getAvailableSpacesForOcean(this), (space) => {
+        new SelectSpace('Add an ocean', game.board.getAvailableSpacesForOcean(this))
+          .andThen((space) => {
             game.addOcean(this, space);
             game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
             return undefined;
-          },
-        ),
+          }),
       );
     }
     if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
@@ -779,14 +777,15 @@ export class Player implements IPlayer {
         newMessage(messageTitle, (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
         'Keep',
         cards,
-        (selected) => {
+        {min: cardsToKeep, max: cardsToKeep, played: false})
+        .andThen((selected) => {
           selected.forEach((card) => {
             this.draftedCards.push(card);
             cards = cards.filter((c) => c !== card);
           });
           this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
           return undefined;
-        }, {min: cardsToKeep, max: cardsToKeep, played: false}),
+        }),
     );
   }
 
@@ -1090,19 +1089,14 @@ export class Player implements IPlayer {
       'Perform an action from a played card',
       'Take action',
       this.getPlayableActionCards(),
-      ([card]) => {
+      {selectBlueCardAction: true})
+      .andThen(([card]) => {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
         const action = card.action(this);
-        if (action !== undefined) {
-          this.game.defer(new SimpleDeferredAction(
-            this,
-            () => action,
-          ));
-        }
+        this.defer(action);
         this.actionsThisGeneration.add(card.name);
         return undefined;
-      }, {selectBlueCardAction: true},
-    );
+      });
   }
 
   private playCeoOPGAction(): PlayerInput {
@@ -1110,14 +1104,14 @@ export class Player implements IPlayer {
       'Use CEO once per game action',
       'Take action',
       this.getUsableOPGCeoCards(),
-      ([card]) => {
+      {selectBlueCardAction: true})
+      .andThen(([card]) => {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
         const action = card.action?.(this);
         this.defer(action);
         this.actionsThisGeneration.add(card.name);
         return undefined;
-      }, {selectBlueCardAction: true},
-    );
+      });
   }
 
   public playAdditionalCorporationCard(corporationCard: ICorporationCard): void {
@@ -1297,7 +1291,8 @@ export class Player implements IPlayer {
       action.options.push(
         new SelectSpace(
           'Select space for greenery tile',
-          this.game.board.getAvailableSpacesForGreenery(this), (space) => {
+          this.game.board.getAvailableSpacesForGreenery(this))
+          .andThen((space) => {
             // Do not raise oxygen or award TR for final greenery placements
             this.game.addGreenery(this, space, false);
             this.stock.deduct(Resource.PLANTS, this.plantsNeededForGreenery);
@@ -1307,9 +1302,7 @@ export class Player implements IPlayer {
             // Resolve Philares deferred actions
             if (this.game.deferredActions.length > 0) resolveFinalGreeneryDeferredActions();
             return undefined;
-          },
-        ),
-      );
+          }));
       action.options.push(
         new SelectOption('Don\'t place a greenery', 'Confirm', () => {
           this.game.playerIsDoneWithGame(this);
@@ -1528,9 +1521,8 @@ export class Player implements IPlayer {
       'Standard projects',
       'Confirm',
       standardProjects,
-      (card) => card[0].action(this),
-      {enabled: standardProjects.map((card) => card.canAct(this))},
-    );
+      {enabled: standardProjects.map((card) => card.canAct(this))})
+      .andThen(([card]) => card.action(this));
   }
 
   private headStartIsInEffect() {

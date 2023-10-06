@@ -32,16 +32,11 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
     return player.energy > 0;
   }
   public action(player: IPlayer) {
-    return new SelectAmount(
-      'Select amount of energy to spend',
-      'Spend energy',
-      (amount: number) => {
+    return new SelectAmount('Select amount of energy to spend', 'Spend energy', 1, player.energy)
+      .andThen((amount) => {
         player.stock.deduct(Resource.ENERGY, amount);
         player.stock.add(Resource.MEGACREDITS, amount, {log: true});
         return undefined;
-      },
-      1,
-      player.energy,
-    );
+      });
   }
 }

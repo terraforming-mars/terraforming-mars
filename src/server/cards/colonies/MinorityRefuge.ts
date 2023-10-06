@@ -61,10 +61,8 @@ export class MinorityRefuge extends Card implements IProjectCard {
         player, {
           title: 'Select colony for Minority Refuge',
           colonies: openColonies,
-          cb: () => {
-            player.production.add(Resource.MEGACREDITS, -2);
-          },
-        }));
+        }))
+      .andThen(() => player.production.add(Resource.MEGACREDITS, -2));
     return undefined;
   }
 }

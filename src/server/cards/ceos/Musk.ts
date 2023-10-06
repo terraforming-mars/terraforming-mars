@@ -43,14 +43,16 @@ export class Musk extends CeoCard {
       'Select Earth card(s) to discard',
       'Discard',
       eligibleCards,
-      (cards) => {
-        player.stock.add(Resource.TITANIUM, cards.length + 6, {log: true});
-        for (const card of cards) {
-          player.discardCardFromHand(card);
-        }
-        player.game.defer(DrawCards.keepAll(player, cards.length, {tag: Tag.SPACE}));
-        return undefined;
-      },
-      {min: 0, max: eligibleCards.length});
+      {min: 0, max: eligibleCards.length})
+      .andThen(
+        (cards) => {
+          player.stock.add(Resource.TITANIUM, cards.length + 6, {log: true});
+          for (const card of cards) {
+            player.discardCardFromHand(card);
+          }
+          player.game.defer(DrawCards.keepAll(player, cards.length, {tag: Tag.SPACE}));
+          return undefined;
+        },
+      );
   }
 }

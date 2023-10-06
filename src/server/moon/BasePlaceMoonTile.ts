@@ -24,10 +24,11 @@ export abstract class BasePlaceMoonTile extends DeferredAction<Space> {
     if (spaces.length === 0) {
       return undefined;
     }
-    return new SelectSpace(this.title, spaces, (space) => {
-      this.placeTile(space);
-      this.cb(space);
-      return undefined;
-    });
+    return new SelectSpace(this.title, spaces)
+      .andThen((space) => {
+        this.placeTile(space);
+        this.cb(space);
+        return undefined;
+      });
   }
 }

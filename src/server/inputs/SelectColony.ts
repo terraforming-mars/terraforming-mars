@@ -1,12 +1,12 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
 import {IColony} from '../colonies/IColony';
 import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
 import {SelectColonyModel} from '../../common/models/PlayerInputModel';
 import {coloniesToModel} from '../models/ModelUtils';
 import {IPlayer} from '../IPlayer';
 
-export class SelectColony extends BasePlayerInput {
+export class SelectColony extends BasePlayerInputAndThen<IColony> {
   // When true, show just the tile, and none of the cubes on top.
   // Used for tiles that are not yet in the game, or for a clearer
   // visualziation when necesary.
@@ -16,7 +16,6 @@ export class SelectColony extends BasePlayerInput {
     title: string | Message,
     buttonLabel: string = 'Save',
     public colonies: Array<IColony>,
-    public cb: (colony: IColony) => PlayerInput | undefined,
   ) {
     super('colony', title);
     this.buttonLabel = buttonLabel;

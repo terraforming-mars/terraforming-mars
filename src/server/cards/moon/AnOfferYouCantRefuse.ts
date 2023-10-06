@@ -97,7 +97,7 @@ export class AnOfferYouCantRefuse extends Card {
       if (party.name === from) {
         orOptions.options.push(new SelectOption('Do not move'));
       } else {
-        orOptions.options.push(new SelectOption(party.name, 'Select').andThen(() => {
+        orOptions.options.push(new SelectOption(party.name).andThen(() => {
           turmoil.removeDelegateFromParty(delegate, from, game);
           turmoil.sendDelegateToParty(delegate, party.name, game);
           return undefined;

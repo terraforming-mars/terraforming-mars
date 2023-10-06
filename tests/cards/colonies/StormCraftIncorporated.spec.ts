@@ -45,7 +45,7 @@ describe('StormCraftIncorporated', function() {
     heatOption.cb(4);
     floaterOption.cb(0);
     expect(function() {
-      options.cb();
+      options.cb(undefined);
     }).to.throw(`Need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
   });
 
@@ -57,7 +57,7 @@ describe('StormCraftIncorporated', function() {
     const floaterOption = cast(options.options[1], SelectAmount);
     heatOption.cb(2);
     floaterOption.cb(3);
-    options.cb();
+    options.cb(undefined);
     expect(player.heat).to.eq(8);
     expect(card.resourceCount).to.eq(7);
   });

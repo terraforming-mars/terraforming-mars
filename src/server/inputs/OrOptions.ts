@@ -4,10 +4,7 @@ import {IPlayer} from '../IPlayer';
 import {OrOptionsModel} from '../../common/models/PlayerInputModel';
 import {OptionsInput} from './OptionsPlayerInput';
 
-export class OrOptions extends OptionsInput {
-  public cb(): PlayerInput | undefined {
-    return undefined;
-  }
+export class OrOptions extends OptionsInput<undefined> {
   constructor(...options: Array<PlayerInput>) {
     super('or', 'Select one option', options);
   }
@@ -29,6 +26,6 @@ export class OrOptions extends OptionsInput {
       throw new Error('Invalid index');
     }
     player.runInput(input.response, this.options[input.index]);
-    return this.cb();
+    return this.cb(undefined);
   }
 }

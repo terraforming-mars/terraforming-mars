@@ -50,13 +50,13 @@ describe('TheNewSpaceRace', function() {
     selectInitialCards1.options[0].cb([player1.dealtCorporationCards[0]]);
     selectInitialCards1.options[1].cb(player1.dealtPreludeCards);
     selectInitialCards1.options[2].cb([]);
-    selectInitialCards1.cb();
+    selectInitialCards1.cb(undefined);
 
     const selectInitialCards2 = cast(player2.getWaitingFor(), SelectInitialCards);
     selectInitialCards2.options[0].cb([player2.dealtCorporationCards[0]]);
     selectInitialCards2.options[1].cb(player2.dealtPreludeCards);
     selectInitialCards2.options[2].cb([]);
-    selectInitialCards2.cb();
+    selectInitialCards2.cb(undefined);
 
     const selectInitialCards3 = cast(player3.getWaitingFor(), SelectInitialCards);
     selectInitialCards3.options[0].cb([player3.dealtCorporationCards[0]]);
@@ -73,7 +73,7 @@ describe('TheNewSpaceRace', function() {
     cast(player3.popWaitingFor(), SelectInitialCards);
 
     // This will trigger everything.
-    selectInitialCards3.cb();
+    selectInitialCards3.cb(undefined);
 
     expect(game.getPlayersInGenerationOrder()).deep.eq([player2, player3, player1]);
 

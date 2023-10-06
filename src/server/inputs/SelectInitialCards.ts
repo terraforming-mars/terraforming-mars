@@ -13,11 +13,7 @@ import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 export class SelectInitialCards extends AndOptions {
   public override readonly type = 'initialCards';
   constructor(private player: IPlayer, cb: (corporation: ICorporationCard) => undefined) {
-    super(() => {
-      this.completed(corporation);
-      cb(corporation);
-      return undefined;
-    });
+    super();
     let corporation: ICorporationCard;
     this.title = ' ';
     this.buttonLabel = 'Start';
@@ -72,6 +68,12 @@ export class SelectInitialCards extends AndOptions {
           return undefined;
         }),
     );
+    this.andThen(() => {
+      this.completed(corporation);
+      // TODO(kberg): This is probably broken. Stop subclassing AndOptions.
+      cb(corporation);
+      return undefined;
+    });
   }
 
   private completed(corporation: ICorporationCard) {

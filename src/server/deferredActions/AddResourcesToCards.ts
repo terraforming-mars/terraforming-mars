@@ -35,7 +35,7 @@ export class AddResourcesToCards extends DeferredAction {
         });
     });
 
-    return new AndOptions(() => {
+    return new AndOptions(...options).andThen(() => {
       let sum = 0;
       cards.forEach((card) => {
         sum += map.get(card.name) ?? 0;
@@ -50,6 +50,6 @@ export class AddResourcesToCards extends DeferredAction {
         }
       });
       return undefined;
-    }, ...options);
+    });
   }
 }

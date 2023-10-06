@@ -48,8 +48,7 @@ export type SelectCardModel = BaseInputModel & {
   cards: Array<CardModel>;
   max: number;
   min: number;
-  // TODO(kberg): Dig into client to remove 'undefined'
-  showOnlyInLearnerMode: boolean | undefined;
+  showOnlyInLearnerMode: boolean;
   selectBlueCardAction: boolean;
   showOwner: boolean;
 }
@@ -83,8 +82,7 @@ export type SelectAmountModel = BaseInputModel & {
   type: 'amount';
   min: number;
   max: number;
-  // TODO(kberg): Dig into client to remove 'undefined'
-  maxByDefault: boolean | undefined;
+  maxByDefault: boolean;
 }
 
 export type SelectDelegateModel = BaseInputModel & {

@@ -41,8 +41,8 @@ export class KaguyaTech extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const greeneries = player.game.board.getGreeneries(player);
-    return new SelectSpace('Select a greenery to convert to a city.',
-      greeneries, (space) => {
+    return new SelectSpace('Select a greenery to convert to a city.', greeneries)
+      .andThen((space) => {
         player.game.removeTile(space.id);
         player.game.addCity(player, space, this.name);
         return undefined;

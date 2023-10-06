@@ -1,14 +1,13 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {Space} from '../boards/Space';
 import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
 import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
+import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
 
-export class SelectSpace extends BasePlayerInput {
+export class SelectSpace extends BasePlayerInputAndThen<Space> {
   constructor(
     title: string | Message,
-    public spaces: ReadonlyArray<Space>,
-    public cb: (space: Space) => PlayerInput | undefined) {
+    public spaces: ReadonlyArray<Space>) {
     super('space', title);
     if (spaces.length === 0) {
       throw new Error('No available spaces');
@@ -28,9 +27,7 @@ export class SelectSpace extends BasePlayerInput {
     if (!isSelectSpaceResponse(input)) {
       throw new Error('Not a valid SelectSpaceResponse');
     }
-    const space = this.spaces.find(
-      (space) => space.id === input.spaceId,
-    );
+    const space = this.spaces.find((space) => space.id === input.spaceId);
     if (space === undefined) {
       throw new Error('Space not available');
     }

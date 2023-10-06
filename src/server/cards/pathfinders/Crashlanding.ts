@@ -55,8 +55,8 @@ export class Crashlanding extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
       'Select space for Crashlanding tile',
-      this.playableSpaces(player),
-      (space: Space) => {
+      this.playableSpaces(player))
+      .andThen((space) => {
         space.adjacency = {bonus: ['callback']};
         const tile: Tile = {
           tileType: TileType.CRASHLANDING,

@@ -62,13 +62,12 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     const addAsteroidToCard = new SelectCard(
       'Select card to add 1 asteroid',
       'Add asteroid',
-      asteroidCards,
-      ([card]) => {
+      asteroidCards)
+      .andThen(([card]) => {
         player.pay(Payment.of({titanium: 1}));
         player.addResourceTo(card, {log: true});
         return undefined;
-      },
-    );
+      });
 
     const spendAsteroidResource = () => {
       this.resourceCount--;

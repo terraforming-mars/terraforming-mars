@@ -10,7 +10,6 @@ import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
@@ -72,13 +71,13 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
 
   public action(player: IPlayer) {
     const game = player.game;
-    game.defer(new SimpleDeferredAction(
-      player,
-      () => new SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler.tradeableColonies(game), (colony) => {
-        tradeWithColony(this, player, colony);
-        return undefined;
-      }),
-    ));
+    player.defer(
+      new SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler.tradeableColonies(game))
+        .andThen((colony) => {
+          tradeWithColony(this, player, colony);
+          return undefined;
+        }),
+    );
     return undefined;
   }
 }

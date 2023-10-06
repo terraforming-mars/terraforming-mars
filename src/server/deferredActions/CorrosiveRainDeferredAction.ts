@@ -24,12 +24,11 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
       return undefined;
     });
     const removeFloaters = new SelectCard(
-      'Select card to remove 2 floaters from', 'Remove floaters', floaterCards,
-      ([card]) => {
+      'Select card to remove 2 floaters from', 'Remove floaters', floaterCards)
+      .andThen(([card]) => {
         this.player.removeResourceFrom(card, 2);
         return undefined;
-      },
-    );
+      });
     selectAction.options.push(payMC, removeFloaters);
 
     if (floaterCards.length === 0) {

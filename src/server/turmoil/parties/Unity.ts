@@ -100,10 +100,11 @@ class UnityPolicy02 implements Policy {
         } else if (availableFloaterCards.length > 1) {
           orOptions.options.push(
             new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
-              return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, ([card]) => {
-                player.addResourceTo(card, {qty: 2, log: true});
-                return undefined;
-              });
+              return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards)
+                .andThen(([card]) => {
+                  player.addResourceTo(card, {qty: 2, log: true});
+                  return undefined;
+                });
             }),
           );
         }

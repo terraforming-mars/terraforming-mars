@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Space} from '../../boards/Space';
 import {CardResource} from '../../../common/CardResource';
 import {TileType} from '../../../common/TileType';
 
@@ -41,8 +40,8 @@ export class MartianNatureWonders extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace('Select a Martian Natural Wonder space',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: Space) => {
+      player.game.board.getAvailableSpacesOnLand(player))
+      .andThen((space) => {
         player.game.simpleAddTile(player, space, {tileType: TileType.MARTIAN_NATURE_WONDERS});
         player.game.grantSpaceBonuses(player, space);
         return undefined;

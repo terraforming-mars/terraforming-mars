@@ -1,11 +1,11 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
 import {IPlayer} from '../IPlayer';
 import {InputResponse, isSelectPlayerResponse} from '../../common/inputs/InputResponse';
 import {SelectPlayerModel} from '../../common/models/PlayerInputModel';
 
-export class SelectPlayer extends BasePlayerInput {
-  constructor(public players: Array<IPlayer>, title: string | Message, buttonLabel: string = 'Save', public cb: (player: IPlayer) => PlayerInput | undefined) {
+export class SelectPlayer extends BasePlayerInputAndThen<IPlayer> {
+  constructor(public players: Array<IPlayer>, title: string | Message, buttonLabel: string = 'Save') {
     super('player', title);
     this.buttonLabel = buttonLabel;
   }

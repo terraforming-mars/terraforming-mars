@@ -115,7 +115,6 @@ export interface IPlayer {
 
   // Custom cards
   // Community Leavitt Station and Pathfinders Leavitt Station
-  // TODO(kberg): move scienceTagCount to Tags?
   scienceTagCount: number;
   // PoliticalAgendas Scientists P41
   hasTurmoilScienceTagBonus: boolean;

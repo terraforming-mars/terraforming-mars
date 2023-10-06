@@ -85,12 +85,11 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     return new SelectCard(
       'Select card to add 1 asteroid',
       'Add asteroid',
-      asteroidCards,
-      ([card]) => {
+      asteroidCards)
+      .andThen(([card]) => {
         player.addResourceTo(card, {log: true});
         return undefined;
-      },
-    );
+      });
   }
 
   private spendResource(player: IPlayer) {

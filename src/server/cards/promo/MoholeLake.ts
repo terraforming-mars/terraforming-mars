@@ -53,9 +53,10 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, ([card]) => {
-      player.addResourceTo(card, {log: true});
-      return undefined;
-    });
+    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards)
+      .andThen(([card]) => {
+        player.addResourceTo(card, {log: true});
+        return undefined;
+      });
   }
 }

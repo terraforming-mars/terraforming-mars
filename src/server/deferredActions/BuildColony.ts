@@ -24,10 +24,11 @@ export class BuildColony extends DeferredAction<IColony> {
     }
 
     const title = this.options?.title ?? 'Select where to build a colony';
-    return new SelectColony(title, 'Build', colonies, (colony: IColony) => {
-      colony.addColony(this.player, {giveBonusTwice: this.options?.giveBonusTwice ?? false});
-      this.cb(colony);
-      return undefined;
-    });
+    return new SelectColony(title, 'Build', colonies)
+      .andThen((colony: IColony) => {
+        colony.addColony(this.player, {giveBonusTwice: this.options?.giveBonusTwice ?? false});
+        this.cb(colony);
+        return undefined;
+      });
   }
 }

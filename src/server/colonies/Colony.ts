@@ -192,15 +192,16 @@ export abstract class Colony implements IColony {
       const openColonies = game.colonies.filter((colony) => colony.isActive);
       action = new SimpleDeferredAction(
         player,
-        () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: IColony) => {
-          game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-          (colony as Colony).handleTrade(player, {
-            usesTradeFleet: false,
-            decreaseTrackAfterTrade: false,
-            giveColonyBonuses: false,
-          });
-          return undefined;
-        }),
+        () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies)
+          .andThen((colony) => {
+            game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
+            (colony as Colony).handleTrade(player, {
+              usesTradeFleet: false,
+              decreaseTrackAfterTrade: false,
+              giveColonyBonuses: false,
+            });
+            return undefined;
+          }),
       );
       break;
 
@@ -237,13 +238,13 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.GAIN_SCIENCE_TAG:
-      player.tags.gainScienceTag();
+      player.tags.gainScienceTag(1);
       player.playCard(new ScienceTagCard(), undefined, 'nothing');
       game.log('${0} gained 1 Science tag', (b) => b.player(player));
       break;
 
     case ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG:
-      player.scienceTagCount += 2;
+      player.tags.gainScienceTag(2);
       player.playCard(new ScienceTagCard(), undefined, 'nothing');
       game.log('${0} gained 2 Science tags', (b) => b.player(player));
       break;
@@ -302,17 +303,12 @@ export abstract class Colony implements IColony {
         () => {
           const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
           if (playersWithCards.length === 0) return undefined;
-          return new SelectPlayer(
-            playersWithCards,
-            'Select player to discard a card',
-            'Select',
-            (selectedPlayer: IPlayer) => {
+          return new SelectPlayer(playersWithCards, 'Select player to discard a card', 'Select')
+            .andThen((selectedPlayer) => {
               game.defer(new DiscardCards(selectedPlayer, 1, 1, this.name + ' colony effect. Select a card to discard'));
               return undefined;
-            },
-          );
-        },
-      );
+            });
+        });
       break;
 
     case ColonyBenefit.PLACE_OCEAN_TILE:

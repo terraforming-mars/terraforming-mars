@@ -51,10 +51,11 @@ export class RedCity extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
-      player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
-      return undefined;
-    });
+    return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player))
+      .andThen((space) => {
+        player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
+        return undefined;
+      });
   }
 
   public override getVictoryPoints(player: IPlayer): number {

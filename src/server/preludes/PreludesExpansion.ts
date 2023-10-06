@@ -30,7 +30,8 @@ export class PreludesExpansion {
     }
 
     return new SelectCard(
-      'Select prelude card to play', 'Play', cards, ([card]) => {
+      'Select prelude card to play', 'Play', cards)
+      .andThen(([card]) => {
         if (card.canPlay?.(player) === false) {
           PreludesExpansion.fizzle(player, card);
           return undefined;

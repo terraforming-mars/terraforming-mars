@@ -43,7 +43,7 @@ import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
-import {LogMessageData} from '@/common/logs/LogMessageData';
+import {LogMessageData, LogMessageDataAttrs} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
@@ -64,6 +64,7 @@ import {ParticipantId} from '@/common/Types';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyModel} from '@/common/models/ColonyModel';
+import {ClientCard} from '@/common/cards/ClientCard';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -164,14 +165,23 @@ export default Vue.extend({
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
-    cardToHtml(cardType: CardType, cardName: string) {
-      const suffixFreeCardName = cardName.split(':')[0];
-      const className = cardTypeToCss[cardType];
+    cardToHtml(card: ClientCard, attrs: LogMessageDataAttrs | undefined) {
+      const suffixFreeCardName = card.name.split(':')[0];
+      const className = cardTypeToCss[card.type];
 
       if (className === undefined) {
         return suffixFreeCardName;
       }
-      return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + '</span>';
+      let tagHTML = '';
+      if (attrs?.tags === true) {
+        tagHTML = '&nbsp;' + (card.tags.map((tag) => `<div class="log-tag tag-${tag}"></div>`).join(' '));
+      }
+
+      let costHTML = '';
+      if (attrs?.cost === true) {
+        costHTML = `<span>&nbsp;<div class="log-resource-megacredits">${card.cost}</div></span>`;
+      }
+      return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + tagHTML + costHTML +'</span>';
     },
     messageDataToHTML(data: LogMessageData): string {
       if (data.type === undefined || data.value === undefined) {
@@ -191,7 +201,7 @@ export default Vue.extend({
         const cardName = data.value as CardName;
         const card = getCard(cardName);
         if (card !== undefined) {
-          return this.cardToHtml(card.type, cardName);
+          return this.cardToHtml(card, data.attrs);
         } else {
           console.log(`Cannot render ${cardName}`);
         }
@@ -250,6 +260,7 @@ export default Vue.extend({
           return logEntryBullet + Log.applyData(message, this.messageDataToHTML);
         }
       } catch (err) {
+        console.log(err);
         return this.safeMessage(message);
       }
       return '';

@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {all} from '../Options';
-import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 
 export class CassiniStation extends Card implements IProjectCard {
@@ -48,17 +47,15 @@ export class CassiniStation extends Card implements IProjectCard {
     const input = new SelectCard(
       'Select card to gain 2 floaters or 3 data',
       'Add resources',
-      cards,
-      (selected: Array<ICard>) => {
-        const card = selected[0];
+      cards)
+      .andThen(([card]) => {
         if (card.resourceType === CardResource.FLOATER) {
           player.addResourceTo(card, {qty: 2, log: true});
         } else {
           player.addResourceTo(card, {qty: 3, log: true});
         }
         return undefined;
-      },
-    );
+      });
 
     if (cards.length === 1) {
       input.cb(cards);

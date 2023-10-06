@@ -29,16 +29,12 @@ export class DecreaseAnyProduction extends DeferredAction {
 
       if (candidates.length > 0) {
         if (candidates.length > 1 || candidates[0] === this.player) {
-          return new SelectPlayer(
-            candidates,
-            this.title,
-            'Decrease',
-            (found: IPlayer) => {
-              found.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+          return new SelectPlayer(candidates, this.title, 'Decrease')
+            .andThen((candidate) => {
+              candidate.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
               this.cb(undefined);
               return undefined;
-            },
-          );
+            });
         } else {
           candidates[0].production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
         }

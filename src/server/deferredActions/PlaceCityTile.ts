@@ -23,14 +23,11 @@ export class PlaceCityTile extends DeferredAction {
     if (spaces.length === 0) {
       return undefined;
     }
-    return new SelectSpace(
-      title,
-      spaces,
-      (space: Space) => {
+    return new SelectSpace(title, spaces)
+      .andThen((space) => {
         this.player.game.addCity(this.player, space);
         return undefined;
-      },
-    );
+      });
   }
 
   private getTitle(type: PlacementType) {

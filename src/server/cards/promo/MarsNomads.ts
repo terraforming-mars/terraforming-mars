@@ -6,7 +6,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
-import {Space} from '../../boards/Space';
 import {intersection} from '../../../common/utils/utils';
 import {TileType} from '../../../common/TileType';
 
@@ -41,12 +40,11 @@ export class MarsNomads extends Card implements IActionCard {
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
       'Select space for Nomads',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: Space) => {
+      player.game.board.getAvailableSpacesOnLand(player))
+      .andThen((space) => {
         player.game.nomadSpace = space.id;
         return undefined;
-      },
-    );
+      });
   }
 
   private eliglbleDestinationSpaces(player: IPlayer) {
@@ -71,15 +69,14 @@ export class MarsNomads extends Card implements IActionCard {
 
     return new SelectSpace(
       'Select new destination for Mars Nomads',
-      spaces,
-      (space: Space) => {
+      spaces)
+      .andThen((space) => {
         player.game.nomadSpace = space.id;
         // Mars nomads is funny. The tile is temporarily placed so the card acts appropriate, but is then removed so it doesn't have post-placement impact.
         player.game.addTile(player, space, {tileType: TileType.MARS_NOMADS});
         player.game.removeTile(space.id);
 
         return undefined;
-      },
-    );
+      });
   }
 }

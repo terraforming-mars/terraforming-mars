@@ -122,10 +122,11 @@ class GreensPolicy04 implements Policy {
         } else if (availableMicrobeCards.length > 1) {
           orOptions.options.push(
             new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
-              return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, ([card]) => {
-                player.addResourceTo(card, {qty: 2, log: true});
-                return undefined;
-              });
+              return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards)
+                .andThen(([card]) => {
+                  player.addResourceTo(card, {qty: 2, log: true});
+                  return undefined;
+                });
             }),
           );
         }

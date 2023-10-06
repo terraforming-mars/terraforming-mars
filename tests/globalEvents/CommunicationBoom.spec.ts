@@ -64,7 +64,7 @@ describe('CommunicationBoom', function() {
     expect(playerOptions.options).has.length(2);
     expect(playerOptions.options[0].title).contains(b.name);
     playerOptions.options[0].cb(1);
-    playerOptions.cb();
+    playerOptions.cb(undefined);
     expect(b.resourceCount).eq(3);
 
     runAllActions(game);
@@ -73,7 +73,7 @@ describe('CommunicationBoom', function() {
     expect(playerOptions2.options).has.length(2);
     expect(playerOptions2.options[0].title).contains(e.name);
     playerOptions2.options[0].cb(3);
-    playerOptions2.cb();
+    playerOptions2.cb(undefined);
     expect(e.resourceCount).eq(5);
   });
 });

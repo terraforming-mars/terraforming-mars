@@ -24,7 +24,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
     input.options[3].cb(0);
     input.options[4].cb(0);
     input.options[5].cb(1);
-    input.cb();
+    input.cb(undefined);
     expect(player.megaCredits).eq(0);
     expect(player.steel).eq(0);
     expect(player.titanium).eq(0);
@@ -42,11 +42,11 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
     input.options[0].cb(0);
     input.options[5].cb(3);
 
-    expect(() => input.cb()).to.throw('Select 2 resources.');
+    expect(() => input.cb(undefined)).to.throw('Select 2 resources.');
 
     player.heat = 0;
     input.options[5].cb(2);
-    input.cb();
+    input.cb(undefined);
     expect(player.heat).eq(2);
   });
 

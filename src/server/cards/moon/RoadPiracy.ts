@@ -70,7 +70,8 @@ export class RoadPiracy extends Card implements IProjectCard {
       }
       return undefined;
     };
-    const option = new AndOptions(cb, ...selectAmounts);
+    // TODO(kberg): does title always have to be set separately? That's fixable.
+    const option = new AndOptions(...selectAmounts).andThen(cb);
     option.title = title;
     return option;
   }

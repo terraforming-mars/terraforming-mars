@@ -4,8 +4,8 @@ import {IPlayer} from '../IPlayer';
 import {AndOptionsModel, SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 import {OptionsInput} from './OptionsPlayerInput';
 
-export class AndOptions extends OptionsInput {
-  constructor(public cb: () => PlayerInput | undefined, ...options: Array<PlayerInput>) {
+export class AndOptions extends OptionsInput<undefined> {
+  constructor(...options: Array<PlayerInput>) {
     super('and', '', options);
   }
 
@@ -29,6 +29,6 @@ export class AndOptions extends OptionsInput {
     for (let i = 0; i < input.responses.length; i++) {
       player.runInput(input.responses[i], this.options[i]);
     }
-    return this.cb();
+    return this.cb(undefined);
   }
 }

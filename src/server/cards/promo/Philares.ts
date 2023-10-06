@@ -82,15 +82,15 @@ export class Philares extends Card implements ICorporationCard {
         return undefined;
       });
 
-    const selectResources = new AndOptions(
-      () => {
+    const selectResources = new AndOptions(selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat)
+      .andThen(() => {
         if (
           megacreditsAmount +
-                    steelAmount +
-                    titaniumAmount +
-                    plantsAmount +
-                    energyAmount +
-                    heatAmount > resourceCount
+                  steelAmount +
+                  titaniumAmount +
+                  plantsAmount +
+                  energyAmount +
+                  heatAmount > resourceCount
         ) {
           throw new Error('Need to select ' + resourceCount + ' resource(s)');
         }
@@ -101,7 +101,7 @@ export class Philares extends Card implements ICorporationCard {
         philaresPlayer.stock.add(Resource.ENERGY, energyAmount, {log: true});
         philaresPlayer.stock.add(Resource.HEAT, heatAmount, {log: true});
         return undefined;
-      }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
+      } );
     selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
 
     return selectResources;

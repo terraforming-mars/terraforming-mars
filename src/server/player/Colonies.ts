@@ -93,14 +93,7 @@ export class Colonies {
         return undefined;
       });
 
-    const trade = new AndOptions(
-      () => {
-        return undefined;
-      },
-      howToPayForTrade,
-      selectColony,
-    );
-
+    const trade = new AndOptions(howToPayForTrade, selectColony);
     trade.title = 'Trade with a colony tile';
     trade.buttonLabel = 'Trade';
 

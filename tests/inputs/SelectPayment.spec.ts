@@ -18,8 +18,7 @@ describe('SelectPayment', function() {
 
   it('Simple', function() {
     player.megaCredits = 10;
-    const selectPayment = new SelectPayment(
-      '', 10, {}, cb);
+    const selectPayment = new SelectPayment('', 10, {}).andThen(cb);
 
     selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 10})}, player);
     expect(selected).deep.eq(Payment.of({megaCredits: 10}));
@@ -32,8 +31,7 @@ describe('SelectPayment', function() {
   it('Simple, can pay with steel', function() {
     player.megaCredits = 6;
     player.steel = 2;
-    const selectPayment = new SelectPayment(
-      '', 10, {steel: true}, cb);
+    const selectPayment = new SelectPayment('', 10, {steel: true}).andThen(cb);
 
     selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 6, steel: 2})}, player);
     expect(selected).deep.eq(Payment.of({megaCredits: 6, steel: 2}));

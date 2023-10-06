@@ -81,12 +81,11 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
         spireScience: this.options.canUseSpireScience || false,
         lunaTradeFederationTitanium: this.player.canUseTitaniumAsMegacredits,
         kuiperAsteroids: this.options.canUseAsteroids || false,
-      },
-      (payment: Payment) => {
+      })
+      .andThen((payment) => {
         this.player.pay(payment);
         this.cb(payment);
         return undefined;
-      },
-    );
+      });
   }
 }

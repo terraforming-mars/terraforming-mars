@@ -19,26 +19,26 @@ describe('SelectDelegate', function() {
   });
 
   it('Simple - Neutral', function() {
-    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '', cb);
+    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '').andThen(cb);
     selectDelegate.process({type: 'delegate', player: 'NEUTRAL'});
     expect(selected).eq('NEUTRAL');
   });
 
   it('Simple - Player by color', function() {
-    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '', cb);
+    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '').andThen(cb);
     selectDelegate.process({type: 'delegate', player: players[0].color});
     expect(selected).eq(players[0]);
   });
 
 
   it('Cannot select unavailable delegate', function() {
-    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '', cb);
+    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '').andThen(cb);
     expect(() => selectDelegate.process({type: 'delegate', player: players[1].color}))
       .to.throw(Error, /Player not available/);
   });
 
   it('Cannot select unavailable neutral delegate', function() {
-    const selectDelegate = new SelectDelegate([players[0]], '', cb);
+    const selectDelegate = new SelectDelegate([players[0]], '').andThen(cb);
     expect(() => selectDelegate.process({type: 'delegate', player: 'NEUTRAL'}))
       .to.throw(Error, /Player not available/);
   });

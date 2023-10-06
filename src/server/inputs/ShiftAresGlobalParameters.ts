@@ -1,12 +1,11 @@
-import {BasePlayerInput} from '../PlayerInput';
+import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
 import {IPlayer} from '../IPlayer';
 import {AresGlobalParametersResponse} from '../../common/inputs/AresGlobalParametersResponse';
 import {InputResponse, isAresGlobalParametersResponse, isShiftAresGlobalParametersResponse} from '../../common/inputs/InputResponse';
 import {ShiftAresGlobalParametersModel} from '../../common/models/PlayerInputModel';
 
-export class ShiftAresGlobalParameters extends BasePlayerInput {
-  constructor(
-    public cb: (units: AresGlobalParametersResponse) => undefined) {
+export class ShiftAresGlobalParameters extends BasePlayerInputAndThen<AresGlobalParametersResponse> {
+  constructor() {
     super('aresGlobalParameters', 'Adjust Ares global parameters up to 1 step.');
   }
 

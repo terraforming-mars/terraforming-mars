@@ -63,12 +63,13 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
               spaceOwner.defer(
                 new OrOptions(
                   new SelectOption('Do not buy a card', undefined, () => undefined),
-                  new SelectPayment('Pay 2 M€ to draw a card', 2, {}, (payment) => {
+                  new SelectPayment('Pay 2 M€ to draw a card', 2, {})
+                    .andThen((payment) => {
                     // TODO(kberg): pay should have an afterPay for the heat / floaters costs.
-                    spaceOwner.pay(payment);
-                    spaceOwner.drawCard();
-                    return undefined;
-                  }),
+                      spaceOwner.pay(payment);
+                      spaceOwner.drawCard();
+                      return undefined;
+                    }),
                 ));
             }
             return undefined;

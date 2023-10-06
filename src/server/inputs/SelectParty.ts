@@ -1,5 +1,5 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
+import {BasePlayerInputAndThen} from '../PlayerInput';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';

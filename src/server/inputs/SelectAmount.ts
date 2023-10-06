@@ -1,5 +1,5 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
+import {BasePlayerInputAndThen} from '../PlayerInput';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
 import {SelectAmountModel} from '../../common/models/PlayerInputModel';
 

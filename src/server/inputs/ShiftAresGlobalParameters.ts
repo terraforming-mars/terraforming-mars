@@ -1,4 +1,4 @@
-import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
+import {BasePlayerInputAndThen} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {AresGlobalParametersResponse} from '../../common/inputs/AresGlobalParametersResponse';
 import {InputResponse, isAresGlobalParametersResponse, isShiftAresGlobalParametersResponse} from '../../common/inputs/InputResponse';

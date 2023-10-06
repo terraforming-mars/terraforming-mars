@@ -36,6 +36,14 @@ export abstract class BasePlayerInput implements PlayerInput {
   }
 }
 
+
+export abstract class BasePlayerInputAndThen<T> extends BasePlayerInput {
+  public cb: (param: T) => PlayerInput | undefined = () => undefined;
+  public andThen(cb: (param: T) => PlayerInput | undefined): this {
+    this.cb = cb;
+    return this;
+  }
+}
 export function getCardFromPlayerInput<T extends ICard>(cards: ReadonlyArray<T>, cardName: string): {card: T, idx: number} {
   const idx = cards.findIndex((card) => card.name === cardName);
   if (idx === -1) {

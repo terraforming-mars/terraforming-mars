@@ -2,7 +2,7 @@ import {Message} from '../../common/logs/Message';
 import {Space} from '../boards/Space';
 import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
 import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
-import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
+import {BasePlayerInputAndThen} from '../PlayerInput';
 
 export class SelectSpace extends BasePlayerInputAndThen<Space> {
   constructor(

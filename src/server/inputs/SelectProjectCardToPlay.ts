@@ -1,4 +1,4 @@
-import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
+import {BasePlayerInputAndThen} from '../PlayerInput';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard, PlayableCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';

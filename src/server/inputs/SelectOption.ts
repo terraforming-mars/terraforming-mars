@@ -1,6 +1,6 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
+import {BasePlayerInputAndThen} from '../PlayerInput';
 import {InputResponse, isSelectOptionResponse} from '../../common/inputs/InputResponse';
 import {SelectOptionModel} from '../../common/models/PlayerInputModel';
 

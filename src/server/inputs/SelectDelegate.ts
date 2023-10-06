@@ -1,11 +1,11 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInputAndThen} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';
 import {SelectDelegateModel} from '../../common/models/PlayerInputModel';
 
-export class SelectDelegate extends BasePlayerInputAndThen<IPlayer | NeutralPlayer> {
+export class SelectDelegate extends BasePlayerInput<IPlayer | NeutralPlayer> {
   // TODO(kberg): is there any reason to not just accept IDs?
   constructor(
     public players: ReadonlyArray<IPlayer | NeutralPlayer>,

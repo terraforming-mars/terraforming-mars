@@ -1,10 +1,10 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {BasePlayerInputAndThen} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {InputResponse, isSelectOptionResponse} from '../../common/inputs/InputResponse';
 import {SelectOptionModel} from '../../common/models/PlayerInputModel';
 
-export class SelectOption extends BasePlayerInputAndThen<undefined> {
+export class SelectOption extends BasePlayerInput<undefined> {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Select') {

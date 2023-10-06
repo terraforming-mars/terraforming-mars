@@ -1,7 +1,7 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
 import {getCardFromPlayerInput} from '../PlayerInput';
-import {BasePlayerInputAndThen} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
 import {SelectCardModel} from '../../common/models/PlayerInputModel';
@@ -16,7 +16,7 @@ export type Options = {
   played: boolean | CardName.SELF_REPLICATING_ROBOTS // Default is true. If true, then shows resources on those cards. If false than shows discounted price.
   showOwner: boolean, // Default is false. If true then show the name of the card owner below.
 }
-export class SelectCard<T extends ICard> extends BasePlayerInputAndThen<Array<T>> {
+export class SelectCard<T extends ICard> extends BasePlayerInput<Array<T>> {
   public config: Options;
 
   constructor(

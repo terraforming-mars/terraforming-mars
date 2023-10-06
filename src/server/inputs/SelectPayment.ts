@@ -1,11 +1,11 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInputAndThen} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {isPayment, Payment, PaymentOptions} from '../../common/inputs/Payment';
 import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
 import {SelectPaymentModel} from '../../common/models/PlayerInputModel';
 
-export class SelectPayment extends BasePlayerInputAndThen<Payment> {
+export class SelectPayment extends BasePlayerInput<Payment> {
   constructor(
     title: string | Message,
     public amount: number,

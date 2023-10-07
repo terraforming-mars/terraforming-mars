@@ -14,6 +14,7 @@ import {Size} from '../../../common/cards/render/Size';
 
 import {ALL_AWARDS} from '../../awards/Awards';
 import {AwardScorer} from '../../awards/AwardScorer';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class Asimov extends CeoCard {
   constructor() {
@@ -68,12 +69,8 @@ export class Asimov extends CeoCard {
     // Sort the players by score:
     const players: Array<IPlayer> = game.getPlayers().slice();
     players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
-    let title = 'Fund ' + award.name + ' award' + ' [';
-    title += players
-      .sort((a, b) => scorer.get(b) - scorer.get(a))
-      .map((player) => player.name + ': ' + scorer.get(player))
-      .join(' / ');
-    title += ']';
+    const title = newMessage('Fund ${0} award [${1}]', (b) => b.award(award).string(
+      players.map((player) => player.name + ': ' + scorer.get(player)).join(' / ')));
 
     return new SelectOption(title, 'Confirm').andThen(() => {
       player.game.awards.push(award);

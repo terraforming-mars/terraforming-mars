@@ -33,7 +33,7 @@ describe('Splice', function() {
     expect(action.options).has.lengthOf(2);
     const orOptions = cast(action.options[0], SelectOption);
 
-    orOptions.cb();
+    orOptions.cb(undefined);
     expect(card2.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(2);
   });
@@ -60,12 +60,12 @@ describe('Splice', function() {
     const pi = cast(player.getWaitingFor(), AndOptions);
     pi.options[0].cb([card]);
     pi.options[1].cb([]);
-    pi.cb();
+    pi.cb(undefined);
     // Player 2 picks Recyclon
     const pi2 = cast(player2.getWaitingFor(), AndOptions);
     pi2.options[0].cb([card2]);
     pi2.options[1].cb([]);
-    pi2.cb();
+    pi2.cb(undefined);
 
     // Default resource on Recyclon and player2's MC
     expect(card2.resourceCount).to.eq(1);

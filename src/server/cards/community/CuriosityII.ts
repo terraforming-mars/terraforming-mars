@@ -65,14 +65,12 @@ export class CuriosityII extends Card implements ICorporationCard {
     if (!player.canAfford(2)) return undefined;
 
     return new OrOptions(
-      new SelectOption('Pay 2 M€ to draw a card', 'Confirm', () => {
+      new SelectOption('Pay 2 M€ to draw a card', 'Confirm').andThen(() => {
         player.game.defer(new SelectPaymentDeferred(player, 2, {title: TITLES.payForCardAction(this.name)}))
           .andThen(() => player.game.defer(DrawCards.keepAll(player)));
         return undefined;
       }),
-      new SelectOption('Do nothing', 'Confirm', () => {
-        return undefined;
-      }),
+      new SelectOption('Do nothing', 'Confirm'),
     );
   }
 }

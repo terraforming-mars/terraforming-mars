@@ -48,7 +48,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
       Tag.ANIMAL];
 
     const options = tags.map((tag) => {
-      return new SelectOption(tag, undefined, () => {
+      return new SelectOption(tag).andThen(() => {
         this.draw2Cards(player, tag);
         return undefined;
       });

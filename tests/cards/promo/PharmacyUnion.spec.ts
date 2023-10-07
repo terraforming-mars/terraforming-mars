@@ -38,7 +38,7 @@ describe('PharmacyUnion', function() {
     const pi = cast(player.getWaitingFor(), SelectInitialCards);
     pi.options[0].cb([card]);
     pi.options[1].cb([]);
-    pi.cb();
+    pi.cb(undefined);
 
     expect(card.resourceCount).to.eq(2);
     // Should not pay for the free Science card

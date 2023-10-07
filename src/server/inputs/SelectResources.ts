@@ -46,20 +46,18 @@ export class SelectResources extends AndOptions {
     // is kind of strangely structured. If you can refactor this,
     // please do.
     private units = Units.of({})) {
-    super(
-      () => {
-        const array = Object.values(units);
-        if (array.some((count) => count < 0)) {
-          throw new Error('All units must be positive');
-        }
-        if (sum(array) !== this.count) {
-          throw new Error(`Select ${this.count} resources.`);
-        }
+    super(...SelectResources.makeOptions(count, units));
+    this.andThen(() => {
+      const array = Object.values(units);
+      if (array.some((count) => count < 0)) {
+        throw new Error('All units must be positive');
+      }
+      if (sum(array) !== this.count) {
+        throw new Error(`Select ${this.count} resources.`);
+      }
 
-        this.player.stock.addUnits(this.units, {log: true});
-        return undefined;
-      },
-      ...SelectResources.makeOptions(count, units),
-    );
+      this.player.stock.addUnits(this.units, {log: true});
+      return undefined;
+    });
   }
 }

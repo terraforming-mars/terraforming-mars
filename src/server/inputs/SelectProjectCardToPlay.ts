@@ -16,7 +16,7 @@ export type PlayCardMetadata = {
   details: CanPlayResponse | undefined;
 };
 
-export class SelectProjectCardToPlay extends BasePlayerInput {
+export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
   public cards: Array<IProjectCard> = [];
   public extras: Map<CardName, PlayCardMetadata>;
 
@@ -25,7 +25,6 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     cards: Array<PlayableCard> = player.getPlayableCards(),
     public config?: {
       action?: CardAction,
-      cb?(cardToPlay: IProjectCard): void,
     }) {
     super('projectCard', 'Play project card');
     this.buttonLabel = 'Play card';
@@ -107,11 +106,5 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
       }
     }
     this.cb(card);
-  }
-
-  // To fullfil PlayerInput.
-  public cb(card: IProjectCard) {
-    this.config?.cb?.(card);
-    return undefined;
   }
 }

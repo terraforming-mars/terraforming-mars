@@ -34,7 +34,7 @@ export class DeclareCloneTag extends DeferredAction<PlanetaryTag> {
       this.player.game.tags.filter(isPlanetaryTag));
 
     const options = tags.map((tag) => {
-      return new SelectOption(tag, 'Choose', () => {
+      return new SelectOption(tag, 'Choose').andThen(() => {
         this.card.cloneTag = tag;
         this.player.game.log('${0} turned the clone tag on ${1} into a ${2} tag',
           (b) => b.player(this.player).card(this.card).string(tag));

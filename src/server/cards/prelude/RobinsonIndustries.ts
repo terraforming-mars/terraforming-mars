@@ -42,7 +42,7 @@ export class RobinsonIndustries extends Card implements IActionCard, ICorporatio
     let lowest: Array<SelectOption> = [];
 
     ALL_RESOURCES.forEach((resource) => {
-      const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
+      const option = new SelectOption('Increase ' + resource + ' production 1 step').andThen(() => {
         player.game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForCardAction(this.name)}))
           // Add production after payment, to prevent Manutech from being in the way.
           .andThen(() => player.production.add(resource, 1, {log: true}));

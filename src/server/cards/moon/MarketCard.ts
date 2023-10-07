@@ -42,8 +42,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
       return new OrOptions(
-        new SelectOption(newMessage('Buy ${0}', (b) => b.string(this.tradeResource)), 'Buy', () => this.getBuyingOption(player)),
-        new SelectOption(newMessage('Sell ${0}', (b) => b.string(this.tradeResource)), 'Sell', () => this.getSellingOption(player)),
+        new SelectOption(newMessage('Buy ${0}', (b) => b.string(this.tradeResource)), 'Buy').andThen(() => this.getBuyingOption(player)),
+        new SelectOption(newMessage('Sell ${0}', (b) => b.string(this.tradeResource)), 'Sell').andThen(() => this.getSellingOption(player)),
       );
     } else if (offerBuy) {
       return this.getBuyingOption(player);

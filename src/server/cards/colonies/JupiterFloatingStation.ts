@@ -50,13 +50,13 @@ export class JupiterFloatingStation extends Card implements IProjectCard {
 
   public action(player: IPlayer) {
     return new OrOptions(
-      new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
+      new SelectOption('Add 1 floater to a Jovian card', 'Add floater').andThen(() => {
         player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {
           restrictedTag: Tag.JOVIAN, title: 'Add 1 floater to a Jovian card',
         }));
         return undefined;
       }),
-      new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
+      new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€').andThen(() => {
         player.stock.add(Resource.MEGACREDITS, Math.min(this.resourceCount, 4), {log: true});
         return undefined;
       }),

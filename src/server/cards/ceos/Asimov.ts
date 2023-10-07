@@ -53,7 +53,7 @@ export class Asimov extends CeoCard {
 
     freeAward.options = validAwards.slice(0, awardCount).map((award) => this.selectAwardToFund(player, award));
     freeAward.options.push(
-      new SelectOption('Do nothing', 'Confirm', () => {
+      new SelectOption('Do nothing', 'Confirm').andThen(() => {
         game.log('${0} chose not to fund any award', (b) => b.player(player));
         return undefined;
       }),
@@ -75,7 +75,7 @@ export class Asimov extends CeoCard {
       .join(' / ');
     title += ']';
 
-    return new SelectOption(title, 'Confirm', () => {
+    return new SelectOption(title, 'Confirm').andThen(() => {
       player.game.awards.push(award);
       player.game.fundAward(player, award);
       return undefined;

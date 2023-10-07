@@ -69,7 +69,7 @@ describe('Cyanobacteria', function() {
     options?.options[0].cb(1);
     options?.options[1].cb(3);
     options?.options[2].cb(5);
-    options?.cb();
+    options?.cb(undefined);
 
     expect(ghgProducingBacteria.resourceCount).eq(1);
     expect(tardigrades.resourceCount).eq(3);
@@ -86,9 +86,9 @@ describe('Cyanobacteria', function() {
     options?.options[0].cb(1);
     options?.options[1].cb(3);
     options?.options[2].cb(6);
-    expect(() => options?.cb()).to.throw(/Expecting 9 .*, got 10/);
+    expect(() => options?.cb(undefined)).to.throw(/Expecting 9 .*, got 10/);
 
     options?.options[2].cb(4);
-    expect(() => options?.cb()).to.throw(/Expecting 9 .*, got 8/);
+    expect(() => options?.cb(undefined)).to.throw(/Expecting 9 .*, got 8/);
   });
 });

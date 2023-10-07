@@ -4,9 +4,8 @@ import {AresGlobalParametersResponse} from '../../common/inputs/AresGlobalParame
 import {InputResponse, isAresGlobalParametersResponse, isShiftAresGlobalParametersResponse} from '../../common/inputs/InputResponse';
 import {ShiftAresGlobalParametersModel} from '../../common/models/PlayerInputModel';
 
-export class ShiftAresGlobalParameters extends BasePlayerInput {
-  constructor(
-    public cb: (units: AresGlobalParametersResponse) => undefined) {
+export class ShiftAresGlobalParameters extends BasePlayerInput<AresGlobalParametersResponse> {
+  constructor() {
     super('aresGlobalParameters', 'Adjust Ares global parameters up to 1 step.');
   }
 

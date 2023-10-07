@@ -44,20 +44,17 @@ export class StealResources extends DeferredAction {
 
       return new SelectOption(
         'Steal ' + qtyToSteal + ' ' + this.resource + ' from ' + candidate.name,
-        'Steal',
-        () => {
+        'Steal')
+        .andThen(() => {
           candidate.stock.deduct(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
           this.player.stock.add(this.resource, qtyToSteal);
           return undefined;
-        },
-      );
+        });
     });
 
     return new OrOptions(
       ...stealOptions,
-      new SelectOption('Do not steal', 'Confirm', () => {
-        return undefined;
-      }),
+      new SelectOption('Do not steal', 'Confirm'),
     );
   }
 }

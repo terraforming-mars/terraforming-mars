@@ -73,10 +73,10 @@ export class Colonies {
     handlers.forEach((handler) => {
       if (handler.canUse()) {
         howToPayForTrade.options.push(new SelectOption(
-          handler.optionText(), '', () => {
-            selected = handler;
-            return undefined;
-          }));
+          handler.optionText()).andThen(() => {
+          selected = handler;
+          return undefined;
+        }));
       }
     });
 
@@ -93,14 +93,7 @@ export class Colonies {
         return undefined;
       });
 
-    const trade = new AndOptions(
-      () => {
-        return undefined;
-      },
-      howToPayForTrade,
-      selectColony,
-    );
-
+    const trade = new AndOptions(howToPayForTrade, selectColony);
     trade.title = 'Trade with a colony tile';
     trade.buttonLabel = 'Trade';
 

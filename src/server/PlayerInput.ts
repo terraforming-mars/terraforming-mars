@@ -22,11 +22,11 @@ export interface PlayerInput {
     maxByDefault?: boolean;
 }
 
-export abstract class BasePlayerInput implements PlayerInput {
+export abstract class BasePlayerInput<T> implements PlayerInput {
   public readonly type: PlayerInputType;
   public buttonLabel: string = 'Save';
   public title: string | Message;
-  public abstract cb(...item: any): PlayerInput | undefined;
+  public cb: (param: T) => PlayerInput | undefined = () => undefined;
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
 
@@ -34,7 +34,13 @@ export abstract class BasePlayerInput implements PlayerInput {
     this.type = type;
     this.title = title;
   }
+
+  public andThen(cb: (param: T) => PlayerInput | undefined): this {
+    this.cb = cb;
+    return this;
+  }
 }
+
 
 export function getCardFromPlayerInput<T extends ICard>(cards: ReadonlyArray<T>, cardName: string): {card: T, idx: number} {
   const idx = cards.findIndex((card) => card.name === cardName);

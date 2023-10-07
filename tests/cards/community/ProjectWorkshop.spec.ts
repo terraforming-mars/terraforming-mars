@@ -56,7 +56,7 @@ describe('ProjectWorkshop', function() {
 
     expect(card.canAct(player)).is.true;
     const selectOption = cast(churnAction(card, player), SelectOption);
-    expect(churn(() => selectOption.cb(), player)).is.undefined;
+    expect(churn(() => selectOption.cb(undefined), player)).is.undefined;
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
@@ -69,7 +69,7 @@ describe('ProjectWorkshop', function() {
     expect(player.getSteelValue()).to.eq(3);
     expect(player.getTitaniumValue()).to.eq(4);
 
-    card.action(player).cb();
+    card.action(player).cb(undefined);
     expect(player.playedCards).has.lengthOf(0);
     expect(game.projectDeck.discardPile.includes(advancedAlloys)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
@@ -88,7 +88,7 @@ describe('ProjectWorkshop', function() {
     player.playedCards.push(smallAnimals, extremophiles);
 
     const selectOption = cast(card.action(player), SelectOption);
-    const selectCard = cast(selectOption.cb(), SelectCard<ICard>);
+    const selectCard = cast(selectOption.cb(undefined), SelectCard<ICard>);
 
     selectCard.cb([smallAnimals]);
     expect(player.getTerraformRating()).to.eq(originalTR + 2);
@@ -115,7 +115,7 @@ describe('ProjectWorkshop', function() {
 
     const selectOption = cast(card.action(player), SelectOption);
 
-    expect(selectOption.cb()).is.undefined;
+    expect(selectOption.cb(undefined)).is.undefined;
     expect(player.playedCards).is.empty;
 
     expect(player.getTerraformRating()).to.eq(originalTR - 5);
@@ -188,7 +188,7 @@ describe('ProjectWorkshop', function() {
     player.heat = 5;
 
     const selectOption = cast(churnAction(card, player), SelectOption);
-    const selectPayment = cast(churn(() => selectOption.cb(), player), SelectPayment);
+    const selectPayment = cast(churn(() => selectOption.cb(undefined), player), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);

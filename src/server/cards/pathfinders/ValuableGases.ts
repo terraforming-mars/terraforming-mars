@@ -10,7 +10,6 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {Resource} from '../../../common/Resource';
 import {digit} from '../Options';
 import {CardType} from '../../../common/cards/CardType';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 
 // TODO(kberg) like #3644, this card may have similar behavior.
@@ -52,14 +51,11 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
       };
     });
     if (playableCards.length !== 0) {
-      player.game.defer(new SimpleDeferredAction(player, () => {
-        return new SelectProjectCardToPlay(
-          player,
-          playableCards,
-          {
-            cb: (card) => player.addResourceTo(card, 5),
-          });
-      }));
+      player.defer(new SelectProjectCardToPlay(player, playableCards)
+        .andThen((card) => {
+          player.addResourceTo(card, 5);
+          return undefined;
+        }));
     }
 
     return undefined;

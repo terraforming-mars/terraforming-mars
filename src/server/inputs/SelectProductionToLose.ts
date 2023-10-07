@@ -1,17 +1,16 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
 import {SelectProductionToLoseModel} from '../../common/models/PlayerInputModel';
 
-export class SelectProductionToLose extends BasePlayerInput {
+export class SelectProductionToLose extends BasePlayerInput<Units> {
   constructor(
     title: string | Message,
     public unitsToLose: number,
     public player: IPlayer,
-    public cb: (units: Units) => PlayerInput | undefined,
     buttonLabel: string = 'Save',
   ) {
     super('productionToLose', title);

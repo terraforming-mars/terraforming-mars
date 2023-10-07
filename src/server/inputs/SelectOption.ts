@@ -1,13 +1,13 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {InputResponse, isSelectOptionResponse} from '../../common/inputs/InputResponse';
 import {SelectOptionModel} from '../../common/models/PlayerInputModel';
 
-export class SelectOption extends BasePlayerInput {
+export class SelectOption extends BasePlayerInput<undefined> {
   constructor(
     title: string | Message,
-    buttonLabel: string = 'Select',
-    public cb: () => PlayerInput | undefined) {
+    buttonLabel: string = 'Select') {
     super('option', title);
     this.buttonLabel = buttonLabel;
   }
@@ -23,6 +23,6 @@ export class SelectOption extends BasePlayerInput {
     if (!isSelectOptionResponse(response)) {
       throw new Error('Not a valid SelectOptionResponse');
     }
-    return this.cb();
+    return this.cb(undefined);
   }
 }

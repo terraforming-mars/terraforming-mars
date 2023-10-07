@@ -55,42 +55,42 @@ export class UtopiaInvest extends Card implements IActionCard, ICorporationCard 
 
     const options: Array<SelectOption> = [];
 
-    const reduceMegacredits = new SelectOption('Decrease M€ production', 'Decrease production', () => {
+    const reduceMegacredits = new SelectOption('Decrease M€ production', 'Decrease production').andThen(() => {
       player.production.add(Resource.MEGACREDITS, -1);
       player.megaCredits += 4;
       this.log(player, 'megacredit');
       return undefined;
     });
 
-    const reduceSteel = new SelectOption('Decrease steel production', 'Decrease production', () => {
+    const reduceSteel = new SelectOption('Decrease steel production', 'Decrease production').andThen(() => {
       player.production.add(Resource.STEEL, -1);
       player.steel += 4;
       this.log(player, 'steel');
       return undefined;
     });
 
-    const reduceTitanium = new SelectOption('Decrease titanium production', 'Decrease production', () => {
+    const reduceTitanium = new SelectOption('Decrease titanium production', 'Decrease production').andThen(() => {
       player.production.add(Resource.TITANIUM, -1);
       player.titanium += 4;
       this.log(player, 'titanium');
       return undefined;
     });
 
-    const reducePlants = new SelectOption('Decrease plants production', 'Decrease production', () => {
+    const reducePlants = new SelectOption('Decrease plants production', 'Decrease production').andThen(() => {
       player.production.add(Resource.PLANTS, -1);
       player.plants += 4;
       this.log(player, 'plant');
       return undefined;
     });
 
-    const reduceEnergy = new SelectOption('Decrease energy production', 'Decrease production', () => {
+    const reduceEnergy = new SelectOption('Decrease energy production', 'Decrease production').andThen(() => {
       player.production.add(Resource.ENERGY, -1);
       player.energy += 4;
       this.log(player, 'energy');
       return undefined;
     });
 
-    const reduceHeat = new SelectOption('Decrease heat production', 'Decrease production', () => {
+    const reduceHeat = new SelectOption('Decrease heat production', 'Decrease production').andThen(() => {
       player.production.add(Resource.HEAT, -1);
       player.heat += 4;
       this.log(player, 'heat');

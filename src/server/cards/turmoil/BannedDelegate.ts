@@ -54,17 +54,18 @@ export class BannedDelegate extends Card implements IProjectCard {
         }
 
         if (players.length > 0) {
-          const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: IPlayer | NeutralPlayer) => {
-            let playerToRemove: Delegate;
-            if (selectedPlayer === 'NEUTRAL') {
-              playerToRemove = 'NEUTRAL';
-            } else {
-              playerToRemove = selectedPlayer.id;
-            }
-            turmoil.removeDelegateFromParty(playerToRemove, party.name, player.game);
-            this.log(player, party, selectedPlayer);
-            return undefined;
-          });
+          const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party')
+            .andThen((selectedPlayer) => {
+              let playerToRemove: Delegate;
+              if (selectedPlayer === 'NEUTRAL') {
+                playerToRemove = 'NEUTRAL';
+              } else {
+                playerToRemove = selectedPlayer.id;
+              }
+              turmoil.removeDelegateFromParty(playerToRemove, party.name, player.game);
+              this.log(player, party, selectedPlayer);
+              return undefined;
+            });
           selectDelegate.buttonLabel = 'Remove delegate';
           orOptions.push(selectDelegate);
         }

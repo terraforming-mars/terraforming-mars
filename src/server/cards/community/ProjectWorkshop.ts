@@ -82,8 +82,8 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
 
     const flipBlueCard = new SelectOption(
       'Flip and discard a played blue card',
-      'Select',
-      () => {
+      'Select')
+      .andThen(() => {
         if (activeCards.length === 1) {
           this.convertCardPointsToTR(player, activeCards[0]);
           player.discardPlayedCard(activeCards[0]);
@@ -103,10 +103,9 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
               return undefined;
             },
           );
-      },
-    );
+      });
 
-    const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card', () => {
+    const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card').andThen(() => {
       player.game.defer(new SelectPaymentDeferred(player, 3,
         {title: TITLES.payForCardAction(this.name)}))
         .andThen(() => player.drawCard(1, {cardType: CardType.ACTIVE}));

@@ -16,11 +16,10 @@ export class SelectProductionToLoseDeferred extends DeferredAction {
     return new SelectProductionToLose(
       this.title,
       this.unitsToLose,
-      this.player,
-      (production: Units) => {
+      this.player)
+      .andThen((production) => {
         this.player.production.adjust(Units.negative(production), {log: true});
         return undefined;
-      },
-    );
+      });
   }
 }

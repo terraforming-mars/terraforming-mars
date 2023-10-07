@@ -52,10 +52,7 @@ export class CometForVenus extends Card implements IProjectCard {
           }),
         new SelectOption(
           'Do not remove M€',
-          'Confirm',
-          () => undefined,
-        ),
-      );
+          'Confirm'));
     }
 
     return undefined;

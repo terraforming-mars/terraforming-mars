@@ -113,7 +113,7 @@ class GreensPolicy04 implements Policy {
 
         if (availableMicrobeCards.length === 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm', () => {
+            new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm').andThen(() => {
               player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
 
               return undefined;
@@ -121,7 +121,7 @@ class GreensPolicy04 implements Policy {
           );
         } else if (availableMicrobeCards.length > 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
+            new SelectOption('Add 2 microbes to a card', 'Confirm').andThen(() => {
               return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards)
                 .andThen(([card]) => {
                   player.addResourceTo(card, {qty: 2, log: true});
@@ -131,7 +131,7 @@ class GreensPolicy04 implements Policy {
           );
         }
 
-        orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm', () => {
+        orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm').andThen(() => {
           player.stock.add(Resource.PLANTS, 3);
           game.log('${0} gained 3 plants', (b) => b.player(player));
           return undefined;

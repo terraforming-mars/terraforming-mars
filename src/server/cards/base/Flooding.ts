@@ -62,10 +62,7 @@ export class Flooding extends Card implements IProjectCard {
             }),
             new SelectOption(
               'Don\'t remove M€ from adjacent player',
-              'Confirm',
-              () => undefined,
-            ),
-          );
+              'Confirm'));
         }
         return undefined;
       });

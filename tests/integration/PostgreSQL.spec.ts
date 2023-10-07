@@ -204,7 +204,7 @@ describeDatabaseSuite({
       // the end of Player.takeAction
       function takeAction(p: IPlayer) {
         // A do-nothing player input
-        const simpleOption = new SelectOption('', '', () => undefined);
+        const simpleOption = new SelectOption('');
         p.setWaitingFor(simpleOption, () => {
           (p as any).incrementActionsTaken();
           p.takeAction();
@@ -281,7 +281,7 @@ describeDatabaseSuite({
       // the end of Player.takeAction
       function takeAction(p: IPlayer) {
         // A do-nothing player input
-        const simpleOption = new SelectOption('', '', () => {
+        const simpleOption = new SelectOption('').andThen(() => {
           player.megaCredits++;
           return undefined;
         });
@@ -362,7 +362,7 @@ describeDatabaseSuite({
       // the end of Player.takeAction
       function takeAction(p: IPlayer) {
         // A do-nothing player input
-        const simpleOption = new SelectOption('', '', () => {
+        const simpleOption = new SelectOption('').andThen(() => {
           player.megaCredits++;
           return undefined;
         });

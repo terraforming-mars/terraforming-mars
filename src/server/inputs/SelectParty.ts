@@ -1,12 +1,12 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInputAndThen} from './BasePlayerInputAndThen';
+import {BasePlayerInput} from '../PlayerInput';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
 import {SelectPartyModel} from '../../common/models/PlayerInputModel';
 import {getTurmoilModel} from '../models/TurmoilModel';
 
-export class SelectParty extends BasePlayerInputAndThen<PartyName> {
+export class SelectParty extends BasePlayerInput<PartyName> {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Send delegate',

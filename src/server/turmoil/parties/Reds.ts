@@ -173,7 +173,7 @@ class RedsPolicy03 implements Policy {
 
         // Decrease temperature option
         if (this.canDecrease(game, GlobalParameter.TEMPERATURE)) {
-          orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm', () => {
+          orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm').andThen(() => {
             game.increaseTemperature(player, -1);
             game.log('${0} decreased temperature 1 step', (b) => b.player(player));
             return undefined;
@@ -182,7 +182,7 @@ class RedsPolicy03 implements Policy {
 
         // Remove ocean option
         if (this.canDecrease(game, GlobalParameter.OCEANS)) {
-          orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
+          orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm').andThen(() => {
             game.defer(new RemoveOceanTile(player, 'Turmoil Reds action - Remove an Ocean tile from the board'));
             return undefined;
           }));
@@ -190,7 +190,7 @@ class RedsPolicy03 implements Policy {
 
         // Decrease oxygen level option
         if (this.canDecrease(game, GlobalParameter.OXYGEN)) {
-          orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm', () => {
+          orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm').andThen(() => {
             game.increaseOxygenLevel(player, -1);
             game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
             return undefined;
@@ -199,7 +199,7 @@ class RedsPolicy03 implements Policy {
 
         // Decrease Venus scale option
         if (this.canDecrease(game, GlobalParameter.VENUS)) {
-          orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm', () => {
+          orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm').andThen(() => {
             game.increaseVenusScaleLevel(player, -1);
             game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
             return undefined;
@@ -207,21 +207,21 @@ class RedsPolicy03 implements Policy {
         }
 
         if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon habitat rate', 'Confirm', () => {
+          orOptions.options.push(new SelectOption('Decrease Moon habitat rate', 'Confirm').andThen(() => {
             MoonExpansion.lowerHabitatRate(player, 1);
             return undefined;
           }));
         }
 
         if (this.canDecrease(game, GlobalParameter.MOON_MINING_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon mining rate', 'Confirm', () => {
+          orOptions.options.push(new SelectOption('Decrease Moon mining rate', 'Confirm').andThen(() => {
             MoonExpansion.lowerMiningRate(player, 1);
             return undefined;
           }));
         }
 
         if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate', 'Confirm', () => {
+          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate', 'Confirm').andThen(() => {
             MoonExpansion.lowerLogisticRate(player, 1);
             return undefined;
           }));

@@ -36,11 +36,11 @@ export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
       });
     const wild = new OrOptions(selectCard, this.selectStandardResources(1));
     if (this.standardResourceCount > 0) {
-      wild.cb = () => {
+      wild.andThen(() => {
         return this.standardResourceCount > 0 ?
           this.selectStandardResources(this.standardResourceCount) :
           undefined;
-      };
+      });
       wild.title = newMessage(
         'Choose your wild resource bonus, after which you will gain ${0} more distinct standard resources.',
         (b) => b.number(this.standardResourceCount));

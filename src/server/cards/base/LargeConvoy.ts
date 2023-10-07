@@ -51,12 +51,12 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     const availableActions: Array<PlayerInput> = [];
 
-    const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants', gainPlants);
+    const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);
 
     if (animalCards.length === 1) {
       const targetAnimalCard = animalCards[0];
-      availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
+      availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals').andThen(() => {
         player.addResourceTo(targetAnimalCard, {qty: 4, log: true});
         return undefined;
       }));

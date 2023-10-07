@@ -45,7 +45,7 @@ export class RemoveAnyPlants extends DeferredAction {
           .rawString(candidate.name) // TODO(kberg): change to .player(candidate). But it won't work immediately.
           .getMessage();
 
-      return new SelectOption(message, 'Remove plants', () => {
+      return new SelectOption(message, 'Remove plants').andThen(() => {
         candidate.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
         return undefined;
       });
@@ -53,7 +53,7 @@ export class RemoveAnyPlants extends DeferredAction {
 
     const orOptions = new OrOptions(
       ...removalOptions,
-      new SelectOption('Skip removing plants', 'Confirm', () => {
+      new SelectOption('Skip removing plants', 'Confirm').andThen(() => {
         return undefined;
       }),
     );

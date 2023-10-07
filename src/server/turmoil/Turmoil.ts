@@ -362,12 +362,11 @@ export class Turmoil {
     const setRulingParty = new OrOptions();
 
     setRulingParty.title = 'Select new ruling party';
-    setRulingParty.options = this.parties.map((p: IParty) => new SelectOption(
-      p.name, 'Select', () => {
-        this.rulingParty = p;
-        PoliticalAgendas.setNextAgenda(this, player.game);
-        return undefined;
-      }),
+    setRulingParty.options = this.parties.map((p: IParty) => new SelectOption(p.name).andThen(() => {
+      this.rulingParty = p;
+      PoliticalAgendas.setNextAgenda(this, player.game);
+      return undefined;
+    }),
     );
 
     player.defer(setRulingParty);

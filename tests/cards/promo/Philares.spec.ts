@@ -91,7 +91,7 @@ describe('Philares', () => {
     // Options are ordered 0-5, MC to heat.
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
-    andOptions.cb();
+    andOptions.cb(undefined);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));
   });
 
@@ -104,7 +104,7 @@ describe('Philares', () => {
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
-    expect(() => andOptions.cb()).to.throw('Need to select 1 resource(s)');
+    expect(() => andOptions.cb(undefined)).to.throw('Need to select 1 resource(s)');
   });
 
   it('Multiple bonuses when placing next to multiple tiles', () => {
@@ -119,7 +119,7 @@ describe('Philares', () => {
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
-    andOptions.cb();
+    andOptions.cb(undefined);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
@@ -135,7 +135,7 @@ describe('Philares', () => {
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
-    andOptions.cb();
+    andOptions.cb(undefined);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
@@ -150,7 +150,7 @@ describe('Philares', () => {
     options.options[0].cb(1);
     options.options[1].cb(1);
     options.options[2].cb(1);
-    expect(() => options.cb()).to.throw('Need to select 2 resource(s)');
+    expect(() => options.cb(undefined)).to.throw('Need to select 2 resource(s)');
   });
 
   it('Should take initial action', function() {
@@ -187,7 +187,7 @@ describe('Philares', () => {
     const philaresPlayerResourceSelection = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Option 3 is plants.
     philaresPlayerResourceSelection.options[3].cb(1);
-    philaresPlayerResourceSelection.cb();
+    philaresPlayerResourceSelection.cb(undefined);
     expect(philaresPlayer.plants).to.eq(8);
     expect(philaresPlayer.getWaitingFor()).is.undefined;
 

@@ -66,10 +66,8 @@ export class RobinHaulings extends Card implements ICorporationCard {
     const options = new OrOptions();
     if (this.canRaiseVenus(player)) {
       options.options.push(
-        new SelectOption(
-          'Spend 3 floaters to raise Venus 1 step',
-          'OK',
-          () => {
+        new SelectOption('Spend 3 floaters to raise Venus 1 step')
+          .andThen(() => {
             player.game.increaseVenusScaleLevel(player, 1);
             this.resourceCount -= 3;
             return undefined;
@@ -77,10 +75,8 @@ export class RobinHaulings extends Card implements ICorporationCard {
     }
     if (this.canRaiseOxygen(player)) {
       options.options.push(
-        new SelectOption(
-          'Spend 3 floaters to raise oxygen 1 step',
-          'OK',
-          () => {
+        new SelectOption('Spend 3 floaters to raise oxygen 1 step')
+          .andThen(() => {
             player.game.increaseOxygenLevel(player, 1);
             this.resourceCount -= 3;
             return undefined;

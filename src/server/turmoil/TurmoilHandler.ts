@@ -27,7 +27,7 @@ export class TurmoilHandler {
     }
     const policy: Policy = turmoil.rulingPolicy();
     if (policy.canAct?.(player)) {
-      return new SelectOption(policyDescription(policy, player), 'Pay', () => policy.action?.(player));
+      return new SelectOption(policyDescription(policy, player), 'Pay').andThen(() => policy.action?.(player));
     }
     return undefined;
   }

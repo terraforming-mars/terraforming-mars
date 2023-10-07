@@ -66,14 +66,14 @@ export class MindSetMars extends Card implements ICorporationCard {
     const options = new OrOptions();
 
     if (this.canAddDelegate(player)) {
-      options.options.push(new SelectOption('Spend 2 agendas to add a delegate to any party', 'OK', () => {
+      options.options.push(new SelectOption('Spend 2 agendas to add a delegate to any party').andThen(() => {
         player.removeResourceFrom(this, 2);
         player.game.defer(new SendDelegateToArea(player));
         return undefined;
       }));
     }
     if (this.canAddCity(player)) {
-      options.options.push(new SelectOption('Spend 5 agendas to place a city on Mars', 'OK', () => {
+      options.options.push(new SelectOption('Spend 5 agendas to place a city on Mars').andThen(() => {
         player.removeResourceFrom(this, 5);
         player.game.defer(new PlaceCityTile(player));
         return undefined;

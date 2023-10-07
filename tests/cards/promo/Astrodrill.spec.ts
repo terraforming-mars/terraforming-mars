@@ -45,7 +45,7 @@ describe('Astrodrill', function() {
 
     // add asteroid resource and gain standard resource
     const addAsteroidOption = cast(action.options[1], SelectOption);
-    const result = addAsteroidOption.cb();
+    const result = addAsteroidOption.cb(undefined);
     expect(card.resourceCount).to.eq(4);
     expect(result).is.undefined;
   });

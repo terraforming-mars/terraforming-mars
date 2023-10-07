@@ -69,7 +69,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
     const availableActions = new OrOptions();
 
     const animalCards: Array<ICard> = player.getResourceCards(CardResource.ANIMAL);
-    const gainPlantsOption = new SelectOption('Gain 4 plants', 'Gain plants', () => {
+    const gainPlantsOption = new SelectOption('Gain 4 plants', 'Gain plants').andThen(() => {
       player.stock.add(Resource.PLANTS, 4, {log: true});
       return undefined;
     });
@@ -80,7 +80,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       const targetCard = animalCards[0];
       availableActions.options.push(
         gainPlantsOption,
-        new SelectOption('Add 2 animals to ' + targetCard.name, 'Add animals', () => {
+        new SelectOption('Add 2 animals to ' + targetCard.name, 'Add animals').andThen(() => {
           player.addResourceTo(targetCard, {qty: 2, log: true});
           return undefined;
         }));

@@ -63,7 +63,7 @@ describe('MindSetMars', function() {
 
     turmoil.delegateReserve.clear();
     turmoil.delegateReserve.add(player.id, 3);
-    cast(card.action(player), SelectOption).cb();
+    cast(card.action(player), SelectOption).cb(undefined);
     expect(game.deferredActions.length).eq(1);
     assertSendDelegateToArea(player, game.deferredActions.pop()!);
     expect(card.resourceCount).eq(1);
@@ -73,7 +73,7 @@ describe('MindSetMars', function() {
     card.resourceCount = 7;
 
     turmoil.delegateReserve.clear();
-    cast(card.action(player), SelectOption).cb();
+    cast(card.action(player), SelectOption).cb(undefined);
     expect(game.deferredActions.length).eq(1);
     assertPlaceCityTile(player, game.deferredActions.pop()!);
     expect(card.resourceCount).eq(2);

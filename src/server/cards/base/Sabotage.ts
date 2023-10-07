@@ -39,7 +39,7 @@ export class Sabotage extends Card implements IProjectCard {
         const amountRemoved = Math.min(3, target.titanium);
         const optionTitle = 'Remove ' + amountRemoved + ' titanium from ' + target.name;
 
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
+        availableActions.options.push(new SelectOption(optionTitle, 'Confirm').andThen(() => {
           target.stock.deduct(Resource.TITANIUM, 3, {log: true, from: player});
           return undefined;
         }));
@@ -49,7 +49,7 @@ export class Sabotage extends Card implements IProjectCard {
         const amountRemoved = Math.min(4, target.steel);
         const optionTitle = 'Remove ' + amountRemoved + ' steel from ' + target.name;
 
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
+        availableActions.options.push(new SelectOption(optionTitle, 'Confirm').andThen(() => {
           target.stock.deduct(Resource.STEEL, 4, {log: true, from: player});
           return undefined;
         }));
@@ -59,7 +59,7 @@ export class Sabotage extends Card implements IProjectCard {
         const amountRemoved = Math.min(7, target.megaCredits);
         const optionTitle = 'Remove ' + amountRemoved + ' M€ from ' + target.name;
 
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
+        availableActions.options.push(new SelectOption(optionTitle, 'Confirm').andThen(() => {
           target.stock.deduct(Resource.MEGACREDITS, 7, {log: true, from: player});
           return undefined;
         }));
@@ -67,7 +67,7 @@ export class Sabotage extends Card implements IProjectCard {
     });
 
     if (availableActions.options.length > 0) {
-      availableActions.options.push(new SelectOption('Do not remove resource', 'Confirm', () => {
+      availableActions.options.push(new SelectOption('Do not remove resource', 'Confirm').andThen(() => {
         return undefined;
       }));
       return availableActions;

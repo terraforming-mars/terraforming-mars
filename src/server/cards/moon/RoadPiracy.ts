@@ -70,7 +70,8 @@ export class RoadPiracy extends Card implements IProjectCard {
       }
       return undefined;
     };
-    const option = new AndOptions(cb, ...selectAmounts);
+    // TODO(kberg): does title always have to be set separately? That's fixable.
+    const option = new AndOptions(...selectAmounts).andThen(cb);
     option.title = title;
     return option;
   }
@@ -81,11 +82,11 @@ export class RoadPiracy extends Card implements IProjectCard {
     const stealTitanium = newMessage('Steal ${0} titanium', (b) => b.number(4));
     if (game.isSoloMode()) {
       return new OrOptions(
-        new SelectOption(stealSteel, 'Steal steel', () => {
+        new SelectOption(stealSteel, 'Steal steel').andThen(() => {
           player.steel += 6;
           return undefined;
         }),
-        new SelectOption(stealTitanium, 'Steal titanium', () => {
+        new SelectOption(stealTitanium, 'Steal titanium').andThen(() => {
           player.titanium += 4;
           return undefined;
         }),
@@ -108,9 +109,7 @@ export class RoadPiracy extends Card implements IProjectCard {
       return undefined;
     }
 
-    options.options.push(new SelectOption('Do not steal', 'Confirm', () => {
-      return undefined;
-    }));
+    options.options.push(new SelectOption('Do not steal', 'Confirm'));
     return options;
   }
 }

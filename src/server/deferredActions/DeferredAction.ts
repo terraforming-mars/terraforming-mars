@@ -62,7 +62,7 @@ export abstract class DeferredAction<T = undefined> implements AndThen<T> {
   }
 }
 
-export class SimpleDeferredAction extends DeferredAction {
+export class SimpleDeferredAction<T> extends DeferredAction<T> {
   constructor(
     player: IPlayer,
     public execute: () => PlayerInput | undefined,

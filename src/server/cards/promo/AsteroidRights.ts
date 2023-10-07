@@ -56,21 +56,21 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
     const hasAsteroids = this.resourceCount > 0;
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
 
-    const gainTitaniumOption = new SelectOption('Remove 1 asteroid on this card to gain 2 titanium', 'Remove asteroid', () => {
+    const gainTitaniumOption = new SelectOption('Remove 1 asteroid on this card to gain 2 titanium', 'Remove asteroid').andThen(() => {
       this.resourceCount--;
       player.titanium += 2;
       LogHelper.logRemoveResource(player, this, 1, 'gain 2 titanium');
       return undefined;
     });
 
-    const increaseMcProdOption = new SelectOption('Remove 1 asteroid on this card to increase M€ production 1 step', 'Remove asteroid', () => {
+    const increaseMcProdOption = new SelectOption('Remove 1 asteroid on this card to increase M€ production 1 step', 'Remove asteroid').andThen(() => {
       this.resourceCount--;
       player.production.add(Resource.MEGACREDITS, 1);
       LogHelper.logRemoveResource(player, this, 1, 'increase M€ production 1 step');
       return undefined;
     });
 
-    const addAsteroidToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
+    const addAsteroidToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid').andThen(() => {
       player.game.defer(new SelectPaymentDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(this, {log: true});
 
@@ -90,7 +90,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
 
     // Add asteroid to any card
     if (!hasAsteroids) {
-      if (asteroidCards.length === 1) return addAsteroidToSelf.cb();
+      if (asteroidCards.length === 1) return addAsteroidToSelf.cb(undefined);
       return addAsteroidOption;
     }
 

@@ -62,11 +62,11 @@ export class Atmoscoop extends Card implements IProjectCard {
       return undefined;
     }
 
-    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature', () => {
+    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature').andThen(() => {
       game.increaseTemperature(player, 2);
       return undefined;
     });
-    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus', () => {
+    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus').andThen(() => {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     });

@@ -201,15 +201,16 @@ export class Executor implements BehaviorExecutor {
       const options = behavior.or.behaviors
         .filter((behavior) => this.canExecute(behavior, player, card))
         .map((behavior) => {
-          return new SelectOption(behavior.title, undefined, () => {
-            this.execute(behavior, player, card);
-            return undefined;
-          });
+          return new SelectOption(behavior.title)
+            .andThen(() => {
+              this.execute(behavior, player, card);
+              return undefined;
+            });
         });
 
       // TODO(kberg): move this behavior to OrOptions?
       if (options.length === 1 && behavior.or.autoSelect === true) {
-        options[0].cb();
+        options[0].cb(undefined);
       } else {
         player.defer(new OrOptions(...options));
       }

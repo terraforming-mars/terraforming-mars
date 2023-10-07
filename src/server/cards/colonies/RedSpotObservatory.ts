@@ -54,8 +54,8 @@ export class RedSpotObservatory extends Card implements IProjectCard {
 
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Add 1 floater on this card', 'Add floater', () => this.addResource(player));
-    const spendResource = new SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater', () => this.spendResource(player));
+    const addResource = new SelectOption('Add 1 floater on this card', 'Add floater').andThen(() => this.addResource(player));
+    const spendResource = new SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater').andThen(() => this.spendResource(player));
 
     opts.push(spendResource);
     opts.push(addResource);

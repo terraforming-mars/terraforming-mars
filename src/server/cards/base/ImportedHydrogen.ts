@@ -54,12 +54,12 @@ export class ImportedHydrogen extends Card implements IProjectCard {
 
     const availableActions: Array<PlayerInput> = [];
 
-    const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants', gainPlants);
+    const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);
 
     if (availableMicrobeCards.length === 1) {
       const targetMicrobeCard = availableMicrobeCards[0];
-      availableActions.push(new SelectOption('Add 3 microbes to ' + targetMicrobeCard.name, 'Add microbes', () => {
+      availableActions.push(new SelectOption('Add 3 microbes to ' + targetMicrobeCard.name, 'Add microbes').andThen(() => {
         player.addResourceTo(targetMicrobeCard, {qty: 3, log: true});
         return undefined;
       }));
@@ -75,7 +75,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
 
     if (availableAnimalCards.length === 1) {
       const targetAnimalCard = availableAnimalCards[0];
-      availableActions.push(new SelectOption('Add 2 animals to ' + targetAnimalCard.name, 'Add animals', () => {
+      availableActions.push(new SelectOption('Add 2 animals to ' + targetAnimalCard.name, 'Add animals').andThen(() => {
         player.addResourceTo(targetAnimalCard, {qty: 2, log: true});
         return undefined;
       }));

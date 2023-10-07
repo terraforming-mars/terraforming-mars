@@ -31,15 +31,15 @@ describe('DeclareCloneTag', function() {
     expect(orOptions).has.length(3);
     expect(card.cloneTag).eq(Tag.CLONE);
 
-    orOptions[0].cb();
+    orOptions[0].cb(undefined);
     expect(card.cloneTag).eq(Tag.EARTH);
     expect(tag).eq(Tag.EARTH);
 
-    orOptions[1].cb();
+    orOptions[1].cb(undefined);
     expect(card.cloneTag).eq(Tag.MARS);
     expect(tag).eq(Tag.MARS);
 
-    orOptions[2].cb();
+    orOptions[2].cb(undefined);
     expect(card.cloneTag).eq(Tag.JOVIAN);
     expect(tag).eq(Tag.JOVIAN);
   });
@@ -54,23 +54,23 @@ describe('DeclareCloneTag', function() {
 
     expect(orOptions).has.length(5);
 
-    orOptions[0].cb();
+    orOptions[0].cb(undefined);
     expect(card.cloneTag).eq(Tag.VENUS);
     expect(tag).eq(Tag.VENUS);
 
-    orOptions[1].cb();
+    orOptions[1].cb(undefined);
     expect(card.cloneTag).eq(Tag.EARTH);
     expect(tag).eq(Tag.EARTH);
 
-    orOptions[2].cb();
+    orOptions[2].cb(undefined);
     expect(card.cloneTag).eq(Tag.MARS);
     expect(tag).eq(Tag.MARS);
 
-    orOptions[3].cb();
+    orOptions[3].cb(undefined);
     expect(card.cloneTag).eq(Tag.JOVIAN);
     expect(tag).eq(Tag.JOVIAN);
 
-    orOptions[4].cb();
+    orOptions[4].cb(undefined);
     expect(card.cloneTag).eq(Tag.MOON);
     expect(tag).eq(Tag.MOON);
   });

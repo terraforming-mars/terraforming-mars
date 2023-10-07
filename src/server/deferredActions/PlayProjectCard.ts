@@ -14,6 +14,9 @@ export class PlayProjectCard extends DeferredAction<IProjectCard | undefined> {
       this.cb(undefined);
       return undefined;
     }
-    return new SelectProjectCardToPlay(this.player, playableCards, {cb: this.cb});
+    return new SelectProjectCardToPlay(this.player, playableCards).andThen((card) => {
+      this.cb(card);
+      return undefined;
+    });
   }
 }

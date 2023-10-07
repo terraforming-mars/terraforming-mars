@@ -16,7 +16,7 @@ describe('SelectProductionToLose', function() {
   });
 
   it('Simple', function() {
-    const selectProductionToLose = new SelectProductionToLose('', 2, player, cb);
+    const selectProductionToLose = new SelectProductionToLose('', 2, player).andThen(cb);
 
     selectProductionToLose.process({type: 'productionToLose', units: Units.of({megacredits: 2})}, player);
     expect(selected).deep.eq(Units.of({megacredits: 2}));

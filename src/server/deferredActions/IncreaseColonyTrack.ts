@@ -24,7 +24,7 @@ export class IncreaseColonyTrack extends DeferredAction {
     const options = new OrOptions();
     for (let step = this.steps; step > 0; step--) {
       options.options.push(
-        new SelectOption('Increase colony track ' + step + ' step(s)', 'Confirm', () => {
+        new SelectOption('Increase colony track ' + step + ' step(s)', 'Confirm').andThen(() => {
           this.colony.increaseTrack(step);
           LogHelper.logColonyTrackIncrease(this.player, this.colony, step);
           this.cb(undefined);
@@ -34,7 +34,7 @@ export class IncreaseColonyTrack extends DeferredAction {
     }
     options.title = this.title;
     options.options.push(
-      new SelectOption('Don\'t increase colony track', 'Confirm', () => {
+      new SelectOption('Don\'t increase colony track', 'Confirm').andThen(() => {
         this.cb(undefined);
         return undefined;
       }),

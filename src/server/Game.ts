@@ -241,7 +241,6 @@ export class Game implements IGame, Logger {
       gameOptions.randomMA = RandomMAOptionType.NONE;
 
       players[0].setTerraformRating(14);
-      players[0].terraformRatingAtGenerationStart = 14;
     }
 
     const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
@@ -784,7 +783,6 @@ export class Game implements IGame, Logger {
     this.incrementFirstPlayer();
 
     this.players.forEach((player) => {
-      player.terraformRatingAtGenerationStart = player.getTerraformRating();
       player.hasIncreasedTerraformRatingThisGeneration = false;
     });
 

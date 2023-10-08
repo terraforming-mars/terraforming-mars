@@ -207,7 +207,6 @@ describe('Player', function() {
       terraformRating: 20,
       corporations: [],
       hasIncreasedTerraformRatingThisGeneration: false,
-      terraformRatingAtGenerationStart: 20,
       megaCredits: 1,
       megaCreditProduction: 2,
       steel: 3,

@@ -21,10 +21,10 @@ describe('Dirigibles', function() {
   });
 
   it('Should act - single target', function() {
-    expect(player.getSpendableFloaters()).to.eq(0);
+    expect(player.getSpendable('floaters')).to.eq(0);
     expect(churnAction(card, player)).is.undefined;
     expect(player.getCardsWithResources()).has.lengthOf(1);
-    expect(player.getSpendableFloaters()).to.eq(1);
+    expect(player.getSpendable('floaters')).to.eq(1);
     expect(card.resourceCount).to.eq(1);
   });
 

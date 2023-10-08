@@ -12,14 +12,14 @@ import {DEFAULT_PAYMENT_VALUES, PAYMENT_UNITS, PaymentUnit} from '@/common/input
 export type SelectPaymentDataModel = {
     card?: CardModel;
     cost: number;
-    heat: number;
+    warning: string | undefined;
     megaCredits: number;
+    heat: number;
     steel: number;
     titanium: number;
     plants: number; // Plants are not actually used in this compnent. It's just to satisfy the mixin.
     microbes: number; // Microbes are not actually used in this component. It's just to satisfy the mixin.
     floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
-    warning: string | undefined;
     lunaArchivesScience?: number; // Luna Archives Science isn't used in this component, but it simplifies testing.
     spireScience?: number;
     seeds?: number;

@@ -266,33 +266,32 @@ export default Vue.extend({
     selectedCardHasWarning(): boolean {
       return this.card !== undefined && this.card.warning !== undefined;
     },
-    showReserveSteelWarning(): boolean {
-      return this.reserveUnits.steel > 0 && this.canUse('steel');
-    },
-    showReserveTitaniumWarning(): boolean {
-      return this.reserveUnits.titanium > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium());
-    },
-    showReserveHeatWarning(): boolean {
-      return this.reserveUnits.heat > 0 && this.canUse('heat');
-    },
-    showReservePlantsWarning(): boolean {
-      return this.reserveUnits.plants > 0 && this.canUse('plants');
+    showReserveWarning(unit: keyof Units & PaymentUnit) {
+      return this.reserveUnits[unit] > 0 && this.canUse(unit);
     },
     saveData() {
+      // TODO(kberg): This is FINALLY very similar to SelectPayment. Merge them? :D
       const payment: Payment = {...Payment.EMPTY};
       let totalSpent = 0;
 
       for (const target of PAYMENT_UNITS) {
-        payment[target] = this[target] ?? 0;
-        totalSpent += payment[target] * this.getResourceRate(target);
-      }
+        if (!this.canUse(target)) {
+          continue;
+        }
+        const amount = this[target] ?? 0;
+        if (amount === 0) {
+          continue;
+        }
 
-      for (const target of PAYMENT_UNITS) {
         if (payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
         }
+
+        payment[target] = amount;
+        totalSpent += payment[target] * this.getResourceRate(target);
       }
+
       if (totalSpent < this.cost) {
         this.warning = 'Haven\'t spent enough';
         return;
@@ -356,7 +355,7 @@ export default Vue.extend({
       <AppButton type="plus" @click="addValue('steel', 1, available.steel)" />
       <AppButton type="max" @click="setMaxValue('steel', available.steel)" title="MAX" />
     </div>
-    <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
+    <div v-if="showReserveWarning('steel')" class="card-warning" v-i18n>
     (Some steel is unavailable here in reserve for the project card.)
     </div>
 
@@ -367,7 +366,7 @@ export default Vue.extend({
       <AppButton type="plus" @click="addValue('titanium', 1, available.titanium)" />
       <AppButton type="max" @click="setMaxValue('titanium', available.titanium)" title="MAX" />
     </div>
-    <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
+    <div v-if="showReserveWarning('titanium')" class="card-warning" v-i18n>
     (Some titanium is unavailable here in reserve for the project card.)
     </div>
 
@@ -378,7 +377,7 @@ export default Vue.extend({
       <AppButton type="plus" @click="addValue('heat', 1, available.heat)" />
       <AppButton type="max" @click="setMaxValue('heat', available.heat)" title="MAX" />
     </div>
-    <div v-if="showReserveHeatWarning()" class="card-warning" v-i18n>
+    <div v-if="showReserveWarning('plants')" class="card-warning" v-i18n>
     (Some heat is unavailable here in reserve for the project card.)
     </div>
 
@@ -389,7 +388,7 @@ export default Vue.extend({
       <AppButton type="plus" @click="addValue('plants', 1, available.plants)" />
       <AppButton type="max" @click="setMaxValue('plants', available.plants)" title="MAX" />
     </div>
-    <div v-if="showReservePlantsWarning()" class="card-warning" v-i18n>
+    <div v-if="showReserveWarning('plants')" class="card-warning" v-i18n>
     (Some plants are unavailable here in reserve for the project card.)
     </div>
 

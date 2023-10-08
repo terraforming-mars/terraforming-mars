@@ -133,18 +133,26 @@ export default Vue.extend({
     saveData() {
       const payment: Payment = {...Payment.EMPTY};
       let totalSpent = 0;
-      for (const target of PAYMENT_UNITS) {
-        payment[target] = this[target] ?? 0;
-        totalSpent += payment[target] * this.getResourceRate(target);
-      }
 
-      for (const target of PAYMENT_UNITS) {
-        if (payment[target] > this.getAvailableUnits(target)) {
-          this.warning = `You do not have enough ${target}`;
+      for (const unit of PAYMENT_UNITS) {
+        if (!this.canUse(unit)) {
+          continue;
+        }
+        const amount = this[unit] ?? 0;
+        if (amount === 0) {
+          continue;
+        }
+
+        if (amount > this.getAvailableUnits(unit)) {
+          this.warning = `You do not have enough ${unit}`;
           return;
         }
+
+        payment[unit] = amount;
+        totalSpent += payment[unit] * this.getResourceRate(unit);
       }
-      const requiredAmt = this.playerinput.amount || 0;
+
+      const requiredAmt = this.playerinput.amount;
       if (requiredAmt > 0 && totalSpent < requiredAmt) {
         this.warning = 'Haven\'t spent enough';
         return;

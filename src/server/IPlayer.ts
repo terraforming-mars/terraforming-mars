@@ -68,7 +68,6 @@ export interface IPlayer {
   pickedCorporationCard?: ICorporationCard;
 
   // Terraforming Rating
-  hasIncreasedTerraformRatingThisGeneration: boolean;
   terraformRatingAtGenerationStart: number;
 
   // Resources

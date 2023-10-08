@@ -22,3 +22,15 @@ export function isSpectatorId(object: any): object is SpectatorId {
 export function isSpaceId(object: string): object is SpaceId {
   return /^m?[0-9][0-9]$/.test(object);
 }
+
+/**
+ * Very similar to `any` but only contains primitives, arrays of primitives, or dictionaries of primitives.
+ *
+ * An object of this type are guaranteed safe to serialize and deserialize.
+ */
+export type JSONValue =
+    | string
+    | number
+    | boolean
+    | { [x: string]: JSONValue }
+    | Array<JSONValue>;

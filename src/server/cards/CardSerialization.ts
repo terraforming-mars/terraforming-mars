@@ -39,6 +39,9 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
       serialized.generationUsed = card.generationUsed;
     }
   }
+  if (card.data !== undefined) {
+    serialized.data = card.data;
+  }
   return serialized;
 }
 
@@ -49,6 +52,9 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
   }
   if (element.resourceCount !== undefined) {
     card.resourceCount = element.resourceCount;
+  }
+  if (card.hasOwnProperty('data')) {
+    card.data = element.data;
   }
   if (isICloneTagCard(card) && element.cloneTag !== undefined) {
     card.cloneTag = element.cloneTag;

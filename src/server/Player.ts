@@ -92,7 +92,6 @@ export class Player implements IPlayer {
 
   // Terraforming Rating
   private terraformRating: number = 20;
-  public hasIncreasedTerraformRatingThisGeneration: boolean = false;
   public terraformRatingAtGenerationStart: number = 20;
 
   public get megaCredits(): number {
@@ -305,7 +304,6 @@ export class Player implements IPlayer {
     const raiseRating = () => {
       this.terraformRating += steps;
 
-      this.hasIncreasedTerraformRatingThisGeneration = true;
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
       }
@@ -1843,7 +1841,6 @@ export class Player implements IPlayer {
       pickedCorporationCard: this.pickedCorporationCard?.name,
       // Terraforming Rating
       terraformRating: this.terraformRating,
-      hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
       terraformRatingAtGenerationStart: this.terraformRatingAtGenerationStart,
       // Resources
       megaCredits: this.megaCredits,
@@ -1940,7 +1937,6 @@ export class Player implements IPlayer {
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
     player.energy = d.energy;
     player.colonies.setFleetSize(d.fleetSize);
-    player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
     player.megaCredits = d.megaCredits;
@@ -2011,6 +2007,13 @@ export class Player implements IPlayer {
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
     player.timer = Timer.deserialize(d.timer);
+
+    if (d.hasIncreasedTerraformRatingThisGeneration === true) {
+      const card = player.playedCards.find((card) => card.name === CardName.UNITED_NATIONS_MARS_INITIATIVE);
+      card?.onIncreaseTerraformRating?.(player, player, 1);
+      const card2 = player.playedCards.find((card) => card.name === CardName.PRISTAR);
+      card2?.onIncreaseTerraformRating?.(player, player, 1);
+    }
 
     return player;
   }

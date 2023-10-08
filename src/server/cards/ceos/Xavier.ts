@@ -19,7 +19,7 @@ export class Xavier extends CeoCard {
           b.br;
           b.plainText('Once per game, gain 2 wild tags for THIS GENERATION.');
           b.br.br;
-          b.effect('AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it ',
+          b.effect('AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.',
             (eb) => eb.asterix().startEffect.cards(1, {secondaryTag: AltSecondaryTag.REQ}).colon().megacredits(-1));
         }),
       },

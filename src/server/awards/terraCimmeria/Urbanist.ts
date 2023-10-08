@@ -2,7 +2,7 @@ import {Board} from '../../boards/Board';
 import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {IAward} from '../IAward';
-import {Space} from '@/server/boards/Space';
+import {Space} from '../../../boards/Space';
 
 export class Urbanist implements IAward {
   public readonly name = 'Urbanist';

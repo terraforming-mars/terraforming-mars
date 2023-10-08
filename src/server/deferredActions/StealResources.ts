@@ -4,13 +4,15 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
+import {Message} from '../../common/logs/Message';
+import {newMessage} from '../logs/MessageBuilder';
 
 export class StealResources extends DeferredAction {
   constructor(
     player: IPlayer,
     public resource: Resource,
     public count: number = 1,
-    public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
+    public title: string | Message = newMessage('Select player to steal up to ${0} ${1} from', (b) => b.number(count).string(resource)),
   ) {
     super(player, Priority.ATTACK_OPPONENT);
   }
@@ -43,7 +45,7 @@ export class StealResources extends DeferredAction {
       }
 
       return new SelectOption(
-        'Steal ' + qtyToSteal + ' ' + this.resource + ' from ' + candidate.name,
+        newMessage('Steal ${0} ${1} from ${2}', (b) => b.number(qtyToSteal).string(this.resource).player(candidate)),
         'Steal')
         .andThen(() => {
           candidate.stock.deduct(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
@@ -54,7 +56,7 @@ export class StealResources extends DeferredAction {
 
     return new OrOptions(
       ...stealOptions,
-      new SelectOption('Do not steal', 'Confirm'),
+      new SelectOption('Do not steal'),
     );
   }
 }

@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
 import {played} from '../Options';
 import {Card} from '../Card';
 import {PartyName} from '../../../common/turmoil/PartyName';
@@ -40,10 +39,5 @@ export class SummitLogistics extends Card {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.drawCard(2);
-    return undefined;
   }
 }

@@ -9,15 +9,19 @@
     "Try starting with the Beginner corporation": "Versuche es zu Beginn mit dem Anfänger-Konzern",
 
     "You win!": "Du hast gewonnen!",
+    "${0} won!": "${0} hat gewonnen!",
     "But it isn't the reason to stop making Mars better.": "Aber das ist kein Grund den Mars nicht noch besser zu machen.",
     "Try to win with expansions enabled": "Versuche mit aktivierten Erweiterungen zu gewinnen.",
     "Try to win before the last generation comes": "Versuche vor der letzten Generation zu gewinnen.",
     "Can you get": "Schaffst du es",
     "+ Victory Points?": " oder mehr Siegpunkte zu erreichen?",
+    "Go to main page": "Zurück zum Hauptmenü",
 
     "Victory points breakdown after": "Siegpunkteaufschlüsselung nach ",
     "Victory points details": "Siegpunkte-Details",
     "Victory points details for": "Siegpunkte-Details für",
+    "Victory Points": "Siegpunkte",
+    "Turmoil Points": "Aufruhr-Punkte",
     "generations": "Generationen",
     "Player": "Spieler",
     "Corporation": "Konzern",
@@ -26,13 +30,25 @@
     "Total": "Gesamt",
     "Timer": "Zeitdauer",
     "Victory points details for": "Siegpunktedetails für",
+    
+    "% completed": "% vervollständigt",
+    "Temperature": "Temperatur",
+    "Oxygen": "Sauerstoff",
+    "Oceans": "Ozeane",
+    "Venus": "Venus",
+    "L. Habitat": "Mond Habitat",
+    "L. Mining": "Mond Mine",
+    "L. Logistics": "Mond Straßen",
+	
     "Final situation on the board": "Finales Spielbrett",
     "Final game log": "Abschließendes Spiel-Log",
-    "Go to main page": "Zurück zum Hauptmenü",
+    
     
     "1st place for": "1. Platz für",
     "2nd place for": "2. Platz für",
     "award (funded by": "Auszeichnung (finanziert durch",
+    "1st place for ${0} award (funded by ${1})": "1. Platz für ${0} Auszueichnung (finanziert durch ${1})",
+    "2nd place for ${0} award (funded by ${1})": "2. Platz für ${0} Auszueichnung (finanziert durch ${1})",
 
     "M": "M",
     "A": "A",

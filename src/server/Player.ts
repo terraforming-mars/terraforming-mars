@@ -93,7 +93,6 @@ export class Player implements IPlayer {
   // Terraforming Rating
   private terraformRating: number = 20;
   public hasIncreasedTerraformRatingThisGeneration: boolean = false;
-  public terraformRatingAtGenerationStart: number = 20;
 
   public get megaCredits(): number {
     return this.stock.megacredits;
@@ -1844,7 +1843,6 @@ export class Player implements IPlayer {
       // Terraforming Rating
       terraformRating: this.terraformRating,
       hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
-      terraformRatingAtGenerationStart: this.terraformRatingAtGenerationStart,
       // Resources
       megaCredits: this.megaCredits,
       megaCreditProduction: this.production.megacredits,
@@ -1961,7 +1959,6 @@ export class Player implements IPlayer {
     player.steel = d.steel;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;
-    player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
     player.titanium = d.titanium;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;

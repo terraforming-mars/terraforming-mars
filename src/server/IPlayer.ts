@@ -69,7 +69,6 @@ export interface IPlayer {
 
   // Terraforming Rating
   hasIncreasedTerraformRatingThisGeneration: boolean;
-  terraformRatingAtGenerationStart: number;
 
   // Resources
   megaCredits: number;

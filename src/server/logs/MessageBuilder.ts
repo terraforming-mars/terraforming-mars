@@ -116,6 +116,7 @@ export class MessageBuilder {
   }
 }
 
+// TODO(kberg): Rename to ... erm ... message?
 export function newMessage(message: string, f?: (builder: MessageBuilder) => void): Message {
   const builder = new MessageBuilder(message);
   f?.(builder);

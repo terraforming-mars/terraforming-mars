@@ -6,6 +6,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {IParty} from '../turmoil/parties/IParty';
 import {BonusId, PolicyId} from '../../common/turmoil/Types';
 import {policyDescription} from '../turmoil/Policy';
+import {newMessage} from '../logs/MessageBuilder';
 
 export class ChoosePoliticalAgenda extends DeferredAction {
   constructor(
@@ -30,7 +31,7 @@ export class ChoosePoliticalAgenda extends DeferredAction {
 
     const orBonuses = new OrOptions(...bonuses);
     // TODO(replace)
-    orBonuses.title = 'Select a ' + this.party.name + ' bonus.';
+    orBonuses.title = newMessage('Select a ${0} bonus', (b) => b.party(this.party));
 
     const policies = this.party.policies.map((policy) => {
       return new SelectOption(policyDescription(policy, this.player),
@@ -41,7 +42,7 @@ export class ChoosePoliticalAgenda extends DeferredAction {
         });
     });
     const orPolicies = new OrOptions(...policies);
-    orPolicies.title = 'Select a ' + this.party.name + ' policy.';
+    orPolicies.title = newMessage('Select a ${0} policy', (b) => b.party(this.party));
 
     return new OrOptions(orBonuses, orPolicies);
   }

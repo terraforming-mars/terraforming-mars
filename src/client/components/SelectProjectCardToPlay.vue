@@ -275,10 +275,12 @@ export default Vue.extend({
       let totalSpent = 0;
 
       for (const target of PAYMENT_UNITS) {
+        console.log('start', target);
         if (!this.canUse(target)) {
           continue;
         }
         const amount = this[target] ?? 0;
+        console.log('amount', target, '=', amount);
         if (amount === 0) {
           continue;
         }
@@ -288,14 +290,19 @@ export default Vue.extend({
           return;
         }
 
+
         payment[target] = amount;
-        totalSpent += payment[target] * this.getResourceRate(target);
+        const resourceRate = this.getResourceRate(target);
+        console.log(target, amount, resourceRate);
+        totalSpent += amount * this.getResourceRate(target);
       }
+      console.log('test', 5, totalSpent, this.cost);
 
       if (totalSpent < this.cost) {
         this.warning = 'Haven\'t spent enough';
         return;
       }
+      console.log('test', 6);
 
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
@@ -389,7 +396,7 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('plants', available.plants)" title="MAX" />
     </div>
     <div v-if="showReserveWarning('plants')" class="card-warning" v-i18n>
-    (Some plants are unavailable here in reserve for the project card.)
+    (Some plants are unavailable here in reserve for the project card.)\
     </div>
 
     <div class="payments_type input-group" v-if="canUse('microbes')">

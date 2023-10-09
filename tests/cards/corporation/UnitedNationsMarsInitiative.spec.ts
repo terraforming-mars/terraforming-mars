@@ -16,6 +16,7 @@ describe('UnitedNationsMarsInitiative', function() {
   beforeEach(function() {
     card = new UnitedNationsMarsInitiative();
     [game, player] = testGame(2);
+    player.corporations.push(card);
   });
 
   it('Can not act if TR was not raised', function() {

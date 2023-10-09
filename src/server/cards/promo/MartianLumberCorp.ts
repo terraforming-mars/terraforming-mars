@@ -26,7 +26,7 @@ export class MartianLumberCorp extends Card {
           b.effect('When playing a building tag, plants may be used as 3 M€ each.',
             (eb) => eb.building(1, {played}).startEffect.plants(1).equals().megacredits(3)).br;
           b.production((pb) => pb.plants(1)).br;
-          b.plainText('(Requires that you have 2 greenery tiles. Increase plant production 1 step.').br;
+          b.plainText('(Requires that you have 2 greenery tiles. Increase plant production 1 step.)').br;
         }),
       },
     });

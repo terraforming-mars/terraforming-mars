@@ -7,7 +7,7 @@ import {SelectOptionModel} from '../../common/models/PlayerInputModel';
 export class SelectOption extends BasePlayerInput<undefined> {
   constructor(
     title: string | Message,
-    buttonLabel: string = 'Select') {
+    buttonLabel: string = 'Confirm') {
     super('option', title);
     this.buttonLabel = buttonLabel;
   }

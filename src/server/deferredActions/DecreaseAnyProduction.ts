@@ -2,6 +2,8 @@ import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
+import {Message} from '../../common/logs/Message';
+import {newMessage} from '../logs/MessageBuilder';
 
 export type Options = {
   count: number,
@@ -16,7 +18,7 @@ export class DecreaseAnyProduction extends DeferredAction {
       count: 1,
       stealing: false,
     },
-    public title: string = 'Select player to decrease ' + resource + ' production by ' + options.count + ' step(s)',
+    public title: string | Message = newMessage('Select player to decrease ${0} production by ${1} step(s)', (b) => b.string(resource).number(options.count)),
   ) {
     super(player, Priority.ATTACK_OPPONENT);
   }

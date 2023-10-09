@@ -206,7 +206,6 @@ describe('Player', function() {
       pickedCorporationCard: 'Tharsis Republic' as CardName,
       terraformRating: 20,
       corporations: [],
-      terraformRatingAtGenerationStart: 20,
       megaCredits: 1,
       megaCreditProduction: 2,
       steel: 3,

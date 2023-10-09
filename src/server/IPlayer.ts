@@ -67,9 +67,6 @@ export interface IPlayer {
   // Used only during set-up
   pickedCorporationCard?: ICorporationCard;
 
-  // Terraforming Rating
-  terraformRatingAtGenerationStart: number;
-
   // Resources
   megaCredits: number;
   steel: number;

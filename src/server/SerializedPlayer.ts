@@ -60,7 +60,6 @@ export interface SerializedPlayer extends DeprecatedFields{
     steelProduction: number;
     steelValue: number;
     terraformRating: number;
-    terraformRatingAtGenerationStart: number;
     timer: SerializedTimer;
     titanium: number;
     titaniumProduction: number;

@@ -60,7 +60,7 @@
     "Didn\u2019t even find player": "Konnte keine Spieler finden",
     "No player has played requested card": "Kein Spieler hat die geforderte Karte gespielt",
     "Drew and discarded ${0} to place a ${1}": "${0} gezogen und abgeworfen, um eine ${1} zu platzieren",
-    "Drew and discarded ${0} and ${1} to place a ${2}": "Zog und verwarf ${0} und ${1}, um einen ${2} zu platzieren",
+    "Drew and discarded ${0} and ${1} to place a ${2}": "Zog und verwarf ${0} und ${1}, um ${2} zu platzieren",
     "The id of this game is ${0}": "Die ID dieses Spiels ist ${0}",
     "Good luck ${0}!": "Viel Glück, ${0}!",
     "Final greenery placement": "Finale Platzierung der Grünflächen",

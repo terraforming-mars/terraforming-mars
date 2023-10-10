@@ -643,11 +643,6 @@ export class Player implements IPlayer {
         card.opgActionIsActive = false;
       }
     }
-    const solBank = this.getCorporation(CardName.SOLBANK);
-    if (solBank !== undefined && solBank.resourceCount > 0) {
-      this.megaCredits += solBank.resourceCount;
-      solBank.resourceCount = 0;
-    }
   }
 
   private doneWorldGovernmentTerraforming(): void {

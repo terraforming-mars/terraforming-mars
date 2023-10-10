@@ -35,6 +35,7 @@ export type GameOptions = {
   pathfindersExpansion: boolean;
   ceoExtension: boolean;
   starWarsExpansion: boolean;
+  underworldExpansion: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -108,6 +109,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   startingCorporations: 2,
   starWarsExpansion: false,
   turmoilExtension: false,
+  underworldExpansion: false,
   undoOption: false,
   venusNextExtension: false,
   twoCorpsVariant: false,

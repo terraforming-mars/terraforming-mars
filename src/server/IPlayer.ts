@@ -30,6 +30,7 @@ import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
+import {UnderworldPlayerData} from './underworld/UnderworldData';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -134,6 +135,8 @@ export interface IPlayer {
   victoryPointsByGeneration: Array<number>;
   totalDelegatesPlaced: number;
 
+  underworldData: UnderworldPlayerData;
+
   tearDown(): void;
   tableau: Array<ICorporationCard | IProjectCard>;
 
@@ -186,14 +189,14 @@ export interface IPlayer {
    */
   resolveInsurance(): void;
   /**
-    * In the solo game, Mons Insurance is only held by the sole player, who will
-    * have to pay the penalty for hurting the neutral player.
-    *
-    * `this` is the potentialInsurer: the solo player in the game. It's not
-    * clear yet whether the player has Mons Insurance, but if they do, they will
-    * pay. Unlike `resolveInsurance`, there is no claimant Player so the money
-    * disappears.
-    */
+   * In the solo game, Mons Insurance is only held by the sole player, who will
+   * have to pay the penalty for hurting the neutral player.
+   *
+   * `this` is the potentialInsurer: the solo player in the game. It's not
+   * clear yet whether the player has Mons Insurance, but if they do, they will
+   * pay. Unlike `resolveInsurance`, there is no claimant Player so the money
+   * disappears.
+   */
   resolveInsuranceInSoloGame(): void;
   /**
    * Returns the number of colonies this player has on all the colony types.

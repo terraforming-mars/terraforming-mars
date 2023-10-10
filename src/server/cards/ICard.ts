@@ -17,6 +17,7 @@ import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {OneOrArray} from '../../common/utils/types';
+import {JSONValue} from '../../common/Types';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -85,6 +86,12 @@ export interface ICard {
   /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
   tilesBuilt?: Array<TileType>;
   isDisabled?: boolean; // For Pharmacy Union and CEO cards.
+  /**
+   * Extra data that the game will serialize and deserialize along with the card.
+   *
+   * ONLY store plain JSON data. Classes, objects, functions, will all be incorrectly serialized.
+   */
+  data?: JSONValue;
 }
 
 export interface IActionCard {

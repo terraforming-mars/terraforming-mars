@@ -35,13 +35,23 @@ export class Pristar extends Card implements ICorporationCard {
     });
   }
 
+  public data = {
+    lastGenerationIncreasedTR: -1,
+  };
+
   public override bespokePlay(player: IPlayer) {
     player.decreaseTerraformRating(2);
     return undefined;
   }
 
+  onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer): void {
+    if (player === cardOwner) {
+      this.data.lastGenerationIncreasedTR = player.game.generation;
+    }
+  }
+
   public onProductionPhase(player: IPlayer) {
-    if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
+    if (this.data.lastGenerationIncreasedTR !== player.game.generation) {
       player.stock.add(Resource.MEGACREDITS, 6, {log: true, from: this});
       player.addResourceTo(this, 1);
     }

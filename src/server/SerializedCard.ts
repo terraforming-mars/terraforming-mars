@@ -2,6 +2,7 @@ import {CardName} from '../common/cards/CardName';
 import {Resource} from '../common/Resource';
 import {Tag} from '../common/cards/Tag';
 import {OneOrArray} from '../common/utils/types';
+import {JSONValue} from '../common/Types';
 
 export type SerializedCard = {
   allTags?: Array<Tag>; // For Aridor
@@ -13,6 +14,7 @@ export type SerializedCard = {
   generationUsed?: number; // For CEO Cards.
   resourceCount?: number;
   targetCards?: Array<SerializedRobotCard>;
+  data?: JSONValue;
 }
 
 export type SerializedRobotCard = {

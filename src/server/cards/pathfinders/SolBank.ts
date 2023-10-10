@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {IPlayer} from '@/server/IPlayer';
+import {IPlayer} from '../../IPlayer';
 
 export class SolBank extends Card implements ICorporationCard {
   constructor() {

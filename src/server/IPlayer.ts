@@ -140,9 +140,17 @@ export interface IPlayer {
   tearDown(): void;
   tableau: Array<ICorporationCard | IProjectCard>;
 
+  /**
+   * Return `true` if this player has played the supplied corporation card.
+   */
   isCorporation(corporationName: CardName): boolean;
+  /**
+   * Return the corporation card this player has played by the given name, or `undefined`.
+   */
   getCorporation(corporationName: CardName): ICorporationCard | undefined;
-  getCeo(ceoName: CardName): ICeoCard | undefined;
+  /**
+   * Return the corporation card this player has played by the given name, or throw an Error.
+   */
   getCorporationOrThrow(corporationName: CardName): ICorporationCard;
   getTitaniumValue(): number;
   increaseTitaniumValue(): void;
@@ -166,13 +174,52 @@ export interface IPlayer {
   alloysAreProtected(): boolean;
   canReduceAnyProduction(resource: Resource, minQuantity?: number): boolean;
   canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): void;
+  /**
+   * Return true if this player cannot have their production reduced.
+   *
+   * It can if this player is attacking themselves, or if this player has played Private Security.
+   */
   productionIsProtected(attacker: IPlayer): boolean;
+  /**
+   * In the multiplayer game, after an attack, the attacked player makes a claim
+   * for insurance. If Mons Insurance is in the game, the claimant will receive
+   * as much as possible from the insurer.
+   *
+   * `this` is the attacked player.
+   */
   resolveInsurance(): void;
+  /**
+    * In the solo game, Mons Insurance is only held by the sole player, who will
+    * have to pay the penalty for hurting the neutral player.
+    *
+    * `this` is the potentialInsurer: the solo player in the game. It's not
+    * clear yet whether the player has Mons Insurance, but if they do, they will
+    * pay. Unlike `resolveInsurance`, there is no claimant Player so the money
+    * disappears.
+    */
   resolveInsuranceInSoloGame(): void;
+  /**
+   * Returns the number of colonies this player has on all the colony types.
+   *
+   * If Colonies is not in this game, this returns 0.
+   */
   getColoniesCount(): number;
+  /**
+   * Count the number of cards in the player's event pile.
+   */
   getPlayedEventsCount(): number;
+  /**
+   * For the given global parameter, return a sum of all requirements bonuses this
+   * player has thanks to played cards, Turmoil policies, etcetera.
+   */
   getRequirementsBonus(parameter: GlobalParameter): number;
+  /**
+   * Remove resources from this player's played card
+   */
   removeResourceFrom(card: ICard, count?: number, options?: {removingPlayer? : IPlayer, log?: boolean}): void;
+  /**
+   * Add resources to this player's played card
+   */
   addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean}): void;
 
   /**

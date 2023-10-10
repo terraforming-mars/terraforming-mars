@@ -33,7 +33,7 @@
     "Card not found" : "Karte nicht gefunden",
     "The project discard pile has been shuffled to form a new deck." : "Der Projektkarten-Ablagestapel wurde neu gemischt, um einen neuen Nachziehstapel zu bilden.",
     "${0} fizzled. ${1} gains 15 M€.": "${0} hat gepatzt. ${1} erhält 15 M€.",
-    "Incorrect options provided" : "Ungültige Optionen angegeben",
+    "Incorrect options provided": "Ungültige Optionen angegeben",
     "Input contains unauthorized keys": "Eingabe enthält ungültige Zeichen",
     "Amount provided too high (max ": "Eingegebener Betrag zu hoch (max. ",
     "Amount provided too low (min ": "Eingegebener Betrag zu niedrig (min. ",
@@ -326,6 +326,7 @@
     "${0} returned ${1} to their hand": "${0} nahm ${1} auf seine/ihre Hand zurück",
     "${0} gained 0 M€ from ${1} action.": "${0} erhielt 0 M€ aus der Aktion ${1}.",
     "${0} gained ${1} M€ from ${2} action.": "${0} erhielt ${1} M€ aus der Aktion ${2}.",
+    "${0} cannot afford to use the ${1} effect": "${0} kann es sich nicht leisten, den ${1}-Effekt zu nutzen",
 
     "${0} gained ${1} TR": "${0} erhielt ${1} TW",
     "${0} lost ${1} TR": "${0} verlor ${1} TW",

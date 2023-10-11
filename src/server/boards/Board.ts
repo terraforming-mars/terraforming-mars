@@ -299,7 +299,7 @@ export abstract class Board {
   public serialize(): SerializedBoard {
     return {
       spaces: this.spaces.map((space) => {
-        return {
+        const serialized: SerializedSpace = {
           id: space.id,
           spaceType: space.spaceType,
           tile: space.tile,
@@ -309,6 +309,14 @@ export abstract class Board {
           x: space.x,
           y: space.y,
         };
+        if (space.undergroundResources !== undefined) {
+          serialized.undergroundResources = space.undergroundResources;
+        }
+        if (space.excavator !== undefined) {
+          serialized.excavator = space.excavator.id;
+        }
+
+        return serialized;
       }),
     };
   }
@@ -316,6 +324,7 @@ export abstract class Board {
   public static deserializeSpace(serialized: SerializedSpace, players: ReadonlyArray<IPlayer>): Space {
     const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
+    const excavator = players.find((p) => p.id === serialized.excavator);
     const space: Space = {
       id: serialized.id,
       spaceType: serialized.spaceType,
@@ -333,7 +342,12 @@ export abstract class Board {
     if (serialized.adjacency !== undefined) {
       space.adjacency = serialized.adjacency;
     }
-
+    if (serialized.undergroundResources !== undefined) {
+      space.undergroundResources = serialized.undergroundResources;
+    }
+    if (excavator !== undefined) {
+      space.excavator = excavator;
+    }
     return space;
   }
 

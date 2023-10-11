@@ -14,6 +14,7 @@ import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
 import {SerializedDeck} from './cards/SerializedDeck';
+import {UnderworldData} from './underworld/UnderworldData';
 import {AwardName} from '../common/ma/AwardName';
 import {GlobalParameter} from '../common/GlobalParameter';
 
@@ -65,6 +66,7 @@ export type SerializedGame = {
     tradeEmbargo?: boolean;
     turmoil?: SerializedTurmoil;
     undoCount: number;
+    underworldData?: UnderworldData;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
 }

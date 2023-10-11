@@ -71,6 +71,8 @@ import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {inplaceRemove, sum} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
 import {ChooseCards} from './deferredActions/ChooseCards';
+import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -192,6 +194,9 @@ export class Player implements IPlayer {
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
+
+  // Underworld
+  public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
@@ -432,13 +437,6 @@ export class Player implements IPlayer {
     return attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 
-  /**
-   * In the multiplayer game, after an attack, the attacked player makes a claim
-   * for insurance. If Mons Insurance is in the game, the claimant will receive
-   * as much as possible from the insurer.
-   *
-   * `this` is the attacked player.
-   */
   public resolveInsurance() {
   // game.monsInsuranceOwner could be eliminated entirely if there
   // was a fast version of getCardPlayer().
@@ -453,15 +451,6 @@ export class Player implements IPlayer {
     }
   }
 
-  /**
-   * In the solo game, Mons Insurance is only held by the sole player, who will
-   * have to pay the penalty for hurting the neutral player.
-   *
-   * `this` is the potentialInsurer: the solo player in the game. It's not
-   * clear yet whether the player has Mons Insurance, but if they do, they will
-   * pay. Unlike `resolveInsurance`, there is no claimant Player so the money
-   * disappears.
-   */
   public resolveInsuranceInSoloGame() {
     const monsInsurance = <MonsInsurance> this.getCorporation(CardName.MONS_INSURANCE);
     monsInsurance?.payDebt(this, undefined);
@@ -564,6 +553,7 @@ export class Player implements IPlayer {
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);
+      // result = result.filter((card) => card.resourceType === resource || card.resourceType === CardResource.WARE);
     }
 
     return result;
@@ -629,6 +619,7 @@ export class Player implements IPlayer {
     this.energy += this.production.energy;
     this.heat += this.production.heat;
 
+    // this.tableau.forEach((card) => card.onProductionPhase?.(this));
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
     // Turn off CEO OPG actions that were activated this generation
     for (const card of this.playedCards) {
@@ -1229,6 +1220,24 @@ export class Player implements IPlayer {
     return this.isCorporation(CardName.NIRGAL_ENTERPRISES) ? 0 : this.game.getAwardFundingCost();
   }
 
+  // private milestoneCost() {
+  //   if (this.isCorporation(CardName.NIRGAL_ENTERPRISES)) {
+  //     return 0;
+  //   }
+  //   const [_owner, stagedProtests] = this.game.getCardHolder(CardName.STAGED_PROTESTS);
+  //   const plus8 = (stagedProtests?.generationUsed === this.game.generation) ? 8 : 0;
+  //   return MILESTONE_COST + plus8;
+  // }
+
+  // private awardFundingCost() {
+  //   if (this.isCorporation(CardName.NIRGAL_ENTERPRISES)) {
+  //     return 0;
+  //   }
+  //   const [_owner, stagedProtests] = this.game.getCardHolder(CardName.STAGED_PROTESTS);
+  //   const plus8 = (stagedProtests?.generationUsed === this.game.generation) ? 8 : 0;
+  //   return this.game.getAwardFundingCost() + plus8;
+  // }
+
   private fundAward(award: IAward): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')').andThen(() => {
       this.game.defer(new SelectPaymentDeferred(this, this.awardFundingCost(), {title: 'Select how to pay for award'}));
@@ -1336,6 +1345,11 @@ export class Player implements IPlayer {
 
   public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
     const trSource: TRSource | DynamicTRSource | undefined = card.tr || (card.behavior !== undefined ? getBehaviorExecutor().toTRSource(card.behavior) : undefined);
+    // const trSource =
+    //     card.tr ||
+    //     (card.behavior !== undefined ?
+    //       getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) :
+    //       undefined);
     return {
       cost: this.getCardCost(card),
       ...this.paymentOptionsForCard(card),
@@ -1494,6 +1508,10 @@ export class Player implements IPlayer {
         case CardName.MOON_MINE_STANDARD_PROJECT_V2:
         case CardName.MOON_ROAD_STANDARD_PROJECT_V2:
           return gameOptions.moonStandardProjectVariant === true;
+        // case CardName.EXCAVATE_STANDARD_PROJECT:
+        //   return gameOptions.underworldExpansion === true;
+        // case CardName.COLLUSION_STANDARD_PROJECT:
+        //   return gameOptions.underworldExpansion === true && gameOptions.turmoilExtension === true;
         default:
           return true;
         }
@@ -1899,6 +1917,7 @@ export class Player implements IPlayer {
       actionsTakenThisGame: this.actionsTakenThisGame,
       victoryPointsByGeneration: this.victoryPointsByGeneration,
       totalDelegatesPlaced: this.totalDelegatesPlaced,
+      underworldData: this.underworldData,
     };
 
     if (this.lastCardPlayed !== undefined) {
@@ -1994,6 +2013,10 @@ export class Player implements IPlayer {
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
     player.timer = Timer.deserialize(d.timer);
+
+    if (d.underworldData !== undefined) {
+      player.underworldData = d.underworldData;
+    }
 
     if (d.hasIncreasedTerraformRatingThisGeneration === true) {
       const card = player.playedCards.find((card) => card.name === CardName.UNITED_NATIONS_MARS_INITIATIVE);

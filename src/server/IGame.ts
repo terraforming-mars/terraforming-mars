@@ -32,6 +32,7 @@ import {Tag} from '../common/cards/Tag';
 import {Tile} from './Tile';
 import {Logger} from './logs/Logger';
 import {GlobalParameter} from '../common/GlobalParameter';
+import {UnderworldData} from './underworld/UnderworldData';
 
 export interface Score {
   corporation: String;
@@ -71,6 +72,8 @@ export interface IGame extends Logger {
   aresData: AresData | undefined;
   moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
+  underworldData: UnderworldData | undefined;
+
   // Card-specific data
   // Mons Insurance promo corp
   monsInsuranceOwner?: PlayerId; // Not serialized

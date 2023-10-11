@@ -99,6 +99,7 @@ export class GameHandler extends Handler {
             politicalAgendasExtension: gameReq.politicalAgendasExtension,
             moonExpansion: gameReq.moonExpansion,
             pathfindersExpansion: gameReq.pathfindersExpansion,
+            underworldExpansion: false,
             promoCardsOption: gameReq.promoCardsOption,
             communityCardsOption: gameReq.communityCardsOption,
             solarPhaseOption: gameReq.solarPhaseOption,

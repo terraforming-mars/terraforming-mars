@@ -112,4 +112,16 @@ describe('UnderworldExpansion', function() {
     expect(UnderworldExpansion.identifiableSpaces(game)).does.not.include(space);
     expect(UnderworldExpansion.identifiedSpaces(game)).includes(space);
   });
+
+  it('gainCorruption', () => {
+    expect(player1.underworldData.corruption).eq(0);
+    UnderworldExpansion.gainCorruption(player1, 2);
+    expect(player1.underworldData.corruption).eq(2);
+  });
+
+  it('loseCorruption', () => {
+    player1.underworldData.corruption = 3;
+    UnderworldExpansion.loseCorruption(player1, 2);
+    expect(player1.underworldData.corruption).eq(1);
+  });
 });

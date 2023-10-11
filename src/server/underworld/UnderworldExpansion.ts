@@ -326,19 +326,19 @@ export class UnderworldExpansion {
   //     throw new Error('Method not implemented.');
   //   }
 
-  //   public static gainCorruption(player: IPlayer, count: number, options?: {log: boolean;}) {
-  //     player.underworldData.corruption += count;
-  //     if (options?.log === true) {
-  //       player.game.log('${0} gained ${1} corruption', (b) => b.player(player).number(count));
-  //     }
-  //   }
+  public static gainCorruption(player: IPlayer, count: number, options?: {log: boolean}) {
+    player.underworldData.corruption += count;
+    if (options?.log === true) {
+      player.game.log('${0} gained ${1} corruption', (b) => b.player(player).number(count));
+    }
+  }
 
-  //   public static loseCorruption(player: IPlayer, count: number, options?: {log: boolean;}) {
-  //     player.underworldData.corruption -= count;
-  //     if (options?.log === true) {
-  //       player.game.log('${0} spent ${1} corruption', (b) => b.player(player).number(count));
-  //     }
-  //   }
+  public static loseCorruption(player: IPlayer, count: number, options?: {log: boolean}) {
+    player.underworldData.corruption -= count;
+    if (options?.log === true) {
+      player.game.log('${0} spent ${1} corruption', (b) => b.player(player).number(count));
+    }
+  }
 
   //   static removeAllUnclaimedTokens(game: IGame) {
   //     if (game.underworldData === undefined) {

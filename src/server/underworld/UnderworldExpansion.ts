@@ -3,7 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {Space} from '../boards/Space';
 import {UnderworldData, UnderworldPlayerData} from './UnderworldData';
 import {Random} from '../../common/utils/Random';
-import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
+import {UndergroundResourceToken, undergroundResourcerTokenDescription} from '../../common/underworld/UndergroundResourceToken';
 import {inplaceShuffle} from '../utils/shuffle';
 // import {Resource} from '../../common/Resource';
 // import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
@@ -16,7 +16,7 @@ import {IGame} from '../IGame';
 // import {OrOptions} from '../inputs/OrOptions';
 // import {SelectOption} from '../inputs/SelectOption';
 // import {newMessage} from '../logs/MessageBuilder';
-// import {LogHelper} from '../LogHelper';
+import {LogHelper} from '../LogHelper';
 // import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 
 export class UnderworldExpansion {
@@ -98,32 +98,32 @@ export class UnderworldExpansion {
   //     );
   //   }
 
-  public static identify(_game: IGame, _space: Space, _player?: IPlayer): void {
-  //     if (space.undergroundResources !== undefined) {
-  //       return space.undergroundResources;
-  //     }
-  //     const undergroundResource = game.underworldData?.tokens.pop();
-  //     if (undergroundResource === undefined) {
-  //       // TODO(kberg): collect tokens from all players
-  //       throw new Error('Cannot identify excatation space, no available tokens.');
-  //     }
-  //     space.undergroundResources = undergroundResource;
-  //     if (player !== undefined) {
-  //       LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'identified');
-  //     }
-  //     // TODO(there must be a case when a neutral player identifies that applies to the callbacks);
-  //     if (player !== undefined) {
-  //       this.onIdentification(player, space);
-  //     }
+  public static identify(game: IGame, space: Space, player?: IPlayer): void {
+    if (space.undergroundResources !== undefined) {
+      return;
+    }
+    const undergroundResource = game.underworldData?.tokens.pop();
+    if (undergroundResource === undefined) {
+      // TODO(kberg): collect tokens from all players
+      throw new Error('Cannot identify excatation space, no available tokens.');
+    }
+    space.undergroundResources = undergroundResource;
+    if (player !== undefined) {
+      LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'identified');
+    }
+    // TODO(there must be a case when a neutral player identifies that applies to the callbacks);
+    if (player !== undefined) {
+      this.onIdentification(player, space);
+    }
   }
 
-  //   public static onIdentification(player: IPlayer, space: Space) {
-  //     for (const p of player.game.getPlayersInGenerationOrder()) {
-  //       for (const card of p.tableau) {
-  //         card.onIdentification?.(player, p, space);
-  //       }
-  //     }
-  //   }
+  public static onIdentification(player: IPlayer, space: Space) {
+    for (const p of player.game.getPlayersInGenerationOrder()) {
+      for (const card of p.tableau) {
+        card.onIdentification?.(player, p, space);
+      }
+    }
+  }
 
   //   public static excavatableSpaces(
   //     player: IPlayer,

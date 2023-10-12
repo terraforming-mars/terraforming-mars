@@ -5,20 +5,21 @@ import {CardName} from './CardName';
 import {CardType} from './CardType';
 import {GameModule} from './GameModule';
 import {ICardMetadata} from './ICardMetadata';
-import {ICardRequirements} from './ICardRequirements';
+import {CardRequirementDescriptor} from './CardRequirementDescriptor';
 import {IVictoryPoints} from './IVictoryPoints';
 import {Tag} from './Tag';
 import {CardDiscount} from './Types';
+import {OneOrArray} from '../utils/types';
 
 export type ClientCard = {
   name: CardName;
   module: GameModule;
   tags: Array<Tag>;
-  cardDiscount?: CardDiscount | Array<CardDiscount>;
+  cardDiscount?: OneOrArray<CardDiscount>;
   victoryPoints?: number | 'special' | IVictoryPoints,
   cost?: number;
   type: CardType;
-  requirements?: ICardRequirements;
+  requirements: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
   warning?: string | Message;
   productionBox?: Units; // Replace with behavior?

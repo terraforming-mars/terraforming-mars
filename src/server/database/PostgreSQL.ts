@@ -6,7 +6,7 @@ import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
-import {difference} from '../../common/utils/utils';
+import {oneWayDifference} from '../../common/utils/utils';
 
 export class PostgreSQL implements IDatabase {
   private databaseName: string | undefined = undefined; // Use this only for stats.
@@ -264,7 +264,7 @@ export class PostgreSQL implements IDatabase {
     logForUndo(gameId, 'deleted', res?.rowCount, 'rows');
     const second = await this.getSaveIds(gameId);
     logForUndo(gameId, 'second', second);
-    logForUndo(gameId, 'Rollback difference', difference(first, second));
+    logForUndo(gameId, 'Rollback difference', oneWayDifference(first, second));
   }
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {

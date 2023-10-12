@@ -42,8 +42,8 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
   public action(player: IPlayer) {
     const firstOption = new SelectOption(
       'Spend 1 energy to add 1 data to this card.',
-      'Spend energy',
-      () => {
+      'Spend energy')
+      .andThen(() => {
         player.stock.deduct(Resource.ENERGY, 1);
         player.addResourceTo(this, {qty: 1, log: true});
         return undefined;
@@ -51,19 +51,19 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
 
     const secondOption = new SelectOption(
       'Remove all data from this card to gain 3M€ per data removed.',
-      'Spend data',
-      () => {
+      'Spend data')
+      .andThen(() => {
         player.stock.add(Resource.MEGACREDITS, 3 * this.resourceCount, {log: true});
         this.resourceCount = 0; // Should this use addResourceTo?
         return undefined;
       });
 
     if (this.resourceCount === 0) {
-      firstOption.cb();
+      firstOption.cb(undefined);
       return undefined;
     }
     if (player.energy === 0) {
-      secondOption.cb();
+      secondOption.cb(undefined);
       return undefined;
     }
     return new OrOptions(firstOption, secondOption);

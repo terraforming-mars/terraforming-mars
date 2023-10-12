@@ -50,16 +50,7 @@
     "All awards already funded": "Ya han sido finanziados todas las recompensas",
     "Didn\u2019t even find player": "No se ha encontrado un jugador",
     "No player has played requested card": "Ningún jugador ha jugado la carta solicitada",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Ha robado y descartado ${0} (coste ${1}) para colocar ${2}",
-
-
-
-
-
-
-
-
-
+    "Drew and discarded ${0} to place a ${1}": "Ha robado y descartado ${0} para colocar ${1}",
 
     "${0} played ${1}": "${0} ha jugado ${1}",
     "${0} used ${1} action": "${0} ha realizado la acción ${1}",

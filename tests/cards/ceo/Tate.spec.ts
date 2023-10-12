@@ -32,7 +32,7 @@ describe('Tate', function() {
     const orOptions = cast(card.action(player), OrOptions);
     // Select tag [0] (Tag.BUILDING)
     const selectOption = cast(orOptions.options[0], SelectOption);
-    cast(selectOption.cb(), undefined);
+    cast(selectOption.cb(undefined), undefined);
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard<ICard>);
 
@@ -54,7 +54,7 @@ describe('Tate', function() {
     const orOptions = cast(card.action(player), OrOptions);
     // Select tag [0] (Tag.BUILDING)
     const selectOption = cast(orOptions.options[0], SelectOption);
-    cast(selectOption.cb(), undefined);
+    cast(selectOption.cb(undefined), undefined);
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard<ICard>);
 

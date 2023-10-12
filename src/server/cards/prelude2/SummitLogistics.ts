@@ -1,10 +1,8 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
 import {played} from '../Options';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardType} from '../../../common/cards/CardType';
 
@@ -16,7 +14,7 @@ export class SummitLogistics extends Card {
       tags: [Tag.BUILDING, Tag.SPACE],
       cost: 10,
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
+      requirements: {party: PartyName.SCIENTISTS},
 
       behavior: {
         stock: {
@@ -41,10 +39,5 @@ export class SummitLogistics extends Card {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.drawCard(2, {include: ((card) =>card.requirements !== undefined)});
-    return undefined;
   }
 }

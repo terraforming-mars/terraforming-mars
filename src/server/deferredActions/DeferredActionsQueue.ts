@@ -4,13 +4,13 @@ import {IPlayer} from '../IPlayer';
 
 export class DeferredActionsQueue {
   private insertId: number = 0;
-  private queue: Array<DeferredAction> = [];
+  private queue: Array<DeferredAction<any>> = [];
 
   get length(): number {
     return this.queue.length;
   }
 
-  public push(action: DeferredAction): void {
+  public push(action: DeferredAction<any>): void {
     action.queueId = this.insertId++;
     this.queue.push(action);
   }
@@ -61,7 +61,9 @@ export class DeferredActionsQueue {
       return;
     }
     this.queue.splice(next, 1);
-    this.run(action, () => this.runAll(cb));
+    this.run(action, () => {
+      this.runAll(cb);
+    });
   }
 
   // The following methods are used in tests

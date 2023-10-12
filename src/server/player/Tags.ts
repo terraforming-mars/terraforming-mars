@@ -8,6 +8,7 @@ import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorpor
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {IPlayer} from '../IPlayer';
+import {OneOrArray} from '../../common/utils/types';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
@@ -126,7 +127,7 @@ export class Tags {
     return false;
   }
 
-  public cardTagCount(card: ICard, target: Tag | Array<Tag>): number {
+  public cardTagCount(card: ICard, target: OneOrArray<Tag>): number {
     let count = 0;
     for (const tag of card.tags) {
       if (tag === target) {
@@ -260,8 +261,8 @@ export class Tags {
     return false;
   }
 
-  public gainScienceTag() {
-    this.player.scienceTagCount++;
+  public gainScienceTag(count: number) {
+    this.player.scienceTagCount += count;
   }
 
   /**

@@ -7,7 +7,6 @@ import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Board} from '../../boards/Board';
 import {Size} from '../../../common/cards/render/Size';
@@ -20,7 +19,7 @@ export class Wetlands extends Card implements IProjectCard {
       tags: [Tag.PLANT, Tag.MARS],
       cost: 20,
       tr: {oxygen: 1, tr: 1},
-      requirements: CardRequirements.builder((b) => b.oceans(2)),
+      requirements: {oceans: 2},
       reserveUnits: {plants: 4},
       victoryPoints: 1,
 
@@ -68,8 +67,8 @@ export class Wetlands extends Card implements IProjectCard {
 
     return new SelectSpace(
       'Select space for Wetlands',
-      this.availableSpaces(player),
-      (space: Space) => {
+      this.availableSpaces(player))
+      .andThen((space) => {
         const tile = {
           tileType: TileType.WETLANDS,
           card: this.name,
@@ -78,7 +77,6 @@ export class Wetlands extends Card implements IProjectCard {
         player.game.addTile(player, space, tile);
         player.game.increaseOxygenLevel(player, 1);
         return undefined;
-      },
-    );
+      });
   }
 }

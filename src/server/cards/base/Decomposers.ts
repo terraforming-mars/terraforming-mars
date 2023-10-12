@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
 import {played} from '../Options';
@@ -20,7 +19,7 @@ export class Decomposers extends Card implements IProjectCard {
 
       resourceType: CardResource.MICROBE,
       victoryPoints: {resourcesHere: {}, per: 3},
-      requirements: CardRequirements.builder((b) => b.oxygen(3)),
+      requirements: {oxygen: 3},
 
       metadata: {
         cardNumber: '131',

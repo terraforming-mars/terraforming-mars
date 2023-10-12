@@ -34,7 +34,7 @@ export class Tate extends CeoCard {
     inplaceRemove(tags, Tag.CLONE);
 
     const options = tags.map((tag) => {
-      return new SelectOption('Search for ' + tag + ' tags', 'Search', () => {
+      return new SelectOption('Search for ' + tag + ' tags', 'Search').andThen(() => {
         game.log('${0} searched for ${1} tags', (b) => b.player(player).string(tag));
         player.drawCardKeepSome(5, {keepMax: 2, tag: tag, paying: true, logDrawnCard: true});
         return undefined;

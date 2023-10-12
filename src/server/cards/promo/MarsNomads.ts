@@ -6,7 +6,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
-import {Space} from '../../boards/Space';
 import {intersection} from '../../../common/utils/utils';
 import {TileType} from '../../../common/TileType';
 
@@ -41,26 +40,22 @@ export class MarsNomads extends Card implements IActionCard {
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
       'Select space for Nomads',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: Space) => {
-        player.game.addTile(player, space, {tileType: TileType.MARS_NOMADS, card: this.name});
+      player.game.board.getAvailableSpacesOnLand(player))
+      .andThen((space) => {
+        player.game.nomadSpace = space.id;
         return undefined;
-      },
-    );
+      });
   }
 
   private eliglbleDestinationSpaces(player: IPlayer) {
     const game = player.game;
     const board = game.board;
-
-    const availableSpaces = board.getAvailableSpacesOnLand(player);
-    const currentNomadSpace = board.getSpaceByTileCard(this.name);
-    // This might not be an ideal option, but it's the least disruptive.
-    // There should be a space, and if there isn't, well, let's not penalize
-    // the player.
-    if (currentNomadSpace === undefined) {
+    if (game.nomadSpace === undefined) {
       return [];
     }
+
+    const availableSpaces = board.getAvailableSpacesOnLand(player);
+    const currentNomadSpace = board.getSpace(game.nomadSpace);
     const adjacentSpaces = board.getAdjacentSpaces(currentNomadSpace);
     return intersection(availableSpaces, adjacentSpaces);
   }
@@ -74,17 +69,14 @@ export class MarsNomads extends Card implements IActionCard {
 
     return new SelectSpace(
       'Select new destination for Mars Nomads',
-      spaces,
-      (space: Space) => {
-        const currentNomadSpace = player.game.board.getSpaceByTileCard(this.name);
-
-        if (currentNomadSpace !== undefined) {
-          player.game.removeTile(currentNomadSpace);
-        }
-        player.game.addTile(player, space, {tileType: TileType.MARS_NOMADS, card: this.name});
+      spaces)
+      .andThen((space) => {
+        player.game.nomadSpace = space.id;
+        // Mars nomads is funny. The tile is temporarily placed so the card acts appropriate, but is then removed so it doesn't have post-placement impact.
+        player.game.addTile(player, space, {tileType: TileType.MARS_NOMADS});
+        player.game.removeTile(space.id);
 
         return undefined;
-      },
-    );
+      });
   }
 }

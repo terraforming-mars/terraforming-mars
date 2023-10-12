@@ -42,7 +42,7 @@ describe('Atmoscoop', function() {
     expect(action.options).has.lengthOf(2);
     const orOptions = cast(action.options[1], SelectOption);
 
-    orOptions.cb();
+    orOptions.cb(undefined);
     expect(game.getVenusScaleLevel()).to.eq(4);
   });
 
@@ -51,7 +51,7 @@ describe('Atmoscoop', function() {
 
     const orOptions = cast(card.play(player), OrOptions);
     const selectOption = cast(orOptions.options[1], SelectOption);
-    selectOption.cb();
+    selectOption.cb(undefined);
 
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);

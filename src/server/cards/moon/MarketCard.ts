@@ -42,8 +42,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
       return new OrOptions(
-        new SelectOption(newMessage('Buy ${0}', (b) => b.string(this.tradeResource)), 'Buy', () => this.getBuyingOption(player)),
-        new SelectOption(newMessage('Sell ${0}', (b) => b.string(this.tradeResource)), 'Sell', () => this.getSellingOption(player)),
+        new SelectOption(newMessage('Buy ${0}', (b) => b.string(this.tradeResource)), 'Buy').andThen(() => this.getBuyingOption(player)),
+        new SelectOption(newMessage('Sell ${0}', (b) => b.string(this.tradeResource)), 'Sell').andThen(() => this.getSellingOption(player)),
       );
     } else if (offerBuy) {
       return this.getBuyingOption(player);
@@ -59,27 +59,21 @@ export abstract class MarketCard extends Card implements IActionCard {
     let limit = Math.floor(availableMC / terms.from);
     limit = Math.min(limit, terms.limit);
 
+    // TODO(kberg): use Messages.
     return new SelectAmount(
       newMessage(
         'Select a number of trades (${terms.from} M€ => ${terms.to} ${this.tradeResource}, max ${limit})',
         (b) => b.number(terms.from).number(terms.to).string(this.tradeResource).number(limit)),
       `Buy ${this.tradeResource}`,
-      (tradesRequested: number) => {
-        const cashDue = tradesRequested * terms.from;
-        const unitsEarned = tradesRequested * terms.to;
-        player.game.defer(
-          new SelectPaymentDeferred(
-            player,
-            cashDue,
-            {afterPay: () => {
-              player.stock.add(this.tradeResource, unitsEarned, {log: true});
-            }}));
-
-        return undefined;
-      },
       1,
       limit,
-    );
+    ).andThen( (tradesRequested: number) => {
+      const cashDue = tradesRequested * terms.from;
+      const unitsEarned = tradesRequested * terms.to;
+      player.game.defer(new SelectPaymentDeferred(player, cashDue))
+        .andThen(() => player.stock.add(this.tradeResource, unitsEarned, {log: true}));
+      return undefined;
+    });
   }
 
   private getSellingOption(player: IPlayer) {
@@ -90,20 +84,18 @@ export abstract class MarketCard extends Card implements IActionCard {
     let limit = player.stock.get(this.tradeResource);
     limit = Math.min(limit, terms.limit);
 
+    // TODO(kberg): use Messages.
     return new SelectAmount(
       `Select a number of trades (${terms.from} ${this.tradeResource} => ${terms.to} M€, max ${limit})`,
-      `Sell ${this.tradeResource}`,
-      (unitsSold: number) => {
-        const cashEarned = unitsSold * terms.to;
-        player.stock.add(Resource.MEGACREDITS, cashEarned);
-        player.stock.deduct(this.tradeResource, unitsSold);
-        PathfindersExpansion.addToSolBank(player);
+      `Sell ${this.tradeResource}`, 1, limit,
+    ).andThen((unitsSold: number) => {
+      const cashEarned = unitsSold * terms.to;
+      player.stock.add(Resource.MEGACREDITS, cashEarned);
+      player.stock.deduct(this.tradeResource, unitsSold);
+      PathfindersExpansion.addToSolBank(player);
 
-        player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));
-        return undefined;
-      },
-      1,
-      limit,
-    );
+      player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));
+      return undefined;
+    });
   }
 }

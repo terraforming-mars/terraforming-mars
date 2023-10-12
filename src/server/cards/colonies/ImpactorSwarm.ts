@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
@@ -20,7 +19,7 @@ export class ImpactorSwarm extends Card implements IProjectCard {
         removeAnyPlants: 2,
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN, 2)),
+      requirements: {tag: Tag.JOVIAN, count: 2},
       metadata: {
         cardNumber: 'C16',
         renderData: CardRenderer.builder((b) => {

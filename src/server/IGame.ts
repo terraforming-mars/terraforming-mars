@@ -16,7 +16,7 @@ import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
-import {DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {AndThen, DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
@@ -31,6 +31,8 @@ import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Tag} from '../common/cards/Tag';
 import {Tile} from './Tile';
 import {Logger} from './logs/Logger';
+import {GlobalParameter} from '../common/GlobalParameter';
+import {UnderworldData} from './underworld/UnderworldData';
 
 export interface Score {
   corporation: String;
@@ -51,6 +53,7 @@ export interface IGame extends Logger {
   inputsThisRound: number;
   resettable: boolean;
   generation: number;
+  globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>>;
   phase: Phase;
   projectDeck: ProjectDeck;
   preludeDeck: PreludeDeck;
@@ -69,6 +72,8 @@ export interface IGame extends Logger {
   aresData: AresData | undefined;
   moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
+  underworldData: UnderworldData | undefined;
+
   // Card-specific data
   // Mons Insurance promo corp
   monsInsuranceOwner?: PlayerId; // Not serialized
@@ -80,6 +85,8 @@ export interface IGame extends Logger {
   gagarinBase: Array<SpaceId>;
   // St. Joseph of Cupertino Mission
   stJosephCathedrals: Array<SpaceId>;
+  // Mars Nomads
+  nomadSpace: SpaceId | undefined;
   // Trade Embargo
   tradeEmbargo: boolean;
   // Behold The Emperor
@@ -97,7 +104,7 @@ export interface IGame extends Logger {
   getPlayerById(id: PlayerId): IPlayer;
   // Return an array of players from an array of player ids
   getPlayersById(ids: Array<PlayerId>): Array<IPlayer>;
-  defer(action: DeferredAction<any>, priority?: Priority): void;
+  defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T>;
   milestoneClaimed(milestone: IMilestone): boolean;
   marsIsTerraformed(): boolean;
   lastSoloGeneration(): number;
@@ -149,7 +156,7 @@ export interface IGame extends Logger {
   canAddOcean(): boolean;
   canRemoveOcean(): boolean;
   addOcean(player: IPlayer, space: Space): void;
-  removeTile(space: Space): void;
+  removeTile(spaceId: string): void;
   getPlayers(): ReadonlyArray<IPlayer>;
   // Players returned in play order starting with first player this generation.
   getPlayersInGenerationOrder(): ReadonlyArray<IPlayer>;

@@ -13,6 +13,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {SpaceType} from '../../../common/boards/SpaceType';
+import {Phase} from '../../../common/Phase';
 
 const VALID_BONUSES: Array<SpaceBonus> = [
   SpaceBonus.TITANIUM,
@@ -50,6 +51,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     if (boardType !== BoardType.MARS || space.spaceType === SpaceType.COLONY) return;
     if (cardOwner !== activePlayer) return;
+    if (cardOwner.game.phase === Phase.SOLAR) return;
     // Don't grant bonuses when overplacing.
     if (space.tile?.covers !== undefined) return;
 
@@ -65,12 +67,11 @@ export class GeologicalExpedition extends Card implements IProjectCard {
     unique.forEach((bonus) => {
       options.options.push(new SelectOption(
         SpaceBonus.toString(bonus),
-        'Select',
-        () => {
+        'Select')
+        .andThen(() => {
           activePlayer.game.grantSpaceBonus(activePlayer, bonus, 1);
           return undefined;
-        },
-      ));
+        }));
     });
     if (options.options.length === 1) {
       options.options[0].cb();

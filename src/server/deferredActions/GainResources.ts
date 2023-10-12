@@ -4,7 +4,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
   count?: number;
-  cb?: () => void;
+  cb?(): void;
   log?: boolean;
 }
 

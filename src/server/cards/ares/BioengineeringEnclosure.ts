@@ -7,7 +7,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 
@@ -24,7 +23,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
         addResources: 2,
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
+      requirements: {tag: Tag.SCIENCE},
       metadata: {
         description: 'Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.',
         cardNumber: 'A01',
@@ -63,14 +62,15 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
         return new SelectCard(
           'Select card to add 1 animal',
           'Add animal',
-          resourceCards,
-          ([card]) => {
-            this.resourceCount--;
-            player.addResourceTo(card, 1);
-            player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));
-            return undefined;
-          },
-        );
+          resourceCards)
+          .andThen(
+            ([card]) => {
+              this.resourceCount--;
+              player.addResourceTo(card, 1);
+              player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));
+              return undefined;
+            },
+          );
       },
     ));
     return undefined;

@@ -6,7 +6,6 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -18,7 +17,7 @@ export class VenusianPlants extends Card implements IProjectCard {
       cost: 13,
       tags: [Tag.VENUS, Tag.PLANT],
 
-      requirements: CardRequirements.builder((b) => b.venus(16)),
+      requirements: {venus: 16},
       victoryPoints: 1,
 
       behavior: {
@@ -52,12 +51,11 @@ export class VenusianPlants extends Card implements IProjectCard {
     return new SelectCard(
       'Select card to add 1 resource',
       'Add resource',
-      cards,
-      ([card]) => {
+      cards)
+      .andThen(([card]) => {
         player.addResourceTo(card, {log: true});
         return undefined;
-      },
-    );
+      });
   }
 
   public getResCards(player: IPlayer): ICard[] {

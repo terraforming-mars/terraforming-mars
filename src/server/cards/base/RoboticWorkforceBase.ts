@@ -62,16 +62,17 @@ export abstract class RoboticWorkforceBase extends Card {
     if (cards.length === 0) {
       return undefined;
     }
-    return new SelectCard(title, 'Copy', cards, ([card]) => {
-      player.game.log('${0} copied ${1} production with ${2}', (b) =>
-        b.player(player).card(card).card(this));
+    return new SelectCard(title, 'Copy', cards)
+      .andThen(([card]) => {
+        player.game.log('${0} copied ${1} production with ${2}', (b) =>
+          b.player(player).card(card).card(this));
 
-      if (card.produce) {
-        card.produce(player);
-      } else if (card.behavior !== undefined) {
-        getBehaviorExecutor().execute(this.productionBehavior(card.behavior), player, card);
-      }
-      return cb(card);
-    });
+        if (card.produce) {
+          card.produce(player);
+        } else if (card.behavior !== undefined) {
+          getBehaviorExecutor().execute(this.productionBehavior(card.behavior), player, card);
+        }
+        return cb(card);
+      });
   }
 }

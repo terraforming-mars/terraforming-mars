@@ -23,11 +23,10 @@ describe('AndOptions', function() {
 
   it('Simple', function() {
     const andOptions = new AndOptions(
-      cb,
-      new SelectAmount('', '', amountCb, 0, 10),
-      new SelectAmount('', '', amountCb, 0, 10),
-      new SelectAmount('', '', amountCb, 0, 10),
-    );
+      new SelectAmount('', '', 0, 10).andThen(amountCb),
+      new SelectAmount('', '', 0, 10).andThen(amountCb),
+      new SelectAmount('', '', 0, 10).andThen(amountCb),
+    ).andThen(cb);
 
     expect(andOptions.options).has.length(3);
 

@@ -1,35 +1,10 @@
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {IPlayer} from '../../IPlayer';
+import {ProxyCard} from '../ProxyCard';
 
-export class SpecialDesignProxy implements IProjectCard {
-  public get cost() {
-    return 0;
-  }
-  public get tags() {
-    return [];
-  }
-  public get name() {
-    return CardName.SPECIAL_DESIGN_PROXY;
-  }
-  public get type() {
-    return CardType.PROXY;
-  }
-  public canPlay() {
-    return false;
-  }
-  public get metadata(): ICardMetadata {
-    throw new Error('SpecialDesignProxy is a proxy card, not a real card. Should not render');
-  }
-  public play() {
-    return undefined;
-  }
-  public resourceCount: number = 0;
-
-  public getVictoryPoints() {
-    return 0;
+export class SpecialDesignProxy extends ProxyCard {
+  constructor() {
+    super(CardName.SPECIAL_DESIGN_PROXY);
   }
   public getRequirementBonus(player: IPlayer) {
     // NOTE: normally code looks like 'if player.lastCardPlayed === this.name` but

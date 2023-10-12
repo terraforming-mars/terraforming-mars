@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {digit, played} from '../Options';
 import {Resource} from '../../../common/Resource';
@@ -19,7 +18,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       name: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
       cost: 20,
       tags: [Tag.SPACE, Tag.SCIENCE],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 1).tag(Tag.SCIENCE, 1)),
+      requirements: [{tag: Tag.SPACE}, {tag: Tag.SCIENCE}],
 
       metadata: {
         cardNumber: 'Pf53',
@@ -63,7 +62,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
     game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     const cards = [game.projectDeck.draw(player.game), game.projectDeck.draw(player.game)];
 
-    player.game.log('${0} revealed ${1} and ${2}', (b) => b.player(player).card(cards[0]).card(cards[1]));
+    player.game.log('${0} revealed ${1} and ${2}', (b) => b.player(player).card(cards[0], {tags: true}).card(cards[1], {tags: true}));
     if (this.processCard(player, cards[0])) {
       this.keep(player, cards[1]);
     } else {

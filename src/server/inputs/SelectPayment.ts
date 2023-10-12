@@ -1,18 +1,37 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {isPayment, Payment, PaymentOptions} from '../../common/inputs/Payment';
 import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
+import {SelectPaymentModel} from '../../common/models/PlayerInputModel';
 
-export class SelectPayment extends BasePlayerInput {
+export class SelectPayment extends BasePlayerInput<Payment> {
   constructor(
     title: string | Message,
     public amount: number,
     public paymentOptions: Partial<PaymentOptions>,
-    public cb: (payment: Payment) => PlayerInput | undefined,
   ) {
     super('payment', title);
     this.buttonLabel = 'Pay'; // no input button
+  }
+
+  public toModel(player: IPlayer): SelectPaymentModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'payment',
+      amount: this.amount,
+      paymentOptions: {
+        // TODO(kberg): These are set both here and in Player. Consolidate, perhaps.
+        heat: player.canUseHeatAsMegaCredits,
+        lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+        ...this.paymentOptions,
+      },
+      seeds: player.getSpendableSeedResources(),
+      auroraiData: player.getSpendableData(),
+      kuiperAsteroids: player.getSpendableKuiperAsteroids(),
+      spireScience: player.getSpendableSpireScienceResources(),
+    };
   }
 
   public process(input: InputResponse, player: IPlayer) {

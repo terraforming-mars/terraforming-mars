@@ -7,7 +7,6 @@ import {fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
-import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
 import {ProjectDeck} from '../../../src/server/cards/Deck';
 
 describe('OumuamuaTypeObjectSurvey', function() {
@@ -49,7 +48,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     cost: 10,
     name: 'req' as CardName,
     tags: [Tag.SCIENCE],
-    requirements: CardRequirements.builder((b) => b.temperature(-28, {max: true})),
+    requirements: [{temperature: -28, max: true}],
   });
   // The slug is the card at the bottom of the deck. If it were drawn, the deck would be empty and refilled from the discard pile.
   const slug = fakeCard({

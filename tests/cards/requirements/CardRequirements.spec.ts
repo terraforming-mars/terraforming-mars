@@ -14,6 +14,17 @@ import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {OneOrArray} from '../../../src/common/utils/types';
+import {CardRequirementDescriptor} from '../../../src/common/cards/CardRequirementDescriptor';
+import {IPlayer} from '../../../src/server/IPlayer';
+import {asArray} from '../../../src/common/utils/utils';
+
+function compile(req: OneOrArray<CardRequirementDescriptor>) {
+  return CardRequirements.compile(asArray(req));
+}
+function satisfies(req: OneOrArray<CardRequirementDescriptor>, player: IPlayer) {
+  return compile(asArray(req)).satisfies(player);
+}
 
 describe('CardRequirements', function() {
   let player: TestPlayer;
@@ -25,205 +36,205 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for oceans', function() {
-    const requirements = CardRequirements.builder((b) => b.oceans(5));
+    const requirements = {oceans: 5};
     const oceanSpaces = player.game.board.getAvailableSpacesForOcean(player);
     for (let i = 0; i < 5; i++) {
-      expect(requirements.satisfies(player)).eq(false);
+      expect(satisfies(requirements, player)).eq(false);
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
     for (let i = 0; i < 3; i++) {
-      expect(requirements.satisfies(player)).eq(true);
+      expect(satisfies(requirements, player)).eq(true);
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
   });
 
   it('satisfies properly for temperature max', function() {
-    const requirements = CardRequirements.builder((b) => b.temperature(-10, {max: true}));
-    expect(requirements.satisfies(player)).eq(true);
+    const requirements = {temperature: -10, max: true};
+    expect(satisfies(requirements, player)).eq(true);
     setTemperature(player.game, -10);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
     setTemperature(player.game, -8);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
     player.playCard(adaptationTechnology);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for oxygen', function() {
-    const requirements = CardRequirements.builder((b) => b.oxygen(4));
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {oxygen: 4};
+    expect(satisfies(requirements, player)).eq(false);
     setOxygenLevel(player.game, 4);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
     setOxygenLevel(player.game, 3);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
     player.playCard(adaptationTechnology);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for venus', function() {
-    const requirements = CardRequirements.builder((b) => b.venus(8));
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {venus: 8};
+    expect(satisfies(requirements, player)).eq(false);
     setVenusScaleLevel(player.game, 8);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
     setVenusScaleLevel(player.game, 7);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
     player.playCard(adaptationTechnology);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for tr', function() {
-    const requirements = CardRequirements.builder((b) => b.tr(25));
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {tr: 25};
+    expect(satisfies(requirements, player)).eq(false);
     player.setTerraformRating(25);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
     player.setTerraformRating(24);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
     player.playCard(adaptationTechnology);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
   });
 
   it('satisfies properly for chairman', function() {
-    const requirements = CardRequirements.builder((b) => b.chairman());
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {chairman: true};
+    expect(satisfies(requirements, player)).eq(false);
     player.game.turmoil!.chairman = player.id;
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for resourceTypes', function() {
-    const requirements = CardRequirements.builder((b) => b.resourceTypes(3, {max: true}));
-    expect(requirements.satisfies(player)).eq(true);
+    const requirements = {resourceTypes: 3, max: true};
+    expect(satisfies(requirements, player)).eq(true);
     player.megaCredits = 10;
     player.steel = 2;
     player.titanium = 1;
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
 
     const ants = new Ants();
     player.playedCards.push(ants);
     ants.resourceCount = 2;
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
   });
 
   it('satisfies properly for greeneries', function() {
-    const requirements = CardRequirements.builder((b) => b.greeneries(2, {max: true}));
-    expect(requirements.satisfies(player)).eq(true);
+    const requirements = {greeneries: 2, max: true};
+    expect(satisfies(requirements, player)).eq(true);
     addGreenery(player);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
     addGreenery(player);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
     addGreenery(player2);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
     addGreenery(player);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
   });
 
   it('satisfies properly for cities', function() {
-    const requirements = CardRequirements.builder((b) => b.cities(2, {all: true}));
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {cities: 2, all: true};
+    expect(satisfies(requirements, player)).eq(false);
     player.game.addCity(player2, player.game.board.getAvailableSpacesForCity(player)[0]);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
     player.game.addCity(player, player.game.board.getAvailableSpacesForCity(player)[0]);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for colonies', function() {
-    const requirements = CardRequirements.builder((b) => b.colonies(1));
+    const requirements = {colonies: 1};
     const colony = new Ceres();
     player.game.colonies.push(colony);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
     colony.colonies.push(player2.id);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
     colony.colonies.push(player.id);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for floaters', function() {
-    const requirements = CardRequirements.builder((b) => b.floaters(2));
+    const requirements = {floaters: 2};
     const corp = new Celestic();
     player.setCorporationForTest(corp);
     churnAction(corp, player);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
     churnAction(corp, player);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for partyLeaders', function() {
-    const requirements = CardRequirements.builder((b) => b.partyLeaders(1));
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {partyLeader: 1};
+    expect(satisfies(requirements, player)).eq(false);
     const greens = player.game.turmoil!.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player.id;
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for same tags', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tag.MICROBE, 2));
+    const requirements = {tag: Tag.MICROBE, count: 2};
 
     const ants = new Ants();
     player.playedCards.push(ants);
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
 
     const researchCoordination = new ResearchCoordination();
     player.playedCards.push(researchCoordination);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for different tags', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tag.MICROBE).tag(Tag.ANIMAL));
+    const requirements = [{tag: Tag.MICROBE}, {tag: Tag.ANIMAL}];
 
     player.tagsForTest = {wild: 1};
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
 
     player.tagsForTest = {wild: 1, microbe: 1};
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for max tag requirement', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tag.MICROBE, 1, {max: true}));
+    const requirements = {tag: Tag.MICROBE, max: true};
 
     player.tagsForTest = {microbe: 1};
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
 
     player.tagsForTest = {microbe: 2};
-    expect(requirements.satisfies(player)).eq(false);
+    expect(satisfies(requirements, player)).eq(false);
 
     player.tagsForTest = {microbe: 1, wild: 1};
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for any tag requirement', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tag.MICROBE, 2, {all: true}));
+    const requirements = {tag: Tag.MICROBE, count: 2, all: true};
 
     player.tagsForTest = {microbe: 2};
-    expect(requirements.satisfies(player)).is.true;
+    expect(satisfies(requirements, player)).is.true;
 
     player.tagsForTest = {microbe: 1};
-    expect(requirements.satisfies(player)).is.false;
+    expect(satisfies(requirements, player)).is.false;
 
     player.tagsForTest = {microbe: 1};
     player2.tagsForTest = {microbe: 1};
-    expect(requirements.satisfies(player)).is.true;
+    expect(satisfies(requirements, player)).is.true;
 
     player.tagsForTest = {microbe: 0};
     player2.tagsForTest = {microbe: 2};
-    expect(requirements.satisfies(player)).is.true;
+    expect(satisfies(requirements, player)).is.true;
   });
 
   it('satisfies properly for production', function() {
-    const requirements = CardRequirements.builder((b) => b.production(Resource.PLANTS));
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {production: Resource.PLANTS};
+    expect(satisfies(requirements, player)).eq(false);
     player.production.add(Resource.PLANTS, 1);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for party', function() {
-    const requirements = CardRequirements.builder((b) => b.party(PartyName.MARS));
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {party: PartyName.MARS};
+    expect(satisfies(requirements, player)).eq(false);
     player.game.turmoil!.sendDelegateToParty(player.id, PartyName.MARS, player.game);
     player.game.turmoil!.sendDelegateToParty(player.id, PartyName.MARS, player.game);
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('satisfies properly for plantsRemoved', function() {
-    const requirements = CardRequirements.builder((b) => b.plantsRemoved());
-    expect(requirements.satisfies(player)).eq(false);
+    const requirements = {plantsRemoved: true};
+    expect(satisfies(requirements, player)).eq(false);
 
     player2.plants = 1;
     const smallAsteroid = new SmallAsteroid();
@@ -233,18 +244,18 @@ describe('CardRequirements', function() {
     const orOptions = cast(player.getWaitingFor(), OrOptions);
     orOptions.options[0].cb([player2]);
 
-    expect(requirements.satisfies(player)).eq(true);
+    expect(satisfies(requirements, player)).eq(true);
   });
 
   it('throws errors when out of range', function() {
-    expect(() => CardRequirements.builder((b) => b.temperature(-32))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.temperature(10))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.temperature(-5))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.oxygen(-1))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.oxygen(15))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.oceans(-1))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.oceans(10))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.venus(-1))).to.throw();
-    expect(() => CardRequirements.builder((b) => b.venus(31))).to.throw();
+    expect(() => compile({temperature: -32})).to.throw();
+    expect(() => compile({temperature: 10})).to.throw();
+    expect(() => compile({temperature: -5})).to.throw();
+    expect(() => compile({oxygen: -1})).to.throw();
+    expect(() => compile({oxygen: 15})).to.throw();
+    expect(() => compile({oceans: -1})).to.throw();
+    expect(() => compile({oceans: 10})).to.throw();
+    expect(() => compile({venus: -1})).to.throw();
+    expect(() => compile({venus: 31})).to.throw();
   });
 });

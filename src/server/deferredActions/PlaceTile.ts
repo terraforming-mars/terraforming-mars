@@ -24,10 +24,8 @@ export class PlaceTile extends DeferredAction {
     const availableSpaces = game.board.getAvailableSpacesForType(this.player, on);
     const title = this.options?.title ?? this.getTitle(on);
 
-    return new SelectSpace(
-      title,
-      availableSpaces,
-      (space: Space) => {
+    return new SelectSpace(title, availableSpaces)
+      .andThen((space: Space) => {
         const tile: Tile = {...this.options.tile};
         if (this.options.on === 'upgradeable-ocean') {
           tile.covers = space.tile;
@@ -35,8 +33,7 @@ export class PlaceTile extends DeferredAction {
         game.addTile(this.player, space, tile);
         space.adjacency = this.options.adjacencyBonus;
         return undefined;
-      },
-    );
+      });
   }
 
   private getTitle(type: PlacementType) {

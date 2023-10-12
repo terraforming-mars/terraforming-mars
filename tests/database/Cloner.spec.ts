@@ -26,11 +26,9 @@ describe('Cloner', function() {
     expect(newPlayerZero.beginner).is.true;
 
     expect(player.getTerraformRating()).eq(23);
-    expect(player.terraformRatingAtGenerationStart).eq(14);
     expect(player.handicap).eq(9);
 
     expect(newPlayerZero.getTerraformRating()).eq(17);
-    expect(player.terraformRatingAtGenerationStart).eq(14);
     expect(newPlayerZero.handicap).eq(3);
 
     expect(player.dealtCorporationCards, 'dealtCorporationCards').deep.eq(newPlayerZero.dealtCorporationCards);

@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
@@ -21,7 +20,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
       name: CardName.BOTANICAL_EXPERIENCE,
       cost: 14,
       tags: [Tag.PLANT, Tag.MARS, Tag.SCIENCE],
-      requirements: CardRequirements.builder((b) => b.greeneries(1, {all})),
+      requirements: {greeneries: 1, all},
       resourceType: CardResource.DATA,
 
       metadata: {

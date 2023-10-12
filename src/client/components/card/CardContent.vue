@@ -1,6 +1,6 @@
 <template>
   <div :class="getClasses()">
-    <CardRequirementsComponent v-if="requirements" :requirements="requirements"/>
+    <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>
     <CardRenderData v-if="metadata.renderData" :renderData="metadata.renderData" />
     <CardDescription v-if="metadata.description" :item="metadata.description" />
     <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
@@ -12,11 +12,11 @@
 
 import Vue from 'vue';
 import {ICardMetadata} from '@/common/cards/ICardMetadata';
-import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
 import CardRenderData from './CardRenderData.vue';
+import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 
 export default Vue.extend({
   name: 'CardContent',
@@ -26,7 +26,7 @@ export default Vue.extend({
       required: true,
     },
     requirements: {
-      type: Object as () => ICardRequirements,
+      type: Array<CardRequirementDescriptor>,
     },
     isCorporation: {
       type: Boolean,

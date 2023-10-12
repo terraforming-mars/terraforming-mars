@@ -15,6 +15,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
 import {sum} from '../../../common/utils/utils';
+import {TITLES} from '../../inputs/titles';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -26,7 +27,6 @@ export class Unity extends Party implements IParty {
 class UnityBonus01 implements Bonus {
   id = 'ub01' as const;
   description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
-  isDefault = true;
 
   getScore(player: IPlayer) {
     const tags = [Tag.VENUS, Tag.EARTH, Tag.JOVIAN];
@@ -43,7 +43,6 @@ class UnityBonus01 implements Bonus {
 class UnityBonus02 implements Bonus {
   id = 'ub02' as const;
   description = 'Gain 1 M€ for each Space tag you have';
-  isDefault = false;
 
   getScore(player: IPlayer) {
     return player.tags.count(Tag.SPACE, 'raw');
@@ -57,15 +56,24 @@ class UnityBonus02 implements Bonus {
 }
 
 class UnityPolicy01 implements Policy {
-  isDefault = true;
   id = 'up01' as const;
   description = 'Your titanium resources are worth 1 M€ extra';
+
+  onPolicyStart(game: IGame): void {
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      player.increaseTitaniumValue();
+    });
+  }
+  onPolicyEnd(game: IGame): void {
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      player.decreaseTitaniumValue();
+    });
+  }
 }
 
 class UnityPolicy02 implements Policy {
   id = 'up02' as const;
   description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
-  isDefault = false;
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -76,47 +84,42 @@ class UnityPolicy02 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(
-      player,
-      4,
-      {
-        title: 'Select how to pay for Turmoil Unity action',
-        afterPay: () => {
-          const availableFloaterCards = player.getResourceCards(CardResource.FLOATER);
-          const orOptions = new OrOptions();
+    game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.UNITY)}))
+      .andThen(() => {
+        const availableFloaterCards = player.getResourceCards(CardResource.FLOATER);
+        const orOptions = new OrOptions();
 
-          if (availableFloaterCards.length === 1) {
-            orOptions.options.push(
-              new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
-                player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
+        if (availableFloaterCards.length === 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm').andThen(() => {
+              player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
 
-                return undefined;
-              }),
-            );
-          } else if (availableFloaterCards.length > 1) {
-            orOptions.options.push(
-              new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
-                return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, ([card]) => {
+              return undefined;
+            }),
+          );
+        } else if (availableFloaterCards.length > 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 floaters to a card', 'Confirm').andThen(() => {
+              return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards)
+                .andThen(([card]) => {
                   player.addResourceTo(card, {qty: 2, log: true});
                   return undefined;
                 });
-              }),
-            );
-          }
+            }),
+          );
+        }
 
-          orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
-            player.stock.add(Resource.TITANIUM, 2);
-            game.log('${0} gained 2 titanium', (b) => b.player(player));
-            return undefined;
-          }));
-
-          if (orOptions.options.length === 1) return orOptions.options[0].cb();
-
-          game.defer(new SimpleDeferredAction(player, () => orOptions));
+        orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm').andThen(() => {
+          player.stock.add(Resource.TITANIUM, 2);
+          game.log('${0} gained 2 titanium', (b) => b.player(player));
           return undefined;
-        },
-      },
-    ));
+        }));
+
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+
+        game.defer(new SimpleDeferredAction(player, () => orOptions));
+        return undefined;
+      });
 
     return undefined;
   }
@@ -125,7 +128,6 @@ class UnityPolicy02 implements Policy {
 class UnityPolicy03 implements Policy {
   id = 'up03' as const;
   description = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
-  isDefault = false;
 
   canAct(player: IPlayer) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -136,16 +138,8 @@ class UnityPolicy03 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(
-      player,
-      4,
-      {
-        title: 'Select how to pay for Turmoil Unity action',
-        afterPay: () => {
-          player.drawCard(1, {tag: Tag.SPACE});
-        },
-      },
-    ));
+    game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.UNITY)}))
+      .andThen(() => player.drawCard(1, {tag: Tag.SPACE}));
 
     return undefined;
   }
@@ -154,7 +148,6 @@ class UnityPolicy03 implements Policy {
 class UnityPolicy04 implements Policy {
   id = 'up04' as const;
   description = 'Cards with Space tags cost 2 M€ less to play';
-  isDefault = false;
 }
 
 export const UNITY_BONUS_1 = new UnityBonus01();

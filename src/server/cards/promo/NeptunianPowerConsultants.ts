@@ -49,15 +49,14 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
         const orOptions = new OrOptions();
         orOptions.options.push(new SelectPayment(
           'Spend 5 M€ for one energy production and hydroelectric resource',
-          5, {steel: true},
-          (payment) => {
+          5, {steel: true})
+          .andThen((payment) => {
             cardOwner.pay(payment);
             cardOwner.production.add(Resource.ENERGY, 1, {log: true});
             cardOwner.addResourceTo(this, {qty: 1, log: true});
             return undefined;
-          },
-        ));
-        orOptions.options.push(new SelectOption('Do not use card effect.', undefined, () => {
+          }));
+        orOptions.options.push(new SelectOption('Do not use card effect.', undefined).andThen(() => {
           game.log('${0} declined to use the ${1} effect', (b) => b.player(cardOwner).card(this));
           return undefined;
         }));

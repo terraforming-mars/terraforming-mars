@@ -3,13 +3,16 @@ import {Message} from '../common/logs/Message';
 import {PlayerInputType} from '../common/input/PlayerInputType';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {IPlayer} from './IPlayer';
+import {PlayerInputModel} from '../common/models/PlayerInputModel';
 
 export interface PlayerInput {
-    inputType: PlayerInputType;
+    type: PlayerInputType;
     buttonLabel: string;
-    options?: Array<PlayerInput>;
     title: string | Message;
     cb(...item: any): PlayerInput | undefined;
+
+    toModel(player: IPlayer): PlayerInputModel;
+
     /**
      * Processes and validates `response` for this PlayerInput which is meant for the given `player`.
      *
@@ -19,18 +22,25 @@ export interface PlayerInput {
     maxByDefault?: boolean;
 }
 
-export abstract class BasePlayerInput implements PlayerInput {
-  public readonly inputType: PlayerInputType;
+export abstract class BasePlayerInput<T> implements PlayerInput {
+  public readonly type: PlayerInputType;
   public buttonLabel: string = 'Save';
   public title: string | Message;
-  public abstract cb(...item: any): PlayerInput | undefined;
+  public cb: (param: T) => PlayerInput | undefined = () => undefined;
+  public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
 
-  constructor(inputType: PlayerInputType, title: string | Message = '') {
-    this.inputType = inputType;
+  constructor(type: PlayerInputType, title: string | Message = '') {
+    this.type = type;
     this.title = title;
   }
+
+  public andThen(cb: (param: T) => PlayerInput | undefined): this {
+    this.cb = cb;
+    return this;
+  }
 }
+
 
 export function getCardFromPlayerInput<T extends ICard>(cards: ReadonlyArray<T>, cardName: string): {card: T, idx: number} {
   const idx = cards.findIndex((card) => card.name === cardName);

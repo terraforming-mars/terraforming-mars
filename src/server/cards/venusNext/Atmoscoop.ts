@@ -10,7 +10,6 @@ import {CardName} from '../../../common/cards/CardName';
 import * as constants from '../../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
@@ -23,7 +22,7 @@ export class Atmoscoop extends Card implements IProjectCard {
       cost: 22,
       tags: [Tag.JOVIAN, Tag.SPACE],
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
+      requirements: {tag: Tag.SCIENCE, count: 3},
       victoryPoints: 1,
 
       behavior: {
@@ -63,11 +62,11 @@ export class Atmoscoop extends Card implements IProjectCard {
       return undefined;
     }
 
-    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature', () => {
+    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature').andThen(() => {
       game.increaseTemperature(player, 2);
       return undefined;
     });
-    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus', () => {
+    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus').andThen(() => {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     });

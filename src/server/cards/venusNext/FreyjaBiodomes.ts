@@ -5,7 +5,6 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -18,7 +17,7 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
       tags: [Tag.PLANT, Tag.VENUS],
       cost: 14,
 
-      requirements: CardRequirements.builder((b) => b.venus(10)),
+      requirements: {venus: 10},
       victoryPoints: 2,
 
       behavior: {
@@ -51,12 +50,11 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
       return new SelectCard(
         'Select card to add 2 resources',
         'Add resources',
-        cards,
-        ([card]) => {
+        cards)
+        .andThen(([card]) => {
           player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
-        },
-      );
+        });
     }
 
     if (cards.length === 1) {

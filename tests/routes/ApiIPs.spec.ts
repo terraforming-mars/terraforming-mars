@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ApiIPs} from '../../src/server/routes/ApiIPs';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
-import {PlayerId, SpectatorId} from '@/common/Types';
+import {PlayerId, SpectatorId} from '../../src/common/Types';
 
 describe('ApiIPs', function() {
   let res: MockResponse;

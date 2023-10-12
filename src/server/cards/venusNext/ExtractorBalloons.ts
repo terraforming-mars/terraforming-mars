@@ -69,13 +69,13 @@ export class ExtractorBalloons extends Card implements IActionCard {
     }
     return new OrOptions(
       new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
-        'Remove floaters', () => {
-          player.removeResourceFrom(this, 2);
-          const actual = player.game.increaseVenusScaleLevel(player, 1);
-          LogHelper.logVenusIncrease(player, actual);
-          return undefined;
-        }),
-      new SelectOption('Add 1 floater to this card', 'Add floater', () => {
+        'Remove floaters').andThen(() => {
+        player.removeResourceFrom(this, 2);
+        const actual = player.game.increaseVenusScaleLevel(player, 1);
+        LogHelper.logVenusIncrease(player, actual);
+        return undefined;
+      }),
+      new SelectOption('Add 1 floater to this card', 'Add floater').andThen(() => {
         player.addResourceTo(this, {log: true});
         return undefined;
       }),

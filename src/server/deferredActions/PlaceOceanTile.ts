@@ -1,6 +1,5 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from './DeferredAction';
 import {PlacementType} from '../boards/PlacementType';
 
@@ -23,14 +22,11 @@ export class PlaceOceanTile extends DeferredAction {
     const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, on);
     const title = this.options?.title ?? this.getTitle(on);
 
-    return new SelectSpace(
-      title,
-      availableSpaces,
-      (space: Space) => {
+    return new SelectSpace(title, availableSpaces)
+      .andThen((space) => {
         this.player.game.addOcean(this.player, space);
         return undefined;
-      },
-    );
+      });
   }
 
   private getTitle(type: PlacementType) {

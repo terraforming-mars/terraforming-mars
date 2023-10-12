@@ -13,6 +13,7 @@ import {MAX_TEMPERATURE} from '../../../common/constants';
 import {LogHelper} from '../../LogHelper';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
+import {TITLES} from '../../inputs/titles';
 
 export class DirectedImpactors extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -52,8 +53,8 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Pay 6 M€ to add 1 asteroid to a card', 'Pay', () => this.addResource(player, asteroidCards));
-    const spendResource = new SelectOption('Remove 1 asteroid to raise temperature 1 step', 'Remove asteroid', () => this.spendResource(player));
+    const addResource = new SelectOption('Pay 6 M€ to add 1 asteroid to a card', 'Pay').andThen(() => this.addResource(player, asteroidCards));
+    const spendResource = new SelectOption('Remove 1 asteroid to raise temperature 1 step', 'Remove asteroid').andThen(() => this.spendResource(player));
     const temperatureIsMaxed = player.game.getTemperature() === MAX_TEMPERATURE;
 
     if (this.resourceCount > 0) {
@@ -74,7 +75,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
   }
 
   private addResource(player: IPlayer, asteroidCards: ICard[]) {
-    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: TITLES.payForCardAction(this.name)}));
 
     if (asteroidCards.length === 1) {
       player.addResourceTo(this, {log: true});
@@ -84,12 +85,11 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     return new SelectCard(
       'Select card to add 1 asteroid',
       'Add asteroid',
-      asteroidCards,
-      ([card]) => {
+      asteroidCards)
+      .andThen(([card]) => {
         player.addResourceTo(card, {log: true});
         return undefined;
-      },
-    );
+      });
   }
 
   private spendResource(player: IPlayer) {

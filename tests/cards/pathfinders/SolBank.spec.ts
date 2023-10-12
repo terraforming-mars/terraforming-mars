@@ -18,6 +18,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SelectColony} from '../../../src/server/inputs/SelectColony';
 
 describe('SolBank', () => {
   let solBank: SolBank;
@@ -30,6 +31,9 @@ describe('SolBank', () => {
     player.playCorporationCard(solBank);
     player.megaCredits = 100;
     game.colonies.push(new Luna());
+
+    // Player is waiting for SelectColony. Popping it. The cast is just to ensure that if this changes, the test changes.
+    cast(player.popWaitingFor(), SelectColony);
   });
 
   it('paying for project card', () => {

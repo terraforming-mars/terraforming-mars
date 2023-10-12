@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -23,7 +22,7 @@ export class SecretLabs extends Card implements IProjectCard {
       name: CardName.SECRET_LABS,
       cost: 21,
       tags: [Tag.JOVIAN, Tag.BUILDING, Tag.SPACE],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.JOVIAN)),
+      requirements: [{tag: Tag.SCIENCE}, {tag: Tag.JOVIAN}],
       victoryPoints: 1,
 
       metadata: {
@@ -63,21 +62,21 @@ export class SecretLabs extends Card implements IProjectCard {
     if (player.canAfford({cost: 0, tr: {oceans: 1}})) {
       const oceanPlacementAvailable = player.game.board.getOceanSpaces().length < MAX_OCEAN_TILES;
       const optionTitle = oceanPlacementAvailable ? 'Place an ocean tile. Add 2 microbes to ANY card.': 'Add 2 microbes to ANY card.';
-      options.options.push(new SelectOption(optionTitle, 'select', () => {
+      options.options.push(new SelectOption(optionTitle).andThen(() => {
         if (oceanPlacementAvailable) player.game.defer(new PlaceOceanTile(player));
         player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
         return undefined;
       }));
     }
     if (player.canAfford({cost: 0, tr: {temperature: 1}})) {
-      options.options.push(new SelectOption('Raise temperature 1 step. Gain 3 plants.', 'select', () => {
+      options.options.push(new SelectOption('Raise temperature 1 step. Gain 3 plants.').andThen(() => {
         player.game.increaseTemperature(player, 1);
         player.stock.add(Resource.PLANTS, 3, {log: true});
         return undefined;
       }));
     }
     if (player.canAfford({cost: 0, tr: {oxygen: 1}})) {
-      options.options.push(new SelectOption('Raise oxygen level 1 step. Add 2 floaters to ANY card.', 'select', () => {
+      options.options.push(new SelectOption('Raise oxygen level 1 step. Add 2 floaters to ANY card.').andThen(() => {
         player.game.increaseOxygenLevel(player, 1);
         player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
         return undefined;

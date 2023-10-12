@@ -65,7 +65,7 @@ describe('CorrosiveRain', function() {
     const removeFloaters = cast(orOptions.options[1], SelectCard);
 
     expect(player.megaCredits).eq(3);
-    reduce10MC.cb();
+    reduce10MC.cb(undefined);
     expect(player.megaCredits).eq(0);
 
     expect(titanShuttles.resourceCount).eq(3);

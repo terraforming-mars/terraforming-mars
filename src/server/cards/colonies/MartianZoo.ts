@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
@@ -18,7 +17,7 @@ export class MartianZoo extends Card implements IProjectCard {
       name: CardName.MARTIAN_ZOO,
       type: CardType.ACTIVE,
       resourceType: CardResource.ANIMAL,
-      requirements: CardRequirements.builder((b) => b.cities(2, {all})),
+      requirements: {cities: 2, all},
       victoryPoints: 1,
 
       metadata: {

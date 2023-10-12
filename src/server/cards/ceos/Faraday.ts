@@ -12,6 +12,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {newMessage} from '../../logs/MessageBuilder';
+import {TITLES} from '../../inputs/titles';
 
 const INVALID_TAGS = [
   Tag.EVENT,
@@ -74,24 +75,12 @@ export class Faraday extends CeoCard {
   public effectOptions(player: IPlayer, tag: Tag) {
     if (!player.canAfford(3)) return;
     return new OrOptions(
-      new SelectOption(newMessage('Pay 3 MC to draw a ${1} card', (b) => b.string(tag)), 'Confirm', () => {
-        player.game.defer(
-          new SelectPaymentDeferred(
-            player,
-            3,
-            {
-              title: 'Select how to pay for action',
-              afterPay: () => {
-                player.drawCard(1, {tag: tag});
-              },
-            },
-          ),
-        );
+      new SelectOption(newMessage('Pay 3 M€ to draw a ${1} card', (b) => b.string(tag)), 'Confirm').andThen(() => {
+        player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
+          .andThen(() => player.drawCard(1, {tag: tag}));
         return undefined;
       }),
-      new SelectOption('Do nothing', 'Confirm', () => {
-        return undefined;
-      }),
+      new SelectOption('Do nothing', 'Confirm'),
     );
   }
 }

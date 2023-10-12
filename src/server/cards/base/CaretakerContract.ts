@@ -1,6 +1,5 @@
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -10,7 +9,7 @@ export class CaretakerContract extends ActionCard {
       type: CardType.ACTIVE,
       name: CardName.CARETAKER_CONTRACT,
       cost: 3,
-      requirements: CardRequirements.builder((b) => b.temperature(0)),
+      requirements: {temperature: 0},
 
       action: {
         spend: {heat: 8},

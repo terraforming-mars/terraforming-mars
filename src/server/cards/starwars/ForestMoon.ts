@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardResource} from '../../../common/CardResource';
 import {Resource} from '../../../common/Resource';
 
@@ -16,7 +15,7 @@ export class ForestMoon extends Card implements IProjectCard {
       name: CardName.FOREST_MOON,
       tags: [Tag.PLANT, Tag.ANIMAL],
       cost: 15,
-      requirements: CardRequirements.builder((b) => b.greeneries(4, {all})),
+      requirements: {greeneries: 4, all},
       victoryPoints: 1,
 
       behavior: {

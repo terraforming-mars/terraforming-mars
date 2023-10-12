@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
 
@@ -15,7 +14,7 @@ export class DiasporaMovement extends Card implements IProjectCard {
       name: CardName.DIASPORA_MOVEMENT,
       tags: [Tag.JOVIAN],
       cost: 7,
-      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+      requirements: {party: PartyName.REDS},
       victoryPoints: 1,
 
       behavior: {

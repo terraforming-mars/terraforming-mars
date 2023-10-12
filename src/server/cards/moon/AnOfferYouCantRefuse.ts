@@ -95,11 +95,9 @@ export class AnOfferYouCantRefuse extends Card {
 
     turmoil.parties.forEach((party) => {
       if (party.name === from) {
-        orOptions.options.push(new SelectOption('Do not move', '', () => {
-          return undefined;
-        }));
+        orOptions.options.push(new SelectOption('Do not move'));
       } else {
-        orOptions.options.push(new SelectOption(party.name, 'Select', () => {
+        orOptions.options.push(new SelectOption(party.name).andThen(() => {
           turmoil.removeDelegateFromParty(delegate, from, game);
           turmoil.sendDelegateToParty(delegate, party.name, game);
           return undefined;
@@ -122,7 +120,7 @@ export class AnOfferYouCantRefuse extends Card {
         }
 
         const color = game.getPlayerById(delegate).color;
-        const option = new SelectOption(newMessage('${0} / ${1}', (b) => b.party(party).playerColor(color)), 'Select', () => {
+        const option = new SelectOption(newMessage('${0} / ${1}', (b) => b.party(party).playerColor(color))).andThen(() => {
           turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
           turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
           return this.moveToAnotherParty(game, party.name, player.id);

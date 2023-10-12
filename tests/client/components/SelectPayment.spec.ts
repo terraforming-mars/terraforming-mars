@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import SelectPayment from '@/client/components/SelectPayment.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 import {CardName} from '@/common/cards/CardName';
@@ -269,24 +269,38 @@ describe('SelectPayment', () => {
   it('Luna Trade Federation: Can use titanium by default', async () => {
     const wrapper = setupBill(
       10,
-      {
-        megaCredits: 10, titanium: 2, titaniumValue: 4,
-      },
-      {paymentOptions: {lunaTradeFederationTitanium: true}});
+      // Note here that titanium is valued at 4, so LTF titanium will be valued at 3.
+      {megaCredits: 10, titanium: 2, titaniumValue: 4},
+      {paymentOptions: {titanium: false, lunaTradeFederationTitanium: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectValue('megaCredits', 10);
-    tester.expectValue('titanium', 0);
-
-    await tester.clickMax('titanium');
-
     tester.expectValue('megaCredits', 4);
+    tester.expectValue('titanium', 2);
+
+    await tester.clickMinus('titanium');
+
+    tester.expectValue('megaCredits', 7);
+    tester.expectValue('titanium', 1);
+  });
+
+  it('Pay with titanium', async () => {
+    const wrapper = setupBill(
+      10,
+      {
+        megaCredits: 10, titanium: 2, titaniumValue: 4,
+      },
+      {paymentOptions: {titanium: true, lunaTradeFederationTitanium: false}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('megaCredits', 2);
     tester.expectValue('titanium', 2);
   });
 
-  it('Luna Trade Federation: Can use titanium at normal rate when titanium is true', async () => {
+  it('Luna Trade Federation: Can use titanium at normal rate when paymentOptions{titanium} is true', async () => {
     const wrapper = setupBill(
       10,
       {
@@ -314,7 +328,7 @@ describe('SelectPayment', () => {
   const setupBill = function(
     amount: number,
     playerFields: Partial<PublicPlayerModel>,
-    playerInputFields: Partial<PlayerInputModel>) {
+    playerInputFields: Partial<SelectPaymentModel>) {
     const thisPlayer: Partial<PublicPlayerModel> = {
       steel: 0,
       titanium: 0,
@@ -329,12 +343,16 @@ describe('SelectPayment', () => {
       id: 'playerid-foo',
     };
 
-    const playerInput: Partial<PlayerInputModel> = {
-      amount: amount,
+    const playerInput: SelectPaymentModel = {
+      type: 'payment',
+      buttonLabel: '',
       title: 'foo',
-      microbes: 0,
-      floaters: 0,
-      lunaArchivesScience: 0,
+      amount: amount,
+      paymentOptions: {},
+      auroraiData: 0,
+      kuiperAsteroids: 0,
+      seeds: 0,
+      spireScience: 0,
       ...playerInputFields,
     };
 

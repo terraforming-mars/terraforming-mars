@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -15,7 +14,7 @@ export class ParliamentHall extends Card implements IProjectCard {
       name: CardName.PARLIAMENT_HALL,
       tags: [Tag.BUILDING],
       cost: 8,
-      requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
+      requirements: {party: PartyName.MARS},
       victoryPoints: 1,
 
       behavior: {

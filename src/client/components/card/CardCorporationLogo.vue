@@ -142,7 +142,7 @@
     </template>
     <template v-else-if="title === CardName.NIRGAL_ENTERPRISES">
       <div class="nirgal-enterprises-logo">
-        <div>NIRGRAL</div>
+        <div>NIRGAL</div>
         <div>ENTERPRISES</div>
       </div>
     </template>

@@ -31,7 +31,11 @@ export enum Priority {
   DISCARD_CARDS,
 }
 
-export abstract class DeferredAction<T = undefined> {
+export interface AndThen<T> {
+  andThen(cb: (param: T) => void): this;
+}
+
+export abstract class DeferredAction<T = undefined> implements AndThen<T> {
   // The position in the queue. Do not set directly.
   public queueId: number = -1;
   constructor(
@@ -44,7 +48,8 @@ export abstract class DeferredAction<T = undefined> {
   }
 
   public abstract execute(): PlayerInput | undefined;
-  protected cb: (param: T) => void = () => {};
+  // TODO(kberg): Make protected again.
+  public cb: (param: T) => void = () => {};
   private callbackSet = false;
 
   public andThen(cb: (param: T) => void): this {
@@ -57,7 +62,7 @@ export abstract class DeferredAction<T = undefined> {
   }
 }
 
-export class SimpleDeferredAction extends DeferredAction {
+export class SimpleDeferredAction<T> extends DeferredAction<T> {
   constructor(
     player: IPlayer,
     public execute: () => PlayerInput | undefined,

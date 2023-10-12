@@ -6,30 +6,36 @@ import {sum} from '../../common/utils/utils';
 
 export class SelectResources extends AndOptions {
   private static makeOptions(count: number, units: Units) {
-    const selectMegacredits = new SelectAmount('Megacredits', 'Select', (amount: number) => {
-      units.megacredits = amount;
-      return undefined;
-    }, 0, count);
-    const selectSteel = new SelectAmount('Steel', 'Select', (amount: number) => {
-      units.steel = amount;
-      return undefined;
-    }, 0, count);
-    const selectTitanium = new SelectAmount('Titanium', 'Select', (amount: number) => {
-      units.titanium = amount;
-      return undefined;
-    }, 0, count);
-    const selectPlants = new SelectAmount('Plants', 'Select', (amount: number) => {
-      units.plants = amount;
-      return undefined;
-    }, 0, count);
-    const selectEnergy = new SelectAmount('Energy', 'Select', (amount: number) => {
-      units.energy = amount;
-      return undefined;
-    }, 0, count);
-    const selectHeat = new SelectAmount('Heat', 'Select', (amount: number) => {
-      units.heat = amount;
-      return undefined;
-    }, 0, count);
+    const selectMegacredits = new SelectAmount('Megacredits', 'Select', 0, count)
+      .andThen((amount) => {
+        units.megacredits = amount;
+        return undefined;
+      });
+    const selectSteel = new SelectAmount('Steel', 'Select', 0, count)
+      .andThen((amount) => {
+        units.steel = amount;
+        return undefined;
+      });
+    const selectTitanium = new SelectAmount('Titanium', 'Select', 0, count)
+      .andThen((amount) => {
+        units.titanium = amount;
+        return undefined;
+      });
+    const selectPlants = new SelectAmount('Plants', 'Select', 0, count)
+      .andThen((amount) => {
+        units.plants = amount;
+        return undefined;
+      });
+    const selectEnergy = new SelectAmount('Energy', 'Select', 0, count)
+      .andThen((amount) => {
+        units.energy = amount;
+        return undefined;
+      });
+    const selectHeat = new SelectAmount('Heat', 'Select', 0, count)
+      .andThen((amount) => {
+        units.heat = amount;
+        return undefined;
+      });
     return [selectMegacredits, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat];
   }
   constructor(
@@ -40,20 +46,18 @@ export class SelectResources extends AndOptions {
     // is kind of strangely structured. If you can refactor this,
     // please do.
     private units = Units.of({})) {
-    super(
-      () => {
-        const array = Object.values(units);
-        if (array.some((count) => count < 0)) {
-          throw new Error('All units must be positive');
-        }
-        if (sum(array) !== this.count) {
-          throw new Error(`Select ${this.count} resources.`);
-        }
+    super(...SelectResources.makeOptions(count, units));
+    this.andThen(() => {
+      const array = Object.values(units);
+      if (array.some((count) => count < 0)) {
+        throw new Error('All units must be positive');
+      }
+      if (sum(array) !== this.count) {
+        throw new Error(`Select ${this.count} resources.`);
+      }
 
-        this.player.stock.addUnits(this.units, {log: true});
-        return undefined;
-      },
-      ...SelectResources.makeOptions(count, units),
-    );
+      this.player.stock.addUnits(this.units, {log: true});
+      return undefined;
+    });
   }
 }

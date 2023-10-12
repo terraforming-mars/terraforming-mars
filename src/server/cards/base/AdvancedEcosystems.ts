@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class AdvancedEcosystems extends Card implements IProjectCard {
   constructor() {
@@ -14,7 +13,7 @@ export class AdvancedEcosystems extends Card implements IProjectCard {
       cost: 11,
       victoryPoints: 3,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.PLANT).tag(Tag.ANIMAL).tag(Tag.MICROBE)),
+      requirements: [{tag: Tag.PLANT}, {tag: Tag.ANIMAL}, {tag: Tag.MICROBE}],
       metadata: {
         description: 'Requires a plant tag, a microbe tag, and an animal tag.',
         cardNumber: '135',

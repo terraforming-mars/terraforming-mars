@@ -11,7 +11,7 @@ import * as raw_settings from '../genfiles/settings.json';
 import * as prometheus from 'prom-client';
 
 import {Database} from './database/Database';
-import {serverId} from './utils/server-ids';
+import {runId, serverId} from './utils/server-ids';
 import {Route} from './routes/Route';
 import {processRequest} from './server/requestProcessor';
 import {timeAsync} from './utils/timer';
@@ -106,6 +106,7 @@ async function start() {
     console.log(`The secret serverId for this server is \x1b[1m${serverId}\x1b[0m.`);
     console.log(`Administrative routes can be found at admin?serverId=${serverId}`);
   }
+  console.log(`The public run ID is ${runId}`);
   console.log('Server is ready.');
 }
 

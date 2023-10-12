@@ -53,11 +53,12 @@ export class ImmigrantCity extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: Space) => {
-      player.game.addCity(player, space);
-      player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
-      player.game.defer(new LoseProduction(player, Resource.MEGACREDITS, {count: 2}));
-      return undefined;
-    });
+    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player))
+      .andThen((space) => {
+        player.game.addCity(player, space);
+        player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
+        player.game.defer(new LoseProduction(player, Resource.MEGACREDITS, {count: 2}));
+        return undefined;
+      });
   }
 }

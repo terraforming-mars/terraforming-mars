@@ -19,13 +19,9 @@ describe('orOptions', function() {
 
   it('Simple', function() {
     const orOptions = new OrOptions(
-      new SelectOption('', '', () => {
-        return cb(2);
-      }),
-      new SelectOption('', '', () => {
-        return cb(3);
-      }),
-      new SelectAmount('', '', cb, 0, 10),
+      new SelectOption('').andThen(() => cb(2)),
+      new SelectOption('').andThen(() => cb(3)),
+      new SelectAmount('', '', 0, 10).andThen(cb),
     );
 
     expect(orOptions.options).has.length(3);

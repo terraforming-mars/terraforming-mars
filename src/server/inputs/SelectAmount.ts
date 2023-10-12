@@ -1,18 +1,29 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
+import {SelectAmountModel} from '../../common/models/PlayerInputModel';
 
-export class SelectAmount extends BasePlayerInput {
+export class SelectAmount extends BasePlayerInput<number> {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Save',
-    public cb: (amount: number) => undefined | PlayerInput,
     public min: number,
     public max: number,
     public maxByDefault?: boolean,
   ) {
     super('amount', title);
     this.buttonLabel = buttonLabel;
+  }
+
+  public toModel(): SelectAmountModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'amount',
+      max: this.max,
+      min: this.min,
+      maxByDefault: this.maxByDefault ?? false,
+    };
   }
 
   public process(input: InputResponse) {

@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class LunaGovernor extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +17,7 @@ export class LunaGovernor extends Card implements IProjectCard {
         production: {megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 3)),
+      requirements: {tag: Tag.EARTH, count: 3},
       metadata: {
         cardNumber: 'C20',
         renderData: CardRenderer.builder((b) => {

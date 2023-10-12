@@ -20,10 +20,8 @@ export class SellSteel extends DeferredAction {
       this.logSale(0);
       return undefined;
     }
-    return new SelectAmount(
-      'Select a number of units of steel to sell',
-      'Sell steel',
-      (unitsSold: number) => {
+    return new SelectAmount('Select a number of units of steel to sell', 'Sell steel', 0, unitsAvailable)
+      .andThen((unitsSold: number) => {
         if (unitsSold > 0) {
           const cashEarned = unitsSold * 3;
           this.player.stock.add(Resource.MEGACREDITS, cashEarned);
@@ -31,9 +29,6 @@ export class SellSteel extends DeferredAction {
         }
         this.logSale(unitsSold);
         return undefined;
-      },
-      0,
-      unitsAvailable,
-    );
+      });
   }
 }

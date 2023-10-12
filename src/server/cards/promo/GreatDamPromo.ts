@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {TileType} from '../../../common/TileType';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
@@ -36,7 +35,7 @@ export class GreatDamPromo extends Card implements IProjectCard {
         production: {energy: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(4)),
+      requirements: {oceans: 4},
       victoryPoints: 1,
     });
   }
@@ -48,11 +47,12 @@ export class GreatDamPromo extends Card implements IProjectCard {
     const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 
-    return new SelectSpace('Select space for tile', availableSpaces, (space: Space) => {
-      player.game.addTile(player, space, {tileType: TileType.GREAT_DAM});
-      space.adjacency = this.adjacencyBonus;
-      return undefined;
-    });
+    return new SelectSpace('Select space for tile', availableSpaces)
+      .andThen((space) => {
+        player.game.addTile(player, space, {tileType: TileType.GREAT_DAM});
+        space.adjacency = this.adjacencyBonus;
+        return undefined;
+      });
   }
 
   private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {

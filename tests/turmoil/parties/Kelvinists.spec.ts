@@ -88,7 +88,7 @@ describe('Kelvinists', function() {
 
     heatOption.cb(4);
     floaterOption.cb(1);
-    action.cb();
+    action.cb(undefined);
 
     expect(player.heat).to.eq(4);
     expect(stormcraft.resourceCount).to.eq(1);

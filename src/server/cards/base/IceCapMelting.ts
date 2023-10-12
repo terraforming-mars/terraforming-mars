@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class IceCapMelting extends Card implements IProjectCard {
@@ -16,7 +15,7 @@ export class IceCapMelting extends Card implements IProjectCard {
         ocean: {},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(2)),
+      requirements: {temperature: 2},
       metadata: {
         cardNumber: '181',
         renderData: CardRenderer.builder((b) => b.oceans(1)),

@@ -1838,6 +1838,9 @@
                 background: linear-gradient(90deg, #f3a10e 0%, #fdea25 45%, #fdea25 55%, #f3a10e 100%);
                 filter: drop-shadow(0px 0px 1px black);
                 box-shadow: 2px 2px 1px;
+                &--narrow {
+                  width: 110px;
+                }
             }
             .card-text-size--XS {
                 font-size: @font_size_tiny;
@@ -2379,7 +2382,8 @@ each(@parties, {
     // the stuff above wasn't contained inside card-content.
     @resource_types: microbe, animal, science, floater, fighter, camp,
       asteroid, disease, preservation, data, syndicate-fleet, cube,
-      venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource;
+      venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
+      clone-trooper;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

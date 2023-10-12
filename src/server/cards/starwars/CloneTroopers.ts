@@ -9,7 +9,6 @@ import {ALL_RESOURCES} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
@@ -25,7 +24,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
       tags: [Tag.SCIENCE],
       cost: 12,
       resourceType: CardResource.CLONE_TROOPER,
-      requirements: CardRequirements.builder((b) => b.oceans(6)),
+      requirements: {oceans: 6},
       victoryPoints: {resourcesHere: {}},
 
       metadata: {
@@ -47,7 +46,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
   public action(player: Player) {
     if (this.resourceCount > 0) {
       const options = new OrOptions();
-      options.options.push(new SelectOption('Add a Clone Trooper to this card', 'Add', () => {
+      options.options.push(new SelectOption('Add a Clone Trooper to this card').andThen(() => {
         player.addResourceTo(this, {log: true});
         return undefined;
       }));
@@ -66,12 +65,11 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
             if (p.stock.get(resource) > 0) {
               // TODO(kberg): Included protected resources
               options.options.push(new SelectOption(
-                newMessage('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(p)),
-                'steal', () => {
-                  p.stock.steal(resource, 1, player);
-                  player.removeResourceFrom(this, 1);
-                  return undefined;
-                }));
+                newMessage('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(p)), 'steal').andThen(() => {
+                p.stock.steal(resource, 1, player);
+                player.removeResourceFrom(this, 1);
+                return undefined;
+              }));
             }
           });
         });

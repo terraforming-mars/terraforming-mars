@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -23,7 +22,7 @@ export class FloatingHabs extends ActionCard implements IActionCard {
         addResourcesToAnyCard: {type: CardResource.FLOATER, count: 1, autoSelect: true},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      requirements: {tag: Tag.SCIENCE, count: 2},
       metadata: {
         cardNumber: '225',
         renderData: CardRenderer.builder((b) => {

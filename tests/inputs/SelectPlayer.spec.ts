@@ -18,13 +18,13 @@ describe('SelectPlayer', function() {
   });
 
   it('Simple - Player by id', function() {
-    const selectPlayer = new SelectPlayer([players[0], players[1]], '', '', cb);
+    const selectPlayer = new SelectPlayer([players[0], players[1]], '').andThen(cb);
     selectPlayer.process({type: 'player', player: players[0].color});
     expect(selected).eq(players[0]);
   });
 
   it('Cannot select unavailable player', function() {
-    const selectPlayer = new SelectPlayer([players[0], players[1]], '', '', cb);
+    const selectPlayer = new SelectPlayer([players[0], players[1]], '').andThen(cb);
     expect(() => selectPlayer.process({type: 'player', player: players[2].color}))
       .to.throw(Error, /Player not available/);
   });

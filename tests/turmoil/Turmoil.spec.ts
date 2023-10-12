@@ -36,6 +36,7 @@ import {DarksideMeteorBombardment} from '../../src/server/cards/moon/DarksideMet
 import {LunaStagingStation} from '../../src/server/cards/moon/LunaStagingStation';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
+import {testGame} from '../TestGame';
 
 describe('Turmoil', function() {
   let player: TestPlayer;
@@ -44,12 +45,9 @@ describe('Turmoil', function() {
   let turmoil: Turmoil;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-
-    game = Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
+    [game, player, player2] = testGame(2, {turmoilExtension: true});
     game.phase = Phase.ACTION;
-    turmoil = game.turmoil!;
+    turmoil = Turmoil.getTurmoil(game);
     // Eliminate the flaky cases where the current global event sends delegates to
     // parties, changing the dominant party outcome.
     turmoil.parties.forEach((p) => p.delegates.clear());

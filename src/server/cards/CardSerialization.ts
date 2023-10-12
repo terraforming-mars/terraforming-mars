@@ -4,11 +4,15 @@ import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
+import {CardType} from '../../common/cards/CardType';
 
 export function serializeProjectCard(card: IProjectCard): SerializedCard {
   const serialized: SerializedCard = {
     name: card.name,
   };
+  if (card.type === CardType.PROXY) {
+    return serialized;
+  }
   if (card.bonusResource !== undefined) {
     serialized.bonusResource = card.bonusResource;
   }
@@ -35,6 +39,9 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
       serialized.generationUsed = card.generationUsed;
     }
   }
+  if (card.data !== undefined) {
+    serialized.data = card.data;
+  }
   return serialized;
 }
 
@@ -45,6 +52,9 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
   }
   if (element.resourceCount !== undefined) {
     card.resourceCount = element.resourceCount;
+  }
+  if (card.hasOwnProperty('data')) {
+    card.data = element.data;
   }
   if (isICloneTagCard(card) && element.cloneTag !== undefined) {
     card.cloneTag = element.cloneTag;

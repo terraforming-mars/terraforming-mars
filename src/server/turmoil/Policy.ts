@@ -11,10 +11,14 @@ export type PolicyId = `${Party}${Suffix}`
 export interface Policy {
   id: PolicyId;
   description: string | ((player: IPlayer | undefined) => string);
-  isDefault: boolean;
-  onTilePlaced?: (player: IPlayer, space: Space) => void;
-  onCardPlayed?: (player: IPlayer, card: IProjectCard) => void;
-  action?: (player: IPlayer) => PlayerInput | undefined;
-  canAct?: (player: IPlayer) => boolean;
-  apply?: (game: IGame) => void;
+  onTilePlaced?(player: IPlayer, space: Space): void;
+  onCardPlayed?(player: IPlayer, card: IProjectCard): void;
+  action?(player: IPlayer): PlayerInput | undefined;
+  canAct?(player: IPlayer): boolean;
+  onPolicyStart?(game: IGame): void;
+  onPolicyEnd?(game: IGame): void;
+}
+
+export function policyDescription(policy: Policy, player: IPlayer | undefined): string {
+  return typeof(policy.description) === 'string' ? policy.description : policy.description(player);
 }

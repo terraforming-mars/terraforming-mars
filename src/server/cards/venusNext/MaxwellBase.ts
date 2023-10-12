@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -24,7 +23,7 @@ export class MaxwellBase extends ActionCard implements IActionCard {
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.venus(12)),
+      requirements: {venus: 12},
       victoryPoints: 3,
       behavior: {
         production: {energy: -1},

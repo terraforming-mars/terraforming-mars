@@ -23,7 +23,7 @@ export class HeadStart extends PreludeCard {
           b.steel(2).br;
           b.text('GAIN 2 STEEL.', Size.TINY).br;
           b.megacredits(0, {questionMark: true}).br;
-          b.text('GAIN 2 MC PER PROJECT CARD YOU HAVE IN HAND.', Size.TINY, true, false).br;
+          b.text('GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.', Size.TINY, true, false).br;
           b.arrow().arrow().br;
           b.text('IMMEDIATELY TAKE 2 ACTIONS.', Size.TINY, true, false).br;
         }),

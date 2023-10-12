@@ -6,7 +6,8 @@ import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {TITLES} from '../../inputs/titles';
 export const ACTION_COST = 3;
 export class UnitedNationsMarsInitiative extends Card implements IActionCard, ICorporationCard {
   constructor() {
@@ -32,14 +33,24 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, IC
       },
     });
   }
-  public canAct(player: IPlayer): boolean {
-    return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford({cost: ACTION_COST, tr: {tr: 1}});
+
+  public data = {
+    lastGenerationIncreasedTR: -1,
+  };
+
+  onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer): void {
+    if (player === cardOwner) {
+      this.data.lastGenerationIncreasedTR = player.game.generation;
+    }
   }
+
+  public canAct(player: IPlayer): boolean {
+    return this.data.lastGenerationIncreasedTR === player.game.generation && player.canAfford({cost: ACTION_COST, tr: {tr: 1}});
+  }
+
   public action(player: IPlayer) {
-    player.payMegacreditsDeferred(
-      3,
-      'Select how to pay for UNMI action.',
-      () => player.increaseTerraformRating());
+    player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
+      .andThen(() => player.increaseTerraformRating());
     return undefined;
   }
 }

@@ -37,10 +37,11 @@ export class HuygensObservatory extends Card implements IProjectCard {
   }
 
   private trade(player: IPlayer, colonies: Array<IColony>) {
-    return new SelectColony('Select colony tile to trade with for free', 'Select', colonies, (colony: IColony) => {
-      colony.trade(player);
-      return undefined;
-    });
+    return new SelectColony('Select colony tile to trade with for free', 'Select', colonies)
+      .andThen((colony) => {
+        colony.trade(player);
+        return undefined;
+      });
   }
 
   private tryToTrade(player: IPlayer) {
@@ -64,8 +65,8 @@ export class HuygensObservatory extends Card implements IProjectCard {
         new SelectColony(
           'Select a colony tile to recall a trade fleet from',
           'OK',
-          visitedColonies,
-          (colony: IColony) => {
+          visitedColonies)
+          .andThen((colony) => {
             game.log(
               '${0} is reusing a trade fleet from ${1}',
               (b) => b.player(player).colony(colony));
@@ -78,7 +79,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
     }
     if (hasFreeTradeFleet) {
       if (orOptions.options.length === 1) {
-        orOptions.options.push(new SelectOption('Use an available trade fleet', 'OK', () => {
+        orOptions.options.push(new SelectOption('Use an available trade fleet', 'OK').andThen(() => {
           game.defer(new SimpleDeferredAction(player, () => tradeInput));
           return undefined;
         }));
@@ -104,8 +105,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
       game.defer(new BuildColony(player, {
         allowDuplicate: true,
         title: 'Select colony for Huygens Observatory',
-        cb: () => this.tryToTrade(player),
-      }));
+      })).andThen(() => this.tryToTrade(player));
     } else {
       game.defer(new SimpleDeferredAction(player, () => {
         this.tryToTrade(player);

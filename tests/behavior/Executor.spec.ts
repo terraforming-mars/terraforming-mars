@@ -496,7 +496,7 @@ describe('Executor', () => {
     const andOptions = cast(player.popWaitingFor(), AndOptions);
     andOptions.options[0].cb(0); // heat
     andOptions.options[1].cb(2); // floaters
-    andOptions.cb();
+    andOptions.cb(undefined);
 
     expect(stormcraft.resourceCount).eq(0);
   });

@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -19,7 +18,7 @@ export class SponsoredMohole extends Card implements IProjectCard {
         production: {heat: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
+      requirements: {party: PartyName.KELVINISTS},
       metadata: {
         cardNumber: 'T13',
         renderData: CardRenderer.builder((b) => {

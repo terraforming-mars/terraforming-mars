@@ -22,7 +22,7 @@ export type DatabaseTestDescriptor = {
     markFinished: boolean,
     moreCleaning: boolean,
   }>,
-  otherTests?: (dbFunction: () => ITestDatabase) => void,
+  otherTests?(dbFunction: () => ITestDatabase): void,
 };
 
 export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {

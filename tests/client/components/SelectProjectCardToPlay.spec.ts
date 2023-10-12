@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
@@ -44,6 +44,10 @@ describe('SelectProjectCardToPlay', () => {
           }],
           id: 'foo',
           selfReplicatingRobotCards: [],
+          thisPlayer: {
+            steel: 0,
+            tableau: [],
+          },
         },
         playerinput: {
           title: 'foo',
@@ -54,6 +58,7 @@ describe('SelectProjectCardToPlay', () => {
             name: CardName.BIRDS,
             reserveUnits: {},
           }],
+          paymentOptions: {},
         },
         onsave: () => {},
         showsave: true,
@@ -527,7 +532,7 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 7, megaCredits: 3}));
   });
 
-  it('Max includes Stormcraft floaters', async () => {
+  it('Max heat includes Stormcraft floaters', async () => {
     // Birds will cost 10. Player has 10 MC, 3 heat, and 1 floaters. It also is reserving one unit of heat.
     //
     // Initial setup will be that it selects 10MC.
@@ -609,7 +614,7 @@ describe('SelectProjectCardToPlay', () => {
     cardName: CardName,
     cardCost: number,
     playerFields: Partial<PublicPlayerModel>,
-    playerInputFields: Partial<PlayerInputModel>,
+    playerInputFields: Partial<SelectProjectCardToPlayModel>,
     reserveUnits: Units | undefined = undefined) {
     const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
@@ -624,18 +629,27 @@ describe('SelectProjectCardToPlay', () => {
       id: 'playerid-foo',
       thisPlayer: thisPlayer as PublicPlayerModel,
     };
-    const playerInput: Partial<PlayerInputModel> = {
+    const playerInput: SelectProjectCardToPlayModel = {
+      type: 'projectCard',
       title: 'foo',
+      buttonLabel: 'bar',
       cards: [{
         name: cardName,
         resources: undefined,
         calculatedCost: cardCost,
       }],
+      paymentOptions: {},
+      floaters: 0,
+      graphene: 0,
+      kuiperAsteroids: 0,
+      lunaArchivesScience: 0,
+      microbes: 0,
+      seeds: 0,
+      ...playerInputFields,
     };
     if (reserveUnits !== undefined) {
       playerInput.cards![0].reserveUnits = reserveUnits;
     }
-    Object.assign(playerInput, playerInputFields);
 
     return mount(SelectProjectCardToPlay, {
       localVue: getLocalVue(),

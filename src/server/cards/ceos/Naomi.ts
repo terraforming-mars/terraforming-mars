@@ -37,11 +37,11 @@ export class Naomi extends CeoCard {
 
     activeColonies.forEach((colony) => {
       game.defer(new SimpleDeferredAction(player, () => new OrOptions(
-        new SelectOption('Move the ' + colony.name + ' tile track marker to its HIGHEST value', 'Select', () => {
+        new SelectOption('Move the ' + colony.name + ' tile track marker to its HIGHEST value').andThen(() => {
           colony.trackPosition = MAX_COLONY_TRACK_POSITION;
           return undefined;
         }),
-        new SelectOption('Move the ' + colony.name + ' tile track marker to its LOWEST value', 'Select', () => {
+        new SelectOption('Move the ' + colony.name + ' tile track marker to its LOWEST value').andThen(() => {
           colony.trackPosition = colony.colonies.length;
           return undefined;
         }),

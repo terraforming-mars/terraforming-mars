@@ -5,7 +5,6 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
@@ -17,7 +16,7 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
       name: CardName.GREAT_ESCARPMENT_CONSORTIUM,
       cost: 6,
 
-      requirements: CardRequirements.builder((b) => b.production(Resource.STEEL)),
+      requirements: {production: Resource.STEEL, count: 1},
       metadata: {
         cardNumber: '061',
         renderData: CardRenderer.builder((b) => {

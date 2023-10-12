@@ -77,15 +77,16 @@ export class ColoniesHandler {
       }
     }
 
-    const selectColonyTile = new SelectColony(title, 'Add colony tile', colonyTiles, (colonyTile: IColony) => {
-      game.colonies.push(colonyTile);
-      game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-      game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colonyTile));
-      maybeActivateNewColonyTile(colonyTile, game);
-      inplaceRemove(game.discardedColonies, colonyTile);
-      options?.cb?.(colonyTile);
-      return undefined;
-    });
+    const selectColonyTile = new SelectColony(title, 'Add colony tile', colonyTiles)
+      .andThen((colonyTile) => {
+        game.colonies.push(colonyTile);
+        game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colonyTile));
+        maybeActivateNewColonyTile(colonyTile, game);
+        inplaceRemove(game.discardedColonies, colonyTile);
+        options?.cb?.(colonyTile);
+        return undefined;
+      });
     selectColonyTile.showTileOnly = true;
     player.defer(selectColonyTile);
   }

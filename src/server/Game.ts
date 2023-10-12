@@ -30,7 +30,7 @@ import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
-import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
+import {AndThen, DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -70,6 +70,9 @@ import {addDays, dayStringToDays} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
 import {IGame, Score} from './IGame';
 import {MarsBoard} from './boards/MarsBoard';
+import {UnderworldData} from './underworld/UnderworldData';
+import {UnderworldExpansion} from './underworld/UnderworldExpansion';
+import {SpaceType} from '../common/boards/SpaceType';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -88,6 +91,7 @@ export class Game implements IGame, Logger {
   public undoCount: number = 0; // Each undo increases it
   public inputsThisRound = 0;
   public resettable: boolean = false;
+  public globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>> = [];
 
   public generation: number = 1;
   public phase: Phase = Phase.RESEARCH;
@@ -130,6 +134,7 @@ export class Game implements IGame, Logger {
   public aresData: AresData | undefined;
   public moonData: MoonData | undefined;
   public pathfindersData: PathfindersData | undefined;
+  public underworldData: UnderworldData = UnderworldExpansion.initializeGameWithoutUnderworld();
 
   // Card-specific data
   // Mons Insurance promo corp
@@ -142,14 +147,15 @@ export class Game implements IGame, Logger {
   public gagarinBase: Array<SpaceId> = [];
   // St. Joseph of Cupertino Mission
   stJosephCathedrals: Array<SpaceId> = [];
-
-  // The set of tags available in this game.
-  public readonly tags: ReadonlyArray<Tag>;
-
+  // Mars Nomads
+  nomadSpace: SpaceId | undefined = undefined;
   // Trade Embargo
   public tradeEmbargo: boolean = false;
   // Behold The Emperor
   public beholdTheEmperor: boolean = false;
+
+  // The set of tags available in this game.
+  public readonly tags: ReadonlyArray<Tag>;
 
   private constructor(
     id: GameId,
@@ -239,7 +245,6 @@ export class Game implements IGame, Logger {
       gameOptions.randomMA = RandomMAOptionType.NONE;
 
       players[0].setTerraformRating(14);
-      players[0].terraformRatingAtGenerationStart = 14;
     }
 
     const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
@@ -266,6 +271,11 @@ export class Game implements IGame, Logger {
     // Add Turmoil stuff
     if (gameOptions.turmoilExtension) {
       game.turmoil = Turmoil.newInstance(game, gameOptions.politicalAgendasExtension);
+    }
+
+    // Must configure this before solo placement.
+    if (gameOptions.underworldExpansion) {
+      game.underworldData = UnderworldExpansion.initialize(rng);
     }
 
     // and 2 neutral cities and forests on board
@@ -399,10 +409,12 @@ export class Game implements IGame, Logger {
       fundedAwards: serializeFundedAwards(this.fundedAwards),
       gagarinBase: this.gagarinBase,
       stJosephCathedrals: this.stJosephCathedrals,
+      nomadSpace: this.nomadSpace,
       gameAge: this.gameAge,
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
       generation: this.generation,
+      globalsPerGeneration: this.globalsPerGeneration,
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
@@ -422,6 +434,7 @@ export class Game implements IGame, Logger {
       syndicatePirateRaider: this.syndicatePirateRaider,
       temperature: this.temperature,
       tradeEmbargo: this.tradeEmbargo,
+      underworldData: this.underworldData,
       undoCount: this.undoCount,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [
@@ -461,11 +474,12 @@ export class Game implements IGame, Logger {
     return ids.map((id) => this.getPlayerById(id));
   }
 
-  public defer(action: DeferredAction, priority?: Priority): void {
+  public defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T> {
     if (priority !== undefined) {
       action.priority = priority;
     }
     this.deferredActions.push(action);
+    return action;
   }
 
   public milestoneClaimed(milestone: IMilestone): boolean {
@@ -725,8 +739,6 @@ export class Game implements IGame, Logger {
       this.syndicatePirateRaider = undefined;
       // Trade embargo hook.
       this.tradeEmbargo = false;
-      // Behold The Emperor hook
-      this.beholdTheEmperor = false;
     }
   }
 
@@ -735,33 +747,54 @@ export class Game implements IGame, Logger {
 
     Turmoil.ifTurmoil(this, (turmoil) => {
       turmoil.endGeneration(this);
+      // Behold The Emperor hook
+      this.beholdTheEmperor = false;
     });
+
+    UnderworldExpansion.endGeneration(this);
 
     // turmoil.endGeneration might have added actions.
     if (this.deferredActions.length > 0) {
       this.deferredActions.runAll(() => this.goToDraftOrResearch());
     } else {
+      // TODO(kberg): Move this to the start of goToDraftOrResearch
       this.phase = Phase.INTERGENERATION;
+      // TODO(kberg): Rename to startNewGeneration
       this.goToDraftOrResearch();
     }
   }
 
-  private updateVPbyGeneration(): void {
+  private updatePlayerVPForTheGeneration(): void {
     this.getPlayers().forEach((player) => {
       player.victoryPointsByGeneration.push(player.getVictoryPoints().total);
     });
   }
 
+  private updateGlobalsForTheGeneration(): void {
+    if (!Array.isArray(this.globalsPerGeneration)) {
+      this.globalsPerGeneration = [];
+    }
+    this.globalsPerGeneration.push({});
+    const entry = this.globalsPerGeneration[this.globalsPerGeneration.length - 1];
+    entry[GlobalParameter.TEMPERATURE] = this.temperature;
+    entry[GlobalParameter.OXYGEN] = this.oxygenLevel;
+    entry[GlobalParameter.OCEANS] = this.board.getOceanSpaces().length;
+    if (this.gameOptions.venusNextExtension) {
+      entry[GlobalParameter.VENUS] = this.venusScaleLevel;
+    }
+    MoonExpansion.ifMoon(this, (moonData) => {
+      entry[GlobalParameter.MOON_HABITAT_RATE] = moonData.habitatRate;
+      entry[GlobalParameter.MOON_MINING_RATE] = moonData.miningRate;
+      entry[GlobalParameter.MOON_LOGISTICS_RATE] = moonData.logisticRate;
+    });
+  }
+
   private goToDraftOrResearch() {
-    this.updateVPbyGeneration();
+    this.updatePlayerVPForTheGeneration();
+    this.updateGlobalsForTheGeneration();
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
     this.incrementFirstPlayer();
-
-    this.players.forEach((player) => {
-      player.terraformRatingAtGenerationStart = player.getTerraformRating();
-      player.hasIncreasedTerraformRatingThisGeneration = false;
-    });
 
     if (this.gameOptions.draftVariant) {
       this.gotoDraftPhase();
@@ -1015,7 +1048,8 @@ export class Game implements IGame, Logger {
         this.donePlayers.add(player.id);
       }
     }
-    this.updateVPbyGeneration();
+    this.updatePlayerVPForTheGeneration();
+    this.updateGlobalsForTheGeneration();
     this.gotoEndGame();
   }
 
@@ -1148,7 +1182,7 @@ export class Game implements IGame, Logger {
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onTemperatureChange(this, aresData);
     });
-
+    UnderworldExpansion.onTemperatureChange(this, steps);
     return undefined;
   }
 
@@ -1256,6 +1290,12 @@ export class Game implements IGame, Logger {
     AresHandler.ifAres(this, () => {
       AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
     });
+
+    if (this.gameOptions.underworldExpansion) {
+      if (space.spaceType !== SpaceType.COLONY && space.player === player) {
+        UnderworldExpansion.identify(this, space, player);
+      }
+    }
   }
 
   public simpleAddTile(player: IPlayer, space: Space, tile: Tile) {
@@ -1375,7 +1415,8 @@ export class Game implements IGame, Logger {
     });
   }
 
-  public removeTile(space: Space): void {
+  public removeTile(spaceId: SpaceId): void {
+    const space = this.board.getSpace(spaceId);
     space.tile = undefined;
     space.player = undefined;
   }
@@ -1469,14 +1510,14 @@ export class Game implements IGame, Logger {
     if (cardCount === 1) {
       const card = this.projectDeck.draw(this);
       this.projectDeck.discard(card);
-      this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
+      this.log('Drew and discarded ${0} to place a ${1}', (b) => b.card(card, {cost: true}).tileType(toPlace));
       return card.cost;
     } else {
       const card1 = this.projectDeck.draw(this);
       this.projectDeck.discard(card1);
       const card2 = this.projectDeck.draw(this);
       this.projectDeck.discard(card2);
-      this.log('Drew and discarded ${0} (cost ${1}) and ${2} (cost ${3}) to place a ${4}', (b) => b.card(card1).number(card1.cost).card(card2).number(card2.cost).tileType(toPlace));
+      this.log('Drew and discarded ${0} and ${1} to place a ${2}', (b) => b.card(card1, {cost: true}).card(card2, {cost: true}).tileType(toPlace));
       return card1.cost + card2.cost;
     }
   }
@@ -1582,6 +1623,9 @@ export class Game implements IGame, Logger {
       game.pathfindersData = PathfindersData.deserialize(d.pathfindersData);
     }
 
+    if (d.underworldData !== undefined) {
+      game.underworldData = d.underworldData;
+    }
     game.passedPlayers = new Set<PlayerId>(d.passedPlayers);
     game.donePlayers = new Set<PlayerId>(d.donePlayers);
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
@@ -1610,11 +1654,13 @@ export class Game implements IGame, Logger {
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
     game.gagarinBase = d.gagarinBase;
-    // TODO(kberg): remove ?? [] by 2023-11-01
+    // TODO(kberg): remove ?? [] after 2023-11-01
     game.stJosephCathedrals = d.stJosephCathedrals ?? [];
+    game.nomadSpace = d.nomadSpace;
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
-
+    // TODO(kberg): remove ?? {} after 2023-11-30
+    game.globalsPerGeneration = d.globalsPerGeneration ?? [];
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {

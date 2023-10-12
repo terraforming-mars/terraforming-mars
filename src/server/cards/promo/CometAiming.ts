@@ -62,13 +62,12 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     const addAsteroidToCard = new SelectCard(
       'Select card to add 1 asteroid',
       'Add asteroid',
-      asteroidCards,
-      ([card]) => {
+      asteroidCards)
+      .andThen(([card]) => {
         player.pay(Payment.of({titanium: 1}));
         player.addResourceTo(card, {log: true});
         return undefined;
-      },
-    );
+      });
 
     const spendAsteroidResource = () => {
       this.resourceCount--;
@@ -87,11 +86,11 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     const availableActions: Array<PlayerInput> = [];
 
     if (this.canPlaceOcean(player)) {
-      availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid', spendAsteroidResource));
+      availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid').andThen(spendAsteroidResource));
     }
 
     if (asteroidCards.length === 1) {
-      availableActions.push(new SelectOption('Spend 1 titanium to gain 1 asteroid resource', 'Spend titanium', addAsteroidToSelf));
+      availableActions.push(new SelectOption('Spend 1 titanium to gain 1 asteroid resource', 'Spend titanium').andThen(addAsteroidToSelf));
     } else {
       availableActions.push(addAsteroidToCard);
     }
@@ -99,7 +98,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     if (availableActions.length === 1) {
       const action = availableActions[0];
 
-      if (action instanceof SelectOption) return action.cb();
+      if (action instanceof SelectOption) return action.cb(undefined);
       return availableActions[0]; // SelectCard
     }
 

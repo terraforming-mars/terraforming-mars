@@ -19,7 +19,7 @@
     <template v-if="space.cathedral === true">
       <div class='board-cube--cathedral'></div>
     </template>
-    <template v-if="isNomadSpace">
+    <template v-if="space.nomads === true">
       <div class='board-cube--nomad'></div>
     </template>
     </div>
@@ -33,7 +33,6 @@ import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
 import {TileView} from '@/client/components/board/TileView';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {TileType} from '@/common/TileType';
 
 export default Vue.extend({
   name: 'board-space',
@@ -71,9 +70,6 @@ export default Vue.extend({
     },
     restricted(): boolean {
       return this.space.bonus.includes(SpaceBonus.RESTRICTED);
-    },
-    isNomadSpace(): boolean {
-      return this.space.tileType === TileType.MARS_NOMADS;
     },
   },
 });

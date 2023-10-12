@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class EventAnalysts extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +18,7 @@ export class EventAnalysts extends Card implements IProjectCard {
         turmoil: {influenceBonus: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
+      requirements: {party: PartyName.SCIENTISTS},
       metadata: {
         description: 'Requires that Scientists are ruling or that you have 2 delegates there.',
         cardNumber: 'T05',

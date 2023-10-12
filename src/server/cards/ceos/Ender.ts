@@ -1,12 +1,10 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
+import {DrawCards} from '../../deferredActions/DrawCards';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
-import {DrawCards} from '../../deferredActions/DrawCards';
-import {SelectAmount} from '../../inputs/SelectAmount';
 
 export class Ender extends CeoCard {
   constructor() {
@@ -29,20 +27,11 @@ export class Ender extends CeoCard {
     return player.cardsInHand.length > 0;
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): undefined {
     this.isDisabled = true;
     const max = Math.min(player.cardsInHand.length, player.game.generation * 2);
-    // TODO(d-little): Replace with SelectCard.
-    return new SelectAmount(
-      'Select number of cards to discard',
-      'Discard cards',
-      (amount: number) => {
-        player.game.defer(new DiscardCards(player, amount), Priority.DISCARD_AND_DRAW);
-        player.game.defer(DrawCards.keepAll(player, amount));
-        return undefined;
-      },
-      1,
-      max,
-    );
+    player.game.defer(new DiscardCards(player, 0, max), Priority.DISCARD_AND_DRAW)
+      .andThen((cards) => player.game.defer(DrawCards.keepAll(player, cards.length)));
+    return undefined;
   }
 }

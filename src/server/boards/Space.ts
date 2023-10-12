@@ -4,16 +4,31 @@ import {Tile} from '../Tile';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {SpaceId} from '../../common/Types';
 import {IPlayer} from '../IPlayer';
+import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
 
 export type Space = {
-    id: SpaceId;
-    spaceType: SpaceType;
-    tile?: Tile;
-    player?: IPlayer;
-    bonus: Array<SpaceBonus>;
-    adjacency?: AdjacencyBonus,
-    x: number;
-    y: number;
+  /** The unique ID of this space*/
+  id: SpaceId;
+  /** The type of space: ocean, space colony, etc. */
+  spaceType: SpaceType;
+  /** The tile placed on top of the space. Could be a hazard tile. */
+  tile?: Tile;
+  /** The player who owns this tile. Will show a token, even the neutral player */
+  player?: IPlayer;
+  /** The bonuses granted to a player for placing a tile on this space. */
+  bonus: Array<SpaceBonus>;
+  /** The bonuses granted to players when placing tiles NEXT TO this space. */
+  adjacency?: AdjacencyBonus,
+
+  /** The x-coordinate of this space, or -1 if it is not the main board (e.g. colony) */
+  x: number;
+  /** The y-coordinate of this space, or -1 if it is not the main board (e.g. colony) */
+  y: number;
+
+  /** Optional underworld expansion resource token. */
+  undergroundResources?: UndergroundResourceToken;
+  /** Optional underworld player who excavated this resource token. */
+  excavator?: IPlayer;
 }
 
 export function newSpace(

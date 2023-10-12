@@ -73,10 +73,10 @@ export class Colonies {
     handlers.forEach((handler) => {
       if (handler.canUse()) {
         howToPayForTrade.options.push(new SelectOption(
-          handler.optionText(), '', () => {
-            selected = handler;
-            return undefined;
-          }));
+          handler.optionText()).andThen(() => {
+          selected = handler;
+          return undefined;
+        }));
       }
     });
 
@@ -84,22 +84,16 @@ export class Colonies {
       return undefined;
     }
 
-    const selectColony = new SelectColony('Select colony tile for trade', 'trade', openColonies, (colony: IColony) => {
-      if (selected === undefined) {
-        throw new Error(`Unexpected condition: no trade funding source selected when trading with ${colony.name}.`);
-      }
-      selected.trade(colony);
-      return undefined;
-    });
-
-    const trade = new AndOptions(
-      () => {
+    const selectColony = new SelectColony('Select colony tile for trade', 'trade', openColonies)
+      .andThen((colony) => {
+        if (selected === undefined) {
+          throw new Error(`Unexpected condition: no trade funding source selected when trading with ${colony.name}.`);
+        }
+        selected.trade(colony);
         return undefined;
-      },
-      howToPayForTrade,
-      selectColony,
-    );
+      });
 
+    const trade = new AndOptions(howToPayForTrade, selectColony);
     trade.title = 'Trade with a colony tile';
     trade.buttonLabel = 'Trade';
 
@@ -213,16 +207,11 @@ export class TradeWithMegacredits implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.game.defer(new SelectPaymentDeferred(
-      this.player,
-      this.tradeCost,
-      {
-        title: newMessage('Select how to pay ${0} for colony trade', (b) => b.number(this.tradeCost)),
-        afterPay: () => {
-          this.player.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
-          colony.trade(this.player);
-        },
-      },
-    ));
+    this.player.game.defer(new SelectPaymentDeferred(this.player, this.tradeCost,
+      {title: newMessage('Select how to pay ${0} for colony trade', (b) => b.number(this.tradeCost))}))
+      .andThen(() => {
+        this.player.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
+        colony.trade(this.player);
+      });
   }
 }

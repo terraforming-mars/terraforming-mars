@@ -3,7 +3,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 
 export class RedAppeasement extends Card {
@@ -12,7 +11,7 @@ export class RedAppeasement extends Card {
       name: CardName.RED_APPEASEMENT,
       type: CardType.EVENT,
       cost: 1,
-      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+      requirements: {party: PartyName.REDS},
 
       behavior: {
         production: {megacredits: 2},

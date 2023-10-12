@@ -6,141 +6,30 @@ import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {Resource} from '../../common/Resource';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
-import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
-import {MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_4} from './parties/MarsFirst';
+import {GREENS_POLICY_2, GREENS_POLICY_3} from './parties/Greens';
+import {KELVINISTS_POLICY_4} from './parties/Kelvinists';
+import {MARS_FIRST_POLICY_2} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
-import {SCIENTISTS_POLICY_1} from './parties/Scientists';
-import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
+import {REDS_POLICY_2} from './parties/Reds';
 import {DynamicTRSource} from '../cards/ICard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {TRSource} from '../../common/cards/TRSource';
+import {Policy, policyDescription} from './Policy';
 
 export class TurmoilHandler {
   private constructor() {}
 
-  public static addPlayerAction(player: IPlayer, options: PlayerInput[]): void {
-    // Turmoil Scientists action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.SCIENTISTS)) {
-      const scientistsPolicy = SCIENTISTS_POLICY_1;
-
-      if (scientistsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            scientistsPolicy.description,
-            'Pay',
-            () => scientistsPolicy.action(player),
-          ),
-        );
-      }
+  public static partyAction(player: IPlayer): PlayerInput | undefined {
+    const turmoil = player.game.turmoil;
+    if (turmoil === undefined) {
+      return undefined;
     }
-
-    // Turmoil Kelvinists action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS)) {
-      const kelvinistsPolicy = KELVINISTS_POLICY_1;
-
-      if (kelvinistsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            kelvinistsPolicy.description(player),
-            'Pay',
-            () => kelvinistsPolicy.action(player),
-          ),
-        );
-      }
+    const policy: Policy = turmoil.rulingPolicy();
+    if (policy.canAct?.(player)) {
+      return new SelectOption(policyDescription(policy, player), 'Pay').andThen(() => policy.action?.(player));
     }
-
-    // Turmoil Kelvinists action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, 'kp03')) {
-      const kelvinistsPolicy = KELVINISTS_POLICY_3;
-
-      if (kelvinistsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            kelvinistsPolicy.description,
-            'Pay',
-            () => kelvinistsPolicy.action(player),
-          ),
-        );
-      }
-    }
-
-    // Turmoil Greens action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp04')) {
-      const greensPolicy = GREENS_POLICY_4;
-
-      if (greensPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            greensPolicy.description,
-            'Pay',
-            () => greensPolicy.action(player),
-          ),
-        );
-      }
-    }
-
-    // Turmoil Mars First action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mfp04')) {
-      const marsFirstPolicy = MARS_FIRST_POLICY_4;
-
-      if (marsFirstPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            marsFirstPolicy.description,
-            'Pay',
-            () => marsFirstPolicy.action(player),
-          ),
-        );
-      }
-    }
-
-    // Turmoil Unity action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.UNITY, 'up02')) {
-      const unityPolicy = UNITY_POLICY_2;
-
-      if (unityPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            unityPolicy.description,
-            'Pay',
-            () => unityPolicy.action(player),
-          ),
-        );
-      }
-    }
-
-    // Turmoil Unity action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.UNITY, 'up03')) {
-      const unityPolicy = UNITY_POLICY_3;
-
-      if (unityPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            unityPolicy.description,
-            'Pay',
-            () => unityPolicy.action(player),
-          ),
-        );
-      }
-    }
-
-    // Turmoil Reds action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp03')) {
-      const redsPolicy = REDS_POLICY_3;
-
-      if (redsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            redsPolicy.description,
-            'Pay',
-            () => redsPolicy.action(player),
-          ),
-        );
-      }
-    }
+    return undefined;
   }
 
   public static applyOnCardPlayedEffect(player: IPlayer, selectedCard: IProjectCard): void {

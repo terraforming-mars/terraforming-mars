@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -21,7 +20,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
         addResourcesToAnyCard: {count: 2, type: CardResource.MICROBE},
       },
 
-      requirements: CardRequirements.builder((b) => b.colonies().cities()),
+      requirements: [{colonies: 1}, {cities: 1}],
       metadata: {
         cardNumber: 'C48',
         renderData: CardRenderer.builder((b) => {

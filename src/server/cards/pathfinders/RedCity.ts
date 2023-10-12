@@ -4,7 +4,6 @@ import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {TileType} from '../../../common/TileType';
@@ -25,7 +24,7 @@ export class RedCity extends Card implements IProjectCard {
         production: {energy: -1, megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+      requirements: {party: PartyName.REDS},
       victoryPoints: 'special',
 
       metadata: {
@@ -52,10 +51,11 @@ export class RedCity extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
-      player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
-      return undefined;
-    });
+    return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player))
+      .andThen((space) => {
+        player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
+        return undefined;
+      });
   }
 
   public override getVictoryPoints(player: IPlayer): number {

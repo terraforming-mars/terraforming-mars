@@ -12,6 +12,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectPayment} from '../../inputs/SelectPayment';
+import {TITLES} from '../../inputs/titles';
 
 export class StJosephOfCupertinoMission extends Card implements IActionCard {
   constructor() {
@@ -48,28 +49,32 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
       return undefined;
     }
 
-    player.game.defer(new SelectPaymentDeferred(player, 5, {canUseSteel: true, title: 'Select how to pay for St. Joseph of Cupertino Mission action', afterPay: () => {
-      player.defer(new SelectSpace('Select new cathedral space', cities, (space) => {
-        player.game.stJosephCathedrals.push(space.id);
-        const spaceOwner = space.player;
-        if (spaceOwner === undefined || spaceOwner.color === 'neutral') {
-          return undefined;
-        }
-        if (spaceOwner.canAfford(2)) {
-          spaceOwner.defer(
-            new OrOptions(
-              new SelectOption('Do not buy a card', undefined, () => undefined),
-              new SelectPayment('Pay 2 M€ to draw a card', 2, {heat: player.canUseHeatAsMegaCredits}, (payment) => {
-                // TODO(kberg): pay should have an afterPay for the heat / floaters costs.
-                spaceOwner.pay(payment);
-                spaceOwner.drawCard();
-                return undefined;
-              }),
-            ));
-        }
-        return undefined;
-      }));
-    }}));
+    player.game.defer(new SelectPaymentDeferred(player, 5, {canUseSteel: true, title: TITLES.payForCardAction(this.name)}))
+      .andThen(() => {
+        // TODO(kberg): get player.defer to return AndThen<Space>
+        player.defer(new SelectSpace('Select new cathedral space', cities)
+          .andThen((space) => {
+            player.game.stJosephCathedrals.push(space.id);
+            const spaceOwner = space.player;
+            if (spaceOwner === undefined || spaceOwner.color === 'neutral') {
+              return undefined;
+            }
+            if (spaceOwner.canAfford(2)) {
+              spaceOwner.defer(
+                new OrOptions(
+                  new SelectOption('Do not buy a card'),
+                  new SelectPayment('Pay 2 M€ to draw a card', 2, {})
+                    .andThen((payment) => {
+                    // TODO(kberg): pay should have an afterPay for the heat / floaters costs.
+                      spaceOwner.pay(payment);
+                      spaceOwner.drawCard();
+                      return undefined;
+                    }),
+                ));
+            }
+            return undefined;
+          }));
+      });
     return undefined;
   }
 

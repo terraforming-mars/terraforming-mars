@@ -14,6 +14,7 @@ export interface ViewModel {
   players: Array<PublicPlayerModel>;
   id?: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
+  runId: string;
 }
 
 // 'off': Resources (or production) are unprotected.
@@ -65,7 +66,7 @@ export type PublicPlayerModel = {
   titaniumValue: number;
   tradesThisGeneration: number;
   victoryPointsBreakdown: IVictoryPointsBreakdown;
-  victoryPointsByGeneration: Array<number>
+  victoryPointsByGeneration: Array<number>;
 }
 
 /** A player's view of the game, including their secret information. */

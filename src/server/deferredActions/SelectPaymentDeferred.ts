@@ -4,6 +4,7 @@ import {Payment} from '../../common/inputs/Payment';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
 import {Message} from '../../common/logs/Message';
+import {newMessage} from '../logs/MessageBuilder';
 
 export type Options = {
   canUseSteel?: boolean;
@@ -14,10 +15,9 @@ export type Options = {
   canUseAsteroids?: boolean;
   canUseSpireScience?: boolean,
   title?: string | Message;
-  afterPay?: () => void;
 }
 
-export class SelectPaymentDeferred extends DeferredAction {
+export class SelectPaymentDeferred extends DeferredAction<Payment> {
   constructor(
     player: IPlayer,
     public amount: number,
@@ -64,13 +64,14 @@ export class SelectPaymentDeferred extends DeferredAction {
       if (this.player.megaCredits < this.amount) {
         throw new Error(`Player does not have ${this.amount} M€`);
       }
-      this.player.pay(Payment.of({megaCredits: this.amount}));
-      this.options.afterPay?.();
+      const payment = Payment.of({megaCredits: this.amount});
+      this.player.pay(payment);
+      this.cb(payment);
       return undefined;
     }
 
     return new SelectPayment(
-      this.options.title || 'Select how to spend ' + this.amount + ' M€',
+      this.options.title || newMessage('Select how to spend ${0} M€', (b) => b.number(this.amount)),
       this.amount,
       {
         steel: this.options.canUseSteel || false,
@@ -81,12 +82,11 @@ export class SelectPaymentDeferred extends DeferredAction {
         spireScience: this.options.canUseSpireScience || false,
         lunaTradeFederationTitanium: this.player.canUseTitaniumAsMegacredits,
         kuiperAsteroids: this.options.canUseAsteroids || false,
-      },
-      (payment: Payment) => {
+      })
+      .andThen((payment) => {
         this.player.pay(payment);
-        this.options.afterPay?.();
+        this.cb(payment);
         return undefined;
-      },
-    );
+      });
   }
 }

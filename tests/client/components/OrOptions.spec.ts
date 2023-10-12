@@ -17,17 +17,18 @@ describe('OrOptions', function() {
           id: 'foo',
         },
         playerinput: {
+          type: 'or',
           title: 'foo',
           options: [{
-            inputType: 'option',
+            type: 'card',
             title: 'hide this',
             showOnlyInLearnerMode: true,
           }, {
-            inputType: 'option',
+            type: 'option',
             title: 'select a',
           }, {
             title: 'select b',
-            inputType: 'option',
+            type: 'option',
           }],
         },
         onsave: function(data: InputResponse) {
@@ -46,7 +47,7 @@ describe('OrOptions', function() {
     }).at(0).trigger('click');
     expect(savedData).to.deep.eq({type: 'or', index: 1, response: {type: 'option'}});
   });
-  it('moves and selects 2nd option', async function() {
+  it('clicks 2nd option', async function() {
     let savedData: InputResponse | undefined;
     const component = mount(OrOptions, {
       localVue: getLocalVue(),
@@ -55,13 +56,14 @@ describe('OrOptions', function() {
           id: 'foo',
         },
         playerinput: {
+          type: 'or',
           title: 'foo',
           options: [{
-            inputType: 'option',
+            type: 'option',
             title: 'select a',
           }, {
+            type: 'option',
             title: 'select b',
-            inputType: 'option',
           }],
         },
         onsave: function(data: InputResponse) {

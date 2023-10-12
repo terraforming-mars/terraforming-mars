@@ -10,7 +10,6 @@ import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
 import {played} from '../Options';
@@ -43,7 +42,7 @@ export class EcologicalZone extends Card implements IProjectCard {
       resourceType: CardResource.ANIMAL,
       adjacencyBonus,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.greeneries()),
+      requirements: {greeneries: 1},
       metadata,
     });
   }
@@ -66,16 +65,13 @@ export class EcologicalZone extends Card implements IProjectCard {
       player.addResourceTo(this, {qty: 1, log: true});
     }
 
-    return new SelectSpace(
-      'Select space next to greenery for special tile',
-      this.getAvailableSpaces(player),
-      (requestedSpace: Space) => {
-        player.game.addTile(player, requestedSpace, {
+    return new SelectSpace('Select space next to greenery for special tile', this.getAvailableSpaces(player))
+      .andThen((space) => {
+        player.game.addTile(player, space, {
           tileType: TileType.ECOLOGICAL_ZONE,
         });
-        requestedSpace.adjacency = this.adjacencyBonus;
+        space.adjacency = this.adjacencyBonus;
         return undefined;
-      },
-    );
+      });
   }
 }

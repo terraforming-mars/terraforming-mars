@@ -21,13 +21,13 @@ describe('SelectColony', function() {
   });
 
   it('Simple', function() {
-    const selectColony = new SelectColony('', '', [luna, pluto], cb);
+    const selectColony = new SelectColony('', '', [luna, pluto]).andThen(cb);
     selectColony.process({type: 'colony', colonyName: ColonyName.LUNA});
     expect(selected!.name).eq(luna.name);
   });
 
   it('Cannot select unavailable colony', function() {
-    const selectColony = new SelectColony('', '', [luna, pluto], cb);
+    const selectColony = new SelectColony('', '', [luna, pluto]).andThen(cb);
     selectColony.process({type: 'colony', colonyName: ColonyName.LUNA});
     expect(selected!.name).eq(luna.name);
     expect(() => selectColony.process({type: 'colony', colonyName: ColonyName.ENCELADUS}))

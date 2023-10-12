@@ -1,4 +1,3 @@
-import {ICard} from '../cards/ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
@@ -18,12 +17,11 @@ export class GrantResourceDeferred extends DeferredAction {
     if (this.wild) {
       const cards = this.player.getResourceCards(undefined);
       if (cards.length > 0) {
-        options.options.push(new SelectCard('Add resource to card', 'Add resource', this.player.getResourceCards(undefined),
-          (selected: Array<ICard>) => {
-            this.player.addResourceTo(selected[0], {qty: 1, log: true});
+        options.options.push(new SelectCard('Add resource to card', 'Add resource', this.player.getResourceCards(undefined))
+          .andThen(([card]) => {
+            this.player.addResourceTo(card, {qty: 1, log: true});
             return undefined;
-          },
-        ));
+          }));
         options.title = 'Choose your wild resource bonus.';
       }
     }

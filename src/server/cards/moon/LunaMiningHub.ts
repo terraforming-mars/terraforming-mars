@@ -15,7 +15,7 @@ export class LunaMiningHub extends Card {
       name: CardName.LUNA_MINING_HUB,
       type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
-      cost: 16,
+      cost: 23,
       reserveUnits: {steel: 1, titanium: 1},
 
       behavior: {

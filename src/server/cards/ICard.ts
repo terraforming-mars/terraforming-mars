@@ -98,15 +98,15 @@ export interface ICard {
    * @param cardOwner the player who owns THIS CARD.
    * @param space the space that was just identified.
    */
-  onIdentification?: (identifyingPlayer: IPlayer, cardOwner: IPlayer, space: Space) => void;
+  onIdentification?(identifyingPlayer: IPlayer, cardOwner: IPlayer, space: Space): void;
 
-  // /**
-  //  * Optional callback when any player excavates a space.
-  //  *
-  //  * @param player the player performing the excavation action
-  //  * @param space the space that was just excavated.
-  //  */
-  // onExcavation?: (player: IPlayer, space: Space) => void;
+  /**
+   * Optional callback when any player excavates a space.
+   *
+   * @param player the player performing the excavation action
+   * @param space the space that was just excavated.
+   */
+  onExcavation?(player: IPlayer, space: Space): void;
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */
   type: CardType;

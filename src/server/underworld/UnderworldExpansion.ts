@@ -174,34 +174,37 @@ export class UnderworldExpansion {
     return spaces;
   }
 
-  // public static excavate(player: IPlayer, space: Space) {
-  //   if (space.undergroundResources === undefined) {
-  //     this.identify(player.game, space, player);
-  //   }
+  public static excavate(player: IPlayer, space: Space) {
+    if (space.undergroundResources === undefined) {
+      this.identify(player.game, space, player);
+    }
 
-  //   const undergroundResource = space.undergroundResources;
-  //   if (undergroundResource === undefined) {
-  //     throw new Error('No available identification tokens');
-  //   }
+    const undergroundResource = space.undergroundResources;
+    if (undergroundResource === undefined) {
+      throw new Error('No available identification tokens');
+    }
 
-  //   this.grant(player, undergroundResource);
-  //   LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'excavated');
+    this.grant(player, undergroundResource);
+    LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'excavated');
 
-  //   space.excavator = player;
+    space.excavator = player;
+    player.tableau.forEach((card) => card.onExcavation?.(player, space));
 
-  //   const game = player.game;
-  //   game.board
-  //     .getAdjacentSpaces(space)
-  //     .forEach((s) => UnderworldExpansion.identify(game, s, player));
-  //   // const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
-  //   // if (leaser !== undefined) {
-  //   //   leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
-  //   // }
-  //   player.tableau.forEach((card) => card.onExcavation?.(player, space));
-  // }
+    // TODO(kberg): The identification is supposed to be resolved after the benefit.
+    const game = player.game;
+    game.board
+      .getAdjacentSpaces(space)
+      .forEach((s) => UnderworldExpansion.identify(game, s, player));
+    // const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
+    // if (leaser !== undefined) {
+    //   leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
+    // }
+  }
 
   public static grant(player: IPlayer, token: UndergroundResourceToken): void {
     switch (token) {
+    case 'nothing':
+      break;
     case 'card1':
       player.drawCard(1);
       break;

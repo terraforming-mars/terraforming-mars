@@ -5,19 +5,19 @@ import {UnderworldData, UnderworldPlayerData} from './UnderworldData';
 import {Random} from '../../common/utils/Random';
 import {UndergroundResourceToken, undergroundResourcerTokenDescription} from '../../common/underworld/UndergroundResourceToken';
 import {inplaceShuffle} from '../utils/shuffle';
-// import {Resource} from '../../common/Resource';
-// import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
-// import {CardResource} from '../../common/CardResource';
-// import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
+import {Resource} from '../../common/Resource';
+import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
+import {CardResource} from '../../common/CardResource';
+import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {IGame} from '../IGame';
 // import {SpaceType} from '../../common/boards/SpaceType';
 // import {CardName} from '../../common/cards/CardName';
 // import {PlayerInput} from '../PlayerInput';
 // import {OrOptions} from '../inputs/OrOptions';
 // import {SelectOption} from '../inputs/SelectOption';
-// import {newMessage} from '../logs/MessageBuilder';
+import {newMessage} from '../logs/MessageBuilder';
 import {LogHelper} from '../LogHelper';
-// import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
+import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -71,7 +71,6 @@ export class UnderworldExpansion {
 
     add(2, 'tr');
     add(2, 'ocean');
-
 
     add(3, 'data1pertemp');
     add(1, 'microbe1pertemp');
@@ -164,117 +163,116 @@ export class UnderworldExpansion {
   //     return spaces;
   //   }
 
-  //   public static excavate(player: IPlayer, space: Space) {
-  //     const undergroundResource = space.undergroundResources !== undefined ? space.undergroundResources : this.identify(player.game, space, player);
-  //     this.grant(player, undergroundResource);
-  //     LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'excavated');
-
-  //     space.excavator = player;
-
-  //     const game = player.game;
-  //     game.board
-  //       .getAdjacentSpaces(space)
-  //       .forEach((s) => UnderworldExpansion.identify(game, s, player));
-  //     const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
-  //     if (leaser !== undefined) {
-  //       leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
-  //     }
-  //     player.tableau.forEach((card) => card.onExcavation?.(player, space));
+  // public static excavate(player: IPlayer, space: Space) {
+  //   if (space.undergroundResources === undefined) {
+  //     this.identify(player.game, space, player);
   //   }
 
-  //   public static grant(player: IPlayer, token: UndergroundResourceToken): void {
-  //     switch (token) {
-  //     case 'card1':
-  //       player.drawCard(1);
-  //       break;
-  //     case 'card2':
-  //       player.drawCard(2);
-  //       break;
-  //     case 'corruption1':
-  //       UnderworldExpansion.gainCorruption(player, 1, {log: true});
-  //       break;
-  //     case 'corruption2':
-  //       UnderworldExpansion.gainCorruption(player, 2, {log: true});
-  //       break;
-  //     case 'data1':
-  //       player.game.defer(
-  //         new AddResourcesToCard(player, CardResource.DATA, {count: 1}),
-  //       );
-  //       break;
-  //     case 'data2':
-  //       player.game.defer(
-  //         new AddResourcesToCard(player, CardResource.DATA, {count: 2}),
-  //       );
-  //       break;
-  //     case 'data3':
-  //       player.game.defer(
-  //         new AddResourcesToCard(player, CardResource.DATA, {count: 3}),
-  //       );
-  //       break;
-  //     case 'steel2':
-  //       player.stock.add(Resource.STEEL, 2, {log: true});
-  //       break;
-  //     case 'steel1production':
-  //       player.production.add(Resource.STEEL, 1, {log: true});
-  //       break;
-  //     case 'titanium2':
-  //       player.stock.add(Resource.TITANIUM, 2, {log: true});
-  //       break;
-  //     case 'titanium1production':
-  //       player.production.add(Resource.TITANIUM, 1, {log: true});
-  //       break;
-  //     case 'plant1':
-  //       player.stock.add(Resource.PLANTS, 1, {log: true});
-  //       break;
-  //     case 'plant2':
-  //       player.stock.add(Resource.PLANTS, 2, {log: true});
-  //       break;
-  //     case 'plant3':
-  //       player.stock.add(Resource.PLANTS, 3, {log: true});
-  //       break;
-  //     case 'plant1production':
-  //       player.production.add(Resource.PLANTS, 1, {log: true});
-  //       break;
-  //     case 'titaniumandplant':
-  //       break;
-  //     case 'energy1production':
-  //       player.production.add(Resource.ENERGY, 1, {log: true});
-  //       break;
-  //     case 'heat2production':
-  //       player.production.add(Resource.HEAT, 2, {log: true});
-  //       break;
-  //     case 'microbe1':
-  //       player.game.defer(
-  //         new AddResourcesToCard(player, CardResource.MICROBE, {count: 1}),
-  //       );
-  //       break;
-  //     case 'microbe2':
-  //       player.game.defer(
-  //         new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}),
-  //       );
-  //       break;
-  //     case 'tr':
-  //       player.increaseTerraformRating();
-  //       break;
-  //     case 'ocean':
-  //       if (player.game.canAddOcean() && player.canAfford({cost: 4, tr: {oceans: 1}})) {
-  //         player.game.defer(new SelectPaymentDeferred(player, 4, {title: newMessage('Select how to pay 4 M€ for ocean bonus')}))
-  //           .andThen(() => player.game.defer(new PlaceOceanTile(player)));
-  //       }
-  //       break;
-  //     case 'data1pertemp':
-  //     case 'microbe1pertemp':
-  //     case 'plant2pertemp':
-  //     case 'steel2pertemp':
-  //     case 'titanium1pertemp':
-  //       // TODO(kberg): viz
-  //       player.underworldData.temperatureBonus = token;
-  //       player.game.log('For the rest of this generation, ${0} will gain ${1}', (b) => b.player(player).string(token));
-  //       break;
-  //     default:
-  //       throw new Error('Unknown reward: ' + token);
-  //     }
+  //   const undergroundResource = space.undergroundResources;
+  //   if (undergroundResource === undefined) {
+  //     throw new Error('No available identification tokens');
   //   }
+
+  //   this.grant(player, undergroundResource);
+  //   LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'excavated');
+
+  //   space.excavator = player;
+
+  //   const game = player.game;
+  //   game.board
+  //     .getAdjacentSpaces(space)
+  //     .forEach((s) => UnderworldExpansion.identify(game, s, player));
+  //   // const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
+  //   // if (leaser !== undefined) {
+  //   //   leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
+  //   // }
+  //   player.tableau.forEach((card) => card.onExcavation?.(player, space));
+  // }
+
+  public static grant(player: IPlayer, token: UndergroundResourceToken): void {
+    switch (token) {
+    case 'card1':
+      player.drawCard(1);
+      break;
+    case 'card2':
+      player.drawCard(2);
+      break;
+    case 'corruption1':
+      UnderworldExpansion.gainCorruption(player, 1, {log: true});
+      break;
+    case 'corruption2':
+      UnderworldExpansion.gainCorruption(player, 2, {log: true});
+      break;
+    case 'data1':
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
+      break;
+    case 'data2':
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
+      break;
+    case 'data3':
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 3}));
+      break;
+    case 'steel2':
+      player.stock.add(Resource.STEEL, 2, {log: true});
+      break;
+    case 'steel1production':
+      player.production.add(Resource.STEEL, 1, {log: true});
+      break;
+    case 'titanium2':
+      player.stock.add(Resource.TITANIUM, 2, {log: true});
+      break;
+    case 'titanium1production':
+      player.production.add(Resource.TITANIUM, 1, {log: true});
+      break;
+    case 'plant1':
+      player.stock.add(Resource.PLANTS, 1, {log: true});
+      break;
+    case 'plant2':
+      player.stock.add(Resource.PLANTS, 2, {log: true});
+      break;
+    case 'plant3':
+      player.stock.add(Resource.PLANTS, 3, {log: true});
+      break;
+    case 'plant1production':
+      player.production.add(Resource.PLANTS, 1, {log: true});
+      break;
+    case 'titaniumandplant':
+      player.stock.addUnits({plants: 1, titanium: 1}, {log: true});
+      break;
+    case 'energy1production':
+      player.production.add(Resource.ENERGY, 1, {log: true});
+      break;
+    case 'heat2production':
+      player.production.add(Resource.HEAT, 2, {log: true});
+      break;
+    case 'microbe1':
+      player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 1}));
+      break;
+    case 'microbe2':
+      player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
+      break;
+    case 'tr':
+      player.increaseTerraformRating();
+      break;
+    case 'ocean':
+      if (player.game.canAddOcean() && player.canAfford({cost: 4, tr: {oceans: 1}})) {
+        player.game.defer(new SelectPaymentDeferred(player, 4, {title: newMessage('Select how to pay 4 M€ for ocean bonus')}))
+          .andThen(() => player.game.defer(new PlaceOceanTile(player)));
+      }
+      break;
+    case 'data1pertemp':
+    case 'microbe1pertemp':
+    case 'plant2pertemp':
+    case 'steel2pertemp':
+    case 'titanium1pertemp':
+      // TODO(kberg): viz
+      player.underworldData.temperatureBonus = token;
+      player.game.log('For the rest of this generation, ${0} will gain ${1}', (b) => b.player(player).string(token));
+      break;
+    default:
+      throw new Error('Unknown reward: ' + token);
+    }
+  }
 
   //   public static mayBlockAttack(target: IPlayer, perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
   //     if (target.game.gameOptions.underworldExpansion === false) {

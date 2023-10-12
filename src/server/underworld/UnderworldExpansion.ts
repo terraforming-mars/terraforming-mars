@@ -18,6 +18,7 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {newMessage} from '../logs/MessageBuilder';
 import {LogHelper} from '../LogHelper';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
+import {Phase} from '../../common/Phase';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -391,35 +392,38 @@ export class UnderworldExpansion {
   //     return player.game.board.spaces.filter((space) => space.excavator === player).length;
   //   }
 
-  static endGeneration(_game: IGame) {
-    // game.getPlayersInGenerationOrder().forEach((player) => player.underworldData.temperatureBonus === undefined);
+  static endGeneration(game: IGame) {
+    game.getPlayersInGenerationOrder().forEach((player) => player.underworldData.temperatureBonus = undefined);
   }
 
   //   // TODO(kberg): add viz for temperature bonus.
-  static onTemperatureChange(_game: IGame, _steps: number) {
-  //     game.getPlayersInGenerationOrder().forEach((player) => {
-  //       switch (player.underworldData.temperatureBonus) {
-  //       case 'data1pertemp':
-  //       case 'microbe1pertemp':
-  //         const resource = player.underworldData.temperatureBonus === 'data1pertemp' ? CardResource.DATA : CardResource.MICROBE;
-  //         for (let i = 0; i < steps; i++) {
-  //           player.game.defer(new AddResourcesToCard(player, resource));
-  //         }
-  //         break;
-  //       case 'plant2pertemp':
-  //         player.stock.add(Resource.PLANTS, 2 * steps, {log: true});
-  //         break;
-  //       case 'steel2pertemp':
-  //         player.stock.add(Resource.STEEL, 2 * steps, {log: true});
-  //         break;
-  //       case 'titanium1pertemp':
-  //         player.stock.add(Resource.TITANIUM, steps, {log: true});
-  //         break;
-  //       case undefined:
-  //         break;
-  //       default:
-  //         throw new Error('Unknown temperatore bonus: ' + player.underworldData.temperatureBonus);
-  //       }
-  //     });
+  static onTemperatureChange(game: IGame, steps: number) {
+    if (game.phase !== Phase.ACTION) {
+      return;
+    }
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      switch (player.underworldData.temperatureBonus) {
+      case 'data1pertemp':
+      case 'microbe1pertemp':
+        const resource = player.underworldData.temperatureBonus === 'data1pertemp' ? CardResource.DATA : CardResource.MICROBE;
+        for (let i = 0; i < steps; i++) {
+          player.game.defer(new AddResourcesToCard(player, resource));
+        }
+        break;
+      case 'plant2pertemp':
+        player.stock.add(Resource.PLANTS, 2 * steps, {log: true});
+        break;
+      case 'steel2pertemp':
+        player.stock.add(Resource.STEEL, 2 * steps, {log: true});
+        break;
+      case 'titanium1pertemp':
+        player.stock.add(Resource.TITANIUM, steps, {log: true});
+        break;
+      case undefined:
+        break;
+      default:
+        throw new Error('Unknown temperatore bonus: ' + player.underworldData.temperatureBonus);
+      }
+    });
   }
 }

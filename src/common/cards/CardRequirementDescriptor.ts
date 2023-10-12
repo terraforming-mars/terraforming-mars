@@ -34,22 +34,35 @@ export type CardRequirementDescriptor = {
   cities?: number,
   oceans?: number,
   production?: Resource,
+  plantsRemoved?: boolean,
+  resourceTypes?: number,
+  tr?: number,
+
+  // Venus
   venus?: number,
   floaters?: number,
+
+  // Colonies
   colonies?: number,
+
+  // Turmoil
   party?: PartyName,
   chairman?: {},
   partyLeader?: number,
+
+  // The Moon
   habitatTiles?: number,
   miningTiles?: number,
   roadTiles?: number,
   habitatRate?: number,
   miningRate?: number,
   logisticRate?: number,
-  plantsRemoved?: boolean,
-  resourceTypes?: number,
-  tr?: number,
 
+  // Underworld
+  // excavation?: number,
+  corruption?: number,
+
+  // Adjectives
   count?: number,
   max?: boolean,
   all?: boolean,
@@ -102,6 +115,10 @@ export function requirementType(descriptor: CardRequirementDescriptor): Requirem
     return RequirementType.MINING_TILES;
   } else if (descriptor.roadTiles !== undefined) {
     return RequirementType.ROAD_TILES;
+  // } else if (descriptor.excavation !== undefined) {
+  //   return RequirementType.EXCAVATION;
+  } else if (descriptor.corruption !== undefined) {
+    return RequirementType.CORRUPTION;
   } else {
     throw new Error('Unknown requirement: ' + JSON.stringify(descriptor));
   }

@@ -28,6 +28,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {Payment} from '../../common/inputs/Payment';
 import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -455,6 +456,29 @@ export class Executor implements BehaviorExecutor {
       if (moon.habitatRate !== undefined) MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
       if (moon.miningRate !== undefined) MoonExpansion.raiseMiningRate(player, moon.miningRate);
       if (moon.logisticsRate !== undefined) MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+    }
+
+    if (behavior.underworld !== undefined) {
+      const underworld = behavior.underworld;
+      // if (underworld.identify !== undefined) {
+      //   player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
+      // }
+      // if (underworld.excavate !== undefined) {
+      //   const excavate = underworld.excavate;
+      //   if (typeof(excavate) === 'number') {
+      //     player.game.defer(new ExcavateSpacesDeferred(player, excavate));
+      //   } else {
+      //     player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
+      //   }
+      // }
+      if (underworld.corruption !== undefined) {
+        UnderworldExpansion.gainCorruption(player, ctx.count(underworld.corruption), {log: true});
+      }
+      // if (underworld.markThisGeneration !== undefined) {
+      //   if (isIProjectCard(card)) {
+      //     card.generationUsed = player.game.generation;
+      //   }
+      // }
     }
   }
 

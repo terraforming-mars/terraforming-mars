@@ -96,7 +96,7 @@ import {ModuleManifest} from '../ModuleManifest';
 // import {RecklessDetonation} from './RecklessDetonation';
 // import {ResearchDevelopmentHub} from './ResearchDevelopmentHub';
 // import {RobotMoles} from './RobotMoles';
-// import {Scapegoat} from './Scapegoat';
+import {Scapegoat} from './Scapegoat';
 // import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 // import {SecretResearch} from './SecretResearch';
 // import {ServerSabotage} from './ServerSabotage';
@@ -175,7 +175,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.NARRATIVE_SPIN]: {Factory: NarrativeSpin},
     // [CardName.PRIVATE_INVESTIGATOR]: {Factory: PrivateInvestigator},
     // [CardName.CORPORATE_BLACKMAIL]: {Factory: CorporateBlackmail},
-    // [CardName.SCAPEGOAT]: {Factory: Scapegoat},
+    [CardName.SCAPEGOAT]: {Factory: Scapegoat},
     // // [CardName.FRIENDS_IN_HIGH_PLACES]: {Factory: FriendsinHighPlaces}, // ANOTHER card payment thing.
     // [CardName.MICROGRAVIMETRY]: {Factory: Microgravimetry},
     // [CardName.STEM_FIELD_SUBSIDIES]: {Factory: StemFieldSubsidies},

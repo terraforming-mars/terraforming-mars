@@ -11,6 +11,7 @@ import {MartianCulture} from '../../src/server/cards/pathfinders/MartianCulture'
 import {GHGProducingBacteria} from '../../src/server/cards/base/GHGProducingBacteria';
 import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
+import {TileType} from '../../src/common/TileType';
 // import {VolcanicEruptions} from '../../src/server/turmoil/globalEvents/VolcanicEruptions';
 
 describe('UnderworldExpansion', function() {
@@ -337,4 +338,71 @@ describe('UnderworldExpansion', function() {
   // VolcanicEruptions
   //   UnderworldExpansion.grant(player1, 'titanium1pertemp');
   // });
+
+  it('excavatableSpaces', () => {
+    const space = game.board.getAvailableSpacesOnLand(player1)[0];
+    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+    expect(UnderworldExpansion.excavatableSpaces(player1)).includes(space);
+    expect(adjacentSpaces).has.length(3);
+
+    space.undergroundResources = 'nothing';
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).includes(space);
+
+    space.excavator = player1;
+    expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.include(space);
+    // The only excavatable space now is the one next to the excavation space.
+    expect(UnderworldExpansion.excavatableSpaces(player1)).has.members(adjacentSpaces);
+
+    // Reset for tile tests.
+    space.excavator = undefined;
+    space.tile = {tileType: TileType.GREENERY};
+    space.player = player1;
+    expect(UnderworldExpansion.excavatableSpaces(player1)).has.members([space]);
+    expect(UnderworldExpansion.excavatableSpaces(player2)).includes(space);
+    space.tile = {tileType: TileType.CITY};
+    expect(UnderworldExpansion.excavatableSpaces(player2)).does.not.include(space);
+  });
+
+  // TODO(kberg): Test excavatablespaces override
+
+  it('excavate', () => {
+    player1.plants = 0;
+    const space = game.board.getAvailableSpacesOnLand(player1)[0];
+    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+    space.undergroundResources = 'plant2';
+
+    const identifiedSpacesBefore = UnderworldExpansion.identifiedSpaces(game);
+    expect(adjacentSpaces.map((space) => identifiedSpacesBefore.includes(space))).deep.eq([false, false, false]);
+
+    UnderworldExpansion.excavate(player1, space);
+
+    expect(player1.plants).eq(2);
+    expect(space.excavator?.id).eq(player1.id);
+    const identifiedSpacesAfter = UnderworldExpansion.identifiedSpaces(game);
+    expect(adjacentSpaces.map((space) => identifiedSpacesAfter.includes(space))).deep.eq([true, true, true]);
+  });
+
+  it('onExcavation callback', () => {
+    const responses: Array<string> = [];
+    const space = game.board.getAvailableSpacesOnLand(player1)[0];
+    space.undergroundResources = 'nothing';
+
+    player1.playedCards.push(fakeCard({
+      onExcavation(player, space) {
+        responses.push(`from player1: ${player.id} - ${space.id}`);
+      },
+    }));
+    player2.playedCards.push(fakeCard({
+      onExcavation(player, space) {
+        responses.push(`from player2: ${player.id} - ${space.id}`);
+      },
+    }));
+
+    UnderworldExpansion.excavate(player1, space);
+
+    expect(responses).deep.eq([
+      'from player1: p-player1-id - 03',
+    ]);
+  });
 });

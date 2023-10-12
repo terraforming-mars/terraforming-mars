@@ -1,4 +1,4 @@
-// import {Board} from '../boards/Board';
+import {Board} from '../boards/Board';
 import {IPlayer} from '../IPlayer';
 import {Space} from '../boards/Space';
 import {UnderworldData, UnderworldPlayerData} from './UnderworldData';
@@ -10,7 +10,7 @@ import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../common/CardResource';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {IGame} from '../IGame';
-// import {SpaceType} from '../../common/boards/SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 // import {CardName} from '../../common/cards/CardName';
 // import {PlayerInput} from '../PlayerInput';
 // import {OrOptions} from '../inputs/OrOptions';
@@ -124,73 +124,87 @@ export class UnderworldExpansion {
     }
   }
 
-  //   public static excavatableSpaces(
-  //     player: IPlayer,
-  //     ignorePlacementRestrictions: boolean = false,
-  //   ) {
-  //     const board = player.game.board;
+  /**
+   * Return a list of spaces `player` may excavate.
+   *
+   * If `ignorePlacementRestictions` is true, `player` can excavate any space on Mars that has
+   * not yet been excavated, even unidentified spaces.
+   *
+   * Otherwise, it may excavate any unexcavated space (even unidentified spaces) that
+   *   1. they own
+   *   2. next to a space they own
+   *   3. next to their excavation markers
+   *   4. that is not antother player's city.
+   *
+   * If a player played Concession Rights this generation, they automatically ignore placement restrictions.
+   */
+  public static excavatableSpaces(player: IPlayer, ignorePlacementRestrictions: boolean = false) {
+    const board = player.game.board;
 
-  //     // Compute any space that any player can excavate.
-  //     const anyExcavatableSpaces = board.spaces.filter((space) => {
-  //       if (space.excavator !== undefined) {
-  //         return false;
-  //       }
-  //       return space.spaceType !== SpaceType.COLONY;
-  //     });
+    // Compute any space that any player can excavate.
+    const anyExcavatableSpaces = board.spaces.filter((space) => {
+      if (space.excavator !== undefined) {
+        return false;
+      }
+      return space.spaceType !== SpaceType.COLONY;
+    });
 
-  //     if (ignorePlacementRestrictions === true) {
-  //       return anyExcavatableSpaces;
-  //     }
+    if (ignorePlacementRestrictions === true) {
+      return anyExcavatableSpaces;
+    }
 
-  //     const concessionRights = player.playedCards.find((card) => card.name === CardName.CONCESSION_RIGHTS);
-  //     if (concessionRights?.generationUsed === player.game.generation) {
-  //       return anyExcavatableSpaces;
-  //     }
+    // const concessionRights = player.playedCards.find((card) => card.name === CardName.CONCESSION_RIGHTS);
+    // if (concessionRights?.generationUsed === player.game.generation) {
+    //   return anyExcavatableSpaces;
+    // }
 
-  //     // Filter out the set of excavatable spaces that other players control.
-  //     const commonExcavatableSpaces = anyExcavatableSpaces.filter((space) => {
-  //       return !Board.isCitySpace(space) || space.player === player;
-  //     });
-  //     const spaces = commonExcavatableSpaces.filter((space) => {
-  //       if (space.tile !== undefined && space.player === player) {
-  //         return true;
-  //       }
-  //       return board.getAdjacentSpaces(space).some((s) => s.excavator === player);
-  //     });
-  //     if (spaces.length === 0) {
-  //       return commonExcavatableSpaces;
-  //     }
-  //     return spaces;
-  //   }
+    // Filter out the set of excavatable spaces that other players control.
+    const commonExcavatableSpaces = anyExcavatableSpaces.filter((space) => {
+      return !Board.isCitySpace(space) || space.player === player;
+    });
+    const spaces = commonExcavatableSpaces.filter((space) => {
+      if (space.tile !== undefined && space.player === player) {
+        return true;
+      }
+      return board.getAdjacentSpaces(space).some((s) => s.excavator === player);
+    });
+    if (spaces.length === 0) {
+      return commonExcavatableSpaces;
+    }
+    return spaces;
+  }
 
-  // public static excavate(player: IPlayer, space: Space) {
-  //   if (space.undergroundResources === undefined) {
-  //     this.identify(player.game, space, player);
-  //   }
+  public static excavate(player: IPlayer, space: Space) {
+    if (space.undergroundResources === undefined) {
+      this.identify(player.game, space, player);
+    }
 
-  //   const undergroundResource = space.undergroundResources;
-  //   if (undergroundResource === undefined) {
-  //     throw new Error('No available identification tokens');
-  //   }
+    const undergroundResource = space.undergroundResources;
+    if (undergroundResource === undefined) {
+      throw new Error('No available identification tokens');
+    }
 
-  //   this.grant(player, undergroundResource);
-  //   LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'excavated');
+    this.grant(player, undergroundResource);
+    LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'excavated');
 
-  //   space.excavator = player;
+    space.excavator = player;
+    player.tableau.forEach((card) => card.onExcavation?.(player, space));
 
-  //   const game = player.game;
-  //   game.board
-  //     .getAdjacentSpaces(space)
-  //     .forEach((s) => UnderworldExpansion.identify(game, s, player));
-  //   // const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
-  //   // if (leaser !== undefined) {
-  //   //   leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
-  //   // }
-  //   player.tableau.forEach((card) => card.onExcavation?.(player, space));
-  // }
+    // TODO(kberg): The identification is supposed to be resolved after the benefit.
+    const game = player.game;
+    game.board
+      .getAdjacentSpaces(space)
+      .forEach((s) => UnderworldExpansion.identify(game, s, player));
+    // const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
+    // if (leaser !== undefined) {
+    //   leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
+    // }
+  }
 
   public static grant(player: IPlayer, token: UndergroundResourceToken): void {
     switch (token) {
+    case 'nothing':
+      break;
     case 'card1':
       player.drawCard(1);
       break;

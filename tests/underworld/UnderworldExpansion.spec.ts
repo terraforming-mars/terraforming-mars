@@ -4,7 +4,7 @@ import {testGame} from '../TestGame';
 import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansion';
 import {Game} from '../../src/server/Game';
 import {UnderworldData} from '../../src/server/underworld/UnderworldData';
-import {cast, fakeCard, runAllActions} from '../TestingUtils';
+import {cast, fakeCard, forceGenerationEnd, runAllActions} from '../TestingUtils';
 import {Units} from '../../src/common/Units';
 import {Cryptocurrency} from '../../src/server/cards/pathfinders/Cryptocurrency';
 import {MartianCulture} from '../../src/server/cards/pathfinders/MartianCulture';
@@ -12,26 +12,28 @@ import {GHGProducingBacteria} from '../../src/server/cards/base/GHGProducingBact
 import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {TileType} from '../../src/common/TileType';
-// import {VolcanicEruptions} from '../../src/server/turmoil/globalEvents/VolcanicEruptions';
+import {IProjectCard} from '../../src/server/cards/IProjectCard';
+import {Phase} from '../../src/common/Phase';
 
 describe('UnderworldExpansion', function() {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let game: Game;
   let underworldData: UnderworldData;
-  let data1: Cryptocurrency;
-  let data2: MartianCulture;
-  let microbes1: GHGProducingBacteria;
-  let microbes2: RegolithEaters;
+  let dataCard1: IProjectCard;
+  let dataCard2: IProjectCard;
+  let microbeCard1: IProjectCard;
+  let microbeCard2: IProjectCard;
 
   beforeEach(() => {
     [game, player1, player2] = testGame(2, {underworldExpansion: true});
     underworldData = game.underworldData;
-    data1 = new Cryptocurrency();
-    data2 = new MartianCulture();
-    microbes1 = new GHGProducingBacteria();
-    microbes2 = new RegolithEaters();
-    player1.playedCards = [data1, data2, microbes1, microbes2];
+    dataCard1 = new Cryptocurrency();
+    dataCard2 = new MartianCulture();
+    microbeCard1 = new GHGProducingBacteria();
+    microbeCard2 = new RegolithEaters();
+    player1.playedCards = [dataCard1, dataCard2, microbeCard1, microbeCard2];
+    game.phase = Phase.ACTION;
   });
 
   it('sanity', () => {
@@ -167,10 +169,10 @@ describe('UnderworldExpansion', function() {
     UnderworldExpansion.grant(player1, 'data1');
     runAllActions(game);
     const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([data2]);
+    selectCard.cb([dataCard2]);
 
-    expect(player1.getCardsWithResources()).deep.eq([data2]);
-    expect(data2.resourceCount).eq(1);
+    expect(player1.getCardsWithResources()).deep.eq([dataCard2]);
+    expect(dataCard2.resourceCount).eq(1);
   });
 
   it('grant bonus - data2', () => {
@@ -179,10 +181,10 @@ describe('UnderworldExpansion', function() {
     UnderworldExpansion.grant(player1, 'data2');
     runAllActions(game);
     const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([data2]);
+    selectCard.cb([dataCard2]);
 
-    expect(player1.getCardsWithResources()).deep.eq([data2]);
-    expect(data2.resourceCount).eq(2);
+    expect(player1.getCardsWithResources()).deep.eq([dataCard2]);
+    expect(dataCard2.resourceCount).eq(2);
   });
 
   it('grant bonus - data3', () => {
@@ -191,10 +193,10 @@ describe('UnderworldExpansion', function() {
     UnderworldExpansion.grant(player1, 'data3');
     runAllActions(game);
     const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([data2]);
+    selectCard.cb([dataCard2]);
 
-    expect(player1.getCardsWithResources()).deep.eq([data2]);
-    expect(data2.resourceCount).eq(3);
+    expect(player1.getCardsWithResources()).deep.eq([dataCard2]);
+    expect(dataCard2.resourceCount).eq(3);
   });
 
   it('grant bonus - steel2', () => {
@@ -269,10 +271,10 @@ describe('UnderworldExpansion', function() {
     UnderworldExpansion.grant(player1, 'microbe1');
     runAllActions(game);
     const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([microbes1]);
+    selectCard.cb([microbeCard1]);
 
-    expect(player1.getCardsWithResources()).deep.eq([microbes1]);
-    expect(microbes1.resourceCount).eq(1);
+    expect(player1.getCardsWithResources()).deep.eq([microbeCard1]);
+    expect(microbeCard1.resourceCount).eq(1);
   });
 
   it('grant bonus - microbe2', () => {
@@ -281,10 +283,10 @@ describe('UnderworldExpansion', function() {
     UnderworldExpansion.grant(player1, 'microbe2');
     runAllActions(game);
     const selectCard = cast(player1.popWaitingFor(), SelectCard);
-    selectCard.cb([microbes1]);
+    selectCard.cb([microbeCard1]);
 
-    expect(player1.getCardsWithResources()).deep.eq([microbes1]);
-    expect(microbes1.resourceCount).eq(2);
+    expect(player1.getCardsWithResources()).deep.eq([microbeCard1]);
+    expect(microbeCard1.resourceCount).eq(2);
   });
 
   it('grant bonus - tr', () => {
@@ -305,39 +307,35 @@ describe('UnderworldExpansion', function() {
   //   UnderworldExpansion.grant(player1, 'ocean');
   // });
 
-  // it('grant bonus - data1pertemp', () => {
-  //   UnderworldExpansion.grant(player1, 'data1pertemp');
-  // });
+  it('grant bonus - data1pertemp', () => {
+    expect(player1.underworldData.temperatureBonus).is.undefined;
+    UnderworldExpansion.grant(player1, 'data1pertemp');
+    expect(player1.underworldData.temperatureBonus).eq('data1pertemp');
+  });
 
-  // it('grant bonus - microbe1pertemp', () => {
-  //   UnderworldExpansion.grant(player1, 'microbe1pertemp');
-  // });
+  it('grant bonus - microbe1pertemp', () => {
+    expect(player1.underworldData.temperatureBonus).is.undefined;
+    UnderworldExpansion.grant(player1, 'microbe1pertemp');
+    expect(player1.underworldData.temperatureBonus).eq('microbe1pertemp');
+  });
 
-  // it('grant bonus - plant2pertemp', () => {
-  //   UnderworldExpansion.grant(player1, 'plant2pertemp');
-  // });
+  it('grant bonus - plant2pertemp', () => {
+    expect(player1.underworldData.temperatureBonus).is.undefined;
+    UnderworldExpansion.grant(player1, 'plant2pertemp');
+    expect(player1.underworldData.temperatureBonus).eq('plant2pertemp');
+  });
 
-  // it('grant bonus - steel2pertemp', () => {
-  //   UnderworldExpansion.grant(player1, 'steel2pertemp');
-  // });
+  it('grant bonus - steel2pertemp', () => {
+    expect(player1.underworldData.temperatureBonus).is.undefined;
+    UnderworldExpansion.grant(player1, 'steel2pertemp');
+    expect(player1.underworldData.temperatureBonus).eq('steel2pertemp');
+  });
 
-  // it('grant bonus - titanium1pertemp', () => {
-  //   UnderworldExpansion.grant(player1, 'titanium1pertemp');
-  // });
-
-  // it('temperature bonus does not apply to WGT', () => {
-  //   UnderworldExpansion.grant(player1, 'titanium1pertemp');
-  // });
-
-  // it('temperature bonus does not apply to Turmoil', () => {
-  // VolcanicEruptions
-  //   UnderworldExpansion.grant(player1, 'titanium1pertemp');
-  // });
-
-  // it('temperature bonus does not apply next generation', () => {
-  // VolcanicEruptions
-  //   UnderworldExpansion.grant(player1, 'titanium1pertemp');
-  // });
+  it('grant bonus - titanium1pertemp', () => {
+    expect(player1.underworldData.temperatureBonus).is.undefined;
+    UnderworldExpansion.grant(player1, 'titanium1pertemp');
+    expect(player1.underworldData.temperatureBonus).eq('titanium1pertemp');
+  });
 
   it('excavatableSpaces', () => {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
@@ -404,5 +402,91 @@ describe('UnderworldExpansion', function() {
     expect(responses).deep.eq([
       'from player1: p-player1-id - 03',
     ]);
+  });
+
+  it('on temperature change - data1pertemp', () => {
+    player1.underworldData.temperatureBonus = 'data1pertemp';
+
+    expect(player1.getCardsWithResources()).is.empty;
+
+    game.increaseTemperature(player2, 2);
+    runAllActions(game);
+    const selectCard1 = cast(player1.popWaitingFor(), SelectCard);
+    selectCard1.cb([dataCard1]);
+
+    expect(player1.getCardsWithResources()).deep.eq([dataCard1]);
+    expect(dataCard1.resourceCount).eq(1);
+
+    runAllActions(game);
+
+    const selectCard2 = cast(player1.popWaitingFor(), SelectCard);
+    selectCard2.cb([dataCard2]);
+    expect(player1.getCardsWithResources()).deep.eq([dataCard1, dataCard2]);
+    expect(dataCard2.resourceCount).eq(1);
+
+    runAllActions(game);
+    expect(player1.popWaitingFor()).is.undefined;
+  });
+
+  it('on temperature change - microbe1pertemp', () => {
+    player1.underworldData.temperatureBonus = 'microbe1pertemp';
+
+    expect(player1.getCardsWithResources()).is.empty;
+
+    game.increaseTemperature(player2, 2);
+    runAllActions(game);
+    const selectCard1 = cast(player1.popWaitingFor(), SelectCard);
+    selectCard1.cb([microbeCard1]);
+
+    expect(player1.getCardsWithResources()).deep.eq([microbeCard1]);
+    expect(microbeCard1.resourceCount).eq(1);
+
+    runAllActions(game);
+
+    const selectCard2 = cast(player1.popWaitingFor(), SelectCard);
+    selectCard2.cb([microbeCard2]);
+    expect(player1.getCardsWithResources()).deep.eq([microbeCard1, microbeCard2]);
+    expect(microbeCard2.resourceCount).eq(1);
+
+    runAllActions(game);
+    expect(player1.popWaitingFor()).is.undefined;
+  });
+
+  it('on temperature change - plant2pertemp', () => {
+    player1.underworldData.temperatureBonus = 'plant2pertemp';
+    game.increaseTemperature(player2, 2);
+    expect(player1.stock.plants).eq(4);
+  });
+
+  it('on temperature change - steel2pertemp', () => {
+    player1.underworldData.temperatureBonus = 'steel2pertemp';
+    game.increaseTemperature(player2, 2);
+    expect(player1.stock.steel).eq(4);
+  });
+
+  it('on temperature change - titanium1pertemp', () => {
+    player1.underworldData.temperatureBonus = 'titanium1pertemp';
+    game.increaseTemperature(player2, 2);
+    expect(player1.stock.titanium).eq(2);
+  });
+
+  it('temperature bonus does not apply to Solar Phase', () => {
+    player1.underworldData.temperatureBonus = 'titanium1pertemp';
+    game.phase = Phase.SOLAR;
+    game.increaseTemperature(player2, 2);
+    expect(player1.stock.titanium).eq(0);
+  });
+
+  it('temperature bonus does not apply next generation', () => {
+    player1.underworldData.temperatureBonus = 'steel2pertemp';
+    game.increaseTemperature(player2, 2);
+    expect(player1.stock.steel).eq(4);
+    player1.stock.steel = 0;
+
+    forceGenerationEnd(game);
+
+    expect(player1.underworldData.temperatureBonus).is.undefined;
+    game.increaseTemperature(player2, 1);
+    expect(player1.stock.steel).eq(0);
   });
 });

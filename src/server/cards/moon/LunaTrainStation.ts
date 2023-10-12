@@ -15,7 +15,7 @@ export class LunaTrainStation extends Card {
       name: CardName.LUNA_TRAIN_STATION,
       type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
-      cost: 20,
+      cost: 24,
       reserveUnits: {steel: 2},
       victoryPoints: 'special',
 

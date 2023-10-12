@@ -92,7 +92,7 @@ export class TurmoilHandler {
   // TODO(kberg): Add a test where if you raise oxygen to max temperature but temperature is maxed you do not have to pay for it.
   // It works, but4 a test would be helpful.
   public static computeTerraformRatingBump(player: IPlayer, inputTr: TRSource | DynamicTRSource = {}): number {
-    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) return 0;
+    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) return 0;
 
     let tr = inputTr instanceof Function ? inputTr(player) : inputTr;
     // Local copy

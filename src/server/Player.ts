@@ -316,7 +316,7 @@ export class Player implements IPlayer {
       });
     };
 
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp01')) {
       if (!this.canAfford(REDS_RULING_POLICY_COST * steps)) {
         // Cannot pay Reds, will not increase TR
         return;

@@ -2,23 +2,33 @@ export enum RequirementType {
     OXYGEN = 'O2',
     TEMPERATURE = 'C',
     OCEANS = 'Ocean',
-    VENUS = 'Venus',
     TR = 'TR',
     RESOURCE_TYPES = 'Resource type',
     GREENERIES = 'Greenery',
     CITIES = 'City',
-    COLONIES = 'Colony',
-    FLOATERS = 'Floater',
-    CHAIRMAN = 'Chairman',
-    PARTY_LEADERS = 'Party leader',
     TAG = 'tag',
     PRODUCTION = 'production',
-    PARTY = 'party',
     REMOVED_PLANTS = 'Removed plants',
-    HABITAT_RATE = 'habitat rate',
+
+    // Venus/Colonies
+    VENUS = 'Venus',
+    COLONIES = 'Colony',
+    FLOATERS = 'Floater',
+
+    // Turmoil
+    CHAIRMAN = 'Chairman',
+    PARTY_LEADERS = 'Party leader',
+    PARTY = 'party',
+
+    // The Moon
+    HABITAT_RATE = 'Habitat rate',
     MINING_RATE = 'Mining rate',
     LOGISTIC_RATE = 'Logistic rate',
     HABITAT_TILES = 'Habitat tiles',
     MINING_TILES = 'Mine tiles',
     ROAD_TILES = 'Road tiles',
+
+    // Underworld
+    EXCAVATION = 'Excavation',
+    CORRUPTION = 'Corruption',
 }

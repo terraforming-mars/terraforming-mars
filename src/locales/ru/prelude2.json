@@ -1,0 +1,36 @@
+{
+    "Applied Science": "Научный подход",
+    "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "Действие: Удалите 1 ресурс с этой карты, чтобы получить 1 любой стандартный ресурс ИЛИ добавить 1 ресурс на ЛЮБУЮ КАРТУ С УЖЕ ИМЕЮЩИМИСЯ НА НЕЙ РЕСУРСАМИ",
+    "Spend 1 science resource here to gain 1 standard resource": "Снять 1 ресурс с карты и получить 1 ресурс на другую карту с ресурсами на ней",
+    "Spend 1 science resource here to gain 1 resource on ANY CARD WITH A RESOURCE.": "Снять 1 ресурс с карты и добавить 1 ресурс на ЛЮБУЮ КАРТУ С УЖЕ ИМЕЮЩИМИСЯ НА НЕЙ РЕСУРСАМИ",
+    "Add 6 resources here.": "Добавить на карту 6 ресурсов",
+
+    "Colony Trade Hub": "Торговый хаб",
+    "Effect: When a colony is placed, gain 2 M€": "Каждый раз когда кто-то строит колонию получите 2 M€",
+    "Increase your energy production 1 step. Gain 3 titanium": "Увеличьте свое производство энергии на 1. Получите 3 титана",
+    "Focused Organization": "Точная организация",
+    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "Действие: Сбросьте 1 карту и потратьте 1 стандартный ресурс, чтобы добрать 1 карту и получить 1 стандартный ресурс",
+    "Draw 1 card and gain 1 standard resource.": "Доберите 1 карту и получите 1 стандартный ресурс",
+
+    "Nobel Prize": "Нобелевская премия",
+    "Gain 2 M€. Draw 2 cards with requirements.": "Получите 2 M€. Доберите 2 карты с требованиями на них",
+
+    "Anti-desertification Techniques": "Техники озеленения",
+    "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Получите 3 M€. Увеличьте ваше производство растений на 1 и ваше производство стали на 1",
+    "Corporate Archives": "Корпоративные архивы",
+    "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Возьмите 7 карт из колоды. Оставьте в руке 2 из них, а остальные 5 сбросьте",
+    "Gain 13 M€": "Получите 13 M€",
+    "Double Down": "Удвоение",
+    "Copy your other prelude's direct effect.": "Скопируйте прямой эффект другой вашей карты прелюдии",
+    "Giant Solar Collector": "Гигантский солнечный накопитель",
+    "Increase your energy production 2 steps. Raise Venus 1 step.": "Увеличьте ваше производство энергии на 2. Повысьте уровень Венеры на 1",
+    "Merger": "Слияние",
+    "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Возьмите из колоды 4 карты корпорации. Разыграйте одну из них, а остальные 3 сбросьте. Затем заплатите 42 M€",
+    "Choose corporation card to play": "Выберите карту корпорации, чтобы разыграть ее",
+    "Select how to pay for Merger": "Выберите как оплатить Слияние",
+    "Not enough corporations while resolving ${0}": "Недостаточно корпораций в колоде, чтобы разыграть ${0}",
+    "New Partner": "Новый партнер",
+    "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Увеличьте ваше производство M€ на 1. Возьмите из колоды 2 карты Прелюдий. Разыграйте 1 из них, а другую сбросьте",
+    "Old Mining Colony": "Горнодобывающая колония",
+    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Увеличьте ваше производство титана на 1. Постройте колонию. Сброьте одну карту с руки"
+}

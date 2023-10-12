@@ -11,6 +11,7 @@ import {MartianCulture} from '../../src/server/cards/pathfinders/MartianCulture'
 import {GHGProducingBacteria} from '../../src/server/cards/base/GHGProducingBacteria';
 import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
+import {TileType} from '../../src/common/TileType';
 // import {VolcanicEruptions} from '../../src/server/turmoil/globalEvents/VolcanicEruptions';
 
 describe('UnderworldExpansion', function() {
@@ -337,4 +338,28 @@ describe('UnderworldExpansion', function() {
   // VolcanicEruptions
   //   UnderworldExpansion.grant(player1, 'titanium1pertemp');
   // });
+
+  it('excavatableSpaces', () => {
+    let space = game.board.getAvailableSpacesOnLand(player1)[0];
+    expect(UnderworldExpansion.excavatableSpaces(player1)).includes(space);
+
+    space.undergroundResources = 'nothing';
+
+    space = game.board.getAvailableSpacesOnLand(player1)[0];
+    expect(UnderworldExpansion.excavatableSpaces(player1)).includes(space);
+
+    space.excavator = player1;
+    expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.include(space);
+    // The only excavatable space now is the one next to the excavation space.
+    expect(UnderworldExpansion.excavatableSpaces(player1)).has.members(game.board.getAdjacentSpaces(space));
+
+    // Reset for tile tests.
+    space.excavator = undefined;
+    space.tile = {tileType: TileType.GREENERY};
+    space.player = player1;
+    expect(UnderworldExpansion.excavatableSpaces(player1)).has.members([space]);
+    expect(UnderworldExpansion.excavatableSpaces(player2)).includes(space);
+    space.tile = {tileType: TileType.CITY};
+    expect(UnderworldExpansion.excavatableSpaces(player2)).does.not.include(space);
+  });
 });

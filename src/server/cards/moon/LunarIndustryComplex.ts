@@ -5,6 +5,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 export class LunarIndustryComplex extends Card implements IProjectCard {
   constructor() {

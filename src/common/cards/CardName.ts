@@ -501,6 +501,7 @@ export enum CardName {
     SUPERCAPACITORS = 'Supercapacitors',
     ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-desertification Techniques',
     TYCHO_MAGNETICS = 'Tycho Magnetics',
+    FLOYD_CONTINUUM = 'Floyd Continuum',
     AQUEDUCT_SYSTEMS = 'Aqueduct Systems',
     ASTRA_MECHANICA = 'Astra Mechanica',
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',

@@ -23,7 +23,7 @@ describe('MonsInsurance', () => {
   beforeEach(() => {
     card = new MonsInsurance();
 
-    [, player, player2, player3] = testGame(3);
+    [/* skipped */, player, player2, player3] = testGame(3);
     card.play(player);
     player.setCorporationForTest(card);
   });

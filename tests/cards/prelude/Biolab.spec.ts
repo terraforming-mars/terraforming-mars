@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('Biolab', function() {
   it('Should play', function() {
     const card = new Biolab();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     Game.newInstance('gameid', [player], player);
     card.play(player);
 

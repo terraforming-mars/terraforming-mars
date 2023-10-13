@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 describe('PowerPlant', function() {
   it('Should play', function() {
     const card = new PowerPlant();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     expect(card.play(player)).is.undefined;
     expect(player.production.energy).to.eq(1);
   });

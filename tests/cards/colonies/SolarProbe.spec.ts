@@ -9,7 +9,7 @@ describe('SolarProbe', function() {
   it('Should play', function() {
     const card = new SolarProbe();
     const research = new Research();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
 
     player.playedCards.push(research);
 

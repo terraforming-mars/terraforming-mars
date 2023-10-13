@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('AtalantaPlanitiaLab', function() {
   it('Should play', function() {
     const card = new AtalantaPlanitiaLab();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     expect(player.simpleCanPlay(card)).is.not.true;
     cast(card.play(player), undefined);
     expect(player.cardsInHand).has.lengthOf(2);

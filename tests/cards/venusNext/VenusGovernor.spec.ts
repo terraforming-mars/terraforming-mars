@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('VenusGovernor', function() {
   it('Should play', function() {
     const card = new VenusGovernor();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
 
     player.tagsForTest = {venus: 1};
     expect(player.simpleCanPlay(card)).is.not.true;

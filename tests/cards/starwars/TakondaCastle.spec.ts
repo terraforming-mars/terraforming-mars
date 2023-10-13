@@ -10,7 +10,7 @@ describe('TakondaCastle', () => {
 
   beforeEach(() => {
     card = new TakondaCastle();
-    [, player] = testGame(1, {starWarsExpansion: true});
+    [/* skipped */, player] = testGame(1, {starWarsExpansion: true});
   });
 
   it('play', () => {

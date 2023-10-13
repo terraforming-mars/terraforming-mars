@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('IndustrialMicrobes', function() {
   it('Should play', function() {
     const card = new IndustrialMicrobes();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player.production.steel).to.eq(1);

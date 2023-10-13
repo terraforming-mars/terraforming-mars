@@ -12,7 +12,7 @@ describe('Cartel', function() {
 
   beforeEach(function() {
     card = new Cartel();
-    [, player] = testGame(2);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 describe('TradeEnvoys', function() {
   it('Should play', function() {
     const card = new TradeEnvoys();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
     const ceres = new Ceres();
     ceres.trade(player);

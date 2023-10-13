@@ -5,7 +5,7 @@ import {cast} from '../../TestingUtils';
 
 describe('EarthCatapult', function() {
   it('Should play', function() {
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     const card = new EarthCatapult();
     const action = card.play(player);
 

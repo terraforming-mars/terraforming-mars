@@ -6,7 +6,7 @@ import {testGame} from '../TestGame';
 
 describe('DeferredActionsQueue', () => {
   it('runs actions for player', () => {
-    const [, player, otherPlayer] = testGame(2);
+    const [/* skipped */, player, otherPlayer] = testGame(2);
 
     const queue = new DeferredActionsQueue();
     const expectedInput = new SelectOption('foo', 'bar');

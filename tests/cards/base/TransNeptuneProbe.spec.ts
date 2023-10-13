@@ -5,7 +5,7 @@ import {cast} from '../../TestingUtils';
 
 describe('TransNeptuneProbe', function() {
   it('Should play', function() {
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     const card = new TransNeptuneProbe();
     const action = card.play(player);
 

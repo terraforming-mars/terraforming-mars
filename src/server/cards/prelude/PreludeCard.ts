@@ -8,9 +8,11 @@ import {Behavior} from '../../behavior/Behavior';
 import {IPreludeCard} from './IPreludeCard';
 import {CardResource} from '../../../common/CardResource';
 import {IVictoryPoints} from '../../../common/cards/IVictoryPoints';
+import {GlobalParameterRequirementBonus} from '../../../common/cards/Types';
 
 export interface StaticPreludeProperties {
     behavior?: Partial<Behavior>,
+    globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
     metadata: ICardMetadata;
     name: CardName;
     tags?: Array<Tag>;
@@ -31,6 +33,7 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
       type: CardType.PRELUDE,
       name: properties.name,
       tags: properties.tags,
+      globalParameterRequirementBonus: properties.globalParameterRequirementBonus,
       metadata: properties.metadata,
       resourceType: properties.resourceType,
       victoryPoints: properties.victoryPoints,

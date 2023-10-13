@@ -209,7 +209,7 @@ export interface IPlayer {
    * For the given global parameter, return a sum of all requirements bonuses this
    * player has thanks to played cards, Turmoil policies, etcetera.
    */
-  getRequirementsBonus(parameter: GlobalParameter): number;
+  getGlobalParameterRequirementBonus(parameter: GlobalParameter): number;
   /**
    * Remove resources from this player's played card
    */

@@ -43,8 +43,7 @@ export interface ICard {
   play(player: IPlayer): PlayerInput | undefined;
   getCardDiscount?(player: IPlayer, card: IProjectCard): number;
   cardDiscount?: OneOrArray<CardDiscount>;
-  // parameter is a Morningstar Inc. special case.
-  getRequirementBonus?(player: IPlayer, parameter: GlobalParameter): number;
+  getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number;
   victoryPoints?: number | 'special' | IVictoryPoints,
   getVictoryPoints(player: IPlayer): number;
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */

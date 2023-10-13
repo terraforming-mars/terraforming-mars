@@ -23,7 +23,7 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement {
   }
 
   public getScore(player: IPlayer): number {
-    const playerRequirementsBonus = player.getRequirementsBonus(this.parameter) * this.scale;
+    const playerRequirementsBonus = player.getGlobalParameterRequirementBonus(this.parameter) * this.scale;
 
     const level = this.getGlobalValue(player);
 

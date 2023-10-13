@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('MetalsCompany', function() {
   it('Should play', function() {
     const card = new MetalsCompany();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(1);
     expect(player.production.steel).to.eq(1);

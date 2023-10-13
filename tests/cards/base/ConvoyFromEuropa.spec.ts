@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 describe('ConvoyFromEuropa', function() {
   it('Should play', function() {
     const card = new ConvoyFromEuropa();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     card.play(player);
     expect(player.cardsInHand).has.lengthOf(1);
   });

@@ -13,7 +13,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
   let player: TestPlayer;
 
   beforeEach(() => {
-    [, player] = testGame(1);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('grant single bonus', () => {

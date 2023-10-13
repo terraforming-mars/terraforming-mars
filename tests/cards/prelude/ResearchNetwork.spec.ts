@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 
 describe('ResearchNetwork', function() {
   it('Should play', function() {
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     const card = new ResearchNetwork();
 
     expect(player.cardsInHand).has.length(0);

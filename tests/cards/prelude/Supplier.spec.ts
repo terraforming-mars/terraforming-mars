@@ -5,7 +5,7 @@ import {cast} from '../../TestingUtils';
 
 describe('Supplier', function() {
   it('Should play', function() {
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     const card = new Supplier();
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(2);

@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('CoronaExtractor', function() {
   it('Should play', function() {
     const card = new CoronaExtractor();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     expect(player.simpleCanPlay(card)).is.not.true;
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(4);

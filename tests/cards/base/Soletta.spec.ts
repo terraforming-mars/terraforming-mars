@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 describe('Soletta', function() {
   it('Should play', function() {
     const card = new Soletta();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(7);
   });

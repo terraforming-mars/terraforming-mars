@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('LagrangeObservatory', function() {
   it('Should play', function() {
     const card = new LagrangeObservatory();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
 
     expect(player.cardsInHand).has.lengthOf(1);

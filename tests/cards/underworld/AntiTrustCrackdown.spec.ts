@@ -11,7 +11,7 @@ describe('AntiTrustCrackdown', () => {
   let card: AntiTrustCrackdown;
 
   beforeEach(() => {
-    [, player1, player2, player3] = testGame(3, {underworldExpansion: true});
+    [/* skipped */, player1, player2, player3] = testGame(3, {underworldExpansion: true});
     card = new AntiTrustCrackdown();
   });
 

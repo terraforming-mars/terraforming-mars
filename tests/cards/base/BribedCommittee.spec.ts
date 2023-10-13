@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 describe('BribedCommittee', function() {
   it('Should play', function() {
     const card = new BribedCommittee();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(-2);
     expect(player.getTerraformRating()).to.eq(22);

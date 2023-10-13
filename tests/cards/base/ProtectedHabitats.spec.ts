@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 describe('ProtectedHabitats', function() {
   it('Should play', function() {
     const card = new ProtectedHabitats();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     expect(card.play(player)).is.undefined;
   });
 });

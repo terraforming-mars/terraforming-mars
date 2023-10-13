@@ -18,7 +18,7 @@ describe('AirScrappingStandardProjectVariant', function() {
 
   it('option not available for regular board', function() {
     // Building another game without the alt venus board.
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     Game.newInstance('gameid', [player], player, {venusNextExtension: true, altVenusBoard: false});
     const cards = player.getStandardProjectOption().cards;
     const names = cards.map((card) => card.name);

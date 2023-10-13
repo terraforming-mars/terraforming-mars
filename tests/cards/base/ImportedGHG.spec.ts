@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('ImportedGHG', function() {
   it('Should play', function() {
     const card = new ImportedGHG();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(1);
     expect(player.heat).to.eq(3);

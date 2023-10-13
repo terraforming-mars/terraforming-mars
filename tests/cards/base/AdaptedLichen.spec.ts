@@ -5,7 +5,7 @@ import {AdaptedLichen} from '../../../src/server/cards/base/AdaptedLichen';
 describe('AdaptedLichen', function() {
   it('Should play', function() {
     const card = new AdaptedLichen();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
 
     card.play(player);
     expect(player.production.plants).to.eq(1);

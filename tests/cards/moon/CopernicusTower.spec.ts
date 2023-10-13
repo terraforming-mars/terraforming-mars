@@ -10,7 +10,7 @@ describe('CopernicusTower', () => {
   let card: CopernicusTower;
 
   beforeEach(() => {
-    [, player] = testGame(1, {moonExpansion: true});
+    [/* skipped */, player] = testGame(1, {moonExpansion: true});
     card = new CopernicusTower();
   });
 

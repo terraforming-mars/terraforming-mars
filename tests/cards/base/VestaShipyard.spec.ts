@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 describe('VestaShipyard', function() {
   it('Should play', function() {
     const card = new VestaShipyard();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
 
     card.play(player);
     expect(player.production.titanium).to.eq(1);

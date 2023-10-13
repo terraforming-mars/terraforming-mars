@@ -17,7 +17,7 @@ describe('SoylentSeedlingSystems', function() {
 
   beforeEach(function() {
     soylent = new SoylentSeedlingSystems();
-    [, player, player2] = testGame(2);
+    [/* skipped */, player, player2] = testGame(2);
     player.setCorporationForTest(soylent);
     // Giving it a corporation card that stores resources to show it doesn't have any.
     celestic = new Celestic();

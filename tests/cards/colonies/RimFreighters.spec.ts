@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 describe('RimFreighters', function() {
   it('Should play', function() {
     const card = new RimFreighters();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
     const ceres = new Ceres();
     ceres.trade(player);

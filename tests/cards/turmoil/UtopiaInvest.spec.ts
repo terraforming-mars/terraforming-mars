@@ -7,7 +7,7 @@ import {testGame} from '../../TestGame';
 describe('UtopiaInvest', function() {
   it('Should play', function() {
     const card = new UtopiaInvest();
-    const [, player] = testGame(2, {turmoilExtension: true});
+    const [/* skipped */, player] = testGame(2, {turmoilExtension: true});
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.production.titanium).to.eq(1);

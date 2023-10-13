@@ -9,7 +9,7 @@ import {SelectOption} from '../../../src/server/inputs/SelectOption';
 describe('CloneTroopers', () => {
   it('Can play', () => {
     const card = new CloneTroopers();
-    const [, player] = testGame(2, {starWarsExpansion: true});
+    const [/* skipped */, player] = testGame(2, {starWarsExpansion: true});
 
     addOcean(player);
     addOcean(player);
@@ -26,7 +26,7 @@ describe('CloneTroopers', () => {
 
   it('act solo', () => {
     const card = new CloneTroopers();
-    const [, player] = testGame(1, {starWarsExpansion: true});
+    const [/* skipped */, player] = testGame(1, {starWarsExpansion: true});
 
     expect(card.resourceCount).eq(0);
 
@@ -50,7 +50,7 @@ describe('CloneTroopers', () => {
 
   it('act multiplayer', () => {
     const card = new CloneTroopers();
-    const [, player, player2, player3] = testGame(3, {starWarsExpansion: true});
+    const [/* skipped */, player, player2, player3] = testGame(3, {starWarsExpansion: true});
 
     expect(card.resourceCount).eq(0);
 

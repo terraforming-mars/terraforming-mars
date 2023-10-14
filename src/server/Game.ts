@@ -1525,12 +1525,21 @@ export class Game implements IGame, Logger {
   public getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount: 1 | 2 = 1) {
     const cost = this.discardForCost(cardCount, toPlace);
 
-    const distance = Math.max(cost-1, 0); // Some cards cost zero.
+    const distance = Math.max(cost - 1, 0); // Some cards cost zero.
     const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,
       (space) => {
-        const adjacentSpaces = this.board.getAdjacentSpaces(space);
-        return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType.CITY) && // no cities nearby
-            adjacentSpaces.some((sp) => this.board.canPlaceTile(sp)); // can place forest nearby
+        // TODO(kberg): this toPlace check is a short-term hack.
+        //
+        // If the tile is a city, then follow these extra placement rules for initial solo player placement.
+        // Otherwise it's a hazard tile, and the city rules don't matter. Ideally this should just split into separate functions,
+        // which would be nice, since it makes Game smaller.
+        if (toPlace === TileType.CITY) {
+          const adjacentSpaces = this.board.getAdjacentSpaces(space);
+          return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType.CITY) && // no cities nearby
+              adjacentSpaces.some((sp) => this.board.canPlaceTile(sp)); // can place forest nearby
+        } else {
+          return true;
+        }
       });
     if (space === undefined) {
       throw new Error('Couldn\'t find space when card cost is ' + cost);

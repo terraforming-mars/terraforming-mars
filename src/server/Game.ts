@@ -755,12 +755,11 @@ export class Game implements IGame, Logger {
 
     // turmoil.endGeneration might have added actions.
     if (this.deferredActions.length > 0) {
-      this.deferredActions.runAll(() => this.goToDraftOrResearch());
+      this.deferredActions.runAll(() => this.startGeneration());
     } else {
-      // TODO(kberg): Move this to the start of goToDraftOrResearch
+      // TODO(kberg): Move this to the start of startNewGeneration
       this.phase = Phase.INTERGENERATION;
-      // TODO(kberg): Rename to startNewGeneration
-      this.goToDraftOrResearch();
+      this.startGeneration();
     }
   }
 
@@ -789,7 +788,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  private goToDraftOrResearch() {
+  private startGeneration() {
     this.updatePlayerVPForTheGeneration();
     this.updateGlobalsForTheGeneration();
     this.generation++;

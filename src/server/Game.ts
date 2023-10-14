@@ -757,8 +757,6 @@ export class Game implements IGame, Logger {
     if (this.deferredActions.length > 0) {
       this.deferredActions.runAll(() => this.startGeneration());
     } else {
-      // TODO(kberg): Move this to the start of startNewGeneration
-      this.phase = Phase.INTERGENERATION;
       this.startGeneration();
     }
   }
@@ -789,6 +787,7 @@ export class Game implements IGame, Logger {
   }
 
   private startGeneration() {
+    this.phase = Phase.INTERGENERATION;
     this.updatePlayerVPForTheGeneration();
     this.updateGlobalsForTheGeneration();
     this.generation++;

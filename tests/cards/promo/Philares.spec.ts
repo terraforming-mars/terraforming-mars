@@ -154,7 +154,7 @@ describe('Philares', () => {
   });
 
   it('Should take initial action', function() {
-    philaresPlayer.runInitialAction(card);
+    philaresPlayer.deferInitialAction(card);
     runAllActions(game);
 
     const action = cast(philaresPlayer.popWaitingFor(), SelectSpace);

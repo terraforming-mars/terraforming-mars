@@ -20,7 +20,7 @@ describe('Polaris', function() {
   });
 
   it('initial action', function() {
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     const space = game.board.getSpace('06');

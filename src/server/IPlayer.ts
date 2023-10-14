@@ -303,13 +303,15 @@ export interface IPlayer {
   canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
-  runInitialAction(corp: ICorporationCard): void;
+  /** Add `corp`'s initial action to the deferred action queue, if it has one. */
+  deferInitialAction(corp: ICorporationCard): void;
   getActions(): OrOptions;
   process(input: InputResponse): void;
   getWaitingFor(): PlayerInput | undefined;
   setWaitingFor(input: PlayerInput, cb?: () => void): void;
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
+  /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined, priority?: Priority): void;
 }
 

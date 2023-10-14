@@ -33,7 +33,7 @@ describe('Vitor', function() {
 
   it('No initial action for solo games', function() {
     Game.newInstance('gameid', [player], player);
-    const action = player.runInitialAction(card);
+    const action = player.deferInitialAction(card);
     cast(action, undefined);
   });
 

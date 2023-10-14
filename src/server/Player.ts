@@ -562,12 +562,9 @@ export class Player implements IPlayer {
     return sum(this.getCardsWithResources(resource).map((card) => card.resourceCount));
   }
 
-  public deferInputCb(result: PlayerInput | undefined): void {
-    this.defer(result, Priority.DEFAULT);
-  }
-
   public runInput(input: InputResponse, pi: PlayerInput): void {
-    this.deferInputCb(pi.process(input, this));
+    const result = pi.process(input, this);
+    this.defer(result, Priority.DEFAULT);
   }
 
   public getAvailableBlueActionCount(): number {

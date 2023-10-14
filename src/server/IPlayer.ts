@@ -240,7 +240,6 @@ export interface IPlayer {
    * Count all the resources of a given type in the tableau.
    */
   getResourceCount(resource: CardResource): number;
-  deferInputCb(result: PlayerInput | undefined): void;
   runInput(input: InputResponse, pi: PlayerInput): void;
   getAvailableBlueActionCount(): number;
   getPlayableActionCards(): Array<ICard & IActionCard>;

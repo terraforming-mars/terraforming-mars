@@ -25,7 +25,7 @@ import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
 import {YesAnd} from './requirements/CardRequirement';
-import {GlobalParameter} from '@/common/GlobalParameter';
+import {GlobalParameter} from '../../common/GlobalParameter';
 
 /**
  * Cards that do not need a cost attribute.

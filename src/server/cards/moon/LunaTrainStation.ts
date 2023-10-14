@@ -22,7 +22,7 @@ export class LunaTrainStation extends Card {
       behavior: {
         production: {megacredits: 4},
         moon: {
-          tile: {type: TileType.LUNA_TRAIN_STATION, title: 'Select a space for Luna Train Station.'},
+          tile: {type: TileType.LUNA_TRAIN_STATION},
           logisticsRate: 1,
         },
       },

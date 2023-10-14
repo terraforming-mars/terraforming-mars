@@ -139,7 +139,7 @@ export interface Behavior {
     /** Places a road tile and also raises the logistics rate */
     roadTile?: PlaceMoonTile,
     /** Places a special tile on the Moon. */
-    tile?: PlaceMoonTile & {type: TileType, title?: string},
+    tile?: PlaceMoonTile & {type: TileType},
     habitatRate?: number,
     miningRate?: number,
     logisticsRate?: number,

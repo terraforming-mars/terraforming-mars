@@ -24,7 +24,6 @@ export class MetallicAsteroid extends Card implements IProjectCard {
         tile: {
           type: TileType.METALLIC_ASTEROID,
           on: 'land',
-          title: 'Select space for Metallic Asteroid tile',
           adjacencyBonus: {bonus: [SpaceBonus.TITANIUM]},
         },
       },

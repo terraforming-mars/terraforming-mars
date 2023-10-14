@@ -22,7 +22,7 @@ export class LunaMiningHub extends Card {
         production: {steel: 1, titanium: 1},
         // TODO(kberg): mining rate ought to occur after tile is placed.
         moon: {
-          tile: {type: TileType.LUNA_MINING_HUB, title: 'Select a space for Luna Mining Hub.'},
+          tile: {type: TileType.LUNA_MINING_HUB},
           miningRate: 1,
         },
       },

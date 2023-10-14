@@ -12,6 +12,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
 import {BoardType} from '../../boards/BoardType';
 import {Board} from '../../boards/Board';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class GagarinMobileBase extends Card implements IActionCard, ICorporationCard {
   constructor() {
@@ -87,7 +88,8 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
   public action(player: IPlayer) {
     const spaces = this.availableSpaces(player);
     if (spaces.length > 0) {
-      return new SelectSpace('Select new space for Gagarin Mobile Base', this.availableSpaces(player))
+      return new SelectSpace(
+        newMessage('Select new space for ${0}', (b) => b.card(this)), this.availableSpaces(player))
         .andThen((space) => {
           player.game.gagarinBase.unshift(space.id);
           player.game.grantSpaceBonuses(player, space);

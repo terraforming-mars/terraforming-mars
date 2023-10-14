@@ -150,8 +150,7 @@
 
     "Convert 7 heat into temperature": "Convertir 7 de calor a temperatura",
     "Convert 8 heat into temperature": "Convertir 8 de calor a temperatura",
-    "Convert 8 plants into greenery": "Convertir 8 plantas a vegetación",
-    "Convert 7 plants into greenery": "Convertir 7 plantas a vegetación",
+    "Convert ${0} plants into greenery": "Convertir ${0} plantas a vegetación",
     "Colonies": "Colonias",
     "funded by": "fundado por",
     "claimed by": "reclamado por",
@@ -226,7 +225,6 @@
      "Pay":"Pagar",
      "Remove floaters": "Quitar flotadores",
      "Add floater": "Añadir flotador",
-     "Select space for tile": "Seleccionar área para loseta",
      "Select card to take into hand": "Selecciona una carta para ponerla en tu mano",
      "Send a delegate in an area (5 M€)": "Enviar delegado al área（5 M€)",
      "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "Paga 10 М€ para robar 3 cartas(Científicos de Conflictos)",

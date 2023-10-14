@@ -20,7 +20,6 @@ export class NewVenice extends Card implements IProjectCard {
         tile: {
           type: TileType.OCEAN_CITY,
           on: 'upgradeable-ocean',
-          title: 'Select space for New Venice',
         },
       },
 

@@ -270,8 +270,7 @@
     "Not enough cards selected": "Wybrano za mało kart",
     "Convert 7 heat into temperature": "Wydaj 7 jednostek ciepła, aby podnieść temperaturę",
     "Convert 8 heat into temperature": "Wydaj 8 jednostek ciepła, aby podnieść temperaturę",
-    "Convert 8 plants into greenery": "Wydaj 8 jednostek roślinności, aby umieścić na planszy obszar zieleni",
-    "Convert 7 plants into greenery": "Wydaj 7 jednostek roślinności, aby umieścić na planszy obszar zieleni",
+    "Convert ${0} plants into greenery": "Wydaj ${0} jednostek roślinności, aby umieścić na planszy obszar zieleni",
 
     "Colonies": "Kolonie",
     "funded by": "ufundowany przez:",
@@ -352,7 +351,6 @@
     "Pay": "Wydaj",
     "Remove floaters": "Usuń dryfowce",
     "Add floater": "Umieść dryfowiec",
-    "Select space for tile": "Wybierz pole do umieszczenia obszaru",
     "Select card to take into hand": "Wybierz karty które weźmiesz na rękę",
     "Send a delegate in an area (5 M€)": "Wyślij delegata z rezerwy (za 5 M€)",
     "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "Wydaj 10 М€, aby dobrać 3 karty",
@@ -365,7 +363,6 @@
     "Show timers": "Pokaż liczniki czasu",
     "You cannot pay for this card": "Nie jesteś w stanie zapłacić za tą kartę",
     "Select card(s) to buy": "Wybierz karty które chcesz kupić",
-    "Select space for special tile": "Wybierz pole do umieszczenia obszaru specjalnego",
     "Starting Megacredits:": "Startowe Megakredyty:",
     "After Preludes:": "Po preludiach:",
 
@@ -471,7 +468,6 @@
     "Oxygen Level": "Poziom tlenu",
     "Spectator link": "Link dla widzów",
     "How to pay?": "Jak grać?",
-    "Select an ocean space for special tile": "Wybierz pole oceanu dla obszaru specjalnego",
     "Must select a space": "Musisz wybrać pole",
     "[ toggle cards filters ]": "[ zwiń filtr kart ]",
     "Cards List": "Lista kart",

@@ -715,15 +715,7 @@ export class Player implements IPlayer {
     }
   }
 
-  /**
-   * Ask the player to draft from a set of cards.
-   *
-   * @param initialDraft when true, this is part of the first generation draft.
-   * @param playerName  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
-   *   step in the draft, and cards have to be dealt.
-   */
-  public askPlayerToDraft(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void {
+  public askPlayerToDraft(initialDraft: boolean, passTo: IPlayer, passedCards?: Array<IProjectCard>): void {
     let cardsToDraw = 4;
     let cardsToKeep = 1;
 
@@ -751,7 +743,7 @@ export class Player implements IPlayer {
       'Select two cards to keep and pass the rest to ${0}';
     this.setWaitingFor(
       new SelectCard(
-        newMessage(messageTitle, (b) => b.rawString(playerName)), // TODO(kberg): replace with player?`
+        newMessage(messageTitle, (b) => b.player(passTo)),
         'Keep',
         cards,
         {min: cardsToKeep, max: cardsToKeep, played: false})

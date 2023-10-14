@@ -2,14 +2,22 @@ import {expect} from 'chai';
 import {Timer} from '../../src/common/Timer';
 import {FakeClock} from './FakeClock';
 
-describe('Timer', function() {
+describe('Timer', () => {
+  let clock: FakeClock;
+  let timer: Timer;
+
+  beforeEach(() => {
+    clock = new FakeClock();
+    timer = Timer.newInstance(clock);
+    // this lastStoppedAt is a bit of a gross mess.
+    (Timer as any).lastStoppedAt = 0;
+  });
+
   it('starts at 00:00', function() {
-    const timer = Timer.newInstance();
     expect(Timer.toString(timer.serialize())).eq('00:00');
   });
 
   it('changes running with start and stop', function() {
-    const timer = Timer.newInstance();
     expect(timer.serialize().running).eq(false);
     timer.start();
     expect(timer.serialize().running).eq(true);
@@ -20,14 +28,7 @@ describe('Timer', function() {
   });
 
   it('shows 00:01 after 1 sec', function() {
-    // this lastStoppedAt is a bit of a gross mess.
-    (Timer as any).lastStoppedAt = 0;
-    const clock = new FakeClock();
-    const timer = Timer.newInstance(clock);
-
-    // The first action in the game is not timed (??? why ???)
-    // So run a start/stop pair.
-    timer.start();
+    timer.start(); // Skipping first action.
     timer.stop();
     expect(Timer.toString(timer.serialize(), clock)).eq('00:00');
 
@@ -40,11 +41,6 @@ describe('Timer', function() {
   });
 
   it('shows 1:00:01 after 3601 sec', function() {
-    // this lastStoppedAt is a bit of a gross mess.
-    (Timer as any).lastStoppedAt = 0;
-    const clock = new FakeClock();
-    const timer = Timer.newInstance(clock);
-
     timer.start(); // Skipping first action
     timer.stop();
 
@@ -53,5 +49,19 @@ describe('Timer', function() {
     expect(Timer.toString(timer.serialize(), clock)).eq('1:00:01');
     timer.stop();
     expect(Timer.toString(timer.serialize(), clock)).eq('1:00:01');
+  });
+
+  it('rebate', () => {
+    timer.start(); // Skipping first action
+    timer.stop();
+
+    timer.start();
+    clock.millis += 3601 * 1000;
+    timer.stop();
+    expect(timer.getElapsed()).eq(3_601_000);
+    timer.rebate(7_500);
+    expect(timer.getElapsed()).eq(3_593_500);
+    timer.rebate(10_000_000); // Doesn't go below zero.
+    expect(timer.getElapsed()).eq(0);
   });
 });

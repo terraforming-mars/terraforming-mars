@@ -1629,8 +1629,7 @@ export class Player implements IPlayer {
       this.setWaitingFor(orOptions, () => {
         this.actionsTakenThisRound++;
         this.actionsTakenThisGame++;
-        // TODO(kberg): implement this?
-        // this.timer.rebateTime(constants.BONUS_SECONDS_PER_ACTION);
+        this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
         this.takeAction();
       });
       return;

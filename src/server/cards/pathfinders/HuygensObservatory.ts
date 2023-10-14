@@ -79,7 +79,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
     }
     if (hasFreeTradeFleet) {
       if (orOptions.options.length === 1) {
-        orOptions.options.push(new SelectOption('Use an available trade fleet', 'OK').andThen(() => {
+        orOptions.options.push(new SelectOption('Use an available trade fleet').andThen(() => {
           game.defer(new SimpleDeferredAction(player, () => tradeInput));
           return undefined;
         }));

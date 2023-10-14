@@ -19,6 +19,7 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {Board} from '../../boards/Board';
 import {TITLES} from '../../inputs/titles';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class Greens extends Party implements IParty {
   readonly name = PartyName.GREENS;
@@ -113,7 +114,7 @@ class GreensPolicy04 implements Policy {
 
         if (availableMicrobeCards.length === 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm').andThen(() => {
+            new SelectOption(newMessage('Add ${0} microbes to ${1}', (b) => b.number(2).card(availableMicrobeCards[0]))).andThen(() => {
               player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
 
               return undefined;
@@ -121,7 +122,7 @@ class GreensPolicy04 implements Policy {
           );
         } else if (availableMicrobeCards.length > 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 microbes to a card', 'Confirm').andThen(() => {
+            new SelectOption('Add 2 microbes to a card').andThen(() => {
               return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards)
                 .andThen(([card]) => {
                   player.addResourceTo(card, {qty: 2, log: true});
@@ -131,7 +132,7 @@ class GreensPolicy04 implements Policy {
           );
         }
 
-        orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm').andThen(() => {
+        orOptions.options.push(new SelectOption('Gain 3 plants').andThen(() => {
           player.stock.add(Resource.PLANTS, 3);
           game.log('${0} gained 3 plants', (b) => b.player(player));
           return undefined;

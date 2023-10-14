@@ -42,7 +42,7 @@ export class Lowell extends CeoCard {
       game.ceoDeck.draw(game),
     ];
 
-    // TODO(): This is not being tested, but currently every CEO is always playable
+    // TODO(d-little): This is not being tested, but currently every CEO is always playable
     ceosDrawn = ceosDrawn.filter((ceo) => {
       if (ceo.canPlay?.(player) === false) {
         game.ceoDeck.discard(ceo);

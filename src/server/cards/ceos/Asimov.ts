@@ -54,7 +54,7 @@ export class Asimov extends CeoCard {
 
     freeAward.options = validAwards.slice(0, awardCount).map((award) => this.selectAwardToFund(player, award));
     freeAward.options.push(
-      new SelectOption('Do nothing', 'Confirm').andThen(() => {
+      new SelectOption('Do nothing').andThen(() => {
         game.log('${0} chose not to fund any award', (b) => b.player(player));
         return undefined;
       }),
@@ -72,7 +72,7 @@ export class Asimov extends CeoCard {
     const title = newMessage('Fund ${0} award [${1}]', (b) => b.award(award).string(
       players.map((player) => player.name + ': ' + scorer.get(player)).join(' / ')));
 
-    return new SelectOption(title, 'Confirm').andThen(() => {
+    return new SelectOption(title).andThen(() => {
       player.game.awards.push(award);
       player.game.fundAward(player, award);
       return undefined;

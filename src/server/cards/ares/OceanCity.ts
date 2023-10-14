@@ -19,7 +19,6 @@ export class OceanCity extends Card implements IProjectCard {
         tile: {
           type: TileType.OCEAN_CITY,
           on: 'upgradeable-ocean',
-          title: 'Select space for Ocean City',
         },
       },
 

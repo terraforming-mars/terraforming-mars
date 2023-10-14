@@ -24,7 +24,6 @@ export class OceanSanctuary extends Card implements IProjectCard {
         tile: {
           type: TileType.OCEAN_SANCTUARY,
           on: 'upgradeable-ocean',
-          title: 'Select space for Ocean Sanctuary',
           adjacencyBonus: {bonus: [SpaceBonus.ANIMAL]},
         },
       },

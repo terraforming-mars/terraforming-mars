@@ -29,6 +29,7 @@ import {Payment} from '../../common/inputs/Payment';
 import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {newMessage} from '../logs/MessageBuilder';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -395,7 +396,7 @@ export class Executor implements BehaviorExecutor {
           card: card.name,
         },
         on: tile.on,
-        title: tile.title,
+        title: tile.title ?? newMessage('Select space for ${0} tile', (b) => b.cardName(card.name)),
         adjacencyBonus: tile.adjacencyBonus,
       }));
     }
@@ -448,9 +449,7 @@ export class Executor implements BehaviorExecutor {
         if (moon.tile.space !== undefined) {
           MoonExpansion.addTile(player, moon.tile.space, {tileType: moon.tile.type, card: card?.name});
         } else {
-          player.game.defer(new PlaceSpecialMoonTile(
-            player, {tileType: moon.tile.type, card: card?.name},
-            moon.tile.title));
+          player.game.defer(new PlaceSpecialMoonTile(player, {tileType: moon.tile.type, card: card?.name}));
         }
       }
       if (moon.habitatRate !== undefined) MoonExpansion.raiseHabitatRate(player, moon.habitatRate);

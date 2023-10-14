@@ -3,12 +3,14 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {Tile} from '../Tile';
 import {IPlayer} from '../IPlayer';
 import {MoonExpansion} from './MoonExpansion';
+import {Message} from '@/common/logs/Message';
+import {newMessage} from '../logs/MessageBuilder';
 
 export class PlaceSpecialMoonTile extends DeferredAction {
   constructor(
     player: IPlayer,
     public tile: Tile,
-    public title: string = 'Select a space on The Moon for this tile.',
+    public title: string | Message = newMessage('Select a space on The Moon for ${0}', (b) => b.tileType(tile.tileType)),
   ) {
     super(player, Priority.DEFAULT);
   }

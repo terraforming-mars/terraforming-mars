@@ -20,7 +20,6 @@ export class OceanFarm extends Card implements IProjectCard {
         tile: {
           type: TileType.OCEAN_FARM,
           on: 'upgradeable-ocean',
-          title: 'Select space for Ocean Farm',
           adjacencyBonus: {bonus: [SpaceBonus.PLANT]},
         },
       },

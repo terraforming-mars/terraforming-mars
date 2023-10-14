@@ -19,7 +19,7 @@ export class SummitLogistics extends Card {
       behavior: {
         stock: {
           megacredits: {
-            tag: [Tag.JOVIAN, Tag.EARTH, Tag.VENUS, Tag.MARS],
+            tag: [Tag.JOVIAN, Tag.EARTH, Tag.VENUS, Tag.MARS, Tag.MOON],
             colonies: {colonies: {}},
           },
         },
@@ -34,8 +34,6 @@ export class SummitLogistics extends Card {
           b.cards(2).br;
           b.plainText('(Requires that Scientists are ruling or that you have 2 delegates there. ' +
             'Gain 1 M€ per planet tag and colony you have. Draw 2 cards.)');
-          b.br;
-          b.plainText('(FAN EXPANSION NOTE: This includes Mars but not The Moon.)');
         }),
       },
     });

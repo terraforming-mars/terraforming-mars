@@ -59,10 +59,9 @@ export abstract class MarketCard extends Card implements IActionCard {
     let limit = Math.floor(availableMC / terms.from);
     limit = Math.min(limit, terms.limit);
 
-    // TODO(kberg): use Messages.
     return new SelectAmount(
       newMessage(
-        'Select a number of trades (${terms.from} M€ => ${terms.to} ${this.tradeResource}, max ${limit})',
+        'Select a number of trades (${0} M€ => ${1} ${2}, max ${3})',
         (b) => b.number(terms.from).number(terms.to).string(this.tradeResource).number(limit)),
       `Buy ${this.tradeResource}`,
       1,
@@ -84,9 +83,11 @@ export abstract class MarketCard extends Card implements IActionCard {
     let limit = player.stock.get(this.tradeResource);
     limit = Math.min(limit, terms.limit);
 
-    // TODO(kberg): use Messages.
+
     return new SelectAmount(
-      `Select a number of trades (${terms.from} ${this.tradeResource} => ${terms.to} M€, max ${limit})`,
+      newMessage(
+        'Select a number of trades (${0} ${1} => ${2} M€, max ${3})',
+        (b) => b.number(terms.from).string(this.tradeResource).number(terms.to).number(limit)),
       `Sell ${this.tradeResource}`, 1, limit,
     ).andThen((unitsSold: number) => {
       const cashEarned = unitsSold * terms.to;

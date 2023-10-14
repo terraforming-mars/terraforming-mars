@@ -1288,7 +1288,7 @@ export class Player implements IPlayer {
             return undefined;
           }));
       action.options.push(
-        new SelectOption('Don\'t place a greenery', 'Confirm').andThen(() => {
+        new SelectOption('Don\'t place a greenery').andThen(() => {
           this.game.playerIsDoneWithGame(this);
           return undefined;
         }),

@@ -50,9 +50,7 @@ export class CometForVenus extends Card implements IProjectCard {
             selectedPlayer.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
             return undefined;
           }),
-        new SelectOption(
-          'Do not remove M€',
-          'Confirm'));
+        new SelectOption('Do not remove M€'));
     }
 
     return undefined;

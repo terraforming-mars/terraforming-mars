@@ -16,6 +16,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
 import {sum} from '../../../common/utils/utils';
 import {TITLES} from '../../inputs/titles';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -91,7 +92,7 @@ class UnityPolicy02 implements Policy {
 
         if (availableFloaterCards.length === 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm').andThen(() => {
+            new SelectOption(newMessage('Add ${0} floaters to ${1}', (b) => b.number(2).card(availableFloaterCards[0]))).andThen(() => {
               player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
 
               return undefined;
@@ -99,7 +100,7 @@ class UnityPolicy02 implements Policy {
           );
         } else if (availableFloaterCards.length > 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 floaters to a card', 'Confirm').andThen(() => {
+            new SelectOption('Add 2 floaters to a card').andThen(() => {
               return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards)
                 .andThen(([card]) => {
                   player.addResourceTo(card, {qty: 2, log: true});
@@ -109,7 +110,7 @@ class UnityPolicy02 implements Policy {
           );
         }
 
-        orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm').andThen(() => {
+        orOptions.options.push(new SelectOption('Gain 2 titanium').andThen(() => {
           player.stock.add(Resource.TITANIUM, 2);
           game.log('${0} gained 2 titanium', (b) => b.player(player));
           return undefined;

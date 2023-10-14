@@ -52,7 +52,7 @@ export class HiredRaiders extends Card implements IProjectCard {
         const amountStolen = Math.min(2, target.steel);
         const optionTitle = newMessage('Steal ${0} steel from ${1}', (b) => b.number(amountStolen).player(target).getMessage());
 
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm').andThen(() => {
+        availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           player.steel += amountStolen;
           target.stock.deduct(Resource.STEEL, 2, {log: true, from: player, stealing: true});
           return undefined;
@@ -63,7 +63,7 @@ export class HiredRaiders extends Card implements IProjectCard {
         const amountStolen = Math.min(3, target.megaCredits);
         const optionTitle = newMessage('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
 
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm').andThen(() => {
+        availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           player.megaCredits += amountStolen;
           target.stock.deduct(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
           return undefined;
@@ -72,7 +72,7 @@ export class HiredRaiders extends Card implements IProjectCard {
     });
 
     if (availableActions.options.length > 0) {
-      availableActions.options.push(new SelectOption('Do not steal', 'Confirm').andThen(() => {
+      availableActions.options.push(new SelectOption('Do not steal').andThen(() => {
         return undefined;
       }));
       return availableActions;

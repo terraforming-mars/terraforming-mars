@@ -109,7 +109,7 @@ export class RoadPiracy extends Card implements IProjectCard {
       return undefined;
     }
 
-    options.options.push(new SelectOption('Do not steal', 'Confirm'));
+    options.options.push(new SelectOption('Do not steal'));
     return options;
   }
 }

@@ -53,7 +53,7 @@ export class RemoveAnyPlants extends DeferredAction {
 
     const orOptions = new OrOptions(
       ...removalOptions,
-      new SelectOption('Skip removing plants', 'Confirm').andThen(() => {
+      new SelectOption('Skip removing plants').andThen(() => {
         return undefined;
       }),
     );

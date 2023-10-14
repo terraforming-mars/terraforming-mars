@@ -56,7 +56,7 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
             cardOwner.addResourceTo(this, {qty: 1, log: true});
             return undefined;
           }));
-        orOptions.options.push(new SelectOption('Do not use card effect.', undefined).andThen(() => {
+        orOptions.options.push(new SelectOption('Do not use card effect').andThen(() => {
           game.log('${0} declined to use the ${1} effect', (b) => b.player(cardOwner).card(this));
           return undefined;
         }));

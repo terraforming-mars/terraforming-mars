@@ -1615,7 +1615,7 @@ export class Player implements IPlayer {
           newMessage('Take first action of ${0} corporation', (b) => b.card(corp)),
           corp.initialActionText)
           .andThen(() => {
-            this.runInitialAction(corp);
+            this.deferInitialAction(corp);
             this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
             return undefined;
           });
@@ -1642,7 +1642,7 @@ export class Player implements IPlayer {
   }
 
   // TODO(kberg): perhaps move to Card
-  public runInitialAction(corp: ICorporationCard) {
+  public deferInitialAction(corp: ICorporationCard) {
     this.game.defer(new SimpleDeferredAction(this, () => {
       if (corp.initialAction) {
         return corp.initialAction(this);
@@ -2018,7 +2018,6 @@ export class Player implements IPlayer {
     return player;
   }
 
-  /* Shorthand for deferring things */
   public defer(input: PlayerInput | undefined | void, priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) {
       return;

@@ -273,7 +273,7 @@ export class Turmoil {
 
     // 4 - Changing Time
     if (this.currentGlobalEvent) {
-      this.globalEventDealer.discardedGlobalEvents.push(this.currentGlobalEvent);
+      this.globalEventDealer.discard(this.currentGlobalEvent);
     }
     // 4.a - Coming Event is now Current event. Add neutral delegate.
     this.currentGlobalEvent = this.comingGlobalEvent;

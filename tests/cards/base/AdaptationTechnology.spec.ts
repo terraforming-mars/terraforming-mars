@@ -6,6 +6,7 @@ import {Resource} from '../../../src/common/Resource';
 import {setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
+import {GlobalParameter} from '../../../src/common/GlobalParameter';
 
 describe('AdaptationTechnology', function() {
   let adaptationTechnology: AdaptationTechnology;
@@ -21,7 +22,7 @@ describe('AdaptationTechnology', function() {
     expect(player.playCard(adaptationTechnology)).is.undefined;
 
     expect(adaptationTechnology.getVictoryPoints(player)).to.eq(1);
-    expect(adaptationTechnology.getRequirementBonus()).to.eq(2);
+    expect(adaptationTechnology.getGlobalParameterRequirementBonus(player, GlobalParameter.TEMPERATURE)).to.eq(2);
   });
 
   it('Test against oxygen requirement', () => {

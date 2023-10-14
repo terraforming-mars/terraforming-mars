@@ -25,7 +25,7 @@ export class EcologyExperts extends PreludeCard {
       },
     });
   }
-  public getRequirementBonus(player: IPlayer): number {
+  public override getGlobalParameterRequirementBonus(player: IPlayer): number {
     if (player.lastCardPlayed === this.name) {
       // Magic number high enough to always ignore requirements.
       return 50;

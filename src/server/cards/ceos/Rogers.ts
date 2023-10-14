@@ -35,7 +35,7 @@ export class Rogers extends CeoCard {
     return undefined;
   }
 
-  public getRequirementBonus(_player: IPlayer, parameter: GlobalParameter): number {
+  public override getGlobalParameterRequirementBonus(_player: IPlayer, parameter: GlobalParameter): number {
     if (this.opgActionIsActive === false || parameter !== GlobalParameter.VENUS) return 0;
     // Magic number high enough to always ignore requirements.
     return 50;

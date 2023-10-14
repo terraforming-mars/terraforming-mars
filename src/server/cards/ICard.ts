@@ -59,10 +59,12 @@ export interface ICard {
   /**
    * The +/- bonus applied to global parameter requirements, e.g. Adaptation Technology.
    *
-   * `parameter` describes which global parameter is being tested. As of now it only applies
-   * to Morningstar Inc.
+   * `parameter` describes which global parameter is being tested.
+   *
+   * NB: Instances of `Card` allow using a JSON object to describe the global parameter bonus,
+   * see `globalParameterRequirementBonus` for more information.
    */
-  getRequirementBonus?(player: IPlayer, parameter: GlobalParameter): number;
+  getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number;
   victoryPoints?: number | 'special' | IVictoryPoints,
   getVictoryPoints(player: IPlayer): number;
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */

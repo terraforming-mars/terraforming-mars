@@ -42,7 +42,7 @@ export class RemoveAnyPlants extends DeferredAction {
       const message =
         new MessageBuilder('Remove ${0} plants from ${1}')
           .number(qtyToRemove)
-          .rawString(candidate.name) // TODO(kberg): change to .player(candidate). But it won't work immediately.
+          .player(candidate)
           .getMessage();
 
       return new SelectOption(message, 'Remove plants').andThen(() => {

@@ -15,7 +15,7 @@ describe('OutdoorSports', function() {
 
   beforeEach(function() {
     card = new OutdoorSports();
-    [, player, player2] = testGame(2);
+    [/* skipped */, player, player2] = testGame(2);
     const board = player.game.board;
     oceanSpace = board.getAvailableSpacesForOcean(player)[0];
 

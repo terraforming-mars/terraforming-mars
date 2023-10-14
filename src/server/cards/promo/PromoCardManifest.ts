@@ -26,6 +26,7 @@ import {DuskLaserMining} from './DuskLaserMining';
 import {EnergyMarket} from './EnergyMarket';
 import {Factorum} from './Factorum';
 import {FieldCappedCity} from './FieldCappedCity';
+import {FloydContinuum} from './FloydContinuum';
 import {GiantSolarCollector} from './GiantSolarCollector';
 import {GreatDamPromo} from './GreatDamPromo';
 import {Harvest} from './Harvest';
@@ -124,6 +125,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.PSYCHE]: {Factory: Psyche},
     [CardName.ROBOT_POLLINATORS]: {Factory: RobotPollinators},
     [CardName.SUPERCAPACITORS]: {Factory: Supercapacitors},
+    [CardName.FLOYD_CONTINUUM]: {Factory: FloydContinuum},
     [CardName.AQUEDUCT_SYSTEMS]: {Factory: AqueductSystems},
     [CardName.ASTRA_MECHANICA]: {Factory: AstraMechanica},
     [CardName.ST_JOSEPH_OF_CUPERTINO_MISSION]: {Factory: StJosephOfCupertinoMission},

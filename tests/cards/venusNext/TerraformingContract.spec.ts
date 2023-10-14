@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('TerraformingContract', function() {
   it('Should play', function() {
     const card = new TerraformingContract();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
 
     player.setTerraformRating(24);
     expect(player.simpleCanPlay(card)).is.not.true;

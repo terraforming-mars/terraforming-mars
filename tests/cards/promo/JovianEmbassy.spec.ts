@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 describe('JovianEmbassy', function() {
   it('Should play', function() {
     const card = new JovianEmbassy();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
 
     card.play(player);
     expect(player.getTerraformRating()).to.eq(21);

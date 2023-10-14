@@ -32,7 +32,7 @@ describe('HiredRaiders', function() {
   });
 
   it('Works in solo', function() {
-    [, player] = testGame(1);
+    [/* skipped */, player] = testGame(1);
 
     const action = cast(card.play(player), OrOptions);
     expect(action.options).has.lengthOf(2);

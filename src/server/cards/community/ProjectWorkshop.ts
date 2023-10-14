@@ -60,7 +60,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
 
   private getEligibleCards(player: IPlayer) {
     const cards = player.playedCards.filter((card) => card.type === CardType.ACTIVE);
-    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
+    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
       return cards;
     }
     return cards.filter((card) => {

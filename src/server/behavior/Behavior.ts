@@ -144,6 +144,13 @@ export interface Behavior {
     miningRate?: number,
     logisticsRate?: number,
   },
+
+  underworld?: {
+    // identify?: Countable,
+    // excavate?: number | {count: Countable, ignorePlacementRestrictions?: boolean},
+    corruption?: Countable,
+    // markThisGeneration?: NoAttributes,
+  },
 }
 
 export interface PlaceMoonTile {

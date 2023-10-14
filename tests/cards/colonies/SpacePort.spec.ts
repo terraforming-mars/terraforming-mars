@@ -13,7 +13,7 @@ describe('SpacePort', function() {
 
   beforeEach(function() {
     card = new SpacePort();
-    [, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
+    [/* skipped */, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
       ColonyName.CERES,
       ColonyName.CALLISTO,
       ColonyName.ENCELADUS,

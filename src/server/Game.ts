@@ -70,6 +70,9 @@ import {addDays, dayStringToDays} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
 import {IGame, Score} from './IGame';
 import {MarsBoard} from './boards/MarsBoard';
+import {UnderworldData} from './underworld/UnderworldData';
+import {UnderworldExpansion} from './underworld/UnderworldExpansion';
+import {SpaceType} from '../common/boards/SpaceType';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -131,6 +134,7 @@ export class Game implements IGame, Logger {
   public aresData: AresData | undefined;
   public moonData: MoonData | undefined;
   public pathfindersData: PathfindersData | undefined;
+  public underworldData: UnderworldData = UnderworldExpansion.initializeGameWithoutUnderworld();
 
   // Card-specific data
   // Mons Insurance promo corp
@@ -267,6 +271,11 @@ export class Game implements IGame, Logger {
     // Add Turmoil stuff
     if (gameOptions.turmoilExtension) {
       game.turmoil = Turmoil.newInstance(game, gameOptions.politicalAgendasExtension);
+    }
+
+    // Must configure this before solo placement.
+    if (gameOptions.underworldExpansion) {
+      game.underworldData = UnderworldExpansion.initialize(rng);
     }
 
     // and 2 neutral cities and forests on board
@@ -425,6 +434,7 @@ export class Game implements IGame, Logger {
       syndicatePirateRaider: this.syndicatePirateRaider,
       temperature: this.temperature,
       tradeEmbargo: this.tradeEmbargo,
+      underworldData: this.underworldData,
       undoCount: this.undoCount,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [
@@ -741,11 +751,15 @@ export class Game implements IGame, Logger {
       this.beholdTheEmperor = false;
     });
 
+    UnderworldExpansion.endGeneration(this);
+
     // turmoil.endGeneration might have added actions.
     if (this.deferredActions.length > 0) {
       this.deferredActions.runAll(() => this.goToDraftOrResearch());
     } else {
+      // TODO(kberg): Move this to the start of goToDraftOrResearch
       this.phase = Phase.INTERGENERATION;
+      // TODO(kberg): Rename to startNewGeneration
       this.goToDraftOrResearch();
     }
   }
@@ -1168,7 +1182,7 @@ export class Game implements IGame, Logger {
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onTemperatureChange(this, aresData);
     });
-
+    UnderworldExpansion.onTemperatureChange(this, steps);
     return undefined;
   }
 
@@ -1276,6 +1290,12 @@ export class Game implements IGame, Logger {
     AresHandler.ifAres(this, () => {
       AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
     });
+
+    if (this.gameOptions.underworldExpansion) {
+      if (space.spaceType !== SpaceType.COLONY && space.player === player) {
+        UnderworldExpansion.identify(this, space, player);
+      }
+    }
   }
 
   public simpleAddTile(player: IPlayer, space: Space, tile: Tile) {
@@ -1603,6 +1623,9 @@ export class Game implements IGame, Logger {
       game.pathfindersData = PathfindersData.deserialize(d.pathfindersData);
     }
 
+    if (d.underworldData !== undefined) {
+      game.underworldData = d.underworldData;
+    }
     game.passedPlayers = new Set<PlayerId>(d.passedPlayers);
     game.donePlayers = new Set<PlayerId>(d.donePlayers);
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);

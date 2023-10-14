@@ -25,26 +25,21 @@ export class PartyHooks {
     }
   }
 
-  // Return true when the supplied policy is active. When `policyId` is inactive, it selects
-  // the default policy for `partyName`.
-  static shouldApplyPolicy(player: IPlayer, partyName: PartyName, policyId?: PolicyId): boolean {
-    const game = player.game;
-    return Turmoil.ifTurmoilElse(game, (turmoil) => {
-      if (game.phase !== Phase.ACTION) return false;
-
-      const rulingParty = turmoil.rulingParty;
-
-      // Set the default policy if not given
-      if (policyId === undefined) {
-        policyId = rulingParty.policies[0].id;
+  /**
+   * Return true when `policy` is active.
+   */
+  static shouldApplyPolicy(player: IPlayer, partyName: PartyName, policyId: PolicyId): boolean {
+    if (player.game.phase !== Phase.ACTION) {
+      return false;
+    }
+    return Turmoil.ifTurmoilElse(player.game, (turmoil) => {
+      // Hook for CEO Zan's effect (Skip all Reds Policy effects)
+      if (partyName === PartyName.REDS && player.cardIsInEffect(CardName.ZAN)) {
+        return false;
       }
 
-      // Hook for CEO Zan's effect (Skip all Reds Policy effects)
-      if (partyName === PartyName.REDS && player.cardIsInEffect(CardName.ZAN)) return false;
-
-      const currentPolicyId: PolicyId = PoliticalAgendas.currentAgenda(turmoil).policyId;
-
-      return rulingParty.name === partyName && currentPolicyId === policyId;
+      const currentPolicyId = PoliticalAgendas.currentAgenda(turmoil).policyId;
+      return turmoil.rulingParty.name === partyName && currentPolicyId === policyId;
     }, () => false);
   }
 }

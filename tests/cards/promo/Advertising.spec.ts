@@ -7,7 +7,7 @@ import {testGame} from '../../TestGame';
 describe('Advertising', function() {
   it('Should play', function() {
     const advertising = new Advertising();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     Game.newInstance('gameid', [player], player);
 
     player.playedCards.push(advertising);

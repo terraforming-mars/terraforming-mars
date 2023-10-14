@@ -453,6 +453,56 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
+  // public identify(count: number = 1, options?: ItemOptions) {
+  //   const item = new CardRenderItem(CardRenderItemType.IDENTIFY, count, options);
+  //   return this._appendToRow(item);
+  // }
+
+  // public excavate(count: number = 1, options?: ItemOptions) {
+  //   const item = new CardRenderItem(CardRenderItemType.EXCAVATE, count, options);
+  //   return this._appendToRow(item);
+  // }
+
+  public corruption(count: number = 1, options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.CORRUPTION, count, options);
+    return this._appendToRow(item);
+  }
+
+  // public undergroundResources(count: number = 1, options?: ItemOptions) {
+  //   const item = new CardRenderItem(CardRenderItemType.UNDERGROUND_RESOURCES, count, options);
+  //   return this._appendToRow(item);
+  // }
+
+  // public corruptionShield() {
+  //   const item = new CardRenderItem(CardRenderItemType.CORRUPTION_SHIELD);
+  //   return this._appendToRow(item);
+  // }
+
+  // public tool(count: number = 1, options?: ItemOptions) {
+  //   const item = new CardRenderItem(CardRenderItemType.TOOL, count, options);
+  //   return this._appendToRow(item);
+  // }
+
+  // public ware(count: number = 1, options?: ItemOptions) {
+  //   const item = new CardRenderItem(CardRenderItemType.WARE, count, options);
+  //   return this._appendToRow(item);
+  // }
+
+  // public scoop(count: number = 1, options?: ItemOptions) {
+  //   const item = new CardRenderItem(CardRenderItemType.SCOOP, count, options);
+  //   return this._appendToRow(item);
+  // }
+
+  // public journalism(count: number = 1, options?: ItemOptions) {
+  //   const item = new CardRenderItem(CardRenderItemType.JOURNALISM, count, options);
+  //   return this._appendToRow(item);
+  // }
+
+  // public activist(count: number = 1, options?: ItemOptions) {
+  //   const item = new CardRenderItem(CardRenderItemType.ACTIVIST, count, options);
+  //   return this._appendToRow(item);
+  // }
+
   public emptyTile(type: 'normal' | 'golden' = 'normal', options?: ItemOptions) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1, options);

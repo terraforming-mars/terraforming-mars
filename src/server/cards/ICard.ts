@@ -41,8 +41,29 @@ export interface ICard {
   name: CardName;
   tags: Array<Tag>;
   play(player: IPlayer): PlayerInput | undefined;
+  /**
+   * Describes the M€ discount `player` could apply to playing `card`.
+   *
+   * If the discount code is simple, consider using `cardDiscount` instead.
+   */
   getCardDiscount?(player: IPlayer, card: IProjectCard): number;
+  /**
+   * Describes type of discount this card applies to other cards.
+   *
+   * Achieves the same thing as `getCardDiscount` but for the simplest, most common use cases.
+   *
+   * Having descriptions this simple also makes it easier to render its discount in the UI.
+   */
   cardDiscount?: OneOrArray<CardDiscount>;
+
+  /**
+   * The +/- bonus applied to global parameter requirements, e.g. Adaptation Technology.
+   *
+   * `parameter` describes which global parameter is being tested.
+   *
+   * NB: Instances of `Card` allow using a JSON object to describe the global parameter bonus,
+   * see `globalParameterRequirementBonus` for more information.
+   */
   getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number;
   victoryPoints?: number | 'special' | IVictoryPoints,
   getVictoryPoints(player: IPlayer): number;
@@ -71,6 +92,23 @@ export interface ICard {
    * @param count the number of resources added to `card`
    */
   onResourceAdded?(player: IPlayer, playedCard: ICard, count: number): void;
+
+  /**
+   * Optional callback when any player identifies a space.
+   *
+   * @param identifyingPlayer the player performing the identification action
+   * @param cardOwner the player who owns THIS CARD.
+   * @param space the space that was just identified.
+   */
+  onIdentification?(identifyingPlayer: IPlayer, cardOwner: IPlayer, space: Space): void;
+
+  /**
+   * Optional callback when any player excavates a space.
+   *
+   * @param player the player performing the excavation action
+   * @param space the space that was just excavated.
+   */
+  onExcavation?(player: IPlayer, space: Space): void;
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */
   type: CardType;

@@ -10,7 +10,7 @@ let timer: Timer;
 
 describe('EscapeVelocity', function() {
   beforeEach(() => {
-    [, player] = testGame(1, {
+    [/* skipped */, player] = testGame(1, {
       escapeVelocityMode: true,
       escapeVelocityThreshold: 3, // 3m
       escapeVelocityBonusSeconds: 5, // 5s

@@ -17,7 +17,7 @@ describe('OrbitalCleanup', function() {
 
   beforeEach(function() {
     card = new OrbitalCleanup();
-    [, player] = testGame(1);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not play if cannot decrease MC production', function() {

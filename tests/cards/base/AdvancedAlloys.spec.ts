@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 describe('AdvancedAlloys', function() {
   it('Should play', function() {
     const card = new AdvancedAlloys();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     card.play(player);
     expect(player.getTitaniumValue()).to.eq(4);
     expect(player.getSteelValue()).to.eq(3);

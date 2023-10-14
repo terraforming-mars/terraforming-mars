@@ -249,7 +249,16 @@ export interface IPlayer {
   finishProductionPhase(): void;
   worldGovernmentTerraforming(): void;
   dealForDraft(quantity: number, cards: Array<IProjectCard>): void;
-  askPlayerToDraft(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void;
+
+  /**
+   * Ask the player to draft from a set of cards.
+   *
+   * @param initialDraft when true, this is part of the first generation draft.
+   * @param passTo  The player _this_ player passes remaining cards to.
+   * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
+   *   step in the draft, and this function will deal cards.
+   */
+  askPlayerToDraft(initialDraft: boolean, passTo: IPlayer, passedCards?: Array<IProjectCard>): void;
   runResearchPhase(draftVariant: boolean): void;
   getCardCost(card: IProjectCard): number;
 

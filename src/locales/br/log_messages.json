@@ -125,7 +125,7 @@
     "drafting": "escolhendo",
     "researching": "pesquisando",
 
-    "${0} used Turmoil Scientists action": "${0} usou ação do Cientistas: Reviravolta",
+    "${0} used Turmoil ${1} action": "${0} usou ação do ${0}: Reviravolta",
 
 	"${0} doubled resources on ${1} from ${2} to ${3}": "${0} dobrou os recursos em ${1} de ${2} para ${3}",
     "${0} linked ${1} with ${2}": "${0} ligada ${1} com ${2}",

@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ICard} from '../ICard';
+import {IStandardProjectCard} from '../IStandardProjectCard';
 import {Resource} from '../../../common/Resource';
 
 export class StandardTechnology extends Card implements IProjectCard {
@@ -26,7 +26,7 @@ export class StandardTechnology extends Card implements IProjectCard {
       },
     });
   }
-  public onStandardProject(player: IPlayer, projectType: ICard) {
+  public onStandardProject(player: IPlayer, projectType: IStandardProjectCard) {
     if (projectType.name !== CardName.SELL_PATENTS_STANDARD_PROJECT) {
       player.stock.add(Resource.MEGACREDITS, 3, {log: true});
     }

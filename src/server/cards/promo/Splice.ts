@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resource} from '../../../common/Resource';
 import {all, played} from '../Options';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class Splice extends Card implements ICorporationCard {
   constructor() {
@@ -71,7 +71,7 @@ export class Splice extends Card implements ICorporationCard {
     });
 
     const getMegacredits = new SelectOption(
-      newMessage('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
+      message('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
       'Gain M€')
       .andThen(() => {
         player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});

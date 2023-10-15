@@ -15,7 +15,7 @@ import {SpaceType} from '../../common/boards/SpaceType';
 // import {PlayerInput} from '../PlayerInput';
 // import {OrOptions} from '../inputs/OrOptions';
 // import {SelectOption} from '../inputs/SelectOption';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 import {LogHelper} from '../LogHelper';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Phase} from '../../common/Phase';
@@ -271,7 +271,7 @@ export class UnderworldExpansion {
       break;
     case 'ocean':
       if (player.game.canAddOcean() && player.canAfford({cost: 4, tr: {oceans: 1}})) {
-        player.game.defer(new SelectPaymentDeferred(player, 4, {title: newMessage('Select how to pay 4 M€ for ocean bonus')}))
+        player.game.defer(new SelectPaymentDeferred(player, 4, {title: message('Select how to pay 4 M€ for ocean bonus')}))
           .andThen(() => player.game.defer(new PlaceOceanTile(player)));
       }
       break;

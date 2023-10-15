@@ -19,7 +19,7 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {Board} from '../../boards/Board';
 import {TITLES} from '../../inputs/titles';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class Greens extends Party implements IParty {
   readonly name = PartyName.GREENS;
@@ -113,7 +113,7 @@ class GreensPolicy04 implements Policy {
 
         if (availableMicrobeCards.length === 1) {
           orOptions.options.push(
-            new SelectOption(newMessage('Add ${0} microbes to ${1}', (b) => b.number(2).card(availableMicrobeCards[0]))).andThen(() => {
+            new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(2).card(availableMicrobeCards[0]))).andThen(() => {
               player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
 
               return undefined;

@@ -12,7 +12,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class ImportedHydrogen extends Card implements IProjectCard {
   constructor() {
@@ -60,7 +60,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
 
     if (availableMicrobeCards.length === 1) {
       const targetMicrobeCard = availableMicrobeCards[0];
-      availableActions.push(new SelectOption(newMessage('Add ${0} microbes to ${1}', (b) => b.number(3).card(targetMicrobeCard)), 'Add microbes').andThen(() => {
+      availableActions.push(new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(3).card(targetMicrobeCard)), 'Add microbes').andThen(() => {
         player.addResourceTo(targetMicrobeCard, {qty: 3, log: true});
         return undefined;
       }));
@@ -76,7 +76,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
 
     if (availableAnimalCards.length === 1) {
       const targetAnimalCard = availableAnimalCards[0];
-      availableActions.push(new SelectOption(newMessage('Add ${0} animals to ${1}', (b) => b.number(2).card(targetAnimalCard)), 'Add animals').andThen(() => {
+      availableActions.push(new SelectOption(message('Add ${0} animals to ${1}', (b) => b.number(2).card(targetAnimalCard)), 'Add animals').andThen(() => {
         player.addResourceTo(targetAnimalCard, {qty: 2, log: true});
         return undefined;
       }));

@@ -14,7 +14,7 @@ import {SelectColony} from '../inputs/SelectColony';
 import {IColonyTrader} from '../colonies/IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
 import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
 import {Payment} from '../../common/inputs/Payment';
 
@@ -155,7 +155,7 @@ export class TradeWithEnergy implements IColonyTrader {
     return this.player.energy >= this.tradeCost;
   }
   public optionText() {
-    return newMessage('Pay ${0} energy', (b) => b.number(this.tradeCost));
+    return message('Pay ${0} energy', (b) => b.number(this.tradeCost));
   }
 
   public trade(colony: IColony) {
@@ -176,7 +176,7 @@ export class TradeWithTitanium implements IColonyTrader {
     return this.player.titanium >= this.tradeCost;
   }
   public optionText() {
-    return newMessage('Pay ${0} titanium', (b) => b.number(this.tradeCost));
+    return message('Pay ${0} titanium', (b) => b.number(this.tradeCost));
   }
 
   public trade(colony: IColony) {
@@ -203,12 +203,12 @@ export class TradeWithMegacredits implements IColonyTrader {
     return this.player.canAfford(this.tradeCost);
   }
   public optionText() {
-    return newMessage('Pay ${0} M€', (b) => b.number(this.tradeCost));
+    return message('Pay ${0} M€', (b) => b.number(this.tradeCost));
   }
 
   public trade(colony: IColony) {
     this.player.game.defer(new SelectPaymentDeferred(this.player, this.tradeCost,
-      {title: newMessage('Select how to pay ${0} for colony trade', (b) => b.number(this.tradeCost))}))
+      {title: message('Select how to pay ${0} for colony trade', (b) => b.number(this.tradeCost))}))
       .andThen(() => {
         this.player.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
         colony.trade(this.player);

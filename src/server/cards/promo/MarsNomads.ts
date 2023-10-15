@@ -8,7 +8,7 @@ import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {intersection} from '../../../common/utils/utils';
 import {TileType} from '../../../common/TileType';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class MarsNomads extends Card implements IActionCard {
   constructor() {
@@ -40,7 +40,7 @@ export class MarsNomads extends Card implements IActionCard {
 
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
-      newMessage('Select space for ${0}', (b) => b.card(this)),
+      message('Select space for ${0}', (b) => b.card(this)),
       player.game.board.getAvailableSpacesOnLand(player))
       .andThen((space) => {
         player.game.nomadSpace = space.id;
@@ -69,7 +69,7 @@ export class MarsNomads extends Card implements IActionCard {
     const spaces = this.eliglbleDestinationSpaces(player);
 
     return new SelectSpace(
-      newMessage('Select new space for ${0}', (b) => b.card(this)),
+      message('Select new space for ${0}', (b) => b.card(this)),
       spaces)
       .andThen((space) => {
         player.game.nomadSpace = space.id;

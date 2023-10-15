@@ -103,8 +103,8 @@ export class TurmoilHandler {
       const availableSteps = constants.MAX_OXYGEN_LEVEL - player.game.getOxygenLevel();
       const steps = Math.min(availableSteps, tr.oxygen);
       total = total + steps;
-      // TODO(kberg): Add constants for these constraints.
-      if (player.game.getOxygenLevel() < 8 && player.game.getOxygenLevel() + steps >= 8) {
+      if (player.game.getOxygenLevel() < constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS &&
+          player.game.getOxygenLevel() + steps >= constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS) {
         tr.temperature = (tr.temperature ?? 0) + 1;
       }
     }
@@ -113,7 +113,8 @@ export class TurmoilHandler {
       const availableSteps = Math.floor((constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2);
       const steps = Math.min(availableSteps, tr.temperature);
       total = total + steps;
-      if (player.game.getTemperature() < 0 && player.game.getTemperature() + (steps * 2) >= 0) {
+      if (player.game.getTemperature() < constants.TEMPERATURE_FOR_OCEAN_BONUS &&
+        player.game.getTemperature() + (steps * 2) >= constants.TEMPERATURE_FOR_OCEAN_BONUS) {
         tr.oceans = (tr.oceans ?? 0) + 1;
       }
     }
@@ -128,7 +129,8 @@ export class TurmoilHandler {
       const availableSteps = Math.floor((constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2);
       const steps = Math.min(availableSteps, tr.venus);
       total = total + steps;
-      if (player.game.getVenusScaleLevel() < 16 && player.game.getVenusScaleLevel() + (steps * 2) >= 16) {
+      if (player.game.getVenusScaleLevel() < constants.VENUS_LEVEL_FOR_TR_BONUS &&
+        player.game.getVenusScaleLevel() + (steps * 2) >= constants.VENUS_LEVEL_FOR_TR_BONUS) {
         tr.tr = (tr.tr ?? 0) + 1;
       }
     }

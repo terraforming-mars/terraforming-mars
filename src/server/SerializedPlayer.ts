@@ -6,7 +6,7 @@ import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 
 interface DeprecatedFields {
-  // TODO(kberg): remove after 2024-11-30
+  // TODO(kberg): remove after 2023-11-30
   hasIncreasedTerraformRatingThisGeneration?: boolean;
 }
 

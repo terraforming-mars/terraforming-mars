@@ -1076,7 +1076,8 @@ export class Game implements IGame, Logger {
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OXYGEN, steps);
       player.increaseTerraformRating(steps);
     }
-    if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
+    if (this.oxygenLevel < constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS &&
+      this.oxygenLevel + steps >= constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS) {
       this.increaseTemperature(player, 1);
     }
 
@@ -1106,19 +1107,21 @@ export class Game implements IGame, Logger {
     const steps = Math.min(increments, (constants.MAX_VENUS_SCALE - this.venusScaleLevel) / 2);
 
     if (this.phase !== Phase.SOLAR) {
-      if (this.venusScaleLevel < 8 && this.venusScaleLevel + steps * 2 >= 8) {
+      if (this.venusScaleLevel < constants.VENUS_LEVEL_FOR_CARD_BONUS &&
+        this.venusScaleLevel + steps * 2 >= constants.VENUS_LEVEL_FOR_CARD_BONUS) {
         player.drawCard();
       }
-      if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
+      if (this.venusScaleLevel < constants.VENUS_LEVEL_FOR_TR_BONUS &&
+        this.venusScaleLevel + steps * 2 >= constants.VENUS_LEVEL_FOR_TR_BONUS) {
         player.increaseTerraformRating();
       }
       if (this.gameOptions.altVenusBoard) {
         const newValue = this.venusScaleLevel + steps * 2;
-        const minimalBaseline = Math.max(this.venusScaleLevel, 16);
-        const maximumBaseline = Math.min(newValue, 30);
+        const minimalBaseline = Math.max(this.venusScaleLevel, constants.ALT_VENUS_MINIMUM_BONUS);
+        const maximumBaseline = Math.min(newValue, constants.MAX_VENUS_SCALE);
         const standardResourcesGranted = Math.max((maximumBaseline - minimalBaseline) / 2, 0);
 
-        const grantWildResource = this.venusScaleLevel + (steps * 2) >= 30;
+        const grantWildResource = this.venusScaleLevel + (steps * 2) >= constants.MAX_VENUS_SCALE;
         // The second half of this expression removes any increases earler than 16-to-18.
         if (grantWildResource || standardResourcesGranted > 0) {
           this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
@@ -1158,10 +1161,12 @@ export class Game implements IGame, Logger {
 
     if (this.phase !== Phase.SOLAR) {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
-      if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
+      if (this.temperature < constants.TEMPERATURE_BONUS_FOR_HEAT_1 &&
+        this.temperature + steps * 2 >= constants.TEMPERATURE_BONUS_FOR_HEAT_1) {
         player.production.add(Resource.HEAT, 1, {log: true});
       }
-      if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
+      if (this.temperature < constants.TEMPERATURE_BONUS_FOR_HEAT_2 &&
+        this.temperature + steps * 2 >= constants.TEMPERATURE_BONUS_FOR_HEAT_2) {
         player.production.add(Resource.HEAT, 1, {log: true});
       }
 
@@ -1171,7 +1176,7 @@ export class Game implements IGame, Logger {
     }
 
     // BONUS FOR OCEAN TILE AT 0
-    if (this.temperature < 0 && this.temperature + steps * 2 >= 0) {
+    if (this.temperature < constants.TEMPERATURE_FOR_OCEAN_BONUS && this.temperature + steps * 2 >= constants.TEMPERATURE_FOR_OCEAN_BONUS) {
       this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from temperature increase'}));
     }
 

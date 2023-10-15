@@ -127,9 +127,9 @@
     "drafting": "választás",
     "researching": "kutatás",
 
-    "${0} used Turmoil Scientists action": "${0} használta a Hatalmi Játszma: Tudósok akciót",
+    "${0} used Turmoil ${1} action": "${0} használta a Hatalmi Játszma: ${1} akciót",
 
-	"${0} doubled resources on ${1} from ${2} to ${3}": "${0} megkétszerezte ${1} erőforrásait ${2}-ról ${3}-ra",
+	  "${0} doubled resources on ${1} from ${2} to ${3}": "${0} megkétszerezte ${1} erőforrásait ${2}-ról ${3}-ra",
     "${0} linked ${1} with ${2}": "${0} összekapcsolta ${1}-t ${2}-vel",
 
     "removed": "eltávolította",

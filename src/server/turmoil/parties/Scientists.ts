@@ -56,8 +56,7 @@ class ScientistsPolicy01 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
-    // TODO(kberg): use Message for "Turmoil {partyname}" action.
-    game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
+    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.SCIENTISTS));
     game.defer(new SelectPaymentDeferred(player, 10, {title: TITLES.payForPartyAction(PartyName.SCIENTISTS)}))
       .andThen(() => {
         player.drawCard(3);

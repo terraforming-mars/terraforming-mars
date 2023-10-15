@@ -81,7 +81,7 @@ class UnityPolicy02 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
-    game.log('${0} used Turmoil Unity action', (b) => b.player(player));
+    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.UNITY));
     player.politicalAgendasActionUsedCount += 1;
 
     game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.UNITY)}))
@@ -135,7 +135,7 @@ class UnityPolicy03 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
-    game.log('${0} used Turmoil Unity action', (b) => b.player(player));
+    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.UNITY));
     player.politicalAgendasActionUsedCount += 1;
 
     game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.UNITY)}))

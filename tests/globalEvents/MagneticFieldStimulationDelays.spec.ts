@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {setTemperature, setOxygenLevel} from '../TestingUtils';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../src/common/constants';
 import {Game} from '../../src/server/Game';
-import {MagneticFieldStimulationDelays} from '../../src/server/turmoil/globalEvents/MagneticFieldStimulationDelays';
+import {MagneticFieldStimulationDelays} from '../../src/server/cards/pathfinders/MagneticFieldStimulationDelays';
 import {TestPlayer} from '../TestPlayer';
 
 describe('MagneticFieldStimulationDelays', function() {

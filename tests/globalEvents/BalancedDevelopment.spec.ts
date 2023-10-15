@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PowerPlant} from '../../src/server/cards/pathfinders/PowerPlant';
 import {Game} from '../../src/server/Game';
-import {BalancedDevelopment} from '../../src/server/turmoil/globalEvents/BalancedDevelopment';
+import {BalancedDevelopment} from '../../src/server/cards/pathfinders/BalancedDevelopment';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 

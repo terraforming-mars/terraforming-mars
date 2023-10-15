@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ConstantStruggle} from '../../src/server/turmoil/globalEvents/ConstantStruggle';
+import {ConstantStruggle} from '../../src/server/cards/pathfinders/ConstantStruggle';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestGame';
 

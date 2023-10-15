@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast, fakeCard, runAllActions} from '../TestingUtils';
 import {Game} from '../../src/server/Game';
-import {CommunicationBoom} from '../../src/server/turmoil/globalEvents/CommunicationBoom';
+import {CommunicationBoom} from '../../src/server/cards/pathfinders/CommunicationBoom';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';

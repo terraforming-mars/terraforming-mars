@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AcquiredCompany} from '../../src/server/cards/base/AcquiredCompany';
 import {Game} from '../../src/server/Game';
-import {TiredEarth} from '../../src/server/turmoil/globalEvents/TiredEarth';
+import {TiredEarth} from '../../src/server/cards/pathfinders/TiredEarth';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 

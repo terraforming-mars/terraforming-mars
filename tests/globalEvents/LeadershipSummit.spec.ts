@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {LeadershipSummit} from '../../src/server/turmoil/globalEvents/LeadershipSummit';
+import {LeadershipSummit} from '../../src/server/cards/community/LeadershipSummit';
 import {Game} from '../../src/server/Game';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../src/common/turmoil/PartyName';

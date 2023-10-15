@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SpaceRaceToMars} from '../../src/server/turmoil/globalEvents/SpaceRaceToMars';
+import {SpaceRaceToMars} from '../../src/server/cards/pathfinders/SpaceRaceToMars';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestGame';
 import {TileType} from '../../src/common/TileType';

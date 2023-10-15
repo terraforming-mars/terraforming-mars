@@ -10,7 +10,7 @@ import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class CosmicRadiation extends Card implements IProjectCard {
   constructor() {
@@ -41,7 +41,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
         const owes = Math.min(bill, mineTileOwner.spendableMegacredits());
 
         game.defer(new SelectPaymentDeferred(mineTileOwner, owes, {
-          title: newMessage('You must spend ${0} M€ for ${1} mining tiles', (b) => b.number(owes).number(owned))}))
+          title: message('You must spend ${0} M€ for ${1} mining tiles', (b) => b.number(owes).number(owned))}))
           .andThen(() =>
             game.log(
               '${0} spends ${1} M€ for the ${2} mining tiles they own.',

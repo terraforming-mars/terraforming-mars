@@ -10,7 +10,7 @@ import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {SelectColony} from '../../inputs/SelectColony';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class DarksideSmugglersUnion extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -59,7 +59,7 @@ export class TradeWithDarksideSmugglersUnion implements IColonyTrader {
   }
 
   public optionText() {
-    return newMessage('Trade for free (use ${0} action)', (b) => b.cardName(CardName.DARKSIDE_SMUGGLERS_UNION));
+    return message('Trade for free (use ${0} action)', (b) => b.cardName(CardName.DARKSIDE_SMUGGLERS_UNION));
   }
 
   public trade(colony: IColony) {

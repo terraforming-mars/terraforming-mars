@@ -5,7 +5,7 @@ import {IPlayer} from '../../../IPlayer';
 import {MAX_OXYGEN_LEVEL} from '../../../../common/constants';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {Units} from '../../../../common/Units';
-import {newMessage} from '../../../logs/MessageBuilder';
+import {message} from '../../../logs/MessageBuilder';
 
 
 export class ConvertPlants extends StandardActionCard {
@@ -44,7 +44,7 @@ export class ConvertPlants extends StandardActionCard {
 
   public action(player: IPlayer) {
     return new SelectSpace(
-      newMessage('Convert ${0} plants into greenery', (b) => b.number(player.plantsNeededForGreenery)),
+      message('Convert ${0} plants into greenery', (b) => b.number(player.plantsNeededForGreenery)),
       player.game.board.getAvailableSpacesForGreenery(player))
       .andThen((space) => {
         this.actionUsed(player);

@@ -12,7 +12,7 @@ import {CardResource} from '../../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 import {SelectResource} from '../../inputs/SelectResource';
 import {Units} from '../../../common/Units';
 
@@ -65,7 +65,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
             if (p.stock.get(resource) > 0) {
               // TODO(kberg): Included protected resources
               options.options.push(new SelectOption(
-                newMessage('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(p)), 'steal').andThen(() => {
+                message('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(p)), 'steal').andThen(() => {
                 p.stock.steal(resource, 1, player);
                 player.removeResourceFrom(this, 1);
                 return undefined;

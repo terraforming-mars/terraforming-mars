@@ -9,7 +9,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class SolarFarm extends Card implements IProjectCard {
   constructor() {
@@ -45,7 +45,7 @@ export class SolarFarm extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace(newMessage('Select space for ${0} tile', (b) => b.card(this)), player.game.board.getAvailableSpacesOnLand(player))
+    return new SelectSpace(message('Select space for ${0} tile', (b) => b.card(this)), player.game.board.getAvailableSpacesOnLand(player))
       .andThen((space) => {
         player.game.addTile(player, space, {
           tileType: TileType.SOLAR_FARM,

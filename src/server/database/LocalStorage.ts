@@ -123,10 +123,6 @@ export class LocalStorage implements IDatabase {
     return Promise.resolve(serializedGame.players.length);
   }
 
-  loadCloneableGame(gameId: GameId): Promise<SerializedGame> {
-    return this.getGameVersion(gameId, 0);
-  }
-
   getGameIds(): Promise<Array<GameId>> {
     const gameIds: Array<GameId> = [];
 

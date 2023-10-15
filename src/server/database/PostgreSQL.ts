@@ -89,10 +89,6 @@ export class PostgreSQL implements IDatabase {
     return res.rows.map((row) => row.game_id);
   }
 
-  public loadCloneableGame(gameId: GameId): Promise<SerializedGame> {
-    return this.getGameVersion(gameId, 0);
-  }
-
   public async getGame(gameId: GameId): Promise<SerializedGame> {
     // Retrieve last save from database
     const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [gameId]);

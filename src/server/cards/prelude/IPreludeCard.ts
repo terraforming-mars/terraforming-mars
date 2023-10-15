@@ -4,9 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 
 export interface IPreludeCard extends IProjectCard {
   startingMegaCredits: number;
-  cardType: CardType.PRELUDE;
+  type: CardType.PRELUDE;
 }
 
 export function isPreludeCard(card: ICard): card is IPreludeCard {
-  return card.cardType === CardType.PRELUDE;
+  return card.type === CardType.PRELUDE;
 }

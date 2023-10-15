@@ -3,6 +3,7 @@ import {Algae} from '../../../src/server/cards/base/Algae';
 import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Algae', function() {
   let card: Algae;
@@ -11,13 +12,11 @@ describe('Algae', function() {
 
   beforeEach(function() {
     card = new Algae();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
@@ -26,7 +25,7 @@ describe('Algae', function() {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     expect(player.plants).to.eq(1);

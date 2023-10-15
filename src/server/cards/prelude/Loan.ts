@@ -1,4 +1,3 @@
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -8,10 +7,10 @@ export class Loan extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.LOAN,
-      startingMegacredits: 30,
 
       behavior: {
         production: {megacredits: -2},
+        stock: {megacredits: 30},
       },
 
       metadata: {
@@ -23,10 +22,6 @@ export class Loan extends PreludeCard implements IProjectCard {
         description: 'Gain 30 M€. Decrease your M€ production 2 steps.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.megaCredits += 30;
-    return undefined;
   }
 }
 

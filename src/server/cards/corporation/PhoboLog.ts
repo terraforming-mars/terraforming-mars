@@ -10,7 +10,7 @@ import {digit} from '../Options';
 export class PhoboLog extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.PHOBOLOG,
       tags: [Tag.SPACE],
       startingMegaCredits: 23,

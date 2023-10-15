@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Board} from '../../boards/Board';
@@ -16,7 +16,7 @@ import {all} from '../Options';
 export class RoverConstruction extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ROVER_CONSTRUCTION,
       tags: [Tag.BUILDING],
       cost: 8,
@@ -33,10 +33,10 @@ export class RoverConstruction extends Card implements IProjectCard {
     });
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
-        new GainResources(cardOwner, Resources.MEGACREDITS, {count: 2, log: true}),
+        new GainResources(cardOwner, Resource.MEGACREDITS, {count: 2, log: true}),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }

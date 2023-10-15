@@ -1,24 +1,26 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
+import {ActionCard} from '../ActionCard';
 
-export class ProcessorFactory extends Card implements IProjectCard {
+export class ProcessorFactory extends ActionCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.PROCESSOR_FACTORY,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 8,
 
+      action: {
+        spend: {steel: 1},
+        addResourcesToAnyCard: {type: CardResource.DATA, count: 2},
+      },
+
       resourceType: CardResource.DATA,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {resourcesHere: {}, per: 3},
 
       metadata: {
         cardNumber: 'M86',
@@ -29,15 +31,5 @@ export class ProcessorFactory extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public canAct(player: Player) {
-    return player.steel > 0;
-  }
-
-  public action(player: Player) {
-    player.steel--;
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
-    return undefined;
   }
 }

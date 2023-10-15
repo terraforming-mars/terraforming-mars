@@ -1,8 +1,8 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,7 +12,7 @@ import {IProjectCard} from '../IProjectCard';
 export class Ringcom extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.RINGCOM,
       tags: [Tag.JOVIAN],
       startingMegaCredits: 39,
@@ -44,22 +44,22 @@ export class Ringcom extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     // Typically  onCardPlayed isn't necessary, but onCorpCardPlayed isn't called for your own corp card.
     this.onCardPlayed(player, this);
     return undefined;
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
     return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): void {
     if (card.tags.includes(Tag.JOVIAN)) {
       player.game.getPlayers().forEach((p) => {
         if (p.isCorporation(this.name)) {
-          p.addResource(Resources.TITANIUM, 1, {log: true});
+          p.stock.add(Resource.TITANIUM, 1, {log: true});
         }
       });
     }

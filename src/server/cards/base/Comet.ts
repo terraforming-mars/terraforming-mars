@@ -9,7 +9,7 @@ import {all} from '../Options';
 export class Comet extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.COMET,
       tags: [Tag.SPACE],
       cost: 21,

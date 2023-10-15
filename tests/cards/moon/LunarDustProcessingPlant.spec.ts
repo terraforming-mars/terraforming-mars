@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarDustProcessingPlant} from '../../../src/server/cards/moon/LunarDustProcessingPlant';
 import {expect} from 'chai';
@@ -12,12 +11,12 @@ import {MoonRoadStandardProject} from '../../../src/server/cards/moon/MoonRoadSt
 describe('LunarDustProcessingPlant', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: LunarDustProcessingPlant;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new LunarDustProcessingPlant();
   });
@@ -27,9 +26,9 @@ describe('LunarDustProcessingPlant', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 0;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
@@ -51,15 +50,15 @@ describe('LunarDustProcessingPlant', () => {
     player.megaCredits = 1000;
 
     player.cardsInHand = [new MareSerenitatisMine()];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
 
     player.titanium = 2;
     player.steel = 0;
-    expect(player.getPlayableCards().map((card) => card.name)).is.empty;
+    expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
 
     // And this one shows that with Lunar Dust Processing Plant, steel isn't necessary
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
   });
 
   it('applies to road standard project', () => {

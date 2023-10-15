@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ import {played} from '../Options';
 export class SpaceRelay extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SPACE_RELAY,
       cost: 13,
       tags: [Tag.SPACE, Tag.JOVIAN],
@@ -33,7 +33,7 @@ export class SpaceRelay extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.JOVIAN)) {
       player.drawCard();
     }

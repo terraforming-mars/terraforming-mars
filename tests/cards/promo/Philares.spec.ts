@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TileType} from '../../../src/common/TileType';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {expect} from 'chai';
 import {Phase} from '../../../src/common/Phase';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
@@ -11,24 +11,23 @@ import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('Philares', () => {
   let card: Philares;
   let philaresPlayer : TestPlayer;
   let otherPlayer: TestPlayer;
   let game: Game;
-  let space: ISpace;
-  let adjacentSpace: ISpace;
-  let adjacentSpace2: ISpace;
+  let space: Space;
+  let adjacentSpace: Space;
+  let adjacentSpace2: Space;
 
   beforeEach(() => {
     card = new Philares();
-    philaresPlayer = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    // redPlayer is first for the final placement test.
-    game = Game.newInstance('gameid', [otherPlayer, philaresPlayer], otherPlayer);
+    // Order is explicit for the final placement test.
+    [game, otherPlayer, philaresPlayer] = testGame(2);
     game.board = EmptyBoard.newInstance();
     space = game.board.spaces[4];
     adjacentSpace = game.board.getAdjacentSpaces(space)[0];
@@ -48,14 +47,16 @@ describe('Philares', () => {
     game.addTile(otherPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
     game.addTile(philaresPlayer, adjacentSpace, {tileType: TileType.GREENERY});
-    expect(game.deferredActions).has.length(1);
+    runAllActions(game);
+    cast(philaresPlayer.popWaitingFor(), AndOptions);
   });
 
   it('bonus when opponent places next to you', () => {
     game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
     game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
-    expect(game.deferredActions).has.length(1);
+    runAllActions(game);
+    cast(philaresPlayer.popWaitingFor(), AndOptions);
   });
 
   it('placing ocean tile does not grant bonus', () => {
@@ -85,25 +86,25 @@ describe('Philares', () => {
   it('one tile one bonus', () => {
     game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
-    const action = game.deferredActions.pop();
-    const options = cast(action?.execute(), AndOptions);
+    runAllActions(game);
+    const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
-    options.options[0].cb(1);
-    options.cb();
-    expect(philaresPlayer.purse()).deep.eq(Units.of({megacredits: 1}));
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
+    andOptions.options[0].cb(1);
+    andOptions.cb(undefined);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));
   });
 
   it('one tile one bonus - player is greedy', () => {
     game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
-    const action = game.deferredActions.pop();
-    const options = cast(action?.execute(), AndOptions);
+    runAllActions(game);
+    const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
-    options.options[0].cb(1);
-    options.options[1].cb(1);
-    expect(() => options.cb()).to.throw('Need to select 1 resource(s)');
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
+    andOptions.options[0].cb(1);
+    andOptions.options[1].cb(1);
+    expect(() => andOptions.cb(undefined)).to.throw('Need to select 1 resource(s)');
   });
 
   it('Multiple bonuses when placing next to multiple tiles', () => {
@@ -112,14 +113,14 @@ describe('Philares', () => {
     expect(game.deferredActions).has.length(0);
     game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
-    const action = game.deferredActions.pop();
-    const options = cast(action?.execute(), AndOptions);
+    runAllActions(game);
+    const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
-    options.options[0].cb(1);
-    options.options[1].cb(1);
-    options.cb();
-    expect(philaresPlayer.purse()).deep.eq(Units.of({megacredits: 1, steel: 1}));
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
+    andOptions.options[0].cb(1);
+    andOptions.options[1].cb(1);
+    andOptions.cb(undefined);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
   it('Multiple bonuses when opponent places next to multiple of your tiles', () => {
@@ -128,14 +129,14 @@ describe('Philares', () => {
     expect(game.deferredActions).has.length(0);
     game.addTile(otherPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
-    const action = game.deferredActions.pop();
-    const options = cast(action?.execute(), AndOptions);
+    runAllActions(game);
+    const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
-    options.options[0].cb(1);
-    options.options[1].cb(1);
-    options.cb();
-    expect(philaresPlayer.purse()).deep.eq(Units.of({megacredits: 1, steel: 1}));
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
+    andOptions.options[0].cb(1);
+    andOptions.options[1].cb(1);
+    andOptions.cb(undefined);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
   it('two tiles two bonuses - player is greedy', () => {
@@ -145,19 +146,19 @@ describe('Philares', () => {
     const action = game.deferredActions.pop();
     const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
+    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     options.options[0].cb(1);
     options.options[1].cb(1);
     options.options[2].cb(1);
-    expect(() => options.cb()).to.throw('Need to select 2 resource(s)');
+    expect(() => options.cb(undefined)).to.throw('Need to select 2 resource(s)');
   });
 
   it('Should take initial action', function() {
-    philaresPlayer.runInitialAction(card);
+    philaresPlayer.deferInitialAction(card);
     runAllActions(game);
 
     const action = cast(philaresPlayer.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(philaresPlayer.getTerraformRating()).to.eq(21);
   });
 
@@ -165,8 +166,8 @@ describe('Philares', () => {
     game.addGreenery(philaresPlayer, space);
 
     // Max out all global parameters
-    (game as any).temperature = MAX_TEMPERATURE;
-    (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    setTemperature(game, MAX_TEMPERATURE);
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     // maxOutOceans(player);
 
     // Setup plants for endgame
@@ -175,24 +176,23 @@ describe('Philares', () => {
 
     // First player final greenery placement, done adjacent to one of Philares' tiles
     game.takeNextFinalGreeneryAction();
-    const firstPlayerGreeneryPlacement = cast(otherPlayer.getWaitingFor(), OrOptions);
+    const firstPlayerGreeneryPlacement = cast(otherPlayer.popWaitingFor(), OrOptions);
 
-    // Option 1 is 'Don't place a greenery'
-    // Don't place a greenery using the callback; add it directly via game.addGreenery() instead
-    // Workaround for test since the greenery placement option auto resolves deferred action
-    firstPlayerGreeneryPlacement.options[1].cb();
-    game.addGreenery(otherPlayer, adjacentSpace);
-    expect(game.deferredActions).has.lengthOf(1);
+    const selectSpace = cast(firstPlayerGreeneryPlacement.options[0], SelectSpace);
+    selectSpace.cb(adjacentSpace);
+    runAllActions(game);
 
     // Philares player gains plant and can subsequently place a greenery
-    philaresPlayer.takeActionForFinalGreenery();
-    const philaresPlayerResourceSelection = cast(philaresPlayer.getWaitingFor(), AndOptions);
+    // philaresPlayer.takeActionForFinalGreenery();
+    const philaresPlayerResourceSelection = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Option 3 is plants.
     philaresPlayerResourceSelection.options[3].cb(1);
-    philaresPlayerResourceSelection.cb();
+    philaresPlayerResourceSelection.cb(undefined);
     expect(philaresPlayer.plants).to.eq(8);
-    philaresPlayer.popWaitingFor();
+    expect(philaresPlayer.getWaitingFor()).is.undefined;
+
     game.takeNextFinalGreeneryAction();
+    runAllActions(game);
     const finalGreeneryPlacement = cast(philaresPlayer.getWaitingFor(), OrOptions);
     expect(game.phase).eq(Phase.RESEARCH);
     finalGreeneryPlacement.options[1].cb();

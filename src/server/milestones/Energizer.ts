@@ -1,13 +1,14 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 
-export class Energizer implements IMilestone {
-  public readonly name = 'Energizer';
-  public readonly description = 'Requires that you have 6 energy production';
-  public getScore(player: Player): number {
-    return player.production.energy;
+export class Energizer extends BaseMilestone {
+  constructor() {
+    super(
+      'Energizer',
+      'Have 6 energy production',
+      6);
   }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 6;
+  public getScore(player: IPlayer): number {
+    return player.production.energy;
   }
 }

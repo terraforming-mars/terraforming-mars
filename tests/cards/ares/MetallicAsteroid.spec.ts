@@ -1,25 +1,22 @@
 import {expect} from 'chai';
 import {MetallicAsteroid} from '../../../src/server/cards/ares/MetallicAsteroid';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('MetallicAsteroid', function() {
   let card: MetallicAsteroid;
   let player: TestPlayer;
-  let otherPlayer: Player;
+  let otherPlayer: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new MetallicAsteroid();
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
   });
 
   it('Play', function() {

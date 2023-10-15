@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -16,6 +16,8 @@ import {digit} from '../Options';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../../common/constants';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {TITLES} from '../../inputs/titles';
 
 export class ProjectWorkshop extends Card implements ICorporationCard {
   constructor() {
@@ -23,7 +25,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
       name: CardName.PROJECT_WORKSHOP,
       tags: [Tag.EARTH],
       startingMegaCredits: 39,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       behavior: {
         stock: {steel: 1, titanium: 1},
@@ -56,28 +58,32 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     });
   }
 
-  private getEligibleCards(player: Player) {
-    const cards = player.getCardsByCardType(CardType.ACTIVE);
-    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) return cards;
+  private getEligibleCards(player: IPlayer) {
+    const cards = player.playedCards.filter((card) => card.type === CardType.ACTIVE);
+    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
+      return cards;
+    }
     return cards.filter((card) => {
       const vp = card.getVictoryPoints(player);
-      if (vp <= 0) return true;
+      if (vp <= 0) {
+        return true;
+      }
       return player.canAfford(REDS_RULING_POLICY_COST * vp);
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.canAfford(3)) return true;
     return this.getEligibleCards(player).length > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const activeCards = this.getEligibleCards(player);
 
     const flipBlueCard = new SelectOption(
       'Flip and discard a played blue card',
-      'Select',
-      () => {
+      'Select')
+      .andThen(() => {
         if (activeCards.length === 1) {
           this.convertCardPointsToTR(player, activeCards[0]);
           player.discardPlayedCard(activeCards[0]);
@@ -88,22 +94,21 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
         return new SelectCard<IProjectCard>(
           'Select active card to discard',
           'Discard',
-          activeCards,
-          ([card]) => {
-            this.convertCardPointsToTR(player, card);
-            player.discardPlayedCard(card);
-            player.drawCard(2);
-            return undefined;
-          },
-        );
-      },
-    );
+          activeCards)
+          .andThen(
+            ([card]) => {
+              this.convertCardPointsToTR(player, card);
+              player.discardPlayedCard(card);
+              player.drawCard(2);
+              return undefined;
+            },
+          );
+      });
 
-    const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card', () => {
-      player.payMegacreditsDeferred(
-        3,
-        'Select how to pay for Project Workshop action.',
-        () => player.drawCard(1, {cardType: CardType.ACTIVE}));
+    const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card').andThen(() => {
+      player.game.defer(new SelectPaymentDeferred(player, 3,
+        {title: TITLES.payForCardAction(this.name)}))
+        .andThen(() => player.drawCard(1, {cardType: CardType.ACTIVE}));
       return undefined;
     });
 
@@ -114,13 +119,13 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     return new OrOptions(drawBlueCard, flipBlueCard);
   }
 
-  private convertCardPointsToTR(player: Player, card: ICard) {
+  private convertCardPointsToTR(player: IPlayer, card: ICard) {
     const steps = card.getVictoryPoints(player);
     // TODO(kberg): this doesn't reduce VPs below 0. What to do?
     if (steps > 0) {
-      player.increaseTerraformRatingSteps(steps, {log: true});
+      player.increaseTerraformRating(steps, {log: true});
     } else if (steps < 0) {
-      player.decreaseTerraformRatingSteps(-steps, {log: true});
+      player.decreaseTerraformRating(-steps, {log: true});
     }
   }
 }

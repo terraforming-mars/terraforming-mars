@@ -13,6 +13,11 @@ const CARD_RENAMES = new Map<string, CardName>([
 
   // TODO(yournamehere): remove after 2021-04-05
   // ['Earth Embasy', CardName.EARTH_EMBASSY],
+
+  // TODO(kberg): remove after 2023-11-01
+  ['Nigral Enterprises', CardName.NIRGAL_ENTERPRISES],
+  // TODO(kberg): remove after 2023-11-01
+  ['Sagitta', CardName.SAGITTA_FRONTIER_SERVICES],
 ]);
 
 export class CardFinder {
@@ -42,10 +47,10 @@ export class CardFinder {
 
   // Function to return a card object by its name
   // NOTE(kberg): This replaces a larger function which searched for both Prelude cards amidst project cards
-  // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
+  // TODO(kberg+dl): Find the use cases where this is used to find Prelude+CEO cards and filter them out to
   //              another function, perhaps?
   public getProjectCardByName(cardName: CardName): IProjectCard | undefined {
-    return this.getCard(cardName, ['projectCards', 'preludeCards']);
+    return this.getCard(cardName, ['projectCards', 'preludeCards', 'ceoCards']);
   }
 
   public getPreludeByName(cardName: CardName): IPreludeCard | undefined {

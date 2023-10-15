@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MomentumViriumHabitat} from '../../../src/server/cards/moon/MomentumViriumHabitat';
 import {expect} from 'chai';
@@ -11,12 +10,12 @@ import {TileType} from '../../../src/common/TileType';
 describe('MomentumViriumHabitat', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MomentumViriumHabitat;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MomentumViriumHabitat();
   });
@@ -26,10 +25,10 @@ describe('MomentumViriumHabitat', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 0;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
@@ -37,7 +36,7 @@ describe('MomentumViriumHabitat', () => {
     expect(player.production.megacredits).eq(0);
     expect(player.production.heat).eq(0);
     expect(player.getTerraformRating()).eq(14);
-    expect(moonData.colonyRate).eq(0);
+    expect(moonData.habitatRate).eq(0);
 
     card.play(player);
 
@@ -50,7 +49,7 @@ describe('MomentumViriumHabitat', () => {
     expect(momentumVirium.tile!.tileType).eq(TileType.MOON_HABITAT);
 
     expect(player.getTerraformRating()).eq(15);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
   });
 });
 

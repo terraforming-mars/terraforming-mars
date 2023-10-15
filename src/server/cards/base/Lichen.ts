@@ -3,13 +3,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Lichen extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LICHEN,
       tags: [Tag.PLANT],
       cost: 7,
@@ -18,7 +17,7 @@ export class Lichen extends Card implements IProjectCard {
         production: {plants: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-24)),
+      requirements: {temperature: -24},
       metadata: {
         cardNumber: '159',
         renderData: CardRenderer.builder((b) => {

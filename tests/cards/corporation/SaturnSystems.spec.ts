@@ -3,6 +3,7 @@ import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('SaturnSystems', function() {
   let card: SaturnSystems;
@@ -10,9 +11,7 @@ describe('SaturnSystems', function() {
 
   beforeEach(function() {
     card = new SaturnSystems();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

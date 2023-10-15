@@ -1,24 +1,24 @@
 {
     "Lakefront Resorts": "Lakefront Resorts",
-    "You start with 54 M€.": "Вы начинаете с 54 МС",
-    "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "Эффект: Когда размещается океан, увеличьте своё производство МС на 1. Ваш бонус за размещение рядом с океаном 3МС вместо 2МС",
+    "You start with 54 M€.": "Вы начинаете с 54 M€",
+    "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "Эффект: Когда размещается океан, увеличьте своё производство M€ на 1. Ваш бонус за размещение рядом с океаном 3M€ вместо 2M€",
 
     "Terralabs Research": "Terralabs Research",
-    "You start with 14 M€. Lower your TR 1 step.": "Вы начинаете с 14МС. Уменьшите свой РТ на 1",
-    "Effect: Buying cards to hand costs 1 M€.": "Эффект: Покупка карт на руку стоит вам 1МС",
+    "You start with 14 M€. Lower your TR 1 step.": "Вы начинаете с 14M€. Уменьшите свой РТ на 1",
+    "Effect: Buying cards to hand costs 1 M€.": "Эффект: Покупка карт на руку стоит вам 1M€",
 
     "Utopia Invest": "Utopia Invest",
-    "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Вы начинаете с 40МС. Увеличьте на 1 своё производство стали и титана",
+    "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Вы начинаете с 40M€. Увеличьте на 1 своё производство стали и титана",
     "Action: Decrease any production to gain 4 resources of that kind.": "Действие: Уменьшите любое своё производтство на 1, чтобы получить 4 ресурса этого типа",
 
     "Pristar": "Pristar",
-    "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "Вы начинаете с 53МС. Уменьшите свой РТ на 2. 1 ПО за каждый ресурс на этой карте",
+    "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "Вы начинаете с 53M€. Уменьшите свой РТ на 2. 1 ПО за каждый ресурс на этой карте",
     "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.":
-    "Эффект: В фазе производства, если вы не получали РТ в этом поколении добавьте 1 ресурс на эту карту и получите 6 МС",
+    "Эффект: В фазе производства, если вы не получали РТ в этом поколении добавьте 1 ресурс на эту карту и получите 6 M€",
 
     "Septem Tribus": "Septem Tribus",
     "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "Вы начинаете с 36 M€. В фазе действий метка на этой карте становится любой меткой на ваш выбор",
-    "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "Действие: Получите 2 МС за каждую партию где у вас есть хотя бы 1 делегат",
+    "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "Действие: Получите 2 M€ за каждую партию где у вас есть хотя бы 1 делегат",
 
     "Robinson Industries": "Robinson Industries",
     "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "Действие: Потратьте 4 M€ чтобы поднять на 1 шаг одно из ваших НАИМЕНЬШИХ производств"

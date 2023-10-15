@@ -10,7 +10,7 @@ export class Gyropolis extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GYROPOLIS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 20,
 

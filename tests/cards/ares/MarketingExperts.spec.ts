@@ -1,24 +1,21 @@
 import {MarketingExperts} from '../../../src/server/cards/ares/MarketingExperts';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('MarketingExperts', function() {
   let card: MarketingExperts;
   let player: TestPlayer;
-  let otherPlayer: Player;
+  let otherPlayer: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new MarketingExperts();
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
 

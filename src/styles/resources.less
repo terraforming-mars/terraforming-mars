@@ -25,10 +25,17 @@
     padding: 8px 0px 4px 8px;
     box-sizing: border-box;
 
-    &.resource_item--energy {
-        margin-right: -9px;
-        padding-right: 9px;
-        clip-path: polygon(90% 0, 90% 50%, 100% 75%, 100% 75%, 90% 100%, 0 100%, 0 0);
+    &.resource_item--energy:after {
+        content: " ";
+        background: linear-gradient(rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.3) 50%);
+        clip-path: polygon(0% 50%, 100% 75%, 100% 75%, -5% 100%);
+        width: 10px;
+        height: 86px;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        transform: translateX(76px) translateY(-8px);
+        z-index: 0;
     }
 }
 
@@ -69,18 +76,6 @@
 .resource_icon--megacredits {
     background-image: url(./assets/resources/megacredit.png);
 }
-.resource_icon--megacredits::after {
-    position: absolute;
-    content: "€";
-    color: rgba(0,0,0,.3);
-    font-style: normal;
-    font-family: Arial;
-    font-weight: bold;
-    width: 36px;
-    height: 36px;
-    text-align: center;
-    line-height: 36px;
-}
 
 .resource_icon--megacredit-value {
     background-image: url(./assets/resources/megacredit.png);
@@ -96,9 +91,10 @@
     margin-left: -14px;
     margin-top: -37px;
     text-align: center;
+    position: relative;
 }
 
-@resource_types: microbe, floater, titanium, steel, heat, data, science, seed;
+@resource_types: microbe, floater, titanium, steel, heat, data, science, seed, graphene, asteroid, hydroelectric-resource;
 each(@resource_types, {
   .resource_icon--@{value} {
     background-image: url("assets/resources/@{value}.png");

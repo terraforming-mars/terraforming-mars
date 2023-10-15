@@ -11,12 +11,23 @@ export type HazardConstraint = {
     available: boolean
 }
 
-export type HazardData = {
-    erosionOceanCount: HazardConstraint,
-    removeDustStormsOceanCount: HazardConstraint,
-    severeErosionTemperature: HazardConstraint,
-    severeDustStormOxygen: HazardConstraint
-}
+export const HAZARD_CONSTRAINTS = [
+  'erosionOceanCount',
+  'removeDustStormsOceanCount',
+  'severeErosionTemperature',
+  'severeDustStormOxygen',
+] as const;
+
+/*
+ * This is the same as
+ * type HazardData = {
+ *    erosionOceanCount: HazardConstraint;
+ *   removeDustStormsOceanCount: HazardConstraint;
+ *   severeErosionTemperature: HazardConstraint;
+ *   severeDustStormOxygen: HazardConstraint;
+ * }
+ */
+export type HazardData = Record<typeof HAZARD_CONSTRAINTS[number], HazardConstraint>;
 
 export type MilestoneCount = {
     id: PlayerId;

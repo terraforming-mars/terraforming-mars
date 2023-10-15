@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Steelaris} from '../../../src/server/cards/pathfinders/Steelaris';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
@@ -15,9 +15,7 @@ describe('Steelaris', function() {
 
   beforeEach(function() {
     card = new Steelaris();
-    game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2);
     player.setCorporationForTest(card);
     game.board = EmptyBoard.newInstance();
   });
@@ -27,7 +25,7 @@ describe('Steelaris', function() {
     expect(player.plants).eq(0);
     expect(player.steel).eq(0);
 
-    game.addCityTile(player, citySpace);
+    game.addCity(player, citySpace);
     runAllActions(game);
 
     expect(player.plants).eq(1);
@@ -39,7 +37,7 @@ describe('Steelaris', function() {
     expect(player.plants).eq(0);
     expect(player.steel).eq(0);
 
-    game.addCityTile(player2, citySpace);
+    game.addCity(player2, citySpace);
     runAllActions(game);
 
     expect(player.plants).eq(1);

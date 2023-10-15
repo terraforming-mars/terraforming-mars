@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {ALL_MODULE_MANIFESTS} from '../../src/server/cards/AllCards';
-import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardManifest} from '../../src/server/cards/ModuleManifest';
 import {ICard} from '../../src/server/cards/ICard';
+import {CardType} from '../../src/common/cards/CardType';
 
 describe('CardMetadata', function() {
   let player: TestPlayer;
@@ -12,7 +12,7 @@ describe('CardMetadata', function() {
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player, redPlayer], player, {moonExpansion: true});
   });
 
   it('should have a VP icon', function() {
@@ -21,6 +21,7 @@ describe('CardMetadata', function() {
 
       for (const factory of CardManifest.values(factories)) {
         const card = new factory.Factory();
+        if (card.type === CardType.PROXY) continue;
         if (card.victoryPoints !== undefined) {
           // if (card.victoryPoints === 'special') {
           expect(card.metadata.victoryPoints, card.name + ' should have victoryPoints metadata').is.not.undefined;

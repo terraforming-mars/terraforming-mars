@@ -11,11 +11,11 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, churn, churnAction, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
@@ -29,10 +29,8 @@ describe('ProjectWorkshop', function() {
 
   beforeEach(function() {
     card = new ProjectWorkshop();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
     advancedAlloys = new AdvancedAlloys();
+    [game, player] = testGame(1);
 
     card.play(player);
     player.setCorporationForTest(card);
@@ -42,10 +40,10 @@ describe('ProjectWorkshop', function() {
     expect(player.steel).to.eq(1);
     expect(player.titanium).to.eq(1);
 
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
+    expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
 
   it('Can not act', function() {
@@ -57,10 +55,10 @@ describe('ProjectWorkshop', function() {
     player.megaCredits = 3;
 
     expect(card.canAct(player)).is.true;
-    card.action(player).cb();
-    runAllActions(game);
+    const selectOption = cast(churnAction(card, player), SelectOption);
+    expect(churn(() => selectOption.cb(undefined), player)).is.undefined;
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
+    expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
 
   it('Can flip a played blue card and remove its ongoing effects', function() {
@@ -71,7 +69,7 @@ describe('ProjectWorkshop', function() {
     expect(player.getSteelValue()).to.eq(3);
     expect(player.getTitaniumValue()).to.eq(4);
 
-    card.action(player).cb();
+    card.action(player).cb(undefined);
     expect(player.playedCards).has.lengthOf(0);
     expect(game.projectDeck.discardPile.includes(advancedAlloys)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
@@ -90,7 +88,7 @@ describe('ProjectWorkshop', function() {
     player.playedCards.push(smallAnimals, extremophiles);
 
     const selectOption = cast(card.action(player), SelectOption);
-    const selectCard = cast(selectOption.cb(), SelectCard<ICard>);
+    const selectCard = cast(selectOption.cb(undefined), SelectCard<ICard>);
 
     selectCard.cb([smallAnimals]);
     expect(player.getTerraformRating()).to.eq(originalTR + 2);
@@ -117,7 +115,7 @@ describe('ProjectWorkshop', function() {
 
     const selectOption = cast(card.action(player), SelectOption);
 
-    expect(selectOption.cb()).is.undefined;
+    expect(selectOption.cb(undefined)).is.undefined;
     expect(player.playedCards).is.empty;
 
     expect(player.getTerraformRating()).to.eq(originalTR - 5);
@@ -126,8 +124,7 @@ describe('ProjectWorkshop', function() {
 
 
   it('Project Workshop and Reds taxes', () => {
-    game = newTestGame(1, {turmoilExtension: true});
-    const player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {turmoilExtension: true});
     card.play(player);
     player.setCorporationForTest(card);
     player.game.phase = Phase.ACTION;
@@ -146,7 +143,7 @@ describe('ProjectWorkshop', function() {
 
     const birds = new Birds();
     birds.resourceCount = 1;
-    expect(birds.getVictoryPoints()).eq(1);
+    expect(birds.getVictoryPoints(player)).eq(1);
 
     player.playedCards.push(smallAnimals, extremophiles, birds);
 
@@ -190,13 +187,12 @@ describe('ProjectWorkshop', function() {
     // Setting a larger amount of heat just to make the test results more interesting
     player.heat = 5;
 
-    card.action(player).cb();
-    runAllActions(game);
-    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    const selectOption = cast(churnAction(card, player), SelectOption);
+    const selectPayment = cast(churn(() => selectOption.cb(undefined), player), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
+    expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
 });

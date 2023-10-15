@@ -1,9 +1,13 @@
-import {ISpace} from './ISpace';
+import {Space, newSpace} from './Space';
 import {SpaceId} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {Random} from '../Random';
+import {Random} from '../../common/utils/Random';
+
+function colonySpace(id: SpaceId): Space {
+  return newSpace(id, SpaceType.COLONY, -1, -1, []);
+}
 
 export class BoardBuilder {
   // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].
@@ -15,39 +19,45 @@ export class BoardBuilder {
 
   private spaceTypes: Array<SpaceType> = [];
   private bonuses: Array<Array<SpaceBonus>> = [];
-  private spaces: Array<ISpace> = [];
+  private spaces: Array<Space> = [];
   private unshufflableSpaces: Array<number> = [];
 
   constructor(private includeVenus: boolean, private includePathfinders: boolean) {
-    this.spaces.push(Space.colony(SpaceName.GANYMEDE_COLONY));
-    this.spaces.push(Space.colony(SpaceName.PHOBOS_SPACE_HAVEN));
+    this.spaces.push(colonySpace(SpaceName.GANYMEDE_COLONY));
+    this.spaces.push(colonySpace(SpaceName.PHOBOS_SPACE_HAVEN));
   }
 
-  ocean(...bonus: Array<SpaceBonus>) {
+  ocean(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.OCEAN);
     this.bonuses.push(bonus);
     return this;
   }
 
-  cove(...bonus: Array<SpaceBonus>) {
+  cove(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.COVE);
     this.bonuses.push(bonus);
     return this;
   }
 
-  land(...bonus: Array<SpaceBonus>) {
+  land(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.LAND);
     this.bonuses.push(bonus);
     return this;
   }
 
-  doNotShuffleLastSpace() {
+  restricted(): this {
+    this.spaceTypes.push(SpaceType.RESTRICTED);
+    this.bonuses.push([]);
+    return this;
+  }
+
+  doNotShuffleLastSpace(): this {
     this.unshufflableSpaces.push(this.spaceTypes.length - 1);
     return this;
   }
 
 
-  build(): Array<ISpace> {
+  build(): Array<Space> {
     const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
     const idOffset = this.spaces.length + 1;
     let idx = 0;
@@ -58,28 +68,28 @@ export class BoardBuilder {
       for (let i = 0; i < tilesInThisRow; i++) {
         const spaceId = idx + idOffset;
         const xCoordinate = xOffset + i;
-        const space = new Space(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], this.bonuses[idx], xCoordinate, row);
+        const space = newSpace(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], xCoordinate, row, this.bonuses[idx]);
         this.spaces.push(space);
         idx++;
       }
     }
 
-    this.spaces.push(Space.colony(SpaceName.STANFORD_TORUS));
+    this.spaces.push(colonySpace(SpaceName.STANFORD_TORUS));
     if (this.includeVenus) {
       this.spaces.push(
-        Space.colony(SpaceName.DAWN_CITY),
-        Space.colony(SpaceName.LUNA_METROPOLIS),
-        Space.colony(SpaceName.MAXWELL_BASE),
-        Space.colony(SpaceName.STRATOPOLIS),
+        colonySpace(SpaceName.DAWN_CITY),
+        colonySpace(SpaceName.LUNA_METROPOLIS),
+        colonySpace(SpaceName.MAXWELL_BASE),
+        colonySpace(SpaceName.STRATOPOLIS),
       );
     }
     if (this.includePathfinders) {
       this.spaces.push(
         // Space.colony(SpaceName.MARTIAN_TRANSHIPMENT_STATION),
-        Space.colony(SpaceName.CERES_SPACEPORT),
-        Space.colony(SpaceName.DYSON_SCREENS),
-        Space.colony(SpaceName.LUNAR_EMBASSY),
-        Space.colony(SpaceName.VENERA_BASE),
+        colonySpace(SpaceName.CERES_SPACEPORT),
+        colonySpace(SpaceName.DYSON_SCREENS),
+        colonySpace(SpaceName.LUNAR_EMBASSY),
+        colonySpace(SpaceName.VENERA_BASE),
       );
     }
 
@@ -128,23 +138,7 @@ export class BoardBuilder {
     if (id < 10) {
       strId = '0'+strId;
     }
-    return strId;
-  }
-}
-
-class Space implements ISpace {
-  constructor(public id: SpaceId, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
-  }
-
-  static colony(id: SpaceId) {
-    return new Space(id, SpaceType.COLONY, [], -1, -1);
-  }
-
-  static land(id: string, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    return new Space(id, SpaceType.LAND, bonus, x, y);
-  }
-
-  static ocean(id: string, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    return new Space(id, SpaceType.OCEAN, bonus, x, y);
+    // OK to cast this.
+    return strId as SpaceId;
   }
 }

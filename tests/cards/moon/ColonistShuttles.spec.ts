@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ColonistShuttles} from '../../../src/server/cards/moon/ColonistShuttles';
 import {expect} from 'chai';
@@ -9,12 +8,12 @@ import {expect} from 'chai';
 describe('ColonistShuttles', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: ColonistShuttles;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new ColonistShuttles();
   });
@@ -24,10 +23,10 @@ describe('ColonistShuttles', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 0;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
@@ -43,13 +42,13 @@ describe('ColonistShuttles', () => {
     player.megaCredits = 0;
 
     expect(player.getTerraformRating()).eq(14);
-    expect(moonData.colonyRate).eq(0);
+    expect(moonData.habitatRate).eq(0);
 
     card.play(player);
 
     expect(player.titanium).eq(0);
     expect(player.getTerraformRating()).eq(15);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
     expect(player.megaCredits).eq(14);
   });
 });

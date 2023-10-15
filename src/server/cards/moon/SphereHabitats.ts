@@ -10,7 +10,7 @@ export class SphereHabitats extends Card {
   constructor() {
     super({
       name: CardName.SPHERE_HABITATS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.MOON],
       cost: 14,
       reserveUnits: {titanium: 1},

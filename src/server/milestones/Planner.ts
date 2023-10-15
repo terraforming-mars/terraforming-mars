@@ -1,13 +1,14 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 
-export class Planner implements IMilestone {
-  public readonly name = 'Planner';
-  public readonly description = 'Having at least 16 cards in your hand when you claim this milestone';
-  public getScore(player: Player): number {
-    return player.cardsInHand.length;
+export class Planner extends BaseMilestone {
+  constructor() {
+    super(
+      'Planner',
+      'Have 16 cards in your hand',
+      16);
   }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 16;
+  public getScore(player: IPlayer): number {
+    return player.cardsInHand.length;
   }
 }

@@ -1,11 +1,11 @@
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Units} from '../../common/Units';
 
 export class SelectProductionToLoseDeferred extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     private unitsToLose: number,
     private title: string = `Choose ${unitsToLose} unit(s) of production to lose`,
   ) {
@@ -16,11 +16,10 @@ export class SelectProductionToLoseDeferred extends DeferredAction {
     return new SelectProductionToLose(
       this.title,
       this.unitsToLose,
-      this.player,
-      (production: Units) => {
+      this.player)
+      .andThen((production) => {
         this.player.production.adjust(Units.negative(production), {log: true});
         return undefined;
-      },
-    );
+      });
   }
 }

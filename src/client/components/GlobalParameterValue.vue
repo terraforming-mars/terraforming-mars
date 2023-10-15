@@ -36,7 +36,7 @@ export default Vue.extend({
   name: 'global-parameter-value',
   props: {
     param: {
-      type: Number as () => BaseGlobalParameter,
+      type: String as () => BaseGlobalParameter,
     },
     value: {
       type: Number,

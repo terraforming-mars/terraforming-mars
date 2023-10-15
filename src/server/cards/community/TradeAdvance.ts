@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,9 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
     super({
       name: CardName.TRADE_ADVANCE,
       tags: [Tag.EARTH],
-      startingMegacredits: 2,
+      behavior: {
+        stock: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: 'Y05',
@@ -25,12 +27,12 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new SimpleDeferredAction(
       player,
       () => {
-        const openColonies = player.game.colonies.filter((colony) => colony.isActive);
-        openColonies.forEach((colony) => {
+        const activeColonies = player.game.colonies.filter((colony) => colony.isActive);
+        activeColonies.forEach((colony) => {
           colony.trade(player, {usesTradeFleet: false}, 1);
         });
         return undefined;
@@ -38,9 +40,7 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
     ));
 
     if (player.game.isSoloMode()) {
-      player.megaCredits += 10;
-    } else {
-      player.megaCredits += 2;
+      player.megaCredits += 8;
     }
 
     return undefined;

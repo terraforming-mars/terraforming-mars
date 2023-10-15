@@ -1,11 +1,11 @@
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectAmount} from '../inputs/SelectAmount';
-import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
 
 export class SellSteel extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public title: string = 'Sell your steel for 3M€ each.',
   ) {
     super(player, Priority.DEFAULT);
@@ -20,20 +20,15 @@ export class SellSteel extends DeferredAction {
       this.logSale(0);
       return undefined;
     }
-    return new SelectAmount(
-      'Select a number of units of steel to sell',
-      'Sell steel',
-      (unitsSold: number) => {
+    return new SelectAmount('Select a number of units of steel to sell', 'Sell steel', 0, unitsAvailable)
+      .andThen((unitsSold: number) => {
         if (unitsSold > 0) {
           const cashEarned = unitsSold * 3;
-          this.player.addResource(Resources.MEGACREDITS, cashEarned);
-          this.player.deductResource(Resources.STEEL, unitsSold);
+          this.player.stock.add(Resource.MEGACREDITS, cashEarned);
+          this.player.stock.deduct(Resource.STEEL, unitsSold);
         }
         this.logSale(unitsSold);
         return undefined;
-      },
-      0,
-      unitsAvailable,
-    );
+      });
   }
 }

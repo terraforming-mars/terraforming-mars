@@ -7,7 +7,7 @@ import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {Preferences} from '@/client/utils/PreferencesManager';
 import * as titles from '@/common/inputs/SelectInitialCards';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectCardModel} from '@/common/models/PlayerInputModel';
 import {CardModel} from '@/common/models/CardModel';
 
 let savedData: InputResponse | undefined;
@@ -107,7 +107,7 @@ describe('SelectInitialCards', function() {
     expect(savedData).is.undefined;
 
     await component.vm.$nextTick();
-    const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
+    const confirmationDialog = getConfirmDialog(component);
     expect(confirmationDialog.$data.shown).is.true;
   });
 
@@ -126,32 +126,85 @@ describe('SelectInitialCards', function() {
     expect(savedData).is.undefined;
 
     await component.vm.$nextTick();
-    const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
+    const confirmationDialog = getConfirmDialog(component);
     expect(confirmationDialog.$data.shown).is.true;
+  });
+
+  it('Cannot select two ceos', async function() {
+    const component = createComponent([CardName.ECOLINE], [CardName.ANTS], undefined, [CardName.FLOYD, CardName.HAL9000, CardName.ENDER]);
+    expect(component).not.is.undefined;
+
+    const selectCards = component.findAllComponents({name: 'select-card'});
+    expect(selectCards.length).to.eq(3);
+    selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.FLOYD, CardName.HAL9000]);
+    selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
+    await component.vm.$nextTick();
+
+    const button = getButton(component);
+    expect(button.attributes().disabled).eq('disabled');
   });
 });
 
 function getButton(component: Wrapper<SelectInitialCards>) {
-  const button = component.findAllComponents({name: 'Button'}).at(0);
-  return button.findAllComponents({name: 'button'}).at(0);
+  const button = component.findAllComponents({name: 'AppButton'}).at(0);
+  return button.findAllComponents({name: 'AppButton'}).at(0);
 }
 
-function createComponent(corpCards: Array<CardName>, projectCards: Array<CardName>, preludeCards?: Array<CardName>) {
+function getConfirmDialog(component: Wrapper<SelectInitialCards>): InstanceType<typeof ConfirmDialog> {
+  return component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
+}
+
+function createComponent(corpCards: Array<CardName>, projectCards: Array<CardName>, preludeCards?: Array<CardName>, ceoCards?: Array<CardName>) {
   const toObject = (cards: Array<CardName>) => cards.map((name) => {
     return {name} as CardModel;
   });
-  const options: Array<Partial<PlayerInputModel>> = [{
+  const options: Array<SelectCardModel> = [{
+    type: 'card',
     title: titles.SELECT_CORPORATION_TITLE,
+    buttonLabel: 'x',
     cards: toObject(corpCards),
+    max: 1,
+    min: 1,
+    showOnlyInLearnerMode: false,
+    selectBlueCardAction: false,
+    showOwner: false,
   }, {
+    type: 'card',
     title: titles.SELECT_PROJECTS_TITLE,
+    buttonLabel: 'x',
     cards: toObject(projectCards),
+    max: projectCards.length,
+    min: 1,
+    showOnlyInLearnerMode: false,
+    selectBlueCardAction: false,
+    showOwner: false,
   }];
 
   if (preludeCards) {
     options.splice(1, 0, {
+      type: 'card',
       title: titles.SELECT_PRELUDE_TITLE,
+      buttonLabel: 'x',
       cards: toObject(preludeCards),
+      max: 2,
+      min: 2,
+      showOnlyInLearnerMode: false,
+      selectBlueCardAction: false,
+      showOwner: false,
+    });
+  }
+  if (ceoCards) {
+    options.push({
+      type: 'card',
+      title: titles.SELECT_CEO_TITLE,
+      buttonLabel: 'x',
+      cards: toObject(ceoCards),
+      max: 1,
+      min: 1,
+      showOnlyInLearnerMode: false,
+      selectBlueCardAction: false,
+      showOwner: false,
     });
   }
 
@@ -162,15 +215,10 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
         id: 'foo',
         dealtCorporationCards: [],
         thisPlayer: {actionsThisGeneration: []},
-        game: {
-          gameOptions: {
-            preludeExtension: false,
-            leadersExtension: false,
-          },
-        },
+        game: {},
       },
       playerinput: {
-        title: 'foo',
+        title: 'selectInitialCards',
         options,
       },
       onsave: function(data: AndOptionsResponse) {

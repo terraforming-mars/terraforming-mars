@@ -4,7 +4,6 @@ export enum Phase {
     PRODUCTION = 'production',
     RESEARCH = 'research',
     INITIALDRAFTING = 'initial_drafting',
-    CORPORATIONDRAFTING = 'corporation_drafting',
     DRAFTING = 'drafting',
     PRELUDES = 'preludes',
     CEOS = 'ceos',

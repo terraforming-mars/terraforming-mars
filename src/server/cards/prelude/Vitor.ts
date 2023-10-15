@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
@@ -9,11 +9,13 @@ import {IAward} from '../../awards/IAward';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Resource} from '../../../common/Resource';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class Vitor extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.VITOR,
       tags: [Tag.EARTH],
       startingMegaCredits: 48, // It's 45 + 3 when this corp is played
@@ -35,14 +37,14 @@ export class Vitor extends Card implements ICorporationCard {
     });
   }
 
-  private selectAwardToFund(player: Player, award: IAward): SelectOption {
-    return new SelectOption('Fund ' + award.name + ' award', 'Confirm', () => {
+  private selectAwardToFund(player: IPlayer, award: IAward): SelectOption {
+    return new SelectOption(newMessage('Fund ${0} award', (b) => b.award(award))).andThen(() => {
       player.game.fundAward(player, award);
       return undefined;
     });
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     const game = player.game;
 
     // Awards are disabled for 1 player games
@@ -59,7 +61,7 @@ export class Vitor extends Card implements ICorporationCard {
     return freeAward;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (!player.isCorporation(this.name)) {
       return;
     }
@@ -72,6 +74,6 @@ export class Vitor extends Card implements ICorporationCard {
       if (victoryPoints.points <= 0) return;
     }
 
-    player.megaCredits += 3;
+    player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
   }
 }

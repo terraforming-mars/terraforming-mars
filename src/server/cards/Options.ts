@@ -8,7 +8,9 @@
 // So instead when annotating card items, {played: true} can be reduced to {played}.
 
 export const all = true;
+export const clone = true;
 export const digit = true;
 export const played = true;
 export const multiplier = true;
 export const max = true;
+export const nextTo = true;

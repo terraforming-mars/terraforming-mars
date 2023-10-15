@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {SelectResources} from '../../src/server/inputs/SelectResources';
 import {TestPlayer} from '../TestPlayer';
 import {Units} from '../../src/common/Units';
@@ -8,14 +8,13 @@ describe('SelectResources', function() {
   let player: TestPlayer;
 
   beforeEach(() => {
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Simple', function() {
     const selectResources = new SelectResources(player, 2, '');
 
-    expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
+    expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     selectResources.process({type: 'and', responses: [
       {type: 'amount', amount: 1},
       {type: 'amount', amount: 0},
@@ -24,7 +23,7 @@ describe('SelectResources', function() {
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
     ]}, player);
-    expect(player.getResourcesForTest()).deep.eq(Units.of({megacredits: 1, plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, plants: 1}));
   });
 
   it('No options', function() {

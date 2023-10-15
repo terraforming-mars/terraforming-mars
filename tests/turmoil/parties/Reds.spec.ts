@@ -1,25 +1,20 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
-import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, runAllActions, testGameOptions, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
-import {Reds, REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/server/turmoil/parties/Reds';
+import {cast, runAllActions, setRulingParty, addGreenery} from '../../TestingUtils';
+import {REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/server/turmoil/parties/Reds';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {testGame} from '../../TestGame';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('Reds', function() {
   let player: TestPlayer;
   let secondPlayer: TestPlayer;
   let game: Game;
-  let turmoil: Turmoil;
-  let reds: Reds;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    secondPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, secondPlayer], player, testGameOptions({turmoilExtension: true}));
-    turmoil = game.turmoil!;
-    reds = new Reds();
+    [game, player, secondPlayer] = testGame(2, {turmoilExtension: true});
   });
 
   it('Ruling bonus 1: The player(s) with the lowest TR gains 1 TR', function() {
@@ -59,7 +54,7 @@ describe('Reds', function() {
   });
 
   it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 M€ per step raised', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[0].id);
+    setRulingParty(game, PartyName.REDS, 'rp01');
 
     player.megaCredits = 3;
     player.increaseTerraformRating();
@@ -68,7 +63,7 @@ describe('Reds', function() {
   });
 
   it('Ruling policy 2: When you place a tile, pay 3 M€ or as much as possible', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[1].id);
+    setRulingParty(game, PartyName.REDS, 'rp02');
 
     player.megaCredits = 3;
     addGreenery(player, '10');
@@ -77,7 +72,7 @@ describe('Reds', function() {
   });
 
   it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[2].id);
+    setRulingParty(game, PartyName.REDS, 'rp03');
 
     const redsPolicy = REDS_POLICY_3;
     player.megaCredits = 7;
@@ -95,12 +90,8 @@ describe('Reds', function() {
 
   it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step: Moon', function() {
     // Reset the whole game infrastructure to include the Moon
-    const gameOptions = testGameOptions({turmoilExtension: true, moonExpansion: true});
-    game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
-    turmoil = game.turmoil!;
-    player.popSelectInitialCards();
-
-    setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[2].id);
+    [game, player, secondPlayer] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+    setRulingParty(game, PartyName.REDS, 'rp03');
 
     const redsPolicy = REDS_POLICY_3;
     player.megaCredits = 7;
@@ -117,13 +108,13 @@ describe('Reds', function() {
 
     // This is hard-coding that the first moon option is the Colony one. meh.
     options.options[0].cb();
-    expect(MoonExpansion.moonData(game).colonyRate).eq(0);
+    expect(MoonExpansion.moonData(game).habitatRate).eq(0);
     expect(MoonExpansion.moonData(game).miningRate).eq(1);
     expect(MoonExpansion.moonData(game).logisticRate).eq(1);
   });
 
   it('Ruling policy 4: When you raise a global parameter, decrease your M€ production 1 step per step raised if possible', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[3].id);
+    setRulingParty(game, PartyName.REDS, 'rp04');
 
     game.increaseOxygenLevel(player, 1);
     expect(player.production.megacredits).to.eq(-1);

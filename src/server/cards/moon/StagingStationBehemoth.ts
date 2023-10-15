@@ -9,7 +9,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.STAGING_STATION_BEHEMOTH,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.SPACE],
       cost: 24,
 

@@ -1,12 +1,12 @@
 import {IAward} from './IAward';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardType} from '../../common/cards/CardType';
 
 export class Celebrity implements IAward {
   public readonly name = 'Celebrity';
-  public readonly description = 'Most cards in play (not events) with a cost of at least 20 megacredits';
-  public getScore(player: Player): number {
+  public readonly description = 'Have the most project cards in play with a base cost of at least 20 M€ (not events.)';
+  public getScore(player: IPlayer): number {
     return player.playedCards
-      .filter((card) => (card.cost >= 20) && (card.cardType === CardType.ACTIVE || card.cardType === CardType.AUTOMATED)).length;
+      .filter((card) => (card.cost >= 20) && (card.type === CardType.ACTIVE || card.type === CardType.AUTOMATED)).length;
   }
 }

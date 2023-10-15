@@ -10,7 +10,7 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GRAND_LUNA_ACADEMY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 13,
 

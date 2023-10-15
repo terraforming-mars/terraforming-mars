@@ -10,7 +10,7 @@ export class Habitat14 extends Card {
   constructor() {
     super({
       name: CardName.HABITAT_14,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.MOON],
       cost: 5,
 

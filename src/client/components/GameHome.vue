@@ -7,7 +7,7 @@
             <span class="turn-order" v-i18n>{{getTurnOrder(index)}}</span>
             <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
             <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
-            <Button title="copy" size="tiny" @click="copyUrl(player.id)"/>
+            <AppButton title="copy" size="tiny" @click="copyUrl(player.id)"/>
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Copied!</span></span>
           </li>
           <li v-if="game !== undefined && game.spectatorId">
@@ -15,7 +15,7 @@
             <span class="turn-order"></span>
             <span class="color-square"></span>
             <span class="player-name"><a :href="getHref(game.spectatorId)" v-i18n>Spectator</a></span>
-            <Button title="copy" size="tiny" @click="copyUrl(game.spectatorId)"/>
+            <AppButton title="copy" size="tiny" @click="copyUrl(game.spectatorId)"/>
           </li>
         </ul>
 
@@ -35,7 +35,7 @@
 
 import Vue from 'vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
@@ -66,7 +66,7 @@ export default Vue.extend({
     },
   },
   components: {
-    Button,
+    AppButton,
     'game-setup-detail': GameSetupDetail,
     PurgeWarning,
   },

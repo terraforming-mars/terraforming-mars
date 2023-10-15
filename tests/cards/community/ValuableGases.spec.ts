@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ValuableGases} from '../../../src/server/cards/community/ValuableGases';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ValuableGases', function() {
@@ -9,9 +9,7 @@ describe('ValuableGases', function() {
 
   beforeEach(function() {
     card = new ValuableGases();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

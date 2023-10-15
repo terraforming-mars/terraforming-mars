@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {EosChasmaNationalPark} from '../../../src/server/cards/base/EOSChasmaNationalPark';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {Predators} from '../../../src/server/cards/base/Predators';
@@ -9,9 +9,7 @@ import {runAllActions} from '../../TestingUtils';
 describe('MeatIndustry', function() {
   it('Gives 2 M€ whenever player gains an animal', function() {
     const card = new MeatIndustry();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
-    const player2 = getTestPlayer(game, 1);
+    const [game, player, player2] = testGame(2);
 
     player.playedCards.push(card);
 

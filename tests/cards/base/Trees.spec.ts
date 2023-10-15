@@ -1,7 +1,9 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {Trees} from '../../../src/server/cards/base/Trees';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Trees', function() {
   let card: Trees;
@@ -10,23 +12,21 @@ describe('Trees', function() {
 
   beforeEach(function() {
     card = new Trees();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).temperature = -4;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setTemperature(game, -4);
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     expect(player.production.plants).to.eq(3);
     expect(player.plants).to.eq(1);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

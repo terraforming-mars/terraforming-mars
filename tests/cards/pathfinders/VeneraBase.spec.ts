@@ -3,7 +3,7 @@ import {VeneraBase} from '../../../src/server/cards/pathfinders/VeneraBase';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Unity} from '../../../src/server/turmoil/parties/Unity';
@@ -15,7 +15,7 @@ import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '../../TestingUtils';
+import {cast, churnAction} from '../../TestingUtils';
 
 describe('VeneraBase', function() {
   let card: VeneraBase;
@@ -28,8 +28,7 @@ describe('VeneraBase', function() {
 
   beforeEach(function() {
     card = new VeneraBase();
-    game = newTestGame(1, {turmoilExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
 
     nonVenusFloater = new TitanShuttles();
     venusFloater = new FloatingHabs();
@@ -72,9 +71,7 @@ describe('VeneraBase', function() {
   it('action', function() {
     player.playedCards = [venusFloater, venusFloater2, data, nonVenusFloater];
 
-    card.action(player);
-
-    const selectCard = cast(game.deferredActions.pop()?.execute(), SelectCard);
+    const selectCard = cast(churnAction(card, player), SelectCard);
     expect(selectCard.cards).to.have.members([venusFloater, venusFloater2]);
 
     selectCard.cb([venusFloater]);

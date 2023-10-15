@@ -12,7 +12,7 @@ export class Incite extends Card implements ICorporationCard {
       name: CardName.INCITE,
       tags: [Tag.SCIENCE],
       startingMegaCredits: 32,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       behavior: {
         turmoil: {influenceBonus: 1},

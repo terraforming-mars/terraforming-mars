@@ -1,26 +1,31 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard} from '../ICard';
-import {SelectCard} from '../../inputs/SelectCard';
-import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
+import {ActionCard} from '../ActionCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class Celestic extends Card implements IActionCard, ICorporationCard {
+export class Celestic extends ActionCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CELESTIC,
       tags: [Tag.VENUS],
       startingMegaCredits: 42,
       resourceType: CardResource.FLOATER,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       initialActionText: 'Draw 2 cards with a floater icon on it',
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {resourcesHere: {}, per: 3},
+
+      action: {
+        addResourcesToAnyCard: {
+          type: CardResource.FLOATER,
+          count: 1,
+          autoSelect: true,
+        },
+      },
 
       metadata: {
         cardNumber: 'R05',
@@ -62,34 +67,15 @@ export class Celestic extends Card implements IActionCard, ICorporationCard {
     CardName.NOBEL_LABS,
     CardName.SECRET_LABS,
     CardName.VENERA_BASE,
+
+    // Star Wars
+    CardName.CLOUD_CITY,
   ]);
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     player.drawCard(2, {
       include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === CardResource.FLOATER,
     });
     return undefined;
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    const floaterCards = player.getResourceCards(CardResource.FLOATER);
-    if (floaterCards.length === 1) {
-      player.addResourceTo(this, {qty: 1, log: true});
-      return undefined;
-    }
-
-    return new SelectCard(
-      'Select card to add 1 floater',
-      'Add floater',
-      floaterCards,
-      ([card]) => {
-        player.addResourceTo(card, {log: true});
-        return undefined;
-      },
-    );
   }
 }

@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {AquiferPumping, OCEAN_COST} from '../../../src/server/cards/base/AquiferPumping';
 import {Game} from '../../../src/server/Game';
-import {maxOutOceans, testGameOptions} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
+import {testGame} from '../../TestGame';
 
 describe('AquiferPumping', function() {
   let card: AquiferPumping;
@@ -15,9 +16,7 @@ describe('AquiferPumping', function() {
 
   beforeEach(function() {
     card = new AquiferPumping();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -27,7 +26,7 @@ describe('AquiferPumping', function() {
   it('Should act', function() {
     player.megaCredits = OCEAN_COST;
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
   });
@@ -45,7 +44,7 @@ describe('AquiferPumping', function() {
 
   it('Cannot act if cannot afford reds tax', function() {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    const game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -67,7 +66,7 @@ describe('AquiferPumping', function() {
 
   it('Steel does not satisfy the reds tax', function() {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    const game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 

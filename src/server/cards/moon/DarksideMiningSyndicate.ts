@@ -1,18 +1,18 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 
 export class DarksideMiningSyndicate extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_MINING_SYNDICATE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.SPACE],
       cost: 18,
       tr: {moonMining: 1},
@@ -30,9 +30,9 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const productionBonus = (MoonExpansion.moonData(player.game).miningRate >= 2) ? 1 : 2;
-    player.production.add(Resources.TITANIUM, productionBonus, {log: true});
+    player.production.add(Resource.TITANIUM, productionBonus, {log: true});
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

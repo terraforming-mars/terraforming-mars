@@ -2,28 +2,26 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
 export class Ants extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ANTS,
       tags: [Tag.MICROBE],
       cost: 9,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: VictoryPoints.resource(1, 2),
-      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      victoryPoints: {resourcesHere: {}, per: 2},
+      requirements: {oxygen: 4},
 
       metadata: {
         cardNumber: '035',
@@ -38,12 +36,12 @@ export class Ants extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.game.isSoloMode()) return true;
     return RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE));
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {filter: (c) => c.name === this.name}));
     return undefined;

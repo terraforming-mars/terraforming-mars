@@ -12,7 +12,7 @@ export class Aphrodite extends Card implements ICorporationCard {
       name: CardName.APHRODITE,
       tags: [Tag.PLANT, Tag.VENUS],
       startingMegaCredits: 47,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       behavior: {
         production: {plants: 1},

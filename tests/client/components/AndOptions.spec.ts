@@ -4,7 +4,6 @@ import {getLocalVue} from './getLocalVue';
 
 import {expect} from 'chai';
 import AndOptions from '@/client/components/AndOptions.vue';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 
@@ -20,11 +19,11 @@ describe('AndOptions', function() {
         playerinput: {
           title: 'foo',
           options: [{
-            inputType: PlayerInputType.SELECT_OPTION,
+            type: 'option',
             title: 'select a',
           }, {
             title: 'select b',
-            inputType: PlayerInputType.SELECT_OPTION,
+            type: 'option',
           }],
         },
         onsave: function(data: InputResponse) {
@@ -37,9 +36,9 @@ describe('AndOptions', function() {
         'player-input-factory': PlayerInputFactory,
       },
     });
-    const buttons = component.findAllComponents({name: 'Button'});
+    const buttons = component.findAllComponents({name: 'AppButton'});
     await buttons.at(0).findAllComponents({
-      name: 'button',
+      name: 'AppButton',
     }).at(0).trigger('click');
     expect(savedData).to.deep.eq({type: 'and', responses: [{type: 'option'}, {type: 'option'}]});
   });

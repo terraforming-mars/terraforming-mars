@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
 import {Ryu} from '../../../src/server/cards/ceos/Ryu';
@@ -18,11 +18,10 @@ describe('Ryu', function() {
 
   beforeEach(() => {
     card = new Ryu();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
 
-    player.production.add(Resources.STEEL, 1);
-    player.production.add(Resources.HEAT, 4);
+    player.production.add(Resource.STEEL, 1);
+    player.production.add(Resource.HEAT, 4);
     player.playedCards.push(card);
   });
 

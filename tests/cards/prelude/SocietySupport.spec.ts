@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {SocietySupport} from '../../../src/server/cards/prelude/SocietySupport';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('SocietySupport', function() {
   it('Should play', function() {
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [/* skipped */, player] = testGame(1);
     const card = new SocietySupport();
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(-1);
     expect(player.production.plants).to.eq(1);
     expect(player.production.energy).to.eq(1);

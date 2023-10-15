@@ -1,6 +1,6 @@
 {
     "Agricola Inc": "Agricola Inc",
-    "You start with 1 plant production, 1 M€ production and 40 M€.": "Inizi con una Produzione di Piante di 1, una Produzione di M€ di 1 e 40 M€.",
+    "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Inizi con una Produzione di Piante di 1, una Produzione di M€ di 1, una Produzione Calore di 1 e 40 M€.",
     "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Effetto: a fine partita, ottieni -2 / 0 / 1 / 2 PV PER TIPO DI SIMBOLO con 0 / 1-2 / 3-4 / 5+ simboli.",
 
     "Curiosity II": "Curiosity II",
@@ -21,7 +21,4 @@
    "Project Workshop": "Project Workshop",
     "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Inizi con 39 M€, 1 risorsa Acciaio e 1 risorsa Titanio. Come prima azione, pesca una carta blu.",
     "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Azione: gira e scarta una carta blu giocata per convertire ogni PV su di essa in TT e pescare 2 carte, oppure spendi 3 M€ per pescare una carta blu."
-
-
-
 }

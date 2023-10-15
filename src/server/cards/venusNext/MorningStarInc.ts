@@ -1,5 +1,4 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +12,8 @@ export class MorningStarInc extends Card implements ICorporationCard {
       name: CardName.MORNING_STAR_INC,
       tags: [Tag.VENUS],
       startingMegaCredits: 50,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
+      globalParameterRequirementBonus: {steps: 2, parameter: GlobalParameter.VENUS},
 
       firstAction: {
         text: 'Draw 3 cards with a Venus tag',
@@ -33,9 +33,5 @@ export class MorningStarInc extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {
-    return parameter === GlobalParameter.VENUS ? 2 : 0;
   }
 }

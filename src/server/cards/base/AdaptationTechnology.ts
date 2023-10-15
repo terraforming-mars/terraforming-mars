@@ -8,11 +8,12 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AdaptationTechnology extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ADAPTATION_TECHNOLOGY,
       tags: [Tag.SCIENCE],
       cost: 12,
       victoryPoints: 1,
+      globalParameterRequirementBonus: {steps: 2},
 
       metadata: {
         cardNumber: '153',
@@ -23,8 +24,5 @@ export class AdaptationTechnology extends Card implements IProjectCard {
         }),
       },
     });
-  }
-  public getRequirementBonus(): number {
-    return 2;
   }
 }

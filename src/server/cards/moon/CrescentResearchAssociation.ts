@@ -1,7 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
@@ -11,12 +10,12 @@ import {Tag} from '../../../common/cards/Tag';
 export class CrescentResearchAssociation extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.CRESCENT_RESEARCH_ASSOCIATION,
       tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 50,
 
-      victoryPoints: VictoryPoints.tags(Tag.MOON, 1, 3),
+      victoryPoints: {tag: Tag.MOON, per: 3},
 
       metadata: {
         description: 'You start with 50 M€. 1 VP for every 3 Moon tags you have.',
@@ -31,7 +30,7 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
     });
   }
 
-  public override getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
     if (card.tags.indexOf(Tag.MOON) === -1) {
       return 0;
     }

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {DustSeals} from '../../../src/server/cards/base/DustSeals';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('DustSeals', function() {
   let card: DustSeals;
@@ -10,20 +10,18 @@ describe('DustSeals', function() {
 
   beforeEach(function() {
     card = new DustSeals();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {
     maxOutOceans(player, 4);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });
 

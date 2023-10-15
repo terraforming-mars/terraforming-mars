@@ -7,14 +7,13 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 
 export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.BIOENGINEERING_ENCLOSURE,
       tags: [Tag.ANIMAL],
       cost: 7,
@@ -24,7 +23,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
         addResources: 2,
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
+      requirements: {tag: Tag.SCIENCE},
       metadata: {
         description: 'Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.',
         cardNumber: 'A01',
@@ -38,12 +37,12 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     // >1 because this player already has bioengineering enclosure.
     return this.resourceCount > 0 && player.getResourceCards(this.resourceType).length > 1;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.game.defer(new SimpleDeferredAction(
       player,
       () => {
@@ -63,14 +62,15 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
         return new SelectCard(
           'Select card to add 1 animal',
           'Add animal',
-          resourceCards,
-          ([card]) => {
-            this.resourceCount--;
-            player.addResourceTo(card, 1);
-            player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));
-            return undefined;
-          },
-        );
+          resourceCards)
+          .andThen(
+            ([card]) => {
+              this.resourceCount--;
+              player.addResourceTo(card, 1);
+              player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));
+              return undefined;
+            },
+          );
       },
     ));
     return undefined;

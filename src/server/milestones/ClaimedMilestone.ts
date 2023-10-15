@@ -1,12 +1,12 @@
 
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {IMilestone} from './IMilestone';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 
 export type ClaimedMilestone = {
   milestone: IMilestone;
-  player: Player;
+  player: IPlayer;
 }
 
 export type SerializedClaimedMilestone = {
@@ -25,22 +25,38 @@ export function serializeClaimedMilestones(claimedMilestones: Array<ClaimedMiles
 
 export function deserializeClaimedMilestones(
   claimedMilestones: Array<SerializedClaimedMilestone>,
-  players: Array<Player>,
+  players: Array<IPlayer>,
   milestones: Array<IMilestone>): Array<ClaimedMilestone> {
-  return claimedMilestones.map((element: SerializedClaimedMilestone) => {
-    const milestoneName = element.name;
-    if (milestoneName === undefined) {
+  // Remove duplicates
+  const ms = new Set<MilestoneName>();
+  const filtered: Array<Required<SerializedClaimedMilestone>> = [];
+  for (const claimedMilestone of claimedMilestones) {
+    const name = claimedMilestone.name;
+    if (name === undefined) {
       throw new Error('Milestone name not found');
     }
+    const playerId = claimedMilestone.playerId;
+    if (playerId === undefined) {
+      throw new Error(`Player ID not found when rebuilding claimed milestone ${name}`);
+    }
+
+    if (ms.has(name)) {
+      console.error('Found duplicate milestone: ' + name);
+      continue;
+    } else {
+      filtered.push({name, playerId});
+      ms.add(name);
+    }
+  }
+
+  return filtered.map((element) => {
+    const milestoneName = element.name;
     const milestone: IMilestone | undefined = milestones.find((milestone) => milestone.name === milestoneName);
     if (milestone === undefined) {
       throw new Error(`Milestone ${milestoneName} not found when rebuilding Claimed Milestone`);
     }
 
     const playerId = element.playerId;
-    if (playerId === undefined) {
-      throw new Error(`Player ID not found when rebuilding claimed milestone ${milestoneName}`);
-    }
     const player = players.find((player) => player.id === playerId);
     if (player === undefined) {
       throw new Error(`Player ${playerId} not found when rebuilding claimed milestone ${milestoneName}`);

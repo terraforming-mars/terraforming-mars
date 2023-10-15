@@ -1,12 +1,11 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
 import {PlacementType} from '../boards/PlacementType';
 
 export class PlaceOceanTile extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     private options?: {
       on?: PlacementType,
       title?: string,
@@ -23,14 +22,11 @@ export class PlaceOceanTile extends DeferredAction {
     const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, on);
     const title = this.options?.title ?? this.getTitle(on);
 
-    return new SelectSpace(
-      title,
-      availableSpaces,
-      (space: ISpace) => {
-        this.player.game.addOceanTile(this.player, space);
+    return new SelectSpace(title, availableSpaces)
+      .andThen((space) => {
+        this.player.game.addOcean(this.player, space);
         return undefined;
-      },
-    );
+      });
   }
 
   private getTitle(type: PlacementType) {

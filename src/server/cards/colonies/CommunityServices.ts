@@ -1,8 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -11,7 +11,7 @@ export class CommunityServices extends Card implements IProjectCard {
     super({
       cost: 13,
       name: CardName.COMMUNITY_SERVICES,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       victoryPoints: 1,
 
       metadata: {
@@ -26,8 +26,8 @@ export class CommunityServices extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
+  public override bespokePlay(player: IPlayer) {
+    player.production.add(Resource.MEGACREDITS, player.tags.numberOfCardsWithNoTags() + 1, {log: true});
     return undefined;
   }
 }

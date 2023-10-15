@@ -7,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 export class ResearchCoordination extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.RESEARCH_COORDINATION,
       tags: [Tag.WILD],
       cost: 4,

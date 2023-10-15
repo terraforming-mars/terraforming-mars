@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
 import {Card} from '../Card';
@@ -11,13 +11,13 @@ import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredActi
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 
 export class Philares extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.PHILARES,
       tags: [Tag.BUILDING],
       startingMegaCredits: 47,
@@ -43,7 +43,7 @@ export class Philares extends Card implements ICorporationCard {
     });
   }
 
-  private selectResources(philaresPlayer: Player, resourceCount: number): AndOptions {
+  private selectResources(philaresPlayer: IPlayer, resourceCount: number): AndOptions {
     let megacreditsAmount = 0;
     let steelAmount = 0;
     let titaniumAmount = 0;
@@ -51,57 +51,63 @@ export class Philares extends Card implements ICorporationCard {
     let energyAmount = 0;
     let heatAmount = 0;
 
-    const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
-      megacreditsAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectSteel = new SelectAmount('Steel', 'Select', (amount: number) => {
-      steelAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectTitanium = new SelectAmount('Titanium', 'Select', (amount: number) => {
-      titaniumAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectPlants = new SelectAmount('Plants', 'Select', (amount: number) => {
-      plantsAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectEnergy = new SelectAmount('Energy', 'Select', (amount: number) => {
-      energyAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectHeat = new SelectAmount('Heat', 'Select', (amount: number) => {
-      heatAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
+    const selectMegacredit = new SelectAmount('Megacredits', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        megacreditsAmount = amount;
+        return undefined;
+      });
+    const selectSteel = new SelectAmount('Steel', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        steelAmount = amount;
+        return undefined;
+      });
+    const selectTitanium = new SelectAmount('Titanium', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        titaniumAmount = amount;
+        return undefined;
+      });
+    const selectPlants = new SelectAmount('Plants', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        plantsAmount = amount;
+        return undefined;
+      });
+    const selectEnergy = new SelectAmount('Energy', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        energyAmount = amount;
+        return undefined;
+      });
+    const selectHeat = new SelectAmount('Heat', 'Select', 0, resourceCount)
+      .andThen((amount) => {
+        heatAmount = amount;
+        return undefined;
+      });
 
-    const selectResources = new AndOptions(
-      () => {
+    const selectResources = new AndOptions(selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat)
+      .andThen(() => {
         if (
           megacreditsAmount +
-                    steelAmount +
-                    titaniumAmount +
-                    plantsAmount +
-                    energyAmount +
-                    heatAmount > resourceCount
+                  steelAmount +
+                  titaniumAmount +
+                  plantsAmount +
+                  energyAmount +
+                  heatAmount > resourceCount
         ) {
           throw new Error('Need to select ' + resourceCount + ' resource(s)');
         }
-        philaresPlayer.addResource(Resources.MEGACREDITS, megacreditsAmount, {log: true});
-        philaresPlayer.addResource(Resources.STEEL, steelAmount, {log: true});
-        philaresPlayer.addResource(Resources.TITANIUM, titaniumAmount, {log: true});
-        philaresPlayer.addResource(Resources.PLANTS, plantsAmount, {log: true});
-        philaresPlayer.addResource(Resources.ENERGY, energyAmount, {log: true});
-        philaresPlayer.addResource(Resources.HEAT, heatAmount, {log: true});
+        philaresPlayer.stock.add(Resource.MEGACREDITS, megacreditsAmount, {log: true});
+        philaresPlayer.stock.add(Resource.STEEL, steelAmount, {log: true});
+        philaresPlayer.stock.add(Resource.TITANIUM, titaniumAmount, {log: true});
+        philaresPlayer.stock.add(Resource.PLANTS, plantsAmount, {log: true});
+        philaresPlayer.stock.add(Resource.ENERGY, energyAmount, {log: true});
+        philaresPlayer.stock.add(Resource.HEAT, heatAmount, {log: true});
         return undefined;
-      }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
+      } );
     selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
 
     return selectResources;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
       return;

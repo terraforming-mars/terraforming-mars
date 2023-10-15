@@ -1,13 +1,14 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 
-export class Diversifier implements IMilestone {
-  public readonly name = 'Diversifier';
-  public readonly description = 'Requires that you have 8 different tags in play';
-  public getScore(player: Player): number {
-    return player.tags.distinctCount('milestone');
+export class Diversifier extends BaseMilestone {
+  constructor() {
+    super(
+      'Diversifier',
+      'Have 8 different tags in play',
+      8);
   }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 8;
+  public getScore(player: IPlayer): number {
+    return player.tags.distinctCount('milestone');
   }
 }

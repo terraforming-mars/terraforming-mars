@@ -11,7 +11,7 @@ export class ThoriumRush extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.THORIUM_RUSH,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 39,
 

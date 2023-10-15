@@ -1,8 +1,8 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {QuantumExtractor} from '../../../src/server/cards/base/QuantumExtractor';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('QuantumExtractor', function() {
@@ -11,17 +11,20 @@ describe('QuantumExtractor', function() {
 
   beforeEach(function() {
     card = new QuantumExtractor();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    player.tagsForTest = {science: 3};
+    expect(player.simpleCanPlay(card)).is.not.true;
+  });
+
+  it('Can play', function() {
+    player.tagsForTest = {science: 4};
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play', function() {
-    player.playedCards.push(card, card, card, card);
     card.play(player);
     expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
     expect(card.getCardDiscount(player, new Bushes())).to.eq(0);

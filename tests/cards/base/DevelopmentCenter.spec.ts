@@ -1,6 +1,6 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {DevelopmentCenter} from '../../../src/server/cards/base/DevelopmentCenter';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DevelopmentCenter', function() {
@@ -9,9 +9,7 @@ describe('DevelopmentCenter', function() {
 
   beforeEach(function() {
     card = new DevelopmentCenter();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can not act', function() {

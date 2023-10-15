@@ -3,8 +3,9 @@ import {BlackPolarDust} from '../../../src/server/cards/base/BlackPolarDust';
 import {Game} from '../../../src/server/Game';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('BlackPolarDust', function() {
   let card: BlackPolarDust;
@@ -13,13 +14,11 @@ describe('BlackPolarDust', function() {
 
   beforeEach(function() {
     card = new BlackPolarDust();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    player.production.add(Resources.MEGACREDITS, -4);
+    player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -30,7 +29,7 @@ describe('BlackPolarDust', function() {
 
     expect(game.deferredActions).has.lengthOf(1);
     const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });
 

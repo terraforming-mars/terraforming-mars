@@ -12,7 +12,7 @@ export class MareNectarisMine extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARE_NECTARIS_MINE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 14,
 

@@ -10,8 +10,9 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
-import {newTestGame, getTestPlayer} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
+import {Message} from '../../../src/common/logs/Message';
 
 describe('TitanFloatingLaunchPad', function() {
   let card: TitanFloatingLaunchPad;
@@ -20,15 +21,14 @@ describe('TitanFloatingLaunchPad', function() {
 
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();
-    game = newTestGame(2, {coloniesExtension: true, turmoilExtension: false});
-    player = getTestPlayer(game, 0);
     // Second player is ignored.
+    [game, player] = testGame(2, {coloniesExtension: true});
   });
 
   it('Should act', function() {
     player.playedCards.push(card);
     expect(card.canAct()).is.true;
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Should play with single targets', function() {
@@ -113,7 +113,7 @@ describe('TitanFloatingLaunchPad', function() {
     expect(payAction.options).has.length(1);
 
     const floaterOption = cast(payAction, OrOptions).options[0];
-    expect(floaterOption.title).to.match(/Pay 1 floater/);
+    expect((floaterOption.title as Message).message).to.match(/Pay 1 floater/);
 
     floaterOption.cb();
     tradeAction.options[1].cb(luna);

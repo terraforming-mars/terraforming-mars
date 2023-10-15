@@ -1,7 +1,9 @@
 import {expect} from 'chai';
+import {setOxygenLevel} from '../../TestingUtils';
 import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('ColonizerTrainingCamp', function() {
   let card: ColonizerTrainingCamp;
@@ -10,20 +12,18 @@ describe('ColonizerTrainingCamp', function() {
 
   beforeEach(function() {
     card = new ColonizerTrainingCamp();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    (game as any).oxygenLevel = 6;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setOxygenLevel(game, 6);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
   it('Should play', function() {
-    (game as any).oxygenLevel = 5;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setOxygenLevel(game, 5);
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

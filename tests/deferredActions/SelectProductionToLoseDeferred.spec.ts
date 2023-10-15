@@ -3,16 +3,13 @@ import {expect} from 'chai';
 import {SelectProductionToLoseDeferred} from '../../src/server/deferredActions/SelectProductionToLoseDeferred';
 import {Units} from '../../src/common/Units';
 import {TestPlayer} from '../TestPlayer';
-import {Game} from '../../src/server/Game';
-import {newTestGame, getTestPlayer} from '../TestGame';
+import {testGame} from '../TestGame';
 
 describe('SelectProductionToLoseDeferred', function() {
-  let game: Game;
   let player: TestPlayer;
 
   beforeEach(() => {
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('sanity test', function() {

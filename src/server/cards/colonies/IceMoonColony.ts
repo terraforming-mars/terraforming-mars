@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,7 +12,7 @@ export class IceMoonColony extends Card implements IProjectCard {
       cost: 23,
       tags: [Tag.SPACE],
       name: CardName.ICE_MOON_COLONY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tr: {oceans: 1},
 
       behavior: {
@@ -28,7 +28,7 @@ export class IceMoonColony extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return player.colonies.getPlayableColonies().length > 0;
   }
 }

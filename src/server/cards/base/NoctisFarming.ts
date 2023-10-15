@@ -3,17 +3,16 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NoctisFarming extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.NOCTIS_FARMING,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 10,
-      requirements: CardRequirements.builder((b) => b.temperature(-20)),
+      requirements: {temperature: -20},
       victoryPoints: 1,
 
       behavior: {

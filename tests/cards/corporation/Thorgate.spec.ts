@@ -3,17 +3,14 @@ import {EnergySaving} from '../../../src/server/cards/base/EnergySaving';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('Thorgate', function() {
   it('Should play', function() {
     const card = new Thorgate();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    const [/* skipped */, player] = testGame(2);
+    cast(card.play(player), undefined);
     player.setCorporationForTest(card);
     expect(player.production.energy).to.eq(1);
     expect(card.getCardDiscount(player, new EnergySaving())).to.eq(3);

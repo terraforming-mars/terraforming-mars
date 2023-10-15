@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {GreatDam} from '../../../src/server/cards/base/GreatDam';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('GreatDam', () => {
   let card: GreatDam;
@@ -10,9 +10,7 @@ describe('GreatDam', () => {
 
   beforeEach(() => {
     card = new GreatDam();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Can play', () => {
@@ -28,6 +26,6 @@ describe('GreatDam', () => {
     card.play(player);
 
     expect(player.production.energy).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

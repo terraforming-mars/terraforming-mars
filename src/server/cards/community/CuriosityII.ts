@@ -1,8 +1,8 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
+import {IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,11 +15,12 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
+import {TITLES} from '../../inputs/titles';
 
 export class CuriosityII extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.CURIOSITY_II,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       startingMegaCredits: 40,
@@ -48,7 +49,7 @@ export class CuriosityII extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE, SpaceBonus.ENERGY];
 
     if (cardOwner.id !== activePlayer.id) return;
@@ -60,18 +61,16 @@ export class CuriosityII extends Card implements ICorporationCard {
     }
   }
 
-  private corpAction(player: Player) {
+  private corpAction(player: IPlayer) {
     if (!player.canAfford(2)) return undefined;
 
     return new OrOptions(
-      new SelectOption('Pay 2 M€ to draw a card', 'Confirm', () => {
-        player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}));
-        player.game.defer(DrawCards.keepAll(player));
+      new SelectOption('Pay 2 M€ to draw a card').andThen(() => {
+        player.game.defer(new SelectPaymentDeferred(player, 2, {title: TITLES.payForCardAction(this.name)}))
+          .andThen(() => player.game.defer(DrawCards.keepAll(player)));
         return undefined;
       }),
-      new SelectOption('Do nothing', 'Confirm', () => {
-        return undefined;
-      }),
+      new SelectOption('Do nothing'),
     );
   }
 }

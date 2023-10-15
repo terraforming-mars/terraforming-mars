@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -12,7 +12,7 @@ import {all} from '../Options';
 export class LunaFirstIncorporated extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.LUNA_FIRST_INCORPORATED,
       tags: [Tag.MOON],
       startingMegaCredits: 40,
@@ -46,7 +46,7 @@ export class LunaFirstIncorporated extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     MoonExpansion.moonData(player.game).lunaFirstPlayer = player;
     return undefined;
   }

@@ -4,16 +4,15 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {VictoryPoints} from '../ICard';
 
 export class IoMiningIndustries extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.IO_MINING_INDUSTRIES,
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 41,
-      victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
+      victoryPoints: {tag: Tag.JOVIAN},
 
       behavior: {
         production: {titanium: 2, megacredits: 2},

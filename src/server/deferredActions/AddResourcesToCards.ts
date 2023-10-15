@@ -1,5 +1,5 @@
 import {DeferredAction, Priority} from './DeferredAction';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {SelectAmount} from '../inputs/SelectAmount';
@@ -7,7 +7,7 @@ import {AndOptions} from '../inputs/AndOptions';
 
 export class AddResourcesToCards extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public resourceType: CardResource,
     public count: number) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
@@ -28,17 +28,14 @@ export class AddResourcesToCards extends DeferredAction {
     }
     const map = new Map<CardName, number>();
     const options = cards.map((card) => {
-      // Call back for the selectAmount. Store them in the map first, so
-      // they can be counted and affirmed as enough.
-      const cb = (amount: number) => {
-        map.set(card.name, amount);
-        return undefined;
-      };
-
-      return new SelectAmount(card.name, '', cb, 0, this.count);
+      return new SelectAmount(card.name, '', 0, this.count)
+        .andThen((amount) => {
+          map.set(card.name, amount);
+          return undefined;
+        });
     });
 
-    return new AndOptions(() => {
+    return new AndOptions(...options).andThen(() => {
       let sum = 0;
       cards.forEach((card) => {
         sum += map.get(card.name) ?? 0;
@@ -53,6 +50,6 @@ export class AddResourcesToCards extends DeferredAction {
         }
       });
       return undefined;
-    }, ...options);
+    });
   }
 }

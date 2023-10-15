@@ -1,16 +1,14 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {IMilestone} from '../IMilestone';
-
-export class Spacefarer implements IMilestone {
-  public readonly name = 'Spacefarer';
-  public readonly description = 'Have 6 space tags';
-
-  public getScore(player: Player): number {
-    return player.tags.count(Tag.SPACE);
+import {IPlayer} from '../../IPlayer';
+import {BaseMilestone} from '../IMilestone'; export class Spacefarer extends BaseMilestone {
+  constructor() {
+    super(
+      'Spacefarer',
+      'Have 6 space tags in play',
+      6);
   }
 
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 6;
+  public getScore(player: IPlayer): number {
+    return player.tags.count(Tag.SPACE);
   }
 }

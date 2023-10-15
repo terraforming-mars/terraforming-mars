@@ -2,10 +2,10 @@ import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Game} from '../../Game';
+import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {played} from '../../cards/Options';
 import {Size} from '../../../common/cards/render/Size';
@@ -27,10 +27,10 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
       renderData: RENDER_DATA,
     });
   }
-  public resolve(game: Game, turmoil: Turmoil) {
+  public resolve(game: IGame, turmoil: Turmoil) {
     if (game.isSoloMode()) {
       if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil) >= 4 ) {
-        game.getPlayersInGenerationOrder()[0].decreaseTerraformRatingSteps(2, {log: true});
+        game.getPlayersInGenerationOrder()[0].decreaseTerraformRating(2, {log: true});
       }
     } else {
       const players = [...game.getPlayersInGenerationOrder()].sort(
@@ -39,21 +39,21 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
 
       // We have one rank 1 player
       if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-        players[0].decreaseTerraformRatingSteps(2, {log: true});
+        players[0].decreaseTerraformRating(2, {log: true});
         players.shift();
 
         if (players.length === 1 && this.getScore(players[0], turmoil) > 0) {
-          players[0].decreaseTerraformRating({log: true});
+          players[0].decreaseTerraformRating(1, {log: true});
         } else if (players.length > 1) {
           // We have one rank 2 player
           if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-            players[0].decreaseTerraformRating({log: true});
+            players[0].decreaseTerraformRating(1, {log: true});
             // We have at least two rank 2 players
           } else {
             const score = this.getScore(players[0], turmoil);
             while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
               if (this.getScore(players[0], turmoil) > 0) {
-                players[0].decreaseTerraformRating({log: true});
+                players[0].decreaseTerraformRating(1, {log: true});
               }
               players.shift();
             }
@@ -64,14 +64,14 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
         const score = this.getScore(players[0], turmoil);
         while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
           if (this.getScore(players[0], turmoil) > 0) {
-            players[0].decreaseTerraformRatingSteps(2, {log: true});
+            players[0].decreaseTerraformRating(2, {log: true});
           }
           players.shift();
         }
       }
     }
   }
-  public getScore(player: Player, turmoil: Turmoil) {
+  public getScore(player: IPlayer, turmoil: Turmoil) {
     return player.tags.count(Tag.EARTH, 'raw') + turmoil.getPlayerInfluence(player);
   }
 }

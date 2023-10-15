@@ -3,35 +3,33 @@ import {CommunicationCenter} from '../../../src/server/cards/pathfinders/Communi
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Resources} from '../../../src/common/Resources';
+import {testGame} from '../../TestGame';
+import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
 
 describe('CommunicationCenter', function() {
   let card: CommunicationCenter;
   let player: TestPlayer;
-  let otherPlayer: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new CommunicationCenter();
-    game = newTestGame(2, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
-    otherPlayer = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {pathfindersExpansion: true});
     player.playedCards = [card];
   });
 
   it('canPlay', () => {
     expect(card.canPlay(player)).is.false;
 
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
 
     expect(card.canPlay(player)).is.true;
   });
 
   it('play', () => {
     card.resourceCount = 0;
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
 
     expect(card.play(player));
 
@@ -45,29 +43,29 @@ describe('CommunicationCenter', function() {
     player.playedCards = [card];
     expect(card.resourceCount).eq(0);
 
-    player.onCardPlayed(fakeCard({cardType: CardType.ACTIVE}));
+    player.onCardPlayed(fakeCard({type: CardType.ACTIVE}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(fakeCard({cardType: CardType.AUTOMATED}));
+    player.onCardPlayed(fakeCard({type: CardType.AUTOMATED}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(fakeCard({cardType: CardType.CORPORATION}));
+    player.onCardPlayed(fakeCard({type: CardType.CORPORATION}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(fakeCard({cardType: CardType.PRELUDE}));
+    player.onCardPlayed(fakeCard({type: CardType.PRELUDE}));
     expect(card.resourceCount).eq(0);
 
-    player.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
+    player.onCardPlayed(fakeCard({type: CardType.EVENT}));
     expect(card.resourceCount).eq(1);
 
-    otherPlayer.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
+    player2.onCardPlayed(fakeCard({type: CardType.EVENT}));
     expect(card.resourceCount).eq(2);
 
     expect(player.cardsInHand).is.length(0);
-    expect(otherPlayer.cardsInHand).is.length(0);
+    expect(player2.cardsInHand).is.length(0);
 
-    otherPlayer.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
+    player2.onCardPlayed(fakeCard({type: CardType.EVENT}));
 
     expect(card.resourceCount).eq(0);
     expect(player.cardsInHand).is.length(1);
-    expect(otherPlayer.cardsInHand).is.length(0);
+    expect(player2.cardsInHand).is.length(0);
   });
 
   it('card.addResourceTo', () => {

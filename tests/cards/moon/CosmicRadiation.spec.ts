@@ -1,25 +1,24 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {testGameOptions} from '../../TestingUtils';
+import {IPlayer} from '../../../src/server/IPlayer';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CosmicRadiation} from '../../../src/server/cards/moon/CosmicRadiation';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
+import {testGame} from '../../TestGame';
 
 describe('CosmicRadiation', () => {
+  let game: Game;
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let card: CosmicRadiation;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
-    player1 = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.YELLOW.newPlayer();
-    const game = Game.newInstance('gameid', [player1, player2, player3], player1, testGameOptions({moonExpansion: true}));
+    [game, player1, player2, player3] = testGame(3, {moonExpansion: true, turmoilExtension: true});
     card = new CosmicRadiation();
     moonData = MoonExpansion.moonData(game);
   });
@@ -29,16 +28,16 @@ describe('CosmicRadiation', () => {
     player1.megaCredits = card.cost;
 
     moonData.miningRate = 4;
-    expect(player1.getPlayableCards()).does.include(card);
+    expect(player1.getPlayableCardsForTest()).does.include(card);
 
     moonData.miningRate = 3;
-    expect(player1.getPlayableCards()).does.not.include(card);
+    expect(player1.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player1);
 
-    const assignTile = function(idx: number, player: Player) {
+    const assignTile = function(idx: number, player: IPlayer) {
       spaces[idx].tile = {tileType: TileType.MOON_MINE};
       spaces[idx].player = player;
     };
@@ -56,6 +55,7 @@ describe('CosmicRadiation', () => {
     player3.megaCredits = 20;
 
     card.play(player1);
+    runAllActions(player1.game);
 
     expect(player1.megaCredits).eq(6);
     expect(player2.megaCredits).eq(0);

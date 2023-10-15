@@ -1,9 +1,15 @@
 {
     "New game": "Новая игра",
-    "How to Play": "",
+    "How to Play": "Как играть (англ.)",
     "Cards list": "Список карт",
     "Board game": "Настольная игра",
     "About us": "О проекте",
     "Whats new?": "Новости",
-    "Join us on Discord": "Discord канал"
+    "Join us on Discord": "Discord канал",
+    "Looking for people to play with": "Ищите с кем поиграть",
+    "version": "версия",
+    "deployed": "загружен",
+    " Not affiliated with FryxGames, Asmodee Digital or Steam in any way. ": "Не аффилировано с FryxGames, Asmodee Digital или Steam.",
+    "MARS": "МАРСА",
+    "TERRAFORMING": "ПОКОРЕНИЕ"
 }

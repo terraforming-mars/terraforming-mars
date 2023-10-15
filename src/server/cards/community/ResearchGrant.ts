@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -10,7 +9,9 @@ export class ResearchGrant extends PreludeCard implements IProjectCard {
     super({
       name: CardName.RESEARCH_GRANT,
       tags: [Tag.SCIENCE, Tag.SCIENCE],
-      startingMegacredits: 8,
+      behavior: {
+        stock: {megacredits: 8},
+      },
 
       metadata: {
         cardNumber: 'Y04',
@@ -20,11 +21,6 @@ export class ResearchGrant extends PreludeCard implements IProjectCard {
         description: 'Gain 8 M€.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.megaCredits += 8;
-    return undefined;
   }
 }
 

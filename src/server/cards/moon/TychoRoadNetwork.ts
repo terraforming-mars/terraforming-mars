@@ -10,7 +10,7 @@ export class TychoRoadNetwork extends Card {
   constructor() {
     super({
       name: CardName.TYCHO_ROAD_NETWORK,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 15,
 

@@ -1,15 +1,16 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class ExecutiveOrder extends PreludeCard implements IProjectCard {
   constructor() {
@@ -28,8 +29,8 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.addResource(Resources.MEGACREDITS, 10, {log: true});
+  public override bespokePlay(player: IPlayer) {
+    player.stock.add(Resource.MEGACREDITS, 10, {log: true});
     const turmoil = Turmoil.getTurmoil(player.game);
     const globalEvents: IGlobalEvent[] = [];
 
@@ -43,15 +44,15 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
     player.game.defer(new SimpleDeferredAction(player, () => {
       return new OrOptions(
         ...globalEvents.map((event) => {
-          // TODO: Render as SelectGlobalEvent
-          const description = event.name + ': ' + event.description + ' Neutral delegate added: ' + event.currentDelegate;
-          return new SelectOption(description, 'Select', () => {
+          // TODO(kberg): Render as SelectGlobalEvent
+          const description = newMessage('${0}: ${1} Neutral delegate added: ${2}', (b) => b.globalEvent(event).string(event.description).partyName(event.currentDelegate));
+          return new SelectOption(description).andThen(() => {
             turmoil.currentGlobalEvent = event;
             turmoil.sendDelegateToParty('NEUTRAL', event.currentDelegate, player.game);
 
             globalEvents.forEach((ge) => {
               if (ge.name !== event.name) {
-                turmoil.globalEventDealer.discardedGlobalEvents.push(ge);
+                turmoil.globalEventDealer.discard(ge);
               }
             });
 

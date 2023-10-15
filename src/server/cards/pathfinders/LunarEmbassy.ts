@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class LunarEmbassy extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LUNAR_EMBASSY,
       tags: [Tag.EARTH, Tag.MARS, Tag.CITY, Tag.SPACE],
       cost: 28,

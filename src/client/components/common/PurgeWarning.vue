@@ -1,10 +1,10 @@
 <template>
   <span v-if="expectedPurgeTimeMs != 0">
     <div v-if="hoursLeft < 48" class="general-warning">
-      Warning: This game will be purged in approximately {{Math.floor(hoursLeft)}} hours.
+      {{ getWarningText(true) }}
     </div>
     <div v-else>
-      Warning: This server automatically purges unfinished games. Try to complete this game by {{ purgeTime }}.
+      {{ getWarningText(false) }}
     </div>
   </span>
       <!-- <label class="label label-error">{{ $t(warning) }}</label> -->
@@ -12,6 +12,7 @@
 
 </template>
 <script lang="ts">
+import {translateTextWithParams} from '@/client/directives/i18n';
 import Vue from 'vue';
 
 export default Vue.extend({
@@ -34,6 +35,15 @@ export default Vue.extend({
         return ('0' + n).slice(-2);
       }
       return '' + date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate()) + ' ' + pad(date.getHours()) + ':' + pad(date.getMinutes());
+    },
+  },
+  methods: {
+    getWarningText(isHours: Boolean): string {
+      if (isHours) {
+        return translateTextWithParams('Warning: This game will be purged in approximately ${0} hours.', [Math.floor(this.hoursLeft).toString()]);
+      } else {
+        return translateTextWithParams('Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.', [this.purgeTime]);
+      }
     },
   },
 });

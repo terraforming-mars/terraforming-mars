@@ -1,7 +1,7 @@
 // in-place shuffle using the Fisher-Yates algorithm..
 // See https://bost.ocks.org/mike/shuffle/ for details.
 
-import {Random} from '../Random';
+import {Random} from '../../common/utils/Random';
 
 export function inplaceShuffle(array: Array<unknown>, rng: Random) {
   let last = array.length;

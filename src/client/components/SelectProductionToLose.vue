@@ -54,12 +54,12 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
 
-interface SelectProductionToLoseModel {
+type DataModel = {
     megacredits: number;
     steel: number;
     titanium: number;
@@ -73,7 +73,7 @@ export default Vue.extend({
   name: 'SelectProductionToLose',
   props: {
     playerinput: {
-      type: Object as () => Required<Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>>,
+      type: Object as () => SelectProductionToLoseModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectProductionToLoseResponse) => void,
@@ -85,7 +85,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data(): SelectProductionToLoseModel {
+  data(): DataModel {
     return {
       megacredits: 0,
       steel: 0,
@@ -116,7 +116,7 @@ export default Vue.extend({
       return this.playerinput.payProduction.units.heat > 0;
     },
     hasWarning() {
-      return this.$data.warning !== undefined;
+      return this.warning !== undefined;
     },
     delta(type: string, direction: number) {
       const expendableProductionQuantity = function(type: string, model: PayProductionModel): number {
@@ -145,23 +145,23 @@ export default Vue.extend({
     },
     saveData() {
       const units: Units = {
-        megacredits: this.$data.megacredits,
-        steel: this.$data.steel,
-        titanium: this.$data.titanium,
-        plants: this.$data.plants,
-        energy: this.$data.energy,
-        heat: this.$data.heat,
+        megacredits: this.megacredits,
+        steel: this.steel,
+        titanium: this.titanium,
+        plants: this.plants,
+        energy: this.energy,
+        heat: this.heat,
       };
 
-      const sum = this.$data.megacredits +
-                this.$data.steel +
-                this.$data.titanium +
-                this.$data.plants +
-                this.$data.energy +
-                this.$data.heat;
+      const sum = this.megacredits +
+                this.steel +
+                this.titanium +
+                this.plants +
+                this.energy +
+                this.heat;
 
       if (sum !== this.playerinput.payProduction.cost) {
-        this.$data.warning = `Pay a total of ${this.playerinput.payProduction.cost} production units`;
+        this.warning = `Pay a total of ${this.playerinput.payProduction.cost} production units`;
         return;
       }
 

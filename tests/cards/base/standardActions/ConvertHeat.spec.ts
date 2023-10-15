@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {ConvertHeat} from '../../../../src/server/cards/base/standardActions/ConvertHeat';
 import {Phase} from '../../../../src/common/Phase';
-import {testGameOptions} from '../../../TestingUtils';
+import {churnAction, setTemperature} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
-import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {MAX_TEMPERATURE} from '../../../../src/common/constants';
+import {testGame} from '../../../TestGame';
 
 describe('ConvertHeat', function() {
   let card: ConvertHeat;
@@ -14,9 +14,7 @@ describe('ConvertHeat', function() {
 
   beforeEach(function() {
     card = new ConvertHeat();
-    player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
+    [/* skipped */, player] = testGame(2, {turmoilExtension: true});
   });
 
   it('Can not act without heat', function() {
@@ -40,14 +38,14 @@ describe('ConvertHeat', function() {
   it('Should play', function() {
     player.heat = 8;
     expect(card.canAct(player)).eq(true);
-    expect(card.action(player)).eq(undefined);
+    expect(churnAction(card, player)).eq(undefined);
     expect(player.game.getTemperature()).eq(-28);
   });
 
   it('Can not act when maximized', function() {
     player.heat = 8;
     expect(card.canAct(player)).eq(true);
-    (player.game as any).temperature = MAX_TEMPERATURE;
+    setTemperature(player.game, MAX_TEMPERATURE);
     expect(card.canAct(player)).eq(false);
   });
 });

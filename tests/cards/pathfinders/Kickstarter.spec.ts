@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Kickstarter} from '../../../src/server/cards/pathfinders/Kickstarter';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Game} from '../../../src/server/Game';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -15,8 +15,7 @@ describe('Kickstarter', function() {
 
   beforeEach(function() {
     card = new Kickstarter();
-    game = newTestGame(1, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {pathfindersExpansion: true});
   });
 
   it('play', () => {
@@ -29,7 +28,7 @@ describe('Kickstarter', function() {
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);
 
-    expect(options.options[2].title).to.match(/mars/);
+    expect(options.options[1].title).to.match(/mars/);
     expect(game.pathfindersData).deep.eq({
       venus: -1,
       earth: 0,
@@ -39,7 +38,7 @@ describe('Kickstarter', function() {
       vps: [],
     });
 
-    options.options[2].cb();
+    options.options[1].cb();
 
     expect(game.pathfindersData).deep.eq({
       venus: -1,

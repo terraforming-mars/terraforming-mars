@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGameOptions} from '../../TestingUtils';
 import {SubterraneanHabitats} from '../../../src/server/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -12,12 +11,12 @@ import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHab
 describe('SubterraneanHabitats', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: SubterraneanHabitats;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new SubterraneanHabitats();
   });
@@ -27,21 +26,21 @@ describe('SubterraneanHabitats', () => {
     player.megaCredits = 1000;
 
     player.steel = 1;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
     player.steel = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
     player.steel = 12;
     expect(player.getTerraformRating()).eq(14);
-    expect(moonData.colonyRate).eq(0);
+    expect(moonData.habitatRate).eq(0);
 
     card.play(player);
 
     expect(player.steel).eq(10);
     expect(player.getTerraformRating()).eq(15);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
   });
 
   it('effect', () => {
@@ -52,14 +51,14 @@ describe('SubterraneanHabitats', () => {
     player.megaCredits = 1000;
 
     player.cardsInHand = [theWomb];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.THE_WOMB]);
+    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.THE_WOMB]);
 
     player.titanium = 1;
-    expect(player.getPlayableCards().map((card) => card.name)).is.empty;
+    expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
 
     // And this one shows that with Subterranean Habitats, it needs one fewer unit of titanium.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.THE_WOMB]);
+    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.THE_WOMB]);
   });
 
   it('applies to colony standard project', () => {

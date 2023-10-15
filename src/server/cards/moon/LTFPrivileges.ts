@@ -9,7 +9,7 @@ export class LTFPrivileges extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LTF_PRIVILEGES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON],
       cost: 21,
 

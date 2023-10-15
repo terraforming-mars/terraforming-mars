@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,7 +12,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
     super({
       cost: 0,
       name: CardName.PRODUCTIVE_OUTPOST,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       metadata: {
         cardNumber: 'C30',
@@ -23,7 +23,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.colonies.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
         // Not using GiveColonyBonus deferred action because it's only for the active player

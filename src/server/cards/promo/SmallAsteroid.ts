@@ -9,7 +9,7 @@ import {all} from '../Options';
 export class SmallAsteroid extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SMALL_ASTEROID,
       tags: [Tag.SPACE],
       cost: 10,

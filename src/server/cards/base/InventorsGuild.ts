@@ -1,20 +1,22 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class InventorsGuild extends Card implements IActionCard, IProjectCard {
+export class InventorsGuild extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.INVENTORS_GUILD,
       tags: [Tag.SCIENCE],
       cost: 9,
+
+      action: {
+        drawCard: {count: 1, pay: true},
+      },
 
       metadata: {
         cardNumber: '006',
@@ -23,11 +25,5 @@ export class InventorsGuild extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    return player.drawCardKeepSome(1, {paying: true});
   }
 }

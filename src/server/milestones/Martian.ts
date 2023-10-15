@@ -1,14 +1,15 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 
-export class Martian implements IMilestone {
-  public readonly name = 'Martian';
-  public readonly description = 'Requires that you have 4 Mars tags in play';
-  public getScore(player: Player): number {
-    return player.tags.count(Tag.MARS, 'milestone');
+export class Martian extends BaseMilestone {
+  constructor() {
+    super(
+      'Martian',
+      'Have 4 Mars tags in play',
+      4);
   }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 4;
+  public getScore(player: IPlayer): number {
+    return player.tags.count(Tag.MARS, 'milestone');
   }
 }

@@ -5,16 +5,15 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 
 export class NanotechIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.NANOTECH_INDUSTRIES,
       tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 42,
@@ -25,7 +24,7 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
         drawCard: {count: 3, keep: 2},
       },
 
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       metadata: {
         cardNumber: 'MC1',
@@ -45,7 +44,7 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     player.game.defer(new AddResourcesToCard(
       player,
       CardResource.SCIENCE,

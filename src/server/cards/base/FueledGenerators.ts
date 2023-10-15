@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class FueledGenerators extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.FUELED_GENERATORS,
       tags: [Tag.POWER, Tag.BUILDING],
       cost: 1,

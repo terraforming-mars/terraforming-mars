@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 import {Xavier} from '../../../src/server/cards/ceos/Xavier';
 import {Cartel} from '../../../src/server/cards/base/Cartel';
@@ -9,6 +9,8 @@ import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
 import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {SulphurExports} from '../../../src/server/cards/venusNext/SulphurExports';
+import {Ecologist} from '../../../src/server/milestones/Ecologist';
+import {forceGenerationEnd} from '../../TestingUtils';
 
 
 describe('Xavier', function() {
@@ -18,8 +20,7 @@ describe('Xavier', function() {
 
   beforeEach(() => {
     card = new Xavier();
-    game = newTestGame(2, {ceoExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(2, {ceoExtension: true});
     player.playedCards.push(card, new SearchForLife());
   });
 
@@ -63,5 +64,40 @@ describe('Xavier', function() {
     const cartel = new Cartel();
     cartel.play(player);
     expect(player.production.megacredits).eq(4);
+  });
+
+  it('Gives discount for cards with requirements', function() {
+    const lightningHarvest = new LightningHarvest();
+    const geneRepair = new GeneRepair();
+
+    expect(card.getCardDiscount(player, lightningHarvest)).eq(0);
+    expect(card.getCardDiscount(player, geneRepair)).eq(0);
+    card.action();
+    player.getActionsThisGeneration().add(card.name);
+    expect(card.isDisabled).is.true;
+    expect(card.getCardDiscount(player, lightningHarvest)).eq(1);
+    expect(card.getCardDiscount(player, geneRepair)).eq(1);
+
+    // Persists over generations
+    game.deferredActions.runAll(() => {});
+    expect(card.isDisabled).is.true;
+    player.runProductionPhase();
+    expect(card.getCardDiscount(player, lightningHarvest)).eq(1);
+    expect(card.getCardDiscount(player, geneRepair)).eq(1);
+  });
+
+  it('Works with milestones', () => {
+    const ecologist = new Ecologist();
+    expect(ecologist.getScore(player)).eq(0);
+
+    // Once per game, can gain 2 wild tags for the generation
+    card.action();
+    player.getActionsThisGeneration().add(card.name);
+    expect(ecologist.getScore(player)).eq(2);
+
+    // Bonus wild tags are lost next generation
+    forceGenerationEnd(game);
+    expect(card.isDisabled).is.true;
+    expect(ecologist.getScore(player)).eq(0);
   });
 });

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {VenusFirst} from '../../../src/server/cards/pathfinders/VenusFirst';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
@@ -12,8 +12,7 @@ describe('VenusFirst', function() {
 
   beforeEach(function() {
     card = new VenusFirst();
-    game = newTestGame(1, {venusNextExtension: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {venusNextExtension: true});
   });
 
   it('Should play', function() {

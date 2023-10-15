@@ -1,5 +1,5 @@
 <template>
-    <div class="filterDiv colony-card colonies" :class="backgroundClass" v-i18n>
+    <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
@@ -16,7 +16,7 @@
     <!-- Colony Bonus -->
     <div class="colony-content" :style="'margin-top: {{colonyContentOffset}}px;'">
       <template v-if="metadata.colonyBonusType === ColonyBenefit.GAIN_RESOURCES">
-        <template v-if="metadata.colonyBonusResource !== Resources.MEGACREDITS">
+        <template v-if="metadata.colonyBonusResource !== Resource.MEGACREDITS">
           <div v-for="n in metadata.colonyBonusQuantity" :key=n class="resource" :class="metadata.colonyBonusResource"></div>
         </template>
         <template v-else>
@@ -117,7 +117,7 @@ import ColonyRow from '@/client/components/colonies/ColonyRow.vue';
 import ColonyTradeRow from '@/client/components/colonies/ColonyTradeRow.vue';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
-import {Resources} from '@/common/Resources';
+import {Resource} from '@/common/Resource';
 
 export default Vue.extend({
   name: 'colony',
@@ -171,11 +171,17 @@ export default Vue.extend({
       return getColony(this.colony.name);
     },
     colonyResourceClass(): string {
-      const resource = this.metadata.resourceType;
+      const resource = this.metadata.cardResource;
       return resource?.toString()?.toLowerCase() ?? '';
     },
     backgroundClass(): string {
       return this.colony.name.replace(' ', '-') + '-background';
+    },
+    tooltip(): string {
+      const description = this.metadata.description;
+      return `Build Colony bonus: ${description[0]}
+Trade bonus: ${description[1]}
+Colony bonus: ${description[2]}`;
     },
     ColonyName(): typeof ColonyName {
       return ColonyName;
@@ -183,8 +189,8 @@ export default Vue.extend({
     ColonyBenefit(): typeof ColonyBenefit {
       return ColonyBenefit;
     },
-    Resources(): typeof Resources {
-      return Resources;
+    Resource(): typeof Resource {
+      return Resource;
     },
   },
 });

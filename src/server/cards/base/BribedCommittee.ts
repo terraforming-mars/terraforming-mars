@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class BribedCommittee extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.BRIBED_COMMITTEE,
       tags: [Tag.EARTH],
       cost: 7,

@@ -1,6 +1,6 @@
 import {SelectColony} from './../../../src/server/inputs/SelectColony';
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {MarketManipulation} from '../../../src/server/cards/colonies/MarketManipulation';
 import {Enceladus} from '../../../src/server/colonies/Enceladus';
@@ -21,7 +21,7 @@ describe('MarketManipulation', function() {
 
   beforeEach(function() {
     card = new MarketManipulation();
-    game = newTestGame(2, {
+    [game, player] = testGame(2, {
       coloniesExtension: true,
       customColoniesList: [
         ColonyName.GANYMEDE,
@@ -30,7 +30,6 @@ describe('MarketManipulation', function() {
         ColonyName.CALLISTO,
         ColonyName.EUROPA],
     });
-    player = getTestPlayer(game, 0);
   });
 
   it('Should play', function() {
@@ -57,7 +56,6 @@ describe('MarketManipulation', function() {
     europa.trackPosition = 1;
 
     player.game.colonies = [pluto, callisto, europa];
-    player.game.gameOptions.coloniesExtension = true;
     card.play(player);
     const increaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
     expect(increaseColonyAction.colonies.length).to.eq(2);
@@ -81,7 +79,6 @@ describe('MarketManipulation', function() {
     const luna = new Luna();
 
     player.game.colonies = [enceladus, miranda, luna];
-    player.game.gameOptions.coloniesExtension = true;
     expect(card.canPlay(player)).is.not.true;
 
     player.playCard(new Pets());

@@ -1,11 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
@@ -13,11 +12,11 @@ import {ICard} from '../ICard';
 export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SPACE_DEBRIS_CLEANING_OPERATION,
       cost: 7,
       tags: [Tag.MARS, Tag.SPACE],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 4)),
+      requirements: {tag: Tag.SPACE, count: 4},
 
       behavior: {
         stock: {titanium: 3},
@@ -39,7 +38,7 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(
       new AddResourcesToCard(
         player,

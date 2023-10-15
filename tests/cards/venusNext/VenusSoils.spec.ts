@@ -7,6 +7,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {ICard} from '../../../src/server/cards/ICard';
+import {testGame} from '../../TestGame';
 
 describe('VenusSoils', function() {
   let card: VenusSoils;
@@ -15,10 +16,7 @@ describe('VenusSoils', function() {
 
   beforeEach(function() {
     card = new VenusSoils();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
-    player.popSelectInitialCards();
+    [game, player] = testGame(2);
   });
 
   it('Should play - single target', function() {
@@ -26,7 +24,7 @@ describe('VenusSoils', function() {
     player.playedCards.push(card2);
     expect(card.play(player)).is.undefined;
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(card2.resourceCount).to.eq(2);
     expect(player.production.plants).to.eq(1);

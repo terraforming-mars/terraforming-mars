@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaMiningHub} from '../../../src/server/cards/moon/LunaMiningHub';
 import {expect} from 'chai';
@@ -11,12 +10,12 @@ import {PlaceSpecialMoonTile} from '../../../src/server/moon/PlaceSpecialMoonTil
 describe('LunaMiningHub', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: LunaMiningHub;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new LunaMiningHub();
   });
@@ -28,22 +27,22 @@ describe('LunaMiningHub', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 5;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 0;
     player.steel = 1;
     moonData.miningRate = 5;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 1;
     player.steel = 0;
     moonData.miningRate = 5;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 4;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -23,20 +23,19 @@ export class HAL9000 extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
-    // For every Unit type, see if we can adjust production of that resource by -1
-    // If we can, make said adjustment, and give the player 4 of that production resource
+  public action(player: IPlayer): PlayerInput | undefined {
+    this.isDisabled = true;
+    // For every Unit type, if it can be reduced one unit, do so, and give the player
+    // 4 of that resource.
     for (const type of Units.keys) {
       const adjustment = Units.of({});
       adjustment[type] = -1;
       if (player.production.canAdjust(adjustment)) {
         player.production.adjust(adjustment, {log: true});
         adjustment[type] = 4;
-        player.addUnits(adjustment, {log: true});
+        player.stock.addUnits(adjustment, {log: true});
       }
     }
-
-    this.isDisabled = true;
     return undefined;
   }
 }

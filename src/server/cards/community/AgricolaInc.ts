@@ -1,13 +1,14 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {ITagCount} from '../../../common/cards/ITagCount';
+import {TagCount} from '../../../common/cards/TagCount';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class AgricolaInc extends Card implements ICorporationCard {
   constructor() {
@@ -15,19 +16,19 @@ export class AgricolaInc extends Card implements ICorporationCard {
       name: CardName.AGRICOLA_INC,
       tags: [Tag.PLANT],
       startingMegaCredits: 40,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       victoryPoints: 'special',
       behavior: {
-        production: {megacredits: 1, plants: 1},
+        production: {megacredits: 1, plants: 1, heat: 1},
       },
 
       metadata: {
         cardNumber: 'R36',
-        description: 'You start with 1 plant production, 1 M€ production and 40 M€.',
+        description: 'You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
+          b.production((pb) => pb.megacredits(1).plants(1).heat(1)).nbsp.megacredits(40);
           b.corpBox('effect', (ce) => {
             ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', Size.SMALL, true);
           });
@@ -37,11 +38,13 @@ export class AgricolaInc extends Card implements ICorporationCard {
     });
   }
 
-  public override getVictoryPoints(player: Player): number {
-    const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.POWER, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
-    if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tag.VENUS);
+  public override getVictoryPoints(player: IPlayer): number {
+    const scorableTags = [...player.game.tags];
+    inplaceRemove(scorableTags, Tag.WILD);
+    inplaceRemove(scorableTags, Tag.EVENT);
+    inplaceRemove(scorableTags, Tag.CLONE);
 
-    const playerTags : ITagCount[] = player.tags.getAllTags();
+    const playerTags : TagCount[] = player.tags.countAllTags();
     let points = 0;
 
     scorableTags.forEach((tag) => {

@@ -9,7 +9,7 @@ export class WaterToVenus extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.WATER_TO_VENUS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.SPACE],
       cost: 9,
 

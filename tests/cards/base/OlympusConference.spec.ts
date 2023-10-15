@@ -9,6 +9,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('OlympusConference', function() {
   let card: OlympusConference;
@@ -17,16 +18,14 @@ describe('OlympusConference', function() {
 
   beforeEach(function() {
     card = new OlympusConference();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {
     player.playedCards.push(card);
     card.play(player);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
 
     card.onCardPlayed(player, new Bushes());
     expect(game.deferredActions).has.lengthOf(0);

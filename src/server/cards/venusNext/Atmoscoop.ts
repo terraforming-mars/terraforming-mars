@@ -1,8 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Game} from '../../Game';
+import {IPlayer} from '../../IPlayer';
+import {IGame} from '../../IGame';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
@@ -10,7 +10,6 @@ import {CardName} from '../../../common/cards/CardName';
 import * as constants from '../../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
@@ -18,12 +17,12 @@ import {Card} from '../Card';
 export class Atmoscoop extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ATMOSCOOP,
       cost: 22,
       tags: [Tag.JOVIAN, Tag.SPACE],
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
+      requirements: {tag: Tag.SCIENCE, count: 3},
       victoryPoints: 1,
 
       behavior: {
@@ -41,30 +40,33 @@ export class Atmoscoop extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
       // TODO(kberg): this is not correct, because the titanium can't be used for the reds cost.
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
+      return player.canAfford({
+        cost: this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised,
+        titanium: true,
+      });
     }
 
     return true;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
       return undefined;
     }
 
-    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature', () => {
+    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature').andThen(() => {
       game.increaseTemperature(player, 2);
       return undefined;
     });
-    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus', () => {
+    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus').andThen(() => {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     });
@@ -81,11 +83,11 @@ export class Atmoscoop extends Card implements IProjectCard {
     return undefined;
   }
 
-  private temperatureIsMaxed(game: Game) {
+  private temperatureIsMaxed(game: IGame) {
     return game.getTemperature() === constants.MAX_TEMPERATURE;
   }
 
-  private venusIsMaxed(game: Game) {
+  private venusIsMaxed(game: IGame) {
     return game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
   }
 }

@@ -27,7 +27,6 @@ export interface NewGameConfig {
   board: BoardNameType;
   seed: number;
   initialDraft: boolean;
-  corporationsDraft: boolean;
   randomFirstPlayer: boolean;
 
   // boardName: BoardName;
@@ -45,6 +44,7 @@ export interface NewGameConfig {
   // coloniesExtension: boolean;
   // preludeExtension: boolean;
   // turmoilExtension: boolean;
+  prelude2Expansion: boolean;
   promoCardsOption: boolean;
   communityCardsOption: boolean;
   aresExtension: boolean;
@@ -75,8 +75,11 @@ export interface NewGameConfig {
   altVenusBoard: boolean;
   escapeVelocityMode: boolean;
   escapeVelocityThreshold: number | undefined;
+  escapeVelocityBonusSeconds: number | undefined;
   escapeVelocityPeriod: number | undefined;
   escapeVelocityPenalty: number | undefined;
-  twoCorpsVariant: boolean,
+  twoCorpsVariant: boolean;
   customCeos: Array<CardName>;
+  startingCeos: number;
+  starWarsExpansion: boolean,
 }

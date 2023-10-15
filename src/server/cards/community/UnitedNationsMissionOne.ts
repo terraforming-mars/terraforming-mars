@@ -4,15 +4,15 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 import {Phase} from '../../../common/Phase';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class UnitedNationsMissionOne extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.UNITED_NATIONS_MISSION_ONE,
       tags: [Tag.EARTH],
       startingMegaCredits: 40, // +1 for the initial change in TR.
@@ -34,17 +34,17 @@ export class UnitedNationsMissionOne extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player): undefined {
+  public override bespokePlay(player: IPlayer): undefined {
     player.increaseTerraformRating();
     return undefined;
   }
 
   // TODO(kberg): Since UNMO can generate MC for raising TR, that MC can offset reds costs, can't it?
-  public onIncreaseTerraformRating(player: Player, cardOwner: Player, steps: number) {
+  public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer, steps: number) {
     const game = player.game;
 
     if (game.phase === Phase.ACTION || game.phase === Phase.PRELUDES) {
-      cardOwner.addResource(Resources.MEGACREDITS, steps, {log: true});
+      cardOwner.stock.add(Resource.MEGACREDITS, steps, {log: true});
     }
   }
 }

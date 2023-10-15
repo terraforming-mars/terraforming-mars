@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {CorporateStronghold} from '../../../src/server/cards/base/CorporateStronghold';
-import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('CorporateStronghold', function() {
   let card: CorporateStronghold;
@@ -13,9 +13,7 @@ describe('CorporateStronghold', function() {
 
   beforeEach(function() {
     card = new CorporateStronghold();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
     player.popWaitingFor(); // Removing SelectInitalCards.
   });
 
@@ -24,18 +22,18 @@ describe('CorporateStronghold', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
 
-    expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
+    expect(action.spaces[0].tile && action.spaces[0].tile.tileType).to.eq(TileType.CITY);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
 
-    expect(card.getVictoryPoints()).to.eq(-2);
+    expect(card.getVictoryPoints(player)).to.eq(-2);
   });
 });

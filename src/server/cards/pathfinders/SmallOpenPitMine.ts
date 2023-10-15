@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -8,12 +8,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class SmallOpenPitMine extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.SMALL_OPEN_PIT_MINE,
       cost: 10,
       tags: [Tag.BUILDING],
@@ -28,21 +28,21 @@ export class SmallOpenPitMine extends Card implements IProjectCard {
     });
   }
 
-  public produce(player: Player) {
+  public produce(player: IPlayer) {
     player.game.defer(new SimpleDeferredAction(player, () => {
       return new OrOptions(
-        new SelectOption('Increase your steel production 2 steps', 'Increase', () => {
-          player.production.add(Resources.STEEL, 2, {log: true});
+        new SelectOption('Increase your steel production 2 steps').andThen(() => {
+          player.production.add(Resource.STEEL, 2, {log: true});
           return undefined;
         }),
-        new SelectOption('Increase your titanium production 1 step', 'Increase', () => {
-          player.production.add(Resources.TITANIUM, 1, {log: true});
+        new SelectOption('Increase your titanium production 1 step').andThen(() => {
+          player.production.add(Resource.TITANIUM, 1, {log: true});
           return undefined;
         }));
     }));
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     this.produce(player);
     return undefined;
   }

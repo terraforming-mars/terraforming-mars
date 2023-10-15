@@ -1,6 +1,6 @@
 {
      "Beginner": "Beginner",
-     "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Вы начинаете с 42 M€. Вместо участия в самой первой фазе исследования возьмите бесплтано 10 карт из колоды.",
+     "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Вы начинаете с 42 M€. Вместо участия в самой первой фазе исследования возьмите бесплатно 10 карт из колоды.",
 
      "Credicor": "Credicor",
      "You start with 57 M€.": "Вы начинаете с 57 M€.",
@@ -40,7 +40,7 @@
 
      "Mining Guild": "Mining Guild",
      "You start with 30 M€, 5 steel and 1 steel production.": "Вы начинаете c 30 M€, 5 стали, и 1 дополнительным уровнем производства стали.",
-     "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Эффект: Всякий раз, получая сталь или титан по территориальному бонусу, увеличивайте своё производство стали на 1.",
+     "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "Эффект: Всякий раз, получая сталь или титан по территориальному бонусу, увеличивайте своё производство стали на 1.",
 
      "Terractor": "Terractor",
      "You start with 60 M€.": "Вы начинаете с 60 M€.",

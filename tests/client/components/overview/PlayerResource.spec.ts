@@ -2,7 +2,7 @@ import {shallowMount} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import PlayerResource from '@/client/components/overview/PlayerResource.vue';
-import {Resources} from '@/common/Resources';
+import {Resource} from '@/common/Resource';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {FakeLocalStorage} from '../FakeLocalStorage';
 
@@ -21,7 +21,7 @@ describe('PlayerResource', function() {
     const wrapper = shallowMount(PlayerResource, {
       localVue: getLocalVue(),
       propsData: {
-        type: Resources.HEAT,
+        type: Resource.HEAT,
         count: 10,
         production: 1,
       },
@@ -33,7 +33,7 @@ describe('PlayerResource', function() {
     const wrapper = shallowMount(PlayerResource, {
       localVue: getLocalVue(),
       propsData: {
-        type: Resources.HEAT,
+        type: Resource.HEAT,
         count: 10,
         production: 1,
         value: 1,

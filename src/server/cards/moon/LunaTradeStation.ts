@@ -1,25 +1,25 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../../common/moon/MoonSpaces';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {Card} from '../Card';
-import {Game} from '../../Game';
-import {Resources} from '../../../common/Resources';
+import {ActionCard} from '../ActionCard';
 import {all} from '../Options';
 
-export class LunaTradeStation extends Card implements IActionCard {
+export class LunaTradeStation extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_TRADE_STATION,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON, Tag.MOON, Tag.SPACE],
       cost: 10,
       reserveUnits: {titanium: 2},
+
+      action: {
+        stock: {megacredits: {moon: {habitat: {}}, each: 2}},
+      },
 
       behavior: {
         moon: {
@@ -40,19 +40,5 @@ export class LunaTradeStation extends Card implements IActionCard {
         }),
       },
     });
-  }
-
-  private surfaceColonyCount(game: Game): number {
-    return MoonExpansion.spaces(game, TileType.MOON_HABITAT, {surfaceOnly: true}).length;
-  }
-
-  public canAct(player: Player): boolean {
-    return this.surfaceColonyCount(player.game) > 0;
-  }
-
-  public action(player: Player) {
-    const surfaceColonies = this.surfaceColonyCount(player.game);
-    player.addResource(Resources.MEGACREDITS, 2 * surfaceColonies, {log: true});
-    return undefined;
   }
 }

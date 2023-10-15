@@ -8,7 +8,7 @@ import {digit} from '../Options';
 export class MineralDeposit extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.MINERAL_DEPOSIT,
       cost: 5,
 

@@ -11,6 +11,7 @@ import {Mine} from '../../../src/server/cards/base/Mine';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {testGame} from '../../TestGame';
 
 describe('MarsUniversity', function() {
   let card: MarsUniversity;
@@ -19,15 +20,11 @@ describe('MarsUniversity', function() {
 
   beforeEach(function() {
     card = new MarsUniversity();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
-
+    cast(card.play(player), undefined);
     expect(card.onCardPlayed(player, new Pets())).is.undefined;
     expect(game.deferredActions).has.lengthOf(0);
 
@@ -47,7 +44,7 @@ describe('MarsUniversity', function() {
 
   it('Gives victory point', function() {
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
   it('Runs twice for multiple science tags', function() {
@@ -79,7 +76,7 @@ describe('MarsUniversity', function() {
     player.playCard(roboticWorkforce);
     expect(game.deferredActions).has.lengthOf(3);
 
-    const olympusConferenceAction = game.deferredActions.pop()?.execute();
+    const olympusConferenceAction = cast(game.deferredActions.pop()?.execute(), OrOptions);
     expect(olympusConferenceAction?.title).to.match(/Olympus Conference/);
     // Second option adds another resource.
     olympusConferenceAction?.options?.[1].cb();

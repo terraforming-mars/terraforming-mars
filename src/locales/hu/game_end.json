@@ -1,0 +1,33 @@
+{
+    "Sorry, you lose.": "Sajnos vesztettél.",
+    "Next time you will get more luck!": "Legközelebb több szerencséd lesz!",
+    "Also, take into account these small hints to win:": "Ezen kívül, vedd figyelembe ezeket a kis tippeket a győzelemhez:",
+    "Concentrate more on Global parameters, not on Victory Points": "Többet koncentrálj a globális paraméterekre, ne a győzelmi pontokra",
+    "Don't be greedy with card selection": "Ne legyél kapzsi a kártyaválasztásnál",
+    "Try to increase heat production, not Megacredits": "Próbálj növelni a hőtermelést, ne a Megakreditet",
+    "Try starting with the Beginner corporation": "Próbáld a Kezdő vállalattal kezdeni",
+
+    "You win!": "Győztél!",
+    "But it isn't the reason to stop making Mars better.": "De ez nem ok arra, hogy ne tegyél többet a Marsért.",
+    "Try to win with expansions enabled": "Próbáld megnyerni a játékot a kiegészítőkkel együtt",
+    "Try to win before the last generation comes": "Próbáld megnyerni a játékot mielőtt az utolsó generáció eljön",
+    "Can you get": "Tudsz szerezni",
+    "+ Victory Points?": "+ Győzelmi pontot?",
+
+    "Victory points breakdown after": "Győzelmi pontok eloszlása a játék végén",
+    "generations": "generációk",
+    "Player": "Játékos",
+    "Corporation": "Cégbirodalom",
+    "TR": "TR",
+    "VP": "GyP",
+    "Total": "Összesen",
+    "Victory points details for": "Győzelmi pontok részletei a",
+    "Victory points details": "Győzelmi pontok részletei",
+    "Final situation on the board": "Végső helyzet a táblán",
+    "Final game log": "Végső játéknapló",
+    "Go to main page": "Ugrás a főoldalra",
+    " - Game finished!": "A játék befejeződött!",
+    "Terraforming Mars - Game finished!": "A Mars Terraformálása - A játék befejeződött!",
+    " won!": " nyert!"
+
+}

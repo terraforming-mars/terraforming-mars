@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {TerraformingRobots} from '../../../src/server/cards/pathfinders/TerraformingRobots';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
@@ -13,7 +12,6 @@ import {Tag} from '../../../src/common/cards/Tag';
 describe('TerraformingRobots', function() {
   let card: TerraformingRobots;
   let player: TestPlayer;
-  let game: Game;
 
   let floater1: IProjectCard;
   let floater2: IProjectCard;
@@ -21,8 +19,7 @@ describe('TerraformingRobots', function() {
 
   beforeEach(function() {
     card = new TerraformingRobots();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();

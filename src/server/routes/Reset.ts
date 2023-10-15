@@ -1,9 +1,10 @@
-import * as http from 'http';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {isPlayerId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 /**
  * Reloads the game from the last action.
@@ -21,7 +22,7 @@ export class Reset extends Handler {
     super();
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
     if (playerId === null) {
       ctx.route.badRequest(req, res, 'missing id parameter');
@@ -45,7 +46,7 @@ export class Reset extends Handler {
       throw new Error('Reset is only available for solo games at the moment.');
     }
 
-    let player: Player | undefined;
+    let player: IPlayer | undefined;
     try {
       player = game.getPlayerById(playerId);
     } catch (err) {

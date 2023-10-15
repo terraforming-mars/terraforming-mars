@@ -1,24 +1,29 @@
 import {Colony} from '../../colonies/Colony';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../../common/colonies/ColonyBenefit';
-import {Resources} from '../../../common/Resources';
-import {ShouldIncreaseTrack} from '../../../common/colonies/ShouldIncreaseTrack';
+import {Resource} from '../../../common/Resource';
 
 export class Mercury extends Colony {
   constructor() {
     super({
       name: ColonyName.MERCURY,
+      description: [
+        'Gain the trade bonus of any colony tile. (This does not move the markers.)',
+        'Gain 1 unit of production of the type below the track marker',
+        'Gain 2 M€',
+      ],
+
       buildType: ColonyBenefit.COPY_TRADE,
       tradeType: ColonyBenefit.GAIN_PRODUCTION,
       tradeResource: [
-        Resources.HEAT, Resources.HEAT, Resources.HEAT,
-        Resources.STEEL, Resources.STEEL,
-        Resources.TITANIUM, Resources.TITANIUM,
+        Resource.HEAT, Resource.HEAT, Resource.HEAT,
+        Resource.STEEL, Resource.STEEL,
+        Resource.TITANIUM, Resource.TITANIUM,
       ],
       colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusResource: Resources.MEGACREDITS,
+      colonyBonusResource: Resource.MEGACREDITS,
       colonyBonusQuantity: 2,
-      shouldIncreaseTrack: ShouldIncreaseTrack.ASK,
+      shouldIncreaseTrack: 'ask',
     });
   }
 }

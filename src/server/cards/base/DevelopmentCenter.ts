@@ -1,19 +1,22 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class DevelopmentCenter extends Card implements IActionCard, IProjectCard {
+export class DevelopmentCenter extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.DEVELOPMENT_CENTER,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 11,
+
+      action: {
+        spend: {energy: 1},
+        drawCard: 1,
+      },
 
       metadata: {
         cardNumber: '014',
@@ -24,13 +27,5 @@ export class DevelopmentCenter extends Card implements IActionCard, IProjectCard
         }),
       },
     });
-  }
-  public canAct(player: Player): boolean {
-    return player.energy > 0;
-  }
-  public action(player: Player) {
-    player.energy--;
-    player.drawCard();
-    return undefined;
   }
 }

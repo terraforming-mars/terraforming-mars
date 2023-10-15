@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -11,11 +10,11 @@ export class DawnCity extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DAWN_CITY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.SPACE],
       cost: 15,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
+      requirements: {tag: Tag.SCIENCE, count: 4},
       victoryPoints: 3,
       behavior: {
         production: {energy: -1, titanium: 1},

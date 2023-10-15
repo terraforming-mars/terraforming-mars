@@ -1,9 +1,10 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {SulphurEatingBacteria} from '../../../src/server/cards/venusNext/SulphurEatingBacteria';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('SulphurEatingBacteria', function() {
   let card: SulphurEatingBacteria;
@@ -12,19 +13,17 @@ describe('SulphurEatingBacteria', function() {
 
   beforeEach(function() {
     card = new SulphurEatingBacteria();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    (game as any).venusScaleLevel = 4;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setVenusScaleLevel(game, 4);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    (game as any).venusScaleLevel = 6;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setVenusScaleLevel(game, 6);
+    expect(player.simpleCanPlay(card)).is.true;
     expect(card.play(player)).is.undefined;
   });
 

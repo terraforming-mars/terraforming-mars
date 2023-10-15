@@ -1,14 +1,15 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 
-export class Businessperson implements IMilestone {
-  public readonly name = 'Businessperson';
-  public readonly description = 'Requires that you have 6 Earth tags in play';
-  public getScore(player: Player): number {
-    return player.tags.count(Tag.EARTH, 'milestone');
+export class Businessperson extends BaseMilestone {
+  constructor() {
+    super(
+      'Businessperson',
+      'Have 6 Earth tags in play',
+      6);
   }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 6;
+  public getScore(player: IPlayer): number {
+    return player.tags.count(Tag.EARTH, 'milestone');
   }
 }

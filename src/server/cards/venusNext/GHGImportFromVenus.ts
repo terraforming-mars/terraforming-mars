@@ -9,7 +9,7 @@ export class GHGImportFromVenus extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GHG_IMPORT_FROM_VENUS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.SPACE, Tag.VENUS],
       cost: 23,
 

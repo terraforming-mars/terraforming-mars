@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class BlackPolarDust extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.BLACK_POLAR_DUST,
       cost: 15,
 

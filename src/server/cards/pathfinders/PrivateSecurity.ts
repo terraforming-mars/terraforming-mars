@@ -9,7 +9,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class PrivateSecurity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.PRIVATE_SECURITY,
       cost: 8,
       tags: [Tag.EARTH],

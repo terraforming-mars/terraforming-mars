@@ -5,14 +5,12 @@ import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Resources} from '../../../src/common/Resources';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {Resource} from '../../../src/common/Resource';
+import {cast, churnAction, fakeCard, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
-import {CardType} from '../../../src/common/cards/CardType';
 import {CardResource} from '../../../src/common/CardResource';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {testGame} from '../../TestGame';
 
 describe('MaxwellBase', function() {
   let card: MaxwellBase;
@@ -21,29 +19,27 @@ describe('MaxwellBase', function() {
 
   beforeEach(function() {
     card = new MaxwellBase();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({venusNextExtension: true}));
+    [game, player] = testGame(2, {venusNextExtension: true});
   });
 
   it('Can not play without energy production', function() {
-    (game as any).venusScaleLevel = 12;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setVenusScaleLevel(game, 12);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can not play if Venus requirement not met', function() {
-    player.production.add(Resources.ENERGY, 1);
-    (game as any).venusScaleLevel = 10;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    player.production.add(Resource.ENERGY, 1);
+    setVenusScaleLevel(game, 10);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
-    (game as any).venusScaleLevel = 12;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    player.production.add(Resource.ENERGY, 1);
+    setVenusScaleLevel(game, 12);
+    expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
+    runAllActions(game);
     expect(player.production.energy).to.eq(0);
   });
 
@@ -57,6 +53,7 @@ describe('MaxwellBase', function() {
     player.playedCards.push(card3);
     expect(card.canAct(player)).is.true;
     card.action(player);
+    runAllActions(game);
     expect(card3.resourceCount).to.eq(1);
   });
 
@@ -66,7 +63,7 @@ describe('MaxwellBase', function() {
     player.playedCards.push(card, card2, card3);
     expect(card.canAct(player)).is.true;
 
-    const action = cast(card.action(player), SelectCard);
+    const action = cast(churnAction(card, player), SelectCard);
     action.cb([card2]);
     expect(card2.resourceCount).to.eq(1);
   });
@@ -78,21 +75,12 @@ describe('MaxwellBase', function() {
   it('can Play - for a Venus card with an unusual resource', function() {
     expect(card.canAct(player)).is.false;
 
-    const fakeCard: IProjectCard = {
-      name: 'HELLO' as CardName,
+    const fake = fakeCard({
       cost: 1,
       tags: [Tag.VENUS],
-      canPlay: () => true,
-      play: () => undefined,
-      getVictoryPoints: () => 0,
-      cardType: CardType.ACTIVE,
-      metadata: {
-        cardNumber: '1',
-      },
       resourceType: CardResource.SYNDICATE_FLEET,
-      resourceCount: 0,
-    };
-    player.playedCards.push(fakeCard);
+    });
+    player.playedCards.push(fake);
 
     expect(card.canAct(player)).is.true;
   });

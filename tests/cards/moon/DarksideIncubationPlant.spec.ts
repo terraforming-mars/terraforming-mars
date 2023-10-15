@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {DarksideIncubationPlant} from '../../../src/server/cards/moon/DarksideIncubationPlant';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -13,7 +13,7 @@ describe('DarksideIncubationPlant', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new DarksideIncubationPlant();
   });
 
@@ -22,10 +22,10 @@ describe('DarksideIncubationPlant', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 0;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('act', () => {
@@ -45,24 +45,24 @@ describe('DarksideIncubationPlant', () => {
     action3.options[1].cb();
     expect(card.resourceCount).eq(3);
 
-    // First option removes 2 resources and raises the colony rate.
-    expect(MoonExpansion.moonData(game).colonyRate).eq(0);
+    // First option removes 2 resources and raises the habitat rate.
+    expect(MoonExpansion.moonData(game).habitatRate).eq(0);
     action3.options[0].cb();
     expect(card.resourceCount).eq(1);
-    expect(MoonExpansion.moonData(game).colonyRate).eq(1);
+    expect(MoonExpansion.moonData(game).habitatRate).eq(1);
   });
 
   it('victoryPoints', () => {
     card.resourceCount = 0;
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
     card.resourceCount = 1;
-    expect(card.getVictoryPoints()).eq(0);
+    expect(card.getVictoryPoints(player)).eq(0);
     card.resourceCount = 2;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints(player)).eq(1);
     card.resourceCount = 3;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints(player)).eq(1);
     card.resourceCount = 4;
-    expect(card.getVictoryPoints()).eq(2);
+    expect(card.getVictoryPoints(player)).eq(2);
   });
 });
 

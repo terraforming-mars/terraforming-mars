@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AsteroidMining extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.ASTEROID_MINING,
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 30,

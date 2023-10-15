@@ -1,24 +1,23 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all} from '../Options';
-import {VictoryPoints} from '../ICard';
 
 export class AncientShipyards extends Card {
   constructor() {
     super({
       name: CardName.ANCIENT_SHIPYARDS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.MOON, Tag.SPACE],
       cost: 6,
 
       resourceType: CardResource.RESOURCE_CUBE,
-      victoryPoints: VictoryPoints.resource(-1, 1),
+      victoryPoints: {resourcesHere: {}, each: -1},
       reserveUnits: {titanium: 3},
 
       metadata: {
@@ -38,14 +37,14 @@ export class AncientShipyards extends Card {
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const game = player.game;
     for (const p of game.getPlayers()) {
       if (p === player) continue;
-      p.stealResource(Resources.MEGACREDITS, 2, player);
+      p.stock.steal(Resource.MEGACREDITS, 2, player);
     }
     if (game.isSoloMode()) {
-      player.addResource(Resources.MEGACREDITS, 2);
+      player.stock.add(Resource.MEGACREDITS, 2);
     }
     player.addResourceTo(this, 1);
     return undefined;

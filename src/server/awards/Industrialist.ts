@@ -1,10 +1,10 @@
 import {IAward} from './IAward';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Industrialist implements IAward {
   public readonly name = 'Industrialist';
-  public readonly description = 'Having most steel and energy resources (after final production round)';
-  public getScore(player: Player): number {
+  public readonly description = 'Have most steel and energy';
+  public getScore(player: IPlayer): number {
     if (player.game.isDoneWithFinalProduction()) {
       return player.steel + player.energy;
     } else {

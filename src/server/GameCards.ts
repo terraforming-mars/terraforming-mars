@@ -12,15 +12,16 @@ import {CEO_CARD_MANIFEST} from './cards/ceos/CeoCardManifest';
 import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICard} from './cards/ICard';
-import {ICardFactory} from './cards/ICardFactory';
-import {GameModule} from '../common/cards/GameModule';
-import {GameOptions} from './GameOptions';
+import {isCompatibleWith} from './cards/ICardFactory';
+import {GameOptions} from './game/GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {CardFinder} from './CardFinder';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
+import {PRELUDE2_CARD_MANIFEST} from './cards/prelude2/Prelude2CardManifest';
+import {STAR_WARS_CARD_MANIFEST} from './cards/starwars/StarwarsCardManifest';
 
 /**
  * Returns the cards available to a game based on its `GameOptions`.
@@ -47,6 +48,7 @@ export class GameCards {
       [true, BASE_CARD_MANIFEST],
       [gameOptions.corporateEra, CORP_ERA_CARD_MANIFEST],
       [gameOptions.preludeExtension, PRELUDE_CARD_MANIFEST],
+      [gameOptions.prelude2Expansion, PRELUDE2_CARD_MANIFEST],
       [gameOptions.venusNextExtension, VENUS_CARD_MANIFEST],
       [gameOptions.coloniesExtension, COLONIES_CARD_MANIFEST],
       [gameOptions.turmoilExtension, TURMOIL_CARD_MANIFEST],
@@ -56,41 +58,19 @@ export class GameCards {
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
       [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
       [gameOptions.ceoExtension, CEO_CARD_MANIFEST],
+      [gameOptions.starWarsExpansion, STAR_WARS_CARD_MANIFEST],
     ];
 
-    this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);
+    this.moduleManifests = manifests
+      .filter(([option, _manifest]) => option === true)
+      .map(([_option, manifest]) => manifest);
   }
 
-  private static isCompatibleWith(cf: ICardFactory<ICard>, gameOptions: GameOptions): boolean {
-    if (cf.compatibility === undefined) {
-      return true;
-    }
-    const expansions: Array<GameModule> = Array.isArray(cf.compatibility) ? cf.compatibility : [cf.compatibility];
-    return expansions.every((expansion) => {
-      switch (expansion) {
-      case 'venus':
-        return gameOptions.venusNextExtension;
-      case 'colonies':
-        return gameOptions.coloniesExtension;
-      case 'turmoil':
-        return gameOptions.turmoilExtension;
-      case 'prelude':
-        return gameOptions.preludeExtension;
-      case 'moon':
-        return gameOptions.moonExpansion;
-      case 'pathfinders':
-        return gameOptions.pathfindersExpansion;
-      case 'ceo':
-        return gameOptions.ceoExtension;
-      default:
-        throw new Error(`Unhandled expansion type ${expansion}`);
-      }
-    });
-  }
-
+  // TODO(kberg): Readonly
   private instantiate<T extends ICard>(manifest: CardManifest<T>): Array<T> {
     return CardManifest.values(manifest)
-      .filter((factory) => GameCards.isCompatibleWith(factory, this.gameOptions))
+      .filter((factory) => factory.instantiate !== false)
+      .filter((factory) => isCompatibleWith(factory, this.gameOptions))
       .map((factory) => new factory.Factory());
   }
 
@@ -120,7 +100,6 @@ export class GameCards {
       // remove it from the deck to avoid possible conflicts (e.g. Valley Trust / New Partner)
       preludes = preludes.filter((c) => c.name !== CardName.MERGER);
     }
-
     return preludes;
   }
 

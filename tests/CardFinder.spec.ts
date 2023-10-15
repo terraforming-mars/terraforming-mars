@@ -12,6 +12,9 @@ describe('CardFinder', function() {
   it('getProjectCardByName prelude: success', function() {
     expect(new CardFinder().getProjectCardByName(CardName.ALLIED_BANK)?.name).eq(CardName.ALLIED_BANK);
   });
+  it('getProjectCardByName ceo: success', function() {
+    expect(new CardFinder().getProjectCardByName(CardName.HAL9000)?.name).eq(CardName.HAL9000);
+  });
   it('getCeoByName ceo: success', function() {
     expect(new CardFinder().getCeoByName(CardName.HAL9000)?.name).eq(CardName.HAL9000);
   });

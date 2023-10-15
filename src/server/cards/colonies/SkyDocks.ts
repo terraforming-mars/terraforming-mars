@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRequirements} from '../CardRequirements';
 
 export class SkyDocks extends Card implements IProjectCard {
   constructor() {
@@ -12,14 +11,14 @@ export class SkyDocks extends Card implements IProjectCard {
       cost: 18,
       tags: [Tag.SPACE, Tag.EARTH],
       name: CardName.SKY_DOCKS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       victoryPoints: 2,
 
       behavior: {
         colonies: {addTradeFleet: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
+      requirements: {tag: Tag.EARTH, count: 2},
       cardDiscount: {amount: 1},
       metadata: {
         cardNumber: 'C36',

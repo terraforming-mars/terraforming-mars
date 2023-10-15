@@ -5,9 +5,9 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
 import {isPlayerId, PlayerId} from '../../../src/common/Types';
 
@@ -21,7 +21,7 @@ describe('TempestConsultancy', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, otherPlayer], player, {turmoilExtension: true});
     card = new TempestConsultancy();
     turmoil = game.turmoil!;
   });
@@ -64,7 +64,7 @@ describe('TempestConsultancy', () => {
     expect(marsFirst.delegates.get(player.id)).eq(0);
     card.action(player);
     const action = cast(player.game.deferredActions.pop(), SendDelegateToArea);
-    const options = cast(action.execute(), SelectPartyToSendDelegate);
+    const options = cast(action.execute(), SelectParty);
     options.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id)).eq(4);
@@ -83,7 +83,7 @@ describe('TempestConsultancy', () => {
     card.action(player);
 
     const action = cast(player.game.deferredActions.pop(), SendDelegateToArea);
-    const options = cast(action.execute(), SelectPartyToSendDelegate);
+    const options = cast(action.execute(), SelectParty);
     options.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id)).eq(0);
@@ -92,8 +92,8 @@ describe('TempestConsultancy', () => {
 
   it('new chairman', () => {
     player.setCorporationForTest(card);
-    turmoil.rulingParty = new Greens();
-    turmoil.rulingParty.partyLeader = player.id;
+    turmoil.dominantParty = new Greens();
+    turmoil.dominantParty.partyLeader = player.id;
     expect(player.getTerraformRating()).eq(20);
 
     turmoil.setRulingParty(game);

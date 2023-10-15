@@ -7,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 export class TransNeptuneProbe extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.TRANS_NEPTUNE_PROBE,
       tags: [Tag.SCIENCE, Tag.SPACE],
       cost: 6,

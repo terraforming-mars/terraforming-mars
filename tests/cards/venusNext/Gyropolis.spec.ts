@@ -2,9 +2,9 @@ import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
@@ -20,9 +20,7 @@ describe('Gyropolis', function() {
 
   beforeEach(function() {
     card = new Gyropolis();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -30,17 +28,17 @@ describe('Gyropolis', function() {
     const lunaGoveror = new LunaGovernor();
 
     player.playedCards.push(researchNetwork, lunaGoveror);
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(action.cb(action.availableSpaces[0])).is.undefined;
-    expect(action.availableSpaces[0].player).to.eq(player);
-    expect(action.availableSpaces[0].tile).is.not.undefined;
-    expect(action.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
+    expect(action.cb(action.spaces[0])).is.undefined;
+    expect(action.spaces[0].player).to.eq(player);
+    expect(action.spaces[0].tile).is.not.undefined;
+    expect(action.spaces[0].tile!.tileType).to.eq(TileType.CITY);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
   });

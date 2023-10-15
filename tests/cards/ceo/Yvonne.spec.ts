@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 
 import {Yvonne} from '../../../src/server/cards/ceos/Yvonne';
@@ -18,9 +18,7 @@ describe('Yvonne', function() {
 
   beforeEach(() => {
     card = new Yvonne();
-    game = newTestGame(2, {ceoExtension: true, coloniesExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {ceoExtension: true, coloniesExtension: true});
 
     // Setup some colonies that can be built independently of cards
     const callisto = new Callisto(); // 3 Energy

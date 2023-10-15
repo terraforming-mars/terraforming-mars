@@ -9,7 +9,7 @@ import {all} from '../Options';
 export class DeimosDown extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.DEIMOS_DOWN,
       tags: [Tag.SPACE],
       cost: 31,

@@ -1,12 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {all} from '../Options';
 
 export class SpacePortColony extends Card implements IProjectCard {
   constructor() {
@@ -14,10 +13,10 @@ export class SpacePortColony extends Card implements IProjectCard {
       cost: 27,
       tags: [Tag.SPACE],
       name: CardName.SPACE_PORT_COLONY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
-      requirements: CardRequirements.builder((b) => b.colonies()),
-      victoryPoints: 'special',
+      requirements: {colonies: 1},
+      victoryPoints: {colonies: {colonies: {}}, all, per: 2},
 
       behavior: {
         colonies: {
@@ -33,12 +32,11 @@ export class SpacePortColony extends Card implements IProjectCard {
           b.vpText('1VP per 2 colonies in play.');
         }),
         description: 'Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.',
-        victoryPoints: CardRenderDynamicVictoryPoints.colonies(1, 2, true),
       },
     });
   }
 
-  public override getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: IPlayer) {
     let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;

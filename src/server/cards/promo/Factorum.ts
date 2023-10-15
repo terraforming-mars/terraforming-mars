@@ -1,20 +1,22 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {TITLES} from '../../inputs/titles';
 
 export class Factorum extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.FACTORUM,
       tags: [Tag.POWER, Tag.BUILDING],
       startingMegaCredits: 37,
@@ -31,7 +33,7 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.', (eb) => {
-              eb.empty().arrow().production((pb) => pb.energy(1));
+              eb.empty().arrow().production((pb) => pb.energy(1)).asterix();
               eb.or().megacredits(3).startAction.cards(1, {secondaryTag: Tag.BUILDING});
             });
           });
@@ -40,27 +42,25 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.energy === 0 || player.canAfford(3);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const increaseEnergy = new SelectOption(
       'Increase your energy production 1 step',
-      'Increase production',
-      () => {
-        player.production.add(Resources.ENERGY, 1, {log: true});
+      'Increase production')
+      .andThen(() => {
+        player.production.add(Resource.ENERGY, 1, {log: true});
         return undefined;
-      },
-    );
+      });
 
-    const drawBuildingCard = new SelectOption('Spend 3 M€ to draw a building card', 'Draw card', () => {
-      player.payMegacreditsDeferred(
-        3,
-        'Select how to pay for Factorum action.',
-        () => player.drawCard(1, {tag: Tag.BUILDING}));
-      return undefined;
-    });
+    const drawBuildingCard = new SelectOption('Spend 3 M€ to draw a building card', 'Draw card')
+      .andThen(() => {
+        player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
+          .andThen(() => player.drawCard(1, {tag: Tag.BUILDING}));
+        return undefined;
+      });
 
     if (player.energy > 0) return drawBuildingCard;
     if (!player.canAfford(3)) return increaseEnergy;

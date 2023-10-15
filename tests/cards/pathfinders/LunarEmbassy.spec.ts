@@ -4,7 +4,6 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {SpaceName} from '../../../src/server/SpaceName';
-import {testGameOptions} from '../../TestingUtils';
 
 describe('LunarEmbassy', function() {
   let card: LunarEmbassy;
@@ -13,7 +12,7 @@ describe('LunarEmbassy', function() {
   beforeEach(function() {
     card = new LunarEmbassy();
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({pathfindersExpansion: true}));
+    Game.newInstance('gameid', [player], player, {pathfindersExpansion: true});
   });
 
   it('play', function() {

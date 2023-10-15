@@ -9,6 +9,7 @@ import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
+import {testGame} from '../../TestGame';
 
 describe('Factorum', function() {
   let card: Factorum;
@@ -17,9 +18,7 @@ describe('Factorum', function() {
 
   beforeEach(function() {
     card = new Factorum();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
     player.setCorporationForTest(card);
   });
 
@@ -33,13 +32,13 @@ describe('Factorum', function() {
     expect(orOptions.options).has.lengthOf(2);
     const drawCardOption = cast(orOptions.options[1], SelectOption);
 
-    drawCardOption.cb();
+    drawCardOption.cb(undefined);
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(7);
 
     const gainEnergyProductionOption = cast(orOptions.options[0], SelectOption);
-    gainEnergyProductionOption.cb();
+    gainEnergyProductionOption.cb(undefined);
     expect(player.production.energy).to.eq(1);
   });
 
@@ -50,7 +49,7 @@ describe('Factorum', function() {
     player.energy = 1;
 
     const selectOption = cast(card.action(player), SelectOption);
-    selectOption.cb();
+    selectOption.cb(undefined);
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].tags).includes(Tag.BUILDING);
@@ -73,7 +72,7 @@ describe('Factorum', function() {
     player.heat = 5;
 
     const selectOption = cast(card.action(player), SelectOption);
-    selectOption.cb();
+    selectOption.cb(undefined);
     runAllActions(game);
 
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);

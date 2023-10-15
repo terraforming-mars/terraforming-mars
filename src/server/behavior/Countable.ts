@@ -1,4 +1,5 @@
 import {Units} from '../../common/Units';
+import {OneOrArray} from '../../common/utils/types';
 import {Tag} from '../../common/cards/Tag';
 import {NoAttributes} from './NoAttributes';
 
@@ -14,10 +15,15 @@ export type _Countable = {
    * This is counting tags as if the player was taking an action (for example,
    * a player's wild tags count, events are ignored.)
    */
-  tag?: Tag | Array<Tag>,
+  tag?: OneOrArray<Tag>,
   cities?: {where?: 'onmars' | 'offmars' | 'everywhere'},
   greeneries?: NoAttributes,
   oceans?: NoAttributes,
+  resourcesHere?: NoAttributes,
+  floaters?: NoAttributes,
+  colonies?: {
+    colonies?: {},
+  }
   moon?: {
     habitatRate?: NoAttributes,
     miningRate?: NoAttributes,
@@ -31,18 +37,21 @@ export type _Countable = {
   others?: true; // For tags this has a behavior.
 
   /**
-   * Multiple the sum by `per`.
+   * Multiply the sum by this value.
    *
    * For example, `{cities: {}, each: 2}` would count all the cities on the board, and multiply that value by 2.
    */
-  per?: number;
+  each?: number;
 
   /**
-   * Divide the sum by `each`. Round down.
+   * Divide the sum by this value. Round down.
    *
-   * For example, `{tags: Tag.MOON, each: 3}` would count all moon tags, and then divide by 3.
+   * For example, `{tags: Tag.MOON, per: 3}` would count all moon tags, and then divide by 3.
+   *
+   * `each` is applied before `per`, so `{tags: Tag.MOON, each: 2, per: 3}` would provide 2/3 the value
+   * of moon tags.
    */
-  each?: number;
+  per?: number;
 };
 
 export type Countable = number | _Countable;

@@ -110,7 +110,8 @@
       <span class="red-arrow-3x"></span>
       <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-space"></div></div>
     </template>
-    <template v-else-if="id === 'up04'"> `<div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource">-2</div></div>
+    <template v-else-if="id === 'up04'">
+      <div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource">-2</div></div>
     </template>
     <template v-else-if="id === 'kp01'">
       <span class="money resource">10</span>

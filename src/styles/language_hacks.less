@@ -37,6 +37,9 @@
 
 .language-ru {
     .filterDiv {
+        .card-requirements {
+            font-size: 13px;
+        }
         .card-title {
             font-size: 11px !important;
         }
@@ -84,6 +87,13 @@
             }
         }
 
+        &.card-birds {
+            .card-description {
+                width: 60%;
+                align-self: flex-start;
+            }
+        }
+
         &.card-agricola-inc {
             .description {
                 line-height: 11px;
@@ -122,12 +132,49 @@
                 font-size: 14px;
             }
         }
+        &.Hygiea-background {
+            .colony-background-color {
+                white-space: nowrap;
+            }
+        }
+        &.card-tycho-magnetics {
+            .card-text-size--M {
+                font-size: 12px;
+            }
+        }
     }
 
-    .player_home_colony_cont {
-        .colony-card-title-span, .colony-background-color {
-            font-family: "Ubuntu" !important;
+    .ma-name--terra-pioneer {
+        span {
+            font-size: 10px !important;
         }
+    }
+    .ma-name--spacefarer {
+        span {
+            font-size: 10px !important;
+        }
+    }
+    .ma-name--land-specialist {
+        span {
+            font-size: 10px !important;
+        }
+    }
+    .ma-name--adapter {
+        span {
+            font-size: 10px !important;
+        }
+    }
+    .ma-name--one-giant-step {
+        span {
+            font-size: 10px !important;
+        }
+    }
+
+    .tag-none {
+        background-image: url(./assets/tags/tag-none-ru.png) !important;
+    }
+    .tag-vp::before {
+        content: "ПО" !important;
     }
 }
 

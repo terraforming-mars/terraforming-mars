@@ -10,6 +10,5 @@
     "Convert Plants": "绿化",
     "CONVERT PLANTS": "绿化",
     "Spend 8 plants to place a greenery tile and raise oxygen 1 step.": "花费8植物来放置一个森林板块，并提升氧气1级。",
-    "Convert 8 plants into greenery": "支付8植物放置森林",
-    "Convert 7 plants into greenery": "支付7植物放置森林"
+    "Convert ${0} plants into greenery": "支付${0}植物放置森林"
 }

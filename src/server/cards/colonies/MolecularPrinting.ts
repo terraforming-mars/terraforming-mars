@@ -1,12 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
 export class MolecularPrinting extends Card implements IProjectCard {
@@ -15,8 +13,12 @@ export class MolecularPrinting extends Card implements IProjectCard {
       cost: 11,
       tags: [Tag.SCIENCE],
       name: CardName.MOLECULAR_PRINTING,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       victoryPoints: 1,
+
+      behavior: {
+        stock: {megacredits: {cities: {}, colonies: {colonies: {}}, all}},
+      },
 
       metadata: {
         cardNumber: 'C27',
@@ -27,14 +29,5 @@ export class MolecularPrinting extends Card implements IProjectCard {
         description: 'Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    let coloniesCount = 0;
-    player.game.colonies.forEach((colony) => {
-      coloniesCount += colony.colonies.length;
-    });
-    player.addResource(Resources.MEGACREDITS, player.game.getCitiesCount() + coloniesCount, {log: true});
-    return undefined;
   }
 }

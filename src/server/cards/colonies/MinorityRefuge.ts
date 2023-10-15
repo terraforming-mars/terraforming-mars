@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,7 +15,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
       cost: 5,
       tags: [Tag.SPACE],
       name: CardName.MINORITY_REFUGE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       metadata: {
         cardNumber: 'C26',
@@ -29,7 +29,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
 
   public warning?: string;
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.colonies.getPlayableColonies().length === 0) {
       return false;
     }
@@ -40,7 +40,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
     } else if (megaCreditsProduction <= -4) {
       const lunaIsAvailable = player.game.colonies.some((colony) =>
         colony.name === ColonyName.LUNA &&
-        colony.isColonyFull() === false &&
+        colony.isFull() === false &&
         colony.colonies.includes(player.id) === false);
 
       if (lunaIsAvailable === false) {
@@ -52,12 +52,17 @@ export class MinorityRefuge extends Card implements IProjectCard {
     return true;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const openColonies = player.production.megacredits <= -4 ?
       player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
       undefined;
-    player.game.defer(new BuildColony(player, {title: 'Select colony for Minority Refuge', colonies: openColonies}));
-    player.production.add(Resources.MEGACREDITS, -2);
+    player.game.defer(
+      new BuildColony(
+        player, {
+          title: 'Select colony for Minority Refuge',
+          colonies: openColonies,
+        }))
+      .andThen(() => player.production.add(Resource.MEGACREDITS, -2));
     return undefined;
   }
 }

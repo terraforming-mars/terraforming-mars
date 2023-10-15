@@ -1,12 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
 import {played} from '../Options';
@@ -14,14 +12,14 @@ import {played} from '../Options';
 export class Decomposers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.DECOMPOSERS,
       tags: [Tag.MICROBE],
       cost: 5,
 
       resourceType: CardResource.MICROBE,
-      victoryPoints: VictoryPoints.resource(1, 3),
-      requirements: CardRequirements.builder((b) => b.oxygen(3)),
+      victoryPoints: {resourcesHere: {}, per: 3},
+      requirements: {oxygen: 3},
 
       metadata: {
         cardNumber: '131',
@@ -38,11 +36,11 @@ export class Decomposers extends Card implements IProjectCard {
       },
     });
   }
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
     const qty = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     player.addResourceTo(this, {qty, log: true});
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts
     if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
       player.addResourceTo(this, {qty: 2, log: true});

@@ -9,9 +9,9 @@ import {AresData} from '../ares/AresData';
 import {SpaceModel} from './SpaceModel';
 import {MoonModel} from './MoonModel';
 import {PathfindersModel} from './PathfindersModel';
-import {CardModel} from './CardModel';
 import {SpectatorId} from '../Types';
 import {ColonyName} from '../colonies/ColonyName';
+import {GlobalParameter} from '../GlobalParameter';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
 export type GameModel = {
@@ -19,12 +19,13 @@ export type GameModel = {
   awards: Array<FundedAwardModel>;
   colonies: Array<ColonyModel>;
   discardedColonies: Array<ColonyName>;
-  corporationsToDraft: Array<CardModel>;
   deckSize: number;
   expectedPurgeTimeMs: number;
+  experimentalReset?: boolean;
   gameAge: number;
   gameOptions: GameOptionsModel;
   generation: number;
+  globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>>,
   isSoloModeWin: boolean;
   lastSoloGeneration: number,
   milestones: Array<ClaimedMilestoneModel>;
@@ -42,5 +43,4 @@ export type GameModel = {
   turmoil: TurmoilModel | undefined;
   undoCount: number;
   venusScaleLevel: number;
-  experimentalReset?: boolean;
 }

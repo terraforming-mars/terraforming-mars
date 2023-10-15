@@ -1,15 +1,15 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 
-export class Smith implements IMilestone {
-  public readonly name = 'Smith';
-  public readonly description = 'Have a total of at least 7 steel and titanium production';
-
-  public getScore(player: Player): number {
-    return player.production.steel + player.production.titanium;
+export class Smith extends BaseMilestone {
+  constructor() {
+    super(
+      'Smith',
+      'Have a total of 7 steel and titanium production',
+      7);
   }
 
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 7;
+  public getScore(player: IPlayer): number {
+    return player.production.steel + player.production.titanium;
   }
 }

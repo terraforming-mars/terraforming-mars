@@ -1,6 +1,6 @@
 import {GameIdLedger, IDatabase} from './IDatabase';
-import {Game, Score} from '../Game';
-import {GameOptions} from '../GameOptions';
+import {IGame, Score} from '../IGame';
+import {GameOptions} from '../game/GameOptions';
 import {GameId, isGameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {Dirent, existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync} from 'fs';
@@ -46,7 +46,7 @@ export class LocalFilesystem implements IDatabase {
     return path.resolve(this.completedFolder, `${gameId}.json`);
   }
 
-  saveGame(game: Game): Promise<void> {
+  saveGame(game: IGame): Promise<void> {
     console.log(`saving ${game.id} at position ${game.lastSaveId}`);
     this.saveSerializedGame(game.serialize());
     game.lastSaveId++;
@@ -119,14 +119,9 @@ export class LocalFilesystem implements IDatabase {
     return serializedGame.players.length;
   }
 
-  loadCloneableGame(gameId: GameId): Promise<SerializedGame> {
-    return this.getGameVersion(gameId, 0);
-  }
-
   getGameIds(): Promise<Array<GameId>> {
     const gameIds: Array<GameId> = [];
 
-    // TODO(kberg): use readdir since this is expected to be async anyway.
     readdirSync(this.dbFolder, {withFileTypes: true}).forEach((dirent: Dirent) => {
       const gameId = this.asGameId(dirent);
       if (gameId !== undefined) {
@@ -136,22 +131,23 @@ export class LocalFilesystem implements IDatabase {
     return Promise.resolve(gameIds);
   }
 
-  restoreReferenceGame(_gameId: GameId): Promise<Game> {
-    throw new Error('Does not work');
-  }
-
   saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
     const obj = {gameId, players, generations, gameOptions, scores};
     const text = JSON.stringify(obj, null, 2);
     writeFileSync(this.completedFilename(gameId), text);
   }
 
-  cleanGame(_gameId: GameId): Promise<void> {
+  markFinished(_gameId: GameId): Promise<void> {
     // Not implemented here.
     return Promise.resolve();
   }
 
-  purgeUnfinishedGames(): Promise<void> {
+  purgeUnfinishedGames(): Promise<Array<GameId>> {
+    // Not implemented.
+    return Promise.resolve([]);
+  }
+
+  compressCompletedGames(): Promise<unknown> {
     // Not implemented.
     return Promise.resolve();
   }
@@ -196,7 +192,6 @@ export class LocalFilesystem implements IDatabase {
   public getParticipants(): Promise<Array<GameIdLedger>> {
     const gameIds: Array<GameIdLedger> = [];
 
-    // TODO(kberg): use readdir since this is expected to be async anyway.
     readdirSync(this.dbFolder, {withFileTypes: true}).forEach((dirent: Dirent) => {
       const gameId = this.asGameId(dirent);
       if (gameId !== undefined) {

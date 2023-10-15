@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {cast} from '../../../TestingUtils';
+import {cast, churnAction} from '../../../TestingUtils';
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
-import {maxOutOceans, testGameOptions, runAllActions} from '../../../TestingUtils';
+import {maxOutOceans} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -10,6 +10,7 @@ import {Phase} from '../../../../src/common/Phase';
 import {SelectSpace} from '../../../../src/server/inputs/SelectSpace';
 import {SpaceType} from '../../../../src/common/boards/SpaceType';
 import {TileType} from '../../../../src/common/TileType';
+import {testGame} from '../../../TestGame';
 
 describe('AquiferStandardProject', function() {
   let card: AquiferStandardProject;
@@ -32,13 +33,10 @@ describe('AquiferStandardProject', function() {
   it('action', function() {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
-    expect(game.board.getOceanCount()).eq(0);
+    expect(game.board.getOceanSpaces()).is.empty;
 
-    card.action(player);
-    runAllActions(game);
-
-    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
-    const availableSpace = selectSpace.availableSpaces[0];
+    const selectSpace = cast(churnAction(card, player), SelectSpace);
+    const availableSpace = selectSpace.spaces[0];
 
     expect(availableSpace.spaceType).eq(SpaceType.OCEAN);
 
@@ -46,7 +44,7 @@ describe('AquiferStandardProject', function() {
 
     expect(availableSpace.tile!.tileType).eq(TileType.OCEAN);
     expect(player.getTerraformRating()).eq(21);
-    expect(game.board.getOceanCount()).eq(1);
+    expect(game.board.getOceanSpaces()).has.length(1);
   });
 
   it('cannnot act when maximized', () => {
@@ -57,8 +55,7 @@ describe('AquiferStandardProject', function() {
   });
 
   it('Can not act with reds', () => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    [game, player] = testGame(1, {turmoilExtension: true});
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

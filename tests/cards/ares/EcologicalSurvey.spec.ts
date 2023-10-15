@@ -1,8 +1,6 @@
 import {EcologicalSurvey} from '../../../src/server/cards/ares/EcologicalSurvey';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {expect} from 'chai';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TileType} from '../../../src/common/TileType';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Pets} from '../../../src/server/cards/base/Pets';
@@ -15,30 +13,29 @@ import {addGreenery, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('EcologicalSurvey', () => {
   let card: EcologicalSurvey;
   let player: TestPlayer;
-  let redPlayer : Player;
+  let redPlayer : TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new EcologicalSurvey();
-    player = TestPlayer.BLUE.newPlayer();
-    redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player, redPlayer] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
 
   it('Can play', () => {
     addGreenery(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addGreenery(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addGreenery(player);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   // This doesn't test anything about this card, but about the behavior this card provides, from

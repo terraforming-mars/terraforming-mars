@@ -24,29 +24,29 @@ import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import SelectOption from '@/client/components/SelectOption.vue';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
 import SelectSpace from '@/client/components/SelectSpace.vue';
-import SelectPartyPlayer from '@/client/components/SelectPartyPlayer.vue';
-import SelectPartyToSendDelegate from '@/client/components/SelectPartyToSendDelegate.vue';
+import SelectDelegate from '@/client/components/SelectDelegate.vue';
+import SelectParty from '@/client/components/SelectParty.vue';
 import SelectColony from '@/client/components/SelectColony.vue';
 import SelectProductionToLose from '@/client/components/SelectProductionToLose.vue';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 const typeToComponentName: Record<PlayerInputType, string> = {
-  [PlayerInputType.AND_OPTIONS]: 'and-options',
-  [PlayerInputType.SELECT_CARD]: 'SelectCard',
-  [PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY]: 'SelectProjectCardToPlay',
-  [PlayerInputType.SELECT_INITIAL_CARDS]: 'SelectInitialCards',
-  [PlayerInputType.OR_OPTIONS]: 'or-options',
-  [PlayerInputType.SELECT_OPTION]: 'select-option',
-  [PlayerInputType.SELECT_PAYMENT]: 'SelectPayment',
-  [PlayerInputType.SELECT_SPACE]: 'select-space',
-  [PlayerInputType.SELECT_PLAYER]: 'select-player',
-  [PlayerInputType.SELECT_AMOUNT]: 'select-amount',
-  [PlayerInputType.SELECT_DELEGATE]: 'select-party-player',
-  [PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE]: 'select-party-to-send-delegate',
-  [PlayerInputType.SELECT_COLONY]: 'select-colony',
-  [PlayerInputType.SELECT_PRODUCTION_TO_LOSE]: 'select-production-to-lose',
-  [PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS]: 'shift-ares-global-parameters',
+  'and': 'and-options',
+  'card': 'SelectCard',
+  'projectCard': 'SelectProjectCardToPlay',
+  'initialCards': 'SelectInitialCards',
+  'or': 'or-options',
+  'option': 'select-option',
+  'payment': 'SelectPayment',
+  'space': 'select-space',
+  'player': 'select-player',
+  'amount': 'select-amount',
+  'delegate': 'select-delegate',
+  'party': 'select-party',
+  'colony': 'select-colony',
+  'productionToLose': 'select-production-to-lose',
+  'aresGlobalParameters': 'shift-ares-global-parameters',
 };
 
 export default Vue.component('player-input-factory', {
@@ -81,8 +81,8 @@ export default Vue.component('player-input-factory', {
     SelectInitialCards,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
-    'select-party-player': SelectPartyPlayer,
-    'select-party-to-send-delegate': SelectPartyToSendDelegate,
+    'select-delegate': SelectDelegate,
+    'select-party': SelectParty,
     'select-colony': SelectColony,
     SelectProductionToLose,
     ShiftAresGlobalParameters,
@@ -98,7 +98,7 @@ export default Vue.component('player-input-factory', {
   },
   computed: {
     componentName(): string {
-      return typeToComponentName[this.playerinput.inputType];
+      return typeToComponentName[this.playerinput.type];
     },
   },
 });

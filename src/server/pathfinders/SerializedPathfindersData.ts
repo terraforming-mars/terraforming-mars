@@ -1,5 +1,5 @@
-import {Tag} from '../../common/cards/Tag';
 import {PlayerId} from '../../common/Types';
+import {PlanetaryTag} from './PathfindersData';
 
 export type SerializedPathfindersData = {
   venus: number;
@@ -7,5 +7,5 @@ export type SerializedPathfindersData = {
   mars: number;
   jovian: number;
   moon: number;
-  vps: Array<{id: PlayerId, tag: Tag, points: number}>;
+  vps: Array<{id: PlayerId, tag: PlanetaryTag, points: number}>;
 }

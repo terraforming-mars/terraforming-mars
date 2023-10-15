@@ -1,19 +1,18 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaHyperloopCorporation} from '../../../src/server/cards/moon/LunaHyperloopCorporation';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 
 describe('LunaHyperloopCorporation', () => {
   let player: TestPlayer;
   let card: LunaHyperloopCorporation;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new LunaHyperloopCorporation();
     moonData = MoonExpansion.moonData(game);
   });
@@ -42,6 +41,7 @@ describe('LunaHyperloopCorporation', () => {
   });
 
   it('victory points', () => {
+    player.playedCards.push(card);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     player.megaCredits = 0;
     MoonExpansion.addRoadTile(player, spaces[0].id);

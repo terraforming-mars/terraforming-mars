@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {OreProcessor} from '../../../src/server/cards/base/OreProcessor';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('OreProcessor', function() {
   let card: OreProcessor;
@@ -10,9 +11,7 @@ describe('OreProcessor', function() {
 
   beforeEach(function() {
     card = new OreProcessor();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not act', function() {

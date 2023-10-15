@@ -12,7 +12,7 @@ export class LunarMining extends Card implements IProjectCard {
       cost: 11,
       tags: [Tag.EARTH],
       name: CardName.LUNAR_MINING,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         production: {titanium: {tag: Tag.EARTH, per: 2}},

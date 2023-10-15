@@ -1,16 +1,13 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RestrictedArea extends Card implements IActionCard, IProjectCard {
+export class RestrictedArea extends ActionCard implements IProjectCard {
   constructor(
     name = CardName.RESTRICTED_AREA,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
@@ -25,7 +22,7 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       description: 'Place this tile.',
     }) {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name,
       tags: [Tag.SCIENCE],
       cost: 11,
@@ -37,17 +34,13 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
           adjacencyBonus: adjacencyBonus,
         },
       },
+
+      action: {
+        spend: {megacredits: 2},
+        drawCard: 1,
+      },
+
       metadata,
     });
-  }
-
-  public canAct(player: Player): boolean {
-    return player.canAfford(2);
-  }
-  public action(player: Player) {
-    player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action', afterPay: () => {
-      player.drawCard();
-    }}));
-    return undefined;
   }
 }

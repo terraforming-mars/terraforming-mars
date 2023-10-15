@@ -7,6 +7,7 @@ import {Phase} from '../../../src/common/Phase';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('EcologicalZone', function() {
   let card: EcologicalZone;
@@ -15,9 +16,7 @@ describe('EcologicalZone', function() {
 
   beforeEach(function() {
     card = new EcologicalZone();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', function() {
@@ -31,13 +30,13 @@ describe('EcologicalZone', function() {
 
     const action = cast(card.play(player), SelectSpace);
 
-    const adjacentSpace = action.availableSpaces[0];
+    const adjacentSpace = action.spaces[0];
     action.cb(adjacentSpace);
     expect(adjacentSpace.tile && adjacentSpace.tile.tileType).to.eq(TileType.ECOLOGICAL_ZONE);
 
     card.onCardPlayed(player, card);
     expect(card.resourceCount).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(adjacentSpace.adjacency?.bonus).eq(undefined);
   });
 

@@ -9,7 +9,7 @@ export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.UNDERMOON_DRUG_LORDS_NETWORK,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 2,
       victoryPoints: -1,

@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 
 export class SpacePort extends Card implements IProjectCard {
@@ -12,7 +11,7 @@ export class SpacePort extends Card implements IProjectCard {
       cost: 22,
       tags: [Tag.CITY, Tag.BUILDING],
       name: CardName.SPACE_PORT,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         production: {energy: -1, megacredits: 4},
@@ -20,7 +19,7 @@ export class SpacePort extends Card implements IProjectCard {
         city: {},
       },
 
-      requirements: CardRequirements.builder((b) => b.colonies()),
+      requirements: {colonies: 1},
       metadata: {
         cardNumber: 'C39',
         renderData: CardRenderer.builder((b) => {

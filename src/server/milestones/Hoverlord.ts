@@ -1,18 +1,19 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 
-export class Hoverlord implements IMilestone {
-  public readonly name = 'Hoverlord';
-  public readonly description = 'Having at least 7 floater resources on your cards';
-  public getScore(player: Player): number {
+export class Hoverlord extends BaseMilestone {
+  constructor() {
+    super(
+      'Hoverlord',
+      'Have 7 floater resources on your cards',
+      7);
+  }
+  public getScore(player: IPlayer): number {
     let floaterResources = 0;
     player.getCardsWithResources(CardResource.FLOATER).forEach((card) => {
       floaterResources += card.resourceCount;
     });
     return floaterResources;
-  }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 7;
   }
 }

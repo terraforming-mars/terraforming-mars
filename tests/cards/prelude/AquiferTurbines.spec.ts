@@ -14,6 +14,11 @@ describe('AquiferTurbines', function() {
     game = Game.newInstance('gameid', [player], player);
   });
 
+  it('Can not play', function() {
+    player.megaCredits = 2;
+    expect(card.canPlay(player)).is.false;
+  });
+
   it('Can play', function() {
     player.megaCredits = 3;
     expect(card.canPlay(player)).is.true;

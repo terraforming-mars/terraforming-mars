@@ -1,12 +1,12 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {Resource} from '../../../common/Resource';
 
 export class Pristar extends Card implements ICorporationCard {
   constructor() {
@@ -14,9 +14,9 @@ export class Pristar extends Card implements ICorporationCard {
       name: CardName.PRISTAR,
       startingMegaCredits: 53,
       resourceType: CardResource.PRESERVATION,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {resourcesHere: {}},
 
       metadata: {
         cardNumber: 'R07',
@@ -35,14 +35,24 @@ export class Pristar extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.decreaseTerraformRatingSteps(2);
+  public data = {
+    lastGenerationIncreasedTR: -1,
+  };
+
+  public override bespokePlay(player: IPlayer) {
+    player.decreaseTerraformRating(2);
     return undefined;
   }
 
-  public onProductionPhase(player: Player) {
-    if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-      player.megaCredits += 6;
+  onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer): void {
+    if (player === cardOwner) {
+      this.data.lastGenerationIncreasedTR = player.game.generation;
+    }
+  }
+
+  public onProductionPhase(player: IPlayer) {
+    if (this.data.lastGenerationIncreasedTR !== player.game.generation) {
+      player.stock.add(Resource.MEGACREDITS, 6, {log: true, from: this});
       player.addResourceTo(this, 1);
     }
     return undefined;

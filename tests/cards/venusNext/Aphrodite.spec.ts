@@ -1,15 +1,13 @@
 import {expect} from 'chai';
 import {Aphrodite} from '../../../src/server/cards/venusNext/Aphrodite';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('Aphrodite', function() {
   it('Should play', function() {
     const card = new Aphrodite();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
-    const player2 = getTestPlayer(game, 1);
-    const action = card.play(player);
-    expect(action).is.undefined;
+    const [game, player, player2] = testGame(2);
+    cast(card.play(player), undefined);
     expect(player.production.plants).to.eq(1);
     player.setCorporationForTest(card);
     expect(player.megaCredits).to.eq(0);

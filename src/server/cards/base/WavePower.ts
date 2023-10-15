@@ -3,13 +3,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class WavePower extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.WAVE_POWER,
       tags: [Tag.POWER],
       cost: 8,
@@ -19,7 +18,7 @@ export class WavePower extends Card implements IProjectCard {
         production: {energy: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(3)),
+      requirements: {oceans: 3},
       metadata: {
         cardNumber: '139',
         renderData: CardRenderer.builder((b) => {

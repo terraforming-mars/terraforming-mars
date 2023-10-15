@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {ValuableGases} from '../../../src/server/cards/pathfinders/ValuableGases';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
@@ -9,11 +8,12 @@ import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
+import {CardName} from '../../../src/common/cards/CardName';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('ValuableGases', function() {
   let card: ValuableGases;
   let player: TestPlayer;
-  let game: Game;
 
   let floatingHabs: FloatingHabs;
   let jovianLanters: JovianLanterns;
@@ -22,14 +22,13 @@ describe('ValuableGases', function() {
 
   beforeEach(function() {
     card = new ValuableGases();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
 
-    // Floating Habs is active, has floaters, and requires 2 science
+    // Floating Habs is active, has floaters, requires 2 science, and costs 20
     floatingHabs = new FloatingHabs();
-    // Jovian Lanters is active, has floaters, and requires a jovian tag
+    // Jovian Lanters is active, has floaters, requires a jovian tag, but costs 20
     jovianLanters = new JovianLanterns();
-    // Local Shading has floaters and no requirements
+    // Local Shading has floaters and no requirements. Costs 4.
     localShading = new LocalShading();
     // Air Raid is not a floater card
     airRaid = new AirRaid();
@@ -37,29 +36,19 @@ describe('ValuableGases', function() {
   });
 
   it('Should play', function() {
-    expect(player.getPlayableCards()).is.empty;
+    expect(player.getPlayableCardsForTest()).is.empty;
 
-    // Using playCard instead because playCard impacts lastCardPlayed.
-    player.playCard(card);
+    card.play(player);
 
     runAllActions(player.game);
 
-    const input = player.popWaitingFor();
-
-    const selectProjectCardToPlay = cast(input, SelectProjectCardToPlay);
-    expect(selectProjectCardToPlay.cards).has.members([localShading]);
+    const selectProjectCardToPlay = cast(player.popWaitingFor(), SelectProjectCardToPlay);
+    expect(selectProjectCardToPlay.cards.map((card) => card.name)).has.members([CardName.LOCAL_SHADING, CardName.FLOATING_HABS]);
     expect(player.megaCredits).eq(10);
 
-    selectProjectCardToPlay.cb(localShading, {
-      heat: 0,
+    selectProjectCardToPlay.payAndPlay(localShading, {
+      ...Payment.EMPTY,
       megaCredits: localShading.cost,
-      steel: 0,
-      titanium: 0,
-      microbes: 0,
-      floaters: 0,
-      science: 0,
-      seeds: 0,
-      data: 0,
     });
 
     expect(localShading.resourceCount).eq(5);

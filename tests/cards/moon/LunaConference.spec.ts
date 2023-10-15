@@ -1,10 +1,9 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaConference} from '../../../src/server/cards/moon/LunaConference';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {Scientists} from '../../../src/server/turmoil/parties/Scientists';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
@@ -13,11 +12,11 @@ describe('LunaConference', () => {
   let player: TestPlayer;
   let game: Game;
   let card: LunaConference;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
     card = new LunaConference();
     moonData = MoonExpansion.moonData(game);
   });
@@ -27,10 +26,10 @@ describe('LunaConference', () => {
     player.megaCredits = card.cost;
 
     game.turmoil!.rulingParty = new Scientists();
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     game.turmoil!.rulingParty = new Greens();
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

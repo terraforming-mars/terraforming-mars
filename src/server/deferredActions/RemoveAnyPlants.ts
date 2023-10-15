@@ -1,17 +1,20 @@
-import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
+import {MessageBuilder, newMessage} from '../logs/MessageBuilder';
+import {Message} from '../../common/logs/Message';
 
 export class RemoveAnyPlants extends DeferredAction {
-  constructor(
-    player: Player,
-    public count: number = 1,
-    public title: string = 'Select player to remove up to ' + count + ' plants',
-  ) {
+  private title: string | Message;
+  private count: number;
+
+  constructor(player: IPlayer, count: number = 1, title?: string | Message) {
     super(player, Priority.ATTACK_OPPONENT);
+    this.count = count;
+    this.title = title ?? newMessage('Select player to remove up to ${0} plants', (b) => b.number(count));
   }
 
   public execute() {
@@ -36,17 +39,25 @@ export class RemoveAnyPlants extends DeferredAction {
         qtyToRemove = Math.ceil(qtyToRemove / 2);
       }
 
-      return new SelectOption('Remove ' + qtyToRemove + ' plants from ' + candidate.name, 'Remove plants', () => {
-        candidate.deductResource(Resources.PLANTS, qtyToRemove, {log: true, from: this.player});
+      const message =
+        new MessageBuilder('Remove ${0} plants from ${1}')
+          .number(qtyToRemove)
+          .player(candidate)
+          .getMessage();
+
+      return new SelectOption(message, 'Remove plants').andThen(() => {
+        candidate.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
         return undefined;
       });
     });
 
-    return new OrOptions(
+    const orOptions = new OrOptions(
       ...removalOptions,
-      new SelectOption('Skip removing plants', 'Confirm', () => {
+      new SelectOption('Skip removing plants').andThen(() => {
         return undefined;
       }),
     );
+    orOptions.title = this.title;
+    return orOptions;
   }
 }

@@ -1,21 +1,24 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard} from '../ICard';
 import {played} from '../Options';
 
-export class LunaArchives extends Card implements IActionCard {
+export class LunaArchives extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_ARCHIVES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.SCIENCE, Tag.MOON],
       cost: 13,
       resourceType: CardResource.SCIENCE,
+
+      action: {
+        addResources: {tag: Tag.MOON},
+      },
 
       metadata: {
         cardNumber: 'M69',
@@ -28,15 +31,5 @@ export class LunaArchives extends Card implements IActionCard {
         }),
       },
     });
-  }
-
-  public canAct() {
-    return true;
-  }
-
-  public action(player: Player) {
-    const qty = player.tags.count(Tag.MOON);
-    player.addResourceTo(this, {qty, log: true});
-    return undefined;
   }
 }

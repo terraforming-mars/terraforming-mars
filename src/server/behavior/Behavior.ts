@@ -1,7 +1,7 @@
 // import {SpaceType} from '../../common/boards/SpaceType';
 import {CardResource} from '../../common/CardResource';
 import {CardType} from '../../common/cards/CardType';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 import {Tag} from '../../common/cards/Tag';
 // import {SpaceId} from '../../common/Types';
 // import {CardResource} from '../../common/CardResource';
@@ -12,20 +12,47 @@ import {TileType} from '../../common/TileType';
 import {Countable, CountableUnits} from './Countable';
 import {PlacementType} from '../boards/PlacementType';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
+import {Units} from '../../common/Units';
+
+type ValueOf<Obj> = Obj[keyof Obj];
+type OneOnly<Obj, Key extends keyof Obj> = { [key in Exclude<keyof Obj, Key>]: null } & Pick<Obj, Key>;
+type OneOfByKey<Obj> = { [key in keyof Obj]: OneOnly<Obj, key> };
+export type OneOfType<Obj> = ValueOf<OneOfByKey<Obj>>;
+
+
+export interface Spend extends Units {
+  /** units or a number of resources from the card. */
+  resourcesHere: number,
+}
 
 /** A set of steps that an action can perform in any specific order. */
-
 export interface Behavior {
+  /** Select one of these actions */
+  or?: OrBehavior;
+
+  /**
+   * Spend one of resources before taking the action.
+   *
+   * This is specifically designed to spend only one resource type.
+   */
+  spend?: Partial<OneOfType<Spend>>;
+
   /** Gain or lose production */
   production?: Partial<CountableUnits>;
   /** Gain or lose stock */
   stock?: Partial<CountableUnits>;
 
+  /** Gain n standard resources */
+  standardResource?: number;
+
   /** Add resources to this card itself */
   addResources?: Countable;
 
   /** Add resources to any cards */
-  addResourcesToAnyCard?: AddResource | Array<AddResource>;
+  addResourcesToAnyCard?: AddResource | Array<Omit<AddResource, 'mustHaveCard'>>;
+
+  // /** Remove resources from any card */
+  // removeResourcesFromAnyCard?: Omit<AddResource, 'mustHaveCard'>; // This Omit thing isn't right.
 
   /** Decrease any production */
   decreaseAnyProduction?: DecreaseAnyProduction;
@@ -112,10 +139,17 @@ export interface Behavior {
     /** Places a road tile and also raises the logistics rate */
     roadTile?: PlaceMoonTile,
     /** Places a special tile on the Moon. */
-    tile?: PlaceMoonTile & {type: TileType, title?: string},
+    tile?: PlaceMoonTile & {type: TileType},
     habitatRate?: number,
     miningRate?: number,
     logisticsRate?: number,
+  },
+
+  underworld?: {
+    // identify?: Countable,
+    // excavate?: number | {count: Countable, ignorePlacementRestrictions?: boolean},
+    corruption?: Countable,
+    // markThisGeneration?: NoAttributes,
   },
 }
 
@@ -127,7 +161,7 @@ export interface DrawCard {
   count: Countable,
   /** The number of cards to keep, should be between [1..count-1] */
   keep?: number,
-  /** When true, player has to pay to keep the card. (e.g. 3MC) */
+  /** When true, player may keep the card if they choose to pay for it. (e.g. 3MC.) */
   pay?: boolean,
 
   /** Discard cards without this tag */
@@ -141,10 +175,37 @@ export interface DrawCard {
 export interface AddResource {
   count: Countable,
   type?: CardResource,
-  tag?: Tag;
+  tag?: Tag,
+  /**
+   * If true, then there must be a card that matches this requirement to take the action.
+   *
+   * While the game allows players to take an action that places a resource even though
+   * there might not be a card to accept it, that can often make for players wasting
+   * resources without realizing it. In other words, a true value is a break from the standard rules.
+   */
+  mustHaveCard?: boolean,
+
+  /** When > 0, only cards with at least `min` resources count. */
+  min?: number,
+
+  /** When true, include self-replicating robots cards. */
+  robotCards?: true,
+
+  /** If true, if only one card matches, apply immediately without asking. */
+  // WARNING: I don't think this is actually used.
+  autoSelect?: boolean,
 }
 
 export interface DecreaseAnyProduction {
   count: number;
-  type: Resources;
+  type: Resource;
+}
+
+export interface TitledBehavior extends Behavior {
+  title: string;
+}
+
+export interface OrBehavior {
+  behaviors: Array<TitledBehavior>;
+  autoSelect?: boolean;
 }

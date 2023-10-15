@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Psychrophiles} from '../../../src/server/cards/prelude/Psychrophiles';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {cast, runAllActions, setTemperature} from '../../TestingUtils';
 
 describe('Psychrophiles', () => {
   let card: Psychrophiles;
@@ -15,23 +16,22 @@ describe('Psychrophiles', () => {
   });
 
   it('Cannot play', () => {
-    (game as any).temperature = -18;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setTemperature(game, -18);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play', () => {
-    (game as any).temperature = -20;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setTemperature(game, -20);
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play', () => {
-    expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    expect(player.simpleCanPlay(card)).is.true;
+    cast(card.play(player), undefined);
   });
 
   it('Can act', () => {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Should act', () => {
@@ -39,6 +39,7 @@ describe('Psychrophiles', () => {
     player.playedCards.push(card);
 
     card.action(player);
+    runAllActions(game);
     expect(player.getCardsWithResources()).has.lengthOf(1);
     expect(player.getSpendableMicrobes()).to.eq(1);
   });

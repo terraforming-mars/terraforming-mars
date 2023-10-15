@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('SpaceHotels', function() {
   let card: SpaceHotels;
@@ -9,19 +9,20 @@ describe('SpaceHotels', function() {
 
   beforeEach(function() {
     card = new SpaceHotels();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not play', function() {
-    player.playedCards.push(card);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    player.tagsForTest = {earth: 1};
+    expect(player.simpleCanPlay(card)).is.not.true;
+  });
+
+  it('Can play', function() {
+    player.tagsForTest = {earth: 2};
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play', function() {
-    player.playedCards.push(card, card);
-    expect(player.canPlayIgnoringCost(card)).is.true;
-
     card.play(player);
     expect(player.production.megacredits).to.eq(4);
   });

@@ -282,7 +282,7 @@
             .card-astrodril-logo {
                 position: absolute;
                 text-transform: none;
-                top: 10px;
+                top: 17px;
                 left: 3px;
                 color: rgb(32, 32, 32);
                 font-family: Prototype;
@@ -627,6 +627,14 @@
                 font-size: 45px;
                 top: 20px;
             }
+            .card-mars-maths-logo {
+                position: absolute;
+                font-size: 24px;
+                box-shadow: 5px 10px 12px #d58c56;
+                font-family: "Lucida Sans", "Lucida Sans Unicode", "Lucida Grande", Arial;
+                top: 14px;
+                left: 2px;
+            }
             .card-project-workshop-logo {
                 position: absolute;
                 top: 10px;
@@ -686,6 +694,29 @@
                     line-height: 18px;
                     font-size: 7px;
                 }
+            }
+            .card-tycho-magnetics-logo {
+                position: absolute;
+                text-transform: none;
+                top: 15px;
+                left: 3px;
+                color: rgb(32, 32, 32);
+                font-family: monospace;
+                letter-spacing: 2px;
+                text-align: left;
+                text-shadow: yellow 0px 0px 1px, yellowgreen 0px 2px 2px;
+                font-size: 30px;
+            }
+            .nirgal-enterprises-logo {
+                position: absolute;
+                text-transform: none;
+                top: 32px;
+                left: 3px;
+                color: rgb(50, 100, 50);
+                font-family: 'Times New Roman', Times, serif;
+                letter-spacing: 2px;
+                text-align: left;
+                font-size: 27px;
             }
             .card-nanotech-industries-logo {
                 background-image: url(./assets/moon/corp-logo-nanotech.png);
@@ -865,6 +896,12 @@
                 background-size: 125px 90px;
                 margin-top: 10px;
             }
+            .card-aurorai-logo {
+                background-image: url(./assets/pathfinders/corp-logo-aurorai.png);
+                height: 80px;
+                width: 111px;
+                background-size: 111px 80px;
+            }
         }
         .card-content-corporation {
             top: -30px;
@@ -884,6 +921,24 @@
             line-height: 20px;
             font-weight: bold;
             text-align: center;
+
+            // Adding scrolling for cards with huge description
+            &:not(.global-event-card-content) {
+				overflow-x: hidden;
+			}
+            &::-webkit-scrollbar-track {
+                background-color: transparent;
+                border-radius: 0 0 32px 0;
+            }
+            &::-webkit-scrollbar {
+                width: 4px;
+                background-color: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: #898989;
+                border-radius: 0 0 32px 0;
+            }
+
             .card-corporation-box {
                 position: absolute;
                 display: flex;
@@ -947,6 +1002,13 @@
                 flex-flow: row;
                 align-items: center;
                 margin: 0 4px;
+            }
+
+            .nextto-leftside {
+                margin: 0 -2px 0 4px;
+            }
+            .nextto-rightside {
+                margin: 0 4px 0 -2px;
             }
 
             /*requirements*/
@@ -1130,14 +1192,72 @@
             .card-resource-community {
                 background: linear-gradient(orange, orangered);
             }
+            .card-resource-cathedral {
+                background-image: url(./assets/promo/cathedral.png);
+            }
+            .card-resource-graphene {
+                background-image: url(./assets/resources/graphene.png);
+            }
+            .card-resource-nomads {
+                background: linear-gradient(to bottom right, gold, goldenrod, gold);
+                border: 1px solid black;
+            }
+            .card-resource-hydroelectric-resource {
+                background-image: url(./assets/resources/hydroelectric-resource.png);
+            }
+            .card-resource-clone-trooper {
+                background-image: url(./assets/resources/clone-trooper.png);
+            }
+            /* CEO Assets */
             .card-arrow-opg {
                 display: inline-block;
-                background-image: url(./assets/ceos/arrow_opg.png);
+                background-image: url(./assets/ceos/arrow-opg.png);
                 width: 50px;
                 height: 43px;
                 background-size: 50px 43px;
-                padding-bottom: 22px;
                 background-repeat: no-repeat;
+            }
+            .card-reds-deactivated {
+                display: inline-block;
+                background-image: url(./assets/parties/reds.png);
+                // Increase size by 1.5 _without_ Scale; Scale blows out formatting.
+                width: 75px;
+                height: 54px;
+                background-size: 75px 54px;
+                background-repeat: no-repeat;
+                filter: grayscale(1);
+                // transform: scale(1.5);
+                // margin-right: 10px;
+            }
+            .card-reds {
+                display: inline-block;
+                background-image: url(./assets/parties/reds.png);
+                width: 50px;
+                height: 36px;
+                background-size: 50px 36px;
+                background-repeat: no-repeat;
+            }
+            .card-hazard-tile {
+                background-image: url(./assets/tiles/hazard.png);
+                width: 40px;
+                height: 40px;
+                background-size: 40px;
+                transform: scale(0.9);
+                margin: 5px 2px;
+            }
+            .card-hazard-tile--L {
+                background-image: url(./assets/tiles/hazard.png);
+                width: 48px;
+                height: 48px;
+                background-size: 48px;
+                margin: 5px -4px;
+            }
+            .card-adjacency-bonus {
+                background-image: url(./assets/tiles/adjacency_bonus.png);
+                background-size: 47px 54px;
+                width: 47px;
+                height: 54px;
+                margin: 5px;
             }
 
             /*special*/
@@ -1414,6 +1534,12 @@
             .card-tag-mars {
                 background-image: url("./assets/tags/mars.png");
             }
+            .card-tag-empty {
+                background-image: url("./assets/tags/empty.png");
+            }
+            .card-tag-diverse {
+                background: linear-gradient(to bottom right, green, yellow, red);
+            }
             .card-community-services {
                 font-size: 42px;
                 vertical-align: middle;
@@ -1498,7 +1624,7 @@
                     padding: 0px 4px;
                 }
             }
-            .card-place-colony {
+            .card-colony-tile {
                 text-transform: uppercase;
                 background: #444;
                 color: #eee;
@@ -1712,6 +1838,9 @@
                 background: linear-gradient(90deg, #f3a10e 0%, #fdea25 45%, #fdea25 55%, #f3a10e 100%);
                 filter: drop-shadow(0px 0px 1px black);
                 box-shadow: 2px 2px 1px;
+                &--narrow {
+                  width: 110px;
+                }
             }
             .card-text-size--XS {
                 font-size: @font_size_tiny;
@@ -1921,6 +2050,7 @@
                 position: relative;
             }
             .card-tr--S {
+                background-image: url(./assets/resources/tr.png);
                 width: 42px !important;
                 height: 32px !important;
                 background-size: 42px 32px !important;
@@ -1939,6 +2069,7 @@
                 .card-tr--req();
             }
             .card-tr--req {
+                background-image: url(./assets/resources/tr.png);
                 width: 45px !important;
                 height: 34px !important;
                 background-size: 45px 34px !important;
@@ -2251,7 +2382,8 @@ each(@parties, {
     // the stuff above wasn't contained inside card-content.
     @resource_types: microbe, animal, science, floater, fighter, camp,
       asteroid, disease, preservation, data, syndicate-fleet, cube,
-      venusian-habitat, specialized-robot, seed, orbital, agenda;
+      venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
+      clone-trooper;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

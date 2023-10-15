@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {StanfordTorus} from '../../../src/server/cards/promo/StanfordTorus';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('StanfordTorus', function() {
@@ -9,18 +9,16 @@ describe('StanfordTorus', function() {
 
   beforeEach(function() {
     card = new StanfordTorus();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {
     card.play(player);
-    expect(player.game.getCitiesCount()).to.eq(1);
+    expect(player.game.board.getCities()).has.length(1);
   });
 
   it('Should give victory points', function() {
     card.play(player);
-    expect(card.getVictoryPoints()).to.eq(2);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

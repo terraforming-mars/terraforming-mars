@@ -1,26 +1,36 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
-import {Player} from '../Player';
+import {BasePlayerInput} from '../PlayerInput';
+import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
+import {SelectProductionToLoseModel} from '../../common/models/PlayerInputModel';
 
-export class SelectProductionToLose extends BasePlayerInput {
+export class SelectProductionToLose extends BasePlayerInput<Units> {
   constructor(
     title: string | Message,
     public unitsToLose: number,
-    public player: Player,
-    public cb: (units: Units) => PlayerInput | undefined,
+    public player: IPlayer,
     buttonLabel: string = 'Save',
   ) {
-    super(PlayerInputType.SELECT_PRODUCTION_TO_LOSE, title);
+    super('productionToLose', title);
     this.buttonLabel = buttonLabel;
   }
 
-  // TODO(kberg): Coul dmerge this with SelectResources, though it
+  public override toModel(): SelectProductionToLoseModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'productionToLose',
+      payProduction: {
+        cost: this.unitsToLose,
+        units: this.player.production.asUnits(),
+      },
+    };
+  }
+  // TODO(kberg): Could merge this with SelectResources, though it
   // would take some work.
-  public process(input: InputResponse, player: Player) {
+  public process(input: InputResponse, player: IPlayer) {
     if (!isSelectProductionToLoseResponse(input)) {
       throw new Error('Not a valid SelectProductionToLoseResponse');
     }

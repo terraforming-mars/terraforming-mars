@@ -1,13 +1,13 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {AresData} from '../../common/ares/AresData';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {TileType} from '../../common/TileType';
 import {_AresHazardPlacement} from './AresHazards';
 
 export class AresSetup {
   private constructor() {}
 
-  public static initialData(includeHazards: boolean, players: Player[]): AresData {
+  public static initialData(includeHazards: boolean, players: IPlayer[]): AresData {
     return {
       includeHazards: includeHazards,
       hazardData: {
@@ -22,7 +22,7 @@ export class AresSetup {
     };
   }
 
-  public static setupHazards(game: Game, playerCount: number) {
+  public static setupHazards(game: IGame, playerCount: number) {
     // The number of dust storms depends on the player count.
     // I made up that the solo player has 3 dust storms. The rules
     // don't take solo into account, nor if you played with more than

@@ -1,31 +1,31 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Birds extends Card implements IActionCard, IProjectCard {
+export class Birds extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.BIRDS,
       tags: [Tag.ANIMAL],
       cost: 10,
 
       resourceType: CardResource.ANIMAL,
-      requirements: CardRequirements.builder((b) => b.oxygen(13)),
-      victoryPoints: VictoryPoints.resource(1, 1),
+      requirements: {oxygen: 13},
+      victoryPoints: {resourcesHere: {}},
 
       behavior: {
-        decreaseAnyProduction: {type: Resources.PLANTS, count: 2},
+        decreaseAnyProduction: {type: Resource.PLANTS, count: 2},
+      },
+
+      action: {
+        addResources: 1,
       },
 
       metadata: {
@@ -41,13 +41,5 @@ export class Birds extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
   }
 }

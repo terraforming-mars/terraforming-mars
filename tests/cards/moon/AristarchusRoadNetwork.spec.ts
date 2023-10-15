@@ -1,7 +1,7 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 import {expect} from 'chai';
@@ -11,12 +11,12 @@ import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 describe('AristarchusRoadNetwork', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: AristarchusRoadNetwork;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new AristarchusRoadNetwork();
   });
@@ -25,9 +25,9 @@ describe('AristarchusRoadNetwork', () => {
     player.cardsInHand = [card];
     player.steel = 1;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
     player.steel = 2;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
@@ -43,7 +43,7 @@ describe('AristarchusRoadNetwork', () => {
 
     const deferredAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
     const selectSpace = deferredAction.execute()!;
-    const roadSpace = selectSpace.availableSpaces[0];
+    const roadSpace = selectSpace.spaces[0];
     expect(roadSpace.tile).is.undefined;
     expect(roadSpace.player).is.undefined;
     expect(moonData.logisticRate).eq(0);

@@ -1,15 +1,15 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 
-export class Capitalist implements IMilestone {
-  public readonly name = 'Capitalist';
-  public readonly description = 'Have at least 64 M€';
-
-  public getScore(player: Player): number {
-    return player.megaCredits;
+export class Capitalist extends BaseMilestone {
+  constructor() {
+    super(
+      'Capitalist',
+      'Have 64 M€',
+      64);
   }
 
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 64;
+  public getScore(player: IPlayer): number {
+    return player.megaCredits;
   }
 }

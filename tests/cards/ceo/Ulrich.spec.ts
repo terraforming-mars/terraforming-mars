@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {forceGenerationEnd, maxOutOceans} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Ulrich} from '../../../src/server/cards/ceos/Ulrich';
 
@@ -13,9 +13,7 @@ describe('Ulrich', function() {
 
   beforeEach(() => {
     card = new Ulrich();
-    game = newTestGame(2, {ceoExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {ceoExtension: true});
   });
 
   it('Can act', function() {

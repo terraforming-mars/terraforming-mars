@@ -9,6 +9,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('ImportedNitrogen', function() {
   let card: ImportedNitrogen;
@@ -17,9 +18,7 @@ describe('ImportedNitrogen', function() {
 
   beforeEach(function() {
     card = new ImportedNitrogen();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play without animals and microbes', function() {

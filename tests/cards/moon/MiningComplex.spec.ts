@@ -1,7 +1,7 @@
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MiningComplex} from '../../../src/server/cards/moon/MiningComplex';
 import {expect} from 'chai';
@@ -12,14 +12,22 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 describe('MiningComplex', () => {
   let game: Game;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MiningComplex;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MiningComplex();
+  });
+
+  it('can play', () => {
+    player.megaCredits = 6;
+    expect(card.canPlay(player)).is.false;
+
+    player.megaCredits = 7;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', () => {
@@ -40,7 +48,7 @@ describe('MiningComplex', () => {
 
     const placeRoadTile = cast(game.deferredActions.pop(), PlaceMoonRoadTile);
     const selectSpace = cast(placeRoadTile.execute(), SelectSpace);
-    const spaces = selectSpace.availableSpaces;
+    const spaces = selectSpace.spaces;
     expect(spaces.map((s) => s.id)).to.have.members(['m02', 'm12']);
     selectSpace.cb(spaces[0]);
 

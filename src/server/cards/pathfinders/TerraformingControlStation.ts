@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class TerraformingControlStation extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.TERRAFORMING_CONTROL_STATION,
       cost: 18,
       tags: [Tag.VENUS, Tag.MARS, Tag.SPACE],

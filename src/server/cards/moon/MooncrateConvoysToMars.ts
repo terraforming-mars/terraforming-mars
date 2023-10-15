@@ -2,9 +2,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SellSteel} from '../../moon/SellSteel';
 import {all} from '../Options';
 import {IProjectCard} from '../IProjectCard';
@@ -13,9 +12,9 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOONCRATE_CONVOYS_TO_MARS,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       cost: 13,
-      requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
+      requirements: {party: PartyName.MARS},
 
       behavior: {
         moon: {logisticsRate: 1},
@@ -33,7 +32,7 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     game.getPlayers().forEach((player) => {
       game.defer(new SellSteel(player));

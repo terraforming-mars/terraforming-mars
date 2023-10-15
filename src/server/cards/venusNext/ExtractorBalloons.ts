@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -16,7 +16,7 @@ export class ExtractorBalloons extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.EXTRACTOR_BALLOONS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS],
       cost: 21,
       resourceType: CardResource.FLOATER,
@@ -24,6 +24,23 @@ export class ExtractorBalloons extends Card implements IActionCard {
       behavior: {
         addResources: 3,
       },
+
+      // action: {
+      //   or: {
+      //     autoSelect: true,
+      //     behaviors: [{
+      //       title: 'Remove 2 floaters here to raise Venus 1 step.',
+      //       spend: {resourcesHere: 2},
+      //       global: {venus: 1},
+      //       // Don't offer this if Venus isn't maximized?
+      //       // // // LogHelper.logRemoveResource(player, this, 2, 'raise oxygen 1 step');
+      //     },
+      //     {
+      //       title: 'Add 1 floater to this card.',
+      //       addResources: 1,
+      //     }],
+      //   },
+      // },
 
       metadata: {
         cardNumber: '223',
@@ -43,22 +60,22 @@ export class ExtractorBalloons extends Card implements IActionCard {
   public canAct(): boolean {
     return true;
   }
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const canAffordReds = player.canAfford(0, {tr: {venus: 1}});
+    const canAffordReds = player.canAfford({cost: 0, tr: {venus: 1}});
     if (this.resourceCount < 2 || venusMaxed || !canAffordReds) {
       player.addResourceTo(this, {log: true});
       return undefined;
     }
     return new OrOptions(
       new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
-        'Remove floaters', () => {
-          player.removeResourceFrom(this, 2);
-          const actual = player.game.increaseVenusScaleLevel(player, 1);
-          LogHelper.logVenusIncrease(player, actual);
-          return undefined;
-        }),
-      new SelectOption('Add 1 floater to this card', 'Add floater', () => {
+        'Remove floaters').andThen(() => {
+        player.removeResourceFrom(this, 2);
+        const actual = player.game.increaseVenusScaleLevel(player, 1);
+        LogHelper.logVenusIncrease(player, actual);
+        return undefined;
+      }),
+      new SelectOption('Add 1 floater to this card', 'Add floater').andThen(() => {
         player.addResourceTo(this, {log: true});
         return undefined;
       }),

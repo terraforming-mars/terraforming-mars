@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeFederation} from '../../../src/server/cards/moon/LunaTradeFederation';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 // import {IMoonData} from '../../../src/server/moon/IMoonData';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 // import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
@@ -19,12 +19,8 @@ describe('LunaTradeFederation', () => {
   // let moonData: IMoonData;
 
   beforeEach(() => {
-    game = newTestGame(2, {moonExpansion: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {moonExpansion: true});
     lunaTradeFederation = new LunaTradeFederation();
-    // moonData = MoonExpansion.moonData(game);
-    player.popSelectInitialCards();
   });
 
   it('play', () => {
@@ -80,11 +76,11 @@ describe('LunaTradeFederation', () => {
     player.megaCredits = 6;
     player.titanium = 1;
 
-    expect(player.canAffordCard(card)).is.false;
+    expect(player.canAfford(player.affordOptionsForCard(card))).is.false;
 
     player.megaCredits = 7;
     player.titanium = 1;
-    expect(player.canAffordCard(card)).is.true;
+    expect(player.canAfford(player.affordOptionsForCard(card))).is.true;
   });
 
   it('can use titanium to pay for non-space project cards at a discount', () => {
@@ -97,12 +93,12 @@ describe('LunaTradeFederation', () => {
     player.titanium = 1;
 
     expect(player.spendableMegacredits()).eq(9);
-    expect(player.canAffordCard(card)).is.false;
+    expect(player.canAfford(player.affordOptionsForCard(card))).is.false;
 
     player.megaCredits = 8;
     player.titanium = 1;
     expect(player.spendableMegacredits()).eq(10);
-    expect(player.canAffordCard(card)).is.true;
+    expect(player.canAfford(player.affordOptionsForCard(card))).is.true;
 
     player.megaCredits = 8;
     player.titanium = 3;

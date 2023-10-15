@@ -1,17 +1,15 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class OrbitalCleanup extends Card implements IProjectCard {
+export class OrbitalCleanup extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.ORBITAL_CLEANUP,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 14,
@@ -19,6 +17,10 @@ export class OrbitalCleanup extends Card implements IProjectCard {
 
       behavior: {
         production: {megacredits: -2},
+      },
+
+      action: {
+        stock: {megacredits: {tag: Tag.SCIENCE}},
       },
 
       metadata: {
@@ -35,14 +37,5 @@ export class OrbitalCleanup extends Card implements IProjectCard {
         description: 'Decrease your M€ production 2 steps.',
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, player.tags.count(Tag.SCIENCE), {log: true});
-    return undefined;
   }
 }

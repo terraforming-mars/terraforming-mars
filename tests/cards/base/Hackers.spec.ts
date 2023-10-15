@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Hackers} from '../../../src/server/cards/base/Hackers';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Hackers', function() {
@@ -17,7 +17,7 @@ describe('Hackers', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
   });
 });

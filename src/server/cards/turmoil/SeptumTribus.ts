@@ -1,12 +1,12 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class SeptumTribus extends Card implements IActionCard, ICorporationCard {
@@ -15,7 +15,7 @@ export class SeptumTribus extends Card implements IActionCard, ICorporationCard 
       name: CardName.SEPTUM_TRIBUS,
       tags: [Tag.WILD],
       startingMegaCredits: 36,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R15',
@@ -37,10 +37,10 @@ export class SeptumTribus extends Card implements IActionCard, ICorporationCard 
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
     const partiesWithPresence = turmoil.parties.filter((party) => party.delegates.has(player.id));
-    player.addResource(Resources.MEGACREDITS, partiesWithPresence.length * 2, {log: true});
+    player.stock.add(Resource.MEGACREDITS, partiesWithPresence.length * 2, {log: true});
 
     return undefined;
   }

@@ -3,7 +3,6 @@ import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 
 import {getPreferences, PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
-import {LANGUAGES} from '@/common/constants';
 import BugReportDialog from '@/client/components/BugReportDialog.vue';
 
 type Refs = {
@@ -62,9 +61,6 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   computed: {
-    LANGUAGES(): typeof LANGUAGES {
-      return LANGUAGES;
-    },
     getPreferences(): typeof getPreferences {
       return getPreferences;
     },
@@ -75,12 +71,6 @@ export default (Vue as WithRefs<Refs>).extend({
 
 <template>
     <div class="preferences_panel" :data="syncPreferences()">
-      <div class="preferences_panel_item">
-        <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_hand" data-test="hide_hand">
-          <i class="form-icon"></i> <span v-i18n>Hide cards in hand</span>
-        </label>
-      </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
           <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_awards_and_milestones" data-test="hide_awards_and_milestones">

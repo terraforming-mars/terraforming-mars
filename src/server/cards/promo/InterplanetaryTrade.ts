@@ -3,14 +3,14 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 export class InterplanetaryTrade extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.INTERPLANETARY_TRADE,
       tags: [Tag.SPACE],
       cost: 27,
@@ -27,10 +27,9 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    // This card's tag also counts.
+  public override bespokePlay(player: IPlayer) {
     const distinctTagCount = player.tags.distinctCount('default', Tag.SPACE);
-    player.production.add(Resources.MEGACREDITS, distinctTagCount, {log: true});
+    player.production.add(Resource.MEGACREDITS, distinctTagCount, {log: true});
     return undefined;
   }
 }

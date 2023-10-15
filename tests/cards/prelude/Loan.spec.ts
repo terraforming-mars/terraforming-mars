@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {Loan} from '../../../src/server/cards/prelude/Loan';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {Resource} from '../../../src/common/Resource';
+import {testGame} from '../../TestGame';
 
 describe('Loan', function() {
   let card: Loan;
@@ -10,12 +10,11 @@ describe('Loan', function() {
 
   beforeEach(function() {
     card = new Loan();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not play', function() {
-    player.production.add(Resources.MEGACREDITS, -4);
+    player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 

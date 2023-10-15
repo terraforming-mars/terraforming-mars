@@ -1,13 +1,13 @@
-require('jsdom-global')();
-const MutationObserverMock = require('mutation-observer');
+const jsdom = require('jsdom');
+const {JSDOM} = jsdom;
 
-// @ts-ignore
-global.MutationObserver = MutationObserverMock;
+const dom = new JSDOM(`<!DOCTYPE html>`);
 
-Object.defineProperty(window, 'location', {
-  writable: true,
-  value: {
-    ...window.location,
-    reload: () => {},
-  },
-});
+global.document = dom.window.document;
+global.navigator = dom.window.navigator;
+global.window = dom.window;
+
+global.Element = dom.window.Element;
+global.HTMLBodyElement = dom.window.HTMLBodyElement;
+global.MutationObserver = dom.window.MutationObserver;
+global.Node = dom.window.Node;

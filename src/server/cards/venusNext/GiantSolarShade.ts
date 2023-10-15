@@ -9,7 +9,7 @@ export class GiantSolarShade extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GIANT_SOLAR_SHADE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.SPACE, Tag.VENUS],
       cost: 27,
 

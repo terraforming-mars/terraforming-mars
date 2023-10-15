@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {Sabotage} from '../../../src/server/cards/base/Sabotage';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -12,9 +12,7 @@ describe('Sabotage', function() {
 
   beforeEach(function() {
     card = new Sabotage();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player, player2] = testGame(2);
   });
 
   it('Should play', function() {

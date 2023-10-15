@@ -21,7 +21,7 @@ export class MoholeArea extends Card implements IProjectCard {
       description: 'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.',
     }) {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name,
       tags: [Tag.BUILDING],
       cost: 20,

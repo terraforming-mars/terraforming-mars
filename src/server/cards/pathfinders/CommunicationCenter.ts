@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,10 +13,10 @@ import {ICard} from '../ICard';
 export class CommunicationCenter extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.COMMUNICATION_CENTER,
-      cost: 13,
-      tags: [Tag.SPACE, Tag.MARS, Tag.BUILDING],
+      cost: 8,
+      tags: [Tag.SCIENCE, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
 
       behavior: {
@@ -37,11 +37,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
     });
   }
 
-
-  // Card behavior is in PathfindersExpansion.onCardPlayed. Card.onCardPlayed
-  // does not apply to _any card played_
-
-  public onResourceAdded(player: Player, playedCard: ICard) {
+  public onResourceAdded(player: IPlayer, playedCard: ICard) {
     if (playedCard.name !== this.name) return;
     while (this.resourceCount >= 3) {
       this.resourceCount -= 3;
@@ -50,5 +46,12 @@ export class CommunicationCenter extends Card implements IProjectCard {
         b.player(player).card(this);
       });
     }
+  }
+
+  public onCardPlayedFromAnyPlayer(thisCardOwner: IPlayer, _playedCardOwner: IPlayer, card: IProjectCard) {
+    if (card.type === CardType.EVENT) {
+      thisCardOwner.addResourceTo(this, {qty: 1, log: true});
+    }
+    return undefined;
   }
 }

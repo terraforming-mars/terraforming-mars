@@ -1,11 +1,12 @@
-import * as http from 'http';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Phase} from '../../common/Phase';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {WaitingForModel} from '../../common/models/WaitingForModel';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {isPlayerId, isSpectatorId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class ApiWaitingFor extends Handler {
   public static readonly INSTANCE = new ApiWaitingFor();
@@ -13,12 +14,12 @@ export class ApiWaitingFor extends Handler {
     super();
   }
 
-  private timeToGo(player: Player): boolean {
+  private timeToGo(player: IPlayer): boolean {
     return player.getWaitingFor() !== undefined || player.game.phase === Phase.END;
   }
 
   // When player is undefined, caller is a spectator.
-  private getPlayerWaitingForModel(player: Player, game: Game, gameAge: number, undoCount: number): WaitingForModel {
+  private getPlayerWaitingForModel(player: IPlayer, game: IGame, gameAge: number, undoCount: number): WaitingForModel {
     if (this.timeToGo(player)) {
       return {result: 'GO'};
     } else if (game.gameAge > gameAge || game.undoCount > undoCount) {
@@ -27,19 +28,19 @@ export class ApiWaitingFor extends Handler {
     return {result: 'WAIT'};
   }
 
-  private getSpectatorWaitingForModel(game: Game, gameAge: number, undoCount: number): WaitingForModel {
+  private getSpectatorWaitingForModel(game: IGame, gameAge: number, undoCount: number): WaitingForModel {
     if (game.gameAge > gameAge || game.undoCount > undoCount) {
       return {result: 'REFRESH'};
     }
     return {result: 'WAIT'};
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     const id = String(ctx.url.searchParams.get('id'));
     const gameAge = Number(ctx.url.searchParams.get('gameAge'));
     const undoCount = Number(ctx.url.searchParams.get('undoCount'));
 
-    let game: Game | undefined;
+    let game: IGame | undefined;
     if (isSpectatorId(id) || isPlayerId(id)) {
       game = await ctx.gameLoader.getGame(id);
     }
@@ -49,6 +50,7 @@ export class ApiWaitingFor extends Handler {
     }
     try {
       if (isPlayerId(id)) {
+        ctx.ipTracker.addParticipant(id, ctx.ip);
         ctx.route.writeJson(res, this.getPlayerWaitingForModel(game.getPlayerById(id), game, gameAge, undoCount));
       } else if (isSpectatorId(id)) {
         ctx.route.writeJson(res, this.getSpectatorWaitingForModel(game, gameAge, undoCount));

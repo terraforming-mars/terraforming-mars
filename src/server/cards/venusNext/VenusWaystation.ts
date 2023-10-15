@@ -10,7 +10,7 @@ export class VenusWaystation extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUS_WAYSTATION,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS, Tag.SPACE],
       cost: 9,
       victoryPoints: 1,

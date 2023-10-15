@@ -42,8 +42,8 @@ describe('SmallComet', function() {
     expect(player3.plants).eq(398);
     expect(player.titanium).eq(1);
 
-    const space = action.availableSpaces[0];
-    expect(action.availableSpaces.some((space) => space.spaceType !== SpaceType.LAND)).is.false;
+    const space = action.spaces[0];
+    expect(action.spaces.some((space) => space.spaceType !== SpaceType.LAND)).is.false;
     expect(space.tile).is.undefined;
 
     action?.cb(space);

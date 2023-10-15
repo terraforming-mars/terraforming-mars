@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
@@ -14,19 +14,14 @@ describe('orOptions', function() {
   }
 
   beforeEach(() => {
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Simple', function() {
     const orOptions = new OrOptions(
-      new SelectOption('', '', () => {
-        return cb(2);
-      }),
-      new SelectOption('', '', () => {
-        return cb(3);
-      }),
-      new SelectAmount('', '', cb, 0, 10),
+      new SelectOption('').andThen(() => cb(2)),
+      new SelectOption('').andThen(() => cb(3)),
+      new SelectAmount('', '', 0, 10).andThen(cb),
     );
 
     expect(orOptions.options).has.length(3);

@@ -9,6 +9,7 @@ export class DeepSpaceOperations extends PreludeCard {
   constructor() {
     super({
       name: CardName.DEEP_SPACE_OPERATIONS,
+      tags: [Tag.SPACE],
 
       behavior: {
         stock: {titanium: 4},

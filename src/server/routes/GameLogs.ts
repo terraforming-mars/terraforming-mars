@@ -1,9 +1,11 @@
 import {LogMessage} from '../../common/logs/LogMessage';
 import {LogMessageType} from '../../common/logs/LogMessageType';
 import {ParticipantId} from '../../common/Types';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {Phase} from '../../common/Phase';
 import {Log} from '../../common/logs/Log';
+import {LogMessageData} from '../../common/logs/LogMessageData';
+import {LogMessageDataType} from '../../common/logs/LogMessageDataType';
 
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {
@@ -25,7 +27,7 @@ export class GameLogs {
     return newMessages;
   }
 
-  public getLogsForGameView(playerId: ParticipantId, game: Game, generation: string | null): Array<LogMessage> {
+  public getLogsForGameView(playerId: ParticipantId, game: IGame, generation: string | null): Array<LogMessage> {
     const messagesForPlayer = ((message: LogMessage) => message.playerId === undefined || message.playerId === playerId);
 
     // for most recent generation pull last 50 log messages
@@ -36,11 +38,33 @@ export class GameLogs {
     }
   }
 
-  public getLogsForGameEnd(game: Game): Array<string> {
+  public getLogsForGameEnd(game: IGame): Array<string> {
     if (game.phase !== Phase.END) {
       throw new Error('Game is not over');
     }
 
-    return game.gameLog.map((message) => Log.applyData(message, (d) => d.value));
+    return game.gameLog.map((message) => Log.applyData(message, (datum: LogMessageData) => {
+      if (datum.type === undefined || datum.value === undefined) {
+        return '';
+      }
+
+      switch (datum.type) {
+      case LogMessageDataType.PLAYER:
+        for (const player of game.getPlayers()) {
+          if (datum.value === player.color) {
+            return player.name;
+          }
+        }
+        // Fall-back, show the player color.
+        return datum.value;
+
+      case LogMessageDataType.CARD:
+      case LogMessageDataType.GLOBAL_EVENT:
+      case LogMessageDataType.TILE_TYPE:
+      case LogMessageDataType.COLONY:
+      default:
+        return datum.value;
+      }
+    }));
   }
 }

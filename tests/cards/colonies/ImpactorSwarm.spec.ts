@@ -4,6 +4,7 @@ import {ImpactorSwarm} from '../../../src/server/cards/colonies/ImpactorSwarm';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('ImpactorSwarm', function() {
   let card: ImpactorSwarm;
@@ -13,14 +14,11 @@ describe('ImpactorSwarm', function() {
 
   beforeEach(function() {
     card = new ImpactorSwarm();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Should play when no other player has plants', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.heat).to.eq(12);
   });
 

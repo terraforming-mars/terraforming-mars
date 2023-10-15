@@ -1,7 +1,9 @@
 import {expect} from 'chai';
+import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('VenusianInsects', () => {
   let card: VenusianInsects;
@@ -10,38 +12,36 @@ describe('VenusianInsects', () => {
 
   beforeEach(() => {
     card = new VenusianInsects();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', () => {
-    (game as any).venusScaleLevel = 10;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setVenusScaleLevel(game, 10);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play', () => {
-    (game as any).venusScaleLevel = 12;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setVenusScaleLevel(game, 12);
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play', () => {
-    (game as any).venusScaleLevel = 12;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setVenusScaleLevel(game, 12);
+    expect(player.simpleCanPlay(card)).is.true;
     player.playedCards.push(card);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Gives victory points', () => {
     player.addResourceTo(card, 7);
-    expect(card.getVictoryPoints()).to.eq(3);
+    expect(card.getVictoryPoints(player)).to.eq(3);
   });
 
   it('Should act', () => {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 });

@@ -16,8 +16,8 @@
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <div v-if="showsave === true" class="nofloat">
-            <Button :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
-            <Button :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
+            <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
+            <AppButton :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
     </div>
 </template>
@@ -25,7 +25,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {Color} from '@/common/Color';
 import {Message} from '@/common/logs/Message';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
@@ -34,16 +34,16 @@ import {VueModelCheckbox, VueModelRadio} from '@/client/types';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectCardModel} from '@/common/models/PlayerInputModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import {SelectCardResponse} from '@/common/inputs/InputResponse';
 
-interface Owner {
+type Owner = {
   name: string;
   color: Color;
 }
 
-interface SelectCardModel {
+type WidgetDataModel = {
   cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
   warning: string | Message | undefined;
   owners: Map<CardName, Owner>,
@@ -56,7 +56,7 @@ export default Vue.extend({
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectCardModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectCardResponse) => void,
@@ -70,7 +70,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data(): SelectCardModel {
+  data(): WidgetDataModel {
     return {
       cards: [],
       warning: undefined,
@@ -79,7 +79,7 @@ export default Vue.extend({
   },
   components: {
     Card,
-    Button,
+    AppButton,
   },
   watch: {
     cards() {
@@ -111,7 +111,7 @@ export default Vue.extend({
       if (this.playerinput.showOwner) {
         // Optimization so getOwners isn't repeatedly called.
         this.owners.clear();
-        this.playerinput.cards?.forEach((card) => {
+        this.playerinput.cards.forEach((card) => {
           const owner = this.findOwner(card);
           if (owner !== undefined) this.owners.set(card.name, owner);
         });

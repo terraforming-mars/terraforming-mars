@@ -1,9 +1,9 @@
 import {Game} from '../../../src/server/Game';
-import {cast, fakeCard, testGameOptions} from '../../TestingUtils';
+import {cast, fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -16,7 +16,7 @@ describe('LunaPoliticalInstitute', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true, moonExpansion: true}));
+    game = Game.newInstance('gameid', [player], player, {turmoilExtension: true, moonExpansion: true});
     card = new LunaPoliticalInstitute();
     turmoil = game.turmoil!;
   });
@@ -25,13 +25,13 @@ describe('LunaPoliticalInstitute', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.playedCards = [fakeCard({tags: [Tag.MOON]})];
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.playedCards = [fakeCard({tags: [Tag.MOON, Tag.MOON]})];
-    expect(player.getPlayableCards()).includes(card);
+    expect(player.getPlayableCardsForTest()).includes(card);
   });
 
   it('can act', () => {
@@ -52,7 +52,7 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(marsFirst.delegates.get(player.id)).eq(0);
 
-    const selectParty = cast(game.deferredActions.peek()!.execute(), SelectPartyToSendDelegate);
+    const selectParty = cast(game.deferredActions.peek()!.execute(), SelectParty);
     selectParty.cb(PartyName.MARS);
 
     expect(marsFirst.delegates.get(player.id)).eq(1);

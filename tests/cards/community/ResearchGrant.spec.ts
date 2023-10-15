@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {ResearchGrant} from '../../../src/server/cards/community/ResearchGrant';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -8,7 +9,7 @@ describe('ResearchGrant', function() {
 
   beforeEach(function() {
     card = new ResearchGrant();
-    player = TestPlayer.BLUE.newPlayer();
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Should play', function() {

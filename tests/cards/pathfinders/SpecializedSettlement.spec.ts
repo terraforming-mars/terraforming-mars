@@ -11,7 +11,8 @@ import {TileType} from '../../../src/common/TileType';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
+import {OneOrArray} from '../../../src/common/utils/types';
 
 describe('SpecializedSettlement', function() {
   let card: SpecializedSettlement;
@@ -20,17 +21,16 @@ describe('SpecializedSettlement', function() {
 
   beforeEach(function() {
     card = new SpecializedSettlement();
-    game = newTestGame(1, {aresExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {aresExtension: true, pathfindersExpansion: true});
     game.board = EmptyBoard.newInstance();
     player.popWaitingFor(); // Clears out the default waiting for (selecting initial cards)
   });
 
   it('Can play', () => {
     player.production.override({energy: 0});
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
     player.production.override({energy: 1});
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('play', function() {
@@ -38,7 +38,7 @@ describe('SpecializedSettlement', function() {
       SpaceBonus.DRAW_CARD,
       {},
       {energy: 0, megacredits: 3});
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('play - steel', function() {
@@ -46,7 +46,7 @@ describe('SpecializedSettlement', function() {
       SpaceBonus.STEEL,
       {steel: 1},
       {energy: 0, megacredits: 3, steel: 1});
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('play - titanium', function() {
@@ -54,7 +54,7 @@ describe('SpecializedSettlement', function() {
       SpaceBonus.TITANIUM,
       {titanium: 1},
       {energy: 0, megacredits: 3, titanium: 1});
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('play - plants', function() {
@@ -62,7 +62,7 @@ describe('SpecializedSettlement', function() {
       SpaceBonus.PLANT,
       {plants: 1},
       {energy: 0, megacredits: 3, plants: 1});
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('play - heat', function() {
@@ -70,7 +70,7 @@ describe('SpecializedSettlement', function() {
       SpaceBonus.HEAT,
       {heat: 1},
       {energy: 0, megacredits: 3, heat: 1});
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('play - energy', function() {
@@ -78,7 +78,7 @@ describe('SpecializedSettlement', function() {
       SpaceBonus.ENERGY,
       {energy: 1},
       {energy: 1, megacredits: 3});
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
 
@@ -89,7 +89,7 @@ describe('SpecializedSettlement', function() {
         {megacredits: 1},
         {energy: 0, megacredits: 4});
     }).to.throw(/Unhandled space bonus/);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('play - 2 of the same', function() {
@@ -97,7 +97,7 @@ describe('SpecializedSettlement', function() {
       [SpaceBonus.HEAT, SpaceBonus.HEAT],
       {heat: 2},
       {energy: 0, megacredits: 3, heat: 1});
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('play - 3 different', function() {
@@ -109,7 +109,7 @@ describe('SpecializedSettlement', function() {
     expect(orOptions.options.map((option) => option.title)).deep.eq(['heat', 'steel', 'titanium']);
     orOptions.options[0].cb();
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, heat: 1}));
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('play - 3 different, then play Robotic Workforce', function() {
@@ -120,7 +120,7 @@ describe('SpecializedSettlement', function() {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, heat: 1}));
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     player.playedCards = [card];
 
@@ -144,31 +144,31 @@ describe('SpecializedSettlement', function() {
     hazardSpace.tile = {tileType: TileType.DUST_STORM_MILD, protectedHazard: false};
 
     const selectSpace = cast(card.play(player), SelectSpace);
-    expect(selectSpace.availableSpaces).contains(hazardSpace);
+    expect(selectSpace.spaces).contains(hazardSpace);
     selectSpace.cb(hazardSpace);
 
     expect(hazardSpace.tile?.tileType).eq(TileType.CITY);
     expect(hazardSpace.player).eq(player);
 
     runAllActions(game);
-    expect(player.getResourcesForTest()).deep.eq(Units.of({}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({}));
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
-  function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
+  function singleResourceTest(spaceBonus: OneOrArray<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
     player.production.override({energy: 1});
     const action = card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 3}));
 
     const selectSpace = cast(action, SelectSpace);
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     space.bonus = spaceBonus instanceof Array ? spaceBonus : [spaceBonus];
     selectSpace.cb(space);
 
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(space.player).eq(player);
-    expect(player.getResourcesForTest()).deep.eq(Units.of(stock));
+    expect(player.stock.asUnits()).deep.eq(Units.of(stock));
 
     runAllActions(game);
 

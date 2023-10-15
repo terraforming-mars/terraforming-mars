@@ -9,7 +9,7 @@ export class CorroderSuits extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.CORRODER_SUITS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.VENUS],
       cost: 8,
 

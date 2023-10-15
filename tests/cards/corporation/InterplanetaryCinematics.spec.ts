@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {Virus} from '../../../src/server/cards/base/Virus';
 import {InterplanetaryCinematics} from '../../../src/server/cards/corporation/InterplanetaryCinematics';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryCinematics', function() {
@@ -11,9 +11,7 @@ describe('InterplanetaryCinematics', function() {
 
   beforeEach(function() {
     card = new InterplanetaryCinematics();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('Should play', function() {

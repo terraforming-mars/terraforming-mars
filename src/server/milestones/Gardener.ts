@@ -1,13 +1,14 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 
-export class Gardener implements IMilestone {
-  public readonly name = 'Gardener';
-  public readonly description = 'Owning at least 3 greenery tiles';
-  public getScore(player: Player): number {
-    return player.game.getGreeneriesCount(player);
+export class Gardener extends BaseMilestone {
+  constructor() {
+    super(
+      'Gardener',
+      'Own 3 greenery tiles',
+      3);
   }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 3;
+  public getScore(player: IPlayer): number {
+    return player.game.board.getGreeneries(player).length;
   }
 }

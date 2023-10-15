@@ -1,14 +1,11 @@
 <template>
   <div class="debug-ui-container" :class="getLanguageCssClass()">
       <h1 v-i18n>Cards List</h1>
-      <div class="legacy-anchor">
-        <a href="https://ssimeonoff.github.io/cards-list" target="_blank"><span v-i18n>legacy card UI</span></a>
-      </div>
 
       <!-- start filters -->
 
       <div class="form-group">
-        <input class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
+        <input ref="filter" class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
       </div>
       <input type="checkbox" name="fullFilter" id="fullFilter-checkbox" v-model="fullFilter">
       <label for="fullFilter-checkbox">
@@ -22,13 +19,11 @@
         </button>
 
         <span v-for="expansion in allModules" :key="expansion">
-          <template v-if="experimentalUI() || expansion !== 'ceo'">
           <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
           <label :for="`${expansion}-checkbox`" class="expansion-button">
             <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
-            <span v-i18n>{{expansionName(expansion)}}</span>
+            <span v-i18n>{{MODULE_NAMES[expansion]}}</span>
           </label>
-          </template>
         </span>
       </div>
 
@@ -39,14 +34,12 @@
         </button>
 
         <span v-for="type in allTypes" :key="type">
-          <template v-if="experimentalUI() || type !== ceoType">
           <input type="checkbox" :name="`${type}-cardType`" :id="`${type}-cardType-checkbox`" v-model="types[type]">
           <label :for="`${type}-cardType-checkbox`" class="expansion-button">
               <span v-if="type === 'colonyTiles'" v-i18n>Colony Tiles</span>
               <span v-else-if="type === 'globalEvents'" v-i18n>Global Events</span>
               <span v-else v-i18n>{{type}}</span>
           </label>
-          </template>
         </span>
       </div>
 
@@ -87,7 +80,6 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
-      <template v-if="experimentalUI()">
       <br>
       <section class="debug-ui-cards-list">
           <h2 v-i18n>CEOs</h2>
@@ -95,7 +87,6 @@
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
-      </template>
       <br>
       <section class="debug-ui-cards-list">
         <h2 v-i18n>Standard Projects</h2>
@@ -173,7 +164,7 @@ import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES, PATHFINDERS_COLONY_NAMES}
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
-import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
+import {GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {Tag} from '@/common/cards/Tag';
 import {allColonyNames, getColony} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
@@ -189,11 +180,13 @@ import Award from '@/client/components/Award.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
+import {WithRefs} from 'vue-typed-refs';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
   corpera: 'c',
   prelude: 'p',
+  prelude2: '2',
   venus: 'v',
   colonies: 'C',
   turmoil: 't',
@@ -203,10 +196,11 @@ const moduleAbbreviations: Record<GameModule, string> = {
   moon: 'm',
   pathfinders: 'P',
   ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
+  starwars: 'w',
 };
 
-// TODO(kberg): make this  use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramP';
+// TODO(kberg): make this use suffixModules.
+const ALL_MODULES = 'bcpvCt*ramPl2w';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
@@ -286,7 +280,11 @@ function buildSearchIndex(map: Map<string, Array<string>>) {
   }
 }
 
-export default Vue.extend({
+type Refs = {
+  filter: HTMLInputElement,
+};
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'debug-ui',
   components: {
     Card,
@@ -305,6 +303,7 @@ export default Vue.extend({
         base: true,
         corpera: true,
         prelude: true,
+        prelude2: true,
         venus: true,
         colonies: true,
         turmoil: true,
@@ -314,6 +313,7 @@ export default Vue.extend({
         promo: true,
         pathfinders: true,
         ceo: true,
+        starwars: true,
       },
       types: {
         event: true,
@@ -363,10 +363,14 @@ export default Vue.extend({
       return this.expansions[module] = modules.includes(moduleAbbreviations[module]);
     });
     buildSearchIndex(this.searchIndex);
+    this.$refs.filter.focus();
   },
   computed: {
     allModules(): ReadonlyArray<GameModule> {
       return GAME_MODULES;
+    },
+    MODULE_NAMES(): typeof MODULE_NAMES {
+      return MODULE_NAMES;
     },
     allTypes(): Array<TypeOption> {
       return [
@@ -398,9 +402,6 @@ export default Vue.extend({
     allAwardNames(): ReadonlyArray<AwardName> {
       return awardNames;
     },
-    ceoType(): CardType {
-      return CardType.CEO;
-    },
   },
   methods: {
     updateUrl(search?: string) {
@@ -422,13 +423,13 @@ export default Vue.extend({
       }
     },
     invertExpansions() {
-      GAME_MODULES.forEach((module) => this.$data.expansions[module] = !this.$data.expansions[module]);
+      GAME_MODULES.forEach((module) => this.expansions[module] = !this.expansions[module]);
     },
     invertTags() {
-      this.allTags.forEach((tag) => this.$data.tags[tag] = !this.$data.tags[tag]);
+      this.allTags.forEach((tag) => this.tags[tag] = !this.tags[tag]);
     },
     invertTypes() {
-      this.allTypes.forEach((type) => this.$data.types[type] = !this.$data.types[type]);
+      this.allTypes.forEach((type) => this.types[type] = !this.types[type]);
     },
     sort<T extends string>(names: Array<T>): Array<T> {
       const translated = names.map((name) => ({name: name, text: translateText(name)}));
@@ -468,7 +469,7 @@ export default Vue.extend({
       return getGlobalEventModel(globalEventName);
     },
     filter(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
-      const filterText = this.$data.filterText.toLocaleUpperCase();
+      const filterText = this.filterText.toLocaleUpperCase();
       if (filterText.length === 0) {
         return true;
       }
@@ -498,6 +499,7 @@ export default Vue.extend({
       case 'base': return 'Base';
       case 'corpera': return 'Corporate Era';
       case 'prelude': return 'Prelude';
+      case 'prelude2': return 'Prelude 2';
       case 'venus': return 'Venus Next';
       case 'colonies': return 'Colonies';
       case 'turmoil': return 'Turmoil';
@@ -507,6 +509,7 @@ export default Vue.extend({
       case 'moon': return 'The Moon';
       case 'pathfinders': return 'Pathfinders';
       case 'ceo': return 'CEOs';
+      case 'starwars': return 'Star Wars';
       }
     },
     filterByTags(card: ClientCard): boolean {
@@ -529,7 +532,7 @@ export default Vue.extend({
       }
 
       if (!this.filterByTags(card)) return false;
-      if (!this.types[card.cardType]) return false;
+      if (!this.types[card.type]) return false;
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {
@@ -574,6 +577,7 @@ export default Vue.extend({
         scores: [],
       };
     },
+    // experimentalUI might not be used at the moment, but it's fine to just leave it here.
     experimentalUI(): boolean {
       return getPreferences().experimental_ui;
     },

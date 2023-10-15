@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class FieldCappedCity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.FIELD_CAPPED_CITY,
       tags: [Tag.CITY, Tag.BUILDING, Tag.POWER],
       cost: 29,

@@ -1,11 +1,11 @@
 import {IAward} from './IAward';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {AwardName} from '../../common/ma/AwardName';
 
 export type FundedAward = {
   award: IAward;
-  player: Player;
+  player: IPlayer;
 }
 
 export type SerializedFundedAward = {
@@ -24,22 +24,38 @@ export function serializeFundedAwards(fundedAwards: Array<FundedAward>) : Array<
 
 export function deserializeFundedAwards(
   fundedAwards: Array<SerializedFundedAward>,
-  players: Array<Player>,
+  players: Array<IPlayer>,
   awards: Array<IAward>): Array<FundedAward> {
-  return fundedAwards.map((element: SerializedFundedAward) => {
-    const awardName = element.name;
-    if (awardName === undefined) {
+  // Remove duplicates
+  const aw = new Set<AwardName>();
+  const filtered: Array<Required<SerializedFundedAward>> = [];
+  for (const fundedAward of fundedAwards) {
+    const name = fundedAward.name;
+    if (name === undefined) {
       throw new Error('Award name not found');
     }
+    const playerId = fundedAward.playerId;
+    if (playerId === undefined) {
+      throw new Error(`Player ID not found when rebuilding funded award ${name}`);
+    }
+
+    if (aw.has(name)) {
+      console.error('Found duplicate award: ' + name);
+      continue;
+    } else {
+      filtered.push({name, playerId});
+      aw.add(name);
+    }
+  }
+
+  return filtered.map((element: SerializedFundedAward) => {
+    const awardName = element.name;
     const award: IAward | undefined = awards.find((award) => award.name === awardName);
     if (award === undefined) {
       throw new Error(`Award ${awardName} not found when rebuilding Funded Award`);
     }
 
     const playerId = element.playerId;
-    if (playerId === undefined) {
-      throw new Error(`Player ID not found when rebuilding Funded Award ${awardName}`);
-    }
     const player = players.find((player) => player.id === playerId);
     if (player === undefined) {
       throw new Error(`Player ${playerId} not found when rebuilding Funded Award ${awardName}`);

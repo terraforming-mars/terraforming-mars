@@ -1,45 +1,42 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, churnAction, setTemperature} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {ExtremeColdFungus} from '../../../src/server/cards/base/ExtremeColdFungus';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('ExtremeColdFungus', () => {
   let card: ExtremeColdFungus;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new ExtremeColdFungus();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player] = testGame(2);
   });
 
   it('Cannot play', () => {
-    (game as any).temperature = -8;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    setTemperature(game, -8);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can play', () => {
-    (game as any).temperature = -12;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setTemperature(game, -12);
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should play', () => {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act - single target', () => {
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
 
-    const action = cast(card.action(player), OrOptions);
+    const action = cast(churnAction(card, player), OrOptions);
     expect(action.options).has.lengthOf(2);
 
     action.options[0].cb();
@@ -54,7 +51,7 @@ describe('ExtremeColdFungus', () => {
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
 
-    const action = cast(card.action(player), OrOptions);
+    const action = cast(churnAction(card, player), OrOptions);
     expect(action.options).has.lengthOf(2);
 
     action.options[0].cb([tardigrades]);

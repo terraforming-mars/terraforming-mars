@@ -8,7 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class PowerPlant extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.POWER_PLANT_PATHFINDERS,
       cost: 13,
       tags: [Tag.MARS, Tag.POWER, Tag.BUILDING],

@@ -1,11 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
@@ -13,11 +12,11 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 export class GreatEscarpmentConsortium extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GREAT_ESCARPMENT_CONSORTIUM,
       cost: 6,
 
-      requirements: CardRequirements.builder((b) => b.production(Resources.STEEL)),
+      requirements: {production: Resource.STEEL, count: 1},
       metadata: {
         cardNumber: '061',
         renderData: CardRenderer.builder((b) => {
@@ -31,10 +30,10 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(
-      new DecreaseAnyProduction(player, Resources.STEEL, {count: 1, stealing: true}));
-    player.game.defer(new GainProduction(player, Resources.STEEL, {count: 1}));
+      new DecreaseAnyProduction(player, Resource.STEEL, {count: 1, stealing: true}));
+    player.game.defer(new GainProduction(player, Resource.STEEL, {count: 1}));
     return undefined;
   }
 }

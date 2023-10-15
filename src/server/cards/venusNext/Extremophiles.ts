@@ -1,26 +1,25 @@
-import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
-import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
+import {ActionCard} from '../ActionCard';
 
-export class Extremophiles extends Card implements IActionCard {
+export class Extremophiles extends ActionCard {
   constructor() {
     super({
       name: CardName.EXTREMOPHILES,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS, Tag.MICROBE],
       cost: 3,
       resourceType: CardResource.MICROBE,
-      victoryPoints: VictoryPoints.resource(1, 3),
+      victoryPoints: {resourcesHere: {}, per: 3},
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      action: {
+        addResourcesToAnyCard: {type: CardResource.MICROBE, count: 1},
+      },
+
+      requirements: {tag: Tag.SCIENCE, count: 2},
       metadata: {
         cardNumber: '224',
         description: 'Requires 2 science tags.',
@@ -32,27 +31,5 @@ export class Extremophiles extends Card implements IActionCard {
         }),
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    const microbeCards = player.getResourceCards(CardResource.MICROBE);
-    if (microbeCards.length === 1) {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    }
-
-    return new SelectCard(
-      'Select card to add 1 microbe',
-      'Add microbe',
-      microbeCards,
-      ([card]) => {
-        player.addResourceTo(card, {log: true});
-        return undefined;
-      },
-    );
   }
 }

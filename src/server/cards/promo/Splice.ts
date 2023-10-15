@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -10,13 +10,14 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all, played} from '../Options';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class Splice extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.SPLICE,
       tags: [Tag.MICROBE],
       startingMegaCredits: 48, // 44 + 4 as card resolution when played
@@ -48,15 +49,15 @@ export class Splice extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     return this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     return this._onCardPlayed(player, card);
   }
 
-  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): OrOptions | undefined {
+  private _onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): OrOptions | undefined {
     if (card.tags.includes(Tag.MICROBE) === false) {
       return undefined;
     }
@@ -64,24 +65,27 @@ export class Splice extends Card implements ICorporationCard {
     const microbeTagsCount = player.tags.cardTagCount(card, Tag.MICROBE);
     const megacreditsGain = microbeTagsCount * gainPerMicrobe;
 
-    const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe', () => {
+    const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
       player.addResourceTo(card);
       return undefined;
     });
 
-    const getMegacredits = new SelectOption(`Gain ${megacreditsGain} MC`, 'Gain M€', () => {
-      player.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
-      return undefined;
-    });
+    const getMegacredits = new SelectOption(
+      newMessage('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
+      'Gain M€')
+      .andThen(() => {
+        player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
+        return undefined;
+      });
 
     // Splice owner get 2M€ per microbe tag
-    player.game.getCardPlayer(this.name).addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
+    player.game.getCardPlayerOrThrow(this.name).stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
 
     // Card player choose between 2 M€ and a microbe on card, if possible
-    if (card.resourceType !== undefined && card.resourceType === CardResource.MICROBE) {
+    if (card.resourceType === CardResource.MICROBE) {
       return new OrOptions(addResource, getMegacredits);
     } else {
-      player.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
+      player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
       return undefined;
     }
   }

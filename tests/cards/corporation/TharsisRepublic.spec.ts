@@ -3,9 +3,10 @@ import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepu
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {addCityTile, cast, runAllActions} from '../../TestingUtils';
+import {addCity, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {testGame} from '../../TestGame';
 
 describe('TharsisRepublic', function() {
   let card: TharsisRepublic;
@@ -15,27 +16,25 @@ describe('TharsisRepublic', function() {
 
   beforeEach(function() {
     card = new TharsisRepublic();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
 
     player.setCorporationForTest(card);
   });
 
   it('Should take initial action', function() {
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     runAllActions(game);
 
-    expect(game.getCitiesOnMarsCount()).to.eq(1);
+    expect(game.board.getCitiesOnMars()).has.length(1);
     expect(player.production.megacredits).to.eq(1);
     expect(player.megaCredits).to.eq(3);
   });
 
   it('Gives 3 M€ and MC production for own city on Mars', function() {
-    addCityTile(player);
+    addCity(player);
     runAllActions(game);
 
     expect(player.megaCredits).to.eq(3);
@@ -43,7 +42,7 @@ describe('TharsisRepublic', function() {
   });
 
   it('Gives MC production only for other player\'s city on Mars', function() {
-    addCityTile(player2);
+    addCity(player2);
     runAllActions(game);
 
     expect(player.megaCredits).to.eq(0);

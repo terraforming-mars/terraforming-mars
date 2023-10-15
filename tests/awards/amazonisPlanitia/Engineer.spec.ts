@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {fail} from 'assert';
-import {Game} from '../../../src/server/Game';
-import {Engineer} from '../../../src/server/awards/amazonisPlanitia/Engineer';
+import {testGame} from '../../TestGame';
+import {BESPOKE_PRODUCTION_CARDS, Engineer} from '../../../src/server/awards/amazonisPlanitia/Engineer';
 import {TestPlayer} from '../../TestPlayer';
 import {CardFinder} from '../../../src/server/CardFinder';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -15,9 +14,7 @@ describe('Engineer', () => {
 
   beforeEach(() => {
     award = new Engineer();
-    player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('score', () => {
@@ -33,14 +30,16 @@ describe('Engineer', () => {
     expect(award.getScore(player)).eq(3);
   });
 
+  // A good way to prevent future failures is to duplicate the Robotic Workforce style of test.
   it('verify if production cards list is accurate', () => {
+    const failures: Array<string> = [];
     const cardFinder = new CardFinder();
-    for (const cardName of Engineer.productionCards) {
+    for (const cardName of BESPOKE_PRODUCTION_CARDS) {
       const card = cardFinder.getCardByName(cardName)!;
-      const behavior = card.behavior;
-      if (behavior?.production !== undefined) {
-        fail(`${cardName} shouldn't be on this list.`);
+      if (Engineer.autoInclude(card)) {
+        failures.push(cardName);
       }
     }
+    expect(failures, failures.toString()).has.length(0);
   });
 });

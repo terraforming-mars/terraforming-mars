@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
@@ -10,7 +9,7 @@ export class SisterPlanetSupport extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SISTER_PLANET_SUPPORT,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.VENUS, Tag.EARTH],
       cost: 7,
 
@@ -18,7 +17,7 @@ export class SisterPlanetSupport extends Card implements IProjectCard {
         production: {megacredits: 3},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH)),
+      requirements: [{tag: Tag.VENUS}, {tag: Tag.EARTH}],
       metadata: {
         cardNumber: '244',
         renderData: CardRenderer.builder((b) => {

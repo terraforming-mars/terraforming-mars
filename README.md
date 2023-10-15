@@ -37,7 +37,7 @@ There's a instance available at https://terraforming-mars.herokuapp.com/. It's g
 There's also this excellent
 [YouTube playlist](https://youtube.com/playlist?list=PLCGE78n9vCqhhmRe9YCrRh2GLNMPB_3j1) focused on tutorials custom for this app.
 
-NOTE: This site is restarted daily. A multiplayer game will remain available for 10 days, after which it will be flushed from the database.
+NOTE: This site is restarted daily. A multiplayer game will remain available for 15 days, after which it will be flushed from the database.
 Unfinished solo games are flushed after one day. We continue to make stability and scalability improvements in step with growth and popularity,
 but to make sure your game remains, we highly recommended to host your own web server.
 
@@ -124,3 +124,6 @@ Thanks goes to these wonderful people:
 ## LICENSE
 
 GPLv3
+
+Russian Prototype font: https://fonts-online.ru/fonts/prototype-rus-daymarius (copyright 2001, free for personal use)
+Polish Prototype font: https://www.gry-planszowe.pl/viewtopic.php?p=1489006#p1489006 (copyright 2001, free for personal use)

@@ -8,7 +8,7 @@ import {all} from '../Options';
 export class MiningExpedition extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.MINING_EXPEDITION,
       cost: 12,
 

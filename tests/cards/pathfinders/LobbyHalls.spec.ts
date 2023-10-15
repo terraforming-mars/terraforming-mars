@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LobbyHalls} from '../../../src/server/cards/pathfinders/LobbyHalls';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Game} from '../../../src/server/Game';
@@ -10,7 +10,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src/server//inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server//inputs/SelectParty';
 import {cast} from '../../TestingUtils';
 
 describe('LobbyHalls', function() {
@@ -21,8 +21,7 @@ describe('LobbyHalls', function() {
 
   beforeEach(function() {
     card = new LobbyHalls();
-    game = newTestGame(1, {turmoilExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
     turmoil = game.turmoil!;
   });
 
@@ -65,7 +64,7 @@ describe('LobbyHalls', function() {
     expect(turmoil.getAvailableDelegateCount(player.id)).eq(7);
     expect(marsFirst.delegates.get(player.id)).eq(0);
 
-    const options = cast(action.execute(), SelectPartyToSendDelegate);
+    const options = cast(action.execute(), SelectParty);
     options.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id)).eq(6);

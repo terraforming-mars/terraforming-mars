@@ -8,6 +8,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('Vitor', function() {
   let card: Vitor;
@@ -16,14 +17,11 @@ describe('Vitor', function() {
 
   beforeEach(function() {
     card = new Vitor();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.megaCredits).to.eq(0);
   });
 
@@ -35,8 +33,8 @@ describe('Vitor', function() {
 
   it('No initial action for solo games', function() {
     Game.newInstance('gameid', [player], player);
-    const action = player.runInitialAction(card);
-    expect(action).is.undefined;
+    const action = player.deferInitialAction(card);
+    cast(action, undefined);
   });
 
   it('Give megacredits when card played', function() {

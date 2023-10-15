@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {churnAction, cast} from '../../TestingUtils';
 import {FloaterTechnology} from '../../../src/server/cards/colonies/FloaterTechnology';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
@@ -7,6 +7,7 @@ import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('FloaterTechnology', function() {
   let card: FloaterTechnology;
@@ -15,9 +16,7 @@ describe('FloaterTechnology', function() {
 
   beforeEach(function() {
     card = new FloaterTechnology();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can play', function() {
@@ -26,8 +25,8 @@ describe('FloaterTechnology', function() {
   });
 
   it('Can act without targets', function() {
-    expect(card.canAct()).is.true;
-    expect(card.action(player)).is.undefined;
+    expect(card.canAct(player)).is.true;
+    expect(churnAction(card, player)).is.undefined;
   });
 
   it('Acts automatically with single targets', function() {
@@ -46,10 +45,7 @@ describe('FloaterTechnology', function() {
     const floatingHabs = new FloatingHabs();
     player.playedCards.push(dirigibles, floatingHabs);
 
-    card.action(player);
-    expect(game.deferredActions).has.lengthOf(1);
-
-    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
+    const selectCard = cast(churnAction(card, player), SelectCard<ICard>);
     selectCard.cb([floatingHabs]);
     expect(floatingHabs.resourceCount).to.eq(1);
     expect(dirigibles.resourceCount).to.eq(0);

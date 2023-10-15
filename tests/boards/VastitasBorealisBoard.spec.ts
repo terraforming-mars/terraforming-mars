@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {VastitasBorealisBoard} from '../../src/server/boards/VastitasBorealisBoard';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
-import {SeededRandom} from '../../src/server/Random';
-import {testGameOptions, runAllActions} from '../TestingUtils';
+import {SeededRandom} from '../../src/common/utils/Random';
+import {runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/server/SpaceName';
 
@@ -19,7 +19,7 @@ describe('VastitasBorealisBoard', function() {
     board = VastitasBorealisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA}));
+    game = Game.newInstance('gameid', [player, player2], player, {boardName: BoardName.ARABIA_TERRA});
   });
 
   it('Grants temperature bonus', () => {

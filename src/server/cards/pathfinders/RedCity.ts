@@ -1,10 +1,9 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {TileType} from '../../../common/TileType';
@@ -12,11 +11,12 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {AresHandler} from '../../ares/AresHandler';
 import {Board} from '../../boards/Board';
 import {IProjectCard} from '../IProjectCard';
+import {newMessage} from '../../logs/MessageBuilder';
 
 export class RedCity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.RED_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 21,
@@ -25,7 +25,7 @@ export class RedCity extends Card implements IProjectCard {
         production: {energy: -1, megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+      requirements: {party: PartyName.REDS},
       victoryPoints: 'special',
 
       metadata: {
@@ -42,23 +42,26 @@ export class RedCity extends Card implements IProjectCard {
     });
   }
 
-  private availableRedCitySpaces(player: Player) {
+  private availableRedCitySpaces(player: IPlayer) {
     const board = player.game.board;
     const citySpaces = board.getAvailableSpacesForCity(player);
     return citySpaces.filter((space) => !board.getAdjacentSpaces(space).some(Board.isGreenerySpace));
   }
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     return this.availableRedCitySpaces(player).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
-    return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
-      player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
-      return undefined;
-    });
+  public override bespokePlay(player: IPlayer) {
+    return new SelectSpace(
+      newMessage('Select space for ${0}', (b) => b.card(this)),
+      this.availableRedCitySpaces(player))
+      .andThen((space) => {
+        player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
+        return undefined;
+      });
   }
 
-  public override getVictoryPoints(player: Player): number {
+  public override getVictoryPoints(player: IPlayer): number {
     const space = player.game.board.getSpaceByTileCard(this.name);
     if (space === undefined) {
       return 0;

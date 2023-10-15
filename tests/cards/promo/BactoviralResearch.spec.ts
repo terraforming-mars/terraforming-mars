@@ -10,6 +10,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
+import {testGame} from '../../TestGame';
 
 describe('BactoviralResearch', function() {
   let card: BactoviralResearch;
@@ -18,9 +19,7 @@ describe('BactoviralResearch', function() {
 
   beforeEach(function() {
     card = new BactoviralResearch();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play with multiple microbe cards', function() {

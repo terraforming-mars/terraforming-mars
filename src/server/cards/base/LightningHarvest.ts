@@ -3,13 +3,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class LightningHarvest extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.LIGHTNING_HARVEST,
       cost: 8,
       tags: [Tag.POWER],
@@ -19,7 +18,7 @@ export class LightningHarvest extends Card implements IProjectCard {
         production: {energy: 1, megacredits: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
+      requirements: {tag: Tag.SCIENCE, count: 3},
       metadata: {
         cardNumber: '046',
         renderData: CardRenderer.builder((b) => {

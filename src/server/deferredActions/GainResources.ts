@@ -1,17 +1,17 @@
-import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
   count?: number;
-  cb?: () => void;
+  cb?(): void;
   log?: boolean;
 }
 
 export class GainResources extends DeferredAction {
   constructor(
-    player: Player,
-    public resource: Resources,
+    player: IPlayer,
+    public resource: Resource,
     public options: Options = {},
   ) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
@@ -24,10 +24,8 @@ export class GainResources extends DeferredAction {
     if (this.options.count === 0) {
       return undefined;
     }
-    this.player.addResource(this.resource, this.options.count ?? 1, {log: this.options.log});
-    if (this.options.cb) {
-      this.options.cb();
-    }
+    this.player.stock.add(this.resource, this.options.count ?? 1, {log: this.options.log});
+    this.options.cb?.();
     return undefined;
   }
 }

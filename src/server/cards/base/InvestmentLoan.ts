@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class InvestmentLoan extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.INVESTMENT_LOAN,
       tags: [Tag.EARTH],
       cost: 3,

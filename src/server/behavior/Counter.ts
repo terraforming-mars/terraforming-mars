@@ -1,10 +1,11 @@
 import {Units} from '../../common/Units';
 import {TileType} from '../../common/TileType';
 import {ICard} from '../cards/ICard';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Countable, CountableUnits} from './Countable';
 import {hasIntersection} from '../../common/utils/utils';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {CardResource} from '../../common/CardResource';
 
 /**
  * Counts things in game state.
@@ -26,11 +27,11 @@ export class Counter {
    */
   private cardIsUnplayed: boolean;
 
-  public constructor(private player: Player, private card: ICard) {
+  public constructor(private player: IPlayer, private card: ICard) {
     this.cardIsUnplayed = !player.cardIsInEffect(card.name);
   }
 
-  public count(countable: Countable): number {
+  public count(countable: Countable, context: 'default' | 'vps' = 'default'): number {
     if (typeof(countable) === 'number') {
       return countable;
     }
@@ -45,24 +46,28 @@ export class Counter {
       const p = (countable.all === false) ? player : undefined;
       switch (countable.cities.where) {
       case 'offmars':
-        sum = game.getCitiesOffMarsCount(p);
+        sum = game.board.getCitiesOffMars(p).length;
         break;
       case 'onmars':
-        sum += game.getCitiesOnMarsCount(p);
+        sum += game.board.getCitiesOnMars(p).length;
         break;
       case 'everywhere':
       default:
-        sum += game.getCitiesCount(p);
+        sum += game.board.getCities(p).length;
       }
     }
 
     if (countable.oceans !== undefined) {
-      sum += game.board.getOceanCount({wetlands: true});
+      sum += game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
+    }
+
+    if (countable.floaters !== undefined) {
+      sum += player.getResourceCount(CardResource.FLOATER);
     }
 
     if (countable.greeneries !== undefined) {
       const p = (countable.all === false) ? player : undefined;
-      sum += game.getGreeneriesCount(p);
+      sum += game.board.getGreeneries(p).length;
     }
     if (countable.tag !== undefined) {
       const tag = countable.tag;
@@ -80,7 +85,7 @@ export class Counter {
         sum += player.tags.multipleCount(tag);
       } else { // Single tag
         if (countable.others !== true) { // Just count player's own tags.
-          sum += player.tags.count(tag);
+          sum += player.tags.count(tag, context === 'vps' ? 'raw' : context);
 
           if (this.cardIsUnplayed) { // And include the card itself if it isn't already on the tableau.
             sum += card.tags.filter((t) => t === tag).length;
@@ -96,11 +101,25 @@ export class Counter {
       }
     }
 
+    if (countable.resourcesHere !== undefined) {
+      sum += card.resourceCount;
+    }
+
+    if (countable.colonies !== undefined) {
+      player.game.colonies.forEach((colony) => {
+        if (countable.all) {
+          sum += colony.colonies.length;
+        } else {
+          sum += colony.colonies.filter((colony) => colony === player.id).length;
+        }
+      });
+    }
+
     if (countable.moon !== undefined) {
       const moon = countable.moon;
       MoonExpansion.ifMoon(game, (moonData) => {
         if (moon.habitatRate) {
-          sum += moonData.colonyRate;
+          sum += moonData.habitatRate;
         }
         if (moon.miningRate) {
           sum += moonData.miningRate;

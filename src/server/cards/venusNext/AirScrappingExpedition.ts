@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +12,7 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.AIR_SCRAPPING_EXPEDITION,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.VENUS],
       cost: 13,
 
@@ -30,16 +30,22 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     let floaterCards = player.getResourceCards(CardResource.FLOATER);
     floaterCards = floaterCards.filter((card) => card.tags.some((cardTag) => cardTag === Tag.VENUS));
     if (floaterCards.length === 0) {
       return undefined;
     }
 
-    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, ([card]) => {
-      player.addResourceTo(card, 3);
-      return undefined;
-    });
+    if (floaterCards.length === 1) {
+      player.addResourceTo(floaterCards[0], {qty: 3, log: true});
+      return;
+    }
+
+    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards)
+      .andThen(([card]) => {
+        player.addResourceTo(card, {qty: 3, log: true});
+        return undefined;
+      });
   }
 }

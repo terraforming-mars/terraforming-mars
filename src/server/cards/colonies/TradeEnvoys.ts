@@ -10,7 +10,7 @@ export class TradeEnvoys extends Card implements IProjectCard {
     super({
       cost: 6,
       name: CardName.TRADE_ENVOYS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       behavior: {
         colonies: {tradeOffset: 1},

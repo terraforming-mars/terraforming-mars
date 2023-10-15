@@ -3,8 +3,11 @@
         <h2 v-i18n>Cards to exclude from the game</h2>
         <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
             <div class="cards-filter-result" v-for="cardName in selectedCardNames" v-bind:key="cardName">
-                <label>{{ cardName }}<i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i></label>
-                <Button size="small" type="close" @click="removeCard(cardName)" />
+                <label>{{ cardName }}
+                  <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i>
+                  <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is CEO" v-if="isCEO(cardName)"></i>
+                </label>
+                <AppButton size="small" type="close" @click="removeCard(cardName)" />
             </div>
         </div>
         <div class="cards-filter-input">
@@ -16,6 +19,7 @@
                     <a href="#" v-on:click.prevent="addCard(cardName)">
                       {{ cardName }}
                       <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i>
+                      <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is CEO" v-if="isCEO(cardName)"></i>
                     </a>
                 </div>
             </div>
@@ -26,7 +30,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {CardName} from '@/common/cards/CardName';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
 
@@ -35,6 +39,7 @@ const allItems: Array<CardName> = [
   ...getCards(byType(CardType.ACTIVE)),
   ...getCards(byType(CardType.EVENT)),
   ...getCards(byType(CardType.PRELUDE)),
+  ...getCards(byType(CardType.CEO)),
 ].map(toName)
   .sort((a, b) => a.localeCompare(b));
 
@@ -54,10 +59,15 @@ export default Vue.extend({
       searchTerm: '',
     };
   },
-  components: {Button},
+  components: {
+    AppButton,
+  },
   methods: {
     isPrelude(cardName: CardName) {
-      return getCard(cardName)?.cardType === CardType.PRELUDE;
+      return getCard(cardName)?.type === CardType.PRELUDE;
+    },
+    isCEO(cardName: CardName) {
+      return getCard(cardName)?.type === CardType.CEO;
     },
     removeCard(cardNameToRemove: CardName) {
       this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();

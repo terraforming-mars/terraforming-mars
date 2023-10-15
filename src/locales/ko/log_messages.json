@@ -107,16 +107,7 @@
     "All awards already funded": "모든 기업상이 이미 제정되었음",
     "Didn\u2019t even find player": "플레이어를 찾을 수 없음",
     "No player has played requested card": "요청한 카드를 플레이한 플레이어가 없음",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "${2} 배치를 위해 비용이 ${1} M€인 ${0} 카드를 뽑고 버림",
-
-
-
-
-
-
-
-
-
+    "Drew and discarded ${0} to place a ${1}": "${1} 배치를 위해 ${0} 카드를 뽑고 버림",
 
     "${0} played ${1}": "${0} 플레이어는 ${1} 카드를 추진",
     "${0} used ${1} action": "${0} 플레이어는 ${1} 행동 수행",
@@ -180,7 +171,6 @@
     "${0} doubled resources on ${1} from ${2} to ${3}": "${0} 플레이어는 ${1} 카드 위의 자원을 ${2}개에서 ${3}개로 두 배 증가시킴",
     "${0} linked ${1} with ${2}": "${0} 플레이어는 ${1} 카드를 ${2} 카드에 연결",
 
-    "${0} used Turmoil Scientists action": "${0} 플레이어는 과학당 행동을 수행",
-    "${0} used Turmoil Kelvinists action": "${0} 플레이어는 켈빈당 행동을 수행",
+    "${0} used Turmoil ${1} action": "${0} 플레이어는 ${1}당 행동을 수행",
     "${0} increased heat and energy production 1 step": "${0} 플레이어는 에너지 생산력과 열 생산력이 1만큼씩 상승"
 }

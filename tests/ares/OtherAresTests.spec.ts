@@ -1,24 +1,20 @@
 import {expect} from 'chai';
 import {DesertSettler} from '../../src/server/awards/DesertSettler';
-import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
+import {IGame} from '../../src/server/IGame';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
-import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
 import {addOcean} from '../TestingUtils';
+import {testGame} from '../TestGame';
 
 describe('OtherAresTests', function() {
   let player: TestPlayer;
-  let otherPlayer: Player;
-  let game: Game;
+  let game: IGame;
 
   it('Desert settler counts upgraded oceans', function() {
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
 
     const oceanSpace = game.board.getAvailableSpacesForOcean(player).filter((s) => s.y >= 5)[0];
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
     for (let n = 0; n < 8; n++) {
       addOcean(player);
     }

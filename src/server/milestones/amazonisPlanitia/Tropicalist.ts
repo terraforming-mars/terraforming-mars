@@ -1,21 +1,21 @@
-import {Player} from '../../Player';
-import {isHazardTileType} from '../../../common/TileType';
-import {IMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
+import {isHazardTileType} from '../../../common/AresTileType';
+import {BaseMilestone} from '../IMilestone';
 
-export class Tropicalist implements IMilestone {
-  public readonly name = 'Tropicalist';
-  public readonly description = 'Have 3 tiles in the middle 3 equatorial rows';
+export class Tropicalist extends BaseMilestone {
+  constructor() {
+    super(
+      'Tropicalist',
+      'Own 3 tiles in the middle 3 equatorial rows',
+      3);
+  }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.game.board.spaces
       .filter((space) => space.player !== undefined &&
           space.player === player &&
           space.tile !== undefined &&
           isHazardTileType(space.tile.tileType) === false &&
           space.y >= 3 && space.y <= 5).length;
-  }
-
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 3;
   }
 }

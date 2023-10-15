@@ -21,7 +21,7 @@ export class NuclearZone extends Card implements IProjectCard {
       description: 'Place this tile and raise temperature 2 steps.',
     }) {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name,
       tags: [Tag.EARTH],
       cost,

@@ -1,15 +1,15 @@
-import {Player} from '../../Player';
-import {IMilestone} from '../IMilestone';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
 
-export class Firestarter implements IMilestone {
-  public readonly name = 'Firestarter';
-  public readonly description = 'Have 20 heat';
-
-  public getScore(player: Player): number {
-    return player.heat;
+export class Firestarter extends BaseMilestone {
+  constructor() {
+    super(
+      'Firestarter',
+      'Have 20 heat',
+      20);
   }
 
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 20;
+  public getScore(player: IPlayer): number {
+    return player.heat;
   }
 }

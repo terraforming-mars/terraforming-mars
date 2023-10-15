@@ -3,7 +3,7 @@ import {PlayerId} from '../../common/Types';
 
 export interface SerializedMoonData {
   moon: SerializedBoard;
-  colonyRate: number;
+  habitatRate: number;
   miningRate: number;
   logisticRate: number;
   lunaFirstPlayerId: PlayerId | undefined;

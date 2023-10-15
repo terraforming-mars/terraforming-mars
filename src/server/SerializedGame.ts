@@ -6,29 +6,30 @@ import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
-import {PlayerId, GameId, SpectatorId} from '../common/Types';
-import {GameOptions} from './GameOptions';
+import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
+import {GameOptions} from './game/GameOptions';
 import {AresData} from '../common/ares/AresData';
 import {LogMessage} from '../common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
 import {SerializedDeck} from './cards/SerializedDeck';
+import {UnderworldData} from './underworld/UnderworldData';
+import {AwardName} from '../common/ma/AwardName';
+import {GlobalParameter} from '../common/GlobalParameter';
 
 export type SerializedGame = {
     activePlayer: PlayerId;
     aresData?: AresData;
-    awards: Array<string>;
+    awards: Array<AwardName>;
+    beholdTheEmperor?: boolean;
     board: SerializedBoard;
-    // TODO(dl): Remove conditional on ceoDeck after 2023-03-20
-    ceoDeck?: SerializedDeck;
+    ceoDeck: SerializedDeck;
     currentSeed: number;
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
-    corporationsDraftDirection: 'before' | 'after';
     corporationDeck: SerializedDeck,
-    corporationsToDraft: Array<CardName>;
     createdTimeMs: number;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
@@ -36,15 +37,18 @@ export type SerializedGame = {
     draftRound: number;
     first: SerializedPlayer | PlayerId;
     fundedAwards: Array<SerializedFundedAward>;
+    gagarinBase: Array<SpaceId>;
     gameAge: number;
     gameLog: Array<LogMessage>;
     gameOptions: GameOptions;
     generation: number;
+    globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>>;
     id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;
     milestones: Array<string>;
     moonData: SerializedMoonData | undefined;
+    nomadSpace: SpaceId | undefined;
     pathfindersData: SerializedPathfindersData | undefined;
     oxygenLevel: number;
     passedPlayers: Array<PlayerId>;
@@ -56,10 +60,13 @@ export type SerializedGame = {
     seed: number;
     someoneHasRemovedOtherPlayersPlants: boolean;
     spectatorId: SpectatorId | undefined;
+    stJosephCathedrals: Array<SpaceId>;
     syndicatePirateRaider: PlayerId | undefined;
     temperature: number;
+    tradeEmbargo?: boolean;
     turmoil?: SerializedTurmoil;
     undoCount: number;
+    underworldData?: UnderworldData;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
 }

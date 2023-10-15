@@ -9,7 +9,7 @@ import {all, played} from '../Options';
 export class TollStation extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.TOLL_STATION,
       tags: [Tag.SPACE],
       cost: 12,

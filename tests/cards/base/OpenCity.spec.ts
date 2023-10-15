@@ -2,9 +2,10 @@ import {expect} from 'chai';
 import {OpenCity} from '../../../src/server/cards/base/OpenCity';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('OpenCity', function() {
   let card: OpenCity;
@@ -13,9 +14,7 @@ describe('OpenCity', function() {
 
   beforeEach(function() {
     card = new OpenCity();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play without energy production', function() {
@@ -23,27 +22,27 @@ describe('OpenCity', function() {
   });
 
   it('Can not play if oxygen level too low', function() {
-    player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 11;
+    player.production.add(Resource.ENERGY, 1);
+    setOxygenLevel(game, 11);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
-    (game as any).oxygenLevel = 12;
+    player.production.add(Resource.ENERGY, 1);
+    setOxygenLevel(game, 12);
     expect(card.canPlay(player)).is.true;
 
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.availableSpaces[0]);
-    expect(game.getCitiesOnMarsCount()).to.eq(1);
+    action.cb(action.spaces[0]);
+    expect(game.board.getCitiesOnMars()).has.length(1);
 
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(4);
     expect(player.plants).to.eq(2);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {Productivity} from '../../src/server/turmoil/globalEvents/Productivity';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -21,8 +21,8 @@ describe('Productivity', function() {
     turmoil.dominantParty.delegates.add(player2.id);
     turmoil.dominantParty.delegates.add(player2.id);
 
-    player.production.add(Resources.STEEL, 3);
-    player2.production.add(Resources.STEEL, 3);
+    player.production.add(Resource.STEEL, 3);
+    player2.production.add(Resource.STEEL, 3);
 
     card.resolve(game, turmoil);
     expect(player.steel).to.eq(3);

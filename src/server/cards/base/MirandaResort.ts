@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class MirandaResort extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MIRANDA_RESORT,
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 12,

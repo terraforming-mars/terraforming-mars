@@ -1,9 +1,12 @@
-import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
-import {Game} from '../../src/server/Game';
-import {LocalFilesystem} from '../../src/server/database/LocalFilesystem';
 const path = require('path');
 const fs = require('fs');
 import {tmpdir} from 'os';
+
+import {describeDatabaseSuite} from '../database/databaseSuite';
+import {ITestDatabase, Status} from '../database/ITestDatabase';
+import {IGame} from '../../src/server/IGame';
+import {LocalFilesystem} from '../../src/server/database/LocalFilesystem';
+import {GameId} from '../../src/common/Types';
 
 /*
  * This test can be run with `npm run test:integration` as long as the test is set up
@@ -19,7 +22,7 @@ class TestLocalFilesystem extends LocalFilesystem implements ITestDatabase {
   }
 
   // Tests can wait for saveGamePromise since save() is called inside other methods.
-  public override async saveGame(game: Game): Promise<void> {
+  public override async saveGame(game: IGame): Promise<void> {
     this.lastSaveGamePromise = super.saveGame(game);
     this.promises.push(this.lastSaveGamePromise);
     return this.lastSaveGamePromise;
@@ -35,13 +38,25 @@ class TestLocalFilesystem extends LocalFilesystem implements ITestDatabase {
     response['history_path'] = 'def';
     return response;
   }
+
+  public status(_gameId: GameId): Promise<Status> {
+    throw new Error('Not yet implemented');
+  }
+
+  async completedTime(_gameId: GameId): Promise<number | undefined> {
+    throw new Error('Not yet implemented');
+  }
+
+  async setCompletedTime(_gameId: GameId, _timestampSeconds: number): Promise<void> {
+    throw new Error('Not yet implemented');
+  }
 }
 
 describeDatabaseSuite({
   name: 'LocalFilesystem',
   constructor: () => new TestLocalFilesystem(),
   omit: {
-    cleanGame: true,
+    markFinished: true,
     purgeUnfinishedGames: true,
   },
   stats: {

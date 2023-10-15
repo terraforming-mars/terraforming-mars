@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class Chimera extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.CHIMERA,
       tags: [Tag.WILD, Tag.WILD],
       startingMegaCredits: 36,

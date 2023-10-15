@@ -12,6 +12,7 @@ dist/
 *.swp
 .nyc_output/
 .vscode/
+.idea/
 pid
 *.log
 .eslintcache

@@ -83,7 +83,7 @@
     "${0} removed ${1} ${2} from ${3} to ${4}":"${0} 移除 ${1} ${2} 从 ${3} 来 ${4}",
     "${0} revealed and discarded ${1}":"${0} 展示并丢弃了 ${1}",
     "${0} is using their ${1} effect to draw a card by discarding a card.":"${0} 正在使用其 ${1} 效果来摸牌",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}":"摸取并弃置 ${0} (费用 ${1}) 来放置 ${2}",
+    "Drew and discarded ${0} to place a ${1}":"摸取并弃置 ${0} 来放置 ${1}",
     "${0} increased ${1} colony track ${2} step(s)": "${0} 提升 ${1} 殖民地贸易收入 ${2} 点",
     "${0} kept ${1} project cards": "${0} 保留了 ${1} 张牌",
     "${0} removed ${1} floaters to gain ${2} titanium": "${0} 移除了 ${1} 个云资源并获得 ${2} 个钛",

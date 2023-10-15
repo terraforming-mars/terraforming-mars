@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class MicroMills extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MICRO_MILLS,
       cost: 3,
 

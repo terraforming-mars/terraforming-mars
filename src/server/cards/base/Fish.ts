@@ -1,32 +1,32 @@
-import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
+import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Fish extends Card implements IActionCard, IProjectCard {
+export class Fish extends ActionCard implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.FISH,
       tags: [Tag.ANIMAL],
       cost: 9,
 
       behavior: {
-        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+        decreaseAnyProduction: {type: Resource.PLANTS, count: 1},
+      },
+
+      action: {
+        addResources: 1,
       },
 
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 1),
-      requirements: CardRequirements.builder((b) => b.temperature(2)),
+      victoryPoints: {resourcesHere: {}},
+      requirements: {temperature: 2},
 
       metadata: {
         cardNumber: '052',
@@ -43,13 +43,5 @@ export class Fish extends Card implements IActionCard, IProjectCard {
         },
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
   }
 }

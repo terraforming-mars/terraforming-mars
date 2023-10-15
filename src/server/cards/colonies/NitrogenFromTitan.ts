@@ -12,7 +12,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
       cost: 25,
       tags: [Tag.JOVIAN, Tag.SPACE],
       name: CardName.NITROGEN_FROM_TITAN,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       victoryPoints: 1,
 
       behavior: {

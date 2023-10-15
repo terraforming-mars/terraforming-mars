@@ -1,26 +1,28 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
+import {ActionCard} from '../ActionCard';
 
-export class StratosphericBirds extends Card implements IActionCard {
+export class StratosphericBirds extends ActionCard implements IActionCard {
   constructor() {
     super({
       name: CardName.STRATOSPHERIC_BIRDS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.VENUS, Tag.ANIMAL],
       cost: 12,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 1),
+      victoryPoints: {resourcesHere: {}},
+      requirements: {venus: 12},
 
-      requirements: CardRequirements.builder((b) => b.venus(12)),
+      action: {
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: '249',
         renderData: CardRenderer.builder((b) => {
@@ -37,7 +39,7 @@ export class StratosphericBirds extends Card implements IActionCard {
       },
     });
   }
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     const cardsWithFloater = player.getCardsWithResources(CardResource.FLOATER);
     if (cardsWithFloater.length === 0) return false;
 
@@ -51,15 +53,8 @@ export class StratosphericBirds extends Card implements IActionCard {
       return canPayForFloater;
     }
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, true));
-    return undefined;
-  }
-  public canAct(): boolean {
-    return true;
-  }
-  public action(player: Player) {
-    player.addResourceTo(this);
     return undefined;
   }
 }

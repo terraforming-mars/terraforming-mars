@@ -1,40 +1,44 @@
 import {expect} from 'chai';
 import {Penguins} from '../../../src/server/cards/promo/Penguins';
 import {Game} from '../../../src/server/Game';
-import {maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Penguins', function() {
   let card: Penguins;
   let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Penguins();
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Cannot play', function() {
     maxOutOceans(player, 7);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, 8);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Should act', function() {
     player.playedCards.push(card);
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
     card.action(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 
   it('Should give victory points', function() {
     player.playedCards.push(card);
     card.action(player);
+    runAllActions(game);
     card.action(player);
-    expect(card.getVictoryPoints()).to.eq(2);
+    runAllActions(game);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

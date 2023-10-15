@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Psyche extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.PSYCHE,
       tags: [Tag.SPACE],
       cost: 31,

@@ -11,7 +11,7 @@ export class MiningColony extends Card implements IProjectCard {
       cost: 20,
       tags: [Tag.SPACE],
       name: CardName.MINING_COLONY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         production: {titanium: 1},

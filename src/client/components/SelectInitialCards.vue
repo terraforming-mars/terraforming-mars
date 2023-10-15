@@ -24,7 +24,7 @@
       <label class="label label-error">{{ $t(warning) }}</label>
     </div>
     <!-- :key=warning is a way of validing that the state of the button should change. If the warning changes, or disappears, that's a signal that the button might change. -->
-    <Button :disabled="!valid" v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel"/>
+    <AppButton :disabled="!valid" v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel"/>
   </div>
 </template>
 
@@ -33,11 +33,11 @@
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {getCard, getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/common/constants';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PlayerInputModel, SelectCardModel, SelectInitialCardsModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
@@ -54,7 +54,7 @@ type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
 }
 
-type SelectInitialCardsModel = {
+type DataModel = {
   selectedCards: Array<CardName>,
   // End result will be a single CEO, but the player may select multiple while deciding what to keep.
   selectedCeos: Array<CardName>,
@@ -72,7 +72,7 @@ export default (Vue as WithRefs<Refs>).extend({
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectInitialCardsModel,
     },
     onsave: {
       type: Function as unknown as () => (out: AndOptionsResponse) => void,
@@ -89,12 +89,12 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   components: {
-    Button,
+    AppButton,
     SelectCard,
     'confirm-dialog': ConfirmDialog,
     Colony,
   },
-  data(): SelectInitialCardsModel {
+  data(): DataModel {
     return {
       selectedCards: [],
       selectedCeos: [],
@@ -182,6 +182,10 @@ export default (Vue as WithRefs<Refs>).extend({
             break;
           }
           break;
+          // Gain 2 MC for each project card in hand.
+        case CardName.HEAD_START:
+          result += this.selectedCards.length * 2;
+          break;
         }
       }
       return result;
@@ -200,7 +204,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return starting;
     },
     saveIfConfirmed() {
-      const projectCards = this.selectedCards.filter((name) => getCard(name)?.cardType !== CardType.PRELUDE);
+      const projectCards = this.selectedCards.filter((name) => getCard(name)?.type !== CardType.PRELUDE);
       let showAlert = false;
       if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
       if (showAlert) {
@@ -210,6 +214,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     saveData() {
+      // SelectInitialCards should have its own response type.
       const result: AndOptionsResponse = {
         type: 'and',
         responses: [],
@@ -325,21 +330,21 @@ export default (Vue as WithRefs<Refs>).extend({
       const option = getOption(this.playerinput.options, titles.SELECT_CORPORATION_TITLE);
       if (getPreferences().experimental_ui) {
         option.min = 1;
-        option.max = undefined;
+        option.max = option.cards.length;
       }
       return option;
     },
     preludeCardOption() {
       const option = getOption(this.playerinput.options, titles.SELECT_PRELUDE_TITLE);
       if (getPreferences().experimental_ui) {
-        option.max = undefined;
+        option.max = option.cards.length;
       }
       return option;
     },
     ceoCardOption() {
       const option = getOption(this.playerinput.options, titles.SELECT_CEO_TITLE);
       if (getPreferences().experimental_ui) {
-        option.max = undefined;
+        option.max = option.cards.length;
       }
       return option;
     },
@@ -352,16 +357,19 @@ export default (Vue as WithRefs<Refs>).extend({
   },
 });
 
-function getOption(options: Array<PlayerInputModel> | undefined, title: string): PlayerInputModel {
-  const option = options?.find((option) => option.title === title);
+function getOption(options: Array<PlayerInputModel>, title: string): SelectCardModel {
+  const option = options.find((option) => option.title === title);
   if (option === undefined) {
     throw new Error('invalid input, missing option');
+  }
+  if (option.type !== 'card') {
+    throw new Error('invalid input, Not a SelectCard option');
   }
   return option;
 }
 
-function hasOption(options: Array<PlayerInputModel> | undefined, title: string): boolean {
-  const option = options?.find((option) => option.title === title);
+function hasOption(options: Array<PlayerInputModel>, title: string): boolean {
+  const option = options.find((option) => option.title === title);
   return option !== undefined;
 }
 </script>

@@ -1,32 +1,29 @@
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 
 export class OceanSanctuary extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.OCEAN_SANCTUARY,
       tags: [Tag.ANIMAL],
       cost: 9,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 1),
-      requirements: CardRequirements.builder((b) => b.oceans(5)),
+      victoryPoints: {resourcesHere: {}},
+      requirements: {oceans: 5},
 
       behavior: {
         addResources: 1,
         tile: {
           type: TileType.OCEAN_SANCTUARY,
           on: 'upgradeable-ocean',
-          title: 'Select space for Ocean Sanctuary',
           adjacencyBonus: {bonus: [SpaceBonus.ANIMAL]},
         },
       },

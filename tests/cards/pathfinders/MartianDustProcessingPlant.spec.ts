@@ -1,19 +1,16 @@
 import {expect} from 'chai';
 import {MartianDustProcessingPlant} from '../../../src/server/cards/pathfinders/MartianDustProcessingPlant';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 
 describe('MartianDustProcessingPlant', function() {
   let card: MartianDustProcessingPlant;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new MartianDustProcessingPlant();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('canPlay', function() {

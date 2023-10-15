@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {ShiftAresGlobalParameters} from '../../src/server/inputs/ShiftAresGlobalParameters';
 import {TestPlayer} from '../TestPlayer';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
@@ -17,9 +17,8 @@ describe('ShiftAresGlobalParameters', () => {
   }
 
   beforeEach(() => {
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
-    shiftAresGlobalParameters = new ShiftAresGlobalParameters(player, cb);
+    [/* skipped */, player] = testGame(1);
+    shiftAresGlobalParameters = new ShiftAresGlobalParameters().andThen(cb);
   });
 
   it('fail, no fields', () => {

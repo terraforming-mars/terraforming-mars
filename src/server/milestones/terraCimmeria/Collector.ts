@@ -1,20 +1,20 @@
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {IMilestone} from '../IMilestone';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
 
-export class Collector implements IMilestone {
-  public readonly name = 'Collector';
-  public readonly description = 'Have 3 sets of automated, active and event cards';
+export class Collector extends BaseMilestone {
+  constructor() {
+    super(
+      'Collector',
+      'Have 3 sets of automated (green), active (blue) and event (red) project cards in play',
+      3);
+  }
 
-  public getScore(player: Player): number {
-    const numAutomatedCards = player.playedCards.filter((card) => card.cardType === CardType.AUTOMATED).length;
-    const numActiveCards = player.playedCards.filter((card) => card.cardType === CardType.ACTIVE).length;
+  public getScore(player: IPlayer): number {
+    const numAutomatedCards = player.playedCards.filter((card) => card.type === CardType.AUTOMATED).length;
+    const numActiveCards = player.playedCards.filter((card) => card.type === CardType.ACTIVE).length;
     const numEventCards = player.getPlayedEventsCount();
 
     return Math.min(numAutomatedCards, numActiveCards, numEventCards);
-  }
-
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 3;
   }
 }

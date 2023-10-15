@@ -1,10 +1,12 @@
 import {expect} from 'chai';
+import {setTemperature} from '../TestingUtils';
 import {MAX_TEMPERATURE} from '../../src/common/constants';
 import {Game} from '../../src/server/Game';
 import {SnowCover} from '../../src/server/turmoil/globalEvents/SnowCover';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestGame';
 
 describe('SnowCover', function() {
   let card: SnowCover;
@@ -15,9 +17,7 @@ describe('SnowCover', function() {
 
   beforeEach(function() {
     card = new SnowCover();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
 
     turmoil = Turmoil.newInstance(game);
     turmoil.chairman = player2.id;
@@ -46,7 +46,7 @@ describe('SnowCover', function() {
   });
 
   it('cannot reduce temperature if maxed out', function() {
-    (game as any).temperature = MAX_TEMPERATURE;
+    setTemperature(game, MAX_TEMPERATURE);
     card.resolve(game, turmoil);
     expect(game.getTemperature()).to.eq(MAX_TEMPERATURE);
   });

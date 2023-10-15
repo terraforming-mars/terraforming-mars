@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class StripMine extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.STRIP_MINE,
       tags: [Tag.BUILDING],
       cost: 25,

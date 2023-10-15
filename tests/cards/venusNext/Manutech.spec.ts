@@ -3,6 +3,7 @@ import {PowerPlantStandardProject} from '../../../src/server/cards/base/standard
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Manutech', function() {
   let card: Manutech;
@@ -11,9 +12,7 @@ describe('Manutech', function() {
 
   beforeEach(function() {
     card = new Manutech();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
     player.setCorporationForTest(card);
   });
 

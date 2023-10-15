@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MindSetMars} from '../../../src/server/cards/pathfinders/MindSetMars';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -20,9 +20,7 @@ describe('MindSetMars', function() {
 
   beforeEach(function() {
     card = new MindSetMars();
-    game = newTestGame(2, {turmoilExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(3, {turmoilExtension: true});
     player.setCorporationForTest(card);
     turmoil = game.turmoil!;
   });
@@ -61,11 +59,11 @@ describe('MindSetMars', function() {
 
     turmoil.delegateReserve.clear();
     card.action(player);
-    expect(game.deferredActions.length).eq(0);
+    expect(game.deferredActions).is;
 
     turmoil.delegateReserve.clear();
     turmoil.delegateReserve.add(player.id, 3);
-    cast(card.action(player), SelectOption).cb();
+    cast(card.action(player), SelectOption).cb(undefined);
     expect(game.deferredActions.length).eq(1);
     assertSendDelegateToArea(player, game.deferredActions.pop()!);
     expect(card.resourceCount).eq(1);
@@ -75,7 +73,7 @@ describe('MindSetMars', function() {
     card.resourceCount = 7;
 
     turmoil.delegateReserve.clear();
-    cast(card.action(player), SelectOption).cb();
+    cast(card.action(player), SelectOption).cb(undefined);
     expect(game.deferredActions.length).eq(1);
     assertPlaceCityTile(player, game.deferredActions.pop()!);
     expect(card.resourceCount).eq(2);

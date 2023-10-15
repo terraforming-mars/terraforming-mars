@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -11,7 +11,7 @@ export class IoSulphurResearch extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.IO_SULPHUR_RESEARCH,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.SCIENCE, Tag.JOVIAN],
       cost: 17,
 
@@ -29,7 +29,7 @@ export class IoSulphurResearch extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.drawCard(player.tags.count(Tag.VENUS) >= 3 ? 3 : 1);
     return undefined;
   }

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Aurorai} from '../../../src/server/cards/pathfinders/Aurorai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
@@ -16,8 +16,7 @@ describe('Aurorai', function() {
 
   beforeEach(function() {
     card = new Aurorai();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [game, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 
@@ -27,7 +26,7 @@ describe('Aurorai', function() {
     runAllActions(game);
     expect(card.resourceCount).eq(1);
 
-    player.increaseTerraformRatingSteps(3);
+    player.increaseTerraformRating(3);
     runAllActions(game);
     expect(card.resourceCount).eq(4);
   });
@@ -62,14 +61,14 @@ describe('Aurorai', function() {
     runAllActions(game);
 
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
-    expect(selectPayment.canUseData).is.true;
+    expect(selectPayment.paymentOptions.auroraiData).is.true;
 
     expect(game.getTemperature()).eq(-30);
     expect(() =>
-      selectPayment.cb({...Payment.EMPTY, megaCredits: 4, data: 2}),
+      selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 4, auroraiData: 2}}, player),
     ).to.throw(/Did not spend enough/);
 
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 8, data: 2});
+    selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 8, auroraiData: 2}}, player),
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);
     expect(player.getSpendableData()).eq(1);

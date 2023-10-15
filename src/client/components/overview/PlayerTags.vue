@@ -1,34 +1,33 @@
 <template>
-        <div class="player-tags">
-            <div class="player-tags-main">
-                <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
-                <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
-                  <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
-                </div>
-                <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
-                <div class="tag-and-discount">
-                  <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
-                  <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
-                </div>
+    <div class="player-tags">
+        <div class="player-tags-main">
+            <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
+            <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
+              <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
             </div>
-            <div class="player-tags-secondary">
-              <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
-                <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
-                  <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
-                  <PointsPerTag v-if="getVPs(tagDetail) !== ''" :amount="getVPs(tagDetail)" :data-test="'vps-' + tagDetail.name" />
-                  <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
-                </div>
-                <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
-              </div>
+            <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
+            <div class="tag-and-discount">
+              <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
+              <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
             </div>
         </div>
+        <div class="player-tags-secondary">
+          <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
+            <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
+              <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
+              <PointsPerTag :points="tagDetail"/>
+              <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
+            </div>
+            <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
+          </div>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
 import TagCount from '@/client/components/TagCount.vue';
-import {ITagCount} from '@/common/cards/ITagCount';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {GameModel} from '@/common/models/GameModel';
 import {Tag} from '@/common/cards/Tag';
@@ -38,12 +37,14 @@ import PointsPerTag from '@/client/components/overview/PointsPerTag.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {vueRoot} from '@/client/components/vueRoot';
+import {CardName} from '@/common/cards/CardName';
 
 type InterfaceTagsType = Tag | SpecialTags | 'all' | 'separator';
 type TagDetail = {
   name: InterfaceTagsType;
   discount: number;
   points: number;
+  halfPoints: number;
   count: number;
 };
 
@@ -93,7 +94,7 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
     return player.noTagsCount || 0;
   }
 
-  return player.tags.find((tag: ITagCount) => tag.tag === tagName)?.count ?? 0;
+  return player.tags.find((tag) => tag.tag === tagName)?.count ?? 0;
 };
 
 export default Vue.extend({
@@ -123,11 +124,11 @@ export default Vue.extend({
 
     // Start by giving every entry a default value
     // Ideally, remove 'x' and inline it into Object.fromEntries, but Typescript doesn't like it.
-    const x = ORDER.map((key) => [key, {name: key, discount: 0, points: 0, count: getTagCount(key, this.player)}]);
+    const x = ORDER.map((key) => [key, {name: key, discount: 0, points: 0, count: getTagCount(key, this.player), halfPoints: 0}]);
     const details: TagDetails = Object.fromEntries(x);
 
     // Initialize all's card discount.
-    details['all'] = {name: 'all', discount: this.player?.cardDiscount ?? 0, points: 0, count: 0};
+    details['all'] = {name: 'all', discount: this.player?.cardDiscount ?? 0, points: 0, count: 0, halfPoints: 0};
 
     // For each card
     for (const card of this.player.tableau) {
@@ -137,9 +138,15 @@ export default Vue.extend({
         details[tag].discount += discount.amount;
       }
 
-      const vps = getCard(card.name)?.victoryPoints;
-      if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.type !== 'resource') {
-        details[vps.type].points += (vps.points / vps.per);
+      // Special case Cultivation of Venus & Venera Base.
+      // See https://github.com/terraforming-mars/terraforming-mars/issues/5236
+      if (card.name === CardName.CULTIVATION_OF_VENUS || card.name === CardName.VENERA_BASE) {
+        details[Tag.VENUS].halfPoints ++;
+      } else {
+        const vps = getCard(card.name)?.victoryPoints;
+        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.tag !== undefined) {
+          details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
+        }
       }
     }
 
@@ -193,27 +200,14 @@ export default Vue.extend({
         if (!isInGame(entry.name, this.playerView.game)) {
           return false;
         }
-        if (entry.count === 0) {
+
+        if (entry.count === 0 && entry.discount === 0) {
           if (this.hideZeroTags || concise) {
             return false;
           }
         }
         return true;
       });
-    },
-  },
-
-  methods: {
-    getVPs(detail: TagDetail) {
-      const integer = Math.floor(detail.points);
-      const fraction = detail.points - integer;
-      let vulgarFraction = '';
-      if (fraction === 0.5) {
-        vulgarFraction = '½';
-      } else if (Math.abs(fraction - (1/3)) < Number.EPSILON) {
-        vulgarFraction = '⅓';
-      }
-      return `${integer || ''}${vulgarFraction}`;
     },
   },
 });

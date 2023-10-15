@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {DuskLaserMining} from '../../../src/server/cards/promo/DuskLaserMining';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {Resource} from '../../../src/common/Resource';
+import {testGame} from '../../TestGame';
 
 describe('DuskLaserMining', function() {
   let card: DuskLaserMining;
@@ -11,24 +11,23 @@ describe('DuskLaserMining', function() {
 
   beforeEach(function() {
     card = new DuskLaserMining();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not play if not enough science tags', function() {
-    player.production.add(Resources.ENERGY, 1);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    player.production.add(Resource.ENERGY, 1);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can not play if no energy production', function() {
     player.playedCards.push(new Research());
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new Research());
-    player.production.add(Resources.ENERGY, 1);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    player.production.add(Resource.ENERGY, 1);
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     expect(player.production.energy).to.eq(0);

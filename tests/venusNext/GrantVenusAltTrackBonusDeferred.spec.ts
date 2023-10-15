@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/server/venusNext/GrantVenusAltTrackBonusDeferred';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
@@ -8,13 +7,13 @@ import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Birds} from '../../src/server/cards/base/Birds';
+import {testGame} from '../TestGame';
 
 describe('GrantVenusAltTrackBonusDeferred', function() {
   let player: TestPlayer;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('grant single bonus', () => {
@@ -25,7 +24,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
     input.options[3].cb(0);
     input.options[4].cb(0);
     input.options[5].cb(1);
-    input.cb();
+    input.cb(undefined);
     expect(player.megaCredits).eq(0);
     expect(player.steel).eq(0);
     expect(player.titanium).eq(0);
@@ -43,11 +42,11 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
     input.options[0].cb(0);
     input.options[5].cb(3);
 
-    expect(() => input.cb()).to.throw('Select 2 resources.');
+    expect(() => input.cb(undefined)).to.throw('Select 2 resources.');
 
     player.heat = 0;
     input.options[5].cb(2);
-    input.cb();
+    input.cb(undefined);
     expect(player.heat).eq(2);
   });
 

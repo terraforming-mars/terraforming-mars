@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/server/cards/promo/Potatoes';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Potatoes', function() {
   let card: Potatoes;
@@ -10,8 +10,7 @@ describe('Potatoes', function() {
 
   beforeEach(function() {
     card = new Potatoes();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Can not play', function() {

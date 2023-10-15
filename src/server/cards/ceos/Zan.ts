@@ -1,10 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {Size} from '../../../common/cards/render/Size';
+import {Resource} from '../../../common/Resource';
 
 export class Zan extends CeoCard {
   constructor() {
@@ -14,24 +16,26 @@ export class Zan extends CeoCard {
         cardNumber: 'L26',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          // b.redsInactive().asterix();
-          b.text('(NoRedsNeg)').asterix();
+          b.redsInactive().asterix();
           b.br.br;
-          // b.opgArrow().text('ALL').delegates(1).colon().nbsp.nbsp.party(PartyName.REDS);
-          b.opgArrow().text('ALL').delegates(1).colon().text('REDS');
+          b.opgArrow().text('ALL', Size.SMALL).delegates(1).colon().reds().megacredits(1);
         }),
-        description: 'You are immune to Reds\' ruling policy. Once per game, place all of your available delegates in Reds.',
+        description: 'You are immune to Reds\' ruling policy. Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.',
       },
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
+    this.isDisabled = true;
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
+    const totalAvailableDelegates = turmoil.getAvailableDelegateCount(player.id);
     while (turmoil.getAvailableDelegateCount(player.id) > 0) {
       turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     }
-    this.isDisabled = true;
+    // If we dont do this player will not get the bonus for POLITICAN Awards
+    player.totalDelegatesPlaced += totalAvailableDelegates;
+    player.stock.add(Resource.MEGACREDITS, totalAvailableDelegates, {log: true});
     return undefined;
   }
 }

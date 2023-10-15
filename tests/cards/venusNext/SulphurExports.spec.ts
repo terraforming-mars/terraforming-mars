@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {SulphurExports} from '../../../src/server/cards/venusNext/SulphurExports';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('SulphurExports', function() {
   it('Should play', function() {
     const card = new SulphurExports();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(2);
 
     card.play(player);
     expect(player.production.megacredits).to.eq(1);

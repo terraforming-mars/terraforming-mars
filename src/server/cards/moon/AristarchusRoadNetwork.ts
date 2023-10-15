@@ -10,7 +10,7 @@ export class AristarchusRoadNetwork extends Card {
   constructor() {
     super({
       name: CardName.ARISTARCHUS_ROAD_NETWORK,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 15,
       reserveUnits: {steel: 2},

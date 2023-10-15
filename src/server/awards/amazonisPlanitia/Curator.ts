@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 
 export class Curator implements IAward {
   public readonly name = 'Curator';
-  public readonly description = 'Having the most played tags of any one type';
+  public readonly description = 'Have the most tags of any one type in play';
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     let max = 0;
     for (const tagString in Tag) {
       if (Object.prototype.hasOwnProperty.call(Tag, tagString)) {
@@ -16,7 +16,6 @@ export class Curator implements IAward {
         if (count > max) max = count;
       }
     }
-    // if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return max;
   }

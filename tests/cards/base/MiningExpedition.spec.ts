@@ -4,6 +4,7 @@ import {MiningExpedition} from '../../../src/server/cards/base/MiningExpedition'
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('MiningExpedition', function() {
   let card: MiningExpedition;
@@ -13,9 +14,7 @@ describe('MiningExpedition', function() {
 
   beforeEach(function() {
     card = new MiningExpedition();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Should play', function() {

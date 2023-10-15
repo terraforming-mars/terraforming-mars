@@ -14,7 +14,7 @@
                 </span>
             </div>
             <span @click="toggleDescription" :title="$t('press to show or hide the description')" data-test="toggle-description">
-              <div v-show="showMilestones">
+              <div v-show="showMilestoneDetails">
                   <Milestone
                     v-for="milestone in milestones"
                     :key="milestone.name"
@@ -31,10 +31,10 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {MILESTONE_COST, MAX_MILESTONES} from '@/common/constants';
+import {MAX_MILESTONES, MILESTONE_COST} from '@/common/constants';
 import Milestone from '@/client/components/Milestone.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
-import {getPreferences} from '@/client/utils/PreferencesManager';
+import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'Milestones',
@@ -46,10 +46,14 @@ export default Vue.extend({
       type: Boolean,
       default: true,
     },
+    preferences: {
+      type: Object as () => Readonly<Preferences>,
+      default: () => PreferencesManager.INSTANCE.values(),
+    },
   },
   data() {
     return {
-      showMilestones: this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : true,
+      showMilestoneDetails: (this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : this.preferences?.show_milestone_details),
       showDescription: false,
     };
   },
@@ -61,14 +65,15 @@ export default Vue.extend({
       this.showDescription = !this.showDescription;
     },
     toggleList() {
-      this.showMilestones = !this.showMilestones;
+      this.showMilestoneDetails = !this.showMilestoneDetails;
+      PreferencesManager.INSTANCE.set('show_milestone_details', this.showMilestoneDetails);
     },
     getAvailableMilestoneSpots(): Array<number> {
       const count = this.milestones.filter((milestone) => milestone.playerName).length;
       return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
     },
     isLearnerModeOn(): boolean {
-      return getPreferences().learner_mode;
+      return this.preferences.learner_mode;
     },
   },
 });

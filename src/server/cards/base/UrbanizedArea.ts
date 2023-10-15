@@ -2,8 +2,8 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class UrbanizedArea extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.URBANIZED_AREA,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 10,
@@ -33,17 +33,18 @@ export class UrbanizedArea extends Card implements IProjectCard {
       },
     });
   }
-  private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
-  public override bespokeCanPlay(player: Player): boolean {
-    return this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
-  public override bespokePlay(player: Player) {
-    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (space: ISpace) => {
-      player.game.addCityTile(player, space);
-      return undefined;
-    });
+  public override bespokePlay(player: IPlayer) {
+    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player))
+      .andThen((space) => {
+        player.game.addCity(player, space);
+        return undefined;
+      });
   }
 }

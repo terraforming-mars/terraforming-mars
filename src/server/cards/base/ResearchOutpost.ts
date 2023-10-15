@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class ResearchOutpost extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.RESEARCH_OUTPOST,
       tags: [Tag.SCIENCE, Tag.CITY, Tag.BUILDING],
       cost: 18,

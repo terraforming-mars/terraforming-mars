@@ -1,11 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 import {Board} from '../../boards/Board';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -13,11 +12,11 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 export class MartianMonuments extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.MARTIAN_MONUMENTS,
       cost: 10,
       tags: [Tag.MARS, Tag.BUILDING],
-      requirements: CardRequirements.builder((b) => b.cities(1, {text: 'ON MARS'})),
+      requirements: {cities: 1, text: 'ON MARS'},
 
       behavior: {
         production: {megacredits: {tag: Tag.MARS}},
@@ -34,7 +33,7 @@ export class MartianMonuments extends Card implements IProjectCard {
   }
 
   // Is this necessary?
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     return player.game.board.spaces.some((space) => {
       return Board.isCitySpace(space) && space.player?.id === player.id && space.spaceType !== SpaceType.COLONY;
     });

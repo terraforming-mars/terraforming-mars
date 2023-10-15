@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SubterraneanReservoir extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SUBTERRANEAN_RESERVOIR,
       cost: 11,
 

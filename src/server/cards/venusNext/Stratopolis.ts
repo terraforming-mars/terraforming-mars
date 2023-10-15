@@ -1,31 +1,35 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
-import {IActionCard, ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
-import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
+import {ActionCard} from '../ActionCard';
 
-export class Stratopolis extends Card implements IActionCard {
+export class Stratopolis extends ActionCard {
   constructor() {
     super({
       name: CardName.STRATOPOLIS,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       tags: [Tag.CITY, Tag.VENUS],
       cost: 22,
 
       resourceType: CardResource.FLOATER,
-      victoryPoints: VictoryPoints.resource(1, 3),
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      victoryPoints: {resourcesHere: {}, per: 3},
+      requirements: {tag: Tag.SCIENCE, count: 2},
 
       behavior: {
         production: {megacredits: 2},
         city: {space: SpaceName.STRATOPOLIS},
+      },
+
+      action: {
+        addResourcesToAnyCard: {
+          count: 2,
+          tag: Tag.VENUS,
+          type: CardResource.FLOATER,
+          autoSelect: true,
+        },
       },
 
       metadata: {
@@ -43,33 +47,5 @@ export class Stratopolis extends Card implements IActionCard {
         },
       },
     });
-  }
-
-  public getResCards(player: Player): ICard[] {
-    const resourceCards = player.getResourceCards(CardResource.FLOATER);
-    return resourceCards.filter((card) => card.tags.some((cardTag) => cardTag === Tag.VENUS));
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    const cards = this.getResCards(player);
-
-    if (cards.length === 1) {
-      player.addResourceTo(cards[0], {qty: 2, log: true});
-      return undefined;
-    }
-
-    return new SelectCard(
-      'Select card to add 2 floaters',
-      'Add floater(s)',
-      cards,
-      ([card]) => {
-        player.addResourceTo(card, {qty: 2, log: true});
-        return undefined;
-      },
-    );
   }
 }

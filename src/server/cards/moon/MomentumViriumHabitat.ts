@@ -11,7 +11,7 @@ export class MomentumViriumHabitat extends Card {
   constructor() {
     super({
       name: CardName.MOMENTUM_VIRUM_HABITAT,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.SPACE],
       cost: 23,
 

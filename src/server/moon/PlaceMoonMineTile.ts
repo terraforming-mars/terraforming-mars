@@ -1,33 +1,25 @@
-import {ISpace} from '../boards/ISpace';
-import {Player} from '../Player';
+import {Space} from '../boards/Space';
+import {IPlayer} from '../IPlayer';
 import {BasePlaceMoonTile} from './BasePlaceMoonTile';
-import {IMoonData} from './IMoonData';
+import {MoonData} from './MoonData';
 import {MoonExpansion} from './MoonExpansion';
 
 export class PlaceMoonMineTile extends BasePlaceMoonTile {
-  private cb: (space: ISpace) => void = () => {};
-
   constructor(
-    player: Player,
-    spaces?: Array<ISpace>,
+    player: IPlayer,
+    spaces?: Array<Space>,
     title: string = 'Select a space on The Moon for a mining tile.',
   ) {
     super(player, spaces, title);
   }
 
-  public andThen(cb: (space: ISpace) => void) {
-    this.cb = cb;
-    return this;
-  }
-
-  protected getSpaces(moonData: IMoonData) {
+  protected getSpaces(moonData: MoonData) {
     return moonData.moon.getAvailableSpacesForMine(this.player);
   }
 
-  public placeTile(space: ISpace) {
+  public placeTile(space: Space) {
     MoonExpansion.addMineTile(this.player, space.id);
     MoonExpansion.raiseMiningRate(this.player);
-    this.cb(space);
     return undefined;
   }
 }

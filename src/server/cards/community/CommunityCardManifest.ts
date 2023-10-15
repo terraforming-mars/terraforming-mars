@@ -16,6 +16,9 @@ import {CuriosityII} from './CuriosityII';
 import {ExecutiveOrder} from './ExecutiveOrder';
 import {UnitedNationsMissionOne} from './UnitedNationsMissionOne';
 import {JunkVentures} from './JunkVentures';
+import {SpecialDesignProxy} from './SpecialDesignProxy';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {LeadershipSummit} from '../../turmoil/globalEvents/LeadershipSummit';
 
 export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   module: 'community',
@@ -38,5 +41,11 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
     [CardName.POLITICAL_UPRISING]: {Factory: PoliticalUprising, compatibility: 'turmoil'},
     [CardName.BY_ELECTION]: {Factory: ByElection, compatibility: 'turmoil'},
     [CardName.EXECUTIVE_ORDER]: {Factory: ExecutiveOrder, compatibility: 'turmoil'},
+  },
+  projectCards: {
+    [CardName.SPECIAL_DESIGN_PROXY]: {Factory: SpecialDesignProxy, instantiate: false},
+  },
+  globalEvents: {
+    [GlobalEventName.LEADERSHIP_SUMMIT]: {Factory: LeadershipSummit},
   },
 });

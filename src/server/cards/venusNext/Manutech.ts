@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,7 +13,7 @@ export class Manutech extends Card implements ICorporationCard {
       name: CardName.MANUTECH,
       tags: [Tag.BUILDING],
       startingMegaCredits: 35,
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
 
       behavior: {
         production: {steel: 1},
@@ -35,9 +35,9 @@ export class Manutech extends Card implements ICorporationCard {
     });
   }
 
-  public static onProductionGain(player: Player, resource: Resources, amount: number) {
+  public static onProductionGain(player: IPlayer, resource: Resource, amount: number) {
     if (amount > 0) {
-      player.addResource(resource, amount);
+      player.stock.add(resource, amount);
     }
   }
 }

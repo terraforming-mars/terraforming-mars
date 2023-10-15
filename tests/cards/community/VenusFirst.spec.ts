@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {VenusFirst} from '../../../src/server/cards/community/VenusFirst';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusFirst', function() {
@@ -14,7 +13,7 @@ describe('VenusFirst', function() {
     card = new VenusFirst();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({venusNextExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {venusNextExtension: true});
   });
 
   it('Should play', function() {

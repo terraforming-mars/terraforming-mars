@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Predators} from '../../../src/server/cards/base/Predators';
 import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
@@ -24,9 +24,8 @@ describe('Aridor', function() {
   beforeEach(() => {
     card = new Aridor();
     // 2-player so as to not bother with pre-game action that drops a colony.
-    game = newTestGame(2, {coloniesExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {coloniesExtension: true});
+
     player.setCorporationForTest(card);
   });
 
@@ -52,7 +51,7 @@ describe('Aridor', function() {
   // A test that directly calls initialAction is also good, but this
   // is extra due to a bug #3882
   it('initialAction from input', () => {
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
 
     const colonyInPlay = game.colonies[0];
@@ -75,7 +74,7 @@ describe('Aridor', function() {
   it('initialAction - chooses Venus which cannot be activated', () => {
     const venus = new Venus();
     game.discardedColonies.push(venus);
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     const playerInput = cast(player.popWaitingFor(), SelectColony);
     expect(playerInput?.colonies).contains(venus);
@@ -90,7 +89,7 @@ describe('Aridor', function() {
     player2.setCorporationForTest(new Celestic());
     const venus = new Venus();
     game.discardedColonies.push(venus);
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     const playerInput = cast(player.popWaitingFor(), SelectColony);
     expect(playerInput?.colonies).contains(venus);

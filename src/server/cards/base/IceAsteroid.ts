@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class IceAsteroid extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.ICE_ASTEROID,
       tags: [Tag.SPACE],
       cost: 23,

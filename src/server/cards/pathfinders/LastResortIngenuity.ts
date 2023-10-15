@@ -8,7 +8,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class LastResortIngenuity extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.LAST_RESORT_INGENUITY,
       cost: 4,
 

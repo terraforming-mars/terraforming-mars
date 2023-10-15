@@ -11,7 +11,7 @@ export class ResearchColony extends Card implements IProjectCard {
       cost: 20,
       tags: [Tag.SPACE, Tag.SCIENCE],
       name: CardName.RESEARCH_COLONY,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
 
       behavior: {
         drawCard: 2,

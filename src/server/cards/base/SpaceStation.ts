@@ -9,7 +9,7 @@ import {played} from '../Options';
 export class SpaceStation extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SPACE_STATION,
       tags: [Tag.SPACE],
       cost: 10,

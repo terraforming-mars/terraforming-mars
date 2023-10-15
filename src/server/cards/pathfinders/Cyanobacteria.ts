@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 export class Cyanobacteria extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.CYANOBACTERIA,
       cost: 12,
       tags: [Tag.MICROBE, Tag.MARS],
@@ -31,7 +31,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const microbes = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
     player.game.defer(new AddResourcesToCards(player, CardResource.MICROBE, microbes));
     return undefined;

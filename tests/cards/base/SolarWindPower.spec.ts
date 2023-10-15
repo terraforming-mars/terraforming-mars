@@ -1,15 +1,14 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
+import {cast} from '../../TestingUtils';
 
 describe('SolarWindPower', function() {
   it('Should play', function() {
     const card = new SolarWindPower();
-    const game = newTestGame(1);
-    const player = getTestPlayer(game, 0);
+    const [/* skipped */, player] = testGame(1);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player.titanium).to.eq(2);
   });

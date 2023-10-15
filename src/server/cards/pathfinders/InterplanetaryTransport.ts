@@ -9,7 +9,7 @@ import {all} from '../Options';
 export class InterplanetaryTransport extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.INTERPLANETARY_TRANSPORT,
       cost: 15,
       tags: [Tag.EARTH, Tag.JOVIAN, Tag.SPACE],

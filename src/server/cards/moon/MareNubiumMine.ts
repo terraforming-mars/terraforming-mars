@@ -11,7 +11,7 @@ export class MareNubiumMine extends Card {
   constructor() {
     super({
       name: CardName.MARE_NUBIUM_MINE,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 17,
 

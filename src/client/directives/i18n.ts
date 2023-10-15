@@ -3,14 +3,48 @@ import {Message} from '@/common/logs/Message';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {Log} from '@/common/logs/Log';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {TileType} from '@/common/TileType';
+
+type Context = {
+  playerView: PlayerViewModel | undefined;
+  players: Map<string /* Color */, string>;
+}
+
+const context: Context = {
+  playerView: undefined,
+  players: new Map(),
+};
+
+export function setTranslationContext(game: PlayerViewModel) {
+  context.playerView = game;
+  context.players.clear();
+  for (const player of game.players) {
+    context.players.set(player.color, player.name);
+  }
+}
 
 export function translateMessage(message: Message): string {
   message.message = translateText(message.message);
   return Log.applyData(message, (datum) => {
-    if (datum !== undefined && datum.type === LogMessageDataType.RAW_STRING) {
-      return datum.value;
+    if (datum === undefined) {
+      return '';
     }
-    return '';
+    switch (datum.type) {
+    case LogMessageDataType.RAW_STRING:
+      return datum.value;
+    case LogMessageDataType.PLAYER:
+      return context.players.get(datum.value) ?? datum.value;
+    case LogMessageDataType.TILE_TYPE:
+      return TileType.toString(datum.value as unknown as TileType);
+    case LogMessageDataType.CARD:
+    case LogMessageDataType.GLOBAL_EVENT:
+    case LogMessageDataType.STRING:
+    case LogMessageDataType.PARTY:
+      return translateText(datum.value);
+    default:
+      return translateText(datum.value);
+    }
   });
 }
 
@@ -56,7 +90,7 @@ export function translateText(englishText: string): string {
       }
     }
     if (!translated.has(englishText)) {
-      console.log(`${lang} - please translate: ${englishText}`);
+      console.log(`${lang} - please translate: "${englishText}"`);
     }
   }
 

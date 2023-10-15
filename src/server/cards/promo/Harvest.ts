@@ -4,16 +4,15 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
 
 export class Harvest extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.HARVEST,
       tags: [Tag.PLANT],
       cost: 4,
-      requirements: CardRequirements.builder((b) => b.greeneries(3)),
+      requirements: {greeneries: 3},
 
       behavior: {
         stock: {megacredits: 12},

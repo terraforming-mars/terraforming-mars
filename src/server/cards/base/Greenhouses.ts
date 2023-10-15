@@ -10,7 +10,7 @@ import {all} from '../Options';
 export class Greenhouses extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.GREENHOUSES,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 6,

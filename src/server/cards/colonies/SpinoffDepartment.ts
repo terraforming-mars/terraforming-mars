@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -12,7 +12,7 @@ export class SpinoffDepartment extends Card implements IProjectCard {
       cost: 10,
       tags: [Tag.BUILDING],
       name: CardName.SPINOFF_DEPARTMENT,
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
 
       behavior: {
         production: {megacredits: 2},
@@ -31,7 +31,7 @@ export class SpinoffDepartment extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (card.cost >= 20) {
       player.drawCard();
     }

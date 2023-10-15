@@ -12,7 +12,7 @@ export class FloaterPrototypes extends Card implements IProjectCard {
       cost: 2,
       tags: [Tag.SCIENCE],
       name: CardName.FLOATER_PROTOTYPES,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
 
       behavior: {
         addResourcesToAnyCard: {type: CardResource.FLOATER, count: 2},

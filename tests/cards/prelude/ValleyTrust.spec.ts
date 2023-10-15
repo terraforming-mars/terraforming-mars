@@ -6,8 +6,8 @@ import {MedicalLab} from '../../../src/server/cards/base/MedicalLab';
 import {Research} from '../../../src/server/cards/base/Research';
 import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
 import {TestPlayer} from '../../TestPlayer';
-import {CardType} from '../../../src/common/cards/CardType';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
+import {IPreludeCard, isPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
 
 describe('ValleyTrust', function() {
   let card: ValleyTrust;
@@ -15,8 +15,7 @@ describe('ValleyTrust', function() {
 
   beforeEach(function() {
     card = new ValleyTrust();
-    const game = newTestGame(1, {preludeExtension: true});
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Does not get card discount for other tags', function() {
@@ -29,21 +28,21 @@ describe('ValleyTrust', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('initial action', () => {
-    const selectCard = cast(card.initialAction(player), SelectCard);
+    const selectCard = cast(card.initialAction(player), SelectCard<IPreludeCard>);
+
     expect(selectCard.cards).has.length(3);
-    expect(selectCard.cards.filter((c) => c.cardType === CardType.PRELUDE)).has.length(3);
+    expect(selectCard.cards.every((c) => isPreludeCard(c))).is.true;
   });
 
   it('Card works even without prelude expansion enabled', () => {
-    const game = newTestGame(1, {preludeExtension: false});
-    const player = getTestPlayer(game, 0);
-    const selectCard = cast(card.initialAction(player), SelectCard);
+    [/* skipped */, player] = testGame(1, {preludeExtension: false});
+    const selectCard = cast(card.initialAction(player), SelectCard<IPreludeCard>);
+
     expect(selectCard.cards).has.length(3);
-    expect(selectCard.cards.filter((c) => c.cardType === CardType.PRELUDE)).has.length(3);
+    expect(selectCard.cards.every((c) => isPreludeCard(c))).is.true;
   });
 });

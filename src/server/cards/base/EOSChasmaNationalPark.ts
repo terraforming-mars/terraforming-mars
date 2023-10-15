@@ -4,13 +4,12 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class EosChasmaNationalPark extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.EOS_CHASMA_NATIONAL_PARK,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 16,
@@ -22,7 +21,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
         addResourcesToAnyCard: {count: 1, type: CardResource.ANIMAL},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-12)),
+      requirements: {temperature: -12},
       metadata: {
         cardNumber: '026',
         description: 'Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.',

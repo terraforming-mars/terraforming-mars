@@ -1,9 +1,9 @@
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
-import {Resources} from '../../../../common/Resources';
+import {Resource} from '../../../../common/Resource';
 
 export class CityStandardProject extends StandardProjectCard {
   constructor() {
@@ -23,14 +23,14 @@ export class CityStandardProject extends StandardProjectCard {
     });
   }
 
-  protected override discount(player: Player): number {
+  protected override discount(player: IPlayer): number {
     if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return 2 + super.discount(player);
     }
     return super.discount(player);
   }
 
-  public override canPayWith(player: Player) {
+  public override canPayWith(player: IPlayer) {
     if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return {steel: true};
     } else {
@@ -38,12 +38,16 @@ export class CityStandardProject extends StandardProjectCard {
     }
   }
 
-  public override canAct(player: Player): boolean {
-    return super.canAct(player) && player.game.board.getAvailableSpacesForCity(player).length > 0;
+  public override canAct(player: IPlayer): boolean {
+    // This is pricey because it forces calling canPlayOptions twice.
+    if (player.game.board.getAvailableSpacesForCity(player, this.canPlayOptions(player)).length === 0) {
+      return false;
+    }
+    return super.canAct(player);
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     player.game.defer(new PlaceCityTile(player));
-    player.production.add(Resources.MEGACREDITS, 1);
+    player.production.add(Resource.MEGACREDITS, 1);
   }
 }

@@ -1,13 +1,15 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/server/pathfinders/PathfindersExpansion';
 import {Tag} from '../../src/common/cards/Tag';
-import {fakeCard, runAllActions} from '../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
 import {Game} from '../../src/server/Game';
 import {PathfindersData} from '../../src/server/pathfinders/PathfindersData';
 import {CardName} from '../../src/common/cards/CardName';
+import {SelectParty} from '../../src/server/inputs/SelectParty';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 
 describe('PathfindersExpansion', function() {
   let player1: TestPlayer;
@@ -16,14 +18,13 @@ describe('PathfindersExpansion', function() {
   let pathfindersData: PathfindersData;
 
   beforeEach(() => {
-    game = newTestGame(2, {
+    [game, player1, player2] = testGame(2, {
       venusNextExtension: true,
       pathfindersExpansion: true,
       moonExpansion: true,
+      turmoilExtension: true,
     });
     pathfindersData = game.pathfindersData!;
-    player1 = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
   });
 
   it('Earth track', () => {
@@ -97,5 +98,20 @@ describe('PathfindersExpansion', function() {
     player1.playCard(fakeCard({name: 'A' as CardName, tags: [Tag.EARTH]}));
     expect(pathfindersData.earth).eq(1);
   });
+
+  it('grant delegate reward', () => {
+    PathfindersExpansion.grant('delegate', player1, Tag.EARTH);
+    runAllActions(game);
+    cast(player1.popWaitingFor(), SelectParty);
+  });
+
+  it('grant delegate reward - no grant when player has no available delegates', () => {
+    const turmoil = Turmoil.getTurmoil(game);
+    turmoil.delegateReserve.clear();
+    PathfindersExpansion.grant('delegate', player1, Tag.EARTH);
+    runAllActions(game);
+    cast(player1.getWaitingFor(), undefined);
+  });
+
   // TODO(kberg): not all rewards are tested.
 });

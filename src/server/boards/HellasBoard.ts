@@ -1,16 +1,16 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board} from './Board';
-import {Player} from '../Player';
-import {ISpace} from './ISpace';
+import {Board, SpaceCosts} from './Board';
+import {IPlayer} from '../IPlayer';
+import {Space} from './Space';
 import {HELLAS_BONUS_OCEAN_COST} from '../../common/constants';
-import {SpaceType} from '../../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
-import {Random} from '../Random';
-import {GameOptions} from '../GameOptions';
+import {Random} from '../../common/utils/Random';
+import {GameOptions} from '../game/GameOptions';
+import {MarsBoard} from './MarsBoard';
 
-export class HellasBoard extends Board {
+export class HellasBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): HellasBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
@@ -48,27 +48,16 @@ export class HellasBoard extends Board {
     return new HellasBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): HellasBoard {
+  public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): HellasBoard {
     return new HellasBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  private filterHellas(player: Player, spaces: Array<ISpace>) {
-    return player.canAfford(HELLAS_BONUS_OCEAN_COST, {tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
-  }
-
-  public override getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getSpaces(spaceType, player));
-  }
-
-  public override getAvailableSpacesForCity(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesForCity(player));
-  }
-
-  public override getAvailableSpacesOnLand(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesOnLand(player));
-  }
-
-  public override getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
+  public override spaceCosts(space: Space): SpaceCosts {
+    const costs = super.spaceCosts(space);
+    if (space.id === SpaceName.HELLAS_OCEAN_TILE) {
+      costs.stock.megacredits = HELLAS_BONUS_OCEAN_COST;
+      costs.tr.oceans = 1;
+    }
+    return costs;
   }
 }

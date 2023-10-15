@@ -1,8 +1,9 @@
-import * as http from 'http';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {GameLogs} from './GameLogs';
 import {isPlayerId, isSpectatorId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class ApiGameLogs extends Handler {
   public static readonly INSTANCE = new ApiGameLogs();
@@ -10,7 +11,7 @@ export class ApiGameLogs extends Handler {
     super();
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     const searchParams = ctx.url.searchParams;
     const id = searchParams.get('id');
     if (!id) {

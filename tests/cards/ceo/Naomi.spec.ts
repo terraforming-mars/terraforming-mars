@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {forceGenerationEnd} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 import {Naomi} from '../../../src/server/cards/ceos/Naomi';
 import {Callisto} from '../../../src/server/colonies/Callisto';
@@ -19,9 +19,7 @@ describe('Naomi', function() {
 
   beforeEach(() => {
     card = new Naomi();
-    game = newTestGame(2, {ceoExtension: true, coloniesExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {ceoExtension: true, coloniesExtension: true});
     // Setup some colonies that can be built independently of cards
     game.colonies = [new Callisto(), new Ceres()];
   });
@@ -32,10 +30,10 @@ describe('Naomi', function() {
     expect(player.megaCredits).to.eq(0);
     game.colonies[0].addColony(player);
     expect(player.energy).to.eq(2);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.megaCredits).to.eq(3);
     game.colonies[1].addColony(player);
     expect(player.energy).to.eq(4);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.megaCredits).to.eq(6);
 
     // Player2 here is just a sanity check, _and_ is necessary for the colony count
     game.colonies[0].addColony(player2);

@@ -19,7 +19,7 @@
     </div>
     <div v-if="showsave && selectedOption">
       <div style="margin: 5px 30px 10px" class="wf-action">
-        <Button :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
+        <AppButton :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
       </div>
     </div>
   </div>
@@ -28,12 +28,11 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {OrOptionsModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
 
 let unique = 0;
 
@@ -47,7 +46,7 @@ export default Vue.extend({
       type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => OrOptionsModel,
     },
     onsave: {
       type: Function as unknown as () => (out: OrOptionsResponse) => void,
@@ -60,18 +59,27 @@ export default Vue.extend({
     },
   },
   components: {
-    Button,
+    AppButton,
   },
   data() {
     if (this.playerinput.options === undefined) {
       throw new Error('no options provided for OrOptions');
     }
-    const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || getPreferences().learner_mode);
+    const displayedOptions = this.playerinput.options.filter((o) => {
+      if (o.type !== 'card') {
+        return true;
+      }
+      if (o.showOnlyInLearnerMode === false) {
+        return true;
+      }
+
+      return getPreferences().learner_mode;
+    });
     // Special case: If the first displayed option is SelectCard, and none of them are enabled, skip it.
     let selectedOption = displayedOptions[0];
     if (displayedOptions.length > 1 &&
-      selectedOption.inputType === PlayerInputType.SELECT_CARD &&
-      !selectedOption.cards?.some((card) => card.isDisabled === false)) {
+      selectedOption.type === 'card' &&
+      !selectedOption.cards.some((card) => card.isDisabled !== true)) {
       selectedOption = displayedOptions[1];
     }
     return {
@@ -82,7 +90,7 @@ export default Vue.extend({
   },
   methods: {
     playerFactorySaved() {
-      const idx = this.playerinput.options?.indexOf(this.selectedOption);
+      const idx = this.playerinput.options.indexOf(this.selectedOption);
       if (idx === undefined || idx === -1) {
         throw new Error('option not found');
       }

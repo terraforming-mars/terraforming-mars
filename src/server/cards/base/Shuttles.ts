@@ -4,13 +4,12 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 
 export class Shuttles extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SHUTTLES,
       tags: [Tag.SPACE],
       cost: 10,
@@ -20,7 +19,7 @@ export class Shuttles extends Card implements IProjectCard {
         production: {energy: -1, megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.oxygen(5)),
+      requirements: {oxygen: 5},
       cardDiscount: {tag: Tag.SPACE, amount: 2},
       metadata: {
         cardNumber: '166',

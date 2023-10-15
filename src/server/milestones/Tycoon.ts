@@ -1,15 +1,16 @@
-import {IMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
 import {CardType} from '../../common/cards/CardType';
 
-export class Tycoon implements IMilestone {
-  public readonly name = 'Tycoon';
-  public readonly description = 'Requires that you have 15 project cards in play (blue and green cards)';
-  public getScore(player: Player): number {
-    return player.playedCards
-      .filter((card) => card.cardType === CardType.ACTIVE || card.cardType === CardType.AUTOMATED).length;
+export class Tycoon extends BaseMilestone {
+  constructor() {
+    super(
+      'Tycoon',
+      'Have 15 project cards in play (not events.)',
+      15);
   }
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) > 14;
+  public getScore(player: IPlayer): number {
+    return player.playedCards
+      .filter((card) => card.type === CardType.ACTIVE || card.type === CardType.AUTOMATED).length;
   }
 }

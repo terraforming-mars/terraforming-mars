@@ -20,10 +20,10 @@
     "You start with 3 heat production and 42 M€.": "Du beginnst mit 3 Wärme-Produktion und 42 M€.",
     "Effect: You may use heat as M€. You may not use M€ as heat.": "EFFEKT: Du kannst Wärme als M€ verwenden. Du kannst M€ nicht als Wärme verwenden.",
 
-    "INTERPLANETARY": "INTERPLANETARY",
+    "INTERPLANETARY": "INTERPLANETARE",
     "CINEMATICS": "FILMGESELLSCHAFT",
     "Interplanetary Cinematics": "Interplanetare Filmgesellschaft",
-    "You start with 20 steel and 30 M€.": "Du beginnst mit 20 Stahl-Produktion und 30 M€.",
+    "You start with 20 steel and 30 M€.": "Du beginnst mit 20 Stahl und 30 M€.",
     "Effect: Each time you play an event, you gain 2 M€.": "EFFEKT: Jedes Mal, wenn du ein Ereignis ausspielst, erhalte 2 M€.",
 
     "INVENTRIX": "INVENTRIX",
@@ -46,7 +46,7 @@
     "THORGATE": "THORGATE",
     "Thorgate": "Thorgate",
     "You start with 1 energy production and 48 M€.": "Du beginnst mit 1 Energie-Produktion und 48 M€.",
-    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "EFFEKT: Wenn Du eine Energie-Karte ODER DAS STANDARDPROJEKT KRAFTWERT spielst, zahlst du 3 M€ weniger.",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "EFFEKT: Wenn Du eine Energie-Karte ODER DAS STANDARDPROJEKT KRAFTWERK spielst, zahlst du 3 M€ weniger.",
 
     "UNITED NATIONS MARS INITIATIVE": "UNITED NATIONS MARS INITIATIVE",
     "United Nations Mars Initiative": "United Nations Mars Initiative",
@@ -58,7 +58,7 @@
     "GUILD": "GILDE",
     "Mining Guild": "Bergbau-Gilde",
     "You start with 30 M€, 5 steel and 1 steel production.": "Du beginnst mit 30 M€, 5 Stahl und 1 Stahl-Produktion",
-    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "EFFEKT: Wenn Du als Platzierungsbonus Stahl oder Titan erhälst, erhöhe deine Stahl-Produktion um 1.",
+    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "EFFEKT: Wenn Du als Platzierungsbonus Stahl oder Titan erhälst, erhöhe deine Stahl-Produktion um 1.",
 
     "TERACTOR": "TERACTOR",
     "Teractor": "Teractor",

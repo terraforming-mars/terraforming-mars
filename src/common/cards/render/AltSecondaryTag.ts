@@ -8,6 +8,7 @@ export enum AltSecondaryTag {
   TURMOIL = 'turmoil',
   FLOATER = 'floater',
   BLUE = 'blue',
+  NO_TAGS = 'no_tags',
 
   MOON_MINING_RATE = 'moon-mine',
   MOON_HABITAT_RATE = 'moon-colony',
@@ -15,4 +16,7 @@ export enum AltSecondaryTag {
 
   NO_PLANETARY_TAG = 'no_planetary_tag',
   WILD_RESOURCE = 'wild-resource',
+
+  // used in Faraday CEO
+  DIVERSE = 'diverse',
 }

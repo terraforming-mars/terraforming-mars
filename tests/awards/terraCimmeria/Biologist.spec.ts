@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Biologist} from '../../../src/server/awards/terraCimmeria/Biologist';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
@@ -12,8 +12,7 @@ describe('Biologist', () => {
 
   beforeEach(() => {
     award = new Biologist();
-    const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    [/* skipped */, player] = testGame(2);
   });
 
   it('score', () => {

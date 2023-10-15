@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -7,19 +7,18 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {Card} from '../Card';
-import {VictoryPoints} from '../ICard';
 import {all, played} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 export class IntragenSanctuaryHeadquarters extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS,
       tags: [Tag.ANIMAL, Tag.MOON],
       startingMegaCredits: 38,
       resourceType: CardResource.ANIMAL,
-      victoryPoints: VictoryPoints.resource(1, 2),
+      victoryPoints: {resourcesHere: {}, per: 2},
 
       behavior: {
         // Gains the initial resource from its own tag.
@@ -45,12 +44,12 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
     });
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
     return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard) {
     const count = player.tags.cardTagCount(card, Tag.ANIMAL);
     player.addResourceTo(this, count);
     return undefined;

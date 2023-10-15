@@ -210,10 +210,10 @@ describe('CardRenderer', function() {
     expect(item.type).to.equal(CardRenderItemType.TRADE_DISCOUNT);
     expect(item.amount).to.equal(-2);
   });
-  it('placeColony: success', () => {
-    const renderer = CardRenderer.builder((b) => b.placeColony());
+  it('colonyTile: success', () => {
+    const renderer = CardRenderer.builder((b) => b.colonyTile());
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.PLACE_COLONY);
+    expect(item.type).to.equal(CardRenderItemType.COLONY_TILE);
     expect(item.amount).to.equal(-1);
   });
   it('influence: success', () => {
@@ -236,7 +236,7 @@ describe('CardRenderer', function() {
       expect(item.amount).to.equal(-1);
     });
     it('size - s', () => {
-      const renderer = CardRenderer.builder((b) => b.greenery(Size.SMALL));
+      const renderer = CardRenderer.builder((b) => b.greenery({size: Size.SMALL}));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.GREENERY);
       expect(item.size).to.equal(Size.SMALL);

@@ -1,5 +1,6 @@
-import * as http from 'http';
 import {IHandler, Context} from './IHandler';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export type Options = {
   validateServerId: boolean;
@@ -25,7 +26,7 @@ export abstract class Handler implements IHandler {
     return serverId !== null && serverId === ctx.ids.statsId;
   }
 
-  processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  processRequest(req: Request, res: Response, ctx: Context): Promise<void> {
     if (this.options.validateServerId && !this.isServerIdValid(ctx)) {
       ctx.route.notAuthorized(req, res);
       return Promise.resolve();
@@ -56,15 +57,15 @@ export abstract class Handler implements IHandler {
     }
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public get(req: Request, res: Response, ctx: Context): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }
-  public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public put(req: Request, res: Response, ctx: Context): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }
-  public post(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public post(req: Request, res: Response, ctx: Context): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }

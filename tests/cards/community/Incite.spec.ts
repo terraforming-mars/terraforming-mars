@@ -2,9 +2,9 @@ import {expect} from 'chai';
 import {Incite} from '../../../src/server/cards/community/Incite';
 import {EventAnalysts} from '../../../src/server/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/server/Game';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, getSendADelegateOption, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, getSendADelegateOption, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 
@@ -18,7 +18,7 @@ describe('Incite', function() {
     card = new Incite();
     player = TestPlayer.BLUE.newPlayer();
 
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
 
     card.play(player);
     player.setCorporationForTest(card);
@@ -36,10 +36,10 @@ describe('Incite', function() {
   });
 
   it('Can perform initial action', function() {
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
 
-    const sendDelegate = cast(player.getWaitingFor(), SelectPartyToSendDelegate);
+    const sendDelegate = cast(player.getWaitingFor(), SelectParty);
     sendDelegate.cb(PartyName.MARS);
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);
@@ -53,7 +53,7 @@ describe('Incite', function() {
     expect(getSendADelegateOption(player)).is.undefined;
 
     player.megaCredits = 3;
-    const selectParty = cast(getSendADelegateOption(player), SelectPartyToSendDelegate);
+    const selectParty = cast(getSendADelegateOption(player), SelectParty);
 
     expect(selectParty.title).eq('Send a delegate in an area (3 M€)');
     expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(0);

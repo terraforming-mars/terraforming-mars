@@ -13,6 +13,11 @@ describe('utils', function() {
     expect(utils.intersection([1, 2, 3], [1, 3, 4, 2])).contains.members([2, 3]);
   });
 
+  it('intersection preserves order of first array', () => {
+    expect(utils.intersection([1, 2, 3], [3, 2, 1])).deep.eq([1, 2, 3]);
+    expect(utils.intersection([3, 2, 1], [1, 2, 3])).deep.eq([3, 2, 1]);
+  });
+
   it('hasIntersection', () => {
     expect(utils.hasIntersection([], [])).is.false;
     expect(utils.hasIntersection([1], [2, 3])).is.false;
@@ -49,5 +54,16 @@ describe('utils', function() {
     expect(utils.sum([1, 3, 4])).eq(8);
     expect(utils.sum([1, 4])).eq(5);
     expect(utils.sum([1, 4, -6])).eq(-1);
+  });
+
+  it('zip', () => {
+    const a1 = ['a', 'b', 'c'];
+    const b1 = [5, 4, 2];
+    const zipped: Array<[string, number]> = utils.zip(a1, b1);
+    expect(zipped).deep.eq([
+      ['a', 5],
+      ['b', 4],
+      ['c', 2],
+    ]);
   });
 });

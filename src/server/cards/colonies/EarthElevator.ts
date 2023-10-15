@@ -11,7 +11,7 @@ export class EarthElevator extends Card implements IProjectCard {
       cost: 43,
       tags: [Tag.SPACE, Tag.EARTH],
       name: CardName.EARTH_ELEVATOR,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       victoryPoints: 4,
 
       behavior: {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Counter} from '../../src/server/behavior/Counter';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {testGame} from '../TestGame';
 import {Tag} from '../../src/common/cards/Tag';
 import {addCity, addGreenery, cast, fakeCard, maxOutOceans, runAllActions} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
@@ -21,13 +21,7 @@ describe('Counter', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    game = newTestGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
-    player.popSelectInitialCards();
-    player2.popSelectInitialCards();
-    player3.popSelectInitialCards();
+    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
     fake = fakeCard({});
   });
 
@@ -112,7 +106,7 @@ describe('Counter', () => {
 
     const oceanCity = new OceanCity();
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
 
     expect(count()).deep.eq({'': 2, 'onmars': 1, 'offmars': 1, 'everywhere': 2});
 
@@ -138,13 +132,13 @@ describe('Counter', () => {
     expect(count(player2)).eq(0);
 
     const landSpace = game.board.getAvailableSpacesForCity(player)[0];
-    game.addCityTile(player, landSpace);
+    game.addCity(player, landSpace);
 
     expect(count(player)).eq(2);
     expect(count(player2)).eq(0);
 
     const landSpace2 = game.board.getAvailableSpacesForCity(player2)[0];
-    game.addCityTile(player2, landSpace2);
+    game.addCity(player2, landSpace2);
 
     expect(count(player)).eq(2);
     expect(count(player2)).eq(1);
@@ -171,7 +165,7 @@ describe('Counter', () => {
     const wetlands = new Wetlands();
     player.plants = 4;
     const selectSpace = cast(wetlands.play(player), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(counter.count({greeneries: {}})).eq(4);
   });
 
@@ -214,7 +208,7 @@ describe('Counter', () => {
     const wetlands = new Wetlands();
     player.plants = 4;
     const selectSpace = cast(wetlands.play(player), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(counter.count({oceans: {}})).eq(10);
   });
 
@@ -235,25 +229,17 @@ describe('Counter', () => {
 describe('Counter for Moon', () => {
   let game: Game;
   let player: TestPlayer;
-  let player2: TestPlayer;
-  let player3: TestPlayer;
   let fake: IProjectCard;
 
   beforeEach(() => {
-    game = newTestGame(3, {moonExpansion: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
-    player.popSelectInitialCards();
-    player2.popSelectInitialCards();
-    player3.popSelectInitialCards();
+    [game, player] = testGame(3, {moonExpansion: true});
     fake = fakeCard({});
   });
 
   it('colony rate', () => {
     const counter = new Counter(player, fake);
     const moonData = MoonExpansion.moonData(game);
-    moonData.colonyRate = 3;
+    moonData.habitatRate = 3;
 
     expect(counter.count({moon: {habitatRate: {}}})).eq(3);
     expect(counter.count({moon: {habitatRate: {}}, per: 2})).eq(1);

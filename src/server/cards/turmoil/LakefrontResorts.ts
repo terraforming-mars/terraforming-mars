@@ -1,8 +1,8 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
+import {IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
+import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -16,7 +16,7 @@ import {Board} from '../../boards/Board';
 export class LakefrontResorts extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.LAKEFRONT_RESORTS,
       tags: [Tag.BUILDING],
       startingMegaCredits: 54,
@@ -40,16 +40,19 @@ export class LakefrontResorts extends Card implements ICorporationCard {
     });
   }
 
-  // TODO(kberg): This requires an onDiscard.
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.oceanBonus = 3;
     return undefined;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public override onDiscard(player: IPlayer) {
+    player.oceanBonus = 2;
+  }
+
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
-        new GainProduction(cardOwner, Resources.MEGACREDITS),
+        new GainProduction(cardOwner, Resource.MEGACREDITS),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }

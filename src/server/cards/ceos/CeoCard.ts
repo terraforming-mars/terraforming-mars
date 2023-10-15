@@ -1,38 +1,29 @@
-import {Card} from '../Card';
+import {Card, StaticCardProperties} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
-import {CardName} from '../../../common/cards/CardName';
-import {Tag} from '../../../common/cards/Tag';
 import {ICeoCard} from './ICeoCard';
-import {Player} from '../../../server/Player';
+import {IPlayer} from '../../IPlayer';
 
-interface StaticCeoProperties {
-    metadata: ICardMetadata;
-    name: CardName;
-    tags?: Array<Tag>;
-}
+type StaticCeoProperties = Pick<StaticCardProperties, 'name' | 'tags' | 'victoryPoints' | 'metadata'>;
 
 export abstract class CeoCard extends Card implements ICeoCard {
   public isDisabled = false;
 
   constructor(properties: StaticCeoProperties) {
     super({
-      cardType: CardType.CEO,
-      name: properties.name,
-      tags: properties.tags,
-      metadata: properties.metadata,
+      type: CardType.CEO,
+      ...properties,
     });
   }
 
-  public canAct(_player: Player): boolean {
+  public canAct(_player: IPlayer): boolean {
     return this.isDisabled === false;
   }
 
-  public override play(_player: Player) {
+  public override play(_player: IPlayer) {
     return undefined;
   }
 
-  public override get cardType(): CardType.CEO {
+  public override get type(): CardType.CEO {
     return CardType.CEO;
   }
 }

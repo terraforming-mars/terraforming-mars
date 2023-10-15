@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ConvertPlants} from '../../../../src/server/cards/base/standardActions/ConvertPlants';
 import {Phase} from '../../../../src/common/Phase';
-import {testGameOptions} from '../../../TestingUtils';
+import {setOxygenLevel} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -16,7 +16,7 @@ describe('ConvertPlants', function() {
     card = new ConvertPlants();
     player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
+    Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
   });
 
   it('Can not act without plants', function() {
@@ -43,7 +43,7 @@ describe('ConvertPlants', function() {
     expect(card.canAct(player)).eq(true);
     const action = card.action(player);
     expect(action).not.eq(undefined);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
 
     expect(player.game.getOxygenLevel()).eq(1);
   });
@@ -51,7 +51,7 @@ describe('ConvertPlants', function() {
   it('Can act when maximized', function() {
     player.plants = 8;
     expect(card.canAct(player)).eq(true);
-    (player.game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    setOxygenLevel(player.game, MAX_OXYGEN_LEVEL);
     expect(card.canAct(player)).eq(true);
   });
 });

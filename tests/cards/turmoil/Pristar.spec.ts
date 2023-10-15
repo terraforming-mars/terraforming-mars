@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {Pristar} from '../../../src/server/cards/turmoil/Pristar';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 
 describe('Pristar', function() {
   it('Should play', function() {
     const card = new Pristar();
-    const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const [game, player] = testGame(2);
 
     const play = card.play(player);
     player.setCorporationForTest(card);

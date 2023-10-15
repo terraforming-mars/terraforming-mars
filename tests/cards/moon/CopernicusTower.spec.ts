@@ -1,17 +1,16 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast, churn, churnAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusTower} from '../../../src/server/cards/moon/CopernicusTower';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {testGame} from '../../TestGame';
 
 describe('CopernicusTower', () => {
   let player: TestPlayer;
   let card: CopernicusTower;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [/* skipped */, player] = testGame(1, {moonExpansion: true});
     card = new CopernicusTower();
   });
 
@@ -20,35 +19,35 @@ describe('CopernicusTower', () => {
     player.megaCredits = card.cost;
 
     player.production.override({titanium: 2});
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.production.override({titanium: 1});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('act', () => {
     card.resourceCount = 0;
-    let input = card.action(player);
-    expect(input).is.undefined;
+    expect(churnAction(card, player)).is.undefined;
     expect(card.resourceCount).eq(1);
 
     // Now that there's 1 resource, player will be presented with 2 options.
-    input = cast(card.action(player), OrOptions);
+    let input = cast(churnAction(card, player), OrOptions);
 
     // The second option is the same: increase the resource count.
-    input.options[1].cb();
+    churn(() => input.options[1].cb(), player);
     expect(card.resourceCount).eq(2);
 
     // The first option decreases resource count by 1 and raise the TR 1 step.
-    input = cast(card.action(player), OrOptions);
+    input = cast(churnAction(card, player), OrOptions);
     expect(player.getTerraformRating()).eq(14);
-    input.options[0].cb();
+    churn(() => input.options[0].cb(), player);
     expect(card.resourceCount).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });
 
   it('victory points', () => {
-    expect(card.getVictoryPoints(player)).eq(0);
+    player.playedCards.push(card);
+    expect(card.getVictoryPoints(player)).eq(1);
     player.tagsForTest = {moon: 7};
     expect(card.getVictoryPoints(player)).eq(7);
   });

@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {Pallas} from '../../../src/server/cards/community/Pallas';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 
@@ -20,15 +20,11 @@ describe('Pallas', function() {
 
   beforeEach(function() {
     pallas = new Pallas();
-    game = newTestGame(2, {turmoilExtension: true, coloniesExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [game, player, player2] = testGame(2, {turmoilExtension: true, coloniesExtension: true});
     game.colonies.push(pallas);
     turmoil = Turmoil.getTurmoil(game);
     greens = turmoil.getPartyByName(PartyName.GREENS);
     scientists = turmoil.getPartyByName(PartyName.SCIENTISTS);
-    player.popSelectInitialCards();
-    player2.popSelectInitialCards();
 
     greens.delegates.clear();
     scientists.delegates.clear();
@@ -57,14 +53,14 @@ describe('Pallas', function() {
 
     runAllActions(game);
 
-    const selectParty = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const selectParty = cast(player.popWaitingFor(), SelectParty);
     selectParty.cb(PartyName.GREENS);
     expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
     expect(scientists.delegates.size).eq(0);
 
     runAllActions(game);
 
-    const selectParty2 = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const selectParty2 = cast(player.popWaitingFor(), SelectParty);
     selectParty2.cb(PartyName.SCIENTISTS);
 
     expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
@@ -72,7 +68,7 @@ describe('Pallas', function() {
 
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('Should give trade bonus', function() {
@@ -83,7 +79,7 @@ describe('Pallas', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
     pallas.trade(player2); // player2 is trading. But player(1) is getting the MC
     runAllActions(game);
-    const sendDelegates = cast(player2.popWaitingFor(), SelectPartyToSendDelegate);
+    const sendDelegates = cast(player2.popWaitingFor(), SelectParty);
     sendDelegates.cb(PartyName.REDS);
     runAllActions(game);
 
@@ -99,7 +95,7 @@ describe('Pallas', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
     pallas.trade(player); // player(1) is trading and gaining the mc.
     runAllActions(game);
-    const sendDelegates = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const sendDelegates = cast(player.popWaitingFor(), SelectParty);
     sendDelegates.cb(PartyName.REDS);
     runAllActions(game);
 

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {ExecutiveOrder} from '../../../src/server/cards/community/ExecutiveOrder';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('ExecutiveOrder', function() {
@@ -17,7 +17,7 @@ describe('ExecutiveOrder', function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
 
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
   });
 
   it('Should play', function() {
@@ -30,7 +30,7 @@ describe('ExecutiveOrder', function() {
     selectGlobalEvent.options[0].cb();
     expect(turmoil.currentGlobalEvent).is.not.undefined;
 
-    const selectParty = cast(game.deferredActions.pop()!.execute(), SelectPartyToSendDelegate);
+    const selectParty = cast(game.deferredActions.pop()!.execute(), SelectParty);
     selectParty.cb(PartyName.MARS);
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     expect(marsFirst.delegates.get(player.id)).eq(2);

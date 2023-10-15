@@ -57,6 +57,9 @@ export default Vue.extend({
     prelude: {
       type: Boolean,
     },
+    prelude2: {
+      type: Boolean,
+    },
     venusNext: {
       type: Boolean,
     },
@@ -100,6 +103,7 @@ export default Vue.extend({
         ...corpCardNames('base'),
         ...this.corporateEra ? corpCardNames('corpera') : [],
         ...this.prelude ? corpCardNames('prelude') : [],
+        ...this.prelude2 ? corpCardNames('prelude2') : [],
         ...this.venusNext ? corpCardNames('venus') : [],
         ...this.colonies ? corpCardNames('colonies') : [],
         ...this.turmoil ? corpCardNames('turmoil') : [],
@@ -173,12 +177,14 @@ export default Vue.extend({
       case 'venus': return 'Venus Next';
       case 'colonies': return 'Colonies';
       case 'prelude': return 'Prelude';
+      case 'prelude2': return 'Prelude2';
       case 'turmoil': return 'Turmoil';
       case 'community': return 'Community';
       case 'ares': return 'Ares';
       case 'moon': return 'The Moon';
       case 'pathfinders': return 'Pathfinders';
       case 'ceo': return 'CEOs';
+      case 'starwars': return 'Star Wars';
       }
     },
   },

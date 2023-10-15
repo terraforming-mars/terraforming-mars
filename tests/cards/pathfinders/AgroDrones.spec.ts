@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {AgroDrones} from '../../../src/server/cards/pathfinders/AgroDrones';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -16,11 +17,11 @@ describe('AgroDrones', function() {
   });
 
   it('canPlay', function() {
-    (game as any).temperature = -20;
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    setTemperature(game, -20);
+    expect(player.simpleCanPlay(card)).is.false;
 
-    (game as any).temperature = -18;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    setTemperature(game, -18);
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Can act', function() {

@@ -4,7 +4,7 @@ import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {ImportedNutrients} from '../../../src/server/cards/promo/ImportedNutrients';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGame} from '../../TestGame';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -15,15 +15,13 @@ describe('ImportedNutrients', function() {
 
   beforeEach(function() {
     card = new ImportedNutrients();
-    game = newTestGame(1);
-    player = getTestPlayer(game, 0);
-    player.popSelectInitialCards();
+    [game, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Can play without microbe cards', function() {
     const action = card.play(player);
     expect(player.plants).to.eq(4);
-    expect(action).is.undefined;
+    cast(action, undefined);
   });
 
   it('Adds microbes automatically if only 1 target', function() {

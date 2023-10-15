@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,8 +11,8 @@ export class AlliedBanks extends PreludeCard {
 
       behavior: {
         production: {megacredits: 4},
+        stock: {megacredits: 3},
       },
-      startingMegacredits: 3,
 
       metadata: {
         cardNumber: 'P01',
@@ -24,10 +23,6 @@ export class AlliedBanks extends PreludeCard {
         description: 'Increase your M€ production 4 steps. Gain 3 M€.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.megaCredits += this.startingMegaCredits;
-    return undefined;
   }
 }
 

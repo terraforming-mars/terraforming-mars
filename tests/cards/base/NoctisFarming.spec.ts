@@ -1,7 +1,9 @@
 import {expect} from 'chai';
+import {setTemperature} from '../../TestingUtils';
 import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('NoctisFarming', function() {
   let card: NoctisFarming;
@@ -10,9 +12,7 @@ describe('NoctisFarming', function() {
 
   beforeEach(function() {
     card = new NoctisFarming();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -20,13 +20,13 @@ describe('NoctisFarming', function() {
   });
 
   it('Should play', function() {
-    (game as any).temperature = -20;
+    setTemperature(game, -20);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
     expect(player.production.megacredits).to.eq(1);
     expect(player.plants).to.eq(2);
 
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

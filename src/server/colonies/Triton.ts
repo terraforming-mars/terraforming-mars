@@ -1,20 +1,26 @@
 import {Colony} from './Colony';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
-import {Resources} from '../../common/Resources';
+import {Resource} from '../../common/Resource';
 
 export class Triton extends Colony {
   constructor() {
     super({
       name: ColonyName.TRITON,
+      description: [
+        'Gain 3 titanium',
+        'Gain n titanium',
+        'Gain 1 titanium',
+      ],
+
       buildType: ColonyBenefit.GAIN_RESOURCES,
       buildQuantity: [3, 3, 3],
-      buildResource: Resources.TITANIUM,
+      buildResource: Resource.TITANIUM,
       tradeType: ColonyBenefit.GAIN_RESOURCES,
       tradeQuantity: [0, 1, 1, 2, 3, 4, 5],
-      tradeResource: Resources.TITANIUM,
+      tradeResource: Resource.TITANIUM,
       colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusResource: Resources.TITANIUM,
+      colonyBonusResource: Resource.TITANIUM,
     });
   }
 }

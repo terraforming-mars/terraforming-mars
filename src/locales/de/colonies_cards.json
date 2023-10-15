@@ -68,14 +68,14 @@
     "Increase your plant production 2 steps, or your M€ production 5 steps.": "Erhöhe deine Pflanzen-Produktion um 2 oder deine M€-Produktion um 5.",
 
     "Lunar Mining": "Lunarer Bergbau",
-    "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "",
+    "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Erhöhe deine Titan-Produktion um 1 für je 2 Erdsymbole, die du im Spiel hast, einschließlich dieses.",
 
     "Market Manipulation": "Marktmanipulation",
     "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Erhöhe deine Koloniewertung um 1. Senke eine andere Koloniewertung um 1.",
 
     "Martian Zoo": "Mars-Zoo",
     "Effect: When you play an Earth tag, place an animal here.": "EFFEKT: Wenn du ein Erdsymbol spielst, füge dieser Karte 1 Tier hinzu.",
-    "Action: Gain 1M€ per animal here.": "Action: Erhalte 1 M€ je Tier auf dieser Karte.",
+    "Action: Gain 1M€ per animal here.": "Aktion: Erhalte 1 M€ je Tier auf dieser Karte.",
     "Requires 2 city tiles in play.": "Erfordert 2 Stadtplättchen im Spiel.",
 
     "Mining Colony": "Bergbaukolonie",
@@ -130,8 +130,8 @@
     "1VP per 2 colonies in play.": "1 SP für jede zweite Kolonie im Spiel.",
 
     "Spin-off Department": "Zweigstelle",
-    "(Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.)": "(EFFEKT: Wenn du eine Karte mit Basiskosten von 20 M€ oder mehr spielst, ziehe eine Karte.",
-    "Increase your M€ production 2 steps.": "(Erhöhe deine M€-Produktion um 2.)",
+    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "EFFEKT: Wenn du eine Karte mit Basiskosten von 20 M€ oder mehr spielst, ziehe eine Karte.",
+    "Increase your M€ production 2 steps.": "Erhöhe deine M€-Produktion um 2.",
 
     "Sub-zero Salt Fish": "Eis-Salzwasserfisch",
     "Action: Add 1 animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
@@ -157,7 +157,7 @@
     "Place a colony": "Platziere eine Kolonie.",
 
     "Urban Decomposers": "Urbane Zersetzer",
-    "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Erfordert, dass du 1 Stadtplättchen und ein Kolonieplättchen besitzt. Erhöhe deine Pflanzen-Produktion um 1 und füge einer ANDEREN Karte 2 Mikroben hinzu.",
+    "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Erfordert, dass du 1 Stadtplättchen und eine Kolonie besitzt. Erhöhe deine Pflanzen-Produktion um 1 und füge einer ANDEREN Karte 2 Mikroben hinzu.",
 
     "Warp Drive": "Warp-Antrieb",
     "Effect: When you play a space card, you pay 4 M€ less for it.": "EFFEKT: Wenn du eine Weltraumkarte spielst, zahle 4 M€ weniger für sie.",

@@ -10,7 +10,7 @@
     line-height: 24px;
     height: 26px;
     letter-spacing: 0px;
-    margin-top: 34px;
+    margin-top: 8px;
     left: -17px;
     background: linear-gradient(to right, black, #aaa,#aaa, #aaa);
     color: black;
@@ -177,6 +177,9 @@
         .points-per-tag--S {
           font-size: 16px;
         }
+        .points-per-tag--XS {
+          font-size: 11px;
+        }
         .player-tags-main {
             display: flex;
             align-items: center;
@@ -230,28 +233,21 @@
                         width: 100%;
                         .player-timer {
                             display: flex;
-                            flex-flow: row;
                             width: 100%;
                             justify-content: center;
-                            >div{
-                                display: inline-block;
-                            }
-                            .time-part {
-                                width: 23px;
-                                text-align: left;
-                            }
                             .timer-delimiter {
                                 margin-left: 1px;
                                 margin-right: 1px;
+                            }
+                            .player-timer-seconds {
+                                width: 23px;
+                                text-align: left;
                             }
                             .player-timer-minutes {
                                 text-align: center;
                             }
                             .player-timer-hours {
-                                width: 27px;
                                 text-align: right;
-                                align-self: flex-end;
-                                padding-right: 1px;
                             }
                         }
                     }

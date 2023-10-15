@@ -12,6 +12,7 @@
               <div v-if="gameOptions.pathfindersExpansion" class="create-game-expansion-icon expansion-icon-pathfinders"></div>
               <div v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></div>
               <div v-if="isPoliticalAgendasOn" class="create-game-expansion-icon expansion-icon-agendas"></div>
+              <div v-if="gameOptions.ceoExtension" class="create-game-expansion-icon expansion-icon-ceo"></div>
             </li>
 
             <li><div class="setup-item" v-i18n>Board:</div>
@@ -39,15 +40,14 @@
 
             <li v-if="playerNumber > 1">
               <div class="setup-item" v-i18n>Draft:</div>
-              <div v-if="gameOptions.corporationsDraft" class="game-config generic" v-i18n>Corporation</div>
               <div v-if="gameOptions.initialDraftVariant" class="game-config generic" v-i18n>Initial</div>
               <div v-if="gameOptions.draftVariant" class="game-config generic" v-i18n>Research phase</div>
-              <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant && !gameOptions.corporationsDraft" class="game-config generic" v-i18n>Off</div>
+              <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant" class="game-config generic" v-i18n>Off</div>
             </li>
 
             <li v-if="gameOptions.escapeVelocityMode">
               <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
-              <span>After {{gameOptions.escapeVelocityThreshold}} min, reduce {{gameOptions.escapeVelocityPenalty}} VP every {{gameOptions.escapeVelocityPeriod}} min.</span>
+              <span>{{escapeVelocityDescription}}</span>
             </li>
 
             <li v-if="gameOptions.turmoilExtension && gameOptions.removeNegativeGlobalEvents">
@@ -81,6 +81,7 @@ import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {AgendaStyle} from '@/common/turmoil/Types';
+import {translateTextWithParams} from '@/client/directives/i18n';
 
 const boardColorClass: Record<BoardName, string> = {
   [BoardName.THARSIS]: 'game-config board-tharsis map',
@@ -111,6 +112,13 @@ export default Vue.extend({
     },
     boardColorClass(): string {
       return boardColorClass[this.gameOptions.boardName];
+    },
+    escapeVelocityDescription(): string {
+      const {escapeVelocityThreshold, escapeVelocityPenalty, escapeVelocityPeriod} = this.gameOptions ?? {};
+      if (escapeVelocityThreshold === undefined || escapeVelocityPenalty === undefined || escapeVelocityPeriod === undefined) {
+        return '';
+      }
+      return translateTextWithParams('After ${0} min, reduce ${1} VP every ${2} min.', [escapeVelocityThreshold.toString(), escapeVelocityPenalty.toString(), escapeVelocityPeriod.toString()]);
     },
     RandomMAOptionType(): typeof RandomMAOptionType {
       return RandomMAOptionType;

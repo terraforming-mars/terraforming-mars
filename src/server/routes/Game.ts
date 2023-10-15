@@ -1,4 +1,3 @@
-import * as http from 'http';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Database} from '../database/Database';
@@ -7,13 +6,16 @@ import {RandomBoardOption} from '../../common/boards/RandomBoardOption';
 import {Cloner} from '../database/Cloner';
 import {GameLoader} from '../database/GameLoader';
 import {Game} from '../Game';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {ServeAsset} from './ServeAsset';
 import {NewGameConfig} from '../../common/game/NewGameConfig';
 import {GameId, PlayerId, SpectatorId} from '../../common/Types';
-import {generateRandomId} from '../server-ids';
+import {generateRandomId} from '../utils/server-ids';
+import {IGame} from '../IGame';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
 
@@ -39,14 +41,14 @@ export class GameHandler extends Handler {
     return [board];
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override get(req: Request, res: Response, ctx: Context): Promise<void> {
     req.url = '/assets/index.html';
     return ServeAsset.INSTANCE.get(req, res, ctx);
   }
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {
@@ -90,12 +92,14 @@ export class GameHandler extends Handler {
             venusNextExtension: gameReq.venusNext,
             coloniesExtension: gameReq.colonies,
             preludeExtension: gameReq.prelude,
+            prelude2Expansion: gameReq.prelude2Expansion,
             turmoilExtension: gameReq.turmoil,
             aresExtension: gameReq.aresExtension,
             aresHazards: true, // Not a runtime option.
             politicalAgendasExtension: gameReq.politicalAgendasExtension,
             moonExpansion: gameReq.moonExpansion,
             pathfindersExpansion: gameReq.pathfindersExpansion,
+            underworldExpansion: false,
             promoCardsOption: gameReq.promoCardsOption,
             communityCardsOption: gameReq.communityCardsOption,
             solarPhaseOption: gameReq.solarPhaseOption,
@@ -103,7 +107,6 @@ export class GameHandler extends Handler {
             includeVenusMA: gameReq.includeVenusMA,
 
             draftVariant: gameReq.draftVariant,
-            corporationsDraft: gameReq.corporationsDraft,
             initialDraftVariant: gameReq.initialDraft,
             startingCorporations: gameReq.startingCorporations,
             shuffleMapOption: gameReq.shuffleMapOption,
@@ -120,16 +123,19 @@ export class GameHandler extends Handler {
             altVenusBoard: gameReq.altVenusBoard,
             escapeVelocityMode: gameReq.escapeVelocityMode,
             escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
+            escapeVelocityBonusSeconds: gameReq.escapeVelocityBonusSeconds,
             escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
             escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
             twoCorpsVariant: gameReq.twoCorpsVariant,
             ceoExtension: gameReq.ceoExtension,
             customCeos: gameReq.customCeos,
+            startingCeos: gameReq.startingCeos,
+            starWarsExpansion: gameReq.starWarsExpansion,
           };
 
-          let game: Game;
+          let game: IGame;
           if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-            const serialized = await Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId);
+            const serialized = await Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
             game = Cloner.clone(gameId, players, firstPlayerIdx, serialized);
           } else {
             const seed = Math.random();

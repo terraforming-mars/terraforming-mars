@@ -3,8 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
-import {CardRequirements} from '../CardRequirements';
+import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
@@ -12,12 +11,12 @@ import {played} from '../Options';
 export class PrefabricationofHumanHabitats extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.PREFABRICATION_OF_HUMAN_HABITATS,
       cost: 8,
       tags: [Tag.BUILDING, Tag.CITY],
 
-      requirements: CardRequirements.builder((b) => b.production(Resources.STEEL)),
+      requirements: {production: Resource.STEEL, count: 1},
       cardDiscount: {tag: Tag.CITY, amount: 2},
 
       metadata: {

@@ -4,9 +4,9 @@ import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('NaturalPreserveAres', function() {
   let card: NaturalPreserveAres;
@@ -15,9 +15,7 @@ describe('NaturalPreserveAres', function() {
 
   beforeEach(function() {
     card = new NaturalPreserveAres();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    [game, player] = testGame(2, {aresExtension: true});
   });
 
   it('Should play', function() {
@@ -25,7 +23,7 @@ describe('NaturalPreserveAres', function() {
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
     expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS]});

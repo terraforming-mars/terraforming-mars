@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {PreludeDeck, CeoDeck} from '../../src/server/cards/Deck';
 import {GameCards} from '../../src/server/GameCards';
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {CardName} from '../../src/common/cards/CardName';
-import {ConstRandom, UnseededRandom} from '../../src/server/Random';
+import {ConstRandom, UnseededRandom} from '../../src/common/utils/Random';
 import {ICard} from '../../src/server/cards/ICard';
 
 function name(card: ICard): CardName {
@@ -87,7 +87,7 @@ describe('CeoDeck', function() {
       log: () => {},
     };
 
-    // TODO: Once CEOs is deployed, we can hard-value these deckLength checks.
+    // TODO(dl): Once CEOs is deployed, we can hard-value these deckLength checks.
     // But while we're constantly adding CEOs we cannot expect the drawPile to have a static length
     // Instead, I'm getting the length of the deck prior to the draws, and just making sure it shrinks after we draw.
     const drawCardsCount = 3;

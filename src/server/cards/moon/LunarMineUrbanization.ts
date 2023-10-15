@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -8,13 +8,12 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
-import {CardRequirements} from '../CardRequirements';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_MINE_URBANIZATION,
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 8,
 
@@ -22,7 +21,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
         production: {megacredits: 1},
       },
       // NOTE(kberg): Rules were that it says it Requires 1 mine tile. Changing to "Requires you have 1 mine tile."
-      requirements: CardRequirements.builder((b) => b.miningTiles(1)),
+      requirements: {miningTiles: 1},
       tr: {moonHabitat: 1},
 
       metadata: {
@@ -39,19 +38,20 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player, upgradedTiles: false}).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const spaces = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player, upgradedTiles: false});
-    return new SelectSpace('Select one of your mines to upgrade', spaces, (space) => {
-      if (space.tile === undefined) {
-        throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
-      }
-      space.tile.tileType = TileType.LUNAR_MINE_URBANIZATION;
-      MoonExpansion.raiseHabitatRate(player);
-      return undefined;
-    });
+    return new SelectSpace('Select one of your mines to upgrade', spaces)
+      .andThen((space) => {
+        if (space.tile === undefined) {
+          throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
+        }
+        space.tile.tileType = TileType.LUNAR_MINE_URBANIZATION;
+        MoonExpansion.raiseHabitatRate(player);
+        return undefined;
+      });
   }
 }

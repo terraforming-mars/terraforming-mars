@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,14 +11,14 @@ import {CardType} from '../../../common/cards/CardType';
 import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {all, digit, played} from '../Options';
-import {SerializedCard} from '@/server/SerializedCard';
+import {SerializedCard} from '../../SerializedCard';
 
 export class PharmacyUnion extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.PHARMACY_UNION,
       startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
       resourceType: CardResource.DISEASE,
@@ -59,16 +59,16 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     return [Tag.MICROBE, Tag.MICROBE];
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
     this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this._onCardPlayed(player, card);
     return undefined;
   }
 
-  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
+  private _onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): void {
     if (this.isDisabled) return undefined;
 
     const game = player.game;
@@ -80,20 +80,20 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
     if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
       // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
-      if (player.canAfford(0, {tr: {tr: 3}})) {
+      if (player.canAfford({cost: 0, tr: {tr: 3}})) {
         game.defer(new SimpleDeferredAction(
           player,
           () => {
             const orOptions = new OrOptions(
-              new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€', 'Confirm', () => {
+              new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 this.isDisabled = true;
-                player.increaseTerraformRatingSteps(3);
-                player.deductResource(Resources.MEGACREDITS, megaCreditsLost);
+                player.increaseTerraformRating(3);
+                player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
                 game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                 return undefined;
               }),
-              new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR', 'Confirm', () => {
+              new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 player.increaseTerraformRating();
                 player.megaCredits -= megaCreditsLost;
@@ -119,7 +119,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
             if (this.isDisabled) return undefined;
 
             if (this.resourceCount > 0) {
-              if (player.canAfford(0, {tr: {tr: 1}}) === false) {
+              if (player.canAfford({cost: 0, tr: {tr: 1}}) === false) {
                 // TODO (Lynesth): Remove this when #1670 is fixed
                 game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
               } else {
@@ -130,22 +130,20 @@ export class PharmacyUnion extends Card implements ICorporationCard {
               return undefined;
             }
 
-            if (player.canAfford(0, {tr: {tr: 3}}) === false) {
+            if (player.canAfford({cost: 0, tr: {tr: 3}}) === false) {
               // TODO (Lynesth): Remove this when #1670 is fixed
               game.log('${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
               return undefined;
             }
 
             return new OrOptions(
-              new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR', () => {
+              new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR').andThen(() => {
                 this.isDisabled = true;
-                player.increaseTerraformRatingSteps(3);
+                player.increaseTerraformRating(3);
                 game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
                 return undefined;
               }),
-              new SelectOption('Do nothing', 'Confirm', () => {
-                return undefined;
-              }),
+              new SelectOption('Do nothing', 'Do nothing'),
             );
           },
         ), -1); // Make it a priority

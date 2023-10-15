@@ -1,4 +1,6 @@
+import {GameId} from '../Types';
+
 export type LoadGameFormModel = {
-  game_id: string;
+  gameId: GameId;
   rollbackCount: number;
 }

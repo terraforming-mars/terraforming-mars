@@ -8,10 +8,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Inventrix extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.INVENTRIX,
       tags: [Tag.SCIENCE],
       startingMegaCredits: 45,
+      globalParameterRequirementBonus: {steps: 2},
 
       firstAction: {
         text: 'Draw 3 cards',
@@ -32,9 +33,6 @@ export class Inventrix extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-  public getRequirementBonus(): number {
-    return 2;
   }
 }
 

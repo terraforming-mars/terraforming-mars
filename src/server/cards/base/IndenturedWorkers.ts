@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -9,7 +9,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class IndenturedWorkers extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.INDENTURED_WORKERS,
       cost: 0,
       victoryPoints: -1,
@@ -24,7 +24,7 @@ export class IndenturedWorkers extends Card implements IProjectCard {
     });
   }
 
-  public override getCardDiscount(player: Player) {
+  public override getCardDiscount(player: IPlayer) {
     if (player.lastCardPlayed === this.name) {
       return 8;
     }

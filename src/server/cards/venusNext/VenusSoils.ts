@@ -10,7 +10,7 @@ export class VenusSoils extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUS_SOILS,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       tags: [Tag.VENUS, Tag.PLANT],
       cost: 20,
 

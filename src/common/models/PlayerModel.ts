@@ -1,19 +1,20 @@
 import {CardModel} from './CardModel';
 import {Color} from '../Color';
 import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
-import {ITagCount} from '../cards/ITagCount';
+import {TagCount} from '../cards/TagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
-import {Resources} from '../Resources';
+import {Resource} from '../Resource';
 
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
   id?: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
+  runId: string;
 }
 
 // 'off': Resources (or production) are unprotected.
@@ -50,14 +51,14 @@ export type PublicPlayerModel = {
   noTagsCount: number;
   plants: number;
   plantProduction: number;
-  protectedResources: Record<Resources, Protection>;
-  protectedProduction: Record<Resources, Protection>;
+  protectedResources: Record<Resource, Protection>;
+  protectedProduction: Record<Resource, Protection>;
   tableau: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
   steelValue: number;
-  tags: Array<ITagCount>;
+  tags: Array<TagCount>;
   terraformRating: number;
   timer: TimerModel;
   titanium: number;
@@ -65,7 +66,7 @@ export type PublicPlayerModel = {
   titaniumValue: number;
   tradesThisGeneration: number;
   victoryPointsBreakdown: IVictoryPointsBreakdown;
-  victoryPointsByGeneration: Array<number>
+  victoryPointsByGeneration: Array<number>;
 }
 
 /** A player's view of the game, including their secret information. */

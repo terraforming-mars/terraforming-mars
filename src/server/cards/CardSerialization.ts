@@ -1,32 +1,48 @@
 import {CardFinder} from '../CardFinder';
 import {SerializedCard} from '../SerializedCard';
-import {MiningCard} from './base/MiningCard';
+import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
+import {CardType} from '../../common/cards/CardType';
 
-export function serializeProjectCard(c: IProjectCard): SerializedCard {
-  const result: SerializedCard = {
-    name: c.name,
+export function serializeProjectCard(card: IProjectCard): SerializedCard {
+  const serialized: SerializedCard = {
+    name: card.name,
   };
-  if (c.bonusResource !== undefined) {
-    result.bonusResource = c.bonusResource;
+  if (card.type === CardType.PROXY) {
+    return serialized;
   }
-  if (c.resourceCount !== undefined) {
-    result.resourceCount = c.resourceCount;
+  if (card.bonusResource !== undefined) {
+    serialized.bonusResource = card.bonusResource;
   }
-  if (c instanceof SelfReplicatingRobots) {
-    result.targetCards = c.targetCards.map((t) => {
+  if (card.resourceCount !== undefined) {
+    serialized.resourceCount = card.resourceCount;
+  }
+  if (card instanceof SelfReplicatingRobots) {
+    serialized.targetCards = card.targetCards.map((t) => {
       return {
         card: {name: t.card.name},
         resourceCount: t.resourceCount,
       };
     });
   }
-  if (isICloneTagCard(c)) {
-    result.cloneTag = c.cloneTag;
+  if (isICloneTagCard(card)) {
+    serialized.cloneTag = card.cloneTag;
   }
-  return result;
+  if (isCeoCard(card)) {
+    serialized.isDisabled = card.isDisabled;
+    if (card.opgActionIsActive !== undefined) {
+      serialized.opgActionIsActive = card.opgActionIsActive;
+    }
+    if (card.generationUsed !== undefined) {
+      serialized.generationUsed = card.generationUsed;
+    }
+  }
+  if (card.data !== undefined) {
+    serialized.data = card.data;
+  }
+  return serialized;
 }
 
 export function deserializeProjectCard(element: SerializedCard, cardFinder: CardFinder): IProjectCard {
@@ -36,6 +52,9 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
   }
   if (element.resourceCount !== undefined) {
     card.resourceCount = element.resourceCount;
+  }
+  if (card.hasOwnProperty('data')) {
+    card.data = element.data;
   }
   if (isICloneTagCard(card) && element.cloneTag !== undefined) {
     card.cloneTag = element.cloneTag;
@@ -54,8 +73,19 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
       }
     });
   }
-  if (card instanceof MiningCard && element.bonusResource !== undefined) {
-    card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+  if (!(card instanceof SelfReplicatingRobots)) {
+    if (element.bonusResource !== undefined) {
+      card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+    }
+  }
+  if (isCeoCard(card)) {
+    card.isDisabled = element.isDisabled;
+    if (element.opgActionIsActive !== undefined) {
+      card.opgActionIsActive = element.opgActionIsActive;
+    }
+    if (element.generationUsed !== undefined) {
+      card.generationUsed = element.generationUsed;
+    }
   }
   return card;
 }

@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,7 +12,7 @@ import {Priority} from '../../deferredActions/DeferredAction';
 export class Aurorai extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.AURORAI,
       tags: [Tag.MARS],
       startingMegaCredits: 33,
@@ -38,7 +38,7 @@ export class Aurorai extends Card implements ICorporationCard {
     });
   }
 
-  public onIncreaseTerraformRating(player: Player, cardOwner: Player, steps: number) {
+  public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer, steps: number) {
     if (player === cardOwner) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
     }

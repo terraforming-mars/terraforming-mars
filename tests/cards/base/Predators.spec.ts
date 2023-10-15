@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, setOxygenLevel} from '../../TestingUtils';
 import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {Pets} from '../../../src/server/cards/base/Pets';
@@ -10,6 +10,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('Predators', function() {
   let card: Predators;
@@ -19,9 +20,7 @@ describe('Predators', function() {
 
   beforeEach(function() {
     card = new Predators();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player, player2] = testGame(2);
   });
 
   it('Can not play', function() {
@@ -29,13 +28,13 @@ describe('Predators', function() {
   });
 
   it('Should play', function() {
-    (game as any).oxygenLevel = 11;
+    setOxygenLevel(game, 11);
     expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
     card.play(player);
 
     player.addResourceTo(card, 5);
-    expect(card.getVictoryPoints()).to.eq(5);
+    expect(card.getVictoryPoints(player)).to.eq(5);
   });
 
   it('Should act', function() {

@@ -1,15 +1,15 @@
-import {Player} from '../../Player';
-import {IMilestone} from '../IMilestone';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
 
-export class Colonizer implements IMilestone {
-  public readonly name = 'Colonizer';
-  public readonly description = 'Have 4 colonies built';
-
-  public getScore(player: Player): number {
-    return player.getColoniesCount();
+export class Colonizer extends BaseMilestone {
+  constructor() {
+    super(
+      'Colonizer',
+      'Have 4 colonies',
+      4);
   }
 
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 4;
+  public getScore(player: IPlayer): number {
+    return player.getColoniesCount();
   }
 }

@@ -10,5 +10,24 @@
     "Magnify card descriptions on hover": "Увеличивать текст карт по наведению",
     "Language": "Язык",
     "refresh page": "обновите страницу",
-    "to see changes": "чтобы увидеть изменения"
+    "to see changes": "чтобы увидеть изменения",
+    
+    "Hide non-blue played cards": "Скрыть не-синие сыгранные карты",
+    "Hide log": "Скрыть лог",
+    "Hide tag overview": "Скрыть обзор тэгов",
+    "Hide corporation names for players": "Скрыть названия корпораций",
+    "Show in-game alerts": "Показать внутриигровые оповещения",
+    "Hide Milestones / Awards scores": "Скрыть очки достижений/наград",
+    "Enable sounds": "Включить звуки",
+    "Hide tile confirmation": "Скрыть подтверждения для тайлов",
+    "Hide discount on cards": "Скрыть скидку на картах",
+    "Show discount on cards": "Показать скидку на картах",
+    "Hide sidebar notification": "Скрыть боковые уведомления",
+    "Show sidebar notification": "Показать боковые уведомления",
+    "Learner Mode (req. refresh)": "Режим изучения (треб. обновить)",
+    "Experimental UI": "Экспериментальный UI",
+    "Debug View": "Дебаг режим",
+    "Tutorial Mode (req. refresh)": "Обучение (треб. обновить)",
+    "Ok": "OK",
+    "Report a bug": "Сообщить о баге"
 }

@@ -1,9 +1,10 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {churnAction, cast, churn} from '../../TestingUtils';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
 
 describe('NitriteReducingBacteria', function() {
   let card: NitriteReducingBacteria;
@@ -12,9 +13,7 @@ describe('NitriteReducingBacteria', function() {
 
   beforeEach(function() {
     card = new NitriteReducingBacteria();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -26,16 +25,17 @@ describe('NitriteReducingBacteria', function() {
 
   it('Should act', function() {
     player.playedCards.push(card);
-    card.action(player);
+
+    expect(churnAction(card, player)).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card, 3);
-    const orOptions = cast(card.action(player), OrOptions);
+    const orOptions = cast(churnAction(card, player), OrOptions);
 
-    orOptions.options[1].cb();
+    expect(churn(() => orOptions.options[1].cb(), player)).is.undefined;
     expect(card.resourceCount).to.eq(5);
 
-    orOptions.options[0].cb();
+    expect(churn(() => orOptions.options[0].cb(), player)).is.undefined;
     expect(card.resourceCount).to.eq(2);
     expect(player.getTerraformRating()).to.eq(21);
   });

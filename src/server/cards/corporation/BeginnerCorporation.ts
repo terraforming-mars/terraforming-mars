@@ -8,7 +8,7 @@ import {digit} from '../Options';
 export class BeginnerCorporation extends Card implements ICorporationCard {
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.BEGINNER_CORPORATION,
 
       behavior: {

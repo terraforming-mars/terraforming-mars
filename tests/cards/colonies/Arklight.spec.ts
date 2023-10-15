@@ -18,6 +18,6 @@ describe('Arklight', function() {
     player.setCorporationForTest(card);
     card.onCardPlayed(player, new Predators());
     expect(card.resourceCount).to.eq(2);
-    expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

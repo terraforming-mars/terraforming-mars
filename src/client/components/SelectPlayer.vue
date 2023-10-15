@@ -6,21 +6,21 @@
       <i class="form-icon"></i>
       <SelectPlayerRow :player="players.find((otherPlayer) => otherPlayer.color === player)"></SelectPlayerRow>
     </label>
-    <Button v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
+    <AppButton v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
-import Button from '@/client/components/common/Button.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import AppButton from '@/client/components/common/AppButton.vue';
+import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectPlayerResponse} from '@/common/inputs/InputResponse';
 import {ColorWithNeutral} from '@/common/Color';
 
-interface SelectPlayerModel {
+type DataModel = {
   selectedPlayer: ColorWithNeutral | undefined;
 }
 
@@ -31,7 +31,7 @@ export default Vue.extend({
       type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectPlayerModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectPlayerResponse) => void,
@@ -43,14 +43,14 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data(): SelectPlayerModel {
+  data(): DataModel {
     return {
       selectedPlayer: undefined,
     };
   },
   components: {
     SelectPlayerRow,
-    Button,
+    AppButton,
   },
   methods: {
     saveData() {

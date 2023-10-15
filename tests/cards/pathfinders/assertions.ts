@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
+import {IPlayer} from '../../../src/server/IPlayer';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src/server//inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server//inputs/SelectParty';
 import {cast} from '../../TestingUtils';
 import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
-export function assertSendDelegateToArea(player: Player, action: DeferredAction) {
+export function assertSendDelegateToArea(player: IPlayer, action: DeferredAction) {
   const sendDelegate = cast(action, SendDelegateToArea);
 
   const game = player.game;
@@ -19,17 +19,17 @@ export function assertSendDelegateToArea(player: Player, action: DeferredAction)
   const delegatesInReserve = turmoil.getAvailableDelegateCount(player.id);
   const delegatesInParty = marsFirst.delegates.get(player.id);
 
-  const options = cast(sendDelegate.execute(), SelectPartyToSendDelegate);
+  const options = cast(sendDelegate.execute(), SelectParty);
   options.cb(marsFirst.name);
 
   expect(turmoil.getAvailableDelegateCount(player.id)).eq(delegatesInReserve - 1);
   expect(marsFirst.delegates.get(player.id)).eq(delegatesInParty + 1);
 }
 
-export function assertPlaceCityTile(player: Player, action: DeferredAction) {
+export function assertPlaceCityTile(player: IPlayer, action: DeferredAction) {
   const placeCityTile = cast(action, PlaceCityTile);
   const selectSpace = cast(placeCityTile.execute(), SelectSpace);
-  const space = selectSpace.availableSpaces[0];
+  const space = selectSpace.spaces[0];
   expect(space.tile).is.undefined;
 
   selectSpace.cb(space);

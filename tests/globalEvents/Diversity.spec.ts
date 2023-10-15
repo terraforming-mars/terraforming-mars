@@ -2,28 +2,29 @@ import {expect} from 'chai';
 import {AdvancedEcosystems} from '../../src/server/cards/base/AdvancedEcosystems';
 import {SolarWindPower} from '../../src/server/cards/base/SolarWindPower';
 import {EarlySettlement} from '../../src/server/cards/prelude/EarlySettlement';
-import {Game} from '../../src/server/Game';
 import {Diversity} from '../../src/server/turmoil/globalEvents/Diversity';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestGame';
 
 describe('Diversity', function() {
   it('resolve play', function() {
     const card = new Diversity();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player);
-    const turmoil = Turmoil.newInstance(game);
-    turmoil.initGlobalEvent(game);
-    player2.playedCards.push(new AdvancedEcosystems());
-    player2.playedCards.push(new EarlySettlement());
-    player2.playedCards.push(new SolarWindPower());
+
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
+
+    // player2 has 8 tags.
+    player2.playedCards.push(new AdvancedEcosystems()); // Plant, Microbe, Animal
+    player2.playedCards.push(new EarlySettlement()); // Building, City
+    player2.playedCards.push(new SolarWindPower()); // Science, Space, Power
+
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
     turmoil.dominantParty.delegates.add(player2.id);
+
     card.resolve(game, turmoil);
+
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(10);
   });

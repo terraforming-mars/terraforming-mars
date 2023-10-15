@@ -1,4 +1,4 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
@@ -6,6 +6,8 @@ import {SelectOption} from '../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {DeferredAction, Priority} from './DeferredAction';
+import {Message} from '../../common/logs/Message';
+import {newMessage} from '../logs/MessageBuilder';
 
 // TODO (kberg chosta): Make this a card attribute instead
 const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
@@ -13,12 +15,12 @@ const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE]
 export class RemoveResourcesFromCard extends DeferredAction {
   public override priority = Priority.ATTACK_OPPONENT;
   constructor(
-    player: Player,
+    player: IPlayer,
     public resourceType: CardResource,
     public count: number = 1,
     public ownCardsOnly: boolean = false,
     public mandatory: boolean = true, // Resource must be removed (either it's a cost or the icon is not red-bordered)
-    public title: string = 'Select card to remove ' + count + ' ' + resourceType + '(s)',
+    public title: string | Message = newMessage('Select card to remove ${0} ${1}(s)', (b) => b.number(count).string(resourceType)),
   ) {
     super(player, Priority.ATTACK_OPPONENT);
     if (ownCardsOnly) {
@@ -42,20 +44,17 @@ export class RemoveResourcesFromCard extends DeferredAction {
       this.title,
       'Remove resource(s)',
       resourceCards,
-      ([card]) => {
-        const owner = this.player.game.getCardPlayer(card.name);
+      {showOwner: true})
+      .andThen(([card]) => {
+        const owner = this.player.game.getCardPlayerOrThrow(card.name);
         owner.removeResourceFrom(card, this.count, {removingPlayer: this.player});
         return undefined;
-      },
-      {
-        showOwner: true,
-      },
-    );
+      });
 
     if (this.mandatory) {
       if (resourceCards.length === 1) {
         const card = resourceCards[0];
-        const owner = this.player.game.getCardPlayer(card.name);
+        const owner = this.player.game.getCardPlayerOrThrow(card.name);
         owner.removeResourceFrom(card, this.count, {removingPlayer: this.player});
         return undefined;
       }
@@ -64,13 +63,10 @@ export class RemoveResourcesFromCard extends DeferredAction {
 
     return new OrOptions(
       selectCard,
-      new SelectOption('Do not remove', 'Confirm', () => {
-        return undefined;
-      }),
-    );
+      new SelectOption('Do not remove'));
   }
 
-  public static getAvailableTargetCards(player: Player, resourceType: CardResource | undefined, ownCardsOnly: boolean = false): Array<ICard> {
+  public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, ownCardsOnly: boolean = false): Array<ICard> {
     let resourceCards: Array<ICard>;
     if (ownCardsOnly) {
       if (resourceType === CardResource.ANIMAL) {

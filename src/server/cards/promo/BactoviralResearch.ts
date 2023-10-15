@@ -10,7 +10,7 @@ import {CardResource} from '../../../common/CardResource';
 export class BactoviralResearch extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
       name: CardName.BACTOVIRAL_RESEARCH,
       tags: [Tag.MICROBE, Tag.SCIENCE],
       cost: 10,

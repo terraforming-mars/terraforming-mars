@@ -1,15 +1,15 @@
-import {Player} from '../../Player';
-import {IMilestone} from '../IMilestone';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
 
-export class Farmer implements IMilestone {
-  public readonly name = 'Farmer';
-  public readonly description = 'Have 4 plant production';
-
-  public getScore(player: Player): number {
-    return player.production.plants;
+export class Farmer extends BaseMilestone {
+  constructor() {
+    super(
+      'Farmer',
+      'Have 4 plant production',
+      4);
   }
 
-  public canClaim(player: Player): boolean {
-    return this.getScore(player) >= 4;
+  public getScore(player: IPlayer): number {
+    return player.production.plants;
   }
 }

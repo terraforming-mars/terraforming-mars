@@ -136,7 +136,14 @@ export class SQLite implements IDatabase {
     if (maxGameDays !== undefined) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
       const selectResult = await this.asyncAll('SELECT DISTINCT game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
-      const gameIds = selectResult.map((row) => row.game_id);
+      let gameIds = selectResult.map((row) => row.game_id);
+      if (gameIds.length > 1000) {
+        console.log('Truncated purge to 1000 games.');
+        gameIds = gameIds.slice(0, 1000);
+      } else {
+        console.log(`${gameIds.length} games to be purged.`);
+      }
+
       if (gameIds.length > 0) {
         console.log(`About to purge ${gameIds.length} games`);
         const placeholders = gameIds.map(() => '?').join(', ');

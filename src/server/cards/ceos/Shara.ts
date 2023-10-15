@@ -17,7 +17,7 @@ export class Shara extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY').br;
           b.planetaryTrack().text('2').nbsp.megacredits(0, {clone}).asterix();
-          // TODO: Confirm Balance
+          // TODO(d-little): Confirm Balance
           // There is an option here to balance Shara by subtracting money equal to the current generation.
           // However, this might put Shara on the too-weak side of the equation due to the limits on the Pathfinder influence track.
           // For now, do not subtract the MC, but if users complain that Shara is OP we should revisit this balance.

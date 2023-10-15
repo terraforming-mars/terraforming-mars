@@ -66,7 +66,6 @@ export class GameCards {
       .map(([_option, manifest]) => manifest);
   }
 
-  // TODO(kberg): Readonly
   private instantiate<T extends ICard>(manifest: CardManifest<T>): Array<T> {
     return CardManifest.values(manifest)
       .filter((factory) => factory.instantiate !== false)

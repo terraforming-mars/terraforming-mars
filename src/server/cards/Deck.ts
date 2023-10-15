@@ -16,7 +16,6 @@ import {ICeoCard} from './ceos/ICeoCard';
  */
 export class Deck<T extends ICard> {
   private readonly type;
-  // TODO(kberg): make these private and readonly.
   public drawPile: Array<T>;
   public discardPile: Array<T>;
   private readonly random: Random;

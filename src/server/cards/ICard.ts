@@ -18,6 +18,7 @@ import {TRSource} from '../../common/cards/TRSource';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {OneOrArray} from '../../common/utils/types';
 import {JSONValue} from '../../common/Types';
+import {IStandardProjectCard} from './IStandardProjectCard';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -70,7 +71,7 @@ export interface ICard {
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
   onCardPlayed?(player: IPlayer, card: IProjectCard): PlayerInput | undefined | void;
   onCardPlayedFromAnyPlayer?(thisCardOwner: IPlayer, playedCardOwner: IPlayer, card: IProjectCard): PlayerInput | undefined;
-  onStandardProject?(player: IPlayer, project: ICard): void;
+  onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;
   onDiscard?(player: IPlayer): void;
   /**

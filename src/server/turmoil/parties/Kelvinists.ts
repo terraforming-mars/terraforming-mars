@@ -13,7 +13,6 @@ import {TITLES} from '../../inputs/titles';
 
 export class Kelvinists extends Party implements IParty {
   readonly name = PartyName.KELVINISTS;
-  readonly description = 'Pushes for rapid terraforming, usually employing a heat-first strategy.';
   readonly bonuses = [KELVINISTS_BONUS_1, KELVINISTS_BONUS_2];
   readonly policies = [KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4];
 }

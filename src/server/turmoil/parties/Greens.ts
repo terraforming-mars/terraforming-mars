@@ -23,7 +23,6 @@ import {newMessage} from '../../logs/MessageBuilder';
 
 export class Greens extends Party implements IParty {
   readonly name = PartyName.GREENS;
-  readonly description = 'Want to see a new Earth as soon as possible.';
   readonly bonuses = [GREENS_BONUS_1, GREENS_BONUS_2];
   readonly policies = [GREENS_POLICY_1, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
 }

@@ -17,7 +17,6 @@ import {TITLES} from '../../inputs/titles';
 
 export class MarsFirst extends Party implements IParty {
   readonly name = PartyName.MARS;
-  readonly description = 'Focused on Martian development and independence.';
   readonly bonuses = [MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2];
   readonly policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
 }

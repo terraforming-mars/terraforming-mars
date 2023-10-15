@@ -127,10 +127,6 @@ export default Vue.extend({
       type: String as () => TileView,
       default: 'show',
     },
-    restricted: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {};
@@ -172,7 +168,7 @@ export default Vue.extend({
           } else {
             css += ' board-space-type-volcanic-cove';
           }
-        } else if (!this.restricted) {
+        } else if (this.spaceType !== SpaceType.RESTRICTED) {
           css += ` board-space-type-land`;
 
           if (this.highlight) {

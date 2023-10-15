@@ -9,7 +9,7 @@ import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {Space} from './boards/Space';
-import {LogBuilder} from './logs/LogBuilder';
+import {LogMessageBuilder} from './logs/LogMessageBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
@@ -172,7 +172,7 @@ export interface IGame extends Logger {
   getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined];
   getCardsInHandByResource(player: IPlayer, resourceType: CardResource): void;
   getCardsInHandByType(player: IPlayer, cardType: CardType): void;
-  log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}): void;
+  log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}): void;
   someoneCanHaveProductionReduced(resource: Resource, minQuantity?: number): boolean;
   discardForCost(cardCount: 1 | 2, toPlace: TileType): number;
   getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): Space;

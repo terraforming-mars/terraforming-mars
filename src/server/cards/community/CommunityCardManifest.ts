@@ -1,24 +1,25 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
-import {AgricolaInc} from './AgricolaInc';
-import {Incite} from './Incite';
-import {Playwrights} from './Playwrights';
-import {ProjectWorkshop} from './ProjectWorkshop';
-import {ResearchGrant} from './ResearchGrant';
-import {ValuableGases} from './ValuableGases';
-import {VenusFirst} from './VenusFirst';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+
 import {AerospaceMission} from './AerospaceMission';
-import {TradeAdvance} from './TradeAdvance';
-import {PoliticalUprising} from './PoliticalUprising';
+import {AgricolaInc} from './AgricolaInc';
 import {ByElection} from './ByElection';
-import {Midas} from './Midas';
 import {CuriosityII} from './CuriosityII';
 import {ExecutiveOrder} from './ExecutiveOrder';
-import {UnitedNationsMissionOne} from './UnitedNationsMissionOne';
+import {Incite} from './Incite';
 import {JunkVentures} from './JunkVentures';
+import {LeadershipSummit} from './LeadershipSummit';
+import {Midas} from './Midas';
+import {Playwrights} from './Playwrights';
+import {PoliticalUprising} from './PoliticalUprising';
+import {ProjectWorkshop} from './ProjectWorkshop';
+import {ResearchGrant} from './ResearchGrant';
 import {SpecialDesignProxy} from './SpecialDesignProxy';
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {LeadershipSummit} from '../../turmoil/globalEvents/LeadershipSummit';
+import {TradeAdvance} from './TradeAdvance';
+import {UnitedNationsMissionOne} from './UnitedNationsMissionOne';
+import {ValuableGases} from './ValuableGases';
+import {VenusFirst} from './VenusFirst';
 
 export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   module: 'community',

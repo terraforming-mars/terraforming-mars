@@ -119,10 +119,6 @@ export class LocalFilesystem implements IDatabase {
     return serializedGame.players.length;
   }
 
-  loadCloneableGame(gameId: GameId): Promise<SerializedGame> {
-    return this.getGameVersion(gameId, 0);
-  }
-
   getGameIds(): Promise<Array<GameId>> {
     const gameIds: Array<GameId> = [];
 

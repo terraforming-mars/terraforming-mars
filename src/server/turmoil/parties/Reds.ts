@@ -18,7 +18,6 @@ import {TITLES} from '../../inputs/titles';
 
 export class Reds extends Party implements IParty {
   readonly name = PartyName.REDS;
-  readonly description = 'Wishes to preserve the red planet.';
   readonly bonuses = [REDS_BONUS_1, REDS_BONUS_2];
   readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }

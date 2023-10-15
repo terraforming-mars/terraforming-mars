@@ -12,7 +12,6 @@ import {TITLES} from '../../inputs/titles';
 
 export class Scientists extends Party implements IParty {
   readonly name = PartyName.SCIENTISTS as const;
-  readonly description = 'Tech is the door to the future, and Scientists will do anything to open it.' as const;
   readonly bonuses = [SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2];
   readonly policies = [SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4];
 }

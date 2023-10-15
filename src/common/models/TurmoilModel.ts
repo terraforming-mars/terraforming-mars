@@ -24,7 +24,6 @@ export type PolicyUser = {
 
 export type PartyModel = {
   name: PartyName;
-  description: string;
   partyLeader: Color | undefined;
   delegates: Array<DelegatesModel>;
 }

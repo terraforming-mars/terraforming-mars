@@ -725,8 +725,6 @@ describe('Turmoil', function() {
     expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
     expect(Array.from(t.delegateReserve.values())).to.have.members(['p-blue-id', 'p-red-id', 'p-green-id', 'NEUTRAL', 'NEUTRAL']);
     expect(Array.from(t.usedFreeDelegateAction.values())).has.members(['p-blue-id']);
-    expect(t.rulingParty!.description).eq('Want to see a new Earth as soon as possible.');
-    expect(t.getPartyByName(PartyName.KELVINISTS).description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
   });
 
   it('deserialization with legacy lobby', () => {

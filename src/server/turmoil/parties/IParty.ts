@@ -7,11 +7,10 @@ import {MultiSet} from 'mnemonist';
 
 export interface IParty {
     name: PartyName;
-    description: string; // TODO(kberg): fetch description from agenda.
     delegates: MultiSet<Delegate>;
     partyLeader: undefined | Delegate;
     sendDelegate(playerId: Delegate, game: IGame): void;
     removeDelegate(playerId: Delegate, game: IGame): void;
-    bonuses: Array<Bonus>;
-    policies: Array<Policy>;
+    bonuses: ReadonlyArray<Bonus>;
+    policies: ReadonlyArray<Policy>;
 }

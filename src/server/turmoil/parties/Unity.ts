@@ -20,7 +20,6 @@ import {newMessage} from '../../logs/MessageBuilder';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
-  description = 'Wants to see humanity prosper in the whole solar system.';
   bonuses = [UNITY_BONUS_1, UNITY_BONUS_2];
   policies = [UNITY_POLICY_1, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
 }

@@ -5,8 +5,7 @@ import {MessageBuilder} from './MessageBuilder';
 // This is a terrible way to do extension, but given the local scope (this app)
 // and the extra work in a delegate design pattern, this is fine.
 //
-// TODO(kberg): Rename to LogMessageBuilder.
-export class LogBuilder extends MessageBuilder {
+export class LogMessageBuilder extends MessageBuilder {
   private type: LogMessageType;
 
   constructor(message: string) {

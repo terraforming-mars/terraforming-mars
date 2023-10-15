@@ -86,7 +86,6 @@ export class SQLite implements IDatabase {
     return JSON.parse(row.game);
   }
 
-  // TODO(kberg): throw an error if two game ids exist.
   public async getGameId(participantId: ParticipantId): Promise<GameId> {
     // Default sql is for player id;
     let sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';

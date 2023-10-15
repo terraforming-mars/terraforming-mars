@@ -1,6 +1,6 @@
-import {LogBuilder} from './LogBuilder';
+import {LogMessageBuilder} from './LogMessageBuilder';
 import {IPlayer} from '../IPlayer';
 
 export interface Logger {
-  log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}): void;
+  log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}): void;
 }

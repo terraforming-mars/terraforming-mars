@@ -9,7 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all, digit} from '../Options';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class Sabotage extends Card implements IProjectCard {
   constructor() {
@@ -31,7 +31,7 @@ export class Sabotage extends Card implements IProjectCard {
   }
 
   private title(amount: number, type: string, target: IPlayer) {
-    return newMessage('Remove ${0} {1} from {2}', (b) => b.number(amount).string(type).player(target));
+    return message('Remove ${0} {1} from {2}', (b) => b.number(amount).string(type).player(target));
   }
 
   public override bespokePlay(player: IPlayer) {

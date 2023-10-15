@@ -9,7 +9,7 @@ import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Units} from '../../common/Units';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 type StaticStandardProjectCardProperties = {
   name: CardName,
@@ -88,7 +88,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
         canUseAuroraiData: player.isCorporation(CardName.AURORAI),
         canUseSpireScience: player.isCorporation(CardName.SPIRE),
         canUseAsteroids: canPayWith.kuiperAsteroids && player.isCorporation(CardName.KUIPER_COOPERATIVE),
-        title: newMessage('Select how to pay for the ${0} standard project', (b) => b.cardName(this.name)),
+        title: message('Select how to pay for the ${0} standard project', (b) => b.cardName(this.name)),
       })).andThen(() => {
       this.projectPlayed(player);
       this.actionEssence(player);

@@ -5,7 +5,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {LogHelper} from '../LogHelper';
 import {oneWayDifference} from '../../common/utils/utils';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 export enum LogType {
   DREW = 'drew',
@@ -65,7 +65,7 @@ export class ChooseCards extends DeferredAction {
           new SelectPaymentDeferred(
             player,
             cost,
-            {title: newMessage('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
+            {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
             .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
       } else if (options.logDrawnCard === true) {
         keep(player, selected, unselected, LogType.DREW_VERBOSE);

@@ -11,7 +11,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class LocalHeatTrapping extends Card implements IProjectCard {
   constructor() {
@@ -81,7 +81,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       const targetCard = animalCards[0];
       availableActions.options.push(
         gainPlantsOption,
-        new SelectOption(newMessage('Add ${0} animals to ${1}', (b) => b.number(2).card(targetCard)), 'Add animals').andThen(() => {
+        new SelectOption(message('Add ${0} animals to ${1}', (b) => b.number(2).card(targetCard)), 'Add animals').andThen(() => {
           player.addResourceTo(targetCard, {qty: 2, log: true});
           return undefined;
         }));

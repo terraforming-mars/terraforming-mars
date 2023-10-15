@@ -26,7 +26,7 @@ import {IColony, TradeOptions} from './IColony';
 import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {sum} from '../../common/utils/utils';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 export abstract class Colony implements IColony {
@@ -192,7 +192,7 @@ export abstract class Colony implements IColony {
         {
           count: quantity,
           restrictedTag: Tag.VENUS,
-          title: newMessage('Select Venus card to add ${0} resource(s)', (b) => b.number(quantity)),
+          title: message('Select Venus card to add ${0} resource(s)', (b) => b.number(quantity)),
         });
       break;
 

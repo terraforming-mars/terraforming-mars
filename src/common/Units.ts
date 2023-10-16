@@ -5,7 +5,7 @@ import {Resource} from './Resource';
 
 // Units represents any value of each standard unit.
 // Could be positive or negative, depending on how it's used.
-export interface Units {
+export type Units = {
   megacredits: number;
   steel: number;
   titanium: number;

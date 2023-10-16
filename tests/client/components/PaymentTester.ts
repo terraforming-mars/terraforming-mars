@@ -63,7 +63,7 @@ export class PaymentTester {
   // It verifies that the model has this value, and also that the text box
   // has the same value.
   public expectValue(type: PaymentUnit, amount: number) {
-    const vmVal = this.model[type];
+    const vmVal = this.model.units[type];
     expect(this.getValue(type), `text box value for ${type}`).eq(String(amount));
     expect(vmVal, 'VM box value for ' + type).eq(amount);
   }

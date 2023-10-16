@@ -1,54 +1,36 @@
 // Common code for SelectPayment and SelectProjectCardToPlay
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
-import {SelectPaymentModel as SPM, SelectProjectCardToPlayModel as SPCM} from '@/common/models/PlayerInputModel';
+import {SelectPaymentModel, SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardResource} from '@/common/CardResource';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {DEFAULT_PAYMENT_VALUES, PAYMENT_UNITS, PaymentUnit} from '@/common/inputs/Payment';
+import {DEFAULT_PAYMENT_VALUES, PAYMENT_UNITS, Payment, PaymentUnit} from '@/common/inputs/Payment';
 
 export type SelectPaymentDataModel = {
-    card?: CardModel;
-    cost: number;
-    heat: number;
-    megaCredits: number;
-    steel: number;
-    titanium: number;
-    plants: number; // Plants are not actually used in this compnent. It's just to satisfy the mixin.
-    microbes: number; // Microbes are not actually used in this component. It's just to satisfy the mixin.
-    floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
-    warning: string | undefined;
-    lunaArchivesScience?: number; // Luna Archives Science isn't used in this component, but it simplifies testing.
-    spireScience?: number;
-    seeds?: number;
-    auroraiData?: number;
-    graphene?: number; // Graphene isn't used in this component, but it simplifies testing.
-    kuiperAsteroids: number;
+  card?: CardModel;
+  cost: number;
+  warning: string | undefined;
+  units: Payment;
 }
 
 export type SelectProjectCardToPlayDataModel = SelectPaymentDataModel & {
+  // The cards to select from
+  cards: Array<CardModel>;
+
+  // Information about the currently selected card
   cardName: CardName;
   card: CardModel;
   reserveUnits: Units;
-  cards: Array<CardModel>;
-  tags: Array<Tag>
-  lunaArchivesScience: number;
-  seeds: number;
-  graphene: number;
+  tags: Array<Tag>;
   available: Units;
 }
 
-export interface PaymentWidgetModel extends SelectPaymentDataModel {
-  cardName?: CardName;
-  card?: CardModel;
-  cards?: Array<CardModel>;
-  tags?: Array<Tag>;
-  available?: Units;
-  $data: SelectPaymentDataModel | SelectProjectCardToPlayDataModel;
+type PaymentWidgetModel = SelectPaymentDataModel & Partial<SelectProjectCardToPlayDataModel> & {
   playerView: PlayerViewModel;
-  playerinput: SPM | SPCM;
+  playerinput: SelectPaymentModel | SelectProjectCardToPlayModel;
 }
 
 export const PaymentWidgetMixin = {
@@ -90,39 +72,48 @@ export const PaymentWidgetMixin = {
       }
       return titaniumValue;
     },
-    reduceValue(unit: PaymentUnit, delta: number): void {
-      const currentValue: number | undefined = this.asModel()[unit];
+    /**
+     * Reduce `unit` by one.
+     */
+    reduceValue(unit: PaymentUnit): void {
+      const currentValue: number | undefined = this.asModel().units[unit];
       if (currentValue === undefined) {
         throw new Error(`can not reduceValue for ${unit} on this`);
       }
 
-      const adjustedDelta = Math.min(delta, currentValue);
+      const adjustedDelta = Math.min(1, currentValue);
       if (adjustedDelta === 0) return;
-      this.asModel()[unit] -= adjustedDelta;
+      this.asModel().units[unit] -= adjustedDelta;
       if (unit !== 'megaCredits') this.setRemainingMCValue();
     },
-    // max is the largest value this item can be. It's not the largest delta.
-    addValue(unit: PaymentUnit, delta: number, max?: number): void {
-      const currentValue: number | undefined = this.asModel()[unit];
+    /**
+     * Increase `unit` by one.
+     */
+    addValue(unit: PaymentUnit): void {
+      const currentValue: number | undefined = this.asModel().units[unit];
       if (currentValue === undefined) {
         throw new Error(`can not addValue for ${unit} on this`);
       }
 
-      let maxValue: number = max ?? this.getAvailableUnits(unit);
-      // TODO(kberg): Remove this special code for MC?
-      if (unit === 'megaCredits') {
-        maxValue = this.getMegaCreditsMax();
-      }
+      // Maxiumum value for this unit.
+      // MC has a special-case because the max isn't how many MC the player has,
+      // but how much they need to spend.
+      const maxValue =
+        unit === 'megaCredits' ?
+          this.getMegaCreditsMax() :
+          this.getAvailableUnits(unit);
 
       if (currentValue === maxValue) {
         return;
       }
 
-      const adjustedDelta = Math.min(delta, maxValue - currentValue);
-      if (adjustedDelta === 0) {
+      // addValue used to take a delta parameter, but now add only goes up by one.
+      // This Math.min is probably no longer necessary.
+      const delta = Math.min(1, maxValue - currentValue);
+      if (delta === 0) {
         return;
       }
-      this.asModel()[unit] += adjustedDelta;
+      this.asModel().units[unit] += delta;
       if (unit !== 'megaCredits') {
         this.setRemainingMCValue();
       }
@@ -130,30 +121,27 @@ export const PaymentWidgetMixin = {
     setRemainingMCValue(): void {
       const ta = this.asModel();
 
-      let remainingMC = ta.$data.cost;
+      let remainingMC = ta.cost;
 
       for (const resource of PAYMENT_UNITS) {
         if (resource === 'megaCredits') {
           continue;
         }
-        const value = (ta[resource] ?? 0) * this.getResourceRate(resource);
+        const value = ta.units[resource] * this.getResourceRate(resource);
         remainingMC -= value;
       }
 
-      ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+      ta.units['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue(unit: PaymentUnit, max?: number): void {
-      let currentValue: number | undefined = this.asModel()[unit];
-      if (currentValue === undefined) {
-        throw new Error(`can not setMaxValue for ${unit} on this`);
-      }
-      const cost: number = this.asModel().$data.cost;
+    setMaxValue(unit: PaymentUnit): void {
+      let currentValue: number = this.asModel().units[unit];
+      const cost: number = this.asModel().cost;
       const resourceRate = this.getResourceRate(unit);
       const amountNeed = Math.floor(cost / resourceRate);
       const amountHave: number = this.getAvailableUnits(unit);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
-        this.addValue(unit, 1, max);
+        this.addValue(unit);
         currentValue++;
       }
     },
@@ -204,7 +192,7 @@ export const PaymentWidgetMixin = {
       // then amount, below would be -1, so the Math.max makes sure it's zero.
 
       // BTW, this could be managed by some derivative of reserveUnits that took extended resources into account.
-      if (unit === 'floaters' && this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
+      if (unit === 'floaters' && this.asModel().card?.name === CardName.STRATOSPHERIC_BIRDS) {
         // Find a card other than Dirigibles with floaters.
         // If there is none, then Dirigibles can't use every one.
         if (!thisPlayer.tableau.some((card) => {
@@ -219,11 +207,10 @@ export const PaymentWidgetMixin = {
       const model = this.asModel();
       const thisPlayer = model.playerView.thisPlayer;
       const stormcraft = thisPlayer.tableau.find((card) => card.name === CardName.STORMCRAFT_INCORPORATED);
-      if (stormcraft !== undefined && stormcraft.resources !== undefined) {
+      if (stormcraft?.resources !== undefined) {
         return thisPlayer.heat + (stormcraft.resources * 2);
       }
       return thisPlayer.heat;
     },
-
   },
 };

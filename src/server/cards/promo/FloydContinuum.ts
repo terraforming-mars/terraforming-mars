@@ -15,7 +15,7 @@ import {IActionCard} from '../ICard';
 export class FloydContinuum extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      cost: 12,
+      cost: 4,
       name: CardName.FLOYD_CONTINUUM,
       tags: [Tag.SCIENCE],
       type: CardType.ACTIVE,

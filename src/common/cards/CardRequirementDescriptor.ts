@@ -28,6 +28,8 @@ import {RequirementType} from './RequirementType';
 
 export type CardRequirementDescriptor = {
   tag?: Tag,
+  sumTags?: Array<Tag>,
+  uniqueTags?: {},
   oxygen?: number,
   temperature?: number,
   greeneries?: number,
@@ -117,6 +119,10 @@ export function requirementType(descriptor: CardRequirementDescriptor): Requirem
     return RequirementType.ROAD_TILES;
   // } else if (descriptor.excavation !== undefined) {
   //   return RequirementType.EXCAVATION;
+  } else if (descriptor.sumTags !== undefined) {
+    return RequirementType.SUM_TAGS;
+  } else if (descriptor.uniqueTags !== undefined) {
+    return RequirementType.UNIQUE_TAGS;
   } else if (descriptor.corruption !== undefined) {
     return RequirementType.CORRUPTION;
   } else {

@@ -63,7 +63,7 @@ export default Vue.extend({
   methods: {
     playerFactorySaved(idx: number) {
       return (out: InputResponse) => {
-        this.$data.responded[idx] = out;
+        this.responded[idx] = out;
       };
     },
     canSave(): boolean {

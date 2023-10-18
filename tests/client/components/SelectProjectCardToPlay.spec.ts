@@ -12,6 +12,7 @@ import {Payment} from '@/common/inputs/Payment';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
+import {SelectProjectCardToPlayDataModel} from '@/client/mixins/PaymentWidgetMixin';
 
 describe('SelectProjectCardToPlay', () => {
   let localStorage: FakeLocalStorage;
@@ -412,7 +413,7 @@ describe('SelectProjectCardToPlay', () => {
 
     tester.expectValue('megaCredits', 6);
     tester.expectValue('titanium', 7);
-    expect((wrapper.vm as any).steel).eq(0);
+    expect((wrapper.vm as unknown as SelectProjectCardToPlayDataModel).payment.steel).eq(0);
     tester.expectIsAvailable('steel', false);
 
     tester.clickSave();

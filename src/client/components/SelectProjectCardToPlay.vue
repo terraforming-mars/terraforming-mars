@@ -62,20 +62,9 @@ export default Vue.extend({
       cards: cards,
       cost: 0,
       tags: [],
-      heat: 0,
-      megaCredits: 0,
-      steel: 0,
-      titanium: 0,
-      plants: 0,
-      microbes: 0,
-      lunaArchivesScience: 0,
-      seeds: 0,
-      floaters: 0,
-      auroraiData: 0,
-      graphene: 0,
+      payment: {...Payment.EMPTY},
       warning: undefined,
       available: Units.of({}),
-      kuiperAsteroids: 0,
     };
   },
   components: {
@@ -88,7 +77,7 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost ?? 0;
       this.tags = this.getCardTags(),
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+      this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     });
@@ -110,7 +99,7 @@ export default Vue.extend({
         if (target === 'megaCredits') {
           continue;
         }
-        this[target] = 0;
+        this.payment[target] = 0;
       }
 
       let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
@@ -154,7 +143,7 @@ export default Vue.extend({
 
       for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
-          this.$data[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
+          this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
         }
       }
 
@@ -162,22 +151,22 @@ export default Vue.extend({
       // It's doable of course.
       this.available.steel = Math.max(this.thisPlayer.steel - this.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUse('steel')) {
-        this.steel = deductUnits(this.available.steel, this.getResourceRate('steel'), true);
+        this.payment.steel = deductUnits(this.available.steel, this.getResourceRate('steel'), true);
       }
 
       this.available.titanium = Math.max(this.thisPlayer.titanium - this.reserveUnits.titanium, 0);
       if (megacreditBalance > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium())) {
-        this.titanium = deductUnits(this.available.titanium, this.getResourceRate('titanium'), true);
+        this.payment.titanium = deductUnits(this.available.titanium, this.getResourceRate('titanium'), true);
       }
 
       this.available.heat = Math.max(this.availableHeat() - this.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUse('heat')) {
-        this.heat = deductUnits(this.available.heat, this.getResourceRate('heat'));
+        this.payment.heat = deductUnits(this.available.heat, this.getResourceRate('heat'));
       }
 
       this.available.plants = Math.max(this.thisPlayer.plants - this.reserveUnits.plants, 0);
       if (megacreditBalance > 0 && this.canUse('plants')) {
-        this.plants = deductUnits(this.available.plants, this.getResourceRate('plants'));
+        this.payment.plants = deductUnits(this.available.plants, this.getResourceRate('plants'));
       }
 
       // If we are overspending
@@ -195,7 +184,7 @@ export default Vue.extend({
           'graphene',
           'lunaArchivesScience',
           'megaCredits'] as const) {
-          this[key] -= saveOverspendingUnits(this[key], this.getResourceRate(key));
+          this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
       }
     },
@@ -249,7 +238,7 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+      this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     },
@@ -279,16 +268,14 @@ export default Vue.extend({
       return this.reserveUnits.plants > 0 && this.canUse('plants');
     },
     saveData() {
-      const payment: Payment = {...Payment.EMPTY};
       let totalSpent = 0;
 
       for (const target of PAYMENT_UNITS) {
-        payment[target] = this[target] ?? 0;
-        totalSpent += payment[target] * this.getResourceRate(target);
+        totalSpent += this.payment[target] * this.getResourceRate(target);
       }
 
       for (const target of PAYMENT_UNITS) {
-        if (payment[target] > this.getAvailableUnits(target)) {
+        if (this.payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
         }
@@ -301,7 +288,7 @@ export default Vue.extend({
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
         for (const target of PAYMENT_UNITS) {
-          if (payment[target] && diff >= this.getResourceRate(target)) {
+          if (this.payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;
           }
@@ -317,7 +304,7 @@ export default Vue.extend({
           this.onsave({
             type: 'projectCard',
             card: this.card.name,
-            payment: payment,
+            payment: this.payment,
           });
         } else {
           this.warning = 'Please adjust payment amount';
@@ -327,7 +314,7 @@ export default Vue.extend({
         this.onsave({
           type: 'projectCard',
           card: this.card.name,
-          payment: payment,
+          payment: this.payment,
         });
       }
     },
@@ -352,7 +339,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('steel')">
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay with Steel"></i>
       <AppButton type="minus" @click="reduceValue('steel', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="steel" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.steel" />
       <AppButton type="plus" @click="addValue('steel', 1, available.steel)" />
       <AppButton type="max" @click="setMaxValue('steel', available.steel)" title="MAX" />
     </div>
@@ -363,7 +350,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('titanium') || canUseLunaTradeFederationTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay with Titanium')"></i>
       <AppButton type="minus" @click="reduceValue('titanium', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="titanium" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.titanium" />
       <AppButton type="plus" @click="addValue('titanium', 1, available.titanium)" />
       <AppButton type="max" @click="setMaxValue('titanium', available.titanium)" title="MAX" />
     </div>
@@ -374,7 +361,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('heat')">
       <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay with Heat')"></i>
       <AppButton type="minus" @click="reduceValue('heat', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="heat" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.heat" />
       <AppButton type="plus" @click="addValue('heat', 1, available.heat)" />
       <AppButton type="max" @click="setMaxValue('heat', available.heat)" title="MAX" />
     </div>
@@ -385,7 +372,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('plants')">
       <i class="resource_icon resource_icon--plants payments_type_icon" :title="$t('Pay with plants')"></i>
       <AppButton type="minus" @click="reduceValue('plants', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="plants" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.plants" />
       <AppButton type="plus" @click="addValue('plants', 1, available.plants)" />
       <AppButton type="max" @click="setMaxValue('plants', available.plants)" title="MAX" />
     </div>
@@ -396,7 +383,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('microbes')">
       <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay with Microbes')"></i>
       <AppButton type="minus" @click="reduceValue('microbes', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="microbes" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.microbes" />
       <AppButton type="plus" @click="addValue('microbes', 1)" />
       <AppButton type="max" @click="setMaxValue('microbes')" title="MAX" />
     </div>
@@ -404,7 +391,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('floaters')">
       <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay with Floaters')"></i>
       <AppButton type="minus" @click="reduceValue('floaters', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="floaters" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.floaters" />
       <AppButton type="plus" @click="addValue('floaters', 1)" />
       <AppButton type="max" @click="setMaxValue('floaters')" title="MAX" />
     </div>
@@ -412,7 +399,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('lunaArchivesScience')">
       <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay with (Luna Archive) Science Resources')"></i>
       <AppButton type="minus" @click="reduceValue('lunaArchivesScience', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="lunaArchivesScience" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.lunaArchivesScience" />
       <AppButton type="plus" @click="addValue('lunaArchivesScience', 1)" />
       <AppButton type="max" @click="setMaxValue('lunaArchivesScience')" title="MAX" />
     </div>
@@ -420,7 +407,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('seeds')">
       <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay with Seeds')"></i>
       <AppButton type="minus" @click="reduceValue('seeds', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="seeds" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.seeds" />
       <AppButton type="plus" @click="addValue('seeds', 1)" />
       <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
@@ -428,7 +415,7 @@ export default Vue.extend({
     <div class="payments_type input-group" v-if="canUse('graphene')">
       <i class="resource_icon resource_icon--graphene payments_type_icon" :title="$t('Pay with graphene')"></i>
       <AppButton type="minus" @click="reduceValue('graphene', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="graphene" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.graphene" />
       <AppButton type="plus" @click="addValue('graphene', 1)" />
       <AppButton type="max" @click="setMaxValue('graphene')" title="MAX" />
     </div>
@@ -437,7 +424,7 @@ export default Vue.extend({
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay with Megacredits')"></i>
       <AppButton type="minus" @click="reduceValue('megaCredits', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
+      <input class="form-input form-inline payments_input" v-model.number="payment.megaCredits" />
       <AppButton type="plus" @click="addValue('megaCredits', 1)" />
     </div>
 

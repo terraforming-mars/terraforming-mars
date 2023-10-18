@@ -325,7 +325,7 @@ describe('SelectPayment', () => {
     tester.expectValue('titanium', 2);
   });
 
-  const setupBill = function(
+  function setupBill(
     amount: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<SelectPaymentModel>) {
@@ -366,5 +366,5 @@ describe('SelectPayment', () => {
         showtitle: true,
       },
     });
-  };
+  }
 });

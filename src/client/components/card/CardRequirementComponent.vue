@@ -7,12 +7,6 @@
           <div class="card-special card-minus"></div>
           <div class="card-resource card-resource-plant red-outline"></div>
         </template>
-        <template v-if="type === RequirementType.SUM_TAGS">
-          &nbsp;
-          <template v-for="(tag, index) in tagList">
-            <div :class="getTagClasses(tag, index)" :key="index"></div>
-          </template>
-        </template>
         <template v-if="type === RequirementType.PRODUCTION">
           <div class="card-production-box card-production-box--req">
             <div class="card-production-box-row">
@@ -44,7 +38,6 @@ import {RequirementType} from '@/common/cards/RequirementType';
 import {range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
-import {Tag} from '@/common/cards/Tag';
 
 export default Vue.extend({
   name: 'CardRequirementComponent',
@@ -153,11 +146,8 @@ export default Vue.extend({
         return ['card-tile-lunar-mine--S', 'tile--req'];
       case RequirementType.ROAD_TILES:
         return ['card-tile-lunar-road--S', 'tile--req'];
-      case RequirementType.UNIQUE_TAGS:
-        return ['card-resource-tag--S', 'card-resource-diverse'];
       case RequirementType.PRODUCTION:
       case RequirementType.REMOVED_PLANTS:
-      case RequirementType.SUM_TAGS:
         break;
       }
       return [];
@@ -208,15 +198,6 @@ export default Vue.extend({
         return 'nextto-rightside';
       }
       return '';
-    },
-    tagList(): Array<Tag> | undefined {
-      return this.requirement.sumTags;
-    },
-  },
-  methods: {
-    getTagClasses(tag: Tag, index: number): Array<string> {
-      const class1 = index === 0 ? 'card-resource-tag--S' : 'card-resource-tag--overlap';
-      return [class1, 'card-tag-' + tag];
     },
   },
 });

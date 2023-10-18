@@ -27,8 +27,8 @@ import {TemperatureRequirement} from './TemperatureRequirement';
 import {VenusRequirement} from './VenusRequirement';
 import {CardRequirementDescriptor} from '../../../common/cards/CardRequirementDescriptor';
 import {CorruptionRequirement} from './CorruptionRequirement';
-import { SumTagsCardRequirement } from './SumTagsCardRequirement';
-import { UniqueTagsCardRequirement } from './UniqueTagsCardRequirement';
+import {SumTagsCardRequirement} from './SumTagsCardRequirement';
+import {UniqueTagsCardRequirement} from './UniqueTagsCardRequirement';
 
 export class CardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}

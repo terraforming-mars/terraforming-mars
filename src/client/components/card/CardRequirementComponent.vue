@@ -44,7 +44,7 @@ import {RequirementType} from '@/common/cards/RequirementType';
 import {range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
-import { Tag } from '@/common/cards/Tag';
+import {Tag} from '@/common/cards/Tag';
 
 export default Vue.extend({
   name: 'CardRequirementComponent',
@@ -154,7 +154,7 @@ export default Vue.extend({
       case RequirementType.ROAD_TILES:
         return ['card-tile-lunar-road--S', 'tile--req'];
       case RequirementType.UNIQUE_TAGS:
-        return ['card-resource-tag--S', 'card-resource-diverse']
+        return ['card-resource-tag--S', 'card-resource-diverse'];
       case RequirementType.PRODUCTION:
       case RequirementType.REMOVED_PLANTS:
       case RequirementType.SUM_TAGS:
@@ -218,6 +218,6 @@ export default Vue.extend({
       const class1 = index === 0 ? 'card-resource-tag--S' : 'card-resource-tag--overlap';
       return [class1, 'card-tag-' + tag];
     },
-  }
+  },
 });
 </script>

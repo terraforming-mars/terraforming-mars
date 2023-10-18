@@ -41,7 +41,6 @@ export default Vue.extend({
     },
     componentClasses(): ReadonlyArray<string> {
       let classes: Array<string> = [];
-      
       switch (this.item.type) {
       case CardRenderItemType.TEMPERATURE:
         classes.push('card-global-requirement', 'card-temperature-global-requirement');
@@ -464,5 +463,4 @@ export default Vue.extend({
     },
   },
 });
-
 </script>

@@ -16,7 +16,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
 import {sum} from '../../../common/utils/utils';
 import {TITLES} from '../../inputs/titles';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -91,7 +91,7 @@ class UnityPolicy02 implements Policy {
 
         if (availableFloaterCards.length === 1) {
           orOptions.options.push(
-            new SelectOption(newMessage('Add ${0} floaters to ${1}', (b) => b.number(2).card(availableFloaterCards[0]))).andThen(() => {
+            new SelectOption(message('Add ${0} floaters to ${1}', (b) => b.number(2).card(availableFloaterCards[0]))).andThen(() => {
               player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
 
               return undefined;

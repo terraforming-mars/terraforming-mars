@@ -4,7 +4,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {_AresHazardPlacement} from '../ares/AresHazards';
 import {TileType} from '../../common/TileType';
 import {Message} from '../../common/logs/Message';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 export class PlaceHazardTile extends DeferredAction {
   constructor(
@@ -23,7 +23,7 @@ export class PlaceHazardTile extends DeferredAction {
       return undefined;
     }
     const hazardType = this.hazardType;
-    const title = this.options?.title || newMessage('Select space for ${0}', (b) => b.tileType(hazardType));
+    const title = this.options?.title || message('Select space for ${0}', (b) => b.tileType(hazardType));
 
     return new SelectSpace(title, availableSpaces)
       .andThen((space) => {

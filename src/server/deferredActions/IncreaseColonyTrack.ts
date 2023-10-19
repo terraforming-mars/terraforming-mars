@@ -5,14 +5,14 @@ import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 export class IncreaseColonyTrack extends DeferredAction {
   constructor(
     player: IPlayer,
     public colony: IColony,
     public steps: number,
-    public title: string | Message = newMessage('Increase ${0} colony track before trade', (b) => b.colony(colony)),
+    public title: string | Message = message('Increase ${0} colony track before trade', (b) => b.colony(colony)),
   ) {
     super(player, Priority.INCREASE_COLONY_TRACK);
   }
@@ -26,7 +26,7 @@ export class IncreaseColonyTrack extends DeferredAction {
     const options = new OrOptions();
     for (let step = this.steps; step > 0; step--) {
       options.options.push(
-        new SelectOption(newMessage('Increase colony track ${0} step(s)', (b) => b.number(step)))
+        new SelectOption(message('Increase colony track ${0} step(s)', (b) => b.number(step)))
           .andThen(() => {
             this.colony.increaseTrack(step);
             LogHelper.logColonyTrackIncrease(this.player, this.colony, step);

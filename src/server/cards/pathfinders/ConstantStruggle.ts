@@ -1,13 +1,13 @@
-import {IGlobalEvent} from './IGlobalEvent';
-import {GlobalEvent} from './GlobalEvent';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {Turmoil} from '../Turmoil';
+import {Turmoil} from '../../turmoil/Turmoil';
 import {Resource} from '../../../common/Resource';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {

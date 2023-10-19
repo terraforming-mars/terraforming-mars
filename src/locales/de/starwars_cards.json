@@ -1,0 +1,28 @@
+{
+  "Trade Embargo (I)": "Handelsembargo (I)",
+  "Nobody may trade for the rest of this generation.": "Für den Rest dieser Generation darf niemand mehr handeln.",
+
+  "Clone Troopers (II)": "Klonkrieger (II)",
+  "Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.": "AKTION: Füge einen Klonkrieger zu dieser Karte hinzu ODER entferne einen Klonkrieger von dieser Karte, um eine Standardressource von einem beliebigen Spieler zu klauen.",
+
+  "Behold The Emperor! (III)": "Seht den Imperator! (III)",
+  "Requires that you are Chairman. The current ruling party will automatically be the ruling party during the next Solar phase, and you will remain the Chairman. (As if the current ruling party were dominant and you were its party leader.)": "Benötigt, dass Sie Vorsitzender sind. Die derzeitige Regierungspartei wird in der nächsten Sonnenphase automatisch die Regierungspartei sein, und du bleibst der Vorsitzende. (Als ob die derzeitige Regierungspartei dominant wäre und du ihr Parteivorsitzender wärst).",   
+
+  "Tosche Station (IV)": "Tosche Station (IV)",
+  "Action: Spend X Energy and gain X-1 plants (max 4.)": "AKTION: Gib X Energie aus und erhalte X-1 Pflanzen (max. 4).",
+
+  "Cloud City (V)": "Wolkenstadt (V)",
+  "Requires Venus 6%. Raise Venus 1 step. Add 2 floaters to any card.": "Erfordert Venuswertung von 6%. Erhöhe Venuswertung um 1. Füge 2 Schweber zu einer beliebigen Karte hinzu.",
+  
+  "Forest Moon (VI)": "Wald-Mond (VI)",
+  "Requires any 4 greeneries on Mars. Decrease any energy production 2 steps. Add an animal to any card.": "Benötigt 4 beliebige Grünflächenplättchen auf dem Mars. Reduziere die Energieproduktion um 2. Füge ein Tier zu einer beliebigen Karte hinzu.",
+
+  "Takonda Castle (VII)": "Schloss Takonda (VII)",
+  "Gain 1 M€ for each of your microbe tags and animal tags.": "Erhalte 1 M€ für jedes Ihrer Mikroben- und Tiersymbole.",
+
+  "Tool with the First Order (VIII)": "Werkzeug der Ersten Ordnung (VIII)",
+  "Take another action this turn. Gain 1 TR.": "Erhalte 1 TR. Führe in diesem Zug eine weitere Aktion durch.",
+
+  "Rey ... Skywalker?! (IX)": "Rey ... Skywalker?! (IX)",
+  "Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game. (NOTE: currently using the Restricted Area tile instead of a bronze cube.)": "Erhöhe deine M€-Produktion um 4. Platziere einen Bronzewürfel auf einem freien, nicht reservierten Feld auf dem Mars. Auf diesem Feld darf für den Rest des Spiels kein Plättchen mehr platziert werden. (HINWEIS: Derzeit wird das Sperrgebiet-Plättchen anstelle des Bronzewürfels verwendet)."
+}

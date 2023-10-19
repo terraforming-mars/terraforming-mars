@@ -29,7 +29,7 @@ import {Payment} from '../../common/inputs/Payment';
 import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -396,7 +396,7 @@ export class Executor implements BehaviorExecutor {
           card: card.name,
         },
         on: tile.on,
-        title: tile.title ?? newMessage('Select space for ${0} tile', (b) => b.cardName(card.name)),
+        title: tile.title ?? message('Select space for ${0} tile', (b) => b.cardName(card.name)),
         adjacencyBonus: tile.adjacencyBonus,
       }));
     }

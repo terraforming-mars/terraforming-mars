@@ -63,14 +63,14 @@ export default Vue.extend({
   data(): SelectPaymentDataModel {
     return {
       cost: 0,
-      units: {...Payment.EMPTY},
+      payment: {...Payment.EMPTY},
       warning: undefined,
     };
   },
   mounted() {
     Vue.nextTick(() => {
       this.setInitialCost();
-      this.units.megaCredits = this.getMegaCreditsMax();
+      this.payment.megaCredits = this.getMegaCreditsMax();
       this.setDefaultValues();
     });
   },
@@ -110,7 +110,7 @@ export default Vue.extend({
         }
       }
 
-      this.$data[unit] = contributingUnits;
+      this.payment[unit] = contributingUnits;
       return contributingMCValue;
     },
     setDefaultValues(reserveMegacredits: boolean = false) {
@@ -123,7 +123,7 @@ export default Vue.extend({
         amountCovered += this.setDefaultValue(amountCovered, unit);
       }
       if (!reserveMegacredits) {
-        this.units.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
+        this.payment.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
       }
     },
     setMaxMCValue() {
@@ -133,7 +133,7 @@ export default Vue.extend({
     canAffordWithMcOnly() {
       return this.thisPlayer.megaCredits >= this.cost;
     },
-    canUse(unit: PaymentUnit) {
+    canUse(unit: PaymentUnit): boolean {
       if (unit === 'megaCredits') {
         return true;
       }
@@ -141,20 +141,18 @@ export default Vue.extend({
         if (this.thisPlayer.titanium === 0) {
           return false;
         }
-        return this.playerinput.paymentOptions.titanium || this.playerinput.paymentOptions.lunaTradeFederationTitanium;
+        return this.playerinput.paymentOptions.titanium === true|| this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
       }
-      return this.playerinput.paymentOptions[unit] && this.hasUnits(unit);
+      return this.playerinput.paymentOptions[unit] === true && this.hasUnits(unit);
     },
     saveData() {
-      const payment: Payment = {...Payment.EMPTY};
       let totalSpent = 0;
       for (const target of PAYMENT_UNITS) {
-        payment[target] = this.units[target] ?? 0;
-        totalSpent += payment[target] * this.getResourceRate(target);
+        totalSpent += this.payment[target] * this.getResourceRate(target);
       }
 
       for (const target of PAYMENT_UNITS) {
-        if (payment[target] > this.getAvailableUnits(target)) {
+        if (this.payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
         }
@@ -171,14 +169,14 @@ export default Vue.extend({
       // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
       // from user when nothing is required. Can probably remove this if server only removes what is required.
       if (requiredAmt === 0) {
-        payment.heat = 0;
-        payment.megaCredits = 0;
+        this.payment.heat = 0;
+        this.payment.megaCredits = 0;
       }
 
       if (requiredAmt > 0 && totalSpent > requiredAmt) {
         const diff = totalSpent - requiredAmt;
         for (const target of PAYMENT_UNITS) {
-          if (payment[target] && diff >= this.getResourceRate(target)) {
+          if (this.payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;
           }
@@ -194,7 +192,7 @@ export default Vue.extend({
           return;
         }
       }
-      this.onsave({type: 'payment', payment: payment});
+      this.onsave({type: 'payment', payment: this.payment});
     },
   },
 });
@@ -207,7 +205,7 @@ export default Vue.extend({
 
     <template v-for="unit of PAYMENT_UNITS">
       <payment-unit-component
-        v-model.number="units[unit]"
+        v-model.number="payment[unit]"
         v-bind:key="unit"
         v-if="canUse(unit) === true"
         :unit="unit"

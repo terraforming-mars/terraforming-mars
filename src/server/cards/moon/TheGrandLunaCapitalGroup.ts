@@ -41,7 +41,7 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
         cardNumber: 'MC7',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(32).titanium(1).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).br;
-          b.effect('When you place a habitat tile, gain 2 M€ for each adjacent colony tile.', (eb) => {
+          b.effect('When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.', (eb) => {
             eb.moonHabitat({size: Size.SMALL, all}).moonHabitat({size: Size.SMALL}).asterix()
               .startEffect
               .megacredits(2).slash().moonHabitat({size: Size.SMALL, all});

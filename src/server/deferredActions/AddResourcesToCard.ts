@@ -7,7 +7,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {RobotCard} from '../cards/promo/SelfReplicatingRobots';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 export type Options = {
   count?: number;
@@ -87,7 +87,7 @@ export class AddResourcesToCard extends DeferredAction {
   public execute1() {
     const count = this.options.count ?? 1;
     const title = this.options.title ??
-    newMessage('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
+    message('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
 
     const cards = this.getCardsInPlay();
     if (cards.length === 0) {

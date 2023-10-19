@@ -54,18 +54,21 @@ export class PaymentTester {
     await this.nextTick();
   }
 
-  public getValue(type: PaymentUnit) {
-    const textBox = this.wrapper.find(PaymentTester.selector(type) + ' ~ input').element as HTMLInputElement;
+  public getValue(unit: PaymentUnit) {
+    const textBox = this.wrapper.find(PaymentTester.selector(unit) + ' ~ input').element as HTMLInputElement;
+    if (textBox === undefined) {
+      console.warn('Cannot find ' + unit);
+    }
     return textBox?.value;
   }
 
   // This that the given unit has the given value. It does this two ways:
   // It verifies that the model has this value, and also that the text box
   // has the same value.
-  public expectValue(type: PaymentUnit, amount: number) {
-    const vmVal = this.model.units[type];
-    expect(this.getValue(type), `text box value for ${type}`).eq(String(amount));
-    expect(vmVal, 'VM box value for ' + type).eq(amount);
+  public expectValue(unit: PaymentUnit, amount: number) {
+    const vmVal = this.model.payment[unit];
+    expect(this.getValue(unit), `text box value for ${unit}`).eq(String(amount));
+    expect(vmVal, 'VM box value for ' + unit).eq(amount);
   }
 
   // When `expected` is true, this passes when the unit type is available and visible to the user,

@@ -13,7 +13,7 @@ export type SelectPaymentDataModel = {
   card?: CardModel;
   cost: number;
   warning: string | undefined;
-  units: Payment;
+  payment: Payment;
 }
 
 export type SelectProjectCardToPlayDataModel = SelectPaymentDataModel & {
@@ -32,7 +32,6 @@ type PaymentWidgetModel = SelectPaymentDataModel & Partial<SelectProjectCardToPl
   playerView: PlayerViewModel;
   playerinput: SelectPaymentModel | SelectProjectCardToPlayModel;
 }
-
 export const PaymentWidgetMixin = {
   name: 'PaymentWidgetMixin',
   methods: {
@@ -76,21 +75,21 @@ export const PaymentWidgetMixin = {
      * Reduce `unit` by one.
      */
     reduceValue(unit: PaymentUnit): void {
-      const currentValue: number | undefined = this.asModel().units[unit];
+      const currentValue: number | undefined = this.asModel().payment[unit];
       if (currentValue === undefined) {
         throw new Error(`can not reduceValue for ${unit} on this`);
       }
 
       const adjustedDelta = Math.min(1, currentValue);
       if (adjustedDelta === 0) return;
-      this.asModel().units[unit] -= adjustedDelta;
+      this.asModel().payment[unit] -= adjustedDelta;
       if (unit !== 'megaCredits') this.setRemainingMCValue();
     },
     /**
      * Increase `unit` by one.
      */
     addValue(unit: PaymentUnit): void {
-      const currentValue: number | undefined = this.asModel().units[unit];
+      const currentValue: number | undefined = this.asModel().payment[unit];
       if (currentValue === undefined) {
         throw new Error(`can not addValue for ${unit} on this`);
       }
@@ -113,7 +112,7 @@ export const PaymentWidgetMixin = {
       if (delta === 0) {
         return;
       }
-      this.asModel().units[unit] += delta;
+      this.asModel().payment[unit] += delta;
       if (unit !== 'megaCredits') {
         this.setRemainingMCValue();
       }
@@ -127,14 +126,16 @@ export const PaymentWidgetMixin = {
         if (resource === 'megaCredits') {
           continue;
         }
-        const value = ta.units[resource] * this.getResourceRate(resource);
+        const value = (ta.payment[resource] ?? 0) * this.getResourceRate(resource);
         remainingMC -= value;
       }
-
-      ta.units['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+      ta.payment.megaCredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
     setMaxValue(unit: PaymentUnit): void {
-      let currentValue: number = this.asModel().units[unit];
+      let currentValue: number | undefined = this.asModel().payment[unit];
+      if (currentValue === undefined) {
+        throw new Error(`can not setMaxValue for ${unit} on this`);
+      }
       const cost: number = this.asModel().cost;
       const resourceRate = this.getResourceRate(unit);
       const amountNeed = Math.floor(cost / resourceRate);
@@ -179,7 +180,6 @@ export const PaymentWidgetMixin = {
       }
 
       if (amount === undefined) {
-        console.error('Missing resource type: ' + unit);
         return 0;
       }
 

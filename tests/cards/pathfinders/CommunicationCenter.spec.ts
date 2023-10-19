@@ -2,10 +2,12 @@ import {expect} from 'chai';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {fakeCard, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
+import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CommunicationCenter', function() {
   let card: CommunicationCenter;
@@ -44,28 +46,61 @@ describe('CommunicationCenter', function() {
     expect(card.resourceCount).eq(0);
 
     player.onCardPlayed(fakeCard({type: CardType.ACTIVE}));
+    runAllActions(game);
     expect(card.resourceCount).eq(0);
     player.onCardPlayed(fakeCard({type: CardType.AUTOMATED}));
+    runAllActions(game);
     expect(card.resourceCount).eq(0);
     player.onCardPlayed(fakeCard({type: CardType.CORPORATION}));
+    runAllActions(game);
     expect(card.resourceCount).eq(0);
     player.onCardPlayed(fakeCard({type: CardType.PRELUDE}));
+    runAllActions(game);
     expect(card.resourceCount).eq(0);
 
     player.onCardPlayed(fakeCard({type: CardType.EVENT}));
+    runAllActions(game);
     expect(card.resourceCount).eq(1);
 
     player2.onCardPlayed(fakeCard({type: CardType.EVENT}));
+    runAllActions(game);
     expect(card.resourceCount).eq(2);
 
     expect(player.cardsInHand).is.length(0);
     expect(player2.cardsInHand).is.length(0);
 
     player2.onCardPlayed(fakeCard({type: CardType.EVENT}));
+    runAllActions(game);
 
     expect(card.resourceCount).eq(0);
     expect(player.cardsInHand).is.length(1);
     expect(player2.cardsInHand).is.length(0);
+  });
+
+  it('Work with CEOs favorite project', () => {
+    player.playedCards = [card];
+    player.cardsInHand = [];
+    const ceosFavoriteProject = new CEOsFavoriteProject();
+
+    expect(ceosFavoriteProject.canPlay(player)).is.false;
+    card.resourceCount = 2;
+    expect(ceosFavoriteProject.canPlay(player)).is.true;
+
+    player.playCard(ceosFavoriteProject);
+    runAllActions(game);
+    expect(card.resourceCount).eq(2);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    expect(player.cardsInHand).has.length(0);
+
+    selectCard.cb([card]);
+
+    expect(card.resourceCount).eq(0);
+    expect(player.cardsInHand).has.length(1);
+
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    expect(card.resourceCount).eq(1);
   });
 
   it('card.addResourceTo', () => {

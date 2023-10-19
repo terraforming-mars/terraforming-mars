@@ -11,7 +11,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {IGame} from '../../IGame';
 import {IParty} from '../../turmoil/parties/IParty';
 import {all} from '../Options';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class AnOfferYouCantRefuse extends Card {
   constructor() {
@@ -120,7 +120,7 @@ export class AnOfferYouCantRefuse extends Card {
         }
 
         const color = game.getPlayerById(delegate).color;
-        const option = new SelectOption(newMessage('${0} / ${1}', (b) => b.party(party).playerColor(color))).andThen(() => {
+        const option = new SelectOption(message('${0} / ${1}', (b) => b.party(party).playerColor(color))).andThen(() => {
           turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
           turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
           return this.moveToAnotherParty(game, party.name, player.id);

@@ -88,7 +88,7 @@ export default Vue.extend({
       cards: cards,
       cost: 0,
       tags: [],
-      units: {...Payment.EMPTY},
+      payment: {...Payment.EMPTY},
       warning: undefined,
       available: Units.of({}),
     };
@@ -104,7 +104,7 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost ?? 0;
       this.tags = this.getCardTags(),
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.units.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+      this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     });
@@ -126,7 +126,7 @@ export default Vue.extend({
         if (target === 'megaCredits') {
           continue;
         }
-        this.units[target] = 0;
+        this.payment[target] = 0;
       }
 
       let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
@@ -170,7 +170,7 @@ export default Vue.extend({
 
       for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
-          this.$data[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
+          this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
         }
       }
 
@@ -178,22 +178,22 @@ export default Vue.extend({
       // It's doable of course.
       this.available.steel = Math.max(this.thisPlayer.steel - this.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUse('steel')) {
-        this.units.steel = deductUnits(this.available.steel, this.getResourceRate('steel'), true);
+        this.payment.steel = deductUnits(this.available.steel, this.getResourceRate('steel'), true);
       }
 
       this.available.titanium = Math.max(this.thisPlayer.titanium - this.reserveUnits.titanium, 0);
       if (megacreditBalance > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium())) {
-        this.units.titanium = deductUnits(this.available.titanium, this.getResourceRate('titanium'), true);
+        this.payment.titanium = deductUnits(this.available.titanium, this.getResourceRate('titanium'), true);
       }
 
       this.available.heat = Math.max(this.availableHeat() - this.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUse('heat')) {
-        this.units.heat = deductUnits(this.available.heat, this.getResourceRate('heat'));
+        this.payment.heat = deductUnits(this.available.heat, this.getResourceRate('heat'));
       }
 
       this.available.plants = Math.max(this.thisPlayer.plants - this.reserveUnits.plants, 0);
       if (megacreditBalance > 0 && this.canUse('plants')) {
-        this.units.plants = deductUnits(this.available.plants, this.getResourceRate('plants'));
+        this.payment.plants = deductUnits(this.available.plants, this.getResourceRate('plants'));
       }
 
       // If we are overspending
@@ -211,7 +211,7 @@ export default Vue.extend({
           'graphene',
           'lunaArchivesScience',
           'megaCredits'] as const) {
-          this.units[key] -= saveOverspendingUnits(this.units[key], this.getResourceRate(key));
+          this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
       }
     },
@@ -265,7 +265,7 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.units.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+      this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     },
@@ -294,16 +294,14 @@ export default Vue.extend({
       return false;
     },
     saveData() {
-      const payment: Payment = {...Payment.EMPTY};
       let totalSpent = 0;
 
       for (const target of PAYMENT_UNITS) {
-        payment[target] = this.units[target] ?? 0;
-        totalSpent += payment[target] * this.getResourceRate(target);
+        totalSpent += this.payment[target] * this.getResourceRate(target);
       }
 
       for (const target of PAYMENT_UNITS) {
-        if (payment[target] > this.getAvailableUnits(target)) {
+        if (this.payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
         }
@@ -316,7 +314,7 @@ export default Vue.extend({
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
         for (const target of PAYMENT_UNITS) {
-          if (payment[target] && diff >= this.getResourceRate(target)) {
+          if (this.payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;
           }
@@ -332,7 +330,7 @@ export default Vue.extend({
           this.onsave({
             type: 'projectCard',
             card: this.card.name,
-            payment: payment,
+            payment: this.payment,
           });
         } else {
           this.warning = 'Please adjust payment amount';
@@ -342,7 +340,7 @@ export default Vue.extend({
         this.onsave({
           type: 'projectCard',
           card: this.card.name,
-          payment: payment,
+          payment: this.payment,
         });
       }
     },
@@ -367,7 +365,7 @@ export default Vue.extend({
     <template v-for="unit of PAYMENT_UNITS">
       <div v-bind:key="unit">
         <payment-unit-component
-          v-model.number="units[unit]"
+          v-model.number="payment[unit]"
           v-if="canUse(unit) === true"
           :unit="unit"
           :description="descriptions[unit]"

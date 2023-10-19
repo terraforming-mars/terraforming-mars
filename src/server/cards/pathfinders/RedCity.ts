@@ -11,7 +11,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {AresHandler} from '../../ares/AresHandler';
 import {Board} from '../../boards/Board';
 import {IProjectCard} from '../IProjectCard';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class RedCity extends Card implements IProjectCard {
   constructor() {
@@ -53,7 +53,7 @@ export class RedCity extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
-      newMessage('Select space for ${0}', (b) => b.card(this)),
+      message('Select space for ${0}', (b) => b.card(this)),
       this.availableRedCitySpaces(player))
       .andThen((space) => {
         player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});

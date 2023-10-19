@@ -7,7 +7,7 @@ import {CardName} from '../../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Message} from '../../common/logs/Message';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 // TODO (kberg chosta): Make this a card attribute instead
 const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
@@ -20,7 +20,7 @@ export class RemoveResourcesFromCard extends DeferredAction {
     public count: number = 1,
     public ownCardsOnly: boolean = false,
     public mandatory: boolean = true, // Resource must be removed (either it's a cost or the icon is not red-bordered)
-    public title: string | Message = newMessage('Select card to remove ${0} ${1}(s)', (b) => b.number(count).string(resourceType)),
+    public title: string | Message = message('Select card to remove ${0} ${1}(s)', (b) => b.number(count).string(resourceType)),
   ) {
     super(player, Priority.ATTACK_OPPONENT);
     if (ownCardsOnly) {

@@ -13,7 +13,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectPayment} from '../../inputs/SelectPayment';
 import {TITLES} from '../../inputs/titles';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class StJosephOfCupertinoMission extends Card implements IActionCard {
   constructor() {
@@ -54,7 +54,7 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
       .andThen(() => {
         // TODO(kberg): get player.defer to return AndThen<Space>
         player.defer(new SelectSpace(
-          newMessage('Select new space for ${0}', (b) => b.card(this)),
+          message('Select new space for ${0}', (b) => b.card(this)),
           cities)
           .andThen((space) => {
             player.game.stJosephCathedrals.push(space.id);

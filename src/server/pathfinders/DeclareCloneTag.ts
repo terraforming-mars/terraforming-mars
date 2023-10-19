@@ -6,7 +6,7 @@ import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {isPlanetaryTag, PLANETARY_TAGS, PlanetaryTag} from '../pathfinders/PathfindersData';
 import {intersection} from '../../common/utils/utils';
-import {newMessage} from '../logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
 
 /**
@@ -45,7 +45,7 @@ export class DeclareCloneTag extends DeferredAction<PlanetaryTag> {
     });
     const orOptions = new OrOptions(...options);
     if (this.title === undefined) {
-      this.title = newMessage('Assign the clone tag for ${0}', (b) => b.cardName(this.card.name));
+      this.title = message('Assign the clone tag for ${0}', (b) => b.cardName(this.card.name));
     }
     orOptions.title = this.title;
     return orOptions;

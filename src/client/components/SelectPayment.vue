@@ -29,19 +29,9 @@ export default Vue.extend({
     },
   },
   computed: {
+    ...PaymentWidgetMixin.computed,
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
-    },
-    descriptions(): Partial<Record<PaymentUnit, string>> {
-      return {
-        'steel': 'Steel',
-        'titanium': 'Titanium',
-        'heat': 'Heat',
-        'seeds': 'Seeds',
-        'auroraiData': 'Data',
-        'kuiperAsteroids': 'Asteroids',
-        'spireScience': 'Science',
-      };
     },
     PAYMENT_UNITS(): ReadonlyArray<keyof Payment> {
       return [
@@ -194,6 +184,13 @@ export default Vue.extend({
       }
       this.onsave({type: 'payment', payment: this.payment});
     },
+    onMaxClicked(unit: PaymentUnit) {
+      if (unit === 'megaCredits') {
+        this.setMaxMCValue();
+      } else {
+        this.setMaxValue(unit);
+      }
+    },
   },
 });
 
@@ -212,7 +209,7 @@ export default Vue.extend({
         :description="descriptions[unit]"
         @plus="addValue(unit)"
         @minus="reduceValue(unit)"
-        @max="setMaxValue(unit)">
+        @max="onMaxClicked(unit)">
       </payment-unit-component>
     </template>
 
@@ -221,7 +218,7 @@ export default Vue.extend({
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
     </div>
 
   </section>

@@ -213,4 +213,23 @@ export const PaymentWidgetMixin = {
       return thisPlayer.heat;
     },
   },
+  computed: {
+    descriptions(): Record<PaymentUnit, string> {
+      return {
+        steel: 'Steel',
+        titanium: 'Titanium',
+        heat: 'Heat',
+        seeds: 'Seeds',
+        auroraiData: 'Data',
+        kuiperAsteroids: 'Asteroids',
+        spireScience: 'Science',
+        megaCredits: 'M€',
+        floaters: 'Floaters',
+        graphene: 'Graphene',
+        lunaArchivesScience: 'Science',
+        microbes: 'Microbes',
+        plants: 'Plants',
+      };
+    },
+  },
 };

@@ -26,8 +26,9 @@ export default Vue.extend({
 });
 </script>
 <template>
-  <div class="payments_type input-group">
-    <i class="resource_icon payments_type_icon" :class="'resource_icon--' + unit"  :title="$t('Pay with ' + description)"></i>
+  <div class="payments_type input-group" :data-test="unit">
+    <!-- TODO(kberg): remove toLowerCase -->
+    <i class="resource_icon payments_type_icon" :class="'resource_icon--' + unit.toLowerCase()"  :title="$t('Pay with ' + description)"></i>
     <AppButton type="minus" @click="$emit('minus')" />
     <input
       class="form-input form-inline payments_input"

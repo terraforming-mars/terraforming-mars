@@ -37,19 +37,9 @@ export default Vue.extend({
     },
   },
   computed: {
+    ...PaymentWidgetMixin.computed,
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
-    },
-    descriptions(): Partial<Record<PaymentUnit, string>> {
-      return {
-        'steel': 'Steel',
-        'titanium': 'Titanium',
-        'heat': 'Heat',
-        'seeds': 'Seeds',
-        'auroraiData': 'Data',
-        'kuiperAsteroids': 'Asteroids',
-        'spireScience': 'Science',
-      };
     },
     PAYMENT_UNITS(): ReadonlyArray<keyof Payment> {
       return [
@@ -222,6 +212,7 @@ export default Vue.extend({
     cardCanUse(unit: PaymentUnit): boolean {
       switch (unit) {
       case 'megaCredits':
+        return true;
       case 'heat':
         return this.playerinput.paymentOptions.heat === true;
       case 'steel':
@@ -384,7 +375,7 @@ export default Vue.extend({
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="playerinput.buttonLabel" data-test="save"/>
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
     </div>
   </section>
 </div>

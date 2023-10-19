@@ -179,7 +179,6 @@ export default Vue.extend({
       case RequirementType.VENUS:
       case RequirementType.PARTY:
       case RequirementType.REMOVED_PLANTS:
-      case RequirementType.SUM_TAGS:
         return false;
       }
       return this.count < 4;

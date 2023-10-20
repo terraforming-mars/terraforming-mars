@@ -27,10 +27,10 @@ export class SelectPayment extends BasePlayerInput<Payment> {
         lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
         ...this.paymentOptions,
       },
-      seeds: player.getSpendableSeedResources(),
-      auroraiData: player.getSpendableData(),
-      kuiperAsteroids: player.getSpendableKuiperAsteroids(),
-      spireScience: player.getSpendableSpireScienceResources(),
+      seeds: player.getSpendable('seeds'),
+      auroraiData: player.getSpendable('auroraiData'),
+      kuiperAsteroids: player.getSpendable('kuiperAsteroids'),
+      spireScience: player.getSpendable('spireScience'),
     };
   }
 

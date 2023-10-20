@@ -42,7 +42,6 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
     if (this.options.canUseAsteroids && this.player.resourcesOnCard(CardName.KUIPER_COOPERATIVE) > 0) {
       return false;
     }
-    // HOOK: Luna Trade Federation
     if (this.player.isCorporation(CardName.LUNA_TRADE_FEDERATION) && this.player.titanium > 0) {
       return false;
     }

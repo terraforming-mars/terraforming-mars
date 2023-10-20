@@ -156,7 +156,11 @@ export const PaymentWidgetMixin = {
       const thisPlayer = model.playerView.thisPlayer;
       switch (unit) {
       case 'heat':
-        amount = this.availableHeat();
+        if (model.hasOwnProperty('available')) {
+          amount = model.available?.[unit] ?? -1;
+        } else {
+          amount = this.availableHeat();
+        }
         break;
 
       case 'steel':

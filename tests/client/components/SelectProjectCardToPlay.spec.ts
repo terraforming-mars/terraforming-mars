@@ -305,11 +305,11 @@ describe('SelectProjectCardToPlay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectAvailablePaymentComponents('steel', 'microbes', 'megaCredits');
+    tester.expectAvailablePaymentComponents('steel', 'microbes');
     tester.expectPayment({steel: 4, microbes: 4, megaCredits: 0});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4, megaCredits: 0}));
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4}));
   });
 
   it('using floater and microbes', async () => {

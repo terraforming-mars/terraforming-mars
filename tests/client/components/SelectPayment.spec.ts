@@ -17,10 +17,8 @@ describe('SelectPayment', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
     tester.expectPayment({heat: 3, megaCredits: 7});
-    console.log(2);
 
     await tester.clickMax('heat');
-    console.log(1);
     tester.expectPayment({heat: 5, megaCredits: 5});
 
     await tester.clickMinus('heat');

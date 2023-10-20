@@ -246,7 +246,7 @@ export default Vue.extend({
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save" />
     </div>
 
   </section>

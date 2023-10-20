@@ -29,7 +29,7 @@ export class _AresHazardPlacement {
         }
       });
 
-    game.log('${0} have upgraded to ${1}', (b) => b.string(TileType.toString(from)).string(TileType.toString(to)));
+    game.log('${0} have upgraded to ${1}', (b) => b.tileType(from).tileType(to));
   }
 
   public static onTemperatureChange(game: IGame, aresData: AresData) {

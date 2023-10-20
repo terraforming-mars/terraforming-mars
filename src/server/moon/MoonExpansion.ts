@@ -142,7 +142,7 @@ export class MoonExpansion {
       const position = space.x + offsets[space.y];
 
       player.game.log('${0} placed a ${1} tile on The Moon at (${2}, ${3})', (b) =>
-        b.player(player).string(TileType.toString(tileType)).number(row).number(position));
+        b.player(player).tileType(tileType).number(row).number(position));
     }
   }
 

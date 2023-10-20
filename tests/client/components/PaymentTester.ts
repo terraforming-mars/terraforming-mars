@@ -127,7 +127,7 @@ export class PaymentTester {
     expect(available).has.members(units);
   }
 
-    public async nextTick() {
+  public async nextTick() {
     await this.wrapper.vm.$nextTick();
   }
 }

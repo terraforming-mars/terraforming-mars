@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
 import {SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
-import {PaymentUnit} from '@/common/inputs/Payment';
+import {PAYMENT_UNITS, Payment, PaymentUnit} from '@/common/inputs/Payment';
 
 export class PaymentTester {
   private model: SelectPaymentDataModel;
@@ -54,12 +54,26 @@ export class PaymentTester {
     await this.nextTick();
   }
 
-  public getValue(unit: PaymentUnit) {
-    const textBox = this.wrapper.find(PaymentTester.selector(unit) + ' ~ input').element as HTMLInputElement;
+  public getValue(unit: PaymentUnit): number {
+    const textBox = this.wrapper.find(PaymentTester.selector(unit) + '  ~ input').element as HTMLInputElement;
     if (textBox === undefined) {
-      console.warn('Cannot find ' + unit);
+      throw new Error('Cannot find text box for ' + unit);
     }
-    return textBox?.value;
+    return Number.parseInt(textBox?.value);
+  }
+
+  public getPayment(): Partial<Payment> {
+    const payment: Partial<Payment> = {};
+    for (const unit of PAYMENT_UNITS) {
+      if (this.isAvailable(unit)) {
+        payment[unit] = this.getValue(unit);
+      }
+    }
+    return payment;
+  }
+
+  expectPayment(expected: Partial<Payment>) {
+    expect(this.getPayment()).deep.eq(expected);
   }
 
   // This that the given unit has the given value. It does this two ways:
@@ -67,22 +81,47 @@ export class PaymentTester {
   // has the same value.
   public expectValue(unit: PaymentUnit, amount: number) {
     const vmVal = this.model.payment[unit];
-    expect(this.getValue(unit), `text box value for ${unit}`).eq(String(amount));
+    expect(this.getValue(unit), `text box value for ${unit}`).eq(amount);
     expect(vmVal, 'VM box value for ' + unit).eq(amount);
   }
 
-  // When `expected` is true, this passes when the unit type is available and visible to the user,
-  // and vice-versa.
-  public expectIsAvailable(type: PaymentUnit, expected: boolean) {
-    const w = this.wrapper.find(PaymentTester.selector(type) + ' ~ input');
-    if (expected) {
-      expect(w?.element, `Expect input for ${type} to be visible`).is.not.undefined;
-    } else {
-      expect(w?.element, `Expect input for ${type} to be invisible`).is.undefined;
-    }
+  /**
+   * Returns true when the text box for `unit` is visible.
+   */
+  private isAvailable(unit: PaymentUnit): boolean {
+    return this.wrapper.find(PaymentTester.selector(unit) + '  ~ input')?.element !== undefined;
+  }
+
+  /**
+   * Passes when the text box for `unit` is visible.
+   */
+  public expectIsAvailable(unit: PaymentUnit) {
+    expect(this.isAvailable(unit), `Expect input for ${unit} to be visible`).is.true;
+  }
+
+  /**
+   * Passes when the text box for `unit` is not visible.
+   */
+  public expectIsNotAvailable(unit: PaymentUnit) {
+    expect(this.isAvailable(unit), `Expect input for ${unit} to be invisible`).is.false;
   }
 
   public async nextTick() {
     await this.wrapper.vm.$nextTick();
+  }
+
+  public getAvailablePaymentComponents(): ReadonlyArray<PaymentUnit> {
+    const available: Array<PaymentUnit> = [];
+    for (const unit of PAYMENT_UNITS) {
+      if (this.isAvailable(unit)) {
+        available.push(unit);
+      }
+    }
+    return available;
+  }
+
+  public expectAvailablePaymentComponents(...units: Array<PaymentUnit>) {
+    const available = this.getAvailablePaymentComponents();
+    expect(available).has.members(units);
   }
 }

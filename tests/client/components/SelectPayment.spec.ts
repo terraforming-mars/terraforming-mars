@@ -16,29 +16,21 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('heat', 3);
-    tester.expectValue('megaCredits', 7);
+    tester.expectPayment({heat: 3, megaCredits: 7});
+    console.log(2);
 
     await tester.clickMax('heat');
-
-    tester.expectValue('heat', 5);
-    tester.expectValue('megaCredits', 5);
-
-    await tester.clickMinus('heat');
-
-    tester.expectValue('heat', 4);
-    tester.expectValue('megaCredits', 6);
+    console.log(1);
+    tester.expectPayment({heat: 5, megaCredits: 5});
 
     await tester.clickMinus('heat');
+    tester.expectPayment({heat: 4, megaCredits: 6});
 
-    tester.expectValue('heat', 3);
-    tester.expectValue('megaCredits', 7);
+    await tester.clickMinus('heat');
+    tester.expectPayment({heat: 3, megaCredits: 7});
 
     await tester.clickPlus('heat');
-
-    tester.expectValue('heat', 4);
-    tester.expectValue('megaCredits', 6);
+    tester.expectPayment({heat: 4, megaCredits: 6});
   });
 
   it('Uses steel', async () => {
@@ -49,9 +41,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('steel', 4);
-    tester.expectValue('megaCredits', 2);
+    tester.expectPayment({steel: 4, megaCredits: 2});
   });
 
   it('Check initial value, use steel and titanium, but not enough steel', async () => {
@@ -62,10 +52,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('steel', 1);
-    tester.expectValue('titanium', 2);
-    tester.expectValue('megaCredits', 2);
+    tester.expectPayment({steel: 1, titanium: 2, megaCredits: 2});
   });
 
   it('Uses titanium bonus', async () => {
@@ -76,9 +63,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('titanium', 2);
-    tester.expectValue('megaCredits', 0);
+    tester.expectPayment({titanium: 2, megaCredits: 0});
   });
 
   it('Uses seeds', async () => {
@@ -89,9 +74,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('seeds', 2);
-    tester.expectValue('megaCredits', 4);
+    tester.expectPayment({seeds: 2, megaCredits: 4});
   });
 
   it('Default seed value uses more than minimum when there are not enough MC', async () => {
@@ -102,9 +85,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('seeds', 3);
-    tester.expectValue('megaCredits', 0);
+    tester.expectPayment({seeds: 3, megaCredits: 0});
   });
 
   it('Uses auroraiData', async () => {
@@ -115,9 +96,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('auroraiData', 4);
-    tester.expectValue('megaCredits', 2);
+    tester.expectPayment({auroraiData: 4, megaCredits: 2});
   });
 
   it('initial values, multiple values', async () => {
@@ -130,17 +109,8 @@ describe('SelectPayment', () => {
     await tester.nextTick();
 
     // Using this as a chance to test that other components aren't visible.
-    tester.expectIsAvailable('steel', false);
-    tester.expectIsAvailable('titanium', true);
-    tester.expectIsAvailable('heat', true);
-    tester.expectIsAvailable('megaCredits', true);
-    tester.expectIsAvailable('lunaArchivesScience', false);
-    tester.expectIsAvailable('seeds', false);
-    tester.expectIsAvailable('auroraiData', false);
-
-    tester.expectValue('titanium', 2);
-    tester.expectValue('heat', 0);
-    tester.expectValue('megaCredits', 2);
+    tester.expectAvailablePaymentComponents('titanium', 'heat', 'megaCredits');
+    tester.expectPayment({titanium: 2, heat: 0, megaCredits: 2});
   });
 
   it('can pay, no resources', async () => {
@@ -152,11 +122,7 @@ describe('SelectPayment', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsAvailable('seeds', false);
-    tester.expectIsAvailable('auroraiData', false);
-    tester.expectIsAvailable('titanium', false);
-    tester.expectIsAvailable('steel', false);
-    tester.expectIsAvailable('heat', false);
+    tester.expectAvailablePaymentComponents('megaCredits');
     tester.expectValue('megaCredits', 10);
   });
 
@@ -168,21 +134,15 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('heat', 0);
-    tester.expectValue('megaCredits', 9);
+    tester.expectPayment({heat: 0, megaCredits: 9});
 
     await tester.clickMax('heat');
     await tester.nextTick();
-
-    tester.expectValue('heat', 3);
-    tester.expectValue('megaCredits', 6);
+    tester.expectPayment({heat: 3, megaCredits: 6});
 
     await tester.clickMax('megaCredits');
     await tester.nextTick();
-
-    tester.expectValue('heat', 0);
-    tester.expectValue('megaCredits', 9);
+    tester.expectPayment({heat: 0, megaCredits: 9});
   });
 
   it('max megacredits, 2', async () => {
@@ -193,17 +153,11 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('titanium', 2);
-    tester.expectValue('heat', 0);
-    tester.expectValue('megaCredits', 2);
+    tester.expectPayment({titanium: 2, heat: 0, megaCredits: 2});
 
     await tester.clickMax('megaCredits');
     await tester.nextTick();
-
-    tester.expectValue('titanium', 2);
-    tester.expectValue('heat', 0);
-    tester.expectValue('megaCredits', 5);
+    tester.expectPayment({titanium: 2, heat: 0, megaCredits: 5});
   });
 
   it('Stormcraft floaters count for heat', async () => {
@@ -229,9 +183,10 @@ describe('SelectPayment', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsAvailable('heat', true);
-    tester.expectValue('heat', 7);
-    tester.clickSave();
+    tester.expectIsAvailable('heat');
+    tester.expectPayment({heat: 7, megaCredits: 3});
+    console.log(';click save');
+    await tester.clickSave();
   });
 
   it('Max includes Stormcraft floaters', async () => {
@@ -256,14 +211,10 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('megaCredits', 10);
-    tester.expectValue('heat', 0);
+    tester.expectPayment({heat: 0, megaCredits: 10});
 
     await tester.clickMax('heat');
-
-    tester.expectValue('megaCredits', 5);
-    tester.expectValue('heat', 5);
+    tester.expectPayment({heat: 5, megaCredits: 5});
   });
 
   it('Luna Trade Federation: Can use titanium by default', async () => {
@@ -275,14 +226,10 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('megaCredits', 4);
-    tester.expectValue('titanium', 2);
+    tester.expectPayment({titanium: 2, megaCredits: 4});
 
     await tester.clickMinus('titanium');
-
-    tester.expectValue('megaCredits', 7);
-    tester.expectValue('titanium', 1);
+    tester.expectPayment({titanium: 1, megaCredits: 7});
   });
 
   it('Pay with titanium', async () => {
@@ -295,9 +242,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('megaCredits', 2);
-    tester.expectValue('titanium', 2);
+    tester.expectPayment({titanium: 2, megaCredits: 2});
   });
 
   it('Luna Trade Federation: Can use titanium at normal rate when paymentOptions{titanium} is true', async () => {
@@ -310,19 +255,13 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('megaCredits', 2);
-    tester.expectValue('titanium', 2);
+    tester.expectPayment({titanium: 2, megaCredits: 2});
 
     await(tester.clickMinus('titanium'));
-
-    tester.expectValue('megaCredits', 6);
-    tester.expectValue('titanium', 1);
+    tester.expectPayment({titanium: 1, megaCredits: 6});
 
     await tester.clickMax('titanium');
-
-    tester.expectValue('megaCredits', 2);
-    tester.expectValue('titanium', 2);
+    tester.expectPayment({titanium: 2, megaCredits: 2});
   });
 
   function setupBill(

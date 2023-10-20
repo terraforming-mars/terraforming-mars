@@ -2,7 +2,7 @@ import {CardName} from '../common/cards/CardName';
 import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
 import {Space} from './boards/Space';
-import {TileType} from '../common/TileType';
+import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
 
@@ -30,7 +30,7 @@ export class LogHelper {
   }
 
   static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
-    this.logBoardTileAction(player, space, TileType.toString(tileType) + ' tile');
+    this.logBoardTileAction(player, space, tileTypeToString[tileType] + ' tile');
   }
 
   static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {

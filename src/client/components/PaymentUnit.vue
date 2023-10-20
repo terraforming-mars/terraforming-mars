@@ -37,6 +37,5 @@ export default Vue.extend({
     />
     <AppButton type="plus" @click="$emit('plus')" />
     <AppButton type="max" @click="$emit('max')" title="MAX" />
-
   </div>
 </template>

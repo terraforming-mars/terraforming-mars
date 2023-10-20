@@ -91,16 +91,11 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 3, megaCredits: 7}));
   });
 
-  it('using max button with heat', async () => {
-    // Birds will cost 10. Player has 10 MC and 4 heat. It will select 10MC
-    //
-    // Then when clicking the 'max' button for heat, the algorithm will switch to 8 M€ and 2 heat.
-
+  it('max heat', async () => {
     const wrapper = setupCardForPurchase(
       CardName.BIRDS, 10,
       {heat: 4, megaCredits: 10, titaniumValue: 1, steelValue: 1},
-      {paymentOptions: {heat: true}},
-      Units.of({heat: 2}));
+      {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
@@ -111,6 +106,25 @@ describe('SelectProjectCardToPlay', () => {
 
     await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 4, megaCredits: 6}));
+  });
+
+  it('max heat, heat in reserve', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.BIRDS, 10,
+      {heat: 4, megaCredits: 10, titaniumValue: 1, steelValue: 1},
+      {paymentOptions: {heat: true}},
+      {reserveUnits: Units.of({heat: 2})});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({heat: 0, megaCredits: 10});
+
+    await tester.clickMax('heat');
+    // Only 2 heat available since two are in reserve.
+    tester.expectPayment({heat: 2, megaCredits: 8});
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({heat: 2, megaCredits: 8}));
   });
 
   it('using microbes', async () => {
@@ -291,8 +305,8 @@ describe('SelectProjectCardToPlay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsNotAvailable('megaCredits');
-    tester.expectPayment({steel: 4, microbes: 4});
+    tester.expectAvailablePaymentComponents('steel', 'microbes', 'megaCredits');
+    tester.expectPayment({steel: 4, microbes: 4, megaCredits: 0});
 
     await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4, megaCredits: 0}));
@@ -339,31 +353,26 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('Luna Train Station limits how much steel you can use', async () => {
-    // Luna Train Station costs 20, and will need 2 steel. Player has 20 M€ and 4 steel.
-    //
-    // The algorithm will select 20 MC,
-    //
-    // Then when clicking the 'max' button for steel, the algorithm will switch to 16 M€ and 2 steel.
     const wrapper = setupCardForPurchase(
       CardName.LUNA_TRAIN_STATION, 20,
       {
         megaCredits: 20,
         steel: 4,
         steelValue: 2,
-        // titaniumValue: 0, // Needed for when setReminingMCValue is called.
       },
       {paymentOptions: {steel: true}},
-      Units.of({steel: 2}));
+      {reserveUnits: Units.of({steel: 2})});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
     tester.expectPayment({megaCredits: 20, steel: 0});
 
     await tester.clickMax('steel');
-    tester.expectPayment({megaCredits: 12, steel: 4});
+    // 2 units of steel are in reserve
+    tester.expectPayment({megaCredits: 16, steel: 2});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({steel: 4, megaCredits: 12}));
+    expect(saveResponse.payment).deep.eq(Payment.of({steel: 2, megaCredits: 16}));
   });
 
   it('using titanium metal bonus without using steel', async () => {
@@ -503,19 +512,18 @@ describe('SelectProjectCardToPlay', () => {
         ],
       },
       {paymentOptions: {heat: true}},
-      Units.of({heat: 1}));
+      {reserveUnits: Units.of({heat: 1})});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
     tester.expectPayment({megaCredits: 10, heat: 0});
 
     await tester.clickMax('heat');
-    // tester.expectPayment({heat: 4, megaCredits: 6});
-    tester.expectPayment({heat: 5, megaCredits: 5});
+    // One heat is in reserve
+    tester.expectPayment({heat: 4, megaCredits: 6});
 
     await tester.clickSave();
-    // expect(saveResponse.payment).deep.eq(Payment.of({heat: 4, megaCredits: 6}));
-    expect(saveResponse.payment).deep.eq(Payment.of({heat: 5, megaCredits: 5}));
+    expect(saveResponse.payment).deep.eq(Payment.of({heat: 4, megaCredits: 6}));
   });
 
   it('Luna Trade Federation: Can use titanium by default', async () => {
@@ -557,7 +565,7 @@ describe('SelectProjectCardToPlay', () => {
     cardCost: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<SelectProjectCardToPlayModel>,
-    reserveUnits: Units | undefined = undefined) {
+    options?: {reserveUnits?: Units}) {
     const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
       steel: 0,
@@ -589,8 +597,8 @@ describe('SelectProjectCardToPlay', () => {
       seeds: 0,
       ...playerInputFields,
     };
-    if (reserveUnits !== undefined) {
-      playerInput.cards![0].reserveUnits = reserveUnits;
+    if (options !== undefined) {
+      playerInput.cards![0].reserveUnits = options.reserveUnits;
     }
 
     return mount(SelectProjectCardToPlay, {

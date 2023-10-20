@@ -90,6 +90,27 @@ export class PaymentTester {
     expect(this.isAvailable(unit), `Expect input for ${unit} to be invisible`).is.false;
   }
 
+  /**
+   * Return the set of payment components visible in the UI.
+   */
+  public getAvailablePaymentComponents(): ReadonlyArray<PaymentUnit> {
+    const available: Array<PaymentUnit> = [];
+    for (const unit of PAYMENT_UNITS) {
+      if (this.isAvailable(unit)) {
+        available.push(unit);
+      }
+    }
+    return available;
+  }
+
+  /**
+   * Passes when the visible set of UI components is this list and only this list.
+   */
+  public expectAvailablePaymentComponents(...units: Array<PaymentUnit>) {
+    const available = this.getAvailablePaymentComponents();
+    expect(available).has.members(units);
+  }
+
   public async nextTick() {
     await this.wrapper.vm.$nextTick();
   }

@@ -107,13 +107,7 @@ describe('SelectPayment', () => {
     await tester.nextTick();
 
     // Using this as a chance to test that other components aren't visible.
-    tester.expectIsNotAvailable('steel');
-    tester.expectIsAvailable('titanium');
-    tester.expectIsAvailable('heat');
-    tester.expectIsAvailable('megaCredits');
-    tester.expectIsNotAvailable('lunaArchivesScience');
-    tester.expectIsNotAvailable('seeds');
-    tester.expectIsNotAvailable('auroraiData');
+    tester.expectAvailablePaymentComponents('titanium', 'heat', 'megaCredits');
     tester.expectPayment({titanium: 2, heat: 0, megaCredits: 2});
   });
 
@@ -126,11 +120,7 @@ describe('SelectPayment', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsNotAvailable('seeds');
-    tester.expectIsNotAvailable('auroraiData');
-    tester.expectIsNotAvailable('titanium');
-    tester.expectIsNotAvailable('steel');
-    tester.expectIsNotAvailable('heat');
+    tester.expectAvailablePaymentComponents('megaCredits');
     tester.expectValue('megaCredits', 10);
   });
 

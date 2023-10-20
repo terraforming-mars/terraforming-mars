@@ -11,12 +11,11 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 describe('ReySkywalker', () => {
   let card: ReySkywalker;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new ReySkywalker();
-    [game, player, player2] = testGame(2, {starWarsExpansion: true});
+    [game, player] = testGame(2, {starWarsExpansion: true});
   });
 
   it('Play', () => {

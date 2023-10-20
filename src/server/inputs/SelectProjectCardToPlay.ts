@@ -49,17 +49,17 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
       buttonLabel: this.buttonLabel,
       type: 'projectCard',
       cards: cardsToModel(player, this.cards, {showCalculatedCost: true, extras: this.extras}),
-      microbes: player.getSpendableMicrobes(),
-      floaters: player.getSpendableFloaters(),
+      microbes: player.getSpendable('microbes'),
+      floaters: player.getSpendable('floaters'),
       paymentOptions: {
         heat: player.canUseHeatAsMegaCredits,
         lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
         plants: player.canUsePlantsAsMegacredits,
       },
-      lunaArchivesScience: player.getSpendableLunaArchiveScienceResources(),
-      seeds: player.getSpendableSeedResources(),
-      graphene: player.getSpendableGraphene(),
-      kuiperAsteroids: player.getSpendableKuiperAsteroids(),
+      lunaArchivesScience: player.getSpendable('lunaArchivesScience'),
+      seeds: player.getSpendable('seeds'),
+      graphene: player.getSpendable('graphene'),
+      kuiperAsteroids: player.getSpendable('kuiperAsteroids'),
     };
   }
 

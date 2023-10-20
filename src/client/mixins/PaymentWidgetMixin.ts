@@ -7,7 +7,8 @@ import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardResource} from '@/common/CardResource';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {DEFAULT_PAYMENT_VALUES, PAYMENT_UNITS, Payment, PaymentUnit} from '@/common/inputs/Payment';
+import {DEFAULT_PAYMENT_VALUES, Payment} from '@/common/inputs/Payment';
+import {SPENDABLE_RESOURCES, SpendableResource} from '@/common/inputs/Spendable';
 
 export type SelectPaymentDataModel = {
   card?: CardModel;
@@ -52,7 +53,7 @@ export const PaymentWidgetMixin = {
       const model = this.asModel();
       return Math.min(this.getAvailableUnits('megaCredits'), model.cost);
     },
-    getResourceRate(unit: PaymentUnit): number {
+    getResourceRate(unit: SpendableResource): number {
       switch (unit) {
       case 'steel':
         return this.asModel().playerView.thisPlayer.steelValue;
@@ -74,7 +75,7 @@ export const PaymentWidgetMixin = {
     /**
      * Reduce `unit` by one.
      */
-    reduceValue(unit: PaymentUnit): void {
+    reduceValue(unit: SpendableResource): void {
       const currentValue: number | undefined = this.asModel().payment[unit];
       if (currentValue === undefined) {
         throw new Error(`can not reduceValue for ${unit} on this`);
@@ -88,7 +89,7 @@ export const PaymentWidgetMixin = {
     /**
      * Increase `unit` by one.
      */
-    addValue(unit: PaymentUnit): void {
+    addValue(unit: SpendableResource): void {
       const currentValue: number | undefined = this.asModel().payment[unit];
       if (currentValue === undefined) {
         throw new Error(`can not addValue for ${unit} on this`);
@@ -122,7 +123,7 @@ export const PaymentWidgetMixin = {
 
       let remainingMC = ta.cost;
 
-      for (const resource of PAYMENT_UNITS) {
+      for (const resource of SPENDABLE_RESOURCES) {
         if (resource === 'megaCredits') {
           continue;
         }
@@ -131,7 +132,7 @@ export const PaymentWidgetMixin = {
       }
       ta.payment.megaCredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue(unit: PaymentUnit): void {
+    setMaxValue(unit: SpendableResource): void {
       let currentValue: number | undefined = this.asModel().payment[unit];
       if (currentValue === undefined) {
         throw new Error(`can not setMaxValue for ${unit} on this`);
@@ -147,10 +148,10 @@ export const PaymentWidgetMixin = {
       }
     },
     // Perhaps this is unnecessary. It's just a >0 check.
-    hasUnits(unit: PaymentUnit): boolean {
+    hasUnits(unit: SpendableResource): boolean {
       return this.getAvailableUnits(unit) > 0;
     },
-    getAvailableUnits(unit: PaymentUnit): number {
+    getAvailableUnits(unit: SpendableResource): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
       const thisPlayer = model.playerView.thisPlayer;
@@ -223,7 +224,7 @@ export const PaymentWidgetMixin = {
     },
   },
   computed: {
-    descriptions(): Record<PaymentUnit, string> {
+    descriptions(): Record<SpendableResource, string> {
       return {
         steel: 'Steel',
         titanium: 'Titanium',

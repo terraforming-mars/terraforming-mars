@@ -35,12 +35,12 @@ describe('Psychrophiles', () => {
   });
 
   it('Should act', () => {
-    expect(player.getSpendableMicrobes()).to.eq(0);
+    expect(player.getSpendable('microbes')).to.eq(0);
     player.playedCards.push(card);
 
     card.action(player);
     runAllActions(game);
     expect(player.getCardsWithResources()).has.lengthOf(1);
-    expect(player.getSpendableMicrobes()).to.eq(1);
+    expect(player.getSpendable('microbes')).to.eq(1);
   });
 });

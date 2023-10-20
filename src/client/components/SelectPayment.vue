@@ -1,6 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
-import {Payment, PaymentUnit, PAYMENT_UNITS} from '@/common/inputs/Payment';
+import {Payment} from '@/common/inputs/Payment';
+import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
 import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -33,7 +34,7 @@ export default Vue.extend({
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
     },
-    PAYMENT_UNITS(): ReadonlyArray<keyof Payment> {
+    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
       return [
         'steel',
         'titanium',
@@ -74,7 +75,7 @@ export default Vue.extend({
     },
     setDefaultValue(
       mcAlreadyCovered: number, // MC values of prior-computed resources.
-      unit: PaymentUnit): number {
+      unit: SpendableResource): number {
       if (!this.canUse(unit)) {
         return 0;
       }
@@ -123,7 +124,7 @@ export default Vue.extend({
     canAffordWithMcOnly() {
       return this.thisPlayer.megaCredits >= this.cost;
     },
-    canUse(unit: PaymentUnit): boolean {
+    canUse(unit: SpendableResource): boolean {
       if (unit === 'megaCredits') {
         return true;
       }
@@ -137,11 +138,11 @@ export default Vue.extend({
     },
     saveData() {
       let totalSpent = 0;
-      for (const target of PAYMENT_UNITS) {
+      for (const target of SPENDABLE_RESOURCES) {
         totalSpent += this.payment[target] * this.getResourceRate(target);
       }
 
-      for (const target of PAYMENT_UNITS) {
+      for (const target of SPENDABLE_RESOURCES) {
         if (this.payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
@@ -165,7 +166,7 @@ export default Vue.extend({
 
       if (requiredAmt > 0 && totalSpent > requiredAmt) {
         const diff = totalSpent - requiredAmt;
-        for (const target of PAYMENT_UNITS) {
+        for (const target of SPENDABLE_RESOURCES) {
           if (this.payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;
@@ -184,7 +185,7 @@ export default Vue.extend({
       }
       this.onsave({type: 'payment', payment: this.payment});
     },
-    onMaxClicked(unit: PaymentUnit) {
+    onMaxClicked(unit: SpendableResource) {
       if (unit === 'megaCredits') {
         this.setMaxMCValue();
       } else {
@@ -200,7 +201,7 @@ export default Vue.extend({
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
-    <template v-for="unit of PAYMENT_UNITS">
+    <template v-for="unit of SPENDABLE_RESOURCES">
       <payment-unit-component
         v-model.number="payment[unit]"
         v-bind:key="unit"

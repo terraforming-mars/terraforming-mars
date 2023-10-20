@@ -20,13 +20,13 @@ describe('LunaArchives', () => {
     player.tagsForTest = {moon: 0};
     card.action(player);
     expect(card.resourceCount).eq(0);
-    expect(player.getSpendableLunaArchiveScienceResources()).eq(0);
+    expect(player.getSpendable('lunaArchivesScience')).eq(0);
 
     player.tagsForTest = {moon: 5};
     card.action(player);
     runAllActions(player.game);
     expect(card.resourceCount).eq(5);
-    expect(player.getSpendableLunaArchiveScienceResources()).eq(5);
+    expect(player.getSpendable('lunaArchivesScience')).eq(5);
   });
 
   it('pay for moon card', () => {

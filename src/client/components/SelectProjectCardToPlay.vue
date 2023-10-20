@@ -127,7 +127,7 @@ export default Vue.extend({
       // consumed balance as part of this method.
       //
       // It returns the number of units consumed from availableUnits to make that
-      const deductUnits = function(
+      function deductUnits(
         availableUnits: number | undefined,
         unitValue: number,
         overpay: boolean = true): number {
@@ -141,10 +141,10 @@ export default Vue.extend({
 
         megacreditBalance -= contributingUnits * unitValue;
         return contributingUnits;
-      };
+      }
 
       // This function help save some money at the end
-      const saveOverspendingUnits = function(
+      function saveOverspendingUnits(
         spendingUnits: number | undefined,
         unitValue: number): number {
         if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
@@ -156,7 +156,7 @@ export default Vue.extend({
 
         megacreditBalance += toSaveUnits * unitValue;
         return toSaveUnits;
-      };
+      }
 
       for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {

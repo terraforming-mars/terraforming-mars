@@ -25,7 +25,7 @@ export type SelectProjectCardToPlayDataModel = SelectPaymentDataModel & {
   card: CardModel;
   reserveUnits: Units;
   tags: Array<Tag>;
-  available: Units;
+  available: Omit<Units, 'megacredits' | 'energy'>;
 }
 
 type PaymentWidgetModel = SelectPaymentDataModel & Partial<SelectProjectCardToPlayDataModel> & {
@@ -161,8 +161,13 @@ export const PaymentWidgetMixin = {
 
       case 'steel':
       case 'titanium':
-      case 'megaCredits':
       case 'plants':
+        if (model.hasOwnProperty('available')) {
+          amount = model.available?.[unit] ?? -1;
+          break;
+        }
+      // eslint-disable-next-line no-fallthrough
+      case 'megaCredits':
         amount = thisPlayer[unit];
         break;
 

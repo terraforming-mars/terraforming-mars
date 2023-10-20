@@ -49,7 +49,6 @@ export class SendDelegateToArea extends DeferredAction {
     if (availableParties.length === 0) {
       return undefined;
     }
-    // How many delegates to send
     const numDelegateToSend = this.options.count ?? 1;
 
     const sendDelegate = new SelectParty(this.title, 'Send delegate', availableParties)
@@ -58,7 +57,6 @@ export class SendDelegateToArea extends DeferredAction {
           this.player.game.defer(new SelectPaymentDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
         }
 
-        // TODO(kberg): reconfirm the delegate count.
         for (let i = 0; i < numDelegateToSend; i++) {
           if (this.options.replace) {
             this.turmoil.replaceDelegateFromParty(this.options.replace, this.player.id, partyName, this.player.game);

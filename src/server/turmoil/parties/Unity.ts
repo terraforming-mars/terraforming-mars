@@ -16,10 +16,10 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
 import {sum} from '../../../common/utils/utils';
 import {TITLES} from '../../inputs/titles';
+import {message} from '../../logs/MessageBuilder';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
-  description = 'Wants to see humanity prosper in the whole solar system.';
   bonuses = [UNITY_BONUS_1, UNITY_BONUS_2];
   policies = [UNITY_POLICY_1, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
 }
@@ -81,7 +81,7 @@ class UnityPolicy02 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
-    game.log('${0} used Turmoil Unity action', (b) => b.player(player));
+    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.UNITY));
     player.politicalAgendasActionUsedCount += 1;
 
     game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.UNITY)}))
@@ -91,7 +91,7 @@ class UnityPolicy02 implements Policy {
 
         if (availableFloaterCards.length === 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm').andThen(() => {
+            new SelectOption(message('Add ${0} floaters to ${1}', (b) => b.number(2).card(availableFloaterCards[0]))).andThen(() => {
               player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
 
               return undefined;
@@ -99,7 +99,7 @@ class UnityPolicy02 implements Policy {
           );
         } else if (availableFloaterCards.length > 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 floaters to a card', 'Confirm').andThen(() => {
+            new SelectOption('Add 2 floaters to a card').andThen(() => {
               return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards)
                 .andThen(([card]) => {
                   player.addResourceTo(card, {qty: 2, log: true});
@@ -109,7 +109,7 @@ class UnityPolicy02 implements Policy {
           );
         }
 
-        orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm').andThen(() => {
+        orOptions.options.push(new SelectOption('Gain 2 titanium').andThen(() => {
           player.stock.add(Resource.TITANIUM, 2);
           game.log('${0} gained 2 titanium', (b) => b.player(player));
           return undefined;
@@ -135,7 +135,7 @@ class UnityPolicy03 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
-    game.log('${0} used Turmoil Unity action', (b) => b.player(player));
+    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.UNITY));
     player.politicalAgendasActionUsedCount += 1;
 
     game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.UNITY)}))

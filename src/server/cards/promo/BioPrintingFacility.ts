@@ -12,6 +12,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class BioPrintingFacility extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -56,7 +57,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
       const targetCard = availableAnimalCards[0];
 
       return new OrOptions(
-        new SelectOption('Add 1 animal to ' + targetCard.name, 'Add animal').andThen(() => {
+        new SelectOption(message('Add ${0} animal to ${1}', (b) => b.number(1).card(targetCard)), 'Add animal').andThen(() => {
           player.addResourceTo(targetCard, {log: true});
           return undefined;
         }),

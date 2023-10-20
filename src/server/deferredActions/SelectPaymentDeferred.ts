@@ -4,6 +4,7 @@ import {Payment} from '../../common/inputs/Payment';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
 import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
 
 export type Options = {
   canUseSteel?: boolean;
@@ -69,7 +70,7 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
     }
 
     return new SelectPayment(
-      this.options.title || 'Select how to spend ' + this.amount + ' M€',
+      this.options.title || message('Select how to spend ${0} M€', (b) => b.number(this.amount)),
       this.amount,
       {
         steel: this.options.canUseSteel || false,

@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('MoholeExcavation', function() {
   it('Should play', function() {
     const card = new MoholeExcavation();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(2);
     expect(player.heat).to.eq(2);

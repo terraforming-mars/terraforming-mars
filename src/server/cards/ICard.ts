@@ -17,6 +17,8 @@ import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {OneOrArray} from '../../common/utils/types';
+import {JSONValue} from '../../common/Types';
+import {IStandardProjectCard} from './IStandardProjectCard';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -40,16 +42,36 @@ export interface ICard {
   name: CardName;
   tags: Array<Tag>;
   play(player: IPlayer): PlayerInput | undefined;
+  /**
+   * Describes the M€ discount `player` could apply to playing `card`.
+   *
+   * If the discount code is simple, consider using `cardDiscount` instead.
+   */
   getCardDiscount?(player: IPlayer, card: IProjectCard): number;
+  /**
+   * Describes type of discount this card applies to other cards.
+   *
+   * Achieves the same thing as `getCardDiscount` but for the simplest, most common use cases.
+   *
+   * Having descriptions this simple also makes it easier to render its discount in the UI.
+   */
   cardDiscount?: OneOrArray<CardDiscount>;
-  // parameter is a Morningstar Inc. special case.
-  getRequirementBonus?(player: IPlayer, parameter: GlobalParameter): number;
+
+  /**
+   * The +/- bonus applied to global parameter requirements, e.g. Adaptation Technology.
+   *
+   * `parameter` describes which global parameter is being tested.
+   *
+   * NB: Instances of `Card` allow using a JSON object to describe the global parameter bonus,
+   * see `globalParameterRequirementBonus` for more information.
+   */
+  getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number;
   victoryPoints?: number | 'special' | IVictoryPoints,
   getVictoryPoints(player: IPlayer): number;
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
   onCardPlayed?(player: IPlayer, card: IProjectCard): PlayerInput | undefined | void;
   onCardPlayedFromAnyPlayer?(thisCardOwner: IPlayer, playedCardOwner: IPlayer, card: IProjectCard): PlayerInput | undefined;
-  onStandardProject?(player: IPlayer, project: ICard): void;
+  onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;
   onDiscard?(player: IPlayer): void;
   /**
@@ -72,6 +94,23 @@ export interface ICard {
    */
   onResourceAdded?(player: IPlayer, playedCard: ICard, count: number): void;
 
+  /**
+   * Optional callback when any player identifies a space.
+   *
+   * @param identifyingPlayer the player performing the identification action
+   * @param cardOwner the player who owns THIS CARD.
+   * @param space the space that was just identified.
+   */
+  onIdentification?(identifyingPlayer: IPlayer, cardOwner: IPlayer, space: Space): void;
+
+  /**
+   * Optional callback when any player excavates a space.
+   *
+   * @param player the player performing the excavation action
+   * @param space the space that was just excavated.
+   */
+  onExcavation?(player: IPlayer, space: Space): void;
+
   cost?: number; /** Used with IProjectCard and PreludeCard. */
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;
@@ -85,6 +124,12 @@ export interface ICard {
   /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
   tilesBuilt?: Array<TileType>;
   isDisabled?: boolean; // For Pharmacy Union and CEO cards.
+  /**
+   * Extra data that the game will serialize and deserialize along with the card.
+   *
+   * ONLY store plain JSON data. Classes, objects, functions, will all be incorrectly serialized.
+   */
+  data?: JSONValue;
 }
 
 export interface IActionCard {

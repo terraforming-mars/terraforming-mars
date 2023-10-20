@@ -10,6 +10,7 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {message} from '../../logs/MessageBuilder';
 
 export class ExecutiveOrder extends PreludeCard implements IProjectCard {
   constructor() {
@@ -44,14 +45,14 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
       return new OrOptions(
         ...globalEvents.map((event) => {
           // TODO(kberg): Render as SelectGlobalEvent
-          const description = event.name + ': ' + event.description + ' Neutral delegate added: ' + event.currentDelegate;
+          const description = message('${0}: ${1} Neutral delegate added: ${2}', (b) => b.globalEvent(event).string(event.description).partyName(event.currentDelegate));
           return new SelectOption(description).andThen(() => {
             turmoil.currentGlobalEvent = event;
             turmoil.sendDelegateToParty('NEUTRAL', event.currentDelegate, player.game);
 
             globalEvents.forEach((ge) => {
               if (ge.name !== event.name) {
-                turmoil.globalEventDealer.discardedGlobalEvents.push(ge);
+                turmoil.globalEventDealer.discard(ge);
               }
             });
 

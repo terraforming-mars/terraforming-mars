@@ -29,6 +29,7 @@ export enum Priority {
   LOSE_RESOURCE_OR_PRODUCTION,
   DECREASE_COLONY_TRACK_AFTER_TRADE,
   DISCARD_CARDS,
+  BACK_OF_THE_LINE,
 }
 
 export interface AndThen<T> {

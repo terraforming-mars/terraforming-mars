@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('EarthElevator', function() {
   it('Should play', function() {
     const card = new EarthElevator();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(3);
     expect(card.getVictoryPoints(player)).to.eq(4);

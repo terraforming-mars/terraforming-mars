@@ -15,14 +15,14 @@ export class LunaMiningHub extends Card {
       name: CardName.LUNA_MINING_HUB,
       type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
-      cost: 16,
+      cost: 23,
       reserveUnits: {steel: 1, titanium: 1},
 
       behavior: {
         production: {steel: 1, titanium: 1},
         // TODO(kberg): mining rate ought to occur after tile is placed.
         moon: {
-          tile: {type: TileType.LUNA_MINING_HUB, title: 'Select a space for Luna Mining Hub.'},
+          tile: {type: TileType.LUNA_MINING_HUB},
           miningRate: 1,
         },
       },

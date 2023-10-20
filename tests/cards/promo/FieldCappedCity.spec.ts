@@ -8,7 +8,7 @@ import {testGame} from '../../TestGame';
 describe('FieldCappedCity', function() {
   it('Should play', function() {
     const card = new FieldCappedCity();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);

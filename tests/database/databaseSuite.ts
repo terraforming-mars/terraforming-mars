@@ -224,17 +224,8 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
       const serialized3 = await db.getGameVersion(game.id, 3);
       expect(serialized3.players[0].megaCredits).eq(400);
-    });
 
-    it('loadCloneableGame', async () => {
-      await expect(db.loadCloneableGame('game-id-123')).to.be.rejectedWith(/Game game-id-123 not found/);
-
-      const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-123', [player], player);
-      await db.lastSaveGamePromise;
-      const serialized = await db.loadCloneableGame('game-id-123');
-
-      expect(game.id).eq(serialized.id);
+      await expect(db.getGameVersion('game-id-123', 0)).to.be.rejectedWith(/Game game-id-123 not found/);
     });
 
     it('participantIds', async () => {

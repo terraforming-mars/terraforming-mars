@@ -13,7 +13,7 @@ describe('MartianInsuranceGroup', function() {
 
   beforeEach(function() {
     card = new MartianInsuranceGroup();
-    [, player, player2] = testGame(2);
+    [/* skipped */, player, player2] = testGame(2);
     player.setCorporationForTest(card);
   });
 

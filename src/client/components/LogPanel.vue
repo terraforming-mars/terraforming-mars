@@ -48,7 +48,7 @@ import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
-import {TileType} from '@/common/TileType';
+import {TileType, tileTypeToString} from '@/common/TileType';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
@@ -212,8 +212,8 @@ export default Vue.extend({
         return '<span class="log-card background-color-global-event">' + this.$t(globalEventName) + '</span>';
 
       case LogMessageDataType.TILE_TYPE:
-        const tileType: TileType = +data.value;
-        return this.$t(TileType.toString(tileType));
+        const tileType: TileType = Number(data.value);
+        return this.$t(tileTypeToString[tileType]);
 
       case LogMessageDataType.COLONY:
         const colonyName = data.value as ColonyName;

@@ -18,7 +18,6 @@ import {TITLES} from '../../inputs/titles';
 
 export class Reds extends Party implements IParty {
   readonly name = PartyName.REDS;
-  readonly description = 'Wishes to preserve the red planet.';
   readonly bonuses = [REDS_BONUS_1, REDS_BONUS_2];
   readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
@@ -164,7 +163,7 @@ class RedsPolicy03 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
-    game.log('${0} used Turmoil Reds action', (b) => b.player(player));
+    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.REDS));
     player.politicalAgendasActionUsedCount += 1;
 
     game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.REDS)}))
@@ -173,7 +172,7 @@ class RedsPolicy03 implements Policy {
 
         // Decrease temperature option
         if (this.canDecrease(game, GlobalParameter.TEMPERATURE)) {
-          orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm').andThen(() => {
+          orOptions.options.push(new SelectOption('Decrease temperature').andThen(() => {
             game.increaseTemperature(player, -1);
             game.log('${0} decreased temperature 1 step', (b) => b.player(player));
             return undefined;
@@ -182,7 +181,7 @@ class RedsPolicy03 implements Policy {
 
         // Remove ocean option
         if (this.canDecrease(game, GlobalParameter.OCEANS)) {
-          orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm').andThen(() => {
+          orOptions.options.push(new SelectOption('Remove an ocean tile').andThen(() => {
             game.defer(new RemoveOceanTile(player, 'Turmoil Reds action - Remove an Ocean tile from the board'));
             return undefined;
           }));
@@ -190,7 +189,7 @@ class RedsPolicy03 implements Policy {
 
         // Decrease oxygen level option
         if (this.canDecrease(game, GlobalParameter.OXYGEN)) {
-          orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm').andThen(() => {
+          orOptions.options.push(new SelectOption('Decrease oxygen level').andThen(() => {
             game.increaseOxygenLevel(player, -1);
             game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
             return undefined;
@@ -199,7 +198,7 @@ class RedsPolicy03 implements Policy {
 
         // Decrease Venus scale option
         if (this.canDecrease(game, GlobalParameter.VENUS)) {
-          orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm').andThen(() => {
+          orOptions.options.push(new SelectOption('Decrease Venus scale').andThen(() => {
             game.increaseVenusScaleLevel(player, -1);
             game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
             return undefined;
@@ -207,21 +206,21 @@ class RedsPolicy03 implements Policy {
         }
 
         if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon habitat rate', 'Confirm').andThen(() => {
+          orOptions.options.push(new SelectOption('Decrease Moon habitat rate').andThen(() => {
             MoonExpansion.lowerHabitatRate(player, 1);
             return undefined;
           }));
         }
 
         if (this.canDecrease(game, GlobalParameter.MOON_MINING_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon mining rate', 'Confirm').andThen(() => {
+          orOptions.options.push(new SelectOption('Decrease Moon mining rate').andThen(() => {
             MoonExpansion.lowerMiningRate(player, 1);
             return undefined;
           }));
         }
 
         if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
-          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate', 'Confirm').andThen(() => {
+          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate').andThen(() => {
             MoonExpansion.lowerLogisticRate(player, 1);
             return undefined;
           }));

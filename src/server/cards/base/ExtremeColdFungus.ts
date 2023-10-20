@@ -12,6 +12,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -57,7 +58,7 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
       const targetCard = otherMicrobeCards[0];
 
       return new OrOptions(
-        new SelectOption('Add 2 microbes to ' + targetCard.name, 'Add microbes').andThen(() => {
+        new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(2).card(targetCard)), 'Add microbes').andThen(() => {
           player.addResourceTo(targetCard, {qty: 2, log: true});
           return undefined;
         }),

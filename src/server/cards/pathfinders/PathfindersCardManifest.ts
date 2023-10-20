@@ -1,5 +1,6 @@
 import {ModuleManifest} from '../ModuleManifest';
 import {CardName} from '../../../common/cards/CardName';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 
 import {AdhaiHighOrbitConstructions} from './AdhaiHighOrbitConstructions';
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
@@ -8,16 +9,19 @@ import {Ambient} from './Ambient';
 import {Anthozoa} from './Anthozoa';
 import {AsteroidResources} from './AsteroidResources';
 import {Aurorai} from './Aurorai';
+import {BalancedDevelopment} from './BalancedDevelopment';
+import {BioSol} from './BioSol';
 import {BotanicalExperience} from './BotanicalExperience';
 import {BreedingFarms} from './BreedingFarms';
-import {BioSol} from './BioSol';
 import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
 import {CharityDonation} from './CharityDonation';
 import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
 import {CollegiumCopernicus} from './CollegiumCopernicus';
+import {CommunicationBoom} from './CommunicationBoom';
 import {CommunicationCenter} from './CommunicationCenter';
+import {ConstantStruggle} from './ConstantStruggle';
 import {ControlledBloom} from './ControlledBloom';
 import {CoordinatedRaid} from './CoordinatedRaid';
 import {Crashlanding} from './Crashlanding';
@@ -52,6 +56,7 @@ import {LastResortIngenuity} from './LastResortIngenuity';
 import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
+import {MagneticFieldStimulationDelays} from './MagneticFieldStimulationDelays';
 import {MarsDirect} from './MarsDirect';
 import {MarsMaths} from './MarsMaths';
 import {MartianCulture} from './MartianCulture';
@@ -78,14 +83,14 @@ import {PrivateSecurity} from './PrivateSecurity';
 import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 import {RareEarthElements} from './RareEarthElements';
 import {RedCity} from './RedCity';
-import {Ringcom} from './Ringcom';
 import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 import {RichDeposits} from './RichDeposits';
+import {Ringcom} from './Ringcom';
 import {RobinHaulings} from './RobinHaulings';
 import {SecretLabs} from './SecretLabs';
-import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SmallComet} from './SmallComet';
+import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SocialEvents} from './SocialEvents';
 import {SoilDetoxification} from './SoilDetoxification';
 import {Solarpedia} from './Solarpedia';
@@ -93,15 +98,17 @@ import {SolarStorm} from './SolarStorm';
 import {SolBank} from './SolBank';
 import {SoylentSeedlingSystems} from './SoylentSeedlingSystems';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
+import {SpaceRaceToMars} from './SpaceRaceToMars';
 import {SpaceRelay} from './SpaceRelay';
 import {SpecializedSettlement} from './SpecializedSettlement';
-import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Steelaris} from './Steelaris';
+import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {SurveyMission} from './SurveyMission';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
 import {TheNewSpaceRace} from './TheNewSpaceRace';
 import {ThinkTank} from './ThinkTank';
+import {TiredEarth} from './TiredEarth';
 import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
@@ -229,6 +236,15 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.DEEP_SPACE_OPERATIONS]: {Factory: DeepSpaceOperations},
     [CardName.EXPERIENCED_MARTIANS]: {Factory: ExperiencedMartians, compatibility: ['turmoil', 'pathfinders']},
     [CardName.THE_NEW_SPACE_RACE]: {Factory: TheNewSpaceRace, compatibility: 'turmoil'},
+  },
+
+  globalEvents: {
+    [GlobalEventName.BALANCED_DEVELOPMENT]: {Factory: BalancedDevelopment},
+    [GlobalEventName.SPACE_RACE_TO_MARS]: {Factory: SpaceRaceToMars},
+    [GlobalEventName.CONSTANT_STRUGGLE]: {Factory: ConstantStruggle, negative: true},
+    [GlobalEventName.TIRED_EARTH]: {Factory: TiredEarth, negative: true},
+    [GlobalEventName.MAGNETIC_FIELD_STIMULATION_DELAYS]: {Factory: MagneticFieldStimulationDelays, negative: true},
+    [GlobalEventName.COMMUNICATION_BOOM]: {Factory: CommunicationBoom, negative: true},
   },
 
   // Perhaps these community cards should just move to this manifest, but only if it becomes

@@ -104,7 +104,7 @@ export class PoliticalAgendas {
   }
 
   // Overridable for tests
-  public static defaultRandomElement<T>(list: Array<T>): T {
+  public static defaultRandomElement<T>(list: ReadonlyArray<T>): T {
     const rng = Math.floor(Math.random() * list.length);
     return list[rng];
   }

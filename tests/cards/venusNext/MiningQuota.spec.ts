@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 describe('MiningQuota', function() {
   it('Should play', function() {
     const card = new MiningQuota();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     player.playedCards.push(new SisterPlanetSupport);
     expect(card.canPlay(player)).is.not.true;
 

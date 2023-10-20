@@ -23,7 +23,6 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
           type: TileType.BIOFERTILIZER_FACILITY,
           on: 'land',
           adjacencyBonus: {bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE]},
-          title: 'Select space for Biofertilizer Facility tile',
         },
       },
 

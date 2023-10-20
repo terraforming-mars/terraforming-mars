@@ -6,7 +6,7 @@
 
 import Vue from 'vue';
 import {SpaceType} from '@/common/boards/SpaceType';
-import {TileType} from '@/common/TileType';
+import {TileType, tileTypeToString} from '@/common/TileType';
 import {SpaceHighlight, SpaceModel} from '@/common/models/SpaceModel';
 import {TileView} from '@/client/components/board/TileView';
 
@@ -52,6 +52,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.LUNAR_MINE_URBANIZATION]: 'lunar-mine-urbanization',
   [TileType.CRASHLANDING]: 'crashlanding',
   [TileType.MARS_NOMADS]: '', // This never actually renders.
+  [TileType.REY_SKYWALKER]: 'martian-nature-wonders', // Use Martian Nature Wonders cube CSS.
 };
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -70,29 +71,12 @@ const tileTypeToCssClassAresOverride = new Map<TileType, string>([
 ]);
 
 const descriptions: Record<TileType, string> = {
-  [TileType.MOHOLE_AREA]: 'Mohole Area',
+  ...tileTypeToString,
   [TileType.COMMERCIAL_DISTRICT]: 'Commercial District: 1 VP per adjacent city tile',
-  [TileType.ECOLOGICAL_ZONE]: 'Ecological Zone',
-  [TileType.INDUSTRIAL_CENTER]: 'Industrial Center',
-  [TileType.LAVA_FLOWS]: 'Lava Flows',
-  [TileType.CAPITAL]: 'Capital',
-  [TileType.MINING_AREA]: 'Mining Area',
-  [TileType.MINING_RIGHTS]: 'Mining Rights',
-  [TileType.NATURAL_PRESERVE]: 'Natural Preserve',
-  [TileType.NUCLEAR_ZONE]: 'Nuclear Zone',
-  [TileType.RESTRICTED_AREA]: 'Restricted Area',
-  [TileType.GREAT_DAM]: 'Great Dam',
-  [TileType.MAGNETIC_FIELD_GENERATORS]: 'Magnetic field generators',
-  [TileType.DEIMOS_DOWN]: 'Deimos Down',
   [TileType.CITY]: 'City: 1 VP per adjacent greenery',
   [TileType.GREENERY]: 'Greenery: 1 VP',
   [TileType.OCEAN]: 'Ocean: grants 2M€ when players put tiles next to it',
-  [TileType.BIOFERTILIZER_FACILITY]: 'Biofertilizer Facility',
-  [TileType.METALLIC_ASTEROID]: 'Metallic Asteroid',
-  [TileType.SOLAR_FARM]: 'Solar Farm',
   [TileType.OCEAN_CITY]: 'Ocean City: counts as an ocean and a city.',
-  [TileType.OCEAN_FARM]: 'Ocean Farm',
-  [TileType.OCEAN_SANCTUARY]: 'Ocean Sanctuary',
   [TileType.DUST_STORM_MILD]: 'Mild Dust Storm: lose 1 production when placing next to it. Pay 8M€ to place over it.',
   [TileType.DUST_STORM_SEVERE]: 'Severe Dust Storm: lose 2 production when placing next to it. Pay 16M€ to place over it.',
   [TileType.EROSION_MILD]: 'Mild Erosion: lose 1 production when placing next to it. Pay 8M€ to place over it.',
@@ -102,16 +86,13 @@ const descriptions: Record<TileType, string> = {
   [TileType.MOON_MINE]: 'Moon Mine: 1 VP per adjacent road',
   [TileType.MOON_HABITAT]: 'Moon Colony: 1 VP per adjacent road',
   [TileType.MOON_ROAD]: 'Moon Road: 1 VP',
-  [TileType.LUNA_TRADE_STATION]: 'Luna Trade Station',
-  [TileType.LUNA_MINING_HUB]: 'Luna Mining Hub',
   [TileType.LUNA_TRAIN_STATION]: 'Luna Train Station: 2 VP per adjacent road',
   [TileType.LUNAR_MINE_URBANIZATION]: 'Luna Mine Urbanization: counts as both a colony and a mine tile.',
 
   [TileType.WETLANDS]: 'Wetlands: counts as an ocean and a greenery. Does not count toward 9 oceans.',
   [TileType.RED_CITY]: 'Red City: 1 VP per empty adjacent area. No greeneries may be placed next to it.',
-  [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
-  [TileType.CRASHLANDING]: 'Crashlanding',
-  [TileType.MARS_NOMADS]: '', // This never actually renders.
+  [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders: nothing may be placed here',
+  [TileType.REY_SKYWALKER]: 'Rey... Skywalker?: nothing may be placed here',
 };
 
 export default Vue.extend({
@@ -126,10 +107,6 @@ export default Vue.extend({
     tileView: {
       type: String as () => TileView,
       default: 'show',
-    },
-    restricted: {
-      type: Boolean,
-      default: false,
     },
   },
   data() {
@@ -172,7 +149,7 @@ export default Vue.extend({
           } else {
             css += ' board-space-type-volcanic-cove';
           }
-        } else if (!this.restricted) {
+        } else if (this.spaceType !== SpaceType.RESTRICTED) {
           css += ` board-space-type-land`;
 
           if (this.highlight) {

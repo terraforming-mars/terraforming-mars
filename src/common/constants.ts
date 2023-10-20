@@ -20,6 +20,14 @@ export const MIN_OXYGEN_LEVEL = 0;
 export const MIN_VENUS_SCALE = 0;
 export const MAX_VENUS_SCALE = 30;
 
+export const OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS = 8;
+export const TEMPERATURE_FOR_OCEAN_BONUS = 0;
+export const VENUS_LEVEL_FOR_CARD_BONUS = 8;
+export const VENUS_LEVEL_FOR_TR_BONUS = 16;
+export const ALT_VENUS_MINIMUM_BONUS = 16;
+export const TEMPERATURE_BONUS_FOR_HEAT_1 = -24;
+export const TEMPERATURE_BONUS_FOR_HEAT_2 = -20;
+
 // Colonies
 export const MAX_COLONY_TRACK_POSITION = 6;
 export const MAX_COLONIES_PER_TILE = 3;
@@ -56,6 +64,7 @@ export const DEFAULT_ESCAPE_VELOCITY_THRESHOLD = 30;
 export const DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS = 2;
 export const DEFAULT_ESCAPE_VELOCITY_PERIOD = 2;
 export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
+export const BONUS_SECONDS_PER_ACTION = 5;
 
 // Leaders/CEOs
 export const ASIMOV_AWARD_BONUS = 2;

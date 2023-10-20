@@ -24,7 +24,7 @@ const css: Record<SpaceBonus, string> = {
   [SpaceBonus.SCIENCE]: 'science',
   [SpaceBonus.ENERGY_PRODUCTION]: 'energy-production',
   [SpaceBonus.TEMPERATURE]: 'bonustemperature',
-  [SpaceBonus.RESTRICTED]: '', // RESTRICTED is just a that a space is empty, not an actual bonus.
+  [SpaceBonus._RESTRICTED]: '', // RESTRICTED is just a that a space is empty, not an actual bonus.
   [SpaceBonus.ASTEROID]: 'asteroid',
 };
 

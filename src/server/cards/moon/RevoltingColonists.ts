@@ -10,6 +10,7 @@ import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {message} from '../../logs/MessageBuilder';
 
 export class RevoltingColonists extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +25,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
         description: 'Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.',
         cardNumber: 'M51',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(3, {all}).slash().moonHabitat({size: Size.SMALL, all});
+          b.minus().megacredits(3, {all}).slash().moonHabitat({size: Size.SMALL, all});
         }),
       },
     });
@@ -39,9 +40,8 @@ export class RevoltingColonists extends Card implements IProjectCard {
         const bill = owned * 3;
         const owes = Math.min(bill, habitatTileOwner.spendableMegacredits());
 
-        // TODO(kberg): Use Message.
         game.defer(new SelectPaymentDeferred(habitatTileOwner, owes, {
-          title: 'You must pay ' + owes + 'M€ for ' + owned + ' habitat tiles'}))
+          title: message('You must spend ${0} M€ for ${1} habitat tiles', (b) => b.number(owes).number(owned))}))
           .andThen(() =>
             game.log(
               '${0} spends ${1} M€ for the ${2} habitat tiles they own.',

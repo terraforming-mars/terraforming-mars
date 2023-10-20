@@ -5,12 +5,12 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
 import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {TRSource} from '../../common/cards/TRSource';
 import {sum} from '../../common/utils/utils';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 
 export type SpaceCosts = {
   stock: Units,
@@ -211,10 +211,6 @@ export abstract class Board {
 
   public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
-      if (space.bonus.includes(SpaceBonus.RESTRICTED)) {
-        return false;
-      }
-
       // A space is available if it doesn't have a player marker on it, or it belongs to |player|
       if (space.player !== undefined && space.player !== player) {
         return false;
@@ -263,7 +259,7 @@ export abstract class Board {
   }
 
   public canPlaceTile(space: Space): boolean {
-    return space.tile === undefined && space.spaceType === SpaceType.LAND && space.bonus.includes(SpaceBonus.RESTRICTED) === false;
+    return space.tile === undefined && space.spaceType === SpaceType.LAND;
   }
 
   public static isCitySpace(space: Space): boolean {
@@ -299,7 +295,7 @@ export abstract class Board {
   public serialize(): SerializedBoard {
     return {
       spaces: this.spaces.map((space) => {
-        return {
+        const serialized: SerializedSpace = {
           id: space.id,
           spaceType: space.spaceType,
           tile: space.tile,
@@ -309,6 +305,14 @@ export abstract class Board {
           x: space.x,
           y: space.y,
         };
+        if (space.undergroundResources !== undefined) {
+          serialized.undergroundResources = space.undergroundResources;
+        }
+        if (space.excavator !== undefined) {
+          serialized.excavator = space.excavator.id;
+        }
+
+        return serialized;
       }),
     };
   }
@@ -316,6 +320,7 @@ export abstract class Board {
   public static deserializeSpace(serialized: SerializedSpace, players: ReadonlyArray<IPlayer>): Space {
     const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
+    const excavator = players.find((p) => p.id === serialized.excavator);
     const space: Space = {
       id: serialized.id,
       spaceType: serialized.spaceType,
@@ -323,6 +328,12 @@ export abstract class Board {
       x: serialized.x,
       y: serialized.y,
     };
+
+    // TODO(kberg): Delete this block after 2023-12-01
+    if (space.bonus.length > 0 && space.bonus[0] === SpaceBonus._RESTRICTED) {
+      space.bonus = [];
+      space.spaceType = SpaceType.RESTRICTED;
+    }
 
     if (serialized.tile !== undefined) {
       space.tile = serialized.tile;
@@ -333,7 +344,12 @@ export abstract class Board {
     if (serialized.adjacency !== undefined) {
       space.adjacency = serialized.adjacency;
     }
-
+    if (serialized.undergroundResources !== undefined) {
+      space.undergroundResources = serialized.undergroundResources;
+    }
+    if (excavator !== undefined) {
+      space.excavator = excavator;
+    }
     return space;
   }
 

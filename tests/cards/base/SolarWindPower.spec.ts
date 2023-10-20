@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('SolarWindPower', function() {
   it('Should play', function() {
     const card = new SolarWindPower();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
 
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);

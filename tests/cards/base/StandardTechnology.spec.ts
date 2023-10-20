@@ -13,7 +13,7 @@ describe('StandardTechnology', function() {
   let player: TestPlayer;
 
   beforeEach(() => {
-    [, player] = testGame(1);
+    [/* skipped */, player] = testGame(1);
     card = new StandardTechnology();
   });
 

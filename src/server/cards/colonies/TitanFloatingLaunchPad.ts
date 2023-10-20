@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class TitanFloatingLaunchPad extends Card implements IProjectCard {
   constructor() {
@@ -94,7 +94,7 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
   }
 
   public optionText() {
-    return newMessage('Pay 1 floater (use ${0} action)', (b) => b.cardName(CardName.TITAN_FLOATING_LAUNCHPAD));
+    return message('Pay 1 floater (use ${0} action)', (b) => b.cardName(CardName.TITAN_FLOATING_LAUNCHPAD));
   }
 
   public trade(colony: IColony) {

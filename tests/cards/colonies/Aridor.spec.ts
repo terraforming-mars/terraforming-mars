@@ -51,7 +51,7 @@ describe('Aridor', function() {
   // A test that directly calls initialAction is also good, but this
   // is extra due to a bug #3882
   it('initialAction from input', () => {
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
 
     const colonyInPlay = game.colonies[0];
@@ -74,7 +74,7 @@ describe('Aridor', function() {
   it('initialAction - chooses Venus which cannot be activated', () => {
     const venus = new Venus();
     game.discardedColonies.push(venus);
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     const playerInput = cast(player.popWaitingFor(), SelectColony);
     expect(playerInput?.colonies).contains(venus);
@@ -89,7 +89,7 @@ describe('Aridor', function() {
     player2.setCorporationForTest(new Celestic());
     const venus = new Venus();
     game.discardedColonies.push(venus);
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     const playerInput = cast(player.popWaitingFor(), SelectColony);
     expect(playerInput?.colonies).contains(venus);

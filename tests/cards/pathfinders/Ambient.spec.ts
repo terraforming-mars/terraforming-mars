@@ -25,7 +25,7 @@ describe('Ambient', function() {
     expect(game.getVenusScaleLevel()).eq(0);
     expect(player.getTerraformRating()).eq(20);
 
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(4);

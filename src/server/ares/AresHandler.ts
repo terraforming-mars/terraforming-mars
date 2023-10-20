@@ -6,7 +6,7 @@ import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
-import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
+import {OCEAN_UPGRADE_TILES, TileType, tileTypeToString} from '../../common/TileType';
 import {Tile} from '../Tile';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
 import {AdjacencyCost} from './AdjacencyCost';
@@ -118,7 +118,7 @@ export class AresHandler {
     const bonusText = Array.from(bonuses.multiplicities())
       .map(([bonus, count]) => `${count} ${SpaceBonus.toString(bonus)}`)
       .join(', ');
-    const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile.tileType) : 'no tile';
+    const tileText = adjacentSpace.tile !== undefined ? tileTypeToString[adjacentSpace.tile.tileType] : 'no tile';
     player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
 
     if (adjacentTileOwnerGainsBonus) {
@@ -265,6 +265,6 @@ export class AresHandler {
       return;
     }
     player.increaseTerraformRating(steps);
-    player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType.toString(initialTileType)));
+    player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).tileType(initialTileType));
   }
 }

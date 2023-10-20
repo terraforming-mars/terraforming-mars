@@ -8,7 +8,7 @@ import {testGame} from '../../TestGame';
 describe('CuttingEdgeTechnology', function() {
   it('Should play', function() {
     const card = new CuttingEdgeTechnology();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     card.play(player);
 
     expect(card.getCardDiscount(player, new DustSeals())).to.eq(2);

@@ -9,7 +9,7 @@ import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {Space} from './boards/Space';
-import {LogBuilder} from './logs/LogBuilder';
+import {LogMessageBuilder} from './logs/LogMessageBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
@@ -32,6 +32,7 @@ import {Tag} from '../common/cards/Tag';
 import {Tile} from './Tile';
 import {Logger} from './logs/Logger';
 import {GlobalParameter} from '../common/GlobalParameter';
+import {UnderworldData} from './underworld/UnderworldData';
 
 export interface Score {
   corporation: String;
@@ -71,6 +72,8 @@ export interface IGame extends Logger {
   aresData: AresData | undefined;
   moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
+  underworldData: UnderworldData | undefined;
+
   // Card-specific data
   // Mons Insurance promo corp
   monsInsuranceOwner?: PlayerId; // Not serialized
@@ -169,7 +172,7 @@ export interface IGame extends Logger {
   getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined];
   getCardsInHandByResource(player: IPlayer, resourceType: CardResource): void;
   getCardsInHandByType(player: IPlayer, cardType: CardType): void;
-  log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}): void;
+  log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}): void;
   someoneCanHaveProductionReduced(resource: Resource, minQuantity?: number): boolean;
   discardForCost(cardCount: 1 | 2, toPlace: TileType): number;
   getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): Space;

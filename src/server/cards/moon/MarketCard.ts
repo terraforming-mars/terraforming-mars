@@ -6,7 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 import {PathfindersExpansion} from '../..//pathfinders/PathfindersExpansion';
 
 export interface Terms {
@@ -42,8 +42,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
       return new OrOptions(
-        new SelectOption(newMessage('Buy ${0}', (b) => b.string(this.tradeResource)), 'Buy').andThen(() => this.getBuyingOption(player)),
-        new SelectOption(newMessage('Sell ${0}', (b) => b.string(this.tradeResource)), 'Sell').andThen(() => this.getSellingOption(player)),
+        new SelectOption(message('Buy ${0}', (b) => b.string(this.tradeResource)), 'Buy').andThen(() => this.getBuyingOption(player)),
+        new SelectOption(message('Sell ${0}', (b) => b.string(this.tradeResource)), 'Sell').andThen(() => this.getSellingOption(player)),
       );
     } else if (offerBuy) {
       return this.getBuyingOption(player);
@@ -59,10 +59,9 @@ export abstract class MarketCard extends Card implements IActionCard {
     let limit = Math.floor(availableMC / terms.from);
     limit = Math.min(limit, terms.limit);
 
-    // TODO(kberg): use Messages.
     return new SelectAmount(
-      newMessage(
-        'Select a number of trades (${terms.from} M€ => ${terms.to} ${this.tradeResource}, max ${limit})',
+      message(
+        'Select a number of trades (${0} M€ => ${1} ${2}, max ${3})',
         (b) => b.number(terms.from).number(terms.to).string(this.tradeResource).number(limit)),
       `Buy ${this.tradeResource}`,
       1,
@@ -84,9 +83,11 @@ export abstract class MarketCard extends Card implements IActionCard {
     let limit = player.stock.get(this.tradeResource);
     limit = Math.min(limit, terms.limit);
 
-    // TODO(kberg): use Messages.
+
     return new SelectAmount(
-      `Select a number of trades (${terms.from} ${this.tradeResource} => ${terms.to} M€, max ${limit})`,
+      message(
+        'Select a number of trades (${0} ${1} => ${2} M€, max ${3})',
+        (b) => b.number(terms.from).string(this.tradeResource).number(terms.to).number(limit)),
       `Sell ${this.tradeResource}`, 1, limit,
     ).andThen((unitsSold: number) => {
       const cashEarned = unitsSold * terms.to;

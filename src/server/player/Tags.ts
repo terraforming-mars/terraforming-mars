@@ -20,7 +20,7 @@ export type CountingMode =
 export type DistinctCountMode =
   'default' | // Count all tags in played cards, and then add in all the wild tags.
   'milestone' | // Like default with special conditions for milestones (Chimera)
-  'globalEvent'; // Like default, but does not reduce the count size based on max tags in the game. Should be removed.
+  'globalEvent'; // Like default, but does not apply wild tags, which are used in the action phase.
 
 export type MultipleCountMode =
   'default' | // Count each tag individually, add wild tags, and (Moon) Earth Embassy.
@@ -228,7 +228,7 @@ export class Tags {
     // Leavitt Station hook
     if (this.player.scienceTagCount > 0) uniqueTags.add(Tag.SCIENCE);
 
-    // TODO(kberg): I think the global event case is unnecessary.
+    // Global events occur outside the action phase. Stop counting here, before wild tags apply.
     if (mode === 'globalEvent') return uniqueTags.size;
 
     if (mode === 'milestone' && this.player.isCorporation(CardName.CHIMERA)) wildTagCount--;

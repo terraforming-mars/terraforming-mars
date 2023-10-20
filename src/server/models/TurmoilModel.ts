@@ -106,7 +106,6 @@ function getParties(game: IGame): Array<PartyModel> {
         }
         return {
           name: party.name,
-          description: party.description,
           partyLeader: partyLeader,
           delegates: delegates,
         };

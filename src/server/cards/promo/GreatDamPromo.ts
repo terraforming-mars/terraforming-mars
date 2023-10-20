@@ -10,6 +10,7 @@ import {Board} from '../../boards/Board';
 import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {message} from '../../logs/MessageBuilder';
 
 export class GreatDamPromo extends Card implements IProjectCard {
   constructor(
@@ -47,7 +48,9 @@ export class GreatDamPromo extends Card implements IProjectCard {
     const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 
-    return new SelectSpace('Select space for tile', availableSpaces)
+    return new SelectSpace(
+      message('Select space for ${0}', (b) => b.card(this)),
+      availableSpaces)
       .andThen((space) => {
         player.game.addTile(player, space, {tileType: TileType.GREAT_DAM});
         space.adjacency = this.adjacencyBonus;

@@ -1,14 +1,14 @@
-import {IGlobalEvent} from './IGlobalEvent';
-import {GlobalEvent} from './GlobalEvent';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {Turmoil} from '../Turmoil';
+import {Turmoil} from '../../turmoil/Turmoil';
 import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
 import {isSpecialTileSpace, playerTileFn} from '../../boards/Board';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardRenderer} from '../render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.production((pb) => pb.megacredits(1)).slash().specialTile().nbsp;

@@ -15,14 +15,14 @@ export class LunaTrainStation extends Card {
       name: CardName.LUNA_TRAIN_STATION,
       type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
-      cost: 20,
+      cost: 24,
       reserveUnits: {steel: 2},
       victoryPoints: 'special',
 
       behavior: {
         production: {megacredits: 4},
         moon: {
-          tile: {type: TileType.LUNA_TRAIN_STATION, title: 'Select a space for Luna Train Station.'},
+          tile: {type: TileType.LUNA_TRAIN_STATION},
           logisticsRate: 1,
         },
       },

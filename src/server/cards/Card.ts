@@ -1,7 +1,7 @@
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {CardDiscount} from '../../common/cards/Types';
+import {CardDiscount, GlobalParameterRequirementBonus} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
@@ -25,15 +25,17 @@ import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
 import {YesAnd} from './requirements/CardRequirement';
+import {GlobalParameter} from '../../common/GlobalParameter';
 
-const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
+/**
+ * Cards that do not need a cost attribute.
+ */
+const CARD_TYPES_WITHOUT_COST: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
   CardType.PRELUDE,
   CardType.CEO,
   CardType.STANDARD_ACTION,
 ] as const;
-
-type FirstActionBehavior = Behavior & {text: string};
 
 type SharedProperties = {
   /** @deprecated use behavior */
@@ -44,7 +46,8 @@ type SharedProperties = {
   type: CardType;
   cost?: number;
   initialActionText?: string;
-  firstAction?: FirstActionBehavior;
+  firstAction?: Behavior & {text: string};
+  globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
   metadata: ICardMetadata;
   requirements?: CardRequirementsDescriptor;
   name: CardName;
@@ -99,7 +102,7 @@ export abstract class Card {
       throw new Error(`${name}: corp cards must define startingMegaCredits`);
     }
     if (external.cost === undefined) {
-      if (NO_COST_CARD_TYPES.includes(external.type) === false) {
+      if (CARD_TYPES_WITHOUT_COST.includes(external.type) === false) {
         throw new Error(`${name} must have a cost property`);
       }
     }
@@ -360,6 +363,24 @@ export abstract class Card {
       }
     }
     return sum;
+  }
+
+  public getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number {
+    if (this.properties.globalParameterRequirementBonus !== undefined) {
+      const globalParameterRequirementBonus = this.properties.globalParameterRequirementBonus;
+      if (globalParameterRequirementBonus.nextCardOnly === true) {
+        if (player.lastCardPlayed !== this.name) {
+          return 0;
+        }
+      }
+      if (globalParameterRequirementBonus.parameter !== undefined) {
+        if (globalParameterRequirementBonus.parameter !== parameter) {
+          return 0;
+        }
+      }
+      return globalParameterRequirementBonus.steps;
+    }
+    return 0;
   }
 }
 

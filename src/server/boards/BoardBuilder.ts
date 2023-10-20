@@ -45,6 +45,12 @@ export class BoardBuilder {
     return this;
   }
 
+  restricted(): this {
+    this.spaceTypes.push(SpaceType.RESTRICTED);
+    this.bonuses.push([]);
+    return this;
+  }
+
   doNotShuffleLastSpace(): this {
     this.unshufflableSpaces.push(this.spaceTypes.length - 1);
     return this;

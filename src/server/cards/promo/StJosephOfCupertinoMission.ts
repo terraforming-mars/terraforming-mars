@@ -13,6 +13,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectPayment} from '../../inputs/SelectPayment';
 import {TITLES} from '../../inputs/titles';
+import {message} from '../../logs/MessageBuilder';
 
 export class StJosephOfCupertinoMission extends Card implements IActionCard {
   constructor() {
@@ -52,7 +53,9 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
     player.game.defer(new SelectPaymentDeferred(player, 5, {canUseSteel: true, title: TITLES.payForCardAction(this.name)}))
       .andThen(() => {
         // TODO(kberg): get player.defer to return AndThen<Space>
-        player.defer(new SelectSpace('Select new cathedral space', cities)
+        player.defer(new SelectSpace(
+          message('Select new space for ${0}', (b) => b.card(this)),
+          cities)
           .andThen((space) => {
             player.game.stJosephCathedrals.push(space.id);
             const spaceOwner = space.player;

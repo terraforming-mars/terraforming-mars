@@ -119,7 +119,7 @@ describe('drafting', () => {
     let otherPlayer: TestPlayer;
     try {
       Deck.shuffle = function() {};
-      [, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true});
+      [/* skipped */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true});
     } finally {
       Deck.shuffle = shuffle;
     }

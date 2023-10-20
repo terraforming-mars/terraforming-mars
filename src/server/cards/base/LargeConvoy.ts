@@ -13,6 +13,7 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class LargeConvoy extends Card implements IProjectCard {
   constructor() {
@@ -56,7 +57,7 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     if (animalCards.length === 1) {
       const targetAnimalCard = animalCards[0];
-      availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals').andThen(() => {
+      availableActions.push(new SelectOption(message('Add ${0} animals to ${1}', (b) => b.number(4).card(targetAnimalCard)), 'Add animals').andThen(() => {
         player.addResourceTo(targetAnimalCard, {qty: 4, log: true});
         return undefined;
       }));

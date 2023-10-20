@@ -14,6 +14,7 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Tile} from '../../Tile';
 import {CrashlandingBonus} from '../../pathfinders/CrashlandingBonus';
+import {message} from '../../logs/MessageBuilder';
 
 export class Crashlanding extends Card implements IProjectCard {
   constructor() {
@@ -54,7 +55,7 @@ export class Crashlanding extends Card implements IProjectCard {
   }
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
-      'Select space for Crashlanding tile',
+      message('Select space for ${0} tile', (b) => b.card(this)),
       this.playableSpaces(player))
       .andThen((space) => {
         space.adjacency = {bonus: ['callback']};

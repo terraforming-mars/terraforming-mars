@@ -3,6 +3,8 @@ import {CardName} from '../../common/cards/CardName';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {Tag} from '../../common/cards/Tag';
 import {IProjectCard} from './IProjectCard';
+import {IPlayer} from '../IPlayer';
+import {GlobalParameter} from '../../common/GlobalParameter';
 
 export class ProxyCard implements IProjectCard {
   public readonly name: CardName;
@@ -35,5 +37,8 @@ export class ProxyCard implements IProjectCard {
   }
   public get requirements() {
     return [];
+  }
+  public getGlobalParameterRequirementBonus(_player: IPlayer, _parameter: GlobalParameter): number {
+    return 0;
   }
 }

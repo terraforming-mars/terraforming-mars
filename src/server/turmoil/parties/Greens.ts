@@ -19,10 +19,10 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {Board} from '../../boards/Board';
 import {TITLES} from '../../inputs/titles';
+import {message} from '../../logs/MessageBuilder';
 
 export class Greens extends Party implements IParty {
   readonly name = PartyName.GREENS;
-  readonly description = 'Want to see a new Earth as soon as possible.';
   readonly bonuses = [GREENS_BONUS_1, GREENS_BONUS_2];
   readonly policies = [GREENS_POLICY_1, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
 }
@@ -103,7 +103,7 @@ class GreensPolicy04 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
-    game.log('${0} used Turmoil Greens action', (b) => b.player(player));
+    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.GREENS));
     player.politicalAgendasActionUsedCount += 1;
 
     game.defer(new SelectPaymentDeferred(player, 5, {title: TITLES.payForPartyAction(PartyName.GREENS)}))
@@ -113,7 +113,7 @@ class GreensPolicy04 implements Policy {
 
         if (availableMicrobeCards.length === 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm').andThen(() => {
+            new SelectOption(message('Add ${0} microbes to ${1}', (b) => b.number(2).card(availableMicrobeCards[0]))).andThen(() => {
               player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
 
               return undefined;
@@ -121,7 +121,7 @@ class GreensPolicy04 implements Policy {
           );
         } else if (availableMicrobeCards.length > 1) {
           orOptions.options.push(
-            new SelectOption('Add 2 microbes to a card', 'Confirm').andThen(() => {
+            new SelectOption('Add 2 microbes to a card').andThen(() => {
               return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards)
                 .andThen(([card]) => {
                   player.addResourceTo(card, {qty: 2, log: true});
@@ -131,7 +131,7 @@ class GreensPolicy04 implements Policy {
           );
         }
 
-        orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm').andThen(() => {
+        orOptions.options.push(new SelectOption('Gain 3 plants').andThen(() => {
           player.stock.add(Resource.PLANTS, 3);
           game.log('${0} gained 3 plants', (b) => b.player(player));
           return undefined;

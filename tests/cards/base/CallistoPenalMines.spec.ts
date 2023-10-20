@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('CallistoPenalMines', function() {
   it('Should play', function() {
     const card = new CallistoPenalMines();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(3);
     expect(card.getVictoryPoints(player)).to.eq(2);

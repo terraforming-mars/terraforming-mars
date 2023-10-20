@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {GlobalParameter} from '../../../src/common/GlobalParameter';
 
 describe('Inventrix', function() {
   let card: Inventrix;
@@ -17,11 +18,11 @@ describe('Inventrix', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(card.getRequirementBonus()).to.eq(2);
+    expect(card.getGlobalParameterRequirementBonus(player, GlobalParameter.OCEANS)).to.eq(2);
   });
 
   it('Should take initial action', function() {
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(3);
   });

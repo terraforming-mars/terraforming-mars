@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
 import {played} from '../Options';
 import {Card} from '../Card';
 import {PartyName} from '../../../common/turmoil/PartyName';
@@ -20,7 +19,7 @@ export class SummitLogistics extends Card {
       behavior: {
         stock: {
           megacredits: {
-            tag: [Tag.JOVIAN, Tag.EARTH, Tag.VENUS, Tag.MARS],
+            tag: [Tag.JOVIAN, Tag.EARTH, Tag.VENUS, Tag.MARS, Tag.MOON],
             colonies: {colonies: {}},
           },
         },
@@ -35,15 +34,8 @@ export class SummitLogistics extends Card {
           b.cards(2).br;
           b.plainText('(Requires that Scientists are ruling or that you have 2 delegates there. ' +
             'Gain 1 M€ per planet tag and colony you have. Draw 2 cards.)');
-          b.br;
-          b.plainText('(FAN EXPANSION NOTE: This includes Mars but not The Moon.)');
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.drawCard(2);
-    return undefined;
   }
 }

@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('ReleaseOfInertGases', function() {
   it('Should play', function() {
     const card = new ReleaseOfInertGases();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.getTerraformRating()).to.eq(22);
   });

@@ -99,6 +99,7 @@ export class GameHandler extends Handler {
             politicalAgendasExtension: gameReq.politicalAgendasExtension,
             moonExpansion: gameReq.moonExpansion,
             pathfindersExpansion: gameReq.pathfindersExpansion,
+            underworldExpansion: false,
             promoCardsOption: gameReq.promoCardsOption,
             communityCardsOption: gameReq.communityCardsOption,
             solarPhaseOption: gameReq.solarPhaseOption,
@@ -134,7 +135,7 @@ export class GameHandler extends Handler {
 
           let game: IGame;
           if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-            const serialized = await Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId);
+            const serialized = await Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
             game = Cloner.clone(gameId, players, firstPlayerIdx, serialized);
           } else {
             const seed = Math.random();

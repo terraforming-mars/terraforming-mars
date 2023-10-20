@@ -87,11 +87,6 @@ export interface IDatabase {
     saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
 
     /**
-     * Load a game at save point 0, and provide it in the callback.
-     */
-    loadCloneableGame(gameId: GameId): Promise<SerializedGame>;
-
-    /**
      * Deletes the last `rollbackCount` saves of the specified game.
      *
      * Used as part of undo, reset, and via API to roll back a broken game.

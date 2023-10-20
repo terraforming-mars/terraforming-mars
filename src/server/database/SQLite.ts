@@ -65,20 +65,6 @@ export class SQLite implements IDatabase {
     return rows.map((row) => row.game_id);
   }
 
-  // TODO(kberg): Remove repetition between this and getGameVersion.
-  // this is basically getGameVersion with save ID 0.
-  // This method has more content, so that has to be reconciled.
-  public async loadCloneableGame(gameId: GameId): Promise<SerializedGame> {
-    const sql = 'SELECT game_id, game FROM games WHERE game_id = ? AND save_id = 0';
-    const row: { game_id: GameId, game: any; } = await this.asyncGet(sql, [gameId]);
-    if (row === undefined || row.game_id === undefined || row.game === undefined) {
-      throw new Error(`Game ${gameId} not found`);
-    }
-
-    const json = JSON.parse(row.game);
-    return json;
-  }
-
   saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
     this.db.run(
       'INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)',
@@ -100,7 +86,6 @@ export class SQLite implements IDatabase {
     return JSON.parse(row.game);
   }
 
-  // TODO(kberg): throw an error if two game ids exist.
   public async getGameId(participantId: ParticipantId): Promise<GameId> {
     // Default sql is for player id;
     let sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
@@ -123,11 +108,10 @@ export class SQLite implements IDatabase {
   }
 
   public async getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    const row: { game: any; } = await this.asyncGet(
-      'SELECT game FROM games WHERE game_id = ? and save_id = ?',
-      [gameId, saveId]);
-    if (row === undefined) {
-      throw new Error(`bad game id ${gameId}`);
+    const sql = 'SELECT game_id, game FROM games WHERE game_id = ? and save_id = ?';
+    const row: { game_id: GameId, game: any; } = await this.asyncGet(sql, [gameId, saveId]);
+    if (row === undefined || row.game_id === undefined || row.game === undefined) {
+      throw new Error(`Game ${gameId} not found`);
     }
     return JSON.parse(row.game);
   }
@@ -152,7 +136,14 @@ export class SQLite implements IDatabase {
     if (maxGameDays !== undefined) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
       const selectResult = await this.asyncAll('SELECT DISTINCT game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
-      const gameIds = selectResult.map((row) => row.game_id);
+      let gameIds = selectResult.map((row) => row.game_id);
+      if (gameIds.length > 1000) {
+        console.log('Truncated purge to 1000 games.');
+        gameIds = gameIds.slice(0, 1000);
+      } else {
+        console.log(`${gameIds.length} games to be purged.`);
+      }
+
       if (gameIds.length > 0) {
         console.log(`About to purge ${gameIds.length} games`);
         const placeholders = gameIds.map(() => '?').join(', ');

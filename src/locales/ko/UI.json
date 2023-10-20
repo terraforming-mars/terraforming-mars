@@ -172,9 +172,7 @@
 
     "Convert 7 heat into temperature": "열 자원 7개로 온난화 사업",
     "Convert 8 heat into temperature": "열 자원 8개로 온난화 사업",
-    "Convert 8 plants into greenery": "식물 자원 8개로 녹화 사업",
-    "Convert 7 plants into greenery": "식물 자원 7개로 녹화 사업",
-    "Convert 6 plants into greenery": "식물 자원 6개로 녹화 사업",
+    "Convert ${0} plants into greenery": "식물 자원 ${0}개로 녹화 사업",
     "Colonies": "개척기지",
     "funded by": "제정: ",
     "claimed by": "달성: ",
@@ -254,7 +252,6 @@
     "Pay": "지불",
     "Remove floaters": "부양체 자원 제거",
     "Add floater": "부양체 자원 추가",
-    "Select space for tile": "타일 배치할 곳 선택",
     "Select card to take into hand": "손으로 가져갈 카드 선택",
     "Send a delegate in an area (5 M€)": "의원석에 의원 하나를 보내기 (5 M€)",
     "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "10 М€ 지불하고 카드 3장 뽑기 (과학당 정책 행동)",

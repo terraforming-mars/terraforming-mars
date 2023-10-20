@@ -14,7 +14,7 @@ describe('PrivateSecurity', function() {
 
   beforeEach(function() {
     card = new PrivateSecurity();
-    [, player, opponent1, opponent2] = testGame(3, {pathfindersExpansion: true});
+    [/* skipped */, player, opponent1, opponent2] = testGame(3, {pathfindersExpansion: true});
   });
 
   it('protects against Fish', function() {

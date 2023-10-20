@@ -9,7 +9,7 @@ import {cast} from '../../TestingUtils';
 describe('MicrobiologyPatents', function() {
   it('Should play', function() {
     const card = new MicrobiologyPatents();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
 
     cast(card.play(player), undefined);
     card.onCardPlayed(player, new Virus());

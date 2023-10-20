@@ -10,6 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
+import {message} from '../../logs/MessageBuilder';
 
 export class Vitor extends Card implements ICorporationCard {
   constructor() {
@@ -37,7 +38,7 @@ export class Vitor extends Card implements ICorporationCard {
   }
 
   private selectAwardToFund(player: IPlayer, award: IAward): SelectOption {
-    return new SelectOption('Fund ' + award.name + ' award', 'Confirm').andThen(() => {
+    return new SelectOption(message('Fund ${0} award', (b) => b.award(award))).andThen(() => {
       player.game.fundAward(player, award);
       return undefined;
     });

@@ -5,6 +5,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 export class LunarIndustryComplex extends Card implements IProjectCard {
   constructor() {
@@ -25,7 +26,7 @@ export class LunarIndustryComplex extends Card implements IProjectCard {
           'Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.',
         cardNumber: 'M74',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(2).moonMine().br;
+          b.minus().titanium(2).moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).br;
           b.production((pb) => pb.steel(1).titanium(1).heat(1).energy(2));
         }),
       },

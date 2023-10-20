@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('GanymedeColony', function() {
   it('Should play', function() {
     const card = new GanymedeColony();
-    const [, player] = testGame(2);
+    const [/* skipped */, player] = testGame(2);
     cast(card.play(player), undefined);
     player.playedCards.push(card);
     expect(card.getVictoryPoints(player)).to.eq(1);

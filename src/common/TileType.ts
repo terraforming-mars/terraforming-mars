@@ -1,5 +1,8 @@
 // There might be a temptation to rename or reorder these, but TileType is stored in the database
 // as its number. Would have been better if this was stored as a string, but that ship has sailed,
+
+import {CardName} from './cards/CardName';
+
 // for now.
 export enum TileType {
     GREENERY, // 0
@@ -50,33 +53,34 @@ export enum TileType {
     CRASHLANDING, // 39
 
     MARS_NOMADS, // 40
+    REY_SKYWALKER, // 41
 }
 
-const TO_STRING_MAP: Record<TileType, string> = {
+export const tileTypeToString: Record<TileType, string> = {
   [TileType.GREENERY]: 'greenery',
   [TileType.OCEAN]: 'ocean',
   [TileType.CITY]: 'city',
 
-  [TileType.CAPITAL]: 'Capital',
-  [TileType.COMMERCIAL_DISTRICT]: 'Commercial District',
-  [TileType.ECOLOGICAL_ZONE]: 'Ecological Zone',
-  [TileType.INDUSTRIAL_CENTER]: 'Industrial Center',
-  [TileType.LAVA_FLOWS]: 'Lava Flows',
-  [TileType.MINING_AREA]: 'Mining Area',
-  [TileType.MINING_RIGHTS]: 'Mining Rights',
-  [TileType.MOHOLE_AREA]: 'Mohole Area',
-  [TileType.NATURAL_PRESERVE]: 'Natural Preserve',
-  [TileType.NUCLEAR_ZONE]: 'Nuclear Zone',
-  [TileType.RESTRICTED_AREA]: 'Restricted Area',
-  [TileType.DEIMOS_DOWN]: 'Deimos Down',
-  [TileType.GREAT_DAM]: 'Great Dam',
-  [TileType.MAGNETIC_FIELD_GENERATORS]: 'Magnetic Field Generators',
-  [TileType.BIOFERTILIZER_FACILITY]: 'Bio-Fertilizer Facility',
-  [TileType.METALLIC_ASTEROID]: 'Metallic Asteroid',
-  [TileType.SOLAR_FARM]: 'Solar Farm',
-  [TileType.OCEAN_CITY]: 'Ocean City',
-  [TileType.OCEAN_FARM]: 'Ocean Farm',
-  [TileType.OCEAN_SANCTUARY]: 'Ocean Sanctuary',
+  [TileType.CAPITAL]: CardName.CAPITAL,
+  [TileType.COMMERCIAL_DISTRICT]: CardName.COMMERCIAL_DISTRICT,
+  [TileType.ECOLOGICAL_ZONE]: CardName.ECOLOGICAL_ZONE,
+  [TileType.INDUSTRIAL_CENTER]: CardName.INDUSTRIAL_CENTER,
+  [TileType.LAVA_FLOWS]: CardName.LAVA_FLOWS,
+  [TileType.MINING_AREA]: CardName.MINING_AREA,
+  [TileType.MINING_RIGHTS]: CardName.MINING_RIGHTS,
+  [TileType.MOHOLE_AREA]: CardName.MOHOLE_AREA,
+  [TileType.NATURAL_PRESERVE]: CardName.NATURAL_PRESERVE,
+  [TileType.NUCLEAR_ZONE]: CardName.NUCLEAR_ZONE,
+  [TileType.RESTRICTED_AREA]: CardName.RESTRICTED_AREA,
+  [TileType.DEIMOS_DOWN]: CardName.DEIMOS_DOWN,
+  [TileType.GREAT_DAM]: CardName.GREAT_DAM,
+  [TileType.MAGNETIC_FIELD_GENERATORS]: CardName.MAGNETIC_FIELD_GENERATORS,
+  [TileType.BIOFERTILIZER_FACILITY]: CardName.BIOFERTILIZER_FACILITY,
+  [TileType.METALLIC_ASTEROID]: CardName.METALLIC_ASTEROID,
+  [TileType.SOLAR_FARM]: CardName.SOLAR_FARM,
+  [TileType.OCEAN_CITY]: CardName.OCEAN_CITY,
+  [TileType.OCEAN_FARM]: CardName.OCEAN_FARM,
+  [TileType.OCEAN_SANCTUARY]: CardName.OCEAN_SANCTUARY,
   [TileType.DUST_STORM_MILD]: 'Mild Dust Storm',
   [TileType.DUST_STORM_SEVERE]: 'Severe Dust Storm',
   [TileType.EROSION_MILD]: 'Mild Erosion',
@@ -86,22 +90,17 @@ const TO_STRING_MAP: Record<TileType, string> = {
   [TileType.MOON_MINE]: 'Mine',
   [TileType.MOON_HABITAT]: 'Habitat',
   [TileType.MOON_ROAD]: 'Road',
-  [TileType.LUNA_TRADE_STATION]: 'Luna Trade Station',
-  [TileType.LUNA_MINING_HUB]: 'Luna Mining Hub',
-  [TileType.LUNA_TRAIN_STATION]: 'Luna Train Station',
-  [TileType.LUNAR_MINE_URBANIZATION]: 'Lunar Mine Urbanization',
-  [TileType.WETLANDS]: 'Wetlands',
-  [TileType.RED_CITY]: 'Red City',
-  [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
-  [TileType.CRASHLANDING]: 'Crashlanding',
-  [TileType.MARS_NOMADS]: 'Mars Nomads',
-};
-
-export namespace TileType {
-  export function toString(tileType: TileType): string {
-    return TO_STRING_MAP[tileType];
-  }
-}
+  [TileType.LUNA_TRADE_STATION]: CardName.LUNA_TRADE_STATION,
+  [TileType.LUNA_MINING_HUB]: CardName.LUNA_MINING_HUB,
+  [TileType.LUNA_TRAIN_STATION]: CardName.LUNA_TRAIN_STATION,
+  [TileType.LUNAR_MINE_URBANIZATION]: CardName.LUNAR_MINE_URBANIZATION,
+  [TileType.WETLANDS]: CardName.WETLANDS,
+  [TileType.RED_CITY]: CardName.RED_CITY,
+  [TileType.MARTIAN_NATURE_WONDERS]: CardName.MARTIAN_NATURE_WONDERS,
+  [TileType.CRASHLANDING]: CardName.CRASHLANDING,
+  [TileType.MARS_NOMADS]: CardName.MARS_NOMADS,
+  [TileType.REY_SKYWALKER]: CardName.REY_SKYWALKER,
+} as const;
 
 export const HAZARD_TILES = new Set([TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE]);
 export const OCEAN_UPGRADE_TILES = new Set([TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]);

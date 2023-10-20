@@ -1,9 +1,9 @@
-import {IGlobalEvent} from './IGlobalEvent';
-import {GlobalEvent} from './GlobalEvent';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardRenderer} from '../render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().temperature(2).nbsp.minus().oxygen(2);

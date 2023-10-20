@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('GeothermalPower', function() {
   it('Should play', function() {
     const card = new GeothermalPower();
-    const [, player] = testGame(1);
+    const [/* skipped */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(2);
   });

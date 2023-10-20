@@ -52,7 +52,7 @@
     "Milestones": "Mérföldkövek",
 
     "Terraformer": "Terraformátor",
-    "Have a terraform rating of 35 (or 26 with Turmoil.)": 
+    "Have a terraform rating of 35 (or 26 with Turmoil.)":
         "Legyen 35 terraformálási rátád (vagy 26 Hatalmi Játszmával.)",
     "Mayor": "Polgármester",
     "Own 3 city tiles": "Legyen 3 városod",
@@ -75,12 +75,12 @@
     "Have 3 Jovian tags in play": "Legyen 3 Jupiter ikonod a játékban",
 
     "Generalist": "Generalista",
-    "Requires that you have increased all 6 productions by at least 1 step": 
+    "Requires that you have increased all 6 productions by at least 1 step":
         "Legyen minden 6 termelésed legalább 1 lépéssel növelve",
     "Specialist": "Specialista",
     "Have 10 in production of any resource": "Legyen 10 termelésed bármilyen erőforrásból",
     "Ecologist": "Ökológus",
-    "Have 4 bio tags in play (plant, microbe and animal tags count as bio tags)": 
+    "Have 4 bio tags in play (plant, microbe and animal tags count as bio tags)":
         "Legyen 4 biológiai ikonod a játékban (növény, mikroba és állat ikonok számítanak)",
     "Tycoon": "Iparmágnás",
     "Have 15 project cards in play (not events.)": "Legyen 15 projekt (kék és zöld) kártyád a játékban",
@@ -116,7 +116,7 @@
     "Have the most building tags in play": "A legtöbb épület ikonod van a játékban",
 
     "Celebrity": "Híresség",
-    "Have the most project cards in play with a base cost of at least 20 M€ (not events.)": 
+    "Have the most project cards in play with a base cost of at least 20 M€ (not events.)":
         "A legtöbb projekt kártyád van a játékban, aminek az alap költsége legalább 20 M€ (nem esemény kártyák)",
     "Industrialist": "Iparos",
     "Having most steel and energy resources": "A legtöbb acél és energia erőforrásod van",
@@ -126,7 +126,7 @@
     "Own the most tiles adjacent to ocean tiles": "A legtöbb lapkád van az óceán mellett",
     "Benefactor": "Jótevő",
     "Have the highest terraform rating": "A legmagasabb terraformálási rátád van",
-    
+
     "Venuphile": "Vénusz szerető",
     "Have the most Venus tags in play": "A legtöbb Vénusz ikonod van a játékban",
 
@@ -164,8 +164,7 @@
 
     "Convert 7 heat into temperature": "Hőmérséklet növelése 7 hőből",
     "Convert 8 heat into temperature": "Hőmérséklet növelése 8 hőből",
-    "Convert 8 plants into greenery": "Növényzet lapka lehelyezése 8 palántából",
-    "Convert 7 plants into greenery": "Növényzet lapka lehelyezése 7 palántából",
+    "Convert ${0} plants into greenery": "Növényzet lapka lehelyezése ${0} palántából",
     "Colonies": "Kolóniák",
     "funded by": "Megalapította",
     "claimed by": "Elérte",
@@ -241,7 +240,6 @@
     "Pay": "Fizess",
     "Remove floaters": "Lebegők eltávolítása",
     "Add floater": "Lebegő hozzáadása",
-    "Select space for tile": "Válassz egy helyet a lapka elhelyezéséhez",
     "Select card to take into hand": "Válassz egy kártyát, hogy a kezedbe vedd",
     "Send a delegate in an area (5 M€)": "Helyezz egy küldöttet egy pártba (5 M€)",
     "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "Fizess 10 M€-t, hogy 3 kártyát húzz (Hatalmi Játszma: Tudósok)",
@@ -262,7 +260,7 @@
     "Select a card to keep and pass the rest to ${0}": "Válassz egy kártyát, hogy megtartsd, és add tovább a többit ${0}-nak",
     "Select two cards to keep and pass the rest to ${0}": "Válassz két kártyát, hogy megtartsd, és add tovább a többit ${0}-nak",
     "Game Home": "Játék Kezdőlap",
-    "Send players their links below. As game administrator pick your link to use.": 
+    "Send players their links below. As game administrator pick your link to use.":
         "Küldd el a játékosoknak az alábbi linkeket. Játék adminisztrátorként válaszd ki a sajátodat.",
     "Drafted Cards": "Draftolt Kártyák",
     "Select space for ocean tile": "Válassz egy helyet az óceán lapka elhelyezéséhez",
@@ -339,13 +337,13 @@
     "Greenery: 1 VP": "Növényzet: 1 GyP",
     "Commercial District: 1 VP per adjacent city tile": "Kereskedelmi Negyed: 1 GyP minden szomszédos városért",
 
-    "Unable to reach the server. The server may be restarting or down for maintenance.": 
+    "Unable to reach the server. The server may be restarting or down for maintenance.":
         "Nem sikerült elérni a szervert. A szerver újraindulhat vagy karbantartás alatt lehet.",
     "Unable to restore game ${game_id}": "Nem sikerült visszaállítani a(z) ${game_id} játékot",
     "Game not found": "Játék nem található",
     "toggle cards filters": "kártya szűrők váltása",
 
-    "Show information that can be helpful\n to players who are still learning the games": 
+    "Show information that can be helpful\n to players who are still learning the games":
         "Információk megjelenítése, ami segíthet\n a játékosoknak, akik még tanulják a játékot",
     "press to show or hide the description": "nyomd meg a leírás megjelenítéséhez vagy elrejtéséhez",
 
@@ -378,7 +376,7 @@
     "Remove asteroid": "Aszteroida eltávolítása",
     "gain 1 TR": "1 TR növelése",
     "Draw card": "Kártya húzása",
-    "Remove 1 asteroid on this card to increase M€ production 1 step OR gain 2 titanium": 
+    "Remove 1 asteroid on this card to increase M€ production 1 step OR gain 2 titanium":
         "Távolíts el 1 aszteroidát erről a kártyáról, hogy növeld a M€ termelést 1 lépéssel VAGY szerezz 2 titánt",
     "Remove an asteroid resource to place an ocean": "Távolíts el egy aszteroida erőforrást, hogy helyezz egy óceán lapkát",
     "Select card to add 1 asteroid": "Válassz egy kártyát, hogy adj hozzá 1 aszteroidát",

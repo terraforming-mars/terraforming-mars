@@ -12,7 +12,7 @@ describe('EccentricSponsor', function() {
 
   beforeEach(function() {
     eccentricSponsor = new EccentricSponsor();
-    [, player] = testGame(1);
+    [/* skipped */, player] = testGame(1);
   });
 
   it('Gets card discount', function() {

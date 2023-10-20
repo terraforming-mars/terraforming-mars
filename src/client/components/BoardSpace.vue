@@ -4,7 +4,6 @@
       :space="space"
       :aresExtension="aresExtension"
       :tileView="tileView"
-      :restricted="restricted"
     ></board-space-tile>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
@@ -32,7 +31,6 @@ import Bonus from '@/client/components/Bonus.vue';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
 import {TileView} from '@/client/components/board/TileView';
 import {SpaceModel} from '@/common/models/SpaceModel';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 export default Vue.extend({
   name: 'board-space',
@@ -67,9 +65,6 @@ export default Vue.extend({
   computed: {
     showBonus(): boolean {
       return this.space.tileType === undefined || this.tileView === 'hide';
-    },
-    restricted(): boolean {
-      return this.space.bonus.includes(SpaceBonus.RESTRICTED);
     },
   },
 });

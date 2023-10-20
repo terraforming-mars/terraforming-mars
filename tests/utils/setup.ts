@@ -5,6 +5,8 @@ import {IGameLoader} from '../../src/server/database/IGameLoader';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {registerBehaviorExecutor} from '../../src/server/behavior/BehaviorExecutor';
 import {Executor} from '../../src/server/behavior/Executor';
+import {initializeGlobalEventDealer} from '../../src/server/turmoil/globalEvents/GlobalEventDealer';
+import {ALL_MODULE_MANIFESTS} from '../../src/server/cards/AllCards';
 
 registerBehaviorExecutor(new Executor());
 
@@ -18,7 +20,6 @@ const FAKE_DATABASE: IDatabase = {
   getGameIds: () => Promise.resolve([]),
   getSaveIds: () => Promise.resolve([]),
   initialize: () => Promise.resolve(),
-  loadCloneableGame: () => Promise.resolve({} as SerializedGame),
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),
   purgeUnfinishedGames: () => Promise.resolve([]),
@@ -47,3 +48,4 @@ export function setTestGameLoader(gameLoader: IGameLoader) {
   gameLoaderUnderTest = gameLoader;
 }
 GameLoader.getInstance = () => gameLoaderUnderTest;
+initializeGlobalEventDealer(ALL_MODULE_MANIFESTS);

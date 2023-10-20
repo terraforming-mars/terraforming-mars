@@ -49,7 +49,7 @@ export class MarsUniversity extends Card implements IProjectCard {
                 player.drawCard();
                 return undefined;
               }),
-            new SelectOption('Do nothing', 'Confirm'),
+            new SelectOption('Do nothing'),
           );
         },
       ),

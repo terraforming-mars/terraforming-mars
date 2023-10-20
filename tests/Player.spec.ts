@@ -206,8 +206,6 @@ describe('Player', function() {
       pickedCorporationCard: 'Tharsis Republic' as CardName,
       terraformRating: 20,
       corporations: [],
-      hasIncreasedTerraformRatingThisGeneration: false,
-      terraformRatingAtGenerationStart: 20,
       megaCredits: 1,
       megaCreditProduction: 2,
       steel: 3,
@@ -267,6 +265,7 @@ describe('Player', function() {
       } as SerializedTimer,
       totalDelegatesPlaced: 0,
       victoryPointsByGeneration: [],
+      underworldData: {corruption: 0},
     };
 
     const newPlayer = Player.deserialize(json);

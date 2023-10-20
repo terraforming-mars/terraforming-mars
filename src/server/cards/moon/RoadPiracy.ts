@@ -8,7 +8,7 @@ import {Card} from '../Card';
 import {all, digit} from '../Options';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resource} from '../../../common/Resource';
@@ -46,7 +46,7 @@ export class RoadPiracy extends Card implements IProjectCard {
       if (opponent.stock.get(resource) > 0) {
         const selectAmount =
           new SelectAmount(
-            newMessage('${0}', (b) => b.player(opponent)), undefined, 0, opponent.stock.get(resource))
+            message('${0}', (b) => b.player(opponent)), undefined, 0, opponent.stock.get(resource))
             .andThen((amount: number) => {
               ledger.set(opponent, amount);
               return undefined;
@@ -78,8 +78,8 @@ export class RoadPiracy extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    const stealSteel = newMessage('Steal ${0} steel', (b) => b.number(6));
-    const stealTitanium = newMessage('Steal ${0} titanium', (b) => b.number(4));
+    const stealSteel = message('Steal ${0} steel', (b) => b.number(6));
+    const stealTitanium = message('Steal ${0} titanium', (b) => b.number(4));
     if (game.isSoloMode()) {
       return new OrOptions(
         new SelectOption(stealSteel, 'Steal steel').andThen(() => {
@@ -109,7 +109,7 @@ export class RoadPiracy extends Card implements IProjectCard {
       return undefined;
     }
 
-    options.options.push(new SelectOption('Do not steal', 'Confirm'));
+    options.options.push(new SelectOption('Do not steal'));
     return options;
   }
 }

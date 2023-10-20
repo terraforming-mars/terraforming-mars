@@ -306,7 +306,7 @@ describe('SelectProjectCardToPlay', () => {
     await tester.nextTick();
 
     tester.expectAvailablePaymentComponents('steel', 'microbes');
-    tester.expectPayment({steel: 4, microbes: 4, megaCredits: 0});
+    tester.expectPayment({steel: 4, microbes: 4});
 
     await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4}));

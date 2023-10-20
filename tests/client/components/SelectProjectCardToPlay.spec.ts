@@ -305,11 +305,11 @@ describe('SelectProjectCardToPlay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectAvailablePaymentComponents('steel', 'microbes', 'megaCredits');
-    tester.expectPayment({steel: 4, microbes: 4, megaCredits: 0});
+    tester.expectAvailablePaymentComponents('steel', 'microbes');
+    tester.expectPayment({steel: 4, microbes: 4});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4, megaCredits: 0}));
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4}));
   });
 
   it('using floater and microbes', async () => {
@@ -411,9 +411,7 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    // This is a short-term bug that will be fixed when all payment widgets have a data-test attribute
-    tester.expectPayment({megaCredits: 7, lunaArchivesScience: 8, spireScience: 8});
-    // tester.expectPayment({megaCredits: 7, lunaArchivesScience: 8});
+    tester.expectPayment({megaCredits: 7, lunaArchivesScience: 8});
 
     await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({lunaArchivesScience: 8, megaCredits: 7}));

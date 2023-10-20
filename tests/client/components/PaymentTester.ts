@@ -10,40 +10,24 @@ export class PaymentTester {
     this.model = this.wrapper.vm as unknown as SelectPaymentDataModel;
   }
 
-  private static selector(type: PaymentUnit) {
-    const titles: Record<PaymentUnit, String> = {
-      'megaCredits': 'Megacredits',
-      'steel': 'Steel',
-      'titanium': 'Titanium',
-      'heat': 'Heat',
-      'plants': 'Plants',
-      'microbes': 'Microbes',
-      'floaters': 'Floaters',
-      'lunaArchivesScience': 'Science',
-      'spireScience': 'Science',
-      'seeds': 'Seeds',
-      'auroraiData': 'Data',
-      'graphene': 'graphene',
-      'kuiperAsteroids': 'kupiperAsteroids',
-    };
-    const title = titles[type];
-    return '[title~=' + title + ']';
+  private static selector(unit: PaymentUnit) {
+    return `[data-test=${unit}]`;
   }
 
   public async clickMax(type: PaymentUnit) {
-    const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-max');
+    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-max');
     await button.trigger('click');
     await this.nextTick();
   }
 
   public async clickMinus(type: PaymentUnit) {
-    const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-minus');
+    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-minus');
     await button.trigger('click');
     await this.nextTick();
   }
 
   public async clickPlus(type: PaymentUnit) {
-    const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-plus');
+    const button = this.wrapper.find(PaymentTester.selector(type) + ' .btn-plus');
     await button.trigger('click');
     await this.nextTick();
   }
@@ -55,7 +39,7 @@ export class PaymentTester {
   }
 
   public getValue(unit: PaymentUnit): number {
-    const textBox = this.wrapper.find(PaymentTester.selector(unit) + '  ~ input').element as HTMLInputElement;
+    const textBox = this.wrapper.find(PaymentTester.selector(unit) + ' input').element as HTMLInputElement;
     if (textBox === undefined) {
       throw new Error('Cannot find text box for ' + unit);
     }
@@ -89,7 +73,7 @@ export class PaymentTester {
    * Returns true when the text box for `unit` is visible.
    */
   private isAvailable(unit: PaymentUnit): boolean {
-    return this.wrapper.find(PaymentTester.selector(unit) + '  ~ input')?.element !== undefined;
+    return this.wrapper.find(PaymentTester.selector(unit) + ' input')?.element !== undefined;
   }
 
   /**

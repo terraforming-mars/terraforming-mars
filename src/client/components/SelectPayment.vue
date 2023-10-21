@@ -110,8 +110,8 @@ export default Vue.extend({
       const megaCredits = this.getAvailableUnits('megaCredits');
 
       let amountCovered = reserveMegacredits ? megaCredits : 0;
-      for (const unit of ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'] as const) {
-        amountCovered += this.setDefaultValue(amountCovered, unit);
+      for (const resource of ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'] as const) {
+        amountCovered += this.setDefaultValue(amountCovered, resource);
       }
       if (!reserveMegacredits) {
         this.payment.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
@@ -124,17 +124,17 @@ export default Vue.extend({
     canAffordWithMcOnly() {
       return this.thisPlayer.megaCredits >= this.cost;
     },
-    canUse(unit: SpendableResource): boolean {
-      if (unit === 'megaCredits') {
+    canUse(resource: SpendableResource): boolean {
+      if (resource === 'megaCredits') {
         return true;
       }
-      if (unit === 'titanium') {
+      if (resource === 'titanium') {
         if (this.thisPlayer.titanium === 0) {
           return false;
         }
         return this.playerinput.paymentOptions.titanium === true|| this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
       }
-      return this.playerinput.paymentOptions[unit] === true && this.hasUnits(unit);
+      return this.playerinput.paymentOptions[resource] === true && this.hasUnits(resource);
     },
     saveData() {
       let totalSpent = 0;
@@ -183,11 +183,11 @@ export default Vue.extend({
       }
       this.onsave({type: 'payment', payment: this.payment});
     },
-    onMaxClicked(unit: SpendableResource) {
-      if (unit === 'megaCredits') {
+    onMaxClicked(resource: SpendableResource) {
+      if (resource === 'megaCredits') {
         this.setMaxMCValue();
       } else {
-        this.setMaxValue(unit);
+        this.setMaxValue(resource);
       }
     },
   },
@@ -199,16 +199,16 @@ export default Vue.extend({
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
-    <template v-for="unit of SPENDABLE_RESOURCES">
+    <template v-for="resource of SPENDABLE_RESOURCES">
       <payment-unit-component
-        v-model.number="payment[unit]"
-        v-bind:key="unit"
-        v-if="canUse(unit) === true"
-        :unit="unit"
-        :description="descriptions[unit]"
-        @plus="addValue(unit)"
-        @minus="reduceValue(unit)"
-        @max="onMaxClicked(unit)">
+        v-model.number="payment[resource]"
+        v-bind:key="resource"
+        v-if="canUse(resource) === true"
+        :resource="resource"
+        :description="descriptions[resource]"
+        @plus="addValue(resource)"
+        @minus="reduceValue(resource)"
+        @max="onMaxClicked(resource)">
       </payment-unit-component>
     </template>
 

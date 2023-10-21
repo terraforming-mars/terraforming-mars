@@ -148,17 +148,17 @@ export const PaymentWidgetMixin = {
       }
     },
     // Perhaps this is unnecessary. It's just a >0 check.
-    hasUnits(unit: SpendableResource): boolean {
-      return this.getAvailableUnits(unit) > 0;
+    hasUnits(resource: SpendableResource): boolean {
+      return this.getAvailableUnits(resource) > 0;
     },
-    getAvailableUnits(unit: SpendableResource): number {
+    getAvailableUnits(resource: SpendableResource): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
       const thisPlayer = model.playerView.thisPlayer;
-      switch (unit) {
+      switch (resource) {
       case 'heat':
         if (model.hasOwnProperty('available')) {
-          amount = model.available?.[unit] ?? -1;
+          amount = model.available?.[resource] ?? -1;
         } else {
           amount = this.availableHeat();
         }
@@ -168,12 +168,12 @@ export const PaymentWidgetMixin = {
       case 'titanium':
       case 'plants':
         if (model.hasOwnProperty('available')) {
-          amount = model.available?.[unit] ?? -1;
+          amount = model.available?.[resource] ?? -1;
           break;
         }
       // eslint-disable-next-line no-fallthrough
       case 'megaCredits':
-        amount = thisPlayer[unit];
+        amount = thisPlayer[resource];
         break;
 
       case 'floaters':
@@ -185,7 +185,7 @@ export const PaymentWidgetMixin = {
       case 'graphene':
       case 'kuiperAsteroids':
         // TODO(kberg): remove 'as any'. You can do it.
-        amount = (model.playerinput as any)[unit];
+        amount = (model.playerinput as any)[resource];
         break;
       }
 
@@ -202,7 +202,7 @@ export const PaymentWidgetMixin = {
       // then amount, below would be -1, so the Math.max makes sure it's zero.
 
       // BTW, this could be managed by some derivative of reserveUnits that took extended resources into account.
-      if (unit === 'floaters' && this.asModel().card?.name === CardName.STRATOSPHERIC_BIRDS) {
+      if (resource === 'floaters' && this.asModel().card?.name === CardName.STRATOSPHERIC_BIRDS) {
         // Find a card other than Dirigibles with floaters.
         // If there is none, then Dirigibles can't use every one.
         if (!thisPlayer.tableau.some((card) => {

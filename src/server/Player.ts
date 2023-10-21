@@ -9,7 +9,7 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
 import {Payment, PaymentOptions, DEFAULT_PAYMENT_VALUES} from '../common/inputs/Payment';
-import {SpendableResource, SPENDABLE_RESOURCES, SpendableCardResource, CARD_FOR_SPENDABLE_RESOURCE} from '../common/inputs/Spendable';
+import {SpendableResource, SPENDABLE_RESOURCES, SpendableCardResource, CARD_FOR_SPENDABLE_RESOURCE, SPENDABLE_CARD_RESOURCES} from '../common/inputs/Spendable';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
@@ -887,15 +887,15 @@ export class Player implements IPlayer {
       this.defer(this.spendHeat(payment.heat));
     }
 
-    for (const k of CARD_PAYMENT_UNITS) {
-      const count = payment[k];
-      const cardName = CARD_RESOURCE_PAYMENT_MAP[k];
+    for (const resource of SPENDABLE_CARD_RESOURCES) {
+      const count = payment[resource];
       if (count === 0) {
         continue;
       }
+      const cardName = CARD_FOR_SPENDABLE_RESOURCE[resource];
       const card = this.tableau.find((card) => card.name === cardName);
       if (card === undefined) {
-        throw new Error('Card ' + name + ' not found');
+        throw new Error('Card ' + cardName + ' not found');
       }
       this.removeResourceFrom(card, count, {log: true});
     }

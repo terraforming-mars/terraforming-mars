@@ -31,7 +31,7 @@ export class Sabotage extends Card implements IProjectCard {
   }
 
   private title(amount: number, type: string, target: IPlayer) {
-    return message('Remove ${0} {1} from {2}', (b) => b.number(amount).string(type).player(target));
+    return message('Remove ${0} ${1} from ${2}', (b) => b.number(amount).string(type).player(target));
   }
 
   public override bespokePlay(player: IPlayer) {

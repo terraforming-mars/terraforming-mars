@@ -28,27 +28,27 @@ export enum SpaceBonus {
     ASTEROID, // 15 // Used by Deimos Down Ares
 }
 
-const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
-  [SpaceBonus.TITANIUM, 'Titanium'],
-  [SpaceBonus.STEEL, 'Steel'],
-  [SpaceBonus.PLANT, 'Plant'],
-  [SpaceBonus.DRAW_CARD, 'Card'],
-  [SpaceBonus.HEAT, 'Heat'],
-  [SpaceBonus.OCEAN, 'Ocean'],
-  [SpaceBonus.MEGACREDITS, 'M€'],
-  [SpaceBonus.ANIMAL, 'Animal'],
-  [SpaceBonus.MICROBE, 'Microbe'],
-  [SpaceBonus.ENERGY, 'Energy'],
-  [SpaceBonus.DATA, 'Data'],
-  [SpaceBonus.SCIENCE, 'Science'],
-  [SpaceBonus.ENERGY_PRODUCTION, 'Energy Production'],
-  [SpaceBonus.TEMPERATURE, 'Temperature'],
-  [SpaceBonus._RESTRICTED, 'UNUSED'],
-  [SpaceBonus.ASTEROID, 'Asteroid'],
-]);
+const TO_STRING_MAP: Record<SpaceBonus, string> = {
+  [SpaceBonus.TITANIUM]: 'Titanium',
+  [SpaceBonus.STEEL]: 'Steel',
+  [SpaceBonus.PLANT]: 'Plant',
+  [SpaceBonus.DRAW_CARD]: 'Card',
+  [SpaceBonus.HEAT]: 'Heat',
+  [SpaceBonus.OCEAN]: 'Ocean',
+  [SpaceBonus.MEGACREDITS]: 'M€',
+  [SpaceBonus.ANIMAL]: 'Animal',
+  [SpaceBonus.MICROBE]: 'Microbe',
+  [SpaceBonus.ENERGY]: 'Energy',
+  [SpaceBonus.DATA]: 'Data',
+  [SpaceBonus.SCIENCE]: 'Science',
+  [SpaceBonus.ENERGY_PRODUCTION]: 'Energy Production',
+  [SpaceBonus.TEMPERATURE]: 'Temperature',
+  [SpaceBonus._RESTRICTED]: 'UNUSED',
+  [SpaceBonus.ASTEROID]: 'Asteroid',
+};
 
 export namespace SpaceBonus {
   export function toString(spaceBonus: SpaceBonus): string {
-    return TO_STRING_MAP.get(spaceBonus) || `(unnamed space bonus, id ${spaceBonus})`;
+    return TO_STRING_MAP[spaceBonus];
   }
 }

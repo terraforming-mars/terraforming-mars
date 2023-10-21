@@ -10,6 +10,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {ICard} from '../../../src/server/cards/ICard';
 import {testGame} from '../../TestGame';
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 
 describe('CEOsFavoriteProject', function() {
   let card: CEOsFavoriteProject;
@@ -20,8 +21,25 @@ describe('CEOsFavoriteProject', function() {
     [/* skipped */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
-    expect(card.canPlay(player)).is.not.true;
+  it('Can not play - no cards', function() {
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Can not play - no cards that take resources', function() {
+    player.playedCards.push(new MicroMills());
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Can not play - no cards that have r esources', function() {
+    player.playedCards.push(new MicroMills(), new SecurityFleet());
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Can play', function() {
+    const securityFleet = new SecurityFleet();
+    player.playedCards.push(new MicroMills(), securityFleet);
+    securityFleet.resourceCount = 1;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {

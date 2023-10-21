@@ -7,6 +7,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPaymentResponse} from '@/common/inputs/InputResponse';
+import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 
 export default Vue.extend({
   name: 'SelectPayment',
@@ -28,12 +29,26 @@ export default Vue.extend({
     },
   },
   computed: {
-    thisPlayer: function(): PublicPlayerModel {
+    ...PaymentWidgetMixin.computed,
+    thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
+    },
+    PAYMENT_UNITS(): ReadonlyArray<keyof Payment> {
+      return [
+        'steel',
+        'titanium',
+        'heat',
+        'seeds',
+        'auroraiData',
+        'kuiperAsteroids',
+        'spireScience',
+        'megaCredits',
+      ];
     },
   },
   components: {
     AppButton,
+    PaymentUnitComponent,
   },
   data(): SelectPaymentDataModel {
     return {
@@ -169,84 +184,41 @@ export default Vue.extend({
       }
       this.onsave({type: 'payment', payment: this.payment});
     },
+    onMaxClicked(unit: PaymentUnit) {
+      if (unit === 'megaCredits') {
+        this.setMaxMCValue();
+      } else {
+        this.setMaxValue(unit);
+      }
+    },
   },
 });
+
 </script>
 <template>
 <div class="payments_cont">
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
-    <div class="payments_type input-group" v-if="canUse('steel')">
-      <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay with Steel')"></i>
-      <AppButton type="minus" @click="reduceValue('steel', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="payment.steel" />
-      <AppButton type="plus" @click="addValue('steel', 1)" />
-      <AppButton type="max" @click="setMaxValue('steel')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('titanium')">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay with Titanium')"></i>
-      <AppButton type="minus" @click="reduceValue('titanium', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="payment.titanium" />
-      <AppButton type="plus" @click="addValue('titanium', 1)" />
-      <AppButton type="max" @click="setMaxValue('titanium')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('heat')">
-      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay with Heat')"></i>
-      <AppButton type="minus" @click="reduceValue('heat', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="payment.heat" />
-      <AppButton type="plus" @click="addValue('heat', 1)" />
-      <AppButton type="max" @click="setMaxValue('heat')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('seeds')">
-      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay with Seeds')"></i>
-      <AppButton type="minus" @click="reduceValue('seeds', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="payment.seeds" />
-      <AppButton type="plus" @click="addValue('seeds', 1)" />
-      <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('auroraiData')">
-      <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay with Data')"></i>
-      <AppButton type="minus" @click="reduceValue('auroraiData', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="payment.auroraiData" />
-      <AppButton type="plus" @click="addValue('auroraiData', 1)" />
-      <AppButton type="max" @click="setMaxValue('auroraiData')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('kuiperAsteroids')">
-      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay with Asteroids')"></i>
-      <AppButton type="minus" @click="reduceValue('kuiperAsteroids', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="payment.kuiperAsteroids" />
-      <AppButton type="plus" @click="addValue('kuiperAsteroids', 1)" />
-      <AppButton type="max" @click="setMaxValue('kuiperAsteroids')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('spireScience')">
-      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay with Science')"></i>
-      <AppButton type="minus" @click="reduceValue('spireScience', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="payment.spireScience" />
-      <AppButton type="plus" @click="addValue('spireScience', 1)" />
-      <AppButton type="max" @click="setMaxValue('spireScience')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay with Megacredits')"></i>
-      <AppButton type="minus" @click="reduceValue('megaCredits', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="payment.megaCredits" />
-      <AppButton type="plus" @click="addValue('megaCredits', 1)" />
-      <AppButton type="max" @click="setMaxMCValue()" title="MAX" />
-    </div>
+    <template v-for="unit of PAYMENT_UNITS">
+      <payment-unit-component
+        v-model.number="payment[unit]"
+        v-bind:key="unit"
+        v-if="canUse(unit) === true"
+        :unit="unit"
+        :description="descriptions[unit]"
+        @plus="addValue(unit)"
+        @minus="reduceValue(unit)"
+        @max="onMaxClicked(unit)">
+      </payment-unit-component>
+    </template>
 
     <div v-if="hasWarning()" class="tm-warning">
       <label class="label label-error">{{ $t(warning) }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
     </div>
 
   </section>

@@ -168,27 +168,36 @@ export class Turmoil {
     this.checkDominantParty();
   }
 
-  // Use to remove a delegate from a specific party
-  public removeDelegateFromParty(playerId: Delegate, partyName: PartyName, game: IGame): void {
+  /**
+   * Remove one `delegate` from `partyName`.
+   *
+   * Will re-evaluate the dominant party.
+   */
+  public removeDelegateFromParty(delegate: Delegate, partyName: PartyName, game: IGame): void {
     const party = this.getPartyByName(partyName);
-    this.delegateReserve.add(playerId);
-    party.removeDelegate(playerId, game);
+    this.delegateReserve.add(delegate);
+    party.removeDelegate(delegate, game);
     this.checkDominantParty();
   }
 
-  // Use to replace a delegate from a specific party with another delegate with NO DOMINANCE CHANGE
+  /**
+   * Replace one `outgoingDelegate` delegate with one `incomingDelegate` in `party` without changing
+   * dominance. (I don't think it prevents checking dominance, really.)
+   */
   public replaceDelegateFromParty(
-    outgoingPlayerId: Delegate,
-    incomingPlayerId: Delegate,
+    outgoingDelegate: Delegate,
+    incomingDelegate: Delegate,
     partyName: PartyName,
     game: IGame): void {
     const party = this.getPartyByName(partyName);
-    this.delegateReserve.add(outgoingPlayerId);
-    party.removeDelegate(outgoingPlayerId, game);
-    this.sendDelegateToParty(incomingPlayerId, partyName, game);
+    this.delegateReserve.add(outgoingDelegate);
+    party.removeDelegate(outgoingDelegate, game);
+    this.sendDelegateToParty(incomingDelegate, partyName, game);
   }
 
-  // Check dominant party
+  /**
+   * Updates the dominant party. Called as part of delegate changes.
+   */
   public checkDominantParty(): void {
     // If there is a dominant party
     const sortParties = [...this.parties].sort(
@@ -200,8 +209,13 @@ export class Turmoil {
     }
   }
 
+  /**
+   * Set the next dominanant party taking into account that
+   * `currentDominantParty` is the current dominant party, taking
+   * clockwise order into account.
+   */
   // Function to get next dominant party taking into account the clockwise order
-  public setNextPartyAsDominant(currentDominantParty: IParty) {
+  private setNextPartyAsDominant(currentDominantParty: IParty) {
     const sortParties = [...this.parties].sort(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
@@ -293,7 +307,9 @@ export class Turmoil {
     }
   }
 
-  // Ruling Party changes
+  /**
+   * Set the next ruling party as part of the Turmoil phase.
+   */
   public setRulingParty(game: IGame): void {
     this.rulingPolicy().onPolicyEnd?.(game);
 
@@ -432,6 +448,10 @@ export class Turmoil {
     }
   }
 
+  /**
+   * Return true if `player` can play a project card with `partyName`
+   * as a party requirement.
+   */
   public canPlay(player: IPlayer, partyName : PartyName): boolean {
     if (this.rulingParty.name === partyName) {
       return true;
@@ -441,26 +461,30 @@ export class Turmoil {
     return party.delegates.count(player.id) >= 2;
   }
 
-  // Return number of delegates
-  public getAvailableDelegateCount(playerId: Delegate): number {
-    return this.delegateReserve.get(playerId);
+  /** Return the number of delegates for `delegate` in the reserve. */
+  public getAvailableDelegateCount(delegate: Delegate): number {
+    return this.delegateReserve.get(delegate);
   }
 
-  // List players present in the reserve
+  /** List the delegates present in the reserve */
   public getPresentPlayersInReserve(): Array<Delegate> {
     return Array.from(new Set(this.delegateReserve));
   }
 
-  // Check if player has delegates available
+  /** Return true if `playerId` has delegates in reserve. */
   public hasDelegatesInReserve(playerId: Delegate): boolean {
     return this.getAvailableDelegateCount(playerId) > 0;
   }
 
-  // Get Victory Points
+  /**
+   * End-game victory points for `player`.
+   *
+   * Players get 1 VP at the end of the game for each chairman and party leader they have.
+   */
   public getPlayerVictoryPoints(player: IPlayer): number {
     let victory = 0;
-    if (this.chairman !== undefined && this.chairman === player.id) victory++;
-    this.parties.forEach(function(party) {
+    if (this.chairman === player.id) victory++;
+    this.parties.forEach((party) => {
       if (party.partyLeader === player.id) {
         victory++;
       }

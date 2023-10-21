@@ -2,7 +2,8 @@
 import Vue from 'vue';
 
 import AppButton from '@/client/components/common/AppButton.vue';
-import {Payment, PaymentUnit, PAYMENT_UNITS} from '@/common/inputs/Payment';
+import {Payment} from '@/common/inputs/Payment';
+import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
@@ -41,7 +42,7 @@ export default Vue.extend({
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
     },
-    PAYMENT_UNITS(): ReadonlyArray<keyof Payment> {
+    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
       return [
         'steel',
         'titanium',
@@ -112,7 +113,7 @@ export default Vue.extend({
       return getCardOrThrow(this.cardName).tags;
     },
     setDefaultValues() {
-      for (const target of PAYMENT_UNITS) {
+      for (const target of SPENDABLE_RESOURCES) {
         if (target === 'megaCredits') {
           continue;
         }
@@ -209,7 +210,7 @@ export default Vue.extend({
       return this.tags.includes(Tag.SPACE) ||
           this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
     },
-    cardCanUse(unit: PaymentUnit): boolean {
+    cardCanUse(unit: SpendableResource): boolean {
       switch (unit) {
       case 'megaCredits':
         return true;
@@ -239,7 +240,7 @@ export default Vue.extend({
         throw new Error('Unknown unit ' + unit);
       }
     },
-    canUse(unit: PaymentUnit) {
+    canUse(unit: SpendableResource) {
       if (!this.hasUnits(unit)) {
         return false;
       }
@@ -273,7 +274,7 @@ export default Vue.extend({
     selectedCardHasWarning(): boolean {
       return this.card !== undefined && this.card.warning !== undefined;
     },
-    showReserveWarning(unit: PaymentUnit): boolean {
+    showReserveWarning(unit: SpendableResource): boolean {
       switch (unit) {
       case 'titanium':
         return this.reserveUnits.titanium > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium());
@@ -293,11 +294,11 @@ export default Vue.extend({
       // TODO(kberg): This is FINALLY very similar to SelectPayment. Merge them? :D
       let totalSpent = 0;
 
-      for (const target of PAYMENT_UNITS) {
+      for (const target of SPENDABLE_RESOURCES) {
         totalSpent += this.payment[target] * this.getResourceRate(target);
       }
 
-      for (const target of PAYMENT_UNITS) {
+      for (const target of SPENDABLE_RESOURCES) {
         if (this.payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
@@ -311,7 +312,7 @@ export default Vue.extend({
 
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
-        for (const target of PAYMENT_UNITS) {
+        for (const target of SPENDABLE_RESOURCES) {
           if (this.payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;
@@ -360,7 +361,7 @@ export default Vue.extend({
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 
-    <template v-for="unit of PAYMENT_UNITS">
+    <template v-for="unit of SPENDABLE_RESOURCES">
       <div v-bind:key="unit">
         <payment-unit-component
           v-model.number="payment[unit]"

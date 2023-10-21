@@ -8,37 +8,37 @@
     <div class="payments_type input-group" v-if="canDeductMegaCredits()">
       <div class="production-box"><div class="production resource_icon--megacredits" style="background-size:contain;"></div></div>
       <button class="btn btn-primary" v-on:click="delta('megacredits', -1)"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="megacredits" />
+      <input class="form-input form-inline payments_input" v-model.number="units.megacredits" />
       <button class="btn btn-primary" v-on:click="delta('megacredits', 1)"><i class="icon icon-plus" /></button>
     </div>
     <div class="payments_type input-group" v-if="canDeductSteel()">
       <div class="production-box"><div class="production steel"></div></div>
       <button class="btn btn-primary" v-on:click="delta('steel', -1)"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="steel" />
+      <input class="form-input form-inline payments_input" v-model.number="units.steel" />
       <button class="btn btn-primary" v-on:click="delta('steel', 1)"><i class="icon icon-plus" /></button>
     </div >
     <div class="payments_type input-group" v-if="canDeductTitanium()" >
       <div class="production-box"><div class="production titanium"></div></div>
       <button class="btn btn-primary" v-on:click="delta('titanium', -1)"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="titanium" />
+      <input class="form-input form-inline payments_input" v-model.number="units.titanium" />
       <button class="btn btn-primary" v-on:click="delta('titanium', 1)"><i class="icon icon-plus" /></button>
     </div >
     <div class="payments_type input-group" v-if="canDeductPlants()" >
       <div class="production-box"><div class="production plant"></div></div>
       <button class="btn btn-primary" v-on:click="delta('plants', -1)"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="plants" />
+      <input class="form-input form-inline payments_input" v-model.number="units.plants" />
       <button class="btn btn-primary" v-on:click="delta('plants', 1)"><i class="icon icon-plus" /></button>
     </div >
     <div class="payments_type input-group" v-if="canDeductEnergy()" >
       <div class="production-box"><div class="production energy"></div></div>
       <button class="btn btn-primary" v-on:click="delta('energy', -1)"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="energy" />
+      <input class="form-input form-inline payments_input" v-model.number="units.energy" />
       <button class="btn btn-primary" v-on:click="delta('energy', 1)"><i class="icon icon-plus" /></button>
     </div >
     <div class="payments_type input-group" v-if="canDeductHeat()" >
       <div class="production-box"><div class="production heat"></div></div>
       <button class="btn btn-primary" v-on:click="delta('heat', -1)"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="heat" />
+      <input class="form-input form-inline payments_input" v-model.number="units.heat" />
       <button class="btn btn-primary" v-on:click="delta('heat', 1)"><i class="icon icon-plus" /></button>
     </div >
 
@@ -58,15 +58,11 @@ import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
+import {sum} from '@/common/utils/utils';
 
 type DataModel = {
-    megacredits: number;
-    steel: number;
-    titanium: number;
-    plants: number;
-    energy: number;
-    heat: number;
-    warning: string | undefined;
+  units: Units,
+  warning: string | undefined;
 }
 
 export default Vue.extend({
@@ -87,12 +83,7 @@ export default Vue.extend({
   },
   data(): DataModel {
     return {
-      megacredits: 0,
-      steel: 0,
-      titanium: 0,
-      plants: 0,
-      energy: 0,
-      heat: 0,
+      units: {...Units.EMPTY},
       warning: undefined,
     };
   },
@@ -144,28 +135,14 @@ export default Vue.extend({
       this.$data[type] = newValue;
     },
     saveData() {
-      const units: Units = {
-        megacredits: this.megacredits,
-        steel: this.steel,
-        titanium: this.titanium,
-        plants: this.plants,
-        energy: this.energy,
-        heat: this.heat,
-      };
+      const total = sum(Units.values(this.units));
 
-      const sum = this.megacredits +
-                this.steel +
-                this.titanium +
-                this.plants +
-                this.energy +
-                this.heat;
-
-      if (sum !== this.playerinput.payProduction.cost) {
+      if (total !== this.playerinput.payProduction.cost) {
         this.warning = `Pay a total of ${this.playerinput.payProduction.cost} production units`;
         return;
       }
 
-      this.onsave({type: 'productionToLose', units});
+      this.onsave({type: 'productionToLose', units: this.units});
     },
   },
 });

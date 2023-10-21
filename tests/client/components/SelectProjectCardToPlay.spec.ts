@@ -9,10 +9,10 @@ import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
 import {Payment} from '@/common/inputs/Payment';
+import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 import {SelectProjectCardToPlayDataModel} from '@/client/mixins/PaymentWidgetMixin';
-import {CardModel} from '@/common/models/CardModel';
 
 describe('SelectProjectCardToPlay', () => {
   let localStorage: FakeLocalStorage;

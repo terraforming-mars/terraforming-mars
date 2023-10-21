@@ -36,19 +36,36 @@ describe('Banned Delegate', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
+
+    // This card returns OrOptions, or SelectDelegate. It's
+    // By putting 2 delegates in the Reds party, Reds is a second option.
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.REDS, game);
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.REDS, game);
+
     const initialDelegatesCount = greens.delegates.size;
 
-    const result = card.play(player);
-
-    // TODO(kberg): This returns both because the Global Event deck is always randomized.
-    if (result instanceof SelectDelegate) {
-      const selectDelegate = cast(result, SelectDelegate);
-      selectDelegate.cb(result.players[0]);
-    } else {
-      const orOptions = cast(result, OrOptions);
-      orOptions.options.forEach((option) => option.cb(cast(option, SelectDelegate).players[0]));
-    }
+    const orOptions = cast(card.play(player), OrOptions);
+    orOptions.options.forEach((option) => option.cb(cast(option, SelectDelegate).players[0]));
 
     expect(greens.delegates.size).eq(initialDelegatesCount - 1);
+  });
+
+  it('Removes duplicates', function() {
+    turmoil.chairman = player.id;
+    expect(player.simpleCanPlay(card)).is.true;
+
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.REDS, game);
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.REDS, game);
+
+    const orOptions = cast(card.play(player), OrOptions);
+    const selectDelegate = cast(orOptions.options[0], SelectDelegate);
+    expect(selectDelegate.players).has.members([player, player2, 'NEUTRAL']);
   });
 });

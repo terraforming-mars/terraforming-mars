@@ -660,7 +660,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const refs: Refs = this.$refs;
       const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
-      const component = this.$data as CreateGameModel;
+      const component: CreateGameModel = this;
 
       reader.addEventListener('load', function() {
         const warnings: Array<string> = [];

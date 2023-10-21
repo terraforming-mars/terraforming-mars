@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import {PaymentWidgetMixin} from '@/client/mixins/PaymentWidgetMixin';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {PaymentUnit} from '@/common/inputs/Payment';
+import {SpendableResource} from '@/common/inputs/Spendable';
 
 export default Vue.extend({
   name: 'PaymentUnitComponent',
@@ -11,7 +11,7 @@ export default Vue.extend({
       type: Number,
     },
     unit: {
-      type: String as () => PaymentUnit,
+      type: String as () => SpendableResource,
     },
     description: {
       type: String,

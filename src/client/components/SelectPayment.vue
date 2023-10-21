@@ -34,7 +34,7 @@ export default Vue.extend({
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
     },
-    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
+    SPENDABLE_RESOURCES(): ReadonlyArray<SpendableResource> {
       return [
         'steel',
         'titanium',
@@ -75,17 +75,17 @@ export default Vue.extend({
     },
     setDefaultValue(
       mcAlreadyCovered: number, // MC values of prior-computed resources.
-      unit: SpendableResource): number {
-      if (!this.canUse(unit)) {
+      resource: SpendableResource): number {
+      if (!this.canUse(resource)) {
         return 0;
       }
-      const availableUnits = this.getAvailableUnits(unit);
+      const availableUnits = this.getAvailableUnits(resource);
       if (availableUnits === 0) {
         return 0;
       }
 
       const cost = this.cost;
-      const targetResourceRate = this.getResourceRate(unit);
+      const targetResourceRate = this.getResourceRate(resource);
 
       // Compute the required minimum quantity needed to contribute.
       let contributingUnits = Math.ceil(Math.max(cost - this.getAvailableUnits('megaCredits') - mcAlreadyCovered, 0) / targetResourceRate);
@@ -93,7 +93,7 @@ export default Vue.extend({
       let contributingMCValue = contributingUnits * targetResourceRate;
 
       // When greedy, use as much as possible without overspending. When selfish, use as little as possible
-      const greedy = unit !== 'heat';
+      const greedy = resource !== 'heat';
       if (greedy === true) {
         while (contributingUnits < availableUnits && contributingMCValue <= cost - targetResourceRate) {
           contributingUnits++;
@@ -101,7 +101,7 @@ export default Vue.extend({
         }
       }
 
-      this.payment[unit] = contributingUnits;
+      this.payment[resource] = contributingUnits;
       return contributingMCValue;
     },
     setDefaultValues(reserveMegacredits: boolean = false) {

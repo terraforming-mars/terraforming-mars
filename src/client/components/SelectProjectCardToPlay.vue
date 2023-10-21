@@ -42,7 +42,7 @@ export default Vue.extend({
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
     },
-    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
+    SPENDABLE_RESOURCES(): ReadonlyArray<SpendableResource> {
       return [
         'steel',
         'titanium',

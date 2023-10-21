@@ -53,14 +53,14 @@ export const PaymentWidgetMixin = {
       const model = this.asModel();
       return Math.min(this.getAvailableUnits('megaCredits'), model.cost);
     },
-    getResourceRate(unit: SpendableResource): number {
-      switch (unit) {
+    getResourceRate(resource: SpendableResource): number {
+      switch (resource) {
       case 'steel':
         return this.asModel().playerView.thisPlayer.steelValue;
       case 'titanium':
         return this.getTitaniumResourceRate();
       default:
-        return DEFAULT_PAYMENT_VALUES[unit];
+        return DEFAULT_PAYMENT_VALUES[resource];
       }
     },
     getTitaniumResourceRate(): number {
@@ -75,33 +75,33 @@ export const PaymentWidgetMixin = {
     /**
      * Reduce `unit` by one.
      */
-    reduceValue(unit: SpendableResource): void {
-      const currentValue: number | undefined = this.asModel().payment[unit];
+    reduceValue(resource: SpendableResource): void {
+      const currentValue: number | undefined = this.asModel().payment[resource];
       if (currentValue === undefined) {
-        throw new Error(`can not reduceValue for ${unit} on this`);
+        throw new Error(`can not reduceValue for ${resource} on this`);
       }
 
       const adjustedDelta = Math.min(1, currentValue);
       if (adjustedDelta === 0) return;
-      this.asModel().payment[unit] -= adjustedDelta;
-      if (unit !== 'megaCredits') this.setRemainingMCValue();
+      this.asModel().payment[resource] -= adjustedDelta;
+      if (resource !== 'megaCredits') this.setRemainingMCValue();
     },
     /**
      * Increase `unit` by one.
      */
-    addValue(unit: SpendableResource): void {
-      const currentValue: number | undefined = this.asModel().payment[unit];
+    addValue(resource: SpendableResource): void {
+      const currentValue: number | undefined = this.asModel().payment[resource];
       if (currentValue === undefined) {
-        throw new Error(`can not addValue for ${unit} on this`);
+        throw new Error(`can not addValue for ${resource} on this`);
       }
 
       // Maxiumum value for this unit.
       // MC has a special-case because the max isn't how many MC the player has,
       // but how much they need to spend.
       const maxValue =
-        unit === 'megaCredits' ?
+        resource === 'megaCredits' ?
           this.getMegaCreditsMax() :
-          this.getAvailableUnits(unit);
+          this.getAvailableUnits(resource);
 
       if (currentValue === maxValue) {
         return;
@@ -113,8 +113,8 @@ export const PaymentWidgetMixin = {
       if (delta === 0) {
         return;
       }
-      this.asModel().payment[unit] += delta;
-      if (unit !== 'megaCredits') {
+      this.asModel().payment[resource] += delta;
+      if (resource !== 'megaCredits') {
         this.setRemainingMCValue();
       }
     },
@@ -132,18 +132,18 @@ export const PaymentWidgetMixin = {
       }
       ta.payment.megaCredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue(unit: SpendableResource): void {
-      let currentValue: number | undefined = this.asModel().payment[unit];
+    setMaxValue(resource: SpendableResource): void {
+      let currentValue: number | undefined = this.asModel().payment[resource];
       if (currentValue === undefined) {
-        throw new Error(`can not setMaxValue for ${unit} on this`);
+        throw new Error(`can not setMaxValue for ${resource} on this`);
       }
       const cost: number = this.asModel().cost;
-      const resourceRate = this.getResourceRate(unit);
+      const resourceRate = this.getResourceRate(resource);
       const amountNeed = Math.floor(cost / resourceRate);
-      const amountHave: number = this.getAvailableUnits(unit);
+      const amountHave: number = this.getAvailableUnits(resource);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
-        this.addValue(unit);
+        this.addValue(resource);
         currentValue++;
       }
     },

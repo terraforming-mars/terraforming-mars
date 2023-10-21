@@ -291,51 +291,7 @@ export default Vue.extend({
     // },
 
     saveData() {
-      // TODO(kberg): This is FINALLY very similar to SelectPayment. Merge them? :D
-      let totalSpent = 0;
-
-      for (const target of SPENDABLE_RESOURCES) {
-        totalSpent += this.payment[target] * this.getResourceRate(target);
-      }
-
-      for (const target of SPENDABLE_RESOURCES) {
-        if (this.payment[target] > this.getAvailableUnits(target)) {
-          this.warning = `You do not have enough ${target}`;
-          return;
-        }
-      }
-
-      if (totalSpent < this.cost) {
-        this.warning = 'Haven\'t spent enough';
-        return;
-      }
-
-      if (totalSpent > this.cost) {
-        const diff = totalSpent - this.cost;
-        for (const target of SPENDABLE_RESOURCES) {
-          if (this.payment[target] && diff >= this.getResourceRate(target)) {
-            this.warning = `You cannot overspend ${target}`;
-            return;
-          }
-        }
-      }
-
-      const showAlert = getPreferences().show_alerts;
-
-      if (totalSpent > this.cost && showAlert) {
-        const diff = totalSpent - this.cost;
-
-        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.onsave({
-            type: 'projectCard',
-            card: this.card.name,
-            payment: this.payment,
-          });
-        } else {
-          this.warning = 'Please adjust payment amount';
-          return;
-        }
-      } else {
+      if (this.validatePayment(getPreferences().show_alerts) === true) {
         this.onsave({
           type: 'projectCard',
           card: this.card.name,

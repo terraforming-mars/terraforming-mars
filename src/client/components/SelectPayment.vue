@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Payment} from '@/common/inputs/Payment';
-import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
+import {SpendableResource} from '@/common/inputs/Spendable';
 import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -60,7 +60,7 @@ export default Vue.extend({
   },
   mounted() {
     Vue.nextTick(() => {
-      this.setInitialCost();
+      this.cost = this.playerinput.amount;
       this.payment.megaCredits = this.getMegaCreditsMax();
       this.setDefaultValues();
     });
@@ -69,9 +69,6 @@ export default Vue.extend({
     ...PaymentWidgetMixin.methods,
     hasWarning() {
       return this.warning !== undefined;
-    },
-    setInitialCost() {
-      this.cost = this.playerinput.amount ?? 0;
     },
     setDefaultValue(
       mcAlreadyCovered: number, // MC values of prior-computed resources.
@@ -137,51 +134,9 @@ export default Vue.extend({
       return this.playerinput.paymentOptions[resource] === true && this.hasUnits(resource);
     },
     saveData() {
-      let totalSpent = 0;
-      for (const target of SPENDABLE_RESOURCES) {
-        totalSpent += this.payment[target] * this.getResourceRate(target);
-        if (this.payment[target] > this.getAvailableUnits(target)) {
-          this.warning = `You do not have enough ${target}`;
-          return;
-        }
+      if (this.validatePayment(getPreferences().show_alerts) === true) {
+        this.onsave({type: 'payment', payment: this.payment});
       }
-
-      const requiredAmt = this.playerinput.amount;
-      if (requiredAmt > 0 && totalSpent < requiredAmt) {
-        this.warning = 'Haven\'t spent enough';
-        return;
-      }
-
-      // This following line was introduced in https://github.com/terraforming-mars/terraforming-mars/pull/2353
-      //
-      // According to bafolts@: I think this is an attempt to fix user error. This was added when the UI was
-      // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
-      // from user when nothing is required. Can probably remove this if server only removes what is required.
-      if (requiredAmt === 0) {
-        this.payment.heat = 0;
-        this.payment.megaCredits = 0;
-      }
-
-      if (requiredAmt > 0 && totalSpent > requiredAmt) {
-        const diff = totalSpent - requiredAmt;
-        for (const target of SPENDABLE_RESOURCES) {
-          if (this.payment[target] && diff >= this.getResourceRate(target)) {
-            this.warning = `You cannot overspend ${target}`;
-            return;
-          }
-        }
-      }
-      const showAlert = getPreferences().show_alerts;
-
-      if (requiredAmt > 0 && totalSpent > requiredAmt && showAlert) {
-        const diff = totalSpent - requiredAmt;
-
-        if (!confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.warning = 'Please adjust payment amount';
-          return;
-        }
-      }
-      this.onsave({type: 'payment', payment: this.payment});
     },
     onMaxClicked(resource: SpendableResource) {
       if (resource === 'megaCredits') {

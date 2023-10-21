@@ -222,6 +222,60 @@ export const PaymentWidgetMixin = {
       }
       return thisPlayer.heat;
     },
+    validatePayment(showOverspendingAlert: boolean): boolean {
+      const model = this.asModel();
+      let totalSpent = 0;
+
+      for (const target of SPENDABLE_RESOURCES) {
+        totalSpent += model.payment[target] * this.getResourceRate(target);
+      }
+
+      for (const target of SPENDABLE_RESOURCES) {
+        if (model.payment[target] > this.getAvailableUnits(target)) {
+          model.warning = `You do not have enough ${target}`;
+          return false;
+        }
+      }
+
+      const cost = model.cost;
+      const diff = totalSpent - cost;
+
+      if (cost > 0 && totalSpent < cost) {
+        model.warning = 'Haven\'t spent enough';
+        return false;
+      }
+
+      // TODO(kberg): 2023-11-30: Remove this once things settle down.
+      // // This following line was introduced in https://github.com/terraforming-mars/terraforming-mars/pull/2353
+      // //
+      // // According to bafolts@: I think this is an attempt to fix user error. This was added when the UI was
+      // // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
+      // // from user when nothing is required. Can probably remove this if server only removes what is required.
+      // if (requiredAmt === 0) {
+      //   this.payment.heat = 0;
+      //   this.payment.megaCredits = 0;
+      // }
+
+      if (totalSpent > cost) {
+        for (const target of SPENDABLE_RESOURCES) {
+          if (model.payment[target] && diff >= this.getResourceRate(target)) {
+            model.warning = `You cannot overspend ${target}`;
+            return false;
+          }
+        }
+      }
+
+      if (totalSpent > cost && showOverspendingAlert) {
+        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
+          return true;
+        } else {
+          model.warning = 'Please adjust payment amount';
+          return false;
+        }
+      } else {
+        return true;
+      }
+    },
   },
   computed: {
     descriptions(): Record<SpendableResource, string> {

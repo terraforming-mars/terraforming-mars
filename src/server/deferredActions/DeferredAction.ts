@@ -19,6 +19,9 @@ export enum Priority {
   BUILD_COLONY,
   INCREASE_COLONY_TRACK,
   PLACE_OCEAN_TILE,
+  IDENTIFY_UNDERGROUND_RESOURCE,
+  EXCAVATE_UNDERGROUND_RESOURCE,
+
   /** Anything that doesn't fit into another category. */
   DEFAULT,
   /** Effects that make your opponents lose resources or production. */

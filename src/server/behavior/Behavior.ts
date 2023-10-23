@@ -147,7 +147,7 @@ export interface Behavior {
 
   underworld?: {
     // identify?: Countable,
-    // excavate?: number | {count: Countable, ignorePlacementRestrictions?: boolean},
+    excavate?: number | {count: Countable, ignorePlacementRestrictions?: boolean},
     corruption?: Countable,
     // markThisGeneration?: NoAttributes,
   },

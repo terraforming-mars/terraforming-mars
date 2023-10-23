@@ -112,7 +112,7 @@ import {Scapegoat} from './Scapegoat';
 // import {SubterraneanSea} from './SubterraneanSea';
 // // import {ThiolavaVents} from './ThiolavaVents';
 // import {TitanManufacturingColony} from './TitanManufacturingColony';
-// import {TunnelBoringMachine} from './TunnelBoringMachine';
+import {TunnelBoringMachine} from './TunnelBoringMachine';
 // import {TunnelingOperation} from './TunnelingOperation';
 // import {TunnelingSubcontractor} from './TunnelingSubcontractor';
 // import {UndergroundAmusementPark} from './UndergroundAmusementPark';
@@ -134,7 +134,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // 1-9
     // [CardName.GEOLOGIST_TEAM]: {Factory: GeologistTeam},
     // [CardName.GEOSCAN_SATELLITE]: {Factory: GeoscanSatellite},
-    // [CardName.TUNNEL_BORING_MACHINE]: {Factory: TunnelBoringMachine},
+    [CardName.TUNNEL_BORING_MACHINE]: {Factory: TunnelBoringMachine},
     // [CardName.UNDERGROUND_RAILWAY]: {Factory: UndergroundRailway},
     // // [CardName.GAIA_CITY]: {Factory: GaiaCity},
     // [CardName.DEEPNUKING]: {Factory: Deepnuking},

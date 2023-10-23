@@ -30,6 +30,7 @@ import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {message} from '../logs/MessageBuilder';
+import {ExcavateSpacesDeferred} from '../underworld/ExcavateSpacesDeferred';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -462,14 +463,14 @@ export class Executor implements BehaviorExecutor {
       // if (underworld.identify !== undefined) {
       //   player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
       // }
-      // if (underworld.excavate !== undefined) {
-      //   const excavate = underworld.excavate;
-      //   if (typeof(excavate) === 'number') {
-      //     player.game.defer(new ExcavateSpacesDeferred(player, excavate));
-      //   } else {
-      //     player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
-      //   }
-      // }
+      if (underworld.excavate !== undefined) {
+        const excavate = underworld.excavate;
+        if (typeof(excavate) === 'number') {
+          player.game.defer(new ExcavateSpacesDeferred(player, excavate));
+        } else {
+          player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
+        }
+      }
       if (underworld.corruption !== undefined) {
         UnderworldExpansion.gainCorruption(player, ctx.count(underworld.corruption), {log: true});
       }

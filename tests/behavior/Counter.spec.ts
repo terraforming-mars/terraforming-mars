@@ -21,7 +21,10 @@ describe('Counter', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
+    [game, player, player2, player3] = testGame(3, {
+      venusNextExtension: true,
+      aresExtension: true,
+      aresHazards: false});
     fake = fakeCard({});
   });
 
@@ -312,5 +315,28 @@ describe('Counter for Moon', () => {
     expect(counter.count({moon: {road: {}}})).eq(4);
     MoonExpansion.addRoadTile(player, 'm06');
     expect(counter.count({moon: {road: {}}})).eq(5);
+  });
+});
+
+describe('Counter for Underworld', () => {
+  let game: Game;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let fake: IProjectCard;
+
+  beforeEach(() => {
+    [game, player, player2] = testGame(3, {underworldExpansion: true});
+    fake = fakeCard({});
+  });
+
+  it('corruption', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({underworld: {corruption: {}}})).eq(0);
+    player.underworldData.corruption = 3;
+    expect(counter.count({underworld: {corruption: {}}})).eq(3);
+    expect(counter.count({underworld: {corruption: {}}, all: true})).eq(3);
+    player2.underworldData.corruption = 5;
+    expect(counter.count({underworld: {corruption: {}}})).eq(3);
+    expect(counter.count({underworld: {corruption: {}}, all: true})).eq(8);
   });
 });

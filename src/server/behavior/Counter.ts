@@ -6,6 +6,15 @@ import {Countable, CountableUnits} from './Countable';
 import {hasIntersection} from '../../common/utils/utils';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardResource} from '../../common/CardResource';
+import * as utils from '../../common/utils/utils'; // Since there's already a sum variable.
+
+/**
+ * Counts things in game state.
+ */
+export interface ICounter {
+  count(countable: Countable, context?: 'default' | 'vps'): number;
+  countUnits(countableUnits: Partial<CountableUnits>): Units;
+}
 
 /**
  * Counts things in game state.
@@ -136,6 +145,17 @@ export class Counter {
       }
       if (moon.road) {
         sum += MoonExpansion.spaces(game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+      }
+    }
+
+    if (countable.underworld !== undefined) {
+      const underworld = countable.underworld;
+      if (underworld.corruption !== undefined) {
+        if (countable.all === true) {
+          sum += utils.sum(game.getPlayers().map((p) => p.underworldData.corruption));
+        } else {
+          sum += player.underworldData.corruption;
+        }
       }
     }
 

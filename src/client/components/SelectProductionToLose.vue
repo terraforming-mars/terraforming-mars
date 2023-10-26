@@ -127,12 +127,12 @@ export default Vue.extend({
         }
         return -1;
       };
-      const current = this.$data[type];
+      const current = this.$data.units[type];
       let newValue = current + direction;
       const lowestValue = (type === 'megacredit') ? -5 : 0;
       const expendableQuantity = expendableProductionQuantity(type, this.playerinput.payProduction);
       newValue = Math.min(Math.max(newValue, lowestValue), expendableQuantity);
-      this.$data[type] = newValue;
+      this.$data.units[type] = newValue;
     },
     saveData() {
       const total = sum(Units.values(this.units));

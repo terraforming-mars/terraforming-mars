@@ -33,7 +33,7 @@ import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 // import {ExcavatorLeasing} from './ExcavatorLeasing';
 // import {ExpeditionVehicles} from './ExpeditionVehicles';
 // import {FabricatedScandal} from './FabricatedScandal';
-// import {ForestTunnels} from './ForestTunnels';
+import {ForestTunnels} from './ForestTunnels';
 // import {FreeTradePort} from './FreeTradePort';
 // // import {FriendsinHighPlaces} from './FriendsinHighPlaces';
 // // import {GaiaCity} from './GaiaCity';
@@ -79,9 +79,9 @@ import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 // import {Nanofoundry} from './Nanofoundry';
 // import {NarrativeSpin} from './NarrativeSpin';
 // // import {Neutrinograph} from './Neutrinograph';
-// import {Nightclubs} from './Nightclubs';
-// import {OffWorldTaxHaven} from './OffWorldTaxHaven';
-// import {OldWorldMafia} from './OldWorldMafia';
+import {Nightclubs} from './Nightclubs';
+import {OffWorldTaxHaven} from './OffWorldTaxHaven';
+import {OldWorldMafia} from './OldWorldMafia';
 // import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 // import {PatentManipulation} from './PatentManipulation';
 // import {PersonalSpacecruiser} from './PersonalSpacecruiser';
@@ -138,17 +138,17 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.UNDERGROUND_RAILWAY]: {Factory: UndergroundRailway},
     // // [CardName.GAIA_CITY]: {Factory: GaiaCity},
     // [CardName.DEEPNUKING]: {Factory: Deepnuking},
-    // [CardName.OLD_WORLD_MAFIA]: {Factory: OldWorldMafia},
-    // [CardName.NIGHTCLUBS]: {Factory: Nightclubs},
+    [CardName.OLD_WORLD_MAFIA]: {Factory: OldWorldMafia},
+    [CardName.NIGHTCLUBS]: {Factory: Nightclubs},
     // [CardName.RECKLESS_DETONATION]: {Factory: RecklessDetonation},
     // // 10-18
-    // [CardName.OFF_WORLD_TAX_HAVEN]: {Factory: OffWorldTaxHaven},
+    [CardName.OFF_WORLD_TAX_HAVEN]: {Factory: OffWorldTaxHaven},
     // [CardName.SUBNAUTIC_PIRATES]: {Factory: SubnauticPirates},
     // // [CardName.SOCIAL_ENGINEERING]: {Factory: SocialEngineering}, // Use another player's action. Not right now.
     // [CardName.FABRICATED_SCANDAL]: {Factory: FabricatedScandal},
     // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking},
     // [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
-    // [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},
+    [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},
     // [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},
     // [CardName.TUNNELING_SUBCONTRACTOR]: {Factory: TunnelingSubcontractor},
     // // 19-27

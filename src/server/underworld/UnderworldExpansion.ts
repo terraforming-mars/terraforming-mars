@@ -105,7 +105,7 @@ export class UnderworldExpansion {
     const undergroundResource = game.underworldData?.tokens.pop();
     if (undergroundResource === undefined) {
       // TODO(kberg): collect tokens from all players
-      throw new Error('Cannot identify excatation space, no available tokens.');
+      throw new Error('Cannot identify excavation space, no available tokens.');
     }
     space.undergroundResources = undergroundResource;
     if (player !== undefined) {
@@ -388,9 +388,9 @@ export class UnderworldExpansion {
   //     game.underworldData.tokens.push(...tokens);
   //     inplaceShuffle(game.underworldData.tokens, game.rng);
   //   }
-  //   static excavationMarkerCount(player: IPlayer): number {
-  //     return player.game.board.spaces.filter((space) => space.excavator === player).length;
-  //   }
+  static excavationMarkerCount(player: IPlayer): number {
+    return player.game.board.spaces.filter((space) => space.excavator === player).length;
+  }
 
   static endGeneration(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => player.underworldData.temperatureBonus = undefined);

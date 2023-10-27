@@ -27,6 +27,7 @@ import {TemperatureRequirement} from './TemperatureRequirement';
 import {VenusRequirement} from './VenusRequirement';
 import {CardRequirementDescriptor} from '../../../common/cards/CardRequirementDescriptor';
 import {CorruptionRequirement} from './CorruptionRequirement';
+import {ExcavationRequirement} from './ExcavationRequirement';
 
 export class CardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
@@ -113,8 +114,8 @@ export class CardRequirements {
       return new MiningTilesRequirement({...descriptor, count: descriptor.miningTiles});
     } else if (descriptor.roadTiles !== undefined) {
       return new RoadTilesRequirement({...descriptor, count: descriptor.roadTiles});
-    // } else if (descriptor.excavation !== undefined) {
-    //   return new ExcavationRequirement({...descriptor, count: descriptor.excavation});
+    } else if (descriptor.excavation !== undefined) {
+      return new ExcavationRequirement({...descriptor, count: descriptor.excavation});
     } else if (descriptor.corruption !== undefined) {
       return new CorruptionRequirement({...descriptor, count: descriptor.corruption});
     } else {

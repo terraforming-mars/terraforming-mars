@@ -109,8 +109,8 @@ export default Vue.extend({
     hasWarning() {
       return this.warning !== undefined;
     },
-    delta(type: string, direction: number) {
-      const expendableProductionQuantity = function(type: string, model: PayProductionModel): number {
+    delta(type: keyof Units, direction: number) {
+      const expendableProductionQuantity = function(type: keyof Units, model: PayProductionModel): number {
         switch (type) {
         case 'megacredits':
           return model.units.megacredits + 5;
@@ -124,15 +124,15 @@ export default Vue.extend({
           return model.units.energy;
         case 'heat':
           return model.units.heat;
+        default:
+          return -1;
         }
-        return -1;
       };
-      const current = this.$data[type];
+      const current = this.units[type];
       let newValue = current + direction;
-      const lowestValue = (type === 'megacredit') ? -5 : 0;
       const expendableQuantity = expendableProductionQuantity(type, this.playerinput.payProduction);
-      newValue = Math.min(Math.max(newValue, lowestValue), expendableQuantity);
-      this.$data[type] = newValue;
+      newValue = Math.min(Math.max(newValue, 0), expendableQuantity);
+      this.units[type] = newValue;
     },
     saveData() {
       const total = sum(Units.values(this.units));

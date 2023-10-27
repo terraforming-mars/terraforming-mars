@@ -157,6 +157,13 @@ export class Counter {
           sum += player.underworldData.corruption;
         }
       }
+      if (underworld.excavationMarkers !== undefined) {
+        if (countable.all) {
+          sum += player.game.board.spaces.filter((space) => space.excavator !== undefined).length;
+        } else {
+          sum += player.game.board.spaces.filter((space) => space.excavator === player).length;
+        }
+      }
     }
 
     if (countable.each !== undefined) {

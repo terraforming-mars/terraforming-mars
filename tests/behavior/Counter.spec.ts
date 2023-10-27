@@ -332,11 +332,30 @@ describe('Counter for Underworld', () => {
   it('corruption', () => {
     const counter = new Counter(player, fake);
     expect(counter.count({underworld: {corruption: {}}})).eq(0);
+
     player.underworldData.corruption = 3;
+
     expect(counter.count({underworld: {corruption: {}}})).eq(3);
     expect(counter.count({underworld: {corruption: {}}, all: true})).eq(3);
+
     player2.underworldData.corruption = 5;
+
     expect(counter.count({underworld: {corruption: {}}})).eq(3);
     expect(counter.count({underworld: {corruption: {}}, all: true})).eq(8);
+  });
+
+  it('excavationMarkers', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(0);
+
+    game.board.getSpace(SpaceName.NOCTIS_CITY).excavator = player;
+
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
+    expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(1);
+
+    game.board.getSpace(SpaceName.THARSIS_THOLUS).excavator = player2;
+
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
+    expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(2);
   });
 });

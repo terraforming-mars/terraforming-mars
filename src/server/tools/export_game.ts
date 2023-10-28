@@ -41,6 +41,7 @@ async function main() {
 }
 
 async function load(gameId: GameId) {
+  await localDb.initialize();
   console.log(`Loading game ${gameId}`);
   const game = await db.getGame(gameId);
 

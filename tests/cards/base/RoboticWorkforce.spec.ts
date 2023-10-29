@@ -11,7 +11,7 @@ import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce'
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -31,19 +31,17 @@ import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
-import {DEFAULT_GAME_OPTIONS} from '../../../src/server/game/GameOptions';
+import {testGame} from '../../TestGame';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
   let player: TestPlayer;
-  let game: Game;
-  let redPlayer: TestPlayer;
+  let game: IGame;
+  let player2: TestPlayer;
 
   beforeEach(() => {
     card = new RoboticWorkforce();
-    player = TestPlayer.BLUE.newPlayer();
-    redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, {moonExpansion: true});
+    [game, player, player2] = testGame(2, {moonExpansion: true});
   });
 
   it('Cannot play if no building cards to copy', () => {
@@ -64,7 +62,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(new BiomassCombustors());
     expect(card.canPlay(player)).is.not.true;
 
-    redPlayer.production.override({plants: 1});
+    player2.production.override({plants: 1});
     expect(card.canPlay(player)).is.true;
   });
 
@@ -107,7 +105,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Capital (Ares expansion)', () => {
-    game = Game.newInstance('gameid', [player, redPlayer], player, {...DEFAULT_GAME_OPTIONS, aresExtension: true, aresHazards: false});
+    [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
     const capitalAres = new CapitalAres();
     player.playedCards.push(capitalAres);
 
@@ -122,7 +120,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Solar Farm (Ares expansion)', () => {
-    game = Game.newInstance('gameid', [player, redPlayer], player, {...DEFAULT_GAME_OPTIONS, aresExtension: true, aresHazards: false});
+    [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
     const solarFarm = new SolarFarm();
 
     // This space should have 2 plants bonus on default map
@@ -184,11 +182,11 @@ describe('RoboticWorkforce', () => {
     const heatTrappers = new HeatTrappers();
     player.playedCards.push(heatTrappers);
     player.production.override(Units.of({heat: 1}));
-    redPlayer.production.override(Units.of({heat: 1}));
+    player2.production.override(Units.of({heat: 1}));
 
     expect(card.canPlay(player)).is.false;
 
-    redPlayer.production.override(Units.of({heat: 2}));
+    player2.production.override(Units.of({heat: 2}));
 
     expect(card.canPlay(player)).is.true;
 
@@ -200,7 +198,7 @@ describe('RoboticWorkforce', () => {
     runAllActions(game);
 
     expect(player.production.asUnits()).deep.eq(Units.of({heat: 1, energy: 1}));
-    expect(redPlayer.production.asUnits()).deep.eq(Units.EMPTY);
+    expect(player2.production.asUnits()).deep.eq(Units.EMPTY);
   });
 
   describe('test all cards', () => {
@@ -216,7 +214,6 @@ describe('RoboticWorkforce', () => {
 
     const testCard = function(card: ICard) {
       const researchCoordination = new ResearchCoordination();
-      const gameOptions = {turmoilExtension: true, aresExtension: true, aresHazards: false, moonExpansion: true};
 
       let include = false;
       if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {
@@ -226,11 +223,10 @@ describe('RoboticWorkforce', () => {
         }
 
         // Create new players, set all productions to 2
-        player = TestPlayer.BLUE.newPlayer();
-        redPlayer = TestPlayer.RED.newPlayer();
-        game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+        [game, player, player2] = testGame(2, {turmoilExtension: true, aresExtension: true, aresHazards: false, moonExpansion: true, underworldExpansion: true});
+
         player.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
-        redPlayer.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
+        player2.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
 
         // Set Moon rates.
         game.moonData!.miningRate = 3;
@@ -258,6 +254,8 @@ describe('RoboticWorkforce', () => {
           game.moonData!.moon.spaces[4].tile = {tileType: TileType.MOON_MINE};
           game.moonData!.moon.spaces[4].player = player;
         }
+
+        player.game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
 
         if (isICorporationCard(card)) {
           player.playCorporationCard(card);

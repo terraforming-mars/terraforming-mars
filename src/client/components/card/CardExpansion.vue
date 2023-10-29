@@ -8,19 +8,20 @@ import Vue from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
 
 const MODULE_TO_CSS: Omit<Record<GameModule, string>, 'base'> = {
-  'corpera': 'corporate-icon',
-  'promo': 'promo-icon',
-  'venus': 'venus-icon',
-  'colonies': 'colonies-icon',
-  'prelude': 'prelude-icon',
-  'prelude2': 'prelude2-icon',
-  'turmoil': 'turmoil-icon',
-  'community': 'community-icon',
-  'ares': 'ares-icon',
-  'moon': 'moon-icon',
-  'pathfinders': 'pathfinders-icon',
-  'ceo': 'ceo-icon',
-  'starwars': 'starwars-icon',
+  corpera: 'corporate-icon',
+  promo: 'promo-icon',
+  venus: 'venus-icon',
+  colonies: 'colonies-icon',
+  prelude: 'prelude-icon',
+  prelude2: 'prelude2-icon',
+  turmoil: 'turmoil-icon',
+  community: 'community-icon',
+  ares: 'ares-icon',
+  moon: 'moon-icon',
+  pathfinders: 'pathfinders-icon',
+  ceo: 'ceo-icon',
+  starwars: 'starwars-icon',
+  underworld: 'underworld-icon',
 };
 
 export default Vue.extend({

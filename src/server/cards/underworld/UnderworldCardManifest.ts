@@ -114,7 +114,7 @@ import {SubterraneanSea} from './SubterraneanSea';
 // import {TitanManufacturingColony} from './TitanManufacturingColony';
 import {TunnelBoringMachine} from './TunnelBoringMachine';
 // import {TunnelingOperation} from './TunnelingOperation';
-// import {TunnelingSubcontractor} from './TunnelingSubcontractor';
+import {TunnelingSubcontractor} from './TunnelingSubcontractor';
 // import {UndergroundAmusementPark} from './UndergroundAmusementPark';
 // import {UndergroundHabitat} from './UndergroundHabitat';
 // import {UndergroundRailway} from './UndergroundRailway';
@@ -150,7 +150,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
     [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},
     // [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},
-    // [CardName.TUNNELING_SUBCONTRACTOR]: {Factory: TunnelingSubcontractor},
+    [CardName.TUNNELING_SUBCONTRACTOR]: {Factory: TunnelingSubcontractor},
     // // 19-27
     // [CardName.UNDERGROUND_AMUSEMENT_PARK]: {Factory: UndergroundAmusementPark},
     // [CardName.CASINO]: {Factory: Casino},

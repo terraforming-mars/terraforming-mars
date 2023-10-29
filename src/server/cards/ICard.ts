@@ -68,6 +68,8 @@ export interface ICard {
   getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number;
   victoryPoints?: number | 'special' | IVictoryPoints,
   getVictoryPoints(player: IPlayer): number;
+  /** Returns any dynamic influence value */
+  getInfluenceBonus?: (player: IPlayer) => number;
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
   onCardPlayed?(player: IPlayer, card: IProjectCard): PlayerInput | undefined | void;
   onCardPlayedFromAnyPlayer?(thisCardOwner: IPlayer, playedCardOwner: IPlayer, card: IProjectCard): PlayerInput | undefined;

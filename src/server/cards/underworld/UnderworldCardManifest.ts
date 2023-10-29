@@ -109,7 +109,7 @@ import {Scapegoat} from './Scapegoat';
 // import {StarVegas} from './StarVegas';
 // import {StemFieldSubsidies} from './StemFieldSubsidies';
 // import {SubnauticPirates} from './SubnauticPirates';
-// import {SubterraneanSea} from './SubterraneanSea';
+import {SubterraneanSea} from './SubterraneanSea';
 // // import {ThiolavaVents} from './ThiolavaVents';
 // import {TitanManufacturingColony} from './TitanManufacturingColony';
 import {TunnelBoringMachine} from './TunnelBoringMachine';
@@ -147,7 +147,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.SOCIAL_ENGINEERING]: {Factory: SocialEngineering}, // Use another player's action. Not right now.
     [CardName.FABRICATED_SCANDAL]: {Factory: FabricatedScandal},
     // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking},
-    // [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
+    [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
     [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},
     // [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},
     // [CardName.TUNNELING_SUBCONTRACTOR]: {Factory: TunnelingSubcontractor},

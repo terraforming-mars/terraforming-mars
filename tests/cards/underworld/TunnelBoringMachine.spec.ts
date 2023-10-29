@@ -54,7 +54,7 @@ describe('TunnelBoringMachine', () => {
     const space2 = selectSpace2.spaces[0];
     // Simplify the test by forcing the space to have an easy-to-manage-resource.
     space2.undergroundResources = 'titanium2';
-    selectSpace1.cb(space2);
+    selectSpace2.cb(space2);
 
     expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1, titanium: 2}));
     expect(space2.excavator).eq(player);

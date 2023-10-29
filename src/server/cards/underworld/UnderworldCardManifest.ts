@@ -32,7 +32,7 @@ import {ElectionSponsorship} from './ElectionSponsorship';
 // import {ExcavateStandardProject} from './ExcavateStandardProject';
 // import {ExcavatorLeasing} from './ExcavatorLeasing';
 // import {ExpeditionVehicles} from './ExpeditionVehicles';
-// import {FabricatedScandal} from './FabricatedScandal';
+import {FabricatedScandal} from './FabricatedScandal';
 import {ForestTunnels} from './ForestTunnels';
 import {FreeTradePort} from './FreeTradePort';
 // // import {FriendsinHighPlaces} from './FriendsinHighPlaces';
@@ -145,7 +145,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.OFF_WORLD_TAX_HAVEN]: {Factory: OffWorldTaxHaven},
     // [CardName.SUBNAUTIC_PIRATES]: {Factory: SubnauticPirates},
     // // [CardName.SOCIAL_ENGINEERING]: {Factory: SocialEngineering}, // Use another player's action. Not right now.
-    // [CardName.FABRICATED_SCANDAL]: {Factory: FabricatedScandal},
+    [CardName.FABRICATED_SCANDAL]: {Factory: FabricatedScandal},
     // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking},
     // [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
     [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},

@@ -19,11 +19,11 @@ describe('SolarFlare', function() {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
     expect(player.megaCredits).to.eq(7);

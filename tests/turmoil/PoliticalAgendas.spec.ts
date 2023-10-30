@@ -39,7 +39,7 @@ describe('PoliticalAgendas', function() {
 
       const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
-      turmoil.chairman = player2.id;
+      turmoil.chairman = player2;
       PoliticalAgendas.setNextAgenda(turmoil, game);
       runAllActions(game);
 
@@ -64,7 +64,7 @@ describe('PoliticalAgendas', function() {
 
       const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
-      turmoil.chairman = newPlayer2.id;
+      turmoil.chairman = newPlayer2;
 
       PoliticalAgendas.setNextAgenda(turmoil, game);
       runAllActions(game);

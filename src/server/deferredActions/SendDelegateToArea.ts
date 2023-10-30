@@ -59,14 +59,14 @@ export class SendDelegateToArea extends DeferredAction {
 
         for (let i = 0; i < numDelegateToSend; i++) {
           if (this.options.replace) {
-            this.turmoil.replaceDelegateFromParty(this.options.replace, this.player.id, partyName, this.player.game);
+            this.turmoil.replaceDelegateFromParty(this.options.replace, this.player, partyName, this.player.game);
           } else {
-            this.turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game);
+            this.turmoil.sendDelegateToParty(this.player, partyName, this.player.game);
           }
         }
 
         if (this.options?.freeStandardAction === true) {
-          this.turmoil.usedFreeDelegateAction.add(this.player.id);
+          this.turmoil.usedFreeDelegateAction.add(this.player);
         }
         this.player.totalDelegatesPlaced += numDelegateToSend;
         this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(numDelegateToSend).partyName(partyName));

@@ -33,15 +33,15 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     const turmoil = Turmoil.getTurmoil(player.game);
-    if (!turmoil.hasDelegatesInReserve(player.id)) return false;
+    if (!turmoil.hasDelegatesInReserve(player)) return false;
 
     return turmoil.chairman === 'NEUTRAL';
   }
 
   public override bespokePlay(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    turmoil.delegateReserve.remove(player.id);
-    turmoil.setNewChairman(player.id, player.game, /* setAgenda */ false);
+    turmoil.delegateReserve.remove(player);
+    turmoil.setNewChairman(player, player.game, /* setAgenda */ false);
     return undefined;
   }
 }

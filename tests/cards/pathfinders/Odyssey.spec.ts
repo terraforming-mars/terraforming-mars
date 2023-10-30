@@ -196,10 +196,10 @@ describe('Odyssey', () => {
 
     player.playedCards.push(new ThoriumRush()); // Event: Building, Moon
 
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player.id;
-    turmoil.dominantParty.delegates.add(player.id);
+    turmoil.dominantParty.partyLeader = player;
+    turmoil.dominantParty.delegates.add(player);
 
     // Not enough tags, because the event does not count.
     diversity.resolve(game, turmoil);

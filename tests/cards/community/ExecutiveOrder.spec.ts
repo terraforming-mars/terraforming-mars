@@ -33,6 +33,6 @@ describe('ExecutiveOrder', function() {
     const selectParty = cast(game.deferredActions.pop()!.execute(), SelectParty);
     selectParty.cb(PartyName.MARS);
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
-    expect(marsFirst.delegates.get(player.id)).eq(2);
+    expect(marsFirst.delegates.get(player)).eq(2);
   });
 });

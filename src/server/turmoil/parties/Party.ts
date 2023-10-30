@@ -31,7 +31,7 @@ export abstract class Party {
         if (this.partyLeader === 'NEUTRAL') {
           currentIndex = players.indexOf(game.getPlayerById(game.activePlayer));
         } else {
-          currentIndex = players.indexOf(game.getPlayerById(this.partyLeader));
+          currentIndex = players.indexOf(this.partyLeader);
         }
 
         let playersToCheck: Array<IPlayer | NeutralPlayer> = [];
@@ -52,14 +52,8 @@ export abstract class Party {
         playersToCheck.push('NEUTRAL');
 
         playersToCheck.some((nextPlayer) => {
-          let nextPlayerId: Delegate;
-          if (nextPlayer === 'NEUTRAL') {
-            nextPlayerId = 'NEUTRAL';
-          } else {
-            nextPlayerId = nextPlayer.id;
-          }
-          if (this.delegates.get(nextPlayerId) === max) {
-            this.partyLeader = nextPlayerId;
+          if (this.delegates.get(nextPlayer) === max) {
+            this.partyLeader = nextPlayer;
             return true;
           }
           return false;

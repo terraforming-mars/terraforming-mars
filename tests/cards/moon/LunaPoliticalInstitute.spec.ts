@@ -36,7 +36,7 @@ describe('LunaPoliticalInstitute', () => {
 
   it('can act', () => {
     turmoil.delegateReserve.clear();
-    turmoil.delegateReserve.add(player.id);
+    turmoil.delegateReserve.add(player);
     expect(card.canAct(player)).is.true;
 
     turmoil.delegateReserve.clear();
@@ -50,12 +50,12 @@ describe('LunaPoliticalInstitute', () => {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    expect(marsFirst.delegates.get(player.id)).eq(0);
+    expect(marsFirst.delegates.get(player)).eq(0);
 
     const selectParty = cast(game.deferredActions.peek()!.execute(), SelectParty);
     selectParty.cb(PartyName.MARS);
 
-    expect(marsFirst.delegates.get(player.id)).eq(1);
+    expect(marsFirst.delegates.get(player)).eq(1);
   });
 });
 

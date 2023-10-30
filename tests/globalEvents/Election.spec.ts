@@ -16,10 +16,10 @@ describe('Election', function() {
     player2.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
     addCity(player3);
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
 
     expect(card.getScore(player, turmoil, game)).eq(1);
     expect(card.getScore(player2, turmoil, game)).eq(4);

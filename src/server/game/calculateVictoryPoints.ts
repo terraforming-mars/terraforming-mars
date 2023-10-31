@@ -12,9 +12,14 @@ export function calculateVictoryPoints(player: IPlayer) {
   const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
   // Victory points from cards
+  let negativeVP = 0; // For Underworld.
   for (const playedCard of player.tableau) {
     if (playedCard.victoryPoints !== undefined) {
-      victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(player), playedCard.name);
+      const vp = playedCard.getVictoryPoints(player);
+      victoryPointsBreakdown.setVictoryPoints('victoryPoints', vp, playedCard.name);
+      if (vp < 0) {
+        negativeVP += vp;
+      }
     }
   }
 
@@ -61,6 +66,10 @@ export function calculateVictoryPoints(player: IPlayer) {
   player.colonies.calculateVictoryPoints(victoryPointsBreakdown);
   MoonExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
   PathfindersExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
+
+  // Underworld Score Bribing
+  const bribe = Math.min(Math.abs(negativeVP), player.underworldData.corruption);
+  victoryPointsBreakdown.setVictoryPoints('victoryPoints', bribe, 'Underworld Corruption Bribe');
 
   // Escape velocity VP penalty
   if (player.game.gameOptions.escapeVelocityMode) {

@@ -8,6 +8,7 @@ import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Resource} from '../../../common/Resource';
+import {Tag} from '../../../common/cards/Tag';
 
 export class SagittaFrontierServices extends Card implements ICorporationCard {
   constructor() {
@@ -51,7 +52,7 @@ export class SagittaFrontierServices extends Card implements ICorporationCard {
 
   public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard) {
     if (player.isCorporation(this.name)) {
-      const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
+      const count = card.tags.filter((tag) => tag !== Tag.WILD).length + (card.type === CardType.EVENT ? 1 : 0);
       if (count === 0) {
         player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 4}))
           .andThen(() => {

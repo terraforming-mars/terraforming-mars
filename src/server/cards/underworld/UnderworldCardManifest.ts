@@ -82,7 +82,7 @@ import {ManMadeVolcano} from './ManMadeVolcano';
 import {Nightclubs} from './Nightclubs';
 import {OffWorldTaxHaven} from './OffWorldTaxHaven';
 import {OldWorldMafia} from './OldWorldMafia';
-// import {OrbitalLaserDrill} from './OrbitalLaserDrill';
+import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 // import {PatentManipulation} from './PatentManipulation';
 // import {PersonalSpacecruiser} from './PersonalSpacecruiser';
 // import {PlanetaryRightsBuyout} from './PlanetaryRightsBuyout';
@@ -167,7 +167,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.BEHEMOTH_EXCAVATOR]: {Factory: BehemothExcavator},
     [CardName.LOBBYING_NETWORK]: {Factory: LobbyingNetwork},
     // [CardName.CONCESSION_RIGHTS]: {Factory: ConcessionRights},
-    // [CardName.ORBITAL_LASER_DRILL]: {Factory: OrbitalLaserDrill},
+    [CardName.ORBITAL_LASER_DRILL]: {Factory: OrbitalLaserDrill},
     // [CardName.GREY_MARKET_EXPLOITATION]: {Factory: GreyMarketExploitation},
     // [CardName.EXCAVATOR_LEASING]: {Factory: ExcavatorLeasing},
     [CardName.LANDFILL]: {Factory: Landfill},

@@ -23,6 +23,9 @@ export type OneOfType<Obj> = ValueOf<OneOfByKey<Obj>>;
 export interface Spend extends Units {
   /** units or a number of resources from the card. */
   resourcesHere: number,
+
+  /** corruption from your personal supply. */
+  corruption: number,
 }
 
 /** A set of steps that an action can perform in any specific order. */

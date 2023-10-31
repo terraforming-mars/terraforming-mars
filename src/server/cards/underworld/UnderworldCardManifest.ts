@@ -65,8 +65,8 @@ import {InvestorPlaza} from './InvestorPlaza';
 // // import {Keplertec} from './Keplertec';
 // import {KingdomofTauraro} from './KingdomofTauraro';
 // import {LaborTrafficking} from './LaborTrafficking';
-// import {Landfill} from './Landfill';
-// import {LobbyingNetwork} from './LobbyingNetwork';
+import {Landfill} from './Landfill';
+import {LobbyingNetwork} from './LobbyingNetwork';
 import {ManMadeVolcano} from './ManMadeVolcano';
 // import {MartianExpress} from './MartianExpress';
 // // import {MediaFrenzy} from './MediaFrenzy';
@@ -165,12 +165,12 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.UNDERGROUND_SMUGGLING_RING]: {Factory: UndergroundSmugglingRing},
     // [CardName.DEEPMINING]: {Factory: Deepmining},
     // [CardName.BEHEMOTH_EXCAVATOR]: {Factory: BehemothExcavator},
-    // [CardName.LOBBYING_NETWORK]: {Factory: LobbyingNetwork},
+    [CardName.LOBBYING_NETWORK]: {Factory: LobbyingNetwork},
     // [CardName.CONCESSION_RIGHTS]: {Factory: ConcessionRights},
     // [CardName.ORBITAL_LASER_DRILL]: {Factory: OrbitalLaserDrill},
     // [CardName.GREY_MARKET_EXPLOITATION]: {Factory: GreyMarketExploitation},
     // [CardName.EXCAVATOR_LEASING]: {Factory: ExcavatorLeasing},
-    // [CardName.LANDFILL]: {Factory: Landfill},
+    [CardName.LANDFILL]: {Factory: Landfill},
     // // 37-45
     // [CardName.NARRATIVE_SPIN]: {Factory: NarrativeSpin},
     // [CardName.PRIVATE_INVESTIGATOR]: {Factory: PrivateInvestigator},

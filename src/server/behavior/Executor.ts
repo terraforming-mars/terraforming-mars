@@ -292,6 +292,7 @@ export class Executor implements BehaviorExecutor {
             Units.keys,
             (unit) => {
               player.stock.add(Units.ResourceMap[unit], count, {log: true});
+              return undefined;
             }));
       }
     }

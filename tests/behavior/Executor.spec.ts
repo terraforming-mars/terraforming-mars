@@ -27,6 +27,8 @@ import {Behavior} from '../../src/server/behavior/Behavior';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {StormCraftIncorporated} from '../../src/server/cards/colonies/StormCraftIncorporated';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
+import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansion';
 
 function asUnits(player: IPlayer): Units {
   return {
@@ -558,6 +560,15 @@ describe('Executor', () => {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(player.megaCredits).eq(1);
+  });
+
+  it('underworld, identify', () => {
+    executor.execute({underworld: {identify: 1}}, player, fake);
+    runAllActions(game);
+    expect(UnderworldExpansion.identifiedSpaces(game)).has.length(0);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
+    expect(UnderworldExpansion.identifiedSpaces(game)).has.length(1);
   });
 
   it('underworld, corruption', () => {

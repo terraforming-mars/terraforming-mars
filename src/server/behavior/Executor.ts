@@ -28,9 +28,10 @@ import {SelectOption} from '../inputs/SelectOption';
 import {Payment} from '../../common/inputs/Payment';
 import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {message} from '../logs/MessageBuilder';
+import {IdentifySpacesDeferred} from '../underworld/IdentifySpacesDeferred';
 import {ExcavateSpacesDeferred} from '../underworld/ExcavateSpacesDeferred';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -460,9 +461,9 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.underworld !== undefined) {
       const underworld = behavior.underworld;
-      // if (underworld.identify !== undefined) {
-      //   player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
-      // }
+      if (underworld.identify !== undefined) {
+        player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
+      }
       if (underworld.excavate !== undefined) {
         const excavate = underworld.excavate;
         if (typeof(excavate) === 'number') {

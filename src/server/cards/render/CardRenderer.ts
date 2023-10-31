@@ -453,6 +453,11 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
+  // Underworld
+  public neutralDelegate(amount: number, options?: ItemOptions) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.NEUTRAL_DELEGATE, amount, options));
+  }
+
   // public identify(count: number = 1, options?: ItemOptions) {
   //   const item = new CardRenderItem(CardRenderItemType.IDENTIFY, count, options);
   //   return this._appendToRow(item);

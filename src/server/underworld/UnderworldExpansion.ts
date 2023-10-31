@@ -31,6 +31,9 @@ export class UnderworldExpansion {
     };
   }
 
+  /**
+   * Creates an empty UnderworldData for games that don't include it.
+   */
   public static initializeGameWithoutUnderworld(): UnderworldData {
     return {tokens: []};
   }
@@ -88,16 +91,19 @@ export class UnderworldExpansion {
     };
   }
 
+  /** Return the spaces that have not yet been identified. The opposite of `identifiedSpaces`. */
   public static identifiableSpaces(game: IGame): ReadonlyArray<Space> {
-    return game.board.spaces.filter((space) => space.undergroundResources === undefined);
+    return game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY && space.undergroundResources === undefined);
   }
 
+  /** Return the spaces that not yet been identified. The opposite of `identifiableSpaces`. */
   public static identifiedSpaces(game: IGame): ReadonlyArray<Space> {
     return game.board.spaces.filter(
       (space) => space.undergroundResources !== undefined,
     );
   }
 
+  /** Identify the token at `space`, optionally trigger callbacks */
   public static identify(game: IGame, space: Space, player?: IPlayer): void {
     if (space.undergroundResources !== undefined) {
       return;
@@ -113,14 +119,10 @@ export class UnderworldExpansion {
     }
     // TODO(there must be a case when a neutral player identifies that applies to the callbacks);
     if (player !== undefined) {
-      this.onIdentification(player, space);
-    }
-  }
-
-  public static onIdentification(player: IPlayer, space: Space) {
-    for (const p of player.game.getPlayersInGenerationOrder()) {
-      for (const card of p.tableau) {
-        card.onIdentification?.(player, p, space);
+      for (const p of player.game.getPlayersInGenerationOrder()) {
+        for (const card of p.tableau) {
+          card.onIdentification?.(player, p, space);
+        }
       }
     }
   }

@@ -45,7 +45,7 @@ import {GanymedeTradingCompany} from './GanymedeTradingCompany';
 // import {GeoscanSatellite} from './GeoscanSatellite';
 // import {GeothermalNetwork} from './GeothermalNetwork';
 // import {GlobalAudit} from './GlobalAudit';
-// import {GreyMarketExploitation} from './GreyMarketExploitation';
+import {GreyMarketExploitation} from './GreyMarketExploitation';
 // // import {GuerillaEcologists} from './GuerillaEcologists';
 // import {Hackers} from './Hackers';
 // import {Hadesphere} from './Hadesphere';
@@ -168,7 +168,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.LOBBYING_NETWORK]: {Factory: LobbyingNetwork},
     // [CardName.CONCESSION_RIGHTS]: {Factory: ConcessionRights},
     [CardName.ORBITAL_LASER_DRILL]: {Factory: OrbitalLaserDrill},
-    // [CardName.GREY_MARKET_EXPLOITATION]: {Factory: GreyMarketExploitation},
+    [CardName.GREY_MARKET_EXPLOITATION]: {Factory: GreyMarketExploitation},
     // [CardName.EXCAVATOR_LEASING]: {Factory: ExcavatorLeasing},
     [CardName.LANDFILL]: {Factory: Landfill},
     // // 37-45

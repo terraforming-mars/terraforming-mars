@@ -16,8 +16,6 @@ import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {AgendaStyle} from '../../common/turmoil/Types';
 import {CardName} from '../../common/cards/CardName';
 import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
-import {SelectOption} from '../inputs/SelectOption';
-import {OrOptions} from '../inputs/OrOptions';
 import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
@@ -372,20 +370,6 @@ export class Turmoil {
     } else {
       game.log('A neutral delegate is the new chairman.');
     }
-  }
-
-  public chooseRulingParty(player: IPlayer): void {
-    const setRulingParty = new OrOptions();
-
-    setRulingParty.title = 'Select new ruling party';
-    setRulingParty.options = this.parties.map((p: IParty) => new SelectOption(p.name).andThen(() => {
-      this.rulingParty = p;
-      PoliticalAgendas.setNextAgenda(this, player.game);
-      return undefined;
-    }),
-    );
-
-    player.defer(setRulingParty);
   }
 
   // Called either directly during generation change, or after asking chairperson player

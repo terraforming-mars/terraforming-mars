@@ -115,7 +115,7 @@ import {SubterraneanSea} from './SubterraneanSea';
 import {TunnelBoringMachine} from './TunnelBoringMachine';
 // import {TunnelingOperation} from './TunnelingOperation';
 import {TunnelingSubcontractor} from './TunnelingSubcontractor';
-// import {UndergroundAmusementPark} from './UndergroundAmusementPark';
+import {UndergroundAmusementPark} from './UndergroundAmusementPark';
 // import {UndergroundHabitat} from './UndergroundHabitat';
 // import {UndergroundRailway} from './UndergroundRailway';
 // // import {UndergroundResearchCenter} from './UndergroundResearchCenter';
@@ -152,7 +152,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},
     [CardName.TUNNELING_SUBCONTRACTOR]: {Factory: TunnelingSubcontractor},
     // // 19-27
-    // [CardName.UNDERGROUND_AMUSEMENT_PARK]: {Factory: UndergroundAmusementPark},
+    [CardName.UNDERGROUND_AMUSEMENT_PARK]: {Factory: UndergroundAmusementPark},
     [CardName.CASINO]: {Factory: Casino},
     // [CardName.IMPORTED_HEAVY_MACHINERY]: {Factory: ImportedHeavyMachinery},
     // [CardName.MICROPROBING_TECHNOLOGY]: {Factory: MicroprobingTechnology},

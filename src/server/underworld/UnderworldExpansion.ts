@@ -11,7 +11,7 @@ import {CardResource} from '../../common/CardResource';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {IGame} from '../IGame';
 import {SpaceType} from '../../common/boards/SpaceType';
-// import {CardName} from '../../common/cards/CardName';
+import {CardName} from '../../common/cards/CardName';
 // import {PlayerInput} from '../PlayerInput';
 // import {OrOptions} from '../inputs/OrOptions';
 // import {SelectOption} from '../inputs/SelectOption';
@@ -198,10 +198,10 @@ export class UnderworldExpansion {
     game.board
       .getAdjacentSpaces(space)
       .forEach((s) => UnderworldExpansion.identify(game, s, player));
-    // const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
-    // if (leaser !== undefined) {
-    //   leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
-    // }
+    const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
+    if (leaser !== undefined) {
+      leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
+    }
   }
 
   public static grant(player: IPlayer, token: UndergroundResourceToken): void {

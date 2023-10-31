@@ -26,12 +26,12 @@ export class ExcavateStandardProject extends StandardProjectCard {
     return {steel: true};
   }
 
-  // public override discount(player: IPlayer): number {
-  //   if (player.game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING) !== undefined) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // }
+  public override discount(player: IPlayer): number {
+    if (player.game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING) !== undefined) {
+      return 1;
+    }
+    return 0;
+  }
 
   public override canAct(player: IPlayer): boolean {
     if (UnderworldExpansion.excavatableSpaces(player).length === 0) {

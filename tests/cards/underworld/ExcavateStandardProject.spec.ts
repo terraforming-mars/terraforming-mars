@@ -47,14 +47,14 @@ describe('ExcavateStandardProject', () => {
     card.action(player);
     runAllActions(game);
 
-    const selectSpace1 = cast(player.popWaitingFor(), SelectSpace);
-    const space1 = selectSpace1.spaces[0];
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    const space = selectSpace.spaces[0];
     // Simplify the test by forcing the space to have an easy-to-manage-resource.
-    space1.undergroundResources = 'plant1';
-    selectSpace1.cb(space1);
+    space.undergroundResources = 'plant1';
+    selectSpace.cb(space);
 
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 0, plants: 1}));
-    expect(space1.excavator).eq(player);
+    expect(space.excavator).eq(player);
 
     runAllActions(game);
 

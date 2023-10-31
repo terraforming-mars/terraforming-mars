@@ -30,7 +30,7 @@ import {CollusionStandardProject} from './CollusionStandardProject';
 // import {EarthquakeMachine} from './EarthquakeMachine';
 import {ElectionSponsorship} from './ElectionSponsorship';
 import {ExcavateStandardProject} from './ExcavateStandardProject';
-// import {ExcavatorLeasing} from './ExcavatorLeasing';
+import {ExcavatorLeasing} from './ExcavatorLeasing';
 // import {ExpeditionVehicles} from './ExpeditionVehicles';
 import {FabricatedScandal} from './FabricatedScandal';
 import {ForestTunnels} from './ForestTunnels';
@@ -169,7 +169,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.CONCESSION_RIGHTS]: {Factory: ConcessionRights},
     [CardName.ORBITAL_LASER_DRILL]: {Factory: OrbitalLaserDrill},
     [CardName.GREY_MARKET_EXPLOITATION]: {Factory: GreyMarketExploitation},
-    // [CardName.EXCAVATOR_LEASING]: {Factory: ExcavatorLeasing},
+    [CardName.EXCAVATOR_LEASING]: {Factory: ExcavatorLeasing},
     [CardName.LANDFILL]: {Factory: Landfill},
     // // 37-45
     // [CardName.NARRATIVE_SPIN]: {Factory: NarrativeSpin},

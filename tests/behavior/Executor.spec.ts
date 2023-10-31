@@ -576,4 +576,16 @@ describe('Executor', () => {
     executor.execute({underworld: {corruption: 2}}, player, fake);
     expect(player.underworldData.corruption).eq(2);
   });
+
+  it('underworkd spend corruption', () => {
+    player.underworldData.corruption = 1;
+    expect(executor.canExecute({spend: {corruption: 2}}, player, fake)).is.false;
+
+    player.underworldData.corruption = 2;
+    expect(executor.canExecute({spend: {corruption: 2}}, player, fake)).is.true;
+
+    player.underworldData.corruption = 3;
+    executor.execute({spend: {corruption: 2}}, player, fake);
+    expect(player.underworldData.corruption).eq(1);
+  });
 });

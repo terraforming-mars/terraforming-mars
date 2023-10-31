@@ -4,13 +4,14 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export type Options = {
   count: number,
   stealing?: boolean
 }
 
-export class DecreaseAnyProduction extends DeferredAction {
+export class DecreaseAnyProduction extends DeferredAction<boolean> {
   constructor(
     player: IPlayer,
     public resource: Resource,
@@ -23,27 +24,40 @@ export class DecreaseAnyProduction extends DeferredAction {
     super(player, Priority.ATTACK_OPPONENT);
   }
 
+  private attack(target: IPlayer): void {
+    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, (proceed: boolean) => {
+      if (proceed) {
+        target.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+      }
+      this.cb(proceed);
+      return undefined;
+    }));
+  }
+
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.resolveInsuranceInSoloGame();
+      this.cb(true);
     } else {
-      const candidates: Array<IPlayer> = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
+      const targets: Array<IPlayer> = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
 
-      if (candidates.length > 0) {
-        if (candidates.length > 1 || candidates[0] === this.player) {
-          return new SelectPlayer(candidates, this.title, 'Decrease')
+      if (targets.length === 0) {
+        this.cb(false);
+        return undefined;
+      }
+      if (targets.length > 0) {
+        if (targets.length > 1 || targets[0] === this.player) {
+          return new SelectPlayer(targets, this.title, 'Decrease')
             .andThen((candidate) => {
-              candidate.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
-              this.cb(undefined);
+              this.attack(candidate);
               return undefined;
             });
         } else {
-          candidates[0].production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+          this.attack(targets[0]);
         }
       }
     }
 
-    this.cb(undefined);
     return undefined;
   }
 }

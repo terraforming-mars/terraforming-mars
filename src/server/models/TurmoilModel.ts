@@ -2,9 +2,8 @@ import {Color} from '../../common/Color';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {IGame} from '../IGame';
 import {PoliticalAgendas} from '../turmoil/PoliticalAgendas';
-import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {Turmoil} from '../turmoil/Turmoil';
-import {DelegatesModel, GlobalEventModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
+import {DelegatesModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
 
 export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
   return Turmoil.ifTurmoilElse(game, (turmoil) => {
@@ -34,10 +33,6 @@ export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
       reserve.push({color, number: count});
     });
 
-    const distant = globalEventToModel(turmoil.distantGlobalEvent);
-    const coming = globalEventToModel(turmoil.comingGlobalEvent);
-    const current = globalEventToModel(turmoil.currentGlobalEvent);
-
     const politicalAgendas: PoliticalAgendasModel = {
       marsFirst: PoliticalAgendas.getAgenda(turmoil, PartyName.MARS),
       scientists: PoliticalAgendas.getAgenda(turmoil, PartyName.SCIENTISTS),
@@ -64,26 +59,14 @@ export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
       parties,
       lobby,
       reserve,
-      distant,
-      coming,
-      current,
+      distant: turmoil.distantGlobalEvent?.name,
+      coming: turmoil.comingGlobalEvent?.name,
+      current: turmoil.currentGlobalEvent?.name,
       politicalAgendas,
       policyActionUsers,
     };
   },
   () => undefined);
-}
-
-function globalEventToModel(globalEvent: IGlobalEvent | undefined): GlobalEventModel | undefined {
-  if (globalEvent === undefined) {
-    return undefined;
-  }
-  return {
-    name: globalEvent.name,
-    description: globalEvent.description,
-    revealed: globalEvent.revealedDelegate,
-    current: globalEvent.currentDelegate,
-  };
 }
 
 function getParties(game: IGame): Array<PartyModel> {

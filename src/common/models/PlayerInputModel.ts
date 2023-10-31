@@ -7,6 +7,7 @@ import {Message} from '../logs/Message';
 import {PartyName} from '../turmoil/PartyName';
 import {SpaceId} from '../Types';
 import {PaymentOptions} from '../inputs/Payment';
+import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 
 export type BaseInputModel = {
   title: string | Message;
@@ -105,6 +106,11 @@ export type ShiftAresGlobalParametersModel = BaseInputModel & {
   aresData: AresData;
 }
 
+export type SelectGlobalEventModel = BaseInputModel & {
+  type: 'globalEvent';
+  globalEventNames: Array<GlobalEventName>;
+}
+
 export type PlayerInputModel =
   AndOptionsModel |
   OrOptionsModel |
@@ -122,4 +128,5 @@ export type PlayerInputModel =
   SelectProductionToLoseModel |
   SelectProjectCardToPlayModel |
   SelectSpaceModel |
-  ShiftAresGlobalParametersModel;
+  ShiftAresGlobalParametersModel |
+  SelectGlobalEventModel;

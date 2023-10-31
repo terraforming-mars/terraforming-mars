@@ -1,6 +1,7 @@
 import {CardName} from '../cards/CardName';
 import {ColonyName} from '../colonies/ColonyName';
 import {ColorWithNeutral} from '../Color';
+import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../turmoil/PartyName';
 import {SpaceId} from '../Types';
 import {Units} from '../Units';
@@ -144,6 +145,15 @@ export function isAresGlobalParametersResponse(obj: any): obj is AresGlobalParam
   return matches(obj, ['lowOceanDelta', 'highOceanDelta', 'temperatureDelta', 'oxygenDelta']);
 }
 
+export interface SelectGlobalEventResponse {
+  type: 'globalEvent',
+  globalEventName: GlobalEventName;
+}
+
+export function isSelectGlobalEventResponse(response: InputResponse): response is SelectGlobalEventResponse {
+  return response.type === 'globalEvent' && matches(response, ['type', 'globalEventName']);
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
@@ -158,4 +168,5 @@ export type InputResponse =
   SelectProductionToLoseResponse |
   SelectProjectCardToPlayResponse |
   SelectSpaceResponse |
-  ShiftAresGlobalParametersResponse;
+  ShiftAresGlobalParametersResponse |
+  SelectGlobalEventResponse;

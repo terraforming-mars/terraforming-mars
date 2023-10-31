@@ -114,9 +114,6 @@ export class UnderworldExpansion {
       throw new Error('Cannot identify excavation space, no available tokens.');
     }
     space.undergroundResources = undergroundResource;
-    if (player !== undefined) {
-      LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'identified');
-    }
     // TODO(there must be a case when a neutral player identifies that applies to the callbacks);
     if (player !== undefined) {
       for (const p of player.game.getPlayersInGenerationOrder()) {

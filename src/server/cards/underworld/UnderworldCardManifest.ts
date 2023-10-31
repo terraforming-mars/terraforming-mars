@@ -29,7 +29,7 @@ import {CentralReservoir} from './CentralReservoir';
 // import {DemetronLabs} from './DemetronLabs';
 // import {EarthquakeMachine} from './EarthquakeMachine';
 import {ElectionSponsorship} from './ElectionSponsorship';
-// import {ExcavateStandardProject} from './ExcavateStandardProject';
+import {ExcavateStandardProject} from './ExcavateStandardProject';
 // import {ExcavatorLeasing} from './ExcavatorLeasing';
 // import {ExpeditionVehicles} from './ExpeditionVehicles';
 import {FabricatedScandal} from './FabricatedScandal';
@@ -278,7 +278,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   },
 
   standardProjects: {
-    // [CardName.EXCAVATE_STANDARD_PROJECT]: {Factory: ExcavateStandardProject},
+    [CardName.EXCAVATE_STANDARD_PROJECT]: {Factory: ExcavateStandardProject},
     // [CardName.COLLUSION_STANDARD_PROJECT]: {Factory: CollusionStandardProject},
   },
 });

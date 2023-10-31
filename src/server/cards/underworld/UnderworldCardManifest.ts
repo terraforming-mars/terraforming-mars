@@ -12,7 +12,7 @@ import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 import {BatteryShipment} from './BatteryShipment';
 // import {BehemothExcavator} from './BehemothExcavator';
 import {Casino} from './Casino';
-// import {CaveCity} from './CaveCity';
+import {CaveCity} from './CaveCity';
 import {CentralReservoir} from './CentralReservoir';
 // import {ChemicalFactory} from './ChemicalFactory';
 // import {ClassActionLawsuit} from './ClassActionLawsuit';
@@ -160,7 +160,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.GEOTHERMAL_NETWORK]: {Factory: GeothermalNetwork},
     // [CardName.GLOBAL_AUDIT]: {Factory: GlobalAudit},
     // [CardName.PATENT_MANIPULATION]: {Factory: PatentManipulation},
-    // [CardName.CAVE_CITY]: {Factory: CaveCity},
+    [CardName.CAVE_CITY]: {Factory: CaveCity},
     // // 28-36
     // [CardName.UNDERGROUND_SMUGGLING_RING]: {Factory: UndergroundSmugglingRing},
     // [CardName.DEEPMINING]: {Factory: Deepmining},

@@ -6,6 +6,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IGame} from '../../IGame';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {ChooseRulingPartyDeferred} from '../../turmoil/ChooseRulingPartyDeferred';
 
 export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
   constructor() {
@@ -30,7 +31,7 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
     const game = player.game;
     game.overrideFirstPlayer(player);
     Turmoil.ifTurmoil((player.game), (turmoil) => {
-      turmoil.chooseRulingParty(player);
+      player.game.defer(new ChooseRulingPartyDeferred(player, turmoil));
     });
 
     return undefined;

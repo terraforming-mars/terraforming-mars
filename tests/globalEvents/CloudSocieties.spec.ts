@@ -13,10 +13,10 @@ describe('CloudSocieties', function() {
     const game = Game.newInstance('gameid', [player], player);
     const turmoil = Turmoil.newInstance(game);
     player.playedCards.push(new FloatingHabs());
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player.id;
-    turmoil.dominantParty.delegates.add(player.id);
+    turmoil.dominantParty.partyLeader = player;
+    turmoil.dominantParty.delegates.add(player);
     card.resolve(game, turmoil);
     game.deferredActions.runNext();
     expect(player.playedCards[0].resourceCount).to.eq(3);

@@ -17,7 +17,7 @@ import {CentralReservoir} from './CentralReservoir';
 // import {ChemicalFactory} from './ChemicalFactory';
 // import {ClassActionLawsuit} from './ClassActionLawsuit';
 // import {CloudVortexOutpost} from './CloudVortexOutpost';
-// import {CollusionStandardProject} from './CollusionStandardProject';
+import {CollusionStandardProject} from './CollusionStandardProject';
 // import {ConcessionRights} from './ConcessionRights';
 // import {CorporateBlackmail} from './CorporateBlackmail';
 // // import {CorporateTheft} from './CorporateTheft';
@@ -29,7 +29,7 @@ import {CentralReservoir} from './CentralReservoir';
 // import {DemetronLabs} from './DemetronLabs';
 // import {EarthquakeMachine} from './EarthquakeMachine';
 import {ElectionSponsorship} from './ElectionSponsorship';
-// import {ExcavateStandardProject} from './ExcavateStandardProject';
+import {ExcavateStandardProject} from './ExcavateStandardProject';
 // import {ExcavatorLeasing} from './ExcavatorLeasing';
 // import {ExpeditionVehicles} from './ExpeditionVehicles';
 import {FabricatedScandal} from './FabricatedScandal';
@@ -67,7 +67,7 @@ import {InvestorPlaza} from './InvestorPlaza';
 // import {LaborTrafficking} from './LaborTrafficking';
 // import {Landfill} from './Landfill';
 // import {LobbyingNetwork} from './LobbyingNetwork';
-// import {ManMadeVolcano} from './ManMadeVolcano';
+import {ManMadeVolcano} from './ManMadeVolcano';
 // import {MartianExpress} from './MartianExpress';
 // // import {MediaFrenzy} from './MediaFrenzy';
 // // import {MercenaryAssault} from './MercenaryAssault';
@@ -149,7 +149,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking},
     [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
     [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},
-    // [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},
+    [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},
     [CardName.TUNNELING_SUBCONTRACTOR]: {Factory: TunnelingSubcontractor},
     // // 19-27
     // [CardName.UNDERGROUND_AMUSEMENT_PARK]: {Factory: UndergroundAmusementPark},
@@ -278,8 +278,8 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   },
 
   standardProjects: {
-    // [CardName.EXCAVATE_STANDARD_PROJECT]: {Factory: ExcavateStandardProject},
-    // [CardName.COLLUSION_STANDARD_PROJECT]: {Factory: CollusionStandardProject},
+    [CardName.EXCAVATE_STANDARD_PROJECT]: {Factory: ExcavateStandardProject},
+    [CardName.COLLUSION_STANDARD_PROJECT]: {Factory: CollusionStandardProject},
   },
 });
 

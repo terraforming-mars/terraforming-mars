@@ -9,7 +9,7 @@ describe('PublicCelebrations', function() {
 
     expect(player.simpleCanPlay(card)).is.not.true;
 
-    game.turmoil!.chairman = player.id;
+    game.turmoil!.chairman = player;
     expect(player.simpleCanPlay(card)).is.true;
     card.play(player);
   });

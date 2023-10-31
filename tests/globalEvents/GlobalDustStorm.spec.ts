@@ -17,10 +17,10 @@ describe('GlobalDustStorm', function() {
     player.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
     player.megaCredits = 10;
     player2.megaCredits = 10;
     player.heat = 7;

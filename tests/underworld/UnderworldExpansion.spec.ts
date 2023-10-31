@@ -14,6 +14,7 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {TileType} from '../../src/common/TileType';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Phase} from '../../src/common/Phase';
+import {LawSuit} from '../../src/server/cards/promo/LawSuit';
 
 describe('UnderworldExpansion', function() {
   let player1: TestPlayer;
@@ -488,5 +489,21 @@ describe('UnderworldExpansion', function() {
     expect(player1.underworldData.temperatureBonus).is.undefined;
     game.increaseTemperature(player2, 1);
     expect(player1.stock.steel).eq(0);
+  });
+
+  it('corruption eliminates negative victory points', () => {
+    expect(player1.getVictoryPoints().total).eq(20);
+
+    player1.playedCards.push(new LawSuit());
+
+    expect(player1.getVictoryPoints().total).eq(19);
+
+    player1.underworldData.corruption = 1;
+
+    expect(player1.getVictoryPoints().total).eq(20);
+
+    player1.underworldData.corruption = 2;
+
+    expect(player1.getVictoryPoints().total).eq(20);
   });
 });

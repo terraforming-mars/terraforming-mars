@@ -1469,10 +1469,10 @@ export class Player implements IPlayer {
         case CardName.MOON_MINE_STANDARD_PROJECT_V2:
         case CardName.MOON_ROAD_STANDARD_PROJECT_V2:
           return gameOptions.moonStandardProjectVariant === true;
-        // case CardName.EXCAVATE_STANDARD_PROJECT:
-        //   return gameOptions.underworldExpansion === true;
-        // case CardName.COLLUSION_STANDARD_PROJECT:
-        //   return gameOptions.underworldExpansion === true && gameOptions.turmoilExtension === true;
+        case CardName.EXCAVATE_STANDARD_PROJECT:
+          return gameOptions.underworldExpansion === true;
+        case CardName.COLLUSION_STANDARD_PROJECT:
+          return gameOptions.underworldExpansion === true && gameOptions.turmoilExtension === true;
         default:
           return true;
         }

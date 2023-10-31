@@ -21,15 +21,15 @@ describe('PoliticalAlliance', function() {
 
   it('Can not play', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS);
-    greens.partyLeader = player.id;
+    greens.partyLeader = player;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     const reds = turmoil.getPartyByName(PartyName.REDS);
-    greens.partyLeader = player.id;
-    reds.partyLeader = player.id;
+    greens.partyLeader = player;
+    reds.partyLeader = player;
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

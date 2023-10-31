@@ -164,7 +164,7 @@ export class PathfindersExpansion {
     case 'delegate':
       Turmoil.ifTurmoilElse(game,
         (turmoil) => {
-          if (turmoil.hasDelegatesInReserve(player.id)) {
+          if (turmoil.hasDelegatesInReserve(player)) {
             game.defer(new SendDelegateToArea(player));
           }
         },

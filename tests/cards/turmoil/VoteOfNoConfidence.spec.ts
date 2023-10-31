@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {runAllActions} from '../../TestingUtils';
-import {isPlayerId, PlayerId} from '../../../src/common/Types';
 import {testGame} from '../../TestGame';
 
 describe('VoteOfNoConfidence', function() {
@@ -16,12 +15,11 @@ describe('VoteOfNoConfidence', function() {
     expect(player.simpleCanPlay(card)).is.not.true;
 
     const greens = game.turmoil!.getPartyByName(PartyName.GREENS);
-    greens.partyLeader = player.id;
+    greens.partyLeader = player;
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
-    expect(isPlayerId(turmoil.chairman)).is.true;
-    expect(game.getPlayerById(turmoil.chairman as PlayerId)).to.eq(player);
+    expect(turmoil.chairman).to.eq(player);
     runAllActions(game);
     expect(player.getTerraformRating()).to.eq(15);
   });
@@ -33,7 +31,7 @@ describe('VoteOfNoConfidence', function() {
     const neutralReserve = turmoil.getAvailableDelegateCount('NEUTRAL');
     turmoil.chairman = 'NEUTRAL';
     const greens = game.turmoil!.getPartyByName(PartyName.GREENS);
-    greens.partyLeader = player.id;
+    greens.partyLeader = player;
     card.play(player);
     runAllActions(game);
     expect(turmoil.getAvailableDelegateCount('NEUTRAL')).to.eq(neutralReserve+1);

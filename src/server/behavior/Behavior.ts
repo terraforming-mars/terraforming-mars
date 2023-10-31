@@ -46,7 +46,7 @@ export interface Behavior {
   stock?: Partial<CountableUnits>;
 
   /** Gain n standard resources */
-  standardResource?: number;
+  standardResource?: number | {count: number, same?: boolean};
 
   /** Add resources to this card itself */
   addResources?: Countable;

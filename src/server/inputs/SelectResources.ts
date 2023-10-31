@@ -3,6 +3,7 @@ import {AndOptions} from './AndOptions';
 import {SelectAmount} from './SelectAmount';
 import {Units} from '../../common/Units';
 import {sum} from '../../common/utils/utils';
+import {Message} from '../../common/logs/Message';
 
 export class SelectResources extends AndOptions {
   private static makeOptions(count: number, units: Units) {
@@ -41,7 +42,7 @@ export class SelectResources extends AndOptions {
   constructor(
     public player: IPlayer,
     public count: number,
-    public override title: string,
+    public override title: string | Message,
     // this isn't actually used as a paramteter, but  this class
     // is kind of strangely structured. If you can refactor this,
     // please do.

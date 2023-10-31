@@ -6,6 +6,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export class StealResources extends DeferredAction {
   constructor(
@@ -36,20 +37,25 @@ export class StealResources extends DeferredAction {
       return undefined;
     }
 
-    const stealOptions = candidates.map((candidate) => {
-      let qtyToSteal = Math.min(candidate.stock.get(this.resource), this.count);
+    const stealOptions = candidates.map((target) => {
+      let qtyToSteal = Math.min(target.stock.get(this.resource), this.count);
 
       // Botanical Experience hook.
-      if (this.resource === Resource.PLANTS && candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (this.resource === Resource.PLANTS && target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToSteal = Math.ceil(qtyToSteal / 2);
       }
 
       return new SelectOption(
-        message('Steal ${0} ${1} from ${2}', (b) => b.number(qtyToSteal).string(this.resource).player(candidate)),
+        message('Steal ${0} ${1} from ${2}', (b) => b.number(qtyToSteal).string(this.resource).player(target)),
         'Steal')
         .andThen(() => {
-          candidate.stock.deduct(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
-          this.player.stock.add(this.resource, qtyToSteal);
+          target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, (proceed) => {
+            if (proceed) {
+              target.stock.deduct(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
+              this.player.stock.add(this.resource, qtyToSteal);
+            }
+            return undefined;
+          }));
           return undefined;
         });
     });

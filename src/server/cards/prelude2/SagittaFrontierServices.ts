@@ -8,7 +8,7 @@ import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Resource} from '../../../common/Resource';
-import {Tag} from '@/common/cards/Tag';
+import {Tag} from '../../../common/cards/Tag';
 
 export class SagittaFrontierServices extends Card implements ICorporationCard {
   constructor() {

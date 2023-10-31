@@ -97,7 +97,7 @@ import {OldWorldMafia} from './OldWorldMafia';
 // import {ResearchDevelopmentHub} from './ResearchDevelopmentHub';
 // import {RobotMoles} from './RobotMoles';
 import {Scapegoat} from './Scapegoat';
-// import {SearchforLifeUnderground} from './SearchforLifeUnderground';
+import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 // import {SecretResearch} from './SecretResearch';
 // import {ServerSabotage} from './ServerSabotage';
 // // import {SocialEngineering} from './SocialEngineering';
@@ -156,7 +156,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.CASINO]: {Factory: Casino},
     // [CardName.IMPORTED_HEAVY_MACHINERY]: {Factory: ImportedHeavyMachinery},
     // [CardName.MICROPROBING_TECHNOLOGY]: {Factory: MicroprobingTechnology},
-    // [CardName.SEARCH_FOR_LIFE_UNDERGROUND]: {Factory: SearchforLifeUnderground},
+    [CardName.SEARCH_FOR_LIFE_UNDERGROUND]: {Factory: SearchforLifeUnderground},
     // [CardName.GEOTHERMAL_NETWORK]: {Factory: GeothermalNetwork},
     // [CardName.GLOBAL_AUDIT]: {Factory: GlobalAudit},
     // [CardName.PATENT_MANIPULATION]: {Factory: PatentManipulation},

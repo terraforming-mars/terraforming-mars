@@ -458,10 +458,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.NEUTRAL_DELEGATE, amount, options));
   }
 
-  // public identify(count: number = 1, options?: ItemOptions) {
-  //   const item = new CardRenderItem(CardRenderItemType.IDENTIFY, count, options);
-  //   return this._appendToRow(item);
-  // }
+  public identify(count: number = 1, options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.IDENTIFY, count, options);
+    return this._appendToRow(item);
+  }
 
   public excavate(count: number = 1, options?: ItemOptions) {
     const item = new CardRenderItem(CardRenderItemType.EXCAVATE, count, options);

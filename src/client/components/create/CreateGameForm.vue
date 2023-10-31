@@ -152,6 +152,12 @@
                                 <div class="create-game-expansion-icon expansion-icon-starwars"></div>
                                 <span v-i18n>Star Wars 🆕(β)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <!-- <input type="checkbox" name="ceo" id="underworld-checkbox" v-model="underworldExpansion">
+                            <label for="underworld-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-underworld"></div>
+                                <span v-i18n>Underworld 🆕(α)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
+                            </label> -->
                         </div>
 
                         <div class="create-game-page-column">

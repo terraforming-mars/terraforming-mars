@@ -26,11 +26,11 @@ describe('SponsoredProjects', function() {
     }
     player2.playedCards.push(new Fish());
 
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
     expect(player.playedCards[0].resourceCount).to.eq(2);

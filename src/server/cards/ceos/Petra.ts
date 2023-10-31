@@ -38,7 +38,7 @@ export class Petra extends CeoCard {
     const turmoil = player.game.turmoil;
     if (turmoil === undefined || this.isDisabled === true) return false;
     const numNeutralDelegates = DELEGATES_FOR_NEUTRAL_PLAYER - turmoil.getAvailableDelegateCount('NEUTRAL');
-    const playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player.id);
+    const playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player);
     return playerTotalDelegateCount >= numNeutralDelegates;
   }
 
@@ -55,7 +55,7 @@ export class Petra extends CeoCard {
       for (let i = 0; i < neutralDelegates; i++) {
         // Add the delegate _before_ removing the Neutral, otherwise we get errors when it
         // attempts to find the new party leader if there are no remaining members in the party.
-        turmoil.sendDelegateToParty(player.id, party.name, player.game);
+        turmoil.sendDelegateToParty(player, party.name, player.game);
         turmoil.removeDelegateFromParty('NEUTRAL', party.name, player.game);
         // This would be nice to use:
         // turmoil.replaceDelegateFromParty('NEUTRAL', player.id, party.name, player.game);
@@ -69,8 +69,8 @@ export class Petra extends CeoCard {
 
     // Replace chairman if it is neutral
     if (turmoil.chairman === 'NEUTRAL') {
-      turmoil.setNewChairman(player.id, player.game, /* setAgenda */ false);
-      turmoil.delegateReserve.remove(player.id);
+      turmoil.setNewChairman(player, player.game, /* setAgenda */ false);
+      turmoil.delegateReserve.remove(player);
       count += 1;
     }
     // If we dont do this player will not get the bonus for POLITICAN Awards

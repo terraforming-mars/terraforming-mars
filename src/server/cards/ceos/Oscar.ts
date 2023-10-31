@@ -33,13 +33,13 @@ export class Oscar extends CeoCard {
       return false;
     }
     const turmoil = Turmoil.getTurmoil(player.game);
-    return turmoil.hasDelegatesInReserve(player.id) && turmoil.chairman !== player.id;
+    return turmoil.hasDelegatesInReserve(player) && turmoil.chairman !== player;
   }
 
   public action(player: IPlayer): PlayerInput | undefined {
     const turmoil = Turmoil.getTurmoil(player.game);
-    turmoil.setNewChairman(player.id, player.game, /* setAgenda*/false, /* gainTR*/false);
-    turmoil.delegateReserve.remove(player.id);
+    turmoil.setNewChairman(player, player.game, /* setAgenda*/false, /* gainTR*/false);
+    turmoil.delegateReserve.remove(player);
     // Increase totalDelegatesPlaced manually since we're not using SendDeletageToArea()
     // If we dont do this player will not get the bonus for POLITICAN Awards
     player.totalDelegatesPlaced += 1;

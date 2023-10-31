@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {Delegate} from '../../turmoil/Turmoil';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
 import {IParty} from '../../turmoil/parties/IParty';
@@ -49,20 +48,14 @@ export class BannedDelegate extends Card implements IProjectCard {
           if (entry[0] === 'NEUTRAL') {
             players.push('NEUTRAL');
           } else {
-            players.push(player.game.getPlayerById(entry[0]));
+            players.push(entry[0]);
           }
         }
 
         if (players.length > 0) {
           const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party')
             .andThen((selectedPlayer) => {
-              let playerToRemove: Delegate;
-              if (selectedPlayer === 'NEUTRAL') {
-                playerToRemove = 'NEUTRAL';
-              } else {
-                playerToRemove = selectedPlayer.id;
-              }
-              turmoil.removeDelegateFromParty(playerToRemove, party.name, player.game);
+              turmoil.removeDelegateFromParty(selectedPlayer, party.name, player.game);
               this.log(player, party, selectedPlayer);
               return undefined;
             });

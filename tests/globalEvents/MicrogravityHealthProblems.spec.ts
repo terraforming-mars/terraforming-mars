@@ -22,10 +22,10 @@ describe('MicrogravityHealthProblems', function() {
     colony2.colonies.push(player2.id);
     game.colonies.push(colony1);
     game.colonies.push(colony2);
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
     player.megaCredits = 20;
     player2.megaCredits = 20;
     card.resolve(game, turmoil);

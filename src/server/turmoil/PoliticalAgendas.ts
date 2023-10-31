@@ -74,7 +74,7 @@ export class PoliticalAgendas {
     if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
       const agenda = this.getAgenda(turmoil, rulingParty.name);
       game.defer(new ChoosePoliticalAgenda(
-        game.getPlayerById(chairman),
+        chairman,
         rulingParty,
         (bonusId) => {
           agenda.bonusId = bonusId;

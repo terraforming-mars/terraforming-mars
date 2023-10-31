@@ -30,12 +30,12 @@ describe('Oscar', function() {
 
   it('Takes OPG action', function() {
     turmoil.chairman = 'NEUTRAL';
-    const preActionDelegates = turmoil.delegateReserve.get(player.id);
+    const preActionDelegates = turmoil.delegateReserve.get(player);
     card.action(player);
     runAllActions(game);
-    expect(turmoil.chairman).eq(player.id);
+    expect(turmoil.chairman).eq(player);
     // Delegates in reserve decreases
-    expect(turmoil.delegateReserve.get(player.id)).is.eq(preActionDelegates - 1);
+    expect(turmoil.delegateReserve.get(player)).is.eq(preActionDelegates - 1);
   });
 
   it('Can only act once per game', function() {
@@ -48,12 +48,12 @@ describe('Oscar', function() {
   });
 
   it('Previous Chairman player gets their delegate back to reserve after Oscar OPG', function() {
-    turmoil.chairman = player2.id;
-    const prePlayer2Delegates = turmoil.delegateReserve.get(player2.id);
+    turmoil.chairman = player2;
+    const prePlayer2Delegates = turmoil.delegateReserve.get(player2);
     card.action(player);
     runAllActions(game);
-    expect(turmoil.chairman).eq(player.id);
-    expect(turmoil.delegateReserve.get(player2.id)).is.eq(prePlayer2Delegates + 1);
+    expect(turmoil.chairman).eq(player);
+    expect(turmoil.delegateReserve.get(player2)).is.eq(prePlayer2Delegates + 1);
   });
 
   it('Cannot take OPG if no delegates in reserve', function() {
@@ -64,7 +64,7 @@ describe('Oscar', function() {
 
   it('Cannot take OPG if already chairman', function() {
     expect(card.canAct(player)).is.true;
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
     expect(card.canAct(player)).is.false;
   });
 
@@ -72,7 +72,7 @@ describe('Oscar', function() {
     const tr = player.getTerraformRating();
     card.action(player);
     runAllActions(game);
-    expect(turmoil.chairman).eq(player.id);
+    expect(turmoil.chairman).eq(player);
     expect(player.getTerraformRating()).is.eq(tr);
   });
 
@@ -83,7 +83,7 @@ describe('Oscar', function() {
     card.action(player);
     runAllActions(game);
 
-    expect(turmoil.chairman).eq(player.id);
+    expect(turmoil.chairman).eq(player);
     expect(player.getTerraformRating()).is.eq(tr+1);
   });
 

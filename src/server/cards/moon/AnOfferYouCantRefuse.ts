@@ -1,6 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerId} from '../../../common/Types';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -30,8 +29,8 @@ export class AnOfferYouCantRefuse extends Card {
     });
   }
 
-  private isReplaceableDelegate(delegate: Delegate, player: IPlayer, party: IParty): delegate is PlayerId {
-    if (delegate === player.id || delegate === 'NEUTRAL') {
+  private isReplaceableDelegate(delegate: Delegate, player: IPlayer, party: IParty): delegate is IPlayer {
+    if (delegate === player || delegate === 'NEUTRAL') {
       return false;
     }
 
@@ -41,12 +40,12 @@ export class AnOfferYouCantRefuse extends Card {
     }
 
     // If you're the party leader and the delegate isn't neutral, the exchange is OK.
-    if (party.partyLeader === player.id) {
+    if (party.partyLeader === player) {
       return true;
     }
 
     const partyLeaderDelegateCount = party.delegates.get(party.partyLeader);
-    const yourDelegateCount = party.delegates.get(player.id);
+    const yourDelegateCount = party.delegates.get(player);
 
     if (delegate !== party.partyLeader) {
       // The only reason you might not replace a non-party leader delegate is if you don't start with
@@ -61,7 +60,7 @@ export class AnOfferYouCantRefuse extends Card {
       // You also can't replace a party leader's delegate if another non-party leader has the same number of delegates as the
       // current party leader. Otherwise that other player's delegate would take the lead.
       for (const m of party.delegates.multiplicities()) {
-        if (m[0] === party.partyLeader || m[0] === player.id) {
+        if (m[0] === party.partyLeader || m[0] === player) {
           continue;
         }
         if (m[1] === partyLeaderDelegateCount) {
@@ -75,7 +74,7 @@ export class AnOfferYouCantRefuse extends Card {
   // You can play this if you have an available delegate, and if you can swap with a non-neutral delegate without changing the party leader
   public override bespokeCanPlay(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    if (!turmoil.hasDelegatesInReserve(player.id)) {
+    if (!turmoil.hasDelegatesInReserve(player)) {
       return false;
     }
 
@@ -89,7 +88,7 @@ export class AnOfferYouCantRefuse extends Card {
     return false;
   }
 
-  private moveToAnotherParty(game: IGame, from: PartyName, delegate: PlayerId): OrOptions {
+  private moveToAnotherParty(game: IGame, from: PartyName, delegate: IPlayer): OrOptions {
     const orOptions = new OrOptions();
     const turmoil = Turmoil.getTurmoil(game);
 
@@ -119,11 +118,11 @@ export class AnOfferYouCantRefuse extends Card {
           continue;
         }
 
-        const color = game.getPlayerById(delegate).color;
+        const color = delegate.color;
         const option = new SelectOption(message('${0} / ${1}', (b) => b.party(party).playerColor(color))).andThen(() => {
-          turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
+          turmoil.replaceDelegateFromParty(delegate, player, party.name, game);
           turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
-          return this.moveToAnotherParty(game, party.name, player.id);
+          return this.moveToAnotherParty(game, party.name, player);
         });
         orOptions.options.push(option);
       }

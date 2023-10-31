@@ -10,7 +10,7 @@ describe('SupportedResearch', function() {
     expect(player.simpleCanPlay(card)).is.not.true;
 
     const scientists = game.turmoil!.getPartyByName(PartyName.SCIENTISTS);
-    scientists.delegates.add(player.id, 2);
+    scientists.delegates.add(player, 2);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

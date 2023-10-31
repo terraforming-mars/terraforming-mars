@@ -46,13 +46,13 @@ export class TempestConsultancy extends Card implements ICorporationCard {
   }
 
   public canAct(player: IPlayer) {
-    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) > 0;
+    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) > 0;
   }
 
   public action(player: IPlayer) {
     let count = Math.floor(player.tags.count(Tag.MOON) / 5);
     count = Math.min(count, 3);
-    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id));
+    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player));
     if (count > 0) {
       player.game.defer(new SendDelegateToArea(
         player,

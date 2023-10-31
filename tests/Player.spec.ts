@@ -372,21 +372,21 @@ describe('Player', function() {
 
     const turmoil = game.turmoil!;
 
-    expect(turmoil.usedFreeDelegateAction.has(player.id)).is.false;
+    expect(turmoil.usedFreeDelegateAction.has(player)).is.false;
 
     const freeLobbyAction = cast(getSendADelegateOption(player), SelectParty);
 
     expect(freeLobbyAction.title).eq('Send a delegate in an area (from lobby)');
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(0);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(0);
 
     freeLobbyAction.cb(PartyName.KELVINISTS);
     runAllActions(game);
 
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(1);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(1);
 
     // Now the free lobby action is used, only the 5MC option is available.
     player.megaCredits = 4;
-    expect(turmoil.usedFreeDelegateAction.has(player.id)).is.true;
+    expect(turmoil.usedFreeDelegateAction.has(player)).is.true;
     expect(getSendADelegateOption(player)).is.undefined;
 
     player.megaCredits = 5;
@@ -398,7 +398,7 @@ describe('Player', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(2);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(2);
   });
 
   it('Prelude action cycle', () => {

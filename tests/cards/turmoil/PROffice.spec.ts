@@ -15,7 +15,7 @@ describe('PROffice', function() {
     expect(player.simpleCanPlay(card)).is.not.true;
 
     const unity = game.turmoil!.getPartyByName(PartyName.UNITY);
-    unity.delegates.add(player.id, 2);
+    unity.delegates.add(player, 2);
     expect(player.simpleCanPlay(card)).is.true;
 
     player.playedCards.push(card2, card3);

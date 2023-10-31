@@ -22,10 +22,10 @@ describe('Revolution', function() {
     turmoil = Turmoil.newInstance(game);
 
     turmoil.initGlobalEvent(game);
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
   });
 
   it('resolve play', function() {

@@ -21,7 +21,7 @@ describe('RedTourismWave', function() {
     expect(player.simpleCanPlay(card)).is.not.true;
 
     const reds = game.turmoil!.getPartyByName(PartyName.REDS);
-    reds.delegates.add(player.id, 2);
+    reds.delegates.add(player, 2);
     expect(player.simpleCanPlay(card)).is.true;
   });
 

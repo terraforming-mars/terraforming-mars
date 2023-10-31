@@ -17,7 +17,7 @@ import {CentralReservoir} from './CentralReservoir';
 // import {ChemicalFactory} from './ChemicalFactory';
 // import {ClassActionLawsuit} from './ClassActionLawsuit';
 // import {CloudVortexOutpost} from './CloudVortexOutpost';
-// import {CollusionStandardProject} from './CollusionStandardProject';
+import {CollusionStandardProject} from './CollusionStandardProject';
 // import {ConcessionRights} from './ConcessionRights';
 // import {CorporateBlackmail} from './CorporateBlackmail';
 // // import {CorporateTheft} from './CorporateTheft';
@@ -279,7 +279,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
 
   standardProjects: {
     [CardName.EXCAVATE_STANDARD_PROJECT]: {Factory: ExcavateStandardProject},
-    // [CardName.COLLUSION_STANDARD_PROJECT]: {Factory: CollusionStandardProject},
+    [CardName.COLLUSION_STANDARD_PROJECT]: {Factory: CollusionStandardProject},
   },
 });
 

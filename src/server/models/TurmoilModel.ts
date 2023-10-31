@@ -2,7 +2,6 @@ import {Color} from '../../common/Color';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {IGame} from '../IGame';
 import {PoliticalAgendas} from '../turmoil/PoliticalAgendas';
-import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {Delegate, Turmoil} from '../turmoil/Turmoil';
 import {DelegatesModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
 

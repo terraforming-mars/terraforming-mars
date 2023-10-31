@@ -31,6 +31,7 @@ import {AwardScorer} from '../awards/AwardScorer';
 import {SpaceId} from '../../common/Types';
 import {cardsToModel, coloniesToModel} from './ModelUtils';
 import {runId} from '../utils/server-ids';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export class Server {
   public static getSimpleGameModel(game: IGame): SimpleGameModel {
@@ -245,6 +246,8 @@ export class Server {
       tradesThisGeneration: player.colonies.tradesThisGeneration,
       victoryPointsBreakdown: player.getVictoryPoints(),
       victoryPointsByGeneration: player.victoryPointsByGeneration,
+      corruption: player.underworldData.corruption,
+      excavations: UnderworldExpansion.excavationMarkerCount(player),
     };
   }
 
@@ -396,6 +399,7 @@ export class Server {
       twoCorpsVariant: options.twoCorpsVariant,
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
+      underworldExpansion: options.underworldExpansion,
     };
   }
 

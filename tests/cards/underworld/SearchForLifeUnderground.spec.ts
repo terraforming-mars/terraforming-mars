@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
-import {Tag} from '../../../src/common/cards/Tag';
+import {SearchforLifeUnderground} from '../../../src/server/cards/underworld/SearchforLifeUnderground';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {fakeCard, runAllActions, setOxygenLevel} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('SearchForLife', function() {
-  let card: SearchForLife;
+  let card: SearchforLifeUnderground;
   let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
-    card = new SearchForLife();
+    card = new SearchforLifeUnderground();
     [game, player] = testGame(2);
   });
 
@@ -23,8 +23,10 @@ describe('SearchForLife', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Can not play if oxygen level too high', function() {
-    setOxygenLevel(game, 7);
+  it('Can not play if temperature too high', function() {
+    setTemperature(game, -18);
+    expect(card.canPlay(player)).is.true;
+    setTemperature(game, -16);
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -40,41 +42,19 @@ describe('SearchForLife', function() {
   });
 
 
-  it('action fails, no tags', function() {
+  it('action fails, no microbes', function() {
     player.playedCards.push(card);
 
     player.megaCredits = 1;
 
-    game.projectDeck.drawPile.push(fakeCard({}));
-
     card.action(player);
     runAllActions(game); // pays for card.
-    expect(player.megaCredits).to.eq(0);
-    expect(card.resourceCount).eq(0);
-  });
+    game.underworldData.tokens.push('corruption1');
 
-  it('action fails, wrong tag', function() {
-    player.playedCards.push(card);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    const space = selectSpace.spaces[0];
+    selectSpace.cb(space);
 
-    player.megaCredits = 1;
-
-    game.projectDeck.drawPile.push(fakeCard({tags: [Tag.SCIENCE]}));
-
-    card.action(player);
-    runAllActions(game); // pays for card.
-    expect(player.megaCredits).to.eq(0);
-    expect(card.resourceCount).eq(0);
-  });
-
-  it('action fails, wild tag', function() {
-    player.playedCards.push(card);
-
-    player.megaCredits = 1;
-
-    game.projectDeck.drawPile.push(fakeCard({tags: [Tag.WILD]}));
-
-    card.action(player);
-    runAllActions(game); // pays for card.
     expect(player.megaCredits).to.eq(0);
     expect(card.resourceCount).eq(0);
   });
@@ -84,10 +64,14 @@ describe('SearchForLife', function() {
 
     player.megaCredits = 1;
 
-    game.projectDeck.drawPile.push(fakeCard({tags: [Tag.WILD, Tag.MICROBE]}));
-
     card.action(player);
     runAllActions(game); // pays for card.
+    game.underworldData.tokens.push('microbe1');
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    const space = selectSpace.spaces[0];
+    selectSpace.cb(space);
+
     expect(player.megaCredits).to.eq(0);
     expect(card.resourceCount).eq(1);
   });

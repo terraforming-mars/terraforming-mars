@@ -10,7 +10,7 @@ import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 // import {ArtesianAquifer} from './ArtesianAquifer';
 // import {BatteryFactory} from './BatteryFactory';
 import {BatteryShipment} from './BatteryShipment';
-// import {BehemothExcavator} from './BehemothExcavator';
+import {BehemothExcavator} from './BehemothExcavator';
 import {Casino} from './Casino';
 import {CaveCity} from './CaveCity';
 import {CentralReservoir} from './CentralReservoir';
@@ -164,7 +164,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // 28-36
     // [CardName.UNDERGROUND_SMUGGLING_RING]: {Factory: UndergroundSmugglingRing},
     // [CardName.DEEPMINING]: {Factory: Deepmining},
-    // [CardName.BEHEMOTH_EXCAVATOR]: {Factory: BehemothExcavator},
+    [CardName.BEHEMOTH_EXCAVATOR]: {Factory: BehemothExcavator},
     [CardName.LOBBYING_NETWORK]: {Factory: LobbyingNetwork},
     // [CardName.CONCESSION_RIGHTS]: {Factory: ConcessionRights},
     // [CardName.ORBITAL_LASER_DRILL]: {Factory: OrbitalLaserDrill},

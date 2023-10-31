@@ -34,8 +34,10 @@ export type PublicPlayerModel = {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
+  corruption: number,
   energy: number;
   energyProduction: number;
+  excavations: number,
   fleetSize: number;
   heat: number;
   heatProduction: number;

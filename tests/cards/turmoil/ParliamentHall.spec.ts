@@ -15,7 +15,7 @@ describe('ParliamentHall', function() {
     expect(player.simpleCanPlay(card)).is.not.true;
 
     const mars = game.turmoil!.getPartyByName(PartyName.MARS);
-    mars.delegates.add(player.id, 2);
+    mars.delegates.add(player, 2);
     expect(player.simpleCanPlay(card)).is.true;
 
     player.playedCards.push(card2, card3);

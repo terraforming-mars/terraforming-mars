@@ -26,11 +26,11 @@ describe('BeholdTheEmperor', () => {
 
     expect(card.canPlay(player)).is.false;
 
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
 
     expect(card.canPlay(player)).is.false;
 
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
 
     expect(card.canPlay(player)).is.true;
   });
@@ -46,16 +46,16 @@ describe('BeholdTheEmperor', () => {
       party.delegates.clear();
     });
 
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
     turmoil.rulingParty = kelvinists;
 
-    turmoil.sendDelegateToParty(player2.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
 
     card.play(player);
 
@@ -67,7 +67,7 @@ describe('BeholdTheEmperor', () => {
     turmoil.endGeneration(game);
     runAllActions(game);
 
-    expect(turmoil.chairman).to.eq(player.id);
+    expect(turmoil.chairman).to.eq(player);
     expect(player.getTerraformRating()).to.eq(20);
     expect(player2.getTerraformRating()).to.eq(19);
 

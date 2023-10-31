@@ -25,17 +25,17 @@ describe('Banned Delegate', function() {
   });
 
   it('Cannot play', function() {
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
     expect(player.simpleCanPlay(card)).is.true;
 
     const greens = turmoil.getPartyByName(PartyName.GREENS);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.GREENS, game);
 
     // This card returns OrOptions, or SelectDelegate. It's
     // By putting 2 delegates in the Reds party, Reds is a second option.
@@ -51,13 +51,13 @@ describe('Banned Delegate', function() {
   });
 
   it('Removes duplicates', function() {
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
     expect(player.simpleCanPlay(card)).is.true;
 
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.GREENS, game);
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
     turmoil.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
 

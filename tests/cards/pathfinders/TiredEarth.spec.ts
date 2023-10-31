@@ -21,10 +21,10 @@ describe('TiredEarth', function() {
     player.plants = 20;
     player2.plants = 20;
 
-    turmoil.chairman = player2.id;
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.chairman = player2;
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
 

@@ -56,7 +56,7 @@ describe('WildlifeDome', function() {
     turmoil.rulingParty = reds;
     PoliticalAgendas.setNextAgenda(turmoil, game);
 
-    greens.delegates.add(player.id, 2);
+    greens.delegates.add(player, 2);
     expect(player.canPlay(card)).is.not.true;
 
     player.megaCredits = 17;

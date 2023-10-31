@@ -27,7 +27,7 @@ export class Recruitment extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     const turmoil = Turmoil.getTurmoil(player.game);
-    if (turmoil.hasDelegatesInReserve(player.id) === false) {
+    if (turmoil.hasDelegatesInReserve(player) === false) {
       return false;
     }
 

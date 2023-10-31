@@ -9,9 +9,9 @@ export type TurmoilModel = {
   parties: Array<PartyModel>;
   lobby: Array<Color>;
   reserve: Array<DelegatesModel>;
-  distant: GlobalEventModel | undefined;
-  coming: GlobalEventModel | undefined;
-  current: GlobalEventModel | undefined;
+  distant: GlobalEventName | undefined;
+  coming: GlobalEventName | undefined;
+  current: GlobalEventName | undefined;
   politicalAgendas: PoliticalAgendasModel | undefined;
   policyActionUsers: Array<PolicyUser>;
 }
@@ -31,13 +31,6 @@ export type PartyModel = {
 export type DelegatesModel = {
   color: Color;
   number: number;
-}
-
-export type GlobalEventModel = {
-  name: GlobalEventName;
-  description: string;
-  revealed: PartyName;
-  current: PartyName;
 }
 
 export type PoliticalAgendasModel = {

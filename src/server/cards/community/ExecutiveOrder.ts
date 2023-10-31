@@ -6,11 +6,8 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../../turmoil/Turmoil';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
 import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
-import {message} from '../../logs/MessageBuilder';
+import {SelectGlobalEvent} from '../../inputs/SelectGlobalEvent';
 
 export class ExecutiveOrder extends PreludeCard implements IProjectCard {
   constructor() {
@@ -41,29 +38,21 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
       }
     }
 
-    player.game.defer(new SimpleDeferredAction(player, () => {
-      return new OrOptions(
-        ...globalEvents.map((event) => {
-          // TODO(kberg): Render as SelectGlobalEvent
-          const description = message('${0}: ${1} Neutral delegate added: ${2}', (b) => b.globalEvent(event).string(event.description).partyName(event.currentDelegate));
-          return new SelectOption(description).andThen(() => {
-            turmoil.currentGlobalEvent = event;
-            turmoil.sendDelegateToParty('NEUTRAL', event.currentDelegate, player.game);
+    return new SelectGlobalEvent(globalEvents)
+      .andThen((event) => {
+        player.game.log('${0} selected Global Event ${1} for the current gflobal event', (b) => b.player(player).globalEvent(event));
+        turmoil.currentGlobalEvent = event;
+        turmoil.sendDelegateToParty('NEUTRAL', event.currentDelegate, player.game);
+        player.game.log('Neutral delegate added to ${0}', (b) => b.partyName(event.currentDelegate));
 
-            globalEvents.forEach((ge) => {
-              if (ge.name !== event.name) {
-                turmoil.globalEventDealer.discard(ge);
-              }
-            });
+        globalEvents.forEach((ge) => {
+          if (ge.name !== event.name) {
+            turmoil.globalEventDealer.discard(ge);
+          }
+        });
 
-            return undefined;
-          });
-        }),
-      );
-    }));
-
-    // This gets played -- after -- drawing the global event, so don't turn it into Behavior yet.
-    player.game.defer(new SendDelegateToArea(player, 'Select where to send 2 delegates', {count: 2}));
-    return undefined;
+        player.game.defer(new SendDelegateToArea(player, 'Select where to send 2 delegates', {count: 2}));
+        return undefined;
+      });
   }
 }

@@ -26,7 +26,7 @@
             <Card :card="{name: cardName, resources: getResourcesOnCard(cardName)}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames.elements" :key="globalEventName">
-            <global-event :globalEvent="getGlobalEventModel(globalEventName)" type="prior" :showIcons="false"></global-event>
+            <global-event :globalEventName="globalEventName" type="prior" :showIcons="false"></global-event>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="colonyName in colonyNames.elements" :key="colonyName">
             <colony :colony="getColony(colonyName)"></colony>
@@ -55,8 +55,6 @@ import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
-import {getGlobalEventModel} from '@/client/turmoil/ClientGlobalEventManifest';
-import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
@@ -345,9 +343,6 @@ export default Vue.extend({
     },
     lastGenerationClass(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
-    },
-    getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
-      return getGlobalEventModel(globalEventName);
     },
     // TODO(kberg): getColony could have the actual game colony by changing this component's properties.
     getColony(colonyName: ColonyName): ColonyModel {

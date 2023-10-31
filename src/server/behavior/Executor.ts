@@ -32,6 +32,7 @@ import {message} from '../logs/MessageBuilder';
 import {IdentifySpacesDeferred} from '../underworld/IdentifySpacesDeferred';
 import {ExcavateSpacesDeferred} from '../underworld/ExcavateSpacesDeferred';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {SelectResource} from '../inputs/SelectResource';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -275,11 +276,24 @@ export class Executor implements BehaviorExecutor {
       player.stock.addUnits(units, {log: true});
     }
     if (behavior.standardResource) {
-      player.defer(new SelectResources(
-        player,
-        behavior.standardResource,
-        `Gain ${behavior.standardResource} resources.`,
-      ));
+      const entry = behavior.standardResource;
+      const count = typeof(entry) === 'number' ? entry : entry.count;
+      const same = typeof(entry) === 'number' ? false : entry.same ?? false;
+      if (same === false) {
+        player.defer(
+          new SelectResources(
+            player,
+            count,
+            message('Gain ${0} standard resources', (b) => b.number(count))));
+      } else {
+        player.defer(
+          new SelectResource(
+            message('Gain ${0} units of a standard resource', (b) => b.number(count)),
+            Units.keys,
+            (unit) => {
+              player.stock.add(Units.ResourceMap[unit], count, {log: true});
+            }));
+      }
     }
     if (behavior.steelValue === 1) {
       player.increaseSteelValue();

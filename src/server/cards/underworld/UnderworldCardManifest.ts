@@ -11,7 +11,7 @@ import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 // import {BatteryFactory} from './BatteryFactory';
 import {BatteryShipment} from './BatteryShipment';
 // import {BehemothExcavator} from './BehemothExcavator';
-// import {Casino} from './Casino';
+import {Casino} from './Casino';
 // import {CaveCity} from './CaveCity';
 import {CentralReservoir} from './CentralReservoir';
 // import {ChemicalFactory} from './ChemicalFactory';
@@ -153,7 +153,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.TUNNELING_SUBCONTRACTOR]: {Factory: TunnelingSubcontractor},
     // // 19-27
     // [CardName.UNDERGROUND_AMUSEMENT_PARK]: {Factory: UndergroundAmusementPark},
-    // [CardName.CASINO]: {Factory: Casino},
+    [CardName.CASINO]: {Factory: Casino},
     // [CardName.IMPORTED_HEAVY_MACHINERY]: {Factory: ImportedHeavyMachinery},
     // [CardName.MICROPROBING_TECHNOLOGY]: {Factory: MicroprobingTechnology},
     // [CardName.SEARCH_FOR_LIFE_UNDERGROUND]: {Factory: SearchforLifeUnderground},

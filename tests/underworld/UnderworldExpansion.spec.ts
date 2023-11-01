@@ -4,7 +4,7 @@ import {testGame} from '../TestGame';
 import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansion';
 import {Game} from '../../src/server/Game';
 import {UnderworldData} from '../../src/server/underworld/UnderworldData';
-import {cast, fakeCard, forceGenerationEnd, runAllActions} from '../TestingUtils';
+import {cast, fakeCard, forceGenerationEnd, formatMessage, runAllActions} from '../TestingUtils';
 import {Units} from '../../src/common/Units';
 import {Cryptocurrency} from '../../src/server/cards/pathfinders/Cryptocurrency';
 import {MartianCulture} from '../../src/server/cards/pathfinders/MartianCulture';
@@ -17,6 +17,7 @@ import {Phase} from '../../src/common/Phase';
 import {LawSuit} from '../../src/server/cards/promo/LawSuit';
 import {PlayerInput} from '../../src/server/PlayerInput';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
+import {PrivateMilitaryContractor} from '../../src/server/cards/underworld/PrivateMilitaryContractor';
 
 describe('UnderworldExpansion', function() {
   let player1: TestPlayer;
@@ -574,5 +575,61 @@ describe('UnderworldExpansion', function() {
     expect(tester.called).is.true;
     expect(tester.proceed).is.false;
     expect(player1.underworldData.corruption).eq(0);
+  });
+
+  it('maybeBlockAttack - privateMilitaryContractor - no resources', () => {
+    const privateMilitaryContractor = new PrivateMilitaryContractor();
+    player1.playedCards.push(privateMilitaryContractor);
+    const tester = new MaybeBlockAttackTester();
+    privateMilitaryContractor.resourceCount = 0;
+
+    tester.run();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.true;
+  });
+
+  it('maybeBlockAttack - privateMilitaryContractor - resources', () => {
+    const privateMilitaryContractor = new PrivateMilitaryContractor();
+    player1.playedCards.push(privateMilitaryContractor);
+    const tester = new MaybeBlockAttackTester();
+    privateMilitaryContractor.resourceCount = 2;
+
+    tester.run();
+
+    expect(tester.called).is.false;
+
+    const orOptions = cast(tester.playerInput, OrOptions);
+
+    expect(orOptions.options.length).eq(2);
+    orOptions.options[0].cb();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.false;
+    expect(player1.underworldData.corruption).eq(0);
+    expect(privateMilitaryContractor.resourceCount).eq(1);
+  });
+
+  it('maybeBlockAttack - privateMilitaryContractor - resources and corruption', () => {
+    const privateMilitaryContractor = new PrivateMilitaryContractor();
+    player1.playedCards.push(privateMilitaryContractor);
+    const tester = new MaybeBlockAttackTester();
+    privateMilitaryContractor.resourceCount = 2;
+    player1.underworldData.corruption = 2;
+
+    tester.run();
+
+    expect(tester.called).is.false;
+
+    const orOptions = cast(tester.playerInput, OrOptions);
+
+    expect(orOptions.options.length).eq(3);
+    expect(formatMessage(orOptions.options[0].title)).matches(/Private Military Contractor/);
+    orOptions.options[0].cb();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.false;
+    expect(player1.underworldData.corruption).eq(2);
+    expect(privateMilitaryContractor.resourceCount).eq(1);
   });
 });

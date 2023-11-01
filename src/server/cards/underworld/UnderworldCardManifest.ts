@@ -89,7 +89,7 @@ import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 // import {PlantTax} from './PlantTax';
 // import {PriceWars} from './PriceWars';
 import {PrivateInvestigator} from './PrivateInvestigator';
-// import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
+import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
 // import {PrivateResorts} from './PrivateResorts';
 // import {Prospecting} from './Prospecting';
 // import {PublicSpaceline} from './PublicSpaceline';
@@ -185,7 +185,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.MINING_MARKET_INSIDER]: {Factory: MiningMarketInsider},
     // [CardName.SERVER_SABOTAGE]: {Factory: ServerSabotage},
     // [CardName.SPACE_WARGAMES]: {Factory: SpaceWargames},
-    // [CardName.PRIVATE_MILITARY_CONTRACTOR]: {Factory: PrivateMilitaryContractor},
+    [CardName.PRIVATE_MILITARY_CONTRACTOR]: {Factory: PrivateMilitaryContractor},
     // [CardName.SPACE_PRIVATEERS]: {Factory: SpacePrivateers},
     // [CardName.PERSONAL_SPACECRUISER]: {Factory: PersonalSpacecruiser},
     // [CardName.HYPERSPACE_DRIVE_PROTOTYPE]: {Factory: HyperspaceDrivePrototype},

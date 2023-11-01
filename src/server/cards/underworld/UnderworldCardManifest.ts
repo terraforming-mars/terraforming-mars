@@ -72,12 +72,12 @@ import {ManMadeVolcano} from './ManMadeVolcano';
 // // import {MediaFrenzy} from './MediaFrenzy';
 // // import {MercenaryAssault} from './MercenaryAssault';
 // import {MicroGeodesics} from './MicroGeodesics';
-// import {Microgravimetry} from './Microgravimetry';
+import {Microgravimetry} from './Microgravimetry';
 // import {MicroprobingTechnology} from './MicroprobingTechnology';
 // import {MiningMarketInsider} from './MiningMarketInsider';
 // import {Monopoly} from './Monopoly';
 // import {Nanofoundry} from './Nanofoundry';
-// import {NarrativeSpin} from './NarrativeSpin';
+import {NarrativeSpin} from './NarrativeSpin';
 // // import {Neutrinograph} from './Neutrinograph';
 import {Nightclubs} from './Nightclubs';
 import {OffWorldTaxHaven} from './OffWorldTaxHaven';
@@ -107,7 +107,7 @@ import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 // import {StagedProtests} from './StagedProtests';
 // import {StandardTechnology} from './StandardTechnology';
 // import {StarVegas} from './StarVegas';
-// import {StemFieldSubsidies} from './StemFieldSubsidies';
+import {StemFieldSubsidies} from './StemFieldSubsidies';
 // import {SubnauticPirates} from './SubnauticPirates';
 import {SubterraneanSea} from './SubterraneanSea';
 // // import {ThiolavaVents} from './ThiolavaVents';
@@ -172,13 +172,13 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.EXCAVATOR_LEASING]: {Factory: ExcavatorLeasing},
     [CardName.LANDFILL]: {Factory: Landfill},
     // // 37-45
-    // [CardName.NARRATIVE_SPIN]: {Factory: NarrativeSpin},
+    [CardName.NARRATIVE_SPIN]: {Factory: NarrativeSpin},
     [CardName.PRIVATE_INVESTIGATOR]: {Factory: PrivateInvestigator},
     // [CardName.CORPORATE_BLACKMAIL]: {Factory: CorporateBlackmail},
     [CardName.SCAPEGOAT]: {Factory: Scapegoat},
     // // [CardName.FRIENDS_IN_HIGH_PLACES]: {Factory: FriendsinHighPlaces}, // ANOTHER card payment thing.
-    // [CardName.MICROGRAVIMETRY]: {Factory: Microgravimetry},
-    // [CardName.STEM_FIELD_SUBSIDIES]: {Factory: StemFieldSubsidies},
+    [CardName.MICROGRAVIMETRY]: {Factory: Microgravimetry},
+    [CardName.STEM_FIELD_SUBSIDIES]: {Factory: StemFieldSubsidies},
     [CardName.TITAN_MANUFACTURING_COLONY]: {Factory: TitanManufacturingColony}, // Special token
     [CardName.ROBOT_MOLES]: {Factory: RobotMoles},
     // // 46-54

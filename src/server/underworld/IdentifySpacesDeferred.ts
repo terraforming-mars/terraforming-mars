@@ -29,7 +29,10 @@ export class IdentifySpacesDeferred extends DeferredAction<Array<Space>> {
         return undefined;
       });
   }
-  public execute(): PlayerInput {
+  public execute(): PlayerInput | undefined {
+    if (this.count === 0) {
+      return undefined;
+    }
     return this.selectSpace();
   }
 }

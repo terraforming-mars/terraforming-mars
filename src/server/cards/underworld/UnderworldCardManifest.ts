@@ -7,7 +7,7 @@ import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 // import {AnubisSecurities} from './AnubisSecurities';
 // import {ArboristCollective} from './ArboristCollective';
 // // import {AresMedia} from './AresMedia';
-// import {ArtesianAquifer} from './ArtesianAquifer';
+import {ArtesianAquifer} from './ArtesianAquifer';
 // import {BatteryFactory} from './BatteryFactory';
 import {BatteryShipment} from './BatteryShipment';
 import {BehemothExcavator} from './BehemothExcavator';
@@ -196,7 +196,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.MICRO_GEODESICS]: {Factory: MicroGeodesics},
     // // [CardName.NEUTRINOGRAPH]: {Factory: Neutrinograph},
     // [CardName.SOIL_EXPORT]: {Factory: SoilExport},
-    // [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},
+    [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},
     // [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},
     // // [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft}, // Tricky resource stuff and tricky corruption stuff.
     // // [CardName.UNDERGROUND_RESEARCH_CENTER]: {Factory: UndergroundResearchCenter}, // I want to take time to think about the tag rule.

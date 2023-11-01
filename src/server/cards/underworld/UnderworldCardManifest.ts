@@ -88,7 +88,7 @@ import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 // import {PlanetaryRightsBuyout} from './PlanetaryRightsBuyout';
 // import {PlantTax} from './PlantTax';
 // import {PriceWars} from './PriceWars';
-// import {PrivateInvestigator} from './PrivateInvestigator';
+import {PrivateInvestigator} from './PrivateInvestigator';
 // import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
 // import {PrivateResorts} from './PrivateResorts';
 // import {Prospecting} from './Prospecting';
@@ -173,7 +173,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.LANDFILL]: {Factory: Landfill},
     // // 37-45
     // [CardName.NARRATIVE_SPIN]: {Factory: NarrativeSpin},
-    // [CardName.PRIVATE_INVESTIGATOR]: {Factory: PrivateInvestigator},
+    [CardName.PRIVATE_INVESTIGATOR]: {Factory: PrivateInvestigator},
     // [CardName.CORPORATE_BLACKMAIL]: {Factory: CorporateBlackmail},
     [CardName.SCAPEGOAT]: {Factory: Scapegoat},
     // // [CardName.FRIENDS_IN_HIGH_PLACES]: {Factory: FriendsinHighPlaces}, // ANOTHER card payment thing.

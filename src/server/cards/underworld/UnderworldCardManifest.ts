@@ -84,7 +84,7 @@ import {OffWorldTaxHaven} from './OffWorldTaxHaven';
 import {OldWorldMafia} from './OldWorldMafia';
 import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 // import {PatentManipulation} from './PatentManipulation';
-// import {PersonalSpacecruiser} from './PersonalSpacecruiser';
+import {PersonalSpacecruiser} from './PersonalSpacecruiser';
 // import {PlanetaryRightsBuyout} from './PlanetaryRightsBuyout';
 // import {PlantTax} from './PlantTax';
 // import {PriceWars} from './PriceWars';
@@ -187,7 +187,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.SPACE_WARGAMES]: {Factory: SpaceWargames},
     [CardName.PRIVATE_MILITARY_CONTRACTOR]: {Factory: PrivateMilitaryContractor},
     // [CardName.SPACE_PRIVATEERS]: {Factory: SpacePrivateers},
-    // [CardName.PERSONAL_SPACECRUISER]: {Factory: PersonalSpacecruiser},
+    [CardName.PERSONAL_SPACECRUISER]: {Factory: PersonalSpacecruiser},
     // [CardName.HYPERSPACE_DRIVE_PROTOTYPE]: {Factory: HyperspaceDrivePrototype},
     // [CardName.STAR_VEGAS]: {Factory: StarVegas},
     // [CardName.PRIVATE_RESORTS]: {Factory: PrivateResorts},

@@ -111,7 +111,7 @@ import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 // import {SubnauticPirates} from './SubnauticPirates';
 import {SubterraneanSea} from './SubterraneanSea';
 // // import {ThiolavaVents} from './ThiolavaVents';
-// import {TitanManufacturingColony} from './TitanManufacturingColony';
+import {TitanManufacturingColony} from './TitanManufacturingColony';
 import {TunnelBoringMachine} from './TunnelBoringMachine';
 // import {TunnelingOperation} from './TunnelingOperation';
 import {TunnelingSubcontractor} from './TunnelingSubcontractor';
@@ -179,7 +179,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.FRIENDS_IN_HIGH_PLACES]: {Factory: FriendsinHighPlaces}, // ANOTHER card payment thing.
     // [CardName.MICROGRAVIMETRY]: {Factory: Microgravimetry},
     // [CardName.STEM_FIELD_SUBSIDIES]: {Factory: StemFieldSubsidies},
-    // [CardName.TITAN_MANUFACTURING_COLONY]: {Factory: TitanManufacturingColony}, // Special token
+    [CardName.TITAN_MANUFACTURING_COLONY]: {Factory: TitanManufacturingColony}, // Special token
     // [CardName.ROBOT_MOLES]: {Factory: RobotMoles},
     // // 46-54
     // [CardName.MINING_MARKET_INSIDER]: {Factory: MiningMarketInsider},

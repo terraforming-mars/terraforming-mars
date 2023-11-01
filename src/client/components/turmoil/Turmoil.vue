@@ -2,9 +2,9 @@
 <template>
     <div class="turmoil" v-trim-whitespace>
       <div class="events-board">
-        <global-event v-if="turmoil.distant" :globalEvent="turmoil.distant" type="distant"></global-event>
-        <global-event v-if="turmoil.coming" :globalEvent="turmoil.coming" type="coming"></global-event>
-        <global-event v-if="turmoil.current" :globalEvent="turmoil.current" type="current"></global-event>
+        <global-event v-if="turmoil.distant" :globalEventName="turmoil.distant" type="distant"></global-event>
+        <global-event v-if="turmoil.coming" :globalEventName="turmoil.coming" type="coming"></global-event>
+        <global-event v-if="turmoil.current" :globalEventName="turmoil.current" type="current"></global-event>
       </div>
 
       <div class="turmoil-board">

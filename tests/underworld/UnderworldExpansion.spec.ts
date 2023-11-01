@@ -15,6 +15,8 @@ import {TileType} from '../../src/common/TileType';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Phase} from '../../src/common/Phase';
 import {LawSuit} from '../../src/server/cards/promo/LawSuit';
+import {PlayerInput} from '../../src/server/PlayerInput';
+import {OrOptions} from '../../src/server/inputs/OrOptions';
 
 describe('UnderworldExpansion', function() {
   let player1: TestPlayer;
@@ -505,5 +507,72 @@ describe('UnderworldExpansion', function() {
     player1.underworldData.corruption = 2;
 
     expect(player1.getVictoryPoints().total).eq(20);
+  });
+
+  class MaybeBlockAttackTester {
+    public called: boolean = false;
+    public proceed: boolean = false;
+    public playerInput: PlayerInput | undefined = undefined;
+    public run() {
+      this.playerInput = UnderworldExpansion.maybeBlockAttack(player1, player2, (proceed) => {
+        this.proceed = proceed;
+        this.called = true;
+        return undefined;
+      });
+    }
+  }
+
+  it('maybeBlockAttack - disabled', () => {
+    [game, player1, player2] = testGame(2, {underworldExpansion: false});
+    const tester = new MaybeBlockAttackTester();
+
+    tester.run();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.true;
+    expect(tester.playerInput).is.undefined;
+  });
+
+  it('maybeBlockAttack - cannot afford', () => {
+    player1.underworldData.corruption = 0;
+    const tester = new MaybeBlockAttackTester();
+
+    tester.run();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.true;
+    expect(tester.playerInput).is.undefined;
+  });
+
+  it('maybeBlockAttack - do not block', () => {
+    player1.underworldData.corruption = 1;
+    const tester = new MaybeBlockAttackTester();
+
+    tester.run();
+
+    expect(tester.called).is.false;
+
+    const orOptions = cast(tester.playerInput, OrOptions);
+    orOptions.options[1].cb();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.true;
+    expect(player1.underworldData.corruption).eq(1);
+  });
+
+  it('maybeBlockAttack - block', () => {
+    player1.underworldData.corruption = 1;
+    const tester = new MaybeBlockAttackTester();
+
+    tester.run();
+
+    expect(tester.called).is.false;
+
+    const orOptions = cast(tester.playerInput, OrOptions);
+    orOptions.options[0].cb();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.false;
+    expect(player1.underworldData.corruption).eq(0);
   });
 });

@@ -99,7 +99,7 @@
         <h2 v-i18n>Global Events</h2>
         <template v-if="types.globalEvents">
           <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
-            <global-event v-if="showGlobalEvent(globalEventName)" :globalEvent="getGlobalEventModel(globalEventName)" type="prior"></global-event>
+            <global-event v-if="showGlobalEvent(globalEventName)" :globalEventName="globalEventName" type="prior"></global-event>
           </div>
         </template>
       </section>
@@ -155,8 +155,7 @@ import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {GlobalEventModel} from '@/common/models/TurmoilModel';
-import {allGlobalEventNames, getGlobalEvent, getGlobalEventModel, getGlobalEventOrThrow} from '@/client/turmoil/ClientGlobalEventManifest';
+import {allGlobalEventNames, getGlobalEvent, getGlobalEventOrThrow} from '@/client/turmoil/ClientGlobalEventManifest';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import Colony from '@/client/components/colonies/Colony.vue';
@@ -466,9 +465,6 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     getAllColonyNames() {
       return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).concat(PATHFINDERS_COLONY_NAMES);
-    },
-    getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
-      return getGlobalEventModel(globalEventName);
     },
     filter(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
       const filterText = this.filterText.toLocaleUpperCase();

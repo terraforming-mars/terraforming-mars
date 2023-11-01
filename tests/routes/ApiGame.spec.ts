@@ -89,6 +89,7 @@ describe('ApiGame', () => {
           'undoOption': false,
           'venusNextExtension': false,
           'twoCorpsVariant': false,
+          'underworldExpansion': false,
         },
       },
     );

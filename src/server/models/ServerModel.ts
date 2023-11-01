@@ -356,6 +356,12 @@ export class Server {
       if (space.id === nomads) {
         model.nomads = true;
       }
+      if (space.undergroundResources !== undefined) {
+        model.undergroundResources = space.undergroundResources;
+      }
+      if (space.excavator !== undefined) {
+        model.excavator = space.excavator.color;
+      }
 
       return model;
     });

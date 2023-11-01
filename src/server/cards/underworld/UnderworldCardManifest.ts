@@ -95,7 +95,7 @@ import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 // import {PublicSpaceline} from './PublicSpaceline';
 // import {RecklessDetonation} from './RecklessDetonation';
 // import {ResearchDevelopmentHub} from './ResearchDevelopmentHub';
-// import {RobotMoles} from './RobotMoles';
+import {RobotMoles} from './RobotMoles';
 import {Scapegoat} from './Scapegoat';
 import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 // import {SecretResearch} from './SecretResearch';
@@ -180,7 +180,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.MICROGRAVIMETRY]: {Factory: Microgravimetry},
     // [CardName.STEM_FIELD_SUBSIDIES]: {Factory: StemFieldSubsidies},
     [CardName.TITAN_MANUFACTURING_COLONY]: {Factory: TitanManufacturingColony}, // Special token
-    // [CardName.ROBOT_MOLES]: {Factory: RobotMoles},
+    [CardName.ROBOT_MOLES]: {Factory: RobotMoles},
     // // 46-54
     // [CardName.MINING_MARKET_INSIDER]: {Factory: MiningMarketInsider},
     // [CardName.SERVER_SABOTAGE]: {Factory: ServerSabotage},

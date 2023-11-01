@@ -18,4 +18,15 @@ export class UnderworldTestHelper {
     expect(space.excavator).eq(player);
     expect(player.plants - plants).eq(1);
   }
+
+  public static assertIsIdentificationAction(player: TestPlayer, input: PlayerInput | undefined) {
+    const selectSpace = cast(input, SelectSpace);
+    const space = selectSpace.spaces[0];
+
+    expect(space.undergroundResources).is.undefined;
+
+    player.defer(selectSpace.cb(space));
+
+    expect(space.undergroundResources).is.not.undefined;
+  }
 }

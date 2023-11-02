@@ -69,6 +69,12 @@ export class ArabiaTerraBoard extends MarsBoard {
     }
   }
 
+  public override getAvailableSpacesForOcean(player: IPlayer): readonly Space[] {
+    // Nomads can be found on cove spaces
+    return super.getAvailableSpacesForOcean(player)
+      .filter((space) => space.id !== player.game.nomadSpace);
+  }
+
   public static deserialize(board: SerializedBoard, players: Array<IPlayer>): ArabiaTerraBoard {
     return new ArabiaTerraBoard(Board.deserializeSpaces(board.spaces, players));
   }

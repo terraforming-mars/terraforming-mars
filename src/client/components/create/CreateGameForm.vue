@@ -69,7 +69,7 @@
                             <input type="checkbox" name="promo" id="promo-checkbox" v-model="promoCardsOption">
                             <label for="promo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-promo"></div>
-                                <span v-i18n>Promos 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <div class="create-game-subsection-label" v-i18n>Fan-made</div>
@@ -150,14 +150,14 @@
                             <input type="checkbox" name="starwars" id="starwars-checkbox" v-model="starWarsExpansion">
                             <label for="starwars-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-starwars"></div>
-                                <span v-i18n>Star Wars 🆕(β)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Star Wars(β)</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
-                            <!-- <input type="checkbox" name="ceo" id="underworld-checkbox" v-model="underworldExpansion">
+                            <input type="checkbox" name="ceo" id="underworld-checkbox" v-model="underworldExpansion">
                             <label for="underworld-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-underworld"></div>
-                                <span v-i18n>Underworld 🆕(α)</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
-                            </label> -->
+                                <span v-i18n>Underworld (⚠️ in development)</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
                         </div>
 
                         <div class="create-game-page-column">
@@ -608,6 +608,7 @@ export default (Vue as WithRefs<Refs>).extend({
       customCeos: [],
       startingCeos: 3,
       starWarsExpansion: false,
+      underworldExpansion: false,
     };
   },
   components: {
@@ -874,6 +875,8 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'moon': return model.moonExpansion;
       case 'pathfinders': return model.pathfindersExpansion;
       case 'ceo': return model.ceoExtension;
+      case 'starwars': return model.starWarsExpansion;
+      case 'underworld': return model.underworldExpansion;
       default: throw new Error('Unknown module: ' + module);
       }
     },
@@ -983,7 +986,6 @@ export default (Vue as WithRefs<Refs>).extend({
       const ceoExtension = this.ceoExtension;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
-      const starWarsExpansion = this.starWarsExpansion;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1152,7 +1154,8 @@ export default (Vue as WithRefs<Refs>).extend({
         ceoExtension,
         customCeos,
         startingCeos,
-        starWarsExpansion,
+        starWarsExpansion: this.starWarsExpansion,
+        underworldExpansion: this.underworldExpansion,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

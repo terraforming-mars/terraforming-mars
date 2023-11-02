@@ -11,7 +11,10 @@ export class NobelPrize extends PreludeCard {
       name: CardName.NOBEL_PRIZE,
       tags: [Tag.WILD],
       victoryPoints: 2,
-      startingMegacredits: 2,
+
+      behavior: {
+        stock: {megacredits: 21},
+      },
 
       metadata: {
         cardNumber: '',

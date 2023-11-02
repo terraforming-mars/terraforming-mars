@@ -33,6 +33,7 @@ import {IdentifySpacesDeferred} from '../underworld/IdentifySpacesDeferred';
 import {ExcavateSpacesDeferred} from '../underworld/ExcavateSpacesDeferred';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
+import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -96,6 +97,9 @@ export class Executor implements BehaviorExecutor {
         }
       }
       if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
+        return false;
+      }
+      if (spend.resourceFromAnyCard && player.getCardsWithResources(spend.resourceFromAnyCard.type).length === 0) {
         return false;
       }
       if (spend.corruption && player.underworldData.corruption < spend.corruption) {
@@ -226,15 +230,13 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.spend !== undefined) {
       const spend = behavior.spend;
+      const remainder = {...behavior};
+      delete remainder['spend'];
+
       if (spend.megacredits) {
         player.game.defer(new SelectPaymentDeferred(player, spend.megacredits, {
           title: TITLES.payForCardAction(card.name),
-        }))
-          .andThen(() => {
-            const copy = {...behavior};
-            delete copy['spend'];
-            this.execute(copy, player, card);
-          });
+        })).andThen(() => this.execute(remainder, player, card));
         // Exit early as the rest of handled by the deferred action.
         return;
       }
@@ -251,9 +253,7 @@ export class Executor implements BehaviorExecutor {
       }
       if (spend.heat) {
         player.defer(player.spendHeat(spend.heat, () => {
-          const copy = {...behavior};
-          delete copy['spend'];
-          this.execute(copy, player, card);
+          this.execute(remainder, player, card);
           return undefined;
         }));
         // Exit early as the rest of handled by the deferred action.
@@ -261,6 +261,12 @@ export class Executor implements BehaviorExecutor {
       }
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);
+      }
+      if (spend.resourceFromAnyCard) {
+        player.game.defer(new RemoveResourcesFromCard(player, spend.resourceFromAnyCard.type, 1, {ownCardsOnly: true, blockable: false}))
+          .andThen(() => this.execute(remainder, player, card));
+        // Exit early as the rest of handled by the deferred action.
+        return;
       }
       if (spend.corruption) {
         UnderworldExpansion.loseCorruption(player, spend.corruption);

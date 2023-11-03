@@ -273,7 +273,7 @@ export class Player implements IPlayer {
   }
 
   public decreaseTitaniumValue(): void {
-    if (this.titaniumValue > constants.DEFAULT_TITANIUM_VALUE) {
+    if (this.titaniumValue > 0) {
       this.titaniumValue--;
     }
   }
@@ -291,7 +291,7 @@ export class Player implements IPlayer {
   }
 
   public decreaseSteelValue(): void {
-    if (this.steelValue > constants.DEFAULT_STEEL_VALUE) {
+    if (this.steelValue > 0) {
       this.steelValue--;
     }
   }

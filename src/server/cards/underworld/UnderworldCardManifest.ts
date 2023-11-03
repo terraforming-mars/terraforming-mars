@@ -87,7 +87,7 @@ import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 import {PersonalSpacecruiser} from './PersonalSpacecruiser';
 // import {PlanetaryRightsBuyout} from './PlanetaryRightsBuyout';
 // import {PlantTax} from './PlantTax';
-// import {PriceWars} from './PriceWars';
+import {PriceWars} from './PriceWars';
 import {PrivateInvestigator} from './PrivateInvestigator';
 import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
 import {PrivateResorts} from './PrivateResorts';
@@ -200,7 +200,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},
     // // [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft}, // Tricky resource stuff and tricky corruption stuff.
     // // [CardName.UNDERGROUND_RESEARCH_CENTER]: {Factory: UndergroundResearchCenter}, // I want to take time to think about the tag rule.
-    // [CardName.PRICE_WARS]: {Factory: PriceWars},
+    [CardName.PRICE_WARS]: {Factory: PriceWars},
     // // 64-72
     [CardName.ANTI_TRUST_CRACKDOWN]: {Factory: AntiTrustCrackdown},
     // [CardName.MONOPOLY]: {Factory: Monopoly},

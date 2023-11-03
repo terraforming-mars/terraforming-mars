@@ -9,7 +9,7 @@ import {CardResource} from '../../../common/CardResource';
 export class CloudCity extends Card implements IProjectCard {
   constructor() {
     super({
-      type: CardType.ACTIVE,
+      type: CardType.AUTOMATED,
       name: CardName.CLOUD_CITY,
       tags: [Tag.VENUS],
       cost: 5,

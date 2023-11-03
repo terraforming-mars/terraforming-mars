@@ -6,14 +6,14 @@ import {cast, runAllActions, setOxygenLevel, setTemperature} from '../../Testing
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
-describe('SearchForLife', function() {
+describe('SearchForLifeUnderground', function() {
   let card: SearchforLifeUnderground;
   let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new SearchforLifeUnderground();
-    [game, player] = testGame(2);
+    [game, player] = testGame(2, {underworldExpansion: true});
   });
 
   it('Can not act if no MC', function() {

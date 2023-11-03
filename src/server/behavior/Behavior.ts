@@ -13,6 +13,7 @@ import {Countable, CountableUnits} from './Countable';
 import {PlacementType} from '../boards/PlacementType';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {Units} from '../../common/Units';
+import {NoAttributes} from './NoAttributes';
 
 type ValueOf<Obj> = Obj[keyof Obj];
 type OneOnly<Obj, Key extends keyof Obj> = { [key in Exclude<keyof Obj, Key>]: null } & Pick<Obj, Key>;
@@ -157,7 +158,7 @@ export type Behavior = {
     identify?: Countable,
     excavate?: number | {count: Countable, ignorePlacementRestrictions?: boolean},
     corruption?: Countable,
-    // markThisGeneration?: NoAttributes,
+    markThisGeneration?: NoAttributes,
   },
 }
 

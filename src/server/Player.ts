@@ -616,8 +616,7 @@ export class Player implements IPlayer {
     this.energy += this.production.energy;
     this.heat += this.production.heat;
 
-    // this.tableau.forEach((card) => card.onProductionPhase?.(this));
-    this.corporations.forEach((card) => card.onProductionPhase?.(this));
+    this.tableau.forEach((card) => card.onProductionPhase?.(this));
     // Turn off CEO OPG actions that were activated this generation
     for (const card of this.playedCards) {
       if (isCeoCard(card)) {

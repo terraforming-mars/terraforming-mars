@@ -97,7 +97,7 @@ import {PrivateResorts} from './PrivateResorts';
 import {RobotMoles} from './RobotMoles';
 import {Scapegoat} from './Scapegoat';
 import {SearchforLifeUnderground} from './SearchforLifeUnderground';
-// import {SecretResearch} from './SecretResearch';
+import {SecretResearch} from './SecretResearch';
 // import {ServerSabotage} from './ServerSabotage';
 // // import {SocialEngineering} from './SocialEngineering';
 import {SoilExport} from './SoilExport';
@@ -270,7 +270,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.CENTRAL_RESERVOIR]: {Factory: CentralReservoir},
     [CardName.BATTERY_SHIPMENT]: {Factory: BatteryShipment},
     // [CardName.DEEPWATER_DOME]: {Factory: DeepwaterDome},
-    // [CardName.SECRET_RESEARCH]: {Factory: SecretResearch},
+    [CardName.SECRET_RESEARCH]: {Factory: SecretResearch},
     // [CardName.PROSPECTING]: {Factory: Prospecting, compatibility: 'colonies'},
     [CardName.ELECTION_SPONSORSHIP]: {Factory: ElectionSponsorship, compatibility: 'turmoil'},
     // [CardName.CLOUD_VORTEX_OUTPOST]: {Factory: CloudVortexOutpost, compatibility: 'venus'},

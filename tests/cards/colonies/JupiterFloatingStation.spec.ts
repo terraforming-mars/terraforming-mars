@@ -11,7 +11,7 @@ describe('JupiterFloatingStation', function() {
 
   beforeEach(function() {
     card = new JupiterFloatingStation();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play', function() {

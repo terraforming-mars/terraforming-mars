@@ -11,7 +11,7 @@ describe('AsteroidDeflectionSystem', function() {
 
   beforeEach(function() {
     card = new AsteroidDeflectionSystem();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {

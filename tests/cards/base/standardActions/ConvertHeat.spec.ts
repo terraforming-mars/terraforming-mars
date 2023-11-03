@@ -14,7 +14,7 @@ describe('ConvertHeat', function() {
 
   beforeEach(function() {
     card = new ConvertHeat();
-    [/* skipped */, player] = testGame(2, {turmoilExtension: true});
+    [/* game */, player] = testGame(2, {turmoilExtension: true});
   });
 
   it('Can not act without heat', function() {

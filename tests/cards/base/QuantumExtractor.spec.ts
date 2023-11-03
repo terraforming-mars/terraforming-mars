@@ -11,7 +11,7 @@ describe('QuantumExtractor', function() {
 
   beforeEach(function() {
     card = new QuantumExtractor();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {

@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('Solarnet', function() {
   it('Should play', function() {
     const card = new Solarnet();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     expect(player.simpleCanPlay(card)).is.not.true;
 
     player.tagsForTest = {venus: 1};

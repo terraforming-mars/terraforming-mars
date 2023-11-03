@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('16 Psyche', function() {
   it('Should play', function() {
     const card = new Psyche();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
 
     // Sanity
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);

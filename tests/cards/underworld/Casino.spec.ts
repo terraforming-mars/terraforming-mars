@@ -6,7 +6,7 @@ import {addCity, cast} from '../../TestingUtils';
 describe('Casino', () => {
   it('canPlay', () => {
     const card = new Casino();
-    const [/* skipped */, player, player2] = testGame(2);
+    const [/* game */, player, player2] = testGame(2);
 
     player.underworldData.corruption = 0;
 
@@ -20,7 +20,7 @@ describe('Casino', () => {
 
   it('Should play', () => {
     const card = new Casino();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.underworldData.corruption = 0;
 

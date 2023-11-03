@@ -9,7 +9,7 @@ describe('Meltworks', function() {
 
   beforeEach(function() {
     card = new Meltworks();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not act', function() {

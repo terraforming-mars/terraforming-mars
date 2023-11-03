@@ -12,7 +12,7 @@ describe('PersonalAgenda', function() {
 
   beforeEach(function() {
     card = new PersonalAgenda();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

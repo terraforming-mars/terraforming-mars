@@ -23,7 +23,7 @@ describe('Chimera', function() {
 
   beforeEach(function() {
     card = new Chimera();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 

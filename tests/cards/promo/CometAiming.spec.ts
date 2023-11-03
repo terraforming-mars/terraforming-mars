@@ -13,7 +13,7 @@ describe('CometAiming', function() {
 
   beforeEach(function() {
     card = new CometAiming();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play', function() {

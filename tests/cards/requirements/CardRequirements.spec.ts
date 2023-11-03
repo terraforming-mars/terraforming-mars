@@ -32,7 +32,7 @@ describe('CardRequirements', function() {
   const adaptationTechnology = new AdaptationTechnology();
 
   beforeEach(function() {
-    [/* skipped */, player, player2] = testGame(2, {turmoilExtension: true});
+    [/* game */, player, player2] = testGame(2, {turmoilExtension: true});
   });
 
   it('satisfies properly for oceans', function() {

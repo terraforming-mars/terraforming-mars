@@ -22,7 +22,7 @@ describe('ValuableGases', function() {
 
   beforeEach(function() {
     card = new ValuableGases();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
 
     // Floating Habs is active, has floaters, requires 2 science, and costs 20
     floatingHabs = new FloatingHabs();

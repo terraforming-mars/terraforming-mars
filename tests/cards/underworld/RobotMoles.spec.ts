@@ -7,7 +7,7 @@ import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 describe('RobotMoles', () => {
   it('canAct', () => {
     const card = new RobotMoles();
-    const [/* skipped */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
 
     expect(card.canAct(player)).is.false;
 

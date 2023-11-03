@@ -11,7 +11,7 @@ describe('DysonScreens', function() {
 
   beforeEach(function() {
     card = new DysonScreens();
-    [/* skipped */, player] = testGame(1, {pathfindersExpansion: true});
+    [/* game */, player] = testGame(1, {pathfindersExpansion: true});
   });
 
   it('play', () => {

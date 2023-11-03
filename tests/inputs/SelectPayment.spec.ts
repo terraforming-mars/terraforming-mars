@@ -13,7 +13,7 @@ describe('SelectPayment', function() {
   };
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Simple', function() {

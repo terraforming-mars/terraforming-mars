@@ -14,7 +14,7 @@ describe('Warmonger', () => {
 
   beforeEach(() => {
     award = new Warmonger();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('score', () => {

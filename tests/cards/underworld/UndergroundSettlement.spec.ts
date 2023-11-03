@@ -8,7 +8,7 @@ import {TileType} from '../../../src/common/TileType';
 describe('UndergroundSettlement', () => {
   it('play', () => {
     const card = new UndergroundSettlement();
-    const [/* skipped */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
 
     const selectSpace = cast(card.play(player), SelectSpace);
     const space = selectSpace.spaces[0];

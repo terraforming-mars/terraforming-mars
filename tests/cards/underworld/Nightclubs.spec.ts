@@ -6,7 +6,7 @@ import {addCity, cast, runAllActions} from '../../TestingUtils';
 describe('Nightclubs', () => {
   it('canPlay', () => {
     const card = new Nightclubs();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
 
     expect(card.canPlay(player)).is.false;
 

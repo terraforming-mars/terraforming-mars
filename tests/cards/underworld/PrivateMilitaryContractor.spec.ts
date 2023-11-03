@@ -8,7 +8,7 @@ describe('PrivateMilitaryContractor', () => {
 
   it('canAct', () => {
     const card = new PrivateMilitaryContractor();
-    const [/* skipped */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
 
     player.titanium = 0;
 

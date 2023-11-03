@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('FueledGenerators', function() {
   it('Should play', function() {
     const card = new FueledGenerators();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
 
     player.production.add(Resource.PLANTS, 1);
     card.play(player);

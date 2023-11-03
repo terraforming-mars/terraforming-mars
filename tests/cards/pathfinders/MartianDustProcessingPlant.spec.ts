@@ -10,7 +10,7 @@ describe('MartianDustProcessingPlant', function() {
 
   beforeEach(function() {
     card = new MartianDustProcessingPlant();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('canPlay', function() {

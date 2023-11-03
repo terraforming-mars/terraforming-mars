@@ -13,7 +13,7 @@ describe('CorporateStronghold', function() {
 
   beforeEach(function() {
     card = new CorporateStronghold();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     player.popWaitingFor(); // Removing SelectInitalCards.
   });
 

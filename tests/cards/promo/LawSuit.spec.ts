@@ -13,7 +13,7 @@ describe('LawSuit', () => {
 
   beforeEach(() => {
     card = new LawSuit();
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('Cannot play if no resources or production reduced this turn', () => {

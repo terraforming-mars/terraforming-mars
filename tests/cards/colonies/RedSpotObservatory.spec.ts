@@ -11,7 +11,7 @@ describe('RedSpotObservatory', function() {
 
   beforeEach(function() {
     card = new RedSpotObservatory();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {

@@ -7,7 +7,7 @@ import {Units} from '../../../src/common/Units';
 describe('Landfill', () => {
   it('Should play', () => {
     const card = new Landfill();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.production.override({megacredits: -1, steel: 1, heat: 1});
 

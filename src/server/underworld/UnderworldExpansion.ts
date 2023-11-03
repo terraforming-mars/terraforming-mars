@@ -105,6 +105,9 @@ export class UnderworldExpansion {
 
   /** Identify the token at `space`, optionally trigger callbacks */
   public static identify(game: IGame, space: Space, player?: IPlayer): void {
+    if (game.gameOptions.underworldExpansion !== true) {
+      throw new Error('Underworld expansion not in this game');
+    }
     if (space.undergroundResources !== undefined) {
       return;
     }
@@ -175,6 +178,10 @@ export class UnderworldExpansion {
   }
 
   public static excavate(player: IPlayer, space: Space) {
+    if (player.game.gameOptions.underworldExpansion !== true) {
+      throw new Error('Underworld expansion not in this game');
+    }
+
     if (space.undergroundResources === undefined) {
       this.identify(player.game, space, player);
     }

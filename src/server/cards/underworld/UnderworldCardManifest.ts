@@ -101,7 +101,7 @@ import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 // import {SecretResearch} from './SecretResearch';
 // import {ServerSabotage} from './ServerSabotage';
 // // import {SocialEngineering} from './SocialEngineering';
-// import {SoilExport} from './SoilExport';
+import {SoilExport} from './SoilExport';
 // import {SpacePrivateers} from './SpacePrivateers';
 import {SpaceWargames} from './SpaceWargames';
 // import {StagedProtests} from './StagedProtests';
@@ -195,7 +195,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.EARTHQUAKE_MACHINE]: {Factory: EarthquakeMachine},
     // [CardName.MICRO_GEODESICS]: {Factory: MicroGeodesics},
     // // [CardName.NEUTRINOGRAPH]: {Factory: Neutrinograph},
-    // [CardName.SOIL_EXPORT]: {Factory: SoilExport},
+    [CardName.SOIL_EXPORT]: {Factory: SoilExport},
     [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},
     // [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},
     // // [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft}, // Tricky resource stuff and tricky corruption stuff.

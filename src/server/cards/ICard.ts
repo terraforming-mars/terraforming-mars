@@ -113,6 +113,8 @@ export interface ICard {
    */
   onExcavation?(player: IPlayer, space: Space): void;
 
+  onProductionPhase?(player: IPlayer): void;
+
   cost?: number; /** Used with IProjectCard and PreludeCard. */
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;
@@ -132,6 +134,10 @@ export interface ICard {
    * ONLY store plain JSON data. Classes, objects, functions, will all be incorrectly serialized.
    */
   data?: JSONValue;
+
+  /** The generation the card was activated. Used for Duncan and Underworld cards. */
+  // TODO(kberg): move to json?
+  generationUsed?: number;
 }
 
 export interface IActionCard {

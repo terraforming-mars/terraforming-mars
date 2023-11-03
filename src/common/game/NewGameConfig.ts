@@ -82,4 +82,5 @@ export interface NewGameConfig {
   customCeos: Array<CardName>;
   startingCeos: number;
   starWarsExpansion: boolean,
+  underworldExpansion: boolean,
 }

@@ -24,7 +24,7 @@ export class HellasBoard extends MarsBoard {
     // y=0
     builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT);
     // y=1
-    builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT).land(PLANT).land(PLANT);
+    builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT).land(PLANT, STEEL).land(PLANT).land(PLANT);
     // y=2
     builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(...TWO_PLANTS).land(PLANT, DRAW_CARD);
     // y=3

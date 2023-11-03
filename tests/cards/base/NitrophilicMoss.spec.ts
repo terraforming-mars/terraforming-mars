@@ -12,7 +12,7 @@ describe('NitrophilicMoss', function() {
 
   beforeEach(function() {
     card = new NitrophilicMoss();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play without enough oceans', function() {

@@ -13,7 +13,7 @@ describe('BioPrintingFacility', function() {
 
   beforeEach(function() {
     card = new BioPrintingFacility();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     player.playedCards.push(card);
   });
 

@@ -19,7 +19,7 @@ describe('SelectProjectCardToPlay', function() {
   };
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     aquiferPumping = new AquiferPumping();
     ioMiningIndustries = new IoMiningIndustries();
     called = false;

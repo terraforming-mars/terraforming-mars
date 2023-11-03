@@ -11,7 +11,7 @@ describe('CO2Reducers', function() {
 
   beforeEach(function() {
     card = new CO2Reducers();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

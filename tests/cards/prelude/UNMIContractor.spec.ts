@@ -4,7 +4,7 @@ import {UNMIContractor} from '../../../src/server/cards/prelude/UNMIContractor';
 
 describe('UNMIContractor', function() {
   it('Should play', function() {
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     const card = new UNMIContractor();
     card.play(player);
 

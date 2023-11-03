@@ -9,7 +9,7 @@ describe('SpaceElevator', function() {
 
   beforeEach(function() {
     card = new SpaceElevator();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not act if no steel', function() {

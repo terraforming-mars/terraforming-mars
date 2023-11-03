@@ -17,7 +17,7 @@ describe('ShiftAresGlobalParameters', () => {
   }
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     shiftAresGlobalParameters = new ShiftAresGlobalParameters().andThen(cb);
   });
 

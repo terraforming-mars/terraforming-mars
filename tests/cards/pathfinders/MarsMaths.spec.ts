@@ -14,7 +14,7 @@ describe('MarsMaths', function() {
   });
 
   it('On Action', function() {
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     const previousActions = player.availableActionsThisRound;
     card.action(player);
     expect(player.availableActionsThisRound).eq(previousActions + 2);

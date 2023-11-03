@@ -9,7 +9,7 @@ describe('SelectProductionToLoseDeferred', function() {
   let player: TestPlayer;
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('sanity test', function() {

@@ -10,7 +10,7 @@ describe('VenusWaystation', function() {
     const card = new VenusWaystation();
     const card2 = new LocalShading();
     const card3 = new VenusGovernor();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);

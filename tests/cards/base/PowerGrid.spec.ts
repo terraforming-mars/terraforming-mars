@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 describe('PowerGrid', function() {
   it('Should play', function() {
     const card = new PowerGrid();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     const action = card.play(player);
 
     cast(action, undefined);

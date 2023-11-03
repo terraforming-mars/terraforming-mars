@@ -10,7 +10,7 @@ describe('Potatoes', function() {
 
   beforeEach(function() {
     card = new Potatoes();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {

@@ -12,7 +12,7 @@ describe('GreatDamPromo', function() {
 
   beforeEach(function() {
     card = new GreatDamPromo();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play without meeting requirements', function() {

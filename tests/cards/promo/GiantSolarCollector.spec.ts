@@ -10,7 +10,7 @@ describe('GiantSolarCollector', function() {
 
   beforeEach(function() {
     card = new GiantSolarCollector();
-    [/* skipped */, player] = testGame(1, {venusNextExtension: true});
+    [/* game */, player] = testGame(1, {venusNextExtension: true});
   });
 
   it('Should play', function() {

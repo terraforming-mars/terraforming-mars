@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('SecretResearch', () => {
   it('play', () => {
     const card = new SecretResearch();
-    const [/* skipped */, player] = testGame(2, {coloniesExtension: true});
+    const [/* game */, player] = testGame(2, {coloniesExtension: true});
 
     expect(player.cardsInHand).is.empty;
     expect(player.underworldData.corruption).eq(0);

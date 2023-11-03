@@ -17,7 +17,7 @@ describe('AirRaid', function() {
 
   beforeEach(function() {
     card = new AirRaid();
-    [/* skipped */, player, player2] = testGame(3);
+    [/* game */, player, player2] = testGame(3);
 
     corpo = new StormCraftIncorporated();
     player.setCorporationForTest(corpo);

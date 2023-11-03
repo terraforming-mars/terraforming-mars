@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('MartianIndustries', function() {
   it('Should play', function() {
     const card = new MartianIndustries();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player.production.steel).to.eq(1);

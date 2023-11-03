@@ -8,7 +8,7 @@ import {TileType} from '../../../src/common/TileType';
 describe('CaveCity', () => {
   it('canPlay', () => {
     const card = new CaveCity();
-    const [/* skipped */, player, player2] = testGame(2);
+    const [/* game */, player, player2] = testGame(2);
 
     expect(card.canPlay(player)).is.false;
 
@@ -29,7 +29,7 @@ describe('CaveCity', () => {
 
   it('play', () => {
     const card = new CaveCity();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     const [space1, space2] = player.game.board.getAvailableSpacesForCity(player);
     space1.excavator = player;

@@ -11,7 +11,7 @@ describe('DuskLaserMining', function() {
 
   beforeEach(function() {
     card = new DuskLaserMining();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play if not enough science tags', function() {

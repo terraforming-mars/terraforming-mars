@@ -13,7 +13,7 @@ describe('GreatDamAres', function() {
 
   beforeEach(() => {
     card = new GreatDamAres();
-    [/* skipped */, player] = testGame(2, {aresExtension: true, aresHazards: false});
+    [/* game */, player] = testGame(2, {aresExtension: true, aresHazards: false});
   });
 
   it('Requirements + Benefits', function() {

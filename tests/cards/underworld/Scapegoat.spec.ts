@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('Scapegoat', () => {
   it('Should play', () => {
     const card = new Scapegoat();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.underworldData.corruption = 0;
 

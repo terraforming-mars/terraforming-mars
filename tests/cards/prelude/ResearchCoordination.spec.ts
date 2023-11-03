@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 
 describe('ResearchCoordination', function() {
   it('Should play', function() {
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     const card = new ResearchCoordination();
     cast(card.play(player), undefined);
     expect(player.tags.count(Tag.WILD)).eq(0);

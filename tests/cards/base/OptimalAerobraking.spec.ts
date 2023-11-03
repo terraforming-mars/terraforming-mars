@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 describe('OptimalAerobraking', function() {
   it('Should play', function() {
     const card = new OptimalAerobraking();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(card.onCardPlayed(player, card)).is.undefined;
     expect(card.onCardPlayed(player, new BigAsteroid())).is.undefined;

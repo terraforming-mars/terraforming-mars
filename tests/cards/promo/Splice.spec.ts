@@ -17,7 +17,7 @@ describe('Splice', function() {
 
   beforeEach(function() {
     card = new Splice();
-    [/* skipped */, player, player2] = testGame(2, {skipInitialCardSelection: false});
+    [/* game */, player, player2] = testGame(2, {skipInitialCardSelection: false});
   });
 
   it('Should play', function() {

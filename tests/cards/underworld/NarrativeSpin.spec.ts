@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('NarrativeSpin', () => {
   it('Should play', () => {
     const card = new NarrativeSpin();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.tagsForTest = {earth: 0};
     expect(card.canPlay(player)).is.false;

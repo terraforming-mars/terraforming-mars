@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('MineralDeposit', function() {
   it('Should play', function() {
     const card = new MineralDeposit();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.steel).to.eq(5);
   });

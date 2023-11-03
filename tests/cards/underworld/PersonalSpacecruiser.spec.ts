@@ -19,7 +19,7 @@ describe('PersonalSpacecruiser', () => {
 
   it('production phase, no corruption', () => {
     const card = new PersonalSpacecruiser();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.playedCards.push(card);
     card.resourceCount = 1;
@@ -31,7 +31,7 @@ describe('PersonalSpacecruiser', () => {
 
   it('production phase, no fighter', () => {
     const card = new PersonalSpacecruiser();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.playedCards.push(card);
     card.resourceCount = 0;
@@ -43,7 +43,7 @@ describe('PersonalSpacecruiser', () => {
 
   it('production phase', () => {
     const card = new PersonalSpacecruiser();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.playedCards.push(card);
     card.resourceCount = 1;
@@ -55,7 +55,7 @@ describe('PersonalSpacecruiser', () => {
 
   it('production phase, no corruption', () => {
     const card = new PersonalSpacecruiser();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.playedCards.push(card);
     card.resourceCount = 2;

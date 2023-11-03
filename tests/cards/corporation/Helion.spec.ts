@@ -11,7 +11,7 @@ describe('Helion', function() {
 
   beforeEach(function() {
     card = new Helion();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

@@ -12,7 +12,7 @@ describe('MarsDirect', () => {
   let card: MarsDirect;
 
   beforeEach(() => {
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
     card = new MarsDirect();
   });
 

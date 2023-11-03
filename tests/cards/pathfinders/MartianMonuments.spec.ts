@@ -13,7 +13,7 @@ describe('MartianMonuments', function() {
 
   beforeEach(function() {
     card = new MartianMonuments();
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('can play', function() {

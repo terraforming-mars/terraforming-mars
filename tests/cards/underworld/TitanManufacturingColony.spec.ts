@@ -8,7 +8,7 @@ import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 describe('TitanManufacturingColony', () => {
   it('onCardPlayed', () => {
     const card = new TitanManufacturingColony();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     card.onCardPlayed(player, fakeCard({}));
     expect(card.resourceCount).eq(0);
@@ -25,7 +25,7 @@ describe('TitanManufacturingColony', () => {
 
   it('canAct', () => {
     const card = new TitanManufacturingColony();
-    const [/* skipped */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
 
     expect(card.canAct(player)).is.false;
 

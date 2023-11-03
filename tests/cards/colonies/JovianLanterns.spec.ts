@@ -10,7 +10,7 @@ describe('JovianLanterns', function() {
 
   beforeEach(function() {
     card = new JovianLanterns();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play', function() {

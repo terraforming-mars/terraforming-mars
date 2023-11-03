@@ -18,7 +18,7 @@ describe('CEOsFavoriteProject', function() {
 
   beforeEach(function() {
     card = new CEOsFavoriteProject();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play - no cards', function() {

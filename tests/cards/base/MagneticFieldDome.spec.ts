@@ -10,7 +10,7 @@ describe('MagneticFieldDome', function() {
 
   beforeEach(function() {
     card = new MagneticFieldDome();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {

@@ -15,7 +15,7 @@ describe('SoilDetoxification', function() {
 
   beforeEach(function() {
     card = new SoilDetoxification();
-    [/* skipped */, player] = testGame(1, {turmoilExtension: true});
+    [/* game */, player] = testGame(1, {turmoilExtension: true});
   });
 
   it('canPlay', function() {

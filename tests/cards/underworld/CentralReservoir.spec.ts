@@ -9,7 +9,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 describe('CentralReservoir', () => {
   it('play', () => {
     const card = new CentralReservoir();
-    const [/* skipped */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
 
     const selectSpace = cast(card.play(player), SelectSpace);
     const spaces = selectSpace.spaces;

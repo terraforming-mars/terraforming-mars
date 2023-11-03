@@ -8,7 +8,7 @@ import {cast} from '../../TestingUtils';
 describe('TropicalResort', function() {
   it('Should play', function() {
     const card = new TropicalResort();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     player.production.add(Resource.HEAT, 2);
     cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(0);

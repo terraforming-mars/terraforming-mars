@@ -10,7 +10,7 @@ describe('MagneticShield', function() {
 
   beforeEach(function() {
     card = new MagneticShield();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play if not enough power tags available', function() {

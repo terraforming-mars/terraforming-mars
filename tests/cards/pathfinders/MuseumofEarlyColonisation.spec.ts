@@ -13,7 +13,7 @@ describe('MuseumofEarlyColonisation', function() {
 
   beforeEach(function() {
     card = new MuseumofEarlyColonisation();
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('canPlay', function() {

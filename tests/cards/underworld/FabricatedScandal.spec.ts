@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('FabricatedScandal', () => {
   it('Should play', () => {
     const card = new FabricatedScandal();
-    const [/* skipped */, ...players] = testGame(4);
+    const [/* game */, ...players] = testGame(4);
 
     players[0].setTerraformRating(20);
     players[1].setTerraformRating(18);

@@ -16,7 +16,7 @@ describe('LocalHeatTrapping', () => {
 
   beforeEach(() => {
     card = new LocalHeatTrapping();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     helion = new Helion();
   });
 

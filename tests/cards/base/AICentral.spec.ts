@@ -10,7 +10,7 @@ describe('AICentral', function() {
 
   beforeEach(function() {
     card = new AICentral();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play if not enough science tags to play', function() {

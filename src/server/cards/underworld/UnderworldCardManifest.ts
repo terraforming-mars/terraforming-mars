@@ -90,7 +90,7 @@ import {PersonalSpacecruiser} from './PersonalSpacecruiser';
 // import {PriceWars} from './PriceWars';
 import {PrivateInvestigator} from './PrivateInvestigator';
 import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
-// import {PrivateResorts} from './PrivateResorts';
+import {PrivateResorts} from './PrivateResorts';
 // import {Prospecting} from './Prospecting';
 // import {PublicSpaceline} from './PublicSpaceline';
 // import {RecklessDetonation} from './RecklessDetonation';
@@ -190,7 +190,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.PERSONAL_SPACECRUISER]: {Factory: PersonalSpacecruiser},
     // [CardName.HYPERSPACE_DRIVE_PROTOTYPE]: {Factory: HyperspaceDrivePrototype},
     // [CardName.STAR_VEGAS]: {Factory: StarVegas},
-    // [CardName.PRIVATE_RESORTS]: {Factory: PrivateResorts},
+    [CardName.PRIVATE_RESORTS]: {Factory: PrivateResorts},
     // // 55-63
     // [CardName.EARTHQUAKE_MACHINE]: {Factory: EarthquakeMachine},
     // [CardName.MICRO_GEODESICS]: {Factory: MicroGeodesics},

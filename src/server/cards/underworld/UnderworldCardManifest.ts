@@ -38,8 +38,7 @@ import {FreeTradePort} from './FreeTradePort';
 // // import {FriendsinHighPlaces} from './FriendsinHighPlaces';
 // // import {GaiaCity} from './GaiaCity';
 import {GanymedeTradingCompany} from './GanymedeTradingCompany';
-// import {GeologicalExpertise} from './GeologicalExpertise';
-// // import {GeologicalExpertise} from './GeologicalExpertise';
+import {GeologicalExpertise} from './GeologicalExpertise';
 // import {GeologicalSurvey} from './GeologicalSurvey';
 // import {GeologistTeam} from './GeologistTeam';
 // import {GeoscanSatellite} from './GeoscanSatellite';
@@ -265,7 +264,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.INHERITED_FORTUNE]: {Factory: InheritedFortune},
     // // [CardName.INTELLECTUAL_PROPERTY_THEFT]: {Factory: IntellectualPropertyTheft},
     [CardName.TUNNELING_OPERATION]: {Factory: TunnelingOperation},
-    // [CardName.GEOLOGICAL_EXPERTISE]: {Factory: GeologicalExpertise},
+    [CardName.GEOLOGICAL_EXPERTISE]: {Factory: GeologicalExpertise},
     [CardName.UNDERGROUND_SETTLEMENT]: {Factory: UndergroundSettlement},
     [CardName.GANYMEDE_TRADING_COMPANY]: {Factory: GanymedeTradingCompany, compatibility: 'colonies'},
     [CardName.CENTRAL_RESERVOIR]: {Factory: CentralReservoir},

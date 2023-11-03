@@ -113,7 +113,7 @@ import {SubterraneanSea} from './SubterraneanSea';
 // // import {ThiolavaVents} from './ThiolavaVents';
 import {TitanManufacturingColony} from './TitanManufacturingColony';
 import {TunnelBoringMachine} from './TunnelBoringMachine';
-// import {TunnelingOperation} from './TunnelingOperation';
+import {TunnelingOperation} from './TunnelingOperation';
 import {TunnelingSubcontractor} from './TunnelingSubcontractor';
 import {UndergroundAmusementPark} from './UndergroundAmusementPark';
 // import {UndergroundHabitat} from './UndergroundHabitat';
@@ -264,7 +264,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.INVESTOR_PLAZA]: {Factory: InvestorPlaza},
     [CardName.INHERITED_FORTUNE]: {Factory: InheritedFortune},
     // // [CardName.INTELLECTUAL_PROPERTY_THEFT]: {Factory: IntellectualPropertyTheft},
-    // [CardName.TUNNELING_OPERATION]: {Factory: TunnelingOperation},
+    [CardName.TUNNELING_OPERATION]: {Factory: TunnelingOperation},
     // [CardName.GEOLOGICAL_EXPERTISE]: {Factory: GeologicalExpertise},
     [CardName.UNDERGROUND_SETTLEMENT]: {Factory: UndergroundSettlement},
     [CardName.GANYMEDE_TRADING_COMPANY]: {Factory: GanymedeTradingCompany, compatibility: 'colonies'},

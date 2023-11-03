@@ -10,7 +10,7 @@ describe('HAL 9000', function() {
 
   beforeEach(() => {
     card = new HAL9000();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     player.production.adjust({plants: 0, megacredits: -1, steel: 1, titanium: 1, energy: 1, heat: 1});
   });
 

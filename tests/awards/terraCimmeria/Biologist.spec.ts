@@ -12,7 +12,7 @@ describe('Biologist', () => {
 
   beforeEach(() => {
     award = new Biologist();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('score', () => {

@@ -10,7 +10,7 @@ describe('FuelFactory', function() {
 
   beforeEach(function() {
     card = new FuelFactory();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {

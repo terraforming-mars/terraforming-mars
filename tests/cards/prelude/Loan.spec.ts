@@ -10,7 +10,7 @@ describe('Loan', function() {
 
   beforeEach(function() {
     card = new Loan();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {

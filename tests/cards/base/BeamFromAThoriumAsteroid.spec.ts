@@ -9,7 +9,7 @@ describe('BeamFromAThoriumAsteroid', function() {
 
   beforeEach(function() {
     card = new BeamFromAThoriumAsteroid();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Cannot play without a Jovian tag', function() {

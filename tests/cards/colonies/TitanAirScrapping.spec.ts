@@ -11,7 +11,7 @@ describe('TitanAirScrapping', function() {
 
   beforeEach(function() {
     card = new TitanAirScrapping();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not act', function() {

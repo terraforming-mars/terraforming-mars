@@ -5,7 +5,7 @@ import {cast} from '../../TestingUtils';
 describe('IceAsteroid', function() {
   it('Should play', function() {
     const card = new IceAsteroid();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
   });
 });

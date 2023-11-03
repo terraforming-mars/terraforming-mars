@@ -13,7 +13,7 @@ describe('Teractor', function() {
 
   beforeEach(function() {
     card = new Teractor();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
 
     cast(card.play(player), undefined);
   });

@@ -12,7 +12,7 @@ describe('RefugeeCamps', function() {
 
   beforeEach(function() {
     card = new RefugeeCamps();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

@@ -7,7 +7,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 describe('PrivateInvestigator', () => {
   it('Should play', () => {
     const card = new PrivateInvestigator();
-    const [/* skipped */, player, player2, player3, player4] = testGame(4);
+    const [/* game */, player, player2, player3, player4] = testGame(4);
 
     player.underworldData.corruption = 2;
     player2.underworldData.corruption = 4;

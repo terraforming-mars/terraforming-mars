@@ -8,7 +8,7 @@ import {testGame} from '../../TestGame';
 
 describe('LunaProjectOffice', () => {
   it('can play', () => {
-    const [/* skipped */, player] = testGame(1, {moonExpansion: true});
+    const [/* game */, player] = testGame(1, {moonExpansion: true});
     const card = new LunaProjectOffice();
 
     player.cardsInHand = [card];

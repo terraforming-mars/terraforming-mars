@@ -10,7 +10,7 @@ describe('SubCrustMeasurements', function() {
 
   beforeEach(function() {
     card = new SubCrustMeasurements();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play if not enough science tags', function() {

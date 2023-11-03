@@ -10,7 +10,7 @@ describe('Irrigator', () => {
 
   beforeEach(() => {
     milestone = new Irrigator();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
 
     maxOutOceans(player);
   });

@@ -20,7 +20,7 @@ describe('Gyropolis', function() {
 
   beforeEach(function() {
     card = new Gyropolis();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play', function() {

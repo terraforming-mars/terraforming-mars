@@ -11,7 +11,7 @@ describe('Moss', function() {
 
   beforeEach(function() {
     card = new Moss();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play without enough oceans', function() {

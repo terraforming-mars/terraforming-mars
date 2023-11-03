@@ -15,7 +15,7 @@ describe('Musk', function() {
 
   beforeEach(() => {
     card = new Musk();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     player.playedCards.push(card);
   });
 

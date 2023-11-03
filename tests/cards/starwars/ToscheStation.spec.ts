@@ -17,7 +17,7 @@ describe('ToscheStation', () => {
 
   beforeEach(() => {
     card = new ToscheStation();
-    [/* skipped */, player] = testGame(2, {starWarsExpansion: true});
+    [/* game */, player] = testGame(2, {starWarsExpansion: true});
   });
 
   it('Can act', () => {

@@ -7,7 +7,7 @@ import {Units} from '../../../src/common/Units';
 describe('InheritedFortune', () => {
   it('play', () => {
     const card = new InheritedFortune();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     expect(player.underworldData.corruption).eq(0);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);

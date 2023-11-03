@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('Sponsors', function() {
   it('Should play', function() {
     const card = new Sponsors();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(2);
   });

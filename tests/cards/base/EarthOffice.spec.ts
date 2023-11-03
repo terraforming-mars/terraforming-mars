@@ -12,7 +12,7 @@ describe('EarthOffice', function() {
 
   beforeEach(function() {
     card = new EarthOffice();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
 
     cast(card.play(player), undefined);
   });

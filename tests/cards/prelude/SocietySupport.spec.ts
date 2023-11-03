@@ -5,7 +5,7 @@ import {cast} from '../../TestingUtils';
 
 describe('SocietySupport', function() {
   it('Should play', function() {
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     const card = new SocietySupport();
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(-1);

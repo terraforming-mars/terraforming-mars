@@ -9,7 +9,7 @@ describe('FusionPower', function() {
 
   beforeEach(function() {
     card = new FusionPower();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {

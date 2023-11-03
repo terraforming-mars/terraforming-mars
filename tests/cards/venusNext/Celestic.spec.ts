@@ -11,7 +11,7 @@ import {churnAction} from '../../TestingUtils';
 describe('Celestic', function() {
   it('Should play', function() {
     const card = new Celestic();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     const play = card.play(player);
     expect(play).is.undefined;
 

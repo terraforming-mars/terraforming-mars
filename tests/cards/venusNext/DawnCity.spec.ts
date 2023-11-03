@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 describe('DawnCity', function() {
   it('Should play', function() {
     const card = new DawnCity();
-    const [/* skipped */, player] = testGame(2, {venusNextExtension: true});
+    const [/* game */, player] = testGame(2, {venusNextExtension: true});
     player.production.add(Resource.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.not.true;
 

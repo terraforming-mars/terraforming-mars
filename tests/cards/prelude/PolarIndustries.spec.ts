@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('PolarIndustries', function() {
   it('Should play', function() {
     const card = new PolarIndustries();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
 
     const action = card.play(player);
 

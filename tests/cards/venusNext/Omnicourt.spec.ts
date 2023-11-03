@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('Omnicourt', function() {
   it('Should play', function() {
     const card = new Omnicourt();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     expect(player.simpleCanPlay(card)).is.not.true;
 
     player.tagsForTest = {venus: 1};

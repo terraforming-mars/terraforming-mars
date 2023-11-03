@@ -15,7 +15,7 @@ describe('UndergroundAmusementPark', () => {
 
   it('play', () => {
     const card = new UndergroundAmusementPark();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     cast(card.play(player), undefined);
 

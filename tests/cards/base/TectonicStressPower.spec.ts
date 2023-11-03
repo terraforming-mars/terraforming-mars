@@ -10,7 +10,7 @@ describe('TectonicStressPower', function() {
 
   beforeEach(function() {
     card = new TectonicStressPower();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {

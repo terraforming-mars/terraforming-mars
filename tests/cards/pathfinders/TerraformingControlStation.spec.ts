@@ -12,7 +12,7 @@ describe('TerraformingControlStation', function() {
 
   beforeEach(function() {
     card = new TerraformingControlStation();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('play', function() {

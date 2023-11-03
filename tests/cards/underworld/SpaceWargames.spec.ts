@@ -17,7 +17,7 @@ describe('SpaceWargames', () => {
 
   it('canAct', () => {
     const card = new SpaceWargames();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     expect(card.canAct(player)).is.false;
 

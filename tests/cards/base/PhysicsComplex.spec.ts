@@ -10,7 +10,7 @@ describe('PhysicsComplex', function() {
 
   beforeEach(function() {
     card = new PhysicsComplex();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not act', function() {

@@ -15,7 +15,7 @@ describe('SmallAsteroid', function() {
 
   beforeEach(function() {
     card = new SmallAsteroid();
-    [/* skipped */, player, player2, player3] = testGame(3);
+    [/* game */, player, player2, player3] = testGame(3);
   });
 
   it('Should play', function() {

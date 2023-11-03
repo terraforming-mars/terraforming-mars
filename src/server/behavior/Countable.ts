@@ -7,6 +7,8 @@ import {NoAttributes} from './NoAttributes';
  * Describes something that can be counted.
  */
 export type _Countable = {
+  start?: number;
+
   /**
    * Count the number of tags on the players' played cards.
    *

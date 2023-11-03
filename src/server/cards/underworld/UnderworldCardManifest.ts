@@ -103,7 +103,7 @@ import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 // // import {SocialEngineering} from './SocialEngineering';
 // import {SoilExport} from './SoilExport';
 // import {SpacePrivateers} from './SpacePrivateers';
-// import {SpaceWargames} from './SpaceWargames';
+import {SpaceWargames} from './SpaceWargames';
 // import {StagedProtests} from './StagedProtests';
 // import {StandardTechnology} from './StandardTechnology';
 // import {StarVegas} from './StarVegas';
@@ -184,7 +184,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // 46-54
     // [CardName.MINING_MARKET_INSIDER]: {Factory: MiningMarketInsider},
     // [CardName.SERVER_SABOTAGE]: {Factory: ServerSabotage},
-    // [CardName.SPACE_WARGAMES]: {Factory: SpaceWargames},
+    [CardName.SPACE_WARGAMES]: {Factory: SpaceWargames},
     [CardName.PRIVATE_MILITARY_CONTRACTOR]: {Factory: PrivateMilitaryContractor},
     // [CardName.SPACE_PRIVATEERS]: {Factory: SpacePrivateers},
     [CardName.PERSONAL_SPACECRUISER]: {Factory: PersonalSpacecruiser},

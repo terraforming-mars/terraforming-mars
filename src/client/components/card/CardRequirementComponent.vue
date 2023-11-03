@@ -71,6 +71,7 @@ export default Vue.extend({
       case RequirementType.HABITAT_RATE:
       case RequirementType.MINING_RATE:
       case RequirementType.LOGISTIC_RATE:
+      case RequirementType.CORRUPTION:
         return this.count;
       }
       if (this.requirement.max) {
@@ -147,7 +148,7 @@ export default Vue.extend({
       case RequirementType.ROAD_TILES:
         return ['card-tile-lunar-road--S', 'tile--req'];
       case RequirementType.EXCAVATION:
-        return ['card-excavation-req'];
+        return ['card-excavation req'];
       case RequirementType.CORRUPTION:
         return ['card-resource', 'card-resource-corruption'];
       case RequirementType.PRODUCTION:

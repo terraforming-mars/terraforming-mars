@@ -403,7 +403,9 @@ function populateCount(requirement: CardRequirementDescriptor): CardRequirementD
     requirement.logisticRate ??
     requirement.habitatTiles ??
     requirement.miningTiles ??
-    requirement.roadTiles;
+    requirement.roadTiles ??
+    requirement.corruption ??
+    requirement.excavation;
 
   return requirement;
 }

@@ -63,7 +63,6 @@ export default Vue.extend({
       return this.requirement.count ?? 0;
     },
     amount(): string | number {
-      // <span v-if="requirement.isMax || requirement.amount != 0">{{requirement.amount}}</span>
       switch (this.type) {
       case RequirementType.TEMPERATURE:
       case RequirementType.OXYGEN:
@@ -71,7 +70,6 @@ export default Vue.extend({
       case RequirementType.HABITAT_RATE:
       case RequirementType.MINING_RATE:
       case RequirementType.LOGISTIC_RATE:
-      case RequirementType.CORRUPTION:
         return this.count;
       }
       if (this.requirement.max) {
@@ -186,7 +184,7 @@ export default Vue.extend({
       case RequirementType.REMOVED_PLANTS:
         return false;
       }
-      return this.count < 4;
+      return this.count > 0 && this.count < 4;
     },
     repeats(): Array<number> {
       if (!this.isRepeated || this.requirement.count === undefined) {

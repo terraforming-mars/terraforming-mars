@@ -17,6 +17,7 @@ import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedGame} from './SerializedGame';
 import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
+import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 
 type BoardFactory = {
   newInstance: (gameOptions: GameOptions, rng: Random) => MarsBoard;
@@ -59,14 +60,21 @@ export class GameSetup {
       const board = game.board;
       const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
+      if (game.gameOptions.underworldExpansion === true) {
+        UnderworldExpansion.identify(game, citySpace, undefined);
+      }
+
       const adjacentSpaces = board.getAdjacentSpaces(citySpace).filter((s) => game.board.canPlaceTile(s));
       if (adjacentSpaces.length === 0) {
         throw new Error('No space for forest');
       }
       let idx = game.discardForCost(1, TileType.GREENERY);
       idx = Math.max(idx-1, 0); // Some cards cost zero.
-      const forestSpace = adjacentSpaces[idx%adjacentSpaces.length];
-      game.simpleAddTile(neutral, forestSpace, {tileType: TileType.GREENERY});
+      const greenerySpace = adjacentSpaces[idx%adjacentSpaces.length];
+      game.simpleAddTile(neutral, greenerySpace, {tileType: TileType.GREENERY});
+      if (game.gameOptions.underworldExpansion === true) {
+        UnderworldExpansion.identify(game, greenerySpace, undefined);
+      }
     }
 
     placeCityAndForest(game, 1);

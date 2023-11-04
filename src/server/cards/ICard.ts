@@ -100,10 +100,11 @@ export interface ICard {
    * Optional callback when any player identifies a space.
    *
    * @param identifyingPlayer the player performing the identification action
+   *   or undefined if added by a neutral player.
    * @param cardOwner the player who owns THIS CARD.
    * @param space the space that was just identified.
    */
-  onIdentification?(identifyingPlayer: IPlayer, cardOwner: IPlayer, space: Space): void;
+  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space): void;
 
   /**
    * Optional callback when any player excavates a space.

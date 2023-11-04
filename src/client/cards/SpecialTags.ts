@@ -3,6 +3,6 @@ export enum SpecialTags {
     INFLUENCE = 'influence-count',
     CITY_COUNT = 'city-count',
     COLONY_COUNT = 'colony-count',
-    EXCAVATIONS = 'excavations',
-    CORRUPTION = 'corruption',
+    EXCAVATIONS = 'excavation-count',
+    CORRUPTION = 'corruption-count',
 }

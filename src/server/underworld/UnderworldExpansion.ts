@@ -104,7 +104,7 @@ export class UnderworldExpansion {
   }
 
   /** Identify the token at `space`, optionally trigger callbacks */
-  public static identify(game: IGame, space: Space, player?: IPlayer): void {
+  public static identify(game: IGame, space: Space, player: IPlayer | undefined): void {
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
@@ -117,12 +117,9 @@ export class UnderworldExpansion {
       throw new Error('Cannot identify excavation space, no available tokens.');
     }
     space.undergroundResources = undergroundResource;
-    // TODO(there must be a case when a neutral player identifies that applies to the callbacks);
-    if (player !== undefined) {
-      for (const p of player.game.getPlayersInGenerationOrder()) {
-        for (const card of p.tableau) {
-          card.onIdentification?.(player, p, space);
-        }
+    for (const p of game.getPlayersInGenerationOrder()) {
+      for (const card of p.tableau) {
+        card.onIdentification?.(player, p, space);
       }
     }
   }

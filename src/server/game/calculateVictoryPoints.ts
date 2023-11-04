@@ -68,8 +68,10 @@ export function calculateVictoryPoints(player: IPlayer) {
   PathfindersExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
 
   // Underworld Score Bribing
-  const bribe = Math.min(Math.abs(negativeVP), player.underworldData.corruption);
-  victoryPointsBreakdown.setVictoryPoints('victoryPoints', bribe, 'Underworld Corruption Bribe');
+  if (player.game.gameOptions.underworldExpansion === true) {
+    const bribe = Math.min(Math.abs(negativeVP), player.underworldData.corruption);
+    victoryPointsBreakdown.setVictoryPoints('victoryPoints', bribe, 'Underworld Corruption Bribe');
+  }
 
   // Escape velocity VP penalty
   if (player.game.gameOptions.escapeVelocityMode) {

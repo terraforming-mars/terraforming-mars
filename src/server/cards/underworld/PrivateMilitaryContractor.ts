@@ -33,6 +33,7 @@ export class PrivateMilitaryContractor extends ActionCard implements IProjectCar
             (eb) => eb.corruptionShield().startEffect.fighter().equals().corruption().asterix()).br;
           b.action('Spend 1 titanium to gain 1 fighter resource on this card.',
             (ab) => ab.titanium(1).startAction.fighter(1)).br;
+          b.fighter();
         }),
         description: 'Put 1 fighter resource on this card.',
       },

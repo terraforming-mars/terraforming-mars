@@ -11,7 +11,7 @@ export class RobotMoles extends ActionCard implements IProjectCard {
     super({
       type: CardType.ACTIVE,
       name: CardName.ROBOT_MOLES,
-      cost: 5,
+      cost: 6,
       tags: [Tag.MARS],
       victoryPoints: {resourcesHere: {}, per: 3},
       resourceType: CardResource.DATA,

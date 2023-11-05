@@ -11,6 +11,7 @@ export class NarrativeSpin extends Card implements IProjectCard {
       name: CardName.NARRATIVE_SPIN,
       type: CardType.EVENT,
       cost: 5,
+      tags: [Tag.EARTH],
 
       behavior: {
         underworld: {corruption: 2},

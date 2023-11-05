@@ -18,7 +18,7 @@ export class InheritedFortune extends PreludeCard {
       metadata: {
         cardNumber: 'UP02',
         renderData: CardRenderer.builder((b) => {
-          b.corruption().megacredits(1).production((pb) => pb.megacredits(1));
+          b.corruption().megacredits(10).production((pb) => pb.megacredits(1));
         }),
         description: 'Gain 1 corruption and 10 M€. Increase your M€ production 1 step.',
       },

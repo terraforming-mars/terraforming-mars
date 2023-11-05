@@ -12,6 +12,7 @@ export class UndergroundAmusementPark extends Card implements IProjectCard {
       name: CardName.UNDERGROUND_AMUSEMENT_PARK,
       tags: [Tag.BUILDING],
       cost: 5,
+      victoryPoints: 1,
 
       requirements: {excavation: 1},
 

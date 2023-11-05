@@ -36,6 +36,7 @@ export class Warmonger implements IAward {
     CardName.GREAT_ESCARPMENT_CONSORTIUM,
     CardName.HACKERS,
     CardName.HIRED_RAIDERS,
+    CardName.MINING_EXPEDITION,
     CardName.POWER_SUPPLY_CONSORTIUM,
     CardName.PREDATORS,
     CardName.SABOTAGE,

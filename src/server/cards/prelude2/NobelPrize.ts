@@ -13,7 +13,7 @@ export class NobelPrize extends PreludeCard {
       victoryPoints: 2,
 
       behavior: {
-        stock: {megacredits: 21},
+        stock: {megacredits: 2},
       },
 
       metadata: {

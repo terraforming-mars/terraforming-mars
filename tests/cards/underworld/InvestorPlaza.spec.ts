@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {InvestorPlaza} from '../../../src/server/cards/underworld/InvestorPlaza';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {TileType} from '../../../src/common/TileType';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('InvestorPlaza', () => {
   it('play', () => {
@@ -12,11 +11,8 @@ describe('InvestorPlaza', () => {
 
     cast(card.play(player), undefined);
     runAllActions(game);
-    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    const space = selectSpace.spaces[0];
-    selectSpace.cb(space);
 
-    expect(space.tile?.tileType).eq(TileType.CITY);
+    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
     expect(player.underworldData.corruption).eq(1);
   });
 });

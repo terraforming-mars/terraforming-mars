@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {CupolaCity} from '../../../src/server/cards/base/CupolaCity';
 import {Game} from '../../../src/server/Game';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
-import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('CupolaCity', function() {
   let card: CupolaCity;
@@ -32,13 +31,12 @@ describe('CupolaCity', function() {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
-    const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.spaces[0]);
+    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
-    expect(action.spaces[0].tile && action.spaces[0].tile.tileType).to.eq(TileType.CITY);
   });
 });

@@ -3,9 +3,7 @@ import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
 import {testGame} from '../../TestGame';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
-import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
@@ -13,6 +11,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {Units} from '../../../src/common/Units';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('Gyropolis', function() {
   let card: Gyropolis;
@@ -30,15 +29,11 @@ describe('Gyropolis', function() {
     player.playedCards.push(researchNetwork, lunaGoveror);
     player.production.add(Resource.ENERGY, 2);
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
-    const action = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(action.cb(action.spaces[0])).is.undefined;
-    expect(action.spaces[0].player).to.eq(player);
-    expect(action.spaces[0].tile).is.not.undefined;
-    expect(action.spaces[0].tile!.tileType).to.eq(TileType.CITY);
+    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
   });

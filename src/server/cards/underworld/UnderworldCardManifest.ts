@@ -50,7 +50,7 @@ import {GreyMarketExploitation} from './GreyMarketExploitation';
 // import {Hadesphere} from './Hadesphere';
 // import {HectateSpeditions} from './HectateSpeditions';
 // import {HenkeiGenetics} from './HenkeiGenetics';
-// import {HiredRaiders} from './HiredRaiders';
+import {HiredRaiders} from './HiredRaiders';
 // import {HyperspaceDrivePrototype} from './HyperspaceDrivePrototype';
 // import {ImportedHeavyMachinery} from './ImportedHeavyMachinery';
 // import {InducedTremor} from './InducedTremor';
@@ -234,7 +234,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // Replacements
     // [CardName.STANDARD_TECHNOLOGY]: {Factory: StandardTechnology},
     // [CardName.HACKERS_UNDERWORLD]: {Factory: Hackers},
-    // [CardName.HIRED_RAIDERS_UNDERWORLD]: {Factory: HiredRaiders},
+    [CardName.HIRED_RAIDERS_UNDERWORLD]: {Factory: HiredRaiders},
   },
 
   cardsToRemove: [

@@ -13,7 +13,7 @@ export class TitanManufacturingColony extends ActionCard implements IProjectCard
     super({
       type: CardType.ACTIVE,
       name: CardName.TITAN_MANUFACTURING_COLONY,
-      cost: 14,
+      cost: 18,
       tags: [Tag.JOVIAN, Tag.SPACE, Tag.BUILDING],
       resourceType: CardResource.TOOL,
 

@@ -963,7 +963,7 @@ export enum CardName {
     ANUBIS_SECURITIES = 'Anubis Securities',
     HECTATE_SPEDITIONS = 'Hectate Speditions',
     // Underworld Preludes
-    FREE_TRADE_PORT = 'Free_Trade Port',
+    FREE_TRADE_PORT = 'Free Trade Port',
     INVESTOR_PLAZA = 'Investor Plaza',
     INHERITED_FORTUNE = 'Inherited Fortune',
     INTELLECTUAL_PROPERTY_THEFT = 'Intellectual Property Theft',

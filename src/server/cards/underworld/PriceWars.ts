@@ -5,6 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
+import {all} from '../Options';
 
 export class PriceWars extends Card implements IProjectCard {
   constructor() {
@@ -24,8 +25,8 @@ export class PriceWars extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U63',
         renderData: CardRenderer.builder((b) => {
-          b.minus().production((pb) => pb.heat(1)).br;
-          b.megacredits(12).asterix().corruption(1).asterix();
+          b.steel(1).titanium(1).colon().plus().megacredits(1).asterix().br;
+          b.steel(1, {all}).titanium(1, {all}).colon().minus().megacredits(1, {all}).asterix().br;
         }),
         description: 'Requires 2 corruption. Until the end of this generation, ' +
           'your steel and titanium are worth 1 more M€ each, ' +

@@ -22,6 +22,6 @@ describe('OffWorldTaxHaven', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    expect(player.production.megacredits).eq(2);
+    expect(player.production.megacredits).eq(5);
   });
 });

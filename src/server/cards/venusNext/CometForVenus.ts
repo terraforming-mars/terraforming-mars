@@ -21,6 +21,7 @@ export class CometForVenus extends Card implements IProjectCard {
 
       behavior: {
         global: {venus: 1},
+        removeAnyPlants: 3
       },
 
       metadata: {

@@ -1,0 +1,32 @@
+{
+    "POLYPHEMOS": "POLYPHEMOS",
+    "Polyphemos": "Polyphemos",
+    "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Du beginnst mit 50 M€. Erhöhe deine M€-Produktion um 5. Erhalte 5 Titan.",
+    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "EFFEKT: Wenn du eine Karte kaufst, zahle 5 M€ anstatt 3 M€ (auch für Karten deiner Starthand).",
+
+    "STORM": "STORM",
+    "CRAFT": "CRAFT",
+    "INCOR": "INCOR",
+    "PORATED": "PORATED",
+    "STORMCRAFT INCORPORATED": "STORMCRAFT INCORPORATED",
+    "Stormcraft Incorporated": "Stormcraft Incorporated",
+    "You start with 48 M€.": "Du beginnst mit 48 M€.",
+    "Action: Add a floater to ANY card.": "AKTION: Füge einer BELIEBIGEN Karte einen Schweber hinzu.",
+    "Effect: Floaters on this card may be used as 2 heat each.": "EFFEKT: Schweber auf dieser Karte können jeweils als 2 Wärme eingesetzt werden.",
+
+    "ARKLIGHT": "ARKLIGHT",
+    "Arklight": "Arklight",
+    "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.": "Du beginnst mit 45 M€. Erhöhe deine M€-Produktion um 2. 1 SP für jedes zweite Tier auf dieser Karte.",
+    "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.": "EFFEKT: Wenn du ein Tier- oder Pflanzensymbol spielt (inklusive diesem), füge dieser Karte 1 Tier hinzu.",
+
+    "ARIDOR": "ARIDOR",
+    "Aridor": "Aridor",
+    "COLONY": "KOLONIE",
+    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "Du beginnst mit 40 M€. Als deine erste Aktion, bringe ein zusätzliches Kolonieplättchen deiner Wahl ins Spiel.",
+    "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "EFFEKT: Wenn du einen neuen Symboltyp ins Spiel bringst (Ereigniskarten zählen nicht), erhöhe deine M€-Produktion um 1.",
+
+    "POSEIDON": "POSEIDON",
+    "Poseidon": "Poseidon",
+    "You start with 45 M€. As your first action, place a colony.": "Du beginnst mit 45 M€. Als deine erste Aktion, platziere eine Kolonie.",
+    "Effect: When any colony is placed, including this, raise your M€ production 1 step.": "EFFEKT: Wenn eine Kolonie platziert wird (inklusive dieser), erhöhe deine M€-Produktion um 1."
+}

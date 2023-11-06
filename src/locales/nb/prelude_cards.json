@@ -1,0 +1,47 @@
+{
+    "Ceres Tech Market": "Ceres Tech-Markt",
+    "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "AKTION: Werfe eine beliebige Anzahl von Karten aus deiner Hand ab, um 2 M€ für jede abgeworfene Karte zu erhalten.",
+    "Gain 2 M€ per colony you own.": "Erhalte 2 M€ pro Kolonie, die du besitzt.",
+    
+    "Directed Heat Usage": "Direkte Wärmenutzung",
+    "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Aktion: Bezahle 3 Wärme, um entweder 4 M€ oder 2 Pflanzen zu erhalten.",
+    
+    "Ishtar Expedition": "Ishtar-Expedition",
+    "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Erfordert Venuswertung von 10%., erhalte 3 Titan und zieht 2 Venus-Karten.",
+
+    "L1 Trade Terminal": "L1 Handelsterminal",
+    "Effect: When you trade, first increase that colony tile track 2 steps.": "EFFEKT: Wenn du Handel treibst, erhöhe zuerst die Leiste der Kolonieplättchen um 2 Schritte.",
+    "Add a resource to 3 different cards.": "Füge eine Ressource zu 3 verschiedenen Karten hinzu.",
+
+    "Red Appeasement": "Rote Beschwichtigungspolitik",
+    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Benötigt, dass die ROTEN regieren oder dass du 2 Delegierte dort hast, und dass kein anderer Spieler gepasst hat.",
+    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Erhöhe die M€-Produktion um 2. Dies zählt als Passen. Du bekommst keine weiteren Züge in dieser Generation.",
+    "PASS": "PASSEN",
+
+    "Summit Logistics": "Gipfel-Logistik",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Benötigt, dass FORSCHUNG regieren oder dass du 2 Delegierte dort hast. Erhalte 1 M€ pro Planetensymbol und Kolonie, die du besitzt. Ziehe 2 Karten.",
+    
+    
+    "Psychrophiles": "Psychrophilen",
+    "Action: Add 1 microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "EFFEKT: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von dieser Karte für je 2 M€ verwenden.",
+    "Temperature must be -20 C or lower.": "Temperatur muss -20 °C oder niedriger sein.",
+
+    "Research Coordination": "Koordinierte Forschung",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Wenn du eine Aktion ausführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
+
+    "SF Memorial": "Sci-Fi-Gedenkstätte",
+    "Draw 1 card.": "Ziehe 1 Karte.",
+
+    "Martian Survey": "Marsvermessung",
+    "Oxygen must be 4% or lower. Draw two cards.": "Sauerstoffgehalt muss 4% oder niedriger sein. Ziehe zwei Karten.",
+
+    "House Printing": "Häuserdruck",
+    "Increase your steel production 1 step.": "Erhöhe deine Stahlproduktion um 1.",
+
+    "Space Hotels": "Weltraumhotels",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Erfordert 2 Erdsymbole. Erhöhe deine M€-Produktion um 4.",
+
+    "Lava Tube Settlement": "Lavaröhren-Siedlung",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen auf einem VULKAN unabhängig von angrenzenden Stadtplättchen."
+}

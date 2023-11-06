@@ -1,0 +1,130 @@
+{
+
+	"ACTIVATE THE BELOW ABILITY": "AKTIVIERE DIE FOLGENDE FÄHIGKEIT",
+	"CHANGE LEADER": "WECHSLE ANFÜHRER",
+	"STEAL": "KLAUE",
+	"EACH": "JEDE",
+	"SET ALL": "SETZTE ALLE",
+	"SWAP": "TAUSCHE",
+	"SELL": "VERKAUFE",
+	"GAIN": "ERHALTE",
+	"ALL": "ALLE",
+	"MILESTONES": "MEILENSTEINE",
+	"GAIN THESE RESOURCES": "ERHALTE DIESE RESSOURCEN",
+	"GAIN ALL YOUR COLONY BONUSES TVICE": "ERHALTE ALLE BONI DEINER KOLONIEN ZWEIMAL",
+	"REPLACE ALL NEUTRAL": "ERSETZTE ALLE NEUTRALEN",
+
+
+	"Co-leadership": "Co-Führungsrolle",
+	"Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.": "Ziehe 3 CEO-Karten und nimm eine davon auf deine Hand, sie wird in deinem ersten Zug gespielt. Wirf die anderen 2 ab.",
+
+
+	"Apollo": "Apollo",
+	"Once per game, gain 3 M€ for each tile on The Moon.": "Einmal pro Spiel, erhalte 3 M€ für jedes Plättchen auf dem Mond",
+
+	"Asimov": "Asimov",
+	"You have +2 score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "Du hast +2 auf alle Auszeichnungen. Einmal pro Spiel ziehst du 10-X Auszeichnungen (mindestens 1), wobei X die aktuelle Generation ist. Du darfst eine davon ins Spiel bringen und kostenfrei finanzieren.",
+
+	"Bjorn": "Björn",
+	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "Einmal pro Spiel klaust du X+2 M€ von jedem Spieler, der mehr M€ hat als du, wobei X die aktuelle Generation ist.",
+	
+	"Caesar": "Cäsar",
+	"Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "Einmal pro Spiel, platziere X Gefahrenplättchen, wobei X die aktuelle Generation ist. Jeder Gegner verliert 1 Produktionseinheit seiner Wahl, oder 2 Einheiten, wenn es 6 oder mehr Gefahrenplättchen gibt.",
+
+	"Clarke": "Clarke",
+	"Once per game, increase your plant and heat production 1 step each. Gain plants and heat equal to your production +4.": "Einmal pro Spiel kannst du deine Pflanzen- und Wärme-Produktion um je 1 erhöhen. Du erhältst Pflanzen- und Wärme-Ressourcen in Höhe deiner Produktion +4.",
+
+	"Duncan": "Duncan",
+	"Once per game, gain 7-X VP and 4X M€, where X is the current generation number.": "Einmal pro Spiel erhalte 7-X SP und 4X M€, wobei X die aktuelle Generation ist.",
+
+	"Ender": "Ender",
+	"Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "Einmal pro Spiel werfe eine beliebige Anzahl von Karten bis zum Doppelten der aktuellen Generation ab, ziehe so viele Karten.",
+
+	"Faraday": "Faraday",
+	"When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "Effekt: Wenn du ein Vielfaches von 5 für eine beliebiges Symbol IM SPIEL hast, zahle 3 M€, um eine Karte mit diesem Symbol zu ziehen. Joker-Symbole zählen für diesen Effekt nicht.",
+
+	"Floyd": "Floyd",
+	"Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.": "Einmal pro Spiel spiele eine Karte aus der Hand für 13 + 2X M€ weniger, wobei X die aktuelle Generation ist.",
+
+	"Gaia": "Gaia",
+	"Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.": "Einmal pro Spiel erhalte den Ares-Nachbarschaftsbonus von allen Spieler eigenen Plättchen auf dem Mars.",
+
+	"Gordon": "Gordon",
+	"Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.": "Effekt: Ignoriere die Platzierungsbeschränkungen für Grünflächen und Stadtplättchen auf dem Mars. Erhalte 2 M€, wenn du ein Grünflächen- oder Stadtplättchen auf dem Mars platzierst.",
+
+	"Greta": "Greta",
+	"When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "Wenn du eine Aktion ausführst oder eine Karte ausspielst, die deinen TV in DIESER GENERATION erhöht (max. 10 Mal), erhalte 4 M€ für jeden Schritt.",
+
+	"HAL 9000": "HAL 9000",
+	"Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "Einmal pro Spiel reduziere jede deiner Produktionen um 1, erhalte je 4 dieser Ressource.",
+
+	"Ingrid": "Ingrid",
+	"When you take an action that places a tile on Mars THIS GENERATION, draw a card.": "Wenn du eine Aktion ausführst, die ein Plättchen auf dem Mars in DIESER GENERATION platziert, ziehe eine Karte)",
+
+	"Jansson": "Jansson",
+	"Once per game, gain all placement bonuses under your tiles on Mars.": "Einmal pro Spiel erhalte alle Platzierungsboni unter deinen Plättchen auf dem Mars.",
+
+	"Karen": "Karen",
+	"Once per game, draw Prelude cards equal to the current generation number and choose one to play, and discard the rest.": "Einmal pro Spiel ziehe Präludiumkarten in Höhe der aktuellen Generation und wähle eine zum Ausspielen. Werfe den Rest ab).",
+
+	"Lowell": "Lowell",
+	"Once per game, pay 8 M€ to draw 3 CEO cards and choose one to play. Discard this card.": "Einmal pro Spiel zahle 8 M€, um 3 CEO-Karten zu ziehen, und wähle eine zum Ausspielen. Wirf diese Karte ab.",
+
+	"Maria": "Maria",
+	"Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.": "Einmal pro Spiel ziehe Kolonieplättchen in Höhe der aktuellen Generation. Bringe eines davon ins Spiel und baue, wenn möglich, kostenlos eine Kolonie darauf.",
+
+	"Musk": "Musk",
+	"Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "Einmal pro Spiel lege eine beliebige Anzahl von Erdkarten ab, ziehe so viele Weltraumkarten und erhalte so viele Titan-Ressourcen plus 6.",
+
+	"Naomi": "Naomi",
+	"When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "Wenn du eine Kolonie baust, erhalte 2 Energie und 3 M€. Einmal pro Spiel setzte jede Koloniewertung auf den höchsten oder niedrigsten Wert.",
+
+	"Neil": "Neil",
+	"Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Erhalte 1 M€, wenn ein beliebiger Spieler ein Mondsymbol ausspielt. Einmal pro Spiel erhöhe deine M€-Produktion um den Wert der NIEDRIGSTEN Mondwertung.",
+
+	"Oscar": "Oscar",
+	"You have +1 influence. Once per game, replace the Chairman with one of your delegates.": "Du hast +1 Einfluss. Einmal pro Spiel ersetzte den Vorsitzenden durch einen deiner Delegierten.",
+
+	"Petra": "Petra",
+	"Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.": "Einmal pro Spiel ersetzte alle neutralen Delegierten durch deine Delegierten. Erhalte 3 M€ für jeden auf diese Weise ausgetauschten Delegierten. Platziere 3 neutrale Delegierte.",
+
+	"Quill": "Quill",
+	"Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card. Gain 1 M€ for every 2 floaters added this way.": "Einmal pro Spiel, füge 2 Schweber zu jeder deiner Karten hinzu, die Schweber sammeln, dann füge 2 Schweber zu einer beliebigen Karte hinzu. Du erhältst 1 M€ für je 2 Schweber, die du auf diese Weise hinzufügst.",
+
+	"Rogers": "Rogers",
+	"Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.": "Ignoriere die globalen Anforderungen für deine Venus-Karten in DIESE GENERATION. Wenn du ein Venus-Symbol in DIESER GENERATION spielst, zahle 3 M€ weniger dafür.",
+
+	"Ryu": "Ryu",
+	"Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "Einmal pro Spiel tausche bis zu X+2 Produktionseinheiten zwischen zwei Ressourcen aus, wobei X die aktuelle Generation ist.",
+
+	"Shara": "Shara",
+	"Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "Einmal pro Spiel wähle ein Planetensymbol. Diese Karte zählt, als hätte man sofort 2 dieser Symbole gespielt. Dann erhalte M€ in Höhe der Planetenleiste dieses Symbols.",
+
+	"Stefan": "Stefan",
+	"Once per game, sell any number of cards from your hand for 3 M€ each.": "Einmal pro Spiel verkaufe eine beliebige Anzahl von Karten aus deiner Hand für je 3 M€.",
+
+	"Tate": "Tate",
+	"Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "Einmal pro Spiel benenne ein Symbol. Decke Karten vom Stapel auf, bis du 5 Karten mit diesem Symbol findest. KAUFE bis zu 2 Karten und lege den Rest ab.",
+
+	"Ulrich": "Ulrich",
+	"Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "Einmal pro Spiel erhalte 4 M€ für jeden platzierten Ozean. Wenn alle Ozeane platziert sind, erhalte nur 15 M€.",
+
+	"Van Allen": "Van Allen",
+	"You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.": "Effekt: Du darfst kostenfrei Meilensteine beanspruchen (du musst weiterhin die Voraussetzungen erfüllen). Wenn ein Meilenstein beansprucht wird, erhalte 3 M€.",
+
+	"Will": "Will",
+	"Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "Einmal pro Spiel füge die folgenden Ressourcen zu deinen Karten hinzu: 2 Tiere, 2 Mikroben, 2 Schweber, 2 Joker-Ressourcen.",
+
+	"Xavier": "Xavier",
+	"Once per game, gain 2 wild tags for THIS GENERATION.": "Einmal pro Spiel erhalte 2 Jokersymbole für DIESE GENERATION.",
+	"Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "Effekt: Wenn du eine Karte spielst, die einen Vorrausetzung hat, zahle 1 M€ weniger, NACH dem Einsatz dieser Aktion.",
+
+	"Xu": "Xu",
+	"Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you Have the most Venus tags in play.": "Einmal pro Spiel erhalte 2 M€ für jede Venus-Symbol im Spiel. Erhalte zusätzlich 8 M€, falls du die meisten Venus-Symbole im Spiel hast.",
+
+	"Yvonne": "Yvonne",
+	"Once per game, gain all your colony bonuses twice.": "Einmal pro Spiel erhalte alle Boni deiner Kolonie doppelt.",
+
+	"Zan": "Zan",
+	"You are immune to Reds' ruling policy. Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "Du bist immun gegen die Agendapolitik der Roten. Einmal pro Spiel platziere alle deine verfügbaren Delegierten in die Roten. Du erhältst 1 M€ für jeden auf diese Weise platzierten Delegierten."
+}

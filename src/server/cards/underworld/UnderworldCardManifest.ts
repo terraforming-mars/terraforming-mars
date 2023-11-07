@@ -46,7 +46,7 @@ import {GeologicalExpertise} from './GeologicalExpertise';
 // import {GlobalAudit} from './GlobalAudit';
 import {GreyMarketExploitation} from './GreyMarketExploitation';
 // // import {GuerillaEcologists} from './GuerillaEcologists';
-// import {Hackers} from './Hackers';
+import {Hackers} from './Hackers';
 // import {Hadesphere} from './Hadesphere';
 // import {HectateSpeditions} from './HectateSpeditions';
 // import {HenkeiGenetics} from './HenkeiGenetics';
@@ -233,7 +233,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
 
     // // Replacements
     // [CardName.STANDARD_TECHNOLOGY]: {Factory: StandardTechnology},
-    // [CardName.HACKERS_UNDERWORLD]: {Factory: Hackers},
+    [CardName.HACKERS_UNDERWORLD]: {Factory: Hackers},
     [CardName.HIRED_RAIDERS_UNDERWORLD]: {Factory: HiredRaiders},
   },
 

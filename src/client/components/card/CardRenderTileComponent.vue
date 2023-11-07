@@ -125,6 +125,9 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.CRASHLANDING]: {
     tile: 'card-tile-crashlanding',
   },
+  [TileType.MAN_MADE_VOLCANO]: {
+    tile: 'card-tile-man-made-volcano',
+  },
   [TileType.GREENERY]: {},
   [TileType.OCEAN]: {},
   [TileType.CITY]: {},
@@ -135,6 +138,7 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.RED_CITY]: {}, // This isn't shown on a card
   [TileType.MARTIAN_NATURE_WONDERS]: {}, // This isn't shown on a card
   [TileType.MARS_NOMADS]: {}, // This isn't shown on a card
+  [TileType.REY_SKYWALKER]: {}, // This isn't shown on a card
 };
 
 export default Vue.extend({

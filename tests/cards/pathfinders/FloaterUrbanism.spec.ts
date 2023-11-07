@@ -19,7 +19,7 @@ describe('FloaterUrbanism', function() {
 
   beforeEach(function() {
     card = new FloaterUrbanism();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();

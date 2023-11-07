@@ -20,10 +20,10 @@ describe('MinersOnStrike', function() {
     player.playedCards.push(new MethaneFromTitan());
     player2.playedCards.push(new MethaneFromTitan());
     player2.playedCards.push(new MethaneFromTitan());
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
     card.resolve(game, turmoil);
     expect(player.titanium).to.eq(4);
     expect(player2.titanium).to.eq(5);

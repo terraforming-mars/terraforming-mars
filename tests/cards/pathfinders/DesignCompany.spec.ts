@@ -11,7 +11,7 @@ describe('DesignCompany', function() {
 
   beforeEach(function() {
     card = new DesignCompany();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

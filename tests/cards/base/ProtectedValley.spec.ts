@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {ProtectedValley} from '../../../src/server/cards/base/ProtectedValley';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, runAllActions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('ProtectedValley', function() {
   it('Should play', function() {
@@ -11,9 +11,9 @@ describe('ProtectedValley', function() {
     const [game, player] = testGame(2);
     expect(card.play(player)).is.undefined;
     runAllActions(game);
-    const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(action.spaces[0]);
-    expect(action.spaces[0].tile && action.spaces[0].tile.tileType).to.eq(TileType.GREENERY);
+
+    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
+
     expect(player.production.megacredits).to.eq(2);
     expect(game.getOxygenLevel()).to.eq(1);
   });

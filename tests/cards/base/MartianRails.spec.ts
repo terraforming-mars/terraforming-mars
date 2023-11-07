@@ -11,7 +11,7 @@ describe('MartianRails', () => {
 
   beforeEach(() => {
     card = new MartianRails();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not act without energy', () => {

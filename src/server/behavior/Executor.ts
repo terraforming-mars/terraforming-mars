@@ -28,8 +28,13 @@ import {SelectOption} from '../inputs/SelectOption';
 import {Payment} from '../../common/inputs/Payment';
 import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {message} from '../logs/MessageBuilder';
+import {IdentifySpacesDeferred} from '../underworld/IdentifySpacesDeferred';
+import {ExcavateSpacesDeferred} from '../underworld/ExcavateSpacesDeferred';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {SelectResource} from '../inputs/SelectResource';
+import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
+import {isIProjectCard} from '../cards/IProjectCard';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -93,6 +98,12 @@ export class Executor implements BehaviorExecutor {
         }
       }
       if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
+        return false;
+      }
+      if (spend.resourceFromAnyCard && player.getCardsWithResources(spend.resourceFromAnyCard.type).length === 0) {
+        return false;
+      }
+      if (spend.corruption && player.underworldData.corruption < spend.corruption) {
         return false;
       }
     }
@@ -167,7 +178,7 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.turmoil) {
       if (behavior.turmoil.sendDelegates) {
-        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) < behavior.turmoil.sendDelegates.count) {
+        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
           return false;
         }
       }
@@ -220,15 +231,13 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.spend !== undefined) {
       const spend = behavior.spend;
+      const remainder = {...behavior};
+      delete remainder['spend'];
+
       if (spend.megacredits) {
         player.game.defer(new SelectPaymentDeferred(player, spend.megacredits, {
           title: TITLES.payForCardAction(card.name),
-        }))
-          .andThen(() => {
-            const copy = {...behavior};
-            delete copy['spend'];
-            this.execute(copy, player, card);
-          });
+        })).andThen(() => this.execute(remainder, player, card));
         // Exit early as the rest of handled by the deferred action.
         return;
       }
@@ -245,9 +254,7 @@ export class Executor implements BehaviorExecutor {
       }
       if (spend.heat) {
         player.defer(player.spendHeat(spend.heat, () => {
-          const copy = {...behavior};
-          delete copy['spend'];
-          this.execute(copy, player, card);
+          this.execute(remainder, player, card);
           return undefined;
         }));
         // Exit early as the rest of handled by the deferred action.
@@ -255,6 +262,15 @@ export class Executor implements BehaviorExecutor {
       }
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);
+      }
+      if (spend.resourceFromAnyCard) {
+        player.game.defer(new RemoveResourcesFromCard(player, spend.resourceFromAnyCard.type, 1, {ownCardsOnly: true, blockable: false}))
+          .andThen(() => this.execute(remainder, player, card));
+        // Exit early as the rest of handled by the deferred action.
+        return;
+      }
+      if (spend.corruption) {
+        UnderworldExpansion.loseCorruption(player, spend.corruption);
       }
     }
 
@@ -267,11 +283,25 @@ export class Executor implements BehaviorExecutor {
       player.stock.addUnits(units, {log: true});
     }
     if (behavior.standardResource) {
-      player.defer(new SelectResources(
-        player,
-        behavior.standardResource,
-        `Gain ${behavior.standardResource} resources.`,
-      ));
+      const entry = behavior.standardResource;
+      const count = typeof(entry) === 'number' ? entry : entry.count;
+      const same = typeof(entry) === 'number' ? false : entry.same ?? false;
+      if (same === false) {
+        player.defer(
+          new SelectResources(
+            player,
+            count,
+            message('Gain ${0} standard resources', (b) => b.number(count))));
+      } else {
+        player.defer(
+          new SelectResource(
+            message('Gain ${0} units of a standard resource', (b) => b.number(count)),
+            Units.keys,
+            (unit) => {
+              player.stock.add(Units.ResourceMap[unit], count, {log: true});
+              return undefined;
+            }));
+      }
     }
     if (behavior.steelValue === 1) {
       player.increaseSteelValue();
@@ -459,25 +489,25 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.underworld !== undefined) {
       const underworld = behavior.underworld;
-      // if (underworld.identify !== undefined) {
-      //   player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
-      // }
-      // if (underworld.excavate !== undefined) {
-      //   const excavate = underworld.excavate;
-      //   if (typeof(excavate) === 'number') {
-      //     player.game.defer(new ExcavateSpacesDeferred(player, excavate));
-      //   } else {
-      //     player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
-      //   }
-      // }
+      if (underworld.identify !== undefined) {
+        player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
+      }
+      if (underworld.excavate !== undefined) {
+        const excavate = underworld.excavate;
+        if (typeof(excavate) === 'number') {
+          player.game.defer(new ExcavateSpacesDeferred(player, excavate));
+        } else {
+          player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
+        }
+      }
       if (underworld.corruption !== undefined) {
         UnderworldExpansion.gainCorruption(player, ctx.count(underworld.corruption), {log: true});
       }
-      // if (underworld.markThisGeneration !== undefined) {
-      //   if (isIProjectCard(card)) {
-      //     card.generationUsed = player.game.generation;
-      //   }
-      // }
+      if (underworld.markThisGeneration !== undefined) {
+        if (isIProjectCard(card)) {
+          card.generationUsed = player.game.generation;
+        }
+      }
     }
   }
 

@@ -10,7 +10,7 @@ describe('CarbonateProcessing', function() {
 
   beforeEach(function() {
     card = new CarbonateProcessing();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {

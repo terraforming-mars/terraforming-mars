@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 describe('MirandaResort', function() {
   it('Should play', function() {
     const card = new MirandaResort();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.playedCards.push(new BusinessNetwork());
     cast(card.play(player), undefined);

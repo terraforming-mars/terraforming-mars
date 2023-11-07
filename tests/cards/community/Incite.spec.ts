@@ -43,11 +43,11 @@ describe('Incite', function() {
     sendDelegate.cb(PartyName.MARS);
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);
-    expect(marsFirst.delegates.get(player.id)).eq(2);
+    expect(marsFirst.delegates.get(player)).eq(2);
   });
 
   it('Lobbying costs 3MC', () => {
-    turmoil.usedFreeDelegateAction.add(player.id);
+    turmoil.usedFreeDelegateAction.add(player);
 
     player.megaCredits = 2;
     expect(getSendADelegateOption(player)).is.undefined;
@@ -56,12 +56,12 @@ describe('Incite', function() {
     const selectParty = cast(getSendADelegateOption(player), SelectParty);
 
     expect(selectParty.title).eq('Send a delegate in an area (3 M€)');
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(0);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(0);
 
     selectParty.cb(PartyName.KELVINISTS);
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(1);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(1);
   });
 });

@@ -13,7 +13,7 @@ describe('CrashSiteCleanup', function() {
 
   beforeEach(function() {
     card = new CrashSiteCleanup();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {

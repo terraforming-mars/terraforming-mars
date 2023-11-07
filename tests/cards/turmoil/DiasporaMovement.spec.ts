@@ -27,13 +27,13 @@ describe('DiasporaMovement', function() {
   });
 
   it('Can not play', function() {
-    reds.sendDelegate(player.id, game);
+    reds.sendDelegate(player, game);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    reds.sendDelegate(player.id, game);
-    reds.sendDelegate(player.id, game);
+    reds.sendDelegate(player, game);
+    reds.sendDelegate(player, game);
     expect(player.simpleCanPlay(card)).is.true;
 
     player.playedCards.push(new ColonizerTrainingCamp());

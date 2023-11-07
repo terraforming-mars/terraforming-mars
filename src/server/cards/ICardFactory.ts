@@ -41,6 +41,8 @@ export function isCompatibleWith(cf: ICardFactory<any>, gameOptions: GameOptions
       return gameOptions.ceoExtension;
     case 'starwars':
       return gameOptions.starWarsExpansion;
+    case 'underworld':
+      return gameOptions.underworldExpansion;
     }
     throw new Error(`Unhandled expansion type ${expansion}`);
   });

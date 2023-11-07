@@ -38,7 +38,7 @@ export class CulturalMetropolis extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     const turmoil = Turmoil.getTurmoil(player.game);
-    return turmoil.getAvailableDelegateCount(player.id) >= 2 && player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return turmoil.getAvailableDelegateCount(player) >= 2 && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {

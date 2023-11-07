@@ -9,7 +9,7 @@ describe('DevelopmentCenter', function() {
 
   beforeEach(function() {
     card = new DevelopmentCenter();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not act', function() {

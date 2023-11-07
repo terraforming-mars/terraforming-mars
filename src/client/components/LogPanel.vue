@@ -26,7 +26,7 @@
             <Card :card="{name: cardName, resources: getResourcesOnCard(cardName)}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames.elements" :key="globalEventName">
-            <global-event :globalEvent="getGlobalEventModel(globalEventName)" type="prior" :showIcons="false"></global-event>
+            <global-event :globalEventName="globalEventName" type="prior" :showIcons="false"></global-event>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="colonyName in colonyNames.elements" :key="colonyName">
             <colony :colony="getColony(colonyName)"></colony>
@@ -48,15 +48,13 @@ import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
-import {TileType} from '@/common/TileType';
+import {TileType, tileTypeToString} from '@/common/TileType';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
-import {getGlobalEventModel} from '@/client/turmoil/ClientGlobalEventManifest';
-import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
@@ -212,8 +210,8 @@ export default Vue.extend({
         return '<span class="log-card background-color-global-event">' + this.$t(globalEventName) + '</span>';
 
       case LogMessageDataType.TILE_TYPE:
-        const tileType: TileType = +data.value;
-        return this.$t(TileType.toString(tileType));
+        const tileType: TileType = Number(data.value);
+        return this.$t(tileTypeToString[tileType]);
 
       case LogMessageDataType.COLONY:
         const colonyName = data.value as ColonyName;
@@ -345,9 +343,6 @@ export default Vue.extend({
     },
     lastGenerationClass(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
-    },
-    getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
-      return getGlobalEventModel(globalEventName);
     },
     // TODO(kberg): getColony could have the actual game colony by changing this component's properties.
     getColony(colonyName: ColonyName): ColonyModel {

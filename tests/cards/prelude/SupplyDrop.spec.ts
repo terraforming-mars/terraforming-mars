@@ -5,7 +5,7 @@ import {cast} from '../../TestingUtils';
 
 describe('SupplyDrop', function() {
   it('Should play', function() {
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     const card = new SupplyDrop();
     cast(card.play(player), undefined);
     expect(player.steel).to.eq(8);

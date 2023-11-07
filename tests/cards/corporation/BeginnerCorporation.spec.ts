@@ -5,7 +5,7 @@ import {cast} from '../../TestingUtils';
 describe('BeginnerCorporation', function() {
   it('Should play', function() {
     const card = new BeginnerCorporation();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
   });
 });

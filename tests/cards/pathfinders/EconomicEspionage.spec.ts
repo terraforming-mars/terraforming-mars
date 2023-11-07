@@ -10,7 +10,7 @@ describe('EconomicEspionage', function() {
 
   beforeEach(function() {
     card = new EconomicEspionage();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     player.playedCards.push(card);
   });
 

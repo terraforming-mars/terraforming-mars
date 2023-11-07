@@ -9,6 +9,6 @@ export class ChairmanRequirement extends CardRequirement {
     super({count: 1});
   }
   public satisfies(player: IPlayer) : boolean {
-    return Turmoil.getTurmoil(player.game).chairman === player.id;
+    return Turmoil.getTurmoil(player.game).chairman === player;
   }
 }

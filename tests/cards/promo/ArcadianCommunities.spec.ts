@@ -14,7 +14,7 @@ describe('ArcadianCommunities', function() {
 
   beforeEach(() => {
     card = new ArcadianCommunities();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     player.setCorporationForTest(card);
     board = player.game.board;
   });

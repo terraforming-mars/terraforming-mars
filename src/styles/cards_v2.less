@@ -1216,6 +1216,68 @@
             .card-resource-clone-trooper {
                 background-image: url(./assets/resources/clone-trooper.png);
             }
+
+            /* Underworld Assets */
+            .card-identification {
+              background-image: url(./assets/underworld/identify.png);
+              width: 44px;
+              background-size: 44px 44px;
+              height: 44px;
+          }
+          .card-excavation {
+              background-image: url(./assets/underworld/excavate.png);
+              width: 44px;
+              background-size: 44px 44px;
+              height: 44px;
+              .req {
+
+              }
+          }
+          .card-resource-corruption {
+              background-image: url(./assets/underworld/corruption.png);
+          }
+          // Is this even used?
+          .card-resource-tool {
+            background-image: url(./assets/underworld/card-resource-tool.png);
+          }
+          .card-resource-ware {
+            background-image: url(./assets/underworld/card-resource-ware.png);
+          }
+          .card-resource-scoop {
+            background-image: url(./assets/underworld/card-resource-scoop.png);
+          }
+          .card-resource-journalism {
+            background-image: url(./assets/underworld/card-resource-journalism.png);
+          }
+          .card-resource-activist {
+            background-image: url(./assets/underworld/card-resource-activist.png);
+          }
+
+          .card-neutral-delegate {
+            .card-delegate;
+            background-image: url(./assets/underworld/neutral-delegate.png) !important;
+          }
+
+          .card-underground-resources {
+            width: 44px;
+            background-size: 44px 44px;
+            height: 44px;
+            background-image: url("assets/underworld/underground-token-background.png");
+            .card-x {
+              color: black;
+              font-size: 69px;
+              font-weight: bold;
+              margin-top: 10px;
+            }
+          }
+
+          .card-corruption-shield {
+            width: 44px;
+            background-size: 44px 44px;
+            height: 44px;
+            background-image: url("assets/underworld/corruption-block.png");
+          }
+
             /* CEO Assets */
             .card-arrow-opg {
                 display: inline-block;
@@ -2397,6 +2459,9 @@ each(@parties, {
         background-image: url("./assets/resources/@{value}.png");
       }
     })
+    .card-resource-tool {
+      background-image: url(./assets/underworld/card-resource-tool.png);
+    }
     .card-resource-cube {
       background-image: url("./assets/cube.png");
     }

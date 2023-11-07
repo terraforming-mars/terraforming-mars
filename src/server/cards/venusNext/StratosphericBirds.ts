@@ -54,7 +54,7 @@ export class StratosphericBirds extends ActionCard implements IActionCard {
     }
   }
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, true));
+    player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, {ownCardsOnly: true, blockable: false}));
     return undefined;
   }
 }

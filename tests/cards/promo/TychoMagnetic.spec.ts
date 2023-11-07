@@ -11,7 +11,7 @@ describe('TychoMagnetics', function() {
 
   beforeEach(function() {
     card = new TychoMagnetics();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not act if no energy resources available', function() {

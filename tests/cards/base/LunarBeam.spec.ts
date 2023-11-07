@@ -10,7 +10,7 @@ describe('LunarBeam', function() {
 
   beforeEach(function() {
     card = new LunarBeam();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can play', function() {

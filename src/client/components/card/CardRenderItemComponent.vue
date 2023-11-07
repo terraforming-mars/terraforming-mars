@@ -296,7 +296,7 @@ export default Vue.extend({
         classes.push(this.cardResource, 'card-resource-nomads');
         break;
       case CardRenderItemType.HYDROELECTRIC_RESOURCE:
-        classes.push(this.cardResource, 'card-resource-hydroelectric-resource');
+        classes.push('card-resource', 'card-resource-hydroelectric-resource');
         break;
       }
 

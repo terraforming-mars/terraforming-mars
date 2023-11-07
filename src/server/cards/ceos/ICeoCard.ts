@@ -7,9 +7,6 @@ export interface ICeoCard extends IProjectCard, Partial<IActionCard> {
   /** If this card is active this generation. */
   opgActionIsActive?: boolean;
 
-  /** The generation the card was activated. Used for Duncan. */
-  generationUsed?: number;
-
   canAct(player: IPlayer): boolean;
 }
 

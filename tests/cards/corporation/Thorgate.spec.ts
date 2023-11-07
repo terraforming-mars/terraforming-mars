@@ -9,7 +9,7 @@ import {cast} from '../../TestingUtils';
 describe('Thorgate', function() {
   it('Should play', function() {
     const card = new Thorgate();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     player.setCorporationForTest(card);
     expect(player.production.energy).to.eq(1);

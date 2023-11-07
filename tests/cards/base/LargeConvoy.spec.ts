@@ -13,7 +13,7 @@ describe('LargeConvoy', function() {
 
   beforeEach(function() {
     card = new LargeConvoy();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play without animal cards', function() {

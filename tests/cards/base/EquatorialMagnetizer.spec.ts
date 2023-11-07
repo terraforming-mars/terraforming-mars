@@ -10,7 +10,7 @@ describe('EquatorialMagnetizer', function() {
 
   beforeEach(function() {
     card = new EquatorialMagnetizer();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not act', function() {

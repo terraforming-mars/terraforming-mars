@@ -12,6 +12,7 @@ import {Payment} from '@/common/inputs/Payment';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
+import {SelectProjectCardToPlayDataModel} from '@/client/mixins/PaymentWidgetMixin';
 
 describe('SelectProjectCardToPlay', () => {
   let localStorage: FakeLocalStorage;
@@ -83,36 +84,46 @@ describe('SelectProjectCardToPlay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsAvailable('heat', true);
-    tester.expectValue('heat', 3);
+    tester.expectIsAvailable('heat');
+    tester.expectPayment({heat: 3, megaCredits: 7});
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 3, megaCredits: 7}));
   });
 
-  it('using max button with heat', async () => {
-    // Birds will cost 10. Player has 10 MC and 4 heat. It will select 10MC
-    //
-    // Then when clicking the 'max' button for heat, the algorithm will switch to 8 M€ and 2 heat.
+  it('max heat', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.BIRDS, 10,
+      {heat: 4, megaCredits: 10, titaniumValue: 1, steelValue: 1},
+      {paymentOptions: {heat: true}});
 
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({heat: 0, megaCredits: 10});
+
+    await tester.clickMax('heat');
+    tester.expectPayment({heat: 4, megaCredits: 6});
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({heat: 4, megaCredits: 6}));
+  });
+
+  it('max heat, heat in reserve', async () => {
     const wrapper = setupCardForPurchase(
       CardName.BIRDS, 10,
       {heat: 4, megaCredits: 10, titaniumValue: 1, steelValue: 1},
       {paymentOptions: {heat: true}},
-      Units.of({heat: 2}));
+      {reserveUnits: Units.of({heat: 2})});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('megaCredits', 10);
-    tester.expectValue('heat', 0);
+    tester.expectPayment({heat: 0, megaCredits: 10});
 
     await tester.clickMax('heat');
+    // Only 2 heat available since two are in reserve.
+    tester.expectPayment({heat: 2, megaCredits: 8});
 
-    tester.expectValue('megaCredits', 8);
-    tester.expectValue('heat', 2);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 2, megaCredits: 8}));
   });
 
@@ -125,10 +136,9 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({microbes: 2, megaCredits: 6});
 
-    tester.expectValue('microbes', 2);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({microbes: 2, megaCredits: 6}));
   });
 
@@ -141,44 +151,43 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({floaters: 2, megaCredits: 4});
 
-    tester.expectValue('floaters', 2);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 2, megaCredits: 4}));
   });
 
   it('Paying for Stratospheric Birds without floaters', async () => {
     const wrapper = setupCardForPurchase(
-      CardName.STRATOSPHERIC_BIRDS, 12, {
-        megaCredits: 12,
-      },
+      CardName.STRATOSPHERIC_BIRDS, 12,
+      {megaCredits: 12},
       {});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 12});
 
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({megaCredits: 12}));
   });
 
   it('Paying for Stratospheric Birds with Dirigibles', async () => {
     const wrapper = setupCardForPurchase(
-      CardName.STRATOSPHERIC_BIRDS, 12, {
-        megaCredits: 9,
-      },
+      CardName.STRATOSPHERIC_BIRDS, 12,
+      {megaCredits: 9},
       {floaters: 3});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({floaters: 1, megaCredits: 9});
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 1, megaCredits: 9}));
 
-    tester.clickMax('floaters');
+    await tester.clickMax('floaters');
+    tester.expectPayment({floaters: 2, megaCredits: 6});
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 2, megaCredits: 6}));
   });
 
@@ -188,40 +197,37 @@ describe('SelectProjectCardToPlay', () => {
       {name: CardName.AERIAL_MAPPERS, resources: 1},
     ];
     const wrapper = setupCardForPurchase(
-      CardName.STRATOSPHERIC_BIRDS, 12, {
-        megaCredits: 9,
-        tableau: tableau as Array<CardModel>,
-      },
+      CardName.STRATOSPHERIC_BIRDS, 12,
+      {megaCredits: 9, tableau: tableau as Array<CardModel>},
       {floaters: 3});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 1, megaCredits: 9}));
 
-    tester.clickMax('floaters');
+    await tester.clickMax('floaters');
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 3, megaCredits: 3}));
   });
 
   it('Paying for other card with Dirigibles uses all floaters', async () => {
     const wrapper = setupCardForPurchase(
-      CardName.FORCED_PRECIPITATION, 12, {
-        megaCredits: 9,
-      },
+      CardName.FORCED_PRECIPITATION, 12,
+      {megaCredits: 9},
       {floaters: 3});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 1, megaCredits: 9}));
 
-    tester.clickMax('floaters');
+    await tester.clickMax('floaters');
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 3, megaCredits: 3}));
   });
 
@@ -235,11 +241,9 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 6, steel: 2});
 
-    tester.expectValue('steel', 2);
-
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({steel: 2, megaCredits: 6}));
   });
 
@@ -258,12 +262,9 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 0, titanium: 2});
 
-    tester.expectValue('megaCredits', 0);
-    tester.expectValue('titanium', 2);
-
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 2, megaCredits: 0}));
   });
 
@@ -282,12 +283,9 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 0, steel: 3, titanium: 3});
 
-    tester.expectValue('megaCredits', 0);
-    tester.expectValue('steel', 3);
-    tester.expectValue('titanium', 3);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({steel: 3, titanium: 3, megaCredits: 0}));
   });
 
@@ -307,12 +305,11 @@ describe('SelectProjectCardToPlay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectValue('megaCredits', 0);
-    tester.expectValue('steel', 4);
-    tester.expectValue('microbes', 4);
+    tester.expectAvailablePaymentComponents('steel', 'microbes');
+    tester.expectPayment({steel: 4, microbes: 4});
 
-    tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4, megaCredits: 0}));
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 4, steel: 4}));
   });
 
   it('using floater and microbes', async () => {
@@ -329,12 +326,9 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 1, microbes: 5, floaters: 1});
 
-    tester.expectValue('megaCredits', 1);
-    tester.expectValue('microbes', 5);
-    tester.expectValue('floaters', 1);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 1, microbes: 5, megaCredits: 1}));
   });
 
@@ -352,43 +346,32 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 0, floaters: 7, titanium: 1});
 
-    tester.expectValue('megaCredits', 0);
-    tester.expectValue('floaters', 7);
-    tester.expectValue('titanium', 1);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 1, floaters: 7, megaCredits: 0}));
   });
 
   it('Luna Train Station limits how much steel you can use', async () => {
-    // Luna Train Station costs 20, and will need 2 steel. Player has 20 M€ and 4 steel.
-    //
-    // The algorithm will select 20 MC,
-    //
-    // Then when clicking the 'max' button for steel, the algorithm will switch to 16 M€ and 2 steel.
     const wrapper = setupCardForPurchase(
       CardName.LUNA_TRAIN_STATION, 20,
       {
         megaCredits: 20,
         steel: 4,
         steelValue: 2,
-        titaniumValue: 0, // Needed for when setReminingMCValue is called.
       },
       {paymentOptions: {steel: true}},
-      Units.of({steel: 2}));
+      {reserveUnits: Units.of({steel: 2})});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 20, steel: 0});
 
-    tester.expectValue('megaCredits', 20);
-    tester.expectValue('steel', 0);
     await tester.clickMax('steel');
+    // 2 units of steel are in reserve
+    tester.expectPayment({megaCredits: 16, steel: 2});
 
-    tester.expectValue('megaCredits', 16);
-    tester.expectValue('steel', 2);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({steel: 2, megaCredits: 16}));
   });
 
@@ -409,13 +392,12 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 6, titanium: 7});
 
-    tester.expectValue('megaCredits', 6);
-    tester.expectValue('titanium', 7);
-    expect((wrapper.vm as any).steel).eq(0);
-    tester.expectIsAvailable('steel', false);
+    expect((wrapper.vm as unknown as SelectProjectCardToPlayDataModel).payment.steel).eq(0);
+    tester.expectIsNotAvailable('steel');
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 7, megaCredits: 6}));
   });
 
@@ -424,20 +406,14 @@ describe('SelectProjectCardToPlay', () => {
     // ARISTARCHUS_ROAD_NETWORK costs 15. Player has 7M€ and will use 8 science units.
     const wrapper = setupCardForPurchase(
       CardName.ARISTARCHUS_ROAD_NETWORK, 15,
-      {
-        megaCredits: 7,
-        steel: 0,
-      },
+      {megaCredits: 7, steel: 0},
       {lunaArchivesScience: 10});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 7, lunaArchivesScience: 8});
 
-    tester.expectIsAvailable('lunaArchivesScience', true);
-    tester.expectValue('lunaArchivesScience', 8);
-    tester.expectValue('megaCredits', 7);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({lunaArchivesScience: 8, megaCredits: 7}));
   });
 
@@ -446,19 +422,14 @@ describe('SelectProjectCardToPlay', () => {
     // ARCTIC_ALGAE costs 12. Player has 7M€ and will use 2 seeds.
     const wrapper = setupCardForPurchase(
       CardName.ARCTIC_ALGAE, 12,
-      {
-        megaCredits: 7,
-      },
+      {megaCredits: 7},
       {seeds: 3});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 7, seeds: 1});
 
-    tester.expectIsAvailable('seeds', true);
-    tester.expectValue('seeds', 1);
-    tester.expectValue('megaCredits', 7);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({seeds: 1, megaCredits: 7}));
   });
 
@@ -467,39 +438,29 @@ describe('SelectProjectCardToPlay', () => {
     // ASTEROID_MINING costs 30. Player has 11M€ and will use 5 graphene units.
     const wrapper = setupCardForPurchase(
       CardName.ASTEROID_MINING, 30,
-      {
-        megaCredits: 11,
-        titanium: 0,
-      },
+      {megaCredits: 11, titanium: 0},
       {graphene: 7, paymentOptions: {graphene: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+    tester.expectPayment({megaCredits: 10, graphene: 5});
 
-    tester.expectIsAvailable('graphene', true);
-    tester.expectValue('graphene', 5);
-    tester.expectValue('megaCredits', 10);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({graphene: 5, megaCredits: 10}));
   });
 
   it('initial setup allows for steel and titanium when using Last Restort Ingenuity', async () => {
     // Earth Office costs 1, but has no building tag or space tag.
     const wrapper = setupCardForPurchase(
-      CardName.EARTH_OFFICE, 0, {
-        megaCredits: 0,
-        steel: 4,
-        titanium: 4,
-        lastCardPlayed: CardName.LAST_RESORT_INGENUITY,
-      },
+      CardName.EARTH_OFFICE, 0,
+      {megaCredits: 0, steel: 4, titanium: 4, lastCardPlayed: CardName.LAST_RESORT_INGENUITY},
       {paymentOptions: {steel: false, titanium: false}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsAvailable('steel', true);
-    tester.expectIsAvailable('titanium', true);
+    tester.expectIsAvailable('steel');
+    tester.expectIsAvailable('titanium');
   });
 
   it('Stormcraft floaters count for heat', async () => {
@@ -525,10 +486,10 @@ describe('SelectProjectCardToPlay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectIsAvailable('heat', true);
-    tester.expectValue('heat', 7);
+    tester.expectIsAvailable('heat');
+    tester.expectPayment({megaCredits: 3, heat: 7});
 
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 7, megaCredits: 3}));
   });
 
@@ -551,20 +512,17 @@ describe('SelectProjectCardToPlay', () => {
         ],
       },
       {paymentOptions: {heat: true}},
-      Units.of({heat: 1}));
+      {reserveUnits: Units.of({heat: 1})});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('megaCredits', 10);
-    tester.expectValue('heat', 0);
+    tester.expectPayment({megaCredits: 10, heat: 0});
 
     await tester.clickMax('heat');
+    // One heat is in reserve
+    tester.expectPayment({heat: 4, megaCredits: 6});
 
-    tester.expectValue('megaCredits', 6);
-    tester.expectValue('heat', 4);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({heat: 4, megaCredits: 6}));
   });
 
@@ -576,16 +534,12 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('megaCredits', 10);
-    tester.expectValue('titanium', 0);
+    tester.expectPayment({megaCredits: 10, titanium: 0});
 
     await tester.clickMax('titanium');
+    tester.expectPayment({megaCredits: 4, titanium: 2});
 
-    tester.expectValue('megaCredits', 4);
-    tester.expectValue('titanium', 2);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 2, megaCredits: 4}));
   });
 
@@ -597,16 +551,12 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-
-    tester.expectValue('megaCredits', 15);
-    tester.expectValue('titanium', 3);
+    tester.expectPayment({megaCredits: 15, titanium: 3});
 
     await tester.clickMax('titanium');
+    tester.expectPayment({megaCredits: 7, titanium: 5});
 
-    tester.expectValue('megaCredits', 7);
-    tester.expectValue('titanium', 5);
-
-    tester.clickSave();
+    await tester.clickSave();
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 5, megaCredits: 7}));
   });
 
@@ -615,7 +565,7 @@ describe('SelectProjectCardToPlay', () => {
     cardCost: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<SelectProjectCardToPlayModel>,
-    reserveUnits: Units | undefined = undefined) {
+    options?: {reserveUnits?: Units}) {
     const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
       steel: 0,
@@ -647,8 +597,8 @@ describe('SelectProjectCardToPlay', () => {
       seeds: 0,
       ...playerInputFields,
     };
-    if (reserveUnits !== undefined) {
-      playerInput.cards![0].reserveUnits = reserveUnits;
+    if (options !== undefined) {
+      playerInput.cards![0].reserveUnits = options.reserveUnits;
     }
 
     return mount(SelectProjectCardToPlay, {

@@ -61,7 +61,7 @@ describe('Aridor', function() {
     expect(game.colonies).has.length(5);
 
     expect(() => player.process(<InputResponse>{})).to.throw(/Not a valid SelectColonyResponse/);
-    expect(() => player.process(<InputResponse>{type: 'colony', colonyName: undefined as unknown as ColonyName})).to.throw(/No colony selected/);
+    expect(() => player.process({type: 'colony', colonyName: undefined as unknown as ColonyName})).to.throw(/No colony selected/);
     expect(() => player.process({type: 'colony', colonyName: colonyInPlay.name})).to.throw(/Colony .* not found/);
 
     player.process({type: 'colony', colonyName: discardedColony.name});

@@ -14,7 +14,7 @@ describe('Engineer', () => {
 
   beforeEach(() => {
     award = new Engineer();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('score', () => {

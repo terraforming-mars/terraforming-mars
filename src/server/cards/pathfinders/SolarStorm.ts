@@ -47,7 +47,7 @@ export class SolarStorm extends Card implements IProjectCard {
       }
     }
     player.game.defer(new RemoveResourcesFromCard(
-      player, CardResource.DATA, 3, /* ownCards */ false, /* mandatory */ false));
+      player, CardResource.DATA, 3, {mandatory: false}));
     return undefined;
   }
 }

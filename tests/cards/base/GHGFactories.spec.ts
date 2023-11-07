@@ -10,7 +10,7 @@ describe('GHGFactories', function() {
 
   beforeEach(function() {
     card = new GHGFactories();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {

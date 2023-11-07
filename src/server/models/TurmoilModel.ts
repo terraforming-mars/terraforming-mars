@@ -2,9 +2,8 @@ import {Color} from '../../common/Color';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {IGame} from '../IGame';
 import {PoliticalAgendas} from '../turmoil/PoliticalAgendas';
-import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
-import {Turmoil} from '../turmoil/Turmoil';
-import {DelegatesModel, GlobalEventModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
+import {Delegate, Turmoil} from '../turmoil/Turmoil';
+import {DelegatesModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
 
 export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
   return Turmoil.ifTurmoilElse(game, (turmoil) => {
@@ -12,31 +11,26 @@ export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
     let chairman: Color | undefined;
 
     if (turmoil.chairman) {
-      if (turmoil.chairman === 'NEUTRAL') {
-        chairman = Color.NEUTRAL;
-      } else {
-        chairman = game.getPlayerById(turmoil.chairman).color;
-      }
+      chairman = delegateColor(turmoil.chairman);
     }
     const dominant = turmoil.dominantParty.name;
     const ruling = turmoil.rulingParty.name;
 
     const reserve: Array<DelegatesModel> = [];
     const lobby: Array<Color> = [];
-    turmoil.delegateReserve.forEachMultiplicity((count, playerId) => {
-      const color = playerId === 'NEUTRAL' ? Color.NEUTRAL : game.getPlayerById(playerId).color;
-      if (playerId !== 'NEUTRAL') {
-        if (!turmoil.usedFreeDelegateAction.has(playerId)) {
+    turmoil.delegateReserve.forEachMultiplicity((count, delegate) => {
+      const color = delegateColor(delegate);
+      if (delegate !== 'NEUTRAL') {
+        if (!turmoil.usedFreeDelegateAction.has(delegate)) {
           count--;
           lobby.push(color);
         }
       }
-      reserve.push({color, number: count});
+      reserve.push({
+        color: color,
+        number: count,
+      });
     });
-
-    const distant = globalEventToModel(turmoil.distantGlobalEvent);
-    const coming = globalEventToModel(turmoil.comingGlobalEvent);
-    const current = globalEventToModel(turmoil.currentGlobalEvent);
 
     const politicalAgendas: PoliticalAgendasModel = {
       marsFirst: PoliticalAgendas.getAgenda(turmoil, PartyName.MARS),
@@ -64,26 +58,14 @@ export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
       parties,
       lobby,
       reserve,
-      distant,
-      coming,
-      current,
+      distant: turmoil.distantGlobalEvent?.name,
+      coming: turmoil.comingGlobalEvent?.name,
+      current: turmoil.currentGlobalEvent?.name,
       politicalAgendas,
       policyActionUsers,
     };
   },
   () => undefined);
-}
-
-function globalEventToModel(globalEvent: IGlobalEvent | undefined): GlobalEventModel | undefined {
-  if (globalEvent === undefined) {
-    return undefined;
-  }
-  return {
-    name: globalEvent.name,
-    description: globalEvent.description,
-    revealed: globalEvent.revealedDelegate,
-    current: globalEvent.currentDelegate,
-  };
 }
 
 function getParties(game: IGame): Array<PartyModel> {
@@ -93,17 +75,12 @@ function getParties(game: IGame): Array<PartyModel> {
         const delegates: Array<DelegatesModel> = [];
         for (const player of party.delegates.keys()) {
           const number = party.delegates.count(player);
-          const color = player === 'NEUTRAL' ? Color.NEUTRAL : game.getPlayerById(player).color;
-          delegates.push({color, number});
+          delegates.push({
+            color: delegateColor(player),
+            number,
+          });
         }
-        let partyLeader;
-        if (party.partyLeader) {
-          if (party.partyLeader === 'NEUTRAL') {
-            partyLeader = Color.NEUTRAL;
-          } else {
-            partyLeader = game.getPlayerById(party.partyLeader).color;
-          }
-        }
+        const partyLeader = party.partyLeader === undefined ? undefined : delegateColor(party.partyLeader);
         return {
           name: party.name,
           partyLeader: partyLeader,
@@ -112,4 +89,8 @@ function getParties(game: IGame): Array<PartyModel> {
       });
     },
     () => []);
+}
+
+function delegateColor(delegate: Delegate) {
+  return delegate === 'NEUTRAL' ? Color.NEUTRAL : delegate.color;
 }

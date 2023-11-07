@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('IoResearchOutpost', function() {
   it('Should play', function() {
     const card = new IoResearchOutpost();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     Game.newInstance('gameid', [player], player);
     card.play(player);
 

@@ -13,7 +13,7 @@ describe('Jansson', function() {
 
   beforeEach(() => {
     card = new Jansson();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can only act once per game', function() {

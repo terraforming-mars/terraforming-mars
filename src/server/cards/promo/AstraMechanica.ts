@@ -44,7 +44,7 @@ export class AstraMechanica extends Card implements IProjectCard {
       return undefined;
     }
     return new SelectCard(
-      'Select up 2 to events to return to your hand',
+      'Select up to 2 events to return to your hand',
       'Select',
       events,
       {max: 2, min: 0})

@@ -12,7 +12,7 @@ describe('Viron', function() {
 
   beforeEach(function() {
     card = new Viron();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should act', function() {

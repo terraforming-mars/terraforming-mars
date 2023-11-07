@@ -8,7 +8,7 @@ import {cast} from '../../TestingUtils';
 describe('FloaterLeasing', function() {
   it('Should play', function() {
     const card = new FloaterLeasing();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     const action = card.play(player);
 
     cast(action, undefined);

@@ -12,7 +12,7 @@ describe('Diversifier', function() {
 
   beforeEach(() => {
     milestone = new Diversifier();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Counts wild tags tags as unique tags', function() {

@@ -6,7 +6,7 @@ import {cast} from '../../TestingUtils';
 describe('AsteroidMining', function() {
   it('Should play', function() {
     const card = new AsteroidMining();
-    const [/* skipped */, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(2);
     expect(card.getVictoryPoints(player)).to.eq(2);

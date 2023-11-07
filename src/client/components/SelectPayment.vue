@@ -1,12 +1,14 @@
 <script lang="ts">
 import Vue from 'vue';
-import {Payment, PaymentUnit, PAYMENT_UNITS} from '@/common/inputs/Payment';
+import {Payment} from '@/common/inputs/Payment';
+import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
 import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPaymentResponse} from '@/common/inputs/InputResponse';
+import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 
 export default Vue.extend({
   name: 'SelectPayment',
@@ -28,34 +30,38 @@ export default Vue.extend({
     },
   },
   computed: {
-    thisPlayer: function(): PublicPlayerModel {
+    ...PaymentWidgetMixin.computed,
+    thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
+    },
+    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
+      return [
+        'steel',
+        'titanium',
+        'heat',
+        'seeds',
+        'auroraiData',
+        'kuiperAsteroids',
+        'spireScience',
+        'megaCredits',
+      ];
     },
   },
   components: {
     AppButton,
+    PaymentUnitComponent,
   },
   data(): SelectPaymentDataModel {
     return {
       cost: 0,
-      heat: 0,
-      megaCredits: 0,
-      steel: 0,
-      titanium: 0,
-      plants: 0,
-      microbes: 0,
-      floaters: 0,
-      seeds: 0,
-      auroraiData: 0,
-      kuiperAsteroids: 0,
-      spireScience: 0,
+      payment: {...Payment.EMPTY},
       warning: undefined,
     };
   },
   mounted() {
     Vue.nextTick(() => {
       this.setInitialCost();
-      this.megaCredits = this.getMegaCreditsMax();
+      this.payment.megaCredits = this.getMegaCreditsMax();
       this.setDefaultValues();
     });
   },
@@ -69,7 +75,7 @@ export default Vue.extend({
     },
     setDefaultValue(
       mcAlreadyCovered: number, // MC values of prior-computed resources.
-      unit: PaymentUnit): number {
+      unit: SpendableResource): number {
       if (!this.canUse(unit)) {
         return 0;
       }
@@ -95,7 +101,7 @@ export default Vue.extend({
         }
       }
 
-      this.$data[unit] = contributingUnits;
+      this.payment[unit] = contributingUnits;
       return contributingMCValue;
     },
     setDefaultValues(reserveMegacredits: boolean = false) {
@@ -108,7 +114,7 @@ export default Vue.extend({
         amountCovered += this.setDefaultValue(amountCovered, unit);
       }
       if (!reserveMegacredits) {
-        this.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
+        this.payment.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
       }
     },
     setMaxMCValue() {
@@ -118,7 +124,7 @@ export default Vue.extend({
     canAffordWithMcOnly() {
       return this.thisPlayer.megaCredits >= this.cost;
     },
-    canUse(unit: PaymentUnit) {
+    canUse(unit: SpendableResource): boolean {
       if (unit === 'megaCredits') {
         return true;
       }
@@ -126,20 +132,18 @@ export default Vue.extend({
         if (this.thisPlayer.titanium === 0) {
           return false;
         }
-        return this.playerinput.paymentOptions.titanium || this.playerinput.paymentOptions.lunaTradeFederationTitanium;
+        return this.playerinput.paymentOptions.titanium === true|| this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
       }
-      return this.playerinput.paymentOptions[unit] && this.hasUnits(unit);
+      return this.playerinput.paymentOptions[unit] === true && this.hasUnits(unit);
     },
     saveData() {
-      const payment: Payment = {...Payment.EMPTY};
       let totalSpent = 0;
-      for (const target of PAYMENT_UNITS) {
-        payment[target] = this[target] ?? 0;
-        totalSpent += payment[target] * this.getResourceRate(target);
+      for (const target of SPENDABLE_RESOURCES) {
+        totalSpent += this.payment[target] * this.getResourceRate(target);
       }
 
-      for (const target of PAYMENT_UNITS) {
-        if (payment[target] > this.getAvailableUnits(target)) {
+      for (const target of SPENDABLE_RESOURCES) {
+        if (this.payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
         }
@@ -156,14 +160,14 @@ export default Vue.extend({
       // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
       // from user when nothing is required. Can probably remove this if server only removes what is required.
       if (requiredAmt === 0) {
-        payment.heat = 0;
-        payment.megaCredits = 0;
+        this.payment.heat = 0;
+        this.payment.megaCredits = 0;
       }
 
       if (requiredAmt > 0 && totalSpent > requiredAmt) {
         const diff = totalSpent - requiredAmt;
-        for (const target of PAYMENT_UNITS) {
-          if (payment[target] && diff >= this.getResourceRate(target)) {
+        for (const target of SPENDABLE_RESOURCES) {
+          if (this.payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;
           }
@@ -179,86 +183,43 @@ export default Vue.extend({
           return;
         }
       }
-      this.onsave({type: 'payment', payment: payment});
+      this.onsave({type: 'payment', payment: this.payment});
+    },
+    onMaxClicked(unit: SpendableResource) {
+      if (unit === 'megaCredits') {
+        this.setMaxMCValue();
+      } else {
+        this.setMaxValue(unit);
+      }
     },
   },
 });
+
 </script>
 <template>
 <div class="payments_cont">
   <section v-trim-whitespace>
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
-    <div class="payments_type input-group" v-if="canUse('steel')">
-      <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay with Steel')"></i>
-      <AppButton type="minus" @click="reduceValue('steel', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <AppButton type="plus" @click="addValue('steel', 1)" />
-      <AppButton type="max" @click="setMaxValue('steel')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('titanium')">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay with Titanium')"></i>
-      <AppButton type="minus" @click="reduceValue('titanium', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <AppButton type="plus" @click="addValue('titanium', 1)" />
-      <AppButton type="max" @click="setMaxValue('titanium')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('heat')">
-      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay with Heat')"></i>
-      <AppButton type="minus" @click="reduceValue('heat', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <AppButton type="plus" @click="addValue('heat', 1)" />
-      <AppButton type="max" @click="setMaxValue('heat')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('seeds')">
-      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay with Seeds')"></i>
-      <AppButton type="minus" @click="reduceValue('seeds', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="seeds" />
-      <AppButton type="plus" @click="addValue('seeds', 1)" />
-      <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('auroraiData')">
-      <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay with Data')"></i>
-      <AppButton type="minus" @click="reduceValue('auroraiData', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="auroraiData" />
-      <AppButton type="plus" @click="addValue('auroraiData', 1)" />
-      <AppButton type="max" @click="setMaxValue('auroraiData')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('kuiperAsteroids')">
-      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay with Asteroids')"></i>
-      <AppButton type="minus" @click="reduceValue('kuiperAsteroids', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="kuiperAsteroids" />
-      <AppButton type="plus" @click="addValue('kuiperAsteroids', 1)" />
-      <AppButton type="max" @click="setMaxValue('kuiperAsteroids')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUse('spireScience')">
-      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay with Science')"></i>
-      <AppButton type="minus" @click="reduceValue('spireScience', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="spireScience" />
-      <AppButton type="plus" @click="addValue('spireScience', 1)" />
-      <AppButton type="max" @click="setMaxValue('spireScience')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay with Megacredits')"></i>
-      <AppButton type="minus" @click="reduceValue('megaCredits', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
-      <AppButton type="plus" @click="addValue('megaCredits', 1)" />
-      <AppButton type="max" @click="setMaxMCValue()" title="MAX" />
-    </div>
+    <template v-for="unit of SPENDABLE_RESOURCES">
+      <payment-unit-component
+        v-model.number="payment[unit]"
+        v-bind:key="unit"
+        v-if="canUse(unit) === true"
+        :unit="unit"
+        :description="descriptions[unit]"
+        @plus="addValue(unit)"
+        @minus="reduceValue(unit)"
+        @max="onMaxClicked(unit)">
+      </payment-unit-component>
+    </template>
 
     <div v-if="hasWarning()" class="tm-warning">
       <label class="label label-error">{{ $t(warning) }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
     </div>
 
   </section>

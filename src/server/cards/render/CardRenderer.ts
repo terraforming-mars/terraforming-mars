@@ -453,15 +453,20 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  // public identify(count: number = 1, options?: ItemOptions) {
-  //   const item = new CardRenderItem(CardRenderItemType.IDENTIFY, count, options);
-  //   return this._appendToRow(item);
-  // }
+  // Underworld
+  public neutralDelegate(amount: number, options?: ItemOptions) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.NEUTRAL_DELEGATE, amount, options));
+  }
 
-  // public excavate(count: number = 1, options?: ItemOptions) {
-  //   const item = new CardRenderItem(CardRenderItemType.EXCAVATE, count, options);
-  //   return this._appendToRow(item);
-  // }
+  public identify(count: number = 1, options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.IDENTIFY, count, options);
+    return this._appendToRow(item);
+  }
+
+  public excavate(count: number = 1, options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.EXCAVATE, count, options);
+    return this._appendToRow(item);
+  }
 
   public corruption(count: number = 1, options?: ItemOptions) {
     const item = new CardRenderItem(CardRenderItemType.CORRUPTION, count, options);
@@ -473,15 +478,15 @@ abstract class Builder<T> {
   //   return this._appendToRow(item);
   // }
 
-  // public corruptionShield() {
-  //   const item = new CardRenderItem(CardRenderItemType.CORRUPTION_SHIELD);
-  //   return this._appendToRow(item);
-  // }
+  public corruptionShield() {
+    const item = new CardRenderItem(CardRenderItemType.CORRUPTION_SHIELD);
+    return this._appendToRow(item);
+  }
 
-  // public tool(count: number = 1, options?: ItemOptions) {
-  //   const item = new CardRenderItem(CardRenderItemType.TOOL, count, options);
-  //   return this._appendToRow(item);
-  // }
+  public tool(count: number = 1, options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.TOOL, count, options);
+    return this._appendToRow(item);
+  }
 
   // public ware(count: number = 1, options?: ItemOptions) {
   //   const item = new CardRenderItem(CardRenderItemType.WARE, count, options);

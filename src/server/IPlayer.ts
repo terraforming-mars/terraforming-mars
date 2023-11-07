@@ -3,6 +3,7 @@ import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame, isIGame} from './IGame';
 import {Payment, PaymentOptions} from '../common/inputs/Payment';
+import {SpendableCardResource} from '../common/inputs/Spendable';
 import {ICard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
@@ -264,14 +265,8 @@ export interface IPlayer {
   /** The number of resources on this card for this player, or 0 if the player does not have this card. */
   resourcesOnCard(name: CardName): number;
   spendableMegacredits(): number;
-  getSpendableMicrobes(): number;
-  getSpendableFloaters(): number;
-  getSpendableLunaArchiveScienceResources(): number;
-  getSpendableSeedResources(): number;
-  getSpendableData(): number;
-  getSpendableGraphene(): number;
-  getSpendableKuiperAsteroids(): number;
-  getSpendableSpireScienceResources(): number;
+  /** Return then amount of spendable units of a given card resource */
+  getSpendable(resource: SpendableCardResource): number;
   checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;
   availableHeat(): number;

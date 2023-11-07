@@ -10,7 +10,7 @@ describe('WavePower', function() {
 
   beforeEach(function() {
     card = new WavePower();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {

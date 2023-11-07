@@ -12,7 +12,7 @@ describe('HiredRaiders', function() {
 
   beforeEach(function() {
     card = new HiredRaiders();
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('Should play', function() {
@@ -32,7 +32,7 @@ describe('HiredRaiders', function() {
   });
 
   it('Works in solo', function() {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
 
     const action = cast(card.play(player), OrOptions);
     expect(action.options).has.lengthOf(2);

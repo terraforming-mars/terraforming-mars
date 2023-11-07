@@ -14,7 +14,7 @@ describe('Solar Logistics', function() {
 
   beforeEach(function() {
     card = new SolarLogistics();
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('Card Effects Work - titanium', function() {

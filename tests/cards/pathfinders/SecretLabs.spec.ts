@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SecretLabs} from '../../../src/server/cards/pathfinders/SecretLabs';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
@@ -8,8 +8,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {TileType} from '../../../src/common/TileType';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('SecretLabs', function() {
   let card: SecretLabs;
@@ -19,8 +18,7 @@ describe('SecretLabs', function() {
 
   beforeEach(function() {
     card = new SecretLabs();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();
     player.playedCards = [microbeCard, floaterCard];
@@ -46,14 +44,9 @@ describe('SecretLabs', function() {
     placeOcean.cb();
     runAllActions(player.game);
 
-    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
-    expect(selectSpace.spaces[0].tile).is.undefined;
-
-    selectSpace.cb(selectSpace.spaces[0]);
+    UnderworldTestHelper.assertPlaceOcean(player, player.popWaitingFor());
 
     runAllActions(player.game);
-
-    expect(selectSpace.spaces[0].tile!.tileType).eq(TileType.OCEAN);
     expect(microbeCard.resourceCount).eq(2);
   });
 

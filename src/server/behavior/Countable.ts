@@ -7,6 +7,8 @@ import {NoAttributes} from './NoAttributes';
  * Describes something that can be counted.
  */
 export type _Countable = {
+  start?: number;
+
   /**
    * Count the number of tags on the players' played cards.
    *
@@ -23,7 +25,7 @@ export type _Countable = {
   floaters?: NoAttributes,
   colonies?: {
     colonies?: {},
-  }
+  },
   moon?: {
     habitatRate?: NoAttributes,
     miningRate?: NoAttributes,
@@ -31,7 +33,11 @@ export type _Countable = {
     habitat?: NoAttributes,
     mine?: NoAttributes,
     road?: NoAttributes,
-  }
+  },
+  underworld?: {
+    corruption?: NoAttributes,
+    excavationMarkers?: NoAttributes,
+  },
 
   all?: boolean; // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
   others?: true; // For tags this has a behavior.

@@ -16,7 +16,7 @@ describe('GrantResourceDeferred', function() {
   let tardigrades: Tardigrades;
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     ants = new Ants();
     tardigrades = new Tardigrades();
     player.playedCards.push(ants);

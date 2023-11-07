@@ -11,7 +11,7 @@ import {AresHandler} from '../../../src/server/ares/AresHandler';
 describe('LandClaim', function() {
   it('Should play', function() {
     const card = new LandClaim();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     const action = cast(card.play(player), SelectSpace);
     const landSpace = player.game.board.getAvailableSpacesOnLand(player)[0];
     action.cb(landSpace);
@@ -21,7 +21,7 @@ describe('LandClaim', function() {
 
   it('can claim south pole on hellas board', function() {
     const card = new LandClaim();
-    const [/* skipped */, player] = testGame(2, {boardName: BoardName.HELLAS});
+    const [/* game */, player] = testGame(2, {boardName: BoardName.HELLAS});
     const action = cast(card.play(player), SelectSpace);
     expect(player.canAfford(constants.HELLAS_BONUS_OCEAN_COST)).to.be.false;
     expect(action.spaces.some((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.be.true;

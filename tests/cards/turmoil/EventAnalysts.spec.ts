@@ -9,9 +9,9 @@ describe('EventAnalysts', function() {
     const [game, player] = testGame(1, {turmoilExtension: true});
     expect(player.simpleCanPlay(card)).is.not.true;
 
-    game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
-    game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
-    game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
+    game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
+    game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
+    game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);

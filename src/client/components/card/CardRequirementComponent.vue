@@ -63,7 +63,6 @@ export default Vue.extend({
       return this.requirement.count ?? 0;
     },
     amount(): string | number {
-      // <span v-if="requirement.isMax || requirement.amount != 0">{{requirement.amount}}</span>
       switch (this.type) {
       case RequirementType.TEMPERATURE:
       case RequirementType.OXYGEN:
@@ -146,6 +145,10 @@ export default Vue.extend({
         return ['card-tile-lunar-mine--S', 'tile--req'];
       case RequirementType.ROAD_TILES:
         return ['card-tile-lunar-road--S', 'tile--req'];
+      case RequirementType.EXCAVATION:
+        return ['card-excavation req'];
+      case RequirementType.CORRUPTION:
+        return ['card-resource', 'card-resource-corruption'];
       case RequirementType.PRODUCTION:
       case RequirementType.REMOVED_PLANTS:
         break;
@@ -181,7 +184,7 @@ export default Vue.extend({
       case RequirementType.REMOVED_PLANTS:
         return false;
       }
-      return this.count < 4;
+      return this.count > 0 && this.count < 4;
     },
     repeats(): Array<number> {
       if (!this.isRepeated || this.requirement.count === undefined) {

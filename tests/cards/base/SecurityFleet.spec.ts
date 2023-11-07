@@ -10,7 +10,7 @@ describe('SecurityFleet', function() {
 
   beforeEach(function() {
     card = new SecurityFleet();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not act if no titanium', function() {

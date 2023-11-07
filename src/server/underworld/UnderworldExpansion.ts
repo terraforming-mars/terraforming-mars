@@ -11,10 +11,10 @@ import {CardResource} from '../../common/CardResource';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {IGame} from '../IGame';
 import {SpaceType} from '../../common/boards/SpaceType';
-// import {CardName} from '../../common/cards/CardName';
-// import {PlayerInput} from '../PlayerInput';
-// import {OrOptions} from '../inputs/OrOptions';
-// import {SelectOption} from '../inputs/SelectOption';
+import {CardName} from '../../common/cards/CardName';
+import {PlayerInput} from '../PlayerInput';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectOption} from '../inputs/SelectOption';
 import {message} from '../logs/MessageBuilder';
 import {LogHelper} from '../LogHelper';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
@@ -31,6 +31,9 @@ export class UnderworldExpansion {
     };
   }
 
+  /**
+   * Creates an empty UnderworldData for games that don't include it.
+   */
   public static initializeGameWithoutUnderworld(): UnderworldData {
     return {tokens: []};
   }
@@ -88,37 +91,33 @@ export class UnderworldExpansion {
     };
   }
 
+  /** Return the spaces that have not yet been identified. The opposite of `identifiedSpaces`. */
   public static identifiableSpaces(game: IGame): ReadonlyArray<Space> {
-    return game.board.spaces.filter((space) => space.undergroundResources === undefined);
+    return game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY && space.undergroundResources === undefined);
   }
 
+  /** Return the spaces that not yet been identified. The opposite of `identifiableSpaces`. */
   public static identifiedSpaces(game: IGame): ReadonlyArray<Space> {
     return game.board.spaces.filter(
       (space) => space.undergroundResources !== undefined,
     );
   }
 
-  public static identify(game: IGame, space: Space, player?: IPlayer): void {
+  /** Identify the token at `space`, optionally trigger callbacks */
+  public static identify(game: IGame, space: Space, player: IPlayer | undefined): void {
+    if (game.gameOptions.underworldExpansion !== true) {
+      throw new Error('Underworld expansion not in this game');
+    }
     if (space.undergroundResources !== undefined) {
       return;
     }
     const undergroundResource = game.underworldData?.tokens.pop();
     if (undergroundResource === undefined) {
       // TODO(kberg): collect tokens from all players
-      throw new Error('Cannot identify excatation space, no available tokens.');
+      throw new Error('Cannot identify excavation space, no available tokens.');
     }
     space.undergroundResources = undergroundResource;
-    if (player !== undefined) {
-      LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'identified');
-    }
-    // TODO(there must be a case when a neutral player identifies that applies to the callbacks);
-    if (player !== undefined) {
-      this.onIdentification(player, space);
-    }
-  }
-
-  public static onIdentification(player: IPlayer, space: Space) {
-    for (const p of player.game.getPlayersInGenerationOrder()) {
+    for (const p of game.getPlayersInGenerationOrder()) {
       for (const card of p.tableau) {
         card.onIdentification?.(player, p, space);
       }
@@ -176,6 +175,10 @@ export class UnderworldExpansion {
   }
 
   public static excavate(player: IPlayer, space: Space) {
+    if (player.game.gameOptions.underworldExpansion !== true) {
+      throw new Error('Underworld expansion not in this game');
+    }
+
     if (space.undergroundResources === undefined) {
       this.identify(player.game, space, player);
     }
@@ -196,10 +199,10 @@ export class UnderworldExpansion {
     game.board
       .getAdjacentSpaces(space)
       .forEach((s) => UnderworldExpansion.identify(game, s, player));
-    // const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
-    // if (leaser !== undefined) {
-    //   leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
-    // }
+    const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
+    if (leaser !== undefined) {
+      leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
+    }
   }
 
   public static grant(player: IPlayer, token: UndergroundResourceToken): void {
@@ -289,55 +292,52 @@ export class UnderworldExpansion {
     }
   }
 
-  //   public static mayBlockAttack(target: IPlayer, perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
-  //     if (target.game.gameOptions.underworldExpansion === false) {
-  //       cb(true);
-  //       return;
-  //     }
-  //     const privateMilitaryContractor = target.playedCards.find((card) => card.name === CardName.PRIVATE_MILITARY_CONTRACTOR);
-  //     const militaryContractorFighters = privateMilitaryContractor?.resourceCount ?? 0;
-  //     if (target.underworldData.corruption === 0 && militaryContractorFighters === 0) {
-  //       return cb(true);
-  //     }
-  //     const options = new OrOptions();
-  //     options.title = newMessage('Spend 1 corruption to block an attack by ${0}?', (b) => b.player(perpetrator));
-  //     if (privateMilitaryContractor !== undefined && militaryContractorFighters > 0) {
-  //       options.options.push(
-  //         new SelectOption(
-  //           newMessage('Block with ${0} fighters.', (b) => b.cardName(CardName.PRIVATE_MILITARY_CONTRACTOR)),
-  //           'Spend fighter')
-  //           .andThen(() => {
-  //             target.removeResourceFrom(privateMilitaryContractor, 1);
-  //             target.game.log(
-  //               '${0} spent 1 fighter on ${1} to block an attack by ${2}',
-  //               (b) => b.player(target).cardName(CardName.PRIVATE_MILITARY_CONTRACTOR).player(perpetrator));
-  //             cb(false);
-  //             return undefined;
-  //           }),
-  //       );
-  //     }
-  //     if (target.underworldData.corruption > 0) {
-  //       options.options.push(
-  //         new SelectOption('Block with corruption', 'Spend corruption')
-  //           .andThen(() => {
-  //             target.underworldData.corruption--;
-  //             target.game.log(
-  //               '${0} spent 1 corruption to block an attack by ${1}',
-  //               (b) => b.player(target).player(perpetrator));
-  //             cb(false);
-  //             return undefined;
-  //           }),
-  //       );
-  //     }
-  //     options.options.push(
-  //       new SelectOption('Do not block', 'Do not block')
-  //         .andThen(() => {
-  //           cb(true);
-  //           return undefined;
-  //         }),
-  //     );
-  //     throw new Error('Method not implemented.');
-  //   }
+  public static maybeBlockAttack(target: IPlayer, perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
+    if (target.game.gameOptions.underworldExpansion === false) {
+      cb(true);
+      return undefined;
+    }
+    const privateMilitaryContractor = target.playedCards.find((card) => card.name === CardName.PRIVATE_MILITARY_CONTRACTOR);
+    const militaryContractorFighters = privateMilitaryContractor?.resourceCount ?? 0;
+    if (target.underworldData.corruption === 0 && militaryContractorFighters === 0) {
+      return cb(true);
+    }
+    const options = new OrOptions();
+    options.title = message('Spend 1 corruption to block an attack by ${0}?', (b) => b.player(perpetrator));
+    if (privateMilitaryContractor !== undefined && militaryContractorFighters > 0) {
+      options.options.push(
+        new SelectOption(
+          message('Block with ${0} fighters.', (b) => b.cardName(CardName.PRIVATE_MILITARY_CONTRACTOR)),
+          'Spend fighter')
+          .andThen(() => {
+            target.removeResourceFrom(privateMilitaryContractor, 1);
+            target.game.log(
+              '${0} spent 1 fighter on ${1} to block an attack by ${2}',
+              (b) => b.player(target).cardName(CardName.PRIVATE_MILITARY_CONTRACTOR).player(perpetrator));
+            return cb(false);
+          }),
+      );
+    }
+    if (target.underworldData.corruption > 0) {
+      options.options.push(
+        new SelectOption('Block with corruption', 'Spend corruption')
+          .andThen(() => {
+            target.underworldData.corruption--;
+            target.game.log(
+              '${0} spent 1 corruption to block an attack by ${1}',
+              (b) => b.player(target).player(perpetrator));
+            return cb(false);
+          }),
+      );
+    }
+    options.options.push(
+      new SelectOption('Do not block', 'Do not block')
+        .andThen(() => {
+          return cb(true);
+        }),
+    );
+    return options;
+  }
 
   public static gainCorruption(player: IPlayer, count: number, options?: {log: boolean}) {
     player.underworldData.corruption += count;
@@ -388,9 +388,9 @@ export class UnderworldExpansion {
   //     game.underworldData.tokens.push(...tokens);
   //     inplaceShuffle(game.underworldData.tokens, game.rng);
   //   }
-  //   static excavationMarkerCount(player: IPlayer): number {
-  //     return player.game.board.spaces.filter((space) => space.excavator === player).length;
-  //   }
+  static excavationMarkerCount(player: IPlayer): number {
+    return player.game.board.spaces.filter((space) => space.excavator === player).length;
+  }
 
   static endGeneration(game: IGame) {
     game.getPlayersInGenerationOrder().forEach((player) => player.underworldData.temperatureBonus = undefined);

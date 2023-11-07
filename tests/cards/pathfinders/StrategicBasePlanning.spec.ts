@@ -1,13 +1,10 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {StrategicBasePlanning} from '../../../src/server/cards/pathfinders/StrategicBasePlanning';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {TileType} from '../../../src/common/TileType';
-import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/server/Game';
-import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('StrategicBasePlanning', function() {
   let card: StrategicBasePlanning;
@@ -37,21 +34,7 @@ describe('StrategicBasePlanning', function() {
     expect(player.megaCredits).to.eq(92);
 
     // Expecting build colony before place city
-    const selectColony = cast(game.deferredActions.pop()!.execute(), SelectColony);
-    const colony = selectColony.colonies[0];
-    expect(colony.colonies).is.empty;
-
-    selectColony.cb(colony);
-
-    expect(colony.colonies).deep.eq([player.id]);
-
-    // Place city comes next
-    const selectSpace = cast(game.deferredActions.pop()!.execute(), SelectSpace);
-    const space = selectSpace.spaces[0];
-    expect(space.tile).is.undefined;
-
-    selectSpace.cb(space);
-
-    expect(space.tile?.tileType).eq(TileType.CITY);
+    UnderworldTestHelper.assertBuildColony(player, game.deferredActions.pop()!.execute());
+    UnderworldTestHelper.assertPlaceCity(player, game.deferredActions.pop()!.execute());
   });
 });

@@ -696,6 +696,7 @@ describe('Game', () => {
     game.moonData = undefined;
     game.pathfindersData = undefined;
     const serialized = game.serialize();
+    assertIsJSON(serialized);
     const serializedKeys = Object.keys(serialized);
 
     const unserializedFieldsInGame: Array<keyof Game> = [
@@ -873,3 +874,17 @@ describe('Game', () => {
     expect(deserialized.discardedColonies.map(toName)).has.members(discardedColonyNames);
   });
 });
+
+function assertIsJSON(serialized: any) {
+  for (const field in serialized) {
+    if (serialized.hasOwnProperty(field)) {
+      const val = serialized[field];
+      const type = typeof(val);
+      if (type === 'object') {
+        assertIsJSON(val);
+      } else if (type === 'function') {
+        throw new Error(field + ' is invalid');
+      }
+    }
+  }
+}

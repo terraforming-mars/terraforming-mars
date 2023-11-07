@@ -10,7 +10,7 @@ describe('ResearchGrant', function() {
 
   beforeEach(function() {
     card = new ResearchGrant();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

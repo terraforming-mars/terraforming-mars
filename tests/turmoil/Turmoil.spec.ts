@@ -7,7 +7,7 @@ import {Phase} from '../../src/common/Phase';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
+import {Delegate, Turmoil} from '../../src/server/turmoil/Turmoil';
 import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/server/turmoil/parties/Reds';
@@ -37,6 +37,7 @@ import {LunaStagingStation} from '../../src/server/cards/moon/LunaStagingStation
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
 import {testGame} from '../TestGame';
+import {MultiSet} from 'mnemonist';
 
 describe('Turmoil', function() {
   let player: TestPlayer;
@@ -62,21 +63,21 @@ describe('Turmoil', function() {
   it('Correctly send delegate from the reserve', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.delegates.clear();
-    expect(turmoil.usedFreeDelegateAction).does.not.contain(player.id);
+    expect(turmoil.usedFreeDelegateAction).does.not.contain(player);
 
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
 
-    expect(Array.from(greens.delegates.values())).to.deep.eq([player.id]);
-    expect(turmoil.usedFreeDelegateAction).does.not.contain(player.id);
+    expectDelegateMatch(greens.delegates, player);
+    expect(turmoil.usedFreeDelegateAction).does.not.contain(player);
   });
 
   it('Correctly send delegate from the reserve', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.delegates.clear();
 
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
 
-    expect(Array.from(greens.delegates.values())).to.deep.eq([player.id]);
+    expectDelegateMatch(greens.delegates, player);
   });
 
 
@@ -85,7 +86,7 @@ describe('Turmoil', function() {
     greens.delegates.clear();
     turmoil.delegateReserve.clear();
 
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     expect(greens.delegates.size).eq(0);
   });
 
@@ -93,23 +94,23 @@ describe('Turmoil', function() {
     turmoil.parties.forEach((party) => party.delegates.clear());
 
     const greens = turmoil.getPartyByName(PartyName.GREENS);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     expect(greens.delegates.size).eq(1);
 
     // 1 influence: Leader of dominant party
-    expect(Array.from(greens.delegates.values())).to.deep.eq([player.id]);
-    expect(greens.partyLeader).to.eq(player.id);
+    expectDelegateMatch(greens.delegates, player);
+    expect(greens.partyLeader).to.eq(player);
     expect(turmoil.getPlayerInfluence(player)).to.eq(1);
 
     // 2 influence: Leader of dominant party + at least 1 non-leader delegate in party
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     expect(greens.delegates.size).eq(2);
     expect(turmoil.getPlayerInfluence(player)).to.eq(2);
   });
 
   it('Chairman gives 1 influence', function() {
     turmoil.parties.forEach((party) => party.delegates.clear());
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
     expect(turmoil.getPlayerInfluence(player)).to.eq(1);
   });
 
@@ -119,58 +120,58 @@ describe('Turmoil', function() {
     greens.delegates.clear();
     reds.delegates.clear();
 
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     expect(turmoil.dominantParty).to.eq(greens);
 
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     expect(turmoil.dominantParty).to.eq(greens);
 
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     expect(turmoil.dominantParty).to.eq(reds);
   });
 
   it('Correctly set party leader', function() {
     const party = turmoil.getPartyByName(PartyName.GREENS);
-    turmoil.sendDelegateToParty(player.id, party.name, game);
-    turmoil.sendDelegateToParty(player.id, party.name, game);
-    turmoil.sendDelegateToParty(player.id, party.name, game);
-    expect(party.partyLeader).to.eq(player.id);
+    turmoil.sendDelegateToParty(player, party.name, game);
+    turmoil.sendDelegateToParty(player, party.name, game);
+    turmoil.sendDelegateToParty(player, party.name, game);
+    expect(party.partyLeader).to.eq(player);
   });
 
   it('Correctly run end of generation', function() {
     player.setTerraformRating(20);
     player2.setTerraformRating(21);
 
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player2, PartyName.GREENS, game);
 
-    turmoil.usedFreeDelegateAction.add(player.id);
-    turmoil.usedFreeDelegateAction.add(player2.id);
+    turmoil.usedFreeDelegateAction.add(player);
+    turmoil.usedFreeDelegateAction.add(player2);
 
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(0);
-    expect(turmoil.getAvailableDelegateCount(player2.id)).eq(6);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(0);
+    expect(turmoil.getAvailableDelegateCount(player2)).eq(6);
 
     game.phase = Phase.SOLAR;
     turmoil.endGeneration(game);
     runAllActions(game);
 
-    expect(turmoil.chairman).to.eq(player.id);
+    expect(turmoil.chairman).to.eq(player);
     // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman
     expect(player.getTerraformRating()).to.eq(21);
     expect(player2.getTerraformRating()).to.eq(20);
 
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(4);
-    expect(turmoil.getAvailableDelegateCount(player2.id)).eq(6);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(4);
+    expect(turmoil.getAvailableDelegateCount(player2)).eq(6);
 
     expect(turmoil.usedFreeDelegateAction).is.empty;
     expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.REDS));
@@ -653,35 +654,14 @@ describe('Turmoil', function() {
     expect(player.getTerraformRating()).eq(19);
   });
 
-  it('serializes and deserializes keeping players', function() {
-    const players = [
-      TestPlayer.BLUE.newPlayer(),
-      TestPlayer.RED.newPlayer(),
-    ];
-
-    // Party delegates have to be explicitly set since game set-up draws a global event which
-    // adds delegates to a party. So parties[0] can be empty or not depending on the draw.
-    const party = turmoil.parties[0];
-    party.delegates.add('NEUTRAL', 2);
-    party.delegates.add('p-fancy-pants');
-    party.partyLeader = 'p-leader';
-    const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
-
-    // This assertion ensures that the expectations in deserialization work as expected.
-    expect(serialized.lobby).is.undefined;
-
-    const deserialized = Turmoil.deserialize(serialized, players);
-
-    expect(Array.from(deserialized.parties[0].delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', 'p-fancy-pants']);
-    expect(deserialized.parties[0].partyLeader).eq('p-leader');
-  });
-
   it('deserialization', () => {
-    const players = [
+    const [bluePlayer, redPlayer, greenPlayer] = [
       TestPlayer.BLUE.newPlayer(),
       TestPlayer.RED.newPlayer(),
       TestPlayer.GREEN.newPlayer(),
     ];
+
+    const players = [bluePlayer, redPlayer, greenPlayer];
 
     const json = {
       'chairman': 'NEUTRAL',
@@ -723,59 +703,16 @@ describe('Turmoil', function() {
     expect(t.distantGlobalEvent!.revealedDelegate).eq('Greens');
     expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
     expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
-    expect(Array.from(t.delegateReserve.values())).to.have.members(['p-blue-id', 'p-red-id', 'p-green-id', 'NEUTRAL', 'NEUTRAL']);
-    expect(Array.from(t.usedFreeDelegateAction.values())).has.members(['p-blue-id']);
-  });
-
-  it('deserialization with legacy lobby', () => {
-    const players = [
-      TestPlayer.BLUE.newPlayer(),
-      TestPlayer.RED.newPlayer(),
-      TestPlayer.GREEN.newPlayer(),
-    ];
-
-    const json = {
-      'chairman': 'NEUTRAL',
-      'rulingParty': 'Greens',
-      'dominantParty': 'Unity',
-      'lobby': ['p-green-id', 'p-red-id'],
-      'delegateReserve': ['p-blue-id', 'p-red-id', 'p-green-id', 'NEUTRAL', 'NEUTRAL'],
-      'parties': [
-        {'name': 'Mars First', 'delegates': []},
-        {'name': 'Scientists', 'delegates': []},
-        {'name': 'Unity', 'delegates': ['NEUTRAL'], 'partyLeader': 'NEUTRAL'},
-        {'name': 'Greens', 'delegates': ['NEUTRAL'], 'partyLeader': 'NEUTRAL'},
-        {'name': 'Reds', 'delegates': []},
-        {'name': 'Kelvinists', 'delegates': []},
-      ],
-      'playersInfluenceBonus': [],
-      'globalEventDealer': {
-        'deck': [
-          'Solar Flare',
-          'Spin-Off Products',
-          'Dry Deserts',
-          'Mud Slides',
-          'Productivity'],
-        'discarded': ['Pandemic']},
-      'distantGlobalEvent': 'Eco Sabotage',
-      'comingGlobalEvent': 'Celebrity Leaders',
-      'politicalAgendasData': {
-        'thisAgenda': {
-          'bonusId': 'none', 'policyId': 'none',
-        },
-        'agendas': [],
-        'agendaStyle': 'Random',
-      },
-    } as SerializedTurmoil;
-    const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
-    const t = Turmoil.deserialize(s, players);
-
-    expect(Array.from(t.delegateReserve.values())).to.have.members(['p-blue-id', 'p-red-id', 'p-red-id', 'p-green-id', 'p-green-id', 'NEUTRAL', 'NEUTRAL']);
-    expect(Array.from(t.usedFreeDelegateAction.values())).has.members(['p-blue-id']);
+    expectDelegateMatch(t.delegateReserve, bluePlayer, redPlayer, greenPlayer, 'NEUTRAL', 'NEUTRAL');
+    expect(t.usedFreeDelegateAction).deep.eq(new Set([bluePlayer]));
   });
 
   function setRulingParty(turmoil: Turmoil, game: IGame, party: IParty) {
     turmoil.rulingParty = party;
     PoliticalAgendas.setNextAgenda(turmoil, game);
+  }
+
+  function expectDelegateMatch(actual: MultiSet<Delegate>, ...delegates: Array<Delegate>) {
+    expect(actual).to.deep.eq(MultiSet.from(delegates));
   }
 });

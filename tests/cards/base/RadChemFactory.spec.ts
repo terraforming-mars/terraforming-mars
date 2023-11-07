@@ -10,7 +10,7 @@ describe('RadChemFactory', function() {
 
   beforeEach(function() {
     card = new RadChemFactory();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {

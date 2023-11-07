@@ -12,7 +12,7 @@
         <template v-for="module in GAME_MODULES">
           <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
             <div class="corporations-filter-toolbox-cont">
-                <div><span v-i18n>{{moduleName(module)}}</span>&nbsp;<div :class="icon(module)"></div></div><br>
+                <div><span v-i18n>{{MODULE_NAMES[module]}}</span>&nbsp;<div :class="icon(module)"></div></div><br>
                 <div class="corporations-filter-toolbox">
                     <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
                     <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
@@ -35,7 +35,7 @@
 import Vue from 'vue';
 
 import {CardName} from '@/common/cards/CardName';
-import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
+import {GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {byModule, byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
 
@@ -113,6 +113,7 @@ export default Vue.extend({
         ...this.pathfindersExpansion ? corpCardNames('pathfinders') : [],
       ],
       GAME_MODULES: GAME_MODULES,
+      MODULE_NAMES: MODULE_NAMES,
     };
   },
   methods: {
@@ -168,24 +169,6 @@ export default Vue.extend({
       if (module === 'colonies') suffix = 'colony';
       if (module === 'moon') suffix = 'themoon';
       return `create-game-expansion-icon expansion-icon-${suffix}`;
-    },
-    moduleName(module: GameModule) {
-      switch (module) {
-      case 'base': return 'Base';
-      case 'corpera': return 'Corporate Era';
-      case 'promo': return 'Promo';
-      case 'venus': return 'Venus Next';
-      case 'colonies': return 'Colonies';
-      case 'prelude': return 'Prelude';
-      case 'prelude2': return 'Prelude2';
-      case 'turmoil': return 'Turmoil';
-      case 'community': return 'Community';
-      case 'ares': return 'Ares';
-      case 'moon': return 'The Moon';
-      case 'pathfinders': return 'Pathfinders';
-      case 'ceo': return 'CEOs';
-      case 'starwars': return 'Star Wars';
-      }
     },
   },
   watch: {

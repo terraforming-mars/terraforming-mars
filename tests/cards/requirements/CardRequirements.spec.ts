@@ -32,7 +32,7 @@ describe('CardRequirements', function() {
   const adaptationTechnology = new AdaptationTechnology();
 
   beforeEach(function() {
-    [/* skipped */, player, player2] = testGame(2, {turmoilExtension: true});
+    [/* game */, player, player2] = testGame(2, {turmoilExtension: true});
   });
 
   it('satisfies properly for oceans', function() {
@@ -95,7 +95,7 @@ describe('CardRequirements', function() {
   it('satisfies properly for chairman', function() {
     const requirements = {chairman: true};
     expect(satisfies(requirements, player)).eq(false);
-    player.game.turmoil!.chairman = player.id;
+    player.game.turmoil!.chairman = player;
     expect(satisfies(requirements, player)).eq(true);
   });
 
@@ -160,7 +160,7 @@ describe('CardRequirements', function() {
     const requirements = {partyLeader: 1};
     expect(satisfies(requirements, player)).eq(false);
     const greens = player.game.turmoil!.getPartyByName(PartyName.GREENS);
-    greens.partyLeader = player.id;
+    greens.partyLeader = player;
     expect(satisfies(requirements, player)).eq(true);
   });
 
@@ -227,8 +227,8 @@ describe('CardRequirements', function() {
   it('satisfies properly for party', function() {
     const requirements = {party: PartyName.MARS};
     expect(satisfies(requirements, player)).eq(false);
-    player.game.turmoil!.sendDelegateToParty(player.id, PartyName.MARS, player.game);
-    player.game.turmoil!.sendDelegateToParty(player.id, PartyName.MARS, player.game);
+    player.game.turmoil!.sendDelegateToParty(player, PartyName.MARS, player.game);
+    player.game.turmoil!.sendDelegateToParty(player, PartyName.MARS, player.game);
     expect(satisfies(requirements, player)).eq(true);
   });
 

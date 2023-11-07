@@ -12,7 +12,7 @@ describe('MassConverter', function() {
 
   beforeEach(function() {
     card = new MassConverter();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {

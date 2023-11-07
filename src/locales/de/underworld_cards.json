@@ -32,6 +32,13 @@
 "Action: Spend 1 corruption to gain 3 of the same standard resource.": "AKTION: Bezahle 1 Korruption, um 3 der gleichen Standardressource zu erhalten.",
 "Requires 2 corruption.": "Benötigt 2 Korruption.",
 
+"Hackers": "Hacker",
+"Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Benötigt 2 Korruption. Reduziere eine beliebige M€-Produktion um 2. Erhöhe deine M€-Produktion um 1 für jede Korruptionressource, die du hast.",
+
+"Hired Raiders": "Bezahlte Plünderer",
+"steal": "Klaue",
+"Steal 3 M€, plus 2 extra M€ for each corruption resource you have, from any player.": "Klaue 3 M€, plus 2 zusätzliche M€ für jede Korruptionsressource, die du hast, von einem beliebigen Spieler.",
+
 "Landfill": "Mülldeponie",
 "Increase your M€ production 1 step for each different TYPE of production you have at least 1 step of.": "Erhöhe deine M€-Produktion um 1 für jede andere Produktionsart, von der du mindestens 1 Stufe hast.",
 
@@ -100,6 +107,11 @@
 "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "AKTION: Bezahle 1 Titan, um 1 Jäger-Ressource für diese Karte zu erhalten.",
 "Action: Spend 1 fighter resource on this card to gain 3 M€ for each fighter resource on this card INCLUDING THE PAID FIGHTER.": "AKTION: Bezahle 1 Jäger-Ressource von dieser Karte, um 3 M€ für jede Jäger-Ressource auf dieser Karte zu erhalten, EINSCHLIESSLICH des bezahlten Jägers.",
 "Put 1 fighter resource on this card. 1VP for each Jovian tag you have.": "Lege 1 Jäger-Ressource auf diese Karte. 1 SP für jedes Jupiter-Symbol, das du hast.",
+
+"Standard Technology": "Standardtechnologie",
+"REPEAT": "WIEDERHOLE",
+"Standard projects": "Standardprojekte",
+"Effect: Standard projects you have already taken this geneeration cost 8 M€ less.": "EFFEKT: Standardprojekte, die Sie bereits in dieser Generation durchgeführt haben, kosten 8 M€ weniger.",
 
 "Stem Field Subsidies": "Subventionen für Stammzellen",
 "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "EFFEKT: Immer wenn du eine Wissenschaftssymbol spielst (einschließlich dieses), lege 1 Datum auf eine beliebige Karte und identifiziere eine unterirdische Ressource.",

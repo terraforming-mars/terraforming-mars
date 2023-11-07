@@ -1,4 +1,3 @@
-import {GameModule} from '../../../common/cards/GameModule';
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 
@@ -127,8 +126,7 @@ import {UndergroundSettlement} from './UndergroundSettlement';
 // // import {Whales} from './Whales';
 
 export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
-  // TODO(kberg): Remove 'as GameModule' after 2023-11-30
-  module: 'underworld' as GameModule,
+  module: 'underworld',
   projectCards: {
     // // 1-9
     // [CardName.GEOLOGIST_TEAM]: {Factory: GeologistTeam},

@@ -43,6 +43,14 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     return 0;
   }
 
+  private _discount(player: IPlayer) {
+    const underworldStandardProjectCard = player.playedCards.find(
+      (card) => card.name === CardName.STANDARD_TECHNOLOGY_UNDERWORLD,
+    );
+    const underworldDiscount = underworldStandardProjectCard?.getCardDiscount?.(player, this) ?? 0;
+    return underworldDiscount + this.discount(player);
+  }
+
   protected abstract actionEssence(player: IPlayer): void
 
   public onStandardProject(player: IPlayer): void {
@@ -55,7 +63,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     const canPayWith = this.canPayWith(player);
     return {
       ...canPayWith,
-      cost: this.cost - this.discount(player),
+      cost: this.cost - this._discount(player),
       tr: this.tr,
       auroraiData: true,
       spireScience: true,
@@ -80,7 +88,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     const canPayWith = this.canPayWith(player);
     player.game.defer(new SelectPaymentDeferred(
       player,
-      this.cost - this.discount(player),
+      this.cost - this._discount(player),
       {
         canUseSteel: canPayWith.steel,
         canUseTitanium: canPayWith.titanium,

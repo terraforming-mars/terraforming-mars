@@ -8,6 +8,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {cast, maxOutOceans, runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('ArtificialLake', function() {
   let card: ArtificialLake;
@@ -26,15 +27,13 @@ describe('ArtificialLake', function() {
   it('Should play', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
-    const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.spaces.forEach((space) => {
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.spaces.forEach((space) => {
       expect(space.spaceType).to.eq(SpaceType.LAND);
     });
 
-    action.cb(action!.spaces[0]);
-    const placedTile = action.spaces[0].tile;
-    expect(placedTile!.tileType).to.eq(TileType.OCEAN);
+    UnderworldTestHelper.assertPlaceOcean(player, selectSpace);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

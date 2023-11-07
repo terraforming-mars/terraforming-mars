@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {LavaTubeSettlement} from '../../../src/server/cards/prelude/LavaTubeSettlement';
 import {Game} from '../../../src/server/Game';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
-import {cast, resetBoard} from '../../TestingUtils';
+import {resetBoard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('LavaTubeSettlement', function() {
   let card: LavaTubeSettlement;
@@ -41,11 +41,8 @@ describe('LavaTubeSettlement', function() {
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
-    const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
-    selectSpace.cb(selectSpace.spaces[0]);
+    runAllActions(game);
 
-    expect(selectSpace.spaces[0].tile && selectSpace.spaces[0].tile.tileType).to.eq(TileType.CITY);
-    expect(selectSpace.spaces[0].player).to.eq(player);
-    expect(player.production.energy).to.eq(0);
+    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
   });
 });

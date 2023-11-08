@@ -1,4 +1,3 @@
-import {GameModule} from '../../../common/cards/GameModule';
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 
@@ -116,7 +115,7 @@ import {TunnelingOperation} from './TunnelingOperation';
 import {TunnelingSubcontractor} from './TunnelingSubcontractor';
 import {UndergroundAmusementPark} from './UndergroundAmusementPark';
 // import {UndergroundHabitat} from './UndergroundHabitat';
-// import {UndergroundRailway} from './UndergroundRailway';
+import {UndergroundRailway} from './UndergroundRailway';
 // // import {UndergroundResearchCenter} from './UndergroundResearchCenter';
 import {UndergroundSettlement} from './UndergroundSettlement';
 // import {UndergroundShelters} from './UndergroundShelters';
@@ -127,14 +126,13 @@ import {UndergroundSettlement} from './UndergroundSettlement';
 // // import {Whales} from './Whales';
 
 export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
-  // TODO(kberg): Remove 'as GameModule' after 2023-11-30
-  module: 'underworld' as GameModule,
+  module: 'underworld',
   projectCards: {
     // // 1-9
     // [CardName.GEOLOGIST_TEAM]: {Factory: GeologistTeam},
     // [CardName.GEOSCAN_SATELLITE]: {Factory: GeoscanSatellite},
     [CardName.TUNNEL_BORING_MACHINE]: {Factory: TunnelBoringMachine},
-    // [CardName.UNDERGROUND_RAILWAY]: {Factory: UndergroundRailway},
+    [CardName.UNDERGROUND_RAILWAY]: {Factory: UndergroundRailway},
     // // [CardName.GAIA_CITY]: {Factory: GaiaCity},
     // [CardName.DEEPNUKING]: {Factory: Deepnuking},
     [CardName.OLD_WORLD_MAFIA]: {Factory: OldWorldMafia},

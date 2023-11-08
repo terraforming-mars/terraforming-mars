@@ -69,7 +69,7 @@ export type Behavior = {
 
   /** Gain units of TR */
   // TODO(kberg) permit losing TR for TerralabsResearch
-  tr?: number;
+  tr?: Countable;
 
   /** Raise certain global parameters. */
   global?: {

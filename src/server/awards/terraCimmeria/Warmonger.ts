@@ -60,5 +60,18 @@ export class Warmonger implements IAward {
     CardName.BJORN,
     // Star Wars
     CardName.CLONE_TROOPERS,
+    // Underworld
+    CardName.ANTI_TRUST_CRACKDOWN,
+    CardName.CLASS_ACTION_LAWSUIT,
+    CardName.CORPORATE_BLACKMAIL,
+    CardName.HACKERS_UNDERWORLD,
+    CardName.HIRED_RAIDERS_UNDERWORLD,
+    CardName.INVESTIGATIVE_JOURNALISM,
+    CardName.MONOPOLY,
+    CardName.PLANT_TAX,
+    CardName.RECKLESS_DETONATION,
+    CardName.SERVER_SABOTAGE,
+    CardName.SPACE_PRIVATEERS,
+    CardName.SUBNAUTIC_PIRATES,
   ] as const;
 }

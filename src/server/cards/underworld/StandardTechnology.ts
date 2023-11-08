@@ -18,7 +18,7 @@ export class StandardTechnology extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U00',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Standard projects you have already taken this geneeration cost 8 M€ less.', (eb) =>
+          b.effect('Standard projects you have already taken this generation cost 8 M€ less.', (eb) =>
             eb.text('REPEAT').plate('Standard projects').asterix().startEffect.megacredits(-6));
         }),
       },

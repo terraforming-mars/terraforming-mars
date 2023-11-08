@@ -1669,8 +1669,7 @@ export class Game implements IGame, Logger {
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
     game.gagarinBase = d.gagarinBase;
-    // TODO(kberg): remove ?? [] after 2023-11-01
-    game.stJosephCathedrals = d.stJosephCathedrals ?? [];
+    game.stJosephCathedrals = d.stJosephCathedrals;
     game.nomadSpace = d.nomadSpace;
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;

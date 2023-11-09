@@ -1,0 +1,47 @@
+{
+    "Ceres Tech Market": "",
+    "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "アクション：手札から任意枚数のカードを1枚2MCで売却.",
+    "Gain 2 M€ per colony you own.": "コロニーの所持数×2MC獲得.",
+    
+    "Directed Heat Usage": "",
+    "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "アクション:3温熱支払い、4MC または 2植物獲得",
+    
+    "Ishtar Expedition": "",
+    "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "条件：金星10%以上. 3チタン獲得. 金星タグカードを2枚入手",
+
+    "L1 Trade Terminal": "",
+    "Effect: When you trade, first increase that colony tile track 2 steps.": "効果：交易するコロニータイルのトラックを+2段階してもよい(+1段階も可)",
+    "Add a resource to 3 different cards.": "異なる3枚までのカード上にそれぞれ1リソース追加.",
+
+    "Red Appeasement": "",
+    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "",
+    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "",
+    "PASS": "パス",
+
+    "Summit Logistics": "",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "",
+    
+
+    "Psychrophiles": "低温菌",
+    "Action: Add 1 microbe to this card.": "アクション：このカード上に1微生物追加.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "効果：植物タグプレイ時、このカード上の微生物を2MCとして支払ってもよい.",
+    "Temperature must be -20 C or lower.": "条件：温度-20℃以下.",
+
+    "Research Coordination": "共同研究",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "プレイ後、？タグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
+
+    "SF Memorial": "SF記念碑",
+    "Draw 1 card.": "1ドロー.",
+
+    "Martian Survey": "火星探査",
+    "Oxygen must be 4% or lower. Draw two cards.": "条件：酸素4%以下. 2ドロー.",
+
+    "House Printing": "プリンティングハウス",
+    "Increase your steel production 1 step.": "建材産出+1.",
+
+    "Space Hotels": "軌道ホテル",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "条件：地球タグ2つ以上.MC産出+4.",
+
+    "Lava Tube Settlement": "溶岩洞開拓施設",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "電力産出-1し、MC産出+2. 火山地帯に都市タイル配置(都市隣接可). ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能"
+}

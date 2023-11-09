@@ -1,0 +1,165 @@
+{
+    "Airliners": "浮遊体定期便",
+    "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "条件：浮遊体3つ以上. MC産出+2. 2浮遊体獲得",
+
+    "Air Raid": "空賊",
+    "Requires that you lose 1 floater. Steal 5 M€ from any player.": "1浮遊体を支払い、望むならプレイヤー1人から最大5MCを除去し、同じものを獲得.",
+
+    "Atmo Collectors": "大気収集施設",
+    "Action: Add one floater here.": "アクション：このカード上に1浮遊体追加.",
+    "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "アクション：このカード上から1浮遊体除去し、2チタン または 3電力 または 4温熱を獲得.",
+    "Add 2 floaters to ANY card.": "2浮遊体獲得.",
+
+    "Community Services": "コミュニティサービス",
+    "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "タグ無しカード1枚毎にMC産出+1.",
+
+    "Conscription": "徴募制",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "条件：地球タグ2つ以上.次にプレイするカードのプレイコスト-16MC.",
+
+    "Corona Extractor": "コロナ抽出装置",
+    "Requires 4 science tags. Increase your energy production 4 steps.": "条件；科学タグ4つ以上. 電力産出+4.",
+
+    "Cryo-Sleep": "冷凍睡眠",
+    "Effect: When you trade, you pay 1 less resource for it.": "効果：交易コスト-1.",
+
+    "Earth Elevator": "地球エレベーター",
+    "Increase your titanium production 3 steps.": "チタン産出+3.",
+
+    "Ecology Research": "生態系の研究",
+    "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": "自身のコロニー1つ毎に植物産出+1. 1動物、2微生物獲得.",
+
+    "Floater Leasing": "レンタル浮遊体",
+    "Increase your M€ production 1 step PER 3 floaters you have.": "浮遊体3つ毎にMC産出+1.",
+
+    "Floater Prototypes": "試作浮遊体",
+    "Add two floaters to ANOTHER card.": "2浮遊体獲得.",
+
+    "Floater Technology": "浮遊体テクノロジー",
+    "Action: Add 1 floater to ANOTHER card.": "アクション：別カード上に1浮遊体追加.",
+
+    "Galilean Waystation": "ガリレオ中継ステーション",
+    "Increase your M€ production 1 step for every Jovian tag in play.": "全プレイヤーの木星タグの合計数分、MC産出+1.",
+
+    "Heavy Taxation": "重課税",
+    "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "条件：地球タグ2つ以上. MC産出+2. 4MC獲得.",
+
+    "Ice Moon Colony": "氷床コロニー",
+    "Place 1 colony and 1 ocean tile.": "コロニー1つ配置. 海洋1枚配置",
+
+    "Impactor Swarm": "衝突体群",
+    "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "条件：木星タグ2つ以上. 12温熱獲得. 望むならプレイヤー1人から最大2植物除去.",
+
+    "Interplanetary Colony Ship": "惑星間交易船",
+    "Place a colony.": "コロニー1つ配置.",
+
+    "Jovian Lanterns": "木星ランタン",
+    "1 VP per 2 floaters here.": "このカード上の2浮遊体毎に1VP.",
+    "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "条件：木星タグ1つ以上. TR+1段階. 2浮遊体獲得.",
+
+    "Jupiter Floating Station": "木星浮遊ステーション",
+    "Action: Add 1 floater to a JOVIAN CARD.": "アクション：木星タグカード上に1浮遊体追加.",
+    "Action: Gain 1 M€ for every floater here [MAX 4].": "このカード上の浮遊体毎に1MC獲得.(最大4MC)",
+    "Requires 3 science tags.": "条件：科学タグ3つ以上.",
+
+    "Luna Governor": "月の総督",
+    "Requires 3 Earth tags. Increase your M€ production 2 steps.": "条件：地球タグ3つ以上. MC産出+2.",
+
+    "Lunar Exports": "月よりの輸出",
+    "Increase your plant production 2 steps, or your M€ production 5 steps.": "植物産出+2 または MC産出+5.",
+
+    "Lunar Mining": "月の採掘",
+    "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "地球タグ2つ毎に植物産出+1.",
+
+    "Market Manipulation": "市場操作",
+    "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "コロニータイル1つのトラック+1段階. 別のコロニータイル1つのトラック-1段階.",
+
+    "Martian Zoo": "火星動物園",
+    "Effect: When you play an Earth tag, place an animal here.": "効果：地球タグをプレイ時、このカード上に1動物追加.",
+    "Action: Gain 1M€ per animal here.": "アクション：このカード上の動物毎に1MCを獲得.",
+    "Requires 2 city tiles in play.": "条件：都市タイル2枚以上.",
+
+    "Mining Colony": "採掘コロニー",
+    "Increase your titanium production 1 step. Place a colony.": "チタン産出+1. コロニー1つ配置.",
+
+    "Minority Refuge": "マイノリティ避難所",
+    "Decrease your M€ production 2 steps. Place a colony.": "MC産出-2. コロニー1つ配置.",
+
+    "Molecular Printing": "分子プリンティング",
+    "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "配置済みの全都市タイル1枚毎に1MC獲得. 配置済みの全コロニー1つ毎に1MC獲得獲得.",
+
+    "Nitrogen from Titan": "タイタンよりの窒素",
+    "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "TR+2段階. 木星タグカード上に2浮遊体追加.",
+
+    "Pioneer Settlement": "先駆者の開拓地",
+    "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "条件：所有コロニー1つ以下. MC産出-2. コロニー1つ配置.",
+
+    "Productive Outpost": "肥沃な前哨基地",
+    "Gain all your colony bonuses.": "所有コロニー全てから交易ボーナスを得る.",
+
+    "Quantum Communications": "量子通信",
+    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "科学タグ4つ以上. 配置済みの全コロニー1つ毎にMC産出+1.",
+
+    "Red Spot Observatory": "大赤斑の探査",
+    "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "アクション：このカード上に1浮遊体追加 または このカード上から1浮遊体除去し、1ドロー.",
+    "Requires 3 science tags. Draw 2 cards.": "科学タグ3つ以上. 2ドロー.",
+
+    "Refugee Camps": "難民キャンプ",
+    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "アクション：MC産出-1し、このカード上に1キャンプリソース追加.",
+    "1 VP for each camp resource on this card.": "このカード上の1キャンプリソース毎に1VP",
+
+    "Research Colony": "研究コロニー",
+    "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "コロニー1つ配置(既に配置済みのコロニータイルでも可). 2ドロー.",
+
+    "Rim Freighters": "外縁貨物便",
+
+    "Sky Docks": "空中ドック",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "効果：カードのプレイコスト-1MC.",
+    "Requires 2 Earth tags. Gain 1 Trade Fleet.": "条件：地球タグ2つ以上. 1交易艦隊獲得.",
+
+    "Solar Probe": "太陽探査船",
+    "Draw 1 card for every 3 science tags you have, including this.": "科学タグ3つ毎に1ドロー.",
+
+    "Solar Reflectors": "太陽光反射板",
+    "Increase your heat production 5 steps.": "温熱産出+5.",
+
+    "Space Port": "宇宙港",
+    "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "条件：所有コロニー1つ以上. 電力産出-1し、MC産出+4. 都市タイルを配置. 1交易艦隊獲得.",
+
+    "Space Port Colony": "宇宙港コロニー",
+    "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "条件：所有コロニー1つ以上. コロニー1つ配置(既に配置済みのコロニータイルでも可). 1交易艦隊獲得.",
+    "1VP per 2 colonies in play.": "配置済みの全コロニー2つ毎に1VP.",
+
+    "Spin-off Department": "スピンオフ部門",
+    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "効果：元のプレイコスト20MC以上のカードをプレイ時、1ドロー.",
+    "Increase your M€ production 2 steps.": "MC産出+2.",
+
+    "Sub-zero Salt Fish": "氷点下魚類",
+    "Action: Add 1 animal to this card.": "アクション：このカード上に1動物追加.",
+    "1 VP per 2 animals on this card.": "このカード上の2動物毎に1VP.",
+    "Requires -6 C. Decrease any plant production 1 step.": "条件：温度-6℃以上. プレイヤー1人の植物産出-1.",
+
+    "Titan Air-scrapping": "タイタン大気減圧",
+    "Action: Spend 1 titanium to add 2 floaters here.": "アクション：1チタンを支払い、このカード上に2浮遊体追加.",
+    "Action: Spend 2 floaters here to increase your TR 1 step.": "アクション：このカード上から2浮遊体除去し、TR+1段階.",
+
+    "Titan Floating Launch-pad": "タイタン浮遊発着便",
+    "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "アクション：このカード上に1浮遊体追加 または このカード上から1浮遊体除去し、交易コスト無料で交易.",    
+    "Add two floaters to ANY JOVIAN CARD.": "木星タグカード上に2浮遊体追加.",
+
+    "Titan Shuttles": "タイタンシャトル",
+    "Action: Add 2 floaters to ANY JOVIAN CARD.": "アクション：木星タグカード上に2浮遊体追加.",
+    "Action: Spend any number of floaters here to gain the same number of titanium.": "アクション：このカード上からx浮遊体除去し、xチタン獲得.",
+
+    "Trade Envoys": "交易大使",
+
+    "Trading Colony": "交易コロニー",
+    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "効果：交易するコロニータイルのトラックを+1段階してもよい.",
+    "Place a colony": "コロニー1つ配置.",
+
+    "Urban Decomposers": "都市棲の分解者",
+    "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "条件：所有コロニー1つ以上 かつ 所有都市タイル1つ以上. 植物産出+1. 2微生物獲得.",
+
+    "Warp Drive": "ワープ航法",
+    "Effect: When you play a space card, you pay 4 M€ less for it.": "効果：宇宙タグカードのプレイコスト-4MC.",
+    "Requires 5 science tags.": "科学タグ5つ以上."
+}

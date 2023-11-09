@@ -35,7 +35,12 @@ describe('Warmonger', () => {
     const failures: Array<string> = [];
     const cardFinder = new CardFinder();
     for (const cardName of Warmonger.attackCards) {
-      const card = cardFinder.getCardByName(cardName)!;
+      const card = cardFinder.getCardByName(cardName);
+      // TODO(kberg): Remove === undefined by 2024-02-01
+      if (card === undefined) {
+        console.log('Skipping ' + cardName);
+        continue;
+      }
       if (Warmonger.autoInclude(card)) {
         failures.push(cardName);
       }

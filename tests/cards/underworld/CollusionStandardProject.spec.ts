@@ -81,6 +81,31 @@ describe('CollusionStandardProject', () => {
     expect(player.popWaitingFor()).is.undefined;
   });
 
+  it('action - one delegate', () => {
+    player.underworldData.corruption = 1;
+    turmoil.sendDelegateToParty('NEUTRAL', PartyName.UNITY, game);
+
+    card.action(player);
+    runAllActions(game);
+
+    const andOptions = cast(player.popWaitingFor(), AndOptions);
+    const selectAmount = cast(andOptions.options[0], SelectAmount);
+    const selectParty = cast(andOptions.options[1], SelectParty);
+
+    selectAmount.cb(1);
+    selectParty.cb(PartyName.UNITY);
+    andOptions.cb(undefined);
+
+    expect(player.underworldData.corruption).eq(0);
+    const unity = turmoil.getPartyByName(PartyName.UNITY);
+    expect(unity.delegates).deep.eq(MultiSet.from([player]));
+    expect(unity.partyLeader).eq(player);
+    runAllActions(game);
+    expect(player.popWaitingFor()).is.undefined;
+  });
+
+  // The collusion standard project has bit of an issue. You can not send delegate to party with only 1 neutral on it .  Error message pops up and then the neutral delegate gets removed ... but they still have neutral party leader with none in party.
+
   // TODO(kberg): Add more tests.
   // e.g., tests for entering the wrong number of delegates (only 1 neutral available, or only 1 in your supply.)
 });

@@ -58,7 +58,7 @@
     "GUILD": "ギルド",
     "Mining Guild": "マイニングギルド",
     "You start with 30 M€, 5 steel and 1 steel production.": "初期資源：30MC. 5建材. 初期産出：建材産出+1.",
-    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "効果：タイルの配置ボーナスとして建材 または チタンを入手した場合、入手した資材の産出+1.(2資源ボーナスでも産出+1. 実装都合：チタンと建材同時入手の場合は建材産出優先.)",
+    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "効果：タイルの配置ボーナスとして建材 または チタンを入手した場合、建材産出+1.(2資源ボーナスでも産出+1.)",
 
     "TERACTOR": "テラクター",
     "Terractor": "テラクター",

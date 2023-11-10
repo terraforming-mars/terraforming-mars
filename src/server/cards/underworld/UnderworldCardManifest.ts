@@ -39,7 +39,7 @@ import {FreeTradePort} from './FreeTradePort';
 import {GanymedeTradingCompany} from './GanymedeTradingCompany';
 import {GeologicalExpertise} from './GeologicalExpertise';
 // import {GeologicalSurvey} from './GeologicalSurvey';
-// import {GeologistTeam} from './GeologistTeam';
+import {GeologistTeam} from './GeologistTeam';
 // import {GeoscanSatellite} from './GeoscanSatellite';
 // import {GeothermalNetwork} from './GeothermalNetwork';
 // import {GlobalAudit} from './GlobalAudit';
@@ -129,7 +129,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   module: 'underworld',
   projectCards: {
     // // 1-9
-    // [CardName.GEOLOGIST_TEAM]: {Factory: GeologistTeam},
+    [CardName.GEOLOGIST_TEAM]: {Factory: GeologistTeam},
     // [CardName.GEOSCAN_SATELLITE]: {Factory: GeoscanSatellite},
     [CardName.TUNNEL_BORING_MACHINE]: {Factory: TunnelBoringMachine},
     [CardName.UNDERGROUND_RAILWAY]: {Factory: UndergroundRailway},
@@ -230,7 +230,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents}, // Uncomment when tests are more manageable. See Production.ts
 
     // // Replacements
-    [CardName.STANDARD_TECHNOLOGY]: {Factory: StandardTechnology},
+    [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},
     [CardName.HACKERS_UNDERWORLD]: {Factory: Hackers},
     [CardName.HIRED_RAIDERS_UNDERWORLD]: {Factory: HiredRaiders},
   },

@@ -122,6 +122,8 @@
     "specialized robot(s)": "spezialisierten Roboter",
     "hydroelectric resource(s)": "hydroelektrische Ressource(n)",
     "clone trooper(s)": "Klonkrieger",
+    "corruption": "Koruption",
+    "1 corruption": "1 Koruption",
 
     "${0} played ${1}": "${0} hat ${1} gespielt",
     "${0} used ${1} action": "${0} hat eine Aktion von ${1} genutzt",
@@ -178,6 +180,7 @@
     "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} in Reihe ${3}, Feld ${4}",
     "placed": "platziert",
     "removed": "entfernte",
+    "excavated": "gräbt",
     "land claim": "Landnahme",
     "Road": "Straßen",
     "greenery tile": "Grünflächenplättchen",
@@ -327,6 +330,7 @@
     "${0} gained ${1} TR": "${0} erhielt ${1} TW",
     "${0} lost ${1} TR": "${0} verlor ${1} TW",
     "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}'s ${3}",
+    "${0} spent 1 corruption to block an attack by ${1}": "${0} gab 1 Korruption aus, um den Angriff von ${1} zu blocken",
 
     "earth": "Erde",
     "venus": "Venus",

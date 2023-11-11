@@ -1,9 +1,9 @@
 {
    "Select a Mars First bonus.": "Velg en Mars Først-bonus.",
    "Gain 1 M€ for each building tag you have": "Få 1 M€ for hvert bygningssymbol du har.",
-   "Gain 1 M€ for each tile you have ON MARS": "Få 1 M€ for hver flis du har PÅ MARS.",
+   "Gain 1 M€ for each tile you have ON MARS": "Få 1 M€ for hver brikke du har PÅ MARS.",
    "Select a Mars First policy.": "Velg en Mars Først-retningslinje.",
-   "When you place a tile ON MARS, gain 1 steel": "Når du plasserer en flis PÅ MARS, få 1 stål.",
+   "When you place a tile ON MARS, gain 1 steel": "Når du plasserer en brikke PÅ MARS, få 1 stål.",
    "When you play a building tag, gain 2 M€": "Når du spiller et bygningssymbol, få 2 M€.",
    "Your steel resources are worth 1 M€ extra": "Dine stålressurser er verdt 1 M€ ekstra.",
    "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "Betal 4 M€ for å trekke et Bygning-kort (Omveltning - Mars Først).",
@@ -27,10 +27,10 @@
 
    "Select a Greens bonus.": "Velg en De Grønne-bonus.",
    "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "Få 1 M€ for hvert Plante-, Mikrobe- og Dyresymbol du har.",
-   "Gain 2 M€ for each greenery tile you have": "Få 2 M€ for hvert grøntområde du har.",
+   "Gain 2 M€ for each greenery tile you have": "Få 2 M€ for hvert skogområde du har.",
    "Select a Greens policy.": "Velg en De Grønne-retningslinje.",
-   "When you place a greenery tile, gain 4 M€": "Når du plasserer et grøntområde, få 4 M€.",
-   "When you place a tile, gain 1 plant": "Når du plasserer en flis, få 1 plante.",
+   "When you place a greenery tile, gain 4 M€": "Når du plasserer et skogområde, få 4 M€.",
+   "When you place a tile, gain 1 plant": "Når du plasserer en brikke, få 1 plante.",
    "When you play an animal, plant or microbe tag, gain 2 M€": "Når du spiller et dyre-, plante- eller mikrobesymbol, få 2 M€.",
    "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "Betal 5 M€ for å få 3 planter eller legg til 2 mikrober på ET VALGFRITT KORT (Omveltning - De Grønne).",
 
@@ -39,7 +39,7 @@
    "The player(s) with the highest TR loses 1 TR": "Spilleren(e) med høyest terraformverdi mister 1 TR",
    "Select a Reds policy.": "Velg en De Røde-retningslinje.",
    "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "Når du tar en handling som øker TR, MÅ du betale 3 M€ per trinn økt.",
-   "When you place a tile, pay 3 M€ or as much as possible": "Når du plasserer en flis, betal 3 M€ eller så mye som mulig.",
+   "When you place a tile, pay 3 M€ or as much as possible": "Når du plasserer en brikke, betal 3 M€ eller så mye som mulig.",
    "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "Betal 4 M€ for å redusere et ikke-maksimert globalt parameter 1 trinn (du får IKKE noen sporbonuser).",
    "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "Når du øker et globalt parameter, reduser din M€-produksjon 1 trinn per trinn økt, hvis mulig.",
 
@@ -50,5 +50,5 @@
    "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "Betal 10 M€ for å øke din energi- og varmeproduksjon 1 trinn (Omveltning - Kelvinistene).",
    "When you raise temperature, gain 3 M€ per step raised": "Når du øker temperaturen, få 3 M€ per trinn økt.",
    "Convert 6 heat into temperature (Turmoil Kelvinists)": "Konverter 6 varme til temperatur (Omveltning - Kelvinistene).",
-   "When you place a tile, gain 2 heat": "Når du plasserer en flis, få 2 varme."
+   "When you place a tile, gain 2 heat": "Når du plasserer en brikke, få 2 varme."
   }

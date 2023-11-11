@@ -176,7 +176,7 @@
     "*    +": "*    +",
     "Sell": "Selg",
     "Select prelude card to play": "Velg preludiumskort å spille",
-    "Select space for ocean tile": "Velg plassering for hav-flis",
+    "Select space for ocean tile": "Velg plassering for hav-brikke",
     "Gain 3 plants.": "Få 3 planter.",
     "Venus Milestone/Award": "Venus milepæl/utmerkelse",
     "colony": "Koloni",
@@ -192,5 +192,5 @@
     "1 VP per animal on this card.": "1 SP per dyr på dette kortet.",
     "1 VP per 2 animals on this card.": "1 SP per 2 dyr på dette kortet.",
 
-    "${0} placed ${1} tile on (${2}, ${3}": "${0} plasserte \"${1}\" flis på (${2}, ${3}."
+    "${0} placed ${1} tile on (${2}, ${3}": "${0} plasserte \"${1}\" brikke på (${2}, ${3}."
 }

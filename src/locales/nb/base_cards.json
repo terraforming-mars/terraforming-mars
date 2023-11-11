@@ -57,20 +57,20 @@
 	"4 Oceans": "4 hav",
 	"5 Oceans": "5 hav",
 	"6 Oceans": "6 hav",
-	"Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Krever 4 hav. Plasser denne flisen. Senk din energiproduksjon 2 steg og øk din M€-produksjon med 5.",
-	"1 additional VP for each ocean tile adjacent to this city tile.": "1 ekstra SP for hvert hav som grenser til denne byflisen.",
+	"Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Krever 4 hav. Plasser denne brikken. Senk din energiproduksjon 2 steg og øk din M€-produksjon med 5.",
+	"1 additional VP for each ocean tile adjacent to this city tile.": "1 ekstra SP for hvert hav som grenser til denne by-brikken.",
 
 	"Asteroid": "Asteroide",
 	"Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Øk temperatur 1 steg og få 2 titan. Fjern opp til 3 planter fra en spiller.",
 
 	"Comet": "Komet",
-	"Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.": "Øk temperatur 1 steg og plasser en hav-flis. Fjern opp til 3 planter fra en spiller.",
+	"Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.": "Øk temperatur 1 steg og plasser en hav-brikke. Fjern opp til 3 planter fra en spiller.",
 
 	"Big Asteroid": "Stor asteroide",
 	"Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Øk temperatur 2 steg og få 4 titan. Fjern opp til 4 planter fra en spiller.",
 
 	"Water Import From Europa": "Vannimport fra Europa",
-	"Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "HANDLING: Betal 12 M€ for å plassere en hav-flis. TITANIUM KAN BLI BRUKT som om du spiller et kort med romsymbol.",
+	"Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "HANDLING: Betal 12 M€ for å plassere en hav-brikke. TITANIUM KAN BLI BRUKT som om du spiller et kort med romsymbol.",
 	"1 VP for each Jovian tag you have.": "1 SP for hvert Jupiter symbol du har.",
 
 	"Space Elevator": "Romheis",
@@ -84,29 +84,29 @@
 	"Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "HANDLING: Reduser din energiproduksjon med 1 steg for å øke din terraforming-vurdering med 1 steg.",
 
 	"Domed Crater": "Kuppelkrater",
-	"Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Oksygen må være 7% eller mindre. Få 3 planter. Plasser en by-flis. Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg.",
+	"Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Oksygen må være 7% eller mindre. Få 3 planter. Plasser en by-brikke. Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg.",
 
 	"Noctis City": "Noctis by",
-	"(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.)": "(Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg. Plasser en by-flis på det reserverte området, uten å ta hensyn til normale plasseringsrestriksjoner.)",
+	"(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.)": "(Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg. Plasser en by-brikke på det reserverte området, uten å ta hensyn til normale plasseringsrestriksjoner.)",
 
 	"Methane From Titan": "Metan fra Titan",
 	"(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": "(Krever 2% oksygen. Øk din varmeproduksjon 2 steg og din planteproduksjon 2 steg.)",
 
 	"Imported Hydrogen": "Importert hydrogen",
-	"Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "Få 3 planter, eller legg til 3 mikrober eller 2 dyr på et ANNET kort. Plasser en hav-flis.",
+	"Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "Få 3 planter, eller legg til 3 mikrober eller 2 dyr på et ANNET kort. Plasser en hav-brikke.",
 
 	"Research Outpost": "Forskningsutpost",
 	"Effect: When you play a card, you pay 1 M€ less for it.": "EFFEKT: Når du spiller et kort, betaler du 1 M€ mindre for det.",
-	"Place a city tile NEXT TO NO OTHER TILE.": "Plasser en by-flis VED SIDEN AV INGEN ANDRE FLISER.",
+	"Place a city tile NEXT TO NO OTHER TILE.": "Plasser en by-brikke VED SIDEN AV INGEN ANDRE BRIKKER.",
 
 	"Phobos Space Haven": "Phobos romhavn",
-	"Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.": "Øk din titanium-produksjon 1 steg og plasser en by-flis PÅ DET RESERVERTE OMRÅDET.",
+	"Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.": "Øk din titanium-produksjon 1 steg og plasser en by-brikke PÅ DET RESERVERTE OMRÅDET.",
 
 	"Black Polar Dust": "Sort Polarstøv",
-	"Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.": "Plasser en hav-flis. Reduser din M€-produksjon 2 steg og øk din varmeproduksjon 3 steg.",
+	"Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.": "Plasser en hav-brikke. Reduser din M€-produksjon 2 steg og øk din varmeproduksjon 3 steg.",
 
 	"Arctic Algae": "Arktiske alger",
-	"(Effect: When anyone places an ocean tile, gain 2 plants.)": "EFFEKT: Du får 2 planter når noen plasserer en hav-flis.",
+	"(Effect: When anyone places an ocean tile, gain 2 plants.)": "EFFEKT: Du får 2 planter når noen plasserer en hav-brikke.",
 	"(It must be -12 C or colder to play. Gain 1 plant.)": "Temperatur må være -12 °C eller kaldere. Få 1 plante.",
 
 	"Predators": "Rovdyr",
@@ -121,14 +121,14 @@
 	"Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.": "Krever -12 °C eller varmere. Legg til 1 kort på ET ANNET DYR-KORT. Få 3 planter. Øk din M€-produksjon 2 steg.",
 
 	"Interstellar Colony Ship": "Interstellar koloniskip",
-	"Requires that you have 5 science tags.": "Krever at du har 5 vitenskaps-symboler.",
+	"Requires that you have 5 science tags.": "Krever at du har 5 vitenskapssymboler.",
 
 	"Security Fleet": "Sikkerhetsflåte",
 	"Action: Spend 1 titanium to add 1 fighter resource to this card.": "HANDLING: Bruk 1 titanium for å legge til 1 jagerfly på dette kortet.",
 	"1 VP for each fighter resource on this card.": "1 SP per jagerfly på dette kortet.",
 
 	"Cupola City": "Kuppelby",
-	"Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Oksygen må være 9% eller mindre. Plasser en by-flis. Reduser din energiproduksjon 1 steg og øk din M€-produksjon 3 steg.",
+	"Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Oksygen må være 9% eller mindre. Plasser en by-brikke. Reduser din energiproduksjon 1 steg og øk din M€-produksjon 3 steg.",
 
 	"Lunar Beam": "Energistråle fra Månen",
 	"Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "Reduser din M€-produksjon 2 steg og øk din varme- og energi-produksjon 2 steg hver.",
@@ -137,7 +137,7 @@
 	"Effect: When you play a space event, you gain 3 M€ and 3 heat.": "EFFEKT: Få 3 M€ og 3 varme når du spiller en romhendelse.",
 
 	"Underground City": "Underjordisk by",
-	"Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Plasser en by-flis. Reduser din energiproduksjon 2 steg og øk din stålproduksjon 2 steg.",
+	"Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Plasser en by-brikke. Reduser din energiproduksjon 2 steg og øk din stålproduksjon 2 steg.",
 
 	"Regolith Eaters": "Regolith-spisere",
 	"Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "HANDLING: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.",

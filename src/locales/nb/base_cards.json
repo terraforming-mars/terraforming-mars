@@ -139,7 +139,7 @@
 	"Underground City": "Underjordisk by",
 	"Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Plasser en by-brikke. Reduser din energiproduksjon 2 steg og øk din stålproduksjon 2 steg.",
 
-	"Regolith Eaters": "Regolith-spisere",
+	"Regolith Eaters": "Regolitt-spisere",
 	"Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "HANDLING: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.",
 	"(Action: Remove 2 microbes from this card to raise oxygen level 1 step.)": "(HANDLING: Entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.)",
 
@@ -209,7 +209,7 @@
 	"Lake Marineris": "Marineris See",
 	"(Requires 0° C or warmer. Place 2 ocean tiles.)": "Benötigt eine Temperatur von 0 °C oder wärmer. Platziere 2 Ozeanplättchen.",
 
-	"Small Animals": "Kleintiere",
+	"Small Animals": "Smådyr",
 	"Requires 6% oxygen. Decrease any plant production 1 step.": "Benötigt einen Sauerstoffgehalt von 6% oder mehr. Senke eine beliebige Pflanzen-Produktion um 1.",
 
 	"Kelp Farming": "Tang-Anbau",
@@ -264,7 +264,7 @@
 	"Effect: Each titanium you have is worth 1 M€ extra.": "EFFEKT: Jedes eigene Titan ist 1 M€ zusätzlich wert.",
 	"Effect: Each steel you have is worth 1 M€ extra.": "Jeder eigene Stahl ist 1 M€ zusätzlich wert.",
 
-	"Birds": "Vögel",
+	"Birds": "Fugler",
 	"Action: Add an animal to this card.": "HANDLING: Füge dieser Karte 1 Tier hinzu.",
 	"Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Benötigt Sauerstoffgehalt von 13% oder mehr. Senke eine Pflanzen-Produktion um 2. 1 SP je Tier auf dieser Karte.",
 
@@ -449,7 +449,7 @@
 	"Worms": "Regenwürmer",
 	"Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": "Benötigt Sauerstoffgehalt von 4% oder mehr. Erhöhe deine Pflanzen-Produktion um 1 je 2 eigene Mikrobensymbole (einschließlich dieses).",
 
-	"Decomposers": "Destruenten",
+	"Decomposers": "Nedbrytere",
 	"Effect: When you play an animal, plant, or microbe tag, including this, add a microbe to this card.": "EFFEKT: Wenn du ein Tier-, Pflanzen- oder Mikrobensymbol ausspielst (einschließlich dieses), füge dieser Karte je 1 Mikrobe hinzu.",
 	"Requires 3% oxygen.": "Benötigt Sauerstoffgehalt von 3% oder mehr.",
 	"1 VP per 3 microbes on this card.": "1 SP je 3 Mikroben auf dieser Karte.",
@@ -535,7 +535,7 @@
 	"Standard Technology": "Standardtechnologie",
 	"Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "EFFEKT: Nachdem du für ein Standard-Projekt bezahlt hast (Ausnahme: Patente verkaufen), erhältst du 3 M€.",
 
-	"Nitrite Reducing Bacteria": "Denitrifizierende Bakterien",
+	"Nitrite Reducing Bacteria": "Nitritt-reduserende bakterier",
 	"Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "HANDLING: Füge dieser Karte 1 Mikrobe hinzu ODER entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.",
 	"(Action: Remove 3 microbes to increase your TR 1 step.)": "(HANDLING: Entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.)",
 	"Add 3 microbes to this card.": "Füge dieser Karte 3 Mikroben hinzu.",
@@ -586,7 +586,7 @@
 	"Magnetic Field Dome": "Magnetfeldkuppel",
 	"Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step.": "Senke deine Energie-Produktion um 2. Erhöhe deine Pflanzen-Produktion um 1. Erhöhe deinen Terraformwert um 1.",
 
-	"Pets": "Haustiere",
+	"Pets": "Kjæledyr",
 	"Animals may not be removed from this card": "Tiere dürfen nicht von dieser Karte entfernt werden.",
 	"Effect: When any city tile is placed, add an animal to this card.": "EFFEKT: Immer wenn ein Stadtplättchen platziert wird, füge dieser Karte 1 Tier hinzu.",
 	"(Add 1 animal to this card.)": "(Füge dieser Karte 1 Tier hinzu.)",

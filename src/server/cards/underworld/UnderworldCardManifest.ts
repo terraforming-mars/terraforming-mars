@@ -40,7 +40,7 @@ import {GanymedeTradingCompany} from './GanymedeTradingCompany';
 import {GeologicalExpertise} from './GeologicalExpertise';
 // import {GeologicalSurvey} from './GeologicalSurvey';
 import {GeologistTeam} from './GeologistTeam';
-// import {GeoscanSatellite} from './GeoscanSatellite';
+import {GeoscanSatellite} from './GeoscanSatellite';
 // import {GeothermalNetwork} from './GeothermalNetwork';
 // import {GlobalAudit} from './GlobalAudit';
 import {GreyMarketExploitation} from './GreyMarketExploitation';
@@ -130,7 +130,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   projectCards: {
     // // 1-9
     [CardName.GEOLOGIST_TEAM]: {Factory: GeologistTeam},
-    // [CardName.GEOSCAN_SATELLITE]: {Factory: GeoscanSatellite},
+    [CardName.GEOSCAN_SATELLITE]: {Factory: GeoscanSatellite},
     [CardName.TUNNEL_BORING_MACHINE]: {Factory: TunnelBoringMachine},
     [CardName.UNDERGROUND_RAILWAY]: {Factory: UndergroundRailway},
     // // [CardName.GAIA_CITY]: {Factory: GaiaCity},

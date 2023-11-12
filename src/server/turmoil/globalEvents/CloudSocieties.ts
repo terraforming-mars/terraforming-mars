@@ -10,7 +10,7 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.br.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).colon().floaters(1).nbsp;
+  b.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).colon().floaters(1).nbsp;
   b.floaters(1).slash().influence();
 });
 

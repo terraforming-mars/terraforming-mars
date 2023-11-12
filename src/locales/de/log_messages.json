@@ -67,6 +67,7 @@
     "This game id was ${0}": "Die Spiel-ID war ${0}",
 
     "${0} gained ${1} ${2}": "${0} erhielt ${1} ${2}",
+    "${0} gained ${1} from ${2}": "${0} erhielt ${1} von ${2}",
     "${0} gained ${1} M€ by discarding ${2} cards": "${0} erhielt ${1} M€ durch Abwerfen von ${2} Karten",
     "card": "Karte",
     "1 Card": "1 Karte",

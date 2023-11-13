@@ -114,11 +114,12 @@ export default Vue.extend({
       return boardColorClass[this.gameOptions.boardName];
     },
     escapeVelocityDescription(): string {
-      const {escapeVelocityThreshold, escapeVelocityPenalty, escapeVelocityPeriod} = this.gameOptions ?? {};
-      if (escapeVelocityThreshold === undefined || escapeVelocityPenalty === undefined || escapeVelocityPeriod === undefined) {
+      const {escapeVelocityThreshold, escapeVelocityPenalty, escapeVelocityPeriod, escapeVelocityBonusSeconds} = this.gameOptions ?? {};
+
+      if (escapeVelocityThreshold === undefined || escapeVelocityPenalty === undefined || escapeVelocityPeriod === undefined || escapeVelocityBonusSeconds === undefined) {
         return '';
       }
-      return translateTextWithParams('After ${0} min, reduce ${1} VP every ${2} min.', [escapeVelocityThreshold.toString(), escapeVelocityPenalty.toString(), escapeVelocityPeriod.toString()]);
+      return translateTextWithParams('After ${0} min, reduce ${1} VP every ${2} min. ( ${3} seconds bonus per turn )', [escapeVelocityThreshold.toString(), escapeVelocityPenalty.toString(), escapeVelocityPeriod.toString(), escapeVelocityBonusSeconds.toString()]);
     },
     RandomMAOptionType(): typeof RandomMAOptionType {
       return RandomMAOptionType;

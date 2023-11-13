@@ -13,7 +13,7 @@ export class SpaceWargames extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
       name: CardName.SPACE_WARGAMES,
       cost: 25,
-      tags: [Tag.JOVIAN],
+      tags: [Tag.JOVIAN, Tag.SPACE],
       victoryPoints: {tag: Tag.JOVIAN},
       resourceType: CardResource.FIGHTER,
 

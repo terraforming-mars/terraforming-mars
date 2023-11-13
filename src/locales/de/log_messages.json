@@ -263,7 +263,7 @@
     "${0} spends ${1} M€ for the ${2} habitat tiles they own.": "${0} bezahlt ${1} M€ für die eigenen ${2} Habitate.",
     "${0} spends ${1} M€ for the ${2} mining tiles they own.": "${0} bezahlt ${1} M€ für die eigenen ${2} Minen.",
     "All players except ${0} may not retrieve their trade fleets this generation.": "Alle Spieler außer ${0} dürfen diese Generation ihre Handelsflotten nicht zurückholen.",
-    "All global parameters are high enough that there is no point in changing any of them.": "Alle globalen Parameter sind so hoch, dass es keinen Sinn macht, die Gafahrenmarker zu ändern.",
+    "All global parameters are high enough that there is no point in changing any of them.": "Alle globalen Parameter sind so hoch, dass es keinen Sinn macht, die Gefahrenmarker zu ändern.",
     "${0} decreased ${1} production 1 step to gain 4 ${2}": "${0} senkte ${1}-Produktion um 1, um 4 ${2} zu erhalten",
     "${0} removed neutral delegate from ${1}": "${0} entfernte einen neutralen Deligierten von ${1}",
     "${0} removed ${1}'s delegate from ${2}": "${0} entfernte ${1}s Deligierten von ${2}",

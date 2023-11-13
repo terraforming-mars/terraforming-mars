@@ -1,0 +1,158 @@
+{
+    
+    "Applied Science": "",
+    "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "アクション：このカード上から1科学リソース除去し、任意の1リソースを獲得.",
+    "Add 6 resources here.": "このカード上に6科学リソース追加.",
+
+    "Colony Trade Hub": "",
+    "Increase your energy production 1 step. Gain 3 titanium": "電力産出+1. 3チタン獲得.",
+    "Effect: When a colony is placed, gain 2 M€": "効果：コロニー配置時、2MC獲得.",
+
+    "Focused Organization": "",
+    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "アクション：手札を1枚捨て、さらに1標準リリースを支払い、1ドローと1標準リソース獲得.",
+    "Draw 1 card and gain 1 standard resource.": "1ドローと1標準リソース獲得.",
+
+    "Nobel Prize": "",
+    "Gain 2 M€. Draw 2 cards with requirements.": "2MC獲得. 条件付きカード2枚入手.",
+
+    "Old Mining Colony": "",
+    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "チタン産出+1. コロニー1つ配置. 手札を1枚捨てる",
+
+
+    "Anti-desertification Techniques": "",
+    "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "建材産出+1. 植物産出+1. 3MC獲得.",
+
+    "Corporate Archives": "",
+    "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "デッキの上から7枚を見る.その内、2枚を獲得し残りを捨て札にする.",
+    "Look at the top 7 cards from the deck.": "デッキの上から7枚を見る.",
+    "Take 2 of them into hand and discard the other 5.": "その内、2枚を獲得し残りを捨て札にする.",
+    "Gain 13 M€": "13MC獲得",
+
+    "Double Down": "",
+    "Copy your other prelude's direct effect.": "自身のプレイ済みプレリュードをコピー(タグはコピーされない).",
+
+    "Giant Solar Collector": "",
+    "Increase your energy production 2 steps. Raise Venus 1 step.": "電力産出+2. 金星+1段階.",
+
+    "Head Start": "",
+    "GAIN 2 STEEL.": "2建材獲得.",
+    "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "手札1枚毎に2MC獲得.",
+    "IMMEDIATELY TAKE 2 ACTIONS.": "すぐに2アクション実行.",
+
+    "Merger": "",
+    "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "新たに企業を4枚を見る.その内、1枚を獲得し残りを捨て札にする. その後、42MC支払う.",
+
+    "New Partner": "",
+    "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "MC産出+1. 新たにプレリュードを2枚見る。そのうち1枚を獲得し残りを捨て札にする。",
+
+
+    "Allied Bank": "提携銀行",
+    "Increase your M€ production 4 steps. Gain 3 M€.": "MC産出+4. 3MC獲得.",
+
+    "Aquifer Turbines": "帯水層タービン",
+    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "海洋1枚配置. 電力産出+2. 3MC支払う.",
+
+    "Biofuels": "バイオ燃料",
+    "Increase your energy and plant production 1 step. Gain 2 plants.": "電力産出+1. 植物産出+1. 2植物獲得.",
+
+    "Biolab": "バイオラボ",
+    "Increase your plant production 1 step. Draw 3 cards.": "植物産出+1. 3ドロー.",
+
+    "Biosphere Support": "生物圏の支援",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "MC産出-1し、植物産出+2.",
+
+    "Business Empire": "企業帝国",
+    "Increase your M€ production 6 steps. Pay 6 M€.": "MC産出+6. 6MC支払う.",
+
+    "Dome Farming": "ドーム農法",
+    "Increase your M€ production 2 steps and plant production 1 step.": "MC産出+2. 植物産出+1.",
+
+    "Donation": "寄付",
+    "Gain 21 M€.": "21MC獲得.",
+
+    "Early Settlement": "最初の火星人",
+    "Increase your plant production 1 step. Place a city tile.": "植物産出+1. 都市タイルを配置.",
+
+    "Ecology Experts": "生態系のエキスパート",
+    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "植物産出+1. グローバルパラメーター参照の条件を無視してカード1枚をプレイ.",
+
+    "Eccentric Sponsor": "一風変わったスポンサー",
+    "Play a card from hand, reducing its cost by 25 M€": "プレイコストを-25MCしてカード1枚をプレイ.",
+
+    "Experimental Forest": "実験林",
+    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "緑地タイルを配置. 植物タグカードを2枚入手.",
+
+    "Galilean Mining": "ガリレオ衛生採掘権",
+    "Increase your titanium production 2 steps. Pay 5 M€.": "チタン産出+2. 5MC支払う.",
+
+    "Great Aquifer": "大帯水層",
+    "Place 2 ocean tiles.": "海洋2枚配置.",
+
+    "Huge Asteroid": "超巨大小惑星",
+    "Increase temperature 3 steps. Pay 5 M€.": "温度+3段階. 5MC支払う.",
+
+    "Io Research Outpost": "イオ研究基地",
+    "Increase your titanium production 1 step. Draw a card.": "チタン産出+1. 1ドロー.",
+
+    "Loan": "融資",
+    "Gain 30 M€. Decrease your M€ production 2 steps.": "MC産出-2. 30MC獲得.",
+
+    "Martian Industries": "火星産業帯",
+    "Increase your energy and steel production 1 step. Gain 6 M€.": "建材産出+1. 電力産出+1. 6MC獲得.",
+
+    "Metal-Rich Asteroid": "富金属小惑星",
+    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "温度+1段階. 4建材獲得. 4チタン獲得.",
+
+    "Metals Company": "金属企業",
+    "Increase your M€, steel and titanium production 1 step.": "MC産出+1. 建材産出+1. チタン産出+1.",
+
+    "Mining Operations": "採掘計画",
+    "Increase your steel production 2 steps. Gain 4 steel.": "建材産出+2. 4建材獲得.",
+
+    "Mohole": "モホール計画",
+    "Increase your heat production 3 steps. Gain 3 heat.": "温熱産出+3. 3温熱獲得.",
+
+    "Mohole Excavation": "モホール採掘",
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "建材産出+1. 温熱産出+2. 2温熱獲得.",
+
+    "Nitrogen Shipment": "窒素輸送",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "植物産出+1. TR+1段階. 5MC獲得.",
+
+    "Orbital Construction Yard": "軌道組み立て施設",
+    "Increase your titanium production 1 step. Gain 4 titanium.": "チタン産出+1. 4チタン獲得.",
+
+    "Polar Industries": "極地産業体",
+    "Increase your heat production 2 steps. Place an ocean tile.": "海洋1枚配置. 温熱産出+2.",
+
+    "Power Generation": "発電施設",
+    "Increase your energy production 3 steps.": "電力産出+3.",
+
+    "Research Network": "研究ネットワーク",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "MC産出+1. 3ドロー.プレイ後、？タグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
+
+    "Self-Sufficient Settlement": "自給自足型開拓地",
+    "Increase your M€ production 2 steps. Place a city tile.": "都市タイルを配置. MC産出+2.",
+
+    "Smelting Plant": "溶錬プラント",
+    "Raise oxygen 2 steps. Gain 5 steel.": "酸素+2段階. 5建材獲得.",
+
+    "Society Support": "社会支援",
+    "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "MC産出-1. 電力産出+1. 植物産出+1. 温熱産出+1.",
+
+    "Supplier": "供給体制",
+    "Increase your energy production 2 steps. Gain 4 steel.": "電力産出+2. 4建材獲得.",
+
+    "Supply Drop": "補給物資の投下",
+    "Gain 3 titanium, 8 steel and 3 plants.": "3植物、8建材、3チタンの獲得.",
+
+    "UNMI Contractor": "国際火星動機の施工請負",
+    "Increase your TR 3 steps. Draw a card.": "TR+3段階. 1ドロー.",
+
+    "Acquired Space Agency": "宇宙局の私有化",
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "6チタン獲得. 宇宙タグカードを2枚入手.",
+
+    "Add resource to card GHG Producing Bacteria": "温室効果ガス生成バクテリアに1リソース追加",
+    "Add resource to card Fish": "捕食獣に1リソース追加",
+    "Add resource": "1リソース追加",
+    "Gain plant": "植物獲得"
+}

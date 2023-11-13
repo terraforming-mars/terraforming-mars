@@ -1,0 +1,32 @@
+{
+    "POLYPHEMOS": "フォボログ",
+    "Polyphemos": "フォボログ",
+    "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "初期資源：50MC. 5チタン. 初期産出：MC産出+5.",
+    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "効果：カード購入費＋2MC.",
+
+    "STORM": "ストーム",
+    "CRAFT": "クラフト",
+    "INCOR": "インコー",
+    "PORATED": "ポレイティッド",
+    "STORMCRAFT INCORPORATED": "ストームクラフト",
+    "Stormcraft Incorporated": "ストームクラフト",
+    "You start with 48 M€.": "初期資源：48MC.",
+    "Action: Add a floater to ANY card.": "アクション：1浮遊体獲得.",
+    "Effect: Floaters on this card may be used as 2 heat each.": "効果：このカード上の浮遊体を2温熱として支払ってもよい.",
+
+    "ARKLIGHT": "アークライト",
+    "Arklight": "アークライト",
+    "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.": "初期資源：45MC. 初期産出：MC産出+2. このカード上の2動物毎に1VP.",
+    "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.": "効果：効果：植物タグ または 動物タグをプレイ時、このカード上に1動物追加.",
+
+    "ARIDOR": "アリドール",
+    "Aridor": "アリドール",
+    "COLONY": "コロニー",
+    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "初期資源：40MC. 1アクション目：コロニータイル1つ追加.",
+    "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "効果：未プレイタグをプレイする毎にMC産出+1.(？タグ、イベントタグは含まない)",
+
+    "POSEIDON": "ポセイドン",
+    "Poseidon": "ポセイドン",
+    "You start with 45 M€. As your first action, place a colony.": "初期資源：45MC. 1アクション目：コロニー1つ配置.",
+    "Effect: When any colony is placed, including this, raise your M€ production 1 step.": "効果：コロニー1つ配置毎にMC産出+1."
+}

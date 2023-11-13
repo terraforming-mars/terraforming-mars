@@ -1,0 +1,59 @@
+{
+  "Arcadian": "",
+  "Communities": "",
+  "Arcadian Communities": "",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "初期資源：40MC. 10建材. 1アクション目：非予定地に所有権マーカーを配置.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "アクション：自身の所有タイル または 所有権マーカー に隣接する非予定地に所有権マーカーを追加.",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "効果：所有権マーカーのあるマスにタイル配置を行う毎に3MC獲得.",
+
+  "Astrodrill": "",
+  "Astrodrill ENT": "",
+  "You start with 35 M€ and 3 asteroid resources.": "初期資源：35MC. 3小惑星.",
+  "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "アクション：1小惑星 または 1標準リソース獲得. または このカード上から1小惑星を除去し、3チタン獲得.",
+
+  "FACTORUM": "",
+  "Factorum": "",
+  "You start with 37 M€. Increase your steel production 1 step.": "初期資源：37MC. 初期産出：建材産出+1.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "アクション：電力を所持していない場合、電力産出+1. または 3MC支払い、土建タグカードを1枚入手",
+
+  "KUIPER COOPERATIVE": "",
+  "Kuiper Cooperative": "",
+  "You start with 33 M€. Increase titanium production 1 step.": "初期資源：33MC. 初期産出：チタン産出+1.",
+  "Action: Add 1 asteroid here for every space tag you have.": "アクション：科学タグ1つ毎にこのカード上に1小惑星追加.",
+  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "効果：標準アクション「海洋配置」 または 「温度上昇」を実行時、このカード上の小惑星を1MCとして支払ってもよい",
+
+  "mons": "",
+  "INSURANCE": "",
+  "Mons Insurance": "",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "初期資源：48MC. 初期産出：MC産出+2. 他プレイヤー全員のMC産出-2. ※この効果に対して3MCの支払いは不要.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "効果：いずれかのプレイヤーがリソース または 産出を除去された時、そのプレイヤーに3MC渡す(不足している場合は可能なだけ渡す).",
+
+  "Pharmacy": "",
+  "Union": "",
+  "Pharmacy Union": "",
+  "You start with 54 M€ . Draw a Science card.": "初期資源：54MC. 科学タグカードを1枚入手.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "効果：微生物タグカードがプレイされる毎に、このカード上に1病原リソース追加し、4MC支払う(不足している場合は可能なだけ支払う). 科学タグカードをプレイする毎に、このカード上から1病原リソースを除去し、TR+1段階. もし、除去できる病原リソースがなければこのカードを裏返してもよい. その場合、TR+3段階.",
+
+  "PHIL": "",
+  "A": "",
+  "RES": "",
+  "Philares": "",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "初期資源：47MC. 1アクション目：緑地タイルを配置.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "効果：タイル配置時、隣接した他プレイヤーのタイル1枚毎に1標準リソースを獲得.(複数隣接した場合はタイル毎にリソース種類を選択してよい).",
+
+  "Recyclon": "",
+  "You start with 38 M€ and 1 steel production.": "初期資源：38MC. 初期産出：建材産出+1.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "効果：土建タグをプレイ時、このカード上に1微生物追加 または このカード上から2微生物除去し、植物産出+1.",
+
+  "Tycho Magnetics": "",
+  "You start with 42 M€. Increase your energy production 1 step.": "初期資源：42MC. 初期産出：電力産出+1.",
+  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "アクション：x電力を支払う. デッキの上からx枚を見る.その内、1枚を獲得し残りを捨て札にする.",
+  
+  "SPLI": "",
+  "C": "",
+  "E": "",
+  "TACTICAL GENOMICS": "",
+  "Splice": "",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "初期資源：44MC. 1アクション目：微生物カードを1枚入手.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "効果：微生物タグがプレイされる毎に、微生物カードをプレイしたプレイヤーは2MC または 1微生物獲得. さらにあなたは2MC獲得."
+}

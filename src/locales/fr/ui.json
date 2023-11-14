@@ -410,7 +410,7 @@
     "seconds per action": "secondes par action",
     "Reduce": "Diminuer de",
     "VP every": "PV toutes les",
-    "After ${0} min, reduce ${1} VP every ${2} min.": "Après ${0} min, réduisez de ${1} PV toutes les ${2} minutes.",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Après ${0} min, réduisez de ${1} PV toutes les ${2} minutes. (${3} secondes bonus par tour)",
     "Mandatory Venus Terraforming": "Terraformation obligatoire de Vénus",
     "Cards to exclude from the game": "Cartes à exclure de la partie",
     "Multiplayer Options": "Options multijoueur",

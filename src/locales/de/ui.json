@@ -894,7 +894,7 @@
     "seconds per action": "Sekunden pro Aktion",
     "Reduce": "Reduziere",
     "VP every": "SP alle",
-    "After ${0} min, reduce ${1} VP every ${2} min.": "Reduziere nach ${0} Minuten alle ${2} Minuten ${1} SP.",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Reduziere nach ${0} Minuten alle ${2} Minuten ${1} SP. (${3} Bonussekunden pro Spielzug.)",
     "Exclude some cards": "Karten ausschließen",
     "Custom Colonies list": "Benutzerdefinierte Kolonien",
     "Remove negative Global Events": "Ohne negative globale Ereignisse",

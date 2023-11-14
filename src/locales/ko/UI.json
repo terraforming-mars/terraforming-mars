@@ -321,7 +321,7 @@
     "amazonis p.": "아마조니스 평원",
     "t. cimmeria": "테라 치메리아",
     "Escape Velocity": "탈주 페널티 부여",
-    "After ${0} min, reduce ${1} VP every ${2} min.": "${0}분이 지나면 ${2}분마다 승점이 ${1}씩 감소합니다",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "${0}분이 지나면 ${2}분마다 승점이 ${1}씩 감소합니다 (턴당 ${3} 보너스 초)",
     "Exclude some cards": "일부 카드 제외시키기",
     "Custom Colonies list": "커스텀 개척기지 목록",
     "Remove negative Global Events": "부정적 행성계 사건 제거",

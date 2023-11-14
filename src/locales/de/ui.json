@@ -1049,6 +1049,7 @@
     "Spectator link": "Zuschauer-Link",
     "Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.": "Warnung: Dieser Server bereinigt nicht beendete Spiele automatisch. Beende dieses Spiel bis ${0}.",
     "Warning: This game will be purged in approximately ${0} hours.": "Warnung: Dieses Spiel wird in etwa ${0} Stunden gelöscht.",
+    "Why?": "Warum?",
 
     "How to pay?": "Bezahlung",
     "Some titanium is unavailable here in reserve for the project card.": "Etwas Titan ist hier nicht verfügbar und ist reserviert für die Projektkarte",
@@ -1150,6 +1151,8 @@
     "Decrease plants production": "Reduziere Pflanzen-Produktion",
     "Decrease energy production": "Reduziere Energie-Produktion",
     "Decrease heat production": "Reduziere Wärme-Produktion",
+    "Select award to fund": "Wähle eine Auszeichung, die du finanzieren möchtest",
+    "Fund ${0} award": "Auszeichnung ${0} finanzieren",
 
     "Decrease temperature": "Reduziere Temperatur",
     "Remove an ocean tile": "Entferne ein Ozean-Plättchen",

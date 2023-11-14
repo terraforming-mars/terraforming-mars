@@ -33,8 +33,10 @@
     "Colony VP": "Kolonie SP",
     "Capital:ares": "Hauptstadt",
     "Great Dam:ares": "Staudam",
-    "Natural Preserve:ares": "Naturschutgebiet",
+    "Natural Preserve:ares": "Naturpark",
     "Nuclear Zone:ares": "Atomsperrgebiet",
+    "Ecological Zone:ares": "Naturschutzgebiet",
+    "Commercial District:ares": "Geschäftsviertel",
     
     "% completed": "% vervollständigt",
     "Temperature": "Temperatur",
@@ -47,8 +49,12 @@
 	
     "Final situation on the board": "Finales Spielbrett",
     "Final game log": "Abschließendes Spiel-Log",
-    
-    
+
+    "Most tags on the earth track": "Die meisten Erde-Symbole",
+    "Most tags on the venus track": "Die meisten Venus-Symbole",
+    "Most tags on the jovian track": "Die meisten Jupiter-Symbole",
+    "Most tags on the mars track": "Die meisten Mars-Symbole",
+    "Most tags on the moon track": "Die meisten Mond-Symbole",
     "1st place for": "1. Platz für",
     "2nd place for": "2. Platz für",
     "award (funded by": "Auszeichnung (finanziert durch",

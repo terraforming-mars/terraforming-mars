@@ -20,9 +20,9 @@
 	"Aerospace Mission": "Romfartsoppdrag",
 	"Place 2 colonies. Pay 14 M€.": "Plasser 2 kolonier. Betal 14 M€.",
 
-	"Executive Order": "Exekutivbefehl",
+	"Executive Order": "Gjennomføringsordre",
 	"PLAY": "Spill",
-	"Draw 4 global events. Play 1 as the CURRENT GLOBAL EVENT and discard the rest. Place 2 delegates in any party. Gain 10 M€.": "Ziehe 4 globale Ereignisse. Spiele 1 als AKTUELLES GLOBALES EREIGNIS aus und lege den Rest ab. Platziere 2 Delegierte in einer beliebigen Partei. Erhalte 10 M€.",
+	"Draw 4 global events. Play 1 as the CURRENT GLOBAL EVENT and discard the rest. Place 2 delegates in any party. Gain 10 M€.": "Trekk 4 globale hendelser. Spill 1 som NÅVÆRENDE GLOBALE HENDELSE og kast de andre. Plasser 2 delegater i et valgfritt parti. Få 10 M€.",
 
 	"By-Election": "Bystyrevalg",
 	"set ruling party": "bestem det regjerende partiet",
@@ -87,10 +87,10 @@
 	"Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Oksygen må være 7% eller mindre. Få 3 planter. Plasser en by-brikke. Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg.",
 
 	"Noctis City": "Noctis by",
-	"(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.)": "(Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg. Plasser en by-brikke på det reserverte området, uten å ta hensyn til normale plasseringsrestriksjoner.)",
+	"Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg. Plasser en by-brikke på det reserverte området, uten å ta hensyn til normale plasseringsrestriksjoner.",
 
 	"Methane From Titan": "Metan fra Titan",
-	"(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": "(Krever 2% oksygen. Øk din varmeproduksjon 2 steg og din planteproduksjon 2 steg.)",
+	"Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.": "Krever 2% oksygen. Øk din varmeproduksjon 2 steg og din planteproduksjon 2 steg.",
 
 	"Imported Hydrogen": "Importert hydrogen",
 	"Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "Få 3 planter, eller legg til 3 mikrober eller 2 dyr på et ANNET kort. Plasser en hav-brikke.",
@@ -106,13 +106,13 @@
 	"Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.": "Plasser en hav-brikke. Reduser din M€-produksjon 2 steg og øk din varmeproduksjon 3 steg.",
 
 	"Arctic Algae": "Arktiske alger",
-	"(Effect: When anyone places an ocean tile, gain 2 plants.)": "EFFEKT: Du får 2 planter når noen plasserer en hav-brikke.",
-	"(It must be -12 C or colder to play. Gain 1 plant.)": "Temperatur må være -12 °C eller kaldere. Få 1 plante.",
+	"Effect: When anyone places an ocean tile, gain 2 plants.": "EFFEKT: Du får 2 planter når noen plasserer en hav-brikke.",
+	"It must be -12 C or colder to play. Gain 1 plant.": "Temperatur må være -12 °C eller kaldere. Få 1 plante.",
 
 	"Predators": "Rovdyr",
 	"Action: Remove 1 animal from any card and add it to this card.": "HANDLING: Fjern 1 dyr fra et kort og legg det til på dette kortet.",
 	"1 VP per animal on this card.": "1 SP per dyr på dette kortet.",
-	"(Requires 11% oxygen.)": "(Krever 11% oksygen.)",
+	"Requires 11% oxygen.": "Krever 11% oksygen.",
 
 	"Space Station": "Romstasjon",
 	"Effect: When you play a space card, you pay 2 M€ less for it.": "EFFEKT: Betal 2 M€ mindre når du spiller et romkort.",
@@ -141,11 +141,11 @@
 
 	"Regolith Eaters": "Regolitt-spisere",
 	"Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "HANDLING: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.",
-	"(Action: Remove 2 microbes from this card to raise oxygen level 1 step.)": "(HANDLING: Entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.)",
+	"Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "HANDLING: Entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.",
 
 	"GHG Producing Bacteria": "CO₂ produzierende Bakterien",
 	"Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "HANDLING: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
-	"(Action: Remove 2 microbes to raise temperature 1 step.)": "(HANDLING: Entferne 2 Mikroben von dieser Karte, um die Temperatur um 2 °C zu erhöhen.)",
+	"Action: Remove 2 microbes to raise temperature 1 step.": "HANDLING: Entferne 2 Mikroben von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
 	"Requires 4% oxygen.": "Benötigt einen Sauerstoffgehalt von 4% oder mehr.",
 
 	"Ants": "Maur",
@@ -153,7 +153,7 @@
 	"1 VP per 2 microbes on this card.": "1 SP per 2 mikrober på dette kortet.",
 
 	"Release of Inert Gases": "Frigjøring av inerte gasser",
-	"(Raise your terraforming rating 2 steps.)": "Øk din terraforming-vurdering 2 steg.",
+	"Raise your terraforming rating 2 steps.": "Øk din terraforming-vurdering 2 steg.",
 
 	"Nitrogen-Rich Asteroid": "Nitrogenrik asteroide",
 	"Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "Øk din terraforming-vurdering 2 steg og temperatur 1 steg. Øk planteproduksjon din 1 steg, eller 4 steg hvis du har 3 plantesymboler.",
@@ -161,7 +161,7 @@
 	"Rover Construction": "Mars-Rover-Entwicklung",
 	"Effect: When any city tile is placed, gain 2 M€.": "EFFEKT: Immer wenn ein Stadtplättchen platziert wird, erhältst du 2 M€.",
 
-	"Deimos Down": "Absturz des Daimos",
+	"Deimos Down": "Deimos ned",
 	"Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Erhöhe die Temperatur um 6 °C und erhalte 4 Stahl. Entferne bis zu 8 Pflanzen eines Spielers.",
 
 	"Asteroid Mining": "Asteroidenbergbau",
@@ -183,7 +183,7 @@
 	"Decrease your M€ production 2 steps and increase your energy production 3 steps.": "Senke deine M€-Produktion um 2. Erhöhe deine Energie-Produktion um 3.",
 
 	"Lightning Harvest": "Nutzung von Blitzenergie",
-	"(Requires 3 science tags. Increase your energy production and your M€ production one step each.)": "Benötigt 3 eigene Wissenschaftssymbole. Erhöhe deine Energie-Produktion und M€-Produktion um je 1.",
+	"Requires 3 science tags. Increase your energy production and your M€ production one step each.": "Benötigt 3 eigene Wissenschaftssymbole. Erhöhe deine Energie-Produktion und M€-Produktion um je 1.",
 
 	"Algae": "Seetang",
 	"Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.": "Benötigt 5 Ozeanplättchen im Spiel. Erhalte 1 Pflanze. Erhöhe deine Pflanzen-Produktion um 2.",
@@ -202,12 +202,12 @@
 	"Increase your M€ production 1 step for each Earth tag you have.": "Erhöhe deine M€-Produktion um 1 je eigenes Erdsymbol.",
 
 	"Fish": "Raubfische",
-	"(Action: Add 1 animal to this card.)": "HANDLING: Füge dieser Karte 1 Tier hinzu.",
-	"(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "(Benötigt eine Temperatur von +2 °C oder wärmer. Senke eine beliebige Pflanzen-Produktion um 1.)",
+	"Action: Add 1 animal to this card.": "HANDLING: Füge dieser Karte 1 Tier hinzu.",
+	"Requires +2 C° or warmer. Decrease any plant production 1 step.": "Benötigt eine Temperatur von +2 °C oder wärmer. Senke eine beliebige Pflanzen-Produktion um 1.",
 	"1 VP for each animal on this card.": "1 SP je Tier auf dieser Karte.",
 
 	"Lake Marineris": "Marineris See",
-	"(Requires 0° C or warmer. Place 2 ocean tiles.)": "Benötigt eine Temperatur von 0 °C oder wärmer. Platziere 2 Ozeanplättchen.",
+	"Requires 0° C or warmer. Place 2 ocean tiles.": "Benötigt eine Temperatur von 0 °C oder wärmer. Platziere 2 Ozeanplättchen.",
 
 	"Small Animals": "Smådyr",
 	"Requires 6% oxygen. Decrease any plant production 1 step.": "Benötigt einen Sauerstoffgehalt von 6% oder mehr. Senke eine beliebige Pflanzen-Produktion um 1.",
@@ -221,7 +221,7 @@
 	"Vesta Shipyard": "Vesta-Schiffswerft",
 
 	"Beam From A Thorium Asteroid": "Asteroiden-Energiestrahl",
-	"(Requires a Jovian tag. Increase your heat production and energy production 3 steps each.)": "(Benötigt eigenes Jupitersymbol. Erhöhe deine Wärme- und deine Energie-Produktion um je 3.)",
+	"Requires a Jovian tag. Increase your heat production and energy production 3 steps each.": "Benötigt eigenes Jupitersymbol. Erhöhe deine Wärme- und deine Energie-Produktion um je 3.",
 
 	"Mangrove": "Mangroven",
 	"Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Benötigt eine Temperatur von +4 °C oder wärmer. Platziere ein Grünflächenplättchen auf einem für Ozeane reserviertem Gebiet. Erhöhe den Sauerstoffgehalt um 1%. Ignoriere dabei die normalen Platzierungsregeln.",
@@ -251,7 +251,7 @@
 	"Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": "Platziere dieses Plättchen auf einem Gebiet mit Stahl- oder Titan-Platzierungsbonus. Erhöhe deine Produktion dieser Ressource dann um 1.",
 
 	"Sponsors": "Sponsoren",
-	"(Increase your M€ production 2 steps.)": "Erhöhe deine M€-Produktion um 2.",
+	"Increase your M€ production 2 steps.": "Erhöhe deine M€-Produktion um 2.",
 
 	"Electro Catapult": "Elektro-Katapult",
 	"Action: Spend 1 plant or 1 steel to gain 7 M€.": "HANDLING: Verbrauche 1 Pflanze oder 1 Stahl, um 7 M€ zu erhalten.",
@@ -300,7 +300,7 @@
 	"Increase your M€ production 3 steps.": "Erhöhe deine M€-Produktion um 3.",
 
 	"Giant Space Mirror": "Orbitaler Sonnenspiegel",
-	"(Increase your energy production 3 steps.)": "(Erhöhe deine Energie-Produktion um 3.)",
+	"Increase your energy production 3 steps.": "Erhöhe deine Energie-Produktion um 3.",
 
 	"Trans-Neptune Probe": "Transneptun-Sonde",
 
@@ -312,10 +312,10 @@
 	"Duplicate only the production box of one of your building cards.": "Verdoppele das gesamte braune Produktionsfeld einer deiner ausgespielten Gebäudekarten (auch die negativen Veränderungen!).",
 
 	"Grass": "Gras",
-	"(Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.)": "(Benötigt eine Temperatur von -16 °C oder wärmer. Erhöhe deine Pflanzen-Produktion um 1. Erhalte 3 Pflanzen.)",
+	"Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.": "Benötigt eine Temperatur von -16 °C oder wärmer. Erhöhe deine Pflanzen-Produktion um 1. Erhalte 3 Pflanzen.",
 
 	"Heather": "Heidekraut",
-	"(Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.)": "(Benötigt eine Temperatur von -14 °C oder wärmer. Erhöhe deine Pflanzen-Produktion um 1. Erhalte 1 Pflanze.)",
+	"Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.": "Benötigt eine Temperatur von -14 °C oder wärmer. Erhöhe deine Pflanzen-Produktion um 1. Erhalte 1 Pflanze.",
 
 	"Peroxide Power": "Peroxid-Kraftwerk",
 	"Decrease your M€ production 1 step and increase your energy production 2 steps.": "Senke deine M€-Produktion um 1 und erhöhe deine Energie-Produktion um 2.",
@@ -407,13 +407,13 @@
 	"Increase your energy production 2 steps.": "Erhöhe deine Energie-Produktion um 2.",
 
 	"Farming": "Ackerbau",
-	"(Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.)": "(Benötigt eine Temperatur von +4 °C oder wärmer. Erhöhe deine M€- und deine Pflanzen-Produktion um je 2. Erhalte 2 Pflanzen.)",
+	"Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.": "Benötigt eine Temperatur von +4 °C oder wärmer. Erhöhe deine M€- und deine Pflanzen-Produktion um je 2. Erhalte 2 Pflanzen.",
 
 	"Dust Seals": "Staubdichtungen",
 	"Requires 3 or less ocean tiles.": "Anzahl Ozeanplättchen im Spiel muss 3 oder weniger sein.",
 
 	"Urbanized Area": "Urbanisiertes Gebiet",
-	"(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen angrenzend zu mindestens 2 weiteren Stadtplättchen.",
+	"Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen angrenzend zu mindestens 2 weiteren Stadtplättchen.",
 
 	"Sabotage": "Sabotage",
 	"Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Entferne bis zu 3 Titan ODER 4 Stahl ODER 7 M€ eines Spielers.",
@@ -439,8 +439,8 @@
 	"Place 1 ocean tile.": "Platziere ein Ozeanplättchen.",
 
 	"Ecological Zone": "Økologisk sone",
-	"(Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.)": "(EFFEKT: Wenn du en Tier- oder Pflanzensymbol ausspielst (einschließlich dieser 2), füge dieser Karte je ein Tier hinzu.)",
-	"(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "(Benötigt ein EIGENES Grünflächenplättchen im Spiel. Platziere dieses Plättchen angrenzend zu einem BELIEBIGEN Grünflächenplättchen.)",
+	"Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "EFFEKT: Wenn du en Tier- oder Pflanzensymbol ausspielst (einschließlich dieser 2), füge dieser Karte je ein Tier hinzu.",
+	"Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Benötigt ein EIGENES Grünflächenplättchen im Spiel. Platziere dieses Plättchen angrenzend zu einem BELIEBIGEN Grünflächenplättchen.",
 	"1 VP per 2 animals on this card.": "1 SP je 2 Tiere auf dieser Karte.",
 
 	"Zeppelins": "Zeppeline",
@@ -459,11 +459,11 @@
 
 	"Symbiotic Fungus": "Mykorrhizapilze",
 	"Action: Add a microbe to ANOTHER card.": "HANDLING: Füge einer anderen Karte 1 Mikrobe hinzu.",
-	"(Requires -14 C° or warmer.)": "(Benötigt eine Temperatur von -14 °C oder wärmer.)",
+	"Requires -14 C° or warmer.": "Benötigt eine Temperatur von -14 °C oder wärmer.",
 
 	"Extreme-Cold Fungus": "Extremkälte-Pilze",
-	"(Action: Gain 1 plant.)": "(HANDLING: Erhalte 1 Pflanze.)",
-	"(Action: Add 2 microbes to ANOTHER card.)": "(HANDLING: Füge einer anderen Karte 2 Mikroben hinzu.)",
+	"Action: Gain 1 plant.": "HANDLING: Erhalte 1 Pflanze.",
+	"Action: Add 2 microbes to ANOTHER card.": "HANDLING: Füge einer anderen Karte 2 Mikroben hinzu.",
 	"It must be -10 C or colder.": "Temperatur muss -10 °C oder kälter sein.",
 
 	"Advanced Ecosystems": "Fortgeschrittenes Ökosystem",
@@ -504,7 +504,7 @@
 
 	"Herbivores": "Pflanzenfresser",
 	"Effect: When you place a greenery tile, add an animal to this card.": "EFFEKT: Wann immer du ein Grünflächenplättchen platzierst, füge dieser Karte 1 Tier hinzu.",
-	"(Requires 8% oxygen. +1 animal to this card. -1 any plant production)": "(Benötigt einen Sauerstoffgehalt von 8% oder mehr. Füge dieser Karte 1 Tier hinzu. Senke eine beliebige Pflanzen-Produktion um 1)",
+	"Requires 8% oxygen. +1 animal to this card. -1 any plant production": "Benötigt einen Sauerstoffgehalt von 8% oder mehr. Füge dieser Karte 1 Tier hinzu. Senke eine beliebige Pflanzen-Produktion um 1",
 
 	"Insects": "Fluginsekten",
 	"Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.": "Benötigt Sauerstoffgehalt von 6% oder mehr. Erhöhe deine Pflanzen-Produktion um 1 je eigenes Pflanzensymbol.",
@@ -537,7 +537,7 @@
 
 	"Nitrite Reducing Bacteria": "Nitritt-reduserende bakterier",
 	"Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "HANDLING: Füge dieser Karte 1 Mikrobe hinzu ODER entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.",
-	"(Action: Remove 3 microbes to increase your TR 1 step.)": "(HANDLING: Entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.)",
+	"Action: Remove 3 microbes to increase your TR 1 step.": "HANDLING: Entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.",
 	"Add 3 microbes to this card.": "Füge dieser Karte 3 Mikroben hinzu.",
 	"Remove 3 microbes to increase your terraform rating 1 step": "Entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen",
 	"Remove microbes": "Entferne Mikroben",
@@ -565,8 +565,8 @@
 	"Micro-Mills": "Mikrowindräder",
 	"Increase your heat production 1 step.": "Erhöhe deine Wärme-Produktion um 1.",
 
-	"Magnetic Field Generators": "Magnetfeld-Generatoren",
-	"(Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.)": "Senke deine Energie-Produktion um 4. Erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen Terraformwert um 3.",
+	"Magnetic Field Generators": "Magnetfeltgeneratorer",
+	"Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Senk energiproduksjonen din med 4 og øk planteproduksjonen din med 2. Øk TR med 3.",
 
 	"Shuttles": "Shuttle-Gleiter",
 	"Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Benötigt einen Sauerstoffgehalt von 5% oder mehr. Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktino um 2.",
@@ -578,10 +578,10 @@
 	"Requires 7% oxygen. Increase your energy production 1 step.": "Benötigt Sauerstoffgehalt von 7% oder mehr. Erhöhe deine Energie-Produktion um 1.",
 
 	"Tundra Farming": "Tundra-Ackerbau",
-	"(Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.)": "(Benötigt eine Temperatur von -6 °C oder wärmer. Erhöhe deine Pflanzen-Produktion um 1 und deine M€-Produktion um 2. Erhalte 1 Pflanze.)",
+	"Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.": "Benötigt eine Temperatur von -6 °C oder wärmer. Erhöhe deine Pflanzen-Produktion um 1 und deine M€-Produktion um 2. Erhalte 1 Pflanze.",
 
 	"Aerobraked Ammonia Asteroid": "Verglühender Ammoniakasteroid",
-	"(Increase your heat production 3 steps and your plant production 1 step. Add 2 microbes to ANOTHER card.)": "Füge einer anderen Karte 2 Mikroben hinzu. Erhöhe deine Wärme-Produktion um 3 und deine Pflanzen-Produktion um 1.",
+	"Increase your heat production 3 steps and your plant production 1 step. Add 2 microbes to ANOTHER card.": "Füge einer anderen Karte 2 Mikroben hinzu. Erhöhe deine Wärme-Produktion um 3 und deine Pflanzen-Produktion um 1.",
 
 	"Magnetic Field Dome": "Magnetfeldkuppel",
 	"Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step.": "Senke deine Energie-Produktion um 2. Erhöhe deine Pflanzen-Produktion um 1. Erhöhe deinen Terraformwert um 1.",
@@ -589,14 +589,14 @@
 	"Pets": "Kjæledyr",
 	"Animals may not be removed from this card": "Tiere dürfen nicht von dieser Karte entfernt werden.",
 	"Effect: When any city tile is placed, add an animal to this card.": "EFFEKT: Immer wenn ein Stadtplättchen platziert wird, füge dieser Karte 1 Tier hinzu.",
-	"(Add 1 animal to this card.)": "(Füge dieser Karte 1 Tier hinzu.)",
+	"Add 1 animal to this card.": "Füge dieser Karte 1 Tier hinzu.",
 	"1 VP per 2 animals here.": "1 SP je 2 Tiere auf dieser Karte.",
 
 	"Protected Habitats": "Geschützte Habitate",
 	"Opponents may not remove your": "Gegner dürfen deine folgenden Symbole nicht entfernen.",
 
 	"Protected Valley": "Geschütztes Tal",
-	"(Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": "(Erhöhe deine M€-Produktion um 2. Platziere ein Grünflächenplättchen auf einem für Ozeane reserviertem Gebiet (ignoriere die normalen Platzierungsregeln) und erhöhe den Sauerstoffgehalt um 1%.)",
+	"Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Erhöhe deine M€-Produktion um 2. Platziere ein Grünflächenplättchen auf einem für Ozeane reserviertem Gebiet (ignoriere die normalen Platzierungsregeln) und erhöhe den Sauerstoffgehalt um 1%.",
 
 	"Satellites": "Satelliten",
 	"Increase your M€ production 1 step for each space tag you have, including this one.": "Erhöhe deine M€-Produktion um 1 je eigenes Weltraumsymbol (einschließlich dieses).",
@@ -629,7 +629,7 @@
 	"Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Benötigt Sauerstoffgehalt von 6% oder mehr. Senke eine beliebige Pflanzen-Produktion um 1. Erhöhe deine Energie-Produktion um 2.",
 
 	"Livestock": "Husdyr",
-	"(Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps)": "(Benötigt Sauerstoffgehalt von 9% oder mehr. Senke deine Pflanzen-Produktion um 1. Erhöhe deine M€-Produktion um 2.)",
+	"Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Benötigt Sauerstoffgehalt von 9% oder mehr. Senke deine Pflanzen-Produktion um 1. Erhöhe deine M€-Produktion um 2.",
 
 	"Olympus Conference": "Olympus-Konferenz",
 	"When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "EFFEKT: Wenn du ein Wissenschaftssymbol ausspielst (einschließlich dieses), füge dieser Karte 1 Wissenschaft hinzu ODER entferne 1 Wissenschaft von dieser Karte, um 1 Karte zu ziehen.",
@@ -711,7 +711,7 @@
 	"2 Science": "2 Wissenschaft",
 	"3 Science": "3 Wissenschaft",
 	"5 Science": "5 Wissenschaft",
-	"(Effect: Draw 2 cards.)": "(EFFEKT: Ziehe 2 Karten.)",
+	"Effect: Draw 2 cards.": "EFFEKT: Ziehe 2 Karten.",
 
 	"Requires 3 science tags to play. Decrease your energy production 1 step.": "Benötigt 3 eigene Wissenschaftssymbole. Senke deine Energie-Produktion um 1.",
 

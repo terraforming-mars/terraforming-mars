@@ -31,7 +31,7 @@
 	"Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "EFFEKT: Når du plasserer en brikke som gir deg planter, dyr eller mikrober, får du en ekstra ressurs av hver av disse.",
 	"Requires 3 greeneries on Mars.": "Krever 3 skogområder på Mars.",
 
-	"Magnetic Field Generators": "Magnetfeltgeneratorer",
+	"Magnetic Field Generators:ares": "Magnetfeltgeneratorer",
 	"Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "Senk energiproduksjonen din med 4 og øk planteproduksjonen din med 2. Øk TR med 3. Plasser denne brikken. Den gir 1 plante og 1 mikrobe i NÆRHETSBONUS.",
 
 	"Mining Rights": "Gruverettigheter",
@@ -57,7 +57,7 @@
 	"Great Dam": "Stor demning",
 	"Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "Krever 4 hav-brikker. Øk energiproduksjonen din med 2. Plasser denne brikken INNTIL en hav-brikke. Denne brikken gir 2 energi i NÆRHETSBONUS.",
 
-	"Deimos Down": "Deimos ned",
+	"Deimos Down:ares": "Deimos ned",
 	"Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. It provides adjacency bonus of 1 asteroid and 1 steel.": "Øk temperaturen med 3 og få 4 stål. Denne brikken kan ikke plasseres inntil by-brikker. Den gir 1 asteroide og 1 stål i NÆRHETSBONUS.",
 
 	"Ecological Zone": "Økologisk sone",

@@ -2,10 +2,10 @@
   <div :class="getClass()">
     <div class="card-container">
       <div class="card-content-wrapper" v-i18n>
+        <CardParty class="card-party--revealed" :party="revealed" />
+        <CardParty class="card-party--current" :party="current" />
+        <div class="global-event-title"><span :class="eventNameStyle">{{globalEventName}}</span></div>
         <div class="card-content global-event-card-content">
-          <div class="card-title"><span :class="eventNameStyle">{{globalEventName}}</span></div>
-          <CardParty class="card-party--revealed" :party="revealed" />
-          <CardParty class="card-party--current" :party="current" />
           <CardRenderData v-if="renderData !== undefined" :renderData="renderData" />
           <CardDescription :item='description' />
         </div>

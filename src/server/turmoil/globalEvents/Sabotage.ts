@@ -9,8 +9,8 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.br.production((pb) => pb.minus().energy(1).steel(1)).nbsp.nbsp;
-  b.steel(1).slash().nbsp.influence({size: Size.SMALL});
+  b.production((pb) => pb.minus().energy(1).steel(1)).nbsp.nbsp;
+  b.steel(1).slash().influence({size: Size.MEDIUM});
 });
 
 export class Sabotage extends GlobalEvent implements IGlobalEvent {

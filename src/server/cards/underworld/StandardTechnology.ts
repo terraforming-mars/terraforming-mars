@@ -5,9 +5,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {ICard} from '../ICard';
+import {IActionCard, ICard} from '../ICard';
 
-export class StandardTechnology extends Card implements IProjectCard {
+export class StandardTechnology extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.STANDARD_TECHNOLOGY_UNDERWORLD,
@@ -18,11 +18,17 @@ export class StandardTechnology extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U00',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Standard projects you have already taken this geneeration cost 8 M€ less.', (eb) =>
-            eb.text('REPEAT').plate('Standard projects').asterix().startEffect.megacredits(-6));
+          b.action('Use a standard project that you\'ve already done this generation, with its cost reduced by 8 M€.', (ab) =>
+            ab.empty().startAction.text('REPEAT').plate('Standard projects').asterix().startEffect.megacredits(-6));
         }),
       },
     });
+  }
+  public action(_player: IPlayer) {
+    return undefined;
+  }
+  public canAct(_player: IPlayer): boolean {
+    throw new Error('Method not implemented.');
   }
 
   public data: {gens: Partial<Record<CardName, number>>} = {gens: {}};

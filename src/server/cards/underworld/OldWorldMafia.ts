@@ -23,7 +23,7 @@ export class OldWorldMafia extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).slash().earth(2, {played});
         }),
-        description: 'Gain 1 corruption for every 2 earth tags you have, including this.',
+        description: 'Gain 1 corruption for every 2 Earth tags you have, including this.',
       },
     });
   }

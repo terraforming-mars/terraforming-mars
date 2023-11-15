@@ -16,7 +16,7 @@ import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Behavior} from './Behavior';
-import {Counter} from './Counter';
+import {Counter, ICounter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {BehaviorExecutor} from './BehaviorExecutor';
@@ -39,7 +39,7 @@ import {isIProjectCard} from '../cards/IProjectCard';
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
     const ctx = new Counter(player, card);
-    const asTrSource = this.toTRSource(behavior);
+    const asTrSource = this.toTRSource(behavior, ctx);
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
       return false;
@@ -341,7 +341,7 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.tr !== undefined) {
-      player.increaseTerraformRating(behavior.tr);
+      player.increaseTerraformRating(ctx.count(behavior.tr));
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {
@@ -539,10 +539,20 @@ export class Executor implements BehaviorExecutor {
     }
   }
 
-  public toTRSource(behavior: Behavior): TRSource {
+  public toTRSource(behavior: Behavior, ctx?: ICounter): TRSource {
+    let tr: number | undefined = undefined;
+    if (behavior.tr !== undefined) {
+      if (typeof(behavior.tr) === 'number') {
+        tr = behavior.tr;
+      } else {
+        if (ctx === undefined) {
+          throw new Error('Cannot use Countable without a counter.');
+        }
+        tr = ctx.count(behavior.tr);
+      }
+    }
     const trSource: TRSource = {
-      tr: behavior.tr,
-
+      tr: tr,
       temperature: behavior.global?.temperature,
       oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
       venus: behavior.global?.venus,

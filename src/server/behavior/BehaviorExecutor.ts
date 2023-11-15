@@ -2,12 +2,13 @@ import {ICard} from '../cards/ICard';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Behavior} from './Behavior';
 import {TRSource} from '../../common/cards/TRSource';
+import {ICounter} from './Counter';
 
 export interface BehaviorExecutor {
   canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions): boolean;
   execute(behavior: Behavior, player: IPlayer, card: ICard): void;
   onDiscard(behavior: Behavior, player: IPlayer, _card: ICard): void;
-  toTRSource(behavior: Behavior): TRSource;
+  toTRSource(behavior: Behavior, ctx?: ICounter): TRSource;
 }
 
 let _behaviorExecutor: BehaviorExecutor | undefined = undefined;

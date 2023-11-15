@@ -12,7 +12,7 @@ import {played} from '../../cards/Options';
 
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.text('lose all').heat(1).br.megacredits(-2).slash().building(1, {played}).influence({size: Size.SMALL});
+  b.text('Lose all').heat(1).nbsp.megacredits(-2).slash().building(1, {played}).influence({size: Size.SMALL});
 });
 
 export class GlobalDustStorm extends GlobalEvent implements IGlobalEvent {

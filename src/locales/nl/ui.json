@@ -691,7 +691,7 @@
     "seconds per action": "seconden per actie",
     "Reduce": "Verminderen",
     "VP every": "OP alle",
-    "After ${0} min, reduce ${1} VP every ${2} min.": "Na ${0} min elke ${2} min ${1} OP verminderen",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Na ${0} min elke ${2} min ${1} OP verminderen. (${3} bonusseconden per beurt)",
     "Exclude some cards": "Kaarten uitsluiten",
     "Custom Colonies list": "Aangepaste kolonies",
     "Remove negative Global Events": "Zonder negatieve wereldwijde gebeurtenissen",

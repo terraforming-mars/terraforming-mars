@@ -13,11 +13,6 @@ const CARD_RENAMES = new Map<string, CardName>([
 
   // TODO(yournamehere): remove after 2021-04-05
   // ['Earth Embasy', CardName.EARTH_EMBASSY],
-
-  // TODO(kberg): remove after 2023-11-01
-  ['Nigral Enterprises', CardName.NIRGAL_ENTERPRISES],
-  // TODO(kberg): remove after 2023-11-01
-  ['Sagitta', CardName.SAGITTA_FRONTIER_SERVICES],
 ]);
 
 export class CardFinder {

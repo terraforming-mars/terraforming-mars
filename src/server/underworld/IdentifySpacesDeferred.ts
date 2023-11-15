@@ -11,13 +11,16 @@ export class IdentifySpacesDeferred extends DeferredAction<Array<Space>> {
     super(player, Priority.IDENTIFY_UNDERGROUND_RESOURCE);
   }
 
-  private selectSpace(): PlayerInput {
+  private selectSpace(): PlayerInput | undefined {
     const prefix = 'Select space to identify';
     const title = prefix + (this.count > 1 ? ` (${this.nth} of ${this.count})` : '');
     const selectedSpaces: Array<Space> = [];
 
-    return new SelectSpace(title,
-      UnderworldExpansion.identifiableSpaces(this.player.game))
+    const identifiableSpaces = UnderworldExpansion.identifiableSpaces(this.player.game);
+    if (identifiableSpaces.length === 0) {
+      return undefined;
+    }
+    return new SelectSpace(title, identifiableSpaces)
       .andThen((space) => {
         UnderworldExpansion.identify(this.player.game, space, this.player);
         selectedSpaces.push(space);

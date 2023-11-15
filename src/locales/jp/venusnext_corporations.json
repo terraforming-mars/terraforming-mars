@@ -1,0 +1,30 @@
+{
+    "APHRODITE": "",
+    "Aphrodite": "アフロディーテ",
+    "You start with 1 plant production and 47 M€.": "初期資源：47MC. 初期産出:植物産出+1.",
+    "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "効果：金星+1段階する度、2MC獲得.",
+
+    "CEL": "",
+    "ES": "",
+    "TIC": "",
+    "Celestic": "セレスティック",
+    "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "初期資源：42MC. 1アクション目：浮遊体を含むカードを2枚入手",
+    "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "アクション：1浮遊体獲得. このカード上の3浮遊体毎に1VP.",
+
+    "MA": "",
+    "NUTECH": "",
+    "Manutech": "マニュテク",
+    "You start with 1 steel production, and 35 M€.": "初期資源：35MC. 初期産出:建材産出+1.",
+    "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "効果：産出+xする毎に、産出と同じ種類の資源をx獲得.",
+
+    "MORNING STAR INC.": "",
+    "Morning Star Inc.": "明けの明星",
+    "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "初期資金：50MC. 1アクション目：金星タグカードを3枚入手.",
+    "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "金星パラメーター参照時、それらの条件を+2 または -2段階してもよい..",
+    "Draw 3 cards with a Venus tag": "金星タグカードを3枚入手",
+
+    "VIRON": "",
+    "Viron": "",
+    "You start with 48 M€.": "初期資金：48MC.",
+    "Action: Use a blue card action that has already been used this generation.": "アクション：この世代に使用したアクションカードを再使用."
+}

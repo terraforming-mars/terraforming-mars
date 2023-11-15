@@ -894,7 +894,7 @@
     "seconds per action": "",
     "Reduce": "",
     "VP every": "",
-    "After ${0} min, reduce ${1} VP every ${2} min.": "",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "",
     "Exclude some cards": "除外カード",
     "Custom Colonies list": "カスタム：コロニーリスト",
     "Remove negative Global Events": "",

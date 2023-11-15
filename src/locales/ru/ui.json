@@ -306,7 +306,7 @@
     "seconds per action": "секунд на действие",
     "Reduce": "Уменьшить",
     "VP every": "ПО каждый",
-    "After ${0} min, reduce ${1} VP every ${2} min.": "Через ${0} мин уменьшать по ${1} ПО каждые ${2} мин",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Через ${0} мин уменьшать по ${1} ПО каждые ${2} мин (${3} бонусные секунды за ход)",
     "Venus Milestone/Award": "Достижения/награды Венеры",
     "Mandatory Venus Terraforming": "Обязательное терраформирование Венеры",
     "corporation": "корпорация",

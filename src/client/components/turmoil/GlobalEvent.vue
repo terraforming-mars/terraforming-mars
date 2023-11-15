@@ -89,10 +89,10 @@ export default Vue.extend({
   },
   computed: {
     eventNameStyle(): string {
-      if (this.globalEventName.length > 24) {
+      if (this.globalEventName.length > 20) {
         return 'global-event-name--narrow';
       }
-      return '';
+      return 'global-event-name';
     },
   },
 });

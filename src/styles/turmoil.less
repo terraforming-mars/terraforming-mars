@@ -89,22 +89,23 @@
 .global-event {
     display: inline-block;
     vertical-align: top;
-    width: 330px;
-    height: 170px;
+    width: 332px;
+    height: 186px;
     margin: 0 2px;
     background: url(./assets/parties/global_event.png);
-    background-position: -11px -187px;
-    background-size: 350px 182px;
     color: #000000;
     font-size: medium;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .global-event-card-content {
-    width: 275px !important;
-    height: 100px !important;
+    width: 276px !important;
+    height: 104px !important;
     justify-content: center;
     margin: 0 auto;
+    top: 10px;
+    overflow-x: hidden;
 }
 
 .global-event-title {
@@ -113,16 +114,23 @@
     width: 200px;
     margin-top: 135px;
     margin-left: 70px;
-    text-wrap: nowrap;
-    overflow: hidden;
     font-weight: 600;
     text-align: center;
+    height: 32px;
+    top: 11px;
 }
 
-.global-event-name--narrow {
-  letter-spacing: -0.05em;
-  font-size: 14px;
-  margin-left: 10px;
+.global-event-name {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    &--narrow:extend(.global-event-name) {
+        letter-spacing: -0.02em;
+        font-size: 13px;
+    }
 }
 
 .event-title {

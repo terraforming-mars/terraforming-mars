@@ -1508,12 +1508,11 @@
                 vertical-align: middle;
             }
             .card-influence--size-S {
-                height: 25px;
-                width: 25px;
-                background-size: 25px;
                 position: relative;
                 top: -10px;
-                left: -7px;
+                left: -10px;
+                transform: scale(0.7);
+                margin-right: -12px;
             }
             .turmoil-global-event {
                 display: inline-block;
@@ -2396,21 +2395,17 @@
 }
 
 .card-party {
-  display: inherit;
+  display: flex;
+  position: absolute;
+  transform: scale(1.35);
 }
 
 .card-party--revealed {
-  display: inherit;
-  position: absolute;
-  margin: -7px 0 0 -285px;
-  transform: scale(1.4);
+  margin: 130px 0 0 12px;
 }
 
 .card-party--current {
-  display: inherit;
-  position: absolute;
-  margin: 129px 0 0 280px;
-  transform: scale(1.4);
+  margin: 130px 0 0 276px;
 }
 
 @parties: greens, kelvinists, mars-first, reds, scientists, unity;

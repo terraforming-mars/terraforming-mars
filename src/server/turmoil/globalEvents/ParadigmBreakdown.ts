@@ -9,7 +9,7 @@ import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.br.minus().cards(2).nbsp.megacredits(2).influence();
+  b.minus().cards(2).nbsp.megacredits(2).slash().influence();
 });
 
 export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {

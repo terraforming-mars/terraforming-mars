@@ -4,7 +4,7 @@
       <div class="card-content-wrapper" v-i18n>
         <CardParty class="card-party--revealed" :party="revealed" />
         <CardParty class="card-party--current" :party="current" />
-        <div class="global-event-title"><span :class="global-event-name">{{globalEventName}}</span></div>
+        <div class="global-event-title"><span class="global-event-name">{{globalEventName}}</span></div>
         <div class="card-content global-event-card-content">
           <CardRenderData v-if="renderData !== undefined" :renderData="renderData" />
           <CardDescription :item='description' />

@@ -1,15 +1,15 @@
 {
   "Crescent Research Association": "Forschungsverband Crescent",
-  "Effect: When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.": "EFFEKT: Wenn du ein Mondsymbol ausspielst, bezahlst du 1 M€ weniger pro eigenem gespielten Mondsymbol.",
+  "Effect: When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.": "Effekt: Wenn du ein Mondsymbol ausspielst, bezahlst du 1 M€ weniger pro eigenem gespielten Mondsymbol.",
   "You start with 50 M€. 1 VP for every 3 Moon tags you have.": "Du beginnst mit 50 M€. Du erhälst 1 SP je 3 eigenen Mondsymbolen. ",
 
   "Intragen Sanctuary Headquarters": "Intragen Heiligtum",
-  "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)": "(EFFEKT: Immer wenn ein Tiersymbol ins Spiel kommt (einschließlich dieses), fügst du dieser Karte 1 Tier hinzu.)",
+  "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)": "(Effekt: Immer wenn ein Tiersymbol ins Spiel kommt (einschließlich dieses), fügst du dieser Karte 1 Tier hinzu.)",
   "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "Du beginnst mit 38 M€. Als deine erste Aktion im Spiel platzierst du ein Habitatplättchen auf dem Mond und erhöhst die Habitatwertung um 1. Du erhälst 1 SP je 2 Tiere auf dieser Karte. ",
 
   "Luna First Incorporated": "Luna First Inc.",
-  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.": "EFFEKT: Wenn du eine beliebige Mondwertung erhöhst, erhöhe deine M€-Produktion um 1 pro erhöhten Schritt.",
-  "Effect: When any player raises any Moon Rate, gain 1M€ per step.": "EFFEKT: Immer wenn ein beliebiger Spieler eine beliebige Mondwertung erhöht, erhalte 1 M€ pro erhöhten Schritt.",
+  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.": "Effekt: Wenn du eine beliebige Mondwertung erhöhst, erhöhe deine M€-Produktion um 1 pro erhöhten Schritt.",
+  "Effect: When any player raises any Moon Rate, gain 1M€ per step.": "Effekt: Immer wenn ein beliebiger Spieler eine beliebige Mondwertung erhöht, erhalte 1 M€ pro erhöhten Schritt.",
   "You start with 40 M€, 1 steel, and 1 titanium.": "Du beginnst mit 40 M€, 1 Stahl und 1 Titan.",
 
   "Luna Hyperloop Corporation": "Luna Hyperloop",
@@ -23,26 +23,26 @@
 
   "Tempest Consultancy": "Tempest Beratung",
   "Action: Place 1 delegate in any party for every 5 Moon tags you have [max 3.]": "AKTION: Platziere 1 Delegierten in eine beliebige Partei für je 5 eigene Mondsymbole [max. 3].",
-  "Effect: When your delegate becomes the chairman, increase your TR 1 step.": "EFFEKT: Wenn dein Delegierter den Vorsitz übernimmt, erhöhe deinen TV um 1.",
+  "Effect: When your delegate becomes the chairman, increase your TR 1 step.": "Effekt: Wenn dein Delegierter den Vorsitz übernimmt, erhöhe deinen TV um 1.",
   "You start with 37 M€. As your first action, place 2 delegates in one party.": "Du beginnst mit 37 M€. Als deine erste Aktion im Spiel platziere 2 Delegierte in eine Partei. ",
 
   "The Archaic Foundation Institute": "Das Institut der Archaischen Stiftung",
-  "Effect: When you play a Moon tag, including these, add a cube to this card.": "EFFEKT: Wenn du eine Mondsymbol ausspielst, lege einen bronzenen Rohstoffwürfel auf diese Karte.",
-  "Effect: Automatically remove 3 cubes here and gain 1 TR.": "EFFEKT: Entferne automatisch alle 3 hier gesammelten bronzenen Rohstoffwürfel und erhöhe deinen TV um 1.",
+  "Effect: When you play a Moon tag, including these, add a cube to this card.": "Effekt: Wenn du eine Mondsymbol ausspielst, lege einen bronzenen Rohstoffwürfel auf diese Karte.",
+  "Effect: Automatically remove 3 cubes here and gain 1 TR.": "Effekt: Entferne automatisch alle 3 hier gesammelten bronzenen Rohstoffwürfel und erhöhe deinen TV um 1.",
   "You start with 55 M€.": "Du beginnst mit 55 M€. ",
 
   "Luna Trade Federation": "Mond Handelsföderation",
-  "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "EFFEKT: Wenn Du ein Minenplättchen auf dem Mond platzierst, erhöhe deine Titan-Produktion um 1.",
-  "Effect: You may use titanium resources as 2M€ each.": "EFFEKT: Du darfst Titan als 2 M€ nutzen.",
+  "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "Effekt: Wenn Du ein Minenplättchen auf dem Mond platzierst, erhöhe deine Titan-Produktion um 1.",
+  "Effect: You may use titanium resources as 2M€ each.": "Effekt: Du darfst Titan als 2 M€ nutzen.",
   "You start with 15 M€ and 10 titanium.": "Du beginnst mit 15 M€ und 10 Titan.",
 
   "The Darkside of The Moon Syndicate": "Mond-Syndikat der abgewandten Seite",
   "Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 2M€ from every opponent.": "AKTION: Bezahle 1 Titan, um 1 Syndikatsflotte auf dieser Karte hinzuzufügen ODER entferne 1 Syndikatsflotte von dieser Karte, um bei jedem Gegner 2 M€ zu klauen.",
   "You start with 40 M€ and 2 syndicate fleets on this card.": "Du beginnst mit 40 M€ und 2 Syndikatsflotten auf dieser Karte.",
-  "Effect: When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.": "EFFEKT: Wenn du ein Plättchen auf den Mond legst, klaust du den Gegnern 2 M€ für jedes ihrer Plättchen neben deinem.",
+  "Effect: When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.": "Effekt: Wenn du ein Plättchen auf den Mond legst, klaust du den Gegnern 2 M€ für jedes ihrer Plättchen neben deinem.",
 
   "The Grand Luna Capital Group": "Die Grand Luna Capital Gruppe",
-  "Effect: When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.": "EFFEKT: Wenn du ein Habitatplättchen legst, erhältst du 2 M€ für jedes benachbarte Habitatplättchen.",
+  "Effect: When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.": "Effekt: Wenn du ein Habitatplättchen legst, erhältst du 2 M€ für jedes benachbarte Habitatplättchen.",
   "1 VP for each habitat tile adjacent to your habitat tiles.": "1 SP für jedes Habitatplättchen, das an ein eigenes Habitatplättchen angrenzt.",
   "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.": "Du beginnst mit 32 M€ und 1 Titan. Als deine erste Aktion im Spiel platziere ein Habitatplättchen auf dem Mond und erhöhe die Habitatwertung um 1."
 }

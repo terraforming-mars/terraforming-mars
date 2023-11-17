@@ -2,14 +2,14 @@
     "SPIRE": "SPIRE",
     "Spire": "Spire",
     "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Du beginnst mit 44 M€. Als erste Aktion ziehe 4 Karten und werfe dann 3 Karten von deiner Hand ab.",
-    "Effect: When you play a card with at least 2 tags. including this, add a science resource here.": "EFFEKT: Wenn du eine Karte mit mindestens 2 Symbolen ausspielst, einschließlich dieser, füge hier eine Wissenschaft hinzu.",
-    "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "EFFEKT: Wenn du ein Standardprojekt verwendest, darfst du Wissenschaft hier für je 2 M€ einsetzen.",
+    "Effect: When you play a card with at least 2 tags. including this, add a science resource here.": "Effekt: Wenn du eine Karte mit mindestens 2 Symbolen ausspielst, einschließlich dieser, füge hier eine Wissenschaft hinzu.",
+    "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "Effekt: Wenn du ein Standardprojekt verwendest, darfst du Wissenschaft hier für je 2 M€ einsetzen.",
     
     "SAGITTA FRONTIER SERVICES": "SAGITTA GRENZDIENSTE",
     "Sagitta Frontier Services": "Sagitta Grenzdienste",
     "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": "Du beginnst mit 28 M€. Erhöhe die Energieproduktion um 1 und die M€-Produktion um 2. Ziehen Sie eine Karte ohne Symbol.",
-    "Effect: When you play a card with no tags, gain 4 M€.": "EFFEKT: Wenn du eine Karte ohne Symbol ausspielst, erhalte 4 M€.",
-    "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "EFFEKT: Wenn du eine Karte mit EXAKT 1 Symbol spielst, erhalte 1 M€.",
+    "Effect: When you play a card with no tags, gain 4 M€.": "Effekt: Wenn du eine Karte ohne Symbol ausspielst, erhalte 4 M€.",
+    "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "Effekt: Wenn du eine Karte mit EXAKT 1 Symbol spielst, erhalte 1 M€.",
     
     "ECOTEC": "ECOTEC",
     "Ecotec": "Ecotec",
@@ -38,7 +38,7 @@
     "POINT LUNA": "POINT LUNA",
     "Point Luna": "Point Luna",
     "You start with 1 titanium production and 38 M€.": "Du beginnst mit 38 M€ und einer Titan-Produktion von 1.",
-    "Effect: When you play an Earth tag, including this, draw a card.": "EFFEKT: Wenn du ein Erdsymbol spielst (inklusive diesem), ziehe eine Karte.",
+    "Effect: When you play an Earth tag, including this, draw a card.": "Effekt: Wenn du ein Erdsymbol spielst (inklusive diesem), ziehe eine Karte.",
 
     "ROBINSON": "ROBINSON",
     "INDUSTRIES": "INDUSTRIES",
@@ -50,12 +50,12 @@
     "TRUST": "TRUST",
     "Valley Trust": "Valley Trust",
     "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": "Du beginnst mit 37 M€. Als deine erste Aktion, ziehe 3 Präludium-Karten und spiele eine davon. Wirf die anderen beiden ab.",
-    "Effect: When you play a science tag, you pay 2M€ less for it.": "EFFEKT: Wenn du ein Wissenschaftssymbol spielst, zahlst du 2 M€ weniger.",
+    "Effect: When you play a science tag, you pay 2M€ less for it.": "Effekt: Wenn du ein Wissenschaftssymbol spielst, zahlst du 2 M€ weniger.",
 
     "VIT": "VIT",
     "O": "O",
     "R": "R",
     "Vitor": "Vitor",
     "You start with 45 M€. As your first action, fund an award for free.": "Du beginnst mit 45 M€. Als deine erste Aktion, fördere eine Auszeichnung gratis.",
-    "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "EFFEKT: Wenn du eine Karte mit einem NICHT-NEGATIVEN SP-Symbol spielst (inklusive dieser), erhalte 3 M€."
+    "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "Effekt: Wenn du eine Karte mit einem NICHT-NEGATIVEN SP-Symbol spielst (inklusive dieser), erhalte 3 M€."
 }

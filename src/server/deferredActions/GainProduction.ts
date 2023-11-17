@@ -4,6 +4,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
   count?: number;
+  log?: boolean;
 }
 
 export class GainProduction extends DeferredAction {
@@ -23,7 +24,7 @@ export class GainProduction extends DeferredAction {
     }
 
     if (this.options.count > 0) {
-      this.player.production.add(this.resource, this.options.count);
+      this.player.production.add(this.resource, this.options.count, {log: this.options.log ?? true});
     }
     this.cb(undefined);
     return undefined;

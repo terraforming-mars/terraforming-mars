@@ -539,15 +539,12 @@ export class Executor implements BehaviorExecutor {
     }
   }
 
-  public toTRSource(behavior: Behavior, ctx?: ICounter): TRSource {
+  public toTRSource(behavior: Behavior, ctx: ICounter): TRSource {
     let tr: number | undefined = undefined;
     if (behavior.tr !== undefined) {
       if (typeof(behavior.tr) === 'number') {
         tr = behavior.tr;
       } else {
-        if (ctx === undefined) {
-          throw new Error('Cannot use Countable without a counter.');
-        }
         tr = ctx.count(behavior.tr);
       }
     }

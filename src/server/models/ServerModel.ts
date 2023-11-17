@@ -390,6 +390,7 @@ export class Server {
       moonExpansion: options.moonExpansion,
       pathfindersExpansion: options.pathfindersExpansion,
       preludeExtension: options.preludeExtension,
+      prelude2Expansion: options.prelude2Expansion,
       promoCardsOption: options.promoCardsOption,
       politicalAgendasExtension: options.politicalAgendasExtension,
       removeNegativeGlobalEvents: options.removeNegativeGlobalEventsOption,

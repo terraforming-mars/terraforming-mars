@@ -25,6 +25,7 @@ export type GameOptionsModel = {
   moonExpansion: boolean,
   pathfindersExpansion: boolean,
   preludeExtension: boolean,
+  prelude2Expansion: boolean,
   promoCardsOption: boolean,
   politicalAgendasExtension: AgendaStyle,
   removeNegativeGlobalEvents: boolean,

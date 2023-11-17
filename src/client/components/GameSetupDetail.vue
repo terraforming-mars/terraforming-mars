@@ -4,6 +4,7 @@
             <li><div class="setup-item" v-i18n>Expansion:</div>
               <div v-if="gameOptions.venusNextExtension" class="create-game-expansion-icon expansion-icon-venus"></div>
               <div v-if="gameOptions.preludeExtension" class="create-game-expansion-icon expansion-icon-prelude"></div>
+              <div v-if="gameOptions.prelude2Expansion" class="create-game-expansion-icon expansion-icon-prelude2"></div>
               <div v-if="gameOptions.coloniesExtension" class="create-game-expansion-icon expansion-icon-colony"></div>
               <div v-if="gameOptions.turmoilExtension" class="create-game-expansion-icon expansion-icon-turmoil"></div>
               <div v-if="gameOptions.promoCardsOption" class="create-game-expansion-icon expansion-icon-promo"></div>
@@ -13,6 +14,8 @@
               <div v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></div>
               <div v-if="isPoliticalAgendasOn" class="create-game-expansion-icon expansion-icon-agendas"></div>
               <div v-if="gameOptions.ceoExtension" class="create-game-expansion-icon expansion-icon-ceo"></div>
+              <div v-if="gameOptions.ceoExtension" class="create-game-expansion-icon expansion-icon-ceo"></div>
+              <div v-if="gameOptions.underworldExpansion" class="create-game-expansion-icon expansion-icon-underworld"></div>
             </li>
 
             <li><div class="setup-item" v-i18n>Board:</div>
@@ -107,6 +110,7 @@ export default Vue.extend({
     },
   },
   computed: {
+
     isPoliticalAgendasOn(): boolean {
       return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
     },

@@ -11,8 +11,7 @@ import {Game} from './Game';
 import {Payment, PaymentOptions, DEFAULT_PAYMENT_VALUES} from '../common/inputs/Payment';
 import {SpendableResource, SPENDABLE_RESOURCES, SpendableCardResource, CARD_FOR_SPENDABLE_RESOURCE} from '../common/inputs/Spendable';
 import {IAward} from './awards/IAward';
-import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard';
-import {TRSource} from '../common/cards/TRSource';
+import {ICard, isIActionCard, IActionCard} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {OrOptions} from './inputs/OrOptions';
@@ -74,6 +73,7 @@ import {PreludesExpansion} from './preludes/PreludesExpansion';
 import {ChooseCards} from './deferredActions/ChooseCards';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
+import {Counter} from './behavior/Counter';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -1304,12 +1304,11 @@ export class Player implements IPlayer {
   }
 
   public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
-    const trSource: TRSource | DynamicTRSource | undefined = card.tr || (card.behavior !== undefined ? getBehaviorExecutor().toTRSource(card.behavior) : undefined);
-    // const trSource =
-    //     card.tr ||
-    //     (card.behavior !== undefined ?
-    //       getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) :
-    //       undefined);
+    const trSource =
+      card.tr ||
+      (card.behavior !== undefined ?
+        getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) :
+        undefined);
     return {
       cost: this.getCardCost(card),
       ...this.paymentOptionsForCard(card),

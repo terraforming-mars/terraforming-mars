@@ -33,7 +33,7 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     player.game.defer(
       new DecreaseAnyProduction(player, Resource.STEEL, {count: 1, stealing: true}));
-    player.game.defer(new GainProduction(player, Resource.STEEL, {count: 1}));
+    player.game.defer(new GainProduction(player, Resource.STEEL, {count: 1, log: true}));
     return undefined;
   }
 }

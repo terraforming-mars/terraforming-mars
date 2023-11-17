@@ -33,7 +33,7 @@ export class EnergyTapping extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const gainProduction = new GainProduction(player, Resource.ENERGY, {count: 1});
+    const gainProduction = new GainProduction(player, Resource.ENERGY, {count: 1, log: false});
     const decreaseAnyProduction = new DecreaseAnyProduction(player, Resource.ENERGY, {count: 1, stealing: true});
     // If no player has energy production, then This Player must gain their energy production in order to lose it.
     if (player.game.getPlayers().filter((player) => player.production.energy > 0).length === 0) {

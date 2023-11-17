@@ -39,7 +39,7 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
       Resource.TITANIUM,
       {count: 1, stealing: true},
     ));
-    player.game.defer(new GainProduction(player, Resource.TITANIUM, {count: 1}));
+    player.game.defer(new GainProduction(player, Resource.TITANIUM, {count: 1, log: false}));
     return undefined;
   }
 }

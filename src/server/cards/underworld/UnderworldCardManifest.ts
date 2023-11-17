@@ -23,7 +23,7 @@ import {CollusionStandardProject} from './CollusionStandardProject';
 // import {CraterSurvey} from './CraterSurvey';
 // import {CutThroatBudgeting} from './CutThroatBudgeting';
 // import {Deepmining} from './Deepmining';
-// import {Deepnuking} from './Deepnuking';
+import {Deepnuking} from './Deepnuking';
 // import {DeepwaterDome} from './DeepwaterDome';
 // import {DemetronLabs} from './DemetronLabs';
 // import {EarthquakeMachine} from './EarthquakeMachine';
@@ -134,7 +134,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.TUNNEL_BORING_MACHINE]: {Factory: TunnelBoringMachine},
     [CardName.UNDERGROUND_RAILWAY]: {Factory: UndergroundRailway},
     // // [CardName.GAIA_CITY]: {Factory: GaiaCity},
-    // [CardName.DEEPNUKING]: {Factory: Deepnuking},
+    [CardName.DEEPNUKING]: {Factory: Deepnuking},
     [CardName.OLD_WORLD_MAFIA]: {Factory: OldWorldMafia},
     [CardName.NIGHTCLUBS]: {Factory: Nightclubs},
     // [CardName.RECKLESS_DETONATION]: {Factory: RecklessDetonation},

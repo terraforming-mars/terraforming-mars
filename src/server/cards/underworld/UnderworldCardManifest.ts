@@ -51,7 +51,7 @@ import {Hackers} from './Hackers';
 // import {HenkeiGenetics} from './HenkeiGenetics';
 import {HiredRaiders} from './HiredRaiders';
 // import {HyperspaceDrivePrototype} from './HyperspaceDrivePrototype';
-// import {ImportedHeavyMachinery} from './ImportedHeavyMachinery';
+import {ImportedHeavyMachinery} from './ImportedHeavyMachinery';
 // import {InducedTremor} from './InducedTremor';
 // import {InfrastructureOverload} from './InfrastructureOverload';
 import {InheritedFortune} from './InheritedFortune';
@@ -137,7 +137,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.DEEPNUKING]: {Factory: Deepnuking},
     [CardName.OLD_WORLD_MAFIA]: {Factory: OldWorldMafia},
     [CardName.NIGHTCLUBS]: {Factory: Nightclubs},
-    // [CardName.RECKLESS_DETONATION]: {Factory: RecklessDetonation},
+    // // [CardName.RECKLESS_DETONATION]: {Factory: RecklessDetonation},
     // // 10-18
     [CardName.OFF_WORLD_TAX_HAVEN]: {Factory: OffWorldTaxHaven},
     // [CardName.SUBNAUTIC_PIRATES]: {Factory: SubnauticPirates},
@@ -151,7 +151,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // 19-27
     [CardName.UNDERGROUND_AMUSEMENT_PARK]: {Factory: UndergroundAmusementPark},
     [CardName.CASINO]: {Factory: Casino},
-    // [CardName.IMPORTED_HEAVY_MACHINERY]: {Factory: ImportedHeavyMachinery},
+    [CardName.IMPORTED_HEAVY_MACHINERY]: {Factory: ImportedHeavyMachinery},
     // [CardName.MICROPROBING_TECHNOLOGY]: {Factory: MicroprobingTechnology},
     [CardName.SEARCH_FOR_LIFE_UNDERGROUND]: {Factory: SearchforLifeUnderground},
     // [CardName.GEOTHERMAL_NETWORK]: {Factory: GeothermalNetwork},

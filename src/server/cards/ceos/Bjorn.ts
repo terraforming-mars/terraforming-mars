@@ -3,9 +3,9 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-
 import {Resource} from '../../../common/Resource';
 import {multiplier} from '../Options';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class Bjorn extends CeoCard {
   constructor() {
@@ -25,10 +25,15 @@ export class Bjorn extends CeoCard {
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const targetPlayers = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
+    const targets = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
 
-    targetPlayers.forEach((target) => {
-      target.stock.steal(Resource.MEGACREDITS, game.generation + 2, player);
+    targets.forEach((target) => {
+      target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+        if (proceed) {
+          target.stock.steal(Resource.MEGACREDITS, game.generation + 2, player);
+        }
+        return undefined;
+      }));
     });
 
     return undefined;

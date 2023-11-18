@@ -21,7 +21,7 @@ import {CollusionStandardProject} from './CollusionStandardProject';
 // import {CorporateBlackmail} from './CorporateBlackmail';
 // // import {CorporateTheft} from './CorporateTheft';
 // import {CraterSurvey} from './CraterSurvey';
-// import {CutThroatBudgeting} from './CutThroatBudgeting';
+import {CutThroatBudgeting} from './CutThroatBudgeting';
 // import {Deepmining} from './Deepmining';
 import {Deepnuking} from './Deepnuking';
 // import {DeepwaterDome} from './DeepwaterDome';
@@ -216,7 +216,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},
     // [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},
     // [CardName.EXPEDITION_VEHICLES]: {Factory: ExpeditionVehicles},
-    // [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},
+    [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},
     // [CardName.GEOLOGICAL_SURVEY_UNDERWORLD]: {Factory: GeologicalSurvey},
     // // 82-90
     // [CardName.CLASS_ACTION_LAWSUIT]: {Factory: ClassActionLawsuit},

@@ -83,7 +83,7 @@ import {OldWorldMafia} from './OldWorldMafia';
 import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 // import {PatentManipulation} from './PatentManipulation';
 import {PersonalSpacecruiser} from './PersonalSpacecruiser';
-// import {PlanetaryRightsBuyout} from './PlanetaryRightsBuyout';
+import {PlanetaryRightsBuyout} from './PlanetaryRightsBuyout';
 // import {PlantTax} from './PlantTax';
 import {PriceWars} from './PriceWars';
 import {PrivateInvestigator} from './PrivateInvestigator';
@@ -222,7 +222,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.CLASS_ACTION_LAWSUIT]: {Factory: ClassActionLawsuit},
     // // [CardName.MERCENARY_ASSAULT]: {Factory: MercenaryAssault}, // Blocking rules.
     // [CardName.RESEARCH_DEVELOPMENT_HUB]: {Factory: ResearchDevelopmentHub},
-    // [CardName.PLANETARY_RIGHTS_BUYOUT]: {Factory: PlanetaryRightsBuyout},
+    [CardName.PLANETARY_RIGHTS_BUYOUT]: {Factory: PlanetaryRightsBuyout},
     // // [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy}, // Scoops is not quite clear yet.
     // [CardName.INVESTIGATIVE_JOURNALISM]: {Factory: InvestigativeJournalism},
     // // [CardName.WHALES]: {Factory: Whales}, // This is gonna be tricky.

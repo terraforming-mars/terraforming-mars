@@ -48,7 +48,7 @@ import {GreyMarketExploitation} from './GreyMarketExploitation';
 import {Hackers} from './Hackers';
 // import {Hadesphere} from './Hadesphere';
 // import {HectateSpeditions} from './HectateSpeditions';
-// import {HenkeiGenetics} from './HenkeiGenetics';
+import {HenkeiGenetics} from './HenkeiGenetics';
 import {HiredRaiders} from './HiredRaiders';
 // import {HyperspaceDrivePrototype} from './HyperspaceDrivePrototype';
 import {ImportedHeavyMachinery} from './ImportedHeavyMachinery';
@@ -245,7 +245,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.HADESPHERE]: {Factory: Hadesphere},
     // [CardName.DEMETRON_LABS]: {Factory: DemetronLabs},
     // [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo},
-    // [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics},
+    [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics},
     // [CardName.ARBORIST_COLLECTIVE]: {Factory: ArboristCollective},
     [CardName.KINGDOM_OF_TAURARO]: {Factory: KingdomofTauraro},
     // [CardName.AERON_GENOMICS]: {Factory: AeronGenomics},

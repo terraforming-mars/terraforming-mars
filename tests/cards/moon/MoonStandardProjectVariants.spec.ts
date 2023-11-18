@@ -1,14 +1,13 @@
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
 import {expect} from 'chai';
+import {testGame} from '../../TestGame';
+import {TestPlayer} from '../../TestPlayer';
 import {MoonHabitatStandardProjectVariant2, MoonMineStandardProjectVariant2, MoonRoadStandardProjectVariant2} from '../../../src/server/cards/moon/MoonStandardProjectVariants';
 
 describe('MoonStandardProjectVariants', () => {
   let player: TestPlayer;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
   });
 
   describe('MoonHabitatStandardProjectVariant2', () => {

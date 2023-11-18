@@ -1,16 +1,17 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast} from '../../TestingUtils';
 import {LunarSecurityStations} from '../../../src/server/cards/moon/LunarSecurityStations';
-import {expect} from 'chai';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {HiredRaiders} from '../../../src/server/cards/base/HiredRaiders';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LunarSecurityStations', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let opponent1: TestPlayer;
   let opponent2: TestPlayer;
@@ -18,10 +19,7 @@ describe('LunarSecurityStations', () => {
   let card: LunarSecurityStations;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    opponent1 = TestPlayer.RED.newPlayer();
-    opponent2 = TestPlayer.GREEN.newPlayer();
-    game = Game.newInstance('gameid', [player, opponent1, opponent2], player, {moonExpansion: true});
+    [game, player, opponent1, opponent2] = testGame(3, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new LunarSecurityStations();
   });

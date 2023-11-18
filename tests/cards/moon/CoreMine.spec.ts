@@ -1,3 +1,4 @@
+import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
@@ -5,7 +6,6 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CoreMine} from '../../../src/server/cards/moon/CoreMine';
-import {expect} from 'chai';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 
 describe('CoreMine', () => {

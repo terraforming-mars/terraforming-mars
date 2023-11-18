@@ -1,8 +1,8 @@
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {churnAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
-import {expect} from 'chai';
-import {testGame} from '../../TestGame';
 
 describe('AncientShipyards', () => {
   let player: TestPlayer;

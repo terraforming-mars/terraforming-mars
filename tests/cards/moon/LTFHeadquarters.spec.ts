@@ -1,19 +1,20 @@
-import {Game} from '../../../src/server/Game';
-import {LTFHeadquarters} from '../../../src/server/cards/moon/LTFHeadquarters';
 import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {LTFHeadquarters} from '../../../src/server/cards/moon/LTFHeadquarters';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {BuildColony} from '../../../src/server/deferredActions/BuildColony';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LTFHeadquarters', () => {
+  let game: IGame;
   let player: TestPlayer;
   let card: LTFHeadquarters;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new LTFHeadquarters();
     moonData = MoonExpansion.moonData(game);
   });

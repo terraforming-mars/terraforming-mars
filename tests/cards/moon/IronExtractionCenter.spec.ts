@@ -1,10 +1,10 @@
+import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 import {IronExtractionCenter} from '../../../src/server/cards/moon/IronExtractionCenter';
-import {expect} from 'chai';
 
 describe('IronExtractionCenter', () => {
   let game: IGame;

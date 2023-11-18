@@ -1,25 +1,26 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonRoadStandardProject} from '../../../src/server/cards/moon/MoonRoadStandardProject';
 import {expect} from 'chai';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
-import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {TileType} from '../../../src/common/TileType';
 
 describe('MoonRoadStandardProject', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let moonData: MoonData;
   let card: MoonRoadStandardProject;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MoonRoadStandardProject();
   });
@@ -62,8 +63,8 @@ describe('MoonRoadStandardProject', () => {
     expect(player.steel).eq(2);
     expect(moonData.logisticRate).eq(0);
 
-    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
-    placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
+    runAllActions(game);
+    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
@@ -71,8 +72,7 @@ describe('MoonRoadStandardProject', () => {
 
 
   it('can act when Reds are in power.', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
+    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 

@@ -1,4 +1,5 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarPlanningOffice} from '../../../src/server/cards/moon/LunarPlanningOffice';
@@ -10,15 +11,13 @@ import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce'
 import {CardName} from '../../../src/common/cards/CardName';
 
 describe('LunarPlanningOffice', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let card: LunarPlanningOffice;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new LunarPlanningOffice();
-    player.popWaitingFor(); // Removing SelectInitialCards.
   });
 
   it('play', () => {

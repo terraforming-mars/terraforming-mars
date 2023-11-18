@@ -1,4 +1,5 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/server/cards/moon/AlgaeBioreactors';
@@ -11,12 +12,11 @@ import {MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
 describe('AlgaeBioreactors', () => {
   let player: TestPlayer;
   let card: AlgaeBioreactors;
-  let game: Game;
+  let game: IGame;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new AlgaeBioreactors();
     moonData = MoonExpansion.moonData(game);
   });
@@ -47,8 +47,7 @@ describe('AlgaeBioreactors', () => {
   });
 
   it('canPlay when Reds are in power', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
+    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 

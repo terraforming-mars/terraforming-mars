@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IntragenSanctuaryHeadquarters} from '../../../src/server/cards/moon/IntragenSanctuaryHeadquarters';
@@ -12,9 +12,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   let card: IntragenSanctuaryHeadquarters;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, {moonExpansion: true});
+    [/* game */, player, player2] = testGame(2, {moonExpansion: true});
     card = new IntragenSanctuaryHeadquarters();
   });
 

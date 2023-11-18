@@ -1,5 +1,6 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarIndustryComplex} from '../../../src/server/cards/moon/LunarIndustryComplex';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
@@ -10,13 +11,12 @@ import {cast} from '../../TestingUtils';
 
 describe('LunarIndustryComplex', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: LunarIndustryComplex;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new LunarIndustryComplex();
     moonData = MoonExpansion.moonData(game);
   });

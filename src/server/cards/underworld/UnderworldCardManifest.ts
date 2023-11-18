@@ -4,7 +4,7 @@ import {ModuleManifest} from '../ModuleManifest';
 // import {AeronGenomics} from './AeronGenomics';
 import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 // import {AnubisSecurities} from './AnubisSecurities';
-// import {ArboristCollective} from './ArboristCollective';
+import {ArboristCollective} from './ArboristCollective';
 // // import {AresMedia} from './AresMedia';
 import {ArtesianAquifer} from './ArtesianAquifer';
 // import {BatteryFactory} from './BatteryFactory';
@@ -46,7 +46,7 @@ import {GlobalAudit} from './GlobalAudit';
 import {GreyMarketExploitation} from './GreyMarketExploitation';
 // // import {GuerillaEcologists} from './GuerillaEcologists';
 import {Hackers} from './Hackers';
-// import {Hadesphere} from './Hadesphere';
+import {Hadesphere} from './Hadesphere';
 // import {HectateSpeditions} from './HectateSpeditions';
 import {HenkeiGenetics} from './HenkeiGenetics';
 import {HiredRaiders} from './HiredRaiders';
@@ -242,11 +242,11 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   ],
 
   corporationCards: {
-    // [CardName.HADESPHERE]: {Factory: Hadesphere},
+    [CardName.HADESPHERE]: {Factory: Hadesphere},
     // [CardName.DEMETRON_LABS]: {Factory: DemetronLabs},
     // [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo},
     [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics},
-    // [CardName.ARBORIST_COLLECTIVE]: {Factory: ArboristCollective},
+    [CardName.ARBORIST_COLLECTIVE]: {Factory: ArboristCollective},
     [CardName.KINGDOM_OF_TAURARO]: {Factory: KingdomofTauraro},
     // [CardName.AERON_GENOMICS]: {Factory: AeronGenomics},
     // [CardName.KEPLERTEC]: {Factory: Keplertec},

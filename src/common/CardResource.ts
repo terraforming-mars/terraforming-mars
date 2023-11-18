@@ -23,5 +23,5 @@ export enum CardResource {
     // WARE='Ware',
     // SCOOP='Scoop',
     // JOURNALISM='Journalism',
-    // ACTIVIST='Activist',
+    ACTIVIST='Activist',
 }

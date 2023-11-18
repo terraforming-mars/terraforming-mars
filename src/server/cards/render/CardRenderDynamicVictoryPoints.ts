@@ -27,6 +27,7 @@ const RESOURCE_TO_ITEM_TYPE: Record<CardResource, CardRenderItemType | undefined
   [CardResource.ORBITAL]: undefined,
   [CardResource.GRAPHENE]: undefined,
   [CardResource.TOOL]: undefined,
+  [CardResource.ACTIVIST]: undefined,
 };
 
 const TAG_TO_ITEM_TYPE = new Map<Tag, CardRenderItemType>([

@@ -15,6 +15,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {message} from '../../logs/MessageBuilder';
 import {SelectResource} from '../../inputs/SelectResource';
 import {Units} from '../../../common/Units';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class CloneTroopers extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -61,13 +62,18 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
       } else {
         const allPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);
         ALL_RESOURCES.forEach((resource) => {
-          allPlayers.forEach((p) => {
-            if (p.stock.get(resource) > 0) {
+          allPlayers.forEach((target) => {
+            if (target.stock.get(resource) > 0) {
               // TODO(kberg): Included protected resources
               options.options.push(new SelectOption(
-                message('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(p)), 'steal').andThen(() => {
-                p.stock.steal(resource, 1, player);
-                player.removeResourceFrom(this, 1);
+                message('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(target)), 'steal').andThen(() => {
+                target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+                  if (proceed) {
+                    target.stock.steal(resource, 1, player);
+                    player.removeResourceFrom(this, 1);
+                  }
+                  return undefined;
+                }));
                 return undefined;
               }));
             }

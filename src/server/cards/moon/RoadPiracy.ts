@@ -14,6 +14,7 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resource} from '../../../common/Resource';
 import {sum} from '../../../common/utils/utils';
 import {Message} from '../../../common/logs/Message';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class RoadPiracy extends Card implements IProjectCard {
   constructor() {
@@ -65,8 +66,13 @@ export class RoadPiracy extends Card implements IProjectCard {
         ledger.clear();
         throw new Error(`You may only steal up to ${limit} ${resource} from all players`);
       }
-      for (const entry of ledger) {
-        entry[0].stock.steal(resource, entry[1], player);
+      for (const [target, count] of ledger) {
+        target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+          if (proceed) {
+            target.stock.steal(resource, count, player);
+          }
+          return undefined;
+        }));
       }
       return undefined;
     };

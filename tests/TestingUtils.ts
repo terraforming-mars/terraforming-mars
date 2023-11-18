@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../src/server/Player';
 import {IGame} from '../src/server/IGame';
 import * as constants from '../src/common/constants';
 import {Space} from '../src/server/boards/Space';
@@ -23,7 +22,7 @@ import {IPlayer} from '../src/server/IPlayer';
 import {CardRequirements} from '../src/server/cards/requirements/CardRequirements';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
-export function maxOutOceans(player: Player, toValue: number = 0): Array<Space> {
+export function maxOutOceans(player: IPlayer, toValue: number = 0): Array<Space> {
   const oceans = [];
   if (toValue < 1) {
     toValue = constants.MAX_OCEAN_TILES;
@@ -47,7 +46,7 @@ export function setVenusScaleLevel(game: IGame, venusScaleLevel: number) {
   (game as any).venusScaleLevel = venusScaleLevel;
 }
 
-export function addGreenery(player: Player, spaceId?: SpaceId): Space {
+export function addGreenery(player: IPlayer, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForGreenery(player)[0];
@@ -55,7 +54,7 @@ export function addGreenery(player: Player, spaceId?: SpaceId): Space {
   return space;
 }
 
-export function addOcean(player: Player, spaceId?: SpaceId): Space {
+export function addOcean(player: IPlayer, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForOcean(player)[0];
@@ -63,7 +62,7 @@ export function addOcean(player: Player, spaceId?: SpaceId): Space {
   return space;
 }
 
-export function addCity(player: Player, spaceId?: SpaceId): Space {
+export function addCity(player: IPlayer, spaceId?: SpaceId): Space {
   const space = spaceId ?
     player.game.board.getSpace(spaceId) :
     player.game.board.getAvailableSpacesForCity(player)[0];
@@ -131,7 +130,7 @@ export function formatMessage(message: Message | string): string {
   return Log.applyData(message, (datum) => datum.value);
 }
 
-export function testRedsCosts(cb: () => CanPlayResponse, player: Player, initialMegacredits: number, passingDelta: number) {
+export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number) {
   const turmoil = Turmoil.getTurmoil(player.game);
   turmoil.rulingParty = new Greens();
   PoliticalAgendas.setNextAgenda(turmoil, player.game);
@@ -216,7 +215,7 @@ export function finishGeneration(game: IGame): void {
   }
 }
 
-export function getSendADelegateOption(player: Player) {
+export function getSendADelegateOption(player: IPlayer) {
   return player.getActions().options.find(
     (option) => option.title.toString().startsWith('Send a delegate'));
 }

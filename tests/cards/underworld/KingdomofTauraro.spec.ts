@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {KingdomofTauraro} from '../../../src/server/cards/underworld/KingdomofTauraro';
 import {testGame} from '../../TestGame';
-import {addCity, addGreenery, cast, runAllActions} from '../../TestingUtils';
+import {addCity, addGreenery, runAllActions} from '../../TestingUtils';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('KingdomofTauraro', () => {

@@ -1,19 +1,20 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {MicrosingularityPlant} from '../../../src/server/cards/moon/MicrosingularityPlant';
-import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MicrosingularityPlant', () => {
+  let game: IGame;
   let player: TestPlayer;
   let card: MicrosingularityPlant;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new MicrosingularityPlant();
     moonData = MoonExpansion.moonData(game);
   });

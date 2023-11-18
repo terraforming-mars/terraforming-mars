@@ -1,5 +1,6 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 import {LunarMineUrbanization} from '../../../src/server/cards/moon/LunarMineUrbanization';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
@@ -10,13 +11,13 @@ import {VictoryPointsBreakdown} from '../../../src/server/game/VictoryPointsBrea
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('LunarMineUrbanization', () => {
+  let game: IGame;
   let player: TestPlayer;
   let card: LunarMineUrbanization;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new LunarMineUrbanization();
     moonData = MoonExpansion.moonData(game);
   });

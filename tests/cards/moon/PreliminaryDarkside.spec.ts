@@ -1,8 +1,8 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {PreliminaryDarkside} from '../../../src/server/cards/moon/PreliminaryDarkside';
-import {expect} from 'chai';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('PreliminaryDarkside', () => {
@@ -10,8 +10,7 @@ describe('PreliminaryDarkside', () => {
   let card: PreliminaryDarkside;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new PreliminaryDarkside();
   });
 

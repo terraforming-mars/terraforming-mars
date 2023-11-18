@@ -1,8 +1,9 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {cast, fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
-import {expect} from 'chai';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -10,13 +11,12 @@ import {Tag} from '../../../src/common/cards/Tag';
 
 describe('LunaPoliticalInstitute', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: LunaPoliticalInstitute;
   let turmoil: Turmoil;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {turmoilExtension: true, moonExpansion: true});
+    [game, player] = testGame(1, {turmoilExtension: true, moonExpansion: true});
     card = new LunaPoliticalInstitute();
     turmoil = game.turmoil!;
   });

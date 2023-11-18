@@ -1,3 +1,4 @@
+import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
@@ -5,7 +6,6 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {BasicInfrastructure} from '../../../src/server/cards/moon/BasicInfrastructure';
-import {expect} from 'chai';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 
 describe('BasicInfrastructure', () => {

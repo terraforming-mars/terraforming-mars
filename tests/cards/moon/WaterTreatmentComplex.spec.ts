@@ -1,4 +1,5 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {WaterTreatmentComplex} from '../../../src/server/cards/moon/WaterTreatmentComplex';
 import {expect} from 'chai';
@@ -7,13 +8,13 @@ import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 
 describe('WaterTreatmentComplex', () => {
+  let game: IGame;
   let player: TestPlayer;
   let card: WaterTreatmentComplex;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new WaterTreatmentComplex();
     moonData = MoonExpansion.moonData(game);
   });

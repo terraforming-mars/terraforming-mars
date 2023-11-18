@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {LunaArchives} from '../../../src/server/cards/moon/LunaArchives';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
@@ -10,8 +10,7 @@ describe('LunaArchives', () => {
   let card: LunaArchives;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new LunaArchives();
     player.playedCards.push(card);
   });

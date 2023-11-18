@@ -1,7 +1,8 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {HE3ProductionQuotas} from '../../../src/server/cards/moon/HE3ProductionQuotas';
-import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
@@ -10,13 +11,12 @@ import {Greens} from '../../../src/server/turmoil/parties/Greens';
 
 describe('HE3ProductionQuotas', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: HE3ProductionQuotas;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
+    [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     card = new HE3ProductionQuotas();
     moonData = MoonExpansion.moonData(game);
   });

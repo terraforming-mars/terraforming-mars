@@ -1,4 +1,5 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {UndergroundDetonators} from '../../../src/server/cards/moon/UndergroundDetonators';
 import {expect} from 'chai';
@@ -6,13 +7,13 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
 
 describe('UndergroundDetonators', () => {
+  let game: IGame;
   let player: TestPlayer;
   let card: UndergroundDetonators;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new UndergroundDetonators();
     moonData = MoonExpansion.moonData(game);
   });

@@ -1,5 +1,6 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -7,11 +8,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {LunaEcumenopolis} from '../../../src/server/cards/moon/LunaEcumenopolis';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {testGame} from '../../TestGame';
 // import {Phase} from '../../../src/server/Phase';
 
 describe('LunaEcumenopolis', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let moonData: MoonData;
   let card: LunaEcumenopolis;

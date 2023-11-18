@@ -10,6 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
@@ -53,8 +54,13 @@ export class HiredRaiders extends Card implements IProjectCard {
         const optionTitle = message('Steal ${0} steel from ${1}', (b) => b.number(amountStolen).player(target).getMessage());
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          player.steel += amountStolen;
-          target.stock.deduct(Resource.STEEL, 2, {log: true, from: player, stealing: true});
+          target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+            if (proceed) {
+              target.stock.deduct(Resource.STEEL, 2, {log: true, from: player, stealing: true});
+              player.steel += amountStolen;
+            }
+            return undefined;
+          }));
           return undefined;
         }));
       }
@@ -64,8 +70,13 @@ export class HiredRaiders extends Card implements IProjectCard {
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          player.megaCredits += amountStolen;
-          target.stock.deduct(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
+          target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+            if (proceed) {
+              player.megaCredits += amountStolen;
+              target.stock.deduct(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
+            }
+            return undefined;
+          }));
           return undefined;
         }));
       }

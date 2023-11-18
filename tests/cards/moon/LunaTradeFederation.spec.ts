@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeFederation} from '../../../src/server/cards/moon/LunaTradeFederation';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 // import {IMoonData} from '../../../src/server/moon/IMoonData';
-import {testGame} from '../../TestGame';
 // import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
@@ -12,7 +12,7 @@ import {Units} from '../../../src/common/Units';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('LunaTradeFederation', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let lunaTradeFederation: LunaTradeFederation;

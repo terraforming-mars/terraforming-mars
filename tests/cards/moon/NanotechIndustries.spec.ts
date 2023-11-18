@@ -1,8 +1,8 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {NanotechIndustries} from '../../../src/server/cards/moon/NanotechIndustries';
-import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/server/cards/base/PhysicsComplex';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
@@ -24,8 +24,7 @@ describe('NanotechIndustries', () => {
   const prideoftheEarthArkship = new PrideoftheEarthArkship();
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     nanotechIndustries = new NanotechIndustries();
   });
 

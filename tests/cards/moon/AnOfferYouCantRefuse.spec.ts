@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {cast, formatMessage} from '../../TestingUtils';
+import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
+import {cast, formatMessage} from '../../TestingUtils';
 import {AnOfferYouCantRefuse} from '../../../src/server/cards/moon/AnOfferYouCantRefuse';
 import {TestPlayer} from '../../TestPlayer';
 import {Delegate, Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -14,7 +14,7 @@ describe('AnOfferYouCantRefuse', () => {
   let player: TestPlayer;
   let redPlayer: TestPlayer;
   let yellowPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
   let parties: Parties;
   let card: AnOfferYouCantRefuse;

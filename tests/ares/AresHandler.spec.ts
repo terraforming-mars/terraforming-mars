@@ -33,7 +33,7 @@ const ARES_OPTIONS_WITH_HAZARDS = {...DEFAULT_GAME_OPTIONS, aresExtension: true,
 describe('AresHandler', function() {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     [game, player, otherPlayer] = testGame(2, {aresExtension: true});

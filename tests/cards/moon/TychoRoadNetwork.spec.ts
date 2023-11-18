@@ -7,6 +7,7 @@ import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TychoRoadNetwork} from '../../../src/server/cards/moon/TychoRoadNetwork';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {TileType} from '../../../src/common/TileType';
 
 describe('TychoRoadNetwork', () => {
   let game: IGame;
@@ -42,7 +43,7 @@ describe('TychoRoadNetwork', () => {
 
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceMoonRoad(player, player.popWaitingFor());
+    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.logisticRate).eq(1);

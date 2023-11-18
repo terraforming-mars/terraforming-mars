@@ -1,13 +1,13 @@
+import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
-import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
-import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('AristarchusRoadNetwork', () => {
   let game: IGame;
@@ -41,16 +41,9 @@ describe('AristarchusRoadNetwork', () => {
     expect(player.steel).eq(0);
     expect(player.production.megacredits).eq(2);
 
-    const deferredAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
-    const selectSpace = deferredAction.execute()!;
-    const roadSpace = selectSpace.spaces[0];
-    expect(roadSpace.tile).is.undefined;
-    expect(roadSpace.player).is.undefined;
+    runAllActions(game);
     expect(moonData.logisticRate).eq(0);
-
-    deferredAction.execute()!.cb(roadSpace);
-    expect(roadSpace.tile!.tileType).eq(TileType.MOON_ROAD);
-    expect(roadSpace.player).eq(player);
+    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.logisticRate).eq(1);

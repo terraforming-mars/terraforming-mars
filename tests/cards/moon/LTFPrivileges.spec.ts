@@ -1,7 +1,7 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
-import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 
@@ -10,8 +10,7 @@ describe('LTFPrivileges', () => {
   let card: LTFPrivileges;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new LTFPrivileges();
   });
 

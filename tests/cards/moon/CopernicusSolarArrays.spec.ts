@@ -1,15 +1,14 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusSolarArrays} from '../../../src/server/cards/moon/CopernicusSolarArrays';
-import {expect} from 'chai';
 
 describe('CopernicusSolarArrays', () => {
   let player: TestPlayer;
   let card: CopernicusSolarArrays;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new CopernicusSolarArrays();
   });
 

@@ -35,6 +35,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
           b.tile(TileType.LUNAR_MINE_URBANIZATION, true).asterix();
         }),
       },
+      tilesBuilt: [TileType.LUNAR_MINE_URBANIZATION],
     });
   }
 

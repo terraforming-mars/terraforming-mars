@@ -42,7 +42,7 @@ import {GeologicalExpertise} from './GeologicalExpertise';
 import {GeologistTeam} from './GeologistTeam';
 import {GeoscanSatellite} from './GeoscanSatellite';
 import {GeothermalNetwork} from './GeothermalNetwork';
-// import {GlobalAudit} from './GlobalAudit';
+import {GlobalAudit} from './GlobalAudit';
 import {GreyMarketExploitation} from './GreyMarketExploitation';
 // // import {GuerillaEcologists} from './GuerillaEcologists';
 import {Hackers} from './Hackers';
@@ -155,7 +155,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.MICROPROBING_TECHNOLOGY]: {Factory: MicroprobingTechnology},
     [CardName.SEARCH_FOR_LIFE_UNDERGROUND]: {Factory: SearchforLifeUnderground},
     [CardName.GEOTHERMAL_NETWORK]: {Factory: GeothermalNetwork},
-    // [CardName.GLOBAL_AUDIT]: {Factory: GlobalAudit},
+    [CardName.GLOBAL_AUDIT]: {Factory: GlobalAudit},
     // [CardName.PATENT_MANIPULATION]: {Factory: PatentManipulation},
     [CardName.CAVE_CITY]: {Factory: CaveCity},
     // // 28-36

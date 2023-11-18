@@ -41,6 +41,7 @@ export class LunaTrainStation extends Card {
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(2, true),
       },
+      tilesBuilt: [TileType.LUNA_TRAIN_STATION],
     });
   }
 

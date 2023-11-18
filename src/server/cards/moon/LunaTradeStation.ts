@@ -39,6 +39,7 @@ export class LunaTradeStation extends ActionCard implements IActionCard {
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },
+      tilesBuilt: [TileType.LUNA_TRADE_STATION],
     });
   }
 }

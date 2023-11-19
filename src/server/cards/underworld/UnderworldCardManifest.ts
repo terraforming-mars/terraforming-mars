@@ -120,7 +120,7 @@ import {UndergroundRailway} from './UndergroundRailway';
 import {UndergroundSettlement} from './UndergroundSettlement';
 // import {UndergroundShelters} from './UndergroundShelters';
 // import {UndergroundSmugglingRing} from './UndergroundSmugglingRing';
-// import {Voltagon} from './Voltagon';
+import {Voltagon} from './Voltagon';
 // import {VoltaicMetallurgy} from './VoltaicMetallurgy';
 // import {VolunteerMiningInititive} from './VolunteerMiningInititive';
 // // import {Whales} from './Whales';
@@ -250,7 +250,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.KINGDOM_OF_TAURARO]: {Factory: KingdomofTauraro},
     // [CardName.AERON_GENOMICS]: {Factory: AeronGenomics},
     // [CardName.KEPLERTEC]: {Factory: Keplertec},
-    // [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: 'venus'},
+    [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: 'venus'},
     // // [CardName.ARES_MEDIA]: {Factory: AresMedia}, // Not another events are up card.
     // [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities},
     // [CardName.HECTATE_SPEDITIONS]: {Factory: HectateSpeditions, compatibility: 'colonies'},

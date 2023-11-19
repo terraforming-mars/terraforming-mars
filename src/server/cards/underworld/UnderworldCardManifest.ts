@@ -58,7 +58,7 @@ import {InheritedFortune} from './InheritedFortune';
 // // import {IntellectualPropertyTheft} from './IntellectualPropertyTheft';
 // import {InvestigativeJournalism} from './InvestigativeJournalism';
 import {InvestorPlaza} from './InvestorPlaza';
-// import {JensonBoyleCo} from './JensonBoyleCo';
+import {JensonBoyleCo} from './JensonBoyleCo';
 // import {Keplertec} from './Keplertec';
 // // import {Keplertec} from './Keplertec';
 import {KingdomofTauraro} from './KingdomofTauraro';
@@ -244,7 +244,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   corporationCards: {
     [CardName.HADESPHERE]: {Factory: Hadesphere},
     // [CardName.DEMETRON_LABS]: {Factory: DemetronLabs},
-    // [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo},
+    [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo},
     [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics},
     [CardName.ARBORIST_COLLECTIVE]: {Factory: ArboristCollective},
     [CardName.KINGDOM_OF_TAURARO]: {Factory: KingdomofTauraro},

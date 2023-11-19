@@ -141,10 +141,22 @@
       </div>
     </template>
     <template v-else-if="title === CardName.NIRGAL_ENTERPRISES">
-      <div class="nirgal-enterprises-logo">
+      <div class="card-nirgal-enterprises-logo">
         <div>NIRGAL</div>
         <div>ENTERPRISES</div>
       </div>
+    </template>
+    <template v-else-if="title === CardName.ECOTEC">
+      <div class="card-ecotec-logo"></div>
+    </template>
+    <template v-else-if="title === CardName.PALLADIN_SHIPPING">
+      <div class="card-palladin-shipping-logo"></div>
+    </template>
+    <template v-else-if="title === CardName.SAGITTA_FRONTIER_SERVICES">
+      <div class="card-sagitta-logo">Sagitta</div>
+    </template>
+    <template v-else-if="title === CardName.KUIPER_COOPERATIVE">
+      <div class="card-kuiper-logo">Kuiper<br/>Cooperative</div>
     </template>
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
@@ -184,6 +196,7 @@ const imageOnlyLogos: Map<CardName, string> = new Map([
   [CardName.HABITAT_MARTE, 'card-habitat-marte-logo'],
   [CardName.ODYSSEY, 'card-odyssey-logo'],
   [CardName.AURORAI, 'card-aurorai-logo'],
+  [CardName.SPIRE, 'card-spire-logo'],
 ]);
 
 const imageLogosWithNames: Map<CardName, string> = new Map([

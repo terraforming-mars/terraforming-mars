@@ -1,0 +1,67 @@
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {CardRenderer} from '../render/CardRenderer';
+import {ActionCard} from '../ActionCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {digit} from '../Options';
+
+export class JensonBoyleCo extends ActionCard implements IActionCard, ICorporationCard {
+  constructor() {
+    super({
+      type: CardType.CORPORATION,
+      name: CardName.JENSON_BOYLE_CO,
+      tags: [Tag.EARTH],
+      startingMegaCredits: 46,
+
+      behavior: {
+        underworld: {corruption: 2},
+      },
+
+      action: {
+        or: {
+          behaviors: [
+            {
+              spend: {corruption: 1},
+              stock: {steel: 4},
+              title: 'Spend 1 corruption to gain 4 steel.',
+            },
+            {
+              spend: {corruption: 1},
+              stock: {titanium: 3},
+              title: 'Spend 1 corruption to gain 3 titanium.',
+            },
+            {
+              spend: {corruption: 1},
+              stock: {plants: 3},
+              title: 'Spend 1 corruption to gain 3 plants.',
+            },
+            {
+              spend: {corruption: 1},
+              stock: {heat: 6},
+              title: 'Spend 1 corruption to gain 6 heat.',
+            },
+          ],
+        },
+      },
+
+      metadata: {
+        cardNumber: 'UC03',
+        description: 'You start with 46M€ and 2 corruption.',
+        renderData: CardRenderer.builder((b) => {
+          b.megacredits(46).corruption(2).br;
+          b.action('', (ab) => {
+            ab.corruption(1).startAction
+              .steel(4, {digit}).or()
+              .titanium(3, {digit});
+          }).br;
+          b.plainText('(Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.)').br;
+          b.or()
+            .plants(3, {digit}).or()
+            .heat(6, {digit});
+        }),
+      },
+    });
+  }
+}

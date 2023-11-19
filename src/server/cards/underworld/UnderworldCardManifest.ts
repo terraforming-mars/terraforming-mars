@@ -119,7 +119,7 @@ import {UndergroundRailway} from './UndergroundRailway';
 // // import {UndergroundResearchCenter} from './UndergroundResearchCenter';
 import {UndergroundSettlement} from './UndergroundSettlement';
 // import {UndergroundShelters} from './UndergroundShelters';
-// import {UndergroundSmugglingRing} from './UndergroundSmugglingRing';
+import {UndergroundSmugglingRing} from './UndergroundSmugglingRing';
 import {Voltagon} from './Voltagon';
 // import {VoltaicMetallurgy} from './VoltaicMetallurgy';
 // import {VolunteerMiningInititive} from './VolunteerMiningInititive';
@@ -159,7 +159,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.PATENT_MANIPULATION]: {Factory: PatentManipulation},
     [CardName.CAVE_CITY]: {Factory: CaveCity},
     // // 28-36
-    // [CardName.UNDERGROUND_SMUGGLING_RING]: {Factory: UndergroundSmugglingRing},
+    [CardName.UNDERGROUND_SMUGGLING_RING]: {Factory: UndergroundSmugglingRing},
     // [CardName.DEEPMINING]: {Factory: Deepmining},
     [CardName.BEHEMOTH_EXCAVATOR]: {Factory: BehemothExcavator},
     [CardName.LOBBYING_NETWORK]: {Factory: LobbyingNetwork},

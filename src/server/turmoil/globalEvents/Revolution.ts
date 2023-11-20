@@ -11,9 +11,9 @@ import {played} from '../../cards/Options';
 import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.earth(1, {played, size: Size.SMALL}).plus().influence({size: Size.SMALL}).colon();
-  b.text('1st:', Size.SMALL).tr(2, {size: Size.TINY, digit: true});
-  b.text('2nd:', Size.SMALL).tr(1, {size: Size.TINY, digit: true});
+  b.earth(1, {played, size: Size.SMALL}).plus().influence().colon().br;
+  b.text('1st:', Size.SMALL).tr(2, {size: Size.TINY}).nbsp;
+  b.text('2nd:', Size.SMALL).tr(1, {size: Size.TINY});
 });
 
 export class Revolution extends GlobalEvent implements IGlobalEvent {

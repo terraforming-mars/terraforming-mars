@@ -99,7 +99,7 @@
         <h2 v-i18n>Global Events</h2>
         <template v-if="types.globalEvents">
           <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
-            <global-event v-if="showGlobalEvent(globalEventName)" :globalEventName="globalEventName" type="prior"></global-event>
+            <global-event v-if="showGlobalEvent(globalEventName)" :globalEventName="globalEventName" type="distant"></global-event>
           </div>
         </template>
       </section>

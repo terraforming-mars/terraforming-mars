@@ -26,7 +26,7 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
           b.action('Identify 1 underground resource.',
             (ab) => ab.empty().startAction.identify(1));
           b.br;
-          b.effect('When ANY player identifies an underground resource tha depcts an ocean, YOU gain 1 TR.',
+          b.effect('When ANY player identifies an underground resource that depicts an ocean, YOU gain 1 TR.',
             (eb) => eb.identify(1, {all}).oceans(1).asterix().startEffect.tr(1));
         }),
       },

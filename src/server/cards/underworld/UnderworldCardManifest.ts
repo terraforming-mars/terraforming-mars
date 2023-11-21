@@ -106,7 +106,7 @@ import {SpaceWargames} from './SpaceWargames';
 // import {StandardTechnology} from './StandardTechnology';
 // import {StarVegas} from './StarVegas';
 import {StemFieldSubsidies} from './StemFieldSubsidies';
-// import {SubnauticPirates} from './SubnauticPirates';
+import {SubnauticPirates} from './SubnauticPirates';
 import {SubterraneanSea} from './SubterraneanSea';
 // // import {ThiolavaVents} from './ThiolavaVents';
 import {TitanManufacturingColony} from './TitanManufacturingColony';
@@ -133,14 +133,14 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.GEOSCAN_SATELLITE]: {Factory: GeoscanSatellite},
     [CardName.TUNNEL_BORING_MACHINE]: {Factory: TunnelBoringMachine},
     [CardName.UNDERGROUND_RAILWAY]: {Factory: UndergroundRailway},
-    // // [CardName.GAIA_CITY]: {Factory: GaiaCity},
+    // // [CardName.GAIA_CITY]: {Factory: GaiaCity}, // Figure out the rules first
     [CardName.DEEPNUKING]: {Factory: Deepnuking},
     [CardName.OLD_WORLD_MAFIA]: {Factory: OldWorldMafia},
     [CardName.NIGHTCLUBS]: {Factory: Nightclubs},
-    // // [CardName.RECKLESS_DETONATION]: {Factory: RecklessDetonation},
+    // // [CardName.RECKLESS_DETONATION]: {Factory: RecklessDetonation}, // Just work. Only partially implemented.
     // // 10-18
     [CardName.OFF_WORLD_TAX_HAVEN]: {Factory: OffWorldTaxHaven},
-    // [CardName.SUBNAUTIC_PIRATES]: {Factory: SubnauticPirates},
+    [CardName.SUBNAUTIC_PIRATES]: {Factory: SubnauticPirates},
     // // [CardName.SOCIAL_ENGINEERING]: {Factory: SocialEngineering}, // Use another player's action. Not right now.
     [CardName.FABRICATED_SCANDAL]: {Factory: FabricatedScandal},
     // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking},

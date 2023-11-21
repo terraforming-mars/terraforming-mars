@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../TestingUtils';
+import {cast, formatMessage} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {PlayerInput} from '../../src/server/PlayerInput';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
@@ -7,6 +7,7 @@ import {ICard} from '../../src/server/cards/ICard';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {TileType} from '../../src/common/TileType';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
+import {OrOptions} from '../../src/server/inputs/OrOptions';
 
 export class UnderworldTestHelper {
   public static assertIsExcavationAction(player: TestPlayer, input: PlayerInput | undefined) {
@@ -32,6 +33,15 @@ export class UnderworldTestHelper {
     player.defer(selectSpace.cb(space));
 
     expect(space.undergroundResources).is.not.undefined;
+  }
+
+  public static assertIsMaybeBlock(_player :TestPlayer, input: PlayerInput | undefined, choice: 'fighters' | 'corruption' | 'do not block') {
+    const orOptions = cast(input, OrOptions);
+
+    expect(formatMessage(orOptions.title)).contains('Spend 1 corruption to block an attack by');
+
+    const option = orOptions.options.find((o) => formatMessage(o.title).toLowerCase().indexOf(choice) > -1);
+    option!.cb();
   }
 
   public static assertIsAddResourceToCard(input: PlayerInput | undefined, count: number, expectedCards: Array<ICard>, card: ICard) {

@@ -18,7 +18,7 @@ import {CentralReservoir} from './CentralReservoir';
 // import {CloudVortexOutpost} from './CloudVortexOutpost';
 import {CollusionStandardProject} from './CollusionStandardProject';
 // import {ConcessionRights} from './ConcessionRights';
-// import {CorporateBlackmail} from './CorporateBlackmail';
+import {CorporateBlackmail} from './CorporateBlackmail';
 // // import {CorporateTheft} from './CorporateTheft';
 // import {CraterSurvey} from './CraterSurvey';
 import {CutThroatBudgeting} from './CutThroatBudgeting';
@@ -171,7 +171,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // 37-45
     [CardName.NARRATIVE_SPIN]: {Factory: NarrativeSpin},
     [CardName.PRIVATE_INVESTIGATOR]: {Factory: PrivateInvestigator},
-    // [CardName.CORPORATE_BLACKMAIL]: {Factory: CorporateBlackmail},
+    [CardName.CORPORATE_BLACKMAIL]: {Factory: CorporateBlackmail},
     [CardName.SCAPEGOAT]: {Factory: Scapegoat},
     // // [CardName.FRIENDS_IN_HIGH_PLACES]: {Factory: FriendsinHighPlaces}, // ANOTHER card payment thing.
     [CardName.MICROGRAVIMETRY]: {Factory: Microgravimetry},

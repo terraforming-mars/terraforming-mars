@@ -71,7 +71,7 @@ import {ManMadeVolcano} from './ManMadeVolcano';
 // // import {MercenaryAssault} from './MercenaryAssault';
 // import {MicroGeodesics} from './MicroGeodesics';
 import {Microgravimetry} from './Microgravimetry';
-// import {MicroprobingTechnology} from './MicroprobingTechnology';
+import {MicroprobingTechnology} from './MicroprobingTechnology';
 // import {MiningMarketInsider} from './MiningMarketInsider';
 // import {Monopoly} from './Monopoly';
 // import {Nanofoundry} from './Nanofoundry';
@@ -143,7 +143,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SUBNAUTIC_PIRATES]: {Factory: SubnauticPirates},
     // // [CardName.SOCIAL_ENGINEERING]: {Factory: SocialEngineering}, // Use another player's action. Not right now.
     [CardName.FABRICATED_SCANDAL]: {Factory: FabricatedScandal},
-    // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking},
+    // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking}, // Currently not welel written.
     [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
     [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},
     [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},
@@ -152,15 +152,15 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.UNDERGROUND_AMUSEMENT_PARK]: {Factory: UndergroundAmusementPark},
     [CardName.CASINO]: {Factory: Casino},
     [CardName.IMPORTED_HEAVY_MACHINERY]: {Factory: ImportedHeavyMachinery},
-    // [CardName.MICROPROBING_TECHNOLOGY]: {Factory: MicroprobingTechnology},
+    [CardName.MICROPROBING_TECHNOLOGY]: {Factory: MicroprobingTechnology},
     [CardName.SEARCH_FOR_LIFE_UNDERGROUND]: {Factory: SearchforLifeUnderground},
     [CardName.GEOTHERMAL_NETWORK]: {Factory: GeothermalNetwork},
     [CardName.GLOBAL_AUDIT]: {Factory: GlobalAudit},
-    // [CardName.PATENT_MANIPULATION]: {Factory: PatentManipulation},
+    // [CardName.PATENT_MANIPULATION]: {Factory: PatentManipulation}, // Just don't want to deal with it.
     [CardName.CAVE_CITY]: {Factory: CaveCity},
     // // 28-36
     [CardName.UNDERGROUND_SMUGGLING_RING]: {Factory: UndergroundSmugglingRing},
-    // [CardName.DEEPMINING]: {Factory: Deepmining},
+    // [CardName.DEEPMINING]: {Factory: Deepmining}, // Don't want to deal with testing the robotic workforce assocaition.
     [CardName.BEHEMOTH_EXCAVATOR]: {Factory: BehemothExcavator},
     [CardName.LOBBYING_NETWORK]: {Factory: LobbyingNetwork},
     // [CardName.CONCESSION_RIGHTS]: {Factory: ConcessionRights},

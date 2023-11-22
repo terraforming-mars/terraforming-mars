@@ -37,9 +37,11 @@ const CARD_TYPES_WITHOUT_COST: ReadonlyArray<CardType> = [
   CardType.STANDARD_ACTION,
 ] as const;
 
+/* Properties that are the same internally and externally */
 type SharedProperties = {
   /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
+  action?: Behavior | undefined;
   behavior?: Behavior | undefined;
   cardCost?: number;
   cardDiscount?: OneOrArray<CardDiscount>;
@@ -94,7 +96,7 @@ const cardProperties = new Map<CardName, InternalProperties>();
  * each card, either.
  */
 export abstract class Card {
-  private readonly properties: InternalProperties;
+  protected readonly properties: InternalProperties;
 
   private internalize(external: StaticCardProperties): InternalProperties {
     const name = external.name;
@@ -112,6 +114,7 @@ export abstract class Card {
 
       validateBehavior(external.behavior);
       validateBehavior(external.firstAction);
+      validateBehavior(external.action);
     } catch (e) {
       throw new Error(`Cannot validate ${name}: ${e}`);
     }

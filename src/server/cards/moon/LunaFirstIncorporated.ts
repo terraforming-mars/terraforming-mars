@@ -1,18 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
 import {all} from '../Options';
 
-export class LunaFirstIncorporated extends Card implements ICorporationCard {
+export class LunaFirstIncorporated extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.LUNA_FIRST_INCORPORATED,
       tags: [Tag.MOON],
       startingMegaCredits: 40,

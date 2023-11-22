@@ -1,7 +1,5 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -13,10 +11,9 @@ import {BoardType} from '../../boards/BoardType';
 import {Board} from '../../boards/Board';
 import {message} from '../../logs/MessageBuilder';
 
-export class GagarinMobileBase extends Card implements IActionCard, ICorporationCard {
+export class GagarinMobileBase extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.GAGARIN_MOBILE_BASE,
       tags: [Tag.SCIENCE],
       startingMegaCredits: 42,

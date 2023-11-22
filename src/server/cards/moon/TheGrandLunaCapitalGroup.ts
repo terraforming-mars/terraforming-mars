@@ -1,8 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -12,13 +11,11 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Card} from '../Card';
 import {all} from '../Options';
 
-export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
+export class TheGrandLunaCapitalGroup extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.THE_GRAND_LUNA_CAPITAL_GROUP,
       tags: [Tag.CITY, Tag.MOON],
       startingMegaCredits: 32,

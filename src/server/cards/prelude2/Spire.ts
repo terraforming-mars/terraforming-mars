@@ -1,5 +1,4 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardType} from '../../../common/cards/CardType';
@@ -11,13 +10,12 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {LogHelper} from '../../LogHelper';
 import {CardResource} from '../../../common/CardResource';
 
-export class Spire extends Card implements ICorporationCard {
+export class Spire extends CorporationCard {
   constructor() {
     super({
       name: CardName.SPIRE,
       tags: [Tag.CITY, Tag.EARTH],
       startingMegaCredits: 44,
-      type: CardType.CORPORATION,
       initialActionText: 'Draw 4 cards, then discard 3 cards.',
       resourceType: CardResource.SCIENCE,
 

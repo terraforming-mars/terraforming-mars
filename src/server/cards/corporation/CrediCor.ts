@@ -1,17 +1,14 @@
-import {Card} from '../Card';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IStandardProjectCard} from '../IStandardProjectCard';
 import {Resource} from '../../../common/Resource';
 
-export class CrediCor extends Card implements ICorporationCard {
+export class CrediCor extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.CREDICOR,
       startingMegaCredits: 57,
 

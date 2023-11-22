@@ -1,23 +1,20 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resource} from '../../../common/Resource';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class UtopiaInvest extends Card implements IActionCard, ICorporationCard {
+export class UtopiaInvest extends CorporationCard implements IActionCard {
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,
       tags: [Tag.BUILDING],
       startingMegaCredits: 40,
-      type: CardType.CORPORATION,
 
       behavior: {
         production: {steel: 1, titanium: 1},

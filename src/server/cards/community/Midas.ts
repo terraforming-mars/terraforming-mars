@@ -1,17 +1,14 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class Midas extends Card implements ICorporationCard {
+export class Midas extends CorporationCard {
   constructor() {
     super({
       name: CardName.MIDAS,
       startingMegaCredits: 120,
-      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R41',

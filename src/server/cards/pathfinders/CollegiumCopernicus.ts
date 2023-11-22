@@ -1,9 +1,8 @@
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
@@ -19,10 +18,9 @@ import {message} from '../../logs/MessageBuilder';
 function tradeCost(player: IPlayer) {
   return Math.max(0, 3 - player.colonies.tradeDiscount);
 }
-export class CollegiumCopernicus extends Card implements ICorporationCard, IActionCard {
+export class CollegiumCopernicus extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.COLLEGIUM_COPERNICUS,
       tags: [Tag.SCIENCE, Tag.EARTH],
       startingMegaCredits: 33,

@@ -1,5 +1,4 @@
-import {Card} from '../Card';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -10,15 +9,13 @@ import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {Board} from '../../boards/Board';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class TharsisRepublic extends Card implements ICorporationCard {
+export class TharsisRepublic extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.THARSIS_REPUBLIC,
       tags: [Tag.BUILDING],
       startingMegaCredits: 40,

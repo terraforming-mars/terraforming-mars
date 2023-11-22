@@ -1,20 +1,17 @@
 import {IActionCard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ALL_RESOURCES} from '../../../common/Resource';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
 
-export class RobinsonIndustries extends Card implements IActionCard, ICorporationCard {
+export class RobinsonIndustries extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ROBINSON_INDUSTRIES,
       startingMegaCredits: 47,
 

@@ -1,18 +1,15 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 import {Phase} from '../../../common/Phase';
 import {Resource} from '../../../common/Resource';
 
-export class UnitedNationsMissionOne extends Card implements ICorporationCard {
+export class UnitedNationsMissionOne extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.UNITED_NATIONS_MISSION_ONE,
       tags: [Tag.EARTH],
       startingMegaCredits: 40, // +1 for the initial change in TR.

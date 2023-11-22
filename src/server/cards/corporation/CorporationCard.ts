@@ -1,10 +1,21 @@
-import {IActionCard} from '../ICard';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {CardType} from '../../../common/cards/CardType';
+import {ICorporationCard} from './ICorporationCard';
+import {Card, StaticCardProperties} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
+import {IActionCard} from '../ICard';
 
-/** A prelude card with an action. Duplicates code from ActionCard. */
-export abstract class ActivePreludeCard extends PreludeCard implements IActionCard {
+export abstract class CorporationCard extends Card implements ICorporationCard {
+  constructor(external: Omit<StaticCardProperties, 'type'>) {
+    // Corporation cards don't need a type defined for them.
+    super({...external, type: CardType.CORPORATION});
+  }
+  public override get type(): CardType.CORPORATION {
+    return CardType.CORPORATION;
+  }
+}
+
+export abstract class ActiveCorporationCard extends CorporationCard implements IActionCard {
   public canAct(player: IPlayer) {
     if (this.properties.action === undefined) {
       throw new Error('action not defined');

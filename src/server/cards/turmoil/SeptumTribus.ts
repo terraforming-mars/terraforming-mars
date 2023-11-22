@@ -1,21 +1,18 @@
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class SeptumTribus extends Card implements IActionCard, ICorporationCard {
+export class SeptumTribus extends CorporationCard implements IActionCard {
   constructor() {
     super({
       name: CardName.SEPTUM_TRIBUS,
       tags: [Tag.WILD],
       startingMegaCredits: 36,
-      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R15',

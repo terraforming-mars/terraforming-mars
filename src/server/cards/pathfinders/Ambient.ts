@@ -1,10 +1,9 @@
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
@@ -12,10 +11,9 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
 
-export class Ambient extends Card implements ICorporationCard {
+export class Ambient extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.AMBIENT,
       tags: [Tag.VENUS],
       startingMegaCredits: 38,

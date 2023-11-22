@@ -1,17 +1,14 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
-import {ActionCard} from '../ActionCard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {Resource} from '../../../common/Resource';
 
-export class Voltagon extends ActionCard implements ICorporationCard {
+export class Voltagon extends ActiveCorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.VOLTAGON,
       tags: [Tag.SCIENCE, Tag.POWER],
       startingMegaCredits: 38,

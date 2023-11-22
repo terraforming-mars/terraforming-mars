@@ -1,9 +1,7 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
@@ -12,10 +10,9 @@ import {played} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class AdhaiHighOrbitConstructions extends Card implements ICorporationCard {
+export class AdhaiHighOrbitConstructions extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
       tags: [Tag.SPACE],
       startingMegaCredits: 43,

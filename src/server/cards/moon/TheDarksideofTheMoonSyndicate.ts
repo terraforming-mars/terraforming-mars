@@ -1,7 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
@@ -13,15 +12,13 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
 import {Phase} from '../../../common/Phase';
-import {Card} from '../Card';
 import {all} from '../Options';
 import {Payment} from '../../../common/inputs/Payment';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
-export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationCard {
+export class TheDarksideofTheMoonSyndicate extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
       tags: [Tag.MOON],
       startingMegaCredits: 40,

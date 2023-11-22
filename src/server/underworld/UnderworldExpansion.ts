@@ -138,7 +138,7 @@ export class UnderworldExpansion {
    *
    * If a player played Concession Rights this generation, they automatically ignore placement restrictions.
    */
-  public static excavatableSpaces(player: IPlayer, ignorePlacementRestrictions: boolean = false) {
+  public static excavatableSpaces(player: IPlayer, ignorePlacementRestrictions: boolean = false, ignoreConcsesionRights: boolean = false) {
     const board = player.game.board;
 
     // Compute any space that any player can excavate.
@@ -153,10 +153,12 @@ export class UnderworldExpansion {
       return anyExcavatableSpaces;
     }
 
-    // const concessionRights = player.playedCards.find((card) => card.name === CardName.CONCESSION_RIGHTS);
-    // if (concessionRights?.generationUsed === player.game.generation) {
-    //   return anyExcavatableSpaces;
-    // }
+    const concessionRights = player.playedCards.find((card) => card.name === CardName.CONCESSION_RIGHTS);
+    if (concessionRights?.generationUsed === player.game.generation) {
+      if (ignoreConcsesionRights === false) {
+        return anyExcavatableSpaces;
+      }
+    }
 
     // Filter out the set of excavatable spaces that other players control.
     const commonExcavatableSpaces = anyExcavatableSpaces.filter((space) => {
@@ -389,7 +391,11 @@ export class UnderworldExpansion {
   //     inplaceShuffle(game.underworldData.tokens, game.rng);
   //   }
   static excavationMarkerCount(player: IPlayer): number {
-    return player.game.board.spaces.filter((space) => space.excavator === player).length;
+    return this.excavatedSpaces(player).length;
+  }
+
+  static excavatedSpaces(player: IPlayer) {
+    return player.game.board.spaces.filter((space) => space.excavator === player);
   }
 
   static endGeneration(game: IGame) {

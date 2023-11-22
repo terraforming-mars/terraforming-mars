@@ -8,10 +8,19 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {TileType} from '../../src/common/TileType';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
+import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansion';
+import {oneWayDifference} from '../../src/common/utils/utils';
 
 export class UnderworldTestHelper {
-  public static assertIsExcavationAction(player: TestPlayer, input: PlayerInput | undefined) {
+  public static assertIsExcavationAction(player: TestPlayer, input: PlayerInput | undefined, ignorePlacementRestrictions: boolean = false) {
     const selectSpace = cast(input, SelectSpace);
+    const candidateSpaces = selectSpace.spaces;
+
+    if (ignorePlacementRestrictions) {
+      const strictlyExcavatableSpaces = UnderworldExpansion.excavatableSpaces(player, false, false);
+      expect(oneWayDifference(candidateSpaces, strictlyExcavatableSpaces)).is.not.empty;
+    }
+
     const space = selectSpace.spaces[0];
 
     expect(space.excavator).is.undefined;

@@ -1,17 +1,14 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {CardType} from '../../../common/cards/CardType';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
 import {SelectAmount} from '../../inputs/SelectAmount';
 
-export class TychoMagnetics extends Card implements ICorporationCard {
+export class TychoMagnetics extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.TYCHO_MAGNETICS,
       tags: [Tag.POWER, Tag.SCIENCE],
       startingMegaCredits: 42,

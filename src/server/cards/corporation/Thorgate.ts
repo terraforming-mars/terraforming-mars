@@ -1,15 +1,12 @@
-import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Thorgate extends Card implements ICorporationCard {
+export class Thorgate extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.THORGATE,
       tags: [Tag.POWER],
       startingMegaCredits: 48,

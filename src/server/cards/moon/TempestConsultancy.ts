@@ -1,18 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class TempestConsultancy extends Card implements ICorporationCard {
+export class TempestConsultancy extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.TEMPEST_CONSULTANCY,
       tags: [Tag.MOON],
       startingMegaCredits: 37,

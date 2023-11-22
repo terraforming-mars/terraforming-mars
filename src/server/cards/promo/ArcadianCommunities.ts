@@ -1,19 +1,16 @@
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Space} from '../../boards/Space';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
 
-export class ArcadianCommunities extends Card implements IActionCard, ICorporationCard {
+export class ArcadianCommunities extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ARCADIAN_COMMUNITIES,
       startingMegaCredits: 40,
       initialActionText: 'Place a community (player marker) on a non-reserved area',

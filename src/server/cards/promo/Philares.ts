@@ -1,12 +1,10 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Space} from '../../boards/Space';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -14,10 +12,9 @@ import {BoardType} from '../../boards/BoardType';
 import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 
-export class Philares extends Card implements ICorporationCard {
+export class Philares extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.PHILARES,
       tags: [Tag.BUILDING],
       startingMegaCredits: 47,

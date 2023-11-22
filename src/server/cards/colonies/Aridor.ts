@@ -1,21 +1,20 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {SerializedCard} from '../../SerializedCard';
 import {ICard} from '../ICard';
 
-export class Aridor extends Card implements ICorporationCard {
+export class Aridor extends CorporationCard {
   constructor() {
     super({
       name: CardName.ARIDOR,
       startingMegaCredits: 40,
-      type: CardType.CORPORATION,
       initialActionText: 'Add a colony tile',
 
       metadata: {

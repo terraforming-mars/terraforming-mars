@@ -13,14 +13,14 @@ describe('AirRaid', function() {
   let card: AirRaid;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let corpo: StormCraftIncorporated;
+  let stormcraftIncorporated: StormCraftIncorporated;
 
   beforeEach(function() {
     card = new AirRaid();
     [/* game */, player, player2] = testGame(3);
 
-    corpo = new StormCraftIncorporated();
-    player.setCorporationForTest(corpo);
+    stormcraftIncorporated = new StormCraftIncorporated();
+    player.setCorporationForTest(stormcraftIncorporated);
   });
 
   it('Can not play', function() {
@@ -28,7 +28,7 @@ describe('AirRaid', function() {
   });
 
   it('Should play - multiple targets', function() {
-    player.addResourceTo(corpo);
+    player.addResourceTo(stormcraftIncorporated);
     expect(card.canPlay(player)).is.true;
 
     const otherCardWithFloater = new Dirigibles();
@@ -44,12 +44,12 @@ describe('AirRaid', function() {
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(4);
 
-    option2.cb([corpo]);
-    expect(corpo.resourceCount).to.eq(0);
+    option2.cb([stormcraftIncorporated]);
+    expect(stormcraftIncorporated.resourceCount).to.eq(0);
   });
 
   it('Should play - single target for floater removal and MC removal', function() {
-    player.addResourceTo(corpo);
+    player.addResourceTo(stormcraftIncorporated);
     expect(card.canPlay(player)).is.true;
 
     player2.megaCredits = 4;
@@ -60,7 +60,7 @@ describe('AirRaid', function() {
     option.options[0].cb();
     player.game.deferredActions.pop()!.execute(); // Remove floater
 
-    expect(corpo.resourceCount).to.eq(0);
+    expect(stormcraftIncorporated.resourceCount).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(4);
   });

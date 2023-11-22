@@ -1,18 +1,15 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class TerralabsResearch extends Card implements ICorporationCard {
+export class TerralabsResearch extends CorporationCard {
   constructor() {
     super({
       name: CardName.TERRALABS_RESEARCH,
       tags: [Tag.SCIENCE, Tag.EARTH],
       startingMegaCredits: 14,
-      type: CardType.CORPORATION,
       cardCost: 1,
 
       metadata: {

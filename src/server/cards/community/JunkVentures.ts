@@ -1,18 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {LogHelper} from '../../LogHelper';
 import {IPlayer} from '../../IPlayer';
 
-export class JunkVentures extends Card implements ICorporationCard {
+export class JunkVentures extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.JUNK_VENTURES,
       initialActionText: 'Discard the top 3 cards of the deck',
       startingMegaCredits: 43,

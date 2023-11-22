@@ -1,7 +1,6 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -14,13 +13,12 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all} from '../Options';
 import {SpecialDesignProxy} from './SpecialDesignProxy';
 
-export class Playwrights extends Card implements ICorporationCard {
+export class Playwrights extends CorporationCard {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,
       tags: [Tag.POWER],
       startingMegaCredits: 38,
-      type: CardType.CORPORATION,
 
       behavior: {
         production: {energy: 1},

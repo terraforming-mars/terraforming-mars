@@ -1,18 +1,15 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Priority} from '../../deferredActions/DeferredAction';
 
-export class Aurorai extends Card implements ICorporationCard {
+export class Aurorai extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.AURORAI,
       tags: [Tag.MARS],
       startingMegaCredits: 33,

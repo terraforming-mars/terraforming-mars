@@ -1,17 +1,14 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
 import {all} from '../Options';
 import {Resource} from '../../../common/Resource';
 
-export class KingdomofTauraro extends Card implements ICorporationCard {
+export class KingdomofTauraro extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.KINGDOM_OF_TAURARO,
       tags: [Tag.MARS],
       startingMegaCredits: 50,

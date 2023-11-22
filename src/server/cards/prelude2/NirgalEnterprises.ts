@@ -1,17 +1,14 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
 
-export class NirgalEnterprises extends Card implements ICorporationCard {
+export class NirgalEnterprises extends CorporationCard {
   constructor() {
     super({
       name: CardName.NIRGAL_ENTERPRISES,
       tags: [Tag.POWER, Tag.PLANT, Tag.BUILDING],
       startingMegaCredits: 33,
-      type: CardType.CORPORATION,
 
       behavior: {
         production: {energy: 1, plants: 1, steel: 1},

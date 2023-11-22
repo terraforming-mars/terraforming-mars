@@ -1,18 +1,16 @@
-import {Card} from '../Card';
+import {CorporationCard} from './CorporationCard';
 import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
 export const ACTION_COST = 3;
-export class UnitedNationsMarsInitiative extends Card implements IActionCard, ICorporationCard {
+export class UnitedNationsMarsInitiative extends CorporationCard implements IActionCard, ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.UNITED_NATIONS_MARS_INITIATIVE,
       tags: [Tag.EARTH],
       startingMegaCredits: 40,

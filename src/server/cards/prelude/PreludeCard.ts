@@ -10,17 +10,18 @@ import {CardResource} from '../../../common/CardResource';
 import {IVictoryPoints} from '../../../common/cards/IVictoryPoints';
 import {GlobalParameterRequirementBonus} from '../../../common/cards/Types';
 
-export interface StaticPreludeProperties {
-    behavior?: Partial<Behavior>,
-    globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
-    metadata: ICardMetadata;
-    name: CardName;
-    tags?: Array<Tag>;
-    tilesBuilt?: Array<TileType>,
-    resourceType?: CardResource;
-    startingMegacredits?: number,
-    victoryPoints?: number | 'special' | IVictoryPoints,
-  }
+export type StaticPreludeProperties = {
+  action?: Behavior;
+  behavior?: Partial<Behavior>,
+  globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
+  metadata: ICardMetadata;
+  name: CardName;
+  tags?: Array<Tag>;
+  tilesBuilt?: Array<TileType>,
+  resourceType?: CardResource;
+  startingMegacredits?: number,
+  victoryPoints?: number | 'special' | IVictoryPoints,
+}
 
 export abstract class PreludeCard extends Card implements IPreludeCard {
   constructor(properties: StaticPreludeProperties) {
@@ -29,6 +30,7 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
       throw new Error('Cannot have a Countable for a Prelude stock MC: ' + properties.name);
     }
     const obj: StaticCardProperties = {
+      action: properties.action,
       behavior: properties.behavior,
       type: CardType.PRELUDE,
       name: properties.name,

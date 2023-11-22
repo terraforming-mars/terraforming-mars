@@ -1,16 +1,12 @@
-import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ActionCard} from '../ActionCard';
-import {ICorporationCard} from '../corporation/ICorporationCard';
 import {digit} from '../Options';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 
-export class JensonBoyleCo extends ActionCard implements IActionCard, ICorporationCard {
+export class JensonBoyleCo extends ActiveCorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.JENSON_BOYLE_CO,
       tags: [Tag.EARTH],
       startingMegaCredits: 46,

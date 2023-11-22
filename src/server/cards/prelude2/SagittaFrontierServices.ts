@@ -1,5 +1,5 @@
-import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,12 +10,11 @@ import {GainResources} from '../../deferredActions/GainResources';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 
-export class SagittaFrontierServices extends Card implements ICorporationCard {
+export class SagittaFrontierServices extends CorporationCard {
   constructor() {
     super({
       name: CardName.SAGITTA_FRONTIER_SERVICES,
       startingMegaCredits: 28,
-      type: CardType.CORPORATION,
 
       behavior: {
         production: {energy: 1, megacredits: 2},

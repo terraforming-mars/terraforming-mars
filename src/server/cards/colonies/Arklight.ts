@@ -1,22 +1,19 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Arklight extends Card implements ICorporationCard {
+export class Arklight extends CorporationCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,
       tags: [Tag.ANIMAL],
       startingMegaCredits: 45,
       resourceType: CardResource.ANIMAL,
-      type: CardType.CORPORATION,
       victoryPoints: {resourcesHere: {}, per: 2},
 
       behavior: {

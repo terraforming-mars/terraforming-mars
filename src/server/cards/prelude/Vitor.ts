@@ -1,21 +1,18 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IAward} from '../../awards/IAward';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {message} from '../../logs/MessageBuilder';
 
-export class Vitor extends Card implements ICorporationCard {
+export class Vitor extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.VITOR,
       tags: [Tag.EARTH],
       startingMegaCredits: 48, // It's 45 + 3 when this corp is played

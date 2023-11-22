@@ -1,19 +1,16 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard} from '../ICard';
 import {played} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 
-export class KuiperCooperative extends Card implements ICorporationCard, IActionCard {
+export class KuiperCooperative extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.KUIPER_COOPERATIVE,
       tags: [Tag.SPACE, Tag.SPACE],
       startingMegaCredits: 33,

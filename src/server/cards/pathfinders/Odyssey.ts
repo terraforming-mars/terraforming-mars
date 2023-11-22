@@ -1,5 +1,4 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,10 +10,9 @@ import {Size} from '../../../common/cards/render/Size';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 import {PlayableCard} from '../IProjectCard';
 
-export class Odyssey extends Card implements ICorporationCard, IActionCard {
+export class Odyssey extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ODYSSEY,
       startingMegaCredits: 33,
 

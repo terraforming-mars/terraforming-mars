@@ -1,19 +1,15 @@
-import {IActionCard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ActionCard} from '../ActionCard';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {played} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 
-export class HenkeiGenetics extends ActionCard implements IActionCard, ICorporationCard {
+export class HenkeiGenetics extends ActiveCorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.HENKEI_GENETICS,
       tags: [Tag.MICROBE],
       startingMegaCredits: 47,

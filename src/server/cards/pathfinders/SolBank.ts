@@ -1,15 +1,12 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
 
-export class SolBank extends Card implements ICorporationCard {
+export class SolBank extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.SOLBANK,
       startingMegaCredits: 40,
       resourceType: CardResource.DATA,

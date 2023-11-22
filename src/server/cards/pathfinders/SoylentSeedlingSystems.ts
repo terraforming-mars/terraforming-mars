@@ -1,19 +1,16 @@
 import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {played} from '../Options';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardResource} from '../../../common/CardResource';
 import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
 
-export class SoylentSeedlingSystems extends Card implements ICorporationCard {
+export class SoylentSeedlingSystems extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.SOYLENT_SEEDLING_SYSTEMS,
       tags: [Tag.SCIENCE, Tag.PLANT],
       startingMegaCredits: 38,

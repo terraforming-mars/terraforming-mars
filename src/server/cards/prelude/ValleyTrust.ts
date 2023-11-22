@@ -1,18 +1,15 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
-export class ValleyTrust extends Card implements ICorporationCard {
+export class ValleyTrust extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.VALLEY_TRUST,
       tags: [Tag.EARTH],
       startingMegaCredits: 37,

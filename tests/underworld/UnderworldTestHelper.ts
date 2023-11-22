@@ -17,7 +17,7 @@ export class UnderworldTestHelper {
     const candidateSpaces = selectSpace.spaces;
 
     if (ignorePlacementRestrictions) {
-      const strictlyExcavatableSpaces = UnderworldExpansion.excavatableSpaces(player, false, false);
+      const strictlyExcavatableSpaces = UnderworldExpansion.excavatableSpaces(player, false, true);
       expect(oneWayDifference(candidateSpaces, strictlyExcavatableSpaces)).is.not.empty;
     }
 

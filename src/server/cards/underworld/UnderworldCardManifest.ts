@@ -69,7 +69,7 @@ import {ManMadeVolcano} from './ManMadeVolcano';
 // import {MartianExpress} from './MartianExpress';
 // // import {MediaFrenzy} from './MediaFrenzy';
 // // import {MercenaryAssault} from './MercenaryAssault';
-// import {MicroGeodesics} from './MicroGeodesics';
+import {MicroGeodesics} from './MicroGeodesics';
 import {Microgravimetry} from './Microgravimetry';
 import {MicroprobingTechnology} from './MicroprobingTechnology';
 import {MiningMarketInsider} from './MiningMarketInsider';
@@ -186,11 +186,11 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPACE_PRIVATEERS]: {Factory: SpacePrivateers},
     [CardName.PERSONAL_SPACECRUISER]: {Factory: PersonalSpacecruiser},
     [CardName.HYPERSPACE_DRIVE_PROTOTYPE]: {Factory: HyperspaceDrivePrototype},
-    // [CardName.STAR_VEGAS]: {Factory: StarVegas},
+    // [CardName.STAR_VEGAS]: {Factory: StarVegas}, // Come back to this later. It's gonna break stuff.
     [CardName.PRIVATE_RESORTS]: {Factory: PrivateResorts},
     // // 55-63
     // [CardName.EARTHQUAKE_MACHINE]: {Factory: EarthquakeMachine},
-    // [CardName.MICRO_GEODESICS]: {Factory: MicroGeodesics},
+    [CardName.MICRO_GEODESICS]: {Factory: MicroGeodesics},
     // // [CardName.NEUTRINOGRAPH]: {Factory: Neutrinograph},
     [CardName.SOIL_EXPORT]: {Factory: SoilExport},
     [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},

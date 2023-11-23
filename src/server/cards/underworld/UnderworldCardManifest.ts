@@ -13,7 +13,7 @@ import {BehemothExcavator} from './BehemothExcavator';
 import {Casino} from './Casino';
 import {CaveCity} from './CaveCity';
 import {CentralReservoir} from './CentralReservoir';
-// import {ChemicalFactory} from './ChemicalFactory';
+import {ChemicalFactory} from './ChemicalFactory';
 // import {ClassActionLawsuit} from './ClassActionLawsuit';
 // import {CloudVortexOutpost} from './CloudVortexOutpost';
 import {CollusionStandardProject} from './CollusionStandardProject';
@@ -194,7 +194,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.NEUTRINOGRAPH]: {Factory: Neutrinograph},
     [CardName.SOIL_EXPORT]: {Factory: SoilExport},
     [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},
-    // [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},
+    [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},
     // // [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft}, // Tricky resource stuff and tricky corruption stuff.
     // // [CardName.UNDERGROUND_RESEARCH_CENTER]: {Factory: UndergroundResearchCenter}, // I want to take time to think about the tag rule.
     [CardName.PRICE_WARS]: {Factory: PriceWars},

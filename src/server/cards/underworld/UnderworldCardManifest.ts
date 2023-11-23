@@ -50,7 +50,7 @@ import {Hadesphere} from './Hadesphere';
 // import {HectateSpeditions} from './HectateSpeditions';
 import {HenkeiGenetics} from './HenkeiGenetics';
 import {HiredRaiders} from './HiredRaiders';
-// import {HyperspaceDrivePrototype} from './HyperspaceDrivePrototype';
+import {HyperspaceDrivePrototype} from './HyperspaceDrivePrototype';
 import {ImportedHeavyMachinery} from './ImportedHeavyMachinery';
 // import {InducedTremor} from './InducedTremor';
 // import {InfrastructureOverload} from './InfrastructureOverload';
@@ -185,7 +185,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.PRIVATE_MILITARY_CONTRACTOR]: {Factory: PrivateMilitaryContractor},
     [CardName.SPACE_PRIVATEERS]: {Factory: SpacePrivateers},
     [CardName.PERSONAL_SPACECRUISER]: {Factory: PersonalSpacecruiser},
-    // [CardName.HYPERSPACE_DRIVE_PROTOTYPE]: {Factory: HyperspaceDrivePrototype},
+    [CardName.HYPERSPACE_DRIVE_PROTOTYPE]: {Factory: HyperspaceDrivePrototype},
     // [CardName.STAR_VEGAS]: {Factory: StarVegas},
     [CardName.PRIVATE_RESORTS]: {Factory: PrivateResorts},
     // // 55-63

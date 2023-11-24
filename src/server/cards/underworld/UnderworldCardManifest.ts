@@ -84,7 +84,7 @@ import {OrbitalLaserDrill} from './OrbitalLaserDrill';
 // import {PatentManipulation} from './PatentManipulation';
 import {PersonalSpacecruiser} from './PersonalSpacecruiser';
 import {PlanetaryRightsBuyout} from './PlanetaryRightsBuyout';
-// import {PlantTax} from './PlantTax';
+import {PlantTax} from './PlantTax';
 import {PriceWars} from './PriceWars';
 import {PrivateInvestigator} from './PrivateInvestigator';
 import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
@@ -202,7 +202,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.ANTI_TRUST_CRACKDOWN]: {Factory: AntiTrustCrackdown},
     // [CardName.MONOPOLY]: {Factory: Monopoly},
     // [CardName.STAGED_PROTESTS]: {Factory: StagedProtests},
-    // [CardName.PLANT_TAX]: {Factory: PlantTax},
+    [CardName.PLANT_TAX]: {Factory: PlantTax},
     // [CardName.INFRASTRUCTURE_OVERLOAD]: {Factory: InfrastructureOverload},
     // [CardName.CRATER_SURVEY]: {Factory: CraterSurvey},
     // [CardName.INDUCED_TREMOR]: {Factory: InducedTremor},

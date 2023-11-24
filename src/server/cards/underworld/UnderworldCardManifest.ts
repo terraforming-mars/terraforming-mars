@@ -102,7 +102,7 @@ import {SecretResearch} from './SecretResearch';
 import {SoilExport} from './SoilExport';
 import {SpacePrivateers} from './SpacePrivateers';
 import {SpaceWargames} from './SpaceWargames';
-// import {StagedProtests} from './StagedProtests';
+import {StagedProtests} from './StagedProtests';
 // import {StandardTechnology} from './StandardTechnology';
 // import {StarVegas} from './StarVegas';
 import {StemFieldSubsidies} from './StemFieldSubsidies';
@@ -201,7 +201,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // 64-72
     [CardName.ANTI_TRUST_CRACKDOWN]: {Factory: AntiTrustCrackdown},
     // [CardName.MONOPOLY]: {Factory: Monopoly},
-    // [CardName.STAGED_PROTESTS]: {Factory: StagedProtests},
+    [CardName.STAGED_PROTESTS]: {Factory: StagedProtests},
     [CardName.PLANT_TAX]: {Factory: PlantTax},
     [CardName.INFRASTRUCTURE_OVERLOAD]: {Factory: InfrastructureOverload},
     // [CardName.CRATER_SURVEY]: {Factory: CraterSurvey},

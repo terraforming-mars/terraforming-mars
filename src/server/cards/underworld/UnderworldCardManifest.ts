@@ -53,7 +53,7 @@ import {HiredRaiders} from './HiredRaiders';
 import {HyperspaceDrivePrototype} from './HyperspaceDrivePrototype';
 import {ImportedHeavyMachinery} from './ImportedHeavyMachinery';
 // import {InducedTremor} from './InducedTremor';
-// import {InfrastructureOverload} from './InfrastructureOverload';
+import {InfrastructureOverload} from './InfrastructureOverload';
 import {InheritedFortune} from './InheritedFortune';
 // // import {IntellectualPropertyTheft} from './IntellectualPropertyTheft';
 // import {InvestigativeJournalism} from './InvestigativeJournalism';
@@ -203,7 +203,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.MONOPOLY]: {Factory: Monopoly},
     // [CardName.STAGED_PROTESTS]: {Factory: StagedProtests},
     [CardName.PLANT_TAX]: {Factory: PlantTax},
-    // [CardName.INFRASTRUCTURE_OVERLOAD]: {Factory: InfrastructureOverload},
+    [CardName.INFRASTRUCTURE_OVERLOAD]: {Factory: InfrastructureOverload},
     // [CardName.CRATER_SURVEY]: {Factory: CraterSurvey},
     // [CardName.INDUCED_TREMOR]: {Factory: InducedTremor},
     // [CardName.UNDERGROUND_HABITAT]: {Factory: UndergroundHabitat},

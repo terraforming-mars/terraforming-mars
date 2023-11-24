@@ -26,7 +26,7 @@ import {CutThroatBudgeting} from './CutThroatBudgeting';
 import {Deepnuking} from './Deepnuking';
 // import {DeepwaterDome} from './DeepwaterDome';
 // import {DemetronLabs} from './DemetronLabs';
-// import {EarthquakeMachine} from './EarthquakeMachine';
+import {EarthquakeMachine} from './EarthquakeMachine';
 import {ElectionSponsorship} from './ElectionSponsorship';
 import {ExcavateStandardProject} from './ExcavateStandardProject';
 import {ExcavatorLeasing} from './ExcavatorLeasing';
@@ -189,7 +189,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.STAR_VEGAS]: {Factory: StarVegas}, // Come back to this later. It's gonna break stuff.
     [CardName.PRIVATE_RESORTS]: {Factory: PrivateResorts},
     // // 55-63
-    // [CardName.EARTHQUAKE_MACHINE]: {Factory: EarthquakeMachine},
+    [CardName.EARTHQUAKE_MACHINE]: {Factory: EarthquakeMachine},
     [CardName.MICRO_GEODESICS]: {Factory: MicroGeodesics},
     // // [CardName.NEUTRINOGRAPH]: {Factory: Neutrinograph},
     [CardName.SOIL_EXPORT]: {Factory: SoilExport},

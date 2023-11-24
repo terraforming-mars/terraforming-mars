@@ -296,8 +296,40 @@ export default Vue.extend({
         classes.push(this.cardResource, 'card-resource-nomads');
         break;
       case CardRenderItemType.HYDROELECTRIC_RESOURCE:
-        classes.push('card-resource', 'card-resource-hydroelectric-resource');
+        classes.push(this.cardResource, 'card-resource-hydroelectric-resource');
         break;
+      case CardRenderItemType.IDENTIFY:
+        classes.push('card-identification');
+        break;
+      case CardRenderItemType.EXCAVATE:
+        classes.push('card-excavation');
+        break;
+      case CardRenderItemType.CORRUPTION:
+        classes.push(this.cardResource, 'card-resource-corruption');
+        break;
+      case CardRenderItemType.TOOL:
+        classes.push(this.cardResource, 'card-resource-tool');
+        break;
+      case CardRenderItemType.WARE:
+        classes.push(this.cardResource, 'card-resource-ware');
+        break;
+      case CardRenderItemType.SCOOP:
+        classes.push(this.cardResource, 'card-resource-scoop');
+        break;
+      case CardRenderItemType.JOURNALISM:
+        classes.push(this.cardResource, 'card-resource-journalism');
+        break;
+      case CardRenderItemType.ACTIVIST:
+        classes.push(this.cardResource, 'card-resource-activist');
+        break;
+      case CardRenderItemType.NEUTRAL_DELEGATE:
+        classes.push('card-neutral-delegate');
+        break;
+      case CardRenderItemType.UNDERGROUND_RESOURCES:
+        classes.push('card-underground-resources');
+        break;
+      case CardRenderItemType.CORRUPTION_SHIELD:
+        classes.push('card-corruption-shield');
       }
 
       if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {

@@ -20,7 +20,7 @@ import {CollusionStandardProject} from './CollusionStandardProject';
 import {ConcessionRights} from './ConcessionRights';
 import {CorporateBlackmail} from './CorporateBlackmail';
 // // import {CorporateTheft} from './CorporateTheft';
-// import {CraterSurvey} from './CraterSurvey';
+import {CraterSurvey} from './CraterSurvey';
 import {CutThroatBudgeting} from './CutThroatBudgeting';
 // import {Deepmining} from './Deepmining';
 import {Deepnuking} from './Deepnuking';
@@ -204,7 +204,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.STAGED_PROTESTS]: {Factory: StagedProtests},
     [CardName.PLANT_TAX]: {Factory: PlantTax},
     [CardName.INFRASTRUCTURE_OVERLOAD]: {Factory: InfrastructureOverload},
-    // [CardName.CRATER_SURVEY]: {Factory: CraterSurvey},
+    [CardName.CRATER_SURVEY]: {Factory: CraterSurvey},
     // [CardName.INDUCED_TREMOR]: {Factory: InducedTremor},
     // [CardName.UNDERGROUND_HABITAT]: {Factory: UndergroundHabitat},
     // [CardName.UNDERGROUND_SHELTERS]: {Factory: UndergroundShelters},

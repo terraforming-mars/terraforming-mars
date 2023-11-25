@@ -15,7 +15,7 @@ export class ChemicalFactory extends ActionCard implements IProjectCard {
 
       action: {
         spend: {plants: 1},
-        underworld: {identify: 1},
+        underworld: {excavate: 1},
       },
 
       behavior: {

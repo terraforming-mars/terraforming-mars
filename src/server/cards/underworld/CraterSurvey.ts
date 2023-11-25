@@ -25,7 +25,7 @@ export class CraterSurvey extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.data({amount: 2}).identify(4, {digit});
         }),
-        description: 'Add 2 data resources to ANOTHER card. Identify any 4 underground resources on Mars.',
+        description: 'Add 2 data resources to ANOTHER card. Identify 4 underground resources.',
       },
     });
   }

@@ -114,7 +114,7 @@ import {TunnelBoringMachine} from './TunnelBoringMachine';
 import {TunnelingOperation} from './TunnelingOperation';
 import {TunnelingSubcontractor} from './TunnelingSubcontractor';
 import {UndergroundAmusementPark} from './UndergroundAmusementPark';
-// import {UndergroundHabitat} from './UndergroundHabitat';
+import {UndergroundHabitat} from './UndergroundHabitat';
 import {UndergroundRailway} from './UndergroundRailway';
 // // import {UndergroundResearchCenter} from './UndergroundResearchCenter';
 import {UndergroundSettlement} from './UndergroundSettlement';
@@ -206,7 +206,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.INFRASTRUCTURE_OVERLOAD]: {Factory: InfrastructureOverload},
     [CardName.CRATER_SURVEY]: {Factory: CraterSurvey},
     // [CardName.INDUCED_TREMOR]: {Factory: InducedTremor},
-    // [CardName.UNDERGROUND_HABITAT]: {Factory: UndergroundHabitat},
+    [CardName.UNDERGROUND_HABITAT]: {Factory: UndergroundHabitat},
     // [CardName.UNDERGROUND_SHELTERS]: {Factory: UndergroundShelters},
     // // 73-81
     // [CardName.VOLUNTEER_MINING_INITITIVE]: {Factory: VolunteerMiningInititive},

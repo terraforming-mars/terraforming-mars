@@ -32,6 +32,6 @@ describe('ChemicalFactory', () => {
     cast(card.action(player), undefined);
     runAllActions(game);
     expect(player.plants).eq(0);
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
   });
 });

@@ -25,7 +25,7 @@ describe('Counter', () => {
       venusNextExtension: true,
       aresExtension: true,
       aresHazards: false});
-    fake = fakeCard({});
+    fake = fakeCard();
   });
 
   it('numbers', () => {
@@ -242,7 +242,7 @@ describe('Counter for Moon', () => {
 
   beforeEach(() => {
     [game, player] = testGame(3, {moonExpansion: true});
-    fake = fakeCard({});
+    fake = fakeCard();
   });
 
   it('colony rate', () => {
@@ -332,7 +332,7 @@ describe('Counter for Underworld', () => {
 
   beforeEach(() => {
     [game, player, player2] = testGame(3, {underworldExpansion: true});
-    fake = fakeCard({});
+    fake = fakeCard();
   });
 
   it('corruption', () => {

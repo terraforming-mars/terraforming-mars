@@ -20,7 +20,7 @@ describe('StemFieldSubsidies', () => {
   });
 
   it('onCardPlayed, no tags', () => {
-    card.onCardPlayed(player, fakeCard({}));
+    card.onCardPlayed(player, fakeCard());
 
     runAllActions(game);
 

@@ -1,5 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 
 // import {AeronGenomics} from './AeronGenomics';
 import {AntiTrustCrackdown} from './AntiTrustCrackdown';
@@ -31,6 +32,7 @@ import {ElectionSponsorship} from './ElectionSponsorship';
 import {ExcavateStandardProject} from './ExcavateStandardProject';
 import {ExcavatorLeasing} from './ExcavatorLeasing';
 // import {ExpeditionVehicles} from './ExpeditionVehicles';
+import {FairTradeComplaint} from './FairTradeComplaint';
 import {FabricatedScandal} from './FabricatedScandal';
 import {ForestTunnels} from './ForestTunnels';
 import {FreeTradePort} from './FreeTradePort';
@@ -63,15 +65,18 @@ import {JensonBoyleCo} from './JensonBoyleCo';
 // // import {Keplertec} from './Keplertec';
 import {KingdomofTauraro} from './KingdomofTauraro';
 // import {LaborTrafficking} from './LaborTrafficking';
+// import {LaggingRegulation} from './LaggingRegulation';
 import {Landfill} from './Landfill';
 import {LobbyingNetwork} from './LobbyingNetwork';
 import {ManMadeVolcano} from './ManMadeVolcano';
 // import {MartianExpress} from './MartianExpress';
 // // import {MediaFrenzy} from './MediaFrenzy';
+// import {MediaStir} from './MediaStir';
 // // import {MercenaryAssault} from './MercenaryAssault';
 import {MicroGeodesics} from './MicroGeodesics';
 import {Microgravimetry} from './Microgravimetry';
 import {MicroprobingTechnology} from './MicroprobingTechnology';
+// import {MigrationUnderground} from './MigrationUnderground';
 import {MiningMarketInsider} from './MiningMarketInsider';
 // import {Monopoly} from './Monopoly';
 // import {Nanofoundry} from './Nanofoundry';
@@ -97,6 +102,7 @@ import {RobotMoles} from './RobotMoles';
 import {Scapegoat} from './Scapegoat';
 import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 import {SecretResearch} from './SecretResearch';
+// import {SeismicPredictions} from './SeismicPredictions';
 // import {ServerSabotage} from './ServerSabotage';
 // // import {SocialEngineering} from './SocialEngineering';
 import {SoilExport} from './SoilExport';
@@ -277,6 +283,14 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   standardProjects: {
     [CardName.EXCAVATE_STANDARD_PROJECT]: {Factory: ExcavateStandardProject},
     [CardName.COLLUSION_STANDARD_PROJECT]: {Factory: CollusionStandardProject},
+  },
+
+  globalEvents: {
+    // [GlobalEventName.LAGGING_REGULATION]: {Factory: LaggingRegulation},
+    // [GlobalEventName.MIGRATION_UNDERGROUND]: {Factory: MigrationUnderground, negative: true},
+    [GlobalEventName.FAIR_TRADE_COMPLAINT]: {Factory: FairTradeComplaint, negative: true},
+    // [GlobalEventName.SEISMIC_PREDICTIONS]: {Factory: SeismicPredictions, negative: true},
+    // [GlobalEventName.MEDIA_STIR]: {Factory: MediaStir, negative: true},
   },
 });
 

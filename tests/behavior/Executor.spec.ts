@@ -54,7 +54,7 @@ describe('Executor', () => {
   beforeEach(() => {
     [game, player, player2, player3] = testGame(3, {venusNextExtension: true, underworldExpansion: true});
 
-    fake = fakeCard({});
+    fake = fakeCard();
     executor = new Executor();
   });
 

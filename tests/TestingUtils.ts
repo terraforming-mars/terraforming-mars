@@ -169,7 +169,7 @@ class FakeCard implements IProjectCard {
   public resourceCount = 0;
 }
 
-export function fakeCard(attrs: Partial<IProjectCard>): IProjectCard {
+export function fakeCard(attrs: Partial<IProjectCard> = {}): IProjectCard {
   const card = new FakeCard();
   Object.assign(card, attrs);
   return card;

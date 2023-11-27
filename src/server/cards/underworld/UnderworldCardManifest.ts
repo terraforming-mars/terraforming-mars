@@ -71,7 +71,7 @@ import {LobbyingNetwork} from './LobbyingNetwork';
 import {ManMadeVolcano} from './ManMadeVolcano';
 // import {MartianExpress} from './MartianExpress';
 // // import {MediaFrenzy} from './MediaFrenzy';
-// import {MediaStir} from './MediaStir';
+import {MediaStir} from './MediaStir';
 // // import {MercenaryAssault} from './MercenaryAssault';
 import {MicroGeodesics} from './MicroGeodesics';
 import {Microgravimetry} from './Microgravimetry';
@@ -290,7 +290,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [GlobalEventName.MIGRATION_UNDERGROUND]: {Factory: MigrationUnderground, negative: true},
     [GlobalEventName.FAIR_TRADE_COMPLAINT]: {Factory: FairTradeComplaint, negative: true},
     // [GlobalEventName.SEISMIC_PREDICTIONS]: {Factory: SeismicPredictions, negative: true},
-    // [GlobalEventName.MEDIA_STIR]: {Factory: MediaStir, negative: true},
+    [GlobalEventName.MEDIA_STIR]: {Factory: MediaStir, negative: true},
   },
 });
 

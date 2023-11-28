@@ -65,7 +65,7 @@ import {JensonBoyleCo} from './JensonBoyleCo';
 // // import {Keplertec} from './Keplertec';
 import {KingdomofTauraro} from './KingdomofTauraro';
 // import {LaborTrafficking} from './LaborTrafficking';
-// import {LaggingRegulation} from './LaggingRegulation';
+import {LaggingRegulation} from './LaggingRegulation';
 import {Landfill} from './Landfill';
 import {LobbyingNetwork} from './LobbyingNetwork';
 import {ManMadeVolcano} from './ManMadeVolcano';
@@ -286,7 +286,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   },
 
   globalEvents: {
-    // [GlobalEventName.LAGGING_REGULATION]: {Factory: LaggingRegulation},
+    [GlobalEventName.LAGGING_REGULATION]: {Factory: LaggingRegulation},
     [GlobalEventName.MIGRATION_UNDERGROUND]: {Factory: MigrationUnderground},
     [GlobalEventName.FAIR_TRADE_COMPLAINT]: {Factory: FairTradeComplaint, negative: true},
     // [GlobalEventName.SEISMIC_PREDICTIONS]: {Factory: SeismicPredictions, negative: true},

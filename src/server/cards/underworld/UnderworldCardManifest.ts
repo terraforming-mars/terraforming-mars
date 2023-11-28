@@ -76,7 +76,7 @@ import {MediaStir} from './MediaStir';
 import {MicroGeodesics} from './MicroGeodesics';
 import {Microgravimetry} from './Microgravimetry';
 import {MicroprobingTechnology} from './MicroprobingTechnology';
-// import {MigrationUnderground} from './MigrationUnderground';
+import {MigrationUnderground} from './MigrationUnderground';
 import {MiningMarketInsider} from './MiningMarketInsider';
 // import {Monopoly} from './Monopoly';
 // import {Nanofoundry} from './Nanofoundry';
@@ -287,7 +287,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
 
   globalEvents: {
     // [GlobalEventName.LAGGING_REGULATION]: {Factory: LaggingRegulation},
-    // [GlobalEventName.MIGRATION_UNDERGROUND]: {Factory: MigrationUnderground, negative: true},
+    [GlobalEventName.MIGRATION_UNDERGROUND]: {Factory: MigrationUnderground},
     [GlobalEventName.FAIR_TRADE_COMPLAINT]: {Factory: FairTradeComplaint, negative: true},
     // [GlobalEventName.SEISMIC_PREDICTIONS]: {Factory: SeismicPredictions, negative: true},
     [GlobalEventName.MEDIA_STIR]: {Factory: MediaStir, negative: true},

@@ -102,7 +102,7 @@ import {RobotMoles} from './RobotMoles';
 import {Scapegoat} from './Scapegoat';
 import {SearchforLifeUnderground} from './SearchforLifeUnderground';
 import {SecretResearch} from './SecretResearch';
-// import {SeismicPredictions} from './SeismicPredictions';
+import {SeismicPredictions} from './SeismicPredictions';
 // import {ServerSabotage} from './ServerSabotage';
 // // import {SocialEngineering} from './SocialEngineering';
 import {SoilExport} from './SoilExport';
@@ -289,8 +289,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [GlobalEventName.LAGGING_REGULATION]: {Factory: LaggingRegulation},
     [GlobalEventName.MIGRATION_UNDERGROUND]: {Factory: MigrationUnderground},
     [GlobalEventName.FAIR_TRADE_COMPLAINT]: {Factory: FairTradeComplaint, negative: true},
-    // [GlobalEventName.SEISMIC_PREDICTIONS]: {Factory: SeismicPredictions, negative: true},
+    [GlobalEventName.SEISMIC_PREDICTIONS]: {Factory: SeismicPredictions, negative: true},
     [GlobalEventName.MEDIA_STIR]: {Factory: MediaStir, negative: true},
   },
 });
-

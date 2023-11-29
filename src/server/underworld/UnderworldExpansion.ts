@@ -355,19 +355,19 @@ export class UnderworldExpansion {
     }
   }
 
-  //   static removeAllUnclaimedTokens(game: IGame) {
-  //     if (game.underworldData === undefined) {
-  //       return;
-  //     }
-  //     for (const space of UnderworldExpansion.identifiedSpaces(game)) {
-  //       if (space.undergroundResources !== undefined && space.excavator === undefined) {
-  //         game.underworldData.tokens.push(space.undergroundResources);
-  //         space.undergroundResources = undefined;
-  //       }
-  //     }
-  //     inplaceShuffle(game.underworldData.tokens, game.rng);
-  //     game.log('All unidentified underground resources have been shuffled back into the pile.');
-  //   }
+  static removeAllUnclaimedTokens(game: IGame) {
+    if (game.underworldData === undefined) {
+      return;
+    }
+    for (const space of UnderworldExpansion.identifiedSpaces(game)) {
+      if (space.undergroundResources !== undefined && space.excavator === undefined) {
+        game.underworldData.tokens.push(space.undergroundResources);
+        space.undergroundResources = undefined;
+      }
+    }
+    inplaceShuffle(game.underworldData.tokens, game.rng);
+    game.log('All unidentified underground resources have been shuffled back into the pile.');
+  }
 
   //   static removeUnclaimedToken(game: IGame, space: Space) {
   //     if (game.underworldData === undefined) {

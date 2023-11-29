@@ -38,7 +38,9 @@ export class Urbanist implements IAward {
     let score = 0;
     const adjacent = player.game.board.getAdjacentSpaces(space);
     for (const adj of adjacent) {
-      if (adj.tile?.tileType === TileType.GREENERY) score++;
+      if (Board.isGreenerySpace(adj)) {
+        score++;
+      }
     }
     return score;
   }

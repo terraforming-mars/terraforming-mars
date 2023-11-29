@@ -34,7 +34,7 @@ export class HermeticOrderofMars extends Card implements IProjectCard {
   }
 
   private hasTile(space: Space): boolean {
-    return space.tile !== undefined && !isHazardTileType(space.tile.tileType);
+    return space.spaceType !== SpaceType.RESTRICTED && space.tile !== undefined && !isHazardTileType(space.tile.tileType);
   }
 
   public override bespokePlay(player: IPlayer) {

@@ -95,7 +95,7 @@ import {PrivateInvestigator} from './PrivateInvestigator';
 import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
 import {PrivateResorts} from './PrivateResorts';
 // import {Prospecting} from './Prospecting';
-// import {PublicSpaceline} from './PublicSpaceline';
+import {PublicSpaceline} from './PublicSpaceline';
 // import {RecklessDetonation} from './RecklessDetonation';
 // import {ResearchDevelopmentHub} from './ResearchDevelopmentHub';
 import {RobotMoles} from './RobotMoles';
@@ -219,7 +219,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.NANOFOUNDRY]: {Factory: Nanofoundry},
     [CardName.BATTERY_FACTORY]: {Factory: BatteryFactory},
     // [CardName.VOLTAIC_METALLURGY]: {Factory: VoltaicMetallurgy},
-    // [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},
+    [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},
     // [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},
     // [CardName.EXPEDITION_VEHICLES]: {Factory: ExpeditionVehicles},
     [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},

@@ -79,7 +79,7 @@ import {MicroprobingTechnology} from './MicroprobingTechnology';
 import {MigrationUnderground} from './MigrationUnderground';
 import {MiningMarketInsider} from './MiningMarketInsider';
 // import {Monopoly} from './Monopoly';
-// import {Nanofoundry} from './Nanofoundry';
+import {Nanofoundry} from './Nanofoundry';
 import {NarrativeSpin} from './NarrativeSpin';
 // // import {Neutrinograph} from './Neutrinograph';
 import {Nightclubs} from './Nightclubs';
@@ -216,7 +216,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.UNDERGROUND_SHELTERS]: {Factory: UndergroundShelters},
     // // 73-81
     // [CardName.VOLUNTEER_MINING_INITITIVE]: {Factory: VolunteerMiningInititive},
-    // [CardName.NANOFOUNDRY]: {Factory: Nanofoundry},
+    [CardName.NANOFOUNDRY]: {Factory: Nanofoundry},
     // [CardName.BATTERY_FACTORY]: {Factory: BatteryFactory},
     // [CardName.VOLTAIC_METALLURGY]: {Factory: VoltaicMetallurgy},
     // [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},

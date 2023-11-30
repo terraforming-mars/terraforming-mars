@@ -931,7 +931,7 @@ export enum CardName {
     INDUCED_TREMOR = 'Induced Tremor',
     UNDERGROUND_HABITAT = 'Underground Habitat',
     UNDERGROUND_SHELTERS = 'Underground Shelters',
-    VOLUNTEER_MINING_INITITIVE = 'Volunteer Mining Inititive',
+    VOLUNTEER_MINING_INITIATIVE = 'Volunteer Mining Initiative',
     NANOFOUNDRY = 'Nanofoundry',
     BATTERY_FACTORY = 'Battery Factory',
     VOLTAIC_METALLURGY = 'Voltaic Metallurgy',

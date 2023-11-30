@@ -19,7 +19,6 @@
 
     "Victory points breakdown after": "Seierspoengaufschlüsselung nach ",
     "Victory points details": "Detaljer om seierspoeng",
-    "Victory points details for": "Detaljer for Seierspoeng",
     "Victory Points": "Seierspoeng",
     "Turmoil Points": "Omveltnings-poeng",
     "generations": "Generasjoner",
@@ -43,7 +42,11 @@
     "Final situation on the board": "Endelig situasjon på spillebrettet",
     "Final game log": "Logg over avsluttet spill",
     
-    
+    "Most tags on the earth track": "Flest symboler på jordsporet",
+    "Most tags on the venus track": "Flest symboler på Venus-sporet",
+    "Most tags on the jovian track": "Flest symboler på Jupiter-sporet",
+    "Most tags on the mars track": "Flest symboler på Mars-sporet",
+    "Most tags on the moon track": "Flest symboler på Måne-sporet",
     "1st place for": "1. plass for",
     "2nd place for": "2. plass for",
     "award (funded by": "utmerkelse (finansiert av",
@@ -57,10 +60,10 @@
 
     "Actions taken this game": "Handlinger i dette spillet",
     "Escape Velocity penalty": "Minuspoeng for Unnslipningshastighet (Escape Velocity)",
-    "Download game log": "Spielprotokoll herunterladen",
+    "Download game log": "Last ned spillelogg",
 	
-    "1st place for Landlord award": "1. Platz für Grundbesitzer",
-    "1st place for Banker award": "1. Platz für Banker",
+    "1st place for Landlord award": "1. plass for Grunneier-utmerkelse",
+    "1st place for Banker award": "1. plass for ",
     "1st place for Scientist award": "1. Platz für Forschung",
     "1st place for Thermalist award": "1. Platz für Wärmetechnicker",
     "1st place for Miner award": "1. Platz für Bergmann",

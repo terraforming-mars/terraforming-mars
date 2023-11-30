@@ -4,13 +4,13 @@
   "FAN NOTE: This will apply to Venus but not The Moon.": "Fan notat: Dette gjelder Venus, men ikke Månen.",
   
   "Martian Lumber Corp": "Mars Trelastselskap",
-  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "Effekt: Når du spiller et bygningssymbol, kan planter brukes som 3 M€ hver.",
+  "When playing a building tag, plants may be used as 3 M€ each.": "Effekt: Når du spiller et bygningssymbol, kan planter brukes som 3 M€ hver.",
   "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Krever at du har 2 skogområder. Øk planteproduksjonen med 1 steg.",
   
   "Solar Logistics": "Sol-logistikk",
-  "Effect: When you play an Earth tag, you pay 2 M€ less.": "Effekt: Når du spiller et Jord-symbol, betaler du 2 M€ mindre.",
-  "Effect: When any player plays a space event, draw a card.": "Effekt: Når en spiller spiller en rom-hendelse, trekker du et kort.",
-  "Gain 2 titanium.": "Få 2 titan.",
+  "When you play an Earth tag, you pay 2 M€ less.": "Effekt: Når du spiller et Jord-symbol, betaler du 2 M€ mindre.",
+  "When any player plays a space event, draw a card.": "Effekt: Når en spiller spiller en rom-hendelse, trekker du et kort.",
+  "Gain 2 titanium.": "Få 2 titanium.",
 
   "Deimos Down:promo": "Deimos Ned",
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Øk temperaturen med 3 trinn og få 4 stål. Denne brikken kan ikke plasseres inntil by-brikker. Fjern opptil 6 planter fra en spiller.",
@@ -24,18 +24,18 @@
   "Requires 4% oxygen.": "Krever 4% oksygen.",
   
   "Neptunian Power Consultants": "Neptunianske kraftkonsulenter",
-  "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "Effekt: Når en havbrikke er plassert, kan du betale 5 M€ (stål kan brukes) for å øke energiproduksjonen med 1 steg og legge til 1 vannkraftressurs på dette kortet.",
+  "When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "Effekt: Når en havbrikke er plassert, kan du betale 5 M€ (stål kan brukes) for å øke energiproduksjonen med 1 steg og legge til 1 vannkraftressurs på dette kortet.",
   "1 VP per hydroelectric resource on this card": "1 SP per vannkraftressurs på dette kortet",
   
   "Mars Nomads": "Mars-nomader",
   "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "Handling: FLYTT NOMADENE til et tilstøtende, ikke-reservert tomt område og få PLASSERINGSBONUS som om du plasserte en spesialbrikke der. Ingen brikker kan plasseres på Nomade-området.",
-  "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "PLASSER NOMADENE på et ikke-reservert, tomt område på spillebrettet.",
+  "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "PLASSER NOMADENE på et tomt område på spillebrettet som ikke er reservert.",
   
   "Kaguya Tech": "Kaguya Teknologi",
   "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Øk M€ produksjonen med 2 steg. Trekk 1 kort. Fjern 1 av dine skogområder (påvirker ikke oksygen). Plasser en by-brikke der, uavhengig av plasseringsregler. Få plasseringsbonuser som vanlig.",
   
   "Homeostasis Bureau": "Homeostasebyrået",
-  "Effect: When you raise the temperature, gain 3 M€.": "Effekt: Når du øker temperaturen, få 3 M€.",
+  "When you raise the temperature, gain 3 M€.": "Effekt: Når du øker temperaturen, få 3 M€.",
   "Increase your heat production 2 steps.": "Øk din varmeproduksjon med 2 steg.",
   
   "Hermetic Order of Mars": "Den hermetiske orden av Mars",
@@ -49,8 +49,8 @@
   "Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.": "Øk din stålproduksjon med 1 steg. Kopier produksjonsboksene til 2 av dine andre kort med bygningssymboler.",
   
   "Carbon Nanosystems": "Karbon-nanosystemer",
-  "Effect: When you play a science tag, including this, add a graphene resource here.": "Effekt: Når du spiller et vitenskapssymbol, inkludert dette, legg til en grafen-ressurs her.",
-  "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "Effekt: Når du spiller et rom- eller bygningssymbol, kan grafen brukes som 4 M€ hver.",
+  "When you play a science tag, including this, add a graphene resource here.": "Effekt: Når du spiller et vitenskapssymbol, inkludert dette, legg til en grafen-ressurs her.",
+  "When playing a space or city tag, graphenes may be used as 4 M€ each.": "Effekt: Når du spiller et rom- eller bygningssymbol, kan grafen brukes som 4 M€ hver.",
 
   "Established Methods": "",
   
@@ -64,27 +64,27 @@
   "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Handling: Bruk 3 varme for å få enten 4 M€ eller 2 planter.",
   
   "Supercapacitors": "Superkondensatorer",
-  "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "Effekt: Å KONVERTERE ENERGI TIL VARME UNDER PRODUKSJON ER VALGFRI FOR HVER ENERGIRESSURS.",
+  "CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "Effekt: Å KONVERTERE ENERGI TIL VARME UNDER PRODUKSJON ER VALGFRI FOR HVER ENERGIRESSURS.",
   "Increase M€ production 1 step.": "Øk M€ produksjonen med 1 steg.",
   
-  "Robot Pollinators": "Robotpollinatorer",
+  "Robot Pollinators": "Robotbestøvere",
   "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Krever 4% oksygen. Øk din planteproduksjon med 1 steg. Få 1 plante for hvert plantesymbol du har.",
   
   "16 Psyche": "16 Psyche",
-  "Increase titanium production 2 steps. Gain 3 titanium.": "Øk titanproduksjonen med 2 steg. Få 3 titan.",
+  "Increase titanium production 2 steps. Gain 3 titanium.": "Øk titanproduksjonen med 2 steg. Få 3 titanium.",
   
   "Comet Aiming": "Kometstyring",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Handling: Bruk 1 titan for å legge til 1 asteroideressurs på ET KORT.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Handling: Bruk 1 titanium for å legge til 1 asteroideressurs på ET KORT.",
   "Action: Remove 1 asteroid here to place an ocean.": "Handling: Fjern 1 asteroideressurs her for å plassere en havbrikke.",
 
   "Cutting Edge Technology": "Spydspissteknologi",
-  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Effekt: Når du spiller et kort med et krav, betaler du 2 M€ mindre for det.",
+  "When playing a card with a requirement, you pay 2 M€ less for it.": "Effekt: Når du spiller et kort med et krav, betaler du 2 M€ mindre for det.",
 
   "Crash Site Cleanup": "Rydding av krasjsted",
-  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Krever at en spiller fjernet EN ANNEN SPILLERs planter denne generasjonen. Få 1 titan eller 2 stål.",
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Krever at en spiller fjernet EN ANNEN SPILLERs planter denne generasjonen. Få 1 titanium eller 2 stål.",
 
   "Directed Impactors": "Styrte nedslagsobjekter",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Handling: Bruk 6 M€ for å legge til 1 asteroideressurs på ET KORT (titan kan brukes til å betale for dette).",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Handling: Bruk 6 M€ for å legge til 1 asteroideressurs på ET VALGFRITT KORT (titanium kan brukes til å betale for dette)",
   "Action: Remove 1 asteroid here to raise temperature 1 step.": "Handling: Fjern 1 asteroideressurs her for å øke temperaturen med 1 trinn.",
 
   "Field-Capped City": "Feltkappet by",
@@ -107,12 +107,12 @@
   "Action: Add a microbe or animal to ANOTHER card.": "Handling: Legg til en mikrobe eller et dyr på ET ANNET KORT.",
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Få 3 planter. Øk temperaturen med 1 trinn og plasser 1 havbrikke.",
 
-  "Diversity Support": "Unterstützung der Vielfalt",
-  "9 Resource types": "9 Ressource-Typen",
-  "Requires that you have 9 different types of resources. Gain 1 TR.": "Erfordert, dass du 9 verschiedene Typen von Ressourcen besitzt. Erhalte 1 TV.)",
+  "Diversity Support": "Mangfoldsstøtte",
+  "9 Resource types": "9 ressurstyper",
+  "Requires that you have 9 different types of resources. Gain 1 TR.": "Krever at du har 9 forskjellige typer ressurser. Få 1 TR.",
 
-  "Topsoil Contract": "Topsoil-Vertrag",
-  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "Effekt: Wenn IRGENDEINE deiner Karten 1 Mikrobe erhält, erhalte zusätzlich 1 M€.",
+  "Topsoil Contract": "Toppjordskontrakt",
+  "When you gain a microbe to ANY CARD, also gain 1 M€.": "Effekt: Når du får en mikrobe på ET KORT, få også 1 M€.",
   "Gain 3 plants.": "Erhalte 3 Pflanzen.",
 
   "Imported Nutrients": "Importerte næringsstoffer",
@@ -124,7 +124,6 @@
   "Decrease your energy production 1 step. 1VP per asteroid on this card.": "Senke deine Energie-Produktion um 1. 1 SP für jeden Asteroiden auf dieser Karte.",
 
   "Jovian Embassy": "Jovian Ambassade",
-  "Raise your TR 1 step.": "Øk din TR 1 steg",
 
   "Sub-Crust Measurements": "Underjordiske målinger",
   "Action: Draw a card.": "Handling: Trekk et kort.",
@@ -134,7 +133,7 @@
   "Lose 2 plants. Increase your M€ production 2 steps.": "Mist 2 planter. Øk din M€ produksjon med 2 steg.",
 
   "Meat Industry": "Kjøttindustri",
-  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Effekt: Når du får et dyr på hvilket som helst kort, få 2 M€.",
+  "When you gain an animal to ANY CARD, gain 2 M€.": "Effekt: Når du får et dyr på hvilket som helst kort, få 2 M€.",
 
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen TV um 3 und plaziere dieses Plättchen.",
 
@@ -153,13 +152,13 @@
   "1VP for each 2 asteroids on this card.": "1 SP für jeden zweiten Asteroiden auf dieser Karte.",
 
   "Advertising": "Werbung",
-  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Effekt: Wenn du eine Karte mit Basiskosten von 20 M€ oder mehr spielst, erhöhe deine M€-Produktion um 1.",
+  "When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Effekt: Wenn du eine Karte mit Basiskosten von 20 M€ oder mehr spielst, erhöhe deine M€-Produktion um 1.",
 
   "Project Inspection": "Projektinspektion",
   "Use a card action that has been used this generation.": "Führe eine Karten-Aktion aus, die in dieser Generation bereits ausgeführt wurde.",
 
   "Rego Plastics": "Rego-Plastiken",
-  "Effect: Your steel resources are worth 1 M€ extra.": "Effekt: Deine Stahl-Ressourcen sind 1 M€ mehr wert.",
+  "Your steel resources are worth 1 M€ extra.": "Effekt: Deine Stahl-Ressourcen sind 1 M€ mehr wert.",
 
   "Interplanetary Trade": "Interplanetarer Handel",
   "Increase your M€ production 1 step per different tag you have in play, including this.": "Erhöhe deine M€-Produktion um 1 für jedes unterschiedliche Symbol, das du besitzt (inklusive diesem).",
@@ -173,7 +172,7 @@
 
   "Self-replicating Robots": "Selbstreplizierende Roboter",
   "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "AKTION: Decke und spiele eine WELTRAUM- oder GEBÄUDE-KARTE aus deiner Hand und platziere 2 Ressourcen auf sie ODER verdoppele die Ressourcen auf dieser Karte.",
-  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Effekt: Diese Karte darf wie von der Hand gespielt werden. Ihre Kosten sind um die Anzahl der auf ihr liegenden Ressourcen reduziert.",
+  "Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Effekt: Diese Karte darf wie von der Hand gespielt werden. Ihre Kosten sind um die Anzahl der auf ihr liegenden Ressourcen reduziert.",
 
   "Dusk Laser Mining": "Dämmerungs-Laser-Bergbau",
   "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Erfordert 2 Wissenschaftssymbole. Senke deine Energie-Produktion um 1 und erhöhe deine Titan-Produktion um 1. Erhalte 4 Titan.",
@@ -182,7 +181,7 @@
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "AKTION: Zahle einen beliebigen Betrag an Energie, um dieselbe Anzahl an Karten zu ziehen. NEHME 1 KARTE IN DEINE HAND AUF UND WIRF DIE RESTLICHEN KARTEN AB.",
 
   "Mercurian Alloys": "Merkur-Legierungen",
-  "Effect: Your titanium resources are worth 1 M€ extra.": "Effekt: Deine Titan-Ressourcen sind 1 M€ mehr wert.",
+  "Your titanium resources are worth 1 M€ extra.": "Effekt: Deine Titan-Ressourcen sind 1 M€ mehr wert.",
 
   "Energy Market": "Energiemarkt",
   "Action: Spend 2X M€ to gain X energy.": "AKTION: Zahle 2X M€, um X Energie zu erhalten.",
@@ -201,7 +200,6 @@
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deine TV um 3.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Erfordert 8 Ozeane. 1 SP für jedes Tier auf dieser Karte.",
-  "Requires 2 science tags.": "Erfordert 2 Wissenschaftssymbole.",
   "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "AKTION: Zahle 2X M€, um X Energie zu erhalten oder senke deine Energie-Produktion um 1, um 8 M€ zu erhalten.",
 
   "Bactoviral Research": "Baktovirale Forschung",

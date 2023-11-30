@@ -12,7 +12,7 @@
 	"Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": "Krever 3 hav. Senk din M€-produksjon med 1 og en spillers varmeproduksjon med 1. Øk din planteproduksjon med 2.",
 
 	"Search For Life": "Søken etter liv",
-	"Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "Handling: Betal 1 M€ for å vise det øverste kortet i kortstokken. Hvis det kortet har et mikrobesymbol, legg til en vitenskapsressurs her.",
+	"Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "Betal 1 M€ for å vise det øverste kortet i kortstokken. Hvis det kortet har et mikrobesymbol, legg til en vitenskapsressurs her.",
 	"3 VPs if you have one or more science resources here.": "3 SP hvis du har en eller flere vitenskapsressurser her.",
 
 	"Oxygen must be 6% or less.": "Oksygen må være 6% eller mindre.",
@@ -46,10 +46,10 @@
 	"Raise Venus 2 steps. Draw 2 Venus cards from the deck.": "Øk Venus 2 steg. Trekk 2 Venus kort fra kortstokken.",
 
 	"Inventors' Guild": "Oppfinnerlaug",
-	"Action: Look at the top card and either buy it or discard it": "Handling: Se på det øverste kortet i kortstokken og enten kjøp det eller kast det.",
+	"Look at the top card and either buy it or discard it": "Se på det øverste kortet i kortstokken og enten kjøp det eller kast det.",
 
 	"Martian Rails": "Togbane på Mars",
-	"Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Handling: Betal 1 energi for å få 1 M€ per by PÅ MARS.",
+	"Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Betal 1 energi for å få 1 M€ per by PÅ MARS.",
 
 	"Capital": "Hovedstad",
 	"2 Oceans": "2 hav",
@@ -70,18 +70,18 @@
 	"Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Øk temperatur 2 steg og få 4 titanium. Fjern opp til 4 planter fra en spiller.",
 
 	"Water Import From Europa": "Vannimport fra Europa",
-	"Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "Handling: Betal 12 M€ for å plassere en hav-brikke. TITANIUM KAN BLI BRUKT som om du spiller et kort med romsymbol.",
+	"Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "Betal 12 M€ for å plassere en hav-brikke. TITANIUM KAN BLI BRUKT som om du spiller et kort med romsymbol.",
 	"1 VP for each Jovian tag you have.": "1 SP for hvert Jupiter symbol du har.",
 
 	"Space Elevator": "Romheis",
-	"Action: Spend 1 steel to gain 5 M€.": "Handling: Betal 1 stål, for å få 5 M€.",
+	"Spend 1 steel to gain 5 M€.": "Betal 1 stål, for å få 5 M€.",
 	"Increase your titanium production 1 step.": "Øk titanium-produksjonen din med 1 steg.",
 
 	"Development Center": "Utviklingssenter",
-	"Action: Spend 1 energy to draw a card.": "Handling: Bruk 1 energi for å trekke et kort.",
+	"Spend 1 energy to draw a card.": "Bruk 1 energi for å trekke et kort.",
 
 	"Equatorial Magnetizer": "Ekvatorial magnetisator",
-	"Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "Handling: Reduser din energiproduksjon med 1 steg for å øke din terraforming-vurdering med 1 steg.",
+	"Decrease your energy production 1 step to increase your terraform rating 1 step.": "Reduser din energiproduksjon med 1 steg for å øke din terraforming-vurdering med 1 steg.",
 
 	"Domed Crater": "Kuppelkrater",
 	"Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Oksygen må være 7% eller mindre. Få 3 planter. Plasser en by-brikke. Reduser energi-produksjonen din med 1 steg og øk M€-produksjonen din med 3 steg.",
@@ -110,7 +110,7 @@
 	"It must be -12 C or colder to play. Gain 1 plant.": "Temperatur må være -12 °C eller kaldere. Få 1 plante.",
 
 	"Predators": "Rovdyr",
-	"Action: Remove 1 animal from any card and add it to this card.": "Handling: Fjern 1 dyr fra et kort og legg det til på dette kortet.",
+	"Remove 1 animal from any card and add it to this card.": "Fjern 1 dyr fra et kort og legg det til på dette kortet.",
 	"1 VP per animal on this card.": "1 SP per dyr på dette kortet.",
 	"Requires 11% oxygen.": "Krever 11% oksygen.",
 
@@ -124,7 +124,7 @@
 	"Requires that you have 5 science tags.": "Krever at du har 5 vitenskapssymboler.",
 
 	"Security Fleet": "Sikkerhetsflåte",
-	"Action: Spend 1 titanium to add 1 fighter resource to this card.": "Handling: Bruk 1 titanium for å legge til 1 jagerfly på dette kortet.",
+	"Spend 1 titanium to add 1 fighter resource to this card.": "Bruk 1 titanium for å legge til 1 jagerfly på dette kortet.",
 	"1 VP for each fighter resource on this card.": "1 SP per jagerfly på dette kortet.",
 
 	"Cupola City": "Kuppelby",
@@ -140,16 +140,16 @@
 	"Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Plasser en by-brikke. Reduser din energiproduksjon 2 steg og øk din stålproduksjon 2 steg.",
 
 	"Regolith Eaters": "Regolitt-spisere",
-	"Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Handling: Legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
-	"Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "Handling: Fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
+	"Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
+	"Remove 2 microbes from this card to raise oxygen level 1 step.": "Fjern 2 mikrober fra dette kortet for å øke oksygen-nivået 1 steg.",
 
 	"GHG Producing Bacteria": "CO₂ produserende bakterier",
-	"Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Handling: Legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober for å øke temperaturen 1 steg.",
-	"Action: Remove 2 microbes to raise temperature 1 step.": "Handling: Fjern 2 mikrober for å øke temperaturen 1 steg.",
+	"Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober for å øke temperaturen 1 steg.",
+	"Remove 2 microbes to raise temperature 1 step.": "Fjern 2 mikrober for å øke temperaturen 1 steg.",
 	"Requires 4% oxygen.": "Krever 4% oksygen.",
 
 	"Ants": "Maur",
-	"Action: Remove 1 microbe from any card to add 1 to this card.": "Handling: Fjern 1 mikrobe fra et kort for å legge til 1 på dette kortet.",
+	"Remove 1 microbe from any card to add 1 to this card.": "Fjern 1 mikrobe fra et kort for å legge til 1 på dette kortet.",
 	"1 VP per 2 microbes on this card.": "1 SP per 2 mikrober på dette kortet.",
 
 	"Release of Inert Gases": "Frigjøring av inerte gasser",
@@ -192,7 +192,7 @@
 	"Increase your plant production 1 step.": "Øk din planteproduksjon med 1 trinn.",
 
 	"Tardigrades": "Vannbjørner",
-	"Action: Add 1 microbe to this card.": "Handling: Legg til 1 mikrobe på dette kortet.",
+	"Add 1 microbe to this card.": "Legg til 1 mikrobe på dette kortet.",
 	"1 VP per 4 Microbes on this card.": "1 SP per 4 mikrober på dette kortet.",
 
 	"Virus": "Virus",
@@ -202,7 +202,7 @@
 	"Increase your M€ production 1 step for each Earth tag you have.": "Øk din M€-produksjon med 1 trinn for hvert jord-symbol du har.",
 
 	"Fish": "Fisk",
-	"Action: Add 1 animal to this card.": "Handling: Legg til 1 dyr på dette kortet.",
+	"Add 1 animal to this card.": "Legg til 1 dyr på dette kortet.",
 	"Requires +2 C° or warmer. Decrease any plant production 1 step.": "Krever en temperatur på +2 °C eller varmere. Senk en hvilken som helst planteproduksjon med 1 trinn.",
 	"1 VP for each animal on this card.": "1 SP per dyr på dette kortet.",
 
@@ -254,7 +254,7 @@
 	"Increase your M€ production 2 steps.": "Øk din M€-produksjon med 2 trinn.",
 
 	"Electro Catapult": "Elektrokatapult",
-	"Action: Spend 1 plant or 1 steel to gain 7 M€.": "Handling: Bruk 1 plante eller 1 stål for å få 7 M€.",
+	"Spend 1 plant or 1 steel to gain 7 M€.": "Bruk 1 plante eller 1 stål for å få 7 M€.",
 	"Oxygen must be 8% or less. Decrease your energy production 1 step.": "Oksygen må være 8% eller mindre. Senk din energiproduksjon med 1 trinn.",
 
 	"Earth Catapult": "Jordkatapult",
@@ -265,7 +265,7 @@
 	"Effect: Each steel you have is worth 1 M€ extra.": "Effekt: Hver stål du har er verdt 1 M€ ekstra.",
 
 	"Birds": "Fugler",
-	"Action: Add an animal to this card.": "Handling: Legg til et dyr på dette kortet.",
+	"Add an animal to this card.": "Legg til et dyr på dette kortet.",
 	"Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Krever 13% oksygen. Senk en valgfri spillers planteproduksjon med 2 trinn. 1 SP per dyr på dette kortet.",
 
 	"Mars University": "Mars-universitet",
@@ -278,7 +278,7 @@
 	"Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Få 2 planter. Øk oksygenivået med 1 trinn og plasser et hav-brikke.",
 
 	"Space Mirrors": "Rom-solreflektorer",
-	"Action: Spend 7 M€ to increase your energy production 1 step.": "Handling: Bruk 7 M€ for å øke din energiproduksjon med 1 trinn.",
+	"Spend 7 M€ to increase your energy production 1 step.": "Bruk 7 M€ for å øke din energiproduksjon med 1 trinn.",
 
 	"Solar Wind Power": "Solvindenergi",
 	"Increase your energy production 1 step and gain 2 titanium.": "Øk din energiproduksjon med 1 trinn og få 2 titanium.",
@@ -336,7 +336,7 @@
 	"Requires 5 science tags. Increase your energy production 6 steps.": "Krever 5 vitenskapssymboler. Øk din energiproduksjon med 6 trinn.",
 
 	"Physics Complex": "Fysikkompleks",
-	"Action: Spend 6 energy to add a science resource to this card.": "Handling: Bruk 6 energi for å legge til en vitenskapsressurs på dette kortet.",
+	"Spend 6 energy to add a science resource to this card.": "Bruk 6 energi for å legge til en vitenskapsressurs på dette kortet.",
 	"2 VP for each science resource on this card.": "2 SP for hver vitenskapsressurs på dette kortet.",
 
 	"Greenhouses": "Veksthus",
@@ -356,16 +356,16 @@
 	"Decrease your M€ production 1 step and increase your energy production 1 steps.": "Senk din M€-produksjon med 1 trinn og øk din energiproduksjon med 1 trinn.",
 
 	"Ironworks": "Jernverk",
-	"Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Handling: Bruk 4 energi for å få 1 stål og øke oksygenivået med 1 trinn.",
+	"Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Bruk 4 energi for å få 1 stål og øke oksygenivået med 1 trinn.",
 
 	"Power Grid": "Kraftnett",
 	"Increase your energy production step for each power tag you have, including this.": "Øk din energiproduksjon med 1 trinn for hvert energisymbol du har, inkludert dette.",
 
 	"Steelworks": "Stålverk",
-	"Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "Handling: Bruk 4 energi for å få 2 stål og øke oksygenivået med 1 trinn.",
+	"Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "Bruk 4 energi for å få 2 stål og øke oksygenivået med 1 trinn.",
 
 	"Ore Processor": "Malmprosessor",
-	"Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Handling: Bruk 4 energi for å få 1 titanium og øke oksygenivået med 1 trinn.",
+	"Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Bruk 4 energi for å få 1 titanium og øke oksygenivået med 1 trinn.",
 
 	"Earth Office": "Jordkontor",
 	"Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Effekt: Når du spiller et Jordsymbol, betaler du 3 M€ mindre for det.",
@@ -421,7 +421,7 @@
 	"Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "Krever 3 havbrikker og at du mister 1 plante. Øk din planteproduksjon med 1 trinn.",
 
 	"Industrial Center": "Industrielt senter",
-	"Action: Spend 7 M€ to increase your steel production 1 step.": "Handling: Bruk 7 M€ for å øke din stålproduksjon med 1 trinn.",
+	"Spend 7 M€ to increase your steel production 1 step.": "Bruk 7 M€ for å øke din stålproduksjon med 1 trinn.",
 	"Place this tile adjacent to a city tile.": "Plasser denne brikken ved siden av en by-brikke.",
 
 	"Hired Raiders": "Innleide plyndrere",
@@ -457,12 +457,12 @@
 	"Requires 2 power tags. Increase your energy production 3 steps.": "Krever 2 energisymboler. Øk din energiproduksjon med 3 trinn.",
 
 	"Symbiotic Fungus": "Symbiotiske sopper",
-	"Action: Add a microbe to ANOTHER card.": "Handling: Legg til en mikrobe på ET ANNET kort.",
+	"Add a microbe to ANOTHER card.": "Legg til en mikrobe på ET ANNET kort.",
 	"Requires -14 C° or warmer.": "Krever -14 °C eller varmere.",
 
 	"Extreme-Cold Fungus": "Frosttolerante sopper",
-	"Action: Gain 1 plant.": "Handling: Få 1 plante.",
-	"Action: Add 2 microbes to ANOTHER card.": "Handling: Legg til 2 mikrober på ET ANNET kort.",
+	"Gain 1 plant.": "Få 1 plante.",
+	"Add 2 microbes to ANOTHER card.": "Legg til 2 mikrober på ET ANNET kort.",
 	"It must be -10 C or colder.": "Temperaturen må være -10 °C eller kaldere.",
 
 	"Advanced Ecosystems": "Avanserte økosystemer",
@@ -525,7 +525,7 @@
 	"Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "Effekt: Dine globale krav er +2 eller -2 trinn, ditt valg i hvert tilfelle.",
 
 	"Caretaker Contract": "Vaktmesterkontrakt",
-	"Action: Spend 8 heat to increase your terraform rating 1 step.": "Handling: Bruk 8 varme for å øke din terraformingsverdi med 1 trinn.",
+	"Spend 8 heat to increase your terraform rating 1 step.": "Bruk 8 varme for å øke din terraformingsverdi med 1 trinn.",
 	"Requires 0° C or warmer.": "Krever 0 °C eller varmere.",
 
 	"Designed Microorganisms": "Designede mikroorganismer",
@@ -535,8 +535,8 @@
 	"Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Effekt: Etter at du har betalt for et standardprosjekt, unntatt salg av patenter, får du 3 M€.",
 
 	"Nitrite Reducing Bacteria": "Nitritt-reduserende bakterier",
-	"Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Handling: Legg til 1 mikrobe på dette kortet, eller fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
-	"Action: Remove 3 microbes to increase your TR 1 step.": "Handling: Fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
+	"Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Legg til 1 mikrobe på dette kortet, eller fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
+	"Remove 3 microbes to increase your TR 1 step.": "Fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn.",
 	"Add 3 microbes to this card.": "Legg til 3 mikrober på dette kortet.",
 	"Remove 3 microbes to increase your terraform rating 1 step": "Fjern 3 mikrober for å øke din terraformingsverdi med 1 trinn",
 	"Remove microbes": "Fjern mikrober",
@@ -588,7 +588,6 @@
 	"Pets": "Kjæledyr",
 	"Animals may not be removed from this card": "Dyr kan ikke fjernes fra dette kortet",
 	"Effect: When any city tile is placed, add an animal to this card.": "Effekt: Når en by-brikke plasseres, legg til et dyr på dette kortet.",
-	"Add 1 animal to this card.": "Legg til 1 dyr på dette kortet.",
 	"1 VP per 2 animals here.": "1 SP per 2 dyr på dette kortet.",
 
 	"Protected Habitats": "Beskyttede habitater",
@@ -604,7 +603,7 @@
 	"Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 plants.": "Krever -20 °C eller varmere. Øk din M€-produksjon med 1 trinn og få 2 planter.",
 
 	"Water Splitting Plant": "Vannspaltningsanlegg",
-	"Action: Spend 3 energy to raise oxygen 1 step.": "Handling: Bruk 3 energi for å øke oksygenivået med 1 trinn.",
+	"Spend 3 energy to raise oxygen 1 step.": "Bruk 3 energi for å øke oksygenivået med 1 trinn.",
 	"Requires 2 ocean tiles.": "Krever 2 havbrikker.",
 
 	"Heat Trappers": "Varmefeller",
@@ -639,7 +638,7 @@
 	"Requires two cities in play. Increase your M€ production 1 step.": "Krever to byer i spill. Øk din M€-produksjon med 1 trinn.",
 
 	"Aquifer Pumping": "Akvifer-pumping",
-	"Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.": "Handling: Bruk 8 M€ for å plassere 1 havbrikke. STÅL KAN BRUKES som om du spilte et byggingskort.",
+	"Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.": "Bruk 8 M€ for å plassere 1 havbrikke. STÅL KAN BRUKES som om du spilte et byggingskort.",
 
 	"Flooding": "Oversvømming",
 	"Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "Plasser en havbrikke. HVIS DET ER BRIKKER VED SIDEN AV DENNE HAVBRIKKEN, KAN DU FJERNE 4 M€ FRA EIEREN AV EN AV DISSE BRIKKENE.",
@@ -660,7 +659,7 @@
 	"Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "Krever 2 vitenskapssymboler. Plasser et skogområde og øk oksygenivået med 1 trinn.",
 
 	"Power Infrastructure": "Kraftinfrastruktur",
-	"Action: Spend any amount of energy and gain that amount of M€.": "Handling: Bruk et valgfritt antall energi og få det samme antallet M€.",
+	"Spend any amount of energy and gain that amount of M€.": "Bruk et valgfritt antall energi og få det samme antallet M€.",
 
 	"Indentured Workers": "Kontraktsarbeidere",
 	"The next card you play this generation costs 8 M€ less.": "Det neste kortet du spiller denne generasjonen koster 8 M€ mindre.",
@@ -676,7 +675,7 @@
 	"1 VP for every 3rd City in play.": "1 SP for hver 3. by i spill.",
 
 	"Restricted Area": "Begrenset område",
-	"Action: Spend 2 M€ to draw a card.": "Handling: Bruk 2 M€ for å trekke et kort.",
+	"Spend 2 M€ to draw a card.": "Bruk 2 M€ for å trekke et kort.",
 	"Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each": "Effekt: Når du spiller et Venus-symbol, kan svevere her brukes som betaling, og er verdt 3 M€ hver",
 
 	"Place this tile.": "Plasser denne brikken.",
@@ -689,7 +688,7 @@
 	"Decrease any energy production 1 step and increase your own 1 step.": "Senk en valgfri spillers energiproduksjon med 1 trinn og øk din egen med 1 trinn.",
 
 	"Underground Detonations": "Underjordiske detonasjoner",
-	"Action: Spend 10M€ to increase your heat production 2 steps.": "Handling: Bruk 10 M€ for å øke din varmeproduksjon med 2 trinn.",
+	"Spend 10M€ to increase your heat production 2 steps.": "Bruk 10 M€ for å øke din varmeproduksjon med 2 trinn.",
 
 	"Soletta": "Soletta",
 	"Increase your heat production 7 steps.": "Øk din varmeproduksjon med 7 trinn.",
@@ -708,7 +707,7 @@
 
 	"AI Central": "KI-sentral",
 
-	"Action: Draw 2 cards.": "Handling: Trekk 2 kort.",
+	"Draw 2 cards.": "Trekk 2 kort.",
 	"2 Science": "2 vitenskap",
 	"3 Science": "3 vitenskap",
 	"5 Science": "5 vitenskap",

@@ -273,7 +273,7 @@
 	"Played Cards": "Spilte kort",
 	"played cards": "spilte kort",
 	"SHOW TILES": "VIS BRIKKER",
-	"${0} played cards": "${0} spilte kort",
+	" ${0} played cards ": "${0} spilte kort",
 	"Self-Replicating Robots cards": "Selvreplikerende roboter-kort",
 
 	"Select which cards to take into hand": "Velg hvilke kort å ta inn på hånd",
@@ -843,8 +843,8 @@
 	"Sell steel": "Selg stål",
 	"Hide": "Skjul",
 	"Show": "Vis",
-	"Undo": "Tilbakestill",
-	"undo": "tilbakestill",
+	"Undo": "Angring tillatt",
+	"undo": "Angring tillatt",
 	"12 Gens": "12 Generationer",
 
 	"Your selected cards:": "Dine valgte kort",
@@ -910,6 +910,7 @@
 
 	"Claim a milestone": "Gjør krav på milepæl",
 	"Build colony": "Bygg koloni",
+	"After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Etter ${0} minutter, trekk fra ${1} SP hvert ${2}. min. (${3} bonus sek. per tur.)",
 
 	"Place any final greenery from plants": "Platziere finale Grünflächen",
 	"Don't place a greenery": "Keine Grünfläche platzieren",
@@ -986,8 +987,11 @@
 	"Energy": "Energi",
 	"Heat": "Varme",
 	"VP": "SP",
+	"vp": "SP",
 	"TR": "TR",
+	"tr": "TR",
 	"Cards": "Kort",
+	"cards": "kort",
 	"Building": "Bygning",
 	"Space": "Verdensrom",
 	"Science": "Vitenskap",
@@ -1002,6 +1006,9 @@
 	"Wild": "Joker",
 	"City-Count": "Antall byer",
 	"Colony-Count": "Antall kolonier",
+
+	"escape": "unnslipp",
+
 
 	"Increase production": "Øk produksjon",
 	"Draw card": "Trekk kort",
@@ -1056,5 +1063,7 @@
 	"Increase titanium production 1 step": "Øk titanproduksjon 1 steg",
 	"Increase plants production 1 step": "Øk planteproduksjon 1 steg",
 	"Increase energy production 1 step": "Øk energiproduksjon 1 steg",
-	"Increase heat production 1 step": "Øk varmeproduksjon 1 steg"
+	"Increase heat production 1 step": "Øk varmeproduksjon 1 steg",
+
+	"Production count": "Produksjonsantall"
 }

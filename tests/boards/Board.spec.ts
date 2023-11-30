@@ -277,6 +277,21 @@ describe('Board', function() {
     expect(board.getOceanSpaces({wetlands: false})).has.length(2);
   });
 
+  it('edges', () => {
+    expect(board.getEdges().map((space) => space.id)).to.have.members(
+      [
+        '03', '04', '05', '06', '07',
+        '08', '13',
+        '14', '20',
+        '21', '28',
+        '29', '37',
+        '38', '45',
+        '46', '52',
+        '53', '58',
+        '59', '60', '61', '62', '63',
+      ]);
+  });
+
   class TestBoard extends Board {
     public constructor(spaces: Array<Space>) {
       super(spaces);

@@ -558,6 +558,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Zoologist', 'Manufacturer', 1],
   ['Biologist', 'Zoologist', 6],
   ['Naturalist', 'Zoologist', 2],
+  ['EdgeLord', 'Edgedancer', 9],
 ];
 
 // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"

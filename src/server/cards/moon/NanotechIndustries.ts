@@ -1,19 +1,16 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
-import {Card} from '../Card';
 
-export class NanotechIndustries extends Card implements IActionCard, ICorporationCard {
+export class NanotechIndustries extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.NANOTECH_INDUSTRIES,
       tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 42,

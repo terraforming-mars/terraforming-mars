@@ -1,15 +1,12 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {ActionCard} from '../ActionCard';
 
-export class BioSol extends ActionCard implements ICorporationCard {
+export class BioSol extends ActiveCorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.BIO_SOL,
       tags: [Tag.MICROBE],
       startingMegaCredits: 42,

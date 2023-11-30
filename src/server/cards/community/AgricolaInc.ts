@@ -1,22 +1,19 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {TagCount} from '../../../common/cards/TagCount';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {inplaceRemove} from '../../../common/utils/utils';
 
-export class AgricolaInc extends Card implements ICorporationCard {
+export class AgricolaInc extends CorporationCard {
   constructor() {
     super({
       name: CardName.AGRICOLA_INC,
       tags: [Tag.PLANT],
       startingMegaCredits: 40,
-      type: CardType.CORPORATION,
 
       victoryPoints: 'special',
       behavior: {

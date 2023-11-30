@@ -14,3 +14,4 @@ export const played = true;
 export const multiplier = true;
 export const max = true;
 export const nextTo = true;
+export const cancelled = true;

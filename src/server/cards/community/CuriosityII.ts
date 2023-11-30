@@ -1,10 +1,8 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -17,10 +15,9 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
 import {TITLES} from '../../inputs/titles';
 
-export class CuriosityII extends Card implements ICorporationCard {
+export class CuriosityII extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.CURIOSITY_II,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       startingMegaCredits: 40,

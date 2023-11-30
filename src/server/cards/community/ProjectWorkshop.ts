@@ -1,4 +1,4 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
@@ -8,7 +8,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
@@ -19,13 +18,12 @@ import {REDS_RULING_POLICY_COST} from '../../../common/constants';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
 
-export class ProjectWorkshop extends Card implements ICorporationCard {
+export class ProjectWorkshop extends CorporationCard {
   constructor() {
     super({
       name: CardName.PROJECT_WORKSHOP,
       tags: [Tag.EARTH],
       startingMegaCredits: 39,
-      type: CardType.CORPORATION,
 
       behavior: {
         stock: {steel: 1, titanium: 1},

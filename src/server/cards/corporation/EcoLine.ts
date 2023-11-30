@@ -1,15 +1,12 @@
-import {Card} from '../Card';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class EcoLine extends Card implements ICorporationCard {
+export class EcoLine extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ECOLINE,
       tags: [Tag.PLANT],
       startingMegaCredits: 36,

@@ -1,21 +1,18 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 import {ICard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
 import {LogHelper} from '../../LogHelper';
 
-export class TheArchaicFoundationInstitute extends Card implements ICorporationCard {
+export class TheArchaicFoundationInstitute extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
       tags: [Tag.MOON, Tag.MOON],
       startingMegaCredits: 55,

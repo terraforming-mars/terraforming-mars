@@ -1,9 +1,7 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
 import {played} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
@@ -14,13 +12,12 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 
-export class Ecotec extends Card implements ICorporationCard {
+export class Ecotec extends CorporationCard {
   constructor() {
     super({
       name: CardName.ECOTEC,
       tags: [Tag.MICROBE, Tag.PLANT],
       startingMegaCredits: 42,
-      type: CardType.CORPORATION,
 
       behavior: {
         production: {plants: 1},

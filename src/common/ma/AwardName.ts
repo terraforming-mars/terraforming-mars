@@ -57,6 +57,10 @@ export const awardNames = [
   'Hoarder',
   'Naturalist',
   'Voyager',
+
+  // Underworld
+  'Kingpin',
+  'EdgeLord',
 ] as const;
 
 export type AwardName = typeof awardNames[number];

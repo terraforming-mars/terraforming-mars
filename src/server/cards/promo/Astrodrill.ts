@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
@@ -10,16 +9,14 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {LogHelper} from '../../LogHelper';
 import {Resource} from '../../../common/Resource';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
 import {PlayerInput} from '../../PlayerInput';
 
-export class Astrodrill extends Card implements IActionCard, ICorporationCard {
+export class Astrodrill extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ASTRODRILL,
       tags: [Tag.SPACE],
       startingMegaCredits: 35,

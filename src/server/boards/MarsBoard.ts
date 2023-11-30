@@ -8,6 +8,13 @@ import {AresHandler} from '../ares/AresHandler';
 import {CardName} from '../../common/cards/CardName';
 
 export class MarsBoard extends Board {
+  private readonly edges: ReadonlyArray<Space>;
+
+  protected constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
+    this.edges = this.computeEdges();
+  }
+
   public getCitiesOffMars(player?: IPlayer): Array<Space> {
     return this.getCities(player).filter((space) => space.spaceType === SpaceType.COLONY);
   }
@@ -112,6 +119,28 @@ export class MarsBoard extends Board {
         (space) => space.tile === undefined &&
                       (space.player === undefined || space.player === player),
       );
+  }
+
+  private computeEdges(): ReadonlyArray<Space> {
+    return this.spaces.filter((space) => {
+      if (space.y === 0 || space.y === 8 || space.x === 8) {
+        return true;
+      }
+      // left side is tricky.
+      // top-left is easy with math. Look at the map.
+      if (space.y + space.x === 4) {
+        return true;
+      }
+      // bottom-left is also easy with math. Look at the map.
+      if (space.y - space.x === 4) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  public getEdges(): ReadonlyArray<Space> {
+    return this.edges;
   }
 
   public getAvailableIsolatedSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {

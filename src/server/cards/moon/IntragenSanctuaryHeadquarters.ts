@@ -1,19 +1,17 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
-import {Card} from '../Card';
 import {all, played} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class IntragenSanctuaryHeadquarters extends Card implements ICorporationCard {
+export class IntragenSanctuaryHeadquarters extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS,
       tags: [Tag.ANIMAL, Tag.MOON],
       startingMegaCredits: 38,

@@ -37,7 +37,7 @@ describe('TerraformingRobots', function() {
   it('onCardPlayed', () => {
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player, fakeCard({}));
+    card.onCardPlayed(player, fakeCard());
     expect(card.resourceCount).eq(0);
 
     card.onCardPlayed(player, fakeCard({

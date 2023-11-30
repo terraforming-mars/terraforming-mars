@@ -121,6 +121,8 @@
     "agenda(s)": "Agenda(en)",
     "seed(s)": "Saatgut",
     "specialized robot(s)": "spezialisierten Roboter",
+    "graphene(s)": "Karbon",
+    "1 graphene(s)": "1 Karbon",
     "hydroelectric resource(s)": "hydroelektrische Ressource(n)",
     "clone trooper(s)": "Klonkrieger",
     "corruption": "Koruption",
@@ -168,7 +170,7 @@
     "${0} decreased Venus scale level 1 step": "${0} senkte die Venuswertung um 1",
 
     "${0} kept ${1} project cards": "${0} behielt ${1} Projektkarten",
-    "${0} drew ${1}": "${0} zog ${1}",
+    "${0} drew ${1}": "${0} zogst ${1}",
     "${0} drew no cards": "${0} zogst keine Karten",
     "${0} drew ${1} and ${2}": "${0} zogst ${1} und ${2}",
     "${0} drew ${1}, ${2} and ${3}": "${0} zogst ${1}, ${2} und ${3}",

@@ -1149,54 +1149,61 @@ export class Player implements IPlayer {
     return cb();
   }
 
-  private claimMilestone(milestone: IMilestone): SelectOption {
-    return new SelectOption(milestone.name, 'Claim - ' + '('+ milestone.name + ')').andThen(() => {
-      if (this.game.milestoneClaimed(milestone)) {
-        throw new Error(milestone.name + ' is already claimed');
-      }
-      this.game.claimedMilestones.push({
-        player: this,
-        milestone: milestone,
-      });
-      // VanAllen CEO Hook for Milestones
-      const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
-      if (vanAllen !== undefined) {
-        vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
-      }
-      if (!this.cardIsInEffect(CardName.VANALLEN)) {
-        const cost = this.milestoneCost();
-        this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
-      }
-      this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
-      return undefined;
+  public claimableMilestones(): Array<IMilestone> {
+    if (this.game.allMilestonesClaimed()) {
+      return [];
+    }
+    if ((this.canAfford(this.milestoneCost()) || this.cardIsInEffect(CardName.VANALLEN))) {
+      return this.game.milestones
+        .filter((milestone) => !this.game.milestoneClaimed(milestone) && milestone.canClaim(this));
+    }
+    return [];
+  }
+
+  private claimMilestone(milestone: IMilestone) {
+    if (this.game.milestoneClaimed(milestone)) {
+      throw new Error(milestone.name + ' is already claimed');
+    }
+    this.game.claimedMilestones.push({
+      player: this,
+      milestone: milestone,
     });
+    // VanAllen CEO Hook for Milestones
+    const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
+    if (vanAllen !== undefined) {
+      vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
+    }
+    if (!this.cardIsInEffect(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
+      const cost = this.milestoneCost();
+      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
+    }
+    this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
+  }
+
+  private isStagedProtestsActive() {
+    const owner = this.game.getCardPlayerOrUndefined(CardName.STAGED_PROTESTS);
+    if (owner === undefined) {
+      return false;
+    }
+    const stagedProtests = owner.playedCards.find((card) => card.name === CardName.STAGED_PROTESTS);
+    return stagedProtests?.generationUsed === this.game.generation;
   }
 
   private milestoneCost() {
-    return this.isCorporation(CardName.NIRGAL_ENTERPRISES) ? 0 : MILESTONE_COST;
+    if (this.isCorporation(CardName.NIRGAL_ENTERPRISES)) {
+      return 0;
+    }
+    return this.isStagedProtestsActive() ? MILESTONE_COST + 8 : MILESTONE_COST;
   }
 
-  private awardFundingCost() {
-    return this.isCorporation(CardName.NIRGAL_ENTERPRISES) ? 0 : this.game.getAwardFundingCost();
+  // Public for tests.
+  public awardFundingCost() {
+    if (this.isCorporation(CardName.NIRGAL_ENTERPRISES)) {
+      return 0;
+    }
+    const plus8 = this.isStagedProtestsActive() ? 8 : 0;
+    return this.game.getAwardFundingCost() + plus8;
   }
-
-  // private milestoneCost() {
-  //   if (this.isCorporation(CardName.NIRGAL_ENTERPRISES)) {
-  //     return 0;
-  //   }
-  //   const [_owner, stagedProtests] = this.game.getCardHolder(CardName.STAGED_PROTESTS);
-  //   const plus8 = (stagedProtests?.generationUsed === this.game.generation) ? 8 : 0;
-  //   return MILESTONE_COST + plus8;
-  // }
-
-  // private awardFundingCost() {
-  //   if (this.isCorporation(CardName.NIRGAL_ENTERPRISES)) {
-  //     return 0;
-  //   }
-  //   const [_owner, stagedProtests] = this.game.getCardHolder(CardName.STAGED_PROTESTS);
-  //   const plus8 = (stagedProtests?.generationUsed === this.game.generation) ? 8 : 0;
-  //   return this.game.getAwardFundingCost() + plus8;
-  // }
 
   private fundAward(award: IAward): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')').andThen(() => {
@@ -1634,18 +1641,16 @@ export class Player implements IPlayer {
     action.buttonLabel = 'Take action';
 
     // VanAllen can claim milestones for free:
-    if ((this.canAfford(this.milestoneCost()) || this.cardIsInEffect(CardName.VANALLEN)) && !this.game.allMilestonesClaimed() ) {
-      const remainingMilestones = new OrOptions();
-      remainingMilestones.title = 'Claim a milestone';
-      remainingMilestones.options = this.game.milestones
-        .filter(
-          (milestone: IMilestone) =>
-            !this.game.milestoneClaimed(milestone) &&
-            milestone.canClaim(this))
-        .map(
-          (milestone: IMilestone) =>
-            this.claimMilestone(milestone));
-      if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
+    const claimableMilestones = this.claimableMilestones();
+    if (claimableMilestones.length > 0) {
+      const milestoneOption = new OrOptions();
+      milestoneOption.title = 'Claim a milestone';
+      milestoneOption.options = claimableMilestones.map(
+        (milestone) => new SelectOption(milestone.name, 'Claim - ' + '('+ milestone.name + ')').andThen(() => {
+          this.claimMilestone(milestone);
+          return undefined;
+        }));
+      action.options.push(milestoneOption);
     }
 
     // Convert Plants

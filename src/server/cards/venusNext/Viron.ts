@@ -1,20 +1,17 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Viron extends Card implements ICard, ICorporationCard {
+export class Viron extends CorporationCard {
   constructor() {
     super({
       name: CardName.VIRON,
       tags: [Tag.MICROBE],
       startingMegaCredits: 48,
-      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R12',

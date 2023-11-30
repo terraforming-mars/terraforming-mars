@@ -1,19 +1,16 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Manutech extends Card implements ICorporationCard {
+export class Manutech extends CorporationCard {
   constructor() {
     super({
       name: CardName.MANUTECH,
       tags: [Tag.BUILDING],
       startingMegaCredits: 35,
-      type: CardType.CORPORATION,
 
       behavior: {
         production: {steel: 1},

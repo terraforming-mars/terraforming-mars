@@ -15,7 +15,7 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
       tags: [Tag.SCIENCE, Tag.EARTH],
 
       behavior: {
-        stock: {megacredits: 21},
+        stock: {megacredits: 12},
       },
 
       metadata: {

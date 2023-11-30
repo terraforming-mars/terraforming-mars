@@ -25,7 +25,7 @@ describe('HeadStart', function() {
   });
 
   it('Gain resources', () => {
-    player.cardsInHand.push(fakeCard({}), fakeCard({}), fakeCard({}));
+    player.cardsInHand.push(fakeCard(), fakeCard(), fakeCard());
     headStart.play(player);
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 6, steel: 2}));
   });

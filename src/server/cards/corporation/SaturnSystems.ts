@@ -1,18 +1,16 @@
-import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
 
-export class SaturnSystems extends Card implements ICorporationCard {
+export class SaturnSystems extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.SATURN_SYSTEMS,
       tags: [Tag.JOVIAN],
       startingMegaCredits: 42,

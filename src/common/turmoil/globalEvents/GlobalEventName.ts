@@ -46,4 +46,11 @@ export enum GlobalEventName {
     MAGNETIC_FIELD_STIMULATION_DELAYS ='Magnetic Field Stimulation Delays',
     COMMUNICATION_BOOM = 'Communication Boom',
     SPACE_RACE_TO_MARS = 'Space Race to Mars',
+
+    // Underworld
+    LAGGING_REGULATION = 'Lagging Regulation',
+    FAIR_TRADE_COMPLAINT = 'Fair Trade Complaint',
+    MIGRATION_UNDERGROUND = 'Migration Underground',
+    SEISMIC_PREDICTIONS = 'Seismic Predictions',
+    MEDIA_STIR = 'Media Stir',
 }

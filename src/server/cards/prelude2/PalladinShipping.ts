@@ -1,5 +1,4 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
@@ -12,13 +11,12 @@ import {IActionCard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 
-export class PalladinShipping extends Card implements ICorporationCard, IActionCard {
+export class PalladinShipping extends CorporationCard implements IActionCard {
   constructor() {
     super({
       name: CardName.PALLADIN_SHIPPING,
       tags: [Tag.SPACE],
       startingMegaCredits: 36,
-      type: CardType.CORPORATION,
 
       behavior: {
         stock: {titanium: 5},

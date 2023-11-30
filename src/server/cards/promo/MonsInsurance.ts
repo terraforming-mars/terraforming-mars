@@ -1,17 +1,14 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class MonsInsurance extends Card implements ICorporationCard {
+export class MonsInsurance extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.MONS_INSURANCE,
       startingMegaCredits: 48,
 

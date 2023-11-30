@@ -1,4 +1,4 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
@@ -6,16 +6,13 @@ import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 
-export class Recyclon extends Card implements ICorporationCard {
+export class Recyclon extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.RECYCLON,
       tags: [Tag.MICROBE, Tag.BUILDING],
       startingMegaCredits: 38,

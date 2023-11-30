@@ -10,7 +10,7 @@ describe('TitanManufacturingColony', () => {
     const card = new TitanManufacturingColony();
     const [/* game */, player] = testGame(2);
 
-    card.onCardPlayed(player, fakeCard({}));
+    card.onCardPlayed(player, fakeCard());
     expect(card.resourceCount).eq(0);
 
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));

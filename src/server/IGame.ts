@@ -165,7 +165,7 @@ export interface IGame extends Logger {
    */
   getCardPlayerOrThrow(name: CardName): IPlayer;
   /**
-   * Returns the Player holding this card, or throws.
+   * Returns the Player holding this card, or returns undefined.
    */
   getCardPlayerOrUndefined(name: CardName): IPlayer | undefined;
   // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.

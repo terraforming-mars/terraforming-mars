@@ -165,10 +165,10 @@ export class Stock {
    * `from` steals up to `qty` units of `resource` from this player. Or, at least as
    * much as possible.
    */
-  public steal(resource: Resource, qty: number, thief: IPlayer) {
+  public steal(resource: Resource, qty: number, thief: IPlayer, options?: {log?: boolean}) {
     const qtyToSteal = Math.min(this[resource], qty);
     if (qtyToSteal > 0) {
-      this.deduct(resource, qtyToSteal, {log: true, from: thief, stealing: true});
+      this.deduct(resource, qtyToSteal, {log: options?.log ?? true, from: thief, stealing: true});
       thief.stock.add(resource, qtyToSteal);
     }
   }

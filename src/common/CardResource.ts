@@ -20,8 +20,8 @@ export enum CardResource {
     HYDROELECTRIC_RESOURCE = 'Hydroelectric resource',
     CLONE_TROOPER = 'Clone Trooper',
     TOOL='Tool',
-    // WARE='Ware',
-    // SCOOP='Scoop',
-    // JOURNALISM='Journalism',
+    WARE='Ware',
+    SCOOP='Scoop',
+    JOURNALISM='Journalism',
     ACTIVIST='Activist',
 }

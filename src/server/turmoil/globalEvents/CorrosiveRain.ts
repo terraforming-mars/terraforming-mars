@@ -8,7 +8,7 @@ import {CorrosiveRainDeferredAction} from '../../deferredActions/CorrosiveRainDe
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().floaters(2).or().megacredits(-10).br.cards(1).slash().influence();
+  b.minus().floaters(2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
 });
 
 export class CorrosiveRain extends GlobalEvent implements IGlobalEvent {

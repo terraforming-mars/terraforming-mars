@@ -1,13 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
 import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -15,10 +14,9 @@ import {Resource} from '../../../common/Resource';
 import {all, digit, played} from '../Options';
 import {SerializedCard} from '../../SerializedCard';
 
-export class PharmacyUnion extends Card implements ICorporationCard {
+export class PharmacyUnion extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.PHARMACY_UNION,
       startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
       resourceType: CardResource.DISEASE,

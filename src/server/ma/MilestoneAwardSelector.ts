@@ -1,9 +1,35 @@
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, THARSIS_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../awards/Awards';
+import {
+  AMAZONIS_PLANITIA_AWARDS,
+  ARABIA_TERRA_AWARDS,
+  ARES_AWARDS,
+  Awards,
+  ELYSIUM_AWARDS,
+  HELLAS_AWARDS,
+  MOON_AWARDS,
+  THARSIS_AWARDS,
+  TERRA_CIMMERIA_AWARDS,
+  VASTITAS_BOREALIS_AWARDS,
+  VENUS_AWARDS,
+  UNDERWORLD_AWARDS,
+} from '../awards/Awards';
 import {IAward} from '../awards/IAward';
 import {BoardName} from '../../common/boards/BoardName';
 import {GameOptions} from '../game/GameOptions';
 import {IMilestone} from '../milestones/IMilestone';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, THARSIS_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../milestones/Milestones';
+import {
+  AMAZONIS_PLANITIA_MILESTONES,
+  ARABIA_TERRA_MILESTONES,
+  ARES_MILESTONES,
+  ELYSIUM_MILESTONES,
+  HELLAS_MILESTONES,
+  Milestones,
+  MOON_MILESTONES,
+  THARSIS_MILESTONES,
+  TERRA_CIMMERIA_MILESTONES,
+  VASTITAS_BOREALIS_MILESTONES,
+  VENUS_MILESTONES,
+  UNDERWORLD_MILESTONES,
+} from '../milestones/Milestones';
 import {FullMoon} from '../moon/FullMoon';
 import {Lunarchitect} from '../moon/Lunarchitect';
 import {LunarMagnate} from '../moon/LunarMagnate';
@@ -148,8 +174,6 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     return e.name;
   }
 
-  // map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[];
-
   const candidateMilestones: Array<MilestoneName> = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
   const candidateAwards: Array<AwardName> = [...THARSIS_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
@@ -164,6 +188,11 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   if (gameOptions.moonExpansion) {
     candidateMilestones.push(...MOON_MILESTONES.map(toName));
     candidateAwards.push(...MOON_AWARDS.map(toName));
+  }
+
+  if (gameOptions.underworldExpansion) {
+    candidateMilestones.push(...UNDERWORLD_MILESTONES.map(toName));
+    candidateAwards.push(...UNDERWORLD_AWARDS.map(toName));
   }
 
   if (gameOptions.includeFanMA) {

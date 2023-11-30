@@ -1,15 +1,12 @@
-import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Teractor extends Card implements ICorporationCard {
+export class Teractor extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.TERACTOR,
       tags: [Tag.EARTH],
       startingMegaCredits: 60,

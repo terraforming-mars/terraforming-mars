@@ -45,7 +45,7 @@ describe('SearchForLife', function() {
 
     player.megaCredits = 1;
 
-    game.projectDeck.drawPile.push(fakeCard({}));
+    game.projectDeck.drawPile.push(fakeCard());
 
     card.action(player);
     runAllActions(game); // pays for card.

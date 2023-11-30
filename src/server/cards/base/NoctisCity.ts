@@ -34,7 +34,7 @@ export class NoctisCity extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    if (player.game.board.getNoctisCitySpaceId !== undefined) {
+    if (player.game.board.getNoctisCitySpaceId() !== undefined) {
       return true;
     } else {
       return player.game.board.getAvailableSpacesForCity(player).length > 0;

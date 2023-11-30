@@ -6,6 +6,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
 
 describe('SmallComet', function() {
   let card: SmallComet;
@@ -16,10 +17,7 @@ describe('SmallComet', function() {
 
   beforeEach(function() {
     card = new SmallComet();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.GREEN.newPlayer();
-    game = Game.newInstance('gameid', [player, player2, player3], player);
+    [game, player, player2, player3] = testGame(3);
   });
 
   it('play', function() {
@@ -33,22 +31,22 @@ describe('SmallComet', function() {
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
+    const space = action.spaces[0];
+    expect(action.spaces.some((space) => space.spaceType !== SpaceType.LAND)).is.false;
+    expect(space.tile).is.undefined;
 
-    expect(player.getTerraformRating()).eq(22);
+    action.cb(space);
+
+    expect(space.tile?.tileType).eq(TileType.OCEAN);
+
+    runAllActions(game);
+
+    expect(player.getTerraformRating()).eq(23);
     expect(player.game.getTemperature()).eq(-28);
     expect(player.game.getOxygenLevel()).eq(1);
     expect(player.plants).eq(3);
     expect(player2.plants).eq(13);
     expect(player3.plants).eq(398);
     expect(player.titanium).eq(1);
-
-    const space = action.spaces[0];
-    expect(action.spaces.some((space) => space.spaceType !== SpaceType.LAND)).is.false;
-    expect(space.tile).is.undefined;
-
-    action?.cb(space);
-
-    expect(space.tile?.tileType).eq(TileType.OCEAN);
-    expect(player.getTerraformRating()).eq(23);
   });
 });

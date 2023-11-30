@@ -2,7 +2,7 @@
   <span v-if="expectedPurgeTimeMs != 0">
     <div :class="klass">{{ warningText }}
       <a href="https://github.com/terraforming-mars/terraforming-mars/wiki/FAQ#purge">
-        <span i-18n>Why?</span>
+        <span v-i18n>Why?</span>
       </a>
     </div>
   </span>

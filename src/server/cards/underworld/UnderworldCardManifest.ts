@@ -8,7 +8,7 @@ import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 import {ArboristCollective} from './ArboristCollective';
 // // import {AresMedia} from './AresMedia';
 import {ArtesianAquifer} from './ArtesianAquifer';
-// import {BatteryFactory} from './BatteryFactory';
+import {BatteryFactory} from './BatteryFactory';
 import {BatteryShipment} from './BatteryShipment';
 import {BehemothExcavator} from './BehemothExcavator';
 import {Casino} from './Casino';
@@ -217,7 +217,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // 73-81
     // [CardName.VOLUNTEER_MINING_INITITIVE]: {Factory: VolunteerMiningInititive},
     [CardName.NANOFOUNDRY]: {Factory: Nanofoundry},
-    // [CardName.BATTERY_FACTORY]: {Factory: BatteryFactory},
+    [CardName.BATTERY_FACTORY]: {Factory: BatteryFactory},
     // [CardName.VOLTAIC_METALLURGY]: {Factory: VoltaicMetallurgy},
     // [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},
     // [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},

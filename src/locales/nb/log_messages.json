@@ -21,12 +21,12 @@
 
 	"increased": "økte",
 	"decreased": "senket",
-	"${0}'s ${1} amount ${2} by ${3}": "${0}s ${1}-mengde ble endret med ${3} ${2}",
-	"${0}'s ${1} production ${2} by ${3}": "${0}s ${1}-produksjon ble endret med ${3} ${2}",
-	"${0}'s ${1} amount ${2} by ${3} stolen by ${4}": "${0}s ${1}-mengde ble endret med ${3} ${2} stjålet av ${4}",
-	"${0}'s ${1} production ${2} by ${3} stolen by ${4}": "${0}s ${1}-produksjon ble endret med ${3} ${2} stjålet av ${4}",
-	"${0}'s ${1} amount ${2} by ${3} by ${4}": "${0}s ${1}-mengde ble endret med ${3} ${2} av ${4}",
-	"${0}'s ${1} production ${2} by ${3} by ${4}": "${0}s ${1}-produksjon ble endret med ${3} ${2} av ${4}",
+	"${0}'s ${1} amount ${2} by ${3}": "${0}s ${1}-mengde ${2} med ${3}",
+	"${0}'s ${1} production ${2} by ${3}": "${0}s ${1}-produksjon ${2} med ${3}",
+	"${0}'s ${1} amount ${2} by ${3} stolen by ${4}": "${0}s ${1}-mengde ${2} med ${3} stjålet av ${4}",
+	"${0}'s ${1} production ${2} by ${3} stolen by ${4}": "${0}s ${1}-produksjon ${2} med ${3} stjålet av ${4}",
+	"${0}'s ${1} amount ${2} by ${3} by ${4}": "${0}s ${1}-mengde ${2} med ${3} av ${4}",
+	"${0}'s ${1} production ${2} by ${3} by ${4}": "${0}s ${1}-produksjon ${2} med ${3} av ${4}",
 	"${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} fjernet ${1} ressurs(er) fra ${2}s ${3}",
 
 	"Card not found": "Kort ikke funnet",
@@ -62,7 +62,7 @@
 	"Drew and discarded ${0} and ${1} to place a ${2}": "Trakk og kastet ${0} og ${1} for å plassere en ${2}",
 	"The id of this game is ${0}": "Spillets ID er ${0}",
 	"Good luck ${0}!": "Lykke til ${0}!",
-	"Final greenery placement": "Siste skogområde-plassering",
+	"Final greenery placement": "Plassering av siste skogområde",
 	"This game id was ${0}": "Spillets ID var ${0}",
 
 	"${0} gained ${1} M€ by discarding ${2} cards": "${0} fikk ${1} M€ ved å kaste ${2} kort",
@@ -122,6 +122,7 @@
 	"clone trooper(s)": "klonekriger(e)",
 	"corruption": "korrupsjon",
 	"1 corruption": "1 korrupsjon",
+	"Final greenery phase is skipped since you did not complete the win condition.": "Fasen for å plassere et siste skogområde hoppes over siden du ikke fullførte betingelsene for å vinne.",
 
 	"${0} played ${1}": "${0} spilte ${1}",
 	"${0} used ${1} action": "${0} brukte handlingen ${1}",

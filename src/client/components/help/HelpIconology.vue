@@ -49,6 +49,7 @@
                 <div class="resource-tag tag-city"></div>
                 <div class="help-icon-label" v-i18n>City</div>
             </div>
+            <br>
             <div>
                 <div class="resource-tag tag-wild"></div>
                 <div class="help-icon-label" v-i18n>Wild</div>

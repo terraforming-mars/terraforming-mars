@@ -85,7 +85,7 @@
               <ul>
                 <li><span v-i18n>i. Game end check</span>
                   <ul>
-                    <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase. </li>
+                    <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase.</li>
                     <li v-i18n>(If playing solo, the game ends after 14 generations.)</li>
                     <li v-i18n>Solo mode adjustments for expansions:</li>
                     <li v-i18n>• Prelude: The game ends 2 generations earlier.</li>
@@ -139,7 +139,7 @@
             <li v-i18n>In turn order, convert plants to greeneries.</li>
             <li v-i18n>Assign awards</li>
             <li>
-              <span v-i18n> Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader</span>
+              <span v-i18n>Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader</span>
               <div class="expansion-icon expansion-icon-turmoil"></div>)
             </li>
           </ul>

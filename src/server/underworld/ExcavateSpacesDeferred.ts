@@ -31,7 +31,9 @@ export class ExcavateSpacesDeferred extends DeferredAction {
   }
 
   public execute(): undefined {
-    this.selectSpace();
+    if (this.count > 0) {
+      this.selectSpace();
+    }
     return undefined;
   }
 }

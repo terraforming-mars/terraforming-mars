@@ -1,22 +1,98 @@
 {
     "Callisto": "Kallisto",
+    "Build Colony bonus: Gain 1 energy production": "Platzierungsbonus Kolonie: Erhalte 1 Energie-Produktion",
+    "Trade bonus: Gain n energy": "Handelsertrag: Erhalte n Energie",
+    "Colony bonus: Gain 3 energy": "Koloniebonus: Erhalte 3 Energie",
+    
     "Ceres": "Ceres",
+    "Build Colony bonus: Gain 1 steel production": "Platzierungsbonus Kolonie: Erhalte 1 Stahl-Produktion",
+    "Trade bonus: Gain n steel": "Handelsertrag: Erhalte n Stahl",
+    "Colony bonus: Gain 2 steel": "Koloniebonus: Erhalte 2 Stahl",
+    
     "Enceladus": "Enceladus",
+    "Build Colony bonus: Add 3 microbes to ANY card": "Platzierungsbonus Kolonie: Erhalte 3 Mikroben auf eine beliebige Karte",
+    "Trade bonus: Add n microbes to ANY card": "Handelsertrag: Erhalte n Mikroben auf eine beliebige Karte",
+    "Colony bonus: Add 1 microbe to ANY card": "Koloniebonus: Erhalte 1 Mikrobe auf eine beliebige Karte",
+    
     "Europa": "Europa",
+    "Build Colony bonus: Place an ocean tile": "Platzierungsbonus Kolonie: Platziere 1 Ozean",
+    "Trade bonus: Gain 1 unit of production of the type shown": "Handelsertrag: Erhalte 1 angezeigte Einheit Produktion",
+    "Colony bonus: Gain 1 M€": "Koloniebonus: Erhalte 1 M€",
+    
     "Ganymede": "Ganymed",
+    "Build Colony bonus: Gain 1 plant production": "Platzierungsbonus Kolonie: Erhalte 1 Pflanzen-Produktion",
+    "Trade bonus: Gain n plants": "Handelsertrag: Erhalte n Pflanzen",
+    "Colony bonus: Gain 1 plant": "Koloniebonus: Erhalte 1 Pflanze",
+    
     "Io": "Io",
+    "Build Colony bonus: Gain 1 heat production": "Platzierungsbonus Kolonie: Erhalte 1 Wärme-Produktion",
+    "Trade bonus: Gain n heat": "Handelsertrag: Erhalte n Wärme",
+    "Colony bonus: Gain 2 heat": "Koloniebonus: Erhalte 2 Wärme",
+    
     "Luna": "Luna",
+    "Build Colony bonus: Gain 2 M€ production": "Platzierungsbonus Kolonie: Erhalte 2 M€-Produktion",
+    "Trade bonus: Gain n M€": "Handelsertrag: Erhalte n M€",
+    "Colony bonus: Gain 2 M€": "Koloniebonus: Erhalte 2 M€",
+    
     "Miranda": "Miranda",
+    "Build Colony bonus: Add 1 animal to ANY card": "Platzierungsbonus Kolonie: Erhalte 1 Tier auf eine beliebige Karte",
+    "Trade bonus: Add n animals to ANY card": "Handelsertrag: Erhalte n Tiere auf eine beliebige Karte",
+    "Colony bonus: Draw 1 card": "Koloniebonus: Ziehe 1 Karte",
+    
     "Pluto": "Pluto",
+    "Build Colony bonus: Draw 2 cards": "Platzierungsbonus Kolonie: Ziehe 2 Karten",
+    "Trade bonus: Draw n cards": "Handelsertrag: Ziehe n Karten",
+    "Colony bonus: Draw 1 card and then discard 1 card": "Koloniebonus: Ziehe 1 Karte und werfe dann 1 Karte ab",
+    
     "Titan": "Titan",
+    "Build Colony bonus: Add 3 floaters to ANY card": "Platzierungsbonus Kolonie: Erhalte 3 Schweber auf eine beliebige Karte",
+    "Trade bonus: Add n floaters to ANY card": "Handelsertrag: Erhalte n Schweber auf eine beliebige Karte",
+    "Colony bonus: Add 1 floater to ANY card": "Koloniebonus: Erhalte 1 Schweber auf eine beliebige Karte",
+    
     "Triton": "Triton",
-    "Leavitt": "Leavitt",
-    "Titania": "Titania",
-    "Venus": "Venus",
-    "Hygiea": "Hygiea",
+    "Build Colony bonus: Gain 3 titanium": "Platzierungsbonus Kolonie: Erhalte 3 Titan",
+    "Trade bonus: Gain n titanium": "Handelsertrag: Erhalte n Titan",
+    "Colony bonus: Gain 1 titanium": "Koloniebonus: Erhalte 1 Titan",
+    
     "Iapetus": "Iapetus",
+    "Build Colony bonus: Gain 1 TR": "Platzierungsbonus Kolonie: Erhalte 1 TW",
+    "Trade bonus: Gain n TR": "Handelsertrag: Erhalte n TW",
+    "Colony bonus: Pay 1 M€ less for cards this generation": "Koloniebonus: Bezahle 1 M€ weniger für Karten in dieser Generation",
+
     "Mercury": "Merkur",
+    "Build Colony bonus: Gain the trade bonus of any colony": "Platzierungsbonus Kolonie: Erhalte den Handelsertrag einer beliebigen Kolonie",
+    "Trade bonus: Gain 1 unit of production of the type shown": "Handelsertrag: Erhalte 1 angezeigte Einheit Produktion",
+    "Colony bonus: Gain 2 M€": "Koloniebonus: Erhalte 1 Titan",
+    
+    "Hygiea": "Hygiea",
+    "Build Colony bonus: Choose opponent to discard 1 card": "Platzierungsbonus Kolonie: Wähle ein Gegner, der 1 Karte abwerfen muss",
+    "Trade bonus: Steal 3 units of the listed type": "Handelsertrag: Stehle 3 Einheiten von der angezeigten Ressource",
+    "Colony bonus: Gain 3 M€": "Koloniebonus: Erhalte 3 M€",
+    
+    "Titania": "Titania",
+    "Build Colony bonus: Gain 5, 3, or 2 VP": "Platzierungsbonus Kolonie: Erhalte 5, 3 oder 2 SP",
+    "Trade bonus: Gain n VP": "Handelsertrag: Erhalte n SP",
+    "Colony bonus: Lose 3 M€": "Koloniebonus: Verliere 3 M€",
+    
+    "Leavitt": "Leavitt",
+    "Build Colony bonus: Gain 1 science tag": "Platzierungsbonus Kolonie: Erhalte 1 Wissenschafts-Symbol",
+    "Trade bonus: Draw n cards, keep 1": "Handelsertrag: Ziehe n Karten, behalte 1",
+    "Colony bonus: Draw 1 card which you may pay to keep it": "Koloniebonus: Ziehe 1 Karte, welche du bezahlen kannst um sie zu behalten",
+    
+    "Venus": "Venus",
+    "Build Colony bonus: Increase Venus 1 step": "Platzierungsbonus Kolonie: Erhöhe die Venuswertung um 1",
+    "Trade bonus: Add n resources to ANY Venus card": "Handelsertrag: Erhalte n Ressourcen auf eine beliebige Venus-Karte",
+    "Colony bonus: Add 1 resource to ANY Venus card": "Koloniebonus: Erhalte 1 Ressource auf eine beliebige Venus-Karte",
+    
     "Pallas": "Pallas",
+    "Build Colony bonus: Gain +1 influence": "Platzierungsbonus Kolonie: Erhalte +1 Einfluss",
+    "Trade bonus: Place n delegates": "Handelsertrag: Platziere n Delegierte",
+    "Colony bonus: Gain 1 M€ for each deleagte in any party": "Koloniebonus: Erhalte 1 M€ für jeden Delegierten in jeder Partei",
+    
+    "Iapetus II": "Iapetus II",
+    "Build Colony bonus: Add 3 data to ANY card": "Platzierungsbonus Kolonie: Erhalte 3 Daten auf eine beliebige Karte",
+    "Trade bonus: Add n data to ANY card": "Handelsertrag: Erhalte n Daten auf eine beliebige Karte",
+    "Colony bonus: Add 1 Daten to ANY card": "Koloniebonus: Erhalte 1 Datum auf eine beliebige Karte",
 
     "Select colony tile to remove": "Wähle ein zu entfernendes Kolonie-Plättchen",
     "Colony Bonus": "Koloniebonus",

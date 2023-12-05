@@ -40,7 +40,7 @@ import {FreeTradePort} from './FreeTradePort';
 // // import {GaiaCity} from './GaiaCity';
 import {GanymedeTradingCompany} from './GanymedeTradingCompany';
 import {GeologicalExpertise} from './GeologicalExpertise';
-// import {GeologicalSurvey} from './GeologicalSurvey';
+import {GeologicalSurvey} from './GeologicalSurvey';
 import {GeologistTeam} from './GeologistTeam';
 import {GeoscanSatellite} from './GeoscanSatellite';
 import {GeothermalNetwork} from './GeothermalNetwork';
@@ -223,7 +223,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},
     // [CardName.EXPEDITION_VEHICLES]: {Factory: ExpeditionVehicles},
     [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},
-    // [CardName.GEOLOGICAL_SURVEY_UNDERWORLD]: {Factory: GeologicalSurvey},
+    [CardName.GEOLOGICAL_SURVEY_UNDERWORLD]: {Factory: GeologicalSurvey},
     // // 82-90
     // [CardName.CLASS_ACTION_LAWSUIT]: {Factory: ClassActionLawsuit},
     // // [CardName.MERCENARY_ASSAULT]: {Factory: MercenaryAssault}, // Blocking rules.

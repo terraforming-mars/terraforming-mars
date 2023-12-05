@@ -31,7 +31,7 @@ import {EarthquakeMachine} from './EarthquakeMachine';
 import {ElectionSponsorship} from './ElectionSponsorship';
 import {ExcavateStandardProject} from './ExcavateStandardProject';
 import {ExcavatorLeasing} from './ExcavatorLeasing';
-// import {ExpeditionVehicles} from './ExpeditionVehicles';
+import {ExpeditionVehicles} from './ExpeditionVehicles';
 import {FairTradeComplaint} from './FairTradeComplaint';
 import {FabricatedScandal} from './FabricatedScandal';
 import {ForestTunnels} from './ForestTunnels';
@@ -221,7 +221,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // [CardName.VOLTAIC_METALLURGY]: {Factory: VoltaicMetallurgy},
     [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},
     [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},
-    // [CardName.EXPEDITION_VEHICLES]: {Factory: ExpeditionVehicles},
+    [CardName.EXPEDITION_VEHICLES]: {Factory: ExpeditionVehicles},
     [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},
     [CardName.GEOLOGICAL_SURVEY_UNDERWORLD]: {Factory: GeologicalSurvey},
     // // 82-90

@@ -69,7 +69,7 @@ import {LaggingRegulation} from './LaggingRegulation';
 import {Landfill} from './Landfill';
 import {LobbyingNetwork} from './LobbyingNetwork';
 import {ManMadeVolcano} from './ManMadeVolcano';
-// import {MartianExpress} from './MartianExpress';
+import {MartianExpress} from './MartianExpress';
 // // import {MediaFrenzy} from './MediaFrenzy';
 import {MediaStir} from './MediaStir';
 // // import {MercenaryAssault} from './MercenaryAssault';
@@ -220,7 +220,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.BATTERY_FACTORY]: {Factory: BatteryFactory},
     // [CardName.VOLTAIC_METALLURGY]: {Factory: VoltaicMetallurgy},
     [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},
-    // [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},
+    [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},
     // [CardName.EXPEDITION_VEHICLES]: {Factory: ExpeditionVehicles},
     [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},
     // [CardName.GEOLOGICAL_SURVEY_UNDERWORLD]: {Factory: GeologicalSurvey},

@@ -488,10 +488,10 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  // public ware(count: number = 1, options?: ItemOptions) {
-  //   const item = new CardRenderItem(CardRenderItemType.WARE, count, options);
-  //   return this._appendToRow(item);
-  // }
+  public ware(count: number = 1, options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.WARE, count, options);
+    return this._appendToRow(item);
+  }
 
   // public scoop(count: number = 1, options?: ItemOptions) {
   //   const item = new CardRenderItem(CardRenderItemType.SCOOP, count, options);

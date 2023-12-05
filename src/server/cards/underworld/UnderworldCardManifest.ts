@@ -127,7 +127,7 @@ import {UndergroundSettlement} from './UndergroundSettlement';
 import {UndergroundShelters} from './UndergroundShelters';
 import {UndergroundSmugglingRing} from './UndergroundSmugglingRing';
 import {Voltagon} from './Voltagon';
-// import {VoltaicMetallurgy} from './VoltaicMetallurgy';
+import {VoltaicMetallurgy} from './VoltaicMetallurgy';
 import {VolunteerMiningInitiative} from './VolunteerMiningInitiative';
 // // import {Whales} from './Whales';
 
@@ -218,7 +218,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.VOLUNTEER_MINING_INITIATIVE]: {Factory: VolunteerMiningInitiative},
     [CardName.NANOFOUNDRY]: {Factory: Nanofoundry},
     [CardName.BATTERY_FACTORY]: {Factory: BatteryFactory},
-    // [CardName.VOLTAIC_METALLURGY]: {Factory: VoltaicMetallurgy},
+    [CardName.VOLTAIC_METALLURGY]: {Factory: VoltaicMetallurgy},
     [CardName.PUBLIC_SPACELINE]: {Factory: PublicSpaceline},
     [CardName.MARTIAN_EXPRESS]: {Factory: MartianExpress},
     [CardName.EXPEDITION_VEHICLES]: {Factory: ExpeditionVehicles},

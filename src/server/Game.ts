@@ -113,7 +113,7 @@ export class Game implements IGame, Logger {
   private researchedPlayers = new Set<PlayerId>();
   private draftedPlayers = new Set<PlayerId>();
   // The first player of this generation.
-  private first: IPlayer;
+  public first: IPlayer;
 
   // Drafting
   private draftRound: number = 1;

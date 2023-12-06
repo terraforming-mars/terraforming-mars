@@ -329,6 +329,7 @@
     "${0} gained 0 M€ from ${1} action.": "${0} erhielt 0 M€ aus der Aktion ${1}.",
     "${0} gained ${1} M€ from ${2} action.": "${0} erhielt ${1} M€ aus der Aktion ${2}.",
     "${0} cannot afford to use the ${1} effect": "${0} kann es sich nicht leisten, den ${1}-Effekt zu nutzen",
+    "${0} declined to use the ${1} effect": "${0} entschied, den ${1}-Effekt nicht zu nutzen",
 
     "${0} gained ${1} TR": "${0} erhielt ${1} TW",
     "${0} lost ${1} TR": "${0} verlor ${1} TW",

@@ -552,8 +552,7 @@ export class Player implements IPlayer {
     let result = this.tableau.filter((card) => card.resourceType !== undefined);
 
     if (resource !== undefined) {
-      result = result.filter((card) => card.resourceType === resource);
-      // result = result.filter((card) => card.resourceType === resource || card.resourceType === CardResource.WARE);
+      result = result.filter((card) => card.resourceType === resource || card.resourceType === CardResource.WARE);
     }
 
     return result;
@@ -712,6 +711,14 @@ export class Player implements IPlayer {
     }
   }
 
+  /**
+   * Ask the player to draft from a set of cards.
+   *
+   * @param initialDraft when true, this is part of the first generation draft.
+   * @param passTo  The player _this_ player passes remaining cards to.
+   * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
+   *   step in the draft, and cards have to be dealt.
+   */
   public askPlayerToDraft(initialDraft: boolean, passTo: IPlayer, passedCards?: Array<IProjectCard>): void {
     let cardsToDraw = 4;
     let cardsToKeep = 1;
@@ -1990,6 +1997,7 @@ export class Player implements IPlayer {
     return player;
   }
 
+  /* Shorthand for deferring things */
   public defer(input: PlayerInput | undefined | void, priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) {
       return;

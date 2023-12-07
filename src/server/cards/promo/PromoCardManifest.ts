@@ -34,6 +34,7 @@ import {Harvest} from './Harvest';
 import {HermeticOrderofMars} from './HermeticOrderofMars';
 import {HiTechLab} from './HiTechLab';
 import {HomeostasisBureau} from './HomeostasisBureau';
+import {IcyImpactors} from './IcyImpactors';
 import {ImportedNutrients} from './ImportedNutrients';
 import {InterplanetaryTrade} from './InterplanetaryTrade';
 import {JovianEmbassy} from './JovianEmbassy';
@@ -141,6 +142,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.SOLAR_LOGISTICS]: {Factory: SolarLogistics},
     [CardName.TESLARACT]: {Factory: Teslaract},
     [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
+    [CardName.ICY_IMPACTORS]: {Factory: IcyImpactors},
   },
 
   preludeCards: {

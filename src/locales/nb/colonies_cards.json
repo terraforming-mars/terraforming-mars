@@ -6,8 +6,8 @@
     "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Krever at du mister 1 svever. Stjel 5 M€ fra en valgfri spiller.",
 
     "Atmo Collectors": "Atmo-samlere",
-    "Action: Add one floater here.": "Handling: Legg til en svever her.",
-    "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Handling: Bruk 1 svever her for å få 2 titanium, 3 energi eller 4 varme.",
+    "Add one floater here.": "Legg til en svever her.",
+    "Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Bruk 1 svever her for å få 2 titanium, 3 energi eller 4 varme.",
     "Add 2 floaters to ANY card.": "Legg til 2 svevere på ET VALGFRITT kort.",
 
     "Community Services": "Samfunnstjenester",
@@ -20,7 +20,7 @@
     "Requires 4 science tags. Increase your energy production 4 steps.": "Krever 4 vitenskap-symboler. Øk din energi-produksjon med 4.",
 
     "Cryo-Sleep": "Kryo-søvn",
-    "Effect: When you trade, you pay 1 less resource for it.": "Effekt: Når du handler, betaler du 1 ressurs mindre for det.",
+    "When you trade, you pay 1 less resource for it.": "Når du handler, betaler du 1 ressurs mindre for det.",
 
     "Earth Elevator": "Jord-heis",
     "Increase your titanium production 3 steps.": "Øk din titanium-produksjon med 3.",
@@ -35,7 +35,7 @@
     "Add two floaters to ANOTHER card.": "Legg til 2 svevere på ET VALGFRITT kort.",
 
     "Floater Technology": "Svever-teknologi",
-    "Action: Add 1 floater to ANOTHER card.": "Handling: Legg til 1 svever på ET VALGFRITT kort.",
+    "Add 1 floater to ANOTHER card.": "Legg til 1 svever på ET VALGFRITT kort.",
 
     "Galilean Waystation": "Galileisk veistasjon",
     "Increase your M€ production 1 step for every Jovian tag in play.": "Øk din M€-produksjon med 1 for hvert Jupiter-symbol i spill.",
@@ -57,8 +57,8 @@
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Krever 1 Jupiter-symbol. Øk din TR med 1 steg. Legg til 2 svevere på ET VALGFRITT kort.",
 
     "Jupiter Floating Station": "Jupiter-svever-stasjon",
-    "Action: Add 1 floater to a JOVIAN CARD.": "Handling: Legg til 1 svever på ET JUPITER-KORT.",
-    "Action: Gain 1 M€ for every floater here [MAX 4].": "Handling: Få 1 M€ for hver svever her [MAKS 4].",
+    "Add 1 floater to a JOVIAN CARD.": "Legg til 1 svever på ET JUPITER-KORT.",
+    "Gain 1 M€ for every floater here [MAX 4].": "Få 1 M€ for hver svever her [MAKS 4].",
     "Requires 3 science tags.": "Krever 3 vitenskap-symboler.",
 
     "Luna Governor": "Måne-guvernør",
@@ -71,11 +71,11 @@
     "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Øk din titanium-produksjon med 1 for hver 2 Jord-symboler du har i spill, inkludert dette.",
 
     "Market Manipulation": "Markedsmanipulasjon",
-    "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Øk et koloni-spor med 1 steg. Senk et annet koloni-spor med 1 steg.",
+    "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Øk sporet på en koloni-plate med 1 steg. Senk et annet koloni-spor med 1 steg.",
 
     "Martian Zoo": "Mars Dyrepark",
-    "Effect: When you play an Earth tag, place an animal here.": "Effekt: Når du spiller et Jord-symbol, plasser et dyr her.",
-    "Action: Gain 1M€ per animal here.": "Få 1 M€ per dyr her.",
+    "When you play an Earth tag, place an animal here.": "Når du spiller et Jord-symbol, plasser et dyr her.",
+    "Gain 1M€ per animal here.": "Få 1 M€ per dyr her.",
     "Requires 2 city tiles in play.": "Krever 2 byer i spill.",
 
     "Mining Colony": "Gruve-koloni",
@@ -99,67 +99,67 @@
     "Quantum Communications": "Kvantekommunikasjon",
     "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Krever 4 vitenskap-symboler. Øk din M€-produksjon med 1 for hver koloni i spill.",
 
-    "Red Spot Observatory": "Roter-Fleck-Observatorium",
-    "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "AKTION: Füge dieser Karte einen Schweber hinzu oder entferne einen Schweber von dieser Karte, um eine Karte zu ziehen.",
-    "Requires 3 science tags. Draw 2 cards.": "Erfordert 3 Wissenschaftssymbole. Ziehe 2 Karten.",
+    "Red Spot Observatory": "Rød Flekk-observatorium",
+    "Add 1 floater to this card, or spend 1 floater here to draw a card.": "Legg til 1 svever på dette kortet, eller bruk 1 svever her for å trekke et kort.",
+    "Requires 3 science tags. Draw 2 cards.": "Krever 3 vitenskap-symboler. Trekk 2 kort.",
 
-    "Refugee Camps": "Flüchtlingslager",
-    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "AKTION: Senke deine M€-Produktion um 1, um dieser Karte eine Lager-Ressource hinzuzufügen",
-    "1 VP for each camp resource on this card.": "1 SP für jede Lager-Ressource auf dieser Karte.",
+    "Refugee Camps": "Flyktningleirer",
+    "Decrease your M€ production 1 step to add a camp resource to this card.": "Reduser din M€-produksjon med 1 for å legge til en leir-ressurs på dette kortet.",
+    "1 VP for each camp resource on this card.": "1 SP for hver leir-ressurs på dette kortet.",
 
-    "Research Colony": "Forschungskolonie",
-    "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Platziere eine Kolonie. DARF AUCH AUF EINER EIGENEN KOLONIE PLATZIERT WERDEN. Ziehe 2 Karten.",
+    "Research Colony": "Forskningskoloni",
+    "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Plasser en koloni. KAN PLASSERES DER DU ALLEREDE HAR EN KOLONI. Trekk 2 kort.",
 
-    "Rim Freighters": "Randzonen-Frachter",
+    "Rim Freighters": "Frakteskip fra ytterkanten",
 
-    "Sky Docks": "Himmelshäfen",
-    "Effect: When you play a card, you pay 1 M€ less for it.": "Effekt: Wenn du eine Karte spielst, zahle 1 M€ weniger für sie.",
-    "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Erfodert 2 Erdsymbole. Erhalte 1 Handelsflotte.",
+    "Sky Docks": "Himmel-dokker",
+    "When you play a card, you pay 1 M€ less for it.": "Når du spiller et kort, betaler du 1 M€ mindre for det.",
+    "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Krever 2 Jord-symboler. Få 1 Handelsflåte.",
 
-    "Solar Probe": "Solarsonde",
-    "Draw 1 card for every 3 science tags you have, including this.": "Ziehe 1 Karte für jedes 3. Wissenschaftssymbol, das du besitzt (inklusive diesem).",
+    "Solar Probe": "Solsonde",
+    "Draw 1 card for every 3 science tags you have, including this.": "Trekk 1 kort for hvert 3. vitenskapsymbol du har, inkludert dette.",
 
-    "Solar Reflectors": "Solarreflektoren",
-    "Increase your heat production 5 steps.": "Erhöhe deine Wärmeproduktion um 5.",
+    "Solar Reflectors": "Solreflektorer",
+    "Increase your heat production 5 steps.": "Øk din varme-produksjon med 5.",
 
-    "Space Port": "Raumhafen",
-    "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "Erfordert 1 Kolonie. Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 4. Platziere ein Stadtplättchen. Erhalte 1 Handelsflotte.",
+    "Space Port": "Romhavn",
+    "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "Krever 1 koloni. Reduser din energi-produksjon med 1 og øk din M€-produksjon med 4. Plasser en by. Få 1 Handelsflåte.",
 
-    "Space Port Colony": "Raumhafen-Kolonie",
-    "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Erfordert 1 Kolonie. Platziere 1 Kolonie. DARF AUCH AUF EINER EIGENEN KOLONIE PLATZIERT WERDEN. Erhalte 1 Handelsflotte.",
-    "1VP per 2 colonies in play.": "1 SP für jede zweite Kolonie im Spiel.",
+    "Space Port Colony": "Romhavn-koloni",
+    "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Krever en koloni. Plasser en koloni. KAN PLASSERES PÅ EN KOLONI-PLATE DER DU ALLEREDE HAR EN KOLONI. Få 1 Handelsflåte.",
+    "1VP per 2 colonies in play.": "1 SP for hver 2 kolonier i spill.",
 
-    "Spin-off Department": "Zweigstelle",
-    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Effekt: Wenn du eine Karte mit Basiskosten von 20 M€ oder mehr spielst, ziehe eine Karte.",
-    "Increase your M€ production 2 steps.": "Erhöhe deine M€-Produktion um 2.",
+    "Spin-off Department": "Spin-off-avdeling",
+    "WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "NÅR DU SPILLER ET KORT MED EN GRUNNKOSTNAD PÅ 20M€ ELLER MER, trekk et kort.",
+    "Increase your M€ production 2 steps.": "Øk din M€-produksjon med 2.",
 
     "Sub-zero Salt Fish": "Ishavsfisk",
-    "Action: Add 1 animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
-    "1 VP per 2 animals on this card.": "1 SP für jedes zweite Tier auf dieser Karte.",
-    "Requires -6 C. Decrease any plant production 1 step.": "Erfordert -6 °C. Senke eine beliebige Pflanzen-Produktion um 1.",
+    "Add 1 animal to this card.": "Legg til 1 dyr på dette kortet.",
+    "1 VP per 2 animals on this card.": "1 SP for hvert 2. dyr på dette kortet.",
+    "Requires -6 C. Decrease any plant production 1 step.": "Krever -6 C. Reduser en valgfri plante-produksjon med 1 steg.",
 
-    "Titan Air-scrapping": "Titan-Luft-Recycling",
-    "Action: Spend 1 titanium to add 2 floaters here.": "AKTION: Bezahle 1 Titan, um dieser Karte 2 Schweber hinzuzufügen.",
-    "Action: Spend 2 floaters here to increase your TR 1 step.": "AKTION: Entferne 2 Schweber von dieser Karte, um deine TV um 1 zu erhöhen.",
+    "Titan Air-scrapping": "Luftskraping på Titan",
+    "Spend 1 titanium to add 2 floaters here.": "Bruk 1 titanium for å legge til 2 svevere her.",
+    "Spend 2 floaters here to increase your TR 1 step.": "Bruk 2 svevere her for å øke din TR med 1 steg.",
 
-    "Titan Floating Launch-pad": "Titan-Schweber-Startplattform",
-    "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "AKTION: Füge einer BELIEBIGEN JUPITER-KARTE einen Schweber hinzu oder entferne einen Schweber von dieser Karte, um kostenlos zu handeln.",
-    "Add two floaters to ANY JOVIAN CARD.": "Füge 2 Schweber einer BELIEBIGEN JUPITER-KARTE hinzu.",
+    "Titan Floating Launch-pad": "Flytende Lanseringsplattform på Titan",
+    "Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Legg til 1 svever på ET VALGFRITT JUPITER-KORT eller bruk 1 svever her for å handle gratis.",
+    "Add two floaters to ANY JOVIAN CARD.": "Legg til 2 svevere på ET VALGFRITT JUPITER-KORT.",
 
-    "Titan Shuttles": "Titan-Shuttles",
-    "Action: Add 2 floaters to ANY JOVIAN CARD.": "AKTION: Füge 2 Schweber einer BELIEBIGEN JUPITER-KARTE hinzu.",
-    "Action: Spend any number of floaters here to gain the same number of titanium.": "AKTION: Entferne eine beliebige Anzahl an Schwebern von dieser Karte, um dieselbe Menge Titan zu erhalten.",
+    "Titan Shuttles": "Skytteltrafikk på Titan",
+    "Add 2 floaters to ANY JOVIAN CARD.": "Legg til 2 svevere på ET VALGFRITT JUPITER-KORT.",
+    "Spend any number of floaters here to gain the same number of titanium.": "Bruk et valgfritt antall svevere her for å få det samme antallet titanium.",
 
-    "Trade Envoys": "Handelsvertreter",
+    "Trade Envoys": "Handelsutsendinger",
 
-    "Trading Colony": "Handelskolonie",
-    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Effekt: Wenn du handelst, darfst du zuerst die Kolonie um 1 Schritt erhöhen.",
-    "Place a colony": "Platziere eine Kolonie.",
+    "Trading Colony": "Handelskoloni",
+    "When you trade, you may first increase that Colony Tile track 1 step.": "Når du handler, kan du først øke det koloni-spor med 1 steg.",
+    "Place a colony": "Plasser en koloni",
 
     "Urban Decomposers": "Urbane nedbrytere",
-    "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Erfordert, dass du 1 Stadtplättchen und eine Kolonie besitzt. Erhöhe deine Pflanzen-Produktion um 1 und füge einer ANDEREN Karte 2 Mikroben hinzu.",
+    "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Krever at du har 1 by og 1 koloni i spill. Øk din plante-produksjon med 1, og legg til 2 mikrober på ET VALGFRITT kort.",
 
-    "Warp Drive": "Warp-Antrieb",
-    "Effect: When you play a space card, you pay 4 M€ less for it.": "Effekt: Wenn du eine Weltraumkarte spielst, zahle 4 M€ weniger für sie.",
-    "Requires 5 science tags.": "Erfordert 5 Wissenschaftssymbole."
+    "Warp Drive": "Warpdrive",
+    "When you play a space card, you pay 4 M€ less for it.": "Når du spiller et rom-kort, betaler du 4 M€ mindre for det.",
+    "Requires 5 science tags.": "Krever 5 vitenskap-symboler."
 }

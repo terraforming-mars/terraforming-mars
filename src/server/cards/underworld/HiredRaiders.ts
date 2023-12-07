@@ -48,12 +48,13 @@ export class HiredRaiders extends Card implements IProjectCard {
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          return UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+          target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
             if (proceed) {
               target.stock.steal(Resource.MEGACREDITS, amountStolen, player);
             }
             return undefined;
-          });
+          }));
+          return undefined;
         }));
       }
     });

@@ -117,8 +117,10 @@ export interface IGame extends Logger {
   hasPassedThisActionPhase(player: IPlayer): boolean;
   // Public for testing.
   incrementFirstPlayer(): void;
-  // Only used in the prelude The New Space Race.
+  // Only used in the prelude The New Space Race
   overrideFirstPlayer(newFirstPlayer: IPlayer): void;
+  // The first player this generation
+  readonly first: IPlayer;
   gameIsOver(): boolean;
   isDoneWithFinalProduction(): boolean;
   doneWorldGovernmentTerraforming(): void;

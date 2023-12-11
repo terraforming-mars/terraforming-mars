@@ -177,7 +177,7 @@
 
     "${0} kept ${1} project cards": "${0} behielt ${1} Projektkarten",
     "${0} drew ${1}": "${0} zog(st) ${1}",
-    "${0} drew no cards": "${0} zogst keine Karten",
+    "${0} drew no cards": "${0} zog(st) keine Karten",
     "${0} drew ${1} and ${2}": "${0} zogst ${1} und ${2}",
     "${0} drew ${1}, ${2} and ${3}": "${0} zogst ${1}, ${2} und ${3}",
     "${0} drew ${1}, ${2}, ${3} and ${4}": "${0} zogst ${1}, ${2}, ${3} und ${4}",

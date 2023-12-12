@@ -1,47 +1,42 @@
 {
     "Ceres Tech Market": "Ceres Tech-Markt",
-    "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "AKTION: Werfe eine beliebige Anzahl von Karten aus deiner Hand ab, um 2 M€ für jede abgeworfene Karte zu erhalten.",
-    "Gain 2 M€ per colony you own.": "Erhalte 2 M€ pro Kolonie, die du besitzt.",
+    "Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "Kast et valgfritt antall kort fra hånden din for å få 2 M€ for hvert kastede kort.",
+    "Gain 2 M€ per colony you own.": "Få 2 M€ per koloni du eier.",
     
-    "Directed Heat Usage": "Direkte Wärmenutzung",
-    "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Aktion: Bezahle 3 Wärme, um entweder 4 M€ oder 2 Pflanzen zu erhalten.",
-    
-    "Ishtar Expedition": "Ishtar-Expedition",
-    "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Erfordert Venuswertung von 10%., erhalte 3 Titan und zieht 2 Venus-Karten.",
+    "Ishtar Expedition": "Ishtar-ekspedisjonen",
+    "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Krever Venus 10%. Få 3 titanium og trekk 2 Venus-kort.",
 
     "L1 Trade Terminal": "L1 Handelsterminal",
-    "Effect: When you trade, first increase that colony tile track 2 steps.": "Effekt: Wenn du Handel treibst, erhöhe zuerst die Leiste der Kolonieplättchen um 2 Schritte.",
-    "Add a resource to 3 different cards.": "Füge eine Ressource zu 3 verschiedenen Karten hinzu.",
+    "When you trade, first increase that colony tile track 2 steps.": "Når du handler, øk først sporet på koloniplaten med 2 trinn.",
+    "Add a resource to 3 different cards.": "Legg til en ressurs på 3 forskjellige kort.",
 
-    "Red Appeasement": "Rote Beschwichtigungspolitik",
-    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Benötigt, dass die ROTEN regieren oder dass du 2 Delegierte dort hast, und dass kein anderer Spieler gepasst hat.",
-    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Erhöhe die M€-Produktion um 2. Dies zählt als Passen. Du bekommst keine weiteren Züge in dieser Generation.",
-    "PASS": "PASSEN",
+    "Red Appeasement": "Rød forsoning",
+    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Krever at De Røde regjerer eller at du har 2 delegater der, OG AT INGEN ANDRE SPILLER HAR SAGT PASS.",
+    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Øk M€-produksjonen med 2 trinn. Dette teller som å si pass. Du får ingen flere trekk denne generasjonen.",
+    "PASS": "PASS",
 
-    "Summit Logistics": "Gipfel-Logistik",
-    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Benötigt, dass FORSCHUNG regieren oder dass du 2 Delegierte dort hast. Erhalte 1 M€ pro Planetensymbol und Kolonie, die du besitzt. Ziehe 2 Karten.",
+    "Summit Logistics": "Toppmøte-logistikk",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Krever at Forskerne regjerer eller at du har 2 delegater der. Få 1 M€ per planetsymbol og koloni du har. Trekk 2 kort.",
     
     
     "Psychrophiles": "Psykrofiler",
-    "Action: Add 1 microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
-    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Effekt: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von dieser Karte für je 2 M€ verwenden.",
-    "Temperature must be -20 C or lower.": "Temperatur muss -20 °C oder niedriger sein.",
+    "When paying for a plant card, microbes here may be used as 2 M€ each.": "Når du betaler for et plantekort, kan mikrober her brukes som 2 M€ hver.",
+    "Temperature must be -20 C or lower.": "Temperaturen må være -20 C eller lavere.",
 
-    "Research Coordination": "Koordinierte Forschung",
-    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Wenn du eine Aktion ausführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
+    "Research Coordination": "Forskningskoordinering",
 
-    "SF Memorial": "Sci-Fi-Gedenkstätte",
-    "Draw 1 card.": "Ziehe 1 Karte.",
+    "SF Memorial": "SF-minnesmerke",
+    "Draw 1 card.": "Trekk 1 kort.",
 
-    "Martian Survey": "Marsvermessung",
-    "Oxygen must be 4% or lower. Draw two cards.": "Sauerstoffgehalt muss 4% oder niedriger sein. Ziehe zwei Karten.",
+    "Martian Survey": "Mars-undersøkelse",
+    "Oxygen must be 4% or lower. Draw two cards.": "Oksygen må være 4% eller lavere. Trekk to kort.",
 
-    "House Printing": "Häuserdruck",
-    "Increase your steel production 1 step.": "Erhöhe deine Stahlproduktion um 1.",
+    "House Printing": "Husprinting",
+    "Increase your steel production 1 step.": "Øk stålproduksjonen din med 1 trinn.",
 
-    "Space Hotels": "Weltraumhotels",
-    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Erfordert 2 Erdsymbole. Erhöhe deine M€-Produktion um 4.",
+    "Space Hotels": "Romhoteller",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Krever 2 jord-symboler. Øk M€-produksjonen med 4 trinn.",
 
-    "Lava Tube Settlement": "Lavaröhren-Siedlung",
-    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen auf einem VULKAN unabhängig von angrenzenden Stadtplättchen."
+    "Lava Tube Settlement": "Bosetning i lavatunnel",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Reduser energiproduksjonen din med 1 trinn og øk M€-produksjonen din med 2 trinn. Plasser en by på et VULKANSK OMRÅDE uavhengig av tilstøtende byer."
 }

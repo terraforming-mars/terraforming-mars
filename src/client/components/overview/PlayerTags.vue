@@ -2,7 +2,7 @@
     <div class="player-tags">
         <div class="player-tags-main">
             <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
-            <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
+            <div v-if="isEscapeVelocityOn" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
               <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
             </div>
             <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>

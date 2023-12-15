@@ -9,6 +9,7 @@ import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
 import {AmazonisBoard} from '../../../src/server/boards/AmazonisBoard';
 import {UnseededRandom} from '../../../src/common/utils/Random';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 
 describe('GagarinMobileBase', () => {
   let game: Game;
@@ -71,7 +72,7 @@ describe('GagarinMobileBase', () => {
   });
 
   it('onTilePlaced, self', () => {
-    game.gagarinBase = ['13'];
+    game.gagarinBase = [space13.id];
     game.addCity(player, space13);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
@@ -79,11 +80,23 @@ describe('GagarinMobileBase', () => {
 
   it('onTilePlaced, opponent', () => {
     game.simpleAddTile(player2, game.board.getSpace('07'), {tileType: TileType.NUCLEAR_ZONE});
-    game.gagarinBase = ['13'];
+    game.gagarinBase = [space13.id];
     game.addCity(player2, space13);
     runAllActions(game);
     cast(player2.getWaitingFor(), undefined);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
     expect(selectSpace.spaces.map((s) => s.id)).to.have.members(['12', '19', '20']);
+
+    const space12 = game.board.getSpace('12');
+    space12.bonus = [SpaceBonus.DRAW_CARD];
+
+    // When gagarin moves, it gets a bonus, not the opponent.
+    player.cardsInHand = [];
+    player2.cardsInHand = [];
+    selectSpace.cb(space12);
+
+    expect(player2.cardsInHand).is.empty;
+    expect(player.cardsInHand).has.length(1);
   });
 });

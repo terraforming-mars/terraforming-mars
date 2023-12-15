@@ -107,7 +107,7 @@ export class GagarinMobileBase extends CorporationCard implements IActionCard {
       return;
     }
     if (space.id === activePlayer.game.gagarinBase[0]) {
-      cardOwner.defer(this.action(activePlayer));
+      cardOwner.defer(this.action(cardOwner));
     }
   }
 }

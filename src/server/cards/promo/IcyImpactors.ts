@@ -18,7 +18,7 @@ export class IcyImpactors extends Card implements IActionCard {
       name: CardName.ICY_IMPACTORS,
       type: CardType.ACTIVE,
       tags: [Tag.SPACE],
-      cost: 10,
+      cost: 15,
       resourceType: CardResource.ASTEROID,
 
       metadata: {
@@ -28,7 +28,7 @@ export class IcyImpactors extends Card implements IActionCard {
             ab.megacredits(10).openBrackets.titanium(1).closeBrackets.startAction.asteroids(2));
           b.br;
           b.action('Spend 1 asteroid here to place an ocean tile. ' +
-            'FIRST PLACER CHOOSES WHERE YOU MUST PLACE IT', (ab) =>
+            'FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT', (ab) =>
             ab.or().asteroids(1).startAction.oceans(1).asterix());
         }),
       },

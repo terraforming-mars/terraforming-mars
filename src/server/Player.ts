@@ -95,6 +95,7 @@ export class Player implements IPlayer {
 
   // Terraforming Rating
   private terraformRating: number = 20;
+  public hasIncreasedTerraformRatingThisGeneration: boolean = false;
 
   public get megaCredits(): number {
     return this.stock.megacredits;
@@ -303,6 +304,7 @@ export class Player implements IPlayer {
   public increaseTerraformRating(steps: number = 1, opts: {log?: boolean} = {}) {
     const raiseRating = () => {
       this.terraformRating += steps;
+      this.hasIncreasedTerraformRatingThisGeneration = true;
 
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
@@ -1818,6 +1820,7 @@ export class Player implements IPlayer {
       pickedCorporationCard: this.pickedCorporationCard?.name,
       // Terraforming Rating
       terraformRating: this.terraformRating,
+      hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
       // Resources
       megaCredits: this.megaCredits,
       megaCreditProduction: this.production.megacredits,
@@ -1909,10 +1912,12 @@ export class Player implements IPlayer {
     player.colonies.cardDiscount = d.cardDiscount;
     player.colonies.tradeDiscount = d.colonyTradeDiscount;
     player.colonies.tradeOffset = d.colonyTradeOffset;
+    player.colonies.setFleetSize(d.fleetSize);
     player.colonies.victoryPoints = d.colonyVictoryPoints;
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
     player.energy = d.energy;
-    player.colonies.setFleetSize(d.fleetSize);
+    // TODO(kberg): remove ?? false by 2023-01-30
+    player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration ?? false;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
     player.megaCredits = d.megaCredits;
@@ -1985,13 +1990,6 @@ export class Player implements IPlayer {
 
     if (d.underworldData !== undefined) {
       player.underworldData = d.underworldData;
-    }
-
-    if (d.hasIncreasedTerraformRatingThisGeneration === true) {
-      const card = player.playedCards.find((card) => card.name === CardName.UNITED_NATIONS_MARS_INITIATIVE);
-      card?.onIncreaseTerraformRating?.(player, player, 1);
-      const card2 = player.playedCards.find((card) => card.name === CardName.PRISTAR);
-      card2?.onIncreaseTerraformRating?.(player, player, 1);
     }
 
     return player;

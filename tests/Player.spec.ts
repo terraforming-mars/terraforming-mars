@@ -203,9 +203,10 @@ describe('Player', function() {
   it('serialization test', () => {
     const json: SerializedPlayer = {
       id: 'p-blue',
-      pickedCorporationCard: 'Tharsis Republic' as CardName,
+      pickedCorporationCard: CardName.THARSIS_REPUBLIC,
       terraformRating: 20,
       corporations: [],
+      hasIncreasedTerraformRatingThisGeneration: false,
       megaCredits: 1,
       megaCreditProduction: 2,
       steel: 3,

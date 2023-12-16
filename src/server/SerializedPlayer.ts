@@ -6,8 +6,6 @@ import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 
 interface DeprecatedFields {
-  // TODO(kberg): remove after 2023-11-30
-  hasIncreasedTerraformRatingThisGeneration?: boolean;
 }
 
 export interface SerializedPlayer extends DeprecatedFields{
@@ -35,6 +33,8 @@ export interface SerializedPlayer extends DeprecatedFields{
     energyProduction: number;
     fleetSize: number;
     handicap: number;
+    // TODO(kberg): remove ? by 2024-01-30
+    hasIncreasedTerraformRatingThisGeneration?: boolean;
     hasTurmoilScienceTagBonus: boolean;
     heat: number;
     heatProduction: number;

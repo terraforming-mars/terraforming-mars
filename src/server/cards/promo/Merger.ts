@@ -34,7 +34,6 @@ export class Merger extends PreludeCard {
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
-    LogHelper.logDrawnCards(player, dealtCorps, true);
     const enabled = dealtCorps.map((corp) => {
       return player.canAfford(Merger.mergerCost - this.spendableMegacredits(player, corp));
     });

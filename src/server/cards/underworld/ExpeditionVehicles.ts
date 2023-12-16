@@ -8,6 +8,8 @@ import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {isHazardTileType} from '../../../common/AresTileType';
 import {all} from '../Options';
+import {BoardType} from '../../boards/BoardType';
+import {MoonExpansion} from '../../moon/MoonExpansion';
 
 export class ExpeditionVehicles extends Card implements IProjectCard {
   constructor() {
@@ -38,9 +40,11 @@ export class ExpeditionVehicles extends Card implements IProjectCard {
     });
   }
 
-  onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
+  onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     if (cardOwner === activePlayer) {
-      const adjacentSpacesWithTiles = activePlayer.game.board.getAdjacentSpaces(space)
+      const game = activePlayer.game;
+      const board = boardType === BoardType.MARS ? game.board : MoonExpansion.moonData(game).moon;
+      const adjacentSpacesWithTiles = board.getAdjacentSpaces(space)
         .filter((space) => {
           return space.tile !== undefined && !isHazardTileType(space.tile.tileType);
         });

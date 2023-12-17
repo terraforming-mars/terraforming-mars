@@ -3,14 +3,15 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {digit} from '../Options';
 import {SelectCard} from '../../inputs/SelectCard';
 import {LogHelper} from '../../LogHelper';
 import {CardResource} from '../../../common/CardResource';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Spire extends CorporationCard {
+export class Spire extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.SPIRE,
@@ -53,7 +54,7 @@ export class Spire extends CorporationCard {
     return undefined;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (player.isCorporation(this.name)) {
       const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
       if (count >= 2) {

@@ -71,7 +71,7 @@ export interface ICard {
   /** Returns any dynamic influence value */
   getInfluenceBonus?: (player: IPlayer) => number;
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
-  onCardPlayed?(player: IPlayer, card: IProjectCard): PlayerInput | undefined | void;
+  onCardPlayed?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
   onCardPlayedFromAnyPlayer?(thisCardOwner: IPlayer, playedCardOwner: IPlayer, card: IProjectCard): PlayerInput | undefined;
   onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;

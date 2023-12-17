@@ -6,7 +6,7 @@ import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 
 export class Ringcom extends CorporationCard {
   constructor() {
@@ -50,10 +50,9 @@ export class Ringcom extends CorporationCard {
 
   public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
-    return undefined;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     if (card.tags.includes(Tag.JOVIAN)) {
       player.game.getPlayers().forEach((p) => {
         if (p.isCorporation(this.name)) {

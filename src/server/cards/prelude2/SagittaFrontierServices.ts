@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Resource} from '../../../common/Resource';
@@ -46,10 +46,9 @@ export class SagittaFrontierServices extends CorporationCard {
     if (player === cardOwner) {
       this.onCardPlayed(cardOwner, card);
     }
-    return undefined;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (player.isCorporation(this.name)) {
       const count = card.tags.filter((tag) => tag !== Tag.WILD).length + (card.type === CardType.EVENT ? 1 : 0);
       if (count === 0) {

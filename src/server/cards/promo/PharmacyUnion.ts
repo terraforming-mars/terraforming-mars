@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -57,17 +57,14 @@ export class PharmacyUnion extends CorporationCard {
     return [Tag.MICROBE, Tag.MICROBE];
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
-    this._onCardPlayed(player, card);
-  }
-
   public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this._onCardPlayed(player, card);
-    return undefined;
+    this.onCardPlayed(player, card);
   }
 
-  private _onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): void {
-    if (this.isDisabled) return undefined;
+  public onCardPlayed(player: IPlayer, card: ICard): void {
+    if (this.isDisabled) {
+      return;
+    }
 
     const game = player.game;
 
@@ -166,8 +163,6 @@ export class PharmacyUnion extends CorporationCard {
         },
       ), Priority.SUPERPOWER);
     }
-
-    return undefined;
   }
 
   public serialize(serialized: SerializedCard) {

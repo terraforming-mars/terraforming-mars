@@ -45,7 +45,7 @@ export abstract class DeferredAction<T = undefined> implements AndThen<T> {
   public queueId: number = -1;
   constructor(
     public player: IPlayer,
-    public priority: Priority = Priority.DEFAULT,
+    public readonly priority: Priority = Priority.DEFAULT,
   ) {}
 
   public static create(player: IPlayer, priority: Priority, execute: () => PlayerInput | undefined): DeferredAction {

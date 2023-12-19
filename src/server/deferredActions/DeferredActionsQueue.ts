@@ -37,6 +37,9 @@ export class DeferredActionsQueue {
     return a.priority < b.priority || (a.priority === b.priority && a.queueId < b.queueId);
   }
 
+  /**
+   * Return the index within the queue that has the highest priority, or -1 if no entry exists.
+   */
   private nextItemIndex(): number {
     if (this.queue.length === 0) {
       return -1;
@@ -66,16 +69,10 @@ export class DeferredActionsQueue {
     });
   }
 
-  // The following methods are used in tests
-  public peek(): DeferredAction<any> | undefined {
-    return this.queue[this.nextItemIndex()];
-  }
-
-  public pop(): DeferredAction<any> | undefined {
-    return this.queue.splice(this.nextItemIndex(), 1)[0];
-  }
-
-  public run(action: DeferredAction, cb: () => void): void {
+  /**
+   * Run a single action, and then call cb.
+   */
+  private run(action: DeferredAction, cb: () => void): void {
     // Special hook for trade bonus deferred actions
     // So that they happen for all players at the same time
     if (action instanceof GiveColonyBonus) {
@@ -92,6 +89,23 @@ export class DeferredActionsQueue {
     }
   }
 
+  /**
+   * Tests only: look at the highest priority item on the queue.
+   */
+  public peek(): DeferredAction<any> | undefined {
+    return this.queue[this.nextItemIndex()];
+  }
+
+  /**
+   * Tests only: remove the highest priority item from the queue.
+   */
+  public pop(): DeferredAction<any> | undefined {
+    return this.queue.splice(this.nextItemIndex(), 1)[0];
+  }
+
+  /**
+   * Tests only: Run the next item on the queue. This is in insertion order, not priority order.
+   */
   public runNext(): void {
     const action = this.pop();
     if (action !== undefined) {

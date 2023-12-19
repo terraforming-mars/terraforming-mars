@@ -303,10 +303,30 @@ export interface IPlayer {
   /** Add `corp`'s initial action to the deferred action queue, if it has one. */
   deferInitialAction(corp: ICorporationCard): void;
   getActions(): OrOptions;
+
+  /**
+   * Process the response this player provided for the current input it's waiting for.
+   */
   process(input: InputResponse): void;
+  /** Return the piece of input this player is asked to provide. */
   getWaitingFor(): PlayerInput | undefined;
+
+  /**
+   * Define the piece of input this player is asked to provide. When provided, call cb.
+   *
+   * setWaitingFor will overwrite another piece of data this player is asked
+   * to wait for. Use setWaitingForSafely to not overwrite the most current version.
+   */
   setWaitingFor(input: PlayerInput, cb?: () => void): void;
+
+  /**
+   * Define the piece of input this player is asked to provide. When provided, call cb.
+   *
+   * If this player is already waiting for something, this call will set up a
+   * control that doesn't pop this in the input until the current request is resolved.
+   */
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
+
   serialize(): SerializedPlayer;
   /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined, priority?: Priority): void;

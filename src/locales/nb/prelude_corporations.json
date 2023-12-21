@@ -1,19 +1,19 @@
 {
     "SPIRE": "SPIRE",
     "Spire": "Spire",
-    "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Du begynner med 44 M€. Som din første handling, trekker du 4 kort, og kaster deretter 3 kort fra hånden din.",
+    "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Du starter med 44 M€. Som din første handling, trekker du 4 kort, og kaster deretter 3 kort fra hånden din.",
     "Effect: When you play a card with at least 2 tags. including this, add a science resource here.": "Effekt: Når du spiller et kort med minst 2 symboler, inkludert dette, legg til en vitenskapsressurs på dette kortet.",
     "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "Effekt: Når du bruker et standardprosjekt, kan vitenskapsressurser her brukes som 2 M€ hver.",
     
     "SAGITTA FRONTIER SERVICES": "SAGITTA GRENSETJENESTER",
     "Sagitta Frontier Services": "Sagitta Grensetjenester",
-    "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": "Du begynner med 28 M€. Øk energiproduksjonen med 1 og M€-produksjonen med 2. Trekk et kort uten symboler.",
+    "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": "Du starter med 28 M€. Øk energiproduksjonen med 1 og M€-produksjonen med 2. Trekk et kort uten symboler.",
     "Effect: When you play a card with no tags, gain 4 M€.": "Effekt: Du får 4 M€ når du spiller et kort uten symboler.",
     "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "Effekt: Du får 1 M€ når du spiller et kort med NØYAKTIG 1 symbol.",
     
     "ECOTEC": "ECOTEC",
     "Ecotec": "Ecotec",
-    "You start with 42 M€. Increase your plant production 1 step.": "Du begynner med 42 M€. Øk planteproduksjonen din med 1.",
+    "You start with 42 M€. Increase your plant production 1 step.": "Du starter med 42 M€. Øk planteproduksjonen din med 1.",
     "Effect: When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.": "Effekt: Når du spiller et mikrobe-, plante- eller dyresymbol, får du 1 plante eller legger til en mikrobe på ET KORT.",
     
     "PALLADIN SHIPPING": "PALLADIN-VERSAND",

@@ -7,6 +7,7 @@ import {ActionCard} from '../ActionCard';
 import {all, digit} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {sum} from '../../../common/utils/utils';
+import {CardResource} from '../../../common/CardResource';
 
 export class MiningMarketInsider extends ActionCard implements IProjectCard {
   constructor() {
@@ -15,6 +16,7 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
       name: CardName.MINING_MARKET_INSIDER,
       cost: 5,
       tags: [Tag.EARTH],
+      resourceType: CardResource.DATA,
 
       action: {
         spend: {resourcesHere: 4},

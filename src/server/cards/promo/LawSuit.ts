@@ -10,6 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {all} from '../Options';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class LawSuit extends Card implements IProjectCard {
   constructor() {
@@ -44,9 +45,13 @@ export class LawSuit extends Card implements IProjectCard {
       .andThen((suedPlayer: IPlayer) => {
         const amount = Math.min(3, suedPlayer.megaCredits);
         player.stock.add(Resource.MEGACREDITS, amount);
-        suedPlayer.stock.deduct(Resource.MEGACREDITS, amount, {log: true, from: player, stealing: true});
         suedPlayer.playedCards.push(this);
-        return undefined;
+        return UnderworldExpansion.maybeBlockAttack(suedPlayer, player, (proceed) => {
+          if (proceed) {
+            suedPlayer.stock.deduct(Resource.MEGACREDITS, amount, {log: true, from: player, stealing: true});
+          }
+          return undefined;
+        });
       });
   }
   public override getVictoryPoints() {

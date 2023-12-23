@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {HenkeiGenetics} from '../../../src/server/cards/underworld/HenkeiGenetics';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {CardResource} from '../../../src/common/CardResource';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
@@ -43,7 +43,7 @@ describe('HenkeiGenetics', () => {
     cast(player.popWaitingFor(), undefined);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.cardsInHand[0].resourceType).eq(CardResource.MICROBE);
+    expect(player.cardsInHand[0].tags).contains(Tag.MICROBE);
     expect(player.underworldData.corruption).eq(0);
   });
 

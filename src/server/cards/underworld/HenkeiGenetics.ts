@@ -20,7 +20,7 @@ export class HenkeiGenetics extends ActiveCorporationCard {
 
       action: {
         spend: {corruption: 1},
-        drawCard: {count: 1, resource: CardResource.MICROBE},
+        drawCard: {count: 1, tag: Tag.MICROBE},
       },
 
       metadata: {

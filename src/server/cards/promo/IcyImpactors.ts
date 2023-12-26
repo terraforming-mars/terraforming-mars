@@ -48,16 +48,6 @@ export class IcyImpactors extends Card implements IActionCard {
   action(player: IPlayer) {
     const options = new OrOptions();
 
-    if (this.canAddAsteroids(player)) {
-      options.options.push(
-        new SelectOption('Spend 10 M€ to add 2 asteroids here').andThen(() => {
-          player.game.defer(new SelectPaymentDeferred(player, 10, {canUseTitanium: true})).andThen(() => {
-            player.addResourceTo(this, {qty: 2, log: true});
-          });
-          return undefined;
-        }));
-    }
-
     if (this.canPlaceOcean(player)) {
       options.options.push(
         new SelectOption('Spend 1 asteroid here to place an ocean (first player chooses where to place it)').andThen(() => {
@@ -75,6 +65,17 @@ export class IcyImpactors extends Card implements IActionCard {
           return undefined;
         }));
     }
+
+    if (this.canAddAsteroids(player)) {
+      options.options.push(
+        new SelectOption('Spend 10 M€ to add 2 asteroids here').andThen(() => {
+          player.game.defer(new SelectPaymentDeferred(player, 10, {canUseTitanium: true})).andThen(() => {
+            player.addResourceTo(this, {qty: 2, log: true});
+          });
+          return undefined;
+        }));
+    }
+
     if (options.options.length === 0) {
       return undefined;
     }

@@ -69,7 +69,7 @@ export const BONUS_SECONDS_PER_ACTION = 5;
 // Leaders/CEOs
 export const ASIMOV_AWARD_BONUS = 2;
 
-export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp'] as const;
+export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg'] as const;
 
 export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   en: 'English',
@@ -85,6 +85,7 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   nl: 'Nederlands',
   hu: 'Magyar',
   jp: '日本語',
+  bg: 'Български',
 };
 
 export const APP_NAME = 'Terraforming Mars';

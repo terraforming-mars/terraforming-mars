@@ -1,0 +1,24 @@
+{
+  "Lakefront Resorts": "Озерни курорти",
+  "You start with 54 M€.": "Започвате с 54 M€",
+  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "Ефект: Когато се поставя която и да е океанска плоча, увеличете своето производство на M€ с 1 стъпка. Вашият бонус за поставяне до океана е 3M€ вместо 2M€.",
+
+  "Terralabs Research": "Terralabs Research",
+  "You start with 14 M€. Lower your TR 1 step.": "Започвате с 14M€. Намалете своя ТР с 1 стъпка.",
+  "Effect: Buying cards to hand costs 1 M€.": "Ефект: Покупката на карти за ръка струва 1M€.",
+
+  "Utopia Invest": "Utopia Invest",
+  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Започвате с 40M€. Увеличете производството на стомана и титан с по 1 стъпка.",
+  "Action: Decrease any production to gain 4 resources of that kind.": "Действие: Намалете всяко производство, за да получите 4 ресурса от този вид.",
+
+  "Pristar": "Pristar",
+  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "Започвате с 53M€. Намалете своя ТР с 2 стъпки. 1 Точка за всяко запазено средство тук.",
+  "Effect: During the production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "Ефект: През фазата на производство, ако досега не сте получили ТР в този цикъл, добавете едно запазено средство тук и спечелете 6 M€.",
+
+  "Septem Tribus": "Septem Tribus",
+  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "Започвате с 36 M€. Когато извършите действие, дивата етикет се брои като всяка етикет по ваш избор.",
+  "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "Действие: Получете 2 M€ за всяка партия, в която имате поне 1 делегат.",
+
+  "Robinson Industries": "Robinson Industries",
+  "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "Действие: Потрете 4 M€, за да увеличите (едно от) вашето НАЙ-НИСКО производство с 1 стъпка."
+}

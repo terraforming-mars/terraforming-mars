@@ -8,7 +8,7 @@ import {Game} from '../../../src/server/Game';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
+import {IDeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
 import {SelectParty} from '../../../src/server//inputs/SelectParty';
 import {cast} from '../../TestingUtils';
@@ -52,7 +52,7 @@ describe('LobbyHalls', function() {
     assertAddDelegateAction(cast(game.deferredActions.pop(), SendDelegateToArea));
   });
 
-  function assertCloneTagAction(action: DeferredAction) {
+  function assertCloneTagAction(action: IDeferredAction) {
     const options = cast(action, DeclareCloneTag).execute();
     options.options[0].cb();
     expect(card.tags).deep.eq([Tag.EARTH, Tag.BUILDING]);

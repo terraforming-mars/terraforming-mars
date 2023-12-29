@@ -1,9 +1,9 @@
-import {BasePlayerInput} from '../PlayerInput';
+import {BaseInputRequest} from '../PlayerInput';
 import {InputResponse, isSelectGlobalEventResponse} from '../../common/inputs/InputResponse';
 import {SelectGlobalEventModel} from '../../common/models/PlayerInputModel';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 
-export class SelectGlobalEvent extends BasePlayerInput<IGlobalEvent> {
+export class SelectGlobalEvent extends BaseInputRequest<IGlobalEvent> {
   constructor(public globalEvents: ReadonlyArray<IGlobalEvent>) {
     super('card', 'Select Global Event');
   }

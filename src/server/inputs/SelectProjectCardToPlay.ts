@@ -1,4 +1,4 @@
-import {BasePlayerInput} from '../PlayerInput';
+import {BaseInputRequest} from '../PlayerInput';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard, PlayableCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
@@ -16,7 +16,7 @@ export type PlayCardMetadata = {
   details: CanPlayResponse | undefined;
 };
 
-export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
+export class SelectProjectCardToPlay extends BaseInputRequest<IProjectCard> {
   public cards: Array<IProjectCard> = [];
   public extras: Map<CardName, PlayCardMetadata>;
 

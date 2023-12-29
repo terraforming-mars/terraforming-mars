@@ -22,7 +22,7 @@ export interface PlayerInput {
     maxByDefault?: boolean;
 }
 
-export abstract class BasePlayerInput<T> implements PlayerInput {
+export abstract class BaseInputRequest<T> implements PlayerInput {
   public readonly type: InputRequestType;
   public buttonLabel: string = 'Save';
   public title: string | Message;

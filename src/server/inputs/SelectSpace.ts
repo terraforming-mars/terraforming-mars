@@ -2,9 +2,9 @@ import {Message} from '../../common/logs/Message';
 import {Space} from '../boards/Space';
 import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
 import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
-import {BasePlayerInput} from '../PlayerInput';
+import {BaseInputRequest} from '../PlayerInput';
 
-export class SelectSpace extends BasePlayerInput<Space> {
+export class SelectSpace extends BaseInputRequest<Space> {
   constructor(
     title: string | Message,
     public spaces: ReadonlyArray<Space>) {

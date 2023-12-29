@@ -1,12 +1,12 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
+import {BaseInputRequest} from '../PlayerInput';
 import {IColony} from '../colonies/IColony';
 import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
 import {SelectColonyModel} from '../../common/models/PlayerInputModel';
 import {coloniesToModel} from '../models/ModelUtils';
 import {IPlayer} from '../IPlayer';
 
-export class SelectColony extends BasePlayerInput<IColony> {
+export class SelectColony extends BaseInputRequest<IColony> {
   // When true, show just the tile, and none of the cubes on top.
   // Used for tiles that are not yet in the game, or for a clearer
   // visualziation when necesary.

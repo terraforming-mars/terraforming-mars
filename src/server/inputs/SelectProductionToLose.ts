@@ -1,12 +1,12 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
+import {BaseInputRequest} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
 import {SelectProductionToLoseModel} from '../../common/models/PlayerInputModel';
 
-export class SelectProductionToLose extends BasePlayerInput<Units> {
+export class SelectProductionToLose extends BaseInputRequest<Units> {
   constructor(
     title: string | Message,
     public unitsToLose: number,

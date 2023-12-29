@@ -1,10 +1,10 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {BasePlayerInput} from '../PlayerInput';
+import {BaseInputRequest} from '../PlayerInput';
 import {InputResponse, isSelectOptionResponse} from '../../common/inputs/InputResponse';
 import {SelectOptionModel} from '../../common/models/PlayerInputModel';
 
-export class SelectOption extends BasePlayerInput<undefined> {
+export class SelectOption extends BaseInputRequest<undefined> {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Confirm') {

@@ -1,11 +1,11 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
+import {BaseInputRequest} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';
 import {SelectDelegateModel} from '../../common/models/PlayerInputModel';
 
-export class SelectDelegate extends BasePlayerInput<IPlayer | NeutralPlayer> {
+export class SelectDelegate extends BaseInputRequest<IPlayer | NeutralPlayer> {
   constructor(
     public players: ReadonlyArray<IPlayer | NeutralPlayer>,
     title: string | Message) {

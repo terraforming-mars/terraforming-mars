@@ -1,9 +1,9 @@
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
+import {BaseInputRequest} from '../PlayerInput';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
 import {SelectAmountModel} from '../../common/models/PlayerInputModel';
 
-export class SelectAmount extends BasePlayerInput<number> {
+export class SelectAmount extends BaseInputRequest<number> {
   constructor(
     title: string | Message,
     buttonLabel: string = 'Save',

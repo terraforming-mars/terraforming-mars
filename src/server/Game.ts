@@ -1,7 +1,6 @@
 import * as constants from '../common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
-import {BoardName} from '../common/boards/BoardName';
 import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
@@ -39,7 +38,6 @@ import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
 import {GainResources} from './deferredActions/GainResources';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
-import {SpaceName} from './SpaceName';
 import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
@@ -1243,16 +1241,6 @@ export class Game implements IGame, Logger {
       AresHandler.payAdjacencyAndHazardCosts(player, space, subjectToHazardAdjacency);
     });
 
-    // Hellas special requirements ocean tile
-    if (space.id === SpaceName.HELLAS_OCEAN_TILE &&
-        this.canAddOcean() &&
-        this.gameOptions.boardName === BoardName.HELLAS) {
-      if (player.color !== Color.NEUTRAL) {
-        this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from placement bonus'}));
-        this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
-      }
-    }
-
     TurmoilHandler.resolveTilePlacementCosts(player);
 
     // Part 3. Setup for bonuses
@@ -1342,7 +1330,11 @@ export class Game implements IGame, Logger {
       player.stock.add(Resource.HEAT, count, {log: true});
       break;
     case SpaceBonus.OCEAN:
-      // ignore
+      // Hellas special requirements ocean tile
+      if (this.canAddOcean()) {
+        this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from placement bonus'}));
+        this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
+      }
       break;
     case SpaceBonus.MICROBE:
       this.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: count}));

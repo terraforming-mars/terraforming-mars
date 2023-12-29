@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
@@ -30,7 +30,7 @@ export class Duncan extends CeoCard {
 
   public generationUsed = -1;
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     this.isDisabled = true;
     player.stock.add(Resource.MEGACREDITS, 4 * player.game.generation, {log: true});
     this.generationUsed = player.game.generation;

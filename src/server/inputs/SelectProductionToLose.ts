@@ -1,5 +1,5 @@
 import {Message} from '../../common/logs/Message';
-import {BaseInputRequest} from '../PlayerInput';
+import {BaseInputRequest} from '../InputRequest';
 import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';

@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -23,7 +23,7 @@ export class Gaia extends CeoCard {
     });
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     this.isDisabled = true;
     const board = player.game.board;
     // For every tile placed on the board, grant all the adjacency bonuses for that tile.

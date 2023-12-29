@@ -1,7 +1,7 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
-import {getCardFromPlayerInput} from '../PlayerInput';
-import {BaseInputRequest} from '../PlayerInput';
+import {getCardFromPlayerInput} from '../InputRequest';
+import {BaseInputRequest} from '../InputRequest';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
 import {SelectCardModel} from '../../common/models/PlayerInputModel';

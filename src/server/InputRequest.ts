@@ -5,11 +5,11 @@ import {InputResponse} from '../common/inputs/InputResponse';
 import {IPlayer} from './IPlayer';
 import {PlayerInputModel} from '../common/models/PlayerInputModel';
 
-export interface PlayerInput {
+export interface InputRequest {
     type: InputRequestType;
     buttonLabel: string;
     title: string | Message;
-    cb(...item: any): PlayerInput | undefined;
+    cb(...item: any): InputRequest | undefined;
 
     toModel(player: IPlayer): PlayerInputModel;
 
@@ -18,24 +18,24 @@ export interface PlayerInput {
      *
      * This is another mechainsm for calling cb() with a client-side response.
      */
-    process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
+    process(response: InputResponse, player: IPlayer): InputRequest | undefined;
     maxByDefault?: boolean;
 }
 
-export abstract class BaseInputRequest<T> implements PlayerInput {
+export abstract class BaseInputRequest<T> implements InputRequest {
   public readonly type: InputRequestType;
   public buttonLabel: string = 'Save';
   public title: string | Message;
-  public cb: (param: T) => PlayerInput | undefined = () => undefined;
+  public cb: (param: T) => InputRequest | undefined = () => undefined;
   public abstract toModel(player: IPlayer): PlayerInputModel;
-  public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
+  public abstract process(response: InputResponse, player: IPlayer): InputRequest | undefined;
 
   constructor(type: InputRequestType, title: string | Message = '') {
     this.type = type;
     this.title = title;
   }
 
-  public andThen(cb: (param: T) => PlayerInput | undefined): this {
+  public andThen(cb: (param: T) => InputRequest | undefined): this {
     this.cb = cb;
     return this;
   }

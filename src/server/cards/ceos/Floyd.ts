@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
@@ -32,7 +32,7 @@ export class Floyd extends CeoCard {
     return player.cardsInHand.length > 0;
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     this.isDisabled = true;
     this.opgActionIsActive = true;
     player.game.defer(new PlayProjectCard(player))

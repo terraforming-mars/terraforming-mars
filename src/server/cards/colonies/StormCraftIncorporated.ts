@@ -7,7 +7,7 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {Resource} from '../../../common/Resource';
 import {message} from '../../logs/MessageBuilder';
 
@@ -45,7 +45,7 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
   }
 
   public spendHeat(player: IPlayer, targetAmount: number,
-    cb: () => (undefined | PlayerInput) = () => undefined): AndOptions {
+    cb: () => (undefined | InputRequest) = () => undefined): AndOptions {
     let heatAmount: number;
     let floaterAmount: number;
 

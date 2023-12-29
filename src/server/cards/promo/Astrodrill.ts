@@ -12,7 +12,7 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 
 export class Astrodrill extends CorporationCard implements IActionCard {
   constructor() {
@@ -53,7 +53,7 @@ export class Astrodrill extends CorporationCard implements IActionCard {
 
   public action(player: IPlayer) {
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
-    const opts: Array<PlayerInput> = [];
+    const opts: Array<InputRequest> = [];
 
     const gainStandardResource = new SelectOption('Gain a standard resource', 'Gain').andThen(() => {
       return new OrOptions(

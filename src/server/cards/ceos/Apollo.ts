@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
@@ -26,7 +26,7 @@ export class Apollo extends CeoCard {
     });
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     this.isDisabled = true;
     const moonSpacesCount = MoonExpansion.spaces(player.game, undefined, {surfaceOnly: true}).length;
     player.stock.add(Resource.MEGACREDITS, moonSpacesCount * 3, {log: true});

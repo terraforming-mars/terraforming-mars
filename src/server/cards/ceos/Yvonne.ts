@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Size} from '../../../common/cards/render/Size';
@@ -27,7 +27,7 @@ export class Yvonne extends CeoCard {
     return player.game.gameOptions.coloniesExtension === true;
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     this.isDisabled = true;
     player.game.colonies.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {

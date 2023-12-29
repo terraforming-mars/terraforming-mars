@@ -1,5 +1,5 @@
 import {Message} from '../../common/logs/Message';
-import {BaseInputRequest} from '../PlayerInput';
+import {BaseInputRequest} from '../InputRequest';
 import {IColony} from '../colonies/IColony';
 import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
 import {SelectColonyModel} from '../../common/models/PlayerInputModel';

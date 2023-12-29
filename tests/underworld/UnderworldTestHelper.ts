@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast, formatMessage} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
-import {PlayerInput} from '../../src/server/PlayerInput';
+import {InputRequest} from '../../src/server/InputRequest';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {ICard} from '../../src/server/cards/ICard';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
@@ -12,7 +12,7 @@ import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansi
 import {oneWayDifference} from '../../src/common/utils/utils';
 
 export class UnderworldTestHelper {
-  public static assertIsExcavationAction(player: TestPlayer, input: PlayerInput | undefined, ignorePlacementRestrictions: boolean = false) {
+  public static assertIsExcavationAction(player: TestPlayer, input: InputRequest | undefined, ignorePlacementRestrictions: boolean = false) {
     const selectSpace = cast(input, SelectSpace);
     const candidateSpaces = selectSpace.spaces;
 
@@ -33,7 +33,7 @@ export class UnderworldTestHelper {
     expect(player.plants - plants).eq(1);
   }
 
-  public static assertIsIdentificationAction(player: TestPlayer, input: PlayerInput | undefined) {
+  public static assertIsIdentificationAction(player: TestPlayer, input: InputRequest | undefined) {
     const selectSpace = cast(input, SelectSpace);
     const space = selectSpace.spaces[0];
 
@@ -44,7 +44,7 @@ export class UnderworldTestHelper {
     expect(space.undergroundResources).is.not.undefined;
   }
 
-  public static assertIsMaybeBlock(_player :TestPlayer, input: PlayerInput | undefined, choice: 'fighters' | 'corruption' | 'do not block') {
+  public static assertIsMaybeBlock(_player :TestPlayer, input: InputRequest | undefined, choice: 'fighters' | 'corruption' | 'do not block') {
     const orOptions = cast(input, OrOptions);
 
     expect(formatMessage(orOptions.title)).contains('Spend 1 corruption to block an attack by');
@@ -53,7 +53,7 @@ export class UnderworldTestHelper {
     option!.cb();
   }
 
-  public static assertIsAddResourceToCard(input: PlayerInput | undefined, count: number, expectedCards: Array<ICard>, card: ICard) {
+  public static assertIsAddResourceToCard(input: InputRequest | undefined, count: number, expectedCards: Array<ICard>, card: ICard) {
     const selectCard = cast(input, SelectCard);
     expect(selectCard.cards).to.have.members(expectedCards);
 
@@ -62,16 +62,16 @@ export class UnderworldTestHelper {
     expect(initialValue + count).eq(card.resourceCount);
   }
 
-  public static assertPlaceCity(player: TestPlayer, input: PlayerInput | undefined, idx: number = 0) {
+  public static assertPlaceCity(player: TestPlayer, input: InputRequest | undefined, idx: number = 0) {
     this.assertPlaceTile(player, input, TileType.CITY, idx);
   }
 
-  public static assertPlaceOcean(player: TestPlayer, input: PlayerInput | undefined, idx: number = 0) {
+  public static assertPlaceOcean(player: TestPlayer, input: InputRequest | undefined, idx: number = 0) {
     this.assertPlaceTile(player, input, TileType.OCEAN, idx);
   }
 
 
-  public static assertPlaceTile(player: TestPlayer, input: PlayerInput | undefined, tileType: TileType, idx: number = 0) {
+  public static assertPlaceTile(player: TestPlayer, input: InputRequest | undefined, tileType: TileType, idx: number = 0) {
     const selectSpace = cast(input, SelectSpace);
     const space = selectSpace.spaces[idx];
     space.bonus = [];
@@ -86,7 +86,7 @@ export class UnderworldTestHelper {
     }
   }
 
-  public static assertBuildColony(player: TestPlayer, input: PlayerInput | undefined, idx: number = 0) {
+  public static assertBuildColony(player: TestPlayer, input: InputRequest | undefined, idx: number = 0) {
     const selectColony = cast(input, SelectColony);
     const colony = selectColony.colonies[idx];
     expect(colony.colonies).is.empty;

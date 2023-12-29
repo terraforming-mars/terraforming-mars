@@ -1,11 +1,11 @@
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
 import {OrOptionsModel} from '../../common/models/PlayerInputModel';
 import {OptionsInput} from './OptionsPlayerInput';
 
 export class OrOptions extends OptionsInput<undefined> {
-  constructor(...options: Array<PlayerInput>) {
+  constructor(...options: Array<InputRequest>) {
     super('or', 'Select one option', options);
   }
 

@@ -6,7 +6,7 @@ import {digit} from '../Options';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {SelectCard} from '../../inputs/SelectCard';
 
 export class CeresTechMarket extends Card implements IActionCard {
@@ -45,7 +45,7 @@ export class CeresTechMarket extends Card implements IActionCard {
 
   // Pretty much a duplicate of SellPatents. Also similar to Ender.
   // Should make card discarding a behavior.
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     return new SelectCard(
       'Discard cards for 2 M€ each',
       'Discard',

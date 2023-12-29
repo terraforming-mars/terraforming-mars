@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 
@@ -35,7 +35,7 @@ export class L1TradeTerminal extends Card {
     });
   }
 
-  public override bespokePlay(player: IPlayer): PlayerInput | undefined {
+  public override bespokePlay(player: IPlayer): InputRequest | undefined {
     function addResources(cards: ReadonlyArray<ICard>): void {
       for (const card of cards) {
         player.addResourceTo(card, {qty: 1, log: true});

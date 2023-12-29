@@ -3,7 +3,7 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
 import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {Resource} from '../../common/Resource';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {GREENS_POLICY_2, GREENS_POLICY_3} from './parties/Greens';
@@ -20,7 +20,7 @@ import {Policy, policyDescription} from './Policy';
 export class TurmoilHandler {
   private constructor() {}
 
-  public static partyAction(player: IPlayer): PlayerInput | undefined {
+  public static partyAction(player: IPlayer): InputRequest | undefined {
     const turmoil = player.game.turmoil;
     if (turmoil === undefined) {
       return undefined;

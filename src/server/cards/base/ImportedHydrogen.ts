@@ -6,7 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
@@ -40,7 +40,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer): undefined | PlayerInput {
+  public override bespokePlay(player: IPlayer): undefined | InputRequest {
     const availableMicrobeCards = player.getResourceCards(CardResource.MICROBE);
     const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
 
@@ -53,7 +53,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       return gainPlants();
     }
 
-    const availableActions: Array<PlayerInput> = [];
+    const availableActions: Array<InputRequest> = [];
 
     const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);

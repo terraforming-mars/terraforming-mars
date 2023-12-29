@@ -1,5 +1,5 @@
 import {Player} from '../src/server/Player';
-import {PlayerInput} from '../src/server/PlayerInput';
+import {InputRequest} from '../src/server/InputRequest';
 import {Color} from '../src/common/Color';
 import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
@@ -61,11 +61,11 @@ export class TestPlayer extends Player {
 
   public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
 
-  public override runInput(input: InputResponse, pi: PlayerInput): void {
-    super.runInput(input, pi);
+  public override runInput(res: InputResponse, req: InputRequest): void {
+    super.runInput(res, req);
   }
 
-  public popWaitingFor2(): [PlayerInput | undefined, (() => void) | undefined] {
+  public popWaitingFor2(): [InputRequest | undefined, (() => void) | undefined] {
     const waitingFor = this.waitingFor;
     const waitingForCb = this.waitingForCb;
     this.waitingFor = undefined;
@@ -73,7 +73,7 @@ export class TestPlayer extends Player {
     return [waitingFor, waitingForCb];
   }
 
-  public popWaitingFor(): PlayerInput | undefined {
+  public popWaitingFor(): InputRequest | undefined {
     const waitingFor = this.getWaitingFor();
     this.waitingFor = undefined;
     this.waitingForCb = undefined;

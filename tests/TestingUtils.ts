@@ -14,7 +14,7 @@ import {CanPlayResponse, IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
-import {PlayerInput} from '../src/server/PlayerInput';
+import {InputRequest} from '../src/server/InputRequest';
 import {IActionCard} from '../src/server/cards/ICard';
 import {TestPlayer} from './TestPlayer';
 import {PartyName} from '../src/common/turmoil/PartyName';
@@ -102,7 +102,7 @@ export function runNextAction(game: IGame) {
 }
 
 // Use churnAction instead.
-export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput | undefined {
+export function cardAction(card: IActionCard, player: TestPlayer): InputRequest | undefined {
   const input = card.action(player);
   if (input !== undefined) {
     return input;
@@ -248,15 +248,15 @@ export function churnAction(card: IActionCard, player: TestPlayer) {
  * Rather than have to know which is correct, this function supports both cases, returning a
  * PlayerInput if necessary.
  */
-export function churn(pi: PlayerInput | (() => PlayerInput | undefined) | undefined, player: TestPlayer): PlayerInput | undefined {
-  const result = typeof(pi) === 'function' ? pi() : pi;
+export function churn(req: InputRequest | (() => InputRequest | undefined) | undefined, player: TestPlayer): InputRequest | undefined {
+  const result = typeof(req) === 'function' ? req() : req;
   player.defer(result);
   runAllActions(player.game);
   return player.popWaitingFor();
 }
 
 /**
- * Get the PlayerInput a player is waiting for. Expect it to be of type `klass` and call `f` with it.
+ * Get the InputRequest a player is waiting for. Expect it to be of type `klass` and call `f` with it.
  * Afterwards, call any additional callback.
  */
 export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, f: (waitingFor: T) => void) {

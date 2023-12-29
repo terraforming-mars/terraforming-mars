@@ -1,5 +1,5 @@
 import {Message} from '../../common/logs/Message';
-import {BaseInputRequest} from '../PlayerInput';
+import {BaseInputRequest} from '../InputRequest';
 import {IPlayer} from '../IPlayer';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';

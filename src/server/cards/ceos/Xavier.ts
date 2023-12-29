@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {played} from '../Options';
@@ -32,7 +32,7 @@ export class Xavier extends CeoCard {
     return this.opgActionIsActive ? [Tag.WILD, Tag.WILD] : [];
   }
 
-  public action(): PlayerInput | undefined {
+  public action(): InputRequest | undefined {
     this.isDisabled = true;
     this.opgActionIsActive = true;
     return undefined;

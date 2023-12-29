@@ -12,7 +12,7 @@ import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {IGame} from '../IGame';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {CardName} from '../../common/cards/CardName';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {message} from '../logs/MessageBuilder';
@@ -294,7 +294,7 @@ export class UnderworldExpansion {
     }
   }
 
-  public static maybeBlockAttack(target: IPlayer, perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
+  public static maybeBlockAttack(target: IPlayer, perpetrator: IPlayer, cb: (proceed: boolean) => InputRequest | undefined): InputRequest | undefined {
     if (target.game.gameOptions.underworldExpansion === false) {
       cb(true);
       return undefined;

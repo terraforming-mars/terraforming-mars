@@ -27,7 +27,7 @@ import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
-import {PlayerInput} from './PlayerInput';
+import {InputRequest} from './InputRequest';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
 import {AndThen, DeferredAction, Priority} from './deferredActions/DeferredAction';
@@ -605,7 +605,7 @@ export class Game implements IGame, Logger {
     }
   }
 
-  private selectInitialCards(player: IPlayer): PlayerInput {
+  private selectInitialCards(player: IPlayer): InputRequest {
     return new SelectInitialCards(player, (corporation: ICorporationCard) => {
       this.playerHasPickedCorporationCard(player, corporation);
       return undefined;

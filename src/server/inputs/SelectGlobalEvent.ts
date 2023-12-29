@@ -1,4 +1,4 @@
-import {BaseInputRequest} from '../PlayerInput';
+import {BaseInputRequest} from '../InputRequest';
 import {InputResponse, isSelectGlobalEventResponse} from '../../common/inputs/InputResponse';
 import {SelectGlobalEventModel} from '../../common/models/PlayerInputModel';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';

@@ -15,7 +15,7 @@ import {TileType} from '../../src/common/TileType';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Phase} from '../../src/common/Phase';
 import {LawSuit} from '../../src/server/cards/promo/LawSuit';
-import {PlayerInput} from '../../src/server/PlayerInput';
+import {InputRequest} from '../../src/server/InputRequest';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {PrivateMilitaryContractor} from '../../src/server/cards/underworld/PrivateMilitaryContractor';
 
@@ -513,7 +513,7 @@ describe('UnderworldExpansion', function() {
   class MaybeBlockAttackTester {
     public called: boolean = false;
     public proceed: boolean = false;
-    public playerInput: PlayerInput | undefined = undefined;
+    public playerInput: InputRequest | undefined = undefined;
     public run() {
       this.playerInput = UnderworldExpansion.maybeBlockAttack(player1, player2, (proceed) => {
         this.proceed = proceed;

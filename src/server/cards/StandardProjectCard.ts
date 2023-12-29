@@ -1,7 +1,7 @@
 import {CardType} from '../../common/cards/CardType';
 import {IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
@@ -84,7 +84,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     this.onStandardProject(player);
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     const canPayWith = this.canPayWith(player);
     player.game.defer(new SelectPaymentDeferred(
       player,

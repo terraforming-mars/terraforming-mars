@@ -2,7 +2,7 @@ import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {MoonData} from './MoonData';
 import {MoonExpansion} from './MoonExpansion';
 
@@ -16,7 +16,7 @@ export abstract class BasePlaceMoonTile extends DeferredAction<Space> {
   }
 
   protected abstract getSpaces(moonData: MoonData): ReadonlyArray<Space>;
-  protected abstract placeTile(space: Space): PlayerInput | undefined;
+  protected abstract placeTile(space: Space): InputRequest | undefined;
 
   public execute() {
     const spaces = this.spaces !== undefined ? this.spaces : this.getSpaces(MoonExpansion.moonData(this.player.game));

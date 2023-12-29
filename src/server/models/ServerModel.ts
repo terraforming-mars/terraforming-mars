@@ -7,7 +7,7 @@ import {GameOptionsModel} from '../../common/models/GameOptionsModel';
 import {Board} from '../boards/Board';
 import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {PlayerInputModel} from '../../common/models/PlayerInputModel';
 import {PlayerViewModel, Protection, PublicPlayerModel} from '../../common/models/PlayerModel';
 import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
@@ -191,7 +191,7 @@ export class Server {
 
   public static getWaitingFor(
     player: IPlayer,
-    waitingFor: PlayerInput | undefined,
+    waitingFor: InputRequest | undefined,
   ): PlayerInputModel | undefined {
     if (waitingFor === undefined) {
       return undefined;

@@ -3,7 +3,7 @@ import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {Card} from './Card';
 import {IActionCard, ICard} from './ICard';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {IPlayer} from '../IPlayer';
 
 interface StaticStandardActionCardProperties {
@@ -25,7 +25,7 @@ export abstract class StandardActionCard extends Card implements IActionCard, IC
 
   public abstract canAct(player: IPlayer): boolean
 
-  public abstract action(player: IPlayer): PlayerInput | undefined
+  public abstract action(player: IPlayer): InputRequest | undefined
 
   protected actionUsed(player: IPlayer) {
     player.game.log('${0} used ${1} standard action', (b) => b.player(player).card(this));

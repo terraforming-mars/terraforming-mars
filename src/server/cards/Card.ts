@@ -14,7 +14,7 @@ import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {OneOrArray} from '../../common/utils/types';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
@@ -225,7 +225,7 @@ export abstract class Card {
     return true;
   }
 
-  public play(player: IPlayer): PlayerInput | undefined {
+  public play(player: IPlayer): InputRequest | undefined {
     player.stock.deductUnits(MoonExpansion.adjustedReserveCosts(player, this));
     if (this.behavior !== undefined) {
       getBehaviorExecutor().execute(this.behavior, player, this);
@@ -233,7 +233,7 @@ export abstract class Card {
     return this.bespokePlay(player);
   }
 
-  public bespokePlay(_player: IPlayer): PlayerInput | undefined {
+  public bespokePlay(_player: IPlayer): InputRequest | undefined {
     return undefined;
   }
 

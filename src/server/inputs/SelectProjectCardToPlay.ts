@@ -1,4 +1,4 @@
-import {BaseInputRequest} from '../PlayerInput';
+import {BaseInputRequest} from '../InputRequest';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard, PlayableCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';

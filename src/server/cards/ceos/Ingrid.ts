@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Space} from '../../boards/Space';
@@ -27,7 +27,7 @@ export class Ingrid extends CeoCard {
 
   public opgActionIsActive = false;
 
-  public action(): PlayerInput | undefined {
+  public action(): InputRequest | undefined {
     this.isDisabled = true;
     this.opgActionIsActive = true;
     return undefined;

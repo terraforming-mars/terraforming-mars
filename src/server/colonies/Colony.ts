@@ -11,7 +11,7 @@ import {MAX_COLONIES_PER_TILE, MAX_COLONY_TRACK_POSITION} from '../../common/con
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {Resource} from '../../common/Resource';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
@@ -170,11 +170,11 @@ export abstract class Colony implements IColony {
     }
   }
 
-  public giveColonyBonus(player: IPlayer, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+  public giveColonyBonus(player: IPlayer, isGiveColonyBonus: boolean = false): undefined | InputRequest {
     return this.giveBonus(player, this.metadata.colonyBonusType, this.metadata.colonyBonusQuantity, this.metadata.colonyBonusResource, isGiveColonyBonus);
   }
 
-  private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+  private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | InputRequest {
     const game = player.game;
 
     let action: undefined | DeferredAction<any> = undefined;

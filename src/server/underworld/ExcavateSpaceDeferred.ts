@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
@@ -14,7 +14,7 @@ export class ExcavateSpaceDeferred extends DeferredAction<Space> {
     super(player, Priority.EXCAVATE_UNDERGROUND_RESOURCE);
   }
 
-  public execute(): PlayerInput {
+  public execute(): InputRequest {
     return new SelectSpace(this.title,
       this.excavatableSpaces)
       .andThen((space) => {

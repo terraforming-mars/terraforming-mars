@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {PlayerId} from '../../common/Types';
 import {IGame} from '../IGame';
 import {SerializedColony} from '../SerializedColony';
@@ -28,6 +28,6 @@ export interface IColony {
   isFull(): boolean;
   addColony(player: IPlayer, options?: {giveBonusTwice: boolean}): void;
   trade(player: IPlayer, tradeOptions?: TradeOptions, bonusTradeOffset?: number): void;
-  giveColonyBonus(player: IPlayer, isGiveColonyBonus?: boolean): undefined | PlayerInput;
+  giveColonyBonus(player: IPlayer, isGiveColonyBonus?: boolean): undefined | InputRequest;
   serialize(): SerializedColony;
 }

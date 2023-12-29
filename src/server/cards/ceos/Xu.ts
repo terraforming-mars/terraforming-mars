@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -25,7 +25,7 @@ export class Xu extends CeoCard {
     });
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     this.isDisabled = true;
     const players = player.game.getPlayers();
 

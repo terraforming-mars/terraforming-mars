@@ -9,7 +9,7 @@ import {Ants} from '../../../src/server/cards/base/Ants';
 import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
-import {PlayerInput} from '../../../src/server/PlayerInput';
+import {InputRequest} from '../../../src/server/InputRequest';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
@@ -24,8 +24,8 @@ describe('ToolWithTheFirstOrder', () => {
     [game, player, player2] = testGame(2);
   });
 
-  function findOption(pi: PlayerInput, title: string) {
-    return cast(pi, OrOptions).options.find((option) => option.title === title)!;
+  function findOption(req: InputRequest, title: string) {
+    return cast(req, OrOptions).options.find((option) => option.title === title)!;
   }
 
   it('play', () => {

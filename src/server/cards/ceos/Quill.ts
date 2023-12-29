@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {CardResource} from '../../../common/CardResource';
@@ -32,7 +32,7 @@ export class Quill extends CeoCard {
     return player.getResourceCards(CardResource.FLOATER).length > 0;
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     this.isDisabled = true;
     const resourceCards = player.getResourceCards(CardResource.FLOATER);
     resourceCards.forEach((card) => player.addResourceTo(card, {qty: 2, log: true}));

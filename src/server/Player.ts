@@ -18,7 +18,7 @@ import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from '../common/turmoil/PartyName';
 import {Phase} from '../common/Phase';
-import {PlayerInput} from './PlayerInput';
+import {InputRequest} from './InputRequest';
 import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
@@ -79,7 +79,7 @@ const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
 export class Player implements IPlayer {
   public readonly id: PlayerId;
-  protected waitingFor?: PlayerInput;
+  protected waitingFor?: InputRequest;
   protected waitingForCb?: () => void;
   public game: IGame;
   public tags: Tags;
@@ -564,7 +564,8 @@ export class Player implements IPlayer {
     return sum(this.getCardsWithResources(resource).map((card) => card.resourceCount));
   }
 
-  public runInput(input: InputResponse, pi: PlayerInput): void {
+  // TODO(kberg): Reorder and rename
+  public runInput(input: InputResponse, pi: InputRequest): void {
     const result = pi.process(input, this);
     this.defer(result, Priority.DEFAULT);
   }
@@ -1028,7 +1029,7 @@ export class Player implements IPlayer {
   }
 
   /* Visible for testing */
-  public playActionCard(): PlayerInput {
+  public playActionCard(): InputRequest {
     return new SelectCard<ICard & IActionCard>(
       'Perform an action from a played card',
       'Take action',
@@ -1043,7 +1044,7 @@ export class Player implements IPlayer {
       });
   }
 
-  private playCeoOPGAction(): PlayerInput {
+  private playCeoOPGAction(): InputRequest {
     return new SelectCard<ICeoCard>(
       'Use CEO once per game action',
       'Take action',
@@ -1146,7 +1147,7 @@ export class Player implements IPlayer {
     return this.heat + (floaters * 2);
   }
 
-  public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
+  public spendHeat(amount: number, cb: () => (undefined | InputRequest) = () => undefined) : InputRequest | undefined {
     const stormcraft = <StormCraftIncorporated> this.getCorporation(CardName.STORMCRAFT_INCORPORATED);
     if (stormcraft?.resourceCount > 0) {
       return stormcraft.spendHeat(this, amount, cb);
@@ -1211,7 +1212,7 @@ export class Player implements IPlayer {
     return this.game.getAwardFundingCost() + plus8;
   }
 
-  private fundAward(award: IAward): PlayerInput {
+  private fundAward(award: IAward): InputRequest {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')').andThen(() => {
       this.game.defer(new SelectPaymentDeferred(this, this.awardFundingCost(), {title: 'Select how to pay for award'}));
       this.game.fundAward(this, award);
@@ -1219,7 +1220,7 @@ export class Player implements IPlayer {
     });
   }
 
-  private endTurnOption(): PlayerInput {
+  private endTurnOption(): InputRequest {
     return new SelectOption('End Turn', 'End').andThen(() => {
       this.actionsTakenThisRound = this.availableActionsThisRound; // This allows for variable actions per turn, like Mars Maths
       this.game.log('${0} ended turn', (b) => b.player(this));
@@ -1233,7 +1234,7 @@ export class Player implements IPlayer {
     this.game.log('${0} passed', (b) => b.player(this));
   }
 
-  private passOption(): PlayerInput {
+  private passOption(): InputRequest {
     return new SelectOption('Pass for this generation', 'Pass').andThen(() => {
       this.pass();
       return undefined;
@@ -1766,11 +1767,11 @@ export class Player implements IPlayer {
     }
   }
 
-  public getWaitingFor(): PlayerInput | undefined {
+  public getWaitingFor(): InputRequest | undefined {
     return this.waitingFor;
   }
 
-  public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
+  public setWaitingFor(input: InputRequest, cb: () => void = () => {}): void {
     if (this.waitingFor !== undefined) {
       const message = 'Overwriting a waitingFor: ' + this.waitingFor.type;
       if (THROW_WAITING_FOR) {
@@ -1786,7 +1787,7 @@ export class Player implements IPlayer {
   }
 
   // This was only built for the Philares/Final Greenery case. Might not work elsewhere.
-  public setWaitingForSafely(input: PlayerInput, cb: () => void = () => {}): void {
+  public setWaitingForSafely(input: InputRequest, cb: () => void = () => {}): void {
     if (this.waitingFor === undefined) {
       this.setWaitingFor(input, cb);
     } else {
@@ -1993,7 +1994,7 @@ export class Player implements IPlayer {
   }
 
   /* Shorthand for deferring things */
-  public defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined), priority: Priority = Priority.DEFAULT): void {
+  public defer(input: InputRequest | undefined | void | (() => InputRequest | undefined), priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) {
       return;
     }

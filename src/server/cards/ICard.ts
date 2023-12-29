@@ -2,7 +2,7 @@ import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from './IProjectCard';
 import {Space} from '../boards/Space';
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 import {CardResource} from '../../common/CardResource';
@@ -41,7 +41,7 @@ export type DynamicTRSource = (player: IPlayer) => TRSource;
 export interface ICard {
   name: CardName;
   tags: Array<Tag>;
-  play(player: IPlayer): PlayerInput | undefined;
+  play(player: IPlayer): InputRequest | undefined;
   /**
    * Describes the M€ discount `player` could apply to playing `card`.
    *
@@ -71,8 +71,8 @@ export interface ICard {
   /** Returns any dynamic influence value */
   getInfluenceBonus?: (player: IPlayer) => number;
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
-  onCardPlayed?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
-  onCardPlayedFromAnyPlayer?(thisCardOwner: IPlayer, playedCardOwner: IPlayer, card: IProjectCard): PlayerInput | undefined;
+  onCardPlayed?(player: IPlayer, card: ICard): InputRequest | undefined | void;
+  onCardPlayedFromAnyPlayer?(thisCardOwner: IPlayer, playedCardOwner: IPlayer, card: IProjectCard): InputRequest | undefined;
   onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;
   onDiscard?(player: IPlayer): void;
@@ -142,7 +142,7 @@ export interface ICard {
 }
 
 export interface IActionCard {
-  action(player: IPlayer): PlayerInput | undefined;
+  action(player: IPlayer): InputRequest | undefined;
   canAct(player: IPlayer): boolean;
 }
 

@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 
 export enum Priority {
   /** Legacy value that should not be further used. */
@@ -43,7 +43,7 @@ export interface IDeferredAction <T = undefined> extends AndThen<T> {
   queueId: number;
   player: IPlayer;
   priority: Priority;
-  execute(): PlayerInput | undefined;
+  execute(): InputRequest | undefined;
 }
 
 export abstract class DeferredAction<T = undefined> implements IDeferredAction<T> {
@@ -54,7 +54,7 @@ export abstract class DeferredAction<T = undefined> implements IDeferredAction<T
     public priority: Priority = Priority.DEFAULT,
   ) {}
 
-  public abstract execute(): PlayerInput | undefined;
+  public abstract execute(): InputRequest | undefined;
   // TODO(kberg): Make protected again.
   public cb: (param: T) => void = () => {};
   private callbackSet = false;
@@ -72,7 +72,7 @@ export abstract class DeferredAction<T = undefined> implements IDeferredAction<T
 export class SimpleDeferredAction<T> extends DeferredAction<T> {
   constructor(
     player: IPlayer,
-    public execute: () => PlayerInput | undefined,
+    public execute: () => InputRequest | undefined,
     priority?: Priority,
   ) {
     super(player, priority);

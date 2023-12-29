@@ -1,6 +1,6 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
-import {BaseInputRequest} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
+import {BaseInputRequest} from '../InputRequest';
 import {InputResponse, isSelectOptionResponse} from '../../common/inputs/InputResponse';
 import {SelectOptionModel} from '../../common/models/PlayerInputModel';
 
@@ -19,7 +19,7 @@ export class SelectOption extends BaseInputRequest<undefined> {
       type: 'option',
     };
   }
-  public process(response: InputResponse): PlayerInput | undefined {
+  public process(response: InputResponse): InputRequest | undefined {
     if (!isSelectOptionResponse(response)) {
       throw new Error('Not a valid SelectOptionResponse');
     }

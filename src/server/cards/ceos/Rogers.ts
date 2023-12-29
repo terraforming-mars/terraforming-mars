@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
@@ -29,7 +29,7 @@ export class Rogers extends CeoCard {
 
   public opgActionIsActive = false;
 
-  public action(): PlayerInput | undefined {
+  public action(): InputRequest | undefined {
     this.isDisabled = true;
     this.opgActionIsActive = true;
     return undefined;

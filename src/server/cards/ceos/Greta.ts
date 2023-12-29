@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {Resource} from '../../../common/Resource';
@@ -26,7 +26,7 @@ export class Greta extends CeoCard {
   public opgActionIsActive = false;
   public effectTriggerCount = 0;
 
-  public action(): PlayerInput | undefined {
+  public action(): InputRequest | undefined {
     this.opgActionIsActive = true;
     this.isDisabled = true;
     return undefined;

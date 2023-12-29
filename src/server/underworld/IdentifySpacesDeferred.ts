@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
@@ -11,7 +11,7 @@ export class IdentifySpacesDeferred extends DeferredAction<Array<Space>> {
     super(player, Priority.IDENTIFY_UNDERGROUND_RESOURCE);
   }
 
-  private selectSpace(): PlayerInput | undefined {
+  private selectSpace(): InputRequest | undefined {
     const prefix = 'Select space to identify';
     const title = prefix + (this.count > 1 ? ` (${this.nth} of ${this.count})` : '');
     const selectedSpaces: Array<Space> = [];
@@ -32,7 +32,7 @@ export class IdentifySpacesDeferred extends DeferredAction<Array<Space>> {
         return undefined;
       });
   }
-  public execute(): PlayerInput | undefined {
+  public execute(): InputRequest | undefined {
     if (this.count === 0) {
       return undefined;
     }

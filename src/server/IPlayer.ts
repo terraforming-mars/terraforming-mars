@@ -7,7 +7,7 @@ import {SpendableCardResource} from '../common/inputs/Spendable';
 import {ICard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
-import {PlayerInput} from './PlayerInput';
+import {InputRequest} from './InputRequest';
 import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
@@ -244,7 +244,7 @@ export interface IPlayer {
    * Count all the resources of a given type in the tableau.
    */
   getResourceCount(resource: CardResource): number;
-  runInput(input: InputResponse, pi: PlayerInput): void;
+  runInput(input: InputResponse, pi: InputRequest): void;
   getAvailableBlueActionCount(): number;
   getPlayableActionCards(): Array<ICard & IActionCard>;
   getUsableOPGCeoCards(): Array<ICeoCard>;
@@ -273,7 +273,7 @@ export interface IPlayer {
   checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;
   availableHeat(): number;
-  spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
+  spendHeat(amount: number, cb?: () => (undefined | InputRequest)) : InputRequest | undefined;
 
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): undefined;
   onCardPlayed(card: IProjectCard): void;
@@ -304,12 +304,12 @@ export interface IPlayer {
   deferInitialAction(corp: ICorporationCard): void;
   getActions(): OrOptions;
   process(input: InputResponse): void;
-  getWaitingFor(): PlayerInput | undefined;
-  setWaitingFor(input: PlayerInput, cb?: () => void): void;
-  setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
+  getWaitingFor(): InputRequest | undefined;
+  setWaitingFor(input: InputRequest, cb?: () => void): void;
+  setWaitingForSafely(input: InputRequest, cb?: () => void): void;
   serialize(): SerializedPlayer;
   /** Shorthand for deferring evaluating a PlayerInput */
-  defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;
+  defer(input: InputRequest | undefined | void | (() => InputRequest | undefined | void), priority?: Priority): void;
 
 }
 

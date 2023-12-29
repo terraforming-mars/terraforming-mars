@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {DELEGATES_FOR_NEUTRAL_PLAYER} from '../../../common/constants';
@@ -40,7 +40,7 @@ export class Petra extends CeoCard {
     return playerTotalDelegateCount >= numNeutralDelegates;
   }
 
-  public action(player: IPlayer): PlayerInput | undefined {
+  public action(player: IPlayer): InputRequest | undefined {
     this.isDisabled = true;
 
     const turmoil = player.game.turmoil as Turmoil;

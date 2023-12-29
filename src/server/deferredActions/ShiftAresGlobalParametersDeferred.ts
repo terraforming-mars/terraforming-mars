@@ -2,7 +2,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {IPlayer} from '../IPlayer';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {AresHandler} from '../ares/AresHandler';
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 
 export class ShiftAresGlobalParametersDeferred extends DeferredAction {
   constructor(player: IPlayer) {
@@ -10,7 +10,7 @@ export class ShiftAresGlobalParametersDeferred extends DeferredAction {
   }
 
   public execute() {
-    let pi: PlayerInput | undefined = undefined;
+    let pi: InputRequest | undefined = undefined;
     AresHandler.ifAres(this.player.game, (aresData) => {
       pi = new ShiftAresGlobalParameters()
         .andThen((response) => {

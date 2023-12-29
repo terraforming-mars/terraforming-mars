@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
@@ -40,7 +40,7 @@ export class LargeConvoy extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer): PlayerInput | undefined {
+  public override bespokePlay(player: IPlayer): InputRequest | undefined {
     const animalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
@@ -50,7 +50,7 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     if (animalCards.length === 0 ) return gainPlants();
 
-    const availableActions: Array<PlayerInput> = [];
+    const availableActions: Array<InputRequest> = [];
 
     const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);

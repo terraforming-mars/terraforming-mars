@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ICard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
-import {PlayerInput} from '../..//PlayerInput';
+import {InputRequest} from '../../InputRequest';
 
 export abstract class RoboticWorkforceBase extends Card {
   constructor(properties: StaticCardProperties) {
@@ -58,7 +58,7 @@ export abstract class RoboticWorkforceBase extends Card {
     return this.getPlayableBuildingCards(player).length > 0;
   }
 
-  protected selectBuildingCard(player: IPlayer, cards: ReadonlyArray<ICard>, title: string, cb: (card: ICard) => PlayerInput | undefined = () => undefined) {
+  protected selectBuildingCard(player: IPlayer, cards: ReadonlyArray<ICard>, title: string, cb: (card: ICard) => InputRequest | undefined = () => undefined) {
     if (cards.length === 0) {
       return undefined;
     }

@@ -8,7 +8,7 @@ import {Card} from '../Card';
 import {all} from '../Options';
 import {IActionCard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
+import {InputRequest} from '../../InputRequest';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {Resource} from '../../../common/Resource';
 
@@ -49,7 +49,7 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
   canAct(): boolean {
     return this.resourceCount > 0;
   }
-  action(player: IPlayer): PlayerInput | undefined {
+  action(player: IPlayer): InputRequest | undefined {
     if (player.game.isSoloMode()) {
       player.stock.add(Resource.MEGACREDITS, 2, {log: true});
       this.resourceCount--;

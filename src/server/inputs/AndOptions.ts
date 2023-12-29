@@ -1,11 +1,11 @@
-import {PlayerInput} from '../PlayerInput';
+import {InputRequest} from '../InputRequest';
 import {InputResponse, isAndOptionsResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
 import {AndOptionsModel, SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 import {OptionsInput} from './OptionsPlayerInput';
 
 export class AndOptions extends OptionsInput<undefined> {
-  constructor(...options: Array<PlayerInput>) {
+  constructor(...options: Array<InputRequest>) {
     super('and', '', options);
   }
 

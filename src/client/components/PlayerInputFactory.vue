@@ -11,7 +11,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
+import {InputRequestType} from '@/common/input/InputRequestType';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import AndOptions from '@/client/components/AndOptions.vue';
@@ -32,7 +32,7 @@ import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParame
 import SelectGlobalEvent from '@/client/components/SelectGlobalEvent.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
-const typeToComponentName: Record<PlayerInputType, string> = {
+const typeToComponentName: Record<InputRequestType, string> = {
   'and': 'and-options',
   'card': 'SelectCard',
   'projectCard': 'SelectProjectCardToPlay',

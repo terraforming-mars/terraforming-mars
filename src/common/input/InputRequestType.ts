@@ -1,4 +1,4 @@
-export type PlayerInputType =
+export type InputRequestType =
     'and' |
     'or' |
     'amount' |

@@ -1,12 +1,12 @@
 import {ICard} from './cards/ICard';
 import {Message} from '../common/logs/Message';
-import {PlayerInputType} from '../common/input/PlayerInputType';
+import {InputRequestType} from '../common/input/InputRequestType';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {IPlayer} from './IPlayer';
 import {PlayerInputModel} from '../common/models/PlayerInputModel';
 
 export interface PlayerInput {
-    type: PlayerInputType;
+    type: InputRequestType;
     buttonLabel: string;
     title: string | Message;
     cb(...item: any): PlayerInput | undefined;
@@ -23,14 +23,14 @@ export interface PlayerInput {
 }
 
 export abstract class BasePlayerInput<T> implements PlayerInput {
-  public readonly type: PlayerInputType;
+  public readonly type: InputRequestType;
   public buttonLabel: string = 'Save';
   public title: string | Message;
   public cb: (param: T) => PlayerInput | undefined = () => undefined;
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
 
-  constructor(type: PlayerInputType, title: string | Message = '') {
+  constructor(type: InputRequestType, title: string | Message = '') {
     this.type = type;
     this.title = title;
   }

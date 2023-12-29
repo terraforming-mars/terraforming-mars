@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {SelectPartyModel} from '@/common/models/PlayerInputModel';
+import {SelectPartyModel} from '@/common/models/InputRequestModel';
 import Party from '@/client/components/Party.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {SelectPartyResponse} from '@/common/inputs/InputResponse';

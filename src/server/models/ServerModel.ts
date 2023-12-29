@@ -8,7 +8,7 @@ import {Board} from '../boards/Board';
 import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {InputRequest} from '../InputRequest';
-import {PlayerInputModel} from '../../common/models/PlayerInputModel';
+import {InputRequestModel} from '../../common/models/InputRequestModel';
 import {PlayerViewModel, Protection, PublicPlayerModel} from '../../common/models/PlayerModel';
 import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
 import {TileType} from '../../common/TileType';
@@ -192,7 +192,7 @@ export class Server {
   public static getWaitingFor(
     player: IPlayer,
     waitingFor: InputRequest | undefined,
-  ): PlayerInputModel | undefined {
+  ): InputRequestModel | undefined {
     if (waitingFor === undefined) {
       return undefined;
     }

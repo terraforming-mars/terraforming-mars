@@ -54,7 +54,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
+import {SelectProductionToLoseModel} from '@/common/models/InputRequestModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';

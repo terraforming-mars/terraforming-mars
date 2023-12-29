@@ -2,7 +2,7 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
-import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
+import {ShiftAresGlobalParametersModel} from '@/common/models/InputRequestModel';
 
 describe('ShiftAresGlobalParameters', function() {
   const mockPlayerModel: ShiftAresGlobalParametersModel = {

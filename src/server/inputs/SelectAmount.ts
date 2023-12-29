@@ -1,7 +1,7 @@
 import {Message} from '../../common/logs/Message';
 import {BaseInputRequest} from '../InputRequest';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
-import {SelectAmountModel} from '../../common/models/PlayerInputModel';
+import {SelectAmountModel} from '../../common/models/InputRequestModel';
 
 export class SelectAmount extends BaseInputRequest<number> {
   constructor(

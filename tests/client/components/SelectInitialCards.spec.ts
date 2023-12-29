@@ -7,7 +7,7 @@ import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {Preferences} from '@/client/utils/PreferencesManager';
 import * as titles from '@/common/inputs/SelectInitialCards';
-import {SelectCardModel} from '@/common/models/PlayerInputModel';
+import {SelectCardModel} from '@/common/models/InputRequestModel';
 import {CardModel} from '@/common/models/CardModel';
 
 let savedData: InputResponse | undefined;

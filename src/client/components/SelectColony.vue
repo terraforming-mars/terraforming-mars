@@ -14,7 +14,7 @@
 import Vue from 'vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {SelectColonyModel} from '@/common/models/PlayerInputModel';
+import {SelectColonyModel} from '@/common/models/InputRequestModel';
 import {SelectColonyResponse} from '@/common/inputs/InputResponse';
 import {ColonyName} from '@/common/colonies/ColonyName';
 

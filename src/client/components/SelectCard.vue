@@ -34,7 +34,7 @@ import {VueModelCheckbox, VueModelRadio} from '@/client/types';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
-import {SelectCardModel} from '@/common/models/PlayerInputModel';
+import {SelectCardModel} from '@/common/models/InputRequestModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import {SelectCardResponse} from '@/common/inputs/InputResponse';
 

@@ -9,7 +9,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CanPlayResponse} from '../cards/IProjectCard';
 import {YesAnd} from '../cards/requirements/CardRequirement';
 import {cardsToModel} from '../models/ModelUtils';
-import {SelectProjectCardToPlayModel} from '../../common/models/PlayerInputModel';
+import {SelectProjectCardToPlayModel} from '../../common/models/InputRequestModel';
 
 export type PlayCardMetadata = {
   reserveUnits: Readonly<Units>;

@@ -44,7 +44,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
-import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
+import {ShiftAresGlobalParametersModel} from '@/common/models/InputRequestModel';
 import {ShiftAresGlobalParametersResponse} from '@/common/inputs/InputResponse';
 import {HazardData} from '@/common/ares/AresData';
 

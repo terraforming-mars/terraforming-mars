@@ -15,17 +15,17 @@ export type BaseInputModel = {
 }
 export type AndOptionsModel = BaseInputModel & {
   type: 'and';
-  options: Array<PlayerInputModel>;
+  options: Array<InputRequestModel>;
 }
 
 export type OrOptionsModel = BaseInputModel & {
   type: 'or';
-  options: Array<PlayerInputModel>;
+  options: Array<InputRequestModel>;
 }
 
 export type SelectInitialCardsModel = BaseInputModel & {
   type: 'initialCards';
-  options: Array<PlayerInputModel>;
+  options: Array<InputRequestModel>;
 }
 
 export type SelectOptionModel = BaseInputModel & {
@@ -111,7 +111,7 @@ export type SelectGlobalEventModel = BaseInputModel & {
   globalEventNames: Array<GlobalEventName>;
 }
 
-export type PlayerInputModel =
+export type InputRequestModel =
   AndOptionsModel |
   OrOptionsModel |
   SelectInitialCardsModel |

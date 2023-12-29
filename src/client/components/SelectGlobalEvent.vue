@@ -17,7 +17,7 @@ import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
-import {SelectGlobalEventModel} from '@/common/models/PlayerInputModel';
+import {SelectGlobalEventModel} from '@/common/models/InputRequestModel';
 import {SelectGlobalEventResponse} from '@/common/inputs/InputResponse';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 

@@ -3,7 +3,7 @@ import {BaseInputRequest} from '../InputRequest';
 import {IPlayer} from '../IPlayer';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';
-import {SelectDelegateModel} from '../../common/models/PlayerInputModel';
+import {SelectDelegateModel} from '../../common/models/InputRequestModel';
 
 export class SelectDelegate extends BaseInputRequest<IPlayer | NeutralPlayer> {
   constructor(

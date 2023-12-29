@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
+import {SelectSpaceModel} from '@/common/models/InputRequestModel';
 import {isMarsSpace} from '@/common/boards/spaces';
 
 export default Vue.extend({

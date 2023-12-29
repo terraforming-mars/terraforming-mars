@@ -37,7 +37,7 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import {getCard, getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/common/constants';
-import {PlayerInputModel, SelectCardModel, SelectInitialCardsModel} from '@/common/models/PlayerInputModel';
+import {InputRequestModel, SelectCardModel, SelectInitialCardsModel} from '@/common/models/InputRequestModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
@@ -357,7 +357,7 @@ export default (Vue as WithRefs<Refs>).extend({
   },
 });
 
-function getOption(options: Array<PlayerInputModel>, title: string): SelectCardModel {
+function getOption(options: Array<InputRequestModel>, title: string): SelectCardModel {
   const option = options.find((option) => option.title === title);
   if (option === undefined) {
     throw new Error('invalid input, missing option');
@@ -368,7 +368,7 @@ function getOption(options: Array<PlayerInputModel>, title: string): SelectCardM
   return option;
 }
 
-function hasOption(options: Array<PlayerInputModel>, title: string): boolean {
+function hasOption(options: Array<InputRequestModel>, title: string): boolean {
   const option = options.find((option) => option.title === title);
   return option !== undefined;
 }

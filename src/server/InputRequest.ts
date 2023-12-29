@@ -3,7 +3,7 @@ import {Message} from '../common/logs/Message';
 import {InputRequestType} from '../common/input/InputRequestType';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {IPlayer} from './IPlayer';
-import {PlayerInputModel} from '../common/models/PlayerInputModel';
+import {InputRequestModel} from '../common/models/InputRequestModel';
 
 export interface InputRequest {
     type: InputRequestType;
@@ -11,7 +11,7 @@ export interface InputRequest {
     title: string | Message;
     cb(...item: any): InputRequest | undefined;
 
-    toModel(player: IPlayer): PlayerInputModel;
+    toModel(player: IPlayer): InputRequestModel;
 
     /**
      * Processes and validates `response` for this PlayerInput which is meant for the given `player`.
@@ -27,7 +27,7 @@ export abstract class BaseInputRequest<T> implements InputRequest {
   public buttonLabel: string = 'Save';
   public title: string | Message;
   public cb: (param: T) => InputRequest | undefined = () => undefined;
-  public abstract toModel(player: IPlayer): PlayerInputModel;
+  public abstract toModel(player: IPlayer): InputRequestModel;
   public abstract process(response: InputResponse, player: IPlayer): InputRequest | undefined;
 
   constructor(type: InputRequestType, title: string | Message = '') {

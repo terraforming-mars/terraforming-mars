@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {SelectAmountModel} from '@/common/models/PlayerInputModel';
+import {SelectAmountModel} from '@/common/models/InputRequestModel';
 import {SelectAmountResponse} from '@/common/inputs/InputResponse';
 
 interface DataModel {

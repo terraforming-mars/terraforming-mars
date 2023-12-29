@@ -2,7 +2,7 @@ import {Message} from '../../common/logs/Message';
 import {BaseInputRequest} from '../InputRequest';
 import {IPlayer} from '../IPlayer';
 import {InputResponse, isSelectPlayerResponse} from '../../common/inputs/InputResponse';
-import {SelectPlayerModel} from '../../common/models/PlayerInputModel';
+import {SelectPlayerModel} from '../../common/models/InputRequestModel';
 
 export class SelectPlayer extends BaseInputRequest<IPlayer> {
   constructor(public players: Array<IPlayer>, title: string | Message, buttonLabel: string = 'Save') {

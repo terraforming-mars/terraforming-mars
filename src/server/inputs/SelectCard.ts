@@ -4,7 +4,7 @@ import {getCardFromPlayerInput} from '../InputRequest';
 import {BaseInputRequest} from '../InputRequest';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
-import {SelectCardModel} from '../../common/models/PlayerInputModel';
+import {SelectCardModel} from '../../common/models/InputRequestModel';
 import {IPlayer} from '../IPlayer';
 import {cardsToModel} from '../models/ModelUtils';
 

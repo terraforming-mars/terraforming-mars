@@ -3,7 +3,7 @@ import {BaseInputRequest} from '../InputRequest';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
-import {SelectPartyModel} from '../../common/models/PlayerInputModel';
+import {SelectPartyModel} from '../../common/models/InputRequestModel';
 import {getTurmoilModel} from '../models/TurmoilModel';
 
 export class SelectParty extends BaseInputRequest<PartyName> {

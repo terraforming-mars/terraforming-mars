@@ -1,6 +1,6 @@
 import {BaseInputRequest} from '../InputRequest';
 import {InputResponse, isSelectGlobalEventResponse} from '../../common/inputs/InputResponse';
-import {SelectGlobalEventModel} from '../../common/models/PlayerInputModel';
+import {SelectGlobalEventModel} from '../../common/models/InputRequestModel';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 
 export class SelectGlobalEvent extends BaseInputRequest<IGlobalEvent> {

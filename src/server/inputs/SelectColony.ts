@@ -2,7 +2,7 @@ import {Message} from '../../common/logs/Message';
 import {BaseInputRequest} from '../InputRequest';
 import {IColony} from '../colonies/IColony';
 import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
-import {SelectColonyModel} from '../../common/models/PlayerInputModel';
+import {SelectColonyModel} from '../../common/models/InputRequestModel';
 import {coloniesToModel} from '../models/ModelUtils';
 import {IPlayer} from '../IPlayer';
 

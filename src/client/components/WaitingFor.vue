@@ -17,7 +17,7 @@
 
 import Vue from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {InputRequestModel} from '@/common/models/InputRequestModel';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
@@ -47,7 +47,7 @@ export default Vue.extend({
       type: Object as () => typeof raw_settings,
     },
     waitingfor: {
-      type: Object as () => PlayerInputModel | undefined,
+      type: Object as () => InputRequestModel | undefined,
     },
   },
   data() {

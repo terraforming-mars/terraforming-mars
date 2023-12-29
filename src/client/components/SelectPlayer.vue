@@ -14,7 +14,7 @@
 
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
+import {SelectPlayerModel} from '@/common/models/InputRequestModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectPlayerResponse} from '@/common/inputs/InputResponse';

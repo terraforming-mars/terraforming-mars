@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import SelectPayment from '@/client/components/SelectPayment.vue';
-import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
+import {SelectPaymentModel} from '@/common/models/InputRequestModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 import {CardName} from '@/common/cards/CardName';

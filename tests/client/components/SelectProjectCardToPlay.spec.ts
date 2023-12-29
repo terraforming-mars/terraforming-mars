@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
-import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
+import {SelectProjectCardToPlayModel} from '@/common/models/InputRequestModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';

@@ -3,7 +3,7 @@ import Vue from 'vue';
 import {Payment} from '@/common/inputs/Payment';
 import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
 import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
-import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
+import {SelectPaymentModel} from '@/common/models/InputRequestModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import AppButton from '@/client/components/common/AppButton.vue';

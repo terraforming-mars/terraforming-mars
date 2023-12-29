@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {Color} from '@/common/Color';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
-import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
+import {SelectPlayerModel} from '@/common/models/InputRequestModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
 

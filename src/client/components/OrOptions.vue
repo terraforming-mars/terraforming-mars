@@ -30,7 +30,7 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {OrOptionsModel} from '@/common/models/PlayerInputModel';
+import {OrOptionsModel} from '@/common/models/InputRequestModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
 

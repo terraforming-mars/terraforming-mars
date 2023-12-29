@@ -1,7 +1,7 @@
 import {InputRequest} from '../InputRequest';
 import {InputResponse, isAndOptionsResponse} from '../../common/inputs/InputResponse';
 import {IPlayer} from '../IPlayer';
-import {AndOptionsModel, SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
+import {AndOptionsModel, SelectInitialCardsModel} from '../../common/models/InputRequestModel';
 import {OptionsInput} from './OptionsPlayerInput';
 
 export class AndOptions extends OptionsInput<undefined> {

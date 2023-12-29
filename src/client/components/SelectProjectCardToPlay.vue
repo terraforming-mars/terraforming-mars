@@ -10,7 +10,7 @@ import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PaymentWidgetMixin, SelectProjectCardToPlayDataModel} from '@/client/mixins/PaymentWidgetMixin';
-import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
+import {SelectProjectCardToPlayModel} from '@/common/models/InputRequestModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tag} from '@/common/cards/Tag';

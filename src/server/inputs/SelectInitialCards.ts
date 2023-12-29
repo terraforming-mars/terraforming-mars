@@ -7,7 +7,7 @@ import {Merger} from '../cards/promo/Merger';
 import {CardName} from '../../common/cards/CardName';
 import {ICeoCard} from '../cards/ceos/ICeoCard';
 import * as titles from '../../common/inputs/SelectInitialCards';
-import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
+import {SelectInitialCardsModel} from '../../common/models/InputRequestModel';
 
 
 export class SelectInitialCards extends AndOptions {

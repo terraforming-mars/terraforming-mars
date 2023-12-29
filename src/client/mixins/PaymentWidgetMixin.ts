@@ -1,7 +1,7 @@
 // Common code for SelectPayment and SelectProjectCardToPlay
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
-import {SelectPaymentModel, SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
+import {SelectPaymentModel, SelectProjectCardToPlayModel} from '@/common/models/InputRequestModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';

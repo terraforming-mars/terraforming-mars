@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import {CardModel} from '@/common/models/CardModel';
-import {PlayerInputModel, SelectCardModel} from '@/common/models/PlayerInputModel';
+import {InputRequestModel, SelectCardModel} from '@/common/models/InputRequestModel';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 import {SELECT_CORPORATION_TITLE, SELECT_PROJECTS_TITLE} from '@/common/inputs/SelectInitialCards';
@@ -127,10 +127,10 @@ describe('PlayerInputFactory', function() {
   });
 });
 
-// function runTest(playerInput: Omit<PlayerInputModel, 'title' | 'buttonLabel'>) {
-function runTest(playerInput: Partial<PlayerInputModel>) {
+// function runTest(playerInput: Omit<InputRequestModel, 'title' | 'buttonLabel'>) {
+function runTest(playerInput: Partial<InputRequestModel>) {
   // TODO(kberg): this no longer needs to be partial, but needs all the invocations above to change.
-  const fullInput: Partial<PlayerInputModel> = {
+  const fullInput: Partial<InputRequestModel> = {
     title: 'test input',
     buttonLabel: 'save',
     ...playerInput,

@@ -2,7 +2,7 @@ import {CardModel} from './CardModel';
 import {Color} from '../Color';
 import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
 import {TagCount} from '../cards/TagCount';
-import {PlayerInputModel} from './PlayerInputModel';
+import {InputRequestModel} from './InputRequestModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId, ParticipantId} from '../Types';
@@ -85,5 +85,5 @@ export interface PlayerViewModel extends ViewModel {
   pickedCorporationCard: Array<CardModel>; // Why Array?
   preludeCardsInHand: Array<CardModel>;
   thisPlayer: PublicPlayerModel;
-  waitingFor: PlayerInputModel | undefined;
+  waitingFor: InputRequestModel | undefined;
 }

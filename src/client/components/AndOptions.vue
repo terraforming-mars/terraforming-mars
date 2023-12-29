@@ -19,7 +19,7 @@
 
 import Vue from 'vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {AndOptionsModel} from '@/common/models/PlayerInputModel';
+import {AndOptionsModel} from '@/common/models/InputRequestModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
 

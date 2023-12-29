@@ -4,7 +4,7 @@ import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
-import {SelectProductionToLoseModel} from '../../common/models/PlayerInputModel';
+import {SelectProductionToLoseModel} from '../../common/models/InputRequestModel';
 
 export class SelectProductionToLose extends BaseInputRequest<Units> {
   constructor(

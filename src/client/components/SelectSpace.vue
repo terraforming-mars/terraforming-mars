@@ -21,7 +21,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
-import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
+import {SelectSpaceModel} from '@/common/models/InputRequestModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectSpaceResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';

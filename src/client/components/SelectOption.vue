@@ -9,7 +9,7 @@
 
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {SelectOptionModel} from '@/common/models/PlayerInputModel';
+import {SelectOptionModel} from '@/common/models/InputRequestModel';
 import {SelectOptionResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({

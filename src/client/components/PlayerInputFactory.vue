@@ -13,7 +13,7 @@
 import Vue from 'vue';
 import {InputRequestType} from '@/common/input/InputRequestType';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {InputRequestModel} from '@/common/models/InputRequestModel';
 import AndOptions from '@/client/components/AndOptions.vue';
 import OrOptions from '@/client/components/OrOptions.vue';
 import SelectAmount from '@/client/components/SelectAmount.vue';
@@ -60,7 +60,7 @@ export default Vue.component('player-input-factory', {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => InputRequestModel,
     },
     onsave: {
       type: Function as unknown as () => (out: InputResponse) => void,

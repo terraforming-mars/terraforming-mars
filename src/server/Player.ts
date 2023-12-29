@@ -565,8 +565,8 @@ export class Player implements IPlayer {
   }
 
   // TODO(kberg): Reorder and rename
-  public runInput(input: InputResponse, pi: InputRequest): void {
-    const result = pi.process(input, this);
+  public runInput(res: InputResponse, pi: InputRequest): void {
+    const result = pi.process(res, this);
     this.defer(result, Priority.DEFAULT);
   }
 

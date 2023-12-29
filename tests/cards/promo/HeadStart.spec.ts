@@ -30,8 +30,8 @@ describe('HeadStart', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 6, steel: 2}));
   });
 
-  function findOption(pi: OrOptions, title: string) {
-    return pi.options.find((option) => option.title === title)!;
+  function findOption(orOptions: OrOptions, title: string) {
+    return orOptions.options.find((option) => option.title === title)!;
   }
 
   it('Take 2 actions, as first prelude', () => {

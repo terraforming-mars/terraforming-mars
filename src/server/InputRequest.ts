@@ -14,7 +14,7 @@ export interface InputRequest {
     toModel(player: IPlayer): InputRequestModel;
 
     /**
-     * Processes and validates `response` for this PlayerInput which is meant for the given `player`.
+     * Processes and validates `response` for this InputRequest which is meant for the given `player`.
      *
      * This is another mechainsm for calling cb() with a client-side response.
      */

@@ -2,7 +2,6 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {IPlayer} from '../IPlayer';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {AresHandler} from '../ares/AresHandler';
-import {InputRequest} from '../InputRequest';
 
 export class ShiftAresGlobalParametersDeferred extends DeferredAction {
   constructor(player: IPlayer) {
@@ -10,9 +9,9 @@ export class ShiftAresGlobalParametersDeferred extends DeferredAction {
   }
 
   public execute() {
-    let pi: InputRequest | undefined = undefined;
+    let req: ShiftAresGlobalParameters | undefined = undefined;
     AresHandler.ifAres(this.player.game, (aresData) => {
-      pi = new ShiftAresGlobalParameters()
+      req = new ShiftAresGlobalParameters()
         .andThen((response) => {
           const hazardData = aresData.hazardData;
           if (hazardData.erosionOceanCount.available) {
@@ -43,9 +42,9 @@ export class ShiftAresGlobalParametersDeferred extends DeferredAction {
           return undefined;
         });
     });
-    if (pi === undefined) {
+    if (req === undefined) {
       throw new Error('Should not reach.');
     }
-    return pi;
+    return req;
   }
 }

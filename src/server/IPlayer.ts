@@ -244,7 +244,7 @@ export interface IPlayer {
    * Count all the resources of a given type in the tableau.
    */
   getResourceCount(resource: CardResource): number;
-  runInput(input: InputResponse, pi: InputRequest): void;
+  runInput(res: InputResponse, req: InputRequest): void;
   getAvailableBlueActionCount(): number;
   getPlayableActionCards(): Array<ICard & IActionCard>;
   getUsableOPGCeoCards(): Array<ICeoCard>;

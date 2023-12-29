@@ -39,17 +39,20 @@ export interface AndThen<T> {
   andThen(cb: (param: T) => void): this;
 }
 
-export abstract class DeferredAction<T = undefined> implements AndThen<T> {
+export interface IDeferredAction <T = undefined> extends AndThen<T> {
+  queueId: number;
+  player: IPlayer;
+  priority: Priority;
+  execute(): PlayerInput | undefined;
+}
+
+export abstract class DeferredAction<T = undefined> implements IDeferredAction<T> {
   // The position in the queue. Do not set directly.
   public queueId: number = -1;
   constructor(
     public player: IPlayer,
     public priority: Priority = Priority.DEFAULT,
   ) {}
-
-  public static create(player: IPlayer, priority: Priority, execute: () => PlayerInput | undefined): DeferredAction {
-    return new SimpleDeferredAction(player, execute, priority);
-  }
 
   public abstract execute(): PlayerInput | undefined;
   // TODO(kberg): Make protected again.

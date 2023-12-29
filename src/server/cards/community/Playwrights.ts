@@ -6,7 +6,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -79,7 +78,7 @@ export class Playwrights extends CorporationCard {
                * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
                * Needs to be deferred to happen after Law Suit's `play()` method.
                */
-                player.game.defer(new SimpleDeferredAction(player, () => {
+                player.defer(() => {
                   player.game.getPlayers().some((p) => {
                     const card = p.playedCards[p.playedCards.length - 1];
                     if (card?.name === selectedCard.name) {
@@ -89,7 +88,7 @@ export class Playwrights extends CorporationCard {
                     return false;
                   });
                   return undefined;
-                }));
+                });
               }
             });
           return undefined;

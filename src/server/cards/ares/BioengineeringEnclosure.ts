@@ -6,7 +6,6 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 
@@ -43,8 +42,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
   }
 
   public action(player: IPlayer) {
-    player.game.defer(new SimpleDeferredAction(
-      player,
+    player.defer(
       () => {
         const resourceCards = player.getResourceCards(this.resourceType).filter((card) => card.name !== CardName.BIOENGINEERING_ENCLOSURE);
 
@@ -72,7 +70,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
             },
           );
       },
-    ));
+    );
     return undefined;
   }
 }

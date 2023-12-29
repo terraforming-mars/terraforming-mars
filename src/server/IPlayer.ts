@@ -309,7 +309,8 @@ export interface IPlayer {
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
   /** Shorthand for deferring evaluating a PlayerInput */
-  defer(input: PlayerInput | undefined, priority?: Priority): void;
+  defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;
+
 }
 
 export function isIPlayer(object: any): object is IPlayer {

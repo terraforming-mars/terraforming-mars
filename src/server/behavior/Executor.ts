@@ -4,7 +4,6 @@ import {TRSource} from '../../common/cards/TRSource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
-import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
@@ -346,10 +345,10 @@ export class Executor implements BehaviorExecutor {
     const addResources = behavior.addResources;
     if (addResources !== undefined) {
       const count = ctx.count(addResources);
-      player.game.defer(new SimpleDeferredAction(player, () => {
+      player.defer(() => {
         player.addResourceTo(card, {qty: count, log: true});
         return undefined;
-      }));
+      });
     }
 
     if (behavior.addResourcesToAnyCard) {

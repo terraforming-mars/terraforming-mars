@@ -7,7 +7,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 import {ICard} from '../ICard';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -64,10 +63,9 @@ export class Ambient extends CorporationCard {
     player.heat -= 8;
     player.increaseTerraformRating();
     // A hack that allows this action to be replayable.
-    player.game.defer(new SimpleDeferredAction(player, () => {
+    player.defer(() => {
       player.getActionsThisGeneration().delete(this.name);
-      return undefined;
-    }));
+    });
     return undefined;
   }
 }

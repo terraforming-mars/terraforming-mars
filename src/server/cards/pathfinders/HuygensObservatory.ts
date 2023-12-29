@@ -10,7 +10,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class HuygensObservatory extends Card implements IProjectCard {
@@ -73,25 +72,25 @@ export class HuygensObservatory extends Card implements IProjectCard {
             colony.visitor = undefined;
             // TODO(kberg): counting the trades in a generation is not the same as using trade fleets. :[
             player.colonies.tradesThisGeneration--;
-            game.defer(new SimpleDeferredAction(player, () => tradeInput));
+            player.defer(() => tradeInput);
             return undefined;
           }));
     }
     if (hasFreeTradeFleet) {
       if (orOptions.options.length === 1) {
         orOptions.options.push(new SelectOption('Use an available trade fleet').andThen(() => {
-          game.defer(new SimpleDeferredAction(player, () => tradeInput));
+          player.defer(tradeInput);
           return undefined;
         }));
       } else {
-        game.defer(new SimpleDeferredAction(player, () => tradeInput));
+        player.defer(tradeInput);
       }
     }
     if (orOptions.options.length === 1) {
-      game.defer(new SimpleDeferredAction(player, () => orOptions.options[0]));
+      player.defer(orOptions.options[0]);
     }
     if (orOptions.options.length > 1) {
-      game.defer(new SimpleDeferredAction(player, () => orOptions));
+      player.defer(orOptions);
     }
   }
   public override bespokeCanPlay(player: IPlayer): boolean {
@@ -107,10 +106,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
         title: 'Select colony for Huygens Observatory',
       })).andThen(() => this.tryToTrade(player));
     } else {
-      game.defer(new SimpleDeferredAction(player, () => {
-        this.tryToTrade(player);
-        return undefined;
-      }));
+      player.defer(() => this.tryToTrade(player));
     }
     return undefined;
   }

@@ -15,7 +15,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {Board} from '../../boards/Board';
 import {TITLES} from '../../inputs/titles';
@@ -139,7 +138,7 @@ class GreensPolicy04 implements Policy {
 
         if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-        game.defer(new SimpleDeferredAction(player, () => orOptions));
+        player.defer(orOptions);
         return undefined;
       });
 

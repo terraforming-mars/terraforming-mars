@@ -5,7 +5,6 @@ import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -54,7 +53,7 @@ export class CuriosityII extends CorporationCard {
     if (space.spaceType === SpaceType.COLONY) return;
 
     if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || space.tile?.covers !== undefined) {
-      cardOwner.game.defer(new SimpleDeferredAction(cardOwner, () => this.corpAction(cardOwner)));
+      cardOwner.defer(() => this.corpAction(cardOwner));
     }
   }
 

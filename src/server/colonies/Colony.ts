@@ -164,10 +164,9 @@ export abstract class Colony implements IColony {
 
     // !== false because default is true.
     if (options.decreaseTrackAfterTrade !== false) {
-      player.game.defer(new SimpleDeferredAction(player, () => {
+      player.defer(() => {
         this.trackPosition = this.colonies.length;
-        return undefined;
-      }), Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
+      }, Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
     }
   }
 
@@ -335,9 +334,9 @@ export abstract class Colony implements IColony {
     if (action !== undefined) {
       if (isGiveColonyBonus) {
         /*
-           * When this method is called from within the GiveColonyBonus deferred action
-           * we return the player input directly instead of deferring it
-           */
+         * When this method is called from within the GiveColonyBonus deferred action
+         * we return the player input directly instead of deferring it
+         */
         return action.execute(); // undefined | PlayerInput
       } else {
         game.defer(action);

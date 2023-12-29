@@ -29,7 +29,7 @@ import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
-import {AndThen, DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
+import {AndThen, DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -1353,7 +1353,7 @@ export class Game implements IGame, Logger {
       break;
     case SpaceBonus.TEMPERATURE:
       if (this.getTemperature() < constants.MAX_TEMPERATURE) {
-        this.defer(new SimpleDeferredAction(player, () => this.increaseTemperature(player, 1)));
+        player.defer(() => this.increaseTemperature(player, 1));
         this.defer(new SelectPaymentDeferred(
           player,
           constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,

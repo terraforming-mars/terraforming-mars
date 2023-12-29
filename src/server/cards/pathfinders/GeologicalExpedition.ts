@@ -11,7 +11,7 @@ import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/DeferredAction';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Phase} from '../../../common/Phase';
 
@@ -81,8 +81,6 @@ export class GeologicalExpedition extends Card implements IProjectCard {
       // should not happen.
       return;
     }
-    const action = new SimpleDeferredAction(activePlayer, () => options);
-    action.priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
-    activePlayer.game.defer(action);
+    activePlayer.defer(options, Priority.GAIN_RESOURCE_OR_PRODUCTION);
   }
 }

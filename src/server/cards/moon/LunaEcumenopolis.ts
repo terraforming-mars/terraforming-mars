@@ -8,7 +8,6 @@ import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Space} from '../../boards/Space';
 import {MoonData} from '../../moon/MoonData';
 
@@ -102,11 +101,10 @@ export class LunaEcumenopolis extends Card {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));
-    player.game.defer(new SimpleDeferredAction(player, () => {
+    player.defer(() => {
       const habitatRate = MoonExpansion.moonData(player.game).habitatRate;
       player.increaseTerraformRating(Math.floor(habitatRate / 2));
-      return undefined;
-    }));
+    });
     return undefined;
   }
 }

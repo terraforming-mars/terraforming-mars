@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {DeferredAction, Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
@@ -16,7 +16,7 @@ export class ExcavateSpacesDeferred extends DeferredAction {
   private selectSpace(): void {
     const prefix = 'Select space to excavate';
     const title = prefix + (this.count > 1 ? ` (${this.nth} of ${this.count})` : '');
-    this.player.game.defer(new SimpleDeferredAction(this.player, () => {
+    this.player.defer(() => {
       return new SelectSpace(title,
         UnderworldExpansion.excavatableSpaces(this.player, this.ignorePlacementRestrictions))
         .andThen((space) => {
@@ -27,7 +27,7 @@ export class ExcavateSpacesDeferred extends DeferredAction {
           }
           return undefined;
         });
-    }));
+    });
   }
 
   public execute(): undefined {

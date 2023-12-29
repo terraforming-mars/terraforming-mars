@@ -1624,14 +1624,14 @@ export class Player implements IPlayer {
 
   // TODO(kberg): perhaps move to Card
   public deferInitialAction(corp: ICorporationCard) {
-    this.game.defer(new SimpleDeferredAction(this, () => {
+    this.defer(() => {
       if (corp.initialAction) {
         return corp.initialAction(this);
       } else if (corp.firstAction !== undefined) {
         getBehaviorExecutor().execute(corp.firstAction, this, corp);
       }
       return undefined;
-    }));
+    });
   }
 
   private incrementActionsTaken(): void {
@@ -1993,11 +1993,12 @@ export class Player implements IPlayer {
   }
 
   /* Shorthand for deferring things */
-  public defer(input: PlayerInput | undefined | void, priority: Priority = Priority.DEFAULT): void {
+  public defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined), priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) {
       return;
     }
-    const action = new SimpleDeferredAction(this, () => input, priority);
+    const cb = typeof(input) === 'function' ? input : () => input;
+    const action = new SimpleDeferredAction(this, cb, priority);
     this.game.defer(action);
   }
 }

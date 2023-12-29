@@ -25,13 +25,13 @@ describe('JunkVentures', function() {
     expect(game.projectDeck.discardPile).is.empty;
     expect(card.canAct(player)).is.false;
 
-    game.projectDeck.discard(game.projectDeck.draw(game));
+    game.projectDeck.discard(game.projectDeck.drawLegacy(game));
     expect(card.canAct(player)).is.false;
 
-    game.projectDeck.discard(game.projectDeck.draw(game));
+    game.projectDeck.discard(game.projectDeck.drawLegacy(game));
     expect(card.canAct(player)).is.false;
 
-    game.projectDeck.discard(game.projectDeck.draw(game));
+    game.projectDeck.discard(game.projectDeck.drawLegacy(game));
     expect(card.canAct(player)).is.true;
   });
 

@@ -32,7 +32,7 @@ export class JunkVentures extends CorporationCard {
     const discardedCards = new Set<CardName>();
 
     for (let i = 0; i < 3; i++) {
-      const card = player.game.projectDeck.draw(player.game);
+      const card = player.game.projectDeck.drawLegacy(player.game);
       player.game.projectDeck.discard(card);
       discardedCards.add(card.name);
     }

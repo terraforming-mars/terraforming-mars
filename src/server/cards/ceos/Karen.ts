@@ -25,7 +25,7 @@ export class Karen extends CeoCard {
     const game = player.game;
     const cards: Array<IPreludeCard> = [];
     for (let i = 0; i < game.generation; i++) {
-      cards.push(game.preludeDeck.draw(game));
+      cards.push(game.preludeDeck.drawLegacy(game));
     }
     return PreludesExpansion.playPrelude(player, cards);
   }

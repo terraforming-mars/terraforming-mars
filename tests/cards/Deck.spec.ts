@@ -54,8 +54,8 @@ describe('PreludeDeck', function() {
       log: () => {},
     };
 
-    deck.discard(deck.draw(logger));
-    deck.discard(deck.draw(logger));
+    deck.discard(deck.drawLegacy(logger));
+    deck.discard(deck.drawLegacy(logger));
 
     expect(deck.drawPile).has.length(33);
     expect(deck.discardPile).has.length(2);
@@ -93,7 +93,7 @@ describe('CeoDeck', function() {
     const drawCardsCount = 3;
     const deckLength = deck.drawPile.length - drawCardsCount;
     for (let i = 0; i < drawCardsCount; i++) {
-      deck.discard(deck.draw(logger));
+      deck.discard(deck.drawLegacy(logger));
     }
 
     expect(deck.drawPile).has.length(deckLength);

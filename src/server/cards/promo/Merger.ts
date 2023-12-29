@@ -62,7 +62,7 @@ export class Merger extends PreludeCard {
     const cards: Array<ICorporationCard> = [];
     try {
       while (cards.length < 4) {
-        cards.push(corporationDeck.draw(player.game));
+        cards.push(corporationDeck.drawLegacy(player.game));
       }
     } catch (err) {
       // Error will only occur if the deck is empty. That won't happen, but here we'll just do our best.

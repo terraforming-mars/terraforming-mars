@@ -437,19 +437,6 @@ export class Turmoil {
     }
   }
 
-  /**
-   * Return true if `player` can play a project card with `partyName`
-   * as a party requirement.
-   */
-  public canPlay(player: IPlayer, partyName : PartyName): boolean {
-    if (this.rulingParty.name === partyName) {
-      return true;
-    }
-
-    const party = this.getPartyByName(partyName);
-    return party.delegates.count(player) >= 2;
-  }
-
   /** Return the number of delegates for `delegate` in the reserve. */
   public getAvailableDelegateCount(delegate: Delegate): number {
     return this.delegateReserve.get(delegate);

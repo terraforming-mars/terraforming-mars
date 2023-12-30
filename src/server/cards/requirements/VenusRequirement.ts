@@ -5,6 +5,9 @@ import {RequirementType} from '../../../common/cards/RequirementType';
 import {MAX_VENUS_SCALE, MIN_VENUS_SCALE} from '../../../common/constants';
 import {Options} from './CardRequirement';
 
+/**
+ * Evaluate whether the game's venus scale level is at least (or at most) a given value.
+ */
 export class VenusRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.VENUS;
   protected readonly parameter = GlobalParameter.VENUS;

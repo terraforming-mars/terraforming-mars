@@ -5,6 +5,9 @@ import {GlobalParameter} from '../../../common/GlobalParameter';
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {Options} from './CardRequirement';
 
+/**
+ * Evaluate whether the game's ocean tile count is at least (or at most) a given value.
+ */
 export class OceanRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.OCEANS;
   protected readonly parameter = GlobalParameter.OCEANS;

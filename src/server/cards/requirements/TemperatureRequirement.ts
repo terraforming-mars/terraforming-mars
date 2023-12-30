@@ -5,6 +5,9 @@ import {RequirementType} from '../../../common/cards/RequirementType';
 import {MAX_TEMPERATURE, MIN_TEMPERATURE} from '../../../common/constants';
 import {Options} from './CardRequirement';
 
+/**
+ * Evaluate whether the game's temperature is at least (or at most) a given value.
+ */
 export class TemperatureRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.TEMPERATURE;
   protected readonly parameter = GlobalParameter.TEMPERATURE;

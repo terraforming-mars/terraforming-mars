@@ -57,6 +57,22 @@ export class Deck<T extends ICard> {
     }
   }
 
+  public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T | undefined {
+    if (this.drawPile.length === 0) {
+      logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
+      this.shuffle();
+    }
+
+    const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
+
+    if (this.drawPile.length === 0) {
+      logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
+      this.shuffle();
+    }
+
+    return card;
+  }
+
   public drawLegacy(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
     return this.drawOrThrow(logger, source);
   }

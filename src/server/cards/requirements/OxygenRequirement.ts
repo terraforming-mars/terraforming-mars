@@ -8,7 +8,6 @@ import {MAX_OXYGEN_LEVEL, MIN_OXYGEN_LEVEL} from '../../../common/constants';
 export class OxygenRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.OXYGEN;
   protected readonly parameter = GlobalParameter.OXYGEN;
-  protected override readonly scale = 1;
 
   constructor(options?: Partial<Options>) {
     const count = options?.count ?? 1;

@@ -22,6 +22,7 @@
     "mnemonist": "^0.39.3",
     "prom-client": "^14.0.1",
     "spectre.css": "^0.5.8",
+    "ts-pattern": "^4.3.0",
     "vti": "^0.1.7",
     "vue": "2.6.10",
     "vue-template-compiler": "2.6.10",

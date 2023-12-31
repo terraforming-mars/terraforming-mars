@@ -1,10 +1,9 @@
 import {IPlayer} from '../../IPlayer';
 import {InequalityRequirement} from './InequalityRequirement';
-import {GlobalParameter} from '../../../common/GlobalParameter';
+import {GlobalParameter, getGlobalParameterLimits} from '../../../common/GlobalParameter';
 import {YesAnd} from './CardRequirement';
 
 export abstract class GlobalParameterRequirement extends InequalityRequirement {
-  protected scale: number = 1;
   protected abstract parameter: GlobalParameter;
 
   public abstract getGlobalValue(player: IPlayer): number;
@@ -23,7 +22,7 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement {
   }
 
   public getScore(player: IPlayer): number {
-    const playerRequirementsBonus = player.getGlobalParameterRequirementBonus(this.parameter) * this.scale;
+    const playerRequirementsBonus = player.getGlobalParameterRequirementBonus(this.parameter) * this.scale();
 
     const level = this.getGlobalValue(player);
 
@@ -35,6 +34,10 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement {
   }
 
   public distance(player: IPlayer): number {
-    return Math.floor(Math.abs(this.getScore(player) - this.count) / this.scale);
+    return Math.floor(Math.abs(this.getScore(player) - this.count) / this.scale());
+  }
+
+  protected scale(): number {
+    return getGlobalParameterLimits(this.parameter).scale;
   }
 }

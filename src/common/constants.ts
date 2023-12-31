@@ -1,3 +1,5 @@
+import { GlobalParameter, getGlobalParameterLimits } from "./GlobalParameter";
+
 // Base constants
 export const CARD_COST = 3;
 export const MILESTONE_COST = 8;
@@ -12,13 +14,13 @@ export const OCEAN_BONUS = 2;
 
 // Global parameters
 export const HEAT_FOR_TEMPERATURE = 8;
-export const MAX_OCEAN_TILES = 9;
-export const MAX_TEMPERATURE = 8;
-export const MAX_OXYGEN_LEVEL = 14;
-export const MIN_TEMPERATURE = -30;
-export const MIN_OXYGEN_LEVEL = 0;
-export const MIN_VENUS_SCALE = 0;
-export const MAX_VENUS_SCALE = 30;
+export const MAX_OCEAN_TILES = getGlobalParameterLimits(GlobalParameter.OCEANS).maximum;
+export const MAX_TEMPERATURE = getGlobalParameterLimits(GlobalParameter.TEMPERATURE).maximum;
+export const MAX_OXYGEN_LEVEL = getGlobalParameterLimits(GlobalParameter.OXYGEN).maximum;
+export const MIN_TEMPERATURE = getGlobalParameterLimits(GlobalParameter.TEMPERATURE).minimum;
+export const MIN_OXYGEN_LEVEL = getGlobalParameterLimits(GlobalParameter.OXYGEN).minimum;
+export const MIN_VENUS_SCALE = getGlobalParameterLimits(GlobalParameter.VENUS).minimum;
+export const MAX_VENUS_SCALE = getGlobalParameterLimits(GlobalParameter.VENUS).maximum;
 
 export const OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS = 8;
 export const TEMPERATURE_FOR_OCEAN_BONUS = 0;

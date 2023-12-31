@@ -25,27 +25,29 @@ export class ColoniesHandler {
   public static onCardPlayed(game: IGame, card: ICard) {
     if (!game.gameOptions.coloniesExtension) return;
     game.colonies.forEach((colony) => {
-      ColoniesHandler.maybeActivateColony(colony, card);
+      if (colony.isActive === false && ColoniesHandler.cardActivatesColony(colony, card)) {
+        colony.isActive = true;
+      }
     });
   }
 
   /*
-   * Conditionally activate the incoming colony based on the played card.
+   * Return true if the colony is active, or will be activated by this card.
    *
    * Returns `true` if the colony is already active, or becomes active from this
    * call.
    */
-  public static maybeActivateColony(colony: IColony, card: ICard): boolean {
-    if (colony.isActive !== true) {
-      if (colony.metadata.cardResource !== undefined && colony.metadata.cardResource === card.resourceType) {
-        colony.isActive = true;
-      }
-
-      if (colony.name === ColonyName.VENUS && card.tags.includes(Tag.VENUS) && card.resourceType !== undefined) {
-        colony.isActive = true;
-      }
+  public static cardActivatesColony(colony: IColony, card: ICard): boolean {
+    if (colony.isActive) {
+      return true;
     }
-    return colony.isActive;
+    if (colony.metadata.cardResource !== undefined && colony.metadata.cardResource === card.resourceType) {
+      return true;
+    }
+    if (colony.name === ColonyName.VENUS && card.tags.includes(Tag.VENUS) && card.resourceType !== undefined) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -54,10 +56,14 @@ export class ColoniesHandler {
   public static addColonyTile(player: IPlayer, options?: {
     title?: string,
     colonies?: Array<IColony>,
+    activateableOnly?: boolean,
     cb?: (colony: IColony) => void,
   }): void {
     const game = player.game;
-    const colonyTiles = options?.colonies ?? game.discardedColonies;
+    let colonyTiles = options?.colonies ?? game.discardedColonies;
+    if (options?.activateableOnly === true) {
+      colonyTiles = colonyTiles.filter((colonyTile) => colonyTileWillEnterActive(colonyTile, game));
+    }
     if (colonyTiles.length === 0) {
       game.log('No availble colony tiles for ${0} to choose from', (b) => b.player(player));
       return;
@@ -65,24 +71,28 @@ export class ColoniesHandler {
 
     const title = options?.title ?? 'Select colony tile to add';
 
-    function maybeActivateNewColonyTile(colony: IColony, game: IGame): void {
-      if (colony.isActive) return;
+    function colonyTileWillEnterActive(colony: IColony, game: IGame): boolean {
+      if (colony.isActive) {
+        return true;
+      }
       for (const player of game.getPlayers()) {
         for (const card of player.tableau) {
-          const active = ColoniesHandler.maybeActivateColony(colony, card);
-          if (active) {
-            return;
+          if (ColoniesHandler.cardActivatesColony(colony, card)) {
+            return true;
           }
         }
       }
+      return false;
     }
 
-    const selectColonyTile = new SelectColony(title, 'Add colony tile', colonyTiles)
+    const selectColonyTile = new SelectColony(title, 'Add colony tile', [...colonyTiles])
       .andThen((colonyTile) => {
         game.colonies.push(colonyTile);
         game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
         game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colonyTile));
-        maybeActivateNewColonyTile(colonyTile, game);
+        if (!colonyTile.isActive && colonyTileWillEnterActive(colonyTile, game)) {
+          colonyTile.isActive = true;
+        }
         inplaceRemove(game.discardedColonies, colonyTile);
         options?.cb?.(colonyTile);
         return undefined;

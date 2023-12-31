@@ -94,7 +94,7 @@ import {PriceWars} from './PriceWars';
 import {PrivateInvestigator} from './PrivateInvestigator';
 import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
 import {PrivateResorts} from './PrivateResorts';
-// import {Prospecting} from './Prospecting';
+import {Prospecting} from './Prospecting';
 import {PublicSpaceline} from './PublicSpaceline';
 // import {RecklessDetonation} from './RecklessDetonation';
 import {ResearchDevelopmentHub} from './ResearchDevelopmentHub';
@@ -275,7 +275,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.BATTERY_SHIPMENT]: {Factory: BatteryShipment},
     // [CardName.DEEPWATER_DOME]: {Factory: DeepwaterDome},
     [CardName.SECRET_RESEARCH]: {Factory: SecretResearch},
-    // [CardName.PROSPECTING]: {Factory: Prospecting, compatibility: 'colonies'},
+    [CardName.PROSPECTING]: {Factory: Prospecting, compatibility: 'colonies'},
     [CardName.ELECTION_SPONSORSHIP]: {Factory: ElectionSponsorship, compatibility: 'turmoil'},
     // [CardName.CLOUD_VORTEX_OUTPOST]: {Factory: CloudVortexOutpost, compatibility: 'venus'},
   },

@@ -7,7 +7,7 @@
               <CardTags :tags="getTags()" />
           </div>
           <CardTitle :title="card.name" :type="getCardType()"/>
-          <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()" :padBottom="hasResourceType" />
+          <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()" :padBottom="hasResourceType" :requirementsModifiers="getCardRequirementsModifiers()" />
       </div>
       <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
       <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount()" :type="resourceType" />
@@ -37,6 +37,7 @@ import {CardResource} from '@/common/CardResource';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
+import {RequirementType} from '@/common/cards/RequirementType';
 
 const CARDS_WITH_EXTERNAL_DOCUMENTATION = [
   CardName.BOTANICAL_EXPERIENCE,
@@ -130,6 +131,9 @@ export default Vue.extend({
     },
     getCardRequirements(): Array<CardRequirementDescriptor> {
       return this.cardInstance.requirements;
+    },
+    getCardRequirementsModifiers(): Map<RequirementType, number> {
+      return new Map(this.card.requirementsModifiers.map((rme) => [rme.type, rme.modifier]));
     },
     getResourceAmount(): number {
       return this.card.resources || this.robotCard?.resources || 0;

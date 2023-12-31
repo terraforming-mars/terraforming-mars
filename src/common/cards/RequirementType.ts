@@ -1,3 +1,6 @@
+import {match} from 'ts-pattern';
+import {GlobalParameter} from '../GlobalParameter';
+
 export enum RequirementType {
     OXYGEN = 'O2',
     TEMPERATURE = 'C',
@@ -31,4 +34,35 @@ export enum RequirementType {
     // Underworld
     EXCAVATION = 'Excavation',
     CORRUPTION = 'Corruption',
+}
+
+export function requirementTypeFromGlobalParameter(globalParameter: GlobalParameter): RequirementType {
+  return match(globalParameter)
+    .with(GlobalParameter.OCEANS, () => RequirementType.OCEANS)
+    .with(GlobalParameter.OXYGEN, () => RequirementType.OXYGEN)
+    .with(GlobalParameter.TEMPERATURE, () => RequirementType.TEMPERATURE)
+    .with(GlobalParameter.VENUS, () => RequirementType.VENUS)
+    .with(GlobalParameter.MOON_HABITAT_RATE, () => RequirementType.HABITAT_RATE)
+    .with(GlobalParameter.MOON_MINING_RATE, () => RequirementType.MINING_RATE)
+    .with(GlobalParameter.MOON_LOGISTICS_RATE, () => RequirementType.LOGISTIC_RATE)
+    .exhaustive();
+}
+
+export function globalParameterForRequirementType(requirementType: RequirementType): GlobalParameter | null {
+  switch (requirementType) {
+  case RequirementType.TEMPERATURE:
+    return GlobalParameter.TEMPERATURE;
+  case RequirementType.OXYGEN:
+    return GlobalParameter.OXYGEN;
+  case RequirementType.VENUS:
+    return GlobalParameter.VENUS;
+  case RequirementType.HABITAT_RATE:
+    return GlobalParameter.MOON_HABITAT_RATE;
+  case RequirementType.MINING_RATE:
+    return GlobalParameter.MOON_MINING_RATE;
+  case RequirementType.LOGISTIC_RATE:
+    return GlobalParameter.MOON_LOGISTICS_RATE;
+  default:
+    return null;
+  }
 }

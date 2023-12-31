@@ -1,4 +1,4 @@
-import { GlobalParameter, getGlobalParameterLimits } from "./GlobalParameter";
+import {GlobalParameter, getGlobalParameterLimits} from './GlobalParameter';
 
 // Base constants
 export const CARD_COST = 3;

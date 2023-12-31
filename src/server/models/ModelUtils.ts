@@ -1,6 +1,7 @@
 import {CardModel} from '../../common/models/CardModel';
 import {ColonyModel} from '../../common/models/ColonyModel';
 import {Color} from '../../common/Color';
+import {GLOBAL_PARAMETERS} from '../../common/GlobalParameter';
 import {IGame} from '../IGame';
 import {ICard} from '../cards/ICard';
 import {isIProjectCard} from '../cards/IProjectCard';
@@ -11,6 +12,8 @@ import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
+import {requirementTypeFromGlobalParameter} from '../../common/cards/RequirementType';
+import {RequirementModifierEntry} from '../../common/models/CardModel';
 
 export function cardsToModel(
   player: IPlayer,
@@ -24,6 +27,14 @@ export function cardsToModel(
 ): Array<CardModel> {
   return cards.map((card, index) => {
     let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
+
+    const requirementsModifiers = GLOBAL_PARAMETERS.map((parameter) => {
+      const rme: RequirementModifierEntry = {
+        type: requirementTypeFromGlobalParameter(parameter),
+        modifier: player.getGlobalParameterRequirementBonus(parameter),
+      };
+      return rme;
+    });
 
     // Too bad this is hard-coded
     if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
@@ -51,6 +62,7 @@ export function cardsToModel(
       bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
       discount: discount,
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
+      requirementsModifiers: requirementsModifiers,
     };
     const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
     if (isDisabled === true) {

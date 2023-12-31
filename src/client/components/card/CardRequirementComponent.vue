@@ -2,7 +2,7 @@
   <div class="card-requirement">
       <div class="card-item-container" :class="nextTo">
         <template v-if="requirement.max">max&nbsp;</template>
-        <span v-if="!isRepeated">{{amount}}</span>{{suffix}}
+        <span v-if="!isRepeated"><span v-if="modifiedAmount !== amount"><span style="text-decoration: line-through;">{{amount}}</span> →</span> {{ modifiedAmount }}</span>{{suffix}}
         <template v-if="type === RequirementType.REMOVED_PLANTS">
           <div class="card-special card-minus"></div>
           <div class="card-resource card-resource-plant red-outline"></div>
@@ -34,10 +34,11 @@
 
 import Vue from 'vue';
 import {CardRequirementDescriptor, requirementType} from '@/common/cards/CardRequirementDescriptor';
-import {RequirementType} from '@/common/cards/RequirementType';
+import {RequirementType, globalParameterForRequirementType} from '@/common/cards/RequirementType';
 import {range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
+import {getGlobalParameterLimits} from '@/common/GlobalParameter';
 
 export default Vue.extend({
   name: 'CardRequirementComponent',
@@ -45,6 +46,9 @@ export default Vue.extend({
     requirement: {
       type: Object as () => CardRequirementDescriptor,
       required: true,
+    },
+    requirementsModifiers: {
+      type: Object as () => Map<RequirementType, number>,
     },
     leftMargin: {
       type: Boolean,
@@ -82,6 +86,24 @@ export default Vue.extend({
         return this.count;
       }
       return '';
+    },
+    modifiedAmount(): string | number {
+      const requirementModifier = this.requirementsModifiers.get(this.type);
+      if (requirementModifier) {
+        const globalParameter = globalParameterForRequirementType(this.type);
+        if (globalParameter) {
+          const limits = getGlobalParameterLimits(globalParameter);
+          const scale = limits.scale;
+          const sign = this.requirement.max ? 1 : -1;
+          const modifiedAmount = this.count + requirementModifier * scale * sign;
+          if (this.requirement.max) {
+            return Math.min(modifiedAmount, limits.maximum);
+          } else {
+            return Math.max(modifiedAmount, limits.minimum);
+          }
+        }
+      }
+      return this.amount;
     },
     suffix(): string {
       switch (this.type) {

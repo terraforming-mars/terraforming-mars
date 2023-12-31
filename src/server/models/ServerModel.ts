@@ -32,6 +32,9 @@ import {SpaceId} from '../../common/Types';
 import {cardsToModel, coloniesToModel} from './ModelUtils';
 import {runId} from '../utils/server-ids';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {GLOBAL_PARAMETERS} from '../../common/GlobalParameter';
+import {requirementTypeFromGlobalParameter} from '../../common/cards/RequirementType';
+import {RequirementModifierEntry} from '../../common/models/CardModel';
 
 export class Server {
   public static getSimpleGameModel(game: IGame): SimpleGameModel {
@@ -124,12 +127,21 @@ export class Server {
   }
 
   public static getSelfReplicatingRobotsTargetCards(player: IPlayer): Array<CardModel> {
+    const requirementsModifiers = GLOBAL_PARAMETERS.map((parameter) => {
+      const rme: RequirementModifierEntry = {
+        type: requirementTypeFromGlobalParameter(parameter),
+        modifier: player.getGlobalParameterRequirementBonus(parameter),
+      };
+      return rme;
+    });
+
     return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
       const model: CardModel = {
         resources: targetCard.resourceCount,
         name: targetCard.card.name,
         calculatedCost: player.getCardCost(targetCard.card),
         isSelfReplicatingRobotsCard: true,
+        requirementsModifiers: requirementsModifiers,
       };
       return model;
     });

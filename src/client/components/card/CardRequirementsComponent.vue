@@ -1,7 +1,7 @@
 <template>
   <div :class="getClasses">
     <div v-for="(req, idx) in requirements" :key="idx">
-      <card-requirement :requirement="req" :leftMargin="indentRight[idx]"/>
+      <card-requirement :requirement="req" :requirementsModifiers="requirementsModifiers" :leftMargin="indentRight[idx]"/>
     </div>
   </div>
 </template>
@@ -11,6 +11,7 @@
 import Vue from 'vue';
 import CardRequirementComponent from './CardRequirementComponent.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
+import {RequirementType} from '@/common/cards/RequirementType';
 
 export default Vue.extend({
   name: 'CardRequirementsComponent',
@@ -18,6 +19,9 @@ export default Vue.extend({
     requirements: {
       type: Array<CardRequirementDescriptor>,
       required: true,
+    },
+    requirementsModifiers: {
+      type: Object as () => Map<RequirementType, number>,
     },
   },
   components: {

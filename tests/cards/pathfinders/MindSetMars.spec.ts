@@ -33,10 +33,10 @@ describe('MindSetMars', function() {
   });
 
   it('when you play a jovian tag', function() {
-    const a = fakeCard({name: 'A' as CardName, tags: [Tag.BUILDING]});
+    const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(card.resourceCount).eq(0);
     player.playCard(a);
-    expect(card.resourceCount).eq(1);
+    expect(card.resourceCount).eq(0);
   });
 
   it('when opponent plays a building tag', function() {
@@ -59,7 +59,7 @@ describe('MindSetMars', function() {
 
     turmoil.delegateReserve.clear();
     card.action(player);
-    expect(game.deferredActions).is;
+    expect(game.deferredActions.length).eq(0);
 
     turmoil.delegateReserve.clear();
     turmoil.delegateReserve.add(player, 3);

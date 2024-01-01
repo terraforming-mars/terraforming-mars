@@ -10,6 +10,8 @@ import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansion';
 import {oneWayDifference} from '../../src/common/utils/utils';
+import {Luna} from '../../src/server/colonies/Luna';
+import {AndOptions} from '../../src/server/inputs/AndOptions';
 
 export class UnderworldTestHelper {
   public static assertIsExcavationAction(player: TestPlayer, input: PlayerInput | undefined, ignorePlacementRestrictions: boolean = false) {
@@ -94,5 +96,36 @@ export class UnderworldTestHelper {
     selectColony.cb(colony);
 
     expect(colony.colonies).deep.eq([player.id]);
+  }
+
+  public static assertNoTradeAction(player: TestPlayer) {
+    const actions = player.getActions();
+    const tradeAction = actions.options.find(
+      (option) => option.title === 'Trade with a colony tile');
+
+    expect(tradeAction).is.undefined;
+  }
+
+  public static assertTradeAction(player: TestPlayer, optionTitle: string) {
+    const luna = new Luna();
+    player.game.colonies = [luna];
+
+    const actions = player.getActions();
+    const tradeAction = actions.options.find(
+      (option) => option.title === 'Trade with a colony tile');
+
+    const andOptions = cast(tradeAction, AndOptions);
+
+    const payAction = cast(andOptions.options[0], OrOptions);
+    expect(payAction.title).eq('Pay trade fee');
+    expect(payAction.options).has.length(1);
+
+    const option = cast(payAction, OrOptions).options[0];
+    expect(formatMessage(option.title)).to.eq(optionTitle);
+
+    option.cb();
+    andOptions.options[1].cb(luna);
+
+    expect(player.megaCredits).eq(2);
   }
 }

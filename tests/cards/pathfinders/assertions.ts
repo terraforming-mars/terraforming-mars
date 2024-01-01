@@ -9,6 +9,7 @@ import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
+// TODO(kberg): mix with Underworld assertions.
 export function assertSendDelegateToArea(player: IPlayer, action: IDeferredAction) {
   const sendDelegate = cast(action, SendDelegateToArea);
 

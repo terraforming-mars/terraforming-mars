@@ -17,6 +17,7 @@ import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {message} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
 import {Payment} from '../../common/inputs/Payment';
+import {TradeWithHectateSpeditions} from '../cards/underworld/HectateSpeditions';
 
 export class Colonies {
   private player: IPlayer;
@@ -60,6 +61,7 @@ export class Colonies {
       new TradeWithDarksideSmugglersUnion(player),
       new TradeWithTitanFloatingLaunchPad(player),
       new TradeWithCollegiumCopernicus(player),
+      new TradeWithHectateSpeditions(player),
       new TradeWithEnergy(player),
       new TradeWithTitanium(player),
       new TradeWithMegacredits(player),

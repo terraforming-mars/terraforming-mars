@@ -16,7 +16,7 @@ import {CaveCity} from './CaveCity';
 import {CentralReservoir} from './CentralReservoir';
 import {ChemicalFactory} from './ChemicalFactory';
 // import {ClassActionLawsuit} from './ClassActionLawsuit';
-// import {CloudVortexOutpost} from './CloudVortexOutpost';
+import {CloudVortexOutpost} from './CloudVortexOutpost';
 import {CollusionStandardProject} from './CollusionStandardProject';
 import {ConcessionRights} from './ConcessionRights';
 import {CorporateBlackmail} from './CorporateBlackmail';
@@ -277,7 +277,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SECRET_RESEARCH]: {Factory: SecretResearch},
     [CardName.PROSPECTING]: {Factory: Prospecting, compatibility: 'colonies'},
     [CardName.ELECTION_SPONSORSHIP]: {Factory: ElectionSponsorship, compatibility: 'turmoil'},
-    // [CardName.CLOUD_VORTEX_OUTPOST]: {Factory: CloudVortexOutpost, compatibility: 'venus'},
+    [CardName.CLOUD_VORTEX_OUTPOST]: {Factory: CloudVortexOutpost, compatibility: 'venus'},
   },
 
   standardProjects: {

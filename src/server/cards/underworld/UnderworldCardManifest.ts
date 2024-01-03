@@ -25,7 +25,7 @@ import {CraterSurvey} from './CraterSurvey';
 import {CutThroatBudgeting} from './CutThroatBudgeting';
 // import {Deepmining} from './Deepmining';
 import {Deepnuking} from './Deepnuking';
-// import {DeepwaterDome} from './DeepwaterDome';
+import {DeepwaterDome} from './DeepwaterDome';
 // import {DemetronLabs} from './DemetronLabs';
 import {EarthquakeMachine} from './EarthquakeMachine';
 import {ElectionSponsorship} from './ElectionSponsorship';
@@ -273,7 +273,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.GANYMEDE_TRADING_COMPANY]: {Factory: GanymedeTradingCompany, compatibility: 'colonies'},
     [CardName.CENTRAL_RESERVOIR]: {Factory: CentralReservoir},
     [CardName.BATTERY_SHIPMENT]: {Factory: BatteryShipment},
-    // [CardName.DEEPWATER_DOME]: {Factory: DeepwaterDome},
+    [CardName.DEEPWATER_DOME]: {Factory: DeepwaterDome},
     [CardName.SECRET_RESEARCH]: {Factory: SecretResearch},
     [CardName.PROSPECTING]: {Factory: Prospecting, compatibility: 'colonies'},
     [CardName.ELECTION_SPONSORSHIP]: {Factory: ElectionSponsorship, compatibility: 'turmoil'},

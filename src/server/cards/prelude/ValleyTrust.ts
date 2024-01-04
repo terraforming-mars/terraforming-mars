@@ -40,9 +40,9 @@ export class ValleyTrust extends CorporationCard {
   public initialAction(player: IPlayer) {
     const game = player.game;
     const cards = [
-      game.preludeDeck.draw(game),
-      game.preludeDeck.draw(game),
-      game.preludeDeck.draw(game),
+      game.preludeDeck.drawLegacy(game),
+      game.preludeDeck.drawLegacy(game),
+      game.preludeDeck.drawLegacy(game),
     ];
     return PreludesExpansion.playPrelude(player, cards);
   }

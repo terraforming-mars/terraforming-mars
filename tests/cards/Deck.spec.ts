@@ -1,10 +1,13 @@
 import {expect} from 'chai';
-import {PreludeDeck, CeoDeck} from '../../src/server/cards/Deck';
+import {PreludeDeck, CeoDeck, ProjectDeck} from '../../src/server/cards/Deck';
 import {GameCards} from '../../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
+import {ICard} from '../../src/server/cards/ICard';
+import {Game} from '../../src/server/Game';
+import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {CardName} from '../../src/common/cards/CardName';
 import {ConstRandom, UnseededRandom} from '../../src/common/utils/Random';
-import {ICard} from '../../src/server/cards/ICard';
+import {testGame} from '../TestGame';
 
 function name(card: ICard): CardName {
   return card.name;
@@ -54,8 +57,8 @@ describe('PreludeDeck', function() {
       log: () => {},
     };
 
-    deck.discard(deck.draw(logger));
-    deck.discard(deck.draw(logger));
+    deck.discard(deck.drawLegacy(logger));
+    deck.discard(deck.drawLegacy(logger));
 
     expect(deck.drawPile).has.length(33);
     expect(deck.discardPile).has.length(2);
@@ -93,7 +96,7 @@ describe('CeoDeck', function() {
     const drawCardsCount = 3;
     const deckLength = deck.drawPile.length - drawCardsCount;
     for (let i = 0; i < drawCardsCount; i++) {
-      deck.discard(deck.draw(logger));
+      deck.discard(deck.drawLegacy(logger));
     }
 
     expect(deck.drawPile).has.length(deckLength);
@@ -109,5 +112,120 @@ describe('CeoDeck', function() {
 
     expect(deck.drawPile).to.deep.eq(deserialized.drawPile);
     expect(deck.discardPile).to.deep.eq(deserialized.discardPile);
+  });
+});
+
+describe('draw()', function() {
+  let deck: ProjectDeck;
+  let game: Game;
+  let drawnCard: IProjectCard | undefined;
+  let originalLength: number;
+  let topCard: IProjectCard | undefined;
+  let bottomCard: IProjectCard | undefined;
+
+  describe('with more than enough cards in the draw pile', function() {
+    beforeEach(function() {
+      [game] = testGame(2, {skipInitialCardSelection: true});
+      deck = game.projectDeck;
+      originalLength = game.projectDeck.drawPile.length;
+    });
+
+    describe('drawing from the top', function() {
+      beforeEach(function() {
+        topCard = deck.drawPile[originalLength - 1];
+        drawnCard = deck.draw(game);
+      });
+
+      it('should draw the top card', () => {
+        expect(drawnCard).to.equal(topCard);
+      });
+
+      it('should remove the card from the draw pile', () => {
+        expect(deck.drawPile.length).to.equal(originalLength - 1);
+      });
+    });
+
+    describe('drawing from the bottom', function() {
+      beforeEach(function() {
+        bottomCard = deck.drawPile[0];
+        drawnCard = deck.draw(game, 'bottom');
+      });
+
+      it('should draw the bottom card', () => {
+        expect(drawnCard).to.equal(bottomCard);
+      });
+
+      it('should remove the card from the draw pile', () => {
+        expect(deck.drawPile.length).to.equal(originalLength - 1);
+      });
+    });
+  });
+
+  describe('draw from the top with only 1 card left in the draw pile', function() {
+    beforeEach(function() {
+      [game] = testGame(2, {skipInitialCardSelection: true});
+      deck = game.projectDeck;
+      originalLength = game.projectDeck.drawPile.length;
+      bottomCard = deck.drawPile[0];
+
+      // move all cards in the draw pile except 1 into discard pile
+      const allExceptLast = deck.drawPile.splice(1);
+      deck.discardPile.push(...allExceptLast);
+
+      drawnCard = deck.draw(game);
+    });
+
+    it('should draw the top card', () => {
+      expect(drawnCard).to.equal(bottomCard);
+    });
+
+    it('should shuffle the discard pile back into the draw pile', () => {
+      expect(deck.drawPile.length).to.equal(originalLength - 1);
+      expect(deck.discardPile.length).to.equal(0);
+    });
+  });
+
+  describe('draw from the top with no cards left in the draw pile', function() {
+    let removedCards: IProjectCard[];
+
+    beforeEach(function() {
+      [game] = testGame(2, {skipInitialCardSelection: true});
+      deck = game.projectDeck;
+      originalLength = game.projectDeck.drawPile.length;
+      bottomCard = deck.drawPile[0];
+
+      // remove all draw pile cards
+      removedCards = deck.drawPile.splice(0);
+
+      drawnCard = deck.draw(game);
+    });
+
+    it('should have an empty discard pile', () => {
+      expect(deck.discardPile.length).to.equal(0);
+    });
+
+    it('the drawn card should be undefined', function() {
+      expect(drawnCard).to.equal(undefined);
+    });
+
+    describe('some cards are discarded before drawing from the top again', function() {
+      beforeEach(function() {
+        deck.discardPile = [...removedCards.splice(0, 11)];
+
+        drawnCard = deck.draw(game);
+      });
+
+      it('should draw the new top card', () => {
+        expect(drawnCard).to.not.equal(undefined);
+      });
+
+      it('should empty the discard pile', () => {
+        expect(deck.discardPile.length).to.equal(0);
+      });
+
+      it('should have the correct number of remaining cards in the draw pile', () => {
+        expect(deck.drawPile.length).to.equal(10);
+      });
+    });
   });
 });

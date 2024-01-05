@@ -25,7 +25,7 @@ export class Nanofoundry extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U74',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(-5, {digit})).cards(1).slash().energy(1, {played});
+          b.production((pb) => pb.minus().energy(5, {digit})).cards(1).slash().energy(1, {played});
         }),
         description: 'Requires 2 science tags. Reduce your energy production 5 steps. ' +
           'Draw 1 card for every power tag you have, including this.',

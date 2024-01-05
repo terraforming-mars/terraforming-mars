@@ -39,14 +39,14 @@ export class HectateSpeditions extends ActiveCorporationCard {
         description: 'You start with 38M€. As your first action, place a colony.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(38).colonyTile().br;
+          b.megacredits(38).colonies().br;
           b.effect('When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.',
-            (eb) => eb.text('planetary tag').startEffect.agenda());
+            (eb) => eb.text('planetary tag').startEffect.supplyChain());
           b.br;
-          b.agenda({amount: 2, digit: true}).colon().trade({size: Size.SMALL}).nbsp;
-          b.agenda({amount: 5, digit: true}).arrow(Size.SMALL).tradeFleet().br;
+          b.supplyChain({amount: 2, digit: true}).colon().trade({size: Size.SMALL}).nbsp;
+          b.supplyChain({amount: 5, digit: true}).arrow(Size.SMALL).tradeFleet().br;
           b.plainText('(Effect: Spend 2 supply chain resources (min. 1) to trade.)').br;
-          b.plainText('(Action: Spend 5 agenda resources to gain a trade fleet.)');
+          b.plainText('(Action: Spend 5 supplyChain resources to gain a trade fleet.)');
         }),
       },
     });

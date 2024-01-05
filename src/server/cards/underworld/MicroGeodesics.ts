@@ -5,6 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
+import {digit} from '../Options';
 
 export class MicroGeodesics extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +25,7 @@ export class MicroGeodesics extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U56',
         renderData: CardRenderer.builder((b) => {
-          b.minus().microbes(1).excavate().plants(3).data().asterix();
+          b.minus().microbes(1).excavate().plants(3, {digit}).data().asterix();
         }),
         description: 'Spend 1 microbe from any card to excavate an underground resource and gain 3 plants. Add 1 data resource to ANOTHER card.',
       },

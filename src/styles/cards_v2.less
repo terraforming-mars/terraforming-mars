@@ -1207,7 +1207,6 @@
                 background-image: url(./assets/resources/preservation.png);
             }
             .card-resource-data {
-                color: #0000 !important;
                 background-image: url(./assets/resources/data.png);
             }
             .card-resource-syndicate-fleet {
@@ -1273,9 +1272,6 @@
                 width: 44px;
                 background-size: 44px 44px;
                 height: 44px;
-                .req {
-
-                }
             }
             .card-resource-corruption {
                 background-image: url(./assets/underworld/corruption.png);
@@ -1295,6 +1291,9 @@
             }
             .card-resource-activist {
               background-image: url(./assets/underworld/card-resource-activist.png);
+            }
+            .card-resource-supply-chain {
+              background-image: url(./assets/underworld/card-resource-supply-chain.png);
             }
 
             .card-neutral-delegate {
@@ -2500,9 +2499,13 @@ each(@parties, {
         background-image: url("./assets/resources/@{value}.png");
       }
     })
-    .card-resource-tool {
-      background-image: url(./assets/underworld/card-resource-tool.png);
-    }
+
+    @underworld_resource_types: tool, ware, scoop, activist, journalism, supply-chain;
+    each(@underworld_resource_types, {
+      .card-resource-@{value} {
+        background-image: url("./assets/underworld/card-resource-@{value}.png");
+      }
+    })
     .card-resource-cube {
       background-image: url("./assets/cube.png");
     }

@@ -7,7 +7,6 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all} from '../Options';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class AncientShipyards extends Card {
   constructor() {
@@ -42,12 +41,12 @@ export class AncientShipyards extends Card {
     const game = player.game;
     for (const target of game.getPlayers()) {
       if (target === player) continue;
-      target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+      target.maybeBlockAttack(player, (proceed) => {
         if (proceed) {
           target.stock.steal(Resource.MEGACREDITS, 2, player);
         }
         return undefined;
-      }));
+      });
     }
     if (game.isSoloMode()) {
       player.stock.add(Resource.MEGACREDITS, 2);

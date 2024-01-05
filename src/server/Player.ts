@@ -435,6 +435,11 @@ export class Player implements IPlayer {
     return true;
   }
 
+
+  public maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void {
+    this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
+  }
+
   public productionIsProtected(attacker: IPlayer): boolean {
     return attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }

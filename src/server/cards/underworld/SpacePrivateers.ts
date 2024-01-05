@@ -9,7 +9,6 @@ import {all} from '../Options';
 import {IActionCard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {Resource} from '../../../common/Resource';
 
 export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
@@ -66,7 +65,7 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
     const targets = player.game.getPlayers().filter((p) => p !== player);
     const waitingFor = new Set(targets);
     for (const target of targets) {
-      target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+      target.maybeBlockAttack(player, (proceed) => {
         if (proceed) {
           target.stock.steal(Resource.MEGACREDITS, 2, player, {log: true});
           target.resolveInsurance();
@@ -78,7 +77,7 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
           player.removeResourceFrom(this, 1, {log: true});
         }
         return undefined;
-      }));
+      });
     }
     return undefined;
   }

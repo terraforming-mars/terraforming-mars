@@ -125,6 +125,7 @@
     "1 graphene(s)": "1 Karbon",
     "hydroelectric resource(s)": "hydroelektrische Ressource(n)",
     "clone trooper(s)": "Klonkrieger",
+    "activist(s)": "Aktivist(en)",
     "corruption": "Koruption",
     "1 corruption": "1 Koruption",
 
@@ -135,6 +136,7 @@
     "${0} passed": "${0} hat gepasst",
     "${0} ended turn": "${0} hat den Zug beendet",
     "${0} converted ${1} units of energy to heat": "${0} hat ${1} Energieressource(n) in Wärme umgewandelt",
+    "${0} converted ${1} units of steel to titanium.": "${0} hat ${1} Stahlressource(n) in Titan umgewandelt",
     "${0} converted heat into temperature": "${0} hat Wärme in einen Temperaturanstieg investiert",
     "${0} converted plants into a greenery": "${0} hat Pflanzen in eine Grünfläche umgewandelt",
     "${0} traded with ${1}": "${0} hat mit ${1} gehandelt",
@@ -336,6 +338,7 @@
     "${0} gained ${1} M€ from ${2} action.": "${0} erhielt ${1} M€ aus der Aktion ${2}.",
     "${0} cannot afford to use the ${1} effect": "${0} kann es sich nicht leisten, den ${1}-Effekt zu nutzen",
     "${0} declined to use the ${1} effect": "${0} entschied, den ${1}-Effekt nicht zu nutzen",
+    "${0} has no fighter resource cards and gained 1 titanium.": "${0} hat keine Jäger-Ressourcen Karten und erhielt 1 Titan.",
 
     "${0} gained ${1} TR": "${0} erhielt ${1} TW",
     "${0} lost ${1} TR": "${0} verlor ${1} TW",

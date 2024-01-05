@@ -6,7 +6,6 @@ import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resource} from '../../../common/Resource';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class SubnauticPirates extends Card implements IProjectCard {
   constructor() {
@@ -50,12 +49,12 @@ export class SubnauticPirates extends Card implements IProjectCard {
         }
 
         set.forEach((target) => {
-          target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+          target.maybeBlockAttack(player, (proceed) => {
             if (proceed) {
               target.stock.steal(Resource.MEGACREDITS, 6, player);
             }
             return undefined;
-          }));
+          });
         });
         return undefined;
       });

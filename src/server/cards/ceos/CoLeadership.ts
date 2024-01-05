@@ -22,9 +22,9 @@ export class CoLeadership extends PreludeCard {
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     let ceosDrawn: Array<ICeoCard> = [
-      game.ceoDeck.draw(game),
-      game.ceoDeck.draw(game),
-      game.ceoDeck.draw(game),
+      game.ceoDeck.drawLegacy(game),
+      game.ceoDeck.drawLegacy(game),
+      game.ceoDeck.drawLegacy(game),
     ];
 
     // TODO(d-little): This is not being tested, but currently every CEO is always playable

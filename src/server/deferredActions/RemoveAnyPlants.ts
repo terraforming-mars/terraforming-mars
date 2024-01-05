@@ -6,8 +6,6 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
 import {MessageBuilder, message} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
-
 export class RemoveAnyPlants extends DeferredAction {
   private title: string | Message;
   private count: number;
@@ -47,12 +45,12 @@ export class RemoveAnyPlants extends DeferredAction {
           .getMessage();
 
       return new SelectOption(message, 'Remove plants').andThen(() => {
-        target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, (proceed) => {
+        target.maybeBlockAttack(this.player, (proceed) => {
           if (proceed === true) {
             target.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
           }
           return undefined;
-        }));
+        });
         return undefined;
       });
     });

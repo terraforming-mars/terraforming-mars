@@ -194,18 +194,18 @@ const moduleAbbreviations: Record<GameModule, string> = {
   ares: 'a',
   moon: 'm',
   pathfinders: 'P',
-  ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
+  ceo: 'l', // ceo abbreviation is 'l' for leader, since 'c' and 'C' are already taken
   starwars: 'w',
   underworld: 'u',
 };
 
 // TODO(kberg): make this use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramPl2w';
+const ALL_MODULES = 'bcpvCt*ramPl2wu';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
 
-export interface DebugUIModel {
+type DebugUIModel = {
   filterText: string,
   fullFilter: boolean,
   expansions: Record<GameModule, boolean>,

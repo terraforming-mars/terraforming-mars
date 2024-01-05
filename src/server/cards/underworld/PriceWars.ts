@@ -3,7 +3,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 
@@ -12,8 +11,7 @@ export class PriceWars extends Card implements IProjectCard {
     super({
       name: CardName.PRICE_WARS,
       type: CardType.EVENT,
-      cost: 6,
-      tags: [Tag.BUILDING],
+      cost: 1,
 
       requirements: {corruption: 2},
       victoryPoints: -1,

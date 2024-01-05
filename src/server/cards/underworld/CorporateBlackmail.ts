@@ -10,6 +10,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resource} from '../../../common/Resource';
 import {message} from '../../../server/logs/MessageBuilder';
+import {Size} from '../../../common/cards/render/Size';
 
 
 export class CorporateBlackmail extends Card implements IProjectCard {
@@ -25,9 +26,8 @@ export class CorporateBlackmail extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U39',
         renderData: CardRenderer.builder((b) => {
-          b.text('PAYS YOU').megacredits(10).or().corruption(-2).br;
-          // TODO(kberg): Small bold caps
-          b.text('THIS CANNOT BE BLOCKED BY CORRUPTION').br;
+          b.text('PAYS YOU', Size.SMALL).megacredits(10).or().corruption(-2).br;
+          b.text('THIS CANNOT BE BLOCKED BY CORRUPTION', Size.SMALL).br;
         }),
         description: 'Requires 1 corruption. Target a player that has at least 2 corruption. ' +
           'Unless that player pays you 10 M€, they lose 2 corruption.',

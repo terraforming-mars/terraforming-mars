@@ -435,6 +435,11 @@ export class Player implements IPlayer {
     return true;
   }
 
+
+  public maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void {
+    this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
+  }
+
   public productionIsProtected(attacker: IPlayer): boolean {
     return attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
@@ -709,7 +714,7 @@ export class Player implements IPlayer {
 
   public dealForDraft(quantity: number, cards: Array<IProjectCard>): void {
     for (let i = 0; i < quantity; i++) {
-      cards.push(this.game.projectDeck.draw(this.game, 'bottom'));
+      cards.push(this.game.projectDeck.drawLegacy(this.game, 'bottom'));
     }
   }
 

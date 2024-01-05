@@ -322,6 +322,9 @@ export default Vue.extend({
       case CardRenderItemType.ACTIVIST:
         classes.push(this.cardResource, 'card-resource-activist');
         break;
+      case CardRenderItemType.SUPPLY_CHAIN:
+        classes.push(this.cardResource, 'card-resource-supply-chain');
+        break;
       case CardRenderItemType.NEUTRAL_DELEGATE:
         classes.push('card-neutral-delegate');
         break;

@@ -328,22 +328,22 @@ export class Game implements IGame, Logger {
         gameOptions.initialDraftVariant ||
         gameOptions.ceoExtension) {
         for (let i = 0; i < gameOptions.startingCorporations; i++) {
-          player.dealtCorporationCards.push(corporationDeck.draw(game));
+          player.dealtCorporationCards.push(corporationDeck.drawLegacy(game));
         }
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {
-            player.dealtProjectCards.push(projectDeck.draw(game));
+            player.dealtProjectCards.push(projectDeck.drawLegacy(game));
           }
         }
         if (gameOptions.preludeExtension) {
           for (let i = 0; i < constants.PRELUDE_CARDS_DEALT_PER_PLAYER; i++) {
-            const prelude = preludeDeck.draw(game);
+            const prelude = preludeDeck.drawLegacy(game);
             player.dealtPreludeCards.push(prelude);
           }
         }
         if (gameOptions.ceoExtension) {
           for (let i = 0; i < gameOptions.startingCeos; i++) {
-            const ceoCard = ceoDeck.draw(game);
+            const ceoCard = ceoDeck.drawLegacy(game);
             player.dealtCeoCards.push(ceoCard);
           }
         }
@@ -1510,14 +1510,14 @@ export class Game implements IGame, Logger {
 
   public discardForCost(cardCount: 1 | 2, toPlace: TileType) {
     if (cardCount === 1) {
-      const card = this.projectDeck.draw(this);
+      const card = this.projectDeck.drawLegacy(this);
       this.projectDeck.discard(card);
       this.log('Drew and discarded ${0} to place a ${1}', (b) => b.card(card, {cost: true}).tileType(toPlace));
       return card.cost;
     } else {
-      const card1 = this.projectDeck.draw(this);
+      const card1 = this.projectDeck.drawLegacy(this);
       this.projectDeck.discard(card1);
-      const card2 = this.projectDeck.draw(this);
+      const card2 = this.projectDeck.drawLegacy(this);
       this.projectDeck.discard(card2);
       this.log('Drew and discarded ${0} and ${1} to place a ${2}', (b) => b.card(card1, {cost: true}).card(card2, {cost: true}).tileType(toPlace));
       return card1.cost + card2.cost;

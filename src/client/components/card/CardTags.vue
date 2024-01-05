@@ -1,6 +1,11 @@
 <template>
   <div class="card-tags">
-    <CardTag v-for="(cardTag, index) in tags" :key="index" :index="index" :type="cardTag"/>
+    <template v-if="tags.length <= 4">
+      <CardTag v-for="(cardTag, index) in tags" :key="index" :index="index" :type="cardTag"/>
+    </template>
+    <template v-else>
+      <CardTag :key="0" :index="0" type="asterisk"/>
+    </template>
   </div>
 </template>
 

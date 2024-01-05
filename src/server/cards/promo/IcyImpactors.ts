@@ -24,11 +24,11 @@ export class IcyImpactors extends Card implements IActionCard {
       metadata: {
         cardNumber: 'X47',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 10 M€ (titanium may be used) to add 2 asteroids here', (ab) =>
+          b.action('Spend 10 M€ (titanium may be used) to add 2 asteroids here.', (ab) =>
             ab.megacredits(10).openBrackets.titanium(1).closeBrackets.startAction.asteroids(2));
           b.br;
           b.action('Spend 1 asteroid here to place an ocean tile. ' +
-            'FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT', (ab) =>
+            'FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.', (ab) =>
             ab.or().asteroids(1).startAction.oceans(1).asterix());
         }),
       },

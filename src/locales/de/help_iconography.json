@@ -31,6 +31,7 @@
     "Heat": "Wärme",
     "Floater": "Schweber",
     "Asteroid": "Asteroid",
+    "Preservation": "Erhaltungsressource",
     "Camp": "Lager",
     "Disease": "Krankheit",
 
@@ -119,7 +120,7 @@
     "End Game": "Spielende",
     "In turn order, convert plants to greeneries.": "In Zugreihenfolge, konvertiere Pflanzen zu Grünflächen",
     "Assign awards": "Vergebe Auszeichnungen",
-    "Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader)": "Punktzahl = TW + Plättchen + Karten + Meilensteine + Auszeichnungen + (1 SP pro Vorsitzender und Partei-Anführer)",
+    "Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader": "Punktzahl = TW + Plättchen + Karten + Meilensteine + Auszeichnungen + (1 SP pro Vorsitzender und Partei-Anführer)",
 
     "Game Iconology": "Spielsymbole",
     "Game Phases": "Phasen",

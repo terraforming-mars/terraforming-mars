@@ -10,6 +10,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {all} from '../Options';
 import {IProjectCard} from '../IProjectCard';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class CometForVenus extends Card implements IProjectCard {
   constructor() {
@@ -46,8 +47,13 @@ export class CometForVenus extends Card implements IProjectCard {
           Array.from(venusTagPlayers),
           'Select player to remove up to 4 M€ from',
           'Remove M€')
-          .andThen((selectedPlayer) => {
-            selectedPlayer.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
+          .andThen((target) => {
+            target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+              if (proceed) {
+                target.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
+              }
+              return undefined;
+            }));
             return undefined;
           }),
         new SelectOption('Do not remove M€'));

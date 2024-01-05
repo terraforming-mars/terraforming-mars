@@ -20,7 +20,7 @@ export class HectateSpeditions extends ActiveCorporationCard {
   constructor() {
     super({
       name: CardName.HECTATE_SPEDITIONS,
-      tags: [Tag.MARS],
+      tags: [Tag.EARTH],
       startingMegaCredits: 42,
       resourceType: CardResource.SUPPLY_CHAIN,
 

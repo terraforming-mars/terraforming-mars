@@ -30,7 +30,7 @@ export class ManMadeVolcano extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U17',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(2).heat(4, {digit})).br;
+          b.production((pb) => pb.energy(2, {digit}).heat(4, {digit})).br;
           b.plainText('Increase your energy production 2 steps and your heat production 4 steps.').br;
           b.tile(TileType.MAN_MADE_VOLCANO).openBrackets.excavate().closeBrackets.br;
           b.plainText('Place this special tile on a NON-RESERVED space that has your excavation marker.').br;

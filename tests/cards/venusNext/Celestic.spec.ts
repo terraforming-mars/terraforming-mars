@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllManifests';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';

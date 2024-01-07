@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
-import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllManifests';
 import {CapitalAres} from '../../../src/server/cards/ares/CapitalAres';
 import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
 import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustors';

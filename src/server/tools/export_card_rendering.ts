@@ -1,7 +1,7 @@
 require('dotenv').config();
 import * as fs from 'fs';
 
-import {ALL_MODULE_MANIFESTS} from '../cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../cards/AllManifests';
 import {CardManifest, GlobalEventManifest, ModuleManifest} from '../cards/ModuleManifest';
 import {ICard} from '../cards/ICard';
 import {GameModule} from '../../common/cards/GameModule';

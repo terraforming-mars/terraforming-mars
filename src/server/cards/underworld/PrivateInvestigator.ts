@@ -23,8 +23,8 @@ export class PrivateInvestigator extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U38',
         renderData: CardRenderer.builder((b) => {
-          b.text('TARGET A PLAYER THAT HAS MORE CORRUPTION THAN YOU.', Size.SMALL).br;
-          b.text('PLACE THIS CARD FACE DOWN IN THAT PLAYER\'S PROJECT CARD PILE', Size.SMALL).br;
+          b.text('TARGET A PLAYER WITH MORE CORRUPTION THAN YOU.', Size.SMALL, true).br;
+          b.text('PLACE THIS CARD FACE DOWN IN THAT PLAYER\'S PROJECT CARD PILE.', Size.SMALL, true).br;
           b.tr(1);
         }),
         description: 'Gain 1 TR.',

@@ -333,6 +333,10 @@ export default Vue.extend({
         break;
       case CardRenderItemType.CORRUPTION_SHIELD:
         classes.push('card-corruption-shield');
+        break;
+      case CardRenderItemType.GEOSCAN_ICON:
+        classes.push('card-geoscan-icon');
+        break;
       }
 
       if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {
@@ -487,11 +491,13 @@ export default Vue.extend({
         return '<div class="board-cube--bronze"></div>';
       }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
-      if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {
-        result = '<div class="card-x">x</div>';
-      }
-      if (this.item.type === CardRenderItemType.WILD && this.item.cancelled === true) {
-        result = '<div class="card-x">✕</div>';
+      if (this.item.cancelled === true) {
+        switch (this.item.type) {
+        case CardRenderItemType.TR:
+        case CardRenderItemType.WILD:
+        case CardRenderItemType.UNDERGROUND_RESOURCES:
+          result = '<div class="card-x">x</div>';
+        }
       }
 
       return result;

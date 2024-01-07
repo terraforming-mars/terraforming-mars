@@ -21,7 +21,7 @@ export class Landfill extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U36',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1).slash().production((pb2) => pb2.text('1+').wild(1)).asterix());
+          b.production((pb) => pb.megacredits(1, {questionMark: true})).asterix();
         }),
         description: 'Increase your M€ production 1 step for each different TYPE of production ' +
           'you have at least 1 step of.',

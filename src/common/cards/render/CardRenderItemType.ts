@@ -104,4 +104,5 @@ export enum CardRenderItemType {
   JOURNALISM = 'journalism',
   ACTIVIST = 'activist',
   SUPPLY_CHAIN = 'supply-chain',
+  GEOSCAN_ICON = 'geoscan-icon',
 }

@@ -513,6 +513,11 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
+  public geoscan() {
+    const item = new CardRenderItem(CardRenderItemType.GEOSCAN_ICON, 1, {});
+    return this._appendToRow(item);
+  }
+
   public emptyTile(type: 'normal' | 'golden' = 'normal', options?: ItemOptions) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1, options);

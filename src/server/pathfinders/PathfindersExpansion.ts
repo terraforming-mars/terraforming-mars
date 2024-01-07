@@ -259,10 +259,9 @@ export class PathfindersExpansion {
   public static addToSolBank(player: IPlayer) {
     const solBank = player.getCorporation(CardName.SOLBANK);
     if (solBank !== undefined) {
-      player.defer(() => {
-        player.addResourceTo(solBank, {qty: 1, log: true});
-      },
-      Priority.GAIN_RESOURCE_OR_PRODUCTION);
+      player.defer(
+        () => player.addResourceTo(solBank, {qty: 1, log: true}),
+        Priority.GAIN_RESOURCE_OR_PRODUCTION);
     }
   }
 }

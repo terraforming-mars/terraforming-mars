@@ -44,7 +44,7 @@ export class JensonBoyleCo extends ActiveCorporationCard {
 
       metadata: {
         cardNumber: 'UC03',
-        description: 'You start with 46M€ and 2 corruption.',
+        description: 'You start with 46 M€ and 2 corruption.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(46).corruption(2).br;
           b.action('', (ab) => {

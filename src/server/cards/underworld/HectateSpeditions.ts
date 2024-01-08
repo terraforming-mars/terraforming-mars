@@ -45,7 +45,7 @@ export class HectateSpeditions extends ActiveCorporationCard {
           b.br;
           b.supplyChain({amount: 2, digit: true}).colon().trade({size: Size.SMALL}).nbsp;
           b.supplyChain({amount: 5, digit: true}).arrow(Size.SMALL).tradeFleet().br;
-          b.plainText('(Action: Spend 2 supply chain resources (min. 1) to trade.)').br;
+          b.plainText('(Effect: Spend 2 supply chain resources (min. 1) to trade.)').br;
           b.plainText('(Action: Spend 5 supply chain resources to gain a trade fleet.)');
         }),
       },

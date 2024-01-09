@@ -26,6 +26,7 @@ import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescr
 import {asArray} from '../../common/utils/utils';
 import {YesAnd} from './requirements/CardRequirement';
 import {GlobalParameter} from '../../common/GlobalParameter';
+import {BoardName} from '../../common/boards/BoardName';
 
 /**
  * Cards that do not need a cost attribute.
@@ -47,6 +48,7 @@ type SharedProperties = {
   cardDiscount?: OneOrArray<CardDiscount>;
   type: CardType;
   cost?: number;
+  exclusiveToBoards?: [BoardName]
   initialActionText?: string;
   firstAction?: Behavior & {text: string};
   globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
@@ -59,7 +61,7 @@ type SharedProperties = {
   tilesBuilt?: Array<TileType>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
-}
+};
 
 /* Internal representation of card properties. */
 type InternalProperties = SharedProperties & {

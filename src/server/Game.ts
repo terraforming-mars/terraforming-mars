@@ -222,7 +222,7 @@ export class Game implements IGame, Logger {
     const board = GameSetup.newBoard(gameOptions, rng);
     const gameCards = new GameCards(gameOptions);
 
-    const projectDeck = new ProjectDeck(gameCards.getProjectCards(), [], rng);
+    const projectDeck = new ProjectDeck(gameCards.getProjectCards(gameOptions.boardName), [], rng);
     projectDeck.shuffle();
 
     const corporationDeck = new CorporationDeck(gameCards.getCorporationCards(), [], rng);

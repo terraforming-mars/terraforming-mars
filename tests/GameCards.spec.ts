@@ -5,6 +5,7 @@ import {GameCards} from '../src/server/GameCards';
 import {CardName} from '../src/common/cards/CardName';
 import {CardManifest} from '../src/server/cards/ModuleManifest';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../src/server/game/GameOptions';
+import {BoardName} from '../src/common/boards/BoardName';
 
 describe('GameCards', function() {
   it('correctly removes projectCardsToRemove', function() {
@@ -74,6 +75,24 @@ describe('GameCards', function() {
     expect(ceoNames).to.contain(CardName.FLOYD); // Yes generic CEO
     expect(ceoNames).to.contain(CardName.KAREN); // Yes Prelude
     expect(ceoNames).not.to.contain(CardName.NEIL); // No Moon
+  });
+
+  it('correctly excludes cards that cannot be played with the given board', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      boardName: BoardName.HELLAS,
+    };
+    const names = new GameCards(gameOptions).getProjectCards(gameOptions.boardName).map((c) => c.name);
+    expect(names).not.to.contain(CardName.NOCTIS_CITY);
+  });
+
+  it('correctly includes cards that should be played with the given board', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      boardName: BoardName.THARSIS,
+    };
+    const names = new GameCards(gameOptions).getProjectCards(gameOptions.boardName).map((c) => c.name);
+    expect(names).to.contain(CardName.NOCTIS_CITY);
   });
 });
 

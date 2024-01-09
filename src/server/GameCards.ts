@@ -23,6 +23,7 @@ import {ICeoCard} from './cards/ceos/ICeoCard';
 import {PRELUDE2_CARD_MANIFEST} from './cards/prelude2/Prelude2CardManifest';
 import {STAR_WARS_CARD_MANIFEST} from './cards/starwars/StarwarsCardManifest';
 import {UNDERWORLD_CARD_MANIFEST} from './cards/underworld/UnderworldCardManifest';
+import {BoardName} from '../common/boards/BoardName';
 
 /**
  * Returns the cards available to a game based on its `GameOptions`.
@@ -75,15 +76,16 @@ export class GameCards {
       .map((factory) => new factory.Factory());
   }
 
-  public getProjectCards() {
-    return this.getCards<IProjectCard>('projectCards');
+  public getProjectCards(boardName?: BoardName) {
+    return this.getCards<IProjectCard>('projectCards', boardName);
   }
   public getStandardProjects() {
     return this.getCards<IStandardProjectCard>('standardProjects');
   }
   public getCorporationCards(): Array<ICorporationCard> {
-    const cards = this.getCards<ICorporationCard>('corporationCards')
-      .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
+    const cards = this.getCards<ICorporationCard>('corporationCards').filter(
+      (card) => card.name !== CardName.BEGINNER_CORPORATION,
+    );
     return this.addCustomCards(cards, this.gameOptions.customCorporationsList);
   }
   public getPreludeCards() {
@@ -110,7 +112,10 @@ export class GameCards {
     return ceos;
   }
 
-  private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> = []): Array<T> {
+  private addCustomCards<T extends ICard>(
+    cards: Array<T>,
+    customList: Array<CardName> = [],
+  ): Array<T> {
     for (const cardName of customList) {
       const idx = cards.findIndex((c) => c.name === cardName);
       if (idx === -1) {
@@ -125,14 +130,20 @@ export class GameCards {
     return cards;
   }
 
-  private getCards<T extends ICard>(cardManifestName: keyof ModuleManifest) : Array<T> {
+  private getCards<T extends ICard>(
+    cardManifestName: keyof ModuleManifest,
+    boardName?: BoardName,
+  ): Array<T> {
     let cards: Array<T> = [];
     for (const moduleManifest of this.moduleManifests) {
       // a bit of a hack, but since this is a private API, this is reasonable.
-      const cardManifest: CardManifest<T> = moduleManifest[cardManifestName] as CardManifest<T>;
+      const cardManifest: CardManifest<T> = moduleManifest[
+        cardManifestName
+      ] as CardManifest<T>;
       cards.push(...this.instantiate(cardManifest));
     }
 
+    cards = this.filterExclusiveToBoardCards(cards, boardName);
     cards = this.filterBannedCards(cards);
     cards = this.filterReplacedCards(cards);
     return cards;
@@ -153,5 +164,17 @@ export class GameCards {
       }
       return true;
     });
+  }
+
+  /* Filter cards that can be played with the board */
+  private filterExclusiveToBoardCards<T extends ICard>(
+    cards: Array<T>,
+    boardName?: BoardName,
+  ): Array<T> {
+    return boardName ? cards.filter((card) => {
+      // can't access properties directly due to type error
+      const cardExclusiveToBoardsProperty = ((card as any)['properties']).exclusiveToBoards;
+      return cardExclusiveToBoardsProperty ? cardExclusiveToBoardsProperty.includes(boardName) : card;
+    }) : cards;
   }
 }

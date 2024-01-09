@@ -19,6 +19,7 @@ import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescr
 import {OneOrArray} from '../../common/utils/types';
 import {JSONValue} from '../../common/Types';
 import {IStandardProjectCard} from './IStandardProjectCard';
+import {BoardName} from '../../common/boards/BoardName';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -139,6 +140,8 @@ export interface ICard {
   /** The generation the card was activated. Used for Duncan and Underworld cards. */
   // TODO(kberg): move to json?
   generationUsed?: number;
+
+  exclusiveToBoards?: [BoardName];
 }
 
 export interface IActionCard {

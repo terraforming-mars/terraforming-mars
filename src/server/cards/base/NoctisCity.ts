@@ -2,11 +2,13 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
+
 import {IPlayer} from '../../IPlayer';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
+import {BoardName} from '../../../common/boards/BoardName';
 
 export class NoctisCity extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +21,7 @@ export class NoctisCity extends Card implements IProjectCard {
       behavior: {
         production: {energy: -1, megacredits: 3},
       },
+      exclusiveToBoards: [BoardName.THARSIS],
 
       metadata: {
         cardNumber: '017',

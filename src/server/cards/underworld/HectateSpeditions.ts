@@ -36,7 +36,7 @@ export class HectateSpeditions extends ActiveCorporationCard {
 
       metadata: {
         cardNumber: 'U12',
-        description: 'You start with 38M€. As your first action, place a colony.',
+        description: 'You start with 38 M€. As your first action, place a colony.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(38).colonies().br;

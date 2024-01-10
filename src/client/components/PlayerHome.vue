@@ -387,29 +387,21 @@ export default Vue.extend({
   },
   methods: {
     navigatePage(event: KeyboardEvent) {
-      const inputSource = event.target as Element;
+      const ids: Partial<Record<string, string>> = {
+        [KeyboardNavigation.GAMEBOARD]: 'shortkey-board',
+        [KeyboardNavigation.PLAYERSOVERVIEW]: 'shortkey-playersoverview',
+        [KeyboardNavigation.HAND]: 'shortkey-hand',
+        [KeyboardNavigation.COLONIES]: 'shortkey-colonies',
+      };
+      const inputSource = event.target as Node;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
-        let id: string | undefined = undefined;
-        switch (event.code) {
-        case KeyboardNavigation.GAMEBOARD:
-          id = 'shortkey-board';
-          break;
-        case KeyboardNavigation.PLAYERSOVERVIEW:
-          id = 'shortkey-playersoverview';
-          break;
-        case KeyboardNavigation.HAND:
-          id = 'shortkey-hand';
-          break;
-        case KeyboardNavigation.COLONIES:
-          id = 'shortkey-colonies';
-          break;
-        default:
-          return;
-        }
-        const el = document.getElementById(id);
-        if (el) {
-          event.preventDefault();
-          el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
+        const id = ids[event.code];
+        if (id) {
+          const el = document.getElementById(id);
+          if (el) {
+            event.preventDefault();
+            el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
+          }
         }
       }
     },

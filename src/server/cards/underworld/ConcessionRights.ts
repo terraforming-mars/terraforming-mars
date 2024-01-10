@@ -31,7 +31,7 @@ export class ConcessionRights extends Card implements IProjectCard {
           b.excavate().emptyTile().asterix().nbsp.excavate().corruption();
         }),
         description: 'Requires 1 Earth tag. Until the end of this generation, ' +
-        'you can excavate ignoring placement restrictions. Excavation 1 underground resource. Gain 1 corruption.',
+        'you can excavate ignoring placement restrictions. Excavate 1 underground resource. Gain 1 corruption.',
       },
     });
   }

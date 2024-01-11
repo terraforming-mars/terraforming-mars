@@ -8,22 +8,24 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {addGreenery, resetBoard, setRulingParty, runAllActions, cast} from '../../TestingUtils';
+import {addGreenery, resetBoard, setRulingParty, runAllActions, cast, forceGenerationEnd, maxOutOceans, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {MAX_TEMPERATURE, MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
   let player: TestPlayer;
-  let redPlayer : TestPlayer;
+  let player2 : TestPlayer;
   let game: IGame;
 
   beforeEach(() => {
     card = new GeologicalSurvey();
-    [game, player, redPlayer] = testGame(2, {aresExtension: true});
+    [game, player, player2] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
 
@@ -156,7 +158,7 @@ describe('GeologicalSurvey', () => {
     // Hand-placing an ocean to make things easy, since this test suite relies on an otherwise empty board.
     space.spaceType = SpaceType.OCEAN;
     space.bonus = [SpaceBonus.HEAT];
-    game.simpleAddTile(redPlayer, space, {tileType: TileType.OCEAN});
+    game.simpleAddTile(player2, space, {tileType: TileType.OCEAN});
 
     player.heat = 0;
     new OceanCity().play(player);
@@ -166,5 +168,34 @@ describe('GeologicalSurvey', () => {
     selectSpace.cb(space);
     runAllActions(game);
     expect(player.heat).eq(0);
+  });
+
+
+  it('Works during final greenery placement', () => {
+    const [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: false});
+
+    player.playedCards.push(card);
+    // Set up end-game conditions
+    setTemperature(game, MAX_TEMPERATURE);
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
+    maxOutOceans(player);
+    player.plants = 9;
+    player.steel = 0;
+
+    // Pass last turn
+    forceGenerationEnd(game);
+
+    // Final greenery placement is considered part of the production phase.
+    expect(game.phase).to.eq(Phase.PRODUCTION);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), OrOptions);
+    expect(options.title).eq('Place any final greenery from plants');
+    const selectSpace = cast(options.options[0], SelectSpace);
+    const space = selectSpace.spaces[0];
+    space.bonus = [SpaceBonus.STEEL];
+    selectSpace.cb(space);
+
+    expect(player.plants).eq(1);
+    expect(player.steel).eq(2);
   });
 });

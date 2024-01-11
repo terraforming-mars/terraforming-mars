@@ -15,6 +15,9 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Board} from '../../boards/Board';
 
+/**
+ * Abstraction for cards that give rewards based on tile placement.  (e.g. Ecological Survey, Geological Survey.)
+ */
 export abstract class SurveyCard extends Card implements IProjectCard {
   constructor(properties: StaticCardProperties) {
     super(properties);

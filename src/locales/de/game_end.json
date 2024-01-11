@@ -39,6 +39,7 @@
     "Ecological Zone:ares": "Naturschutzgebiet",
     "Commercial District:ares": "Geschäftsviertel",
     
+    "Completed!": "Vervollständigt!",
     "% completed": "% vervollständigt",
     "Temperature": "Temperatur",
     "Oxygen": "Sauerstoff",
@@ -58,7 +59,7 @@
     "Most tags on the moon track": "Die meisten Mond-Symbole",
     "1st place for": "1. Platz für",
     "2nd place for": "2. Platz für",
-    "award (funded by": "Auszeichnung (finanziert durch",
+    "funded by": "finanziert durch",
     "1st place for ${0} award (funded by ${1})": "1. Platz für ${0} Auszueichnung (finanziert durch ${1})",
     "2nd place for ${0} award (funded by ${1})": "2. Platz für ${0} Auszueichnung (finanziert durch ${1})",
 

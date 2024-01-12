@@ -1264,7 +1264,8 @@ export class Game implements IGame, Logger {
       });
 
       AresHandler.ifAres(this, (aresData) => {
-        AresHandler.earnAdjacencyBonuses(aresData, player, space);
+        const incrementMilestone = tile?.tileType !== TileType.MARS_NOMADS;
+        AresHandler.earnAdjacencyBonuses(aresData, player, space, {incrementMilestone});
       });
 
       TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);

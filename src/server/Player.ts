@@ -1673,9 +1673,11 @@ export class Player implements IPlayer {
     // Convert Heat
     const convertHeat = new ConvertHeat();
     if (convertHeat.canAct(this)) {
-      action.options.push(new SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
+      const option = new SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
         return convertHeat.action(this);
-      }));
+      });
+      option.warnings = convertHeat.warnings;
+      action.options.push(option);
     }
 
     const turmoilInput = TurmoilHandler.partyAction(this);

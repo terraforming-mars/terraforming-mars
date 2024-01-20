@@ -1,8 +1,8 @@
+import * as constants from '../../../../common/constants';
 import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
-import * as constants from '../../../../common/constants';
 
 export class AsteroidStandardProject extends StandardProjectCard {
   constructor() {
@@ -31,7 +31,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
 
   public override canAct(player: IPlayer): boolean {
     if (player.game.getTemperature() === constants.MAX_TEMPERATURE) {
-      return false;
+      this.warnings.push('maxtemp');
     }
     return super.canAct(player);
   }

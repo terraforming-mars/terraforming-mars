@@ -48,6 +48,7 @@ export function cardsToModel(
       name: card.name,
       calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
       warning: warning,
+      warnings: card.warnings,
       bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
       discount: discount,
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,

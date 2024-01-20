@@ -19,6 +19,7 @@ import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescr
 import {OneOrArray} from '../../common/utils/types';
 import {JSONValue} from '../../common/Types';
 import {IStandardProjectCard} from './IStandardProjectCard';
+import {Warning} from '../../common/cards/Warning';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -120,7 +121,14 @@ export interface ICard {
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
+
+  /** Per-instance message when choosing a card to play or act upon. */
   warning?: string | Message;
+  /**
+   * State-specific data about whether this card's action has other warnings.
+   */
+  warnings?: Array<Warning>;
+
   behavior?: Behavior,
   produce?(player: IPlayer): void;
   tr?: TRSource | DynamicTRSource;

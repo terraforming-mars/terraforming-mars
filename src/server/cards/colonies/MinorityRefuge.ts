@@ -27,8 +27,6 @@ export class MinorityRefuge extends Card implements IProjectCard {
     });
   }
 
-  public warning?: string;
-
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.colonies.getPlayableColonies().length === 0) {
       return false;

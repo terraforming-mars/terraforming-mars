@@ -84,11 +84,9 @@ describe('Ambient', function() {
     setTemperature(game, MAX_TEMPERATURE);
 
     const getBlueActions = function() {
-      const actions = cast(player.getActions(), OrOptions);
-      if (actions.options[0].title === 'Perform an action from a played card') {
-        return cast(actions.options[0], SelectCard);
-      }
-      return undefined;
+      const orOptions = cast(player.getActions(), OrOptions);
+      const option = orOptions.options.find((o) => o.title === 'Perform an action from a played card');
+      return option === undefined ? undefined : cast(option, SelectCard);
     };
 
     expect(getBlueActions()!.cards.map((c) => (c as any).name)).deep.eq([card.name]);

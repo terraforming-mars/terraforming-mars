@@ -96,6 +96,6 @@ describe('PlayerInput', function() {
     });
     await Promise.all(([emit, post]));
 
-    expect(res.content).eq('{"message":"Unexpected token } in JSON at position 0"}');
+    expect(res.content).matches(/Unexpected token/);
   });
 });

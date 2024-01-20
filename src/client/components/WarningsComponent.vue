@@ -1,0 +1,31 @@
+<template>
+  <div>
+    <div v-for="(warning, idx) in warnings" :key="idx" class="card-warning">
+      {{ $t(descriptions[warning]) }}
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import {Warning} from '@/common/cards/Warning';
+
+const descriptions: Record<Warning, string> = {
+  'maxtemp': 'Note: temperature is already at its goal.',
+};
+
+export default Vue.extend({
+  name: 'WarningsComponent',
+  props: {
+    warnings: {
+      type: Object as () => Array<Warning>,
+      required: true,
+    },
+  },
+  computed: {
+    descriptions(): typeof descriptions {
+      return descriptions;
+    },
+  },
+});
+</script>

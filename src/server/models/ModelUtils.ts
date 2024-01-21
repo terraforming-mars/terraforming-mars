@@ -34,7 +34,7 @@ export function cardsToModel(
     }
 
 
-    let warning = card.warning;
+    let warning = undefined;
     const playCardMetadata = options?.extras?.get(card.name);
     if (typeof(playCardMetadata?.details) === 'object') {
       const thinkTankResources = playCardMetadata?.details.thinkTankResources;

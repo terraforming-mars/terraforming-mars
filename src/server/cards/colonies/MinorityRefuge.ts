@@ -44,7 +44,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
       if (lunaIsAvailable === false) {
         return false;
       }
-      this.warning = 'You will only be able to build the colony on Luna.';
+      this.warnings.push('buildOnLuna');
     }
 
     return true;

@@ -14,6 +14,7 @@ const descriptions: Record<Warning, string> = {
   'maxtemp': 'Note: the temperature is already at its goal.',
   'maxoceans': 'Note: all oceans are already on the board.',
   'maxvenus': 'Note: Venus scale is already at its goal.',
+  'buildOnLuna': 'You will only be able to build the colony on Luna.',
 };
 
 export default Vue.extend({

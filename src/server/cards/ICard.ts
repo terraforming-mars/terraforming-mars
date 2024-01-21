@@ -1,7 +1,6 @@
 import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from './IProjectCard';
 import {Space} from '../boards/Space';
-import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
@@ -122,10 +121,8 @@ export interface ICard {
   requirements: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
 
-  /** Per-instance message when choosing a card to play or act upon. */
-  warning?: string | Message;
   /**
-   * State-specific data about whether this card's action has other warnings.
+   * Per-instance state-specific warnings about this card's action.
    */
   warnings?: Array<Warning>;
 

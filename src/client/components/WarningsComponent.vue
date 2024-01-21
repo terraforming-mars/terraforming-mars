@@ -11,7 +11,9 @@ import Vue from 'vue';
 import {Warning} from '@/common/cards/Warning';
 
 const descriptions: Record<Warning, string> = {
-  'maxtemp': 'Note: temperature is already at its goal.',
+  'maxtemp': 'Note: the temperature is already at its goal.',
+  'maxoceans': 'Note: all oceans are already on the board.',
+  'maxvenus': 'Note: Venus scale is already at its goal.',
 };
 
 export default Vue.extend({

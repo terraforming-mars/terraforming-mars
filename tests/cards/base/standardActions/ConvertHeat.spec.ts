@@ -44,7 +44,7 @@ describe('ConvertHeat', function() {
     expect(game.getTemperature()).eq(-28);
   });
 
-  it('Spending heat when the global parameter is at its maximum is a valid stall action', function() {
+  it('Spending heat when the global parameter is at its goal is a valid stall action', function() {
     player.heat = 8;
 
     expect(card.canAct(player)).eq(true);

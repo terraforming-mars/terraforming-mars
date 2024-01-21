@@ -1,2 +1,4 @@
 export type Warning =
- 'maxtemp';
+ 'maxtemp' |
+ 'maxoceans' |
+ 'maxvenus';

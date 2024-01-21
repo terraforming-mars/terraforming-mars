@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(warning, idx) in warnings" :key="idx" class="card-warning">
+    <div v-for="(warning, idx) in (warnings || [])" :key="idx" class="card-warning">
       {{ $t(descriptions[warning]) }}
     </div>
   </div>
@@ -20,7 +20,7 @@ export default Vue.extend({
   name: 'WarningsComponent',
   props: {
     warnings: {
-      type: Object as () => Array<Warning>,
+      type: Object as () => Array<Warning> | undefined,
       required: true,
     },
   },

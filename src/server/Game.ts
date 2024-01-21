@@ -1498,17 +1498,6 @@ export class Game implements IGame, Logger {
     this.gameAge++;
   }
 
-  public someoneCanHaveProductionReduced(resource: Resource, minQuantity: number = 1): boolean {
-    // in soloMode you don't have to decrease resources
-    if (this.isSoloMode()) return true;
-    return this.getPlayers().some((p) => {
-      if (p.production[resource] < minQuantity) return false;
-      // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
-      if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;
-      return true;
-    });
-  }
-
   public discardForCost(cardCount: 1 | 2, toPlace: TileType) {
     if (cardCount === 1) {
       const card = this.projectDeck.drawLegacy(this);

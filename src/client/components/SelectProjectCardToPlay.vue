@@ -17,6 +17,7 @@ import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
+import WarningsComponent from '@/client/components/WarningsComponent.vue';
 
 export default Vue.extend({
   name: 'SelectProjectCardToPlay',
@@ -88,6 +89,7 @@ export default Vue.extend({
     Card,
     AppButton,
     PaymentUnitComponent,
+    WarningsComponent,
   },
   mounted() {
     Vue.nextTick(() => {
@@ -351,6 +353,7 @@ export default Vue.extend({
 
   <section v-trim-whitespace>
     <div v-if="selectedCardHasWarning()" class="card-warning">{{ $t(card.warning) }}</div>
+    <warnings-component :warnings="card.warnings"></warnings-component>
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 

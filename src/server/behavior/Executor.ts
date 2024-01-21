@@ -127,8 +127,16 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.decreaseAnyProduction !== undefined) {
-      if (!player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count)) {
-        return false;
+      if (!game.isSoloMode()) {
+        const dap = behavior.decreaseAnyProduction;
+        const targets = game.getPlayers().filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
+
+        if (targets.length === 0) {
+          return false;
+        }
+        if (targets.length === 1 && targets[0] === player) {
+          card.warnings.push('decreaseOwnProduction');
+        }
       }
     }
 

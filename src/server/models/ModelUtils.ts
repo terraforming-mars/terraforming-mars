@@ -48,7 +48,6 @@ export function cardsToModel(
       name: card.name,
       calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
       warning: warning,
-      warnings: card.warnings,
       bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
       discount: discount,
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
@@ -60,6 +59,9 @@ export function cardsToModel(
     const reserveUnits = playCardMetadata?.reserveUnits;
     if (reserveUnits !== undefined) {
       model.reserveUnits = reserveUnits;
+    }
+    if (card.warnings.length > 0) {
+      model.warnings = card.warnings;
     }
     return model;
   });

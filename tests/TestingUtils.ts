@@ -149,6 +149,7 @@ class FakeCard implements IProjectCard {
   public cost = 0;
   public tags = [];
   public requirements = [];
+  public warnings = [];
   public canPlay(player: IPlayer) {
     if (this.requirements.length === 0) {
       return true;

@@ -67,7 +67,7 @@ class CardProcessor {
       requirements: card.requirements ?? [],
       metadata: card.metadata,
       warning: card.warning,
-      productionBox: Units.isUnits(production) ? Units.of(production) : Units.EMPTY, // Dynamic units aren't used on on the client side.
+      productionBox: Units.isUnits(production) ? production : Units.EMPTY, // Dynamic units aren't used on on the client side.
       resourceType: card.resourceType,
       startingMegaCredits: startingMegaCredits,
       cardCost: cardCost,

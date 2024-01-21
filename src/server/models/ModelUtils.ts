@@ -33,7 +33,6 @@ export function cardsToModel(
       discount = [{tag: Tag.MARS, amount: player.tags.count(Tag.MARS)}];
     }
 
-
     let warning = card.warning;
     const playCardMetadata = options?.extras?.get(card.name);
     if (typeof(playCardMetadata?.details) === 'object') {

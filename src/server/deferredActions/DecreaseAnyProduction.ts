@@ -38,7 +38,7 @@ export class DecreaseAnyProduction extends DeferredAction<boolean> {
       this.player.resolveInsuranceInSoloGame();
       this.cb(true);
     } else {
-      const targets: Array<IPlayer> = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
+      const targets = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
 
       if (targets.length === 0) {
         this.cb(false);

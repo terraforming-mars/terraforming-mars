@@ -6,4 +6,5 @@ export type Warning =
  'maxHabitatRate' |
  'maxMiningRate' |
  'maxLogisticsRate' |
+ 'decreaseOwnProduction' |
  'buildOnLuna';

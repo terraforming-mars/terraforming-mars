@@ -18,6 +18,7 @@ const descriptions: Record<Warning, string> = {
   'maxHabitatRate': 'Note: Moon habitat rate is already at its goal.',
   'maxMiningRate': 'Note: Moon mining rate is already at its goal.',
   'maxLogisticsRate': 'Note: Moon logistics rate is already at its goal.',
+  'decreaseOwnProduction': 'Warning: you are the only player that can lose production.',
   'buildOnLuna': 'You will only be able to build the colony on Luna.',
 };
 
@@ -25,7 +26,7 @@ export default Vue.extend({
   name: 'WarningsComponent',
   props: {
     warnings: {
-      type: Object as () => Array<Warning> | undefined,
+      type: Array as () => Array<Warning> | undefined,
       required: true,
     },
   },

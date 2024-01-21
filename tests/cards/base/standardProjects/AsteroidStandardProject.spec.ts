@@ -39,7 +39,7 @@ describe('AsteroidStandardProject', function() {
     expect(game.getTemperature()).eq(-28);
   });
 
-  it('Paying when the global parameter is at its maximum is a valid stall action', () => {
+  it('Paying when the global parameter is at its goal is a valid stall action', () => {
     player.megaCredits = 14;
     expect(card.canAct(player)).eq(true);
 

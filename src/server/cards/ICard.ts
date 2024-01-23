@@ -1,7 +1,6 @@
 import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from './IProjectCard';
 import {Space} from '../boards/Space';
-import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
@@ -19,6 +18,7 @@ import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescr
 import {OneOrArray} from '../../common/utils/types';
 import {JSONValue} from '../../common/Types';
 import {IStandardProjectCard} from './IStandardProjectCard';
+import {Warning} from '../../common/cards/Warning';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -120,7 +120,12 @@ export interface ICard {
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
-  warning?: string | Message;
+
+  /**
+   * Per-instance state-specific warnings about this card's action.
+   */
+  warnings: Array<Warning>;
+
   behavior?: Behavior,
   produce?(player: IPlayer): void;
   tr?: TRSource | DynamicTRSource;

@@ -39,6 +39,7 @@
     "random": "Zufällig",
 
     "GEN": "GEN",
+    "Gen: ": "Gen",
     "Venus scale": "Venusleiste",
     "Generation Marker": "Generationen-Marker",
     "Ruling Party": "Regierende Partei",
@@ -598,8 +599,7 @@
     "Gain 1 M€ per floater here (max 4)": "Erhalte 1 M€ pro Schweber hier (maximal 4M€)",
     "Add microbes": "Füge Mikroben hinzu",
     "Add animal": "Füge Tier hinzu",
-    "Add ${0} ${1} to ${2}": "Füge ${0} ${1} ${2} hinzu",
-    "Add ${0} animals to ${1}": "Füge ${0} Tiere ${1} hinzu",
+    "Add ${0} animal to ${1}": "Füge ${0} Tier(e) ${1} hinzu",
     "Select a Venus card to add 1 microbe": "Wähle eine Venus-Karte um 1 Mikrobe hinzuzufügen",
     "Select a card to add an microbe": "Wähle eine Karte um 1 Mikrobe hinzuzufügen",
     "Select a card to add an animal": "Wähle eine Karte um 1 Tier hinzuzufügen",
@@ -711,6 +711,8 @@
     "Decrease energy": "Reduziere Energie-Produktion",
     "Select amount of energy to gain": "Wähle Menge an Energie, die du erhalten möchtest",
     "Select amount of energy to convert to heat": "Wähle Menge an Energie, die in Wärme umgewandelt werden soll",
+    "Select up to steel to convert to heat": "Wähle Menge an Stahl, der in Titan umgewandelt werden soll",
+    "Convert Steel": "Konvertiere Stahl",
     "Spend 1 plant to gain 7 M€.": "Bezahle 1 Pflanze, um 7 M€ zu erhalten",
     "Spend 1 steel to gain 7 M€.": "Bezahle 1 Stahl, um 7 M€ zu erhalten",
     "Spend plant": "Bezahle Pflanze",
@@ -859,6 +861,11 @@
     "Which resource production would you prefer to decrease?": "Welche Produktionsart bevorzugst Du zu reduzieren?",
     "Amplify erosions at:": "Erosionen verstärken bei:",
     "Save": "Speichern",
+
+    "Spend 1 corruption to block an attack by ${0}?": "Willst du 1 Korruption bezahlen, um einen Angriff von ${0} zu blockieren?",
+    "Block with corruption": "Block mit Korruption",
+    "Spend corruption": "Korruption ausgeben",
+    "Do not block": "Nicht blocken",
 
     "Select Earth card(s) to discard": "Wähle Karte(n) mit Erd-Symbol, die du abwerfen möchtest",
     "Select a card to keep and pass the rest to ${0}": "Wähle eine Karte, die du behalten möchtest und gebe den Rest an ${0}",

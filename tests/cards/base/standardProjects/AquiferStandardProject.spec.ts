@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churnAction} from '../../../TestingUtils';
+import {cast, churnAction, runAllActions} from '../../../TestingUtils';
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
 import {maxOutOceans} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
@@ -38,11 +38,22 @@ describe('AquiferStandardProject', function() {
     expect(game.board.getOceanSpaces()).has.length(1);
   });
 
-  it('cannnot act when maximized', () => {
-    player.megaCredits = card.cost;
-    expect(card.canAct(player)).is.true;
+  it('Paying when the global parameter is at its goal is a valid stall action', () => {
+    player.megaCredits = 18;
+    expect(card.canAct(player)).eq(true);
+
     maxOutOceans(player);
-    expect(card.canAct(player)).is.false;
+
+    player.megaCredits = 18;
+    expect(player.getTerraformRating()).eq(23);
+    expect(card.canAct(player)).eq(true);
+
+    cast(card.action(player), undefined);
+    runAllActions(game);
+
+    expect(game.board.getOceanSpaces()).has.length(9);
+    expect(player.getTerraformRating()).eq(23);
+    expect(player.megaCredits).eq(0);
   });
 
   it('Can not act with reds', () => {

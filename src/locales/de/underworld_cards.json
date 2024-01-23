@@ -1,0 +1,253 @@
+{
+
+"Anti-trust Crackdown": "Kartellrechtliches Durchgreifen",
+"Requires that you have no more than 0 corruption. ALL players lose 2 corruption each.": "Benötigt, dass du nicht mehr als 0 Korruption hast. ALLE Spieler verlieren jeweils 2 Korruption.",
+
+"Artesian Aquifer": "Artesischer Grundwasserleiter",
+"Place an ocean, then excavate the underground resource in its space, if possible.": "Platziere einen Ozean und grabe dann, wenn möglich, die unterirdische Ressource in seinem Feld aus.",
+
+"Battery Factory": "Batterie-Fabrik",
+"Action: Spend 1 energy to gain 1 M€ for each power tag you have.": "AKTION: Bezahle 1 Energie, um 1 M€ für jedes Energie-Symbol zu erhalten, das du hast.",
+
+"Behemoth Excavator": "Behemoth Bagger",
+"Excavate 3 underground resources.": "Grabe 3 unterirdische Ressourcen aus.",
+
+"Casino": "Kasino",
+"Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "Benötigt mindestens 1 Stadtplättchen im Spiel. Erhalte 1 Korruption. Erhöhe deine M€-Produktion um 2.",
+
+"Cave City": "Höhlenstadt",
+"Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "Benötigt 1 Ausgrabungsmarker. Erhöhe deine M€-Produktion um 1. Platziere eine Stadt auf einem Feld, auf dem DU einen Ausgrabungsmarker hast. Die normalen Platzierungsbeschränkungen gelten weiterhin.",
+
+"Chemical Factory": "Chemische Fabrik",
+"Action: Spend 1 plant to excavate an underground resource.": "AKTION: Bezahle 1 Pflanze, um eine unterirdische Ressource auszugraben.",
+"Gain 2 corruption.": "Erhalte 2 Korruption.",
+
+"Concession Rights": "Konzessionsrechte",
+"Requires 1 Earth tag. Until the end of this generation, you can excavate ignoring placement restrictions. Excavation 1 underground resource. Gain 1 corruption.": "Benötigt 1 Erd-Symbol. Bis zum Ende dieser Generation kannst du ohne Rücksicht auf Platzierungsbeschränkungen graben. Grabe 1 unterirdische Ressource aus. Erhalte 1 Korruption.",
+
+"Corporate Blackmail": "Erpressung durch Unternehmen",
+"PAYS YOU": "BEZAHLE",
+"THIS CANNOT BE BLOCKED BY CORRUPTION": "DIES KANN NICHT DURCH KORRUPTION BLOCKIERT WERDEN",
+"Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Benötigt 1 Korruption. Visiere einen Spieler, der mindestens 2 Korruption hat. Wenn dieser Spieler nicht 10 M€ an dich zahlt, verliert er 2 Korruptionspunkte.",
+
+"Crater Survey": "Krater Vermessung",
+"Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Füge 2 Daten einer ANDEREN Karte hinzu. Identifiziere 4 unterirdische Ressourcen.",
+
+"Cut-throat Budgeting": "Halsabschneiderische Budgetierung",
+"Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "Benötigt 1 Korruption. Erhöhe deine M€-, Stahl- und Energieproduktion um jeweils 1.",
+
+"Deepnuking": "Tiefschürfen",
+"Excavate 2 underground resources. Remove up to 3 plants from any player.": "Grabe 2 unterirdische Ressourcen aus. Entferne bis zu 3 Pflanzen von einem beliebigen Spieler.",
+
+"Earthquake Machine": "Erdbeben-Maschine",
+"Action: Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "AKTION: Bazahle 1 Energie, um eine unterirdische Ressource auf einem beliebigen Feld auf dem Mars auszugraben, auf dem sich kein Plättchen befindet.",
+"Requires 2 science tags. Decrease any plant production 1 step": "Benötigt 2 Wissenschafts-Symbole. Reduziere eine beliebige Pflanzenproduktion um 1.",
+
+"Excavator Leasing": "Bagger-Leasing",
+"Effect: The excavate standard project costs 1 M€ less for all players.": "EFFEKT: Das Standardprojekt Ausgraben kostet für alle Spieler 1 M€ weniger.",
+"Effect: When any player excavates underground resources, you gain 1 M€ per excavation.": "EFFEKT: Wenn ein beliebiger Spieler unterirdische Ressourcen ausgräbt, erhälst du 1 M€ pro Ausgrabung.",
+
+"Expedition Vehicles": "Expeditions-Fahrzeuge",
+"Effect: After you place a tile (on Mars or in space) that has no adjacent tiles, draw a card.": "EFFEKT: Nachdem du ein Plättchen (auf dem Mars oder im Weltraum) platziert hast, das keine angrenzenden Plättchen hat, ziehe eine Karte.",
+
+"Fabricated Scandal": "Erfundener Skandal",
+"most": "am meisten",
+"least": "am wenigsten",
+"Gain 1 corruption. The players with the highest TR lose 1 TR. Then the players with the lowest TR gain 1 TR, if possible.": "Erhalte 1 Korruption. Die Spieler mit dem höchsten TW verlieren 1 TW. Dann erhalten die Spieler mit dem niedrigsten TW 1 TW, wenn möglich.",
+
+"Forest Tunnels": "Waldtunnel",
+"Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "Benötigt einen Ausgrabungsmarker. Erhalte 1 Pflanze für jeden Ausgrabungsmarker, den du besitzt.",
+
+"Geological Survey": "Geologische Untersuchung",
+"Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Füge 1 Datum zu einer ANDEREN Karte hinzu. Identifiziere 2 beliebige unterirdische Ressourcen auf dem Mars.",
+
+"Geologist Team": "Geologen-Team",
+"Action: Identify 1 underground resource.": "AKTION: Identifiziere 1 unterirdische Ressource.",
+"Effect: When ANY player identifies an underground resource that depicts an ocean, YOU gain 1 TR.": "EFFEKT: Wenn ein beliebiger Spieler eine unterirdische Ressource identifiziert, die einen Ozean darstellt, erhältst DU 1 TW.",
+
+"Geoscan Satellite": "Geoscan Satellit",
+"Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "FÜge 2 Daten einer beliebigen Karte hinzu. Wähle ein Feld auf dem Spielbrett. Identifiziere die unterirdische Ressource in diesem Feld und in allen angrenzenden Feldern.",
+
+"Geothermal Network": "Geothermisches Netzwerk",
+"Requires 3 excavation markers. Increase your heat production 3 steps.": "Benötigt 3 Ausgrabungsmarker. Erhöhe die Wärmeproduktion um 3.",
+
+"Global Audit": "Globale Prüfung",
+"Every player with 0 corruption gains 1 TR, if possible.": "Jeder Spieler mit 0 Korruption erhält 1 TW, wenn möglich.",
+
+"Grey Market Exploitation": "Ausbeutung des grauen Marktes",
+"Action: Spend 1 M€ to gain 1 standard resource.": "AKTION: Bezahle 1 M€, um 1 Standardressource zu erhalten.",
+"Action: Spend 1 corruption to gain 3 of the same standard resource.": "AKTION: Bezahle 1 Korruption, um 3 der gleichen Standardressource zu erhalten.",
+"Requires 2 corruption.": "Benötigt 2 Korruption.",
+
+"Hackers": "Hacker",
+"Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Benötigt 2 Korruption. Reduziere eine beliebige M€-Produktion um 2. Erhöhe deine M€-Produktion um 1 für jede Korruptionressource, die du hast.",
+
+"Hired Raiders": "Bezahlte Plünderer",
+"Steal 3 M€, plus 2 extra M€ for each corruption resource you have, from any player.": "Klaue 3 M€, plus 2 zusätzliche M€ für jede Korruptionsressource, die du hast, von einem beliebigen Spieler.",
+
+"Hyperspace Drive Prototype": "Hyperraum-Antrieb Prototyp",
+"Requires that 3 science tags. Put a fighter resource on a card you own, or gain 1 titanium if you have no suitable card. Put a science resource on a card you own, or gain 1 TR if you have no suitable card.": "Benötigt 3 Wissenschafts-Symbole. Lege einen Jäger auf eine Karte, die du besitzt, oder erhalte 1 Titan, wenn du keine passende Karte hast. Lege eine Wissenschaftsressource auf eine Karte, die du besitzt, oder erhalte 1 TW, wenn du keine passende Karte hast.",
+
+"Imported Heavy Machinery": "Importierte Spezialmaschinen",
+"Excavate 2 underground resources.": "Grabe 2 unterirdische Ressourcen aus.",
+
+"Infrastructure Overload": "Überlastung der Infrastruktur",
+"Requires 2 corruption. Reduce any energy production 2 steps.": "Benötigt 2 Korruption. Reduziere eine beliebige Energieproduktion um 2.",
+
+"Investigative Journalism": "Investigativer Journalismus",
+"Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.": "AKTION: Bezahle 5 M€ und entferne 1 Korruption von EINEM ANDEREN Spieler mit mehr Korruption als du, um 1 Journalismus-Ressource dieser Karte hinzuzufügen.",
+"Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.": "Reduziere deine M€-Produktion um 2. 1 VP pro 2 Journalismus-Ressourcen auf dieser Karte.",
+
+"Landfill": "Mülldeponie",
+"Increase your M€ production 1 step for each different TYPE of production you have at least 1 step of.": "Erhöhe deine M€-Produktion um 1 für jede andere Produktionsart, von der du mindestens 1 Stufe hast.",
+
+"Lobbying Network": "Lobbying-Netzwerk",
+"Gain 1 corruption.": "Erhalte 1 Korruption.",
+
+"Man-made Volcano": "Künstlicher Vulkan",
+"Increase your energy production 2 steps and your heat production 4 steps.": "Erhöhe deine Energie-Produktion um 2 und Ihre Wärme-Produktion um 4.",
+"Place this special tile on a NON-RESERVED space that has your excavation marker.": "Platziere dieses Spezialplättchen auf einem NICHT-RESERVIERTEN Feld, auf dem dein Ausgrabungsmarker liegt.",
+
+"Martian Express": "Marsianer-Express",
+"Action: This card can receive any resource that can be placed on a card. Resources placed here get converted to Wares resources.": "AKTION: Diese Karte kann jede Ressource aufnehmen, die auf einer Karte platziert werden kann. Hier platzierte Ressourcen werden in Waren umgewandelt.",
+"Action: Remove all wares from here and gain 1 M€ for each ware removed.": "Aktion: Entferne alle Waren von dieser Karte und erhalte 1 M€ für jede entfernte Ware.",
+"Requires 1 city in play.": "Benötigt 1 Stadt im Spiel.",
+
+"Micro-Geodesics": "Mikro-Geodäsie",
+"Spend 1 microbe from any card to excavate an underground resource and gain 3 plants. Add 1 data resource to ANOTHER card.": "Bezahle 1 Mikrobe von einer eigenen beliebigen Karte, um eine unterirdische Ressource auszugraben und 3 Pflanzen zu erhalten. Füge 1 Datum EINER ANDEREN Karte hinzu.",
+
+"Microgravimetry": "Mikrogravimetrie",
+"Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "AKTION: Bezahle eine beliebige Menge an Energie, um so viele unterirdische Ressourcen auf dem Spielbrett zu identifizieren und die gleiche Anzahl an Daten auf diese Karte zu legen.",
+
+"Microprobing Technology": "Mikroskopische Technologie",
+"Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "Benötigt 1 Wissenschafts-Symbol. Erhalte 3 Pflanzen. Füge 2 Daten einer beliebigen Karte hinzu. Identifiziere 3 unterirdische Ressourcen.",
+
+"Mining Market Insider": "Bergbau-Markt-Insider",
+"Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "EFFEKT: Nachdem ein beliebiger Spieler 1 oder mehr unterirdische Ressourcen (auf einmal) identifiziert hat, füge dieser Karte 1 Datum hinzu.",
+"Action: Spend 4 data resources on this card to draw a card.": "Aktion: Bezahle 4 Daten von dieser Karte, um eine Karte zu ziehen.",
+
+"Nanofoundry": "Nanogießerei",
+"Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Benötigt 2 Wissenschafts-Symbole. Verringere deine Energieproduktion um 5. Ziehe 1 Karte für jedes Energiesymbol, das du hast, einschließlich diesem.",
+
+"Narrative Spin": "Erzählerische Drehung",
+"Requires 1 Earth tag. Gain 2 corruption.": "Benötigt 1 Erd-Symbol. Erhalte 2 Korruption.",
+
+"Nightclubs": "Nachtclubs",
+"Requires that you own a city in play. Gain 1 corruption and increase your M€ production 2 steps.": "Benötigt eine eigene Stadt im Spiel. Erhalte 1 Korruption und erhöhe deine M€-Produktion um 2.",
+
+"Off-World Tax Haven": "Steuerparadies außerhalb der Welt",
+"Requires 2 corruption. Increase your M€ production 5 steps.": "Benötigt 2 Korruption. Erhöhe deine M€-Produktion um 5.",
+
+"Old World Mafia": "Mafia der Alten Welt",
+"Gain 1 corruption for every 2 Earth tags you have, including this.": "Du erhältst 1 Korruption für je 2 Erd-Symbole, die du besitzt, einschließlich diesem.",
+
+"Orbital Laser Drill": "Orbital-Laserbohrer",
+"Requires 2 science tags. Excavate 2 underground resources, IGNORING PLACEMENT RESTRICTIONS.": "Benötigt 2 Wissenschafts-Symbole. Grabe 2 unterirdische Ressourcen aus und ignoriere dabei die Platzierungsbeschränkungen.",
+
+"Personal Spacecruiser": "Persönlicher Raumkreuzer",
+"Effect: During the production phase, if there is at least 1 fighter resource on this card, gain 2 M€ for each corruption resource you have.": "EFFEKT: Wenn sich in der Produktionsphase mindestens 1 Jäger-Ressource auf dieser Karte befindet, erhältst du 2 M€ für jede Korruptionsressource, die du besitzt.",
+"Put 1 fighter resource on this card. Gain 1 corruption.": "Lege 1 Jäger-Ressource auf diese Karte. Erhalte 1 Korruption.",
+
+"Planetary Rights Buyout": "Rückkauf von Planetenrechten",
+"Requires 5 corruption. Gain 7 TR": "Benötigt 5 Korruption. Erhalte 7 TW",
+
+"Plant Tax": "Pflanzensteuer",
+"ALL players lose 2 plants. Players can block this with corruption. Gain 1 corruption DURING THE PRODUCTION PHASE OF THIS GENERATION.": "ALLE Spieler verlieren 2 Pflanzen. Die Spieler können dies mit Korruption verhindern. Erhalte 1 Korruption WÄHREND DER PRODUKTIONSPHASE DIESER GENERATION.",
+
+"Price Wars": "Preiskampf",
+"Requires 2 corruption. Until the end of this generation, your steel and titanium are worth 1 more M€ each, and steel and titanium for other players is worth 1 M€ less.": "Benötigt 2 Korruption. Bis zum Ende dieser Generation ist dein Stahl und Titan jeweils 1 M€ mehr wert, und Stahl und Titan für andere Spieler sind 1 M€ weniger wert.",
+
+"Private Investigator": "Privatdetektiv",
+"TARGET A PLAYER WITH MORE CORRUPTION THAN YOU.": "EINEN SPIELER ANVISIEREN, DER MEHR KORRUPTION HAT ALS DU.",
+"PLACE THIS CARD FACE DOWN IN THAT PLAYER'S PROJECT CARD PILE.": "DIESE KARTE VERDECKT IM PROJEKTKARTENSTAPEL DIESES SPIELERS PLATZIEREN.",
+"Gain 1 TR.": "Erhalte 1 TW.",
+
+"Private Military Contractor": "Privater militärischer Auftragnehmer",
+"Effect: When blocking damage from other players, you can use fighters here as if they were corruption resources. You cannot use them for score bribing or collusion.": "EFFEKT: Wenn du Schaden von anderen Spielern abblockst, kannst du die Jäger hier wie Korruptionsressourcen einsetzen. Du kannst sie nicht für Bestechung oder geheime Absprachen verwenden.",
+"Action: Spend 1 titanium to add 1 fighter resource to this card.": "Aktion: Bezahle 1 Titan, um 1 Jäger-Ressource auf diese Karte zu erhalten.",
+"Add 1 fighter resource to this card.": "Lege 1 Jäger-Ressource auf diese Karte.",
+
+"Private Resorts": "Privater Urlaubsort",
+"Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "Benötigt 3 Ozeane. Verringere deine Wärme-Produktion um 1. Nur am Ende dieser Generation, während der Produktionsphase, erhalte 12 M€ und 1 Korruption.",
+
+"Public Spaceline": "Öffentliche Raumfahrtlinie",
+"Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "Benötigt 5 Weltraum-Symbole. Diese Karte hat 2 Erd-, 2 Jupiter-, 2 Venus- und 2 Mars-Symbole.",
+
+"Research & Development Hub": "Forschungs- und Entwicklungszentrum",
+"Effect: At the end of each production phase, add 1 data here for EACH OTHER PLAYER that has 7 or more cards in their hand.": "EFFEKT: Am Ende jeder Produktionsphase füge 1 Datum für JEDEN ANDEREN SPIELER, der 7 oder mehr Karten auf der Hand hat, hinzu.",
+"1 VP for every 3 data resources on this card.": "1 SP für je 3 Datenressourcen auf dieser Karte.",
+
+"Robot Moles": "Roboter-Maulwürfe",
+"Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "AKTION: Bezahle 1 Stahl, um 1 Datun zu dieser Karte hinzuzufügen und 2 unterirdische Ressourcen zu identifizieren.",
+"1 VP per 3 data resources on this card.": "1 SP für je 3 Datenressourcen auf dieser Karte.",
+
+"Scapegoat": "Sündenbock",
+"Gain 1 corruption.": "Erhalte 1 Korruption.",
+
+"Search for Life Underground": "Suche nach Leben im Untergrund",
+"Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "AKTION: Bezahle 1 M€, um eine unterirdische Ressource zu identifizieren. Wenn mindestens 1 Mikrobe abgebildet ist, füge hier eine wissenschaftliche Ressource hinzu.",
+"3 VPs if you have one or more science resources here.": "3 SP, falls du Du hier mindestens ein Wissenschaftsressource hast.",
+"Temperature must -18° C or colder.": "Die Temperatur muss -18° C oder kälter sein.",
+
+"Soil Export": "Export von Böden",
+"Excavate an underground resource.": "Grabe eine unterirdische Ressource aus.",
+"At the end of this generation only, during the production phase, gain 12 M€.": "Nur am Ende dieser Generation erhalte während der Produktionsphase 12 M€.",
+
+"Space Privateers": "Weltraum-Freibeuter",
+"Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "AKTION: Wenn sich mindestens 1 Jäger auf dieser Karte befindet, klaue 2 M€ von JEDEM ANDEREN Spieler.",
+"Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "EFFEKT: Wenn 1 oder mehrere Spieler diese Karte mit Korruption blockieren, entferne 1 Jäger von dieser Karte.",
+"Solo: Gain 2 M€ and remove 1 fighter from this card.": "Solo: Erhalte 2 M€ und entferne 1 Jäger von dieser Karte.",
+"Requires 3 corruption. Put 3 fighter resources on this card.": "Benötigt 3 Korruption. Lege 3 Jäger auf diese Karte.",
+
+"Space Wargames": "Weltraum-Wargames",
+"Action: Spend 1 titanium to gain 1 fighter resource to this card.": "AKTION: Bezahle 1 Titan, um 1 Jäger-Ressource für diese Karte zu erhalten.",
+"Action: Spend 1 fighter resource on this card to gain 3 M€ for each fighter resource on this card INCLUDING THE PAID FIGHTER.": "AKTION: Bezahle 1 Jäger-Ressource von dieser Karte, um 3 M€ für jede Jäger-Ressource auf dieser Karte zu erhalten, EINSCHLIESSLICH des bezahlten Jägers.",
+"Put 1 fighter resource on this card. 1VP for each Jovian tag you have.": "Lege 1 Jäger auf diese Karte. 1 SP für jedes Jupiter-Symbol, das du hast.",
+
+"Staged Protests": "Inszenierte Proteste",
+"Awards and Milestones": "Auszeichnungen und Meilensteine",
+"Requires 1 corruption. Gain 1 corruption. Until the end of this generation, milestones and awards cost +8 M€.": "Benötigt 1 Korruption. Erhalte 1 Korruption. Bis zum Ende dieser Generation kosten Meilensteine und Auszeichnungen +8 M€.",
+
+"Stem Field Subsidies": "Subventionen für Stammzellen",
+"Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "EFFEKT: Immer wenn du eine Wissenschaftssymbol spielst (einschließlich dieses), lege 1 Datum auf eine beliebige Karte und identifiziere eine unterirdische Ressource.",
+"1 VP per 3 data resources on this card.": "1 SP pro 3 Datenressourcen auf dieser Karte.",
+
+"Subnautic Pirates": "Subnautische Piraten",
+"Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Benötigt 1 Ausgrabungsmarker und 1 Korruption. Wähle ein Ozeanplättchen, auf dem dein Ausgrabungsmarker liegt. Klaue 6 M€ von jedem anderen Spieler, der ein an diesen Ozean angrenzendes Plättchen besitzt. Dies kann durch Korruption verhindert werden.",
+
+"Subterranean Sea": "Unterirdisches Meer",
+"Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "Platziere ein Ozeanplättchen auf ein Feld, das nicht für einen Ozean reserviert ist und auf der du einen Ausgrabungsmarker hast.",
+
+"Titan Manufacturing Colony": "Titan Manufacturing Kolonie",
+"Effect: Whenever you play a Jovian tag, (including this one), add 1 tool resource on this card.": "EFFEKT: Immer wenn du ein Jupiter-Symbol spielst (einschließlich diesem), lege 1 Werkzeugressource auf diese Karte.",
+"Action: Spend 1 tool resource on this card to excavate an underground resource.": "AKTION: Bezahle 1 Werkzeugressource von dieser Karte, um eine unterirdische Ressource auszugraben.",
+
+"Tunnel Boring Machine": "Tunnelbohrmaschine",
+"Action: Pay 3 energy to excavate 2 underground resources": "AKTION: Bezahle 3 Energie, um 2 unterirdische Ressourcen auszugraben.",
+
+"Tunneling Subcontractor": "Tunnelbau Subunternehmer",
+"Gain 1 corruption. Excavate an underground resource.": "Erhalte 1 Korruption. Grabe eine unterirdische Ressource aus.",
+
+"Underground Amusement Park": "Unterirdischer Vergnügungspark",
+"Requires an excavation marker. Increase your M€ production 1 step.": "Benötigt einen Ausgrabungsmarker. Erhöhe deine M€-Produktion um 1.",
+
+"Underground Habitat": "Unterirdischer Lebensraum",
+"Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "Grabe eine unterirdische Ressource aus. Erhöhe deine Pflanzenproduktion um 1. Füge 1 Tier einer anderen Karte hinzu.",
+
+"Underground Railway": "Unterirdische Eisenbahn",
+"Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "Reduziere deine Energieproduktion um 1. Erhalte 1 TW für je 4 Ausgrabungsmarker, die du besitzt.",
+
+"Underground Shelters": "Unterirdische Bunker",
+"Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "Grabe eine unterirdische Ressource aus. Am Ende des Spiels erhalte für deine Städte 1 Siegpunkt pro 3 Ausgrabungsmarker, die du in diesem Stadtfeld und den angrenzenden Feldern hast.",
+
+"Underground Smuggling Ring": "Unterirdischer Schmuggelring",
+"Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "Benötigt einen Ausgrabungsmarker. Erhalte 1 Korruption und 2 von einer gleichen Standardressource.",
+
+"Voltaic Metallurgy": "Voltaische Metallurgie",
+"Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "AKTION: Gib eine beliebige Anzahl von Stahl aus, um die gleiche Menge Titan zu erhalten (das Maximum ist die Anzahl der Energie-Symbole, die du hast).",
+"Requires 1 science tag.": "Benötigt 1 Wissenschafts-Symbol.",
+
+"Volunteer Mining Initiative": "Freiwillige Bergbau-Initiative",
+"Excavate 1 underground resource for every 3 cities in play.": "Grabe 1 unterirdische Ressource für je 3 Städte im Spiel aus."
+  
+}

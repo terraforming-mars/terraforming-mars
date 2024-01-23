@@ -18,7 +18,7 @@ import {timeAsync} from './utils/timer';
 import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {Executor} from './behavior/Executor';
 import {GameLoader} from './database/GameLoader';
-import {ALL_MODULE_MANIFESTS} from './cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from './cards/AllManifests';
 import {initializeGlobalEventDealer} from './turmoil/globalEvents/GlobalEventDealer';
 
 process.on('uncaughtException', (err: any) => {

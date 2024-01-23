@@ -1,0 +1,50 @@
+{
+
+"AERON GENOMICS": "Aeron Genetik",
+"Aeron Genomics": "Aeron Genetik",
+"Effect: After you excavate an underground resource, put an animal on this card.": "EFFEKT: Nachdem du eine unterirdische Ressource ausgegraben hast, lege ein Tier auf diese Karte.",
+"Action: Spend 1 M€ to move an animal from here to another card.": "AKTION: Bezahle 1 M€, um ein Tier von hier auf eine andere Karte zu bewegen.",
+"You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "Du beginnst mit 35 M€, 5 Stahl und 1 Tierressource auf dieser Karte. 1 VP pro 3 Tiere auf dieser Karte.",
+
+"ARBORIST COLLECTIVE": "Arboristen Kollektiv",
+"Arborist Collective": "Arboristen Kollektiv",
+"Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "EFFEKT: Nachdem du eine Ereigniskarte mit Grundkosten von 14 oder weniger gespielt hast, lege eine Aktivistenressource auf diese Karte.",
+"Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "AKTION: Bezahle 2 Aktivisten, um deine Pflanzenproduktion um 1 zu erhöhen und 2 Pflanzen zu erhalten.",
+"You start with 36 M€, 3 plants and 1 plant production.": "Du beginnst mit 36 M€, 3 Pflanzen und 1 Pflanzenproduktion.",
+
+"HADESPHERE": "Sphäre des Hades",
+"Hadesphere": "Sphäre des Hades",
+"Action: Excavate an underground resource.": "AKTION: Grabe eine unterirdische Ressource aus.",
+"You start with 36 M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.": "Du beginnst mit 36 M€ und 5 Stahl. Identifiziere als erste Aktion 3 beliebige unterirdische Ressourcen auf dem Mars.",
+
+"HECTATE SPEDITIONS": "Hectate Speditionen",
+"Hectate Speditions": "Hectate Speditionen",
+"planetary tag": "Planeten-Symbol",
+"Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "EFFEKT: Wenn du ein Erd-, Mars-, Venus-, Mond- oder Jupiter-Symbol spielst, einschließlich dieses, lege 1 Lieferketten-Ressource auf diese Karte.",
+"Effect: Spend 2 supply chain resources (min. 1) to trade.": "EFFEKT: Bezahle 2 Lieferketten-Ressourcen (mind. 1), um zu handeln.",
+"Action: Spend 5 supply chain resources to gain a trade fleet.": "AKTION: Bezahle 5 Lieferketten-Ressourcen, um eine Handelsflotte zu erhalten.",
+"You start with 38 M€. As your first action, place a colony.": "Du beginnst mit 38 M€. Als erste Aktion platzierst du eine Kolonie.",
+
+"HENKEI GENETICS": "Henkei Gentechnik",
+"Henkei Genetics": "Henkei Gentechnik",
+"Effect: After you play a microbe card that can hold microbes, add 2 microbes to it.": "EFFEKT: Nachdem du eine Mikrobenkarte gespielt hast, die Mikroben aufnehmen kann, füge ihr 2 Mikroben hinzu.",
+"Action: Pay 1 corruption to draw a card with a microbe tag.": "Aktion: Zahle 1 Korruption, um eine Karte mit einem Mikroben-Symbol zu ziehen.",
+"You start with 47 M€ and 1 corruption.": "Du beginnst mit 47 M€ und 1 Koruption.",
+
+"JENSON-BOYLE & CO": "Jenson-Boyle & Co",
+"Jenson-Boyle & Co": "Jenson-Boyle & Co",
+"Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.": "Aktion: Bezahle 1 Korruption, um entweder 4 Stahl, 3 Titan, 3 Pflanzen oder 6 Hitze zu erhalten.",
+"You start with 46 M€ and 2 corruption.": "Du beginnst mit 46 M€ und 2 Korruption.",
+
+"KINGDOM OF TAURARO": "Königreich von Tauraro",
+"Kingdom of Tauraro": "Königreich von Tauraro",
+"Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "EFFEKT: Du darfst Städte angrenzend an andere Städte platzieren. Du musst Städte immer angrenzend zu deinen Plättchen platzieren, die du bereits besitzst, sofern dies möglich ist.",
+"You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "Du beginnst mit 50 M€ und 6 M€ Produktion. Alle Gegner erhalten 2 M€ Produktion. Als erste Aktion platziere eine Stadt.",
+
+"VOLTAGON": "Voltagon",
+"Voltagon": "Voltagon",
+"Effect: After you excavate an underground resource, gain 2 energy.": "EFFEKT: Nachdem du eine unterirdische Ressource ausgegraben hast, erhältst du 2 Energie.",
+"Action: Spend 8 energy to increase oxygen or Venus 1 step.": "AKTION: Bezahle 8 Energie, um den Sauerstoffgehalt oder die Venuswertung um 1 zu erhöhen.",
+"You start with 38 M€ and 1 energy production.": "Du beginnst mit 38 M€ und einer Energie-Produktion von 1."
+
+}

@@ -8,6 +8,7 @@ import {PartyName} from '../turmoil/PartyName';
 import {SpaceId} from '../Types';
 import {PaymentOptions} from '../inputs/Payment';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {Warning} from '../cards/Warning';
 
 export type BaseInputModel = {
   title: string | Message;
@@ -30,6 +31,7 @@ export type SelectInitialCardsModel = BaseInputModel & {
 
 export type SelectOptionModel = BaseInputModel & {
   type: 'option';
+  warnings?: Array<Warning>;
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {

@@ -31,7 +31,7 @@ export class GeologicalSurvey extends SurveyCard {
     });
   }
 
-  public checkForBonuses(cardOwner: IPlayer, space: Space) {
+  protected checkForBonuses(cardOwner: IPlayer, space: Space) {
     super.testForStandardResource(cardOwner, space, Resource.STEEL, SpaceBonus.STEEL);
     super.testForStandardResource(cardOwner, space, Resource.TITANIUM, SpaceBonus.TITANIUM);
     super.testForStandardResource(cardOwner, space, Resource.HEAT, SpaceBonus.HEAT);

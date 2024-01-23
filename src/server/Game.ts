@@ -1264,7 +1264,8 @@ export class Game implements IGame, Logger {
       });
 
       AresHandler.ifAres(this, (aresData) => {
-        AresHandler.earnAdjacencyBonuses(aresData, player, space);
+        const incrementMilestone = tile?.tileType !== TileType.MARS_NOMADS;
+        AresHandler.earnAdjacencyBonuses(aresData, player, space, {incrementMilestone});
       });
 
       TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
@@ -1495,17 +1496,6 @@ export class Game implements IGame, Logger {
     logMessage.playerId = options?.reservedFor?.id;
     this.gameLog.push(logMessage);
     this.gameAge++;
-  }
-
-  public someoneCanHaveProductionReduced(resource: Resource, minQuantity: number = 1): boolean {
-    // in soloMode you don't have to decrease resources
-    if (this.isSoloMode()) return true;
-    return this.getPlayers().some((p) => {
-      if (p.production[resource] < minQuantity) return false;
-      // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
-      if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;
-      return true;
-    });
   }
 
   public discardForCost(cardCount: 1 | 2, toPlace: TileType) {

@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {runAllActions, setOxygenLevel} from '../../../TestingUtils';
+import {cast, runAllActions, setTemperature} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {Phase} from '../../../../src/common/Phase';
-import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
+import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 import {testGame} from '../../../TestGame';
 
 describe('AsteroidStandardProject', function() {
@@ -16,8 +16,7 @@ describe('AsteroidStandardProject', function() {
 
   beforeEach(function() {
     card = new AsteroidStandardProject();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(2);
   });
 
   it('Can act', function() {
@@ -40,11 +39,21 @@ describe('AsteroidStandardProject', function() {
     expect(game.getTemperature()).eq(-28);
   });
 
-  it('Can not act when maximized', () => {
-    player.megaCredits = card.cost;
-    expect(card.canAct(player)).is.true;
-    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
-    expect(card.canAct(player)).is.true;
+  it('Paying when the global parameter is at its goal is a valid stall action', () => {
+    player.megaCredits = 14;
+    expect(card.canAct(player)).eq(true);
+
+    setTemperature(game, MAX_TEMPERATURE);
+
+    expect(player.getTerraformRating()).eq(20);
+    expect(card.canAct(player)).eq(true);
+
+    cast(card.action(player), undefined);
+    runAllActions(game);
+
+    expect(game.getTemperature()).eq(MAX_TEMPERATURE);
+    expect(player.getTerraformRating()).eq(20);
+    expect(player.megaCredits).eq(0);
   });
 
   it('Can not act with reds', () => {

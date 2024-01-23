@@ -6,7 +6,7 @@ import {GameLoader} from '../../src/server/database/GameLoader';
 import {registerBehaviorExecutor} from '../../src/server/behavior/BehaviorExecutor';
 import {Executor} from '../../src/server/behavior/Executor';
 import {initializeGlobalEventDealer} from '../../src/server/turmoil/globalEvents/GlobalEventDealer';
-import {ALL_MODULE_MANIFESTS} from '../../src/server/cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../../src/server/cards/AllManifests';
 
 registerBehaviorExecutor(new Executor());
 

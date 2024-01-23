@@ -6,6 +6,7 @@ import * as prometheus from 'prom-client';
 import {Database} from './Database';
 import {CacheConfig} from './CacheConfig';
 import {Clock} from '../../common/Timer';
+import {SerializedGame} from '../SerializedGame';
 
 const metrics = {
   start: new prometheus.Gauge({
@@ -38,7 +39,13 @@ export class Cache extends EventEmitter {
   }
 
   private async getInstance(gameId: GameId) : Promise<void> {
-    const game = await this.db.getGame(gameId);
+    let game: SerializedGame;
+    try {
+      game = await this.db.getGame(gameId);
+    } catch (e) {
+      console.error(`getInstance for ${gameId}`, e);
+      return;
+    }
     if (this.games.get(gameId) === undefined) {
       this.games.set(gameId, undefined);
       const participantIds: Array<ParticipantId> = [];

@@ -10,7 +10,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {all} from '../Options';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class LawSuit extends Card implements IProjectCard {
   constructor() {
@@ -48,13 +47,13 @@ export class LawSuit extends Card implements IProjectCard {
           player.game.log('${0} sued ${1} who had 0 MC.', (b) => b.player(player).player(suedPlayer));
         }
         suedPlayer.playedCards.push(this);
-        suedPlayer.defer(UnderworldExpansion.maybeBlockAttack(suedPlayer, player, (proceed) => {
+        suedPlayer.maybeBlockAttack(player, (proceed) => {
           if (proceed) {
             suedPlayer.stock.deduct(Resource.MEGACREDITS, amount, {log: true, from: player, stealing: true});
           }
           player.stock.add(Resource.MEGACREDITS, amount);
           return undefined;
-        }));
+        });
         return undefined;
       });
   }

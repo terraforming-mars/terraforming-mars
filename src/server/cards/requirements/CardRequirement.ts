@@ -10,7 +10,6 @@ export type Options = {
 };
 
 export type YesAnd = {
-  ok: true,
   thinkTankResources?: number
 }
 

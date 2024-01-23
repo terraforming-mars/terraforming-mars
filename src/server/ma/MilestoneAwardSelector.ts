@@ -218,6 +218,10 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     if (!gameOptions.turmoilExtension) {
       inplaceRemove(candidateAwards, 'Politician');
     }
+    // Special-case Terran and Businessperson, which are exactly the same.
+    if (candidateMilestones.includes('Terran') && candidateMilestones.includes('Businessperson')) {
+      inplaceRemove(candidateMilestones, 'Terran');
+    }
   }
 
   inplaceShuffle(candidateMilestones, UnseededRandom.INSTANCE);

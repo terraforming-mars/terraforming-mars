@@ -36,7 +36,7 @@ export class HectateSpeditions extends ActiveCorporationCard {
 
       metadata: {
         cardNumber: 'U12',
-        description: 'You start with 38M€. As your first action, place a colony.',
+        description: 'You start with 38 M€. As your first action, place a colony.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(38).colonies().br;
@@ -46,7 +46,7 @@ export class HectateSpeditions extends ActiveCorporationCard {
           b.supplyChain({amount: 2, digit: true}).colon().trade({size: Size.SMALL}).nbsp;
           b.supplyChain({amount: 5, digit: true}).arrow(Size.SMALL).tradeFleet().br;
           b.plainText('(Effect: Spend 2 supply chain resources (min. 1) to trade.)').br;
-          b.plainText('(Action: Spend 5 supplyChain resources to gain a trade fleet.)');
+          b.plainText('(Action: Spend 5 supply chain resources to gain a trade fleet.)');
         }),
       },
     });

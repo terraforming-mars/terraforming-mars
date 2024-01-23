@@ -176,8 +176,15 @@ export interface IPlayer {
   hasProtectedHabitats(): boolean;
   plantsAreProtected(): boolean;
   alloysAreProtected(): boolean;
+  /**
+   *
+   * @param resource
+   * @param minQuantity
+   */
   canReduceAnyProduction(resource: Resource, minQuantity?: number): boolean;
-  canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): void;
+  canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): boolean;
+  maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void;
+
   /**
    * Return true if this player cannot have their production reduced.
    *
@@ -310,7 +317,6 @@ export interface IPlayer {
   serialize(): SerializedPlayer;
   /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;
-
 }
 
 export function isIPlayer(object: any): object is IPlayer {

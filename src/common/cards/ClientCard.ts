@@ -1,4 +1,3 @@
-import {Message} from '../logs/Message';
 import {CardResource} from '../CardResource';
 import {Units} from '../Units';
 import {CardName} from './CardName';
@@ -21,7 +20,6 @@ export type ClientCard = {
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
-  warning?: string | Message;
   productionBox?: Units; // Replace with behavior?
   resourceType?: CardResource;
   startingMegaCredits?: number; // Corporation and Prelude

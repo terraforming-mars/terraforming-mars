@@ -1,4 +1,10 @@
 export type Warning =
  'maxtemp' |
+ 'maxoxygen' |
  'maxoceans' |
- 'maxvenus';
+ 'maxvenus' |
+ 'maxHabitatRate' |
+ 'maxMiningRate' |
+ 'maxLogisticsRate' |
+ 'decreaseOwnProduction' |
+ 'buildOnLuna';

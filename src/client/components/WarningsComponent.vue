@@ -12,15 +12,21 @@ import {Warning} from '@/common/cards/Warning';
 
 const descriptions: Record<Warning, string> = {
   'maxtemp': 'Note: the temperature is already at its goal.',
+  'maxoxygen': 'Note: the oxygen level is already at its goal.',
   'maxoceans': 'Note: all oceans are already on the board.',
   'maxvenus': 'Note: Venus scale is already at its goal.',
+  'maxHabitatRate': 'Note: Moon habitat rate is already at its goal.',
+  'maxMiningRate': 'Note: Moon mining rate is already at its goal.',
+  'maxLogisticsRate': 'Note: Moon logistics rate is already at its goal.',
+  'decreaseOwnProduction': 'Warning: you are the only player that can lose production.',
+  'buildOnLuna': 'You will only be able to build the colony on Luna.',
 };
 
 export default Vue.extend({
   name: 'WarningsComponent',
   props: {
     warnings: {
-      type: Object as () => Array<Warning> | undefined,
+      type: Array as () => Array<Warning> | undefined,
       required: true,
     },
   },

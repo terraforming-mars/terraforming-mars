@@ -34,11 +34,13 @@ import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
 import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
 import {isIProjectCard} from '../cards/IProjectCard';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
     const ctx = new Counter(player, card);
     const asTrSource = this.toTRSource(behavior, ctx);
+    const game = player.game;
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
       return false;
@@ -48,6 +50,23 @@ export class Executor implements BehaviorExecutor {
       if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card, canAffordOptions))) {
         return false;
       }
+    }
+
+    if (behavior.global !== undefined) {
+      const g = behavior.global;
+      if (g.temperature !== undefined && game.getTemperature() >= MAX_TEMPERATURE) {
+        card.warnings.push('maxtemp');
+      }
+      if (g.oxygen !== undefined && game.getOxygenLevel() >= MAX_OXYGEN_LEVEL) {
+        card.warnings.push('maxoxygen');
+      }
+      if (g.venus !== undefined && game.getVenusScaleLevel() >= MAX_VENUS_SCALE) {
+        card.warnings.push('maxvenus');
+      }
+    }
+
+    if (behavior.ocean !== undefined && game.board.getOceanSpaces().length >= MAX_OCEAN_TILES) {
+      card.warnings.push('maxoceans');
     }
 
     if (behavior.stock !== undefined) {
@@ -108,8 +127,16 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.decreaseAnyProduction !== undefined) {
-      if (!player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count)) {
-        return false;
+      if (!game.isSoloMode()) {
+        const dap = behavior.decreaseAnyProduction;
+        const targets = game.getPlayers().filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
+
+        if (targets.length === 0) {
+          return false;
+        }
+        if (targets.length === 1 && targets[0] === player) {
+          card.warnings.push('decreaseOwnProduction');
+        }
       }
     }
 
@@ -121,20 +148,20 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.city !== undefined) {
       if (behavior.city.space === undefined) {
-        if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city', canAffordOptions).length === 0) {
+        if (game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city', canAffordOptions).length === 0) {
           return false;
         }
       }
     }
 
     if (behavior.greenery !== undefined) {
-      if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
+      if (game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
         return false;
       }
     }
 
     if (behavior.tile !== undefined) {
-      if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on, canAffordOptions).length === 0) {
+      if (game.board.getAvailableSpacesForType(player, behavior.tile.on, canAffordOptions).length === 0) {
         return false;
       }
     }
@@ -177,7 +204,7 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.turmoil) {
       if (behavior.turmoil.sendDelegates) {
-        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
+        if (Turmoil.getTurmoil(game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
           return false;
         }
       }
@@ -185,7 +212,7 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.moon !== undefined) {
       const moon = behavior.moon;
-      const moonData = MoonExpansion.moonData(player.game);
+      const moonData = MoonExpansion.moonData(game);
       if (moon.habitatTile !== undefined && moon.habitatTile.space === undefined) {
         if (moonData.moon.getAvailableSpacesOnLand(player).length === 0) {
           return false;
@@ -200,6 +227,15 @@ export class Executor implements BehaviorExecutor {
         if (moonData.moon.getAvailableSpacesOnLand(player).length === 0) {
           return false;
         }
+      }
+      if (moon.habitatRate ?? 0 >= MAXIMUM_HABITAT_RATE) {
+        card.warnings.push('maxHabitatRate');
+      }
+      if (moon.miningRate ?? 0 >= MAXIMUM_MINING_RATE) {
+        card.warnings.push('maxMiningRate');
+      }
+      if (moon.logisticsRate ?? 0 >= MAXIMUM_LOGISTICS_RATE) {
+        card.warnings.push('maxLogisticsRate');
       }
     }
 

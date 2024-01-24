@@ -1344,15 +1344,6 @@ export class Player implements IPlayer {
     return card.canPlay(this, options);
   }
 
-  /**
-   * Verify if requirements for the card can be met, ignoring the project cost.
-   * Only made public for tests.
-   */
-  // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    return card.canPlay(this, canAffordOptions);
-  }
-
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
     return {
       megaCredits: this.megaCredits - reserveUnits.megacredits,

@@ -1676,7 +1676,9 @@ export class Player implements IPlayer {
       const option = new SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
         return convertHeat.action(this);
       });
-      option.warnings = convertHeat.warnings;
+      if (convertHeat.warnings.size > 0) {
+        option.warnings = Array.from(convertHeat.warnings);
+      }
       action.options.push(option);
     }
 

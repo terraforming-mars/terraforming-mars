@@ -30,7 +30,7 @@ export class AquiferStandardProject extends StandardProjectCard {
 
   public override canAct(player: IPlayer): boolean {
     if (!player.game.canAddOcean()) {
-      this.warnings.push('maxoceans');
+      this.warnings.add('maxoceans');
     }
     return super.canAct(player);
   }

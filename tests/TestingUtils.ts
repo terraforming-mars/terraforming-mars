@@ -20,6 +20,7 @@ import {TestPlayer} from './TestPlayer';
 import {PartyName} from '../src/common/turmoil/PartyName';
 import {IPlayer} from '../src/server/IPlayer';
 import {CardRequirements} from '../src/server/cards/requirements/CardRequirements';
+import {Warning} from '../src/common/cards/Warning';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: IPlayer, toValue: number = 0): Array<Space> {
@@ -149,7 +150,7 @@ class FakeCard implements IProjectCard {
   public cost = 0;
   public tags = [];
   public requirements = [];
-  public warnings = [];
+  public warnings = new Set<Warning>();
   public canPlay(player: IPlayer) {
     if (this.requirements.length === 0) {
       return true;

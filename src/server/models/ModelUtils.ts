@@ -60,8 +60,8 @@ export function cardsToModel(
     if (reserveUnits !== undefined) {
       model.reserveUnits = reserveUnits;
     }
-    if (card.warnings.length > 0) {
-      model.warnings = card.warnings;
+    if (card.warnings.size > 0) {
+      model.warnings = Array.from(card.warnings);
     }
     return model;
   });

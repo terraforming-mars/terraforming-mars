@@ -130,7 +130,7 @@ export default Vue.extend({
         return false;
       } else if (typeof this.cards === 'object') {
         if (this.cards.warnings !== undefined) {
-          this.warnings = this.cards.warnings;
+          this.warnings = this.cards.warnings ?? [];
         }
         if (this.cards.warning !== undefined) {
           this.warning = this.cards.warning;

@@ -16,7 +16,7 @@ describe('GreatDamPromo', function() {
   });
 
   it('Can not play without meeting requirements', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {

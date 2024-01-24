@@ -20,7 +20,7 @@ describe('EnergyTapping', function() {
 
   it('play - no targets', function() {
     player.playedCards.push(card, card);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     runAllActions(game);

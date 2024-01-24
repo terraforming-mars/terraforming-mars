@@ -13,12 +13,12 @@ describe('AntiGravityTechnology', function() {
 
   it('Cannot play', function() {
     player.tagsForTest = {science: 6};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', function() {
     player.tagsForTest = {science: 7};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {

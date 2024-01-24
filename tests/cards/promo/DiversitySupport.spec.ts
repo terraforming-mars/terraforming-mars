@@ -16,7 +16,7 @@ describe('DiversitySupport', function() {
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', function() {
@@ -28,7 +28,7 @@ describe('DiversitySupport', function() {
     dirigibles.resourceCount = 4;
     fish.resourceCount = 3;
     ants.resourceCount = 2;
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     // 6 standard resources
     player.megaCredits = 10;
@@ -38,7 +38,7 @@ describe('DiversitySupport', function() {
     player.energy = 1;
     player.heat = 3;
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(player.getTerraformRating()).to.eq(21);
   });

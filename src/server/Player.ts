@@ -1336,11 +1336,12 @@ export class Player implements IPlayer {
   }
 
   public canPlay(card: IProjectCard): boolean | YesAnd {
+    card.warnings.clear();
     const options = this.affordOptionsForCard(card);
     if (!this.canAfford(options)) {
       return false;
     }
-    return this.simpleCanPlay(card, options);
+    return card.canPlay(this, options);
   }
 
   /**

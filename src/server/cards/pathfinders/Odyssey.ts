@@ -46,7 +46,8 @@ export class Odyssey extends CorporationCard implements IActionCard {
       const array: Array<PlayableCard> = [];
       for (const card of player.playedCards) {
         if (card.type === CardType.EVENT && card.cost <= 16) {
-          const details = player.canPlay(card);
+          card.warnings.clear();
+          const details = card.canPlay(player);
           if (details !== false) {
             array.push({card, details});
           }

@@ -99,7 +99,7 @@ const cardProperties = new Map<CardName, InternalProperties>();
 export abstract class Card {
   protected readonly properties: InternalProperties;
   public resourceCount = 0;
-  public warnings: Array<Warning> = [];
+  public warnings = new Set<Warning>();
 
   private internalize(external: StaticCardProperties): InternalProperties {
     const name = external.name;

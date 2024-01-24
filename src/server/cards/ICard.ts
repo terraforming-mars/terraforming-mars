@@ -124,7 +124,7 @@ export interface ICard {
   /**
    * Per-instance state-specific warnings about this card's action.
    */
-  warnings: Array<Warning>;
+  warnings: Set<Warning>;
 
   behavior?: Behavior,
   produce?(player: IPlayer): void;

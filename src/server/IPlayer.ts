@@ -25,7 +25,7 @@ import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {ICeoCard} from './cards/ceos/ICeoCard';
-import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
+import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';

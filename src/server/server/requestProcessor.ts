@@ -1,4 +1,5 @@
 import * as prometheus from 'prom-client';
+import * as responses from '../routes/responses';
 
 import {paths} from '../../common/app/paths';
 
@@ -18,7 +19,6 @@ import {GamesOverview} from '../routes/GamesOverview';
 import {Context, IHandler} from '../routes/IHandler';
 import {Load} from '../routes/Load';
 import {LoadGame} from '../routes/LoadGame';
-import {Route} from '../routes/Route';
 import {PlayerInput} from '../routes/PlayerInput';
 import {ServeApp} from '../routes/ServeApp';
 import {ServeAsset} from '../routes/ServeAsset';
@@ -111,15 +111,14 @@ function getHandler(pathname: string): IHandler | undefined {
 
 export function processRequest(
   req: Request,
-  res: Response,
-  route: Route): void {
+  res: Response): void {
   const start = process.hrtime.bigint();
   let pathnameForLatency: string | undefined = undefined;
   try {
     const ipAddress = getIPAddress(req);
     ipTracker.add(ipAddress);
     if (ipBlocklist.isBlocked(ipAddress)) {
-      route.notFound(req, res);
+      responses.notFound(req, res);
     }
 
     if (req.method === 'HEAD') {
@@ -127,14 +126,13 @@ export function processRequest(
       return;
     }
     if (req.url === undefined) {
-      route.notFound(req, res);
+      responses.notFound(req, res);
       return;
     }
 
     const url = new URL(req.url, `http://${req.headers.host}`);
     const ctx: Context = {
       url: url,
-      route: route,
       gameLoader: GameLoader.getInstance(),
       ip: getIPAddress(req),
       ipTracker: ipTracker,
@@ -151,7 +149,7 @@ export function processRequest(
       handler.processRequest(req, res, ctx);
     } else {
       pathnameForLatency = undefined;
-      route.notFound(req, res);
+      responses.notFound(req, res);
     }
   } finally {
     const duration = Number(process.hrtime.bigint() - start) / 1_000_000;

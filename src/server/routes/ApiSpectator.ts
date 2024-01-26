@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
@@ -16,7 +17,7 @@ export class ApiSpectator extends Handler {
   public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     const id = ctx.url.searchParams.get('id');
     if (!id) {
-      ctx.route.badRequest(req, res, 'invalid id');
+      responses.badRequest(req, res, 'invalid id');
       return;
     }
     let game: IGame | undefined;
@@ -24,9 +25,9 @@ export class ApiSpectator extends Handler {
       game = await ctx.gameLoader.getGame(id);
     }
     if (game === undefined) {
-      ctx.route.notFound(req, res);
+      responses.notFound(req, res);
       return;
     }
-    ctx.route.writeJson(res, Server.getSpectatorModel(game));
+    responses.writeJson(res, Server.getSpectatorModel(game));
   }
 }

@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {IPlayer} from '../IPlayer';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
@@ -20,12 +21,12 @@ export class PlayerInput extends Handler {
   public override async post(req: Request, res: Response, ctx: Context): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
     if (playerId === null) {
-      ctx.route.badRequest(req, res, 'missing id parameter');
+      responses.badRequest(req, res, 'missing id parameter');
       return;
     }
 
     if (!isPlayerId(playerId)) {
-      ctx.route.badRequest(req, res, 'invalid player id');
+      responses.badRequest(req, res, 'invalid player id');
       return;
     }
 
@@ -34,7 +35,7 @@ export class PlayerInput extends Handler {
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
     const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
-      ctx.route.notFound(req, res);
+      responses.notFound(req, res);
       return;
     }
     let player: IPlayer | undefined;
@@ -44,7 +45,7 @@ export class PlayerInput extends Handler {
       console.warn(`unable to find player ${playerId}`, err);
     }
     if (player === undefined) {
-      ctx.route.notFound(req, res);
+      responses.notFound(req, res);
       return;
     }
     return this.processInput(req, res, ctx, player);
@@ -77,7 +78,7 @@ export class PlayerInput extends Handler {
     } catch (err) {
       console.error(err);
     }
-    ctx.route.writeJson(res, Server.getPlayerModel(player));
+    responses.writeJson(res, Server.getPlayerModel(player));
   }
 
   private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
@@ -94,7 +95,7 @@ export class PlayerInput extends Handler {
             await this.performUndo(req, res, ctx, player);
           } else {
             player.process(entity);
-            ctx.route.writeJson(res, Server.getPlayerModel(player));
+            responses.writeJson(res, Server.getPlayerModel(player));
           }
           resolve();
         } catch (e) {

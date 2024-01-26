@@ -1,5 +1,4 @@
 import {IGameLoader} from '../database/IGameLoader';
-import {Route} from './Route';
 import {IPTracker} from '../server/IPTracker';
 import {Request} from '../Request';
 import {Response} from '../Response';
@@ -11,7 +10,6 @@ export interface IHandler {
 export type Context = {
   url: URL,
   ip: string,
-  route: Route,
   gameLoader: IGameLoader,
   ipTracker: IPTracker,
   ids: {

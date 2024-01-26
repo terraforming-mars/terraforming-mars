@@ -16,12 +16,12 @@ import AdminHome from '@/client/components/admin/AdminHome.vue';
 import {$t, setTranslationContext} from '@/client/directives/i18n';
 
 import * as constants from '@/common/constants';
-import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import * as raw_settings from '@/genfiles/settings.json';
 import {paths} from '@/common/app/paths';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
+import {statusCode} from '@/common/http/statusCode';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -131,7 +131,7 @@ export const mainAppSettings = {
       };
       xhr.onload = function() {
         try {
-          if (xhr.status === HTTPResponseCode.OK) {
+          if (xhr.status === statusCode.ok) {
             const model = xhr.response as ViewModel;
             if (path === paths.PLAYER) {
               app.playerView = model as PlayerViewModel;
@@ -208,7 +208,7 @@ export const mainAppSettings = {
         alert('Error getting game data');
       };
       xhr.onload = function() {
-        if (xhr.status === HTTPResponseCode.OK) {
+        if (xhr.status === statusCode.ok) {
           window.history.replaceState(
             xhr.response,
             `${constants.APP_NAME} - Game`,

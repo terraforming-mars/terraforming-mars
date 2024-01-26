@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {GameLogs} from './GameLogs';
@@ -15,16 +16,16 @@ export class ApiGameLogs extends Handler {
     const searchParams = ctx.url.searchParams;
     const id = searchParams.get('id');
     if (!id) {
-      ctx.route.badRequest(req, res, 'missing id parameter');
+      responses.badRequest(req, res, 'missing id parameter');
       return;
     }
     if (!isPlayerId(id) && !isSpectatorId(id)) {
-      ctx.route.badRequest(req, res, 'invalid player id');
+      responses.badRequest(req, res, 'invalid player id');
       return;
     }
     const game = await ctx.gameLoader.getGame(id);
     if (game === undefined) {
-      ctx.route.notFound(req, res, 'game not found');
+      responses.notFound(req, res, 'game not found');
       return;
     }
 
@@ -33,7 +34,7 @@ export class ApiGameLogs extends Handler {
       try {
         logs = this.gameLogs.getLogsForGameEnd(game).join('\n');
       } catch (e) {
-        ctx.route.badRequest(req, res, 'cannot fetch game-end log');
+        responses.badRequest(req, res, 'cannot fetch game-end log');
         return;
       }
       res.setHeader('Content-Type', 'text/plain');
@@ -41,7 +42,7 @@ export class ApiGameLogs extends Handler {
     } else {
       const generation = searchParams.get('generation');
       const logs = this.gameLogs.getLogsForGameView(id, game, generation);
-      ctx.route.writeJson(res, logs);
+      responses.writeJson(res, logs);
     }
   }
 }

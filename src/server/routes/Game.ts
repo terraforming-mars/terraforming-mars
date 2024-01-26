@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Database} from '../database/Database';
@@ -48,7 +49,7 @@ export class GameHandler extends Handler {
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, _ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {
@@ -142,9 +143,9 @@ export class GameHandler extends Handler {
             game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
           }
           GameLoader.getInstance().add(game);
-          ctx.route.writeJson(res, Server.getSimpleGameModel(game));
+          responses.writeJson(res, Server.getSimpleGameModel(game));
         } catch (error) {
-          ctx.route.internalServerError(req, res, error);
+          responses.internalServerError(req, res, error);
         }
         resolve();
       });

@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {IHandler, Context} from './IHandler';
 import {Request} from '../Request';
 import {Response} from '../Response';
@@ -28,18 +29,18 @@ export abstract class Handler implements IHandler {
 
   processRequest(req: Request, res: Response, ctx: Context): Promise<void> {
     if (this.options.validateServerId && !this.isServerIdValid(ctx)) {
-      ctx.route.notAuthorized(req, res);
+      responses.notAuthorized(req, res);
       return Promise.resolve();
     }
 
     if (this.options.validateStatsId) {
       if (this.isServerIdValid(ctx)) {
-        ctx.route.downgradeRedirect(req, res, ctx);
+        responses.downgradeRedirect(req, res, ctx);
         return Promise.resolve();
       }
 
       if (!this.isStatsIdValid(ctx)) {
-        ctx.route.notAuthorized(req, res);
+        responses.notAuthorized(req, res);
         return Promise.resolve();
       }
     }
@@ -52,21 +53,21 @@ export abstract class Handler implements IHandler {
     case 'POST':
       return this.post(req, res, ctx);
     default:
-      ctx.route.badRequest(req, res, 'Bad method');
+      responses.badRequest(req, res, 'Bad method');
       return Promise.resolve();
     }
   }
 
-  public get(req: Request, res: Response, ctx: Context): Promise<void> {
-    ctx.route.notFound(req, res);
+  public get(req: Request, res: Response, _ctx: Context): Promise<void> {
+    responses.notFound(req, res);
     return Promise.resolve();
   }
-  public put(req: Request, res: Response, ctx: Context): Promise<void> {
-    ctx.route.notFound(req, res);
+  public put(req: Request, res: Response, _ctx: Context): Promise<void> {
+    responses.notFound(req, res);
     return Promise.resolve();
   }
-  public post(req: Request, res: Response, ctx: Context): Promise<void> {
-    ctx.route.notFound(req, res);
+  public post(req: Request, res: Response, _ctx: Context): Promise<void> {
+    responses.notFound(req, res);
     return Promise.resolve();
   }
 }

@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Request} from '../Request';
@@ -10,7 +11,7 @@ export class ApiIPs extends Handler {
   }
 
   public override get(_req: Request, res: Response, ctx: Context): Promise<void> {
-    ctx.route.writeJson(res, ctx.ipTracker.toJSON(), 2);
+    responses.writeJson(res, ctx.ipTracker.toJSON(), 2);
     return Promise.resolve();
   }
 }

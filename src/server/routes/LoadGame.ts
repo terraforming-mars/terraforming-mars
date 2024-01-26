@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {Database} from '../database/Database';
 import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
@@ -14,7 +15,7 @@ export class LoadGame extends Handler {
     super();
   }
 
-  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, _ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {
@@ -37,12 +38,12 @@ export class LoadGame extends Handler {
           const game = await GameLoader.getInstance().getGame(gameId, /* bypassCache */ true);
           if (game === undefined) {
             console.warn(`unable to find ${gameId} in database`);
-            ctx.route.notFound(req, res, 'game_id not found');
+            responses.notFound(req, res, 'game_id not found');
           } else {
-            ctx.route.writeJson(res, Server.getSimpleGameModel(game));
+            responses.writeJson(res, Server.getSimpleGameModel(game));
           }
         } catch (error) {
-          ctx.route.internalServerError(req, res, error);
+          responses.internalServerError(req, res, error);
         }
         resolve();
       });

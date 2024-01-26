@@ -39,7 +39,7 @@
 
 import Vue from 'vue';
 import {paths} from '@/common/app/paths';
-import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
+import {statusCode} from '@/common/http/statusCode';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
@@ -306,7 +306,7 @@ export default Vue.extend({
         console.error('error updating messages, unable to reach server');
       };
       xhr.onload = () => {
-        if (xhr.status === HTTPResponseCode.OK) {
+        if (xhr.status === statusCode.ok) {
           messages.splice(0, messages.length);
           messages.push(...xhr.response);
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {

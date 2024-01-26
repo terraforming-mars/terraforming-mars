@@ -1,11 +1,13 @@
+// TODO(kberg): move up a level? Or to something like server/http
 import {escape} from 'html-escaper';
 import {Context} from './IHandler';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {statusCode} from '../../common/http/statusCode';
 
 export function badRequest(req: Request, res: Response, err?: string): void {
   console.warn('bad request', req.url);
-  res.writeHead(400);
+  res.writeHead(statusCode.badRequest);
   res.write('Bad request');
   if (err) {
     res.write(': ');
@@ -18,7 +20,7 @@ export function notFound(req: Request, res: Response, err?: string): void {
   if (!process.argv.includes('hide-not-found-warnings')) {
     console.warn('Not found', req.method, req.url);
   }
-  res.writeHead(404);
+  res.writeHead(statusCode.notFound);
   res.write('Not found');
   if (err) {
     res.write(': ');
@@ -28,7 +30,7 @@ export function notFound(req: Request, res: Response, err?: string): void {
 }
 
 export function notModified(res: Response): void {
-  res.writeHead(304);
+  res.writeHead(statusCode.notModified);
   res.end();
 }
 
@@ -37,7 +39,7 @@ export function internalServerError(
   res: Response,
   err: unknown): void {
   console.warn('internal server error: ', req.url, err);
-  res.writeHead(500);
+  res.writeHead(statusCode.internalServerError);
 
   res.write('Internal server error: ');
 
@@ -54,7 +56,7 @@ export function internalServerError(
 
 export function notAuthorized(req: Request, res: Response): void {
   console.warn('Not authorized', req.method, req.url);
-  res.writeHead(403);
+  res.writeHead(statusCode.forbidden);
   res.write('Not authorized');
   res.end();
 }
@@ -62,7 +64,7 @@ export function notAuthorized(req: Request, res: Response): void {
 export function downgradeRedirect(_req: Request, res: Response, ctx: Context): void {
   const url = new URL(ctx.url); // defensive copty
   url.searchParams.set('serverId', ctx.ids.statsId);
-  res.writeHead(301, {Location: url.pathname + url.search});
+  res.writeHead(statusCode.movedPermanently, {Location: url.pathname + url.search});
   res.end();
 }
 

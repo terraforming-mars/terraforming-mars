@@ -8,7 +8,7 @@ import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {isHazardTileType} from '../../../common/AresTileType';
 import {Resource} from '../../../common/Resource';
-import {Space} from '../..//boards/Space';
+import {Space} from '../../boards/Space';
 
 export class HermeticOrderOfMars extends Card implements IProjectCard {
   constructor() {

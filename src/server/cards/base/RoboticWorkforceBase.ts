@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ICard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
-import {PlayerInput} from '../..//PlayerInput';
+import {PlayerInput} from '../../PlayerInput';
 
 export abstract class RoboticWorkforceBase extends Card {
   constructor(properties: StaticCardProperties) {

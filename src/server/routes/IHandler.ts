@@ -2,6 +2,7 @@ import {IGameLoader} from '../database/IGameLoader';
 import {IPTracker} from '../server/IPTracker';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {Clock} from '../../common/Timer';
 
 export interface IHandler {
   processRequest(req: Request, res: Response, ctx: Context): Promise<void>;
@@ -16,4 +17,5 @@ export type Context = {
     serverId: string,
     statsId: string,
   },
+  clock: Clock;
 }

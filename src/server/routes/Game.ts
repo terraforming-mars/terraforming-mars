@@ -17,15 +17,50 @@ import {generateRandomId} from '../utils/server-ids';
 import {IGame} from '../IGame';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
+import {durationToMilliseconds} from '../utils/durations';
+
+// TODO(kberg): Using zod might be the right approach.
+function get(): QuotaConfig {
+  const defaultQuota = {limit: 1, perMs: 1}; // Effectively, no limit.
+  const val = process.env.GAME_QUOTA;
+  try {
+    if (val === undefined) {
+      throw new Error('Undefined quota');
+    }
+    const struct = JSON.parse(val);
+    let {limit, per} = struct;
+    if (limit === undefined) {
+      throw new Error('limit is absent');
+    }
+    limit = Number.parseInt(limit);
+    if (isNaN(limit)) {
+      throw new Error('limit is invalid');
+    }
+    if (per === undefined) {
+      throw new Error('per is absent');
+    }
+    const perMs = durationToMilliseconds(per);
+    if (isNaN(perMs)) {
+      throw new Error('perMillis is invalid');
+    }
+    return {limit, perMs};
+  } catch (e) {
+    console.log(e);
+    return defaultQuota;
+  }
+}
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
-
 // Calling get() feeds the game to the player (I think, and calling put creates a game.)
 // So, that should be fixed, you know.
 export class GameHandler extends Handler {
   public static readonly INSTANCE = new GameHandler();
-  private constructor() {
+  private quotaHandler;
+
+  private constructor(quotaConfig: QuotaConfig = get()) {
     super();
+    this.quotaHandler = new QuotaHandler(quotaConfig);
   }
 
   public static boardOptions(board: RandomBoardOption | BoardName): Array<BoardName> {
@@ -49,8 +84,14 @@ export class GameHandler extends Handler {
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public override put(req: Request, res: Response, _ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
+      if (this.quotaHandler.measure(ctx) === false) {
+        responses.quotaExceeded(req, res);
+        resolve();
+        return;
+      }
+
       let body = '';
       req.on('data', function(data) {
         body += data.toString();

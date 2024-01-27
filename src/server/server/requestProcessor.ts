@@ -30,6 +30,7 @@ import {newIpTracker} from './IPTracker';
 import {getHerokuIpAddress} from './heroku';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {Clock} from '../../common/Timer';
 
 const metrics = {
   count: new prometheus.Counter({
@@ -46,6 +47,8 @@ const metrics = {
     buckets: [0.1, 0.25, 0.5, 1, 2.5, 5, 10, 25, 50, 100, 250, 500, 1000],
   }),
 };
+
+const clock = new Clock();
 
 const ips = (process.env.IP_BLOCKLIST ?? '').trim().split(' ');
 const ipBlocklist = newIpBlocklist(ips);
@@ -133,6 +136,7 @@ export function processRequest(
     const url = new URL(req.url, `http://${req.headers.host}`);
     const ctx: Context = {
       url: url,
+      clock,
       gameLoader: GameLoader.getInstance(),
       ip: getIPAddress(req),
       ipTracker: ipTracker,

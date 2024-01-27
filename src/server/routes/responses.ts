@@ -73,3 +73,11 @@ export function writeJson(res: Response, json: any, space?: string | number | un
   const s = JSON.stringify(json, undefined, space);
   res.end(s);
 }
+
+export function quotaExceeded(req: Request, res: Response) {
+  console.warn('Quota exceeded for', req.method, req.url);
+  res.writeHead(statusCode.tooManyRequests);
+  res.write('Quota exceeded');
+  res.end();
+}
+

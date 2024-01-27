@@ -202,7 +202,7 @@ export class LocalFilesystem implements IDatabase {
           if (game.spectatorId) participantIds.push(game.spectatorId);
           gameIds.push({gameId, participantIds});
         } catch (e) {
-          console.error(`While reading $gameId} `, e);
+          console.error(`While reading ${gameId} `, e);
         }
       }
     });

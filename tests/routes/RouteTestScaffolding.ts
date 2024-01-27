@@ -3,6 +3,7 @@ import {Handler} from '../../src/server/routes/Handler';
 import {FakeGameLoader} from './FakeGameLoader';
 import {MockRequest, MockResponse} from './HttpMocks';
 import {newIpTracker} from '../../src/server/server/IPTracker';
+import {FakeClock} from '../common/FakeClock';
 
 export type Header = 'accept-encoding';
 
@@ -20,6 +21,7 @@ export class RouteTestScaffolding {
         serverId: '1',
         statsId: '2',
       },
+      clock: new FakeClock(),
     };
     if (!this.req.headers) this.req.headers = {};
   }

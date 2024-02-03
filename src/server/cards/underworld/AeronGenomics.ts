@@ -20,7 +20,7 @@ export class AeronGenomics extends ActiveCorporationCard {
       victoryPoints: {resourcesHere: {}, per: 3},
 
       behavior: {
-        stock: {steel: 3},
+        stock: {steel: 5},
         addResources: 1,
       },
 

@@ -25,7 +25,7 @@ describe('AeronGenomics', function() {
     card.play(player);
     runAllActions(game);
     expect(card.resourceCount).eq(1);
-    expect(player.steel).eq(3);
+    expect(player.steel).eq(5);
   });
 
   it('onExcavate', () => {

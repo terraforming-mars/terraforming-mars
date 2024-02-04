@@ -49,6 +49,7 @@ import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {ColonyModel} from '@/common/models/ColonyModel';
 import * as titles from '@/common/inputs/SelectInitialCards';
+import {sum} from '@/common/utils/utils';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -109,86 +110,86 @@ export default (Vue as WithRefs<Refs>).extend({
       throw new Error('should not be called');
     },
     getAfterPreludes() {
-      let result = 0;
-      for (const prelude of this.selectedPreludes) {
+      return sum(this.selectedPreludes.map((prelude) => {
         const card = getCardOrThrow(prelude);
-        result += card.startingMegaCredits ?? 0;
+        const base = card.startingMegaCredits ?? 0;
+        return base + this.extra(prelude);
+      }));
+    },
+    extra(prelude: CardName): number {
+      const card = getCardOrThrow(prelude);
+      switch (this.selectedCorporations.length === 1 ? this.selectedCorporations[0] : undefined) {
+      // For each step you increase the production of a resource ... you also gain that resource.
+      case CardName.MANUTECH:
+        return card.productionBox?.megacredits ?? 0;
 
-        switch (this.selectedCorporations.length === 1 ? this.selectedCorporations[0] : undefined) {
-        // For each step you increase the production of a resource ... you also gain that resource.
-        case CardName.MANUTECH:
-          result += card.productionBox?.megacredits ?? 0;
-          break;
-
-        // When you place a city tile, gain 3 M€.
-        case CardName.THARSIS_REPUBLIC:
-          switch (prelude) {
-          case CardName.SELF_SUFFICIENT_SETTLEMENT:
-          case CardName.EARLY_SETTLEMENT:
-          case CardName.STRATEGIC_BASE_PLANNING:
-            result += 3;
-            break;
-          }
-          break;
-
-        // When ANY microbe tag is played ... lose 4 M€ or as much as possible.
-        case CardName.PHARMACY_UNION:
-          const tags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
-          result -= (4 * tags);
-          break;
-
-        // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
-        case CardName.SPLICE:
-          const microbeTags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
-          result += (2 * microbeTags);
-          break;
-
-        // Whenever Venus is terraformed 1 step, you gain 2 M€
-        case CardName.APHRODITE:
-          switch (prelude) {
-          case CardName.VENUS_FIRST:
-          case CardName.VENUS_FIRST_PATHFINDERS:
-            result += 4;
-            break;
-          case CardName.HYDROGEN_BOMBARDMENT:
-            result += 2;
-            break;
-          }
-          break;
-
-        // When any player raises any Moon Rate, gain 1M€ per step.
-        case CardName.LUNA_FIRST_INCORPORATED:
-          switch (prelude) {
-          case CardName.FIRST_LUNAR_SETTLEMENT:
-          case CardName.CORE_MINE:
-          case CardName.BASIC_INFRASTRUCTURE:
-            result += 1;
-            break;
-          case CardName.MINING_COMPLEX:
-            result += 2;
-            break;
-          }
-          break;
-
-        // When you place an ocean tile, gain 4MC
-        case CardName.POLARIS:
-          switch (prelude) {
-          case CardName.AQUIFER_TURBINES:
-          case CardName.POLAR_INDUSTRIES:
-            result += 4;
-            break;
-          case CardName.GREAT_AQUIFER:
-            result += 8;
-            break;
-          }
-          break;
-          // Gain 2 MC for each project card in hand.
-        case CardName.HEAD_START:
-          result += this.selectedCards.length * 2;
-          break;
+      // When you place a city tile, gain 3 M€.
+      case CardName.THARSIS_REPUBLIC:
+        switch (prelude) {
+        case CardName.SELF_SUFFICIENT_SETTLEMENT:
+        case CardName.EARLY_SETTLEMENT:
+        case CardName.STRATEGIC_BASE_PLANNING:
+          return 3;
         }
+        return 0;
+
+      // When ANY microbe tag is played ... lose 4 M€ or as much as possible.
+      case CardName.PHARMACY_UNION:
+        const tags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
+        return (-4 * tags);
+
+      // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
+      case CardName.SPLICE:
+        const microbeTags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
+        return (2 * microbeTags);
+
+      // Whenever Venus is terraformed 1 step, you gain 2 M€
+      case CardName.APHRODITE:
+        switch (prelude) {
+        case CardName.VENUS_FIRST:
+        case CardName.VENUS_FIRST_PATHFINDERS:
+          return 4;
+        case CardName.HYDROGEN_BOMBARDMENT:
+          return 2;
+        }
+        return 0;
+
+      // When any player raises any Moon Rate, gain 1M€ per step.
+      case CardName.LUNA_FIRST_INCORPORATED:
+        switch (prelude) {
+        case CardName.FIRST_LUNAR_SETTLEMENT:
+        case CardName.CORE_MINE:
+        case CardName.BASIC_INFRASTRUCTURE:
+          return 1;
+        case CardName.MINING_COMPLEX:
+          return 2;
+        }
+        return 0;
+
+      // When you place an ocean tile, gain 4MC
+      case CardName.POLARIS:
+        switch (prelude) {
+        case CardName.AQUIFER_TURBINES:
+        case CardName.POLAR_INDUSTRIES:
+          return 4;
+        case CardName.GREAT_AQUIFER:
+          return 8;
+        }
+        return 0;
+
+      // Gain 2 MC for each project card in hand.
+      case CardName.HEAD_START:
+        return this.selectedCards.length * 2;
+
+      // Gain 4MC for playing a card with no tags.
+      // Gain 1MC for playing a card with 1 tag.
+      case CardName.SAGITTA_FRONTIER_SERVICES:
+        const count = card.tags.filter((tag) => tag !== Tag.WILD).length + (card.type === CardType.EVENT ? 1 : 0);
+        return count === 0 ? 4 : count === 1 ? 1 : 0;
+
+      default:
+        return 0;
       }
-      return result;
     },
     getStartingMegacredits() {
       if (this.selectedCorporations.length !== 1) {

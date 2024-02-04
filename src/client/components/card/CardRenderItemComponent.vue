@@ -420,7 +420,7 @@ export default Vue.extend({
       if (isICardRenderItem(this.item) && this.item.amountInside) {
         if (this.item.questionMark === true) {
           result += '?';
-        } else if (this.item.amount !== 0) {
+        } else {
           result += this.item.amount.toString();
         }
 

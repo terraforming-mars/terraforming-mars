@@ -37,6 +37,27 @@ export const DEFAULT_PAYMENT_VALUES: Record<SpendableResource, number> = {
   kuiperAsteroids: 1,
 } as const;
 
+/**
+ * See PaymentOptions.
+ */
+type WaysToPay = Exclude<SpendableResource, 'megaCredits'> | 'lunaTradeFederationTitanium';
+
+/**
+ * PaymentOptions describes the ways you can pay for something.
+ *
+ * This is different from Payment, which describes what is being used to pay for something.
+ *
+ * PaymentOptions says "You can spend heat, microbes, and seeds", and Payment says "Here's 3 heat and 1 seed."
+ *
+ * That's why PaymentOptions includes two references to titanium. One describes paying for space cards
+ * (good ol' titanium) and one describes a special behavior for the Luna Archives corporation that lets you
+ * spend titanium in a new way.
+ *
+ * megaCredits is removed because it's always assumed and I think it's possibly special-cased the codebase.
+ * Could be smart to remove it, /shrug
+ */
+export type PaymentOptions = {[k in WaysToPay]: boolean};
+
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {
     heat: 0,
@@ -72,24 +93,3 @@ export namespace Payment {
     };
   }
 }
-
-/**
- * See PaymentOptions.
- */
-type WaysToPay = Exclude<SpendableResource, 'megaCredits'> | 'lunaTradeFederationTitanium';
-
-/**
- * PaymentOptions describes the ways you can pay for something.
- *
- * This is different from Payment, which describes what is being used to pay for something.
- *
- * PaymentOptions says "You can spend heat, microbes, and seeds", and Payment says "Here's 3 heat and 1 seed."
- *
- * That's why PaymentOptions includes two references to titanium. One describes paying for space cards
- * (good ol' titanium) and one describes a special behavior for the Luna Archives corporation that lets you
- * spend titanium in a new way.
- *
- * megaCredits is removed because it's always assumed and I think it's possibly special-cased the codebase.
- * Could be smart to remove it, /shrug
- */
-export type PaymentOptions = {[k in WaysToPay]: boolean};

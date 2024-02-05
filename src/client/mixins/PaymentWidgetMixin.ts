@@ -53,14 +53,14 @@ export const PaymentWidgetMixin = {
       const model = this.asModel();
       return Math.min(this.getAvailableUnits('megaCredits'), model.cost);
     },
-    getResourceRate(unit: SpendableResource): number {
-      switch (unit) {
+    getResourceRate(resource: SpendableResource): number {
+      switch (resource) {
       case 'steel':
         return this.asModel().playerView.thisPlayer.steelValue;
       case 'titanium':
         return this.getTitaniumResourceRate();
       default:
-        return DEFAULT_PAYMENT_VALUES[unit];
+        return DEFAULT_PAYMENT_VALUES[resource];
       }
     },
     getTitaniumResourceRate(): number {
@@ -75,33 +75,33 @@ export const PaymentWidgetMixin = {
     /**
      * Reduce `unit` by one.
      */
-    reduceValue(unit: SpendableResource): void {
-      const currentValue: number | undefined = this.asModel().payment[unit];
+    reduceValue(resource: SpendableResource): void {
+      const currentValue: number | undefined = this.asModel().payment[resource];
       if (currentValue === undefined) {
-        throw new Error(`can not reduceValue for ${unit} on this`);
+        throw new Error(`can not reduceValue for ${resource} on this`);
       }
 
       const adjustedDelta = Math.min(1, currentValue);
       if (adjustedDelta === 0) return;
-      this.asModel().payment[unit] -= adjustedDelta;
-      if (unit !== 'megaCredits') this.setRemainingMCValue();
+      this.asModel().payment[resource] -= adjustedDelta;
+      if (resource !== 'megaCredits') this.setRemainingMCValue();
     },
     /**
      * Increase `unit` by one.
      */
-    addValue(unit: SpendableResource): void {
-      const currentValue: number | undefined = this.asModel().payment[unit];
+    addValue(resource: SpendableResource): void {
+      const currentValue: number | undefined = this.asModel().payment[resource];
       if (currentValue === undefined) {
-        throw new Error(`can not addValue for ${unit} on this`);
+        throw new Error(`can not addValue for ${resource} on this`);
       }
 
       // Maxiumum value for this unit.
       // MC has a special-case because the max isn't how many MC the player has,
       // but how much they need to spend.
       const maxValue =
-        unit === 'megaCredits' ?
+        resource === 'megaCredits' ?
           this.getMegaCreditsMax() :
-          this.getAvailableUnits(unit);
+          this.getAvailableUnits(resource);
 
       if (currentValue === maxValue) {
         return;
@@ -113,8 +113,8 @@ export const PaymentWidgetMixin = {
       if (delta === 0) {
         return;
       }
-      this.asModel().payment[unit] += delta;
-      if (unit !== 'megaCredits') {
+      this.asModel().payment[resource] += delta;
+      if (resource !== 'megaCredits') {
         this.setRemainingMCValue();
       }
     },
@@ -132,33 +132,33 @@ export const PaymentWidgetMixin = {
       }
       ta.payment.megaCredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue(unit: SpendableResource): void {
-      let currentValue: number | undefined = this.asModel().payment[unit];
+    setMaxValue(resource: SpendableResource): void {
+      let currentValue: number | undefined = this.asModel().payment[resource];
       if (currentValue === undefined) {
-        throw new Error(`can not setMaxValue for ${unit} on this`);
+        throw new Error(`can not setMaxValue for ${resource} on this`);
       }
       const cost: number = this.asModel().cost;
-      const resourceRate = this.getResourceRate(unit);
+      const resourceRate = this.getResourceRate(resource);
       const amountNeed = Math.floor(cost / resourceRate);
-      const amountHave: number = this.getAvailableUnits(unit);
+      const amountHave: number = this.getAvailableUnits(resource);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
-        this.addValue(unit);
+        this.addValue(resource);
         currentValue++;
       }
     },
     // Perhaps this is unnecessary. It's just a >0 check.
-    hasUnits(unit: SpendableResource): boolean {
-      return this.getAvailableUnits(unit) > 0;
+    hasUnits(resource: SpendableResource): boolean {
+      return this.getAvailableUnits(resource) > 0;
     },
-    getAvailableUnits(unit: SpendableResource): number {
+    getAvailableUnits(resource: SpendableResource): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
       const thisPlayer = model.playerView.thisPlayer;
-      switch (unit) {
+      switch (resource) {
       case 'heat':
         if (model.hasOwnProperty('available')) {
-          amount = model.available?.[unit] ?? -1;
+          amount = model.available?.[resource] ?? -1;
         } else {
           amount = this.availableHeat();
         }
@@ -168,12 +168,12 @@ export const PaymentWidgetMixin = {
       case 'titanium':
       case 'plants':
         if (model.hasOwnProperty('available')) {
-          amount = model.available?.[unit] ?? -1;
+          amount = model.available?.[resource] ?? -1;
           break;
         }
       // eslint-disable-next-line no-fallthrough
       case 'megaCredits':
-        amount = thisPlayer[unit];
+        amount = thisPlayer[resource];
         break;
 
       case 'floaters':
@@ -185,7 +185,7 @@ export const PaymentWidgetMixin = {
       case 'graphene':
       case 'kuiperAsteroids':
         // TODO(kberg): remove 'as any'. You can do it.
-        amount = (model.playerinput as any)[unit];
+        amount = (model.playerinput as any)[resource];
         break;
       }
 
@@ -202,7 +202,7 @@ export const PaymentWidgetMixin = {
       // then amount, below would be -1, so the Math.max makes sure it's zero.
 
       // BTW, this could be managed by some derivative of reserveUnits that took extended resources into account.
-      if (unit === 'floaters' && this.asModel().card?.name === CardName.STRATOSPHERIC_BIRDS) {
+      if (resource === 'floaters' && this.asModel().card?.name === CardName.STRATOSPHERIC_BIRDS) {
         // Find a card other than Dirigibles with floaters.
         // If there is none, then Dirigibles can't use every one.
         if (!thisPlayer.tableau.some((card) => {
@@ -221,6 +221,60 @@ export const PaymentWidgetMixin = {
         return thisPlayer.heat + (stormcraft.resources * 2);
       }
       return thisPlayer.heat;
+    },
+    validatePayment(showOverspendingAlert: boolean): boolean {
+      const model = this.asModel();
+      let totalSpent = 0;
+
+      for (const target of SPENDABLE_RESOURCES) {
+        totalSpent += model.payment[target] * this.getResourceRate(target);
+      }
+
+      for (const target of SPENDABLE_RESOURCES) {
+        if (model.payment[target] > this.getAvailableUnits(target)) {
+          model.warning = `You do not have enough ${target}`;
+          return false;
+        }
+      }
+
+      const cost = model.cost;
+      const diff = totalSpent - cost;
+
+      if (cost > 0 && totalSpent < cost) {
+        model.warning = 'Haven\'t spent enough';
+        return false;
+      }
+
+      // TODO(kberg): 2023-11-30: Remove this once things settle down.
+      // // This following line was introduced in https://github.com/terraforming-mars/terraforming-mars/pull/2353
+      // //
+      // // According to bafolts@: I think this is an attempt to fix user error. This was added when the UI was
+      // // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
+      // // from user when nothing is required. Can probably remove this if server only removes what is required.
+      // if (requiredAmt === 0) {
+      //   this.payment.heat = 0;
+      //   this.payment.megaCredits = 0;
+      // }
+
+      if (totalSpent > cost) {
+        for (const target of SPENDABLE_RESOURCES) {
+          if (model.payment[target] && diff >= this.getResourceRate(target)) {
+            model.warning = `You cannot overspend ${target}`;
+            return false;
+          }
+        }
+      }
+
+      if (totalSpent > cost && showOverspendingAlert) {
+        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
+          return true;
+        } else {
+          model.warning = 'Please adjust payment amount';
+          return false;
+        }
+      } else {
+        return true;
+      }
     },
   },
   computed: {

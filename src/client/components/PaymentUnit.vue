@@ -10,7 +10,7 @@ export default Vue.extend({
     value: {
       type: Number,
     },
-    unit: {
+    resource: {
       type: String as () => SpendableResource,
     },
     description: {
@@ -26,9 +26,9 @@ export default Vue.extend({
 });
 </script>
 <template>
-  <div class="payments_type input-group" :data-test="unit">
+  <div class="payments_type input-group" :data-test="resource">
     <!-- TODO(kberg): remove toLowerCase -->
-    <i class="resource_icon payments_type_icon" :class="'resource_icon--' + unit.toLowerCase()"  :title="$t('Pay with ' + description)"></i>
+    <i class="resource_icon payments_type_icon" :class="'resource_icon--' + resource.toLowerCase()"  :title="$t('Pay with ' + description)"></i>
     <AppButton type="minus" @click="$emit('minus')" />
     <input
       class="form-input form-inline payments_input"

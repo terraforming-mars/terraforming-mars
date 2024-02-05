@@ -43,7 +43,7 @@ export default Vue.extend({
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
     },
-    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
+    SPENDABLE_RESOURCES(): ReadonlyArray<SpendableResource> {
       return [
         'steel',
         'titanium',
@@ -132,32 +132,32 @@ export default Vue.extend({
       // It returns the number of units consumed from availableUnits to make that
       function deductUnits(
         availableUnits: number | undefined,
-        unitValue: number,
+        resourceValue: number,
         overpay: boolean = true): number {
         if (availableUnits === undefined || availableUnits === 0) {
           return 0;
         }
         // The number of units required to sell to meet the balance.
-        const _tmp = megacreditBalance / unitValue;
+        const _tmp = megacreditBalance / resourceValue;
         const balanceAsUnits = overpay ? Math.ceil(_tmp) : Math.floor(_tmp);
         const contributingUnits = Math.min(availableUnits, balanceAsUnits);
 
-        megacreditBalance -= contributingUnits * unitValue;
+        megacreditBalance -= contributingUnits * resourceValue;
         return contributingUnits;
       }
 
       // This function help save some money at the end
       function saveOverspendingUnits(
         spendingUnits: number | undefined,
-        unitValue: number): number {
+        resourceValue: number): number {
         if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
           return 0;
         }
         // Calculate the unit of resource we can save and still pay enough
-        const overSpendingAsUnits = Math.floor(Math.abs(megacreditBalance) / unitValue);
+        const overSpendingAsUnits = Math.floor(Math.abs(megacreditBalance) / resourceValue);
         const toSaveUnits = Math.min(spendingUnits, overSpendingAsUnits);
 
-        megacreditBalance += toSaveUnits * unitValue;
+        megacreditBalance += toSaveUnits * resourceValue;
         return toSaveUnits;
       }
 
@@ -212,8 +212,8 @@ export default Vue.extend({
       return this.tags.includes(Tag.SPACE) ||
           this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
     },
-    cardCanUse(unit: SpendableResource): boolean {
-      switch (unit) {
+    cardCanUse(resource: SpendableResource): boolean {
+      switch (resource) {
       case 'megaCredits':
         return true;
       case 'heat':
@@ -239,17 +239,17 @@ export default Vue.extend({
         return this.tags.includes(Tag.SPACE) ||
             this.tags.includes(Tag.CITY);
       default:
-        throw new Error('Unknown unit ' + unit);
+        throw new Error('Unknown resource ' + resource);
       }
     },
-    canUse(unit: SpendableResource) {
-      if (!this.hasUnits(unit)) {
+    canUse(resource: SpendableResource) {
+      if (!this.hasUnits(resource)) {
         return false;
       }
       if (this.card === undefined) {
         return false;
       }
-      return this.cardCanUse(unit);
+      return this.cardCanUse(resource);
     },
     canUseLunaTradeFederationTitanium(): boolean {
       return this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
@@ -276,61 +276,24 @@ export default Vue.extend({
     selectedCardHasWarning(): boolean {
       return this.card !== undefined && this.card.warning !== undefined;
     },
-    showReserveWarning(unit: SpendableResource): boolean {
-      switch (unit) {
+    showReserveWarning(resource: SpendableResource): boolean {
+      switch (resource) {
       case 'titanium':
         return this.reserveUnits.titanium > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium());
       case 'steel':
       case 'heat':
       case 'plants':
-        return this.reserveUnits[unit] > 0 && this.canUse(unit);
+        return this.reserveUnits[resource] > 0 && this.canUse(resource);
       }
       return false;
     },
+    // TODO(kberg): use?
+    // showReserveWarning(unit: keyof Units & PaymentUnit) {
+    //   return this.reserveUnits[unit] > 0 && this.canUse(unit);
+    // },
+
     saveData() {
-      let totalSpent = 0;
-
-      for (const target of SPENDABLE_RESOURCES) {
-        totalSpent += this.payment[target] * this.getResourceRate(target);
-      }
-
-      for (const target of SPENDABLE_RESOURCES) {
-        if (this.payment[target] > this.getAvailableUnits(target)) {
-          this.warning = `You do not have enough ${target}`;
-          return;
-        }
-      }
-      if (totalSpent < this.cost) {
-        this.warning = 'Haven\'t spent enough';
-        return;
-      }
-
-      if (totalSpent > this.cost) {
-        const diff = totalSpent - this.cost;
-        for (const target of SPENDABLE_RESOURCES) {
-          if (this.payment[target] && diff >= this.getResourceRate(target)) {
-            this.warning = `You cannot overspend ${target}`;
-            return;
-          }
-        }
-      }
-
-      const showAlert = getPreferences().show_alerts;
-
-      if (totalSpent > this.cost && showAlert) {
-        const diff = totalSpent - this.cost;
-
-        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.onsave({
-            type: 'projectCard',
-            card: this.card.name,
-            payment: this.payment,
-          });
-        } else {
-          this.warning = 'Please adjust payment amount';
-          return;
-        }
-      } else {
+      if (this.validatePayment(getPreferences().show_alerts) === true) {
         this.onsave({
           type: 'projectCard',
           card: this.card.name,
@@ -357,19 +320,19 @@ export default Vue.extend({
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 
-    <template v-for="unit of SPENDABLE_RESOURCES">
-      <div v-bind:key="unit">
+    <template v-for="resource of SPENDABLE_RESOURCES">
+      <div v-bind:key="resource">
         <payment-unit-component
-          v-model.number="payment[unit]"
-          v-if="canUse(unit) === true"
-          :unit="unit"
-          :description="descriptions[unit]"
-          @plus="addValue(unit)"
-          @minus="reduceValue(unit)"
-          @max="setMaxValue(unit)">
+          v-model.number="payment[resource]"
+          v-if="canUse(resource) === true"
+          :resource="resource"
+          :description="descriptions[resource]"
+          @plus="addValue(resource)"
+          @minus="reduceValue(resource)"
+          @max="setMaxValue(resource)">
         </payment-unit-component>
-        <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n>
-        (Some {{unit}} are unavailable here in reserve for the project card.)
+        <div v-if="showReserveWarning(resource)" class="card-warning" v-i18n>
+        (Some {{resource}} are unavailable here in reserve for the project card.)
         </div>
       </div>
     </template>

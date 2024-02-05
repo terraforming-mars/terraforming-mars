@@ -184,7 +184,7 @@ export default (Vue as WithRefs<Refs>).extend({
       // Gain 4MC for playing a card with no tags.
       // Gain 1MC for playing a card with 1 tag.
       case CardName.SAGITTA_FRONTIER_SERVICES:
-        const count = card.tags.filter((tag) => tag !== Tag.WILD).length + (card.type === CardType.EVENT ? 1 : 0);
+        const count = card.tags.filter((tag) => tag !== Tag.WILD).length;
         return count === 0 ? 4 : count === 1 ? 1 : 0;
 
       default:

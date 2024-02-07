@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="warnings !== undefined">
     <div v-for="(warning, idx) in (warnings || [])" :key="idx" class="card-warning">
       {{ $t(descriptions[warning]) }}
     </div>
@@ -20,14 +20,17 @@ const descriptions: Record<Warning, string> = {
   'maxLogisticsRate': 'Note: Moon logistics rate is already at its goal.',
   'decreaseOwnProduction': 'Warning: you are the only player that can lose production.',
   'buildOnLuna': 'You will only be able to build the colony on Luna.',
+  'preludeFizzle': 'This prelude is not playable, so you will discard it and gain 15 M€.',
 };
 
 export default Vue.extend({
   name: 'WarningsComponent',
   props: {
     warnings: {
-      type: Array as () => Array<Warning> | undefined,
-      required: true,
+      type: Array as () => Array<Warning>,
+      default: () => {
+        return [];
+      },
     },
   },
   computed: {

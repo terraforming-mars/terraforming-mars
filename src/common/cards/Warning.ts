@@ -7,4 +7,5 @@ export type Warning =
  'maxMiningRate' |
  'maxLogisticsRate' |
  'decreaseOwnProduction' |
- 'buildOnLuna';
+ 'buildOnLuna' |
+ 'preludeFizzle';

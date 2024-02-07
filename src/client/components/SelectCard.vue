@@ -50,7 +50,7 @@ type WidgetDataModel = {
   // The selected item or items
   cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
   warning: string | Message | undefined;
-  warnings: Readonly<Array<Warning>>;
+  warnings: ReadonlyArray<Warning> | undefined;
   owners: Map<CardName, Owner>,
 }
 
@@ -80,7 +80,7 @@ export default Vue.extend({
       cards: [],
       warning: undefined,
       owners: new Map(),
-      warnings: [],
+      warnings: undefined,
     };
   },
   components: {
@@ -129,9 +129,7 @@ export default Vue.extend({
       if (Array.isArray(this.cards)) {
         return false;
       } else if (typeof this.cards === 'object') {
-        if (this.cards.warnings !== undefined) {
-          this.warnings = this.cards.warnings ?? [];
-        }
+        this.warnings = this.cards.warnings;
         if (this.cards.warning !== undefined) {
           this.warning = this.cards.warning;
           return true;

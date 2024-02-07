@@ -23,12 +23,20 @@ export default Vue.extend({
   methods: {
     ...PaymentWidgetMixin.methods,
   },
+  computed: {
+    iconClass(): string {
+      switch (this.unit) {
+      case 'kuiperAsteroids': return 'resource_icon--asteroid';
+      // TODO(kberg): remove toLowerCase
+      default: return 'resource_icon--' + this.unit.toLowerCase();
+      }
+    },
+  },
 });
 </script>
 <template>
   <div class="payments_type input-group" :data-test="unit">
-    <!-- TODO(kberg): remove toLowerCase -->
-    <i class="resource_icon payments_type_icon" :class="'resource_icon--' + unit.toLowerCase()"  :title="$t('Pay with ' + description)"></i>
+    <i class="resource_icon payments_type_icon" :class="iconClass"  :title="$t('Pay with ' + description)"></i>
     <AppButton type="minus" @click="$emit('minus')" />
     <input
       class="form-input form-inline payments_input"

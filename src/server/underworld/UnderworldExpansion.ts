@@ -295,9 +295,8 @@ export class UnderworldExpansion {
   }
 
   public static maybeBlockAttack(target: IPlayer, perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
-    if (target.game.gameOptions.underworldExpansion === false) {
-      cb(true);
-      return undefined;
+    if (target.game.gameOptions.underworldExpansion === false || target === perpetrator) {
+      return cb(true);
     }
     const privateMilitaryContractor = target.playedCards.find((card) => card.name === CardName.PRIVATE_MILITARY_CONTRACTOR);
     const militaryContractorFighters = privateMilitaryContractor?.resourceCount ?? 0;

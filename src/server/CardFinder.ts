@@ -15,6 +15,7 @@ const CARD_RENAMES = new Map<string, CardName>([
   // ['Earth Embasy', CardName.EARTH_EMBASSY],
 ]);
 
+// TODO(kberg): This doesn't need to be a class.
 export class CardFinder {
   private getCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {
     const standardizedCardName = CARD_RENAMES.get(cardName) || cardName;

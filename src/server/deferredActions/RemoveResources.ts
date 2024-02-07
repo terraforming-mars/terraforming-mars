@@ -6,12 +6,12 @@ import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export class RemoveResources extends DeferredAction<number> {
   constructor(
-    player: IPlayer,
-    public target: IPlayer,
+    private target: IPlayer,
+    public perpetrator: IPlayer,
     public resource: Resource,
     public count: number = 1,
   ) {
-    super(player, Priority.ATTACK_OPPONENT);
+    super(target, Priority.ATTACK_OPPONENT);
   }
 
   public execute() {
@@ -39,10 +39,11 @@ export class RemoveResources extends DeferredAction<number> {
       return undefined;
     }
     // Move to this.target.maybeBlockAttack?
-    return UnderworldExpansion.maybeBlockAttack(this.target, this.player, () => {
-      this.target.stock.deduct(this.resource, qtyLost, {log: true, from: this.player});
+    this.target.defer(UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, () => {
+      this.target.stock.deduct(this.resource, qtyLost, {log: true, from: this.perpetrator});
       this.cb(qtyLost);
       return undefined;
-    });
+    }));
+    return undefined;
   }
 }

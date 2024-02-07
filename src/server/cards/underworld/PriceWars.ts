@@ -35,9 +35,7 @@ export class PriceWars extends Card implements IProjectCard {
 
   public generationUsed: number | undefined = undefined;
 
-  // TODO(kberg): Make Astra Mechanica, Odyssey and Playwrights compatible.
-  // TODO(kberg): log, log, log.
-  public override bespokePlay(player: IPlayer) {
+  private increase(player: IPlayer) {
     for (const p of player.game.getPlayersInGenerationOrder()) {
       if (p === player) {
         p.increaseSteelValue();
@@ -47,21 +45,38 @@ export class PriceWars extends Card implements IProjectCard {
         p.decreaseTitaniumValue();
       }
     }
+  }
+
+  private decrease(player: IPlayer) {
+    for (const p of player.game.getPlayersInGenerationOrder()) {
+      if (p === player) {
+        p.decreaseSteelValue();
+        p.decreaseTitaniumValue();
+      } else {
+        p.increaseSteelValue();
+        p.increaseTitaniumValue();
+      }
+    }
+  }
+
+  // TODO(kberg): log, log, log.
+  public override bespokePlay(player: IPlayer) {
+    this.increase(player);
     return undefined;
   }
 
   public onProductionPhase(player: IPlayer) {
     if (this.generationUsed === player.game.generation) {
-      for (const p of player.game.getPlayersInGenerationOrder()) {
-        if (p === player) {
-          p.decreaseSteelValue();
-          p.decreaseTitaniumValue();
-        } else {
-          p.increaseSteelValue();
-          p.increaseTitaniumValue();
-        }
-      }
+      this.decrease(player);
     }
+    return undefined;
+  }
+
+  // Warning: this is not Playwrights/Odyssey compatible because once the card is discarded, it's not effective anymore.
+  // TODO(kberg): When making this card work with P/O, remove the code in those cards that disallows them.
+  public override onDiscard(player: IPlayer) {
+    this.decrease(player);
+    this.generationUsed = undefined;
     return undefined;
   }
 }

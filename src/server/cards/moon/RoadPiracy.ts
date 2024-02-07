@@ -14,6 +14,7 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resource} from '../../../common/Resource';
 import {sum} from '../../../common/utils/utils';
 import {Message} from '../../../common/logs/Message';
+import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 
 export class RoadPiracy extends Card implements IProjectCard {
   constructor() {
@@ -81,7 +82,13 @@ export class RoadPiracy extends Card implements IProjectCard {
     return option;
   }
 
+
   public override bespokePlay(player: IPlayer) {
+    player.game.defer(new SimpleDeferredAction(player, () => this.do(player)), Priority.ATTACK_OPPONENT);
+    return undefined;
+  }
+
+  public do(player: IPlayer) {
     const game = player.game;
     const stealSteel = message('Steal ${0} steel', (b) => b.number(6));
     const stealTitanium = message('Steal ${0} titanium', (b) => b.number(4));

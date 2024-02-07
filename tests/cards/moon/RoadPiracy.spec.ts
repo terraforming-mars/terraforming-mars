@@ -6,6 +6,7 @@ import {testGame} from '../../TestGame';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 
 describe('RoadPiracy', () => {
   let game: Game;
@@ -28,8 +29,12 @@ describe('RoadPiracy', () => {
   it('Players only have steel', () => {
     player2.steel = 2;
     player3.steel = 5;
-    const orOptions = cast(card.play(player), OrOptions);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
     expect(orOptions.options.length).eq(2);
+
     const steel = cast(orOptions.options[0], AndOptions);
     steel.process({
       type: 'and',
@@ -38,6 +43,7 @@ describe('RoadPiracy', () => {
         {type: 'amount', amount: 4},
       ],
     }, player);
+
     expect(player.steel).eq(6);
     expect(player2.steel).eq(0);
     expect(player3.steel).eq(1);
@@ -46,8 +52,12 @@ describe('RoadPiracy', () => {
   it('Players only have titanium', () => {
     player2.titanium = 2;
     player3.titanium = 5;
-    const orOptions = cast(card.play(player), OrOptions);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
     expect(orOptions.options.length).eq(2);
+
     const titanium = cast(orOptions.options[0], AndOptions);
     titanium.process({
       type: 'and',
@@ -56,6 +66,7 @@ describe('RoadPiracy', () => {
         {type: 'amount', amount: 1},
       ],
     }, player);
+
     expect(player.titanium).eq(3);
     expect(player2.titanium).eq(0);
     expect(player3.titanium).eq(4);
@@ -64,9 +75,14 @@ describe('RoadPiracy', () => {
   it('Select too many from one player', () => {
     player2.titanium = 2;
     player3.titanium = 5;
-    const orOptions = cast(card.play(player), OrOptions);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
     expect(orOptions.options.length).eq(2);
+
     const titanium = cast(orOptions.options[0], AndOptions);
+
     expect(() => titanium.process({
       type: 'and',
       responses: [
@@ -93,7 +109,10 @@ describe('RoadPiracy', () => {
   it('Select too many overall', () => {
     player2.titanium = 2;
     player3.titanium = 5;
-    const orOptions = cast(card.play(player), OrOptions);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
     expect(orOptions.options.length).eq(2);
     const titanium = cast(orOptions.options[0], AndOptions);
     expect(() => titanium.process({
@@ -121,12 +140,38 @@ describe('RoadPiracy', () => {
   it('Do not select', () => {
     player2.titanium = 2;
     player3.titanium = 5;
-    const orOptions = cast(card.play(player), OrOptions);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
     expect(orOptions.options.length).eq(2);
     orOptions.options[1].cb();
     expect(player.titanium).eq(0);
     expect(player2.titanium).eq(2);
     expect(player3.titanium).eq(5);
+  });
+
+  it('Road piracy works with Pathfinders bonuses', () => {
+    [game, player, player2, player3] = testGame(3, {pathfindersExpansion: true});
+
+    player2.steel = 0;
+    player3.steel = 3;
+
+    // Road Piracy has a Moon tag. Next step grants steel.
+    game.pathfindersData!.moon = 1;
+    player.playCard(card);
+    runAllActions(game);
+
+    expect(player.steel).eq(2);
+    expect(player2.steel).eq(1);
+    expect(player3.steel).eq(4);
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const steel = cast(orOptions.options[0], AndOptions);
+
+    expect(steel.options.length).eq(2);
+    expect(cast(steel.options[0], SelectAmount).max).eq(1);
+    expect(cast(steel.options[1], SelectAmount).max).eq(4);
   });
 });
 

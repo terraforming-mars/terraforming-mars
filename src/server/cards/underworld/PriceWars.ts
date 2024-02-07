@@ -33,15 +33,16 @@ export class PriceWars extends Card implements IProjectCard {
     });
   }
 
-  public generationUsed: number = -1;
+  public generationUsed: number | undefined = undefined;
 
   // TODO(kberg): Make Astra Mechanica, Odyssey and Playwrights compatible.
   // TODO(kberg): log, log, log.
   public override bespokePlay(player: IPlayer) {
-    player.increaseSteelValue();
-    player.increaseTitaniumValue();
     for (const p of player.game.getPlayersInGenerationOrder()) {
-      if (p !== player) {
+      if (p === player) {
+        p.increaseSteelValue();
+        p.increaseTitaniumValue();
+      } else {
         p.decreaseSteelValue();
         p.decreaseTitaniumValue();
       }
@@ -51,10 +52,11 @@ export class PriceWars extends Card implements IProjectCard {
 
   public onProductionPhase(player: IPlayer) {
     if (this.generationUsed === player.game.generation) {
-      player.decreaseSteelValue();
-      player.decreaseTitaniumValue();
       for (const p of player.game.getPlayersInGenerationOrder()) {
-        if (p !== player) {
+        if (p === player) {
+          p.decreaseSteelValue();
+          p.decreaseTitaniumValue();
+        } else {
           p.increaseSteelValue();
           p.increaseTitaniumValue();
         }

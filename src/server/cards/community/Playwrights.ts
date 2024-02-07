@@ -107,6 +107,10 @@ export class Playwrights extends CorporationCard {
     try {
       player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
+          // Special case Price Wars, which is not easy to work with.
+          if (card.name === CardName.PRICE_WARS) {
+            return false;
+          }
           const canAffordOptions = {
             cost: player.getCardCost(card),
             reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),

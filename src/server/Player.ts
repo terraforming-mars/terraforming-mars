@@ -1601,6 +1601,8 @@ export class Player implements IPlayer {
           message('Take first action of ${0} corporation', (b) => b.card(corp)),
           corp.initialActionText)
           .andThen(() => {
+            game.log('${0} took the first action of ${1} corporation', (b) => b.player(this).card(corp)),
+
             this.deferInitialAction(corp);
             this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
             return undefined;

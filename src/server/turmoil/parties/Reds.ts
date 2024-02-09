@@ -43,7 +43,9 @@ class RedsBonus01 implements Bonus {
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
-      if (scores[idx] > 0) player.increaseTerraformRating();
+      if (scores[idx] > 0) {
+        player.increaseTerraformRating(1, {log: true});
+      }
     });
   }
 }

@@ -63,6 +63,6 @@ describe('WildlifeDome', function() {
     expect(player.canPlay(card)).is.not.true;
 
     player.megaCredits = 18;
-    expect(player.canPlay(card)).is.true;
+    expect(player.canPlay(card)).deep.eq({redsCost: 3});
   });
 });

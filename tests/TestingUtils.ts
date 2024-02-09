@@ -131,7 +131,9 @@ export function formatMessage(message: Message | string): string {
   return Log.applyData(message, (datum) => datum.value);
 }
 
-export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number) {
+// Run a few tests to see that a canPlay or canAct behaves correctly in the face of reds costs.
+// canAct is used to identify if the action is canAct, which returns different results from canPlay. At the moment.
+export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number, canAct: boolean = false) {
   const turmoil = Turmoil.getTurmoil(player.game);
   turmoil.rulingParty = new Greens();
   PoliticalAgendas.setNextAgenda(turmoil, player.game);
@@ -142,7 +144,11 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
   player.megaCredits = initialMegacredits + passingDelta - 1;
   expect(cb(), 'Reds in power, not enough money').is.false;
   player.megaCredits = initialMegacredits + passingDelta;
-  expect(cb(), 'Reds in power, enough money').is.true;
+  if (passingDelta > 0 && canAct === false) {
+    expect(cb(), 'Reds in power, enough money').deep.eq({redsCost: passingDelta});
+  } else {
+    expect(cb(), 'Reds in power, enough money').is.true;
+  }
 }
 
 class FakeCard implements IProjectCard {

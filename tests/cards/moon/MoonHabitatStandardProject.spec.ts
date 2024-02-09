@@ -81,9 +81,9 @@ describe('MoonHabitatStandardProject', () => {
     // Card requirements
     player.titanium = 1;
 
-    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
     moonData.habitatRate = 8;
-    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct */ true);
   });
 });
 

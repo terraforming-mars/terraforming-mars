@@ -395,7 +395,7 @@ export class Turmoil {
 
   public getPlayerInfluence(player: IPlayer) {
     let influence = 0;
-    if (this.chairman !== undefined && this.chairman === player) influence++;
+    if (this.chairman === player) influence++;
 
     const dominantParty : IParty = this.dominantParty;
     const isPartyLeader = dominantParty.partyLeader === player;

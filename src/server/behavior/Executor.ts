@@ -228,13 +228,13 @@ export class Executor implements BehaviorExecutor {
           return false;
         }
       }
-      if (moon.habitatRate ?? 0 >= MAXIMUM_HABITAT_RATE) {
+      if ((moon.habitatRate ?? 0) >= MAXIMUM_HABITAT_RATE) {
         card.warnings.add('maxHabitatRate');
       }
-      if (moon.miningRate ?? 0 >= MAXIMUM_MINING_RATE) {
+      if ((moon.miningRate ?? 0) >= MAXIMUM_MINING_RATE) {
         card.warnings.add('maxMiningRate');
       }
-      if (moon.logisticsRate ?? 0 >= MAXIMUM_LOGISTICS_RATE) {
+      if ((moon.logisticsRate ?? 0) >= MAXIMUM_LOGISTICS_RATE) {
         card.warnings.add('maxLogisticsRate');
       }
     }

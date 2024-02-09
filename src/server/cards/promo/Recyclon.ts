@@ -3,7 +3,8 @@ import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
-import {IProjectCard} from '../IProjectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ICard} from '../ICard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../../common/cards/CardName';
@@ -40,7 +41,11 @@ export class Recyclon extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
+    if (!player.isCorporation(this.name)) {
+      return undefined;
+    }
+
     if (card.tags.includes(Tag.BUILDING) === false || !player.isCorporation(this.name)) {
       return undefined;
     }
@@ -60,5 +65,9 @@ export class Recyclon extends CorporationCard {
       return undefined;
     });
     return new OrOptions(spendResource, addResource);
+  }
+
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
+    return this.onCardPlayed(player, card);
   }
 }

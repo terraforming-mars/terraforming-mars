@@ -10,7 +10,8 @@ export type Options = {
 };
 
 export type YesAnd = {
-  thinkTankResources?: number
+  thinkTankResources?: number,
+  redsCost?: number,
 }
 
 /**

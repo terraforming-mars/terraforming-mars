@@ -293,7 +293,6 @@ export class Turmoil {
     // 4.c - Draw the new distant event and add neutral delegate
     this.distantGlobalEvent = this.globalEventDealer.draw();
     this.addNeutralDelegate(this.distantGlobalEvent?.revealedDelegate, game);
-    game.log('Turmoil phase has been resolved');
   }
 
   private addNeutralDelegate(partyName: PartyName | undefined, game: IGame) {

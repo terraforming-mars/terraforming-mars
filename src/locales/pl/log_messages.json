@@ -89,7 +89,6 @@
     "${0} copied ${1} production with ${2}": "${0} kopiuje produkcję ${1} za pomocą ${2}",
     "${0} used ${1} action with ${2}": "${0} wykorzystuje akcję ${1} za pomocą ${2}",
     "${0} is the new chairman and gains ${1} TR": "${0} zostaje nowym przewodniczącym i podnosi swój WT o ${1} poziom",
-    "Turmoil phase has been resolved": "Faza niepokojów została rozpatrzona",
     "A neutral delegate is the new chairman.": "Neutralny delegat zostaje nowym przewodniczącym.",
     "Greens are in power in the first generation.": "Zieloni są partią rządząca w pierwszym pokoleniu.",
     "Resolving global event ${0}": "Rozpatrywanie wydarzenia globalnego ${0}",

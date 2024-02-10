@@ -137,7 +137,6 @@
     "${0} copied ${1} production with ${2}": "${0} kopieerde de productie van ${1} met ${2}",
     "${0} used ${1} action with ${2}": "${0} gebruikte een actie van ${1} met ${2}",
     "${0} is the new chairman and gains ${1} TR": "${0} is de nieuwe voorzitter en krijgt ${1} TW",
-    "Turmoil phase has been resolved": "De opstand is geëindigd",
     "A neutral delegate is the new chairman.": "Een neutrale afgevaardigde is de nieuwe voorzitter.",
     "Greens are in power in the first generation.": "DE GROENEN zijn aan de macht in de eerste generatie.",
     "Resolving global event ${0}": "Voltooi wereldwijd evenement ${0}",

@@ -148,7 +148,6 @@
     "${0} copied ${1} production with ${2}": "${0}は${1}の生産を${2}によってコピーした",
     "${0} used ${1} action with ${2}": "${0}は${2}として${1}のアクションを実行",
     "${0} is the new chairman and gains ${1} TR": "${0}が党首となり、TR+${1}段階",
-    "Turmoil phase has been resolved": "",
     "A neutral delegate is the new chairman.": "",
     "Greens are in power in the first generation.": "",
     "Resolving global event ${0}": "",

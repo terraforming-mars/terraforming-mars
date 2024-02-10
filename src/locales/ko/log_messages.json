@@ -133,7 +133,6 @@
     "${0} copied ${1} production with ${2}": "${0} 플레이어가 ${2} 효과로 ${1} 생산량을 복사했습니다.",
     "${0} used ${1} action with ${2}": "${0} 플레이어가 ${2} 카드에서 ${1} 행동을 사용했습니다.",
     "${0} is the new chairman and gains ${1} TR": "${0} 플레이어는 새 의장이 되며 ${1} TR을 얻습니다. ",
-    "Turmoil phase has been resolved": "격동 단계 처리됨",
     "Resolving global event ${0}": "${0} 카드에 의한 행성계 사건을 처리하였습니다.",
 
     "${0} raised the ${1} planetary track ${2} ${3}": "${0} 플레이어는 행성 영향력 중 ${1} 트랙을 ${2} ${3} 증가시켰습니다.",

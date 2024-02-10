@@ -8,7 +8,6 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
-import {multiplier} from '../Options';
 
 export class PowerInfrastructure extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -22,7 +21,7 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
         cardNumber: '194',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend any amount of energy and gain that amount of M€.', (eb) => {
-            eb.text('x').energy(1).startAction.megacredits(0, {multiplier});
+            eb.text('x').energy(1).startAction.megacredits(1, {text: 'x'});
           });
         }),
       },

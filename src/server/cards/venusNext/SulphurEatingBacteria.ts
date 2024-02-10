@@ -10,7 +10,6 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {multiplier} from '../Options';
 
 export class SulphurEatingBacteria extends Card implements IActionCard {
   constructor() {
@@ -30,7 +29,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
           }).br;
           b.or().br;
           b.action('Spend any number of microbes here to gain triple amount of M€.', (eb) => {
-            eb.text('x').microbes(1).startAction.megacredits(3, {multiplier});
+            eb.text('x').microbes(1).startAction.megacredits(1, {text: '3x'});
           });
         }),
         description: 'Requires Venus 6%',

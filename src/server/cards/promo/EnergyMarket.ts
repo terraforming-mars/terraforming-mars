@@ -10,7 +10,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {multiplier} from '../Options';
 
 export class EnergyMarket extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +23,7 @@ export class EnergyMarket extends Card implements IProjectCard {
         cardNumber: 'X03',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2X M€ to gain X energy.', (eb) => {
-            eb.megacredits(2, {multiplier}).startAction.text('x').energy(1);
+            eb.megacredits(1, {text: '2x'}).startAction.text('x').energy(1);
           }).br;
           b.or().br;
           b.action('Decrease energy production 1 step to gain 8 M€.', (eb) => {

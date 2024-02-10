@@ -31,7 +31,7 @@ export class Playwrights extends CorporationCard {
           b.megacredits(38).production((pb) => pb.energy(1));
           b.corpBox('action', (cb) => {
             cb.action('Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
-              eb.megacredits(0, {questionMark: true}).startAction;
+              eb.megacredits(1, {text: '?'}).startAction;
               eb.text('replay', Size.SMALL, true);
               eb.nbsp.cards(1, {all, secondaryTag: Tag.EVENT});
             });

@@ -89,6 +89,8 @@ export interface ICardRenderItem extends CardComponent {
   isPlayed?: boolean;
   /** used text instead of integers in some cases */
   text?: string;
+  /** used inside MC typically */
+  innerText?: string;
   /** for uppercase text */
   isUppercase?: boolean;
   /** for bold text */
@@ -99,8 +101,6 @@ export interface ICardRenderItem extends CardComponent {
   size?: Size;
   /** adding tag dependency (top right bubble of this item) */
   secondaryTag?: Tag | AltSecondaryTag;
-  /** used for amount labels like 2x, x, etc. */
-  multiplier?: boolean;
   /** places the pathfinder Clone symbol in the object */
   clone?: boolean;
   /** add a symbol on top of the item to show it's cancelled or negated in some way (usually X) */

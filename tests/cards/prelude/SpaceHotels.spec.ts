@@ -14,12 +14,12 @@ describe('SpaceHotels', function() {
 
   it('Can not play', function() {
     player.tagsForTest = {earth: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', function() {
     player.tagsForTest = {earth: 2};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {

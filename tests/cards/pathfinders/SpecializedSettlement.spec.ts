@@ -28,9 +28,9 @@ describe('SpecializedSettlement', function() {
 
   it('Can play', () => {
     player.production.override({energy: 0});
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
     player.production.override({energy: 1});
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {

@@ -25,13 +25,13 @@ describe('UrbanizedArea', function() {
   });
 
   it('Can not play without energy production', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play without available space between two cities', function() {
     game.addCity(player, lands[0]);
     player.production.add(Resource.ENERGY, 1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
@@ -39,7 +39,7 @@ describe('UrbanizedArea', function() {
     game.addCity(player, lands[1]);
 
     player.production.add(Resource.ENERGY, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const action = cast(card.play(player), SelectSpace);
     expect(action.spaces).has.lengthOf(1);

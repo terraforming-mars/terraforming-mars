@@ -20,12 +20,12 @@ describe('SmallAnimals', function() {
   it('Can not play if oxygen level too low', function() {
     player2.production.add(Resource.PLANTS, 1);
     setOxygenLevel(game, 5);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if no one has plant production', function() {
     setOxygenLevel(game, 6);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should act', function() {
@@ -38,7 +38,7 @@ describe('SmallAnimals', function() {
   it('Should play', function() {
     setOxygenLevel(game, 6);
     player2.production.add(Resource.PLANTS, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.playedCards.push(card);
     card.play(player);

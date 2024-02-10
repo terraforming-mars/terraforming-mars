@@ -18,12 +18,12 @@ describe('Worms', function() {
 
   it('Can not play', function() {
     setOxygenLevel(game, 3);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     setOxygenLevel(game, 4);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
 

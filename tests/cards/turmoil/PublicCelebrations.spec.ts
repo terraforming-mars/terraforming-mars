@@ -7,10 +7,10 @@ describe('PublicCelebrations', function() {
     const card = new PublicCelebrations();
     const [game, player] = testGame(1, {turmoilExtension: true});
 
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     game.turmoil!.chairman = player;
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
   });
 });

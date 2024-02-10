@@ -19,9 +19,9 @@ describe('Robot Pollinators', function() {
 
   it('Can not play if oxygen level too low', function() {
     setOxygenLevel(game, 1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     setOxygenLevel(game, 10);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Play, No tags', function() {

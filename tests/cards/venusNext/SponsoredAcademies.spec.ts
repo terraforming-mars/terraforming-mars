@@ -31,7 +31,7 @@ describe('SponsoredAcademies', function() {
 
   it('Should play', function() {
     player.cardsInHand.push(housePrinting, tardigrades);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.playCard(card);
     const discardCard = cast(game.deferredActions.pop()!.execute(), SelectCard<IProjectCard>);

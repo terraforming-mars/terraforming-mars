@@ -9,14 +9,14 @@ describe('VoteOfNoConfidence', function() {
     const card = new VoteOfNoConfidence();
     const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     turmoil.chairman = 'NEUTRAL';
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     const greens = game.turmoil!.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player;
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(turmoil.chairman).to.eq(player);

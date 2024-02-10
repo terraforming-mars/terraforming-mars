@@ -1336,20 +1336,12 @@ export class Player implements IPlayer {
   }
 
   public canPlay(card: IProjectCard): boolean | YesAnd {
+    card.warnings.clear();
     const options = this.affordOptionsForCard(card);
     if (!this.canAfford(options)) {
       return false;
     }
-    return this.simpleCanPlay(card, options);
-  }
-
-  /**
-   * Verify if requirements for the card can be met, ignoring the project cost.
-   * Only made public for tests.
-   */
-  // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    return card.canPlay(this, canAffordOptions);
+    return card.canPlay(this, options);
   }
 
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {

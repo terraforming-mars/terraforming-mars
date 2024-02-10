@@ -17,16 +17,16 @@ describe('Psychrophiles', () => {
 
   it('Cannot play', () => {
     setTemperature(game, -18);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     setTemperature(game, -20);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     cast(card.play(player), undefined);
   });
 

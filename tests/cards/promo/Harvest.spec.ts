@@ -18,13 +18,13 @@ describe('Harvest', function() {
   });
 
   it('Cannot play', function() {
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
   });
 
   it('Should play', function() {
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.megaCredits).to.eq(12);

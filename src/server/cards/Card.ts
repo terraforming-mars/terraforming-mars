@@ -78,14 +78,12 @@ export type StaticCardProperties = SharedProperties & {
 const cardProperties = new Map<CardName, InternalProperties>();
 
 /**
- * Card is an implementation for most cards in the game, which provides one key features:
+ * Card is an implementation for most cards in the game, which provides two key features:
  *
  * 1. It stores key card properties into a static cache, which means that each instance of a card
  *    consumes very little memory.
  *
- * 2. It's key behavior is to provide a lot of the `canPlay` and `play` behavior currently
- *    in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
- *    put right in here.
+ * 2. It provides a lot of the `canPlay` and `play` behavior that would have been in other cards.
  *
  * In order to implement this default behavior, Card subclasses should ideally not
  * override `play` and `canPlay`. Instead, they should override `bespokeCanPlay` and

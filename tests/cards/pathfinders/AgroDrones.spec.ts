@@ -18,10 +18,10 @@ describe('AgroDrones', function() {
 
   it('canPlay', function() {
     setTemperature(game, -20);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     setTemperature(game, -18);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Can act', function() {

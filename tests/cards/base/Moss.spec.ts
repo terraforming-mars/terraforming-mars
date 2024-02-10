@@ -17,19 +17,19 @@ describe('Moss', function() {
   it('Can not play without enough oceans', function() {
     maxOutOceans(player, 2);
     player.plants = 1;
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if have no plants', function() {
     maxOutOceans(player, 3);
     player.plants = 0;
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, 3);
     player.plants = 1;
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.plants).to.eq(0);
@@ -42,7 +42,7 @@ describe('Moss', function() {
     player.playedCards.push(viralEnhancers);
     player.plants = 0;
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
 
     expect(player.plants).to.eq(-1);

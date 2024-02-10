@@ -26,12 +26,12 @@ describe('Banned Delegate', function() {
 
   it('Cannot play', function() {
     turmoil.chairman = player2;
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     turmoil.chairman = player;
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
@@ -52,7 +52,7 @@ describe('Banned Delegate', function() {
 
   it('Removes duplicates', function() {
     turmoil.chairman = player;
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);

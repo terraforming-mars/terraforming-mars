@@ -32,7 +32,7 @@ describe('WildlifeDome', function() {
   it('Should play: reds', function() {
     turmoil.rulingParty = reds;
     PoliticalAgendas.setNextAgenda(turmoil, game);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Play when greens are in power', function() {

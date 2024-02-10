@@ -20,12 +20,12 @@ describe('VenusianPlants', function() {
 
   it('Can not play', function() {
     setVenusScaleLevel(game, 14);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - multiple targets', function() {
     setVenusScaleLevel(game, 16);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const card2 = new Thermophiles();
     const card3 = new VenusianAnimals();

@@ -20,10 +20,10 @@ describe('HecateSpeditions', function() {
   });
 
   it('play', function() {
-    // expect(card.resourceCount).eq(0);
+    expect(card.resourceCount).eq(0);
     player.playCorporationCard(card);
     runAllActions(game);
-    // expect(card.resourceCount).eq(1);
+    expect(card.resourceCount).eq(1);
     cast(player.popWaitingFor(), undefined);
   });
 

@@ -24,6 +24,10 @@ export class HecateSpeditions extends ActiveCorporationCard {
       startingMegaCredits: 42,
       resourceType: CardResource.SUPPLY_CHAIN,
 
+      behavior: {
+        addResources: 1,
+      },
+
       firstAction: {
         colonies: {buildColony: {}},
         text: 'Place a colony',

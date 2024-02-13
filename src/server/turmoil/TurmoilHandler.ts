@@ -35,22 +35,19 @@ export class TurmoilHandler {
   public static applyOnCardPlayedEffect(player: IPlayer, selectedCard: IProjectCard): void {
     // PoliticalAgendas Greens P3 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp03')) {
-      const policy = GREENS_POLICY_3;
-      policy.onCardPlayed(player, selectedCard);
+      GREENS_POLICY_3.onCardPlayed(player, selectedCard);
     }
 
     // PoliticalAgendas MarsFirst P2 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mfp02')) {
-      const policy = MARS_FIRST_POLICY_2;
-      policy.onCardPlayed(player, selectedCard);
+      MARS_FIRST_POLICY_2.onCardPlayed(player, selectedCard);
     }
   }
 
   public static resolveTilePlacementCosts(player: IPlayer): void {
     // PoliticalAgendas Reds P2 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp02')) {
-      const redsPolicy = REDS_POLICY_2;
-      redsPolicy.onTilePlaced(player);
+      REDS_POLICY_2.onTilePlaced(player);
     }
   }
 
@@ -59,14 +56,12 @@ export class TurmoilHandler {
 
     // PoliticalAgendas Greens P2 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp02')) {
-      const greensPolicy = GREENS_POLICY_2;
-      greensPolicy.onTilePlaced(player);
+      GREENS_POLICY_2.onTilePlaced(player);
     }
 
     // PoliticalAgendas Kelvinists P4 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, 'kp04')) {
-      const kelvinistsPolicy = KELVINISTS_POLICY_4;
-      kelvinistsPolicy.onTilePlaced(player);
+      KELVINISTS_POLICY_4.onTilePlaced(player);
     }
   }
 

@@ -10,7 +10,6 @@ import {Units} from '../../common/Units';
 import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {TRSource} from '../../common/cards/TRSource';
 import {sum} from '../../common/utils/utils';
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
 
 export type SpaceCosts = {
   stock: Units,
@@ -328,12 +327,6 @@ export abstract class Board {
       x: serialized.x,
       y: serialized.y,
     };
-
-    // TODO(kberg): Delete this block after 2023-12-01
-    if (space.bonus.length > 0 && space.bonus[0] === SpaceBonus._RESTRICTED) {
-      space.bonus = [];
-      space.spaceType = SpaceType.RESTRICTED;
-    }
 
     if (serialized.tile !== undefined) {
       space.tile = serialized.tile;

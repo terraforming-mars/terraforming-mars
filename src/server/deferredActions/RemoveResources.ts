@@ -39,9 +39,11 @@ export class RemoveResources extends DeferredAction<number> {
       return undefined;
     }
     // Move to this.target.maybeBlockAttack?
-    this.target.defer(UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, () => {
-      this.target.stock.deduct(this.resource, qtyLost, {log: true, from: this.perpetrator});
-      this.cb(qtyLost);
+    this.target.defer(UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, (proceed) => {
+      if (proceed) {
+        this.target.stock.deduct(this.resource, qtyLost, {log: true, from: this.perpetrator});
+        this.cb(qtyLost);
+      }
       return undefined;
     }));
     return undefined;

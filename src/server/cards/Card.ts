@@ -8,7 +8,7 @@ import {Tag} from '../../common/cards/Tag';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {DynamicTRSource} from './ICard';
+import {DynamicTRSource, ICard} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
@@ -96,7 +96,7 @@ const cardProperties = new Map<CardName, InternalProperties>();
  * be custom-written for each card, _no_ common behavior should be custom-written for
  * each card, either.
  */
-export abstract class Card {
+export abstract class Card implements ICard {
   protected readonly properties: InternalProperties;
   public resourceCount = 0;
   public warnings = new Set<Warning>();

@@ -962,7 +962,7 @@ export enum CardName {
   VOLTAGON = 'Voltagon',
   ARES_MEDIA = 'Ares Media',
   ANUBIS_SECURITIES = 'Anubis Securities',
-  HECTATE_SPEDITIONS = 'Hectate Speditions',
+  HECATE_SPEDITIONS = 'Hecate Speditions',
   // Underworld Preludes
   FREE_TRADE_PORT = 'Free Trade Port',
   INVESTOR_PLAZA = 'Investor Plaza',

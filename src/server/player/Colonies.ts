@@ -17,7 +17,7 @@ import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {message} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
 import {Payment} from '../../common/inputs/Payment';
-import {TradeWithHectateSpeditions} from '../cards/underworld/HectateSpeditions';
+import {TradeWithHectateSpeditions} from '../cards/underworld/HecateSpeditions';
 
 export class Colonies {
   private player: IPlayer;

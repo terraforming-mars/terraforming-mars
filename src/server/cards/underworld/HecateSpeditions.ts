@@ -16,10 +16,10 @@ function tradeCost(player: IPlayer) {
   return Math.max(1, 2 - player.colonies.tradeDiscount);
 }
 
-export class HectateSpeditions extends ActiveCorporationCard {
+export class HecateSpeditions extends ActiveCorporationCard {
   constructor() {
     super({
-      name: CardName.HECTATE_SPEDITIONS,
+      name: CardName.HECATE_SPEDITIONS,
       tags: [Tag.EARTH],
       startingMegaCredits: 42,
       resourceType: CardResource.SUPPLY_CHAIN,
@@ -70,16 +70,16 @@ export class TradeWithHectateSpeditions implements IColonyTrader {
   private hectateSpeditions: ICorporationCard | undefined;
 
   constructor(private player: IPlayer) {
-    this.hectateSpeditions = player.getCorporation(CardName.HECTATE_SPEDITIONS);
+    this.hectateSpeditions = player.getCorporation(CardName.HECATE_SPEDITIONS);
   }
 
   public canUse() {
     return (this.hectateSpeditions?.resourceCount ?? 0) >= tradeCost(this.player) &&
-      !this.player.getActionsThisGeneration().has(CardName.HECTATE_SPEDITIONS);
+      !this.player.getActionsThisGeneration().has(CardName.HECATE_SPEDITIONS);
   }
 
   public optionText() {
-    return message('Pay ${0} ${1} resources (use ${2} action)', (b) => b.number(tradeCost(this.player)).string('supply chain').cardName(CardName.HECTATE_SPEDITIONS));
+    return message('Pay ${0} ${1} resources (use ${2} action)', (b) => b.number(tradeCost(this.player)).string('supply chain').cardName(CardName.HECATE_SPEDITIONS));
   }
 
   private tradeWithColony(card: ICorporationCard, player: IPlayer, colony: IColony) {

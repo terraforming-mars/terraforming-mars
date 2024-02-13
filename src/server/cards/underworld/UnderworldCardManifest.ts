@@ -49,7 +49,7 @@ import {GreyMarketExploitation} from './GreyMarketExploitation';
 // // import {GuerillaEcologists} from './GuerillaEcologists';
 import {Hackers} from './Hackers';
 import {Hadesphere} from './Hadesphere';
-import {HectateSpeditions} from './HectateSpeditions';
+import {HecateSpeditions} from './HecateSpeditions';
 import {HenkeiGenetics} from './HenkeiGenetics';
 import {HiredRaiders} from './HiredRaiders';
 import {HyperspaceDrivePrototype} from './HyperspaceDrivePrototype';
@@ -258,7 +258,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: 'venus'},
     // // [CardName.ARES_MEDIA]: {Factory: AresMedia}, // Not another events are up card.
     // [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities},
-    [CardName.HECTATE_SPEDITIONS]: {Factory: HectateSpeditions, compatibility: 'colonies'},
+    [CardName.HECATE_SPEDITIONS]: {Factory: HecateSpeditions, compatibility: 'colonies'},
   },
 
   preludeCards: {

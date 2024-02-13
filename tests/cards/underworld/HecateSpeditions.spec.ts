@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {HectateSpeditions} from '../../../src/server/cards/underworld/HectateSpeditions';
+import {HecateSpeditions} from '../../../src/server/cards/underworld/HecateSpeditions';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -8,14 +8,14 @@ import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
-describe('HectateSpeditions', function() {
-  let card: HectateSpeditions;
+describe('HecateSpeditions', function() {
+  let card: HecateSpeditions;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
-    card = new HectateSpeditions();
+    card = new HecateSpeditions();
     [game, player, player2] = testGame(3, {coloniesExtension: true});
   });
 
@@ -68,7 +68,7 @@ describe('HectateSpeditions', function() {
     UnderworldTestHelper.assertNoTradeAction(player);
 
     card.resourceCount = 2;
-    UnderworldTestHelper.assertTradeAction(player, 'Pay 2 supply chain resources (use Hectate Speditions action)');
+    UnderworldTestHelper.assertTradeAction(player, 'Pay 2 supply chain resources (use Hecate Speditions action)');
     expect(card.resourceCount).eq(0);
   });
 });

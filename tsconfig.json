@@ -9,7 +9,7 @@
         // ES 2021 has a couple of features not supported in Opera, but they're WeakRef and Promise.any.
         // It is safe to assume those features won't be run on a browser.
         // "lib": ["dom", "es2021"],
-        "lib": ["dom", "es2019"],
+        "lib": ["dom", "es2021"],
         "incremental": true,
         "module": "commonjs",
         "strict": true,
@@ -21,7 +21,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "skipLibCheck": true,
-        "target": "es6",
+        "target": "es2021",
         "types": ["node"],
         "moduleResolution": "node",
         "resolveJsonModule": true,

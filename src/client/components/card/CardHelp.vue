@@ -22,8 +22,7 @@ export default Vue.extend({
   },
   computed: {
     url(): string {
-      // TODO(kberg): use replaceAll when upgrading browser version.
-      const anchor = this.name.toLowerCase().split(' ').join('-');
+      const anchor = this.name.toLowerCase().replaceAll(' ', '-');
       return 'https://github.com/terraforming-mars/terraforming-mars/wiki/Card-Details#' + anchor;
     },
   },

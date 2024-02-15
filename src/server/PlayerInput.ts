@@ -9,6 +9,14 @@ export interface PlayerInput {
     type: PlayerInputType;
     buttonLabel: string;
     title: string | Message;
+    /**
+     * When false, this input should not be the default selected PlayerInput.
+     * When unset or true, this input may be the default selected PlayerInput.
+     *
+     * Used only when this option is a child option of an OrOptions.
+     */
+    eligibleForDefault?: boolean;
+
     cb(...item: any): PlayerInput | undefined;
 
     /**
@@ -29,6 +37,8 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   public buttonLabel: string = 'Save';
   public title: string | Message;
   public cb: (param: T) => PlayerInput | undefined = () => undefined;
+  public eligibleForDefault: boolean | undefined = undefined;
+
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
 

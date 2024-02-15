@@ -10,12 +10,17 @@ export class OrOptions extends OptionsInput<undefined> {
   }
 
   public toModel(player: IPlayer): OrOptionsModel {
-    return {
+    const initialIdx = this.options.findIndex((option) => option.eligibleForDefault !== false);
+    const model: OrOptionsModel = {
       title: this.title,
       buttonLabel: this.buttonLabel,
       type: 'or',
       options: this.options.map((option) => option.toModel(player)),
     };
+    if (initialIdx > -1) {
+      model.initialIdx = initialIdx;
+    }
+    return model;
   }
 
   public process(input: InputResponse, player: IPlayer) {

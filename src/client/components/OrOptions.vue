@@ -65,22 +65,23 @@ export default Vue.extend({
     if (this.playerinput.options === undefined) {
       throw new Error('no options provided for OrOptions');
     }
-    const displayedOptions = this.playerinput.options.filter((o) => {
-      if (o.type !== 'card') {
+    const displayedOptions = this.playerinput.options.filter((option) => {
+      if (option.type !== 'card') {
         return true;
       }
-      if (o.showOnlyInLearnerMode === false) {
+      if (option.showOnlyInLearnerMode === false) {
         return true;
       }
 
       return getPreferences().learner_mode;
     });
-    // Special case: If the first displayed option is SelectCard, and none of them are enabled, skip it.
-    let selectedOption = displayedOptions[0];
+    const initialIdx = this.playerinput.initialIdx ?? 0;
+    // Special case: If the first recommended displayed option is SelectCard, and none of them are enabled, skip it.
+    let selectedOption = displayedOptions[initialIdx];
     if (displayedOptions.length > 1 &&
       selectedOption.type === 'card' &&
       !selectedOption.cards.some((card) => card.isDisabled !== true)) {
-      selectedOption = displayedOptions[1];
+      selectedOption = displayedOptions[initialIdx + 1];
     }
     return {
       displayedOptions,

@@ -1702,6 +1702,9 @@ export class Player implements IPlayer {
       });
       if (convertHeat.warnings.size > 0) {
         option.warnings = Array.from(convertHeat.warnings);
+        if (convertHeat.warnings.has('maxtemp')) {
+          option.eligibleForDefault = false;
+        }
       }
       action.options.push(option);
     }

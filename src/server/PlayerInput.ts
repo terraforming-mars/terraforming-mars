@@ -11,6 +11,9 @@ export interface PlayerInput {
     title: string | Message;
     cb(...item: any): PlayerInput | undefined;
 
+    /**
+     * Converts this PlayerInput to the model received by the UI.
+     */
     toModel(player: IPlayer): PlayerInputModel;
 
     /**
@@ -19,7 +22,6 @@ export interface PlayerInput {
      * This is another mechainsm for calling cb() with a client-side response.
      */
     process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
-    maxByDefault?: boolean;
 }
 
 export abstract class BasePlayerInput<T> implements PlayerInput {

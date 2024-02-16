@@ -57,7 +57,6 @@ type SharedProperties = {
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  tilesBuilt?: Array<TileType>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
@@ -67,12 +66,14 @@ type InternalProperties = SharedProperties & {
   reserveUnits?: Units,
   requirements: Array<CardRequirementsDescriptor>
   compiledRequirements: CardRequirements;
+  tilesBuilt: ReadonlyArray<TileType>,
 }
 
 /* External representation of card properties. */
 export type StaticCardProperties = SharedProperties & {
   reserveUnits?: Partial<Units>,
   requirements?: OneOrArray<CardRequirementDescriptor>,
+  tilesBuilt?: ReadonlyArray<TileType>,
 }
 
 const cardProperties = new Map<CardName, InternalProperties>();
@@ -118,18 +119,21 @@ export abstract class Card implements ICard {
       validateBehavior(external.behavior);
       validateBehavior(external.firstAction);
       validateBehavior(external.action);
+      Card.validateTilesBuilt(external);
     } catch (e) {
       throw new Error(`Cannot validate ${name}: ${e}`);
     }
 
     const translatedRequirements = asArray(external.requirements ?? []).map((req) => populateCount(req));
     const compiledRequirements = CardRequirements.compile(translatedRequirements);
+    const tilesBuilt = external.tilesBuilt ?? (external.behavior?.tile?.type ? [external.behavior.tile.type] : []);
 
     const internal: InternalProperties = {
       ...external,
       reserveUnits: external.reserveUnits === undefined ? undefined : Units.of(external.reserveUnits),
       requirements: translatedRequirements,
       compiledRequirements: compiledRequirements,
+      tilesBuilt: tilesBuilt,
     };
     return internal;
   }
@@ -195,8 +199,8 @@ export abstract class Card implements ICard {
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
-  public get tilesBuilt(): Array<TileType> {
-    return this.properties.tilesBuilt || [];
+  public get tilesBuilt(): ReadonlyArray<TileType> {
+    return this.properties.tilesBuilt;
   }
   public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
     let yesAnd: YesAnd | undefined = undefined;
@@ -347,6 +351,13 @@ export abstract class Card implements ICard {
       }
     } else {
       throw new Error('Unknown VPs defined');
+    }
+  }
+
+  private static validateTilesBuilt(properties: StaticCardProperties) {
+    const tileType = properties.behavior?.tile?.type;
+    if (tileType !== undefined && properties.tilesBuilt !== undefined) {
+      throw new Error('tilesBuilt and properties.tile.tileType both defined: ' + properties.name);
     }
   }
 

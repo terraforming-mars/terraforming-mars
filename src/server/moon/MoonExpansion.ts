@@ -327,17 +327,15 @@ export class MoonExpansion {
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
-    const tilesBuilt: Array<TileType> = card.tilesBuilt || [];
-
-    if (tilesBuilt.includes(TileType.MOON_HABITAT) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
+    if (card.tilesBuilt.includes(TileType.MOON_HABITAT) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
       titanium -= 1;
     }
 
-    if (tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
+    if (card.tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
       titanium -= 1;
     }
 
-    if (tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+    if (card.tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
       steel = 0;
     }
 

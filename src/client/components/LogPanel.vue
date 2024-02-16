@@ -23,7 +23,7 @@
         <div class="card-panel" v-if="cardNames.length + globalEventNames.length + colonyNames.length > 0">
           <AppButton size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
           <div id="log_panel_card" class="cardbox" v-for="cardName in cardNames.elements" :key="cardName">
-            <Card :card="{name: cardName, resources: getResourcesOnCard(cardName)}"/>
+            <Card :card="{name: cardName, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(cardName), resources: getResourcesOnCard(cardName)}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames.elements" :key="globalEventName">
             <global-event :globalEventName="globalEventName" type="prior" :showIcons="false"></global-event>
@@ -228,10 +228,24 @@ export default Vue.extend({
         visitor: undefined,
       };
     },
+    isSelfReplicatingRobotsCard(cardName: CardName) {
+      for (const player of this.players) {
+        if (player.selfReplicatingRobotsCards.some((card) => card.name === cardName)) {
+          return true;
+        }
+      }
+      return false;
+    },
     getResourcesOnCard(cardName: CardName) {
       for (const player of this.players) {
-        const foundCard = player.tableau.find((card) => card.name === cardName);
-        if (foundCard !== undefined) return foundCard.resources;
+        const playedCard = player.tableau.find((card) => card.name === cardName);
+        if (playedCard !== undefined) {
+          return playedCard.resources;
+        }
+        const srrCard = player.selfReplicatingRobotsCards.find((card) => card.name === cardName);
+        if (srrCard !== undefined) {
+          return srrCard.resources;
+        }
       }
 
       return undefined;

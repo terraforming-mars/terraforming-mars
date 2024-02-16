@@ -38,7 +38,7 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
       globalParameterRequirementBonus: properties.globalParameterRequirementBonus,
       metadata: properties.metadata,
       resourceType: properties.resourceType,
-      tilesBuilt: properties.tilesBuilt ?? [],
+      tilesBuilt: properties.tilesBuilt,
       victoryPoints: properties.victoryPoints,
     };
     if (startingMegaCredits !== undefined) {

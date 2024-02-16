@@ -1310,6 +1310,7 @@ export class Player implements IPlayer {
 
     const playableCards: Array<PlayableCard> = [];
     for (const card of candidateCards) {
+      card.warnings.clear();
       const canPlay = this.canPlay(card);
       if (canPlay !== false) {
         playableCards.push({

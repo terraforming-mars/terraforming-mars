@@ -78,7 +78,7 @@ export default Vue.extend({
         <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
             <span> Self-Replicating Robots cards </span>
             <div>
-                <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [CardType.ACTIVE])" :key="card.name" class="cardbox">
+                <div v-for="card in player.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
                     <Card :card="card" />
                 </div>
             </div>

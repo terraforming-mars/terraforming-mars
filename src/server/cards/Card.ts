@@ -126,7 +126,22 @@ export abstract class Card implements ICard {
 
     const translatedRequirements = asArray(external.requirements ?? []).map((req) => populateCount(req));
     const compiledRequirements = CardRequirements.compile(translatedRequirements);
-    const tilesBuilt = external.tilesBuilt ?? (external.behavior?.tile?.type ? [external.behavior.tile.type] : []);
+    const tilesBuilt = [...external.tilesBuilt ?? []];
+    if (external.behavior?.tile?.type !== undefined) {
+      tilesBuilt.push(external.behavior?.tile.type);
+    }
+    if (external.behavior?.moon?.tile?.type !== undefined) {
+      tilesBuilt.push(external.behavior.moon.tile.type);
+    }
+    if (external.behavior?.moon?.habitatTile !== undefined) {
+      tilesBuilt.push(TileType.MOON_HABITAT);
+    }
+    if (external.behavior?.moon?.mineTile !== undefined) {
+      tilesBuilt.push(TileType.MOON_MINE);
+    }
+    if (external.behavior?.moon?.roadTile !== undefined) {
+      tilesBuilt.push(TileType.MOON_ROAD);
+    }
 
     const internal: InternalProperties = {
       ...external,
@@ -355,9 +370,22 @@ export abstract class Card implements ICard {
   }
 
   private static validateTilesBuilt(properties: StaticCardProperties) {
-    const tileType = properties.behavior?.tile?.type;
-    if (tileType !== undefined && properties.tilesBuilt !== undefined) {
-      throw new Error('tilesBuilt and properties.tile.tileType both defined: ' + properties.name);
+    if (properties.tilesBuilt !== undefined) {
+      if (properties.behavior?.tile?.type !== undefined) {
+        throw new Error('tilesBuilt and behavior.tile.tileType both defined: ' + properties.name);
+      }
+      if (properties.behavior?.moon?.tile?.type !== undefined) {
+        throw new Error('tilesBuilt and behavior.moon.tile.tileType both defined: ' + properties.name);
+      }
+      if (properties.behavior?.moon?.habitatTile !== undefined) {
+        throw new Error('tilesBuilt and behavior.moon.habitatTile both defined: ' + properties.name);
+      }
+      if (properties.behavior?.moon?.mineTile !== undefined) {
+        throw new Error('tilesBuilt and behavior.moon.mineTile both defined: ' + properties.name);
+      }
+      if (properties.behavior?.moon?.roadTile !== undefined) {
+        throw new Error('tilesBuilt and behavior.moon.roadTile both defined: ' + properties.name);
+      }
     }
   }
 

@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonSpaces} from '../../../common/moon/MoonSpaces';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -35,7 +34,6 @@ export class MomentumViriumHabitat extends Card {
           b.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).asterix();
         }),
       },
-      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

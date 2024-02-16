@@ -4,7 +4,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../../common/moon/MoonSpaces';
-import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -33,7 +32,6 @@ export class MareNectarisMine extends Card implements IProjectCard {
           b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
-      tilesBuilt: [TileType.MOON_MINE],
     });
   }
 }

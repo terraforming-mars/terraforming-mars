@@ -85,7 +85,7 @@ import {Nightclubs} from './Nightclubs';
 import {OffWorldTaxHaven} from './OffWorldTaxHaven';
 import {OldWorldMafia} from './OldWorldMafia';
 import {OrbitalLaserDrill} from './OrbitalLaserDrill';
-// import {PatentManipulation} from './PatentManipulation';
+import {PatentManipulation} from './PatentManipulation';
 import {PersonalSpacecruiser} from './PersonalSpacecruiser';
 import {PlanetaryRightsBuyout} from './PlanetaryRightsBuyout';
 import {PlantTax} from './PlantTax';
@@ -161,7 +161,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SEARCH_FOR_LIFE_UNDERGROUND]: {Factory: SearchforLifeUnderground},
     [CardName.GEOTHERMAL_NETWORK]: {Factory: GeothermalNetwork},
     [CardName.GLOBAL_AUDIT]: {Factory: GlobalAudit},
-    // [CardName.PATENT_MANIPULATION]: {Factory: PatentManipulation}, // Just don't want to deal with it.
+    [CardName.PATENT_MANIPULATION]: {Factory: PatentManipulation}, // Just don't want to deal with it.
     [CardName.CAVE_CITY]: {Factory: CaveCity},
     // // 28-36
     [CardName.UNDERGROUND_SMUGGLING_RING]: {Factory: UndergroundSmugglingRing},

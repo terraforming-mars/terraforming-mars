@@ -8,27 +8,33 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {isSpecialTile} from '../../boards/Board';
 
-export class AstraMechanica extends Card implements IProjectCard {
+export class PatentManipulation extends Card implements IProjectCard {
   constructor() {
     super({
-      type: CardType.AUTOMATED,
-      name: CardName.ASTRA_MECHANICA,
-      tags: [Tag.SCIENCE],
+      type: CardType.EVENT,
+      name: CardName.PATENT_MANIPULATION,
       cost: 7,
+
+      requirements: {corruption: 1},
+      victoryPoints: -2,
 
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.cards(2, {secondaryTag: Tag.EVENT}).asterix();
         }),
-        description: 'RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.',
+        description: 'RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.',
       },
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer) {
+    return this.getCards(player).length > 0;
+  }
+
   private getCards(player: IPlayer): ReadonlyArray<IProjectCard> {
     return player.playedCards.filter((card) => {
-      if (card.type !== CardType.EVENT) {
+      if (card.type !== CardType.AUTOMATED && card.type !== CardType.ACTIVE) {
         return false;
       }
       if (card.tilesBuilt.some(isSpecialTile)) {
@@ -38,21 +44,17 @@ export class AstraMechanica extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer) {
-    return this.getCards(player).length > 0;
-  }
-
+  // TODO(kberg): much of this card is a duplicate of Astra Mechanica.
   public override bespokePlay(player: IPlayer) {
-    const events = this.getCards(player);
-    if (events.length === 0) {
-      player.game.log('${0} had no events', (b) => b.player(player));
+    const candidates = this.getCards(player);
+    if (candidates.length === 0) {
+      player.game.log('${0} had no collectable green or blue project cards', (b) => b.player(player));
       return undefined;
     }
     return new SelectCard(
-      'Select up to 2 events to return to your hand',
+      'Select 1 card to return to your hand',
       'Select',
-      events,
-      {max: 2, min: 0})
+      candidates)
       .andThen(
         (cards) => {
           for (const card of cards) {

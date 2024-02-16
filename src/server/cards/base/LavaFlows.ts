@@ -23,7 +23,6 @@ export class LavaFlows extends Card implements IProjectCard {
       name,
       cost: 18,
       adjacencyBonus,
-      tilesBuilt: [TileType.LAVA_FLOWS],
 
       behavior: {
         global: {temperature: 2},

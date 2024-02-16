@@ -24,6 +24,7 @@ export class PreludesExpansion {
     // This preps the warning attribute in preludes.
     // All preludes can be presented. Unplayable ones just fizzle.
     for (const card of cards) {
+      card.warnings.clear();
       if (!card.canPlay(player)) {
         card.warnings.add('preludeFizzle');
       }

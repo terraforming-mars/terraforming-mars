@@ -61,7 +61,7 @@ import {InheritedFortune} from './InheritedFortune';
 import {InvestigativeJournalism} from './InvestigativeJournalism';
 import {InvestorPlaza} from './InvestorPlaza';
 import {JensonBoyleCo} from './JensonBoyleCo';
-// import {Keplertec} from './Keplertec';
+import {Keplertec} from './Keplertec';
 import {KingdomofTauraro} from './KingdomofTauraro';
 // import {LaborTrafficking} from './LaborTrafficking';
 import {LaggingRegulation} from './LaggingRegulation';
@@ -254,7 +254,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.ARBORIST_COLLECTIVE]: {Factory: ArboristCollective},
     [CardName.KINGDOM_OF_TAURARO]: {Factory: KingdomofTauraro},
     [CardName.AERON_GENOMICS]: {Factory: AeronGenomics},
-    // [CardName.KEPLERTEC]: {Factory: Keplertec},
+    [CardName.KEPLERTEC]: {Factory: Keplertec},
     [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: 'venus'},
     // // [CardName.ARES_MEDIA]: {Factory: AresMedia}, // Not another events are up card.
     // [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities},

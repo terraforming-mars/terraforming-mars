@@ -381,14 +381,15 @@ export class UnderworldExpansion {
     inplaceShuffle(game.underworldData.tokens, game.rng);
   }
 
+  /** Add the set of tokens to the pool, and then shuffle the pool */
+  static addTokens(game: IGame, tokens: Array<UndergroundResourceToken>) {
+    if (game.underworldData === undefined) {
+      return;
+    }
+    game.underworldData.tokens.push(...tokens);
+    inplaceShuffle(game.underworldData.tokens, game.rng);
+  }
 
-  //   static addTokens(game: IGame, tokens: Array<UndergroundResourceToken>) {
-  //     if (game.underworldData === undefined) {
-  //       return;
-  //     }
-  //     game.underworldData.tokens.push(...tokens);
-  //     inplaceShuffle(game.underworldData.tokens, game.rng);
-  //   }
   static excavationMarkerCount(player: IPlayer): number {
     return this.excavatedSpaces(player).length;
   }

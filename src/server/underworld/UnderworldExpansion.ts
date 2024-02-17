@@ -368,18 +368,18 @@ export class UnderworldExpansion {
     game.log('All unidentified underground resources have been shuffled back into the pile.');
   }
 
-  //   static removeUnclaimedToken(game: IGame, space: Space) {
-  //     if (game.underworldData === undefined) {
-  //       return;
-  //     }
-  //     if (space.undergroundResources !== undefined && space.excavator === undefined) {
-  //       game.underworldData.tokens.push(space.undergroundResources);
-  //       space.undergroundResources = undefined;
-  //     } else {
-  //       throw new Error('Cannot reclaim that space');
-  //     }
-  //     inplaceShuffle(game.underworldData.tokens, game.rng);
-  //   }
+  static removeUnclaimedToken(game: IGame, space: Space) {
+    if (game.underworldData === undefined) {
+      return;
+    }
+    if (space.undergroundResources !== undefined && space.excavator === undefined) {
+      game.underworldData.tokens.push(space.undergroundResources);
+      space.undergroundResources = undefined;
+    } else {
+      throw new Error('Cannot reclaim that space');
+    }
+    inplaceShuffle(game.underworldData.tokens, game.rng);
+  }
 
 
   //   static addTokens(game: IGame, tokens: Array<UndergroundResourceToken>) {

@@ -633,7 +633,7 @@ describe('UnderworldExpansion', function() {
     expect(privateMilitaryContractor.resourceCount).eq(1);
   });
 
-  it('removeUnclaimedToken', () => {
+  it('removeAllUnclaimedTokens', () => {
     const board = game.board;
     const space = board.getSpace('30');
     const space2 = board.getSpace('31');
@@ -655,5 +655,29 @@ describe('UnderworldExpansion', function() {
     expect(space2.excavator).eq(player1);
     expect(space2.undergroundResources).eq('card2');
     expect(game.underworldData.tokens).to.have.members(['card1', 'corruption1']);
+  });
+
+  it('removeUnclaimedToken', () => {
+    const board = game.board;
+    const space = board.getSpace('30');
+    const space2 = board.getSpace('31');
+    const space3 = board.getSpace('32');
+
+    space.undergroundResources = 'card1';
+
+    space2.excavator = player1;
+    space2.undergroundResources = 'card2';
+
+    space3.undergroundResources = 'corruption1',
+    game.underworldData.tokens = [];
+
+    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space, space2, space3]);
+
+    UnderworldExpansion.removeUnclaimedToken(game, space);
+
+    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space2, space3]);
+    expect(space2.excavator).eq(player1);
+    expect(space2.undergroundResources).eq('card2');
+    expect(game.underworldData.tokens).to.have.members(['card1']);
   });
 });

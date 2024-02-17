@@ -12,9 +12,10 @@ import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansi
 import {oneWayDifference} from '../../src/common/utils/utils';
 import {Luna} from '../../src/server/colonies/Luna';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
+import {Space} from '../../src/server/boards/Space';
 
 export class UnderworldTestHelper {
-  public static assertIsExcavationAction(player: TestPlayer, input: PlayerInput | undefined, ignorePlacementRestrictions: boolean = false) {
+  public static assertIsExcavationAction(player: TestPlayer, input: PlayerInput | undefined, ignorePlacementRestrictions: boolean = false, _space: Space | undefined = undefined) {
     const selectSpace = cast(input, SelectSpace);
     const candidateSpaces = selectSpace.spaces;
 
@@ -23,7 +24,10 @@ export class UnderworldTestHelper {
       expect(oneWayDifference(candidateSpaces, strictlyExcavatableSpaces)).is.not.empty;
     }
 
-    const space = selectSpace.spaces[0];
+    if (_space !== undefined) {
+      expect(selectSpace.spaces).includes(_space);
+    }
+    const space = _space ?? selectSpace.spaces[0];
 
     expect(space.excavator).is.undefined;
 

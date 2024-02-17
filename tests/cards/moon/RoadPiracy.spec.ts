@@ -105,7 +105,6 @@ describe('RoadPiracy', () => {
     expect(player3.titanium).eq(3);
   });
 
-
   it('Select too many overall', () => {
     player2.titanium = 2;
     player3.titanium = 5;

@@ -44,7 +44,7 @@ export class RoadPiracy extends Card implements IProjectCard {
       if (opponent === player) {
         continue;
       }
-      if (opponent.stock.get(resource) > 0) {
+      if (opponent.stock.get(resource) > 0 && !opponent.alloysAreProtected()) {
         const selectAmount =
           new SelectAmount(
             message('${0}', (b) => b.player(opponent)), undefined, 0, opponent.stock.get(resource))

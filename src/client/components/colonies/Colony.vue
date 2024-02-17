@@ -118,6 +118,7 @@ import ColonyTradeRow from '@/client/components/colonies/ColonyTradeRow.vue';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
 import {Resource} from '@/common/Resource';
+import {translateText} from '@/client/directives/i18n';
 
 export default Vue.extend({
   name: 'colony',
@@ -178,10 +179,12 @@ export default Vue.extend({
       return this.colony.name.replace(' ', '-') + '-background';
     },
     tooltip(): string {
-      const description = this.metadata.description;
-      return `Build Colony bonus: ${description[0]}
-Trade bonus: ${description[1]}
-Colony bonus: ${description[2]}`;
+      const descriptions = this.metadata.description.map(translateText);
+      const titles = ['Build Colony bonus', 'Trade bonus', 'Colony bonus'].map(translateText);
+
+      return `${titles[0]}: ${descriptions[0]}
+${titles[1]}: ${descriptions[1]}
+${titles[2]}: ${descriptions[2]}`;
     },
     ColonyName(): typeof ColonyName {
       return ColonyName;

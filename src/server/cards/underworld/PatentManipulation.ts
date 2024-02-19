@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
@@ -21,9 +20,9 @@ export class PatentManipulation extends Card implements IProjectCard {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.cards(2, {secondaryTag: Tag.EVENT}).asterix();
+          b.cards(1).asterix(); // TODO(kberg): add altsecondarytag.green, and show both blue and green tags.
         }),
-        description: 'RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.',
+        description: 'RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES OR RETURN PLAYED CARDS TO YOUR HAND.',
       },
     });
   }
@@ -35,6 +34,9 @@ export class PatentManipulation extends Card implements IProjectCard {
   private getCards(player: IPlayer): ReadonlyArray<IProjectCard> {
     return player.playedCards.filter((card) => {
       if (card.type !== CardType.AUTOMATED && card.type !== CardType.ACTIVE) {
+        return false;
+      }
+      if (card.name === CardName.ASTRA_MECHANICA) {
         return false;
       }
       if (card.tilesBuilt.some(isSpecialTile)) {

@@ -9,6 +9,7 @@ import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {BribedCommittee} from '../../../src/server/cards/base/BribedCommittee';
 import {MoholeArea} from '../../../src/server/cards/base/MoholeArea';
+import {AstraMechanica} from '../../../src/server/cards/promo/AstraMechanica';
 
 describe('PatentManipulation', () => {
   const canPlayRuns = [
@@ -38,7 +39,8 @@ describe('PatentManipulation', () => {
     const aiCentral = new AICentral();
     const bribedCommittee = new BribedCommittee();
     const moholeArea = new MoholeArea();
-    player.playedCards = [microMills, aiCentral, bribedCommittee, moholeArea];
+    const astraMechanica = new AstraMechanica();
+    player.playedCards = [microMills, aiCentral, bribedCommittee, moholeArea, astraMechanica];
     player.cardsInHand = [];
     const selectCard = cast(card.play(player), SelectCard);
 
@@ -46,7 +48,7 @@ describe('PatentManipulation', () => {
 
     selectCard.cb([microMills]);
 
-    expect(player.playedCards).to.have.members([aiCentral, bribedCommittee, moholeArea]);
+    expect(player.playedCards).to.have.members([aiCentral, bribedCommittee, moholeArea, astraMechanica]);
     expect(player.cardsInHand).to.have.members([microMills]);
   });
 });

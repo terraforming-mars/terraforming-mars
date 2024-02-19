@@ -4,7 +4,7 @@ import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventN
 
 import {AeronGenomics} from './AeronGenomics';
 import {AntiTrustCrackdown} from './AntiTrustCrackdown';
-// import {AnubisSecurities} from './AnubisSecurities';
+import {AnubisSecurities} from './AnubisSecurities';
 import {ArboristCollective} from './ArboristCollective';
 // // import {AresMedia} from './AresMedia';
 import {ArtesianAquifer} from './ArtesianAquifer';
@@ -257,7 +257,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.KEPLERTEC]: {Factory: Keplertec},
     [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: 'venus'},
     // // [CardName.ARES_MEDIA]: {Factory: AresMedia}, // Not another events are up card.
-    // [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities},
+    [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities},
     [CardName.HECATE_SPEDITIONS]: {Factory: HecateSpeditions, compatibility: 'colonies'},
   },
 

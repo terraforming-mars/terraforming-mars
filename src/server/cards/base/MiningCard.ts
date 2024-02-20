@@ -14,6 +14,11 @@ import {TileType} from '../../../common/TileType';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
 
 export abstract class MiningCard extends Card implements IProjectCard {
+  public bonusResource?: Array<Resource>;
+  protected abstract readonly title: string;
+  protected readonly isAres: boolean = false;
+  protected readonly placeTile: boolean = true;
+
   constructor(
     name: CardName,
     cost: number,
@@ -26,36 +31,25 @@ export abstract class MiningCard extends Card implements IProjectCard {
       metadata,
     });
   }
-  public bonusResource?: Array<Resource>;
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
     return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
-  private isAres(): boolean {
-    return this.name === CardName.MINING_AREA_ARES ||
-               this.name === CardName.MINING_RIGHTS_ARES;
-  }
+
   private getAdjacencyBonus(bonusType: SpaceBonus): AdjacencyBonus | undefined {
-    if (this.isAres()) {
+    if (this.isAres) {
       return {bonus: [bonusType]};
     }
     return undefined;
   }
-  protected getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): Array<Space> {
+  protected getAvailableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       // Ares-only: exclude spaces already covered (which is only returned if the tile is a hazard tile.)
       .filter((space) => space.tile === undefined)
       .filter((space) => space.bonus.includes(SpaceBonus.STEEL) || space.bonus.includes(SpaceBonus.TITANIUM));
   }
-  private getSelectTitle(): string {
-    let result = 'Select a space with a steel or titanium bonus';
-    if (this.name === CardName.MINING_AREA || this.name === CardName.MINING_AREA_ARES) {
-      result += ' adjacent to one of your tiles';
-    }
-    return result;
-  }
 
   private getTileType(bonus: SpaceBonus.STEEL | SpaceBonus.TITANIUM): TileType {
-    if (this.isAres()) {
+    if (this.isAres) {
       return bonus === SpaceBonus.STEEL ? TileType.MINING_STEEL_BONUS : TileType.MINING_TITANIUM_BONUS;
     }
     if (this.name === CardName.MINING_RIGHTS) {
@@ -71,7 +65,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer): SelectSpace {
-    return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player))
+    return new SelectSpace(this.title, this.getAvailableSpaces(player))
       .andThen((space) => {
         const bonusResources = [];
         if (space.bonus.includes(SpaceBonus.STEEL)) {
@@ -89,9 +83,11 @@ export abstract class MiningCard extends Card implements IProjectCard {
           .andThen((resource) => {
             player.production.add(resource, 1, {log: true});
             this.bonusResource = [resource];
-            const spaceBonus = resource === Resource.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
-            player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
-            space.adjacency = this.getAdjacencyBonus(spaceBonus);
+            if (this.placeTile) {
+              const spaceBonus = resource === Resource.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
+              player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
+              space.adjacency = this.getAdjacencyBonus(spaceBonus);
+            }
           });
         return undefined;
       });

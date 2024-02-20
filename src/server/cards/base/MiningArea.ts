@@ -5,6 +5,8 @@ import {MiningCard} from './MiningCard';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningArea extends MiningCard {
+  protected readonly title = 'Select a space with a steel or titanium bonus adjacent to one of your tiles';
+
   constructor(
     name = CardName.MINING_AREA,
     metadata = {
@@ -23,6 +25,7 @@ export class MiningArea extends MiningCard {
       metadata,
     );
   }
+
   protected override getAvailableSpaces(player: IPlayer, canAffordOptions: CanAffordOptions) {
     return super.getAvailableSpaces(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player));

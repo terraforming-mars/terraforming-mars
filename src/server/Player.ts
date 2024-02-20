@@ -1095,13 +1095,13 @@ export class Player implements IPlayer {
       const diff = this.cardsInHand.length * this.cardCost;
       this.stock.deduct(Resource.MEGACREDITS, diff);
     }
+    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     // Calculating this before playing the corporation card, which might change the player's hand size.
     const numberOfCardInHand = this.cardsInHand.length;
     corporationCard.play(this);
     if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
       this.pendingInitialActions.push(corporationCard);
     }
-    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     if (additionalCorp === false) {
       this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(numberOfCardInHand));
     }

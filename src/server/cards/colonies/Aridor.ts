@@ -33,6 +33,23 @@ export class Aridor extends CorporationCard {
     });
   }
   public allTags = new Set<Tag>();
+
+  private tagsForCard(card: ICard): Array<Tag> {
+    if (card.type === CardType.EVENT) {
+      return [];
+    }
+    return card.tags.filter((tag) => tag !== Tag.WILD);
+  }
+
+  public override bespokePlay(player: IPlayer) {
+    for (const card of player.tableau) {
+      for (const tag of this.tagsForCard(card)) {
+        this.allTags.add(tag);
+      }
+    }
+    return undefined;
+  }
+
   public initialAction(player: IPlayer) {
     ColoniesHandler.addColonyTile(
       player,
@@ -46,17 +63,14 @@ export class Aridor extends CorporationCard {
   }
 
   public onCardPlayed(player: IPlayer, card: ICard) {
-    if (
-      card.type === CardType.EVENT ||
-      card.tags.filter((tag) => tag !== Tag.WILD).length === 0 ||
-      !player.isCorporation(this.name)) {
+    if (!player.isCorporation(this.name)) {
       return;
     }
-
-    for (const tag of card.tags.filter((tag) => tag !== Tag.WILD)) {
+    for (const tag of this.tagsForCard(card)) {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {
+        player.game.log('${0} gained 1 MC production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
         player.production.add(Resource.MEGACREDITS, 1, {log: true});
       }
     }

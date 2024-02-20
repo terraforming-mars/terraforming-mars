@@ -172,7 +172,7 @@ export default Vue.extend({
     }
 
     // Put them in order.
-    const tagsInOrder: Array<TagDetail> = [];
+    const tagsInOrder = [];
     for (const tag of ORDER) {
       const entry = details[tag];
       tagsInOrder.push(entry);

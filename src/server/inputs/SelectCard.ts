@@ -69,7 +69,7 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<Array<T>> {
     if (input.cards.length > this.config.max) {
       throw new Error('Too many cards selected');
     }
-    const cards: Array<T> = [];
+    const cards = [];
     for (const cardName of input.cards) {
       const {card, idx} = getCardFromPlayerInput(this.cards, cardName);
       cards.push(card);

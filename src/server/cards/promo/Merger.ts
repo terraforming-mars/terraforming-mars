@@ -58,7 +58,7 @@ export class Merger extends PreludeCard {
   }
 
   private static dealCorporations(player: IPlayer, corporationDeck: CorporationDeck) {
-    const cards: Array<ICorporationCard> = [];
+    const cards = [];
     try {
       while (cards.length < 4) {
         cards.push(corporationDeck.drawLegacy(player.game));

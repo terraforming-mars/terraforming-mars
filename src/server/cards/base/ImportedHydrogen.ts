@@ -53,7 +53,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       return gainPlants();
     }
 
-    const availableActions: Array<PlayerInput> = [];
+    const availableActions = [];
 
     const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);

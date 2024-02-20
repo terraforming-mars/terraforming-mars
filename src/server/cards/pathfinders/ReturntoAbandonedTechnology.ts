@@ -30,7 +30,7 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const cards: Array<IProjectCard> = [];
+    const cards = [];
     for (let idx = 0; idx < 4; idx++) {
       const card = player.game.projectDeck.discardPile.pop();
       if (card === undefined) break;

@@ -44,7 +44,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
   }
 
   public action(player: IPlayer) {
-    const opts: Array<SelectOption> = [];
+    const opts = [];
 
     const addResource = new SelectOption('Spend one titanium to add 2 floaters to this card', 'Spend titanium').andThen(() => this.addResource(player));
     const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters').andThen(() => this.spendResource(player));

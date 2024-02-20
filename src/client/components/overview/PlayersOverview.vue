@@ -58,7 +58,7 @@ export default Vue.extend({
         return players;
       }
 
-      let result: Array<PublicPlayerModel> = [];
+      let result = [];
       let currentPlayerOffset = 0;
       const currentPlayerIndex = playerIndex(
         this.thisPlayer.color,

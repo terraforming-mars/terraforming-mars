@@ -8,7 +8,6 @@ import {played} from '../Options';
 import {IActionCard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
-import {PlayableCard} from '../IProjectCard';
 
 export class Odyssey extends CorporationCard implements IActionCard {
   constructor() {
@@ -43,7 +42,7 @@ export class Odyssey extends CorporationCard implements IActionCard {
   private availableEventCards(player: IPlayer) {
     this.checkLoops++;
     try {
-      const array: Array<PlayableCard> = [];
+      const array = [];
       for (const card of player.playedCards) {
         // Special case Price Wars, which is not easy to work with.
         if (card.name === CardName.PRICE_WARS) {

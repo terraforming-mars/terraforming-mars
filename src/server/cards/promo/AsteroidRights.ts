@@ -8,7 +8,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {LogHelper} from '../../LogHelper';
-import {PlayerInput} from '../../PlayerInput';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -94,7 +93,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
       return addAsteroidOption;
     }
 
-    const opts: Array<PlayerInput> = [];
+    const opts = [];
     opts.push(gainTitaniumOption);
     opts.push(increaseMcProdOption);
     asteroidCards.length === 1 ? opts.push(addAsteroidToSelf) : opts.push(addAsteroidOption);

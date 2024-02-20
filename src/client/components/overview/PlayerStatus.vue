@@ -37,7 +37,7 @@ export default Vue.extend({
   },
   methods: {
     getLabelAndTimerClasses(): string {
-      const classes: Array<string> = [];
+      const classes = [];
       const baseClass = 'player-action-status-container';
       classes.push(baseClass);
       if (!this.showTimer) {

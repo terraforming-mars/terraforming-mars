@@ -32,7 +32,7 @@ describe('Engineer', () => {
 
   // A good way to prevent future failures is to duplicate the Robotic Workforce style of test.
   it('verify if production cards list is accurate', () => {
-    const failures: Array<string> = [];
+    const failures = [];
     const cardFinder = new CardFinder();
     for (const cardName of BESPOKE_PRODUCTION_CARDS) {
       const card = cardFinder.getCardByName(cardName)!;

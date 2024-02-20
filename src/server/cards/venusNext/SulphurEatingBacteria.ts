@@ -1,5 +1,4 @@
 import {IActionCard} from '../ICard';
-import {PlayerInput} from '../../PlayerInput';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
@@ -40,7 +39,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
     return true;
   }
   public action(player: IPlayer) {
-    const opts: Array<PlayerInput> = [];
+    const opts = [];
 
     const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe').andThen(() => {
       player.addResourceTo(this, {log: true});

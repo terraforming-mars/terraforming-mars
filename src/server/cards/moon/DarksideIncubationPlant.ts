@@ -54,7 +54,7 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
   }
 
   public action(player: IPlayer) {
-    const options: Array<SelectOption> = [];
+    const options = [];
     MoonExpansion.ifMoon(player.game, (moonData) => {
       if (this.canRaiseHabitatRate(player) && moonData.habitatRate < 8) {
         options.push(new SelectOption('Spend 2 microbes to raise the habitat rate 1 step.').andThen(() => {

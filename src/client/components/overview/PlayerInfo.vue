@@ -66,7 +66,7 @@ export default Vue.extend({
       return vueRoot(this).setVisibilityState('pinned_player_' + playerIndex, false);
     },
     pinPlayer() {
-      let hiddenPlayersIndexes: Array<Number> = [];
+      let hiddenPlayersIndexes = [];
       const playerPinned = this.isPinned(this.playerIndex);
 
       // if player is already pinned, add to hidden players (toggle)

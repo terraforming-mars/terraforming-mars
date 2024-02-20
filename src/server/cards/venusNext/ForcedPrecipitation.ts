@@ -45,7 +45,7 @@ export class ForcedPrecipitation extends Card implements IActionCard {
   }
 
   public action(player: IPlayer) {
-    const opts: Array<SelectOption> = [];
+    const opts = [];
 
     const addResource = new SelectOption('Pay 2 M€ to add 1 floater to this card', 'Pay').andThen(() => this.addResource(player));
     const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters').andThen(() => this.spendResource(player));

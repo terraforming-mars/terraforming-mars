@@ -28,7 +28,7 @@ export function deserializeFundedAwards(
   awards: Array<IAward>): Array<FundedAward> {
   // Remove duplicates
   const aw = new Set<AwardName>();
-  const filtered: Array<Required<SerializedFundedAward>> = [];
+  const filtered = [];
   for (const fundedAward of fundedAwards) {
     const name = fundedAward.name;
     if (name === undefined) {

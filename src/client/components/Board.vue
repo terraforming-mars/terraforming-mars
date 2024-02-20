@@ -385,7 +385,7 @@ export default Vue.extend({
       throw new Error('Board space not found by id \'' + spaceId + '\'');
     },
     getValuesForParameter(targetParameter: string): Array<GlobalParamLevel> {
-      const values: Array<GlobalParamLevel> = [];
+      const values = [];
       let startValue: number;
       let endValue: number;
       let step: number;

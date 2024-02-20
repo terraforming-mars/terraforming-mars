@@ -47,7 +47,7 @@ export class TitanAirScrapping extends Card implements IProjectCard {
   }
 
   public action(player: IPlayer) {
-    const opts: Array<SelectOption> = [];
+    const opts = [];
 
     const addResource = new SelectOption('Spend 1 titanium to add 2 floaters on this card', 'Spend titanium').andThen(() => this.addResource(player));
     const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters').andThen(() => this.spendResource(player));

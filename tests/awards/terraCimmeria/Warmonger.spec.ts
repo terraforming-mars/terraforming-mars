@@ -32,7 +32,7 @@ describe('Warmonger', () => {
 
   // A good way to prevent future failures is to duplicate the Robotic Workforce style of test.
   it('verify if attack cards list is accurate', () => {
-    const failures: Array<string> = [];
+    const failures = [];
     const cardFinder = new CardFinder();
     for (const cardName of Warmonger.attackCards) {
       const card = cardFinder.getCardByName(cardName);

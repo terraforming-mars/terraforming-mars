@@ -280,7 +280,7 @@ export default Vue.extend({
       });
     },
     globalsDataset(): Array<DataSet> {
-      const dataset: Array<DataSet> = [];
+      const dataset = [];
 
       const gpg = this.game.globalsPerGeneration;
       function getValues(param: GlobalParameter, min: number, max: number): Array<number> {

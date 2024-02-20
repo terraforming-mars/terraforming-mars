@@ -38,7 +38,7 @@ export class RoadPiracy extends Card implements IProjectCard {
   }
 
   private generateOption(player: IPlayer, resource: Resource, title: Message, limit: number) {
-    const selectAmounts: Array<SelectAmount> = [];
+    const selectAmounts = [];
     const ledger: Map<IPlayer, number> = new Map();
     for (const opponent of player.game.getPlayers()) {
       if (opponent === player) {

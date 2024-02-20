@@ -29,7 +29,7 @@ export function deserializeClaimedMilestones(
   milestones: Array<IMilestone>): Array<ClaimedMilestone> {
   // Remove duplicates
   const ms = new Set<MilestoneName>();
-  const filtered: Array<Required<SerializedClaimedMilestone>> = [];
+  const filtered = [];
   for (const claimedMilestone of claimedMilestones) {
     const name = claimedMilestone.name;
     if (name === undefined) {

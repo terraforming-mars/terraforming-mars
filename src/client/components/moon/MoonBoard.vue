@@ -138,7 +138,7 @@ export default Vue.extend({
         throw new Error('Wrong parameter to get values from: ' + targetParameter);
       }
 
-      const values: Array<MoonParamLevel> = [];
+      const values = [];
       for (let value = 8; value >= 0; value -= 1) {
         values.push({
           value: value,

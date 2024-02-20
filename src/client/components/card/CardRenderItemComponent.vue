@@ -40,7 +40,7 @@ export default Vue.extend({
       return this.item.secondaryTag !== undefined ? 'card-resource--has-secondary-tag' : 'card-resource';
     },
     componentClasses(): ReadonlyArray<string> {
-      let classes: Array<string> = [];
+      let classes = [];
       switch (this.item.type) {
       case CardRenderItemType.TEMPERATURE:
         classes.push('card-global-requirement', 'card-temperature-global-requirement');

@@ -670,7 +670,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const component: CreateGameModel = this;
 
       reader.addEventListener('load', function() {
-        const warnings: Array<string> = [];
+        const warnings = [];
         try {
           const readerResults = reader.result;
           if (typeof(readerResults) === 'string') {
@@ -1192,7 +1192,7 @@ export default (Vue as WithRefs<Refs>).extend({
 });
 
 function validatePlayers(players: Array<NewPlayerModel>): Array<string> {
-  const errors: Array<string> = [];
+  const errors = [];
 
   // Ensure indexes are distinct, and start from 1..
   const indexes = players.map((p) => p.index).sort();

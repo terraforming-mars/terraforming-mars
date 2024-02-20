@@ -115,7 +115,7 @@ export default (Vue as WithRefs<Refs>).extend({
       });
     },
     getSelectableSpaces(): Array<HTMLElement> {
-      const spaces: Array<HTMLElement> = [];
+      const spaces = [];
 
       const regions = ['main_board', 'moon_board', 'colony_spaces'];
       for (const region of regions) {

@@ -422,7 +422,7 @@ export default Vue.extend({
       return classes.join(' ');
     },
     getFleetsCountRange(player: PublicPlayerModel): Array<number> {
-      const fleetsRange: Array<number> = [];
+      const fleetsRange = [];
       for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);
       }

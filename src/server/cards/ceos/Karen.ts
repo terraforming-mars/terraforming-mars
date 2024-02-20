@@ -3,7 +3,6 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {IPreludeCard} from '../prelude/IPreludeCard';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
 export class Karen extends CeoCard {
@@ -23,7 +22,7 @@ export class Karen extends CeoCard {
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const cards: Array<IPreludeCard> = [];
+    const cards = [];
     for (let i = 0; i < game.generation; i++) {
       cards.push(game.preludeDeck.drawLegacy(game));
     }

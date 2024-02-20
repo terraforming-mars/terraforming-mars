@@ -1,7 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Size} from '../../../common/cards/render/Size';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {LogHelper} from '../../LogHelper';
@@ -49,7 +48,7 @@ export class JunkVentures extends CorporationCard {
     const game = player.game;
     game.projectDeck.shuffleDiscardPile();
 
-    const cards: Array<IProjectCard> = [];
+    const cards = [];
     for (let idx = 0; idx < 3; idx++) {
       const card = player.game.projectDeck.discardPile.pop();
       if (card === undefined) {

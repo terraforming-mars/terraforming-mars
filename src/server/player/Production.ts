@@ -84,27 +84,27 @@ export class Production {
   }
 
   public adjust(units: Units, options?: {log: boolean, from?: IPlayer}) {
-    if (units.megacredits !== undefined) {
+    if (units.megacredits !== 0) {
       this.add(Resource.MEGACREDITS, units.megacredits, options);
     }
 
-    if (units.steel !== undefined) {
+    if (units.steel !== 0) {
       this.add(Resource.STEEL, units.steel, options);
     }
 
-    if (units.titanium !== undefined) {
+    if (units.titanium !== 0) {
       this.add(Resource.TITANIUM, units.titanium, options);
     }
 
-    if (units.plants !== undefined) {
+    if (units.plants !== 0) {
       this.add(Resource.PLANTS, units.plants, options);
     }
 
-    if (units.energy !== undefined) {
+    if (units.energy !== 0) {
       this.add(Resource.ENERGY, units.energy, options);
     }
 
-    if (units.heat !== undefined) {
+    if (units.heat !== 0) {
       this.add(Resource.HEAT, units.heat, options);
     }
   }

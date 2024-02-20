@@ -33,28 +33,26 @@ describe('MiningAreaAres', function() {
 
     const action = cast(card.play(player), SelectSpace);
 
-    const titaniumSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
-    expect(titaniumSpace).is.not.undefined;
-    expect(titaniumSpace!.bonus[0]).equal(SpaceBonus.TITANIUM);
+    const titaniumSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false)!;
+    expect(titaniumSpace.bonus[0]).equal(SpaceBonus.TITANIUM);
 
-    action.cb(titaniumSpace!);
+    action.cb(titaniumSpace);
     runAllActions(game);
 
-    expect(titaniumSpace!.player).to.eq(player);
-    expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_TITANIUM_BONUS);
+    expect(titaniumSpace.player).to.eq(player);
+    expect(titaniumSpace.tile?.tileType).to.eq(TileType.MINING_TITANIUM_BONUS);
     expect(player.production.titanium).to.eq(1);
-    expect(titaniumSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.TITANIUM]});
+    expect(titaniumSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.TITANIUM]});
 
-    const steelSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
-    expect(steelSpace).is.not.undefined;
-    expect(steelSpace!.bonus[0]).equal(SpaceBonus.STEEL);
+    const steelSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL))!;
+    expect(steelSpace.bonus[0]).equal(SpaceBonus.STEEL);
 
-    action.cb(steelSpace!);
+    action.cb(steelSpace);
     runAllActions(game);
 
-    expect(steelSpace!.player).to.eq(player);
-    expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_STEEL_BONUS);
+    expect(steelSpace.player).to.eq(player);
+    expect(steelSpace.tile?.tileType).to.eq(TileType.MINING_STEEL_BONUS);
     expect(player.production.titanium).to.eq(1);
-    expect(steelSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
+    expect(steelSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
   });
 });

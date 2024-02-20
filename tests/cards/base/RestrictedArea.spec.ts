@@ -29,7 +29,7 @@ describe('RestrictedArea', function() {
     const space = action.spaces[0];
     action.cb(space);
 
-    expect(space.tile && space.tile.tileType).to.eq(TileType.RESTRICTED_AREA);
+    expect(space.tile?.tileType).to.eq(TileType.RESTRICTED_AREA);
     expect(space.adjacency?.bonus).eq(undefined);
   });
 

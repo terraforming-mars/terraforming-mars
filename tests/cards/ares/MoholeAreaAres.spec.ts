@@ -16,7 +16,7 @@ describe('MoholeAreaAres', function() {
     const space = action.spaces[0];
     action.cb(space);
 
-    expect(space.tile && space.tile.tileType).to.eq(TileType.MOHOLE_AREA);
+    expect(space.tile?.tileType).to.eq(TileType.MOHOLE_AREA);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.HEAT, SpaceBonus.HEAT]});
   });
 });

@@ -10,7 +10,6 @@ import {PlayCardMetadata} from '../inputs/SelectProjectCardToPlay';
 import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
-import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 
 export function cardsToModel(
   player: IPlayer,
@@ -55,8 +54,9 @@ export function cardsToModel(
       discount: discount,
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
     };
-    const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
-    if (isDisabled === true) {
+    if (card.isDisabled) {
+      model.isDisabled = true;
+    } else if (options.enabled?.[index] === false) {
       model.isDisabled = true;
     }
     const reserveUnits = playCardMetadata?.reserveUnits;

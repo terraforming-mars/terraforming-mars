@@ -27,6 +27,7 @@ export default Vue.extend({
     iconClass(): string {
       switch (this.unit) {
       case 'kuiperAsteroids': return 'resource_icon--asteroid';
+      case 'lunaArchivesScience': return 'resource_icon--science';
       // TODO(kberg): remove toLowerCase
       default: return 'resource_icon--' + this.unit.toLowerCase();
       }

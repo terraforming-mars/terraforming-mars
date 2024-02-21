@@ -18,13 +18,13 @@ export class AnubisSecurities extends CorporationCard {
 
       metadata: {
         cardNumber: 'UC11',
-        description: 'You start with 42 M€. As your first action, play a card ignroing global requirements.',
+        description: 'You start with 42 M€. As your first action, play a card ignoring global requirements.',
         renderData: CardRenderer.builder((b) => {
           b.effect('When any player increases their TR by 1, they gain 2 M€.', (eb) => {
             eb.tr(1, {all}).startEffect.megacredits(2, {all});
           }).br;
-          b.text('-X').corruption(1).text('X').megacredits(6).asterix().br;
-          b.text('Y').corruption(1, {all}).colon().text('PAYS').text('Y').megacredits(1).or().tr(1, {size: Size.SMALL}).asterix().br;
+          b.text('-X').corruption(1).megacredits(1, {text: '6X'}).asterix().br;
+          b.text('Y').corruption(1, {all}).colon().plainText('PAYS').megacredits(1, {text: 'Y'}).or(Size.TINY).tr(1, {size: Size.TINY}).asterix().br;
           b.plainText('(At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. ' +
             'Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.)').br;
         }),

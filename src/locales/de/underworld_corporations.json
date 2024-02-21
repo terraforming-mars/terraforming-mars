@@ -6,6 +6,13 @@
 "Action: Spend 1 M€ to move an animal from here to another card.": "AKTION: Bezahle 1 M€, um ein Tier von hier auf eine andere Karte zu bewegen.",
 "You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "Du beginnst mit 35 M€, 5 Stahl und 1 Tierressource auf dieser Karte. 1 VP pro 3 Tiere auf dieser Karte.",
 
+"ANUBIS SECURITIES": "Anubis-Wertpapiere",
+"Anubis Securities": "Anubis-Wertpapiere",
+"Effect: When any player increases their TR by 1, they gain 2 M€.": "EFFEKT: Wenn ein Spieler seinen TW um 1 erhöht, erhält er 2 M€.",
+"PAYS Y": "Zahlen Dir",
+"At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.": "Am Ende der Produktionsphase gibst du deine gesamte Korruption ab und erhältst 6 M€ für jede abgegebene Korruption. Dann muss jeder Spieler 1 M€ pro Korruptionseinheit, die er besitzt, an dich zahlen. Hat niemand Korruption, erhälst du stattdessen 1 TW.",
+"You start with 42 M€. As your first action, play a card ignroing global requirements.": "Du beginnst mit 42 M€. Als deine erste Aktion im Spiel, spiele eine Karte aus, die die globalen Anforderungen ignoriert.",
+  
 "ARBORIST COLLECTIVE": "Arboristen Kollektiv",
 "Arborist Collective": "Arboristen Kollektiv",
 "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "EFFEKT: Nachdem du eine Ereigniskarte mit Grundkosten von 14 oder weniger gespielt hast, lege eine Aktivistenressource auf diese Karte.",
@@ -28,13 +35,19 @@
 "HENKEI GENETICS": "Henkei Gentechnik",
 "Henkei Genetics": "Henkei Gentechnik",
 "Effect: After you play a microbe card that can hold microbes, add 2 microbes to it.": "EFFEKT: Nachdem du eine Mikrobenkarte gespielt hast, die Mikroben aufnehmen kann, füge ihr 2 Mikroben hinzu.",
-"Action: Pay 1 corruption to draw a card with a microbe tag.": "Aktion: Zahle 1 Korruption, um eine Karte mit einem Mikroben-Symbol zu ziehen.",
+"Action: Pay 1 corruption to draw a card with a microbe tag.": "AKTION: Zahle 1 Korruption, um eine Karte mit einem Mikroben-Symbol zu ziehen.",
 "You start with 47 M€ and 1 corruption.": "Du beginnst mit 47 M€ und 1 Koruption.",
 
 "JENSON-BOYLE & CO": "Jenson-Boyle & Co",
 "Jenson-Boyle & Co": "Jenson-Boyle & Co",
-"Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.": "Aktion: Bezahle 1 Korruption, um entweder 4 Stahl, 3 Titan, 3 Pflanzen oder 6 Hitze zu erhalten.",
+"Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.": "AKTION: Bezahle 1 Korruption, um entweder 4 Stahl, 3 Titan, 3 Pflanzen oder 6 Hitze zu erhalten.",
 "You start with 46 M€ and 2 corruption.": "Du beginnst mit 46 M€ und 2 Korruption.",
+
+"KEPLERTEC": "KeplerTec",
+"Keplertec": "KeplerTec",
+"Action: Spend 1 titanium to put a fighter resource on ANY card.": "AKTION: Benutze 1 Titan, um eine Jäger auf eine beliebige Karte zu legen.",
+"Effect: When you place a fighter resource on this card, draw 4 random underground resource tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "EFFEKT: Wenn du eine Jäger auf dieser Karte platzierst, ziehe 4 zufällige unterirdische Ressourcenplättchen. Wähle eine von ihnen und beanspruche die darauf befindliche Belohnung. Dann mischst du die Plättchen zurück in den Stapel.",
+"You start with 33 M€, 3 titanium, and 1 titanium production.": "Du beginnst mit 33 M€, 3 Titan und 1 Titan-Produktion.",
 
 "KINGDOM OF TAURARO": "Königreich von Tauraro",
 "Kingdom of Tauraro": "Königreich von Tauraro",

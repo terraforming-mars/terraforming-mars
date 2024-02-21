@@ -29,6 +29,7 @@ export function isSpaceId(object: string): object is SpaceId {
  * An object of this type are guaranteed safe to serialize and deserialize.
  */
 export type JSONValue =
+    | undefined
     | string
     | number
     | boolean

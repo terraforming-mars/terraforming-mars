@@ -63,7 +63,7 @@ import {InvestorPlaza} from './InvestorPlaza';
 import {JensonBoyleCo} from './JensonBoyleCo';
 import {Keplertec} from './Keplertec';
 import {KingdomofTauraro} from './KingdomofTauraro';
-// import {LaborTrafficking} from './LaborTrafficking';
+import {LaborTrafficking} from './LaborTrafficking';
 import {LaggingRegulation} from './LaggingRegulation';
 import {Landfill} from './Landfill';
 import {LobbyingNetwork} from './LobbyingNetwork';
@@ -148,7 +148,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SUBNAUTIC_PIRATES]: {Factory: SubnauticPirates},
     // // [CardName.SOCIAL_ENGINEERING]: {Factory: SocialEngineering}, // Use another player's action. Not right now.
     [CardName.FABRICATED_SCANDAL]: {Factory: FabricatedScandal},
-    // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking}, // Currently not welel written.
+    [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking},
     [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
     [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},
     [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},

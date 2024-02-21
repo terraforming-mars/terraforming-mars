@@ -21,7 +21,7 @@ export class AstraMechanica extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.cards(2, {secondaryTag: Tag.EVENT}).asterix();
           b.br;
-          b.text('Fan note: You may not choose cards that return cards to your hand.');
+          b.plainText('Fan note: You may not choose cards that return cards to your hand.');
         }),
         description: 'RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.',
       },

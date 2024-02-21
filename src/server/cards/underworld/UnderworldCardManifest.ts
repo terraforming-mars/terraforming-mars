@@ -77,7 +77,7 @@ import {Microgravimetry} from './Microgravimetry';
 import {MicroprobingTechnology} from './MicroprobingTechnology';
 import {MigrationUnderground} from './MigrationUnderground';
 import {MiningMarketInsider} from './MiningMarketInsider';
-// import {Monopoly} from './Monopoly';
+import {Monopoly} from './Monopoly';
 import {Nanofoundry} from './Nanofoundry';
 import {NarrativeSpin} from './NarrativeSpin';
 // // import {Neutrinograph} from './Neutrinograph';
@@ -205,7 +205,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.PRICE_WARS]: {Factory: PriceWars},
     // // 64-72
     [CardName.ANTI_TRUST_CRACKDOWN]: {Factory: AntiTrustCrackdown},
-    // [CardName.MONOPOLY]: {Factory: Monopoly},
+    [CardName.MONOPOLY]: {Factory: Monopoly},
     [CardName.STAGED_PROTESTS]: {Factory: StagedProtests},
     [CardName.PLANT_TAX]: {Factory: PlantTax},
     [CardName.INFRASTRUCTURE_OVERLOAD]: {Factory: InfrastructureOverload},

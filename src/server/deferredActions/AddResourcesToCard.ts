@@ -16,7 +16,7 @@ export type Options = {
   title?: string | Message;
   robotCards?: boolean;
   filter?(card: ICard): boolean;
-  log?(): void;
+  log?: boolean;
 }
 
 export class AddResourcesToCard extends DeferredAction {
@@ -135,8 +135,8 @@ export class AddResourcesToCard extends DeferredAction {
   }
 
   private addResource(card: ICard, qty: number) {
-    const autoLog = this.options.log === undefined;
+    const autoLog = this.options.log !== false;
     this.player.addResourceTo(card, {qty, log: autoLog});
-    this.options.log?.();
+    this.cb(undefined);
   }
 }

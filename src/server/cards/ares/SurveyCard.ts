@@ -65,12 +65,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       }
     }
     if (grant) {
-      cardOwner.game.defer(new GainResources(
-        cardOwner,
-        resource,
-        {
-          cb: () => this.log(cardOwner, resource),
-        }));
+      cardOwner.game.defer(new GainResources(cardOwner, resource).andThen(() => this.log(cardOwner, resource)));
     }
   }
 

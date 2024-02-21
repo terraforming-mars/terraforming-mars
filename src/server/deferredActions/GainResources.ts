@@ -4,7 +4,6 @@ import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
   count?: number;
-  cb?(): void;
   log?: boolean;
 }
 
@@ -25,7 +24,7 @@ export class GainResources extends DeferredAction {
       return undefined;
     }
     this.player.stock.add(this.resource, this.options.count ?? 1, {log: this.options.log});
-    this.options.cb?.();
+    this.cb(undefined);
     return undefined;
   }
 }

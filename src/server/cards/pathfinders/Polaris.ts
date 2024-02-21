@@ -53,10 +53,9 @@ export class Polaris extends CorporationCard {
         cardOwner.game.defer(
           new GainResources(cardOwner, Resource.MEGACREDITS, {
             count: 4,
-            cb: () => activePlayer.game.log(
-              '${0} gained ${1} from ${2}',
-              (b) => b.player(cardOwner).string(Resource.MEGACREDITS).cardName(this.name)),
-          }),
+          }).andThen(() => activePlayer.game.log(
+            '${0} gained ${1} from ${2}',
+            (b) => b.player(cardOwner).string(Resource.MEGACREDITS).cardName(this.name))),
           cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
         );
       }

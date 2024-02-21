@@ -22,7 +22,7 @@ export class PatentManipulation extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.cards(1).asterix(); // TODO(kberg): add altsecondarytag.green, and show both blue and green tags.
         }),
-        description: 'RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES OR RETURN PLAYED CARDS TO YOUR HAND.',
+        description: 'RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. IT MAY NOT BE A CARD THAT PLACES SPECIAL TILES OR RETURNS PLAYED CARDS TO YOUR HAND.',
       },
     });
   }

@@ -20,6 +20,8 @@ export class AstraMechanica extends Card implements IProjectCard {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.cards(2, {secondaryTag: Tag.EVENT}).asterix();
+          b.br;
+          b.text('Fan note: You may not choose cards that return cards to your hand.');
         }),
         description: 'RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.',
       },
@@ -29,6 +31,9 @@ export class AstraMechanica extends Card implements IProjectCard {
   private getCards(player: IPlayer): ReadonlyArray<IProjectCard> {
     return player.playedCards.filter((card) => {
       if (card.type !== CardType.EVENT) {
+        return false;
+      }
+      if (card.name === CardName.PATENT_MANIPULATION || card.name === CardName.RETURN_TO_ABANDONED_TECHNOLOGY) {
         return false;
       }
       if (card.tilesBuilt.some(isSpecialTile)) {

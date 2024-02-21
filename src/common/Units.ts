@@ -108,7 +108,14 @@ export namespace Units {
     return partial;
   }
 
-  export function values(u: Units): Array<number> {
+  /**
+   * Returns an array of 6 elements representing the unit value in unit order.
+   *
+   * In other words, it returns an array of
+   * [MC, steel, titanium, plants, energy, heat].
+   *
+   */
+  export function values(u: Units): ReadonlyArray<number> {
     return keys.map((k) => u[k]);
   }
 

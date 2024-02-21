@@ -10,6 +10,7 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {Units} from '../../common/Units';
 import {message} from '../logs/MessageBuilder';
 import {IStandardProjectCard} from './IStandardProjectCard';
+import {sum} from '../../common/utils/utils';
 
 type StaticStandardProjectCardProperties = {
   name: CardName,
@@ -44,11 +45,8 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
   }
 
   private _discount(player: IPlayer) {
-    const underworldStandardProjectCard = player.playedCards.find(
-      (card) => card.name === CardName.STANDARD_TECHNOLOGY_UNDERWORLD,
-    );
-    const underworldDiscount = underworldStandardProjectCard?.getCardDiscount?.(player, this) ?? 0;
-    return underworldDiscount + this.discount(player);
+    const discountFromCards = sum(player.playedCards.map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
+    return discountFromCards + this.discount(player);
   }
 
   protected abstract actionEssence(player: IPlayer): void

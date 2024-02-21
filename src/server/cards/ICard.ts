@@ -56,6 +56,10 @@ export interface ICard {
    * Having descriptions this simple also makes it easier to render its discount in the UI.
    */
   cardDiscount?: OneOrArray<CardDiscount>;
+  /**
+   * Describes the M€ discount `player` could apply to playing `card`.
+   */
+  getStandardProjectDiscount?(player: IPlayer, card: IStandardProjectCard): number;
 
   /**
    * The +/- bonus applied to global parameter requirements, e.g. Adaptation Technology.

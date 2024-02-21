@@ -108,7 +108,7 @@ import {SoilExport} from './SoilExport';
 import {SpacePrivateers} from './SpacePrivateers';
 import {SpaceWargames} from './SpaceWargames';
 import {StagedProtests} from './StagedProtests';
-// import {StandardTechnology} from './StandardTechnology';
+import {StandardTechnology} from './StandardTechnology';
 // import {StarVegas} from './StarVegas';
 import {StemFieldSubsidies} from './StemFieldSubsidies';
 import {SubnauticPirates} from './SubnauticPirates';
@@ -235,7 +235,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents}, // Uncomment when tests are more manageable. See Production.ts
 
     // // Replacements
-    // [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},
+    [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},
     [CardName.HACKERS_UNDERWORLD]: {Factory: Hackers},
     [CardName.HIRED_RAIDERS_UNDERWORLD]: {Factory: HiredRaiders},
   },

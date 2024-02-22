@@ -37,7 +37,7 @@ export class CorporateBlackmail extends Card implements IProjectCard {
 
 
   private targets(player: IPlayer) {
-    return player.game.getPlayers().filter((p) => p.underworldData.corruption >= 2 && p !== player);
+    return player.getOpponents().filter((p) => p.underworldData.corruption >= 2);
   }
 
   public override bespokeCanPlay(player: IPlayer) {

@@ -39,8 +39,7 @@ export class AncientShipyards extends Card {
 
   public action(player: IPlayer) {
     const game = player.game;
-    for (const target of game.getPlayers()) {
-      if (target === player) continue;
+    for (const target of player.getOpponents()) {
       target.maybeBlockAttack(player, (proceed) => {
         if (proceed) {
           target.stock.steal(Resource.MEGACREDITS, 2, player);

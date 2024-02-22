@@ -34,7 +34,7 @@ export class CometForVenus extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.tags.count(Tag.VENUS, 'raw') > 0);
+    const venusTagPlayers = player.getOpponents().filter((opponent) => opponent.tags.count(Tag.VENUS, 'raw') > 0);
 
     if (player.game.isSoloMode()|| venusTagPlayers.length === 0) {
       return undefined;

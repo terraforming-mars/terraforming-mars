@@ -35,10 +35,8 @@ export class KingdomofTauraro extends CorporationCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const p of player.game.getPlayers()) {
-      if (p.id !== player.id) {
-        p.production.add(Resource.MEGACREDITS, 2, {log: true});
-      }
+    for (const opponent of player.getOpponents()) {
+      opponent.production.add(Resource.MEGACREDITS, 2, {log: true});
     }
     return undefined;
   }

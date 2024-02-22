@@ -40,11 +40,9 @@ export class Caesar extends CeoCard {
       game.defer(new PlaceHazardTile(player, TileType.EROSION_MILD));
     }
 
-    const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
-
     player.defer(() => {
       const hazardTileCount = game.board.spaces.filter((space) => space.tile && HAZARD_TILES.has(space.tile.tileType)).length;
-      otherPlayers.forEach((opponent) => {
+      player.getOpponents().forEach((opponent) => {
         const units = hazardTileCount < 6 ? 1 : 2;
         game.defer(new SelectProductionToLoseDeferred(opponent, units));
       });

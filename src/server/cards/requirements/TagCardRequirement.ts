@@ -22,11 +22,9 @@ export class TagCardRequirement extends InequalityRequirement {
     let tagCount = player.tags.count(this.tag, mode);
 
     if (this.all) {
-      player.game.getPlayers().forEach((p) => {
-        if (p.id !== player.id) {
-          // Don't include opponents' wild tags because they are not performing the action.
-          tagCount += p.tags.count(this.tag, 'raw');
-        }
+      player.getOpponents().forEach((p) => {
+        // Don't include opponents' wild tags because they are not performing the action.
+        tagCount += p.tags.count(this.tag, 'raw');
       });
     }
     // PoliticalAgendas Scientists P4 hook

@@ -102,7 +102,7 @@ export interface IGame extends Logger {
   // Retrieve a player by it's id
   getPlayerById(id: PlayerId): IPlayer;
   // Return an array of players from an array of player ids
-  getPlayersById(ids: Array<PlayerId>): Array<IPlayer>;
+  getPlayersById(ids: Array<PlayerId>): ReadonlyArray<IPlayer>;
   defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T>;
   milestoneClaimed(milestone: IMilestone): boolean;
   marsIsTerraformed(): boolean;
@@ -145,7 +145,7 @@ export interface IGame extends Logger {
   increaseTemperature(player: IPlayer, increments: -2 | -1 | 1 | 2 | 3): undefined;
   getTemperature(): number;
   getGeneration(): number;
-  getPassedPlayers():Array<Color>;
+  getPassedPlayers():ReadonlyArray<Color>;
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
   addTile(player: IPlayer, space: Space, tile: Tile): void;

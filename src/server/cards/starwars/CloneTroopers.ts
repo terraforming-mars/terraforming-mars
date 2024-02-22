@@ -59,7 +59,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
           },
         ));
       } else {
-        const allPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);
+        const allPlayers = player.getOpponents();
         ALL_RESOURCES.forEach((resource) => {
           allPlayers.forEach((target) => {
             if (target.stock.get(resource) > 0) {

@@ -38,10 +38,9 @@ export class HiredRaiders extends Card implements IProjectCard {
       );
     }
 
-    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
-    availablePlayerTargets.forEach((target) => {
+    player.getOpponents().forEach((target) => {
       if (target.megaCredits > 0) {
         const amountStolen = Math.min(amount, target.megaCredits);
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));

@@ -21,6 +21,7 @@ export class Pets extends Card implements IProjectCard {
       tags: [Tag.EARTH, Tag.ANIMAL],
       cost: 10,
       resourceType: CardResource.ANIMAL,
+      protectedResources: true,
 
       victoryPoints: {resourcesHere: {}, per: 2},
 

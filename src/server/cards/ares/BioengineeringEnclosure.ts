@@ -17,6 +17,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
       tags: [Tag.ANIMAL],
       cost: 7,
       resourceType: CardResource.ANIMAL,
+      protectedResources: true,
 
       behavior: {
         addResources: 2,

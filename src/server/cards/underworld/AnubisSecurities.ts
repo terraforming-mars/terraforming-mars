@@ -20,6 +20,7 @@ export class AnubisSecurities extends CorporationCard {
         cardNumber: 'UC11',
         description: 'You start with 42 M€. As your first action, play a card ignoring global requirements.',
         renderData: CardRenderer.builder((b) => {
+          b.megacredits(42).projectRequirements().br;
           b.effect('When any player increases their TR by 1, they gain 2 M€.', (eb) => {
             eb.tr(1, {all}).startEffect.megacredits(2, {all});
           }).br;

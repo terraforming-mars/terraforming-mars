@@ -1,5 +1,4 @@
 import {CardName} from '../../../common/cards/CardName';
-import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
@@ -19,8 +18,6 @@ export class Deepmining extends MiningCard {
         cardNumber: 'U29',
         renderData: CardRenderer.builder((b) => {
           b.excavate(1).asterix().br;
-
-          b.tile(TileType.MINING_RIGHTS, true).asterix().br;
           b.production((pb) => pb.steel(1).or().titanium(1)).asterix();
         }),
         description: 'Excavate an IDENTIFIED underground resource ANYWHERE ON MARS with a steel or titanium placement bonus. ' +

@@ -92,7 +92,7 @@ export abstract class Colony implements IColony {
     // TODO(kberg): Time for an onNewColony hook.
 
     // Poseidon hook
-    const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
+    const poseidon = player.game.getCardPlayerOrUndefined(CardName.POSEIDON);
     if (poseidon !== undefined) {
       poseidon.production.add(Resource.MEGACREDITS, 1, {log: true});
     }

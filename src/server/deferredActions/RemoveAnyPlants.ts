@@ -24,7 +24,7 @@ export class RemoveAnyPlants extends DeferredAction {
       return undefined;
     }
 
-    const candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && !p.plantsAreProtected() && p.plants > 0);
+    const candidates = this.player.getOpponents().filter((p) => !p.plantsAreProtected() && p.plants > 0);
 
     if (candidates.length === 0) {
       return undefined;

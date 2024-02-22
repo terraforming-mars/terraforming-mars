@@ -23,7 +23,7 @@ export class Bjorn extends CeoCard {
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const targets = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
+    const targets = player.getOpponents().filter((p) => p.megaCredits > player.megaCredits);
 
     targets.forEach((target) => {
       target.maybeBlockAttack(player, (proceed) => {

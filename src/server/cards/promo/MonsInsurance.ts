@@ -36,10 +36,8 @@ export class MonsInsurance extends CorporationCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const p of player.game.getPlayers()) {
-      if (p.id !== player.id) {
-        p.production.add(Resource.MEGACREDITS, -2, {log: true});
-      }
+    for (const p of player.getOpponents()) {
+      p.production.add(Resource.MEGACREDITS, -2, {log: true});
     }
     player.game.monsInsuranceOwner = player.id;
     return undefined;

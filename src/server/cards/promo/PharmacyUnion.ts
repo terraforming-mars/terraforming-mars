@@ -143,10 +143,7 @@ export class PharmacyUnion extends CorporationCard {
     if (hasMicrobesTag) {
       player.defer(() => {
         const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tag.MICROBE).length;
-        const player = game.getPlayers().find((p) => p.isCorporation(this.name));
-        if (player === undefined) {
-          throw new Error(`PharmacyUnion: did not find player for ${game.id}`);
-        }
+        const player = game.getCardPlayerOrThrow(this.name);
         const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
         player.addResourceTo(this, microbeTagCount);
         player.megaCredits -= megaCreditsLost;

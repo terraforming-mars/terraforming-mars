@@ -103,8 +103,7 @@ export class Counter {
 
         // When counting all the other players' tags, just count raw, so as to disregard their wild tags.
         if (countable.all === true || countable.others === true) {
-          game.getPlayers()
-            .filter((p) => p.id !== player.id)
+          player.getOpponents()
             .forEach((p) => sum += p.tags.count(tag, 'raw'));
         }
       }

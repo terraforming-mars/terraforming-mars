@@ -2026,6 +2026,10 @@ export class Player implements IPlayer {
     return player;
   }
 
+  public getOpponents(): Array<IPlayer> {
+    return this.game.getPlayers().filter((p) => p !== this);
+  }
+
   /* Shorthand for deferring things */
   public defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined), priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) {

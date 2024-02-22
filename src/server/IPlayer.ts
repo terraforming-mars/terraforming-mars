@@ -307,6 +307,7 @@ export interface IPlayer {
   canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
+  getOpponents(): ReadonlyArray<IPlayer>;
   /** Add `corp`'s initial action to the deferred action queue, if it has one. */
   deferInitialAction(corp: ICorporationCard): void;
   getActions(): OrOptions;

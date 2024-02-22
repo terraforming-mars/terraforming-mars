@@ -5,7 +5,7 @@ import {InputResponse, isSelectPlayerResponse} from '../../common/inputs/InputRe
 import {SelectPlayerModel} from '../../common/models/PlayerInputModel';
 
 export class SelectPlayer extends BasePlayerInput<IPlayer> {
-  constructor(public players: Array<IPlayer>, title: string | Message, buttonLabel: string = 'Save') {
+  constructor(public players: ReadonlyArray<IPlayer>, title: string | Message, buttonLabel: string = 'Save') {
     super('player', title);
     this.buttonLabel = buttonLabel;
   }

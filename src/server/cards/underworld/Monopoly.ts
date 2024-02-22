@@ -30,7 +30,7 @@ export class Monopoly extends Card implements IProjectCard {
 
   private availableProductions(player: IPlayer): Array<keyof Units> {
     const units = new Set<keyof Units>();
-    const targets = player.game.getPlayers().filter((p) => p !== player);
+    const targets = player.getOpponents();
     for (const unit of Units.keys) {
       const resource = Units.ResourceMap[unit];
       if (targets.some((target) => target.canHaveProductionReduced(resource, 1, player))) {
@@ -55,10 +55,7 @@ export class Monopoly extends Card implements IProjectCard {
           player.resolveInsuranceInSoloGame();
           return undefined;
         }
-        for (const target of player.game.getPlayers()) {
-          if (target === player) {
-            continue;
-          }
+        for (const target of player.getOpponents()) {
           if (target.canHaveProductionReduced(resource, 1, player)) {
             target.maybeBlockAttack(player, (proceed: boolean) => {
               if (proceed) {

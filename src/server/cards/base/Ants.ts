@@ -38,7 +38,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
 
   public canAct(player: IPlayer): boolean {
     if (player.game.isSoloMode()) return true;
-    return RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
+    return RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.MICROBE).length > 0;
   }
 
   public action(player: IPlayer) {

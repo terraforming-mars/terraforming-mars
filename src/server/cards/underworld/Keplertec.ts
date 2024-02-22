@@ -39,10 +39,10 @@ export class Keplertec extends ActiveCorporationCard {
         cardNumber: 'UC08',
         description: 'You start with 33 M€, 3 titanium, and 1 titanium production.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(33).titanium(3, {digit}).production((pb) => pb.temperature(1)).br;
+          b.megacredits(33).titanium(3, {digit}).production((pb) => pb.titanium(1)).br;
           b.action('Spend 1 titanium to put a fighter resource on ANY card.', (ab) => {
             ab.megacredits(1).animals(1).startAction.fighter(1).asterix();
-          });
+          }).br;
           b.effect('When you place a fighter resource on this card, draw 4 random underground resource tokens. ' +
             'Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.', (eb) => {
             eb.fighter(1).startEffect.undergroundResources(1, {text: '?'}).asterix();

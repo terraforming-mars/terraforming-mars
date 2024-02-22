@@ -299,7 +299,7 @@ export class Executor implements BehaviorExecutor {
         player.removeResourceFrom(card, spend.resourcesHere);
       }
       if (spend.resourceFromAnyCard) {
-        player.game.defer(new RemoveResourcesFromCard(player, spend.resourceFromAnyCard.type, 1, {ownCardsOnly: true, blockable: false}))
+        player.game.defer(new RemoveResourcesFromCard(player, spend.resourceFromAnyCard.type, 1, {source: 'self', blockable: false}))
           .andThen(() => this.execute(remainder, player, card));
         // Exit early as the rest of handled by the deferred action.
         return;

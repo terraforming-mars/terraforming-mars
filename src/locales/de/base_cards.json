@@ -711,7 +711,7 @@
     "2 Science": "2 Wissenschaft",
     "3 Science": "3 Wissenschaft",
     "5 Science": "5 Wissenschaft",
-    "(Effect: Draw 2 cards.)": "(EFFEKT: Ziehe 2 Karten.)",
+    "Effect: Draw 2 cards.": "EFFEKT: Ziehe 2 Karten.",
 
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "Benötigt 3 eigene Wissenschaftssymbole. Senke deine Energie-Produktion um 1.",
 
@@ -727,7 +727,7 @@
   "Steel production": "Stahl-Produktion",
   "4 Science": "4 Wissenschaft",
   "2 Cities": "2 Städte",
-  "Standard projects": "Standardprojekte",
+  "Standard projects": "Standard Projekte",
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.": "Benötigt 2 Erde-Symbole. Erhöhe deine M€-Produktion um 4 Schritte.",
   "Oxygen must be 4% or lower. Draw two cards.": "Sauerstoff muss 4% oder niedriger sein. Ziehe 2 Karten.",

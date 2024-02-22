@@ -38,10 +38,16 @@ export class ForcedPrecipitation extends Card implements IActionCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const canSpendResource = this.resourceCount > 1 && !venusMaxed;
-
-    return player.canAfford(2) || (canSpendResource && player.canAfford({cost: 0, tr: {venus: 1}}));
+    if (player.canAfford(2)) {
+      return true;
+    }
+    if (this.resourceCount > 1 && player.canAfford({cost: 0, tr: {venus: 1}})) {
+      if (player.game.getVenusScaleLevel() === MAX_VENUS_SCALE) {
+        this.warnings.add('maxvenus');
+      }
+      return true;
+    }
+    return false;
   }
 
   public action(player: IPlayer) {
@@ -49,7 +55,10 @@ export class ForcedPrecipitation extends Card implements IActionCard {
 
     const addResource = new SelectOption('Pay 2 M€ to add 1 floater to this card', 'Pay').andThen(() => this.addResource(player));
     const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters').andThen(() => this.spendResource(player));
-    if (this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford({cost: 0, tr: {venus: 1}})) {
+    if (player.game.getVenusScaleLevel() === MAX_VENUS_SCALE) {
+      spendResource.warnings = ['maxvenus'];
+    }
+    if (this.resourceCount > 1 && player.canAfford({cost: 0, tr: {venus: 1}})) {
       opts.push(spendResource);
     } else {
       return this.addResource(player);

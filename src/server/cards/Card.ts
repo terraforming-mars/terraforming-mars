@@ -55,6 +55,7 @@ type SharedProperties = {
   requirements?: CardRequirementsDescriptor;
   name: CardName;
   resourceType?: CardResource;
+  protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
   tr?: TRSource | DynamicTRSource,
@@ -195,6 +196,9 @@ export abstract class Card implements ICard {
   }
   public get resourceType() {
     return this.properties.resourceType;
+  }
+  public get protectedResources() {
+    return this.properties.protectedResources;
   }
   public get startingMegaCredits() {
     return this.properties.startingMegaCredits === undefined ? 0 : this.properties.startingMegaCredits;

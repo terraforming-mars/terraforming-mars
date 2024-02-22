@@ -135,6 +135,7 @@ export interface ICard {
   tr?: TRSource | DynamicTRSource;
   resourceCount: number;
   resourceType?: CardResource;
+  protectedResources?: boolean;
   /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
   tilesBuilt: ReadonlyArray<TileType>;
   isDisabled?: boolean; // For Pharmacy Union and CEO cards.

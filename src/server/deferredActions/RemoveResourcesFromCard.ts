@@ -3,14 +3,10 @@ import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectOption} from '../inputs/SelectOption';
-import {CardName} from '../../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Message} from '../../common/logs/Message';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
-
-// TODO (kberg chosta): Make this a card attribute instead
-const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
 
 export class RemoveResourcesFromCard extends DeferredAction<boolean> {
   public resourceType: CardResource;
@@ -101,7 +97,7 @@ export class RemoveResourcesFromCard extends DeferredAction<boolean> {
     let resourceCards: Array<ICard>;
     if (ownCardsOnly) {
       if (resourceType === CardResource.ANIMAL) {
-        resourceCards = player.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false);
+        resourceCards = player.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true);
       } else {
         resourceCards = player.getCardsWithResources(resourceType);
       }
@@ -111,7 +107,7 @@ export class RemoveResourcesFromCard extends DeferredAction<boolean> {
         switch (resourceType) {
         case CardResource.ANIMAL:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;
-          resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false));
+          resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true));
           break;
         case CardResource.MICROBE:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;

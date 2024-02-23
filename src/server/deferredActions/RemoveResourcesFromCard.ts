@@ -9,13 +9,14 @@ import {Message} from '../../common/logs/Message';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export type Source = 'self' | 'opponents' | 'all';
-export type Response = {card: ICard, owner: IPlayer, blocked: boolean}
+export type Response = {card: ICard, owner: IPlayer, proceed: boolean}
 export class RemoveResourcesFromCard extends DeferredAction<Response> {
   public cardResource: CardResource | undefined;
   public count: number;
   private source: Source;
   private mandatory: boolean;
   private blockable: boolean;
+  private autoselect: boolean;
   private title: string | Message;
 
   public override priority = Priority.ATTACK_OPPONENT;
@@ -24,8 +25,12 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     cardResource: CardResource | undefined,
     count: number = 1,
     options?: {
-      source?: Source, // default all
-      mandatory?: boolean, // default true (Resource must be removed (either it's a cost or the icon is not red-bordered))
+      /** Which players to take from. Default all. */
+      source?: Source,
+      /** Resource must be removed (either it's a cost or the icon is not red-bordered.) default true. */
+      mandatory?: boolean,
+      /** If there's only one card, automatically select it. Default is true. Ignored if mandatory is false. */
+      autoselect?: boolean
       title?: string | Message,
       blockable?: boolean,
     }) {
@@ -35,6 +40,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     this.source = options?.source ?? 'all';
     this.mandatory = options?.mandatory ?? true;
     this.blockable = options?.blockable ?? true;
+    this.autoselect = options?.autoselect ?? true;
     this.title = options?.title ?? (`Select card to remove ${count} ${cardResource}(s)`);
     if (this.source === 'self') {
       this.priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
@@ -67,7 +73,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       });
 
     if (this.mandatory) {
-      if (cards.length === 1) {
+      if (cards.length === 1 && this.autoselect === true) {
         this.attack(cards[0]);
         return undefined;
       }
@@ -88,13 +94,13 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     //   this.cb(true);
     //   return;
     // }
-    return UnderworldExpansion.maybeBlockAttack(target, this.player, ((proceed) => {
+    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, ((proceed) => {
       if (proceed) {
         target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
       }
-      this.cb({card: card, owner: target, blocked: proceed});
+      this.cb({card: card, owner: target, proceed: proceed});
       return undefined;
-    }));
+    })));
   }
 
   public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all'): Array<ICard> {

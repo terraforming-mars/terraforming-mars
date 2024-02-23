@@ -20,7 +20,7 @@ import {CloudVortexOutpost} from './CloudVortexOutpost';
 import {CollusionStandardProject} from './CollusionStandardProject';
 import {ConcessionRights} from './ConcessionRights';
 import {CorporateBlackmail} from './CorporateBlackmail';
-// // import {CorporateTheft} from './CorporateTheft';
+import {CorporateTheft} from './CorporateTheft';
 import {CraterSurvey} from './CraterSurvey';
 import {CutThroatBudgeting} from './CutThroatBudgeting';
 import {Deepmining} from './Deepmining';
@@ -200,7 +200,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SOIL_EXPORT]: {Factory: SoilExport},
     [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},
     [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},
-    // // [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft}, // Tricky resource stuff and tricky corruption stuff.
+    [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft},
     // // [CardName.UNDERGROUND_RESEARCH_CENTER]: {Factory: UndergroundResearchCenter}, // I want to take time to think about the tag rule.
     [CardName.PRICE_WARS]: {Factory: PriceWars},
     // // 64-72

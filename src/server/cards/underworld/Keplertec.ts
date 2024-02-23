@@ -87,7 +87,9 @@ export class Keplertec extends ActiveCorporationCard {
     return orOptions;
   }
 
-  onResourceAdded(player: IPlayer, _playedCard: ICard, count: number) {
-    player.defer(this.effect(player, count));
+  onResourceAdded(player: IPlayer, card: ICard, count: number) {
+    if (card === this) {
+      player.defer(this.effect(player, count));
+    }
   }
 }

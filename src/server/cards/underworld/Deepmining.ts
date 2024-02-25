@@ -30,4 +30,9 @@ export class Deepmining extends MiningCard {
       .filter((space) => space.excavator === undefined)
       .filter((space) => space.bonus.includes(SpaceBonus.STEEL) || space.bonus.includes(SpaceBonus.TITANIUM));
   }
+
+  protected override spaceSelected(player: IPlayer, space: Space) {
+    UnderworldExpansion.excavate(player, space);
+    super.spaceSelected(player, space);
+  }
 }

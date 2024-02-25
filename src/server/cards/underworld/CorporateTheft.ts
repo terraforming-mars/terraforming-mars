@@ -25,23 +25,24 @@ export class CorporateTheft extends Card implements IProjectCard {
         description: 'Requires 2 corruption. Remove 1 resource from a card belonging to a different player. ' +
           'Then, if you have a card that can hold it, put it on such a card. ' +
           // 'If target paid corruption to block this, you gain that corruption.',
-          'If the target blocked this, you gain 1 corruption.',
+          'If the target blocked this, you gain 1 corruption. ' +
+          'NOTE: Do not use in single player games.',
       },
     });
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.game.isSoloMode()) {
-      return true;
+      return false;
     }
     return RemoveResourcesFromCard.getAvailableTargetCards(player, undefined, 'opponents').length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    game.defer(new RemoveResourcesFromCard(player, undefined, 1, {source: 'opponents', blockable: true, autoselect: false})).andThen((param) => {
-      if (param.proceed) {
-        const type = param.card.resourceType;
+    game.defer(new RemoveResourcesFromCard(player, undefined, 1, {source: 'opponents', blockable: true, autoselect: false})).andThen((response) => {
+      if (response.proceed && response.card !== undefined) {
+        const type = response.card.resourceType;
         if (player.getResourceCards(type).length > 0) {
           game.defer(new AddResourcesToCard(player, type, {log: true}));
         }
@@ -49,7 +50,6 @@ export class CorporateTheft extends Card implements IProjectCard {
         // This is almost right beacuse it's not clear the player used a fighter to block the steal.
         UnderworldExpansion.gainCorruption(player, 1, {log: true});
       }
-      console.log(param);
     });
     return undefined;
   }

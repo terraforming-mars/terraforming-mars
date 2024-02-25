@@ -7,7 +7,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 export class SelectResourceTypeDeferred extends DeferredAction<Resource> {
   constructor(
     player: IPlayer,
-    public resources: Array<Resource>,
+    public resources: ReadonlyArray<Resource>,
     public title: string,
   ) {
     super(player, Priority.DEFAULT);

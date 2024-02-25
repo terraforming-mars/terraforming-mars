@@ -14,43 +14,38 @@ describe('Deepmining', function() {
 
   beforeEach(function() {
     card = new Deepmining();
-    [game, player] = testGame(2);
+    [game, player] = testGame(2, {underworldExpansion: true});
   });
 
   it('Cannot play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
-    for (const space of game.board.getAvailableSpacesOnLand(player)) {
-      if (space.bonus.includes(SpaceBonus.STEEL) || space.bonus.includes(SpaceBonus.TITANIUM)) {
-        space.undergroundResources = 'nothing';
+  const playRuns = [
+    {spaceBonus: SpaceBonus.STEEL, production: 'steel'},
+    {spaceBonus: SpaceBonus.TITANIUM, production: 'titanium'},
+  ] as const;
+  for (const run of playRuns) {
+    it('play ' + JSON.stringify(run), function() {
+      for (const space of game.board.getAvailableSpacesOnLand(player)) {
+        if (space.bonus.includes(run.spaceBonus)) {
+          space.undergroundResources = 'card1';
+        }
       }
-    }
 
-    const action = cast(card.play(player), SelectSpace);
+      const action = cast(card.play(player), SelectSpace);
+      const space = action.spaces.find((space) => space.bonus.includes(run.spaceBonus))!;
 
-    const titaniumSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false)!;
-    expect(titaniumSpace.bonus).contains(SpaceBonus.TITANIUM);
-    expect(titaniumSpace.bonus).does.not.contain(SpaceBonus.STEEL);
+      player.cardsInHand = [];
 
-    action.cb(titaniumSpace);
-    runAllActions(game);
+      action.cb(space);
+      runAllActions(game);
 
-    expect(titaniumSpace.player).to.be.undefined;
-    expect(titaniumSpace.tile).is.undefined;
-    expect(player.production.titanium).to.eq(1);
-    expect(titaniumSpace.adjacency?.bonus).eq(undefined);
-
-    const steelSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL))!;
-    expect(steelSpace.bonus).contains(SpaceBonus.STEEL);
-
-    action.cb(steelSpace);
-    runAllActions(game);
-
-    expect(steelSpace.player).is.undefined;
-    expect(steelSpace.tile).is.undefined;
-    expect(player.production.steel).to.eq(1);
-    expect(steelSpace.adjacency?.bonus).eq(undefined);
-  });
+      expect(space.player).to.be.undefined;
+      expect(space.tile).is.undefined;
+      expect(player.production[run.production]).to.eq(1);
+      expect(space.adjacency?.bonus).eq(undefined);
+      expect(player.cardsInHand).to.have.length(1);
+    });
+  }
 });

@@ -9,7 +9,7 @@ import {Message} from '../../common/logs/Message';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export type Source = 'self' | 'opponents' | 'all';
-export type Response = {card: ICard, owner: IPlayer, proceed: boolean}
+export type Response = {card: ICard, owner: IPlayer, proceed: boolean} | {card: undefined, owner: undefined, proceed: boolean};
 export class RemoveResourcesFromCard extends DeferredAction<Response> {
   public cardResource: CardResource | undefined;
   public count: number;
@@ -53,12 +53,14 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   public execute() {
     if (this.source !== 'self' && this.player.game.isSoloMode()) {
       this.player.resolveInsuranceInSoloGame();
+      this.cb({card: undefined, owner: undefined, proceed: true});
       return undefined;
     }
 
     const cards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.cardResource, this.source);
 
     if (cards.length === 0) {
+      this.cb({card: undefined, owner: undefined, proceed: false});
       return undefined;
     }
 

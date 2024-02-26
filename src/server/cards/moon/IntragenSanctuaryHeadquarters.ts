@@ -48,6 +48,6 @@ export class IntragenSanctuaryHeadquarters extends CorporationCard {
 
   public onCardPlayed(player: IPlayer, card: ICard) {
     const count = player.tags.cardTagCount(card, Tag.ANIMAL);
-    player.addResourceTo(this, count);
+    player.addResourceTo(this, {qty: count, log: true});
   }
 }

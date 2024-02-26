@@ -35,10 +35,10 @@ export class PreludesExpansion {
       .andThen(([card]) => {
         if (card.canPlay?.(player) === false) {
           PreludesExpansion.fizzle(player, card);
-          return undefined;
         } else {
-          return player.playCard(card, undefined, cardAction);
+          player.playCard(card, undefined, cardAction);
         }
+        return undefined;
       });
   }
 }

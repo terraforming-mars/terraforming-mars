@@ -64,7 +64,8 @@ export class Lowell extends CeoCard {
         // Add Lowell to Discard pile
         game.ceoDeck.discard(this);
         // Play the new CEO
-        return player.playCard(chosenCeo);
+        player.playCard(chosenCeo);
+        return undefined;
       });
   }
 }

@@ -11,6 +11,7 @@ import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {message} from '../../logs/MessageBuilder';
 import {IColony} from '../../colonies/IColony';
 import {CardResource} from '../../../common/CardResource';
+import {played} from '../Options';
 
 function tradeCost(player: IPlayer) {
   return Math.max(1, 2 - player.colonies.tradeDiscount);
@@ -21,7 +22,7 @@ export class HecateSpeditions extends ActiveCorporationCard {
     super({
       name: CardName.HECATE_SPEDITIONS,
       tags: [Tag.EARTH],
-      startingMegaCredits: 42,
+      startingMegaCredits: 38,
       resourceType: CardResource.SUPPLY_CHAIN,
 
       behavior: {
@@ -45,12 +46,12 @@ export class HecateSpeditions extends ActiveCorporationCard {
           b.br;
           b.megacredits(38).colonies().br;
           b.effect('When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.',
-            (eb) => eb.text('planetary tag').startEffect.supplyChain());
+            (eb) => eb.earth(1, {played}).mars(1, {played}).venus(1, {played}).moon(1, {played}).jovian({played}).startEffect.supplyChain());
           b.br;
           b.supplyChain({amount: 2, digit: true}).colon().trade({size: Size.SMALL}).nbsp;
           b.supplyChain({amount: 5, digit: true}).arrow(Size.SMALL).tradeFleet().br;
-          b.plainText('(Effect: Spend 2 supply chain resources (min. 1) to trade.)').br;
-          b.plainText('(Action: Spend 5 supply chain resources to gain a trade fleet.)');
+          b.plainText('(Effect: Spend 2 supply chain resources (min. 1) to trade.) ' +
+            '(Action: Spend 5 supply chain resources to gain a trade fleet.)');
         }),
       },
     });

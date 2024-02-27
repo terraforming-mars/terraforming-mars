@@ -373,7 +373,7 @@
     "${0} gained 1 TR since no opponent had any corruption": "${0} erhielt 1 TW, da kein Gegner eine Korruption hatte",
     "${0} was paid ${1} M€ from ${2}": "${0} wurde ${1} M€ von ${2} gezahlt",
     "${0} discarded ${1} corruption and gained ${2} M€": "${0} warf ${1} Korruption ab und erhielt ${2} M€",
-    "${1} gained ${2} M€ from the ${3} corp effect.": "${1} erhielt ${2} M€ aus dem ${3} Konzern-Effekt.",
+    "${0} gained ${1} M€ from the ${2} corp effect.": "${0} erhielt ${1} M€ aus dem ${2} Konzern-Effekt.",
     "${0} gained 1 MC production from ${1} for ${2}": "${0} erhielt 1 MC Produktion von ${1} für ${2}",
     "${0} gained ${1} from ${2}": "${0} erhielt ${1} von ${2}",
     "${0} gained 2 ${1} from ${2}": "${0} erhielt 2 ${1} von ${2}",

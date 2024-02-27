@@ -184,6 +184,7 @@ export const PaymentWidgetMixin = {
       case 'auroraiData':
       case 'graphene':
       case 'kuiperAsteroids':
+      case 'corruption':
         // TODO(kberg): remove 'as any'. You can do it.
         amount = (model.playerinput as any)[unit];
         break;
@@ -239,6 +240,7 @@ export const PaymentWidgetMixin = {
         lunaArchivesScience: 'Science',
         microbes: 'Microbes',
         plants: 'Plants',
+        corruption: 'Corruption',
       };
     },
   },

@@ -1,4 +1,4 @@
-import {DATA_VALUE, FLOATERS_VALUE, MICROBES_VALUE, GRAPHENE_VALUE, SEED_VALUE} from '../constants';
+import {DATA_VALUE, FLOATERS_VALUE, MICROBES_VALUE, GRAPHENE_VALUE, SEED_VALUE, CORRUPTION_VALUE} from '../constants';
 import {SpendableResource, SPENDABLE_RESOURCES} from './Spendable';
 
 /**
@@ -35,6 +35,7 @@ export const DEFAULT_PAYMENT_VALUES: Record<SpendableResource, number> = {
   auroraiData: DATA_VALUE,
   graphene: GRAPHENE_VALUE,
   kuiperAsteroids: 1,
+  corruption: CORRUPTION_VALUE,
 } as const;
 
 export namespace Payment {
@@ -52,6 +53,7 @@ export namespace Payment {
     auroraiData: 0,
     graphene: 0,
     kuiperAsteroids: 0,
+    corruption: 0,
   } as const;
 
   export function of(payment: Partial<Payment>) : Payment {
@@ -69,6 +71,7 @@ export namespace Payment {
       graphene: payment.graphene ?? 0,
       kuiperAsteroids: payment.kuiperAsteroids ?? 0,
       plants: payment.plants ?? 0,
+      corruption: payment.corruption ?? 0,
     };
   }
 }

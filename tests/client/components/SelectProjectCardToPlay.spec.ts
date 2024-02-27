@@ -560,6 +560,22 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 5, megaCredits: 7}));
   });
 
+  it('using corruption', async () => {
+    // Imported Nitrogen costs 23, and has an Earth tag. Player has 4M€ and will use 2 corruption units.
+    const wrapper = setupCardForPurchase(
+      CardName.IMPORTED_NITROGEN, 23,
+      {megaCredits: 4},
+      {corruption: 3, paymentOptions: {corruption: true}});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    await tester.clickMax('corruption');
+    tester.expectPayment({megaCredits: 3, corruption: 2});
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({corruption: 2, megaCredits: 3}));
+  });
+
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,
@@ -595,6 +611,7 @@ describe('SelectProjectCardToPlay', () => {
       lunaArchivesScience: 0,
       microbes: 0,
       seeds: 0,
+      corruption: 0,
       ...playerInputFields,
     };
     if (options !== undefined) {

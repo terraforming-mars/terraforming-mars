@@ -4,7 +4,6 @@ import {FriendsInHighPlaces} from '../../../src/server/cards/underworld/FriendsI
 import {LargeConvoy} from '../../../src/server/cards/base/LargeConvoy';
 import {TestPlayer} from '../../TestPlayer';
 import {ProtectedValley} from '../../../src/server/cards/base/ProtectedValley';
-import {Server} from '../../../src/server/models/ServerModel';
 
 describe('FriendsInHighPlaces', () => {
   let player: TestPlayer;

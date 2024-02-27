@@ -33,4 +33,14 @@ export class OrOptions extends OptionsInput<undefined> {
     player.runInput(input.response, this.options[input.index]);
     return this.cb(undefined);
   }
+
+  public reduce(): PlayerInput | undefined {
+    if (this.options.length === 0) {
+      return undefined;
+    }
+    if (this.options.length === 1) {
+      return this.options[0].cb();
+    }
+    return this;
+  }
 }

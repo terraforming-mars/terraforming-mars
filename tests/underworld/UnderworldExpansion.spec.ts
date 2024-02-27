@@ -122,12 +122,12 @@ describe('UnderworldExpansion', function() {
   it('identifiable, identified', () => {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
 
-    expect(UnderworldExpansion.identifiableSpaces(game)).includes(space);
+    expect(UnderworldExpansion.identifiableSpaces(player1)).includes(space);
     expect(UnderworldExpansion.identifiedSpaces(game)).does.not.include(space);
 
     UnderworldExpansion.identify(game, space, player1);
 
-    expect(UnderworldExpansion.identifiableSpaces(game)).does.not.include(space);
+    expect(UnderworldExpansion.identifiableSpaces(player1)).does.not.include(space);
     expect(UnderworldExpansion.identifiedSpaces(game)).includes(space);
   });
 

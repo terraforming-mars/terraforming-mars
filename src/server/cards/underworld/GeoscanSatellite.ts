@@ -32,7 +32,7 @@ export class GeoscanSatellite extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return UnderworldExpansion.identifiableSpaces(player.game).length > 0;
+    return UnderworldExpansion.identifiableSpaces(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {

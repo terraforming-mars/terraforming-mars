@@ -16,7 +16,7 @@ export class IdentifySpacesDeferred extends DeferredAction<Array<Space>> {
     const title = prefix + (this.count > 1 ? ` (${this.nth} of ${this.count})` : '');
     const selectedSpaces: Array<Space> = [];
 
-    const identifiableSpaces = UnderworldExpansion.identifiableSpaces(this.player.game);
+    const identifiableSpaces = UnderworldExpansion.identifiableSpaces(this.player);
     if (identifiableSpaces.length === 0) {
       return undefined;
     }

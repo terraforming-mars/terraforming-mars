@@ -80,7 +80,7 @@ import {MiningMarketInsider} from './MiningMarketInsider';
 import {Monopoly} from './Monopoly';
 import {Nanofoundry} from './Nanofoundry';
 import {NarrativeSpin} from './NarrativeSpin';
-// // import {Neutrinograph} from './Neutrinograph';
+import {Neutrinograph} from './Neutrinograph';
 import {Nightclubs} from './Nightclubs';
 import {OffWorldTaxHaven} from './OffWorldTaxHaven';
 import {OldWorldMafia} from './OldWorldMafia';
@@ -196,7 +196,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // 55-63
     [CardName.EARTHQUAKE_MACHINE]: {Factory: EarthquakeMachine},
     [CardName.MICRO_GEODESICS]: {Factory: MicroGeodesics},
-    // // [CardName.NEUTRINOGRAPH]: {Factory: Neutrinograph},
+    [CardName.NEUTRINOGRAPH]: {Factory: Neutrinograph},
     [CardName.SOIL_EXPORT]: {Factory: SoilExport},
     [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},
     [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},

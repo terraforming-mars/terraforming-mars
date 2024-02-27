@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SubterraneanSea} from '../../../src/server/cards/underworld/SubterraneanSea';
 import {testGame} from '../../TestGame';
-import {cast, maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
@@ -24,9 +24,11 @@ describe('SubterraneanSea', () => {
 
     spaces[1].excavator = player;
     expect(card.canPlay(player)).is.true;
+    expect(card.warnings).does.not.include('maxoceans');
 
     maxOutOceans(player);
-    expect(card.canPlay(player)).is.false;
+    expect(card.canPlay(player)).is.true;
+    expect(card.warnings).includes('maxoceans');
   });
 
   it('play', () => {
@@ -37,7 +39,9 @@ describe('SubterraneanSea', () => {
     spaces[0].excavator = player;
     spaces[1].excavator = player;
 
-    const selectSpace = cast(card.play(player), SelectSpace);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     expect(selectSpace.spaces).deep.eq([spaces[0], spaces[1]]);
     const selectedSpace = spaces[1];
     selectSpace.cb(selectedSpace);

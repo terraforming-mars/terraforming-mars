@@ -56,7 +56,7 @@ export abstract class DeferredAction<T = undefined> implements IDeferredAction<T
 
   public abstract execute(): PlayerInput | undefined;
   // TODO(kberg): Make protected again.
-  public cb: (param: T) => void = () => {};
+  public cb: (param: T) => PlayerInput | undefined | void = () => {};
   private callbackSet = false;
 
   public andThen(cb: (param: T) => void): this {

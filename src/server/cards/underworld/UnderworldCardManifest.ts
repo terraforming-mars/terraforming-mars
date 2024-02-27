@@ -128,7 +128,7 @@ import {UndergroundSmugglingRing} from './UndergroundSmugglingRing';
 import {Voltagon} from './Voltagon';
 import {VoltaicMetallurgy} from './VoltaicMetallurgy';
 import {VolunteerMiningInitiative} from './VolunteerMiningInitiative';
-// // import {Whales} from './Whales';
+import {Whales} from './Whales';
 
 export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   module: 'underworld',
@@ -181,7 +181,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.FRIENDS_IN_HIGH_PLACES]: {Factory: FriendsInHighPlaces},
     [CardName.MICROGRAVIMETRY]: {Factory: Microgravimetry},
     [CardName.STEM_FIELD_SUBSIDIES]: {Factory: StemFieldSubsidies},
-    [CardName.TITAN_MANUFACTURING_COLONY]: {Factory: TitanManufacturingColony}, // Special token
+    [CardName.TITAN_MANUFACTURING_COLONY]: {Factory: TitanManufacturingColony},
     [CardName.ROBOT_MOLES]: {Factory: RobotMoles},
     // 46-54
     [CardName.MINING_MARKET_INSIDER]: {Factory: MiningMarketInsider},
@@ -230,7 +230,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.PLANETARY_RIGHTS_BUYOUT]: {Factory: PlanetaryRightsBuyout},
     // // [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy}, // Scoops is not quite clear yet.
     [CardName.INVESTIGATIVE_JOURNALISM]: {Factory: InvestigativeJournalism},
-    // // [CardName.WHALES]: {Factory: Whales}, // This is gonna be tricky.
+    [CardName.WHALES]: {Factory: Whales},
     // // [CardName.GUERILLA_ECOLOGISTS]: {Factory: GuerillaEcologists}, // IP.
     // // [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents}, // Uncomment when tests are more manageable. See Production.ts
 

@@ -58,14 +58,4 @@ describe('FriendsInHighPlaces', () => {
     player.underworldData.corruption = 1;
     expect(player.canPlay(protectedValley)).is.false;
   });
-
-  it('xyzzy', () => {
-    const largeConvoy = new LargeConvoy();
-    player.megaCredits = 26;
-    player.underworldData.corruption = 1;
-    expect(player.canPlay(largeConvoy)).eq(true);
-    player.cardsInHand.push(largeConvoy);
-    const m2 = Server.getPlayerModel(player);
-    console.log(JSON.stringify(m2, null, 2));
-  });
 });

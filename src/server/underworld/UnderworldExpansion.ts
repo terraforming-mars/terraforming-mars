@@ -92,12 +92,25 @@ export class UnderworldExpansion {
     };
   }
 
-  /** Return the spaces that have not yet been identified. The opposite of `identifiedSpaces`. */
-  public static identifiableSpaces(game: IGame): ReadonlyArray<Space> {
-    return game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY && space.undergroundResources === undefined);
+  /**
+   * Return the spaces that have not yet been identified.
+   *
+   * For the most part, the opposite of `identifiedSpaces`.
+   */
+  public static identifiableSpaces(player: IPlayer): ReadonlyArray<Space> {
+    const spaces = player.game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY);
+    if (player.cardIsInEffect(CardName.NEUTRINOGRAPH)) {
+      return spaces.filter((space) => space.excavator === undefined);
+    } else {
+      return spaces.filter((space) => space.undergroundResources === undefined);
+    }
   }
 
-  /** Return the spaces that not yet been identified. The opposite of `identifiableSpaces`. */
+  /**
+   * Return the spaces that not yet been identified.
+   *
+   * For the most part, the opposite of `identifiableSpaces`.
+   */
   public static identifiedSpaces(game: IGame): ReadonlyArray<Space> {
     return game.board.spaces.filter(
       (space) => space.undergroundResources !== undefined,
@@ -109,8 +122,14 @@ export class UnderworldExpansion {
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
+
     if (space.undergroundResources !== undefined) {
-      return;
+      if (player?.cardIsInEffect(CardName.NEUTRINOGRAPH) && space.excavator === undefined) {
+        UnderworldExpansion.addTokens(game, [space.undergroundResources]);
+        space.undergroundResources = undefined;
+      } else {
+        return;
+      }
     }
     const undergroundResource = game.underworldData?.tokens.pop();
     if (undergroundResource === undefined) {

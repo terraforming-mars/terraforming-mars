@@ -34,7 +34,7 @@ export class Microgravimetry extends Card implements IProjectCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.energy > 0 && UnderworldExpansion.identifiableSpaces(player.game).length > 0;
+    return player.energy > 0 && UnderworldExpansion.identifiableSpaces(player).length > 0;
   }
 
   public action(player: IPlayer) {

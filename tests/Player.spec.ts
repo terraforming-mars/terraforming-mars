@@ -221,6 +221,7 @@ describe('Player', function() {
       heatProduction: 12,
       titaniumValue: 13,
       steelValue: 14,
+      canUseCorruptionAsMegacredits: false,
       canUseHeatAsMegaCredits: false,
       canUseTitaniumAsMegacredits: false,
       canUsePlantsAsMegaCredits: false,

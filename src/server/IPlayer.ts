@@ -86,6 +86,8 @@ export interface IPlayer {
   canUseTitaniumAsMegacredits: boolean;
   // Martian Lumber Corp
   canUsePlantsAsMegacredits: boolean;
+  // Friends in High Places
+  canUseCorruptionAsMegacredits: boolean;
 
   // This generation / this round
   actionsTakenThisRound: number;

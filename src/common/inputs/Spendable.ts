@@ -39,14 +39,20 @@ export const SPENDABLE_CARD_RESOURCES = [
   'kuiperAsteroids',
 ] as const;
 
-export const SPENDABLE_RESOURCES = [...SPENDABLE_STANDARD_RESOURCES, ...SPENDABLE_CARD_RESOURCES] as const;
+export const OTHER_SPENDABLE_RESOURCES = [
+  // Friends in High Places enables spending corruption for Earth tags.
+  'corruption',
+] as const;
+
+export const SPENDABLE_RESOURCES = [...SPENDABLE_STANDARD_RESOURCES, ...SPENDABLE_CARD_RESOURCES, ...OTHER_SPENDABLE_RESOURCES] as const;
 
 export type SpendableStandardResource = typeof SPENDABLE_STANDARD_RESOURCES[number];
 /** Types of resources on cards that can be spent to pay for things. */
 export type SpendableCardResource = typeof SPENDABLE_CARD_RESOURCES[number];
+export type OtherSpendableResource = typeof OTHER_SPENDABLE_RESOURCES[number];
 
 /** Types of resources spent to pay for things. */
-export type SpendableResource = SpendableStandardResource | SpendableCardResource;
+export type SpendableResource = SpendableStandardResource | SpendableCardResource | OtherSpendableResource;
 
 export const CARD_FOR_SPENDABLE_RESOURCE: Record<SpendableCardResource, CardName> = {
   microbes: CardName.PSYCHROPHILES,

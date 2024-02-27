@@ -55,6 +55,7 @@ export default Vue.extend({
         'seeds',
         'graphene',
         'megaCredits',
+        'corruption',
       ];
     },
   },
@@ -161,7 +162,7 @@ export default Vue.extend({
         return toSaveUnits;
       }
 
-      for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene'] as const) {
+      for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene', 'corruption'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
           this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
         }
@@ -203,6 +204,7 @@ export default Vue.extend({
           'seeds',
           'graphene',
           'lunaArchivesScience',
+          'corruption',
           'megaCredits'] as const) {
           this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
@@ -238,6 +240,8 @@ export default Vue.extend({
       case 'graphene':
         return this.tags.includes(Tag.SPACE) ||
             this.tags.includes(Tag.CITY);
+      case 'corruption':
+        return this.tags.includes(Tag.EARTH) && this.playerinput.paymentOptions.corruption === true;
       default:
         throw new Error('Unknown unit ' + unit);
       }

@@ -153,6 +153,8 @@ export class Player implements IPlayer {
   public canUsePlantsAsMegacredits: boolean = false;
   // Luna Trade Federation
   public canUseTitaniumAsMegacredits: boolean = false;
+  // Friends in High Places
+  public canUseCorruptionAsMegacredits: boolean = false;
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
@@ -844,6 +846,7 @@ export class Player implements IPlayer {
       auroraiData: card.type === CardType.STANDARD_PROJECT,
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
       kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
+      corruption: card.tags.includes(Tag.EARTH),
     };
   }
 
@@ -916,6 +919,9 @@ export class Player implements IPlayer {
     removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
     removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
     removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
+    if (payment.corruption > 0) {
+      UnderworldExpansion.loseCorruption(this, payment.corruption);
+    }
 
     if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
@@ -1377,6 +1383,7 @@ export class Player implements IPlayer {
       auroraiData: this.getSpendable('auroraiData'),
       graphene: this.getSpendable('graphene'),
       kuiperAsteroids: this.getSpendable('kuiperAsteroids'),
+      corruption: this.underworldData.corruption,
     };
   }
 
@@ -1418,6 +1425,7 @@ export class Player implements IPlayer {
       auroraiData: options?.auroraiData ?? false,
       graphene: options?.graphene ?? false,
       kuiperAsteroids: options?.kuiperAsteroids ?? false,
+      corruption: options?.corruption ?? false,
     };
 
     // HOOK: Luna Trade Federation
@@ -1874,6 +1882,8 @@ export class Player implements IPlayer {
       canUsePlantsAsMegaCredits: this.canUsePlantsAsMegacredits,
       // Luna Trade Federation
       canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
+      // This generation / this round
+      canUseCorruptionAsMegacredits: this.canUseCorruptionAsMegacredits,
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),

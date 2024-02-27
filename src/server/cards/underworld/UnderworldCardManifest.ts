@@ -36,7 +36,7 @@ import {FairTradeComplaint} from './FairTradeComplaint';
 import {FabricatedScandal} from './FabricatedScandal';
 import {ForestTunnels} from './ForestTunnels';
 import {FreeTradePort} from './FreeTradePort';
-// // import {FriendsinHighPlaces} from './FriendsinHighPlaces';
+import {FriendsInHighPlaces} from './FriendsInHighPlaces';
 // // import {GaiaCity} from './GaiaCity';
 import {GanymedeTradingCompany} from './GanymedeTradingCompany';
 import {GeologicalExpertise} from './GeologicalExpertise';
@@ -178,7 +178,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.PRIVATE_INVESTIGATOR]: {Factory: PrivateInvestigator},
     [CardName.CORPORATE_BLACKMAIL]: {Factory: CorporateBlackmail},
     [CardName.SCAPEGOAT]: {Factory: Scapegoat},
-    // // [CardName.FRIENDS_IN_HIGH_PLACES]: {Factory: FriendsinHighPlaces}, // ANOTHER card payment thing.
+    [CardName.FRIENDS_IN_HIGH_PLACES]: {Factory: FriendsInHighPlaces},
     [CardName.MICROGRAVIMETRY]: {Factory: Microgravimetry},
     [CardName.STEM_FIELD_SUBSIDIES]: {Factory: StemFieldSubsidies},
     [CardName.TITAN_MANUFACTURING_COLONY]: {Factory: TitanManufacturingColony}, // Special token

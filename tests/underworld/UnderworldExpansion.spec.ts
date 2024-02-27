@@ -511,11 +511,20 @@ describe('UnderworldExpansion', function() {
   });
 
   class MaybeBlockAttackTester {
+    // The target of the attack. If you want a different target, change this before calling run.
+    public target = player1;
+    // The perpetrator of the attack. If you want a different perpetrator, change this before calling run.
+    public perpetrator = player2;
+
+    // Will be true if the callback is invoked.
     public called: boolean = false;
+    // True if the caller did not block.
     public proceed: boolean = false;
+    // And player input the target must immediately resolve.
     public playerInput: PlayerInput | undefined = undefined;
+
     public run() {
-      this.playerInput = UnderworldExpansion.maybeBlockAttack(player1, player2, (proceed) => {
+      this.playerInput = UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, (proceed) => {
         this.proceed = proceed;
         this.called = true;
         return undefined;
@@ -564,6 +573,24 @@ describe('UnderworldExpansion', function() {
   it('maybeBlockAttack - block', () => {
     player1.underworldData.corruption = 1;
     const tester = new MaybeBlockAttackTester();
+
+    tester.run();
+
+    expect(tester.called).is.false;
+
+    const orOptions = cast(tester.playerInput, OrOptions);
+    orOptions.options[0].cb();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.false;
+    expect(player1.underworldData.corruption).eq(0);
+  });
+
+  it('maybeBlockAttack - block self', () => {
+    player1.underworldData.corruption = 1;
+    const tester = new MaybeBlockAttackTester();
+    tester.perpetrator = player1;
+    tester.target = player1;
 
     tester.run();
 

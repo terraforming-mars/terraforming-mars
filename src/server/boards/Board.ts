@@ -51,6 +51,7 @@ export abstract class Board {
   }
 
   /* Returns the space given a Space ID. */
+  // TODO(kberg): rename to getSpaceOrThrow
   public getSpace(id: SpaceId): Space {
     const space = this.map.get(id);
     if (space === undefined) {

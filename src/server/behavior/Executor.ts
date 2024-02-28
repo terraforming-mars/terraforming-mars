@@ -151,6 +151,11 @@ export class Executor implements BehaviorExecutor {
         if (game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city', canAffordOptions).length === 0) {
           return false;
         }
+      } else {
+        // Special case for Star Vegas. The space may already be occupied.
+        if (game.board.getSpace(behavior.city.space).tile !== undefined) {
+          return false;
+        }
       }
     }
 
@@ -454,6 +459,9 @@ export class Executor implements BehaviorExecutor {
       if (behavior.city.space !== undefined) {
         const space = player.game.board.getSpace(behavior.city.space);
         player.game.addCity(player, space);
+        if (space.tile !== undefined) { // Should never be undefined
+          space.tile.card = card.name;
+        }
       } else {
         player.game.defer(new PlaceCityTile(player, {on: behavior.city.on}));
       }

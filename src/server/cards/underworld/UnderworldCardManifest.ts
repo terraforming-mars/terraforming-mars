@@ -109,7 +109,7 @@ import {SpacePrivateers} from './SpacePrivateers';
 import {SpaceWargames} from './SpaceWargames';
 import {StagedProtests} from './StagedProtests';
 // import {StandardTechnology} from './StandardTechnology';
-// import {StarVegas} from './StarVegas';
+import {StarVegas} from './StarVegas';
 import {StemFieldSubsidies} from './StemFieldSubsidies';
 import {SubnauticPirates} from './SubnauticPirates';
 import {SubterraneanSea} from './SubterraneanSea';
@@ -191,7 +191,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPACE_PRIVATEERS]: {Factory: SpacePrivateers},
     [CardName.PERSONAL_SPACECRUISER]: {Factory: PersonalSpacecruiser},
     [CardName.HYPERSPACE_DRIVE_PROTOTYPE]: {Factory: HyperspaceDrivePrototype},
-    // [CardName.STAR_VEGAS]: {Factory: StarVegas}, // Come back to this later. It's gonna break stuff.
+    [CardName.STAR_VEGAS]: {Factory: StarVegas},
     [CardName.PRIVATE_RESORTS]: {Factory: PrivateResorts},
     // 55-63
     [CardName.EARTHQUAKE_MACHINE]: {Factory: EarthquakeMachine},
@@ -265,7 +265,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.FREE_TRADE_PORT]: {Factory: FreeTradePort, compatibility: 'colonies'},
     [CardName.INVESTOR_PLAZA]: {Factory: InvestorPlaza},
     [CardName.INHERITED_FORTUNE]: {Factory: InheritedFortune},
-    // // [CardName.INTELLECTUAL_PROPERTY_THEFT]: {Factory: IntellectualPropertyTheft},
+    // // [CardName.INTELLECTUAL_PROPERTY_THEFT]: {Factory: IntellectualPropertyTheft}, // Too tricky
     [CardName.TUNNELING_OPERATION]: {Factory: TunnelingOperation},
     [CardName.GEOLOGICAL_EXPERTISE]: {Factory: GeologicalExpertise},
     [CardName.UNDERGROUND_SETTLEMENT]: {Factory: UndergroundSettlement},

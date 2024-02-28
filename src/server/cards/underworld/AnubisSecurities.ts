@@ -54,7 +54,7 @@ export class AnubisSecurities extends CorporationCard {
   public onIncreaseTerraformRating(player: IPlayer, _cardOwner: IPlayer, steps: number) {
     const money = steps * 2;
     player.stock.add(Resource.MEGACREDITS, money);
-    player.game.log('${1} gained ${2} M€ from the ${3} corp effect.', (b) => b.player(player).number(money).card(this));
+    player.game.log('${0} gained ${1} M€ from the ${2} corp effect', (b) => b.player(player).number(money).card(this));
   }
 
   public onProductionPhase(player: IPlayer) {

@@ -7,7 +7,7 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {MiningCard} from '../base/MiningCard';
 
 export class Deepmining extends MiningCard {
-  protected readonly title = 'Select an excavated space with a steel or titanium bonus';
+  protected readonly title = 'Select an identified space with a steel or titanium bonus';
   protected override readonly placeTile = false;
 
   constructor() {

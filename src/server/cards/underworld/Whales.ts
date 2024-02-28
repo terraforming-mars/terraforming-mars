@@ -10,7 +10,7 @@ import {Size} from '../../../common/cards/render/Size';
 export class Whales extends Card implements IProjectCard {
   constructor() {
     super({
-      type: CardType.AUTOMATED,
+      type: CardType.ACTIVE,
       name: CardName.WHALES,
       cost: 10,
       tags: [Tag.ANIMAL],

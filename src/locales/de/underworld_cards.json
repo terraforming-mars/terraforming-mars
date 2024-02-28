@@ -30,6 +30,9 @@
 "THIS CANNOT BE BLOCKED BY CORRUPTION": "DIES KANN NICHT DURCH KORRUPTION BLOCKIERT WERDEN",
 "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Benötigt 1 Korruption. Visiere einen Spieler, der mindestens 2 Korruption hat. Wenn dieser Spieler nicht 10 M€ an dich zahlt, verliert er 2 Korruptionspunkte.",
 
+"Corporate Theft": "Unternehmensdiebstahl",
+"Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. NOTE: Do not use in single player games.": "Benötigt 2 Korruption. Entferne 1 Ressource von einer Karte, die einem anderen Spieler gehört. Wenn du dann eine Karte hast, die sie aufnehmen kann, lege sie auf eine solche Karte. Wenn das Ziel dies blockiert, erhältst du 1 Korruption. HINWEIS: Nicht im Solo-Modus verwenden.",
+
 "Crater Survey": "Krater Vermessung",
 "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Füge 2 Daten einer ANDEREN Karte hinzu. Identifiziere 4 unterirdische Ressourcen.",
 
@@ -189,6 +192,9 @@
 "Public Spaceline": "Öffentliche Raumfahrtlinie",
 "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "Benötigt 5 Weltraum-Symbole. Diese Karte hat 2 Erd-, 2 Jupiter-, 2 Venus- und 2 Mars-Symbole.",
 
+"Reckless Detonation": "Rücksichtslose Sprengung",
+"Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "Benötigt 2 Korruption. Grabe eine unterirdische Ressource aus. Entferne bis zu 3 Stahl oder 2 Titan von einem anderen Spieler.",
+
 "Research & Development Hub": "Forschungs- und Entwicklungszentrum",
 "Effect: At the end of each production phase, add 1 data here for EACH OTHER PLAYER that has 7 or more cards in their hand.": "EFFEKT: Am Ende jeder Produktionsphase füge 1 Datum für JEDEN ANDEREN SPIELER, der 7 oder mehr Karten auf der Hand hat, hinzu.",
 "1 VP for every 3 data resources on this card.": "1 SP für je 3 Datenressourcen auf dieser Karte.",
@@ -271,6 +277,10 @@
 "Requires 1 science tag.": "Benötigt 1 Wissenschafts-Symbol.",
 
 "Volunteer Mining Initiative": "Freiwillige Bergbau-Initiative",
-"Excavate 1 underground resource for every 3 cities in play.": "Grabe 1 unterirdische Ressource für je 3 Städte im Spiel aus."
+"Excavate 1 underground resource for every 3 cities in play.": "Grabe 1 unterirdische Ressource für je 3 Städte im Spiel aus.",
+
+"Whales": "Wale",
+"Effect: Whenever you would gain an ocean when there are already 9 oceans on the board, add an animal to this card": "Effekt: Immer wenn du einen Ozean erhalten würdest, wenn sich bereits 9 Ozeane auf dem Spielbrett befinden, füge dieser Karte ein Tier hinzu.",
+"Requires 6 oceans. 1 VP for each animal on this card.": "Benötigt 6 Ozeane. 1 SP für jedes Tier auf dieser Karte."
   
 }

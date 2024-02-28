@@ -239,6 +239,14 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+    if (behavior.underworld !== undefined) {
+      const underworld = behavior.underworld;
+      if (underworld.identify !== undefined) {
+        if (UnderworldExpansion.identifiableSpaces(player).length === 0) {
+          return false;
+        }
+      }
+    }
     return true;
   }
 

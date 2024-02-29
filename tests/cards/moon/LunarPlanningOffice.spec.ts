@@ -42,7 +42,7 @@ describe('LunarPlanningOffice', () => {
     expect(game.projectDeck.discardPile.map((c) => c.name)).has.members([CardName.MICRO_MILLS]);
 
     // Robotic Workforce is at the top of the deck.
-    expect(game.projectDeck.drawLegacy(game).name).eq(CardName.ROBOTIC_WORKFORCE);
+    expect(game.projectDeck.draw(game)?.name).eq(CardName.ROBOTIC_WORKFORCE);
   });
 });
 

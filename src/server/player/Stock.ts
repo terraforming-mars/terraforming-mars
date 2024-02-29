@@ -97,6 +97,9 @@ export class Stock {
       from? : ResourceSource,
       stealing?: boolean
     }) {
+    if (amount === 0) {
+      return;
+    }
     // When amount is negative, sometimes the amount being asked to be removed is more than the player has.
     // delta represents an adjusted amount which basically declares that a player cannot lose more resources
     // then they have.

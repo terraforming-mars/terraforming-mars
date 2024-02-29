@@ -46,7 +46,7 @@ import {GeoscanSatellite} from './GeoscanSatellite';
 import {GeothermalNetwork} from './GeothermalNetwork';
 import {GlobalAudit} from './GlobalAudit';
 import {GreyMarketExploitation} from './GreyMarketExploitation';
-// import {GuerillaEcologists} from './GuerillaEcologists';
+import {GuerillaEcologists} from './GuerillaEcologists';
 import {Hackers} from './Hackers';
 import {Hadesphere} from './Hadesphere';
 import {HecateSpeditions} from './HecateSpeditions';
@@ -231,7 +231,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy}, // Scoops is not quite clear yet.
     [CardName.INVESTIGATIVE_JOURNALISM]: {Factory: InvestigativeJournalism},
     [CardName.WHALES]: {Factory: Whales},
-    // [CardName.GUERILLA_ECOLOGISTS]: {Factory: GuerillaEcologists},
+    [CardName.GUERILLA_ECOLOGISTS]: {Factory: GuerillaEcologists},
     [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents},
 
     // // Replacements

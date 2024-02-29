@@ -46,7 +46,7 @@ import {GeoscanSatellite} from './GeoscanSatellite';
 import {GeothermalNetwork} from './GeothermalNetwork';
 import {GlobalAudit} from './GlobalAudit';
 import {GreyMarketExploitation} from './GreyMarketExploitation';
-// // import {GuerillaEcologists} from './GuerillaEcologists';
+// import {GuerillaEcologists} from './GuerillaEcologists';
 import {Hackers} from './Hackers';
 import {Hadesphere} from './Hadesphere';
 import {HecateSpeditions} from './HecateSpeditions';
@@ -113,7 +113,7 @@ import {StarVegas} from './StarVegas';
 import {StemFieldSubsidies} from './StemFieldSubsidies';
 import {SubnauticPirates} from './SubnauticPirates';
 import {SubterraneanSea} from './SubterraneanSea';
-// // import {ThiolavaVents} from './ThiolavaVents';
+import {ThiolavaVents} from './ThiolavaVents';
 import {TitanManufacturingColony} from './TitanManufacturingColony';
 import {TunnelBoringMachine} from './TunnelBoringMachine';
 import {TunnelingOperation} from './TunnelingOperation';
@@ -231,8 +231,8 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy}, // Scoops is not quite clear yet.
     [CardName.INVESTIGATIVE_JOURNALISM]: {Factory: InvestigativeJournalism},
     [CardName.WHALES]: {Factory: Whales},
-    // // [CardName.GUERILLA_ECOLOGISTS]: {Factory: GuerillaEcologists}, // IP.
-    // // [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents}, // Uncomment when tests are more manageable. See Production.ts
+    // [CardName.GUERILLA_ECOLOGISTS]: {Factory: GuerillaEcologists},
+    [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents},
 
     // // Replacements
     // [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},

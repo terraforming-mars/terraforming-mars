@@ -19,6 +19,7 @@ import {OneOrArray} from '../../common/utils/types';
 import {JSONValue} from '../../common/Types';
 import {IStandardProjectCard} from './IStandardProjectCard';
 import {Warning} from '../../common/cards/Warning';
+import {Resource} from '../../common/Resource';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -118,6 +119,7 @@ export interface ICard {
    */
   onExcavation?(player: IPlayer, space: Space): void;
 
+  onProductionGain?(player: IPlayer, resource: Resource, amount: number): void;
   onProductionPhase?(player: IPlayer): void;
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */

@@ -122,3 +122,13 @@ export function zip<S, T>(first: ReadonlyArray<S>, second: ReadonlyArray<T>): Ar
 export function asArray<T>(elem: OneOrArray<T>): Array<T> {
   return Array.isArray(elem) ? elem : [elem];
 }
+
+export function deNull<T>(array: ReadonlyArray<T | undefined>): Array<T> {
+  const output: Array<T> = [];
+  for (const elem of array) {
+    if (elem !== undefined) {
+      output.push(elem);
+    }
+  }
+  return output;
+}

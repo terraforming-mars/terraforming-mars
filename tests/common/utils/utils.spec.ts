@@ -66,4 +66,14 @@ describe('utils', function() {
       ['c', 2],
     ]);
   });
+
+  it('deNull', () => {
+    expect(utils.deNull([])).deep.eq([]);
+    expect(utils.deNull([1])).deep.eq([1]);
+    expect(utils.deNull([1, 2, 3, 4, 5])).deep.eq([1, 2, 3, 4, 5]);
+    expect(utils.deNull([1, undefined, 3, 4, 5])).deep.eq([1, 3, 4, 5]);
+    expect(utils.deNull([undefined])).deep.eq([]);
+    expect(utils.deNull([undefined, 1, undefined])).deep.eq([1]);
+    expect(utils.deNull([undefined, undefined])).deep.eq([]);
+  });
 });

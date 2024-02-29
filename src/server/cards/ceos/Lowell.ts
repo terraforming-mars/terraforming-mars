@@ -3,7 +3,6 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {ICeoCard} from './ICeoCard';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -26,6 +25,9 @@ export class Lowell extends CeoCard {
   }
 
   public override canAct(player: IPlayer): boolean {
+    if (!player.game.ceoDeck.canDraw(3)) {
+      this.warnings.add('deckTooSmall');
+    }
     if (!super.canAct(player)) {
       return false;
     }
@@ -36,11 +38,7 @@ export class Lowell extends CeoCard {
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    let ceosDrawn: Array<ICeoCard> = [
-      game.ceoDeck.drawLegacy(game),
-      game.ceoDeck.drawLegacy(game),
-      game.ceoDeck.drawLegacy(game),
-    ];
+    let ceosDrawn = game.ceoDeck.drawN(game, 3);
 
     // TODO(d-little): This is not being tested, but currently every CEO is always playable
     ceosDrawn = ceosDrawn.filter((ceo) => {

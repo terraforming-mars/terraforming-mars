@@ -197,7 +197,8 @@ export class UnderworldExpansion {
   }
 
   public static excavate(player: IPlayer, space: Space) {
-    if (player.game.gameOptions.underworldExpansion !== true) {
+    const game = player.game;
+    if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
 
@@ -217,7 +218,6 @@ export class UnderworldExpansion {
     player.tableau.forEach((card) => card.onExcavation?.(player, space));
 
     // TODO(kberg): The identification is supposed to be resolved after the benefit.
-    const game = player.game;
     game.board
       .getAdjacentSpaces(space)
       .forEach((s) => UnderworldExpansion.identify(game, s, player));

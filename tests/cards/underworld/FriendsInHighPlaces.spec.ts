@@ -57,4 +57,14 @@ describe('FriendsInHighPlaces', () => {
     player.underworldData.corruption = 1;
     expect(player.canPlay(protectedValley)).is.false;
   });
+
+  it('does not work without Friends in High Places', () => {
+    // Large Convoy costs 36.
+    const largeConvoy = new LargeConvoy();
+    player.megaCredits = 30;
+    player.underworldData.corruption = 1;
+    expect(player.canPlay(largeConvoy)).eq(true);
+    player.playedCards = [];
+    expect(player.canPlay(largeConvoy)).eq(false);
+  });
 });

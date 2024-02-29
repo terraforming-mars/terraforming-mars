@@ -1,6 +1,5 @@
 import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {IPreludeCard} from '../prelude/IPreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
@@ -24,11 +23,17 @@ export class NewPartner extends PreludeCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer) {
+    const game = player.game;
+    if (!game.preludeDeck.canDraw(2)) {
+      this.warnings.add('deckTooSmall');
+    }
+    return true;
+  }
+
   public override bespokePlay(player: IPlayer) {
-    const cards: Array<IPreludeCard> = [
-      player.game.preludeDeck.drawLegacy(player.game),
-      player.game.preludeDeck.drawLegacy(player.game),
-    ];
+    const game = player.game;
+    const cards = game.preludeDeck.drawN(game, 2);
     return PreludesExpansion.playPrelude(player, cards);
   }
 }

@@ -37,13 +37,10 @@ export class ValleyTrust extends CorporationCard {
     return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
   }
 
+  // TODO(kberg): find a way to feed warnings for initialAction.
   public initialAction(player: IPlayer) {
     const game = player.game;
-    const cards = [
-      game.preludeDeck.drawLegacy(game),
-      game.preludeDeck.drawLegacy(game),
-      game.preludeDeck.drawLegacy(game),
-    ];
+    const cards = game.preludeDeck.drawN(game, 3);
     return PreludesExpansion.playPrelude(player, cards);
   }
 }

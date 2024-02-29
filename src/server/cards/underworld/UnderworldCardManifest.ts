@@ -121,7 +121,7 @@ import {TunnelingSubcontractor} from './TunnelingSubcontractor';
 import {UndergroundAmusementPark} from './UndergroundAmusementPark';
 import {UndergroundHabitat} from './UndergroundHabitat';
 import {UndergroundRailway} from './UndergroundRailway';
-// // import {UndergroundResearchCenter} from './UndergroundResearchCenter';
+import {UndergroundResearchCenter} from './UndergroundResearchCenter';
 import {UndergroundSettlement} from './UndergroundSettlement';
 import {UndergroundShelters} from './UndergroundShelters';
 import {UndergroundSmugglingRing} from './UndergroundSmugglingRing';
@@ -201,7 +201,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},
     [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},
     [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft},
-    // // [CardName.UNDERGROUND_RESEARCH_CENTER]: {Factory: UndergroundResearchCenter}, // I want to take time to think about the tag rule.
+    [CardName.UNDERGROUND_RESEARCH_CENTER]: {Factory: UndergroundResearchCenter},
     [CardName.PRICE_WARS]: {Factory: PriceWars},
     // 64-72
     [CardName.ANTI_TRUST_CRACKDOWN]: {Factory: AntiTrustCrackdown},

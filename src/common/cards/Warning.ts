@@ -8,4 +8,5 @@ export type Warning =
  'maxLogisticsRate' |
  'decreaseOwnProduction' |
  'buildOnLuna' |
- 'preludeFizzle';
+ 'preludeFizzle' |
+ 'underworldMustExcavateEnergy';

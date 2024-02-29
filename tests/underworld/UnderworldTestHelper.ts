@@ -33,10 +33,11 @@ export class UnderworldTestHelper {
 
     const plants = player.plants;
     space.undergroundResources = 'plant1';
-    selectSpace.cb(space);
+    const pi = selectSpace.cb(space);
 
     expect(space.excavator).eq(player);
     expect(player.plants - plants).eq(1);
+    return pi;
   }
 
   public static assertIsIdentificationAction(player: TestPlayer, input: PlayerInput | undefined) {

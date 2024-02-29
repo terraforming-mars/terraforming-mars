@@ -21,6 +21,7 @@ const descriptions: Record<Warning, string> = {
   'decreaseOwnProduction': 'Warning: you are the only player that can lose production.',
   'buildOnLuna': 'You will only be able to build the colony on Luna.',
   'preludeFizzle': 'This prelude is not playable, so you will discard it and gain 15 M€.',
+  'underworldMustExcavateEnergy': 'You will be limited to excavating a space that gives 1 energy production.',
 };
 
 export default Vue.extend({

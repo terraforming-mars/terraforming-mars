@@ -58,18 +58,16 @@ export class Merger extends PreludeCard {
   }
 
   private static dealCorporations(player: IPlayer, corporationDeck: CorporationDeck) {
-    const cards = [];
-    try {
-      while (cards.length < 4) {
-        cards.push(corporationDeck.drawLegacy(player.game));
-      }
-    } catch (err) {
+    const game = player.game;
+    const cards = corporationDeck.drawN(game, 4);
+    if (cards.length !== 4) {
       // Error will only occur if the deck is empty. That won't happen, but here we'll just do our best.
-      player.game.log('Not enough corporations while resolving ${0}', (b) => b.cardName(CardName.MERGER));
+      game.log('Not enough corporations while resolving ${0}', (b) => b.cardName(CardName.MERGER));
     }
     LogHelper.logDrawnCards(player, cards, /* privateMessage= */true);
     return cards;
   }
+
   public static setCardCost(player: IPlayer) {
     return player.corporations
       .map((card) => (card.cardCost ?? CARD_COST) - CARD_COST) // Convert every card cost to delta from zero. (e.g. -2, 0, +2)

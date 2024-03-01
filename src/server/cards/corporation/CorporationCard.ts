@@ -15,6 +15,9 @@ export abstract class CorporationCard extends Card implements ICorporationCard {
   }
 }
 
+/**
+ * A corporation card that can parse an `action: {}` stanza.
+ */
 export abstract class ActiveCorporationCard extends CorporationCard implements IActionCard {
   public canAct(player: IPlayer) {
     if (this.properties.action === undefined) {

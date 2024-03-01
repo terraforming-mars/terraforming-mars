@@ -108,8 +108,9 @@ export interface ICard {
    *   or undefined if added by a neutral player.
    * @param cardOwner the player who owns THIS CARD.
    * @param space the space that was just identified.
+   * @param fromExcavate when true, this identifacation came from excavating an unidentified space.
    */
-  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space): void;
+  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space, fromExcavate: boolean): void;
 
   /**
    * Optional callback when any player excavates a space.

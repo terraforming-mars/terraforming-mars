@@ -26,7 +26,7 @@ import {CutThroatBudgeting} from './CutThroatBudgeting';
 import {Deepmining} from './Deepmining';
 import {Deepnuking} from './Deepnuking';
 import {DeepwaterDome} from './DeepwaterDome';
-// import {DemetronLabs} from './DemetronLabs';
+import {DemetronLabs} from './DemetronLabs';
 import {EarthquakeMachine} from './EarthquakeMachine';
 import {ElectionSponsorship} from './ElectionSponsorship';
 import {ExcavateStandardProject} from './ExcavateStandardProject';
@@ -248,7 +248,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
 
   corporationCards: {
     [CardName.HADESPHERE]: {Factory: Hadesphere},
-    // [CardName.DEMETRON_LABS]: {Factory: DemetronLabs},
+    [CardName.DEMETRON_LABS]: {Factory: DemetronLabs},
     [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo},
     [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics},
     [CardName.ARBORIST_COLLECTIVE]: {Factory: ArboristCollective},

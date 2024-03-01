@@ -24,7 +24,7 @@ export class UndergroundShelters extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U72',
         // TODO(kberg): Custom VP icon.
-        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(1, 3),
+        victoryPoints: CardRenderDynamicVictoryPoints.undergroundShelters(),
         renderData: CardRenderer.builder((b) => {
           b.excavate(1);
         }),

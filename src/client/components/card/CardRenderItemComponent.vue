@@ -337,6 +337,9 @@ export default Vue.extend({
       case CardRenderItemType.GEOSCAN_ICON:
         classes.push('card-geoscan-icon');
         break;
+      case CardRenderItemType.UNDERGROUND_SHELTERS:
+        classes.push('card-underground-shelters');
+        break;
       }
 
       if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {

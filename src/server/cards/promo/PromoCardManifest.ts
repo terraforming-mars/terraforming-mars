@@ -69,6 +69,7 @@ import {SaturnSurfing} from './SaturnSurfing';
 import {SelfReplicatingRobots} from './SelfReplicatingRobots';
 import {SmallAsteroid} from './SmallAsteroid';
 import {SnowAlgae} from './SnowAlgae';
+import {SoilEnrichment} from './SoilEnrichment';
 import {SolarLogistics} from './SolarLogistics';
 import {Splice} from './Splice';
 import {StanfordTorus} from './StanfordTorus';
@@ -143,6 +144,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.TESLARACT]: {Factory: Teslaract},
     [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
     [CardName.ICY_IMPACTORS]: {Factory: IcyImpactors},
+    [CardName.SOIL_ENRICHMENT]: {Factory: SoilEnrichment},
   },
 
   preludeCards: {

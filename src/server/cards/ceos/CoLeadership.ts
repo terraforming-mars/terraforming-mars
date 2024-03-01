@@ -19,13 +19,16 @@ export class CoLeadership extends PreludeCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer) {
+    if (!player.game.ceoDeck.canDraw(3)) {
+      this.warnings.add('deckTooSmall');
+    }
+    return true;
+  }
+
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    let ceosDrawn: Array<ICeoCard> = [
-      game.ceoDeck.drawLegacy(game),
-      game.ceoDeck.drawLegacy(game),
-      game.ceoDeck.drawLegacy(game),
-    ];
+    let ceosDrawn: Array<ICeoCard> = game.ceoDeck.drawN(game, 3);
 
     // TODO(d-little): This is not being tested, but currently every CEO is always playable
     ceosDrawn = ceosDrawn.filter((ceo) => {

@@ -41,17 +41,23 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
     });
   }
 
-  public canAct(): boolean {
+  public canAct(player: IPlayer): boolean {
+    if (!player.game.projectDeck.canDraw(1)) {
+      this.warnings.add('deckTooSmall');
+    }
     return true;
   }
 
   public action(player: IPlayer) {
-    const topCard = player.game.projectDeck.drawLegacy(player.game);
-    player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard, {tags: true}));
-    if (topCard.tags.includes(Tag.SPACE)) {
+    const card = player.game.projectDeck.draw(player.game);
+    if (card === undefined) {
+      return;
+    }
+    player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(card, {tags: true}));
+    if (card.tags.includes(Tag.SPACE)) {
       player.addResourceTo(this, {qty: 1, log: true});
     }
-    player.game.projectDeck.discard(topCard);
+    player.game.projectDeck.discard(card);
     return undefined;
   }
 }

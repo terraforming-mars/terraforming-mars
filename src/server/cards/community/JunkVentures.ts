@@ -3,7 +3,6 @@ import {Size} from '../../../common/cards/render/Size';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {ChooseCards} from '../../deferredActions/ChooseCards';
-import {LogHelper} from '../../LogHelper';
 import {IPlayer} from '../../IPlayer';
 
 export class JunkVentures extends CorporationCard {
@@ -28,15 +27,10 @@ export class JunkVentures extends CorporationCard {
   }
 
   public initialAction(player: IPlayer) {
-    const discardedCards = new Set<CardName>();
-
-    for (let i = 0; i < 3; i++) {
-      const card = player.game.projectDeck.drawLegacy(player.game);
+    const cards = player.game.projectDeck.drawN(player.game, 3);
+    for (const card of cards) {
       player.game.projectDeck.discard(card);
-      discardedCards.add(card.name);
     }
-
-    LogHelper.logDiscardedCards(player.game, Array.from(discardedCards));
     return undefined;
   }
 

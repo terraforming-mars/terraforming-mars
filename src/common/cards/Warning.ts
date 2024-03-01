@@ -9,4 +9,5 @@ export type Warning =
  'decreaseOwnProduction' |
  'buildOnLuna' |
  'preludeFizzle' |
- 'underworldMustExcavateEnergy';
+ 'underworldMustExcavateEnergy' |
+ 'deckTooSmall';

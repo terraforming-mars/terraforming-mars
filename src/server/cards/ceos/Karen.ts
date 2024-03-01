@@ -19,13 +19,16 @@ export class Karen extends CeoCard {
     });
   }
 
+  public override canAct(player: IPlayer) {
+    if (!player.game.preludeDeck.canDraw(player.game.generation)) {
+      this.warnings.add('deckTooSmall');
+    }
+    return super.canAct(player);
+  }
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const cards = [];
-    for (let i = 0; i < game.generation; i++) {
-      cards.push(game.preludeDeck.drawLegacy(game));
-    }
+    const cards = game.preludeDeck.drawN(game, game.generation);
     return PreludesExpansion.playPrelude(player, cards);
   }
 }

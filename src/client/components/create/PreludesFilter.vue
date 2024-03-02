@@ -42,7 +42,6 @@ import {CardType} from '@/common/cards/CardType';
 function preludeCardNames(module: GameModule): Array<CardName> {
   return getCards(byModule(module))
     .filter(byType(CardType.PRELUDE))
-    .filter((card) => card.name !== CardName.VENUS_FIRST)
     .map(toName);
 }
 

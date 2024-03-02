@@ -16,6 +16,8 @@ const CARD_RENAMES = new Map<string, CardName>([
 
   // TODO(kberg): remove after 2024-04-01
   ['Hectate Speditions', CardName.HECATE_SPEDITIONS],
+  // TODO(kberg): remove after 2024-04-01
+  ['Venus First:Pathfinders', CardName.VENUS_FIRST],
 ]);
 
 // TODO(kberg): This doesn't need to be a class.

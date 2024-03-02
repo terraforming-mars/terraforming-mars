@@ -34,8 +34,8 @@ export class Gaia extends CeoCard {
       space.tile?.tileType !== undefined && space.player !== undefined && !isHazardTileType(space.tile.tileType) && space.spaceType !== SpaceType.COLONY,
     );
     tilesOnMars.forEach((space) => {
-      AresHandler.ifAres(player.game, (aresData) => {
-        AresHandler.earnAdjacencyBonuses(aresData, player, space, {incrementMilestone: false, giveAresTileOwnerBonus: false});
+      AresHandler.ifAres(player.game, () => {
+        AresHandler.earnAdjacencyBonuses(player, space, {giveAresTileOwnerBonus: false});
       });
     });
     return undefined;

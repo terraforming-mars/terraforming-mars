@@ -150,6 +150,16 @@ export interface IGame extends Logger {
   // a tile on The Moon.
   addTile(player: IPlayer, space: Space, tile: Tile): void;
   simpleAddTile(player: IPlayer, space: Space, tile: Tile): void;
+  /**
+   * Gives all the bonuses a player may gain when placing a tile on a space.
+   *
+   * This includes bonuses on the map, from oceans, Ares tiles, Turmoil, Colonies, etc.
+   */
+  grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean): void
+
+  /**
+   * Gives all the bonuses from a space on the map.
+   */
   grantSpaceBonuses(player: IPlayer, space: Space): void;
   grantSpaceBonus(player: IPlayer, spaceBonus: SpaceBonus, count?: number): void;
   addGreenery(player: IPlayer, space: Space, shouldRaiseOxygen?: boolean): void;

@@ -1234,7 +1234,6 @@ export class Game implements IGame, Logger {
     TurmoilHandler.resolveTilePlacementCosts(player);
 
     // Part 3. Setup for bonuses
-    const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
     const initialTileTypeForAres = space.tile?.tileType;
     const coveringExistingTile = space.tile !== undefined;
 
@@ -1243,30 +1242,12 @@ export class Game implements IGame, Logger {
 
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
-      if (!coveringExistingTile) {
-        this.grantSpaceBonuses(player, space);
-      }
-
-      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-        if (Board.isOceanSpace(adjacentSpace)) {
-          player.megaCredits += player.oceanBonus;
-        }
-      });
-
-      AresHandler.ifAres(this, () => {
-        AresHandler.earnAdjacencyBonuses(player, space);
-      });
+      this.grantPlacementBonuses(player, space, coveringExistingTile);
 
       if (tile?.tileType !== TileType.MARS_NOMADS) {
         AresHandler.ifAres(this, (aresData) => {
           AresHandler.maybeIncrementMilestones(aresData, player, space);
         });
-      }
-
-      TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
-
-      if (arcadianCommunityBonus) {
-        this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
       }
     } else {
       space.player = undefined;
@@ -1286,6 +1267,30 @@ export class Game implements IGame, Logger {
       if (space.spaceType !== SpaceType.COLONY && space.player === player) {
         UnderworldExpansion.identify(this, space, player);
       }
+    }
+  }
+
+  public grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean) {
+    const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
+
+    if (!coveringExistingTile) {
+      this.grantSpaceBonuses(player, space);
+    }
+
+    this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+      if (Board.isOceanSpace(adjacentSpace)) {
+        player.megaCredits += player.oceanBonus;
+      }
+    });
+
+    AresHandler.ifAres(this, () => {
+      AresHandler.earnAdjacencyBonuses(player, space);
+    });
+
+    TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
+
+    if (arcadianCommunityBonus) {
+      this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
     }
   }
 

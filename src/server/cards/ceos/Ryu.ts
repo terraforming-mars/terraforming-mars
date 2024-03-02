@@ -31,7 +31,6 @@ export class Ryu extends CeoCard {
     if (!super.canAct(player)) {
       return false;
     }
-    // I'm not using player.canReduceAnyProduction here as that cares about solo players
     return player.production.megacredits +
               player.production.steel +
               player.production.titanium +

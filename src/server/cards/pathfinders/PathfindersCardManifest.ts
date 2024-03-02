@@ -221,7 +221,7 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: {Factory: AdhaiHighOrbitConstructions, compatibility: 'colonies'},
   },
   preludeCards: {
-    [CardName.VENUS_FIRST_PATHFINDERS]: {Factory: VenusFirst, compatibility: 'venus'},
+    [CardName.VENUS_FIRST]: {Factory: VenusFirst, compatibility: 'venus'},
     [CardName.VALUABLE_GASES_PATHFINDERS]: {Factory: ValuableGases, compatibility: 'venus'},
     [CardName.CO2_REDUCERS]: {Factory: CO2Reducers, compatibility: 'venus'},
     [CardName.HYDROGEN_BOMBARDMENT]: {Factory: HydrogenBombardment, compatibility: 'venus'},

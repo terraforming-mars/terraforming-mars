@@ -146,7 +146,7 @@ export default (Vue as WithRefs<Refs>).extend({
       // Whenever Venus is terraformed 1 step, you gain 2 M€
       case CardName.APHRODITE:
         switch (prelude) {
-        case CardName.VENUS_FIRST_PATHFINDERS:
+        case CardName.VENUS_FIRST:
           return 4;
         case CardName.HYDROGEN_BOMBARDMENT:
           return 2;

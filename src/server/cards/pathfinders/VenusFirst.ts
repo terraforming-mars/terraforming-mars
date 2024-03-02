@@ -6,7 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class VenusFirst extends PreludeCard {
   constructor() {
     super({
-      name: CardName.VENUS_FIRST_PATHFINDERS,
+      name: CardName.VENUS_FIRST,
       tags: [Tag.VENUS],
 
       behavior: {

@@ -21,7 +21,7 @@ export type UndergroundResourceToken =
 /**
  * Text descriptions of each Underground resource token.
  */
-export const undergroundResourcerTokenDescription: Record<UndergroundResourceToken, string> = {
+export const undergroundResourceTokenDescription: Record<UndergroundResourceToken, string> = {
   nothing: 'nothing',
   card1: 'draw 1 card',
   card2: 'draw 2 cards',

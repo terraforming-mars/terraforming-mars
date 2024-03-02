@@ -64,6 +64,10 @@
 "Forest Tunnels": "Waldtunnel",
 "Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "Benötigt einen Ausgrabungsmarker. Erhalte 1 Pflanze für jeden Ausgrabungsmarker, den du besitzt.",
 
+"Friends in High Places": "Freunde in hohen Positionen",
+"Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "Effekt: Beim Bezahlen von Karten mit Erdsymbol können Korruptionsressourcen zu je 10 M€ ausgegeben werden.",
+"Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "Benötigt 1 Korruption und 1 Erdsymbol. Erhalte 1 Korruption.",
+
 "Geological Survey": "Geologische Untersuchung",
 "Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Füge 1 Datum zu einer ANDEREN Karte hinzu. Identifiziere 2 beliebige unterirdische Ressourcen auf dem Mars.",
 
@@ -84,6 +88,9 @@
 "Action: Spend 1 M€ to gain 1 standard resource.": "AKTION: Bezahle 1 M€, um 1 Standardressource zu erhalten.",
 "Action: Spend 1 corruption to gain 3 of the same standard resource.": "AKTION: Bezahle 1 Korruption, um 3 der gleichen Standardressource zu erhalten.",
 "Requires 2 corruption.": "Benötigt 2 Korruption.",
+
+"Guerilla Ecologists": "Guerilla-Ökologen",
+"Requires 1 corruption. Spend 4 plants to place a greenery tile IGNORING ADJACENCY RESTRICTIONS.": "Benötigt 1 Korruption. Gib 4 Pflanzen aus, um ein Grunflächenplättchen zu platzieren, UNABHÄNGIG VON EINSCHRÄNKUNGEN.",
 
 "Hackers": "Hacker",
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Benötigt 2 Korruption. Reduziere eine beliebige M€-Produktion um 2. Erhöhe deine M€-Produktion um 1 für jede Korruptionressource, die du hast.",
@@ -122,7 +129,7 @@
 "Place this special tile on a NON-RESERVED space that has your excavation marker.": "Platziere dieses Spezialplättchen auf einem NICHT-RESERVIERTEN Feld, auf dem dein Ausgrabungsmarker liegt.",
 
 "Martian Express": "Marsianer-Express",
-"Action: This card can receive any resource that can be placed on a card. Resources placed here get converted to Wares resources.": "AKTION: Diese Karte kann jede Ressource aufnehmen, die auf einer Karte platziert werden kann. Hier platzierte Ressourcen werden in Waren umgewandelt.",
+"Effect: This card can receive any resource that can be placed on a card. Resources placed here get converted to Wares resources.": "EFFEKT: Diese Karte kann jede Ressource aufnehmen, die auf einer Karte platziert werden kann. Hier platzierte Ressourcen werden in Waren umgewandelt.",
 "Action: Remove all wares from here and gain 1 M€ for each ware removed.": "Aktion: Entferne alle Waren von dieser Karte und erhalte 1 M€ für jede entfernte Ware.",
 "Requires 1 city in play.": "Benötigt 1 Stadt im Spiel.",
 
@@ -147,6 +154,10 @@
 
 "Narrative Spin": "Erzählerische Drehung",
 "Requires 1 Earth tag. Gain 2 corruption.": "Benötigt 1 Erd-Symbol. Erhalte 2 Korruption.",
+
+"Neutrinograph": "Neutrinograph",
+"Effect: When identifying underground resources EXCEPT by placing a tile or excavating, you can re-identify spaces that already have an unclaimed token. When you do, replace that token with a new one.": "EFFEKT: Wenn du unterirdische Ressourcen identifizierst, AUSSER durch Platzieren eines Plättchens oder Ausgraben, kannst du Felder, die bereits ein nicht beanspruchtes Plättchen haben, erneut identifizieren. Wenn du das tust, ersetze das Plättchen durch ein neues.",
+"Requires 4 science tags. Identify 2 underground resources.": "Benötigt 4 Wissenschafts-Symbole. Identifiziere 2 unterirdische Ressourcen.",
 
 "Nightclubs": "Nachtclubs",
 "Requires that you own a city in play. Gain 1 corruption and increase your M€ production 2 steps.": "Benötigt eine eigene Stadt im Spiel. Erhalte 1 Korruption und erhöhe deine M€-Produktion um 2.",
@@ -233,6 +244,9 @@
 "Awards and Milestones": "Auszeichnungen und Meilensteine",
 "Requires 1 corruption. Gain 1 corruption. Until the end of this generation, milestones and awards cost +8 M€.": "Benötigt 1 Korruption. Erhalte 1 Korruption. Bis zum Ende dieser Generation kosten Meilensteine und Auszeichnungen +8 M€.",
 
+"Star Vegas": "Star Vegas",
+"Requires any 3 cities in play. Place a city on a space reserved for a different space city. Gain 2 corruption. Increase your MC production one step for each city in play.": "Benötigt 3 beliebige Städte im Spiel. Platziere eine Stadt auf einem Feld, das für eine andere Weltraum-Stadt reserviert ist. Erhalte 2 Korruption. Erhöhe deine MC-Produktion um 1 für jede Stadt im Spiel.",
+  
 "Standard Technology": "Standardtechnologie",
 "REPEAT": "WIEDERHOLE",
 "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "AKTION: Benutze ein Standardprojekt, das du in dieser Generation bereits durchgeführt hast und dessen Kosten um 8 Mio. € reduziert wurden.",
@@ -247,6 +261,10 @@
 "Subterranean Sea": "Unterirdisches Meer",
 "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "Platziere ein Ozeanplättchen auf ein Feld, das nicht für einen Ozean reserviert ist und auf der du einen Ausgrabungsmarker hast.",
 
+"Thiolava Vents": "Thiolava Schlote",
+"Effect: Each time you increase your heat production, including this, put 1 microbe on this card.": "EFFEKT: Jedes Mal, wenn du deine Wärme-Produktion erhöhst, einschließlich dieser, füge auf dieser Karte 1 Mikrobe hinzu.",
+"Requires an ocean. Increase your heat production 2 steps. 1 VP per 3 microbes on this card.": "Benötigt einen Ozean. Erhöhe deine Wärme-Produktion um 2. 1 SP pro 3 Mikroben auf dieser Karte.",
+  
 "Titan Manufacturing Colony": "Titan Manufacturing Kolonie",
 "Effect: Whenever you play a Jovian tag, (including this one), add 1 tool resource on this card.": "EFFEKT: Immer wenn du ein Jupiter-Symbol spielst (einschließlich diesem), lege 1 Werkzeugressource auf diese Karte.",
 "Action: Spend 1 tool resource on this card to excavate an underground resource.": "AKTION: Bezahle 1 Werkzeugressource von dieser Karte, um eine unterirdische Ressource auszugraben.",
@@ -266,6 +284,9 @@
 "Underground Railway": "Unterirdische Eisenbahn",
 "Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "Reduziere deine Energieproduktion um 1. Erhalte 1 TW für je 4 Ausgrabungsmarker, die du besitzt.",
 
+"Underground Research Center": "Unterirdisches Forschungszentrum",
+"Requires 5 excavation markers. Decrease your energy production 1 step. Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. Draw 2 cards with that tag.": "Benötigt 5 Ausgrabungsmarker. Reduziere deine Energie-Produktion um 1. Grabe eine unterirdische Ressource aus. Wähle ein Symbol, das kein Joker- oder Klonsymbol ist. Ziehe 2 Karten mit diesem Symbol.",
+  
 "Underground Shelters": "Unterirdische Bunker",
 "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "Grabe eine unterirdische Ressource aus. Am Ende des Spiels erhalte für deine Städte 1 Siegpunkt pro 3 Ausgrabungsmarker, die du in diesem Stadtfeld und den angrenzenden Feldern hast.",
 

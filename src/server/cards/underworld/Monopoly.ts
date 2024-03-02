@@ -23,21 +23,17 @@ export class Monopoly extends Card implements IProjectCard {
           b.text('STEAL').production((pb) => pb.wild(1, {all})).br;
         }),
         description: 'Requires 3 corruption. Choose a standard production type. ' +
-          'Steal 1 unit of that production from EACH OTHER player. They can block this with corruption.',
+          'Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.',
       },
     });
   }
 
   private availableProductions(player: IPlayer): Array<keyof Units> {
-    const units = new Set<keyof Units>();
     const targets = player.getOpponents();
-    for (const unit of Units.keys) {
+    return Units.keys.filter((unit) => {
       const resource = Units.ResourceMap[unit];
-      if (targets.some((target) => target.canHaveProductionReduced(resource, 1, player))) {
-        units.add(unit);
-      }
-    }
-    return Array.from(units);
+      return targets.some((target) => target.canHaveProductionReduced(resource, 1, player));
+    });
   }
 
   public override bespokeCanPlay(player: IPlayer) {

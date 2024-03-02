@@ -117,7 +117,7 @@
 "Labor Trafficking": "Arbeitskräftehandel",
 "FIRST": "ERSTE",
 "Effect: The first standard project action you take each generation, except selling patents, costs 6 M€ less.": "EFFEKT: Die erste Standard-Projekt-Aktion, die Du pro Generation durchführst, außer dem Verkauf von Patenten, kostet 6 M€ weniger.",
-  
+
 "Landfill": "Mülldeponie",
 "Increase your M€ production 1 step for each different TYPE of production you have at least 1 step of.": "Erhöhe deine M€-Produktion um 1 für jede andere Produktionsart, von der du mindestens 1 Stufe hast.",
 
@@ -147,8 +147,8 @@
 "Action: Spend 4 data resources on this card to draw a card.": "Aktion: Bezahle 4 Daten von dieser Karte, um eine Karte zu ziehen.",
 
 "Monopoly": "Monopol",
-"Requires 3 corruption. Choose a standard production type. Steal 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Benötigt 3 Korruption. Wähle eine Standard-Produktion. Stiehl 1 Einheit dieser Produktion von JEDEM ANDEREN Spieler. Er kann dies mit Korruption blockieren.",
-  
+"Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Benötigt 3 Korruption. Wähle eine Standard-Produktion. Stiehl bis zu 1 Einheit dieser Produktion von JEDEM ANDEREN Spieler. Er kann dies mit Korruption blockieren.",
+
 "Nanofoundry": "Nanogießerei",
 "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Benötigt 2 Wissenschafts-Symbole. Verringere deine Energieproduktion um 5. Ziehe 1 Karte für jedes Energiesymbol, das du hast, einschließlich diesem.",
 
@@ -224,7 +224,7 @@
 
 "Server Sabotage": "Server Sabotage",
 "Gain 1 corruption. Remove 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "Erhalte 1 Korruption. Entferne 2 Daten von einem beliebigen Spieler. Entferne alle nicht beanspruchten unterirdischen Ressourcen vom Spielbrett zurück auf den Stapel. Ihre Felder können wieder identifiziert werden.",
-  
+
 "Soil Export": "Export von Böden",
 "Excavate an underground resource.": "Grabe eine unterirdische Ressource aus.",
 "At the end of this generation only, during the production phase, gain 12 M€.": "Nur am Ende dieser Generation erhalte während der Produktionsphase 12 M€.",
@@ -246,7 +246,7 @@
 
 "Star Vegas": "Star Vegas",
 "Requires any 3 cities in play. Place a city on a space reserved for a different space city. Gain 2 corruption. Increase your MC production one step for each city in play.": "Benötigt 3 beliebige Städte im Spiel. Platziere eine Stadt auf einem Feld, das für eine andere Weltraum-Stadt reserviert ist. Erhalte 2 Korruption. Erhöhe deine MC-Produktion um 1 für jede Stadt im Spiel.",
-  
+
 "Standard Technology": "Standardtechnologie",
 "REPEAT": "WIEDERHOLE",
 "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "AKTION: Benutze ein Standardprojekt, das du in dieser Generation bereits durchgeführt hast und dessen Kosten um 8 Mio. € reduziert wurden.",
@@ -264,7 +264,7 @@
 "Thiolava Vents": "Thiolava Schlote",
 "Effect: Each time you increase your heat production, including this, put 1 microbe on this card.": "EFFEKT: Jedes Mal, wenn du deine Wärme-Produktion erhöhst, einschließlich dieser, füge auf dieser Karte 1 Mikrobe hinzu.",
 "Requires an ocean. Increase your heat production 2 steps. 1 VP per 3 microbes on this card.": "Benötigt einen Ozean. Erhöhe deine Wärme-Produktion um 2. 1 SP pro 3 Mikroben auf dieser Karte.",
-  
+
 "Titan Manufacturing Colony": "Titan Manufacturing Kolonie",
 "Effect: Whenever you play a Jovian tag, (including this one), add 1 tool resource on this card.": "EFFEKT: Immer wenn du ein Jupiter-Symbol spielst (einschließlich diesem), lege 1 Werkzeugressource auf diese Karte.",
 "Action: Spend 1 tool resource on this card to excavate an underground resource.": "AKTION: Bezahle 1 Werkzeugressource von dieser Karte, um eine unterirdische Ressource auszugraben.",
@@ -286,7 +286,7 @@
 
 "Underground Research Center": "Unterirdisches Forschungszentrum",
 "Requires 5 excavation markers. Decrease your energy production 1 step. Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. Draw 2 cards with that tag.": "Benötigt 5 Ausgrabungsmarker. Reduziere deine Energie-Produktion um 1. Grabe eine unterirdische Ressource aus. Wähle ein Symbol, das kein Joker- oder Klonsymbol ist. Ziehe 2 Karten mit diesem Symbol.",
-  
+
 "Underground Shelters": "Unterirdische Bunker",
 "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "Grabe eine unterirdische Ressource aus. Am Ende des Spiels erhalte für deine Städte 1 Siegpunkt pro 3 Ausgrabungsmarker, die du in diesem Stadtfeld und den angrenzenden Feldern hast.",
 
@@ -303,5 +303,5 @@
 "Whales": "Wale",
 "Effect: Whenever you would gain an ocean when there are already 9 oceans on the board, add an animal to this card": "Effekt: Immer wenn du einen Ozean erhalten würdest, wenn sich bereits 9 Ozeane auf dem Spielbrett befinden, füge dieser Karte ein Tier hinzu.",
 "Requires 6 oceans. 1 VP for each animal on this card.": "Benötigt 6 Ozeane. 1 SP für jedes Tier auf dieser Karte."
-  
+
 }

@@ -179,11 +179,11 @@ export interface IPlayer {
   plantsAreProtected(): boolean;
   alloysAreProtected(): boolean;
   /**
+   * Returns true when this player can lose |minQuantity| units of production.
    *
-   * @param resource
-   * @param minQuantity
+   * This typically means they have the required units of production, and that production
+   * isn't protected.
    */
-  canReduceAnyProduction(resource: Resource, minQuantity?: number): boolean;
   canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): boolean;
   maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void;
 

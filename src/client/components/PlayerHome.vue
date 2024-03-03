@@ -392,6 +392,7 @@ export default Vue.extend({
         [KeyboardNavigation.PLAYERSOVERVIEW]: 'shortkey-playersoverview',
         [KeyboardNavigation.HAND]: 'shortkey-hand',
         [KeyboardNavigation.COLONIES]: 'shortkey-colonies',
+
       };
       const inputSource = event.target as Node;
       if (inputSource.nodeName.toLowerCase() !== 'input') {

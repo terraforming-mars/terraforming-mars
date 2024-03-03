@@ -1,10 +1,12 @@
 import Vue from 'vue';
 
+Vue.config.devtools=true;
 import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {mainAppSettings} from '@/client/components/App';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import i18nPlugin from '@/client/plugins/i18n.plugin';
 
+console.log("asdf")
 declare global {
   interface Window {
     _translations: { [key: string]: string } | undefined;

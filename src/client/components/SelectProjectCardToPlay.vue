@@ -100,10 +100,42 @@ export default Vue.extend({
       this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
+      window.addEventListener('keydown', this.maybePerformAction);
     });
+  },
+  destroyed() {
+    window.removeEventListener('keydown', this.maybePerformAction);
   },
   methods: {
     ...PaymentWidgetMixin.methods,
+    maybePerformAction(event: KeyboardEvent) {
+      const ids: Partial<Record<string,number>> = {
+        'KeyZ': 0,
+        'KeyX': 1,
+        'KeyC': 2,
+        'KeyV': 3,
+      };
+      const inputSource = event.target as Node;
+      if (inputSource.nodeName.toLowerCase() !== 'input') {
+        const cardIdx = ids[event.code];
+        if (cardIdx != undefined) {
+           console.log(`Key ${event.code} pressed. doing ${cardIdx}`)
+           this.playNthCard(cardIdx)
+        }
+      }
+    },
+    
+    playNthCard(cardIdx:number){
+      // play the nth card. oonly does anything if 
+      // is active player with card choices
+      // out of the valid cards, get the nth card
+      
+      console.log(cardIdx);
+      const card = this.cards[cardIdx];
+      this.cardName = card.name;
+      this.cardChanged(); 
+      this.saveData()
+    },
     getCard() {
       const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
@@ -255,6 +287,7 @@ export default Vue.extend({
       return this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
     },
     cardChanged() {
+      console.log('cardchange')
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();

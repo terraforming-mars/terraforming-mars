@@ -16,8 +16,21 @@ describe('Neutrinograph', () => {
     expect(card.canPlay(player)).is.false;
     player.tagsForTest = {science: 4};
     expect(card.canPlay(player)).is.true;
+  });
 
+  it('canPlay while some spaces are excavatable', () => {
+    const card = new Neutrinograph();
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+
+    player.tagsForTest = {science: 4};
+    const spaces = UnderworldExpansion.identifiableSpaces(player);
+    spaces.forEach((space) => space.undergroundResources = 'nothing');
+    spaces.slice(1).forEach((space) => space.excavator = player);
     cast(card.play(player), undefined);
+    expect(card.canPlay(player)).is.true;
+
+    spaces[0].excavator = player;
+    expect(card.canPlay(player)).is.false;
   });
 
   it('play', () => {

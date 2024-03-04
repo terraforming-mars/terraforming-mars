@@ -231,6 +231,80 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({floaters: 3, megaCredits: 3}));
   });
 
+  it('Paying for Soil Enrichment without microbes', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.SOIL_ENRICHMENT, 6,
+      {megaCredits: 6},
+      {});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({megaCredits: 6});
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({megaCredits: 6}));
+  });
+
+  it('Paying for Soil Enrichment with Psychophriles', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.SOIL_ENRICHMENT, 6,
+      {megaCredits: 5},
+      {microbes: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+    tester.expectPayment({microbes: 1, megaCredits: 4});
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 1, megaCredits: 4}));
+
+    await tester.clickMax('microbes');
+    tester.expectPayment({microbes: 2, megaCredits: 2});
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 2, megaCredits: 2}));
+  });
+
+  it('Paying for Soil Enrichment with Psychophriles while another card has microbes', async () => {
+    const tableau: Array<Partial<CardModel>> = [
+      {name: CardName.PSYCHROPHILES, resources: 3},
+      {name: CardName.TARDIGRADES, resources: 1},
+    ];
+    const wrapper = setupCardForPurchase(
+      CardName.SOIL_ENRICHMENT, 6,
+      {megaCredits: 4, tableau: tableau as Array<CardModel>},
+      {microbes: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 1, megaCredits: 4}));
+
+    await tester.clickMax('microbes');
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 3, megaCredits: 0}));
+  });
+
+  it('Paying for other card with Psychophriles uses all microbes', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.BUSHES, 10,
+      {megaCredits: 8},
+      {microbes: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 1, megaCredits: 8}));
+
+    await tester.clickMax('microbes');
+
+    await tester.clickSave();
+    expect(saveResponse.payment).deep.eq(Payment.of({microbes: 3, megaCredits: 4}));
+  });
+
   it('using steel', async () => {
     // Rego Plastics will cost 10. Player has 7M€ and 4 steels.
     // They should spend at least enough to pay for the card, that is 6 M€ and 2 steel.

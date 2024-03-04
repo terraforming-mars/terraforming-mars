@@ -37,7 +37,7 @@ export class DarksideSmugglersUnion extends Card implements IProjectCard, IActio
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.colonies.canTrade() && ColoniesHandler.tradeableColonies(player.game).length > 0;
+    return player.colonies.canTrade();
   }
 
   public action(player: IPlayer) {

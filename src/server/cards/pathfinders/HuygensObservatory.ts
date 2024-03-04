@@ -94,7 +94,10 @@ export class HuygensObservatory extends Card implements IProjectCard {
     }
   }
   public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0 || ColoniesHandler.tradeableColonies(player.game).length > 0;
+    if (!player.colonies.canTrade()) {
+      return false;
+    }
+    return player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {

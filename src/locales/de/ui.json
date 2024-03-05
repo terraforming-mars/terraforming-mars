@@ -473,6 +473,7 @@
     "Select space reserved for ocean to place greenery tile": "Wähle ein reserviertes Feld für Ozeane um eine Grünfläche zu platzieren",
     "Select space for greenery tile": "Wähle ein Feld für das Grünflächenplättchen",
     "Select space for city tile": "Wähle ein Feld für das Stadtplättchen",
+    "Select space for a city tile": "Wähle ein Feld für ein Stadtplättchen",
     "Select space adjacent to a city tile": "Wähle ein Feld angrenzend zu deiner Stadt",
     "Select space for special city tile": "Wähle ein Feld für das Spezial-Stadtplättchen",
     "Select space for ${0} tile": "Wähle ein Feld für das ${0}-Spezialplättchen",
@@ -889,6 +890,8 @@
     "Spend 1 corruption to gain 3 plants.": "Bezahle 1 Korruption , um 3 Pflanzen zu erhalten",
     "Spend 1 corruption to gain 6 heat.": "Bezahle 1 Korruption , um 6 Wärme zu erhalten",
     "Spend 1 corruption to gain 3 of the same standard resource.": "Bezahle 1 Korruption , um 3 von derselben Standard-Ressource zu erhalten",
+    "Spend 8 energy to increase oxygen 1 step.": "Bezahle 8 Energie , um den Suerstoffsgehalt um 1% zu erhöhen.",
+    "Spend 8 energy to increase Venus 1 step.": "Bezahle 8 Energie , um die Venuswertung um 2% zu erhöhen.",
 
     "Select Earth card(s) to discard": "Wähle Karte(n) mit Erd-Symbol, die du abwerfen möchtest",
     "Select a card to keep and pass the rest to ${0}": "Wähle eine Karte, die du behalten möchtest und gebe den Rest an ${0}",

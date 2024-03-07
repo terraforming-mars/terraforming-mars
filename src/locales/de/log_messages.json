@@ -68,8 +68,6 @@
     "This game id was ${0}": "Die Spiel-ID war ${0}",
 
     "${0} gained ${1}": "${0} erhielt ${1}",
-    "${0} gained 1 ${1}": "${0} erhielt 1 ${1}",
-    "${0} gained 2 ${1}": "${0} erhielt 2 ${1}",
     "${0} gained ${1} ${2}": "${0} erhielt ${1} ${2}",
     "${0} gained 1 ${1} and 1 ${2} from ${3}": "${0} erhielt 1 ${1} und 1 ${2} von ${3}",
     "${0} gained ${1} M€ by discarding ${2} cards": "${0} erhielt ${1} M€ durch Abwerfen von ${2} Karten",
@@ -122,6 +120,7 @@
     "1 Microbe": "1 Mikrobe",
     "microbe(s)": "Mikrobe(n)",
     "2 microbes": "2 Mikroben",
+    "1 microbe / 2 °C": "1 Mikrobe / 2 °C",
     "animal": "Tier",
     "Animal": "Tier",
     "1 Animal": "1 Tier",

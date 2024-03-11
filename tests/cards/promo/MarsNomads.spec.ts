@@ -2,15 +2,16 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MarsNomads} from '../../../src/server/cards/promo/MarsNomads';
 import {Networker} from '../../../src/server/milestones/Networker';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {TileType} from '../../../src/common/TileType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 
-describe('MarsNomads', function() {
+describe('MarsNomads', () => {
   let card: MarsNomads;
   let board: MarsBoard;
   let player: TestPlayer;
@@ -80,7 +81,7 @@ describe('MarsNomads', function() {
     expect(cast(card.action(player), SelectSpace).spaces).to.not.contain(space19);
   });
 
-  it('Action gets adjacency bonus', function() {
+  it('Action gets adjacency bonus', () => {
     const destinationSpace = game.board.getSpace('04');
     const adjacentSpaces = game.board.getAdjacentSpaces(destinationSpace);
 
@@ -96,7 +97,7 @@ describe('MarsNomads', function() {
     expect(player.megaCredits).to.eq(1);
   });
 
-  it('Action does not get milestone benefit from adjacency', function() {
+  it('Action does not get milestone benefit from adjacency', () => {
     const destinationSpace = game.board.getSpace('04');
     const adjacentSpaces = game.board.getAdjacentSpaces(destinationSpace);
 
@@ -116,7 +117,7 @@ describe('MarsNomads', function() {
     expect(milestone.getScore(player)).eq(0);
   });
 
-  it('action gains ocean bonus', function() {
+  it('action gains ocean bonus', () => {
     const destinationSpace = game.board.getSpace('04');
     const adjacentSpaces = game.board.getAdjacentSpaces(destinationSpace);
 
@@ -128,5 +129,26 @@ describe('MarsNomads', function() {
     const selectSpace = cast(card.action(player), SelectSpace);
     selectSpace.cb(destinationSpace);
     expect(player.megaCredits).to.eq(2);
+  });
+
+  it('can make initial placement on an ocean bonus space even without the money (Bug #6479)', () => {
+    player.megaCredits = 0;
+    const space3 = game.board.getSpace('03');
+    expect(space3.spaceType).eq(SpaceType.LAND);
+    space3.bonus = [SpaceBonus.OCEAN];
+
+    const selectSpace = cast(card.play(player), SelectSpace);
+    expect(selectSpace.spaces).contains(space3);
+    selectSpace.cb(space3);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    expect(player.getTerraformRating()).eq(20);
+
+    space3.bonus = [SpaceBonus.TEMPERATURE];
+    selectSpace.cb(space3);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    expect(game.getTemperature()).eq(-30);
+    expect(player.getTerraformRating()).eq(20);
   });
 });

@@ -159,7 +159,7 @@
   "(Requires 4 science tags.)": "(Benötigt 4 eigene Wissenschaftssymbole.)",
 
   "Orbital Laboratories": "Orbitale Gärten",
-  "(Increase your plant production by 2. Gain 1 plant.)": "(Erhöhe deine Pflanzen-Produktion um 2. Erhalte 1 Pflanze.)",
+  "(Increase your plant production 2 steps. Gain 1 plant.)": "(Erhöhe deine Pflanzen-Produktion um 2. Erhalte 1 Pflanze.)",
 
   "Oumuamua Type Object Survey": "Oumuamua-Untersuchung",
   "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Ziehe 2 Karten. Hat die erste ein Wissenschafts- oder Mikrobensymbol, spiele sie sofort kostenlos, (ignoriere dabei ihre Bedingungen). Hat sie ein Weltraumsymbol, erhöhe deine Energie-Produktion um 3. Falls nichts zutrifft, verfahre mit der 2. Karte ebenso.)",
@@ -241,7 +241,7 @@
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, füge dieser Karte 1 Roboter hinzu.)",
   "1 VP for every specialized robot on this card.": "1 SP je Roboter auf dieser Karte.",
   "(Requires 4 science tags.)": "(Benötigt 4 eigene Wissenschaftssymbole.)",
-  
+
   "Think Tank": "Denkfabrik",
   "(Action: Spend 2 M€ to place 1 data on any card.)": "(AKTION: Bezahle 2 M€ um einer Karte 1 Datenressource hinzuzufügen.)",
   "+/-1 global parameter": "+/-1 globaler Parameter",

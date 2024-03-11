@@ -34,14 +34,14 @@ export class MarsNomads extends Card implements IActionCard {
 
 
   public override bespokeCanPlay(player: IPlayer) {
-    const spaces = player.game.board.getAvailableSpacesOnLand(player);
+    const spaces = player.game.board.getNonReservedLandSpaces();
     return spaces.length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
       message('Select space for ${0}', (b) => b.card(this)),
-      player.game.board.getAvailableSpacesOnLand(player))
+      player.game.board.getNonReservedLandSpaces())
       .andThen((space) => {
         player.game.nomadSpace = space.id;
         return undefined;

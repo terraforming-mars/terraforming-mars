@@ -54,6 +54,9 @@ export default Vue.extend({
   },
   methods: {
     saveData() {
+      if (this.selectedPlayer === undefined) {
+        return;
+      }
       this.onsave({type: 'player', player: this.selectedPlayer});
     },
   },

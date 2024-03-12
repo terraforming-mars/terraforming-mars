@@ -7,6 +7,7 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
+import {CardType} from '../../../src/common/cards/CardType';
 
 describe('Warmonger', () => {
   let award: Warmonger;
@@ -40,6 +41,9 @@ describe('Warmonger', () => {
       if (card === undefined) {
         console.log('Skipping ' + cardName);
         continue;
+      }
+      if (card.type === CardType.EVENT) {
+        failures.push(cardName);
       }
       if (Warmonger.autoInclude(card)) {
         failures.push(cardName);

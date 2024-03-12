@@ -1,74 +1,3 @@
-<script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
-
-import {getPreferences, PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
-import BugReportDialog from '@/client/components/BugReportDialog.vue';
-
-type Refs = {
-  bugDialog: InstanceType<typeof BugReportDialog>,
-}
-
-export default (Vue as WithRefs<Refs>).extend({
-  name: 'PreferencesDialog',
-  props: {
-    preferencesManager: {
-      type: Object as () => PreferencesManager,
-    },
-  },
-  components: {
-    'bug-report-dialog': BugReportDialog,
-  },
-  data() {
-    return {
-      prefs: {...this.preferencesManager.values()},
-    };
-  },
-  methods: {
-    setBoolPreferencesCSS(
-      target: HTMLElement,
-      val: boolean,
-      name: Preference,
-    ): void {
-      const cssClassSuffix = name;
-      if (val) {
-        target.classList.add('preferences_' + cssClassSuffix);
-      } else {
-        target.classList.remove('preferences_' + cssClassSuffix);
-      }
-    },
-    updatePreferences(): void {
-      for (const k of Object.keys(this.preferencesManager.values()) as Array<Preference>) {
-        const val = this.prefs[k];
-        this.preferencesManager.set(k, val, /* setOnChange */ true);
-      }
-    },
-    syncPreferences(): void {
-      const target = document.getElementById('ts-preferences-target');
-      if (!target) return;
-
-      for (const k of Object.keys(this.prefs) as Array<Preference>) {
-        if (k === 'lang') continue;
-        this.setBoolPreferencesCSS(target, this.prefs[k], k);
-      }
-
-      if (!target.classList.contains('language-' + this.prefs.lang)) {
-        target.classList.add('language-' + this.prefs.lang);
-      }
-    },
-    okClicked(): void {
-      this.$emit('okButtonClicked');
-    },
-  },
-  computed: {
-    getPreferences(): typeof getPreferences {
-      return getPreferences;
-    },
-
-  },
-});
-</script>
-
 <template>
     <div class="preferences_panel" :data="syncPreferences()">
       <div class="preferences_panel_item">
@@ -157,3 +86,74 @@ export default (Vue as WithRefs<Refs>).extend({
       <bug-report-dialog ref="bugDialog"></bug-report-dialog>
     </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
+
+import {getPreferences, PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
+import BugReportDialog from '@/client/components/BugReportDialog.vue';
+
+type Refs = {
+  bugDialog: InstanceType<typeof BugReportDialog>,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
+  name: 'PreferencesDialog',
+  props: {
+    preferencesManager: {
+      type: Object as () => PreferencesManager,
+    },
+  },
+  components: {
+    'bug-report-dialog': BugReportDialog,
+  },
+  data() {
+    return {
+      prefs: {...this.preferencesManager.values()},
+    };
+  },
+  methods: {
+    setBoolPreferencesCSS(
+      target: HTMLElement,
+      val: boolean,
+      name: Preference,
+    ): void {
+      const cssClassSuffix = name;
+      if (val) {
+        target.classList.add('preferences_' + cssClassSuffix);
+      } else {
+        target.classList.remove('preferences_' + cssClassSuffix);
+      }
+    },
+    updatePreferences(): void {
+      for (const k of Object.keys(this.preferencesManager.values()) as Array<Preference>) {
+        const val = this.prefs[k];
+        this.preferencesManager.set(k, val, /* setOnChange */ true);
+      }
+    },
+    syncPreferences(): void {
+      const target = document.getElementById('ts-preferences-target');
+      if (!target) return;
+
+      for (const k of Object.keys(this.prefs) as Array<Preference>) {
+        if (k === 'lang') continue;
+        this.setBoolPreferencesCSS(target, this.prefs[k], k);
+      }
+
+      if (!target.classList.contains('language-' + this.prefs.lang)) {
+        target.classList.add('language-' + this.prefs.lang);
+      }
+    },
+    okClicked(): void {
+      this.$emit('okButtonClicked');
+    },
+  },
+  computed: {
+    getPreferences(): typeof getPreferences {
+      return getPreferences;
+    },
+
+  },
+});
+</script>

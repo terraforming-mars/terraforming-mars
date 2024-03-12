@@ -1,3 +1,15 @@
+<template>
+  <div class="sortable-cards">
+    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
+      <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
+      <div ref="cardbox" class="cardbox">
+        <Card :card="card"/>
+      </div>
+    </div>
+    <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
+  </div>
+</template>
+
 <script lang="ts">
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
@@ -80,14 +92,3 @@ export default Vue.extend({
   },
 });
 </script>
-<template>
-  <div class="sortable-cards">
-    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
-      <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
-      <div ref="cardbox" class="cardbox">
-        <Card :card="card"/>
-      </div>
-    </div>
-    <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
-  </div>
-</template>

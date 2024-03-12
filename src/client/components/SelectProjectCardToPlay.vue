@@ -1,3 +1,47 @@
+<template>
+<div class="payments_cont">
+
+  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
+
+  <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
+    <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
+    <Card class="cardbox" :card="availableCard" />
+  </label>
+
+  <section v-trim-whitespace>
+    <div v-if="selectedCardHasWarning()" class="card-warning">{{ $t(card.warning) }}</div>
+    <warnings-component :warnings="card.warnings"></warnings-component>
+
+    <h3 class="payments_title" v-i18n>How to pay?</h3>
+
+    <template v-for="unit of SPENDABLE_RESOURCES">
+      <div v-bind:key="unit">
+        <payment-unit-component
+          v-model.number="payment[unit]"
+          v-if="canUse(unit) === true"
+          :unit="unit"
+          :description="descriptions[unit]"
+          @plus="addValue(unit)"
+          @minus="reduceValue(unit)"
+          @max="setMaxValue(unit)">
+        </payment-unit-component>
+        <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n>
+        (Some {{unit}} are unavailable here in reserve for the project card.)
+        </div>
+      </div>
+    </template>
+
+    <div v-if="hasWarning()" class="tm-warning">
+      <label class="label label-error">{{ $t(warning) }}</label>
+    </div>
+
+    <div v-if="showsave === true" class="payments_save">
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
+    </div>
+  </section>
+</div>
+</template>
+
 <script lang="ts">
 import Vue from 'vue';
 
@@ -345,46 +389,3 @@ export default Vue.extend({
   },
 });
 </script>
-<template>
-<div class="payments_cont">
-
-  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
-
-  <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
-    <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
-    <Card class="cardbox" :card="availableCard" />
-  </label>
-
-  <section v-trim-whitespace>
-    <div v-if="selectedCardHasWarning()" class="card-warning">{{ $t(card.warning) }}</div>
-    <warnings-component :warnings="card.warnings"></warnings-component>
-
-    <h3 class="payments_title" v-i18n>How to pay?</h3>
-
-    <template v-for="unit of SPENDABLE_RESOURCES">
-      <div v-bind:key="unit">
-        <payment-unit-component
-          v-model.number="payment[unit]"
-          v-if="canUse(unit) === true"
-          :unit="unit"
-          :description="descriptions[unit]"
-          @plus="addValue(unit)"
-          @minus="reduceValue(unit)"
-          @max="setMaxValue(unit)">
-        </payment-unit-component>
-        <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n>
-        (Some {{unit}} are unavailable here in reserve for the project card.)
-        </div>
-      </div>
-    </template>
-
-    <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ $t(warning) }}</label>
-    </div>
-
-    <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
-    </div>
-  </section>
-</div>
-</template>

@@ -83,6 +83,8 @@ export class PlayerInput extends Handler {
   }
 
   private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
+    // TODO(kberg): Find a better place for this optimization.
+    player.tableau.forEach((card) => card.warnings.clear());
     return new Promise((resolve) => {
       let body = '';
       req.on('data', (data) => {

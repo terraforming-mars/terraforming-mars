@@ -23,10 +23,10 @@ describe('StarVegas', function() {
 
   it('play', () => {
     const card = new StarVegas();
-    const [game, player/* , player2 */] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {underworldExpansion: true});
     addCity(player);
     addCity(player);
-    addCity(player);
+    addCity(player2);
     cast(card.play(player), undefined);
 
     expect(player.production.megacredits).eq(0);

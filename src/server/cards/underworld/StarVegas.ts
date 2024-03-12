@@ -93,7 +93,7 @@ export class StarVegas extends Card {
       if (space !== undefined) {
         const id = space.id as SpaceCity;
         game.log('${0} placed ${1} on ${2}', (b) => b.player(player).cardName(this.name).string(spaceCityNames[id] ?? 'unknown'));
-        player.production.add(Resource.MEGACREDITS, (game.board.getCities(player)).length, {log: true});
+        player.production.add(Resource.MEGACREDITS, (game.board.getCities()).length, {log: true});
         if (space.tile !== undefined) { // Should not happen
           space.tile.card = this.name;
         }

@@ -1,3 +1,21 @@
+<template>
+  <div id="load-game">
+      <h1><span v-i18n>{{ APP_NAME }}</span> — <span v-i18n>Load Game</span></h1>
+
+      <div class="load-game-form load-game--block">
+          <div class="container load-game-options">
+              <div >
+                  <label for="gameId">Game, player, or spectator ID to reload:</label><br/>
+                  <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
+                  <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
+                  <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>
+                  <AppButton title="Load Game" size="big" type="success" @click="loadGame" />
+              </div>
+          </div>
+      </div>
+  </div>
+</template>
+
 <script lang="ts">
 import Vue from 'vue';
 import * as constants from '@/common/constants';
@@ -68,20 +86,3 @@ export default Vue.extend({
   },
 });
 </script>
-<template>
-  <div id="load-game">
-      <h1><span v-i18n>{{ APP_NAME }}</span> — <span v-i18n>Load Game</span></h1>
-
-      <div class="load-game-form load-game--block">
-          <div class="container load-game-options">
-              <div >
-                  <label for="gameId">Game, player, or spectator ID to reload:</label><br/>
-                  <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
-                  <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
-                  <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>
-                  <AppButton title="Load Game" size="big" type="success" @click="loadGame" />
-              </div>
-          </div>
-      </div>
-  </div>
-</template>

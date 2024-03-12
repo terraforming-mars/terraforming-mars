@@ -23,7 +23,7 @@ export class CraterSurvey extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U71',
         renderData: CardRenderer.builder((b) => {
-          b.data({amount: 2}).identify(4, {digit});
+          b.data({amount: 2}).asterix().identify(4, {digit});
         }),
         description: 'Add 2 data resources to ANOTHER card. Identify 4 underground resources.',
       },

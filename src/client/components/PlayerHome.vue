@@ -54,7 +54,7 @@
 
         <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
           <Milestones :milestones="game.milestones" />
-          <Awards :awards="game.awards" show-scores/>
+          <Awards :awards="game.awards" show-scores />
         </div>
       </div>
 

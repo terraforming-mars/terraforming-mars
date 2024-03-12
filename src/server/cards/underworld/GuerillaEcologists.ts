@@ -22,7 +22,7 @@ export class GuerillaEcologists extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U89',
         renderData: CardRenderer.builder((b) => {
-          b.plants(4, {digit}).arrow().greenery().asterix();
+          b.minus().plants(4, {digit}).greenery().asterix();
         }),
         // description: 'Requires 1 corruption and that you lose 4 plants. Place a greenery tile IGNORING ADJACENCY RESTRICTIONS.',
         description: 'Requires 1 corruption. Spend 4 plants to place a greenery tile IGNORING ADJACENCY RESTRICTIONS.',

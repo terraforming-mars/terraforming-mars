@@ -22,7 +22,7 @@ export class MartianExpress extends Card implements IActionCard {
       metadata: {
         cardNumber: 'U78',
         renderData: CardRenderer.builder((b) => {
-          b.effect('This card can receive any resource that can be placed on a card. Resources placed here get converted to Wares resources.',
+          b.effect('This card can receive any resource that can be placed on ANY card. Resources placed here get converted to wares resources.',
             (ab) => ab.wild(1).asterix().startEffect.ware(1)).br;
           b.action('Remove all wares from here and gain 1 M€ for each ware removed.',
             (ab) => ab.text('x').ware(1).startAction.text('x').megacredits(1));

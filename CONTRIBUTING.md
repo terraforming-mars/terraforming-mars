@@ -19,6 +19,10 @@ first response is to ask for clarification or possibly significant changes. We c
 respectfully working with you to ensure your change can be accepted, and also, that it be
 clear, correct, and well-tested.
 
+## Translations
+
+Note that translating the game to your locale has its own completely different set of problems. See [Translations](https://github.com/terraforming-mars/terraforming-mars/wiki/Translations) on the wiki.
+
 ## Unit Tests
 
 We care that our project is correct, and that means testing, and unit tests are our best way of ensuring that future changes don’t break existing behavior.

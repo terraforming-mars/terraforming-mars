@@ -7,7 +7,6 @@ import {ICard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {digit} from '../Options';
 import {SelectCard} from '../../inputs/SelectCard';
-import {LogHelper} from '../../LogHelper';
 import {CardResource} from '../../../common/CardResource';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
@@ -43,7 +42,6 @@ export class Spire extends CorporationCard implements ICorporationCard {
         for (const card of cards) {
           player.discardCardFromHand(card);
         }
-        LogHelper.logDiscardedCards(player.game, cards);
         return undefined;
       });
   }

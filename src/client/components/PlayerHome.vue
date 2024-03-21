@@ -392,6 +392,7 @@ export default Vue.extend({
         [KeyboardNavigation.PLAYERSOVERVIEW]: 'shortkey-playersoverview',
         [KeyboardNavigation.HAND]: 'shortkey-hand',
         [KeyboardNavigation.COLONIES]: 'shortkey-colonies',
+
       };
       if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
         return;

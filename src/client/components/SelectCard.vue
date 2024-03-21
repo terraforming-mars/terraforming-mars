@@ -141,6 +141,7 @@ export default Vue.extend({
       return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
     },
     saveData() {
+      console.log('insavedata');
       this.onsave({type: 'card', cards: this.getData()});
     },
     getCardBoxClass(card: CardModel): string {

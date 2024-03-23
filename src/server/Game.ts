@@ -1555,6 +1555,7 @@ export class Game implements IGame, Logger {
     // TODO(kberg): delete this block by 2023-07-01
     gameOptions.starWarsExpansion = gameOptions.starWarsExpansion ?? false;
     gameOptions.bannedCards = gameOptions.bannedCards ?? [];
+    gameOptions.includedCards = gameOptions.includedCards ?? [];
 
     const players = d.players.map((element) => Player.deserialize(element));
     const first = players.find((player) => player.id === d.first);

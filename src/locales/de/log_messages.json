@@ -131,7 +131,7 @@
     "Science": "Wissenschaft",
     "science(s)": "Wissenschaft(en)",
     "fighter(s)": "Jäger",
-    "syndicate fleet(s)": "Syndicat Flotte",
+    "syndicate fleet(s)": "Syndikat Flotte",
     "resource cube(s)": "Rohstoffwürfel",
     "floater(s)": "Schweber",
     "asteroid": "Asteroid",
@@ -386,6 +386,9 @@
     "${0} gained 1 MC production from ${1} for ${2}": "${0} erhielt 1 MC Produktion von ${1} für ${2}",
     "${0} gained ${1} from ${2}": "${0} erhielt ${1} von ${2}",
     "${0} gained 2 ${1} from ${2}": "${0} erhielt 2 ${1} von ${2}",
+    "${0} gained 4 M€ for playing a card with no tags.": "${0} erhielt 4 M€ für das Ausspielen einer Karte, die kein Symbol hat.",
+    "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} erhielt 4 M€ für das Ausspielen von ${1}, das kein Symbol hat.",
+    "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} erhielt 1 M€ für das Ausspielen von ${1}, das genau 1 Symbol hat.",
 
     "${0} gained ${1} TR": "${0} erhielt ${1} TW",
     "${0} lost ${1} TR": "${0} verlor ${1} TW",

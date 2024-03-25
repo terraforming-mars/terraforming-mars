@@ -884,7 +884,13 @@
     "Choose 1 unit(s) of production to lose": "Wähle 1 Einheit Produktion, die verloren geht",
     "Choose 2 unit(s) of production to lose": "Wähle 2 Einheit Produktion, die verloren geht",
     "Which resource production would you prefer to decrease?": "Welche Produktionsart bevorzugst Du zu reduzieren?",
+    "Reveal erosions at:": "Erosionen aufdecken bei:",
+    "Remove dust storms at:": "Entferne Sand Stürme bei:",
     "Amplify erosions at:": "Erosionen verstärken bei:",
+    "Amplify dust storms at:": "Sand Stürme verstärken bei:",
+    "oceans": "Ozeane",
+    "°C": "°C",
+    "% oxygen": "% Sauerstoffgehalt",
     "Save": "Speichern",
 
     "Spend 1 corruption to block an attack by ${0}?": "Willst du 1 Korruption bezahlen, um einen Angriff von ${0} zu blockieren?",

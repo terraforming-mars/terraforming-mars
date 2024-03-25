@@ -48,6 +48,7 @@ export type GameOptions = {
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   bannedCards: Array<CardName>;
+  includedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
   customCeos: Array<CardName>;
@@ -70,6 +71,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   aresHazards: true,
   boardName: BoardName.THARSIS,
   bannedCards: [],
+  includedCards: [],
   ceoExtension: false,
   clonedGamedId: undefined,
   coloniesExtension: false,

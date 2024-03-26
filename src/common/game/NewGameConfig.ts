@@ -11,8 +11,6 @@ import {isGameId} from '../Types';
 export type BoardNameType = BoardName | RandomBoardOption;
 
 export const NewPlayerModel = z.object({
-  // TODO(kberg): Remove index, which is only used in CreateGameForm.vue
-  index: z.number().default(1),
   name: z.string(),
   color: z.nativeEnum(Color),
   beginner: z.boolean().default(false),

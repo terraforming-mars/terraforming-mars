@@ -380,17 +380,17 @@
                         <div class="create-game-players-cont">
                             <div class="container">
                                 <div class="columns">
-                                  <template v-for="newPlayer in getPlayers()">
-                                    <div v-bind:key="newPlayer.index">
+                                  <template v-for="(newPlayer, index) in getPlayers()">
+                                    <div v-bind:key="index">
                                       <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
                                           <div>
-                                              <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
+                                              <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" />
                                           </div>
                                           <div class="create-game-page-color-row">
                                               <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']">
                                                 <div v-bind:key="color">
-                                                  <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color" :id="'radioBox' + color + newPlayer.index">
-                                                  <label :for="'radioBox' + color + newPlayer.index">
+                                                  <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + (index + 1)" v-model="newPlayer.color" :id="'radioBox' + color + (index + 1)">
+                                                  <label :for="'radioBox' + color + (index + 1)">
                                                       <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
                                                   </label>
                                                 </div>
@@ -410,7 +410,7 @@
                                               <!-- </template> -->
 
                                               <label class="form-radio form-inline" v-if="!randomFirstPlayer">
-                                                  <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
+                                                  <input type="radio" name="firstIndex" :value="index + 1" v-model="firstIndex">
                                                   <i class="form-icon"></i> <span v-i18n>Goes First?</span>
                                               </label>
                                           </div>
@@ -504,7 +504,7 @@ import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {playerColorClass, range, zip} from '@/common/utils/utils';
+import {playerColorClass} from '@/common/utils/utils';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
@@ -533,14 +533,14 @@ export default (Vue as WithRefs<Refs>).extend({
       firstIndex: 1,
       playersCount: 1,
       players: [
-        {index: 1, name: '', color: Color.RED, beginner: false, handicap: 0, first: false},
-        {index: 2, name: '', color: Color.GREEN, beginner: false, handicap: 0, first: false},
-        {index: 3, name: '', color: Color.YELLOW, beginner: false, handicap: 0, first: false},
-        {index: 4, name: '', color: Color.BLUE, beginner: false, handicap: 0, first: false},
-        {index: 5, name: '', color: Color.BLACK, beginner: false, handicap: 0, first: false},
-        {index: 6, name: '', color: Color.PURPLE, beginner: false, handicap: 0, first: false},
-        {index: 7, name: '', color: Color.ORANGE, beginner: false, handicap: 0, first: false},
-        {index: 8, name: '', color: Color.PINK, beginner: false, handicap: 0, first: false},
+        {name: '', color: Color.RED, beginner: false, handicap: 0, first: false},
+        {name: '', color: Color.GREEN, beginner: false, handicap: 0, first: false},
+        {name: '', color: Color.YELLOW, beginner: false, handicap: 0, first: false},
+        {name: '', color: Color.BLUE, beginner: false, handicap: 0, first: false},
+        {name: '', color: Color.BLACK, beginner: false, handicap: 0, first: false},
+        {name: '', color: Color.PURPLE, beginner: false, handicap: 0, first: false},
+        {name: '', color: Color.ORANGE, beginner: false, handicap: 0, first: false},
+        {name: '', color: Color.PINK, beginner: false, handicap: 0, first: false},
       ],
       corporateEra: true,
       prelude: false,
@@ -754,11 +754,8 @@ export default (Vue as WithRefs<Refs>).extend({
         }
       }
     },
-    getPlayerNamePlaceholder(player: NewPlayerModel): string {
-      return translateTextWithParams(
-        'Player ${0} name',
-        [String(player.index)],
-      );
+    getPlayerNamePlaceholder(index: number): string {
+      return translateTextWithParams('Player ${0} name', [String(index + 1)]);
     },
     updatecustomCorporations(customCorporations: Array<CardName>) {
       this.customCorporations = customCorporations;
@@ -1193,15 +1190,6 @@ export default (Vue as WithRefs<Refs>).extend({
 
 function validatePlayers(players: Array<NewPlayerModel>): Array<string> {
   const errors = [];
-
-  // Ensure indexes are distinct, and start from 1..
-  const indexes = players.map((p) => p.index).sort();
-  const expectedIndexes = range(players.length + 1); // [0, 1, 2, ...], the +1 is necessary.
-  expectedIndexes.shift(); // [1, 2, ...]
-  const zipped = zip(indexes, expectedIndexes);
-  if (zipped.some((e) => e[0] !== e[1])) {
-    errors.push('Each player index must be unique and in the range of 1..player count');
-  }
 
   // Ensure colors are valid and distinct
   const colors = new Set(players.map((p) => p.color));

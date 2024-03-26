@@ -3,7 +3,7 @@ import {BoardName} from '../common/boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
 import {IGame} from './IGame';
 import {GameOptions} from './game/GameOptions';
-import {GameId, PlayerId} from '../common/Types';
+import {GameId, isPlayerId, safeCast} from '../common/Types';
 import {HellasBoard} from './boards/HellasBoard';
 import {TharsisBoard} from './boards/TharsisBoard';
 import {IPlayer} from './IPlayer';
@@ -47,7 +47,7 @@ export class GameSetup {
   }
 
   public static neutralPlayerFor(gameId: GameId): IPlayer {
-    const playerId = 'p-' + gameId + '-neutral' as PlayerId;
+    const playerId = safeCast('p-' + gameId + '-neutral', isPlayerId);
     return new Player('neutral', Color.NEUTRAL, true, 0, playerId);
   }
 

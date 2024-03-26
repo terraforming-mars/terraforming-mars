@@ -5,7 +5,7 @@ import {IPlayer} from '../IPlayer';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
-import {SpaceId} from '../../common/Types';
+import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 
 function mineSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
   return newSpace(id, SpaceType.LUNAR_MINE, x, y, bonus);
@@ -73,8 +73,7 @@ class Builder {
   public nextId(): SpaceId {
     this.idx++;
     const strId = this.idx.toString().padStart(2, '0');
-    // This cast is safe.
-    return 'm' + strId as SpaceId;
+    return safeCast('m' + strId, isSpaceId);
   }
 }
 

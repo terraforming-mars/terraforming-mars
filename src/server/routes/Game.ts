@@ -12,7 +12,7 @@ import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {ServeAsset} from './ServeAsset';
 import {NewGameConfig} from '../../common/game/NewGameConfig';
-import {GameId, PlayerId, SpectatorId} from '../../common/Types';
+import {safeCast, isGameId, isSpectatorId, isPlayerId} from '../../common/Types';
 import {generateRandomId} from '../utils/server-ids';
 import {IGame} from '../IGame';
 import {Request} from '../Request';
@@ -99,15 +99,15 @@ export class GameHandler extends Handler {
       req.once('end', async () => {
         try {
           const gameReq: NewGameConfig = JSON.parse(body);
-          const gameId = generateRandomId('g') as GameId;
-          const spectatorId = generateRandomId('s') as SpectatorId;
+          const gameId = safeCast(generateRandomId('g'), isGameId);
+          const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
           const players = gameReq.players.map((obj: any) => {
             return new Player(
               obj.name,
               obj.color,
               obj.beginner,
               Number(obj.handicap), // For some reason handicap is coming up a string.
-              generateRandomId('p') as PlayerId,
+              safeCast(generateRandomId('p'), isPlayerId),
             );
           });
           let firstPlayerIdx = 0;
@@ -193,3 +193,4 @@ export class GameHandler extends Handler {
     });
   }
 }
+

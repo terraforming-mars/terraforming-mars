@@ -39,4 +39,8 @@ export class RouteTestScaffolding {
   public post(handler: Handler, res: MockResponse) {
     return handler.post(this.req, res, this.ctx);
   }
+
+  public put(handler: Handler, res: MockResponse) {
+    return handler.put(this.req, res, this.ctx);
+  }
 }

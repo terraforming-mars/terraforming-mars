@@ -98,7 +98,7 @@ export class GameHandler extends Handler {
       });
       req.once('end', async () => {
         try {
-          const gameReq: NewGameConfig = JSON.parse(body);
+          const gameReq = NewGameConfig.parse(JSON.parse(body));
           const gameId = safeCast(generateRandomId('g'), isGameId);
           const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
           const players = gameReq.players.map((obj: any) => {

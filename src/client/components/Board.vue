@@ -270,6 +270,8 @@
                           <tspan dy="15">Albor</tspan>
                           <tspan x="5" dy="12">Tholus</tspan>
                       </text>
+                      <line x1="38" y1="26" x2="63" y2="38" class="board-line"></line>
+                      <text x="61" y="41" class="board-caption board_caption--black">●</text>
                   </g>
                   <g id="apollinaris_mons" transform="translate(500, 210)">
                       <text class="board-caption">

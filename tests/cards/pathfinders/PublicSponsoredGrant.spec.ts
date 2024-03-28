@@ -47,7 +47,12 @@ describe('PublicSponsoredGrant', function() {
     expect(player2.megaCredits).eq(0);
     expect(player3.megaCredits).eq(0);
 
+    // Confirming that tags are filtered appropriately.
+    expect(options.options.map((o) => o.title)).to.contain(Tag.SPACE);
+    expect(options.options.map((o) => o.title)).to.not.contain(Tag.JOVIAN);
+
     expect(options.options[0].title).eq(Tag.BUILDING);
+
     expect(player.cardsInHand).is.empty;
 
     const scienceCard = new SearchForLife();

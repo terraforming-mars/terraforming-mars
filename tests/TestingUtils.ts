@@ -23,12 +23,8 @@ import {CardRequirements} from '../src/server/cards/requirements/CardRequirement
 import {Warning} from '../src/common/cards/Warning';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
-export function maxOutOceans(player: IPlayer, toValue: number = 0): Array<Space> {
+export function maxOutOceans(player: IPlayer, toValue: number = constants.MAX_OCEAN_TILES): Array<Space> {
   const oceans = [];
-  if (toValue < 1) {
-    toValue = constants.MAX_OCEAN_TILES;
-  }
-
   while (player.game.board.getOceanSpaces().length < toValue) {
     oceans.push(addOcean(player));
   }
@@ -131,24 +127,44 @@ export function formatMessage(message: Message | string): string {
   return Log.applyData(message, (datum) => datum.value);
 }
 
-// Run a few tests to see that a canPlay or canAct behaves correctly in the face of reds costs.
-// canAct is used to identify if the action is canAct, which returns different results from canPlay. At the moment.
+/**
+ * Run a few tests to see that a canPlay or canAct behaves correctly in the face of reds costs.
+ *
+ * @param cb the code to invoke that indicates wheter the action can be taken.
+ * @param player player taking the action
+ * @param initialMegacredits starting money
+ * @param passingDelta additional money required to take this action when Reds are in power.. Typically a multiple of 3
+ * @param canAct set to true when cb calls canAct, which returns different results from canPlay. At the moment.
+ */
 export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number, canAct: boolean = false) {
-  player.game.phase = Phase.ACTION;
   const turmoil = Turmoil.getTurmoil(player.game);
-  turmoil.rulingParty = new Greens();
-  PoliticalAgendas.setNextAgenda(turmoil, player.game);
-  player.megaCredits = initialMegacredits;
-  expect(cb(), 'Greens in power').is.true;
-  turmoil.rulingParty = new Reds();
-  PoliticalAgendas.setNextAgenda(turmoil, player.game);
-  player.megaCredits = initialMegacredits + passingDelta - 1;
-  expect(cb(), 'Reds in power, not enough money').is.false;
-  player.megaCredits = initialMegacredits + passingDelta;
-  if (passingDelta > 0 && canAct === false) {
-    expect(cb(), 'Reds in power, enough money').deep.eq({redsCost: passingDelta});
-  } else {
-    expect(cb(), 'Reds in power, enough money').is.true;
+
+  {
+    player.game.phase = Phase.ACTION;
+    turmoil.rulingParty = new Greens();
+    PoliticalAgendas.setNextAgenda(turmoil, player.game);
+    player.megaCredits = initialMegacredits;
+
+    expect(cb(), 'Greens in power').is.true;
+  }
+
+  {
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, player.game);
+    player.megaCredits = initialMegacredits + passingDelta - 1;
+
+    expect(cb(), 'Reds in power, cannot afford').is.false;
+  }
+
+  {
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, player.game);
+    player.megaCredits = initialMegacredits + passingDelta;
+    if (passingDelta > 0 && canAct === false) {
+      expect(cb(), 'Reds in power, can afford').deep.eq({redsCost: passingDelta});
+    } else {
+      expect(cb(), 'Reds in power, can afford').is.true;
+    }
   }
 }
 

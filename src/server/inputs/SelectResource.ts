@@ -1,21 +1,15 @@
+import { Resource } from '@/common/Resource';
 import {Message} from '../../common/logs/Message';
-import {Units} from '../../common/Units';
-import {OrOptions} from './OrOptions';
-import {SelectOption} from './SelectOption';
+import {IPlayer} from '../IPlayer';
+import { SelectOne } from './basicInputs/SelectOne';
+import { PlayerSelection } from './selectables/PlayerSelection';
 
-export class SelectResource extends OrOptions {
+export class SelectResource extends SelectOne<Resource> {
   constructor(
-    public override title: string | Message,
-    public include: ReadonlyArray<keyof Units>,
-    cb: (key: keyof Units) => undefined,
-    public override buttonLabel: string = 'Select',
+    public readonly players: Array<IPlayer>,
+    title: string | Message,
+    buttonLabel: string = 'Save'
   ) {
-    super();
-    for (const key of include) {
-      this.options.push(new SelectOption(key).andThen(() => {
-        cb(key);
-        return undefined;
-      }));
-    }
+    super(new PlayerSelection(title, buttonLabel, players));
   }
 }

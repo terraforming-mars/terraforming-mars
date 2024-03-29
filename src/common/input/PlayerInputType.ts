@@ -1,17 +1,9 @@
-export type PlayerInputType =
-    'and' |
-    'or' |
-    'amount' |
-    'card' |
-    'delegate' |
-    'payment' |
-    'projectCard' |
-    'initialCards' |
-    'option' |
-    'party' |
-    'player' |
-    'space' |
-    'colony' |
-    'productionToLose' |
-    'aresGlobalParameters' |
-    'globalEvent';
+export enum PlayerInputType {
+    AND = 'and',
+    OR = 'or',
+    OPTION = 'option',
+    SELECT_ONE = 'selectOne',
+    SELECT_MANY = 'selectMany',
+    AMOUNT = 'amount',
+    PAYMENT = 'payment',
+}

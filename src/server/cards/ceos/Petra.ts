@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {DELEGATES_FOR_NEUTRAL_PLAYER} from '../../../common/constants';
 import {Turmoil} from '../../turmoil/Turmoil';
-import {SelectParty} from '../../inputs/SelectParty';
+import {SelectParty} from '../../inputs/selectables/PartySelection';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 

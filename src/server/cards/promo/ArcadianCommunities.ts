@@ -1,6 +1,6 @@
 import {IPlayer} from '../../IPlayer';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {Space} from '../../boards/Space';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';

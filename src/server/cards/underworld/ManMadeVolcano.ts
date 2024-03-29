@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {message} from '../../logs/MessageBuilder';
 import {digit} from '../Options';
 

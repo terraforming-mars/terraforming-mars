@@ -10,9 +10,9 @@ import {all} from '../Options';
 import {Resource} from '../../../common/Resource';
 import {Board} from '../../boards/Board';
 import {Space} from '../../boards/Space';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectPayment} from '../../inputs/SelectPayment';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
+import {SelectPayment} from '../../inputs/basicInputs/SelectPayment';
 import {Size} from '../../../common/cards/render/Size';
 
 export class NeptunianPowerConsultants extends Card implements IProjectCard {

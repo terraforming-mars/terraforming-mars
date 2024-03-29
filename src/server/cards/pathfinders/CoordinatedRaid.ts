@@ -4,7 +4,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {SelectColony} from '../../inputs/SelectColony';
+import {SelectColony} from '../../inputs/selectables/ColonySelection';
 import {IColony} from '../../colonies/IColony';
 
 export class CoordinatedRaid extends Card implements IProjectCard {

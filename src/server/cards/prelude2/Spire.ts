@@ -6,7 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {ICard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {digit} from '../Options';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 import {CardResource} from '../../../common/CardResource';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 

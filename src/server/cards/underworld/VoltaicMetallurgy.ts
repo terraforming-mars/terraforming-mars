@@ -6,7 +6,7 @@ import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
 import {message} from '../../logs/MessageBuilder';
 import {Resource} from '../../../common/Resource';
 

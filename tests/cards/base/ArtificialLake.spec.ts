@@ -6,7 +6,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast, maxOutOceans, runAllActions, setTemperature} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
@@ -90,5 +90,16 @@ describe('ArtificialLake', function() {
     });
 
     expect(player.simpleCanPlay(card)).is.true;
+  });
+
+  it('Works with reds', () => {
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+
+    // Card requirements
+    setTemperature(game, -6);
+
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
+    maxOutOceans(player2);
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
   });
 });

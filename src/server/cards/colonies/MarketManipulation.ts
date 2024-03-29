@@ -7,7 +7,7 @@ import {IGame} from '../../IGame';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
-import {SelectColony} from '../../inputs/SelectColony';
+import {SelectColony} from '../../inputs/selectables/ColonySelection';
 import {LogHelper} from '../../LogHelper';
 
 export class MarketManipulation extends Card implements IProjectCard {

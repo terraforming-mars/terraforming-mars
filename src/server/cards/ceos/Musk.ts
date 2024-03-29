@@ -8,7 +8,7 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 
 
 export class Musk extends CeoCard {

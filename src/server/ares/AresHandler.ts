@@ -1,6 +1,6 @@
 import {CardName} from '../../common/cards/CardName';
 import {IGame} from '../IGame';
-import {SelectCard} from '../inputs/SelectCard';
+import {SelectCard} from '../inputs/selectables/CardSelection';
 import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';

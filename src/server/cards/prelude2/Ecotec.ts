@@ -7,9 +7,9 @@ import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {Resource} from '../../../common/Resource';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectCard} from '../../inputs/SelectCard';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 
 export class Ecotec extends CorporationCard {
   constructor() {

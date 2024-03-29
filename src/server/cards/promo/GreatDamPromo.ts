@@ -8,7 +8,7 @@ import {Card} from '../Card';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
 import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {message} from '../../logs/MessageBuilder';
 

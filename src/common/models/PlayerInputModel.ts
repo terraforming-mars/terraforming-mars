@@ -1,139 +1,61 @@
-import {CardModel} from './CardModel';
-import {ColonyModel} from './ColonyModel';
-import {Color, ColorWithNeutral} from '../Color';
-import {PayProductionModel} from './PayProductionUnitsModel';
-import {AresData} from '../ares/AresData';
 import {Message} from '../logs/Message';
-import {PartyName} from '../turmoil/PartyName';
-import {SpaceId} from '../Types';
 import {PaymentOptions} from '../inputs/Payment';
-import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
-import {Warning} from '../cards/Warning';
+import { SelectionType } from '../input/SelectionType';
+import { PlayerInputType } from '../input/PlayerInputType';
+import { Warning } from '../cards/Warning';
 
-export type BaseInputModel = {
+export interface PlayerInputModel {
   title: string | Message;
   buttonLabel: string;
+  type: PlayerInputType;
 }
 
-export type AndOptionsModel = BaseInputModel & {
-  type: 'and';
+export interface AndOptionsModel extends PlayerInputModel {
+  type: PlayerInputType.AND;
   options: Array<PlayerInputModel>;
 }
 
-export type OrOptionsModel = BaseInputModel & {
-  type: 'or';
+export interface OrOptionsModel extends PlayerInputModel {
+  type: PlayerInputType.OR;
   options: Array<PlayerInputModel>;
   // When set, initialIdx represents the option within `options` that should be
   // shows as the default selection.
   initialIdx?: number;
 }
 
-export type SelectInitialCardsModel = BaseInputModel & {
-  type: 'initialCards';
-  options: Array<PlayerInputModel>;
+export interface SelectionInputModel extends PlayerInputModel {
+  options: Record<string, any>;
+  selectionType: SelectionType;
 }
 
-export type SelectOptionModel = BaseInputModel & {
-  type: 'option';
-  warnings?: Array<Warning>;
+export interface SelectOneModel extends SelectionInputModel {
+  type: PlayerInputType.SELECT_ONE;
 }
 
-export type SelectProjectCardToPlayModel = BaseInputModel & {
-  type: 'projectCard';
-  cards: Array<CardModel>;
-  paymentOptions: Partial<PaymentOptions>,
-  microbes: number;
-  floaters: number;
-  lunaArchivesScience: number;
-  seeds: number;
-  graphene: number;
-  kuiperAsteroids: number;
-  corruption: number;
-}
-
-export type SelectCardModel = BaseInputModel & {
-  type: 'card';
-  cards: Array<CardModel>;
-  max: number;
+export interface SelectManyModel extends SelectionInputModel {
+  type: PlayerInputType.SELECT_MANY;
   min: number;
-  showOnlyInLearnerMode: boolean;
-  selectBlueCardAction: boolean;
-  showOwner: boolean;
+  max: number;
 }
 
-export type SelectColonyModel = BaseInputModel & {
-  type: 'colony';
-  coloniesModel: Array<ColonyModel>;
+export interface SelectWithInputModel extends SelectOneModel {
+  secondaryInputs: Record<string, PlayerInputModel>;
 }
 
-export type SelectPaymentModel = BaseInputModel & {
-  type: 'payment';
+export interface SelectPaymentModel extends PlayerInputModel {
+  type: PlayerInputType.PAYMENT;
   amount: number;
-  paymentOptions: Partial<PaymentOptions>;
-  seeds: number;
-  auroraiData: number;
-  kuiperAsteroids: number;
-  spireScience: number;
+  paymentOptions: PaymentOptions;
 }
 
-export type SelectPlayerModel = BaseInputModel & {
-  type: 'player';
-  players: Array<Color>;
-}
-
-export type SelectSpaceModel = BaseInputModel & {
-  type: 'space';
-  spaces: Array<SpaceId>;
-}
-
-export type SelectAmountModel = BaseInputModel & {
-  type: 'amount';
+export interface SelectAmountModel extends PlayerInputModel {
+  type: PlayerInputType.AMOUNT;
   min: number;
   max: number;
   maxByDefault: boolean;
 }
 
-export type SelectDelegateModel = BaseInputModel & {
-  type: 'delegate';
-  players: Array<ColorWithNeutral>;
+export interface SelectOptionModel extends PlayerInputModel {
+  type: PlayerInputType.OPTION;
+  warnings?: Array<Warning>;
 }
-
-export type SelectPartyModel = BaseInputModel & {
-  type: 'party';
-  parties: Array<PartyName>;
-}
-
-export type SelectProductionToLoseModel = BaseInputModel & {
-  type: 'productionToLose';
-  payProduction: PayProductionModel;
-}
-
-export type ShiftAresGlobalParametersModel = BaseInputModel & {
-  type: 'aresGlobalParameters';
-  aresData: AresData;
-}
-
-export type SelectGlobalEventModel = BaseInputModel & {
-  type: 'globalEvent';
-  globalEventNames: Array<GlobalEventName>;
-}
-
-export type PlayerInputModel =
-  AndOptionsModel |
-  OrOptionsModel |
-  SelectInitialCardsModel |
-  SelectOptionModel |
-  SelectProjectCardToPlayModel |
-  SelectCardModel |
-  SelectAmountModel |
-  SelectCardModel |
-  SelectColonyModel |
-  SelectDelegateModel |
-  SelectPartyModel |
-  SelectPaymentModel |
-  SelectPlayerModel |
-  SelectProductionToLoseModel |
-  SelectProjectCardToPlayModel |
-  SelectSpaceModel |
-  ShiftAresGlobalParametersModel |
-  SelectGlobalEventModel;

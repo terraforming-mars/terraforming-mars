@@ -3,9 +3,9 @@ import {IPlayer} from '../IPlayer';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
-import {OrOptions} from '../inputs/OrOptions';
+import {OrOptions} from '../inputs/basicInputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
-import {InputResponse} from '../../common/inputs/InputResponse';
+import {InputResponse, OrOptionsResponse} from '../../common/inputs/InputResponse';
 import {isPlayerId} from '../../common/Types';
 import {Request} from '../Request';
 import {Response} from '../Response';
@@ -55,7 +55,7 @@ export class PlayerInput extends Handler {
   private isWaitingForUndo(player: IPlayer, entity: InputResponse): boolean {
     const waitingFor = player.getWaitingFor();
     if (entity.type === 'or' && waitingFor instanceof OrOptions) {
-      const idx = entity.index;
+      const idx = (entity as OrOptionsResponse).index;
       return waitingFor.options[idx] instanceof UndoActionOption;
     }
     return false;

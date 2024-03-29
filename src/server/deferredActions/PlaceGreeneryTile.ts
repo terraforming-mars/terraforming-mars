@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {SelectSpace} from '../inputs/SelectSpace';
+import {SelectSpace} from '../inputs/selectables/SpaceSelection';
 import {DeferredAction, Priority} from './DeferredAction';
 import {PlacementType} from '../boards/PlacementType';
 

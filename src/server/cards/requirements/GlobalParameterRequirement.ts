@@ -2,7 +2,6 @@ import {IPlayer} from '../../IPlayer';
 import {InequalityRequirement} from './InequalityRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 
-
 /**
  * Defines the class of requirements that compare against global parameters. Subclasses define
  * important attributes of how each global paramter functions (e.g. `OxygenRequirement`.)

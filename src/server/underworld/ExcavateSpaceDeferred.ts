@@ -2,7 +2,7 @@ import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {SelectSpace} from '../inputs/SelectSpace';
+import {SelectSpace} from '../inputs/selectables/SpaceSelection';
 import {UnderworldExpansion} from './UnderworldExpansion';
 
 export class ExcavateSpaceDeferred extends DeferredAction<Space> {

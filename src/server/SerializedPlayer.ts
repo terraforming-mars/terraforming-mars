@@ -4,6 +4,7 @@ import {Color} from '../common/Color';
 import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
+import { SpendableResource } from './player/SpendableResource';
 
 interface DeprecatedFields {
 }
@@ -13,10 +14,6 @@ export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
     beginner: boolean;
-    canUseCorruptionAsMegacredits: boolean;
-    canUseHeatAsMegaCredits: boolean;
-    canUseTitaniumAsMegacredits: boolean;
-    canUsePlantsAsMegaCredits: boolean;
     cardCost: number;
     cardDiscount: number;
     cardsInHand: Array<CardName>;
@@ -34,7 +31,6 @@ export interface SerializedPlayer extends DeprecatedFields{
     energyProduction: number;
     fleetSize: number;
     handicap: number;
-    // TODO(kberg): remove ? by 2024-01-30
     hasIncreasedTerraformRatingThisGeneration?: boolean;
     hasTurmoilScienceTagBonus: boolean;
     heat: number;
@@ -58,14 +54,15 @@ export interface SerializedPlayer extends DeprecatedFields{
     removedFromPlayCards: Array<CardName>;
     removingPlayers: Array<PlayerId>;
     scienceTagCount: number;
+    spendableResources: SpendableResource[];
     steel: number;
     steelProduction: number;
-    steelValue: number;
+    steelValueBonus: number;
     terraformRating: number;
     timer: SerializedTimer;
     titanium: number;
     titaniumProduction: number;
-    titaniumValue: number;
+    titaniumValueBonus: number;
     totalDelegatesPlaced: number;
     tradesThisGeneration: number;
     turmoilPolicyActionUsed: boolean;

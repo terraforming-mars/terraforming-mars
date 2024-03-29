@@ -5,7 +5,7 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {IActionCard} from '../ICard';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {LogHelper} from '../../LogHelper';
 import {digit} from '../Options';
 import {sum} from '../../../common/utils/utils';

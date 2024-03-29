@@ -11,18 +11,19 @@ import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
-export function cardsToModel(
-  player: IPlayer,
-  cards: ReadonlyArray<ICard>,
-  options: {
-    showResources?: boolean,
-    showCalculatedCost?: boolean,
-    enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
-  } = {},
-): Array<CardModel> {
-  return cards.map((card, index) => {
-    let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
+export type Options = {
+  showResources?: boolean,
+  showCalculatedCost?: boolean,
+  enabled?: Map<CardName, boolean>,
+  showOwner?: boolean
+}
 
+export function cardsToModel(player: IPlayer, cards: ReadonlyArray<ICard>, options: Options = {}): Array<CardModel> {
+  return cards.map((card) => cardToModel(card, player, options));
+}
+
+export function cardToModel(card: ICard, player: IPlayer, options: Options): CardModel {
+  let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
     // Too bad this is hard-coded
     if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
       discount = [{tag: Tag.MOON, amount: player.tags.count(Tag.MOON)}];
@@ -39,6 +40,7 @@ export function cardsToModel(
       bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
       discount: discount,
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
+      showOwner: options.showOwner
     };
 
     if (card.isDisabled || options.enabled?.[index] === false) {
@@ -55,25 +57,25 @@ export function cardsToModel(
     }
 
     return model;
-  });
 }
 
-/**
- * No need for both isActive and showTitleOnly.
- */
-export function coloniesToModel(game: IGame, colonies: Array<IColony>, showTileOnly: boolean, isActive: boolean = true) : Array<ColonyModel> {
+export function coloniesToModel(game: IGame, colonies: Array<IColony>, showTileOnly: boolean) : Array<ColonyModel> {
   return colonies.map(
-    (colony): ColonyModel => ({
-      colonies: colony.colonies.map(
-        (playerId): Color => game.getPlayerById(playerId).color,
-      ),
-      isActive: isActive && colony.isActive && showTileOnly === false,
-      name: colony.name,
-      trackPosition: colony.trackPosition,
-      visitor:
-        colony.visitor === undefined ?
-          undefined :
-          game.getPlayerById(colony.visitor).color,
-    }),
+    (colony): ColonyModel => (colonyToModel(game, colony, showTileOnly)),
   );
+}
+
+export function colonyToModel(game: IGame, colony: IColony, showTileOnly: boolean): ColonyModel {
+  return {
+    colonies: colony.colonies.map(
+      (playerId): Color => game.getPlayerById(playerId).color,
+    ),
+    isActive: colony.isActive && showTileOnly === false,
+    name: colony.name,
+    trackPosition: colony.trackPosition,
+    visitor:
+      colony.visitor === undefined ?
+        undefined :
+        game.getPlayerById(colony.visitor).color,
+  }
 }

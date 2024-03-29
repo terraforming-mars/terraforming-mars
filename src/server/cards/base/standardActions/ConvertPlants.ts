@@ -3,7 +3,7 @@ import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {IPlayer} from '../../../IPlayer';
 import {MAX_OXYGEN_LEVEL} from '../../../../common/constants';
-import {SelectSpace} from '../../../inputs/SelectSpace';
+import {SelectSpace} from '../../../inputs/selectables/SpaceSelection';
 import {Units} from '../../../../common/Units';
 import {message} from '../../../logs/MessageBuilder';
 

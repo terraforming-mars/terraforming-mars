@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';

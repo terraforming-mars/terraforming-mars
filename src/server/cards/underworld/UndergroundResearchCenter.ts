@@ -6,11 +6,11 @@ import {Card} from '../Card';
 import {ALL_TAGS, Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {Units} from '../../../common/Units';
 import {inplaceRemove} from '../../../common/utils/utils';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 import {Priority} from '../../deferredActions/DeferredAction';
 
 export class UndergroundResearchCenter extends Card implements IProjectCard {

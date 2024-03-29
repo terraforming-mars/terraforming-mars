@@ -26,6 +26,8 @@ import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescr
 import {asArray} from '../../common/utils/utils';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
+import {SpendableResource} from '../player/SpendableResource';
+import { ReserveUnits } from '@/common/inputs/Payment';
 
 /**
  * Cards that do not need a cost attribute.
@@ -45,6 +47,7 @@ type SharedProperties = {
   behavior?: Behavior | undefined;
   cardCost?: number;
   cardDiscount?: OneOrArray<CardDiscount>;
+  spendableResource?: SpendableResource;
   type: CardType;
   cost?: number;
   initialActionText?: string;
@@ -58,11 +61,11 @@ type SharedProperties = {
   startingMegaCredits?: number;
   tags?: Array<Tag>;
   victoryPoints?: number | 'special' | IVictoryPoints,
+  reserveUnits?: ReserveUnits,
 }
 
 /* Internal representation of card properties. */
 type InternalProperties = SharedProperties & {
-  reserveUnits?: Units,
   requirements: Array<CardRequirementsDescriptor>
   compiledRequirements: CardRequirements;
   tilesBuilt: ReadonlyArray<TileType>,
@@ -70,7 +73,6 @@ type InternalProperties = SharedProperties & {
 
 /* External representation of card properties. */
 export type StaticCardProperties = SharedProperties & {
-  reserveUnits?: Partial<Units>,
   requirements?: OneOrArray<CardRequirementDescriptor>,
   tilesBuilt?: ReadonlyArray<TileType>,
 }
@@ -115,9 +117,9 @@ export abstract class Card implements ICard {
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
       Card.autopopulateMetadataVictoryPoints(external);
 
-      validateBehavior(external.behavior);
-      validateBehavior(external.firstAction);
-      validateBehavior(external.action);
+      validateBehavior(external.behavior, name);
+      validateBehavior(external.firstAction, name);
+      validateBehavior(external.action, name);
       Card.validateTilesBuilt(external);
     } catch (e) {
       throw new Error(`Cannot validate ${name}: ${e}`);
@@ -144,7 +146,6 @@ export abstract class Card implements ICard {
 
     const internal: InternalProperties = {
       ...external,
-      reserveUnits: external.reserveUnits === undefined ? undefined : Units.of(external.reserveUnits),
       requirements: translatedRequirements,
       compiledRequirements: compiledRequirements,
       tilesBuilt: tilesBuilt,
@@ -207,8 +208,8 @@ export abstract class Card implements ICard {
   public get cardDiscount() {
     return this.properties.cardDiscount;
   }
-  public get reserveUnits(): Units {
-    return this.properties.reserveUnits || Units.EMPTY;
+  public get reserveUnits(): ReserveUnits {
+    return this.properties.reserveUnits || {};
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;
@@ -466,10 +467,10 @@ function populateCount(requirement: CardRequirementDescriptor): CardRequirementD
   return requirement;
 }
 
-export function validateBehavior(behavior: Behavior | undefined) : void {
+export function validateBehavior(behavior: Behavior | undefined, name: CardName) : void {
   function validate(condition: boolean, error: string) {
     if (condition === false) {
-      throw new Error(error);
+      throw new Error(`for ${name}: ${error}`);
     }
   }
   if (behavior === undefined) {

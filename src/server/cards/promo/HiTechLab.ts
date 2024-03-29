@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class HiTechLab extends Card implements IProjectCard {

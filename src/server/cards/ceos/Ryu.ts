@@ -4,10 +4,10 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
-import {OrOptions} from '../../inputs/OrOptions';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
 import {ALL_RESOURCES, Resource} from '../../../common/Resource';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
 import {message} from '../../logs/MessageBuilder';
 
 export class Ryu extends CeoCard {

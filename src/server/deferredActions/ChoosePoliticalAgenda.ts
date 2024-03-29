@@ -1,5 +1,5 @@
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
+import {OrOptions} from '../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../inputs/selectables/GenericSelection';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {DeferredAction, Priority} from './DeferredAction';

@@ -6,7 +6,7 @@ import {digit} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 import {Space} from '../../boards/Space';
 
 export class AeronGenomics extends ActiveCorporationCard {

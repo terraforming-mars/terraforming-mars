@@ -4,8 +4,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {SelectCard} from '../../inputs/SelectCard';
-import {OrOptions} from '../../inputs/OrOptions';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 

@@ -3,10 +3,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {Turmoil} from '../../turmoil/Turmoil';
-import {SelectParty} from '../../inputs/SelectParty';
-import {AndOptions} from '../../inputs/AndOptions';
+import {SelectParty} from '../../inputs/selectables/PartySelection';
+import {AndOptions} from '../../inputs/basicInputs/AndOptions';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
 import {all} from '../Options';
 
 export class CollusionStandardProject extends StandardProjectCard {

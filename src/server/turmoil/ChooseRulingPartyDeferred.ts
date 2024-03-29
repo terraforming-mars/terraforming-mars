@@ -1,10 +1,10 @@
 import {IPlayer} from '../IPlayer';
 import {DeferredAction} from '../deferredActions/DeferredAction';
-import {OrOptions} from '../inputs/OrOptions';
+import {OrOptions} from '../inputs/basicInputs/OrOptions';
 import {Turmoil} from './Turmoil';
 import {PoliticalAgendas} from './PoliticalAgendas';
 import {IParty} from './parties/IParty';
-import {SelectOption} from '../inputs/SelectOption';
+import {SelectOption} from '../inputs/selectables/GenericSelection';
 
 export class ChooseRulingPartyDeferred extends DeferredAction<IParty> {
   private turmoil: Turmoil;

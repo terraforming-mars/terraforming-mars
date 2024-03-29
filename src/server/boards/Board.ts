@@ -10,6 +10,7 @@ import {Units} from '../../common/Units';
 import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {TRSource} from '../../common/cards/TRSource';
 import {sum} from '../../common/utils/utils';
+import { SpaceBonus } from '@/common/boards/SpaceBonus';
 
 export type SpaceCosts = {
   stock: Units,
@@ -192,8 +193,9 @@ export abstract class Board {
   public canAfford(player: IPlayer, space: Space, canAffordOptions?: CanAffordOptions) {
     const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
     if (additionalCosts.stock.megacredits > 0) {
-      const plan: CanAffordOptions = canAffordOptions !== undefined ? {...canAffordOptions} : {cost: 0, tr: {}};
-      plan.cost += additionalCosts.stock.megacredits;
+      const plan: CanAffordOptions = canAffordOptions ?? {cost: 0, tr: {}, megacreditOnlyCost: 0};
+
+      plan.megacreditOnlyCost += additionalCosts.stock.megacredits;
       plan.tr = additionalCosts.tr;
 
       const afford = player.canAfford(plan);

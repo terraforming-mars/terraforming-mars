@@ -4,8 +4,8 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../../common/constants';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class Naomi extends CeoCard {

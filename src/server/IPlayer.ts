@@ -10,13 +10,11 @@ import {IProjectCard} from './cards/IProjectCard';
 import {PlayerInput} from './PlayerInput';
 import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
-import {SelectCard} from './inputs/SelectCard';
 import {Priority} from './deferredActions/DeferredAction';
 import {RobotCard} from './cards/promo/SelfReplicatingRobots';
 import {SerializedPlayer} from './SerializedPlayer';
 import {Timer} from '../common/Timer';
 import {AllOptions, DrawOptions} from './deferredActions/DrawCards';
-import {Units} from '../common/Units';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
@@ -27,16 +25,21 @@ import {Production} from './player/Production';
 import {ICeoCard} from './cards/ceos/ICeoCard';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {Color} from '../common/Color';
-import {OrOptions} from './inputs/OrOptions';
+import {OrOptions} from './inputs/basicInputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
+import { SpendableResource } from '@/server/player/SpendableResource';
+import { SelectOne } from './inputs/basicInputs/SelectOne';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
-export type CanAffordOptions = Partial<PaymentOptions> & {
-  cost: number,
-  reserveUnits?: Units,
-  tr?: TRSource,
+export type CanAffordOptions = {
+  /** The card we are trying to determine if the player can afford */ 
+  card: IProjectCard
+  /** Sources of TR that might be penalized by Turmoil Reds */
+  additionalTR?: TRSource | DynamicTRSource,
+  /** Additional costs that must be payed for with MC */
+  additionalCosts?: number
 }
 
 /**
@@ -78,14 +81,11 @@ export interface IPlayer {
   energy: number;
   heat: number;
 
-  // Helion
-  canUseHeatAsMegaCredits: boolean;
-  // Luna Trade Federation
-  canUseTitaniumAsMegacredits: boolean;
-  // Martian Lumber Corp
-  canUsePlantsAsMegacredits: boolean;
-  // Friends in High Places
-  canUseCorruptionAsMegacredits: boolean;
+  // Spending Options
+  SpendableResources: SpendableResource[];
+
+  steelValueBonus: number;
+  titaniumValueBonus: number;
 
   // This generation / this round
   actionsTakenThisRound: number;
@@ -156,11 +156,9 @@ export interface IPlayer {
    * Return the corporation card this player has played by the given name, or throw an Error.
    */
   getCorporationOrThrow(corporationName: CardName): ICorporationCard;
-  getTitaniumValue(): number;
   increaseTitaniumValue(): void;
   decreaseTitaniumValue(): void;
   getSelfReplicatingRobotsTargetCards(): Array<RobotCard>;
-  getSteelValue(): number;
   increaseSteelValue(): void;
   decreaseSteelValue(): void;
   getTerraformRating(): number;
@@ -275,10 +273,9 @@ export interface IPlayer {
   /** The number of resources on this card for this player, or 0 if the player does not have this card. */
   resourcesOnCard(name: CardName): number;
   spendableMegacredits(): number;
-  /** Return then amount of spendable units of a given card resource */
-  getSpendable(resource: SpendableCardResource): number;
-  checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;
+  GetPaymentOptions(card?: IProjectCard): PaymentOptions;
+  ValidatePayment(options: PaymentOptions, payment: Payment, amount: number, card?: ICard): void;
   availableHeat(): number;
   spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
 
@@ -297,19 +294,11 @@ export interface IPlayer {
   getPlayableCards(): Array<IProjectCard>;
   canPlay(card: IProjectCard): boolean;
   simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean;
-  canSpend(payment: Payment, reserveUnits?: Units): boolean;
-  payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number;
-  /**
-   * Returns a summary of how much a player would have to spend to play a card,
-   * any associated costs, and ways the player can pay.
-   */
-  affordOptionsForCard(card: IProjectCard): CanAffordOptions;
+  payingAmount(options: PaymentOptions, payment: Payment): number;
   canAfford(options: number | CanAffordOptions): boolean;
-  /** Gets the added penal cost of playing a card when Turmoil reds are in power */
   getRedsCost(tr: TRSource): number;
-  /** Gets relevent warning for playing a card (Reds, Think Tank, and Pharmacy Union) */
   getWarning(card: ICard): string | undefined;
-  getStandardProjectOption(): SelectCard<IStandardProjectCard>;
+  getStandardProjectOption(): SelectOne<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
   getOpponents(): ReadonlyArray<IPlayer>;
   /** Add `corp`'s initial action to the deferred action queue, if it has one. */

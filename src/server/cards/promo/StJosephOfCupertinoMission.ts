@@ -6,12 +6,12 @@ import {IActionCard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
 import {IGame} from '../../IGame';
 import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectPayment} from '../../inputs/SelectPayment';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
+import {SelectPayment} from '../../inputs/basicInputs/SelectPayment';
 import {TITLES} from '../../inputs/titles';
 import {message} from '../../logs/MessageBuilder';
 

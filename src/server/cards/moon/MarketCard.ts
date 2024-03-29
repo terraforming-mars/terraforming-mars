@@ -1,7 +1,7 @@
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {Card, StaticCardProperties} from '../Card';

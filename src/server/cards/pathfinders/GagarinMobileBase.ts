@@ -5,7 +5,7 @@ import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Tag} from '../../../common/cards/Tag';
 import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {IActionCard} from '../ICard';
 import {BoardType} from '../../boards/BoardType';
 import {Board} from '../../boards/Board';

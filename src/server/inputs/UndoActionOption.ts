@@ -1,4 +1,5 @@
-import {SelectOption} from './SelectOption';
+import { SelectOption } from "./basicInputs/SelectOption";
+
 
 export class UndoActionOption extends SelectOption {
   constructor() {

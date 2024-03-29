@@ -15,7 +15,10 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 33,
       victoryPoints: 2,
-      tr: (player) => ({tr: 1 + player.tags.count(Tag.JOVIAN)}),
+
+      behavior: {
+        tr: {tag: Tag.JOVIAN}
+      },
 
       metadata: {
         cardNumber: '197',

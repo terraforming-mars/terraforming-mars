@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {TRSource} from '../../../common/cards/TRSource';
 
 export class SubterraneanSea extends Card implements IProjectCard {
   constructor() {
@@ -15,8 +16,6 @@ export class SubterraneanSea extends Card implements IProjectCard {
       cost: 10,
       tags: [Tag.BUILDING],
 
-      tr: {oceans: 1},
-
       metadata: {
         cardNumber: 'U15',
         renderData: CardRenderer.builder((b) => {
@@ -25,6 +24,10 @@ export class SubterraneanSea extends Card implements IProjectCard {
         description: 'Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.',
       },
     });
+  }
+
+  public override getTRSources(_player: IPlayer): TRSource {
+    return {oceans: 1}
   }
 
   private availableSpaces(player: IPlayer) {

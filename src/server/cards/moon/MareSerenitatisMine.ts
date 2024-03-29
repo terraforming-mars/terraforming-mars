@@ -10,6 +10,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import { TRSource } from '@/common/cards/TRSource';
 
 export class MareSerenitatisMine extends Card {
   constructor() {
@@ -23,7 +24,6 @@ export class MareSerenitatisMine extends Card {
         production: {steel: 1, titanium: 1},
       },
       reserveUnits: {steel: 1, titanium: 2},
-      tr: {moonMining: 1, moonLogistics: 1},
 
       metadata: {
         description: 'Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step. ' +
@@ -37,6 +37,10 @@ export class MareSerenitatisMine extends Card {
       },
       tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
     });
+  }
+
+  public override getTRSources(_player: IPlayer): TRSource {
+    return {moonLogistics: 1, moonMining: 1}
   }
 
   public override bespokePlay(player: IPlayer) {

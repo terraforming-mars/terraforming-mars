@@ -1,6 +1,5 @@
 import {CardType} from '../../common/cards/CardType';
 import {IPlayer} from '../IPlayer';
-import {TRSource} from '../../common/cards/TRSource';
 import {PlayerInput} from '../PlayerInput';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';
@@ -17,7 +16,6 @@ type StaticStandardProjectCardProperties = {
   cost: number,
   metadata: ICardMetadata,
   reserveUnits?: Partial<Units>,
-  tr?: TRSource,
 }
 
 export type StandardProjectCanPayWith = {
@@ -62,7 +60,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     return {
       ...canPayWith,
       cost: this.cost - this._discount(player),
-      tr: this.tr,
+      tr: this.getTRSources(player),
       auroraiData: true,
       spireScience: true,
       reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),

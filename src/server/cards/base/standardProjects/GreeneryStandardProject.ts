@@ -3,13 +3,13 @@ import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {PlaceGreeneryTile} from '../../../deferredActions/PlaceGreeneryTile';
+import {TRSource} from '../../../../common/cards/TRSource';
 
 export class GreeneryStandardProject extends StandardProjectCard {
   constructor() {
     super({
       name: CardName.GREENERY_STANDARD_PROJECT,
       cost: 23,
-      tr: {oxygen: 1},
       metadata: {
         cardNumber: 'SP6',
         renderData: CardRenderer.builder((b) =>
@@ -19,6 +19,10 @@ export class GreeneryStandardProject extends StandardProjectCard {
         ),
       },
     });
+  }
+
+  public override getTRSources(_player: IPlayer): TRSource {
+    return {oxygen: 1}
   }
 
   public override canPayWith(player: IPlayer) {

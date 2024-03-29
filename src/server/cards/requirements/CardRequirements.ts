@@ -1,8 +1,7 @@
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRequirement, YesAnd} from './CardRequirement';
+import {CardRequirement} from './CardRequirement';
 import {ChairmanRequirement} from './ChairmanRequirement';
 import {CitiesRequirement} from './CitiesRequirement';
 import {ColoniesRequirement} from './ColoniesRequirement';
@@ -32,7 +31,7 @@ import {ExcavationRequirement} from './ExcavationRequirement';
 export class CardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
 
-  public satisfies(player: IPlayer): boolean | YesAnd {
+  public satisfies(player: IPlayer): boolean {
     if (this.requirements.length === 0) {
       return true;
     }
@@ -48,18 +47,13 @@ export class CardRequirements {
     if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
-    const thinkTankResources = player.playedCards.find((c) => c.name === CardName.THINK_TANK)?.resourceCount;
-    let result: boolean | YesAnd = true;
     for (const requirement of this.requirements) {
-      const satisfies = requirement.satisfies(player, thinkTankResources);
+      const satisfies = requirement.satisfies(player);
       if (satisfies === false) {
         return false;
       }
-      if (typeof(satisfies) === 'object') {
-        result = satisfies;
-      }
     }
-    return result;
+    return true;
   }
 
   public static compile(descriptors: Array<CardRequirementDescriptor> | undefined): CardRequirements {

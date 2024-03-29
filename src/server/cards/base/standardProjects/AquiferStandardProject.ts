@@ -3,13 +3,13 @@ import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
 import {StandardProjectCard} from '../../StandardProjectCard';
+import {TRSource} from '../../../../common/cards/TRSource';
 
 export class AquiferStandardProject extends StandardProjectCard {
   constructor() {
     super({
       name: CardName.AQUIFER_STANDARD_PROJECT,
       cost: 18,
-      tr: {oceans: 1},
       metadata: {
         cardNumber: 'SP2',
         renderData: CardRenderer.builder((b) =>
@@ -18,6 +18,10 @@ export class AquiferStandardProject extends StandardProjectCard {
           })),
       },
     });
+  }
+
+  public override getTRSources(_player: IPlayer): TRSource {
+    return {oceans: 1}
   }
 
   public override canPayWith(player: IPlayer) {

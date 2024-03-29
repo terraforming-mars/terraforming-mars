@@ -3,13 +3,13 @@ import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
+import {TRSource} from '../../../../common/cards/TRSource';
 
 export class AsteroidStandardProject extends StandardProjectCard {
   constructor() {
     super({
       name: CardName.ASTEROID_STANDARD_PROJECT,
       cost: 14,
-      tr: {temperature: 1},
       metadata: {
         cardNumber: 'SP9',
         renderData: CardRenderer.builder((b) =>
@@ -19,6 +19,10 @@ export class AsteroidStandardProject extends StandardProjectCard {
         ),
       },
     });
+  }
+
+  public override getTRSources(_player: IPlayer): TRSource {
+    return {temperature: 1}
   }
 
   public override canPayWith(player: IPlayer) {

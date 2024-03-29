@@ -8,6 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
+import {TRSource} from '../../../common/cards/TRSource';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,6 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       },
       // NOTE(kberg): Rules were that it says it Requires 1 mine tile. Changing to "Requires you have 1 mine tile."
       requirements: {miningTiles: 1},
-      tr: {moonHabitat: 1},
 
       metadata: {
         description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles ' +
@@ -37,6 +37,10 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       },
       tilesBuilt: [TileType.LUNAR_MINE_URBANIZATION],
     });
+  }
+
+  public override getTRSources(_player: IPlayer): TRSource {
+    return {moonHabitat: 1}
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {

@@ -9,11 +9,6 @@ export type Options = {
   count: number,
 };
 
-export type YesAnd = {
-  thinkTankResources?: number,
-  redsCost?: number,
-}
-
 /**
  * Information to evaluate a card requirement.
  *
@@ -55,5 +50,5 @@ export abstract class CardRequirement {
    * YesAnd if it can only do that under certain conditions (e.g. spend 2 Think Tank
    * resources.)
    */
-  public abstract satisfies(player: IPlayer, thinkTankResources?: number) : boolean | YesAnd;
+  public abstract satisfies(player: IPlayer) : boolean;
 }

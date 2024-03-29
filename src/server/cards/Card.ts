@@ -8,7 +8,7 @@ import {Tag} from '../../common/cards/Tag';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {DynamicTRSource, ICard} from './ICard';
+import {ICard} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
@@ -24,7 +24,6 @@ import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
-import {YesAnd} from './requirements/CardRequirement';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
 
@@ -58,7 +57,6 @@ type SharedProperties = {
   protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
@@ -212,39 +210,23 @@ export abstract class Card implements ICard {
   public get reserveUnits(): Units {
     return this.properties.reserveUnits || Units.EMPTY;
   }
-  public get tr(): TRSource | DynamicTRSource | undefined {
-    return this.properties.tr;
-  }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
   public get tilesBuilt(): ReadonlyArray<TileType> {
     return this.properties.tilesBuilt;
   }
-  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    let yesAnd: YesAnd | undefined = undefined;
+
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
     const satisfied = this.properties.compiledRequirements.satisfies(player);
-    if (satisfied === false) {
+    if (satisfied === false)
       return false;
-    }
-    if (satisfied !== true) {
-      yesAnd = satisfied;
-    }
 
     if (this.behavior !== undefined) {
-      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
+      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) 
         return false;
-      }
     }
-    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions);
-    if (bespokeCanPlay === false) {
-      return false;
-    }
-
-    if (yesAnd !== undefined) {
-      return yesAnd;
-    }
-    return true;
+    return this.bespokeCanPlay(player, canAffordOptions);
   }
 
   public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {
@@ -270,8 +252,7 @@ export abstract class Card implements ICard {
     this.bespokeOnDiscard(player);
   }
 
-  public bespokeOnDiscard(_player: IPlayer): void {
-  }
+  public bespokeOnDiscard(_player: IPlayer): void {}
 
   public getVictoryPoints(player: IPlayer): number {
     const vp = this.properties.victoryPoints;
@@ -431,7 +412,12 @@ export abstract class Card implements ICard {
     }
     return 0;
   }
+
+  public getTRSources(player: IPlayer): TRSource {
+    return this.behavior !== undefined ? getBehaviorExecutor().toTRSource(this.behavior, new Counter(player, this)) : {}
+  }
 }
+
 
 function populateCount(requirement: CardRequirementDescriptor): CardRequirementDescriptor {
   requirement.count =

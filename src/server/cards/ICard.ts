@@ -37,7 +37,6 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
   return object.getCheckLoops !== undefined;
 }
 
-export type DynamicTRSource = (player: IPlayer) => TRSource;
 
 export interface ICard {
   name: CardName;
@@ -122,20 +121,20 @@ export interface ICard {
 
   onProductionGain?(player: IPlayer, resource: Resource, amount: number): void;
   onProductionPhase?(player: IPlayer): void;
+  /** If a card has a mandatory effect that the player should be warned about (Pharmacy Union and Think Tank), the player's getWarning function will call this */
+  getWarningForCard?(player: IPlayer, card: ICard): string | undefined;
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;
   metadata: ICardMetadata;
 
-  /**
-   * Per-instance state-specific warnings about this card's action.
-   */
+  /** Per-instance state-specific warnings about this card's action. */
   warnings: Set<Warning>;
 
   behavior?: Behavior,
   produce?(player: IPlayer): void;
-  tr?: TRSource | DynamicTRSource;
+  getTRSources(player: IPlayer): TRSource;
   resourceCount: number;
   resourceType?: CardResource;
   protectedResources?: boolean;

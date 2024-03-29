@@ -4,7 +4,7 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame, isIGame} from './IGame';
 import {Payment, PaymentOptions} from '../common/inputs/Payment';
 import {SpendableCardResource} from '../common/inputs/Spendable';
-import {ICard, IActionCard, DynamicTRSource} from './cards/ICard';
+import {ICard, IActionCard} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
 import {PlayerInput} from './PlayerInput';
@@ -26,8 +26,6 @@ import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {ICeoCard} from './cards/ceos/ICeoCard';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
-import {YesAnd} from './cards/requirements/CardRequirement';
-import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
@@ -38,7 +36,7 @@ export type ResourceSource = IPlayer | GlobalEventName | ICard;
 export type CanAffordOptions = Partial<PaymentOptions> & {
   cost: number,
   reserveUnits?: Units,
-  tr?: TRSource | DynamicTRSource,
+  tr?: TRSource,
 }
 
 /**
@@ -296,9 +294,9 @@ export interface IPlayer {
   /** Player is done taking actions this generation. */
   pass(): void;
   takeActionForFinalGreenery(): void;
-  getPlayableCards(): Array<PlayableCard>;
-  canPlay(card: IProjectCard): boolean | YesAnd;
-  simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd;
+  getPlayableCards(): Array<IProjectCard>;
+  canPlay(card: IProjectCard): boolean;
+  simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean;
   canSpend(payment: Payment, reserveUnits?: Units): boolean;
   payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number;
   /**
@@ -307,6 +305,10 @@ export interface IPlayer {
    */
   affordOptionsForCard(card: IProjectCard): CanAffordOptions;
   canAfford(options: number | CanAffordOptions): boolean;
+  /** Gets the added penal cost of playing a card when Turmoil reds are in power */
+  getRedsCost(tr: TRSource): number;
+  /** Gets relevent warning for playing a card (Reds, Think Tank, and Pharmacy Union) */
+  getWarning(card: ICard): string;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
   getOpponents(): ReadonlyArray<IPlayer>;

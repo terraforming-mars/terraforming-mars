@@ -63,8 +63,6 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {message} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
-import {YesAnd} from './cards/requirements/CardRequirement';
-import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
@@ -73,7 +71,8 @@ import {PreludesExpansion} from './preludes/PreludesExpansion';
 import {ChooseCards} from './deferredActions/ChooseCards';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
-import {Counter} from './behavior/Counter';
+import {TRSource} from '../common/cards/TRSource';
+
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -1301,7 +1300,7 @@ export class Player implements IPlayer {
     return this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true);
   }
 
-  public getPlayableCards(): Array<PlayableCard> {
+  public getPlayableCards(): Array<IProjectCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
     const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
@@ -1311,52 +1310,31 @@ export class Player implements IPlayer {
       }
     }
 
-    const playableCards: Array<PlayableCard> = [];
+    const playableCards: Array<IProjectCard> = [];
     for (const card of candidateCards) {
       card.warnings.clear();
       const canPlay = this.canPlay(card);
       if (canPlay !== false) {
-        playableCards.push({
-          card,
-          details: canPlay,
-        });
+        playableCards.push(card);
       }
     }
     return playableCards;
   }
 
   public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
-    const trSource =
-      card.tr ||
-      (card.behavior !== undefined ?
-        getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) :
-        undefined);
     return {
       cost: this.getCardCost(card),
       ...this.paymentOptionsForCard(card),
       reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
-      tr: trSource,
+      tr: card.getTRSources(this),
     };
   }
 
-  public canPlay(card: IProjectCard): boolean | YesAnd {
+  public canPlay(card: IProjectCard): boolean {
     const options = this.affordOptionsForCard(card);
     const canAfford = this.newCanAfford(options);
-    if (!canAfford.canAfford) {
-      return false;
-    }
-    const canPlay = this.simpleCanPlay(card, options);
-    if (canPlay === false) {
-      return false;
-    }
-    if (canAfford.redsCost > 0) {
-      if (typeof canPlay === 'boolean') {
-        return {redsCost: canAfford.redsCost};
-      } else {
-        return {...canPlay, redsCost: canAfford.redsCost};
-      }
-    }
-    return canPlay;
+    if (!canAfford) return false;
+    return this.simpleCanPlay(card, options);
   }
 
   /**
@@ -1364,7 +1342,7 @@ export class Player implements IPlayer {
    * Only made public for tests.
    */
   // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
+  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean {
     return card.canPlay(this, canAffordOptions);
   }
 
@@ -1442,14 +1420,14 @@ export class Player implements IPlayer {
     return totalToPay;
   }
 
-  private static CANNOT_AFFORD = {canAfford: false, redsCost: 0} as const;
+  public getRedsCost(tr: TRSource): number {
+    return TurmoilHandler.computeTerraformRatingBump(this, tr) * REDS_RULING_POLICY_COST
+  }
 
   /**
    * Returns information about whether a player can afford to spend money with other costs and ways to pay taken into account.
    */
-  public newCanAfford(o: number | CanAffordOptions): {redsCost: number, canAfford: boolean} {
-    const options: CanAffordOptions = typeof(o) === 'number' ? {cost: o} : {...o};
-
+  public newCanAfford(options: CanAffordOptions): boolean {
     // TODO(kberg): These are set both here and in SelectPayment. Consolidate, perhaps.
     options.heat = this.canUseHeatAsMegaCredits;
     options.lunaTradeFederationTitanium = this.canUseTitaniumAsMegacredits;
@@ -1459,30 +1437,41 @@ export class Player implements IPlayer {
       // Special-case heat
       const unitsWithoutHeat = {...reserveUnits, heat: 0};
       if (!this.stock.has(unitsWithoutHeat)) {
-        return Player.CANNOT_AFFORD;
+        return false;
       }
       if (this.availableHeat() < reserveUnits.heat) {
-        return Player.CANNOT_AFFORD;
+        return false;
       }
     } else {
       if (!this.stock.has(reserveUnits)) {
-        return Player.CANNOT_AFFORD;
+        return false;
       }
     }
 
     const maxPayable = this.maxSpendable(reserveUnits);
-    const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options.tr) * REDS_RULING_POLICY_COST;
+    const redsCost = options.tr !== undefined ? this.getRedsCost(options.tr) : 0; 
     if (redsCost > 0) {
       const usableForRedsCost = this.payingAmount(maxPayable, {});
       if (usableForRedsCost < redsCost) {
-        return Player.CANNOT_AFFORD;
+        return false;
       }
     }
 
     const usable = this.payingAmount(maxPayable, options);
 
     const canAfford = options.cost + redsCost <= usable;
-    return {canAfford, redsCost};
+    return canAfford;
+  }
+
+  public getWarning(card: ICard): string {
+    let warning = '';
+    const redsCost = this.getRedsCost(card.getTRSources(this));
+    if (redsCost > 0)
+      warning += `Playing ${card.name} will cost an additional ${redsCost} M€ because Reds are in power`;
+    this.tableau.forEach((playedCard) => {
+      warning += playedCard.getWarningForCard?.(this, card)
+    })
+    return warning;
   }
 
   /**
@@ -1490,7 +1479,8 @@ export class Player implements IPlayer {
    * and additionally pay the reserveUnits (no replaces here)
    */
   public canAfford(o: number | CanAffordOptions): boolean {
-    return this.newCanAfford(o).canAfford;
+    if (typeof o === 'number') return o <= this.spendableMegacredits()
+    return this.newCanAfford(o);
   }
 
   private getStandardProjects(): Array<IStandardProjectCard> {

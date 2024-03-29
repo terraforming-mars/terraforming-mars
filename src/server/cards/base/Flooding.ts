@@ -17,7 +17,6 @@ export class Flooding extends Card implements IProjectCard {
       type: CardType.EVENT,
       name: CardName.FLOODING,
       cost: 7,
-      tr: {oceans: 1},
       victoryPoints: -1,
 
       metadata: {

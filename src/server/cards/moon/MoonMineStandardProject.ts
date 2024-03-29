@@ -7,13 +7,13 @@ import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Resource} from '../../../common/Resource';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {TRSource} from '../../../common/cards/TRSource';
 
 export class MoonMineStandardProject extends StandardProjectCard {
   constructor(properties = {
     name: CardName.MOON_MINE_STANDARD_PROJECT,
     cost: 20,
     reserveUnits: {titanium: 1},
-    tr: {moonMining: 1},
     tilesBuilt: [TileType.MOON_MINE],
 
     metadata: {
@@ -26,6 +26,10 @@ export class MoonMineStandardProject extends StandardProjectCard {
     },
   }) {
     super(properties);
+  }
+
+  public override getTRSources(_player: IPlayer): TRSource {
+    return {moonMining: 1}
   }
 
   protected override discount(player: IPlayer): number {

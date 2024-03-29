@@ -14,7 +14,6 @@ export class MoonHabitatStandardProjectVariant2 extends MoonHabitatStandardProje
       name: CardName.MOON_HABITAT_STANDARD_PROJECT_V2,
       cost: 26,
       reserveUnits: Units.EMPTY,
-      tr: {moonHabitat: 1},
       tilesBuilt: [TileType.MOON_HABITAT],
 
       metadata: {
@@ -39,7 +38,6 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
       name: CardName.MOON_MINE_STANDARD_PROJECT_V2,
       cost: 23,
       reserveUnits: Units.EMPTY,
-      tr: {moonMining: 1},
       tilesBuilt: [TileType.MOON_MINE],
 
       metadata: {
@@ -64,7 +62,6 @@ export class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject {
       name: CardName.MOON_ROAD_STANDARD_PROJECT_V2,
       cost: 21,
       reserveUnits: Units.EMPTY,
-      tr: {moonLogistics: 1},
       tilesBuilt: [TileType.MOON_ROAD],
 
       metadata: {

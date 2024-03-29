@@ -3,12 +3,12 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import * as constants from '../../../common/constants';
+import {TRSource} from '../../../common/cards/TRSource';
 
 export class AirScrappingStandardProject extends StandardProjectCard {
   constructor(properties = {
     name: CardName.AIR_SCRAPPING_STANDARD_PROJECT,
     cost: 15,
-    tr: {venus: 1},
     metadata: {
       cardNumber: 'SP1',
       renderData: CardRenderer.builder((b) =>
@@ -19,6 +19,10 @@ export class AirScrappingStandardProject extends StandardProjectCard {
     },
   }) {
     super(properties);
+  }
+
+  public override getTRSources(_player: IPlayer): TRSource {
+    return {venus: 1}
   }
 
   public override canAct(player: IPlayer): boolean {

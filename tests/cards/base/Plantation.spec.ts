@@ -1,6 +1,6 @@
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 import {Plantation} from '../../../src/server/cards/base/Plantation';
 import {Game} from '../../../src/server/Game';
@@ -31,4 +31,22 @@ describe('Plantation', function() {
     action.cb(action.spaces[0]);
     expect(game.getOxygenLevel()).to.eq(1);
   });
+
+  const redsRuns = [
+    {oxygen: 12, expected: 3},
+    {oxygen: 13, expected: 3},
+    {oxygen: 14, expected: 0},
+  ] as const;
+
+  for (const run of redsRuns) {
+    it('Works with reds ' + JSON.stringify(run), () => {
+      const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+
+      // Card requirement
+      player.tagsForTest = {science: 2};
+
+      setOxygenLevel(game, run.oxygen);
+      testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
+    });
+  }
 });

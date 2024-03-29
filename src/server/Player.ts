@@ -1331,9 +1331,11 @@ export class Player implements IPlayer {
       (card.behavior !== undefined ?
         getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) :
         undefined);
+    const cost = this.getCardCost(card);
+    const paymentOptionsForCard = this.paymentOptionsForCard(card);
     return {
-      cost: this.getCardCost(card),
-      ...this.paymentOptionsForCard(card),
+      cost,
+      ...paymentOptionsForCard,
       reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
       tr: trSource,
     };

@@ -1,11 +1,8 @@
 import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {cast, runAllActions, setTemperature} from '../../../TestingUtils';
+import {cast, runAllActions, setTemperature, testRedsCosts} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
-import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
-import {Reds} from '../../../../src/server/turmoil/parties/Reds';
-import {Phase} from '../../../../src/common/Phase';
 import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 import {testGame} from '../../../TestGame';
 
@@ -56,17 +53,10 @@ describe('AsteroidStandardProject', function() {
     expect(player.megaCredits).eq(0);
   });
 
-  it('Can not act with reds', () => {
+  it('Test reds', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
-
-    player.megaCredits = card.cost;
-    player.game.phase = Phase.ACTION;
-    player.game.turmoil!.rulingParty = new Reds();
-    PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
-    expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 2;
-    expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 3;
-    expect(card.canAct(player)).eq(true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct= */ true);
+    setTemperature(game, 8);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct= */ true);
   });
 });

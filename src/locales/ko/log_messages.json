@@ -119,7 +119,6 @@
     "${0} converted plants into a greenery": "${0} 플레이어는 식물 자원으로 녹지를 배치",
     "${0} traded with ${1}": "${0} 플레이어는 ${1} 개척지기와 무역 사업 수행",
     "${0} used ${1} standard project": "${0} 플레이어는 ${1} 일반 프로젝트 추진",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} 플레이어는 ${1} 일반 프로젝트를 추진하여, ${2}장의 카드를 판매",
     "${0} built a colony on ${1}": "${0} 플레이어는 ${1} 개척기지 건설",
     "${0} bought ${1} card(s)": "${0} 플레이어는 ${1}장의 카드를 구매",
     "${0} acted as World Government and increased Venus scale": "${0} 플레이어는 세계정부 테라포밍 사업으로 금성개척률을 1단계 상승시킴",

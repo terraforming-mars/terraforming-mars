@@ -172,7 +172,6 @@
     "${0} converted plants into a greenery": "${0} hat Pflanzen in eine Grünfläche umgewandelt",
     "${0} traded with ${1}": "${0} hat mit ${1} gehandelt",
     "${0} used ${1} standard project": "${0} hat Standardprojekt ${1} genutzt",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} hat Standardprojekt ${1} genutzt und ${2} Karten verkauft",
     "${0} built a colony on ${1}": "${0} hat eine Kolonie auf ${1} errichtet",
     "${0} bought ${1} card(s)": "${0} hat ${1} Karte(n) gekauft",
     "${0} acted as World Government and increased Venus scale": "${0} handelte als Weltregierung und erhöhte die Venus-Skala",

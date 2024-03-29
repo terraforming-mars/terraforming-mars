@@ -123,7 +123,6 @@
     "${0} converted plants into a greenery": "${0} heeft van planten een groentegel gemaakt",
     "${0} traded with ${1}": "${0} heeft met ${1} gehandeld",
     "${0} used ${1} standard project": "${0} heeft standaardproject ${1} gebruikt",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} gebruikte standaardproject ${1} en verkocht ${2} kaarten",
     "${0} built a colony on ${1}": "${0} heeft een kolonie gesticht op ${1}",
     "${0} bought ${1} card(s)": "${0} heeft ${1} kaart(en) gekocht",
     "${0} acted as World Government and increased Venus scale": "${0} trad op als wereldregering en verhoogde de Venus-waarde",

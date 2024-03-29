@@ -308,7 +308,7 @@ export interface IPlayer {
   /** Gets the added penal cost of playing a card when Turmoil reds are in power */
   getRedsCost(tr: TRSource): number;
   /** Gets relevent warning for playing a card (Reds, Think Tank, and Pharmacy Union) */
-  getWarning(card: ICard): string;
+  getWarning(card: ICard): string | undefined;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
   getOpponents(): ReadonlyArray<IPlayer>;

@@ -1463,14 +1463,22 @@ export class Player implements IPlayer {
     return canAfford;
   }
 
-  public getWarning(card: ICard): string {
-    let warning = '';
+  public getWarning(card: ICard): string | undefined {
+    let warning: string | undefined; 
+    function addWarning(w: string | undefined) {
+      if (w) {
+        warning = warning ?? '';
+        warning += w + '\n';
+      }
+    }
+    // Move this to turmoilHandler
     const redsCost = this.getRedsCost(card.getTRSources(this));
     if (redsCost > 0) {
-      warning += `Playing ${card.name} will cost an additional ${redsCost} M€ because Reds are in power`;
+      addWarning(`Playing ${card.name} will cost an additional ${redsCost} M€ because Reds are in power`);
     }
+
     this.tableau.forEach((playedCard) => {
-      warning += playedCard.getWarningForCard?.(this, card);
+      addWarning(playedCard.getWarningForCard?.(this, card));
     });
     return warning;
   }

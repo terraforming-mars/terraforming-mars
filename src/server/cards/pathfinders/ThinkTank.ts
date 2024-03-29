@@ -111,7 +111,7 @@ export class ThinkTank extends ActionCard implements ICard {
     player.game.defer(new SimpleDeferredAction(player, () => {
       this.resourceCount -= this.distance(card, player);
       return undefined;
-    }, Priority.SUPERPOWER))
+    }, Priority.COST))
   }
 }
 

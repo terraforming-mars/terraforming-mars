@@ -2,8 +2,6 @@ import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 
 export enum Priority {
-  /** Legacy value that should not be further used. */
-  SUPERPOWER = -1,
   /** Used for Pathfinders. First thing a player must do before further effects. */
   DECLARE_CLONE_TAG,
   /** Cost of a blue card action, or paying Reds costs. Must happen before the effects. */

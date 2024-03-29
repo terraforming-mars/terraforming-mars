@@ -103,7 +103,7 @@ export class PharmacyUnion extends CorporationCard {
           );
           orOptions.title = 'Choose the order of tag resolution for Pharmacy Union';
           return orOptions;
-        }, -1); // Make it a priority
+        }, Priority.COST); // Make it a priority
         return undefined;
       }
     }
@@ -141,7 +141,7 @@ export class PharmacyUnion extends CorporationCard {
             }),
             new SelectOption('Do nothing', 'Do nothing'),
           );
-        }, -1); // Make it a priority
+        }, Priority.COST); // Make it a priority
       }
     }
 
@@ -155,7 +155,7 @@ export class PharmacyUnion extends CorporationCard {
         player.megaCredits -= megaCreditsLost;
         game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
         return undefined;
-      }, Priority.SUPERPOWER);
+      }, Priority.COST);
     }
   }
 

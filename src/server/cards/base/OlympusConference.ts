@@ -57,7 +57,7 @@ export class OlympusConference extends Card implements IProjectCard {
         options.title = 'Select an option for Olympus Conference';
         return options;
       },
-      Priority.SUPERPOWER); // Unshift that deferred action
+      Priority.COST);
     }
     return undefined;
   }

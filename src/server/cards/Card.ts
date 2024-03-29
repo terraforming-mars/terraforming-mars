@@ -58,6 +58,7 @@ type SharedProperties = {
   protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
+  /** Descirbes where the card's TR comes from. Unnecessary for some behaviors. */
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
@@ -117,9 +118,9 @@ export abstract class Card implements ICard {
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
       Card.autopopulateMetadataVictoryPoints(external);
 
-      validateBehavior(external.behavior);
-      validateBehavior(external.firstAction);
-      validateBehavior(external.action);
+      validateBehavior(external.behavior, name);
+      validateBehavior(external.firstAction, name);
+      validateBehavior(external.action, name);
       Card.validateTilesBuilt(external);
     } catch (e) {
       throw new Error(`Cannot validate ${name}: ${e}`);
@@ -459,10 +460,10 @@ function populateCount(requirement: CardRequirementDescriptor): CardRequirementD
   return requirement;
 }
 
-export function validateBehavior(behavior: Behavior | undefined) : void {
+export function validateBehavior(behavior: Behavior | undefined, name: CardName) : void {
   function validate(condition: boolean, error: string) {
     if (condition === false) {
-      throw new Error(error);
+      throw new Error(`for ${name}: ${error}`);
     }
   }
   if (behavior === undefined) {

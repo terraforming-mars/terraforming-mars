@@ -28,7 +28,7 @@ export class MoonRoadStandardProject extends StandardProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {moonLogistics: 1}
+    return {moonLogistics: 1};
   }
 
   protected override discount(player: IPlayer): number {

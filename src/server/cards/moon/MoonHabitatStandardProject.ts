@@ -7,7 +7,7 @@ import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
 import {Resource} from '../../../common/Resource';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import { TRSource } from '@/common/cards/TRSource';
+import {TRSource} from '@/common/cards/TRSource';
 
 
 export class MoonHabitatStandardProject extends StandardProjectCard {
@@ -30,7 +30,7 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {moonHabitat: 1}
+    return {moonHabitat: 1};
   }
 
   protected override discount(player: IPlayer): number {

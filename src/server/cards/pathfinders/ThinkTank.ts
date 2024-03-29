@@ -49,57 +49,60 @@ export class ThinkTank extends ActionCard implements ICard {
     venus: GlobalParameter.VENUS,
     miningRate: GlobalParameter.MOON_MINING_RATE,
     logisticRate: GlobalParameter.MOON_LOGISTICS_RATE,
-    habitatRate: GlobalParameter.MOON_HABITAT_RATE
-  }
+    habitatRate: GlobalParameter.MOON_HABITAT_RATE,
+  } as const;
 
   // This code should be handled by the Game class
   private getGlobalValue(param: GlobalParameter, game: IGame): number | undefined {
     switch (param) {
-      case GlobalParameter.TEMPERATURE:
-        return game.getTemperature()
-      case GlobalParameter.OXYGEN:
-        return game.getOxygenLevel()
-      case GlobalParameter.OCEANS:
-        return game.board.getOceanSpaces().length
-      case GlobalParameter.VENUS:
-        return game.getVenusScaleLevel()
-      case GlobalParameter.MOON_MINING_RATE:
-        return game.moonData?.miningRate
-      case GlobalParameter.MOON_LOGISTICS_RATE:
-        return game.moonData?.logisticRate
-      case GlobalParameter.MOON_HABITAT_RATE:
-        return game.moonData?.habitatRate
+    case GlobalParameter.TEMPERATURE:
+      return game.getTemperature();
+    case GlobalParameter.OXYGEN:
+      return game.getOxygenLevel();
+    case GlobalParameter.OCEANS:
+      return game.board.getOceanSpaces().length;
+    case GlobalParameter.VENUS:
+      return game.getVenusScaleLevel();
+    case GlobalParameter.MOON_MINING_RATE:
+      return game.moonData?.miningRate;
+    case GlobalParameter.MOON_LOGISTICS_RATE:
+      return game.moonData?.logisticRate;
+    case GlobalParameter.MOON_HABITAT_RATE:
+      return game.moonData?.habitatRate;
     }
   }
 
   private testReq(req: CardRequirementDescriptor, param: keyof CardRequirementDescriptor, player: IPlayer): number {
-    const reqVal = req[param]
-    const global = this.GlobalReqs[param]
-    if (typeof reqVal === "number" && global) {
-      const globalValue = this.getGlobalValue(global, player.game)
+    const reqVal = req[param];
+    const global = this.GlobalReqs[param];
+    if (typeof reqVal === 'number' && global) {
+      const globalValue = this.getGlobalValue(global, player.game);
       if (globalValue) {
         const multiplier = req.max ? -1 : 1;
         const adjustedVal = reqVal + multiplier * (player.getGlobalParameterRequirementBonus(global) - this.resourceCount);
         return Math.min(0, multiplier * (globalValue - adjustedVal));
       }
     }
-    return 0
+    return 0;
   }
 
   private distance(card: ICard, player: IPlayer): number {
     let dist = 0;
     card.requirements.forEach((req) => {
       for (const key in req) {
-        dist += this.testReq(req, key as keyof CardRequirementDescriptor, player)
+        if (key in this.GlobalReqs) {
+          dist += this.testReq(req, key as keyof CardRequirementDescriptor, player);
+        }
       }
-    })
-    return dist
+    });
+    return dist;
   }
 
   public getWarningForCard(player: IPlayer, card: IProjectCard): string | undefined {
     const dist = this.distance(card, player);
-    if (dist > 0)
+    if (dist > 0) {
       return `Playing ${card.name} consumes ${dist} data from Think Tank`;
+    }
     return undefined;
   }
 
@@ -111,7 +114,7 @@ export class ThinkTank extends ActionCard implements ICard {
     player.game.defer(new SimpleDeferredAction(player, () => {
       this.resourceCount -= this.distance(card, player);
       return undefined;
-    }, Priority.COST))
+    }, Priority.COST));
   }
 }
 

@@ -21,7 +21,7 @@ export class BufferGasStandardProject extends StandardProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {tr: 1}
+    return {tr: 1};
   }
 
   actionEssence(player: IPlayer): void {

@@ -41,16 +41,19 @@ export function cardsToModel(
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
     };
 
-    if (card.isDisabled || options.enabled?.[index] === false)
+    if (card.isDisabled || options.enabled?.[index] === false) {
       model.isDisabled = true;
+    }
 
-    // 'card as IProjectCard' isn't ideal but is very temporary. 
-    if ('reserveUnits' in card)
-      model.reserveUnits = MoonExpansion.adjustedReserveCosts(player, card as IProjectCard)
+    // 'card as IProjectCard' isn't ideal but is very temporary.
+    if ('reserveUnits' in card) {
+      model.reserveUnits = MoonExpansion.adjustedReserveCosts(player, card as IProjectCard);
+    }
 
-    if (card.warnings.size > 0)
+    if (card.warnings.size > 0) {
       model.warnings = Array.from(card.warnings);
-    
+    }
+
     return model;
   });
 }

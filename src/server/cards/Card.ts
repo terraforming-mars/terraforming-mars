@@ -219,12 +219,14 @@ export abstract class Card implements ICard {
 
   public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
     const satisfied = this.properties.compiledRequirements.satisfies(player);
-    if (satisfied === false)
+    if (satisfied === false) {
       return false;
+    }
 
     if (this.behavior !== undefined) {
-      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) 
+      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
         return false;
+      }
     }
     return this.bespokeCanPlay(player, canAffordOptions);
   }
@@ -414,7 +416,7 @@ export abstract class Card implements ICard {
   }
 
   public getTRSources(player: IPlayer): TRSource {
-    return this.behavior !== undefined ? getBehaviorExecutor().toTRSource(this.behavior, new Counter(player, this)) : {}
+    return this.behavior !== undefined ? getBehaviorExecutor().toTRSource(this.behavior, new Counter(player, this)) : {};
   }
 }
 

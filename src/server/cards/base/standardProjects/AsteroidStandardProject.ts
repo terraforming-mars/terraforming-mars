@@ -22,7 +22,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {temperature: 1}
+    return {temperature: 1};
   }
 
   public override canPayWith(player: IPlayer) {

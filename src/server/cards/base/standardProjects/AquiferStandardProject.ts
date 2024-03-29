@@ -21,7 +21,7 @@ export class AquiferStandardProject extends StandardProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {oceans: 1}
+    return {oceans: 1};
   }
 
   public override canPayWith(player: IPlayer) {

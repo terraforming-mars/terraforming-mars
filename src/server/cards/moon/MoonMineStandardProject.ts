@@ -29,7 +29,7 @@ export class MoonMineStandardProject extends StandardProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {moonMining: 1}
+    return {moonMining: 1};
   }
 
   protected override discount(player: IPlayer): number {

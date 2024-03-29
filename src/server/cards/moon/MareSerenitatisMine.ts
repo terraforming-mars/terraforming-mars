@@ -10,7 +10,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import { TRSource } from '@/common/cards/TRSource';
+import {TRSource} from '../../../common/cards/TRSource';
 
 export class MareSerenitatisMine extends Card {
   constructor() {
@@ -40,7 +40,7 @@ export class MareSerenitatisMine extends Card {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {moonLogistics: 1, moonMining: 1}
+    return {moonLogistics: 1, moonMining: 1};
   }
 
   public override bespokePlay(player: IPlayer) {

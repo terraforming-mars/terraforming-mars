@@ -58,8 +58,9 @@ export class PharmacyUnion extends CorporationCard {
   }
 
   public getWarningforCard(_player: IPlayer, card: ICard): string | undefined {
-    if (card.tags.includes(Tag.MICROBE))
+    if (card.tags.includes(Tag.MICROBE)) {
       return `Pharmacy Union loses 4M€ for every microbe tag played`;
+    }
     return undefined;
   }
 

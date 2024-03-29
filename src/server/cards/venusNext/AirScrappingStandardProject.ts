@@ -22,7 +22,7 @@ export class AirScrappingStandardProject extends StandardProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {venus: 1}
+    return {venus: 1};
   }
 
   public override canAct(player: IPlayer): boolean {

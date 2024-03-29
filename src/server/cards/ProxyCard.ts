@@ -6,7 +6,7 @@ import {IProjectCard} from './IProjectCard';
 import {IPlayer} from '../IPlayer';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
-import { TRSource } from '@/common/cards/TRSource';
+import {TRSource} from '../../common/cards/TRSource';
 
 const EMPTY_SET: Readonly<Set<Warning>> = new Set();
 
@@ -52,6 +52,6 @@ export class ProxyCard implements IProjectCard {
     return EMPTY_SET;
   }
   getTRSources(_player: IPlayer): TRSource {
-    return {}
+    return {};
   }
 }

@@ -22,7 +22,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {oxygen: 1}
+    return {oxygen: 1};
   }
 
   public override canPayWith(player: IPlayer) {

@@ -27,7 +27,7 @@ export class SubterraneanSea extends Card implements IProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {oceans: 1}
+    return {oceans: 1};
   }
 
   private availableSpaces(player: IPlayer) {

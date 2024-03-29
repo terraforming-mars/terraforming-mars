@@ -30,7 +30,7 @@ export class RoverDriversUnion extends Card implements IProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {moonLogistics: 1}
+    return {moonLogistics: 1};
   }
 
   public override bespokePlay(player: IPlayer) {

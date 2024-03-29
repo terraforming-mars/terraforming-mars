@@ -1421,7 +1421,7 @@ export class Player implements IPlayer {
   }
 
   public getRedsCost(tr: TRSource): number {
-    return TurmoilHandler.computeTerraformRatingBump(this, tr) * REDS_RULING_POLICY_COST
+    return TurmoilHandler.computeTerraformRatingBump(this, tr) * REDS_RULING_POLICY_COST;
   }
 
   /**
@@ -1449,7 +1449,7 @@ export class Player implements IPlayer {
     }
 
     const maxPayable = this.maxSpendable(reserveUnits);
-    const redsCost = options.tr !== undefined ? this.getRedsCost(options.tr) : 0; 
+    const redsCost = options.tr !== undefined ? this.getRedsCost(options.tr) : 0;
     if (redsCost > 0) {
       const usableForRedsCost = this.payingAmount(maxPayable, {});
       if (usableForRedsCost < redsCost) {
@@ -1466,11 +1466,12 @@ export class Player implements IPlayer {
   public getWarning(card: ICard): string {
     let warning = '';
     const redsCost = this.getRedsCost(card.getTRSources(this));
-    if (redsCost > 0)
+    if (redsCost > 0) {
       warning += `Playing ${card.name} will cost an additional ${redsCost} M€ because Reds are in power`;
+    }
     this.tableau.forEach((playedCard) => {
-      warning += playedCard.getWarningForCard?.(this, card)
-    })
+      warning += playedCard.getWarningForCard?.(this, card);
+    });
     return warning;
   }
 
@@ -1479,7 +1480,9 @@ export class Player implements IPlayer {
    * and additionally pay the reserveUnits (no replaces here)
    */
   public canAfford(o: number | CanAffordOptions): boolean {
-    if (typeof o === 'number') return o <= this.spendableMegacredits()
+    if (typeof o === 'number') {
+      return o <= this.spendableMegacredits();
+    }
     return this.newCanAfford(o);
   }
 

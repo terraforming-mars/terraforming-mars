@@ -40,7 +40,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
   }
 
   public override getTRSources(_player: IPlayer): TRSource {
-    return {moonHabitat: 1}
+    return {moonHabitat: 1};
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {

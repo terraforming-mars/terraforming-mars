@@ -6,7 +6,6 @@ import {AlgaeBioreactors} from '../../../src/server/cards/moon/AlgaeBioreactors'
 import {expect} from 'chai';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Phase} from '../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
 
 describe('AlgaeBioreactors', () => {
@@ -49,7 +48,6 @@ describe('AlgaeBioreactors', () => {
   it('canPlay when Reds are in power', () => {
     const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
-    game.phase = Phase.ACTION;
 
     // Card requirements
     player.production.override({plants: 1});

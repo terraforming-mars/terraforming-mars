@@ -131,7 +131,6 @@ describe('LunaEcumenopolis', () => {
   //   const player = TestPlayer.BLUE.newPlayer();
   //   const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
   //   const moonData = MoonExpansion.moonData(game);
-  //   game.phase = Phase.ACTION;
 
   //   // Card requirements
   //   player.production.override({plants: 1});

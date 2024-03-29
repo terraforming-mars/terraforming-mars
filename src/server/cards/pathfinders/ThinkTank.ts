@@ -78,9 +78,10 @@ export class ThinkTank extends ActionCard implements ICard {
     if (typeof reqVal === 'number' && global) {
       const globalValue = this.getGlobalValue(global, player.game);
       if (globalValue) {
-        const multiplier = req.max ? -1 : 1;
+        let multiplier = req.max ? -1 : 1;
+        if (global === GlobalParameter.TEMPERATURE || global === GlobalParameter.VENUS) multiplier *= 2;
         const adjustedVal = reqVal + multiplier * (player.getGlobalParameterRequirementBonus(global) - this.resourceCount);
-        return Math.min(0, multiplier * (globalValue - adjustedVal));
+        return Math.max(0, (adjustedVal - globalValue) / multiplier);
       }
     }
     return 0;
@@ -112,7 +113,12 @@ export class ThinkTank extends ActionCard implements ICard {
 
   public onCardPlayed(player: IPlayer, card: ICard) {
     player.game.defer(new SimpleDeferredAction(player, () => {
-      this.resourceCount -= this.distance(card, player);
+      const dist = this.distance(card, player);
+      if (dist <= this.resourceCount) {
+        this.resourceCount -= dist;
+      } else {
+        throw new Error('Think Tank distance calculation error')
+      }
       return undefined;
     }, Priority.COST));
   }

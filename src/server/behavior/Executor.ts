@@ -1,6 +1,5 @@
 import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
-import {TRSource} from '../../common/cards/TRSource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
@@ -15,7 +14,7 @@ import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Behavior} from './Behavior';
-import {Counter, ICounter} from './Counter';
+import {Counter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {BehaviorExecutor} from './BehaviorExecutor';
@@ -40,7 +39,6 @@ import {CardName} from '../../common/cards/CardName';
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
     const ctx = new Counter(player, card);
-    const asTrSource = this.toTRSource(behavior, ctx);
     const game = player.game;
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
@@ -111,7 +109,7 @@ export class Executor implements BehaviorExecutor {
         if (!player.canAfford({
           cost: 0,
           reserveUnits: Units.of({heat: spend.heat}),
-          tr: asTrSource,
+          tr: card.getTRSources(player),
         })) {
           return false;
         }
@@ -596,28 +594,5 @@ export class Executor implements BehaviorExecutor {
         player.colonies.tradeOffset -= colonies.tradeOffset;
       }
     }
-  }
-
-  public toTRSource(behavior: Behavior, ctx: ICounter): TRSource {
-    let tr: number | undefined = undefined;
-    if (behavior.tr !== undefined) {
-      if (typeof(behavior.tr) === 'number') {
-        tr = behavior.tr;
-      } else {
-        tr = ctx.count(behavior.tr);
-      }
-    }
-    const trSource: TRSource = {
-      tr: tr,
-      temperature: behavior.global?.temperature,
-      oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
-      venus: behavior.global?.venus,
-      oceans: behavior.ocean !== undefined ? 1 : undefined,
-
-      moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
-      moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
-      moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
-    };
-    return trSource;
   }
 }

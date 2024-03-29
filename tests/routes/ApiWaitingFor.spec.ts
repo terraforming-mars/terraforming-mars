@@ -5,6 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {GameId} from '../../src/common/Types';
+import {statusCode} from '../../src/common/http/statusCode';
 
 describe('ApiWaitingFor', function() {
   let scaffolding: RouteTestScaffolding;
@@ -18,7 +19,7 @@ describe('ApiWaitingFor', function() {
   it('fails when game not found', async () => {
     scaffolding.url = '/api/waitingfor?id=p-some-player-id&gameAge=123&undoCount=0';
     await scaffolding.get(ApiWaitingFor.INSTANCE, res);
-    expect(res.statusCode).eq(404);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found: cannot find game for that player');
   });
 
@@ -32,7 +33,7 @@ describe('ApiWaitingFor', function() {
 
     scaffolding.url = '/api/waitingfor?id=' + player.id + '&gameAge=50&undoCount=0';
     await scaffolding.get(ApiWaitingFor.INSTANCE, res);
-    expect(res.statusCode).eq(404);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found: player not found');
   });
 
@@ -43,7 +44,7 @@ describe('ApiWaitingFor', function() {
 
     scaffolding.url = '/api/waitingfor?id=' + player.id + '&gameAge=50&undoCount=0';
     await scaffolding.get(ApiWaitingFor.INSTANCE, res);
-    expect(res.statusCode).eq(200);
+    expect(res.statusCode).eq(statusCode.ok);
     expect(res.content).eq('{"result":"GO"}');
   });
 
@@ -58,7 +59,7 @@ describe('ApiWaitingFor', function() {
 
     scaffolding.url = '/api/waitingfor?id=' + game.spectatorId + '-invalid' + '&gameAge=50&undoCount=0';
     await scaffolding.get(ApiWaitingFor.INSTANCE, res);
-    expect(res.statusCode).eq(404);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found: cannot find game for that player');
   });
 
@@ -70,7 +71,7 @@ describe('ApiWaitingFor', function() {
 
     scaffolding.url = '/api/waitingfor?id=' + game.spectatorId + '&gameAge=50&undoCount=0';
     await scaffolding.get(ApiWaitingFor.INSTANCE, res);
-    expect(res.statusCode).eq(200);
+    expect(res.statusCode).eq(statusCode.ok);
     expect(res.content).eq('{"result":"WAIT"}');
   });
 });

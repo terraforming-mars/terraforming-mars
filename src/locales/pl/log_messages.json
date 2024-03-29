@@ -75,7 +75,6 @@
     "${0} converted plants into a greenery": "${0} wykorzystuje jednostki roślinności, aby umieścić na planszy obszar zieleni",
     "${0} traded with ${1}": "${0} wykonuje akcję handlu z ${1}",
     "${0} used ${1} standard project": "${0} wykorzystuje projekt standardowy ${1}",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} wykorzystuje projekt standardowy ${1} sprzedając ${2} kart.",
     "${0} built a colony on ${1}": "${0} umieszcza kolonię na ${1}.",
     "${0} bought ${1} card(s)": "${0} kupuje karty w ilości: ${1}.",
     "${0} acted as World Government and increased Venus scale": "${0} wykorzystuje akcję Działań Rządu Światowego i podnosi Współczynnik Terraformacji Wenus",

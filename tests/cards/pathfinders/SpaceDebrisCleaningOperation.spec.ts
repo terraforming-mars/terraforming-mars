@@ -1,22 +1,23 @@
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {expect} from 'chai';
 import {SpaceDebrisCleaningOperation} from '../../../src/server/cards/pathfinders/SpaceDebrisCleaningOperation';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {Penguins} from '../../../src/server/cards/promo/Penguins';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
+import {testGame} from '../../TestGame';
 
 describe('SpaceDebrisCleaningOperation', function() {
   let card: SpaceDebrisCleaningOperation;
   let player: TestPlayer;
-  let game: Game;
+  let player2: TestPlayer;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SpaceDebrisCleaningOperation();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player, player2] = testGame(2);
     player.playedCards.push(card);
   });
 
@@ -26,6 +27,15 @@ describe('SpaceDebrisCleaningOperation', function() {
 
     player.tagsForTest = {space: 4};
     expect(player.simpleCanPlay(card)).is.true;
+  });
+
+  it('canPlay, any 4 tags', function() {
+    player2.tagsForTest = {space: 3};
+    expect(player.simpleCanPlay(card)).is.false;
+
+    player.tagsForTest = {space: 4};
+    expect(player.simpleCanPlay(card)).is.true;
+    expect(player2.simpleCanPlay(card)).is.true;
   });
 
   it('play', function() {

@@ -1,5 +1,5 @@
 import {Space, newSpace} from './Space';
-import {SpaceId} from '../../common/Types';
+import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
@@ -138,7 +138,6 @@ export class BoardBuilder {
     if (id < 10) {
       strId = '0'+strId;
     }
-    // OK to cast this.
-    return strId as SpaceId;
+    return safeCast(strId, isSpaceId);
   }
 }

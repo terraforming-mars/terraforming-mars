@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import * as responses from '../../src/server/routes/responses';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {statusCode} from '../../src/common/http/statusCode';
 
 describe('Route', () => {
   let scaffolding: RouteTestScaffolding;
@@ -16,7 +17,7 @@ describe('Route', () => {
     scaffolding.url = 'goo.goo.gaa.gaa';
     scaffolding.req.headers['accept-encoding'] = '';
     responses.internalServerError(scaffolding.req, res, {'<img src=x onerror=alert(1)>': 'foo'});
-    expect(res.statusCode).eq(500);
+    expect(res.statusCode).eq(statusCode.internalServerError);
     expect(res.content).eq('Internal server error: unknown error');
   });
 
@@ -24,7 +25,7 @@ describe('Route', () => {
     scaffolding.url = 'goo.goo.gaa.gaa';
     scaffolding.req.headers['accept-encoding'] = '';
     responses.internalServerError(scaffolding.req, res, '<img src=x onerror=alert(1)>');
-    expect(res.statusCode).eq(500);
+    expect(res.statusCode).eq(statusCode.internalServerError);
     expect(res.content).eq('Internal server error: &lt;img src=x onerror=alert(1)&gt;');
   });
 });

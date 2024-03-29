@@ -134,6 +134,7 @@ export function formatMessage(message: Message | string): string {
 // Run a few tests to see that a canPlay or canAct behaves correctly in the face of reds costs.
 // canAct is used to identify if the action is canAct, which returns different results from canPlay. At the moment.
 export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number, canAct: boolean = false) {
+  player.game.phase = Phase.ACTION;
   const turmoil = Turmoil.getTurmoil(player.game);
   turmoil.rulingParty = new Greens();
   PoliticalAgendas.setNextAgenda(turmoil, player.game);

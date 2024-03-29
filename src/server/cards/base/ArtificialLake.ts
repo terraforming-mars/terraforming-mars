@@ -13,7 +13,6 @@ export class ArtificialLake extends Card implements IProjectCard {
       name: CardName.ARTIFICIAL_LAKE,
       tags: [Tag.BUILDING],
       cost: 15,
-      tr: {oceans: 1},
       victoryPoints: 1,
 
       behavior: {

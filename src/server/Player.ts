@@ -8,26 +8,25 @@ import {Color} from '../common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame} from './IGame';
 import {Game} from './Game';
-import {Payment, PaymentOptions, DEFAULT_PAYMENT_VALUES} from '../common/inputs/Payment';
-import {SpendableResource, SPENDABLE_RESOURCES, SpendableCardResource, CARD_FOR_SPENDABLE_RESOURCE} from '../common/inputs/Spendable';
+import {Payment, PaymentOptions, ReserveUnits} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
-import {ICard, isIActionCard, IActionCard} from './cards/ICard';
+import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {OrOptions} from './inputs/OrOptions';
+import {OrOptions} from './inputs/basicInputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from '../common/turmoil/PartyName';
 import {Phase} from '../common/Phase';
 import {PlayerInput} from './PlayerInput';
 import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
-import {SelectCard} from './inputs/SelectCard';
+import {SelectCard} from './inputs/selectables/CardSelection';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectProjectCardToPlay} from './inputs/SelectProjectCardToPlay';
-import {SelectOption} from './inputs/SelectOption';
-import {SelectSpace} from './inputs/SelectSpace';
+import {SelectOption} from './inputs/selectables/GenericSelection';
+import {SelectSpace} from './inputs/selectables/SpaceSelection';
 import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
@@ -63,7 +62,6 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {message} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
-import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
@@ -74,6 +72,9 @@ import {ChooseCards} from './deferredActions/ChooseCards';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
+import { SpendableResource } from '@/server/player/SpendableResource';
+import { TRSource } from '@/common/cards/TRSource';
+import { SelectOneInput } from './inputs/basicInputs/SelectOne';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -116,6 +117,7 @@ export class Player implements IPlayer {
   public get energy(): number {
     return this.stock.energy;
   }
+
   public get heat(): number {
     return this.stock.heat;
   }
@@ -144,17 +146,21 @@ export class Player implements IPlayer {
     this.stock.heat = heat;
   }
 
-  // Resource values
-  private titaniumValue: number = 3;
-  private steelValue: number = 2;
-  // Helion
-  public canUseHeatAsMegaCredits: boolean = false;
-  // Martian Lumber Corp
-  public canUsePlantsAsMegacredits: boolean = false;
-  // Luna Trade Federation
-  public canUseTitaniumAsMegacredits: boolean = false;
-  // Friends in High Places
-  public canUseCorruptionAsMegacredits: boolean = false;
+  /**
+   * Sources of resources that can be spent as MC.
+   * 
+   * By default, MC = 1MC (obviously), Steel = 2MC for building tags, and Titanium = 3MC for space tags
+   */
+  public SpendableResources: SpendableResource[] = [];
+
+  /**
+   * When a card (from the moon expansion) has an effect that modifies the amount of reserve units you must pay, it gets added here
+   */
+  public ReserveResourceModifiers: Array<(card: ICard) => ReserveUnits> = [];
+
+  // Fields for Advanced Alloys abilities
+  public titaniumValueBonus = 0;
+  public steelValueBonus = 0;
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
@@ -267,17 +273,13 @@ export class Player implements IPlayer {
     return corporation;
   }
 
-  public getTitaniumValue(): number {
-    return this.titaniumValue;
-  }
-
   public increaseTitaniumValue(): void {
-    this.titaniumValue++;
+    this.titaniumValueBonus++;
   }
 
   public decreaseTitaniumValue(): void {
-    if (this.titaniumValue > 0) {
-      this.titaniumValue--;
+    if (this.titaniumValueBonus > 0) {
+      this.titaniumValueBonus--;
     }
   }
 
@@ -285,17 +287,13 @@ export class Player implements IPlayer {
     return (<SelfReplicatingRobots> this.playedCards.find((card) => card instanceof SelfReplicatingRobots))?.targetCards ?? [];
   }
 
-  public getSteelValue(): number {
-    return this.steelValue;
-  }
-
   public increaseSteelValue(): void {
-    this.steelValue++;
+    this.steelValueBonus++;
   }
 
   public decreaseSteelValue(): void {
-    if (this.steelValue > 0) {
-      this.steelValue--;
+    if (this.steelValueBonus > 0) {
+      this.steelValueBonus--;
     }
   }
 
@@ -327,7 +325,7 @@ export class Player implements IPlayer {
         return;
       }
       this.game.defer(
-        new SelectPaymentDeferred(this, REDS_RULING_POLICY_COST * steps, {title: 'Select how to pay for TR increase'}),
+        new SelectPaymentDeferred(this, REDS_RULING_POLICY_COST * steps, this.GetPaymentOptions(), 'Select how to pay for TR increase'),
         Priority.COST)
         .andThen(raiseRating);
     } else {
@@ -760,13 +758,13 @@ export class Player implements IPlayer {
   }
 
   /**
-   * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
-   * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
+   * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits
    */
   public spendableMegacredits(): number {
-    let total = this.megaCredits;
-    if (this.canUseHeatAsMegaCredits) total += this.availableHeat();
-    if (this.canUseTitaniumAsMegacredits) total += this.titanium * (this.titaniumValue - 1);
+    let total = 0;
+    this.SpendableResources.forEach((resource) => {
+      total += resource.GetValue() * resource.GetStock();
+    })
     return total;
   }
 
@@ -820,61 +818,23 @@ export class Player implements IPlayer {
     return Math.max(cost, 0);
   }
 
-  private paymentOptionsForCard(card: IProjectCard): PaymentOptions {
-    return {
-      heat: this.canUseHeatAsMegaCredits,
-      steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
-      plants: card.tags.includes(Tag.BUILDING) && this.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP),
-      titanium: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE),
-      lunaTradeFederationTitanium: this.canUseTitaniumAsMegacredits,
-      seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
-      floaters: card.tags.includes(Tag.VENUS),
-      microbes: card.tags.includes(Tag.PLANT),
-      lunaArchivesScience: card.tags.includes(Tag.MOON),
-      // TODO(kberg): add this.isCorporation(CardName.SPIRE)
-      spireScience: card.type === CardType.STANDARD_PROJECT,
-      // TODO(kberg): add this.isCorporation(CardName.AURORAI)
-      auroraiData: card.type === CardType.STANDARD_PROJECT,
-      graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
-      kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
-      corruption: card.tags.includes(Tag.EARTH) && this.cardIsInEffect(CardName.FRIENDS_IN_HIGH_PLACES),
-    };
+  /** Gets the payment options the player has for any given card */
+  public GetPaymentOptions(card?: ICard): PaymentOptions {
+    let paymentOptions: PaymentOptions = {};
+    this.SpendableResources.forEach((resource) => {
+      let spendingOption = resource.GetValidSpendingOption(card);
+      if (spendingOption !== undefined) {
+        paymentOptions[resource.Name] = {value: spendingOption.value, resource: resource.GetResourceType, maxSpendable: resource.GetStock(card)};
+      }
+    })
+    return paymentOptions;
   }
 
-  public checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction: CardAction = 'add') {
-    const cardCost = this.getCardCost(selectedCard);
-
-    const reserved = MoonExpansion.adjustedReserveCosts(this, selectedCard);
-
-    if (!this.canSpend(payment, reserved)) {
-      throw new Error('You do not have that many resources to spend');
+  /** Validates a payment given the corresponding paymentOptions and amount to pay */
+  public ValidatePayment(options: PaymentOptions, payment: Payment, amount: number) {
+    if (this.payingAmount(options, payment) < amount) {
+      throw new Error('Did not spend enough');
     }
-
-    if (payment.floaters > 0) {
-      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && payment.floaters === this.getSpendable('floaters')) {
-        const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
-        if (cardsWithFloater.length === 1) {
-          throw new Error('Cannot spend all floaters to play Stratospheric Birds');
-        }
-      }
-    }
-
-    if (payment.microbes > 0) {
-      if (selectedCard.name === CardName.SOIL_ENRICHMENT && payment.microbes === this.getSpendable('microbes')) {
-        const cardsWithMicrobe = this.getCardsWithResources(CardResource.MICROBE);
-        if (cardsWithMicrobe.length === 1) {
-          throw new Error('Cannot spend all microbes to play Soil Enrichment');
-        }
-      }
-    }
-
-    // TODO(kberg): Move this.paymentOptionsForCard to a parameter.
-    const totalToPay = this.payingAmount(payment, this.paymentOptionsForCard(selectedCard));
-
-    if (totalToPay < cardCost) {
-      throw new Error('Did not spend enough to pay for card');
-    }
-    return this.playCard(selectedCard, payment, cardAction);
   }
 
   public resourcesOnCard(name: CardName): number {
@@ -882,46 +842,11 @@ export class Player implements IPlayer {
     return card?.resourceCount ?? 0;
   }
 
-  public getSpendable(SpendableResource: SpendableCardResource): number {
-    return this.resourcesOnCard(CARD_FOR_SPENDABLE_RESOURCE[SpendableResource]);
-  }
-
   public pay(payment: Payment) {
-    const standardUnits = Units.of({
-      megacredits: payment.megaCredits,
-      steel: payment.steel,
-      titanium: payment.titanium,
-      plants: payment.plants,
-    });
-
-    this.stock.deductUnits(standardUnits);
-
-    if (payment.heat > 0) {
-      this.defer(this.spendHeat(payment.heat));
-    }
-
-    const removeResourcesOnCard = (name: CardName, count: number) => {
-      if (count === 0) {
-        return;
-      }
-      const card = this.tableau.find((card) => card.name === name);
-      if (card === undefined) {
-        throw new Error('Card ' + name + ' not found');
-      }
-      this.removeResourceFrom(card, count, {log: true});
-    };
-
-    removeResourcesOnCard(CardName.PSYCHROPHILES, payment.microbes);
-    removeResourcesOnCard(CardName.DIRIGIBLES, payment.floaters);
-    removeResourcesOnCard(CardName.LUNA_ARCHIVES, payment.lunaArchivesScience);
-    removeResourcesOnCard(CardName.SPIRE, payment.spireScience);
-    removeResourcesOnCard(CardName.CARBON_NANOSYSTEMS, payment.graphene);
-    removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
-    removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
-    removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
-    if (payment.corruption > 0) {
-      UnderworldExpansion.loseCorruption(this, payment.corruption);
-    }
+    this.SpendableResources.forEach((resource) => {
+      if (resource.Name in payment)
+        resource.DeductStock(payment[resource.Name]);
+    })
 
     if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
@@ -1189,7 +1114,7 @@ export class Player implements IPlayer {
     }
     if (!this.cardIsInEffect(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
       const cost = this.milestoneCost();
-      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
+      this.game.defer(new SelectPaymentDeferred(this, cost, this.GetPaymentOptions(), 'Select how to pay for milestone'));
     }
     this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
   }
@@ -1221,7 +1146,7 @@ export class Player implements IPlayer {
 
   private fundAward(award: IAward): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')').andThen(() => {
-      this.game.defer(new SelectPaymentDeferred(this, this.awardFundingCost(), {title: 'Select how to pay for award'}));
+      this.game.defer(new SelectPaymentDeferred(this, this.awardFundingCost(), this.GetPaymentOptions(), 'Select how to pay for award'));
       this.game.fundAward(this, award);
       return undefined;
     });
@@ -1301,7 +1226,7 @@ export class Player implements IPlayer {
     return this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true);
   }
 
-  public getPlayableCards(): Array<PlayableCard> {
+  public getPlayableCards(): Array<IProjectCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
     const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
@@ -1311,52 +1236,19 @@ export class Player implements IPlayer {
       }
     }
 
-    const playableCards: Array<PlayableCard> = [];
+    const playableCards: Array<IProjectCard> = [];
     for (const card of candidateCards) {
       card.warnings.clear();
-      const canPlay = this.canPlay(card);
-      if (canPlay !== false) {
-        playableCards.push({
-          card,
-          details: canPlay,
-        });
+      if (this.canPlay(card)) {
+        playableCards.push(card);
       }
     }
     return playableCards;
   }
 
-  public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
-    const trSource =
-      card.tr ||
-      (card.behavior !== undefined ?
-        getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) :
-        undefined);
-    return {
-      cost: this.getCardCost(card),
-      ...this.paymentOptionsForCard(card),
-      reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
-      tr: trSource,
-    };
-  }
-
-  public canPlay(card: IProjectCard): boolean | YesAnd {
-    const options = this.affordOptionsForCard(card);
-    const canAfford = this.newCanAfford(options);
-    if (!canAfford.canAfford) {
-      return false;
-    }
-    const canPlay = this.simpleCanPlay(card, options);
-    if (canPlay === false) {
-      return false;
-    }
-    if (canAfford.redsCost > 0) {
-      if (typeof canPlay === 'boolean') {
-        return {redsCost: canAfford.redsCost};
-      } else {
-        return {...canPlay, redsCost: canAfford.redsCost};
-      }
-    }
-    return canPlay;
+  public canPlay(card: IProjectCard): boolean {
+    const options: CanAffordOptions = {card: card};
+    return this.newCanAfford(options) && this.simpleCanPlay(card, options);
   }
 
   /**
@@ -1364,34 +1256,8 @@ export class Player implements IPlayer {
    * Only made public for tests.
    */
   // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
+  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean {
     return card.canPlay(this, canAffordOptions);
-  }
-
-  private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
-    return {
-      megaCredits: this.megaCredits - reserveUnits.megacredits,
-      steel: this.steel - reserveUnits.steel,
-      titanium: this.titanium - reserveUnits.titanium,
-      plants: this.plants - reserveUnits.plants,
-      heat: this.availableHeat() - reserveUnits.heat,
-      floaters: this.getSpendable('floaters'),
-      microbes: this.getSpendable('microbes'),
-      lunaArchivesScience: this.getSpendable('lunaArchivesScience'),
-      spireScience: this.getSpendable('spireScience'),
-      seeds: this.getSpendable('seeds'),
-      auroraiData: this.getSpendable('auroraiData'),
-      graphene: this.getSpendable('graphene'),
-      kuiperAsteroids: this.getSpendable('kuiperAsteroids'),
-      corruption: this.underworldData.corruption,
-    };
-  }
-
-  public canSpend(payment: Payment, reserveUnits?: Units): boolean {
-    const maxPayable = this.maxSpendable(reserveUnits);
-
-    return SPENDABLE_RESOURCES.every((key) =>
-      0 <= payment[key] && payment[key] <= maxPayable[key]);
   }
 
   /**
@@ -1404,85 +1270,45 @@ export class Player implements IPlayer {
    * @param {PaymentOptions} options any configuration defining the accepted form of payment.
    * @return {number} a number representing the value of payment in M€.
    */
-  public payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number {
-    const multiplier = {
-      ...DEFAULT_PAYMENT_VALUES,
-      steel: this.getSteelValue(),
-      titanium: this.getTitaniumValue(),
-    };
-
-    const usable: {[key in SpendableResource]: boolean} = {
-      megaCredits: true,
-      steel: options?.steel ?? false,
-      titanium: options?.titanium ?? false,
-      heat: this.canUseHeatAsMegaCredits,
-      plants: options?.plants ?? false,
-      microbes: options?.microbes ?? false,
-      floaters: options?.floaters ?? false,
-      lunaArchivesScience: options?.lunaArchivesScience ?? false,
-      spireScience: options?.spireScience ?? false,
-      seeds: options?.seeds ?? false,
-      auroraiData: options?.auroraiData ?? false,
-      graphene: options?.graphene ?? false,
-      kuiperAsteroids: options?.kuiperAsteroids ?? false,
-      corruption: options?.corruption ?? false,
-    };
-
-    // HOOK: Luna Trade Federation
-    if (usable.titanium === false && payment.titanium > 0 && this.isCorporation(CardName.LUNA_TRADE_FEDERATION)) {
-      usable.titanium = true;
-      multiplier.titanium -= 1;
-    }
-
+  public payingAmount(options: PaymentOptions, payment: Payment): number {
     let totalToPay = 0;
-    for (const key of SPENDABLE_RESOURCES) {
-      if (usable[key]) totalToPay += payment[key] * multiplier[key];
+    for (const key in options) {
+      if (options[key] === undefined)
+        throw new Error('Invalid Payment Option');
+      if (typeof payment[key] !== 'number')
+        throw new Error('Invalid Payment')
+      if (options[key].maxSpendable < payment[key]) 
+        throw new Error('Player does not have enough resources');
+      totalToPay += payment[key] * options[key].value;
     }
-
     return totalToPay;
   }
 
-  private static CANNOT_AFFORD = {canAfford: false, redsCost: 0} as const;
+  private maxSpendable(options: PaymentOptions): number {
+    let retVal = 0;
+    for (const key in options) {
+      retVal += options[key].maxSpendable * options[key].value;
+    }
+    return retVal;
+  }
+
+  public getRedsCostFromTRSource(tr?: TRSource | DynamicTRSource): number{
+    return TurmoilHandler.computeTerraformRatingBump(this, tr) * REDS_RULING_POLICY_COST;
+  }
+
+  public getRedsCostForCard(card: ICard): number{
+    let tr = card.behavior !== undefined ? getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) : undefined;
+    return this.getRedsCostFromTRSource(tr)
+  }
 
   /**
    * Returns information about whether a player can afford to spend money with other costs and ways to pay taken into account.
    */
-  public newCanAfford(o: number | CanAffordOptions): {redsCost: number, canAfford: boolean} {
-    const options: CanAffordOptions = typeof(o) === 'number' ? {cost: o} : {...o};
-
-    // TODO(kberg): These are set both here and in SelectPayment. Consolidate, perhaps.
-    options.heat = this.canUseHeatAsMegaCredits;
-    options.lunaTradeFederationTitanium = this.canUseTitaniumAsMegacredits;
-
-    const reserveUnits = options.reserveUnits ?? Units.EMPTY;
-    if (reserveUnits.heat > 0) {
-      // Special-case heat
-      const unitsWithoutHeat = {...reserveUnits, heat: 0};
-      if (!this.stock.has(unitsWithoutHeat)) {
-        return Player.CANNOT_AFFORD;
-      }
-      if (this.availableHeat() < reserveUnits.heat) {
-        return Player.CANNOT_AFFORD;
-      }
-    } else {
-      if (!this.stock.has(reserveUnits)) {
-        return Player.CANNOT_AFFORD;
-      }
-    }
-
-    const maxPayable = this.maxSpendable(reserveUnits);
-    const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options.tr) * REDS_RULING_POLICY_COST;
-    if (redsCost > 0) {
-      const usableForRedsCost = this.payingAmount(maxPayable, {});
-      if (usableForRedsCost < redsCost) {
-        return Player.CANNOT_AFFORD;
-      }
-    }
-
-    const usable = this.payingAmount(maxPayable, options);
-
-    const canAfford = options.cost + redsCost <= usable;
-    return {canAfford, redsCost};
+  public newCanAfford(options: CanAffordOptions): boolean {
+    const additionalCosts = options.additionalCosts ?? 0 + this.getRedsCostForCard(options.card) + this.getRedsCostFromTRSource(options.additionalTR)
+    if (this.spendableMegacredits() < additionalCosts)
+      return false
+    return options.card.cost + additionalCosts <= this.maxSpendable(this.GetPaymentOptions(options.card));
   }
 
   /**
@@ -1490,7 +1316,10 @@ export class Player implements IPlayer {
    * and additionally pay the reserveUnits (no replaces here)
    */
   public canAfford(o: number | CanAffordOptions): boolean {
-    return this.newCanAfford(o).canAfford;
+    if (typeof o === 'number') {
+      return o <= this.spendableMegacredits()
+    }
+    return this.newCanAfford(o);
   }
 
   private getStandardProjects(): Array<IStandardProjectCard> {
@@ -1524,7 +1353,7 @@ export class Player implements IPlayer {
       .sort((a, b) => a.cost - b.cost);
   }
 
-  public getStandardProjectOption(): SelectCard<IStandardProjectCard> {
+  public getStandardProjectOption(): SelectOneInput<IStandardProjectCard> {
     const standardProjects: Array<IStandardProjectCard> = this.getStandardProjects();
 
     return new SelectCard(
@@ -1730,7 +1559,7 @@ export class Player implements IPlayer {
 
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
-      action.options.push(new SelectProjectCardToPlay(this, playableCards));
+      action.options.push(new SelectProjectCardToPlay(this));
     }
 
     const coloniesTradeAction = this.colonies.coloniesTradeAction();
@@ -1874,17 +1703,9 @@ export class Player implements IPlayer {
       heat: this.heat,
       heatProduction: this.production.heat,
       // Resource values
-      titaniumValue: this.titaniumValue,
-      steelValue: this.steelValue,
-      // Helion
-      canUseHeatAsMegaCredits: this.canUseHeatAsMegaCredits,
-      // Martian Lumber Corp
-      canUsePlantsAsMegaCredits: this.canUsePlantsAsMegacredits,
-      // Luna Trade Federation
-      canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
-      // This generation / this round
-      canUseCorruptionAsMegacredits: this.canUseCorruptionAsMegacredits,
-      // This generation / this round
+      spendableResources: this.SpendableResources,
+      titaniumValueBonus: this.titaniumValueBonus,
+      steelValueBonus: this.steelValueBonus,
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
       pendingInitialActions: this.pendingInitialActions.map((c) => c.name),
@@ -1946,9 +1767,6 @@ export class Player implements IPlayer {
 
     player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
-    player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
-    player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
-    player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits;
     player.cardCost = d.cardCost;
     player.colonies.cardDiscount = d.cardDiscount;
     player.colonies.tradeDiscount = d.colonyTradeDiscount;
@@ -1977,10 +1795,11 @@ export class Player implements IPlayer {
     player.removingPlayers = d.removingPlayers;
     player.scienceTagCount = d.scienceTagCount;
     player.steel = d.steel;
-    player.steelValue = d.steelValue;
+    player.steelValueBonus = d.steelValueBonus;
     player.terraformRating = d.terraformRating;
     player.titanium = d.titanium;
-    player.titaniumValue = d.titaniumValue;
+    player.titaniumValueBonus = d.titaniumValueBonus;
+    player.SpendableResources = d.spendableResources;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
     player.colonies.tradesThisGeneration = d.tradesThisGeneration;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;

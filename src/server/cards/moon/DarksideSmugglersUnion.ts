@@ -9,7 +9,7 @@ import {IPlayer} from '../../IPlayer';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
-import {SelectColony} from '../../inputs/SelectColony';
+import {SelectColony} from '../../inputs/selectables/ColonySelection';
 import {message} from '../../logs/MessageBuilder';
 
 export class DarksideSmugglersUnion extends Card implements IProjectCard, IActionCard {

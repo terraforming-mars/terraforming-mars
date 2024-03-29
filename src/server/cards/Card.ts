@@ -7,7 +7,6 @@ import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
-import {Units} from '../../common/Units';
 import {DynamicTRSource, ICard} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
@@ -24,9 +23,10 @@ import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
-import {YesAnd} from './requirements/CardRequirement';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
+import {SpendableResource} from '../player/SpendableResource';
+import { ReserveUnits } from '@/common/inputs/Payment';
 
 /**
  * Cards that do not need a cost attribute.
@@ -46,6 +46,7 @@ type SharedProperties = {
   behavior?: Behavior | undefined;
   cardCost?: number;
   cardDiscount?: OneOrArray<CardDiscount>;
+  spendableResource?: SpendableResource;
   type: CardType;
   cost?: number;
   initialActionText?: string;
@@ -60,11 +61,11 @@ type SharedProperties = {
   tags?: Array<Tag>;
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
+  reserveUnits?: ReserveUnits,
 }
 
 /* Internal representation of card properties. */
 type InternalProperties = SharedProperties & {
-  reserveUnits?: Units,
   requirements: Array<CardRequirementsDescriptor>
   compiledRequirements: CardRequirements;
   tilesBuilt: ReadonlyArray<TileType>,
@@ -72,7 +73,6 @@ type InternalProperties = SharedProperties & {
 
 /* External representation of card properties. */
 export type StaticCardProperties = SharedProperties & {
-  reserveUnits?: Partial<Units>,
   requirements?: OneOrArray<CardRequirementDescriptor>,
   tilesBuilt?: ReadonlyArray<TileType>,
 }
@@ -146,7 +146,6 @@ export abstract class Card implements ICard {
 
     const internal: InternalProperties = {
       ...external,
-      reserveUnits: external.reserveUnits === undefined ? undefined : Units.of(external.reserveUnits),
       requirements: translatedRequirements,
       compiledRequirements: compiledRequirements,
       tilesBuilt: tilesBuilt,
@@ -209,8 +208,8 @@ export abstract class Card implements ICard {
   public get cardDiscount() {
     return this.properties.cardDiscount;
   }
-  public get reserveUnits(): Units {
-    return this.properties.reserveUnits || Units.EMPTY;
+  public get reserveUnits(): ReserveUnits {
+    return this.properties.reserveUnits || {};
   }
   public get tr(): TRSource | DynamicTRSource | undefined {
     return this.properties.tr;
@@ -221,14 +220,10 @@ export abstract class Card implements ICard {
   public get tilesBuilt(): ReadonlyArray<TileType> {
     return this.properties.tilesBuilt;
   }
-  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    let yesAnd: YesAnd | undefined = undefined;
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
     const satisfied = this.properties.compiledRequirements.satisfies(player);
     if (satisfied === false) {
       return false;
-    }
-    if (satisfied !== true) {
-      yesAnd = satisfied;
     }
 
     if (this.behavior !== undefined) {
@@ -236,15 +231,7 @@ export abstract class Card implements ICard {
         return false;
       }
     }
-    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions);
-    if (bespokeCanPlay === false) {
-      return false;
-    }
-
-    if (yesAnd !== undefined) {
-      return yesAnd;
-    }
-    return true;
+    return this.bespokeCanPlay(player, canAffordOptions);
   }
 
   public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {

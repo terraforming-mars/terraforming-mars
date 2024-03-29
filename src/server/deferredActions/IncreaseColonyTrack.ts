@@ -1,7 +1,7 @@
 import {IPlayer} from '../IPlayer';
 import {IColony} from '../colonies/IColony';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
+import {OrOptions} from '../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../inputs/selectables/GenericSelection';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';

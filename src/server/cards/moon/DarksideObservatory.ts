@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {MoonCards} from '../../moon/MoonCards';
 import {IActionCard, ICard} from '../ICard';
 import {Card} from '../Card';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 
 export class DarksideObservatory extends Card implements IProjectCard, IActionCard {
   constructor() {

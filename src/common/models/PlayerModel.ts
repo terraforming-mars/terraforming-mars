@@ -59,13 +59,13 @@ export type PublicPlayerModel = {
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
-  steelValue: number;
+  steelValueBonus: number;
   tags: Array<TagCount>;
   terraformRating: number;
   timer: TimerModel;
   titanium: number;
   titaniumProduction: number;
-  titaniumValue: number;
+  titaniumValueBonus: number;
   tradesThisGeneration: number;
   victoryPointsBreakdown: IVictoryPointsBreakdown;
   victoryPointsByGeneration: Array<number>;

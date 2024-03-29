@@ -8,8 +8,8 @@ import {digit} from '../Options';
 import {ICard} from '../ICard';
 import {UndergroundResourceToken} from '../../../common/underworld/UndergroundResourceToken';
 import {UnderworldExpansion} from '../../../server/underworld/UnderworldExpansion';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 
 export class Keplertec extends ActiveCorporationCard {

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';

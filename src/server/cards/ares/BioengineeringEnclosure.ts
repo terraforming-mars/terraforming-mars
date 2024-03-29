@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 

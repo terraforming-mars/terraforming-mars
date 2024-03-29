@@ -1,7 +1,7 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Card, StaticCardProperties} from '../Card';
 import {IPlayer} from '../../IPlayer';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 import {CardName} from '../../../common/cards/CardName';
 import {ICard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';

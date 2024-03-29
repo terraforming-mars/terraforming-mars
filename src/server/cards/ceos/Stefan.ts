@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 
 export class Stefan extends CeoCard {
   constructor() {

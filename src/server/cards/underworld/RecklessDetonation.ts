@@ -5,9 +5,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all, digit} from '../Options';
 import {IPlayer} from '../../IPlayer';
-import {OrOptions} from '../../inputs/OrOptions';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
 import {Resource} from '../../../common/Resource';
-import {SelectOption} from '../../inputs/SelectOption';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 import {message} from '../../logs/MessageBuilder';
 
 export class RecklessDetonation extends Card implements IProjectCard {

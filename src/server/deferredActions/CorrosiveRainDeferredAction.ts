@@ -1,9 +1,9 @@
 import {IPlayer} from '../IPlayer';
-import {SelectCard} from '../inputs/SelectCard';
-import {OrOptions} from '../inputs/OrOptions';
+import {SelectCard} from '../inputs/selectables/CardSelection';
+import {OrOptions} from '../inputs/basicInputs/OrOptions';
 import {Resource} from '../../common/Resource';
 import {CardResource} from '../../common/CardResource';
-import {SelectOption} from '../inputs/SelectOption';
+import {SelectOption} from '../inputs/selectables/GenericSelection';
 import {DeferredAction, Priority} from './DeferredAction';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 

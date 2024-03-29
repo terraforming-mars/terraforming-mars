@@ -5,9 +5,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 

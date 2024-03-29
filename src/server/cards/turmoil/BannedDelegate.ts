@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {OrOptions} from '../../inputs/OrOptions';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
 import {IParty} from '../../turmoil/parties/IParty';
 import {CardRenderer} from '../render/CardRenderer';

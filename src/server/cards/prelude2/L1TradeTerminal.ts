@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 import {ICard} from '../ICard';
 
 export class L1TradeTerminal extends Card {

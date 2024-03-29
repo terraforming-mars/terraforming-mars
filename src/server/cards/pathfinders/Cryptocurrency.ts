@@ -8,8 +8,8 @@ import {IActionCard} from '../ICard';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
 
 export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
   constructor() {

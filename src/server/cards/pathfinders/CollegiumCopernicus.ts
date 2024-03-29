@@ -8,7 +8,7 @@ import {played} from '../Options';
 import {IActionCard, ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
-import {SelectColony} from '../../inputs/SelectColony';
+import {SelectColony} from '../../inputs/selectables/ColonySelection';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';

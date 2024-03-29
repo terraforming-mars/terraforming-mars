@@ -20,6 +20,7 @@ import {JSONValue} from '../../common/Types';
 import {IStandardProjectCard} from './IStandardProjectCard';
 import {Warning} from '../../common/cards/Warning';
 import {Resource} from '../../common/Resource';
+import { ReserveUnits } from '../../common/inputs/Payment';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -152,6 +153,7 @@ export interface ICard {
   /** The generation the card was activated. Used for Duncan and Underworld cards. */
   // TODO(kberg): move to json?
   generationUsed?: number;
+  reserveUnits: ReserveUnits;
 }
 
 export interface IActionCard {

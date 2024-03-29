@@ -2,7 +2,7 @@ import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {LogHelper} from '../../LogHelper';

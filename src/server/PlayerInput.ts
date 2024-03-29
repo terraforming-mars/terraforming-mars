@@ -1,4 +1,3 @@
-import {ICard} from './cards/ICard';
 import {Message} from '../common/logs/Message';
 import {PlayerInputType} from '../common/input/PlayerInputType';
 import {InputResponse} from '../common/inputs/InputResponse';
@@ -51,14 +50,12 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
     this.cb = cb;
     return this;
   }
-}
 
-
-export function getCardFromPlayerInput<T extends ICard>(cards: ReadonlyArray<T>, cardName: string): {card: T, idx: number} {
-  const idx = cards.findIndex((card) => card.name === cardName);
-  if (idx === -1) {
-    throw new Error(`Card ${cardName} not found`);
+  public ResponseAsType<T extends InputResponse>(response: InputResponse): T {
+    try {
+      return response as T;
+    } catch {
+      throw new Error('Invalid Response');
+    }
   }
-  const card = cards[idx];
-  return {card, idx};
 }

@@ -7,8 +7,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {ALL_TAGS, Tag} from '../../../common/cards/Tag';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 import {all} from '../Options';
 import {inplaceRemove} from '../../../common/utils/utils';
 

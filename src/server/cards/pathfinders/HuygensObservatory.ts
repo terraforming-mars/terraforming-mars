@@ -4,11 +4,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
-import {OrOptions} from '../../inputs/OrOptions';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectColony} from '../../inputs/SelectColony';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
+import {SelectColony} from '../../inputs/selectables/ColonySelection';
 import {IColony} from '../../colonies/IColony';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 

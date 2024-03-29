@@ -7,8 +7,7 @@ import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardResource} from '@/common/CardResource';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {DEFAULT_PAYMENT_VALUES, Payment} from '@/common/inputs/Payment';
-import {SPENDABLE_RESOURCES, SpendableResource} from '@/common/inputs/Spendable';
+import {Payment} from '@/common/inputs/Payment';
 
 export type SelectPaymentDataModel = {
   card?: CardModel;

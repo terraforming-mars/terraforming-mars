@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Size} from '../../../common/cards/render/Size';
 import {ICeoCard} from './ICeoCard';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCard} from '../../inputs/selectables/CardSelection';
 
 export class CoLeadership extends PreludeCard {
   constructor() {

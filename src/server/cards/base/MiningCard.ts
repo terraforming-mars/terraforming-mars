@@ -7,7 +7,7 @@ import {IProjectCard} from '../../cards/IProjectCard';
 import {Space} from '../../boards/Space';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {Tag} from '../../../common/cards/Tag';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';

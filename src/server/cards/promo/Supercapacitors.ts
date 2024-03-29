@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
 import {Card} from '../Card';
 
 export class Supercapacitors extends Card implements IProjectCard {

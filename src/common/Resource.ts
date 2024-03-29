@@ -7,4 +7,4 @@ export enum Resource {
     HEAT = 'heat'
 }
 
-export const ALL_RESOURCES = [Resource.MEGACREDITS, Resource.STEEL, Resource.TITANIUM, Resource.PLANTS, Resource.ENERGY, Resource.HEAT] as const;
+export const ALL_RESOURCES: Array<Resource> = [Resource.MEGACREDITS, Resource.STEEL, Resource.TITANIUM, Resource.PLANTS, Resource.ENERGY, Resource.HEAT] as const;

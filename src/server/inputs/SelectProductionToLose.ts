@@ -1,20 +1,27 @@
-import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
-import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
+import {InputResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
-import {SelectProductionToLoseModel} from '../../common/models/PlayerInputModel';
+import { SelectWithInput } from './basicInputs/SelectWithInput';
+import { ResourceSelection } from './selectables/ResourceSelection';
+import { Message } from '../../common/logs/Message';
+import { ALL_RESOURCES } from '@/common/Resource';
+import { SelectAmount } from './basicInputs/SelectAmount';
+import { PlayerSelection } from './selectables/PlayerSelection';
 
-export class SelectProductionToLose extends BasePlayerInput<Units> {
+export class SelectProductionToLose extends SelectWithInput<Units> {
   constructor(
-    title: string | Message,
-    public unitsToLose: number,
-    public player: IPlayer,
-    buttonLabel: string = 'Save',
+    title: string | Message, 
+    player: IPlayer
   ) {
-    super('productionToLose', title);
-    this.buttonLabel = buttonLabel;
+    super(
+      new PlayerSelection(), 
+      () => new SelectAmount('Select Amount', '' player.getCardCost(card), player.GetPaymentOptions(card))
+    );
+    this.cb = (card: IProjectCard) => {
+      player.playCard(card);
+      return undefined;
+    }
   }
 
   public override toModel(): SelectProductionToLoseModel {

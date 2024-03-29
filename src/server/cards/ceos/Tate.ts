@@ -5,8 +5,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {Tag} from '../../../common/cards/Tag';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
 import {Size} from '../../../common/cards/render/Size';
 import {inplaceRemove} from '../../../common/utils/utils';
 import {message} from '../../logs/MessageBuilder';

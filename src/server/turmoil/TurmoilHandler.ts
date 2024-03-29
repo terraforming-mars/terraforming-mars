@@ -1,7 +1,7 @@
 import * as constants from '../../common/constants';
 import {IProjectCard} from '../cards/IProjectCard';
 import {GlobalParameter} from '../../common/GlobalParameter';
-import {SelectOption} from '../inputs/SelectOption';
+import {SelectOption} from '../inputs/selectables/GenericSelection';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {Resource} from '../../common/Resource';

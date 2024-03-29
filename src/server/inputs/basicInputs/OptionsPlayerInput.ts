@@ -1,6 +1,6 @@
-import {PlayerInputType} from '../../common/input/PlayerInputType';
-import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {PlayerInputType} from '../../../common/input/PlayerInputType';
+import {Message} from '../../../common/logs/Message';
+import {BasePlayerInput, PlayerInput} from '../../PlayerInput';
 
 export abstract class OptionsInput<T> extends BasePlayerInput<T> {
   public options: Array<PlayerInput>;

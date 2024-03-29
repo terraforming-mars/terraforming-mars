@@ -1,8 +1,8 @@
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectCard} from '../inputs/SelectCard';
-import {SelectOption} from '../inputs/SelectOption';
+import {OrOptions} from '../inputs/basicInputs/OrOptions';
+import {SelectCard} from '../inputs/selectables/CardSelection';
+import {SelectOption} from '../inputs/selectables/GenericSelection';
 import {ICard} from '../cards/ICard';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Message} from '../../common/logs/Message';

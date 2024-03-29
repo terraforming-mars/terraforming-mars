@@ -4,7 +4,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
 
 export class TychoMagnetics extends CorporationCard {
   constructor() {

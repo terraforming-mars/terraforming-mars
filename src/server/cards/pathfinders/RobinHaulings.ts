@@ -8,8 +8,8 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../../common/constants';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 
 export class RobinHaulings extends CorporationCard {
   constructor() {

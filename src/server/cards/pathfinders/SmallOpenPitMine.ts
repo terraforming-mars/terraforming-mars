@@ -5,8 +5,8 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 import {Resource} from '../../../common/Resource';
 
 export class SmallOpenPitMine extends Card implements IProjectCard {

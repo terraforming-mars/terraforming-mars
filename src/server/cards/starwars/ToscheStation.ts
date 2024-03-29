@@ -4,7 +4,7 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectAmount} from '../../inputs/basicInputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';

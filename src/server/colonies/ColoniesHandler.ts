@@ -3,7 +3,7 @@ import {IColony} from './IColony';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {ICard} from '../cards/ICard';
 import {Tag} from '../../common/cards/Tag';
-import {SelectColony} from '../inputs/SelectColony';
+import {SelectColony} from '../inputs/selectables/ColonySelection';
 import {IPlayer} from '../IPlayer';
 import {inplaceRemove} from '../../common/utils/utils';
 

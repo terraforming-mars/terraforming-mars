@@ -1,19 +1,11 @@
 import {ICard} from './ICard';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
-import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
-import {YesAnd} from './requirements/CardRequirement';
-
-export type CanPlayResponse = boolean | YesAnd;
-
-export type PlayableCard = {
-  card: IProjectCard,
-  details?: CanPlayResponse,
-};
+import { ReserveUnits } from '@/common/inputs/Payment';
 
 export interface IProjectCard extends ICard {
-  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): CanPlayResponse;
+  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
   cost: number;
 
   /**
@@ -35,7 +27,7 @@ export interface IProjectCard extends ICard {
    * Added for the expansion The Moon, but now used with Local Heat Trapping,
    * the Convert Heat standard action, and other cards.
    */
-  reserveUnits?: Units;
+  reserveUnits: ReserveUnits;
 }
 
 export function isIProjectCard(card: ICard): card is IProjectCard {

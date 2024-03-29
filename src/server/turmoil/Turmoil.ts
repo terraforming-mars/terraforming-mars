@@ -17,7 +17,7 @@ import {CardName} from '../../common/cards/CardName';
 import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
-import {SelectParty} from '../inputs/SelectParty';
+import {SelectParty} from '../inputs/selectables/PartySelection';
 import {Policy, PolicyId, policyDescription} from './Policy';
 import {PlayerId} from '@/common/Types';
 

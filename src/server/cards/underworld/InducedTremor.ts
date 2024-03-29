@@ -8,7 +8,7 @@ import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {cancelled} from '../Options';
 import {ExcavateSpaceDeferred} from '../../underworld/ExcavateSpaceDeferred';
 import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 
 export class InducedTremor extends Card implements IProjectCard {
   constructor() {

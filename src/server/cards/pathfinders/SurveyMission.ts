@@ -6,7 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {MarsBoard} from '../../boards/MarsBoard';
 import {BoardType} from '../../boards/BoardType';
 import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {LogHelper} from '../../LogHelper';
 import {digit} from '../Options';
 

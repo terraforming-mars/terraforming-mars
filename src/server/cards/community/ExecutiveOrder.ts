@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
-import {SelectGlobalEvent} from '../../inputs/SelectGlobalEvent';
+import {SelectGlobalEvent} from '../../inputs/selectables/SelectGlobalEvent';
 
 export class ExecutiveOrder extends PreludeCard implements IProjectCard {
   constructor() {

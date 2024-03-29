@@ -1,5 +1,5 @@
 import {IPlayer} from '../IPlayer';
-import {SelectColony} from '../inputs/SelectColony';
+import {SelectColony} from '../inputs/selectables/ColonySelection';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class RemoveColonyFromGame extends DeferredAction {

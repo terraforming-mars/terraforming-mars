@@ -4,7 +4,7 @@ import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {SelectSpace} from '../../inputs/selectables/SpaceSelection';
 import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';

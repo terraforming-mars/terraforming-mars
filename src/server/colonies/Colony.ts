@@ -14,7 +14,7 @@ import {PlayerId} from '../../common/Types';
 import {PlayerInput} from '../PlayerInput';
 import {Resource} from '../../common/Resource';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
-import {SelectColony} from '../inputs/SelectColony';
+import {SelectColony} from '../inputs/selectables/ColonySelection';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {StealResources} from '../deferredActions/StealResources';
 import {Tag} from '../../common/cards/Tag';

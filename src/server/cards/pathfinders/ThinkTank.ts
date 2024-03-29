@@ -5,8 +5,13 @@ import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {Size} from '../../../common/cards/render/Size';
+import { IProjectCard } from '../IProjectCard';
+/*import { IPlayer } from '@/server/IPlayer';
+import { ICard } from '../ICard';
+import { Priority, SimpleDeferredAction } from '@/server/deferredActions/DeferredAction';
+import { requirementType } from '@/common/cards/CardRequirementDescriptor';*/
 
-export class ThinkTank extends ActionCard {
+export class ThinkTank extends ActionCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.THINK_TANK,
@@ -34,6 +39,24 @@ export class ThinkTank extends ActionCard {
       },
     });
   }
+
+  /*public override getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number {
+    return this.resourceCount
+  }*/
+
+  /*onCardPlayed(player: IPlayer, card: ICard): void | PlayerInput | undefined {
+    player.game.defer(new SimpleDeferredAction(
+      player, 
+      () => {
+        card.requirements.forEach((req) => {
+          //something
+        })
+        this.resourceCount -=
+        return undefined
+      },
+      Priority.SUPERPOWER
+    ))
+  }*/
 
   public override resourceCount = 0;
 }

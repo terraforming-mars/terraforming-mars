@@ -8,8 +8,8 @@ import {UnseededRandom} from '../../../common/utils/Random';
 import {ASIMOV_AWARD_BONUS} from '../../../common/constants';
 
 import {IAward} from '../../awards/IAward';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/basicInputs/OrOptions';
+import {SelectOption} from '../../inputs/selectables/GenericSelection';
 import {Size} from '../../../common/cards/render/Size';
 
 import {ALL_AWARDS} from '../../awards/Awards';

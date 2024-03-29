@@ -1,5 +1,5 @@
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {SelectSpace} from '../inputs/SelectSpace';
+import {SelectSpace} from '../inputs/selectables/SpaceSelection';
 import {Tile} from '../Tile';
 import {IPlayer} from '../IPlayer';
 import {MoonExpansion} from './MoonExpansion';

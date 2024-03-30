@@ -166,6 +166,11 @@ export class UnderworldExpansion {
       if (space.excavator !== undefined) {
         return false;
       }
+
+      if (space.undergroundResources === 'ocean' && !player.canAfford({cost: 4, tr: {oceans: 1}})) {
+        return false;
+      }
+
       return space.spaceType !== SpaceType.COLONY;
     });
 
@@ -295,9 +300,11 @@ export class UnderworldExpansion {
       player.increaseTerraformRating();
       break;
     case 'ocean':
-      if (player.game.canAddOcean() && player.canAfford({cost: 4, tr: {oceans: 1}})) {
-        player.game.defer(new SelectPaymentDeferred(player, 4, {title: message('Select how to pay 4 M€ for ocean bonus')}))
-          .andThen(() => player.game.defer(new PlaceOceanTile(player)));
+      if (player.canAfford({cost: 4, tr: {oceans: 1}})) {
+        if (player.game.canAddOcean() || player.cardIsInEffect(CardName.WHALES)) {
+          player.game.defer(new SelectPaymentDeferred(player, 4, {title: message('Select how to pay 4 M€ for ocean bonus')}))
+            .andThen(() => player.game.defer(new PlaceOceanTile(player)));
+        }
       }
       break;
     case 'data1pertemp':

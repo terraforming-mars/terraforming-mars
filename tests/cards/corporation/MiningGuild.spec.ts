@@ -30,7 +30,7 @@ describe('MiningGuild', () => {
 
   it('Should play', () => {
     card.play(player);
-    expect(player.steel).to.eq(5);
+    expect(player.stock.steel).to.eq(5);
     expect(player.production.steel).to.eq(1);
   });
 

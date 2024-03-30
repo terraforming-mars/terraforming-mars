@@ -20,7 +20,7 @@ describe('ImportedNutrients', function() {
 
   it('Can play without microbe cards', function() {
     const action = card.play(player);
-    expect(player.plants).to.eq(4);
+    expect(player.stock.plants).to.eq(4);
     cast(action, undefined);
   });
 
@@ -31,7 +31,7 @@ describe('ImportedNutrients', function() {
     card.play(player);
     runAllActions(game);
 
-    expect(player.plants).to.eq(4);
+    expect(player.stock.plants).to.eq(4);
     expect(ants.resourceCount).to.eq(4);
   });
 
@@ -44,7 +44,7 @@ describe('ImportedNutrients', function() {
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectCard);
 
-    expect(player.plants).to.eq(4);
+    expect(player.stock.plants).to.eq(4);
 
     action.cb([decomposers]);
     expect(decomposers.resourceCount).to.eq(4);

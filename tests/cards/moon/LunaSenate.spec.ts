@@ -17,7 +17,7 @@ describe('LunaSenate', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     player.tagsForTest = {moon: 3};
     expect(player.getPlayableCardsForTest()).does.include(card);

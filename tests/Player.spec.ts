@@ -319,14 +319,14 @@ describe('Player', function() {
     const player1 = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const player2 = new Player('red', Color.RED, false, 0, 'p-red');
     const game = Game.newInstance('gameid', [player1, player2], player1);
-    player1.megaCredits = 0;
+    player1.stock.megacredits = 0;
     player1.production.add(Resource.MEGACREDITS, -5);
-    player2.megaCredits = 3;
+    player2.stock.megacredits = 3;
     game.monsInsuranceOwner = player2.id;
     player1.stock.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
-    expect(player2.megaCredits).eq(3);
+    expect(player2.stock.megacredits).eq(3);
     player1.production.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
-    expect(player2.megaCredits).eq(3);
+    expect(player2.stock.megacredits).eq(3);
   });
 
   it('removeResourcesFrom', () => {
@@ -387,11 +387,11 @@ describe('Player', function() {
     expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(1);
 
     // Now the free lobby action is used, only the 5MC option is available.
-    player.megaCredits = 4;
+    player.stock.megacredits = 4;
     expect(turmoil.usedFreeDelegateAction.has(player)).is.true;
     expect(getSendADelegateOption(player)).is.undefined;
 
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     const selectParty = cast(getSendADelegateOption(player), SelectParty);
 
     expect(selectParty.title).eq('Send a delegate in an area (5 M€)');
@@ -399,7 +399,7 @@ describe('Player', function() {
     selectParty.cb(PartyName.KELVINISTS);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(2);
   });
 
@@ -480,7 +480,7 @@ describe('Player', function() {
     selectCard.cb([loan]);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(15);
+    expect(player.stock.megacredits).eq(15);
     expect(player.preludeCardsInHand).deep.eq([alliedBanks]);
   });
 });

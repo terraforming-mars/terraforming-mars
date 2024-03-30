@@ -23,10 +23,10 @@ describe('MiningComplex', () => {
   });
 
   it('can play', () => {
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(card.canPlay(player)).is.false;
 
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(card.canPlay(player)).is.true;
   });
 
@@ -34,11 +34,11 @@ describe('MiningComplex', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
     expect(moonData.logisticRate).eq(0);
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
 
     card.play(player);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     const placeMineTile = cast(game.deferredActions.pop(), PlaceMoonMineTile);
     placeMineTile.execute()!.cb(moonData.moon.getSpace('m06'));

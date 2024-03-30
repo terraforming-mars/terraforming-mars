@@ -29,8 +29,8 @@ describe('JovianTaxRights', function() {
     turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
-    expect(player.titanium).to.eq(0);
-    expect(player2.titanium).to.eq(3);
+    expect(player.stock.titanium).to.eq(0);
+    expect(player2.stock.titanium).to.eq(3);
     expect(player.production.megacredits).to.eq(0);
     expect(player2.production.megacredits).to.eq(2);
   });

@@ -25,7 +25,7 @@ describe('Kelvinists', function() {
 
     const bonus = KELVINISTS_BONUS_1;
     bonus.grant(game);
-    expect(player.megaCredits).to.eq(5);
+    expect(player.stock.megacredits).to.eq(5);
   });
 
   it('Ruling bonus 2: Gain 1 heat for each heat production you have', function() {
@@ -33,11 +33,11 @@ describe('Kelvinists', function() {
 
     const bonus = KELVINISTS_BONUS_2;
     bonus.grant(game);
-    expect(player.heat).to.eq(5);
+    expect(player.stock.heat).to.eq(5);
   });
 
   it('Ruling policy 1: Pay 10 M€ to increase your energy and heat production 1 step', function() {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     setRulingParty(game, PartyName.KELVINISTS, KELVINISTS_POLICY_1.id);
 
     const kelvinistsPolicy = KELVINISTS_POLICY_1;
@@ -52,7 +52,7 @@ describe('Kelvinists', function() {
     setRulingParty(game, PartyName.KELVINISTS, KELVINISTS_POLICY_2.id);
 
     game.increaseTemperature(player, 1);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 
   it('Ruling policy 3: Convert 6 heat into temperature', function() {
@@ -66,7 +66,7 @@ describe('Kelvinists', function() {
 
     const initialTR = player.getTerraformRating();
     kelvinistsPolicy.action(player);
-    expect(player.heat).to.eq(0);
+    expect(player.stock.heat).to.eq(0);
     expect(player.getTerraformRating()).to.eq(initialTR + 1);
     expect(game.getTemperature()).to.eq(-28);
   });
@@ -90,7 +90,7 @@ describe('Kelvinists', function() {
     floaterOption.cb(1);
     action.cb(undefined);
 
-    expect(player.heat).to.eq(4);
+    expect(player.stock.heat).to.eq(4);
     expect(stormcraft.resourceCount).to.eq(1);
     expect(kelvinistsPolicy.canAct(player)).to.be.true;
   });
@@ -100,6 +100,6 @@ describe('Kelvinists', function() {
 
     const emptySpace: Space = game.board.spaces.find((space) => space.bonus.length === 0)!;
     game.addTile(player, emptySpace, {tileType: TileType.CITY});
-    expect(player.heat).to.eq(2);
+    expect(player.stock.heat).to.eq(2);
   });
 });

@@ -31,12 +31,12 @@ export class UnderworldTestHelper {
 
     expect(space.excavator).is.undefined;
 
-    const plants = player.plants;
+    const plants = player.stock.plants;
     space.undergroundResources = 'plant1';
     const pi = selectSpace.cb(space);
 
     expect(space.excavator).eq(player);
-    expect(player.plants - plants).eq(1);
+    expect(player.stock.plants - plants).eq(1);
     return pi;
   }
 
@@ -131,6 +131,6 @@ export class UnderworldTestHelper {
     option.cb();
     andOptions.options[1].cb(luna);
 
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   }
 }

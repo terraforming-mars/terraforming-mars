@@ -46,7 +46,7 @@ describe('SpaceDebrisCleaningOperation', function() {
     card.play(player);
     runAllActions(game);
 
-    expect(player.titanium).eq(3);
+    expect(player.stock.titanium).eq(3);
     expect(player.cardsInHand).has.length(1);
     expect(lunarObservationPost.resourceCount).eq(2); // Both "add resource" actions go to this card.
   });

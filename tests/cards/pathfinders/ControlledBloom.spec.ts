@@ -19,7 +19,7 @@ describe('ControlledBloom', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     addOcean(player);
     expect(player.canPlay(card)).is.false;
     addOcean(player);
@@ -36,7 +36,7 @@ describe('ControlledBloom', function() {
 
     card.play(player);
 
-    expect(player.plants).eq(3);
+    expect(player.stock.plants).eq(3);
 
     const addResourcesToCard = cast(game.deferredActions.pop()!.execute()!, SelectCard);
     expect(addResourcesToCard.cards.map((c) => c.name)).has.members(['A', 'C']);

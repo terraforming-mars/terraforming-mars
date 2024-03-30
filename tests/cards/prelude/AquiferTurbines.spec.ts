@@ -15,17 +15,17 @@ describe('AquiferTurbines', function() {
   });
 
   it('Can not play', function() {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canPlay(player)).is.false;
   });
 
   it('Can play', function() {
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     card.play(player);
 
     // PlaceOceanTile
@@ -35,6 +35,6 @@ describe('AquiferTurbines', function() {
     game.deferredActions.runNext();
 
     expect(player.production.energy).to.eq(2);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 });

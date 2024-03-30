@@ -37,8 +37,8 @@ describe('ProjectWorkshop', function() {
   });
 
   it('Starts with correct resources', function() {
-    expect(player.steel).to.eq(1);
-    expect(player.titanium).to.eq(1);
+    expect(player.stock.steel).to.eq(1);
+    expect(player.stock.titanium).to.eq(1);
 
     player.deferInitialAction(card);
     runAllActions(game);
@@ -47,12 +47,12 @@ describe('ProjectWorkshop', function() {
   });
 
   it('Can not act', function() {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Can spend 3 M€ to draw a blue card', function() {
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
 
     expect(card.canAct(player)).is.true;
     const selectOption = cast(churnAction(card, player), SelectOption);
@@ -64,7 +64,7 @@ describe('ProjectWorkshop', function() {
   it('Can flip a played blue card and remove its ongoing effects', function() {
     player.playedCards.push(advancedAlloys);
     advancedAlloys.play(player);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     expect(player.getSteelValue()).to.eq(3);
     expect(player.getTitaniumValue()).to.eq(4);
@@ -101,7 +101,7 @@ describe('ProjectWorkshop', function() {
 
   it('Can select option if able to do both actions', function() {
     player.playedCards.push(advancedAlloys);
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     // That the response is OrOptions is the test.
     cast(card.action(player), OrOptions);
   });
@@ -152,17 +152,17 @@ describe('ProjectWorkshop', function() {
       return cast(orOptions.options[1].cb(), SelectCard);
     };
 
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     expect(selectCard().cards).has.members([smallAnimals, extremophiles, birds]);
 
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     expect(selectCard().cards).has.members([smallAnimals, birds]);
 
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(selectCard().cards).has.members([smallAnimals, birds]);
 
     const originalTR = player.getTerraformRating();
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
 
     const orOptions = cast(card.action(player), OrOptions);
     expect(orOptions.options[1].cb()).is.undefined;
@@ -171,7 +171,7 @@ describe('ProjectWorkshop', function() {
     expect(player.playedCards).has.members([smallAnimals, extremophiles]);
     expect(game.projectDeck.discardPile).contains(birds);
     expect(player.getTerraformRating()).to.eq(originalTR + 1);
-    expect(player.megaCredits).eq(2); // Spent 3MC for the reds tax.
+    expect(player.stock.megacredits).eq(2); // Spent 3MC for the reds tax.
   });
 
   it('Project Workshop + Helion', function() {
@@ -179,19 +179,19 @@ describe('ProjectWorkshop', function() {
     helion.play(player);
     player.corporations.push(helion);
 
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).is.false;
-    player.heat = 1;
+    player.stock.heat = 1;
     expect(card.canAct(player)).is.true;
 
     // Setting a larger amount of heat just to make the test results more interesting
-    player.heat = 5;
+    player.stock.heat = 5;
 
     const selectOption = cast(churnAction(card, player), SelectOption);
     const selectPayment = cast(churn(() => selectOption.cb(undefined), player), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
-    expect(player.megaCredits).to.eq(1);
-    expect(player.heat).to.eq(3);
+    expect(player.stock.megacredits).to.eq(1);
+    expect(player.stock.heat).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });

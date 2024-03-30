@@ -50,7 +50,7 @@ describe('DarksideSmugglersUnion', function() {
     const selectColony = cast(card.action(player), SelectColony);
     selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('is available through standard trade action', () => {
@@ -74,6 +74,6 @@ describe('DarksideSmugglersUnion', function() {
     darksideOption.cb();
     tradeAction.options[1].cb(luna);
 
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 });

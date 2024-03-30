@@ -11,6 +11,6 @@ describe('InvestmentLoan', function() {
     cast(card.play(player), undefined);
     runAllActions(game);
     expect(player.production.megacredits).to.eq(-1);
-    expect(player.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
   });
 });

@@ -24,7 +24,7 @@ describe('ThoriumRush', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
@@ -53,39 +53,39 @@ describe('ThoriumRush', () => {
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 
-    player.titanium = 1;
-    player.megaCredits = card.cost;
+    player.stock.titanium = 1;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.true;
 
     turmoil.rulingParty = new Greens();
     PoliticalAgendas.setNextAgenda(turmoil, game);
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.true;
 
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, game);
-    player.megaCredits = card.cost + 8;
+    player.stock.megacredits = card.cost + 8;
     expect(player.canPlay(card)).is.false;
-    player.megaCredits = card.cost + 9;
+    player.stock.megacredits = card.cost + 9;
     expect(player.canPlay(card)).deep.eq({redsCost: 9});
 
     moonData.miningRate = 8;
 
-    player.megaCredits = card.cost + 5;
+    player.stock.megacredits = card.cost + 5;
     expect(player.canPlay(card)).is.false;
-    player.megaCredits = card.cost + 6;
+    player.stock.megacredits = card.cost + 6;
     expect(player.canPlay(card)).deep.eq({redsCost: 6});
 
     moonData.habitatRate = 8;
 
-    player.megaCredits = card.cost + 2;
+    player.stock.megacredits = card.cost + 2;
     expect(player.canPlay(card)).is.false;
-    player.megaCredits = card.cost + 3;
+    player.stock.megacredits = card.cost + 3;
     expect(player.canPlay(card)).deep.eq({redsCost: 3});
 
     moonData.logisticRate = 8;
 
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.true;
   });
 });

@@ -25,10 +25,10 @@ describe('ThinkTank', () => {
   });
 
   it('action', () => {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     expect(thinkTank.canAct(player)).is.false;
 
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(thinkTank.canAct(player)).is.true;
 
     thinkTank.resourceCount = 0;
@@ -37,7 +37,7 @@ describe('ThinkTank', () => {
 
     runAllActions(game);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(thinkTank.resourceCount).eq(1);
   });
 
@@ -105,7 +105,7 @@ describe('ThinkTank', () => {
     // Breathing filters requires 7% oxygen
     const breathingFilters = new BreathingFilters();
     player.cardsInHand.push(breathingFilters);
-    player.megaCredits = breathingFilters.cost;
+    player.stock.megacredits = breathingFilters.cost;
 
     setOxygenLevel(game, 5);
     thinkTank.resourceCount = 3;
@@ -123,7 +123,7 @@ describe('ThinkTank', () => {
     // Breathing filters requires 7% oxygen
     const breathingFilters = new BreathingFilters();
     player.cardsInHand.push(breathingFilters);
-    player.megaCredits = breathingFilters.cost;
+    player.stock.megacredits = breathingFilters.cost;
 
     setOxygenLevel(game, 5);
     thinkTank.resourceCount = 3;

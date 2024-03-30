@@ -29,13 +29,13 @@ describe('ArcadianCommunities', function() {
 
     expect(space.tile).is.undefined;
     expect(space.player).eq(player);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('play', () => {
     const play = card.play(player);
     expect(play).is.undefined;
-    expect(player.steel).to.eq(10);
+    expect(player.stock.steel).to.eq(10);
   });
 
   it('action + effect', () => {
@@ -53,12 +53,12 @@ describe('ArcadianCommunities', function() {
 
     expect(space.tile).is.undefined;
     expect(space.player).eq(player);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
 
     // This describes the effect.
     player.game.addCity(player, space);
     runAllActions(player.game);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 
   it('available spaces do not include those where player already has token', () => {

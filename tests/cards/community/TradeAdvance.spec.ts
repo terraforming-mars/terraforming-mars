@@ -24,10 +24,10 @@ describe('TradeAdvance', function() {
 
     runAllActions(player.game);
 
-    expect(player.megaCredits).to.eq(6); // 2 from card + 4 from Luna
-    expect(player.energy).to.eq(3);
-    expect(player.steel).to.eq(3);
-    expect(player.heat).to.eq(4);
+    expect(player.stock.megacredits).to.eq(6); // 2 from card + 4 from Luna
+    expect(player.stock.energy).to.eq(3);
+    expect(player.stock.steel).to.eq(3);
+    expect(player.stock.heat).to.eq(4);
     game.colonies.forEach((colony) => {
       if (colony.isActive) {
         expect(colony.trackPosition).to.eq(0);

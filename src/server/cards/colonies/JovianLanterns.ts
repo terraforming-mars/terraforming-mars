@@ -44,7 +44,7 @@ export class JovianLanterns extends Card implements IProjectCard {
 
 
   public canAct(player: IPlayer): boolean {
-    return player.titanium > 0;
+    return player.stock.titanium > 0;
   }
 
   public action(player: IPlayer) {

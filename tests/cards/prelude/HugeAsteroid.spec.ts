@@ -15,12 +15,12 @@ describe('HugeAsteroid', function() {
   });
 
   it('Can not play', function() {
-    player.megaCredits = 4;
+    player.stock.megacredits = 4;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     expect(card.canPlay(player)).is.true;
     const initialTR = player.getTerraformRating();
 
@@ -29,7 +29,7 @@ describe('HugeAsteroid', function() {
     // SelectPaymentDeferred
     game.deferredActions.runNext();
 
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.production.heat).to.eq(1);
     expect(player.getTerraformRating()).to.eq(initialTR + 3);
   });

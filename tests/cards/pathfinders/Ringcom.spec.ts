@@ -20,10 +20,10 @@ describe('Ringcom', function() {
   });
 
   it('play', () => {
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(player.production.megacredits).eq(0);
     card.play(player);
-    expect(player.titanium).eq(1);
+    expect(player.stock.titanium).eq(1);
     expect(player.production.megacredits).eq(3);
   });
 
@@ -42,15 +42,15 @@ describe('Ringcom', function() {
 
   it('when you play a jovian tag', function() {
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     player.playCard(a);
-    expect(player.titanium).eq(1);
+    expect(player.stock.titanium).eq(1);
   });
 
   it('when opponent plays a jovian tag', function() {
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     player2.playCard(a);
-    expect(player.titanium).eq(1);
+    expect(player.stock.titanium).eq(1);
   });
 });

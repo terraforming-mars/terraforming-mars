@@ -62,7 +62,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     game = Game.newInstance('gameid', [player], player);
     projectDeck = game.projectDeck;
     projectDeck.discardPile = [];
-    player.megaCredits = 100;
+    player.stock.megacredits = 100;
   });
 
   it('Neither drawn card valid', () => {
@@ -110,7 +110,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(player.playedCards).deep.eq([spaceScienceTag]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
-    expect(player.megaCredits).eq(100);
+    expect(player.stock.megacredits).eq(100);
   });
 
   it('Card has a microbe tag', () => {
@@ -123,7 +123,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(player.playedCards).deep.eq([microbeTag]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
-    expect(player.megaCredits).eq(100);
+    expect(player.stock.megacredits).eq(100);
   });
 
   it('Card has a science tag', () => {
@@ -136,7 +136,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(player.playedCards).deep.eq([scienceTag]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
-    expect(player.megaCredits).eq(100);
+    expect(player.stock.megacredits).eq(100);
   });
 
   it('Card has a science tag and microbe tag', () => {
@@ -149,7 +149,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(player.playedCards).deep.eq([scienceMicrobeTag]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
-    expect(player.megaCredits).eq(100);
+    expect(player.stock.megacredits).eq(100);
   });
 
   it('Card has requirements', () => {
@@ -166,7 +166,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(player.playedCards).deep.eq([requirementsCard]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
-    expect(player.megaCredits).eq(100);
+    expect(player.stock.megacredits).eq(100);
   });
 
   it('The part where a card gets 2 data', function() {
@@ -192,7 +192,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
   //   expect(player.playedCards).deep.eq([lunarObservationPost]);
   //   expect(player.production.energy).eq(0);
   //   // played card doesn't cost anything.
-  //   expect(player.megaCredits).eq(100);
+  //   expect(player.stock.megacredits).eq(100);
 
   //   card.play(player);
   //   runAllActions(game);

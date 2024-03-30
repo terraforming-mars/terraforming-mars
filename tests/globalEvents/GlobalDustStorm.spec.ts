@@ -21,12 +21,12 @@ describe('GlobalDustStorm', function() {
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;
     turmoil.dominantParty.delegates.add(player2);
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
-    player.heat = 7;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
+    player.stock.heat = 7;
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(8);
-    expect(player.heat).to.eq(0);
-    expect(player2.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(8);
+    expect(player.stock.heat).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(10);
   });
 });

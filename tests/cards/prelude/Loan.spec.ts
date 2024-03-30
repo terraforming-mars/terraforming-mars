@@ -22,7 +22,7 @@ describe('Loan', function() {
     expect(card.canPlay(player)).is.true;
     card.play(player);
 
-    expect(player.megaCredits).to.eq(30);
+    expect(player.stock.megacredits).to.eq(30);
     expect(player.production.megacredits).to.eq(-2);
   });
 });

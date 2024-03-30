@@ -33,12 +33,12 @@ describe('Yvonne', function() {
     ceres.addColony(player2);
     triton.addColony(player2);
 
-    player.energy = 0;
-    player.steel = 0;
-    player.titanium = 0;
-    player2.energy = 0;
-    player2.steel = 0;
-    player2.titanium = 0;
+    player.stock.energy = 0;
+    player.stock.steel = 0;
+    player.stock.titanium = 0;
+    player2.stock.energy = 0;
+    player2.stock.steel = 0;
+    player2.stock.titanium = 0;
   });
 
   it('Can act', function() {
@@ -47,26 +47,26 @@ describe('Yvonne', function() {
 
   it('Takes action', function() {
     // Sanity check before OPG
-    expect(player2.energy).eq(0);
-    expect(player2.steel).eq(0);
-    expect(player2.titanium).eq(0);
+    expect(player2.stock.energy).eq(0);
+    expect(player2.stock.steel).eq(0);
+    expect(player2.stock.titanium).eq(0);
     card.action(player);
     game.deferredActions.runAll(() => { });
-    expect(player.energy).eq(6);
-    expect(player.steel).eq(4);
-    expect(player.titanium).eq(2);
+    expect(player.stock.energy).eq(6);
+    expect(player.stock.steel).eq(4);
+    expect(player.stock.titanium).eq(2);
   });
 
   it('Opponents dont get the bonuses', function() {
     // Sanity check before OPG
-    expect(player2.energy).eq(0);
-    expect(player2.steel).eq(0);
-    expect(player2.titanium).eq(0);
+    expect(player2.stock.energy).eq(0);
+    expect(player2.stock.steel).eq(0);
+    expect(player2.stock.titanium).eq(0);
     card.action(player);
     game.deferredActions.runAll(() => { });
-    expect(player2.energy).eq(0);
-    expect(player2.steel).eq(0);
-    expect(player2.titanium).eq(0);
+    expect(player2.stock.energy).eq(0);
+    expect(player2.stock.steel).eq(0);
+    expect(player2.stock.titanium).eq(0);
   });
 
   it('Can only act once per game', function() {

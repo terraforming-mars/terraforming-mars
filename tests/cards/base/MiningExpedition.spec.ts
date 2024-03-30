@@ -18,15 +18,15 @@ describe('MiningExpedition', function() {
   });
 
   it('Should play', function() {
-    player2.plants = 8;
+    player2.stock.plants = 8;
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
-    expect(player2.plants).to.eq(6);
+    expect(player2.stock.plants).to.eq(6);
 
-    expect(player.steel).to.eq(2);
+    expect(player.stock.steel).to.eq(2);
     expect(game.getOxygenLevel()).to.eq(1);
   });
 });

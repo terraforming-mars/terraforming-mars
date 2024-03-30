@@ -26,10 +26,10 @@ describe('MicrogravityHealthProblems', function() {
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;
     turmoil.dominantParty.delegates.add(player2);
-    player.megaCredits = 20;
-    player2.megaCredits = 20;
+    player.stock.megacredits = 20;
+    player2.stock.megacredits = 20;
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(14);
-    expect(player2.megaCredits).to.eq(20);
+    expect(player.stock.megacredits).to.eq(14);
+    expect(player2.stock.megacredits).to.eq(20);
   });
 });

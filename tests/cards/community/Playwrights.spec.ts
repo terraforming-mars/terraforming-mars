@@ -46,7 +46,7 @@ describe('Playwrights', () => {
     expect(player.getTerraformRating()).to.eq(tr + 2);
     expect(card.canAct(player)).is.not.true;
 
-    player.megaCredits = event.cost;
+    player.stock.megacredits = event.cost;
     expect(card.canAct(player)).is.true;
 
     const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
@@ -56,7 +56,7 @@ describe('Playwrights', () => {
     runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(tr + 4);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(player.playedCards).has.lengthOf(0);
     expect(player.removedFromPlayCards).has.lengthOf(1);
   });
@@ -67,7 +67,7 @@ describe('Playwrights', () => {
     event.play(player2);
     player2.playedCards.push(event);
 
-    player.megaCredits = event.cost;
+    player.stock.megacredits = event.cost;
     expect(card.canAct(player)).is.true;
     const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
     selectCard.cb([event]);
@@ -76,7 +76,7 @@ describe('Playwrights', () => {
     runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(tr + 2);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(player2.playedCards).has.lengthOf(0);
     expect(player.removedFromPlayCards).has.lengthOf(1);
   });
@@ -85,8 +85,8 @@ describe('Playwrights', () => {
     player2.playedCards.push(new MartianSurvey(), new LocalHeatTrapping(), new DeimosDown());
 
     setOxygenLevel(game, 5);
-    player.heat = 4;
-    player.megaCredits = 30;
+    player.stock.heat = 4;
+    player.stock.megacredits = 30;
     expect(card.canAct(player)).is.not.true;
   });
 
@@ -110,7 +110,7 @@ describe('Playwrights', () => {
     const event = new LawSuit();
     player2.playedCards.push(event);
 
-    player.megaCredits = event.cost;
+    player.stock.megacredits = event.cost;
     player.removingPlayers = [player2.id];
     expect(card.canAct(player)).is.true;
 
@@ -132,7 +132,7 @@ describe('Playwrights', () => {
     const event = new SpecialDesign();
     player2.playedCards.push(event);
 
-    player.megaCredits = event.cost;
+    player.stock.megacredits = event.cost;
     expect(card.canAct(player)).is.true;
 
     const selectCard = cast(card.action(player), SelectCard<ICard>);
@@ -154,7 +154,7 @@ describe('Playwrights', () => {
     const event = new SpecialDesign();
     player2.playedCards.push(event);
 
-    player.megaCredits = event.cost;
+    player.stock.megacredits = event.cost;
     expect(card.canAct(player)).is.true;
 
     const selectCard = cast(card.action(player), SelectCard<ICard>);

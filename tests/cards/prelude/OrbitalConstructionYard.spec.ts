@@ -9,6 +9,6 @@ describe('OrbitalConstructionYard', function() {
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(1);
-    expect(player.titanium).to.eq(4);
+    expect(player.stock.titanium).to.eq(4);
   });
 });

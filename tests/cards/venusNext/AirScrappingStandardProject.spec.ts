@@ -20,27 +20,27 @@ describe('AirScrappingStandardProject', function() {
   });
 
   it('Can act', function() {
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(card.canAct(player)).is.false;
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', function() {
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);
 
     card.action(player);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
   it('Paying when the global parameter is at its goal is a valid stall action', () => {
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     expect(card.canAct(player)).eq(true);
 
     setVenusScaleLevel(game, MAX_VENUS_SCALE);
@@ -53,18 +53,18 @@ describe('AirScrappingStandardProject', function() {
 
     expect(game.getVenusScaleLevel()).eq(MAX_VENUS_SCALE);
     expect(player.getTerraformRating()).eq(20);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('Can not act with reds', () => {
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = 17;
+    player.stock.megacredits = 17;
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = 18;
+    player.stock.megacredits = 18;
     expect(card.canAct(player)).eq(true);
   });
 });

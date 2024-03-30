@@ -40,7 +40,7 @@ export class Factorum extends CorporationCard implements IActionCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.energy === 0 || player.canAfford(3);
+    return player.stock.energy === 0 || player.canAfford(3);
   }
 
   public action(player: IPlayer) {
@@ -59,7 +59,7 @@ export class Factorum extends CorporationCard implements IActionCard {
         return undefined;
       });
 
-    if (player.energy > 0) return drawBuildingCard;
+    if (player.stock.energy > 0) return drawBuildingCard;
     if (!player.canAfford(3)) return increaseEnergy;
 
     return new OrOptions(increaseEnergy, drawBuildingCard);

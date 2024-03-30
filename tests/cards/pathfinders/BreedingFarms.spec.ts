@@ -44,29 +44,29 @@ describe('BreedingFarms', function() {
   });
 
   it('Can act', function() {
-    player.plants = 0;
+    player.stock.plants = 0;
     player.playedCards = [];
 
     expect(card.canAct(player)).is.false;
 
-    player.plants = 1;
+    player.stock.plants = 1;
     player.playedCards = [];
 
     expect(card.canAct(player)).is.false;
 
-    player.plants = 0;
+    player.stock.plants = 0;
     player.playedCards = [fish];
 
     expect(card.canAct(player)).is.false;
 
-    player.plants = 1;
+    player.stock.plants = 1;
     player.playedCards = [fish];
 
     expect(card.canAct(player)).is.true;
   });
 
   it('act', function() {
-    player.plants = 1;
+    player.stock.plants = 1;
     fish.resourceCount = 0;
     player.playedCards = [fish];
 
@@ -74,7 +74,7 @@ describe('BreedingFarms', function() {
     runAllActions(player.game);
     player.getWaitingFor()?.cb([fish]);
 
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
     expect(fish.resourceCount).eq(1);
   });
 });

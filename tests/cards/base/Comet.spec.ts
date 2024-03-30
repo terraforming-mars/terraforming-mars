@@ -22,8 +22,8 @@ describe('Comet', function() {
   });
 
   it('Should play', function() {
-    player2.plants = 2;
-    player3.plants = 4;
+    player2.stock.plants = 2;
+    player3.stock.plants = 4;
 
     card.play(player);
     expect(game.getTemperature()).to.eq(-28);
@@ -35,26 +35,26 @@ describe('Comet', function() {
 
     const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
     orOptions.options[0].cb();
-    expect(player2.plants).to.eq(0);
+    expect(player2.stock.plants).to.eq(0);
   });
 
   it('Provides no options if there is nothing to confirm', function() {
     maxOutOceans(player);
-    player.plants = 8;
+    player.stock.plants = 8;
 
     card.play(player);
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
 
-    expect(player.plants).to.eq(8); // self plants are not removed
+    expect(player.stock.plants).to.eq(8); // self plants are not removed
     expect(game.getTemperature()).to.eq(-28);
   });
 
   it('Works fine in solo mode', function() {
     Game.newInstance('gameid', [player], player);
-    player.plants = 8;
+    player.stock.plants = 8;
 
     cast(card.play(player), undefined);
-    expect(player.plants).to.eq(8);
+    expect(player.stock.plants).to.eq(8);
   });
 });

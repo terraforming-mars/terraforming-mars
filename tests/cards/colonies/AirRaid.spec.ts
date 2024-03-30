@@ -34,15 +34,15 @@ describe('AirRaid', function() {
     const otherCardWithFloater = new Dirigibles();
     player.playedCards.push(otherCardWithFloater);
     player.addResourceTo(otherCardWithFloater);
-    player2.megaCredits = 4;
+    player2.stock.megacredits = 4;
 
     card.play(player);
     const option1 = cast(player.game.deferredActions.pop()!.execute(), OrOptions);
     const option2 = cast(player.game.deferredActions.pop()!.execute(), SelectCard<ICard>);
 
     option1.options[0].cb();
-    expect(player2.megaCredits).to.eq(0);
-    expect(player.megaCredits).to.eq(4);
+    expect(player2.stock.megacredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(4);
 
     option2.cb([stormcraftIncorporated]);
     expect(stormcraftIncorporated.resourceCount).to.eq(0);
@@ -52,7 +52,7 @@ describe('AirRaid', function() {
     player.addResourceTo(stormcraftIncorporated);
     expect(card.canPlay(player)).is.true;
 
-    player2.megaCredits = 4;
+    player2.stock.megacredits = 4;
     card.play(player);
 
     const option = cast(player.game.deferredActions.pop()!.execute(), OrOptions); // Steal money
@@ -61,7 +61,7 @@ describe('AirRaid', function() {
     player.game.deferredActions.pop()!.execute(); // Remove floater
 
     expect(stormcraftIncorporated.resourceCount).to.eq(0);
-    expect(player2.megaCredits).to.eq(0);
-    expect(player.megaCredits).to.eq(4);
+    expect(player2.stock.megacredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(4);
   });
 });

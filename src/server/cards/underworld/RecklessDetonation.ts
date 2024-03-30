@@ -44,8 +44,8 @@ export class RecklessDetonation extends Card implements IProjectCard {
     const availableActions = new OrOptions();
 
     availablePlayerTargets.forEach((target) => {
-      if (target.titanium > 0 && !target.alloysAreProtected()) {
-        const amountRemoved = Math.min(2, target.titanium);
+      if (target.stock.titanium > 0 && !target.alloysAreProtected()) {
+        const amountRemoved = Math.min(2, target.stock.titanium);
         const optionTitle = this.title(amountRemoved, 'titanium', target);
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.stock.deduct(Resource.TITANIUM, 2, {log: true, from: player});
@@ -53,8 +53,8 @@ export class RecklessDetonation extends Card implements IProjectCard {
         }));
       }
 
-      if (target.steel > 0 && !target.alloysAreProtected()) {
-        const amountRemoved = Math.min(3, target.steel);
+      if (target.stock.steel > 0 && !target.alloysAreProtected()) {
+        const amountRemoved = Math.min(3, target.stock.steel);
         const optionTitle = this.title(amountRemoved, 'steel', target);
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.stock.deduct(Resource.STEEL, 3, {log: true, from: player});

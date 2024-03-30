@@ -17,33 +17,33 @@ describe('AncientShipyards', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.titanium = 2;
-    player.megaCredits = card.cost;
+    player.stock.titanium = 2;
+    player.stock.megacredits = card.cost;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
-    player.titanium = 3;
+    player.stock.titanium = 3;
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
-    player.titanium = 3;
+    player.stock.titanium = 3;
     expect(player.production.steel).eq(0);
 
     card.play(player);
 
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
   });
 
   it('act', () => {
     expect(card.resourceCount).eq(0);
-    player.megaCredits = 0;
-    player2.megaCredits = 10;
-    player3.megaCredits = 7;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 10;
+    player3.stock.megacredits = 7;
 
     expect(churnAction(card, player)).is.undefined;
 
-    expect(player.megaCredits).eq(4);
-    expect(player2.megaCredits).eq(8);
-    expect(player3.megaCredits).eq(5);
+    expect(player.stock.megacredits).eq(4);
+    expect(player2.stock.megacredits).eq(8);
+    expect(player3.stock.megacredits).eq(5);
     expect(card.resourceCount).eq(1);
   });
 
@@ -51,11 +51,11 @@ describe('AncientShipyards', () => {
     [/* game */, player] = testGame(1, {moonExpansion: true});
 
     expect(card.resourceCount).eq(0);
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     expect(churnAction(card, player)).is.undefined;
 
-    expect(player.megaCredits).eq(12);
+    expect(player.stock.megacredits).eq(12);
     expect(card.resourceCount).eq(1);
   });
 

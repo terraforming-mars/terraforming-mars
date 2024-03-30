@@ -32,7 +32,7 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
   }
 
   public canAct(player: IPlayer) {
-    return player.steel > 0 && player.energy > 0;
+    return player.stock.steel > 0 && player.stock.energy > 0;
   }
 
   public action(player: IPlayer) {

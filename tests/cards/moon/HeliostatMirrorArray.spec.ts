@@ -14,24 +14,24 @@ describe('HeliostatMirrorArray', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
     player.production.override({energy: 0});
-    player.titanium = 1;
-    player.heat = 0;
+    player.stock.titanium = 1;
+    player.stock.heat = 0;
 
     card.play(player);
 
-    expect(player.titanium).eq(0);
-    expect(player.heat).eq(1);
+    expect(player.stock.titanium).eq(0);
+    expect(player.stock.heat).eq(1);
     expect(player.production.energy).eq(2);
   });
 });

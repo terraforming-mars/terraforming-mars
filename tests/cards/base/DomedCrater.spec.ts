@@ -36,7 +36,7 @@ describe('DomedCrater', function() {
 
     UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
 
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
 

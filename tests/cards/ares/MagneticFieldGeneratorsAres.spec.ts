@@ -41,16 +41,16 @@ describe('MagneticFieldGeneratorsAres', function() {
     expect(player.production.plants).to.eq(2);
     expect(player.getTerraformRating()).to.eq(23);
 
-    player.megaCredits = 0;
-    player.plants = 0;
+    player.stock.megacredits = 0;
+    player.stock.plants = 0;
 
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
     adjacentSpaces[0].bonus = []; // Just in case it had plant bonuses
     game.addGreenery(player, adjacentSpaces[0]);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(1); // For Ares tile owner bonus
-    expect(player.plants).eq(1);
+    expect(player.stock.megacredits).eq(1); // For Ares tile owner bonus
+    expect(player.stock.plants).eq(1);
     expect(microbeCard.resourceCount).eq(1);
   });
 });

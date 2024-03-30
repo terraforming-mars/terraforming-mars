@@ -44,20 +44,20 @@ describe('SoylentSeedlingSystems', function() {
     const greenery = new GreeneryStandardProject();
     expect(greenery.canAct(player)).is.false;
 
-    player.megaCredits = 23;
+    player.stock.megacredits = 23;
     expect(greenery.canAct(player)).is.true;
 
-    player.megaCredits = 19;
+    player.stock.megacredits = 19;
     expect(greenery.canAct(player)).is.false;
 
-    player.megaCredits = 18;
+    player.stock.megacredits = 18;
     expect(greenery.canAct(player)).is.false;
 
     soylent.resourceCount++;
     expect(greenery.canAct(player)).is.true;
 
     // Doesn't apply to player2
-    player2.megaCredits = 18;
+    player2.stock.megacredits = 18;
     celestic.resourceCount++;
     expect(greenery.canAct(player2)).is.false;
   });
@@ -65,13 +65,13 @@ describe('SoylentSeedlingSystems', function() {
   it('plant tag', () => {
     const plantCard = fakeCard({name: 'A' as CardName, cost: 10, tags: [Tag.PLANT]});
 
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     expect(player.canPlay(plantCard)).is.true;
 
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(player.canPlay(plantCard)).is.false;
 
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     expect(player.canPlay(plantCard)).is.false;
 
     soylent.resourceCount++;

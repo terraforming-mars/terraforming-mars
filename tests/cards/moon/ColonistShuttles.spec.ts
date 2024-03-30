@@ -20,12 +20,12 @@ describe('ColonistShuttles', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
@@ -38,18 +38,18 @@ describe('ColonistShuttles', () => {
     MoonExpansion.addHabitatTile(player, 'm07');
     MoonExpansion.addHabitatTile(player, 'm08');
 
-    player.titanium = 1;
-    player.megaCredits = 0;
+    player.stock.titanium = 1;
+    player.stock.megacredits = 0;
 
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.habitatRate).eq(0);
 
     card.play(player);
 
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.habitatRate).eq(1);
-    expect(player.megaCredits).eq(14);
+    expect(player.stock.megacredits).eq(14);
   });
 });
 

@@ -33,8 +33,8 @@ describe('CorrosiveRain', function() {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    player.megaCredits = 15;
-    player2.megaCredits = 15;
+    player.stock.megacredits = 15;
+    player2.stock.megacredits = 15;
 
     card.resolve(game, turmoil);
     expect(game.deferredActions).has.lengthOf(2);
@@ -42,8 +42,8 @@ describe('CorrosiveRain', function() {
     expect(game.deferredActions).has.lengthOf(0);
     expect(player2.cardsInHand).has.lengthOf(3);
     expect(player.cardsInHand).has.lengthOf(0);
-    expect(player.megaCredits).to.eq(5);
-    expect(player2.megaCredits).to.eq(5);
+    expect(player.stock.megacredits).to.eq(5);
+    expect(player2.stock.megacredits).to.eq(5);
   });
 
   it('remove floaters', () => {
@@ -56,7 +56,7 @@ describe('CorrosiveRain', function() {
     titanAirScrapping.resourceCount = 1;
     birds.resourceCount = 3;
 
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
 
     card.resolve(game, turmoil);
     runAllActions(game);
@@ -64,9 +64,9 @@ describe('CorrosiveRain', function() {
     const reduce10MC = cast(orOptions.options[0], SelectOption);
     const removeFloaters = cast(orOptions.options[1], SelectCard);
 
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
     reduce10MC.cb(undefined);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     expect(titanShuttles.resourceCount).eq(3);
     expect(removeFloaters.cards).has.members([titanShuttles]);

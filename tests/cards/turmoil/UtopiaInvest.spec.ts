@@ -14,7 +14,7 @@ describe('UtopiaInvest', function() {
     expect(player.production.steel).to.eq(1);
     const action = cast(card.action(player), OrOptions);
     action.options[2].cb();
-    expect(player.titanium).to.eq(4);
+    expect(player.stock.titanium).to.eq(4);
     expect(player.production.titanium).to.eq(0);
   });
 });

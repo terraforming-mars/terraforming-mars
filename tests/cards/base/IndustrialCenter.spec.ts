@@ -23,10 +23,10 @@ describe('IndustrialCenter', function() {
   });
 
   it('Should action', function() {
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     card.action(player);
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.production.steel).to.eq(1);
   });
 

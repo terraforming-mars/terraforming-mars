@@ -29,9 +29,9 @@ describe('StrategicBasePlanning', function() {
   it('Should play', function() {
     game.deferredActions.pop();
 
-    player.megaCredits = 100;
+    player.stock.megacredits = 100;
     card.play(player);
-    expect(player.megaCredits).to.eq(92);
+    expect(player.stock.megacredits).to.eq(92);
 
     // Expecting build colony before place city
     UnderworldTestHelper.assertBuildColony(player, game.deferredActions.pop()!.execute());

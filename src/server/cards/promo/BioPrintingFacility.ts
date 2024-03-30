@@ -35,7 +35,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.energy >= 2;
+    return player.stock.energy >= 2;
   }
 
   public action(player: IPlayer) {

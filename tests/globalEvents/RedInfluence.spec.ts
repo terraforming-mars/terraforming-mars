@@ -14,8 +14,8 @@ describe('RedInfluence', function() {
     const turmoil = Turmoil.newInstance(game);
 
     player.setTerraformRating(23);
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
 
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
@@ -24,8 +24,8 @@ describe('RedInfluence', function() {
     turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(4);
-    expect(player2.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
+    expect(player2.stock.megacredits).to.eq(4);
     expect(player.production.megacredits).to.eq(0);
     expect(player2.production.megacredits).to.eq(3);
   });
@@ -37,9 +37,9 @@ describe('RedInfluence', function() {
     const turmoil = Turmoil.newInstance(game);
 
     player.setTerraformRating(59);
-    player.megaCredits = 20;
+    player.stock.megacredits = 20;
 
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(5);
+    expect(player.stock.megacredits).to.eq(5);
   });
 });

@@ -242,8 +242,8 @@ describe('RoboticWorkforce', () => {
         addOcean(player, '34');
 
         // Some moon cards need steel and titanium
-        player.steel = 2;
-        player.titanium = 2;
+        player.stock.steel = 2;
+        player.stock.titanium = 2;
 
         expect(game.deferredActions).has.lengthOf(0);
 

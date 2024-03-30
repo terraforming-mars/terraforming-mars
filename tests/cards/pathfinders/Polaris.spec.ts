@@ -33,9 +33,9 @@ describe('Polaris', function() {
     expect(space.tile?.tileType === TileType.OCEAN);
 
     expect(player.production.megacredits).to.eq(1);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
     expect(player2.production.megacredits).to.eq(0);
-    expect(player2.megaCredits).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(0);
   });
 
   it('When anyone plays ocean tile', function() {
@@ -43,9 +43,9 @@ describe('Polaris', function() {
     runAllActions(game);
 
     expect(player.production.megacredits).to.eq(1);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player2.production.megacredits).to.eq(0);
-    expect(player2.megaCredits).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(0);
   });
 
   it('When you play ocean tile', function() {
@@ -53,9 +53,9 @@ describe('Polaris', function() {
     runAllActions(game);
 
     expect(player.production.megacredits).to.eq(1);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
     expect(player2.production.megacredits).to.eq(0);
-    expect(player2.megaCredits).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(0);
   });
 });
 

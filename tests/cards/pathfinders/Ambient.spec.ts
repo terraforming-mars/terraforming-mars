@@ -51,36 +51,36 @@ describe('Ambient', function() {
   });
 
   it('canAct', function() {
-    player.heat = 7;
+    player.stock.heat = 7;
     setTemperature(game, MAX_TEMPERATURE);
 
     expect(card.canAct(player)).is.false;
 
-    player.heat = 8;
+    player.stock.heat = 8;
     setTemperature(game, MAX_TEMPERATURE - 2);
     expect(card.canAct(player)).is.false;
 
 
-    player.heat = 8;
+    player.stock.heat = 8;
     setTemperature(game, MAX_TEMPERATURE);
     expect(card.canAct(player)).is.true;
   });
 
   it('action', () => {
-    player.heat = 9;
+    player.stock.heat = 9;
     setTemperature(game, MAX_TEMPERATURE);
 
     expect(player.getTerraformRating()).eq(20);
 
     card.action(player);
 
-    expect(player.heat).eq(1);
+    expect(player.stock.heat).eq(1);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
     expect(player.getTerraformRating()).eq(21);
   });
 
   it('action is repeatable', () => {
-    player.heat = 16;
+    player.stock.heat = 16;
     setTemperature(game, MAX_TEMPERATURE);
 
     const getBlueActions = function() {
@@ -95,7 +95,7 @@ describe('Ambient', function() {
 
     getBlueActions()!.cb([card]);
 
-    expect(player.heat).eq(8);
+    expect(player.stock.heat).eq(8);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
     expect(player.getTerraformRating()).eq(21);
 
@@ -105,7 +105,7 @@ describe('Ambient', function() {
 
     getBlueActions()!.cb([card]);
 
-    expect(player.heat).eq(0);
+    expect(player.stock.heat).eq(0);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
     expect(player.getTerraformRating()).eq(22);
 

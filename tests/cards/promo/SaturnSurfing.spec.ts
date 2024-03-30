@@ -47,7 +47,7 @@ describe('SaturnSurfing', function() {
     expect(card.canAct()).is.true;
     card.action(player);
     expect(card.resourceCount).to.eq(2);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 
   it('Should give victory points', function() {

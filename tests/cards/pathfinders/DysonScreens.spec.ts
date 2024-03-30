@@ -29,19 +29,19 @@ describe('DysonScreens', function() {
   });
 
   it('canAct', function() {
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(card.canAct(player)).is.false;
 
-    player.titanium = 2;
+    player.stock.titanium = 2;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', function() {
-    player.titanium = 3;
+    player.stock.titanium = 3;
 
     card.action(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({heat: 1, energy: 1}));
-    expect(player.titanium).eq(1);
+    expect(player.stock.titanium).eq(1);
   });
 });

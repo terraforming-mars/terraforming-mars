@@ -34,7 +34,7 @@ describe('ProjectInspection', function() {
   it('Can not play if available actions can not act', function() {
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
 
     expect(card.canPlay(player)).is.not.true;
   });

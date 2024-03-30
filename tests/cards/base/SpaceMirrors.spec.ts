@@ -15,17 +15,17 @@ describe('SpaceMirrors', function() {
   });
 
   it('Can not act', function() {
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act', function() {
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.production.energy).to.eq(1);
   });
 });

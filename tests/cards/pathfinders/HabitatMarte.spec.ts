@@ -47,7 +47,7 @@ describe('HabitatMarte', () => {
     // Requires five science tags
     const interstellar = new InterstellarColonyShip();
     player.playedCards.push(fourScienceTags);
-    player.megaCredits = interstellar.cost;
+    player.stock.megacredits = interstellar.cost;
 
     expect(player.canPlay(interstellar)).is.false;
 

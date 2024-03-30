@@ -26,22 +26,22 @@ describe('Naomi', function() {
 
   it('Gains 2 energy and 2 M€ when building a colony', function() {
     player.playedCards.push(card);
-    expect(player.energy).to.eq(0);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.energy).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     game.colonies[0].addColony(player);
-    expect(player.energy).to.eq(2);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.energy).to.eq(2);
+    expect(player.stock.megacredits).to.eq(3);
     game.colonies[1].addColony(player);
-    expect(player.energy).to.eq(4);
-    expect(player.megaCredits).to.eq(6);
+    expect(player.stock.energy).to.eq(4);
+    expect(player.stock.megacredits).to.eq(6);
 
     // Player2 here is just a sanity check, _and_ is necessary for the colony count
     game.colonies[0].addColony(player2);
-    expect(player2.energy).to.eq(0);
-    expect(player2.megaCredits).to.eq(0);
+    expect(player2.stock.energy).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(0);
     game.colonies[1].addColony(player2);
-    expect(player2.energy).to.eq(0);
-    expect(player2.megaCredits).to.eq(0);
+    expect(player2.stock.energy).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(0);
   });
 
   it('Takes action', function() {

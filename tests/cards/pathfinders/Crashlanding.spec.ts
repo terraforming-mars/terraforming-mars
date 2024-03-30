@@ -35,7 +35,7 @@ describe('Crashlanding', () => {
   beforeEach(() => {
     card = new Crashlanding();
     [game, player] = testGame(2, {pathfindersExpansion: true, aresExtension: true, aresHazards: false});
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     dataCard = fakeCard({name: 'A' as CardName, resourceType: CardResource.DATA});
     microbeCard = fakeCard({name: 'B' as CardName, resourceType: CardResource.MICROBE});
     animalCard = fakeCard({name: 'C' as CardName, resourceType: CardResource.ANIMAL});
@@ -88,7 +88,7 @@ describe('Crashlanding', () => {
     orOptions.options[0].cb();
     runAllActions(game);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     expect(dataCard.resourceCount).eq(2);
     addGreenery(player, '35');
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, titanium: 1, steel: 0}));
@@ -110,7 +110,7 @@ describe('Crashlanding', () => {
     orOptions.options[1].cb();
     runAllActions(game);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     expect(dataCard.resourceCount).eq(2);
     addGreenery(player, '35');
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, titanium: 0, steel: 1}));
@@ -126,7 +126,7 @@ describe('Crashlanding', () => {
   it('adjacency bonuses when Crashlanding is placed', () => {
     game.board = EmptyBoard.newInstance(); // Avoids other adjacency bonuses
     player.playedCards.push(dataCard);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     addGreenery(player, '35');
 

@@ -18,7 +18,7 @@ describe('Lowell', function() {
   beforeEach(() => {
     card = new Lowell();
     [game, player] = testGame(1, {ceoExtension: true, preludeExtension: true});
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
   });
 
   it('Has a wild tag', function() {
@@ -36,7 +36,7 @@ describe('Lowell', function() {
   });
 
   it('Cannot act: Not enough M€', function() {
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(card.canAct(player)).is.false;
   });
 
@@ -47,7 +47,7 @@ describe('Lowell', function() {
     selectCard.cb([selectCard.cards[0]]);
     expect(player.playedCards.filter((card) => card.type === CardType.CEO).length).eq(1);
     expect(player.playedCards.includes(card)).is.false;
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('Can only act once per game', function() {

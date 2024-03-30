@@ -35,7 +35,7 @@ export class PersonalSpacecruiser extends Card implements IProjectCard {
   }
   public onProductionPhase(player: IPlayer) {
     if (this.resourceCount > 0) {
-      player.megaCredits += (2 * player.underworldData.corruption);
+      player.stock.megacredits += (2 * player.underworldData.corruption);
     }
     return undefined;
   }

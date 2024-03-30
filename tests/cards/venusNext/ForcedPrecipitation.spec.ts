@@ -22,13 +22,13 @@ describe('ForcedPrecipitation', function() {
 
   it('Should act - both actions available', function() {
     player.playedCards.push(card);
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     const action = card.action(player);
     game.deferredActions.runNext();
     cast(action, undefined);
     expect(card.resourceCount).to.eq(1);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.stock.megacredits).to.eq(8);
 
     player.addResourceTo(card);
     expect(card.resourceCount).to.eq(2);
@@ -41,7 +41,7 @@ describe('ForcedPrecipitation', function() {
 
   it('Should act - only one action available', function() {
     player.playedCards.push(card);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     player.addResourceTo(card, 2);
 
     card.action(player);

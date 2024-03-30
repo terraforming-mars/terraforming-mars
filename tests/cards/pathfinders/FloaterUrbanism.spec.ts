@@ -27,7 +27,7 @@ describe('FloaterUrbanism', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.tagsForTest = {venus: 3};
     expect(player.canPlay(card)).is.false;
     player.tagsForTest = {venus: 4};

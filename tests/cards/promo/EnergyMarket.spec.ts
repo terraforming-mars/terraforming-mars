@@ -54,8 +54,8 @@ describe('EnergyMarket', function() {
     expect(next).is.undefined;
     runAllActions(player.game);
     cast(player.getWaitingFor(), undefined);
-    expect(player.megaCredits).eq(2);
-    expect(player.energy).eq(3);
+    expect(player.stock.megacredits).eq(2);
+    expect(player.stock.energy).eq(3);
   });
 
   it('Should act when energy production available', function() {
@@ -64,6 +64,6 @@ describe('EnergyMarket', function() {
     expect(result).is.undefined;
 
     expect(player.production.energy).to.eq(0);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.stock.megacredits).to.eq(8);
   });
 });

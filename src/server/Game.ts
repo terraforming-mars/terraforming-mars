@@ -999,7 +999,7 @@ export class Game implements IGame, Logger {
   // Part of final greenery placement.
   public canPlaceGreenery(player: IPlayer): boolean {
     return !this.donePlayers.has(player.id) &&
-            player.plants >= player.plantsNeededForGreenery &&
+            player.stock.plants >= player.plantsNeededForGreenery &&
             this.board.getAvailableSpacesForGreenery(player).length > 0;
   }
 
@@ -1126,7 +1126,7 @@ export class Game implements IGame, Logger {
     // Check for Aphrodite corporation
     const aphrodite = this.players.find((player) => player.isCorporation(CardName.APHRODITE));
     if (aphrodite !== undefined) {
-      aphrodite.megaCredits += steps * 2;
+      aphrodite.stock.megacredits += steps * 2;
     }
 
     this.venusScaleLevel += steps * 2;
@@ -1279,7 +1279,7 @@ export class Game implements IGame, Logger {
 
     this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
       if (Board.isOceanSpace(adjacentSpace)) {
-        player.megaCredits += player.oceanBonus;
+        player.stock.megacredits += player.oceanBonus;
       }
     });
 

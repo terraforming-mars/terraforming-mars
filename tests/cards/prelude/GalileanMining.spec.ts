@@ -15,12 +15,12 @@ describe('GalileanMining', function() {
   });
 
   it('Can not play', function() {
-    player.megaCredits = 4;
+    player.stock.megacredits = 4;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
@@ -28,7 +28,7 @@ describe('GalileanMining', function() {
     // SelectPaymentDeferred
     game.deferredActions.runNext();
 
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.production.titanium).to.eq(2);
   });
 });

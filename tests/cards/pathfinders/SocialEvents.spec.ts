@@ -26,7 +26,7 @@ describe('SocialEvents', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.true;
     player.tagsForTest = {mars: 3};
     expect(player.canPlay(card)).is.true;
@@ -34,13 +34,13 @@ describe('SocialEvents', function() {
 
   it('canPlay - Reds', function() {
     turmoil.rulingParty = new Reds();
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.true;
     player.tagsForTest = {mars: 3};
     expect(player.canPlay(card)).is.false;
-    player.megaCredits = card.cost + 5;
+    player.stock.megacredits = card.cost + 5;
     expect(player.canPlay(card)).is.false;
-    player.megaCredits = card.cost + 6;
+    player.stock.megacredits = card.cost + 6;
     expect(player.canPlay(card)).deep.eq({redsCost: 6});
   });
 
@@ -64,23 +64,23 @@ describe('SocialEvents', function() {
     turmoil.rulingParty = new Reds();
     expect(player.getTerraformRating()).eq(14);
 
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     player.tagsForTest = {mars: 0};
     card.play(player);
     runAllActions(game);
     expect(player.getTerraformRating()).eq(14);
-    expect(player.megaCredits).eq(10);
+    expect(player.stock.megacredits).eq(10);
 
     player.tagsForTest = {mars: 1};
     card.play(player);
     runAllActions(game);
     expect(player.getTerraformRating()).eq(15);
-    expect(player.megaCredits).eq(7); // -3 MC
+    expect(player.stock.megacredits).eq(7); // -3 MC
 
     player.tagsForTest = {mars: 3};
     card.play(player);
     runAllActions(game);
     expect(player.getTerraformRating()).eq(17);
-    expect(player.megaCredits).eq(1); // -6 MC
+    expect(player.stock.megacredits).eq(1); // -6 MC
   });
 });

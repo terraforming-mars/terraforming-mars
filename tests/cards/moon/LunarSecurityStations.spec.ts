@@ -26,7 +26,7 @@ describe('LunarSecurityStations', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     spaces[0].tile = {tileType: TileType.MOON_ROAD};
@@ -40,8 +40,8 @@ describe('LunarSecurityStations', () => {
   });
 
   it('protects against Hired Raiders', () => {
-    opponent1.steel = 5;
-    opponent2.steel = 5;
+    opponent1.stock.steel = 5;
+    opponent2.stock.steel = 5;
 
     const hiredRaiders = new HiredRaiders();
 
@@ -56,7 +56,7 @@ describe('LunarSecurityStations', () => {
     expect(action.options).has.lengthOf(2);
     action.options[0].cb();
     // And it's the one without Luna Security Stations.
-    expect(opponent1.steel).to.eq(3);
+    expect(opponent1.stock.steel).to.eq(3);
   });
 
   it('play', () => {

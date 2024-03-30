@@ -34,14 +34,14 @@ describe('HermeticOrderOfMars', function() {
     card.play(player);
 
     expect(player.production.megacredits).eq(2);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('One tile, no spaces next to it', () => {
     addGreenery(player, '50');
     card.play(player);
 
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
   });
 
   it('Two tiles next to each other', () => {
@@ -49,7 +49,7 @@ describe('HermeticOrderOfMars', function() {
     addGreenery(player, '51');
     card.play(player);
 
-    expect(player.megaCredits).eq(8);
+    expect(player.stock.megacredits).eq(8);
   });
 
   it('One tile next to them.', () => {
@@ -58,7 +58,7 @@ describe('HermeticOrderOfMars', function() {
     addOcean(player, '43'); // Next to both 50 and 51.
     card.play(player);
 
-    expect(player.megaCredits).eq(7);
+    expect(player.stock.megacredits).eq(7);
   });
 
   it('Hazards count', () => {
@@ -67,7 +67,7 @@ describe('HermeticOrderOfMars', function() {
     board.getSpace('43').tile = {tileType: TileType.DUST_STORM_MILD};
     card.play(player);
 
-    expect(player.megaCredits).eq(8);
+    expect(player.stock.megacredits).eq(8);
   });
 
   it('Restricted space does not count', () => {
@@ -76,6 +76,6 @@ describe('HermeticOrderOfMars', function() {
     board.getSpace('43').spaceType = SpaceType.RESTRICTED;
     card.play(player);
 
-    expect(player.megaCredits).eq(7);
+    expect(player.stock.megacredits).eq(7);
   });
 });

@@ -17,11 +17,11 @@ describe('DevelopmentCenter', function() {
   });
 
   it('Should act', function() {
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    expect(player.energy).to.eq(0);
+    expect(player.stock.energy).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);
   });
 });

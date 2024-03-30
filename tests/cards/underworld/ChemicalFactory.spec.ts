@@ -23,15 +23,15 @@ describe('ChemicalFactory', () => {
 
   it('canAct', () => {
     expect(card.canAct(player)).is.false;
-    player.plants = 1;
+    player.stock.plants = 1;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', () => {
-    player.plants = 1;
+    player.stock.plants = 1;
     cast(card.action(player), undefined);
     runAllActions(game);
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
     UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
   });
 });

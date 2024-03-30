@@ -15,19 +15,19 @@ describe('CultivationOfVenus', function() {
   });
 
   it('Can act', function() {
-    player.plants = 2;
+    player.stock.plants = 2;
     expect(card.canAct(player)).is.false;
-    player.plants = 3;
+    player.stock.plants = 3;
     expect(card.canAct(player)).is.true;
   });
 
   it('act', function() {
-    player.plants = 5;
+    player.stock.plants = 5;
     expect(player.getTerraformRating()).eq(14);
 
     card.action(player);
 
-    expect(player.plants).eq(2);
+    expect(player.stock.plants).eq(2);
     expect(game.getVenusScaleLevel()).to.eq(2);
     expect(player.getTerraformRating()).eq(15);
   });

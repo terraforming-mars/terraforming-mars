@@ -18,12 +18,12 @@ describe('PowerInfrastructure', function() {
   });
 
   it('Should act', function() {
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(card.canAct(player)).is.true;
     const action = card.action(player);
     action.cb(1);
 
-    expect(player.energy).to.eq(0);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.energy).to.eq(0);
+    expect(player.stock.megacredits).to.eq(1);
   });
 });

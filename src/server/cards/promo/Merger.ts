@@ -108,7 +108,7 @@ export class Merger extends PreludeCard {
       incomingTitanium += asNumber(production?.titanium);
     }
     if (corp.name === CardName.LUNA_TRADE_FEDERATION || player.isCorporation(CardName.LUNA_TRADE_FEDERATION)) {
-      sum += (player.titanium + incomingTitanium) * (titaniumValue - 1);
+      sum += (player.stock.titanium + incomingTitanium) * (titaniumValue - 1);
     }
 
     return sum;

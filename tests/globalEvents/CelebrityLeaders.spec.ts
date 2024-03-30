@@ -25,11 +25,11 @@ describe('CelebrityLeaders', function() {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
 
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(12);
-    expect(player2.megaCredits).to.eq(20);
+    expect(player.stock.megacredits).to.eq(12);
+    expect(player2.stock.megacredits).to.eq(20);
   });
 });

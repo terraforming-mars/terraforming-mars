@@ -29,7 +29,7 @@ describe('MarsNomads', () => {
     const space = selectSpace.spaces[0];
     space.bonus = [SpaceBonus.PLANT];
     selectSpace.cb(space);
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
   });
 
   it('No tiles may be placed on the nomad space', () => {
@@ -55,7 +55,7 @@ describe('MarsNomads', () => {
     selectSpace.cb(nextSpace);
 
     expect(game.nomadSpace).eq(nextSpace.id);
-    expect(player.steel).eq(1);
+    expect(player.stock.steel).eq(1);
   });
 
   it('Nomads only moves to adjacent unreserved spaces', () => {
@@ -90,11 +90,11 @@ describe('MarsNomads', () => {
     adjacentSpaces[0].adjacency = {bonus: [SpaceBonus.MEGACREDITS]};
     game.nomadSpace = adjacentSpaces[1].id;
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     const selectSpace = cast(card.action(player), SelectSpace);
     selectSpace.cb(destinationSpace);
 
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
   });
 
   it('Action does not get milestone benefit from adjacency', () => {
@@ -113,7 +113,7 @@ describe('MarsNomads', () => {
     selectSpace.cb(destinationSpace);
 
     // Gain adjacency bonuses of all players' tiles
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
     expect(milestone.getScore(player)).eq(0);
   });
 
@@ -125,14 +125,14 @@ describe('MarsNomads', () => {
     adjacentSpaces[0].tile = {tileType: TileType.OCEAN};
     game.nomadSpace = adjacentSpaces[1].id;
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     const selectSpace = cast(card.action(player), SelectSpace);
     selectSpace.cb(destinationSpace);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('can make initial placement on an ocean bonus space even without the money (Bug #6479)', () => {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     const space3 = game.board.getSpace('03');
     expect(space3.spaceType).eq(SpaceType.LAND);
     space3.bonus = [SpaceBonus.OCEAN];

@@ -24,15 +24,15 @@ describe('CrediCor', function() {
     card.onStandardProject(player, new AsteroidStandardProject());
     card.onStandardProject(player, new CityStandardProject());
     card.onStandardProject(player, new GreeneryStandardProject());
-    expect(player.megaCredits).to.eq(8);
+    expect(player.stock.megacredits).to.eq(8);
   });
 
   it('Runs onCardPlayed', function() {
     player.setCorporationForTest(card);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     card.onCardPlayed(player, new GiantIceAsteroid());
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
     card.onCardPlayed(player, new Bushes());
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
   });
 });

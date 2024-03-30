@@ -24,7 +24,7 @@ describe('EccentricSponsor', function() {
   it('Should play', function() {
     const nitrogenRichAsteroid = new NitrogenRichAsteroid();
     player.cardsInHand = [nitrogenRichAsteroid];
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
 
     expect(player.getCardCost(nitrogenRichAsteroid)).eq(31);
     expect(player.canPlay(nitrogenRichAsteroid)).is.false;
@@ -41,7 +41,7 @@ describe('EccentricSponsor', function() {
   it('Fizzle', function() {
     const nitrogenRichAsteroid = new NitrogenRichAsteroid();
     player.cardsInHand = [nitrogenRichAsteroid];
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     expect(player.getCardCost(nitrogenRichAsteroid)).eq(31);
     expect(player.canPlay(nitrogenRichAsteroid)).is.false;
@@ -49,7 +49,7 @@ describe('EccentricSponsor', function() {
     player.playCard(eccentricSponsor);
     runAllActions(player.game);
     cast(player.popWaitingFor(), undefined);
-    expect(player.megaCredits).eq(15);
+    expect(player.stock.megacredits).eq(15);
     expect(player.cardsInHand).deep.eq([nitrogenRichAsteroid]);
   });
 });

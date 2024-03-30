@@ -24,21 +24,21 @@ describe('Zan', function() {
   it('Not affected by Reds policy when raising TR', function() {
     setRulingParty(game, PartyName.REDS);
 
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     player.increaseTerraformRating();
     game.deferredActions.runNext();
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
   });
 
   it('Not affected by Reds policy when checking canPlay for cards that give TR', function() {
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     const releaseOfInertGases = new ReleaseOfInertGases();
     expect(releaseOfInertGases.canPlay(player)).is.true;
   });
 
   it('Takes OPG action', function() {
     const turmoil = game.turmoil!;
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     const expectedMegagredits = turmoil.getAvailableDelegateCount(player);
     card.action(player);
     while (game.deferredActions.length) {
@@ -46,7 +46,7 @@ describe('Zan', function() {
     }
 
     expect(turmoil.getAvailableDelegateCount(player)).eq(0);
-    expect(player.megaCredits).eq(expectedMegagredits);
+    expect(player.stock.megacredits).eq(expectedMegagredits);
 
     expect(turmoil.dominantParty.name).eq(PartyName.REDS);
     expect(turmoil.dominantParty.partyLeader).eq(player);

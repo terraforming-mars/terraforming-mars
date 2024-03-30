@@ -47,7 +47,7 @@ describe('FocusedOrganization', () => {
       if (run.cardsInHand === 1) {
         player.drawCard();
       }
-      player.megaCredits = run.resources;
+      player.stock.megacredits = run.resources;
       expect(card.canAct(player)).eq(run.expected);
     });
   }
@@ -59,8 +59,8 @@ describe('FocusedOrganization', () => {
     const firstCard = game.projectDeck.drawOrThrow(game);
     const secondCard = game.projectDeck.drawOrThrow(game);
     player.cardsInHand = [firstCard, secondCard];
-    player.megaCredits = 5;
-    player.plants = 3;
+    player.stock.megacredits = 5;
+    player.stock.plants = 3;
 
     const andOptions: AndOptions = card.action(player);
     const selectCard = cast(andOptions.options[0], SelectCard);
@@ -94,8 +94,8 @@ describe('FocusedOrganization', () => {
     const firstCard = game.projectDeck.drawOrThrow(game);
     const secondCard = game.projectDeck.drawOrThrow(game);
     player.cardsInHand = [firstCard, secondCard];
-    player.megaCredits = 5;
-    player.plants = 3;
+    player.stock.megacredits = 5;
+    player.stock.plants = 3;
 
     const andOptions: AndOptions = card.action(player);
     const selectCard = cast(andOptions.options[0], SelectCard);

@@ -25,7 +25,7 @@ describe('Virus', function() {
     player.playedCards.push(birds, predators);
     player.addResourceTo(birds);
     player.addResourceTo(predators);
-    player.plants = 5;
+    player.stock.plants = 5;
 
     const orOptions = cast(card.play(player2), OrOptions);
 
@@ -33,13 +33,13 @@ describe('Virus', function() {
     expect(birds.resourceCount).to.eq(0);
 
     orOptions.options[1].cb();
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
   });
 
   it('Can play when no other player has resources', function() {
-    player.plants = 5;
+    player.stock.plants = 5;
     expect(card.play(player)).is.undefined;
-    expect(player.plants).to.eq(5);
+    expect(player.stock.plants).to.eq(5);
   });
 
   it('Works in solo mode', function() {

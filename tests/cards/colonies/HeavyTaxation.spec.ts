@@ -10,6 +10,6 @@ describe('HeavyTaxation', function() {
     expect(card.canPlay(player)).is.not.true;
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(2);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
   });
 });

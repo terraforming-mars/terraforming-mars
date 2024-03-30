@@ -18,34 +18,34 @@ describe('LunaFirstIncorporated', () => {
 
     // Case 1
     player.production.override({megacredits: 0});
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     MoonExpansion.raiseMiningRate(otherPlayer, 1);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
     expect(player.production.megacredits).eq(0);
 
     // Case 2
     player.production.override({megacredits: 0});
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     MoonExpansion.raiseHabitatRate(otherPlayer, 2);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
     expect(player.production.megacredits).eq(0);
 
     // Case 3
     player.production.override({megacredits: 0});
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     MoonExpansion.raiseLogisticRate(player, 1);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
     expect(player.production.megacredits).eq(1);
 
     // Case 4
     player.production.override({megacredits: 0});
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     MoonExpansion.raiseMiningRate(player, 2);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
     expect(player.production.megacredits).eq(2);
   });
 });

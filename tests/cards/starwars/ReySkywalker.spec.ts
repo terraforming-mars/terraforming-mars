@@ -27,16 +27,16 @@ describe('ReySkywalker', () => {
         .some((s) => s.tile?.tileType === TileType.OCEAN))[0];
 
     expect(space.bonus).deep.eq([SpaceBonus.STEEL, SpaceBonus.STEEL]);
-    player.megaCredits = 0;
-    player.steel = 0;
+    player.stock.megacredits = 0;
+    player.stock.steel = 0;
 
     const selectSpace = cast(card.play(player), SelectSpace);
     selectSpace.cb(space);
     runAllActions(player.game);
 
     // Player doesn't get the placement bonus either.
-    expect(player.steel).eq(0);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.steel).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).not.contains(space.id);
   });
 });

@@ -172,7 +172,7 @@ describe('Counter', () => {
 
     maxOutOceans(player);
     const wetlands = new Wetlands();
-    player.plants = 4;
+    player.stock.plants = 4;
     const selectSpace = cast(wetlands.play(player), SelectSpace);
     selectSpace.cb(selectSpace.spaces[0]);
     expect(counter.count({greeneries: {}})).eq(4);
@@ -215,7 +215,7 @@ describe('Counter', () => {
 
     maxOutOceans(player);
     const wetlands = new Wetlands();
-    player.plants = 4;
+    player.stock.plants = 4;
     const selectSpace = cast(wetlands.play(player), SelectSpace);
     selectSpace.cb(selectSpace.spaces[0]);
     expect(counter.count({oceans: {}})).eq(10);

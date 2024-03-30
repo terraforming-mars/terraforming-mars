@@ -19,12 +19,12 @@ describe('HAL 9000', function() {
     expect(player.production.asUnits()).deep.eq({plants: 0, megacredits: -1, steel: 1, titanium: 1, energy: 1, heat: 1});
     card.action(player);
     expect(player.production.asUnits()).deep.eq({plants: 0, megacredits: -2, steel: 0, titanium: 0, energy: 0, heat: 0});
-    expect(player.plants).eq(0);
-    expect(player.megaCredits).eq(4);
-    expect(player.steel).eq(4);
-    expect(player.titanium).eq(4);
-    expect(player.energy).eq(4);
-    expect(player.heat).eq(4);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.megacredits).eq(4);
+    expect(player.stock.steel).eq(4);
+    expect(player.stock.titanium).eq(4);
+    expect(player.stock.energy).eq(4);
+    expect(player.stock.heat).eq(4);
   });
 
   it('Can only act once per game', function() {

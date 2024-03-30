@@ -28,26 +28,26 @@ describe('Robot Pollinators', function() {
     // Sanity
     setOxygenLevel(game, 10);
     expect(player.production.plants).to.eq(0);
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
 
     // Play
     card.play(player);
     player.playedCards.push(card);
     expect(player.production.plants).to.eq(1);
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
   });
 
   it('Play, Yes tags', function() {
     // Sanity
     setOxygenLevel(game, 10);
     expect(player.production.plants).to.eq(0);
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
 
     player.playedCards.push(fakeCard({tags: [Tag.PLANT, Tag.PLANT, Tag.PLANT]}));
     // Play
     card.play(player);
     player.playedCards.push(card);
     expect(player.production.plants).to.eq(1);
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
   });
 });

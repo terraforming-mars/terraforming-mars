@@ -17,6 +17,6 @@ describe('RoverConstruction', function() {
     addCity(player);
     runAllActions(game);
     expect(game.board.getCities()).has.length(1);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 });

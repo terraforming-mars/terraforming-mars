@@ -23,12 +23,12 @@ describe('HeavyDutyRovers', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     moonData.logisticRate = 0;
     expect(player.getTerraformRating()).eq(14);
 
@@ -38,7 +38,7 @@ describe('HeavyDutyRovers', () => {
 
     card.play(player);
 
-    expect(player.megaCredits).eq(8);
+    expect(player.stock.megacredits).eq(8);
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });
@@ -52,7 +52,7 @@ describe('HeavyDutyRovers', () => {
       moonData.moon.getSpace(spaceId).player = p;
     }
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     moonData.logisticRate = 0;
 
     addTile('m02', TileType.MOON_ROAD);
@@ -77,7 +77,7 @@ describe('HeavyDutyRovers', () => {
 
     card.play(player);
 
-    expect(player.megaCredits).eq(20);
+    expect(player.stock.megacredits).eq(20);
   });
 });
 

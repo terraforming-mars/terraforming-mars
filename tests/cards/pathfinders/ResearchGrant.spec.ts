@@ -15,7 +15,7 @@ describe('ResearchGrant', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.megaCredits).eq(14);
+    expect(player.stock.megacredits).eq(14);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 1}));
   });
 });

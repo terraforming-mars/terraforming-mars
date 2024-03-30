@@ -36,6 +36,6 @@ describe('Apollo', function() {
     MoonExpansion.addRoadTile(player2, spaces[2].id);
 
     card.action(player);
-    expect(player.megaCredits).eq(9);
+    expect(player.stock.megacredits).eq(9);
   });
 });

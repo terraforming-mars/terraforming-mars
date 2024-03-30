@@ -39,7 +39,7 @@ export class ViralEnhancers extends Card implements IProjectCard {
     }
 
     if (card.resourceType !== CardResource.ANIMAL && card.resourceType !== CardResource.MICROBE) {
-      player.plants += resourceCount;
+      player.stock.plants += resourceCount;
       return undefined;
     }
 
@@ -51,7 +51,7 @@ export class ViralEnhancers extends Card implements IProjectCard {
             return undefined;
           }),
           new SelectOption('Gain plant').andThen(() => {
-            player.plants++;
+            player.stock.plants++;
             return undefined;
           }),
         ),

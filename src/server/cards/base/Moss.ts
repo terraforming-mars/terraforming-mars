@@ -31,12 +31,12 @@ export class Moss extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
-    const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName.MANUTECH);
+    const hasEnoughPlants = player.stock.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName.MANUTECH);
 
     return hasEnoughPlants;
   }
   public override bespokePlay(player: IPlayer) {
-    player.plants--;
+    player.stock.plants--;
     return undefined;
   }
 }

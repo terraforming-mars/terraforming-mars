@@ -12,9 +12,9 @@ describe('Capitalist', () => {
   });
 
   it('Can claim with 64 M€', () => {
-    player.megaCredits = 63;
+    player.stock.megacredits = 63;
     expect(milestone.canClaim(player)).is.false;
-    player.megaCredits = 64;
+    player.stock.megacredits = 64;
     expect(milestone.canClaim(player)).is.true;
   });
 });

@@ -20,7 +20,7 @@ describe('PROffice', function() {
 
     player.playedCards.push(card2, card3);
     card.play(player);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
     expect(player.getTerraformRating()).to.eq(15);
   });
 });

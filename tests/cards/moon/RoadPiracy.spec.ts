@@ -27,8 +27,8 @@ describe('RoadPiracy', () => {
   });
 
   it('Players only have steel', () => {
-    player2.steel = 2;
-    player3.steel = 5;
+    player2.stock.steel = 2;
+    player3.stock.steel = 5;
     cast(card.play(player), undefined);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
@@ -44,14 +44,14 @@ describe('RoadPiracy', () => {
       ],
     }, player);
 
-    expect(player.steel).eq(6);
-    expect(player2.steel).eq(0);
-    expect(player3.steel).eq(1);
+    expect(player.stock.steel).eq(6);
+    expect(player2.stock.steel).eq(0);
+    expect(player3.stock.steel).eq(1);
   });
 
   it('Players only have titanium', () => {
-    player2.titanium = 2;
-    player3.titanium = 5;
+    player2.stock.titanium = 2;
+    player3.stock.titanium = 5;
     cast(card.play(player), undefined);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
@@ -67,14 +67,14 @@ describe('RoadPiracy', () => {
       ],
     }, player);
 
-    expect(player.titanium).eq(3);
-    expect(player2.titanium).eq(0);
-    expect(player3.titanium).eq(4);
+    expect(player.stock.titanium).eq(3);
+    expect(player2.stock.titanium).eq(0);
+    expect(player3.stock.titanium).eq(4);
   });
 
   it('Select too many from one player', () => {
-    player2.titanium = 2;
-    player3.titanium = 5;
+    player2.stock.titanium = 2;
+    player3.stock.titanium = 5;
     cast(card.play(player), undefined);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
@@ -100,14 +100,14 @@ describe('RoadPiracy', () => {
       ],
     }, player);
 
-    expect(player.titanium).eq(4);
-    expect(player2.titanium).eq(0);
-    expect(player3.titanium).eq(3);
+    expect(player.stock.titanium).eq(4);
+    expect(player2.stock.titanium).eq(0);
+    expect(player3.stock.titanium).eq(3);
   });
 
   it('Select too many overall', () => {
-    player2.titanium = 2;
-    player3.titanium = 5;
+    player2.stock.titanium = 2;
+    player3.stock.titanium = 5;
     cast(card.play(player), undefined);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
@@ -131,39 +131,39 @@ describe('RoadPiracy', () => {
       ],
     }, player);
 
-    expect(player.titanium).eq(4);
-    expect(player2.titanium).eq(0);
-    expect(player3.titanium).eq(3);
+    expect(player.stock.titanium).eq(4);
+    expect(player2.stock.titanium).eq(0);
+    expect(player3.stock.titanium).eq(3);
   });
 
   it('Do not select', () => {
-    player2.titanium = 2;
-    player3.titanium = 5;
+    player2.stock.titanium = 2;
+    player3.stock.titanium = 5;
     cast(card.play(player), undefined);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
 
     expect(orOptions.options.length).eq(2);
     orOptions.options[1].cb();
-    expect(player.titanium).eq(0);
-    expect(player2.titanium).eq(2);
-    expect(player3.titanium).eq(5);
+    expect(player.stock.titanium).eq(0);
+    expect(player2.stock.titanium).eq(2);
+    expect(player3.stock.titanium).eq(5);
   });
 
   it('Road piracy works with Pathfinders bonuses', () => {
     [game, player, player2, player3] = testGame(3, {pathfindersExpansion: true});
 
-    player2.steel = 0;
-    player3.steel = 3;
+    player2.stock.steel = 0;
+    player3.stock.steel = 3;
 
     // Road Piracy has a Moon tag. Next step grants steel.
     game.pathfindersData!.moon = 1;
     player.playCard(card);
     runAllActions(game);
 
-    expect(player.steel).eq(2);
-    expect(player2.steel).eq(1);
-    expect(player3.steel).eq(4);
+    expect(player.stock.steel).eq(2);
+    expect(player2.stock.steel).eq(1);
+    expect(player3.stock.steel).eq(4);
 
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     const steel = cast(orOptions.options[0], AndOptions);

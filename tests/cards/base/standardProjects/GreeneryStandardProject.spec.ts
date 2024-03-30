@@ -22,26 +22,26 @@ describe('GreeneryStandardProject', function() {
   });
 
   it('Can act', function() {
-    player.megaCredits = card.cost - 1;
+    player.stock.megacredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);
 
     UnderworldTestHelper.assertPlaceTile(player, churnAction(card, player), TileType.GREENERY);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(21);
     expect(game.getOxygenLevel()).eq(1);
   });
 
   it('can act when maximized', () => {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(card.canAct(player)).is.true;
     setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     // Players can still place greeneries even if the oxygen level is maximized
@@ -51,14 +51,14 @@ describe('GreeneryStandardProject', function() {
   it('Can not act with reds', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
 
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 2;
+    player.stock.megacredits = card.cost + 2;
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 3;
+    player.stock.megacredits = card.cost + 3;
     expect(card.canAct(player)).eq(true);
   });
 });

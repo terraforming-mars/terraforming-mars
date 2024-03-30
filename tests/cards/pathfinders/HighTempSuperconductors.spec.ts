@@ -26,7 +26,7 @@ describe('HighTempSuperconductors', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     turmoil.rulingParty = new Reds();
     expect(player.canPlay(card)).is.false;
     turmoil.rulingParty = new Kelvinists();
@@ -43,15 +43,15 @@ describe('HighTempSuperconductors', function() {
 
     // Not power tag
     const cost10 = fakeCard({cost: 10, tags: [Tag.CITY]});
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     expect(player.canPlay(cost10)).is.false;
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     expect(player.canPlay(cost10)).is.true;
 
     const cost10WithTag = fakeCard({cost: 10, tags: [Tag.POWER]});
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(player.canPlay(cost10WithTag)).is.false;
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(player.canPlay(cost10WithTag)).is.true;
   });
 
@@ -59,9 +59,9 @@ describe('HighTempSuperconductors', function() {
     player.playedCards.push(card);
 
     const powerPlant = new PowerPlantStandardProject();
-    player.megaCredits = powerPlant.cost - 4;
+    player.stock.megacredits = powerPlant.cost - 4;
     expect(powerPlant.canAct(player)).is.false;
-    player.megaCredits++;
+    player.stock.megacredits++;
     expect(powerPlant.canAct(player)).is.true;
   });
 
@@ -71,27 +71,27 @@ describe('HighTempSuperconductors', function() {
     player.setCorporationForTest(new Thorgate());
 
     const powerPlant = new PowerPlantStandardProject();
-    player.megaCredits = powerPlant.cost - 7;
+    player.stock.megacredits = powerPlant.cost - 7;
     expect(powerPlant.canAct(player)).is.false;
-    player.megaCredits++;
+    player.stock.megacredits++;
     expect(powerPlant.canAct(player)).is.true;
   });
 
   it('discount Kelvinists ruling bonus', function() {
     setRulingParty(game, PartyName.KELVINISTS);
 
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.false;
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.true;
     expect(KELVINISTS_POLICY_1.description(player)).matches(/10 M/);
 
     player.playedCards.push(card);
     expect(KELVINISTS_POLICY_1.description(player)).matches(/7 M/);
 
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.false;
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.true;
   });
 });

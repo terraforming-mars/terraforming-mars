@@ -21,15 +21,15 @@ describe('Supercapacitors', () => {
     cast(player.popWaitingFor(), undefined);
     player.production.override({energy: 1, heat: 2});
     player.playedCards.push(card);
-    player.energy = 0;
+    player.stock.energy = 0;
     forceGenerationEnd(game);
     runAllActions(game);
 
     // Select cards for next generation
     cast(player.popWaitingFor(), SelectCard);
     // Production still occurs.
-    expect(player.energy).eq(1);
-    expect(player.heat).eq(2);
+    expect(player.stock.energy).eq(1);
+    expect(player.stock.heat).eq(2);
   });
 
 
@@ -37,8 +37,8 @@ describe('Supercapacitors', () => {
     cast(player.popWaitingFor(), undefined);
     player.playedCards.push(card);
     player.production.override({energy: 2, heat: 3});
-    player.energy = 5;
-    player.heat = 0;
+    player.stock.energy = 5;
+    player.stock.heat = 0;
     forceGenerationEnd(game);
     runAllActions(game);
 
@@ -47,8 +47,8 @@ describe('Supercapacitors', () => {
       selectAmount.cb(4);
     });
 
-    expect(player.energy).eq(3); // 5 - 4 + 2 (production)
-    expect(player.heat).eq(7); // 0 + 4 + 3 (production);
+    expect(player.stock.energy).eq(3); // 5 - 4 + 2 (production)
+    expect(player.stock.heat).eq(7); // 0 + 4 + 3 (production);
 
     // Select cards for next generation
     cast(player.popWaitingFor(), SelectCard);

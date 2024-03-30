@@ -17,16 +17,16 @@ describe('LTFPrivileges', () => {
 
   it('effect', () => {
     // This test and the next show that Mare Sernaitatis needs a steel and 2 titanium.
-    player.titanium = 2;
-    player.steel = 2;
-    player.megaCredits = 1000;
+    player.stock.titanium = 2;
+    player.stock.steel = 2;
+    player.stock.megacredits = 1000;
 
     const arn = new AristarchusRoadNetwork();
     player.cardsInHand = [arn];
     expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
 
-    player.titanium = 0;
-    player.steel = 0;
+    player.stock.titanium = 0;
+    player.stock.steel = 0;
     expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
 
     // And this one shows that with Improved Moon Concrete, doesn't need steel.

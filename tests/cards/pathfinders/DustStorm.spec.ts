@@ -21,16 +21,16 @@ describe('DustStorm', function() {
     expect(player.getTerraformRating()).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 
-    player.energy = 5;
-    player2.energy = 15;
-    player3.energy = 400;
+    player.stock.energy = 5;
+    player2.stock.energy = 15;
+    player3.stock.energy = 400;
 
     card.play(player);
 
     expect(player.getTerraformRating()).eq(22);
     expect(player.game.getTemperature()).eq(-26);
-    expect(player.energy).eq(0);
-    expect(player2.energy).eq(0);
-    expect(player3.energy).eq(0);
+    expect(player.stock.energy).eq(0);
+    expect(player2.stock.energy).eq(0);
+    expect(player3.stock.energy).eq(0);
   });
 });

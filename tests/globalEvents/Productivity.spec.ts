@@ -25,7 +25,7 @@ describe('Productivity', function() {
     player2.production.add(Resource.STEEL, 3);
 
     card.resolve(game, turmoil);
-    expect(player.steel).to.eq(3);
-    expect(player2.steel).to.eq(6);
+    expect(player.stock.steel).to.eq(3);
+    expect(player2.stock.steel).to.eq(6);
   });
 });

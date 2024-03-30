@@ -17,7 +17,7 @@ describe('AnubisSecurities', () => {
     // Ants needs 4% oxygen
     const ants = new Ants();
     player.cardsInHand = [aiCentral, ants];
-    player.megaCredits = Math.max(aiCentral.cost, ants.cost);
+    player.stock.megacredits = Math.max(aiCentral.cost, ants.cost);
 
     expect(player.canPlay(aiCentral)).is.false;
     expect(player.canPlay(ants)).is.false;
@@ -41,13 +41,13 @@ describe('AnubisSecurities', () => {
     const [/* game */, player] = testGame(2);
 
     player.setCorporationForTest(card);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     player.increaseTerraformRating(1);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
 
     player.increaseTerraformRating(2);
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
   });
 
   it('TR effect, opponent', () => {
@@ -55,16 +55,16 @@ describe('AnubisSecurities', () => {
     const [/* game */, player, player2] = testGame(2);
 
     player.setCorporationForTest(card);
-    player.megaCredits = 0;
-    player2.megaCredits = 0;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 0;
 
     player2.increaseTerraformRating(1);
-    expect(player2.megaCredits).eq(2);
-    expect(player.megaCredits).eq(0);
+    expect(player2.stock.megacredits).eq(2);
+    expect(player.stock.megacredits).eq(0);
 
     player2.increaseTerraformRating(2);
-    expect(player2.megaCredits).eq(6);
-    expect(player.megaCredits).eq(0);
+    expect(player2.stock.megacredits).eq(6);
+    expect(player.stock.megacredits).eq(0);
   });
 
   const onProductionPhaseRuns = [
@@ -84,13 +84,13 @@ describe('AnubisSecurities', () => {
       player.underworldData.corruption = run.corruptions[0];
       player2.underworldData.corruption = run.corruptions[1];
 
-      player.megaCredits = 0;
-      player2.megaCredits = 10;
+      player.stock.megacredits = 0;
+      player2.stock.megacredits = 10;
 
       card.onProductionPhase(player);
 
-      expect(player.megaCredits).eq(run.mc[0]);
-      expect(player2.megaCredits).eq(run.mc[1]);
+      expect(player.stock.megacredits).eq(run.mc[0]);
+      expect(player2.stock.megacredits).eq(run.mc[1]);
       expect(player.getTerraformRating()).eq(run.tr);
     });
   }

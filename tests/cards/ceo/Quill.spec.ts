@@ -37,7 +37,7 @@ describe('Quill', function() {
     const dirigibles = new Dirigibles();
     const localShading = new LocalShading();
     player.playedCards.push(dirigibles, localShading);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     // Sanity
     expect(dirigibles.resourceCount).eq(0);
@@ -54,6 +54,6 @@ describe('Quill', function() {
     expect(dirigibles.resourceCount).eq(4);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
   });
 });

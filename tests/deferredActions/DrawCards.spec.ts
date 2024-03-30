@@ -44,7 +44,7 @@ describe('DrawCards', function() {
   });
 
   it('buys 1', function() {
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectCard);
@@ -55,11 +55,11 @@ describe('DrawCards', function() {
     player.game.deferredActions.runNext();
     expect(player.cardsInHand).has.length(1);
     expect(projectDeck.discardPile).has.length(0);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('cannot buy', function() {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectCard);
@@ -68,7 +68,7 @@ describe('DrawCards', function() {
     action.cb([]);
     expect(player.cardsInHand).has.length(0);
     expect(projectDeck.discardPile).has.length(1);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('drawn cards are privately logged', () => {

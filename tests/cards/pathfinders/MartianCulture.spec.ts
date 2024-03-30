@@ -16,7 +16,7 @@ describe('MartianCulture', function() {
   });
 
   it('can play', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.tagsForTest = {mars: 2};
     expect(player.canPlay(card)).is.true;
 

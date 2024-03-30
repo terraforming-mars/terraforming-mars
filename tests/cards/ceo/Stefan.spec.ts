@@ -33,7 +33,7 @@ describe('Stefan', function() {
     selectCard.cb([fake1, fake2]);
     game.deferredActions.runAll(() => {});
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
   });
 
   it('Takes action, sells only 1 card', function() {
@@ -47,7 +47,7 @@ describe('Stefan', function() {
     selectCard.cb([fake1]);
     game.deferredActions.runAll(() => {});
     expect(player.cardsInHand).has.length(1);
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
   });
 
   it('Can only act once per game', function() {

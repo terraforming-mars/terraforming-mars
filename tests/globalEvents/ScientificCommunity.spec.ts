@@ -25,7 +25,7 @@ describe('ScientificCommunity', function() {
     turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(1);
-    expect(player2.megaCredits).to.eq(5);
+    expect(player.stock.megacredits).to.eq(1);
+    expect(player2.stock.megacredits).to.eq(5);
   });
 });

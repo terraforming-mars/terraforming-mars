@@ -46,7 +46,7 @@ describe('SelectProjectCardToPlay', function() {
       payment: Payment.of({megaCredits: 18}),
     })).to.throw(/You do not have that many resources to spend/);
 
-    player.megaCredits = 20;
+    player.stock.megacredits = 20;
     expect(called).is.false;
     expect(player.playedCards).is.empty;
     selectProjectCardToPlay.process({
@@ -55,7 +55,7 @@ describe('SelectProjectCardToPlay', function() {
       payment: Payment.of({megaCredits: 18}),
     });
     expect(called).is.true;
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
     expect(player.playedCards.map((c) => c.name)).deep.eq([CardName.AQUIFER_PUMPING]);
   });
 });

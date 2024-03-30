@@ -17,9 +17,9 @@ describe('SearchForLife', function() {
   });
 
   it('Can not act if no MC', function() {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     expect(card.canAct(player)).is.not.true;
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     expect(card.canAct(player)).is.true;
   });
 
@@ -43,52 +43,52 @@ describe('SearchForLife', function() {
   it('action fails, no tags', function() {
     player.playedCards.push(card);
 
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
 
     game.projectDeck.drawPile.push(fakeCard());
 
     card.action(player);
     runAllActions(game); // pays for card.
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(card.resourceCount).eq(0);
   });
 
   it('action fails, wrong tag', function() {
     player.playedCards.push(card);
 
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
 
     game.projectDeck.drawPile.push(fakeCard({tags: [Tag.SCIENCE]}));
 
     card.action(player);
     runAllActions(game); // pays for card.
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(card.resourceCount).eq(0);
   });
 
   it('action fails, wild tag', function() {
     player.playedCards.push(card);
 
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
 
     game.projectDeck.drawPile.push(fakeCard({tags: [Tag.WILD]}));
 
     card.action(player);
     runAllActions(game); // pays for card.
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(card.resourceCount).eq(0);
   });
 
   it('action succeeds', function() {
     player.playedCards.push(card);
 
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
 
     game.projectDeck.drawPile.push(fakeCard({tags: [Tag.WILD, Tag.MICROBE]}));
 
     card.action(player);
     runAllActions(game); // pays for card.
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(card.resourceCount).eq(1);
   });
 });

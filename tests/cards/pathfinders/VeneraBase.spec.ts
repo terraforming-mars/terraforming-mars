@@ -37,7 +37,7 @@ describe('VeneraBase', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.rulingParty = new Greens();
     expect(player.canPlay(card)).is.false;

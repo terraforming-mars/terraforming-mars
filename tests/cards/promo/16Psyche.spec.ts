@@ -14,7 +14,7 @@ describe('16 Psyche', function() {
     cast(card.play(player), undefined);
     // Effect
     expect(player.production.titanium).to.eq(2);
-    expect(player.titanium).to.eq(3);
+    expect(player.stock.titanium).to.eq(3);
     expect(player.getVictoryPoints().victoryPoints).to.eq(2);
   });
 });

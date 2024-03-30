@@ -30,7 +30,7 @@ describe('RedCity', function() {
 
   it('can play', () => {
     game.phase = Phase.ACTION;
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.SCIENTISTS);
     player.production.override({energy: 1});
 
@@ -49,7 +49,7 @@ describe('RedCity', function() {
 
   it('cannot play when no spaces are available', () => {
     game.phase = Phase.ACTION;
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.production.override({energy: 1});
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);
     expect(player.canPlay(card)).is.true;

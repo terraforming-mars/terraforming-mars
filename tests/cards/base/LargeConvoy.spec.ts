@@ -21,7 +21,7 @@ describe('LargeConvoy', function() {
 
     expect(card.getVictoryPoints(player)).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
-    expect(player.plants).to.eq(5);
+    expect(player.stock.plants).to.eq(5);
   });
 
   it('Should play with single animal target', function() {
@@ -36,7 +36,7 @@ describe('LargeConvoy', function() {
     expect(vps.victoryPoints).to.eq(4);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(pets.resourceCount).to.eq(4);
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
   });
 
   it('Should play with multiple animal targets', function() {
@@ -48,7 +48,7 @@ describe('LargeConvoy', function() {
 
     expect(card.getVictoryPoints(player)).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
 
     action.options[1].cb([pets]);
     expect(pets.resourceCount).to.eq(4);
@@ -58,7 +58,7 @@ describe('LargeConvoy', function() {
     const pets = new Pets();
     player.playedCards.push(pets);
     maxOutOceans(player);
-    const plantsCount = player.plants;
+    const plantsCount = player.stock.plants;
     const cardsInHand = player.cardsInHand.length;
 
     const action = cast(card.play(player), OrOptions);
@@ -67,6 +67,6 @@ describe('LargeConvoy', function() {
     expect(player.cardsInHand).has.lengthOf(cardsInHand + 2);
 
     action.options[0].cb();
-    expect(player.plants).to.eq(plantsCount + 5);
+    expect(player.stock.plants).to.eq(plantsCount + 5);
   });
 });

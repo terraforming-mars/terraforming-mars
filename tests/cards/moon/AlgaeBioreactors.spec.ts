@@ -22,7 +22,7 @@ describe('AlgaeBioreactors', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     player.production.override({plants: 1});
     expect(player.getPlayableCardsForTest()).does.include(card);

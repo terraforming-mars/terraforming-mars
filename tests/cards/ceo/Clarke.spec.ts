@@ -30,7 +30,7 @@ describe('Clarke', function() {
     expect(churnAction(card, player)).is.undefined;
     expect(player.production.plants).eq(1);
     expect(player.production.heat).eq(1);
-    expect(player.plants).eq(5);
-    expect(player.heat).eq(5);
+    expect(player.stock.plants).eq(5);
+    expect(player.stock.heat).eq(5);
   });
 });

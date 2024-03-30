@@ -36,7 +36,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
 
 
   public canAct(player: IPlayer) {
-    return player.energy > 0 || this.resourceCount > 0;
+    return player.stock.energy > 0 || this.resourceCount > 0;
   }
 
   public action(player: IPlayer) {
@@ -62,7 +62,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
       firstOption.cb(undefined);
       return undefined;
     }
-    if (player.energy === 0) {
+    if (player.stock.energy === 0) {
       secondOption.cb(undefined);
       return undefined;
     }

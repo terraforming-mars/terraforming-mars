@@ -202,13 +202,13 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
 
-      player.megaCredits = 200;
+      player.stock.megacredits = 200;
       await db.saveGame(game);
 
-      player.megaCredits = 300;
+      player.stock.megacredits = 300;
       await db.saveGame(game);
 
-      player.megaCredits = 400;
+      player.stock.megacredits = 400;
       await db.saveGame(game);
 
       const allSaveIds = await db.getSaveIds(game.id);

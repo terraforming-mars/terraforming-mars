@@ -24,19 +24,19 @@ describe('StandardTechnology', function() {
   it('Rebate for Asteroid Standard Project', function() {
     player.playedCards.push(card);
     card.onStandardProject(player, new AsteroidStandardProject());
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 
   it('No rebate for Asteroid standard project', function() {
     player.playedCards.push(card);
     card.onStandardProject(player, new SellPatentsStandardProject());
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
 
   it('Rebate for Greenery standard project -- using fuller operation', function() {
     player.playedCards.push(card);
-    player.megaCredits = 23;
+    player.stock.megacredits = 23;
     player.setTerraformRating(20);
 
     const greeneryStandardProject = new GreeneryStandardProject();
@@ -46,6 +46,6 @@ describe('StandardTechnology', function() {
 
     selectSpace?.cb(availableSpace);
 
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
   });
 });

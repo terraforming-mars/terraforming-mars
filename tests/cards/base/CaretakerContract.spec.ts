@@ -32,15 +32,15 @@ describe('CaretakerContract', function() {
   });
 
   it('Cannot act', function() {
-    player.heat = 7;
+    player.stock.heat = 7;
     expect(card.canAct(player)).is.false;
-    player.heat = 8;
+    player.stock.heat = 8;
     expect(card.canAct(player)).is.true;
   });
   it('Should act', function() {
-    player.heat = 8;
+    player.stock.heat = 8;
     card.action(player);
-    expect(player.heat).to.eq(0);
+    expect(player.stock.heat).to.eq(0);
     expect(player.getTerraformRating()).to.eq(21);
   });
 
@@ -50,7 +50,7 @@ describe('CaretakerContract', function() {
     game.phase = Phase.ACTION;
 
     turmoil.rulingParty = new Greens();
-    player.heat = 8;
+    player.stock.heat = 8;
     PoliticalAgendas.setNextAgenda(turmoil, game);
     expect(card.canAct(player)).is.true;
 
@@ -58,9 +58,9 @@ describe('CaretakerContract', function() {
     PoliticalAgendas.setNextAgenda(turmoil, game);
     expect(card.canAct(player)).is.false;
 
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).is.false;
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canAct(player)).is.true;
   });
 
@@ -75,16 +75,16 @@ describe('CaretakerContract', function() {
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, game);
 
-    player.megaCredits = 3;
-    player.heat = 8;
+    player.stock.megacredits = 3;
+    player.stock.heat = 8;
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 0;
-    player.heat = 11;
+    player.stock.megacredits = 0;
+    player.stock.heat = 11;
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 0;
-    player.heat = 8;
+    player.stock.megacredits = 0;
+    player.stock.heat = 8;
     expect(card.canAct(player)).is.false;
   });
 
@@ -93,9 +93,9 @@ describe('CaretakerContract', function() {
     player.setCorporationForTest(stormcraft);
     stormcraft.play(player);
     stormcraft.resourceCount = 3;
-    player.heat = 1;
+    player.stock.heat = 1;
     expect(card.canAct(player)).is.false;
-    player.heat = 2;
+    player.stock.heat = 2;
     expect(card.canAct(player)).is.true;
   });
 });

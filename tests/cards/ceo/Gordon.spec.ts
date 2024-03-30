@@ -36,13 +36,13 @@ describe('Gordon', function() {
   });
 
   it('Gains 2 MC when placing city or greenery tile', function() {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     addGreenery(player, '35');
     game.deferredActions.runNext();
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
     addCity(player, '37');
     game.deferredActions.runNext();
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
   });
 
   it('Does not give MC production for city off Mars', function() {
@@ -50,13 +50,13 @@ describe('Gordon', function() {
       tileType: TileType.CITY,
     });
     runAllActions(game);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Does not gain MC when opponent places city or greenery tile', function() {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     addGreenery(player2, '35');
     runAllActions(game);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 });

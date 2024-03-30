@@ -21,24 +21,24 @@ describe('ConvertPlants', function() {
 
   it('Can not act without plants', function() {
     expect(card.canAct(player)).eq(false);
-    player.plants = 7;
+    player.stock.plants = 7;
     expect(card.canAct(player)).eq(false);
   });
 
   it('Can not act with reds', function() {
-    player.plants = 8;
+    player.stock.plants = 8;
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canAct(player)).eq(true);
   });
 
   it('Should play', function() {
-    player.plants = 8;
+    player.stock.plants = 8;
 
     expect(card.canAct(player)).eq(true);
     const action = card.action(player);
@@ -49,7 +49,7 @@ describe('ConvertPlants', function() {
   });
 
   it('Can act when maximized', function() {
-    player.plants = 8;
+    player.stock.plants = 8;
     expect(card.canAct(player)).eq(true);
     setOxygenLevel(player.game, MAX_OXYGEN_LEVEL);
     expect(card.canAct(player)).eq(true);

@@ -27,7 +27,7 @@ describe('Scientists', function() {
 
     const bonus = SCIENTISTS_BONUS_1;
     bonus.grant(game);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each science tag you have, with Habitat Marte', function() {
@@ -38,7 +38,7 @@ describe('Scientists', function() {
     bonus.grant(game);
 
     // This includes Habitat Marte itself, which has a Mars tag.
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
   });
 
   it('Ruling bonus 2: Gain 1 M€ for every 3 cards in hand', function() {
@@ -46,20 +46,20 @@ describe('Scientists', function() {
 
     const bonus = SCIENTISTS_BONUS_2;
     bonus.grant(game);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
   });
 
   it('Ruling policy 1: Pay 10 M€ to draw 3 cards', function() {
     setRulingParty(game, PartyName.SCIENTISTS, SCIENTISTS_POLICY_1.id);
 
     const scientistsPolicy = SCIENTISTS_POLICY_1;
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     expect(scientistsPolicy.canAct(player)).to.be.true;
 
     scientistsPolicy.action(player);
     game.deferredActions.runNext();
     expect(player.cardsInHand).has.lengthOf(3);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(scientistsPolicy.canAct(player)).to.be.false;
   });
 
@@ -98,7 +98,7 @@ describe('Scientists', function() {
   it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less Science tag', function() {
     // Meet all card requirements except the Science tag
     player.playedCards.push(new SpaceStation(), new Satellites());
-    player.titanium = 2;
+    player.stock.titanium = 2;
     const card = new PrideoftheEarthArkship();
     expect(card.canPlay(player)).to.be.false;
 

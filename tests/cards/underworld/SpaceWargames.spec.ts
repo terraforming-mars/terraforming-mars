@@ -26,7 +26,7 @@ describe('SpaceWargames', () => {
     expect(card.canAct(player)).is.true;
 
     card.resourceCount = 0;
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     expect(card.canAct(player)).is.true;
   });
@@ -36,7 +36,7 @@ describe('SpaceWargames', () => {
     const [game, player] = testGame(2);
 
     card.resourceCount = 1;
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     cast(card.action(player), undefined);
 
@@ -45,13 +45,13 @@ describe('SpaceWargames', () => {
     orOptions.options[0].cb();
     runAllActions(game);
 
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(card.resourceCount).eq(2);
 
     orOptions.options[1].cb();
     runAllActions(game);
 
     expect(card.resourceCount).eq(1);
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
   });
 });

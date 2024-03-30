@@ -35,7 +35,7 @@ describe('ViralEnhancers', function() {
     orOptions.options[0].cb();
     expect(birds.resourceCount).to.eq(1);
     orOptions.options[1].cb();
-    expect(player.plants).to.eq(1);
+    expect(player.stock.plants).to.eq(1);
 
     card.onCardPlayed(player, ants);
     expect(game.deferredActions).has.lengthOf(1);
@@ -44,7 +44,7 @@ describe('ViralEnhancers', function() {
     orOptions2.options[0].cb();
     expect(ants.resourceCount).to.eq(1);
     orOptions2.options[1].cb();
-    expect(player.plants).to.eq(2);
+    expect(player.stock.plants).to.eq(2);
   });
 
   it('Should play for each tag', function() {
@@ -61,7 +61,7 @@ describe('ViralEnhancers', function() {
 
     const orOptions2 = cast(game.deferredActions.pop()!.execute(), OrOptions);
     orOptions2.options[1].cb();
-    expect(player.plants).to.eq(1);
+    expect(player.stock.plants).to.eq(1);
     expect(game.deferredActions).has.lengthOf(0);
   });
 });

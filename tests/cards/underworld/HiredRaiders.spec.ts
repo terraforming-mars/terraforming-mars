@@ -16,26 +16,26 @@ describe('HiredRaiders', function() {
   });
 
   it('Play, no corruption', function() {
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
 
     const orOptions = cast(card.play(player), OrOptions);
     expect(orOptions.options).has.lengthOf(2);
     orOptions.options[0].cb();
-    expect(player2.megaCredits).to.eq(7);
-    expect(player.megaCredits).to.eq(13);
+    expect(player2.stock.megacredits).to.eq(7);
+    expect(player.stock.megacredits).to.eq(13);
   });
 
   it('Play, corruption', function() {
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
     player.underworldData.corruption = 2;
 
     const orOptions = cast(card.play(player), OrOptions);
     expect(orOptions.options).has.lengthOf(2);
     orOptions.options[0].cb();
-    expect(player2.megaCredits).to.eq(3);
-    expect(player.megaCredits).to.eq(17);
+    expect(player2.stock.megacredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(17);
   });
 
   it('Works in solo', function() {
@@ -43,6 +43,6 @@ describe('HiredRaiders', function() {
 
     cast(card.play(player), undefined);
 
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 });

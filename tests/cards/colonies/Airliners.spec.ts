@@ -23,7 +23,7 @@ describe('Airliners', function() {
 
     player.playedCards = [jovianLanterns, searchForLife];
 
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     searchForLife.resourceCount = 0;
     jovianLanterns.resourceCount = 0;

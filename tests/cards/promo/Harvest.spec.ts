@@ -27,6 +27,6 @@ describe('Harvest', function() {
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.megaCredits).to.eq(12);
+    expect(player.stock.megacredits).to.eq(12);
   });
 });

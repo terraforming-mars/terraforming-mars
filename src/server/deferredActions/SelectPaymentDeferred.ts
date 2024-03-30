@@ -30,10 +30,10 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
     if (this.player.canUseHeatAsMegaCredits && this.player.availableHeat() > 0) {
       return false;
     }
-    if (this.options.canUseSteel && this.player.steel > 0) {
+    if (this.options.canUseSteel && this.player.stock.steel > 0) {
       return false;
     }
-    if (this.options.canUseTitanium && this.player.titanium > 0) {
+    if (this.options.canUseTitanium && this.player.stock.titanium > 0) {
       return false;
     }
     if (this.options.canUseGraphene && this.player.resourcesOnCard(CardName.CARBON_NANOSYSTEMS) > 0) {
@@ -42,7 +42,7 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
     if (this.options.canUseAsteroids && this.player.resourcesOnCard(CardName.KUIPER_COOPERATIVE) > 0) {
       return false;
     }
-    if (this.player.isCorporation(CardName.LUNA_TRADE_FEDERATION) && this.player.titanium > 0) {
+    if (this.player.isCorporation(CardName.LUNA_TRADE_FEDERATION) && this.player.stock.titanium > 0) {
       return false;
     }
     if (this.options.canUseSeeds && (this.player.resourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS) > 0)) {
@@ -60,7 +60,7 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
 
   public execute() {
     if (this.mustPayWithMegacredits()) {
-      if (this.player.megaCredits < this.amount) {
+      if (this.player.stock.megacredits < this.amount) {
         throw new Error(`Player does not have ${this.amount} M€`);
       }
       const payment = Payment.of({megaCredits: this.amount});

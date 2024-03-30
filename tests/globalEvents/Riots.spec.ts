@@ -16,6 +16,6 @@ describe('Riots', function() {
     addCity(player);
     player.stock.add(Resource.MEGACREDITS, 10);
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(6);
+    expect(player.stock.megacredits).to.eq(6);
   });
 });

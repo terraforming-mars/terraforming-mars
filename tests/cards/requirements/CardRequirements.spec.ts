@@ -102,9 +102,9 @@ describe('CardRequirements', function() {
   it('satisfies properly for resourceTypes', function() {
     const requirements = {resourceTypes: 3, max: true};
     expect(satisfies(requirements, player)).eq(true);
-    player.megaCredits = 10;
-    player.steel = 2;
-    player.titanium = 1;
+    player.stock.megacredits = 10;
+    player.stock.steel = 2;
+    player.stock.titanium = 1;
     expect(satisfies(requirements, player)).eq(true);
 
     const ants = new Ants();
@@ -236,7 +236,7 @@ describe('CardRequirements', function() {
     const requirements = {plantsRemoved: true};
     expect(satisfies(requirements, player)).eq(false);
 
-    player2.plants = 1;
+    player2.stock.plants = 1;
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);
     // Choose Remove 1 plant option

@@ -15,11 +15,11 @@ describe('TakondaCastle', () => {
 
   it('play', () => {
     function test(tags: Partial<Record<Tag, number>>, expected: number) {
-      player.megaCredits = 0;
+      player.stock.megacredits = 0;
       player.tagsForTest = tags;
       card.play(player);
 
-      expect(player.megaCredits).eq(expected);
+      expect(player.stock.megacredits).eq(expected);
     }
 
     test({}, 0);

@@ -25,8 +25,8 @@ describe('Callisto', function() {
 
   it('Should trade', function() {
     callisto.trade(player);
-    expect(player.energy).to.eq(2);
-    expect(player2.energy).to.eq(0);
+    expect(player.stock.energy).to.eq(2);
+    expect(player2.stock.energy).to.eq(0);
   });
 
   it('Should give trade bonus', function() {
@@ -37,7 +37,7 @@ describe('Callisto', function() {
 
     expect(player.production.energy).to.eq(1);
     expect(player2.production.energy).to.eq(0);
-    expect(player.energy).to.eq(3);
-    expect(player2.energy).to.eq(2);
+    expect(player.stock.energy).to.eq(3);
+    expect(player2.stock.energy).to.eq(2);
   });
 });

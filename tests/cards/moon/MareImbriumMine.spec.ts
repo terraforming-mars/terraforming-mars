@@ -26,7 +26,7 @@ describe('MareImbriumMine', () => {
   });
 
   it('play', () => {
-    player.titanium = 3;
+    player.stock.titanium = 3;
     expect(player.production.steel).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
@@ -34,7 +34,7 @@ describe('MareImbriumMine', () => {
     card.play(player);
     runAllActions(game);
 
-    expect(player.titanium).eq(2);
+    expect(player.stock.titanium).eq(2);
     expect(player.production.steel).eq(1);
     expect(player.production.titanium).eq(1);
     expect(player.getTerraformRating()).eq(15);

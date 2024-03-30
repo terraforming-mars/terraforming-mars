@@ -13,16 +13,16 @@ describe('Meltworks', function() {
   });
 
   it('Can not act', function() {
-    player.heat = 4;
+    player.stock.heat = 4;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act', function() {
-    player.heat = 5;
+    player.stock.heat = 5;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    expect(player.heat).to.eq(0);
-    expect(player.steel).to.eq(3);
+    expect(player.stock.heat).to.eq(0);
+    expect(player.stock.steel).to.eq(3);
   });
 });

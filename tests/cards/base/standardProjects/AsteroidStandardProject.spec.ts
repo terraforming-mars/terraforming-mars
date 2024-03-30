@@ -20,27 +20,27 @@ describe('AsteroidStandardProject', function() {
   });
 
   it('Can act', function() {
-    player.megaCredits = card.cost - 1;
+    player.stock.megacredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.setTerraformRating(20);
     expect(game.getTemperature()).eq(-30);
 
     card.action(player);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(21);
     expect(game.getTemperature()).eq(-28);
   });
 
   it('Paying when the global parameter is at its goal is a valid stall action', () => {
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(card.canAct(player)).eq(true);
 
     setTemperature(game, MAX_TEMPERATURE);
@@ -53,20 +53,20 @@ describe('AsteroidStandardProject', function() {
 
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
     expect(player.getTerraformRating()).eq(20);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('Can not act with reds', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
 
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 2;
+    player.stock.megacredits = card.cost + 2;
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 3;
+    player.stock.megacredits = card.cost + 3;
     expect(card.canAct(player)).eq(true);
   });
 });

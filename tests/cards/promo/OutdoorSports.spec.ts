@@ -28,7 +28,7 @@ describe('OutdoorSports', function() {
   });
 
   it('cannotPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
 
@@ -37,7 +37,7 @@ describe('OutdoorSports', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
 
@@ -46,7 +46,7 @@ describe('OutdoorSports', function() {
   });
 
   it('canPlay - other player owns the city', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
 

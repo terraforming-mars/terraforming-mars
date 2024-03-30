@@ -21,19 +21,19 @@ describe('LawSuit', () => {
   });
 
   it('Cannot play if resource loss is zero', () => {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.false;
   });
 
   it('Can play if resources removed this turn by other player', () => {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Cannot play if resources removed by self', () => {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: player});
     expect(card.canPlay(player)).is.false;
   });
@@ -55,11 +55,11 @@ describe('LawSuit', () => {
     // This part sets up player2 as a thief whom you will sue.
     player.removingPlayers.push(player2.id);
     // This thief now has has 2MC
-    player2.megaCredits = 2;
-    player.megaCredits = 0;
+    player2.stock.megacredits = 2;
+    player.stock.megacredits = 0;
     const play = cast(card.play(player), SelectPlayer);
     play.cb(player2);
-    expect(player.megaCredits).eq(2);
-    expect(player2.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(2);
+    expect(player2.stock.megacredits).eq(0);
   });
 });

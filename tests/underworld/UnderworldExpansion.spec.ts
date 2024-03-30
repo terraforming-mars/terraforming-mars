@@ -369,11 +369,11 @@ describe('UnderworldExpansion', function() {
   it('excavatableSpaces - cannot afford ocean bonus', () => {
     const space = UnderworldExpansion.identifiableSpaces(player1)[0];
     space.undergroundResources = 'ocean';
-    player1.megaCredits = 3;
+    player1.stock.megacredits = 3;
 
     expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.contain(space);
 
-    player1.megaCredits = 4;
+    player1.stock.megacredits = 4;
 
     expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);
   });
@@ -381,7 +381,7 @@ describe('UnderworldExpansion', function() {
   // TODO(kberg): Test excavatablespaces override
 
   it('excavate', () => {
-    player1.plants = 0;
+    player1.stock.plants = 0;
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
     space.undergroundResources = 'plant2';
@@ -391,7 +391,7 @@ describe('UnderworldExpansion', function() {
 
     UnderworldExpansion.excavate(player1, space);
 
-    expect(player1.plants).eq(2);
+    expect(player1.stock.plants).eq(2);
     expect(space.excavator?.id).eq(player1.id);
     const identifiedSpacesAfter = UnderworldExpansion.identifiedSpaces(game);
     expect(adjacentSpaces.map((space) => identifiedSpacesAfter.includes(space))).deep.eq([true, true, true]);

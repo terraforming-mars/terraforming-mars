@@ -25,7 +25,7 @@ describe('SecretLabs', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.tagsForTest = {jovian: 1, science: 1};
     expect(player.canPlay(card)).is.true;
 
@@ -77,7 +77,7 @@ describe('SecretLabs', function() {
   });
 
   it('play - available if oceans are maxed out', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.tagsForTest = {jovian: 1, science: 1};
     maxOutOceans(player);
     const options = cast(card.play(player), OrOptions);

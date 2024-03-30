@@ -30,17 +30,17 @@ describe('SolarStorm', function() {
     expect(player.getTerraformRating()).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 
-    player.plants = 5;
-    player2.plants = 15;
-    player3.plants = 400;
+    player.stock.plants = 5;
+    player2.stock.plants = 15;
+    player3.stock.plants = 400;
 
     card.play(player);
 
     expect(player.getTerraformRating()).eq(21);
     expect(player.game.getTemperature()).eq(-28);
-    expect(player.plants).eq(3);
-    expect(player2.plants).eq(13);
-    expect(player3.plants).eq(398);
+    expect(player.stock.plants).eq(3);
+    expect(player2.stock.plants).eq(13);
+    expect(player3.stock.plants).eq(398);
     expect(player.production.asUnits()).deep.eq(Units.of({heat: 1}));
   });
 
@@ -89,15 +89,15 @@ describe('SolarStorm', function() {
   });
 
   it('Compatible with Botanical Experience', () => {
-    player.plants = 5;
-    player2.plants = 15;
+    player.stock.plants = 5;
+    player2.stock.plants = 15;
     player2.playedCards.push(new BotanicalExperience());
-    player3.plants = 400;
+    player3.stock.plants = 400;
 
     card.play(player);
 
-    expect(player.plants).eq(3);
-    expect(player2.plants).eq(14);
-    expect(player3.plants).eq(398);
+    expect(player.stock.plants).eq(3);
+    expect(player2.stock.plants).eq(14);
+    expect(player3.stock.plants).eq(398);
   });
 });

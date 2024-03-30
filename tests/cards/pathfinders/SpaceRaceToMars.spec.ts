@@ -92,7 +92,7 @@ describe('SpaceRaceToMars', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.energy).eq(1);
-    expect(player2.energy).eq(3);
+    expect(player.stock.energy).eq(1);
+    expect(player2.stock.energy).eq(3);
   });
 });

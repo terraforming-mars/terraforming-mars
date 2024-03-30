@@ -30,22 +30,22 @@ describe('FloatingHabs', function() {
 
   it('Should act - single target', function() {
     player.playedCards.push(card);
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     card.action(player);
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.stock.megacredits).to.eq(8);
   });
 
   it('Should act - multiple targets', function() {
     player.playedCards.push(card, new Dirigibles());
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     const selectCard = cast(churnAction(card, player), SelectCard);
     selectCard.cb([card]);
     game.deferredActions.runNext();
     expect(card.resourceCount).to.eq(1);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.stock.megacredits).to.eq(8);
   });
 
   it('Gives victory points', function() {

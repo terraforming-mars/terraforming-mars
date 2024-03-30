@@ -84,13 +84,13 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
     // These are not used for safety but do help give a better error message
     // to the user
     const reserveUnits = details.reserveUnits;
-    if (reserveUnits.steel + input.payment.steel > this.player.steel) {
+    if (reserveUnits.steel + input.payment.steel > this.player.stock.steel) {
       throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${input.card}`);
     }
-    if (reserveUnits.titanium + input.payment.titanium > this.player.titanium) {
+    if (reserveUnits.titanium + input.payment.titanium > this.player.stock.titanium) {
       throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${input.card}`);
     }
-    if (reserveUnits.plants + input.payment.plants > this.player.plants) {
+    if (reserveUnits.plants + input.payment.plants > this.player.stock.plants) {
       throw new Error(`${reserveUnits.titanium} units of plants must be reserved for ${input.card}`);
     }
     const yesAnd = typeof(details.details) === 'boolean' ? undefined : details.details;

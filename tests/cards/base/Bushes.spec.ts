@@ -25,6 +25,6 @@ describe('Bushes', function() {
 
     card.play(player);
     expect(player.production.plants).to.eq(2);
-    expect(player.plants).to.eq(2);
+    expect(player.stock.plants).to.eq(2);
   });
 });

@@ -31,12 +31,12 @@ describe('DiversitySupport', function() {
     expect(card.canPlay(player)).is.not.true;
 
     // 6 standard resources
-    player.megaCredits = 10;
-    player.steel = 2;
-    player.titanium = 1;
-    player.plants = 4;
-    player.energy = 1;
-    player.heat = 3;
+    player.stock.megacredits = 10;
+    player.stock.steel = 2;
+    player.stock.titanium = 1;
+    player.stock.plants = 4;
+    player.stock.energy = 1;
+    player.stock.heat = 3;
 
     expect(card.canPlay(player)).is.true;
     card.play(player);

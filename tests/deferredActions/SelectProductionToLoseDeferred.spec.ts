@@ -20,16 +20,16 @@ describe('SelectProductionToLoseDeferred', function() {
 
   it('prevents taking too much production', function() {
     player.production.override({megacredits: 5, heat: 10});
-    player.megaCredits = 100;
-    player.heat = 100;
+    player.stock.megacredits = 100;
+    player.stock.heat = 100;
     expect(() => cb({megacredits: 12}, 12)).to.throw();
     expect(() => cb({heat: 12, megacredits: 8}, 20)).to.throw();
   });
 
   it('prevents negative production', function() {
     player.production.override({megacredits: 10, heat: 10});
-    player.megaCredits = 100;
-    player.heat = 100;
+    player.stock.megacredits = 100;
+    player.stock.heat = 100;
     expect(() => cb({megacredits: 15, heat: 5, steel: -10}, 10)).to.throw();
   });
 

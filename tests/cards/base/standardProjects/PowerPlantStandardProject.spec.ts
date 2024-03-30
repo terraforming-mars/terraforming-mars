@@ -17,14 +17,14 @@ describe('PowerPlantStandardProjects', function() {
   });
 
   it('Should act', function() {
-    player.megaCredits = 11;
+    player.stock.megacredits = 11;
     player.playedCards.push(new StandardTechnology());
     expect(game.deferredActions.length).eq(0);
     card.action(player);
     expect(game.deferredActions.length).eq(1);
-    expect(player.megaCredits).eq(11);
+    expect(player.stock.megacredits).eq(11);
     game.deferredActions.runNext();
     expect(player.production.energy).eq(1);
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
   });
 });

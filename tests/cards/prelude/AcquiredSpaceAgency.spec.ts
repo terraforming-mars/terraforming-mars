@@ -11,7 +11,7 @@ describe('AcquiredSpaceAgency', function() {
     Game.newInstance('gameid', [player], player);
     card.play(player);
 
-    expect(player.titanium).to.eq(6);
+    expect(player.stock.titanium).to.eq(6);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SPACE))).has.lengthOf(2);
   });

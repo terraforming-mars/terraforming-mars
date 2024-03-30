@@ -75,7 +75,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
     const pets = new Pets();
     player.playCard(pets);
     expect(card.resourceCount).eq(1);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 });
 

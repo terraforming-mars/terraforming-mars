@@ -24,7 +24,7 @@ describe('MolecularPrinting', function() {
     addCity(player, '03');
 
     cast(card.play(player), undefined);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

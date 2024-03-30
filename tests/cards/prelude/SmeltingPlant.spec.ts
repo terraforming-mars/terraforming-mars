@@ -8,7 +8,7 @@ describe('SmeltingPlant', function() {
     const [game, player] = testGame(1);
     const card = new SmeltingPlant();
     cast(card.play(player), undefined);
-    expect(player.steel).to.eq(5);
+    expect(player.stock.steel).to.eq(5);
     expect(game.getOxygenLevel()).to.eq(2);
   });
 });

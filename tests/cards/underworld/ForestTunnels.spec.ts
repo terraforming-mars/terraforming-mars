@@ -20,18 +20,18 @@ describe('Forest Tunnels', () => {
     const card = new ForestTunnels();
     const [game, player] = testGame(1, {underworldExpansion: true});
 
-    player.plants = 0;
+    player.stock.plants = 0;
     game.board.getSpace(SpaceName.NOCTIS_CITY).excavator = player;
     card.play(player);
     runAllActions(game);
 
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
 
-    player.plants = 0;
+    player.stock.plants = 0;
     game.board.getSpace(SpaceName.THARSIS_THOLUS).excavator = player;
     card.play(player);
     runAllActions(game);
 
-    expect(player.plants).eq(2);
+    expect(player.stock.plants).eq(2);
   });
 });

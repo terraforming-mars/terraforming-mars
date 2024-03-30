@@ -13,16 +13,16 @@ describe('MoonStandardProjectVariants', () => {
   describe('MoonHabitatStandardProjectVariant2', () => {
     it('can act', () => {
       const card = new MoonHabitatStandardProjectVariant2();
-      player.titanium = 1;
-      player.megaCredits = 22;
+      player.stock.titanium = 1;
+      player.stock.megacredits = 22;
       expect(player.canPlay(card)).is.false;
 
-      player.titanium = 0;
-      player.megaCredits = 25;
+      player.stock.titanium = 0;
+      player.stock.megacredits = 25;
       expect(player.canPlay(card)).is.false;
 
-      player.titanium = 0;
-      player.megaCredits = 26;
+      player.stock.titanium = 0;
+      player.stock.megacredits = 26;
       expect(player.canPlay(card)).is.true;
     });
   });
@@ -30,16 +30,16 @@ describe('MoonStandardProjectVariants', () => {
   describe('MoonMineStandardProjectVariant2', () => {
     it('can act', () => {
       const card = new MoonMineStandardProjectVariant2();
-      player.titanium = 1;
-      player.megaCredits = 20;
+      player.stock.titanium = 1;
+      player.stock.megacredits = 20;
       expect(player.canPlay(card)).is.false;
 
-      player.titanium = 0;
-      player.megaCredits = 22;
+      player.stock.titanium = 0;
+      player.stock.megacredits = 22;
       expect(player.canPlay(card)).is.false;
 
-      player.titanium = 0;
-      player.megaCredits = 23;
+      player.stock.titanium = 0;
+      player.stock.megacredits = 23;
       expect(player.canPlay(card)).is.true;
     });
   });
@@ -47,16 +47,16 @@ describe('MoonStandardProjectVariants', () => {
   describe('MoonRoadStandardProjectVariant2', () => {
     it('can act', () => {
       const card = new MoonRoadStandardProjectVariant2();
-      player.titanium = 1;
-      player.megaCredits = 18;
+      player.stock.titanium = 1;
+      player.stock.megacredits = 18;
       expect(player.canPlay(card)).is.false;
 
-      player.titanium = 0;
-      player.megaCredits = 20;
+      player.stock.titanium = 0;
+      player.stock.megacredits = 20;
       expect(player.canPlay(card)).is.false;
 
-      player.titanium = 0;
-      player.megaCredits = 21;
+      player.stock.titanium = 0;
+      player.stock.megacredits = 21;
       expect(player.canPlay(card)).is.true;
     });
   });

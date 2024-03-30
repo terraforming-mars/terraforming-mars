@@ -26,10 +26,10 @@ export class AresTestHelper {
     firstSpace.adjacency = {bonus: [bonus]};
     player.game.addTile(player, firstSpace, {tileType: TileType.RESTRICTED_AREA});
 
-    expect(player.megaCredits).is.eq(0);
+    expect(player.stock.megacredits).is.eq(0);
     const adjacentSpace = player.game.board.getAdjacentSpaces(firstSpace)[0];
     player.game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
-    expect(player.megaCredits).is.eq(expectedMc);
+    expect(player.stock.megacredits).is.eq(expectedMc);
   }
 
   public static getHazards(player: IPlayer): Array<Space> {

@@ -25,38 +25,38 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   });
 
   it('can act', () => {
-    player.titanium = 1;
+    player.stock.titanium = 1;
     card.resourceCount = 0;
     expect(card.canAct(player)).is.true;
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     card.resourceCount = 1;
     expect(card.canAct(player)).is.true;
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     card.resourceCount = 0;
     expect(card.canAct(player)).is.false;
   });
 
   it('action - add resource', () => {
-    player.titanium = 3;
+    player.stock.titanium = 3;
     card.resourceCount = 0;
 
     const options = card.action(player);
     expect(options).is.undefined;
     expect(game.deferredActions).has.length(0);
 
-    expect(player.titanium).eq(2);
+    expect(player.stock.titanium).eq(2);
     expect(card.resourceCount).eq(1);
   });
 
   it('action - steal', () => {
-    player.titanium = 0;
+    player.stock.titanium = 0;
     card.resourceCount = 3;
 
-    player.megaCredits = 5;
-    player2.megaCredits = 5;
-    player3.megaCredits = 5;
+    player.stock.megacredits = 5;
+    player2.stock.megacredits = 5;
+    player3.stock.megacredits = 5;
 
     const options = card.action(player);
     expect(options).is.undefined;
@@ -65,25 +65,25 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     cast(player.getWaitingFor(), undefined);
 
     expect(card.resourceCount).eq(2);
-    expect(player.megaCredits).eq(9);
-    expect(player2.megaCredits).eq(3);
-    expect(player3.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(9);
+    expect(player2.stock.megacredits).eq(3);
+    expect(player3.stock.megacredits).eq(3);
   });
 
   it('action - choose', () => {
-    player.titanium = 1;
+    player.stock.titanium = 1;
     card.resourceCount = 1;
 
-    player.megaCredits = 5;
-    player2.megaCredits = 5;
-    player3.megaCredits = 5;
+    player.stock.megacredits = 5;
+    player2.stock.megacredits = 5;
+    player3.stock.megacredits = 5;
 
     const options = cast(card.action(player), OrOptions);
 
     options.options[0].cb();
     runAllActions(game);
     cast(player.getWaitingFor(), undefined);
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(card.resourceCount).eq(2);
 
     options.options[1].cb();
@@ -91,9 +91,9 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     cast(player.getWaitingFor(), undefined);
 
     expect(card.resourceCount).eq(1);
-    expect(player.megaCredits).eq(9);
-    expect(player2.megaCredits).eq(3);
-    expect(player3.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(9);
+    expect(player2.stock.megacredits).eq(3);
+    expect(player3.stock.megacredits).eq(3);
   });
 
   it('effect', () => {
@@ -111,23 +111,23 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     adjacentSpaces[4].player = player;
 
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
-    player2.megaCredits = 10;
-    player.megaCredits = 0;
+    player2.stock.megacredits = 10;
+    player.stock.megacredits = 0;
     player.setCorporationForTest(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
-    expect(player2.megaCredits).eq(4);
-    expect(player.megaCredits).eq(6);
+    expect(player2.stock.megacredits).eq(4);
+    expect(player.stock.megacredits).eq(6);
 
     // Test 2: Do it again, but other player doesn't have enough to pay the full costs.
     centerSpace.tile = undefined;
     centerSpace.player = undefined;
-    player2.megaCredits = 5;
-    player.megaCredits = 0;
+    player2.stock.megacredits = 5;
+    player.stock.megacredits = 0;
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
-    expect(player2.megaCredits).eq(0);
-    expect(player.megaCredits).eq(5);
+    expect(player2.stock.megacredits).eq(0);
+    expect(player.stock.megacredits).eq(5);
   });
 
   it('no effect during solar phase', () => {
@@ -145,16 +145,16 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     adjacentSpaces[4].player = player;
 
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
-    player2.megaCredits = 10;
-    player.megaCredits = 0;
+    player2.stock.megacredits = 10;
+    player.stock.megacredits = 0;
     player.setCorporationForTest(card);
 
     player.game.phase = Phase.SOLAR;
 
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
-    expect(player2.megaCredits).eq(10);
-    expect(player.megaCredits).eq(0);
+    expect(player2.stock.megacredits).eq(10);
+    expect(player.stock.megacredits).eq(0);
   });
 });
 

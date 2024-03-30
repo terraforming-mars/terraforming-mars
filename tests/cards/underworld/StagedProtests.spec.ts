@@ -35,14 +35,14 @@ describe('StagedProtests', () => {
     card.play(player);
     player.playedCards.push(card);
     player.setTerraformRating(35); // Can claim Terraformer milestone
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     expect(player.claimableMilestones()).is.empty;
-    player.megaCredits = 16;
+    player.stock.megacredits = 16;
 
     expect(player.claimableMilestones()).to.have.members([terraformer]);
 
     finishGeneration(game);
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
 
     expect(player.claimableMilestones()).to.have.members([terraformer]);
   });

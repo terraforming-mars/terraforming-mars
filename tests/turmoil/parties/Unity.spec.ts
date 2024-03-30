@@ -24,7 +24,7 @@ describe('Unity', function() {
 
     const bonus = UNITY_BONUS_1;
     bonus.grant(game);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 
   it('Ruling bonus 2: Gain 1 M€ for each Space tag you have', function() {
@@ -32,7 +32,7 @@ describe('Unity', function() {
 
     const bonus = UNITY_BONUS_2;
     bonus.grant(game);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
   });
 
   it('Ruling policy 1: Your titanium resources are worth 1 M€ extra', function() {
@@ -47,13 +47,13 @@ describe('Unity', function() {
     setRulingParty(game, PartyName.UNITY, 'up02');
 
     const unityPolicy = UNITY_POLICY_2;
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
 
     // Gain titanium
     unityPolicy.action(player);
     game.deferredActions.runNext();
-    expect(player.titanium).to.eq(2);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.titanium).to.eq(2);
+    expect(player.stock.megacredits).to.eq(4);
 
     // Add floaters
     const localShading = new LocalShading();
@@ -64,21 +64,21 @@ describe('Unity', function() {
 
     orOptions.options[0].cb();
     expect(localShading.resourceCount).to.eq(2);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Ruling policy 3: Spend 4 M€ to draw a Space card', function() {
     setRulingParty(game, PartyName.UNITY, 'up03');
 
     const unityPolicy = UNITY_POLICY_3;
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
 
     unityPolicy.action(player);
     expect(unityPolicy.canAct(player)).to.be.true;
     game.deferredActions.runNext();
 
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
     expect(player.cardsInHand[0].tags.includes(Tag.SPACE)).to.be.true;
     expect(unityPolicy.canAct(player)).to.be.false;
   });

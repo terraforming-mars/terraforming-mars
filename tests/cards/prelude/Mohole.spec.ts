@@ -9,6 +9,6 @@ describe('Mohole', function() {
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(3);
-    expect(player.heat).to.eq(3);
+    expect(player.stock.heat).to.eq(3);
   });
 });

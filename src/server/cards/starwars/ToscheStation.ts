@@ -29,11 +29,11 @@ export class ToscheStation extends Card implements IActionCard, IProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    return player.energy > 0;
+    return player.stock.energy > 0;
   }
 
   public action(player: Player) {
-    return new SelectAmount('Select amount of energy to spend', 'Spend energy', 1, Math.min(player.energy, 4))
+    return new SelectAmount('Select amount of energy to spend', 'Spend energy', 1, Math.min(player.stock.energy, 4))
       .andThen((amount) => {
         player.stock.deduct(Resource.ENERGY, amount);
         player.stock.add(Resource.PLANTS, amount - 1, {log: true});

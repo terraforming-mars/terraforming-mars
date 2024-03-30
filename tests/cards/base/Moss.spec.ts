@@ -16,23 +16,23 @@ describe('Moss', function() {
 
   it('Can not play without enough oceans', function() {
     maxOutOceans(player, 2);
-    player.plants = 1;
+    player.stock.plants = 1;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if have no plants', function() {
     maxOutOceans(player, 3);
-    player.plants = 0;
+    player.stock.plants = 0;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, 3);
-    player.plants = 1;
+    player.stock.plants = 1;
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
     expect(player.production.plants).to.eq(1);
   });
 
@@ -40,14 +40,14 @@ describe('Moss', function() {
     maxOutOceans(player, 3);
     const viralEnhancers = new ViralEnhancers();
     player.playedCards.push(viralEnhancers);
-    player.plants = 0;
+    player.stock.plants = 0;
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
 
-    expect(player.plants).to.eq(-1);
+    expect(player.stock.plants).to.eq(-1);
     viralEnhancers.onCardPlayed(player, card);
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
     expect(player.production.plants).to.eq(1);
   });
 });

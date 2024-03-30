@@ -20,9 +20,9 @@ describe('MetallicAsteroid', function() {
   });
 
   it('Play', function() {
-    otherPlayer.plants = 5;
+    otherPlayer.stock.plants = 5;
 
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(game.getTemperature()).eq(-30);
     expect(game.deferredActions).has.lengthOf(0);
 
@@ -30,7 +30,7 @@ describe('MetallicAsteroid', function() {
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(player.titanium).eq(1);
+    expect(player.stock.titanium).eq(1);
     expect(game.getTemperature()).eq(-28);
     // This interrupt is for removing four plants. Not going to do further
     // testing on this because it's beyond the scope of this test without

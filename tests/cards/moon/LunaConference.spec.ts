@@ -23,7 +23,7 @@ describe('LunaConference', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     game.turmoil!.rulingParty = new Scientists();
     expect(player.getPlayableCardsForTest()).does.include(card);
@@ -37,19 +37,19 @@ describe('LunaConference', () => {
     spaces[0].tile = {tileType: TileType.MOON_ROAD};
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     card.play(player);
 
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
 
     spaces[0].tile = {tileType: TileType.MOON_HABITAT};
     spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     spaces[2].tile = {tileType: TileType.MOON_HABITAT};
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     card.play(player);
 
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
   });
 });
 

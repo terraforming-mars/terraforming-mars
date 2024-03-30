@@ -36,7 +36,7 @@ describe('MicroGeodesics', () => {
     ants.resourceCount = 1;
     card.play(player);
     runAllActions(game);
-    expect(player.plants).eq(3);
+    expect(player.stock.plants).eq(3);
 
     UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);

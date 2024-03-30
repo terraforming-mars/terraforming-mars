@@ -23,22 +23,22 @@ describe('TychoRoadNetwork', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.steel = 0;
-    player.megaCredits = card.cost;
+    player.stock.steel = 0;
+    player.stock.megacredits = card.cost;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(player.production.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
 
-    expect(player.steel).eq(0);
+    expect(player.stock.steel).eq(0);
     expect(player.production.megacredits).eq(1);
 
     runAllActions(game);

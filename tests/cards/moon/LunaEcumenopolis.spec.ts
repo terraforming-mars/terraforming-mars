@@ -31,22 +31,22 @@ describe('LunaEcumenopolis', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     const moon = moonData.moon;
     moon.getSpace('m12').tile = {tileType: TileType.MOON_HABITAT};
     moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
 
-    player.titanium = 2;
+    player.stock.titanium = 2;
     expect(player.getPlayableCardsForTest()).does.include(card);
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('can play when 1st placement enables 2nd placement', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     const moon = moonData.moon;
     moon.getSpace('m18').tile = {tileType: TileType.MOON_HABITAT};
@@ -54,12 +54,12 @@ describe('LunaEcumenopolis', () => {
 
     // This test works because space 13 is the only available colony space, but after
     // playing it, space 12 can take a colony.
-    player.titanium = 2;
+    player.stock.titanium = 2;
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('Cannot play: not enough adjacent colony tiles', () => {
-    player.titanium = 2;
+    player.stock.titanium = 2;
     moonData.moon.getSpace('m09').tile = {tileType: TileType.MOON_HABITAT};
     moonData.moon.getSpace('m18').tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCardsForTest()).does.not.include(card);
@@ -90,16 +90,16 @@ describe('LunaEcumenopolis', () => {
 
   it('can play next to Lunar Mine Urbanization', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     const moon = moonData.moon;
     moon.getSpace('m12').tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
     moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
 
-    player.titanium = 2;
+    player.stock.titanium = 2;
     expect(player.getPlayableCardsForTest()).does.include(card);
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 

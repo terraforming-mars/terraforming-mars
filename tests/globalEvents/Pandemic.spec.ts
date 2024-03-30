@@ -21,10 +21,10 @@ describe('Pandemic', function() {
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;
     turmoil.dominantParty.delegates.add(player2);
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(7);
-    expect(player2.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(7);
+    expect(player2.stock.megacredits).to.eq(10);
   });
 });

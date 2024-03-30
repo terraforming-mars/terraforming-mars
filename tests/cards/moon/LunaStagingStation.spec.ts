@@ -20,29 +20,29 @@ describe('LunaStagingStation', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     moonData.logisticRate = 2;
     expect(player.getPlayableCardsForTest()).does.include(card);
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     moonData.logisticRate = 2;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     moonData.logisticRate = 1;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {
-    player.titanium = 1;
+    player.stock.titanium = 1;
     moonData.logisticRate = 2;
     expect(player.getTerraformRating()).eq(14);
 
     card.play(player);
 
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(moonData.logisticRate).eq(4);
     expect(player.getTerraformRating()).eq(16);
   });

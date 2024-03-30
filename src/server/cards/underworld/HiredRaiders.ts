@@ -32,7 +32,7 @@ export class HiredRaiders extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     const amount = 3 + (2 * player.underworldData.corruption);
     if (player.game.isSoloMode()) {
-      player.megaCredits += amount;
+      player.stock.megacredits += amount;
       player.game.log('${0} stole ${1} M€ from the neutral player', (b) =>
         b.player(player).number(amount),
       );
@@ -41,8 +41,8 @@ export class HiredRaiders extends Card implements IProjectCard {
     const availableActions = new OrOptions();
 
     player.getOpponents().forEach((target) => {
-      if (target.megaCredits > 0) {
-        const amountStolen = Math.min(amount, target.megaCredits);
+      if (target.stock.megacredits > 0) {
+        const amountStolen = Math.min(amount, target.stock.megacredits);
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {

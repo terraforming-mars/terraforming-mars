@@ -16,21 +16,21 @@ describe('Sabotage', function() {
   });
 
   it('Should play', function() {
-    player2.titanium = 3;
-    player2.steel = 4;
-    player2.megaCredits = 7;
+    player2.stock.titanium = 3;
+    player2.stock.steel = 4;
+    player2.stock.megacredits = 7;
 
     const action = cast(card.play(player), OrOptions);
 
     expect(action.options).has.lengthOf(4);
 
     action.options[0].cb();
-    expect(player2.titanium).to.eq(0);
+    expect(player2.stock.titanium).to.eq(0);
 
     action.options[1].cb();
-    expect(player2.steel).to.eq(0);
+    expect(player2.stock.steel).to.eq(0);
 
     action.options[2].cb();
-    expect(player2.megaCredits).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(0);
   });
 });

@@ -27,11 +27,11 @@ describe('AerosportTournament', function() {
     addCity(player, '03');
     expect(card.play(player)).is.undefined;
 
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     addCity(player, '05');
     expect(card.play(player)).is.undefined;
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 });

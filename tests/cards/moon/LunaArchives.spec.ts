@@ -30,9 +30,9 @@ describe('LunaArchives', () => {
 
   it('pay for moon card', () => {
     const ee = new EarthEmbassy();
-    player.megaCredits = ee.cost;
+    player.stock.megacredits = ee.cost;
     expect(player.canPlay(ee)).is.true;
-    player.megaCredits-=2;
+    player.stock.megacredits-=2;
     expect(player.canPlay(ee)).is.false;
     card.resourceCount = 1;
     expect(player.canPlay(ee)).is.false;

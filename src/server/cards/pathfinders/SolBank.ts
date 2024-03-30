@@ -27,7 +27,7 @@ export class SolBank extends CorporationCard {
 
   // Behavior is in Pathfinders.addToSolBank.
   public onProductionPhase(player: IPlayer): undefined {
-    player.megaCredits += this.resourceCount;
+    player.stock.megacredits += this.resourceCount;
     this.resourceCount = 0;
     return undefined;
   }

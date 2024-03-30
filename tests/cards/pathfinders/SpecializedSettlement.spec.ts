@@ -137,7 +137,7 @@ describe('SpecializedSettlement', function() {
 
   it('play on hazard space', function() {
     player.production.override({energy: 1});
-    player.megaCredits = 8; // Placing on a mild hazard costs 8MC
+    player.stock.megacredits = 8; // Placing on a mild hazard costs 8MC
 
     const hazardSpace = player.game.board.getAvailableSpacesForCity(player)[0];
     hazardSpace.bonus = [SpaceBonus.HEAT];

@@ -26,7 +26,7 @@ describe('AsteroidMining', function() {
     turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
-    expect(player.titanium).to.eq(1);
-    expect(player2.titanium).to.eq(5);
+    expect(player.stock.titanium).to.eq(1);
+    expect(player2.stock.titanium).to.eq(5);
   });
 });

@@ -42,14 +42,14 @@ describe('PharmacyUnion', function() {
 
     expect(card.resourceCount).to.eq(2);
     // Should not pay for the free Science card
-    expect(player.megaCredits).to.eq(46);
+    expect(player.stock.megacredits).to.eq(46);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
 
   it('Gains diseases and removes MC when ANY player plays microbe cards', function() {
-    player.megaCredits = 8;
-    player2.megaCredits = 8;
+    player.stock.megacredits = 8;
+    player2.stock.megacredits = 8;
     card.play(player);
     runAllActions(game);
 
@@ -58,15 +58,15 @@ describe('PharmacyUnion', function() {
     card.onCardPlayed(player, ants);
     player.game.deferredActions.runNext(); // Add microbe and lose 4 MC
     expect(card.resourceCount).to.eq(3);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
 
     const viralEnhancers = new ViralEnhancers();
     player2.playedCards.push(viralEnhancers);
     card.onCardPlayed(player2, viralEnhancers);
     player.game.deferredActions.runNext(); // Add microbe and lose 4 MC
-    expect(player2.megaCredits).to.eq(8); // should not change
+    expect(player2.stock.megacredits).to.eq(8); // should not change
     expect(card.resourceCount).to.eq(4);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Removes diseases and gives TR only when corp owner plays science cards', function() {
@@ -154,7 +154,7 @@ describe('PharmacyUnion', function() {
     // Edge case, let player pick order of resolution
     // see https://github.com/bafolts/terraforming-mars/issues/1286
 
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
     const viralEnhancers = new ViralEnhancers();
 
     // Another player playing a Science/Microbes card and Pharmacy Union has no resource
@@ -163,7 +163,7 @@ describe('PharmacyUnion', function() {
     card.onCardPlayed(player2, viralEnhancers);
     player.game.deferredActions.runNext(); // Add microbe and lose 4 MC
     expect(card.resourceCount).to.eq(1);
-    expect(player.megaCredits).to.eq(8);
+    expect(player.stock.megacredits).to.eq(8);
     expect(player.game.deferredActions).has.lengthOf(0);
 
 
@@ -176,21 +176,21 @@ describe('PharmacyUnion', function() {
     const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[1].cb(); // Add disease then remove it
     expect(card.resourceCount).to.eq(0);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
 
     orOptions.options[0].cb(); // Turn face down then lose 4MC
     expect(card.isDisabled).is.true;
     expect(card.resourceCount).to.eq(0);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Edge case, lose MC before gaining', () => {
     // See https://github.com/terraforming-mars/terraforming-mars/issues/2191
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     player.playedCards = [new MediaGroup()];
     player.playCard(new Virus());
     runAllActions(player.game);
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
   });
 
   it('serialization test for Player with Pharmacy Union, when false', () => {

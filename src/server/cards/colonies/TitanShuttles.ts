@@ -57,7 +57,7 @@ export class TitanShuttles extends Card implements IProjectCard {
         1, this.resourceCount, true,
       ).andThen((amount) => {
         player.removeResourceFrom(this, amount);
-        player.titanium += amount;
+        player.stock.titanium += amount;
         player.game.log('${0} removed ${1} floaters to gain ${2} titanium', (b) => b.player(player).number(amount).number(amount));
         return undefined;
       }),

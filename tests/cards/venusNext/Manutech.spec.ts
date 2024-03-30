@@ -19,13 +19,13 @@ describe('Manutech', function() {
   it('Should play', function() {
     card.play(player);
     expect(player.production.steel).to.eq(1);
-    expect(player.steel).to.eq(1);
+    expect(player.stock.steel).to.eq(1);
   });
 
   it('Should add energy resources by Power Plant standard project', function() {
-    player.megaCredits = 11;
+    player.stock.megacredits = 11;
     new PowerPlantStandardProject().action(player);
     game.deferredActions.pop()!.execute();
-    expect(player.energy).to.eq(1);
+    expect(player.stock.energy).to.eq(1);
   });
 });

@@ -50,7 +50,7 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
     let floaterAmount: number;
 
     const options = new AndOptions(
-      new SelectAmount('Heat', 'Spend heat', 0, Math.min(player.heat, targetAmount))
+      new SelectAmount('Heat', 'Spend heat', 0, Math.min(player.stock.heat, targetAmount))
         .andThen((amount) => {
           heatAmount = amount;
           return undefined;

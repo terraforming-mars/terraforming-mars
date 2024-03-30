@@ -11,7 +11,7 @@ describe('CometForVenus', function() {
     const card = new CometForVenus();
     const card2 = new AerialMappers();
     const [game, player, player2] = testGame(2);
-    player2.megaCredits = 10;
+    player2.stock.megacredits = 10;
     player2.playedCards.push(card2);
 
     const action = cast(card.play(player), OrOptions);
@@ -24,6 +24,6 @@ describe('CometForVenus', function() {
     expect(subActionSelectPlayer.players[0]).to.eq(player2);
     subActionSelectPlayer.cb(player2);
     expect(game.getVenusScaleLevel()).to.eq(2);
-    expect(player2.megaCredits).to.eq(6);
+    expect(player2.stock.megacredits).to.eq(6);
   });
 });

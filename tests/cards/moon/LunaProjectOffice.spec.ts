@@ -12,7 +12,7 @@ describe('LunaProjectOffice', () => {
     const card = new LunaProjectOffice();
 
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     player.tagsForTest = {science: 2};
     expect(player.getPlayableCardsForTest()).does.include(card);

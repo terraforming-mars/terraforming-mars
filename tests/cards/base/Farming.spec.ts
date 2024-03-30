@@ -26,7 +26,7 @@ describe('Farming', function() {
 
     expect(player.production.megacredits).to.eq(2);
     expect(player.production.plants).to.eq(2);
-    expect(player.plants).to.eq(2);
+    expect(player.stock.plants).to.eq(2);
 
     expect(card.getVictoryPoints(player)).to.eq(2);
   });

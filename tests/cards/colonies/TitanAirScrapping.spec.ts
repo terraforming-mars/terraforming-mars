@@ -21,7 +21,7 @@ describe('TitanAirScrapping', function() {
 
   it('Should act - both actions possible', function() {
     player.playedCards.push(card);
-    player.titanium = 3;
+    player.stock.titanium = 3;
     player.addResourceTo(card, 7);
     expect(card.canAct(player)).is.true;
 

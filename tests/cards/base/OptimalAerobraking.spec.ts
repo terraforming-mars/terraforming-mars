@@ -11,7 +11,7 @@ describe('OptimalAerobraking', function() {
     cast(card.play(player), undefined);
     expect(card.onCardPlayed(player, card)).is.undefined;
     expect(card.onCardPlayed(player, new BigAsteroid())).is.undefined;
-    expect(player.megaCredits).to.eq(3);
-    expect(player.heat).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
+    expect(player.stock.heat).to.eq(3);
   });
 });

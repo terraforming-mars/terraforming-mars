@@ -21,31 +21,31 @@ describe('ConvertHeat', function() {
 
   it('Can not act without heat', function() {
     expect(card.canAct(player)).eq(false);
-    player.heat = 7;
+    player.stock.heat = 7;
     expect(card.canAct(player)).eq(false);
   });
 
   it('Can not act with reds', function() {
-    player.heat = 8;
+    player.stock.heat = 8;
     game.phase = Phase.ACTION;
     game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canAct(player)).eq(true);
   });
 
   it('Should play', function() {
-    player.heat = 8;
+    player.stock.heat = 8;
     expect(card.canAct(player)).eq(true);
     expect(churnAction(card, player)).eq(undefined);
     expect(game.getTemperature()).eq(-28);
   });
 
   it('Spending heat when the global parameter is at its goal is a valid stall action', function() {
-    player.heat = 8;
+    player.stock.heat = 8;
 
     expect(card.canAct(player)).eq(true);
 
@@ -57,7 +57,7 @@ describe('ConvertHeat', function() {
     cast(card.action(player), undefined);
 
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.heat).eq(0);
+    expect(player.stock.heat).eq(0);
     expect(player.getTerraformRating()).eq(20);
   });
 });

@@ -8,8 +8,8 @@ describe('SupplyDrop', function() {
     const [/* game */, player] = testGame(1);
     const card = new SupplyDrop();
     cast(card.play(player), undefined);
-    expect(player.steel).to.eq(8);
-    expect(player.titanium).to.eq(3);
-    expect(player.plants).to.eq(3);
+    expect(player.stock.steel).to.eq(8);
+    expect(player.stock.titanium).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
   });
 });

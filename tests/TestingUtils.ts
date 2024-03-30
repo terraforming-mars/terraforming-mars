@@ -138,13 +138,13 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
   const turmoil = Turmoil.getTurmoil(player.game);
   turmoil.rulingParty = new Greens();
   PoliticalAgendas.setNextAgenda(turmoil, player.game);
-  player.megaCredits = initialMegacredits;
+  player.stock.megacredits = initialMegacredits;
   expect(cb(), 'Greens in power').is.true;
   turmoil.rulingParty = new Reds();
   PoliticalAgendas.setNextAgenda(turmoil, player.game);
-  player.megaCredits = initialMegacredits + passingDelta - 1;
+  player.stock.megacredits = initialMegacredits + passingDelta - 1;
   expect(cb(), 'Reds in power, not enough money').is.false;
-  player.megaCredits = initialMegacredits + passingDelta;
+  player.stock.megacredits = initialMegacredits + passingDelta;
   if (passingDelta > 0 && canAct === false) {
     expect(cb(), 'Reds in power, enough money').deep.eq({redsCost: passingDelta});
   } else {

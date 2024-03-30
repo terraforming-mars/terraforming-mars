@@ -36,9 +36,9 @@ describe('Wetlands', function() {
 
   // Can only play when two oceans are next to each other and you have 4 plants.
   it('Can play', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.plants = 4;
+    player.stock.plants = 4;
     addOcean(player, '15');
     expect(player.canPlay(card)).is.false;
 
@@ -46,15 +46,15 @@ describe('Wetlands', function() {
     expect(player.canPlay(card)).is.true;
     expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
 
-    player.plants = 3;
+    player.stock.plants = 3;
     expect(card.canPlay(player)).is.false;
   });
 
   // Same test as above, with Red City in the way
   it('Cannot play next to Red City', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.plants = 4;
+    player.stock.plants = 4;
     addOcean(player, '15');
     expect(player.canPlay(card)).is.false;
 
@@ -70,9 +70,9 @@ describe('Wetlands', function() {
 
   // If only available spaces are reserved, cannot play.
   it('Can play if spots are reserved', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.plants = 4;
+    player.stock.plants = 4;
     addOcean(player, '15');
     expect(player.canPlay(card)).is.false;
 
@@ -93,14 +93,14 @@ describe('Wetlands', function() {
   });
 
   it('play', function() {
-    player.plants = 7;
+    player.stock.plants = 7;
     addOcean(player, '15');
     addOcean(player, '16');
     expect(card.canPlay(player)).is.true;
     expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
 
     const action = card.play(player);
-    expect(player.plants).eq(3);
+    expect(player.stock.plants).eq(3);
 
     const selectSpace = cast(action, SelectSpace);
     expect(selectSpace.spaces.map(toSpaceId)).deep.eq(['09', '23']);
@@ -141,9 +141,9 @@ describe('Wetlands', function() {
     const space = game.board.getSpace('15');
     game.simpleAddTile(player, space, {tileType: TileType.WETLANDS});
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     addGreenery(player, '09');
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 
   it('Wetlands counts for city-related VP', function() {
@@ -158,7 +158,7 @@ describe('Wetlands', function() {
   });
 
   it('Wetlands works with land claim', function() {
-    player.plants = 7;
+    player.stock.plants = 7;
     addOcean(player, '15');
     addOcean(player, '16');
     const claimedSpace = game.board.getSpace('09');
@@ -168,7 +168,7 @@ describe('Wetlands', function() {
     expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
 
     const action = card.play(player);
-    expect(player.plants).eq(3);
+    expect(player.stock.plants).eq(3);
 
     const selectSpace = cast(action, SelectSpace);
     expect(selectSpace.spaces.map(toSpaceId)).deep.eq(['09', '23']);

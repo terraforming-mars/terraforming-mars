@@ -16,17 +16,17 @@ describe('TychoMagnetics', function() {
 
   it('Can not act if no energy resources available', function() {
     expect(card.canAct(player)).is.not.true;
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(card.canAct(player)).is.true;
   });
 
   it('Should act', function() {
-    player.energy = 5;
+    player.stock.energy = 5;
     expect(card.canAct(player)).is.true;
 
     const amount = cast(card.action(player), SelectAmount);
 
     amount.cb(3);
-    expect(player.energy).to.eq(2);
+    expect(player.stock.energy).to.eq(2);
   });
 });

@@ -58,7 +58,7 @@ export class CorporateBlackmail extends Card implements IProjectCard {
 
     return new SelectPlayer(this.targets(player), 'Select player to blackmail', 'blackmail')
       .andThen((blackmailedPlayer: IPlayer) => {
-        if (blackmailedPlayer.megaCredits < 10) {
+        if (blackmailedPlayer.stock.megacredits < 10) {
           corruptionConsequence(blackmailedPlayer);
           return undefined;
         } else {

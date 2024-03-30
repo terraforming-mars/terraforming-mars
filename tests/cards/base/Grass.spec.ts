@@ -25,6 +25,6 @@ describe('Grass', function() {
     card.play(player);
 
     expect(player.production.plants).to.eq(1);
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
   });
 });

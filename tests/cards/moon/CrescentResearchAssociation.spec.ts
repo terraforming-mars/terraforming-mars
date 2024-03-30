@@ -24,30 +24,30 @@ describe('CrescentResearchAssociation', () => {
     const predators = new Predators();
 
     // Additional card requirements.
-    player.titanium = 1;
+    player.stock.titanium = 1;
     setOxygenLevel(game, 14);
 
     player.cardsInHand = [mareNectarisMine, predators];
     player.setCorporationForTest(card);
 
     player.tagsForTest = {moon: 0};
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(player.getPlayableCardsForTest()).has.members([mareNectarisMine, predators]);
 
     player.tagsForTest = {moon: 0};
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
     expect(player.getPlayableCardsForTest()).is.empty;
 
     player.tagsForTest = {moon: 1};
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
     expect(player.getPlayableCardsForTest()).has.members([mareNectarisMine]);
 
     player.tagsForTest = {moon: 1};
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
     expect(player.getPlayableCardsForTest()).is.empty;
 
     player.tagsForTest = {moon: 2};
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
     expect(player.getPlayableCardsForTest()).has.members([mareNectarisMine]);
   });
 

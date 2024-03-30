@@ -22,7 +22,7 @@ describe('Vitor', function() {
 
   it('Should play', function() {
     cast(card.play(player), undefined);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Has initial action', function() {
@@ -42,18 +42,18 @@ describe('Vitor', function() {
 
     // Dust Seals has victory points
     card.onCardPlayed(player, new DustSeals());
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
 
     // Lava flows has none
     card.onCardPlayed(player, new LavaFlows());
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
 
     // Ants has dynamic victory points
     card.onCardPlayed(player, new Ants());
-    expect(player.megaCredits).to.eq(6);
+    expect(player.stock.megacredits).to.eq(6);
 
     // This card has negative dynamic victory points
     card.onCardPlayed(player, new AncientShipyards());
-    expect(player.megaCredits).to.eq(6);
+    expect(player.stock.megacredits).to.eq(6);
   });
 });

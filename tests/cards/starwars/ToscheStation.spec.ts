@@ -22,7 +22,7 @@ describe('ToscheStation', () => {
 
   it('Can act', () => {
     expect(card.canAct(player)).is.false;
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(card.canAct(player)).is.true;
   });
 
@@ -36,16 +36,16 @@ describe('ToscheStation', () => {
       expectedPlants: number,
     }) {
     it('' + idx, () => {
-      player.energy = testCase.energy;
-      player.plants = 0;
+      player.stock.energy = testCase.energy;
+      player.stock.plants = 0;
       const selectAmount = card.action(player);
 
       expect(selectAmount.max).eq(testCase.max ?? testCase.energy);
 
       selectAmount.cb(testCase.spend);
 
-      expect(player.energy).eq(testCase.expectedEnergy);
-      expect(player.plants).eq(testCase.expectedPlants);
+      expect(player.stock.energy).eq(testCase.expectedEnergy);
+      expect(player.stock.plants).eq(testCase.expectedPlants);
     });
   }
 

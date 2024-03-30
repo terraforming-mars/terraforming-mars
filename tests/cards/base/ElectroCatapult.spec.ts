@@ -41,18 +41,18 @@ describe('ElectroCatapult', () => {
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
   it('Should act', () => {
-    player.plants = 1;
-    player.steel = 1;
+    player.stock.plants = 1;
+    player.stock.steel = 1;
 
     const orOptions = cast(churnAction(card, player), OrOptions);
     expect(orOptions.options).has.lengthOf(2);
 
     orOptions.options[0].cb();
-    expect(player.plants).to.eq(0);
-    expect(player.megaCredits).to.eq(7);
+    expect(player.stock.plants).to.eq(0);
+    expect(player.stock.megacredits).to.eq(7);
 
     orOptions.options[1].cb();
-    expect(player.steel).to.eq(0);
-    expect(player.megaCredits).to.eq(14);
+    expect(player.stock.steel).to.eq(0);
+    expect(player.stock.megacredits).to.eq(14);
   });
 });

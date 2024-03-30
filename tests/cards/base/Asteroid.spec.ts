@@ -18,18 +18,18 @@ describe('Asteroid', function() {
   });
 
   it('Should play', function() {
-    player2.plants = 2;
+    player2.stock.plants = 2;
     card.play(player);
     runAllActions(game);
 
     const orOptions = cast(player.getWaitingFor(), OrOptions);
     orOptions.options[1].cb(); // do nothing
-    expect(player2.plants).to.eq(2);
+    expect(player2.stock.plants).to.eq(2);
 
     orOptions.options[0].cb(); // remove plants
-    expect(player2.plants).to.eq(0);
+    expect(player2.stock.plants).to.eq(0);
 
-    expect(player.titanium).to.eq(2);
+    expect(player.stock.titanium).to.eq(2);
     expect(game.getTemperature()).to.eq(-28);
   });
 });

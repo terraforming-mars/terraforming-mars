@@ -27,17 +27,17 @@ describe('Voltagon', () => {
   });
 
   it('canAct', () => {
-    player.energy = 7;
+    player.stock.energy = 7;
 
     expect(card.canAct(player)).is.false;
 
-    player.energy = 8;
+    player.stock.energy = 8;
 
     expect(card.canAct(player)).is.true;
   });
 
   it('action', () => {
-    player.energy = 16;
+    player.stock.energy = 16;
 
     cast(card.action(player), undefined);
     runAllActions(game);
@@ -46,23 +46,23 @@ describe('Voltagon', () => {
     expect(game.getOxygenLevel()).eq(0);
     cast(orOptions.options[0], SelectOption).cb(undefined);
 
-    expect(player.energy).eq(8);
+    expect(player.stock.energy).eq(8);
     expect(game.getOxygenLevel()).eq(1);
 
     expect(game.getVenusScaleLevel()).eq(0);
     cast(orOptions.options[1], SelectOption).cb(undefined);
 
-    expect(player.energy).eq(0);
+    expect(player.stock.energy).eq(0);
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
   it('onExcavate', () => {
     player.setCorporationForTest(card);
-    player.energy = 0;
+    player.stock.energy = 0;
     const spaces = UnderworldExpansion.excavatableSpaces(player);
     spaces[0].undergroundResources = 'nothing';
     UnderworldExpansion.excavate(player, spaces[0]);
 
-    expect(player.energy).eq(2);
+    expect(player.stock.energy).eq(2);
   });
 });

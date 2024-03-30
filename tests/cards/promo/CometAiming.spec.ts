@@ -27,11 +27,11 @@ describe('CometAiming', function() {
 
   it('Should act - single action choice, single target', function() {
     player.playedCards.push(card);
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    expect(player.titanium).to.eq(0);
+    expect(player.stock.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(1);
 
     card.action(player);
@@ -45,13 +45,13 @@ describe('CometAiming', function() {
     const card2 = new RotatorImpacts();
     player.playedCards.push(card, card2);
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     card.resourceCount = 1;
 
     const action = cast(card.action(player), OrOptions);
     action.options[1].cb([card2]);
     expect(card2.resourceCount).to.eq(1);
-    expect(player.titanium).to.eq(0);
+    expect(player.stock.titanium).to.eq(0);
   });
 
   it('Cannot spend resource to place ocean if oceans are maxed', function() {
@@ -60,12 +60,12 @@ describe('CometAiming', function() {
     maxOutOceans(player);
     expect(card.canAct(player)).is.not.true;
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
     expect(player.game.deferredActions).has.lengthOf(0);
-    expect(player.titanium).to.eq(0);
+    expect(player.stock.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(2);
   });
 });

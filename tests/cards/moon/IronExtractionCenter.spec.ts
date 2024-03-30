@@ -20,22 +20,22 @@ describe('IronExtractionCenter', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.titanium = 0;
-    player.megaCredits = card.cost;
+    player.stock.titanium = 0;
+    player.stock.megacredits = card.cost;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
     expect(player.production.steel).eq(0);
 
-    player.titanium = 3;
+    player.stock.titanium = 3;
     moonData.miningRate = 3;
 
     card.play(player);
 
-    expect(player.titanium).eq(2);
+    expect(player.stock.titanium).eq(2);
     expect(player.production.steel).eq(1);
 
 
@@ -43,7 +43,7 @@ describe('IronExtractionCenter', () => {
     moonData.miningRate = 4;
     card.play(player);
 
-    expect(player.titanium).eq(1);
+    expect(player.stock.titanium).eq(1);
     expect(player.production.steel).eq(3);
   });
 });

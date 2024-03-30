@@ -56,11 +56,11 @@ export class Ambient extends CorporationCard {
   }
 
   public canAct(player: IPlayer) {
-    return player.heat >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford({cost: 0, tr: {tr: 1}});
+    return player.stock.heat >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford({cost: 0, tr: {tr: 1}});
   }
 
   public action(player: IPlayer) {
-    player.heat -= 8;
+    player.stock.heat -= 8;
     player.increaseTerraformRating();
     // A hack that allows this action to be replayable.
     player.defer(() => {

@@ -41,7 +41,7 @@ describe('CorporateBlackmail', () => {
     player.underworldData.corruption = 3;
     player2.underworldData.corruption = 3;
     player3.underworldData.corruption = 1;
-    player3.megaCredits = 20;
+    player3.stock.megacredits = 20;
     player4.underworldData.corruption = 3;
     const selectPlayer = cast(card.play(player), SelectPlayer);
 
@@ -50,19 +50,19 @@ describe('CorporateBlackmail', () => {
 
   it('play, not enough M€', () => {
     player2.underworldData.corruption = 3;
-    player2.megaCredits = 9;
+    player2.stock.megacredits = 9;
 
     const selectPlayer = cast(card.play(player), SelectPlayer);
     cast(selectPlayer.cb(player2), undefined);
 
-    expect(player2.megaCredits).eq(9);
+    expect(player2.stock.megacredits).eq(9);
     expect(player2.underworldData.corruption).eq(1);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('play, choose M€', () => {
     player2.underworldData.corruption = 3;
-    player2.megaCredits = 11;
+    player2.stock.megacredits = 11;
 
     const selectPlayer = cast(card.play(player), SelectPlayer);
     cast(selectPlayer.cb(player2), undefined);
@@ -70,14 +70,14 @@ describe('CorporateBlackmail', () => {
     const orOptions = cast(player2.popWaitingFor(), OrOptions);
     orOptions.options[0].cb(undefined);
 
-    expect(player2.megaCredits).eq(1);
+    expect(player2.stock.megacredits).eq(1);
     expect(player2.underworldData.corruption).eq(3);
-    expect(player.megaCredits).eq(10);
+    expect(player.stock.megacredits).eq(10);
   });
 
   it('play, choose corruption', () => {
     player2.underworldData.corruption = 3;
-    player2.megaCredits = 11;
+    player2.stock.megacredits = 11;
 
     const selectPlayer = cast(card.play(player), SelectPlayer);
     cast(selectPlayer.cb(player2), undefined);
@@ -85,8 +85,8 @@ describe('CorporateBlackmail', () => {
     const orOptions = cast(player2.popWaitingFor(), OrOptions);
     orOptions.options[1].cb(undefined);
 
-    expect(player2.megaCredits).eq(11);
+    expect(player2.stock.megacredits).eq(11);
     expect(player2.underworldData.corruption).eq(1);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 });

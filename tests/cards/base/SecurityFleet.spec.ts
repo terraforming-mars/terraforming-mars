@@ -19,12 +19,12 @@ describe('SecurityFleet', function() {
 
   it('Should act', function() {
     player.playedCards.push(card);
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
     runAllActions(player.game);
-    expect(player.titanium).to.eq(0);
+    expect(player.stock.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(1);
   });
 });

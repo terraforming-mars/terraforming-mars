@@ -18,6 +18,6 @@ describe('UndergroundSettlement', () => {
 
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(space.excavator).eq(player);
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
   });
 });

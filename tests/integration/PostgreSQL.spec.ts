@@ -126,7 +126,7 @@ describeDatabaseSuite({
 
       await db.saveGame(game);
       await db.saveGame(game);
-      player.megaCredits = 105;
+      player.stock.megacredits = 105;
       await db.saveGame(game);
 
       expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
@@ -134,7 +134,7 @@ describeDatabaseSuite({
       expect(serializedv3.players[0].megaCredits).eq(105);
       expect(game.lastSaveId).eq(4);
 
-      player.megaCredits = 77;
+      player.stock.megacredits = 77;
       game.lastSaveId = 3;
       await db.saveGame(game);
       expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
@@ -282,7 +282,7 @@ describeDatabaseSuite({
       function takeAction(p: IPlayer) {
         // A do-nothing player input
         const simpleOption = new SelectOption('').andThen(() => {
-          player.megaCredits++;
+          player.stock.megacredits++;
           return undefined;
         });
         p.setWaitingFor(simpleOption, () => {
@@ -298,7 +298,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(1);
+      expect(player.stock.megacredits).eq(1);
       expect(player.actionsTakenThisRound).eq(1);
 
       // Player's second action
@@ -306,7 +306,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(2);
+      expect(player.stock.megacredits).eq(2);
       expect(player.actionsTakenThisRound).eq(2);
 
 
@@ -315,7 +315,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(3);
+      expect(player.stock.megacredits).eq(3);
       expect(player.actionsTakenThisRound).eq(3);
 
 
@@ -324,7 +324,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(4);
+      expect(player.stock.megacredits).eq(4);
       expect(player.actionsTakenThisRound).eq(4);
 
 
@@ -333,7 +333,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(5);
+      expect(player.stock.megacredits).eq(5);
       expect(player.actionsTakenThisRound).eq(5);
 
       // Trigger an undo
@@ -342,7 +342,7 @@ describeDatabaseSuite({
       const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);
       await db.awaitAllSaves();
       const revisedPlayer = newGame.getPlayerById(player.id);
-      expect(revisedPlayer.megaCredits).eq(4);
+      expect(revisedPlayer.stock.megacredits).eq(4);
       expect(revisedPlayer.actionsTakenThisRound).eq(4);
     });
 
@@ -363,7 +363,7 @@ describeDatabaseSuite({
       function takeAction(p: IPlayer) {
         // A do-nothing player input
         const simpleOption = new SelectOption('').andThen(() => {
-          player.megaCredits++;
+          player.stock.megacredits++;
           return undefined;
         });
         p.setWaitingFor(simpleOption, () => {
@@ -379,7 +379,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(1);
+      expect(player.stock.megacredits).eq(1);
       expect(player.actionsTakenThisRound).eq(1);
 
       // Player's second action
@@ -387,7 +387,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(2);
+      expect(player.stock.megacredits).eq(2);
       expect(player.actionsTakenThisRound).eq(2);
 
 
@@ -396,7 +396,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(3);
+      expect(player.stock.megacredits).eq(3);
       expect(player.actionsTakenThisRound).eq(3);
 
 
@@ -405,7 +405,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(4);
+      expect(player.stock.megacredits).eq(4);
       expect(player.actionsTakenThisRound).eq(4);
 
 
@@ -414,7 +414,7 @@ describeDatabaseSuite({
       player.process({type: 'option'});
 
       await db.awaitAllSaves();
-      expect(player.megaCredits).eq(5);
+      expect(player.stock.megacredits).eq(5);
       expect(player.actionsTakenThisRound).eq(5);
 
       // Trigger an undo
@@ -423,7 +423,7 @@ describeDatabaseSuite({
       const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);
       await db.awaitAllSaves();
       const revisedPlayer = newGame.getPlayerById(player.id);
-      expect(revisedPlayer.megaCredits).eq(4);
+      expect(revisedPlayer.stock.megacredits).eq(4);
       expect(revisedPlayer.actionsTakenThisRound).eq(4);
     });
   },

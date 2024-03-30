@@ -23,12 +23,12 @@ describe('HellasBoard', function() {
     expect(game.board.getSpace(SpaceName.HELLAS_OCEAN_TILE).tile).is.undefined;
 
     // Cannot afford
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     let availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
     expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
     // Can afford
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
     expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
   });
@@ -39,12 +39,12 @@ describe('HellasBoard', function() {
     const adjacentSpace = board.getAdjacentSpaces(oceanSpace)[0];
     adjacentSpace.adjacency = {bonus: [], cost: 3};
 
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     let availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
     expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
     // Can afford
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
     expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
   });

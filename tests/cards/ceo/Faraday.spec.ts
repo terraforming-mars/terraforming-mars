@@ -22,7 +22,7 @@ describe('Faraday', function() {
     [game, player] = testGame(1);
 
     player.popWaitingFor();
-    player.megaCredits = PLAYER_INITIALMC;
+    player.stock.megacredits = PLAYER_INITIALMC;
     player.playedCards.push(card);
   });
 
@@ -34,7 +34,7 @@ describe('Faraday', function() {
     runAllActions(player.game);
     cast(player.getWaitingFor(), undefined);
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC);
   });
 
   it('Can draw a card when reaching a multiple of 5 for a tag', function() {
@@ -51,7 +51,7 @@ describe('Faraday', function() {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
@@ -65,18 +65,18 @@ describe('Faraday', function() {
     orOptions.options[1].cb();
     runAllActions(game);
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC);
   });
 
   it('No prompt if player cannot afford to pay for card', function() {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
 
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(player.game);
     cast(player.getWaitingFor(), undefined);
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
   });
 
   it('Play a card with two of the same tag', function() {
@@ -87,7 +87,7 @@ describe('Faraday', function() {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
@@ -105,7 +105,7 @@ describe('Faraday', function() {
     runAllActions(game);
 
     expect(player.cardsInHand).has.length(2);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST - CARD_DRAW_COST);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST - CARD_DRAW_COST);
   });
 
   it('Play a card that puts two tags at 5 count, buy one', function() {
@@ -121,7 +121,7 @@ describe('Faraday', function() {
     runAllActions(game);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
   });
 
   it('Play a card that puts two tags at 5 count, buy none', function() {
@@ -134,7 +134,7 @@ describe('Faraday', function() {
     orOptions.options[1].cb();
     runAllActions(game);
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC);
   });
 
   it('Wild tags dont count', function() {
@@ -163,7 +163,7 @@ describe('Faraday', function() {
     runAllActions(player.game);
     cast(player.getWaitingFor(), undefined);
     expect(player.cardsInHand).has.length(0);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC);
   });
 
   it('Does trigger when activating Clone Tags (via CrewTraining)', function() {
@@ -183,7 +183,7 @@ describe('Faraday', function() {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     runAllActions(game);
-    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
+    expect(player.stock.megacredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand[0].tags.includes(Tag.EARTH)).is.true;
   });

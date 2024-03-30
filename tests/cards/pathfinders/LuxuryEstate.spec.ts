@@ -27,33 +27,33 @@ describe('LuxuryEstate', function() {
 
   it('play', function() {
     card.play(player);
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     addCity(player);
     card.play(player);
-    expect(player.titanium).eq(1);
+    expect(player.stock.titanium).eq(1);
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     addCity(player);
     card.play(player);
-    expect(player.titanium).eq(2);
+    expect(player.stock.titanium).eq(2);
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     addGreenery(player);
     card.play(player);
-    expect(player.titanium).eq(3);
+    expect(player.stock.titanium).eq(3);
 
     // Other player's cities don't count.
-    player.titanium = 0;
+    player.stock.titanium = 0;
     addCity(player2);
     card.play(player);
-    expect(player.titanium).eq(3);
+    expect(player.stock.titanium).eq(3);
 
     // Other player's greeneries don't count.
-    player.titanium = 0;
+    player.stock.titanium = 0;
     addGreenery(player2);
     card.play(player);
-    expect(player.titanium).eq(3);
+    expect(player.stock.titanium).eq(3);
   });
 });

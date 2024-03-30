@@ -21,28 +21,28 @@ describe('InventorsGuild', function() {
   });
 
   it('Should act', function() {
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     const selectCard = cast(churnAction(card, player), SelectCard);
     selectCard.cb([]);
 
     expect(game.projectDeck.discardPile).has.lengthOf(1);
-    expect(player.megaCredits).to.eq(3);
-    player.megaCredits = 3;
+    expect(player.stock.megacredits).to.eq(3);
+    player.stock.megacredits = 3;
 
     selectCard.cb([selectCard.cards[0]]);
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
   it('Cannot buy card if cannot pay', function() {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     const selectCard = cast(churnAction(card, player), SelectCard);
     expect(selectCard.config.max).to.eq(0);
     selectCard.cb([]);
     expect(game.deferredActions).has.lengthOf(0);
     expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.cardsInHand).has.lengthOf(0);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 });

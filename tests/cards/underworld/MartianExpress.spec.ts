@@ -70,7 +70,7 @@ describe('MartianExpress', () => {
     card.resourceCount = 7;
     cast(card.action(player), undefined);
 
-    expect(player.megaCredits).eq(7);
+    expect(player.stock.megacredits).eq(7);
     expect(card.resourceCount).eq(0);
   });
 });

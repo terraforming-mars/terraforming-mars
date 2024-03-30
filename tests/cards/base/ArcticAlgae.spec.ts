@@ -23,11 +23,11 @@ describe('ArcticAlgae', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.plants).to.eq(1);
+    expect(player.stock.plants).to.eq(1);
     player.playedCards.push(card);
 
     addOcean(player2);
     runNextAction(game);
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
   });
 });

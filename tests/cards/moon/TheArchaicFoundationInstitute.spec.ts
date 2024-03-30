@@ -61,7 +61,7 @@ describe('TheArchaicFoundationInstitute', () => {
 
   it('Cannot automatically deduct when player cannot afford reds cost', () => {
     expect(player.getTerraformRating()).eq(14);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     card.resourceCount = 2;
 
     setRulingParty(game, PartyName.REDS);
@@ -76,7 +76,7 @@ describe('TheArchaicFoundationInstitute', () => {
 
   it('When reds are in power, can autodeduct with enough MC.', () => {
     expect(player.getTerraformRating()).eq(14);
-    player.megaCredits = 4;
+    player.stock.megacredits = 4;
     card.resourceCount = 2;
 
     setRulingParty(game, PartyName.REDS);
@@ -86,11 +86,11 @@ describe('TheArchaicFoundationInstitute', () => {
     expect(card.resourceCount).eq(1);
     runAllActions(game);
     expect(player.getTerraformRating()).eq(15);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
   });
 
   it('If there are more than 3, you can take action.', () => {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     card.resourceCount = 8;
 
     expect(card.canAct(player)).is.true;
@@ -102,23 +102,23 @@ describe('TheArchaicFoundationInstitute', () => {
   });
 
   it('Reds in effect, 8 resources, enough MC to raise once.', () => {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     card.resourceCount = 8;
     setRulingParty(game, PartyName.REDS);
 
     expect(card.canAct(player)).is.false;
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canAct(player)).is.true;
     cast(card.action(player), undefined);
     runAllActions(game);
 
     expect(card.resourceCount).eq(5);
     expect(player.getTerraformRating()).eq(15);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('Reds in effect, 8 resources, enough money.', () => {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     card.resourceCount = 8;
     setRulingParty(game, PartyName.REDS);
 
@@ -128,6 +128,6 @@ describe('TheArchaicFoundationInstitute', () => {
 
     expect(card.resourceCount).eq(2);
     expect(player.getTerraformRating()).eq(16);
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
   });
 });

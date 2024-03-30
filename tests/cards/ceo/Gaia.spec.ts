@@ -40,9 +40,9 @@ describe('Gaia', function() {
     addCity(player3, adjacentSpaces[1].id);
 
     // Gain adjacency bonuses of all players' tiles
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     card.action(player);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('Takes action, does not gain bonuses from Oceans', function() {
@@ -56,9 +56,9 @@ describe('Gaia', function() {
     adjacentSpace.tile = {tileType: TileType.OCEAN};
 
     // Take action, do not gain MC from Ocean adjacency
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     card.action(player);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Takes action, Networker Milestone does not get a benefit', function() {
@@ -90,10 +90,10 @@ describe('Gaia', function() {
     addGreenery(player2, adjacentSpaces[0].id);
     addCity(player3, adjacentSpaces[1].id);
 
-    const oldPlayer2MC = player2.megaCredits;
+    const oldPlayer2MC = player2.stock.megacredits;
     // Gain adjacency bonuses of all players' tiles
     card.action(player);
-    expect(player2.megaCredits).eq(oldPlayer2MC);
+    expect(player2.stock.megacredits).eq(oldPlayer2MC);
   });
 
 

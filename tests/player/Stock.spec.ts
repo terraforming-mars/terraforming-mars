@@ -59,12 +59,12 @@ describe('Stock', function() {
       heat: 0,
     });
 
-    player.megaCredits = 20;
-    player.steel = 19;
-    player.titanium = 18;
-    player.plants = 17;
-    player.energy = 16;
-    player.heat = 15;
+    player.stock.megacredits = 20;
+    player.stock.steel = 19;
+    player.stock.titanium = 18;
+    player.stock.plants = 17;
+    player.stock.energy = 16;
+    player.stock.heat = 15;
 
     player.stock.addUnits(Units.of({megacredits: 10}));
     expect(player.stock.asUnits()).deep.eq({
@@ -139,12 +139,12 @@ describe('Stock', function() {
       heat: 0,
     });
 
-    player.megaCredits = 20;
-    player.steel = 19;
-    player.titanium = 18;
-    player.plants = 17;
-    player.energy = 16;
-    player.heat = 15;
+    player.stock.megacredits = 20;
+    player.stock.steel = 19;
+    player.stock.titanium = 18;
+    player.stock.plants = 17;
+    player.stock.energy = 16;
+    player.stock.heat = 15;
 
     player.stock.deductUnits(Units.of({megacredits: 10}));
     expect(player.stock.asUnits()).deep.eq({
@@ -210,22 +210,22 @@ describe('Stock', function() {
   it('adds resources', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player);
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     // adds any positive amount
     player.stock.add(Resource.MEGACREDITS, 12);
-    expect(player.megaCredits).eq(22);
+    expect(player.stock.megacredits).eq(22);
     // removes more than we have
     player.stock.add(Resource.MEGACREDITS, -23);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     // adds any positive amount
     player.stock.add(Resource.MEGACREDITS, 5);
-    expect(player.megaCredits).eq(5);
+    expect(player.stock.megacredits).eq(5);
     // removes less than we have
     player.stock.add(Resource.MEGACREDITS, -4);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
     // makes no change
     player.stock.add(Resource.MEGACREDITS, 0);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
   });
 
   it('addResource logging', () => {
@@ -248,7 +248,7 @@ describe('Stock', function() {
     const player2 = new Player('red', Color.RED, false, 0, 'p-red');
     const game = Game.newInstance('gameid', [player, player2], player);
 
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     player.stock.add(Resource.MEGACREDITS, -5, {log: true, from: player2});
 
     const log = game.gameLog;
@@ -271,7 +271,7 @@ describe('Stock', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player);
 
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     const warn = console.warn;
     const consoleLog: Array<Array<any>> = [];
     console.warn = (message?: any, ...optionalParams: any[]) => {

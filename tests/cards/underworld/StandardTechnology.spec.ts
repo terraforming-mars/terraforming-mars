@@ -21,30 +21,30 @@ describe('StandardTechnology', function() {
     const asteroidStandardProject = new AsteroidStandardProject();
 
     // First play is standard cost.
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
     expect(asteroidStandardProject.canAct(player)).eq(false);
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(asteroidStandardProject.canAct(player)).eq(true);
 
     asteroidStandardProject.action(player);
     runAllActions(game);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     // Second play is discounted
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     expect(asteroidStandardProject.canAct(player)).eq(false);
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(asteroidStandardProject.canAct(player)).eq(true);
 
     asteroidStandardProject.action(player);
     runAllActions(game);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     // Next generation
     forceGenerationEnd(game);
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
     expect(asteroidStandardProject.canAct(player)).eq(false);
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(asteroidStandardProject.canAct(player)).eq(true);
   });
 });

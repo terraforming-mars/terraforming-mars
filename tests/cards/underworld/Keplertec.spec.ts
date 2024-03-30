@@ -16,7 +16,7 @@ describe('Keplertec', () => {
 
     cast(card.play(player), undefined);
 
-    expect(player.titanium).eq(3);
+    expect(player.stock.titanium).eq(3);
     expect(player.production.titanium).eq(1);
   });
 
@@ -26,7 +26,7 @@ describe('Keplertec', () => {
     player.playedCards = [card];
 
     expect(card.canAct(player)).is.false;
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(card.canAct(player)).is.true;
   });
 
@@ -36,7 +36,7 @@ describe('Keplertec', () => {
 
     const personalSpaceCruiser = new PersonalSpacecruiser();
     player.playedCards = [card, personalSpaceCruiser, new Tardigrades()];
-    player.titanium = 1;
+    player.stock.titanium = 1;
     cast(card.action(player), undefined);
     runAllActions(game);
 
@@ -47,7 +47,7 @@ describe('Keplertec', () => {
 
     expect(personalSpaceCruiser.resourceCount).eq(1);
     expect(card.resourceCount).eq(0);
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
   });
 
   it('effect', () => {

@@ -47,16 +47,16 @@ describe('Odyssey', () => {
     const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 8});
     player.playedCards = [expensiveEvent];
     expect(odyssey.canAct(player)).is.false;
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(odyssey.canAct(player)).is.false;
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     expect(odyssey.canAct(player)).is.true;
   });
 
   it('cannot act - cannot meet requirements', () => {
     // Requires +2C temperature.
     const event = new IceCapMelting();
-    player.megaCredits = event.cost;
+    player.stock.megacredits = event.cost;
     player.playedCards = [event];
     expect(odyssey.canAct(player)).is.false;
     setTemperature(game, 0);
@@ -66,7 +66,7 @@ describe('Odyssey', () => {
   });
 
   it('can act', () => {
-    player.megaCredits = 50;
+    player.stock.megacredits = 50;
     expect(odyssey.canAct(player)).is.false;
     const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 17});
     const nonEvent = fakeCard({type: CardType.ACTIVE, cost: 2});
@@ -87,11 +87,11 @@ describe('Odyssey', () => {
 
     expect(selectProjectCardToPlay.cards).is.empty;
 
-    player.megaCredits = 4;
+    player.stock.megacredits = 4;
     selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectProjectCardToPlay.cards).has.members([inventionContest]);
 
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectProjectCardToPlay.cards).has.members([importOfAdvancedGHG, inventionContest]);
 
@@ -104,25 +104,25 @@ describe('Odyssey', () => {
     expect(player.production.heat).eq(2);
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
     expect(player.playedCards).has.members([inventionContest]);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('action triggers related effects', () => {
     const importOfAdvancedGHG = new ImportOfAdvancedGHG();
     const mediaGroup = new MediaGroup();
-    player.megaCredits = 50;
+    player.stock.megacredits = 50;
 
     player.playedCards = [importOfAdvancedGHG, mediaGroup];
     const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
 
     expect(player.production.heat).eq(0);
-    expect(player.megaCredits).eq(50);
+    expect(player.stock.megacredits).eq(50);
 
     selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: 9});
     runAllActions(game);
 
     expect(player.production.heat).eq(2);
-    expect(player.megaCredits).eq(44); // 50 - 9 + 3 = 44
+    expect(player.stock.megacredits).eq(44); // 50 - 9 + 3 = 44
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
     expect(player.playedCards).has.members([mediaGroup]);
   });
@@ -203,12 +203,12 @@ describe('Odyssey', () => {
 
     // Not enough tags, because the event does not count.
     diversity.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
 
     // Now there will be enough tags, with the event.
     player.setCorporationForTest(odyssey);
     diversity.resolve(game, turmoil);
 
-    expect(player.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
   });
 });

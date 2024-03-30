@@ -6,9 +6,9 @@ export class Miner implements IAward {
   public readonly description = 'Have the most steel and titanium';
   public getScore(player: IPlayer): number {
     if (player.game.isDoneWithFinalProduction()) {
-      return player.steel + player.titanium;
+      return player.stock.steel + player.stock.titanium;
     } else {
-      return player.steel + player.production.steel + player.titanium + player.production.titanium;
+      return player.stock.steel + player.production.steel + player.stock.titanium + player.production.titanium;
     }
   }
 }

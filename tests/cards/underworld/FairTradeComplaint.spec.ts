@@ -39,7 +39,7 @@ describe('FairTradeComplaint', function() {
 
   for (const run of resolveTests) {
     it(`handSize: ${run.handSize}, influence: ${run.influence}`, () => {
-      player.megaCredits = run.mc;
+      player.stock.megacredits = run.mc;
       turmoil.addInfluenceBonus(player, run.influence);
       for (let i = 0; i < run.handSize; i++) {
         player.cardsInHand.push(fakeCard());
@@ -48,7 +48,7 @@ describe('FairTradeComplaint', function() {
       card.resolve(game, turmoil);
 
       expect(player.cardsInHand).has.length(run.expect.handSize);
-      expect(player.megaCredits).eq(run.expect.mc);
+      expect(player.stock.megacredits).eq(run.expect.mc);
     });
   }
 });

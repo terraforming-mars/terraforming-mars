@@ -41,7 +41,7 @@ describe('OpenCity', function() {
 
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(4);
-    expect(player.plants).to.eq(2);
+    expect(player.stock.plants).to.eq(2);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

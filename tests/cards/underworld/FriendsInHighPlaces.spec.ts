@@ -41,7 +41,7 @@ describe('FriendsInHighPlaces', () => {
     it('pay for earth card ' + JSON.stringify(run), () => {
       // Large Convoy costs 36.
       const largeConvoy = new LargeConvoy();
-      player.megaCredits = run.mc;
+      player.stock.megacredits = run.mc;
       player.underworldData.corruption = run.corruption;
       expect(player.canPlay(largeConvoy)).eq(run.expected);
     });
@@ -50,9 +50,9 @@ describe('FriendsInHighPlaces', () => {
   it('does not work with non-earth cards ', () => {
     // Protected Valley costs 23.
     const protectedValley = new ProtectedValley();
-    player.megaCredits = 23;
+    player.stock.megacredits = 23;
     expect(player.canPlay(protectedValley)).is.true;
-    player.megaCredits = 22;
+    player.stock.megacredits = 22;
     expect(player.canPlay(protectedValley)).is.false;
     player.underworldData.corruption = 1;
     expect(player.canPlay(protectedValley)).is.false;
@@ -61,7 +61,7 @@ describe('FriendsInHighPlaces', () => {
   it('does not work without Friends in High Places', () => {
     // Large Convoy costs 36.
     const largeConvoy = new LargeConvoy();
-    player.megaCredits = 30;
+    player.stock.megacredits = 30;
     player.underworldData.corruption = 1;
     expect(player.canPlay(largeConvoy)).eq(true);
     player.playedCards = [];

@@ -20,15 +20,15 @@ describe('EcoSabotage', function() {
     turmoil.dominantParty.partyLeader = player2;
     turmoil.dominantParty.delegates.add(player2);
 
-    player.plants = 10;
-    player2.plants = 10;
+    player.stock.plants = 10;
+    player2.stock.plants = 10;
 
     expect(turmoil.getPlayerInfluence(player)).eq(0);
     expect(turmoil.getPlayerInfluence(player2)).eq(2);
 
     card.resolve(game, turmoil);
 
-    expect(player.plants).to.eq(3);
-    expect(player2.plants).to.eq(5);
+    expect(player.stock.plants).to.eq(3);
+    expect(player2.stock.plants).to.eq(5);
   });
 });

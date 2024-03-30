@@ -10,11 +10,11 @@ describe('PrivateMilitaryContractor', () => {
     const card = new PrivateMilitaryContractor();
     const [/* game */, player] = testGame(2, {underworldExpansion: true});
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
 
     expect(card.canAct(player)).is.false;
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     expect(card.canAct(player)).is.true;
   });
@@ -22,11 +22,11 @@ describe('PrivateMilitaryContractor', () => {
   it('action', () => {
     const card = new PrivateMilitaryContractor();
     const [game, player] = testGame(2, {underworldExpansion: true});
-    player.titanium = 2;
+    player.stock.titanium = 2;
     cast(card.action(player), undefined);
     runAllActions(game);
 
-    expect(player.titanium).eq(1);
+    expect(player.stock.titanium).eq(1);
     expect(card.resourceCount).eq(1);
   });
 });

@@ -25,17 +25,17 @@ describe('VastitasBorealisBoard', function() {
   it('Grants temperature bonus', () => {
     const space = board.getSpace(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
 
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).does.not.include(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
 
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).includes(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
     expect(game.getTemperature()).eq(-30);
 
     game.addTile(player, space, {tileType: TileType.CITY});
     runAllActions(game);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(game.getTemperature()).eq(-28);
   });
 });

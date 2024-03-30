@@ -24,7 +24,7 @@ describe('Floyd', function() {
   it('Takes action', function() {
     player.playedCards.push(card);
     game.generation = 6;
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
 
     const asteroidMining = new AsteroidMining();
     expect(card.canAct(player)).is.false;

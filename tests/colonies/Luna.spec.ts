@@ -25,8 +25,8 @@ describe('Luna', function() {
 
   it('Should trade', function() {
     luna.trade(player);
-    expect(player.megaCredits).to.eq(2);
-    expect(player2.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(2);
+    expect(player2.stock.megacredits).to.eq(0);
   });
 
   it('Should give trade bonus', function() {
@@ -37,7 +37,7 @@ describe('Luna', function() {
 
     expect(player.production.megacredits).to.eq(2);
     expect(player2.production.megacredits).to.eq(0);
-    expect(player.megaCredits).to.eq(2);
-    expect(player2.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
+    expect(player2.stock.megacredits).to.eq(2);
   });
 });

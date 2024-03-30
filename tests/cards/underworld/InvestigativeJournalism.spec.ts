@@ -40,7 +40,7 @@ describe('InvestigativeJournalism', () => {
       const card = new InvestigativeJournalism();
       const [/* game */, player, player2] = testGame(2, {underworldExpansion: true});
 
-      player.megaCredits = run.megacredits;
+      player.stock.megacredits = run.megacredits;
       player.underworldData.corruption = run.corruptions[0];
       player2.underworldData.corruption = run.corruptions[1];
 
@@ -60,7 +60,7 @@ describe('InvestigativeJournalism', () => {
       const card = new InvestigativeJournalism();
       const [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
 
-      player.megaCredits = 5;
+      player.stock.megacredits = 5;
       player.underworldData.corruption = run.corruptions[0];
       player2.underworldData.corruption = run.corruptions[1];
       player3.underworldData.corruption = run.corruptions[2];
@@ -68,7 +68,7 @@ describe('InvestigativeJournalism', () => {
 
       card.action(player);
       runAllActions(game);
-      expect(player.megaCredits).eq(0);
+      expect(player.stock.megacredits).eq(0);
 
       const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
 

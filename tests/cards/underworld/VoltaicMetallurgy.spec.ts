@@ -33,7 +33,7 @@ describe('VoltaicMetallurgy', () => {
       const [/* game */, player] = testGame(1);
 
       player.tagsForTest = {power: run.powerTags};
-      player.steel = run.steel;
+      player.stock.steel = run.steel;
       expect(card.canAct(player)).eq(run.canPlay);
     });
   }
@@ -48,12 +48,12 @@ describe('VoltaicMetallurgy', () => {
       const [/* game */, player] = testGame(1);
 
       player.tagsForTest = {power: run.powerTags};
-      player.steel = run.steel;
+      player.stock.steel = run.steel;
       const selectAmount = cast(card.action(player), SelectAmount);
       expect(selectAmount.max).eq(run.expected.max);
       selectAmount.cb(run.amount);
-      expect(player.steel).eq(run.expected.steel);
-      expect(player.titanium).eq(run.expected.titanium);
+      expect(player.stock.steel).eq(run.expected.steel);
+      expect(player.stock.titanium).eq(run.expected.titanium);
     });
   }
 });

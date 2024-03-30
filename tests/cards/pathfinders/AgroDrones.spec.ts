@@ -25,36 +25,36 @@ describe('AgroDrones', function() {
   });
 
   it('Can act', function() {
-    player.steel = 0;
-    player.energy = 0;
+    player.stock.steel = 0;
+    player.stock.energy = 0;
 
     expect(card.canAct(player)).is.false;
 
-    player.steel = 0;
-    player.energy = 1;
+    player.stock.steel = 0;
+    player.stock.energy = 1;
 
     expect(card.canAct(player)).is.false;
 
-    player.steel = 1;
-    player.energy = 0;
+    player.stock.steel = 1;
+    player.stock.energy = 0;
 
     expect(card.canAct(player)).is.false;
 
-    player.steel = 1;
-    player.energy = 1;
+    player.stock.steel = 1;
+    player.stock.energy = 1;
 
     expect(card.canAct(player)).is.true;
   });
 
   it('act', function() {
-    player.steel = 1;
-    player.energy = 1;
-    player.plants = 0;
+    player.stock.steel = 1;
+    player.stock.energy = 1;
+    player.stock.plants = 0;
 
     card.action(player);
 
-    expect(player.steel).eq(0);
-    expect(player.energy).eq(0);
-    expect(player.plants).eq(3);
+    expect(player.stock.steel).eq(0);
+    expect(player.stock.energy).eq(0);
+    expect(player.stock.plants).eq(3);
   });
 });

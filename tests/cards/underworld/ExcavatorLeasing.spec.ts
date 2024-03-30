@@ -23,7 +23,7 @@ describe('ExcavatorLeasing', () => {
   });
 
   it('can act', () => {
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(standardProject.canAct(player)).is.false;
     player.playedCards.push(card);
     expect(standardProject.canAct(player)).is.true;
@@ -31,7 +31,7 @@ describe('ExcavatorLeasing', () => {
 
   it('action', () => {
     player.playedCards.push(card);
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
 
     standardProject.action(player);
     runAllActions(game);
@@ -47,7 +47,7 @@ describe('ExcavatorLeasing', () => {
 
   it('action - other player', () => {
     player.playedCards.push(card);
-    player2.megaCredits = 6;
+    player2.stock.megacredits = 6;
 
     standardProject.action(player2);
     runAllActions(game);

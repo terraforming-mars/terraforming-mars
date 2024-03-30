@@ -28,7 +28,7 @@ describe('Algae', function() {
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.plants).to.eq(1);
+    expect(player.stock.plants).to.eq(1);
     expect(player.production.plants).to.eq(2);
   });
 });

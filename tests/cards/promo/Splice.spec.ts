@@ -35,7 +35,7 @@ describe('Splice', function() {
 
     orOptions.cb(undefined);
     expect(card2.resourceCount).to.eq(1);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('Should play with multiple microbe tags', function() {
@@ -50,8 +50,8 @@ describe('Splice', function() {
 
     const action = card.onCardPlayed(player2, card2);
     cast(action, undefined);
-    expect(player.megaCredits).to.eq(4);
-    expect(player2.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
+    expect(player2.stock.megacredits).to.eq(4);
   });
 
   it('Should grant Recyclon a Microbe or 2MC', function() {
@@ -69,7 +69,7 @@ describe('Splice', function() {
 
     // Default resource on Recyclon and player2's MC
     expect(card2.resourceCount).to.eq(1);
-    expect(player2.megaCredits).to.eq(38);
+    expect(player2.stock.megacredits).to.eq(38);
 
     // Player 2 should have the option to pick a microbe or 2 MC
     const pi3 = cast(player2.getWaitingFor(), OrOptions);
@@ -83,6 +83,6 @@ describe('Splice', function() {
 
     // Pick 2 MC
     pi3.options[1].cb();
-    expect(player2.megaCredits).to.eq(40);
+    expect(player2.stock.megacredits).to.eq(40);
   });
 });

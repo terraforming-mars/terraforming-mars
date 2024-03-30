@@ -42,7 +42,7 @@ export class LawSuit extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     return new SelectPlayer(this.targets(player), 'Select player to sue (steal 3 M€ from)', 'Steal M€')
       .andThen((suedPlayer: IPlayer) => {
-        const amount = Math.min(3, suedPlayer.megaCredits);
+        const amount = Math.min(3, suedPlayer.stock.megacredits);
         if (amount === 0) {
           player.game.log('${0} sued ${1} who had 0 MC.', (b) => b.player(player).player(suedPlayer));
         }

@@ -40,11 +40,11 @@ export class NewVenice extends Card implements IProjectCard {
 
   // TODO(kberg): use reserveUnits for plants.
   public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.plants >= 2;
+    return player.stock.plants >= 2;
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.plants -= 2;
+    player.stock.plants -= 2;
     return undefined;
   }
 }

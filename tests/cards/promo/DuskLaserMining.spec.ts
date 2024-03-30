@@ -32,6 +32,6 @@ describe('DuskLaserMining', function() {
     card.play(player);
     expect(player.production.energy).to.eq(0);
     expect(player.production.titanium).to.eq(1);
-    expect(player.titanium).to.eq(4);
+    expect(player.stock.titanium).to.eq(4);
   });
 });

@@ -27,9 +27,9 @@ describe('ParadigmBreakdown', function() {
     const dustSeals = new DustSeals();
     const powerPlant = new PowerPlant();
 
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     player.cardsInHand.push(asteroid, dustSeals, powerPlant);
-    player2.megaCredits = 10;
+    player2.stock.megacredits = 10;
     player2.cardsInHand.push(dustSeals);
 
     card.resolve(game, turmoil);
@@ -42,8 +42,8 @@ describe('ParadigmBreakdown', function() {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0]).to.eq(dustSeals);
-    expect(player.megaCredits).to.eq(12);
+    expect(player.stock.megacredits).to.eq(12);
     expect(player2.cardsInHand).has.lengthOf(0);
-    expect(player2.megaCredits).to.eq(16);
+    expect(player2.stock.megacredits).to.eq(16);
   });
 });

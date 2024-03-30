@@ -26,7 +26,7 @@ describe('MooncrateConvoysToMars', () => {
 
   it('can play', () => {
     player1.cardsInHand = [card];
-    player1.megaCredits = card.cost;
+    player1.stock.megacredits = card.cost;
 
     game.turmoil!.rulingParty = new MarsFirst();
     expect(player1.getPlayableCardsForTest()).does.include(card);
@@ -38,12 +38,12 @@ describe('MooncrateConvoysToMars', () => {
   it('play', () => {
     expect(moonData.logisticRate).eq(0);
 
-    player1.steel = 5;
-    player1.megaCredits = 0;
-    player2.steel = 0;
-    player2.megaCredits = 0;
-    player3.steel = 3;
-    player3.megaCredits = 0;
+    player1.stock.steel = 5;
+    player1.stock.megacredits = 0;
+    player2.stock.steel = 0;
+    player2.stock.megacredits = 0;
+    player3.stock.steel = 3;
+    player3.stock.megacredits = 0;
 
     card.play(player1);
 
@@ -52,8 +52,8 @@ describe('MooncrateConvoysToMars', () => {
     const firstSale = cast(game.deferredActions.pop()!.execute(), SelectAmount);
     expect(firstSale.max).eq(5);
     firstSale.cb(2);
-    expect(player1.steel).eq(3);
-    expect(player1.megaCredits).eq(6);
+    expect(player1.stock.steel).eq(3);
+    expect(player1.stock.megacredits).eq(6);
 
     const secondSale = game.deferredActions.pop()!.execute();
     expect(secondSale).is.undefined;

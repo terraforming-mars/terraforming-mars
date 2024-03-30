@@ -50,7 +50,7 @@ describe('Asimov', function() {
     const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb();
     expect(card.isDisabled).is.true;
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     forceGenerationEnd(game);
     expect(card.canAct(player)).is.false;

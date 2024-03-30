@@ -46,8 +46,8 @@ export class MonsInsurance extends CorporationCard {
   // When `insured` is undefined, it's the neutral player.
   public payDebt(player: IPlayer, claimant : IPlayer | undefined) {
     if (player !== claimant) {
-      const retribution = Math.min(player.megaCredits, 3);
-      if (claimant) claimant.megaCredits += retribution;
+      const retribution = Math.min(player.stock.megacredits, 3);
+      if (claimant) claimant.stock.megacredits += retribution;
       player.stock.deduct(Resource.MEGACREDITS, retribution);
       if (retribution > 0) {
         if (claimant !== undefined) {

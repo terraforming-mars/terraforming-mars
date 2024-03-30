@@ -23,14 +23,14 @@ describe('LaborTrafficking', function() {
     const greeneryStandardProject = new GreeneryStandardProject();
 
     // First play is discounted cost.
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(asteroidStandardProject.canAct(player)).eq(false);
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     expect(asteroidStandardProject.canAct(player)).eq(true);
 
-    player.megaCredits = 16;
+    player.stock.megacredits = 16;
     expect(greeneryStandardProject.canAct(player)).eq(false);
-    player.megaCredits = 17;
+    player.stock.megacredits = 17;
     expect(greeneryStandardProject.canAct(player)).eq(true);
 
     // Take an action.
@@ -38,24 +38,24 @@ describe('LaborTrafficking', function() {
     runAllActions(game);
 
     // Second play is standard cost
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
     expect(asteroidStandardProject.canAct(player)).eq(false);
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(asteroidStandardProject.canAct(player)).eq(true);
 
     asteroidStandardProject.action(player);
     runAllActions(game);
 
-    player.megaCredits = 22;
+    player.stock.megacredits = 22;
     expect(greeneryStandardProject.canAct(player)).eq(false);
-    player.megaCredits = 23;
+    player.stock.megacredits = 23;
     expect(greeneryStandardProject.canAct(player)).eq(true);
 
     // Next generation
     forceGenerationEnd(game);
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(asteroidStandardProject.canAct(player)).eq(false);
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     expect(asteroidStandardProject.canAct(player)).eq(true);
   });
 });

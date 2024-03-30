@@ -13,7 +13,7 @@ describe('FieldCappedCity', function() {
     runAllActions(player.game);
 
     UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
     expect(player.production.energy).to.eq(1);
     expect(player.production.megacredits).to.eq(2);
   });

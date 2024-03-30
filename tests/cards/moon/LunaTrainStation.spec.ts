@@ -23,30 +23,30 @@ describe('LunaTrainStation', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.steel = 2;
+    player.stock.steel = 2;
     moonData.logisticRate = 5;
     expect(player.getPlayableCardsForTest()).does.include(card);
 
-    player.steel = 2;
+    player.stock.steel = 2;
     moonData.logisticRate = 4;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.steel = 1;
+    player.stock.steel = 1;
     moonData.logisticRate = 5;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {
-    player.steel = 3;
+    player.stock.steel = 3;
     expect(player.production.steel).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
 
-    expect(player.steel).eq(1);
+    expect(player.stock.steel).eq(1);
     expect(player.production.megacredits).eq(4);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.logisticRate).eq(1);

@@ -45,8 +45,8 @@ describe('Leavitt', function() {
     leavitt.addColony(player2);
     leavitt.trackPosition = 4;
     leavitt.trade(player);
-    player.megaCredits = 5;
-    player2.megaCredits = 5;
+    player.stock.megacredits = 5;
+    player2.stock.megacredits = 5;
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard);
 
@@ -67,8 +67,8 @@ describe('Leavitt', function() {
 
     runAllActions(game);
 
-    expect(player2.megaCredits).eq(2);
-    expect(player.megaCredits).eq(5);
+    expect(player2.stock.megacredits).eq(2);
+    expect(player.stock.megacredits).eq(5);
     expect(player2.cardsInHand).deep.eq([selectCard2.cards[0]]);
   });
 
@@ -76,8 +76,8 @@ describe('Leavitt', function() {
     leavitt.addColony(player2);
     leavitt.trackPosition = 4;
     leavitt.trade(player);
-    player.megaCredits = 5;
-    player2.megaCredits = 1;
+    player.stock.megacredits = 5;
+    player2.stock.megacredits = 1;
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard);
 
@@ -100,8 +100,8 @@ describe('Leavitt', function() {
 
     runAllActions(game);
 
-    expect(player2.megaCredits).eq(1);
-    expect(player.megaCredits).eq(5);
+    expect(player2.stock.megacredits).eq(1);
+    expect(player.stock.megacredits).eq(5);
     expect(player2.cardsInHand).is.empty;
   });
 

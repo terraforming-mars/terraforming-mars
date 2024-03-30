@@ -19,7 +19,7 @@ describe('TerralabsResearch', function() {
     pi.cb(undefined);
 
     // 14 starting MC - 1 for each card select at the start (total: 2)
-    expect(player.megaCredits).to.eq(12);
+    expect(player.stock.megacredits).to.eq(12);
     // 14 Solo TR - 1
     expect(player.getTerraformRating()).to.eq(13);
 
@@ -29,7 +29,7 @@ describe('TerralabsResearch', function() {
     const action = cast(player.popWaitingFor(), SelectCard);
     action.cb([action.cards[0]]);
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(11);
+    expect(player.stock.megacredits).to.eq(11);
     expect(player.cardsInHand).has.lengthOf(3);
   });
 });

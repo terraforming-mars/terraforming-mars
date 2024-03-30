@@ -88,7 +88,7 @@ describe('TitanFloatingLaunchPad', function() {
     const selectColony = cast(game.deferredActions.peek()!.execute(), SelectColony);
     selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('Cannot take trade action during embargo #6348', function() {
@@ -133,6 +133,6 @@ describe('TitanFloatingLaunchPad', function() {
     tradeAction.options[1].cb(luna);
 
     expect(card.resourceCount).eq(0);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 });

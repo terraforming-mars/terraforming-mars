@@ -85,24 +85,24 @@ describe('SurveyMission', () => {
   });
 
   it('Gaining bonuses', () => {
-    expect(player.heat).eq(0);
-    expect(player.plants).eq(0);
+    expect(player.stock.heat).eq(0);
+    expect(player.stock.plants).eq(0);
 
     const selectSpace = cast(card.play(player), SelectSpace);
     const space = board.getSpace('04');
     space.bonus = [SpaceBonus.HEAT, SpaceBonus.PLANT];
     selectSpace.cb(space);
 
-    expect(player.heat).eq(1);
-    expect(player.plants).eq(1);
+    expect(player.stock.heat).eq(1);
+    expect(player.stock.plants).eq(1);
   });
 
   it('Compatible with Mining Guild', () => {
     player.setCorporationForTest(new MiningGuild());
     const selectSpace = cast(card.play(player), SelectSpace);
 
-    expect(player.steel).eq(5); // Comes from playing the Prelude
-    expect(player.plants).eq(0);
+    expect(player.stock.steel).eq(5); // Comes from playing the Prelude
+    expect(player.stock.plants).eq(0);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     const space = board.getSpace('04');
@@ -110,8 +110,8 @@ describe('SurveyMission', () => {
     selectSpace.cb(space);
     runAllActions(game);
 
-    expect(player.steel).eq(6);
-    expect(player.plants).eq(1);
+    expect(player.stock.steel).eq(6);
+    expect(player.stock.plants).eq(1);
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
   });
   // TODO Hazards are playable, but you won't get anything.

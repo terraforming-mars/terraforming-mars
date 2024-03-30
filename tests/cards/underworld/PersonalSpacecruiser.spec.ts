@@ -26,7 +26,7 @@ describe('PersonalSpacecruiser', () => {
     player.underworldData.corruption = 0;
     card.onProductionPhase(player);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('production phase, no fighter', () => {
@@ -38,7 +38,7 @@ describe('PersonalSpacecruiser', () => {
     player.underworldData.corruption = 1;
     card.onProductionPhase(player);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('production phase', () => {
@@ -50,7 +50,7 @@ describe('PersonalSpacecruiser', () => {
     player.underworldData.corruption = 4;
     card.onProductionPhase(player);
 
-    expect(player.megaCredits).eq(8);
+    expect(player.stock.megacredits).eq(8);
   });
 
   it('production phase, no corruption', () => {
@@ -62,6 +62,6 @@ describe('PersonalSpacecruiser', () => {
     player.underworldData.corruption = 4;
     card.onProductionPhase(player);
 
-    expect(player.megaCredits).eq(8);
+    expect(player.stock.megacredits).eq(8);
   });
 });

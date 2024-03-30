@@ -28,7 +28,7 @@ describe('PrivateResorts', () => {
     expect(game.generation).eq(1);
     forceGenerationEnd(game);
     expect(game.generation).eq(2);
-    expect(player.megaCredits).eq(20);
+    expect(player.stock.megacredits).eq(20);
     expect(player.underworldData.corruption).eq(0);
 
     cast(card.play(player), undefined);
@@ -37,18 +37,18 @@ describe('PrivateResorts', () => {
     expect(player.production.heat).eq(0);
     player.playedCards.push(card);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     player.underworldData.corruption = 0;
     forceGenerationEnd(game);
     expect(game.generation).eq(3);
-    expect(player.megaCredits).eq(32); // TR = 20
+    expect(player.stock.megacredits).eq(32); // TR = 20
     expect(player.underworldData.corruption).eq(1);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     player.underworldData.corruption = 0;
     forceGenerationEnd(game);
     expect(game.generation).eq(4);
-    expect(player.megaCredits).eq(20);
+    expect(player.stock.megacredits).eq(20);
     expect(player.underworldData.corruption).eq(0);
   });
 });

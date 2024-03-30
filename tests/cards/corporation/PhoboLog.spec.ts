@@ -8,7 +8,7 @@ describe('PhoboLog', function() {
     const card = new PhoboLog();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
-    expect(player.titanium).to.eq(10);
+    expect(player.stock.titanium).to.eq(10);
     expect(player.getTitaniumValue()).to.eq(4);
   });
 });

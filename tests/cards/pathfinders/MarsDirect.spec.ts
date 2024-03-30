@@ -31,23 +31,23 @@ describe('MarsDirect', () => {
     player.setCorporationForTest(card);
 
     player.tagsForTest = {mars: 0};
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
     expect(player.getPlayableCardsForTest()).has.members([powerPlant, controlledBloom]);
 
     player.tagsForTest = {mars: 0};
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
     expect(player.getPlayableCardsForTest()).is.empty;
 
     player.tagsForTest = {mars: 1};
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
     expect(player.getPlayableCardsForTest()).has.members([powerPlant]);
 
     player.tagsForTest = {mars: 1};
-    player.megaCredits = 11;
+    player.stock.megacredits = 11;
     expect(player.getPlayableCardsForTest()).is.empty;
 
     player.tagsForTest = {mars: 2};
-    player.megaCredits = 11;
+    player.stock.megacredits = 11;
     expect(player.getPlayableCardsForTest()).has.members([powerPlant]);
   });
 });

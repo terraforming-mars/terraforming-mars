@@ -44,7 +44,7 @@ describe('SoilEnrichment', function() {
     nitriteReducingBacteria.resourceCount = 0;
     player.playedCards.push(ghgProducingBacteria, tardigrades, nitriteReducingBacteria);
 
-    player.plants = 0;
+    player.stock.plants = 0;
     expect(card.canPlay(player)).is.true;
 
     const selectCard = cast(card.play(player), SelectCard);
@@ -52,6 +52,6 @@ describe('SoilEnrichment', function() {
     selectCard.cb([tardigrades]);
 
     expect(tardigrades.resourceCount).eq(0);
-    expect(player.plants).eq(5);
+    expect(player.stock.plants).eq(5);
   });
 });

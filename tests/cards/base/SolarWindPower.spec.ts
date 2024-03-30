@@ -10,6 +10,6 @@ describe('SolarWindPower', function() {
 
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
-    expect(player.titanium).to.eq(2);
+    expect(player.stock.titanium).to.eq(2);
   });
 });

@@ -27,13 +27,13 @@ describe('WaterImportFromEuropa', function() {
   });
 
   it('Should act', function() {
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
 
     const action = card.action(player);
     cast(action, undefined);
 
     game.deferredActions.runNext(); // Payment
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
     const selectOcean = cast(game.deferredActions.peek()!.execute(), SelectSpace);
@@ -43,7 +43,7 @@ describe('WaterImportFromEuropa', function() {
 
   it('Can act if can pay even after oceans are maxed', function() {
     maxOutOceans(player);
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
 
     expect(card.canAct(player)).is.true;
   });

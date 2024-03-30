@@ -49,10 +49,10 @@ describe('Incite', function() {
   it('Lobbying costs 3MC', () => {
     turmoil.usedFreeDelegateAction.add(player);
 
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(getSendADelegateOption(player)).is.undefined;
 
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     const selectParty = cast(getSendADelegateOption(player), SelectParty);
 
     expect(selectParty.title).eq('Send a delegate in an area (3 M€)');
@@ -61,7 +61,7 @@ describe('Incite', function() {
     selectParty.cb(PartyName.KELVINISTS);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(1);
   });
 });

@@ -13,6 +13,6 @@ describe('MediaArchives', function() {
     Game.newInstance('gameid', [player, player2], player);
     player.playedCards.push(card, new Virus());
     cast(card.play(player), undefined);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
   });
 });

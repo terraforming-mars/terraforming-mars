@@ -27,8 +27,8 @@ describe('CommunicationBoom', function() {
     const f = fakeCard({name: 'F' as CardName, resourceType: CardResource.DATA});
     player2.playedCards = [e, f];
 
-    player.megaCredits = 8;
-    player2.megaCredits = 12;
+    player.stock.megacredits = 8;
+    player2.stock.megacredits = 12;
 
     turmoil.initGlobalEvent(game);
     turmoil.chairman = player2;
@@ -40,13 +40,13 @@ describe('CommunicationBoom', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(a.resourceCount).eq(0);
     expect(b.resourceCount).eq(2);
     expect(c.resourceCount).eq(0);
     expect(d.resourceCount).eq(2);
 
-    expect(player2.megaCredits).eq(2);
+    expect(player2.stock.megacredits).eq(2);
     expect(e.resourceCount).eq(2);
     expect(f.resourceCount).eq(2);
 

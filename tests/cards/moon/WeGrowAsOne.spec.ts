@@ -22,7 +22,7 @@ describe('WeGrowAsOne', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     game.turmoil!.rulingParty = new Unity();
     expect(player.getPlayableCardsForTest()).does.include(card);

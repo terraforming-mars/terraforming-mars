@@ -38,7 +38,7 @@ describe('SeismicPredictions', function() {
       if (run.ownedTiles < run.claimed) {
         throw new Error('Invalid test');
       }
-      player.megaCredits = run.mc;
+      player.stock.megacredits = run.mc;
       turmoil.addInfluenceBonus(player, run.influence);
 
       const board = game.board;
@@ -54,7 +54,7 @@ describe('SeismicPredictions', function() {
 
       card.resolve(game, turmoil);
 
-      expect(player.megaCredits).eq(run.expect.mc);
+      expect(player.stock.megacredits).eq(run.expect.mc);
 
       // Expect the unclaimed tokens
       // Count the tokens in the pile

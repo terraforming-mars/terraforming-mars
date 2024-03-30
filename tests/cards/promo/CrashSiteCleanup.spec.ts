@@ -23,7 +23,7 @@ describe('CrashSiteCleanup', function() {
   it('Can play if removed plants from another player this generation', function() {
     const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
-    player2.plants = 1;
+    player2.stock.plants = 1;
 
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);
@@ -36,9 +36,9 @@ describe('CrashSiteCleanup', function() {
 
     const action = cast(card.play(player), OrOptions);
     action.options[0].cb();
-    expect(player.titanium).to.eq(1);
+    expect(player.stock.titanium).to.eq(1);
     action.options[1].cb();
-    expect(player.steel).to.eq(2);
+    expect(player.stock.steel).to.eq(2);
   });
 
   it('Can play if removed plants from neutral player in solo mode', function() {

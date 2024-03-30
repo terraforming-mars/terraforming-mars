@@ -25,7 +25,7 @@ describe('Diversity', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.megaCredits).to.eq(0);
-    expect(player2.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(10);
   });
 });

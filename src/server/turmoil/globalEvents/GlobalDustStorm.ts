@@ -27,8 +27,8 @@ export class GlobalDustStorm extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: IGame, turmoil: Turmoil): void {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      if (player.heat > 0) {
-        player.stock.deduct(Resource.HEAT, player.heat, {log: true, from: this.name});
+      if (player.stock.heat > 0) {
+        player.stock.deduct(Resource.HEAT, player.stock.heat, {log: true, from: this.name});
       }
       const maxedSteelTags = Math.min(5, player.tags.count(Tag.BUILDING, 'raw'));
       player.stock.deduct(Resource.MEGACREDITS, 2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});

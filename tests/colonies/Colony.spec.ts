@@ -158,11 +158,11 @@ describe('Colony', function() {
     // TODO (Lynesth): Do this better with next colony refactor PR
     const income = [1, 2, 4, 7, 10, 13, 17];
     for (let i = 0; i <= MAX_COLONY_TRACK_POSITION; i++) {
-      player.megaCredits = 0;
+      player.stock.megacredits = 0;
       luna.trackPosition = i;
       luna.trade(player);
       runAllActions(game);
-      expect(player.megaCredits).to.eq(income[i]);
+      expect(player.stock.megacredits).to.eq(income[i]);
     }
   });
 
@@ -171,44 +171,44 @@ describe('Colony', function() {
     luna.trackPosition = 3; // 7 MC
     luna.trade(player);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(7);
-    expect(player2.megaCredits).to.eq(0);
-    expect(player3.megaCredits).to.eq(0);
-    expect(player4.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(7);
+    expect(player2.stock.megacredits).to.eq(0);
+    expect(player3.stock.megacredits).to.eq(0);
+    expect(player4.stock.megacredits).to.eq(0);
 
     // 1 colony
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player);
     luna.trade(player);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(9);
-    expect(player2.megaCredits).to.eq(0);
-    expect(player3.megaCredits).to.eq(0);
-    expect(player4.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(9);
+    expect(player2.stock.megacredits).to.eq(0);
+    expect(player3.stock.megacredits).to.eq(0);
+    expect(player4.stock.megacredits).to.eq(0);
 
     // 2 colonies
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player2);
     luna.trade(player2);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(2);
-    expect(player2.megaCredits).to.eq(9);
-    expect(player3.megaCredits).to.eq(0);
-    expect(player4.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(2);
+    expect(player2.stock.megacredits).to.eq(9);
+    expect(player3.stock.megacredits).to.eq(0);
+    expect(player4.stock.megacredits).to.eq(0);
 
     // 3 colonies
-    player.megaCredits = 0;
-    player2.megaCredits = 0;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 0;
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player3);
     luna.trade(player4);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(2);
-    expect(player2.megaCredits).to.eq(2);
-    expect(player3.megaCredits).to.eq(2);
-    expect(player4.megaCredits).to.eq(7);
+    expect(player.stock.megacredits).to.eq(2);
+    expect(player2.stock.megacredits).to.eq(2);
+    expect(player3.stock.megacredits).to.eq(2);
+    expect(player4.stock.megacredits).to.eq(7);
   });
 
   it('Should give trade bonus for each colony a player has', function() {
@@ -219,22 +219,22 @@ describe('Colony', function() {
 
     luna.trade(player2);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(6);
-    expect(player2.megaCredits).to.eq(7);
-    expect(player3.megaCredits).to.eq(0);
-    expect(player4.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(6);
+    expect(player2.stock.megacredits).to.eq(7);
+    expect(player3.stock.megacredits).to.eq(0);
+    expect(player4.stock.megacredits).to.eq(0);
   });
 
   it('Should let player build a colony only if they can afford it', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
 
-    player.megaCredits = 17;
+    player.stock.megacredits = 17;
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
   it('Should not let players build a colony if they already have one', function() {
     game.colonies = [luna]; // Only a single colony in this test to show that building a second colony on a tile isn't possible.
-    player.megaCredits = 17;
+    player.stock.megacredits = 17;
 
     luna.addColony(player2);
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
@@ -245,7 +245,7 @@ describe('Colony', function() {
 
   it('Should not let players build a colony if colony tile is full', function() {
     game.colonies = [luna]; // Only a single colony in this test to show that building on a full tile isn't possible.
-    player.megaCredits = 17;
+    player.stock.megacredits = 17;
     expect(luna.isFull()).to.be.false;
 
     luna.addColony(player2);
@@ -264,32 +264,32 @@ describe('Colony', function() {
   it('Should let players trade only if they can afford it', function() {
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
 
-    player.megaCredits = 0;
-    player.energy = 2;
+    player.stock.megacredits = 0;
+    player.stock.energy = 2;
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
-    player.energy = 3;
+    player.stock.energy = 3;
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
 
-    player.energy = 0;
-    player.titanium = 2;
+    player.stock.energy = 0;
+    player.stock.titanium = 2;
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
-    player.titanium = 3;
+    player.stock.titanium = 3;
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });
 
   it('Player with Helion can trade', function() {
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
-    player.megaCredits = 7;
-    player.heat = 2;
+    player.stock.megacredits = 7;
+    player.stock.heat = 2;
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
     player.canUseHeatAsMegaCredits = true;
@@ -297,7 +297,7 @@ describe('Colony', function() {
   });
 
   it('Should not let players trade if they have no fleet', function() {
-    player.titanium = 3;
+    player.stock.titanium = 3;
 
     luna.trade(player);
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
@@ -306,8 +306,8 @@ describe('Colony', function() {
   it('Should not let players trade with colonies that have already been traded with', function() {
     game.colonies = [luna]; // Only a single colony in this test to show that retrading on a colony isn't possible.
 
-    player.titanium = 3;
-    player2.titanium = 3;
+    player.stock.titanium = 3;
+    player2.stock.titanium = 3;
 
     luna.trade(player);
     expect(isTradeWithColonyActionAvailable(player2)).to.be.false;

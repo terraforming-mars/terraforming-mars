@@ -10,6 +10,6 @@ describe('Biofuels', function() {
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player.production.plants).to.eq(1);
-    expect(player.plants).to.eq(2);
+    expect(player.stock.plants).to.eq(2);
   });
 });

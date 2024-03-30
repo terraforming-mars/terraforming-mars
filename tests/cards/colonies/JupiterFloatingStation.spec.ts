@@ -25,6 +25,6 @@ describe('JupiterFloatingStation', function() {
     player.addResourceTo(card, 7);
     const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[1].cb();
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
   });
 });

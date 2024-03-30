@@ -18,7 +18,7 @@ describe('DeimosDown', function() {
   });
 
   it('Should play', function() {
-    player2.plants = 8;
+    player2.stock.plants = 8;
     card.play(player);
 
     expect(game.deferredActions).has.lengthOf(1);
@@ -26,18 +26,18 @@ describe('DeimosDown', function() {
     orOptions.options[0].cb();
 
     expect(game.getTemperature()).to.eq(-24);
-    expect(player.steel).to.eq(4);
-    expect(player2.plants).to.eq(0);
+    expect(player.stock.steel).to.eq(4);
+    expect(player2.stock.plants).to.eq(0);
   });
 
   it('Works fine in solo mode', function() {
     const game = Game.newInstance('gameid', [player], player);
 
-    player.plants = 15;
+    player.stock.plants = 15;
     card.play(player);
 
     expect(game.getTemperature()).to.eq(-24);
-    expect(player.steel).to.eq(4);
-    expect(player.plants).to.eq(15); // not removed
+    expect(player.stock.steel).to.eq(4);
+    expect(player.stock.plants).to.eq(15); // not removed
   });
 });

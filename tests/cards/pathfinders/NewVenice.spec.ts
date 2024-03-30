@@ -33,22 +33,22 @@ describe('NewVenice', function() {
     addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    player.plants = 1;
+    player.stock.plants = 1;
     expect(card.canPlay(player)).is.false;
 
-    player.plants = 2;
+    player.stock.plants = 2;
     expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {
     const oceanSpace = addOcean(player);
-    player.plants = 2;
+    player.stock.plants = 2;
     player.production.override({energy: 0, megacredits: 0});
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
     expect(player.production.megacredits).eq(2);
     expect(player.production.energy).eq(1);
     expect(game.board.getCitiesOnMars()).is.empty;
@@ -108,11 +108,11 @@ describe('NewVenice', function() {
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     game.addGreenery(player, greenery);
 
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 
   it('New Venice counts for city-related VP', function() {
@@ -166,9 +166,9 @@ describe('NewVenice', function() {
       return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
     })[0];
 
-    player.plants = 3;
+    player.stock.plants = 3;
     game.addOcean(player, oceanSpace);
-    expect(player.plants).eq(4);
+    expect(player.stock.plants).eq(4);
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -178,6 +178,6 @@ describe('NewVenice', function() {
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
     // Losing two plants as the rules of the card dictate, not gaining any.
-    expect(player.plants).eq(2);
+    expect(player.stock.plants).eq(2);
   });
 });

@@ -21,7 +21,7 @@ describe('HE3FusionPlant', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     moonData.miningRate = 2;
     expect(player.getPlayableCardsForTest()).does.include(card);

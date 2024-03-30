@@ -20,22 +20,22 @@ describe('MartianRails', () => {
   });
 
   it('Should act', () => {
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(card.canAct(player)).is.true;
     addCity(player);
 
     card.action(player);
-    expect(player.energy).to.eq(0);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.energy).to.eq(0);
+    expect(player.stock.megacredits).to.eq(1);
   });
 
   it('Ignores cities off Mars', () => {
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(card.canAct(player)).is.true;
     addCity(player, SpaceName.GANYMEDE_COLONY);
 
     card.action(player);
-    expect(player.energy).to.eq(0);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.energy).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 });

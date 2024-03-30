@@ -97,53 +97,6 @@ export class Player implements IPlayer {
   private terraformRating: number = 20;
   public hasIncreasedTerraformRatingThisGeneration: boolean = false;
 
-  public get megaCredits(): number {
-    return this.stock.megacredits;
-  }
-
-  public get steel(): number {
-    return this.stock.steel;
-  }
-
-  public get titanium(): number {
-    return this.stock.titanium;
-  }
-
-  public get plants(): number {
-    return this.stock.plants;
-  }
-
-  public get energy(): number {
-    return this.stock.energy;
-  }
-  public get heat(): number {
-    return this.stock.heat;
-  }
-
-  public set megaCredits(megacredits: number) {
-    this.stock.megacredits = megacredits;
-  }
-
-  public set steel(steel: number) {
-    this.stock.steel = steel;
-  }
-
-  public set titanium(titanium: number) {
-    this.stock.titanium = titanium;
-  }
-
-  public set plants(plants: number) {
-    this.stock.plants = plants;
-  }
-
-  public set energy(energy: number) {
-    this.stock.energy = energy;
-  }
-
-  public set heat(heat: number) {
-    this.stock.heat = heat;
-  }
-
   // Resource values
   private titaniumValue: number = 3;
   private steelValue: number = 2;
@@ -600,19 +553,19 @@ export class Player implements IPlayer {
     if (this.cardIsInEffect(CardName.SUPERCAPACITORS)) {
       Supercapacitors.onProduction(this);
     } else {
-      this.heat += this.energy;
-      this.energy = 0;
+      this.stock.heat += this.stock.energy;
+      this.stock.energy = 0;
       this.finishProductionPhase();
     }
   }
 
   public finishProductionPhase() {
-    this.megaCredits += this.production.megacredits + this.terraformRating;
-    this.steel += this.production.steel;
-    this.titanium += this.production.titanium;
-    this.plants += this.production.plants;
-    this.energy += this.production.energy;
-    this.heat += this.production.heat;
+    this.stock.megacredits += this.production.megacredits + this.terraformRating;
+    this.stock.steel += this.production.steel;
+    this.stock.titanium += this.production.titanium;
+    this.stock.plants += this.production.plants;
+    this.stock.energy += this.production.energy;
+    this.stock.heat += this.production.heat;
 
     this.tableau.forEach((card) => card.onProductionPhase?.(this));
     // Turn off CEO OPG actions that were activated this generation
@@ -764,9 +717,9 @@ export class Player implements IPlayer {
    * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
    */
   public spendableMegacredits(): number {
-    let total = this.megaCredits;
+    let total = this.stock.megacredits;
     if (this.canUseHeatAsMegaCredits) total += this.availableHeat();
-    if (this.canUseTitaniumAsMegacredits) total += this.titanium * (this.titaniumValue - 1);
+    if (this.canUseTitaniumAsMegacredits) total += this.stock.titanium * (this.titaniumValue - 1);
     return total;
   }
 
@@ -1085,10 +1038,10 @@ export class Player implements IPlayer {
 
     // There is a simpler way to deal with this block, but I'd rather not deal with the fallout of getting it wrong.
     if (additionalCorp) {
-      this.megaCredits += corporationCard.startingMegaCredits;
+      this.stock.megacredits += corporationCard.startingMegaCredits;
       this.cardCost = Merger.setCardCost(this);
     } else {
-      this.megaCredits = corporationCard.startingMegaCredits;
+      this.stock.megacredits = corporationCard.startingMegaCredits;
       if (corporationCard.cardCost !== undefined) {
         this.cardCost = corporationCard.cardCost;
       }
@@ -1151,7 +1104,7 @@ export class Player implements IPlayer {
 
   public availableHeat(): number {
     const floaters = this.getCorporation(CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
-    return this.heat + (floaters * 2);
+    return this.stock.heat + (floaters * 2);
   }
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
@@ -1361,10 +1314,10 @@ export class Player implements IPlayer {
 
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
     return {
-      megaCredits: this.megaCredits - reserveUnits.megacredits,
-      steel: this.steel - reserveUnits.steel,
-      titanium: this.titanium - reserveUnits.titanium,
-      plants: this.plants - reserveUnits.plants,
+      megaCredits: this.stock.megacredits - reserveUnits.megacredits,
+      steel: this.stock.steel - reserveUnits.steel,
+      titanium: this.stock.titanium - reserveUnits.titanium,
+      plants: this.stock.plants - reserveUnits.plants,
       heat: this.availableHeat() - reserveUnits.heat,
       floaters: this.getSpendable('floaters'),
       microbes: this.getSpendable('microbes'),
@@ -1852,17 +1805,17 @@ export class Player implements IPlayer {
       terraformRating: this.terraformRating,
       hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
       // Resources
-      megaCredits: this.megaCredits,
+      megaCredits: this.stock.megacredits,
       megaCreditProduction: this.production.megacredits,
-      steel: this.steel,
+      steel: this.stock.steel,
       steelProduction: this.production.steel,
-      titanium: this.titanium,
+      titanium: this.stock.titanium,
       titaniumProduction: this.production.titanium,
-      plants: this.plants,
+      plants: this.stock.plants,
       plantProduction: this.production.plants,
-      energy: this.energy,
+      energy: this.stock.energy,
       energyProduction: this.production.energy,
-      heat: this.heat,
+      heat: this.stock.heat,
       heatProduction: this.production.heat,
       // Resource values
       titaniumValue: this.titaniumValue,
@@ -1947,15 +1900,15 @@ export class Player implements IPlayer {
     player.colonies.setFleetSize(d.fleetSize);
     player.colonies.victoryPoints = d.colonyVictoryPoints;
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
-    player.energy = d.energy;
+    player.stock.energy = d.energy;
     // TODO(kberg): remove ?? false by 2023-01-30
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration ?? false;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
-    player.heat = d.heat;
-    player.megaCredits = d.megaCredits;
+    player.stock.heat = d.heat;
+    player.stock.megacredits = d.megaCredits;
     player.needsToDraft = d.needsToDraft;
     player.oceanBonus = d.oceanBonus;
-    player.plants = d.plants;
+    player.stock.plants = d.plants;
     player.plantsNeededForGreenery = d.plantsNeededForGreenery;
     player.production.override(Units.of({
       energy: d.energyProduction,
@@ -1967,10 +1920,10 @@ export class Player implements IPlayer {
     }));
     player.removingPlayers = d.removingPlayers;
     player.scienceTagCount = d.scienceTagCount;
-    player.steel = d.steel;
+    player.stock.steel = d.steel;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;
-    player.titanium = d.titanium;
+    player.stock.titanium = d.titanium;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
     player.colonies.tradesThisGeneration = d.tradesThisGeneration;

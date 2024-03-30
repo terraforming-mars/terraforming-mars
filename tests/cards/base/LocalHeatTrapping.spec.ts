@@ -21,52 +21,52 @@ describe('LocalHeatTrapping', () => {
   });
 
   it('Cannot play without 5 heat', () => {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.cardsInHand = [card];
     expect(player.canPlay(card)).is.false;
-    player.heat = 4;
+    player.stock.heat = 4;
     expect(player.canPlay(card)).is.false;
-    player.heat = 5;
+    player.stock.heat = 5;
     expect(player.canPlay(card)).is.true;
   });
 
   it('Should play - no animal targets', () => {
-    player.megaCredits = card.cost;
-    player.heat = 6;
-    player.megaCredits = 1;
+    player.stock.megacredits = card.cost;
+    player.stock.heat = 6;
+    player.stock.megacredits = 1;
     player.cardsInHand = [card];
 
     expect(player.canPlay(card)).is.true;
 
     card.play(player);
 
-    expect(player.plants).to.eq(4);
-    expect(player.heat).to.eq(1);
+    expect(player.stock.plants).to.eq(4);
+    expect(player.stock.heat).to.eq(1);
   });
 
   it('Should play - single animal target', () => {
-    player.heat = 5;
+    player.stock.heat = 5;
     const pets = new Pets();
     player.playedCards.push(card, pets);
 
     const orOptions = cast(card.play(player), OrOptions);
 
     orOptions.options[0].cb();
-    expect(player.plants).to.eq(4);
-    expect(player.heat).to.eq(0);
+    expect(player.stock.plants).to.eq(4);
+    expect(player.stock.heat).to.eq(0);
 
     orOptions.options[1].cb();
     expect(pets.resourceCount).to.eq(2);
   });
 
   it('Should play - multiple animal targets', () => {
-    player.heat = 5;
+    player.stock.heat = 5;
     const pets = new Pets();
     const fish = new Fish();
     player.playedCards.push(card, pets, fish);
 
     const orOptions = cast(card.play(player), OrOptions);
-    expect(player.heat).to.eq(0);
+    expect(player.stock.heat).to.eq(0);
     orOptions.options[1].cb([fish]);
     expect(fish.resourceCount).to.eq(2);
   });
@@ -75,11 +75,11 @@ describe('LocalHeatTrapping', () => {
     helion.play(player);
     player.setCorporationForTest(helion);
 
-    player.megaCredits = 0;
-    player.heat = 5; // have to pay for card with 1 heat
+    player.stock.megacredits = 0;
+    player.stock.heat = 5; // have to pay for card with 1 heat
     player.cardsInHand = [card];
     expect(player.canPlay(card)).is.false;
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     expect(player.canPlay(card)).is.true;
   });
 
@@ -91,8 +91,8 @@ describe('LocalHeatTrapping', () => {
     player.cardsInHand = [card];
 
     function canPlay(config: {mc: number, heat: number, floaters: number, discount: number}) {
-      player.megaCredits = config.mc;
-      player.heat = config.heat;
+      player.stock.megacredits = config.mc;
+      player.stock.heat = config.heat;
       stormcraft.resourceCount = config.floaters;
       player.colonies.cardDiscount = config.discount;
       return player.canPlay(card);

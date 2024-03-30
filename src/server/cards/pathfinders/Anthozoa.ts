@@ -34,7 +34,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
 
 
   public canAct(player: IPlayer) {
-    return player.plants > 0;
+    return player.stock.plants > 0;
   }
 
   public action(player: IPlayer) {

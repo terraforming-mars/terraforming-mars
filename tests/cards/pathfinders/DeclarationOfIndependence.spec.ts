@@ -20,7 +20,7 @@ describe('DeclarationOfIndependence', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     player.tagsForTest = {mars: 5};
     expect(player.canPlay(card)).is.false;

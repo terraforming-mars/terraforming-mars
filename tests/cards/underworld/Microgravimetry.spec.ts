@@ -20,12 +20,12 @@ describe('Microgravimetry', () => {
 
   it('canAct - no energy', () => {
     expect(card.canAct(player)).is.false;
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(card.canAct(player)).is.true;
   });
 
   it('action: 1 energy', () => {
-    player.energy = 1;
+    player.stock.energy = 1;
     const selectAmount = cast(card.action(player), SelectAmount);
     selectAmount.cb(1);
     runAllActions(game);
@@ -36,7 +36,7 @@ describe('Microgravimetry', () => {
   });
 
   it('action: 3 energy', () => {
-    player.energy = 4;
+    player.stock.energy = 4;
     const selectAmount = cast(card.action(player), SelectAmount);
     selectAmount.cb(3);
     runAllActions(game);

@@ -50,7 +50,7 @@ describe('Whales', () => {
     player.playedCards.push(card);
     maxOutOceans(otherPlayer);
     const aquiferStandardProject = new AquiferStandardProject();
-    player.megaCredits = aquiferStandardProject.cost;
+    player.stock.megacredits = aquiferStandardProject.cost;
 
     expect(game.board.getOceanSpaces()).has.length(9);
     expect(game.canAddOcean()).is.false;
@@ -61,7 +61,7 @@ describe('Whales', () => {
     cast(player.popWaitingFor(), undefined);
 
     expect(game.board.getOceanSpaces()).has.length(9);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(card.resourceCount).eq(1);
   });
 
@@ -107,14 +107,14 @@ describe('Whales', () => {
     const space = UnderworldExpansion.identifiableSpaces(player)[0];
     space.undergroundResources = 'ocean';
     maxOutOceans(otherPlayer);
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     expect(UnderworldExpansion.excavatableSpaces(player)).contains(space);
 
     UnderworldExpansion.excavate(player, space);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
     expect(game.board.getOceanSpaces()).has.length(9);
     expect(card.resourceCount).eq(1);
   });

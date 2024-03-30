@@ -41,7 +41,7 @@ describe('Europa', function() {
 
     expect(player.production.megacredits).to.eq(0);
     expect(player2.production.megacredits).to.eq(1);
-    expect(player.megaCredits).to.eq(1);
-    expect(player2.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(1);
+    expect(player2.stock.megacredits).to.eq(0);
   });
 });

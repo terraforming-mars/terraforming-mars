@@ -26,7 +26,7 @@ describe('Shara', function() {
 
   it('Activate for Mars on Generation 6', function() {
     player.playedCards.push(card);
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
     game.generation = 6;
 
     card.action(player);
@@ -55,7 +55,7 @@ describe('Shara', function() {
       vps: [],
     });
 
-    expect(player.megaCredits).eq(12+2);
+    expect(player.stock.megacredits).eq(12+2);
     expect(card.tags).deep.eq([Tag.MARS, Tag.MARS]);
   });
 });

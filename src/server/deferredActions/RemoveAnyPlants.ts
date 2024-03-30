@@ -24,14 +24,14 @@ export class RemoveAnyPlants extends DeferredAction {
       return undefined;
     }
 
-    const candidates = this.player.getOpponents().filter((p) => !p.plantsAreProtected() && p.plants > 0);
+    const candidates = this.player.getOpponents().filter((p) => !p.plantsAreProtected() && p.stock.plants > 0);
 
     if (candidates.length === 0) {
       return undefined;
     }
 
     const removalOptions = candidates.map((target) => {
-      let qtyToRemove = Math.min(target.plants, this.count);
+      let qtyToRemove = Math.min(target.stock.plants, this.count);
 
       // Botanical Experience hook.
       if (target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {

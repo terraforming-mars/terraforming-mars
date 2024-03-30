@@ -18,30 +18,30 @@ describe('BigAsteroid', function() {
   });
 
   it('Should play', function() {
-    player2.plants = 5;
+    player2.stock.plants = 5;
     card.play(player);
     runAllActions(game);
 
     const orOptions = cast(player.getWaitingFor(), OrOptions);
     orOptions.options[1].cb(); // do nothing
-    expect(player2.plants).to.eq(5);
+    expect(player2.stock.plants).to.eq(5);
 
     orOptions.options[0].cb(); // remove plants
-    expect(player2.plants).to.eq(1);
+    expect(player2.stock.plants).to.eq(1);
     expect(game.getTemperature()).to.eq(-26);
-    expect(player.titanium).to.eq(4);
+    expect(player.stock.titanium).to.eq(4);
   });
 
   it('Works fine in solo', function() {
     game = Game.newInstance('gameid', [player], player);
-    player.plants = 5;
+    player.stock.plants = 5;
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
 
-    expect(player.plants).to.eq(5);
+    expect(player.stock.plants).to.eq(5);
     expect(game.getTemperature()).to.eq(-26);
-    expect(player.titanium).to.eq(4);
+    expect(player.stock.titanium).to.eq(4);
   });
 });

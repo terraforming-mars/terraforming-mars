@@ -15,21 +15,21 @@ describe('SolarPanelFoundry', () => {
 
 
   it('can act', () => {
-    player.steel = 2;
+    player.stock.steel = 2;
     expect(card.canAct(player)).is.true;
 
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(card.canAct(player)).is.false;
   });
 
   it('act', () => {
-    player.steel = 2;
+    player.stock.steel = 2;
     player.production.override({energy: 0});
 
     card.action(player);
 
     expect(player.production.energy).eq(1);
-    expect(player.steel).eq(0);
+    expect(player.stock.steel).eq(0);
   });
 });
 

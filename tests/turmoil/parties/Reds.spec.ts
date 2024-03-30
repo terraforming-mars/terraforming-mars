@@ -56,26 +56,26 @@ describe('Reds', function() {
   it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 M€ per step raised', function() {
     setRulingParty(game, PartyName.REDS, 'rp01');
 
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     player.increaseTerraformRating();
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Ruling policy 2: When you place a tile, pay 3 M€ or as much as possible', function() {
     setRulingParty(game, PartyName.REDS, 'rp02');
 
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     addGreenery(player, '10');
     runAllActions(game);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step', function() {
     setRulingParty(game, PartyName.REDS, 'rp03');
 
     const redsPolicy = REDS_POLICY_3;
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     game.increaseOxygenLevel(player, 1);
     expect(game.getOxygenLevel()).to.eq(1);
 
@@ -83,7 +83,7 @@ describe('Reds', function() {
     redsPolicy.action(player);
     game.deferredActions.runNext();
 
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
     expect(game.getOxygenLevel()).to.eq(0);
     expect(redsPolicy.canAct(player)).to.be.false;
   });
@@ -94,7 +94,7 @@ describe('Reds', function() {
     setRulingParty(game, PartyName.REDS, 'rp03');
 
     const redsPolicy = REDS_POLICY_3;
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
 
     MoonExpansion.raiseHabitatRate(secondPlayer, 1);
     MoonExpansion.raiseMiningRate(secondPlayer, 1);

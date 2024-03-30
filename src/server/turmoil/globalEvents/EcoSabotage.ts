@@ -25,7 +25,7 @@ export class EcoSabotage extends GlobalEvent implements IGlobalEvent {
 
   public resolve(game: IGame, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      const plants = player.plants;
+      const plants = player.stock.plants;
       const maxPlants = 3 + turmoil.getPlayerInfluence(player);
       const plantDecrease = Math.max(0, plants - maxPlants);
       player.stock.deduct(Resource.PLANTS, plantDecrease, {log: true, from: this.name});

@@ -154,7 +154,7 @@ export class TradeWithEnergy implements IColonyTrader {
   }
 
   public canUse() {
-    return this.player.energy >= this.tradeCost;
+    return this.player.stock.energy >= this.tradeCost;
   }
   public optionText() {
     return message('Pay ${0} energy', (b) => b.number(this.tradeCost));
@@ -175,7 +175,7 @@ export class TradeWithTitanium implements IColonyTrader {
   }
 
   public canUse() {
-    return this.player.titanium >= this.tradeCost;
+    return this.player.stock.titanium >= this.tradeCost;
   }
   public optionText() {
     return message('Pay ${0} titanium', (b) => b.number(this.tradeCost));

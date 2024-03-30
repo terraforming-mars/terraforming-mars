@@ -65,46 +65,46 @@ describe('BotanicalExperience', function() {
   });
 
   it('targeted to remove plants', () => {
-    player.plants = 7;
+    player.stock.plants = 7;
     player.playedCards = [card];
     game.defer(new RemoveAnyPlants(otherPlayer, 5));
     runAllActions(game);
     const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
 
-    expect(otherPlayer.plants).eq(0);
+    expect(otherPlayer.stock.plants).eq(0);
 
     orOptions.options[0].cb();
 
-    expect(player.plants).eq(4);
+    expect(player.stock.plants).eq(4);
   });
 
   it('targeted to steal plants', () => {
-    player.plants = 7;
+    player.stock.plants = 7;
     player.playedCards = [card];
     game.defer(new StealResources(otherPlayer, Resource.PLANTS, 5));
     runAllActions(game);
     const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
 
-    expect(otherPlayer.plants).eq(0);
+    expect(otherPlayer.stock.plants).eq(0);
 
     orOptions.options[0].cb();
 
-    expect(player.plants).eq(4);
-    expect(otherPlayer.plants).eq(3);
+    expect(player.stock.plants).eq(4);
+    expect(otherPlayer.stock.plants).eq(3);
   });
 
   it('does not imapct other resource types', () => {
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     player.playedCards = [card];
     game.defer(new StealResources(otherPlayer, Resource.MEGACREDITS, 5));
     runAllActions(game);
     const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
 
-    expect(otherPlayer.megaCredits).eq(0);
+    expect(otherPlayer.stock.megacredits).eq(0);
 
     orOptions.options[0].cb();
 
-    expect(player.megaCredits).eq(2);
-    expect(otherPlayer.megaCredits).eq(5);
+    expect(player.stock.megacredits).eq(2);
+    expect(otherPlayer.stock.megacredits).eq(5);
   });
 });

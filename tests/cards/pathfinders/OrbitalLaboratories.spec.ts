@@ -14,12 +14,12 @@ describe('OrbitalLaboratories', function() {
   });
 
   it('play', function() {
-    player.plants = 0;
+    player.stock.plants = 0;
     player.production.override({plants: 0});
 
     card.play(player);
 
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
     expect(player.production.plants).eq(2);
   });
 });

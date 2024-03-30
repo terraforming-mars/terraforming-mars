@@ -37,10 +37,10 @@ describe('SpacePrivateers', () => {
     const card = new SpacePrivateers();
     const [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
 
-    player.megaCredits = 0;
-    player2.megaCredits = 4;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 4;
     player2.underworldData.corruption = 1;
-    player3.megaCredits = 4;
+    player3.stock.megacredits = 4;
     player3.underworldData.corruption = 1;
 
     card.resourceCount = 2;
@@ -51,11 +51,11 @@ describe('SpacePrivateers', () => {
     UnderworldTestHelper.assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
     runAllActions(game);
 
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
     expect(card.resourceCount).eq(2);
-    expect(player2.megaCredits).eq(2);
+    expect(player2.stock.megacredits).eq(2);
     expect(player2.underworldData.corruption).eq(1);
-    expect(player3.megaCredits).eq(2);
+    expect(player3.stock.megacredits).eq(2);
     expect(player3.underworldData.corruption).eq(1);
   });
 
@@ -63,10 +63,10 @@ describe('SpacePrivateers', () => {
     const card = new SpacePrivateers();
     const [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
 
-    player.megaCredits = 0;
-    player2.megaCredits = 4;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 4;
     player2.underworldData.corruption = 1;
-    player3.megaCredits = 4;
+    player3.stock.megacredits = 4;
     player3.underworldData.corruption = 1;
 
     card.resourceCount = 2;
@@ -77,11 +77,11 @@ describe('SpacePrivateers', () => {
     UnderworldTestHelper.assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
     runAllActions(game);
 
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
     expect(card.resourceCount).eq(1);
-    expect(player2.megaCredits).eq(4);
+    expect(player2.stock.megacredits).eq(4);
     expect(player2.underworldData.corruption).eq(0);
-    expect(player3.megaCredits).eq(2);
+    expect(player3.stock.megacredits).eq(2);
     expect(player3.underworldData.corruption).eq(1);
   });
 
@@ -89,10 +89,10 @@ describe('SpacePrivateers', () => {
     const card = new SpacePrivateers();
     const [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
 
-    player.megaCredits = 0;
-    player2.megaCredits = 4;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 4;
     player2.underworldData.corruption = 1;
-    player3.megaCredits = 4;
+    player3.stock.megacredits = 4;
     player3.underworldData.corruption = 1;
 
     card.resourceCount = 2;
@@ -103,11 +103,11 @@ describe('SpacePrivateers', () => {
     UnderworldTestHelper.assertIsMaybeBlock(player3, player3.popWaitingFor(), 'corruption');
     runAllActions(game);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(card.resourceCount).eq(1);
-    expect(player2.megaCredits).eq(4);
+    expect(player2.stock.megacredits).eq(4);
     expect(player2.underworldData.corruption).eq(0);
-    expect(player3.megaCredits).eq(4);
+    expect(player3.stock.megacredits).eq(4);
     expect(player3.underworldData.corruption).eq(0);
   });
 });

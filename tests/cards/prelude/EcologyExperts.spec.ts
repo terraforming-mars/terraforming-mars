@@ -29,7 +29,7 @@ describe('EcologyExperts', function() {
     // Ants needs 4% oxygen
     const ants = new Ants();
     player.cardsInHand = [aiCentral, ants];
-    player.megaCredits = Math.max(aiCentral.cost, ants.cost);
+    player.stock.megacredits = Math.max(aiCentral.cost, ants.cost);
 
     expect(player.canPlay(aiCentral)).is.false;
     expect(player.canPlay(ants)).is.false;

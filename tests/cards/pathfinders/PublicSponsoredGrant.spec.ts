@@ -28,7 +28,7 @@ describe('PublicSponsoredGrant', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.rulingParty = new Unity();
     expect(player.canPlay(card)).is.false;
@@ -37,15 +37,15 @@ describe('PublicSponsoredGrant', function() {
   });
 
   it('play', function() {
-    player.megaCredits = 4;
-    player2.megaCredits = 1;
-    player3.megaCredits = 0;
+    player.stock.megacredits = 4;
+    player2.stock.megacredits = 1;
+    player3.stock.megacredits = 0;
 
     const options = cast(card.play(player), OrOptions);
 
-    expect(player.megaCredits).eq(4);
-    expect(player2.megaCredits).eq(0);
-    expect(player3.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(4);
+    expect(player2.stock.megacredits).eq(0);
+    expect(player3.stock.megacredits).eq(0);
 
     // Confirming that tags are filtered appropriately.
     expect(options.options.map((o) => o.title)).to.contain(Tag.SPACE);
@@ -71,16 +71,16 @@ describe('PublicSponsoredGrant', function() {
     player2.setCorporationForTest(new MonsInsurance());
     // This isn't very clean but it's necessary for the test.
     game.monsInsuranceOwner = player2.id;
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
-    player3.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
+    player3.stock.megacredits = 10;
 
     card.play(player);
 
     // This is a great test, because player1 instigated the loss, so does not get an insurance
     // payout. Player 2 loses the payout and player 3 gets it.
-    expect(player.megaCredits).eq(10);
-    expect(player2.megaCredits).eq(5);
-    expect(player3.megaCredits).eq(11);
+    expect(player.stock.megacredits).eq(10);
+    expect(player2.stock.megacredits).eq(5);
+    expect(player3.stock.megacredits).eq(11);
   });
 });

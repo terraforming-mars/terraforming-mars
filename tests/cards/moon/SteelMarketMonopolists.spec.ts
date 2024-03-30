@@ -22,7 +22,7 @@ describe('SteelMarketMonopolists', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     moonData.miningRate = 3;
     expect(player.getPlayableCardsForTest()).does.include(card);
@@ -31,55 +31,55 @@ describe('SteelMarketMonopolists', () => {
   });
 
   it('can act - buy', () => {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).eq(false);
 
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canAct(player)).eq(true);
   });
 
   it('can act - sell', () => {
-    player.steel = 0;
+    player.stock.steel = 0;
     expect(card.canAct(player)).eq(false);
 
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(card.canAct(player)).eq(true);
   });
 
   it('sell steel', () => {
-    player.megaCredits = 1;
-    player.steel = 2;
+    player.stock.megacredits = 1;
+    player.stock.steel = 2;
     const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(2);
     selectAmount.cb(2);
-    expect(player.megaCredits).eq(7);
-    expect(player.steel).eq(0);
+    expect(player.stock.megacredits).eq(7);
+    expect(player.stock.steel).eq(0);
   });
 
   it('sell steel - limited', () => {
-    player.megaCredits = 0;
-    player.steel = 100;
+    player.stock.megacredits = 0;
+    player.stock.steel = 100;
     const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(3);
   });
 
   it('buy steel', () => {
-    player.megaCredits = 7;
-    player.steel = 0;
+    player.stock.megacredits = 7;
+    player.stock.steel = 0;
     const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(2);
     selectAmount.cb(2);
     runAllActions(game);
-    expect(player.megaCredits).eq(1);
-    expect(player.steel).eq(4);
+    expect(player.stock.megacredits).eq(1);
+    expect(player.stock.steel).eq(4);
   });
 
   it('buy steel - limited', () => {
-    player.megaCredits = 100;
-    player.steel = 0;
+    player.stock.megacredits = 100;
+    player.stock.steel = 0;
     const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(3);

@@ -57,7 +57,7 @@ describe('EarthquakeMachine', () => {
 
   it('canAct', () => {
     expect(card.canAct(player)).is.false;
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(card.canAct(player)).is.true;
   });
 

@@ -28,7 +28,7 @@ describe('Viron', function() {
 
     expect(card.canAct(player)).is.not.true;
 
-    player.megaCredits += 2;
+    player.stock.megacredits += 2;
 
     expect(card.canAct(player)).is.true;
 
@@ -44,7 +44,7 @@ describe('Viron', function() {
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
     player.addActionThisGeneration(card.name);
-    player.megaCredits += 2;
+    player.stock.megacredits += 2;
 
     expect(card.canAct(player)).is.not.true;
   });
@@ -58,7 +58,7 @@ describe('Viron', function() {
     expect(focusedOrganization.canAct(player)).is.false;
 
     player.cardsInHand.push(new RestrictedArea());
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
 
     expect(focusedOrganization.canAct(player)).is.true;
 

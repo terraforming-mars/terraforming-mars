@@ -8,8 +8,8 @@ describe('Metal-RichAsteroid', function() {
     const card = new MetalRichAsteroid();
     const [game, player] = testGame(1);
     cast(card.play(player), undefined);
-    expect(player.titanium).to.eq(4);
-    expect(player.steel).to.eq(4);
+    expect(player.stock.titanium).to.eq(4);
+    expect(player.stock.steel).to.eq(4);
     expect(game.getTemperature()).to.equal(-28);
   });
 });

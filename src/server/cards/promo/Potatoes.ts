@@ -30,13 +30,13 @@ export class Potatoes extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     const viralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
-    const hasEnoughPlants = player.plants >= 2 || player.plants >= 1 && viralEnhancers !== undefined;
+    const hasEnoughPlants = player.stock.plants >= 2 || player.stock.plants >= 1 && viralEnhancers !== undefined;
 
     return hasEnoughPlants;
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.plants -= 2;
+    player.stock.plants -= 2;
     return undefined;
   }
 }

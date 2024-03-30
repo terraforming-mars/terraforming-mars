@@ -27,8 +27,8 @@ describe('MareSerenitatisMine', () => {
   });
 
   it('play', () => {
-    player.titanium = 3;
-    player.steel = 3;
+    player.stock.titanium = 3;
+    player.stock.steel = 3;
     expect(player.production.steel).eq(0);
     expect(player.production.titanium).eq(0);
     expect(player.getTerraformRating()).eq(14);
@@ -36,8 +36,8 @@ describe('MareSerenitatisMine', () => {
 
     card.play(player);
 
-    expect(player.titanium).eq(1);
-    expect(player.steel).eq(2);
+    expect(player.stock.titanium).eq(1);
+    expect(player.stock.steel).eq(2);
     expect(player.production.steel).eq(1);
     expect(player.production.titanium).eq(1);
     expect(player.getTerraformRating()).eq(15);

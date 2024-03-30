@@ -21,20 +21,20 @@ describe('SmallDutyRovers', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(player.getPlayableCardsForTest()).does.include(card);
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {
     expect(moonData.logisticRate).eq(0);
     expect(player.getTerraformRating()).eq(14);
-    player.titanium = 1;
-    player.megaCredits = 0;
+    player.stock.titanium = 1;
+    player.stock.megacredits = 0;
     // remove space bonuses to keep this simple.
     moonData.moon.spaces.forEach((space) => {
       space.bonus = [];
@@ -49,8 +49,8 @@ describe('SmallDutyRovers', () => {
 
     card.play(player);
 
-    expect(player.titanium).eq(0);
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.titanium).eq(0);
+    expect(player.stock.megacredits).eq(6);
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });

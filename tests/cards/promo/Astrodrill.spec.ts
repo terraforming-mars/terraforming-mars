@@ -35,7 +35,7 @@ describe('Astrodrill', function() {
     // spend asteroid resource
     const spendAsteroidOption = action.options[0];
     spendAsteroidOption.cb();
-    expect(player.titanium).to.eq(3);
+    expect(player.stock.titanium).to.eq(3);
     expect(player.game.deferredActions).has.lengthOf(0);
   });
 
@@ -70,9 +70,9 @@ describe('Astrodrill', function() {
     expect(resourceChoices.options).has.lengthOf(6);
 
     resourceChoices.options[1].cb();
-    expect(player.steel).to.eq(1);
+    expect(player.stock.steel).to.eq(1);
 
     resourceChoices.options[4].cb();
-    expect(player.heat).to.eq(1);
+    expect(player.stock.heat).to.eq(1);
   });
 });

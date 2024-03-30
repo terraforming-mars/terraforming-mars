@@ -20,7 +20,7 @@ describe('Solarpedia', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.false;
 
     player.tagsForTest = {earth: 0, venus: 1, jovian: 1, mars: 1};

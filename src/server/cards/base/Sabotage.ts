@@ -40,8 +40,8 @@ export class Sabotage extends Card implements IProjectCard {
     const availableActions = new OrOptions();
 
     player.getOpponents().forEach((target) => {
-      if (target.titanium > 0 && !target.alloysAreProtected()) {
-        const amountRemoved = Math.min(3, target.titanium);
+      if (target.stock.titanium > 0 && !target.alloysAreProtected()) {
+        const amountRemoved = Math.min(3, target.stock.titanium);
         const optionTitle = this.title(amountRemoved, 'titanium', target);
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.stock.deduct(Resource.TITANIUM, 3, {log: true, from: player});
@@ -49,8 +49,8 @@ export class Sabotage extends Card implements IProjectCard {
         }));
       }
 
-      if (target.steel > 0 && !target.alloysAreProtected()) {
-        const amountRemoved = Math.min(4, target.steel);
+      if (target.stock.steel > 0 && !target.alloysAreProtected()) {
+        const amountRemoved = Math.min(4, target.stock.steel);
         const optionTitle = this.title(amountRemoved, 'steel', target);
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.stock.deduct(Resource.STEEL, 4, {log: true, from: player});
@@ -58,8 +58,8 @@ export class Sabotage extends Card implements IProjectCard {
         }));
       }
 
-      if (target.megaCredits > 0) {
-        const amountRemoved = Math.min(7, target.megaCredits);
+      if (target.stock.megacredits > 0) {
+        const amountRemoved = Math.min(7, target.stock.megacredits);
         const optionTitle = this.title(amountRemoved, 'M€', target);
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.stock.deduct(Resource.MEGACREDITS, 7, {log: true, from: player});

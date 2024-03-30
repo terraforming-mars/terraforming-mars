@@ -34,11 +34,11 @@ export class HiredRaiders extends Card implements IProjectCard {
     if (player.game.isSoloMode()) {
       return new OrOptions(
         new SelectOption('Steal 2 steel', 'Steal steel').andThen(() => {
-          player.steel += 2;
+          player.stock.steel += 2;
           return undefined;
         }),
         new SelectOption('Steal 3 M€', 'Steal M€').andThen(() => {
-          player.megaCredits += 3;
+          player.stock.megacredits += 3;
           return undefined;
         }),
       );
@@ -47,15 +47,15 @@ export class HiredRaiders extends Card implements IProjectCard {
     const availableActions = new OrOptions();
 
     player.getOpponents().forEach((target) => {
-      if (target.steel > 0 && !target.alloysAreProtected()) {
-        const amountStolen = Math.min(2, target.steel);
+      if (target.stock.steel > 0 && !target.alloysAreProtected()) {
+        const amountStolen = Math.min(2, target.stock.steel);
         const optionTitle = message('Steal ${0} steel from ${1}', (b) => b.number(amountStolen).player(target).getMessage());
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.maybeBlockAttack(player, (proceed) => {
             if (proceed) {
               target.stock.deduct(Resource.STEEL, 2, {log: true, from: player, stealing: true});
-              player.steel += amountStolen;
+              player.stock.steel += amountStolen;
             }
             return undefined;
           });
@@ -63,14 +63,14 @@ export class HiredRaiders extends Card implements IProjectCard {
         }));
       }
 
-      if (target.megaCredits > 0) {
-        const amountStolen = Math.min(3, target.megaCredits);
+      if (target.stock.megacredits > 0) {
+        const amountStolen = Math.min(3, target.stock.megacredits);
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.maybeBlockAttack(player, (proceed) => {
             if (proceed) {
-              player.megaCredits += amountStolen;
+              player.stock.megacredits += amountStolen;
               target.stock.deduct(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
             }
             return undefined;

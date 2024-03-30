@@ -16,9 +16,9 @@ describe('Thorgate', function() {
     expect(card.getCardDiscount(player, new EnergySaving())).to.eq(3);
     expect(card.getCardDiscount(player, new Pets())).to.eq(0);
     const powerPlant = new PowerPlantStandardProject();
-    player.megaCredits = powerPlant.cost - 3;
+    player.stock.megacredits = powerPlant.cost - 3;
     expect(powerPlant.canAct(player)).eq(true);
-    player.megaCredits--;
+    player.stock.megacredits--;
     expect(powerPlant.canAct(player)).eq(false);
   });
 });

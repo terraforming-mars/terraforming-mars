@@ -43,7 +43,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    if (player.titanium > 0) {
+    if (player.stock.titanium > 0) {
       return true;
     }
     return this.resourceCount > 0 && this.canPlaceOcean(player);
@@ -80,7 +80,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
       return addAsteroidToCard;
     }
 
-    if (player.titanium === 0) return spendAsteroidResource();
+    if (player.stock.titanium === 0) return spendAsteroidResource();
 
     const availableActions = [];
 

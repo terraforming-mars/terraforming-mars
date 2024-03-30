@@ -24,7 +24,7 @@ describe('IapetusII', function() {
 
   it('Should activate', function() {
     expect(iapetusII.isActive).is.false;
-    player.titanium = 1; // for Lunar Observation Post costs.
+    player.stock.titanium = 1; // for Lunar Observation Post costs.
     player.playCard(lunarObservationPost); // playCard activates any colonies.
     expect(iapetusII.isActive).is.true;
   });

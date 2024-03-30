@@ -13,6 +13,6 @@ describe('NitrogenShipment', function() {
     cast(action, undefined);
     expect(player.getTerraformRating()).to.eq(21);
     expect(player.production.plants).to.eq(1);
-    expect(player.megaCredits).to.eq(5);
+    expect(player.stock.megacredits).to.eq(5);
   });
 });

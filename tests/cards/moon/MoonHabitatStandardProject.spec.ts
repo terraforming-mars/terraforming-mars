@@ -25,16 +25,16 @@ describe('MoonHabitatStandardProject', () => {
   });
 
   it('can act', () => {
-    player.titanium = 0;
-    player.megaCredits = 22;
+    player.stock.titanium = 0;
+    player.stock.megacredits = 22;
     expect(player.canPlay(card)).is.false;
 
-    player.titanium = 1;
-    player.megaCredits = 21;
+    player.stock.titanium = 1;
+    player.stock.megacredits = 21;
     expect(player.canPlay(card)).is.false;
 
-    player.titanium = 1;
-    player.megaCredits = 22;
+    player.stock.titanium = 1;
+    player.stock.megacredits = 22;
     expect(player.canPlay(card)).is.true;
 
     // TODO(kberg): Are there spaces on the moon for a habitat?
@@ -52,7 +52,7 @@ describe('MoonHabitatStandardProject', () => {
   });
 
   it('act', () => {
-    player.titanium = 3;
+    player.stock.titanium = 3;
     expect(player.getTerraformRating()).eq(14);
     expect(player.production.megacredits).eq(0);
 
@@ -60,7 +60,7 @@ describe('MoonHabitatStandardProject', () => {
     const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     payAction.cb(Payment.EMPTY);
 
-    expect(player.titanium).eq(2);
+    expect(player.stock.titanium).eq(2);
     expect(player.production.megacredits).eq(1);
 
     expect(moonData.habitatRate).eq(0);
@@ -77,7 +77,7 @@ describe('MoonHabitatStandardProject', () => {
     const moonData = MoonExpansion.moonData(game);
 
     // Card requirements
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
     moonData.habitatRate = 8;

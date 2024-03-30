@@ -37,7 +37,7 @@ describe('OrbitalCleanup', function() {
     player.playedCards.push(new ResearchCoordination());
 
     card.action(player);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
   });
 
   it('Should give victory points', function() {
@@ -60,8 +60,8 @@ describe('OrbitalCleanup', function() {
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new ResearchCoordination());
 
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     card.action(player);
-    expect(player.megaCredits).to.eq(4);
+    expect(player.stock.megacredits).to.eq(4);
   });
 });

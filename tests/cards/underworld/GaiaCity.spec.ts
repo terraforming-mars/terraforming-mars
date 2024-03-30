@@ -70,6 +70,6 @@ describe('GaiaCity', () => {
     selectSpace.cb(space);
 
     expect(space.tile?.tileType).eq(TileType.CITY);
-    expect(player.plants).eq(2);
+    expect(player.stock.plants).eq(2);
   });
 });

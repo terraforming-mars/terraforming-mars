@@ -37,7 +37,7 @@ export class EarthquakeMachine extends Card implements IProjectCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.energy > 0 && UnderworldExpansion.excavatableSpaces(player).length > 0;
+    return player.stock.energy > 0 && UnderworldExpansion.excavatableSpaces(player).length > 0;
   }
 
   public action(player: IPlayer) {

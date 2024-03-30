@@ -13,7 +13,7 @@ describe('RichDeposits', function() {
     Game.newInstance('gameid', [player], player);
   });
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.false;
     player.tagsForTest = {science: 1};
     expect(player.canPlay(card)).is.false;

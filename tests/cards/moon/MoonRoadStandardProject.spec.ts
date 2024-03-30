@@ -25,16 +25,16 @@ describe('MoonRoadStandardProject', () => {
   });
 
   it('can act', () => {
-    player.steel = 0;
-    player.megaCredits = 18;
+    player.stock.steel = 0;
+    player.stock.megacredits = 18;
     expect(player.canPlay(card)).is.false;
 
-    player.steel = 1;
-    player.megaCredits = 17;
+    player.stock.steel = 1;
+    player.stock.megacredits = 17;
     expect(player.canPlay(card)).is.false;
 
-    player.steel = 1;
-    player.megaCredits = 18;
+    player.stock.steel = 1;
+    player.stock.megacredits = 18;
     expect(player.canPlay(card)).is.true;
 
     // 2. Are there spaces on the moon for a Road?
@@ -52,14 +52,14 @@ describe('MoonRoadStandardProject', () => {
   });
 
   it('act', () => {
-    player.steel = 3;
+    player.stock.steel = 3;
     expect(player.getTerraformRating()).eq(14);
 
     card.action(player);
     const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     payAction.cb(Payment.EMPTY);
 
-    expect(player.steel).eq(2);
+    expect(player.stock.steel).eq(2);
     expect(moonData.logisticRate).eq(0);
 
     runAllActions(game);
@@ -75,7 +75,7 @@ describe('MoonRoadStandardProject', () => {
     const moonData = MoonExpansion.moonData(game);
 
     // Card requirements
-    player.steel = 1;
+    player.stock.steel = 1;
 
     testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
     moonData.logisticRate = 8;

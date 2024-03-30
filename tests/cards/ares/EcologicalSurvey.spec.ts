@@ -67,12 +67,12 @@ describe('EcologicalSurvey', () => {
     player.playedCards = [card, microbeCard, animalCard];
 
     // firstSpace tile might grant resources, so resetting all the resource values.
-    player.megaCredits = 0;
-    player.titanium = 0;
-    player.steel = 0;
-    player.heat = 0;
-    player.energy = 0;
-    player.plants = 0;
+    player.stock.megacredits = 0;
+    player.stock.titanium = 0;
+    player.stock.steel = 0;
+    player.stock.heat = 0;
+    player.stock.energy = 0;
+    player.stock.plants = 0;
     player.cardsInHand = [];
     microbeCard.resourceCount = 0;
     animalCard.resourceCount = 0;
@@ -81,12 +81,12 @@ describe('EcologicalSurvey', () => {
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
 
-    expect(player.megaCredits).eq(2);
-    expect(player.titanium).eq(1);
-    expect(player.steel).eq(1);
-    expect(player.heat).eq(1);
-    expect(player.energy).eq(1);
-    expect(player.plants).eq(2);
+    expect(player.stock.megacredits).eq(2);
+    expect(player.stock.titanium).eq(1);
+    expect(player.stock.steel).eq(1);
+    expect(player.stock.heat).eq(1);
+    expect(player.stock.energy).eq(1);
+    expect(player.stock.plants).eq(2);
     expect(player.cardsInHand).is.length(1);
     expect(microbeCard.resourceCount).eq(2);
     expect(animalCard.resourceCount).eq(2);
@@ -97,10 +97,10 @@ describe('EcologicalSurvey', () => {
     // What's key is that this space has a weird behavior - it grants all the bonuses.
     // Only three of them will grant additional bonuses: steel, titanium, and heat.
 
-    expect(player.titanium).eq(0);
-    expect(player.steel).eq(0);
-    expect(player.heat).eq(0);
-    expect(player.plants).eq(0);
+    expect(player.stock.titanium).eq(0);
+    expect(player.stock.steel).eq(0);
+    expect(player.stock.heat).eq(0);
+    expect(player.stock.plants).eq(0);
     expect(player.cardsInHand).is.length(0);
 
     const space = game.board.getAvailableSpacesOnLand(player)[0];
@@ -116,10 +116,10 @@ describe('EcologicalSurvey', () => {
 
     runAllActions(game);
 
-    expect(player.titanium).eq(1);
-    expect(player.steel).eq(1);
-    expect(player.heat).eq(1);
-    expect(player.plants).eq(2);
+    expect(player.stock.titanium).eq(1);
+    expect(player.stock.steel).eq(1);
+    expect(player.stock.heat).eq(1);
+    expect(player.stock.plants).eq(2);
     expect(player.cardsInHand).is.length(1);
   });
 
@@ -132,13 +132,13 @@ describe('EcologicalSurvey', () => {
     space.bonus = [SpaceBonus.PLANT];
     game.simpleAddTile(redPlayer, space, {tileType: TileType.OCEAN});
 
-    player.plants = 0;
+    player.stock.plants = 0;
     new OceanCity().play(player);
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
     selectSpace.cb(space);
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
   });
 
   it('Bonus granted with Arctic Algae', () => {
@@ -150,10 +150,10 @@ describe('EcologicalSurvey', () => {
     game.board.spaces[5].spaceType = SpaceType.OCEAN;
     game.board.spaces[5].bonus = [];
 
-    player.plants = 0;
+    player.stock.plants = 0;
     game.addTile(player, game.board.spaces[5], {tileType: TileType.OCEAN});
     runAllActions(game);
-    expect(player.plants).eq(3);
+    expect(player.stock.plants).eq(3);
   });
 
   it('Bonus granted with Arctic Algae not granted during WGT', () => {
@@ -166,10 +166,10 @@ describe('EcologicalSurvey', () => {
     game.board.spaces[5].bonus = [];
 
     game.phase = Phase.SOLAR;
-    player.plants = 0;
+    player.stock.plants = 0;
     game.addTile(player, game.board.spaces[5], {tileType: TileType.OCEAN});
     runAllActions(game);
-    expect(player.plants).eq(2);
+    expect(player.stock.plants).eq(2);
   });
 
   it('When logging card card resources, log properly', () => {
@@ -199,7 +199,7 @@ describe('EcologicalSurvey', () => {
     setTemperature(game, MAX_TEMPERATURE);
     setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     maxOutOceans(player);
-    player.plants = 9;
+    player.stock.plants = 9;
 
     // Pass last turn
     forceGenerationEnd(game);
@@ -214,6 +214,6 @@ describe('EcologicalSurvey', () => {
     space.bonus = [SpaceBonus.PLANT];
     selectSpace.cb(space);
 
-    expect(player.plants).eq(3);
+    expect(player.stock.plants).eq(3);
   });
 });

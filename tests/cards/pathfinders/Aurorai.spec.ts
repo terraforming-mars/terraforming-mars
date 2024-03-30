@@ -35,10 +35,10 @@ describe('Aurorai', function() {
     const greenery = new GreeneryStandardProject();
     expect(greenery.canAct(player)).is.false;
 
-    player.megaCredits = 23;
+    player.stock.megacredits = 23;
     expect(greenery.canAct(player)).is.true;
 
-    player.megaCredits = 20;
+    player.stock.megacredits = 20;
     expect(greenery.canAct(player)).is.false;
 
     card.resourceCount++;
@@ -49,7 +49,7 @@ describe('Aurorai', function() {
     const asteroid = new AsteroidStandardProject();
     expect(asteroid.canAct(player)).is.false;
 
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     card.resourceCount = 1;
     expect(asteroid.canAct(player)).is.false;
 
@@ -70,7 +70,7 @@ describe('Aurorai', function() {
 
     selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 8, auroraiData: 2}}, player),
     expect(game.getTemperature()).eq(-28);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
     expect(player.getSpendable('auroraiData')).eq(1);
   });
 });

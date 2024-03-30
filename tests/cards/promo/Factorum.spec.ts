@@ -26,7 +26,7 @@ describe('Factorum', function() {
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.production.steel).to.eq(1);
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     const orOptions = cast(card.action(player), OrOptions);
     expect(orOptions.options).has.lengthOf(2);
@@ -35,7 +35,7 @@ describe('Factorum', function() {
     drawCardOption.cb(undefined);
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.megaCredits).to.eq(7);
+    expect(player.stock.megacredits).to.eq(7);
 
     const gainEnergyProductionOption = cast(orOptions.options[0], SelectOption);
     gainEnergyProductionOption.cb(undefined);
@@ -45,15 +45,15 @@ describe('Factorum', function() {
   it('Only offer building card if player has energy', function() {
     const play = card.play(player);
     expect(play).is.undefined;
-    player.megaCredits = 10;
-    player.energy = 1;
+    player.stock.megacredits = 10;
+    player.stock.energy = 1;
 
     const selectOption = cast(card.action(player), SelectOption);
     selectOption.cb(undefined);
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].tags).includes(Tag.BUILDING);
-    expect(player.megaCredits).to.eq(7);
+    expect(player.stock.megacredits).to.eq(7);
   });
 
   it('Factorum + Helion', function() {
@@ -61,15 +61,15 @@ describe('Factorum', function() {
     helion.play(player);
     player.corporations.push(helion);
 
-    player.megaCredits = 2;
-    player.energy = 5;
+    player.stock.megacredits = 2;
+    player.stock.energy = 5;
 
     expect(card.canAct(player)).is.false;
-    player.heat = 1;
+    player.stock.heat = 1;
     expect(card.canAct(player)).is.true;
 
     // Setting a larger amount of heat just to make the test results more interesting
-    player.heat = 5;
+    player.stock.heat = 5;
 
     const selectOption = cast(card.action(player), SelectOption);
     selectOption.cb(undefined);
@@ -79,7 +79,7 @@ describe('Factorum', function() {
     selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
 
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.megaCredits).to.eq(1);
-    expect(player.heat).to.eq(3);
+    expect(player.stock.megacredits).to.eq(1);
+    expect(player.stock.heat).to.eq(3);
   });
 });

@@ -21,18 +21,18 @@ describe('RecklessDetonation', () => {
   it('Should play', function() {
     const card = new RecklessDetonation();
     const [game, player, player2] = testGame(2, {underworldExpansion: true});
-    player2.titanium = 3;
-    player2.steel = 4;
+    player2.stock.titanium = 3;
+    player2.stock.steel = 4;
 
     const orOptions = cast(card.play(player), OrOptions);
 
     expect(orOptions.options).has.lengthOf(3);
 
     orOptions.options[0].cb();
-    expect(player2.titanium).to.eq(1);
+    expect(player2.stock.titanium).to.eq(1);
 
     orOptions.options[1].cb();
-    expect(player2.steel).to.eq(1);
+    expect(player2.stock.steel).to.eq(1);
 
     runAllActions(game);
     UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());

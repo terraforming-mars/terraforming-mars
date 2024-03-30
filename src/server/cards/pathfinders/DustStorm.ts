@@ -36,7 +36,7 @@ export class DustStorm extends Card implements IProjectCard {
     player.game.getPlayers().forEach((target) => {
       target.maybeBlockAttack(player, (proceed) => {
         if (proceed) {
-          target.stock.deduct(Resource.ENERGY, target.energy, {log: true});
+          target.stock.deduct(Resource.ENERGY, target.stock.energy, {log: true});
         }
         return undefined;
       });

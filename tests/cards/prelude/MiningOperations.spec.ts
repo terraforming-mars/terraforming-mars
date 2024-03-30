@@ -9,6 +9,6 @@ describe('MiningOperations', function() {
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.steel).to.eq(2);
-    expect(player.steel).to.eq(4);
+    expect(player.stock.steel).to.eq(4);
   });
 });

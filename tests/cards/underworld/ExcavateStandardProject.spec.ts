@@ -27,22 +27,22 @@ describe('ExcavateStandardProject', () => {
   });
 
   it('can act', () => {
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(card.canAct(player)).is.false;
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 2;
-    player.steel = 2;
+    player.stock.megacredits = 2;
+    player.stock.steel = 2;
     expect(card.canAct(player)).is.false;
 
-    player.megaCredits = 3;
-    player.steel = 2;
+    player.stock.megacredits = 3;
+    player.stock.steel = 2;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', () => {
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
 
     card.action(player);
     runAllActions(game);

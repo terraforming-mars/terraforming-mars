@@ -88,11 +88,11 @@ export class AresHandler {
           break;
 
         case SpaceBonus.MEGACREDITS:
-          player.megaCredits++;
+          player.stock.megacredits++;
           break;
 
         case SpaceBonus.ENERGY:
-          player.energy++;
+          player.stock.energy++;
           break;
 
         case SpaceBonus.MICROBE:
@@ -118,7 +118,7 @@ export class AresHandler {
         ownerBonus = 2;
       }
 
-      adjacentPlayer.megaCredits += ownerBonus;
+      adjacentPlayer.stock.megacredits += ownerBonus;
       player.game.log('${0} gains ${1} M€ for a tile placed next to ${2}', (b) => b.player(adjacentPlayer).number(ownerBonus).string(tileText));
     }
   }

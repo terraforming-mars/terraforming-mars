@@ -74,7 +74,7 @@ describe('Pallas', function() {
 
   it('Should give trade bonus', function() {
     pallas.addColony(player);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
@@ -84,12 +84,12 @@ describe('Pallas', function() {
     sendDelegates.cb(PartyName.REDS);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
   });
 
   it('Colony benefit occurs after trade bonus', function() {
     pallas.addColony(player);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     pallas.trackPosition = 2; // Send 1 delegate
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
@@ -100,6 +100,6 @@ describe('Pallas', function() {
     sendDelegates.cb(PartyName.REDS);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
   });
 });

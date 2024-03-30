@@ -35,13 +35,13 @@ describe('MediaStir', function() {
 
   for (const run of resolveTests) {
     it(`corruption: ${run.corruption}, influence: ${run.influence}`, () => {
-      player.megaCredits = run.mc;
+      player.stock.megacredits = run.mc;
       turmoil.addInfluenceBonus(player, run.influence);
       player.underworldData.corruption = run.corruption;
 
       card.resolve(game, turmoil);
 
-      expect(player.megaCredits).eq(run.expect.mc);
+      expect(player.stock.megacredits).eq(run.expect.mc);
       expect(player.getTerraformRating()).eq(run.expect.tr);
     });
   }

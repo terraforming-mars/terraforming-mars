@@ -65,7 +65,7 @@ describe('AdhaiHighOrbitConstructions', function() {
   it('STANDARD COLONY PROJECT', function() {
     const colonyStandardProject = new BuildColonyStandardProject();
 
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     expect(colonyStandardProject.canAct(player)).is.false;
 
     card.resourceCount = 3;
@@ -79,7 +79,7 @@ describe('AdhaiHighOrbitConstructions', function() {
   it('trade discount', function() {
     expect(player.colonies.coloniesTradeAction()).is.undefined;
 
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     expect(player.colonies.coloniesTradeAction()).is.undefined;
 
     card.resourceCount = 2;
@@ -99,14 +99,14 @@ describe('AdhaiHighOrbitConstructions', function() {
 
     // This doesn't work with titanium
     card.resourceCount = 2;
-    player.megaCredits = 0;
-    player.titanium = 2;
+    player.stock.megacredits = 0;
+    player.stock.titanium = 2;
     expect(player.colonies.coloniesTradeAction()).is.undefined;
 
     // This doesn't work with energy
     card.resourceCount = 2;
-    player.titanium = 0;
-    player.energy = 2;
+    player.stock.titanium = 0;
+    player.stock.energy = 2;
     expect(player.colonies.coloniesTradeAction()).is.undefined;
   });
 });

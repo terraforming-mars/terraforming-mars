@@ -14,7 +14,7 @@ describe('ArchimedesHydroponicsStation', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     player.production.override({energy: 1, megacredits: -4});
     expect(player.getPlayableCardsForTest()).does.include(card);

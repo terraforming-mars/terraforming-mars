@@ -34,45 +34,45 @@ describe('AirScrappingStandardProjectVariant', function() {
   });
 
   it('Can act', function() {
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(card.canAct(player)).is.false;
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     expect(card.canAct(player)).is.true;
   });
 
   it('Can act with Venus tags', function() {
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(card.canAct(player)).is.false;
     player.tagsForTest = {venus: 1};
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
     expect(card.canAct(player)).is.false;
     player.tagsForTest = {venus: 2};
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
     expect(card.canAct(player)).is.false;
     player.tagsForTest = {venus: 3};
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 11;
+    player.stock.megacredits = 11;
     expect(card.canAct(player)).is.false;
     player.tagsForTest = {venus: 4};
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     expect(card.canAct(player)).is.false;
     player.tagsForTest = {venus: 5};
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     player.tagsForTest = {venus: 6};
     expect(card.canAct(player)).is.false;
   });
 
   it('action', function() {
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     player.tagsForTest = {venus: 3};
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);
@@ -80,13 +80,13 @@ describe('AirScrappingStandardProjectVariant', function() {
     card.action(player);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
     expect(player.getTerraformRating()).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
   it('action - max discount 5', function() {
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     player.tagsForTest = {venus: 6};
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);
@@ -94,7 +94,7 @@ describe('AirScrappingStandardProjectVariant', function() {
     card.action(player);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(5);
+    expect(player.stock.megacredits).eq(5);
     expect(player.getTerraformRating()).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
   });

@@ -27,7 +27,7 @@ describe('AdaptationTechnology', function() {
 
   it('Test against oxygen requirement', () => {
     const openCity = new OpenCity();
-    player.megaCredits = openCity.cost;
+    player.stock.megacredits = openCity.cost;
 
     player.production.add(Resource.ENERGY, 1);
 

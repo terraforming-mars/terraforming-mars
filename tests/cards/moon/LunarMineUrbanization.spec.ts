@@ -24,7 +24,7 @@ describe('LunarMineUrbanization', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
@@ -46,7 +46,7 @@ describe('LunarMineUrbanization', () => {
     player.production.override({megacredits: 0});
     moonData.habitatRate = 0;
     expect(player.getTerraformRating()).eq(14);
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     const action = cast(card.play(player), SelectSpace);
 
@@ -65,7 +65,7 @@ describe('LunarMineUrbanization', () => {
 
   it('can play, compatible with Odyssey', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     const [space, nextSpace] = moonData.moon.getAvailableSpacesOnLand(player);
 
@@ -93,7 +93,7 @@ describe('LunarMineUrbanization', () => {
     player.production.override({megacredits: 0});
     moonData.habitatRate = 0;
     expect(player.getTerraformRating()).eq(14);
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     const action = cast(card.play(player), SelectSpace);
 

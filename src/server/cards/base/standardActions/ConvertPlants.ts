@@ -24,7 +24,7 @@ export class ConvertPlants extends StandardActionCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    if (player.plants < player.plantsNeededForGreenery) {
+    if (player.stock.plants < player.plantsNeededForGreenery) {
       return false;
     }
     if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) {
@@ -49,7 +49,7 @@ export class ConvertPlants extends StandardActionCard {
       .andThen((space) => {
         this.actionUsed(player);
         player.game.addGreenery(player, space);
-        player.plants -= player.plantsNeededForGreenery;
+        player.stock.plants -= player.plantsNeededForGreenery;
         return undefined;
       });
   }

@@ -20,14 +20,14 @@ describe('GenerousFunding', function() {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
     player.setTerraformRating(25);
     player2.setTerraformRating(50);
 
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(14);
-    expect(player2.megaCredits).to.eq(26);
+    expect(player.stock.megacredits).to.eq(14);
+    expect(player2.stock.megacredits).to.eq(26);
   });
 
   it('no negative mc give out if TR lower than 15', function() {
@@ -44,13 +44,13 @@ describe('GenerousFunding', function() {
     turmoil.dominantParty.delegates.add(player2);
     turmoil.dominantParty.delegates.add(player2);
 
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
     player.setTerraformRating(12);
     player2.setTerraformRating(50);
 
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(10);
-    expect(player2.megaCredits).to.eq(26);
+    expect(player.stock.megacredits).to.eq(10);
+    expect(player2.stock.megacredits).to.eq(26);
   });
 });

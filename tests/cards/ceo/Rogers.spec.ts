@@ -19,7 +19,7 @@ describe('Rogers', function() {
     card = new Rogers();
     [game, player] = testGame(1, {ceoExtension: true});
     player.playedCards.push(card);
-    player.megaCredits = 30;
+    player.stock.megacredits = 30;
   });
 
   it('Can only act once per game', function() {

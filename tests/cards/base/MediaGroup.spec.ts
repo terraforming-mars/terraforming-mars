@@ -14,11 +14,11 @@ describe('MediaGroup', function() {
 
     runAllActions(game);
 
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
 
     card.onCardPlayed(player, card);
     runAllActions(game);
 
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 });

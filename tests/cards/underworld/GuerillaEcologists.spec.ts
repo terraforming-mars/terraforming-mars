@@ -26,7 +26,7 @@ describe('GuerillaEcologists', () => {
         }
       }
       player.underworldData.corruption = run.corruption;
-      player.plants = run.plants;
+      player.stock.plants = run.plants;
       expect(card.canPlay(player)).eq(run.expected);
     });
   }
@@ -36,14 +36,14 @@ describe('GuerillaEcologists', () => {
     const [game, player] = testGame(2);
     game.board = EmptyBoard.newInstance();
 
-    player.plants = 4;
+    player.stock.plants = 4;
     const selectSpace = cast(card.play(player), SelectSpace);
     const space = selectSpace.spaces[0];
     selectSpace.cb(space);
 
     expect(space.tile?.tileType).eq(TileType.GREENERY);
     expect(space.player).eq(player);
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
   });
 
   it('play with Viral Enhancers', () => {
@@ -51,7 +51,7 @@ describe('GuerillaEcologists', () => {
     const [game, player] = testGame(2);
     game.board = EmptyBoard.newInstance();
 
-    player.plants = 3;
+    player.stock.plants = 3;
     player.underworldData.corruption = 1;
 
     expect(card.canPlay(player)).is.false;
@@ -68,14 +68,14 @@ describe('GuerillaEcologists', () => {
 
     expect(space.tile?.tileType).eq(TileType.GREENERY);
     expect(space.player).eq(player);
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
   });
 
   it('Can place greenery tile on any available land space, not just adjacent to exising greenery', function() {
     const card = new GuerillaEcologists();
     const [game, player] = testGame(2);
     game.board = EmptyBoard.newInstance();
-    player.plants = 4;
+    player.stock.plants = 4;
     addGreenery(player, '35');
     const selectSpace = cast(card.play(player), SelectSpace);
     expect(selectSpace.spaces.length).greaterThan(6);

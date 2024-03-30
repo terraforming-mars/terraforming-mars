@@ -34,8 +34,8 @@ describe('SpinoffProducts', function() {
     turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(4);
-    expect(player2.megaCredits).to.eq(14);
+    expect(player.stock.megacredits).to.eq(4);
+    expect(player2.stock.megacredits).to.eq(14);
   });
 
   it('resolve play, with Habitat Marte', function() {
@@ -51,6 +51,6 @@ describe('SpinoffProducts', function() {
     card.resolve(game, turmoil);
 
     // This includes Habitat Marte itself, which has a Mars tag.
-    expect(player.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
   });
 });

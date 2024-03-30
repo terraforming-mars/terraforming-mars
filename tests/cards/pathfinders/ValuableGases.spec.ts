@@ -44,7 +44,7 @@ describe('ValuableGases', function() {
 
     const selectProjectCardToPlay = cast(player.popWaitingFor(), SelectProjectCardToPlay);
     expect(selectProjectCardToPlay.cards.map((card) => card.name)).has.members([CardName.LOCAL_SHADING, CardName.FLOATING_HABS]);
-    expect(player.megaCredits).eq(10);
+    expect(player.stock.megacredits).eq(10);
 
     selectProjectCardToPlay.payAndPlay(localShading, {
       ...Payment.EMPTY,

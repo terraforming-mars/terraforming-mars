@@ -42,7 +42,7 @@ describe('NewPartner', function() {
   });
 
   it('Can play with no playable preludes drawn', function() {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     // Both of these cards cost MC which the player does not have, and so
     // if the player plays this they will have to fizzle one of the cards.
     game.preludeDeck.drawPile.push(hugeAsteroid, galileanMining);
@@ -51,6 +51,6 @@ describe('NewPartner', function() {
     expect(selectCard.cards).deep.eq([galileanMining, hugeAsteroid]);
     selectCard.cb([selectCard.cards[0]]);
     runAllActions(game);
-    expect(player.megaCredits).eq(15);
+    expect(player.stock.megacredits).eq(15);
   });
 });

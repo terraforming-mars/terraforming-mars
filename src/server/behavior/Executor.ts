@@ -92,16 +92,16 @@ export class Executor implements BehaviorExecutor {
       if (spend.megacredits && !player.canAfford(spend.megacredits)) {
         return false;
       }
-      if (spend.steel && player.steel < spend.steel) {
+      if (spend.steel && player.stock.steel < spend.steel) {
         return false;
       }
-      if (spend.titanium && player.titanium < spend.titanium) {
+      if (spend.titanium && player.stock.titanium < spend.titanium) {
         return false;
       }
-      if (spend.plants && player.plants < spend.plants) {
+      if (spend.plants && player.stock.plants < spend.plants) {
         return false;
       }
-      if (spend.energy && player.energy < spend.energy) {
+      if (spend.energy && player.stock.energy < spend.energy) {
         return false;
       }
       if (spend.heat) {

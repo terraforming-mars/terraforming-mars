@@ -18,7 +18,7 @@ describe('DeepSpaceOperations', function() {
     card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    expect(player.titanium).eq(4);
+    expect(player.stock.titanium).eq(4);
 
     expect(player.cardsInHand).has.lengthOf(2);
     player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tag.SPACE)).not.to.eq(-1));

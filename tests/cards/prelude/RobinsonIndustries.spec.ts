@@ -22,12 +22,12 @@ describe('RobinsonIndustries', function() {
   });
 
   it('Can not act', function() {
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Can act', function() {
-    player.megaCredits = 4;
+    player.stock.megacredits = 4;
     expect(card.canAct(player)).is.true;
 
     const result = cast(card.action(player), OrOptions);
@@ -36,7 +36,7 @@ describe('RobinsonIndustries', function() {
     result.options[1].cb();
     runAllActions(game);
     expect(player.production.steel).to.eq(1);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Only allows to choose from lowest production(s)', function() {
@@ -56,13 +56,13 @@ describe('RobinsonIndustries', function() {
     const helion = new Helion();
     helion.play(player);
     player.corporations.push(helion);
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canAct(player)).is.false;
-    player.heat = 1;
+    player.stock.heat = 1;
     expect(card.canAct(player)).is.true;
 
     // Setting a larger amount of heat just to make the test results more interesting
-    player.heat = 5;
+    player.stock.heat = 5;
 
     const selectResource = cast(card.action(player), OrOptions);
     expect((selectResource.options[1].title as String).includes('steel')).is.true;
@@ -72,7 +72,7 @@ describe('RobinsonIndustries', function() {
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 2, heat: 2});
     expect(player.production.steel).to.eq(1);
-    expect(player.megaCredits).to.eq(1);
-    expect(player.heat).to.eq(3);
+    expect(player.stock.megacredits).to.eq(1);
+    expect(player.stock.heat).to.eq(3);
   });
 });

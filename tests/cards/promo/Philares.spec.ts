@@ -171,8 +171,8 @@ describe('Philares', () => {
     // maxOutOceans(player);
 
     // Setup plants for endgame
-    philaresPlayer.plants = 7;
-    otherPlayer.plants = 8;
+    philaresPlayer.stock.plants = 7;
+    otherPlayer.stock.plants = 8;
 
     // First player final greenery placement, done adjacent to one of Philares' tiles
     game.takeNextFinalGreeneryAction();
@@ -188,7 +188,7 @@ describe('Philares', () => {
     // Option 3 is plants.
     philaresPlayerResourceSelection.options[3].cb(1);
     philaresPlayerResourceSelection.cb(undefined);
-    expect(philaresPlayer.plants).to.eq(8);
+    expect(philaresPlayer.stock.plants).to.eq(8);
     expect(philaresPlayer.getWaitingFor()).is.undefined;
 
     game.takeNextFinalGreeneryAction();

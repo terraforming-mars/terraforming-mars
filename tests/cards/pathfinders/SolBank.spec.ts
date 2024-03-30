@@ -29,7 +29,7 @@ describe('SolBank', () => {
     [game, player] = testGame(1, {coloniesExtension: true, turmoilExtension: true});
     solBank = new SolBank();
     player.playCorporationCard(solBank);
-    player.megaCredits = 100;
+    player.stock.megacredits = 100;
     game.colonies.push(new Luna());
 
     // Player is waiting for SelectColony. Popping it. The cast is just to ensure that if this changes, the test changes.
@@ -67,7 +67,7 @@ describe('SolBank', () => {
 
   it('paying for project card with steel', () => {
     player.cardsInHand = [new BiomassCombustors()]; // Costs 4
-    player.steel = 3;
+    player.stock.steel = 3;
     player.production.override({plants: 1}); // card requires losing 1 plant production
     setOxygenLevel(game, 6);
     const spctp = new SelectProjectCardToPlay(player);
@@ -82,7 +82,7 @@ describe('SolBank', () => {
   });
 
   it('paying for project card with titanium', () => {
-    player.titanium = 10;
+    player.stock.titanium = 10;
     player.cardsInHand = [new AerobrakedAmmoniaAsteroid()]; // Costs 26
     const spctp = new SelectProjectCardToPlay(player);
     spctp.process({
@@ -102,7 +102,7 @@ describe('SolBank', () => {
     selectCard.cb([selectCard.cards[1], selectCard.cards[2]]);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(94);
+    expect(player.stock.megacredits).eq(94);
     expect(solBank.resourceCount).eq(1);
   });
 
@@ -138,8 +138,8 @@ describe('SolBank', () => {
   });
 
   it('paying to trade with colonies, titanium', () => {
-    player.megaCredits = 0;
-    player.titanium = 100;
+    player.stock.megacredits = 0;
+    player.stock.titanium = 100;
 
     const tradeAction = player.colonies.coloniesTradeAction();
     tradeAction?.process({
@@ -157,31 +157,31 @@ describe('SolBank', () => {
     }, player);
     runAllActions(game);
 
-    expect(player.titanium).eq(97);
+    expect(player.stock.titanium).eq(97);
     expect(solBank.resourceCount).eq(1);
   });
 
   it('paying for a Turmoil delegate', () => {
     const turmoil = game.turmoil!;
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     const input = turmoil.getSendDelegateInput(player);
     input!.process({type: 'party', partyName: PartyName.REDS});
     runAllActions(game);
 
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
     expect(solBank.resourceCount).eq(0);
 
     const input2 = turmoil.getSendDelegateInput(player);
     input2!.process({type: 'party', partyName: PartyName.REDS});
     runAllActions(game);
 
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
     expect(solBank.resourceCount).eq(1);
   });
 
   it('Action that spends steel', () => {
-    player.steel = 1;
-    player.megaCredits = 0;
+    player.stock.steel = 1;
+    player.stock.megacredits = 0;
     const spaceElevator = new SpaceElevator();
     player.playedCards.push(spaceElevator);
     const selectCard = player.playActionCard();
@@ -191,18 +191,18 @@ describe('SolBank', () => {
     }, player);
     runAllActions(game);
 
-    expect(player.steel).eq(0);
-    expect(player.megaCredits).eq(5);
+    expect(player.stock.steel).eq(0);
+    expect(player.stock.megacredits).eq(5);
     expect(solBank.resourceCount).eq(1);
   });
 
   it('next generation', () => {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     player.setTerraformRating(15);
     solBank.resourceCount = 5;
     finishGeneration(game);
 
-    expect(player.megaCredits).eq(18);
+    expect(player.stock.megacredits).eq(18);
     expect(solBank.resourceCount).eq(0);
   });
 });

@@ -90,7 +90,7 @@ describe('StratosphericBirds', () => {
     player.playedCards.push(aerialMappers);
 
     setVenusScaleLevel(game, 12);
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
 
     expect(card.canPlay(player)).is.true;
 
@@ -108,14 +108,14 @@ describe('StratosphericBirds', () => {
     player.addResourceTo(dirigibles, 1);
 
     setVenusScaleLevel(game, 12);
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
 
     // 9 M€ + 1 Dirigibles floater: Cannot play
     expect(card.canPlay(player)).is.not.true;
 
 
     // 12 M€ + 1 Dirigibles floater: Card is playable
-    player.megaCredits = 12;
+    player.stock.megacredits = 12;
     expect(card.canPlay(player)).is.true;
 
     // Try to spend floater to pay for card: Throw an error
@@ -138,7 +138,7 @@ describe('StratosphericBirds', () => {
     player.addResourceTo(dirigibles, 3);
 
     setVenusScaleLevel(game, 12);
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
 
     expect(card.canPlay(player)).is.true;
 
@@ -148,14 +148,14 @@ describe('StratosphericBirds', () => {
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
     expect(deuteriumExport.resourceCount).to.eq(0);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Can play with discounts and single Dirigibles floater', () => {
     const dirigibles = new Dirigibles();
     player.playedCards.push(dirigibles);
     player.addResourceTo(dirigibles, 1);
-    player.megaCredits = 4;
+    player.stock.megacredits = 4;
     setVenusScaleLevel(game, 12);
 
     const indentured = new IndenturedWorkers();

@@ -24,6 +24,6 @@ describe('CentralReservoir', () => {
     expect(spaces.map((s) => s.spaceType)).does.not.contain(SpaceType.OCEAN);
     expect(space.tile?.tileType).eq(TileType.OCEAN);
     expect(space.excavator).eq(player);
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
   });
 });

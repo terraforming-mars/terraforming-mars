@@ -23,19 +23,19 @@ describe('DeimosDownPromo', function() {
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
-    expect(player.steel).to.eq(4);
+    expect(player.stock.steel).to.eq(4);
     const input = player.game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
   });
 
   it('Can remove plants', function() {
-    player2.plants = 5;
+    player2.stock.plants = 5;
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
-    expect(player.steel).to.eq(4);
+    expect(player.stock.steel).to.eq(4);
 
     expect(player.game.deferredActions).has.lengthOf(1);
 
@@ -43,19 +43,19 @@ describe('DeimosDownPromo', function() {
     const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb([player2]);
 
-    expect(player2.plants).to.eq(0);
+    expect(player2.stock.plants).to.eq(0);
   });
 
   it('Works fine in solo mode', function() {
     game = Game.newInstance('gameid', [player], player);
 
-    player.plants = 15;
+    player.stock.plants = 15;
     expect(card.play(player)).is.undefined;
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
 
     expect(player.game.getTemperature()).to.eq(-24);
-    expect(player.steel).to.eq(4);
-    expect(player.plants).to.eq(15); // not removed
+    expect(player.stock.steel).to.eq(4);
+    expect(player.stock.plants).to.eq(15); // not removed
   });
 });

@@ -45,20 +45,20 @@ describe('AresHandler', function() {
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.RESTRICTED_AREA});
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     player.cardsInHand = [];
-    otherPlayer.megaCredits = 0;
+    otherPlayer.stock.megacredits = 0;
     otherPlayer.cardsInHand = [];
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     // player who placed next to Restricted area gets a card, but no money.
-    expect(player.megaCredits).is.eq(0);
+    expect(player.stock.megacredits).is.eq(0);
     expect(player.cardsInHand).is.length(1);
 
     // player who owns Restricted area gets money, but no card.
-    expect(otherPlayer.megaCredits).is.eq(1);
+    expect(otherPlayer.stock.megacredits).is.eq(1);
     expect(otherPlayer.cardsInHand).is.length(0);
   });
 
@@ -149,18 +149,18 @@ describe('AresHandler', function() {
     firstSpace.adjacency = {bonus: [], cost: 2};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
 
-    player.megaCredits = 2;
-    otherPlayer.megaCredits = 0;
+    player.stock.megacredits = 2;
+    otherPlayer.stock.megacredits = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     game.deferredActions.peek()!.execute();
 
     // player who placed next to Nuclear zone, loses two money.
-    expect(player.megaCredits).is.eq(0);
+    expect(player.stock.megacredits).is.eq(0);
 
     // player who owns Nuclear zone doesn't get an adjacency bonus.
-    expect(otherPlayer.megaCredits).is.eq(0);
+    expect(otherPlayer.stock.megacredits).is.eq(0);
   });
 
   it('Cannot afford adjacency costs', function() {
@@ -168,7 +168,7 @@ describe('AresHandler', function() {
     firstSpace.adjacency = {bonus: [], cost: 2};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
 
-    otherPlayer.megaCredits = 0;
+    otherPlayer.stock.megacredits = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
 
@@ -239,28 +239,28 @@ describe('AresHandler', function() {
   it('cover mild hazard', function() {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     _AresHazardPlacement.putHazardAt(space, TileType.EROSION_MILD);
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     expect(player.getTerraformRating()).eq(20);
 
     game.addTile(player, space, {tileType: TileType.GREENERY});
     game.deferredActions.peek()!.execute();
 
     expect(space.tile!.tileType).eq(TileType.GREENERY);
-    expect(player.megaCredits).is.eq(0);
+    expect(player.stock.megacredits).is.eq(0);
     expect(player.getTerraformRating()).eq(21);
   });
 
   it('cover severe hazard', function() {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     _AresHazardPlacement.putHazardAt(space, TileType.EROSION_SEVERE);
-    player.megaCredits = 16;
+    player.stock.megacredits = 16;
     expect(player.getTerraformRating()).eq(20);
 
     game.addTile(player, space, {tileType: TileType.GREENERY});
     game.deferredActions.peek()!.execute();
 
     expect(space.tile!.tileType).eq(TileType.GREENERY);
-    expect(player.megaCredits).is.eq(0);
+    expect(player.stock.megacredits).is.eq(0);
     expect(player.getTerraformRating()).eq(22);
   });
 
@@ -411,15 +411,15 @@ describe('AresHandler', function() {
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;
-    expect(otherPlayer.plants).eq(0);
-    expect(player.plants).eq(0);
+    expect(otherPlayer.stock.plants).eq(0);
+    expect(player.stock.plants).eq(0);
 
     game.addOcean(otherPlayer, space);
-    // Placing an Ocean City on top of the ocean will not grant player plants.
+    // Placing an Ocean City on top of the ocean will not grant player.stock.plants.
     game.addTile(player, space, {tileType: TileType.OCEAN_CITY});
 
-    expect(otherPlayer.plants).greaterThan(0);
-    expect(player.plants).eq(0);
+    expect(otherPlayer.stock.plants).greaterThan(0);
+    expect(player.stock.plants).eq(0);
   });
 
   it('No adjacency bonuses during WGT', function() {
@@ -428,18 +428,18 @@ describe('AresHandler', function() {
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.RESTRICTED_AREA});
     game.phase = Phase.SOLAR;
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     player.cardsInHand = [];
-    otherPlayer.megaCredits = 0;
+    otherPlayer.stock.megacredits = 0;
     otherPlayer.cardsInHand = [];
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     // Neither player gets money or a card.
-    expect(player.megaCredits).is.eq(0);
+    expect(player.stock.megacredits).is.eq(0);
     expect(player.cardsInHand).is.length(0);
-    expect(otherPlayer.megaCredits).is.eq(0);
+    expect(otherPlayer.stock.megacredits).is.eq(0);
     expect(otherPlayer.cardsInHand).is.length(0);
   });
 
@@ -449,14 +449,14 @@ describe('AresHandler', function() {
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
     game.phase = Phase.SOLAR;
 
-    player.megaCredits = 2;
-    otherPlayer.megaCredits = 0;
+    player.stock.megacredits = 2;
+    otherPlayer.stock.megacredits = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     // player who placed next to Nuclear zone, loses nothing.
-    expect(player.megaCredits).is.eq(2);
+    expect(player.stock.megacredits).is.eq(2);
   });
 
   it('No adjacency hazard costs during WGT', function() {
@@ -474,7 +474,7 @@ describe('AresHandler', function() {
   it('No hazard coverage cost or bonus during WGT', function() {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     _AresHazardPlacement.putHazardAt(space, TileType.EROSION_SEVERE);
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     expect(player.getTerraformRating()).eq(20);
     game.phase = Phase.SOLAR;
 
@@ -483,7 +483,7 @@ describe('AresHandler', function() {
     expect(space.tile!.tileType).eq(TileType.GREENERY);
 
     // No costs or benefits
-    expect(player.megaCredits).is.eq(8);
+    expect(player.stock.megacredits).is.eq(8);
     expect(player.getTerraformRating()).eq(20);
   });
 });

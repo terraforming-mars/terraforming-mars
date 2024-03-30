@@ -21,10 +21,10 @@ describe('DeimosDownAres', function() {
   beforeEach(() => {
     card = new DeimosDownAres();
     [game, player, player2] = testGame(2, {aresExtension: true});
-    player.megaCredits = 0;
-    player2.megaCredits = 0;
-    player.steel = 0;
-    player2.steel = 0;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 0;
+    player.stock.steel = 0;
+    player2.stock.steel = 0;
   });
 
   // Identical to the Deimos Down Promo test
@@ -33,20 +33,20 @@ describe('DeimosDownAres', function() {
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
-    expect(player.steel).to.eq(4);
+    expect(player.stock.steel).to.eq(4);
     const input = player.game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
   });
 
   // Identical to the Deimos Down Promo test
   it('Can remove plants', function() {
-    player2.plants = 5;
+    player2.stock.plants = 5;
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
-    expect(player.steel).to.eq(4);
+    expect(player.stock.steel).to.eq(4);
 
     expect(player.game.deferredActions).has.lengthOf(1);
 
@@ -54,21 +54,21 @@ describe('DeimosDownAres', function() {
     const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb([player2]);
 
-    expect(player2.plants).to.eq(0);
+    expect(player2.stock.plants).to.eq(0);
   });
 
   // Identical to the Deimos Down Promo test
   it('Works fine in solo mode', function() {
     const [game, player] = testGame(1);
 
-    player.plants = 15;
+    player.stock.plants = 15;
     expect(card.play(player)).is.undefined;
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
 
     expect(player.game.getTemperature()).to.eq(-24);
-    expect(player.steel).to.eq(4);
-    expect(player.plants).to.eq(15); // not removed
+    expect(player.stock.steel).to.eq(4);
+    expect(player.stock.plants).to.eq(15); // not removed
   });
 
   it('Adjacency bonus', function() {
@@ -93,10 +93,10 @@ describe('DeimosDownAres', function() {
     const space = action.spaces[0];
     action.cb(space);
 
-    player.megaCredits = 0;
-    player2.megaCredits = 0;
-    player.steel = 0;
-    player2.steel = 0;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 0;
+    player.stock.steel = 0;
+    player2.stock.steel = 0;
 
     // Place tiles from different players next to tile that grants adjacency bonuses
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
@@ -104,14 +104,14 @@ describe('DeimosDownAres', function() {
     game.addGreenery(player, adjacentSpaces[0]);
     runAllActions(game);
 
-    expect(player.megaCredits).to.eq(1); // Owner gets MC bonus
+    expect(player.stock.megacredits).to.eq(1); // Owner gets MC bonus
 
     // Player 1 gets adjacency bonuses
-    expect(player.steel).to.eq(1); // 1 Steel for adjacency bonus
+    expect(player.stock.steel).to.eq(1); // 1 Steel for adjacency bonus
     expect(player.getResourceCount(CardResource.ASTEROID)).eq(1);
 
     // Player 2 gets nothing
-    expect(player2.steel).to.eq(0);
+    expect(player2.stock.steel).to.eq(0);
     expect(player2.getResourceCount(CardResource.ASTEROID)).eq(0);
   });
 
@@ -125,10 +125,10 @@ describe('DeimosDownAres', function() {
     const space = action.spaces[0];
     action.cb(space);
 
-    player.megaCredits = 0;
-    player2.megaCredits = 0;
-    player.steel = 0;
-    player2.steel = 0;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 0;
+    player.stock.steel = 0;
+    player2.stock.steel = 0;
 
     // Place tiles from different players next to tile that grants adjacency bonuses
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
@@ -136,14 +136,14 @@ describe('DeimosDownAres', function() {
     game.addGreenery(player2, adjacentSpaces[0]);
     runAllActions(game);
 
-    expect(player.megaCredits).to.eq(1); // Owner gets MC bonus
+    expect(player.stock.megacredits).to.eq(1); // Owner gets MC bonus
 
     // Player 1 gets nothing
-    expect(player.steel).to.eq(0);
+    expect(player.stock.steel).to.eq(0);
     expect(player.getResourceCount(CardResource.ASTEROID)).eq(0);
 
     // Player 2 gets adjacency bonuses
-    expect(player2.steel).to.eq(1); // 1 Steel for adjacency bonus
+    expect(player2.stock.steel).to.eq(1); // 1 Steel for adjacency bonus
     expect(player2.getResourceCount(CardResource.ASTEROID)).eq(1);
   });
 });

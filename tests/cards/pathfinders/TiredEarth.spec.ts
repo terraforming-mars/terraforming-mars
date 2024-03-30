@@ -18,8 +18,8 @@ describe('TiredEarth', function() {
     player2.playedCards.push(new AcquiredCompany());
     player2.playedCards.push(new AcquiredCompany());
 
-    player.plants = 20;
-    player2.plants = 20;
+    player.stock.plants = 20;
+    player2.stock.plants = 20;
 
     turmoil.chairman = player2;
     turmoil.dominantParty.partyLeader = player2;
@@ -28,7 +28,7 @@ describe('TiredEarth', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.plants).to.eq(19);
-    expect(player2.plants).to.eq(20);
+    expect(player.stock.plants).to.eq(19);
+    expect(player2.stock.plants).to.eq(20);
   });
 });

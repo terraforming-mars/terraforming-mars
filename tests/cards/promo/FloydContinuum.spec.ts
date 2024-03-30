@@ -54,14 +54,14 @@ describe('FloydContinuum', () => {
 
   it('oceans', () => {
     maxOutOceans(player, 8);
-    player.megaCredits = 0; // Erases ocean adjacency bonuses
+    player.stock.megacredits = 0; // Erases ocean adjacency bonuses
     card.action(player);
     runAllActions(game);
 
     expect(player.stock.megacredits).eq(0);
 
     maxOutOceans(player, 9);
-    player.megaCredits = 0; // Erases ocean adjacency bonuses
+    player.stock.megacredits = 0; // Erases ocean adjacency bonuses
     card.action(player);
     runAllActions(game);
 
@@ -89,7 +89,7 @@ describe('FloydContinuum', () => {
     setOxygenLevel(game, 14);
     maxOutOceans(player, 9);
     setTemperature(game, 8);
-    player.megaCredits = 0; // Erases ocean adjacency bonuses
+    player.stock.megacredits = 0; // Erases ocean adjacency bonuses
 
     card.action(player);
     runAllActions(game);

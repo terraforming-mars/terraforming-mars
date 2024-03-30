@@ -15,20 +15,20 @@ describe('RustEatingBacteria', () => {
   });
 
   it('can act', () => {
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(card.canAct(player)).is.true;
 
-    player.steel = 0;
+    player.stock.steel = 0;
     expect(card.canAct(player)).is.false;
   });
 
   it('action', () => {
-    player.steel = 1;
+    player.stock.steel = 1;
     card.resourceCount = 0;
     card.action(player);
     runAllActions(player.game);
     expect(card.resourceCount).eq(2);
-    expect(player.steel).eq(0);
+    expect(player.stock.steel).eq(0);
   });
 });
 

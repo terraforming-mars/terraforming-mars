@@ -10,10 +10,10 @@ describe('Pristar', function() {
     const play = card.play(player);
     player.setCorporationForTest(card);
     expect(play).is.undefined;
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     game.increaseTemperature(player, 1);
     card.onProductionPhase(player);
-    expect(player.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
     expect(card.resourceCount).to.eq(0);
   });
 });

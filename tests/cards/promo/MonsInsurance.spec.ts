@@ -35,20 +35,20 @@ describe('MonsInsurance', () => {
   });
 
   it('Triggers effect when resources are removed', () => {
-    player.megaCredits = 2;
-    player2.titanium = 3;
+    player.stock.megacredits = 2;
+    player2.stock.titanium = 3;
 
     const card2 = new Sabotage();
     const action = cast(card2.play(player3), OrOptions);
 
     action.options[1].cb();
-    expect(player2.titanium).to.eq(0);
-    expect(player2.megaCredits).to.eq(2);
-    expect(player.megaCredits).to.eq(0);
+    expect(player2.stock.titanium).to.eq(0);
+    expect(player2.stock.megacredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Does not trigger effect when player removes resources from self', () => {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
 
     const ants = new Ants();
     const tardigrades = new Tardigrades();
@@ -56,12 +56,12 @@ describe('MonsInsurance', () => {
     tardigrades.resourceCount = 3;
 
     ants.action(player2); // remove resource from own card
-    expect(player2.megaCredits).to.eq(0);
-    expect(player.megaCredits).to.eq(2);
+    expect(player2.stock.megacredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('Does not trigger effect when player should pay itself', () => {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
 
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
@@ -71,52 +71,52 @@ describe('MonsInsurance', () => {
     player2.playedCards.push(ants);
 
     ants.action(player2); // remove resource from Mons' card
-    expect(player2.megaCredits).to.eq(0);
-    expect(player.megaCredits).to.eq(2);
+    expect(player2.stock.megacredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('Effect triggers direct calls to addResource', () => {
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
-    player2.steel = 1;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
+    player2.stock.steel = 1;
 
     player2.stock.add(Resource.STEEL, -1, {log: false, from: player3});
 
-    expect(player2.megaCredits).to.eq(13);
-    expect(player.megaCredits).to.eq(7);
+    expect(player2.stock.megacredits).to.eq(13);
+    expect(player.stock.megacredits).to.eq(7);
   });
 
   it('Effect does not trigger direct calls to addResource for Global Event', () => {
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
-    player2.steel = 1;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
+    player2.stock.steel = 1;
 
     player2.stock.add(Resource.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
 
-    expect(player2.megaCredits).to.eq(10);
-    expect(player.megaCredits).to.eq(10);
+    expect(player2.stock.megacredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
   });
 
   it('Effect triggers direct calls to addProduction', () => {
     player.production.override({megacredits: 1});
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
 
     player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: player3});
 
-    expect(player2.megaCredits).to.eq(13);
-    expect(player.megaCredits).to.eq(7);
+    expect(player2.stock.megacredits).to.eq(13);
+    expect(player.stock.megacredits).to.eq(7);
   });
 
   it('Effect does not trigger direct calls to addProduction for Global Event', () => {
     player.production.override({megacredits: 1});
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
 
     player2.production.add(Resource.MEGACREDITS, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
 
-    expect(player2.megaCredits).to.eq(10);
-    expect(player.megaCredits).to.eq(10);
+    expect(player2.stock.megacredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
   });
 });
 
@@ -137,7 +137,7 @@ describe('MonsInsurance - Solo', () => {
   });
 
   it('Triggers on StealResources', () => {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     // AirRaid steals 5 resources from any player.
     const airRaid = new AirRaid();
@@ -146,11 +146,11 @@ describe('MonsInsurance - Solo', () => {
     cast(player.getWaitingFor(), undefined);
 
     // 10 + 5 - 3 = 12
-    expect(player.megaCredits).eq(12);
+    expect(player.stock.megacredits).eq(12);
   });
 
   it('Triggers on DecreaseAnyProduction', () => {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     // Birds removes 2 plant production
     const birds = new Birds();
@@ -158,11 +158,11 @@ describe('MonsInsurance - Solo', () => {
     runAllActions(player.game);
     cast(player.getWaitingFor(), undefined);
 
-    expect(player.megaCredits).eq(7);
+    expect(player.stock.megacredits).eq(7);
   });
 
   it('Triggers on RemoveAnyPlants', () => {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     // DeimosDown removes 8 plants from any palyer
     const comet = new DeimosDown();
@@ -171,11 +171,11 @@ describe('MonsInsurance - Solo', () => {
     runAllActions(player.game);
     cast(player.getWaitingFor(), undefined);
 
-    expect(player.megaCredits).eq(7);
+    expect(player.stock.megacredits).eq(7);
   });
 
   it('Triggers on RemoveResourcesFromCard', () => {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     // Predators steals one animal from another player
     const predators = new Predators();
@@ -187,6 +187,6 @@ describe('MonsInsurance - Solo', () => {
     cast(player.getWaitingFor(), undefined);
 
     expect(predators.resourceCount).eq(1);
-    expect(player.megaCredits).eq(7);
+    expect(player.stock.megacredits).eq(7);
   });
 });

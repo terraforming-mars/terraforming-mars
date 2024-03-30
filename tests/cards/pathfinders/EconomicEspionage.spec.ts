@@ -15,21 +15,21 @@ describe('EconomicEspionage', function() {
   });
 
   it('can act', function() {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
 
     expect(card.canAct(player)).is.false;
 
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
 
     expect(card.canAct(player)).is.true;
   });
 
   it('action', function() {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
 
     card.action(player);
     runAllActions(player.game);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(card.resourceCount).eq(1);
   });
 

@@ -8,6 +8,6 @@ describe('MineralDeposit', function() {
     const card = new MineralDeposit();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
-    expect(player.steel).to.eq(5);
+    expect(player.stock.steel).to.eq(5);
   });
 });

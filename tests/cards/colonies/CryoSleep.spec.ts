@@ -14,7 +14,7 @@ describe('CryoSleep', function() {
     cast(card.play(player), undefined);
     const ceres = new Ceres();
     ceres.trade(player);
-    expect(player.steel).to.eq(2);
+    expect(player.stock.steel).to.eq(2);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

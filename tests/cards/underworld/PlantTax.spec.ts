@@ -18,17 +18,17 @@ describe('PlantTax', function() {
   });
 
   it('play', function() {
-    player.plants = 5;
-    player2.plants = 15;
-    player3.plants = 400;
+    player.stock.plants = 5;
+    player2.stock.plants = 15;
+    player3.stock.plants = 400;
 
     expect(card.play(player)).is.undefined;
 
     runAllActions(game);
 
-    expect(player.plants).eq(3);
-    expect(player2.plants).eq(13);
-    expect(player3.plants).eq(398);
+    expect(player.stock.plants).eq(3);
+    expect(player2.stock.plants).eq(13);
+    expect(player3.stock.plants).eq(398);
   });
 
   it('generationEnd', function() {

@@ -23,11 +23,11 @@ describe('MudSlides', function() {
     const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];
     game.addCity(player, game.board.getAdjacentSpaces(oceanTile)[0]);
     game.addOcean(player, oceanTile);
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     card.resolve(game, turmoil);
 
-    expect(player.megaCredits).to.eq(6);
+    expect(player.stock.megacredits).to.eq(6);
   });
 
   it('resolve play with overplaced tiles', function() {
@@ -58,10 +58,10 @@ describe('MudSlides', function() {
     };
     player.game.addTile(player, spaces.second, tile);
 
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     card.resolve(game, turmoil);
 
-    expect(player.megaCredits).to.eq(6);
+    expect(player.stock.megacredits).to.eq(6);
   });
 });

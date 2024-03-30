@@ -25,7 +25,7 @@ describe('CosmicRadiation', () => {
 
   it('can play', () => {
     player1.cardsInHand = [card];
-    player1.megaCredits = card.cost;
+    player1.stock.megacredits = card.cost;
 
     moonData.miningRate = 4;
     expect(player1.getPlayableCardsForTest()).does.include(card);
@@ -43,23 +43,23 @@ describe('CosmicRadiation', () => {
     };
 
     assignTile(0, player1);
-    player1.megaCredits = 10;
+    player1.stock.megacredits = 10;
 
     assignTile(1, player2);
     assignTile(2, player2);
-    player2.megaCredits = 3;
+    player2.stock.megacredits = 3;
 
     assignTile(3, player3);
     assignTile(4, player3);
     assignTile(5, player3);
-    player3.megaCredits = 20;
+    player3.stock.megacredits = 20;
 
     card.play(player1);
     runAllActions(player1.game);
 
-    expect(player1.megaCredits).eq(6);
-    expect(player2.megaCredits).eq(0);
-    expect(player3.megaCredits).eq(8);
+    expect(player1.stock.megacredits).eq(6);
+    expect(player2.stock.megacredits).eq(0);
+    expect(player3.stock.megacredits).eq(8);
   });
 });
 

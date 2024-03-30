@@ -21,7 +21,7 @@ describe('LunarPlanningOffice', () => {
   });
 
   it('play', () => {
-    player.steel = 0;
+    player.stock.steel = 0;
     player.cardsInHand = [];
 
     // Prime the deck for a determinstic outcome.
@@ -35,7 +35,7 @@ describe('LunarPlanningOffice', () => {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
 
-    expect(player.steel).eq(6);
+    expect(player.stock.steel).eq(6);
 
     cast(player.popWaitingFor(), undefined);
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.MARE_NECTARIS_MINE, CardName.MARE_IMBRIUM_MINE]);

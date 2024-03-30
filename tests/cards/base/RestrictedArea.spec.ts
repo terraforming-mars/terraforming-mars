@@ -18,7 +18,7 @@ describe('RestrictedArea', function() {
   });
 
   it('Can not act if not enough MC', function() {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     expect(card.canAct(player)).is.not.true;
   });
 
@@ -34,12 +34,12 @@ describe('RestrictedArea', function() {
   });
 
   it('Should act', function() {
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).is.true;
     card.action(player);
 
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);
   });
 });

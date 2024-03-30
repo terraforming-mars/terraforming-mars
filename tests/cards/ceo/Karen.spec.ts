@@ -19,7 +19,7 @@ describe('Karen', function() {
     [game, player] = testGame(2, {preludeExtension: true});
 
     // This ensures that preludes which cost MC are affordable.
-    player.megaCredits = 20;
+    player.stock.megacredits = 20;
   });
 
   it('Can act', function() {
@@ -48,7 +48,7 @@ describe('Karen', function() {
   });
 
   it('Discards unplayable prelude cards', function() {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     game.preludeDeck.drawPile.push(new GalileanMining());
 
     cast(card.action(player), SelectCard<IPreludeCard>);

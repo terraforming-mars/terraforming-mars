@@ -40,7 +40,7 @@ describe('WildlifeDome', function() {
     turmoil.rulingParty = greens;
     PoliticalAgendas.setNextAgenda(turmoil, game);
 
-    player.megaCredits = 15;
+    player.stock.megacredits = 15;
     expect(player.canPlay(card)).is.true;
 
     expect(card.play(player)).is.undefined;
@@ -59,10 +59,10 @@ describe('WildlifeDome', function() {
     greens.delegates.add(player, 2);
     expect(player.canPlay(card)).is.not.true;
 
-    player.megaCredits = 17;
+    player.stock.megacredits = 17;
     expect(player.canPlay(card)).is.not.true;
 
-    player.megaCredits = 18;
+    player.stock.megacredits = 18;
     expect(player.canPlay(card)).deep.eq({redsCost: 3});
   });
 });

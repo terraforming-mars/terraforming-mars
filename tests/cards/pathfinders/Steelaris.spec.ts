@@ -22,65 +22,65 @@ describe('Steelaris', function() {
 
   it('when you place a city', function() {
     const citySpace = game.board.getAvailableSpacesForCity(player)[0];
-    expect(player.plants).eq(0);
-    expect(player.steel).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.steel).eq(0);
 
     game.addCity(player, citySpace);
     runAllActions(game);
 
-    expect(player.plants).eq(1);
-    expect(player.steel).eq(1);
+    expect(player.stock.plants).eq(1);
+    expect(player.stock.steel).eq(1);
   });
 
   it('when opponent places a city', function() {
     const citySpace = game.board.getAvailableSpacesForCity(player)[0];
-    expect(player.plants).eq(0);
-    expect(player.steel).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.steel).eq(0);
 
     game.addCity(player2, citySpace);
     runAllActions(game);
 
-    expect(player.plants).eq(1);
-    expect(player.steel).eq(1);
+    expect(player.stock.plants).eq(1);
+    expect(player.stock.steel).eq(1);
   });
 
   it('when you place a greenery', function() {
     const greenerySpace = game.board.getAvailableSpacesForGreenery(player)[0];
-    expect(player.plants).eq(0);
-    expect(player.steel).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.steel).eq(0);
 
     game.addGreenery(player, greenerySpace);
     runAllActions(game);
 
-    expect(player.plants).eq(0);
-    expect(player.steel).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.steel).eq(0);
   });
 
   it('when you place a special tile', function() {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    expect(player.plants).eq(0);
-    expect(player.steel).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.steel).eq(0);
 
     game.addTile(player, space, {tileType: TileType.NUCLEAR_ZONE});
     runAllActions(game);
 
-    expect(player.plants).eq(1);
-    expect(player.steel).eq(1);
-    expect(player2.plants).eq(0);
-    expect(player2.steel).eq(0);
+    expect(player.stock.plants).eq(1);
+    expect(player.stock.steel).eq(1);
+    expect(player2.stock.plants).eq(0);
+    expect(player2.stock.steel).eq(0);
   });
 
   it('when opponent places a special tile', function() {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    expect(player.plants).eq(0);
-    expect(player.steel).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.steel).eq(0);
 
     game.addTile(player2, space, {tileType: TileType.NUCLEAR_ZONE});
     runAllActions(game);
 
-    expect(player.plants).eq(1);
-    expect(player.steel).eq(1);
-    expect(player2.plants).eq(0);
-    expect(player2.steel).eq(0);
+    expect(player.stock.plants).eq(1);
+    expect(player.stock.steel).eq(1);
+    expect(player2.stock.plants).eq(0);
+    expect(player2.stock.steel).eq(0);
   });
 });

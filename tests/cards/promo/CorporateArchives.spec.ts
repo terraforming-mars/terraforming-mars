@@ -11,7 +11,7 @@ describe('CorporateArchives', function() {
     const [game, player] = testGame(2);
     const discarded = game.projectDeck.discardPile;
     expect(discarded).is.empty;
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -30,6 +30,6 @@ describe('CorporateArchives', function() {
 
     expect(discarded).has.length(5);
     expect(discarded).has.members([cards[0], cards[1], cards[3], cards[5], cards[6]]);
-    expect(player.megaCredits).eq(13);
+    expect(player.stock.megacredits).eq(13);
   });
 });

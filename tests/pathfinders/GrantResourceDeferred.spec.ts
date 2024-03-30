@@ -36,12 +36,12 @@ describe('GrantResourceDeferred', function() {
 
     selectOptions.cb(undefined);
 
-    expect(player.megaCredits).eq(0);
-    expect(player.steel).eq(0);
-    expect(player.titanium).eq(0);
-    expect(player.plants).eq(0);
-    expect(player.energy).eq(0);
-    expect(player.heat).eq(1);
+    expect(player.stock.megacredits).eq(0);
+    expect(player.stock.steel).eq(0);
+    expect(player.stock.titanium).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.energy).eq(0);
+    expect(player.stock.heat).eq(1);
   });
 
   it('grant single bonus or wild bonus', () => {

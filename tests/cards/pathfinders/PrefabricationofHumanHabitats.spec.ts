@@ -34,7 +34,7 @@ describe('PrefabricationofHumanHabitats', function() {
   it('City standard project discount ', function() {
     const cityStandardProject = new CityStandardProject();
 
-    player.megaCredits = 23;
+    player.stock.megacredits = 23;
     player.playedCards.pop();
     expect(cityStandardProject.canAct(player)).is.false;
 
@@ -45,13 +45,13 @@ describe('PrefabricationofHumanHabitats', function() {
   it('Can pay for city standard project with steel ', function() {
     const cityStandardProject = new CityStandardProject();
 
-    player.megaCredits = 19;
+    player.stock.megacredits = 19;
     player.playedCards.push(card);
 
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(cityStandardProject.canAct(player)).is.false;
 
-    player.steel = 2;
+    player.stock.steel = 2;
     expect(cityStandardProject.canAct(player)).is.true;
   });
 });

@@ -63,7 +63,7 @@ describe('CollegiumCopernicus', function() {
     const selectColony = cast(game.deferredActions.peek()!.execute(), SelectColony);
     selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
 
@@ -91,13 +91,13 @@ describe('CollegiumCopernicus', function() {
     const dataOption = payAction.options[0];
     expect(formatMessage(dataOption.title)).to.match(/Pay 3 data/);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     dataOption.cb();
     tradeAction.options[1].cb(luna);
 
     expect(card.resourceCount).eq(0);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 
   it('play', function() {

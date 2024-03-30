@@ -59,11 +59,11 @@ describe('OceanSanctuary', function() {
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];
 
-    expect(otherPlayer.megaCredits).eq(0);
+    expect(otherPlayer.stock.megacredits).eq(0);
 
     game.addGreenery(otherPlayer, greenery);
 
-    expect(otherPlayer.megaCredits).eq(2);
+    expect(otherPlayer.stock.megacredits).eq(2);
   });
 
   it('Victory Points', function() {
@@ -76,20 +76,20 @@ describe('OceanSanctuary', function() {
       return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
     })[0];
 
-    player.plants = 0;
+    player.stock.plants = 0;
     game.addOcean(player, oceanSpace);
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
 
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
 
     action.cb(oceanSpace);
 
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
   });
 });

@@ -31,70 +31,70 @@ describe('Bjorn', function() {
   });
 
   it('Takes OPG action, Everyone is richer than me, and has more MC than Current Generation+2.  Steal the maximum amount of MC', function() {
-    player.megaCredits = 10;
-    player2.megaCredits = 20;
-    player3.megaCredits = 30;
-    player4.megaCredits = 40;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 20;
+    player3.stock.megacredits = 30;
+    player4.stock.megacredits = 40;
     card.action(player);
-    expect(player.megaCredits).eq(10 + 3*stealValue);
-    expect(player2.megaCredits).eq(20-stealValue);
-    expect(player3.megaCredits).eq(30-stealValue);
-    expect(player4.megaCredits).eq(40-stealValue);
+    expect(player.stock.megacredits).eq(10 + 3*stealValue);
+    expect(player2.stock.megacredits).eq(20-stealValue);
+    expect(player3.stock.megacredits).eq(30-stealValue);
+    expect(player4.stock.megacredits).eq(40-stealValue);
   });
 
   it('Takes OPG action, two players have more money than me and one has less', function() {
-    player.megaCredits = 10;
-    player2.megaCredits = 0;
-    player3.megaCredits = 30;
-    player4.megaCredits = 40;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 0;
+    player3.stock.megacredits = 30;
+    player4.stock.megacredits = 40;
     card.action(player);
-    expect(player.megaCredits).eq(10 + 2*stealValue);
-    expect(player2.megaCredits).eq(0);
-    expect(player3.megaCredits).eq(30-stealValue);
-    expect(player4.megaCredits).eq(40-stealValue);
+    expect(player.stock.megacredits).eq(10 + 2*stealValue);
+    expect(player2.stock.megacredits).eq(0);
+    expect(player3.stock.megacredits).eq(30-stealValue);
+    expect(player4.stock.megacredits).eq(40-stealValue);
   });
 
   it('Takes OPG action, First player has plenty of MC, Second player has more MC than me but _less than the current generation_, third player is broke', function() {
-    player.megaCredits = 5;
-    player2.megaCredits = 40; // Steal stealValue from this player
-    player3.megaCredits = 7; // Steal 7 (everything) from this player
-    player4.megaCredits = 3; // Steal nothing from this player
+    player.stock.megacredits = 5;
+    player2.stock.megacredits = 40; // Steal stealValue from this player
+    player3.stock.megacredits = 7; // Steal 7 (everything) from this player
+    player4.stock.megacredits = 3; // Steal nothing from this player
     card.action(player);
-    expect(player.megaCredits).eq(5 + stealValue + 7);
-    expect(player2.megaCredits).eq(40 - stealValue);
-    expect(player3.megaCredits).eq(0);
-    expect(player4.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(5 + stealValue + 7);
+    expect(player2.stock.megacredits).eq(40 - stealValue);
+    expect(player3.stock.megacredits).eq(0);
+    expect(player4.stock.megacredits).eq(3);
   });
 
   it('Takes OPG action, Everybody has more money than me, but less than current generation, steal as much as possible', function() {
-    player.megaCredits = 0;
-    player2.megaCredits = 5;
-    player3.megaCredits = 5;
-    player4.megaCredits = 5;
+    player.stock.megacredits = 0;
+    player2.stock.megacredits = 5;
+    player3.stock.megacredits = 5;
+    player4.stock.megacredits = 5;
     card.action(player);
-    expect(player.megaCredits).eq(15);
-    expect(player2.megaCredits).eq(0);
-    expect(player3.megaCredits).eq(0);
-    expect(player4.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(15);
+    expect(player2.stock.megacredits).eq(0);
+    expect(player3.stock.megacredits).eq(0);
+    expect(player4.stock.megacredits).eq(0);
   });
 
   it('Takes OPG action, but nobody has more money than me.', function() {
-    player.megaCredits = 10;
-    player2.megaCredits = 2;
-    player3.megaCredits = 3;
-    player4.megaCredits = 4;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 2;
+    player3.stock.megacredits = 3;
+    player4.stock.megacredits = 4;
     card.action(player);
-    expect(player.megaCredits).eq(10);
-    expect(player2.megaCredits).eq(2);
-    expect(player3.megaCredits).eq(3);
-    expect(player4.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(10);
+    expect(player2.stock.megacredits).eq(2);
+    expect(player3.stock.megacredits).eq(3);
+    expect(player4.stock.megacredits).eq(4);
   });
 
   it('Takes OPG action, players that lost money can play Law Suit', () => {
-    player.megaCredits = 5;
-    player2.megaCredits = 50;
-    player3.megaCredits = 0;
-    player4.megaCredits = 7;
+    player.stock.megacredits = 5;
+    player2.stock.megacredits = 50;
+    player3.stock.megacredits = 0;
+    player4.stock.megacredits = 7;
 
     const lawsuit = new LawSuit();
     expect(lawsuit.canPlay(player)).is.not.true;

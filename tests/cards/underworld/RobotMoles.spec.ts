@@ -11,7 +11,7 @@ describe('RobotMoles', () => {
 
     expect(card.canAct(player)).is.false;
 
-    player.steel = 1;
+    player.stock.steel = 1;
 
     expect(card.canAct(player)).is.true;
   });
@@ -20,7 +20,7 @@ describe('RobotMoles', () => {
     const card = new RobotMoles();
     const [game, player] = testGame(2, {underworldExpansion: true});
 
-    player.steel = 1;
+    player.stock.steel = 1;
 
     cast(card.action(player), undefined);
 
@@ -31,6 +31,6 @@ describe('RobotMoles', () => {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).eq(1);
-    expect(player.steel).eq(0);
+    expect(player.stock.steel).eq(0);
   });
 });

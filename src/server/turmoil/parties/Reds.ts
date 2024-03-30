@@ -87,8 +87,8 @@ class RedsPolicy02 implements Policy {
   readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
 
   onTilePlaced(player: IPlayer) {
-    let amountPlayerHas = player.megaCredits;
-    if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
+    let amountPlayerHas = player.stock.megacredits;
+    if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.stock.heat;
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {

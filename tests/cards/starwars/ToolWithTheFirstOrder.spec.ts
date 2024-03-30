@@ -38,7 +38,7 @@ describe('ToolWithTheFirstOrder', () => {
     expect(player.actionsTakenThisRound).eq(0);
     expect(game.activePlayer).eq(player.id);
 
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.takeAction();
     const [waitingFor, cb] = player.popWaitingFor2();
     const playProjectCard = findOption(waitingFor!, 'Play project card');

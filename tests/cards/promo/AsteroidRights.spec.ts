@@ -29,13 +29,13 @@ describe('AsteroidRights', function() {
   });
 
   it('Can not act', function() {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     card.resourceCount = 0;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act - can auto spend asteroid resource', function() {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     const action = cast(card.action(player), OrOptions);
 
     // Gain 1 M€ prod
@@ -44,21 +44,21 @@ describe('AsteroidRights', function() {
 
     // Gain 2 titanium
     action.options[0].cb();
-    expect(player.titanium).to.eq(2);
+    expect(player.stock.titanium).to.eq(2);
   });
 
   it('Should play - can auto add asteroid resource to self', function() {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     card.resourceCount = 0;
 
     card.action(player);
     player.game.deferredActions.peek()!.execute();
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(card.resourceCount).to.eq(1);
   });
 
   it('Should play - can add asteroid resource to other card', function() {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     card.resourceCount = 0;
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
@@ -69,7 +69,7 @@ describe('AsteroidRights', function() {
   });
 
   it('Should play - all options available', function() {
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
 

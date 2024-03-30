@@ -20,46 +20,46 @@ describe('LunaHyperloopCorporation', () => {
 
   it('action', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     MoonExpansion.addRoadTile(player, spaces[0].id);
     card.action(player);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     MoonExpansion.addRoadTile(player, spaces[1].id);
     card.action(player);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     MoonExpansion.addRoadTile(player, spaces[2].id);
     card.action(player);
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     MoonExpansion.addHabitatTile(player, spaces[3].id);
     card.action(player);
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
   });
 
   it('victory points', () => {
     player.playedCards.push(card);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     MoonExpansion.addRoadTile(player, spaces[0].id);
     card.action(player);
     expect(card.getVictoryPoints(player)).eq(1);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     MoonExpansion.addRoadTile(player, spaces[1].id);
     card.action(player);
     expect(card.getVictoryPoints(player)).eq(2);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     MoonExpansion.addRoadTile(player, spaces[2].id);
     card.action(player);
     expect(card.getVictoryPoints(player)).eq(3);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     MoonExpansion.addHabitatTile(player, spaces[3].id);
     card.action(player);
     expect(card.getVictoryPoints(player)).eq(3);

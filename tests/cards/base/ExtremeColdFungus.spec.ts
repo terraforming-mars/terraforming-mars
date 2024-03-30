@@ -43,7 +43,7 @@ describe('ExtremeColdFungus', () => {
     expect(tardigrades.resourceCount).to.eq(2);
 
     action.options[1].cb();
-    expect(player.plants).to.eq(1);
+    expect(player.stock.plants).to.eq(1);
   });
 
   it('Should act - multiple targets', () => {

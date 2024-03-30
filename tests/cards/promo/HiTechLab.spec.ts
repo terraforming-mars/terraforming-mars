@@ -27,7 +27,7 @@ describe('HiTechLab', function() {
     const amount = cast(card.action(player), SelectAmount);
 
     amount.cb(3);
-    expect(player.energy).to.eq(2);
+    expect(player.stock.energy).to.eq(2);
   });
 
   it('Should give victory points', function() {

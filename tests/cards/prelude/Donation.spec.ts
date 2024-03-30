@@ -8,6 +8,6 @@ describe('Donation', function() {
     const card = new Donation();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
-    expect(player.megaCredits).to.eq(21);
+    expect(player.stock.megacredits).to.eq(21);
   });
 });

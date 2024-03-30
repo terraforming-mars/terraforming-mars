@@ -15,17 +15,17 @@ describe('UndergroundDetonations', function() {
   });
 
   it('Can not act', function() {
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act', function() {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.production.heat).to.eq(2);
   });
 });

@@ -16,7 +16,7 @@ describe('PreliminaryDarkside', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
@@ -25,19 +25,19 @@ describe('PreliminaryDarkside', () => {
     const action = cast(card.play(player), OrOptions);
     expect(action.options).has.lengthOf(2);
 
-    player.titanium = 0;
-    player.steel = 0;
+    player.stock.titanium = 0;
+    player.stock.steel = 0;
     action.options[0].cb();
 
-    expect(player.titanium).eq(3);
-    expect(player.steel).eq(0);
+    expect(player.stock.titanium).eq(3);
+    expect(player.stock.steel).eq(0);
 
-    player.titanium = 0;
-    player.steel = 0;
+    player.stock.titanium = 0;
+    player.stock.steel = 0;
     action.options[1].cb();
 
-    expect(player.titanium).eq(0);
-    expect(player.steel).eq(4);
+    expect(player.stock.titanium).eq(0);
+    expect(player.stock.steel).eq(4);
   });
 });
 

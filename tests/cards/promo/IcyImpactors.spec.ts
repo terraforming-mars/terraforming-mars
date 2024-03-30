@@ -25,18 +25,18 @@ describe('IcyImpactors', () => {
 
   it('Can not act', () => {
     player.playedCards.push(card);
-    player.megaCredits = 9;
+    player.stock.megacredits = 9;
     expect(card.canAct(player)).is.not.true;
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     expect(card.canAct(player)).is.true;
   });
 
   it('action - single action choice - gain resources', () => {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
 
     cast(card.action(player), undefined);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(card.resourceCount).to.eq(2);
   });
 
@@ -53,18 +53,18 @@ describe('IcyImpactors', () => {
   });
 
   it('action - multiple - gain resources', () => {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     card.resourceCount = 1;
 
     const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[1].cb();
     runAllActions(game);
     expect(card.resourceCount).to.eq(3);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('action - multiple - place ocean', () => {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     card.resourceCount = 1;
 
     const orOptions = cast(card.action(player), OrOptions);
@@ -81,7 +81,7 @@ describe('IcyImpactors', () => {
     player.playedCards.push(card);
     card.resourceCount = 1;
     maxOutOceans(opponent);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     expect(card.canAct(player)).is.true;
 

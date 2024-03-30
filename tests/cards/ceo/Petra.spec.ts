@@ -87,7 +87,7 @@ describe('Petra', function() {
     expect(reds.delegates.count(player)).eq(1);
     expect(reds.partyLeader).eq(player);
 
-    expect(player.megaCredits).to.eq(15);
+    expect(player.stock.megacredits).to.eq(15);
 
     // Make sure that the player has the correct amount of spare delegates
     expect(turmoil.getAvailableDelegateCount(player)).eq(2); // 1 Reserve + 1 Lobby
@@ -130,7 +130,7 @@ describe('Petra', function() {
     expect(reds.partyLeader).eq(player);
 
     // We should have been paid 3MC for every swap, 7*3 total
-    expect(player.megaCredits).to.eq(21);
+    expect(player.stock.megacredits).to.eq(21);
   });
 
 

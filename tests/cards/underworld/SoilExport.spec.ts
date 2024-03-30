@@ -12,7 +12,7 @@ describe('SoilExport', () => {
     expect(game.generation).eq(1);
     forceGenerationEnd(game);
     expect(game.generation).eq(2);
-    expect(player.megaCredits).eq(20);
+    expect(player.stock.megacredits).eq(20);
 
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -21,14 +21,14 @@ describe('SoilExport', () => {
 
     player.playedCards.push(card);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     forceGenerationEnd(game);
     expect(game.generation).eq(3);
-    expect(player.megaCredits).eq(32); // TR = 20
+    expect(player.stock.megacredits).eq(32); // TR = 20
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     forceGenerationEnd(game);
     expect(game.generation).eq(4);
-    expect(player.megaCredits).eq(20);
+    expect(player.stock.megacredits).eq(20);
   });
 });

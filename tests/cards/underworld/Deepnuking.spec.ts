@@ -24,7 +24,7 @@ describe('Deepnuking', () => {
   });
 
   it('play', () => {
-    player2.plants = 5;
+    player2.stock.plants = 5;
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -36,7 +36,7 @@ describe('Deepnuking', () => {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     expect(orOptions.options).has.length(2);
     orOptions.options[0].cb();
-    expect(player2.plants).to.eq(2);
+    expect(player2.stock.plants).to.eq(2);
 
     runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;

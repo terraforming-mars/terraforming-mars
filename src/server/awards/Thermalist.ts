@@ -6,9 +6,9 @@ export class Thermalist implements IAward {
   public readonly description = 'Have the most heat';
   public getScore(player: IPlayer): number {
     if (player.game.isDoneWithFinalProduction()) {
-      return player.heat;
+      return player.stock.heat;
     } else {
-      return player.energy + player.heat + player.production.heat;
+      return player.stock.energy + player.stock.heat + player.production.heat;
     }
   }
 }

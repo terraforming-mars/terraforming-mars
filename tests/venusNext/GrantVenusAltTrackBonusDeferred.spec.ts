@@ -25,12 +25,12 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
     input.options[4].cb(0);
     input.options[5].cb(1);
     input.cb(undefined);
-    expect(player.megaCredits).eq(0);
-    expect(player.steel).eq(0);
-    expect(player.titanium).eq(0);
-    expect(player.plants).eq(0);
-    expect(player.energy).eq(0);
-    expect(player.heat).eq(1);
+    expect(player.stock.megacredits).eq(0);
+    expect(player.stock.steel).eq(0);
+    expect(player.stock.titanium).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.energy).eq(0);
+    expect(player.stock.heat).eq(1);
   });
 
   it('reject too many bonuses', () => {
@@ -44,10 +44,10 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
 
     expect(() => input.cb(undefined)).to.throw('Select 2 resources.');
 
-    player.heat = 0;
+    player.stock.heat = 0;
     input.options[5].cb(2);
     input.cb(undefined);
-    expect(player.heat).eq(2);
+    expect(player.stock.heat).eq(2);
   });
 
   it('grants wild resource', () => {

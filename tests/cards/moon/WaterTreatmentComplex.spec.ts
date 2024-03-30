@@ -21,19 +21,19 @@ describe('WaterTreatmentComplex', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     space.tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCardsForTest()).does.include(card);
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
     space.tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     space.tile = {tileType: TileType.MOON_ROAD};
     expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
@@ -41,11 +41,11 @@ describe('WaterTreatmentComplex', () => {
   it('play', () => {
     expect(moonData.habitatRate).eq(0);
     expect(player.getTerraformRating()).eq(14);
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     card.play(player);
 
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(moonData.habitatRate).eq(2);
     expect(player.getTerraformRating()).eq(16);
   });

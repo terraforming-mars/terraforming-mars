@@ -25,8 +25,8 @@ describe('Io', function() {
 
   it('Should trade', function() {
     io.trade(player);
-    expect(player.heat).to.eq(3);
-    expect(player2.heat).to.eq(0);
+    expect(player.stock.heat).to.eq(3);
+    expect(player2.stock.heat).to.eq(0);
   });
 
   it('Should give trade bonus', function() {
@@ -37,7 +37,7 @@ describe('Io', function() {
 
     expect(player.production.heat).to.eq(1);
     expect(player2.production.heat).to.eq(0);
-    expect(player.heat).to.eq(2);
-    expect(player2.heat).to.eq(3);
+    expect(player.stock.heat).to.eq(2);
+    expect(player2.stock.heat).to.eq(3);
   });
 });

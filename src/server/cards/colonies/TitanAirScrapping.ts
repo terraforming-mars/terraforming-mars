@@ -37,7 +37,7 @@ export class TitanAirScrapping extends Card implements IProjectCard {
 
 
   public canAct(player: IPlayer): boolean {
-    if (player.titanium > 0) {
+    if (player.stock.titanium > 0) {
       return true;
     }
     if (this.resourceCount >= 2) {
@@ -57,7 +57,7 @@ export class TitanAirScrapping extends Card implements IProjectCard {
     }
 
 
-    if (player.titanium > 0) {
+    if (player.stock.titanium > 0) {
       opts.push(addResource);
     }
 

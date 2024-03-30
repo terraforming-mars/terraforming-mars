@@ -36,7 +36,7 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
     });
 
     if (player.game.isSoloMode()) {
-      player.megaCredits += 8;
+      player.stock.megacredits += 8;
     }
 
     return undefined;

@@ -75,12 +75,12 @@ describe('GeologicalSurvey', () => {
     player.playedCards = [card, microbeCard, animalCard];
 
     // firstSpace tile might grant resources, so resetting all the resource values.
-    player.megaCredits = 0;
-    player.titanium = 0;
-    player.steel = 0;
-    player.heat = 0;
-    player.energy = 0;
-    player.plants = 0;
+    player.stock.megacredits = 0;
+    player.stock.titanium = 0;
+    player.stock.steel = 0;
+    player.stock.heat = 0;
+    player.stock.energy = 0;
+    player.stock.plants = 0;
     player.cardsInHand = []; 0;
     microbeCard.resourceCount = 0;
     animalCard.resourceCount = 0;
@@ -89,12 +89,12 @@ describe('GeologicalSurvey', () => {
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
 
-    expect(player.megaCredits).eq(2);
-    expect(player.titanium).eq(2);
-    expect(player.steel).eq(2);
-    expect(player.heat).eq(2);
-    expect(player.energy).eq(1);
-    expect(player.plants).eq(1);
+    expect(player.stock.megacredits).eq(2);
+    expect(player.stock.titanium).eq(2);
+    expect(player.stock.steel).eq(2);
+    expect(player.stock.heat).eq(2);
+    expect(player.stock.energy).eq(1);
+    expect(player.stock.plants).eq(1);
     expect(player.cardsInHand).is.length(1);
     expect(microbeCard.resourceCount).eq(1);
     expect(animalCard.resourceCount).eq(1);
@@ -105,10 +105,10 @@ describe('GeologicalSurvey', () => {
     // What's key is that this space has a weird behavior - it grants all the bonuses.
     // Only three of them will grant additional bonuses: steel, titanium, and heat.
 
-    expect(player.titanium).eq(0);
-    expect(player.steel).eq(0);
-    expect(player.heat).eq(0);
-    expect(player.plants).eq(0);
+    expect(player.stock.titanium).eq(0);
+    expect(player.stock.steel).eq(0);
+    expect(player.stock.heat).eq(0);
+    expect(player.stock.plants).eq(0);
     expect(player.cardsInHand).is.length(0);
 
     const space = game.board.getAvailableSpacesOnLand(player)[0];
@@ -124,10 +124,10 @@ describe('GeologicalSurvey', () => {
 
     runAllActions(game);
 
-    expect(player.titanium).eq(2);
-    expect(player.steel).eq(2);
-    expect(player.heat).eq(2);
-    expect(player.plants).eq(1);
+    expect(player.stock.titanium).eq(2);
+    expect(player.stock.steel).eq(2);
+    expect(player.stock.heat).eq(2);
+    expect(player.stock.plants).eq(1);
     expect(player.cardsInHand).is.length(1);
   });
 
@@ -141,14 +141,14 @@ describe('GeologicalSurvey', () => {
 
     addGreenery(player, '11');
     runAllActions(game);
-    expect(player.steel).eq(0);
+    expect(player.stock.steel).eq(0);
 
     resetBoard(game);
 
     setRulingParty(game, PartyName.MARS);
     addGreenery(player, '11');
     runAllActions(game);
-    expect(player.steel).eq(2);
+    expect(player.stock.steel).eq(2);
   });
 
   it('Bonus not granted when overplacing', () => {
@@ -160,14 +160,14 @@ describe('GeologicalSurvey', () => {
     space.bonus = [SpaceBonus.HEAT];
     game.simpleAddTile(player2, space, {tileType: TileType.OCEAN});
 
-    player.heat = 0;
+    player.stock.heat = 0;
     new OceanCity().play(player);
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
     selectSpace.cb(space);
     runAllActions(game);
-    expect(player.heat).eq(0);
+    expect(player.stock.heat).eq(0);
   });
 
 
@@ -179,8 +179,8 @@ describe('GeologicalSurvey', () => {
     setTemperature(game, MAX_TEMPERATURE);
     setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     maxOutOceans(player);
-    player.plants = 9;
-    player.steel = 0;
+    player.stock.plants = 9;
+    player.stock.steel = 0;
 
     // Pass last turn
     forceGenerationEnd(game);
@@ -195,7 +195,7 @@ describe('GeologicalSurvey', () => {
     space.bonus = [SpaceBonus.STEEL];
     selectSpace.cb(space);
 
-    expect(player.plants).eq(1);
-    expect(player.steel).eq(2);
+    expect(player.stock.plants).eq(1);
+    expect(player.stock.steel).eq(2);
   });
 });

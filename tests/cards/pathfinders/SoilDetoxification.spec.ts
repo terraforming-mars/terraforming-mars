@@ -19,7 +19,7 @@ describe('SoilDetoxification', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.rulingParty = new Unity();
     expect(player.canPlay(card)).is.false;
@@ -39,9 +39,9 @@ describe('SoilDetoxification', function() {
     expect(player.plantsNeededForGreenery).to.eq(7);
 
     const convert = new ConvertPlants();
-    player.plants = 6;
+    player.stock.plants = 6;
     expect(convert.canAct(player)).eq(false);
-    player.plants = 7;
+    player.stock.plants = 7;
     expect(convert.canAct(player)).eq(true);
   });
 
@@ -53,9 +53,9 @@ describe('SoilDetoxification', function() {
     expect(player.plantsNeededForGreenery).to.eq(6);
 
     const convert = new ConvertPlants();
-    player.plants = 5;
+    player.stock.plants = 5;
     expect(convert.canAct(player)).eq(false);
-    player.plants = 6;
+    player.stock.plants = 6;
     expect(convert.canAct(player)).eq(true);
   });
 });

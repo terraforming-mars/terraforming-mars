@@ -34,12 +34,12 @@ import {SelectResource} from '../../src/server/inputs/SelectResource';
 
 function asUnits(player: IPlayer): Units {
   return {
-    megacredits: player.megaCredits,
-    steel: player.steel,
-    titanium: player.titanium,
-    plants: player.plants,
-    energy: player.energy,
-    heat: player.heat,
+    megacredits: player.stock.megacredits,
+    steel: player.stock.steel,
+    titanium: player.stock.titanium,
+    plants: player.stock.plants,
+    energy: player.stock.energy,
+    heat: player.stock.heat,
   };
 }
 
@@ -85,8 +85,8 @@ describe('Executor', () => {
   });
 
   it('stock - simple', () => {
-    player.steel = 2;
-    player.heat = 5;
+    player.stock.steel = 2;
+    player.stock.heat = 5;
     executor.execute({stock: {steel: 3, heat: 2}}, player, fake);
     expect(asUnits(player)).deep.eq(Units.of({steel: 5, heat: 7}));
   });
@@ -108,16 +108,16 @@ describe('Executor', () => {
   });
 
   it('greeneryDiscount', () => {
-    player.plants = 8;
+    player.stock.plants = 8;
     expect(game.canPlaceGreenery(player)).is.true;
 
-    player.plants = 7;
+    player.stock.plants = 7;
     expect(game.canPlaceGreenery(player)).is.false;
 
     executor.execute({greeneryDiscount: 1}, player, fake);
     expect(game.canPlaceGreenery(player)).is.true;
 
-    player.plants = 6;
+    player.stock.plants = 6;
     expect(game.canPlaceGreenery(player)).is.false;
 
     executor.execute({greeneryDiscount: 1}, player, fake);
@@ -126,16 +126,16 @@ describe('Executor', () => {
     executor.onDiscard({greeneryDiscount: 1}, player, fake);
     expect(game.canPlaceGreenery(player)).is.false;
 
-    player.plants = 7;
+    player.stock.plants = 7;
     expect(game.canPlaceGreenery(player)).is.true;
   });
 
   it('drawCard - simple', () => {
     expect(player.cardsInHand).has.length(0);
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     executor.execute({drawCard: 3}, player, fake);
     expect(player.cardsInHand).has.length(3);
-    expect(player.megaCredits).eq(5);
+    expect(player.stock.megacredits).eq(5);
   });
 
   it('drawCard, resource type', () => {
@@ -158,7 +158,7 @@ describe('Executor', () => {
 
   it('drawCard, type and tag', () => {
     expect(player.cardsInHand).has.length(0);
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     executor.execute({drawCard: {count: 3, tag: Tag.SPACE, type: CardType.EVENT}}, player, fake);
     expect(player.cardsInHand).has.length(3);
     expect(player.cardsInHand[0].tags).contains(Tag.SPACE);
@@ -167,12 +167,12 @@ describe('Executor', () => {
     expect(player.cardsInHand[0].type).eq(CardType.EVENT);
     expect(player.cardsInHand[1].type).eq(CardType.EVENT);
     expect(player.cardsInHand[2].type).eq(CardType.EVENT);
-    expect(player.megaCredits).eq(5);
+    expect(player.stock.megacredits).eq(5);
   });
 
   it('drawCard, type and tag, keep some', () => {
     expect(player.cardsInHand).has.length(0);
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
 
     executor.execute({drawCard: {count: 3, tag: Tag.SPACE, type: CardType.EVENT, keep: 2}}, player, fake);
 
@@ -185,12 +185,12 @@ describe('Executor', () => {
     const cards = selectCard.cards;
     selectCard.cb([cards[0], cards[1]]);
     expect(player.cardsInHand).has.length(2);
-    expect(player.megaCredits).eq(5);
+    expect(player.stock.megacredits).eq(5);
   });
 
   it('drawCard, pay', () => {
     expect(player.cardsInHand).has.length(0);
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     executor.execute({drawCard: {count: 1, pay: true}}, player, fake);
 
     runAllActions(game);
@@ -200,7 +200,7 @@ describe('Executor', () => {
     runAllActions(game);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 
   it('drawCard - countable', () => {
@@ -266,7 +266,7 @@ describe('Executor', () => {
   it('add resources to specific card - includes self', () => {
     const saturnSurfing = new SaturnSurfing();
     player.playedCards = [fakeCard({tags: [Tag.EARTH, Tag.EARTH]})];
-    player.megaCredits = saturnSurfing.cost;
+    player.stock.megacredits = saturnSurfing.cost;
     player.playCard(saturnSurfing);
     runAllActions(game);
 
@@ -455,57 +455,57 @@ describe('Executor', () => {
   it('spend - steel', () => {
     const behavior = {spend: {steel: 1}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
-    expect(player.steel).eq(0);
+    expect(player.stock.steel).eq(0);
   });
 
   it('spend - titanium', () => {
     const behavior = {spend: {titanium: 1}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
-    player.titanium = 1;
+    player.stock.titanium = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
   });
 
   it('spend - plants', () => {
     const behavior = {spend: {plants: 1}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
-    player.plants = 1;
+    player.stock.plants = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
   });
 
   it('spend - energy', () => {
     const behavior = {spend: {energy: 1}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
-    player.energy = 1;
+    player.stock.energy = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
-    expect(player.energy).eq(0);
+    expect(player.stock.energy).eq(0);
   });
 
   it('spend - megacredits', () => {
     const behavior = {spend: {megacredits: 1}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
-    player.megaCredits = 1;
+    player.stock.megacredits = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
     runAllActions(game);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('spend - heat', () => {
     const behavior = {spend: {heat: 1}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
-    player.heat = 1;
+    player.stock.heat = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
-    expect(player.heat).eq(0);
+    expect(player.stock.heat).eq(0);
   });
 
   it('spend - heat - Stormcraft', () => {
@@ -539,7 +539,7 @@ describe('Executor', () => {
   it('or, canExecute', () => {
     const behavior: Behavior = {or: {behaviors: [{spend: {steel: 1}, stock: {megacredits: 1}, title: ''}]}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(executor.canExecute(behavior, player, fake)).is.true;
   });
 
@@ -552,11 +552,11 @@ describe('Executor', () => {
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     expect(orOptions.options).has.length(2);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     orOptions.options[0].cb();
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
     orOptions.options[1].cb();
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
   });
 
   it('or, execute, not all options are playable', () => {
@@ -568,9 +568,9 @@ describe('Executor', () => {
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     expect(orOptions.options).has.length(1);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     orOptions.options[0].cb();
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
   });
 
   it('or, execute, autoselect', () => {
@@ -583,7 +583,7 @@ describe('Executor', () => {
     executor.execute(behavior, player, fake);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
   });
 
   it('underworld, identify', () => {

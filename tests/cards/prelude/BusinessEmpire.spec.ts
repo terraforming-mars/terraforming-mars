@@ -15,19 +15,19 @@ describe('BusinessEmpire', function() {
   });
 
   it('Can not play', function() {
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
     expect(card.canPlay(player)).is.true;
     card.play(player);
 
     // SelectPaymentDeferred
     game.deferredActions.runNext();
 
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.production.megacredits).to.eq(6);
   });
 });

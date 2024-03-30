@@ -10,6 +10,6 @@ describe('MartianIndustries', function() {
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player.production.steel).to.eq(1);
-    expect(player.megaCredits).to.eq(6);
+    expect(player.stock.megacredits).to.eq(6);
   });
 });

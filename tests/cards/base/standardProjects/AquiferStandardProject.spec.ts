@@ -21,14 +21,14 @@ describe('AquiferStandardProject', function() {
   });
 
   it('Can act', function() {
-    player.megaCredits = card.cost - 1;
+    player.stock.megacredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.setTerraformRating(20);
     expect(game.board.getOceanSpaces()).is.empty;
 
@@ -39,12 +39,12 @@ describe('AquiferStandardProject', function() {
   });
 
   it('Paying when the global parameter is at its goal is a valid stall action', () => {
-    player.megaCredits = 18;
+    player.stock.megacredits = 18;
     expect(card.canAct(player)).eq(true);
 
     maxOutOceans(player);
 
-    player.megaCredits = 18;
+    player.stock.megacredits = 18;
     expect(player.getTerraformRating()).eq(23);
     expect(card.canAct(player)).eq(true);
 
@@ -53,20 +53,20 @@ describe('AquiferStandardProject', function() {
 
     expect(game.board.getOceanSpaces()).has.length(9);
     expect(player.getTerraformRating()).eq(23);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 
   it('Can not act with reds', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
 
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 2;
+    player.stock.megacredits = card.cost + 2;
     expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 3;
+    player.stock.megacredits = card.cost + 3;
     expect(card.canAct(player)).eq(true);
   });
 });

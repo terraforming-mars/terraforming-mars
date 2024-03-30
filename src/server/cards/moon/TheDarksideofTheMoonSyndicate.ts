@@ -48,12 +48,12 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.titanium > 0 || this.resourceCount > 0;
+    return player.stock.titanium > 0 || this.resourceCount > 0;
   }
 
   public action(player: IPlayer) {
     const orOptions = new OrOptions();
-    if (player.titanium > 0) {
+    if (player.stock.titanium > 0) {
       orOptions.options.push(new SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet').andThen(() => {
         player.pay(Payment.of({titanium: 1}));
         player.addResourceTo(this, {qty: 1, log: true});
@@ -103,7 +103,7 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
       costs.forEachMultiplicity((qty, target) => {
         // TODO(kberg): Create a Game.steal method that manages this, both here
         // and in StealResources.
-        const adjustedQuantity = Math.min(qty, target.megaCredits);
+        const adjustedQuantity = Math.min(qty, target.stock.megacredits);
         activePlayer.stock.add(Resource.MEGACREDITS, adjustedQuantity, {log: true});
         target.stock.deduct(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
       });

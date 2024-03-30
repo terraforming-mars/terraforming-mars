@@ -26,7 +26,7 @@ describe('HomeworldSupport', function() {
     turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
-    expect(player.megaCredits).to.eq(2);
-    expect(player2.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(2);
+    expect(player2.stock.megacredits).to.eq(10);
   });
 });

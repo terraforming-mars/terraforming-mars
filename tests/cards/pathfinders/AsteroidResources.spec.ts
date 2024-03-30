@@ -21,38 +21,38 @@ describe('AsteroidResources', function() {
   });
 
   it('canPlay', function() {
-    player.energy = 2;
+    player.stock.energy = 2;
     expect(card.canPlay(player)).is.false;
-    player.energy = 3;
+    player.stock.energy = 3;
     expect(card.canPlay(player)).is.true;
   });
 
   it('play, gain production', function() {
-    player.energy = 3;
+    player.stock.energy = 3;
 
     card.play(player);
     runAllActions(game);
     const options = cast(player.popWaitingFor(), OrOptions);
     options.options[0].cb();
-    expect(player.energy).eq(0);
+    expect(player.stock.energy).eq(0);
     expect(player.production.titanium).eq(1);
     expect(player.production.steel).eq(1);
-    expect(player.titanium).eq(0);
-    expect(player.steel).eq(0);
+    expect(player.stock.titanium).eq(0);
+    expect(player.stock.steel).eq(0);
   });
 
   it('play, place ocean', function() {
-    player.energy = 3;
+    player.stock.energy = 3;
 
     card.play(player);
     runAllActions(game);
     const options = cast(player.popWaitingFor(), OrOptions);
     options.options[1].cb();
-    expect(player.energy).eq(0);
+    expect(player.stock.energy).eq(0);
     expect(player.production.titanium).eq(0);
     expect(player.production.steel).eq(0);
-    expect(player.titanium).eq(1);
-    expect(player.steel).eq(2);
+    expect(player.stock.titanium).eq(1);
+    expect(player.stock.steel).eq(2);
     const action = cast(player.game.deferredActions.peek(), PlaceOceanTile);
     const select = cast(action.execute(), SelectSpace);
     const space = select.spaces[0];

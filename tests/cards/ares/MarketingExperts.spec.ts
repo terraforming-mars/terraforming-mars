@@ -35,13 +35,13 @@ describe('MarketingExperts', function() {
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};
     game.addTile(player, firstSpace, {tileType: TileType.RESTRICTED_AREA});
 
-    expect(player.megaCredits).is.eq(0);
-    expect(otherPlayer.megaCredits).is.eq(0);
+    expect(player.stock.megacredits).is.eq(0);
+    expect(otherPlayer.stock.megacredits).is.eq(0);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
 
-    expect(player.megaCredits).is.eq(2);
-    expect(otherPlayer.megaCredits).is.eq(0);
+    expect(player.stock.megacredits).is.eq(2);
+    expect(otherPlayer.stock.megacredits).is.eq(0);
   });
 });

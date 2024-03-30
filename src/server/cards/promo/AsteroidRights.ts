@@ -57,7 +57,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
 
     const gainTitaniumOption = new SelectOption('Remove 1 asteroid on this card to gain 2 titanium', 'Remove asteroid').andThen(() => {
       this.resourceCount--;
-      player.titanium += 2;
+      player.stock.titanium += 2;
       LogHelper.logRemoveResource(player, this, 1, 'gain 2 titanium');
       return undefined;
     });

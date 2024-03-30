@@ -23,29 +23,29 @@ describe('Jansson', function() {
   });
 
   it('Takes action', function() {
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
     addGreenery(player, '35');
-    expect(player.plants).eq(2);
+    expect(player.stock.plants).eq(2);
     card.action(player);
-    expect(player.plants).eq(4);
+    expect(player.stock.plants).eq(4);
   });
 
   it('Do not get bonuses from tiles on the Moon', function() {
     const [moonGame, player] = testGame(2, {ceoExtension: true, moonExpansion: true});
     const moonData = MoonExpansion.moonData(moonGame);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
-    expect(player.steel).eq(0);
-    expect(player.titanium).eq(0);
+    expect(player.stock.steel).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(player.cardsInHand).is.empty;
     MoonExpansion.addHabitatTile(player, spaces[0].id);
     MoonExpansion.addMineTile(player, spaces[1].id);
     MoonExpansion.addRoadTile(player, spaces[2].id);
-    expect(player.steel).eq(1);
-    expect(player.titanium).eq(0);
+    expect(player.stock.steel).eq(1);
+    expect(player.stock.titanium).eq(0);
     expect(player.cardsInHand.length).eq(1);
     card.action(player);
-    expect(player.steel).eq(1);
-    expect(player.titanium).eq(0);
+    expect(player.stock.steel).eq(1);
+    expect(player.stock.titanium).eq(0);
     expect(player.cardsInHand.length).eq(1);
   });
 });

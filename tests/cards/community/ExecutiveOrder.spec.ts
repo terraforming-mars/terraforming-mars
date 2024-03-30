@@ -23,7 +23,7 @@ describe('ExecutiveOrder', function() {
     const selectGlobalEvent = cast(card.play(player), SelectGlobalEvent);
     expect(selectGlobalEvent.globalEvents).has.length(4);
 
-    expect(player.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
     selectGlobalEvent.cb(selectGlobalEvent.globalEvents[0]);
 
     expect(turmoil.currentGlobalEvent).eq(selectGlobalEvent.globalEvents[0]);

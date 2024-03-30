@@ -62,8 +62,8 @@ describe('CloneTroopers', () => {
 
     expect(card.resourceCount).eq(2);
 
-    player2.megaCredits = 2;
-    player3.titanium = 5;
+    player2.stock.megacredits = 2;
+    player3.stock.titanium = 5;
 
     let orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb();

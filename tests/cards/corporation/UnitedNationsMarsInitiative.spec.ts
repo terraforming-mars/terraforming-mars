@@ -20,24 +20,24 @@ describe('UnitedNationsMarsInitiative', function() {
   });
 
   it('Can not act if TR was not raised', function() {
-    player.megaCredits = 10;
+    player.stock.megacredits = 10;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Can not act if not enough MC', function() {
     player.setTerraformRating(21);
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act', function() {
     player.increaseTerraformRating();
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
     runAllActions(game);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.getTerraformRating()).to.eq(22);
   });
 
@@ -48,18 +48,18 @@ describe('UnitedNationsMarsInitiative', function() {
 
     player.increaseTerraformRating();
     expect(player.getTerraformRating()).to.eq(21);
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
     expect(card.canAct(player)).is.false;
-    player.heat = 1;
+    player.stock.heat = 1;
     expect(card.canAct(player)).is.true;
 
     // Setting a larger amount of heat just to make the test results more interesting
-    player.heat = 5;
+    player.stock.heat = 5;
 
     const selectPayment = cast(churnAction(card, player), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.getTerraformRating()).to.eq(22);
-    expect(player.megaCredits).to.eq(1);
-    expect(player.heat).to.eq(3);
+    expect(player.stock.megacredits).to.eq(1);
+    expect(player.stock.heat).to.eq(3);
   });
 });

@@ -23,7 +23,7 @@ describe('ProductiveOutpost', function() {
 
     card.play(player);
     runAllActions(player.game);
-    expect(player.megaCredits).to.eq(2);
-    expect(player.titanium).to.eq(1);
+    expect(player.stock.megacredits).to.eq(2);
+    expect(player.stock.titanium).to.eq(1);
   });
 });

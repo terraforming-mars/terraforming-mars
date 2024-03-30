@@ -24,13 +24,13 @@ describe('Ulrich', function() {
     const oceansPlaced = 5;
     maxOutOceans(player2, oceansPlaced);
     card.action(player);
-    expect(player.megaCredits).eq(oceansPlaced * 4);
+    expect(player.stock.megacredits).eq(oceansPlaced * 4);
   });
 
   it('Takes action: All oceans placed - gain only 15 M€', function() {
     maxOutOceans(player2);
     card.action(player);
-    expect(player.megaCredits).eq(15);
+    expect(player.stock.megacredits).eq(15);
   });
 
   it('Can only act once per game', function() {

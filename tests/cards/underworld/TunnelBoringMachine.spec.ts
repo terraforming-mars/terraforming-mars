@@ -26,19 +26,19 @@ describe('TunnelBoringMachine', () => {
   });
 
   it('can act', () => {
-    player.energy = 2;
+    player.stock.energy = 2;
     expect(card.canAct(player)).is.false;
-    player.energy = 3;
+    player.stock.energy = 3;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', () => {
-    player.energy = 3;
+    player.stock.energy = 3;
 
     expect(card.action(player)).is.undefined;
     runAllActions(game);
 
-    expect(player.energy).eq(0);
+    expect(player.stock.energy).eq(0);
     UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);
     UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());

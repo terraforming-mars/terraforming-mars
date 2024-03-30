@@ -25,16 +25,16 @@ describe('MoonMineStandardProject', () => {
   });
 
   it('can act', () => {
-    player.titanium = 1;
-    player.megaCredits = 19;
+    player.stock.titanium = 1;
+    player.stock.megacredits = 19;
     expect(player.canPlay(card)).is.false;
 
-    player.titanium = 0;
-    player.megaCredits = 20;
+    player.stock.titanium = 0;
+    player.stock.megacredits = 20;
     expect(player.canPlay(card)).is.false;
 
-    player.titanium = 1;
-    player.megaCredits = 20;
+    player.stock.titanium = 1;
+    player.stock.megacredits = 20;
     expect(player.canPlay(card)).is.true;
 
     // 2. Are there spaces on the moon for a Mine?
@@ -52,7 +52,7 @@ describe('MoonMineStandardProject', () => {
   });
 
   it('act', () => {
-    player.titanium = 3;
+    player.stock.titanium = 3;
     expect(player.getTerraformRating()).eq(14);
     expect(player.production.steel).eq(0);
 
@@ -60,7 +60,7 @@ describe('MoonMineStandardProject', () => {
     const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     payAction.cb(Payment.EMPTY);
 
-    expect(player.titanium).eq(2);
+    expect(player.stock.titanium).eq(2);
     expect(player.production.steel).eq(1);
     expect(moonData.miningRate).eq(0);
 
@@ -76,7 +76,7 @@ describe('MoonMineStandardProject', () => {
     const moonData = MoonExpansion.moonData(game);
 
     // Card requirements
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
     moonData.miningRate = 8;

@@ -14,7 +14,7 @@ describe('HE3Lobbyists', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     expect(player.getPlayableCardsForTest()).does.include(card);
   });

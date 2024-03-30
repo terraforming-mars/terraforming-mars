@@ -11,6 +11,6 @@ describe('TradeEnvoys', function() {
     cast(card.play(player), undefined);
     const ceres = new Ceres();
     ceres.trade(player);
-    expect(player.steel).to.eq(3);
+    expect(player.stock.steel).to.eq(3);
   });
 });

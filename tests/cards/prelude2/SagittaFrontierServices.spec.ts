@@ -31,27 +31,27 @@ describe('SagittaFrontierServices', () => {
     player.setCorporationForTest(card);
     card.onCardPlayed(player, fakeCard({tags: []}));
     runAllActions(game);
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
   });
 
   it('One tag, gain 1 M€', () => {
     player.setCorporationForTest(card);
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(game);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
   });
 
   it('Event tag is a tag', () => {
     player.setCorporationForTest(card);
     card.onCardPlayed(player, fakeCard({type: CardType.EVENT, tags: []}));
     runAllActions(game);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
   });
 
   it('Wild tag is not a tag', () => {
     player.setCorporationForTest(card);
     card.onCardPlayed(player, fakeCard({tags: [Tag.WILD]}));
     runAllActions(game);
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
   });
 });

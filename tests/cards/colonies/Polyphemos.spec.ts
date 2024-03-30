@@ -21,7 +21,7 @@ describe('Polyphemos', function() {
     pi.cb(undefined);
 
     // 50 starting MC - 5 for each card select at the start (total: 10)
-    expect(player.megaCredits).to.eq(40);
+    expect(player.stock.megacredits).to.eq(40);
     expect(player.production.megacredits).to.eq(5);
 
     player.playedCards.push(card3);
@@ -30,7 +30,7 @@ describe('Polyphemos', function() {
     const action = cast(player.popWaitingFor(), SelectCard);
     action.cb([action.cards[0]]);
     runAllActions(player.game);
-    expect(player.megaCredits).to.eq(35);
+    expect(player.stock.megacredits).to.eq(35);
     expect(player.cardsInHand).has.lengthOf(3);
   });
 });

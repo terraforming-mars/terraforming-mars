@@ -9,8 +9,8 @@ describe('ConstantStruggle', function() {
     const [game, player, player2] = testGame(2, {turmoilExtension: true, pathfindersExpansion: true});
     const turmoil = game.turmoil!;
 
-    player.megaCredits = 8;
-    player2.megaCredits = 12;
+    player.stock.megacredits = 8;
+    player2.stock.megacredits = 12;
 
     turmoil.initGlobalEvent(game);
     turmoil.chairman = player2;
@@ -31,8 +31,8 @@ describe('ConstantStruggle', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.megaCredits).eq(0);
-    expect(player2.megaCredits).eq(5);
+    expect(player.stock.megacredits).eq(0);
+    expect(player2.stock.megacredits).eq(5);
 
     expect(game.pathfindersData).deep.eq({
       venus: -1,
@@ -43,7 +43,7 @@ describe('ConstantStruggle', function() {
       vps: [],
     });
 
-    expect(player.titanium).eq(0);
-    expect(player2.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
+    expect(player2.stock.titanium).eq(0);
   });
 });

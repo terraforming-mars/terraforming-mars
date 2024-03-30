@@ -21,7 +21,7 @@ describe('MicrosingularityPlant', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     const space1 = moonData.moon.getAvailableSpacesOnLand(player)[0];
     const space2 = moonData.moon.getAvailableSpacesOnLand(player)[1];

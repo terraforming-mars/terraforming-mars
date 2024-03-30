@@ -35,7 +35,7 @@ export class Stefan extends CeoCard {
       player.cardsInHand,
       {min: 0, max: player.cardsInHand.length})
       .andThen((cards) => {
-        player.megaCredits += cards.length * 3;
+        player.stock.megacredits += cards.length * 3;
 
         cards.forEach((card) => {
           player.discardCardFromHand(card);

@@ -17,24 +17,24 @@ describe('OzoneGenerators', function() {
 
   it('canPlay', function() {
     setOxygenLevel(game, 5);
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.false;
     setOxygenLevel(game, 6);
     expect(player.canPlay(card)).is.true;
   });
 
   it('canAct', function() {
-    player.energy = 2;
+    player.stock.energy = 2;
     expect(card.canAct(player)).is.false;
-    player.energy = 3;
+    player.stock.energy = 3;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', function() {
     expect(player.getTerraformRating()).eq(14);
-    player.energy = 3;
+    player.stock.energy = 3;
     card.action(player);
     expect(player.getTerraformRating()).eq(15);
-    expect(player.energy).eq(0);
+    expect(player.stock.energy).eq(0);
   });
 });

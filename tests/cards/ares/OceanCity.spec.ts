@@ -116,11 +116,11 @@ describe('OceanCity', function() {
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
     game.addGreenery(player, greenery);
 
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 
   it('Ocean City counts for city-related VP', function() {
@@ -175,20 +175,20 @@ describe('OceanCity', function() {
       return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
     })[0];
 
-    player.plants = 0;
+    player.stock.plants = 0;
     game.addOcean(player, oceanSpace);
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
 
     action.cb(oceanSpace);
 
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
-    expect(player.plants).eq(1);
+    expect(player.stock.plants).eq(1);
   });
 });

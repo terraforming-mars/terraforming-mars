@@ -9,6 +9,6 @@ describe('Supplier', function() {
     const card = new Supplier();
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(2);
-    expect(player.steel).to.eq(4);
+    expect(player.stock.steel).to.eq(4);
   });
 });

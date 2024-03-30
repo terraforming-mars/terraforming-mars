@@ -64,7 +64,7 @@ describe('TitanShuttles', function() {
     // spend floaters to gain titanium
     orOptions.options[1].cb(6);
     expect(card.resourceCount).to.eq(1);
-    expect(player.titanium).to.eq(6);
+    expect(player.stock.titanium).to.eq(6);
 
     // add 2 floaters to Jovian card
     orOptions.options[0].cb();

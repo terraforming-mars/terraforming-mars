@@ -17,7 +17,7 @@ describe('Pollinators', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.tagsForTest = {plant: 2};
     expect(player.canPlay(card)).is.false;
     player.tagsForTest = {plant: 3};

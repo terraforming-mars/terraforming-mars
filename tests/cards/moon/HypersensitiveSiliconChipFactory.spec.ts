@@ -21,7 +21,7 @@ describe('HypersensitiveSiliconChipFactory', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
     const space1 = moonData.moon.getAvailableSpacesOnLand(player)[0];
     const space2 = moonData.moon.getAvailableSpacesOnLand(player)[1];
@@ -29,15 +29,15 @@ describe('HypersensitiveSiliconChipFactory', () => {
     space1.tile = {tileType: TileType.MOON_MINE};
     space2.tile = {tileType: TileType.MOON_MINE};
 
-    player.titanium = 2;
+    player.stock.titanium = 2;
     player.production.override({energy: 2});
     expect(player.getPlayableCardsForTest()).does.include(card);
 
-    player.titanium = 1;
+    player.stock.titanium = 1;
     player.production.override({energy: 2});
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.titanium = 2;
+    player.stock.titanium = 2;
     space2.tile = {tileType: TileType.MOON_HABITAT};
     player.production.override({energy: 1});
     expect(player.getPlayableCardsForTest()).does.not.include(card);
@@ -45,11 +45,11 @@ describe('HypersensitiveSiliconChipFactory', () => {
 
   it('play', () => {
     player.production.override({megacredits: 0});
-    player.titanium = 2;
+    player.stock.titanium = 2;
 
     card.play(player);
 
-    expect(player.titanium).eq(0);
+    expect(player.stock.titanium).eq(0);
     expect(player.production.megacredits).eq(4);
   });
 });

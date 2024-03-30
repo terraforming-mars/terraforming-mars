@@ -32,18 +32,18 @@ describe('PathfindersExpansion', function() {
     runAllActions(game);
 
     expect(pathfindersData.earth).eq(3);
-    expect(player1.plants).eq(2);
-    expect(player2.plants).eq(1);
+    expect(player1.stock.plants).eq(2);
+    expect(player2.stock.plants).eq(1);
 
-    expect(player1.megaCredits).eq(0);
-    expect(player2.megaCredits).eq(0);
+    expect(player1.stock.megacredits).eq(0);
+    expect(player2.stock.megacredits).eq(0);
 
     PathfindersExpansion.raiseTrack(Tag.EARTH, player1, 3);
     runAllActions(game);
 
     expect(pathfindersData.earth).eq(6);
-    expect(player1.megaCredits).eq(3);
-    expect(player2.megaCredits).eq(3);
+    expect(player1.stock.megacredits).eq(3);
+    expect(player2.stock.megacredits).eq(3);
   });
 
   it('Venus track', () => {
@@ -60,8 +60,8 @@ describe('PathfindersExpansion', function() {
     runAllActions(game);
 
     expect(pathfindersData.venus).eq(3);
-    expect(player1.heat).eq(2);
-    expect(player2.heat).eq(1);
+    expect(player1.stock.heat).eq(2);
+    expect(player2.stock.heat).eq(1);
     expect(floaterCard.resourceCount).eq(1);
     expect(floaterCard2.resourceCount).eq(0);
   });

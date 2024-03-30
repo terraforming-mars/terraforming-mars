@@ -18,6 +18,6 @@ describe('LakefrontResorts', function() {
 
     expect(player.production.megacredits).to.eq(2);
     // The 2 oceans are adjacent
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 });

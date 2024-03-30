@@ -25,17 +25,17 @@ describe('AerospaceMission', function() {
   });
 
   it('Can not play', function() {
-    player.megaCredits = 13;
+    player.stock.megacredits = 13;
     expect(card.canPlay(player)).is.false;
   });
 
   it('Can play', function() {
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
-    player.megaCredits = 14;
+    player.stock.megacredits = 14;
     card.play(player);
 
     // Expect Callisto and Ceres to show up first and second in the colonies list, every time
@@ -63,6 +63,6 @@ describe('AerospaceMission', function() {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
   });
 });

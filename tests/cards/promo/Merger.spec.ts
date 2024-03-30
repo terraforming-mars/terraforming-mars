@@ -59,7 +59,7 @@ describe('Merger', function() {
 
   it('Can play as long as have enough M€', function() {
     player.corporations.push(new BeginnerCorporation()); // Vestigial corporation
-    player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
+    player.stock.megacredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
     merger.play(player);
     runAllActions(game);
 
@@ -75,7 +75,7 @@ describe('Merger', function() {
   });
 
   it('Excludes corps that player cannot afford', function() {
-    player.megaCredits = 27;
+    player.stock.megacredits = 27;
     merger.play(player);
     runAllActions(game);
 
@@ -91,18 +91,18 @@ describe('Merger', function() {
 
   it('Fizzle if player cannot play any corp', () => {
     player.corporations.push(new BeginnerCorporation()); // Vestigial corporation
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     game.corporationDeck.drawPile = [new ValleyTrust(), new PhoboLog(), new TerralabsResearch(), new InterplanetaryCinematics()];
     merger.play(player);
     runAllActions(game);
 
     cast(player.popWaitingFor(), undefined);
-    expect(player.megaCredits).eq(15);
+    expect(player.stock.megacredits).eq(15);
   });
 
   it('Can play as long as have enough M€', function() {
     player.corporations = [new BeginnerCorporation()]; // Vestigial corporation
-    player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
+    player.stock.megacredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
     merger.play(player);
     runAllActions(game);
 
@@ -127,7 +127,7 @@ describe('Merger', function() {
 
   it('Player has effects of both corps', function() {
     player.corporations.push(new Splice(), new SaturnSystems());
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     expect(player.isCorporation(CardName.SPLICE)).is.true;
     expect(player.isCorporation(CardName.SATURN_SYSTEMS)).is.true;
@@ -136,7 +136,7 @@ describe('Merger', function() {
     expect(player.production.megacredits).to.eq(1); // Saturn Sys
 
     player2.playCard(new Ants());
-    expect(player.megaCredits).to.eq(2); // Splice
+    expect(player.stock.megacredits).to.eq(2); // Splice
   });
 
   it('Confirming that Cheung Shing Mars works', function() {
@@ -157,7 +157,7 @@ describe('Merger', function() {
 
   it('Works with Terralabs played via Merger', function() {
     player.corporations = [new BeginnerCorporation()]; // Vestigial corporation
-    player.megaCredits = 50; // Ensure enough to pay for Merger cost
+    player.stock.megacredits = 50; // Ensure enough to pay for Merger cost
     merger.play(player);
     runAllActions(game);
 
@@ -195,7 +195,7 @@ describe('Merger', function() {
   // Same behavior should apply to Polyphemos.
   it('Works with Terralabs first', function() {
     player.playCorporationCard(new TerralabsResearch());
-    player.megaCredits = 50; // Ensure enough to pay for Merger cost
+    player.stock.megacredits = 50; // Ensure enough to pay for Merger cost
     merger.play(player);
     expect(player.cardCost).to.eq(1);
     runAllActions(game);
@@ -231,7 +231,7 @@ describe('Merger', function() {
     const helion = new Helion();
     player.cardsInHand = [new MicroMills(), new Asteroid()];
     player.playCorporationCard(helion);
-    expect(player.megaCredits).eq(helion.startingMegaCredits - 6);
+    expect(player.stock.megacredits).eq(helion.startingMegaCredits - 6);
 
     merger.play(player);
 
@@ -243,7 +243,7 @@ describe('Merger', function() {
 
     runAllActions(game);
 
-    expect(player.megaCredits).eq(helion.startingMegaCredits + tharsis.startingMegaCredits - Merger.mergerCost - 6);
+    expect(player.stock.megacredits).eq(helion.startingMegaCredits + tharsis.startingMegaCredits - Merger.mergerCost - 6);
   });
 
   it('Works with Viron and another corporation card', function() {

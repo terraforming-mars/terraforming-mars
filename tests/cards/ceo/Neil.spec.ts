@@ -33,10 +33,10 @@ describe('Neil', function() {
     player.playedCards.push(card);
 
     card.onCardPlayed(player, new LTFPrivileges());
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
 
     card.onCardPlayed(player2, new ThoriumRush());
-    expect(player.megaCredits).eq(2);
+    expect(player.stock.megacredits).eq(2);
   });
 
 

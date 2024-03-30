@@ -23,7 +23,7 @@ describe('CuriosityII', function() {
     game.phase = Phase.ACTION;
 
     player.setCorporationForTest(card);
-    player.megaCredits = 2;
+    player.stock.megacredits = 2;
   });
 
   it('Can pay 2 M€ to draw card when placing a tile on a non-empty space', function() {
@@ -36,12 +36,12 @@ describe('CuriosityII', function() {
 
     orOptions.options[1].cb(); // Do nothing
     expect(player.cardsInHand).is.empty;
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
 
     orOptions.options[0].cb(); // Pay 2 M€ to draw a card
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Does not trigger when placing a tile on an empty space', function() {
@@ -50,7 +50,7 @@ describe('CuriosityII', function() {
     runAllActions(game);
 
     expect(player.cardsInHand).is.empty;
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('Does not trigger when opponent places a tile', function() {
@@ -59,7 +59,7 @@ describe('CuriosityII', function() {
     runAllActions(game);
 
     expect(player.cardsInHand).is.empty;
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('Placing a tile on top of another one triggers the bonus', () => {
@@ -81,6 +81,6 @@ describe('CuriosityII', function() {
     runAllActions(game);
 
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 });

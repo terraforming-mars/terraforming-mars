@@ -42,7 +42,7 @@ describe('EosChasmaNationalPark', () => {
     action.cb([birds]);
 
     expect(birds.resourceCount).to.eq(1);
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
     expect(player.production.megacredits).to.eq(2);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
@@ -62,7 +62,7 @@ describe('EosChasmaNationalPark', () => {
     cast(player.popWaitingFor(), undefined);
 
     expect(birds.resourceCount).to.eq(1);
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
     expect(player.production.megacredits).to.eq(2);
 
     expect(card.getVictoryPoints(player)).to.eq(1);

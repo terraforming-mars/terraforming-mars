@@ -21,12 +21,12 @@ describe('Tate', function() {
     card = new Tate();
     player = TestPlayer.BLUE.newPlayer();
     [game, player] = testGame(1);
-    player.megaCredits = 6;
+    player.stock.megacredits = 6;
   });
 
   it('Takes OPG action', function() {
     // Sanity:
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
     expect(player.cardsInHand).is.empty;
 
     const orOptions = cast(card.action(player), OrOptions);
@@ -40,7 +40,7 @@ describe('Tate', function() {
     selectCard.cb([selectCard.cards[0], selectCard.cards[1]]);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
     expect(player.cardsInHand).has.length(2);
     expect(player.cardsInHand[0].tags).contains(Tag.BUILDING);
     expect(player.cardsInHand[1].tags).contains(Tag.BUILDING);
@@ -48,7 +48,7 @@ describe('Tate', function() {
 
   it('Takes OPG action, only buy one card', function() {
     // Sanity:
-    expect(player.megaCredits).eq(6);
+    expect(player.stock.megacredits).eq(6);
     expect(player.cardsInHand).is.empty;
 
     const orOptions = cast(card.action(player), OrOptions);
@@ -62,7 +62,7 @@ describe('Tate', function() {
     selectCard.cb([selectCard.cards[0]]);
     runAllActions(game);
 
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand[0].tags).contains(Tag.BUILDING);
   });

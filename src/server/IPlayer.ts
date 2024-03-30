@@ -72,14 +72,6 @@ export interface IPlayer {
   // Terraforming Rating
   hasIncreasedTerraformRatingThisGeneration: boolean;
 
-  // Resources
-  megaCredits: number;
-  steel: number;
-  titanium: number;
-  plants: number;
-  energy: number;
-  heat: number;
-
   // Helion
   canUseHeatAsMegaCredits: boolean;
   // Luna Trade Federation

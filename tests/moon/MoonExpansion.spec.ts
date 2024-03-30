@@ -37,10 +37,10 @@ describe('MoonExpansion', () => {
 
   it('addTile grants space bonus', () => {
     // Contains card and steel.
-    player.steel = 0;
+    player.stock.steel = 0;
     player.cardsInHand = [];
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
-    expect(player.steel).eq(1);
+    expect(player.stock.steel).eq(1);
     expect(player.cardsInHand).has.length(1);
   });
 
@@ -59,9 +59,9 @@ describe('MoonExpansion', () => {
   it('Adding a tile while someone has cards with onTilePlaced behavior does not trigger them.', () => {
     player.cardsInHand = [new EcologicalSurvey(), new GeologicalSurvey()];
     player.setCorporationForTest(new Philares());
-    player.steel = 0;
+    player.stock.steel = 0;
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
-    expect(player.steel).eq(1);
+    expect(player.stock.steel).eq(1);
   });
 
   it('raiseMiningRate', () => {
@@ -175,10 +175,10 @@ describe('MoonExpansion', () => {
     const specialDesign = new SpecialDesign();
 
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.titanium = 1;
-    player.steel = 1;
+    player.stock.titanium = 1;
+    player.stock.steel = 1;
     moonData.miningRate = 3;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 

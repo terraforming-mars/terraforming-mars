@@ -27,8 +27,8 @@ describe('LunaTradeFederation', () => {
     expect(player.canUseTitaniumAsMegacredits).is.false;
     player.playCorporationCard(lunaTradeFederation);
     runAllActions(game);
-    expect(player.titanium).eq(10);
-    expect(player.megaCredits).eq(15);
+    expect(player.stock.titanium).eq(10);
+    expect(player.stock.megacredits).eq(15);
     expect(player.canUseTitaniumAsMegacredits).is.true;
   });
 
@@ -73,13 +73,13 @@ describe('LunaTradeFederation', () => {
     expect(player.canUseTitaniumAsMegacredits).is.true;
 
     const card = fakeCard({cost: 10, tags: [Tag.SPACE]});
-    player.megaCredits = 6;
-    player.titanium = 1;
+    player.stock.megacredits = 6;
+    player.stock.titanium = 1;
 
     expect(player.canAfford(player.affordOptionsForCard(card))).is.false;
 
-    player.megaCredits = 7;
-    player.titanium = 1;
+    player.stock.megacredits = 7;
+    player.stock.titanium = 1;
     expect(player.canAfford(player.affordOptionsForCard(card))).is.true;
   });
 
@@ -89,19 +89,19 @@ describe('LunaTradeFederation', () => {
     expect(player.canUseTitaniumAsMegacredits).is.true;
 
     const card = fakeCard({cost: 10, tags: [Tag.MICROBE]});
-    player.megaCredits = 7;
-    player.titanium = 1;
+    player.stock.megacredits = 7;
+    player.stock.titanium = 1;
 
     expect(player.spendableMegacredits()).eq(9);
     expect(player.canAfford(player.affordOptionsForCard(card))).is.false;
 
-    player.megaCredits = 8;
-    player.titanium = 1;
+    player.stock.megacredits = 8;
+    player.stock.titanium = 1;
     expect(player.spendableMegacredits()).eq(10);
     expect(player.canAfford(player.affordOptionsForCard(card))).is.true;
 
-    player.megaCredits = 8;
-    player.titanium = 3;
+    player.stock.megacredits = 8;
+    player.stock.titanium = 3;
     expect(player.spendableMegacredits()).eq(14);
 
     player.increaseTitaniumValue();

@@ -15,18 +15,18 @@ describe('PhysicsComplex', function() {
 
   it('Can not act', function() {
     card.play(player);
-    player.energy = 5;
+    player.stock.energy = 5;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act', function() {
     player.playedCards.push(card);
-    player.energy = 6;
+    player.stock.energy = 6;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
     runAllActions(player.game);
-    expect(player.energy).to.eq(0);
+    expect(player.stock.energy).to.eq(0);
     expect(card.resourceCount).to.eq(1);
   });
 });

@@ -40,7 +40,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 1 && !venusMaxed;
 
-    return player.titanium > 0 || (canSpendResource && player.canAfford({cost: 0, tr: {venus: 1}}));
+    return player.stock.titanium > 0 || (canSpendResource && player.canAfford({cost: 0, tr: {venus: 1}}));
   }
 
   public action(player: IPlayer) {
@@ -55,7 +55,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
       return this.addResource(player);
     }
 
-    if (player.titanium > 0) {
+    if (player.stock.titanium > 0) {
       opts.push(addResource);
     } else {
       return this.spendResource(player);

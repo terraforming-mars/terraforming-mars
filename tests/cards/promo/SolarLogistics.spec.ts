@@ -18,10 +18,10 @@ describe('Solar Logistics', function() {
   });
 
   it('Card Effects Work - titanium', function() {
-    player.titanium = 0;
+    player.stock.titanium = 0;
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.titanium).to.eq(2);
+    expect(player.stock.titanium).to.eq(2);
   });
 
   it('Card Effects Work - discounts', function() {

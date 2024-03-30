@@ -29,7 +29,7 @@ describe('ImportedHydrogen', function() {
     expect(action.options).has.lengthOf(3);
 
     action.options[0].cb();
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
 
     const selectAnimal = cast(action.options[2], SelectOption);
     const selectMicrobe = cast(action.options[1], SelectCard);
@@ -44,8 +44,8 @@ describe('ImportedHydrogen', function() {
   });
 
   it('Should add plants directly if no microbe or animal cards available', function() {
-    expect(player.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(0);
     card.play(player);
-    expect(player.plants).to.eq(3);
+    expect(player.stock.plants).to.eq(3);
   });
 });

@@ -62,11 +62,11 @@ describe('SubnauticPirates', () => {
     const adjacentSpaces = game.board.getAdjacentSpaces(oceanSpace);
     const adjacentSpace2 = adjacentSpaces[0];
     game.simpleAddTile(player2, adjacentSpace2, {tileType: TileType.GREENERY});
-    player2.megaCredits = 6;
+    player2.stock.megacredits = 6;
 
     const adjacentSpace3 = adjacentSpaces[1];
     game.simpleAddTile(player3, adjacentSpace3, {tileType: TileType.GREENERY});
-    player3.megaCredits = 7;
+    player3.stock.megacredits = 7;
 
     const selectSpace = cast(card.play(player), SelectSpace);
 
@@ -78,9 +78,9 @@ describe('SubnauticPirates', () => {
     cast(player2.popWaitingFor(), undefined);
     cast(player3.popWaitingFor(), undefined);
 
-    expect(player.megaCredits).eq(12);
-    expect(player2.megaCredits).eq(0);
-    expect(player3.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(12);
+    expect(player2.stock.megacredits).eq(0);
+    expect(player3.stock.megacredits).eq(1);
   });
 
 
@@ -92,11 +92,11 @@ describe('SubnauticPirates', () => {
     const adjacentSpaces = game.board.getAdjacentSpaces(oceanSpace);
     const adjacentSpace2 = adjacentSpaces[0];
     game.simpleAddTile(player2, adjacentSpace2, {tileType: TileType.GREENERY});
-    player2.megaCredits = 6;
+    player2.stock.megacredits = 6;
 
     const adjacentSpace3 = adjacentSpaces[1];
     game.simpleAddTile(player3, adjacentSpace3, {tileType: TileType.GREENERY});
-    player3.megaCredits = 7;
+    player3.stock.megacredits = 7;
 
     player2.underworldData.corruption = 1;
     player3.underworldData.corruption = 1;
@@ -113,9 +113,9 @@ describe('SubnauticPirates', () => {
     runAllActions(game);
     UnderworldTestHelper.assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
 
-    expect(player.megaCredits).eq(6);
-    expect(player2.megaCredits).eq(6);
-    expect(player3.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(6);
+    expect(player2.stock.megacredits).eq(6);
+    expect(player3.stock.megacredits).eq(1);
     expect(player2.underworldData.corruption).eq(0);
     expect(player3.underworldData.corruption).eq(1);
   });

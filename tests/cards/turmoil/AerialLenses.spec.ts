@@ -36,13 +36,13 @@ describe('AerialLenses', function() {
   });
 
   it('Should play with plants', function() {
-    player2.plants = 5;
+    player2.stock.plants = 5;
     card.play(player);
     expect(player.production.heat).to.eq(2);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
-    expect(player2.plants).to.eq(3);
+    expect(player2.stock.plants).to.eq(3);
   });
 });

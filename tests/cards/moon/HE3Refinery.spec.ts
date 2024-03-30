@@ -20,32 +20,32 @@ describe('HE3Refinery', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('act', () => {
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     moonData.miningRate = 0;
     card.action(player);
-    expect(player.megaCredits).eq(0);
+    expect(player.stock.megacredits).eq(0);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     moonData.miningRate = 1;
     card.action(player);
-    expect(player.megaCredits).eq(1);
+    expect(player.stock.megacredits).eq(1);
 
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     moonData.miningRate = 3;
     card.action(player);
-    expect(player.megaCredits).eq(3);
+    expect(player.stock.megacredits).eq(3);
 
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     moonData.miningRate = 4;
     card.action(player);
-    expect(player.megaCredits).eq(4);
+    expect(player.stock.megacredits).eq(4);
   });
 });
 

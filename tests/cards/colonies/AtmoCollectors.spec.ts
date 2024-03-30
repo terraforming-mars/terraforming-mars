@@ -41,21 +41,21 @@ describe('AtmoCollectors', function() {
     expect(card.resourceCount).to.eq(2);
     expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2}));
 
-    player.titanium = 0;
+    player.stock.titanium = 0;
 
     orOptions.options[1].cb();
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);
     expect(player.stock.asUnits()).deep.eq(Units.of({energy: 3}));
 
-    player.energy = 0;
+    player.stock.energy = 0;
 
     orOptions.options[2].cb();
     runAllActions(game);
     expect(card.resourceCount).to.eq(0);
     expect(player.stock.asUnits()).deep.eq(Units.of({heat: 4}));
 
-    player.heat = 0;
+    player.stock.heat = 0;
 
     orOptions.options[3].cb();
     runAllActions(game);

@@ -39,7 +39,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
     player.getOpponents().forEach((target) => {
       target.maybeBlockAttack(player, (proceed) => {
         if (proceed) {
-          target.stock.deduct(Resource.MEGACREDITS, Math.min(target.megaCredits, 2), {log: true, from: player});
+          target.stock.deduct(Resource.MEGACREDITS, Math.min(target.stock.megacredits, 2), {log: true, from: player});
         }
         return undefined;
       });

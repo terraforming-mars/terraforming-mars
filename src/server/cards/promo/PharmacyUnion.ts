@@ -79,7 +79,7 @@ export class PharmacyUnion extends CorporationCard {
         player.defer(() => {
           const orOptions = new OrOptions(
             new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
-              const megaCreditsLost = Math.min(player.megaCredits, 4);
+              const megaCreditsLost = Math.min(player.stock.megacredits, 4);
               this.isDisabled = true;
               player.increaseTerraformRating(3);
               player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
@@ -87,9 +87,9 @@ export class PharmacyUnion extends CorporationCard {
               return undefined;
             }),
             new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
-              const megaCreditsLost = Math.min(player.megaCredits, 4);
+              const megaCreditsLost = Math.min(player.stock.megacredits, 4);
               player.increaseTerraformRating();
-              player.megaCredits -= megaCreditsLost;
+              player.stock.megacredits -= megaCreditsLost;
               game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
               game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
               return undefined;
@@ -144,9 +144,9 @@ export class PharmacyUnion extends CorporationCard {
       player.defer(() => {
         const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tag.MICROBE).length;
         const player = game.getCardPlayerOrThrow(this.name);
-        const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
+        const megaCreditsLost = Math.min(player.stock.megacredits, microbeTagCount * 4);
         player.addResourceTo(this, microbeTagCount);
-        player.megaCredits -= megaCreditsLost;
+        player.stock.megacredits -= megaCreditsLost;
         game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
         return undefined;
       }, Priority.SUPERPOWER);

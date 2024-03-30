@@ -82,8 +82,8 @@ describe('Game', () => {
     award = new Thermalist();
     game.fundAward(player, award);
 
-    player2.heat = 23;
-    player3.heat = 23;
+    player2.stock.heat = 23;
+    player3.stock.heat = 23;
 
     // Add some cards with VPs
     const birdsCard = new Birds();
@@ -189,8 +189,8 @@ describe('Game', () => {
     setVenusScaleLevel(game, 6);
     maxOutOceans(player);
     // Skip final greenery Phase
-    player.plants = 0;
-    player2.plants = 0;
+    player.stock.plants = 0;
+    player2.stock.plants = 0;
     // Pass last turn
     game.playerHasPassed(player);
     game.playerHasPassed(player2);
@@ -208,8 +208,8 @@ describe('Game', () => {
     setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
     maxOutOceans(player);
     // Skip final greenery Phase
-    player.plants = 0;
-    player2.plants = 0;
+    player.stock.plants = 0;
+    player2.stock.plants = 0;
     // Pass last turn
     game.playerHasPassed(player);
     game.playerHasPassed(player2);
@@ -233,8 +233,8 @@ describe('Game', () => {
     setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
     maxOutOceans(player);
     // Skip final greenery Phase
-    player.plants = 0;
-    player2.plants = 0;
+    player.stock.plants = 0;
+    player2.stock.plants = 0;
     // Pass last turn
     game.playerHasPassed(player);
     game.playerHasPassed(player2);
@@ -265,7 +265,7 @@ describe('Game', () => {
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     maxOutOceans(player);
 
-    player.plants = 0; // Skip final greenery Phase
+    player.stock.plants = 0; // Skip final greenery Phase
 
     // Pass last turn
     game.playerHasPassed(player);
@@ -285,7 +285,7 @@ describe('Game', () => {
     setTemperature(game, constants.MAX_TEMPERATURE);
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     maxOutOceans(player);
-    player.plants = 9;
+    player.stock.plants = 9;
 
     // Pass last turn
     forceGenerationEnd(game);
@@ -306,7 +306,7 @@ describe('Game', () => {
     setTemperature(game, constants.MAX_TEMPERATURE - 2);
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     maxOutOceans(player);
-    player.plants = 9;
+    player.stock.plants = 9;
 
     // Pass last turn
     forceGenerationEnd(game);
@@ -324,7 +324,7 @@ describe('Game', () => {
     // Set up end-game conditions
     game.generation = 14;
     player.setTerraformRating(63);
-    player.plants = 9;
+    player.stock.plants = 9;
 
     // Pass last turn
     forceGenerationEnd(game);
@@ -343,7 +343,7 @@ describe('Game', () => {
     // Set up near end-game conditions
     game.generation = 14;
     player.setTerraformRating(62);
-    player.plants = 9;
+    player.stock.plants = 9;
 
     // Pass last turn
     forceGenerationEnd(game);
@@ -372,14 +372,14 @@ describe('Game', () => {
 
     // Trigger end game
     player.setTerraformRating(20);
-    player.plants = 14;
+    player.stock.plants = 14;
     player.takeActionForFinalGreenery();
 
     // Place first greenery to get 2 plants
     const placeFirstGreenery = cast(player.getWaitingFor(), OrOptions);
     const arsiaMons = game.board.getSpace(SpaceName.ARSIA_MONS);
     placeFirstGreenery.options[0].cb(arsiaMons);
-    expect(player.plants).to.eq(8);
+    expect(player.stock.plants).to.eq(8);
 
     // Place second greenery
     const placeSecondGreenery = cast(player.getWaitingFor(), OrOptions);
@@ -406,7 +406,7 @@ describe('Game', () => {
 
     [player1, player2, player3, player4].forEach((p) => {
       p.popWaitingFor();
-      p.plants = 8;
+      p.stock.plants = 8;
     });
 
     game.takeNextFinalGreeneryAction();
@@ -461,8 +461,8 @@ describe('Game', () => {
       p.popWaitingFor();
     });
 
-    player1.plants = 8;
-    player4.plants = 8;
+    player1.stock.plants = 8;
+    player4.stock.plants = 8;
 
     game.takeNextFinalGreeneryAction();
 
@@ -570,13 +570,13 @@ describe('Game', () => {
 
     player.setTerraformRating(35); // Can claim Terraformer milestone
 
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
     // Cannot afford milestone.
     const actions = cast(player.getActions(), OrOptions);
 
     expect(actions.options.find((option) => option.title === 'Claim a milestone')).is.undefined;
 
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     const actions2 = cast(player.getActions(), OrOptions);
     const claimMilestoneAction = cast(actions2.options.find((option) => option.title === 'Claim a milestone'), OrOptions);
     claimMilestoneAction.options[0].cb();
@@ -592,7 +592,7 @@ describe('Game', () => {
     player.popWaitingFor();
 
     player.setTerraformRating(35); // Can claim Terraformer milestone
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
     const actions = cast(player.getActions(), OrOptions);
     const claimMilestoneAction = cast(actions.options.find((option) => option.title === 'Claim a milestone'), OrOptions);
     claimMilestoneAction.options[0].cb();
@@ -673,14 +673,14 @@ describe('Game', () => {
 
     space.bonus = [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.PLANT, SpaceBonus.TITANIUM];
     expect(player.cardsInHand).has.length(0);
-    expect(player.plants).eq(0);
-    expect(player.titanium).eq(0);
+    expect(player.stock.plants).eq(0);
+    expect(player.stock.titanium).eq(0);
 
     game.addTile(player, space, {tileType: TileType.GREENERY});
 
     expect(player.cardsInHand).has.length(4);
-    expect(player.plants).eq(1);
-    expect(player.titanium).eq(1);
+    expect(player.stock.plants).eq(1);
+    expect(player.stock.titanium).eq(1);
   });
 
   /**

@@ -34,11 +34,11 @@ export class TychoMagnetics extends CorporationCard {
 
   // TODO(kberg): this is a direct copy from hi-tech lab.
   public canAct(player: IPlayer): boolean {
-    return player.energy > 0;
+    return player.stock.energy > 0;
   }
 
   public action(player: IPlayer) {
-    return new SelectAmount('Select amount of energy to spend', 'OK', 1, player.energy)
+    return new SelectAmount('Select amount of energy to spend', 'OK', 1, player.stock.energy)
       .andThen((amount) => {
         player.stock.deduct(Resource.ENERGY, amount);
         player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));

@@ -22,8 +22,8 @@ describe('GiantIceAsteroid', function() {
   });
 
   it('Should play', function() {
-    player2.plants = 4;
-    player3.plants = 6;
+    player2.stock.plants = 4;
+    player3.stock.plants = 6;
     card.play(player);
     expect(game.deferredActions).has.lengthOf(3);
 
@@ -36,10 +36,10 @@ describe('GiantIceAsteroid', function() {
     expect(orOptions.options).has.lengthOf(3);
 
     orOptions.options[0].cb();
-    expect(player2.plants).to.eq(0);
+    expect(player2.stock.plants).to.eq(0);
 
     orOptions.options[1].cb();
-    expect(player3.plants).to.eq(0);
+    expect(player3.stock.plants).to.eq(0);
 
     expect(game.getTemperature()).to.eq(-26);
     expect(player.getTerraformRating()).to.eq(24);

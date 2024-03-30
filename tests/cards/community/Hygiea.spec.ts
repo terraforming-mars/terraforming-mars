@@ -53,8 +53,8 @@ describe('Hygiea', () => {
   });
 
   it('Should trade - megacredits', () => {
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
 
     hygiea.trade(player);
     runAllActions(game);
@@ -62,13 +62,13 @@ describe('Hygiea', () => {
     expect(orOptions.options.length).eq(2);
     orOptions.options[0].cb();
 
-    expect(player.megaCredits).to.eq(13);
-    expect(player2.megaCredits).to.eq(7);
+    expect(player.stock.megacredits).to.eq(13);
+    expect(player2.stock.megacredits).to.eq(7);
   });
 
   it('Should trade - do not steal', () => {
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
 
     hygiea.trade(player);
     runAllActions(game);
@@ -76,8 +76,8 @@ describe('Hygiea', () => {
     expect(orOptions.options.length).eq(2);
     orOptions.options[1].cb();
 
-    expect(player.megaCredits).to.eq(10);
-    expect(player2.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
+    expect(player2.stock.megacredits).to.eq(10);
   });
 
   it('Should give trade bonus', () => {
@@ -86,16 +86,16 @@ describe('Hygiea', () => {
     hygiea.trade(player2);
     runAllActions(game);
 
-    expect(player.megaCredits).to.eq(3);
-    expect(player2.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(3);
+    expect(player2.stock.megacredits).to.eq(0);
   });
 
   it('Stealing compatible with Law Suit', () => {
     const lawSuit = new LawSuit();
     player2.cardsInHand.push(lawSuit);
 
-    player.megaCredits = 10;
-    player2.megaCredits = 10;
+    player.stock.megacredits = 10;
+    player2.stock.megacredits = 10;
 
     expect(lawSuit.canPlay(player2)).is.false;
 
@@ -105,15 +105,15 @@ describe('Hygiea', () => {
     expect(orOptions.options.length).eq(2);
     orOptions.options[0].cb();
 
-    expect(player.megaCredits).to.eq(13);
-    expect(player2.megaCredits).to.eq(7);
+    expect(player.stock.megacredits).to.eq(13);
+    expect(player2.stock.megacredits).to.eq(7);
 
     expect(lawSuit.canPlay(player2)).is.true;
     const selectPlayer = cast(lawSuit.play(player2), SelectPlayer);
     selectPlayer.cb(player);
 
-    expect(player.megaCredits).to.eq(10);
-    expect(player2.megaCredits).to.eq(10);
+    expect(player.stock.megacredits).to.eq(10);
+    expect(player2.stock.megacredits).to.eq(10);
     expect(player.playedCards).to.have.members([lawSuit]);
   });
 });

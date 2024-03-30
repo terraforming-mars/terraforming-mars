@@ -21,7 +21,7 @@ describe('MarsFirst', function() {
 
     const bonus = MARS_FIRST_BONUS_1;
     bonus.grant(game);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
   });
 
   it('Ruling bonus 2: Gain 1 M€ for each tile you have ON MARS', function() {
@@ -29,14 +29,14 @@ describe('MarsFirst', function() {
 
     const bonus = MARS_FIRST_BONUS_2;
     bonus.grant(game);
-    expect(player.megaCredits).to.eq(1);
+    expect(player.stock.megacredits).to.eq(1);
   });
 
   it('Ruling policy 1: When you place a tile ON MARS, gain 1 steel', function() {
     setRulingParty(game, PartyName.MARS, 'mfp01');
 
     addGreenery(player, '11');
-    expect(player.steel).to.eq(1);
+    expect(player.stock.steel).to.eq(1);
   });
 
   it('Ruling policy 2: When you play a building tag, gain 2 MC', function() {
@@ -44,7 +44,7 @@ describe('MarsFirst', function() {
 
     const mine = new Mine();
     player.playCard(mine);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
   });
 
   it('Ruling policy 3: Your steel resources are worth 1 M€ extra', function() {
@@ -59,14 +59,14 @@ describe('MarsFirst', function() {
     setRulingParty(game, PartyName.MARS, 'mfp04');
 
     const marsFirstPolicy = MARS_FIRST_POLICY_4;
-    player.megaCredits = 7;
+    player.stock.megacredits = 7;
 
     marsFirstPolicy.action(player);
     expect(marsFirstPolicy.canAct(player)).to.be.true;
     game.deferredActions.runNext();
 
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
     expect(player.cardsInHand[0].tags.includes(Tag.BUILDING)).to.be.true;
     expect(marsFirstPolicy.canAct(player)).to.be.false;
   });

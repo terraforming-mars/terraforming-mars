@@ -25,8 +25,8 @@ describe('Ganymede', function() {
 
   it('Should trade', function() {
     ganymede.trade(player);
-    expect(player.plants).to.eq(1);
-    expect(player2.plants).to.eq(0);
+    expect(player.stock.plants).to.eq(1);
+    expect(player2.stock.plants).to.eq(0);
   });
 
   it('Should give trade bonus', function() {
@@ -37,7 +37,7 @@ describe('Ganymede', function() {
 
     expect(player.production.plants).to.eq(1);
     expect(player2.production.plants).to.eq(0);
-    expect(player.plants).to.eq(1);
-    expect(player2.plants).to.eq(1);
+    expect(player.stock.plants).to.eq(1);
+    expect(player2.stock.plants).to.eq(1);
   });
 });

@@ -25,8 +25,8 @@ describe('Ceres', function() {
 
   it('Should trade', function() {
     ceres.trade(player);
-    expect(player.steel).to.eq(2);
-    expect(player2.steel).to.eq(0);
+    expect(player.stock.steel).to.eq(2);
+    expect(player2.stock.steel).to.eq(0);
   });
 
   it('Should give trade bonus', function() {
@@ -37,7 +37,7 @@ describe('Ceres', function() {
 
     expect(player.production.steel).to.eq(1);
     expect(player2.production.steel).to.eq(0);
-    expect(player.steel).to.eq(2);
-    expect(player2.steel).to.eq(2);
+    expect(player.stock.steel).to.eq(2);
+    expect(player2.stock.steel).to.eq(2);
   });
 });

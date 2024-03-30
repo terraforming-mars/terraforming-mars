@@ -35,7 +35,7 @@ describe('DesignedOrganisms', function() {
     card.play(player);
     runAllActions(game);
 
-    expect(player.plants).eq(3);
+    expect(player.stock.plants).eq(3);
     expect(player.production.asUnits()).eql(Units.of({plants: 2}));
     expect(tardigrades.resourceCount).eq(3);
     expect(penguins.resourceCount).eq(1);

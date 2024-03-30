@@ -10,19 +10,19 @@ describe('SeptumTribus', function() {
     card.play(player);
 
     player.setCorporationForTest(card);
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
 
     const turmoil = game.turmoil!;
 
     turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     card.action(player);
-    expect(player.megaCredits).to.eq(2);
+    expect(player.stock.megacredits).to.eq(2);
 
-    player.megaCredits = 0;
+    player.stock.megacredits = 0;
     turmoil.sendDelegateToParty(player, PartyName.KELVINISTS, game);
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     card.action(player);
-    expect(player.megaCredits).to.eq(6);
+    expect(player.stock.megacredits).to.eq(6);
   });
 });

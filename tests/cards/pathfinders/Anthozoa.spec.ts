@@ -15,7 +15,7 @@ describe('Anthozoa', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     expect(player.canPlay(card)).is.false;
     addOcean(player);
     expect(player.canPlay(card)).is.false;
@@ -27,17 +27,17 @@ describe('Anthozoa', function() {
 
   it('canAct', function() {
     expect(card.canAct(player)).is.false;
-    player.plants = 1;
+    player.stock.plants = 1;
     expect(card.canAct(player)).is.true;
   });
 
   it('action', function() {
-    player.plants = 1;
+    player.stock.plants = 1;
     expect(card.resourceCount).eq(0);
 
     card.action(player);
 
-    expect(player.plants).eq(0);
+    expect(player.stock.plants).eq(0);
     expect(card.resourceCount).eq(1);
   });
 

@@ -18,10 +18,10 @@ describe('Helion', function() {
     cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(3);
 
-    player.megaCredits = 3;
+    player.stock.megacredits = 3;
     expect(player.canAfford(5)).to.be.false;
 
-    player.heat = 2;
+    player.stock.heat = 2;
     expect(player.canAfford(5)).to.be.true;
   });
 
@@ -30,8 +30,8 @@ describe('Helion', function() {
     player.playCorporationCard(card);
     player.playAdditionalCorporationCard(stormcraft);
 
-    player.heat = 4;
-    player.megaCredits = 0;
+    player.stock.heat = 4;
+    player.stock.megacredits = 0;
 
     expect(player.availableHeat()).eq(4);
     expect(player.canAfford(10)).is.false;

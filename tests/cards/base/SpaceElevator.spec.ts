@@ -23,11 +23,11 @@ describe('SpaceElevator', function() {
   });
 
   it('Should act', function() {
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    expect(player.steel).to.eq(0);
-    expect(player.megaCredits).to.eq(5);
+    expect(player.stock.steel).to.eq(0);
+    expect(player.stock.megacredits).to.eq(5);
   });
 });

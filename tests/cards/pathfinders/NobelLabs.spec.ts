@@ -31,7 +31,7 @@ describe('NobelLabs', function() {
   });
 
   it('canPlay', function() {
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.tagsForTest = {science: 3};
     expect(player.canPlay(card)).is.false;
     player.tagsForTest = {science: 4};

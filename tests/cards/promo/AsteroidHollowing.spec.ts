@@ -23,19 +23,19 @@ describe('AsteroidHollowing', function() {
   });
 
   it('Should act', function() {
-    player.titanium = 1;
+    player.stock.titanium = 1;
 
     expect(card.canAct(player)).is.true;
     expect(churnAction(card, player)).is.undefined;
 
-    expect(player.titanium).to.eq(0);
+    expect(player.stock.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(1);
     expect(player.production.megacredits).to.eq(1);
   });
 
   it('Should give victory points', function() {
     player.playedCards.push(card);
-    player.titanium = 2;
+    player.stock.titanium = 2;
 
     expect(churnAction(card, player)).is.undefined;
     expect(card.getVictoryPoints(player)).to.eq(0);

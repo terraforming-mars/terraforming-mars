@@ -44,8 +44,8 @@ describe('RotatorImpacts', () => {
 
   it('Should act', () => {
     player.playedCards.push(card);
-    player.megaCredits = 16;
-    player.titanium = 2;
+    player.stock.megacredits = 16;
+    player.stock.titanium = 2;
 
     // only one possible action: add resource to card
     expect(card.resourceCount).to.eq(0);
@@ -63,7 +63,7 @@ describe('RotatorImpacts', () => {
 
   it('Should not allow to raise Venus level if there no resources on card', () => {
     player.playedCards.push(card);
-    player.megaCredits = 5;
+    player.stock.megacredits = 5;
     expect(card.canAct(player)).is.not.true;
   });
 

@@ -10,6 +10,6 @@ export class Capitalist extends BaseMilestone {
   }
 
   public getScore(player: IPlayer): number {
-    return player.megaCredits;
+    return player.stock.megacredits;
   }
 }

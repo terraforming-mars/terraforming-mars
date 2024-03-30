@@ -24,11 +24,11 @@ describe('AquiferPumping', function() {
   });
 
   it('Should act', function() {
-    player.megaCredits = OCEAN_COST;
+    player.stock.megacredits = OCEAN_COST;
     const action = card.action(player);
     cast(action, undefined);
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
   });
 
   it('Cannot act if not enough to pay', function() {
@@ -36,9 +36,9 @@ describe('AquiferPumping', function() {
   });
 
   it('Can use steel to pay', function() {
-    player.megaCredits = OCEAN_COST - 2;
+    player.stock.megacredits = OCEAN_COST - 2;
     expect(card.canAct(player)).is.not.true;
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(card.canAct(player)).is.true;
   });
 
@@ -50,17 +50,17 @@ describe('AquiferPumping', function() {
 
     turmoil.rulingParty = new Greens();
     PoliticalAgendas.setNextAgenda(turmoil, game);
-    player.megaCredits = OCEAN_COST;
+    player.stock.megacredits = OCEAN_COST;
     expect(card.canAct(player)).is.true;
 
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, game);
-    player.megaCredits = OCEAN_COST;
+    player.stock.megacredits = OCEAN_COST;
     expect(card.canAct(player)).is.false;
 
-    player.megaCredits = OCEAN_COST + 2;
+    player.stock.megacredits = OCEAN_COST + 2;
     expect(card.canAct(player)).is.false;
-    player.megaCredits = OCEAN_COST + 3;
+    player.stock.megacredits = OCEAN_COST + 3;
     expect(card.canAct(player)).is.true;
   });
 
@@ -72,21 +72,21 @@ describe('AquiferPumping', function() {
 
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, game);
-    player.megaCredits = OCEAN_COST;
+    player.stock.megacredits = OCEAN_COST;
     expect(card.canAct(player)).is.false;
 
-    player.megaCredits = 3;
-    player.steel = 4;
+    player.stock.megacredits = 3;
+    player.stock.steel = 4;
     expect(card.canAct(player)).is.true;
 
-    player.megaCredits = 1;
-    player.steel = 5;
+    player.stock.megacredits = 1;
+    player.stock.steel = 5;
     expect(card.canAct(player)).is.false;
   });
 
   it('Can act if can pay even after oceans are maxed', function() {
     maxOutOceans(player);
-    player.megaCredits = 8;
+    player.stock.megacredits = 8;
 
     expect(card.canAct(player)).is.true;
   });

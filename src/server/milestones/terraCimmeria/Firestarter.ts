@@ -10,6 +10,6 @@ export class Firestarter extends BaseMilestone {
   }
 
   public getScore(player: IPlayer): number {
-    return player.heat;
+    return player.stock.heat;
   }
 }

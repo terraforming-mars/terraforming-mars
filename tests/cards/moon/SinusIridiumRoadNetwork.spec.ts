@@ -16,31 +16,31 @@ describe('SinusIridiumRoadNetwork', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
 
-    player.steel = 0;
+    player.stock.steel = 0;
     player.production.override({energy: 1});
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.steel = 1;
+    player.stock.steel = 1;
     player.production.override({energy: 0});
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
 
-    player.steel = 1;
+    player.stock.steel = 1;
     player.production.override({energy: 1});
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
-    player.steel = 2;
+    player.stock.steel = 2;
     player.production.override({energy: 1});
-    player.steel = 1;
+    player.stock.steel = 1;
     expect(player.production.megacredits).eq(0);
 
     card.play(player);
 
-    expect(player.steel).eq(0);
+    expect(player.stock.steel).eq(0);
     expect(player.production.energy).eq(0);
     expect(player.production.megacredits).eq(3);
 

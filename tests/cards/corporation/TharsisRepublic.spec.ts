@@ -30,14 +30,14 @@ describe('TharsisRepublic', function() {
 
     expect(game.board.getCitiesOnMars()).has.length(1);
     expect(player.production.megacredits).to.eq(1);
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
   });
 
   it('Gives 3 M€ and MC production for own city on Mars', function() {
     addCity(player);
     runAllActions(game);
 
-    expect(player.megaCredits).to.eq(3);
+    expect(player.stock.megacredits).to.eq(3);
     expect(player.production.megacredits).to.eq(1);
   });
 
@@ -45,7 +45,7 @@ describe('TharsisRepublic', function() {
     addCity(player2);
     runAllActions(game);
 
-    expect(player.megaCredits).to.eq(0);
+    expect(player.stock.megacredits).to.eq(0);
     expect(player.production.megacredits).to.eq(1);
   });
 

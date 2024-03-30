@@ -20,7 +20,7 @@ describe('Hadesphere', () => {
     player.playCorporationCard(card);
     runAllActions(game);
 
-    expect(player.steel).eq(5);
+    expect(player.stock.steel).eq(5);
   });
 
   it('canAct', () => {

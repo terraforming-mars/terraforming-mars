@@ -41,18 +41,18 @@ describe('StripMine', function() {
 
   it('Cannot play if Reds are ruling and cannot afford 6 MC', function() {
     player.production.add(Resource.ENERGY, 2);
-    player.megaCredits = card.cost;
+    player.stock.megacredits = card.cost;
     player.game.phase = Phase.ACTION;
 
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, game);
     expect(player.canPlay(card)).is.false;
 
-    player.megaCredits += 6; // Payment for Reds tax
+    player.stock.megacredits += 6; // Payment for Reds tax
     expect(player.canPlay(card)).deep.eq({redsCost: 6});
 
-    player.megaCredits = 5; // Cannot play as cannot afford Reds tax in MC
-    player.steel = 30;
+    player.stock.megacredits = 5; // Cannot play as cannot afford Reds tax in MC
+    player.stock.steel = 30;
     expect(player.canPlay(card)).is.false;
   });
 });

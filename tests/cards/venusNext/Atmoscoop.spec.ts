@@ -30,12 +30,12 @@ describe('Atmoscoop', function() {
 
   it('Cannot play', function() {
     player.playedCards.push(new Research());
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - no targets', function() {
     player.playedCards.push(new Research(), new SearchForLife());
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const action = cast(card.play(player), OrOptions);
 

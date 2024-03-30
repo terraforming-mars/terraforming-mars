@@ -21,7 +21,7 @@ describe('NoctisCity', function() {
   });
 
   it('Cannot play without energy production', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('All land spaces are available on Hellas', function() {
@@ -34,7 +34,7 @@ describe('NoctisCity', function() {
 
   it('Should play', function() {
     player.production.add(Resource.ENERGY, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.energy).to.eq(0);

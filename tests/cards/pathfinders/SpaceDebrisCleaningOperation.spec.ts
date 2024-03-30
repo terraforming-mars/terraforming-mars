@@ -23,19 +23,19 @@ describe('SpaceDebrisCleaningOperation', function() {
 
   it('canPlay', function() {
     player.tagsForTest = {space: 3};
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.tagsForTest = {space: 4};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('canPlay, any 4 tags', function() {
     player2.tagsForTest = {space: 3};
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.tagsForTest = {space: 4};
-    expect(player.simpleCanPlay(card)).is.true;
-    expect(player2.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {

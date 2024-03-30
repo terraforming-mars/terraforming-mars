@@ -15,14 +15,14 @@ describe('MartianZoo', function() {
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     const lands = player.game.board.getAvailableSpacesOnLand(player);
     player.game.addCity(player, lands[0]);
     player.game.addCity(player, lands[1]);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     cast(card.play(player), undefined);
   });

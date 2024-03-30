@@ -8,10 +8,10 @@ describe('IshtarMining', function() {
     const card = new IshtarMining();
     const [game, player] = testGame(2);
     game.increaseVenusScaleLevel(player, 3);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     game.increaseVenusScaleLevel(player, 3);
     expect(game.getVenusScaleLevel()).to.eq(12);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(1);
   });

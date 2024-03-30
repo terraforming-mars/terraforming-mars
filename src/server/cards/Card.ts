@@ -87,7 +87,7 @@ const cardProperties = new Map<CardName, InternalProperties>();
  *    consumes very little memory.
  *
  * 2. It's key behavior is to provide a lot of the `canPlay` and `play` behavior currently
- *    in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
+ *    in player.canPlay and player.play. These will eventually be removed and
  *    put right in here.
  *
  * In order to implement this default behavior, Card subclasses should ideally not

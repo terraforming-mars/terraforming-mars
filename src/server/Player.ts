@@ -1345,7 +1345,7 @@ export class Player implements IPlayer {
     if (!canAfford.canAfford) {
       return false;
     }
-    const canPlay = this.simpleCanPlay(card, options);
+    const canPlay = card.canPlay(this, options);
     if (canPlay === false) {
       return false;
     }
@@ -1357,15 +1357,6 @@ export class Player implements IPlayer {
       }
     }
     return canPlay;
-  }
-
-  /**
-   * Verify if requirements for the card can be met, ignoring the project cost.
-   * Only made public for tests.
-   */
-  // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    return card.canPlay(this, canAffordOptions);
   }
 
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {

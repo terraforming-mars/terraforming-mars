@@ -12,7 +12,6 @@ export class IceAsteroid extends Card implements IProjectCard {
       name: CardName.ICE_ASTEROID,
       tags: [Tag.SPACE],
       cost: 23,
-      tr: {oceans: 2},
 
       behavior: {
         ocean: {count: 2},

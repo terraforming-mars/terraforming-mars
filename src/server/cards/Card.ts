@@ -58,7 +58,7 @@ type SharedProperties = {
   protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  /** Descirbes where the card's TR comes from. Unnecessary for some behaviors. */
+  /** Describes where the card's TR comes from. Unnecessary for some behaviors. */
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }

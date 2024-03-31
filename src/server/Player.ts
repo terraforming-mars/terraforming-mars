@@ -75,6 +75,7 @@ import {ChooseCards} from './deferredActions/ChooseCards';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
+import {TRSource} from '../common/cards/TRSource';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -1327,11 +1328,17 @@ export class Player implements IPlayer {
   }
 
   public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
-    const trSource =
-      card.tr ||
-      (card.behavior !== undefined ?
-        getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) :
-        undefined);
+    let trSource: TRSource | undefined = undefined;
+    if (card.tr) {
+      trSource = card.tr;
+    } else {
+      const computedTr = card.computeTr?.(this);
+      if (computedTr !== undefined) {
+        trSource = computedTr;
+      } else if (card.behavior !== undefined) {
+        trSource = getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card));
+      }
+    }
     const cost = this.getCardCost(card);
     const paymentOptionsForCard = this.paymentOptionsForCard(card);
     return {

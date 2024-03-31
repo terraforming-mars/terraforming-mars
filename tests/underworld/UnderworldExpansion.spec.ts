@@ -366,6 +366,18 @@ describe('UnderworldExpansion', function() {
     expect(UnderworldExpansion.excavatableSpaces(player2)).does.not.include(space);
   });
 
+  it('excavatableSpaces - cannot afford ocean bonus', () => {
+    const space = UnderworldExpansion.identifiableSpaces(player1)[0];
+    space.undergroundResources = 'ocean';
+    player1.megaCredits = 3;
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.contain(space);
+
+    player1.megaCredits = 4;
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);
+  });
+
   // TODO(kberg): Test excavatablespaces override
 
   it('excavate', () => {

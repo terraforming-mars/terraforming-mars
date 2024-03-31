@@ -21,7 +21,7 @@ describe('ArtificialLake', function() {
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
@@ -50,7 +50,7 @@ describe('ArtificialLake', function() {
     }
 
     // Card is still playable to get VPs...
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // ...but an action to place ocean is not unavailable
     cast(card.play(player), undefined);
@@ -69,14 +69,14 @@ describe('ArtificialLake', function() {
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(1);
 
     // Card is still playable.
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // No spaces left?
     game.simpleAddTile(player, spaces[0], {tileType: TileType.GREENERY});
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(0);
 
     // Cannot play.
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
   });
 
   it('Can still play if oceans are maxed but no land spaces are available', function() {
@@ -89,7 +89,7 @@ describe('ArtificialLake', function() {
       game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
     });
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Works with reds', () => {

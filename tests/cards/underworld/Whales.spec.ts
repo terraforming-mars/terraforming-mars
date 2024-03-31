@@ -7,6 +7,7 @@ import {AquiferStandardProject} from '../../../src/server/cards/base/standardPro
 import {IGame} from '../../../src/server/IGame';
 import {Flooding} from '../../../src/server/cards/base/Flooding';
 import {IcyImpactors} from '../../../src/server/cards/promo/IcyImpactors';
+import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('Whales', () => {
   let card: Whales;
@@ -16,7 +17,7 @@ describe('Whales', () => {
 
   beforeEach(() => {
     card = new Whales();
-    [game, player, otherPlayer] = testGame(2);
+    [game, player, otherPlayer] = testGame(2, {underworldExpansion: true});
   });
 
   it('canPlay', () => {
@@ -81,7 +82,7 @@ describe('Whales', () => {
     expect(card.resourceCount).eq(1);
   });
 
-  // This special case test is written because Icy Impactors is still custom code.
+  // This special test case is written because Icy Impactors is still custom code.
   it('effect - Icy Impactors', () => {
     player.playedCards.push(card);
     maxOutOceans(otherPlayer);
@@ -96,6 +97,24 @@ describe('Whales', () => {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
 
+    expect(game.board.getOceanSpaces()).has.length(9);
+    expect(card.resourceCount).eq(1);
+  });
+
+  // This special test case is written because Excavation has custom code.
+  it('effect - excavation', () => {
+    player.playedCards.push(card);
+    const space = UnderworldExpansion.identifiableSpaces(player)[0];
+    space.undergroundResources = 'ocean';
+    maxOutOceans(otherPlayer);
+    player.megaCredits = 10;
+
+    expect(UnderworldExpansion.excavatableSpaces(player)).contains(space);
+
+    UnderworldExpansion.excavate(player, space);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(6);
     expect(game.board.getOceanSpaces()).has.length(9);
     expect(card.resourceCount).eq(1);
   });

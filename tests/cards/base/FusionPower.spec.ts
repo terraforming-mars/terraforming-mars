@@ -14,9 +14,9 @@ describe('FusionPower', function() {
 
   it('Can not play', function() {
     player.tagsForTest = {power: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     player.tagsForTest = {power: 2};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {

@@ -7,16 +7,16 @@ describe('SisterPlanetSupport', function() {
   it('Should play', function() {
     const card = new SisterPlanetSupport();
     const [/* game */, player] = testGame(1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {earth: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1, earth: 1};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(3);

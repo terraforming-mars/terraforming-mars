@@ -1256,16 +1256,7 @@ export class Player implements IPlayer {
 
   public canPlay(card: IProjectCard): boolean {
     const options: CanAffordOptions = {card: card};
-    return this.newCanAfford(options) && this.simpleCanPlay(card, options);
-  }
-
-  /**
-   * Verify if requirements for the card can be met, ignoring the project cost.
-   * Only made public for tests.
-   */
-  // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean {
-    return card.canPlay(this, canAffordOptions);
+    return this.newCanAfford(options) && card.canPlay(this, canAffordOptions);
   }
 
   /**

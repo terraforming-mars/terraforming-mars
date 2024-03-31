@@ -4,7 +4,7 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame, isIGame} from './IGame';
 import {Payment, PaymentOptions} from '../common/inputs/Payment';
 import {SpendableCardResource} from '../common/inputs/Spendable';
-import {ICard, IActionCard, DynamicTRSource} from './cards/ICard';
+import {ICard, IActionCard} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
 import {PlayerInput} from './PlayerInput';
@@ -38,7 +38,7 @@ export type ResourceSource = IPlayer | GlobalEventName | ICard;
 export type CanAffordOptions = Partial<PaymentOptions> & {
   cost: number,
   reserveUnits?: Units,
-  tr?: TRSource | DynamicTRSource,
+  tr?: TRSource,
 }
 
 /**

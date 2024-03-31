@@ -8,7 +8,7 @@ import {Tag} from '../../common/cards/Tag';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {DynamicTRSource, ICard} from './ICard';
+import {ICard} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
@@ -58,8 +58,8 @@ type SharedProperties = {
   protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  /** Describes where the card's TR comes from. Unnecessary for some behaviors. */
-  tr?: TRSource | DynamicTRSource,
+  /** Describes where the card's TR comes from. */
+  tr?: TRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
@@ -213,7 +213,7 @@ export abstract class Card implements ICard {
   public get reserveUnits(): Units {
     return this.properties.reserveUnits || Units.EMPTY;
   }
-  public get tr(): TRSource | DynamicTRSource | undefined {
+  public get tr(): TRSource | undefined {
     return this.properties.tr;
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {

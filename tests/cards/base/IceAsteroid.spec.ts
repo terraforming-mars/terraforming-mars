@@ -9,14 +9,19 @@ describe('IceAsteroid', function() {
     cast(card.play(player), undefined);
   });
 
-  it('Works with reds', () => {
-    const card = new IceAsteroid();
-    const [/* game */, player, player2] = testGame(2, {turmoilExtension: true});
+  const redsRuns = [
+    {oceans: 0, expected: 6},
+    {oceans: 7, expected: 6},
+    {oceans: 8, expected: 3},
+    {oceans: 9, expected: 0},
+  ] as const;
 
-    testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
-    maxOutOceans(player2, 8);
-    testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
-    maxOutOceans(player2, 9);
-    testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
-  });
+  for (const run of redsRuns) {
+    it('Works with reds ' + JSON.stringify(run), () => {
+      const card = new IceAsteroid();
+      const [/* game */, player, player2] = testGame(2, {turmoilExtension: true});
+      maxOutOceans(player2, run.oceans);
+      testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
+    });
+  }
 });

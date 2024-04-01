@@ -300,9 +300,8 @@ export class MoonExpansion {
           if (include && options?.surfaceOnly) {
             include = space.spaceType !== SpaceType.COLONY;
           }
-
           if (include && options?.ownedBy !== undefined) {
-            include = space.player === options.ownedBy;
+            include = space.player === options.ownedBy || space.coOwner === options.ownedBy;
           }
 
           return include;
@@ -358,7 +357,7 @@ export class MoonExpansion {
       // Each road tile on the map awards 1VP to the player owning it.
       // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.
       const moon = moonData.moon;
-      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id);
+      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id || space.coOwner?.id === player.id);
       mySpaces.forEach((space) => {
         if (space.tile !== undefined) {
           const type = space.tile.tileType;

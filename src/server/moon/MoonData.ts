@@ -1,3 +1,4 @@
+import {PlayerId} from '../../common/Types';
 import {IPlayer} from '../IPlayer';
 import {MoonBoard} from './MoonBoard';
 import {SerializedMoonData} from './SerializedMoonData';
@@ -26,17 +27,21 @@ export namespace MoonData {
     };
   }
 
-  export function deserialize(moonData: SerializedMoonData, players: Array<IPlayer>): MoonData {
-    const lunaFirstPlayer = players.find((p) => p.id === moonData.lunaFirstPlayerId);
-    if (moonData.lunaFirstPlayerId !== undefined && lunaFirstPlayer === undefined) {
-      throw new Error(`player ${moonData.lunaFirstPlayerId} not found`);
+  function findPlayer(players: Array<IPlayer>, playerId: PlayerId | undefined) {
+    const player = players.find((player) => player.id === playerId);
+    if (playerId !== undefined && player === undefined) {
+      throw new Error(`player ${playerId} not found`);
     }
+    return player;
+  }
+
+  export function deserialize(moonData: SerializedMoonData, players: Array<IPlayer>): MoonData {
     return {
       habitatRate: moonData.habitatRate,
       logisticRate: moonData.logisticRate,
       miningRate: moonData.miningRate,
       moon: MoonBoard.deserialize(moonData.moon, players),
-      lunaFirstPlayer: lunaFirstPlayer,
+      lunaFirstPlayer: findPlayer(players, moonData.lunaFirstPlayerId),
       lunaProjectOfficeLastGeneration: moonData.lunaProjectOfficeLastGeneration,
     };
   }

@@ -309,16 +309,23 @@ export abstract class Board {
         if (space.excavator !== undefined) {
           serialized.excavator = space.excavator.id;
         }
+        if (space.coOwner !== undefined) {
+          serialized.coOwner = space.coOwner.id;
+        }
 
         return serialized;
       }),
     };
   }
 
+  private static findPlayer(players: ReadonlyArray<IPlayer>, playerId: PlayerId | undefined) {
+    return players.find((p) => p.id === playerId);
+  }
+
   public static deserializeSpace(serialized: SerializedSpace, players: ReadonlyArray<IPlayer>): Space {
-    const playerId: PlayerId | undefined = serialized.player;
-    const player = players.find((p) => p.id === playerId);
-    const excavator = players.find((p) => p.id === serialized.excavator);
+    const player = this.findPlayer(players, serialized.player);
+    const excavator = this.findPlayer(players, serialized.excavator);
+    const coOwner = this.findPlayer(players, serialized.coOwner);
     const space: Space = {
       id: serialized.id,
       spaceType: serialized.spaceType,
@@ -341,6 +348,9 @@ export abstract class Board {
     }
     if (excavator !== undefined) {
       space.excavator = excavator;
+    }
+    if (coOwner !== undefined) {
+      space.coOwner = coOwner;
     }
     return space;
   }

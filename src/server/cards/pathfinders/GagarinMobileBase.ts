@@ -73,7 +73,7 @@ export class GagarinMobileBase extends CorporationCard implements IActionCard {
     if (visited[0] === undefined) {
       return availableSpaces;
     }
-    const currentSpace = board.getSpace(visited[0]);
+    const currentSpace = board.getSpaceOrThrow(visited[0]);
     return this.closestSpaces(board, availableSpaces, currentSpace);
   }
 

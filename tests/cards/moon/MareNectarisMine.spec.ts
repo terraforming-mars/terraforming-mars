@@ -44,7 +44,7 @@ describe('MareNectarisMine', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareNectaris = moonData.moon.getSpace(MoonSpaces.MARE_NECTARIS);
+    const mareNectaris = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_NECTARIS);
     expect(mareNectaris.player).eq(player);
     expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
   });

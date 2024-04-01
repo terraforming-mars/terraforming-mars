@@ -65,7 +65,7 @@ describe('CuriosityII', function() {
   it('Placing a tile on top of another one triggers the bonus', () => {
     // particularly when the space bonus is empty.
     const oceanSpace = game.board.getAvailableSpacesForOcean(player2).find((space) => space.bonus.length === 0)!;
-    game.board.getSpace(oceanSpace.id).tile = {tileType: TileType.OCEAN};
+    game.board.getSpaceOrThrow(oceanSpace.id).tile = {tileType: TileType.OCEAN};
 
     const oceanSanctuary = new OceanSanctuary();
     oceanSanctuary.play(player);

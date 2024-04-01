@@ -56,7 +56,7 @@ export class MarsNomads extends Card implements IActionCard {
     }
 
     const availableSpaces = board.getAvailableSpacesOnLand(player);
-    const currentNomadSpace = board.getSpace(game.nomadSpace);
+    const currentNomadSpace = board.getSpaceOrThrow(game.nomadSpace);
     const adjacentSpaces = board.getAdjacentSpaces(currentNomadSpace);
     return intersection(availableSpaces, adjacentSpaces);
   }

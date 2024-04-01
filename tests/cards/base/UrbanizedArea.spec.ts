@@ -20,7 +20,7 @@ describe('UrbanizedArea', function() {
     card = new UrbanizedArea();
     [game, player] = testGame(2);
 
-    const tharsisTholus = game.board.getSpace(SpaceName.THARSIS_THOLUS);
+    const tharsisTholus = game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS);
     lands = game.board.getAdjacentSpaces(tharsisTholus).filter((space) => space.spaceType === SpaceType.LAND);
   });
 

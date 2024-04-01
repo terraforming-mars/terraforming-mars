@@ -21,7 +21,7 @@ describe('GagarinMobileBase', () => {
   beforeEach(() => {
     [game, player, player2] = testGame(2);
     card = new GagarinMobileBase();
-    space13 = game.board.getSpace('13');
+    space13 = game.board.getSpaceOrThrow('13');
     player.playedCards = [card];
   });
 
@@ -79,7 +79,7 @@ describe('GagarinMobileBase', () => {
   });
 
   it('onTilePlaced, opponent', () => {
-    game.simpleAddTile(player2, game.board.getSpace('07'), {tileType: TileType.NUCLEAR_ZONE});
+    game.simpleAddTile(player2, game.board.getSpaceOrThrow('07'), {tileType: TileType.NUCLEAR_ZONE});
     game.gagarinBase = [space13.id];
     game.addCity(player2, space13);
     runAllActions(game);
@@ -88,7 +88,7 @@ describe('GagarinMobileBase', () => {
 
     expect(selectSpace.spaces.map((s) => s.id)).to.have.members(['12', '19', '20']);
 
-    const space12 = game.board.getSpace('12');
+    const space12 = game.board.getSpaceOrThrow('12');
     space12.bonus = [SpaceBonus.DRAW_CARD];
 
     // When gagarin moves, it gets a bonus, not the opponent.

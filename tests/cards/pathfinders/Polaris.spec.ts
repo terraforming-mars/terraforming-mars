@@ -23,7 +23,7 @@ describe('Polaris', function() {
     player.deferInitialAction(card);
     runAllActions(game);
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
-    const space = game.board.getSpace('06');
+    const space = game.board.getSpaceOrThrow('06');
 
     expect(selectSpace.spaces).includes(space);
 

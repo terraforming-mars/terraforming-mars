@@ -297,7 +297,6 @@ export default (Vue as WithRefs<Refs>).extend({
     return {
       filterText: decodeURIComponent(window.location.hash).slice(1),
       fullFilter: false,
-      // TODO(kberg): remove this huge initializer with something like the toggle
       expansions: {
         base: true,
         corpera: true,

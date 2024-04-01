@@ -7,7 +7,7 @@ import {isICorporationCard} from '../../src/server/cards/corporation/ICorporatio
 import {fakeCard} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
 import {CardName} from '../../src/common/cards/CardName';
-import {CardFinder} from '../../src/server/CardFinder';
+import {newCard} from '../../src/server/createCard';
 
 // Exposes rawCount available for testing.
 class TestableTags extends Tags {
@@ -57,7 +57,7 @@ describe('Tags', function() {
   ] as const;
   for (const run of cardHasTagRuns) {
     it('cardHasTag ' + JSON.stringify(run), () => {
-      expect(tags.cardHasTag(new CardFinder().getCardByName(run.card)!, run.tag)).eq(run.expected);
+      expect(tags.cardHasTag(newCard(run.card)!, run.tag)).eq(run.expected);
     });
   }
 

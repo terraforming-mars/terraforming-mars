@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {Warmonger} from '../../../src/server/awards/terraCimmeria/Warmonger';
 import {TestPlayer} from '../../TestPlayer';
-import {newCard} from '../../../src/server/CardFinder';
+import {newCard} from '../../../src/server/createCard';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';

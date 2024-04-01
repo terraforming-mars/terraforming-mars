@@ -1,7 +1,7 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
 import {MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
-import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, newCorporationCard} from './CardFinder';
+import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, newCorporationCard} from './createCard';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';

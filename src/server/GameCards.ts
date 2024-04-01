@@ -17,7 +17,7 @@ import {GameOptions} from './game/GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
-import {newCard} from './CardFinder';
+import {newCard} from './createCard';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
 import {PRELUDE2_CARD_MANIFEST} from './cards/prelude2/Prelude2CardManifest';

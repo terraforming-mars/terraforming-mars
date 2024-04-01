@@ -1,4 +1,4 @@
-import {cardsFromJSON} from '../src/server/CardFinder';
+import {cardsFromJSON} from '../src/server/createCard';
 import {CardName} from '../src/common/cards/CardName';
 import {cast, finishGeneration} from './TestingUtils';
 import {expect} from 'chai';

@@ -1,4 +1,4 @@
-import {newProjectCard} from '../CardFinder';
+import {newProjectCard} from '../createCard';
 import {SerializedCard} from '../SerializedCard';
 import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';

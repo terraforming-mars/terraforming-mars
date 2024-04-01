@@ -5,6 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {DarksideMiningSyndicate} from '../../../src/server/cards/moon/DarksideMiningSyndicate';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
+import {testRedsCosts} from '../../TestingUtils';
 
 describe('DarksideMiningSyndicate', () => {
   let game: IGame;
@@ -48,5 +49,18 @@ describe('DarksideMiningSyndicate', () => {
     expect(player.production.titanium).eq(5);
     expect(player.getTerraformRating()).eq(17);
   });
-});
 
+  const redsRuns = [
+    {miningRate: 6, expected: 3},
+    {miningRate: 7, expected: 3},
+    {miningRate: 8, expected: 0},
+  ] as const;
+
+  for (const run of redsRuns) {
+    it('Works with reds ' + JSON.stringify(run), () => {
+      const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+      game.moonData!.miningRate = run.miningRate;
+      testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
+    });
+  }
+});

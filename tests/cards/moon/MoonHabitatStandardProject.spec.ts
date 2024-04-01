@@ -72,7 +72,7 @@ describe('MoonHabitatStandardProject', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 
-  it('can act when Reds are in power.', () => {
+  it('can act when Reds are in power', () => {
     const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
 

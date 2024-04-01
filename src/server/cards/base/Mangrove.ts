@@ -12,7 +12,6 @@ export class Mangrove extends Card implements IProjectCard {
       name: CardName.MANGROVE,
       tags: [Tag.PLANT],
       cost: 12,
-      tr: {oxygen: 1},
       victoryPoints: 1,
 
       behavior: {

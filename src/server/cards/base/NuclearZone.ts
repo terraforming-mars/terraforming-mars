@@ -35,7 +35,6 @@ export class NuclearZone extends Card implements IProjectCard {
       },
       metadata,
       victoryPoints: -2,
-      tr: {temperature: 2},
     });
   }
 }

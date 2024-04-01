@@ -3,13 +3,14 @@ import {Wetlands} from '../../../src/server/cards/pathfinders/Wetlands';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {addCity, addGreenery, addOcean, cast, fakeCard, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
+import {addCity, addGreenery, addOcean, cast, fakeCard, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Space} from '../../../src/server/boards/Space';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {CardName} from '../../../src/common/cards/CardName';
+import {testGame} from '../../TestGame';
 
 const toSpaceId = (space: Space): string => space.id;
 
@@ -20,9 +21,7 @@ describe('Wetlands', function() {
 
   beforeEach(function() {
     card = new Wetlands();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, {pathfindersExpansion: true});
+    [game, player/* , player2 */] = testGame( 2, {pathfindersExpansion: true});
     game.board = EmptyBoard.newInstance();
     game.board.getSpace('15').spaceType = SpaceType.OCEAN;
     game.board.getSpace('16').spaceType = SpaceType.OCEAN;
@@ -179,5 +178,16 @@ describe('Wetlands', function() {
     expect(space.id).eq(claimedSpace.id);
     selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.WETLANDS);
+  });
+
+  it('canPlay when Reds are in power', () => {
+    const [/* game */, player] = testGame(2, {turmoilExtension: true});
+
+    // Card requirements
+    player.plants = 4;
+    addOcean(player, '15');
+    addOcean(player, '16');
+
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
   });
 });

@@ -14,6 +14,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
+import {CardType} from '../../../src/common/cards/CardType';
 
 describe('PublicSponsoredGrant', function() {
   let card: PublicSponsoredGrant;
@@ -65,6 +66,17 @@ describe('PublicSponsoredGrant', function() {
 
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.BIOMASS_COMBUSTORS, CardName.COLONIZER_TRAINING_CAMP]);
     expect(game.projectDeck.discardPile.map((c) => c.name)).deep.eq([CardName.SEARCH_FOR_LIFE]);
+  });
+
+  it('works with events', function() {
+    const options = cast(card.play(player), OrOptions);
+    const eventOption = options.options.find((o) => o.title === Tag.EVENT)!;
+
+    expect(player.cardsInHand).is.empty;
+
+    eventOption.cb();
+
+    expect(player.cardsInHand.map((c) => c.type)).deep.eq([CardType.EVENT, CardType.EVENT]);
   });
 
   it('compatible with Mons Insurance', function() {

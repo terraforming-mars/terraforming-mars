@@ -20,7 +20,7 @@ describe('HellasBoard', function() {
 
   it('Removes Hellas bonus ocean space if player cannot pay', () => {
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
-    expect(game.board.getSpace(SpaceName.HELLAS_OCEAN_TILE).tile).is.undefined;
+    expect(game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE).tile).is.undefined;
 
     // Cannot afford
     player.megaCredits = 5;
@@ -35,7 +35,7 @@ describe('HellasBoard', function() {
 
   it('Calculate costs for Hellas ocean space with other costs (e.g. ares)', () => {
     // Cannot afford
-    const oceanSpace = board.getSpace(SpaceName.HELLAS_OCEAN_TILE);
+    const oceanSpace = board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
     const adjacentSpace = board.getAdjacentSpaces(oceanSpace)[0];
     adjacentSpace.adjacency = {bonus: [], cost: 3};
 

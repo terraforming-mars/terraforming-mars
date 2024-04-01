@@ -16,7 +16,7 @@ describe('EdgeLord', () => {
 
   it('getScore', () => {
     function excavate(player: IPlayer, spaceId: SpaceId) {
-      const space = player.game.board.getSpace(spaceId);
+      const space = player.game.board.getSpaceOrThrow(spaceId);
       space.undergroundResources = 'nothing';
       space.excavator = player;
     }

@@ -64,7 +64,7 @@ describe('HermeticOrderOfMars', function() {
   it('Hazards count', () => {
     addGreenery(player, '50');
     addGreenery(player, '51');
-    board.getSpace('43').tile = {tileType: TileType.DUST_STORM_MILD};
+    board.getSpaceOrThrow('43').tile = {tileType: TileType.DUST_STORM_MILD};
     card.play(player);
 
     expect(player.megaCredits).eq(8);
@@ -73,7 +73,7 @@ describe('HermeticOrderOfMars', function() {
   it('Restricted space does not count', () => {
     addGreenery(player, '50');
     addGreenery(player, '51');
-    board.getSpace('43').spaceType = SpaceType.RESTRICTED;
+    board.getSpaceOrThrow('43').spaceType = SpaceType.RESTRICTED;
     card.play(player);
 
     expect(player.megaCredits).eq(7);

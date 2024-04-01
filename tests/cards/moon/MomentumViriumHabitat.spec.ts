@@ -44,7 +44,7 @@ describe('MomentumViriumHabitat', () => {
     expect(player.production.megacredits).eq(3);
     expect(player.production.heat).eq(2);
 
-    const momentumVirium = moonData.moon.getSpace(MoonSpaces.MOMENTUM_VIRIUM);
+    const momentumVirium = moonData.moon.getSpaceOrThrow(MoonSpaces.MOMENTUM_VIRIUM);
     expect(momentumVirium.player).eq(player);
     expect(momentumVirium.tile!.tileType).eq(TileType.MOON_HABITAT);
 

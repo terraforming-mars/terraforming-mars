@@ -1419,7 +1419,7 @@ export class Game implements IGame, Logger {
   }
 
   public removeTile(spaceId: SpaceId): void {
-    const space = this.board.getSpace(spaceId);
+    const space = this.board.getSpaceOrThrow(spaceId);
     space.tile = undefined;
     space.player = undefined;
   }

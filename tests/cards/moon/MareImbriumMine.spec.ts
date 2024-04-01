@@ -40,7 +40,7 @@ describe('MareImbriumMine', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareImbrium = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
+    const mareImbrium = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_IMBRIUM);
     expect(mareImbrium.player).eq(player);
     expect(mareImbrium.tile!.tileType).eq(TileType.MOON_MINE);
   });

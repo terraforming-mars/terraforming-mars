@@ -31,7 +31,7 @@ describe('KingdomofTauraro', () => {
     player.setCorporationForTest(card);
 
     const board = game.board;
-    const space = board.getSpace('35');
+    const space = board.getSpaceOrThrow('35');
     addCity(player, space.id);
     const availableSpacesForCity = board.getAvailableSpacesForCity(player);
     const spacesNextToCity = board.getAdjacentSpaces(space);
@@ -45,8 +45,8 @@ describe('KingdomofTauraro', () => {
 
     const board = game.board;
     // Spot 55 has 6 land spaces next to it. Makes testing easier.
-    const space = board.getSpace('55');
-    const otherSpace = board.getSpace('35');
+    const space = board.getSpaceOrThrow('55');
+    const otherSpace = board.getSpaceOrThrow('35');
     addGreenery(player, space.id);
     const availableSpacesForCity = board.getAvailableSpacesForCity(player);
     expect(availableSpacesForCity).to.have.members(board.getAdjacentSpaces(space));

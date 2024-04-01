@@ -40,7 +40,7 @@ describe('NoctisCity', function() {
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
 
-    const noctis = game.board.getSpace(SpaceName.NOCTIS_CITY);
+    const noctis = game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY);
     expect(noctis.tile?.tileType).to.eq(TileType.CITY);
   });
 });

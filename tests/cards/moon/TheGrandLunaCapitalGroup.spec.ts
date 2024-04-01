@@ -20,7 +20,7 @@ describe('TheGrandLunaCapitalGroup', () => {
   });
 
   it('effect', () => {
-    const centerSpace = moonData.moon.getSpace('m07');
+    const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     // Space 0 intentionallyleft blank
@@ -48,7 +48,7 @@ describe('TheGrandLunaCapitalGroup', () => {
   it('victoryPoints', () => {
     // It's possible better tests are necessary, but I don't think so.
     // I was wrong.
-    const centerSpace = moonData.moon.getSpace('m06');
+    const centerSpace = moonData.moon.getSpaceOrThrow('m06');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     expect(card.getVictoryPoints(player)).eq(0);

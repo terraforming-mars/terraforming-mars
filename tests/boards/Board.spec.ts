@@ -30,9 +30,9 @@ describe('Board', function() {
   });
 
   it('getSpace', () => {
-    expect(board.getSpace('01').spaceType).eq(SpaceType.COLONY);
-    expect(board.getSpace('01').id).eq('01');
-    expect(() => board.getSpace(MoonSpaces.LUNA_TRADE_STATION).id).to.throw(Error, /Can't find space with id m01/);
+    expect(board.getSpaceOrThrow('01').spaceType).eq(SpaceType.COLONY);
+    expect(board.getSpaceOrThrow('01').id).eq('01');
+    expect(() => board.getSpaceOrThrow(MoonSpaces.LUNA_TRADE_STATION).id).to.throw(Error, /Can't find space with id m01/);
   });
 
   it('Can have greenery placed on any available land when player has no tile placed', function() {
@@ -137,19 +137,19 @@ describe('Board', function() {
   it('getAdjacentSpacesClockwise', () => {
     expect(
       board.getAdjacentSpacesClockwise(
-        board.getSpace('51'))
+        board.getSpaceOrThrow('51'))
         .map((space) => space?.id))
       .deep.eq(['43', '44', '52', '58', '57', '50']);
 
     expect(
       board.getAdjacentSpacesClockwise(
-        board.getSpace('20'))
+        board.getSpaceOrThrow('20'))
         .map((space) => space?.id))
       .deep.eq(['13', undefined, undefined, '28', '27', '19']);
 
     expect(
       board.getAdjacentSpacesClockwise(
-        board.getSpace('03'))
+        board.getSpaceOrThrow('03'))
         .map((space) => space?.id))
       .deep.eq([undefined, undefined, '04', '09', '08', undefined]);
   });
@@ -167,7 +167,7 @@ describe('Board', function() {
     expect(board.getNthAvailableLandSpace(3, 1, undefined /* player */, (s) => s.id !== '09').id).eq('10');
 
     // Filter player tokens (I'm looking at you, Land Claim)
-    board.getSpace('05').player = player;
+    board.getSpaceOrThrow('05').player = player;
     expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
     expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
 
@@ -330,8 +330,8 @@ describe('Board', function() {
     const player2 = new Player('name-2', Color.YELLOW, false, 0, 'p-name-2-id');
 
     const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
-    expect(board.getSpace('01').player).eq(player1);
-    expect(board.getSpace('03').player).eq(player2);
+    expect(board.getSpaceOrThrow('01').player).eq(player1);
+    expect(board.getSpaceOrThrow('03').player).eq(player2);
   });
 
   it('Randomized maps have space types on all spaces, #4056', () => {

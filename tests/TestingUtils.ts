@@ -45,7 +45,7 @@ export function setVenusScaleLevel(game: IGame, venusScaleLevel: number) {
 
 export function addGreenery(player: IPlayer, spaceId?: SpaceId): Space {
   const space = spaceId ?
-    player.game.board.getSpace(spaceId) :
+    player.game.board.getSpaceOrThrow(spaceId) :
     player.game.board.getAvailableSpacesForGreenery(player)[0];
   player.game.addGreenery(player, space);
   return space;
@@ -53,7 +53,7 @@ export function addGreenery(player: IPlayer, spaceId?: SpaceId): Space {
 
 export function addOcean(player: IPlayer, spaceId?: SpaceId): Space {
   const space = spaceId ?
-    player.game.board.getSpace(spaceId) :
+    player.game.board.getSpaceOrThrow(spaceId) :
     player.game.board.getAvailableSpacesForOcean(player)[0];
   player.game.addOcean(player, space);
   return space;
@@ -61,7 +61,7 @@ export function addOcean(player: IPlayer, spaceId?: SpaceId): Space {
 
 export function addCity(player: IPlayer, spaceId?: SpaceId): Space {
   const space = spaceId ?
-    player.game.board.getSpace(spaceId) :
+    player.game.board.getSpaceOrThrow(spaceId) :
     player.game.board.getAvailableSpacesForCity(player)[0];
   player.game.addCity(player, space);
   return space;

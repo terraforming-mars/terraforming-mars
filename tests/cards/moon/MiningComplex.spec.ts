@@ -41,7 +41,7 @@ describe('MiningComplex', () => {
     expect(player.megaCredits).eq(0);
 
     const placeMineTile = cast(game.deferredActions.pop(), PlaceMoonMineTile);
-    placeMineTile.execute()!.cb(moonData.moon.getSpace('m06'));
+    placeMineTile.execute()!.cb(moonData.moon.getSpaceOrThrow('m06'));
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);

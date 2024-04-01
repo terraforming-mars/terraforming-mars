@@ -96,7 +96,7 @@ export class MoonExpansion {
   public static addTile(player: IPlayer, spaceId: SpaceId, tile: Tile): void {
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
-      const space = moonData.moon.getSpace(spaceId);
+      const space = moonData.moon.getSpaceOrThrow(spaceId);
       if (!this.MOON_TILES.has(tile.tileType)) {
         throw new Error(`Bad tile type for the moon: ${tile.tileType}`);
       }

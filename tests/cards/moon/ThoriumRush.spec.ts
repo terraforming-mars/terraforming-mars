@@ -37,9 +37,9 @@ describe('ThoriumRush', () => {
 
     card.play(player);
 
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m02')),
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m03')),
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m04')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m02')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m03')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m04')),
 
     expect(moonData.habitatRate).eq(1);
     expect(moonData.habitatRate).eq(1);

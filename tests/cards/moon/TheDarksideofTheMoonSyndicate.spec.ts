@@ -97,7 +97,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   });
 
   it('effect', () => {
-    const centerSpace = moonData.moon.getSpace('m07');
+    const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     // Space 0 intentionallyleft blank
@@ -131,7 +131,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   });
 
   it('no effect during solar phase', () => {
-    const centerSpace = moonData.moon.getSpace('m07');
+    const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     // Space 0 intentionallyleft blank

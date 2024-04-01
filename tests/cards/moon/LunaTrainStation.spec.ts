@@ -62,7 +62,7 @@ describe('LunaTrainStation', () => {
 
   it('getVictoryPoints', () => {
     // This space has room to surround it with roads.
-    const space = moonData.moon.getSpace('m15');
+    const space = moonData.moon.getSpaceOrThrow('m15');
     space.tile = {tileType: TileType.LUNA_TRAIN_STATION, card: card.name};
 
     expect(card.getVictoryPoints(player)).eq(0);

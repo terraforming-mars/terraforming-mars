@@ -36,12 +36,12 @@ describe('HE3FusionPlant', () => {
     expect(player.production.energy).eq(0);
 
     player.production.override({energy: 0});
-    moonData.moon.getSpace('m06')!.tile = {tileType: TileType.MOON_MINE};
+    moonData.moon.getSpaceOrThrow('m06')!.tile = {tileType: TileType.MOON_MINE};
     card.play(player);
     expect(player.production.energy).eq(1);
 
     player.production.override({energy: 0});
-    moonData.moon.getSpace('m07')!.tile = {tileType: TileType.MOON_MINE};
+    moonData.moon.getSpaceOrThrow('m07')!.tile = {tileType: TileType.MOON_MINE};
     card.play(player);
     expect(player.production.energy).eq(2);
   });

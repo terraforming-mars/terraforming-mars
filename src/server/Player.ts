@@ -1,7 +1,7 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
 import {MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
-import {CardFinder} from './CardFinder';
+import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, newCorporationCard} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
@@ -1935,7 +1935,6 @@ export class Player implements IPlayer {
 
   public static deserialize(d: SerializedPlayer): Player {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
-    const cardFinder = new CardFinder();
 
     player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
@@ -1982,12 +1981,12 @@ export class Player implements IPlayer {
     player.lastCardPlayed = d.lastCardPlayed;
 
     // Rebuild removed from play cards (Playwrights, Odyssey)
-    player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
+    player.removedFromPlayCards = cardsFromJSON(d.removedFromPlayCards);
 
     player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
     if (d.pickedCorporationCard !== undefined) {
-      player.pickedCorporationCard = cardFinder.getCorporationCardByName(d.pickedCorporationCard);
+      player.pickedCorporationCard = newCorporationCard(d.pickedCorporationCard);
     }
 
     // Rebuild corporation cards
@@ -1996,7 +1995,7 @@ export class Player implements IPlayer {
     // This shouldn't happen
     if (corporations !== undefined) {
       for (const corporation of corporations) {
-        const card = cardFinder.getCorporationCardByName(corporation.name);
+        const card = newCorporationCard(corporation.name);
         if (card === undefined) {
           continue;
         }
@@ -2008,17 +2007,17 @@ export class Player implements IPlayer {
       }
     }
 
-    player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
-    player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
-    player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
-    player.dealtCeoCards = cardFinder.ceosFromJSON(d.dealtCeoCards);
-    player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
-    player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
+    player.pendingInitialActions = corporationCardsFromJSON(d.pendingInitialActions ?? []);
+    player.dealtCorporationCards = corporationCardsFromJSON(d.dealtCorporationCards);
+    player.dealtPreludeCards = cardsFromJSON(d.dealtPreludeCards);
+    player.dealtCeoCards = ceosFromJSON(d.dealtCeoCards);
+    player.dealtProjectCards = cardsFromJSON(d.dealtProjectCards);
+    player.cardsInHand = cardsFromJSON(d.cardsInHand);
     // I don't like "as IPreludeCard" but this is pretty safe.
-    player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand) as Array<IPreludeCard>;
-    player.ceoCardsInHand = cardFinder.ceosFromJSON(d.ceoCardsInHand);
-    player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
-    player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
+    player.preludeCardsInHand = cardsFromJSON(d.preludeCardsInHand) as Array<IPreludeCard>;
+    player.ceoCardsInHand = ceosFromJSON(d.ceoCardsInHand);
+    player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element));
+    player.draftedCards = cardsFromJSON(d.draftedCards);
 
     player.timer = Timer.deserialize(d.timer);
 

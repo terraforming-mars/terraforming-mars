@@ -1,7 +1,7 @@
 import * as constants from '../common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
-import {CardFinder} from './CardFinder';
+import {cardsFromJSON} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
@@ -1634,11 +1634,10 @@ export class Game implements IGame, Logger {
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
     game.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
 
-    const cardFinder = new CardFinder();
     // Reinit undrafted cards map
     game.unDraftedCards = new Map<PlayerId, IProjectCard[]>();
     d.unDraftedCards.forEach((unDraftedCard) => {
-      game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
+      game.unDraftedCards.set(unDraftedCard[0], cardsFromJSON(unDraftedCard[1]));
     });
 
     game.lastSaveId = d.lastSaveId;

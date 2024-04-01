@@ -128,9 +128,7 @@ export abstract class Board {
   }
 
   public getSpaceByTileCard(cardName: CardName): Space | undefined {
-    return this.spaces.find(
-      (space) => space.tile !== undefined && space.tile.card === cardName,
-    );
+    return this.spaces.find((space) => space.tile?.card === cardName);
   }
 
   public getSpaces(spaceType: SpaceType, _player: IPlayer): ReadonlyArray<Space> {

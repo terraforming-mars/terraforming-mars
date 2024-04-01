@@ -62,9 +62,9 @@
 
     <div class="board" id="moon_board">
       <MoonSpace
-        v-for="curSpace in getAllNonColonySpaces()"
-        :key="curSpace.id"
-        :space="curSpace"
+        v-for="space in getAllNonColonySpaces()"
+        :key="space.id"
+        :space="space"
         :tileView="tileView"
         data-test="moon-board-space"
       />

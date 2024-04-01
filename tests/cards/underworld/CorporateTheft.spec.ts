@@ -3,7 +3,7 @@ import {CorporateTheft} from '../../../src/server/cards/underworld/CorporateThef
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
-import {newProjectCard} from '../../../src/server/CardFinder';
+import {newProjectCard} from '../../../src/server/createCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 

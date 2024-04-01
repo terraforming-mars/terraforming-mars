@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {COMMUNITY_CARD_MANIFEST} from '../src/server/cards/community/CommunityCardManifest';
-import {newPrelude} from '../src/server/CardFinder';
+import {newPrelude} from '../src/server/createCard';
 import {GameCards} from '../src/server/GameCards';
 import {CardName} from '../src/common/cards/CardName';
 import {CardManifest} from '../src/server/cards/ModuleManifest';

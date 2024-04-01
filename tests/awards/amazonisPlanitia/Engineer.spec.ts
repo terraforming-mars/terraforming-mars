@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {BESPOKE_PRODUCTION_CARDS, Engineer} from '../../../src/server/awards/amazonisPlanitia/Engineer';
 import {TestPlayer} from '../../TestPlayer';
-import {newCard} from '../../../src/server/CardFinder';
+import {newCard} from '../../../src/server/createCard';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Cartel} from '../../../src/server/cards/base/Cartel';

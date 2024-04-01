@@ -1,21 +1,21 @@
 import {CardName} from '../src/common/cards/CardName';
 import {expect} from 'chai';
-import {newCeo, newProjectCard} from '../src/server/CardFinder';
+import {newCeo, newProjectCard} from '../src/server/createCard';
 
-describe('CardFinder', function() {
-  it('findProjectCard: success', function() {
+describe('createCard', function() {
+  it('newProjectCard: success', function() {
     expect(newProjectCard(CardName.AI_CENTRAL)?.name).eq(CardName.AI_CENTRAL);
   });
-  it('findProjectCard: failure', function() {
+  it('newProjectCard: failure', function() {
     expect(newProjectCard(CardName.ECOLINE)).is.undefined;
   });
-  it('findProjectCard prelude: success', function() {
+  it('newProjectCard prelude: success', function() {
     expect(newProjectCard(CardName.ALLIED_BANK)?.name).eq(CardName.ALLIED_BANK);
   });
-  it('findProjectCard ceo: success', function() {
+  it('newProjectCard ceo: success', function() {
     expect(newProjectCard(CardName.HAL9000)?.name).eq(CardName.HAL9000);
   });
-  it('getCeoByName ceo: success', function() {
+  it('newCeo: success', function() {
     expect(newCeo(CardName.HAL9000)?.name).eq(CardName.HAL9000);
   });
 

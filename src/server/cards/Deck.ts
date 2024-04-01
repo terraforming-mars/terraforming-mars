@@ -1,5 +1,5 @@
 import {SerializedDeck} from './SerializedDeck';
-import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../CardFinder';
+import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../createCard';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../LogHelper';
 import {Random} from '../../common/utils/Random';

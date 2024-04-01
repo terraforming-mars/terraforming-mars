@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AstraMechanica} from '../../../src/server/cards/promo/AstraMechanica';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
-import {cardsFromJSON} from '../../../src/server/CardFinder';
+import {cardsFromJSON} from '../../../src/server/createCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';

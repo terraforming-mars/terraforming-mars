@@ -3,8 +3,12 @@ import {OneOrArray} from '../../common/utils/types';
 import {asArray} from '../../common/utils/utils';
 import {GameOptions} from '../game/GameOptions';
 
-export interface ICardFactory<T> {
-  // Creates a new instance of this ard.
+/**
+ * Defines conditions for creating a card in a game, including conditions
+ * when it will be included in a game.
+ */
+export type CardFactorySpec<T> = {
+  // Creates a new instance of this card.
   Factory: new () => T;
   // Returns the required modules for this card.
   compatibility?: OneOrArray<GameModule>;
@@ -14,7 +18,7 @@ export interface ICardFactory<T> {
   negative?: boolean;
 }
 
-export function isCompatibleWith(cf: ICardFactory<any>, gameOptions: GameOptions): boolean {
+export function isCompatibleWith(cf: CardFactorySpec<any>, gameOptions: GameOptions): boolean {
   if (cf.compatibility === undefined) {
     return true;
   }

@@ -31,7 +31,7 @@ export class LunaEcumenopolis extends Card {
           b.tr(1).slash().moonHabitatRate().moonHabitatRate();
         }),
       },
-      tilesBuilt: [TileType.MOON_HABITAT],
+      tilesBuilt: [TileType.MOON_HABITAT, TileType.MOON_HABITAT],
     });
   }
 

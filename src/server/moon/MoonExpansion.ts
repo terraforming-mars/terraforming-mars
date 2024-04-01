@@ -327,16 +327,25 @@ export class MoonExpansion {
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
-    if (card.tilesBuilt.includes(TileType.MOON_HABITAT) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
-      titanium -= 1;
-    }
+    for (const tileBuilt of card.tilesBuilt) {
+      switch (tileBuilt) {
+      case TileType.MOON_HABITAT:
+        if (player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
+          titanium -= 1;
+        }
+        break;
 
-    if (card.tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
-      titanium -= 1;
-    }
+      case TileType.MOON_MINE:
+        if (player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
+          titanium -= 1;
+        }
+        break;
 
-    if (card.tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
-      steel = 0;
+      case TileType.MOON_ROAD:
+        if (player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+          steel = 0;
+        }
+      }
     }
 
     steel = Math.max(steel, 0);

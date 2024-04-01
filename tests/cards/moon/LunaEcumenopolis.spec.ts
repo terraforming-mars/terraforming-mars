@@ -8,6 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {LunaEcumenopolis} from '../../../src/server/cards/moon/LunaEcumenopolis';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {SubterraneanHabitats} from '../../../src/server/cards/moon/SubterraneanHabitats';
 // import {Phase} from '../../../src/server/Phase';
 
 describe('LunaEcumenopolis', () => {
@@ -126,6 +127,19 @@ describe('LunaEcumenopolis', () => {
     expect(player.getTerraformRating()).eq(18);
   });
 
+  it('Compatible with Subterranean Habitats', () => {
+    const moon = moonData.moon;
+    player.megaCredits = card.cost;
+
+    moon.getSpaceOrThrow('m12').tile = {tileType: TileType.MOON_HABITAT};
+    moon.getSpaceOrThrow('m19').tile = {tileType: TileType.MOON_HABITAT};
+
+    player.titanium = 0;
+    expect(player.canPlay(card)).is.false;
+    const subterraneanHabitats = new SubterraneanHabitats();
+    player.playedCards.push(subterraneanHabitats);
+    expect(player.canPlay(card)).is.true;
+  });
 
   // it('canPlay when Reds are in power', () => {
   //   const player = TestPlayer.BLUE.newPlayer();

@@ -25,12 +25,12 @@ describe('HostileTakeover', () => {
   });
 
   const canPlayRuns = [
-    {miningRate: 0, habitatRate: 0, miningTiles: false, habitatTiles: false, roadTiles: false, expected: false},
-    {miningRate: 3, habitatRate: 2, miningTiles: true, habitatTiles: true, roadTiles: false, expected: false},
-    {miningRate: 4, habitatRate: 1, miningTiles: true, habitatTiles: true, roadTiles: false, expected: false},
-    {miningRate: 4, habitatRate: 2, miningTiles: false, habitatTiles: true, roadTiles: false, expected: false},
-    {miningRate: 4, habitatRate: 2, miningTiles: true, habitatTiles: false, roadTiles: false, expected: false},
-    {miningRate: 4, habitatRate: 2, miningTiles: true, habitatTiles: true, roadTiles: false, expected: true},
+    {habitatRate: 0, miningRate: 0, habitatTiles: false, miningTiles: false, roadTiles: false, expected: false},
+    {habitatRate: 2, miningRate: 3, habitatTiles: true, miningTiles: true, roadTiles: false, expected: false},
+    {habitatRate: 1, miningRate: 4, habitatTiles: true, miningTiles: true, roadTiles: false, expected: false},
+    {habitatRate: 2, miningRate: 4, habitatTiles: true, miningTiles: false, roadTiles: false, expected: false},
+    {habitatRate: 2, miningRate: 4, habitatTiles: false, miningTiles: true, roadTiles: false, expected: false},
+    {habitatRate: 2, miningRate: 4, habitatTiles: true, miningTiles: true, roadTiles: false, expected: true},
   ] as const;
 
   for (const run of canPlayRuns) {
@@ -90,9 +90,57 @@ describe('HostileTakeover', () => {
 
   // });
 
-  // it('compatible with Lunar Mine Urabanization', () => {
+  describe('Compatible with Lunar Mine Urbanization', () => {
+    const canPlayRuns = [
+      {habitatTiles: false, miningTiles: false, expected: false},
+      {habitatTiles: false, miningTiles: true, expected: true},
+      {habitatTiles: true, miningTiles: false, expected: true},
+      {habitatTiles: true, miningTiles: true, expected: true},
+    ] as const;
 
-  // });
+    for (const run of canPlayRuns) {
+      it('can play ' + JSON.stringify(run), () => {
+        moonData.habitatRate = 2;
+        moonData.miningRate = 4;
+
+        if (run.habitatTiles) {
+          MoonExpansion.addHabitatTile(opponent, 'm05');
+        }
+        if (run.miningTiles) {
+          MoonExpansion.addMineTile(opponent, 'm06');
+        }
+        MoonExpansion.addTile(opponent, 'm07', {tileType: TileType.LUNAR_MINE_URBANIZATION});
+        expect(card.canPlay(player)).eq(run.expected);
+      });
+    }
+
+    const playRuns = [
+      {habitat: {tile: true, expected: ['m05', 'm07'], selected: 'm05'}, mine: {tile: true, expected: ['m06', 'm07']}},
+      {habitat: {tile: true, expected: ['m05', 'm07'], selected: 'm07'}, mine: {tile: true, expected: ['m06']}},
+      {habitat: {tile: true, expected: ['m05'], selected: 'm05'}, mine: {tile: false, expected: ['m07']}},
+      {habitat: {tile: false, expected: ['m07'], selected: 'm07'}, mine: {tile: true, expected: ['m06']}},
+      {habitat: {tile: true, expected: ['m05', 'm07'], selected: 'm05'}, mine: {tile: true, expected: ['m06', 'm07']}},
+      {habitat: {tile: true, expected: ['m05', 'm07'], selected: 'm07'}, mine: {tile: true, expected: ['m06']}},
+    ] as const;
+
+    for (const run of playRuns) {
+      it('play ' + JSON.stringify(run), () => {
+        if (run.habitat.tile) {
+          MoonExpansion.addHabitatTile(opponent, 'm05');
+        }
+        if (run.mine.tile) {
+          MoonExpansion.addMineTile(opponent, 'm06');
+        }
+        MoonExpansion.addTile(opponent, 'm07', {tileType: TileType.LUNAR_MINE_URBANIZATION});
+
+        const selectSpace = cast(card.play(player), SelectSpace);
+
+        expect(selectSpace.spaces.map((s) => s.id)).to.have.members(run.habitat.expected);
+        const selectMiningSpace = cast(selectSpace.cb(moonData.moon.getSpaceOrThrow(run.habitat.selected)), SelectSpace);
+        expect(selectMiningSpace.spaces.map((s) => s.id)).to.have.members(run.mine.expected);
+      });
+    }
+  });
 
   it('computeVictoryPoints', () => {
     const vps = new VictoryPointsBreakdown();

@@ -11,7 +11,7 @@ import {Units} from '../../../common/Units';
 import {inplaceRemove} from '../../../common/utils/utils';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 
 export class UndergroundResearchCenter extends Card implements IProjectCard {
   constructor() {

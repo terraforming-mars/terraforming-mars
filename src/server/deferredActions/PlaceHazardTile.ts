@@ -1,6 +1,7 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {_AresHazardPlacement} from '../ares/AresHazards';
 import {TileType} from '../../common/TileType';
 import {Message} from '../../common/logs/Message';

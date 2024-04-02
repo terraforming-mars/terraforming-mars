@@ -9,7 +9,7 @@ import {CardResource} from '../../../common/CardResource';
 import {all, played} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {ICard} from '../ICard';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 
 export class CommunicationCenter extends Card implements IProjectCard {
   constructor() {

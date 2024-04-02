@@ -1,6 +1,7 @@
 import {IPlayer} from '../IPlayer';
 import {SelectCard} from '../inputs/SelectCard';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
 import {IProjectCard} from '../cards/IProjectCard';

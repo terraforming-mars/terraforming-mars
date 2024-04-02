@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {DrawCards} from '../../deferredActions/DrawCards';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 
 export class Ender extends CeoCard {

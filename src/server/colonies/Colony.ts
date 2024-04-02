@@ -1,7 +1,8 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../../common/cards/CardName';
 import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
-import {DeferredAction, Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {DeferredAction, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';

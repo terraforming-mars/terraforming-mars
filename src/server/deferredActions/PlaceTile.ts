@@ -1,7 +1,8 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {Space} from '../boards/Space';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {PlacementType} from '../boards/PlacementType';
 import {Tile} from '../Tile';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';

@@ -1,6 +1,7 @@
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {IPlayer} from '../IPlayer';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {Units} from '../../common/Units';
 
 export class SelectProductionToLoseDeferred extends DeferredAction {

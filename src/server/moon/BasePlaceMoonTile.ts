@@ -1,5 +1,6 @@
 import {Space} from '../boards/Space';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';

@@ -6,7 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';

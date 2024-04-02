@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IPlayer} from '../../IPlayer';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 
 export class OldMiningColony extends PreludeCard {
   constructor() {

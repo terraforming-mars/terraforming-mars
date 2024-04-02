@@ -7,7 +7,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
-import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
+import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 
 export class CharityDonation extends Card implements IProjectCard {
   constructor() {

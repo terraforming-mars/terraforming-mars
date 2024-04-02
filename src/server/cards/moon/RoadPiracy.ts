@@ -14,7 +14,8 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resource} from '../../../common/Resource';
 import {sum} from '../../../common/utils/utils';
 import {Message} from '../../../common/logs/Message';
-import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 
 export class RoadPiracy extends Card implements IProjectCard {
   constructor() {

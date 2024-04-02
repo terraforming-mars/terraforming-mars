@@ -1,6 +1,7 @@
 import {IPlayer} from '../IPlayer';
 import {SelectParty} from '../inputs/SelectParty';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {Delegate, Turmoil} from '../turmoil/Turmoil';
 

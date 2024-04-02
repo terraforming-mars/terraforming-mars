@@ -1,6 +1,7 @@
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {CardName} from '../../common/cards/CardName';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 

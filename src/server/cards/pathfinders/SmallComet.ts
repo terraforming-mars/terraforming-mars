@@ -8,7 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
 import {RemoveResources} from '../../deferredActions/RemoveResources';
 import {Resource} from '../../../common/Resource';
-import {Priority} from '../../../server/deferredActions/DeferredAction';
+import {Priority} from '../../../server/deferredActions/Priority';
 
 export class SmallComet extends Card implements IProjectCard {
   constructor() {

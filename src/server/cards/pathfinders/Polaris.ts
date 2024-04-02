@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 import {Space} from '../../boards/Space';
 import {GainResources} from '../../deferredActions/GainResources';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {Size} from '../../../common/cards/render/Size';
 import {Board} from '../../boards/Board';
 import {Phase} from '../../../common/Phase';

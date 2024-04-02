@@ -71,8 +71,7 @@ export class ProjectWorkshop extends CorporationCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    if (player.canAfford(3)) return true;
-    return this.getEligibleCards(player).length > 0;
+    return player.canAfford(3) || this.getEligibleCards(player).length > 0;
   }
 
   public action(player: IPlayer) {
@@ -111,7 +110,6 @@ export class ProjectWorkshop extends CorporationCard {
     });
 
     if (activeCards.length === 0) return drawBlueCard;
-    // TODO(kberg): Take reds into account
     if (!player.canAfford(3)) return flipBlueCard;
 
     return new OrOptions(drawBlueCard, flipBlueCard);

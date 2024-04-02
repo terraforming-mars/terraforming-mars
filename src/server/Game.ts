@@ -1553,10 +1553,6 @@ export class Game implements IGame, Logger {
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
 
-    // TODO(kberg): delete this block by 2023-07-01
-    gameOptions.starWarsExpansion = gameOptions.starWarsExpansion ?? false;
-    gameOptions.bannedCards = gameOptions.bannedCards ?? [];
-
     const players = d.players.map((element) => Player.deserialize(element));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {
@@ -1661,8 +1657,7 @@ export class Game implements IGame, Logger {
     game.nomadSpace = d.nomadSpace;
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
-    // TODO(kberg): remove ?? {} after 2023-11-30
-    game.globalsPerGeneration = d.globalsPerGeneration ?? [];
+    game.globalsPerGeneration = d.globalsPerGeneration;
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {

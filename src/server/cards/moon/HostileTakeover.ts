@@ -7,8 +7,8 @@ import {IPlayer} from '../../IPlayer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
+import {Space} from '../../boards/Space';
 
-// TODO(kberg): Make compatible with Lunar Mine Urbanization.
 export class HostileTakeover extends Card {
   constructor() {
     super({
@@ -35,25 +35,47 @@ export class HostileTakeover extends Card {
   }
 
   private availableSpaces(player: IPlayer, type: TileType) {
-    return MoonExpansion.spaces(player.game, type).filter((space) => space.player !== player && space.coOwner === undefined);
+    return MoonExpansion.spaces(player.game, type, {upgradedTiles: false})
+      .filter((space) => space.player !== player && space.coOwner === undefined);
   }
   public override bespokeCanPlay(player: IPlayer) {
     const habitatSpaces = this.availableSpaces(player, TileType.MOON_HABITAT);
     const mineSpaces = this.availableSpaces(player, TileType.MOON_MINE);
+    const lunarMineUrbanizationSpaces = this.availableSpaces(player, TileType.LUNAR_MINE_URBANIZATION);
     // TODO(kberg): warn if Lunar Mine Urbanization is one of the few eligibile cards.
-    return habitatSpaces.length > 0 && mineSpaces.length > 0;
-    // SPECIAL CASE consider Lunar Mine Urbanization
+    if (habitatSpaces.length > 0 && mineSpaces.length > 0) {
+      return true;
+    }
+    if (habitatSpaces.length + mineSpaces.length > 0 && lunarMineUrbanizationSpaces.length > 0) {
+      return true;
+    }
+    return false;
   }
 
   public override bespokePlay(player: IPlayer) {
-    // SPECIAL CASE consider Lunar Mine Urbanization
     const habitatSpaces = this.availableSpaces(player, TileType.MOON_HABITAT);
+    const mineSpaces = this.availableSpaces(player, TileType.MOON_MINE);
+
+    // It is expected that Lunar Mine Urbanization cannot be played twice.
+    let lunarMineUrbanizationSpace: Space | undefined = this.availableSpaces(player, TileType.LUNAR_MINE_URBANIZATION)[0];
+
+    if (lunarMineUrbanizationSpace !== undefined) {
+      if (mineSpaces.length === 0) {
+        mineSpaces.push(lunarMineUrbanizationSpace);
+        lunarMineUrbanizationSpace = undefined;
+      } else {
+        habitatSpaces.push(lunarMineUrbanizationSpace);
+      }
+    }
+
     return new SelectSpace('Select a habitat space to co-own', habitatSpaces).andThen((space) => {
       space.coOwner = player;
-      const mineSpaces = this.availableSpaces(player, TileType.MOON_MINE);
-      if (mineSpaces.length === 0) {
-        player.game.log('that habitat space is the only available mining space.');
-        return undefined;
+      if (space.id === lunarMineUrbanizationSpace?.id) {
+        lunarMineUrbanizationSpace = undefined;
+      } else {
+        if (lunarMineUrbanizationSpace !== undefined) {
+          mineSpaces.push(lunarMineUrbanizationSpace);
+        }
       }
       return new SelectSpace('Select a mining space to co-own', mineSpaces).andThen((space) => {
         space.coOwner = player;

@@ -85,7 +85,7 @@ describe('MarsNomads', () => {
     expect(cast(card.action(player), SelectSpace).spaces).to.not.contain(space19);
   });
 
-  it('Action gets adjacency bonus', () => {
+  it('Action does not gets adjacency bonus', () => {
     const destinationSpace = game.board.getSpaceOrThrow('04');
     const adjacentSpaces = game.board.getAdjacentSpaces(destinationSpace);
 
@@ -98,7 +98,8 @@ describe('MarsNomads', () => {
     const selectSpace = cast(card.action(player), SelectSpace);
     selectSpace.cb(destinationSpace);
 
-    expect(player.megaCredits).to.eq(1);
+    expect(player.megaCredits).to.eq(0);
+    expect(player2.megaCredits).to.eq(0);
   });
 
   it('Action does not get milestone benefit from adjacency', () => {
@@ -116,12 +117,11 @@ describe('MarsNomads', () => {
     const selectSpace = cast(card.action(player), SelectSpace);
     selectSpace.cb(destinationSpace);
 
-    // Gain adjacency bonuses of all players' tiles
-    expect(player.megaCredits).to.eq(1);
+    expect(player.megaCredits).to.eq(0);
     expect(milestone.getScore(player)).eq(0);
   });
 
-  it('action gains ocean bonus', () => {
+  it('Action gains ocean bonus', () => {
     const destinationSpace = game.board.getSpaceOrThrow('04');
     const adjacentSpaces = game.board.getAdjacentSpaces(destinationSpace);
 
@@ -135,7 +135,7 @@ describe('MarsNomads', () => {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('can make initial placement on an ocean bonus space even without the money (Bug #6479)', () => {
+  it('Can make initial placement on an ocean bonus space even without the money (Bug #6479)', () => {
     player.megaCredits = 0;
     const space3 = game.board.getSpaceOrThrow('03');
     expect(space3.spaceType).eq(SpaceType.LAND);

@@ -1245,22 +1245,18 @@ export class Game implements IGame, Logger {
     if (this.phase !== Phase.SOLAR) {
       this.grantPlacementBonuses(player, space, coveringExistingTile);
 
-      if (tile?.tileType !== TileType.MARS_NOMADS) {
-        AresHandler.ifAres(this, (aresData) => {
-          AresHandler.maybeIncrementMilestones(aresData, player, space);
-        });
-      }
+      AresHandler.ifAres(this, (aresData) => {
+        AresHandler.maybeIncrementMilestones(aresData, player, space);
+      });
     } else {
       space.player = undefined;
     }
 
-    if (tile?.tileType !== TileType.MARS_NOMADS) {
-      this.players.forEach((p) => {
-        p.tableau.forEach((playedCard) => {
-          playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
-        });
+    this.players.forEach((p) => {
+      p.tableau.forEach((playedCard) => {
+        playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
       });
-    }
+    });
 
     AresHandler.ifAres(this, () => {
       AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
@@ -1274,8 +1270,6 @@ export class Game implements IGame, Logger {
   }
 
   public grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean) {
-    const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
-
     if (!coveringExistingTile) {
       this.grantSpaceBonuses(player, space);
     }
@@ -1286,14 +1280,17 @@ export class Game implements IGame, Logger {
       }
     });
 
-    AresHandler.ifAres(this, () => {
-      AresHandler.earnAdjacencyBonuses(player, space);
-    });
+    if (space.tile !== undefined) {
+      AresHandler.ifAres(this, () => {
+        AresHandler.earnAdjacencyBonuses(player, space);
+      });
 
-    TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
+      TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
 
-    if (arcadianCommunityBonus) {
-      this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
+      const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
+      if (arcadianCommunityBonus) {
+        this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
+      }
     }
   }
 

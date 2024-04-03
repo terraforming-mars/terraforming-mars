@@ -60,11 +60,22 @@ export class DeferredActionsQueue {
   }
 
   // The following methods are used in tests
+  get length(): number {
+    return this.queue.length;
+  }
+
   public peek(): IDeferredAction<any> | undefined {
     return this.queue[0];
   }
 
   public pop(): IDeferredAction<any> | undefined {
     return this.queue.shift();
+  }
+
+  public runNext(): void {
+    const action = this.pop();
+    if (action) {
+      this.run(action, () => {});
+    }
   }
 }

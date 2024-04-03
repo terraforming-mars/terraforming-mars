@@ -15,8 +15,8 @@ import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
 import {CardResource} from '../common/CardResource';
-import {AndThen, DeferredAction} from './deferredActions/DeferredAction';
 import {Priority} from './deferredActions/Priority';
+import {DeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
@@ -104,7 +104,7 @@ export interface IGame extends Logger {
   getPlayerById(id: PlayerId): IPlayer;
   // Return an array of players from an array of player ids
   getPlayersById(ids: Array<PlayerId>): ReadonlyArray<IPlayer>;
-  defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T>;
+  defer<T>(action: DeferredAction<T>, priority?: Priority): DeferredAction<T>;
   milestoneClaimed(milestone: IMilestone): boolean;
   marsIsTerraformed(): boolean;
   lastSoloGeneration(): number;

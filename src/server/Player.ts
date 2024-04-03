@@ -1257,7 +1257,7 @@ export class Player implements IPlayer {
     // Resolve any deferredAction before placing the next greenery
     // Otherwise if two tiles are placed next to Philares, only the last benefit is triggered
     // if Philares does not accept the first bonus before the second tile is down
-    if (this.game.deferredActions.length > 0) {
+    if (!this.game.deferredActions.IsEmpty) {
       resolveFinalGreeneryDeferredActions();
       return;
     }
@@ -1278,7 +1278,7 @@ export class Player implements IPlayer {
             this.takeActionForFinalGreenery();
 
             // Resolve Philares deferred actions
-            if (this.game.deferredActions.length > 0) resolveFinalGreeneryDeferredActions();
+            if (!this.game.deferredActions.IsEmpty) resolveFinalGreeneryDeferredActions();
             return undefined;
           }));
       action.options.push(
@@ -1291,7 +1291,7 @@ export class Player implements IPlayer {
       return;
     }
 
-    if (this.game.deferredActions.length > 0) {
+    if (!this.game.deferredActions.IsEmpty) {
       resolveFinalGreeneryDeferredActions();
     } else {
       this.game.playerIsDoneWithGame(this);
@@ -1551,7 +1551,7 @@ export class Player implements IPlayer {
   public takeAction(saveBeforeTakingAction: boolean = true): void {
     const game = this.game;
 
-    if (game.deferredActions.length > 0) {
+    if (!this.game.deferredActions.IsEmpty) {
       game.deferredActions.runAll(() => this.takeAction());
       return;
     }

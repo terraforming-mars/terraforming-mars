@@ -3,99 +3,69 @@ import {GiveColonyBonus} from './GiveColonyBonus';
 import {IPlayer} from '../IPlayer';
 
 export class DeferredActionsQueue {
-  private insertId: number = 0;
+
+  /** Array of Deferred Actions sorted in order of when to be executed */
   private queue: Array<IDeferredAction<any>> = [];
 
-  get length(): number {
-    return this.queue.length;
+  /** Gets if the Queue is empty */
+  public get IsEmpty(): boolean {
+    return this.queue.length === 0;
   }
 
+  /** Adds a deferred action to the queue, then sorts the queue. */
   public push(action: IDeferredAction<any>): void {
-    action.queueId = this.insertId++;
     this.queue.push(action);
+    // Because 'push' add actions to the end of an array, actions with the same priority will always
+    // be organized where whichever action was added the queue first will be executed first 
+    this.queue.sort((a, b) => a.priority - b.priority)
   }
 
+  /** Starts a callback loop that resolves every action in the queue for 1 particular player */
   public runAllFor(player: IPlayer, cb: () => void): void {
-    let b: IDeferredAction | undefined;
-    let j = -1;
-    for (let i = this.queue.length - 1; i >= 0; i--) {
-      const a = this.queue[i];
-      if (a.player.id === player.id && (b === undefined || this.hasHigherPriority(a, b))) {
-        b = a;
-        j = i;
-      }
+    let action: IDeferredAction | undefined;
+    while (action?.player !== player && !this.IsEmpty) {
+      action = this.queue.shift();
     }
-    if (b === undefined) {
+    if (action) {
+      this.run(action, () => this.runAllFor(player, cb));
+    } else {
       cb();
-      return;
     }
-    this.queue.splice(j, 1);
-    this.run(b, () => this.runAllFor(player, cb));
   }
 
-  private hasHigherPriority(a: IDeferredAction, b: IDeferredAction) {
-    return a.priority < b.priority || (a.priority === b.priority && a.queueId < b.queueId);
-  }
-
-  private nextItemIndex(): number {
-    if (this.queue.length === 0) {
-      return -1;
-    }
-    let b = this.queue[0];
-    let j = 0;
-    for (let i = this.queue.length - 1; i >= 1; i--) {
-      const a = this.queue[i];
-      if (this.hasHigherPriority(a, b)) {
-        b = a;
-        j = i;
-      }
-    }
-    return j;
-  }
-
+  /** Starts a callback loop that resolves every action in the queue */
   public runAll(cb: () => void): void {
-    const next = this.nextItemIndex();
-    const action = this.queue[next];
-    if (action === undefined) {
+    const action = this.queue.shift();
+    if (action) {
+      this.run(action, () => this.runAll(cb));
+    } else {
       cb();
-      return;
     }
-    this.queue.splice(next, 1);
-    this.run(action, () => {
-      this.runAll(cb);
-    });
   }
 
-  // The following methods are used in tests
-  public peek(): IDeferredAction<any> | undefined {
-    return this.queue[this.nextItemIndex()];
-  }
-
-  public pop(): IDeferredAction<any> | undefined {
-    return this.queue.splice(this.nextItemIndex(), 1)[0];
-  }
-
+  // This function should be moved to the DeferredAction class, so GiveColonyBonus can override the function, instead using of this hook
+  /** Resolves a single action. */
   public run(action: IDeferredAction, cb: () => void): void {
-    // Special hook for trade bonus deferred actions
-    // So that they happen for all players at the same time
+    // GiveColonyBonus hook so that all players can give a response at the same time.
     if (action instanceof GiveColonyBonus) {
       action.andThen(cb);
       action.execute();
       return;
     }
-
     const input = action.execute();
-    if (input !== undefined) {
+    if (input) {
       action.player.setWaitingFor(input, cb);
     } else {
       cb();
     }
   }
 
-  public runNext(): void {
-    const action = this.pop();
-    if (action !== undefined) {
-      this.run(action, () => {});
-    }
+  // The following methods are used in tests
+  public peek(): IDeferredAction<any> | undefined {
+    return this.queue[0];
+  }
+  
+  public pop(): IDeferredAction<any> | undefined {
+    return this.queue.shift()
   }
 }

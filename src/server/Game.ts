@@ -29,8 +29,8 @@ import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
-import {AndThen, DeferredAction} from './deferredActions/DeferredAction';
 import {Priority} from './deferredActions/Priority';
+import {DeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -463,7 +463,7 @@ export class Game implements IGame, Logger {
     return ids.map((id) => this.getPlayerById(id));
   }
 
-  public defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T> {
+  public defer<T>(action: DeferredAction<T>, priority?: Priority): DeferredAction<T> {
     if (priority !== undefined) {
       action.priority = priority;
     }
@@ -696,7 +696,7 @@ export class Game implements IGame, Logger {
   }
 
   private postProductionPhase(): void {
-    if (this.deferredActions.length > 0) {
+    if (!this.deferredActions.IsEmpty) {
       this.deferredActions.runAll(() => this.postProductionPhase());
       return;
     }
@@ -743,7 +743,7 @@ export class Game implements IGame, Logger {
     UnderworldExpansion.endGeneration(this);
 
     // turmoil.endGeneration might have added actions.
-    if (this.deferredActions.length > 0) {
+    if (!this.deferredActions.IsEmpty) {
       this.deferredActions.runAll(() => this.startGeneration());
     } else {
       this.startGeneration();
@@ -948,7 +948,7 @@ export class Game implements IGame, Logger {
 
 
   public playerIsFinishedTakingActions(): void {
-    if (this.deferredActions.length > 0) {
+    if (!this.deferredActions.IsEmpty) {
       this.deferredActions.runAll(() => this.playerIsFinishedTakingActions());
       return;
     }

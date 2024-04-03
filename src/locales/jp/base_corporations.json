@@ -7,7 +7,7 @@
     "Credicor": "クレディコー",
     "CrediCor": "クレディコー",
     "You start with 57 M€.":"初期資源：57MC.",
-    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "効果：20MCを超える標準プロジェクトを実行 または 元のプレイコスト20MC以上のカードをプレイ時、4MC獲得.",
+    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "効果：20MC以上の標準プロジェクトを実行時 または 元のプレイコスト20MC以上のカードをプレイ時、4MC獲得.",
 
     "ECOLINE": "エコライン",
     "Ecoline": "エコライン",
@@ -20,9 +20,9 @@
     "You start with 3 heat production and 42 M€.": "初期資源：42MC. 初期産出：温熱産出+3.",
     "Effect: You may use heat as M€. You may not use M€ as heat.": "効果：温熱をMCとして扱ってもよい.(MCを温熱として扱えない)",
 
-    "INTERPLANETARY": "",
+    "INTERPLANETARY": "惑星間",
     "CINEMATICS": "シネマティック",
-    "Interplanetary Сinematics": "シネマティック",
+    "Interplanetary Cinematics": "惑星間シネマティック",
     "You start with 20 steel and 30 M€.": "初期資源：30MC. 20建材.",
     "Effect: Each time you play an event, you gain 2 M€.": "効果：イベントカードをプレイ時、2MC獲得.",
 
@@ -48,8 +48,8 @@
     "You start with 1 energy production and 48 M€.":"初期資源：48MC. 初期産出：電力産出+1.",
     "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "効果：電力タグカードのプレイコスト-3MC. 標準プロジェクト「発電所の設置」のコスト-3MC.",
 
-    "UNITED NATIONS MARS INITIATIVE": "UNITED NATIONS MARS INITIATIVE",
-    "United Nations Mars Initiative": "United Nations Mars Initiative",
+    "UNITED NATIONS MARS INITIATIVE": "国連火星動議",
+    "United Nations Mars Initiative": "国連火星動議",
     "UNMI": "UNMI",
     "You start with 40 M€.":"初期資源：40MC.",
     "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "アクション：この世代中にTR増加済みなら、3MC支払ってTR+1段階.",
@@ -58,16 +58,16 @@
     "GUILD": "ギルド",
     "Mining Guild": "マイニングギルド",
     "You start with 30 M€, 5 steel and 1 steel production.": "初期資源：30MC. 5建材. 初期産出：建材産出+1.",
-    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "効果：タイルの配置ボーナスとして建材 または チタンを入手した場合、入手した資材の産出+1.(2資源ボーナスでも産出+1. 実装都合：チタンと建材同時入手の場合は建材産出優先.)",
+    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "効果：タイルの配置ボーナスとして建材 または チタンを入手した場合、建材産出+1.",
 
     "TERACTOR": "テラクター",
-    "Terractor": "テラクター",
+    "Teractor": "テラクター",
     "You start with 60 M€.":"初期資源：60MC.",
     "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "効果：地球タグカードのプレイコスト-3MC.",
 
     "SATURN": "サターン",
-    "SYSTEMS": "システム",
-    "Saturn Systems": "サターンシステム",
+    "SYSTEMS": "システムズ",
+    "Saturn Systems": "サターン・システムズ",
     "You start with 1 titanium production and 42 M€.": "初期資源：42MC. 初期産出：チタン産出+1.",
     "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "効果：木星タグがプレイされる毎にMC産出+1."
 }

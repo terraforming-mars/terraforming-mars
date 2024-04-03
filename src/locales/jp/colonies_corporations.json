@@ -1,8 +1,8 @@
 {
-    "POLYPHEMOS": "フォボログ",
-    "Polyphemos": "フォボログ",
+    "POLYPHEMOS": "ポリュペモス",
+    "Polyphemos": "ポリュペモス",
     "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "初期資源：50MC. 5チタン. 初期産出：MC産出+5.",
-    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "効果：カード購入費＋2MC.",
+    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "効果：カード購入費+2MC.",
 
     "STORM": "ストーム",
     "CRAFT": "クラフト",
@@ -22,7 +22,7 @@
     "ARIDOR": "アリドール",
     "Aridor": "アリドール",
     "COLONY": "コロニー",
-    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "初期資源：40MC. 1アクション目：コロニータイル1つ追加.",
+    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "初期資源：40MC. 1アクション目：コロニータイルを1つ追加.",
     "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "効果：未プレイタグをプレイする毎にMC産出+1.(？タグ、イベントタグは含まない)",
 
     "POSEIDON": "ポセイドン",

@@ -9,8 +9,17 @@ import {Player} from '../../Player';
 import {intersection} from '../../../common/utils/utils';
 import {TileType} from '../../../common/TileType';
 import {message} from '../../logs/MessageBuilder';
-
 export class MarsNomads extends Card implements IActionCard {
+  /*
+   * A good page about this card: https://boardgamegeek.com/thread/3154812.
+   *
+   * 1. Arcadian Communities and Land Claim block Mars Nomads.
+   *  1a. Even if it's your AC.
+   * 2. Mining Guild and Philares cannot take advantage of it.
+   * 3. Placing next to an ocean tile gives a placement bonus.
+   *
+   * Ares: Adjacency bonuses are not placement bonuses.
+   */
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -31,7 +40,6 @@ export class MarsNomads extends Card implements IActionCard {
       },
     });
   }
-
 
   public override bespokeCanPlay(player: IPlayer) {
     const spaces = player.game.board.getNonReservedLandSpaces();

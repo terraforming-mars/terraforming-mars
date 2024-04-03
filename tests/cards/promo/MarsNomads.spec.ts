@@ -10,6 +10,10 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
+import {Philares} from '../../../src/server/cards/promo/Philares';
+import {EmptyBoard} from '../../ares/EmptyBoard';
+import {LandClaim} from '../../../src/server/cards/base/LandClaim';
+import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 
 describe('MarsNomads', () => {
   let card: MarsNomads;
@@ -150,5 +154,101 @@ describe('MarsNomads', () => {
     cast(player.popWaitingFor(), undefined);
     expect(game.getTemperature()).eq(-30);
     expect(player.getTerraformRating()).eq(20);
+  });
+
+  it('Compatible with Land Claim', () => {
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+
+    expect(cast(card.play(player), SelectSpace).spaces).to.include(space);
+
+    const landClaim = new LandClaim();
+    const claimLand = cast(landClaim.play(player), SelectSpace);
+
+    expect(claimLand.spaces).to.include(space);
+
+    claimLand.cb(space);
+
+    expect(cast(card.play(player), SelectSpace).spaces).to.not.include(space);
+  });
+
+  describe('Compatible with Philares', () => {
+    let philares: Philares;
+
+    beforeEach(() => {
+      game.board = EmptyBoard.newInstance();
+      philares = new Philares();
+      player2.setCorporationForTest(philares);
+    });
+
+    it('Placement does not trigger Philares', () => {
+      // Nomad will start at nomadSpace, and move to destinationSpace,
+      // which is next to both the current nomad space, and Philares.
+      const destinationSpace = game.board.getSpaceOrThrow('04');
+      const [philaresSpace, nomadSpace] = game.board.getAdjacentSpaces(destinationSpace);
+
+      game.simpleAddTile(player2, philaresSpace, {tileType: TileType.NATURAL_PRESERVE});
+      const selectSpace = cast(card.play(player), SelectSpace);
+      expect(selectSpace.spaces).contains(nomadSpace);
+      selectSpace.cb(nomadSpace);
+      expect(game.nomadSpace).eq(nomadSpace.id);
+      runAllActions(game);
+      expect(player2.popWaitingFor()).is.undefined;
+    });
+
+    it('Move does not trigger Philares', () => {
+      // Nomad will start at nomadSpace, and move to destinationSpace,
+      // which is next to both the current nomad space, and Philares.
+      const destinationSpace = game.board.getSpaceOrThrow('04');
+      const [philaresSpace, nomadSpace] = game.board.getAdjacentSpaces(destinationSpace);
+
+      game.simpleAddTile(player2, philaresSpace, {tileType: TileType.NATURAL_PRESERVE});
+      game.nomadSpace = nomadSpace.id;
+      const selectSpace = cast(card.action(player), SelectSpace);
+      expect(selectSpace.spaces).contains(destinationSpace);
+      selectSpace.cb(destinationSpace);
+      expect(game.nomadSpace).eq(destinationSpace.id);
+      runAllActions(game);
+      expect(player2.popWaitingFor()).is.undefined;
+    });
+  });
+
+  describe('Compatible with Mining Guild', () => {
+    let miningGuild: MiningGuild;
+
+    beforeEach(() => {
+      game.board = EmptyBoard.newInstance();
+      miningGuild = new MiningGuild();
+      player.setCorporationForTest(miningGuild);
+    });
+
+    it('Placement does not trigger Mining Guild', () => {
+      const space = game.board.getSpaceOrThrow('04');
+
+      const selectSpace = cast(card.play(player), SelectSpace);
+      space.bonus = [SpaceBonus.STEEL];
+      expect(selectSpace.spaces).contains(space);
+      selectSpace.cb(space);
+      runAllActions(game);
+
+      expect(game.nomadSpace).eq(space.id);
+      expect(player.steel).eq(0);
+      expect(player.production.steel).eq(0);
+    });
+
+    it('Move does not trigger Mining Guild', () => {
+      const firstSpace = game.board.getSpaceOrThrow('05');
+      const space = game.board.getSpaceOrThrow('04');
+      game.nomadSpace = firstSpace.id;
+
+      const selectSpace = cast(card.action(player), SelectSpace);
+      space.bonus = [SpaceBonus.STEEL];
+      expect(selectSpace.spaces).contains(space);
+      selectSpace.cb(space);
+      runAllActions(game);
+
+      expect(game.nomadSpace).eq(space.id);
+      expect(player.steel).eq(1);
+      expect(player.production.steel).eq(0);
+    });
   });
 });

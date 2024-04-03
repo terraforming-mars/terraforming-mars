@@ -10,7 +10,6 @@ export interface IDeferredAction <T = undefined> {
 }
 
 export abstract class DeferredAction<T = undefined> implements IDeferredAction<T> {
-
   /** The callback function to be called after execution or return of a PlayerInput. */
   protected cb: (param: T) => PlayerInput | undefined | void = () => {};
 

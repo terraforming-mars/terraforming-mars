@@ -3,7 +3,6 @@ import {GiveColonyBonus} from './GiveColonyBonus';
 import {IPlayer} from '../IPlayer';
 
 export class DeferredActionsQueue {
-
   /** Array of Deferred Actions sorted in order of when to be executed */
   private queue: Array<IDeferredAction<any>> = [];
 
@@ -16,8 +15,8 @@ export class DeferredActionsQueue {
   public push(action: IDeferredAction<any>): void {
     this.queue.push(action);
     // Because 'push' add actions to the end of an array, actions with the same priority will always
-    // be organized where whichever action was added the queue first will be executed first 
-    this.queue.sort((a, b) => a.priority - b.priority)
+    // be organized such that whichever action was added the queue first will be executed first
+    this.queue.sort((a, b) => a.priority - b.priority);
   }
 
   /** Starts a callback loop that resolves every action in the queue for 1 particular player */
@@ -64,8 +63,8 @@ export class DeferredActionsQueue {
   public peek(): IDeferredAction<any> | undefined {
     return this.queue[0];
   }
-  
+
   public pop(): IDeferredAction<any> | undefined {
-    return this.queue.shift()
+    return this.queue.shift();
   }
 }

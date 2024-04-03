@@ -1254,11 +1254,13 @@ export class Game implements IGame, Logger {
       space.player = undefined;
     }
 
-    this.players.forEach((p) => {
-      p.tableau.forEach((playedCard) => {
-        playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
+    if (tile?.tileType !== TileType.MARS_NOMADS) {
+      this.players.forEach((p) => {
+        p.tableau.forEach((playedCard) => {
+          playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
+        });
       });
-    });
+    }
 
     AresHandler.ifAres(this, () => {
       AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);

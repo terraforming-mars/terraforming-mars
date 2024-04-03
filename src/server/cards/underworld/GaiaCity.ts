@@ -25,7 +25,7 @@ export class GaiaCity extends Card implements IProjectCard {
         }),
         description: 'Reduce your energy production one step and increase your M€ production 2 steps. ' +
         'Place a city in a space with ANY player\'s excavation marker. ' +
-        'Its placement bonus is doubled (incluing adjacencies.)',
+        'Its placement bonus is doubled (including adjacencies.)',
       },
     });
   }

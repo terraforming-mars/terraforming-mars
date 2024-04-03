@@ -7,7 +7,6 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {intersection} from '../../../common/utils/utils';
-import {TileType} from '../../../common/TileType';
 import {message} from '../../logs/MessageBuilder';
 export class MarsNomads extends Card implements IActionCard {
   /*
@@ -81,9 +80,7 @@ export class MarsNomads extends Card implements IActionCard {
       spaces)
       .andThen((space) => {
         player.game.nomadSpace = space.id;
-        // Mars nomads is funny. The tile is temporarily placed so the card acts appropriate, but is then removed so it doesn't have post-placement impact.
-        player.game.addTile(player, space, {tileType: TileType.MARS_NOMADS});
-        player.game.removeTile(space.id);
+        player.game.grantPlacementBonuses(player, space, false);
 
         return undefined;
       });

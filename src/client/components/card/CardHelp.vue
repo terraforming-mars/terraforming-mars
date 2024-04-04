@@ -1,5 +1,5 @@
 <template>
-  <div class="card-help"><a :href="url" target="_blank">?</a></div>
+  <div class="card-help" @click="click"><a :href="url" target="_blank">?</a></div>
 </template>
 
 <script lang="ts">
@@ -18,6 +18,9 @@ export default Vue.extend({
     getClasses(): string {
       const classes = ['card-help'];
       return classes.join(' ');
+    },
+    click() {
+      window.open(this.url, '_blank');
     },
   },
   computed: {

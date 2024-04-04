@@ -1,6 +1,6 @@
 <template>
   <div :class="getCardClasses(card)">
-      <div class="card-content-wrapper" v-i18n>
+      <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
           <div v-if="!isStandardProject()" class="card-cost-and-tags">
               <CardCost :amount="getCost()" :newCost="getReducedCost()" />
               <card-help v-show="hasHelp" :name="card.name" />
@@ -80,6 +80,7 @@ export default Vue.extend({
 
     return {
       cardInstance: card,
+      hovering: false,
     };
   },
   methods: {
@@ -156,7 +157,7 @@ export default Vue.extend({
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
     },
     hasHelp(): boolean {
-      return CARDS_WITH_EXTERNAL_DOCUMENTATION.includes(this.card.name) && getPreferences().experimental_ui;
+      return this.hovering && CARDS_WITH_EXTERNAL_DOCUMENTATION.includes(this.card.name);
     },
   },
 });

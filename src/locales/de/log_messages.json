@@ -410,6 +410,7 @@
     "The discard pile has been shuffled to form a new deck.": "Der Abwurfstapel wurde gemischt, um einen neuen Kartenstapel zu bilden.",
     "All unidentified underground resources have been shuffled back into the pile.": "Alle nicht identifizierten unterirdischen Ressourcen wurden zurück in den Stapel gemischt.",
     "discarded every card without match": "alle Karten ohne Übereinstummung abgeworfen",
+    "that habitat space is the only available mining space.": "dieses Habitatfeld ist das einzige verfügbare Minenfeld.",
     "${0} removed ${1} ${2} from ${3} to ${4}": "${0} entfernte ${1} ${2} von ${3}, um ${4}",
     "draw a card": "1 Karte zu ziehen",
     "Gain 1 TR": "1 TW zu erhalten",

@@ -909,6 +909,8 @@
     "Select a card to keep and pass the rest to ${0}": "Wähle eine Karte, die du behalten möchtest und gebe den Rest an ${0}",
     "Select two cards to keep and pass the rest to ${0}": "Wähle zwei Karten, die du behalten möchtest und gebe den Rest an ${0}",
     "Select how to spend ${0} M€ for ${1} cards": "Wähle aus, wie du für ${1} Karten ${0} M€ bezahlen möchtest",
+    "Select a habitat space to co-own": "Wähle ein Habitat als Miteigentümer",
+    "Select a mining space to co-own": "Wähle eine Minie als Miteigentümer",
     "Game Home": "Spiel Startseite",
     "Send players their links below. As game administrator pick your link to use.": "Schicke den Mitspielern die Links unten. Als Spiel-Administrator wähle deinen eigenen Link zum Spielen.",
     "Drafted Cards": "Gedraftete Karten",

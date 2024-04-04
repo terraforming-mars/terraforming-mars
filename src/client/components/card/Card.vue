@@ -39,14 +39,16 @@ import {CardName} from '@/common/cards/CardName';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 
 const CARDS_WITH_EXTERNAL_DOCUMENTATION = [
+  CardName.ASTRA_MECHANICA,
   CardName.BOTANICAL_EXPERIENCE,
+  CardName.FLOYD_CONTINUUM,
   CardName.LUNA_ECUMENOPOLIS,
-  CardName.ROBOTIC_WORKFORCE,
-  CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
-  CardName.SAGITTA_FRONTIER_SERVICES,
-  CardName.PRICE_WARS,
-  CardName.PHILARES,
   CardName.MINING_GUILD,
+  CardName.PHILARES,
+  CardName.PRICE_WARS,
+  CardName.ROBOTIC_WORKFORCE,
+  CardName.SAGITTA_FRONTIER_SERVICES,
+  CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
 ];
 
 export default Vue.extend({

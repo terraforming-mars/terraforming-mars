@@ -1,73 +1,72 @@
 {
   "Floyd Continuum": "",
   "Action: Gain 3 M€ per completed terraforming parameter.": "アクション：完了済みのグローバルパラメーター1つ毎に3MC獲得.",
-  "FAN NOTE: This will apply to Venus but not The Moon.": "拡張注記：酸素、温度、海洋、金星の4種のみ参照。ファン拡張パラメーターは除外.",
-  
+
   "Martian Lumber Corp": "",
   "Effect: When playing a building tag, plants may be used as 3 M€ each.": "効果：土建タグプレイ時、1植物を3MCとして支払ってもよい(複数OK).",
   "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "条件：緑地タイルを2枚以上所持. 植物産出+1.",
-  
+
   "Solar Logistics": "",
   "Effect: When you play an Earth tag, you pay 2 M€ less.": "効果：地球タグカードのプレイコスト-2MC.",
   "Effect: When any player plays a space event, draw a card.": "効果：宇宙タグ付きイベントカードがプレイされる毎に1ドロー.",
   "Gain 2 titanium.": "2チタン獲得.",
-  
+
   "Teslaract": "",
   "Action: Spend 1 energy production to gain 1 plant production.": "アクション：電力産出-1し、植物産出+1.",
   "Raise your TR 1 step.": "TR+1段階.",
-  
+
   "Red Ships": "",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "アクション：海洋に隣接する都市タイルと特殊タイルの合計数分、1MC獲得.",
   "Requires 4% oxygen.": "条件：酸素4%以上.",
-  
+
   "Neptunian Power Consultants": "",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "効果：海洋1枚配置された時、5MC支払っても良い. ※建材での支払い可能. 支払った場合、電力産出+1し、このカード上に1ハイドロリソース追加.",
   "1 VP per hydroelectric resource on this card": "このカード上の1ハイドロリソース毎に1VP.",
-  
+
   "Mars Nomads": "",
   "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "アクション：遊牧民を隣接する空きマスへ移動し、そのマスから配置ボーナスを獲得.(海洋隣接ボーナスも含む)",
   "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "遊牧民を空きマスに配置. ※遊牧民がいるマスに配置できない",
-  
+
   "Kaguya Tech": "",
   "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "MC産出+2. 1ドロー. 自身の緑地タイル1つを都市タイルと置き換える. この時、配置ルールは全て無視し、配置ボーナスを獲得.",
-  
+
   "Homeostasis Bureau": "",
   "Effect: When you raise the temperature, gain 3 M€.": "効果：温度+1段階する毎に3MC獲得.",
   "Increase your heat production 2 steps.": "温熱産出+2.",
-  
+
   "Hermetic Order of Mars": "",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "条件：酸素4%以下. MC産出+2. 所有するタイルに隣接する空きマス毎に1MC獲得.",
-  
+
   "St. Joseph of Cupertino Mission": "",
   "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "アクション：5MCを支払い(※建材での支払い可能)、任意の都市上に大聖堂を1つ配置. 配置された都市の所有者は2MC支払い、1ドローしてもよい. 同一都市上には大聖堂1つ迄配置可能. ",
   "1 VP per City with a Cathedral in it.": "配置した大聖堂1つ毎に1VP.",
-  
+
   "Cyberia Systems": "",
   "Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.": "建材産出+2. 異なる土建タグカード2枚を選択し、その産出効果をコピー",
-  
+
   "Carbon Nanosystems": "",
   "Effect: When you play a science tag, including this, add a graphene resource here.": "効果：科学タグをプレイ時、このカード上に1グラフェン追加.",
   "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "効果：宇宙タグ または 都市タグプレイ時、このカード上のグラフェンを4MCとして支払ってもよい.",
-  
+
   "Astra Mechanica": "",
   "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "プレイ済みのイベントカード2枚を手札に戻す. ※特殊タイルを配置するカードは不可.",
-  
+
   "Aqueduct Systems": "",
   "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "条件：海洋に隣接する都市タイルを所持. 土建タグカードを3枚入手.",
-    
+
   "Directed Heat Usage": "",
   "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "アクション：3温熱を支払い、4MC または 2植物獲得.",
-  
+
   "Supercapacitors": "",
   "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "効果：電力→温熱への自動変換を任意個数へ変更.",
   "Increase M€ production 1 step.": "MC産出+1.",
-  
+
   "Robot Pollinators": "",
   "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "条件：酸素4%以上. 植物産出+1. 植物タグ1つ毎に1植物獲得.",
-  
+
   "16 Psyche": "",
   "Increase titanium production 2 steps. Gain 3 titanium.": "チタン産出+2. 3チタン獲得.",
-  
+
   "Comet Aiming": "",
   "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "アクション：1チタンを支払い、1小惑星獲得.",
   "Action: Remove 1 asteroid here to place an ocean.": "アクション：このカード上から1小惑星を除去し、海洋配置.",
@@ -87,7 +86,7 @@
 
   "Great Dam": "",
   "Requires 4 ocean tiles. Increase your energy production 2 steps.": "条件：海洋4枚以上. 電力産出+2.",
-  
+
   "Magnetic Shield": "",
   "3 Power": "電力タグ3つ以上",
   "Requires 3 power tags. Raise your TR 4 steps.": "条件：電力タグ3つ以上. TR+4段階",
@@ -210,5 +209,5 @@
 
   "Outdoor Sports": "",
   "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "条件：海洋に隣接する都市タイルが存在. MC産出+2."
- 
+
 }

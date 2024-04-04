@@ -793,9 +793,7 @@ export class Player implements IPlayer {
       cardsToKeep = 5;
     }
 
-    // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
-    const action = new ChooseCards(this, dealtCards, {paying: true, keepMax: cardsToKeep}).execute();
-    this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
+    new ChooseCards(this, dealtCards, {paying: true, keepMax: cardsToKeep}).run(() => this.game.playerIsFinishedWithResearchPhase(this));
   }
 
   public getCardCost(card: IProjectCard): number {
@@ -1257,7 +1255,7 @@ export class Player implements IPlayer {
     // Resolve any deferredAction before placing the next greenery
     // Otherwise if two tiles are placed next to Philares, only the last benefit is triggered
     // if Philares does not accept the first bonus before the second tile is down
-    if (!this.game.deferredActions.IsEmpty) {
+    if (this.game.deferredActions.isNotEmpty()) {
       resolveFinalGreeneryDeferredActions();
       return;
     }
@@ -1278,7 +1276,7 @@ export class Player implements IPlayer {
             this.takeActionForFinalGreenery();
 
             // Resolve Philares deferred actions
-            if (!this.game.deferredActions.IsEmpty) resolveFinalGreeneryDeferredActions();
+            if (this.game.deferredActions.isNotEmpty()) resolveFinalGreeneryDeferredActions();
             return undefined;
           }));
       action.options.push(
@@ -1291,7 +1289,7 @@ export class Player implements IPlayer {
       return;
     }
 
-    if (!this.game.deferredActions.IsEmpty) {
+    if (this.game.deferredActions.isNotEmpty()) {
       resolveFinalGreeneryDeferredActions();
     } else {
       this.game.playerIsDoneWithGame(this);
@@ -1551,7 +1549,7 @@ export class Player implements IPlayer {
   public takeAction(saveBeforeTakingAction: boolean = true): void {
     const game = this.game;
 
-    if (!this.game.deferredActions.IsEmpty) {
+    if (this.game.deferredActions.isNotEmpty()) {
       game.deferredActions.runAll(() => this.takeAction());
       return;
     }
@@ -1817,6 +1815,8 @@ export class Player implements IPlayer {
     }
     this.timer.start();
     this.waitingFor = input;
+    // The callback function tells the player what part of the code to return to after an input is processed.
+    // For example, a DeferredAction sets the WaitingFor to some PlayerInput. The callback function send us back to the DeferredActionsQueue after the input is given.
     this.waitingForCb = cb;
     this.game.inputsThisRound++;
   }

@@ -6,6 +6,7 @@ export interface IDeferredAction <T = undefined> {
   player: IPlayer;
   priority: Priority;
   execute(): PlayerInput | undefined;
+  run(cb: () => void): void;
   andThen(cb: (param: T) => void): this;
 }
 
@@ -23,10 +24,20 @@ export abstract class DeferredAction<T = undefined> implements IDeferredAction<T
     public priority: Priority = Priority.DEFAULT,
   ) {}
 
-  /** Execute the deferred action and possibly return a player input */
+  /** Execute the behavior of the deferred action and possibly return a player input */
   public abstract execute(): PlayerInput | undefined;
 
-  /** Executed a callback function with a parameter determined by the child class of DeferredAction */
+  /** Execute the action, then run the callback function */
+  public run(cb: () => void): void {
+    const input = this.execute();
+    if (input !== undefined) {
+      this.player.setWaitingFor(input, cb);
+    } else {
+      cb();
+    }
+  }
+
+  /** Stores cb, to be called after this deferred action completes. */
   public andThen(cb: (param: T) => void): this {
     if (this.callbackSet) {
       throw new Error('Cannot call andThen twice for the same object.');

@@ -696,7 +696,7 @@ export class Game implements IGame, Logger {
   }
 
   private postProductionPhase(): void {
-    if (!this.deferredActions.IsEmpty) {
+    if (this.deferredActions.isNotEmpty()) {
       this.deferredActions.runAll(() => this.postProductionPhase());
       return;
     }
@@ -743,7 +743,7 @@ export class Game implements IGame, Logger {
     UnderworldExpansion.endGeneration(this);
 
     // turmoil.endGeneration might have added actions.
-    if (!this.deferredActions.IsEmpty) {
+    if (this.deferredActions.isNotEmpty()) {
       this.deferredActions.runAll(() => this.startGeneration());
     } else {
       this.startGeneration();
@@ -948,7 +948,7 @@ export class Game implements IGame, Logger {
 
 
   public playerIsFinishedTakingActions(): void {
-    if (!this.deferredActions.IsEmpty) {
+    if (this.deferredActions.isNotEmpty()) {
       this.deferredActions.runAll(() => this.playerIsFinishedTakingActions());
       return;
     }

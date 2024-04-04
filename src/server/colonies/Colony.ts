@@ -28,6 +28,7 @@ import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../commo
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {sum} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
+import {StealColonyBonuses} from '../deferredActions/StealColonyBonuses';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 export abstract class Colony implements IColony {
@@ -154,7 +155,11 @@ export abstract class Colony implements IColony {
 
     // !== false because default is true.
     if (options.giveColonyBonuses !== false) {
-      player.game.defer(new GiveColonyBonus(player, this, options.selfishTrade));
+      if (options.selfishTrade) {
+        player.game.defer(new StealColonyBonuses(player, this));
+      } else {
+        player.game.defer(new GiveColonyBonus(player, this));
+      }
     }
 
     // !== false because default is true.

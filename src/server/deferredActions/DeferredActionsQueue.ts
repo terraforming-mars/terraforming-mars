@@ -1,5 +1,4 @@
 import {IDeferredAction} from './DeferredAction';
-import {GiveColonyBonus} from './GiveColonyBonus';
 import {IPlayer} from '../IPlayer';
 
 export class DeferredActionsQueue {
@@ -7,11 +6,11 @@ export class DeferredActionsQueue {
   private queue: Array<IDeferredAction<any>> = [];
 
   /** Gets if the Queue is empty */
-  public get IsEmpty(): boolean {
-    return this.queue.length === 0;
+  public isNotEmpty(): boolean {
+    return this.queue.length > 0;
   }
 
-  /** Adds a deferred action to the queue, then sorts the queue. */
+  /** Adds a deferred action to the queue. */
   public push(action: IDeferredAction<any>): void {
     this.queue.push(action);
     // Because 'push' add actions to the end of an array, actions with the same priority will always
@@ -22,11 +21,11 @@ export class DeferredActionsQueue {
   /** Starts a callback loop that resolves every action in the queue for 1 particular player */
   public runAllFor(player: IPlayer, cb: () => void): void {
     let action: IDeferredAction | undefined;
-    while (action?.player !== player && !this.IsEmpty) {
+    while (action?.player !== player && this.isNotEmpty()) {
       action = this.queue.shift();
     }
     if (action) {
-      this.run(action, () => this.runAllFor(player, cb));
+      action.run(() => this.runAllFor(player, cb));
     } else {
       cb();
     }
@@ -36,24 +35,7 @@ export class DeferredActionsQueue {
   public runAll(cb: () => void): void {
     const action = this.queue.shift();
     if (action) {
-      this.run(action, () => this.runAll(cb));
-    } else {
-      cb();
-    }
-  }
-
-  // This function should be moved to the DeferredAction class, so GiveColonyBonus can override the function, instead using of this hook
-  /** Resolves a single action. */
-  public run(action: IDeferredAction, cb: () => void): void {
-    // GiveColonyBonus hook so that all players can give a response at the same time.
-    if (action instanceof GiveColonyBonus) {
-      action.andThen(cb);
-      action.execute();
-      return;
-    }
-    const input = action.execute();
-    if (input) {
-      action.player.setWaitingFor(input, cb);
+      action.run(() => this.runAll(cb));
     } else {
       cb();
     }
@@ -75,7 +57,7 @@ export class DeferredActionsQueue {
   public runNext(): void {
     const action = this.pop();
     if (action) {
-      this.run(action, () => {});
+      action.run(() => {});
     }
   }
 }

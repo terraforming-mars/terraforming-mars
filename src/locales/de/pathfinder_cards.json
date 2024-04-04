@@ -105,7 +105,7 @@
   "(Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.)": "(Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Energie-Produktion um 2.)",
 
   "Huygens Observatory": "Huygens-Observatorium",
-  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Errichte eine Kolonie - auch dort erlaubt, wo du bereits eine Kolonie hast. Handle kostenlos - du darfst dafür eine bereits genutzte Flotte verwenden. Erhöhe deinen TW um 1. *)",
+  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Errichte eine Kolonie - auch dort erlaubt, wo du bereits eine Kolonie hast. Handle kostenlos - du darfst dafür eine bereits genutzte Flotte verwenden. Erhöhe deinen TW um 1.)",
 
   "Hydrogen Processing Plant": "Wasserstoff-Verarbeitung",
   "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(Benötigt Sauerstoffgehalt von 3% oder mehr. Erhöhe deine Energie-Produktion um 1 je 2 Ozeanplättchen im Spiel. Senke den Sauerstoffgehalt um 1%)",
@@ -186,8 +186,8 @@
   "NO": "NICHT",
 
   "Public Sponsored Grant": "Öffentliche Subvention",
-  "(Requires Scientists are ruling or that you have 2 delegates there. All other players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Benötigt Regierungspartei: FORSCHUNG oder 2+ eiegene Delegierte dort. Alle anderen Spieler verlieren 2 M€. Wähle ein Symbol (außer Jupiter, Stadt, Joker und Planet) und ziehe 2 Karten damit.)",
-
+  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Benötigt Regierungspartei: FORSCHUNG oder 2+ eiegene Delegierte dort. Alle Spieler verlieren 2 M€. Wähle ein Symbol (außer Jupiter, Stadt, Joker und Planet) und ziehe 2 Karten damit.)",
+  
   "Rare-Earth Elements": "Seltene-Erd-Elemente",
   "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(Erhöhe deine M€-Produktion um 1 je eigenes Spezialplättchen.)",
 
@@ -224,8 +224,8 @@
   "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(Benötigt je ein eigenes Venus-, Erde-, Mars- und Jupitersymbol. Füge einer beliebigen Karte 2 Daten hinzu. 1 SP je 6 Daten auf dieser Karte.)",
 
   "Space Debris Cleaning Operation": "Weltraumschrott räumen",
-  "(Requires 4 space tags. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(Benötigt 4 Weltraumsymbole im Spiel. Füge einer Karte 1 beliebige Ressource hinzu (kein Tier). Füge einer Karte 1 Datenressource hinzu. Erhalte 3 Titan. Ziehe 1 Karte.)",
-
+  "(Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(Benötigt 4 Weltraumsymbole im Spiel. Füge einer Karte 1 beliebige Ressource hinzu (kein Tier). Füge einer Karte 1 Datenressource hinzu. Erhalte 3 Titan. Ziehe 1 Karte.)",
+  
   "Space Relay": "Orbitaler Verstärker",
   "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(EFFEKT: Wenn du ein Jupitersymbol ausspielst (einschließlich dieses), ziehe 1 Karte.)",
   "(Erhöhe deine M€-Produktion um 1 Schritt.)": "(Erhöhe deine M€-Produktion um 1.)",
@@ -245,7 +245,7 @@
   "Think Tank": "Denkfabrik",
   "(Action: Spend 2 M€ to place 1 data on any card.)": "(AKTION: Bezahle 2 M€ um einer Karte 1 Datenressource hinzuzufügen.)",
   "+/-1 global parameter": "+/-1 globaler Parameter",
-  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(Effekt: Wenn du eine Karte ausspielst, darfst du Daten von dieser Karte entfernen, um je entfernte Datenressource die globalen Bedingungen der Karte um 1 Stufe zu erhöhen bzw. zu verringern.)",
+  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(EFFEKT: Wenn du eine Karte ausspielst, darfst du Daten von dieser Karte entfernen, um je entfernte Datenressource die globalen Bedingungen der Karte um 1 Stufe zu erhöhen bzw. zu verringern.)",
 
   "Venera Base": "Venera Basis",
   "(Action: Add 1 floater to ANY Venus card)": "(AKTION: Füge einer beliebigen Venuskarte 1 Schweber hinzu.)",

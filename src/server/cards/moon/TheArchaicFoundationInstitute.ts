@@ -23,8 +23,9 @@ export class TheArchaicFoundationInstitute extends CorporationCard {
       },
 
       metadata: {
-        description: 'You start with 55 M€.',
+        hasExternalHelp: true,
         cardNumber: '',
+        description: 'You start with 55 M€.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(55).nbsp;
           b.effect('When you play a Moon tag, including these, add a cube to this card.', (eb) => {

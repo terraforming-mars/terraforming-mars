@@ -35,21 +35,7 @@ import {Tag} from '@/common/cards/Tag';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {CardResource} from '@/common/CardResource';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
-import {CardName} from '@/common/cards/CardName';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
-
-const CARDS_WITH_EXTERNAL_DOCUMENTATION = [
-  CardName.ASTRA_MECHANICA,
-  CardName.BOTANICAL_EXPERIENCE,
-  CardName.FLOYD_CONTINUUM,
-  CardName.LUNA_ECUMENOPOLIS,
-  CardName.MINING_GUILD,
-  CardName.PHILARES,
-  CardName.PRICE_WARS,
-  CardName.ROBOTIC_WORKFORCE,
-  CardName.SAGITTA_FRONTIER_SERVICES,
-  CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
-];
 
 export default Vue.extend({
   name: 'Card',
@@ -161,7 +147,7 @@ export default Vue.extend({
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
     },
     hasHelp(): boolean {
-      return this.hovering && CARDS_WITH_EXTERNAL_DOCUMENTATION.includes(this.card.name);
+      return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;
     },
   },
 });

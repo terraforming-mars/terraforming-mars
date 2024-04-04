@@ -99,6 +99,9 @@
   
   "Heliostat Mirror Array": "Heliostat-Spiegel-Array",
   "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "Bezahle 1 Titan. Erhalte 1 Wärme. Erhöhe deine Energie-Produktion um 2.",
+
+  "Hostile Takeover": "Feindliche Übernahme",
+  "Requires a habitat rate of 2 or higher, and a mining rate of 4 or higher. Add your player marker to a habitat tile and a mining tile owned by any opponent. Those now also count as yours. Increase your M€ production 2 steps.": "Benötigt eine Habitatwertung von 2 oder höher und eine Minienwertung von 4 oder höher. Lege deinen Spielermarker auf ein Habitat- und ein Minen-Plättchen, das einem beliebigen Gegner gehört. Diese zählen nun auch als deine. Erhöhe deine M€-Produktion um 2.",
   
   "Hypersensitive Silicon Chip Factory": "Hypersensible Silizium-Chipfabrik",
   "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "Benötigt 2 Minenplättchen auf dem Mond. Bezahle 2 Titan. Erhöhe deine M€-Produktion um 4.",
@@ -199,7 +202,7 @@
   "Requires 6 space tags.": "Benötigt 6 eigene Weltraumsymbole.",
   
   "Mooncrate Block Factory": "Mondkrater-Blockfabrik",
-  "Lunar standard projects": "Lunar-Standardprojekte",
+  "Lunar standard projects": "Lunar-Standard-Projekte",
   "Effect: When you pay for a Lunar standard project, you spend 4M€ less.": "EFFEKT: Wenn du für ein Lunar-Standardprojekt bezahlst, bezahlst du 4 M€ weniger.",
   "Requires 1 mine on The Moon.": "Benötigt 1 eigenes Minenplättchen.",
   
@@ -238,7 +241,7 @@
   
   "Rust Eating Bacteria": "Rostfressende Bakterien",
   "1 VP per 3 microbes here.": "1 SP je 3 Mikroben auf dieser Karte.",
-  "Action: Spend 1 steel to add 2 microbes here.": "Aktion: Bezahle 1 Stahl, um dieser Karte 2 Mikroben hinzuzufügen.",
+  "Action: Spend 1 steel to add 2 microbes here.": "AKTION: Bezahle 1 Stahl, um dieser Karte 2 Mikroben hinzuzufügen.",
   
   "Sinus Iridium Road Network": "Sinus Iridium Straßennetzwerk",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Reduziere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3. Bezahle 1 Stahl. Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1.",

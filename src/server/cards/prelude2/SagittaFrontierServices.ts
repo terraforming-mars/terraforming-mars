@@ -22,6 +22,7 @@ export class SagittaFrontierServices extends CorporationCard {
 
       metadata: {
         cardNumber: '',
+        hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): provide reasonable secondary tag. It's not rendered on CardRenderItemComponent.
           b.megacredits(28).production((pb) => pb.energy(1).megacredits(2)).cards(1, {secondaryTag: AltSecondaryTag.NO_TAGS}).openBrackets.noTags().closeBrackets.br;

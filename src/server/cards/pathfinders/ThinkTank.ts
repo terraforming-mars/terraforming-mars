@@ -9,9 +9,10 @@ import {GlobalParameter} from '../../../common/GlobalParameter';
 import {IPlayer} from '../../IPlayer';
 import {ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRequirementDescriptor} from '../../../common/cards/CardRequirementDescriptor';
 import {IGame} from '../../../server/IGame';
+import {Priority} from '../../../server/deferredActions/Priority';
 
 export class ThinkTank extends ActionCard implements ICard {
   constructor() {

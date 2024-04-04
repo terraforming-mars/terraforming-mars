@@ -434,12 +434,12 @@ export abstract class Card implements ICard {
         oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
         venus: behavior.global?.venus,
         oceans: behavior.ocean !== undefined ? 1 : undefined,
-
         moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
         moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
         moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
       };
     }
+    if (this.tr) source = this.tr;
     return source;
   }
 }

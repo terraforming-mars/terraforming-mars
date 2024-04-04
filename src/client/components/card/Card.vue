@@ -45,6 +45,8 @@ const CARDS_WITH_EXTERNAL_DOCUMENTATION = [
   CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
   CardName.SAGITTA_FRONTIER_SERVICES,
   CardName.PRICE_WARS,
+  CardName.PHILARES,
+  CardName.MINING_GUILD,
 ];
 
 export default Vue.extend({

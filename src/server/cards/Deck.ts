@@ -1,5 +1,5 @@
 import {SerializedDeck} from './SerializedDeck';
-import {CardFinder} from '../CardFinder';
+import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../createCard';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../LogHelper';
 import {Random} from '../../common/utils/Random';
@@ -157,10 +157,8 @@ export class CorporationDeck extends Deck<ICorporationCard> {
   }
 
   public static deserialize(d: SerializedDeck, random: Random): Deck<ICorporationCard> {
-    const cardFinder = new CardFinder();
-
-    const deck = cardFinder.corporationCardsFromJSON(d.drawPile);
-    const discarded = cardFinder.corporationCardsFromJSON(d.discardPile);
+    const deck = corporationCardsFromJSON(d.drawPile);
+    const discarded = corporationCardsFromJSON(d.discardPile);
     return new CorporationDeck(deck, discarded, random);
   }
 }
@@ -171,10 +169,8 @@ export class ProjectDeck extends Deck<IProjectCard> {
   }
 
   public static deserialize(d: SerializedDeck, random: Random): Deck<IProjectCard> {
-    const cardFinder = new CardFinder();
-
-    const deck = cardFinder.cardsFromJSON(d.drawPile);
-    const discarded = cardFinder.cardsFromJSON(d.discardPile);
+    const deck = cardsFromJSON(d.drawPile);
+    const discarded = cardsFromJSON(d.discardPile);
     return new ProjectDeck(deck, discarded, random);
   }
 }
@@ -195,10 +191,8 @@ export class PreludeDeck extends Deck<IPreludeCard> {
   }
 
   public static deserialize(d: SerializedDeck, random: Random): Deck<IPreludeCard> {
-    const cardFinder = new CardFinder();
-
-    const deck = <Array<IPreludeCard>>cardFinder.preludesFromJSON(d.drawPile);
-    const discarded = cardFinder.preludesFromJSON(d.discardPile);
+    const deck = preludesFromJSON(d.drawPile);
+    const discarded = preludesFromJSON(d.discardPile);
     return new PreludeDeck(deck, discarded, random);
   }
 }
@@ -209,10 +203,8 @@ export class CeoDeck extends Deck<ICeoCard> {
   }
 
   public static deserialize(d: SerializedDeck, random: Random): Deck<ICeoCard> {
-    const cardFinder = new CardFinder();
-
-    const deck = cardFinder.ceosFromJSON(d.drawPile);
-    const discarded = cardFinder.ceosFromJSON(d.discardPile);
+    const deck = ceosFromJSON(d.drawPile);
+    const discarded = ceosFromJSON(d.discardPile);
     return new CeoDeck(deck, discarded, random);
   }
 }

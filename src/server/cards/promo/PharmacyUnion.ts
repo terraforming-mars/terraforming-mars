@@ -7,7 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {ICard} from '../ICard';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resource} from '../../../common/Resource';

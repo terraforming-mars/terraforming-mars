@@ -1,11 +1,8 @@
 import {expect} from 'chai';
 import {AirScrappingStandardProject} from '../../../src/server/cards/venusNext/AirScrappingStandardProject';
-import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {cast, runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {Reds} from '../../../src/server/turmoil/parties/Reds';
-import {Phase} from '../../../src/common/Phase';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {testGame} from '../../TestGame';
 
@@ -56,15 +53,9 @@ describe('AirScrappingStandardProject', function() {
     expect(player.megaCredits).eq(0);
   });
 
-  it('Can not act with reds', () => {
-    player.megaCredits = 15;
-    player.game.phase = Phase.ACTION;
-    player.game.turmoil!.rulingParty = new Reds();
-    PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
-    expect(card.canAct(player)).eq(false);
-    player.megaCredits = 17;
-    expect(card.canAct(player)).eq(false);
-    player.megaCredits = 18;
-    expect(card.canAct(player)).eq(true);
+  it('Test reds', () => {
+    testRedsCosts(() => card.canAct(player), player, 15, 3, /* canAct= */ true);
+    setVenusScaleLevel(game, 30);
+    testRedsCosts(() => card.canAct(player), player, 15, 0, /* canAct= */ true);
   });
 });

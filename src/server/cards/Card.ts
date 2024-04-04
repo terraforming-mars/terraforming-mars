@@ -57,6 +57,8 @@ type SharedProperties = {
   protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
+  /** Describes where the card's TR comes from. */
+  tr?: TRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
@@ -84,7 +86,7 @@ const cardProperties = new Map<CardName, InternalProperties>();
  *    consumes very little memory.
  *
  * 2. It's key behavior is to provide a lot of the `canPlay` and `play` behavior currently
- *    in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
+ *    in player.canPlay and player.play. These will eventually be removed and
  *    put right in here.
  *
  * In order to implement this default behavior, Card subclasses should ideally not
@@ -115,9 +117,9 @@ export abstract class Card implements ICard {
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
       Card.autopopulateMetadataVictoryPoints(external);
 
-      validateBehavior(external.behavior);
-      validateBehavior(external.firstAction);
-      validateBehavior(external.action);
+      validateBehavior(external.behavior, name);
+      validateBehavior(external.firstAction, name);
+      validateBehavior(external.action, name);
       Card.validateTilesBuilt(external);
     } catch (e) {
       throw new Error(`Cannot validate ${name}: ${e}`);
@@ -209,6 +211,9 @@ export abstract class Card implements ICard {
   }
   public get reserveUnits(): Units {
     return this.properties.reserveUnits || Units.EMPTY;
+  }
+  public get tr(): TRSource | undefined {
+    return this.properties.tr;
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;
@@ -466,10 +471,10 @@ function populateCount(requirement: CardRequirementDescriptor): CardRequirementD
   return requirement;
 }
 
-export function validateBehavior(behavior: Behavior | undefined) : void {
+export function validateBehavior(behavior: Behavior | undefined, name: CardName) : void {
   function validate(condition: boolean, error: string) {
     if (condition === false) {
-      throw new Error(error);
+      throw new Error(`for ${name}: ${error}`);
     }
   }
   if (behavior === undefined) {

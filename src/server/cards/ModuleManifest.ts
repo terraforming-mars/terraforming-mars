@@ -2,7 +2,7 @@ import {CardName} from '../../common/cards/CardName';
 import {GameModule} from '../../common/cards/GameModule';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {ICorporationCard} from './corporation/ICorporationCard';
-import {ICardFactory} from './ICardFactory';
+import {CardFactorySpec} from './ICardFactory';
 import {IProjectCard} from './IProjectCard';
 import {ICard} from './ICard';
 import {IStandardProjectCard} from './IStandardProjectCard';
@@ -11,17 +11,17 @@ import {IPreludeCard} from './prelude/IPreludeCard';
 import {ICeoCard} from './ceos/ICeoCard';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 
-export type CardManifest<T extends ICard> = Partial<Record<CardName, ICardFactory<T>>>;
-export type GlobalEventManifest = Partial<Record<GlobalEventName, ICardFactory<IGlobalEvent>>>;
+export type CardManifest<T extends ICard> = Partial<Record<CardName, CardFactorySpec<T>>>;
+export type GlobalEventManifest = Partial<Record<GlobalEventName, CardFactorySpec<IGlobalEvent>>>;
 
 export namespace CardManifest {
   export function keys<T extends ICard>(manifest: CardManifest<T>): Array<CardName> {
     return Object.keys(manifest) as Array<CardName>;
   }
-  export function values<T extends ICard>(manifest: CardManifest<T>): Array<ICardFactory<T>> {
-    return Object.values(manifest) as Array<ICardFactory<T>>;
+  export function values<T extends ICard>(manifest: CardManifest<T>): Array<CardFactorySpec<T>> {
+    return Object.values(manifest) as Array<CardFactorySpec<T>>;
   }
-  export function entries<T extends ICard>(manifest: CardManifest<T>): Array<[CardName, ICardFactory<T>]> {
+  export function entries<T extends ICard>(manifest: CardManifest<T>): Array<[CardName, CardFactorySpec<T>]> {
     return keys(manifest).map((key) => {
       const value = manifest[key];
       if (value === undefined) {
@@ -36,10 +36,10 @@ export namespace GlobalEventManifest {
   export function keys(manifest: GlobalEventManifest): Array<GlobalEventName> {
     return Object.keys(manifest) as Array<GlobalEventName>;
   }
-  export function values(manifest: GlobalEventManifest): Array<ICardFactory<IGlobalEvent>> {
-    return Object.values(manifest) as Array<ICardFactory<IGlobalEvent>>;
+  export function values(manifest: GlobalEventManifest): Array<CardFactorySpec<IGlobalEvent>> {
+    return Object.values(manifest) as Array<CardFactorySpec<IGlobalEvent>>;
   }
-  export function entries(manifest: GlobalEventManifest): Array<[GlobalEventName, ICardFactory<IGlobalEvent>]> {
+  export function entries(manifest: GlobalEventManifest): Array<[GlobalEventName, CardFactorySpec<IGlobalEvent>]> {
     return keys(manifest).map((key) => {
       const value = manifest[key];
       if (value === undefined) {

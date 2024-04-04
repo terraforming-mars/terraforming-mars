@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AstraMechanica} from '../../../src/server/cards/promo/AstraMechanica';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
-import {CardFinder} from '../../../src/server/CardFinder';
+import {cardsFromJSON} from '../../../src/server/createCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
@@ -25,7 +25,7 @@ describe('AstraMechanica', () => {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new AstraMechanica();
       const [/* game */, player] = testGame(2);
-      player.playedCards = new CardFinder().cardsFromJSON([...run.playedCards]);
+      player.playedCards = cardsFromJSON([...run.playedCards]);
       expect(card.canPlay(player)).eq(run.expected);
     });
   }

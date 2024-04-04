@@ -96,7 +96,7 @@ export class MoonExpansion {
   public static addTile(player: IPlayer, spaceId: SpaceId, tile: Tile): void {
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
-      const space = moonData.moon.getSpace(spaceId);
+      const space = moonData.moon.getSpaceOrThrow(spaceId);
       if (!this.MOON_TILES.has(tile.tileType)) {
         throw new Error(`Bad tile type for the moon: ${tile.tileType}`);
       }
@@ -300,9 +300,8 @@ export class MoonExpansion {
           if (include && options?.surfaceOnly) {
             include = space.spaceType !== SpaceType.COLONY;
           }
-
           if (include && options?.ownedBy !== undefined) {
-            include = space.player === options.ownedBy;
+            include = space.player === options.ownedBy || space.coOwner === options.ownedBy;
           }
 
           return include;
@@ -327,16 +326,25 @@ export class MoonExpansion {
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
-    if (card.tilesBuilt.includes(TileType.MOON_HABITAT) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
-      titanium -= 1;
-    }
+    for (const tileBuilt of card.tilesBuilt) {
+      switch (tileBuilt) {
+      case TileType.MOON_HABITAT:
+        if (player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
+          titanium -= 1;
+        }
+        break;
 
-    if (card.tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
-      titanium -= 1;
-    }
+      case TileType.MOON_MINE:
+        if (player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
+          titanium -= 1;
+        }
+        break;
 
-    if (card.tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
-      steel = 0;
+      case TileType.MOON_ROAD:
+        if (player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+          steel = 0;
+        }
+      }
     }
 
     steel = Math.max(steel, 0);
@@ -349,7 +357,7 @@ export class MoonExpansion {
       // Each road tile on the map awards 1VP to the player owning it.
       // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.
       const moon = moonData.moon;
-      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id);
+      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id || space.coOwner?.id === player.id);
       mySpaces.forEach((space) => {
         if (space.tile !== undefined) {
           const type = space.tile.tileType;

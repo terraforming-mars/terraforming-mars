@@ -16,6 +16,12 @@
       class="board-cube"
       :class="`board-cube--${space.color}`"
     />
+    <div
+      v-if="space.coOwner !== undefined && tileView === 'show'"
+      class="board-cube-coOwner"
+      :class="`board-cube--${space.coOwner}`"
+    />
+
   </div>
 </template>
 

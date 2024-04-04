@@ -1,6 +1,7 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {PlacementType} from '../boards/PlacementType';
 
 export class PlaceGreeneryTile extends DeferredAction {

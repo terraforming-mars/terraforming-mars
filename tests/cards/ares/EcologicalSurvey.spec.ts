@@ -31,13 +31,13 @@ describe('EcologicalSurvey', () => {
 
   it('Can play', () => {
     addGreenery(player);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addGreenery(player);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addGreenery(player);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   // This doesn't test anything about this card, but about the behavior this card provides, from

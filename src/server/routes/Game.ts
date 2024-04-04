@@ -20,33 +20,32 @@ import {Response} from '../Response';
 import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
 import {durationToMilliseconds} from '../utils/durations';
 
-// TODO(kberg): Using zod might be the right approach.
 function get(): QuotaConfig {
   const defaultQuota = {limit: 1, perMs: 1}; // Effectively, no limit.
   const val = process.env.GAME_QUOTA;
   try {
-    if (val === undefined) {
-      throw new Error('Undefined quota');
+    if (val !== undefined) {
+      const struct = JSON.parse(val);
+      let {limit, per} = struct;
+      if (limit === undefined) {
+        throw new Error('limit is absent');
+      }
+      limit = Number.parseInt(limit);
+      if (isNaN(limit)) {
+        throw new Error('limit is invalid');
+      }
+      if (per === undefined) {
+        throw new Error('per is absent');
+      }
+      const perMs = durationToMilliseconds(per);
+      if (isNaN(perMs)) {
+        throw new Error('perMillis is invalid');
+      }
+      return {limit, perMs};
     }
-    const struct = JSON.parse(val);
-    let {limit, per} = struct;
-    if (limit === undefined) {
-      throw new Error('limit is absent');
-    }
-    limit = Number.parseInt(limit);
-    if (isNaN(limit)) {
-      throw new Error('limit is invalid');
-    }
-    if (per === undefined) {
-      throw new Error('per is absent');
-    }
-    const perMs = durationToMilliseconds(per);
-    if (isNaN(perMs)) {
-      throw new Error('perMillis is invalid');
-    }
-    return {limit, perMs};
+    return defaultQuota;
   } catch (e) {
-    console.log(e);
+    console.warn('While initialzing quota:', (e instanceof Error ? e.message : e));
     return defaultQuota;
   }
 }

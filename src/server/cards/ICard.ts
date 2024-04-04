@@ -37,7 +37,6 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
   return object.getCheckLoops !== undefined;
 }
 
-
 export interface ICard {
   name: CardName;
   tags: Array<Tag>;
@@ -134,7 +133,12 @@ export interface ICard {
 
   behavior?: Behavior,
   produce?(player: IPlayer): void;
-  getTRSources(player: IPlayer): TRSource;
+
+  /** Terraform Rating predicted when this card is played */
+  tr?: TRSource;
+  /** Terraform Rating predicted when this card is played */
+  computeTr?(player: IPlayer): TRSource;
+
   resourceCount: number;
   resourceType?: CardResource;
   protectedResources?: boolean;

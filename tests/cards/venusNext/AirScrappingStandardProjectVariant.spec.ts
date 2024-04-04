@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {AirScrappingStandardProjectVariant} from '../../../src/server/cards/venusNext/AirScrappingStandardProjectVariant';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -13,7 +13,7 @@ describe('AirScrappingStandardProjectVariant', function() {
 
   beforeEach(function() {
     card = new AirScrappingStandardProjectVariant();
-    [game, player] = testGame(1, {venusNextExtension: true, altVenusBoard: true});
+    [game, player] = testGame(1, {venusNextExtension: true, altVenusBoard: true, turmoilExtension: true});
   });
 
   it('option not available for regular board', function() {
@@ -97,5 +97,11 @@ describe('AirScrappingStandardProjectVariant', function() {
     expect(player.megaCredits).eq(5);
     expect(player.getTerraformRating()).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
+  });
+
+  it('Test reds', () => {
+    testRedsCosts(() => card.canAct(player), player, 15, 3, /* canAct= */ true);
+    setVenusScaleLevel(game, 30);
+    testRedsCosts(() => card.canAct(player), player, 15, 0, /* canAct= */ true);
   });
 });

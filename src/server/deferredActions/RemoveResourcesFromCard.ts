@@ -4,7 +4,8 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectOption} from '../inputs/SelectOption';
 import {ICard} from '../cards/ICard';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 

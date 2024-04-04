@@ -354,12 +354,12 @@ describe('Counter for Underworld', () => {
     const counter = new Counter(player, fake);
     expect(counter.count({underworld: {excavationMarkers: {}}})).eq(0);
 
-    game.board.getSpace(SpaceName.NOCTIS_CITY).excavator = player;
+    game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY).excavator = player;
 
     expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
     expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(1);
 
-    game.board.getSpace(SpaceName.THARSIS_THOLUS).excavator = player2;
+    game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).excavator = player2;
 
     expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
     expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(2);

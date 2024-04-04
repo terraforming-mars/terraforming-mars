@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SubterraneanSea} from '../../../src/server/cards/underworld/SubterraneanSea';
 import {testGame} from '../../TestGame';
-import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
@@ -47,5 +47,20 @@ describe('SubterraneanSea', () => {
     selectSpace.cb(selectedSpace);
 
     expect(selectedSpace.tile?.tileType).eq(TileType.OCEAN);
+  });
+
+  it('canPlay when Reds are in power', () => {
+    const card = new SubterraneanSea();
+    const [game, player, player2] = testGame(2, {underworldExpansion: true, turmoilExtension: true});
+
+    // Card requirements
+    const spaces = game.board.getAvailableSpacesOnLand(player);
+    spaces[0].excavator = player;
+
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
+
+    maxOutOceans(player2);
+
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
   });
 });

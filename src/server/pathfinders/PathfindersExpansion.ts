@@ -21,7 +21,7 @@ import {Tag} from '../../common/cards/Tag';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
-import {Priority} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
 
 export const TRACKS = PlanetaryTracks.initialize();
 

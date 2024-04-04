@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {COMMUNITY_CARD_MANIFEST} from '../src/server/cards/community/CommunityCardManifest';
-import {CardFinder} from '../src/server/CardFinder';
+import {newPrelude} from '../src/server/createCard';
 import {GameCards} from '../src/server/GameCards';
 import {CardName} from '../src/common/cards/CardName';
 import {CardManifest} from '../src/server/cards/ModuleManifest';
@@ -45,7 +45,7 @@ describe('GameCards', function() {
 
     const communityPreludes = CardManifest.keys(COMMUNITY_CARD_MANIFEST.preludeCards);
     communityPreludes.forEach((preludeName) => {
-      const preludeCard = new CardFinder().getPreludeByName(preludeName)!;
+      const preludeCard = newPrelude(preludeName)!;
       expect(preludeDeck.includes(preludeCard)).is.not.true;
     });
   });

@@ -362,6 +362,9 @@ export class Server {
       if (space.excavator !== undefined) {
         model.excavator = space.excavator.color;
       }
+      if (space.coOwner !== undefined) {
+        model.coOwner = space.coOwner.color;
+      }
 
       return model;
     });

@@ -14,35 +14,35 @@ describe('MorningStarInc', function() {
     player.setCorporationForTest(corp);
 
     setVenusScaleLevel(game, 2);
-    expect(player.simpleCanPlay(min8Card)).is.false;
-    expect(player.simpleCanPlay(max10Card)).is.true;
+    expect(min8Card.canPlay(player)).is.false;
+    expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 4);
-    expect(player.simpleCanPlay(min8Card)).is.true;
-    expect(player.simpleCanPlay(max10Card)).is.true;
+    expect(min8Card.canPlay(player)).is.true;
+    expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 6);
-    expect(player.simpleCanPlay(min8Card)).is.true;
-    expect(player.simpleCanPlay(max10Card)).is.true;
+    expect(min8Card.canPlay(player)).is.true;
+    expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 8);
-    expect(player.simpleCanPlay(min8Card)).is.true;
-    expect(player.simpleCanPlay(max10Card)).is.true;
+    expect(min8Card.canPlay(player)).is.true;
+    expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 10);
-    expect(player.simpleCanPlay(min8Card)).is.true;
-    expect(player.simpleCanPlay(max10Card)).is.true;
+    expect(min8Card.canPlay(player)).is.true;
+    expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(min8Card)).is.true;
-    expect(player.simpleCanPlay(max10Card)).is.true;
+    expect(min8Card.canPlay(player)).is.true;
+    expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 14);
-    expect(player.simpleCanPlay(min8Card)).is.true;
-    expect(player.simpleCanPlay(max10Card)).is.true;
+    expect(min8Card.canPlay(player)).is.true;
+    expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 16);
-    expect(player.simpleCanPlay(min8Card)).is.true;
-    expect(player.simpleCanPlay(max10Card)).is.false;
+    expect(min8Card.canPlay(player)).is.true;
+    expect(max10Card.canPlay(player)).is.false;
   });
 });

@@ -23,7 +23,7 @@ describe('VastitasBorealisBoard', function() {
   });
 
   it('Grants temperature bonus', () => {
-    const space = board.getSpace(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
+    const space = board.getSpaceOrThrow(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
 
     player.megaCredits = 2;
     expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).does.not.include(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);

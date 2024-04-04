@@ -366,6 +366,18 @@ describe('UnderworldExpansion', function() {
     expect(UnderworldExpansion.excavatableSpaces(player2)).does.not.include(space);
   });
 
+  it('excavatableSpaces - cannot afford ocean bonus', () => {
+    const space = UnderworldExpansion.identifiableSpaces(player1)[0];
+    space.undergroundResources = 'ocean';
+    player1.megaCredits = 3;
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.contain(space);
+
+    player1.megaCredits = 4;
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);
+  });
+
   // TODO(kberg): Test excavatablespaces override
 
   it('excavate', () => {
@@ -662,9 +674,9 @@ describe('UnderworldExpansion', function() {
 
   it('removeAllUnclaimedTokens', () => {
     const board = game.board;
-    const space = board.getSpace('30');
-    const space2 = board.getSpace('31');
-    const space3 = board.getSpace('32');
+    const space = board.getSpaceOrThrow('30');
+    const space2 = board.getSpaceOrThrow('31');
+    const space3 = board.getSpaceOrThrow('32');
 
     space.undergroundResources = 'card1';
 
@@ -686,9 +698,9 @@ describe('UnderworldExpansion', function() {
 
   it('removeUnclaimedToken', () => {
     const board = game.board;
-    const space = board.getSpace('30');
-    const space2 = board.getSpace('31');
-    const space3 = board.getSpace('32');
+    const space = board.getSpaceOrThrow('30');
+    const space2 = board.getSpaceOrThrow('31');
+    const space3 = board.getSpaceOrThrow('32');
 
     space.undergroundResources = 'card1';
 

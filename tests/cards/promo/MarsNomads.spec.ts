@@ -10,6 +10,10 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
+import {Philares} from '../../../src/server/cards/promo/Philares';
+import {EmptyBoard} from '../../ares/EmptyBoard';
+import {LandClaim} from '../../../src/server/cards/base/LandClaim';
+import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 
 describe('MarsNomads', () => {
   let card: MarsNomads;
@@ -72,7 +76,7 @@ describe('MarsNomads', () => {
     const space = board.getAvailableSpacesOnLand(player)[12];
     game.nomadSpace = space.id;
 
-    const space19 = board.getSpace('19');
+    const space19 = board.getSpaceOrThrow('19');
 
     expect(cast(card.action(player), SelectSpace).spaces).to.contain(space19);
 
@@ -81,8 +85,8 @@ describe('MarsNomads', () => {
     expect(cast(card.action(player), SelectSpace).spaces).to.not.contain(space19);
   });
 
-  it('Action gets adjacency bonus', () => {
-    const destinationSpace = game.board.getSpace('04');
+  it('Action does not gets adjacency bonus', () => {
+    const destinationSpace = game.board.getSpaceOrThrow('04');
     const adjacentSpaces = game.board.getAdjacentSpaces(destinationSpace);
 
     // Nomad will move to destinationSpace, which is next to both the current nomad space, and the natural preserve.
@@ -94,11 +98,12 @@ describe('MarsNomads', () => {
     const selectSpace = cast(card.action(player), SelectSpace);
     selectSpace.cb(destinationSpace);
 
-    expect(player.megaCredits).to.eq(1);
+    expect(player.megaCredits).to.eq(0);
+    expect(player2.megaCredits).to.eq(0);
   });
 
   it('Action does not get milestone benefit from adjacency', () => {
-    const destinationSpace = game.board.getSpace('04');
+    const destinationSpace = game.board.getSpaceOrThrow('04');
     const adjacentSpaces = game.board.getAdjacentSpaces(destinationSpace);
 
     // Nomad will move to destinationSpace, which is next to both the current nomad space, and the natural preserve.
@@ -112,13 +117,12 @@ describe('MarsNomads', () => {
     const selectSpace = cast(card.action(player), SelectSpace);
     selectSpace.cb(destinationSpace);
 
-    // Gain adjacency bonuses of all players' tiles
-    expect(player.megaCredits).to.eq(1);
+    expect(player.megaCredits).to.eq(0);
     expect(milestone.getScore(player)).eq(0);
   });
 
-  it('action gains ocean bonus', () => {
-    const destinationSpace = game.board.getSpace('04');
+  it('Action gains ocean bonus', () => {
+    const destinationSpace = game.board.getSpaceOrThrow('04');
     const adjacentSpaces = game.board.getAdjacentSpaces(destinationSpace);
 
     // Nomad will move to destinationSpace, which is next to both the current nomad space, and the ocean.
@@ -131,9 +135,9 @@ describe('MarsNomads', () => {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('can make initial placement on an ocean bonus space even without the money (Bug #6479)', () => {
+  it('Can make initial placement on an ocean bonus space even without the money (Bug #6479)', () => {
     player.megaCredits = 0;
-    const space3 = game.board.getSpace('03');
+    const space3 = game.board.getSpaceOrThrow('03');
     expect(space3.spaceType).eq(SpaceType.LAND);
     space3.bonus = [SpaceBonus.OCEAN];
 
@@ -150,5 +154,101 @@ describe('MarsNomads', () => {
     cast(player.popWaitingFor(), undefined);
     expect(game.getTemperature()).eq(-30);
     expect(player.getTerraformRating()).eq(20);
+  });
+
+  it('Compatible with Land Claim', () => {
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+
+    expect(cast(card.play(player), SelectSpace).spaces).to.include(space);
+
+    const landClaim = new LandClaim();
+    const claimLand = cast(landClaim.play(player), SelectSpace);
+
+    expect(claimLand.spaces).to.include(space);
+
+    claimLand.cb(space);
+
+    expect(cast(card.play(player), SelectSpace).spaces).to.not.include(space);
+  });
+
+  describe('Compatible with Philares', () => {
+    let philares: Philares;
+
+    beforeEach(() => {
+      game.board = EmptyBoard.newInstance();
+      philares = new Philares();
+      player2.setCorporationForTest(philares);
+    });
+
+    it('Placement does not trigger Philares', () => {
+      // Nomad will start at nomadSpace, and move to destinationSpace,
+      // which is next to both the current nomad space, and Philares.
+      const destinationSpace = game.board.getSpaceOrThrow('04');
+      const [philaresSpace, nomadSpace] = game.board.getAdjacentSpaces(destinationSpace);
+
+      game.simpleAddTile(player2, philaresSpace, {tileType: TileType.NATURAL_PRESERVE});
+      const selectSpace = cast(card.play(player), SelectSpace);
+      expect(selectSpace.spaces).contains(nomadSpace);
+      selectSpace.cb(nomadSpace);
+      expect(game.nomadSpace).eq(nomadSpace.id);
+      runAllActions(game);
+      expect(player2.popWaitingFor()).is.undefined;
+    });
+
+    it('Move does not trigger Philares', () => {
+      // Nomad will start at nomadSpace, and move to destinationSpace,
+      // which is next to both the current nomad space, and Philares.
+      const destinationSpace = game.board.getSpaceOrThrow('04');
+      const [philaresSpace, nomadSpace] = game.board.getAdjacentSpaces(destinationSpace);
+
+      game.simpleAddTile(player2, philaresSpace, {tileType: TileType.NATURAL_PRESERVE});
+      game.nomadSpace = nomadSpace.id;
+      const selectSpace = cast(card.action(player), SelectSpace);
+      expect(selectSpace.spaces).contains(destinationSpace);
+      selectSpace.cb(destinationSpace);
+      expect(game.nomadSpace).eq(destinationSpace.id);
+      runAllActions(game);
+      expect(player2.popWaitingFor()).is.undefined;
+    });
+  });
+
+  describe('Compatible with Mining Guild', () => {
+    let miningGuild: MiningGuild;
+
+    beforeEach(() => {
+      game.board = EmptyBoard.newInstance();
+      miningGuild = new MiningGuild();
+      player.setCorporationForTest(miningGuild);
+    });
+
+    it('Placement does not trigger Mining Guild', () => {
+      const space = game.board.getSpaceOrThrow('04');
+
+      const selectSpace = cast(card.play(player), SelectSpace);
+      space.bonus = [SpaceBonus.STEEL];
+      expect(selectSpace.spaces).contains(space);
+      selectSpace.cb(space);
+      runAllActions(game);
+
+      expect(game.nomadSpace).eq(space.id);
+      expect(player.steel).eq(0);
+      expect(player.production.steel).eq(0);
+    });
+
+    it('Move does not trigger Mining Guild', () => {
+      const firstSpace = game.board.getSpaceOrThrow('05');
+      const space = game.board.getSpaceOrThrow('04');
+      game.nomadSpace = firstSpace.id;
+
+      const selectSpace = cast(card.action(player), SelectSpace);
+      space.bonus = [SpaceBonus.STEEL];
+      expect(selectSpace.spaces).contains(space);
+      selectSpace.cb(space);
+      runAllActions(game);
+
+      expect(game.nomadSpace).eq(space.id);
+      expect(player.steel).eq(1);
+      expect(player.production.steel).eq(0);
+    });
   });
 });

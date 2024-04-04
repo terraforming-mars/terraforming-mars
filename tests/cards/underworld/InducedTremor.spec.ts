@@ -12,8 +12,8 @@ describe('InducedTremor', () => {
 
     cast(card.play(player), undefined);
     runAllActions(game);
-    const space = game.board.getSpace('30');
-    const neighbor = game.board.getSpace('21');
+    const space = game.board.getSpaceOrThrow('30');
+    const neighbor = game.board.getSpaceOrThrow('21');
 
     expect(space.undergroundResources).is.undefined;
     expect(neighbor.undergroundResources).is.undefined;

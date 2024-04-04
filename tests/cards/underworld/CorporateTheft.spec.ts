@@ -3,13 +3,13 @@ import {CorporateTheft} from '../../../src/server/cards/underworld/CorporateThef
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
-import {CardFinder} from '../../../src/server/CardFinder';
+import {newProjectCard} from '../../../src/server/createCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 function toCard(e: readonly [CardName, number] | CardName) {
   const [cardName, count] = typeof(e) === 'string' ? [e, 0] : e;
-  const card = new CardFinder().getProjectCardByName(cardName)!;
+  const card = newProjectCard(cardName)!;
   card.resourceCount = count;
   return card;
 }

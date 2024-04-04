@@ -17,7 +17,7 @@ import {GameOptions} from './game/GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
-import {CardFinder} from './CardFinder';
+import {newCard} from './createCard';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
 import {PRELUDE2_CARD_MANIFEST} from './cards/prelude2/Prelude2CardManifest';
@@ -40,7 +40,6 @@ import {UNDERWORLD_CARD_MANIFEST} from './cards/underworld/UnderworldCardManifes
 export class GameCards {
   private readonly gameOptions: GameOptions;
   private readonly moduleManifests: Array<ModuleManifest>;
-  private readonly cardFinder: CardFinder = new CardFinder();
 
   public constructor(gameOptions: GameOptions) {
     this.gameOptions = gameOptions;
@@ -114,7 +113,7 @@ export class GameCards {
     for (const cardName of customList) {
       const idx = cards.findIndex((c) => c.name === cardName);
       if (idx === -1) {
-        const card = this.cardFinder.getCardByName(cardName);
+        const card = newCard(cardName);
         if (card === undefined) {
           // TODO(kberg): throw an error.
           console.warn(`Unknown card: ${cardName}`);

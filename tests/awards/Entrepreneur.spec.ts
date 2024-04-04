@@ -10,7 +10,7 @@ import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {addGreenery} from '../TestingUtils';
 
 function addAdjacencyBonus(player: IPlayer, spaceId: SpaceId, adjacency: AdjacencyBonus = {bonus: [SpaceBonus.HEAT]}): void {
-  const space = player.game.board.getSpace(spaceId);
+  const space = player.game.board.getSpaceOrThrow(spaceId);
   space.tile = {tileType: TileType.GREENERY};
   space.player = player;
   space.adjacency = adjacency;

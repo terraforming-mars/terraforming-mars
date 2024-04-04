@@ -21,32 +21,32 @@ describe('CloudSeeding', () => {
   it('Cannot play if cannot reduce M€ production', () => {
     maxOutOceans(player, 3);
     player.production.add(Resource.MEGACREDITS, -5);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Cannot play if ocean requirements not met', () => {
     maxOutOceans(player, 2);
     player.production.add(Resource.HEAT, 1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Cannot play if no one has heat production', () => {
     maxOutOceans(player, 3);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     maxOutOceans(player, 3);
     player.production.add(Resource.MEGACREDITS, -4);
     player.production.add(Resource.HEAT, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play - auto select if single target', () => {
     // Meet requirements
     player2.production.add(Resource.HEAT, 1);
     maxOutOceans(player, 3);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.megacredits).to.eq(-1);

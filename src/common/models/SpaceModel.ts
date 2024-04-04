@@ -21,6 +21,7 @@ export type SpaceModel = {
   gagarin?: number; // 0 means current
   cathedral?: true; // Absent or true
   nomads?: true; // Absent or true
+  coOwner?: Color;
 
   undergroundResources?: UndergroundResourceToken;
   excavator?: Color;

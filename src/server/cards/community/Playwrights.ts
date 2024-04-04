@@ -117,7 +117,7 @@ export class Playwrights extends CorporationCard {
           };
           return card.type === CardType.EVENT &&
           // Can player.canPlay(card) replace this?
-          player.canAfford(canAffordOptions) && player.simpleCanPlay(card, canAffordOptions);
+          player.canAfford(canAffordOptions) && card.canPlay(player, canAffordOptions);
         }));
       });
     } finally {

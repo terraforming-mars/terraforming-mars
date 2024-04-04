@@ -72,7 +72,7 @@ export class StarVegas extends Card {
     const spaces = [];
     for (const spaceId of SPACE_CITIES) {
       try {
-        const space = player.game.board.getSpace(spaceId);
+        const space = player.game.board.getSpaceOrThrow(spaceId);
         if (space.tile === undefined) {
           spaces.push(space);
         }

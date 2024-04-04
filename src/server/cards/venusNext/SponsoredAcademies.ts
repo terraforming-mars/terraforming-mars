@@ -2,7 +2,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../render/CardRenderer';
 import {DrawCards} from '../../deferredActions/DrawCards';

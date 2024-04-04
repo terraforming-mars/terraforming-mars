@@ -55,7 +55,7 @@ describe('RedCity', function() {
     expect(player.canPlay(card)).is.true;
 
     // An arbitrary space.
-    const redCitySpace = board.getSpace('53');
+    const redCitySpace = board.getSpaceOrThrow('53');
 
     board.spaces.forEach((space) => {
       if (space.spaceType !== SpaceType.OCEAN) {
@@ -84,7 +84,7 @@ describe('RedCity', function() {
   });
 
   it('play', function() {
-    const redCitySpace = board.getSpace('53');
+    const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     const action = cast(card.play(player), SelectSpace);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 2}));
@@ -97,7 +97,7 @@ describe('RedCity', function() {
   });
 
   it('vps', function() {
-    const redCitySpace = board.getSpace('53');
+    const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     cast(card.play(player), SelectSpace).cb(redCitySpace);
 
@@ -117,7 +117,7 @@ describe('RedCity', function() {
   });
 
   it('cannot place greenery next to red city', function() {
-    const redCitySpace = board.getSpace('53');
+    const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     cast(card.play(player), SelectSpace).cb(redCitySpace);
     const adjacentSpaces = board.getAdjacentSpaces(redCitySpace);

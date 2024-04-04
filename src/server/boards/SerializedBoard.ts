@@ -21,4 +21,5 @@ export interface SerializedSpace {
   y: number;
   undergroundResources?: UndergroundResourceToken;
   excavator?: PlayerId;
+  coOwner?: PlayerId;
 }

@@ -43,7 +43,7 @@ describe('MareSerenitatisMine', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareSerenitatis = moonData.moon.getSpace(MoonSpaces.MARE_SERENITATIS);
+    const mareSerenitatis = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_SERENITATIS);
     expect(mareSerenitatis.player).eq(player);
     expect(mareSerenitatis.tile!.tileType).eq(TileType.MOON_MINE);
 

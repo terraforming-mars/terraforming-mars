@@ -4,6 +4,7 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 
 export class StealColonyBonuses extends DeferredAction {
+  /** Tracks the amount bonuses the player has 'stolen' */
   private bonusesRecived = 0;
 
   constructor(

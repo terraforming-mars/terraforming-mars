@@ -5,6 +5,7 @@ import {Priority} from './Priority';
 export interface IDeferredAction <T = undefined> {
   player: IPlayer;
   priority: Priority;
+  //TODO(ethandobbs) Remove this from the interface and make protected on the class
   execute(): PlayerInput | undefined;
   run(cb: () => void): void;
   andThen(cb: (param: T) => void): this;

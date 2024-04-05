@@ -19,9 +19,9 @@ describe('GameHandler', () => {
   it('Official random boards do not include fan maps', () => {
     expect(GameHandler.boardOptions(RandomBoardOption.OFFICIAL)).deep.eq([BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM]);
   });
-  it('Official random boards do include fan maps', () => {
+  it('Fully random boards do include fan maps', () => {
     expect(GameHandler.boardOptions(RandomBoardOption.ALL)).deep.eq([
-      BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM, BoardName.ARABIA_TERRA, BoardName.VASTITAS_BOREALIS, BoardName.AMAZONIS, BoardName.TERRA_CIMMERIA,
+      BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM, BoardName.UTOPIA_PLANITIA, BoardName.ARABIA_TERRA, BoardName.VASTITAS_BOREALIS, BoardName.AMAZONIS, BoardName.TERRA_CIMMERIA,
     ]);
   });
 

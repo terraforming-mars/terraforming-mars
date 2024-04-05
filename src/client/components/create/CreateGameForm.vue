@@ -569,6 +569,7 @@ export default (Vue as WithRefs<Refs>).extend({
         BoardName.ELYSIUM,
         RandomBoardOption.OFFICIAL,
         BoardName.UTOPIA_PLANITIA,
+        BoardName.VASTITAS_BOREALIS_NOVUS,
         BoardName.ARABIA_TERRA,
         BoardName.AMAZONIS,
         BoardName.TERRA_CIMMERIA,
@@ -842,6 +843,8 @@ export default (Vue as WithRefs<Refs>).extend({
         return 'create-game-board-hexagon create-game-elysium';
       case BoardName.UTOPIA_PLANITIA:
         return 'create-game-board-hexagon create-game-utopia-planitia';
+      case BoardName.VASTITAS_BOREALIS_NOVUS:
+        return 'create-game-board-hexagon create-game-vastital-borealis-novus';
       case BoardName.AMAZONIS:
         return 'create-game-board-hexagon create-game-amazonis';
       case BoardName.ARABIA_TERRA:
@@ -888,6 +891,7 @@ export default (Vue as WithRefs<Refs>).extend({
         [BoardName.ELYSIUM]: 'elysium',
         [BoardName.ARABIA_TERRA]: 'arabia-terra',
         [BoardName.UTOPIA_PLANITIA]: 'utopia-planitia',
+        [BoardName.VASTITAS_BOREALIS_NOVUS]: 'vastitas-borealis-novus',
         [BoardName.VASTITAS_BOREALIS]: 'vastitas-borealis',
         [BoardName.AMAZONIS]: 'amazonis-planatia',
         [BoardName.TERRA_CIMMERIA]: 'terra-cimmeria',

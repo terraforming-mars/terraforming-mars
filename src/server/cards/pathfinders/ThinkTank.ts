@@ -118,7 +118,7 @@ export class ThinkTank extends ActionCard implements ICard {
       if (dist <= this.resourceCount) {
         this.resourceCount -= dist;
       } else {
-        throw new Error('Think Tank distance calculation error')
+        throw new Error('Think Tank distance calculation error');
       }
       return undefined;
     }, Priority.COST));

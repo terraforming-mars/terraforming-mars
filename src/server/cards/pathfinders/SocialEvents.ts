@@ -15,7 +15,7 @@ export class SocialEvents extends Card implements IProjectCard {
       tags: [Tag.EARTH, Tag.MARS],
 
       behavior: {
-        tr: {tag: Tag.MARS, per: 2}
+        tr: {tag: Tag.MARS, per: 2},
       },
 
       metadata: {

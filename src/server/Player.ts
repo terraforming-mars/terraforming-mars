@@ -1457,7 +1457,7 @@ export class Player implements IPlayer {
   }
 
   public getWarning(card: ICard): string | undefined {
-    let warning: string | undefined; 
+    let warning: string | undefined;
     function addWarning(w: string | undefined) {
       if (w) {
         warning = warning ?? '';

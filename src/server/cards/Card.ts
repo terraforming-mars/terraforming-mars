@@ -422,7 +422,7 @@ export abstract class Card implements ICard {
 
   public getTRSources(player: IPlayer): TRSource {
     let source: TRSource = {};
-    const behavior = this.behavior
+    const behavior = this.behavior;
     if (behavior) {
       let tr: number | undefined = undefined;
       if (behavior.tr !== undefined) {

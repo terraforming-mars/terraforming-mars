@@ -16,7 +16,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       victoryPoints: 2,
 
       behavior: {
-        tr: {tag: Tag.JOVIAN}
+        tr: {tag: Tag.JOVIAN},
       },
 
       metadata: {

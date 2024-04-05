@@ -13,6 +13,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
       name: CardName.VOTE_OF_NO_CONFIDENCE,
       type: CardType.EVENT,
       cost: 5,
+      tr: {tr: 1},
 
       // TODO(kberg): this renders a delegate with a tie and a black background. On the physical card, there is
       // no black background.

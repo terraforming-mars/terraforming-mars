@@ -6,7 +6,6 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {TRSource} from '../../../common/cards/TRSource';
 
 export class MoonRoadStandardProject extends StandardProjectCard {
   constructor(properties = {
@@ -14,6 +13,7 @@ export class MoonRoadStandardProject extends StandardProjectCard {
     cost: 18,
     reserveUnits: {steel: 1},
     tilesBuilt: [TileType.MOON_ROAD],
+    tr: {moonLogistics: 1},
 
     metadata: {
       cardNumber: '',
@@ -25,10 +25,6 @@ export class MoonRoadStandardProject extends StandardProjectCard {
     },
   }) {
     super(properties);
-  }
-
-  public override getTRSources(_player: IPlayer): TRSource {
-    return {moonLogistics: 1};
   }
 
   protected override discount(player: IPlayer): number {

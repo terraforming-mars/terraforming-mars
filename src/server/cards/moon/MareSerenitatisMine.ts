@@ -19,6 +19,7 @@ export class MareSerenitatisMine extends Card {
       type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 21,
+      tr: {moonMining: 1, moonLogistics: 1},
 
       behavior: {
         production: {steel: 1, titanium: 1},

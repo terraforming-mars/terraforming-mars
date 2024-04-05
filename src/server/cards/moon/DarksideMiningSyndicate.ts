@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
-import {TRSource} from '../../../common/cards/TRSource';
 
 export class DarksideMiningSyndicate extends Card implements IProjectCard {
   constructor() {
@@ -16,6 +15,7 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.SPACE],
       cost: 18,
+      tr: {moonMining: 1},
 
       metadata: {
         description: 'Increase your titanium production 2 steps, or ' +
@@ -28,10 +28,6 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override getTRSources(_player: IPlayer): TRSource {
-    return {moonMining: 1};
   }
 
   public override bespokePlay(player: IPlayer) {

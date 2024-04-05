@@ -7,8 +7,6 @@ import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
 import {Resource} from '../../../common/Resource';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {TRSource} from '@/common/cards/TRSource';
-
 
 export class MoonHabitatStandardProject extends StandardProjectCard {
   constructor(properties = {
@@ -16,6 +14,7 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
     cost: 22,
     reserveUnits: {titanium: 1},
     tilesBuilt: [TileType.MOON_HABITAT],
+    tr: {moonHabitat: 1},
 
     metadata: {
       cardNumber: '',
@@ -27,10 +26,6 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
     },
   }) {
     super(properties);
-  }
-
-  public override getTRSources(_player: IPlayer): TRSource {
-    return {moonHabitat: 1};
   }
 
   protected override discount(player: IPlayer): number {

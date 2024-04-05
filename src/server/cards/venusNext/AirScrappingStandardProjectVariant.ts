@@ -11,6 +11,7 @@ export class AirScrappingStandardProjectVariant extends AirScrappingStandardProj
     super({
       name: CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT,
       cost: 15,
+      tr: {venus: 1},
       metadata: {
         cardNumber: 'SP1a',
         renderData: CardRenderer.builder((b) => {

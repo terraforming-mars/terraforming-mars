@@ -10,12 +10,14 @@ import {Units} from '../../common/Units';
 import {message} from '../logs/MessageBuilder';
 import {IStandardProjectCard} from './IStandardProjectCard';
 import {sum} from '../../common/utils/utils';
+import {TRSource} from '../../common/cards/TRSource';
 
 type StaticStandardProjectCardProperties = {
   name: CardName,
   cost: number,
   metadata: ICardMetadata,
   reserveUnits?: Partial<Units>,
+  tr?: TRSource,
 }
 
 export type StandardProjectCanPayWith = {
@@ -60,7 +62,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     return {
       ...canPayWith,
       cost: this.cost - this._discount(player),
-      tr: this.getTRSources(player),
+      tr: this.tr,
       auroraiData: true,
       spireScience: true,
       reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),

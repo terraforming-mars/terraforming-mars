@@ -8,7 +8,6 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
-import {TRSource} from '../../../common/cards/TRSource';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +16,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       type: CardType.EVENT,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 8,
+      tr: {moonHabitat: 1},
 
       behavior: {
         production: {megacredits: 1},
@@ -36,10 +36,6 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       },
       tilesBuilt: [TileType.LUNAR_MINE_URBANIZATION],
     });
-  }
-
-  public override getTRSources(_player: IPlayer): TRSource {
-    return {moonHabitat: 1};
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {

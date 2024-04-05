@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resource} from '../../../common/Resource';
 import {Card} from '../Card';
-import {TRSource} from '../../../common/cards/TRSource';
 
 export class RoverDriversUnion extends Card implements IProjectCard {
   constructor() {
@@ -31,10 +30,6 @@ export class RoverDriversUnion extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override getTRSources(_player: IPlayer): TRSource {
-    return {moonLogistics: 1};
   }
 
   public override bespokePlay(player: IPlayer) {

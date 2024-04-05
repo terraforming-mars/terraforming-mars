@@ -61,6 +61,14 @@ export const ELYSIUM_AWARDS = [
   new Benefactor(),
 ];
 
+export const UTOPIA_PLANITIA_AWARDS = [
+  // new Suburbian(),
+  // new Investor(),
+  // new Botanist(),
+  // new Incorporator(),
+  // new Metropolist(),
+];
+
 export const HELLAS_AWARDS = [
   new Cultivator(),
   new Magnate(),
@@ -119,6 +127,7 @@ export const ALL_AWARDS = [
   ...THARSIS_AWARDS,
   ...ELYSIUM_AWARDS,
   ...HELLAS_AWARDS,
+  ...UTOPIA_PLANITIA_AWARDS,
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
   ...MOON_AWARDS,

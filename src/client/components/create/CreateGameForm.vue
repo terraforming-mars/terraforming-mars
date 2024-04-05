@@ -165,7 +165,7 @@
 
                             <template v-for="boardName in boards">
                               <div v-bind:key="boardName">
-                                <div v-if="boardName==='arabia terra'" class="create-game-subsection-label" v-i18n>Fan-made</div>
+                                <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
                                 <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
                                 <label :for="boardName+'-checkbox'" class="expansion-button">
                                     <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
@@ -511,7 +511,7 @@ import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {GameModule} from '@/common/cards/GameModule';
-import {NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
+import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CreateGameModel} from './CreateGameModel';
 
@@ -568,6 +568,7 @@ export default (Vue as WithRefs<Refs>).extend({
         BoardName.HELLAS,
         BoardName.ELYSIUM,
         RandomBoardOption.OFFICIAL,
+        BoardName.UTOPIA_PLANITIA,
         BoardName.ARABIA_TERRA,
         BoardName.AMAZONIS,
         BoardName.TERRA_CIMMERIA,
@@ -831,22 +832,25 @@ export default (Vue as WithRefs<Refs>).extend({
         this.moonStandardProjectVariant = false;
       }
     },
-    getBoardColorClass(boardName: string): string {
-      if (boardName === BoardName.THARSIS) {
+    getBoardColorClass(boardName: BoardName | BoardNameType): string {
+      switch (boardName) {
+      case BoardName.THARSIS:
         return 'create-game-board-hexagon create-game-tharsis';
-      } else if (boardName === BoardName.HELLAS) {
+      case BoardName.HELLAS:
         return 'create-game-board-hexagon create-game-hellas';
-      } else if (boardName === BoardName.ELYSIUM) {
+      case BoardName.ELYSIUM:
         return 'create-game-board-hexagon create-game-elysium';
-      } else if (boardName === BoardName.AMAZONIS) {
+      case BoardName.UTOPIA_PLANITIA:
+        return 'create-game-board-hexagon create-game-utopia-planitia';
+      case BoardName.AMAZONIS:
         return 'create-game-board-hexagon create-game-amazonis';
-      } else if (boardName === BoardName.ARABIA_TERRA) {
+      case BoardName.ARABIA_TERRA:
         return 'create-game-board-hexagon create-game-arabia-terra';
-      } else if (boardName === BoardName.TERRA_CIMMERIA) {
+      case BoardName.TERRA_CIMMERIA:
         return 'create-game-board-hexagon create-game-terra-cimmeria';
-      } else if (boardName === BoardName.VASTITAS_BOREALIS) {
+      case BoardName.VASTITAS_BOREALIS:
         return 'create-game-board-hexagon create-game-vastitas-borealis';
-      } else {
+      default:
         return 'create-game-board-hexagon create-game-random';
       }
     },
@@ -883,6 +887,7 @@ export default (Vue as WithRefs<Refs>).extend({
         [BoardName.HELLAS]: 'hellas',
         [BoardName.ELYSIUM]: 'elysium',
         [BoardName.ARABIA_TERRA]: 'arabia-terra',
+        [BoardName.UTOPIA_PLANITIA]: 'utopia-planitia',
         [BoardName.VASTITAS_BOREALIS]: 'vastitas-borealis',
         [BoardName.AMAZONIS]: 'amazonis-planatia',
         [BoardName.TERRA_CIMMERIA]: 'terra-cimmeria',

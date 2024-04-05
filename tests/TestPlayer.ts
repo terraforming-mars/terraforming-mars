@@ -89,6 +89,6 @@ export class TestPlayer extends Player {
   }
 
   public getPlayableCardsForTest(): Array<IProjectCard> {
-    return this.getPlayableCards().map((entry) => entry.card);
+    return this.getPlayableCards();
   }
 }

@@ -49,7 +49,7 @@ describe('StripMine', function() {
     expect(player.canPlay(card)).is.false;
 
     player.megaCredits += 6; // Payment for Reds tax
-    expect(player.canPlay(card)).deep.eq({redsCost: 6});
+    expect(player.canPlay(card)).is.true;
 
     player.megaCredits = 5; // Cannot play as cannot afford Reds tax in MC
     player.steel = 30;

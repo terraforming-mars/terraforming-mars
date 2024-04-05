@@ -7,9 +7,9 @@ import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns'
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
 import {cast, runAllActions} from '../../TestingUtils';
-import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Payment} from '../../../src/common/inputs/Payment';
+import { SelectProjectCardToPlay } from '../../../src/server/inputs/SelectProjectCardToPlay';
 
 describe('ValuableGases', function() {
   let card: ValuableGases;
@@ -46,9 +46,13 @@ describe('ValuableGases', function() {
     expect(selectProjectCardToPlay.cards.map((card) => card.name)).has.members([CardName.LOCAL_SHADING, CardName.FLOATING_HABS]);
     expect(player.megaCredits).eq(10);
 
-    selectProjectCardToPlay.payAndPlay(localShading, {
-      ...Payment.EMPTY,
-      megaCredits: localShading.cost,
+    selectProjectCardToPlay.process({
+      type: 'projectCard',
+      card: localShading.name, 
+      payment: {
+        ...Payment.EMPTY,
+        megaCredits: localShading.cost,
+      }
     });
 
     expect(localShading.resourceCount).eq(5);

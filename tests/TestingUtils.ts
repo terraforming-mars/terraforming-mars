@@ -10,7 +10,7 @@ import {Log} from '../src/common/logs/Log';
 import {Greens} from '../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../src/server/turmoil/parties/Reds';
-import {CanPlayResponse, IProjectCard} from '../src/server/cards/IProjectCard';
+import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
@@ -21,6 +21,7 @@ import {PartyName} from '../src/common/turmoil/PartyName';
 import {IPlayer} from '../src/server/IPlayer';
 import {CardRequirements} from '../src/server/cards/requirements/CardRequirements';
 import {Warning} from '../src/common/cards/Warning';
+import { TRSource } from '@/common/cards/TRSource';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: IPlayer, toValue: number = constants.MAX_OCEAN_TILES): Array<Space> {
@@ -136,7 +137,7 @@ export function formatMessage(message: Message | string): string {
  * @param passingDelta additional money required to take this action when Reds are in power.. Typically a multiple of 3
  * @param canAct set to true when cb calls canAct, which returns different results from canPlay. At the moment.
  */
-export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number, canAct: boolean = false) {
+export function testRedsCosts(cb: () => boolean, player: IPlayer, initialMegacredits: number, passingDelta: number, _canAct: boolean = false) {
   const turmoil = Turmoil.getTurmoil(player.game);
 
   {
@@ -160,11 +161,7 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, player.game);
     player.megaCredits = initialMegacredits + passingDelta;
-    if (passingDelta > 0 && canAct === false) {
-      expect(cb(), 'Reds in power, can afford').deep.eq({redsCost: passingDelta});
-    } else {
-      expect(cb(), 'Reds in power, can afford').is.true;
-    }
+    expect(cb(), 'Reds in power, can afford').is.true
   }
 }
 
@@ -179,6 +176,9 @@ class FakeCard implements IProjectCard {
       return true;
     }
     return CardRequirements.compile(this.requirements).satisfies(player);
+  }
+  public getTRSources(_player: IPlayer): TRSource {
+    return {};
   }
   public play() {
     return undefined;

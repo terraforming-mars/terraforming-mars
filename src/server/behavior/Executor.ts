@@ -39,6 +39,7 @@ import {CardName} from '../../common/cards/CardName';
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
     const ctx = new Counter(player, card);
+    const TRSource = card.getTRSources(player, behavior);
     const game = player.game;
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
@@ -109,7 +110,7 @@ export class Executor implements BehaviorExecutor {
         if (!player.canAfford({
           cost: 0,
           reserveUnits: Units.of({heat: spend.heat}),
-          tr: card.getTRSources(player),
+          tr: TRSource,
         })) {
           return false;
         }

@@ -1441,15 +1441,12 @@ export class Player implements IPlayer {
       }
     }
 
-    const maxPayable = this.maxSpendable(reserveUnits);
     const redsCost = options.tr !== undefined ? this.getRedsCost(options.tr) : 0;
-    if (redsCost > 0) {
-      const usableForRedsCost = this.payingAmount(maxPayable, {});
-      if (usableForRedsCost < redsCost) {
-        return false;
-      }
+    if (this.spendableMegacredits() < redsCost) {
+      return false;
     }
 
+    const maxPayable = this.maxSpendable(reserveUnits);
     const usable = this.payingAmount(maxPayable, options);
 
     const canAfford = options.cost + redsCost <= usable;

@@ -420,27 +420,26 @@ export abstract class Card implements ICard {
     return 0;
   }
 
-  public getTRSources(player: IPlayer): TRSource {
-    let source: TRSource = {};
-    const behavior = this.behavior;
+  public getTRSources(player: IPlayer, b?: Behavior): TRSource {
+    if (this.tr && b === (this.behavior || undefined)) return this.tr;
+    const behavior = b ?? this.behavior
     if (behavior) {
       let tr: number | undefined = undefined;
       if (behavior.tr !== undefined) {
         tr = typeof(behavior.tr) === 'number' ? behavior.tr : new Counter(player, this).count(behavior.tr);
       }
-      source = {
+      return {
         tr: tr,
         temperature: behavior.global?.temperature,
         oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
         venus: behavior.global?.venus,
-        oceans: behavior.ocean !== undefined ? 1 : undefined,
+        oceans: behavior.ocean !== undefined ? behavior.ocean.count ?? 1 : undefined,
         moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
         moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
         moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
       };
     }
-    if (this.tr) source = this.tr;
-    return source;
+    return {};
   }
 }
 

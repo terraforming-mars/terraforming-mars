@@ -8,10 +8,9 @@ import {ArchaeBacteria} from '../../../src/server/cards/base/ArchaeBacteria';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {BreathingFilters} from '../../../src/server/cards/base/BreathingFilters';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
-import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
-import {Payment} from '../../../src/common/inputs/Payment';
 import {Resource} from '../../../src/common/Resource';
 import {range} from '../../../src/common/utils/utils';
+import { Payment } from '../../../src/common/inputs/Payment';
 
 describe('ThinkTank', () => {
   let thinkTank: ThinkTank;
@@ -41,7 +40,7 @@ describe('ThinkTank', () => {
     expect(thinkTank.resourceCount).eq(1);
   });
 
-  it('canPlay, temperature, positive', () => {
+  it('canPlay, positive', () => {
     // Temperature must be -10 or more.
     const bushes = new Bushes();
 
@@ -52,16 +51,18 @@ describe('ThinkTank', () => {
     expect(bushes.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 1;
-    expect(bushes.canPlay(player)).deep.eq({thinkTankResources: 1});
+    expect(bushes.canPlay(player)).is.true;
+    expect(thinkTank.distance(bushes, player)).deep.eq(1);
 
     setTemperature(game, -14);
     expect(bushes.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 2;
-    expect(bushes.canPlay(player)).deep.eq({thinkTankResources: 2});
+    expect(bushes.canPlay(player)).is.true;
+    expect(thinkTank.distance(bushes, player)).deep.eq(2);
   });
 
-  it('canPlay, temperature, negative', () => {
+  it('canPlay, negative', () => {
     // Temperature must be -18 or colder.
     const archaeBacteria = new ArchaeBacteria();
 
@@ -72,69 +73,29 @@ describe('ThinkTank', () => {
     expect(archaeBacteria.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 1;
-    expect(archaeBacteria.canPlay(player)).deep.eq({thinkTankResources: 1});
+    expect(archaeBacteria.canPlay(player)).is.true;
 
     setTemperature(game, -14);
     expect(archaeBacteria.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 2;
-    expect(archaeBacteria.canPlay(player)).deep.eq({thinkTankResources: 2});
+    expect(archaeBacteria.canPlay(player)).is.true;
   });
 
-  it('canPlay, oxygen', () => {
+  it('Resources get removed', () => {
     // Breathing filters requires 7% oxygen
     const breathingFilters = new BreathingFilters();
 
-    setOxygenLevel(game, 7);
+    setOxygenLevel(game, 5);
+    expect(breathingFilters.canPlay(player)).is.false;
+
+    thinkTank.resourceCount = 4;
     expect(breathingFilters.canPlay(player)).is.true;
 
-    setOxygenLevel(game, 6);
-    expect(breathingFilters.canPlay(player)).is.false;
-
-    thinkTank.resourceCount = 1;
-    expect(breathingFilters.canPlay(player)).deep.eq({thinkTankResources: 1});
-
-    setOxygenLevel(game, 5);
-    expect(breathingFilters.canPlay(player)).is.false;
-
-    thinkTank.resourceCount = 2;
-    expect(breathingFilters.canPlay(player)).deep.eq({thinkTankResources: 2});
-  });
-
-  it('effect', () => {
-    // Breathing filters requires 7% oxygen
-    const breathingFilters = new BreathingFilters();
-    player.cardsInHand.push(breathingFilters);
-    player.megaCredits = breathingFilters.cost;
-
-    setOxygenLevel(game, 5);
-    thinkTank.resourceCount = 3;
-    const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    expect(selectProjectCardToPlay.cards).includes(breathingFilters);
-    selectProjectCardToPlay.process({
-      type: 'projectCard',
-      card: breathingFilters.name,
-      payment: Payment.of({megaCredits: breathingFilters.cost}),
-    });
-    expect(thinkTank.resourceCount).eq(1);
-  });
-
-  it('effect ', () => {
-    // Breathing filters requires 7% oxygen
-    const breathingFilters = new BreathingFilters();
-    player.cardsInHand.push(breathingFilters);
-    player.megaCredits = breathingFilters.cost;
-
-    setOxygenLevel(game, 5);
-    thinkTank.resourceCount = 3;
-    const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    expect(selectProjectCardToPlay.cards).includes(breathingFilters);
-    selectProjectCardToPlay.process({
-      type: 'projectCard',
-      card: breathingFilters.name,
-      payment: Payment.of({megaCredits: breathingFilters.cost}),
-    });
-    expect(thinkTank.resourceCount).eq(1);
+    player.megaCredits += breathingFilters.cost;
+    player.checkPaymentAndPlayCard(breathingFilters, Payment.of({megaCredits: breathingFilters.cost}));
+    runAllActions(game);
+    expect(thinkTank.resourceCount).eq(2);
   });
 
   // Effect on Ocean City when no oceans exist.
@@ -157,7 +118,7 @@ describe('ThinkTank', () => {
 
     thinkTank.resourceCount = 5;
 
-    expect(oceanCity.canPlay(player)).deep.eq({thinkTankResources: 5});
+    expect(thinkTank.distance(oceanCity, player)).deep.eq(5);
 
     game.removeTile(ocean.id);
     expect(game.board.getOceanSpaces()).is.empty;

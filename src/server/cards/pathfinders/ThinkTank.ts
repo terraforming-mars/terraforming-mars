@@ -88,7 +88,7 @@ export class ThinkTank extends ActionCard implements ICard {
     return 0;
   }
 
-  private distance(card: ICard, player: IPlayer): number {
+  public distance(card: ICard, player: IPlayer): number {
     let dist = 0;
     card.requirements.forEach((req) => {
       for (const key in req) {

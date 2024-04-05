@@ -9,7 +9,6 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
-import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -94,8 +93,7 @@ describe('StratosphericBirds', () => {
 
     expect(card.canPlay(player)).is.true;
 
-    const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 12});
+    player.checkPaymentAndPlayCard(card, {...Payment.EMPTY, megaCredits: 12});
     runAllActions(game); // Remove floater
     cast(player.popWaitingFor(), undefined);
     expect(aerialMappers.resourceCount).to.eq(0);
@@ -120,13 +118,11 @@ describe('StratosphericBirds', () => {
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
-      const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-      selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
+      player.checkPaymentAndPlayCard(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
-    const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 12});
+    player.checkPaymentAndPlayCard(card, {...Payment.EMPTY, megaCredits: 12});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
   });
@@ -143,8 +139,7 @@ describe('StratosphericBirds', () => {
     expect(card.canPlay(player)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card
-    const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
+    player.checkPaymentAndPlayCard(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
     expect(deuteriumExport.resourceCount).to.eq(0);

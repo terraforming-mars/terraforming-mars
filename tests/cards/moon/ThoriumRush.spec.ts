@@ -67,21 +67,21 @@ describe('ThoriumRush', () => {
     player.megaCredits = card.cost + 8;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 9;
-    expect(player.canPlay(card)).deep.eq({redsCost: 9});
+    expect(player.canPlay(card)).is.true;
 
     moonData.miningRate = 8;
 
     player.megaCredits = card.cost + 5;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 6;
-    expect(player.canPlay(card)).deep.eq({redsCost: 6});
+    expect(player.canPlay(card)).is.true;
 
     moonData.habitatRate = 8;
 
     player.megaCredits = card.cost + 2;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 3;
-    expect(player.canPlay(card)).deep.eq({redsCost: 3});
+    expect(player.canPlay(card)).is.true;
 
     moonData.logisticRate = 8;
 

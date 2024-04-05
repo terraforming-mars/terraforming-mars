@@ -28,10 +28,7 @@ describe('SelectProjectCardToPlay', function() {
   it('Simple', function() {
     const selectProjectCardToPlay = new SelectProjectCardToPlay(
       player,
-      [
-        {card: aquiferPumping},
-        {card: ioMiningIndustries},
-      ],
+      [aquiferPumping, ioMiningIndustries],
     ).andThen(cb);
 
     expect(() => selectProjectCardToPlay.process({

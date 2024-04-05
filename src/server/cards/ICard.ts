@@ -138,7 +138,7 @@ export interface ICard {
   tr?: TRSource;
   /** Get TR sources from 'tr', or determine sources from 'behavior'
    * If needed, this function can be overrided by a card for more complicated computed TR */
-  getTRSources(player: IPlayer): TRSource;
+  getTRSources(player: IPlayer, b?: Behavior): TRSource;
 
   resourceCount: number;
   resourceType?: CardResource;

@@ -98,7 +98,7 @@ describe('Odyssey', () => {
     expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
     expect(player.production.heat).eq(0);
 
-    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
+    player.checkPaymentAndPlayCard(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost}, 'discard');
     runAllActions(game);
 
     expect(player.production.heat).eq(2);
@@ -113,12 +113,11 @@ describe('Odyssey', () => {
     player.megaCredits = 50;
 
     player.playedCards = [importOfAdvancedGHG, mediaGroup];
-    const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
 
     expect(player.production.heat).eq(0);
     expect(player.megaCredits).eq(50);
 
-    selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: 9});
+    player.checkPaymentAndPlayCard(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: 9}, 'discard');
     runAllActions(game);
 
     expect(player.production.heat).eq(2);
@@ -133,7 +132,11 @@ describe('Odyssey', () => {
 
     const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectProjectCardToPlay.cards).includes(indenturedWorkers);
-    selectProjectCardToPlay.payAndPlay(indenturedWorkers, Payment.of({})); // Indentured workers costs 0.
+    selectProjectCardToPlay.process({
+      type: 'projectCard',
+      card: indenturedWorkers.name,
+      payment: Payment.of({}),
+    });
     runAllActions(game);
     const deimosDown = new DeimosDown();
 
@@ -176,7 +179,7 @@ describe('Odyssey', () => {
     player.addActionThisGeneration(odyssey.name); // This is played after `action` as it matches code behavior.
     expect(selectProjectCardToPlay.cards.map((c) => c.name)).deep.eq([projectInspection.name]);
 
-    const playAction = selectProjectCardToPlay.payAndPlay(projectInspection, Payment.EMPTY);
+    const playAction = player.checkPaymentAndPlayCard(projectInspection, Payment.EMPTY, 'discard');
     expect(playAction).is.undefined;
     runAllActions(game);
     const selectAction = cast(player.popWaitingFor(), SelectCard);

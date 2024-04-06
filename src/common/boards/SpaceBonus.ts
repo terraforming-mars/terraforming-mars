@@ -21,11 +21,16 @@ export enum SpaceBonus {
     SCIENCE, // 11
     ENERGY_PRODUCTION, // 12
 
-    // Vastitas Borealis-specific
+    // Vastitas Borealis-specific (and Terra Cimmeria)
     TEMPERATURE, // 13
+
     // Amazonis-specific
     _RESTRICTED, // 14
     ASTEROID, // 15 // Used by Deimos Down Ares
+
+    // Terra Cimerria-specific
+    DELEGATE, // 16
+
 }
 
 const TO_STRING_MAP: Record<SpaceBonus, string> = {
@@ -45,6 +50,7 @@ const TO_STRING_MAP: Record<SpaceBonus, string> = {
   [SpaceBonus.TEMPERATURE]: 'Temperature',
   [SpaceBonus._RESTRICTED]: 'UNUSED',
   [SpaceBonus.ASTEROID]: 'Asteroid',
+  [SpaceBonus.DELEGATE]: 'Delegate',
 };
 
 export namespace SpaceBonus {

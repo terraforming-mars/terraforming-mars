@@ -126,6 +126,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
       push(VASTITAS_BOREALIS_MILESTONES, VASTITAS_BOREALIS_AWARDS);
       break;
     case BoardName.UTOPIA_PLANITIA:
+    case BoardName.VASTITAS_BOREALIS_NOVUS:
       // push(UTOPIA_PLANITIA_MILESTONES, UTOPIA_PLANITIA_AWARDS);
       drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
       break;

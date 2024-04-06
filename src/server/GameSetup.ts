@@ -19,6 +19,7 @@ import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {UtopiaPlanitiaBoard} from './boards/UtopiaPlanitiaBoard';
+import {VastitasBorealisNovusBoard} from './boards/VastitasBorealisNovusBoard';
 
 type BoardFactory = {
   newInstance: (gameOptions: GameOptions, rng: Random) => MarsBoard;
@@ -30,6 +31,7 @@ const boards: Record<BoardName, BoardFactory> = {
   [BoardName.HELLAS]: HellasBoard,
   [BoardName.ELYSIUM]: ElysiumBoard,
   [BoardName.UTOPIA_PLANITIA]: UtopiaPlanitiaBoard,
+  [BoardName.VASTITAS_BOREALIS_NOVUS]: VastitasBorealisNovusBoard,
   [BoardName.AMAZONIS]: AmazonisBoard,
   [BoardName.ARABIA_TERRA]: ArabiaTerraBoard,
   [BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard,

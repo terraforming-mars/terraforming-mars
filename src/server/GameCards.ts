@@ -133,6 +133,7 @@ export class GameCards {
     }
 
     cards = this.filterBannedCards(cards);
+    cards = this.addCustomCards(cards, this.gameOptions.includedCards);
     cards = this.filterReplacedCards(cards);
     return cards;
   }

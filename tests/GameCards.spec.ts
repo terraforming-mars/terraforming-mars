@@ -76,7 +76,7 @@ describe('GameCards', function() {
     expect(ceoNames).not.to.contain(CardName.NEIL); // No Moon
   });
 
-  it('correctly removes banned cards', function () {
+  it('correctly removes banned cards', function() {
     const gameOptions: GameOptions = {
       ...DEFAULT_GAME_OPTIONS,
       corporateEra: true,
@@ -86,7 +86,7 @@ describe('GameCards', function() {
     expect(names).to.not.contain(CardName.SOLAR_WIND_POWER);
   });
 
-  it('correctly includes the included cards', function () {
+  it('correctly includes the included cards', function() {
     const gameOptions: GameOptions = {
       ...DEFAULT_GAME_OPTIONS,
       corporateEra: true,
@@ -95,6 +95,5 @@ describe('GameCards', function() {
     const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
     expect(names).to.contain(CardName.VENUSIAN_INSECTS);
   });
-
 });
 

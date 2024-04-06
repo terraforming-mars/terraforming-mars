@@ -228,7 +228,7 @@ describe('Turmoil', function() {
   // this test is fundementally flawed because adding oceans to the board gives the player placement bonuses
   // TODO(ethandobbs): Add a system to add oceans to the board in tests independent of the player.
 
-  /*it('Cannot play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
+  /* it('Cannot play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     // Both of these cards cost 23MC.
     const iceAsteroid = new IceAsteroid();

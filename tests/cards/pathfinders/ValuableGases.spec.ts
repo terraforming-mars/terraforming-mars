@@ -9,7 +9,7 @@ import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
 import {cast, runAllActions} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Payment} from '../../../src/common/inputs/Payment';
-import { SelectProjectCardToPlay } from '../../../src/server/inputs/SelectProjectCardToPlay';
+import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 
 describe('ValuableGases', function() {
   let card: ValuableGases;
@@ -48,11 +48,11 @@ describe('ValuableGases', function() {
 
     selectProjectCardToPlay.process({
       type: 'projectCard',
-      card: localShading.name, 
+      card: localShading.name,
       payment: {
         ...Payment.EMPTY,
         megaCredits: localShading.cost,
-      }
+      },
     });
 
     expect(localShading.resourceCount).eq(5);

@@ -21,7 +21,7 @@ import {PartyName} from '../src/common/turmoil/PartyName';
 import {IPlayer} from '../src/server/IPlayer';
 import {CardRequirements} from '../src/server/cards/requirements/CardRequirements';
 import {Warning} from '../src/common/cards/Warning';
-import { TRSource } from '@/common/cards/TRSource';
+import {TRSource} from '../src/common/cards/TRSource';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: IPlayer, toValue: number = constants.MAX_OCEAN_TILES): Array<Space> {
@@ -161,7 +161,7 @@ export function testRedsCosts(cb: () => boolean, player: IPlayer, initialMegacre
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, player.game);
     player.megaCredits = initialMegacredits + passingDelta;
-    expect(cb(), 'Reds in power, can afford').is.true
+    expect(cb(), 'Reds in power, can afford').is.true;
   }
 }
 

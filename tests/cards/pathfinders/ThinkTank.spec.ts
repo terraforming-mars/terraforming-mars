@@ -10,7 +10,7 @@ import {BreathingFilters} from '../../../src/server/cards/base/BreathingFilters'
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {Resource} from '../../../src/common/Resource';
 import {range} from '../../../src/common/utils/utils';
-import { Payment } from '../../../src/common/inputs/Payment';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('ThinkTank', () => {
   let thinkTank: ThinkTank;

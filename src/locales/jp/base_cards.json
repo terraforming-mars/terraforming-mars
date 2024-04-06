@@ -17,39 +17,11 @@
 
     "Oxygen must be 6% or less.": "条件：酸素6%以下",
 
-    "Aerospace Mission": "",
-    "Place 2 colonies. Pay 14 M€.": "",
-
-    "Executive Order": "",
-    "PLAY": "",
-    "Draw 4 global events. Play 1 as the CURRENT GLOBAL EVENT and discard the rest. Place 2 delegates in any party. Gain 10 M€.": "",
-
-    "By-Election": "",
-    "set ruling party": "",
-    "Set the ruling party to one of your choice. Gain 1 influence.": "",
-
-    "Political Uprising": "",
-    "Place 4 delegates in any parties. Draw a Turmoil card.": "",
-
-    "Research Grant": "",
-    "Gain 8 M€.": "",
-
-    "Trade Advance":"",
-    "[ solo": "",
-    "Trade all colonies with": "",
-    "Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "",
-
-    "Valuable Gases": "",
-    "Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.": "",
-
-    "Venus First": "",
-    "Raise Venus 2 steps. Draw 2 Venus cards from the deck.": "",
-
     "Inventors' Guild": "発明家ギルド",
     "Action: Look at the top card and either buy it or discard it": "アクション：デッキトップを1枚確認し3MCで購入するか、そのまま捨てる.",
 
     "Martian Rails": "火星鉄道",
-    "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "アクション：1電力支払う. 火星上の都市数分のMCを獲得.",
+    "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "アクション：1電力支払う. 火星上の都市数分、1MC獲得.",
 
     "Capital": "首都",
     "2 Oceans": "海洋2枚",
@@ -444,7 +416,7 @@
     "1 VP per 2 animals on this card.": "このカード上の2動物毎に1VP.",
 
     "Zeppelins": "飛行船",
-    "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "条件：酸素5%以上. 火星上の都市数分のMC産出+1.",
+    "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "条件：酸素5%以上. 火星上の都市数分、MC産出+1.",
 
     "Worms": "ミミズ",
     "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": "条件：酸素4%以上. 微生物タグ2つ毎に植物産出+1.",

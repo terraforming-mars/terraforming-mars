@@ -1,190 +1,198 @@
 {
-  "Floyd Continuum": "",
+  "Soil Enrichment": "土壌強化",
+  "Spend 1 microbe from ANY of your cards to gain 5 plants": "1微生物を支払う. 5植物獲得.",
+  
+  "Icy Impactors": "凍結衝突体",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "アクション：10M€支払い、このカード上に2小惑星追加. ※チタンでの支払い可能.",
+  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "アクション：このカード上から1小惑星を除去し、海洋配置. 配置場所はその世代の1番手が決める.",
+  
+  "Floyd Continuum": "フロイド連続体",
   "Action: Gain 3 M€ per completed terraforming parameter.": "アクション：完了済みのグローバルパラメーター1つ毎に3MC獲得.",
-
-  "Martian Lumber Corp": "",
+  "FAN NOTE: This will apply to Venus but not The Moon.": "拡張注記：酸素、温度、海洋、金星の4種のみ参照。ファン拡張パラメーターは除外.",
+  
+  "Martian Lumber Corp": "火星木材",
   "Effect: When playing a building tag, plants may be used as 3 M€ each.": "効果：土建タグプレイ時、1植物を3MCとして支払ってもよい(複数OK).",
   "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "条件：緑地タイルを2枚以上所持. 植物産出+1.",
-
-  "Solar Logistics": "",
+  
+  "Solar Logistics": "太陽物流",
   "Effect: When you play an Earth tag, you pay 2 M€ less.": "効果：地球タグカードのプレイコスト-2MC.",
   "Effect: When any player plays a space event, draw a card.": "効果：宇宙タグ付きイベントカードがプレイされる毎に1ドロー.",
   "Gain 2 titanium.": "2チタン獲得.",
-
-  "Teslaract": "",
+  
+  "Teslaract": "テスラ制御技術",
   "Action: Spend 1 energy production to gain 1 plant production.": "アクション：電力産出-1し、植物産出+1.",
   "Raise your TR 1 step.": "TR+1段階.",
-
-  "Red Ships": "",
+  
+  "Red Ships": "赤き船",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "アクション：海洋に隣接する都市タイルと特殊タイルの合計数分、1MC獲得.",
   "Requires 4% oxygen.": "条件：酸素4%以上.",
-
-  "Neptunian Power Consultants": "",
+  
+  "Neptunian Power Consultants": "海王星電力コンサルタント",
   "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "効果：海洋1枚配置された時、5MC支払っても良い. ※建材での支払い可能. 支払った場合、電力産出+1し、このカード上に1ハイドロリソース追加.",
   "1 VP per hydroelectric resource on this card": "このカード上の1ハイドロリソース毎に1VP.",
-
-  "Mars Nomads": "",
+  
+  "Mars Nomads": "火星遊牧民",
   "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "アクション：遊牧民を隣接する空きマスへ移動し、そのマスから配置ボーナスを獲得.(海洋隣接ボーナスも含む)",
   "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "遊牧民を空きマスに配置. ※遊牧民がいるマスに配置できない",
-
-  "Kaguya Tech": "",
+  
+  "Kaguya Tech": "カグヤテック",
   "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "MC産出+2. 1ドロー. 自身の緑地タイル1つを都市タイルと置き換える. この時、配置ルールは全て無視し、配置ボーナスを獲得.",
-
-  "Homeostasis Bureau": "",
+  
+  "Homeostasis Bureau": "恒常性事務局",
   "Effect: When you raise the temperature, gain 3 M€.": "効果：温度+1段階する毎に3MC獲得.",
   "Increase your heat production 2 steps.": "温熱産出+2.",
-
-  "Hermetic Order of Mars": "",
+  
+  "Hermetic Order of Mars": "火星密教団",
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "条件：酸素4%以下. MC産出+2. 所有するタイルに隣接する空きマス毎に1MC獲得.",
-
-  "St. Joseph of Cupertino Mission": "",
+  
+  "St. Joseph of Cupertino Mission": "クパチーノ聖ヨゼフ伝道所",
   "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "アクション：5MCを支払い(※建材での支払い可能)、任意の都市上に大聖堂を1つ配置. 配置された都市の所有者は2MC支払い、1ドローしてもよい. 同一都市上には大聖堂1つ迄配置可能. ",
   "1 VP per City with a Cathedral in it.": "配置した大聖堂1つ毎に1VP.",
-
-  "Cyberia Systems": "",
+  
+  "Cyberia Systems": "サイベリア・システム",
   "Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.": "建材産出+2. 異なる土建タグカード2枚を選択し、その産出効果をコピー",
-
-  "Carbon Nanosystems": "",
+  
+  "Carbon Nanosystems": "カーボンナノシステム",
   "Effect: When you play a science tag, including this, add a graphene resource here.": "効果：科学タグをプレイ時、このカード上に1グラフェン追加.",
   "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "効果：宇宙タグ または 都市タグプレイ時、このカード上のグラフェンを4MCとして支払ってもよい.",
-
-  "Astra Mechanica": "",
+  
+  "Astra Mechanica": "アストラメカニカ",
+  "Fan note: You may not choose cards that return cards to your hand.": "ファン拡張：カードを手札に戻すカードを選ぶことはできない.",
   "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "プレイ済みのイベントカード2枚を手札に戻す. ※特殊タイルを配置するカードは不可.",
-
-  "Aqueduct Systems": "",
+  
+  "Aqueduct Systems": "水路システム",
   "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "条件：海洋に隣接する都市タイルを所持. 土建タグカードを3枚入手.",
-
-  "Directed Heat Usage": "",
+    
+  "Directed Heat Usage": "誘導熱利用",
   "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "アクション：3温熱を支払い、4MC または 2植物獲得.",
-
-  "Supercapacitors": "",
+  
+  "Supercapacitors": "スーパーコンデンサ",
   "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "効果：電力→温熱への自動変換を任意個数へ変更.",
   "Increase M€ production 1 step.": "MC産出+1.",
-
-  "Robot Pollinators": "",
+  
+  "Robot Pollinators": "受粉媒介ロボット",
   "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "条件：酸素4%以上. 植物産出+1. 植物タグ1つ毎に1植物獲得.",
-
-  "16 Psyche": "",
+  
+  "16 Psyche": "プシケ",
   "Increase titanium production 2 steps. Gain 3 titanium.": "チタン産出+2. 3チタン獲得.",
-
-  "Comet Aiming": "",
+  
+  "Comet Aiming": "彗星誘導",
   "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "アクション：1チタンを支払い、1小惑星獲得.",
   "Action: Remove 1 asteroid here to place an ocean.": "アクション：このカード上から1小惑星を除去し、海洋配置.",
 
-  "Cutting Edge Technology": "",
+  "Cutting Edge Technology": "最先端テクノロジー",
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "効果：条件付きカードのプレイコスト-2MC.",
 
-  "Crash Site Cleanup": "",
+  "Crash Site Cleanup": "隕石孔整備",
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "条件：この世代中に植物が除去されていること. 1チタン または 2建材獲得.",
 
-  "Directed Impactors": "",
+  "Directed Impactors": "誘導落下",
   "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "アクション：6MC支払い、1小惑星獲得. ※チタンでの支払い可能.",
   "Action: Remove 1 asteroid here to raise temperature 1 step.": "アクション：このカード上から1小惑星を除去し、温度+1段階.",
 
-  "Field-Capped City": "",
+  "Field-Capped City": "磁界都市",
   "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "MC産出+2. 電力産出+1. 3植物獲得. 都市タイルを配置.",
 
-  "Great Dam": "",
   "Requires 4 ocean tiles. Increase your energy production 2 steps.": "条件：海洋4枚以上. 電力産出+2.",
-
-  "Magnetic Shield": "",
+  
+  "Magnetic Shield": "磁界シールド",
   "3 Power": "電力タグ3つ以上",
   "Requires 3 power tags. Raise your TR 4 steps.": "条件：電力タグ3つ以上. TR+4段階",
 
-  "Meltworks": "",
+  "Meltworks": "溶融産業",
   "Action: Spend 5 heat to gain 3 steel.": "アクション：5温熱支払い、3建材獲得.",
 
-  "Mohole Lake": "",
+  "Mohole Lake": "モホール湖",
   "Action: Add a microbe or animal to ANOTHER card.": "アクション：1微生物 または 1動物獲得.",
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "3植物獲得. 温度+1段階. 海洋1枚配置.",
 
-  "Diversity Support": "",
+  "Diversity Support": "多様性支援",
   "9 Resource types": "リソース9種類",
   "Requires that you have 9 different types of resources. Gain 1 TR.": "条件：リソース9種類以上を所持. TR+1段階.",
 
-  "Topsoil Contract": "",
+  "Topsoil Contract": "表土契約",
   "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "効果：カード上に1微生物配置する毎に1MC獲得.",
   "Gain 3 plants.": "3植物獲得.",
 
-  "Imported Nutrients": "",
+  "Imported Nutrients": "栄養素の輸入",
   "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "4植物獲得. 4微生物獲得.",
 
-  "Asteroid Deflection System": "",
+  "Asteroid Deflection System": "微天体斥退システム",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "アクション: デッキトップを1枚確認し捨てる. そのカードに宇宙タグがあればこのカード上に1小惑星追加.",
   "opponents may not remove your plants": "除去無効：あなたの植物",
   "Decrease your energy production 1 step. 1VP per asteroid on this card.": "電力産出-1. このカード上の1小惑星毎に1VP",
 
-  "Jovian Embassy": "",
+  "Jovian Embassy": "木星大使館",
   "Raise your TR 1 step.": "TR+1段階.",
 
-  "Sub-Crust Measurements": "",
+  "Sub-Crust Measurements": "地殻下観測",
   "Action: Draw a card.": "アクション：1ドロー.",
   "Requires 2 science tags.": "条件：科学タグ2つ以上.",
 
-  "Potatoes": "",
+  "Potatoes": "じゃがいも",
   "Lose 2 plants. Increase your M€ production 2 steps.": "2植物を支払う. MC産出+2.",
 
-  "Meat Industry": "",
+  "Meat Industry": "食肉産業",
   "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "カード上に1動物配置する毎に2MC獲得.",
 
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "電力産出-4し、植物産出+2. TR+3段階. 特殊タイルを配置.",
 
-  "Orbital Cleanup": "",
+  "Orbital Cleanup": "軌道清掃",
   "Action: Gain 1 M€ per science tag you have.": "アクション：科学タグ1つ毎に1MC獲得獲得.",
   "Decrease your M€ production 2 steps.": "MC産出-2.",
 
-  "Law Suit": "",
+  "Law Suit": "民事訴訟",
   "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "この世代中にあなたのリソースまたは産出を除去したプレイヤー1人から3MC除去し、3MC獲得. またこのカードをそのプレイヤーのプレイ済みカードとする.",
 
-  "Small Asteroid": "",
+  "Small Asteroid": "小型小惑星",
   "Increase temperature 1 step. Remove up to 2 plants from any player.": "温度+1段階. 望むならプレイヤー1人から最大2植物除去.",
 
-  "Asteroid Hollowing": "",
+  "Asteroid Hollowing": "小惑星中空化",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "アクション：1チタンを支払い、このカード上に小惑星追加し、MC産出+1.",
   "1VP for each 2 asteroids on this card.": "このカード上の2小惑星毎に1VP.",
 
-  "Advertising": "",
+  "Advertising": "広告戦略",
   "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "効果：元のプレイコスト20MC以上のカードをプレイ時、MC産出+1.",
 
-  "Project Inspection": "",
+  "Project Inspection": "プロジェクトの査察",
   "Use a card action that has been used this generation.": "この世代に使用したアクションカードを再使用.",
 
-  "Rego Plastics": "",
+  "Rego Plastics": "レゴ・プラスチック",
   "Effect: Your steel resources are worth 1 M€ extra.": "効果：建材の価値+1MC.",
 
-  "Interplanetary Trade": "",
+  "Interplanetary Trade": "惑星間交易",
   "Increase your M€ production 1 step per different tag you have in play, including this.": "プレイ済みのタグ種類毎にMC産出+1.",
 
-  "Penguins": "",
-  "Action: Add 1 animal to this card.": "アクション；このカード上に1動物追加.",
+  "Penguins": "ペンギン",
+  "Action: Add 1 animal to this card.": "アクション：このカード上に1動物追加.",
   "Requires 8 oceans.": "条件：海洋8枚以上.",
 
-  "Snow Algae": "",
+  "Snow Algae": "氷雪藻",
   "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "条件：海洋2枚以上. 植物産出+1. 温熱産出+1.",
 
-  "Self-replicating Robots": "",
+  "Self-replicating Robots": "自己修復型ロボット",
   "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "アクション：手札から土建タグ または 宇宙タグカードをこのカード上に置き、2リソース追加. または このカード上のカード1枚を選択し、その上にあるリソースを2倍にする.",
   "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "効果：このカード上からカードをプレイする時、そのカード上の1リソース毎にプレイコスト-1MC.",
 
-  "Dusk Laser Mining": "",
+  "Dusk Laser Mining": "黄昏レーザー採掘",
   "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "条件：科学タグ2つ以上. 電力産出-1し、チタン産出+1. 4チタン獲得.",
 
-  "Hi-Tech Lab": "",
+  "Hi-Tech Lab": "ハイテク研究所",
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "アクション：x電力を支払う. デッキの上からx枚を見る.その内、1枚を獲得し残りを捨て札にする",
 
-  "Mercurian Alloys": "",
+  "Mercurian Alloys": "水星合金",
   "Effect: Your titanium resources are worth 1 M€ extra.": "効果：チタンの価値+1MC.",
 
-  "Energy Market": "",
+  "Energy Market": "電力市場",
   "Action: Spend 2X M€ to gain X energy.": "アクション：2xMC支払い、x電力獲得.",
   "Action: Decrease energy production 1 step to gain 8 M€.": "アクション：電力産出-1し、8MC獲得.",
 
-  "Asteroid Rights": "",
+  "Asteroid Rights": "小惑星の所有権",
   "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "アクション：1MC支払い、1小惑星獲得.",
   "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "アクション：このカード上から1小惑星を除去し、2チタン獲得 または MC産出+1.",
   "Add 2 asteroids to this card.": "このカード上に2小惑星追加.",
 
-  "Stanford Torus": "",
+  "Stanford Torus": "スタンフォード・トーラス",
   "Place a city tile IN SPACE, outside and separate from the planet.": "宇宙空間上に都市タイルを配置.",
 
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去..",
@@ -197,17 +205,20 @@
   "Requires 2 science tags.": "条件：科学タグ2つ以上.",
   "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "アクション：2xMC支払い、x電力獲得 または 電力産出-1し、8MC獲得.",
 
-  "Bactoviral Research": "",
+  "Bactoviral Research": "細菌ウイルス研究",
   "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "1ドロー. 科学タグ1つ毎に1微生物獲得獲得.",
 
-  "Bio Printing Facility": "",
+  "Bio Printing Facility": "生物出力工場",
   "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.":
    "アクション：2電力支払い、2植物 または 1動物獲得.",
 
-  "Harvest": "",
+  "Harvest": "収穫",
   "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "条件：緑地タイルを3枚以上所持. 12MC獲得.",
 
-  "Outdoor Sports": "",
-  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "条件：海洋に隣接する都市タイルが存在. MC産出+2."
+  "Outdoor Sports": "アウトドア・スポーツ",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "条件：海洋に隣接する都市タイルが存在. MC産出+2.",
 
+  "Saturn Surfing": "土星サーフィン",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "アクション：このカード上の1浮遊体毎に1MC獲得(最大5MC)し、このカード上から1浮遊体除去.",
+  "Add 1 floater here for every Earth tag you have, including this.": "地球タグ1つ毎にこのカード上に1浮遊体追加."
 }

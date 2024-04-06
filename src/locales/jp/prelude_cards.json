@@ -1,26 +1,23 @@
 {
-    "Ceres Tech Market": "",
+    "Ceres Tech Market": "セレス技術市場",
     "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "アクション：手札から任意枚数のカードを1枚2MCで売却.",
     "Gain 2 M€ per colony you own.": "コロニーの所持数×2MC獲得.",
-    
-    "Directed Heat Usage": "",
-    "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "アクション:3温熱支払い、4MC または 2植物獲得",
-    
-    "Ishtar Expedition": "",
+
+    "Ishtar Expedition": "イシュタル探検隊",
     "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "条件：金星10%以上. 3チタン獲得. 金星タグカードを2枚入手",
 
-    "L1 Trade Terminal": "",
+    "L1 Trade Terminal": "L1交易ターミナル",
     "Effect: When you trade, first increase that colony tile track 2 steps.": "効果：交易するコロニータイルのトラックを+2段階してもよい(+1段階も可)",
     "Add a resource to 3 different cards.": "異なる3枚までのカード上にそれぞれ1リソース追加.",
 
-    "Red Appeasement": "",
-    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "",
-    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "",
+    "Red Appeasement": "赤き宥和",
+    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "条件：赤き惑星党が与党か、そこに2議席あり、他のプレイヤーがパスしていない.",
+    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "MC産出+2. この世代ではこれ以上アクションができなくなる.",
     "PASS": "パス",
 
-    "Summit Logistics": "",
-    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "",
-    
+    "Summit Logistics": "頂上物流",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "条件：科学万能党が与党か、そこに2議席ある. 惑星タグの合計数分、MC獲得. 全コロニーの数分MC獲得. 2ドロー.",
+    "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "※ファン拡張の火星タグ含む. 月タグは含まない.",
 
     "Psychrophiles": "低温菌",
     "Action: Add 1 microbe to this card.": "アクション：このカード上に1微生物追加.",

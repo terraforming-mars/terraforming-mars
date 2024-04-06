@@ -1,48 +1,47 @@
 {
-    
-    "Applied Science": "",
+    "Applied Science": "応用科学",
     "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "アクション：このカード上から1科学リソース除去し、任意の1リソースを獲得.",
     "Add 6 resources here.": "このカード上に6科学リソース追加.",
 
-    "Colony Trade Hub": "",
+    "Colony Trade Hub": "コロニー交易拠点",
     "Increase your energy production 1 step. Gain 3 titanium": "電力産出+1. 3チタン獲得.",
     "Effect: When a colony is placed, gain 2 M€": "効果：コロニー配置時、2MC獲得.",
 
-    "Focused Organization": "",
+    "Focused Organization": "重点的な組織",
     "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "アクション：手札を1枚捨て、さらに1標準リリースを支払い、1ドローと1標準リソース獲得.",
     "Draw 1 card and gain 1 standard resource.": "1ドローと1標準リソース獲得.",
 
-    "Nobel Prize": "",
+    "Nobel Prize": "ノーベル賞",
     "Gain 2 M€. Draw 2 cards with requirements.": "2MC獲得. 条件付きカード2枚入手.",
 
-    "Old Mining Colony": "",
+    "Old Mining Colony": "旧鉱業コロニー",
     "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "チタン産出+1. コロニー1つ配置. 手札を1枚捨てる",
 
 
-    "Anti-desertification Techniques": "",
+    "Anti-desertification Techniques": "砂漠化防止技術",
     "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "建材産出+1. 植物産出+1. 3MC獲得.",
 
-    "Corporate Archives": "",
+    "Corporate Archives": "企業アーカイブス",
     "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "デッキの上から7枚を見る.その内、2枚を獲得し残りを捨て札にする.",
     "Look at the top 7 cards from the deck.": "デッキの上から7枚を見る.",
     "Take 2 of them into hand and discard the other 5.": "その内、2枚を獲得し残りを捨て札にする.",
     "Gain 13 M€": "13MC獲得",
 
-    "Double Down": "",
+    "Double Down": "倍掛け",
     "Copy your other prelude's direct effect.": "自身のプレイ済みプレリュードをコピー(タグはコピーされない).",
 
     "Giant Solar Collector": "",
     "Increase your energy production 2 steps. Raise Venus 1 step.": "電力産出+2. 金星+1段階.",
 
-    "Head Start": "",
+    "Head Start": "幸先の良いスタート",
     "GAIN 2 STEEL.": "2建材獲得.",
     "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "手札1枚毎に2MC獲得.",
     "IMMEDIATELY TAKE 2 ACTIONS.": "すぐに2アクション実行.",
 
-    "Merger": "",
+    "Merger": "企業合併",
     "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "新たに企業を4枚を見る.その内、1枚を獲得し残りを捨て札にする. その後、42MC支払う.",
 
-    "New Partner": "",
+    "New Partner": "新しいパートナー",
     "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "MC産出+1. 新たにプレリュードを2枚見る。そのうち1枚を獲得し残りを捨て札にする。",
 
 

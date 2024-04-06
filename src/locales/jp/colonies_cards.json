@@ -17,7 +17,7 @@
     "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "条件：地球タグ2つ以上.次にプレイするカードのプレイコスト-16MC.",
 
     "Corona Extractor": "コロナ抽出装置",
-    "Requires 4 science tags. Increase your energy production 4 steps.": "条件；科学タグ4つ以上. 電力産出+4.",
+    "Requires 4 science tags. Increase your energy production 4 steps.": "条件：科学タグ4つ以上. 電力産出+4.",
 
     "Cryo-Sleep": "冷凍睡眠",
     "Effect: When you trade, you pay 1 less resource for it.": "効果：交易コスト-1.",
@@ -94,7 +94,7 @@
     "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "条件：所有コロニー1つ以下. MC産出-2. コロニー1つ配置.",
 
     "Productive Outpost": "肥沃な前哨基地",
-    "Gain all your colony bonuses.": "所有コロニー全てから交易ボーナスを得る.",
+    "Gain all your colony bonuses.": "所有コロニー全てからコロニー・ボーナスを得る.",
 
     "Quantum Communications": "量子通信",
     "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "科学タグ4つ以上. 配置済みの全コロニー1つ毎にMC産出+1.",

@@ -136,8 +136,10 @@ export interface ICard {
 
   /** Terraform Rating predicted when this card is played */
   tr?: TRSource;
-  /** Get TR sources from 'tr', or determine sources from 'behavior'
-   * If needed, this function can be overrided by a card for more complicated computed TR */
+  /**
+   * Get TR sources from 'tr', or determine sources from 'behavior'
+   * If needed, this function can be overrided by a card for more complicated computed TR
+   */
   getTRSources(player: IPlayer, b?: Behavior): TRSource;
 
   resourceCount: number;

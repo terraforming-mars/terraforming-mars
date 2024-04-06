@@ -13,8 +13,8 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
     name: CardName.MOON_HABITAT_STANDARD_PROJECT,
     cost: 22,
     reserveUnits: {titanium: 1},
-    tilesBuilt: [TileType.MOON_HABITAT],
     tr: {moonHabitat: 1},
+    tilesBuilt: [TileType.MOON_HABITAT],
 
     metadata: {
       cardNumber: '',

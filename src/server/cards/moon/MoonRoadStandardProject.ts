@@ -12,8 +12,8 @@ export class MoonRoadStandardProject extends StandardProjectCard {
     name: CardName.MOON_ROAD_STANDARD_PROJECT,
     cost: 18,
     reserveUnits: {steel: 1},
-    tilesBuilt: [TileType.MOON_ROAD],
     tr: {moonLogistics: 1},
+    tilesBuilt: [TileType.MOON_ROAD],
 
     metadata: {
       cardNumber: '',

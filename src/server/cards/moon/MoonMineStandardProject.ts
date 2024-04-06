@@ -13,8 +13,8 @@ export class MoonMineStandardProject extends StandardProjectCard {
     name: CardName.MOON_MINE_STANDARD_PROJECT,
     cost: 20,
     reserveUnits: {titanium: 1},
-    tilesBuilt: [TileType.MOON_MINE],
     tr: {moonMining: 1},
+    tilesBuilt: [TileType.MOON_MINE],
 
     metadata: {
       cardNumber: '',

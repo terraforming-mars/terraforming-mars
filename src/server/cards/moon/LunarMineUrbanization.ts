@@ -16,12 +16,12 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       type: CardType.EVENT,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 8,
-      tr: {moonHabitat: 1},
 
       behavior: {
         production: {megacredits: 1},
       },
       requirements: {miningTiles: 1},
+      tr: {moonHabitat: 1},
 
       metadata: {
         description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles ' +

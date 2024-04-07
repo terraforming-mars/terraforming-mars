@@ -10,6 +10,7 @@ import {CanPlayResponse} from '../cards/IProjectCard';
 import {YesAnd} from '../cards/requirements/CardRequirement';
 import {cardsToModel} from '../models/ModelUtils';
 import {SelectProjectCardToPlayModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export type PlayCardMetadata = {
   reserveUnits: Readonly<Units>;
@@ -67,31 +68,31 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
 
   public process(input: InputResponse) {
     if (!isSelectProjectCardToPlayResponse(input)) {
-      throw new Error('Not a valid SelectProjectCardToPlayResponse');
+      throw new InputError('Not a valid SelectProjectCardToPlayResponse');
     }
     if (!isPayment(input.payment)) {
-      throw new Error('payment is not a valid type');
+      throw new InputError('payment is not a valid type');
     }
 
     const card = this.cards.find((card) => card.name === input.card);
     if (card === undefined) {
-      throw new Error('Unknown card name ' + input.card);
+      throw new InputError('Unknown card name ' + input.card);
     }
     const details = this.extras.get(input.card);
     if (details === undefined) {
-      throw new Error('Unknown card name ' + input.card);
+      throw new InputError('Unknown card name ' + input.card);
     }
     // These are not used for safety but do help give a better error message
     // to the user
     const reserveUnits = details.reserveUnits;
     if (reserveUnits.steel + input.payment.steel > this.player.steel) {
-      throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${input.card}`);
+      throw new InputError(`${reserveUnits.steel} units of steel must be reserved for ${input.card}`);
     }
     if (reserveUnits.titanium + input.payment.titanium > this.player.titanium) {
-      throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${input.card}`);
+      throw new InputError(`${reserveUnits.titanium} units of titanium must be reserved for ${input.card}`);
     }
     if (reserveUnits.plants + input.payment.plants > this.player.plants) {
-      throw new Error(`${reserveUnits.titanium} units of plants must be reserved for ${input.card}`);
+      throw new InputError(`${reserveUnits.titanium} units of plants must be reserved for ${input.card}`);
     }
     const yesAnd = typeof(details.details) === 'boolean' ? undefined : details.details;
     this.payAndPlay(card, input.payment, yesAnd);

@@ -8,6 +8,7 @@ import {CardName} from '../../common/cards/CardName';
 import {ICeoCard} from '../cards/ceos/ICeoCard';
 import * as titles from '../../common/inputs/SelectInitialCards';
 import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 
 export class SelectInitialCards extends AndOptions {
@@ -23,7 +24,7 @@ export class SelectInitialCards extends AndOptions {
         titles.SELECT_CORPORATION_TITLE, undefined, player.dealtCorporationCards, {min: 1, max: 1}).andThen(
         (cards) => {
           if (cards.length !== 1) {
-            throw new Error('Only select 1 corporation card');
+            throw new InputError('Only select 1 corporation card');
           }
           corporation = cards[0];
           return undefined;
@@ -40,7 +41,7 @@ export class SelectInitialCards extends AndOptions {
         new SelectCard(titles.SELECT_PRELUDE_TITLE, undefined, player.dealtPreludeCards, {min: 2, max: 2})
           .andThen( (preludeCards: Array<IProjectCard>) => {
             if (preludeCards.length !== 2) {
-              throw new Error('Only select 2 preludes');
+              throw new InputError('Only select 2 preludes');
             }
             player.preludeCardsInHand.push(...preludeCards);
             return undefined;
@@ -51,7 +52,7 @@ export class SelectInitialCards extends AndOptions {
       this.options.push(
         new SelectCard(titles.SELECT_CEO_TITLE, undefined, player.dealtCeoCards, {min: 1, max: 1}).andThen((ceoCards: Array<ICeoCard>) => {
           if (ceoCards.length !== 1) {
-            throw new Error('Only select 1 CEO');
+            throw new InputError('Only select 1 CEO');
           }
           // Push chosen card to hand
           player.ceoCardsInHand.push(ceoCards[0]);
@@ -83,7 +84,7 @@ export class SelectInitialCards extends AndOptions {
     if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
       player.cardsInHand = [];
       player.preludeCardsInHand = [];
-      throw new Error('Too many cards selected');
+      throw new InputError('Too many cards selected');
     }
     // discard all unpurchased cards
     player.dealtProjectCards.forEach((card) => {

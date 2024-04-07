@@ -968,6 +968,8 @@
     "vastitas borealis": "Vastitas Borealis",
     "terra cimmeria": "Terra Cimmeria",
     "amazonis p.": "Amazonis P.",
+    "utopia planitia": "Utopia Planitia",
+    "vastitas borealis novus": "Vastitas Borealis Novus",
     "Escape Velocity": "Fluchtgeschwindigkeit",
     "After": "Nach",
     "min": "Min.",
@@ -977,6 +979,7 @@
     "VP every": "SP alle",
     "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Reduziere nach ${0} Minuten alle ${2} Minuten ${1} SP. (${3} Bonussekunden pro Spielzug.)",
     "Exclude some cards": "Karten ausschließen",
+    "Include some cards": "Karten hinzufügen",
     "Custom Colonies list": "Benutzerdefinierte Kolonien",
     "Remove negative Global Events": "Ohne negative globale Ereignisse",
     "Fast mode": "Express-Modus",
@@ -988,6 +991,7 @@
     "Mandatory Venus Terraforming": "Erforderliches Venus-Terraforming",
     "63 TR solo mode": "63-TW-Solo-Modus",
     "Cards to exclude from the game": "Auszuschließende Karten",
+    "Cards to include in the game": "Hinzufügen von Karten",
     "Start typing the card name to exclude": "Tippe den Namen der Karte, die ausgeschlossen werden soll",
     "Filter": "Filter",
     "TR Boost": "TW-Boost",
@@ -1172,6 +1176,7 @@
 
     "Select how to pay for the ${0} standard project": "Wähle aus, wie du für das Standardprojekt ${0} bezahlen möchtest",
     "Excavate:SP": "Ausgraben",
+    "Asteroid:SP": "Asteroid",
     "Select space for ocean from temperature increase": "Wähle ein Feld für einen Ozean, der aufgrund des Temperaturanstiegs platziert wird",
 
     "Select production to decrease one step and gain 4 resources": "Wähle eine Produktion, um einen Schritt zu reduzieren und 4 Ressourcen zu erhalten",

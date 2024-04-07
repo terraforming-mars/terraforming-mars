@@ -127,7 +127,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
       break;
     case BoardName.UTOPIA_PLANITIA:
     case BoardName.VASTITAS_BOREALIS_NOVUS:
-      // push(UTOPIA_PLANITIA_MILESTONES, UTOPIA_PLANITIA_AWARDS);
+    case BoardName.TERRA_CIMMERIA_NOVUS:
       drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
       break;
     }

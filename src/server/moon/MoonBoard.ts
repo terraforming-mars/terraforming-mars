@@ -1,5 +1,5 @@
 import {Board} from '../boards/Board';
-import {Space, newSpace} from '../boards/Space';
+import {Space} from '../boards/Space';
 import {SerializedBoard} from '../boards/SerializedBoard';
 import {IPlayer} from '../IPlayer';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -8,13 +8,13 @@ import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 
 function mineSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
-  return newSpace(id, SpaceType.LUNAR_MINE, x, y, bonus);
+  return {id, spaceType: SpaceType.LUNAR_MINE, x, y, bonus};
 }
 function surfaceSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
-  return newSpace(id, SpaceType.LAND, x, y, bonus);
+  return {id, spaceType: SpaceType.LAND, x, y, bonus};
 }
 function colonySpace(id: SpaceId): Space {
-  return newSpace(id, SpaceType.COLONY, -1, -1, []);
+  return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
 }
 
 export class MoonBoard extends Board {

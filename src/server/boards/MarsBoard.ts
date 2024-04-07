@@ -6,12 +6,13 @@ import {Space} from './Space';
 import {PlacementType} from './PlacementType';
 import {AresHandler} from '../ares/AresHandler';
 import {CardName} from '../../common/cards/CardName';
+import {SpaceId} from '../../common/Types';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
 
-  protected constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces);
+  protected constructor(spaces: ReadonlyArray<Space>, noctisCitySpaceId: SpaceId | undefined) {
+    super(spaces, noctisCitySpaceId);
     this.edges = this.computeEdges();
   }
 
@@ -163,6 +164,9 @@ export class MarsBoard extends Board {
    */
   public getNonReservedLandSpaces(): ReadonlyArray<Space> {
     return this.spaces.filter((space) => {
+      if (space.id === this.noctisCitySpaceId) {
+        return false;
+      }
       return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
         space.player === undefined;

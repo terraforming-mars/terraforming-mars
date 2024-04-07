@@ -48,7 +48,7 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces);
+    super(spaces, undefined);
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions: CanAffordOptions) {

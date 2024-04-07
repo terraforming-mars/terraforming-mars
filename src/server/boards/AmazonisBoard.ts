@@ -48,7 +48,7 @@ export class AmazonisBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces);
+    super(spaces, undefined);
   }
 
   public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {

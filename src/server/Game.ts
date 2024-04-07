@@ -1369,7 +1369,7 @@ export class Game implements IGame, Logger {
       this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));
       break;
     case SpaceBonus.DELEGATE:
-      this.defer(new SendDelegateToArea(player));
+      Turmoil.ifTurmoil(this, () => this.defer(new SendDelegateToArea(player)));
       break;
     default:
       throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');

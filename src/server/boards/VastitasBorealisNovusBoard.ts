@@ -9,6 +9,7 @@ import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SpaceName} from '../SpaceName';
+import {Space} from './Space';
 
 export class VastitasBorealisNovusBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisNovusBoard {
@@ -42,10 +43,14 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
     builder.land(DELEGATE).land().land(DRAW_CARD).land(STEEL).land(TITANIUM);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng); // , SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
+      builder.shuffle(rng);
     }
     const spaces = builder.build();
     return new VastitasBorealisNovusBoard(spaces);
+  }
+
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions: CanAffordOptions) {
@@ -54,7 +59,7 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
         return Turmoil.ifTurmoilElse(
           player.game,
           (turmoil) => turmoil.hasDelegatesInReserve(player),
-          () => false);
+          () => true);
       }
       return true;
     });

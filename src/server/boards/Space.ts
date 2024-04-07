@@ -33,12 +33,3 @@ export type Space = {
   /** This tile's co-owner. Used for The Moon's Hostile Takeover card. */
   coOwner?: IPlayer;
 }
-
-export function newSpace(
-  id: SpaceId,
-  spaceType: SpaceType,
-  x: number,
-  y: number,
-  bonus: Array<SpaceBonus>): Space {
-  return {id, spaceType, x, y, bonus};
-}

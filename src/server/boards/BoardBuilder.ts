@@ -1,4 +1,4 @@
-import {Space, newSpace} from './Space';
+import {Space} from './Space';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
@@ -6,7 +6,7 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
 
 function colonySpace(id: SpaceId): Space {
-  return newSpace(id, SpaceType.COLONY, -1, -1, []);
+  return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
 }
 
 export class BoardBuilder {
@@ -68,7 +68,13 @@ export class BoardBuilder {
       for (let i = 0; i < tilesInThisRow; i++) {
         const spaceId = idx + idOffset;
         const xCoordinate = xOffset + i;
-        const space = newSpace(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], xCoordinate, row, this.bonuses[idx]);
+        const space = {
+          id: BoardBuilder.spaceId(spaceId),
+          spaceType: this.spaceTypes[idx],
+          x: xCoordinate,
+          y: row,
+          bonus: this.bonuses[idx],
+        };
         this.spaces.push(space);
         idx++;
       }

@@ -19,6 +19,7 @@ import {AmazonisBoard} from './boards/AmazonisBoard';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {UtopiaPlanitiaBoard} from './boards/UtopiaPlanitiaBoard';
 import {VastitasBorealisNovusBoard} from './boards/VastitasBorealisNovusBoard';
+import {TerraCimmeriaNovusBoard} from './boards/TerraCimmeriaNovusBoard';
 import {Board} from './boards/Board';
 import {Space} from './boards/Space';
 
@@ -30,6 +31,7 @@ const boards: Record<BoardName, BoardFactory> = {
   [BoardName.ELYSIUM]: ElysiumBoard,
   [BoardName.UTOPIA_PLANITIA]: UtopiaPlanitiaBoard,
   [BoardName.VASTITAS_BOREALIS_NOVUS]: VastitasBorealisNovusBoard,
+  [BoardName.TERRA_CIMMERIA_NOVUS]: TerraCimmeriaNovusBoard,
   [BoardName.AMAZONIS]: AmazonisBoard,
   [BoardName.ARABIA_TERRA]: ArabiaTerraBoard,
   [BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard,

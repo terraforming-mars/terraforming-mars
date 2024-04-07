@@ -26,6 +26,7 @@ describe('GameHandler', () => {
       BoardName.ELYSIUM,
       BoardName.UTOPIA_PLANITIA,
       BoardName.VASTITAS_BOREALIS_NOVUS,
+      BoardName.TERRA_CIMMERIA_NOVUS,
       BoardName.ARABIA_TERRA,
       BoardName.VASTITAS_BOREALIS,
       BoardName.AMAZONIS,

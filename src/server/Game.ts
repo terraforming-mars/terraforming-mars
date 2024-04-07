@@ -73,6 +73,7 @@ import {UnderworldData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
+import {BuildColony} from './deferredActions/BuildColony';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -1355,11 +1356,11 @@ export class Game implements IGame, Logger {
       break;
     case SpaceBonus.TEMPERATURE:
       if (this.getTemperature() < constants.MAX_TEMPERATURE) {
-        player.defer(() => this.increaseTemperature(player, 1));
         this.defer(new SelectPaymentDeferred(
           player,
           constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
-          {title: 'Select how to pay for placement bonus temperature'}));
+          {title: 'Select how to pay for placement bonus temperature'}))
+          .andThen(() => this.increaseTemperature(player, 1));
       }
       break;
     case SpaceBonus.ENERGY:
@@ -1370,6 +1371,13 @@ export class Game implements IGame, Logger {
       break;
     case SpaceBonus.DELEGATE:
       Turmoil.ifTurmoil(this, () => this.defer(new SendDelegateToArea(player)));
+      break;
+    case SpaceBonus.COLONY:
+      this.defer(new SelectPaymentDeferred(
+        player,
+        constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
+        {title: 'Select how to pay for placement bonus temperature'}))
+        .andThen(() => this.defer(new BuildColony(player)));
       break;
     default:
       throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');

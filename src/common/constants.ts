@@ -49,6 +49,7 @@ export const GRAPHENE_VALUE = 4;
 // Map specific
 export const HELLAS_BONUS_OCEAN_COST = 6;
 export const VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST = 3;
+export const TERRA_CIMMERIA_COLONY_COST = 5;
 
 // Moon
 export const MAXIMUM_HABITAT_RATE = 8;

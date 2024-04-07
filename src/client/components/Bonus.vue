@@ -24,9 +24,10 @@ const css: Record<SpaceBonus, string> = {
   [SpaceBonus.SCIENCE]: 'science',
   [SpaceBonus.ENERGY_PRODUCTION]: 'energy-production',
   [SpaceBonus.TEMPERATURE]: 'bonustemperature',
-  [SpaceBonus._RESTRICTED]: '', // RESTRICTED is just a that a space is empty, not an actual bonus.
   [SpaceBonus.ASTEROID]: 'asteroid',
   [SpaceBonus.DELEGATE]: 'delegate',
+  [SpaceBonus.COLONY]: 'colony',
+  [SpaceBonus._RESTRICTED]: '', // RESTRICTED is just a that a space is empty, not an actual bonus.
 };
 
 export default Vue.extend({

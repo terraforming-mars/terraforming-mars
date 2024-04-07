@@ -1,9 +1,6 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {SpaceName} from '../SpaceName';
-import {IPlayer} from '../IPlayer';
-import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {Space} from './Space';
 import {GameOptions} from '../game/GameOptions';
@@ -48,12 +45,8 @@ export class TerraCimmeriaBoard extends MarsBoard {
     return new TerraCimmeriaBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): TerraCimmeriaBoard {
-    return new TerraCimmeriaBoard(Board.deserializeSpaces(board.spaces, players));
-  }
-
-  public override getNonReservedLandSpaces(): ReadonlyArray<Space> {
-    return super.getNonReservedLandSpaces();
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
   }
 
   public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {

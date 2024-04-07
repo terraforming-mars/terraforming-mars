@@ -4,10 +4,8 @@ import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {Space} from './Space';
-import {SerializedBoard} from './SerializedBoard';
 import {MarsBoard} from './MarsBoard';
 
 export class ArabiaTerraBoard extends MarsBoard {
@@ -77,9 +75,5 @@ export class ArabiaTerraBoard extends MarsBoard {
     // Nomads can be found on cove spaces
     return super.getAvailableSpacesForOcean(player)
       .filter((space) => space.id !== player.game.nomadSpace);
-  }
-
-  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): ArabiaTerraBoard {
-    return new ArabiaTerraBoard(Board.deserializeSpaces(board.spaces, players));
   }
 }

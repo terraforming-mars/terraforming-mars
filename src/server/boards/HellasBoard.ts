@@ -1,11 +1,9 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board, SpaceCosts} from './Board';
-import {IPlayer} from '../IPlayer';
+import {SpaceCosts} from './Board';
 import {Space} from './Space';
 import {HELLAS_BONUS_OCEAN_COST} from '../../common/constants';
 import {BoardBuilder} from './BoardBuilder';
-import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
@@ -45,10 +43,6 @@ export class HellasBoard extends MarsBoard {
 
     const spaces = builder.build();
     return new HellasBoard(spaces);
-  }
-
-  public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): HellasBoard {
-    return new HellasBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {

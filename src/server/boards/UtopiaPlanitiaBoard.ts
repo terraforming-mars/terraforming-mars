@@ -1,12 +1,10 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board} from './Board';
-import {IPlayer} from '../IPlayer';
 import {BoardBuilder} from './BoardBuilder';
-import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
+import {Space} from './Space';
 
 export class UtopiaPlanitiaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): UtopiaPlanitiaBoard {
@@ -44,7 +42,7 @@ export class UtopiaPlanitiaBoard extends MarsBoard {
     return new UtopiaPlanitiaBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): UtopiaPlanitiaBoard {
-    return new UtopiaPlanitiaBoard(Board.deserializeSpaces(board.spaces, players));
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
   }
 }

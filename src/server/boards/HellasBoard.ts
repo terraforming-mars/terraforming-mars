@@ -19,14 +19,13 @@ export class HellasBoard extends MarsBoard {
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const HEAT = SpaceBonus.HEAT;
     const TITANIUM = SpaceBonus.TITANIUM;
-    const TWO_PLANTS = [PLANT, PLANT];
 
     // y=0
-    builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT);
+    builder.ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, STEEL).land(PLANT);
     // y=1
-    builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT).land(PLANT, STEEL).land(PLANT).land(PLANT);
+    builder.ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT).land(PLANT, STEEL).land(PLANT).land(PLANT);
     // y=2
-    builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(...TWO_PLANTS).land(PLANT, DRAW_CARD);
+    builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(PLANT, PLANT).land(PLANT, DRAW_CARD);
     // y=3
     builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL, STEEL).land(STEEL).ocean(PLANT).ocean(PLANT).land(PLANT);
     // y=4

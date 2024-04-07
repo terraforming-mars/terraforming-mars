@@ -21,14 +21,20 @@ describe('Warmonger', () => {
   it('score', () => {
     player.playedCards = [];
     expect(award.getScore(player)).eq(0);
+
+    // Tardigrades does not take from another card or player.
     player.playedCards.push(new Tardigrades());
     expect(award.getScore(player)).eq(0);
+
     player.playedCards.push(new Ants());
     expect(award.getScore(player)).eq(1);
+
+    // Big Asteroid is an event and does not count.
     player.playedCards.push(new BigAsteroid());
-    expect(award.getScore(player)).eq(2);
+    expect(award.getScore(player)).eq(1);
+
     player.corporations.push(new TheDarksideofTheMoonSyndicate());
-    expect(award.getScore(player)).eq(3);
+    expect(award.getScore(player)).eq(2);
   });
 
   // A good way to prevent future failures is to duplicate the Robotic Workforce style of test.

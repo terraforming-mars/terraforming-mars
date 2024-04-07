@@ -6,7 +6,6 @@ import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
-import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 
 export class UtopiaPlanitiaBoard extends MarsBoard {
@@ -47,9 +46,5 @@ export class UtopiaPlanitiaBoard extends MarsBoard {
 
   public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): UtopiaPlanitiaBoard {
     return new UtopiaPlanitiaBoard(Board.deserializeSpaces(board.spaces, players));
-  }
-
-  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
-    return [];
   }
 }

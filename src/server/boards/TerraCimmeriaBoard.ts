@@ -64,8 +64,4 @@ export class TerraCimmeriaBoard extends MarsBoard {
       SpaceName.TYRRHENUS_MONS,
     ];
   }
-
-  public override getNoctisCitySpaceId(): SpaceId | undefined {
-    return undefined;
-  }
 }

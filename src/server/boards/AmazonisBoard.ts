@@ -61,8 +61,4 @@ export class AmazonisBoard extends MarsBoard {
       SpaceName.ULYSSES_THOLUS,
     ];
   }
-
-  public override getNoctisCitySpaceId(): SpaceId | undefined {
-    return undefined;
-  }
 }

@@ -1,8 +1,6 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {Board} from './Board';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {BoardBuilder} from './BoardBuilder';
-import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {SpaceId} from '../../common/Types';
@@ -63,10 +61,6 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
       }
       return true;
     });
-  }
-
-  public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): VastitasBorealisNovusBoard {
-    return new VastitasBorealisNovusBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
   public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {

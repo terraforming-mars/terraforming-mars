@@ -1,10 +1,8 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board} from './Board';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
-import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {SpaceId} from '../../common/Types';
@@ -46,8 +44,8 @@ export class TharsisBoard extends MarsBoard {
     return new TharsisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): TharsisBoard {
-    return new TharsisBoard(Board.deserializeSpaces(board.spaces, players));
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
   }
 
   public override getNonReservedLandSpaces(): ReadonlyArray<Space> {

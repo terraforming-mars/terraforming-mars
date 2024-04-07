@@ -1,10 +1,8 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board, SpaceCosts} from './Board';
-import {IPlayer} from '../IPlayer';
+import {SpaceCosts} from './Board';
 import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
-import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
@@ -47,10 +45,6 @@ export class VastitasBorealisBoard extends MarsBoard {
 
     const spaces = builder.build();
     return new VastitasBorealisBoard(spaces);
-  }
-
-  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): VastitasBorealisBoard {
-    return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {

@@ -1,6 +1,5 @@
 import {Board} from '../boards/Board';
 import {Space} from '../boards/Space';
-import {SerializedBoard} from '../boards/SerializedBoard';
 import {IPlayer} from '../IPlayer';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
@@ -50,9 +49,8 @@ export class MoonBoard extends Board {
     return new MoonBoard(b.spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): MoonBoard {
-    const spaces = Board.deserializeSpaces(board.spaces, players);
-    return new MoonBoard(spaces);
+  public constructor(spaces: Array<Space>) {
+    super(spaces);
   }
 }
 

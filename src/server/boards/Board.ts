@@ -355,8 +355,9 @@ export abstract class Board {
     return space;
   }
 
-  public static deserializeSpaces(spaces: ReadonlyArray<SerializedSpace>, players: ReadonlyArray<IPlayer>): Array<Space> {
-    return spaces.map((space) => Board.deserializeSpace(space, players));
+  public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): {spaces: Array<Space>} {
+    const spaces = board.spaces.map((space) => Board.deserializeSpace(space, players));
+    return {spaces};
   }
 }
 

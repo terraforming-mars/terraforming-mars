@@ -329,7 +329,7 @@ describe('Board', function() {
     const player1 = new Player('name-1', Color.RED, false, 0, 'p-name-1-id');
     const player2 = new Player('name-2', Color.YELLOW, false, 0, 'p-name-2-id');
 
-    const board = new TestBoard(Board.deserializeSpaces(boardJson.spaces, [player1, player2]));
+    const board = new TestBoard(Board.deserialize(boardJson, [player1, player2]).spaces);
     expect(board.getSpaceOrThrow('01').player).eq(player1);
     expect(board.getSpaceOrThrow('03').player).eq(player2);
   });

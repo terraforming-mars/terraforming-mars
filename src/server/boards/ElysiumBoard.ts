@@ -43,7 +43,7 @@ export class ElysiumBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces);
+    super(spaces, undefined);
   }
 
   public override getVolcanicSpaceIds(): Array<SpaceId> {

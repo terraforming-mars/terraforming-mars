@@ -1,6 +1,5 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
@@ -45,19 +44,7 @@ export class TharsisBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces);
-  }
-
-  public override getNonReservedLandSpaces(): ReadonlyArray<Space> {
-    return super.getNonReservedLandSpaces().filter((space) => space.id !== SpaceName.NOCTIS_CITY);
-  }
-
-  public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
-    return super.getAvailableSpacesOnLand(player, canAffordOptions).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
-  }
-
-  public override canPlaceTile(space: Space): boolean {
-    return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
+    super(spaces, SpaceName.NOCTIS_CITY);
   }
 
   public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
@@ -67,9 +54,5 @@ export class TharsisBoard extends MarsBoard {
       SpaceName.PAVONIS_MONS,
       SpaceName.THARSIS_THOLUS,
     ];
-  }
-
-  public override getNoctisCitySpaceId() {
-    return SpaceName.NOCTIS_CITY;
   }
 }

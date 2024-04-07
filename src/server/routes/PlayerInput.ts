@@ -12,6 +12,7 @@ import {Response} from '../Response';
 import {runId} from '../utils/server-ids';
 import {AppError} from '../server/AppError';
 import {statusCode} from '../../common/http/statusCode';
+import {InputError} from '../inputs/InputError';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -102,7 +103,7 @@ export class PlayerInput extends Handler {
           }
           resolve();
         } catch (e) {
-          if (!(e instanceof AppError)) {
+          if (!(e instanceof AppError || e instanceof InputError)) {
             console.warn('Error processing input from player', e);
           }
           // TODO(kberg): use responses.ts, though that changes the output.

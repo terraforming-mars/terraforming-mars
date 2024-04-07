@@ -4,6 +4,7 @@ import {BasePlayerInput} from '../PlayerInput';
 import {InputResponse, isSelectOptionResponse} from '../../common/inputs/InputResponse';
 import {SelectOptionModel} from '../../common/models/PlayerInputModel';
 import {Warning} from '../../common/cards/Warning';
+import {InputError} from './InputError';
 
 export class SelectOption extends BasePlayerInput<undefined> {
   constructor(
@@ -25,7 +26,7 @@ export class SelectOption extends BasePlayerInput<undefined> {
   }
   public process(response: InputResponse): PlayerInput | undefined {
     if (!isSelectOptionResponse(response)) {
-      throw new Error('Not a valid SelectOptionResponse');
+      throw new InputError('Not a valid SelectOptionResponse');
     }
     return this.cb(undefined);
   }

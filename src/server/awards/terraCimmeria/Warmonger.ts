@@ -2,6 +2,7 @@ import {ICard} from '../../cards/ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
+import {CardType} from '../../../common/cards/CardType';
 
 export class Warmonger implements IAward {
   public readonly name = 'Warmonger';
@@ -17,6 +18,9 @@ export class Warmonger implements IAward {
   }
 
   public static autoInclude(card: ICard) {
+    if (card.type === CardType.EVENT) {
+      return;
+    }
     if (card.behavior !== undefined) {
       const behavior = card.behavior;
       if (behavior.removeAnyPlants !== undefined) return true;

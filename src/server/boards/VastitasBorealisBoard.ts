@@ -53,6 +53,10 @@ export class VastitasBorealisBoard extends MarsBoard {
     return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
+  }
+
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {

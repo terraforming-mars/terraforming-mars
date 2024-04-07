@@ -6,6 +6,7 @@ import {testGame} from '../../TestGame';
 import {IGame} from '../../../src/server/IGame';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
+import {CollusionStandardProject} from '../../../src/server/cards/underworld/CollusionStandardProject';
 
 describe('LaborTrafficking', function() {
   let card: LaborTrafficking;
@@ -57,5 +58,22 @@ describe('LaborTrafficking', function() {
     expect(asteroidStandardProject.canAct(player)).eq(false);
     player.megaCredits = 8;
     expect(asteroidStandardProject.canAct(player)).eq(true);
+  });
+
+  // By and large this is really a StandardProjectCard test,
+  // but it works just fine here since this was the source of its report.
+  it('Cost does not go negative', () => {
+    const card = new LaborTrafficking();
+    const [game, player] = testGame(1, {turmoilExtension: true, underworldExpansion: true});
+    player.playedCards.push(card);
+
+    const collusionStandardProject = new CollusionStandardProject();
+
+    player.underworldData.corruption = 1;
+    expect(collusionStandardProject.canAct(player)).eq(true);
+
+    collusionStandardProject.action(player);
+    runAllActions(game);
+    expect(player.megaCredits).eq(0);
   });
 });

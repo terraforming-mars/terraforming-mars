@@ -44,9 +44,11 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     return 0;
   }
 
-  private _discount(player: IPlayer) {
+  private adjustedCost(player: IPlayer) {
     const discountFromCards = sum(player.playedCards.map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
-    return discountFromCards + this.discount(player);
+    const discount = discountFromCards + this.discount(player);
+    const adjusted = Math.max(0, this.cost - discount);
+    return adjusted;
   }
 
   protected abstract actionEssence(player: IPlayer): void
@@ -61,7 +63,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     const canPayWith = this.canPayWith(player);
     return {
       ...canPayWith,
-      cost: this.cost - this._discount(player),
+      cost: this.adjustedCost(player),
       tr: this.tr,
       auroraiData: true,
       spireScience: true,
@@ -86,7 +88,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     const canPayWith = this.canPayWith(player);
     player.game.defer(new SelectPaymentDeferred(
       player,
-      this.cost - this._discount(player),
+      this.adjustedCost(player),
       {
         canUseSteel: canPayWith.steel,
         canUseTitanium: canPayWith.titanium,

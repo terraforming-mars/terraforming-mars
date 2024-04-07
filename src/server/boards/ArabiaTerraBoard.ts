@@ -50,6 +50,10 @@ export class ArabiaTerraBoard extends MarsBoard {
     return new ArabiaTerraBoard(spaces);
   }
 
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
+  }
+
   public override getVolcanicSpaceIds() {
     return [
       SpaceName.TIKHONAROV,

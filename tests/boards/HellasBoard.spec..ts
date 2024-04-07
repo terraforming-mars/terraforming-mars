@@ -5,17 +5,16 @@ import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/server/SpaceName';
 import {HellasBoard} from '../../src/server/boards/HellasBoard';
-import {TileType} from '../../src/common/TileType';
+import {cast} from '../TestingUtils';
 
 describe('HellasBoard', function() {
   let board: HellasBoard;
   let game: Game;
   let player: TestPlayer;
-  let player2: TestPlayer;
 
   beforeEach(function() {
-    [game, player, player2] = testGame(2, {boardName: BoardName.HELLAS, aresExtension: true});
-    board = game.board as HellasBoard;
+    [game, player/* , player2 */] = testGame(2, {boardName: BoardName.HELLAS, aresExtension: true});
+    board = cast(game.board, HellasBoard);
   });
 
   it('Removes Hellas bonus ocean space if player cannot pay', () => {

@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {MultiSet} from 'mnemonist';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
@@ -11,7 +12,7 @@ import {SerializedBoard} from '../../src/server/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
-import {MultiSet} from 'mnemonist';
+import {SpaceId} from '../../src/common/Types';
 
 describe('Board', function() {
   let board: TharsisBoard;
@@ -132,6 +133,18 @@ describe('Board', function() {
       const actual = board.getAdjacentSpaces(space).map((s) => s.id);
       expect(expected).to.eql(actual);
     });
+  });
+
+  it('has error with input while calling getAdjacentSpaces', () => {
+    expect(function() {
+      board.getAdjacentSpaces({
+        x: 0,
+        y: 0,
+        bonus: [],
+        id: 'foobar' as SpaceId,
+        spaceType: SpaceType.LAND,
+      });
+    }).to.throw('Unexpected space ID foobar');
   });
 
   it('getAdjacentSpacesClockwise', () => {

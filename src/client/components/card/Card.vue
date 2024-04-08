@@ -59,10 +59,6 @@ export default Vue.extend({
       required: false,
       default: false,
     },
-    robotCard: {
-      type: Object as () => CardModel | undefined,
-      required: false,
-    },
   },
   data() {
     const cardName = this.card.name;
@@ -124,7 +120,7 @@ export default Vue.extend({
       return this.cardInstance.requirements;
     },
     getResourceAmount(): number {
-      return this.card.resources || this.robotCard?.resources || 0;
+      return this.card.resources || 0;
     },
     isCorporationCard() : boolean {
       return this.getCardType() === CardType.CORPORATION;
@@ -139,13 +135,14 @@ export default Vue.extend({
   },
   computed: {
     hasResourceType(): boolean {
-      return this.card.isSelfReplicatingRobotsCard === true || this.cardInstance.resourceType !== undefined || this.robotCard !== undefined;
+      return this.cardInstance.resourceType !== undefined || this.card.isSelfReplicatingRobotsCard || false;
     },
     resourceType(): CardResource {
-      if (this.robotCard !== undefined || this.card.isSelfReplicatingRobotsCard === true) return CardResource.RESOURCE_CUBE;
+      if (this.card.isSelfReplicatingRobotsCard) return CardResource.RESOURCE_CUBE;
       // This last RESOURCE_CUBE is functionally unnecessary and serves to satisfy the type contract.
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
     },
+    // TODO(ethandobbs) Figure out what the purpose of this function is. It has no references. I want to delete it
     hasHelp(): boolean {
       return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;
     },

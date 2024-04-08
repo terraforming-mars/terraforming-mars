@@ -5,6 +5,7 @@ import {Tag} from '../../src/common/cards/Tag';
 import {deserializeProjectCard, serializeProjectCard} from '../../src/server/cards/CardSerialization';
 import {cast} from '../TestingUtils';
 import {Asimov} from '../../src/server/cards/ceos/Asimov';
+import {TestPlayer} from '../TestPlayer';
 
 describe('CardSerialization', function() {
   it('undefiend clone tags serialize and deserialize', function() {
@@ -12,9 +13,10 @@ describe('CardSerialization', function() {
     expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
     const serializedCard = serializeProjectCard(card);
+    const player = TestPlayer.BLUE.newPlayer();
 
     expect(serializedCard.cloneTag).eq(Tag.CLONE);
-    const deserialized = deserializeProjectCard(serializedCard);
+    const deserialized = deserializeProjectCard(serializedCard, player);
     const lobbyHalls = cast(deserialized, LobbyHalls);
     expect(lobbyHalls.cloneTag).eq(Tag.CLONE);
     expect(lobbyHalls.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
@@ -26,8 +28,9 @@ describe('CardSerialization', function() {
     const serializedCard = serializeProjectCard(card);
 
     expect(serializedCard.cloneTag).eq(Tag.SCIENCE);
+    const player = TestPlayer.BLUE.newPlayer();
 
-    const deserialized = deserializeProjectCard(serializedCard);
+    const deserialized = deserializeProjectCard(serializedCard, player);
     const lobbyHalls = cast(deserialized, LobbyHalls);
     expect(lobbyHalls.cloneTag).eq(Tag.SCIENCE);
     expect(lobbyHalls.tags).deep.eq([Tag.SCIENCE, Tag.BUILDING]);
@@ -42,11 +45,12 @@ describe('CardSerialization', function() {
     expect(serializeProjectCard(card).isDisabled).is.true;
 
     const serialized = serializeProjectCard(card);
+    const player = TestPlayer.BLUE.newPlayer();
 
     serialized.isDisabled = false;
-    expect(cast(deserializeProjectCard(serialized), Asimov).isDisabled).is.false;
+    expect(cast(deserializeProjectCard(serialized, player), Asimov).isDisabled).is.false;
 
     serialized.isDisabled = true;
-    expect(cast(deserializeProjectCard(serialized), Asimov).isDisabled).is.true;
+    expect(cast(deserializeProjectCard(serialized, player), Asimov).isDisabled).is.true;
   });
 });

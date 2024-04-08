@@ -68,7 +68,7 @@ describe('PriceWars', () => {
 
     const unplayed = serializeProjectCard(card);
     expect(unplayed.generationUsed).is.undefined;
-    expect(deserializeProjectCard(unplayed).generationUsed).is.undefined;
+    expect(deserializeProjectCard(unplayed, player).generationUsed).is.undefined;
 
     player.playCard(card);
     expect(card.generationUsed).eq(3);
@@ -76,7 +76,7 @@ describe('PriceWars', () => {
     const serialized = serializeProjectCard(card);
     expect(serialized.generationUsed).eq(3);
 
-    const deserialized = deserializeProjectCard(serialized);
+    const deserialized = deserializeProjectCard(serialized, player);
     expect(deserialized.generationUsed).eq(3);
   });
 });

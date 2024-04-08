@@ -139,7 +139,11 @@ export interface ICard {
   /** Terraform Rating predicted when this card is played */
   computeTr?(player: IPlayer): TRSource;
 
-  resourceCount: number;
+  /** Get the card's resource count. This property is overwritten by Self Replicating Robots */
+  get resourceCount(): number;
+  /** Set the card's resource count. This property is overwritten by Self Replicating Robots */
+  set resourceCount(amount: number);
+
   resourceType?: CardResource;
   protectedResources?: boolean;
   /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */

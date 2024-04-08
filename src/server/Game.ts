@@ -72,6 +72,7 @@ import {MarsBoard} from './boards/MarsBoard';
 import {UnderworldData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
+import { SelfReplicatingRobots } from './cards/promo/SelfReplicatingRobots';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -331,6 +332,7 @@ export class Game implements IGame, Logger {
         player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
         if (gameOptions.initialDraftVariant === false) {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
+          player.dealtProjectCards.push(new SelfReplicatingRobots());
         }
         if (gameOptions.preludeExtension) {
           player.dealtPreludeCards.push(...preludeDeck.drawN(game, constants.PRELUDE_CARDS_DEALT_PER_PLAYER));

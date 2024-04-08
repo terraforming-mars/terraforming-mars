@@ -5,6 +5,7 @@ import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
 import {CardType} from '../../common/cards/CardType';
+import {IPlayer} from '../IPlayer';
 
 export function serializeProjectCard(card: IProjectCard): SerializedCard {
   const serialized: SerializedCard = {
@@ -23,12 +24,7 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
     serialized.generationUsed = card.generationUsed;
   }
   if (card instanceof SelfReplicatingRobots) {
-    serialized.targetCards = card.targetCards.map((t) => {
-      return {
-        card: {name: t.card.name},
-        resourceCount: t.resourceCount,
-      };
-    });
+    serialized.played = card.player !== undefined;
   }
   if (isICloneTagCard(card)) {
     serialized.cloneTag = card.cloneTag;
@@ -45,7 +41,7 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
   return serialized;
 }
 
-export function deserializeProjectCard(element: SerializedCard): IProjectCard {
+export function deserializeProjectCard(element: SerializedCard, player: IPlayer): IProjectCard {
   const card = newProjectCard(element.name);
   if (card === undefined) {
     throw new Error(`Card ${element.name} not found`);
@@ -62,19 +58,8 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
   if (isICloneTagCard(card) && element.cloneTag !== undefined) {
     card.cloneTag = element.cloneTag;
   }
-  if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
-    card.targetCards = [];
-    element.targetCards.forEach((targetCard) => {
-      const foundTargetCard = newProjectCard(targetCard.card.name);
-      if (foundTargetCard !== undefined) {
-        card.targetCards.push({
-          card: foundTargetCard,
-          resourceCount: targetCard.resourceCount,
-        });
-      } else {
-        console.warn('did not find card for SelfReplicatingRobots', targetCard);
-      }
-    });
+  if (card instanceof SelfReplicatingRobots && element.played) {
+    card.player = player;
   }
   if (!(card instanceof SelfReplicatingRobots)) {
     if (element.bonusResource !== undefined) {

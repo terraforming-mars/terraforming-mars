@@ -34,7 +34,5 @@ export class ThinkTank extends ActionCard {
       },
     });
   }
-
-  public override resourceCount = 0;
 }
 

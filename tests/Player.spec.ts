@@ -14,7 +14,6 @@ import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {cast, doWait, getSendADelegateOption, runAllActions} from './TestingUtils';
-import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/server/cards/base/Pets';
 import {TestPlayer} from './TestPlayer';
 import {SelectParty} from '../src/server/inputs/SelectParty';
@@ -274,14 +273,6 @@ describe('Player', function() {
 
     expect(newPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.colonies.tradesThisGeneration).eq(100);
-  });
-  it('pulls self replicating robots target cards', function() {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
-    const srr = new SelfReplicatingRobots();
-    player.playedCards.push(srr);
-    srr.targetCards.push({card: new LunarBeam(), resourceCount: 0});
-    expect(player.getSelfReplicatingRobotsTargetCards().length).eq(1);
   });
 
   it('addResourceTo', () => {

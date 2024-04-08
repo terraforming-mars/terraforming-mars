@@ -134,15 +134,6 @@
 
       </div>
 
-      <div v-if="thisPlayer.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-        <dynamic-title title="Self-Replicating Robots cards" :color="thisPlayer.color"/>
-        <div>
-          <div v-for="card in thisPlayer.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
-            <Card :card="card"/>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <div class="player_home_block player_home_block--setup nofloat"  v-if="thisPlayer.tableau.length === 0">

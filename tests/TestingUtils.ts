@@ -191,8 +191,8 @@ class FakeCard implements IProjectCard {
   }
   public type = CardType.ACTIVE;
   public metadata = {};
-  public resourceCount = 0;
   public tilesBuilt = [];
+  public resourceCount = 0;
 }
 
 export function fakeCard(attrs: Partial<IProjectCard> = {}): IProjectCard {

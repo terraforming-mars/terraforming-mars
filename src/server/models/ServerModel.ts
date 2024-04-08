@@ -1,4 +1,3 @@
-import {CardModel} from '../../common/models/CardModel';
 import {Color} from '../../common/Color';
 import {IGame} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
@@ -123,18 +122,6 @@ export class Server {
     };
   }
 
-  public static getSelfReplicatingRobotsTargetCards(player: IPlayer): Array<CardModel> {
-    return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
-      const model: CardModel = {
-        resources: targetCard.resourceCount,
-        name: targetCard.card.name,
-        calculatedCost: player.getCardCost(targetCard.card),
-        isSelfReplicatingRobotsCard: true,
-      };
-      return model;
-    });
-  }
-
   public static getMilestones(game: IGame): Array<ClaimedMilestoneModel> {
     const allMilestones = game.milestones;
     const claimedMilestones = game.claimedMilestones;
@@ -233,7 +220,6 @@ export class Server {
       protectedResources: Server.getResourceProtections(player),
       protectedProduction: Server.getProductionProtections(player),
       tableau: cardsToModel(player, player.tableau, {showResources: true}),
-      selfReplicatingRobotsCards: Server.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,
       steelProduction: player.production.steel,
       steelValue: player.getSteelValue(),

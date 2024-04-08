@@ -31,7 +31,6 @@ export class AppliedScience extends ActivePreludeCard implements IActionCard {
                 count: 1,
                 min: 1,
                 mustHaveCard: true,
-                robotCards: true,
               },
               title: 'Spend 1 science resource here to gain 1 resource on ANY CARD WITH A RESOURCE.',
             },

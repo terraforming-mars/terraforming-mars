@@ -1,5 +1,6 @@
 import {IAward} from './IAward';
 import {IPlayer} from '../IPlayer';
+import {CardName} from '../../common/cards/CardName';
 
 export class Excentric implements IAward {
   public readonly name = 'Excentric';
@@ -8,7 +9,8 @@ export class Excentric implements IAward {
     let score = 0;
 
     player.getCardsWithResources().forEach((card) => {
-      score += card.resourceCount;
+      // Self-Replicating Robots resources do not count towards excentric
+      if (card.name !== CardName.SELF_REPLICATING_ROBOTS) score += card.resourceCount;
     });
 
     return score;

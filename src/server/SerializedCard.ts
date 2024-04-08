@@ -13,11 +13,6 @@ export type SerializedCard = {
   opgActionIsActive?: boolean; // For CEO Cards.
   generationUsed?: number; // For CEO and Underworld Cards.
   resourceCount?: number;
-  targetCards?: Array<SerializedRobotCard>;
+  played?: boolean; // For Self-Replicating Robots
   data?: JSONValue;
-}
-
-export type SerializedRobotCard = {
-  card: SerializedCard;
-  resourceCount: number;
 }

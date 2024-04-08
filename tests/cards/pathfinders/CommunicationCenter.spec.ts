@@ -2,12 +2,11 @@ import {expect} from 'chai';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
-import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CommunicationCenter', function() {
   let card: CommunicationCenter;
@@ -88,19 +87,8 @@ describe('CommunicationCenter', function() {
 
     player.playCard(ceosFavoriteProject);
     runAllActions(game);
-    expect(card.resourceCount).eq(2);
-    const selectCard = cast(player.popWaitingFor(), SelectCard);
-
-    expect(player.cardsInHand).has.length(0);
-
-    selectCard.cb([card]);
-
-    expect(card.resourceCount).eq(0);
-    expect(player.cardsInHand).has.length(1);
-
-    runAllActions(game);
-    cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).eq(1);
+    expect(player.cardsInHand).has.length(1);
   });
 
   it('card.addResourceTo', () => {

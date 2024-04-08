@@ -17,7 +17,6 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
           count: 1,
           min: 1,
           mustHaveCard: true,
-          robotCards: true,
         },
       },
 

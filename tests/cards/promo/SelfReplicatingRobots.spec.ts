@@ -9,6 +9,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
+import {deserializeProjectCard, serializeProjectCard} from '../../../src/server/cards/CardSerialization';
 
 describe('SelfReplicatingRobots', function() {
   let card: SelfReplicatingRobots;
@@ -17,6 +18,7 @@ describe('SelfReplicatingRobots', function() {
   beforeEach(function() {
     card = new SelfReplicatingRobots();
     player = TestPlayer.BLUE.newPlayer();
+    card.player = player;
     Game.newInstance('gameid', [player], player);
   });
 
@@ -43,16 +45,39 @@ describe('SelfReplicatingRobots', function() {
   it('act', () => {
     const earthOffice = new EarthOffice();
     player.cardsInHand.push(earthOffice);
-    player.cardsInHand.push(new HousePrinting());
+    const housePrinting = new HousePrinting();
+    player.cardsInHand.push(housePrinting);
 
     const action = cast(card.action(player), OrOptions);
     action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
-    expect(card.targetCards[0].resourceCount).to.eq(2);
-    expect(player.cardsInHand).deep.eq([earthOffice]);
-    expect(card.targetCards).has.lengthOf(1);
+    expect(card.data.attachedCards[housePrinting.name]).to.eq(2);
+    expect(Object.entries(card.data.attachedCards)).has.lengthOf(1);
 
     const action2 = cast(card.action(player), OrOptions);
-    action2.options[0].cb([cast(action2.options[0], SelectCard<IProjectCard>).cards[0]]);
-    expect(card.targetCards[0].resourceCount).to.eq(4);
+    action2.process({
+      type: 'or',
+      index: 0,
+      response: {type: 'card', cards: [housePrinting.name]},
+    }, player);
+    expect(card.data.attachedCards[housePrinting.name]).to.eq(4);
   });
+
+  it('Survives serialization', () => {
+    const card = new SelfReplicatingRobots();
+
+    let serialized = serializeProjectCard(card);
+    expect(serialized.played).is.not.true;
+    let deserialized = deserializeProjectCard(serialized, player) as SelfReplicatingRobots;
+    expect(deserialized.player).is.undefined;
+
+    player.playCard(card);
+    expect(card.player).deep.eq(player);
+
+    serialized = serializeProjectCard(card);
+    expect(serialized.played).is.true;
+    deserialized = deserializeProjectCard(serialized, player) as SelfReplicatingRobots;
+    expect(deserialized.player).eq(player);
+  });
+
+  // See CEOsFavoriteProject.spec.ts for cross-compatability test
 });

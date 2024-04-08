@@ -35,6 +35,9 @@ export class ProxyCard implements IProjectCard {
   public get resourceCount() {
     return 0;
   }
+  public set resourceCount(_amount: number) {
+    return;
+  }
   public getVictoryPoints() {
     return 0;
   }

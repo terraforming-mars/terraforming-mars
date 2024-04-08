@@ -2,7 +2,6 @@ import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
 import {getCardFromPlayerInput} from '../PlayerInput';
 import {BasePlayerInput} from '../PlayerInput';
-import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
 import {SelectCardModel} from '../../common/models/PlayerInputModel';
 import {IPlayer} from '../IPlayer';
@@ -16,7 +15,7 @@ export type Options = {
   /** When provided, then the cards with false in `enabled` are not selectable and grayed out */
   enabled: Array<boolean> | undefined,
   /** Default is true. If true, then shows resources on those cards. If false than shows discounted price. */
-  played: boolean | CardName.SELF_REPLICATING_ROBOTS
+  played: boolean,
   /** Default is false. If true then show the name of the card owner below. */
   showOwner: boolean,
 }
@@ -47,8 +46,8 @@ export class SelectCard<T extends ICard> extends BasePlayerInput<Array<T>> {
       buttonLabel: this.buttonLabel,
       type: 'card',
       cards: cardsToModel(player, this.cards, {
-        showCalculatedCost: this.config.played === false || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
-        showResources: this.config.played === true || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
+        showCalculatedCost: this.config.played === false,
+        showResources: this.config.played === true,
         enabled: this.config.enabled,
       }),
       max: this.config.max,

@@ -101,7 +101,7 @@ const cardProperties = new Map<CardName, InternalProperties>();
  */
 export abstract class Card implements ICard {
   protected readonly properties: InternalProperties;
-  public resourceCount = 0;
+  private cardResourceCount = 0;
   public warnings = new Set<Warning>();
 
   private internalize(external: StaticCardProperties): InternalProperties {
@@ -222,6 +222,13 @@ export abstract class Card implements ICard {
   public get tilesBuilt(): ReadonlyArray<TileType> {
     return this.properties.tilesBuilt;
   }
+  public get resourceCount(): number {
+    return this.cardResourceCount;
+  }
+  public set resourceCount(amount: number) {
+    this.cardResourceCount = amount;
+  }
+
   public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
     let yesAnd: YesAnd | undefined = undefined;
     const satisfied = this.properties.compiledRequirements.satisfies(player);

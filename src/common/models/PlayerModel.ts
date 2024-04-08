@@ -56,7 +56,6 @@ export type PublicPlayerModel = {
   protectedResources: Record<Resource, Protection>;
   protectedProduction: Record<Resource, Protection>;
   tableau: Array<CardModel>;
-  selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
   steelValue: number;

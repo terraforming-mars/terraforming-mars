@@ -12,7 +12,6 @@ import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
 import {Priority} from './deferredActions/Priority';
-import {RobotCard} from './cards/promo/SelfReplicatingRobots';
 import {SerializedPlayer} from './SerializedPlayer';
 import {Timer} from '../common/Timer';
 import {AllOptions, DrawOptions} from './deferredActions/DrawCards';
@@ -161,7 +160,6 @@ export interface IPlayer {
   getTitaniumValue(): number;
   increaseTitaniumValue(): void;
   decreaseTitaniumValue(): void;
-  getSelfReplicatingRobotsTargetCards(): Array<RobotCard>;
   getSteelValue(): number;
   increaseSteelValue(): void;
   decreaseSteelValue(): void;

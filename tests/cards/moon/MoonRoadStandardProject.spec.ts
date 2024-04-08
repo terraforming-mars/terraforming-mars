@@ -77,9 +77,9 @@ describe('MoonRoadStandardProject', () => {
     // Card requirements
     player.steel = 1;
 
-    testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
     moonData.logisticRate = 8;
-    testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct */ true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
 

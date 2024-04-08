@@ -54,7 +54,7 @@ describe('WaterSplittingPlant', function() {
       maxOutOceans(player, 2);
 
       setOxygenLevel(game, run.oxygen);
-      testRedsCosts(() => card.canAct(player), player, 0, run.expected, /* canAct= */true);
+      testRedsCosts(() => card.canAct(player), player, 0, run.expected);
     });
   }
 });

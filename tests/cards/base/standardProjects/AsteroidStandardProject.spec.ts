@@ -55,8 +55,8 @@ describe('AsteroidStandardProject', function() {
 
   it('Test reds', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
-    testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct= */ true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
     setTemperature(game, 8);
-    testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct= */ true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });

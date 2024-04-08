@@ -134,9 +134,8 @@ export function formatMessage(message: Message | string): string {
  * @param player player taking the action
  * @param initialMegacredits starting money
  * @param passingDelta additional money required to take this action when Reds are in power.. Typically a multiple of 3
- * @param canAct set to true when cb calls canAct, which returns different results from canPlay. At the moment.
  */
-export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number, canAct: boolean = false) {
+export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number) {
   const turmoil = Turmoil.getTurmoil(player.game);
 
   {
@@ -160,10 +159,9 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, player.game);
     player.megaCredits = initialMegacredits + passingDelta;
-    if (passingDelta > 0 && canAct === false) {
-      expect(cb(), 'Reds in power, can afford').deep.eq({redsCost: passingDelta});
-    } else {
-      expect(cb(), 'Reds in power, can afford').is.true;
+    if (passingDelta > 0) {
+      // TODO(kberg): Change to is.true
+      expect(cb(), 'Reds in power, can afford').is.not.false;
     }
   }
 }

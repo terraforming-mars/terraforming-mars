@@ -446,9 +446,9 @@ export class Turmoil {
     return Array.from(new Set(this.delegateReserve));
   }
 
-  /** Return true if `playerId` has delegates in reserve. */
-  public hasDelegatesInReserve(playerId: Delegate): boolean {
-    return this.getAvailableDelegateCount(playerId) > 0;
+  /** Return true if `player` has delegates in reserve. */
+  public hasDelegatesInReserve(player: Delegate): boolean {
+    return this.getAvailableDelegateCount(player) > 0;
   }
 
   /**

@@ -3,6 +3,7 @@ import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputRespo
 import {IPlayer} from '../IPlayer';
 import {OrOptionsModel} from '../../common/models/PlayerInputModel';
 import {OptionsInput} from './OptionsPlayerInput';
+import {InputError} from './InputError';
 
 export class OrOptions extends OptionsInput<undefined> {
   constructor(...options: Array<PlayerInput>) {
@@ -25,10 +26,10 @@ export class OrOptions extends OptionsInput<undefined> {
 
   public process(input: InputResponse, player: IPlayer) {
     if (!isOrOptionsResponse(input)) {
-      throw new Error('Not a valid OrOptionsResponse');
+      throw new InputError('Not a valid OrOptionsResponse');
     }
     if (this.options.length <= input.index) {
-      throw new Error('Invalid index');
+      throw new InputError('Invalid index');
     }
     player.runInput(input.response, this.options[input.index]);
     return this.cb(undefined);

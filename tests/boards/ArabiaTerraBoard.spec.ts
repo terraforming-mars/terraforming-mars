@@ -12,18 +12,16 @@ import {SearchForLife} from '../../src/server/cards/base/SearchForLife';
 import {Decomposers} from '../../src/server/cards/base/Decomposers';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {testGame} from '../TestGame';
 
 describe('ArabiaTerraBoard', function() {
   let board: ArabiaTerraBoard;
   let game: Game;
   let player: TestPlayer;
-  let player2: TestPlayer;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameId', [player, player2], player, {boardName: BoardName.ARABIA_TERRA});
-    board = game.board as ArabiaTerraBoard;
+    [game, player/* , player2 */] = testGame(2, {boardName: BoardName.ARABIA_TERRA});
+    board = cast(game.board, ArabiaTerraBoard);
   });
 
   it('Can place an ocean in a cove', () => {

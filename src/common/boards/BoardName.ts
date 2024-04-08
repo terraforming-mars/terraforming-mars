@@ -4,6 +4,7 @@ export enum BoardName {
   ELYSIUM = 'elysium',
 
   UTOPIA_PLANITIA = 'utopia planitia',
+  VASTITAS_BOREALIS_NOVUS = 'vastitas borealis novus',
 
   ARABIA_TERRA = 'arabia terra',
   VASTITAS_BOREALIS = 'vastitas borealis',

@@ -2,6 +2,7 @@ import {Message} from '../../common/logs/Message';
 import {BasePlayerInput} from '../PlayerInput';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
 import {SelectAmountModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export class SelectAmount extends BasePlayerInput<number> {
   constructor(
@@ -28,16 +29,16 @@ export class SelectAmount extends BasePlayerInput<number> {
 
   public process(input: InputResponse) {
     if (!isSelectAmountResponse(input)) {
-      throw new Error('Not a valid SelectAmountResponse');
+      throw new InputError('Not a valid SelectAmountResponse');
     }
     if (isNaN(input.amount)) {
-      throw new Error('Amount is not a number');
+      throw new InputError('Amount is not a number');
     }
     if (input.amount > this.max) {
-      throw new Error('Amount provided too high (max ' + String(this.max) + ')');
+      throw new InputError('Amount provided too high (max ' + String(this.max) + ')');
     }
     if (input.amount < this.min) {
-      throw new Error('Amount provided too low (min ' + String(this.min) + ')');
+      throw new InputError('Amount provided too low (min ' + String(this.min) + ')');
     }
     return this.cb(input.amount);
   }

@@ -73,6 +73,7 @@ import {UnderworldData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
 import { SelfReplicatingRobots } from './cards/promo/SelfReplicatingRobots';
+import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -1368,6 +1369,9 @@ export class Game implements IGame, Logger {
       break;
     case SpaceBonus.ASTEROID:
       this.defer(new AddResourcesToCard(player, CardResource.ASTEROID, {count: count}));
+      break;
+    case SpaceBonus.DELEGATE:
+      Turmoil.ifTurmoil(this, () => this.defer(new SendDelegateToArea(player)));
       break;
     default:
       throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');

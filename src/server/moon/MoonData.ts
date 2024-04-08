@@ -1,5 +1,6 @@
 import {PlayerId} from '../../common/Types';
 import {IPlayer} from '../IPlayer';
+import {Board} from '../boards/Board';
 import {MoonBoard} from './MoonBoard';
 import {SerializedMoonData} from './SerializedMoonData';
 
@@ -36,11 +37,14 @@ export namespace MoonData {
   }
 
   export function deserialize(moonData: SerializedMoonData, players: Array<IPlayer>): MoonData {
+    const spaces = Board.deserialize(moonData.moon, players).spaces;
+    const board = new MoonBoard(spaces);
+
     return {
       habitatRate: moonData.habitatRate,
       logisticRate: moonData.logisticRate,
       miningRate: moonData.miningRate,
-      moon: MoonBoard.deserialize(moonData.moon, players),
+      moon: board,
       lunaFirstPlayer: findPlayer(players, moonData.lunaFirstPlayerId),
       lunaProjectOfficeLastGeneration: moonData.lunaProjectOfficeLastGeneration,
     };

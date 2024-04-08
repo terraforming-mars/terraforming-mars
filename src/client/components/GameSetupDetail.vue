@@ -90,6 +90,7 @@ const boardColorClass: Record<BoardName, string> = {
   [BoardName.HELLAS]: 'game-config board-hellas map',
   [BoardName.ELYSIUM]: 'game-config board-elysium map',
   [BoardName.UTOPIA_PLANITIA]: 'game-config board-utopia-planitia map',
+  [BoardName.VASTITAS_BOREALIS_NOVUS]: 'game-config board-vastitas_borealis_novus map',
   [BoardName.AMAZONIS]: 'game-config board-amazonis map',
   [BoardName.ARABIA_TERRA]: 'game-config board-arabia_terra map',
   [BoardName.VASTITAS_BOREALIS]: 'game-config board-vastitas_borealis map',

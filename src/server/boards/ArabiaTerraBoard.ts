@@ -49,16 +49,12 @@ export class ArabiaTerraBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined);
-  }
-
-  public override getVolcanicSpaceIds() {
-    return [
+    super(spaces, undefined, [
       SpaceName.TIKHONAROV,
       SpaceName.LADON,
       SpaceName.FLAUGERGUES,
       SpaceName.CHARYBDIS,
-    ];
+    ]);
   }
 
   public override getSpaces(spaceType: SpaceType): Array<Space> {

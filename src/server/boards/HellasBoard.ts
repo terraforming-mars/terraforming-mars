@@ -46,7 +46,7 @@ export class HellasBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined);
+    super(spaces, undefined, []);
   }
 
   public override spaceCosts(space: Space): SpaceCosts {

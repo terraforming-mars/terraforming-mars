@@ -11,8 +11,11 @@ import {SpaceId} from '../../common/Types';
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
 
-  protected constructor(spaces: ReadonlyArray<Space>, noctisCitySpaceId: SpaceId | undefined) {
-    super(spaces, noctisCitySpaceId);
+  protected constructor(
+    spaces: ReadonlyArray<Space>,
+    noctisCitySpaceId: SpaceId | undefined,
+    volcanicSpaceIds: ReadonlyArray<SpaceId>) {
+    super(spaces, noctisCitySpaceId, volcanicSpaceIds);
     this.edges = this.computeEdges();
   }
 
@@ -150,7 +153,7 @@ export class MarsBoard extends Board {
   }
 
   public getAvailableVolcanicSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
-    const volcanicSpaceIds = this.getVolcanicSpaceIds();
+    const volcanicSpaceIds = this.volcanicSpaceIds;
 
     const spaces = this.getAvailableSpacesOnLand(player, canAffordOptions);
     if (volcanicSpaceIds.length > 0) {

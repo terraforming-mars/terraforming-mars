@@ -6,7 +6,6 @@ import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
-import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 
 export class VastitasBorealisBoard extends MarsBoard {
@@ -48,7 +47,12 @@ export class VastitasBorealisBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined);
+    super(spaces, undefined, [
+      SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
+      SpaceName.ALBA_FOSSAE,
+      SpaceName.CERANIUS_FOSSAE,
+      SpaceName.ALBA_MONS,
+    ]);
   }
 
   public override spaceCosts(space: Space): SpaceCosts {
@@ -58,14 +62,5 @@ export class VastitasBorealisBoard extends MarsBoard {
       costs.tr.oceans = 1;
     }
     return costs;
-  }
-
-  public override getVolcanicSpaceIds(): Array<SpaceId> {
-    return [
-      SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
-      SpaceName.ALBA_FOSSAE,
-      SpaceName.CERANIUS_FOSSAE,
-      SpaceName.ALBA_MONS,
-    ];
   }
 }

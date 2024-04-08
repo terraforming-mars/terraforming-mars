@@ -50,7 +50,7 @@ export class MoonBoard extends Board {
   }
 
   public constructor(spaces: Array<Space>) {
-    super(spaces, undefined);
+    super(spaces, undefined, []);
   }
 }
 

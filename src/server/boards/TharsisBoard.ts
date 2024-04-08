@@ -4,7 +4,6 @@ import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
-import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 
 export class TharsisBoard extends MarsBoard {
@@ -44,15 +43,11 @@ export class TharsisBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, SpaceName.NOCTIS_CITY);
-  }
-
-  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
-    return [
+    super(spaces, SpaceName.NOCTIS_CITY, [
       SpaceName.ASCRAEUS_MONS,
       SpaceName.ARSIA_MONS,
       SpaceName.PAVONIS_MONS,
       SpaceName.THARSIS_THOLUS,
-    ];
+    ]);
   }
 }

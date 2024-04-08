@@ -4,7 +4,6 @@ import {SpaceName} from '../SpaceName';
 import {Random} from '../../common/utils/Random';
 import {Space} from './Space';
 import {GameOptions} from '../game/GameOptions';
-import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 
 export class TerraCimmeriaBoard extends MarsBoard {
@@ -46,15 +45,11 @@ export class TerraCimmeriaBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined);
-  }
-
-  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
-    return [
+    super(spaces, undefined, [
       SpaceName.ALBOR_THOLUS_TERRACIMMERIA,
       SpaceName.APOLLINARIS_MONS,
       SpaceName.HADRIACUS_MONS,
       SpaceName.TYRRHENUS_MONS,
-    ];
+    ]);
   }
 }

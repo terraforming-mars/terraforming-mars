@@ -1,14 +1,18 @@
 import * as dotenv from 'dotenv';
 import {expect} from 'chai';
-import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
+import {describeDatabaseSuite} from '../database/databaseSuite';
+import {ITestDatabase, Status} from '../database/ITestDatabase';
+import {IGame} from '../../src/server/IGame';
 import {Game} from '../../src/server/Game';
 import {PostgreSQL} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
-import {runAllActions, testGameOptions} from '../TestingUtils';
-import {Player} from '../../src/server/Player';
+import {runAllActions} from '../TestingUtils';
+import {IPlayer} from '../../src/server/IPlayer';
 import {GameLoader} from '../../src/server/database/GameLoader';
+import {GameId} from '../../src/common/Types';
+import {QueryResult} from 'pg';
 
 dotenv.config({path: 'tests/integration/.env', debug: true});
 
@@ -30,7 +34,7 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   }
 
   // Tests can wait for saveGamePromise since save() is called inside other methods.
-  public override async saveGame(game: Game): Promise<void> {
+  public override async saveGame(game: IGame): Promise<void> {
     this.lastSaveGamePromise = super.saveGame(game);
     this.promises.push(this.lastSaveGamePromise);
     return this.lastSaveGamePromise;
@@ -60,8 +64,31 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     await Promise.all(this.promises);
     this.promises.length = 0;
   }
+
   public async getStat(field: string): Promise<string | number> {
     return (await this.stats())[field];
+  }
+
+  async status(gameId: GameId): Promise<Status> {
+    const result = await this.client.query('SELECT DISTINCT status FROM games WHERE game_id = $1 LIMIT 1', [gameId]);
+    const statusText = result.rows[0].status;
+    if (statusText === 'running' || statusText === 'finished') {
+      return statusText;
+    }
+    throw new Error('Invalid status for ' + gameId + ': ' + statusText);
+  }
+
+  async completedTime(gameId: GameId): Promise<number | undefined> {
+    const res = await this.client.query('SELECT completed_time FROM completed_game WHERE game_id = $1', [gameId]);
+    if (res.rows.length === 0 || res.rows[0] === undefined) {
+      return undefined;
+    }
+    const row = res.rows[0];
+    return row.completed_time;
+  }
+
+  setCompletedTime(gameId: GameId, timestampSeconds: number): Promise<QueryResult<any>> {
+    return this.client.query('UPDATE completed_game SET completed_time = to_timestamp($1) WHERE game_id = $2', [timestampSeconds, gameId]);
   }
 }
 
@@ -70,6 +97,7 @@ describeDatabaseSuite({
   constructor: () => new TestPostgreSQL(),
   omit: {
     purgeUnfinishedGames: true,
+    markFinished: true,
   },
   stats: {
     'type': 'POSTGRESQL',
@@ -153,9 +181,9 @@ describeDatabaseSuite({
     it('test save id count with undo', async () => {
       // Set up a simple game.
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({draftVariant: false, undoOption: true}));
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
+      const player2 = TestPlayer.RED.newPlayer({beginner: true});
+      const game = Game.newInstance('gameid', [player, player2], player, {draftVariant: false, undoOption: true});
       await db.awaitAllSaves();
 
       expect(await db.getStat('save-count')).eq(1);
@@ -174,9 +202,9 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with our own simple option, and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
-        const simpleOption = new SelectOption('', '', () => undefined);
+        const simpleOption = new SelectOption('');
         p.setWaitingFor(simpleOption, () => {
           (p as any).incrementActionsTaken();
           p.takeAction();
@@ -228,9 +256,9 @@ describeDatabaseSuite({
 
     it('undo works in multiplayer, other players have passed', async () => {
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player, player2], player2, testGameOptions({draftVariant: false, undoOption: true}));
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
+      const player2 = TestPlayer.RED.newPlayer({beginner: true});
+      const game = Game.newInstance('gameid', [player, player2], player2, {draftVariant: false, undoOption: true});
       await db.awaitAllSaves();
 
       // Move into the action phase by having both players complete their research.
@@ -251,9 +279,9 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
-        const simpleOption = new SelectOption('', '', () => {
+        const simpleOption = new SelectOption('').andThen(() => {
           player.megaCredits++;
           return undefined;
         });
@@ -320,8 +348,8 @@ describeDatabaseSuite({
 
     it('undo works in solo', async () => {
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player], player, testGameOptions({undoOption: true}));
+      const player = TestPlayer.BLACK.newPlayer({beginner: true});
+      const game = Game.newInstance('gameid', [player], player, {undoOption: true});
       await db.awaitAllSaves();
 
       // Move into the action phase. This triggers a save.
@@ -332,9 +360,9 @@ describeDatabaseSuite({
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
-      function takeAction(p: Player) {
+      function takeAction(p: IPlayer) {
         // A do-nothing player input
-        const simpleOption = new SelectOption('', '', () => {
+        const simpleOption = new SelectOption('').andThen(() => {
           player.megaCredits++;
           return undefined;
         });

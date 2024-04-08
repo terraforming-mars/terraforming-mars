@@ -16,7 +16,7 @@ describe('GrantResourceDeferred', function() {
   let tardigrades: Tardigrades;
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     ants = new Ants();
     tardigrades = new Tardigrades();
     player.playedCards.push(ants);
@@ -34,7 +34,7 @@ describe('GrantResourceDeferred', function() {
     selectOptions.options[4].cb(0);
     selectOptions.options[5].cb(1);
 
-    selectOptions.cb();
+    selectOptions.cb(undefined);
 
     expect(player.megaCredits).eq(0);
     expect(player.steel).eq(0);

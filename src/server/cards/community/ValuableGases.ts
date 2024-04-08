@@ -1,5 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -30,19 +30,16 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    const playableCards = player.getPlayableCards().filter((card) => card.tags.includes(Tag.VENUS));
+  public override bespokePlay(player: IPlayer) {
+    const playableCards = player.getPlayableCards().filter((card) => card.card.tags.includes(Tag.VENUS));
 
     if (playableCards.length > 0) {
-      return new SelectProjectCardToPlay(
-        player,
-        playableCards,
-        {
-          cb: (card) => {
-            if (card.resourceType === CardResource.FLOATER) {
-              player.addResourceTo(card, 4);
-            }
-          },
+      return new SelectProjectCardToPlay(player, playableCards)
+        .andThen((card) => {
+          if (card.resourceType === CardResource.FLOATER) {
+            player.addResourceTo(card, 4);
+          }
+          return undefined;
         });
     }
 

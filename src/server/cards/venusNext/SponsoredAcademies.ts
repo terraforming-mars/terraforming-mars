@@ -1,8 +1,8 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../render/CardRenderer';
 import {DrawCards} from '../../deferredActions/DrawCards';
@@ -30,15 +30,15 @@ export class SponsoredAcademies extends Card implements IProjectCard {
       },
     });
   }
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return player.cardsInHand.length > 1; // this card and at least another
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
+    // TODO(kberg): Use DiscardCards.andThen().
     player.game.defer(new DiscardCards(player), Priority.SPONSORED_ACADEMIES);
     player.game.defer(DrawCards.keepAll(player, 3), Priority.SPONSORED_ACADEMIES);
-    const otherPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);
-    for (const p of otherPlayers) {
+    for (const p of player.getOpponents()) {
       player.game.defer(DrawCards.keepAll(p));
     }
     return undefined;

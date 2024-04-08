@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,7 +14,6 @@ export class SocialEvents extends Card implements IProjectCard {
       name: CardName.SOCIAL_EVENTS,
       cost: 18,
       tags: [Tag.EARTH, Tag.MARS],
-      tr: ((player) => ({tr: this.getExpectedTr(player)})),
 
       metadata: {
         cardNumber: '...',
@@ -26,12 +25,14 @@ export class SocialEvents extends Card implements IProjectCard {
     });
   }
 
-  private getExpectedTr(player: Player) {
-    return Math.floor((player.tags.count(Tag.MARS) + 1) / 2); // +1 is the "including this"
+  public computeTr(player: IPlayer) {
+    const expectedTr = Math.floor((player.tags.count(Tag.MARS) + 1) / 2); // +1 is the "including this";
+    return {tr: expectedTr};
   }
 
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(this.getExpectedTr(player), {log: true});
+  public override bespokePlay(player: IPlayer) {
+    const steps = this.computeTr(player).tr;
+    player.increaseTerraformRating(steps, {log: true});
     return undefined;
   }
 }

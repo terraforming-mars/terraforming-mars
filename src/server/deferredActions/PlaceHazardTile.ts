@@ -1,16 +1,18 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../boards/ISpace';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {_AresHazardPlacement} from '../ares/AresHazards';
 import {TileType} from '../../common/TileType';
+import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
 
 export class PlaceHazardTile extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public hazardType: TileType.DUST_STORM_MILD | TileType.EROSION_MILD,
     private options?: {
-      title?: string,
+      title?: string | Message,
     }) {
     super(player, Priority.DEFAULT);
   }
@@ -22,16 +24,13 @@ export class PlaceHazardTile extends DeferredAction {
       return undefined;
     }
     const hazardType = this.hazardType;
-    const title = this.options?.title || 'Select space for ' + TileType.toString(hazardType);
+    const title = this.options?.title || message('Select space for ${0}', (b) => b.tileType(hazardType));
 
-    return new SelectSpace(
-      title,
-      availableSpaces,
-      (space: ISpace) => {
+    return new SelectSpace(title, availableSpaces)
+      .andThen((space) => {
         _AresHazardPlacement.putHazardAt(space, hazardType);
         return undefined;
-      },
-    );
+      });
   }
 }
 

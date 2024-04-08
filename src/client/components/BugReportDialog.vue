@@ -25,6 +25,7 @@ import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SpectatorId} from '@/common/Types';
+import {getPreferences} from '../utils/PreferencesManager';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -80,11 +81,17 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     setMessage() {
       const playerView = vueRoot(this).playerView;
-      this.message = `URL: ${this.url(playerView)}
-Player color: ${playerView?.thisPlayer.color}
-Step: ${playerView?.game.step}
-Version: ${raw_settings.head}, built at ${raw_settings.builtAt}
-Browser: ${browser()}`;
+      const content = {
+        url: this.url(playerView),
+        color: playerView?.thisPlayer.color,
+        step: playerView?.game.step,
+        version: raw_settings.head,
+        builtAt: raw_settings.builtAt,
+        browser: browser(),
+        language: getPreferences().lang,
+        experimental_ui: getPreferences().experimental_ui,
+      };
+      this.message = JSON.stringify(content, null, 2);
     },
   },
   mounted() {

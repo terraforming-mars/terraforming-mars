@@ -1,21 +1,19 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {ITagCount} from '../../../common/cards/ITagCount';
-import {CardType} from '../../../common/cards/CardType';
+import {TagCount} from '../../../common/cards/TagCount';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {inplaceRemove} from '../../../common/utils/utils';
 
-export class AgricolaInc extends Card implements ICorporationCard {
+export class AgricolaInc extends CorporationCard {
   constructor() {
     super({
       name: CardName.AGRICOLA_INC,
       tags: [Tag.PLANT],
       startingMegaCredits: 40,
-      type: CardType.CORPORATION,
 
       victoryPoints: 'special',
       behavior: {
@@ -37,12 +35,13 @@ export class AgricolaInc extends Card implements ICorporationCard {
     });
   }
 
-  public override getVictoryPoints(player: Player): number {
-    // TODO(kberg): Include  the remaining tags.
-    const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.POWER, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
-    if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tag.VENUS);
+  public override getVictoryPoints(player: IPlayer): number {
+    const scorableTags = [...player.game.tags];
+    inplaceRemove(scorableTags, Tag.WILD);
+    inplaceRemove(scorableTags, Tag.EVENT);
+    inplaceRemove(scorableTags, Tag.CLONE);
 
-    const playerTags : ITagCount[] = player.tags.getAllTags();
+    const playerTags : TagCount[] = player.tags.countAllTags();
     let points = 0;
 
     scorableTags.forEach((tag) => {

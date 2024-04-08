@@ -3,7 +3,7 @@ import {AsteroidMiningConsortium} from '../../../src/server/cards/base/AsteroidM
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -19,16 +19,16 @@ describe('AsteroidMiningConsortium', function() {
   });
 
   it('Cannot play if no titanium production', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play if player has titanium production', function() {
-    player.production.add(Resources.TITANIUM, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    player.production.add(Resource.TITANIUM, 1);
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play - auto select if single target', function() {
-    player2.production.add(Resources.TITANIUM, 1);
+    player2.production.add(Resource.TITANIUM, 1);
 
     expect(player.production.titanium).to.eq(0);
     expect(player2.production.titanium).to.eq(1);
@@ -43,7 +43,7 @@ describe('AsteroidMiningConsortium', function() {
   });
 
   it('Should play - do not auto select single target is self', function() {
-    player.production.add(Resources.TITANIUM, 1);
+    player.production.add(Resource.TITANIUM, 1);
     card.play(player); // can decrease own production
 
     runAllActions(game);
@@ -58,14 +58,14 @@ describe('AsteroidMiningConsortium', function() {
 
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(player.production.titanium).to.eq(1);
   });
 
   it('Should play - multiple targets', function() {
-    player.production.add(Resources.TITANIUM, 1);
-    player2.production.add(Resources.TITANIUM, 1);
+    player.production.add(Resource.TITANIUM, 1);
+    player2.production.add(Resource.TITANIUM, 1);
     card.play(player);
 
     runAllActions(game);

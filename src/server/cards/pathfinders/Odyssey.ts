@@ -1,7 +1,6 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -10,10 +9,9 @@ import {IActionCard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 
-export class Odyssey extends Card implements ICorporationCard, IActionCard {
+export class Odyssey extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ODYSSEY,
       startingMegaCredits: 33,
 
@@ -41,31 +39,38 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
   }
 
 
-  public availableEventCards(player: Player) {
+  private availableEventCards(player: IPlayer) {
     this.checkLoops++;
     try {
-      return player.playedCards.filter((card) => {
-        return card.type === CardType.EVENT &&
-        card.cost <= 16 &&
-        player.canPlay(card);
-      });
+      const array = [];
+      for (const card of player.playedCards) {
+        // Special case Price Wars, which is not easy to work with.
+        if (card.name === CardName.PRICE_WARS) {
+          continue;
+        }
+        if (card.type === CardType.EVENT && card.cost <= 16) {
+          const details = player.canPlay(card);
+          if (details !== false) {
+            array.push({card, details});
+          }
+        }
+      }
+      return array;
     } finally {
       this.checkLoops--;
     }
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return this.availableEventCards(player).length > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const eventCards = this.availableEventCards(player);
-    return new SelectProjectCardToPlay(
-      player,
-      eventCards,
-      {
-        action: 'discard',
-        cb: (card) => player.removedFromPlayCards.push(card),
+    return new SelectProjectCardToPlay(player, eventCards, {action: 'discard'})
+      .andThen((card) => {
+        player.removedFromPlayCards.push(card);
+        return undefined;
       });
   }
 }

@@ -153,6 +153,11 @@
 	background-size: 16px;
 }
 
+.board-space-bonus--delegate {
+	background: url(./assets/misc/delegate.png) no-repeat;
+	background-size: 16px;
+}
+
 .board-space-tile--ocean {
 	background: url(./assets/board_icons.png) -79px -29px no-repeat;
 	width: 46px;
@@ -224,6 +229,16 @@
 	height: 21px;
 	z-index: 3;
 	margin: 25px 0 0 15px;
+	filter: drop-shadow(2px 2px 3px black);
+}
+
+// for The Moon
+.board-cube-coOwner {
+	position: absolute;
+	width: 21px;
+	height: 21px;
+	z-index: 3;
+	margin: 8px 0 0 4px;
 	filter: drop-shadow(2px 2px 3px black);
 }
 
@@ -319,9 +334,10 @@
 		font-weight: bold;
 		text-align: center;
 		position: absolute;
-		margin: 6px 0 0 0px;
+		padding: 8px 0 6px 0px;
 		color: black;
 		background-color: rgba(255, 255, 255, .6);
+		clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 	}
 
 	.board-space-bonuses {
@@ -400,4 +416,118 @@
 		padding-top: 14px;
 		text-align: center;
 	}
+}
+
+.gagarin {
+	&.visited {
+		filter: brightness(.7)
+	}
+	position: absolute;
+  margin: 7px 0 0 14px;
+	background: url(./assets/pathfinders/gagarin.png);
+	background-size: 16px;
+	width: 16px;
+	height: 9px;
+}
+
+.board-cube--cathedral {
+	position: absolute;
+  margin: 3px 0 0 14px;
+	background: url(./assets/promo/cathedral.png);
+	background-size: 20px;
+	width: 20px;
+	height: 20px;
+}
+
+.board-cube--nomad {
+	position: absolute;
+	background: linear-gradient(to bottom right, gold, goldenrod, gold);
+	width: 15px;
+	height: 15px;
+	z-index: 3;
+	margin: 8px 0 0 16px;
+	border: 1px solid black;
+}
+
+
+.underground-token-background {
+	position: absolute;
+	width: 20px;
+	height: 18px;
+  background-size: 20px 18px;
+	z-index: 3;
+	margin: 8px 0 0 20px;
+	filter: drop-shadow(2px 2px 3px black);
+  background-image: url("assets/underworld/underground-token-background.png");
+}
+
+.underground-token-resource {
+	position: absolute;
+	width: 22px;
+	height: 22px;
+  background-size: 22px;
+	z-index: 3;
+	margin: 6px 0 0 19px;
+	filter: drop-shadow(2px 2px 3px black);
+}
+
+@token_types:
+	nothing,
+	card1, card2,
+	corruption1, corruption2,
+	data1, data2, data3,
+	steel2, steel1production,
+	titanium2, titanium1production,
+	plant1, plant2, plant3, plant1production,
+	titaniumandplant,
+	energy1production, heat2production,
+	microbe1, microbe2, tr, ocean,
+	data1pertemp, microbe1pertemp, plant2pertemp, steel2pertemp, titanium1pertemp;
+each(@token_types, {
+  .underground-token--@{value} {
+    background-image: url("assets/underworld/underground-resource--@{value}.png");
+  }
+})
+
+.underground-excavator {
+	position: absolute;
+	width: 21px;
+	height: 21px;
+	z-index: 3;
+	margin: 7px 0 0 21px;
+	filter: drop-shadow(2px 2px 3px black);
+  transform: rotate(0.14turn);
+}
+
+// TODO(kberg): Replace with a different shape
+.underground-excavator--red {
+	background: url(./assets/board_icons.png) -24px -91px no-repeat;
+}
+
+.underground-excavator--blue {
+	background: url(./assets/board_icons.png) -94px -91px no-repeat;
+}
+
+.underground-excavator--black {
+	background: url(./assets/board_icons.png) -48px -91px no-repeat;
+}
+
+.underground-excavator--yellow {
+	background: url(./assets/board_icons.png) -72px -91px no-repeat;
+}
+
+.underground-excavator--green {
+	background: url(./assets/board_icons.png) -1px -91px no-repeat;
+}
+
+.underground-excavator--purple {
+	background: url(./assets/board_icons.png) -118px -91px no-repeat;
+}
+
+.underground-excavator--orange {
+	background: url(./assets/board_icons.png) -1px -117px no-repeat;
+}
+
+.underground-excavator--pink {
+	background: url(./assets/board_icons.png) -24px -117px no-repeat;
 }

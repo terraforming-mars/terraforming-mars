@@ -1,11 +1,11 @@
 import {MilestoneName} from '../../common/ma/MilestoneName';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export interface IMilestone {
   name: MilestoneName;
   description: string;
-  canClaim(player: Player): boolean;
-  getScore(player: Player): number;
+  canClaim(player: IPlayer): boolean;
+  getScore(player: IPlayer): number;
 }
 
 export abstract class BaseMilestone implements IMilestone {
@@ -19,8 +19,8 @@ export abstract class BaseMilestone implements IMilestone {
     this.threshold = threshold;
   }
 
-  public abstract getScore(player: Player): number;
-  public canClaim(player: Player): boolean {
+  public abstract getScore(player: IPlayer): number;
+  public canClaim(player: IPlayer): boolean {
     return this.getScore(player) >= this.threshold;
   }
 }

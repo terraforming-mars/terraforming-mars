@@ -19,14 +19,13 @@ describe('Extremophiles', function() {
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new Research());
-    expect(player.simpleCanPlay(card)).is.true;
-    const action = card.play(player);
-    expect(action).is.undefined;
+    expect(card.canPlay(player)).is.true;
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {

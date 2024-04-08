@@ -8,7 +8,6 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
-import {CardRequirements} from '../../../src/server/cards/CardRequirements';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Businessperson} from '../../../src/server/milestones/Businessperson';
 import {Scientist} from '../../../src/server/awards/Scientist';
@@ -24,12 +23,12 @@ describe('Chimera', function() {
 
   beforeEach(function() {
     card = new Chimera();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 
   it('as action', function() {
-    const a = fakeCard({name: 'A' as CardName, requirements: CardRequirements.builder((f) => f.tag(Tag.EARTH, 4))});
+    const a = fakeCard({name: 'A' as CardName, requirements: [{tag: Tag.EARTH, count: 4}]});
     player.megaCredits = card.cost;
     player.playedCards = [new BusinessNetwork()];
     expect(player.canPlay(a)).is.false;
@@ -48,7 +47,7 @@ describe('Chimera', function() {
   });
 
   it('as award', function() {
-    // Scientist: Having the most science tags in play
+    // Scientist: Have the most science tags in play
     const award = new Scientist();
     expect(award.getScore(player)).eq(1);
     player.playedCards = [new AdaptationTechnology()];
@@ -56,7 +55,7 @@ describe('Chimera', function() {
   });
 
   it('as milestone, single tag count', function() {
-    // Businessperson: Requires that you have 6 Earth tags in play
+    // Businessperson: Have at least 6 Earth tags in play
     const milestone = new Businessperson();
     player.playedCards = [new BusinessNetwork(), new EarthCatapult(), new Cartel()];
     expect(milestone.getScore(player)).eq(4);

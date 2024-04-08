@@ -2,10 +2,9 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions, forceGenerationEnd} from '../../TestingUtils';
+import {runAllActions, forceGenerationEnd, cast} from '../../TestingUtils';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-
 import {Xu} from '../../../src/server/cards/ceos/Xu';
 
 
@@ -41,7 +40,7 @@ describe('Xu', function() {
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     // Gains correct M€ amount:
     //  Venus Tags:
@@ -59,7 +58,7 @@ describe('Xu', function() {
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     // Gains correct M€ amount:
     //  Venus Tags:
@@ -71,13 +70,13 @@ describe('Xu', function() {
   });
 
 
-  it('Takes OPG action, does not have the most venus tags', function() {
+  it('Takes OPG action, does not Have the most Venus tags in play', function() {
     player2.playedCards.push(fakeCard({tags: [Tag.VENUS, Tag.VENUS]}));
 
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     // Gains correct M€ amount:
     //  Venus Tags:
@@ -94,7 +93,7 @@ describe('Xu', function() {
     expect(player.megaCredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     // Gains correct M€ amount:
     //  Venus Tags:

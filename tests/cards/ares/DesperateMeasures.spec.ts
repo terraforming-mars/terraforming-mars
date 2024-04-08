@@ -51,6 +51,7 @@ describe('DesperateMeasures', function() {
   it('hazard tile with player marker cannot be played on', function() {
     const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
+    player.megaCredits = 8;
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).contains(protectedDustStorm.id);
 
     cast(card.play(player), SelectSpace).cb(protectedDustStorm);

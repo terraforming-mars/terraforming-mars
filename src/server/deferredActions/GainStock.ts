@@ -1,15 +1,16 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export type Options = {
-  cb?: () => void;
+  cb?(): void;
   log?: boolean;
 }
 
 export class GainStock extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public units: Units,
     public options: Options = {},
   ) {
@@ -20,7 +21,7 @@ export class GainStock extends DeferredAction {
   }
 
   public execute() {
-    this.player.addUnits(this.units, {log: this.options.log});
+    this.player.stock.addUnits(this.units, {log: this.options.log});
     this.options.cb?.();
     return undefined;
   }

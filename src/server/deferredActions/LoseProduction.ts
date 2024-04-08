@@ -1,6 +1,7 @@
-import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
-import {DeferredAction, Priority} from './DeferredAction';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export type Options = {
   count?: number;
@@ -8,8 +9,8 @@ export type Options = {
 
 export class LoseProduction extends DeferredAction {
   constructor(
-    player: Player,
-    public resource: Resources,
+    player: IPlayer,
+    public resource: Resource,
     public options: Options = {},
   ) {
     super(player, Priority.LOSE_RESOURCE_OR_PRODUCTION);

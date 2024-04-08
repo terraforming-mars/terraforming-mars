@@ -1,9 +1,10 @@
 import {Message} from '../logs/Message';
 import {Units} from '../Units';
 import {CardName} from '../cards/CardName';
-import {Resources} from '../Resources';
+import {Resource} from '../Resource';
 import {CardDiscount} from '../cards/Types';
 import {Tag} from '../cards/Tag';
+import {Warning} from '../cards/Warning';
 
 export interface CardModel {
     name: CardName;
@@ -11,9 +12,10 @@ export interface CardModel {
     calculatedCost?: number;
     isSelfReplicatingRobotsCard?: boolean,
     discount?: Array<CardDiscount>,
-    isDisabled: boolean; // Used with Pharmacy Union
+    isDisabled?: boolean; // Used with Pharmacy Union
     warning?: string | Message;
-    reserveUnits: Readonly<Units>; // Written for The Moon, but useful in other contexts.
-    bonusResource?: Array<Resources>; // Used with the Mining cards and Robotic Workforce
+    warnings?: ReadonlyArray<Warning>;
+    reserveUnits?: Readonly<Units>; // Written for The Moon, but useful in other contexts.
+    bonusResource?: Array<Resource>; // Used with the Mining cards and Robotic Workforce
     cloneTag?: Tag; // Used with Pathfinders
 }

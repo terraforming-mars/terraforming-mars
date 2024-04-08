@@ -1,28 +1,25 @@
-import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
-import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
-import {cast, testGameOptions} from '../../TestingUtils';
-import {LunarSecurityStations} from '../../../src/server/cards/moon/LunarSecurityStations';
 import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {MoonData} from '../../../src/server/moon/MoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {cast} from '../../TestingUtils';
+import {LunarSecurityStations} from '../../../src/server/cards/moon/LunarSecurityStations';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {HiredRaiders} from '../../../src/server/cards/base/HiredRaiders';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LunarSecurityStations', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
-  let opponent1: Player;
-  let opponent2: Player;
-  let moonData: IMoonData;
+  let opponent1: TestPlayer;
+  let opponent2: TestPlayer;
+  let moonData: MoonData;
   let card: LunarSecurityStations;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    opponent1 = TestPlayer.RED.newPlayer();
-    opponent2 = TestPlayer.GREEN.newPlayer();
-    game = Game.newInstance('gameid', [player, opponent1, opponent2], player, testGameOptions({moonExpansion: true}));
+    [game, player, opponent1, opponent2] = testGame(3, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new LunarSecurityStations();
   });
@@ -36,10 +33,10 @@ describe('LunarSecurityStations', () => {
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
     spaces[2].tile = {tileType: TileType.MOON_ROAD};
 
-    expect(player.getPlayableCards()).includes(card);
+    expect(player.getPlayableCardsForTest()).includes(card);
 
     spaces[1].tile = {tileType: TileType.MOON_HABITAT};
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('protects against Hired Raiders', () => {

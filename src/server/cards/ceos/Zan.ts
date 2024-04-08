@@ -1,12 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class Zan extends CeoCard {
   constructor() {
@@ -25,15 +25,17 @@ export class Zan extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
-    const totalDelegatesPlaced = turmoil.getAvailableDelegateCount(player.id);
-    while (turmoil.getAvailableDelegateCount(player.id) > 0) {
-      turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    const totalAvailableDelegates = turmoil.getAvailableDelegateCount(player);
+    while (turmoil.getAvailableDelegateCount(player) > 0) {
+      turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     }
-    player.addResource(Resources.MEGACREDITS, totalDelegatesPlaced, {log: true});
+    // If we dont do this player will not get the bonus for POLITICAN Awards
+    player.totalDelegatesPlaced += totalAvailableDelegates;
+    player.stock.add(Resource.MEGACREDITS, totalAvailableDelegates, {log: true});
     return undefined;
   }
 }

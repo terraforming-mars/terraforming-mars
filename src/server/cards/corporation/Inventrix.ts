@@ -1,17 +1,15 @@
-import {Card} from '../Card';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Inventrix extends Card implements ICorporationCard {
+export class Inventrix extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.INVENTRIX,
       tags: [Tag.SCIENCE],
       startingMegaCredits: 45,
+      globalParameterRequirementBonus: {steps: 2},
 
       firstAction: {
         text: 'Draw 3 cards',
@@ -32,9 +30,6 @@ export class Inventrix extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-  public getRequirementBonus(): number {
-    return 2;
   }
 }
 

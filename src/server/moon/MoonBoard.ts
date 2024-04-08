@@ -1,32 +1,23 @@
 import {Board} from '../boards/Board';
-import {ISpace} from '../boards/ISpace';
-import {SerializedBoard} from '../boards/SerializedBoard';
-import {Player} from '../Player';
+import {Space} from '../boards/Space';
+import {IPlayer} from '../IPlayer';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
+import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 
-class Space implements ISpace {
-  constructor(
-    public id: string,
-    public spaceType: SpaceType,
-    public x: number,
-    public y: number,
-    public bonus: Array<SpaceBonus>) { }
-
-  public static mine(id: string, x: number, y: number, bonus: Array<SpaceBonus>) {
-    return new Space(id, SpaceType.LUNAR_MINE, x, y, bonus);
-  }
-  public static surface(id: string, x: number, y: number, bonus: Array<SpaceBonus>) {
-    return new Space(id, SpaceType.LAND, x, y, bonus);
-  }
-  public static colony(id: string) {
-    return new Space(id, SpaceType.COLONY, -1, -1, []);
-  }
+function mineSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
+  return {id, spaceType: SpaceType.LUNAR_MINE, x, y, bonus};
+}
+function surfaceSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
+  return {id, spaceType: SpaceType.LAND, x, y, bonus};
+}
+function colonySpace(id: SpaceId): Space {
+  return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
 }
 
 export class MoonBoard extends Board {
-  public getAvailableSpacesForMine(player: Player): Array<ISpace> {
+  public getAvailableSpacesForMine(player: IPlayer): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {
       const val = space.tile === undefined &&
         space.spaceType === SpaceType.LUNAR_MINE &&
@@ -58,16 +49,15 @@ export class MoonBoard extends Board {
     return new MoonBoard(b.spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): MoonBoard {
-    const spaces = Board.deserializeSpaces(board.spaces, players);
-    return new MoonBoard(spaces);
+  public constructor(spaces: Array<Space>) {
+    super(spaces);
   }
 }
 
 class Builder {
   y: number = -1;
   x: number = 0;
-  spaces: Array<ISpace> = [];
+  spaces: Array<Space> = [];
   private idx: number = 0;
 
   public row(startX: number): Row {
@@ -76,12 +66,12 @@ class Builder {
     return new Row(this);
   }
   public colony() {
-    this.spaces.push(Space.colony(this.nextId()));
+    this.spaces.push(colonySpace(this.nextId()));
   }
-  public nextId(): string {
+  public nextId(): SpaceId {
     this.idx++;
     const strId = this.idx.toString().padStart(2, '0');
-    return 'm' + strId;
+    return safeCast('m' + strId, isSpaceId);
   }
 }
 
@@ -89,14 +79,14 @@ class Row {
   constructor(private builder: Builder) {
   }
 
-  land(...bonuses: SpaceBonus[]): Row {
-    const space = Space.surface(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+  land(...bonuses: SpaceBonus[]): this {
+    const space = surfaceSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
     this.builder.spaces.push(space);
     return this;
   }
 
-  mine(...bonuses: SpaceBonus[]): Row {
-    const space = Space.mine(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+  mine(...bonuses: SpaceBonus[]): this {
+    const space = mineSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
     this.builder.spaces.push(space);
     return this;
   }

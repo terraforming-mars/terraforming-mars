@@ -1,5 +1,5 @@
-import {Game, Score} from '../Game';
-import {GameOptions} from '../GameOptions';
+import {IGame, Score} from '../IGame';
+import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
@@ -69,12 +69,14 @@ export interface IDatabase {
     /**
      * Saves the current state of the game. at a supplied save point. Used for
      * interim game updates.
+     *
+     * Do not call directly.
      */
-    saveGame(game: Game): Promise<void>;
+    saveGame(game: IGame): Promise<void>;
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal
-     * games. Called at a game's conclusion along with {@link cleanGame}.
+     * games. Called at a game's conclusion along with {@link markFinished}.
      *
      * This is not impliemented in {@link SQLite}.
      *
@@ -85,11 +87,6 @@ export interface IDatabase {
     saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
 
     /**
-     * Load a game at save point 0, and provide it in the callback.
-     */
-    loadCloneableGame(gameId: GameId): Promise<SerializedGame>;
-
-    /**
      * Deletes the last `rollbackCount` saves of the specified game.
      *
      * Used as part of undo, reset, and via API to roll back a broken game.
@@ -97,30 +94,34 @@ export interface IDatabase {
     deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void>;
 
     /**
-     * A maintenance task on a single game to close it out upon its completion.
+     * A maintenance task on a single game to mark it as complete.
+     *
      * It will:
      *
-     * * Purge all saves between `(0, last save]`.
      * * Mark the game as finished.
-     * * It also participates in purging abandoned solo games older
-     *   than a given date range, regardless of the supplied `gameId`.
-     *   Constraints for this purge vary by database.
+     * * Put it on queue to compress it after a given amount of time.
+     *   (Purges all saves between `(0, last save]`.)
      */
-    // TODO(kberg): Make the extra maintenance behavior a first-class method.
-    cleanGame(gameId: GameId): Promise<void>;
+    markFinished(gameId: GameId): Promise<void>;
+
 
     /**
      * A maintenance task that purges abandoned solo games older
      * than a given date range.
      *
-     * This is currently also part of cleanGame().
-     *
      * Behavior when the environment variable is absent is system-dependent:
      * * In PostgreSQL, it uses a default of 10 days
      * * In Sqlite, it doesn't purge
      * * This whole method is ignored in LocalFilesystem.
+     *
+     * Returns a list of purged Game IDs.
      */
-    purgeUnfinishedGames(maxGameDays?: string): Promise<void>;
+    purgeUnfinishedGames(maxGameDays?: string): Promise<Array<GameId>>;
+
+    /**
+     * A maintenance task that compresses completed games.
+     */
+    compressCompletedGames(maxGameDays?: string): Promise<unknown>;
 
     /**
      * Generate database statistics for admin purposes.

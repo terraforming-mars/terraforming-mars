@@ -1,71 +1,84 @@
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {CardDiscount} from '../../common/cards/Types';
+import {CardDiscount, GlobalParameterRequirementBonus} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
-import {Player} from '../Player';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {CardRequirements} from './CardRequirements';
-import {DynamicTRSource} from './ICard';
+import {ICard} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
-import {isICorporationCard} from './corporation/ICorporationCard';
+import {OneOrArray} from '../../common/utils/types';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
+import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
+import {CardRequirements} from './requirements/CardRequirements';
+import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
+import {asArray} from '../../common/utils/utils';
+import {YesAnd} from './requirements/CardRequirement';
+import {GlobalParameter} from '../../common/GlobalParameter';
+import {Warning} from '../../common/cards/Warning';
 
-const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
+/**
+ * Cards that do not need a cost attribute.
+ */
+const CARD_TYPES_WITHOUT_COST: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
   CardType.PRELUDE,
   CardType.CEO,
   CardType.STANDARD_ACTION,
 ] as const;
 
-type ReserveUnits = Units & {deduct: boolean};
-type FirstActionBehavior = Behavior & {text: string};
-
-/*
- * Internal representation of card properties.
- */
-type Properties = {
+/* Properties that are the same internally and externally */
+type SharedProperties = {
   /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
+  action?: Behavior | undefined;
   behavior?: Behavior | undefined;
   cardCost?: number;
-  cardDiscount?: CardDiscount | Array<CardDiscount>;
+  cardDiscount?: OneOrArray<CardDiscount>;
   type: CardType;
   cost?: number;
   initialActionText?: string;
-  firstAction?: FirstActionBehavior;
+  firstAction?: Behavior & {text: string};
+  globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
   metadata: ICardMetadata;
-  requirements?: CardRequirements;
+  requirements?: CardRequirementsDescriptor;
   name: CardName;
-  reserveUnits?: ReserveUnits,
   resourceType?: CardResource;
+  protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
-  tr?: TRSource | DynamicTRSource,
+  /** Describes where the card's TR comes from. */
+  tr?: TRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-// TODO(kberg): move this out.
-// Makes fields in T Partial.
-type PartialField<T, K extends keyof T> = Omit<T, K> & {[k in K]: Partial<T[K]>};
+/* Internal representation of card properties. */
+type InternalProperties = SharedProperties & {
+  reserveUnits?: Units,
+  requirements: Array<CardRequirementsDescriptor>
+  compiledRequirements: CardRequirements;
+  tilesBuilt: ReadonlyArray<TileType>,
+}
 
 /* External representation of card properties. */
-// type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
-export type StaticCardProperties = PartialField<Properties, 'reserveUnits'>;
+export type StaticCardProperties = SharedProperties & {
+  reserveUnits?: Partial<Units>,
+  requirements?: OneOrArray<CardRequirementDescriptor>,
+  tilesBuilt?: ReadonlyArray<TileType>,
+}
 
-export const staticCardProperties = new Map<CardName, Properties>();
+const cardProperties = new Map<CardName, InternalProperties>();
 
 /**
  * Card is an implementation for most cards in the game, which provides one key features:
@@ -74,7 +87,7 @@ export const staticCardProperties = new Map<CardName, Properties>();
  *    consumes very little memory.
  *
  * 2. It's key behavior is to provide a lot of the `canPlay` and `play` behavior currently
- *    in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
+ *    in player.canPlay and player.play. These will eventually be removed and
  *    put right in here.
  *
  * In order to implement this default behavior, Card subclasses should ideally not
@@ -86,39 +99,72 @@ export const staticCardProperties = new Map<CardName, Properties>();
  * be custom-written for each card, _no_ common behavior should be custom-written for
  * each card, either.
  */
-export abstract class Card {
-  private readonly properties: Properties;
-  constructor(properties: StaticCardProperties) {
-    let staticInstance = staticCardProperties.get(properties.name);
-    if (staticInstance === undefined) {
-      if (properties.type === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
-        throw new Error('must define startingMegaCredits for corporation cards');
-      }
-      if (properties.cost === undefined) {
-        if (NO_COST_CARD_TYPES.includes(properties.type) === false) {
-          throw new Error(`${properties.name} must have a cost property`);
-        }
-      }
-      try {
-        // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
-        Card.autopopulateMetadataVictoryPoints(properties);
-
-        validateBehavior(properties.behavior);
-        validateBehavior(properties.firstAction);
-      } catch (e) {
-        throw new Error(`Cannot validate ${properties.name}: ${e}`);
-      }
-
-      const p: Properties = {
-        ...properties,
-        reserveUnits: properties.reserveUnits === undefined ? undefined : {...Units.of(properties.reserveUnits), deduct: properties.reserveUnits.deduct ?? true},
-      };
-      staticCardProperties.set(properties.name, p);
-      staticInstance = p;
-    }
-    this.properties = staticInstance;
-  }
+export abstract class Card implements ICard {
+  protected readonly properties: InternalProperties;
   public resourceCount = 0;
+  public warnings = new Set<Warning>();
+
+  private internalize(external: StaticCardProperties): InternalProperties {
+    const name = external.name;
+    if (external.type === CardType.CORPORATION && external.startingMegaCredits === undefined) {
+      throw new Error(`${name}: corp cards must define startingMegaCredits`);
+    }
+    if (external.cost === undefined) {
+      if (CARD_TYPES_WITHOUT_COST.includes(external.type) === false) {
+        throw new Error(`${name} must have a cost property`);
+      }
+    }
+    try {
+      // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
+      Card.autopopulateMetadataVictoryPoints(external);
+
+      validateBehavior(external.behavior, name);
+      validateBehavior(external.firstAction, name);
+      validateBehavior(external.action, name);
+      Card.validateTilesBuilt(external);
+    } catch (e) {
+      throw new Error(`Cannot validate ${name}: ${e}`);
+    }
+
+    const translatedRequirements = asArray(external.requirements ?? []).map((req) => populateCount(req));
+    const compiledRequirements = CardRequirements.compile(translatedRequirements);
+    const tilesBuilt = [...external.tilesBuilt ?? []];
+    if (external.behavior?.tile?.type !== undefined) {
+      tilesBuilt.push(external.behavior?.tile.type);
+    }
+    if (external.behavior?.moon?.tile?.type !== undefined) {
+      tilesBuilt.push(external.behavior.moon.tile.type);
+    }
+    if (external.behavior?.moon?.habitatTile !== undefined) {
+      tilesBuilt.push(TileType.MOON_HABITAT);
+    }
+    if (external.behavior?.moon?.mineTile !== undefined) {
+      tilesBuilt.push(TileType.MOON_MINE);
+    }
+    if (external.behavior?.moon?.roadTile !== undefined) {
+      tilesBuilt.push(TileType.MOON_ROAD);
+    }
+
+    const internal: InternalProperties = {
+      ...external,
+      reserveUnits: external.reserveUnits === undefined ? undefined : Units.of(external.reserveUnits),
+      requirements: translatedRequirements,
+      compiledRequirements: compiledRequirements,
+      tilesBuilt: tilesBuilt,
+    };
+    return internal;
+  }
+
+  constructor(external: StaticCardProperties) {
+    const name = external.name;
+    let internal = cardProperties.get(name);
+    if (internal === undefined) {
+      internal = this.internalize(external);
+      cardProperties.set(name, internal);
+    }
+    this.properties = internal;
+  }
+
   public get adjacencyBonus() {
     return this.properties.adjacencyBonus;
   }
@@ -152,6 +198,9 @@ export abstract class Card {
   public get resourceType() {
     return this.properties.resourceType;
   }
+  public get protectedResources() {
+    return this.properties.protectedResources;
+  }
   public get startingMegaCredits() {
     return this.properties.startingMegaCredits === undefined ? 0 : this.properties.startingMegaCredits;
   }
@@ -161,64 +210,77 @@ export abstract class Card {
   public get cardDiscount() {
     return this.properties.cardDiscount;
   }
-  public get reserveUnits(): ReserveUnits {
-    return this.properties.reserveUnits || {...Units.EMPTY, deduct: true};
+  public get reserveUnits(): Units {
+    return this.properties.reserveUnits || Units.EMPTY;
   }
-  public get tr(): TRSource | DynamicTRSource | undefined {
+  public get tr(): TRSource | undefined {
     return this.properties.tr;
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
-  public get tilesBuilt(): Array<TileType> {
-    return this.properties.tilesBuilt || [];
+  public get tilesBuilt(): ReadonlyArray<TileType> {
+    return this.properties.tilesBuilt;
   }
-  public canPlay(player: Player) {
-    if (this.requirements?.satisfies(player) === false) {
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
+    let yesAnd: YesAnd | undefined = undefined;
+    const satisfied = this.properties.compiledRequirements.satisfies(player);
+    if (satisfied === false) {
       return false;
     }
-    if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
-      return false;
+    if (satisfied !== true) {
+      yesAnd = satisfied;
     }
-    return this.bespokeCanPlay(player);
-  }
 
-  public bespokeCanPlay(_player: Player): boolean {
+    if (this.behavior !== undefined) {
+      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
+        return false;
+      }
+    }
+    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions);
+    if (bespokeCanPlay === false) {
+      return false;
+    }
+
+    if (yesAnd !== undefined) {
+      return yesAnd;
+    }
     return true;
   }
 
-  public play(player: Player): PlayerInput | undefined {
-    if (!isICorporationCard(this) && this.reserveUnits.deduct === true) {
-      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-      player.deductUnits(adjustedReserveUnits);
-    }
+  public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {
+    return true;
+  }
+
+  public play(player: IPlayer): PlayerInput | undefined {
+    player.stock.deductUnits(MoonExpansion.adjustedReserveCosts(player, this));
     if (this.behavior !== undefined) {
       getBehaviorExecutor().execute(this.behavior, player, this);
     }
     return this.bespokePlay(player);
   }
 
-  public bespokePlay(_player: Player): PlayerInput | undefined {
+  public bespokePlay(_player: IPlayer): PlayerInput | undefined {
     return undefined;
   }
 
-  public onDiscard(player: Player): void {
+  public onDiscard(player: IPlayer): void {
     if (this.behavior !== undefined) {
       getBehaviorExecutor().onDiscard(this.behavior, player, this);
     }
     this.bespokeOnDiscard(player);
   }
 
-  public bespokeOnDiscard(_player: Player): void {
+  public bespokeOnDiscard(_player: IPlayer): void {
   }
 
-  public getVictoryPoints(player: Player): number {
+  public getVictoryPoints(player: IPlayer): number {
     const vp = this.properties.victoryPoints;
     if (typeof(vp) === 'number') {
       return vp;
     }
     if (typeof(vp) === 'object') {
-      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+      return new Counter(player, this).count(vp, 'vps');
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
@@ -312,7 +374,27 @@ export abstract class Card {
     }
   }
 
-  public getCardDiscount(_player?: Player, card?: IProjectCard): number {
+  private static validateTilesBuilt(properties: StaticCardProperties) {
+    if (properties.tilesBuilt !== undefined) {
+      if (properties.behavior?.tile?.type !== undefined) {
+        throw new Error('tilesBuilt and behavior.tile.tileType both defined: ' + properties.name);
+      }
+      if (properties.behavior?.moon?.tile?.type !== undefined) {
+        throw new Error('tilesBuilt and behavior.moon.tile.tileType both defined: ' + properties.name);
+      }
+      if (properties.behavior?.moon?.habitatTile !== undefined) {
+        throw new Error('tilesBuilt and behavior.moon.habitatTile both defined: ' + properties.name);
+      }
+      if (properties.behavior?.moon?.mineTile !== undefined) {
+        throw new Error('tilesBuilt and behavior.moon.mineTile both defined: ' + properties.name);
+      }
+      if (properties.behavior?.moon?.roadTile !== undefined) {
+        throw new Error('tilesBuilt and behavior.moon.roadTile both defined: ' + properties.name);
+      }
+    }
+  }
+
+  public getCardDiscount(_player?: IPlayer, card?: IProjectCard): number {
     if (this.cardDiscount === undefined) {
       return 0;
     }
@@ -332,24 +414,73 @@ export abstract class Card {
     }
     return sum;
   }
+
+  public getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number {
+    if (this.properties.globalParameterRequirementBonus !== undefined) {
+      const globalParameterRequirementBonus = this.properties.globalParameterRequirementBonus;
+      if (globalParameterRequirementBonus.nextCardOnly === true) {
+        if (player.lastCardPlayed !== this.name) {
+          return 0;
+        }
+      }
+      if (globalParameterRequirementBonus.parameter !== undefined) {
+        if (globalParameterRequirementBonus.parameter !== parameter) {
+          return 0;
+        }
+      }
+      return globalParameterRequirementBonus.steps;
+    }
+    return 0;
+  }
 }
 
-export function validateBehavior(behavior: Behavior | undefined) : void {
+function populateCount(requirement: CardRequirementDescriptor): CardRequirementDescriptor {
+  requirement.count =
+    requirement.count ??
+    requirement.oceans ??
+    requirement.oxygen ??
+    requirement.temperature ??
+    requirement.venus ??
+    requirement.tr ??
+    requirement.resourceTypes ??
+    requirement.greeneries ??
+    requirement.cities ??
+    requirement.colonies ??
+    requirement.floaters ??
+    requirement.partyLeader ??
+    requirement.habitatRate ??
+    requirement.miningRate ??
+    requirement.logisticRate ??
+    requirement.habitatTiles ??
+    requirement.miningTiles ??
+    requirement.roadTiles ??
+    requirement.corruption ??
+    requirement.excavation;
+
+  return requirement;
+}
+
+export function validateBehavior(behavior: Behavior | undefined, name: CardName) : void {
   function validate(condition: boolean, error: string) {
     if (condition === false) {
-      throw new Error(error);
+      throw new Error(`for ${name}: ${error}`);
     }
   }
   if (behavior === undefined) {
     return;
   }
   if (behavior.spend) {
-    if (behavior.spend.megacredits ?? behavior.spend.heat) {
-      validate(behavior.tr === undefined, 'spend.megacredits and spend.heat are not yet compatible with tr');
-      validate(behavior.global === undefined, 'spend.megacredits and spend.heat are not yet compatible with global');
-      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.habitatRate');
-      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.logisticsRate');
-      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.miningRate');
+    const spend = behavior.spend;
+    if (spend.megacredits) {
+      validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
+      validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
+      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
+      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
+      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
+    }
+    // Don't spend heat with other types yet. It's probably not compatible. Check carefully.
+    if (spend.heat) {
+      validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
   }
 }

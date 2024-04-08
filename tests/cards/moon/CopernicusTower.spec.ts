@@ -10,7 +10,7 @@ describe('CopernicusTower', () => {
   let card: CopernicusTower;
 
   beforeEach(() => {
-    [, player] = testGame(1, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new CopernicusTower();
   });
 
@@ -19,10 +19,10 @@ describe('CopernicusTower', () => {
     player.megaCredits = card.cost;
 
     player.production.override({titanium: 2});
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.production.override({titanium: 1});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('act', () => {

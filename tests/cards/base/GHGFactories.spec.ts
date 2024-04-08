@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {GHGFactories} from '../../../src/server/cards/base/GHGFactories';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
 describe('GHGFactories', function() {
@@ -10,7 +10,7 @@ describe('GHGFactories', function() {
 
   beforeEach(function() {
     card = new GHGFactories();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {
@@ -18,7 +18,7 @@ describe('GHGFactories', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
     card.play(player);
 

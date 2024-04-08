@@ -1,6 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {DarksideIncubationPlant} from '../../../src/server/cards/moon/DarksideIncubationPlant';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -9,11 +10,10 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 describe('DarksideIncubationPlant', () => {
   let player: TestPlayer;
   let card: DarksideIncubationPlant;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new DarksideIncubationPlant();
   });
 
@@ -22,10 +22,10 @@ describe('DarksideIncubationPlant', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 0;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('act', () => {
@@ -45,11 +45,11 @@ describe('DarksideIncubationPlant', () => {
     action3.options[1].cb();
     expect(card.resourceCount).eq(3);
 
-    // First option removes 2 resources and raises the colony rate.
-    expect(MoonExpansion.moonData(game).colonyRate).eq(0);
+    // First option removes 2 resources and raises the habitat rate.
+    expect(MoonExpansion.moonData(game).habitatRate).eq(0);
     action3.options[0].cb();
     expect(card.resourceCount).eq(1);
-    expect(MoonExpansion.moonData(game).colonyRate).eq(1);
+    expect(MoonExpansion.moonData(game).habitatRate).eq(1);
   });
 
   it('victoryPoints', () => {

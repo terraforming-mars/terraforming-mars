@@ -11,19 +11,19 @@ describe('DysonScreens', function() {
 
   beforeEach(function() {
     card = new DysonScreens();
-    [, player] = testGame(1, {pathfindersExpansion: true});
+    [/* game */, player] = testGame(1, {pathfindersExpansion: true});
   });
 
   it('play', () => {
     player.cardsInHand = [];
-    expect(player.game.board.getSpace(SpaceName.DYSON_SCREENS).player).is.undefined;
+    expect(player.game.board.getSpaceOrThrow(SpaceName.DYSON_SCREENS).player).is.undefined;
     expect(player.game.getTemperature()).eq(-30);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     card.play(player);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.game.board.getSpace(SpaceName.DYSON_SCREENS).player?.id).eq(player.id);
+    expect(player.game.board.getSpaceOrThrow(SpaceName.DYSON_SCREENS).player?.id).eq(player.id);
     expect(player.game.getTemperature()).eq(-28);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 2, heat: 2}));
   });

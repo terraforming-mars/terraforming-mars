@@ -22,8 +22,8 @@ describe('ResearchOutpost', function() {
     const action = cast(player.popWaitingFor(), SelectSpace);
 
 
-    action.cb(action.availableSpaces[0]);
-    expect(game.getCitiesCount()).to.eq(1);
+    action.cb(action.spaces[0]);
+    expect(game.board.getCities()).has.length(1);
     expect(card.getCardDiscount()).to.eq(1);
   });
 

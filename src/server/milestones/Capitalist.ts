@@ -1,15 +1,15 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Capitalist extends BaseMilestone {
   constructor() {
     super(
       'Capitalist',
-      'Have at least 64 M€',
+      'Have 64 M€',
       64);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.megaCredits;
   }
 }

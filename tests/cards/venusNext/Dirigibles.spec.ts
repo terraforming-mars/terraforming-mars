@@ -12,20 +12,19 @@ describe('Dirigibles', function() {
 
   beforeEach(function() {
     card = new Dirigibles();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     player.playedCards.push(card);
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act - single target', function() {
-    expect(player.getSpendableFloaters()).to.eq(0);
+    expect(player.getSpendable('floaters')).to.eq(0);
     expect(churnAction(card, player)).is.undefined;
     expect(player.getCardsWithResources()).has.lengthOf(1);
-    expect(player.getSpendableFloaters()).to.eq(1);
+    expect(player.getSpendable('floaters')).to.eq(1);
     expect(card.resourceCount).to.eq(1);
   });
 

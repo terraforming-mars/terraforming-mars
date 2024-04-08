@@ -1,7 +1,7 @@
 import {MultiSet} from 'mnemonist';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {IProjectCard} from '../IProjectCard';
@@ -11,7 +11,8 @@ import {Tag} from '../../../common/cards/Tag';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
+import {TITLES} from '../../inputs/titles';
 
 const INVALID_TAGS = [
   Tag.EVENT,
@@ -39,12 +40,13 @@ export class Faraday extends CeoCard {
   }
 
   // This _could_ save CPU cycles instead of running multiple finds?
-  private countTags(player: Player): Record<Tag, number> {
+  private countTags(player: IPlayer): Record<Tag, number> {
     const record: Partial<Record<Tag, number>> = {};
-    for (const entry of player.tags.getAllTags()) {
+    for (const entry of player.tags.countAllTags()) {
       record[entry.tag] = entry.count;
     }
-    // This is safe because getAllTags returns all tags. I wish it were easy to initialize a Record type.
+    // This is safe because countAllTags returns all tags. I wish it were easy to initialize a Record type.
+    // Actually it doesn't return Clone tags.
     return record as Record<Tag, number>;
   }
 
@@ -56,7 +58,7 @@ export class Faraday extends CeoCard {
     return priorTagCount % 5 + tagsOnCard >= 5;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (card.tags.length === 0 || card.type === CardType.EVENT || !player.canAfford(2)) return;
 
     const counts = this.countTags(player);
@@ -70,27 +72,15 @@ export class Faraday extends CeoCard {
     });
   }
 
-  public effectOptions(player: Player, tag: Tag) {
+  public effectOptions(player: IPlayer, tag: Tag) {
     if (!player.canAfford(3)) return;
     return new OrOptions(
-      new SelectOption(newMessage('Pay 3 MC to draw a ${1} card', (b) => b.string(tag)), 'Confirm', () => {
-        player.game.defer(
-          new SelectPaymentDeferred(
-            player,
-            3,
-            {
-              title: 'Select how to pay for action',
-              afterPay: () => {
-                player.drawCard(1, {tag: tag});
-              },
-            },
-          ),
-        );
+      new SelectOption(message('Pay 3 M€ to draw a ${1} card', (b) => b.string(tag))).andThen(() => {
+        player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
+          .andThen(() => player.drawCard(1, {tag: tag}));
         return undefined;
       }),
-      new SelectOption('Do nothing', 'Confirm', () => {
-        return undefined;
-      }),
+      new SelectOption('Do nothing'),
     );
   }
 }

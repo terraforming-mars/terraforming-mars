@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SpacePort} from '../../../src/server/cards/colonies/SpacePort';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
@@ -13,7 +13,7 @@ describe('SpacePort', function() {
 
   beforeEach(function() {
     card = new SpacePort();
-    [, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
+    [/* game */, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
       ColonyName.CERES,
       ColonyName.CALLISTO,
       ColonyName.ENCELADUS,
@@ -23,25 +23,25 @@ describe('SpacePort', function() {
   });
 
   it('Can not play without colony', function() {
-    player.production.add(Resources.ENERGY, 1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    player.production.add(Resource.ENERGY, 1);
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play without energy production', function() {
     player.game.colonies[0].colonies.push(player.id);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     player.game.colonies[0].colonies.push(player.id);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(4);
   });

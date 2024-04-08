@@ -1,12 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {GainResources} from '../../deferredActions/GainResources';
 
 
@@ -25,19 +25,19 @@ export class Quill extends CeoCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;
     }
     return player.getResourceCards(CardResource.FLOATER).length > 0;
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const resourceCards = player.getResourceCards(CardResource.FLOATER);
     resourceCards.forEach((card) => player.addResourceTo(card, {qty: 2, log: true}));
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
-    player.game.defer(new GainResources(player, Resources.MEGACREDITS, {count: resourceCards.length + 1, log: true}));
+    player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: resourceCards.length + 1, log: true}));
     return undefined;
   }
 }

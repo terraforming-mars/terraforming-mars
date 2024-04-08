@@ -18,8 +18,7 @@ describe('AtmoCollectors', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {
@@ -27,9 +26,9 @@ describe('AtmoCollectors', function() {
 
     card.action(player);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).to.eq(1);
-    expect(player.purse()).deep.eq(Units.EMPTY);
+    expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
 
     card.resourceCount = 3;
 
@@ -40,27 +39,27 @@ describe('AtmoCollectors', function() {
     orOptions.options[0].cb();
     runAllActions(game);
     expect(card.resourceCount).to.eq(2);
-    expect(player.purse()).deep.eq(Units.of({titanium: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2}));
 
     player.titanium = 0;
 
     orOptions.options[1].cb();
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);
-    expect(player.purse()).deep.eq(Units.of({energy: 3}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({energy: 3}));
 
     player.energy = 0;
 
     orOptions.options[2].cb();
     runAllActions(game);
     expect(card.resourceCount).to.eq(0);
-    expect(player.purse()).deep.eq(Units.of({heat: 4}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({heat: 4}));
 
     player.heat = 0;
 
     orOptions.options[3].cb();
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);
-    expect(player.purse()).deep.eq(Units.EMPTY);
+    expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
   });
 });

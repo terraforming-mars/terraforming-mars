@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 export class TheWomb extends Card {
@@ -28,12 +27,11 @@ export class TheWomb extends Card {
         cardNumber: 'M08',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(2).nbsp.megacredits(4);
+            pb.minus().energy(2).nbsp.plus().megacredits(4);
           }).br;
           b.minus().titanium(2).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});
         }),
       },
-      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

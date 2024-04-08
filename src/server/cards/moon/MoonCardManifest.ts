@@ -17,7 +17,7 @@ import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
 import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
 import {DarksideObservatory} from './DarksideObservatory';
-// import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
+import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
 import {DeepLunarMining} from './DeepLunarMining';
 import {EarthEmbassy} from './EarthEmbassy';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
@@ -30,7 +30,7 @@ import {HE3ProductionQuotas} from './HE3ProductionQuotas';
 import {HE3Refinery} from './HE3Refinery';
 import {HeavyDutyRovers} from './HeavyDutyRovers';
 import {HeliostatMirrorArray} from './HeliostatMirrorArray';
-// import {HostileTakeover} from './HostileTakeover';
+import {HostileTakeover} from './HostileTakeover';
 import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFactory';
 import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
@@ -56,7 +56,6 @@ import {LunarSecurityStations} from './LunarSecurityStations';
 import {LunarSteel} from './LunarSteel';
 import {LunarTradeFleet} from './LunarTradeFleet';
 import {LunaSenate} from './LunaSenate';
-// import {LunaSenate} from './LunaSenate';
 import {LunaStagingStation} from './LunaStagingStation';
 import {LunaTradeStation} from './LunaTradeStation';
 import {LunaTrainStation} from './LunaTrainStation';
@@ -84,11 +83,10 @@ import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
 import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {OrbitalPowerGrid} from './OrbitalPowerGrid';
-// import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
-// import {RoadPiracy} from './RoadPiracy';
+import {RoadPiracy} from './RoadPiracy';
 import {RoverDriversUnion} from './RoverDriversUnion';
 import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
@@ -170,7 +168,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.REVOLTING_COLONISTS]: {Factory: RevoltingColonists},
     [CardName.COSMIC_RADIATION]: {Factory: CosmicRadiation},
     [CardName.OFF_WORLD_CITY_LIVING]: {Factory: OffWorldCityLiving},
-    //   [CardName.ROAD_PIRACY]: {Factory: RoadPiracy},
+    [CardName.ROAD_PIRACY]: {Factory: RoadPiracy},
     [CardName.LUNAR_MINE_URBANIZATION]: {Factory: LunarMineUrbanization},
     [CardName.THORIUM_RUSH]: {Factory: ThoriumRush},
     [CardName.HE3_PRODUCTION_QUOTAS]: {Factory: HE3ProductionQuotas, compatibility: 'turmoil'},
@@ -180,7 +178,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.LUNAR_INDEPENDENCE_WAR]: {Factory: LunarIndependenceWar},
     [CardName.AN_OFFER_YOU_CANT_REFUSE]: {Factory: AnOfferYouCantRefuse, compatibility: 'turmoil'},
     [CardName.PRELIMINARY_DARKSIDE]: {Factory: PreliminaryDarkside},
-    //   [CardName.HOSTILE_TAKEOVER]: {Factory: HostileTakeover},
+    [CardName.HOSTILE_TAKEOVER]: {Factory: HostileTakeover},
     [CardName.SYNDICATE_PIRATE_RAIDS]: {Factory: SyndicatePirateRaids, compatibility: 'colonies'},
     [CardName.DARKSIDE_MINING_SYNDICATE]: {Factory: DarksideMiningSyndicate},
     //   // [CardName.HE3_PROPULSION]: {Factory: HE3Propulsion, compatibility: 'colonies'},
@@ -196,6 +194,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.EARTH_EMBASSY]: {Factory: EarthEmbassy},
     [CardName.ROVER_DRIVERS_UNION]: {Factory: RoverDriversUnion},
     [CardName.LTF_HEADQUARTERS]: {Factory: LTFHeadquarters, compatibility: 'colonies'},
+    [CardName.DARKSIDE_SMUGGLERS_UNION]: {Factory: DarksideSmugglersUnion, compatibility: 'colonies'},
     [CardName.UNDERMOON_DRUG_LORDS_NETWORK]: {Factory: UndermoonDrugLordsNetwork},
     [CardName.LTF_PRIVILEGES]: {Factory: LTFPrivileges},
     [CardName.GRAND_LUNA_ACADEMY]: {Factory: GrandLunaAcademy},

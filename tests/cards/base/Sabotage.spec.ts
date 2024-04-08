@@ -12,7 +12,7 @@ describe('Sabotage', function() {
 
   beforeEach(function() {
     card = new Sabotage();
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('Should play', function() {

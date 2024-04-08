@@ -9,12 +9,12 @@ describe('StanfordTorus', function() {
 
   beforeEach(function() {
     card = new StanfordTorus();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play', function() {
     card.play(player);
-    expect(player.game.getCitiesCount()).to.eq(1);
+    expect(player.game.board.getCities()).has.length(1);
   });
 
   it('Should give victory points', function() {

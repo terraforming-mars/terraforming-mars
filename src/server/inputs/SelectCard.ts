@@ -1,29 +1,36 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
-import {BasePlayerInput, getCardFromPlayerInput, PlayerInput} from '../PlayerInput';
-import {PlayerInputType} from '../../common/input/PlayerInputType';
+import {getCardFromPlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
+import {SelectCardModel} from '../../common/models/PlayerInputModel';
+import {IPlayer} from '../IPlayer';
+import {cardsToModel} from '../models/ModelUtils';
+import {InputError} from './InputError';
 
 export type Options = {
   max: number,
   min: number,
-  selectBlueCardAction: boolean, // Default is false. When true, ???
-  enabled: Array<boolean> | undefined, // When provided, then the cards with false in `enabled` are not selectable and grayed out
-  played: boolean | CardName.SELF_REPLICATING_ROBOTS // Default is true. If true, then shows resources on those cards. If false than shows discounted price.
-  showOwner: boolean, // Default is false. If true then show the name of the card owner below.
+  /** Default is false. When true, ??? */
+  selectBlueCardAction: boolean,
+  /** When provided, then the cards with false in `enabled` are not selectable and grayed out */
+  enabled: Array<boolean> | undefined,
+  /** Default is true. If true, then shows resources on those cards. If false than shows discounted price. */
+  played: boolean | CardName.SELF_REPLICATING_ROBOTS
+  /** Default is false. If true then show the name of the card owner below. */
+  showOwner: boolean,
 }
-export class SelectCard<T extends ICard> extends BasePlayerInput {
+export class SelectCard<T extends ICard> extends BasePlayerInput<Array<T>> {
   public config: Options;
 
   constructor(
     title: string | Message,
     buttonLabel: string = 'Save',
-    public cards: Array<T>,
-    public cb: (cards: Array<T>) => PlayerInput | undefined,
+    public cards: ReadonlyArray<T>,
     config?: Partial<Options>,
   ) {
-    super(PlayerInputType.SELECT_CARD, title);
+    super('card', title);
     this.config = {
       max: config?.max ?? 1,
       min: config?.min ?? 1,
@@ -35,22 +42,40 @@ export class SelectCard<T extends ICard> extends BasePlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
+  public toModel(player: IPlayer): SelectCardModel {
+    return {
+      title: this.title,
+      buttonLabel: this.buttonLabel,
+      type: 'card',
+      cards: cardsToModel(player, this.cards, {
+        showCalculatedCost: this.config.played === false || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
+        showResources: this.config.played === true || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
+        enabled: this.config.enabled,
+      }),
+      max: this.config.max,
+      min: this.config.min,
+      showOnlyInLearnerMode: this.config.enabled?.every((p: boolean) => p === false) ?? false,
+      selectBlueCardAction: this.config.selectBlueCardAction,
+      showOwner: this.config.showOwner === true,
+    };
+  }
+
   public process(input: InputResponse) {
     if (!isSelectCardResponse(input)) {
-      throw new Error('Not a valid SelectCardResponse');
+      throw new InputError('Not a valid SelectCardResponse');
     }
     if (input.cards.length < this.config.min) {
-      throw new Error('Not enough cards selected');
+      throw new InputError('Not enough cards selected');
     }
     if (input.cards.length > this.config.max) {
-      throw new Error('Too many cards selected');
+      throw new InputError('Too many cards selected');
     }
-    const cards: Array<T> = [];
+    const cards = [];
     for (const cardName of input.cards) {
       const {card, idx} = getCardFromPlayerInput(this.cards, cardName);
       cards.push(card);
       if (this.config.enabled?.[idx] === false) {
-        throw new Error(`${cardName} is not available`);
+        throw new InputError(`${cardName} is not available`);
       }
     }
     return this.cb(cards);

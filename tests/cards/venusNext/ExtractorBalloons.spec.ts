@@ -17,8 +17,7 @@ describe('ExtractorBalloons', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     expect(card.resourceCount).to.eq(3);
   });

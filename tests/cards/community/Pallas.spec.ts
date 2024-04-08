@@ -5,9 +5,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
+import {MultiSet} from 'mnemonist';
 
 describe('Pallas', function() {
   let pallas: Pallas;
@@ -53,33 +54,33 @@ describe('Pallas', function() {
 
     runAllActions(game);
 
-    const selectParty = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const selectParty = cast(player.popWaitingFor(), SelectParty);
     selectParty.cb(PartyName.GREENS);
-    expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
+    expect(greens.delegates).deep.eq(MultiSet.from([player]));
     expect(scientists.delegates.size).eq(0);
 
     runAllActions(game);
 
-    const selectParty2 = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const selectParty2 = cast(player.popWaitingFor(), SelectParty);
     selectParty2.cb(PartyName.SCIENTISTS);
 
-    expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
-    expect(Array.from(scientists.delegates.values())).deep.eq([player.id]);
+    expect(greens.delegates).deep.eq(MultiSet.from([player]));
+    expect(scientists.delegates).deep.eq(MultiSet.from([player]));
 
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('Should give trade bonus', function() {
     pallas.addColony(player);
     player.megaCredits = 0;
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     pallas.trade(player2); // player2 is trading. But player(1) is getting the MC
     runAllActions(game);
-    const sendDelegates = cast(player2.popWaitingFor(), SelectPartyToSendDelegate);
+    const sendDelegates = cast(player2.popWaitingFor(), SelectParty);
     sendDelegates.cb(PartyName.REDS);
     runAllActions(game);
 
@@ -90,12 +91,12 @@ describe('Pallas', function() {
     pallas.addColony(player);
     player.megaCredits = 0;
     pallas.trackPosition = 2; // Send 1 delegate
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     pallas.trade(player); // player(1) is trading and gaining the mc.
     runAllActions(game);
-    const sendDelegates = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
+    const sendDelegates = cast(player.popWaitingFor(), SelectParty);
     sendDelegates.cb(PartyName.REDS);
     runAllActions(game);
 

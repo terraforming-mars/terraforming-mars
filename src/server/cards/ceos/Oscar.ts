@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -22,24 +22,24 @@ export class Oscar extends CeoCard {
     });
   }
 
-  public override play(player: Player) {
+  public override play(player: IPlayer) {
     const turmoil = player.game.turmoil;
     if (turmoil) turmoil.addInfluenceBonus(player);
     return undefined;
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;
     }
     const turmoil = Turmoil.getTurmoil(player.game);
-    return turmoil.hasDelegatesInReserve(player.id) && turmoil.chairman !== player.id;
+    return turmoil.hasDelegatesInReserve(player) && turmoil.chairman !== player;
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     const turmoil = Turmoil.getTurmoil(player.game);
-    turmoil.setNewChairman(player.id, player.game, /* setAgenda*/false, /* gainTR*/false);
-    turmoil.delegateReserve.remove(player.id);
+    turmoil.setNewChairman(player, player.game, /* setAgenda*/false, /* gainTR*/false);
+    turmoil.delegateReserve.remove(player);
     // Increase totalDelegatesPlaced manually since we're not using SendDeletageToArea()
     // If we dont do this player will not get the bonus for POLITICAN Awards
     player.totalDelegatesPlaced += 1;

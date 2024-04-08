@@ -71,7 +71,7 @@ export default Vue.extend({
       return this.metadata.buildQuantity[this.idx] > 1 ? String(this.metadata.buildQuantity[this.idx]) : '';
     },
     resource(): string | undefined {
-      return (this.metadata.buildResource ?? this.metadata.resourceType)?.toLowerCase();
+      return (this.metadata.buildResource ?? this.metadata.cardResource)?.toLowerCase();
     },
   },
 });

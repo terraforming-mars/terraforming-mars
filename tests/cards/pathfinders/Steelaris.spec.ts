@@ -25,7 +25,7 @@ describe('Steelaris', function() {
     expect(player.plants).eq(0);
     expect(player.steel).eq(0);
 
-    game.addCityTile(player, citySpace);
+    game.addCity(player, citySpace);
     runAllActions(game);
 
     expect(player.plants).eq(1);
@@ -37,7 +37,7 @@ describe('Steelaris', function() {
     expect(player.plants).eq(0);
     expect(player.steel).eq(0);
 
-    game.addCityTile(player2, citySpace);
+    game.addCity(player2, citySpace);
     runAllActions(game);
 
     expect(player.plants).eq(1);

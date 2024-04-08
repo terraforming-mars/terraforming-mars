@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
@@ -24,8 +24,8 @@ describe('Birds', function() {
   });
 
   it('Should play', function() {
-    player2.production.add(Resources.PLANTS, 2);
-    player3.production.add(Resources.PLANTS, 7);
+    player2.production.add(Resource.PLANTS, 2);
+    player3.production.add(Resource.PLANTS, 7);
     setOxygenLevel(game, 13);
     expect(card.canPlay(player)).is.true;
 

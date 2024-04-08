@@ -13,13 +13,12 @@ describe('BioPrintingFacility', function() {
 
   beforeEach(function() {
     card = new BioPrintingFacility();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     player.playedCards.push(card);
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
 

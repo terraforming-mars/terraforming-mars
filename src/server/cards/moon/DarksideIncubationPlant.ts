@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -49,15 +49,15 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
     return true;
   }
 
-  private canRaiseHabitatRate(player: Player) {
-    return this.resourceCount >= 2 && player.canAfford(0, {tr: {moonHabitat: 1}});
+  private canRaiseHabitatRate(player: IPlayer) {
+    return this.resourceCount >= 2 && player.canAfford({cost: 0, tr: {moonHabitat: 1}});
   }
 
-  public action(player: Player) {
-    const options: Array<SelectOption> = [];
+  public action(player: IPlayer) {
+    const options = [];
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (this.canRaiseHabitatRate(player) && moonData.colonyRate < 8) {
-        options.push(new SelectOption('Spend 2 microbes to raise the habitat rate 1 step.', 'Select', () => {
+      if (this.canRaiseHabitatRate(player) && moonData.habitatRate < 8) {
+        options.push(new SelectOption('Spend 2 microbes to raise the habitat rate 1 step.').andThen(() => {
           player.removeResourceFrom(this, 2);
           LogHelper.logRemoveResource(player, this, 2, 'raise the habitat rate');
           MoonExpansion.raiseHabitatRate(player);
@@ -65,12 +65,12 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
         }));
       }
     });
-    options.push(new SelectOption('Add 1 microbe to this card', 'Select', () => {
+    options.push(new SelectOption('Add 1 microbe to this card').andThen(() => {
       player.addResourceTo(this, 1);
       return undefined;
     }));
     if (options.length === 1) {
-      return options[0].cb();
+      return options[0].cb(undefined);
     } else {
       return new OrOptions(...options);
     }

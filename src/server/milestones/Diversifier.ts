@@ -1,14 +1,14 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Diversifier extends BaseMilestone {
   constructor() {
     super(
       'Diversifier',
-      'Requires that you have 8 different tags in play',
+      'Have 8 different tags in play',
       8);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.tags.distinctCount('milestone');
   }
 }

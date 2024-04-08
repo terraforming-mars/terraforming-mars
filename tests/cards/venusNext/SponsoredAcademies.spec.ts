@@ -31,7 +31,7 @@ describe('SponsoredAcademies', function() {
 
   it('Should play', function() {
     player.cardsInHand.push(housePrinting, tardigrades);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.playCard(card);
     const discardCard = cast(game.deferredActions.pop()!.execute(), SelectCard<IProjectCard>);
@@ -52,11 +52,11 @@ describe('SponsoredAcademies', function() {
     player.playCard(card);
 
     // If something here doesn't work, it might be linked to the DeferredActionsQueue,
-    expect((game.deferredActions.pop() as DiscardCards).title).eq('Select 1 card to discard');
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(player.color);
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(player2.color);
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(player3.color);
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(player4.color);
+    cast(game.deferredActions.pop(), DiscardCards);
+    expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player.color);
+    expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player2.color);
+    expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player3.color);
+    expect(cast(game.deferredActions.pop(), DrawCards).player.color).eq(player4.color);
   });
 
   it('Takes priority over Mars U', () => {

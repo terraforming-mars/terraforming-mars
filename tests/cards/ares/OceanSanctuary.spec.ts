@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {OceanSanctuary} from '../../../src/server/cards/ares/OceanSanctuary';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -14,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('OceanSanctuary', function() {
   let card: OceanSanctuary;
   let player: TestPlayer;
-  let otherPlayer: Player;
+  let otherPlayer: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -24,19 +23,19 @@ describe('OceanSanctuary', function() {
 
   it('Can play', function() {
     addOcean(player);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Play', function() {
@@ -78,7 +77,7 @@ describe('OceanSanctuary', function() {
     })[0];
 
     player.plants = 0;
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
     expect(player.plants).eq(1);
 
     card.play(player);

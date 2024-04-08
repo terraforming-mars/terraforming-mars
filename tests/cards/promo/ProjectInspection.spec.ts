@@ -8,7 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {ICard} from '../../../src/server/cards/ICard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -41,7 +41,7 @@ describe('ProjectInspection', function() {
 
   it('Should play', function() {
     player.playedCards.push(restrictedArea);
-    player.addResource(Resources.MEGACREDITS, 2);
+    player.stock.add(Resource.MEGACREDITS, 2);
     player.addActionThisGeneration(restrictedArea.name);
     expect(card.canPlay(player)).is.true;
 
@@ -106,7 +106,7 @@ describe('ProjectInspection', function() {
     expect(action1.cards).has.lengthOf(2); // IW and PI (which was just played) are available
     expect(action1.cards[0]?.name).eq(indenturedWorkers.name);
     expect(action1.cards[1]?.name).eq(card.name);
-    action1.cb(card, Payment.EMPTY);
+    action1.payAndPlay(card, Payment.EMPTY);
     runAllActions(player.game);
 
     const play2 = cast(player.popWaitingFor(), SelectCard);
@@ -125,7 +125,7 @@ describe('ProjectInspection', function() {
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
     player.addActionThisGeneration(playwrights.name);
-    player.addResource(Resources.MEGACREDITS, 2);
+    player.stock.add(Resource.MEGACREDITS, 2);
     expect(playwrights.canAct(player)).is.true; // PW -> PI -> RA
 
     const action1 = cast(playwrights.action(player), SelectCard<IProjectCard>);
@@ -146,7 +146,7 @@ describe('ProjectInspection', function() {
     player.playedCards.push(card);
     player.playedCards.push(indenturedWorkers);
     player.addActionThisGeneration(playwrights.name);
-    player.addResource(Resources.MEGACREDITS, 2);
+    player.stock.add(Resource.MEGACREDITS, 2);
     expect(playwrights.canAct(player)).is.true; // PW -> PI -> PW -> IW
 
     const action1 = cast(playwrights.action(player), SelectCard<IProjectCard>);

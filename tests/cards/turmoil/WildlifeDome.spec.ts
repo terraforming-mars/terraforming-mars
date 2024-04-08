@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -23,7 +23,7 @@ describe('WildlifeDome', function() {
     card = new WildlifeDome();
     player = TestPlayer.BLUE.newPlayer();
     redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
     turmoil = game.turmoil!;
     reds = turmoil.getPartyByName(PartyName.REDS);
     greens = turmoil.getPartyByName(PartyName.GREENS);
@@ -32,7 +32,7 @@ describe('WildlifeDome', function() {
   it('Should play: reds', function() {
     turmoil.rulingParty = reds;
     PoliticalAgendas.setNextAgenda(turmoil, game);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Play when greens are in power', function() {
@@ -47,7 +47,7 @@ describe('WildlifeDome', function() {
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(game.getOxygenLevel()).to.eq(1);
   });
 
@@ -56,13 +56,13 @@ describe('WildlifeDome', function() {
     turmoil.rulingParty = reds;
     PoliticalAgendas.setNextAgenda(turmoil, game);
 
-    greens.delegates.add(player.id, 2);
+    greens.delegates.add(player, 2);
     expect(player.canPlay(card)).is.not.true;
 
     player.megaCredits = 17;
     expect(player.canPlay(card)).is.not.true;
 
     player.megaCredits = 18;
-    expect(player.canPlay(card)).is.true;
+    expect(player.canPlay(card)).deep.eq({redsCost: 3});
   });
 });

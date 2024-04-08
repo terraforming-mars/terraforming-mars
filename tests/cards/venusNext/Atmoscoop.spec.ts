@@ -30,19 +30,19 @@ describe('Atmoscoop', function() {
 
   it('Cannot play', function() {
     player.playedCards.push(new Research());
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - no targets', function() {
     player.playedCards.push(new Research(), new SearchForLife());
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const action = cast(card.play(player), OrOptions);
 
     expect(action.options).has.lengthOf(2);
     const orOptions = cast(action.options[1], SelectOption);
 
-    orOptions.cb();
+    orOptions.cb(undefined);
     expect(game.getVenusScaleLevel()).to.eq(4);
   });
 
@@ -51,10 +51,10 @@ describe('Atmoscoop', function() {
 
     const orOptions = cast(card.play(player), OrOptions);
     const selectOption = cast(orOptions.options[1], SelectOption);
-    selectOption.cb();
+    selectOption.cb(undefined);
 
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(dirigibles.resourceCount).to.eq(2);
@@ -85,11 +85,9 @@ describe('Atmoscoop', function() {
     player.playedCards.push(dirigibles);
     setTemperature(game, constants.MAX_TEMPERATURE);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
-
+    cast(card.play(player), undefined);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(dirigibles.resourceCount).to.eq(2);
@@ -103,7 +101,7 @@ describe('Atmoscoop', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(dirigibles.resourceCount).to.eq(2);
   });
 

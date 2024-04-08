@@ -1,5 +1,5 @@
-<!-- single item in GamesOverview -->
 <template>
+  <!-- single item in GamesOverview -->
   <span>
     <a v-bind:href="'game?id='+id">{{id}}</a>
     <template v-if="game === undefined">

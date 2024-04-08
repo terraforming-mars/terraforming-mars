@@ -1,9 +1,10 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {ChooseRulingPartyDeferred} from '../../turmoil/ChooseRulingPartyDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class ByElection extends PreludeCard implements IProjectCard {
@@ -21,10 +22,10 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     Turmoil.ifTurmoil((player.game), (turmoil) => {
       turmoil.addInfluenceBonus(player);
-      turmoil.chooseRulingParty(player);
+      player.game.defer(new ChooseRulingPartyDeferred(player, turmoil));
     });
 
     return undefined;

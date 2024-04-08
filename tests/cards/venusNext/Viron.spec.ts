@@ -5,6 +5,7 @@ import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
+import {FocusedOrganization} from '../../../src/server/cards/prelude2/FocusedOrganization';
 
 describe('Viron', function() {
   let card: Viron;
@@ -12,13 +13,13 @@ describe('Viron', function() {
 
   beforeEach(function() {
     card = new Viron();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should act', function() {
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     player.setCorporationForTest(card);
     const restrictedArea = new RestrictedArea();
@@ -46,5 +47,24 @@ describe('Viron', function() {
     player.megaCredits += 2;
 
     expect(card.canAct(player)).is.not.true;
+  });
+
+  it('Works with active preludes', () => {
+    card.play(player);
+
+    player.setCorporationForTest(card);
+    const focusedOrganization = new FocusedOrganization();
+
+    expect(focusedOrganization.canAct(player)).is.false;
+
+    player.cardsInHand.push(new RestrictedArea());
+    player.megaCredits = 1;
+
+    expect(focusedOrganization.canAct(player)).is.true;
+
+    player.playedCards.push(focusedOrganization);
+    player.addActionThisGeneration(focusedOrganization.name);
+
+    expect(card.canAct(player)).is.true;
   });
 });

@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -25,7 +25,7 @@ describe('CapitalAres', function() {
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
-    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resource.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
@@ -38,9 +38,8 @@ describe('CapitalAres', function() {
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);
     action.cb(citySpace);
 
-    expect(citySpace.tile).is.not.undefined;
     expect(citySpace.player).to.eq(player);
-    expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
+    expect(citySpace.tile?.tileType).to.eq(TileType.CAPITAL);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
   });

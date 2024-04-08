@@ -18,8 +18,7 @@ describe('Titan', function() {
   beforeEach(function() {
     titan = new Titan();
     aerialMappers = new AerialMappers();
-    [game, player, player2] = testGame(2);
-    game.gameOptions.coloniesExtension = true;
+    [game, player, player2] = testGame(2, {coloniesExtension: true});
     game.colonies.push(titan);
   });
 

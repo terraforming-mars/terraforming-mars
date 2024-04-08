@@ -11,7 +11,7 @@ describe('MartianCulture', function() {
 
   beforeEach(function() {
     card = new MartianCulture();
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
     player.playedCards.push(card);
   });
 

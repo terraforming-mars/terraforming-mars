@@ -11,15 +11,20 @@ describe('QuantumExtractor', function() {
 
   beforeEach(function() {
     card = new QuantumExtractor();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    player.tagsForTest = {science: 3};
+    expect(card.canPlay(player)).is.not.true;
+  });
+
+  it('Can play', function() {
+    player.tagsForTest = {science: 4};
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
-    player.playedCards.push(card, card, card, card);
     card.play(player);
     expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
     expect(card.getCardDiscount(player, new Bushes())).to.eq(0);

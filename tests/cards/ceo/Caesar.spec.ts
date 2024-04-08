@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {cast, runAllActions} from '../../TestingUtils';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 
 import {SelectProductionToLose} from '../../../src/server/inputs/SelectProductionToLose';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -23,8 +23,8 @@ describe('Caesar', function() {
     card = new Caesar();
     [game, player, player2] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
-    player.production.add(Resources.PLANTS, startingPlants);
-    player2.production.add(Resources.PLANTS, startingPlants);
+    player.production.add(Resource.PLANTS, startingPlants);
+    player2.production.add(Resource.PLANTS, startingPlants);
     runAllActions(game);
   });
 
@@ -48,7 +48,7 @@ describe('Caesar', function() {
     // Place 3 hazard tiles
     for (let i = 0; i < game.generation; i++) {
       const placeHazard = game.deferredActions.pop()!.execute() as SelectSpace;
-      placeHazard.cb(placeHazard.availableSpaces[i]);
+      placeHazard.cb(placeHazard.spaces[i]);
     }
 
     // Make sure all 3 hazards were placed
@@ -75,7 +75,7 @@ describe('Caesar', function() {
     // Place game.generation hazard tiles
     for (let i = 0; i < game.generation; i++) {
       const placeHazard = game.deferredActions.pop()!.execute() as SelectSpace;
-      placeHazard.cb(placeHazard.availableSpaces[i]);
+      placeHazard.cb(placeHazard.spaces[i]);
     }
 
     // Make sure there are now 6 hazards

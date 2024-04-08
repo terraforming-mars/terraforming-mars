@@ -1,23 +1,23 @@
-import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MiningComplex} from '../../../src/server/cards/moon/MiningComplex';
-import {expect} from 'chai';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('MiningComplex', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MiningComplex;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MiningComplex();
   });
@@ -41,14 +41,14 @@ describe('MiningComplex', () => {
     expect(player.megaCredits).eq(0);
 
     const placeMineTile = cast(game.deferredActions.pop(), PlaceMoonMineTile);
-    placeMineTile.execute()!.cb(moonData.moon.getSpace('m06'));
+    placeMineTile.execute()!.cb(moonData.moon.getSpaceOrThrow('m06'));
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
 
     const placeRoadTile = cast(game.deferredActions.pop(), PlaceMoonRoadTile);
     const selectSpace = cast(placeRoadTile.execute(), SelectSpace);
-    const spaces = selectSpace.availableSpaces;
+    const spaces = selectSpace.spaces;
     expect(spaces.map((s) => s.id)).to.have.members(['m02', 'm12']);
     selectSpace.cb(spaces[0]);
 

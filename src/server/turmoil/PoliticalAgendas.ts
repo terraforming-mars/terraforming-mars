@@ -1,5 +1,5 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {Bonus} from './Bonus';
 import {IParty} from './parties/IParty';
 import {PartyName} from '../../common/turmoil/PartyName';
@@ -22,7 +22,7 @@ export class PoliticalAgendas {
 
   public static newInstance(
     agendaStyle: AgendaStyle,
-    parties: Array<IParty>): PoliticalAgendasData {
+    parties: ReadonlyArray<IParty>): PoliticalAgendasData {
     const agendas: Map<PartyName, Agenda> = new Map();
 
     parties.forEach((p) => {
@@ -61,7 +61,7 @@ export class PoliticalAgendas {
   // The ruling party is already in power, and now it is time for the party to select an agenda.
   // Do not expect the method to return an activated agenda if the current agenda style is chairman
   // And a person is the chairman -- the end of this method will just defer selection until later.
-  public static setNextAgenda(turmoil: Turmoil, game: Game): void {
+  public static setNextAgenda(turmoil: Turmoil, game: IGame): void {
     const rulingParty = turmoil.rulingParty;
     const politicalAgendasData = turmoil.politicalAgendasData;
     const chairman = turmoil.chairman;
@@ -74,7 +74,7 @@ export class PoliticalAgendas {
     if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
       const agenda = this.getAgenda(turmoil, rulingParty.name);
       game.defer(new ChoosePoliticalAgenda(
-        game.getPlayerById(chairman),
+        chairman,
         rulingParty,
         (bonusId) => {
           agenda.bonusId = bonusId;
@@ -104,7 +104,7 @@ export class PoliticalAgendas {
   }
 
   // Overridable for tests
-  public static defaultRandomElement<T>(list: Array<T>): T {
+  public static defaultRandomElement<T>(list: ReadonlyArray<T>): T {
     const rng = Math.floor(Math.random() * list.length);
     return list[rng];
   }

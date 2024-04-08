@@ -1,14 +1,17 @@
 {
-    "Space hotels": "Космические отели",
-    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Требует 2 метки Земли. Увеличьте производство МС на 4",
+    "prelude": "Пролог",
     "2 Earth": "2 Земли",
+    "Space Hotels": "Космические отели",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Требует 2 метки Земли. Увеличьте производство M€ на 4",
     "Lava Tube Settlement": "Колонисты в лавовых трубках",
     "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Уменьшите ваше производство энергии на 1, увеличьте ваш доход на 2. Разместите тайл города на ВУЛКАНИЧЕКОЙ ОБЛАСТИ вне зависимости от соседних тайлов",
-    "prelude": "Пролог",
-
-    "Cheung Shing MARS": "",
-    "You start with 3 M€ production and 44 M€.": "Вы начинаете с 44 M€ и 3 уровнями дохода дополнительно",
-    "Effect: When you play a building tag, you pay 2 M€ less for it.":
-    "Платите на 2 M€ меньше за каждую метку строителя на разыгрываемой карте",
-    "": ""
+    "House Printing": "Печатание домов",
+    "Martian Survey": "Опрос марсиан",
+    "(Oxygen must be 4% or lower. Draw two cards.)": "(Требование: кислород должен быть 4% или ниже. Возьмите 2 карты.)",
+    "Psychrophiles": "Психрофилы",
+    "(Effect: When paying for a plant card, microbes here may be used as 2 M€ each.)": "(Эффект: когда разыгрывается карта с меткой растения, бактерии с этой карты могут быть проданы за 2 M€ каждый.)",
+    "(Temperature must be -20 C or lower.)": "(Требование: температура -20 градусов или ниже)",
+    "Research Coordination": "Координация исследований",
+    "(After being played, when you perform an action, the wild tag counts as any tag of your choice.)": "(После разыгрывания, когда вы выполняете действие, метки с животными считаются любыми метками.)",
+    "SF Memorial": "Мемориал СФ"
 }

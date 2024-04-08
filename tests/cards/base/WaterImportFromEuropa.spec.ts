@@ -30,14 +30,14 @@ describe('WaterImportFromEuropa', function() {
     player.megaCredits = 13;
 
     const action = card.action(player);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     game.deferredActions.runNext(); // Payment
     expect(player.megaCredits).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
     const selectOcean = cast(game.deferredActions.peek()!.execute(), SelectSpace);
-    selectOcean.cb(selectOcean.availableSpaces[0]);
+    selectOcean.cb(selectOcean.spaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });
 

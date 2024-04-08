@@ -1,19 +1,16 @@
-import {Player} from '../../Player';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
 
-export class ArcadianCommunities extends Card implements IActionCard, ICorporationCard {
+export class ArcadianCommunities extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ARCADIAN_COMMUNITIES,
       startingMegaCredits: 40,
       initialActionText: 'Place a community (player marker) on a non-reserved area',
@@ -38,21 +35,18 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     });
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     return new SelectSpace(
       'Select space for claim',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: ISpace) => {
+      player.game.board.getAvailableSpacesOnLand(player))
+      .andThen((space: Space) => {
         space.player = player;
-
         player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
-
         return undefined;
-      },
-    );
+      });
   }
 
-  public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
+  public getAvailableSpacesForMarker(player: IPlayer): Array<Space> {
     const board = player.game.board;
     const candidateSpaces = board.getAvailableSpacesOnLand(player);
     const spaces = candidateSpaces.filter((space) => {
@@ -65,18 +59,15 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     return spaces.filter((space, index) => spaces.indexOf(space) === index);
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return this.getAvailableSpacesForMarker(player).length > 0;
   }
 
-  public action(player: Player) {
-    return new SelectSpace(
-      'Select space for claim',
-      this.getAvailableSpacesForMarker(player),
-      (space: ISpace) => {
+  public action(player: IPlayer) {
+    return new SelectSpace('Select space for claim', this.getAvailableSpacesForMarker(player))
+      .andThen((space) => {
         space.player = player;
         return undefined;
-      },
-    );
+      });
   }
 }

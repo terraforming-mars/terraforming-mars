@@ -1,20 +1,20 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {HypersensitiveSiliconChipFactory} from '../../../src/server/cards/moon/HypersensitiveSiliconChipFactory';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('HypersensitiveSiliconChipFactory', () => {
+  let game: IGame;
   let player: TestPlayer;
   let card: HypersensitiveSiliconChipFactory;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new HypersensitiveSiliconChipFactory();
     moonData = MoonExpansion.moonData(game);
   });
@@ -31,16 +31,16 @@ describe('HypersensitiveSiliconChipFactory', () => {
 
     player.titanium = 2;
     player.production.override({energy: 2});
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 1;
     player.production.override({energy: 2});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.titanium = 2;
     space2.tile = {tileType: TileType.MOON_HABITAT};
     player.production.override({energy: 1});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

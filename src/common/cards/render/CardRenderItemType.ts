@@ -25,12 +25,13 @@ export enum CardRenderItemType {
   TRADE = 'trade',
   TRADE_DISCOUNT = 'trade_discount',
   TRADE_FLEET = 'trade_fleet',
-  PLACE_COLONY = 'place_colony',
+  COLONY_TILE = 'colony_tile',
   CHAIRMAN = 'chairman',
   PARTY_LEADERS = 'party_leaders',
   DELEGATES = 'delegates',
   INFLUENCE = 'influence',
-  NO_TAGS ='no_tags',
+  NO_TAGS = 'no_tags',
+  EMPTY_TAG = 'empty_tag',
   PRESERVATION = 'preservation',
   WILD = 'wild',
   FIGHTER = 'fighter',
@@ -74,6 +75,11 @@ export enum CardRenderItemType {
   GLOBAL_EVENT = 'global-event',
   FIRST_PLAYER = '1p',
   RULING_PARTY = 'ruling-party',
+  CATHEDRAL = 'cathedral',
+  GRAPHENE = 'graphene',
+  NOMADS = 'nomads',
+  HYDROELECTRIC_RESOURCE = 'hydroelectric-resource',
+  CITY_OR_SPECIAL_TILE = 'city-or-special-tile',
 
   // CEO Extension:
   ARROW_OPG = 'arrow-opg',
@@ -81,4 +87,23 @@ export enum CardRenderItemType {
   REDS_DEACTIVATED = 'reds-deactivated',
   HAZARD_TILE = 'hazard-tile',
   ADJACENCY_BONUS = 'adjacency-bonus',
+
+  // Star Wars
+  CLONE_TROOPER = 'clone-trooper',
+
+  // Underworld
+  IDENTIFY = 'identify',
+  EXCAVATE = 'excavate',
+  CORRUPTION = 'corruption',
+  NEUTRAL_DELEGATE = 'neutral-delegate',
+  UNDERGROUND_RESOURCES = 'underground-resources',
+  CORRUPTION_SHIELD = 'corruptive-block',
+  TOOL = 'tool',
+  WARE = 'ware',
+  SCOOP = 'scoop',
+  JOURNALISM = 'journalism',
+  ACTIVIST = 'activist',
+  SUPPLY_CHAIN = 'supply-chain',
+  GEOSCAN_ICON = 'geoscan-icon',
+  UNDERGROUND_SHELTERS = 'underground-shelters',
 }

@@ -1,24 +1,25 @@
-import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testGameOptions, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineStandardProject';
-import {expect} from 'chai';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
-import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {Phase} from '../../../src/common/Phase';
+import {Payment} from '../../../src/common/inputs/Payment';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {TileType} from '../../../src/common/TileType';
 
 describe('MoonMineStandardProject', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MoonMineStandardProject;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MoonMineStandardProject();
   });
@@ -57,31 +58,29 @@ describe('MoonMineStandardProject', () => {
 
     card.action(player);
     const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
-    payAction.options.afterPay!();
+    payAction.cb(Payment.EMPTY);
 
     expect(player.titanium).eq(2);
     expect(player.production.steel).eq(1);
     expect(moonData.miningRate).eq(0);
 
-    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonMineTile);
-    placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
+    runAllActions(game);
+    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_MINE);
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });
 
-  it('can act when Reds are in power.', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
+  it('can act when Reds are in power', () => {
+    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
-    game.phase = Phase.ACTION;
 
     // Card requirements
     player.titanium = 1;
 
-    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
     moonData.miningRate = 8;
-    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct */ true);
   });
 });
 

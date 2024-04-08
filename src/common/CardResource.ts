@@ -16,4 +16,13 @@ export enum CardResource {
     SEED = 'Seed',
     AGENDA = 'Agenda',
     ORBITAL = 'Orbital',
+    GRAPHENE = 'Graphene',
+    HYDROELECTRIC_RESOURCE = 'Hydroelectric resource',
+    CLONE_TROOPER = 'Clone Trooper',
+    TOOL = 'Tool',
+    WARE = 'Ware',
+    SCOOP = 'Scoop',
+    JOURNALISM = 'Journalism',
+    ACTIVIST = 'Activist',
+    SUPPLY_CHAIN = 'Supply Chain',
 }

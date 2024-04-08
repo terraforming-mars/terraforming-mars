@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/server/Game';
 import {testGame} from '../TestGame';
-import {addGreenery, addCityTile, cast, runAllActions} from '../TestingUtils';
+import {addGreenery, addCity, cast, runAllActions} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../src/server/cards/ares/NaturalPreserveAres';
 import {EmptyBoard} from '../ares/EmptyBoard';
@@ -34,7 +34,7 @@ describe('Networker', () => {
     naturalPreserveAres.play(player2);
     runAllActions(game);
     const action = cast(player2.popWaitingFor(), SelectSpace);
-    const naturalPreserveSpace = action.availableSpaces[0];
+    const naturalPreserveSpace = action.spaces[0];
     action.cb(naturalPreserveSpace);
 
     expect(scores()).deep.eq([0, 0, 0]);
@@ -46,7 +46,7 @@ describe('Networker', () => {
 
     expect(scores()).deep.eq([0, 1, 0]);
 
-    addCityTile(player3, adjacentSpaces[1].id);
+    addCity(player3, adjacentSpaces[1].id);
 
     expect(scores()).deep.eq([0, 1, 1]);
   });

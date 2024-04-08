@@ -1,10 +1,12 @@
-import {Game} from '../../../src/server/Game';
-import {runAllActions, testGameOptions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IntragenSanctuaryHeadquarters} from '../../../src/server/cards/moon/IntragenSanctuaryHeadquarters';
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
+import {MeatIndustry} from '../../../src/server/cards/promo/MeatIndustry';
+import {Pets} from '../../../src/server/cards/base/Pets';
 
 describe('IntragenSanctuaryHeadquarters', () => {
   let player: TestPlayer;
@@ -12,9 +14,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   let card: IntragenSanctuaryHeadquarters;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, testGameOptions({moonExpansion: true}));
+    [/* game */, player, player2] = testGame(2, {moonExpansion: true});
     card = new IntragenSanctuaryHeadquarters();
   });
 
@@ -66,6 +66,16 @@ describe('IntragenSanctuaryHeadquarters', () => {
 
     card.onCardPlayed(player2, new MartianZoo());
     expect(card.resourceCount).eq(1);
+  });
+
+  it('works with Meat Industry', () => {
+    player.setCorporationForTest(card);
+    const meatIndustry = new MeatIndustry();
+    player.playedCards.push(meatIndustry);
+    const pets = new Pets();
+    player.playCard(pets);
+    expect(card.resourceCount).eq(1);
+    expect(player.megaCredits).eq(2);
   });
 });
 

@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -24,7 +24,7 @@ export class Will extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 2}));
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));

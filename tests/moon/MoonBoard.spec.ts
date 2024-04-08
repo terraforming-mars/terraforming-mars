@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {MoonBoard} from '../../src/server/moon/MoonBoard';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
+import {SpaceId} from '../../src/common/Types';
 
 describe('MoonBoard', function() {
   let board: MoonBoard;
@@ -11,13 +12,13 @@ describe('MoonBoard', function() {
   });
 
   it('getSpace', () => {
-    expect(() => board.getSpace('01').id).to.throw(Error, /Can't find space with id 01/);
-    expect(board.getSpace('m01').spaceType).eq(SpaceType.COLONY);
-    expect(board.getSpace(MoonSpaces.LUNA_TRADE_STATION).id).eq('m01');
+    expect(() => board.getSpaceOrThrow('01').id).to.throw(Error, /Can't find space with id 01/);
+    expect(board.getSpaceOrThrow('m01').spaceType).eq(SpaceType.COLONY);
+    expect(board.getSpaceOrThrow(MoonSpaces.LUNA_TRADE_STATION).id).eq('m01');
   });
 
 
-  const testCases: Array<[string, Array<string>]> = [
+  const testCases: Array<[SpaceId, Array<SpaceId>]> = [
     ['m01', []],
     ['m02', ['m03', 'm07', 'm06']],
     ['m03', ['m04', 'm08', 'm07', 'm02']],
@@ -59,7 +60,7 @@ describe('MoonBoard', function() {
 
   testCases.forEach(([spaceId, expected]) => {
     it('getAdjacentSpaces - ' + spaceId, () => {
-      const space = board.getSpace(spaceId);
+      const space = board.getSpaceOrThrow(spaceId);
       const actual = board.getAdjacentSpaces(space).map((s) => s.id);
       expect(expected).to.eql(actual);
     });

@@ -1,10 +1,10 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -28,14 +28,14 @@ export class MoonMineStandardProject extends StandardProjectCard {
     super(properties);
   }
 
-  protected override discount(player: Player): number {
+  protected override discount(player: IPlayer): number {
     if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
       return 4;
     }
     return super.discount(player);
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     const moonData = MoonExpansion.moonData(player.game);
     const spaces = moonData.moon.getAvailableSpacesForMine(player);
 
@@ -46,10 +46,10 @@ export class MoonMineStandardProject extends StandardProjectCard {
     return super.canAct(player);
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-    player.deductUnits(adjustedReserveUnits);
+    player.stock.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonMineTile(player));
-    player.production.add(Resources.STEEL, 1, {log: true});
+    player.production.add(Resource.STEEL, 1, {log: true});
   }
 }

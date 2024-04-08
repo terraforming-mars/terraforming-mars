@@ -14,7 +14,7 @@
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": "Необходимо 3 тайла океана. Снизьте свой доход на 1 и производство тепла любого игрока на 1. Повысьте своё производство растений на 2.",
 
     "Search For Life": "Поиски жизни",
-    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "Действие: потратьте 1 МC, чтобы открыть верхнюю карту колоды. Если на карте есть символ бактерий, положите жетон науки на эту карту.",
+    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "Действие: потратьте 1 М€, чтобы открыть верхнюю карту колоды. Если на карте есть символ бактерий, положите жетон науки на эту карту.",
     "3 VPs if you have one or more science resources here.": "3 ПО, если на этой карте есть хотя бы 1 жетон науки.",
     "Oxygen must be 6% or less.": "Уровень кислорода должен быть 6% или ниже",
 
@@ -42,7 +42,7 @@
     "Big Asteroid": "Большой астероид",
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Повысьте температуру на 2 и получите 4 титана. Удалите до 4 растений у любого игрока.",
 
-    "Water Import from Europa": "Импорт воды с Европы",
+    "Water Import From Europa": "Импорт воды с Европы",
     "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "Действие: заплатите 12 M€, чтоб выложить тайл океана. Можно использовать титан для оплаты, как при игре карты с символом космоса.",
     "1 VP for each Jovian tag you have.": "1 ПО за каждый ваш символ Юпитера.",
 
@@ -84,7 +84,7 @@
 
     "Predators": "Хищники",
     "Action: Remove 1 animal from any card and add it to this card.": "Действие: удалите 1 жетон животных с любой карты и положите на эту карту 1 жетон животных.",
-    "Requires 11% oxygen. 1 VP per animal on this card.": "Уровень кислорода должен быть 11%. 1 ПО за каждый жетон животных на этой карте.",
+    "(Requires 11% oxygen.)": "(Уровень кислорода должен быть 11%.)",
 
     "Space Station": "Космическая станция",
     "Effect: When you play a space card, you pay 2 M€ less for it.": "Свойство: когда играете карту с символом космоса, вы платите на 2 M€ меньше.",
@@ -120,7 +120,7 @@
 
     "Ants": "Муравьи",
     "Action: Remove 1 microbe from any card to add 1 to this card.": "Действие: удалите 1 жетон бактерий с любой карты и положите на эту карту 1 жетон бактерий.",
-    "Requires 4% oxygen. 1 VP per 2 microbes on this card.": "Уровень кислорода должен быть 4%. 1 ПО за каждые 2 жетона бактерий на этой карте.",
+    "1 VP per 2 microbes on this card.": "1 ПО за каждые 2 жетона бактерий на этой карте.",
 
     "Release of Inert Gases": "Выпуск инертных газов",
     "Raise your terraforming rating 2 steps.": "Повысьте свой рейтинг на 2.",
@@ -247,7 +247,7 @@
     "Viral Enhancers": "Вирусные векторы",
     "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Свойство: когда вы играете карту с символом растения, бактерии или животного, включая эту, получите 1 растение или положите 1 соответствующий жетон на только что сыгранную карту.",
 
-    "Towing a Comet": "Буксировка кометы",
+    "Towing A Comet": "Буксировка кометы",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Получите 2 растения. Повысьте уровень кислорода на 1 и выложите тайл океана.",
 
     "Space Mirrors": "Космические зеркала",
@@ -407,7 +407,7 @@
     "Steal up to 2 steel, or 3 M€ from any player.": "Украдите у любого игрока до 2 стали или до 3 M€.",
 
     "Hackers": "Хакеры",
-    "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.": "Снизьте своё производство энергии на 1 и доход любого игрока на 2. Повысьте свой доход на 2.",
+    "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.": "Снизьте своё производство энергии на 1 и доход любого игрока на 2. Повысьте свой доход на 2.",
 
     "GHG Factories": "Фабрики парникового газа",
     "Decrease your energy production 1 step and increase your heat production 4 steps.": "Снизьте своё производство энергии на 1 и повысьте своё производство тепла на 4.",
@@ -421,7 +421,7 @@
     "1 VP per 2 animals on this card.": "1 ПО за каждые 2 животных на этой карте",
 
     "Zeppelins": "Дирижабли",
-    "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "Уровень кислорода должен быть 5%. Увеличьте ваше производсво МС на 1 за каждый тайл города НА МАРСЕ",
+    "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "Уровень кислорода должен быть 5%. Увеличьте ваше производсво M€ на 1 за каждый тайл города НА МАРСЕ",
 
     "Worms": "Черви",
     "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": "Уровень кислорода должен быть 4%. Повысьте свой уровень производства растений на 1 за каждые 2 ваших символа бактерий, включая этот.",
@@ -436,7 +436,7 @@
 
     "Symbiotic Fungus": "Грибы-симбионты",
     "Action: Add a microbe to ANOTHER card.": "Действие: положите жетон бактерий на другую карту.",
-    "Requires -14 C or warmer.": "Температура должна быть -14 градусов или выше.",
+    "(Requires -14 C° or warmer.)": "(Температура должна быть -14 градусов или выше.)",
 
     "Extreme-Cold Fungus": "Грибок для сверхнизких температур",
     "Action: Gain 1 plant.": "Действие: получите 1 растение",
@@ -462,7 +462,6 @@
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Повысьте температуру на 2 и выложите этот тайл либо на купол Фарсида, либо на гору Павлина, либо на гору Арсия.",
 
     "Power Plant": "Электростанция",
-    "Increase your energy production 1 step.": "Повысьте своё производство энергии на 1.",
 
     "Mohole Area": "Проект Мохол",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Повысьте своё производство тепла на 4. Выложите этот тайл на зарезервированный для океана участок.",
@@ -512,7 +511,7 @@
     "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Свойство: после того как вы оплатите стандартный проект, кроме «продажи патентов», получите 3 M€.",
 
     "Nitrite Reducing Bacteria": "Бактерия, перерабатывающая нитриты",
-    "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Действие: положите жетон бактерий на эту карту или сбросьте 3 жетона бактерий, чтобы повысить свой рейтинг на 1.",
+    "(Action: Remove 3 microbes to increase your TR 1 step.)": "(Действие: положите жетон бактерий на эту карту или сбросьте 3 жетона бактерий, чтобы повысить свой рейтинг на 1.)",
     "Add 3 microbes to this card.": "Положите 3 жетона бактерий на эту карту.",
 
     "Industrial Microbes": "Промышленные микробы",
@@ -565,7 +564,7 @@
     "Add 1 animal to this card. 1 VP per 2 animals here.": "Положите 1 животное на эту карту. 1 ПО за каждые два животных на этой карте.",
 
     "Protected Habitats": "Защищённая среда обитания",
-    "OPPONENTS MAY NOT REMOVE YOUR": "Противники не могут удалять ваши.",
+    "Opponents may not remove your": "Противники не могут удалять ваши жетоны.",
 
     "Protected Valley": "Защищённая долина",
     "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Повысьте свой доход на 2. Проведите озеленение зарезервированного для океана участка, игнорируя правила проведения озеленений, и повысьте уровень кислорода на 1.",
@@ -629,7 +628,7 @@
     "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "Необходимо 2 символа науки. Проведите озеленение и повысьте уровень кислорода на 1.",
 
     "Power Infrastructure": "Инфраструктура энергетики",
-    "Action: Spend any amount of energy and gain that amount of M€.": "Действие: потратьте любое количество энергии, чтобы получить такое же количество MC.",
+    "Action: Spend any amount of energy and gain that amount of M€.": "Действие: потратьте любое количество энергии, чтобы получить такое же количество M€.",
 
     "Indentured Workers": "Законтрактованные рабочие",
     "The next card you play this generation costs 8 M€ less.": "Следующая карта, которую вы сыграете в этом поколении, будет стоить на 8M€ меньше.",
@@ -687,6 +686,7 @@
     "ACTION": "ДЕЙСТВИЕ",
     "Select prelude card to play": "Выберите карту Прологов, чтобы разыграть ее",
     "Select space for ocean tile": "Выберите место для размещения океана",
+    "Select space adjacent to a city tile": "Выберите место, примыкающее к тайлу города",
     "Venus Milestone/Award": "Награда/Достижение проекта Венера",
 
     "${0} placed ${1} tile on (${2}, ${3}": "${0} разместил тайл \"${1}\" на координатах (${2}, ${3}"

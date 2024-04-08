@@ -1,11 +1,9 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {CardResource} from '../../../common/CardResource';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -15,10 +13,9 @@ import {Turmoil} from '../../turmoil/Turmoil';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {Size} from '../../../common/cards/render/Size';
 
-export class MindSetMars extends Card implements ICorporationCard {
+export class MindSetMars extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.MIND_SET_MARS,
       startingMegaCredits: 44,
       resourceType: CardResource.AGENDA,
@@ -28,7 +25,7 @@ export class MindSetMars extends Card implements ICorporationCard {
       },
 
       metadata: {
-        cardNumber: 'PfC23',
+        cardNumber: 'PfC21',
         description: 'You start with 44 M€ and 1 agenda resource to this card.',
         renderData: CardRenderer.builder((b) => {
           b.br;
@@ -43,37 +40,37 @@ export class MindSetMars extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.game.getCardPlayerOrUndefined(this.name) !== player) return;
     if (card.tags.includes(Tag.BUILDING)) {
       player.addResourceTo(this, {qty: 1, log: true});
     }
   }
 
-  private canAddDelegate(player: Player) {
+  private canAddDelegate(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player.id) > 0;
+    return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player) > 0;
   }
 
-  private canAddCity(player: Player) {
+  private canAddCity(player: IPlayer) {
     return this.resourceCount >= 5 && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return this.canAddDelegate(player) || this.canAddCity(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const options = new OrOptions();
 
     if (this.canAddDelegate(player)) {
-      options.options.push(new SelectOption('Spend 2 agendas to add a delegate to any party', 'OK', () => {
+      options.options.push(new SelectOption('Spend 2 agendas to add a delegate to any party').andThen(() => {
         player.removeResourceFrom(this, 2);
         player.game.defer(new SendDelegateToArea(player));
         return undefined;
       }));
     }
     if (this.canAddCity(player)) {
-      options.options.push(new SelectOption('Spend 5 agendas to place a city on Mars', 'OK', () => {
+      options.options.push(new SelectOption('Spend 5 agendas to place a city on Mars').andThen(() => {
         player.removeResourceFrom(this, 5);
         player.game.defer(new PlaceCityTile(player));
         return undefined;

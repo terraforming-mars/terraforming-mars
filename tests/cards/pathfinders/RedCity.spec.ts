@@ -8,7 +8,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Phase} from '../../../src/common/Phase';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {Board} from '../../../src/server/boards/Board';
+import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {Units} from '../../../src/common/Units';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../TestingUtils';
@@ -19,7 +19,7 @@ describe('RedCity', function() {
   let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
-  let board: Board;
+  let board: MarsBoard;
 
   beforeEach(function() {
     card = new RedCity();
@@ -55,7 +55,7 @@ describe('RedCity', function() {
     expect(player.canPlay(card)).is.true;
 
     // An arbitrary space.
-    const redCitySpace = board.getSpace('53');
+    const redCitySpace = board.getSpaceOrThrow('53');
 
     board.spaces.forEach((space) => {
       if (space.spaceType !== SpaceType.OCEAN) {
@@ -84,11 +84,11 @@ describe('RedCity', function() {
   });
 
   it('play', function() {
-    const redCitySpace = board.getSpace('53');
+    const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     const action = cast(card.play(player), SelectSpace);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 2}));
-    expect(action.availableSpaces).includes(redCitySpace);
+    expect(action.spaces).includes(redCitySpace);
 
     action.cb(redCitySpace);
 
@@ -97,7 +97,7 @@ describe('RedCity', function() {
   });
 
   it('vps', function() {
-    const redCitySpace = board.getSpace('53');
+    const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     cast(card.play(player), SelectSpace).cb(redCitySpace);
 
@@ -117,7 +117,7 @@ describe('RedCity', function() {
   });
 
   it('cannot place greenery next to red city', function() {
-    const redCitySpace = board.getSpace('53');
+    const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     cast(card.play(player), SelectSpace).cb(redCitySpace);
     const adjacentSpaces = board.getAdjacentSpaces(redCitySpace);

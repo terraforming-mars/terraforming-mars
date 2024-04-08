@@ -8,14 +8,15 @@ export type GameOptionsModel = {
   altVenusBoard: boolean,
   boardName: BoardName,
   bannedCards: Array<CardName>;
+  includedCards: Array<CardName>;
   ceoExtension: boolean,
   coloniesExtension: boolean,
   communityCardsOption: boolean,
   corporateEra: boolean,
   draftVariant: boolean,
-  corporationsDraft: boolean,
   escapeVelocityMode: boolean,
   escapeVelocityThreshold?: number,
+  escapeVelocityBonusSeconds?: number,
   escapeVelocityPeriod?: number,
   escapeVelocityPenalty?: number,
   fastModeOption: boolean,
@@ -25,6 +26,7 @@ export type GameOptionsModel = {
   moonExpansion: boolean,
   pathfindersExpansion: boolean,
   preludeExtension: boolean,
+  prelude2Expansion: boolean,
   promoCardsOption: boolean,
   politicalAgendasExtension: AgendaStyle,
   removeNegativeGlobalEvents: boolean,
@@ -40,4 +42,5 @@ export type GameOptionsModel = {
   twoCorpsVariant: boolean,
   venusNextExtension: boolean,
   undoOption: boolean,
+  underworldExpansion: boolean;
 }

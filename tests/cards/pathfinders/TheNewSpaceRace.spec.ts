@@ -3,7 +3,7 @@ import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpace
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast} from '../../TestingUtils';
+import {cast, doWait, runAllActions, setRulingParty} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
@@ -35,11 +35,11 @@ describe('TheNewSpaceRace', function() {
   });
 
   /*
-  For this test to work, you need a player with the prelude card in hand.
-  That must be not the first placer.
-  Set the game to have no draft.]
-  Then as we move through to the game phase, the first player will change, and there will be a change of ruling party.
-  Finally, that player will get a second action.
+   * For this test to work, you need a player with the prelude card in hand. That must be not the first player.
+   * Set the game to have no draft.
+   *
+   * While moving through to the game phase, the first player will change, and there will be a change of ruling party.
+   * Finally, that player will get a second action.
   */
   it('Should play', function() {
     player1.dealtPreludeCards = [new AlliedBanks(), new BiosphereSupport()];
@@ -50,13 +50,13 @@ describe('TheNewSpaceRace', function() {
     selectInitialCards1.options[0].cb([player1.dealtCorporationCards[0]]);
     selectInitialCards1.options[1].cb(player1.dealtPreludeCards);
     selectInitialCards1.options[2].cb([]);
-    selectInitialCards1.cb();
+    selectInitialCards1.cb(undefined);
 
     const selectInitialCards2 = cast(player2.getWaitingFor(), SelectInitialCards);
     selectInitialCards2.options[0].cb([player2.dealtCorporationCards[0]]);
     selectInitialCards2.options[1].cb(player2.dealtPreludeCards);
     selectInitialCards2.options[2].cb([]);
-    selectInitialCards2.cb();
+    selectInitialCards2.cb(undefined);
 
     const selectInitialCards3 = cast(player3.getWaitingFor(), SelectInitialCards);
     selectInitialCards3.options[0].cb([player3.dealtCorporationCards[0]]);
@@ -73,27 +73,43 @@ describe('TheNewSpaceRace', function() {
     cast(player3.popWaitingFor(), SelectInitialCards);
 
     // This will trigger everything.
-    selectInitialCards3.cb();
+    selectInitialCards3.cb(undefined);
 
     expect(game.getPlayersInGenerationOrder()).deep.eq([player2, player3, player1]);
 
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
-    const [input, cb] = player2.popWaitingFor2();
-    const selectParty = cast(input, OrOptions);
+    cast(player1.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
+    doWait(player2, OrOptions, (selectParty) => {
+      expect(game.turmoil!.rulingParty.name).eq(PartyName.GREENS);
+      selectParty.options[2].cb(); // 2 is Unity.
+      expect(game.turmoil!.rulingParty.name).eq(PartyName.UNITY);
+    });
 
-    expect(game.turmoil!.rulingParty.name).eq(PartyName.GREENS);
-    selectParty.options[2].cb(); // 2 is Unity.
-    expect(game.turmoil!.rulingParty.name).eq(PartyName.UNITY);
-    // cb would be called during normal processing.
-    cb?.();
-
-    expect(player1.getWaitingFor()).is.undefined;
-    expect(player3.getWaitingFor()).is.undefined;
+    cast(player1.getWaitingFor(), undefined);
+    cast(player3.getWaitingFor(), undefined);
 
     // Player2 is up, and will play its other prelude first.
     const next = cast(player2.getWaitingFor(), SelectCard);
     expect(player2.actionsTakenThisRound).eq(0);
     expect(next.cards.map((c) => c.name)).deep.eq([CardName.AQUIFER_TURBINES]);
+  });
+
+  it('Play during late game (e.g. Karen CEO)', function() {
+    expect(player1.getTitaniumValue()).eq(3);
+    setRulingParty(game, PartyName.UNITY);
+    expect(player1.getTitaniumValue()).eq(4);
+
+    // Some assertions before the last cb.
+    expect(game.getPlayersInGenerationOrder()).deep.eq([player1, player2, player3]);
+
+    cast(card.play(player2), undefined);
+    runAllActions(game);
+
+    expect(game.turmoil!.rulingParty.name).eq(PartyName.UNITY);
+    const selectParty = cast(player2.popWaitingFor(), OrOptions);
+    selectParty.options[3].cb(); // 3 is Greens
+    expect(game.turmoil!.rulingParty.name).eq(PartyName.GREENS);
+
+    expect(player1.getTitaniumValue()).eq(3);
   });
 });

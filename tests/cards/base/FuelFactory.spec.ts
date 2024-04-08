@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {FuelFactory} from '../../../src/server/cards/base/FuelFactory';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -10,16 +10,16 @@ describe('FuelFactory', function() {
 
   beforeEach(function() {
     card = new FuelFactory();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    player.production.add(Resource.ENERGY, 1);
+    expect(card.canPlay(player)).is.true;
     card.play(player);
 
     expect(player.production.energy).to.eq(0);

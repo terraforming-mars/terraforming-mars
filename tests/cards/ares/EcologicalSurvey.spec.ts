@@ -1,6 +1,5 @@
 import {EcologicalSurvey} from '../../../src/server/cards/ares/EcologicalSurvey';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {Ants} from '../../../src/server/cards/base/Ants';
@@ -10,16 +9,18 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
-import {addGreenery, cast, runAllActions} from '../../TestingUtils';
+import {addGreenery, cast, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('EcologicalSurvey', () => {
   let card: EcologicalSurvey;
   let player: TestPlayer;
-  let redPlayer : Player;
+  let redPlayer : TestPlayer;
   let game: Game;
 
   beforeEach(() => {
@@ -30,13 +31,13 @@ describe('EcologicalSurvey', () => {
 
   it('Can play', () => {
     addGreenery(player);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addGreenery(player);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addGreenery(player);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   // This doesn't test anything about this card, but about the behavior this card provides, from
@@ -188,5 +189,31 @@ describe('EcologicalSurvey', () => {
     expect(msg.data[2].value).to.eq(card.name);
     expect(msg.message).to.eq('${0} gained a bonus ${1} because of ${2}');
     expect(microbeCard.resourceCount).eq(2);
+  });
+
+  it('Works during final greenery placement', () => {
+    const [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: false});
+
+    player.playedCards.push(card);
+    // Set up end-game conditions
+    setTemperature(game, MAX_TEMPERATURE);
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
+    maxOutOceans(player);
+    player.plants = 9;
+
+    // Pass last turn
+    forceGenerationEnd(game);
+
+    // Final greenery placement is considered part of the production phase.
+    expect(game.phase).to.eq(Phase.PRODUCTION);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), OrOptions);
+    expect(options.title).eq('Place any final greenery from plants');
+    const selectSpace = cast(options.options[0], SelectSpace);
+    const space = selectSpace.spaces[0];
+    space.bonus = [SpaceBonus.PLANT];
+    selectSpace.cb(space);
+
+    expect(player.plants).eq(3);
   });
 });

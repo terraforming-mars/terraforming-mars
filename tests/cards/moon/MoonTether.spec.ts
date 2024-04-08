@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {fakeCard, testGameOptions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
+import {fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonTether} from '../../../src/server/cards/moon/MoonTether';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -10,8 +10,7 @@ describe('MoonTether', () => {
   let card: MoonTether;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new MoonTether();
   });
 
@@ -19,14 +18,14 @@ describe('MoonTether', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.playedCards.push(fakeCard({tags: [Tag.SPACE, Tag.SPACE, Tag.SPACE, Tag.SPACE, Tag.SPACE]}));
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     // Pushing a sixth tag will do it.
     player.playedCards.push(fakeCard({tags: [Tag.SPACE]}));
-    expect(player.getPlayableCards()).includes(card);
+    expect(player.getPlayableCardsForTest()).includes(card);
   });
 
   it('play', () => {

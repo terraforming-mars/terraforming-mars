@@ -12,7 +12,7 @@ describe('Curator', () => {
 
   beforeEach(() => {
     award = new Curator();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Counts tags', () => {

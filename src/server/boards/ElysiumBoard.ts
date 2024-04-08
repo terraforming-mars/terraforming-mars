@@ -1,13 +1,13 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
-import {SerializedBoard} from './SerializedBoard';
-import {Player} from '../Player';
-import {Random} from '../Random';
-import {GameOptions} from '../GameOptions';
+import {Random} from '../../common/utils/Random';
+import {GameOptions} from '../game/GameOptions';
+import {SpaceId} from '../../common/Types';
+import {MarsBoard} from './MarsBoard';
+import {Space} from './Space';
 
-export class ElysiumBoard extends Board {
+export class ElysiumBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
@@ -42,11 +42,11 @@ export class ElysiumBoard extends Board {
     return new ElysiumBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): ElysiumBoard {
-    return new ElysiumBoard(Board.deserializeSpaces(board.spaces, players));
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
   }
 
-  public override getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): Array<SpaceId> {
     return [
       SpaceName.ARSIA_MONS_ELYSIUM,
       SpaceName.ELYSIUM_MONS,

@@ -3,12 +3,11 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -22,7 +21,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
 
       resourceType: CardResource.MICROBE,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      requirements: {oxygen: 4},
 
       metadata: {
         cardNumber: '035',
@@ -37,14 +36,17 @@ export class Ants extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     if (player.game.isSoloMode()) return true;
-    return RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
+    return RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.MICROBE).length > 0;
   }
 
-  public action(player: Player) {
-    player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE));
-    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {filter: (c) => c.name === this.name}));
+  public action(player: IPlayer) {
+    player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE).andThen((response) => {
+      if (response.proceed) {
+        player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {filter: (c) => c.name === this.name}));
+      }
+    }));
     return undefined;
   }
 }

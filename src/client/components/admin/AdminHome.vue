@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import * as paths from '@/common/app/paths';
+import {paths} from '@/common/app/paths';
 
 export default Vue.extend({
   name: 'admin-home',
@@ -22,6 +22,7 @@ export default Vue.extend({
         paths.API_GAMES,
         paths.API_METRICS,
         paths.LOAD,
+        paths.API_IPS,
       ],
     };
   },

@@ -1,10 +1,10 @@
 import {IAward} from './IAward';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Thermalist implements IAward {
   public readonly name = 'Thermalist';
-  public readonly description = 'Having the most heat resource cubes (after final production round)';
-  public getScore(player: Player): number {
+  public readonly description = 'Have the most heat';
+  public getScore(player: IPlayer): number {
     if (player.game.isDoneWithFinalProduction()) {
       return player.heat;
     } else {

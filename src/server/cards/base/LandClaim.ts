@@ -1,9 +1,8 @@
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
@@ -24,18 +23,17 @@ export class LandClaim extends Card implements IProjectCard {
       },
     });
   }
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return player.game.board.getNonReservedLandSpaces().length > 0;
   }
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
       'Select space for claim',
-      player.game.board.getNonReservedLandSpaces(),
-      (space: ISpace) => {
+      player.game.board.getNonReservedLandSpaces())
+      .andThen((space) => {
         space.player = player;
         LogHelper.logBoardTileAction(player, space, 'land claim');
         return undefined;
-      },
-    );
+      });
   }
 }

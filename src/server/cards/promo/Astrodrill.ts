@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
@@ -9,17 +8,14 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {LogHelper} from '../../LogHelper';
-import {Resources} from '../../../common/Resources';
-import {CardType} from '../../../common/cards/CardType';
+import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
-import {PlayerInput} from '../../PlayerInput';
 
-export class Astrodrill extends Card implements IActionCard, ICorporationCard {
+export class Astrodrill extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ASTRODRILL,
       tags: [Tag.SPACE],
       startingMegaCredits: 35,
@@ -54,40 +50,40 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
-    const opts: Array<PlayerInput> = [];
+    const opts = [];
 
-    const gainStandardResource = new SelectOption('Gain a standard resource', 'Gain', () => {
+    const gainStandardResource = new SelectOption('Gain a standard resource', 'Gain').andThen(() => {
       return new OrOptions(
-        new SelectOption('Gain 1 titanium', 'Gain titanium', () => {
-          player.addResource(Resources.TITANIUM, 1, {log: true});
+        new SelectOption('Gain 1 titanium', 'Gain titanium').andThen(() => {
+          player.stock.add(Resource.TITANIUM, 1, {log: true});
           return undefined;
         }),
-        new SelectOption('Gain 1 steel', 'Gain steel', () => {
-          player.addResource(Resources.STEEL, 1, {log: true});
+        new SelectOption('Gain 1 steel', 'Gain steel').andThen(() => {
+          player.stock.add(Resource.STEEL, 1, {log: true});
           return undefined;
         }),
-        new SelectOption('Gain 1 plant', 'Gain plant', () => {
-          player.addResource(Resources.PLANTS, 1, {log: true});
+        new SelectOption('Gain 1 plant', 'Gain plant').andThen(() => {
+          player.stock.add(Resource.PLANTS, 1, {log: true});
           return undefined;
         }),
-        new SelectOption('Gain 1 energy', 'Gain energy', () => {
-          player.addResource(Resources.ENERGY, 1, {log: true});
+        new SelectOption('Gain 1 energy', 'Gain energy').andThen(() => {
+          player.stock.add(Resource.ENERGY, 1, {log: true});
           return undefined;
         }),
-        new SelectOption('Gain 1 heat', 'Gain heat', () => {
-          player.addResource(Resources.HEAT, 1, {log: true});
+        new SelectOption('Gain 1 heat', 'Gain heat').andThen(() => {
+          player.stock.add(Resource.HEAT, 1, {log: true});
           return undefined;
         }),
-        new SelectOption('Gain 1 M€', 'Gain M€', () => {
-          player.addResource(Resources.MEGACREDITS, 1, {log: true});
+        new SelectOption('Gain 1 M€', 'Gain M€').andThen(() => {
+          player.stock.add(Resource.MEGACREDITS, 1, {log: true});
           return undefined;
         }),
       );
     });
 
-    const addResourceToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
+    const addResourceToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid').andThen(() => {
       player.addResourceTo(this, {log: true});
 
       return undefined;
@@ -96,15 +92,13 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
     const addResource = new SelectCard(
       'Select card to add 1 asteroid',
       'Add asteroid',
-      asteroidCards,
-      ([card]) => {
+      asteroidCards)
+      .andThen(([card]) => {
         player.addResourceTo(card, {log: true});
-
         return undefined;
-      },
-    );
+      });
 
-    const spendResource = new SelectOption('Remove 1 asteroid on this card to gain 3 titanium', 'Remove asteroid', () => {
+    const spendResource = new SelectOption('Remove 1 asteroid on this card to gain 3 titanium', 'Remove asteroid').andThen(() => {
       this.resourceCount--;
       player.titanium += 3;
       LogHelper.logRemoveResource(player, this, 1, 'gain 3 titanium');

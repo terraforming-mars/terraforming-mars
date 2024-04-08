@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
@@ -23,7 +23,7 @@ export class HAL9000 extends CeoCard {
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     // For every Unit type, if it can be reduced one unit, do so, and give the player
     // 4 of that resource.
@@ -33,7 +33,7 @@ export class HAL9000 extends CeoCard {
       if (player.production.canAdjust(adjustment)) {
         player.production.adjust(adjustment, {log: true});
         adjustment[type] = 4;
-        player.addUnits(adjustment, {log: true});
+        player.stock.addUnits(adjustment, {log: true});
       }
     }
     return undefined;

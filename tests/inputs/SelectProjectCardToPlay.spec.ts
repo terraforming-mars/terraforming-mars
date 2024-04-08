@@ -19,7 +19,7 @@ describe('SelectProjectCardToPlay', function() {
   };
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     aquiferPumping = new AquiferPumping();
     ioMiningIndustries = new IoMiningIndustries();
     called = false;
@@ -28,9 +28,11 @@ describe('SelectProjectCardToPlay', function() {
   it('Simple', function() {
     const selectProjectCardToPlay = new SelectProjectCardToPlay(
       player,
-      [aquiferPumping, ioMiningIndustries],
-      {cb},
-    );
+      [
+        {card: aquiferPumping},
+        {card: ioMiningIndustries},
+      ],
+    ).andThen(cb);
 
     expect(() => selectProjectCardToPlay.process({
       type: 'projectCard',

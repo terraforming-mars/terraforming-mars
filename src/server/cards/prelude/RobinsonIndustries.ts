@@ -1,18 +1,17 @@
 import {IActionCard} from '../ICard';
-import {Player} from '../../Player';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ALL_RESOURCES} from '../../../common/Resources';
-import {Card} from '../Card';
+import {ALL_RESOURCES} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {TITLES} from '../../inputs/titles';
 
-export class RobinsonIndustries extends Card implements IActionCard, ICorporationCard {
+export class RobinsonIndustries extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ROBINSON_INDUSTRIES,
       startingMegaCredits: 47,
 
@@ -31,23 +30,19 @@ export class RobinsonIndustries extends Card implements IActionCard, ICorporatio
       },
     });
   }
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.canAfford(4);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     let minimum = player.production.megacredits;
     let lowest: Array<SelectOption> = [];
 
     ALL_RESOURCES.forEach((resource) => {
-      const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
-        player.payMegacreditsDeferred(
-          4,
-          'Select how to pay for Robinson Industries action.',
-          () => {
-            // Add production after payment, to prevent Manutech from being in the way.
-            player.production.add(resource, 1, {log: true});
-          });
+      const option = new SelectOption('Increase ' + resource + ' production 1 step').andThen(() => {
+        player.game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForCardAction(this.name)}))
+          // Add production after payment, to prevent Manutech from being in the way.
+          .andThen(() => player.production.add(resource, 1, {log: true}));
         return undefined;
       });
 

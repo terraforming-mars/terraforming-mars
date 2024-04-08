@@ -24,9 +24,7 @@ describe('MarsUniversity', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
-
+    cast(card.play(player), undefined);
     expect(card.onCardPlayed(player, new Pets())).is.undefined;
     expect(game.deferredActions).has.lengthOf(0);
 
@@ -78,7 +76,7 @@ describe('MarsUniversity', function() {
     player.playCard(roboticWorkforce);
     expect(game.deferredActions).has.lengthOf(3);
 
-    const olympusConferenceAction = game.deferredActions.pop()?.execute();
+    const olympusConferenceAction = cast(game.deferredActions.pop()?.execute(), OrOptions);
     expect(olympusConferenceAction?.title).to.match(/Olympus Conference/);
     // Second option adds another resource.
     olympusConferenceAction?.options?.[1].cb();

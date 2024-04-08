@@ -1,0 +1,29 @@
+import {expect} from 'chai';
+import {CentralReservoir} from '../../../src/server/cards/underworld/CentralReservoir';
+import {testGame} from '../../TestGame';
+import {cast, runAllActions} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {TileType} from '../../../src/common/TileType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
+
+describe('CentralReservoir', () => {
+  it('play', () => {
+    const card = new CentralReservoir();
+    const [game, player] = testGame(2, {underworldExpansion: true});
+
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    const spaces = selectSpace.spaces;
+    const space = spaces[0];
+    space.player = undefined;
+    space.undergroundResources = 'plant1';
+    space.bonus = [];
+    selectSpace.cb(space);
+
+    expect(spaces.map((s) => s.spaceType)).does.not.contain(SpaceType.OCEAN);
+    expect(space.tile?.tileType).eq(TileType.OCEAN);
+    expect(space.excavator).eq(player);
+    expect(player.plants).eq(1);
+  });
+});

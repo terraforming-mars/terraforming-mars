@@ -16,12 +16,12 @@ describe('ParadigmBreakdown', function() {
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.initGlobalEvent(game);
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player.id);
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player);
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     const asteroid = new Asteroid();
     const dustSeals = new DustSeals();
@@ -38,7 +38,7 @@ describe('ParadigmBreakdown', function() {
     const selectCard = cast(player.popWaitingFor(), SelectCard);
     selectCard.cb([powerPlant, asteroid]);
     runAllActions(game);
-    expect(player2.popWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0]).to.eq(dustSeals);

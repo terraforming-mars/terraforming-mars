@@ -1,20 +1,16 @@
-import {Player} from '../../Player';
-import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardResource} from '../../../common/CardResource';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
 
-export class SoylentSeedlingSystems extends Card implements ICorporationCard {
+export class SoylentSeedlingSystems extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.SOYLENT_SEEDLING_SYSTEMS,
       tags: [Tag.SCIENCE, Tag.PLANT],
       startingMegaCredits: 38,
@@ -32,7 +28,7 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
             eb.greenery().startEffect.seed();
           }).br;
           b.effect('When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.', (eb) => {
-            eb.plants(1, {played}).slash().greenery(Size.MEDIUM).startEffect.seed().equals().megacredits(5);
+            eb.plants(1, {played}).slash().greenery().startEffect.seed().equals().megacredits(5);
           }).br;
         }),
         description: 'You start with 38M€ and 2 seeds on this card.',
@@ -40,7 +36,7 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (cardOwner.id !== activePlayer.id) {
       return;
     }

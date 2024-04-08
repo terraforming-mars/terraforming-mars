@@ -53,6 +53,10 @@ describe('Urbanist', () => {
 
     expect(capital.getVictoryPoints(player)).to.eq(1);
     expect(award.getScore(player)).eq(1);
+
+    const greeneries = game.board.getAdjacentSpaces(citySpace).filter((space) => space.tile === undefined);
+    addGreenery(player, greeneries[0].id);
+    expect(award.getScore(player)).eq(2);
   });
 
 
@@ -60,7 +64,7 @@ describe('Urbanist', () => {
     const redCity = new RedCity();
     const selectSpace = cast(churnPlay(redCity, player), SelectSpace);
     player.playedCards.push(redCity);
-    const citySpace = selectSpace.availableSpaces[0];
+    const citySpace = selectSpace.spaces[0];
 
     expect(award.getScore(player)).eq(0);
 

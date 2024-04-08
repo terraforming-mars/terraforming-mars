@@ -1,10 +1,9 @@
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {IProjectCard} from '../../IProjectCard';
-import {multiplier} from '../../Options';
 
 export class SellPatentsStandardProject extends StandardProjectCard {
   constructor() {
@@ -15,14 +14,14 @@ export class SellPatentsStandardProject extends StandardProjectCard {
         cardNumber: 'SP8',
         renderData: CardRenderer.builder((b) =>
           b.standardProject('Discard any number of cards to gain that amount of M€.', (eb) => {
-            eb.text('X').cards(1).startAction.megacredits(0, {multiplier});
+            eb.text('X').cards(1).startAction.megacredits(1, {text: 'x'});
           }),
         ),
       },
     });
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     return player.cardsInHand.length > 0;
   }
 
@@ -30,26 +29,18 @@ export class SellPatentsStandardProject extends StandardProjectCard {
     // no-op
   }
 
-  public override action(player: Player): SelectCard<IProjectCard> {
+  public override action(player: IPlayer): SelectCard<IProjectCard> {
     return new SelectCard(
       'Sell patents',
       'Sell',
       player.cardsInHand,
-      (cards) => {
+      {max: player.cardsInHand.length, played: false})
+      .andThen((cards) => {
         player.megaCredits += cards.length;
-        cards.forEach((card) => {
-          for (let i = 0; i < player.cardsInHand.length; i++) {
-            if (player.cardsInHand[i].name === card.name) {
-              player.cardsInHand.splice(i, 1);
-              break;
-            }
-          }
-          player.game.projectDeck.discard(card);
-        });
+        cards.forEach((card) => player.discardCardFromHand(card));
         this.projectPlayed(player);
         player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(cards.length));
         return undefined;
-      }, {max: player.cardsInHand.length, played: false},
-    );
+      });
   }
 }

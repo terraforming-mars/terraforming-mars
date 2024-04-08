@@ -2,15 +2,15 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class ViralEnhancers extends Card implements IProjectCard {
   constructor() {
@@ -32,7 +32,7 @@ export class ViralEnhancers extends Card implements IProjectCard {
       },
     });
   }
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     const resourceCount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (resourceCount === 0) {
       return undefined;
@@ -44,19 +44,18 @@ export class ViralEnhancers extends Card implements IProjectCard {
     }
 
     for (let i = 0; i < resourceCount; i++) {
-      player.game.defer(new SimpleDeferredAction(
-        player,
+      player.defer(
         () => new OrOptions(
-          new SelectOption('Add resource to card ' + card.name, 'Add resource', () => {
+          new SelectOption(message('Add resource to card ${0}', (b) => b.card(card)), 'Add resource').andThen(() => {
             player.addResourceTo(card);
             return undefined;
           }),
-          new SelectOption('Gain plant', 'Save', () => {
+          new SelectOption('Gain plant').andThen(() => {
             player.plants++;
             return undefined;
           }),
         ),
-      ));
+      );
     }
     return undefined;
   }

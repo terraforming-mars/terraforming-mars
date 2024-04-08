@@ -8,7 +8,7 @@ import {Game} from '../../../src/server/Game';
 import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {cast, fakeCard} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
 
@@ -36,20 +36,20 @@ describe('ExperiencedMartians', function() {
     expect(player.cardsInHand).has.members([a, c]);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
 
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(7);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
 
     expect(game.deferredActions.length).eq(1);
 
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(7);
-    expect(marsFirst.delegates.get(player.id)).eq(0);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
+    expect(marsFirst.delegates.get(player)).eq(0);
 
     const action = cast(game.deferredActions.pop(), SendDelegateToArea);
-    const options = cast(action.execute(), SelectPartyToSendDelegate);
+    const options = cast(action.execute(), SelectParty);
     options.cb(marsFirst.name);
 
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(6);
-    expect(marsFirst.delegates.get(player.id)).eq(1);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(6);
+    expect(marsFirst.delegates.get(player)).eq(1);
   });
 });

@@ -1,16 +1,14 @@
-import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarSteel} from '../../../src/server/cards/moon/LunarSteel';
-import {expect} from 'chai';
 
 describe('LunarSteel', () => {
   let player: TestPlayer;
   let card: LunarSteel;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new LunarSteel();
   });
 

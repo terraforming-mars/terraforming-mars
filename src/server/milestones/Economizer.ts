@@ -1,14 +1,14 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Economizer extends BaseMilestone {
   constructor() {
     super(
       'Economizer',
-      'Requires that you have 5 heat production',
+      'Have 5 heat production',
       5);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.production.heat;
   }
 }

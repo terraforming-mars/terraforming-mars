@@ -1,11 +1,10 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {MAX_OCEAN_TILES} from '../../../common/constants';
-import {multiplier} from '../Options';
 
 export class Ulrich extends CeoCard {
   constructor() {
@@ -14,19 +13,19 @@ export class Ulrich extends CeoCard {
       metadata: {
         cardNumber: 'L21',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().oceans(1).colon().megacredits(4, {multiplier}).slash().megacredits(15).asterix();
+          b.opgArrow().oceans(1).colon().megacredits(1, {text: '4x'}).slash().megacredits(15).asterix();
         }),
         description: 'Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.',
       },
     });
   }
 
-  public action(player: Player): PlayerInput | undefined {
+  public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const oceansPlaced = game.board.getOceanCount();
+    const oceansPlaced = game.board.getOceanSpaces().length;
     const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
-    player.addResource(Resources.MEGACREDITS, bonusCredits, {log: true});
+    player.stock.add(Resource.MEGACREDITS, bonusCredits, {log: true});
     return undefined;
   }
 }

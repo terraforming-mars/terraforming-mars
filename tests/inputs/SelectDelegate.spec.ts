@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {SelectDelegate} from '../../src/server/inputs/SelectDelegate';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {NeutralPlayer} from '../../src/server/turmoil/Turmoil';
 
 describe('SelectDelegate', function() {
   let players: Array<TestPlayer>;
-  let selected: Player | NeutralPlayer | undefined;
-  const cb = (player: Player | NeutralPlayer) => {
+  let selected: IPlayer | NeutralPlayer | undefined;
+  const cb = (player: IPlayer | NeutralPlayer) => {
     selected = player;
     return undefined;
   };
@@ -19,26 +19,26 @@ describe('SelectDelegate', function() {
   });
 
   it('Simple - Neutral', function() {
-    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '', cb);
+    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '').andThen(cb);
     selectDelegate.process({type: 'delegate', player: 'NEUTRAL'});
     expect(selected).eq('NEUTRAL');
   });
 
   it('Simple - Player by color', function() {
-    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '', cb);
+    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '').andThen(cb);
     selectDelegate.process({type: 'delegate', player: players[0].color});
     expect(selected).eq(players[0]);
   });
 
 
   it('Cannot select unavailable delegate', function() {
-    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '', cb);
+    const selectDelegate = new SelectDelegate([players[0], 'NEUTRAL'], '').andThen(cb);
     expect(() => selectDelegate.process({type: 'delegate', player: players[1].color}))
       .to.throw(Error, /Player not available/);
   });
 
   it('Cannot select unavailable neutral delegate', function() {
-    const selectDelegate = new SelectDelegate([players[0]], '', cb);
+    const selectDelegate = new SelectDelegate([players[0]], '').andThen(cb);
     expect(() => selectDelegate.process({type: 'delegate', player: 'NEUTRAL'}))
       .to.throw(Error, /Player not available/);
   });

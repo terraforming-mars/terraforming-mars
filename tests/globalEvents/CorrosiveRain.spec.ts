@@ -27,11 +27,11 @@ describe('CorrosiveRain', function() {
   });
 
   it('resolve play', function() {
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     player.megaCredits = 15;
     player2.megaCredits = 15;
@@ -65,7 +65,7 @@ describe('CorrosiveRain', function() {
     const removeFloaters = cast(orOptions.options[1], SelectCard);
 
     expect(player.megaCredits).eq(3);
-    reduce10MC.cb();
+    reduce10MC.cb(undefined);
     expect(player.megaCredits).eq(0);
 
     expect(titanShuttles.resourceCount).eq(3);

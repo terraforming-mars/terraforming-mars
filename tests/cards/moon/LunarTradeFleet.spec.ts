@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {LunarTradeFleet} from '../../../src/server/cards/moon/LunarTradeFleet';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LunarTradeFleet', () => {
+  let game: IGame;
   let player: TestPlayer;
   let card: LunarTradeFleet;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new LunarTradeFleet();
     moonData = MoonExpansion.moonData(game);
   });
@@ -23,10 +23,10 @@ describe('LunarTradeFleet', () => {
     player.megaCredits = card.cost;
 
     player.production.override({titanium: 2});
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.production.override({titanium: 1});
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

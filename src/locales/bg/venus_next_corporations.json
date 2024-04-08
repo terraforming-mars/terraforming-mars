@@ -1,0 +1,21 @@
+{
+  "Aphrodite": "Афродита",
+  "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "Ефект: Всеки път, когато Венера се тераформира с 1 стъпка, печелите 2 M€.",
+  "You start with 1 plant production and 47 M€.": "Започвате с производство на растения 1 и 47M€. Увеличете производството на растения с 1.",
+
+  "Celestic": "Селестик",
+  "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "Започвате с 42 M€. Като ваше първо действие, разкрийте карти от тестето, докато разкриете 2 карти с икона на аеростат. Вземете ги в ръка и изхвърлете останалите.",
+  "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "Действие: Добавете аеростат към ВСЯКА карта. 1 ТП за всеки 3 аеростата на тази карта.",
+
+  "Manutech": "Манутек",
+  "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "Ефект: За всеки стъпка, с която увеличавате производството на ресурс, включително това, също получавате този ресурс.",
+  "You start with 1 steel production, and 35 M€.": "Започвате с производство на стомана 1 и 35M€. Увеличете го с 1.",
+
+  "Morning Star Inc": "Морнинг Стар Инк",
+  "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "Започвате с 50 M€. Като ваше първо действие, разкрийте карти от тестето, докато разкриете 3 карти с етикет Венера. Вземете ги в ръка и изхвърлете останалите.",
+  "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "Ефект: Вашите изисквания за Венера са +/- 2 стъпки, по ваш избор във всеки случай.",
+
+  "Viron": "Вирон",
+  "You start with 48 M€.": "Започвате с 48M€.",
+  "Action: Use a blue card action that has already been used this generation.": "Действие: Използвайте действие от синя карта, което вече е било използвано този ход."
+}

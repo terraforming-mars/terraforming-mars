@@ -13,7 +13,7 @@ describe('CometAiming', function() {
 
   beforeEach(function() {
     card = new CometAiming();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -37,7 +37,7 @@ describe('CometAiming', function() {
     card.action(player);
     expect(player.game.deferredActions).has.lengthOf(1);
     const selectSpace = cast(player.game.deferredActions.peek()!.execute(), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });
 

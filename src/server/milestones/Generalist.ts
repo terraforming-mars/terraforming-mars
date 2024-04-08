@@ -1,14 +1,15 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Generalist extends BaseMilestone {
   constructor() {
     super(
       'Generalist',
-      'Requires that you have increased all 6 productions by at least 1 step',
+      'Have increased all 6 productions by 1 step',
       6);
   }
-  public getScore(player: Player): number {
+
+  public getScore(player: IPlayer): number {
     let score = 0;
     const requiredProduction = player.game.gameOptions.corporateEra ? 0 : 1;
 

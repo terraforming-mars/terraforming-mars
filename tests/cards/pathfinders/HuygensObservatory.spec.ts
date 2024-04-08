@@ -21,7 +21,7 @@ describe('HuygensObservatory', function() {
     card = new HuygensObservatory();
     // By choosing 2 players I don't have to pay attention to the first action which
     // removes a colony tile.
-    [game, player] = testGame(2, {
+    [game, player/* , player2*/] = testGame(2, {
       coloniesExtension: true,
       customColoniesList: [
         ColonyName.GANYMEDE,
@@ -34,11 +34,55 @@ describe('HuygensObservatory', function() {
     ganymede = game.colonies.find((colony) => colony.name === ColonyName.GANYMEDE)!;
   });
 
+  it('can play, trade fleet home', () => {
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('can play, trade fleet on a colony tile', () => {
+    ganymede.trade(player);
+
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Cannot play, cannot place a colony', () => {
+    for (const colony of player.game.colonies) {
+      colony.colonies = [player.id, player.id, player.id];
+    }
+
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Can play even if you have a colony where you already have one.', () => {
+    for (const colony of player.game.colonies) {
+      colony.colonies = [player.id, player.id, player.id];
+    }
+
+    expect(card.canPlay(player)).is.false;
+
+    ganymede.colonies.pop();
+
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Cannot play, cannot trade', () => {
+    for (const colony of player.game.colonies) {
+      expect(card.canPlay(player)).is.true;
+      colony.visitor = player.id;
+    }
+
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Cannot play, trade embargo', () => {
+    player.game.tradeEmbargo = true;
+    expect(card.canPlay(player)).is.false;
+  });
+
   it('play, simple case (place colony, trade with it)', function() {
     expect(player.getTerraformRating()).eq(20);
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     expect(player.getTerraformRating()).eq(21);
 
@@ -52,7 +96,7 @@ describe('HuygensObservatory', function() {
     selectColony.cb(ganymede);
 
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
-    expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
+    expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(ganymede.visitor).is.undefined;
 
     runAllActions(game);
@@ -66,7 +110,7 @@ describe('HuygensObservatory', function() {
     expect(ganymede.visitor).eq(player.id);
 
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
-    expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
   });
 
   it('play, place colony where you already have one', function() {
@@ -74,7 +118,7 @@ describe('HuygensObservatory', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     runAllActions(game);
 
@@ -108,7 +152,7 @@ describe('HuygensObservatory', function() {
     expect(ganymede.visitor).eq(player.id);
 
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
   });
 
   it('play, only trade fleet is on a colony', function() {
@@ -117,7 +161,7 @@ describe('HuygensObservatory', function() {
 
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     runAllActions(game);
@@ -152,7 +196,7 @@ describe('HuygensObservatory', function() {
 
     const action = card.play(player);
 
-    expect(action).is.undefined;
+    cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     runAllActions(game);

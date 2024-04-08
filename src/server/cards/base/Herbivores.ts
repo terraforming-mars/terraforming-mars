@@ -2,15 +2,13 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
+import {IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
+import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
-import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
 
@@ -24,10 +22,10 @@ export class Herbivores extends Card implements IProjectCard {
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.oxygen(8)),
+      requirements: {oxygen: 8},
 
       behavior: {
-        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+        decreaseAnyProduction: {type: Resource.PLANTS, count: 1},
         addResources: 1,
       },
 
@@ -35,7 +33,7 @@ export class Herbivores extends Card implements IProjectCard {
         cardNumber: '147',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you place a greenery tile, add an animal to this card.', (eb) => {
-            eb.greenery(Size.MEDIUM, false).startEffect.animals(1);
+            eb.greenery({withO2: false}).startEffect.animals(1);
           }).br;
           b.vpText('1 VP per 2 animals on this card.');
           b.animals(1).production((pb) => pb.minus().plants(1, {all}));
@@ -49,7 +47,7 @@ export class Herbivores extends Card implements IProjectCard {
     });
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (cardOwner.id === activePlayer.id && Board.isGreenerySpace(space)) {
       cardOwner.game.defer(new AddResourcesToCard(cardOwner, CardResource.ANIMAL, {filter: (c) => c.name === this.name}));
     }

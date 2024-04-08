@@ -44,14 +44,19 @@
 <script lang="ts">
 import Vue from 'vue';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
 import {ShiftAresGlobalParametersResponse} from '@/common/inputs/InputResponse';
+import {HazardData} from '@/common/ares/AresData';
+
+type DataModel = AresGlobalParametersResponse & {
+  hazardData: HazardData,
+};
 
 export default Vue.extend({
   name: 'ShiftAresGlobalParameters',
   props: {
     playerinput: {
-      type: Object as () => Required<Pick<PlayerInputModel, 'aresData' | 'buttonLabel'>>,
+      type: Object as () => ShiftAresGlobalParametersModel,
     },
     onsave: {
       type: Function as unknown as () => (out: ShiftAresGlobalParametersResponse) => void,
@@ -63,7 +68,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data() {
+  data(): DataModel {
     const hazardData = this.playerinput.aresData.hazardData;
     return {
       hazardData: hazardData,
@@ -71,19 +76,23 @@ export default Vue.extend({
       highOceanDelta: 0,
       temperatureDelta: 0,
       oxygenDelta: 0,
-      ADJUSTMENT_RANGE: [-1, 0, 1],
     };
   },
   methods: {
     saveData() {
       const response: AresGlobalParametersResponse = {
-        lowOceanDelta: this.$data.lowOceanDelta,
-        highOceanDelta: this.$data.highOceanDelta,
-        temperatureDelta: this.$data.temperatureDelta,
-        oxygenDelta: this.$data.oxygenDelta,
+        lowOceanDelta: this.lowOceanDelta,
+        highOceanDelta: this.highOceanDelta,
+        temperatureDelta: this.temperatureDelta,
+        oxygenDelta: this.oxygenDelta,
       };
 
       this.onsave({type: 'aresGlobalParameters', response});
+    },
+  },
+  computed: {
+    ADJUSTMENT_RANGE(): [-1, 0, 1] {
+      return [-1, 0, 1];
     },
   },
 });

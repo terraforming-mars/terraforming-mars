@@ -1,21 +1,18 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {ActionCard} from '../ActionCard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class Celestic extends ActionCard implements ICorporationCard {
+export class Celestic extends ActiveCorporationCard {
   constructor() {
     super({
       name: CardName.CELESTIC,
       tags: [Tag.VENUS],
       startingMegaCredits: 42,
       resourceType: CardResource.FLOATER,
-      type: CardType.CORPORATION,
       initialActionText: 'Draw 2 cards with a floater icon on it',
       victoryPoints: {resourcesHere: {}, per: 3},
 
@@ -67,9 +64,12 @@ export class Celestic extends ActionCard implements ICorporationCard {
     CardName.NOBEL_LABS,
     CardName.SECRET_LABS,
     CardName.VENERA_BASE,
+
+    // Star Wars
+    CardName.CLOUD_CITY,
   ]);
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     player.drawCard(2, {
       include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === CardResource.FLOATER,
     });

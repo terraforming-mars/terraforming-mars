@@ -1,11 +1,13 @@
-import * as http from 'http';
+import * as responses from './responses';
 import {Database} from '../database/Database';
 import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {LoadGameFormModel} from '../../common/models/LoadGameFormModel';
-import {GameId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {isGameId} from '../../common/Types';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
@@ -13,7 +15,7 @@ export class LoadGame extends Handler {
     super();
   }
 
-  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, _ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {
@@ -23,22 +25,25 @@ export class LoadGame extends Handler {
         try {
           const gameReq: LoadGameFormModel = JSON.parse(body);
 
-          const game_id = gameReq.game_id as GameId;
+          const gameId = gameReq.gameId;
+          if (!isGameId(gameId)) {
+            throw new Error('Invalid game id');
+          }
           // This should probably be behind some kind of verification that prevents just
           // anyone from rolling back a large number of steps.
           const rollbackCount = gameReq.rollbackCount;
           if (rollbackCount > 0) {
-            Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
+            Database.getInstance().deleteGameNbrSaves(gameId, rollbackCount);
           }
-          const game = await GameLoader.getInstance().getGame(game_id, /* bypassCache */ true);
+          const game = await GameLoader.getInstance().getGame(gameId, /* bypassCache */ true);
           if (game === undefined) {
-            console.warn(`unable to find ${game_id} in database`);
-            ctx.route.notFound(req, res, 'game_id not found');
+            console.warn(`unable to find ${gameId} in database`);
+            responses.notFound(req, res, 'game_id not found');
           } else {
-            ctx.route.writeJson(res, Server.getSimpleGameModel(game));
+            responses.writeJson(res, Server.getSimpleGameModel(game));
           }
         } catch (error) {
-          ctx.route.internalServerError(req, res, error);
+          responses.internalServerError(req, res, error);
         }
         resolve();
       });

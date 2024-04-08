@@ -1,17 +1,14 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class MonsInsurance extends Card implements ICorporationCard {
+export class MonsInsurance extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.MONS_INSURANCE,
       startingMegaCredits: 48,
 
@@ -38,22 +35,20 @@ export class MonsInsurance extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    for (const p of player.game.getPlayers()) {
-      if (p.id !== player.id) {
-        p.production.add(Resources.MEGACREDITS, -2, {log: true});
-      }
+  public override bespokePlay(player: IPlayer) {
+    for (const p of player.getOpponents()) {
+      p.production.add(Resource.MEGACREDITS, -2, {log: true});
     }
     player.game.monsInsuranceOwner = player.id;
     return undefined;
   }
 
   // When `insured` is undefined, it's the neutral player.
-  public payDebt(player: Player, claimant : Player | undefined) {
+  public payDebt(player: IPlayer, claimant : IPlayer | undefined) {
     if (player !== claimant) {
       const retribution = Math.min(player.megaCredits, 3);
       if (claimant) claimant.megaCredits += retribution;
-      player.deductResource(Resources.MEGACREDITS, retribution);
+      player.stock.deduct(Resource.MEGACREDITS, retribution);
       if (retribution > 0) {
         if (claimant !== undefined) {
           player.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>

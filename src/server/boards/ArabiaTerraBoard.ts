@@ -1,15 +1,14 @@
-import {GameOptions} from '../GameOptions';
-import {Player} from '../Player';
-import {Random} from '../Random';
+import {GameOptions} from '../game/GameOptions';
+import {IPlayer} from '../IPlayer';
+import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
-import {ISpace} from './ISpace';
-import {SerializedBoard} from './SerializedBoard';
+import {Space} from './Space';
+import {MarsBoard} from './MarsBoard';
 
-export class ArabiaTerraBoard extends Board {
+export class ArabiaTerraBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ArabiaTerraBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
@@ -49,6 +48,10 @@ export class ArabiaTerraBoard extends Board {
     return new ArabiaTerraBoard(spaces);
   }
 
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
+  }
+
   public override getVolcanicSpaceIds() {
     return [
       SpaceName.TIKHONAROV,
@@ -58,7 +61,7 @@ export class ArabiaTerraBoard extends Board {
     ];
   }
 
-  public override getSpaces(spaceType: SpaceType): Array<ISpace> {
+  public override getSpaces(spaceType: SpaceType): Array<Space> {
     switch (spaceType) {
     case SpaceType.LAND:
     case SpaceType.OCEAN:
@@ -68,7 +71,9 @@ export class ArabiaTerraBoard extends Board {
     }
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): ArabiaTerraBoard {
-    return new ArabiaTerraBoard(Board.deserializeSpaces(board.spaces, players));
+  public override getAvailableSpacesForOcean(player: IPlayer): readonly Space[] {
+    // Nomads can be found on cove spaces
+    return super.getAvailableSpacesForOcean(player)
+      .filter((space) => space.id !== player.game.nomadSpace);
   }
 }

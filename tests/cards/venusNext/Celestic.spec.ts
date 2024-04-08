@@ -1,10 +1,9 @@
 import {expect} from 'chai';
-import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllManifests';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
-import {RequirementType} from '../../../src/common/cards/RequirementType';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {CardType} from '../../../src/common/cards/CardType';
 import {churnAction} from '../../TestingUtils';
@@ -12,7 +11,7 @@ import {churnAction} from '../../TestingUtils';
 describe('Celestic', function() {
   it('Should play', function() {
     const card = new Celestic();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     const play = card.play(player);
     expect(play).is.undefined;
 
@@ -42,7 +41,7 @@ describe('Celestic', function() {
         const string = JSON.stringify(renderData);
         if (string.includes('floater')) {
           found.push(card.name);
-        } else if (card.requirements?.requirements.some((req) => req.type === RequirementType.FLOATERS)) {
+        } else if (card.requirements?.some((req) => req.floaters !== undefined)) {
           found.push(card.name);
         }
       });

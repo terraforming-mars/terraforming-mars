@@ -1,16 +1,13 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
-export class CrescentResearchAssociation extends Card implements ICorporationCard {
+export class CrescentResearchAssociation extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.CRESCENT_RESEARCH_ASSOCIATION,
       tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 50,
@@ -30,7 +27,7 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
     });
   }
 
-  public override getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
     if (card.tags.indexOf(Tag.MOON) === -1) {
       return 0;
     }

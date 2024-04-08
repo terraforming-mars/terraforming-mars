@@ -30,10 +30,9 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {OrOptionsModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
-import {PlayerInputType} from '@/common/input/PlayerInputType';
 
 let unique = 0;
 
@@ -47,7 +46,7 @@ export default Vue.extend({
       type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => OrOptionsModel,
     },
     onsave: {
       type: Function as unknown as () => (out: OrOptionsResponse) => void,
@@ -66,13 +65,23 @@ export default Vue.extend({
     if (this.playerinput.options === undefined) {
       throw new Error('no options provided for OrOptions');
     }
-    const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || getPreferences().learner_mode);
-    // Special case: If the first displayed option is SelectCard, and none of them are enabled, skip it.
-    let selectedOption = displayedOptions[0];
+    const displayedOptions = this.playerinput.options.filter((option) => {
+      if (option.type !== 'card') {
+        return true;
+      }
+      if (option.showOnlyInLearnerMode === false) {
+        return true;
+      }
+
+      return getPreferences().learner_mode;
+    });
+    const initialIdx = this.playerinput.initialIdx ?? 0;
+    // Special case: If the first recommended displayed option is SelectCard, and none of them are enabled, skip it.
+    let selectedOption = displayedOptions[initialIdx];
     if (displayedOptions.length > 1 &&
-      selectedOption.inputType === PlayerInputType.SELECT_CARD &&
-      !selectedOption.cards?.some((card) => card.isDisabled === false)) {
-      selectedOption = displayedOptions[1];
+      selectedOption.type === 'card' &&
+      !selectedOption.cards.some((card) => card.isDisabled !== true)) {
+      selectedOption = displayedOptions[initialIdx + 1];
     }
     return {
       displayedOptions,
@@ -82,7 +91,7 @@ export default Vue.extend({
   },
   methods: {
     playerFactorySaved() {
-      const idx = this.playerinput.options?.indexOf(this.selectedOption);
+      const idx = this.playerinput.options.indexOf(this.selectedOption);
       if (idx === undefined || idx === -1) {
         throw new Error('option not found');
       }

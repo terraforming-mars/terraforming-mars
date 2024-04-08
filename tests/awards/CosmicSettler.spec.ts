@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {CosmicSettler} from '../../src/server/awards/CosmicSettler';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
@@ -10,7 +10,7 @@ import {testGame} from '../TestGame';
 describe('CosmicSettler', function() {
   let award : CosmicSettler;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let board: Board;
 
   beforeEach(function() {

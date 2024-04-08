@@ -2,12 +2,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Delegate} from '../../turmoil/Turmoil';
+import {IPlayer} from '../../IPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
 import {IParty} from '../../turmoil/parties/IParty';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
 import {all} from '../Options';
@@ -20,7 +18,7 @@ export class BannedDelegate extends Card implements IProjectCard {
       name: CardName.BANNED_DELEGATE,
       cost: 0,
 
-      requirements: CardRequirements.builder((b) => b.chairman()),
+      requirements: {chairman: true},
       metadata: {
         cardNumber: 'T02',
         description: 'Requires that you are Chairman. Remove any NON-LEADER delegate.',
@@ -31,11 +29,11 @@ export class BannedDelegate extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer): OrOptions | SelectDelegate | undefined {
     const turmoil = Turmoil.getTurmoil(player.game);
     const orOptions: Array<SelectDelegate> = [];
     // Take each party having more than just the party leader in the area
-    turmoil.parties.forEach((party) => {
+    for (const party of turmoil.parties) {
       if (party.delegates.size > 1) {
         // Remove the party leader from available choices
         const copy = MultiSet.from(party.delegates);
@@ -45,32 +43,27 @@ export class BannedDelegate extends Card implements IProjectCard {
           // This wouldn't happen normally.
           throw new Error(`partyLeader not defined for ${player.game.id}`);
         }
-        const players: Array<Player | NeutralPlayer> = [];
-        for (const playerId of copy) {
-          if (playerId === 'NEUTRAL') {
+        const players: Array<IPlayer | NeutralPlayer> = [];
+        for (const entry of copy.multiplicities()) {
+          if (entry[0] === 'NEUTRAL') {
             players.push('NEUTRAL');
           } else {
-            players.push(player.game.getPlayerById(playerId));
+            players.push(entry[0]);
           }
         }
 
         if (players.length > 0) {
-          const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: Player | NeutralPlayer) => {
-            let playerToRemove: Delegate;
-            if (selectedPlayer === 'NEUTRAL') {
-              playerToRemove = 'NEUTRAL';
-            } else {
-              playerToRemove = selectedPlayer.id;
-            }
-            turmoil.removeDelegateFromParty(playerToRemove, party.name, player.game);
-            this.log(player, party, selectedPlayer);
-            return undefined;
-          });
+          const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party')
+            .andThen((selectedPlayer) => {
+              turmoil.removeDelegateFromParty(selectedPlayer, party.name, player.game);
+              this.log(player, party, selectedPlayer);
+              return undefined;
+            });
           selectDelegate.buttonLabel = 'Remove delegate';
           orOptions.push(selectDelegate);
         }
       }
-    });
+    }
     if (orOptions.length === 0) {
       return undefined;
     } else if (orOptions.length === 1) {
@@ -81,7 +74,7 @@ export class BannedDelegate extends Card implements IProjectCard {
     }
   }
 
-  private log(player: Player, party: IParty, selectedPlayer: Player | NeutralPlayer) {
+  private log(player: IPlayer, party: IParty, selectedPlayer: IPlayer | NeutralPlayer) {
     if (selectedPlayer === 'NEUTRAL') {
       player.game.log('${0} removed neutral delegate from ${1}', (b) => b.player(player).party(party));
     } else {

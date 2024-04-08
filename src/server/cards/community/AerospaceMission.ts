@@ -1,10 +1,10 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class AerospaceMission extends PreludeCard {
   constructor() {
@@ -24,12 +24,12 @@ export class AerospaceMission extends PreludeCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     return player.canAfford(14);
   }
 
-  public override bespokePlay(player: Player) {
-    player.deductResource(Resources.MEGACREDITS, 14);
+  public override bespokePlay(player: IPlayer) {
+    player.stock.deduct(Resource.MEGACREDITS, 14);
     player.game.defer(new BuildColony(player, {title: 'Select where to build the first colony'}));
     player.game.defer(new BuildColony(player, {title: 'Select where to build the second colony'}));
     return undefined;

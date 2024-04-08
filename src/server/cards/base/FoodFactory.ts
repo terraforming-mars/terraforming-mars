@@ -26,7 +26,7 @@ export class FoodFactory extends Card implements IProjectCard {
             pb.plus().megacredits(4);
           });
         }),
-        description: 'Decrease your plant production 1 step and increase your M€ production 4 steps',
+        description: 'Decrease your plant production 1 step and increase your M€ production 4 steps.',
       },
     });
   }

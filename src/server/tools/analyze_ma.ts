@@ -2,13 +2,17 @@ require('dotenv').config();
 
 import * as http from 'http';
 import * as fs from 'fs';
+import * as responses from '../routes/responses';
+
 import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../GameOptions';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../game/GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {MultiSet} from 'mnemonist';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
-function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
+function processRequest(req: Request, res: Response): void {
   if (req.url === undefined) {
     return;
   }
@@ -16,9 +20,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
   if (url.pathname === '/') {
     fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
       if (err) {
-        res.writeHead(500);
-        res.write('Internal server error ' + err);
-        res.end();
+        responses.internalServerError(req, res, err);
       }
       res.setHeader('Content-Length', data.length);
       res.end(data);
@@ -29,9 +31,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     res.setHeader('Content-Length', data.length);
     res.end(data);
   } else {
-    res.writeHead(404);
-    res.write('Not found');
-    res.end();
+    responses.notFound(req, res);
   }
 }
 

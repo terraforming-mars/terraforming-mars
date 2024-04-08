@@ -1,15 +1,15 @@
-import {Player} from '../../Player';
 import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
 
 export class Gambler extends BaseMilestone {
   constructor() {
     super(
       'Gambler',
-      'Fund at least 2 awards',
+      'Fund 2 awards',
       2);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.game.fundedAwards.filter((award) => award.player === player).length;
   }
 }

@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/common/Phase';
@@ -16,7 +16,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   let player2: TestPlayer;
   let player3: TestPlayer;
   let card: TheDarksideofTheMoonSyndicate;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     [game, player, player2, player3] = testGame(3, {moonExpansion: true});
@@ -62,7 +62,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     expect(options).is.undefined;
 
     runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(card.resourceCount).eq(2);
     expect(player.megaCredits).eq(9);
@@ -82,13 +82,13 @@ describe('TheDarksideofTheMoonSyndicate', () => {
 
     options.options[0].cb();
     runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
     expect(player.titanium).eq(0);
     expect(card.resourceCount).eq(2);
 
     options.options[1].cb();
     runAllActions(game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
 
     expect(card.resourceCount).eq(1);
     expect(player.megaCredits).eq(9);
@@ -97,7 +97,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   });
 
   it('effect', () => {
-    const centerSpace = moonData.moon.getSpace('m07');
+    const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     // Space 0 intentionallyleft blank
@@ -131,7 +131,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   });
 
   it('no effect during solar phase', () => {
-    const centerSpace = moonData.moon.getSpace('m07');
+    const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     // Space 0 intentionallyleft blank

@@ -1,37 +1,45 @@
 import {Behavior} from '../behavior/Behavior';
-import {Player} from '../Player';
-import {Card, StaticCardProperties, validateBehavior} from './Card';
+import {IPlayer} from '../IPlayer';
+import {Card, StaticCardProperties} from './Card';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 
+// Same as StaticCardProperties, but action is expected.
 export interface StaticActionCardProperties extends StaticCardProperties {
   action: Behavior;
 }
 
+/**
+ * A Card that has a data-defined behavior in `action`.
+ */
+// TODO(kberg): Find a way to use mixins to share this with ActiveCorporationCard and ActivePreludeCard
 export abstract class ActionCard extends Card {
   // Add actionBehavior to StaticCardProperties, otherwise this will multiple memory consumption.
-  private actionBehavior: Behavior;
   constructor(properties: StaticActionCardProperties) {
     super(properties);
-    this.actionBehavior = properties.action;
-    validateBehavior(properties.action);
   }
-  public canAct(player: Player) {
-    if (!getBehaviorExecutor().canExecute(this.actionBehavior, player, this)) {
+  public canAct(player: IPlayer) {
+    if (this.properties.action === undefined) {
+      throw new Error('action not defined');
+    }
+    if (!getBehaviorExecutor().canExecute(this.properties.action, player, this)) {
       return false;
     }
     return this.bespokeCanAct(player);
   }
 
-  public action(player: Player) {
-    getBehaviorExecutor().execute(this.actionBehavior, player, this);
+  public action(player: IPlayer) {
+    if (this.properties.action === undefined) {
+      throw new Error('action not defined');
+    }
+    getBehaviorExecutor().execute(this.properties.action, player, this);
     return this.bespokeAction(player);
   }
 
-  public bespokeCanAct(_player: Player): boolean {
+  public bespokeCanAct(_player: IPlayer): boolean {
     return true;
   }
 
-  public bespokeAction(_player: Player) {
+  public bespokeAction(_player: IPlayer) {
     return undefined;
   }
 }

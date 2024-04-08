@@ -1,17 +1,15 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class PointLuna extends Card implements ICorporationCard {
+export class PointLuna extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.POINT_LUNA,
       tags: [Tag.SPACE, Tag.EARTH],
       startingMegaCredits: 38,
@@ -36,17 +34,16 @@ export class PointLuna extends Card implements ICorporationCard {
       },
     });
   }
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     return this.onCardPlayed(player, card);
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (player.isCorporation(this.name)) {
       const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
       if (tagCount > 0) {
         player.drawCard(tagCount);
       }
     }
-    return undefined;
   }
 }

@@ -1,4 +1,4 @@
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
@@ -21,19 +21,19 @@ export class BuildColonyStandardProject extends StandardProjectCard {
     });
   }
 
-  protected override discount(player: Player): number {
+  protected override discount(player: IPlayer): number {
     const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
     const adhaiDiscount = Math.floor((adhai?.resourceCount ?? 0) / 2);
     return adhaiDiscount + super.discount(player);
   }
 
-  private getOpenColonies(player: Player) {
+  private getOpenColonies(player: IPlayer) {
     let openColonies = player.game.colonies.filter((colony) => !colony.isFull() &&
       colony.colonies.includes(player.id) === false &&
       colony.isActive);
 
     // TODO(kberg): Europa sometimes costs additional 3.
-    const canAffordVenus = player.canAfford(this.cost, {tr: {venus: 1}});
+    const canAffordVenus = player.canAfford({cost: this.cost, tr: {venus: 1}});
     if (!canAffordVenus) {
       openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
     }
@@ -41,11 +41,11 @@ export class BuildColonyStandardProject extends StandardProjectCard {
     return openColonies;
   }
 
-  public override canAct(player: Player): boolean {
+  public override canAct(player: IPlayer): boolean {
     return super.canAct(player) && this.getOpenColonies(player).length > 0;
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     player.game.defer(new BuildColony(player));
   }
 }

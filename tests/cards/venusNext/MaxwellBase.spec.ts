@@ -5,15 +5,11 @@ import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {CardName} from '../../../src/common/cards/CardName';
-import {Tag} from '../../../src/common/cards/Tag';
-import {CardType} from '../../../src/common/cards/CardType';
-import {CardResource} from '../../../src/common/CardResource';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {testGame} from '../../TestGame';
+import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
 
 describe('MaxwellBase', function() {
   let card: MaxwellBase;
@@ -27,22 +23,21 @@ describe('MaxwellBase', function() {
 
   it('Can not play without energy production', function() {
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if Venus requirement not met', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 10);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     expect(player.production.energy).to.eq(0);
   });
@@ -74,26 +69,11 @@ describe('MaxwellBase', function() {
 
   // This may seem like a weird test, but it's just verifying that a change
   // removing legacy code works correctly.
-  //
-  // TODO(kberg): Replace this hand-made card with Floater Urbanism.
   it('can Play - for a Venus card with an unusual resource', function() {
     expect(card.canAct(player)).is.false;
 
-    const fakeCard: IProjectCard = {
-      name: 'HELLO' as CardName,
-      cost: 1,
-      tags: [Tag.VENUS],
-      canPlay: () => true,
-      play: () => undefined,
-      getVictoryPoints: () => 0,
-      type: CardType.ACTIVE,
-      metadata: {
-        cardNumber: '1',
-      },
-      resourceType: CardResource.SYNDICATE_FLEET,
-      resourceCount: 0,
-    };
-    player.playedCards.push(fakeCard);
+    const fake = new FloaterUrbanism();
+    player.playedCards.push(fake);
 
     expect(card.canAct(player)).is.true;
   });

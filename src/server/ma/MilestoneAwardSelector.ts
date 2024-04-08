@@ -1,16 +1,44 @@
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, THARSIS_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../awards/Awards';
+import {
+  AMAZONIS_PLANITIA_AWARDS,
+  ARABIA_TERRA_AWARDS,
+  ARES_AWARDS,
+  Awards,
+  ELYSIUM_AWARDS,
+  HELLAS_AWARDS,
+  MOON_AWARDS,
+  TERRA_CIMMERIA_AWARDS,
+  THARSIS_AWARDS,
+  UNDERWORLD_AWARDS,
+  // UTOPIA_PLANITIA_AWARDS,
+  VASTITAS_BOREALIS_AWARDS,
+  VENUS_AWARDS,
+} from '../awards/Awards';
 import {IAward} from '../awards/IAward';
 import {BoardName} from '../../common/boards/BoardName';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {IMilestone} from '../milestones/IMilestone';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, THARSIS_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../milestones/Milestones';
+import {
+  AMAZONIS_PLANITIA_MILESTONES,
+  ARABIA_TERRA_MILESTONES,
+  ARES_MILESTONES,
+  ELYSIUM_MILESTONES,
+  HELLAS_MILESTONES,
+  Milestones,
+  MOON_MILESTONES,
+  TERRA_CIMMERIA_MILESTONES,
+  THARSIS_MILESTONES,
+  UNDERWORLD_MILESTONES,
+  // UTOPIA_PLANITIA_MILESTONES,
+  VASTITAS_BOREALIS_MILESTONES,
+  VENUS_MILESTONES,
+} from '../milestones/Milestones';
 import {FullMoon} from '../moon/FullMoon';
 import {Lunarchitect} from '../moon/Lunarchitect';
 import {LunarMagnate} from '../moon/LunarMagnate';
 import {OneGiantStep} from '../moon/OneGiantStep';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {inplaceShuffle} from '../utils/shuffle';
-import {UnseededRandom} from '../Random';
+import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {AwardName} from '../../common/ma/AwardName';
 import {inplaceRemove} from '../../common/utils/utils';
@@ -97,6 +125,11 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.VASTITAS_BOREALIS:
       push(VASTITAS_BOREALIS_MILESTONES, VASTITAS_BOREALIS_AWARDS);
       break;
+    case BoardName.UTOPIA_PLANITIA:
+    case BoardName.VASTITAS_BOREALIS_NOVUS:
+      // push(UTOPIA_PLANITIA_MILESTONES, UTOPIA_PLANITIA_AWARDS);
+      drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
+      break;
     }
     if (includeVenus) {
       push(VENUS_MILESTONES, VENUS_AWARDS);
@@ -148,8 +181,6 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     return e.name;
   }
 
-  // map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[];
-
   const candidateMilestones: Array<MilestoneName> = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
   const candidateAwards: Array<AwardName> = [...THARSIS_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
@@ -164,6 +195,11 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   if (gameOptions.moonExpansion) {
     candidateMilestones.push(...MOON_MILESTONES.map(toName));
     candidateAwards.push(...MOON_AWARDS.map(toName));
+  }
+
+  if (gameOptions.underworldExpansion) {
+    candidateMilestones.push(...UNDERWORLD_MILESTONES.map(toName));
+    candidateAwards.push(...UNDERWORLD_AWARDS.map(toName));
   }
 
   if (gameOptions.includeFanMA) {
@@ -188,6 +224,10 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     }
     if (!gameOptions.turmoilExtension) {
       inplaceRemove(candidateAwards, 'Politician');
+    }
+    // Special-case Terran and Businessperson, which are exactly the same.
+    if (candidateMilestones.includes('Terran') && candidateMilestones.includes('Businessperson')) {
+      inplaceRemove(candidateMilestones, 'Terran');
     }
   }
 

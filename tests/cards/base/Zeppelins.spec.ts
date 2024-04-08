@@ -17,14 +17,14 @@ describe('Zeppelins', function() {
 
   it('Can not play', function() {
     setOxygenLevel(game, 4);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
   it('Should play', function() {
     setOxygenLevel(game, 5);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const lands = game.board.getAvailableSpacesOnLand(player);
-    game.addCityTile(player, lands[0]);
+    game.addCity(player, lands[0]);
 
     card.play(player);
     expect(player.production.megacredits).to.eq(1);

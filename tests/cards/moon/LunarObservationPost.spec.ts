@@ -9,7 +9,7 @@ describe('LunarObservationPost', () => {
   let card: LunarObservationPost;
 
   beforeEach(() => {
-    [, player] = testGame(2, {moonExpansion: true});
+    [/* game */, player] = testGame(2, {moonExpansion: true});
     card = new LunarObservationPost();
   });
 
@@ -18,10 +18,10 @@ describe('LunarObservationPost', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 0;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

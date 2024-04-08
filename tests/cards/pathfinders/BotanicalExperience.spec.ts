@@ -4,9 +4,9 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {TileType} from '../../../src/common/TileType';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {StealResources} from '../../../src/server/deferredActions/StealResources';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RemoveAnyPlants} from '../../../src/server/deferredActions/RemoveAnyPlants';
@@ -16,7 +16,7 @@ describe('BotanicalExperience', function() {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let game: Game;
-  let space: ISpace;
+  let space: Space;
 
   beforeEach(function() {
     card = new BotanicalExperience();
@@ -26,10 +26,10 @@ describe('BotanicalExperience', function() {
   });
 
   it('canPlay', () => {
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     game.addGreenery(otherPlayer, space);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('onTilePlaced', () => {
@@ -81,7 +81,7 @@ describe('BotanicalExperience', function() {
   it('targeted to steal plants', () => {
     player.plants = 7;
     player.playedCards = [card];
-    game.defer(new StealResources(otherPlayer, Resources.PLANTS, 5));
+    game.defer(new StealResources(otherPlayer, Resource.PLANTS, 5));
     runAllActions(game);
     const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
 
@@ -96,7 +96,7 @@ describe('BotanicalExperience', function() {
   it('does not imapct other resource types', () => {
     player.megaCredits = 7;
     player.playedCards = [card];
-    game.defer(new StealResources(otherPlayer, Resources.MEGACREDITS, 5));
+    game.defer(new StealResources(otherPlayer, Resource.MEGACREDITS, 5));
     runAllActions(game);
     const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
 

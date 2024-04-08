@@ -1,9 +1,9 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {Phase} from '../../../common/Phase';
 
 export class Greta extends CeoCard {
@@ -32,11 +32,11 @@ export class Greta extends CeoCard {
     return undefined;
   }
 
-  public onIncreaseTerraformRating(player: Player, cardOwner: Player) {
+  public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer) {
     const game = player.game;
     if (this.opgActionIsActive === true && this.effectTriggerCount < 10) {
       if (player === cardOwner && game.phase === Phase.ACTION) {
-        player.addResource(Resources.MEGACREDITS, 4, {log: true});
+        player.stock.add(Resource.MEGACREDITS, 4, {log: true});
         this.effectTriggerCount++;
       }
     }

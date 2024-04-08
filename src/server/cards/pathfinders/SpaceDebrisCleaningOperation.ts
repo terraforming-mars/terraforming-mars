@@ -1,14 +1,14 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
+import {all} from '../Options';
 
 export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +17,7 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
       name: CardName.SPACE_DEBRIS_CLEANING_OPERATION,
       cost: 7,
       tags: [Tag.MARS, Tag.SPACE],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 4)),
+      requirements: {tag: Tag.SPACE, count: 4, all},
 
       behavior: {
         stock: {titanium: 3},
@@ -32,14 +32,14 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
           b.wild(1).asterix().data().asterix().cards(1);
         }),
         // Nerfed by disallowing science resources (rather than the one The Moon does just to keep the text smaller.)
-        description: 'Requires 4 space tags. Gain 3 titanium. ' +
+        description: 'Requires any 4 space tags in play. Gain 3 titanium. ' +
           'Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) ' +
           'Add 1 data to ANY card. Draw 1 card.',
       },
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(
       new AddResourcesToCard(
         player,

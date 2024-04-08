@@ -7,7 +7,7 @@ import {MoonModel} from '@/common/models/MoonModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 
 const model: MoonModel = {
-  colonyRate: 0,
+  habitatRate: 0,
   logisticsRate: 0,
   miningRate: 0,
   spaces: [

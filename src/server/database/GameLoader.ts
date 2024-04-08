@@ -1,6 +1,7 @@
 import * as prometheus from 'prom-client';
 import {Database} from './Database';
 import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {PlayerId, GameId, SpectatorId, isGameId, ParticipantId} from '../../common/Types';
 import {IGameLoader} from './IGameLoader';
 import {GameIdLedger} from './IDatabase';
@@ -34,11 +35,13 @@ export class GameLoader implements IGameLoader {
   private cache: Cache;
   private readonly config: CacheConfig;
   private readonly clock: Clock;
+  private purgedGames: Array<GameId>;
 
   private constructor(config: CacheConfig, clock: Clock) {
     this.config = config;
     this.clock = clock;
     this.cache = new Cache(config, clock);
+    this.purgedGames = [];
     timeAsync(this.cache.load())
       .then((v) => {
         metrics.initialize.set(v.duration);
@@ -62,7 +65,7 @@ export class GameLoader implements IGameLoader {
     this.cache.load();
   }
 
-  public async add(game: Game): Promise<void> {
+  public async add(game: IGame): Promise<void> {
     const d = await this.cache.getGames();
     d.games.set(game.id, game);
     if (game.spectatorId !== undefined) {
@@ -86,7 +89,7 @@ export class GameLoader implements IGameLoader {
     return d.games.get(gameId) !== undefined;
   }
 
-  public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<Game | undefined> {
+  public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<IGame | undefined> {
     const d = await this.cache.getGames();
     const gameId = isGameId(id) ? id : d.participantIds.get(id);
     if (gameId === undefined) return undefined;
@@ -117,7 +120,7 @@ export class GameLoader implements IGameLoader {
     return undefined;
   }
 
-  public async restoreGameAt(gameId: GameId, saveId: number): Promise<Game> {
+  public async restoreGameAt(gameId: GameId, saveId: number): Promise<IGame> {
     const current = await this.getGame(gameId);
     if (current === undefined) {
       throw new Error('Cannot find game');
@@ -140,6 +143,32 @@ export class GameLoader implements IGameLoader {
 
   public sweep() {
     this.cache.sweep();
+  }
+
+  public async completeGame(game: IGame) {
+    const database = Database.getInstance();
+    await database.saveGame(game);
+    try {
+      this.mark(game.id);
+      await database.markFinished(game.id);
+      await this.maintenance();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  public saveGame(game: IGame): Promise<void> {
+    if (this.purgedGames.includes(game.id)) {
+      throw new Error('This game no longer exists');
+    }
+    return Database.getInstance().saveGame(game);
+  }
+
+  public async maintenance() {
+    const database = Database.getInstance();
+    const purgedGames = await database.purgeUnfinishedGames();
+    this.purgedGames.push(...purgedGames);
+    await database.compressCompletedGames();
   }
 }
 

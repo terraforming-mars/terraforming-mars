@@ -3,6 +3,7 @@ import {testGame} from '../../TestGame';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {TestPlayer} from '../../TestPlayer';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
+import {cast} from '../../TestingUtils';
 
 describe('Helion', function() {
   let card: Helion;
@@ -10,12 +11,11 @@ describe('Helion', function() {
 
   beforeEach(function() {
     card = new Helion();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(3);
 
     player.megaCredits = 3;

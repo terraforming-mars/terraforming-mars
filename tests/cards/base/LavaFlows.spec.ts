@@ -21,14 +21,14 @@ describe('LavaFlows', function() {
   });
 
   it('Cannot play if no available spaces', function() {
-    game.addTile(player, game.board.getSpace(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, game.board.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, game.board.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
     expect(card.canPlay(player)).is.true;
 
     const anotherPlayer = TestPlayer.RED.newPlayer();
-    game.board.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
+    game.board.getSpaceOrThrow(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -39,33 +39,33 @@ describe('LavaFlows', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    expect(action.availableSpaces).deep.eq(game.board.getAvailableSpacesOnLand(player));
+    expect(action.spaces).deep.eq(game.board.getAvailableSpacesOnLand(player));
   });
 
   it('Ares hazards do not disrupt Lava Flow space selection', function() {
     card.play(player);
     runAllActions(game);
-    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces).has.length(4);
+    expect(cast(player.popWaitingFor(), SelectSpace).spaces).has.length(4);
 
     card.play(player);
     runAllActions(game);
-    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces.map((space) => space.id))
+    expect(cast(player.popWaitingFor(), SelectSpace).spaces.map((space) => space.id))
       .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS, SpaceName.THARSIS_THOLUS]);
 
-    game.board.getSpace(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.EROSION_MILD, protectedHazard: false};
+    game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.EROSION_MILD, protectedHazard: false};
 
     card.play(player);
     runAllActions(game);
-    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces).has.length(4);
+    expect(cast(player.popWaitingFor(), SelectSpace).spaces).has.length(4);
 
-    game.board.getSpace(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.CITY};
+    game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.CITY};
     card.play(player);
     runAllActions(game);
-    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces).has.length(3);
+    expect(cast(player.popWaitingFor(), SelectSpace).spaces).has.length(3);
 
     card.play(player);
     runAllActions(game);
-    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces.map((space) => space.id))
+    expect(cast(player.popWaitingFor(), SelectSpace).spaces.map((space) => space.id))
       .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS]);
   });
 
@@ -73,7 +73,7 @@ describe('LavaFlows', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
 
     expect(space.tile!.tileType).to.eq(TileType.LAVA_FLOWS);

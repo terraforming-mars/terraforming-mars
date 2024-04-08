@@ -18,9 +18,9 @@ describe('EcologyExperts', function() {
   });
 
   it('Gets requirement bonus', function() {
-    expect(card.getRequirementBonus(player)).to.eq(0);
+    expect(card.getGlobalParameterRequirementBonus(player)).to.eq(0);
     player.lastCardPlayed = card.name;
-    expect(card.getRequirementBonus(player)).to.eq(50);
+    expect(card.getGlobalParameterRequirementBonus(player)).to.eq(50);
   });
 
   it('Should play', function() {

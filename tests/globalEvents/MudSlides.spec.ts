@@ -4,8 +4,7 @@ import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
-import {testGameOptions} from '../TestingUtils';
-import {ISpace} from '../../src/server/boards/ISpace';
+import {Space} from '../../src/server/boards/Space';
 import {TileType} from '../../src/common/TileType';
 
 describe('MudSlides', function() {
@@ -16,15 +15,14 @@ describe('MudSlides', function() {
 
   beforeEach(() => {
     card = new MudSlides();
-    [game, player] = testGame(2);
-    turmoil = Turmoil.newInstance(game);
-    turmoil.initGlobalEvent(game);
+    [game, player] = testGame(2, {turmoilExtension: true, aresExtension: true});
+    turmoil = Turmoil.getTurmoil(game);
   });
 
   it('resolve play', function() {
     const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];
-    game.addCityTile(player, game.board.getAdjacentSpaces(oceanTile)[0]);
-    game.addOceanTile(player, oceanTile);
+    game.addCity(player, game.board.getAdjacentSpaces(oceanTile)[0]);
+    game.addOcean(player, oceanTile);
     player.megaCredits = 10;
 
     card.resolve(game, turmoil);
@@ -33,10 +31,10 @@ describe('MudSlides', function() {
   });
 
   it('resolve play with overplaced tiles', function() {
-    [game, player] = testGame(2, testGameOptions({aresExtension: true, turmoilExtension: true}));
+    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
 
     // Find two adjacent ocean spaces
-    function adjacentOceans(): {first: ISpace, second: ISpace} {
+    function adjacentOceans(): {first: Space, second: Space} {
       const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
       for (const space of oceanSpaces) {
         const adjacentSpaces = game.board.getAdjacentSpaces(space);
@@ -50,15 +48,14 @@ describe('MudSlides', function() {
 
     const spaces = adjacentOceans();
 
-    game.addOceanTile(player, spaces.first);
-    game.addOceanTile(player, spaces.second);
+    game.addOcean(player, spaces.first);
+    game.addOcean(player, spaces.second);
 
     // Add an ocean city on top of the second ocean.
     const tile = {
       tileType: TileType.OCEAN_CITY,
       covers: spaces.second.tile,
     };
-    game.gameOptions.aresExtension = true;
     player.game.addTile(player, spaces.second, tile);
 
     player.megaCredits = 10;

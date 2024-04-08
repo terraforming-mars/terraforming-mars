@@ -28,6 +28,15 @@ const cssClass: Record<CardResource, string> = {
   [CardResource.SEED]: 'card-resource-seed',
   [CardResource.AGENDA]: 'card-resource-agenda',
   [CardResource.ORBITAL]: 'card-resource-orbital',
+  [CardResource.GRAPHENE]: 'card-resource-graphene',
+  [CardResource.HYDROELECTRIC_RESOURCE]: 'card-resource-hydroelectric-resource',
+  [CardResource.CLONE_TROOPER]: 'card-resource-clone-trooper',
+  [CardResource.TOOL]: 'card-resource-tool',
+  [CardResource.WARE]: 'card-resource-ware',
+  [CardResource.SCOOP]: 'card-resource-scoop',
+  [CardResource.ACTIVIST]: 'card-resource-activist',
+  [CardResource.JOURNALISM]: 'card-resource-journalism',
+  [CardResource.SUPPLY_CHAIN]: 'card-resource-supply-chain',
 };
 
 export default Vue.extend({

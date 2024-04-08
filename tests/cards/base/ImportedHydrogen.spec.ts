@@ -16,7 +16,7 @@ describe('ImportedHydrogen', function() {
 
   beforeEach(function() {
     card = new ImportedHydrogen();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -39,7 +39,7 @@ describe('ImportedHydrogen', function() {
     selectMicrobe.cb([tardigrades]);
 
     expect(tardigrades.resourceCount).to.eq(3);
-    selectAnimal.cb();
+    selectAnimal.cb(undefined);
     expect(pets.resourceCount).to.eq(2);
   });
 

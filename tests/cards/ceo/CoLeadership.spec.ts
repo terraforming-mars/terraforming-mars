@@ -18,8 +18,8 @@ describe('Co Leadership', function() {
   });
 
   it('Should play', function() {
-    expect(player.ceoCardsInHand.length).eq(0);
-    expect(game.ceoDeck.discardPile.length).eq(0);
+    expect(player.ceoCardsInHand).is.empty;
+    expect(game.ceoDeck.discardPile).is.empty;
     const selectCard = card.play(player) as SelectCard<ICard>;
     selectCard.cb([selectCard.cards[0]]);
     game.deferredActions.runAll(() => {});

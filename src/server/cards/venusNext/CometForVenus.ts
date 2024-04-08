@@ -1,8 +1,8 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -33,8 +33,8 @@ export class CometForVenus extends Card implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.tags.count(Tag.VENUS, 'raw') > 0);
+  public override bespokePlay(player: IPlayer) {
+    const venusTagPlayers = player.getOpponents().filter((opponent) => opponent.tags.count(Tag.VENUS, 'raw') > 0);
 
     if (player.game.isSoloMode()|| venusTagPlayers.length === 0) {
       return undefined;
@@ -45,18 +45,17 @@ export class CometForVenus extends Card implements IProjectCard {
         new SelectPlayer(
           Array.from(venusTagPlayers),
           'Select player to remove up to 4 M€ from',
-          'Remove M€',
-          (selectedPlayer: Player) => {
-            selectedPlayer.deductResource(Resources.MEGACREDITS, 4, {log: true, from: player});
+          'Remove M€')
+          .andThen((target) => {
+            target.maybeBlockAttack(player, (proceed) => {
+              if (proceed) {
+                target.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
+              }
+              return undefined;
+            });
             return undefined;
-          },
-        ),
-        new SelectOption(
-          'Do not remove M€',
-          'Confirm',
-          () => undefined,
-        ),
-      );
+          }),
+        new SelectOption('Do not remove M€'));
     }
 
     return undefined;

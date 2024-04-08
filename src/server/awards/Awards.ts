@@ -38,8 +38,10 @@ import {Politician} from './terraCimmeria/Politician';
 import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
 import {Zoologist2} from './amazonisPlanitia/Zoologist';
+import {Kingpin} from './underworld/Kingpin';
+import {EdgeLord} from './underworld/EdgeLord';
 
-export const THARSIS_AWARDS: Array<IAward> = [
+export const THARSIS_AWARDS = [
   new Landlord(),
   new Scientist(),
   new Banker(),
@@ -47,11 +49,11 @@ export const THARSIS_AWARDS: Array<IAward> = [
   new Miner(),
 ];
 
-export const VENUS_AWARDS: Array<IAward> = [
+export const VENUS_AWARDS = [
   new Venuphile(),
 ];
 
-export const ELYSIUM_AWARDS: Array<IAward> = [
+export const ELYSIUM_AWARDS = [
   new Celebrity(),
   new Industrialist(),
   new DesertSettler(),
@@ -59,7 +61,15 @@ export const ELYSIUM_AWARDS: Array<IAward> = [
   new Benefactor(),
 ];
 
-export const HELLAS_AWARDS: Array<IAward> = [
+export const UTOPIA_PLANITIA_AWARDS = [
+  // new Suburbian(),
+  // new Investor(),
+  // new Botanist(),
+  // new Incorporator(),
+  // new Metropolist(),
+];
+
+export const HELLAS_AWARDS = [
   new Cultivator(),
   new Magnate(),
   new SpaceBaron(),
@@ -67,16 +77,16 @@ export const HELLAS_AWARDS: Array<IAward> = [
   new Contractor(),
 ];
 
-export const ARES_AWARDS: Array<IAward> = [
+export const ARES_AWARDS = [
   new Entrepreneur(),
 ];
 
-export const MOON_AWARDS: Array<IAward> = [
+export const MOON_AWARDS = [
   new FullMoon(),
   new LunarMagnate(),
 ];
 
-export const AMAZONIS_PLANITIA_AWARDS: Array<IAward> = [
+export const AMAZONIS_PLANITIA_AWARDS = [
   new Curator(),
   new Engineer(),
   new Historian(),
@@ -92,7 +102,7 @@ export const ARABIA_TERRA_AWARDS = [
   new Manufacturer(),
 ];
 
-export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
+export const TERRA_CIMMERIA_AWARDS = [
   new Biologist(),
   new Economizer2(),
   new Politician(),
@@ -100,7 +110,7 @@ export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
   new Warmonger(),
 ];
 
-export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
+export const VASTITAS_BOREALIS_AWARDS = [
   new Adapter(),
   new Edgedancer(),
   new Hoarder(),
@@ -108,10 +118,16 @@ export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
   new Voyager(),
 ];
 
-export const ALL_AWARDS: Array<IAward> = [
+export const UNDERWORLD_AWARDS = [
+  new Kingpin(),
+  new EdgeLord(),
+];
+
+export const ALL_AWARDS = [
   ...THARSIS_AWARDS,
   ...ELYSIUM_AWARDS,
   ...HELLAS_AWARDS,
+  ...UTOPIA_PLANITIA_AWARDS,
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
   ...MOON_AWARDS,
@@ -119,8 +135,10 @@ export const ALL_AWARDS: Array<IAward> = [
   ...ARABIA_TERRA_AWARDS,
   ...TERRA_CIMMERIA_AWARDS,
   ...VASTITAS_BOREALIS_AWARDS,
+  ...UNDERWORLD_AWARDS,
 ];
 
+// Remove namespace and rename function
 export namespace Awards {
   export const ALL = ALL_AWARDS;
 

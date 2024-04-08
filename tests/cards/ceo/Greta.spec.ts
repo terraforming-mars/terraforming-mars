@@ -91,12 +91,12 @@ describe('Greta', function() {
     player.setTerraformRating(20);
     player2.setTerraformRating(20);
     player.megaCredits = 0;
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
 
     card.action();
     turmoil.endGeneration(game);
     runAllActions(game);
-    expect(turmoil.chairman).to.eq(player.id);
+    expect(turmoil.chairman).to.eq(player);
     expect(player.getTerraformRating()).to.eq(20);
     expect(player.megaCredits).to.eq(0);
     expect(player2.getTerraformRating()).to.eq(19);

@@ -74,47 +74,60 @@
     display: inline-block;
     vertical-align: top;
     transform: scale(0.88);
-    margin: -50px 0 -45px -60px;
+    margin: -40px 0 -45px -60px;
 }
 
 .events-board {
     display: inline-block;
     vertical-align: top;
-    width: 1025px;
     box-sizing: initial;
     text-align: left;
-    margin: -10px 0 -10px 10px;
+    margin: 10px 0 -10px 0px;
+    width: 1010px;
 }
 
 .global-event {
     display: inline-block;
     vertical-align: top;
-    width: 350px;
+    width: 332px;
     height: 186px;
-    background: url(./assets/turmoil_ui.png);
-    background-position: -21px -172px;
-    margin: 20px 0 0 -13px;
+    margin: 0 1px;
+    background: url(./assets/parties/global_event.png);
     color: #000000;
     font-size: medium;
-}
-
-.global-event--current {
-    background-position: -727px -172px;
-}
-
-.global-event--coming {
-    background-position: -375px -172px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .global-event-card-content {
-  width: 330px !important;
-  margin-left: 10px;
+    width: 300px !important;
+    height: 118px !important;
+    justify-content: center;
+    margin: 0 auto;
+    top: 3px;
+    box-sizing: inherit;
 }
 
-.global-event-name--narrow {
-  letter-spacing: -0.05em;
-  font-size: 14px;
-  margin-left: 10px;
+.global-event-title {
+    position: absolute;
+    text-transform: uppercase;
+    width: 200px;
+    margin-top: 135px;
+    margin-left: 70px;
+    font-weight: 600;
+    text-align: center;
+    height: 32px;
+    top: 11px;
+}
+
+.global-event-name {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    line-height: 15px;
 }
 
 .event-title {
@@ -556,8 +569,10 @@
     text-decoration: none;
     cursor: pointer;
     position: absolute;
-    margin: 138px 0 0 370px;
+    margin: 138px 0 0 0;
     font-weight: bold;
+	text-align: right;
+	width: 460px;
 }
 
 .policies-clickable:link {

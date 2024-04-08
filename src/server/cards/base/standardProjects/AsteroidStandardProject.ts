@@ -1,8 +1,8 @@
-import {Player} from '../../../Player';
+import * as constants from '../../../../common/constants';
+import {IPlayer} from '../../../IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
-import * as constants from '../../../../common/constants';
 
 export class AsteroidStandardProject extends StandardProjectCard {
   constructor() {
@@ -13,7 +13,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: 'SP9',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 14 M€ to raise temperature 1 step.', (eb) => {
+          b.standardProject('Spend 14 M€ to raise the temperature 1 step.', (eb) => {
             eb.megacredits(14).startAction.temperature(1);
           }),
         ),
@@ -21,14 +21,22 @@ export class AsteroidStandardProject extends StandardProjectCard {
     });
   }
 
-  public override canAct(player: Player): boolean {
-    if (player.game.getTemperature() === constants.MAX_TEMPERATURE) {
-      return false;
+  public override canPayWith(player: IPlayer) {
+    if (player.isCorporation(CardName.KUIPER_COOPERATIVE)) {
+      return {kuiperAsteroids: true};
+    } else {
+      return {};
+    }
+  }
+
+  public override canAct(player: IPlayer): boolean {
+    if (player.game.getTemperature() >= constants.MAX_TEMPERATURE) {
+      this.warnings.add('maxtemp');
     }
     return super.canAct(player);
   }
 
-  actionEssence(player: Player): void {
+  actionEssence(player: IPlayer): void {
     player.game.increaseTemperature(player, 1);
   }
 }

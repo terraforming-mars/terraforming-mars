@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -25,8 +25,8 @@ export class ProjectInspection extends Card implements IProjectCard {
   }
 
   // This matches Viron.getActionCards.
-  private getActionCards(player: Player): Array<IActionCard & ICard> {
-    const result: Array<IActionCard & ICard> = [];
+  private getActionCards(player: IPlayer): Array<IActionCard & ICard> {
+    const result = [];
 
     for (const playedCard of player.tableau) {
       if (playedCard === this) {
@@ -45,11 +45,11 @@ export class ProjectInspection extends Card implements IProjectCard {
     return result;
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return this.getActionCards(player).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const actionCards = this.getActionCards(player);
     if (actionCards.length === 0 ) {
       return undefined;
@@ -57,12 +57,11 @@ export class ProjectInspection extends Card implements IProjectCard {
     return new SelectCard<IActionCard & ICard>(
       'Perform an action from a played card again',
       'Take action',
-      actionCards,
-      ([card]) => {
+      actionCards)
+      .andThen(([card]) => {
         const foundCard = card;
         player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
         return foundCard.action(player);
-      },
-    );
+      });
   }
 }

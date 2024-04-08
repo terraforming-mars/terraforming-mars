@@ -10,7 +10,7 @@ describe('Tardigrades', function() {
 
   beforeEach(function() {
     card = new Tardigrades();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

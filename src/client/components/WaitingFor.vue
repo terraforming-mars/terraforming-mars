@@ -1,9 +1,9 @@
 <template>
   <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
   <div v-else class="wf-root">
-    <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
+    <!-- <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
       <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
-    </template>
+    </template> -->
     <player-input-factory :players="players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
@@ -25,10 +25,11 @@ import {WaitingForModel} from '@/common/models/WaitingForModel';
 
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
-import * as paths from '@/common/app/paths';
-import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
+import {paths} from '@/common/app/paths';
+import {statusCode} from '@/common/http/statusCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
+import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -80,7 +81,7 @@ export default Vue.extend({
       xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
-        if (xhr.status === HTTPResponseCode.OK) {
+        if (xhr.status === statusCode.ok) {
           root.screen = 'empty';
           root.playerView = xhr.response;
           root.playerkey++;
@@ -88,15 +89,22 @@ export default Vue.extend({
           if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
             (window).location = (window).location; // eslint-disable-line no-self-assign
           }
-        } else if (xhr.status === HTTPResponseCode.BAD_REQUEST && xhr.responseType === 'json') {
-          showAlert(xhr.response.message);
+        } else if (xhr.status === statusCode.badRequest && xhr.responseType === 'json') {
+          if (xhr.response.id === INVALID_RUN_ID) {
+            showAlert(xhr.response.message, () => {
+              setTimeout(() => window.location.reload(), 100);
+            });
+          } else {
+            showAlert(xhr.response.message);
+          }
         } else {
           showAlert('Unexpected response from server. Please try again.');
         }
         root.isServerSideRequestInProgress = false;
       };
-      xhr.send(JSON.stringify(out));
+      xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
       xhr.onerror = function() {
+        // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
       };
     },
@@ -116,6 +124,7 @@ export default Vue.extend({
       };
       xhr.send();
       xhr.onerror = function() {
+        // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;
       };
     },
@@ -130,7 +139,7 @@ export default Vue.extend({
         if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
           (window).location = (window).location; // eslint-disable-line no-self-assign
         }
-      } else if (xhr.status === 400 && xhr.responseType === 'json') {
+      } else if (xhr.status === statusCode.badRequest && xhr.responseType === 'json') {
         showAlert(xhr.response.message);
       } else {
         showAlert('Unexpected response from server. Please try again.');
@@ -149,7 +158,7 @@ export default Vue.extend({
           root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };
         xhr.onload = () => {
-          if (xhr.status === HTTPResponseCode.OK) {
+          if (xhr.status === statusCode.ok) {
             const result = xhr.response as WaitingForModel;
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.

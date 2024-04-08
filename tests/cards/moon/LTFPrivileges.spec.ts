@@ -1,8 +1,7 @@
-import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
-import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 
@@ -11,8 +10,7 @@ describe('LTFPrivileges', () => {
   let card: LTFPrivileges;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new LTFPrivileges();
   });
 
@@ -25,15 +23,15 @@ describe('LTFPrivileges', () => {
 
     const arn = new AristarchusRoadNetwork();
     player.cardsInHand = [arn];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
+    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
 
     player.titanium = 0;
     player.steel = 0;
-    expect(player.getPlayableCards().map((card) => card.name)).is.empty;
+    expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
 
     // And this one shows that with Improved Moon Concrete, doesn't need steel.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
+    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
   });
 });
 

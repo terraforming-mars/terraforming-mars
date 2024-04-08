@@ -1,0 +1,23 @@
+{
+  "Buffer Gas": "Буферен газ",
+  "(Spend 16 M€ to increase your TR 1 step. Solo games only.)": "(Изразходвайте 16 M€, за да увеличите TR с 1 стъпка. Само за соло игри.)",
+  "Lunar Habitat": "Лунно обиталище",
+  "(Spend 22 M€ and 1 titanium to place a habitat on The Moon and raise your M€ production 1 step.)": "(Изразходвайте 22 M€ и 1 титан, за да разположите обиталище на Луната и увеличете производството си на M€ с 1 стъпка.)",
+  "Lunar Mine": "Лунна минa",
+  "(Spend 20 M€ and 1 titanium to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.)": "(Изразходвайте 20 M€ и 1 титан, за да разположите минa на Луната, увеличете скоростта на добив с 1 стъпка и увеличете производството на стомана с 1 стъпка.)",
+  "Road Infrastructure": "Лунна инфраструктура",
+  "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": "(Изразходвайте 18 M€ и 1 стомана, за да разположите път на Луната и увеличете рейтинга на логистиката с 1 стъпка.)",
+  "(Spend 25 M€ to place a city tile and increase your M€ production 1 step.)": "(Изразходвайте 25 M€, за да разположите плочка на град и увеличете производството си на M€ с 1 стъпка.)",
+  "(Spend 17 M€ to place a colony.)": "(Изразходвайте 17 M€, за да разположите колония.)",
+  "(Spend 23 M€ to place a greenery tile and raise oxygen 1 step.)": "(Изразходвайте 23 M€, за да разположите плочка с растителност и увеличете кислорода с 1 стъпка.)",
+  "(Spend 11 M€ to increase your energy production 1 step.)": "(Изразходвайте 11 M€, за да увеличите производството на енергия с 1 стъпка.)",
+  "Sell Patents": "Продаване на патенти",
+  "(Discard any number of cards to gain that amount of M€.)": "(Изхвърлете произволен брой карти, за да спечелите тази сума M€.)",
+  "asteroid": "Астероид",
+  "(Spend 14 M€ to raise the temperature 1 step.)": "(Изразходвайте 14 M€, за да повишите температурата с 1 стъпка.)",
+  "Air Scrapping": "Почистване на въздуха",
+  "(Spend 15 M€ to raise Venus 1 step.)": "(Изразходвайте 15 M€, за да повишите Venus с 1 стъпка.)",
+  "Air Scrapping (Var)": "Почистване на въздуха (вар.)",
+  "(Spend 15M€, less 1M€ per Venus tag you have, to raise Venus 1 step.)": "(Изразходвайте 15 M€, минус 1 M€ за всеки Venus таг, който притежавате, за да увеличите Venus с 1 стъпка.)",
+  "(Spend 18 M€ to place an ocean tile.)": "(Изразходвайте 18 M€, за да разположите плочка на океан.)"
+}

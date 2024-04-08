@@ -18,8 +18,7 @@ describe('ImpactorSwarm', function() {
   });
 
   it('Should play when no other player has plants', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.heat).to.eq(12);
   });
 

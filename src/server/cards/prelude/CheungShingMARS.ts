@@ -1,15 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class CheungShingMARS extends Card implements ICorporationCard {
+export class CheungShingMARS extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.CHEUNG_SHING_MARS,
       tags: [Tag.BUILDING],
       startingMegaCredits: 44,

@@ -1,14 +1,15 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Legend extends BaseMilestone {
   constructor() {
     super(
       'Legend',
-      'Requires that you have played 5 events',
+      'Have 5 cards in your event pile',
       5);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
+    // TODO(kberg): include events removed by Odyssey and Playwrights?
     return player.getPlayedEventsCount();
   }
 }

@@ -3,7 +3,7 @@ import {EnergyTapping} from '../../../src/server/cards/base/EnergyTapping';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
@@ -18,18 +18,37 @@ describe('EnergyTapping', function() {
     [game, player, player2] = testGame(2);
   });
 
-  it('Should play - auto select if single target', function() {
+  it('play - no targets', function() {
+    player.playedCards.push(card, card);
+    expect(card.canPlay(player)).is.true;
+
     card.play(player);
-    player2.production.override({energy: 1});
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+
+    expect(player.production.energy).to.eq(1);
+
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
+    expect(selectPlayer.players).deep.eq([player]);
+    selectPlayer.cb(player);
+    runAllActions(game);
+    expect(player.production.energy).to.eq(0);
+    expect(player2.production.energy).to.eq(0);
+  });
+
+  it('play - auto select if single target', function() {
+    player2.production.override({energy: 1});
+
+    card.play(player);
+
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player2.production.energy).to.eq(0);
   });
 
-  it('Should play - multiple targets', function() {
-    player.production.add(Resources.ENERGY, 2);
-    player2.production.add(Resources.ENERGY, 3);
+  it('play - multiple targets', function() {
+    player.production.add(Resource.ENERGY, 2);
+    player2.production.add(Resource.ENERGY, 3);
 
     card.play(player);
 
@@ -48,7 +67,7 @@ describe('EnergyTapping', function() {
     card.play(player);
 
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
 
     expect(player.production.energy).to.eq(1);
     expect(card.getVictoryPoints(player)).to.eq(-1);

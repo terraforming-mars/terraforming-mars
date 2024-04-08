@@ -5,7 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -13,6 +13,7 @@ import {MAX_TEMPERATURE} from '../../../common/constants';
 import {LogHelper} from '../../LogHelper';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
+import {TITLES} from '../../inputs/titles';
 
 export class DirectedImpactors extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -38,33 +39,33 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     const cardHasResources = this.resourceCount > 0;
-    const canPayForAsteroid = player.canAfford(6, {titanium: true});
+    const canPayForAsteroid = player.canAfford({cost: 6, titanium: true});
 
     if (player.game.getTemperature() === MAX_TEMPERATURE && cardHasResources) return true;
     if (canPayForAsteroid) return true;
 
-    return player.canAfford(0, {tr: {temperature: 1}}) && cardHasResources;
+    return player.canAfford({cost: 0, tr: {temperature: 1}}) && cardHasResources;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
-    const opts: Array<SelectOption> = [];
+    const opts = [];
 
-    const addResource = new SelectOption('Pay 6 M€ to add 1 asteroid to a card', 'Pay', () => this.addResource(player, asteroidCards));
-    const spendResource = new SelectOption('Remove 1 asteroid to raise temperature 1 step', 'Remove asteroid', () => this.spendResource(player));
+    const addResource = new SelectOption('Pay 6 M€ to add 1 asteroid to a card', 'Pay').andThen(() => this.addResource(player, asteroidCards));
+    const spendResource = new SelectOption('Remove 1 asteroid to raise temperature 1 step', 'Remove asteroid').andThen(() => this.spendResource(player));
     const temperatureIsMaxed = player.game.getTemperature() === MAX_TEMPERATURE;
 
     if (this.resourceCount > 0) {
-      if (!temperatureIsMaxed && player.canAfford(0, {tr: {temperature: 1}})) {
+      if (!temperatureIsMaxed && player.canAfford({cost: 0, tr: {temperature: 1}})) {
         opts.push(spendResource);
       }
     } else {
       return this.addResource(player, asteroidCards);
     }
 
-    if (player.canAfford(6, {titanium: true})) {
+    if (player.canAfford({cost: 6, titanium: true})) {
       opts.push(addResource);
     } else {
       return this.spendResource(player);
@@ -73,8 +74,8 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     return new OrOptions(...opts);
   }
 
-  private addResource(player: Player, asteroidCards: ICard[]) {
-    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
+  private addResource(player: IPlayer, asteroidCards: ICard[]) {
+    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: TITLES.payForCardAction(this.name)}));
 
     if (asteroidCards.length === 1) {
       player.addResourceTo(this, {log: true});
@@ -84,15 +85,14 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     return new SelectCard(
       'Select card to add 1 asteroid',
       'Add asteroid',
-      asteroidCards,
-      ([card]) => {
+      asteroidCards)
+      .andThen(([card]) => {
         player.addResourceTo(card, {log: true});
         return undefined;
-      },
-    );
+      });
   }
 
-  private spendResource(player: Player) {
+  private spendResource(player: IPlayer) {
     this.resourceCount--;
     LogHelper.logRemoveResource(player, this, 1, 'raise temperature 1 step');
     player.game.increaseTemperature(player, 1);

@@ -5,6 +5,8 @@ import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningRights extends MiningCard {
+  protected readonly title: string = 'Select a space with a steel or titanium bonus';
+
   constructor(
     name = CardName.MINING_RIGHTS,
     metadata = {

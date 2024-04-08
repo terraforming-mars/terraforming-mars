@@ -13,7 +13,7 @@ describe('StandardTechnology', function() {
   let player: TestPlayer;
 
   beforeEach(() => {
-    [, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     card = new StandardTechnology();
   });
 
@@ -42,7 +42,7 @@ describe('StandardTechnology', function() {
     const greeneryStandardProject = new GreeneryStandardProject();
 
     const selectSpace = cast(churnAction(greeneryStandardProject, player), SelectSpace);
-    const availableSpace = selectSpace.availableSpaces[0];
+    const availableSpace = selectSpace.spaces[0];
 
     selectSpace?.cb(availableSpace);
 

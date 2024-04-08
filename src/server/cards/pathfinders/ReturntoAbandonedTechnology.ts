@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
-import {DrawCards} from '../../deferredActions/DrawCards';
+import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -25,12 +25,12 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player) {
+  public override bespokeCanPlay(player: IPlayer) {
     return player.game.projectDeck.discardPile.length > 0;
   }
 
-  public override bespokePlay(player: Player) {
-    const cards: Array<IProjectCard> = [];
+  public override bespokePlay(player: IPlayer) {
+    const cards = [];
     for (let idx = 0; idx < 4; idx++) {
       const card = player.game.projectDeck.discardPile.pop();
       if (card === undefined) break;
@@ -38,7 +38,9 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
     }
 
     const cardsToKeep = Math.min(2, cards.length);
-    return DrawCards.choose(player, cards, {keepMax: cardsToKeep});
+    player.game.defer(new ChooseCards(player, cards, {keepMax: cardsToKeep}));
+
+    return undefined;
   }
 }
 

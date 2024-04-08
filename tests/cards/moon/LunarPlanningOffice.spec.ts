@@ -1,8 +1,9 @@
-import {Game} from '../../../src/server/Game';
-import {runAllActions, testGameOptions} from '../../TestingUtils';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarPlanningOffice} from '../../../src/server/cards/moon/LunarPlanningOffice';
-import {expect} from 'chai';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
 import {MareImbriumMine} from '../../../src/server/cards/moon/MareImbriumMine';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
@@ -10,15 +11,13 @@ import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce'
 import {CardName} from '../../../src/common/cards/CardName';
 
 describe('LunarPlanningOffice', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let card: LunarPlanningOffice;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new LunarPlanningOffice();
-    player.popWaitingFor(); // Removing SelectInitialCards.
   });
 
   it('play', () => {
@@ -38,12 +37,12 @@ describe('LunarPlanningOffice', () => {
 
     expect(player.steel).eq(6);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.MARE_NECTARIS_MINE, CardName.MARE_IMBRIUM_MINE]);
     expect(game.projectDeck.discardPile.map((c) => c.name)).has.members([CardName.MICRO_MILLS]);
 
     // Robotic Workforce is at the top of the deck.
-    expect(game.projectDeck.draw(game).name).eq(CardName.ROBOTIC_WORKFORCE);
+    expect(game.projectDeck.draw(game)?.name).eq(CardName.ROBOTIC_WORKFORCE);
   });
 });
 

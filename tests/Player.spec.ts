@@ -6,24 +6,32 @@ import {IoMiningIndustries} from '../src/server/cards/base/IoMiningIndustries';
 import {PowerSupplyConsortium} from '../src/server/cards/base/PowerSupplyConsortium';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {SelectOption} from '../src/server/inputs/SelectOption';
-import {Resources} from '../src/common/Resources';
+import {Resource} from '../src/common/Resource';
 import {SerializedPlayer} from '../src/server/SerializedPlayer';
 import {SerializedTimer} from '../src/common/SerializedTimer';
 import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
-import {cast, formatLogMessage, getSendADelegateOption, runAllActions, testGameOptions} from './TestingUtils';
-import {Units} from '../src/common/Units';
+import {cast, doWait, getSendADelegateOption, runAllActions} from './TestingUtils';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/server/cards/base/Pets';
-import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventName';
 import {TestPlayer} from './TestPlayer';
-import {SelectPartyToSendDelegate} from '../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../src/server/inputs/SelectParty';
 import {PartyName} from '../src/common/turmoil/PartyName';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {SelectPlayer} from '../src/server/inputs/SelectPlayer';
 import {SelectAmount} from '../src/server/inputs/SelectAmount';
+import {Phase} from '../src/common/Phase';
+import {testGame} from './TestGame';
+import {SelectCard} from '../src/server/inputs/SelectCard';
+import {AlliedBanks} from '../src/server/cards/prelude/AlliedBanks';
+import {Biofuels} from '../src/server/cards/prelude/Biofuels';
+import {CO2Reducers} from '../src/server/cards/pathfinders/CO2Reducers';
+import {Donation} from '../src/server/cards/prelude/Donation';
+import {Loan} from '../src/server/cards/prelude/Loan';
+import {IPreludeCard} from '../src/server/cards/prelude/IPreludeCard';
+import {OrOptions} from '../src/server/inputs/OrOptions';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -45,8 +53,8 @@ describe('Player', function() {
     const player2 = new Player('red', Color.RED, false, 0, 'p-red');
     const player3 = new Player('yellow', Color.YELLOW, false, 0, 'p-yellow');
     Game.newInstance('gameid', [player, player2, player3], player);
-    player2.production.add(Resources.ENERGY, 2);
-    player3.production.add(Resources.ENERGY, 2);
+    player2.production.add(Resource.ENERGY, 2);
+    player3.production.add(Resource.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
     card.play(player);
@@ -64,11 +72,10 @@ describe('Player', function() {
 
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    player.production.add(Resources.ENERGY, 1);
-    player2.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
+    player2.production.add(Resource.ENERGY, 1);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
     cast(player.getWaitingFor(), SelectPlayer);
 
@@ -82,7 +89,7 @@ describe('Player', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const redPlayer = new Player('red', Color.RED, false, 0, 'p-red');
 
-    player.production.add(Resources.HEAT, 2);
+    player.production.add(Resource.HEAT, 2);
     Game.newInstance('gameid', [player, redPlayer], player);
     player.defer(card.play(player));
     runAllActions(player.game);
@@ -93,7 +100,7 @@ describe('Player', function() {
     player.process({type: 'amount', amount: 1});
     expect(player.production.heat).to.eq(1);
     expect(player.production.megacredits).to.eq(1);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
   it('Runs SaturnSystems when other player plays card', function() {
     const player1 = new Player('blue', Color.BLUE, false, 0, 'p-blue');
@@ -109,13 +116,13 @@ describe('Player', function() {
   it('Chains onend functions from player inputs', function(done) {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player);
-    const mockOption3 = new SelectOption('Mock select option 3', 'Save', () => {
+    const mockOption3 = new SelectOption('Mock select option 3').andThen(() => {
       return undefined;
     });
-    const mockOption2 = new SelectOption('Mock select option 2', 'Save', () => {
+    const mockOption2 = new SelectOption('Mock select option 2').andThen(() => {
       return mockOption3;
     });
-    const mockOption = new SelectOption('Mock select option', 'Save', () => {
+    const mockOption = new SelectOption('Mock select option').andThen(() => {
       return mockOption2;
     });
     player.setWaitingFor(mockOption, done);
@@ -144,8 +151,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = testGameOptions({venusNextExtension: false});
-    Game.newInstance('gameid', [player], player, gameOptions);
+    Game.newInstance('gameid', [player], player, {venusNextExtension: false});
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -156,8 +162,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start, with Venus', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = testGameOptions({venusNextExtension: true});
-    Game.newInstance('gameid', [player], player, gameOptions);
+    Game.newInstance('gameid', [player], player, {venusNextExtension: true});
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -169,8 +174,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start, with The Moon', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = testGameOptions({venusNextExtension: false, moonExpansion: true});
-    Game.newInstance('gameid', [player], player, gameOptions);
+    Game.newInstance('gameid', [player], player, {venusNextExtension: false, moonExpansion: true});
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -184,8 +188,7 @@ describe('Player', function() {
 
   it('Include buffer gas for solo games with 63 TR', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
-    game.gameOptions.soloTR = true;
+    Game.newInstance('gameid', [player], player, {soloTR: true});
     const option = player.getStandardProjectOption();
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).not.to.be.undefined;
@@ -200,11 +203,10 @@ describe('Player', function() {
   it('serialization test', () => {
     const json: SerializedPlayer = {
       id: 'p-blue',
-      pickedCorporationCard: 'Tharsis Republic' as CardName,
+      pickedCorporationCard: CardName.THARSIS_REPUBLIC,
       terraformRating: 20,
       corporations: [],
       hasIncreasedTerraformRatingThisGeneration: false,
-      terraformRatingAtGenerationStart: 20,
       megaCredits: 1,
       megaCreditProduction: 2,
       steel: 3,
@@ -219,8 +221,10 @@ describe('Player', function() {
       heatProduction: 12,
       titaniumValue: 13,
       steelValue: 14,
+      canUseCorruptionAsMegacredits: false,
       canUseHeatAsMegaCredits: false,
       canUseTitaniumAsMegacredits: false,
+      canUsePlantsAsMegaCredits: false,
       actionsTakenThisRound: 15,
       actionsTakenThisGame: 30,
       actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],
@@ -238,7 +242,7 @@ describe('Player', function() {
       cardCost: 3,
       cardDiscount: 7,
       fleetSize: 99,
-      tradesThisTurn: 100,
+      tradesThisGeneration: 100,
       colonyTradeOffset: 101,
       colonyTradeDiscount: 102,
       colonyVictoryPoints: 104,
@@ -263,6 +267,7 @@ describe('Player', function() {
       } as SerializedTimer,
       totalDelegatesPlaced: 0,
       victoryPointsByGeneration: [],
+      underworldData: {corruption: 0},
     };
 
     const newPlayer = Player.deserialize(json);
@@ -272,322 +277,11 @@ describe('Player', function() {
   });
   it('pulls self replicating robots target cards', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    expect(player.getSelfReplicatingRobotsTargetCards().length).eq(0);
+    expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
     const srr = new SelfReplicatingRobots();
     player.playedCards.push(srr);
     srr.targetCards.push({card: new LunarBeam(), resourceCount: 0});
     expect(player.getSelfReplicatingRobotsTargetCards().length).eq(1);
-  });
-
-  it('has units', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-
-    const units: Units = Units.of({});
-    expect(player.hasUnits(units)).is.true;
-
-    units.megacredits = 1;
-    expect(player.hasUnits(units)).is.false;
-    player.megaCredits = 1;
-    expect(player.hasUnits(units)).is.true;
-
-    units.steel = 1;
-    expect(player.hasUnits(units)).is.false;
-    player.steel = 1;
-    expect(player.hasUnits(units)).is.true;
-
-    units.titanium = 1;
-    expect(player.hasUnits(units)).is.false;
-    player.titanium = 1;
-    expect(player.hasUnits(units)).is.true;
-
-    units.plants = 1;
-    expect(player.hasUnits(units)).is.false;
-    player.plants = 1;
-    expect(player.hasUnits(units)).is.true;
-
-    units.energy = 1;
-    expect(player.hasUnits(units)).is.false;
-    player.energy = 1;
-    expect(player.hasUnits(units)).is.true;
-
-    units.heat = 1;
-    expect(player.hasUnits(units)).is.false;
-    player.heat = 1;
-    expect(player.hasUnits(units)).is.true;
-  });
-
-
-  it('add units', () => {
-    function asUnits(player: Player): Units {
-      return {
-        megacredits: player.megaCredits,
-        steel: player.steel,
-        titanium: player.titanium,
-        plants: player.plants,
-        energy: player.energy,
-        heat: player.heat,
-      };
-    }
-
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-
-    expect(asUnits(player)).deep.eq({
-      megacredits: 0,
-      steel: 0,
-      titanium: 0,
-      plants: 0,
-      energy: 0,
-      heat: 0,
-    });
-
-    player.megaCredits = 20;
-    player.steel = 19;
-    player.titanium = 18;
-    player.plants = 17;
-    player.energy = 16;
-    player.heat = 15;
-
-    player.addUnits(Units.of({megacredits: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 19,
-      titanium: 18,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({steel: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 18,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({titanium: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 28,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({plants: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 28,
-      plants: 27,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({energy: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 28,
-      plants: 27,
-      energy: 26,
-      heat: 15,
-    });
-
-    player.addUnits(Units.of({heat: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 30,
-      steel: 29,
-      titanium: 28,
-      plants: 27,
-      energy: 26,
-      heat: 25,
-    });
-  });
-
-  it('deduct units', () => {
-    function asUnits(player: Player): Units {
-      return {
-        megacredits: player.megaCredits,
-        steel: player.steel,
-        titanium: player.titanium,
-        plants: player.plants,
-        energy: player.energy,
-        heat: player.heat,
-      };
-    }
-
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-
-    expect(asUnits(player)).deep.eq({
-      megacredits: 0,
-      steel: 0,
-      titanium: 0,
-      plants: 0,
-      energy: 0,
-      heat: 0,
-    });
-
-    player.megaCredits = 20;
-    player.steel = 19;
-    player.titanium = 18;
-    player.plants = 17;
-    player.energy = 16;
-    player.heat = 15;
-
-    player.deductUnits(Units.of({megacredits: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 19,
-      titanium: 18,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.deductUnits(Units.of({steel: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 18,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.deductUnits(Units.of({titanium: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 8,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.deductUnits(Units.of({plants: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 8,
-      plants: 7,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.deductUnits(Units.of({energy: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 8,
-      plants: 7,
-      energy: 6,
-      heat: 15,
-    });
-
-    player.deductUnits(Units.of({heat: 10}));
-    expect(asUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 8,
-      plants: 7,
-      energy: 6,
-      heat: 5,
-    });
-  });
-
-  it('deduct production', () => {
-    function asProductionUnits(player: Player): Units {
-      return {
-        megacredits: player.production.megacredits,
-        steel: player.production.steel,
-        titanium: player.production.titanium,
-        plants: player.production.plants,
-        energy: player.production.energy,
-        heat: player.production.heat,
-      };
-    }
-
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-
-    expect(asProductionUnits(player)).deep.eq({
-      megacredits: 0,
-      steel: 0,
-      titanium: 0,
-      plants: 0,
-      energy: 0,
-      heat: 0,
-    });
-
-    player.production.add(Resources.MEGACREDITS, 20);
-    player.production.add(Resources.STEEL, 19);
-    player.production.add(Resources.TITANIUM, 18);
-    player.production.add(Resources.PLANTS, 17);
-    player.production.add(Resources.ENERGY, 16);
-    player.production.add(Resources.HEAT, 15);
-
-    player.production.adjust(Units.of({megacredits: -10}));
-    expect(asProductionUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 19,
-      titanium: 18,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.production.adjust(Units.of({steel: -10}));
-    expect(asProductionUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 18,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.production.adjust(Units.of({titanium: -10}));
-    expect(asProductionUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 8,
-      plants: 17,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.production.adjust(Units.of({plants: -10}));
-    expect(asProductionUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 8,
-      plants: 7,
-      energy: 16,
-      heat: 15,
-    });
-
-    player.production.adjust(Units.of({energy: -10}));
-    expect(asProductionUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 8,
-      plants: 7,
-      energy: 6,
-      heat: 15,
-    });
-
-    player.production.adjust(Units.of({heat: -10}));
-    expect(asProductionUnits(player)).deep.eq({
-      megacredits: 10,
-      steel: 9,
-      titanium: 8,
-      plants: 7,
-      energy: 6,
-      heat: 5,
-    });
   });
 
   it('addResourceTo', () => {
@@ -600,19 +294,19 @@ describe('Player', function() {
 
     const card = new Pets();
     expect(card.resourceCount).eq(0);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.addResourceTo(card);
     expect(card.resourceCount).eq(1);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.addResourceTo(card, 1);
     expect(card.resourceCount).eq(2);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.addResourceTo(card, 3);
     expect(card.resourceCount).eq(5);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     player.addResourceTo(card, {qty: 3, log: true});
     expect(log.length).eq(1);
@@ -626,12 +320,12 @@ describe('Player', function() {
     const player2 = new Player('red', Color.RED, false, 0, 'p-red');
     const game = Game.newInstance('gameid', [player1, player2], player1);
     player1.megaCredits = 0;
-    player1.production.add(Resources.MEGACREDITS, -5);
+    player1.production.add(Resource.MEGACREDITS, -5);
     player2.megaCredits = 3;
     game.monsInsuranceOwner = player2.id;
-    player1.addResource(Resources.MEGACREDITS, -3, {from: player2, log: false});
+    player1.stock.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
     expect(player2.megaCredits).eq(3);
-    player1.production.add(Resources.MEGACREDITS, -3, {from: player2, log: false});
+    player1.production.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
     expect(player2.megaCredits).eq(3);
   });
 
@@ -644,7 +338,7 @@ describe('Player', function() {
 
     const card = new Pets();
     expect(card.resourceCount).eq(0);
-    expect(log.length).eq(0);
+    expect(log).is.empty;
 
     log.length = 0;
     card.resourceCount = 6;
@@ -673,125 +367,32 @@ describe('Player', function() {
     expect(log[0].data[1].value).eq('4');
   });
 
-  it('adds resources', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    Game.newInstance('gameid', [player], player);
-    player.megaCredits = 10;
-    // adds any positive amount
-    player.addResource(Resources.MEGACREDITS, 12);
-    expect(player.megaCredits).eq(22);
-    // removes more than we have
-    player.addResource(Resources.MEGACREDITS, -23);
-    expect(player.megaCredits).eq(0);
-    // adds any positive amount
-    player.addResource(Resources.MEGACREDITS, 5);
-    expect(player.megaCredits).eq(5);
-    // removes less than we have
-    player.addResource(Resources.MEGACREDITS, -4);
-    expect(player.megaCredits).eq(1);
-    // makes no change
-    player.addResource(Resources.MEGACREDITS, 0);
-    expect(player.megaCredits).eq(1);
-  });
-
-  it('addResource logging', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
-
-    const log = game.gameLog;
-    log.length = 0; // Empty it out.
-
-    player.addResource(Resources.MEGACREDITS, 12, {log: false});
-    expect(log.length).eq(0);
-
-    player.addResource(Resources.MEGACREDITS, 12, {log: true});
-    const logEntry = log[0];
-    expect(formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12');
-  });
-
-  it('addResource logging from player', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const player2 = new Player('red', Color.RED, false, 0, 'p-red');
-    const game = Game.newInstance('gameid', [player, player2], player);
-
-    player.megaCredits = 5;
-    player.addResource(Resources.MEGACREDITS, -5, {log: true, from: player2});
-
-    const log = game.gameLog;
-    const logEntry = log[log.length - 1];
-    expect(formatLogMessage(logEntry)).eq('blue\'s megacredits amount decreased by 5 by red');
-  });
-
-  it('addResource logging from global event', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
-
-    player.addResource(Resources.MEGACREDITS, 12, {log: true, from: GlobalEventName.ASTEROID_MINING});
-
-    const log = game.gameLog;
-    const logEntry = log[log.length - 1];
-    expect(formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Asteroid Mining');
-  });
-
-  it('addResource logs error when deducting too much', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    Game.newInstance('gameid', [player], player);
-
-    player.megaCredits = 10;
-    const warn = console.warn;
-    const consoleLog: Array<Array<any>> = [];
-    console.warn = (message?: any, ...optionalParams: any[]) => {
-      consoleLog.push([message, optionalParams]);
-    };
-    player.addResource(Resources.MEGACREDITS, -12);
-    console.warn = warn;
-
-    expect(consoleLog.length).eq(1);
-    expect(consoleLog[0][0]).eq('Illegal state: Adjusting -12 megacredits when player has 10');
-    expect(JSON.parse(consoleLog[0][1])).deep.eq(
-      {
-        'gameId': 'gameid',
-        'lastSaveId': 0,
-        'logAge': 7,
-        'currentPlayer': 'p-blue',
-        'metadata': {
-          'player': {
-            'color': 'blue',
-            'id': 'p-blue',
-            'name': 'blue',
-          },
-          'resource': 'megacredits',
-          'amount': -12,
-        },
-      });
-  });
-
   it('Turmoil player action', () => {
     const player = TestPlayer.BLUE.newPlayer();
 
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    const game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
 
     const turmoil = game.turmoil!;
 
-    expect(turmoil.usedFreeDelegateAction.has(player.id)).is.false;
+    expect(turmoil.usedFreeDelegateAction.has(player)).is.false;
 
-    const freeLobbyAction = cast(getSendADelegateOption(player), SelectPartyToSendDelegate);
+    const freeLobbyAction = cast(getSendADelegateOption(player), SelectParty);
 
     expect(freeLobbyAction.title).eq('Send a delegate in an area (from lobby)');
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(0);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(0);
 
     freeLobbyAction.cb(PartyName.KELVINISTS);
     runAllActions(game);
 
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(1);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(1);
 
     // Now the free lobby action is used, only the 5MC option is available.
     player.megaCredits = 4;
-    expect(turmoil.usedFreeDelegateAction.has(player.id)).is.true;
+    expect(turmoil.usedFreeDelegateAction.has(player)).is.true;
     expect(getSendADelegateOption(player)).is.undefined;
 
     player.megaCredits = 5;
-    const selectParty = cast(getSendADelegateOption(player), SelectPartyToSendDelegate);
+    const selectParty = cast(getSendADelegateOption(player), SelectParty);
 
     expect(selectParty.title).eq('Send a delegate in an area (5 M€)');
 
@@ -799,12 +400,93 @@ describe('Player', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(2);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(2);
+  });
+
+  it('Prelude action cycle', () => {
+    const [game, player1, player2] = testGame(2, {preludeExtension: true});
+
+    // None of these preludes require additional user input, so they're good for this test.
+    const alliedBanks = new AlliedBanks();
+    const biofuels = new Biofuels();
+    const co2Reducers = new CO2Reducers();
+    const donation = new Donation();
+
+    game.phase = Phase.PRELUDES;
+    player1.preludeCardsInHand = [alliedBanks, biofuels];
+    player2.preludeCardsInHand = [co2Reducers, donation];
+
+    expect(player1.actionsTakenThisRound).eq(0);
+    expect(game.activePlayer).eq(player1.id);
+
+    player1.takeAction();
+
+    doWait(player1, SelectCard, (firstPrelude) => {
+      expect(firstPrelude!.title).eq('Select prelude card to play');
+      firstPrelude.cb([alliedBanks]);
+    });
+    runAllActions(game);
+
+    expect(game.activePlayer).eq(player1.id);
+    expect(player2.getWaitingFor()).is.undefined;
+
+    doWait(player1, SelectCard, (selectCard) => {
+      expect(selectCard.title).eq('Select prelude card to play');
+      selectCard.cb([biofuels]);
+    });
+    runAllActions(game);
+
+    expect(game.activePlayer).eq(player2.id);
+    expect(player1.getWaitingFor()).is.undefined;
+
+    doWait(player2, SelectCard, (firstPrelude) => {
+      expect(firstPrelude!.title).eq('Select prelude card to play');
+      firstPrelude.cb([co2Reducers]);
+    });
+    runAllActions(game);
+
+    expect(game.activePlayer).eq(player2.id);
+    expect(player1.getWaitingFor()).is.undefined;
+
+    doWait(player2, SelectCard, (selectCard) => {
+      expect(selectCard.title).eq('Select prelude card to play');
+      selectCard.cb([donation]);
+    });
+
+    runAllActions(game);
+
+    expect(game.phase).eq(Phase.ACTION);
+    expect(game.activePlayer).eq(player1.id);
+    expect(player2.getWaitingFor()).is.undefined;
+  });
+
+  it('Prelude fizzle', () => {
+    const [game, player] = testGame(1, {preludeExtension: true});
+
+    const alliedBanks = new AlliedBanks();
+    const loan = new Loan();
+
+    game.phase = Phase.PRELUDES;
+    player.preludeCardsInHand = [alliedBanks, loan];
+
+    player.production.override({megacredits: -5});
+
+    player.takeAction();
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+    expect(selectCard.cards).deep.eq([alliedBanks, loan]);
+    expect(loan.canPlay(player)).is.false;
+    selectCard.cb([loan]);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(15);
+    expect(player.preludeCardsInHand).deep.eq([alliedBanks]);
   });
 });
 
 function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
-  return player.getWaitingFor()!.options!.map((o) => o.title as string).map(titlesToGlobalParameter);
+  return cast(player.getWaitingFor(), OrOptions).options.map((o) => o.title as string).map(titlesToGlobalParameter);
 }
 
 function titlesToGlobalParameter(title: string): GlobalParameter {

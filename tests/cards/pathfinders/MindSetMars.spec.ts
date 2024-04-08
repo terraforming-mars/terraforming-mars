@@ -33,10 +33,10 @@ describe('MindSetMars', function() {
   });
 
   it('when you play a jovian tag', function() {
-    const a = fakeCard({name: 'A' as CardName, tags: [Tag.BUILDING]});
+    const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(card.resourceCount).eq(0);
     player.playCard(a);
-    expect(card.resourceCount).eq(1);
+    expect(card.resourceCount).eq(0);
   });
 
   it('when opponent plays a building tag', function() {
@@ -62,8 +62,8 @@ describe('MindSetMars', function() {
     expect(game.deferredActions.length).eq(0);
 
     turmoil.delegateReserve.clear();
-    turmoil.delegateReserve.add(player.id, 3);
-    cast(card.action(player), SelectOption).cb();
+    turmoil.delegateReserve.add(player, 3);
+    cast(card.action(player), SelectOption).cb(undefined);
     expect(game.deferredActions.length).eq(1);
     assertSendDelegateToArea(player, game.deferredActions.pop()!);
     expect(card.resourceCount).eq(1);
@@ -73,7 +73,7 @@ describe('MindSetMars', function() {
     card.resourceCount = 7;
 
     turmoil.delegateReserve.clear();
-    cast(card.action(player), SelectOption).cb();
+    cast(card.action(player), SelectOption).cb(undefined);
     expect(game.deferredActions.length).eq(1);
     assertPlaceCityTile(player, game.deferredActions.pop()!);
     expect(card.resourceCount).eq(2);
@@ -82,7 +82,7 @@ describe('MindSetMars', function() {
   it('both are available, place delegates', () => {
     card.resourceCount = 7;
 
-    turmoil.delegateReserve.add(player.id, 3);
+    turmoil.delegateReserve.add(player, 3);
     const options = cast(card.action(player), OrOptions);
     expect(options.options).has.length(2);
 
@@ -97,7 +97,7 @@ describe('MindSetMars', function() {
   it('both are available, place a city', () => {
     card.resourceCount = 7;
 
-    turmoil.delegateReserve.add(player.id, 3);
+    turmoil.delegateReserve.add(player, 3);
     const options = cast(card.action(player), OrOptions);
     expect(options.options).has.length(2);
 

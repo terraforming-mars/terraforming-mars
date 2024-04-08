@@ -1,16 +1,14 @@
-import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusSolarArrays} from '../../../src/server/cards/moon/CopernicusSolarArrays';
-import {expect} from 'chai';
 
 describe('CopernicusSolarArrays', () => {
   let player: TestPlayer;
   let card: CopernicusSolarArrays;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new CopernicusSolarArrays();
   });
 
@@ -19,10 +17,10 @@ describe('CopernicusSolarArrays', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
 
     player.titanium = 0;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 
   it('play', () => {

@@ -1,14 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 
 export class SmallOpenPitMine extends Card implements IProjectCard {
   constructor() {
@@ -28,21 +27,21 @@ export class SmallOpenPitMine extends Card implements IProjectCard {
     });
   }
 
-  public produce(player: Player) {
-    player.game.defer(new SimpleDeferredAction(player, () => {
+  public produce(player: IPlayer) {
+    player.defer(() => {
       return new OrOptions(
-        new SelectOption('Increase your steel production 2 steps', 'Increase', () => {
-          player.production.add(Resources.STEEL, 2, {log: true});
+        new SelectOption('Increase your steel production 2 steps').andThen(() => {
+          player.production.add(Resource.STEEL, 2, {log: true});
           return undefined;
         }),
-        new SelectOption('Increase your titanium production 1 step', 'Increase', () => {
-          player.production.add(Resources.TITANIUM, 1, {log: true});
+        new SelectOption('Increase your titanium production 1 step').andThen(() => {
+          player.production.add(Resource.TITANIUM, 1, {log: true});
           return undefined;
         }));
-    }));
+    });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     this.produce(player);
     return undefined;
   }

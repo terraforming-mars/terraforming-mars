@@ -1,17 +1,17 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
-import {isHazardTileType} from '../../common/TileType';
+import {isHazardTileType} from '../../common/AresTileType';
 
 export class Irrigator extends BaseMilestone {
   constructor() {
     super(
       'Irrigator',
-      'Have at least 4 tiles adjacent to oceans',
+      'Own 4 tiles adjacent to oceans',
       4);
   }
 
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return player.game.board.spaces.filter((space) =>
       space.player === player &&
         space.tile !== undefined &&

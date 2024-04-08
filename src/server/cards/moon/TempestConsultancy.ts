@@ -1,18 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
-import {Player} from '../../Player';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class TempestConsultancy extends Card implements ICorporationCard {
+export class TempestConsultancy extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.TEMPEST_CONSULTANCY,
       tags: [Tag.MOON],
       startingMegaCredits: 37,
@@ -38,21 +35,21 @@ export class TempestConsultancy extends Card implements ICorporationCard {
     });
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     const title = 'Tempest Consultancy first action - Select where to send two delegates';
     player.game.defer(new SendDelegateToArea(player, title, {count: 2}));
 
     return undefined;
   }
 
-  public canAct(player: Player) {
-    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) > 0;
+  public canAct(player: IPlayer) {
+    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     let count = Math.floor(player.tags.count(Tag.MOON) / 5);
     count = Math.min(count, 3);
-    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id));
+    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player));
     if (count > 0) {
       player.game.defer(new SendDelegateToArea(
         player,

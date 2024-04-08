@@ -3,12 +3,14 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
 
 export class SubterraneanHabitats extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SUBTERRANEAN_HABITATS,
       type: CardType.ACTIVE,
+      tags: [Tag.MOON],
       cost: 12,
       reserveUnits: {steel: 2},
 

@@ -1,4 +1,5 @@
 import {Units} from '../../common/Units';
+import {OneOrArray} from '../../common/utils/types';
 import {Tag} from '../../common/cards/Tag';
 import {NoAttributes} from './NoAttributes';
 
@@ -6,6 +7,8 @@ import {NoAttributes} from './NoAttributes';
  * Describes something that can be counted.
  */
 export type _Countable = {
+  start?: number;
+
   /**
    * Count the number of tags on the players' played cards.
    *
@@ -14,11 +17,15 @@ export type _Countable = {
    * This is counting tags as if the player was taking an action (for example,
    * a player's wild tags count, events are ignored.)
    */
-  tag?: Tag | Array<Tag>,
+  tag?: OneOrArray<Tag>,
   cities?: {where?: 'onmars' | 'offmars' | 'everywhere'},
   greeneries?: NoAttributes,
   oceans?: NoAttributes,
   resourcesHere?: NoAttributes,
+  floaters?: NoAttributes,
+  colonies?: {
+    colonies?: {},
+  },
   moon?: {
     habitatRate?: NoAttributes,
     miningRate?: NoAttributes,
@@ -26,7 +33,11 @@ export type _Countable = {
     habitat?: NoAttributes,
     mine?: NoAttributes,
     road?: NoAttributes,
-  }
+  },
+  underworld?: {
+    corruption?: NoAttributes,
+    excavationMarkers?: NoAttributes,
+  },
 
   all?: boolean; // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
   others?: true; // For tags this has a behavior.

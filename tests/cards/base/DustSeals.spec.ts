@@ -10,16 +10,16 @@ describe('DustSeals', function() {
 
   beforeEach(function() {
     card = new DustSeals();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {
     maxOutOceans(player, 4);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

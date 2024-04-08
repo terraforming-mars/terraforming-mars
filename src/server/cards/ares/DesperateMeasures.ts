@@ -1,11 +1,10 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {Game} from '../../Game';
-import {Player} from '../../Player';
+import {IGame} from '../../IGame';
+import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../../common/TileType';
 import {AresHandler} from '../../ares/AresHandler';
 import {CardRenderer} from '../render/CardRenderer';
@@ -29,29 +28,30 @@ export class DesperateMeasures extends Card implements IProjectCard {
     });
   }
 
-  private getHazardTiles(game: Game) {
+  private getHazardTiles(game: IGame) {
     return game.board.spaces.filter((space) => AresHandler.hasHazardTile(space));
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     // You can't play desperate measures if there isn't a hazard marker in play.
     return this.getHazardTiles(player.game).length > 0;
   }
 
-  public override bespokePlay(player: Player) {
-    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space: ISpace) => {
-      if (space.tile === undefined) {
-        throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);
-      }
-      space.tile.protectedHazard = true;
-      const tileType = space.tile.tileType;
-      if (TileType.DUST_STORM_MILD === tileType || TileType.DUST_STORM_SEVERE === tileType) {
-        player.game.increaseOxygenLevel(player, 1);
-      } else {
+  public override bespokePlay(player: IPlayer) {
+    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game))
+      .andThen((space) => {
+        if (space.tile === undefined) {
+          throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);
+        }
+        space.tile.protectedHazard = true;
+        const tileType = space.tile.tileType;
+        if (TileType.DUST_STORM_MILD === tileType || TileType.DUST_STORM_SEVERE === tileType) {
+          player.game.increaseOxygenLevel(player, 1);
+        } else {
         // is an erosion tile when the expression above is false.
-        player.game.increaseTemperature(player, 1);
-      }
-      return undefined;
-    });
+          player.game.increaseTemperature(player, 1);
+        }
+        return undefined;
+      });
   }
 }

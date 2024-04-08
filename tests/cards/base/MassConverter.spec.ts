@@ -12,16 +12,20 @@ describe('MassConverter', function() {
 
   beforeEach(function() {
     card = new MassConverter();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    player.tagsForTest = {science: 4};
+    expect(card.canPlay(player)).is.not.true;
+  });
+
+  it('Can play', function() {
+    player.tagsForTest = {science: 5};
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
-    player.playedCards.push(card, card, card, card, card);
-    expect(player.simpleCanPlay(card)).is.true;
     card.play(player);
 
     expect(player.production.energy).to.eq(6);

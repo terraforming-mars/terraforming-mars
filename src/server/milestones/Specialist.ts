@@ -1,14 +1,14 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Specialist extends BaseMilestone {
   constructor() {
     super(
       'Specialist',
-      'Requires that you have at least 10 in production of any resource',
+      'Have 10 in production of any resource',
       10);
   }
-  public getScore(player: Player): number {
+  public getScore(player: IPlayer): number {
     return Math.max(player.production.megacredits,
       player.production.steel,
       player.production.titanium,

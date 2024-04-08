@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {forceGenerationEnd} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {testGame} from '../../TestGame';
 import {Petra} from '../../../src/server/cards/ceos/Petra';
+import {Politician} from '../../../src/server/awards/terraCimmeria/Politician';
 
 
 describe('Petra', function() {
@@ -77,21 +78,21 @@ describe('Petra', function() {
     // Replace 4 delegates + chairman
     card.action(player);
 
-    expect(scientists.delegates.count(player.id)).eq(2);
-    expect(scientists.partyLeader).eq(player.id);
+    expect(scientists.delegates.count(player)).eq(2);
+    expect(scientists.partyLeader).eq(player);
 
-    expect(greens.delegates.count(player.id)).eq(1);
-    expect(greens.partyLeader).eq(player.id);
+    expect(greens.delegates.count(player)).eq(1);
+    expect(greens.partyLeader).eq(player);
 
-    expect(reds.delegates.count(player.id)).eq(1);
-    expect(reds.partyLeader).eq(player.id);
+    expect(reds.delegates.count(player)).eq(1);
+    expect(reds.partyLeader).eq(player);
 
     expect(player.megaCredits).to.eq(15);
 
     // Make sure that the player has the correct amount of spare delegates
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(2); // 1 Reserve + 1 Lobby
-    expect(turmoil.delegateReserve.has(player.id)).is.true;
-    expect(turmoil.chairman).eq(player.id);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(2); // 1 Reserve + 1 Lobby
+    expect(turmoil.delegateReserve.has(player)).is.true;
+    expect(turmoil.chairman).eq(player);
 
 
     // Send 3 Neutral delegates
@@ -99,7 +100,7 @@ describe('Petra', function() {
     expect(game.deferredActions.length).is.greaterThanOrEqual(3);
 
     while (game.deferredActions.length) {
-      const selectParty = game.deferredActions.pop()!.execute() as SelectPartyToSendDelegate;
+      const selectParty = game.deferredActions.pop()!.execute() as SelectParty;
       if (selectParty !== undefined) {
         selectParty.cb(PartyName.GREENS);
       }
@@ -115,22 +116,34 @@ describe('Petra', function() {
 
     // Replace 6 delegates + chairman
     card.action(player);
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(0);
-    expect(turmoil.delegateReserve.has(player.id)).is.false;
-    expect(turmoil.chairman).eq(player.id);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(0);
+    expect(turmoil.delegateReserve.has(player)).is.false;
+    expect(turmoil.chairman).eq(player);
 
-    expect(scientists.delegates.count(player.id)).eq(4);
-    expect(scientists.partyLeader).eq(player.id);
+    expect(scientists.delegates.count(player)).eq(4);
+    expect(scientists.partyLeader).eq(player);
 
-    expect(greens.delegates.count(player.id)).eq(1);
-    expect(greens.partyLeader).eq(player.id);
+    expect(greens.delegates.count(player)).eq(1);
+    expect(greens.partyLeader).eq(player);
 
-    expect(reds.delegates.count(player.id)).eq(1);
-    expect(reds.partyLeader).eq(player.id);
+    expect(reds.delegates.count(player)).eq(1);
+    expect(reds.partyLeader).eq(player);
 
     // We should have been paid 3MC for every swap, 7*3 total
     expect(player.megaCredits).to.eq(21);
   });
+
+
+  it('OPG Counts for POLITICAN Award', function() {
+    const politician = new Politician();
+    game.awards = [];
+    game.awards.push(politician);
+    const preOPGScore = game.awards[0].getScore(player);
+    card.action(player);
+    runAllActions(game);
+    expect(game.awards[0].getScore(player)).eq(preOPGScore+5); // 1 Chairman, 4 Delegates
+  });
+
 
   it('Can only act once per game', function() {
     card.action(player);

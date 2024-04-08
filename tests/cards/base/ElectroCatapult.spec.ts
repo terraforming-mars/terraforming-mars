@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ElectroCatapult} from '../../../src/server/cards/base/ElectroCatapult';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {churnAction, cast, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -22,7 +22,7 @@ describe('ElectroCatapult', () => {
   });
 
   it('Cannot play if oxygen level too high', () => {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 9);
     expect(card.canPlay(player)).is.not.true;
   });
@@ -34,7 +34,7 @@ describe('ElectroCatapult', () => {
   });
 
   it('Should play', () => {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     player.playCard(card);
 
     expect(player.production.energy).to.eq(0);

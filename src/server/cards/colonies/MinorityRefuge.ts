@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
@@ -27,9 +27,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
     });
   }
 
-  public warning?: string;
-
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.colonies.getPlayableColonies().length === 0) {
       return false;
     }
@@ -46,13 +44,13 @@ export class MinorityRefuge extends Card implements IProjectCard {
       if (lunaIsAvailable === false) {
         return false;
       }
-      this.warning = 'You will only be able to build the colony on Luna.';
+      this.warnings.add('buildOnLuna');
     }
 
     return true;
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const openColonies = player.production.megacredits <= -4 ?
       player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
       undefined;
@@ -61,10 +59,8 @@ export class MinorityRefuge extends Card implements IProjectCard {
         player, {
           title: 'Select colony for Minority Refuge',
           colonies: openColonies,
-          cb: () => {
-            player.production.add(Resources.MEGACREDITS, -2);
-          },
-        }));
+        }))
+      .andThen(() => player.production.add(Resource.MEGACREDITS, -2));
     return undefined;
   }
 }

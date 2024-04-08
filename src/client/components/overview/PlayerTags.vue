@@ -2,7 +2,7 @@
     <div class="player-tags">
         <div class="player-tags-main">
             <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
-            <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
+            <div v-if="isEscapeVelocityOn" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
               <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
             </div>
             <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
@@ -28,7 +28,6 @@
 
 import Vue from 'vue';
 import TagCount from '@/client/components/TagCount.vue';
-import {ITagCount} from '@/common/cards/ITagCount';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {GameModel} from '@/common/models/GameModel';
 import {Tag} from '@/common/cards/Tag';
@@ -70,33 +69,47 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.INFLUENCE,
   SpecialTags.CITY_COUNT,
   SpecialTags.COLONY_COUNT,
+  SpecialTags.EXCAVATIONS,
+  SpecialTags.CORRUPTION,
 ];
 
-// TODO(kberg): Possibly pull this from server model.
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
-  if (game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) return false;
+  const gameOptions = game.gameOptions;
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
-  if (game.gameOptions.venusNextExtension === false && tag === Tag.VENUS) return false;
-  if (game.gameOptions.moonExpansion === false && tag === Tag.MOON) return false;
-  if (game.gameOptions.pathfindersExpansion === false && tag === Tag.MARS) return false;
+  switch (tag) {
+  case SpecialTags.COLONY_COUNT:
+    return gameOptions.coloniesExtension !== false;
+  case SpecialTags.INFLUENCE:
+    return game.turmoil !== undefined;
+  case SpecialTags.EXCAVATIONS:
+  case SpecialTags.CORRUPTION:
+    return gameOptions.underworldExpansion !== false;
+  case Tag.VENUS:
+    return game.gameOptions.venusNextExtension !== false;
+  case Tag.MOON:
+    return game.gameOptions.moonExpansion !== false;
+  case Tag.MARS:
+    return (gameOptions.pathfindersExpansion || gameOptions.underworldExpansion);
+  }
   return true;
 };
 
 const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): number => {
-  if (tagName === SpecialTags.COLONY_COUNT) {
+  switch (tagName) {
+  case SpecialTags.COLONY_COUNT:
     return player.coloniesCount || 0;
-  }
-  if (tagName === SpecialTags.INFLUENCE) {
+  case SpecialTags.INFLUENCE:
     return player.influence || 0;
-  }
-  if (tagName === SpecialTags.CITY_COUNT) {
+  case SpecialTags.CITY_COUNT:
     return player.citiesCount || 0;
-  }
-  if (tagName === SpecialTags.NONE) {
+  case SpecialTags.NONE:
     return player.noTagsCount || 0;
+  case SpecialTags.EXCAVATIONS:
+    return player.excavations;
+  case SpecialTags.CORRUPTION:
+    return player.corruption;
   }
-
-  return player.tags.find((tag: ITagCount) => tag.tag === tagName)?.count ?? 0;
+  return player.tags.find((tag) => tag.tag === tagName)?.count ?? 0;
 };
 
 export default Vue.extend({
@@ -159,7 +172,7 @@ export default Vue.extend({
     }
 
     // Put them in order.
-    const tagsInOrder: Array<TagDetail> = [];
+    const tagsInOrder = [];
     for (const tag of ORDER) {
       const entry = details[tag];
       tagsInOrder.push(entry);
@@ -202,7 +215,8 @@ export default Vue.extend({
         if (!isInGame(entry.name, this.playerView.game)) {
           return false;
         }
-        if (entry.count === 0) {
+
+        if (entry.count === 0 && entry.discount === 0) {
           if (this.hideZeroTags || concise) {
             return false;
           }

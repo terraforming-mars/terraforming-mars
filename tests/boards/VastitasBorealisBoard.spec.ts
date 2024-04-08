@@ -1,29 +1,25 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {VastitasBorealisBoard} from '../../src/server/boards/VastitasBorealisBoard';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
-import {SeededRandom} from '../../src/server/Random';
-import {testGameOptions, runAllActions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/server/SpaceName';
+import {testGame} from '../TestGame';
 
 describe('VastitasBorealisBoard', function() {
   let board: VastitasBorealisBoard;
   let game: Game;
   let player: TestPlayer;
-  let player2: TestPlayer;
 
   beforeEach(function() {
-    board = VastitasBorealisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA}));
+    [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS});
+    board = cast(game.board, VastitasBorealisBoard);
   });
 
   it('Grants temperature bonus', () => {
-    const space = board.getSpace(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
+    const space = board.getSpaceOrThrow(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
 
     player.megaCredits = 2;
     expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).does.not.include(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);

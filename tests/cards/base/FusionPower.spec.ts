@@ -9,17 +9,17 @@ describe('FusionPower', function() {
 
   beforeEach(function() {
     card = new FusionPower();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    player.tagsForTest = {power: 1};
+    expect(card.canPlay(player)).is.not.true;
+    player.tagsForTest = {power: 2};
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
-    player.playedCards.push(card, card);
-    expect(player.simpleCanPlay(card)).is.true;
-
     card.play(player);
     expect(player.production.energy).to.eq(3);
   });

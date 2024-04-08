@@ -38,8 +38,10 @@ import {Firestarter} from './terraCimmeria/Firestarter';
 import {Gambler} from './terraCimmeria/Gambler';
 import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
+import {Risktaker} from './underworld/Risktaker';
+import {Tunneler} from './underworld/Tunneler';
 
-export const THARSIS_MILESTONES: Array<IMilestone> = [
+export const THARSIS_MILESTONES = [
   new Terraformer(),
   new Mayor(),
   new Gardener(),
@@ -47,11 +49,11 @@ export const THARSIS_MILESTONES: Array<IMilestone> = [
   new Planner(),
 ];
 
-export const VENUS_MILESTONES: Array<IMilestone> = [
+export const VENUS_MILESTONES = [
   new Hoverlord(),
 ];
 
-export const ELYSIUM_MILESTONES: Array<IMilestone> = [
+export const ELYSIUM_MILESTONES = [
   new Generalist(),
   new Specialist(),
   new Ecologist(),
@@ -59,7 +61,15 @@ export const ELYSIUM_MILESTONES: Array<IMilestone> = [
   new Legend(),
 ];
 
-export const HELLAS_MILESTONES: Array<IMilestone> = [
+export const UTOPIA_PLANITIA_MILESTONES = [
+  // new Specialist(),
+  // new Pioneer(),
+  // new Trader(),
+  // new Metallurgist(),
+  // new Researcher(),
+];
+
+export const HELLAS_MILESTONES = [
   new Diversifier(),
   new Tactician(),
   new PolarExplorer(),
@@ -67,11 +77,11 @@ export const HELLAS_MILESTONES: Array<IMilestone> = [
   new RimSettler(),
 ];
 
-export const ARES_MILESTONES: Array<IMilestone> = [
+export const ARES_MILESTONES = [
   new Networker(),
 ];
 
-export const MOON_MILESTONES: Array<IMilestone> = [
+export const MOON_MILESTONES = [
   new OneGiantStep(),
   new Lunarchitect(),
 ];
@@ -100,7 +110,7 @@ export const TERRA_CIMMERIA_MILESTONES = [
   new Gambler(),
 ];
 
-export const VASTITAS_BOREALIS_MILESTONES: Array<IMilestone> = [
+export const VASTITAS_BOREALIS_MILESTONES = [
   new Electrician(),
   new Smith(),
   new Tradesman(),
@@ -108,10 +118,16 @@ export const VASTITAS_BOREALIS_MILESTONES: Array<IMilestone> = [
   new Capitalist(),
 ];
 
-export const ALL_MILESTONES: Array<IMilestone> = [
+export const UNDERWORLD_MILESTONES = [
+  new Risktaker(),
+  new Tunneler(),
+];
+
+export const ALL_MILESTONES = [
   ...THARSIS_MILESTONES,
   ...ELYSIUM_MILESTONES,
   ...HELLAS_MILESTONES,
+  ...UTOPIA_PLANITIA_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,
@@ -119,8 +135,10 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...ARABIA_TERRA_MILESTONES,
   ...TERRA_CIMMERIA_MILESTONES,
   ...VASTITAS_BOREALIS_MILESTONES,
+  ...UNDERWORLD_MILESTONES,
 ];
 
+// Remove namespace and rename function
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;
 

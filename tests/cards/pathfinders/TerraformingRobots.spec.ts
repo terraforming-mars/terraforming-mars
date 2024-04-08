@@ -19,7 +19,7 @@ describe('TerraformingRobots', function() {
 
   beforeEach(function() {
     card = new TerraformingRobots();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();
@@ -37,7 +37,7 @@ describe('TerraformingRobots', function() {
   it('onCardPlayed', () => {
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player, fakeCard({}));
+    card.onCardPlayed(player, fakeCard());
     expect(card.resourceCount).eq(0);
 
     card.onCardPlayed(player, fakeCard({

@@ -13,7 +13,6 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
       name: CardName.GIANT_ICE_ASTEROID,
       tags: [Tag.SPACE],
       cost: 36,
-      tr: {temperature: 2, oceans: 2},
 
       behavior: {
         global: {temperature: 2},

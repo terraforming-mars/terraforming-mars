@@ -5,6 +5,7 @@ import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {Teractor} from '../../../src/server/cards/corporation/Teractor';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('Teractor', function() {
   let card: Teractor;
@@ -12,10 +13,9 @@ describe('Teractor', function() {
 
   beforeEach(function() {
     card = new Teractor();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
 
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
 

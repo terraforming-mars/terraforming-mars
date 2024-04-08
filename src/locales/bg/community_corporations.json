@@ -1,0 +1,27 @@
+{
+  "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Започвате с 40 M€, 1 производство на растения, 1 производство на M€ и 1 производство на топлина",
+  "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Ефект: На края на играта, спечелете -2/0/1/2 ТП за 0/1-2/3-4/5+ изиграни вида етикети.",
+  "You start with 39 M€, 1 steel, and 1 titanium. As your first action, draw a blue card.": "Започвате с 39 M€, 1 стомана и 1 титан. Като ваше първо действие, изтеглете синя карта.",
+  "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Действие: Обърнете и изхвърлете изиграна синя карта, за да превърнете всяко ТП върху нея в ТР и изтеглете 2 карти или похарчете 3 M€, за да изтеглите синя карта.",
+
+  "Incite": "Подбуждане",
+  "You start with 32 M€. As your first action, place two delegates in one party.": "Започвате с 32 M€. Като ваше първо действие, поставете двама делегати в една партия.",
+  "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "Ефект: Имате +1 влияние. Когато изпращате делегат чрез лобиране, плащате с 2 M€ по-малко за него.",
+
+  "Action: Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.)": "Действие: Повторно изиграйте изиграно събитие от всеки играч, като плащате само в M€ (важат отстъпки и възстановявания), след това ГО ПРЕМАХНЕТЕ ОТ ИГРА.",
+  "You start with 38 M€ and 1 energy production.": "Започвате с 38 M€ и 1 производство на енергия.",
+  "Select event card to replay at cost in M€ and remove from play": "Изберете събитийна карта за повторно възпроизвеждане на стойност в M€ и премахване от игра",
+  "You start with 40 M€ and 2 steel production.": "Започвате с 40 M€ и 2 нива производство на стомана.",
+  "Effect: When you place a tile on an area that has a RESOURCE placement bonus*, you may pay 3 M€ to draw a card. (or place a tile on top of another tile with a RESOURCE placement bonus underneath)": "Когато поставите плочка в зона, която има бонус за поставяне на РЕСУРС *, може да заплатите 3 M€, за да изтеглите карта. (или да поставите плочка върху друга плочка с бонус за поставяне на РЕСУРС под нея)",
+  "Pay 3 M€ to draw a card": "Платете 3 M€, за да изтеглите карта",
+  "Confirm": "ОК",
+  "Select how to pay for action": "Изберете как да платите за действието",
+  "Do nothing": "Не прави нищо",
+
+  "Playwrights": "Драматурзи",
+  "Action: Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Действие: Повторно изиграйте изиграно събитие от всеки играч, като плащате само в M€ (важат отстъпки и възстановявания), след това ГО ПРЕМАХНЕТЕ ОТ ИГРА.",
+
+  "Midas": "Мидас",
+  "You start with 120 M€. Lower your TR 7 steps.": "Започвате с 120 M€. Намалете своя ТР с 7 стъпки.",
+  "": ""
+}

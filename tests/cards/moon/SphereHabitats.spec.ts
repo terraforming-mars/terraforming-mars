@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SphereHabitats} from '../../../src/server/cards/moon/SphereHabitats';
 import {expect} from 'chai';
@@ -11,7 +10,7 @@ describe('SphereHabitats', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player], player, {moonExpansion: true});
     card = new SphereHabitats();
   });
 
@@ -19,9 +18,9 @@ describe('SphereHabitats', () => {
     player.cardsInHand = [card];
     player.titanium = 0;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCards()).does.not.include(card);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
     player.titanium = 1;
-    expect(player.getPlayableCards()).does.include(card);
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', () => {
@@ -32,7 +31,7 @@ describe('SphereHabitats', () => {
     card.play(player);
 
     expect(player.titanium).eq(2);
-    // PlaceMoonHabitatTile is what's responsible for raising the colony rate.
+    // PlaceMoonHabitatTile is what's responsible for raising the habitat rate.
     // Currently that path is already tested with existing code.
     // So I won't keep repeating it.
     // That said, PlaceMoonRoadTile could have its own test. :D

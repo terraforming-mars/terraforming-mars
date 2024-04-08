@@ -3,7 +3,7 @@ import {StripMine} from '../../src/server/cards/base/StripMine';
 import {Election} from '../../src/server/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestGame';
-import {addCityTile, fakeCard} from '../TestingUtils';
+import {addCity, fakeCard} from '../TestingUtils';
 import {Tag} from '../../src/common/cards/Tag';
 
 describe('Election', function() {
@@ -15,11 +15,11 @@ describe('Election', function() {
     player.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
-    addCityTile(player3);
-    turmoil.chairman = player2.id;
+    addCity(player3);
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
 
     expect(card.getScore(player, turmoil, game)).eq(1);
     expect(card.getScore(player2, turmoil, game)).eq(4);

@@ -6,8 +6,9 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast, maxOutOceans, runAllActions, setTemperature} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('ArtificialLake', function() {
   let card: ArtificialLake;
@@ -20,21 +21,19 @@ describe('ArtificialLake', function() {
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
-    const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.availableSpaces.forEach((space) => {
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.spaces.forEach((space) => {
       expect(space.spaceType).to.eq(SpaceType.LAND);
     });
 
-    action.cb(action!.availableSpaces[0]);
-    const placedTile = action.availableSpaces[0].tile;
-    expect(placedTile!.tileType).to.eq(TileType.OCEAN);
+    UnderworldTestHelper.assertPlaceOcean(player, selectSpace);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
@@ -45,17 +44,16 @@ describe('ArtificialLake', function() {
 
     // Set oceans count to the max value
     for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
-      if (game.board.getOceanCount() < constants.MAX_OCEAN_TILES) {
-        game.addOceanTile(player, space);
+      if (game.board.getOceanSpaces().length < constants.MAX_OCEAN_TILES) {
+        game.addOcean(player, space);
       }
     }
 
     // Card is still playable to get VPs...
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // ...but an action to place ocean is not unavailable
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Cannot place ocean if all land spaces are occupied', function() {
@@ -71,14 +69,14 @@ describe('ArtificialLake', function() {
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(1);
 
     // Card is still playable.
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // No spaces left?
     game.simpleAddTile(player, spaces[0], {tileType: TileType.GREENERY});
     expect(game.board.getAvailableSpacesOnLand(player)).has.length(0);
 
     // Cannot play.
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
   });
 
   it('Can still play if oceans are maxed but no land spaces are available', function() {
@@ -91,6 +89,17 @@ describe('ArtificialLake', function() {
       game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
     });
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Works with reds', () => {
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+
+    // Card requirements
+    setTemperature(game, -6);
+
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
+    maxOutOceans(player2);
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
   });
 });

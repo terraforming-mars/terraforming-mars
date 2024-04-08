@@ -1,12 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 
 export class TerraformingRobots extends Card implements IProjectCard {
@@ -14,14 +13,14 @@ export class TerraformingRobots extends Card implements IProjectCard {
     super({
       type: CardType.ACTIVE,
       name: CardName.TERRAFORMING_ROBOTS,
-      cost: 7,
+      cost: 10,
       tags: [Tag.SCIENCE],
       resourceType: CardResource.SPECIALIZED_ROBOT,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
+      requirements: {tag: Tag.SCIENCE, count: 4},
       victoryPoints: {resourcesHere: {}},
 
       metadata: {
-        cardNumber: 'PfTMP',
+        cardNumber: 'PfT12',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Mars tag, add 1 specialized robot on this card.', (eb) => {
             eb.mars(1, {played}).startEffect.specializedRobot(1);
@@ -34,7 +33,7 @@ export class TerraformingRobots extends Card implements IProjectCard {
   }
 
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     const qty = player.tags.cardTagCount(card, Tag.MARS);
     player.addResourceTo(this, {log: true, qty});
   }

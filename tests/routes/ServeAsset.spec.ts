@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {FileAPI, ServeAsset} from '../../src/server/routes/ServeAsset';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {statusCode} from '../../src/common/http/statusCode';
 class FileApiMock extends FileAPI {
   public counts = {
     readFile: 0,
@@ -52,7 +53,7 @@ describe('ServeAsset', () => {
     scaffolding.url = 'goo.goo.gaa.gaa';
     scaffolding.req.headers['accept-encoding'] = '';
     await scaffolding.get(instance, res);
-    expect(res.statusCode).eq(404);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found');
   });
 

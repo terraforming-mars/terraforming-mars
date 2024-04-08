@@ -1,8 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
@@ -28,14 +28,14 @@ export class Hackers extends Card implements IProjectCard {
             pb.plus().megacredits(2);
           });
         }),
-        description: 'Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.',
+        description: 'Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.',
       },
     });
   }
 
-  public override bespokePlay(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(
-      new DecreaseAnyProduction(player, Resources.MEGACREDITS, {count: 2, stealing: true}));
+      new DecreaseAnyProduction(player, Resource.MEGACREDITS, {count: 2, stealing: true}));
     return undefined;
   }
 }

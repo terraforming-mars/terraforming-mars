@@ -1,0 +1,52 @@
+{
+  "Beginner": "Начинаещ",
+  "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Започвате с 42 M€. Вместо избора от 10 карти по време настройката, вземате 10 карти безплатно.",
+
+  "Credicor": "Кредикор",
+  "You start with 57 M€.": "Започвате с 57 M€.",
+  "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "Ефект: След като платите за карта или стандартен проект с основна стойност от 20M€ или повече, получавате 4 M€.",
+
+  "Ecoline": "Еколайн",
+  "You start with 2 plant production, 3 plants, and 36 M€.": "Започвате с 2 производство на растения, 3 растения и 36 M€.",
+  "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Ефект: Винаги можете да платите 7 растения, вместо 8, за поставяне на зеленина.",
+
+  "Helion": "Хелион",
+  "You start with 3 heat production and 42 M€.": "Започвате с 3 производство на топлина и 42 M€.",
+  "Effect: You may use heat as M€. You may not use M€ as heat.": "Ефект: Можете да използвате топлината като M€. Не можете да използвате M€ като топлина.",
+
+  "Interplanetary Cinematics": "Междупланетна кинематография",
+  "You start with 20 steel and 30 M€.": "Започвате с 20 стомана и 30 M€.",
+  "Effect: Each time you play an event, you gain 2 M€.": "Ефект: Всеки път, когато разыгравате събитие, получавате 2 M€.",
+
+  "Inventrix": "Инвентрикс",
+  "As your first action in the game, draw 3 cards. Start with 45 M€.": "Като първо действие в играта, изтеглете 3 карти. Започвате с 45 M€.",
+  "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Ефект: Вашите изисквания за температура, кислород, океан и Венера са с +2 или -2 стъпки, ваш избор във всяка ситуация.",
+
+  "Phobolog": "Фоболог",
+  "You start with 10 titanium and 23 M€.": "Започвате с 10 титан и 23 M€.",
+  "Effect: Your titanium resources are each worth 1 M€ extra.": "Ефект: Всеки ваши титанови ресурси струват с по 1 M€ повече.",
+
+  "Tharsis Republic": "Тарсис Република",
+  "You start with 40 M€. As your first action in the game, place a city tile.": "Започвате с 40 M€. Като първо действие в играта, поставете плочка на град.",
+  "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Ефект: Когато поставите плочка на град НА МАРС, увеличете производството на M€ с 1 стъпка. Когато поставите плочка на град, получавате 3 M€.",
+
+  "Thorgate": "Торгейт",
+  "You start with 1 energy production and 48 M€.": "Започвате с 1 производство на енергия и 48 M€.",
+  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Ефект: При игра на карта за енергия ИЛИ СТАНДАРТНИЯ ПРОЕКТ ЗА ЕЛЕКТРОЦЕНТРАЛА, плащате с 3 M€ по-малко.",
+
+  "UNMI": "ООН",
+  "You start with 40 M€.": "Започвате с 40 M€.",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Действие: Ако Рейтингът ви за тераформиране беше увеличен този ход, можете да платите 3 M€, за да го повишите с 1 стъпка повече.",
+
+  "Mining Guild": "Гилдия на миньорите",
+  "You start with 30 M€, 5 steel and 1 steel production.": "Започвате с 30 M€, 5 стоманени и 1 производство на стомана.",
+  "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "Ефект: Всяки път, когато поставите плочка на район с бонус за стомана или титан, увеличете производството на стомана с 1 стъпка.",
+
+  "Terractor": "Терактор",
+  "You start with 60 M€.": "Започвате с 60 M€.",
+  "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Ефект: При игра на карта с етикет Земя, плащате с 3 M€ по-малко.",
+
+  "Saturn Systems": "Сатурн Системс",
+  "You start with 1 titanium production and 42 M€.": "Започвате с 1 производство на титан и 42 M€.",
+  "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Ефект: Всяки път, когато се появи някоя Юпитерианска карта, включително тази, увеличете производството на M€ с 1 стъпка."
+}

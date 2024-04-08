@@ -1,0 +1,309 @@
+{
+    "Basic Infrastructure": "Basisinfrastructuur",
+    "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1. Ontvang 1 handelsvloot.",
+
+    "Core Mine": "Hoofdmijn",
+    "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "Plaats een mijntegel op de maan en verhoog de mijnwaarde met 1. Verhoog je titaniumproductie met 1.",
+
+    "First Lunar Settlement": "1e maannederzetting",
+    "Place a habitat tile on The Moon and raise the habitat rate 1 step. Increase your M€ production 1 step.": "Plaats een habitattegel op de maan en verhoog de habitatwaarde met 1. Verhoog je M€-productie met 1.",
+
+    "Lunar Planning Office": "Maan Planbureau",
+    "Draw 2 cards with a Moon tag. Gain 6 steel.": "Trek 2 kaarten met een maansymbool. Ontvang 6 staal.",
+
+    "Mining Complex": "Mijnbouwcomplex",
+    "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "Plaats een mijntegel op de maan en verhoog de mijnbouwwaarde met 1. Plaats een wegtegel naast de geplaatste mijnbouwtegel en verhoog de logistiekwaarde met 1. Betaal 7 M€.",
+
+    "AI Controlled Mine Network": "AI-gecontroleerd mijnbouwnetwerk",
+    "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "Vereist een logistiekwaarde van 2 of hoger. Verhoog de logistiekwaarde met 1.",
+
+    "Algae Bioreactors": "Algen bioreaktoren",
+    "Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.": "Verminder je plantproductie met 1. Verhoog de habitatwaarde met 1 en het zuurstofgehalte met 1%.",
+
+    "An Offer You Can't Refuse": "Een aanbod dat je niet kunt weigeren",
+    "Exchange a NON-NEUTRAL NON-LEADER delegate with one of your own from the reserve. You may then move your delegate to another party.": "Ruil een NIET-NEUTRAAL NIET-LEIDER-afgevaardigde in voor een uit je eigen reserve. Je kunt je gemachtigde dan overdragen aan een andere partij.",
+
+    "Ancient Shipyards": "Oude scheepswerven",
+
+    "Ancient Shipyards (Nerfed)": "Oude scheepswerven (Nerfed)",
+    "Action: Steal 2 M€ from each player and add a resource cube here.": "ACTIE: Steel 2 M€ van elke speler en voeg een grondstofblokje toe aan deze kaart.",
+    "Spend 3 titanium. -1 VP for every resource here.": "Betaal 3 titanium. -1 OP per grondstofblokje op deze kaart.",
+
+    "Archimedes Hydroponics Station": "Archimedes hydrocultuurstation",
+    "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Verlaag de energieproductie en de M€-productie met 1. Verhoog je plantproductie met 2.",
+
+    "Aristarchus Road Network": "Aristarchus wegennet",
+    "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Betaal 2 staal. Verhoog je M€-productie met 2. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
+
+    "Colonist Shuttles": "Kolonisten-shuttles",
+    "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Betaal 1 titanium. Verhoog de habitatwaarde met 1. Ontvang 2 M€ voor elke habitattegel op de maan.",
+
+    "Copernicus Solar Arrays": "Copernicus zonnecellen",
+    "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "Betaal 1 titanium. Ontvang 2 warmte. Verhoog je energieproductie met 1.",
+
+    "Copernicus Tower": "Copernicus-toren",
+    "Requires you have 2 titanium production.": "Vereist 2 titaniumproductie.",
+    "Action: Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.": "ACTIE: Voeg 1 wetenschap toe aan deze kaart of verwijder hier 1 wetenschap om je TW met 1 te verhogen.",
+    "1 VP PER MOON TAG YOU HAVE.": "1 OP PER EIGEN MAANSYMBOOL.",
+
+    "Cosmic Radiation": "Kosmische stralen",
+    "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Vereist een mijnwaarde van 4. Alle spelers betalen 4 M€ voor elke mijntegel die ze bezitten.",
+
+    "Darkside Incubation Plant": "Incubatiefaciliteit aan donkere zijde",
+    "Action: Add 1 microbe here.": "ACTIE: Voeg 1 microbe toe aan deze kaart.",
+    "Action: Spend 2 microbes to raise the habitat rate 1 step.": "ACTIE: Verwijder 2 microben van deze kaart om de habitatwaarde met 1 te verhogen.",
+    "Spend 1 titanium. 1 VP for every 2 microbes here.": "Betaal 1 titanium. 1 OP voor elke 2 microben op deze kaart.",
+
+    "Darkside Meteor Bombardment": "Meteoorbombardement aan donkere zijde",
+    "Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.": "Ontvang 2 staal en 2 titanium. Verhoog mijnwaarde met 2.",
+
+    "Darkside Mining Syndicate": "Mijnsyndicaat aan donkere zijde",
+    "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Verhoog je titaniumproductie met 2 of met 1 als de mijnwaarde 2 of meer is en verhoog vervolgens de mijnwaarde met 1.",
+
+    "Darkside Observatory": "Observatorium aan donkere zijde",
+    "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "ACTIE: Voeg 1 wetenschap toe aan een willekeurige kaart [behalve kaarten die 2 of meer OP per wetenschap opleveren].",
+    "Action: Add 2 data to ANY card.": "ACTIE: Voeg 2 data toe aan een kaart.",
+
+    "Deep Lunar Mining": "Diepe maanmijnbouw",
+    "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Betaal 1 titanium. Verhoog je titaniumproductie met 2. Verhoog de mijnwaarde met 1.",
+
+    "Earth Embassy": "Aarde Ambassade",
+    "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.": "EFFECT: Als je een actie uitvoert, tellen je maansymbolen als aardesymbolen, maar niet andersom.",
+
+    "Geodesic Tents": "Geodetische tenten",
+    "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Verlaag je energieproductie met 1 en verhoog je plantproductie met 1. Betaal 1 titanium. Plaats een habitattegel op de maan en verhoog de habitatwaarde met 1.",
+
+    "Grand Luna Academy": "Grote Maan Academie",
+    "Draw 1 card per 2 Moon tags you have, including this.": "Trek 1 kaart voor elke 2 maansymbolen die je bezit, inclusief deze.",
+
+    "HE3 Fusion Plant": "HE3 fusie-energiecentrale",
+    "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "Vereist een mijnwaarde van 2 of hoger. Verhoog je energieproductie met 1 voor elke mijntegel op de maan.",
+
+    "HE3 Lobbyists": "HE3-lobbyisten",
+    "Increase your M€ production 1 step for each Moon tag you have (including this).": "Verhoog je M€-productie met 1 voor elk maansymbool dat je bezit (inclusief dit symbool).",
+
+    "HE3 Production Quotas": "HE3-productiequota",
+    "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "Vereist dat Kelvinisten heersen of dat je daar 2 afgevaardigden hebt en 1 mijntegel op de maan. Betaal 1 staal per mijntegel op de maan om 4 warmte per mijntegel te krijgen. Verhoog de mijnwaarde met 1.",
+
+    "HE3 Refinery": "HE3-raffinaderij",
+    "Action: Gain 1 M€ for each level of mining rate.": "ACTIE: Ontvang 1 M€ voor elke mijnwaarde.",
+
+    "Habitat 14": "Habitat 14",
+    "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Verminder je energieproductie en je M€-productie met 1. Betaal 1 titanium. Plaats een habitattegel op de maan en verhoog de habitatwaarde met 1.",
+
+    "Heavy Duty Rovers": "Zware vracht Rovers",
+    "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the logistic rate 1 step.": "Ontvang 4 M€ voor elke mijntegel naast een wegtegel. Verhoog de logistiekwaarde met 1.",
+
+    "Heliostat Mirror Array": "Heliostat-spiegelarray",
+    "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "Betaal 1 titanium. Ontvang 1 warmte. Verhoog je energieproductie met 2.",
+
+    "Hypersensitive Silicon Chip Factory": "Supergevoelige siliciumchipfabrik",
+    "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "Vereist 2 mijntegels op de maan. Betaal 2 titanium. Verhoog je M€-productie met 4.",
+
+    "Improved Moon Concrete": "Verbeterd maanbeton",
+    "Effect: When you build a mine on The Moon, you spend 1 titanium less.": "EFFECT: Als je een mijntegel op de maan legt, betaal je 1 titanium minder.",
+    "Spend 2 steel. Raise the mining rate 1 step.": "Betaal 2 staal. Verhoog de mijnwaarde met 1.",
+
+    "Iron Extraction Center": "Centrum voor ijzerwinning",
+    "Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.": "Betaal 1 titanium. Verhoog je staalproductie telkens met 1 als de mijnwaarde met 2 omhoog gaat.",
+
+    "L.T.F. Headquarters": "L.T.F.-Hoofdkwartier",
+    "Raise the habitat rate 1 step. Place a colony. Gain 1 Trade Fleet.": "Verhoog de habitatwaarde met 1. Plaats een kolonie. Krijg 1 handelsvloot.",
+
+    "L.T.F. Privileges": "L.T.F.-Privileges",
+    "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "EFFECT: Als je een maansymbool speelt, betaal je geen extra staal of titaan voor het spelen van die symbolen.",
+
+    "Luna Conference": "Maanconferentie",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "Vereist dat WETENSCHAPPERS regeren of dat je daar 2 afgevaardigden hebt. Ontvang 2 M€ per wegtegel op de maan. Ontvang 2 M€ per habitattegel op de maan.",
+
+    "Luna Mining Hub": "Maan-mijnbouwcentrum",
+    "Requires a mining rate of 5 or higher.": "Vereist een mijnwaarde van 5 of hoger.",
+    "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "Betaal 1 staal en 1 titanium en verhoog je staal- en titaanproductie met 1.",
+    "Place this tile on The Moon and raise the mining rate 1 step.": "Plaats deze tegel op de maan en verhoog de mijnwaarde met 1.",
+    "2 VP PER MINING TILE ADJACENT TO THIS TILE.": "2 OP PER MIJNTEGEL NAAST DEZE TEGEL.",
+
+    "Luna Political Institute": "Politiek Instituut Maan",
+    "Action: Place one of your delegates in any party.": "ACTIE: Verplaats een van je afgevaardigden van reserve naar een willekeurige partij.",
+    "Requires that you have 2 Moon tags.": "Vereist 2 eigen maansymbolen.",
+
+    "Luna Project Office": "Maan projectbureau",
+    "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "TREK 5 KAARTEN IN DE ONDERZOEKSFASE VOOR DE VOLGENDE 2 GENERATIES.",
+
+    "Luna Resort": "Maan Resort",
+    "Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.": "Vereist 2 habitats op de maan. Betaal 2 titanium. Verminder je energieproductie met 1 en verhoog je M€-productie met 3. Verhoog de habitatwaarde met 1.",
+
+    "Luna Senate": "Maansenaat",
+    "1 VP per Moon tag you have.": "1 OP PER EIGEN MAANSYMBOOL.",
+    "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)": "Vereist 3 eigen maansymbolen. Verhoog je M€-productie met 1 per maansymbool in het spel (inclusief deze).",
+
+    "Luna Staging Station": "Maan-tussenstation",
+    "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "Vereist een logistiekwaarde van 2 of hoger. Betaal 1 titanium. Verhoog de logistiekwaarde met 2.",
+
+    "Luna Trade Station": "Maan-handelscentrum",
+    "Action: Gain 2 M€ for each habitat tile on The Moon.": "ACTIE: Ontvang 2 M€ voor elke habitattegel op de maan.",
+    "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "Betaal 2 titanium. Plaats deze tegel OP HET GERESERVEERDE GEBIED.",
+
+    "Luna Train Station": "Maan-treinstation",
+    "Requires a logistic rate of 5 or higher. Spend 2 steel. Increase your M€ production 4 steps. Place this tile on The Moon and raise the logistic rate 1 step. 2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.": "Vereist een logistiekwaarde van 5 of hoger. Betaal 2 staal. Verhoog je M€-productie met 4. Plaats deze tegel op de maan en verhoog de logistiekwaarde met 1. 2 OP PER WEGTEGEL NAAST DEZE TEGEL.",
+
+    "Lunar Dust Processing Plant": "Maanstofverwerkingsinstallatie",
+    "Effect: When you place a road tile on The Moon, you spend no steel on it.": "EFFECT: Als je een wegtegel op de maan legt, betaal je er geen extra staal voor.",
+    "Spend 1 titanium. Raise the logistic rate 1 step.": "Betaal 1 titanium. Verhoog de logistiekwaarde met 1.",
+
+    "Lunar Industry Complex": "Maan industrieel complex",
+    "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "Betaal 2 titanium. Plaats een mijntegel op de maan en verhoog mijnwaarde met 1. Verhoog je staal-, titanium- en warmteproductie elk met 1. Verhoog je energieproductie met 2.",
+
+    "Lunar Mine Urbanization": "Maanmijn verstedelijking",
+    "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "Vereist 1 eigen mijntegel. Verhoog je M€-productie met 1. Vervang een van je mijntegels door deze speciale tegel. Verhoog de habitatwaarde met 1. Deze tegel telt zowel als habitattegel als mijntegel.",
+
+    "Lunar Observation Post": "Maan-observatiepost",
+    "Action: Add 1 data resource to ANY card": "ACTIE: Voeg 1 data-grondstof toe aan een willekeurige kaart.",
+    "Spend 1 titanium. 1 VP for every 3 data resources here.": "Betaal 1 titanium. 1 OP voor elke 3 data op deze kaart.",
+
+    "Lunar Security Stations": "Maan-veiligheidsstations",
+    "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "Vereist 3 wegtegels op de maan. Verhoog de logistiekwaarde met 1.",
+
+    "Lunar Steel": "Maanstaal",
+
+    "Lunar Trade Fleet": "Maan-handelsvloot",
+    "2 titanium production": "Vereist 2 titaniumproductie.",
+    "Requires that you have 2 titanium production. Increase your M€ production 1 step. Raise the logistic rate 1 step.": "Vereist een titaniumproductie van 2. Verhoog je M€-productie met 1. Verhoog de logistiekwaarde met 1.",
+
+    "Mare Imbrium Mine": "Mare Imbrium-mijn",
+    "Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Betaal 1 titanium. Verhoog je staalproductie en titaniumproductie met 1. Plaats een mijn OP HET GERESERVEERDE GEBIED en verhoog de mijnwaarde met 1.",
+
+    "Mare Nectaris Mine": "Mare Nectaris-mijn",
+    "Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Betaal 1 titanium. Verhoog je staalproductie met 1. Plaats een mijn OP HET GERESERVEERDE GEBIED en verhoog de mijnwaarde met 1.",
+
+    "Mare Nubium Mine": "Mare Nubium-mijn",
+    "Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Betaal 1 titanium. Verhoog je titaanproductie met 1. Plaats een mijn OP HET GERESERVEERDE GEBIED en verhoog de mijnwaarde met 1.",
+
+    "Mare Serenitatis Mine": "Mare Serenitatis-mijn",
+    "Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step. Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the mining rate 1 step and the logistic rate 1 step.": "Betaal 2 titanium en 1 staal. Verhoog je staalproductie en titaniumproductie met 1. Plaats een mijn OP HET GERESERVEERDE GEBIED en een wegtegel ernaast. Verhoog de mijn- en logistiekwaarde elk met 1.",
+
+    "Microsingularity Plant": "microsingulariteit-faciliteit",
+    "Requires 2 habitats on The Moon. Increase your energy production 2 steps.": "Vereist 2 habitats op de maan. Verhoog je energieproductie met 2.",
+
+    "Mining Robots Manuf. Center": "Productiecentrum voor mijnbouwrobots",
+    "Spend 1 titanium. Raise the mining rate 2 steps.": "Betaal 1 titanium. Verhoog de mijnwaarde met 2.",
+
+    "Momentum Virium Habitat": "Momentum Virium-habitat",
+    "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "Betaal 1 titanium. Verhoog je warmteproductie met 2 en je M€-productie met 3. Plaats een habitattegel OP HET GERESERVEERDE GEBIED en verhoog de habitatwaarde met 1.",
+
+    "Moon Tether": "Maanketting",
+    "Requires 6 space tags.": "Vereist 6 eigen ruimtesymbolen.",
+
+    "Mooncrate Block Factory": "Maankraterblokkenfabriek",
+
+    "Lunar standard projects": "Standaard maanprojecten",
+    "Effect: When you pay for a Lunar standard project, you spend 4M€ less.": "EFFECT: Als je voor een standaard maanproject betaalt, betaal je 4 M€ minder.",
+    "Requires 1 mine on The Moon.": "Vereist 1 eigen mijntegel.",
+
+    "Mooncrate Convoys To Mars": "Maankrater konvooien naar Mars",
+    "Requires that Mars First are ruling or that you have 2 delegates there. Raise the logistic rate 1 step. All players may sell their steel resources for 3M€ each.": "Vereist dat Mars First regeert of dat je daar 2+ afgevaardigden hebt. Verhoog de logistiekwaarde met 1. Alle spelers kunnen hun staalgrondstoffen verkopen voor 3 M€ per stuk.",
+
+    "New Colony Planning Initiaitives": "Nieuwe initiatieven voor kolonieplanning",
+    "Requires the habitat rate to be 2 or higher. Raise the habitat rate 1 step.": "Vereist een habitatclassificatie van 2 of hoger. Verhoog de habitatwaarde met 1.",
+
+    "Off-World City Living": "Buitenaards stadsleven",
+    "Increase your M€ production 1 step per city tile NOT ON MARS. Increase habitat rate 1 step.": "Verhoog je M€-productie met 1 per stadstegel NIET OP MARS. Verhoog de habitatwaarde met 1.",
+
+    "Orbital Power Grid": "Orbitaal elektriciteitsnet",
+    "Increase your energy production 1 step per city tile NOT ON MARS.": "Verhoog je energieproductie met 1 per stadstegel NIET OP MARS.",
+
+    "Preliminary Darkside": "Voorlopige donkere kant",
+    "Gain 3 titanium or 4 steel. Raise the mining rate 1 step.": "Ontvang 3 titanium of 4 staal. Verhoog de mijnwaarde met 1.",
+
+    "Pride of the Earth Arkship": "Trots van de aarde Ark",
+
+    "Science 2 Space": "Wetenschap 2 Ruimte",
+    "Action: Add 1 science resource here per every 5 science tags you have.": "ACTIE: Voeg 1 wetenschap toe aan deze kaart voor elke 5 van je eigen wetenschapssymbolen.",
+    "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "Vereist 1 van je eigen wetenschaps- en 2 van je eigen ruimtesymbolen. Betaal 2 titanium. 1 OP per wetenschap op deze kaart.",
+
+    "Processor Factory": "Processorfabriek",
+    "1 VP for every 3 data resources here.": "1 OP voor elke 3 data op deze kaart.",
+    "Action: Spend 1 steel to add 2 data resources to ANY card.": "ACTIE: Betaal 1 staal om 2 data aan een willekeurige kaart toe te voegen.",
+
+    "Revolting Colonists": "Opstandige kolonisten",
+    "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "Vereist een habitatwaarde van 4 of hoger. Alle spelers betalen 3 M€ voor elke habitattegel die ze bezitten.",
+
+    "Rover Drivers Union": "Rover Chauffeurs Unie",
+    "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "Vereist een logistiekwaarde van 2. Verhoog de logistiekwaarde met 1. Verhoog je M€-productie met 1 voor elke verhoogde logistiekwaarde.",
+
+    "Rust Eating Bacteria": "Roestetende bacteriën",
+    "1 VP per 3 microbes here.": "1 OP voor elke 3 microben op deze kaart.",
+    "Action: Spend 1 steel to add 2 microbes here.": "Actie: Betaal 1 staal om 2 microben aan deze kaart toe te voegen.",
+
+    "Sinus Iridium Road Network": "Sinus Iridium wegennet",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Verminder je energieproductie met 1 en verhoog je M€-productie met 3. Betaal 1 staal. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
+
+    "Small Duty Rovers": "Lichte vracht Rovers",
+    "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Betaal 1 titanium. Verhoog de logistiekwaarde met 1. Ontvang 1 M€ per habitattegel, mijntegel en wegtegel op de maan.",
+
+    "Solar Panel Foundry": "Zonnepanelengieterij",
+    "Action: Spend 2 steel to increase your energy production 1 step.": "ACTIE: Betaal 2 staal om je energieproductie met 1 te verhogen.",
+
+    "Sphere Habitats": "Sferische habitats",
+    "Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Betaal 1 titanium. Plaats een habitattegel op de maan en verhoog de habitatwaarde met 1.",
+
+    "Staging Station \"Behemoth\"": "Tussenstation \"Behemoth\"",
+    "Gain 2 Trade Fleets. Raise the logistic rate 1 step.": "Ontvang 2 handelsvloten. Verhoog de logistiekwaarde met 1.",
+
+    "Steel Market Monopolists": "Staalmarkt monopolisten",
+    "Requires the mining rate to be 3 or higher.": "Vereist een mijnwaarde van 3 of hoger.",
+    "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "ACTIE: Betaal 3X M€ om 2X staal te krijgen (max. 9 M€)",
+    "Action: Spend X steel to gain 3X M€ (max 3 steel).": "ACTIE: Betaal X staal om 3X M€ te krijgen (max. 3 staal).",
+
+    "Subterranean Habitats": "Ondergrondse leefgebieden",
+    "Effect: When you build a habitat on The Moon, you spend 1 titanium less.": "EFFECT: Als je een habitat op de maan bouwt, betaal je 1 titanium minder.",
+    "Spend 2 steel. Raise the habitat rate 1 step.": "Betaal 2 staal. Verhoog het aantal kolonies met 1.",
+
+    "Syndicate Pirate Raids": "Syndicaat Piraataanvalen",
+    "ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION": "ALLE ANDERE SPELERS KUNNEN HUN HANDELSVLOOT IN DEZE GENERATIE NIET TERUGKRIJGEN.",
+
+    "The Womb": "Oorsprong van alle metropolen",
+    "Decrease your energy production 2 steps and increase your M€ production 4 steps. Spend 2 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Verminder je energieproductie met 2 en verhoog je M€-productie met 4. Betaal 2 titanium. Plaats een habitattegel op de maan en verhoog de habitatwaarde met 1.",
+
+    "Thorium Rush": "Thorium Rush",
+    "Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. Raise the habitat rate, mining rate and logistic rate 1 step.": "Plaats 1 habitattegel, 1 mijntegel en 1 wegtegel op de maan. Verhoog de habitatwaarde, mijnwaarde en logistiekwaarde elk met 1.",
+
+    "Titanium Extraction Center": "Titanium extractiecentrum",
+    "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "Betaal 2 titanium. Verhoog je titanium-productie met 1 elke keer dat de mijnwaarde 2 omhoog gaat.",
+
+    "Titanium Market Monopolists": "Monopolisten op de titaniummarkt",
+    "Action: Spend 2X M€ to gain X titanium [max 8 M€]": "ACTIE: Betaal 2X M€ om X titanium [max. 8 M€]",
+    "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "ACTIE: Betaal X titanium om 4X M€ te krijgen [max. 4 titanium].",
+
+    "Tycho Road Network": "Tycho wegennet",
+    "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Betaal 1 staal. Verhoog je M€-productie met 1. Plaats een wegtegel op de maan en verhoog de logistiekwaarde met 1.",
+
+    "Underground Detonators": "Ondergrondse explosieven",
+    "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Ontvang 1 staal en 1 titanium. Verhoog de mijnwaarde met 1.",
+
+    "Undermoon Drug Lords Network": "Ondergronds netwerk van drugsbaronnen",
+    "Increase your M€ production 1 step per 2 steps of habitat rate.": "Verhoog je M€-productie met 1 elke keer dat de habitatwaarde 2 omhoog gaat.",
+
+    "Water Treatment Complex": "Waterzuiveringscomplex",
+    "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "Vereist 1 habitattegel op de maan. Betaal 1 titanium. Verhoog de habitatwaarde met 2.",
+
+    "We Grow As One": "We groeien als eenheid",
+    "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "Vereist dat Unity regeert of dat je daar 2 afgevaardigden hebt. Verhoog ALLE koloniewaarden met 1. Verhoog elke koloniewaarde met 1 als je een kolonie op die kolonietegel hebt.",
+
+    "Martian Embassy": "Mars-ambassade",
+    "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "Verhoog het Mars planetaire spoor met 1 voor elke 3 eigen maansymbolen, inclusief deze.",
+
+    "Luna Archives": "Maanarchieven",
+    "Action: Add 1 science resource here for each Moon tag you have.": "ACTIE: Voeg 1 wetenschap toe aan deze kaart voor elk van je maansymbolen.",
+    "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "EFFECT: Als je een maansymbool speelt, kan de wetenschap van deze kaart worden gebruikt voor betaling van 1 M€ per stuk.",
+
+    "Luna Ecumenopolis": "Maan Oecumenepolis",
+    "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "Betaal 2 titanium. Plaats 2 habitattegels naast minstens 2 andere habitattegels en verhoog de habitatwaarde met 2. Verhoog je TW met 1 voor elke 2 verhoogde habitatwaardering.",
+
+    "Steal": "Steel",
+    "habitat rate": "Habitatwaarde",
+    "Mining rate": "Mijnwaarde",
+    "Logistic rate": "Logistiekwaarde",
+    "Colony tiles": "Kolonietegels",
+    "Mine tiles": "Mijntegels",
+    "Road tiles": "Wegtegels"
+}

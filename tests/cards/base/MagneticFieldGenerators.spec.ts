@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MagneticFieldGenerators} from '../../../src/server/cards/base/MagneticFieldGenerators';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
@@ -10,16 +10,16 @@ describe('MagneticFieldGenerators', function() {
 
   beforeEach(function() {
     card = new MagneticFieldGenerators();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 4);
-    expect(player.simpleCanPlay(card)).is.true;
+    player.production.add(Resource.ENERGY, 4);
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.energy).to.eq(0);

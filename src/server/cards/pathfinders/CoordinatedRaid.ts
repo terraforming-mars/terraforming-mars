@@ -1,10 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../CardRequirements';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
 
@@ -14,7 +13,7 @@ export class CoordinatedRaid extends Card implements IProjectCard {
       cost: 5,
       name: CardName.COORDINATED_RAID,
       type: CardType.EVENT,
-      requirements: CardRequirements.builder((b) => b.colonies(1)),
+      requirements: {colonies: 1},
 
       metadata: {
         cardNumber: 'Pf64',
@@ -28,15 +27,16 @@ export class CoordinatedRaid extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     return player.colonies.getFleetSize() > player.colonies.tradesThisGeneration;
   }
 
-  public override bespokePlay(player: Player) {
-    const colonies = player.game.colonies.filter((colony) => colony.isActive);
-    return new SelectColony('Select colony tile for trade', 'trade', colonies, (colony: IColony) => {
-      colony.trade(player, {selfishTrade: true});
-      return undefined;
-    });
+  public override bespokePlay(player: IPlayer) {
+    const activeColonies = player.game.colonies.filter((colony) => colony.isActive);
+    return new SelectColony('Select colony tile for trade', 'trade', activeColonies)
+      .andThen((colony: IColony) => {
+        colony.trade(player, {selfishTrade: true});
+        return undefined;
+      });
   }
 }

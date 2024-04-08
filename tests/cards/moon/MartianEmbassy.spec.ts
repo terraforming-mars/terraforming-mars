@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {MartianEmbassy} from '../../../src/server/cards/moon/MartianEmbassy';
@@ -7,7 +7,7 @@ import {MartianEmbassy} from '../../../src/server/cards/moon/MartianEmbassy';
 describe('MartianEmbassy', () => {
   let player: TestPlayer;
   let card: MartianEmbassy;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     [game, player] = testGame(1, {pathfindersExpansion: true});

@@ -15,11 +15,11 @@ describe('SelfSufficientSettlement', function() {
 
     const action = card.play(player);
     runAllActions(game);
-    expect(action).is.undefined;
+    cast(action, undefined);
 
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
 
     expect(space.player).is.undefined;
     expect(space.tile).is.undefined;

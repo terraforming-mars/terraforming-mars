@@ -11,12 +11,11 @@ describe('JupiterFloatingStation', function() {
 
   beforeEach(function() {
     card = new JupiterFloatingStation();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {

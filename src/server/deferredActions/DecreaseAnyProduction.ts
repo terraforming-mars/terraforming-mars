@@ -1,50 +1,63 @@
-import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
 import {SelectPlayer} from '../inputs/SelectPlayer';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
 
 export type Options = {
   count: number,
   stealing?: boolean
 }
-export class DecreaseAnyProduction extends DeferredAction {
+
+export class DecreaseAnyProduction extends DeferredAction<boolean> {
   constructor(
-    player: Player,
-    public resource: Resources,
+    player: IPlayer,
+    public resource: Resource,
     public options: Options = {
       count: 1,
       stealing: false,
     },
-    public title: string = 'Select player to decrease ' + resource + ' production by ' + options.count + ' step(s)',
+    public title: string | Message = message('Select player to decrease ${0} production by ${1} step(s)', (b) => b.string(resource).number(options.count)),
   ) {
     super(player, Priority.ATTACK_OPPONENT);
+  }
+
+  private attack(target: IPlayer): void {
+    target.maybeBlockAttack(this.player, (proceed: boolean) => {
+      if (proceed) {
+        target.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+      }
+      this.cb(proceed);
+      return undefined;
+    });
   }
 
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.resolveInsuranceInSoloGame();
-      return undefined;
-    }
+      this.cb(true);
+    } else {
+      const targets = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
 
-    const candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
-
-    if (candidates.length === 0) {
-      return undefined;
-    }
-
-    if (candidates.length === 1 && candidates[0] !== this.player) {
-      candidates[0].production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
-      return undefined;
-    }
-
-    return new SelectPlayer(
-      candidates,
-      this.title,
-      'Decrease',
-      (found: Player) => {
-        found.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+      if (targets.length === 0) {
+        this.cb(false);
         return undefined;
-      },
-    );
+      }
+      if (targets.length > 0) {
+        if (targets.length > 1 || targets[0] === this.player) {
+          return new SelectPlayer(targets, this.title, 'Decrease')
+            .andThen((candidate) => {
+              this.attack(candidate);
+              return undefined;
+            });
+        } else {
+          this.attack(targets[0]);
+        }
+      }
+    }
+
+    return undefined;
   }
 }

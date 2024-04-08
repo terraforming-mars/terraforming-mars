@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -18,14 +18,14 @@ describe('SmallAnimals', function() {
   });
 
   it('Can not play if oxygen level too low', function() {
-    player2.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resource.PLANTS, 1);
     setOxygenLevel(game, 5);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if no one has plant production', function() {
     setOxygenLevel(game, 6);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should act', function() {
@@ -37,8 +37,8 @@ describe('SmallAnimals', function() {
 
   it('Should play', function() {
     setOxygenLevel(game, 6);
-    player2.production.add(Resources.PLANTS, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    player2.production.add(Resource.PLANTS, 1);
+    expect(card.canPlay(player)).is.true;
 
     player.playedCards.push(card);
     card.play(player);

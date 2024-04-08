@@ -1,9 +1,8 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class TradeAdvance extends PreludeCard implements IProjectCard {
@@ -27,17 +26,14 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.game.defer(new SimpleDeferredAction(
-      player,
-      () => {
-        const openColonies = player.game.colonies.filter((colony) => colony.isActive);
-        openColonies.forEach((colony) => {
-          colony.trade(player, {usesTradeFleet: false}, 1);
-        });
-        return undefined;
-      },
-    ));
+  public override bespokePlay(player: IPlayer) {
+    player.defer(() => {
+      const activeColonies = player.game.colonies.filter((colony) => colony.isActive);
+      activeColonies.forEach((colony) => {
+        colony.trade(player, {usesTradeFleet: false}, 1);
+      });
+      return undefined;
+    });
 
     if (player.game.isSoloMode()) {
       player.megaCredits += 8;

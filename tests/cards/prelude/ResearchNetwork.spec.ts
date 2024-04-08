@@ -3,18 +3,17 @@ import {testGame} from '../../TestGame';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Units} from '../../../src/common/Units';
+import {cast} from '../../TestingUtils';
 
 describe('ResearchNetwork', function() {
   it('Should play', function() {
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     const card = new ResearchNetwork();
 
     expect(player.cardsInHand).has.length(0);
     expect(player.production.asUnits()).deep.eq(Units.of({}));
 
-    const action = card.play(player);
-    expect(action).is.undefined;
-
+    cast(card.play(player), undefined);
     expect(player.cardsInHand).has.length(3);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1}));
 

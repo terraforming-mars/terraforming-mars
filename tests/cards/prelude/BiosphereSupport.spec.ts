@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
 describe('BiosphereSupport', function() {
@@ -10,11 +10,11 @@ describe('BiosphereSupport', function() {
 
   beforeEach(function() {
     card = new BiosphereSupport();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {
-    player.production.add(Resources.MEGACREDITS, -5);
+    player.production.add(Resource.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });
 

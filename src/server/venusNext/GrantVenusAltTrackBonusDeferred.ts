@@ -1,13 +1,14 @@
-import {ICard} from '../cards/ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {Player} from '../Player';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
+import {IPlayer} from '../IPlayer';
 import {SelectResources} from '../inputs/SelectResources';
+import {message} from '../logs/MessageBuilder';
 
 export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     public standardResourceCount: number,
     public wildResource: boolean,
   ) {
@@ -29,20 +30,21 @@ export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
       return this.selectStandardResources(this.standardResourceCount);
     }
 
-    const selectCard = new SelectCard('Add resource to card', 'Add resource', resourceCards,
-      (selected: Array<ICard>) => {
-        this.player.addResourceTo(selected[0], {qty: 1, log: true});
+    const selectCard = new SelectCard('Add resource to card', 'Add resource', resourceCards)
+      .andThen(([card]) => {
+        this.player.addResourceTo(card, {qty: 1, log: true});
         return undefined;
-      },
-    );
+      });
     const wild = new OrOptions(selectCard, this.selectStandardResources(1));
     if (this.standardResourceCount > 0) {
-      wild.cb = () => {
+      wild.andThen(() => {
         return this.standardResourceCount > 0 ?
           this.selectStandardResources(this.standardResourceCount) :
           undefined;
-      };
-      wild.title = `Choose your wild resource bonus, after which you will gain ${this.standardResourceCount} more distinct standard resources.`;
+      });
+      wild.title = message(
+        'Choose your wild resource bonus, after which you will gain ${0} more distinct standard resources.',
+        (b) => b.number(this.standardResourceCount));
     } else {
       wild.title = 'Choose your wild resource bonus.';
     }

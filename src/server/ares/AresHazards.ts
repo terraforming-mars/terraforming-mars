@@ -1,8 +1,8 @@
-import {ISpace} from '../boards/ISpace';
-import {Game} from '../Game';
+import {Space} from '../boards/Space';
+import {IGame} from '../IGame';
 import {LogHelper} from '../LogHelper';
 import {Phase} from '../../common/Phase';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {TileType} from '../../common/TileType';
 import {AresData, HazardConstraint} from '../../common/ares/AresData';
 
@@ -10,17 +10,17 @@ import {AresData, HazardConstraint} from '../../common/ares/AresData';
  * Package-private support for placing and upgrading hazard tiles.
  */
 export class _AresHazardPlacement {
-  public static putHazardAt(space: ISpace, tileType: TileType) {
+  public static putHazardAt(space: Space, tileType: TileType) {
     space.tile = {tileType: tileType, protectedHazard: false};
   }
 
-  public static randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1, cardCount: 1 | 2 = 1) {
+  public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 1 | -1, cardCount: 1 | 2 = 1) {
     const space = game.getSpaceByOffset(direction, tileType, cardCount);
     this.putHazardAt(space, tileType);
     return space;
   }
 
-  public static makeSevere(game: Game, from: TileType, to: TileType) {
+  public static makeSevere(game: IGame, from: TileType, to: TileType) {
     game.board.spaces
       .filter((s) => s.tile?.tileType === from)
       .forEach((s) => {
@@ -29,10 +29,10 @@ export class _AresHazardPlacement {
         }
       });
 
-    game.log('${0} have upgraded to ${1}', (b) => b.string(TileType.toString(from)).string(TileType.toString(to)));
+    game.log('${0} have upgraded to ${1}', (b) => b.tileType(from).tileType(to));
   }
 
-  public static onTemperatureChange(game: Game, aresData: AresData) {
+  public static onTemperatureChange(game: IGame, aresData: AresData) {
     // This will have no effect if the erosions don't exist, but that's OK --
     // the check for placing erosions will take this into account.
     this.testConstraint(
@@ -44,25 +44,25 @@ export class _AresHazardPlacement {
     );
   }
 
-  public static onOceanPlaced(aresData: AresData, player: Player) {
+  public static onOceanPlaced(aresData: AresData, player: IPlayer) {
     this.testToPlaceErosionTiles(aresData, player);
     this.testToRemoveDustStorms(aresData, player);
   }
 
-  public static onOxygenChange(game: Game, aresData: AresData) {
+  public static onOxygenChange(game: IGame, aresData: AresData) {
     this.testConstraint(aresData.hazardData.severeDustStormOxygen, game.getOxygenLevel(), () => {
       this.makeSevere(game, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE);
     });
   }
 
-  private static testToPlaceErosionTiles(aresData: AresData, player: Player) {
+  private static testToPlaceErosionTiles(aresData: AresData, player: IPlayer) {
     if (player.game.gameOptions.aresHazards === false) {
       return;
     }
 
     this.testConstraint(
       aresData.hazardData.erosionOceanCount,
-      player.game.board.getOceanCount(),
+      player.game.board.getOceanSpaces().length,
       () => {
         let type = TileType.EROSION_MILD;
         if (aresData.hazardData.severeErosionTemperature.available !== true) {
@@ -78,10 +78,10 @@ export class _AresHazardPlacement {
     );
   }
 
-  private static testToRemoveDustStorms(aresData: AresData, player: Player) {
+  private static testToRemoveDustStorms(aresData: AresData, player: IPlayer) {
     this.testConstraint(
       aresData.hazardData.removeDustStormsOceanCount,
-      player.game.board.getOceanCount(),
+      player.game.board.getOceanSpaces().length,
       () => {
         player.game.board.spaces.forEach((space) => {
           if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {

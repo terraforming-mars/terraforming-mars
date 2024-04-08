@@ -21,7 +21,7 @@ describe('SolarStorm', function() {
 
   beforeEach(function() {
     card = new SolarStorm();
-    [, player, player2, player3] = testGame(3);
+    [/* game */, player, player2, player3] = testGame(3);
     cryptocurrency = new Cryptocurrency();
     communicationCenter = new CommunicationCenter();
   });
@@ -50,7 +50,7 @@ describe('SolarStorm', function() {
     card.play(player);
 
     runAllActions(player.game);
-    expect(player.getWaitingFor()).is.undefined;
+    cast(player.getWaitingFor(), undefined);
   });
 
   it('remove data, only you have data', function() {

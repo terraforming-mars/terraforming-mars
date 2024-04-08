@@ -63,6 +63,10 @@
   "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "AKTION: Füge einer beliebigen Karte 1 Wissenschaft hinzu, [außer denen, die 2 oder mehr SP je Wissenschaft geben].",
   "Action: Add 2 data to ANY card.": "AKTION: Füge zu einer beliebigen Karte 2 Daten hinzu.",
   
+  "Darkside Smugglers' Union": "Darkside-Schmugglervereinigung",
+  "Action: Perform a trade action.": "Aktion: Führe eine freie Handelsaktion durch.",
+  "Raise the logistics rate 1 step.": "Erhöhe die Logistikwertung um 1.",
+  
   "Deep Lunar Mining": "Tiefgehender Mondbergbau",
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Bezahle 1 Titan. Erhöhe deine Titan-Produktion um 2. Erhöhe die Minenwertung um 1.",
   
@@ -95,6 +99,9 @@
   
   "Heliostat Mirror Array": "Heliostat-Spiegel-Array",
   "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "Bezahle 1 Titan. Erhalte 1 Wärme. Erhöhe deine Energie-Produktion um 2.",
+
+  "Hostile Takeover": "Feindliche Übernahme",
+  "Requires a habitat rate of 2 or higher, and a mining rate of 4 or higher. Add your player marker to a habitat tile and a mining tile owned by any opponent. Those now also count as yours. Increase your M€ production 2 steps.": "Benötigt eine Habitatwertung von 2 oder höher und eine Minienwertung von 4 oder höher. Lege deinen Spielermarker auf ein Habitat- und ein Minen-Plättchen, das einem beliebigen Gegner gehört. Diese zählen nun auch als deine. Erhöhe deine M€-Produktion um 2.",
   
   "Hypersensitive Silicon Chip Factory": "Hypersensible Silizium-Chipfabrik",
   "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "Benötigt 2 Minenplättchen auf dem Mond. Bezahle 2 Titan. Erhöhe deine M€-Produktion um 4.",
@@ -195,7 +202,7 @@
   "Requires 6 space tags.": "Benötigt 6 eigene Weltraumsymbole.",
   
   "Mooncrate Block Factory": "Mondkrater-Blockfabrik",
-  "Lunar standard projects": "Lunar-Standardprojekte",
+  "Lunar standard projects": "Lunar-Standard-Projekte",
   "Effect: When you pay for a Lunar standard project, you spend 4M€ less.": "EFFEKT: Wenn du für ein Lunar-Standardprojekt bezahlst, bezahlst du 4 M€ weniger.",
   "Requires 1 mine on The Moon.": "Benötigt 1 eigenes Minenplättchen.",
   
@@ -226,12 +233,15 @@
   "Revolting Colonists": "Aufständische Kolonisten",
   "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "Benötigt eine Habitatwertung von 4 oder höher. Alle Spieler zahlen 3 M€ für jedes Habitatplättchen, das sie besitzen.",
   
+  "Road Piracy": "Straßenpiraterie",
+  "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "Benötigt eine Logistikwertung von 3. Stehle bis zu 6 Stahl oder 4 Titan von anderen Spielern. (Ressourcen können von mehr als 1 Mitspieler gestohlen werden.)",
+  
   "Rover Drivers Union": "Rover-Fahrergewerkschaft",
   "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "Benötigt eine Logistikwertung von 2. Erhöhe die Logistikwertung um 1. Erhöhe deine M€-Produktion um 1 je erhöhte Logistikwertung.",
   
   "Rust Eating Bacteria": "Rostfressende Bakterien",
   "1 VP per 3 microbes here.": "1 SP je 3 Mikroben auf dieser Karte.",
-  "Action: Spend 1 steel to add 2 microbes here.": "Aktion: Bezahle 1 Stahl, um dieser Karte 2 Mikroben hinzuzufügen.",
+  "Action: Spend 1 steel to add 2 microbes here.": "AKTION: Bezahle 1 Stahl, um dieser Karte 2 Mikroben hinzuzufügen.",
   
   "Sinus Iridium Road Network": "Sinus Iridium Straßennetzwerk",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Reduziere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3. Bezahle 1 Stahl. Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1.",
@@ -301,7 +311,10 @@
   "Habitat rate": "Habitatwertung",
   "Mining rate": "Minenwertung",
   "Logistic rate": "Logistikwertung",
+  "Colony tile": "Habitatplättchen",
   "Colony tiles": "Habitatplättchen",
+  "Mine tile": "Minenplättchen",
   "Mine tiles": "Minenplättchen",
+  "Road tile": "Straßenplättchen",
   "Road tiles": "Straßenplättchen"
 }

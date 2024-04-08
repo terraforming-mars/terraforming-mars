@@ -11,7 +11,7 @@ describe('DeepSpaceOperations', function() {
 
   beforeEach(function() {
     card = new DeepSpaceOperations();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

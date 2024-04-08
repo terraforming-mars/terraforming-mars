@@ -1,17 +1,14 @@
-import {Card} from '../Card';
-import {ICorporationCard} from './ICorporationCard';
-import {Player} from '../../Player';
+import {CorporationCard} from './CorporationCard';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ICard} from '../ICard';
 import {IStandardProjectCard} from '../IStandardProjectCard';
+import {Resource} from '../../../common/Resource';
 
-export class CrediCor extends Card implements ICorporationCard {
+export class CrediCor extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.CREDICOR,
       startingMegaCredits: 57,
 
@@ -30,16 +27,15 @@ export class CrediCor extends Card implements ICorporationCard {
       },
     });
   }
-  private effect(player: Player, card: IProjectCard | IStandardProjectCard): void {
+  private effect(player: IPlayer, card: IProjectCard | IStandardProjectCard): void {
     if (player.isCorporation(this.name) && card.cost >= 20) {
-      player.megaCredits += 4;
+      player.stock.add(Resource.MEGACREDITS, 4, {log: true});
     }
   }
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     this.effect(player, card);
   }
-  public onStandardProject(player: Player, project: ICard) {
-    // TODO(kberg): Remove this typecasting.
-    this.effect(player, <IStandardProjectCard>project);
+  public onStandardProject(player: IPlayer, project: IStandardProjectCard) {
+    this.effect(player, project);
   }
 }

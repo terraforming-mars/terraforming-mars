@@ -1,20 +1,16 @@
 import {CardName} from '../cards/CardName';
 import {ColonyName} from '../colonies/ColonyName';
 import {ColorWithNeutral} from '../Color';
+import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../turmoil/PartyName';
 import {SpaceId} from '../Types';
 import {Units} from '../Units';
+import {twoWayDifference} from '../utils/utils';
 import {AresGlobalParametersResponse} from './AresGlobalParametersResponse';
 import {Payment} from './Payment';
 
-function difference<T>(arr1: Array<T>, arr2: Array<T>): Array<T> {
-  return arr1
-    .filter((x) => !arr2.includes(x))
-    .concat(arr2.filter((x) => !arr1.includes(x)));
-}
-
 function matches(response: any, fields: Array<string>) {
-  return difference(Object.keys(response), fields).length === 0;
+  return twoWayDifference(Object.keys(response), fields).length === 0;
 }
 export interface SelectOptionResponse {
   type: 'option',
@@ -73,7 +69,7 @@ export function isSelectSpaceResponse(response: InputResponse): response is Sele
 
 export interface SelectPlayerResponse {
   type: 'player',
-  player: ColorWithNeutral | undefined;
+  player: ColorWithNeutral;
 }
 
 export function isSelectPlayerResponse(response: InputResponse): response is SelectPlayerResponse {
@@ -82,7 +78,7 @@ export function isSelectPlayerResponse(response: InputResponse): response is Sel
 
 export interface SelectPartyResponse {
   type: 'party',
-  partyName: PartyName | undefined;
+  partyName: PartyName;
 }
 
 export function isSelectPartyResponse(response: InputResponse): response is SelectPartyResponse {
@@ -149,6 +145,15 @@ export function isAresGlobalParametersResponse(obj: any): obj is AresGlobalParam
   return matches(obj, ['lowOceanDelta', 'highOceanDelta', 'temperatureDelta', 'oxygenDelta']);
 }
 
+export interface SelectGlobalEventResponse {
+  type: 'globalEvent',
+  globalEventName: GlobalEventName;
+}
+
+export function isSelectGlobalEventResponse(response: InputResponse): response is SelectGlobalEventResponse {
+  return response.type === 'globalEvent' && matches(response, ['type', 'globalEventName']);
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
@@ -163,4 +168,5 @@ export type InputResponse =
   SelectProductionToLoseResponse |
   SelectProjectCardToPlayResponse |
   SelectSpaceResponse |
-  ShiftAresGlobalParametersResponse;
+  ShiftAresGlobalParametersResponse |
+  SelectGlobalEventResponse;

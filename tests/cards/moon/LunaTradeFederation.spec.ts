@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeFederation} from '../../../src/server/cards/moon/LunaTradeFederation';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 // import {IMoonData} from '../../../src/server/moon/IMoonData';
-import {testGame} from '../../TestGame';
 // import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
@@ -12,7 +12,7 @@ import {Units} from '../../../src/common/Units';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('LunaTradeFederation', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let lunaTradeFederation: LunaTradeFederation;
@@ -42,7 +42,7 @@ describe('LunaTradeFederation', () => {
 
   //   runAllActions(game);
   //   const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-  //   selectSpace.cb(moonData.moon.getSpace('m02'));
+  //   selectSpace.cb(moonData.moon.getSpaceOrThrow('m02'));
   //   runAllActions(game);
 
   //   expect(moonData.miningRate).eq(1);
@@ -76,11 +76,11 @@ describe('LunaTradeFederation', () => {
     player.megaCredits = 6;
     player.titanium = 1;
 
-    expect(player.canAffordCard(card)).is.false;
+    expect(player.canAfford(player.affordOptionsForCard(card))).is.false;
 
     player.megaCredits = 7;
     player.titanium = 1;
-    expect(player.canAffordCard(card)).is.true;
+    expect(player.canAfford(player.affordOptionsForCard(card))).is.true;
   });
 
   it('can use titanium to pay for non-space project cards at a discount', () => {
@@ -93,12 +93,12 @@ describe('LunaTradeFederation', () => {
     player.titanium = 1;
 
     expect(player.spendableMegacredits()).eq(9);
-    expect(player.canAffordCard(card)).is.false;
+    expect(player.canAfford(player.affordOptionsForCard(card))).is.false;
 
     player.megaCredits = 8;
     player.titanium = 1;
     expect(player.spendableMegacredits()).eq(10);
-    expect(player.canAffordCard(card)).is.true;
+    expect(player.canAfford(player.affordOptionsForCard(card))).is.true;
 
     player.megaCredits = 8;
     player.titanium = 3;

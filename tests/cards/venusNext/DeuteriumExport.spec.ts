@@ -11,12 +11,11 @@ describe('DeuteriumExport', function() {
 
   beforeEach(function() {
     card = new DeuteriumExport();
-    [/* skipped */, player] = testGame(1, {preludeExtension: true});
+    [/* game */, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {

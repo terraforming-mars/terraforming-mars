@@ -5,25 +5,23 @@ import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {testGameOptions, runAllActions, cast} from '../TestingUtils';
+import {runAllActions, cast} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {ProcessorFactory} from '../../src/server/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/server/cards/base/SearchForLife';
 import {Decomposers} from '../../src/server/cards/base/Decomposers';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {testGame} from '../TestGame';
 
 describe('ArabiaTerraBoard', function() {
   let board: ArabiaTerraBoard;
   let game: Game;
   let player: TestPlayer;
-  let player2: TestPlayer;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameId', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA}));
-    board = game.board as ArabiaTerraBoard;
+    [game, player/* , player2 */] = testGame(2, {boardName: BoardName.ARABIA_TERRA});
+    board = cast(game.board, ArabiaTerraBoard);
   });
 
   it('Can place an ocean in a cove', () => {
@@ -96,13 +94,13 @@ describe('ArabiaTerraBoard', function() {
     const landClaim = new LandClaim();
     const selectSpace = cast(landClaim.play(player), SelectSpace);
     const space = board.getSpaces(SpaceType.COVE)[0];
-    expect(selectSpace.availableSpaces.map((space) => space.id)).contains(space.id);
+    expect(selectSpace.spaces.map((space) => space.id)).contains(space.id);
 
     selectSpace.cb(space);
 
     expect(space.player?.id).equals(player.id);
 
-    player.game.addOceanTile(player, space);
+    player.game.addOcean(player, space);
 
     expect(space.tile?.tileType).equals(TileType.OCEAN);
   });

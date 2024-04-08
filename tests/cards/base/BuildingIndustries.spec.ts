@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {BuildingIndustries} from '../../../src/server/cards/base/BuildingIndustries';
-import {Resources} from '../../../src/common/Resources';
+import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
@@ -10,7 +10,7 @@ describe('BuildingIndustries', function() {
 
   beforeEach(function() {
     card = new BuildingIndustries();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {
@@ -18,7 +18,7 @@ describe('BuildingIndustries', function() {
   });
 
   it('Should play', function() {
-    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

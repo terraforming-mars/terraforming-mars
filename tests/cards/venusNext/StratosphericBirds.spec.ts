@@ -30,26 +30,26 @@ describe('StratosphericBirds', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
     setVenusScaleLevel(game, 10);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Cannot play if no floater', () => {
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
 
     card.play(player);
@@ -92,12 +92,12 @@ describe('StratosphericBirds', () => {
     setVenusScaleLevel(game, 12);
     player.megaCredits = 12;
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 12});
+    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 12});
     runAllActions(game); // Remove floater
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(aerialMappers.resourceCount).to.eq(0);
   });
 
@@ -111,22 +111,22 @@ describe('StratosphericBirds', () => {
     player.megaCredits = 9;
 
     // 9 M€ + 1 Dirigibles floater: Cannot play
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
 
     // 12 M€ + 1 Dirigibles floater: Card is playable
     player.megaCredits = 12;
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
       const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-      selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
+      selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 12});
+    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 12});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
   });
@@ -140,11 +140,11 @@ describe('StratosphericBirds', () => {
     setVenusScaleLevel(game, 12);
     player.megaCredits = 3;
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
-    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
+    selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
     expect(deuteriumExport.resourceCount).to.eq(0);
@@ -161,6 +161,6 @@ describe('StratosphericBirds', () => {
     const indentured = new IndenturedWorkers();
     player.playCard(indentured);
     card.play(player);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 });

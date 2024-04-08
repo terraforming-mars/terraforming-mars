@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {fakeCard, testGameOptions} from '../../TestingUtils';
+import {testGame} from '../../TestGame';
+import {fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -14,8 +14,7 @@ describe('EarthEmbassy', () => {
   let earthEmbassy: EarthEmbassy;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     earthEmbassy = new EarthEmbassy();
   });
 
@@ -39,7 +38,7 @@ describe('EarthEmbassy', () => {
     // Earth Embassy has an earth tag and a moon tag.
     // Business Contacts has an earth tag.
     player.playedCards.push(earthEmbassy, new BusinessNetwork());
-    expect(player.simpleCanPlay(lunaGovernor)).is.true;
+    expect(lunaGovernor.canPlay(player)).is.true;
   });
 
   it('Works for Martian Zoo', () => {

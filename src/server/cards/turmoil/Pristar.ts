@@ -1,19 +1,17 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {Resource} from '../../../common/Resource';
 
-export class Pristar extends Card implements ICorporationCard {
+export class Pristar extends CorporationCard {
   constructor() {
     super({
       name: CardName.PRISTAR,
       startingMegaCredits: 53,
       resourceType: CardResource.PRESERVATION,
-      type: CardType.CORPORATION,
 
       victoryPoints: {resourcesHere: {}},
 
@@ -34,14 +32,14 @@ export class Pristar extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.decreaseTerraformRatingSteps(2);
+  public override bespokePlay(player: IPlayer) {
+    player.decreaseTerraformRating(2);
     return undefined;
   }
 
-  public onProductionPhase(player: Player) {
+  public onProductionPhase(player: IPlayer) {
     if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-      player.megaCredits += 6;
+      player.stock.add(Resource.MEGACREDITS, 6, {log: true, from: this});
       player.addResourceTo(this, 1);
     }
     return undefined;

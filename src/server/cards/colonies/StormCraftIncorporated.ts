@@ -1,25 +1,23 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
+import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
-import {Resources} from '../../../common/Resources';
-import {ActionCard} from '../ActionCard';
+import {Resource} from '../../../common/Resource';
+import {message} from '../../logs/MessageBuilder';
 
-export class StormCraftIncorporated extends ActionCard implements ICorporationCard {
+export class StormCraftIncorporated extends ActiveCorporationCard {
   constructor() {
     super({
       name: CardName.STORMCRAFT_INCORPORATED,
       tags: [Tag.JOVIAN],
       startingMegaCredits: 48,
       resourceType: CardResource.FLOATER,
-      type: CardType.CORPORATION,
 
       action: {
         addResourcesToAnyCard: {type: CardResource.FLOATER, count: 1, autoSelect: true},
@@ -46,36 +44,37 @@ export class StormCraftIncorporated extends ActionCard implements ICorporationCa
     });
   }
 
-  public spendHeat(player: Player, targetAmount: number,
+  public spendHeat(player: IPlayer, targetAmount: number,
     cb: () => (undefined | PlayerInput) = () => undefined): AndOptions {
     let heatAmount: number;
     let floaterAmount: number;
 
     const options = new AndOptions(
-      () => {
-        if (heatAmount + (floaterAmount * 2) < targetAmount) {
-          throw new Error(`Need to pay ${targetAmount} heat`);
-        }
-        if (heatAmount > 0 && heatAmount - 1 + (floaterAmount * 2) >= targetAmount) {
-          throw new Error('You cannot overspend heat');
-        }
-        if (floaterAmount > 0 && heatAmount + ((floaterAmount - 1) * 2) >= targetAmount) {
-          throw new Error('You cannot overspend floaters');
-        }
-        player.removeResourceFrom(this, floaterAmount);
-        player.deductResource(Resources.HEAT, heatAmount);
-        return cb();
-      },
-      new SelectAmount('Heat', 'Spend heat', (amount: number) => {
-        heatAmount = amount;
-        return undefined;
-      }, 0, Math.min(player.heat, targetAmount)),
-      new SelectAmount('Stormcraft Incorporated Floaters (2 heat each)', 'Spend floaters', (amount: number) => {
-        floaterAmount = amount;
-        return undefined;
-      }, 0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2))),
-    );
-    options.title = `Select how to spend ${targetAmount} heat`;
+      new SelectAmount('Heat', 'Spend heat', 0, Math.min(player.heat, targetAmount))
+        .andThen((amount) => {
+          heatAmount = amount;
+          return undefined;
+        }),
+      new SelectAmount('Stormcraft Incorporated Floaters (2 heat each)', 'Spend floaters',
+        0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2)))
+        .andThen((amount) => {
+          floaterAmount = amount;
+          return undefined;
+        })).andThen(() => {
+      if (heatAmount + (floaterAmount * 2) < targetAmount) {
+        throw new Error(`Need to pay ${targetAmount} heat`);
+      }
+      if (heatAmount > 0 && heatAmount - 1 + (floaterAmount * 2) >= targetAmount) {
+        throw new Error('You cannot overspend heat');
+      }
+      if (floaterAmount > 0 && heatAmount + ((floaterAmount - 1) * 2) >= targetAmount) {
+        throw new Error('You cannot overspend floaters');
+      }
+      player.removeResourceFrom(this, floaterAmount);
+      player.stock.deduct(Resource.HEAT, heatAmount);
+      return cb();
+    });
+    options.title = message('Select how to spend ${0} heat', (b) => b.number(targetAmount));
     return options;
   }
 }

@@ -1,29 +1,25 @@
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
-import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
+import {IActionCard, ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
-function tradeCost(player: Player) {
+function tradeCost(player: IPlayer) {
   return Math.max(0, 3 - player.colonies.tradeDiscount);
 }
-export class CollegiumCopernicus extends Card implements ICorporationCard, IActionCard {
+export class CollegiumCopernicus extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.COLLEGIUM_COPERNICUS,
       tags: [Tag.SCIENCE, Tag.EARTH],
       startingMegaCredits: 33,
@@ -55,35 +51,34 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
     });
   }
 
-  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
-    return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     }
   }
 
-  public canAct(player: Player) {
+  public canAct(player: IPlayer) {
     return player.colonies.canTrade() && this.resourceCount >= tradeCost(player);
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const game = player.game;
-    game.defer(new SimpleDeferredAction(
-      player,
-      () => new SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler.tradeableColonies(game), (colony) => {
-        tradeWithColony(this, player, colony);
-        return undefined;
-      }),
-    ));
+    player.defer(
+      new SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler.tradeableColonies(game))
+        .andThen((colony) => {
+          tradeWithColony(this, player, colony);
+          return undefined;
+        }),
+    );
     return undefined;
   }
 }
 
-export function tradeWithColony(card: ICorporationCard, player: Player, colony: IColony) {
+export function tradeWithColony(card: ICorporationCard, player: IPlayer, colony: IColony) {
   const cost = tradeCost(player);
   card.resourceCount -= cost;
   player.game.log('${0} spent ${1} data from ${2} to trade with ${3}', (b) => b.player(player).number(cost).card(card).colony(colony));
@@ -92,7 +87,7 @@ export function tradeWithColony(card: ICorporationCard, player: Player, colony: 
 export class TradeWithCollegiumCopernicus implements IColonyTrader {
   private collegiumCopernicus: ICorporationCard | undefined;
 
-  constructor(private player: Player) {
+  constructor(private player: IPlayer) {
     this.collegiumCopernicus = player.getCorporation(CardName.COLLEGIUM_COPERNICUS);
   }
 
@@ -102,7 +97,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
   }
 
   public optionText() {
-    return newMessage('Pay ${0} data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName.COLLEGIUM_COPERNICUS));
+    return message('Pay ${0} data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName.COLLEGIUM_COPERNICUS));
   }
 
   public trade(colony: IColony) {

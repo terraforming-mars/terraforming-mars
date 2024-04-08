@@ -1,13 +1,14 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Game} from '../../src/server/Game';
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {IGame} from '../../src/server/IGame';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {AresTestHelper} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';
 import {Tile} from '../../src/server/Tile';
 import {SpaceType} from '../../src/common/boards/SpaceType';
-import {Resources} from '../../src/common/Resources';
+import {Resource} from '../../src/common/Resource';
 import {SelectProductionToLose} from '../../src/server/inputs/SelectProductionToLose';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {DesperateMeasures} from '../../src/server/cards/ares/DesperateMeasures';
@@ -17,7 +18,7 @@ import {Phase} from '../../src/common/Phase';
 import {TestPlayer} from '../TestPlayer';
 import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
 import {AresSetup} from '../../src/server/ares/AresSetup';
-import {SeededRandom} from '../../src/server/Random';
+import {SeededRandom} from '../../src/common/utils/Random';
 import {Units} from '../../src/common/Units';
 import {addOcean, cast, runAllActions} from '../TestingUtils';
 import {Ants} from '../../src/server/cards/base/Ants';
@@ -32,7 +33,7 @@ const ARES_OPTIONS_WITH_HAZARDS = {...DEFAULT_GAME_OPTIONS, aresExtension: true,
 describe('AresHandler', function() {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     [game, player, otherPlayer] = testGame(2, {aresExtension: true});
@@ -72,13 +73,13 @@ describe('AresHandler', function() {
     secondSpace.adjacency = {bonus: [SpaceBonus.TITANIUM]};
     game.addTile(otherPlayer, secondSpace, {tileType: TileType.MINING_AREA});
 
-    player.setResourcesForTest(Units.EMPTY);
-    otherPlayer.setResourcesForTest(Units.EMPTY);
+    player.stock.override(Units.EMPTY);
+    otherPlayer.stock.override(Units.EMPTY);
 
     game.addTile(player, greenerySpace, {tileType: TileType.GREENERY});
 
-    expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 1, steel: 1}));
-    expect(otherPlayer.getResourcesForTest()).deep.eq(Units.of({megacredits: 2}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 1, steel: 1}));
+    expect(otherPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 
   describe('setupHazards', function() {
@@ -88,7 +89,7 @@ describe('AresHandler', function() {
       y: number;
     }
 
-    function spacesWithTiles(game: Game): Array<SpaceToTest> {
+    function spacesWithTiles(game: IGame): Array<SpaceToTest> {
       return game.board.spaces
         .filter((space) => space.tile !== undefined)
         .map((space) => {
@@ -181,14 +182,14 @@ describe('AresHandler', function() {
     _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
     // No resources available to play the tile.
-    player.production.add(Resources.MEGACREDITS, -5);
+    player.production.add(Resource.MEGACREDITS, -5);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     expect(() => {
       game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     }).to.throw(/Placing here costs 1 units of production/);
 
-    player.production.add(Resources.PLANTS, 7);
+    player.production.add(Resource.PLANTS, 7);
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
@@ -202,7 +203,7 @@ describe('AresHandler', function() {
     _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE);
 
     // No resources available to play the tile.
-    player.production.add(Resources.MEGACREDITS, -5);
+    player.production.add(Resource.MEGACREDITS, -5);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     try {
@@ -211,7 +212,7 @@ describe('AresHandler', function() {
       expect((err as any).toString()).includes('Placing here costs 2 units of production');
     }
 
-    player.production.add(Resources.PLANTS, 7);
+    player.production.add(Resource.PLANTS, 7);
     game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     runAllActions(game);
@@ -413,7 +414,7 @@ describe('AresHandler', function() {
     expect(otherPlayer.plants).eq(0);
     expect(player.plants).eq(0);
 
-    game.addOceanTile(otherPlayer, space);
+    game.addOcean(otherPlayer, space);
     // Placing an Ocean City on top of the ocean will not grant player plants.
     game.addTile(player, space, {tileType: TileType.OCEAN_CITY});
 

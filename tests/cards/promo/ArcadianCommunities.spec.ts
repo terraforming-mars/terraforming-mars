@@ -4,24 +4,24 @@ import {testGame} from '../../TestGame';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
-import {Board} from '../../../src/server/boards/Board';
+import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('ArcadianCommunities', function() {
   let card: ArcadianCommunities;
   let player: TestPlayer;
-  let board: Board;
+  let board: MarsBoard;
 
   beforeEach(() => {
     card = new ArcadianCommunities();
-    [, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     player.setCorporationForTest(card);
     board = player.game.board;
   });
 
   it('initial action', () => {
     const action = cast(card.initialAction(player), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     expect(space.tile).is.undefined;
     expect(space.player).is.undefined;
 
@@ -44,7 +44,7 @@ describe('ArcadianCommunities', function() {
     initLands[0].player = player;
 
     const action = cast(card.action(player), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
 
     expect(space.tile).is.undefined;
     expect(space.player).is.undefined;
@@ -56,20 +56,20 @@ describe('ArcadianCommunities', function() {
     expect(player.megaCredits).to.eq(0);
 
     // This describes the effect.
-    player.game.addCityTile(player, space);
+    player.game.addCity(player, space);
     runAllActions(player.game);
     expect(player.megaCredits).to.eq(3);
   });
 
   it('available spaces do not include those where player already has token', () => {
     // Spaces 10 and 11 are valid, adjacent spaces.
-    const first = board.getSpace('10');
+    const first = board.getSpaceOrThrow('10');
     expect(first.spaceType).eq(SpaceType.LAND);
 
-    const second = board.getSpace('11');
+    const second = board.getSpaceOrThrow('11');
     expect(second.spaceType).eq(SpaceType.LAND);
 
-    const neighbor = board.getSpace('05');
+    const neighbor = board.getSpaceOrThrow('05');
     expect(neighbor.spaceType).eq(SpaceType.LAND);
 
     expect(board.getAdjacentSpaces(first)).contains(second);
@@ -78,12 +78,12 @@ describe('ArcadianCommunities', function() {
 
     neighbor.player = player;
 
-    expect(cast(card.action(player), SelectSpace).availableSpaces).contains(first);
-    expect(cast(card.action(player), SelectSpace).availableSpaces).contains(second);
+    expect(cast(card.action(player), SelectSpace).spaces).contains(first);
+    expect(cast(card.action(player), SelectSpace).spaces).contains(second);
 
     first.player = player;
 
-    expect(cast(card.action(player), SelectSpace).availableSpaces).does.not.contain(first);
-    expect(cast(card.action(player), SelectSpace).availableSpaces).does.contain(second);
+    expect(cast(card.action(player), SelectSpace).spaces).does.not.contain(first);
+    expect(cast(card.action(player), SelectSpace).spaces).does.contain(second);
   });
 });

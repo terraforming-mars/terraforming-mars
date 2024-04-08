@@ -1,32 +1,35 @@
-import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {CardName} from '../../common/cards/CardName';
+import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
 
 export class StealResources extends DeferredAction {
   constructor(
-    player: Player,
-    public resource: Resources,
+    player: IPlayer,
+    public resource: Resource,
     public count: number = 1,
-    public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
+    public title: string | Message = message('Select player to steal up to ${0} ${1} from', (b) => b.number(count).string(resource)),
   ) {
     super(player, Priority.ATTACK_OPPONENT);
   }
 
   public execute() {
     if (this.player.game.isSoloMode()) {
-      this.player.addResource(this.resource, this.count);
+      this.player.stock.add(this.resource, this.count);
       this.player.resolveInsuranceInSoloGame();
       return undefined;
     }
 
-    let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
-    if (this.resource === Resources.PLANTS) {
+    let candidates: Array<IPlayer> = this.player.getOpponents().filter((p) => p.stock.get(this.resource) > 0);
+    if (this.resource === Resource.PLANTS) {
       candidates = candidates.filter((p) => !p.plantsAreProtected());
     }
-    if (this.resource === Resources.STEEL || this.resource === Resources.TITANIUM) {
+    if (this.resource === Resource.STEEL || this.resource === Resource.TITANIUM) {
       candidates = candidates.filter((p) => !p.alloysAreProtected());
     }
 
@@ -34,30 +37,32 @@ export class StealResources extends DeferredAction {
       return undefined;
     }
 
-    const stealOptions = candidates.map((candidate) => {
-      let qtyToSteal = Math.min(candidate.getResource(this.resource), this.count);
+    const stealOptions = candidates.map((target) => {
+      let qtyToSteal = Math.min(target.stock.get(this.resource), this.count);
 
       // Botanical Experience hook.
-      if (this.resource === Resources.PLANTS && candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (this.resource === Resource.PLANTS && target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToSteal = Math.ceil(qtyToSteal / 2);
       }
 
       return new SelectOption(
-        'Steal ' + qtyToSteal + ' ' + this.resource + ' from ' + candidate.name,
-        'Steal',
-        () => {
-          candidate.deductResource(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
-          this.player.addResource(this.resource, qtyToSteal);
+        message('Steal ${0} ${1} from ${2}', (b) => b.number(qtyToSteal).string(this.resource).player(target)),
+        'Steal')
+        .andThen(() => {
+          target.maybeBlockAttack(this.player, (proceed) => {
+            if (proceed) {
+              target.stock.deduct(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
+              this.player.stock.add(this.resource, qtyToSteal);
+            }
+            return undefined;
+          });
           return undefined;
-        },
-      );
+        });
     });
 
     return new OrOptions(
       ...stealOptions,
-      new SelectOption('Do not steal', 'Confirm', () => {
-        return undefined;
-      }),
+      new SelectOption('Do not steal'),
     );
   }
 }

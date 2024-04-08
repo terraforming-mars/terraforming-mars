@@ -23,7 +23,7 @@ describe('SelectInitialCards', () => {
   }
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
     player.dealtCorporationCards = [new Inventrix(), new Helion()];
     player.dealtProjectCards = [new Ants(), new BactoviralResearch(), new CometAiming(), new Dirigibles()];
     selectInitialCards = new SelectInitialCards(player, cb);

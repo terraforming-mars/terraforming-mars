@@ -1,16 +1,14 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board} from './Board';
-import {Player} from '../Player';
-import {ISpace} from './ISpace';
+import {SpaceCosts} from './Board';
+import {Space} from './Space';
 import {HELLAS_BONUS_OCEAN_COST} from '../../common/constants';
-import {SpaceType} from '../../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
-import {SerializedBoard} from './SerializedBoard';
-import {Random} from '../Random';
-import {GameOptions} from '../GameOptions';
+import {Random} from '../../common/utils/Random';
+import {GameOptions} from '../game/GameOptions';
+import {MarsBoard} from './MarsBoard';
 
-export class HellasBoard extends Board {
+export class HellasBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): HellasBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
@@ -19,14 +17,13 @@ export class HellasBoard extends Board {
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const HEAT = SpaceBonus.HEAT;
     const TITANIUM = SpaceBonus.TITANIUM;
-    const TWO_PLANTS = [PLANT, PLANT];
 
     // y=0
-    builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT);
+    builder.ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, STEEL).land(PLANT);
     // y=1
-    builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT).land(PLANT).land(PLANT);
+    builder.ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT).land(PLANT, STEEL).land(PLANT).land(PLANT);
     // y=2
-    builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(...TWO_PLANTS).land(PLANT, DRAW_CARD);
+    builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(PLANT, PLANT).land(PLANT, DRAW_CARD);
     // y=3
     builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL, STEEL).land(STEEL).ocean(PLANT).ocean(PLANT).land(PLANT);
     // y=4
@@ -48,27 +45,16 @@ export class HellasBoard extends Board {
     return new HellasBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): HellasBoard {
-    return new HellasBoard(Board.deserializeSpaces(board.spaces, players));
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces);
   }
 
-  private filterHellas(player: Player, spaces: Array<ISpace>) {
-    return player.canAfford(HELLAS_BONUS_OCEAN_COST, {tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
-  }
-
-  public override getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getSpaces(spaceType, player));
-  }
-
-  public override getAvailableSpacesForCity(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesForCity(player));
-  }
-
-  public override getAvailableSpacesOnLand(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesOnLand(player));
-  }
-
-  public override getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
+  public override spaceCosts(space: Space): SpaceCosts {
+    const costs = super.spaceCosts(space);
+    if (space.id === SpaceName.HELLAS_OCEAN_TILE) {
+      costs.stock.megacredits = HELLAS_BONUS_OCEAN_COST;
+      costs.tr.oceans = 1;
+    }
+    return costs;
   }
 }

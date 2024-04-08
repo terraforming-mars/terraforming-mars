@@ -3,9 +3,8 @@ import {Tag} from '../../../common/cards/Tag';
 import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Resources} from '../../../common/Resources';
+import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -18,7 +17,7 @@ export class Fish extends ActionCard implements IProjectCard {
       cost: 9,
 
       behavior: {
-        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+        decreaseAnyProduction: {type: Resource.PLANTS, count: 1},
       },
 
       action: {
@@ -27,7 +26,7 @@ export class Fish extends ActionCard implements IProjectCard {
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}},
-      requirements: CardRequirements.builder((b) => b.temperature(2)),
+      requirements: {temperature: 2},
 
       metadata: {
         cardNumber: '052',

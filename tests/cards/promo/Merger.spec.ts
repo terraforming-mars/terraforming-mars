@@ -35,6 +35,9 @@ import {LunaFirstIncorporated} from '../../../src/server/cards/moon/LunaFirstInc
 import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
 import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
 import {PhoboLog} from '../../../src/server/cards/corporation/PhoboLog';
+import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
+import {InterplanetaryCinematics} from '../../../src/server/cards/corporation/InterplanetaryCinematics';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 
 describe('Merger', function() {
   let merger: Merger;
@@ -86,6 +89,17 @@ describe('Merger', function() {
       ]);
   });
 
+  it('Fizzle if player cannot play any corp', () => {
+    player.corporations.push(new BeginnerCorporation()); // Vestigial corporation
+    player.megaCredits = 0;
+    game.corporationDeck.drawPile = [new ValleyTrust(), new PhoboLog(), new TerralabsResearch(), new InterplanetaryCinematics()];
+    merger.play(player);
+    runAllActions(game);
+
+    cast(player.popWaitingFor(), undefined);
+    expect(player.megaCredits).eq(15);
+  });
+
   it('Can play as long as have enough M€', function() {
     player.corporations = [new BeginnerCorporation()]; // Vestigial corporation
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
@@ -95,8 +109,8 @@ describe('Merger', function() {
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
     const index = selectCorp.cards.findIndex((card) => card.name === CardName.ARCADIAN_COMMUNITIES);
     selectCorp.cb([selectCorp.cards[index]]); // Arcadian
+    runAllActions(game);
 
-    game.deferredActions.pop()!.execute(); // SelectPaymentDeferred
     expect(player.isCorporation(CardName.ARCADIAN_COMMUNITIES)).is.true;
     expect(player.pendingInitialActions).has.length(1);
   });
@@ -258,6 +272,20 @@ describe('Merger', function() {
     expect(player.production.megacredits).eq(1);
   });
 
+  it('Works with Aridor and another corporation card, Aridor goes second', function() {
+    player.playCorporationCard(new Viron());
+    runAllActions(game);
+    expect(player.production.megacredits).eq(0);
+
+    player.playAdditionalCorporationCard(new Aridor());
+    runAllActions(game);
+    expect(player.production.megacredits).eq(0);
+
+    player.playCard(new Tardigrades());
+    runAllActions(game);
+    expect(player.production.megacredits).eq(0);
+  });
+
   describe('Mergability outliers for weird cases', () => {
     function testMergability(currentCorp: ICorporationCard | [ICorporationCard, ICorporationCard], candidate: ICorporationCard, megacredits: number, pass: boolean) {
       const corporations = Array.isArray(currentCorp) ? currentCorp : [currentCorp];
@@ -271,7 +299,7 @@ describe('Merger', function() {
         }
         game.corporationDeck.drawPile.push(candidate);
 
-        player.setResourcesForTest(Units.of({megacredits})); // Clear all resources but MC.
+        player.stock.override(Units.of({megacredits})); // Clear all resources but MC.
         merger.play(player);
         runAllActions(game);
 

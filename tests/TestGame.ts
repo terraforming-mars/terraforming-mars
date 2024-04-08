@@ -1,25 +1,24 @@
 import {Game} from '../src/server/Game';
-import {GameOptions} from '../src/server/GameOptions';
-import {testGameOptions} from './TestingUtils';
+import {IGame} from '../src/server/IGame';
+import {GameOptions} from '../src/server/game/GameOptions';
 import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 
-type _TestOptions = {
+export type TestGameOptions = GameOptions & {
   /* skip initial card selection */
   skipInitialCardSelection: boolean;
-}
-export type TestGameOptions = GameOptions & _TestOptions;
+};
 
 function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
   return [
-    TestPlayer.BLUE.newPlayer(false, idSuffix),
-    TestPlayer.RED.newPlayer(false, idSuffix),
-    TestPlayer.YELLOW.newPlayer(false, idSuffix),
-    TestPlayer.GREEN.newPlayer(false, idSuffix),
-    TestPlayer.BLACK.newPlayer(false, idSuffix),
-    TestPlayer.PURPLE.newPlayer(false, idSuffix),
-    TestPlayer.ORANGE.newPlayer(false, idSuffix),
-    TestPlayer.PINK.newPlayer(false, idSuffix),
+    TestPlayer.BLUE.newPlayer({name: 'player1', idSuffix}),
+    TestPlayer.RED.newPlayer({name: 'player2', idSuffix}),
+    TestPlayer.YELLOW.newPlayer({name: 'player3', idSuffix}),
+    TestPlayer.GREEN.newPlayer({name: 'player4', idSuffix}),
+    TestPlayer.BLACK.newPlayer({name: 'player5', idSuffix}),
+    TestPlayer.PURPLE.newPlayer({name: 'player6', idSuffix}),
+    TestPlayer.ORANGE.newPlayer({name: 'player7', idSuffix}),
+    TestPlayer.PINK.newPlayer({name: 'player8', idSuffix}),
   ].slice(0, count);
 }
 
@@ -35,6 +34,7 @@ function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
  *
  * Test game has a return type with a spread array operator.
  */
+// TODO(kberg): return IGame instead of Game
 export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [Game, ...Array<TestPlayer>] {
   const players = createPlayers(count, idSuffix);
 
@@ -43,11 +43,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
     copy.aresHazards = true;
   }
 
-  const options: GameOptions | undefined = customOptions === undefined ?
-    undefined :
-    testGameOptions(customOptions);
-
-  const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
+  const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], customOptions);
   if (customOptions?.skipInitialCardSelection !== false) {
     for (const player of players) {
       /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
@@ -59,7 +55,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
   return [game, ...players];
 }
 
-export function getTestPlayer(game: Game, idx: number): TestPlayer {
+export function getTestPlayer(game: IGame, idx: number): TestPlayer {
   const players = game.getPlayers();
   const length = players.length;
   if (idx >= length) {

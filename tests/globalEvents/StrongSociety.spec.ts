@@ -4,7 +4,7 @@ import {StrongSociety} from '../../src/server/turmoil/globalEvents/StrongSociety
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
-import {addCityTile} from '../TestingUtils';
+import {addCity} from '../TestingUtils';
 
 describe('StrongSociety', function() {
   it('resolve play', function() {
@@ -14,12 +14,12 @@ describe('StrongSociety', function() {
     const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
-    addCityTile(player);
-    turmoil.chairman = player2.id;
+    addCity(player);
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
     expect(player.megaCredits).to.eq(2);

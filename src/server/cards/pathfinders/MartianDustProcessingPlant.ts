@@ -12,7 +12,6 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
       name: CardName.MARTIAN_DUST_PROCESSING_PLANT,
       cost: 15,
       tags: [Tag.MARS, Tag.BUILDING],
-      victoryPoints: 1,
 
       behavior: {
         production: {energy: -1, steel: 2},

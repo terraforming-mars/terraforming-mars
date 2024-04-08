@@ -1,14 +1,14 @@
 import {BaseMilestone} from './IMilestone';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export class Mayor extends BaseMilestone {
   constructor() {
     super(
       'Mayor',
-      'Owning at least 3 city tiles',
+      'Own 3 city tiles',
       3);
   }
-  public getScore(player: Player): number {
-    return player.game.getCitiesCount(player);
+  public getScore(player: IPlayer): number {
+    return player.game.board.getCities(player).length;
   }
 }

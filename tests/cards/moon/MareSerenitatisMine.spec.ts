@@ -1,23 +1,23 @@
-import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testGameOptions} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
-import {expect} from 'chai';
-import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('MareSerenitatisMine', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MareSerenitatisMine;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MareSerenitatisMine();
   });
@@ -43,19 +43,15 @@ describe('MareSerenitatisMine', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareSerenitatis = moonData.moon.getSpace(MoonSpaces.MARE_SERENITATIS);
+    const mareSerenitatis = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_SERENITATIS);
     expect(mareSerenitatis.player).eq(player);
     expect(mareSerenitatis.tile!.tileType).eq(TileType.MOON_MINE);
 
-    const deferredAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
-    const roadSpace = deferredAction.spaces![0];
-    expect(roadSpace.tile).is.undefined;
-    expect(roadSpace.player).is.undefined;
+    runAllActions(game);
     expect(moonData.logisticRate).eq(0);
 
-    deferredAction.execute()!.cb(roadSpace);
-    expect(roadSpace.tile!.tileType).eq(TileType.MOON_ROAD);
-    expect(roadSpace.player).eq(player);
+    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(16);
   });

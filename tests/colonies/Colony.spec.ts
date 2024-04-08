@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IColony} from '../../src/server/colonies/IColony';
 import {Pluto} from '../../src/server/colonies/Pluto';
 import {DustSeals} from '../../src/server/cards/base/DustSeals';
-import {Player} from '../../src/server/Player';
+import {IPlayer} from '../../src/server/IPlayer';
 import {Game} from '../../src/server/Game';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
@@ -10,7 +10,7 @@ import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
-import {cast, runAllActions, testGameOptions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/server/cards/community/Pallas';
@@ -18,6 +18,7 @@ import {Io} from '../../src/server/colonies/Io';
 import {Europa} from '../../src/server/colonies/Europa';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
 import {ColonyDeserializer} from '../../src/server/colonies/ColonyDeserializer';
+import {testGame} from '../TestGame';
 
 function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   const options = cast(player.getStandardProjectOption(), SelectCard);
@@ -25,7 +26,7 @@ function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   return options.config.enabled![colonyOptionIdx];
 }
 
-function isTradeWithColonyActionAvailable(player: Player) {
+function isTradeWithColonyActionAvailable(player: IPlayer) {
   let tradeWithColonyIsAvailable = false;
   player.takeAction();
   const actions = cast(player.getWaitingFor(), OrOptions);
@@ -47,11 +48,7 @@ describe('Colony', function() {
   let game: Game;
 
   beforeEach(function() {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.YELLOW.newPlayer();
-    player4 = TestPlayer.GREEN.newPlayer();
-    const gameOptions = testGameOptions({
+    [game, player, player2, player3, player4] = testGame(4, {
       coloniesExtension: true,
       customColoniesList: [
         ColonyName.LUNA,
@@ -62,7 +59,6 @@ describe('Colony', function() {
         ColonyName.CALLISTO,
       ],
     });
-    game = Game.newInstance('gameid', [player, player2, player3, player4], player, gameOptions, /* seed */ .1);
     luna = game.colonies.find((c) => c.name === ColonyName.LUNA)!;
   });
 

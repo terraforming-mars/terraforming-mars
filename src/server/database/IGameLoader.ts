@@ -1,4 +1,4 @@
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {PlayerId, GameId, SpectatorId} from '../../common/Types';
 import {GameIdLedger} from './IDatabase';
 
@@ -7,7 +7,7 @@ import {GameIdLedger} from './IDatabase';
  * Loads games from database sequentially as needed
  */
 export interface IGameLoader {
-  add(game: Game): Promise<void>;
+  add(game: IGame): Promise<void>;
   getIds(): Promise<Array<GameIdLedger>>;
   /**
    * Fetches a game from the GameLoader cache.
@@ -19,8 +19,8 @@ export interface IGameLoader {
    * doing an adminstrative rollback. Don't even make this true for normal game undos.
    * That's what `restoreGameAt` is for.
    */
-  getGame(id: GameId | PlayerId | SpectatorId, forceLoad?: boolean): Promise<Game | undefined>;
-  restoreGameAt(gameId: GameId, saveId: number): Promise<Game>;
+  getGame(id: GameId | PlayerId | SpectatorId, forceLoad?: boolean): Promise<IGame | undefined>;
+  restoreGameAt(gameId: GameId, saveId: number): Promise<IGame>;
   /**
    * Mark a game to be purged from the cache. It will be
    * purged a a future call to `sweep`.
@@ -28,4 +28,13 @@ export interface IGameLoader {
    * @param {GameId} gameId the game to be removed from the cache. Only call this for completed games.
    */
   mark(gameId: GameId): void;
+
+  /**
+   * Saves a game (but takes into account that the game might have already been purged.)
+   *
+   * Do not call IDatabase.saveGame directly in a running system.
+   */
+  saveGame(game: IGame): Promise<void>;
+  completeGame(game: IGame): Promise<void>;
+  maintenance(): Promise<void>;
 }

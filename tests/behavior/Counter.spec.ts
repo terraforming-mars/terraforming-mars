@@ -21,14 +21,23 @@ describe('Counter', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
-    fake = fakeCard({});
+    [game, player, player2, player3] = testGame(3, {
+      venusNextExtension: true,
+      aresExtension: true,
+      aresHazards: false});
+    fake = fakeCard();
   });
 
   it('numbers', () => {
     const counter = new Counter(player, fake);
     expect(counter.count(3)).eq(3);
     expect(counter.count(8)).eq(8);
+  });
+
+  it('start', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({start: 3})).eq(3);
+    expect(counter.count({start: 3, each: 7})).eq(21);
   });
 
   it('tags, simple', () => {
@@ -106,7 +115,7 @@ describe('Counter', () => {
 
     const oceanCity = new OceanCity();
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
-    game.addOceanTile(player, oceanSpace);
+    game.addOcean(player, oceanSpace);
 
     expect(count()).deep.eq({'': 2, 'onmars': 1, 'offmars': 1, 'everywhere': 2});
 
@@ -132,13 +141,13 @@ describe('Counter', () => {
     expect(count(player2)).eq(0);
 
     const landSpace = game.board.getAvailableSpacesForCity(player)[0];
-    game.addCityTile(player, landSpace);
+    game.addCity(player, landSpace);
 
     expect(count(player)).eq(2);
     expect(count(player2)).eq(0);
 
     const landSpace2 = game.board.getAvailableSpacesForCity(player2)[0];
-    game.addCityTile(player2, landSpace2);
+    game.addCity(player2, landSpace2);
 
     expect(count(player)).eq(2);
     expect(count(player2)).eq(1);
@@ -165,7 +174,7 @@ describe('Counter', () => {
     const wetlands = new Wetlands();
     player.plants = 4;
     const selectSpace = cast(wetlands.play(player), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(counter.count({greeneries: {}})).eq(4);
   });
 
@@ -208,7 +217,7 @@ describe('Counter', () => {
     const wetlands = new Wetlands();
     player.plants = 4;
     const selectSpace = cast(wetlands.play(player), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(counter.count({oceans: {}})).eq(10);
   });
 
@@ -233,13 +242,13 @@ describe('Counter for Moon', () => {
 
   beforeEach(() => {
     [game, player] = testGame(3, {moonExpansion: true});
-    fake = fakeCard({});
+    fake = fakeCard();
   });
 
   it('colony rate', () => {
     const counter = new Counter(player, fake);
     const moonData = MoonExpansion.moonData(game);
-    moonData.colonyRate = 3;
+    moonData.habitatRate = 3;
 
     expect(counter.count({moon: {habitatRate: {}}})).eq(3);
     expect(counter.count({moon: {habitatRate: {}}, per: 2})).eq(1);
@@ -312,5 +321,47 @@ describe('Counter for Moon', () => {
     expect(counter.count({moon: {road: {}}})).eq(4);
     MoonExpansion.addRoadTile(player, 'm06');
     expect(counter.count({moon: {road: {}}})).eq(5);
+  });
+});
+
+describe('Counter for Underworld', () => {
+  let game: Game;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let fake: IProjectCard;
+
+  beforeEach(() => {
+    [game, player, player2] = testGame(3, {underworldExpansion: true});
+    fake = fakeCard();
+  });
+
+  it('corruption', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({underworld: {corruption: {}}})).eq(0);
+
+    player.underworldData.corruption = 3;
+
+    expect(counter.count({underworld: {corruption: {}}})).eq(3);
+    expect(counter.count({underworld: {corruption: {}}, all: true})).eq(3);
+
+    player2.underworldData.corruption = 5;
+
+    expect(counter.count({underworld: {corruption: {}}})).eq(3);
+    expect(counter.count({underworld: {corruption: {}}, all: true})).eq(8);
+  });
+
+  it('excavationMarkers', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(0);
+
+    game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY).excavator = player;
+
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
+    expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(1);
+
+    game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).excavator = player2;
+
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
+    expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(2);
   });
 });

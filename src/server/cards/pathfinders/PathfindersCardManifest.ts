@@ -1,26 +1,30 @@
 import {ModuleManifest} from '../ModuleManifest';
 import {CardName} from '../../../common/cards/CardName';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 
 import {AdhaiHighOrbitConstructions} from './AdhaiHighOrbitConstructions';
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';
 import {Ambient} from './Ambient';
 import {Anthozoa} from './Anthozoa';
-import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
 import {Aurorai} from './Aurorai';
+import {BalancedDevelopment} from './BalancedDevelopment';
+import {BioSol} from './BioSol';
 import {BotanicalExperience} from './BotanicalExperience';
 import {BreedingFarms} from './BreedingFarms';
-import {BioSol} from './BioSol';
 import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
 import {CharityDonation} from './CharityDonation';
 import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
 import {CollegiumCopernicus} from './CollegiumCopernicus';
+import {CommunicationBoom} from './CommunicationBoom';
 import {CommunicationCenter} from './CommunicationCenter';
+import {ConstantStruggle} from './ConstantStruggle';
 import {ControlledBloom} from './ControlledBloom';
 import {CoordinatedRaid} from './CoordinatedRaid';
+import {Crashlanding} from './Crashlanding';
 import {CrewTraining} from './CrewTraining';
 import {Cryptocurrency} from './Cryptocurrency';
 import {CultivationOfVenus} from './CultivationOfVenus';
@@ -39,6 +43,7 @@ import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 import {ExperiencedMartians} from './ExperiencedMartians';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
+import {GagarinMobileBase} from './GagarinMobileBase';
 import {GeologicalExpedition} from './GeologicalExpedition';
 import {HabitatMarte} from './HabitatMarte';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
@@ -51,6 +56,7 @@ import {LastResortIngenuity} from './LastResortIngenuity';
 import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
+import {MagneticFieldStimulationDelays} from './MagneticFieldStimulationDelays';
 import {MarsDirect} from './MarsDirect';
 import {MarsMaths} from './MarsMaths';
 import {MartianCulture} from './MartianCulture';
@@ -77,28 +83,32 @@ import {PrivateSecurity} from './PrivateSecurity';
 import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 import {RareEarthElements} from './RareEarthElements';
 import {RedCity} from './RedCity';
-import {Ringcom} from './Ringcom';
 import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 import {RichDeposits} from './RichDeposits';
+import {Ringcom} from './Ringcom';
 import {RobinHaulings} from './RobinHaulings';
 import {SecretLabs} from './SecretLabs';
-import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SmallComet} from './SmallComet';
+import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SocialEvents} from './SocialEvents';
 import {SoilDetoxification} from './SoilDetoxification';
 import {Solarpedia} from './Solarpedia';
 import {SolarStorm} from './SolarStorm';
+import {SolBank} from './SolBank';
 import {SoylentSeedlingSystems} from './SoylentSeedlingSystems';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
+import {SpaceRaceToMars} from './SpaceRaceToMars';
 import {SpaceRelay} from './SpaceRelay';
 import {SpecializedSettlement} from './SpecializedSettlement';
-import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Steelaris} from './Steelaris';
+import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {SurveyMission} from './SurveyMission';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
 import {TheNewSpaceRace} from './TheNewSpaceRace';
+import {ThinkTank} from './ThinkTank';
+import {TiredEarth} from './TiredEarth';
 import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
@@ -155,8 +165,8 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.CULTIVATION_OF_VENUS]: {Factory: CultivationOfVenus, compatibility: 'venus'},
     [CardName.EXPEDITION_TO_THE_SURFACE_VENUS]: {Factory: ExpeditionToTheSurfaceVenus, compatibility: 'venus'},
     [CardName.LAST_RESORT_INGENUITY]: {Factory: LastResortIngenuity},
-    // // [CardName.CRASHLANDING]: {Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
-    // // [CardName.THINK_TANK]: {Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
+    [CardName.CRASHLANDING]: {Factory: Crashlanding, compatibility: 'ares'},
+    [CardName.THINK_TANK]: {Factory: ThinkTank},
     [CardName.BOTANICAL_EXPERIENCE]: {Factory: BotanicalExperience},
     [CardName.CRYPTOCURRENCY]: {Factory: Cryptocurrency},
     [CardName.RICH_DEPOSITS]: {Factory: RichDeposits},
@@ -198,20 +208,20 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.MARS_MATHS]: {Factory: MarsMaths},
     [CardName.MARS_DIRECT]: {Factory: MarsDirect, compatibility: 'pathfinders'},
     [CardName.MARTIAN_INSURANCE_GROUP]: {Factory: MartianInsuranceGroup, compatibility: 'pathfinders'},
-    // [CardName.SOLBANK]: {Factory: SolBank},
+    [CardName.SOLBANK]: {Factory: SolBank},
     [CardName.BIO_SOL]: {Factory: BioSol},
     [CardName.AURORAI]: {Factory: Aurorai, compatibility: 'pathfinders'},
     [CardName.COLLEGIUM_COPERNICUS]: {Factory: CollegiumCopernicus, compatibility: 'colonies'},
     [CardName.ROBIN_HAULINGS]: {Factory: RobinHaulings, compatibility: ['venus', 'pathfinders']},
     [CardName.ODYSSEY]: {Factory: Odyssey},
-    // [CardName.GAGARIN_MOBILE_BASE]: {Factory: GagarinMobileBase},
+    [CardName.GAGARIN_MOBILE_BASE]: {Factory: GagarinMobileBase},
     // [CardName.MARS_FRONTIER_ALLIANCE]: {Factory: MarsFrontierAlliance},
     [CardName.MIND_SET_MARS]: {Factory: MindSetMars, compatibility: 'turmoil'},
     [CardName.HABITAT_MARTE]: {Factory: HabitatMarte, compatibility: 'pathfinders'},
     [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: {Factory: AdhaiHighOrbitConstructions, compatibility: 'colonies'},
   },
   preludeCards: {
-    [CardName.VENUS_FIRST_PATHFINDERS]: {Factory: VenusFirst, compatibility: 'venus'},
+    [CardName.VENUS_FIRST]: {Factory: VenusFirst, compatibility: 'venus'},
     [CardName.VALUABLE_GASES_PATHFINDERS]: {Factory: ValuableGases, compatibility: 'venus'},
     [CardName.CO2_REDUCERS]: {Factory: CO2Reducers, compatibility: 'venus'},
     [CardName.HYDROGEN_BOMBARDMENT]: {Factory: HydrogenBombardment, compatibility: 'venus'},
@@ -224,15 +234,22 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.VITAL_COLONY]: {Factory: VitalColony, compatibility: 'colonies'},
     [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
     [CardName.DEEP_SPACE_OPERATIONS]: {Factory: DeepSpaceOperations},
-    [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
     [CardName.EXPERIENCED_MARTIANS]: {Factory: ExperiencedMartians, compatibility: ['turmoil', 'pathfinders']},
     [CardName.THE_NEW_SPACE_RACE]: {Factory: TheNewSpaceRace, compatibility: 'turmoil'},
+  },
+
+  globalEvents: {
+    [GlobalEventName.BALANCED_DEVELOPMENT]: {Factory: BalancedDevelopment},
+    [GlobalEventName.SPACE_RACE_TO_MARS]: {Factory: SpaceRaceToMars},
+    [GlobalEventName.CONSTANT_STRUGGLE]: {Factory: ConstantStruggle, negative: true},
+    [GlobalEventName.TIRED_EARTH]: {Factory: TiredEarth, negative: true},
+    [GlobalEventName.MAGNETIC_FIELD_STIMULATION_DELAYS]: {Factory: MagneticFieldStimulationDelays, negative: true},
+    [GlobalEventName.COMMUNICATION_BOOM]: {Factory: CommunicationBoom, negative: true},
   },
 
   // Perhaps these community cards should just move to this manifest, but only if it becomes
   // generally easier to just add all the preludes that match what game someone's playing.
   cardsToRemove: [
-    CardName.VENUS_FIRST,
     CardName.RESEARCH_GRANT,
     CardName.VALUABLE_GASES,
   ],

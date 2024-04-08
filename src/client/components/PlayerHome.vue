@@ -119,13 +119,13 @@
           <div class="text-overview" v-i18n>[ toggle cards filters ]</div>
         </div>
         <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
+            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
         <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
+            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
         <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
-            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
+            <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
 
         <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" ></stacked-cards>

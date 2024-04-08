@@ -43,6 +43,6 @@ export class UtopiaPlanitiaBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined);
+    super(spaces, undefined, []);
   }
 }

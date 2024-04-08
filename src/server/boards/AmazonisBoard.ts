@@ -3,7 +3,6 @@ import {BoardBuilder} from './BoardBuilder';
 import {SpaceName} from '../SpaceName';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
-import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 import {Space} from './Space';
 
@@ -48,15 +47,11 @@ export class AmazonisBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined);
-  }
-
-  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
-    return [
+    super(spaces, undefined, [
       SpaceName.ALBOR_THOLUS,
       SpaceName.ANSERIS_MONS,
       SpaceName.PINDUS_MONS,
       SpaceName.ULYSSES_THOLUS,
-    ];
+    ]);
   }
 }

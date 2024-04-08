@@ -3,7 +3,6 @@ import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
-import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SpaceName} from '../SpaceName';
@@ -48,7 +47,11 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined);
+    super(spaces, undefined, [SpaceName.VASTITAS_BOREALIS_NOVUS_HECATES_THOLUS,
+      SpaceName.VASTITAS_BOREALIS_NOVUS_ELYSIUM_MONS,
+      SpaceName.VASTITAS_BOREALIS_NOVUS_ALBA_MONS,
+      SpaceName.VASTITAS_BOREALIS_NOVUS_URANIUS_THOULS,
+    ]);
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions: CanAffordOptions) {
@@ -61,13 +64,5 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
       }
       return true;
     });
-  }
-
-  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
-    return [SpaceName.VASTITAS_BOREALIS_NOVUS_HECATES_THOLUS,
-      SpaceName.VASTITAS_BOREALIS_NOVUS_ELYSIUM_MONS,
-      SpaceName.VASTITAS_BOREALIS_NOVUS_ALBA_MONS,
-      SpaceName.VASTITAS_BOREALIS_NOVUS_URANIUS_THOULS,
-    ];
   }
 }

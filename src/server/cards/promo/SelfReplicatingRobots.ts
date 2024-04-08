@@ -53,8 +53,8 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
     let count = 0;
     if (this.hasAttachedCards()) {
       count = Object.values(this.data.attachedCards).reduce((acc, value) => {
-        acc += value
-        return acc
+        acc += value;
+        return acc;
       }, 0);
     }
     return count;

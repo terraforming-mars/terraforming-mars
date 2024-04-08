@@ -72,7 +72,7 @@ import {MarsBoard} from './boards/MarsBoard';
 import {UnderworldData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
-import { SelfReplicatingRobots } from './cards/promo/SelfReplicatingRobots';
+import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 
 export class Game implements IGame, Logger {

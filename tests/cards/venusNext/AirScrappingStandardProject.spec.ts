@@ -54,8 +54,8 @@ describe('AirScrappingStandardProject', function() {
   });
 
   it('Test reds', () => {
-    testRedsCosts(() => card.canAct(player), player, 15, 3, /* canAct= */ true);
+    testRedsCosts(() => card.canAct(player), player, 15, 3);
     setVenusScaleLevel(game, 30);
-    testRedsCosts(() => card.canAct(player), player, 15, 0, /* canAct= */ true);
+    testRedsCosts(() => card.canAct(player), player, 15, 0);
   });
 });

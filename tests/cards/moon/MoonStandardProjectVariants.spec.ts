@@ -33,9 +33,9 @@ describe('MoonStandardProjectVariants', () => {
       const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true, moonStandardProjectVariant: true});
       const moonData = MoonExpansion.moonData(game);
 
-      testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
+      testRedsCosts(() => card.canAct(player), player, card.cost, 3);
       moonData.habitatRate = 8;
-      testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct */ true);
+      testRedsCosts(() => card.canAct(player), player, card.cost, 0);
     });
   });
 
@@ -60,9 +60,9 @@ describe('MoonStandardProjectVariants', () => {
       const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true, moonStandardProjectVariant: true});
       const moonData = MoonExpansion.moonData(game);
 
-      testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
+      testRedsCosts(() => card.canAct(player), player, card.cost, 3);
       moonData.miningRate = 8;
-      testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct */ true);
+      testRedsCosts(() => card.canAct(player), player, card.cost, 0);
     });
   });
 
@@ -87,9 +87,9 @@ describe('MoonStandardProjectVariants', () => {
       const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true, moonStandardProjectVariant: true});
       const moonData = MoonExpansion.moonData(game);
 
-      testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
+      testRedsCosts(() => card.canAct(player), player, card.cost, 3);
       moonData.logisticRate = 8;
-      testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct */ true);
+      testRedsCosts(() => card.canAct(player), player, card.cost, 0);
     });
   });
 });

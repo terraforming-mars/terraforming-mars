@@ -78,9 +78,9 @@ describe('MoonMineStandardProject', () => {
     // Card requirements
     player.titanium = 1;
 
-    testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
     moonData.miningRate = 8;
-    testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct */ true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
 

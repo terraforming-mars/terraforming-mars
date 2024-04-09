@@ -4,6 +4,7 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
+import {inplaceShuffle} from '../utils/shuffle';
 
 function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
@@ -23,8 +24,6 @@ export class BoardBuilder {
   private unshufflableSpaces: Array<number> = [];
 
   constructor(private includeVenus: boolean, private includePathfinders: boolean) {
-    this.spaces.push(colonySpace(SpaceName.GANYMEDE_COLONY));
-    this.spaces.push(colonySpace(SpaceName.PHOBOS_SPACE_HAVEN));
   }
 
   ocean(...bonus: Array<SpaceBonus>): this {
@@ -58,6 +57,9 @@ export class BoardBuilder {
 
 
   build(): Array<Space> {
+    this.spaces.push(colonySpace(SpaceName.GANYMEDE_COLONY));
+    this.spaces.push(colonySpace(SpaceName.PHOBOS_SPACE_HAVEN));
+
     const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
     const idOffset = this.spaces.length + 1;
     let idx = 0;
@@ -102,8 +104,7 @@ export class BoardBuilder {
     return this.spaces;
   }
 
-  public shuffleArray(rng: Random, array: Array<Object>): void {
-    this.unshufflableSpaces.sort((a, b) => a < b ? a : b);
+  public shuffleArray(rng: Random, array: Array<unknown>): void {
     // Reversing the indexes so the elements are pulled from the right.
     // Reversing the result so elements are listed left to right.
     const spliced = this.unshufflableSpaces.reverse().map((idx) => array.splice(idx, 1)[0]).reverse();
@@ -118,25 +119,17 @@ export class BoardBuilder {
 
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
-  public shuffle(rng: Random, ...lands: Array<SpaceName>) {
-    this.shuffleArray(rng, this.spaceTypes);
-    this.shuffleArray(rng, this.bonuses);
-    let safety = 0;
-    while (safety < 1000) {
-      let satisfy = true;
-      for (const land of lands) {
-        // Why -3?
-        const land_id = Number(land) - 3;
-        while (this.spaceTypes[land_id] === SpaceType.OCEAN) {
-          satisfy = false;
-          const idx = rng.nextInt(this.spaceTypes.length);
-          [this.spaceTypes[land_id], this.spaceTypes[idx]] = [this.spaceTypes[idx], this.spaceTypes[land_id]];
-        }
+  public shuffle(rng: Random, ...preservedSpaceIds: Array<SpaceName>) {
+    for (const spaceId of preservedSpaceIds) {
+      const idx = Number(spaceId) - 3;
+      if (!this.unshufflableSpaces.includes(idx)) {
+        this.unshufflableSpaces.push(idx);
       }
-      if (satisfy) return;
-      safety++;
     }
-    throw new Error('infinite loop detected');
+    this.unshufflableSpaces.sort((a, b) => a - b);
+    preservingShuffle(this.spaceTypes, this.unshufflableSpaces, rng);
+    inplaceShuffle(this.bonuses, rng);
+    return;
   }
 
   private static spaceId(id: number): SpaceId {
@@ -147,3 +140,16 @@ export class BoardBuilder {
     return safeCast(strId, isSpaceId);
   }
 }
+
+export function preservingShuffle(array: Array<unknown>, preservedIndexes: ReadonlyArray<number>, rng: Random): void {
+  // Reversing the indexes so the elements are pulled from the right.
+  // Reversing the result so elements are listed left to right.
+  const forward = [...preservedIndexes].sort((a, b) => a - b);
+  const backward = [...forward].reverse();
+  const spliced = backward.map((idx) => array.splice(idx, 1)[0]).reverse();
+  inplaceShuffle(array, rng);
+  for (let idx = 0; idx < forward.length; idx++) {
+    array.splice(forward[idx], 0, spliced[idx]);
+  }
+}
+

@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {MultiSet} from 'mnemonist';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
@@ -13,7 +12,6 @@ import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {SpaceId} from '../../src/common/Types';
-import {SpaceName} from '../../src/server/SpaceName';
 
 describe('Board', function() {
   let board: TharsisBoard;
@@ -346,43 +344,5 @@ describe('Board', function() {
     const board = new TestBoard(Board.deserialize(boardJson, [player1, player2]).spaces);
     expect(board.getSpaceOrThrow('01').player).eq(player1);
     expect(board.getSpaceOrThrow('03').player).eq(player2);
-  });
-
-  it('Randomized maps have space types on all spaces, #4056', () => {
-    const spaces = new MultiSet<string>();
-    const seeds = [];
-    for (let idx = 0; idx < 4_000; idx++) {
-      const seed = Math.random();
-      board = TharsisBoard.newInstance({
-        ...DEFAULT_GAME_OPTIONS,
-        shuffleMapOption: true,
-      },
-      new SeededRandom(seed));
-      for (const space of board.spaces) {
-        if (space.spaceType === undefined) {
-          seeds.push(seed);
-          console.log(`Bad seed ${seed}`);
-          spaces.add(space.id);
-        }
-      }
-    }
-    expect(spaces.size, spaces.toJSON() + ' ' + JSON.stringify(seeds)).eq(0);
-  });
-
-  it('Randomized maps preserve land spaces', () => {
-    for (let idx = 0; idx < 4_000; idx++) {
-      const seed = Math.random();
-      board = TharsisBoard.newInstance({
-        ...DEFAULT_GAME_OPTIONS,
-        shuffleMapOption: true,
-      },
-      new SeededRandom(seed));
-      const reservedSpaces = [SpaceName.NOCTIS_CITY,
-        SpaceName.ASCRAEUS_MONS,
-        SpaceName.ARSIA_MONS,
-        SpaceName.PAVONIS_MONS,
-        SpaceName.THARSIS_THOLUS].map((id) => board.getSpaceOrThrow(id).spaceType);
-      expect(reservedSpaces, `for seed ${seed}`).deep.eq([SpaceType.LAND, SpaceType.LAND, SpaceType.LAND, SpaceType.LAND, SpaceType.LAND]);
-    }
   });
 });

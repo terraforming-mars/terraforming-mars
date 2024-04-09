@@ -34,7 +34,7 @@ describe('Deepnuking', () => {
     runAllActions(game);
 
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    expect(orOptions.options).has.length(2);
+    expect(orOptions.options).has.length(3);
     orOptions.options[0].cb();
     expect(player2.plants).to.eq(2);
 

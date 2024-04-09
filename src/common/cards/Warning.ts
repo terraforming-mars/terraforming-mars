@@ -7,6 +7,7 @@ export type Warning =
  'maxMiningRate' |
  'maxLogisticsRate' |
  'decreaseOwnProduction' |
+ 'removeOwnPlants' |
  'buildOnLuna' |
  'preludeFizzle' |
  'underworldMustExcavateEnergy' |

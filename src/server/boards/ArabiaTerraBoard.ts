@@ -26,7 +26,7 @@ export class ArabiaTerraBoard extends MarsBoard {
     // y=1
     builder.ocean(MICROBE, MICROBE, DRAW_CARD).ocean(PLANT).land(PLANT, PLANT).land().land(PLANT).land(PLANT);
     // y=2
-    builder.land(PLANT, STEEL).ocean(PLANT).land(DATA, DATA, DRAW_CARD).land(STEEL).land(STEEL).land(STEEL, PLANT).cove(STEEL, TITANIUM);
+    builder.land(PLANT, STEEL).ocean(PLANT).land(DATA, DATA, DRAW_CARD).land(STEEL).land(STEEL).land(STEEL, PLANT).coveVolcanic(STEEL, TITANIUM);
     // y=3
     builder.land(PLANT, PLANT).land(PLANT).ocean(PLANT, PLANT).land().land().land().land(STEEL, STEEL).land();
     // y=4
@@ -36,12 +36,12 @@ export class ArabiaTerraBoard extends MarsBoard {
     // y=6
     builder.cove(PLANT, TITANIUM).ocean(PLANT, PLANT).cove(PLANT, PLANT).land(PLANT).land(STEEL).land(PLANT, TITANIUM).land(TITANIUM, TITANIUM);
     // y=7
-    builder.ocean(PLANT, PLANT).land(PLANT).land(STEEL, DRAW_CARD).land(STEEL, STEEL).land(STEEL).land(DRAW_CARD);
+    builder.ocean(PLANT, PLANT).land(PLANT).volcanic(STEEL, DRAW_CARD).land(STEEL, STEEL).land(STEEL).volcanic(DRAW_CARD);
     // y=8
-    builder.land().land().land().land().land(STEEL);
+    builder.land().land().land().land().volcanic(STEEL);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng, SpaceName.TIKHONAROV, SpaceName.LADON, SpaceName.FLAUGERGUES, SpaceName.CHARYBDIS);
+      builder.shuffle(rng);
     }
 
     const spaces = builder.build();

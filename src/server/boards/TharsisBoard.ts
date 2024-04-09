@@ -18,13 +18,13 @@ export class TharsisBoard extends MarsBoard {
     // y=0
     builder.land(STEEL, STEEL).ocean(STEEL, STEEL).land().ocean(DRAW_CARD).ocean();
     // y=1
-    builder.land().land(STEEL).land().land().land().ocean(DRAW_CARD, DRAW_CARD);
+    builder.land().volcanic(STEEL).land().land().land().ocean(DRAW_CARD, DRAW_CARD);
     // y=2
-    builder.land(DRAW_CARD).land().land().land().land().land().land(STEEL);
+    builder.volcanic(DRAW_CARD).land().land().land().land().land().land(STEEL);
     // y=3
-    builder.land(PLANT, TITANIUM).land(PLANT).land(PLANT).land(PLANT).land(PLANT, PLANT).land(PLANT).land(PLANT).ocean(PLANT, PLANT);
+    builder.volcanic(PLANT, TITANIUM).land(PLANT).land(PLANT).land(PLANT).land(PLANT, PLANT).land(PLANT).land(PLANT).ocean(PLANT, PLANT);
     // y=4
-    builder.land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT)
+    builder.volcanic(PLANT, PLANT).land(PLANT, PLANT).noctisCity(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT)
       .ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT);
     // y=5
     builder.land(PLANT).land(PLANT, PLANT).land(PLANT).land(PLANT).land(PLANT).ocean(PLANT).ocean(PLANT).ocean(PLANT);
@@ -36,7 +36,7 @@ export class TharsisBoard extends MarsBoard {
     builder.land(STEEL).land(STEEL, STEEL).land().land().ocean(TITANIUM, TITANIUM);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng, SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
+      builder.shuffle(rng);
     }
     const spaces = builder.build();
     return new TharsisBoard(spaces);

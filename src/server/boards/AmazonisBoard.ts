@@ -39,7 +39,7 @@ export class AmazonisBoard extends MarsBoard {
     builder.land().land(DRAW_CARD).land(STEEL).ocean(PLANT).land(STEEL, STEEL);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng, SpaceName.MEDUSAE_FOSSAE, SpaceName.ALBOR_THOLUS, SpaceName.ANSERIS_MONS, SpaceName.PINDUS_MONS, SpaceName.ULYSSES_THOLUS);
+      builder.shuffle(rng);
     }
 
     const spaces = builder.build();

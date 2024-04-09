@@ -21,31 +21,26 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
     const DELEGATE = SpaceBonus.DELEGATE;
 
     // y=0
-    builder.land(PLANT).land().land(STEEL).land().land();
+    builder.land(PLANT).land().volcanic(STEEL).land().land();
     // y=1
-    builder.land(PLANT, PLANT).land(PLANT, PLANT).land().land().land(PLANT).land(DRAW_CARD);
+    builder.land(PLANT, PLANT).land(PLANT, PLANT).land().land().land(PLANT).volcanic(DRAW_CARD);
     // y=2
     builder.land(DRAW_CARD).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT).land().land();
     // y=3
-    builder.land(STEEL, STEEL).land(TITANIUM).ocean(PLANT, PLANT).land(PLANT).land().land(DRAW_CARD).land(PLANT).land(DELEGATE);
+    builder.volcanic(STEEL, STEEL).land(TITANIUM).ocean(PLANT, PLANT).land(PLANT).land().land(DRAW_CARD).land(PLANT).land(DELEGATE).doNotShuffleLastSpace();
     // y=4
-    builder.land().land().ocean(PLANT).land(PLANT, PLANT).land(TEMPERATURE).ocean(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(DRAW_CARD, DRAW_CARD);
+    builder.land().land().ocean(PLANT).land(PLANT, PLANT).land(TEMPERATURE).doNotShuffleLastSpace().ocean(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(DRAW_CARD, DRAW_CARD);
     // y=5
     builder.land(DRAW_CARD, DRAW_CARD).land().land(PLANT).ocean(HEAT, HEAT).ocean(HEAT, HEAT, PLANT).ocean(DRAW_CARD).land(PLANT).land(TITANIUM, TITANIUM);
     // y=6
-    builder.land(TITANIUM).land(STEEL).ocean().ocean(HEAT, HEAT).land(PLANT, PLANT).land(PLANT).land();
+    builder.volcanic(TITANIUM).land(STEEL).ocean().ocean(HEAT, HEAT).land(PLANT, PLANT).land(PLANT).land();
     // y=7
     builder.land(PLANT).land().land(PLANT).land(PLANT, STEEL).land(STEEL).land(PLANT);
     // y=8
-    builder.land(DELEGATE).land().land(DRAW_CARD).land(STEEL).land(TITANIUM);
+    builder.land(DELEGATE).doNotShuffleLastSpace().land().land(DRAW_CARD).land(STEEL).land(TITANIUM);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng,
-        SpaceName.VASTITAS_BOREALIS_NOVUS_HECATES_THOLUS,
-        SpaceName.VASTITAS_BOREALIS_NOVUS_ELYSIUM_MONS,
-        SpaceName.VASTITAS_BOREALIS_NOVUS_ALBA_MONS,
-        SpaceName.VASTITAS_BOREALIS_NOVUS_URANIUS_THOULS,
-      );
+      builder.shuffle(rng);
     }
     const spaces = builder.build();
     return new VastitasBorealisNovusBoard(spaces);

@@ -37,11 +37,7 @@ export class TerraCimmeriaBoard extends MarsBoard {
     builder.ocean(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT).ocean(PLANT, PLANT);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng,
-        SpaceName.ALBOR_THOLUS_TERRACIMMERIA,
-        SpaceName.APOLLINARIS_MONS,
-        SpaceName.HADRIACUS_MONS,
-        SpaceName.TYRRHENUS_MONS);
+      builder.shuffle(rng);
     }
 
     const spaces = builder.build();

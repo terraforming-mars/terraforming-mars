@@ -39,7 +39,11 @@ export class VastitasBorealisBoard extends MarsBoard {
     builder.ocean(PLANT, PLANT).land().land(PLANT).land(PLANT, PLANT).land(STEEL, PLANT);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
+      builder.shuffle(rng,
+        SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
+        SpaceName.ALBA_FOSSAE,
+        SpaceName.CERANIUS_FOSSAE,
+        SpaceName.ALBA_MONS);
     }
 
     const spaces = builder.build();

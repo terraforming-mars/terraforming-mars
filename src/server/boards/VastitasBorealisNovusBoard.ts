@@ -40,7 +40,12 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
     builder.land(DELEGATE).land().land(DRAW_CARD).land(STEEL).land(TITANIUM);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
+      builder.shuffle(rng,
+        SpaceName.VASTITAS_BOREALIS_NOVUS_HECATES_THOLUS,
+        SpaceName.VASTITAS_BOREALIS_NOVUS_ELYSIUM_MONS,
+        SpaceName.VASTITAS_BOREALIS_NOVUS_ALBA_MONS,
+        SpaceName.VASTITAS_BOREALIS_NOVUS_URANIUS_THOULS,
+      );
     }
     const spaces = builder.build();
     return new VastitasBorealisNovusBoard(spaces);

@@ -182,7 +182,7 @@ export class Executor implements BehaviorExecutor {
           robotCards: arctac.robotCards !== undefined,
         });
         const cards = action.getCards();
-        const count = cards[0].length + cards[1].length;
+        const count = cards.length;
         if (count === 0) {
           return false;
         }
@@ -191,7 +191,7 @@ export class Executor implements BehaviorExecutor {
         if (count === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
           // TODO(kberg): also check wither arctac.min + spend is enough.
           // but that's just to make this future-proof.
-          if (cards[0][0]?.name === card.name) {
+          if (cards[0]?.name === card.name) {
             return false;
           }
         }

@@ -124,11 +124,11 @@ export class Server {
   }
 
   public static getSelfReplicatingRobotsTargetCards(player: IPlayer): Array<CardModel> {
-    return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
+    return player.getSelfReplicatingRobotsTargetCards().map((card) => {
       const model: CardModel = {
-        resources: targetCard.resourceCount,
-        name: targetCard.card.name,
-        calculatedCost: player.getCardCost(targetCard.card),
+        resources: card.resourceCount,
+        name: card.name,
+        calculatedCost: player.getCardCost(card),
         isSelfReplicatingRobotsCard: true,
       };
       return model;

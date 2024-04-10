@@ -1,5 +1,4 @@
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {IProjectCard, isIProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
@@ -8,11 +7,10 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-
-export interface RobotCard {
-  card: IProjectCard;
-  resourceCount: number;
-}
+import {ICard} from '../ICard';
+import {LogHelper} from '../../LogHelper';
+import {Card} from '../Card';
+import {RobotCardProxy} from './RobotCardProxy';
 
 export class SelfReplicatingRobots extends Card implements IProjectCard {
   constructor() {
@@ -36,64 +34,89 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
     });
   }
 
-  public targetCards: Array<RobotCard> = [];
+  public data: {robotCards: Partial<Record<CardName, number>>} = {robotCards: {}};
 
   public override getCardDiscount(_player: IPlayer, card: IProjectCard): number {
-    for (const targetCard of this.targetCards) {
-      if (targetCard.card.name === card.name) {
-        return targetCard.resourceCount;
+    return this.data.robotCards[card.name] ?? 0;
+  }
+
+  /** List of candidate cards to attach to SRR from the player's hand */
+  private attachableCards(player: IPlayer): Array<IProjectCard> {
+    return player.cardsInHand.filter((card) =>
+      card.tags.some((tag) => tag === Tag.SPACE || tag === Tag.BUILDING) &&this.data.robotCards[card.name] === undefined,
+    ) ?? [];
+  }
+
+  /** Return a list of Proxy cards */
+  public getRobotCards(): Array<IProjectCard> {
+    const cards: Array<IProjectCard> = [];
+    for (const key in this.data.robotCards) {
+      if (key in CardName) {
+        const cardName = key as CardName;
+        cards.push(new RobotCardProxy(cardName, this.data.robotCards[cardName] ?? 0));
       }
     }
-    return 0;
+    return cards;
   }
 
   public canAct(player: IPlayer): boolean {
-    return this.targetCards.length > 0 ||
-             player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tag.SPACE || tag === Tag.BUILDING));
+    return this.getRobotCards().length > 0 || this.attachableCards(player).length > 0;
   }
 
   public action(player: IPlayer) {
     const orOptions = new OrOptions();
-    const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tag.SPACE || tag === Tag.BUILDING));
 
-    if (this.targetCards.length > 0) {
-      const robotCards = this.targetCards.map((targetCard) => targetCard.card);
+    // Double resources on attached card
+    if (this.getRobotCards().length > 0) {
       orOptions.options.push(new SelectCard(
-        'Select card to double robots resource', 'Double resource', robotCards, {played: CardName.SELF_REPLICATING_ROBOTS})
-        .andThen(([card]) => {
-          let resourceCount = 0;
-          for (const targetCard of this.targetCards) {
-            if (targetCard.card.name === card.name) {
-              resourceCount = targetCard.resourceCount;
-              targetCard.resourceCount *= 2;
-            }
-          }
-          player.game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
-            b.player(player).card(card).number(resourceCount).number(resourceCount * 2);
-          });
-          return undefined;
-        }));
+        'Select card to double robots resource',
+        'Double resource',
+        this.getRobotCards(),
+        {played: CardName.SELF_REPLICATING_ROBOTS},
+      ).andThen(([card]) => {
+        this.addResourcesToAttachedCard(player, card as RobotCardProxy, 'double');
+        return undefined;
+      }));
     }
 
-    if (selectableCards.length > 0) {
+    // Attach a new card
+    if (this.attachableCards(player).length > 0) {
       orOptions.options.push(new SelectCard(
         'Select card to link with Self-Replicating Robots',
-        'Link card', selectableCards,
+        'Link card', this.attachableCards(player),
         {played: CardName.SELF_REPLICATING_ROBOTS}).andThen(
         ([card]) => {
-          const projectCardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
-          player.cardsInHand.splice(projectCardIndex, 1);
-          this.targetCards.push(
-            {
-              card: card,
-              resourceCount: 2,
-            },
-          );
+          this.data.robotCards[card.name] = 2;
           player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(card).card(this));
           return undefined;
         }));
     }
 
     return orOptions;
+  }
+
+  /** Remove the card from the record if its attached */
+  public onCardPlayed(_player: IPlayer, card: ICard): void {
+    if (isIProjectCard(card)) {
+      delete this.data.robotCards[card.name];
+    }
+  }
+
+  /** Add some amount or resource to this card, or double the amount of resources */
+  public addResourcesToAttachedCard(player: IPlayer, card: RobotCardProxy, amount: number | 'double'): void {
+    const resourceCount = this.data.robotCards[card.name];
+    if (resourceCount !== undefined) {
+      const total = amount === 'double' ? resourceCount * 2 : resourceCount + amount;
+      this.data.robotCards[card.name] = total;
+      if (amount === 'double') {
+        player.game.log('${0} added resources on ${1} from ${2} to ${3}', (b) => {
+          b.player(player).cardName(card.name).number(resourceCount).number(total);
+        });
+      } else {
+        LogHelper.logAddResource(player, card);
+      }
+    } else {
+      throw new Error('Selected card is not attached to Self-Replicating Robots');
+    }
   }
 }

@@ -12,7 +12,6 @@ import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
 import {Priority} from './deferredActions/Priority';
-import {RobotCard} from './cards/promo/SelfReplicatingRobots';
 import {SerializedPlayer} from './SerializedPlayer';
 import {Timer} from '../common/Timer';
 import {AllOptions, DrawOptions} from './deferredActions/DrawCards';
@@ -32,6 +31,7 @@ import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -161,7 +161,8 @@ export interface IPlayer {
   getTitaniumValue(): number;
   increaseTitaniumValue(): void;
   decreaseTitaniumValue(): void;
-  getSelfReplicatingRobotsTargetCards(): Array<RobotCard>;
+  getSelfReplicatingRobotsTargetCards(): Array<IProjectCard>;
+  findSelfReplicatingRobots(): SelfReplicatingRobots | undefined;
   getSteelValue(): number;
   increaseSteelValue(): void;
   decreaseSteelValue(): void;

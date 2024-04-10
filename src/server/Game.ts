@@ -73,6 +73,8 @@ import {UnderworldData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
+import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
+import {CEOsFavoriteProject} from './cards/base/CEOsFavoriteProject';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -332,6 +334,7 @@ export class Game implements IGame, Logger {
         player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
         if (gameOptions.initialDraftVariant === false) {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
+          player.dealtProjectCards.push(new SelfReplicatingRobots(), new CEOsFavoriteProject());
         }
         if (gameOptions.preludeExtension) {
           player.dealtPreludeCards.push(...preludeDeck.drawN(game, constants.PRELUDE_CARDS_DEALT_PER_PLAYER));

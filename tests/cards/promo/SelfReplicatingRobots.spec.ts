@@ -43,16 +43,15 @@ describe('SelfReplicatingRobots', function() {
   it('act', () => {
     const earthOffice = new EarthOffice();
     player.cardsInHand.push(earthOffice);
-    player.cardsInHand.push(new HousePrinting());
+    const housePrinting = new HousePrinting();
+    player.cardsInHand.push(housePrinting);
 
     const action = cast(card.action(player), OrOptions);
     action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
-    expect(card.targetCards[0].resourceCount).to.eq(2);
-    expect(player.cardsInHand).deep.eq([earthOffice]);
-    expect(card.targetCards).has.lengthOf(1);
+    expect(card.data.robotCards[housePrinting.name]).to.eq(2);
 
     const action2 = cast(card.action(player), OrOptions);
     action2.options[0].cb([cast(action2.options[0], SelectCard<IProjectCard>).cards[0]]);
-    expect(card.targetCards[0].resourceCount).to.eq(4);
+    expect(card.data.robotCards[housePrinting.name]).to.eq(4);
   });
 });

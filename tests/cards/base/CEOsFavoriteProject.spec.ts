@@ -72,24 +72,24 @@ describe('CEOsFavoriteProject', function() {
     const srr = new SelfReplicatingRobots();
     const birds = new Birds();
     player.playedCards.push(srr);
-    srr.targetCards.push({card: birds, resourceCount: 1});
+    srr.data.robotCards[birds.name] = 1;
     cast(card.play(player), undefined);
     runAllActions(player.game);
-    const action = cast(player.popWaitingFor(), SelectCard<ICard>);
-    action.cb([birds]);
-    expect(srr.targetCards[0].resourceCount).to.eq(2);
+    expect(srr.data.robotCards[birds.name]).to.eq(2);
   });
 
   it('Cannot play on card with no resources', function() {
     const birds = new Birds();
     const securityFleet = new SecurityFleet();
+    const decomposers = new Decomposers();
     securityFleet.resourceCount++;
-    player.playedCards.push(securityFleet, birds);
+    decomposers.resourceCount++;
+    player.playedCards.push(securityFleet, birds, decomposers);
     cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectCard<ICard>);
     expect(action.cards).does.not.contain(birds);
     expect(action.cards).does.contain(securityFleet);
-    expect(() => action.cb([birds])).to.throw(Error, /Invalid card/);
+    expect(action.cards).does.contain(decomposers);
   });
 });

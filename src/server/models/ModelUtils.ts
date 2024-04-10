@@ -10,6 +10,7 @@ import {PlayCardMetadata} from '../inputs/SelectProjectCardToPlay';
 import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
+import {RobotCardProxy} from '../cards/promo/RobotCardProxy';
 
 export function cardsToModel(
   player: IPlayer,
@@ -22,51 +23,61 @@ export function cardsToModel(
   } = {},
 ): Array<CardModel> {
   return cards.map((card, index) => {
-    let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
+    if (card instanceof RobotCardProxy) {
+      return {
+        resources: card.resourceCount,
+        name: card.name,
+        calculatedCost: player.getCardCost(card.realCard(player)),
+        isSelfReplicatingRobotsCard: true,
+      };
+    } else {
+      let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
 
-    // Too bad this is hard-coded
-    if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
-      discount = [{tag: Tag.MOON, amount: player.tags.count(Tag.MOON)}];
-    }
-    if (card.name === CardName.MARS_DIRECT) {
-      discount = [{tag: Tag.MARS, amount: player.tags.count(Tag.MARS)}];
-    }
-
-    let warning = undefined;
-    const playCardMetadata = options?.extras?.get(card.name);
-    if (typeof(playCardMetadata?.details) === 'object') {
-      const thinkTankResources = playCardMetadata.details.thinkTankResources;
-      if ((thinkTankResources ?? 0) > 0) {
-        warning = `Playing ${card.name} consumes ${thinkTankResources} data from Think Tank`;
+      // Too bad this is hard-coded
+      if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
+        discount = [{tag: Tag.MOON, amount: player.tags.count(Tag.MOON)}];
       }
-      if (playCardMetadata.details.redsCost) {
-        warning = warning === undefined ? '' : '\n';
-        warning += `Playing ${card.name} will cost ${playCardMetadata.details.redsCost} M€ more because Reds are in power`;
+      if (card.name === CardName.MARS_DIRECT) {
+        discount = [{tag: Tag.MARS, amount: player.tags.count(Tag.MARS)}];
       }
-    }
 
-    const model: CardModel = {
-      resources: options.showResources ? card.resourceCount : undefined,
-      name: card.name,
-      calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
-      warning: warning,
-      bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
-      discount: discount,
-      cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
-    };
-    if (card.isDisabled) {
-      model.isDisabled = true;
-    } else if (options.enabled?.[index] === false) {
-      model.isDisabled = true;
+      let warning = undefined;
+      const playCardMetadata = options?.extras?.get(card.name);
+      if (typeof(playCardMetadata?.details) === 'object') {
+        const thinkTankResources = playCardMetadata.details.thinkTankResources;
+        if ((thinkTankResources ?? 0) > 0) {
+          warning = `Playing ${card.name} consumes ${thinkTankResources} data from Think Tank`;
+        }
+        if (playCardMetadata.details.redsCost) {
+          warning = warning === undefined ? '' : '\n';
+          warning += `Playing ${card.name} will cost ${playCardMetadata.details.redsCost} M€ more because Reds are in power`;
+        }
+      }
+
+      const model: CardModel = {
+        resources: options.showResources ? card.resourceCount : undefined,
+        name: card.name,
+        calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
+        warning: warning,
+        bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
+        discount: discount,
+        cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
+        isSelfReplicatingRobotsCard: card instanceof RobotCardProxy,
+      };
+      if (card.isDisabled) {
+        model.isDisabled = true;
+      } else if (options.enabled?.[index] === false) {
+        model.isDisabled = true;
+      }
+      const reserveUnits = playCardMetadata?.reserveUnits;
+      if (reserveUnits !== undefined) {
+        model.reserveUnits = reserveUnits;
+      }
+      if (card.warnings.size > 0) {
+        model.warnings = Array.from(card.warnings);
+      }
+      return model;
     }
-    const reserveUnits = playCardMetadata?.reserveUnits;
-    if (reserveUnits !== undefined) {
-      model.reserveUnits = reserveUnits;
-    }
-    if (card.warnings.size > 0) {
-      model.warnings = Array.from(card.warnings);
-    }
-    return model;
   });
 }
 

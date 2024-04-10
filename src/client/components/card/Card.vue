@@ -61,10 +61,6 @@ export default Vue.extend({
       required: false,
       default: false,
     },
-    robotCard: {
-      type: Object as () => CardModel | undefined,
-      required: false,
-    },
     // Cube is only shown when actionUsed is true.
     cubeColor: {
       type: String as () => Color,
@@ -135,7 +131,7 @@ export default Vue.extend({
       return this.cardInstance.requirements;
     },
     getResourceAmount(): number {
-      return this.card.resources || this.robotCard?.resources || 0;
+      return this.card.resources || 0;
     },
     isCorporationCard() : boolean {
       return this.getCardType() === CardType.CORPORATION;
@@ -150,10 +146,10 @@ export default Vue.extend({
   },
   computed: {
     hasResourceType(): boolean {
-      return this.card.isSelfReplicatingRobotsCard === true || this.cardInstance.resourceType !== undefined || this.robotCard !== undefined;
+      return this.card.isSelfReplicatingRobotsCard === true || this.cardInstance.resourceType !== undefined;
     },
     resourceType(): CardResource {
-      if (this.robotCard !== undefined || this.card.isSelfReplicatingRobotsCard === true) return CardResource.RESOURCE_CUBE;
+      if (this.card.isSelfReplicatingRobotsCard === true) return CardResource.RESOURCE_CUBE;
       // This last RESOURCE_CUBE is functionally unnecessary and serves to satisfy the type contract.
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
     },

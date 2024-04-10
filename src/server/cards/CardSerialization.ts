@@ -3,7 +3,6 @@ import {SerializedCard} from '../SerializedCard';
 import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
-import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
 import {CardType} from '../../common/cards/CardType';
 
 export function serializeProjectCard(card: IProjectCard): SerializedCard {
@@ -21,14 +20,6 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
   }
   if (card.generationUsed !== undefined) {
     serialized.generationUsed = card.generationUsed;
-  }
-  if (card instanceof SelfReplicatingRobots) {
-    serialized.targetCards = card.targetCards.map((t) => {
-      return {
-        card: {name: t.card.name},
-        resourceCount: t.resourceCount,
-      };
-    });
   }
   if (isICloneTagCard(card)) {
     serialized.cloneTag = card.cloneTag;
@@ -61,25 +52,6 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
   }
   if (isICloneTagCard(card) && element.cloneTag !== undefined) {
     card.cloneTag = element.cloneTag;
-  }
-  if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
-    card.targetCards = [];
-    element.targetCards.forEach((targetCard) => {
-      const foundTargetCard = newProjectCard(targetCard.card.name);
-      if (foundTargetCard !== undefined) {
-        card.targetCards.push({
-          card: foundTargetCard,
-          resourceCount: targetCard.resourceCount,
-        });
-      } else {
-        console.warn('did not find card for SelfReplicatingRobots', targetCard);
-      }
-    });
-  }
-  if (!(card instanceof SelfReplicatingRobots)) {
-    if (element.bonusResource !== undefined) {
-      card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
-    }
   }
   if (isCeoCard(card)) {
     card.isDisabled = element.isDisabled;

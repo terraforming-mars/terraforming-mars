@@ -6,11 +6,13 @@ import {IProjectCard} from './IProjectCard';
 import {IPlayer} from '../IPlayer';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
+import {CardResource} from '../../common/CardResource';
 
 const EMPTY_SET: Readonly<Set<Warning>> = new Set();
 
 export class ProxyCard implements IProjectCard {
   public readonly name: CardName;
+  public resourceType: CardResource | undefined = undefined;
   public constructor(name: CardName) {
     this.name = name;
   }

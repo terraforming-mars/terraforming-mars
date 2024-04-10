@@ -11,7 +11,7 @@ import {SpaceId} from '../../common/Types';
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
 
-  protected constructor(
+  public constructor(
     spaces: ReadonlyArray<Space>,
     noctisCitySpaceId: SpaceId | undefined,
     volcanicSpaceIds: ReadonlyArray<SpaceId>) {

@@ -3,7 +3,7 @@ import {BoardName} from '../common/boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
 import {IGame} from './IGame';
 import {GameOptions} from './game/GameOptions';
-import {GameId, isPlayerId, safeCast} from '../common/Types';
+import {GameId, SpaceId, isPlayerId, safeCast} from '../common/Types';
 import {HellasBoard} from './boards/HellasBoard';
 import {TharsisBoard} from './boards/TharsisBoard';
 import {IPlayer} from './IPlayer';
@@ -20,26 +20,44 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {UtopiaPlanitiaBoard} from './boards/UtopiaPlanitiaBoard';
 import {VastitasBorealisNovusBoard} from './boards/VastitasBorealisNovusBoard';
 import {Board} from './boards/Board';
+import {Template} from './boards/SurfaceBuilder';
+import {inplaceShuffle} from './utils/shuffle';
+import {zip} from '../common/utils/utils';
 import {Space} from './boards/Space';
 
-type BoardFactory = (new (spaces: ReadonlyArray<Space>) => MarsBoard) & {newInstance: (gameOptions: GameOptions, rng: Random) => MarsBoard};
+type BoardFactory = {
+  Factory: new (spaces: ReadonlyArray<Space>, noctisCitySpaceId: SpaceId | undefined, volcanicSpaceIds: ReadonlyArray<SpaceId>) => MarsBoard
+  template: Template;
+};
 
 const boards: Record<BoardName, BoardFactory> = {
-  [BoardName.THARSIS]: TharsisBoard,
-  [BoardName.HELLAS]: HellasBoard,
-  [BoardName.ELYSIUM]: ElysiumBoard,
-  [BoardName.UTOPIA_PLANITIA]: UtopiaPlanitiaBoard,
-  [BoardName.VASTITAS_BOREALIS_NOVUS]: VastitasBorealisNovusBoard,
-  [BoardName.AMAZONIS]: AmazonisBoard,
-  [BoardName.ARABIA_TERRA]: ArabiaTerraBoard,
-  [BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard,
-  [BoardName.VASTITAS_BOREALIS]: VastitasBorealisBoard,
+  [BoardName.THARSIS]: {Factory: TharsisBoard, template: TharsisBoard.TEMPLATE},
+  [BoardName.HELLAS]: {Factory: HellasBoard, template: HellasBoard.TEMPLATE},
+  [BoardName.ELYSIUM]: {Factory: ElysiumBoard, template: ElysiumBoard.TEMPLATE},
+  [BoardName.UTOPIA_PLANITIA]: {Factory: UtopiaPlanitiaBoard, template: UtopiaPlanitiaBoard.TEMPLATE},
+  [BoardName.VASTITAS_BOREALIS_NOVUS]: {Factory: VastitasBorealisNovusBoard, template: VastitasBorealisNovusBoard.TEMPLATE},
+  [BoardName.AMAZONIS]: {Factory: AmazonisBoard, template: AmazonisBoard.TEMPLATE},
+  [BoardName.ARABIA_TERRA]: {Factory: ArabiaTerraBoard, template: ArabiaTerraBoard.TEMPLATE},
+  [BoardName.TERRA_CIMMERIA]: {Factory: TerraCimmeriaBoard, template: TerraCimmeriaBoard.TEMPLATE},
+  [BoardName.VASTITAS_BOREALIS]: {Factory: VastitasBorealisBoard, template: VastitasBorealisBoard.TEMPLATE},
 };
 
 export class GameSetup {
   public static newBoard(gameOptions: GameOptions, rng: Random): MarsBoard {
-    const factory = boards[gameOptions.boardName];
-    return factory.newInstance(gameOptions, rng);
+    const config = boards[gameOptions.boardName];
+    const clone = structuredClone(config.template);
+    if (gameOptions.shuffleMapOption) {
+      const shuffleableSpaces = clone.spaces.filter((space) => !clone.unshufflableSpaceIds.includes(space.id));
+      const spaceTypes = shuffleableSpaces.map((space) => space.spaceType);
+      inplaceShuffle(spaceTypes, rng);
+      zip(shuffleableSpaces, spaceTypes).forEach(([space, spaceType]) => space.spaceType = spaceType);
+
+      const bonuses = clone.spaces.map((space) => space.bonus);
+      inplaceShuffle(bonuses, rng);
+      zip(clone.spaces, bonuses).forEach(([space, bonus]) => space.bonus = bonus);
+    }
+
+    return new config.Factory(clone);
   }
 
   public static deserializeBoard(players: Array<IPlayer>, gameOptions: GameOptions, d: SerializedGame) {

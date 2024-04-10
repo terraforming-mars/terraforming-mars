@@ -1,61 +1,40 @@
-import {GameOptions} from '../game/GameOptions';
 import {IPlayer} from '../IPlayer';
-import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {BoardBuilder} from './BoardBuilder';
 import {Space} from './Space';
 import {MarsBoard} from './MarsBoard';
+import {SurfaceBuilder} from './SurfaceBuilder';
+
+const PLANT = SpaceBonus.PLANT;
+const STEEL = SpaceBonus.STEEL;
+const DRAW_CARD = SpaceBonus.DRAW_CARD;
+const TITANIUM = SpaceBonus.TITANIUM;
+const MICROBE = SpaceBonus.MICROBE;
+const DATA = SpaceBonus.DATA;
+const ENERGY_PRODUCTION = SpaceBonus.ENERGY_PRODUCTION;
+const SCIENCE = SpaceBonus.SCIENCE;
 
 export class ArabiaTerraBoard extends MarsBoard {
-  public static newInstance(gameOptions: GameOptions, rng: Random): ArabiaTerraBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
-
-    const PLANT = SpaceBonus.PLANT;
-    const STEEL = SpaceBonus.STEEL;
-    const DRAW_CARD = SpaceBonus.DRAW_CARD;
-    const TITANIUM = SpaceBonus.TITANIUM;
-    const MICROBE = SpaceBonus.MICROBE;
-    const DATA = SpaceBonus.DATA;
-    const ENERGY_PRODUCTION = SpaceBonus.ENERGY_PRODUCTION;
-    const SCIENCE = SpaceBonus.SCIENCE;
-
+  public static readonly TEMPLATE = new SurfaceBuilder()
     // y=0
-    builder.ocean().ocean(PLANT).land().land().ocean(DRAW_CARD, DRAW_CARD);
+    .ocean().ocean(PLANT).land().land().ocean(DRAW_CARD, DRAW_CARD)
     // y=1
-    builder.ocean(MICROBE, MICROBE, DRAW_CARD).ocean(PLANT).land(PLANT, PLANT).land().land(PLANT).land(PLANT);
+    .ocean(MICROBE, MICROBE, DRAW_CARD).ocean(PLANT).land(PLANT, PLANT).land().land(PLANT).land(PLANT)
     // y=2
-    builder.land(PLANT, STEEL).ocean(PLANT).land(DATA, DATA, DRAW_CARD).land(STEEL).land(STEEL).land(STEEL, PLANT).coveVolcanic(STEEL, TITANIUM);
+    .land(PLANT, STEEL).ocean(PLANT).land(DATA, DATA, DRAW_CARD).land(STEEL).land(STEEL).land(STEEL, PLANT).coveVolcanic(STEEL, TITANIUM)
     // y=3
-    builder.land(PLANT, PLANT).land(PLANT).ocean(PLANT, PLANT).land().land().land().land(STEEL, STEEL).land();
+    .land(PLANT, PLANT).land(PLANT).ocean(PLANT, PLANT).land().land().land().land(STEEL, STEEL).land()
     // y=4
-    builder.land().land().ocean(STEEL).cove(ENERGY_PRODUCTION).ocean(PLANT, PLANT).land(SCIENCE, DRAW_CARD, STEEL).land().land().land();
+    .land().land().ocean(STEEL).cove(ENERGY_PRODUCTION).ocean(PLANT, PLANT).land(SCIENCE, DRAW_CARD, STEEL).land().land().land()
     // y=5
-    builder.land(PLANT).land(PLANT).ocean(STEEL, STEEL).land(PLANT).land(STEEL).land().cove(PLANT, TITANIUM).land(PLANT);
+    .land(PLANT).land(PLANT).ocean(STEEL, STEEL).land(PLANT).land(STEEL).land().cove(PLANT, TITANIUM).land(PLANT)
     // y=6
-    builder.cove(PLANT, TITANIUM).ocean(PLANT, PLANT).cove(PLANT, PLANT).land(PLANT).land(STEEL).land(PLANT, TITANIUM).land(TITANIUM, TITANIUM);
+    .cove(PLANT, TITANIUM).ocean(PLANT, PLANT).cove(PLANT, PLANT).land(PLANT).land(STEEL).land(PLANT, TITANIUM).land(TITANIUM, TITANIUM)
     // y=7
-    builder.ocean(PLANT, PLANT).land(PLANT).volcanic(STEEL, DRAW_CARD).land(STEEL, STEEL).land(STEEL).volcanic(DRAW_CARD);
+    .ocean(PLANT, PLANT).land(PLANT).volcanic(STEEL, DRAW_CARD).land(STEEL, STEEL).land(STEEL).volcanic(DRAW_CARD)
     // y=8
-    builder.land().land().land().land().volcanic(STEEL);
-
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
-
-    const spaces = builder.build();
-    return new ArabiaTerraBoard(spaces);
-  }
-
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, [
-      SpaceName.TIKHONAROV,
-      SpaceName.LADON,
-      SpaceName.FLAUGERGUES,
-      SpaceName.CHARYBDIS,
-    ]);
-  }
+    .land().land().land().land().volcanic(STEEL)
+    .build();
 
   public override getSpaces(spaceType: SpaceType): Array<Space> {
     switch (spaceType) {
